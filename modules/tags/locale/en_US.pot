@@ -1,0 +1,143 @@
+# Chyrp v2.5 Translation File.
+# Copyright (C) 2013 Chyrp Team
+# This file is distributed under the same license as the Chyrp v2.5 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp v2.5\n"
+"Report-Msgid-Bugs-To: email@chyrp.net\n"
+"POT-Creation-Date: 2013-12-27 18:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/tags/pages/admin/manage_tags.twig:52
+msgid "(none)"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:39
+msgid "Toggle All"
+msgstr ""
+
+#: modules/tags/pages/admin/rename_tag.twig:3
+msgid "Edit Tag"
+msgstr ""
+
+#: modules/tags/tags.php:416
+#, php-format
+msgid "Posts tagged with %s"
+msgstr ""
+
+#: modules/tags/pages/admin/edit_tags.twig:15
+msgid "Update"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:18
+msgid "You don't have any tags."
+msgstr ""
+
+#: modules/tags/tags.php:253
+#: modules/tags/tags.php:267
+msgid "No ID Specified"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:57
+msgid "Tag Selected Post(s) with:"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:6
+msgid "All Tags"
+msgstr ""
+
+#: modules/tags/pages/admin/rename_tag.twig:15
+msgid "Rename"
+msgstr ""
+
+#: modules/tags/info.yaml:6
+msgid "Tagginator"
+msgstr ""
+
+#: modules/tags/tags.php:153
+#: modules/tags/tags.php:221
+#: modules/tags/tags.php:257
+#: modules/tags/tags.php:264
+#: modules/tags/tags.php:271
+#: modules/tags/tags.php:280
+#: modules/tags/tags.php:283
+#: modules/tags/tags.php:332
+msgid "Access Denied"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:29
+msgid "Search &rarr;"
+msgstr ""
+
+#: modules/tags/pages/admin/rename_tag.twig:6
+msgid "Edit Tag &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/tags/pages/admin/edit_tags.twig:3
+#: modules/tags/pages/admin/edit_tags.twig:6
+msgid "Edit Tags"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:3
+msgid "Manage Tags"
+msgstr ""
+
+#: modules/tags/tags.php:484
+#: modules/tags/tags.php:490
+#: modules/tags/tags.php:496
+msgid "Database Error"
+msgstr ""
+
+#: modules/tags/tags.php:264
+#: modules/tags/tags.php:280
+#: modules/tags/tags.php:332
+msgid "Invalid security key."
+msgstr ""
+
+#: modules/tags/tags.php:187
+#: modules/tags/tags.php:460
+#, php-format
+msgid "%s post tagged with &quot;%s&quot;"
+msgid_plural "%s posts tagged with &quot;%s&quot;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: modules/tags/pages/admin/manage_tags.twig:69
+#, php-format
+msgid "Page %d of %d"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:59
+msgid "Tag &rarr;"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:24
+msgid "Post Tags"
+msgstr ""
+
+#: modules/tags/info.yaml:1
+msgid "Do you want to remove your Tags from the database?"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:6
+msgid "(hover for controls)"
+msgstr ""
+
+#: modules/tags/info.yaml:4
+msgid "Adds tagging functionality to posts, allowing organization, grouping, and adding keywords to posts."
+msgstr ""
+
+#: modules/tags/tags.php:257
+#: modules/tags/tags.php:271
+msgid "You do not have sufficient privileges to edit this post."
+msgstr ""
+

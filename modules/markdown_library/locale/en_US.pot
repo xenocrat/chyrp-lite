@@ -1,0 +1,27 @@
+# Chyrp v2.5 Translation File.
+# Copyright (C) 2013 Chyrp Team
+# This file is distributed under the same license as the Chyrp v2.5 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp v2.5\n"
+"Report-Msgid-Bugs-To: email@chyrp.net\n"
+"POT-Creation-Date: 2013-12-27 18:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/markdown/info.yaml:3
+msgid "Markdown"
+msgstr ""
+
+#: modules/markdown/info.yaml:5
+msgid "Markdown support for posts, pages, and comments. Powered by <a href="http://michelf.ca/projects/php-markdown/">PHP Markdown Lib 1.4.1</a>."
+msgstr ""
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16" viewBox="0, 0, 16, 16">
+  <g id="Layer 1">
+    <g>
+      <g>
+        <path d="M8,15 C4.134,15 1,11.866 1,8 C1,4.134 4.134,1 8,1 C11.866,1 15,4.134 15,8 C15,11.866 11.866,15 8,15 z" fill="url(#Gradient_1)"/>
+        <path d="M8,14 C4.686,14 2,11.314 2,8 C2,4.686 4.686,2 8,2 C11.314,2 14,4.686 14,8 C14,11.314 11.314,14 8,14 z" fill="url(#Gradient_2)"/>
+        <path d="M8,13 C5.239,13 3,10.761 3,8 C3,5.239 5.239,3 8,3 C10.761,3 13,5.239 13,8 C13,10.761 10.761,13 8,13 z" fill="url(#Gradient_3)"/>
+      </g>
+      <path d="M7.065,10.306 L7.065,12 L8.792,12 L8.792,10.306 z M5.294,6.676 L6.911,6.676 Q6.911,6.379 6.977,6.121 Q7.043,5.862 7.181,5.669 Q7.318,5.477 7.533,5.361 Q7.747,5.246 8.044,5.246 Q8.484,5.246 8.732,5.488 Q8.979,5.73 8.979,6.236 Q8.99,6.533 8.875,6.731 Q8.759,6.929 8.572,7.094 Q8.385,7.259 8.165,7.424 Q7.945,7.589 7.747,7.814 Q7.549,8.04 7.401,8.359 Q7.252,8.678 7.219,9.151 L7.219,9.646 L8.704,9.646 L8.704,9.228 Q8.748,8.898 8.919,8.678 Q9.089,8.458 9.309,8.288 Q9.529,8.117 9.777,7.946 Q10.024,7.776 10.228,7.534 Q10.431,7.292 10.569,6.951 Q10.706,6.61 10.706,6.082 Q10.706,5.763 10.569,5.394 Q10.431,5.026 10.112,4.707 Q9.793,4.388 9.271,4.174 Q8.748,3.959 7.967,3.959 Q7.362,3.959 6.873,4.162 Q6.383,4.366 6.037,4.729 Q5.69,5.092 5.498,5.587 Q5.305,6.082 5.294,6.676 z" fill="#FFFFFF"/>
+    </g>
+  </g>
+  <defs>
+    <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="8" y1="15" x2="8" y2="1">
+      <stop offset="0" stop-color="#365C9B"/>
+      <stop offset="1" stop-color="#B3CEF3"/>
+    </linearGradient>
+    <linearGradient id="Gradient_2" gradientUnits="userSpaceOnUse" x1="8" y1="14" x2="8" y2="2">
+      <stop offset="0" stop-color="#C7D8E7"/>
+      <stop offset="1" stop-color="#D1DEF0"/>
+    </linearGradient>
+    <linearGradient id="Gradient_3" gradientUnits="userSpaceOnUse" x1="8" y1="13" x2="8" y2="3">
+      <stop offset="0" stop-color="#5377A8"/>
+      <stop offset="1" stop-color="#769BCD"/>
+    </linearGradient>
+  </defs>
+</svg>

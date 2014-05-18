@@ -1,0 +1,9 @@
+name: Cacher
+url: http://chyrp.net/
+version: 1.0
+description: Caches pages, drastically reducing server load.
+author:
+  name: Chyrp Team
+  url: http://chyrp.net/
+notifications:
+  - Please make sure that /includes/caches is writable by the server. If you are not certain whether it is or not, CHMOD it to 777.

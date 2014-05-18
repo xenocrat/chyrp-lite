@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "includes"
+		},
+		{
+			"path": "modules"
+		},
+		{
+			"path": "themes"
+		},
+		{
+			"path": "admin"
+		}
+	]
+}

@@ -1,0 +1,60 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Edit Comment" | translate }{% endblock %}
+
+{% block content %}
+            <h1>${ "Editing Comment" | translate }</h1>
+            <form id="edit_form" action="{% admin "update_comment" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <p>
+                        <label for="body">${ "Body" | translate }</label>
+                        <textarea class="wide" rows="12" name="body" id="body" cols="50">${ comment.body | escape }</textarea>
+                    </p>
+
+                    <div class="buttons">
+                        <button type="submit" class="yay right" accesskey="s">
+                            <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Save" | translate }
+                        </button>
+                        ${ comment.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" />'~ ("Delete" | translate), null, null, "button boo right") }
+                    </div>
+
+                    <div class="clear"></div>
+                    <noscript><br /></noscript>
+                    <div id="more_options" class="more_options">
+                        <p>
+                            <label for="author">${ "Author" | translate }</label>
+                            <input class="text" type="text" name="author" value="${ comment.author | escape }" id="author" />
+                        </p>
+                        <p>
+                            <label for="author_email">${ "Author E-Mail" | translate }</label>
+                            <input class="text" type="text" name="author_email" value="${ comment.author_email | escape }" id="author_email" />
+                        </p>
+                        <p>
+                            <label for="author_url">${ "Author Website" | translate }</label>
+                            <input class="text" type="text" name="author_url" value="${ comment.author_url | escape }" id="author_url" />
+                        </p>
+                        {% if visitor.group.can("edit_comment") %} {# If they can edit all comments, not just this one. #}
+                        <p>
+                            <label for="status">${ "Status" | translate }</label>
+                            <select name="status" id="status">
+                                <option value="approved"${ comment.status | option_selected("approved") }>${ "Approved" | translate }</option>
+                                <option value="denied"${ comment.status | option_selected("denied") }>${ "Denied" | translate }</option>
+                                <option value="spam"${ comment.status | option_selected("spam") }>${ "Spam" | translate }</option>
+                                <option value="pingback"${ comment.status | option_selected("pingback") }>${ "Pingback" | translate }</option>
+                                <option value="trackback"${ comment.status | option_selected("trackback") }>${ "Trackback" | translate }</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="created_at">${ "Timestamp" | translate }</label>
+                            <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime }" id="created_at" />
+                        </p>
+                        {% endif %}
+                        ${ trigger.call("edit_comment_options", comment) }
+                        <div class="clear"></div>
+                    </div>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                    <input type="hidden" name="id" value="$comment.id" id="id" />
+                </fieldset>
+            </form>
+{% endblock %}

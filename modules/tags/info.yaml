@@ -1,0 +1,8 @@
+name: Tagginator
+url: http://chyrplite.net/
+version: 2.1.0
+description: Adds tagging functionality to posts, allowing organization, grouping, and adding keywords to posts.
+author:
+  name: Chyrp Team
+  url: http://chyrp.net/
+confirm: Do you want to remove your Tags from the database?

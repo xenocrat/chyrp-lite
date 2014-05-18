@@ -1,0 +1,58 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Add User" | translate }{% endblock %}
+
+{% block content %}
+            <h1>${ "New User" | translare }</h1>
+            <form id="new_user" class="split" action="{% admin "add_user" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <h2>${ "Settings" | translate }</h2>
+                    <p>
+                        <label for="login">${ "Login" | translate }</label>
+                        <input class="text" type="text" name="login" value="" id="full_name" />
+                    </p>
+                    <p>
+                        <label for="group">${ "Group" | translate }</label>
+                        <select name="group" id="group">
+                            <option value="$default_group.id">$default_group.name</option>
+                            {% for group in groups %}
+                            <option value="$group.id">$group.name</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label for="password1">${ "Password" | translate }</label>
+                        <input class="text" type="password" name="password1" value="" id="password1" />
+                    </p>
+                    <p>
+                        <label for="password2">${ "Confirm" | translate }</label>
+                        <input class="text" type="password" name="password2" value="" id="password2" />
+                    </p>
+
+                    <h2>${ "Information" | translate }</h2>
+                    <p>
+                        <label for="full_name">${ "Full Name" | translate }</label>
+                        <input class="text" type="text" name="full_name" value="" id="full_name" />
+                    </p>
+                    <p>
+                        <label for="email">${ "E-Mail" | translate }</label>
+                        <input class="text" type="text" name="email" value="" id="email" />
+                    </p>
+                    <p>
+                        <label for="website">${ "Website" | translate }</label>
+                        <input class="text" type="text" name="website" value="" id="website" />
+                    </p>
+
+
+                    ${ trigger.call("new_user_fields") }
+
+                    <br />
+
+                    <p>
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Add User" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

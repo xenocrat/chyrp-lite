@@ -1,0 +1,19 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Cascade Settings" | translate("cascade") }{% endblock %}
+
+{% block content %}
+            <form id="cascade_settings" class="split" action="{% admin "cascade_settings" %}" method="post">
+                <fieldset>
+                    <p>
+                        <label for="auto">${ "Automatic" | translate("cascade") }</label>
+                        <input type="checkbox" class="checkbox" name="auto"${ site.ajax_scroll_auto | checked } />
+                        <small>${ "Load more posts when the visitor scrolls to the bottom of the page?" | translate("cascade") }</small>
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                    </p>
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

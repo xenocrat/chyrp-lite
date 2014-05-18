@@ -1,0 +1,45 @@
+                        ${ trigger.call("before_page_fields") }
+                        <p>
+                            <label for="title">${ "Title" | translate }</label>
+                            <input class="text" type="text" name="title" value="${ page.title | escape }" id="title" />
+                        </p>
+                        <p>
+                            <label for="body">${ "Body" | translate }</label>
+                            <textarea class="wide" rows="12" name="body" id="body" cols="50">${ page.body | escape }</textarea>
+                        </p>
+                        ${ trigger.call("after_page_fields") }
+                        <div id="more_options" class="more_options">
+                            <p>
+                                <label for="show_in_list">${ "Show in pages list?" | translate }</label>
+                                <input type="checkbox" name="show_in_list" id="show_in_list" tabindex="3"{% if page.show_in_list or route.action == "write_page" %} checked="checked"{% endif %} />&nbsp;
+                            </p>
+                            <p>
+                                <label for="slug">${ "Slug" | translate }</label>
+                                <input class="text" type="text" name="slug" value="${ page.slug | escape }" id="slug" />
+                            </p>
+                            <p>
+                                <label for="parent_id">${ "Parent" | translate }</label>
+                                <select name="parent_id" id="parent_id">
+                                    <option value="0">----------</option>
+                                    {% for item in theme.pages_list(0, page.id) %}
+                                    <option value="$item.page.id"${ page.parent_id | option_selected(item.page.id) }>${ "&mdash;" | repeat(item.page.depth - 1) } ${ item.page.title | escape }</option>
+                                    {% endfor %}
+                                </select>
+                            </p>
+                            {% if route.action == "write_page" %}
+                            ${ trigger.call("new_page_options") }
+                            {% else %}
+                            ${ trigger.call("edit_page_options", page) }
+                            {% endif %}
+                            <div class="clear"></div>
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" class="yay right" accesskey="s">
+                                {% if route.action == "write_page" %}
+                                <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Publish" | translate }
+                                {% else %}
+                                <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Save" | translate }
+                                {% endif %}
+                            </button>
+                        </div>
+                    </div>

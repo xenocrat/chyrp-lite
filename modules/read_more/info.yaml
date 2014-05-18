@@ -1,0 +1,7 @@
+name: Read More
+url: http://chyrp.net/
+version: 1.0
+description: Split entries at <code><!--more--></code>. Split your posts using the "read_more" twig filter. Pass a string as an argument to use it as the link text.
+author:
+  name: Chyrp Team
+  url: http://chyrp.net/

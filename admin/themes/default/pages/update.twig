@@ -1,0 +1,13 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Update Chyrp" | translate }{% endblock %}
+
+{% block content %}
+                <div class="update_chyrp">
+                    {% if updating %}
+                        $updating
+                    {% else %}
+                        $changelog
+                    {% endif %}
+                </div>
+{% endblock %}

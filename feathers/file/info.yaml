@@ -1,0 +1,8 @@
+name: File
+url: http://github.com/etherald/chyrp-file
+version: 1.0
+description: A file download feather, allowing you to upload files of any type to your Chyrp site.
+author:
+  name: etherald
+  url: http://etherald.com
+uploader: true

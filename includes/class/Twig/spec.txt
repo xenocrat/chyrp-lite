@@ -1,0 +1,363 @@
+==================================
+Twig Template Engine Specification
+==================================
+
+
+This specification specifies a simple cross-language template engine for at least
+PHP, Python and Ruby.
+
+
+Purpose
+=======
+
+A language independent and simple template engine is useful for applications that
+use code which is written in more than one programming language.  Good Examples
+are portal systems which use a blog written in Ruby, a forum software written in
+PHP and a planet system written in Python.
+
+
+Inspiration
+===========
+
+Twig uses a syntax similar to the Genshi text templates which in turn were
+inspired by django which also inspired Jinja (all three of them python template
+engines) which inspired the Twig runtime environment.
+
+
+Undefined Behavior
+==================
+
+To simplify porting the template language to different platforms in a couple of
+situations the behavior is undefined.  Template authors may never take advantage
+of such a situation!
+
+
+Syntax
+======
+
+I'm too lazy to write down the syntax as BNF diagram but the following snippet
+should explain the syntax elements::
+
+    <!DOCTYPE HTML>
+    {# This is a comment #}
+    <title>{% block title %}Page Title Goes Here{% endblock %}</title>
+    {% if show_navigation %}
+    <nav>
+      <ul>
+      {% for item in navigation %}
+        <li><a href="${item.href|e}">$item.caption</a></li>
+      {% endfor %}
+      </ul>
+    </nav>
+    {% endif %}
+    <article>{% block body %}{% endblock %}</article>
+
+
+Comments and Whitespace
+-----------------------
+
+Everything between ``{#`` and ``#}`` is ignored by the lexer.  Inside blocks and
+variable sections the Lexer has to remove whitespace too.
+
+
+Output Expressions
+------------------
+
+To output expressions two syntaxes exist.  Simple variable output or full
+expression output::
+
+    $this.is.a.variable.output
+    ${ expression | goes | here }
+
+The former is what we call a variable expression, the second a full expression.
+Variable expressions must not contain whitespace, whereas a full expression
+must print the output of the full wrapped expression.
+
+
+Expressions
+-----------
+
+Expressions allow basic string manipulation and arithmetic calculations.  It is
+an infix syntax with the following operators in this precedence:
+
+    =========== ==============================================================
+    Operator    Description
+    =========== ==============================================================
+    ``+``       Convert both arguments into a number and add them up.
+    ``-``       Convert both arguments into a number and substract them.
+    ``*``       Convert both arguments into a number and multiply them.
+    ``/``       Convert both arguments into a number and divide them.
+    ``%``       Convert both arguments into a number and calculate the rest
+                of the integer division.
+    ``~``       Convert both arguments into a string and concatenate them.
+    ``or``      True if the left or the right expression is true.
+    ``and``     True if the left and the right expression is true.
+    ``not``     negate the expression
+    =========== ==============================================================
+
+All number conversions have an undefined precision but the implementations
+should try to select the best possible type.  For example, if the implementation
+sees an integer and a float that looks like an integer it may convert the
+latter into a long and add them.
+
+Use parentheses to group expressions.
+
+If an object cannot be compared the implementation might raise an error or fail
+silently.  Template authors may never apply mathematical operators to untrusted
+data.  This is especially true for the php implementation where the following
+outputs ``42``::
+
+    ${ "foo41" + 1 }
+
+This is undefined behavior and will break on different implementations or
+return ``0`` as ``"foo41"`` is not a valid number.
+
+Types
+~~~~~
+
+The following types exist:
+
+    =========== =============== ==============================================
+    Type        Literal         Description
+    =========== =============== ==============================================
+    ``integer`` `\d+`           One of the two numeric types.  Which of them
+                                is used and when is up to the implementation.
+    ``float``   `\d+\.\d+`      Floating point values.
+    ``string``  see below       A unicode string.  The PHP implementation has
+                                to use bytestrings here and may use mb_string.
+    ``bool``    `(true|false)`  Represents boolean values.
+    ``none``    `none`          This type is returned on missing variables or
+                                attributes.
+    =========== =============== ==============================================
+
+String regex::
+
+    (?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')(?sm)
+
+Attribute Lookup
+~~~~~~~~~~~~~~~~
+
+There are two ways to look up attributes on objects.  The dot and the
+subscript syntax, both inspired by JavaScript.  Basically the following
+expressions do the very same::
+
+    foo.name.0
+    foo['name'][0]
+
+This is useful to dynamically get attributes from objects::
+
+    foo[bar]
+
+The underlaying implementation is free to specify on it's own what an attribute
+lookup means.  The PHP reference implementation for example performs these
+actions on ``foo.bar``:
+
+-   try ``$foo['bar']``
+-   try ``$foo->bar()`` (if they're using ``foo.bar`` and not ``foo[bar]``)
+-   try ``$foo->bar``
+-   try ``$foo->getBar()`` (if they're using ``foo.bar`` and not ``foo[bar]``)
+
+The first match returns the object, attribute access to nonexisting attributes
+returns `none`.
+
+Filtering
+~~~~~~~~~
+
+The template language does not specify function calls, but filters can be used
+to further modify variables using functions the template engine provides.
+
+The following snippet shows how filters are translated to function calls::
+
+    ${ 42 | foo(1, 2) | bar | baz }
+        ->  baz(bar(foo(42, 1, 2)))
+
+The following filters must be provided by the implementation:
+
+    =================== ======================================================
+    Name                Description
+    =================== ======================================================
+    `date`              Format the timestamp using the PHP date formatting
+                        rules. This may sound like a nonstandard way of
+                        formatting dates but it's a way very popular among
+                        template designers and also used by django.
+    `strftime`          Format the timestamp using standard strftime rules.
+    `numberformat`      Apply number formatting on the string.  This may or
+                        may not use local specific rules.
+    `moneyformat`       Like `numberformat` but for money.
+    `filesizeformat`    Takes a number of bytes and displays it as KB/MB/GB
+    `format`            Applies `sprintf` formatting on the string::
+                            ${ "%s %2f" | format(string, float) }
+    `even`              Is the number even?
+    `odd`               Is the number odd?
+    `escape`            Apply HTML escaping on a string.  This also has to
+                        convert `"` to `&quot;  but leave `'` unmodified.
+    `e`                 Alias for `escape`.
+    `urlencode`         URL encode the string.  If the second parameter is
+                        true this function should encode for path sections,
+                        otherwise for query strings.
+    `quotes`            Escape quotes (\', \", etc.)
+    `title`             Make the string lowercase and upper case the first
+                        characters of all words.
+    `capitalize`        Like `title` but capitalizes only the first char of
+                        the whole string.
+    `upper`             Convert the string to uppercase.
+    `lower`             Convert the string to lowercase.
+    `strip`             Trim leading and trailing whitespace.
+    `lstrip`            Trim leading whitespace.
+    `rstrip`            Trim trailing whitespace.
+    `translate`         Translate the string using either the "theme" domain
+                        or the "chyrp" domain if in Admin. (Chyrp-specific)
+    `translate_plural`  Translate the (singular) string, or the plural string
+                        if the number passed is not 1.
+    `normalize`         Convert all excessive whitespace (including linebreaks)
+                        into a single space.
+    `truncate`          Truncate a string, providing ellipsis, if it is longer
+                        than the passed length. Keeps words in tact by default,
+                        but with a second boolean parameter will be strict.
+    `replace`           Replaces the occurrence of the first argument with the
+                        second argument in the string.
+    `linebreaks`        Convert linebreaks to <br />'s.
+    `camelize`          Convert string to camelcase.
+    `strip_tags`        Strip HTML from the string.
+    `pluralize`         Return the pluralization of a string, or if a number
+                        is passed and it is 1, don't pluralize.
+    `sanitize`          Remove special characters from a string.
+    `join`              Concatenate the array items and join them with the
+                        string provided (or commas by default).
+    `split`             Split a string into an array at the given breakpoints.
+    `first`             First entry of an Array.
+    `offset`            Entry at Array[offset].
+    `last`              Last entry of an Array.
+    `reverse`           Reverse the Array items.
+    `count`             Count the number of items in an array or string
+                        characters.
+    `length`            Alias for `count`.
+    `default`           If the value is `none` the first argument is returned
+    `keys`              Keys of an Array.
+    `items`             Items of an Array.
+    `inspect`           Dumps the variable or value.
+    `fallback`          If the value is empty or `none`, return this value.
+    `selected`          If the first argument is the same as the value, output
+                        `class="selected"`, or `selected` if the second
+                        argument is `true`.
+    `option_selected`   Same as `selected`, but for `selected="selected"`.
+    `checked`           Same as `selected`, but for `checked="checked"`.
+    =================== ======================================================
+
+Additionally, if a filter is missing (say, ${ foo | bar_filter }, in Chyrp it
+checks for an associated Trigger filter by that filter's name.
+
+
+For Loops
+---------
+
+Iteration works via for loops.  Loops work a bit like their Python counterparts,
+except that they don't support multilevel tuple unpacking and that they add a new
+layer to the context.  Thus at the end of the iteration all the modifications on
+the context disappear.  Additionally, inside loops you have access to a special
+`loop` object which provides runtime information:
+
+    ====================== ===================================================
+    Variable               Description
+    ====================== ===================================================
+    ``loop.index``         The current iteration of the loop (1-indexed)
+    ``loop.index0``        The current iteration of the loop (0-indexed)
+    ``loop.revindex``      The number of iterations from the end of the
+                           loop (1-indexed)
+    ``loop.revindex0``     The number of iterations from the end of the
+                           loop (0-indexed)
+    ``loop.first``         True if this is the first time through the loop
+    ``loop.last``          True if this is the last time through the loop
+    ``loop.parent``        For nested loops, this is the loop "above" the
+                           current one
+    ====================== ===================================================
+
+Additionally for loops can have an `else` section that is executed if no
+iteration took place.
+
+Example
+~~~~~~~
+
+::
+
+    <ul>
+    {% for user in users %}
+        <li><a href="$user.href">${ user.username | escape }</a></li>
+    {% else %}
+        <li><em>No users found!</em></li>
+    {% endfor %}
+    </ul>
+
+
+Notes on Iteration
+~~~~~~~~~~~~~~~~~~
+
+Because we have to cope with PHP too, which has problematic arrays that are
+neither hashmaps nor lists, we have no support for associative array iteration
+at all.  How do you iterate over associative arrays then?  Using a filter::
+
+    {% for key, value in array | items %}
+        ...
+    {% endfor %}
+
+To iterate over the keys only::
+
+    {% for key in array | keys %}
+        ...
+    {% endfor %}
+
+
+If Conditions
+-------------
+
+If conditions work like like Ruby, PHP and Python, just that we use PHP
+keywords.  Also, use `elseif` and not `else if`::
+
+    {% if expr1 %}
+        ...
+    {% elseif expr2 %}
+        ...
+    {% else %}
+        ...
+    {% endif %}
+
+
+Inheritance
+-----------
+
+Template inheritance allows you to build a base "skeleton" template that
+contains all the common elements of your site and defines **blocks** that
+child templates can override.
+
+Here a small template inheritance example::
+
+    <!DOCTYPE HTML>
+    <html lang="en">
+      <link rel="stylesheet" href="style.css">
+      <title>{% block title %}My site{% endblock %}</title>
+      <div id="sidebar">
+        {% block sidebar %}
+         <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+         </ul>
+         {% endblock %}
+      </div>
+      <div id="content">
+         {% block content %}{% endblock %}
+      </div>
+    </html>
+
+If we call that template "base.html" a "index.html" template could override
+it and fill in the blocks::
+
+    {% extends "base.html" %}
+    {% block title %}Foo &mdash; {% super %}{% endblock %}
+    {% block content %}
+        This is the content
+    {% endblock %}
+
+By using `{% super %}` you can render the parent's block.  The template
+filenames must be constant strings (we don't support dynamic inheritance
+for simplicity) and are relative to the loader folder, not the current
+template.

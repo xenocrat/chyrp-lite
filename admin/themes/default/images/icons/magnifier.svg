@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16" viewBox="0, 0, 16, 16">
+  <g id="Layer 1">
+    <g>
+      <g>
+        <path d="M8.274,8.952 L8.982,8.245 C9.372,7.854 10.005,7.854 10.396,8.245 L13.931,11.78 C14.322,12.171 14.322,12.804 13.931,13.195 L13.224,13.902 C12.834,14.292 12.201,14.292 11.81,13.902 L8.274,10.366 C7.884,9.976 7.884,9.342 8.274,8.952 z" fill="#704D19"/>
+        <path d="M8.676,9.146 L9.176,8.646 C9.452,8.37 9.955,8.425 10.298,8.768 L13.408,11.878 C13.751,12.222 13.806,12.724 13.53,13 L13.03,13.5 C12.754,13.776 12.251,13.722 11.908,13.378 L8.798,10.268 C8.455,9.925 8.4,9.423 8.676,9.146 z" fill="url(#Gradient_1)"/>
+      </g>
+      <g>
+        <path d="M6,10 C3.791,10 2,8.209 2,6 C2,3.791 3.791,2 6,2 C8.209,2 10,3.791 10,6 C10,8.209 8.209,10 6,10 z" fill="url(#Gradient_2)"/>
+        <path d="M6,10.5 C3.515,10.5 1.5,8.485 1.5,6 C1.5,3.515 3.515,1.5 6,1.5 C8.485,1.5 10.5,3.515 10.5,6 C10.5,8.485 8.485,10.5 6,10.5 z M5.295,9.429 L6,9.5 C7.933,9.5 9.5,7.933 9.5,6 C9.5,4.067 7.933,2.5 6,2.5 C4.144,2.628 3.109,3.533 2.571,5.295 C2.476,5.605 2.476,6.395 2.571,6.705 C2.995,8.092 3.05,7.909 4.043,8.902 z" fill="url(#Gradient_3)"/>
+        <path d="M6,11 C3.239,11 1,8.761 1,6 C1,3.239 3.239,1 6,1 C8.761,1 11,3.239 11,6 C11,8.761 8.761,11 6,11 z M6,10 C8.209,10 10,8.209 10,6 C10,3.791 8.209,2 6,2 C3.791,2 2,3.791 2,6 C2,8.209 3.791,10 6,10 z z" fill="url(#Gradient_4)"/>
+      </g>
+    </g>
+  </g>
+  <defs>
+    <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="-1.04" y1="15.681" x2="1.082" y2="15.681" gradientTransform="matrix(0.707, -0.707, 0.707, 0.707, 0, 0)">
+      <stop offset="0.101" stop-color="#855A1E"/>
+      <stop offset="0.902" stop-color="#E0BE98"/>
+    </linearGradient>
+    <linearGradient id="Gradient_2" gradientUnits="userSpaceOnUse" x1="6" y1="10" x2="6" y2="2">
+      <stop offset="0.099" stop-color="#B0CEF0" stop-opacity="0.8"/>
+      <stop offset="0.902" stop-color="#C2DAF5" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="Gradient_3" gradientUnits="userSpaceOnUse" x1="6" y1="10.5" x2="6" y2="1.5">
+      <stop offset="0" stop-color="#C7DEF5"/>
+      <stop offset="1" stop-color="#E7EFF6"/>
+    </linearGradient>
+    <linearGradient id="Gradient_4" gradientUnits="userSpaceOnUse" x1="6" y1="11" x2="6" y2="1">
+      <stop offset="0" stop-color="#5D82AE"/>
+      <stop offset="1" stop-color="#96B5D7"/>
+    </linearGradient>
+  </defs>
+</svg>

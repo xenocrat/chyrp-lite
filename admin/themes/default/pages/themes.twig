@@ -1,0 +1,55 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Themes" | translate }{% endblock %}
+
+{% block content %}
+            {% for theme in themes %}
+            <div class="theme{% if theme.name == site.theme %} current{% endif %}{% if loop.index % 2 == 0 %} last{% endif %} box left">
+                <a href="{% admin "change_theme&theme=" ~ theme.name %}" class="link">
+                    <span>${ theme.info.name | translate(theme.name) | escape }</span>
+                    {% if theme.screenshot %}
+                    <img src="$theme.screenshot" alt="${ ('"' ~ theme.info.name ~ '"') | escape } screenshot" class="screenshot" width="285" />
+                    {% endif %}
+                </a>
+                {% if theme.screenshot %}
+                <br />
+                {% endif %}
+                <small>${ "v%s by %s" | translate | format(theme.info.version, theme.info.author.link) }</small>
+                <br />
+                <br />
+                {% if theme.name == site.theme %}
+                <span class="button yay center"><img src="$theme_url/images/icons/success.svg" alt="current theme" />${ "Current Theme" | translate }</span>
+                {% else %}
+                <a class="button center" href="{% admin "change_theme&theme=" ~ theme.name %}"><img src="$theme_url/images/icons/appearance.svg" alt="Select" />${ "Select" | translate }</a>
+                <a class="button center${ preview | selected(theme.name, true) }" href="{% admin "preview_theme&theme=" ~ theme.name %}"><img src="$theme_url/images/icons/magnifier.svg" alt="Preview" />${ "Preview" | translate }</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="clear"></div>
+            <br />
+            <h1>${ "Admin Themes" | translate }</h1>
+            {% for theme in admin_themes %}
+            <div class="theme{% if theme.name == admin_theme %} current{% endif %}{% if loop.index % 2 == 0 %} last{% endif %} box left">
+                <a href="{% admin "change_admin_theme&theme=" ~ theme.name %}" class="link">
+                    <span>${ theme.info.name | translate(theme.name) | escape }</span>
+                    {% if theme.screenshot %}
+                    <img src="$theme.screenshot" alt="${ ('"' ~ theme.info.name ~ '"') | escape } screenshot" class="screenshot" width="285" />
+                    {% endif %}
+                </a>
+                {% if theme.screenshot %}
+                <br />
+                {% endif %}
+                <small>${ "v%s by %s" | translate | format(theme.info.version, theme.info.author.link) }</small>
+                <br />
+                <br />
+                {% if theme.name == admin_theme %}
+                <span class="button yay center"><img src="$theme_url/images/icons/success.svg" alt="current theme" />${ "Current Theme" | translate }</span>
+                {% else %}
+                <a class="button center" href="{% admin "change_admin_theme&theme=" ~ theme.name %}"><img src="$theme_url/images/icons/appearance.svg" alt="Select" />${ "Select" | translate }</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="clear"></div>
+            <br />
+            <a class="button right" href="http://chyrp.net/extend/type/theme">${ "Get More Themes &rsaquo;" | translate }</a>
+{% endblock %}

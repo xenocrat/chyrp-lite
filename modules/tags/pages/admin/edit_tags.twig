@@ -1,0 +1,23 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Edit Tags" | translate("tags") }{% endblock %}
+
+{% block content %}
+            <h1>${ "Edit Tags" | translate("tags") | format(post.title) }</h1>
+            <div class="tag_cloud">
+                <form action="{% admin "update_tags" %}" method="post" accept-charset="utf-8">
+                    <fieldset>
+                        <p>
+                            <input type="text" name="tags" value="${ post.tags | keys | join(", ") | escape }" id="tags" class="big expand" />
+                        </p>
+                        <p class="buttons">
+                            <button class="yay" name="delete">
+                                <img src="$theme_url/images/icons/success.svg" alt="delete" /> ${ "Update" | translate }
+                            </button>
+                            <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                            <input type="hidden" name="id" value="$post.id" id="clean" />
+                        </p>
+                    </fieldset>
+                </form>
+            </div>
+{% endblock %}

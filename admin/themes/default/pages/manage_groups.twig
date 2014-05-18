@@ -1,0 +1,47 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Manage Groups" | translate }{% endblock %}
+
+{% block content %}
+            <h2>${ "Need more detail?" | translate }</h2>
+            <form class="detail" action="index.php" method="get" accept-charset="utf-8">
+                <fieldset>
+                    <input type="hidden" name="action" value="manage_groups" />
+                    {% if visitor.group.can("add_group") %}
+                    <a href="{% admin "new_group" %}" class="button yay right">
+                        <img src="$theme_url/images/icons/add.svg" alt="add" /> ${ "New Group" | translate }
+                    </a>
+                    {% endif %}
+                    <div class="pad">
+                        <h3>${ "Search all groups for user&hellip;" | translate }</h3>
+                        <input class="text" type="text" name="search" value="${ GET.search | escape }" id="search" /> <button type="submit" class="inline">${ "Search &rarr;" | translate }</button>
+                    </div>
+                </fieldset>
+            </form>
+            <br />
+            <h2>${ "Groups" | translate }</h2>
+            {% for group in groups.paginated %}
+            <div class="box">
+                <h1>
+                    <span class="right">
+                        ${ group.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="edit" /> '~("edit" | translate)) }
+                        ${ group.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" /> '~("delete" | translate)) }
+                    </span>
+                    {% if group.id == site.guest_group %}
+                    ${ "&#8220;%s&#8221; is the group for guests." | translate | format(group.name) }
+                    {% elseif group.id == site.default_group %}
+                    ${ "&#8220;%s&#8221; is the default group and has %d <a href=\"%s\">member</a>." | translate_plural("&#8220;%s&#8221; is the default group and has %d <a href=\"%s\">members</a>.", group.size) | format(group.name, group.size, route.url("/admin/?action=manage_users&query=group%3A"~group.name)) }
+                    {% else %}
+                    ${ "&#8220;%s&#8221; has %d <a href=\"%s\">member</a>." | translate_plural("&#8220;%s&#8221; has %d <a href=\"%s\">members</a>.", group.size) | format(group.name, group.size, route.url("/admin/?action=manage_users&query=group%3A"~group.name)) }
+                    {% endif %}
+                </h1>
+            </div>
+            {% endfor %}
+            {% if groups.paginated and groups.pages > 1 %}
+            <div class="pagination">
+                $groups.next_link
+                $groups.prev_link
+                <span class="pages">${ "Page %d of %d" | translate | format(groups.page, groups.pages) }</span>
+            </div>
+            {% endif %}
+{% endblock %}

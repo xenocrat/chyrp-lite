@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${ site.locale | split("_") | first }" lang="${ site.locale | split("_") | first }">
+    <head>
+        <meta http-equiv="Content-type" content="$theme.type; charset=utf-8" />
+        <meta name="robots" content="noindex" />
+        <meta name="viewport" content="initial-scale = 1.0, minimum-scale = 1.0, maximum-scale = 1.0, user-scalable = no" />
+        <title>$site.name: {% block title %}$title{% endblock %}</title>
+        <!-- stylesheets -->
+        <link rel="shortcut icon" href="$site.url/favicon.ico" />
+        <link rel="stylesheet" href="$theme_url/style.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+        <link rel="stylesheet" href="$site.chyrp_url/includes/lib/flexnav/flexnav.css" type="text/css" charset="utf-8" />
+        <!-- javascripts -->
+        <script src="$site.chyrp_url/includes/lib/gz.php?file=jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="$site.chyrp_url/includes/lib/gz.php?file=plugins.js" type="text/javascript" charset="utf-8"></script>
+        <script src="$site.chyrp_url/includes/lib/gz.php?file=flexnav/jquery.flexnav.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="$site.chyrp_url/includes/admin.js.php?action=$route.action" type="text/javascript" charset="utf-8"></script>
+        <script src="$theme_url/javascript.php?action=$route.action" type="text/javascript" charset="utf-8"></script>
+${ trigger.call("admin_head") }
+    </head>
+    <body>
+        <div id="header">
+            <div class="column">
+                <ul id="navigation">
+{% block navigation %}
+                    {% for action, nav in navigation | items %}
+                    {% if nav.show %}
+                    <li class="$action{% if nav.selected %} selected{% endif %}"$nav.attributes><a href="{% admin action %}">$nav.title</a></li>
+                    {% endif %}
+                    {% endfor %}
+{% endblock %}
+                </ul>
+                <h1><a href="$site.url">$site.name</a></h1>
+            </div>
+        </div>
+        <div id="welcome">
+            <div class="column">
+                <a href="{% url "/?action=logout" %}" class="right">${ "Log Out &rsaquo;" | translate }</a>
+                ${ "Hello, %s!" | translate | format(visitor.full_name | split | first | fallback(visitor.login | fallback("Guest" | translate))) }
+                <a href="$site.url">${ "View Site &rsaquo;" | translate }</a>
+            </div>
+        </div>
+        <div class="column menu-button">Menu</div>
+        <ul class="column ${ route.action }_nav flexnav" data-breakpoint="800" id="sub-nav">
+{% block subnav %}
+            {% if subnav[route.action] %}
+            {% for action, nav in subnav[route.action] | items %}
+            {% if nav.show %}
+            <li${ route.action | selected(nav.selected, action) }$nav.attributes><a href="{% admin action %}">$nav.title</a></li>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+{% endblock %}
+        </ul>
+        <div class="clear"></div>
+        <div class="column" id="content">
+            {% if new_update %} $new_update {% endif %}
+            {% for notice in flash.notices %}
+            <p class="message yay">$notice</p>
+            {% endfor %}
+            {% for warning in flash.warnings %}
+            <p class="message boo">$warning</p>
+            {% endfor %}
+            {% for message in flash.messages %}
+            <p class="message">$message</p>
+            {% endfor %}
+{% block content %}{% endblock %}
+            <div class="clear"></div>
+        </div>
+        <div class="column" id="footer">
+            ${ "Chyrp loves you." | translate }<br />
+            <span class="sub">
+                ${ "v%s &dash; &copy; %d, Chyrp Team" | translate | format(version, "now" | date("Y")) }
+            </span>
+        </div>
+    </body>
+</html>

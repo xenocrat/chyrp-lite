@@ -1,0 +1,47 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Like Settings" | translate("likes") }{% endblock %}
+
+{% block content %}
+            <form id="like_settings" class="split" action="{% admin "like_settings" %}" method="post">
+                <fieldset>
+                    <p>
+                        <label for="showOnFront">${ "Show On Front Page" | translate("likes") }</label>
+                        <input type="checkbox" class="checkbox" name="showOnFront"${ site.module_like.showOnFront | checked } /> ${ "enabled" | translate("likes") }
+                        <small>${ "Enables like functionality on front page posts." | translate("likes") }</small>
+                    </p>
+                    <p>
+                        <label for="likeWithText">${ "Like With Text" | translate("likes") }</label>
+                        <input type="checkbox" class="checkbox" name="likeWithText"${ site.module_like.likeWithText | checked } /> ${ "enabled" | translate("likes") }
+                        <small>${ "Enables like with text links (i.e. Like/Unlike)." | translate("likes") }</small>
+                    </p>
+                    <p>
+                        <label for="likeImage">${ "Like Button Image" | translate("likes") }</label>
+                        <select name="likeImage">
+                            {% for key, val in modules['likes'].get_like_images | items %}
+                            <option value="$val" ${ val | option_selected(site.module_like.likeImage) }>$key</option>
+                            {% endfor %}
+                        </select>
+                        <img src="$site.module_like.likeImage" alt="${ "Likes Image" | translate("likes") }" />
+                    </p>
+                    <p>
+                        <table>
+                        <tr valign="top">
+                        <label for="likeText">${ "Like Texts" | translate("likes") }</label>
+                        <td>{% for key, val in site.module_like.likeText | items %}
+                        	<div>
+                        	   <input style="border:solid 1px #ddd; width:350px;" type="text" name="likeText-$key" value="$val" />
+                        	</div>
+                        	{% endfor %}
+                        </td>
+                        </tr>
+                        </table>
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

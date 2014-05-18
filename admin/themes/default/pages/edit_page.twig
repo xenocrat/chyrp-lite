@@ -1,0 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Edit &#8220;%s&#8221;" | translate | format(page.title | escape) }{% endblock %}
+
+{% block content %}
+            ${ page.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" />'~ ("Delete" | translate), null, null, "button boo right") }
+            <h1>${ "Editing &#8220;%s&#8221;" | translate | format(page.title) }</h1>
+            <form id="edit_form" action="{% admin "update_page" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+{% include "partials/page_fields.twig" %}
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                    <input type="hidden" name="id" value="$page.id" id="id" />
+                </fieldset>
+            </form>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Sitemap Settings" | translate("sitemap") }{% endblock %}
+
+{% block content %}
+            <form id="sitemap_settings" class="split" action="{% admin "sitemap_settings" %}" method="post">
+                <fieldset>
+                    <p>
+                        <label for="blog_changefreq">${ "Blog Change Frequency" | translate("sitemap") }</label>
+                        <select name="blog_changefreq">
+                            {% for key, val in modules['sitemap'].change_frequency | items %}
+                            <option value="$val" ${ val | option_selected(site.module_sitemap.blog_changefreq) }>$val</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label for="archives_changefreq">${ "Archive Change Frequency" | translate("sitemap") }</label>
+                        <select name="archives_changefreq">
+                            {% for key, val in modules['sitemap'].change_frequency | items %}
+                            <option value="$val" ${ val | option_selected(site.module_sitemap.archives_changefreq) }>$val</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label for="pages_changefreq">${ "Pages Change Frequency" | translate("sitemap") }</label>
+                        <select name="pages_changefreq">
+                            {% for key, val in modules['sitemap'].change_frequency | items %}
+                            <option value="$val" ${ val | option_selected(site.module_sitemap.pages_changefreq) }>$val</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label for="posts_changefreq">${ "Posts Change Frequency" | translate("sitemap") }</label>
+                        <select name="posts_changefreq">
+                            {% for key, val in modules['sitemap'].change_frequency | items %}
+                            <option value="$val" ${ val | option_selected(site.module_sitemap.posts_changefreq) }>$val</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

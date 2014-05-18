@@ -1,0 +1,96 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Manage Comments" | translate("comments") }{% endblock %}
+
+{% block content %}
+            <h2>${ "Need more detail?" | translate }</h2>
+            <form class="detail" action="index.php" method="get" accept-charset="utf-8">
+                <fieldset>
+                    <input type="hidden" name="action" value="manage_comments" />
+                    <div class="left pad">
+                        <h3>
+                            ${ "Search&hellip;" | translate }
+                            <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" onerror="this.removeAttribute('onerror'); this.src='$theme_url/images/icons/help.svg'" /></a>
+                        </h3>
+                        <input class="text" type="text" name="query" value="${ GET.query | escape }" id="query" />
+                        <button type="submit" class="inline">${ "Search &rarr;" | translate }</button>
+                    </div>
+                    <div class="clear"></div>
+                </fieldset>
+            </form>
+            <br />
+            <form action="{% admin "bulk_comments" %}" method="post">
+                <h2>{% if GET.query %}${ "Search Results" | translate }{% else %}${ "Last 25 Comments" | translate("comments") }{% endif %}</h2>
+                <table border="0" cellspacing="0" cellpadding="0" class="wide">
+                    <thead>
+                        <tr class="head">
+                            <th class="toggler center"></th>
+                            <th>${ "Post" | translate("comments") }</th>
+                            <th>${ "Author" | translate("comments") }</th>
+                            <th>${ "Added" | translate("comments") }</th>
+                            <th>${ "Status" | translate("comments") }</th>
+                            ${ trigger.call("manage_comments_column_header") }
+                            <th colspan="2">${ "Controls" | translate }</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comment in comments.paginated %}
+                        <tr id="comment_$comment.id" class="comment $comment.status{% if loop.last %} last{% endif %}">
+                            <td rowspan="2" class="checkbox center">
+                                <input type="checkbox" name="comment[$comment.id]" value="" id="comment_checkbox_$comment.id" />
+                            </td>
+                            <td class="main">
+                                {% if not comment.post.no_results %}
+                                <a href="$comment.post.url#comment_$comment.id">${ comment.post.title | truncate }</a>
+                                {% endif %}
+                            </td>
+                            <td>${ comment.user.full_name | fallback(comment.user.login) | fallback(comment.author) }</td>
+                            <td>${ comment.created_at | strftime }</td>
+                            <td>${ comment.status | capitalize | translate("comments") }</td>
+                            ${ trigger.call("manage_comments_column", comment) }
+                            {% if comment.editable and comment.deletable %}
+                            <td class="controls">${ comment.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="edit" /> '~("edit" | translate)) }</td>
+                            <td class="controls">${ comment.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" /> '~("delete" | translate)) }</td>
+                            {% elseif comment.editable or comment.deletable %}
+                            ${ comment.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="edit" /> '~("edit" | translate), '<td class="controls" colspan="2">', '</td>') }
+                            ${ comment.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" /> '~("delete" | translate), '<td class="controls" colspan="2">', '</td>') }
+                            {% endif %}
+                        </tr>
+                        <tr class="excerpt">
+                            <td colspan="6">${ comment.body | truncate(100) }</td>
+                        </tr>
+                        {% else %}
+                        <tr class="last">
+                            <td colspan="6" class="center"><span class="sub">${ "(none)" | translate }</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% if visitor.group.can("edit_comment", "delete_comment") %}
+                <br />
+                <div class="controls">
+                    <h4>${ "With selected:" | translate("comments") }</h4>
+                    <button class="lite" name="deny">
+                        <img src="$theme_url/images/icons/deny.svg" alt="deny" /> ${ "deny" | translate("comments") }
+                    </button>
+                    <button class="lite yay" name="approve">
+                        <img src="$theme_url/images/icons/success.svg" alt="approve" /> ${ "approve" | translate("comments") }
+                    </button>
+                    <button class="lite boo" name="spam">
+                        <img src="$theme_url/images/icons/bug.svg" alt="spam" /> ${ "mark as spam" | translate("comments") }
+                    </button>
+                    <button class="lite boo" name="delete">
+                        <img src="$theme_url/images/icons/delete.svg" alt="delete" /> ${ "delete" | translate("comments") }
+                    </button>
+                </div>
+                {% endif %}
+            </form>
+            {% if comments.paginated and comments.pages > 1 %}
+            <br />
+            <div class="pagination">
+                $comments.next_link
+                $comments.prev_link
+                <span class="pages">${ "Page %d of %d" | translate | format(comments.page, comments.pages) }</span>
+            </div>
+            {% endif %}
+{% endblock %}

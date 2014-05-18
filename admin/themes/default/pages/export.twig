@@ -1,0 +1,62 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Export" | translate }{% endblock %}
+
+{% block content %}
+            <h2>${ "What would you like to export?" | translate }</h2>
+            <form id="export_form" class="split" action="{% admin "export" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <p>
+                        <label for="posts">${ "Posts" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="posts" value="" id="posts" checked="checked" />
+                        <small>
+                            ${ "filter:" | translate }
+                            <input class="text" type="text" name="filter_posts" value="" id="filter_posts" />
+                            <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                            ${ "(optional)" | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="pages">${ "Pages" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="pages" value="" id="pages" checked="checked" />
+                        <small>
+                            ${ "filter:" | translate }
+                            <input class="text" type="text" name="filter_pages" value="" id="filter_pages" />
+                            <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                            ${ "(optional)" | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="groups">${ "Groups" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="groups" value="" id="groups" checked="checked" />
+                        <small>
+                            ${ "filter:" | translate }
+                            <input class="text" type="text" name="filter_groups" value="" id="filter_groups" />
+                            <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                            ${ "(optional)" | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="users">${ "Users" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="users" value="" id="users" checked="checked" />
+                        <span class="sub">
+                            ${ "(warning: this also exports the hashed passwords, keep it safe)" | translate }
+                        </span>
+                        <small>
+                            ${ "filter:" | translate }
+                            <input class="text" type="text" name="filter_users" value="" id="filter_users" />
+                            <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                            ${ "(optional)" | translate }
+                        </small>
+                    </p>
+
+                    ${ trigger.call("export_choose") }
+
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Export" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

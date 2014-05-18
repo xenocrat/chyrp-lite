@@ -1,0 +1,33 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Delete Page &#8220;%s&#8221;?" | translate | format(page.title | escape) }{% endblock %}
+
+{% block content %}
+            <h1>${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title) }</h1>
+            <form class="delete" action="{% admin "destroy_page" %}" method="post" accept-charset="utf-8">
+                <fieldset>
+                    <blockquote>
+                        <h2>${ "Excerpt" | translate }</h2>
+                        ${ page.body | truncate(500) }
+                        {% if page.children %}
+                        <br />
+                        <h2><input type="checkbox" name="destroy_children{# OH, THE HORROR! #}" value="" id="destroy_children" /> ${ "Delete children?" | translate }</h2>
+                        <ul class="noitalic">
+                        {% for child in page.children %}
+                            <li><a href="$child.url">$child.title</a></li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </blockquote>
+                    <br />
+
+                    <div class="center">
+                        <button name="destroy" value="indubitably" class="center boo">${ "DESTROY!" | translate }</button>
+                        <button name="destroy" value="bollocks" type="submit" class="yay">${ "Cancel" | translate }</button>
+                    </div>
+
+                    <input type="hidden" name="id" value="$page.id" id="id" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

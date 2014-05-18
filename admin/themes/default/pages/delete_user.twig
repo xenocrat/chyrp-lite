@@ -1,0 +1,89 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Delete User &#8220;%s&#8221;?" | translate | format(user.login | escape) }{% endblock %}
+
+{% block content %}
+            <h1>${ "Are you sure you want to delete user &#8220;%s&#8221;?" | translate | format(user.login | escape) }</h1>
+            <form class="delete" action="{% admin "destroy_user" %}" method="post" accept-charset="utf-8">
+                <fieldset>
+                    <blockquote class="noitalic">
+                        <h2>${ "Information" | translate }</h2>
+                        <ul>
+                            {% if user.full_name %}
+                            <li><strong>${ "Full Name:" | translate }</strong> $user.full_name</li>
+                            {% endif %}
+                            <li><strong>${ "E-Mail:" | translate }</strong> $user.email</li>
+                            {% if user.website %}
+                            <li><strong>${ "Website:" | translate }</strong> <a href="$user.website">$user.website</a></li>
+                            {% endif %}
+                            <li><strong>${ "Group:" | translate }</strong> $user.group.name</li>
+                        </ul>
+                        <br />
+                        {% if user.posts %}
+                        <h2>${ "Posts:" | translate }</h2>
+                        <ul>
+                            {% for post in user.posts %}
+                            <li><a href="$post.url">$post.title</a></li>
+                            {% endfor %}
+                        </ul>
+                        <br />
+                        {% if users %}
+                        <h2 class="inline">
+                            <input type="radio" name="posts" value="move" id="posts_move" />
+                            ${ "Attribute posts to:" | translate }
+                        </h2>
+                        <select name="move_posts" id="move_posts" class="big2">
+                            {% for user in users %}
+                            <option value="$user.id">$user.full_name ($user.login)</option>
+                            {% endfor %}
+                        </select>
+                        <br />
+                        {% endif %}
+                        <h2 class="inline">
+                            <input type="radio" name="posts" value="delete" id="posts_delete" checked="checked" />
+                            ${ "Delete posts." | translate }
+                        </h2>
+                        <br />
+                        <br />
+                        {% endif %}
+                        {% if user.pages %}
+                        <h2>${ "Pages:" | translate }</h2>
+                        <ul>
+                            {% for page in user.pages %}
+                            <li><a href="$page.url">$page.title</a></li>
+                            {% endfor %}
+                        </ul>
+                        <br />
+                        {% if users %}
+                        <h2 class="inline">
+                            <input type="radio" name="pages" value="move" id="pages_move" />
+                            ${ "Attribute pages to:" | translate }
+                        </h2>
+                        <select name="move_pages" id="move_pages" class="big2">
+                            {% for user in users %}
+                            <option value="$user.id">$user.full_name ($user.login)</option>
+                            {% endfor %}
+                        </select>
+                        <br />
+                        {% endif %}
+                        <h2 class="inline">
+                            <input type="radio" name="pages" value="delete" id="pages_delete" checked="checked" />
+                            ${ "Delete pages." | translate }
+                        </h2>
+                        <br />
+                        <br />
+                        {% endif %}
+${ trigger.call("delete_user_form") }
+                    </blockquote>
+                    <br />
+
+                    <div class="center">
+                        <button name="destroy" value="indubitably" class="center boo">${ "DESTROY!" | translate }</button>
+                        <button name="destroy" value="bollocks" type="submit" class="yay">${ "Cancel" | translate }</button>
+                    </div>
+
+                    <input type="hidden" name="id" value="$user.id" id="id" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

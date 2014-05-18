@@ -1,0 +1,101 @@
+# Chyrp v2.5 Translation File.
+# Copyright (C) 2013 Chyrp Team
+# This file is distributed under the same license as the Chyrp v2.5 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp v2.5\n"
+"Report-Msgid-Bugs-To: email@chyrp.net\n"
+"POT-Creation-Date: 2013-12-27 18:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/likes/pages/admin/like_settings.twig:30
+msgid "Like Texts"
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:9
+msgid "Show On Front Page"
+msgstr ""
+
+#: modules/likes/info.yaml:5
+msgid "Please remember to update the permission settings for each group."
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:41
+msgid "Update"
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:10
+#: modules/likes/pages/admin/like_settings.twig:15
+msgid "enabled"
+msgstr ""
+
+#: modules/likes/likes.php:24
+msgid "You do not have sufficient privileges to change settings."
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:14
+msgid "Like With Text"
+msgstr ""
+
+#: modules/likes/likes.php:24
+#: modules/likes/likes.php:30
+msgid "Access Denied"
+msgstr ""
+
+#: modules/likes/model.Like.php:141
+msgid "Unlike Posts"
+msgstr ""
+
+#: modules/likes/model.Like.php:140
+msgid "Like Posts"
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:16
+msgid "Enables like with text links (i.e. Like/Unlike)."
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:11
+msgid "Enables like functionality on front page posts."
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:3
+msgid "Like Settings"
+msgstr ""
+
+#: modules/likes/likes.php:47
+msgid "Settings updated."
+msgstr ""
+
+#: modules/likes/info.yaml:4
+msgid "Likes"
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:25
+msgid "Likes Image"
+msgstr ""
+
+#: modules/likes/pages/admin/like_settings.twig:19
+msgid "Like Button Image"
+msgstr ""
+
+#: modules/likes/info.yaml:1
+msgid "Are you sure you want to remove all Likes from the database?"
+msgstr ""
+
+#: modules/likes/likes.php:30
+msgid "Invalid security key."
+msgstr ""
+
+#: modules/likes/info.yaml:8
+msgid "Allow users to like a post."
+msgstr ""
+

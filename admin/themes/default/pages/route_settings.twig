@@ -1,0 +1,50 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Route Settings" | translate }{% endblock %}
+
+{% block content %}
+            <form id="route_settings" class="split" action="{% admin "route_settings" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <p>
+                        <label for="clean_urls">${ "Clean URLs?" | translate }</label>
+                        <input type="checkbox" name="clean_urls" id="clean_urls"${ site.clean_urls | checked } />
+                        <span class="sub">${ "(recommended)" | translate }</span>
+                        <small>
+                            ${ "Gives your site prettier urls." | translate }<br />
+                            ${ "Requires .htaccess support (pretty common). If you're unsure, it's safe to test and find out. Just come back and disable it if it breaks your site." | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="post_url">
+                            ${ "Post View URL" | translate }
+                            <span class="sub">${ "(requires clean URLs)" | translate }</span>
+                        </label>
+                        <input class="text code" type="text" name="post_url" value="${ site.post_url | escape }" size="30" id="post_url" />
+                    </p>
+                    <div class="small">
+                        <strong>${ "Syntax:" | translate }</strong>
+                        <ul>
+                            <li><code>(year)</code>: ${ "Year submitted" | translate } <span class="sub">${ "(ex. 2007)" | translate }</span></li>
+                            <li><code>(month)</code>: ${ "Month submitted" | translate } <span class="sub">${ "(ex. 12)" | translate }</span></li>
+                            <li><code>(day)</code>: ${ "Day submitted" | translate } <span class="sub">${ "(ex. 25)" | translate }</span></li>
+                            <li><code>(hour)</code>: ${ "Hour submitted" | translate } <span class="sub">${ "(ex. 03)" | translate }</span></li>
+                            <li><code>(minute)</code>: ${ "Minute submitted" | translate } <span class="sub">${ "(ex. 59)" | translate }</span></li>
+                            <li><code>(second)</code>: ${ "Second submitted" | translate } <span class="sub">${ "(ex. 30)" | translate }</span></li>
+                            <li><code>(id)</code>: ${ "Post ID" | translate }</li>
+                            <li><code>(author)</code>: ${ "Post author (username)" | translate } <span class="sub">${ "(ex. Alex)" | translate }</span></li>
+                            <li><code>(clean)</code>: ${ "The non-unique sanitized name" | translate } <span class="sub">${ "(ex. this_is_clean)" | translate }</span></li>
+                            <li><code>(url)</code>: ${ "The unique form of (clean)" | translate } <span class="sub">${ "(ex. this_one_is_taken_2)" | translate }</span></li>
+                            <li><code>(feather)</code>: ${ "The post's feather" | translate } <span class="sub">${ "(ex. text)" | translate }</span></li>
+                            <li><code>(feathers)</code>: ${ "The plural form of the post's feather" | translate } <span class="sub">${ "(ex. links)" | translate }</span></li>
+                            ${ trigger.call("post_view_url_settings") }
+                        </ul>
+                    </div>
+
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

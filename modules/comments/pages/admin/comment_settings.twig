@@ -1,0 +1,47 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Comment Settings" | translate("comments") }{% endblock %}
+
+{% block content %}
+            <form id="comment_settings" class="split" action="{% admin "comment_settings" %}" method="post">
+                <fieldset>
+                    <p>
+                        <label for="akismet_api_key">${ "Akismet API Key" | translate("comments") }</label>
+                        <input class="text" type="text" name="akismet_api_key" value="${ site.akismet_api_key | escape }" id="akismet_api_key" /> <span class="sub">${ "(recommended)" | translate }</span>
+                        <small>${ "A very good spam blocker. Get an API key from <a href=\"http://akismet.com/\">Akismet.com</a>." | translate("comments") }</small>
+                    </p>
+                    <p>
+                        <label for="allowed_comment_html">${ "Allowed HTML Tags" | translate("comments") }</label>
+                        <input class="text code" type="text" name="allowed_comment_html" value="${ site.allowed_comment_html | join(", ") | escape }" id="allowed_comment_html" size="23" />
+                        <small>${ "Format: <code>strong, blockquote, em</code>" | translate("comments") }</small>
+                    </p>
+                    <p>
+                        <label for="allow_nested_comments">${ "Allow Nested Comments" | translate("comments") }</label>
+                        <input type="checkbox" class="checkbox" name="allow_nested_comments"${ site.allow_nested_comments | checked } /> ${ "enabled" | translate("comments") }
+                        <small>${ "Enables replying to a comment" | translate("comments") }</small>
+                    </p>
+                    <p>
+                        <label for="default_comment_status">${ "Default Comment Status" | translate("comments") }</label>
+                        <select name="default_comment_status">
+                            <option value="approved"${ "approved" | option_selected(site.default_comment_status) }>${ "Approved" | translate("comments") }</option>
+                            <option value="denied"${ "denied" | option_selected(site.default_comment_status) }>${ "Denied" | translate("comments") }</option>
+                            <option value="spam"${ "spam" | option_selected(site.default_comment_status) }>${ "Spam" | translate("aggregator") }</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="comments_per_page">${ "Comments Per Page" | translate("comments") }</label>
+                        <input class="text" type="text" name="comments_per_page" value="${ site.comments_per_page | escape }" size="2" id="comments_per_page" />
+                    </p>
+                    <p>
+                        <label for="auto_reload_comments">${ "Reload Comments Every %s Seconds" | translate("comments") | format("<input class=\"text\" type=\"text\" name=\"auto_reload_comments\" value=\"" ~ site.auto_reload_comments | escape ~ "\" size=\"2\" id=\"auto_reload_comments\" />") }</label>
+                        <input type="checkbox" class="checkbox" name="enable_reload_comments"${ site.enable_reload_comments | checked } /> ${ "enabled" | translate("comments") }
+                    </p>
+
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

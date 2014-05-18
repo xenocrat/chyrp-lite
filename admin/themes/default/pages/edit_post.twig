@@ -1,0 +1,17 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Edit &#8220;%s&#8221;" | translate | format(post.title | escape) }{% endblock %}
+
+{% block content %}
+            ${ post.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" />'~ ("Delete" | translate), null, null, "button boo right") }
+            <h1>${ "Editing &#8220;%s&#8221;" | translate | format(post.title | escape) }</h1>
+            <form id="edit_form" class="${ post.feather | escape(true) }" action="{% admin "update_post" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+{% include "partials/post_fields.twig" %}
+
+                    <input type="hidden" name="id" value="$post.id" id="id" />
+                    <input type="hidden" name="feather" value="${ post.feather | escape(true) }" id="feather" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

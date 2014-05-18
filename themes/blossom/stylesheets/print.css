@@ -1,0 +1,12 @@
+@import url('screen.css');
+
+body {                          background-color: #ffffff;
+                                margin: 2em }
+small {                         font-size: 0.33em }
+div#sidebar, div#tail,
+div.prev, div.next {            display: none }
+div.main > article,
+div.standalone {                background-color: #ffffff;
+                                page-break-inside: avoid;
+                                box-shadow: none;
+                                border: 0.1em solid #d2d9d4 }

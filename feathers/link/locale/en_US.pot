@@ -1,0 +1,37 @@
+# Chyrp v2.5 Translation File.
+# Copyright (C) 2013 Chyrp Team
+# This file is distributed under the same license as the Chyrp v2.5 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp v2.5\n"
+"Report-Msgid-Bugs-To: email@chyrp.net\n"
+"POT-Creation-Date: 2013-12-27 18:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: feathers/link/link.php:28
+#: feathers/link/link.php:44
+msgid "URL can't be empty."
+msgstr ""
+
+#: feathers/link/link.php:28
+#: feathers/link/link.php:44
+msgid "Error"
+msgstr ""
+
+#: feathers/link/info.yaml:5
+msgid "Link"
+msgstr ""
+
+#: feathers/link/info.yaml:2
+msgid "Link to other sites, name it, and add an optional description."
+msgstr ""
+

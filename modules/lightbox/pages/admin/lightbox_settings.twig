@@ -1,0 +1,33 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Obscura Settings" | translate("obscura") }{% endblock %}
+
+{% block content %}
+            <form id="obscura_settings" class="split" action="{% admin "obscura_settings" %}" method="post">
+                <fieldset>
+                    <p>
+                        <label for="background">${ "Background" | translate("obscura") }</label>
+                        <select name="background">
+                            <option value="black"${ "black" | option_selected(site.module_obscura["background"]) }>${ "Black" | translate("obscura") }</option>
+                            <option value="grey"${ "grey" | option_selected(site.module_obscura["background"]) }>${ "Grey" | translate("obscura") }</option>
+                            <option value="white"${ "white" | option_selected(site.module_obscura["background"]) }>${ "White" | translate("obscura") }</option>
+                            <option value="inherit"${ "inherit" | option_selected(site.module_obscura["background"]) }>${ "Inherit" | translate("obscura") }</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="spacing">${ "Spacing" | translate("obscura") }</label>
+                        <input class="text" type="text" name="spacing" value="${ site.module_obscura["spacing"] | escape }" size="2" id="spacing" />
+                        <span class="sub">${ "(pixels)" | translate("obscura") }</span>
+                    </p>
+                    <p>
+                        <label for="protect">${ "Protect" | translate("cascade") }</label>
+                        <input type="checkbox" class="checkbox" name="protect"${ site.module_obscura["protect"] | checked } />
+                        <small>${ "Prevent visitors from saving images?" | translate("cascade") }</small>
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                    </p>
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

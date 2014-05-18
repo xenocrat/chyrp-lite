@@ -1,0 +1,33 @@
+{% extends "layouts/default.twig" %}
+
+{% block content %}
+  {% if not post.prev.no_results %}
+  <div role="navigation" class="prev traversal">
+      <a href="$post.prev.url">${ ( "Next post" | translate ) }</a>
+  </div>
+  {% endif %}
+  {% include "feathers/" ~ post.feather ~ ".twig" %}
+  {% if enabled_modules.comments and (post.comment_count > 0 or post.commentable) %}
+  <article role="complementary" class="commentary" id="comments">
+    <ol class="comments" id="comments_$post.id">
+      {% paginate site.comments_per_page comments in post.comments as comment %}
+      {% include "content/comment.twig" %}
+      {% else %}
+      <li class="no_comments"></li> {# Needed for AJAX commenting and XHTML Strict validation. #}
+      {% endpaginate %}
+      {% if post.commentable %}
+      <li>{% include "forms/comment/new.twig" %}</li>
+      {% endif %}
+    </ol>
+    <div class="comments_pagination traversal">
+      $comments.prev_link
+      $comments.next_link
+    </div>
+  </article>
+  {% endif %}
+  {% if not post.next.no_results %}
+  <div role="navigation" class="next traversal">
+      <a href="$post.next.url">${ ( "Previous post" | translate ) }</a>
+  </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,1022 @@
+
+title
+-----
+Target:
+	$title
+Called from:
+	includes/model/Post.php on line 565
+Arguments:
+	$post
+
+
+flash_notice_message
+--------------------
+Target:
+	$message
+Called from:
+	includes/class/Flash.php on line 80
+Arguments:
+	$redirect_to
+
+
+post_export_url
+---------------
+Target:
+	$url
+Called from:
+	includes/controller/Admin.php on line 921
+Arguments:
+	$post)
+
+
+filter_page
+-----------
+Target:
+	$this
+Called from:
+	includes/model/Page.php on line 41
+
+
+bookmarklet_submit_values
+-------------------------
+Target:
+	$values
+Called from:
+	includes/model/Post.php on line 215
+
+
+parse_urls
+----------
+Target:
+	$urls
+Called from:
+	includes/class/Route.php on line 173
+
+
+posts_export
+------------
+Target:
+	$posts_atom
+Called from:
+	includes/controller/Admin.php on line 940
+Arguments:
+	$post
+
+
+link_regexp
+-----------
+Target:
+	$regexp
+Called from:
+	includes/helpers.php on line 903
+
+
+feed_content
+------------
+Target:
+	$feed_content
+Called from:
+	includes/model/Post.php on line 599
+Arguments:
+	$post
+
+
+arian_values
+------------
+Target:
+	$values
+Called from:
+	includes/model/Post.php on line 216
+
+
+before_update_user
+------------------
+Target:
+	$new_values
+Called from:
+	includes/model/User.php on line 178
+
+
+scripts
+-------
+Target:
+	$javascripts
+Called from:
+	includes/class/Theme.php on line 243
+
+
+nav_selected
+------------
+Target:
+	$this->context["selected"]
+Called from:
+	includes/controller/Admin.php on line 2446
+
+
+feed_url
+--------
+Target:
+	$url
+Called from:
+	includes/feed.php on line 33
+Arguments:
+	$post
+
+
+keyword_search
+--------------
+Target:
+	$keywords
+Called from:
+	includes/helpers.php on line 1569
+Arguments:
+	$query, $plain
+
+
+title_from_excerpt
+------------------
+Target:
+	$excerpt
+Called from:
+	includes/model/Post.php on line 540
+
+
+extend_nav
+----------
+Target:
+	$subnav["extend"]
+Called from:
+	includes/controller/Admin.php on line 2328
+
+
+before_group_add_permissions
+----------------------------
+Target:
+	$permissions
+Called from:
+	includes/model/Group.php on line 102
+
+
+before_add_page
+---------------
+Target:
+	$new_values
+Called from:
+	includes/model/Page.php on line 105
+
+
+xmlrpc_methods
+--------------
+Target:
+	$methods
+Called from:
+	includes/xmlrpc.php on line 57
+Arians-iMac:chyrp xhezairi$ ./triggers.rb
+==============================================
+ Trigger Calls
+==============================================
+
+post_view_url_settings
+----------------------
+Called from:
+	admin/themes/default/pages/route_settings.twig on line 39
+
+
+import_movabletype_post
+-----------------------
+Called from:
+	includes/controller/Admin.php on line 1617
+Arguments:
+	$post, $new_post, $link
+
+
+import_chyrp_group
+------------------
+Called from:
+	includes/controller/Admin.php on line 1114
+Arguments:
+	Group::add($name, (array) $permissions)
+
+
+add_page
+--------
+Called from:
+	includes/model/Page.php on line 111
+Arguments:
+	$page
+
+
+add_post
+--------
+Called from:
+	includes/model/Post.php on line 267
+Arguments:
+	$post, $options
+
+
+update_user
+-----------
+Called from:
+	includes/model/User.php on line 184
+Arguments:
+	$this, $old
+
+
+manage_posts_column
+-------------------
+Called from:
+	admin/themes/default/pages/manage_posts.twig on line 50
+Arguments:
+	post
+
+
+user_registered
+---------------
+Called from:
+	includes/controller/Main.php on line 528
+Arguments:
+	$user
+
+
+manage_posts_column_header
+--------------------------
+Called from:
+	admin/themes/default/pages/manage_posts.twig on line 39
+
+
+new_page_options
+----------------
+Called from:
+	admin/themes/default/partials/page_fields.twig on line 43
+
+
+before_page_fields
+------------------
+Called from:
+	admin/themes/default/partials/page_fields.twig on line 1
+
+
+admin_javascript
+----------------
+Called from:
+	includes/admin.js.php on line 245
+
+
+ajax
+----
+Called from:
+	includes/ajax.php on line 204
+
+
+import_chyrp_page
+-----------------
+Called from:
+	includes/controller/Admin.php on line 1191
+Arguments:
+	$entry, $page
+
+
+import_chyrp_user
+-----------------
+Called from:
+	includes/controller/Admin.php on line 1138
+Arguments:
+	$user
+
+
+authenticate
+------------
+Called from:
+	includes/controller/Main.php on line 584
+
+
+trackback_receive
+-----------------
+Called from:
+	includes/trackback.php on line 26
+Arguments:
+	$url, $title, $excerpt, $blog_name
+
+
+bookmarklet_fields
+------------------
+Called from:
+	admin/themes/default/pages/bookmarklet.twig on line 221
+
+
+export_choose
+-------------
+Called from:
+	admin/themes/default/pages/export.twig on line 53
+
+
+manage_pages_column
+-------------------
+Called from:
+	admin/themes/default/pages/manage_pages.twig on line 39
+Arguments:
+	page
+
+
+change_setting
+--------------
+Called from:
+	includes/class/Config.php on line 62
+Arguments:
+	$setting, $value, $overwrite
+
+
+import_chyrp_post
+-----------------
+Called from:
+	includes/controller/Admin.php on line 1169
+Arguments:
+	$entry, $post
+
+
+add_user
+--------
+Called from:
+	includes/model/User.php on line 130
+Arguments:
+	$user
+
+
+admin_head
+----------
+Called from:
+	admin/themes/default/layout.twig on line 21
+
+
+edit_user_fields
+----------------
+Called from:
+	admin/themes/default/pages/edit_user.twig on line 45
+Arguments:
+	user
+
+
+manage_pages_column_header
+--------------------------
+Called from:
+	admin/themes/default/pages/manage_pages.twig on line 28
+
+
+import_movabletype_page
+-----------------------
+Called from:
+	includes/controller/Admin.php on line 1620
+Arguments:
+	$post, $new_page, $link
+
+
+import_wordpress_page
+---------------------
+Called from:
+	includes/controller/Admin.php on line 1314
+Arguments:
+	$item, $page
+
+
+import_wordpress_post
+---------------------
+Called from:
+	includes/controller/Admin.php on line 1302
+Arguments:
+	$item, $post
+
+
+add_group
+---------
+Called from:
+	includes/model/Group.php on line 116
+Arguments:
+	$group
+
+
+manage_users_column
+-------------------
+Called from:
+	admin/themes/default/pages/manage_users.twig on line 50
+Arguments:
+	user
+
+
+route_init
+----------
+Called from:
+	includes/class/Route.php on line 92
+Arguments:
+	$this
+
+
+parse_url
+---------
+Called from:
+	includes/class/Route.php on line 68
+Arguments:
+	$this
+
+
+end
+---
+Called from:
+	index.php on line 46
+	admin/index.php on line 25
+Arguments:
+	$route
+
+
+manage_users_column_header
+--------------------------
+Called from:
+	admin/themes/default/pages/manage_users.twig on line 33
+
+
+route_done
+----------
+Called from:
+	includes/class/Route.php on line 131
+Arguments:
+	$this
+
+
+javascript
+----------
+Called from:
+	includes/javascript.php on line 144
+
+
+update_page
+-----------
+Called from:
+	includes/model/Page.php on line 177
+Arguments:
+	$this, $old
+
+
+update_post
+-----------
+Called from:
+	includes/model/Post.php on line 356
+Arguments:
+	$this, $old, $options
+
+
+new_user_fields
+---------------
+Called from:
+	admin/themes/default/pages/new_user.twig on line 47
+
+
+import_tumble
+-------------
+Called from:
+	includes/controller/Admin.php on line 1446
+Arguments:
+	$post, $new_post
+
+
+feed_item
+---------
+Called from:
+	includes/feed.php on line 53
+Arguments:
+	$post
+
+
+ajax_post_edit_form_javascript
+------------------------------
+Called from:
+	includes/javascript.php on line 46
+
+
+update_group
+------------
+Called from:
+	includes/model/Group.php on line 165
+Arguments:
+	$this, $old
+
+
+can_not_view_site
+-----------------
+Called from:
+	index.php on line 17
+	includes/ajax.php on line 14
+	admin/index.php on line 15
+
+
+delete_user_form
+----------------
+Called from:
+	admin/themes/default/pages/delete_user.twig on line 76
+
+
+import_choose
+-------------
+Called from:
+	admin/themes/default/pages/import.twig on line 36
+	admin/themes/default/pages/import.twig on line 175
+
+
+after_page_fields
+-----------------
+Called from:
+	admin/themes/default/partials/page_fields.twig on line 10
+
+
+after_post_fields
+-----------------
+Called from:
+	admin/themes/default/partials/post_fields.twig on line 37
+	admin/themes/default/pages/bookmarklet.twig on line 211
+Arguments:
+	feather
+
+
+runtime
+-------
+Called from:
+	includes/common.php on line 312
+
+
+before_bookmarklet_fields
+-------------------------
+Called from:
+	admin/themes/default/pages/bookmarklet.twig on line 184
+Arguments:
+	feather
+
+
+edit_page_options
+-----------------
+Called from:
+	admin/themes/default/partials/page_fields.twig on line 45
+Arguments:
+	page
+
+
+before_post_fields
+------------------
+Called from:
+	admin/themes/default/partials/post_fields.twig on line 1
+Arguments:
+	feather
+
+
+import_textpattern_post
+-----------------------
+Called from:
+	includes/controller/Admin.php on line 1516
+Arguments:
+	$post, $new_post
+
+
+not_found
+---------
+Called from:
+	includes/helpers.php on line 149
+	includes/ajax.php on line 27
+	includes/ajax.php on line 52
+	includes/ajax.php on line 73
+
+
+pingback
+--------
+Called from:
+	includes/xmlrpc.php on line 132
+Arguments:
+	$post, $linked_to, $linked_from, $title, $excerpt
+
+
+
+==============================================
+ Trigger Filters
+==============================================
+
+settings_nav
+------------
+Target:
+	$subnav["settings"]
+Called from:
+	includes/controller/Admin.php on line 2318
+
+
+pages_export
+------------
+Target:
+	$pages_atom
+Called from:
+	includes/controller/Admin.php on line 998
+Arguments:
+	$page
+
+
+before_group_add_name
+---------------------
+Target:
+	$name
+Called from:
+	includes/model/Group.php on line 101
+
+
+feed_content
+------------
+Target:
+	$feed_content
+Called from:
+	includes/model/Post.php on line 599
+Arguments:
+	$post
+
+
+arian_values
+------------
+Target:
+	$values
+Called from:
+	includes/model/Post.php on line 216
+
+
+before_update_user
+------------------
+Target:
+	$new_values
+Called from:
+	includes/model/User.php on line 178
+
+
+flash_message
+-------------
+Target:
+	$message
+Called from:
+	includes/class/Flash.php on line 63
+Arguments:
+	$redirect_to
+
+
+before_add_page
+---------------
+Target:
+	$new_values
+Called from:
+	includes/model/Page.php on line 105
+
+
+before_add_post
+---------------
+Target:
+	$new_values
+Called from:
+	includes/model/Post.php on line 229
+
+
+bookmarklet_submit_options
+--------------------------
+Target:
+	$options
+Called from:
+	includes/model/Post.php on line 217
+
+
+scripts
+-------
+Target:
+	$javascripts
+Called from:
+	includes/class/Theme.php on line 243
+
+
+stylesheets
+-----------
+Target:
+	$stylesheets
+Called from:
+	includes/class/Theme.php on line 183
+
+
+export
+------
+Target:
+	$exports
+Called from:
+	includes/controller/Admin.php on line 1043
+
+
+feed_url
+--------
+Target:
+	$url
+Called from:
+	includes/feed.php on line 33
+Arguments:
+	$post
+
+
+send_mail
+---------
+Target:
+	$function
+Called from:
+	includes/helpers.php on line 1706
+
+
+keyword_search
+--------------
+Target:
+	$keywords
+Called from:
+	includes/helpers.php on line 1569
+Arguments:
+	$query, $plain
+
+
+link_regexp
+-----------
+Target:
+	$regexp
+Called from:
+	includes/helpers.php on line 903
+
+
+title
+-----
+Target:
+	$title
+Called from:
+	includes/model/Post.php on line 565
+Arguments:
+	$post
+
+
+xmlrpc_methods
+--------------
+Target:
+	$methods
+Called from:
+	includes/xmlrpc.php on line 57
+
+
+posts_export
+------------
+Target:
+	$posts_atom
+Called from:
+	includes/controller/Admin.php on line 940
+Arguments:
+	$post
+
+
+admin_determine_action
+----------------------
+Target:
+	$route->action
+Called from:
+	includes/controller/Admin.php on line 105
+
+
+title_from_excerpt
+------------------
+Target:
+	$excerpt
+Called from:
+	includes/model/Post.php on line 540
+
+
+before_add_user
+---------------
+Target:
+	$new_values
+Called from:
+	includes/model/User.php on line 124
+
+
+user
+----
+Target:
+	$this
+Called from:
+	includes/model/User.php on line 24
+
+
+visitor
+-------
+Target:
+	$visitor
+Called from:
+	includes/common.php on line 309
+
+
+page_export_url
+---------------
+Target:
+	$url
+Called from:
+	includes/controller/Admin.php on line 983
+Arguments:
+	$page)
+
+
+page
+----
+Target:
+	$this
+Called from:
+	includes/model/Page.php on line 32
+
+
+excerpt
+-------
+Target:
+	$excerpt
+Called from:
+	includes/model/Post.php on line 582
+Arguments:
+	$post
+
+
+bookmarklet_submit_values
+-------------------------
+Target:
+	$values
+Called from:
+	includes/model/Post.php on line 215
+
+
+post
+----
+Target:
+	$this
+Called from:
+	includes/model/Post.php on line 98
+
+
+flash_warning_message
+---------------------
+Target:
+	$message
+Called from:
+	includes/class/Flash.php on line 100
+Arguments:
+	$redirect_to
+
+
+admin_subnav
+------------
+Target:
+	$subnav
+Called from:
+	includes/controller/Admin.php on line 2339
+
+
+post_export_url
+---------------
+Target:
+	$url
+Called from:
+	includes/controller/Admin.php on line 921
+Arguments:
+	$post)
+
+
+before_group_update_name
+------------------------
+Target:
+	$name
+Called from:
+	includes/model/Group.php on line 138
+
+
+group
+-----
+Target:
+	$this
+Called from:
+	includes/model/Group.php on line 30
+
+
+nav_selected
+------------
+Target:
+	$this->context["selected"]
+Called from:
+	includes/controller/Admin.php on line 2446
+
+
+filter_page
+-----------
+Target:
+	$this
+Called from:
+	includes/model/Page.php on line 41
+
+
+post_url_token
+--------------
+Target:
+	$tokens
+Called from:
+	includes/model/Post.php on line 712
+
+
+flash_notice_message
+--------------------
+Target:
+	$message
+Called from:
+	includes/class/Flash.php on line 80
+Arguments:
+	$redirect_to
+
+
+extend_nav
+----------
+Target:
+	$subnav["extend"]
+Called from:
+	includes/controller/Admin.php on line 2328
+
+
+manage_nav
+----------
+Target:
+	$subnav["manage"]
+Called from:
+	includes/controller/Admin.php on line 2289
+
+
+before_group_update_permissions
+-------------------------------
+Target:
+	$permissions
+Called from:
+	includes/model/Group.php on line 139
+
+
+before_update_page
+------------------
+Target:
+	$new_values
+Called from:
+	includes/model/Page.php on line 171
+
+
+before_update_post
+------------------
+Target:
+	$new_values
+Called from:
+	includes/model/Post.php on line 336
+
+
+parse_urls
+----------
+Target:
+	$urls
+Called from:
+	includes/class/Route.php on line 173
+
+
+links
+-----
+Target:
+	$links
+Called from:
+	includes/class/Theme.php on line 295
+
+
+url_code
+--------
+Target:
+	Post::$url_attrs
+Called from:
+	includes/controller/Main.php on line 181
+	includes/controller/Main.php on line 213
+
+
+before_group_add_permissions
+----------------------------
+Target:
+	$permissions
+Called from:
+	includes/model/Group.php on line 102
+
+
+filter_post
+-----------
+Target:
+	$this
+Called from:
+	includes/model/Post.php on line 656
+
+
+url_vals
+--------
+Target:
+	$vals
+Called from:
+	includes/model/Post.php on line 520
+Arguments:
+	$this

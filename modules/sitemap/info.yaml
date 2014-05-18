@@ -1,0 +1,9 @@
+name: Sitemap Generator
+url: http://github.com/poentalabs/chyrp-modules
+version: 1.0
+description: Allows the creation of sitemap.xml for all your Chyrp powered blog content.
+author:
+  name: Poenta Labs
+  url: http://poentalabs.com/
+notifications:
+  - Please remember to give write permissions to sitemap.xml on the root directory of the site.

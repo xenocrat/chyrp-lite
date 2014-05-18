@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Edit Category - %s" | translate("categorize") | format(categorize.name | escape) }{% endblock %}
+
+{% block content %}
+	<h1>${ "Editing Category &#8220;%s&#8221;" | translate("categorize") | format(categorize.name | escape) }</h1>
+	<form id="edit_category" class="split" action="{% admin "edit_category" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+        <fieldset>
+            <p>
+                <label for="name">${ "Name" | translate("categorize") }</label>
+                <input class="text" type="text" name="name" value="${ categorize.name | escape }" id="name" />
+            </p>
+            <p>
+                <label for="clean">
+                    ${ "URL" | translate("categorize") }
+                    <span class="sub">${ "(optional)" | translate }</span>
+                </label>
+                <input class="text" type="text" name="clean" value="${ categorize.clean | escape }" id="clean" />
+                <small>
+                    ${ "Enter a “clean” name here if your category name contains characters that cannot be displayed in a URL, or if you want the category name to appear differently in the URL." | translate("categorize") }
+                </small>
+            </p>
+            <p>
+                <label for="show_on_home">${ "Show on home?" | translate("categorize") }</label>
+                <input class="checkbox" type="checkbox" name="show_on_home" id="show_on_home"{% if categorize.show_on_home %} checked="checked"{% endif %} />
+            </p>
+            <p>
+                <label for="update"></label>
+                <button type="submit" name="update" class="yay"><img src="$theme_url/images/icons/success.svg" alt="update" />${ "Update" | translate("categorize") }</button>
+            </p>
+
+            <input type="hidden" name="id" value="$categorize.id" id="id" />
+            <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+        </fieldset>
+    </form>
+{% endblock %}

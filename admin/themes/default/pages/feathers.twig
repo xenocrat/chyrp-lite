@@ -1,0 +1,55 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Feathers" | translate }{% endblock %}
+
+{% block content %}
+            <div class="enable feather left">
+                <h2>${ "Enabled" | translate }</h2>
+                <ul class="extend">
+                    {% for safename, feather in enabled_feathers | items %}
+                    <li class="$safename">
+                        <a class="$safename info_link" href="javascript:void(0)"><img src="$theme_url/images/icons/info.svg" class="info right" /></a>
+                        {% if feather.help %}
+                        <a href="{% admin "help&id="~feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                        {% endif %}
+                        ${ "<a href=\"%s\">%s</a> v%s <span class=\"sub\">by %s</span>" | translate | format(feather.url, feather.name | translate(safename), feather.version, feather.author.link) }
+                        <div class="expand">
+                            <div class="description">
+                                $feather.description {# translation is done in the controller #}
+                            </div>
+                            <a class="enable_button mobile" href="{% admin "disable&feather="~safename %}">${ "Disable" | translate }</a>
+                            <noscript>
+                                <a class="enable_button desktop" href="{% admin "disable&feather="~safename %}">${ "Disable" | translate }</a>
+                            </noscript>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="disable feather right">
+                <h2>${ "Disabled" | translate }</h2>
+                <ul class="extend">
+                    {% for safename, feather in disabled_feathers | items %}
+                    <li class="$safename">
+                        <a class="$safename info_link" href="javascript:void(0)"><img src="$theme_url/images/icons/info.svg" class="info right" /></a>
+                        {% if feather.help %}
+                        <a href="{% admin "help&id="~feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                        {% endif %}
+                        ${ "<a href=\"%s\">%s</a> v%s <span class=\"sub\">by %s</span>" | translate | format(feather.url, feather.name | translate(safename), feather.version, feather.author.link) }
+                        <div class="expand">
+                            <div class="description">
+                                $feather.description {# translation is done in the controller #}
+                            </div>
+                            <a class="disable_button mobile" href="{% admin "enable&feather="~safename %}">${ "Enable" | translate }</a>
+                            <noscript>
+                                <a class="disable_button desktop" href="{% admin "enable&feather="~safename %}">${ "Enable" | translate }</a>
+                            </noscript>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="clear tip_here"></div>
+            <br />
+            <a class="button right" href="http://chyrp.net/extend/type/feather">${ "Get More Feathers &rsaquo;" | translate }</a>
+{% endblock %}

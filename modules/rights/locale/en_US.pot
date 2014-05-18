@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp v2.1\n"
+"Report-Msgid-Bugs-To: dan@pimley.net\n"
+"POT-Creation-Date: 2013-07-16 21:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/rights/info.yaml:1
+msgid "Rights"
+msgstr ""
+
+#: modules/rights/info.yaml:4
+msgid "Adds post options for attribution and assigning intellectual property rights."
+msgstr ""
+
+#: modules/rights/rights.php:6
+msgid "Original Work"
+msgstr ""
+
+#: modules/rights/rights.php:12
+msgid "Rights Holder"
+msgstr ""
+
+#: modules/rights/rights.php:16
+msgid "Licence"
+msgstr "License"
+
+#: modules/rights/rights.php:19
+msgid "All rights reserved"
+msgstr ""
+
+#: modules/rights/rights.php:22
+msgid "Creative Commons BY"
+msgstr ""
+
+#: modules/rights/rights.php:25
+msgid "Creative Commons BY-ND"
+msgstr ""
+
+#: modules/rights/rights.php:28
+msgid "Creative Commons BY-SA"
+msgstr ""
+
+#: modules/rights/rights.php:31
+msgid "Creative Commons BY-NC"
+msgstr ""
+
+#: modules/rights/rights.php:34
+msgid "Creative Commons BY-NC-ND"
+msgstr ""
+
+#: modules/rights/rights.php:37
+msgid "Creative Commons BY-NC-SA"
+msgstr ""
+
+#: modules/rights/rights.php:40
+msgid "Creative Commons CC0"
+msgstr ""
+
+#: modules/rights/rights.php:43
+msgid "Orphan Work"
+msgstr ""
+
+#: modules/rights/rights.php:46
+msgid "Public Domain"
+msgstr ""
+
+#: modules/rights/rights.php:49
+msgid "Crown Copyright"
+msgstr ""

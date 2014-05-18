@@ -1,0 +1,478 @@
+*::-moz-selection {                                 color: #ffffff;
+                                                    background-color: #42a66a }
+*::selection {                                      color: #ffffff;
+                                                    background-color: #42a66a }
+body {                                              font-family: sans-serif;
+                                                    font-size: 16px;
+                                                    color: #4e5a66;
+                                                    line-height: 1.2;
+                                                    background-color: #f7f5ed;
+                                                    margin: 0em 2em 2em 16em;
+                                                    min-width: 288px;
+                                                    max-width: 1800px }
+p {                                                 line-height: 1.4;
+                                                    margin: 0em 0em 1em 0em }
+    p:last-child {                                  margin-bottom: 0em }
+h1 {                                                font-family: sans-serif;
+                                                    font-size: 0.75em;
+                                                    font-weight: normal;
+                                                    text-transform: uppercase;
+                                                    margin: 1.33em 0em;
+                                                    padding: 0em;
+                                                    line-height: 1 }
+    h1:first-child {                                margin-top: 0em }
+h2 {                                                font-family: sans-serif;
+                                                    font-size: 1.5em;
+                                                    font-weight: normal;
+                                                    text-transform: uppercase;
+                                                    margin: 0.67em 0em;
+                                                    padding: 0em;
+                                                    line-height: 1 }
+    h2:first-child {                                margin-top: 0em }
+h3 {                                                font-family: sans-serif;
+                                                    font-size: 1em;
+                                                    font-weight: normal;
+                                                    text-transform: uppercase;
+                                                    margin: 1em 0em;
+                                                    padding: 0em;
+                                                    line-height: 1 }
+    h3.ribbon {                                     margin: 0em }
+    h3.archive {                                    margin-top: 2em }
+    h3:first-child {                                margin-top: 0em }
+h4 {                                                font-family: sans-serif;
+                                                    font-size: 0.75em;
+                                                    font-weight: normal;
+                                                    text-transform: uppercase;
+                                                    margin: 1.33em 0em;
+                                                    padding: 0em;
+                                                    line-height: 1 }
+    span.byline {                                   font-weight: bold }
+    span.byline:after {                             content: ": "}
+sup {                                               vertical-align: super;
+                                                    font-size: 0.5em }
+em {                                                font: inherit;
+                                                    font-style: italic }
+    blockquote em {                                 font-style: normal }
+strong {                                            font: inherit;
+                                                    font-weight: bold }
+cite {                                              font: inherit;
+                                                    color: #9ea8a8 }
+small {                                             font-family: sans-serif;
+                                                    font-weight: normal;
+                                                    font-size: 0.6em;
+                                                    text-transform: uppercase }
+blockquote {                                        font-size: 1em;
+                                                    font-style: italic;
+                                                    padding: 0em 2em;
+                                                    margin: 0em 0em 2em 0em }
+    blockquote:last-child {                         margin-bottom: 0em }
+pre {                                               font-family: monospace;
+                                                    font-size: 0.75em;
+                                                    margin: 1em 0em }
+    li > pre {                                      margin: 1em 0em 0em 0em }
+ul {                                                list-style: none;
+                                                    margin: 1em 0em;
+                                                    padding: 0em }
+    ul.navigation {                                 list-style: none;
+                                                    font-size: 1em;
+                                                    -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    background-color: #fbfbf7;
+                                                    margin: 0em 0em 2em 0em;
+                                                    padding: 0em;
+                                                    border: 1px solid #c6ccc8;
+                                                    border-radius: 6px;
+                                                    background-image: -o-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -moz-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -webkit-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    box-shadow: 0px 4px 8px 2px rgba(57,67,77,0.1) }
+    ul.navigation li {                              display: block;
+                                                    min-width: 4em;
+                                                    padding: 0.67em 1em;
+                                                    margin: 0em;
+                                                    white-space: normal;
+                                                    text-overflow: ellipsis;
+                                                    border-bottom: 1px solid #d2d9d4 }
+    ul.navigation li:last-child {                   border-bottom: none }
+    ul.navigation li.parent {                       border-bottom-style: dashed }
+    ul.sidebar_nav li {                             text-align: left;
+                                                    font-size: 0.75em }
+    ul.tail_nav li {                                text-align: center }
+    ul.archive li {                                 margin: 0em 0em 1em 2em }
+    ol.comments {                                   padding: 0em;
+                                                    margin: 0em }
+    ol.comments li {                                display: block;
+                                                    position: relative;
+                                                    list-style-type: none;
+                                                    width: 100%;
+                                                    top: 0em;
+                                                    left: -2em;
+                                                    margin-bottom: 2em;
+                                                    padding: 0em 2em 2em 2em;
+                                                    border-bottom: 1px solid #c6ccc8 }
+    ol.comments li:last-child {                     border-bottom: none;
+                                                    margin-bottom: 0em }
+    ol.comments li.no_comments {                    display: none }
+form, fieldset {                                    margin: 0em;
+                                                    padding: 0em;
+                                                    border: none }
+    div.search_box > form {                         display: inline-block;
+                                                    position: relative }
+    form.inline_edit {                              width: 100%;
+                                                    clear: both;
+                                                    background-color: #fbfbf7;
+                                                    -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    margin: 0em auto 1em auto;
+                                                    padding: 2em 2em;
+                                                    border: 1px solid #c6ccc8;
+                                                    border-radius: 6px;
+                                                    background-image: -o-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -moz-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -webkit-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    box-shadow: 0px 4px 8px 2px rgba(57,67,77,0.1) }
+    form.comment_edit {                             width: 100%;
+                                                    background-color: transparent;
+                                                    margin-bottom: 0em;
+                                                    padding: 0em;
+                                                    border: none }
+input {                                             -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    display: block;
+                                                    width: 320px;
+                                                    max-width: 640px;
+                                                    margin: 0.5em 0em;
+                                                    padding: 6px 4px;
+                                                    background: none;
+                                                    text-align: left;
+                                                    font: inherit;
+                                                    font-size: inherit;
+                                                    color: #4e5a66;
+                                                    background-color: #ffffff;
+                                                    border: 1px solid #c6ccc8;
+                                                    border-radius: 0em;
+                                                    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
+    input[type='checkbox'] {                        width: auto }
+    input::-webkit-input-placeholder {              color: #c6ccc8 }
+    input:-moz-placeholder {                        color: #c6ccc8 }
+    input::-moz-placeholder {                       color: #c6ccc8 }
+    input:-ms-input-placeholder {                   color: #c6ccc8 }
+    input:input-placeholder {                       color: #c6ccc8 }
+input:focus {                                       outline: none;
+                                                    background-color: #ffffff;
+                                                    border: 1px solid #4e5a66 }
+    input#search_field {                            display: inline;
+                                                    margin: 0em;
+                                                    padding-right: 34px }
+    div.search_box input[type='text'] {             width: 100% }
+    button#search_submit {                          display: block;
+                                                    position: absolute;
+                                                    width: 34px;
+                                                    top: 0px;
+                                                    bottom: 2px;
+                                                    right: 0px;
+                                                    border: none;
+                                                    margin: 0em;
+                                                    padding: 0em;
+                                                    background: transparent url(../images/search.svg) no-repeat center;
+                                                    overflow: hidden;
+                                                    color: transparent }
+    form.inline_edit input {                        width: 100% }
+select {                                            -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    display: block;
+                                                    width: 320px;
+                                                    margin: 0.5em 0em }
+textarea {                                          -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    display: block;
+                                                    width: 100%;
+                                                    height: 160px;
+                                                    max-width: 640px;
+                                                    font: inherit;
+                                                    font-size: inherit;
+                                                    color: #4e5a66;
+                                                    margin: 0.5em 0em;
+                                                    padding: 2px 4px;
+                                                    background-color: #ffffff;
+                                                    border: 1px solid #c6ccc8;
+                                                    border-radius: 0em;
+                                                    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
+textarea:focus {                                    outline: none;
+                                                    border: 1px solid #4e5a66 }
+    article.commentary textarea {                   max-width: none }
+button {                                            font: inherit;
+                                                    font-size: inherit;
+                                                    cursor: pointer;
+                                                    line-height: normal }
+label {                                             display: block;
+                                                    margin-top: 1em }
+    div.shim {                                      margin-top: 2em }
+    div#mast {                                      display: none;
+                                                    width: 100%;
+                                                    text-align: center;
+                                                    margin-bottom: 2em }
+    div#main {                                      width: 100%;
+                                                    margin: 0em;
+                                                    padding: 0em;
+                                                    clear: both;
+                                                    overflow: visible }
+    div#sidebar {                                   display: block;
+                                                    position: absolute;
+                                                    top: 2em;
+                                                    left: 2em;
+                                                    width: 12em }
+    div.prev {                                      width: 100%;
+                                                    clear: both;
+                                                    text-align: center;
+                                                    margin-bottom: 2em }
+    div.next {                                      width: 100%;
+                                                    clear: both;
+                                                    text-align: center;
+                                                    margin-top: 2em }
+    div.ribbon {                                    width: 100%;
+                                                    text-align: center;
+                                                    color: #ffffff;
+                                                    background-color: #426aa6;
+                                                    background-image: -o-linear-gradient(top, #426aa6 0%, #1d4b91 80%);
+                                                    background-image: -moz-linear-gradient(top, #426aa6 0%, #1d4b91 80%);
+                                                    background-image: -webkit-linear-gradient(top, #426aa6 0%, #1d4b91 80%);
+                                                    background-image: -ms-linear-gradient(top, #426aa6 0%, #1d4b91 80%);
+                                                    background-image: linear-gradient(top, #426aa6 0%, #1d4b91 80%);
+                                                    padding: 0.5em 0em;
+                                                    margin-bottom: 1em;
+                                                    border-radius: 6px }
+    div.flash {                                     background-color: #af2d2d;
+                                                    background-image: -o-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
+                                                    background-image: -moz-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
+                                                    background-image: -webkit-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
+                                                    background-image: -ms-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
+                                                    background-image: linear-gradient(top, #cc5252 0%, #af2d2d 80%);
+                                                    margin-bottom: 0em }
+    div.flash:last-of-type {                        margin-bottom: 1em }
+    div.metadata {                                  font-family: sans-serif;
+                                                    font-weight: normal;
+                                                    font-size: 0.6em;
+                                                    text-transform: uppercase;
+                                                    text-align: center;
+                                                    color: #9ea8a8;
+                                                    display: block;
+                                                    position: absolute;
+                                                    bottom: 0em;
+                                                    left: 0em;
+                                                    width: 100%;
+                                                    height: 2em;
+                                                    line-height: 2.2em;
+                                                    background-color: #ffffff;
+                                                    border-top: 1px solid #c6ccc8 }
+    div.comments_pagination {                       width: 100%;
+                                                    clear: both;
+                                                    text-align: center }
+    div.photo_frame {                               width: 100%;
+                                                    max-height: 1200px;
+                                                    overflow: hidden;
+                                                    clear: both }
+    div.tags {                                      margin: 1.33em 0em 0em 0em;
+                                                    font-size: 0.75em }
+    div.doaction {                                  font-family: inherit;
+                                                    line-height: 2;
+                                                    margin-bottom: 1em }
+    div.doaction:last-child {                       margin-bottom: 0em }
+    div.speak {                                     margin-bottom: 0em }
+    div.admin {                                     margin: 1em 0em 0em 0em }
+    input + div.doaction, textarea + div.doaction { padding-top: 0.5em }
+    div.search_box {                                text-align: center;
+                                                    margin-bottom: 1em }
+    div#tail {                                      display: none;
+                                                    width: 100%;
+                                                    clear: both;
+                                                    padding-top: 2em;
+                                                    text-align: center;
+                                                    margin: 0em }
+    div#recaptcha_widget_div {                      margin-bottom: 0.5em }
+    div#main > article, div.standalone {            display: block;
+                                                    position: relative;
+                                                    -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    width: 100%;
+                                                    clear: both;
+                                                    background-color: #fbfbf7;
+                                                    margin: 0em auto 2em auto;
+                                                    padding: 2em 2em 3.2em 2em;
+                                                    border: 1px solid #c6ccc8;
+                                                    border-radius: 6px;
+                                                    background-image: -o-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -moz-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -webkit-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    box-shadow: 0px 4px 8px 2px rgba(57,67,77,0.1);
+                                                    overflow: hidden }
+    div#main > article:last-child {                 margin-bottom: 0em }
+    div#main > article.commentary {                 padding: 2em }
+    div#main > article.page {                       padding-bottom: 2em }
+    div.standalone {                                margin-bottom: 0em;
+                                                    padding-bottom: 2em }
+    article.audio audio.audio_with_controls,
+    article.audio  div.jp-audio {                   width: 100%;
+                                                    margin: 1em 0em }
+article > header {                                  display: block;
+                                                    width: 100%;
+                                                    clear: both;
+                                                    margin: 0em;
+                                                    padding: 0em;
+                                                    border: none }
+article > section {                                 display: block;
+                                                    width: 100%;
+                                                    clear: both;
+                                                    margin: 1em 0em 0em 0em;
+                                                    padding: 0em }
+    article > section:first-child {                 margin-top: 0em }
+article > footer {                                  display: block;
+                                                    width: 100%;
+                                                    text-align: left;
+                                                    clear: both;
+                                                    margin: 0em 0em 1em 0em;
+                                                    padding: 0em;
+                                                    border: none }
+    article > footer:last-child {                   margin: 0em }
+a {                                                 border-bottom: 1px transparent solid;
+                                                    -webkit-transition-property: color, border;
+                                                    -webkit-transition-duration: 500ms;
+                                                    -moz-transition-property: color, border;
+                                                    -moz-transition-duration: 500ms;
+                                                    transition-property: color, border;
+                                                    transition-duration: 500ms }
+a:link {                                            color: #5c6773;
+                                                    text-decoration: none }
+a:visited {                                         color: #5c6773;
+                                                    text-decoration: none }
+a:hover {                                           color: #000000;
+                                                    text-decoration: none }
+a:focus {                                           outline: none;
+                                                    color: #000000;
+                                                    text-decoration: none }
+a:active {                                          color: #000000;
+                                                    text-decoration: none }
+    div.traversal a {                               display: inline-block;
+                                                    padding: 0.4em 0.6em;
+                                                    min-width: 8em;
+                                                    border: none;
+                                                    border-radius: 0.2em;
+                                                    color: #fbfbf7;
+                                                    background-color: #42a66a }
+    div.traversal a:hover,
+    div.traversal a:focus,
+    div.traversal a:active {                        color: #ffffff;
+                                                    background-color: #1d914b }
+    section a:link, p a:link {                      color: #5c6773;
+                                                    text-decoration: none;
+                                                    border-bottom: 1px #9ea8a8 solid }
+    section a:visited, p a:visited {                color: #5c6773;
+                                                    text-decoration: none;
+                                                    border-bottom: 1px #9ea8a8 solid }
+    section a:hover, p a:hover {                    color: #000000;
+                                                    text-decoration: none;
+                                                    border-bottom: 1px #000000 solid }
+    section a:focus, p a:focus {                    outline: none;
+                                                    color: #000000;
+                                                    text-decoration: none;
+                                                    border-bottom: 1px #000000 solid }
+    section a:active, p a:active {                  color: #000000;
+                                                    text-decoration: none;
+                                                    border-bottom: 1px #000000 solid }
+    div.tags a, span.tags_select a {                padding: 0.2em 0.4em;
+                                                    margin: 0.2em 0em;
+                                                    border-radius: 0.4em;
+                                                    display: inline-block;
+                                                    position: relative;
+                                                    top: 0px;
+                                                    background-color: #ffffff;
+                                                    background-image: -o-linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
+                                                    background-image: -moz-linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
+                                                    background-image: -webkit-linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
+                                                    background-image: -ms-linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
+                                                    background-image: linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
+                                                    border: 1px solid #c6ccc8 }
+    div.tags a:hover, span.tags_select a:hover,
+    div.tags a:focus, span.tags_select a:focus,
+    div.tags a:active, span.tags_select a:active {  top: 1px;
+                                                    color: inherit }
+    div.metadata a {                                color: #9ea8a8 }
+    div.metadata a:link, div.metadata a:visited {   color: #9ea8a8;
+                                                    border-bottom: none }
+    div.metadata a:focus, div.metadata a:active {   color: #000000;
+                                                    border-bottom: none }
+    div.doaction a, button {                        padding: 0.4em 0.6em;
+                                                    border: none;
+                                                    border-radius: 0.2em;
+                                                    color: #ffffff;
+                                                    background-color: #39434d }
+    div.doaction a:link {                           color: #ffffff;
+                                                    text-decoration: none }
+    div.doaction a:visited {                        color: #ffffff;
+                                                    text-decoration: none }
+    div.doaction a:hover, button:hover {            color: #ffffff;
+                                                    text-decoration: none;
+                                                    background-color: #000000 }
+    div.doaction a:focus, button:focus {            outline: none;
+                                                    color: #ffffff;
+                                                    text-decoration: none;
+                                                    background-color: #000000 }
+    div.doaction a:active {                         color: #ffffff;
+                                                    text-decoration: none;
+                                                    background-color: #39434d }
+    div.doaction a.post_delete_link,
+    div.doaction a.delete_link {                    background-color: #cc5252 }
+    div.doaction a.post_delete_link:hover,
+    div.doaction a.delete_link:hover {              background-color: #af2d2d }
+    div.doaction a.post_delete_link:focus,
+    div.doaction a.delete_link:focus {              background-color: #af2d2d }
+    a.more_options_link {                           display: inline-block;
+                                                    margin-top: 1em }
+img {                                               border-style: none;
+                                                    margin: 0em;
+                                                    padding: 0em }
+    div.photo_frame img {                           width: 100% }
+    article img {                                   max-width: 100% }
+.ajax_loading {                                     background-size: 30px 30px;
+                                                    background-image: -webkit-linear-gradient(-45deg, #f2f0e6 25%, transparent 25%, transparent 50%, #f2f0e6 50%, #f2f0e6 75%, transparent 75%, transparent) !important;
+                                                    background-image: -moz-linear-gradient(-45deg, #f2f0e6 25%, transparent 25%, transparent 50%, #f2f0e6 50%, #f2f0e6 75%, transparent 75%, transparent) !important;
+                                                    background-image: -ms-linear-gradient(-45deg, #f2f0e6 25%, transparent 25%, transparent 50%, #f2f0e6 50%, #f2f0e6 75%, transparent 75%, transparent) !important;
+                                                    background-image: linear-gradient(-45deg, #f2f0e6 25%, transparent 25%, transparent 50%, #f2f0e6 50%, #f2f0e6 75%, transparent 75%, transparent) !important;
+                                                    -webkit-animation: stripes 1s linear infinite;
+                                                    -moz-animation: stripes 1s linear infinite;
+                                                    -ms-animation: stripes 1s linear infinite;
+                                                    animation: stripes 1s linear infinite }
+@-webkit-keyframes stripes {                        from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
+@-moz-keyframes stripes {                           from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
+@-ms-keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
+@keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
+
+@media screen and (max-width: 767px) {
+    body {                                          margin: 0em 16px 1em 16px }
+    h2 {                                            font-size: 1.25em;
+                                                    margin: 0.8em 0em }
+    blockquote {                                    padding: 0em 1em }
+    form.inline_edit {                              padding: 1em }
+    input, select {                                 width: 100% }
+    div#mast {                                      display: block }
+    div#sidebar {                                   display: none }
+    div#tail {                                      display: block }
+    div#main > article {                            padding: 1em 1em 2.2em 1em }
+    div.standalone {                                padding: 1em }
+    ul.archive li {                                 margin: 0em 0em 0em 1em }
+}
+
+@media screen and (min-width: 1200px) {
+        .columnized {                               -moz-column-count: 2;
+                                                    -moz-column-gap: 2em;
+                                                    -webkit-column-count: 2;
+                                                    -webkit-column-gap: 2em;
+                                                    column-count: 2;
+                                                    column-gap: 2em }
+}

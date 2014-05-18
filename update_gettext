@@ -1,0 +1,60 @@
+#!/bin/sh
+ruby gettext.rb                                       > ./includes/locale/en_US.pot
+
+ruby gettext.rb ./feathers/audio/   --domain=audio    > ./feathers/audio/locale/en_US.pot
+ruby gettext.rb ./feathers/chat/    --domain=chat     > ./feathers/chat/locale/en_US.pot
+ruby gettext.rb ./feathers/link/    --domain=link     > ./feathers/link/locale/en_US.pot
+ruby gettext.rb ./feathers/photo/   --domain=photo    > ./feathers/photo/locale/en_US.pot
+ruby gettext.rb ./feathers/quote/   --domain=quote    > ./feathers/quote/locale/en_US.pot
+ruby gettext.rb ./feathers/text/    --domain=text     > ./feathers/text/locale/en_US.pot
+ruby gettext.rb ./feathers/video/   --domain=video    > ./feathers/video/locale/en_US.pot
+
+ruby gettext.rb ./modules/aggregator/   --domain=aggregator   > ./modules/aggregator/locale/en_US.pot
+ruby gettext.rb ./modules/cacher/       --domain=cacher       > ./modules/cacher/locale/en_US.pot
+ruby gettext.rb ./modules/cascade/      --domain=cascade      > ./modules/cascade/locale/en_US.pot
+ruby gettext.rb ./modules/categorize/   --domain=categorize   > ./modules/categorize/locale/en_US.pot
+ruby gettext.rb ./modules/comments/     --domain=comments     > ./modules/comments/locale/en_US.pot
+ruby gettext.rb ./modules/dropbox/      --domain=dropbox      > ./modules/dropbox/locale/en_US.pot
+ruby gettext.rb ./modules/emailblog/    --domain=emailblog    > ./modules/emailblog/locale/en_US.pot
+ruby gettext.rb ./modules/extension_manager    --domain=extension_manager    > ./modules/extension_manager/locale/en_US.pot
+ruby gettext.rb ./modules/likes/        --domain=likes        > ./modules/likes/locale/en_US.pot
+ruby gettext.rb ./modules/markdown/     --domain=markdown     > ./modules/markdown/locale/en_US.pot
+ruby gettext.rb ./modules/paging/       --domain=paging       > ./modules/paging/locale/en_US.pot
+ruby gettext.rb ./modules/read_more/    --domain=read_more    > ./modules/read_more/locale/en_US.pot
+ruby gettext.rb ./modules/smartypants/  --domain=smartypants  > ./modules/smartypants/locale/en_US.pot
+ruby gettext.rb ./modules/submission/   --domain=submission   > ./modules/submission/locale/en_US.pot
+ruby gettext.rb ./modules/tags/         --domain=tags         > ./modules/tags/locale/en_US.pot
+ruby gettext.rb ./modules/textilize/    --domain=textilize    > ./modules/textilize/locale/en_US.pot
+ruby gettext.rb ./modules/theme_editor/ --domain=theme_editor > ./modules/theme_editor/locale/en_US.pot
+
+ruby gettext.rb ./themes/firecrest/ --domain=theme > ./themes/firecrest/locale/en_US.pot
+
+# msgfmt -v ./includes/locale/en_US.pot         -o ./includes/locale/en_US.mo
+#
+# msgfmt -v ./feathers/audio/locale/en_US.pot   -o ./feathers/audio/locale/en_US.mo
+# msgfmt -v ./feathers/chat/locale/en_US.pot    -o ./feathers/chat/locale/en_US.mo
+# msgfmt -v ./feathers/link/locale/en_US.pot    -o ./feathers/link/locale/en_US.mo
+# msgfmt -v ./feathers/photo/locale/en_US.pot   -o ./feathers/photo/locale/en_US.mo
+# msgfmt -v ./feathers/quote/locale/en_US.pot   -o ./feathers/quote/locale/en_US.mo
+# msgfmt -v ./feathers/text/locale/en_US.pot    -o ./feathers/text/locale/en_US.mo
+# msgfmt -v ./feathers/video/locale/en_US.pot   -o ./feathers/video/locale/en_US.mo
+#
+# msgfmt -v ./modules/aggregator/locale/en_US.pot     -o ./modules/aggregator/locale/en_US.mo
+# msgfmt -v ./modules/cacher/locale/en_US.pot         -o ./modules/cacher/locale/en_US.mo
+# msgfmt -v ./modules/cascade/locale/en_US.pot        -o ./modules/cascade/locale/en_US.mo
+# msgfmt -v ./modules/categorize/locale/en_US.pot     -o ./modules/categorize/locale/en_US.mo
+# msgfmt -v ./modules/comments/locale/en_US.pot       -o ./modules/comments/locale/en_US.mo
+# msgfmt -v ./modules/dropbox/locale/en_US.pot        -o ./modules/dropbox/locale/en_US.mo
+# msgfmt -v ./modules/emailblog/locale/en_US.pot      -o ./modules/emailblog/locale/en_US.mo
+# msgfmt -v ./modules/extension_manager/locale/en_US.pot      -o ./modules/extension_manager/locale/en_US.mo
+# msgfmt -v ./modules/likes/locale/en_US.pot          -o ./modules/likes/locale/en_US.mo
+# msgfmt -v ./modules/markdown/locale/en_US.pot       -o ./modules/markdown/locale/en_US.mo
+# msgfmt -v ./modules/paging/locale/en_US.pot         -o ./modules/paging/locale/en_US.mo
+# msgfmt -v ./modules/read_more/locale/en_US.pot      -o ./modules/read_more/locale/en_US.mo
+# msgfmt -v ./modules/smartypants/locale/en_US.pot    -o ./modules/smartypants/locale/en_US.mo
+# msgfmt -v ./modules/submission/locale/en_US.pot     -o ./modules/submission/locale/en_US.mo
+# msgfmt -v ./modules/tags/locale/en_US.pot           -o ./modules/tags/locale/en_US.mo
+# msgfmt -v ./modules/textilize/locale/en_US.pot      -o ./modules/textilize/locale/en_US.mo
+# msgfmt -v ./modules/theme_editor/locale/en_US.pot   -o ./modules/theme_editor/locale/en_US.mo
+#
+# msgfmt -v ./themes/firecrest/locale/en_US.pot  -o ./themes/firecrest/locale/en_US.mo

@@ -1,0 +1,50 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Manage Categories" | translate("categorize") }{% endblock %}
+
+{% block content %}
+    <h1>${ "Manage Categories" | translate("categorize") }</h1>
+        <form class="detail" action="index.php" method="get" accept-charset="utf-8">
+            <fieldset>
+                <input type="hidden" name="action" value="manage_categorize" />
+                {% if visitor.group.can("manage_categorize") %}
+                <a href="{% admin "add_category" %}" class="button yay right"> 
+                    <img src="$theme_url/images/icons/add.svg" alt="add" /> ${ "Add Category" | translate("categorize") }
+                </a>
+                {% endif %}
+            </fieldset>
+        </form>
+        <br />
+        <table border="0" cellspacing="0" cellpadding="0" class="wide">
+            <thead> 
+                <tr class="head">
+                    {# <th class="toggler center"></th> #}
+                    <th class="center" width="5">Shown</th>
+                    <th>${ "Name" | translate("categorize") }</th>
+                    ${ trigger.call("manage_comments_column_header") }
+                    <th colspan="2">${ "Controls" | translate }</th>
+                </tr>   
+            </thead>
+            <tbody> 
+                {% for category in categorize %}
+                <tr id="category_$cat.id">
+                    <td class="center show_on_home">
+                        {% if category.show_on_home %}<img src="$theme_url/images/icons/success.svg">
+                        {% else %}&nbsp;
+                        {% endif %}
+                    </td>
+                    <td class="name">
+                        ${ category.name | truncate }
+                    </td>
+                    <td class="controls"><a href="{% admin "edit_category&id="~ category.id %}"><img src="$theme_url/images/icons/edit.svg" alt="edit" /></a>
+                    <td class="controls"><a href="{% admin "delete_category&id="~ category.id %}"><img src="$theme_url/images/icons/delete.svg" alt="delete" /></a>
+                </tr>
+                {% else %}
+                <tr class="last">
+                    <td colspan="6" class="center"><span class="sub">${ "(none)" | translate }</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

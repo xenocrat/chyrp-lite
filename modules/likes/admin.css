@@ -1,0 +1,12 @@
+/* @media-query for small screens */
+@media screen and (max-width: 768px) {
+    select[name=likeImage] {
+        width: auto;
+        min-width: 20%;
+        max-width: 80%;
+    }
+    form#like_settings table {
+        display: table;
+    }
+}
+/* @end */

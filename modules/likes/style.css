@@ -1,0 +1,11 @@
+.likes { position: relative; display: inline; }
+.likes span.text{ }
+.likes a.like img, .likes a.liked img {
+    vertical-align: middle;
+    opacity: .8;
+    filter: alpha(opacity = 80);
+    margin: -2px 5px 0 0!important;
+}
+.likes a.like img:hover { opacity: 1; filter: alpha(opacity = 100); }
+.likes a.like:hover { text-decoration: none; }
+.likes div.unlike { display: none; }

@@ -1,0 +1,74 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Manage Posts" | translate }{% endblock %}
+
+{% block content %}
+            <h2>${ "Need more detail?" | translate }</h2>
+            <form class="detail" action="index.php" method="get" accept-charset="utf-8">
+                <fieldset>
+                    <input type="hidden" name="action" value="manage_posts" />
+                    <div class="left pad margin-right">
+                        <h3>
+                            ${ "Search&hellip;" | translate }
+                            <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                        </h3>
+                        <input class="text" type="text" name="query" value="${ GET.query | escape }" id="query" /> <button type="submit" class="inline">${ "Search &rarr;" | translate }</button>
+                    </div>
+                    <div class="left pad">
+                        <h3>${ "Browse by month:" | translate }</h3>
+                        <select name="month">
+                            <option value="">----------</option>
+                            {% for archive in theme.archives_list %}
+                            <option value="${ archive.when | strftime("%Y-%m") }"${ GET.month | option_selected(archive.when | strftime("%Y-%m")) }>${ archive.when | strftime("%B %Y") } ($archive.count)</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="inline">${ "Show &rarr;" | translate }</button>
+                    </div>
+                    <div class="clear"></div>
+                </fieldset>
+            </form>
+            <br />
+            <h2>{% if GET.query %}${ "Search Results" | translate }{% else %}${ "Last 25 Posts" | translate }{% endif %}</h2>
+            <table border="0" cellspacing="0" cellpadding="0" class="wide">
+                <thead>
+                    <tr class="head">
+                        <th>${ "Title" | translate }</th>
+                        <th>${ "Posted" | translate }</th>
+                        <th>${ "Status" | translate }</th>
+                        <th>${ "Author" | translate }</th>
+                        ${ trigger.call("manage_posts_column_header") }
+                        <th colspan="2">${ "Controls" | translate }</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for post in posts.paginated %}
+                    <tr id="post_$post.id" class="post $post.status_class{% if loop.last %} last{% endif %}">
+                        <td class="main"><a href="$post.url">${ post.title | truncate }</a></td>
+                        <td>${ post.created_at | strftime }</td>
+                        <td>$post.status_name</td>
+                        <td>$post.author.name</td>
+                        ${ trigger.call("manage_posts_column", post) }
+                        {% if post.editable and post.deletable %}
+                        <td class="controls">${ post.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="edit" /> '~("edit" | translate)) }</td>
+                        <td class="controls">${ post.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" /> '~("delete" | translate)) }</td>
+                        {% elseif post.editable or post.deletable %}
+                        ${ post.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="edit" /> '~("edit" | translate), '<td class="controls" colspan="2">', '</td>') }
+                        ${ post.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" /> '~("delete" | translate), '<td class="controls" colspan="2">', '</td>') }
+                        {% endif %}
+                    </tr>
+                {% else %}
+                    <tr class="last">
+                        <td colspan="6" class="center"><span class="sub">${ "(none)" | translate }</span></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if posts.paginated and posts.pages > 1 %}
+            <br />
+            <div class="pagination">
+                $posts.next_link
+                $posts.prev_link
+                <span class="pages">${ "Page %d of %d" | translate | format(posts.page, posts.pages) }</span>
+            </div>
+            {% endif %}
+{% endblock %}

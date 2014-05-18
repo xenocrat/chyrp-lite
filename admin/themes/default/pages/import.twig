@@ -1,0 +1,176 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Import" | translate }{% endblock %}
+
+{% block content %}
+            <h2>Chyrp</h2>
+            <form id="import_chyrp_form" class="split" action="{% admin "import_chyrp" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <p>
+                        <label for="posts_file">${ "Posts .atom File" | translate }</label>
+                        <input type="file" name="posts_file" value="" id="posts_file" />
+                    </p>
+                    <p>
+                        <label for="pages_file">${ "Pages .atom File" | translate }</label>
+                        <input type="file" name="pages_file" value="" id="pages_file" />
+                    </p>
+                    <p>
+                        <label for="groups_file">${ "Groups .yaml File" | translate }</label>
+                        <input type="file" name="groups_file" value="" id="groups_file" />
+                    </p>
+                    <p>
+                        <label for="users_file">${ "Users .yaml File" | translate }</label>
+                        <input type="file" name="users_file" value="" id="users_file" />
+                    </p>
+                    <p>
+                        <label for="media_url">
+                            ${ "What URL is used for embedded media?" | translate }
+                            <span class="sub">${ "(optional)" | translate }</span>
+                        </label>
+                        <input class="text" type="text" name="media_url" value="" id="media_url" />
+                        <small>
+                            ${ "Usually something like <code>http://example.com/uploads/</code>." | translate }
+                        </small>
+                    </p>
+                    <p>${ "When importing posts make sure that the required feathers are enabled otherwise the posts won't display." | translate }</p>
+                    ${ trigger.call("import_choose") }
+
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Import" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+            <br />
+            <hr />
+            <br />
+            <h2>WordPress</h2>
+            <form id="import_wordpress_form" class="split" action="{% admin "import_wordpress" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <p>
+                        <label for="xml_file">${ "eXtended .XML File" | translate }</label>
+                        <input type="file" name="xml_file" value="" id="xml_file" />
+                    </p>
+                    <p>
+                        <label for="media_url">
+                            ${ "What URL is used for embedded media?" | translate }
+                            <span class="sub">${ "(optional)" | translate }</span>
+                        </label>
+                        <input class="text" type="text" name="media_url" value="" id="media_url" />
+                        <small>
+                            ${ "Usually something like <code>http://example.com/wp-content/uploads/</code>." | translate }
+                        </small>
+                    </p>
+
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Import" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+            <br />
+            <hr />
+            <br />
+            <h2>Tumblr</h2>
+            <form id="import_tumblr_form" class="split" action="{% admin "import_tumblr" %}" method="post" accept-charset="utf-8">
+                <fieldset>
+                    <p>
+                        <label for="tumblr_url">${ "Your Tumblr URL" | translate }</label>
+                        <input class="text" type="text" name="tumblr_url" value="" id="tumblr_url" />
+                        <small>${ "Note: Audio tumbles cannot be imported." | translate }</small>
+                    </p>
+
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Import" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+            <br />
+            <hr />
+            <br />
+            <h2>TextPattern</h2>
+            <form id="import_textpattern_form" class="split" action="{% admin "import_textpattern" %}" method="post" accept-charset="utf-8">
+                <fieldset>
+                    <p>
+                        <label for="host">${ "Host" | translate }</label>
+                        <input class="text" type="text" name="host" value="localhost" id="host" />
+                    </p>
+                    <p>
+                        <label for="username">${ "Username" | translate }</label>
+                        <input class="text" type="text" name="username" value="" id="username" />
+                    </p>
+                    <p>
+                        <label for="password">${ "Password" | translate }</label>
+                        <input class="text" type="password" name="password" value="" id="password" />
+                    </p>
+                    <p>
+                        <label for="database">${ "Database" | translate }</label>
+                        <input class="text" type="text" name="database" value="" id="database" />
+                    </p>
+                    <p>
+                        <label for="prefix">${ "Table Prefix" | translate }</label>
+                        <input class="text" type="text" name="prefix" value="" id="prefix" />
+                        <span class="sub">${ "(if any)" | translate }</span>
+                    </p>
+                    <p>
+                        <label for="media_url">
+                            ${ "What URL is used for embedded media?" | translate }
+                            <span class="sub">${ "(optional)" | translate }</span>
+                        </label>
+                        <input class="text" type="text" name="media_url" value="" id="media_url" />
+                        <small>
+                            ${ "Usually something like <code>http://example.com/images/</code>." | translate }
+                        </small>
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Import" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+            <br />
+            <hr />
+            <br />
+            <h2>MovableType</h2>
+            <form id="import_movabletype_form" class="split" action="{% admin "import_movabletype" %}" method="post" accept-charset="utf-8">
+                <fieldset>
+                    <p>
+                        <label for="host">${ "Host" | translate }</label>
+                        <input class="text" type="text" name="host" value="localhost" id="host" />
+                    </p>
+                    <p>
+                        <label for="username">${ "Username" | translate }</label>
+                        <input class="text" type="text" name="username" value="" id="username" />
+                    </p>
+                    <p>
+                        <label for="password">${ "Password" | translate }</label>
+                        <input class="text" type="password" name="password" value="" id="password" />
+                    </p>
+                    <p>
+                        <label for="database">${ "Database" | translate }</label>
+                        <input class="text" type="text" name="database" value="" id="database" />
+                    </p>
+                    <p>
+                        <label for="media_url">
+                            ${ "What URL is used for embedded media?" | translate }
+                            <span class="sub">${ "(optional)" | translate }</span>
+                        </label>
+                        <input class="text" type="text" name="media_url" value="" id="media_url" />
+                        <small>
+                            ${ "Usually something like <code>http://example.com/images/</code>." | translate }
+                        </small>
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Import" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+            ${ trigger.call("import_choose") }
+{% endblock %}

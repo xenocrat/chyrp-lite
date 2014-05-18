@@ -1,0 +1,57 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Edit User &#8220;%s&#8221;" | translate | format(user.login | escape) }{% endblock %}
+
+{% block content %}
+            ${ user.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" />'~ ("Delete" | translate), null, null, "button boo right") }
+            <h1>${ "Editing User &#8220;%s&#8221;" | translate | format(user.login | escape) }</h1>
+            <form id="user_edit" class="split" action="{% admin "update_user" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <h2>${ "Information" | translate }</h2>
+                    <p>
+                        <label for="full_name">${ "Full Name" | translate }</label>
+                        <input class="text" type="text" name="full_name" value="${ user.full_name | escape }" id="full_name" />
+                    </p>
+                    <p>
+                        <label for="email">${ "E-Mail" | translate }</label>
+                        <input class="text" type="text" name="email" value="${ user.email | escape }" id="email" />
+                    </p>
+                    <p>
+                        <label for="website">${ "Website" | translate }</label>
+                        <input class="text" type="text" name="website" value="${ user.website | escape }" id="website" />
+                    </p>
+
+                    <h2>${ "Settings" | translate }</h2>
+                    <p>
+                        <label for="login">${ "Login" | translate }</label>
+                        <input class="text" type="text" name="login" value="${ user.login | escape }" id="full_name" />
+                    </p>
+                    <p>
+                        <label for="group">${ "Group" | translate }</label>
+                        <select name="group" id="group">
+                            {% for group in groups %}
+                            <option value="$group.id"${ group.id | option_selected(user.group_id) }>$group.name</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label for="new_password1">${ "New Password?" | translate }</label>
+                        <input class="text" type="password" name="new_password1" value="" id="new_password1" />
+                    </p>
+                    <p>
+                        <label for="new_password2">${ "Confirm" | translate }</label>
+                        <input class="text" type="password" name="new_password2" value="" id="new_password2" />
+                    </p>
+                    ${ trigger.call("edit_user_fields", user) }
+
+                    <br />
+
+                    <p>
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="id" value="$user.id" id="id" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

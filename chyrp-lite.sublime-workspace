@@ -1,0 +1,532 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"li",
+				"limit"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"alpha",
+				"alphabetize"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"border-botom",
+				"border-bottom-right-radius"
+			],
+			[
+				"border-ra",
+				"border-bottom-left-radius"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"padding-",
+				"padding-top"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"magin",
+				"margin-bottom"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"paddi",
+				"padding-bottom"
+			],
+			[
+				"margin-",
+				"margin-top"
+			],
+			[
+				"_get",
+				"_getDuration"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 267.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"hex",
+				"Preferences: Hex Viewer Key Bindings – Default"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"package control install package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/dan/Repository/chweet/chweet.php",
+		"/Users/dan/Repository/chweet/README",
+		"/Users/dan/Sites/zerogravitas.net/archive.html",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/lexicon/forms/comment/new.twig",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/lexicon/content/comment.twig",
+		"/Users/dan/Projects/Chyrp/chyrp-alphabetize/README.md",
+		"/Users/dan/Projects/Chyrp/chyrp-alphabetize/alphabetize/locale/en_US.pot",
+		"/Applications/MAMP/htdocs/chyrp/feathers/quote/info.yaml",
+		"/Applications/MAMP/htdocs/chyrp/modules/read_more/info.yaml",
+		"/Applications/MAMP/htdocs/chyrp/themes/lexicon/info.yaml",
+		"/Applications/MAMP/htdocs/chyrp/modules/cascade/cascade.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/likes/model.Like.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/helpers.php",
+		"/Applications/MAMP/htdocs/chyrp/modules/alphabetize/info.yaml",
+		"/Applications/MAMP/htdocs/chyrp/modules/alphabetize/locale/en_US.pot",
+		"/Applications/MAMP/htdocs/chyrp/themes/firecrest/layouts/default.twig",
+		"/Applications/MAMP/htdocs/chyrp/themes/firecrest/content/sidebar.twig",
+		"/Users/dan/Projects/Chyrp/chyrp-alphabetize-alt/alphabetize/alphabetize.php",
+		"/Applications/MAMP/htdocs/chyrp/themes/lexicon/pages/alphabetical.twig",
+		"/Applications/MAMP/htdocs/chyrp/includes/class/Theme.php",
+		"/Applications/MAMP/htdocs/chyrp/themes/blossom/layouts/default.twig",
+		"/Applications/MAMP/htdocs/chyrp/themes/blossom/pages/alphabetical.twig",
+		"/Applications/MAMP/htdocs/chyrp/includes/model/Post.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/controller/Main.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/class/Paginator.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/class/Query.php",
+		"/Applications/MAMP/htdocs/chyrp/modules/categorize/categorize.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/class/Model.php",
+		"/Users/dan/Repository/donaemous kext.txt",
+		"/Applications/MAMP/htdocs/chyrp/feathers/photo/photo.php",
+		"/Users/dan/Sites/zerogravitas.net/robots.txt",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/common.php",
+		"/Users/dan/Repository/chyrp-blossom-master-2/chyrp-blossom-master/blossom/content/sidebar.twig",
+		"/Users/dan/Repository/chyrp-blossom-master-2/chyrp-blossom-master/blossom/content/comment.twig",
+		"/Applications/MAMP/htdocs/chyrp/includes/class/SQL.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/class/Session.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/locale/en_US.pot",
+		"/Applications/MAMP/htdocs/chyrp/modules/obscura/locale/en_US.pot",
+		"/Applications/MAMP/htdocs/chyrp/modules/cascade/locale/en_US.pot",
+		"/Applications/MAMP/htdocs/chyrp/modules/tags/tags.php",
+		"/Applications/MAMP/htdocs/chyrp/modules/categorize/model.category.php",
+		"/Applications/MAMP/htdocs/chyrp/modules/comments/comments.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/controller/Admin.php",
+		"/Users/dan/Projects/Chyrp/chyrp-article/article/article.php",
+		"/Applications/MAMP/htdocs/chyrp/modules/alphabetize/alphabetize.php",
+		"/Applications/MAMP/htdocs/chyrp/modules/rights/rights.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/config.yaml.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/lexicon/info.yaml",
+		"/Applications/MAMP/htdocs/chyrp/modules/cascade/info.yaml",
+		"/Applications/MAMP/htdocs/chyrp/themes/firecrest/pages/index.twig",
+		"/Applications/MAMP/htdocs/chyrp/admin/themes/default/pages/manage_posts.twig",
+		"/Applications/MAMP/htdocs/chyrp/themes/firecrest/feathers/photo.twig",
+		"/Users/dan/Projects/Typefaces/Gauge/README.md",
+		"/Users/dan/Sites/pimley.net/projects/downloads/Airlock/AIRLOCK IS DEAD.txt",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/lexicon/forms/user/controls.twig",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/sitemap/sitemap.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/config.yaml.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/lexicon/forms/post/edit.twig",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/admin.js.php",
+		"/Users/dan/Repository/sitemap.xml",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/index.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/aggregator/aggregator.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/comments/comments.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/dropbox/dropbox.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/likes/likes.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/emailblog/emailblog.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/theme_editor/theme_editor.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/cacher/cacher.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/cascade/cascade.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/tags/tags.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/controller/Admin.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/sitemap/pages/admin/sitemap_settings.twig",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/modules/categorize/categorize.php",
+		"/Applications/MAMP/htdocs/chyrp/themes/milquetoast/forms/post/edit.twig",
+		"/Users/dan/Sites/xenocrat.net/index.php",
+		"/Users/dan/Sites/xenocrat.net/index.html",
+		"/Users/dan/Projects/Typefaces/Gauge/Font Files/ LICENCE.txt",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/helpers.php",
+		"/Users/dan/Projects/Chyrp/chyrp-core/modules/read_more/read_more.php",
+		"/Users/dan/Repository/config.yaml.php",
+		"/Users/dan/Repository/htaccess.txt",
+		"/Users/dan/Sites/zerogravitas.net/chyrp old/(dot)htaccess",
+		"/Users/dan/Sites/zerogravitas.net/index.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp old/index.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/CHANGES",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/lexicon/pages/archive.twig",
+		"/Applications/MAMP/htdocs/chyrp/feathers/portfolio/portfolio.php",
+		"/Applications/MAMP/htdocs/chyrp/feathers/portfolio/portfolio.twig",
+		"/Applications/MAMP/htdocs/chyrp/modules/comments/model.Comment.php",
+		"/Applications/MAMP/htdocs/chyrp/modules/textilize/lib/textile.php",
+		"/Users/dan/Projects/Chyrp/chyrp-blossom/README.md",
+		"/Applications/MAMP/htdocs/chyrp/modules/read_more/read_more.php",
+		"/Applications/MAMP/htdocs/chyrp/includes/lib/redactor/redactor.min.js",
+		"/Applications/MAMP/htdocs/chyrp/includes/admin.js.php",
+		"/Users/dan/Projects/Chyrp/chyrp-article/COPYING",
+		"/Users/dan/Projects/Chyrp/chyrp-rights/COPYING",
+		"/Users/dan/Projects/Chyrp/chyrp-core/COPYING",
+		"/Users/dan/Projects/Chyrp/chyrp-article/README.md",
+		"/Users/dan/Projects/Chyrp/chyrp-rights/README.md",
+		"/Users/dan/Sites/nametake.net/chyrp/feathers/photo/photo.php",
+		"/Users/dan/Projects/Chyrp/chyrp-core/feathers/photo/photo.php",
+		"/Users/dan/Projects/Chyrp/rights/locale/en_GB.pot",
+		"/Users/dan/Projects/Chyrp/rights/locale/en_US.pot",
+		"/Applications/MAMP/htdocs/chyrp/modules/dropbox/locale/en_US.pot",
+		"/Users/dan/Projects/Chyrp/rights/info.yaml",
+		"/Users/dan/Sites/zerogravitas.net/400.shtml",
+		"/Users/dan/Sites/zerogravitas.net/403.shtml",
+		"/Users/dan/Sites/zerogravitas.net/404.shtml",
+		"/Users/dan/Sites/zerogravitas.net/500.shtml",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/stardust/javascripts/theme.js.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/stardust/layouts/default.twig",
+		"/Users/dan/Sites/nametake.net/chyrp/themes/firecrest/layouts/default.twig",
+		"/Users/dan/Sites/nametake.net/chyrp/themes/firecrest/javascripts/theme.js.php",
+		"/Users/dan/Sites/nametake.net/chyrp/includes/controller/Main.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/controller/Main.php",
+		"/Users/dan/Sites/nametake.net/chyrp/includes/class/Route.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/class/Route.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/class/Twig.php",
+		"/Users/dan/Repository/error_log",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/model/Page.php",
+		"/Users/dan/Sites/nametake.net/chyrp/includes/class/Model.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/class/Model.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/ajax.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/lib/YAML/Loader.php",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/includes/lib/gettext/gettext.php",
+		"/Users/dan/Repository/MyFontsWebfontsKit/MyFontsWebfontsKit.css",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/lexicon/pages/index.twig",
+		"/Users/dan/Sites/zerogravitas.net/chyrp/themes/lexicon/pages/view.twig"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"getRequestToken",
+			"spin",
+			"hover",
+			"story",
+			"psycho",
+			"book",
+			"code",
+			"fix",
+			"selection",
+			"letter",
+			"range",
+			"search",
+			"index",
+			"limit",
+			"SQL",
+			"obscura",
+			"redirect",
+			"key",
+			"_key",
+			"index",
+			"?",
+			"$a",
+			"route",
+			"alphabet",
+			"url",
+			"private",
+			"function",
+			"private",
+			"$a",
+			"attrib",
+			"search",
+			"find",
+			"list",
+			"where",
+			"$config",
+			"keywords",
+			"consider",
+			"index",
+			"query",
+			"search",
+			"name",
+			"index",
+			"archive",
+			"ringwo",
+			"droid",
+			"broad",
+			"Metalogical",
+			":",
+			"'",
+			":",
+			"‘",
+			"”",
+			"“",
+			":",
+			"game",
+			"movie",
+			"book",
+			"category",
+			"change_frequency",
+			"user_id",
+			"user_name",
+			"total_count",
+			"session_hash",
+			"user_id",
+			"belongs_to",
+			"$username",
+			"$admin->display(",
+			"make_sitemap",
+			"change_frequency",
+			"cc3d3d",
+			"e5e1cf",
+			"ribb",
+			"f0f2f1",
+			"word",
+			"ment",
+			"word",
+			"wor",
+			"broad",
+			"dfn",
+			"Avenir",
+			"Crimson-Roman-webfont",
+			"CrimsonText-Bold",
+			"Crimson-Italic-webfont",
+			"Crimson-Bold-webfont",
+			"Crimson",
+			"#header",
+			"ribb",
+			"42a66a",
+			":",
+			"htmlspecialchars",
+			"content",
+			"post",
+			"content",
+			"postinfo",
+			"edit",
+			"wysiwyg",
+			"redac",
+			"http",
+			"cursor",
+			"that",
+			"who",
+			"search",
+			"action",
+			"search",
+			"p",
+			"aven",
+			"font-size",
+			"Crimson-Roman-webfont",
+			"border",
+			"cc5270",
+			"6f7173",
+			"9b0028",
+			"top",
+			"4d4e4f",
+			"20",
+			"6f7173",
+			"adb1b3",
+			"e5e5e5",
+			"e5e1cf",
+			"f7f7f0",
+			"efefef",
+			"cc5270",
+			"9b0028",
+			"left",
+			"000000",
+			"4d4e4f",
+			"top",
+			"4d4e4f"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"’",
+			"‘",
+			"div.cascade",
+			">"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.538254624767,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.hex_viewer_inspector":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

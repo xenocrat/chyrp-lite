@@ -1,0 +1,7 @@
+name: Cascade
+url: http://chyrplite.net/
+version: 1.0
+description: Adds ajax-powered infinite scrolling to the index, archive, and search pages.
+author:
+  name: Daniel Pimley
+  url: http://www.pimley.net/

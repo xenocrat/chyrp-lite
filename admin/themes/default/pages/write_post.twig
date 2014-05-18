@@ -1,0 +1,14 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Write" | translate }{% endblock %}
+
+{% block content %}
+            <form id="write_form" class="${ feather.safename | escape(true) }" action="{% admin "add_post" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+{% include "partials/post_fields.twig" %}
+
+                    <input type="hidden" name="feather" value="${ feather.safename | escape(true) }" id="feather" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

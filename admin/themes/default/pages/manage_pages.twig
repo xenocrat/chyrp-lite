@@ -1,0 +1,99 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Manage Pages" | translate }{% endblock %}
+
+{% block content %}
+            <h2>${ "Need more detail?" | translate }</h2>
+            <form class="detail" action="index.php" method="get" accept-charset="utf-8">
+                <fieldset>
+                    <input type="hidden" name="action" value="manage_pages" />
+                    <div class="pad">
+                        <h3>
+                            ${ "Search&hellip;" | translate }
+                            <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                        </h3>
+                        <input class="text" type="text" name="query" value="${ GET.query | escape }" id="query" /> <button type="submit" class="inline">${ "Search &rarr;" | translate }</button>
+                    </div>
+                </fieldset>
+            </form>
+            <br />
+            <h2>{% if GET.query %}${ "Search Results" | translate }{% else %}${ "Last 25 Pages" | translate }{% endif %}</h2>
+            <table border="0" cellspacing="0" cellpadding="0" class="wide">
+                <thead>
+                    <tr class="head">
+                        <th>${ "Title" | translate }</th>
+                        <th>${ "Created" | translate }</th>
+                        <th>${ "Last Updated" | translate }</th>
+                        <th>${ "Author" | translate }</th>
+                        ${ trigger.call("manage_pages_column_header") }
+                        <th colspan="2">${ "Controls" | translate }</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for page in pages.paginated %}
+                    <tr id="page_$page.id" class="page{% if loop.last %} last{% endif %}">
+                        <td class="main"><a href="$page.url">${ page.title | truncate }</a></td>
+                        <td>${ page.created_at | strftime }</td>
+                        <td>{% if page.updated %}${ page.updated_at | strftime }{% else %}<span class="sub">${ "never" | translate }</span>{% endif %}</td>
+                        <td>$page.user.login</td>
+                        ${ trigger.call("manage_pages_column", page) }
+                        {% if page.editable and page.deletable %}
+                        <td class="controls">${ page.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="edit" /> '~("edit" | translate)) }</td>
+                        <td class="controls">${ page.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" /> '~("delete" | translate)) }</td>
+                        {% else %}
+                        ${ page.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="edit" /> '~("edit" | translate), '<td class="controls" colspan="2">', '</td>') }
+                        ${ page.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" /> '~("delete" | translate), '<td class="controls" colspan="2">', '</td>') }
+                        {% endif %}
+                    </tr>
+                {% else %}
+                    <tr class="last">
+                        <td colspan="6" class="center"><span class="sub">${ "(none)" | translate }</span></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if pages.paginated and pages.pages > 1 %}
+            <br />
+            <div class="pagination">
+                $pages.next_link
+                $pages.prev_link
+                <span class="pages">${ "Page %d of %d" | translate | format(pages.page, pages.pages) }</span>
+            </div>
+            {% endif %}
+            {% if pages.total %}
+            <br />
+            <h2>${ "Reorder Pages" | translate }</h2>
+            <form id="reorder_pages" action="{% admin "reorder_pages" %}" method="post">
+                <ul class="sort_pages">
+                {% for item in theme.pages_list %}
+                    <li class="page-item" id="page_list_$item.page.id">
+                        <noscript>
+                            <input type="text" size="2" name="list_order[$item.page.id]" value="$item.page.list_order" class="center desktop" />
+                        </noscript>
+                        <div>$item.page.title</div>
+                        <input type="text" size="2" name="list_order[$item.page.id]" value="$item.page.list_order" class="center mobile" />
+
+                        {% if item.has_children %}<ul>{% endif %}
+                    {% if not item.has_children %}</li>{% endif %}
+
+                    {% for ul, li in item.end_tags %}
+                        $ul
+                    $li
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+                <div class="buttons mobile">
+                    <button type="submit" class="yay">
+                        <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Reorder" | translate }
+                    </button>
+                </div>
+                <noscript>
+                    <div class="buttons desktop">
+                        <button type="submit" class="yay">
+                            <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Reorder" | translate }
+                        </button>
+                    </div>
+                </noscript>
+            </form>
+            {% endif %}
+{% endblock %}

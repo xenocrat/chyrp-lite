@@ -1,0 +1,166 @@
+.tags_select {
+    display: inline-block;
+}
+.tags_select a {
+    padding: .1em .4em;
+    line-height: 2em;
+    border: .1em solid #DDDDA8;
+    background: #FFFFCA;
+    text-decoration: none;
+    border-top-width: 0;
+    border-left-width: 0;
+    color: #555;
+}
+.tags_select a.tag_added {
+    background: #eee;
+    border-top-width: .1em;
+    border-bottom: 0;
+    border-left-width: .1em;
+    border-right: 0;
+    border-color: #ddd;
+}
+
+.tag_cloud {
+    text-align: center;
+}
+.tag_cloud span,
+.post_tags a.tag {
+    display: inline-block;
+}
+.tag_cloud span a.tag,
+.post_tags a.tag {
+    display: block;
+    line-height: 2.5em;
+    padding: 0 .75em;
+    background: #eee;
+    text-decoration: none;
+    font-weight: bold;
+    color: #777;
+    text-align: center;
+}
+.tag_cloud span .controls {
+    opacity: 0;
+    padding: .1em .25em;
+    text-align: center;
+    background: #f9f9f9;
+    -webkit-border-bottom-right-radius: .5em;
+    -webkit-border-bottom-left-radius: .5em;
+    -moz-border-radius-bottomright: .5em;
+    -moz-border-radius-bottomleft: .5em;
+}
+
+.post_tags {
+    list-style: none;
+}
+.post_tags li {
+    display: block;
+    margin-bottom: .5em;
+    padding: .75em;
+}
+.post_tags li.hover {
+    background: #eee !important;
+}
+.post_tags input,
+.post_tags h3 {
+    margin: 0 .5em 0 .25em;
+}
+.post_tags li.odd {
+    background: #fafafa;
+}
+.post_tags li a.tag,
+.post_tags li a.edit_tag {
+    margin: -.85em 0;
+}
+.post_tags li a.tag.dropped {
+    margin-right: .3625em;
+}
+.post_tags li a.tag {
+    display: inline-block;
+    padding: 0 .75em;
+    background: #e5e5e5;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+}
+.post_tags li a.edit_tag {
+    display: inline-block;
+    position: relative;
+    bottom: -.2em;
+    padding: .5em .75em .4em;
+    background: #f0f0f0;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+}
+.post_tags li a.edit_tag:hover {
+    background: #f5f5f5;
+}
+.post_tags li a.tag:hover {
+    background: #f0f0f0;
+}
+
+/* @Conform style to core admin pages */
+.post_tags li h3, .post_tags li h3 {
+    font-family: sans-serif !important;
+    font-size: 1em !important;
+}
+
+.post_tags li a:link, .post_tags li a:visited {
+    text-decoration: none;
+}
+/* @end */
+
+/* @media-query for small screens */
+@media screen and (max-width: 768px) {
+    form.left, form.margin_left {
+        width: 100%;
+        margin: 0em;
+    }
+    h2.left {
+        clear: both;
+    }
+    .tag_cloud span {
+        display: block;
+        width: 48%;
+        float: left;
+        overflow: hidden;
+    }
+    .tag_cloud span:nth-child(odd) {
+        margin-right: 4%;
+        clear: both;
+    }
+    .tag_cloud span .controls {
+        opacity: 1 !important;
+        padding: 2em 0em;
+        margin-bottom: 1em;
+    }
+    .tag_cloud span  a {
+        font-size: 100% !important;
+    }
+    .tag_cloud span .controls a {
+        padding: 0em 1em;
+    }
+    .post_tags li {
+        padding-top: 1em;
+        border-top: 1px solid #ddd;
+    }
+    .post_tags li.toggler {
+        border: 1px solid transparent;
+        margin-top: 0em;
+    }
+    .post_tags li.odd,
+    .post_tags li.even {
+        background-color: inherit;
+    }
+    .post_tags input[type="checkbox"] {
+        width: auto !important;
+        float: left !important;
+        margin: 0em 1em 1em 0em !important;
+    }
+    .post_tags li a.tag, .post_tags li a.edit_tag {
+        float: none;
+        clear: both;
+        display: block;
+        margin: 1em 0em;
+        padding: 0.5em 1em;
+        text-align: center;
+    }
+}

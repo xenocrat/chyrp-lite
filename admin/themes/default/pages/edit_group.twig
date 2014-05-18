@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Edit Group &#8220;%s&#8221;" | translate | format(group.name | escape) }{% endblock %}
+
+{% block content %}
+            ${ group.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete" />'~ ("Delete" | translate), null, null, "button boo right") }
+            <h1>${ "Editing Group &#8220;%s&#8221;" | translate | format(group.name | escape) }</h1>
+            <form id="group_edit" class="split{% if group.id == visitor.group.id %} confirm{% endif %}" action="{% admin "update_group" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <p>
+                        <label for="name">${ "Name" | translate }</label>
+                        <input class="text" type="text" name="name" value="${ group.name | escape }" id="name" />
+                    </p>
+
+                    <h2>${ "Permissions" | translate }</h2>
+                    <p id="toggler">
+
+                    </p>
+                    <hr class="js_enabled" />
+                    {% for permission in permissions %}
+                    <p>
+                        <label for="permission_$permission.id">${ permission.name | translate }</label>
+                        <input class="checkbox" type="checkbox" name="permissions[$permission.id]" id="permission_$permission.id"{% if group.can(permission.id) %} checked="checked"{% endif %} />
+                    </p>
+                    {% endfor %}
+                    <br />
+
+                    <p>
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                    </p>
+
+                    <input type="hidden" name="id" value="$group.id" id="id" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}

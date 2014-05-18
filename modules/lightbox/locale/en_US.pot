@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp v2.5\n"
+"Report-Msgid-Bugs-To: dan@pimley.net\n"
+"POT-Creation-Date: 2014-01-24 21:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/lightbox/info.yaml:1
+msgid "Lightbox"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:3
+msgid "Lightbox Settings"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:9
+msgid "Background"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:11
+msgid "Black"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:12
+msgid "Grey"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:13
+msgid "White"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:14
+msgid "Inherit"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:18
+msgid "Spacing"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:20
+msgid "(pixels)"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:23
+msgid "Protect"
+msgstr ""
+
+#: modules/lightbox/pages/admin/lightbox_settings.twig:25
+msgid "Prevent visitors from saving images?"
+msgstr ""
+
+#: modules/lightbox/javascript.php:102
+msgid "Minimize"
+msgstr ""

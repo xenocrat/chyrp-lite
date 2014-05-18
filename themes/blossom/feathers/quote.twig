@@ -1,0 +1,15 @@
+{% extends "content/post.twig" %}
+
+{% block content %}
+      {% if post['title'] %}
+      <h2>
+        <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;$post.title&quot;">$post.title</a>
+      </h2>
+      {% endif %}
+      <section{% if post.quote | length > 1000 %} class="columnized"{% endif %}>
+  	    <blockquote>
+  	      ${ post.quote | read_more("…more") }
+  	    </blockquote>
+  	    <p>${ ("&mdash; " ~ post.source_unfiltered) | markup_post_text(post) | markup_text(post) | read_more }</p>
+      </section>
+{% endblock %}

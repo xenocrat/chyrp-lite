@@ -1,0 +1,27 @@
+  <form id="comment_edit_$comment.id" class="comment_edit" action="{% admin "update_comment" %}" method="post" accept-charset="utf-8">
+    <label for="body">${ "Comment" | translate }</label>
+    <textarea name="body" rows="8" cols="40" class="wide">$comment.body</textarea>
+    <label for="status">${ "Status" | translate }</label>
+    <select name="status" id="status">
+      <option value="approved"{% if comment.status == "approved" %} selected="selected"{% endif %}>${ "Approved" | translate }</option>
+      <option value="denied"{% if comment.status == "denied" %} selected="selected"{% endif %}>${ "Denied" | translate }</option>
+      <option value="spam"{% if comment.status == "spam" %} selected="selected"{% endif %}>${ "Spam" | translate }</option>
+    </select>
+    <a id="more_options_link_$comment.id" href="javascript:void(0)" class="more_options_link">${ "More Options &darr;" | translate("chyrp") }</a>
+    <div id="more_options_$comment.id" class="more_options" style="display: none">
+      <label for="author">${ "Author" | translate }</label>
+      <input class="text" type="text" name="author" value="$comment.author" id="author">
+      <label for="author_url">${ "Author's website" | translate }</label>
+      <input class="text" type="url" name="author_url" value="$comment.author_url" id="author_url">
+      <label for="author_email">${ "Author's email" | translate }</label>
+      <input class="text" type="email" name="author_email" value="$comment.author_email" id="author_email">
+      <label for="created_at">${ "Timestap" | translate }</label>
+      <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime("%B %d, %Y %H:%M:%S") }" id="created_at">
+    </div>
+    <input type="hidden" name="id" value="$comment.id" id="id">
+    <input type="hidden" name="ajax" value="true" id="ajax">
+    <div class="doaction speak">
+      <button type="submit" accesskey="s">${ "Save" | translate }</button>
+      <a href="javascript:void(0)" id="comment_cancel_edit_$comment.id" class="cancel">${ "Cancel" | translate }</a>
+    </div>
+  </form>

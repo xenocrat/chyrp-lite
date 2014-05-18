@@ -1,0 +1,35 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Cache Settings" | translate("cacher") }{% endblock %}
+
+{% block content %}
+            <h1>${ "Cache Settings" | translate("cacher") }</h1>
+            <form id="cache_settings" class="split" action="{% admin "cache_settings" %}" method="post">
+                <fieldset>
+                    <p>
+                        <label for="cache_expire">${ "Expire Cache After&hellip;" | translate("cacher") }</label>
+                        <input class="text" type="text" name="cache_expire" value="${ site.cache_expire | escape }" id="cache_expire" /> <span class="sub">${ "(seconds)" | translate("cacher") }</span>
+                    </p>
+                    <p>
+                        <label for="cache_exclude">${ "Exclude URLs" | translate("cacher") }</label>
+                        <input class="text" type="text" name="cache_exclude" value="${ site.cache_exclude | join(", ") | escape }" id="cache_exclude" /> <span class="sub">${ "(comma separated)" | translate("cacher") }</span>
+                    </p>
+                    
+                    <p>
+                        <label for="cache_memcached_hosts">${ "Memcache Servers" | translate("cacher")}</label>
+                        <input class="text" type="text" name="cache_memcached_hosts" value="${ site.cache_memcached_hosts | join(", ") | escape }" id="cache_memcached_hosts" /> <span class="sub">${ "(comma separated)" | translate("cacher") }</span>
+                    </p>
+
+                    <p class="buttons">
+                        <p>
+                            <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                        </p>
+                        <p>
+                            <a class="button boo" href="{% admin "clear_cache" %}"><img src="$theme_url/images/icons/cancel.svg" alt="clear" />${ "Clear Cache" | translate }</a>
+                        </p>
+                    </p>
+
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                </fieldset>
+            </form>
+{% endblock %}
