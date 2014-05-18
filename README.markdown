@@ -27,7 +27,7 @@ Chyrp Lite is intended to minimise complexity and client-side footprint, and to 
 ### Modified
 * Audio Feather – native player only.
 * Video Feather – native player only, upload only.
-* Recapthca library relocated to module.
+* Recaptcha library relocated to module.
 * Markdown library updated to 1.4.1.
 * Transparent ajax loader, no default widgets.
 * Various code cleanups and bug fixes.
@@ -72,7 +72,7 @@ Keeping Chyrp up to date is important to make sure that your blog is as safe and
 2. Copy your config file from `/includes/config.yaml.php` to somewhere safe.
 3. Disable any Modules/Feathers that you downloaded for the release you're upgrading from.
 4. Overwrite your current Chyrp installation files with the new ones.
-5. Restore your config files<sup>1</sup> back to /includes/.
-6. Upgrade by navigating to [upgrade.php](upgrade.php), and restore any backups.
+5. Restore your config file to /includes/.
+6. Upgrade by navigating to [upgrade.php](upgrade.php).
 7. Re-enable your Modules/Feathers.
 8. Run the upgrader again. It will run the Module/Feather upgrade tasks.
