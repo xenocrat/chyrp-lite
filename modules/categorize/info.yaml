@@ -1,9 +1,9 @@
 name: Categorize
-url: http://www.polarlava.com/
-version: 2.2
+url: http://chyrplite.net/
+version: 1.0
 description: Categorize your posts.
 author:
-  name: Kevin L. Papendick and Chyrp Team
+  name: Kevin L. Papendick
   url: http://www.polarlava.com/
 conflicts:
 notifications:

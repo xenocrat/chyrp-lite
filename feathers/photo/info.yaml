@@ -1,7 +1,7 @@
 name: Photo
-url: http://chyrp.net/
+url: http://chyrplite.net/
 version: 2.0
-description: A photo feather, allowing you to upload any type of picture, with a caption.
+description: Upload and display an image with a caption.
 author:
   name: Alex Suraci
   url: http://ecks.tc/

@@ -40,8 +40,7 @@ Chyrp Lite is intended to minimise complexity and client-side footprint, and to 
   - Sitemap
   - Rights
 
-Requirements
-============
+## Requirements
 Chyrp will thrive on virtually any server setup, but we guarantee Chyrp to run on no less than:
 
 * PHP 5 >= 5.3.0
@@ -53,8 +52,7 @@ Chyrp will thrive on virtually any server setup, but we guarantee Chyrp to run o
 
 These requirements are more of guidelines, as these are the earliest versions of the services that we have tested Chyrp on. If you are successfully running Chyrp on an earlier version of these services, let us know.
 
-Installation
-============
+## Installation
 Installing Chyrp is easier than you expect. You can do it in four steps:
 
 1. If using MySQL, create a MySQL database with a username and password.
@@ -64,8 +62,7 @@ Installing Chyrp is easier than you expect. You can do it in four steps:
 
 That's it! Chyrp will be up and running and ready for you to use.
 
-Upgrading
-=========
+## Upgrading
 Keeping Chyrp up to date is important to make sure that your blog is as safe and as awesome as possible.
 
 1. Download the latest version of Chyrp.
