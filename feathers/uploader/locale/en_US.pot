@@ -18,18 +18,30 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: feathers/file/info.yaml:1
-msgid "File"
-msgstr "File"
-
-#: feathers/file/info.yaml:4
-msgid "A file download feather, allowing you to upload files of any type to your Chyrp site."
+msgid "Uploader"
 msgstr ""
 
-#: feathers/file/file.php:69
+#: feathers/file/info.yaml:4
+msgid "Upload files to your Chyrp site and make them available for visitors to download."
+msgstr ""
+
+#: feathers/file/file.php:7
+msgid "Files"
+msgstr ""
+
+#: feathers/file/file.php:15
+msgid "Caption"
+msgstr ""
+
+#: feathers/file/file.php:11
+msgid "Title"
+msgstr ""
+
+#: feathers/file/file.php:36
 msgid "Error"
 msgstr ""
 
-#: feathers/file/file.php:69
-msgid "Couldn't find file."
+#: feathers/file/file.php:36
+msgid "Failed to upload file."
 msgstr ""
 

@@ -1,8 +1,0 @@
-name: File
-url: http://chyrplite.net/
-version: 1.0
-description: Upload a file to your Chyrp site and make it available for visitors to download.
-author:
-  name: etherald
-  url: http://etherald.com
-uploader: true

@@ -9,7 +9,9 @@
       <section{% if post.caption | length > 1000 %} class="columnized"{% endif %}>
         ${ post.caption | read_more("…more") }
         <div class="doaction admin">
-			<a href="${ post.link | escape }">Download &quot;${ post.filename | escape }&quot;</a>
+        {% for file in post.files %}
+          <a href="${ file.link | escape }">Download &quot;${ file.name | escape }&quot;</a>
+        {% endfor %}
         </div>
       </section>
 {% endblock %}

@@ -23,7 +23,8 @@
             if (empty($_POST['source']))
                 error(__("Error"), __("URL can't be empty."));
 
-            if (!@parse_url($_POST['source'], PHP_URL_SCHEME))
+            # Prepend scheme if a URL is detected in the source text
+            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['source']))
                 $_POST['source'] = "http://".$_POST['source'];
 
             fallback($_POST['slug'], sanitize($_POST['name']));
@@ -39,7 +40,8 @@
             if (empty($_POST['source']))
                 error(__("Error"), __("URL can't be empty."));
 
-            if (!@parse_url($_POST['source'], PHP_URL_SCHEME))
+            # Prepend scheme if a URL is detected in the source text
+            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['source']))
                 $_POST['source'] = "http://".$_POST['source'];
 
             $post->update(array("name" => $_POST['name'],
@@ -48,10 +50,7 @@
         }
 
         public function title($post) {
-            $return = $post->name;
-            fallback($return, $post->title_from_excerpt());
-            fallback($return, $post->source);
-            return $return;
+            return oneof($post->name, $post->title_from_excerpt(), $post->source);
         }
 
         public function excerpt($post) {

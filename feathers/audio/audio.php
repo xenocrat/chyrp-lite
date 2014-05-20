@@ -23,11 +23,6 @@
             $this->respondTo("post_options", "add_option");
         }
 
-        public function add_jplayer_script($scripts) {
-            $scripts[] = Config::current()->chyrp_url."/feathers/audio/jplayer/jquery.jplayer.js";
-            return $scripts;
-        }
-
         public function submit() {
             if (!isset($_POST['filename'])) {
                 if (isset($_FILES['audio']) and $_FILES['audio']['error'] == 0)
@@ -119,7 +114,7 @@
         public function audio_player($filename, $params = array(), $post) {
             $player = "\n".'<audio controls>';
             $player.= "\n\t".__("Your web browser does not support the <code>audio</code> element.", "audio");
-            $player.= "\n\t".'<source src="'.uploaded($post->filename).'" type="'.$this->audio_type($post->filename).'">';
+            $player.= "\n\t".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
             $player.= "\n".'</audio>'."\n";
 
             return $player;

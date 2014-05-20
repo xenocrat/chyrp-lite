@@ -1,0 +1,8 @@
+name: Uploader
+url: http://chyrplite.net/
+version: 1.0
+description: Upload files to your Chyrp site and make them available for visitors to download.
+author:
+  name: Daniel Pimley
+  url: http://pimley.net/
+uploader: true
