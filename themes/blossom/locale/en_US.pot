@@ -350,3 +350,7 @@ msgstr ""
 #: themes/blossom/content/sidebar.twig:13
 msgid "Links"
 msgstr ""
+
+#: themes/blossom/feathers/uploader.twig:13
+msgid "Download"
+msgstr ""

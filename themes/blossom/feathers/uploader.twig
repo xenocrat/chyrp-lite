@@ -10,7 +10,7 @@
         ${ post.caption | read_more("…more") }
         <div class="doaction admin">
         {% for file in post.files %}
-          <a href="${ file.link | escape }">Download &quot;${ file.name | escape | truncate(20, "…", true) }&quot;</a>
+          <a href="${ file.link | escape }">${ "Download" | translate } &quot;${ file.name | escape | truncate(20, "…", true) }&quot;</a>
         {% endfor %}
         </div>
       </section>

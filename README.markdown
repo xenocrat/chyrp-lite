@@ -27,10 +27,10 @@ Chyrp Lite is intended to minimise complexity and client-side footprint, and to 
 ### Modified
 * Audio feather – native player only.
 * Video feather – native player only, upload only.
-* File feather - replaced with multiple file Uploader feather.
+* File feather – replaced with multiple-file Uploader feather.
 * Recaptcha library relocated to module.
 * Markdown library updated to 1.4.1.
-* Transparent ajax loader, no default widgets.
+* CSS-styled ajax loader, no default widgets.
 * Various code cleanups and bug fixes.
 
 ### Added
