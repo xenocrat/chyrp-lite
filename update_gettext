@@ -7,6 +7,7 @@ ruby gettext.rb ./feathers/photo/       --domain=photo        > ./feathers/photo
 ruby gettext.rb ./feathers/quote/       --domain=quote        > ./feathers/quote/locale/en_US.pot
 ruby gettext.rb ./feathers/text/        --domain=text         > ./feathers/text/locale/en_US.pot
 ruby gettext.rb ./feathers/video/       --domain=video        > ./feathers/video/locale/en_US.pot
+ruby gettext.rb ./feathers/uploader/    --domain=uploader     > ./feathers/uploader/locale/en_US.pot
 
 ruby gettext.rb ./modules/cacher/       --domain=cacher       > ./modules/cacher/locale/en_US.pot
 ruby gettext.rb ./modules/cascade/      --domain=cascade      > ./modules/cascade/locale/en_US.pot

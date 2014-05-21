@@ -407,7 +407,8 @@ a:active {                                          color: #000000;
                                                     border-bottom: none }
     div.metadata a:focus, div.metadata a:active {   color: #000000;
                                                     border-bottom: none }
-    div.doaction a, button {                        padding: 0.4em 0.6em;
+    div.doaction a, button {                        white-space: nowrap;
+                                                    padding: 0.4em 0.6em;
                                                     border: none;
                                                     border-radius: 0.2em;
                                                     color: #ffffff;

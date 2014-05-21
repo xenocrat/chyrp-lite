@@ -9,7 +9,7 @@ Chyrp Lite is intended to minimise complexity and client-side footprint, and to 
 * Bookmarklet.
 * Post previews.
 * RedactorJS.
-* Chat Feather.
+* Chat feather.
 * jQueryUI (soon).
 * flexNav (soon).
 * Firecrest theme.
@@ -25,8 +25,9 @@ Chyrp Lite is intended to minimise complexity and client-side footprint, and to 
   - textilize
 
 ### Modified
-* Audio Feather – native player only.
-* Video Feather – native player only, upload only.
+* Audio feather – native player only.
+* Video feather – native player only, upload only.
+* File feather - replaced with multiple file Uploader feather.
 * Recaptcha library relocated to module.
 * Markdown library updated to 1.4.1.
 * Transparent ajax loader, no default widgets.
