@@ -34,9 +34,6 @@ $(function(){
         window.open($(this).attr("href"), "help", "status=0, scrollbars=1, location=0, menubar=0, toolbar=0, resizable=1, height=450, width=400");
         return false;
     })
-
-    // Responsive menus
-    $(".flexnav").flexNav({ 'animationSpeed' : 'fast' });
 })
 
 function toggle_all() {

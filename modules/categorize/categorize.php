@@ -67,13 +67,13 @@
         }
     
         public function manage_posts_column_header() {
-            echo "<th>".__("Category", "category")."</th>";
+            echo '<th class="category">'.__("Category", "category").'</th>';
         }
     
         public function manage_posts_column($post) {
             echo (isset($post->category->name) && $post->category->id != FALSE)
-                ? "<td>" . $post->category->name . "</td>"
-                : "<td>&nbsp;</td>";
+                ? '<td class="category">'.$post->category->name.'</td>'
+                : '<td class="category">&nbsp;</td>';
         }
     
         public function post_options($fields, $post = null) {
