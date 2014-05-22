@@ -1,7 +1,7 @@
 Chyrp Lite
 ==========
 
-Chyrp Lite is a fork of the Chyrp blogging engine, modified to be ultra lightweight. This fork is a work-in-progress and very much a personal project tailored to my specific needs, but you are free to use it if you think it also meets your needs. If you are looking for more features, you may want to consider [Chyrp](http://chyrp.net/) instead.
+Chyrp Lite is an ultra-lightweight fork of the Chyrp blogging engine. Chyrp Lite is a work-in-progress and a personal project tailored to my specific needs, but you are free to use it if you think it also meets your needs. If you are looking for more features, you may want to consider [Chyrp](http://chyrp.net/) instead.
 
 Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Specifically, Chyrp Lite deviates from Chyrp as follows:
 
