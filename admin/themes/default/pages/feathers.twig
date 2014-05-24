@@ -5,7 +5,7 @@
 {% block content %}
             <h2>${ "Feather" | translate }</h2>
             <ul id="feathers_enabled" class="extend feathers">
-                <label for="feathers_enabled">${ "Enabled" | translate }</label>
+                <h5>${ "Enabled" | translate }</h5>
                 {% for safename, feather in enabled_feathers | items %}
                 <li class="${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
@@ -27,7 +27,7 @@
             </ul>
             </ul>
             <ul id="feathers_disabled" class="extend feathers">
-                <label for="feathers_disabled">${ "Disabled" | translate }</label>
+                <h5>${ "Disabled" | translate }</h5>
                 {% for safename, feather in disabled_feathers | items %}
                 <li class="${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>

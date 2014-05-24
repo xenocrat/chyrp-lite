@@ -6,13 +6,13 @@
             <h1>${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(post.title) }</h1>
             <form class="delete" action="{% admin "destroy_post" %}" method="post" accept-charset="utf-8">
                 <fieldset>
-                    <blockquote>
-                        <h2>${ "Excerpt" | translate }</h2>
-                        $post.excerpt
-                    </blockquote>
                     <div class="confirmation">
-                        <button name="destroy" value="indubitably" class="center boo">${ "DESTROY!" | translate }</button>
-                        <button name="destroy" value="bollocks" type="submit" class="yay">${ "Cancel" | translate }</button>
+                        <button name="destroy" value="indubitably" class="boo">
+                            <img src="$theme_url/images/icons/delete.svg" alt="success">${ "Delete!" | translate }
+                        </button>
+                        <button name="destroy" value="bollocks" type="submit" class="yay">
+                            <img src="$theme_url/images/icons/cancel.svg" alt="success">${ "Cancel" | translate }
+                        </button>
                     </div>
                     <input type="hidden" name="id" value="$post.id" id="id">
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">

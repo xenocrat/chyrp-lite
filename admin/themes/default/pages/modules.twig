@@ -5,7 +5,7 @@
 {% block content %}
             <h2>${ "Modules" | translate }</h2>
             <ul id="modules_enabled" class="extend modules">
-                <label for="modules_enabled">${ "Enabled" | translate }</label>
+                <h5>${ "Enabled" | translate }</h5>
                 {% for safename, module in enabled_modules | items %}
                 <li class="${ module.classes | join(" ") }" id="module_$safename">
                     <h3>
@@ -37,7 +37,7 @@
                 {% endfor %}
             </ul>
             <ul id="modules_disabled" class="extend modules">
-                <label for="modules_disabled">${ "Disabled" | translate }</label>
+                <h5>${ "Disabled" | translate }</h5>
                 {% for safename, module in disabled_modules | items %}
                 <li class="${ module.classes | join(" ") }" id="module_$safename">
                     <h3>

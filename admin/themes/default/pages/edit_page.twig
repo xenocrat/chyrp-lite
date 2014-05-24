@@ -3,9 +3,6 @@
 {% block title %}${ "Edit &#8220;%s&#8221;" | translate | format(page.title | escape) }{% endblock %}
 
 {% block content %}
-			<div class="buttons confirmation">
-            	${ page.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete">'~ ("Delete" | translate), null, null, "button boo") }
-        	</div>
             <h1>${ "Editing &#8220;%s&#8221;" | translate | format(page.title) }</h1>
             <form id="edit_form" action="{% admin "update_page" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <fieldset>
