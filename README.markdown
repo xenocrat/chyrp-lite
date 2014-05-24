@@ -12,7 +12,7 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * Post previews.
 * RedactorJS.
 * Chat feather.
-* jQueryUI (soon).
+* jQueryUI.
 * flexNav.
 * Firecrest theme.
 * PNG admin icons.
@@ -38,7 +38,7 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * &lt;br&gt; elements banished from themes, feathers, modules.
 
 ### Added
-* Refurbished admin theme: responsive HTML5 (coming soon).
+* Refurbished admin theme: responsive HTML5 *(in progress)*.
 * Default HTML5 responsive theme: Blossom.
 * Modules:
   - Lightbox
