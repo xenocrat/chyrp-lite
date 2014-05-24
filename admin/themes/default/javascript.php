@@ -24,7 +24,7 @@ var Write = {
 
         // Collect feather names and prepare to serialize
         var feathers = new Array();
-        $("#sub_nav").children().each(function() {
+        $("#sub_nav").children("[id]").each(function() {
             feathers[feathers.length] = $(this).attr("id");
         });
         var list = { list: feathers };
