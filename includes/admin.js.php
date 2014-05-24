@@ -122,9 +122,9 @@ function toggle_options() {
 function validate_slug() {
     $("input#slug").keyup(function(e){
         if (/^([a-zA-Z0-9\-\._:]*)$/.test($(this).val()))
-            $(this).css("background", "");
+            $(this).removeClass("error");
         else
-            $(this).css("background", "#ffdddd");
+            $(this).addClass("error");
     })
 }
 

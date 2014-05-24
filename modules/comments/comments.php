@@ -448,11 +448,11 @@
         }
 
         static function manage_posts_column_header() {
-            echo '<th>'.__("Comments", "comments").'</th>';
+            echo '<th class="post_comments">'.__("Comments", "comments").'</th>';
         }
 
         static function manage_posts_column($post) {
-            echo '<td align="center"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
+            echo '<td class="post_comments"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
         }
 
         static function scripts($scripts) {

@@ -33,3 +33,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+#: feathers/photo/photo.php:11
+#, php-format
+msgid "(Max. file size: %s)"
+msgstr ""

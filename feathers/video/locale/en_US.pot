@@ -35,7 +35,7 @@ msgstr ""
 
 #: feathers/video/video.php:12
 #, php-format
-msgid "<small>(Max. file size: %s)</small>"
+msgid "(Max. file size: %s)"
 msgstr ""
 
 #: feathers/video/video.php:125

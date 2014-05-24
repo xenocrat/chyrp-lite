@@ -7,8 +7,8 @@
                 <fieldset>
 {% include "partials/post_fields.twig" %}
 
-                    <input type="hidden" name="feather" value="${ feather.safename | escape(true) }" id="feather" />
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                    <input type="hidden" name="feather" value="${ feather.safename | escape(true) }" id="feather">
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

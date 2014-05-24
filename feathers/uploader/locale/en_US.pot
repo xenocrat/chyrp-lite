@@ -45,3 +45,7 @@ msgstr ""
 msgid "Failed to upload file."
 msgstr ""
 
+#: feathers/file/file.php:8
+#, php-format
+msgid "(Max. file size: %s)"
+msgstr ""

@@ -223,7 +223,7 @@ msgid "Body"
 msgstr ""
 
 #: modules/comments/info.yaml:7
-msgid "Adds commenting functionality to posts, including Akismet spam protection, auto-reloading, pagination, threading etc."
+msgid "Adds commenting functionality to posts, including Akismet spam protection, auto-reloading, and pagination."
 msgstr ""
 
 #: modules/comments/pages/admin/manage_spam.twig:48

@@ -9,7 +9,7 @@
                     <h2>${ "Settings" | translate }</h2>
                     <p>
                         <label for="login">${ "Login" | translate }</label>
-                        <input class="text" type="text" name="login" value="" id="full_name" />
+                        <input class="text" type="text" name="login" value="" id="full_name">
                     </p>
                     <p>
                         <label for="group">${ "Group" | translate }</label>
@@ -22,37 +22,31 @@
                     </p>
                     <p>
                         <label for="password1">${ "Password" | translate }</label>
-                        <input class="text" type="password" name="password1" value="" id="password1" />
+                        <input class="text" type="password" name="password1" value="" id="password1">
                     </p>
                     <p>
                         <label for="password2">${ "Confirm" | translate }</label>
-                        <input class="text" type="password" name="password2" value="" id="password2" />
+                        <input class="text" type="password" name="password2" value="" id="password2">
                     </p>
 
                     <h2>${ "Information" | translate }</h2>
                     <p>
                         <label for="full_name">${ "Full Name" | translate }</label>
-                        <input class="text" type="text" name="full_name" value="" id="full_name" />
+                        <input class="text" type="text" name="full_name" value="" id="full_name">
                     </p>
                     <p>
                         <label for="email">${ "E-Mail" | translate }</label>
-                        <input class="text" type="text" name="email" value="" id="email" />
+                        <input class="text" type="text" name="email" value="" id="email">
                     </p>
                     <p>
                         <label for="website">${ "Website" | translate }</label>
-                        <input class="text" type="text" name="website" value="" id="website" />
+                        <input class="text" type="text" name="website" value="" id="website">
                     </p>
-
-
                     ${ trigger.call("new_user_fields") }
-
-                    <br />
-
                     <p>
-                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Add User" | translate }</button>
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Add User" | translate }</button>
                     </p>
-
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

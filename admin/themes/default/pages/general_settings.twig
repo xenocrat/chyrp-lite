@@ -7,30 +7,30 @@
                 <fieldset>
                     <p>
                         <label for="name">${ "Site Name" | translate }</label>
-                        <input class="text" type="text" name="name" value="${ site.name | escape }" id="name" />
+                        <input class="text" type="text" name="name" value="${ site.name | escape }" id="name">
                     </p>
                     <p>
                         <label for="description">${ "Description" | translate }</label>
-                        <textarea name="description" rows="2" cols="40">${ site.description | escape(false, false) }</textarea>
+                        <textarea name="description" rows="2">${ site.description | escape(false, false) }</textarea>
                     </p>
                     <p>
                         <label for="chyrp_url">${ "Chyrp URL" | translate }</label>
-                        <input class="text" type="text" name="chyrp_url" value="${ site.chyrp_url | escape }" id="chyrp_url" />
+                        <input class="text" type="text" name="chyrp_url" value="${ site.chyrp_url | escape }" id="chyrp_url">
                     </p>
                     <p>
                         <label for="url">
                             ${ "Alternate URL" | translate }
                             <span class="sub">${ "(optional)" | translate }</span>
                         </label>
-                        <input class="text" type="text" name="url" value="{% if site.url != site.chyrp_url %}${ site.url | escape }{% endif %}" id="url" />
-                        <a href="{% admin "help&id=alternate_urls" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                        <input class="text" type="text" name="url" value="{% if site.url != site.chyrp_url %}${ site.url | escape }{% endif %}" id="url">
+                        <a href="{% admin "help&id=alternate_urls" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
                         <small>
                             ${ "Enter an alternate address here if you want your homepage URL to be different from the URL where Chyrp is normally available." | translate }
                         </small>
                     </p>
                     <p>
                         <label for="email">${ "Contact E-Mail Address" | translate }</label>
-                        <input class="text" type="text" name="email" value="${ site.email | escape }" id="email" />
+                        <input class="text" type="text" name="email" value="${ site.email | escape }" id="email">
                     </p>
                     <p>
                         <label for="timezone">${ "What time is it?" | translate }</label>
@@ -51,17 +51,15 @@
                     </p>
                     <p>
                         <label for="check_updates">${ "Check for Updates?" | translate }</label>
-                        <input class="checkbox" type="checkbox" name="check_updates" id="check_updates"${ site.check_updates | checked } />
+                        <input class="checkbox" type="checkbox" name="check_updates" id="check_updates"${ site.check_updates | checked }>
                         <small>
                             ${ "Check for the availability of new Chyrp versions." | translate }
                         </small>
                     </p>
-
                     <p class="buttons">
-                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
-
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

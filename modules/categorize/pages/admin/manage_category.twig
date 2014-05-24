@@ -3,45 +3,51 @@
 {% block title %}${ "Manage Categories" | translate("categorize") }{% endblock %}
 
 {% block content %}
-    <h1>${ "Manage Categories" | translate("categorize") }</h1>
         <form class="detail" action="index.php" method="get" accept-charset="utf-8">
             <fieldset>
-                <input type="hidden" name="action" value="manage_categorize" />
+                <input type="hidden" name="action" value="manage_categorize">
                 {% if visitor.group.can("manage_categorize") %}
-                <a href="{% admin "add_category" %}" class="button yay right"> 
-                    <img src="$theme_url/images/icons/add.svg" alt="add" /> ${ "Add Category" | translate("categorize") }
-                </a>
+                <div class="detail_single">
+                    <a href="{% admin "add_category" %}" class="button yay"> 
+                        <img src="$theme_url/images/icons/add.svg" alt="add"> ${ "Add Category" | translate("categorize") }
+                    </a>
+                </div>
                 {% endif %}
             </fieldset>
         </form>
-        <br />
-        <table border="0" cellspacing="0" cellpadding="0" class="wide">
+        <h2>${ "Manage Categories" | translate("categorize") }</h2>
+        <table>
             <thead> 
                 <tr class="head">
-                    {# <th class="toggler center"></th> #}
-                    <th class="center" width="5">Shown</th>
-                    <th>${ "Name" | translate("categorize") }</th>
+                    <th class="category_show">${ "Show" | translate("categorize") }</th>
+                    <th class="category_name">${ "Name" | translate("categorize") }</th>
                     ${ trigger.call("manage_comments_column_header") }
-                    <th colspan="2">${ "Controls" | translate }</th>
+                    <th class="controls" colspan="2">${ "Controls" | translate }</th>
                 </tr>   
             </thead>
             <tbody> 
                 {% for category in categorize %}
                 <tr id="category_$cat.id">
-                    <td class="center show_on_home">
-                        {% if category.show_on_home %}<img src="$theme_url/images/icons/success.svg">
+                    <td class="category_show">
+                        {% if category.show_on_home %}<img class="emblem" src="$theme_url/images/icons/success.svg">
                         {% else %}&nbsp;
                         {% endif %}
                     </td>
-                    <td class="name">
+                    <td class="category_name main">
                         ${ category.name | truncate }
                     </td>
-                    <td class="controls"><a href="{% admin "edit_category&id="~ category.id %}"><img src="$theme_url/images/icons/edit.svg" alt="edit" /></a>
-                    <td class="controls"><a href="{% admin "delete_category&id="~ category.id %}"><img src="$theme_url/images/icons/delete.svg" alt="delete" /></a>
+                    <td class="controls">
+                        <a href="{% admin "edit_category&id="~ category.id %}"><img src="$theme_url/images/icons/edit.svg"
+                        alt="${ "edit" | translate }"></a>
+                    </td>
+                    <td class="controls">
+                        <a href="{% admin "delete_category&id="~ category.id %}"><img src="$theme_url/images/icons/delete.svg"
+                        alt="${ "delete" | translate }"></a>
+                    </td>
                 </tr>
                 {% else %}
-                <tr class="last">
-                    <td colspan="6" class="center"><span class="sub">${ "(none)" | translate }</span></td>
+                <tr>
+                    <td colspan="100%"><span class="sub">${ "(none)" | translate }</span></td>
                 </tr>
                 {% endfor %}
             </tbody>

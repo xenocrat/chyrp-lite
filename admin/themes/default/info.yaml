@@ -1,7 +1,7 @@
 name: Default
-version: 2.2
-url: http://chyrp.net/
-description: The default theme provided with Chyrp, which all themes fallback onto.
+version: 3.0
+url: http://chyrplite.net/
+description: The default theme provided with Chyrp Lite.
 author:
-  name: Alex Suraci
-  url: http://toogeneric.com/
+  name: Daniel Pimley
+  url: http://pimley.net/

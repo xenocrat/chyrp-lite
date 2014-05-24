@@ -10,15 +10,12 @@
                         <h2>${ "Excerpt" | translate }</h2>
                         $post.excerpt
                     </blockquote>
-                    <br />
-
-                    <div class="center">
+                    <div class="confirmation">
                         <button name="destroy" value="indubitably" class="center boo">${ "DESTROY!" | translate }</button>
                         <button name="destroy" value="bollocks" type="submit" class="yay">${ "Cancel" | translate }</button>
                     </div>
-
-                    <input type="hidden" name="id" value="$post.id" id="id" />
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                    <input type="hidden" name="id" value="$post.id" id="id">
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

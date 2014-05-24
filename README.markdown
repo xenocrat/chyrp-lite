@@ -3,7 +3,9 @@ Chyrp Lite
 
 Chyrp Lite is an ultra-lightweight fork of the Chyrp blogging engine. Chyrp Lite is a work-in-progress and a personal project tailored to my specific needs, but you are free to use it if you think it also meets your needs. If you are looking for more features, you may want to consider [Chyrp](http://chyrp.net/) instead.
 
-Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Specifically, Chyrp Lite deviates from Chyrp as follows:
+Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. 
+
+Specifically, Chyrp Lite deviates from Chyrp as follows:
 
 ### Removed
 * Bookmarklet.
@@ -11,7 +13,7 @@ Chyrp Lite is intended to minimise complexity and client-side footprint for user
 * RedactorJS.
 * Chat feather.
 * jQueryUI (soon).
-* flexNav (soon).
+* flexNav.
 * Firecrest theme.
 * PNG admin icons.
 * Modules:
@@ -31,10 +33,12 @@ Chyrp Lite is intended to minimise complexity and client-side footprint for user
 * Recaptcha library relocated to module.
 * Markdown library updated to 1.4.1.
 * CSS-styled ajax loader, no default widgets.
+* Admin theme properly separated from core admin functions.
 * Various code cleanups and bug fixes.
+* &lt;br&gt; elements banished from themes, feathers, modules.
 
 ### Added
-* New HTML5 admin theme (coming soon).
+* Refurbished admin theme: responsive HTML5 (coming soon).
 * Default HTML5 responsive theme: Blossom.
 * Modules:
   - Lightbox

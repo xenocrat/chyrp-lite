@@ -1,6 +1,6 @@
                         ${ trigger.call("before_post_fields", feather) }
                         {% for field in feather.fields %}
-                        <p>
+                        <p class="main_options">
                             <label for="${ field.attr }_field">
                                 $field.label
                                 {% if field.optional %}
@@ -21,7 +21,7 @@
                             <em>Current file name: <strong>${ post.filename | escape('') }</strong></em>
                             {% endif %}
                             {% elseif field.type == "text_block" %}
-                            <textarea class="wide{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" rows="${ field.rows | fallback(12) }" name="$field.attr" id="${ field.attr }_field" cols="50">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
+                            <textarea {% if field.classes %} class="${ field.classes | join(" ") }"{% endif %} rows="${ field.rows | fallback(12) }" name="$field.attr" id="${ field.attr }_field">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
                             {% elseif field.type == "checkbox" %}
                             <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr"{% if field.checked %}checked="checked"{% endif %} id="${ field.attr }_field" />
                             {% elseif field.type == "select" %}
@@ -37,7 +37,7 @@
                         ${ trigger.call("after_post_fields", feather) }
                         <div id="more_options" class="more_options">
                             {% if visitor.group.can("add_post") %}
-                            <p>
+                            <p class="more_options_option">
                                 <label for="status">${ "Status" | translate }</label>
                                 <select name="status" id="status">
                                     {% if route.action == "edit_post" %}
@@ -57,24 +57,26 @@
                                 </select>
                             </p>
                             {% endif %}
-                            <p>
-                                <label for="pinned">${ "Pinned?" | translate }</label>
+                            <p class="more_options_option">
+                                <label for="pinned">
+                                    ${ "Pinned?" | translate }
+                                    <span class="sub">${ "(shows this post above all others)" | translate }</span>
+                                </label>
                                 <input type="checkbox" name="pinned" id="pinned"{% if post.pinned %} checked="checked"{% endif %}/>&nbsp;
-                                <small>${ "(shows this post above all others)" | translate }</small>
                             </p>
-                            <p>
+                            <p class="more_options_option">
                                 <label for="slug">
                                     ${ "Slug" | translate }
                                     <a href="{% admin "help&id=slugs" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
                                 </label>
                                 <input class="text" type="text" name="slug" value="${ post.slug | escape }" id="slug" />
                             </p>
-                            <p>
+                            <p class="more_options_option">
                                 <label for="created_at">${ "Timestamp" | translate }</label>
                                 <input class="text" type="text" name="created_at" value="${ post.created_at | fallback(now | date("r")) | strftime }" id="created_at" />
                                 <input type="hidden" name="original_time" value="${ post.created_at | fallback(now | date("r")) | strftime }" />
                             </p>
-                            <p>
+                            <p class="more_options_option">
                                 <label for="trackbacks">
                                     ${ "Trackbacks" | translate }
                                     <a href="{% admin "help&id=trackbacks" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
@@ -83,7 +85,7 @@
                                 <input class="text" type="text" name="trackbacks" value="" id="trackbacks" />
                             </p>
                             {% for field in options %}
-                            <p>
+                            <p class="more_options_option">
                                 <label for="${ field.attr | replace("[", "_") | replace("]", "") }">
                                     $field.label
                                     {% if field.help %}
@@ -111,25 +113,25 @@
                                 $field.extra
                             </p>
                             {% endfor %}
-                            <div class="clear"></div>
+                            <hr>
                         </div>
-                        <div class="buttons">
+                        <div class="buttons confirmation">
                             {% if route.action == "edit_post" %}
                             {% if visitor.group.can("add_post") and post.status == "draft" %}
-                            <button type="submit" class="yay right" accesskey="s" id="publish" name="publish">
+                            <button type="submit" class="yay" accesskey="s" id="publish" name="publish">
                                 <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Publish" | translate }
                             </button>
                             {% endif %}
-                            <button type="submit" class="right" accesskey="s" id="save">
+                            <button type="submit" accesskey="s" id="save">
                                 <img src="$theme_url/images/icons/save.svg" alt="success" />${ "Save" | translate }
                             </button>
                             {% else %}
                             {% if visitor.group.can("add_post") %}
-                            <button type="submit" class="yay right" accesskey="s" id="publish">
+                            <button type="submit" class="yay" accesskey="s" id="publish">
                                 <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Publish" | translate }
                             </button>
                             {% endif %}
-                            <button type="submit" class="right" accesskey="s" id="save" name="draft" value="true">
+                            <button type="submit" accesskey="s" id="save" name="draft" value="true">
                                 <img src="$theme_url/images/icons/save.svg" alt="success" />${ "Save" | translate }
                             </button>
                             {% endif %}

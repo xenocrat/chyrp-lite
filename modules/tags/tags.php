@@ -16,7 +16,6 @@
         public function admin_head() {
             $config = Config::current();
 ?>
-        <link rel="stylesheet" href="<?php echo $config->chyrp_url; ?>/modules/tags/admin.css" type="text/css" media="screen" />
         <script type="text/javascript">
         <?php $this->tagsJS(); ?>
         </script>
@@ -33,7 +32,7 @@
                 $selected = ($post and isset($post->tags[$tag["name"]])) ?
                                 ' class="tag_added"' :
                                 "" ;
-                $selector.= "\t\t\t\t\t\t\t\t".'<a href="javascript:add_tag(\''.addslashes($tag["name"]).'\')"'.$selected.'>'.$tag["name"].'</a>'."\n";
+                $selector.= "\t\t\t\t\t\t\t\t".'<a class="tag" href="javascript:add_tag(\''.addslashes($tag["name"]).'\')"'.$selected.'>'.$tag["name"].'</a>'."\n";
             }
 
             $selector.= "\t\t\t\t\t\t\t</span><br /><br />";
@@ -101,11 +100,11 @@
         }
 
         public function manage_posts_column_header() {
-            echo '<th class="tags">'.__("Tags", "tags").'</th>';
+            echo '<th class="post_tags">'.__("Tags", "tags").'</th>';
         }
 
         public function manage_posts_column($post) {
-            echo '<td class="tags">'.implode(" ", $post->linked_tags).'</td>';
+            echo '<td class="post_tags">'.implode(" ", $post->linked_tags).'</td>';
         }
 
         static function manage_nav($navs) {
@@ -507,7 +506,7 @@
 
             $linked = array();
             foreach ($tags as $tag => $clean)
-                $linked[] = '<a href="'.url("tag/".urlencode($clean), MainController::current()).'" rel="tag">'.$tag.'</a>';
+                $linked[] = '<a class="tag" href="'.url("tag/".urlencode($clean), MainController::current()).'" rel="tag">'.$tag.'</a>';
 
             return $linked;
         }
@@ -641,40 +640,6 @@
                 }).live("mouseout", function(){
                     $(this).find(".controls").css("opacity", 0)
                 })
-
-                $(".tag_cloud span a").draggable({
-                    zIndex: 100,
-                    revert: true
-                });
-
-                $(".post_tags li:not(.toggler)").droppable({
-                    accept: ".tag_cloud span a",
-                    tolerance: "pointer",
-                    activeClass: "active",
-                    hoverClass: "hover",
-                    drop: function(ev, ui) {
-                        var post_id = $(this).attr("id").replace(/post-/, "");
-                        var self = this;
-
-                        $.ajax({
-                            type: "post",
-                            dataType: "json",
-                            url: "<?php echo $config->chyrp_url; ?>/includes/ajax.php",
-                            data: {
-                                action: "tag_post",
-                                post: post_id,
-                                name: $(ui.draggable).text()
-                            },
-                            beforeSend: function(){
-                                $(self).loader()
-                            },
-                            success: function(json){
-                                $(self).loader(true)
-                                $(document.createElement("a")).attr("href", json.url).addClass("tag dropped").text(json.tag).insertBefore($(self).find(".edit_tag"))
-                            }
-                        });
-                    }
-                });
             })
 
             function add_tag(name) {

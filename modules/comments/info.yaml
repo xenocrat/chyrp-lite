@@ -1,7 +1,7 @@
 name: Comments
 url: http://chyrplite.net/
 version: 1.0
-description: Adds commenting functionality to posts, including Akismet spam protection, auto-reloading, pagination, threading etc.
+description: Adds commenting functionality to posts, including Akismet spam protection, auto-reloading, and pagination.
 author:
   name: Chyrp Team
   url: http://chyrp.net/

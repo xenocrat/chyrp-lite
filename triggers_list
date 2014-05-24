@@ -1020,3 +1020,13 @@ Called from:
 	includes/model/Post.php on line 520
 Arguments:
 	$this
+
+manage_groups_column_header
+--------------------------
+Called from:
+	admin/themes/default/pages/manage_groups.twig on line 29
+
+manage_groups_column
+--------------------------
+Called from:
+	admin/themes/default/pages/manage_roups.twig on line 48

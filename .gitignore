@@ -1,2 +1,5 @@
 *.sublime-project
 *.sublime-workspace
+*.idraw
+
+*.psd

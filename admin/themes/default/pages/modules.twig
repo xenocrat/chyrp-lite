@@ -3,75 +3,72 @@
 {% block title %}${ "Modules" | translate }{% endblock %}
 
 {% block content %}
-            <div class="enable module left">
-                <h2>${ "Enabled" | translate }</h2>
-                <ul class="extend">
-                    {% for safename, module in enabled_modules | items %}
-                    <li class="${ module.classes | join(" ") }" id="module_$safename">
-                        <a class="$safename info_link" href="javascript:void(0)"><img src="$theme_url/images/icons/info.svg" class="info right" /></a>
-                        {% if module.help %}
-                        <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
-                        {% endif %}
-                        ${ "<a href=\"%s\">%s</a> v%s <span class=\"sub\">by %s</span>" | translate | format(module.url, module.name | translate(safename), module.version, module.author.link) }
-                        <div class="expand">
-                            <div class="description{% if module.dependencies_needed %} expanded{% endif %}">
-                                $module.description {# translation is done in the controller #}
-
-                                <p class="dependencies_message"{% if not module.dependencies_needed %} style="display: none"{% endif %}>
-                                    ${ "This Module requires the following Modules to be enabled:" | translate }
-                                </p>
-                                <ul class="dependencies_list"{% if not module.dependencies_needed %} style="display: none"{% endif %}>
-                                    {% for dependency in module.dependencies_needed %}
-                                    <li class="$dependency">$dependency</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            {% if not module.dependencies_needed %}
-                            <a class="enable_button mobile" href="{% admin "disable&module="~safename %}">${ "Disable" | translate }</a>
-                            <noscript>
-                                <a class="enable_button desktop" href="{% admin "disable&module="~safename %}">${ "Disable" | translate }</a>
-                            </noscript>
-                            {% endif %}
-                        </div>
-                    </li>
+            <h2>${ "Modules" | translate }</h2>
+            <ul id="modules_enabled" class="extend modules">
+                <label for="modules_enabled">${ "Enabled" | translate }</label>
+                {% for safename, module in enabled_modules | items %}
+                <li class="${ module.classes | join(" ") }" id="module_$safename">
+                    <h3>
+                        <a class="emblem module_toggle" href="{% admin "disable&module="~safename %}" title="${ "Disable" | translate }">
+                            <img src="$theme_url/images/icons/deny.svg" alt="${ "Disable" | translate }">
+                        </a>
+                        <img class="emblem module_status" src="$theme_url/images/icons/success.svg" alt="Conflicts: 0" title="${ "Status" | translate }">
+                        <a class="emblem module_author" href="$module.author.url">
+                            <img src="$theme_url/images/icons/info.svg" alt="${ module.author.url | escape }">
+                        </a>
+                        ${ "<a href=\"%s\">%s</a> v%s" | translate | format(module.url, module.name | translate(safename), module.version) }
+                    </h3>
+                    {% if module.help %}
+                    <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
+                    {% endif %}
+                    <p class="module_description">
+                    $module.description {# translation is done in the controller #}
+                    {% if module.dependencies_needed %}
+                    <p class="module_dependencies_message">
+                        ${ "This Module requires the following Modules to be enabled:" | translate }
+                    </p>
+                    <ul class="module_dependencies_list">
+                    {% for dependency in module.dependencies_needed %}
+                        <li class="$dependency">$dependency</li>
                     {% endfor %}
-                </ul>
-            </div>
-            <div class="disable module right">
-                <h2>${ "Disabled" | translate }</h2>
-                <ul class="extend">
-                    {% for safename, module in disabled_modules | items %}
-                    <li class="${ module.classes | join(" ") }" id="module_$safename">
-                        <a class="$safename info_link" href="javascript:void(0)"><img src="$theme_url/images/icons/info.svg" class="info right" /></a>
-                        {% if module.help %}
-                        <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" /></a>
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            <ul id="modules_disabled" class="extend modules">
+                <label for="modules_disabled">${ "Disabled" | translate }</label>
+                {% for safename, module in disabled_modules | items %}
+                <li class="${ module.classes | join(" ") }" id="module_$safename">
+                    <h3>
+                        {% if not module.dependencies_needed %}
+                        <a class="emblem module_toggle" href="{% admin "enable&module="~safename %}" title="${ "Enable" | translate }">
+                            <img src="$theme_url/images/icons/add.svg" alt="${ "Enable" | translate }">
+                        </a>
                         {% endif %}
-                        ${ "<a href=\"%s\">%s</a> v%s <span class=\"sub\">by %s</span>" | translate | format(module.url, module.name | translate(safename), module.version, module.author.link) }
-                        <div class="expand">
-                            <div class="description{% if module.dependencies_needed %} expanded{% endif %}">
-                                $module.description {# translation is done in the controller #}
-
-                                <p class="dependencies_message"{% if not module.dependencies_needed %} style="display: none"{% endif %}>
-                                    ${ "This Module requires the following Modules to be enabled:" | translate }
-                                </p>
-                                <ul class="dependencies_list"{% if not module.dependencies_needed %} style="display: none"{% endif %}>
-                                    {% for dependency in module.dependencies_needed %}
-                                    <li class="$dependency">$dependency</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            {% if not module.dependencies_needed %}
-                            <a class="disable_button mobile" href="{% admin "enable&module="~safename %}">${ "Enable" | translate }</a>
-                            <noscript>
-                                <a class="disable_button desktop" href="{% admin "enable&module="~safename %}">${ "Enable" | translate }</a>
-                            </noscript>
-                            {% endif %}
-                        </div>
-                    </li>
+                        <img class="emblem module_status" src="$theme_url/images/icons/success.svg" alt="Conflicts: 0" title="${ "Status" | translate }">
+                        <a class="emblem module_author" href="$module.author.url">
+                            <img src="$theme_url/images/icons/info.svg" alt="${ module.author.url | escape }">
+                        </a>
+                        ${ "<a href=\"%s\">%s</a> v%s" | translate | format(module.url, module.name | translate(safename), module.version) }
+                    </h3>
+                    {% if module.help %}
+                    <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
+                    {% endif %}
+                    <p class="module_description">
+                    $module.description {# translation is done in the controller #}
+                    {% if module.dependencies_needed %}
+                    <p class="module_dependencies_message">
+                        ${ "This Module requires the following Modules to be enabled:" | translate }
+                    </p>
+                    <ul class="module_dependencies_list">
+                    {% for dependency in module.dependencies_needed %}
+                        <li class="$dependency">$dependency</li>
                     {% endfor %}
-                </ul>
-            </div>
-            <div class="clear"></div>
-            <br />
-            <a class="button right" href="http://chyrp.net/extend/type/module">${ "Get More Modules &rsaquo;" | translate }</a>
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            <hr class="extend">
 {% endblock %}

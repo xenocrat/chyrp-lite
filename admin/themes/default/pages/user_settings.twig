@@ -7,17 +7,17 @@
                 <fieldset>
                     <p>
                         <label for="can_register">${ "Registration" | translate }</label>
-                        <input class="checkbox" type="checkbox" name="can_register" id="can_register"${ site.can_register | checked } />
+                        <input class="checkbox" type="checkbox" name="can_register" id="can_register"${ site.can_register | checked }>
                         ${ "Allow people to register" | translate }
                     </p>
                     <p>
                         <label for="email_activation">${ "Activate by email" | translate }</label>
-                        <input class="checkbox" type="checkbox" name="email_activation" id="email_activation"${ site.email_activation | checked } />
+                        <input class="checkbox" type="checkbox" name="email_activation" id="email_activation"${ site.email_activation | checked }>
                         ${ "Should users activate by email?" | translate }
                     </p>
                     <p>
                         <label for="enable_recaptcha">${ "Enable Recaptcha" | translate }</label>
-                        <input class="checkbox" type="checkbox" name="enable_recaptcha" id="enable_recaptcha"${ site.enable_recaptcha | checked } />
+                        <input class="checkbox" type="checkbox" name="enable_recaptcha" id="enable_recaptcha"${ site.enable_recaptcha | checked }>
                         ${ "Use recaptcha to prevent bots from registering." | translate }
                     </p>
                     <p>
@@ -36,12 +36,10 @@
                             {% endfor %}
                         </select>
                     </p>
-
                     <p class="buttons">
-                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success" />${ "Update" | translate }</button>
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
-
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>
             </form>
 {% endblock %}
