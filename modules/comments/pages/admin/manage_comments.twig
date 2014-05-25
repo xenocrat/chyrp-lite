@@ -14,7 +14,6 @@
                         <input class="text" type="text" name="query" value="${ GET.query | escape }" id="query">
                         <button type="submit" class="inline">${ "Search" | translate }</button>
                     </div>
-                    <div class="clear"></div>
                 </fieldset>
             </form>
             <h2>{% if GET.query %}${ "Search Results" | translate }{% else %}${ "Last 25 Comments" | translate("comments") }{% endif %}</h2>

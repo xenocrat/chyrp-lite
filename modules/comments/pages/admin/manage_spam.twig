@@ -72,7 +72,6 @@
                 </div>
             </form>
             {% if comments.paginated and comments.pages > 1 %}
-            <br>
             <div class="pagination">
                 $comments.prev_link
                 <span class="pages">${ "Page %d of %d" | translate | format(comments.page, comments.pages) }</span>

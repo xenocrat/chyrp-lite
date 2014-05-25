@@ -75,7 +75,6 @@
                 </div>
             </form>
             {% if posts.paginated and posts.pages > 1 %}
-            <div class="clear"></div>
             <div class="pagination">
                 $posts.prev_link
                 <span class="pages">${ "Page %d of %d" | translate | format(posts.page, posts.pages) }</span>

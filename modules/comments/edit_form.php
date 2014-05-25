@@ -7,15 +7,15 @@
     <div id="more_options_<?php echo $comment->id; ?>" class="more_options" style="display: none">
         <p>
             <label for="author"><?php echo __("Author"); ?></label>
-            <input class="text" type="text" name="author" value="<?php echo fix($comment->author); ?>" id="author" />
+            <input class="text" type="text" name="author" value="<?php echo fix($comment->author); ?>" id="author">
         </p>
         <p>
             <label for="author_url"><?php echo __("Author URL", "comments"); ?></label>
-            <input class="text" type="text" name="author_url" value="<?php echo fix($comment->author_url); ?>" id="author_url" />
+            <input class="text" type="text" name="author_url" value="<?php echo fix($comment->author_url); ?>" id="author_url">
         </p>
         <p>
             <label for="author_email"><?php echo __("Author E-Mail", "comments"); ?></label>
-            <input class="text" type="text" name="author_email" value="<?php echo fix($comment->author_email); ?>" id="author_email" />
+            <input class="text" type="text" name="author_email" value="<?php echo fix($comment->author_email); ?>" id="author_email">
         </p>
         <p>
             <label for="status"><?php echo __("Status"); ?></label>
@@ -27,15 +27,13 @@
         </p>
         <p>
             <label for="created_at"><?php echo __("Timestamp"); ?></label>
-            <input class="text" type="text" name="created_at" value="<?php echo when("F jS, Y H:i:s", $comment->created_at); ?>" id="created_at" />
+            <input class="text" type="text" name="created_at" value="<?php echo when("F jS, Y H:i:s", $comment->created_at); ?>" id="created_at">
         </p>
-        <div class="clear"></div>
     </div>
-    <br />
-    <input type="hidden" name="id" value="<?php echo fix($comment->id); ?>" id="id" />
-    <input type="hidden" name="ajax" value="true" id="ajax" />
+    <input type="hidden" name="id" value="<?php echo fix($comment->id); ?>" id="id">
+    <input type="hidden" name="ajax" value="true" id="ajax">
     <div class="buttons">
-        <button><?php echo __("Update"); ?></button> <?php echo __("or"); ?>
+        <button><?php echo __("Update"); ?></button>
         <a href="javascript:void(0)" id="comment_cancel_edit_<?php echo $comment->id; ?>" class="cancel"><?php echo __("Cancel"); ?></a>
     </div>
 </form>

@@ -149,7 +149,8 @@ small a, .small a, .sub a {                 color: #b3b5b5 }
                                             border: 1px solid #dfdfdf;
                                             border-top: none;
                                             position: relative }
-div.pagination {                            text-align: center;
+div.pagination {                            clear: both;
+                                            text-align: center;
                                             margin-top: 4em }
 a.prev_page,
 a.next_page {                               min-width: 10em }
