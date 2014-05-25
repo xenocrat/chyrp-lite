@@ -8,6 +8,6 @@
       {% endif %}
       <section{% if post.caption | length > 1000 %} class="columnized"{% endif %}>
         ${ post.caption | read_more("…more") }
-        ${ feathers['video'].embed_tag_for(post, 440) }
+        $post.video_player
       </section>
 {% endblock %}

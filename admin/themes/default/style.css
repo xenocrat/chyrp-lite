@@ -216,7 +216,8 @@ textarea {                                  -moz-box-sizing: border-box;
                                             font-size: 1.25em;
                                             padding: 0.2em;
                                             border: 1px solid #dfdfdf;
-                                            background-color: #ffffff }
+                                            background-color: #ffffff;
+/* Removes shadow from Mobile Safari -> */  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus {              border-color: #1e57ba;

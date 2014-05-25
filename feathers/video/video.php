@@ -26,7 +26,7 @@
         public function submit() {
             if (!isset($_POST['filename'])) {
                 if (isset($_FILES['video']) and $_FILES['video']['error'] == 0)
-                    $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv"));
+                    $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
                 else
                     error(__("Error"), __("Couldn't upload video file.", "video"));
             } else
@@ -43,7 +43,7 @@
             if (!isset($_POST['filename']))
                 if (isset($_FILES['video']) and $_FILES['video']['error'] == 0) {
                     $this->delete_file($post);
-                    $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv"));
+                    $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
                 } else
                     $filename = $post->filename;
             else {
@@ -92,6 +92,8 @@
                     return "video/3gpp";
                 case "mkv":
                     return "video/x-matroska";
+                case "mov":
+                    return "video/quicktime";
                 default:
                     return "application/octet-stream";
             }

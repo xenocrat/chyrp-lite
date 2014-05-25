@@ -321,9 +321,6 @@ label {                                             display: block;
     div#main > article.page {                       padding-bottom: 2em }
     div.standalone {                                margin-bottom: 0em;
                                                     padding-bottom: 2em }
-    article.audio audio.audio_with_controls,
-    article.audio  div.jp-audio {                   width: 100%;
-                                                    margin: 1em 0em }
 article > header {                                  display: block;
                                                     width: 100%;
                                                     clear: both;
@@ -344,6 +341,9 @@ article > footer {                                  display: block;
                                                     padding: 0em;
                                                     border: none }
     article > footer:last-child {                   margin: 0em }
+
+article.video video, article.audio audio {          width: 100%;
+                                                    max-width: 1280px }
 a {                                                 border-bottom: 1px transparent solid;
                                                     -webkit-transition-property: color, border;
                                                     -webkit-transition-duration: 500ms;
