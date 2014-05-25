@@ -99,7 +99,10 @@ ul {                                                list-style: none;
     ul.navigation li.parent {                       border-bottom-style: dashed }
     ul.sidebar_nav li {                             text-align: left;
                                                     font-size: 0.75em }
-    ul.tail_nav li {                                text-align: center }
+    ul.tail_nav li {                                text-align: center;
+                                                    padding-top: 0em;
+                                                    padding-bottom: 0em;
+                                                    line-height: 3em }
     ul.archive li {                                 margin: 0em 0em 1em 2em }
     ol.comments {                                   padding: 0em;
                                                     margin: 0em }
@@ -473,6 +476,27 @@ img {                                               border-style: none;
     div#main > article {                            padding: 1em 1em 2.2em 1em }
     div.standalone {                                padding: 1em }
     ul.archive li {                                 margin: 0em 0em 0em 1em }
+    ul.tail_nav.mobile_nav {                        display: block;
+                                                    position: fixed;
+                                                    bottom: 0px;
+                                                    left: 0px;
+                                                    width: 100%;
+                                                    height: auto;
+                                                    margin: 0em;
+                                                    padding: 0em;
+                                                    border-bottom: none;
+                                                    border-radius: 0em }
+    ul.tail_nav.mobile_nav li {                     height: 0em;
+                                                    overflow: hidden;
+                                                    border-bottom: none;
+                                                    -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    -moz-transition: height 1s ease 0s;
+                                                    -webkit-transition: height 1s ease 0s;
+                                                    transition: height 1s ease 0s }
+    ul.tail_nav.mobile_nav.on li,
+    ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
+                                                    border-bottom: 1px solid #d2d9d4 }
 }
 
 @media screen and (min-width: 1200px) {
