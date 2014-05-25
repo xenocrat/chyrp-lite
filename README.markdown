@@ -1,49 +1,44 @@
 Chyrp Lite
 ==========
 
-Chyrp Lite is an ultra-lightweight fork of the Chyrp blogging engine. Chyrp Lite is a personal project tailored to my specific needs, but you are very welcome to use it too! If you are looking for more features, you may want to consider [Chyrp](http://chyrp.net/) instead.
+Chyrp Lite is an ultra-lightweight fork of the Chyrp blogging engine. Chyrp Lite is a personal project tailored to my specific needs, but you are very welcome to use it too! If you are looking for more features than you see here, you may want to consider [Chyrp](http://chyrp.net/) instead.
 
 Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. 
 
+## What can Chyrp Lite do for me?
+Chyrp Lite is a blogging engine that you can use to run your own blog on your own server with minimal fuss. You can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. Chyrp Lite provides a beautiful unobtrusive blog theme and a friendly administration environment – both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5.
+
+Chyrp Lite is fully compatible with Chyrp. If you have a Chyrp blog, you can switch to Chyrp Lite or vice versa!
+
+## How is Chyrp Lite different from Chyrp?
 Specifically, Chyrp Lite deviates from Chyrp as follows:
 
-### Removed
+#### Removed components:
+* RedactorJS, flexNav, jQueryUI.
+* Firecrest HTML4 blog theme.
 * Bookmarklet.
 * Post previews.
-* RedactorJS.
 * Chat feather.
-* jQueryUI.
-* flexNav.
-* Firecrest theme.
-* PNG admin icons.
-* Modules:
-  - Agregator
-  - Dropbox
-  - emailblog
-  - extension manager
-  - paging
-  - smartypants
-  - submission
-  - textilize
+* Modules: Agregator, Dropbox, emailblog, extension manager, paging, smartypants, submission, textilize.
 
-### Modified
-* Audio feather – native player only.
-* Video feather – native player only, upload only.
+#### Modifications:
+* Audio feather – native player only, with broad format support for upload.
+* Video feather – native player only, upload only with broad format support.
 * File feather – replaced with multiple-file Uploader feather.
-* Recaptcha library relocated to module.
-* Markdown library updated to 1.4.1.
-* CSS-styled ajax loader, no default widgets.
-* Admin theme properly separated from core admin functions.
+* Recaptcha library relocated to Recaptcha module.
+* Markdown library updated to latest version (1.4.1 at this time).
+* Pure CSS-styled ajax loader, no default widgets.
+* Admin theme-specific components properly separated from core admin functions.
 * Various code cleanups and bug fixes.
-* &lt;br&gt; elements banished from themes, feathers, modules.
+* &lt;br&gt; elements and utility classes banished from themes, feathers, modules.
 
-### Added
+#### Added features:
 * Refurbished admin theme: responsive HTML5.
-* Default HTML5 responsive theme: Blossom.
+* Default HTML5 responsive theme: "Blossom".
 * Modules:
-  - Lightbox
-  - Sitemap
-  - Rights
+  - Lightbox (image viewer).
+  - Sitemap (index your blog for Search engines)
+  - Rights (set attribution and content licence per post).
 
 ## Requirements
 Chyrp will thrive on virtually any server setup, but we guarantee Chyrp to run on no less than:
