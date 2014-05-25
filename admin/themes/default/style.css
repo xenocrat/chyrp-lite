@@ -623,7 +623,7 @@ li.error .module_status {                   display: inline }
     #content ul#modules_disabled,
     #content ul#feathers_disabled {             padding-left: 0em;
                                                 float: none }
-    #content ul.extend > label:only-child {     display: none }
+    #content ul.extend > h5:only-child {        display: none }
     #content ul.extend > li > h3 {              line-height: 2em }
 
     #content ul.themes > li {                   width: 100%;

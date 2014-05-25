@@ -463,7 +463,7 @@ img {                                               border-style: none;
 @-ms-keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     body {                                          margin: 0em 16px 1em 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
