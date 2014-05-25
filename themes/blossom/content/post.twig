@@ -27,10 +27,8 @@
           {% if enabled_modules.categorize and post.category.id != 0 %}
             &bull; <a href="$post.category.url" rel="tag">$post.category.name</a>
           {% endif %}
-          {% if enabled_modules.rights %}
-            {% if post['rights_licence'] %}
-              &bull; $post.rights_licence
-            {% endif %}
+          {% if ( route.action == "view" ) and ( enabled_modules.rights ) %}
+              $post.licence_mark
           {% endif %}
           {% if enabled_modules.likes and visitor.group.can("like_post") %}
             &bull; $post.get_likes
