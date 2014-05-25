@@ -9,7 +9,7 @@
          * Loads the update XML file.
          */
         private static function xml() {
-            $xml = simplexml_load_string(get_remote("http://chyrp.net/update.xml"));
+            $xml = simplexml_load_string(get_remote("http://pimley.net/projects/downloads/chyrp-lite.xml"));
             return $xml;
         }
 

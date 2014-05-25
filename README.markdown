@@ -37,7 +37,7 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * Default HTML5 responsive theme: "Blossom".
 * Modules:
   - Lightbox (image viewer).
-  - Sitemap (index your blog for Search engines)
+  - Sitemap (index your blog for search engines)
   - Rights (set attribution and content licence per post).
 
 ## Requirements
