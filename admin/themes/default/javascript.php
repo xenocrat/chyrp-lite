@@ -51,7 +51,7 @@ var Extend = {
     },
     check_conflicts: function() {
         $(".extend li.conflict").each(function() {
-            var classes = $(this).attr("class").split(" ");
+            var classes = $(this).attr("class").split(" "), count = 0;
             classes.shift(); // Remove the module's safename class
 
             classes.remove(["conflict",
@@ -63,11 +63,14 @@ var Extend = {
 
             for (i = 0; i < classes.length; i++) {
                 var conflict = classes[i].replace("conflict_", "module_");
-                if ($("#"+conflict).parent().attr("id") == "modules_enabled" )
+                if ($("#"+conflict).parent().attr("id") == "modules_enabled" ) {
+                    count++;
                     $(this).addClass("error").find(".module_status").attr({
                         src: "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/error.svg",
-                        alt: "Conflicts: " + classes.length
+                        alt: "Conflicts: " + count,
+                        title: "Conflicts: " + count
                     });
+                }
             }
         });
     },

@@ -12,7 +12,7 @@
                             <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
                         </h3>
                         <input class="text" type="text" name="query" value="${ GET.query | escape }" id="query">
-                        <button type="submit" class="inline">${ "Search" | translate }</button>
+                        <button type="submit">${ "Search" | translate }</button>
                         {% if visitor.group.can("add_user") %}
                         <a href="{% admin "new_user" %}" class="button yay">
                             <img src="$theme_url/images/icons/add.svg" alt="add"> ${ "New User" | translate }

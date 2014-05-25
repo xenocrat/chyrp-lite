@@ -20,7 +20,7 @@ body {                                      font-size: 14px;
                                             font-family: sans-serif;
                                             line-height: 1.25em;
                                             color: #4a4747;
-                                            background: #efefef;
+                                            background-color: #efefef;
                                             min-width: 320px }
 h1, h2, h3, h4, h5, h6 {                    font-weight: bold;
                                             font-style: normal;
@@ -54,7 +54,7 @@ small a, .small a, .sub a {                 color: #b3b5b5 }
 /* @end */
 
 /* @group Header */
-#header {                                   background: #4f4f4f;
+#header {                                   background-color: #4f4f4f;
                                             padding: 2em 0em 3em 0em;
                                             color: #efefef;
                                             position: relative }
@@ -74,32 +74,31 @@ small a, .small a, .sub a {                 color: #b3b5b5 }
                                             width: 8em;
                                             text-align: center;
                                             text-decoration: none;
-                                            border-bottom: 1px solid #dfdfdf;
                                             border-top-left-radius: 0.8em;
                                             border-top-right-radius: 0.8em }
 #header #navigation li:first-child a {      margin-left: 0em }
 #header #navigation li a:link,
-#header #navigation li a:visited {          background: #dfdfdf;
+#header #navigation li a:visited {          background-color: #dfdfdf;
                                             color: #5f5f5f;
                                             text-decoration: none }
 #header #navigation li.selected a:link,
 #header #navigation li.selected a:visited,
 #header #navigation li a:hover,
-#header #navigation li a:focus {            background: #ffffff;
+#header #navigation li a:focus {            background-color: #ffffff;
                                             color: #4a4747;
                                             text-decoration: none }
-
-#welcome {                                  background: #fff;
+#welcome {                                  background-color: #f2fbff;
                                             padding: 0em 4em;
                                             line-height: 3em;
-                                            border-bottom: 1px solid #dfdfdf }
+                                            border-top: 1px solid #b8cdd9;
+                                            border-bottom: 1px solid #b8cdd9 }
 #welcome a {                                display: inline-block;
                                             text-decoration: none;
                                             margin: 0em;
                                             padding: 0em 1em;
-                                            border-right: 1px solid #dfdfdf }
+                                            border-right: 1px solid #b8cdd9 }
 #welcome #welcome_viewsite {                margin-left: 1em;
-                                            border-left: 1px solid #dfdfdf }
+                                            border-left: 1px solid #b8cdd9 }
 #content ul li {                            list-style-position: inside }
 /* @end */
 
@@ -130,12 +129,12 @@ small a, .small a, .sub a {                 color: #b3b5b5 }
                                             border-top-left-radius: 0.8em;
                                             border-top-right-radius: 0.8em }
 #sub_nav li a:link,
-#sub_nav li a:visited {                     background: #dfdfdf;
+#sub_nav li a:visited {                     background-color: #dfdfdf;
                                             color: #5f5f5f }
 #sub_nav li.selected a:link,
 #sub_nav li.selected a:visited,
 #sub_nav li a:hover,
-#sub_nav li a:focus {                       background: #ffffff;
+#sub_nav li a:focus {                       background-color: #ffffff;
                                             color: #4a4747;
                                             text-decoration: none;
                                             border: 1px solid #dfdfdf;
@@ -144,7 +143,7 @@ small a, .small a, .sub a {                 color: #b3b5b5 }
 
 /* @group Content */
 #content {                                  clear: both;
-                                            background: #ffffff;
+                                            background-color: #ffffff;
                                             padding: 2em 1em 1em 1em;
                                             margin: 0em 4em 1em 4em;
                                             border: 1px solid #dfdfdf;
@@ -174,6 +173,7 @@ span.pages:last-child {                     margin: 0em 14em 0em 1em }
                                             box-sizing: border-box;
                                             display: block;
                                             width: 100%;
+                                            min-height: 7em;
                                             list-style: none;
                                             padding: 1em;
                                             margin: 1em 0em;
@@ -196,7 +196,8 @@ span.pages:last-child {                     margin: 0em 14em 0em 1em }
 #content hr.extend {                        margin: 0em;
                                             visibility: hidden }
 #content ul.themes > li {                   min-width: 288px;
-                                            width: 33.33%;
+                                            width: 32.33%;
+                                            margin-right: 1%;
                                             text-align: center }
 #content ul li img.screenshot {             display: block;
                                             width: 256px;
@@ -215,7 +216,7 @@ textarea {                                  -moz-box-sizing: border-box;
                                             font-size: 1.25em;
                                             padding: 0.2em;
                                             border: 1px solid #dfdfdf;
-                                            background: #ffffff }
+                                            background-color: #ffffff }
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus {              border-color: #1e57ba;
@@ -267,7 +268,7 @@ form.detail input {                         padding: 0.4em }
 table {                                     width: 100%;
                                             margin: 0em 0em 1em 0em }
 table:last-child {                          margin-bottom: 0em }
-table thead tr {                            background: #4f4f4f;
+table thead tr {                            background-color: #4f4f4f;
                                             color: #ffffff;
                                             border: 1px solid #4f4f4f; }
 table thead tr th {                         padding: 0.5em;
@@ -350,12 +351,12 @@ td.controls img {                           position: relative;
 /* @group Messages */
 p.message {                                 padding: 0.6em;
                                             margin-bottom: 1em;
-                                            background: #efefef;
+                                            background-color: #efefef;
                                             border: none;
                                             border-radius: 0.4em }
-p.message.yay {                             background-color: #189100;
+p.message.yay {                             background-color: #76b362;
                                             color: #ffffff }
-p.message.boo {                             background-color: #d51800;
+p.message.boo {                             background-color: #bd2f2f;
                                             color: #ffffff }
 /* @end */
 
@@ -374,7 +375,7 @@ a.prev_page {                               -moz-box-sizing: border-box;
                                             line-height: 1.25em;
                                             margin: 0em;
                                             padding: 0.4em 0.6em 0.5em 0.6em;
-                                            background: #f2fbff;
+                                            background-color: #f2fbff;
                                             border: 1px solid #b8cdd9;
                                             border-radius: 0.3em;
                                             cursor: pointer;
@@ -415,7 +416,7 @@ a.button > img {                            margin-right: 4px;
                                             width: 16px;
                                             height: 16px }
 button[disabled="disabled"],
-button.disabled {                           background: #efefef;
+button.disabled {                           background-color: #efefef;
                                             border-color: #dfdfdf;
                                             color: #7f7f7f;
                                             cursor: not-allowed }
@@ -492,11 +493,15 @@ hr {                                        border: none;
                                             margin: 2em 0em }
 #content ul li {                            list-style: square }
 a.emblem > img,
-img.emblem {                                position: relative;
+img.emblem {                                display: inline;
+                                            position: relative;
                                             top: 2px;
                                             width: 16px;
                                             height: 16px }
-
+li .module_status,
+li .module_status {                         display: none }
+li.error .module_status,
+li.error .module_status {                   display: inline }
 .detail .detail_multiple {                  float: left;
                                             padding-right: 2em }
 .detail .detail_multiple:last-child {       padding-right: 0em }
@@ -505,7 +510,7 @@ img.emblem {                                position: relative;
 /* @media-query for small screens */
 @media screen and (max-width: 768px) {
     #header {                                   text-align: center;
-                                                padding-bottom: 4em }
+                                                padding-bottom: 5em }
     #footer {                                   width: 100% }
     #header #navigation {                       float: none;
                                                 position: absolute;
@@ -518,26 +523,27 @@ img.emblem {                                position: relative;
                                                 margin-right: 1% }
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
-    #welcome {                                  padding: 0em 1em 0em 1em }
-    #sub_nav li {                               display: block;
-                                                width: 100%;
-                                                clear: both;
-                                                text-align: center }
+    #welcome {                                  padding: 0em 0em 0em 1em }
+
+
+
+    #sub_nav li {                               -moz-box-sizing: border-box;
+                                                box-sizing: border-box;
+                                                width: 50%;
+                                                height: 3em;
+                                                text-align: center;
+                                                overflow: visible }
+    #sub_nav li:nth-child(odd) {                clear: both }
+    #sub_nav li:nth-child(odd):last-child {     width: 100% }
     #sub_nav li a {                             -moz-box-sizing: border-box;
                                                 box-sizing: border-box;
                                                 display: block;
-                                                float: none;
+                                                float: left;
                                                 width: 100%;
+                                                margin: 0em;
+                                                padding: 0em 0em 2em 1em;
                                                 font-size: 1em;
-                                                line-height: 2em;
-                                                padding: 1em 0em;
-                                                background: #dfdfdf;
-                                                border-top: 1px solid #d1d1d1;
-                                                border-radius: 0em;
-                                                color: #737373;
-                                                text-decoration: none;
-                                                margin: 0em }
-    #sub_nav li:last-child a {                  border-bottom: 1px solid #dfdfdf !important }
+                                                border: 1px solid #bfbfbf !important }
     #sub_nav {                                  margin-top: 1em }
     #sub_nav, #content {                        margin-left: 1em;
                                                 margin-right: 1em }
@@ -568,7 +574,7 @@ img.emblem {                                position: relative;
     select {                                    width: 100%;
                                                 margin-bottom: 2em }
     a.emblem > img,
-    img.emblem {                                margin-right: 12px }
+    img.emblem {                                margin-right: 8px }
     table {                                     display: block;
                                                 -moz-box-sizing: border-box;
                                                 box-sizing: border-box;
@@ -621,7 +627,8 @@ img.emblem {                                position: relative;
     #content ul.extend > li > h3 {              line-height: 2em }
 
     #content ul.themes > li {                   width: 100%;
-                                                text-align: center }
+                                                text-align: center;
+                                                margin-right: 0em }
     #content ul li img.screenshot {             width: 190px;
 }
 /* @end */
