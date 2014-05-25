@@ -201,7 +201,6 @@ span.pages:last-child {                     margin: 0em 14em 0em 1em }
                                             text-align: center }
 #content ul li img.screenshot {             display: block;
                                             width: 256px;
-                                            height: 192px;
                                             margin: 0em auto 0em auto; 
                                             border: 1px solid #dfdfdf }
 /* @end */
