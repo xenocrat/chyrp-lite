@@ -52,17 +52,17 @@ Chyrp will thrive on virtually any server setup, but we guarantee Chyrp to run o
 These requirements are more of guidelines, as these are the earliest versions of the services that we have tested Chyrp on. If you are successfully running Chyrp on an earlier version of these services, let us know.
 
 ## Installation
-Installing Chyrp is easier than you expect. You can do it in four steps:
+You can install Chyrp Lite in four steps:
 
 1. If using MySQL, create a MySQL database with a username and password.
 2. Download, unzip, and upload.
 3. Open your web browser and navigate to where you uploaded Chyrp.
 4. Follow through the installer at [index.php](index.php).
 
-That's it! Chyrp will be up and running and ready for you to use.
+That's it! Chyrp Lite will be up and running and ready for you to use.
 
 ## Upgrading
-Keeping Chyrp up to date is important to make sure that your blog is as safe and as awesome as possible.
+Keeping Chyrp Lite up to date is important to ensure your blog is as safe and as awesome as possible.
 
 1. Download the latest version of Chyrp.
 2. Copy your config file from `/includes/config.yaml.php` to somewhere safe.
