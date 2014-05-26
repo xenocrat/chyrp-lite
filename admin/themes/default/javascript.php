@@ -42,7 +42,7 @@ var Extend = {
     action: null,
     confirmed: null,
     init: function(){
-        $(".module_toggle, .feather_toggle").click(Extend.ajax_toggle);
+        $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(Extend.ajax_toggle);
 
         if (Route.action != "modules")
             return;
@@ -117,7 +117,9 @@ var Extend = {
                     confirm: Extend.confirmed
                 },
                 success: function(json) {
-                    $("#" + Extend.extension.type + "_" + Extend.extension.name).detach().appendTo("#" + Extend.extension.type + "s_" + Extend.action + "d");
+                    var extension = $("#" + Extend.extension.type + "_" + Extend.extension.name).detach();
+                    $(extension).appendTo("#" + Extend.extension.type + "s_" + Extend.action + "d");
+
                     $(json.notifications).each(function(){
                         if (this == "") return
                             alert(this.replace(/<([^>]+)>\n?/gm, ""));

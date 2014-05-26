@@ -508,6 +508,10 @@ img.emblem {                                display: inline;
                                             top: 2px;
                                             width: 16px;
                                             height: 16px }
+ul#feathers_enabled a.feather_enabler,
+ul#feathers_disabled a.feather_disabler,
+ul#modules_enabled a.module_enabler,
+ul#modules_disabled a.module_disabler {     display: none }
 li .module_status,
 li .module_status {                         display: none }
 li.error .module_status,
@@ -534,9 +538,7 @@ li.error .module_status {                   display: inline }
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
     #welcome {                                  padding: 0em 0em 0em 1em }
-
-
-
+    #welcome a {                                padding: 0em 0.5em }
     #sub_nav li {                               -moz-box-sizing: border-box;
                                                 box-sizing: border-box;
                                                 width: 50%;
@@ -638,7 +640,8 @@ li.error .module_status {                   display: inline }
 
     #content ul.themes > li {                   width: 100%;
                                                 text-align: center;
-                                                margin-right: 0em }
-    #content ul li img.screenshot {             width: 190px;
+                                                margin-right: 0em;
+                                                min-width: 220px }
+    #content ul li img.screenshot {             width: 192px;
 }
 /* @end */

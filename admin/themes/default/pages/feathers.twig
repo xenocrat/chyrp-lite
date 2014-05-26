@@ -9,8 +9,11 @@
                 {% for safename, feather in enabled_feathers | items %}
                 <li class="${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
-                        <a class="emblem feather_toggle" href="{% admin "disable&feather="~safename %}" title="${ "Disable" | translate }">
+                        <a class="emblem feather_disabler" href="{% admin "disable&feather="~safename %}" title="${ "Disable" | translate }">
                             <img src="$theme_url/images/icons/deny.svg" alt="${ "Disable" | translate }">
+                        </a>
+                        <a class="emblem feather_enabler" href="{% admin "enable&feather="~safename %}" title="${ "Enable" | translate }">
+                            <img src="$theme_url/images/icons/add.svg" alt="${ "Enable" | translate }">
                         </a>
                         <a class="emblem feather_author" href="$feather.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ feather.author.url | escape }">
@@ -31,11 +34,12 @@
                 {% for safename, feather in disabled_feathers | items %}
                 <li class="${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
-                        {% if not feather.dependencies_needed %}
-                        <a class="emblem feather_toggle" href="{% admin "enable&feather="~safename %}" title="${ "Enable" | translate }">
+                        <a class="emblem feather_disabler" href="{% admin "disable&feather="~safename %}" title="${ "Disable" | translate }">
+                            <img src="$theme_url/images/icons/deny.svg" alt="${ "Disable" | translate }">
+                        </a>
+                        <a class="emblem feather_enabler" href="{% admin "enable&feather="~safename %}" title="${ "Enable" | translate }">
                             <img src="$theme_url/images/icons/add.svg" alt="${ "Enable" | translate }">
                         </a>
-                        {% endif %}
                         <a class="emblem feather_author" href="$feather.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ feather.author.url | escape }">
                         </a>
