@@ -256,12 +256,16 @@ form.split input[type="checkbox"] {         margin: 0em 0.4em 0.4em 0em }
 form.split input[type="text"],
 form.split input[type="password"],
 form.split textarea {                       width: 25% }
-form.split .split_multiple {                float: left }
-form.split .split_multiple > input,
-form.split .split_multiple > textarea,
-form.split .split_multiple > select,
-form.split .split_multiple > button {       display: block;
+form.split .split_multiple {                float: left;
+                                            clear: none;
+                                            width: 25% }
+form.split .split_multiple input,
+form.split .split_multiple textarea,
+form.split .split_multiple select,
+form.split .split_multiple button {         display: block;
                                             margin: 0em 0em 1em 0em }
+form.split .split_multiple > input,
+form.split .split_multiple > textarea {     width: 100% }
 form.detail input {                         padding: 0.4em }
 /* @end */
 
