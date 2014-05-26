@@ -8,7 +8,7 @@ With Chyrp Lite you can run your own blog on your own web server with minimal fu
 Chyrp Lite is compatible with Chyrp. If you have a Chyrp blog, you can switch to Chyrp Lite or vice versa!
 
 ## How is Chyrp Lite different from Chyrp?
-Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced.
+Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. JavaScripts deemed unduly complex or maintenance-heavy have been removed, as have modules and feathers deemed non-essential.
 
 Specifically, Chyrp Lite deviates from Chyrp as follows:
 
@@ -64,7 +64,7 @@ That's it! Chyrp Lite will be up and running and ready for you to use.
 ## Upgrading
 Keeping Chyrp Lite up to date is important to ensure your blog is as safe and as awesome as possible.
 
-1. Download the latest version of Chyrp.
+1. Download the latest version of Chyrp Lite.
 2. Copy your config file from `/includes/config.yaml.php` to somewhere safe.
 3. Disable any Modules/Feathers that you downloaded for the release you're upgrading from.
 4. Overwrite your current Chyrp installation files with the new ones.
