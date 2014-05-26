@@ -266,8 +266,13 @@ form.detail input {                         padding: 0.4em }
 /* @end */
 
 /* @group Tables */
-table {                                     width: 100%;
-                                            margin: 0em 0em 1em 0em }
+table {                                     -moz-box-sizing: border-box;
+                                            box-sizing: border-box;
+                                            display: block;
+                                            width: 100%;
+                                            margin: 0em 0em 1em 0em;
+                                            overflow-x: scroll;
+                                            -webkit-overflow-scrolling: touch }
 table:last-child {                          margin-bottom: 0em }
 table thead tr {                            background-color: #4f4f4f;
                                             color: #ffffff;
