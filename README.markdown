@@ -1,16 +1,15 @@
-Chyrp Lite
-==========
+##What is Chyrp Lite?
 
 Chyrp Lite is an ultra-lightweight fork of the Chyrp blogging engine. Chyrp Lite is a personal project tailored to my specific needs, but you are very welcome to use it too! If you are looking for more features than you see here, you may want to consider [Chyrp](http://chyrp.net/) instead.
 
-Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. 
-
 ## What can Chyrp Lite do for me?
-Chyrp Lite is a blogging engine that you can use to run your own blog on your own server with minimal fuss. You can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. Chyrp Lite provides a beautiful unobtrusive blog theme and a friendly administration environment – both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5.
+With Chyrp Lite you can run your own blog on your own web server with minimal fuss. You can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. Chyrp Lite provides a beautiful unobtrusive blog theme and a friendly administration environment – both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5.
 
 Chyrp Lite is fully compatible with Chyrp. If you have a Chyrp blog, you can switch to Chyrp Lite or vice versa!
 
 ## How is Chyrp Lite different from Chyrp?
+Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced.
+
 Specifically, Chyrp Lite deviates from Chyrp as follows:
 
 #### Removed components:
@@ -37,7 +36,7 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * Default HTML5 responsive theme: "Blossom".
 * Modules:
   - Lightbox (image viewer).
-  - Sitemap (index your blog for search engines)
+  - Sitemap (index your blog for search engines).
   - Rights (set attribution and content licence per post).
 
 ## Requirements
