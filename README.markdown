@@ -17,15 +17,16 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * Firecrest HTML4 blog theme.
 * Bookmarklet.
 * Post previews.
-* Chat feather.
-* Modules: Agregator, Dropbox, emailblog, extension manager, paging, smartypants, submission, textilize.
+* Feathers: chat, file.
+* Modules: agregator, Dropbox, emailblog, extension manager, paging, smartypants, submission.
 
 #### Modifications:
 * Audio feather – native player only, with broad format support for upload.
 * Video feather – native player only, upload only with broad format support.
 * File feather – replaced with multiple-file Uploader feather.
 * Recaptcha library relocated to Recaptcha module.
-* Markdown library updated to latest version (1.4.1 at this time).
+* Markdown Extra module updated to latest version (1.4.1 at this time).
+* Textile module updated to latest version (3.5.5 at this time).
 * Pure CSS-styled ajax loader, no default widgets.
 * Admin theme-specific components properly separated from core admin functions.
 * Various code cleanups and bug fixes.

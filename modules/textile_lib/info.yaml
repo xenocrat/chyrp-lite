@@ -1,0 +1,11 @@
+name: Textile
+url: http://chyrplite.net/
+version: 1.0
+description: Textile support for posts, pages, and comments. Powered by <a href="http://txstyle.org/">PHP Textile 3.5.5</a>.
+author:
+  name: Chyrp Team
+  url: http://chyrp.net/
+conflicts:
+  - textilize
+  - markdown
+  - markdown_lib

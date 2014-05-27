@@ -18,10 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: modules/markdown/info.yaml:3
-msgid "Markdown Extra"
+msgid "Textile"
 msgstr ""
 
 #: modules/markdown/info.yaml:5
-msgid "Markdown support for posts, pages, and comments. Powered by <a href="http://michelf.ca/projects/php-markdown/">PHP Markdown Lib 1.4.1</a>."
+msgid "Textile support for posts, pages, and comments. Powered by <a href="http://txstyle.org/">PHP Textile 3.5.5</a>."
 msgstr ""
 

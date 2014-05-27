@@ -70,6 +70,9 @@ var Extend = {
                         alt: "Conflicts: " + count,
                         title: "Conflicts: " + count
                     });
+                    break;
+                } else {
+                    $(this).removeClass("error");
                 }
             }
         });
@@ -120,6 +123,9 @@ var Extend = {
                     var extension = $("#" + Extend.extension.type + "_" + Extend.extension.name).detach();
                     $(extension).appendTo("#" + Extend.extension.type + "s_" + Extend.action + "d");
 
+                    if (Extend.extension.type == "module")
+                        Extend.check_conflicts();
+
                     $(json.notifications).each(function(){
                         if (this == "") return
                             alert(this.replace(/<([^>]+)>\n?/gm, ""));
@@ -133,8 +139,6 @@ var Extend = {
                 }
             })
         }, "text")
-
-        Extend.check_conflicts();
 
         return false; // Suppress hyperlink
     }

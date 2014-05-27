@@ -189,8 +189,8 @@ span.pages:last-child {                     margin: 0em 14em 0em 1em }
 #content ul#modules_disabled > li,
 #content ul#feathers_disabled > li {        background-color: #faebe4;
                                             border: 1px solid #d6bdb5 }
-#content ul#modules_enabled > li.error {    background-color: #fff1b2;
-                                            border: 1px solid #d9cd98 }
+#content ul.extend > li.error {             background-color: #fff1b2 !important;
+                                            border: 1px solid #d9cd98 !important }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {            text-decoration: none }
 #content ul.extend > li p:last-child {      margin-bottom: 0em }
