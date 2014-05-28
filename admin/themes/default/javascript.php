@@ -41,6 +41,7 @@ var Extend = {
     },
     action: null,
     confirmed: null,
+    conflicts: 0,
     init: function(){
         $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(Extend.ajax_toggle);
 
@@ -49,30 +50,43 @@ var Extend = {
 
         this.check_conflicts()
     },
+    reset_conflicts: function() {
+        Extend.conflicts = 0;
+        $(".extend li.error").removeClass("error").attr('class', function(i, c) {
+              return c.replace(/conflict([0-9])/g, '');
+        }).find(".module_status").attr({
+            src: "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/success.svg",
+            alt: "Blissful!",
+            title: "Blissful!"
+        });
+    },
     check_conflicts: function() {
+        Extend.reset_conflicts(); // Reset all values
+
         $(".extend li.conflict").each(function() {
-            var classes = $(this).attr("class").split(" "), count = 0;
+            var classes = $(this).attr("class").split(" ");
+
             classes.shift(); // Remove the module's safename class
 
             classes.remove(["conflict",
                             "depends",
                             "missing_dependency",
+                            "error",
                             /depended_by_(.+)/,
                             /needs_(.+)/,
-                            /depends_(.+)/]);
+                            /depends_(.+)/,
+                            /conflict([0-9])/]);
 
             for (i = 0; i < classes.length; i++) {
                 var conflict = classes[i].replace("conflict_", "module_");
                 if ($("#"+conflict).parent().attr("id") == "modules_enabled" ) {
-                    count++;
-                    $(this).addClass("error").find(".module_status").attr({
+                    Extend.conflicts++;
+                    $("#"+conflict).addClass("error conflict"+Extend.conflicts);
+                    $(this).addClass("error conflict"+Extend.conflicts).find(".module_status").attr({
                         src: "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/error.svg",
-                        alt: "Conflicts: " + count,
-                        title: "Conflicts: " + count
+                        alt: "Conflicted!",
+                        title: "Conflicted!"
                     });
-                    break;
-                } else {
-                    $(this).removeClass("error");
                 }
             }
         });

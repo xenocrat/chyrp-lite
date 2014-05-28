@@ -18,12 +18,12 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * Bookmarklet.
 * Post previews.
 * Feathers: chat, file.
-* Modules: agregator, Dropbox, emailblog, extension manager, paging, smartypants, submission.
+* Modules: aggregator, Dropbox, emailblog, extension manager, paging, smartypants, submission.
 
 #### Modifications:
-* Audio feather – native player only, with broad format support for upload.
-* Video feather – native player only, upload only with broad format support.
-* File feather – replaced with multiple-file Uploader feather.
+* Audio feather uses browser's native player, with broad format support for upload.
+* Video feather uses browser's native player, upload only with broad format support.
+* File feather has been replaced with multiple-file Uploader feather.
 * Recaptcha library relocated to Recaptcha module.
 * Markdown Extra module updated to latest version (1.4.1 at this time).
 * Textile module updated to latest version (3.5.5 at this time).
