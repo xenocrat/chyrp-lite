@@ -76,7 +76,7 @@
             },
             load: function() {
                 if ( ChyrpLightbox.active == false ) {
-                    var src = $(this).attr('src'), href = $(this).parent().attr('href'), alt = $(this).attr('alt');
+                    var src = $(this).attr("src"), href = $(this).parent().attr('href'), alt = $(this).attr("alt");
                     $("<div>", {
                         "id": "ChyrpLightbox-bg",
                         "role": "img",
@@ -86,7 +86,7 @@
                         "src": href || src, // Load original (Photo Feather)
                         "alt": alt
                     }).css(ChyrpLightbox.styles.fg).load(ChyrpLightbox.show).error(function() {
-                        $(this).off('error'); this.src = src;
+                        $(this).off("error"); this.src = src;
                     })).appendTo("body");
                     ChyrpLightbox.active = true;
                     return false;
@@ -101,10 +101,10 @@
                     Math.round(fgHeight = fgHeight * 0.99);
                 }
                 fg.css({
-                    "top": Math.round( ( bgHeight - fgHeight ) / 2 ) + 'px',
-                    "left": Math.round( ( bgWidth - fgWidth ) / 2 ) + 'px',
-                    "width": fgWidth + 'px',
-                    "height": fgHeight + 'px',
+                    "top": Math.round( ( bgHeight - fgHeight ) / 2 ) + "px",
+                    "left": Math.round( ( bgWidth - fgWidth ) / 2 ) + "px",
+                    "width": fgWidth + "px",
+                    "height": fgHeight + "px",
                     "visibility": 'visible'
                 });
                 $("<img>", {
@@ -116,8 +116,8 @@
                 }).css({
                     "display": "block",
                     "position": "absolute",
-                    "top": Math.round( ( ( bgHeight - fgHeight ) / 2 ) + 8 ) + 'px',
-                    "right": Math.round( ( ( bgWidth - fgWidth ) / 2 ) + 8 ) + 'px',
+                    "top": Math.round( ( ( bgHeight - fgHeight ) / 2 ) + 8 ) + "px",
+                    "right": Math.round( ( ( bgWidth - fgWidth ) / 2 ) + 8 ) + "px",
                     "cursor": "pointer"
                 }).click(ChyrpLightbox.hide).appendTo("#ChyrpLightbox-bg");
                 bg.css({

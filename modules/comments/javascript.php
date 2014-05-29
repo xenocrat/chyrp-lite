@@ -6,7 +6,7 @@
 ?>
 <!-- --><script>
 $(function(){
-    if ($(".comments:not(:header)").size()) {
+    if ($(".comments").size()) {
 <?php if ($config->auto_reload_comments and $config->enable_reload_comments): ?>
         var updater = setInterval("Comment.reload()", <?php echo $config->auto_reload_comments * 1000; ?>);
 <?php endif; ?>
@@ -23,19 +23,19 @@ $(function(){
                     $(".comment_plural").text(plural);
                 }
                 $("#last_comment").val(json.comment_timestamp);
-                $(data).prependTo(".comments:not(:header)").hide().fadeIn("slow");
+                $(data).prependTo(".comments").hide().fadeIn("slow");
             }, "html")
         }, complete: function(){
             $("#add_comment").loader(true);
         } })
     }
 <?php echo "\n"; if (!isset($config->enable_ajax) or $config->enable_ajax): ?>
-    $(".comments:not(:header)").on("click", ".comment_edit_link", function() {
+    $(".comments").on("click", ".comment_edit_link", function() {
         var id = $(this).attr("id").replace(/comment_edit_/, "");
         Comment.edit(id);
         return false;
     })
-    $(".comments:not(:header)").on("click", ".comment_delete_link", function() {
+    $(".comments").on("click", ".comment_delete_link", function() {
         var id = $(this).attr("id").replace(/comment_delete_/, "");
 
         Comment.notice++;
@@ -58,16 +58,16 @@ var Comment = {
     notice: 0,
     failed: false,
     reload: function() {
-        if ($(".comments:not(:header)").attr("id") == undefined) return;
+        if ($(".comments").attr("id") == undefined) return;
 
-        var id = $(".comments:not(:header)").attr("id").replace(/comments_/, "");
-        if (Comment.editing == 0 && Comment.notice == 0 && Comment.failed != true && $(".comments:not(:header)").children().size() < <?php echo $config->comments_per_page; ?>) {
+        var id = $(".comments").attr("id").replace(/comments_/, "");
+        if (Comment.editing == 0 && Comment.notice == 0 && Comment.failed != true && $(".comments").children().size() < <?php echo $config->comments_per_page; ?>) {
             $.ajax({ type: "post", dataType: "json", url: "<?php echo $config->chyrp_url; ?>/includes/ajax.php", data: "action=reload_comments&post_id="+id+"&last_comment="+$("#last_comment").val(), success: function(json) {
                 if ( json != null ) {
                     $("#last_comment").val(json.last_comment);
                     $.each(json.comment_ids, function(i, id) {
                         $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id }, function(data){
-                            $(data).prependTo(".comments:not(:header)").hide().fadeIn("slow");
+                            $(data).prependTo(".comments").hide().fadeIn("slow");
                         }, "html");
                     });
                 }

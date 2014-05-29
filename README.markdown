@@ -21,12 +21,13 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * Modules: aggregator, Dropbox, emailblog, extension manager, paging, smartypants, submission.
 
 #### Modifications:
+* jQuery updated to 2.1.1, Form plugin updated to v20140218.
+* Markdown Extra module updated to 1.4.1.
+* Textile module updated to 3.5.5.
 * Audio feather uses browser's native player, with broad format support for upload.
 * Video feather uses browser's native player, upload only with broad format support.
 * File feather has been replaced with multiple-file Uploader feather.
 * Recaptcha library relocated to Recaptcha module.
-* Markdown Extra module updated to latest version (1.4.1 at this time).
-* Textile module updated to latest version (3.5.5 at this time).
 * Pure CSS-styled ajax loader, no default widgets.
 * Admin theme-specific components properly separated from core admin functions.
 * Various code cleanups and bug fixes.

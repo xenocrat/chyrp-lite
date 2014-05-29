@@ -116,13 +116,13 @@ var Post = {
         }, "html");
     },
     prepare_links: function(id) {
-        $("body").on("click", ".post_edit_link:not(.no_ajax)", function(){
+        $(".post").last().parent().on("click", ".post_edit_link:not(.no_ajax)", function(){
             var id = $(this).attr("id").replace(/post_edit_/, "");
             Post.edit(id);
             return false;
         });
 
-        $("body").on("click", ".post_delete_link:not(.no_ajax)", function(){
+        $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(){
             if (!confirm("<?php echo __("Are you sure you want to delete this post?\\n\\nIt cannot be restored if you do this. If you wish to hide it, save it as a draft."); ?>")) return false
             var id = $(this).attr("id").replace(/post_delete_/, "");
             Post.destroy(id);
