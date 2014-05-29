@@ -191,24 +191,40 @@ span.pages:last-child {                     margin: 0em 14em 0em 1em }
                                             border: 1px solid #d6bdb5 }
 #content ul#modules_enabled > li.conflict1,
 #content ul#modules_disabled > li.conflict1 {
-                                            background-color: #fde98d;
-                                            border: 1px solid #ccc18f }
+                                            background-color: #ffbd9e;
+                                            border: 1px solid #d9a086 }
 #content ul#modules_enabled > li.conflict2,
 #content ul#modules_disabled > li.conflict2 {
-                                            background-color: #d6c9fc;
-                                            border: 1px solid #b6abd6 }
-#content ul#modules_enabled > li.conflict3,
-#content ul#modules_disabled > li.conflict3 {
-                                            background-color: #f0e3fa;
-                                            border: 1px solid #d0abd6 }
-#content ul#modules_enabled > li.conflict4,
-#content ul#modules_disabled > li.conflict4 {
                                             background-color: #ffd49d;
                                             border: 1px solid #d9b586 }
+#content ul#modules_enabled > li.conflict3,
+#content ul#modules_disabled > li.conflict3 {
+                                            background-color: #fde98d;
+                                            border: 1px solid #ccc18f }
+#content ul#modules_enabled > li.conflict4,
+#content ul#modules_disabled > li.conflict4 {
+                                            background-color: #e8f280;
+                                            border: 1px solid #bfcc31 }
 #content ul#modules_enabled > li.conflict5,
 #content ul#modules_disabled > li.conflict5 {
-                                            background-color: #e7f45d;
-                                            border: 1px solid #c9d633 }
+                                            background-color: #a0eebb;
+                                            border: 1px solid #6bbfa9 }
+#content ul#modules_enabled > li.conflict6,
+#content ul#modules_disabled > li.conflict6 {
+                                            background-color: #aefaed;
+                                            border: 1px solid #75d1d0 }
+#content ul#modules_enabled > li.conflict7,
+#content ul#modules_disabled > li.conflict7 {
+                                            background-color: #b1d0ff;
+                                            border: 1px solid #7ea5e0 }
+#content ul#modules_enabled > li.conflict8,
+#content ul#modules_disabled > li.conflict8 {
+                                            background-color: #d6c9fc;
+                                            border: 1px solid #b6abd6 }
+#content ul#modules_enabled > li.conflict9,
+#content ul#modules_disabled > li.conflict9 {
+                                            background-color: #fad0ff;
+                                            border: 1px solid #d5afdb }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {            text-decoration: none }
 #content ul.extend > li p:last-child {      margin-bottom: 0em }
