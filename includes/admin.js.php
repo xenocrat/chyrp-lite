@@ -30,7 +30,7 @@ $(function(){
     if (Route.action == "delete_group") confirm_delete_group();
 
     // Open help text in a popup window.
-    $(".help").live("click", function(){
+    $(".help").on("click", function(){
         window.open($(this).attr("href"), "help", "status=0, scrollbars=1, location=0, menubar=0, toolbar=0, resizable=1, height=450, width=400");
         return false;
     })

@@ -27,19 +27,19 @@
             fetch: function() {
                 if ( !ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.fail ) {
                     ChyrpAjaxScroll.busy = true;
-                    var last_post = $(".post").last();
+                    var last_post = $(".post:not(:header)").last();
                     var next_page_url = $("#next_page_page").attr('href');
                     if ( next_page_url && last_post.length ) {
                         $.get(next_page_url, function(data){
                             if ( !!history.replaceState ) history.replaceState(ChyrpAjaxScroll.state, '', next_page_url );
                             // Insert new posts
-                            $(".post").last().after($(data).find(".post"));
+                            $(".post:not(:header)").last().after($(data).find(".post:not(:header)"));
                             // Execute inline scripts
                             $(data).filter('script').each(function(){
                                 $.globalEval( this.text || this.textContent || this.innerHTML || "" );
                             });
                             // Update the page description
-                            $(".pages").last().replaceWith( $(data).find('.pages').last() );
+                            $(".pages:not(:header)").last().replaceWith( $(data).find('.pages:not(:header)').last() );
                             // Search for the next page link
                             var ajax_page_link = $(data).find("#next_page_page").last();
                             if ( ajax_page_link ) {

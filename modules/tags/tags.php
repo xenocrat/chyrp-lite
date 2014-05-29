@@ -623,48 +623,42 @@
             $(function(){
                 function scanTags(){
                     $(".tags_select a").each(function(){
-                        regexp = new RegExp("(, ?|^)"+ $(this).text() +"(, ?|$)", "g")
+                        regexp = new RegExp("(, ?|^)"+ $(this).text() +"(, ?|$)", "g");
                         if ($("#tags").val().match(regexp))
-                            $(this).addClass("tag_added")
+                            $(this).addClass("tag_added");
                         else
-                            $(this).removeClass("tag_added")
+                            $(this).removeClass("tag_added");
                     })
                 }
 
-                scanTags()
+                scanTags();
 
-                $("#tags").live("keyup", scanTags)
-
-                $(".tag_cloud > span").live("mouseover", function(){
-                    $(this).find(".controls").css("opacity", 1)
-                }).live("mouseout", function(){
-                    $(this).find(".controls").css("opacity", 0)
-                })
+                $("#tags").on("keyup", scanTags);
             })
 
             function add_tag(name) {
                 if ($("#tags").val().match("(, |^)"+ name +"(, |$)")) {
-                    regexp = new RegExp("(, |^)"+ name +"(, |$)", "g")
+                    regexp = new RegExp("(, |^)"+ name +"(, |$)", "g");
                     $("#tags").val($("#tags").val().replace(regexp, function(match, before, after){
                         if (before == ", " && after == ", ")
-                            return ", "
+                            return ", ";
                         else
-                            return ""
+                            return "";
                     }))
 
                     $(".tags_select a").each(function(){
                         if ($(this).text() == name)
-                            $(this).removeClass("tag_added")
+                            $(this).removeClass("tag_added");
                     })
                 } else {
                     if ($("#tags").val() == "")
-                        $("#tags").val(name)
+                        $("#tags").val(name);
                     else
-                        $("#tags").val($("#tags").val().replace(/(, ?)?$/, ", "+ name))
+                        $("#tags").val($("#tags").val().replace(/(, ?)?$/, ", "+ name));
 
                     $(".tags_select a").each(function(){
                         if ($(this).text() == name)
-                            $(this).addClass("tag_added")
+                            $(this).addClass("tag_added");
                     })
                 }
             }

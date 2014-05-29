@@ -64,18 +64,18 @@ var Post = {
                             reason: "cancelled"
                         }, function(data) {
                             $("#post_edit_form_"+id).loader(true).fadeOut("fast", function(){
-                                $(this).replaceWith(data)
-                                $(this).hide().fadeIn("fast")
+                                $(this).replaceWith(data);
+                                $(this).hide().fadeIn("fast");
                             });
                         }, "html");
-                        return false
+                        return false;
                     });
                 });
             });
         }, "html");
     },
     updated: function(response){
-        id = Post.id
+        id = Post.id;
         if (isError(response))
             return $("#post_edit_form_"+id).loader(true);
 
@@ -95,8 +95,8 @@ var Post = {
                 reason: "edited"
             }, function(data) {
                 $("#post_edit_form_"+id).loader(true).fadeOut("fast", function(){
-                    $(this).replaceWith(data)
-                    $("#post_"+id).hide().fadeIn("fast")
+                    $(this).replaceWith(data);
+                    $("#post_"+id).hide().fadeIn("fast");
                 });
             }, "html");
         }
@@ -116,17 +116,17 @@ var Post = {
         }, "html");
     },
     prepare_links: function(id) {
-        $(".post_edit_link:not(.no_ajax)").live("click", function(){
-            var id = $(this).attr("id").replace(/post_edit_/, "")
-            Post.edit(id)
-            return false
+        $("body").on("click", ".post_edit_link:not(.no_ajax)", function(){
+            var id = $(this).attr("id").replace(/post_edit_/, "");
+            Post.edit(id);
+            return false;
         });
 
-        $(".post_delete_link").live("click", function(){
+        $("body").on("click", ".post_delete_link:not(.no_ajax)", function(){
             if (!confirm("<?php echo __("Are you sure you want to delete this post?\\n\\nIt cannot be restored if you do this. If you wish to hide it, save it as a draft."); ?>")) return false
-            var id = $(this).attr("id").replace(/post_delete_/, "")
-            Post.destroy(id)
-            return false
+            var id = $(this).attr("id").replace(/post_delete_/, "");
+            Post.destroy(id);
+            return false;
         });
     }
 }
