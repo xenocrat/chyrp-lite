@@ -8,7 +8,7 @@
       {% endif %}
       <section{% if post.caption | length > 1000 %} class="columnized"{% endif %}>
         ${ post.caption | read_more("…more") }
-        <div class="doaction admin">
+        <div class="doaction downloads">
         {% for file in post.files %}
           <a href="${ file.link | escape }">${ "Download" | translate } &quot;${ file.name | escape | truncate(20, "…", true) }&quot;</a>
         {% endfor %}

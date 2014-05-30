@@ -288,7 +288,7 @@ label {                                             display: block;
                                                     margin-bottom: 1em }
     div.doaction:last-child {                       margin-bottom: 0em }
     div.speak {                                     margin-bottom: 0em }
-    div.admin {                                     margin: 1em 0em 0em 0em }
+    div.admin, div.downloads {                      margin: 1em 0em 0em 0em }
     input + div.doaction, textarea + div.doaction { padding-top: 0.5em }
     div.search_box {                                text-align: center;
                                                     margin-bottom: 1em }
