@@ -46,8 +46,6 @@ h4 {                                                font-family: sans-serif;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }
-    span.byline {                                   font-weight: bold }
-    span.byline:after {                             content: ": "}
 sup {                                               vertical-align: super;
                                                     font-size: 0.5em }
 em {                                                font: inherit;
@@ -70,9 +68,14 @@ pre {                                               font-family: monospace;
                                                     font-size: 0.75em;
                                                     margin: 1em 0em }
     li > pre {                                      margin: 1em 0em 0em 0em }
-ul {                                                list-style: none;
+ul {                                                list-style: disc outside;
                                                     margin: 1em 0em;
                                                     padding: 0em }
+    ul li > ul {                                    list-style-type: circle }
+ol {                                                list-style: decimal outside;
+                                                    margin: 1em 0em;
+                                                    padding: 0em }
+    ol li > ol {                                    list-style-type: lower-latin }
     ul.navigation {                                 list-style: none;
                                                     font-size: 1em;
                                                     -moz-box-sizing: border-box;
@@ -104,11 +107,11 @@ ul {                                                list-style: none;
                                                     padding-bottom: 0em;
                                                     line-height: 3em }
     ul.archive li {                                 margin: 0em 0em 1em 2em }
-    ol.comments {                                   padding: 0em;
+    ol.comments {                                   list-style: none;
+                                                    padding: 0em;
                                                     margin: 0em }
     ol.comments li {                                display: block;
                                                     position: relative;
-                                                    list-style-type: none;
                                                     width: 100%;
                                                     top: 0em;
                                                     left: -2em;
@@ -118,6 +121,24 @@ ul {                                                list-style: none;
     ol.comments li:last-child {                     border-bottom: none;
                                                     margin-bottom: 0em }
     ol.comments li.no_comments {                    display: none }
+table {                                             border-collapse: collapse;
+                                                    border-spacing: 0em;
+                                                    -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    display: block;
+                                                    width: 100%;
+                                                    margin: 0em 0em 1em 0em;
+                                                    overflow-x: scroll;
+                                                    -webkit-overflow-scrolling: touch }
+table:last-child {                                  margin-bottom: 0em }
+    table thead tr {                                background-color: #4e5a66;
+                                                    color: #fbfbf7;
+                                                    border: 1px solid #4e5a66 }
+    table thead tr th {                             padding: 0.5em;
+                                                    font-weight: bold }
+    table tbody tr td {                             padding: 0.5em;
+                                                    border: 1px solid #c6ccc8;
+                                                    vertical-align: middle }
 form, fieldset {                                    margin: 0em;
                                                     padding: 0em;
                                                     border: none }

@@ -1,11 +1,11 @@
 /* @group Reset */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,
 pre,code,form,fieldset,legend,
-input,textarea,p,blockquote,th,td {         margin: 0;
-                                            padding: 0 }
+input,textarea,p,blockquote,th,td {         margin: 0em;
+                                            padding: 0em }
 table {                                     border-collapse: collapse;
-                                            border-spacing: 0 }
-fieldset,img {                              border: 0 }
+                                            border-spacing: 0em }
+fieldset,img {                              border: 0em }
 address,caption,cite,code,
 dfn,em,strong,th,var {                      font-style: normal;
                                             font-weight: normal }
@@ -314,7 +314,7 @@ table {                                     -moz-box-sizing: border-box;
 table:last-child {                          margin-bottom: 0em }
 table thead tr {                            background-color: #4f4f4f;
                                             color: #ffffff;
-                                            border: 1px solid #4f4f4f; }
+                                            border: 1px solid #4f4f4f }
 table thead tr th {                         padding: 0.5em;
                                             font-weight: bold }
 table tbody tr td {                         padding: 0.5em;
