@@ -99,7 +99,7 @@ small a, .small a, .sub a {                 color: #b3b5b5 }
                                             border-right: 1px solid #b8cdd9 }
 #welcome #welcome_viewsite {                margin-left: 1em;
                                             border-left: 1px solid #b8cdd9 }
-#content ul li {                            list-style-position: inside }
+#content ul li {                            list-style: disc inside }
 /* @end */
 
 /* @group Footer */
@@ -265,7 +265,8 @@ input[type="file"] {                        border: none }
 input.code,
 textarea.code,
 code {                                      font-family: monospace }
-
+select {                                    -moz-box-sizing: border-box;
+                                            box-sizing: border-box }
 form.delete blockquote {                    margin: 0em 4em 1em 4em;
                                             font-style: italic }
 form.delete blockquote h2 {                 font-style: normal;
@@ -535,7 +536,6 @@ hr {                                        border: none;
                                             clear: both;
                                             border-top: 1px solid #ddd;
                                             margin: 2em 0em }
-#content ul li {                            list-style: square }
 a.emblem > img,
 img.emblem {                                display: inline;
                                             position: relative;
@@ -600,6 +600,9 @@ li.error .module_status {                   display: inline }
                                                 padding: 4px 0% 5px }
     form.split label input {                    margin: 0em;
                                                 width: 3em !important }
+    form.split .split_multiple {                float: none;
+                                                clear: both;
+                                                width: 100% }
     form.split small,
     form.split .small {                         margin-left: 0em }
     form.split button {                         margin-left: 0em }
