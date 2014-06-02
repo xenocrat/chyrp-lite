@@ -146,8 +146,8 @@
                               3 => "Be the first to like.",
                               4 => "1 person likes this.",
                               5 => "%NUM% people like this.",
-                              6 => "Like",
-                              7 => "Unlike");
+                              6 => "Like!",
+                              7 => "Unlike!");
 
             $config = Config::current();
             $set = array($config->set("module_like",

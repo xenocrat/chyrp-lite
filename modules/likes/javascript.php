@@ -8,6 +8,9 @@
         var likes = {};
         likes.action = "like";
         likes.didPrevFinish = true;
+        likes.init = function() {
+            $("div.likes a").css("display", "inline"); // Enable liking
+        }
         likes.makeCall = function(post_id, callback, isUnlike) {
             if (!this.didPrevFinish) return false;
             if (isUnlike == true) this.action = "unlike"; else this.action = "like";
@@ -42,32 +45,30 @@
                 cache: false
             })
         }
+        likes.toggle = function(post_id) {
+            if ( $("#likes_post-"+post_id+" a.liked").length ) {
+                this.unlike(post_id);
+            } else {
+                this.like(post_id);
+            }
+        }
         likes.like = function(post_id) {
-            $("#likes_post-"+post_id+" a.like").fadeTo(500,.2);
             this.makeCall(post_id,function(response) {
                 var postDom = $("#likes_post-"+post_id);
                 postDom.children("span.text").html(response.likeText);
-                var thumbImg = postDom.children("a.like").children("img");
-                postDom.children("a.like").attr("title","").removeAttr("href").text("").addClass("liked").removeClass("like");
-                thumbImg.appendTo(postDom.children("a.liked").eq(0));
-                postDom.children("a.liked").fadeTo("500",.80);
-                postDom.find(".like").hide("fast");
+                postDom.children("a.like").removeClass("like").addClass("liked");
             }, false);
         }
         likes.unlike = function(post_id) {
-            $("#likes_post-"+post_id+" a.liked").fadeTo(500,.2);
             this.makeCall(post_id,function(response) {
                 var postDom = $("#likes_post-"+post_id);
                 postDom.children("span.text").html(response.likeText);
-                var thumbImg = postDom.children("a.liked").children("img");
-                postDom.children("a.liked").attr("href","javascript:likes.like("+post_id+")").text("").addClass("like").removeClass("liked").fadeTo("500",1);
-                thumbImg.appendTo(postDom.children("a.like").eq(0));
-                postDom.children("a.liked").hide("fast");
-                postDom.find(".like").show("fast");
+                postDom.children("a.liked").removeClass("liked").addClass("like");
             }, true);
         }
         likes.log = function(obj){
             if(typeof console != "undefined")console.log(obj);
         }
+        $(document).ready(likes.init);
 <?php Trigger::current()->call("likes_javascript"); ?>
 <!-- --></script>

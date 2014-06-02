@@ -1,18 +1,16 @@
-.likes {
+div.likes {
 	position: relative;
 	display: inline;
 }
-.likes a.like img, .likes a.liked img {
+div.likes a {
+	display: none;
+}
+div.likes a.like img, .likes a.liked img {
     vertical-align: middle;
-    opacity: .8;
-    margin: -2px 5px 0em 0em;
 }
-.likes a.like img:hover {
-	opacity: 1;
+div.likes a.like span.unlike {
+	display: none;
 }
-.likes a.like:hover {
-	text-decoration: none;
-}
-.likes div.unlike {
+div.likes a.liked span.like {
 	display: none;
 }

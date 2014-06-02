@@ -10,13 +10,6 @@
             if ($confirm) Like::uninstall();
         }
 
-        public function admin_head() {
-            $config = Config::current();
-?>
-        <link rel="stylesheet" href="<?php echo $config->chyrp_url; ?>/modules/likes/admin.css" type="text/css" media="screen" />
-<?php
-        }
-
         static function admin_like_settings($admin) {
             $config = Config::current();
 
@@ -197,11 +190,12 @@
             $returnStr = "<div class='likes' id='likes_post-$post->id'>";
 
             if (!$hasPersonLiked) {
-                $returnStr.= "<a class='like' href=\"javascript:likes.like($post->id);\" title='".
-                    ($like->total_count ? $likeSetting["likeText"][6] : "")."' >";
-                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='Like Post-$post->id' />";
-                if ($likeSetting["likeWithText"]) # $this->text_default[6] = "Like";
-                    $returnStr.= "(".$likeSetting["likeText"][6].") ";
+                $returnStr.= "<a class='like' href=\"javascript:likes.toggle($post->id);\">";
+                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][6]."'> ";
+                if ($likeSetting["likeWithText"]) {
+                    $returnStr.= "<span class='like'>(".$likeSetting["likeText"][6].")</span> "; # $this->text_default[6] = "Like!"
+                    $returnStr.= "<span class='unlike'>(".$likeSetting["likeText"][7].")</span> "; # $this->text_default[7] = "Unlike!"
+                }
                 $returnStr.= "</a><span class='text'>";
                 if ($like->total_count == 0)
                     # $this->text_default[3] = "Be the first to like.";
@@ -214,11 +208,16 @@
                     $returnStr.= $like->getText($like->total_count, $likeSetting["likeText"][5]);
                 $returnStr.= "</span>";
             } else {
-                # $this->text_default[7] = "Unlike";
-                if ($likeSetting["likeWithText"] and $visitor->group->can("unlike_post") and $hasPersonLiked)
-                    $returnStr.= "<a class='liked' href=\"javascript:likes.unlike($post->id);\"><img src=\"".$likeSetting["likeImage"]."\" alt='Like Post-$post->id' />(".$likeSetting["likeText"][7].") </a><span class='text'>";
+                if ($visitor->group->can("unlike_post") and $hasPersonLiked)
+                    $returnStr.= "<a class='liked' href=\"javascript:likes.toggle($post->id);\">";
                 else
-                    $returnStr.= "<a class='liked'><img src=\"".$likeSetting["likeImage"]."\" alt='Like Post-$post->id' /></a><span class='text'>";
+                    $returnStr.= "<a class='liked'>";
+                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][7]."'> ";
+                if ($likeSetting["likeWithText"]) {
+                    $returnStr.= "<span class='like'>(".$likeSetting["likeText"][6].")</span> "; # $this->text_default[6] = "Like!"
+                    $returnStr.= "<span class='unlike'>(".$likeSetting["likeText"][7].")</span> "; # $this->text_default[7] = "Unlike!"
+                }
+                $returnStr.= "</a><span class='text'>";
                 if ($like->total_count == 1)
                     # $this->text_default[0] = "You like this post.";
                     $returnStr.= $like->getText($like->total_count, $likeSetting["likeText"][0]);
