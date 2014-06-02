@@ -199,9 +199,6 @@
      *     $text - The body of the post/page to parse.
      */
     function emote($text) {
-        if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== false)
-            return $text; # User agent is Google Chrome
-
         $emoji = array(
             ':angry:' => '&#x1f620;',
             ':blush:' => '&#x1f633;',
