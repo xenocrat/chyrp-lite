@@ -1,20 +1,30 @@
 <?php
     class Category extends Model {
+        static function sqlconcat($names = array()) {
+            # MySQL uses concat(a,b) but most other SQLDBS use (a || b)
+            if (SQL::current()->adapter === 'mysql' || SQL::current()->method === 'mysql') {
+                return 'concat('.implode(',', $names).')';
+            }
+            else {
+                return '('.implode(' || ', $names).')';
+            }
+        }
+
         static function getCategory($id = null) {
             # we give all of the categories if there isn't one specified
             if (!isset($id))
                 return SQL::current()->select("categorize",
-                    "id,name,clean,show_on_home,concat(:url,clean) AS url", NULL, "name ASC",
+                    "id,name,clean,show_on_home,".Category::sqlconcat(array(':url','clean'))." AS url", NULL, "name ASC",
                     array(":url" => url("category/")))->fetchAll();
             # single entry
             return SQL::current()->select("categorize",
-                "id,name,clean,show_on_home,concat(:url,clean) AS url", "id = :id", "name ASC",
+                "id,name,clean,show_on_home,".Category::sqlconcat(array(':url','clean'))." AS url", "id = :id", "name ASC",
                 array(':id' => $id, ":url" => url("category/")), 1)->fetchObject();
         }
 
         # This gets used to convert the category/<foo> name back to an ID or whatever else.
         static function getCategorybyClean($name = string) {
-            return SQL::current()->select("categorize", "id,name,clean,show_on_home,concat(:url,clean) AS url", "clean = :clean", "name ASC",
+            return SQL::current()->select("categorize", "id,name,clean,show_on_home,".Category::sqlconcat(array(':url','clean'))." AS url", "clean = :clean", "name ASC",
                 array(":url" => url("category/"), ":clean" => $name), 1)->fetchObject();
         }
 
@@ -26,11 +36,11 @@
         # This might be a nice way of showing the list of cats in the sidebar
         static function getCategoryList() {
             return SQL::current()->select(array('categorize', 'post_attributes', 'posts'),
-                "__categorize.name,__categorize.clean,__categorize.show_on_home,count(__categorize.id) AS total, concat(:url,__categorize.clean) AS url",
+                "__categorize.name,__categorize.clean,__categorize.show_on_home,count(__categorize.id) AS total, ".Category::sqlconcat(array(':url','__categorize.clean'))." AS url",
                 array("post_attributes.post_id = posts.id",
                     "post_attributes.name = 'category_id'",
                     "post_attributes.value = categorize.id"),
-                "`name` ASC", array(":url" => url("category/")),
+                "`__categorize.name` ASC", array(":url" => url("category/")),
                 NULL, NULL, "__categorize.name")->fetchAll();
         }
 
@@ -61,13 +71,12 @@
         }
 
         static function installCategorize() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS `__categorize` (
-                id    INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                name  VARCHAR(128) NOT NULL,
-                clean VARCHAR(128) NOT NULL,
-                show_on_home INT(1) DEFAULT 1,
-                UNIQUE KEY(`clean`)
-                ) DEFAULT CHARSET=UTF8");
+            SQL::current()->query("CREATE TABLE IF NOT EXISTS __categorize (
+                                      id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                                      name  VARCHAR(128) NOT NULL,
+                                      clean VARCHAR(128) NOT NULL UNIQUE,
+                                      show_on_home INT(1) DEFAULT 1
+                                   ) DEFAULT CHARSET=UTF8");
         }
 
         static function uninstallCategorize() {
