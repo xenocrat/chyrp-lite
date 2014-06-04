@@ -193,8 +193,8 @@
                 $returnStr.= "<a class='like' href=\"javascript:likes.toggle($post->id);\">";
                 $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][6]."'> ";
                 if ($likeSetting["likeWithText"]) {
-                    $returnStr.= "<span class='like'>(".$likeSetting["likeText"][6].")</span> "; # $this->text_default[6] = "Like!"
-                    $returnStr.= "<span class='unlike'>(".$likeSetting["likeText"][7].")</span> "; # $this->text_default[7] = "Unlike!"
+                    $returnStr.= "<span class='like'>".$likeSetting["likeText"][6]."</span> "; # $this->text_default[6] = "Like!"
+                    $returnStr.= "<span class='unlike'>".$likeSetting["likeText"][7]."</span> "; # $this->text_default[7] = "Unlike!"
                 }
                 $returnStr.= "</a><span class='text'>";
                 if ($like->total_count == 0)
@@ -214,8 +214,8 @@
                     $returnStr.= "<a class='liked'>";
                 $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][7]."'> ";
                 if ($likeSetting["likeWithText"]) {
-                    $returnStr.= "<span class='like'>(".$likeSetting["likeText"][6].")</span> "; # $this->text_default[6] = "Like!"
-                    $returnStr.= "<span class='unlike'>(".$likeSetting["likeText"][7].")</span> "; # $this->text_default[7] = "Unlike!"
+                    $returnStr.= "<span class='like'>".$likeSetting["likeText"][6]."</span> "; # $this->text_default[6] = "Like!"
+                    $returnStr.= "<span class='unlike'>".$likeSetting["likeText"][7]."</span> "; # $this->text_default[7] = "Unlike!"
                 }
                 $returnStr.= "</a><span class='text'>";
                 if ($like->total_count == 1)
@@ -236,14 +236,6 @@
             $returnStr.= "</div>";
             return $post->get_likes = $returnStr;
         }
-
-/*
-        public function post_likes_count_attr($attr, $post) {
-                $req["post_id"] = $post->id;
-                $like = new Like($req);
-                return $count = $like->fetchCount();
-        }
-*/
 
         public function get_like_images() {
             $imagesDir = MODULES_DIR."/likes/images/";

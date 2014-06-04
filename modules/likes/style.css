@@ -5,7 +5,7 @@ div.likes {
 div.likes a {
 	display: none;
 }
-div.likes a.like img, .likes a.liked img {
+div.likes a.like img, div.likes a.liked img {
     vertical-align: middle;
 }
 div.likes a.like span.unlike {
