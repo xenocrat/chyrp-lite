@@ -57,7 +57,7 @@ These requirements are more of guidelines, as these are the earliest versions of
 You can install Chyrp Lite in four steps:
 
 1. If using MySQL, create a MySQL database with a username and password.
-2. Download, unzip, and upload.
+2. Download the [latest release](https://github.com/xenocrat/chyrp-lite/releases), unzip, and upload to your web server.
 3. Open your web browser and navigate to where you uploaded Chyrp.
 4. Follow through the installer at [index.php](index.php).
 
@@ -74,3 +74,6 @@ Keeping Chyrp Lite up to date is important to ensure your blog is as safe and as
 6. Upgrade by navigating to [upgrade.php](upgrade.php).
 7. Re-enable your Modules/Feathers.
 8. Run the upgrader again. It will run the Module/Feather upgrade tasks.
+
+## Documentation
+The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation for users and developers.
