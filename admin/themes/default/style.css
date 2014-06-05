@@ -403,6 +403,13 @@ p.message.yay {                             background-color: #76b362;
                                             color: #ffffff }
 p.message.boo {                             background-color: #bd2f2f;
                                             color: #ffffff }
+p.message a:link,
+p.message a:visited,
+p.message a:hover,
+p.message a:focus,
+p.message a:active {                        color: #ffffff;
+                                            text-decoration: underline }
+
 /* @end */
 
 /* @group Buttons */
@@ -444,6 +451,8 @@ a.button.boo {                              color: #3e3634;
                                             border: 1px solid #d6bdb5 }
 button.boo:hover,
 a.button.boo:hover,
+button.boo:focus,
+a.button.boo:focus,
 button.boo:active,
 a.button.boo:active {                       border-color: #d51800 }
 button.yay,
@@ -452,6 +461,8 @@ a.button.yay {                              color: #363e34;
                                             border: 1px solid #bdd6b5 }
 button.yay:hover,
 a.button.yay:hover,
+button.yay:focus,
+a.button.yay:focus,
 button.yay:active,
 a.button.yay:active {                       border-color: #189100 }
 button > img,
