@@ -9,15 +9,7 @@
                 {% for safename, module in enabled_modules | items %}
                 <li class="${ module.classes | join(" ") }" id="module_$safename">
                     <h3>
-                        <a class="emblem module_disabler" href="{% admin "disable&module="~safename %}" title="${ "Disable" | translate }">
-                            <img src="$theme_url/images/icons/deny.svg" alt="${ "Disable" | translate }">
-                        </a>
-                        {% if not module.dependencies_needed %}
-                        <a class="emblem module_enabler" href="{% admin "enable&module="~safename %}" title="${ "Enable" | translate }">
-                            <img src="$theme_url/images/icons/add.svg" alt="${ "Enable" | translate }">
-                        </a>
-                        {% endif %}
-                        <img class="emblem module_status" src="$theme_url/images/icons/success.svg" alt="Blissful!" title="${ "Status" | translate }">
+                        <img class="emblem module_status" src="$theme_url/images/icons/success.svg" alt="Blissful!" title="${ "Blissful!" | translate }">
                         <a class="emblem module_author" href="$module.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ module.author.url | escape }">
                         </a>
@@ -37,6 +29,15 @@
                         <li class="$dependency">$dependency</li>
                     {% endfor %}
                     </ul>
+                    {% else %}
+                    <div class="controls">
+                        <a class="button module_disabler" href="{% admin "disable&module="~safename %}">
+                            <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
+                        </a>
+                        <a class="button module_enabler" href="{% admin "enable&module="~safename %}">
+                            <img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
+                        </a>
+                    </div>
                     {% endif %}
                 </li>
                 {% endfor %}
@@ -46,15 +47,7 @@
                 {% for safename, module in disabled_modules | items %}
                 <li class="${ module.classes | join(" ") }" id="module_$safename">
                     <h3>
-                        <a class="emblem module_disabler" href="{% admin "disable&module="~safename %}" title="${ "Disable" | translate }">
-                            <img src="$theme_url/images/icons/deny.svg" alt="${ "Disable" | translate }">
-                        </a>
-                        {% if not module.dependencies_needed %}
-                        <a class="emblem module_enabler" href="{% admin "enable&module="~safename %}" title="${ "Enable" | translate }">
-                            <img src="$theme_url/images/icons/add.svg" alt="${ "Enable" | translate }">
-                        </a>
-                        {% endif %}
-                        <img class="emblem module_status" src="$theme_url/images/icons/success.svg" alt="Blissful!" title="${ "Status" | translate }">
+                        <img class="emblem module_status" src="$theme_url/images/icons/success.svg" alt="Blissful!" title="${ "Blissful!" | translate }">
                         <a class="emblem module_author" href="$module.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ module.author.url | escape }">
                         </a>
@@ -74,6 +67,15 @@
                         <li class="$dependency">$dependency</li>
                     {% endfor %}
                     </ul>
+                    {% else %}
+                    <div class="controls">
+                        <a class="button module_disabler" href="{% admin "disable&module="~safename %}">
+                            <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
+                        </a>
+                        <a class="button module_enabler" href="{% admin "enable&module="~safename %}">
+                            <img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
+                        </a>
+                    </div>
                     {% endif %}
                 </li>
                 {% endfor %}

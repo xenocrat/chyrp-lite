@@ -556,7 +556,7 @@ img.emblem {                                display: inline;
 ul#feathers_enabled a.feather_enabler,
 ul#feathers_disabled a.feather_disabler,
 ul#modules_enabled a.module_enabler,
-ul#modules_disabled a.module_disabler {     display: none }
+ul#modules_disabled a.module_disabler {     display: none !important }
 li .module_status,
 li .module_status {                         display: none }
 li.error .module_status,

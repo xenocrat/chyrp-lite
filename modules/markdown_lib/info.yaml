@@ -1,7 +1,7 @@
 name: Markdown Extra
 url: http://chyrplite.net/
 version: 1.0
-description: Markdown support for posts, pages, and comments. Powered by <a href="http://michelf.ca/projects/php-markdown/">PHP Markdown Lib 1.4.1</a>.
+description: <a href="http://michelf.ca/projects/php-markdown/">Markdown</a> support for posts, pages, and comments.
 author:
   name: Chyrp Team
   url: http://chyrp.net/
