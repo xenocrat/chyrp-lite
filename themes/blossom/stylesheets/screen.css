@@ -123,9 +123,6 @@ ol {                                                list-style: decimal outside;
     ol.comments li.no_comments {                    display: none }
 table {                                             border-collapse: collapse;
                                                     border-spacing: 0em;
-                                                    -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
-                                                    display: block;
                                                     width: 100%;
                                                     margin: 0em 0em 1em 0em;
                                                     overflow-x: scroll;
@@ -493,6 +490,9 @@ img {                                               border-style: none;
     blockquote {                                    padding: 0em 1em }
     form.inline_edit {                              padding: 1em }
     input, select {                                 width: 100% }
+    table {                                         -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    display: block }
     div#mast {                                      display: block }
     div#sidebar {                                   display: none }
     div#tail {                                      display: block }
