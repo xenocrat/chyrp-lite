@@ -355,9 +355,8 @@
         echo (isset($_POST[$index])) ? fix($_POST[$index]) : $fallback ;
     }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <title>Chyrp Installer</title>
@@ -365,18 +364,16 @@
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
-                margin: 0;
-                padding: 0;
-                border: 0;
-            }
-            html {
-                font-size: 62.5%;
+                margin: 0em;
+                padding: 0em;
+                border: 0em;
             }
             body {
-                font: 1.25em/1.5em normal Verdana, Helvetica, Arial, sans-serif;
+                font-size: 14px;
+                font-family: sans-serif;
                 color: #626262;
                 background: #e8e8e8;
-                padding: 0 0 5em;
+                padding: 0em 0em 5em;
             }
             h2 {
                 font-size: 1.25em;
@@ -395,7 +392,7 @@
                 width: 100%;
             }
             form hr {
-                border: 0;
+                border: 0em;
                 padding-bottom: 1em;
                 margin-bottom: 4em;
                 border-bottom: .1em dashed #ddd;
@@ -419,26 +416,26 @@
                 background: #FBE3E4 url('./admin/themes/default/images/icons/failure.png') no-repeat .7em center;
             }
             .error.last {
-                margin: 0 0 1em 0;
+                margin: 0em 0em 1em 0;
             }
             .window {
                 width: 30em;
                 background: #fff;
                 padding: 2em;
-                margin: 5em auto 0;
-                -webkit-border-radius: 2em;
-                -moz-border-radius: 2em;
+                margin: 5em auto 0em;
+                border-radius: 2em;
             }
             h1 {
                 color: #ccc;
                 font-size: 3em;
-                margin: .25em 0 .5em;
+                margin: .25em 0em .5em;
                 text-align: center;
                 line-height: 1;
             }
             code {
                 color: #06B;
-                font-family: Monaco, monospace;
+                font-family: monospace;
+                word-wrap: break-word;
             }
             label {
                 display: block;
@@ -466,13 +463,12 @@
                 text-align: left;
                 padding: .75em 1em;
                 color: #777;
-                text-shadow: #fff .1em .1em 0;
+                text-shadow: #fff .1em .1em 0em;
                 font: 1em normal "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
                 text-decoration: none;
-                border: 0;
+                border: 0em;
                 cursor: pointer;
-                -webkit-border-radius: .5em;
-                -moz-border-radius: .5em;
+                border-radius: .5em;
             }
             button {
                 width: 100%;
@@ -490,7 +486,7 @@
                 color: #f00;
             }
             ol {
-                margin: 0 0 2em 2em;
+                margin: 0em 0em 2em 2em;
             }
             p {
                 margin-bottom: 1em;
