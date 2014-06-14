@@ -47,6 +47,10 @@
      *     $backtrace - The trace of the error.
      */
     function error($title, $body, $backtrace = array()) {
+        # Sanitize input
+        $title = fix($title);
+        $body = fix($body);
+
         if (defined('MAIN_DIR') and !empty($backtrace))
             foreach ($backtrace as $index => &$trace) {
                 if (!isset($trace["file"]) or !isset($trace["line"])) {
@@ -55,13 +59,6 @@
                     $trace["line"] = fix($trace["line"]);
                     $trace["file"] = fix(str_replace(MAIN_DIR."/", "", $trace["file"]));
                 }
-                # $trace["file"] = isset($trace["file"]) ?
-                #                       :
-                #                      (isset($trace["function"]) ?
-                #                          (isset($trace["class"]) ?
-                #                              $trace["class"].$trace["type"] :
-                #                              "").$trace["function"] :
-                #                          "[internal]");
             }
 
         # Clear all output sent before this error.
@@ -97,8 +94,8 @@
         # Display the error.
         if (defined('THEME_DIR') and class_exists("Theme") and Theme::current()->file_exists("pages/error"))
             MainController::current()->display("pages/error",
-                                               array("title" => fix($title),
-                                                     "body" => fix($body),
+                                               array("title" => $title,
+                                                     "body" => $body,
                                                      "backtrace" => $backtrace));
         else
             require INCLUDES_DIR."/error.php";
