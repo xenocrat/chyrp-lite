@@ -1206,7 +1206,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <title><?php echo __("Chyrp Upgrader"); ?></title>
         <style type="text/css" media="screen">
             html, body, ul, ol, li,
@@ -1272,7 +1272,7 @@
                 padding: .75em 1em;
                 color: #777;
                 text-shadow: #fff .1em .1em 0em;
-                font: 1em normal sans-serif;
+                font: 1em sans-serif;
                 text-decoration: none;
                 border: 0em;
                 cursor: pointer;
@@ -1427,7 +1427,7 @@
 </pre>
             <h1 class="what_now"><?php echo __("What now?"); ?></h1>
             <ol>
-                <li><?php echo __("Look through the results up there for any failed tasks. If you see any and you can't figure out why, you can ask for help at the <a href=\"http://chyrp.net/discuss/\">Chyrp Community</a>."); ?></li>
+                <li><?php echo __("Look through the results up there for any failed tasks."); ?></li>
                 <li><?php echo __("If any of your Modules or Feathers have new versions available for this release, check if an <code>upgrades.php</code> file exists in their main directory. If that file exists, run this upgrader again after enabling the Module or Feather and it will run the upgrade tasks."); ?></li>
                 <li><?php echo __("When you are done, you can delete this file. It doesn't pose any real threat on its own, but you should delete it anyway, just to be sure."); ?></li>
             </ol>
@@ -1446,7 +1446,7 @@
                 <li><?php echo __("Disable any third-party Modules and Feathers."); ?></li>
                 <li><?php echo __("Ensure that the Chyrp installation directory is writable by the server."); ?></li>
             </ol>
-            <p><?php echo __("If any of the upgrade processes fail, you can safely keep refreshing &ndash; it will only attempt to do tasks that are not already successfully completed. If you cannot figure something out, please make a topic (with details!) at the <a href=\"http://chyrp.net/discuss/\">Chyrp Community</a>."); ?></p>
+            <p><?php echo __("If any of the upgrade processes fail, you can safely keep refreshing &ndash; we will only attempt to redo tasks that are not already completed."); ?></p>
             <form action="upgrade.php" method="post">
                 <button type="submit" name="upgrade" value="yes"><?php echo __("Upgrade me!"); ?></button>
             </form>

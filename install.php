@@ -358,7 +358,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <title>Chyrp Installer</title>
         <style type="text/css" media="screen">
             html, body, ul, ol, li,
@@ -413,7 +413,7 @@
                 padding: .6em .8em .5em 2.75em;
                 border-bottom: .1em solid #FBC2C4;
                 color: #D12F19;
-                background: #FBE3E4 url('./admin/themes/default/images/icons/failure.png') no-repeat .7em center;
+                background: #FBE3E4 url('./admin/themes/default/images/icons/failure.svg') no-repeat .7em center;
             }
             .error.last {
                 margin: 0em 0em 1em 0;
@@ -460,11 +460,11 @@
                 background: #eee;
                 margin-top: 2em;
                 display: block;
-                text-align: left;
+                text-align: center;
                 padding: .75em 1em;
                 color: #777;
                 text-shadow: #fff .1em .1em 0em;
-                font: 1em normal "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+                font: 1em sans-serif;
                 text-decoration: none;
                 border: 0em;
                 cursor: pointer;
@@ -552,38 +552,38 @@
                 <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
                     <p id="host_field">
                         <label for="host"><?php echo __("Host"); ?> <span class="sub"><?php echo __("(usually ok as \"localhost\")"); ?></span></label>
-                        <input type="text" name="host" value="<?php value_fallback("host", ((isset($_ENV['DATABASE_SERVER'])) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host" />
+                        <input type="text" name="host" value="<?php value_fallback("host", ((isset($_ENV['DATABASE_SERVER'])) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
                     </p>
                 </div>
                 <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
                     <p id="username_field">
                         <label for="username"><?php echo __("Username"); ?></label>
-                        <input type="text" name="username" value="<?php value_fallback("username"); ?>" id="username" />
+                        <input type="text" name="username" value="<?php value_fallback("username"); ?>" id="username">
                     </p>
                 </div>
                 <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
                     <p id="password_field">
                         <label for="password"><?php echo __("Password"); ?></label>
-                        <input type="password" name="password" value="<?php value_fallback("password"); ?>" id="password" />
+                        <input type="password" name="password" value="<?php value_fallback("password"); ?>" id="password">
                     </p>
                 </div>
                 <p id="database_field">
                     <label for="database"><?php echo __("Database"); ?> <?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? '<span class="sub">'.__("(full path)").'</span>' : "" ; ?></label>
-                    <input type="text" name="database" value="<?php value_fallback("database"); ?>" id="database" />
+                    <input type="text" name="database" value="<?php value_fallback("database"); ?>" id="database">
                 </p>
                 <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
                     <p id="prefix_field">
                         <label for="prefix"><?php echo __("Table Prefix"); ?> <span class="sub"><?php echo __("(optional)"); ?></span></label>
-                        <input type="text" name="prefix" value="<?php value_fallback("prefix"); ?>" id="prefix" />
+                        <input type="text" name="prefix" value="<?php value_fallback("prefix"); ?>" id="prefix">
                     </p>
                 </div>
 
-                <hr />
+                <hr>
 
                 <h1><?php echo __("Website Setup"); ?></h1>
                 <p id="name_field">
                     <label for="name"><?php echo __("Site Name"); ?></label>
-                    <input type="text" name="name" value="<?php value_fallback("name", __("My Awesome Site")); ?>" id="name" />
+                    <input type="text" name="name" value="<?php value_fallback("name", __("My Awesome Site")); ?>" id="name">
                 </p>
                 <p id="description_field">
                     <label for="description"><?php echo __("Description"); ?></label>
@@ -601,24 +601,24 @@
                     </select>
                 </p>
 
-                <hr />
+                <hr>
 
                 <h1><?php echo __("Admin Account"); ?></h1>
                 <p id="login_field">
                     <label for="login"><?php echo __("Username"); ?></label>
-                    <input type="text" name="login" value="<?php value_fallback("login", "Admin"); ?>" id="login" />
+                    <input type="text" name="login" value="<?php value_fallback("login", "Admin"); ?>" id="login">
                 </p>
                 <p id="password_1_field">
                     <label for="password_1"><?php echo __("Password"); ?></label>
-                    <input type="password" name="password_1" value="<?php value_fallback("password_1"); ?>" id="password_1" />
+                    <input type="password" name="password_1" value="<?php value_fallback("password_1"); ?>" id="password_1">
                 </p>
                 <p id="password_2_field">
                     <label for="password_2"><?php echo __("Password"); ?> <span class="sub"><?php echo __("(again)"); ?></span></label>
-                    <input type="password" name="password_2" value="<?php value_fallback("password_2"); ?>" id="password_2" />
+                    <input type="password" name="password_2" value="<?php value_fallback("password_2"); ?>" id="password_2">
                 </p>
                 <p id="email_field">
                     <label for="email"><?php echo __("E-Mail Address"); ?></label>
-                    <input type="text" name="email" value="<?php value_fallback("email"); ?>" id="email" />
+                    <input type="text" name="email" value="<?php value_fallback("email"); ?>" id="email">
                 </p>
 
                 <button type="submit"><?php echo __("Install! &rarr;"); ?></button>
