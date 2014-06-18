@@ -1,7 +1,7 @@
 <?php
     if (!class_exists("MainController")) {
         if (defined("INCLUDES_DIR")) {
-            require INCLUDES_DIR."controller/Main.php";
+            require INCLUDES_DIR."/controller/Main.php";
         } else {
             header("Status: 403"); exit("Access denied."); # Undefined constants: xss protection.
         }
