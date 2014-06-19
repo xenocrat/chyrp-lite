@@ -1,0 +1,128 @@
+# Chyrp Lite Translation File.
+# Copyright (C) 2014 Xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2014-06-19 22:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/categorize/categorize.php:14
+#: modules/categorize/pages/admin/manage_category.twig:3
+#: modules/categorize/pages/admin/manage_category.twig:18
+msgid "Manage Categories"
+msgstr ""
+
+#: modules/categorize/categorize.php:96
+msgid "Category"
+msgstr ""
+
+#: modules/categorize/categorize.php:124
+#: modules/categorize/categorize.php:138
+msgid "Invalid Category"
+msgstr ""
+
+#: modules/categorize/categorize.php:149
+#, php-format
+msgid "Posts in category %s"
+msgstr ""
+
+#: modules/categorize/categorize.php:191
+msgid "Categories"
+msgstr ""
+
+#: modules/categorize/categorize.php:219
+msgid "Category added."
+msgstr ""
+
+#: modules/categorize/categorize.php:229
+#: modules/categorize/categorize.php:248
+msgid "You do not have sufficient privileges to manage categories."
+msgstr ""
+
+#: modules/categorize/categorize.php:232
+msgid "An ID is required to edit a category."
+msgstr ""
+
+#: modules/categorize/categorize.php:237
+msgid "Category updated."
+msgstr ""
+
+#: modules/categorize/categorize.php:251
+msgid "Category deleted."
+msgstr ""
+
+#: modules/categorize/info.yaml:1
+msgid "Categorize"
+msgstr ""
+
+#: modules/categorize/info.yaml:4
+msgid "Categorize your posts."
+msgstr ""
+
+#: modules/categorize/info.yaml:7
+msgid "Please remember to update the permission settings for each group."
+msgstr ""
+
+#: modules/categorize/info.yaml:9
+msgid "Do you want to remove your Categories from the database? This will also remove all category entries from your posts."
+msgstr ""
+
+#: modules/categorize/pages/admin/add_category.twig:3
+#: modules/categorize/pages/admin/add_category.twig:6
+msgid "New Category"
+msgstr ""
+
+#: modules/categorize/pages/admin/add_category.twig:10
+#: modules/categorize/pages/admin/edit_category.twig:10
+#: modules/categorize/pages/admin/manage_category.twig:23
+msgid "Name"
+msgstr ""
+
+#: modules/categorize/pages/admin/add_category.twig:15
+#: modules/categorize/pages/admin/edit_category.twig:15
+msgid "URL"
+msgstr ""
+
+#: modules/categorize/pages/admin/add_category.twig:20
+#: modules/categorize/pages/admin/edit_category.twig:20
+msgid "Enter a “clean” name here if your category name contains characters that cannot be displayed in a URL, or if you want the category name to appear differently in the URL."
+msgstr ""
+
+#: modules/categorize/pages/admin/add_category.twig:24
+#: modules/categorize/pages/admin/edit_category.twig:24
+msgid "Show on home?"
+msgstr ""
+
+#: modules/categorize/pages/admin/edit_category.twig:3
+#, php-format
+msgid "Edit Category - %s"
+msgstr ""
+
+#: modules/categorize/pages/admin/edit_category.twig:6
+#, php-format
+msgid "Editing Category &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/categorize/pages/admin/edit_category.twig:28
+msgid "Update"
+msgstr ""
+
+#: modules/categorize/pages/admin/manage_category.twig:12
+msgid "Add Category"
+msgstr ""
+
+#: modules/categorize/pages/admin/manage_category.twig:22
+msgid "Show"
+msgstr ""
+

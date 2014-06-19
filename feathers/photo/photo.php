@@ -3,7 +3,7 @@
         public function __init() {
             $this->setField(array("attr" => "title",
                                   "type" => "text",
-                                  "label" => __("Title", "text"),
+                                  "label" => __("Title", "photo"),
                                   "optional" => true));
             $this->setField(array("attr" => "photo",
                                   "type" => "file",

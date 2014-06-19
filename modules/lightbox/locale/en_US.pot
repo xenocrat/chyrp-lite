@@ -1,8 +1,14 @@
+# Chyrp Lite Translation File.
+# Copyright (C) 2014 Xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Chyrp v2.5\n"
-"Report-Msgid-Bugs-To: dan@pimley.net\n"
-"POT-Creation-Date: 2014-01-24 21:00+0000\n"
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2014-06-19 22:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -12,7 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: modules/lightbox/info.yaml:1
+#: modules/lightbox/lightbox.php:35
 msgid "Lightbox"
+msgstr ""
+
+#: modules/lightbox/info.yaml:4
+msgid "A lightbox for your images."
+msgstr ""
+
+#: modules/lightbox/javascript.php:112
+#: modules/lightbox/javascript.php:113
+#: modules/lightbox/javascript.php:115
+msgid "Minimize"
 msgstr ""
 
 #: modules/lightbox/pages/admin/lightbox_settings.twig:3
@@ -55,6 +72,3 @@ msgstr ""
 msgid "Prevent visitors from saving images?"
 msgstr ""
 
-#: modules/lightbox/javascript.php:102
-msgid "Minimize"
-msgstr ""

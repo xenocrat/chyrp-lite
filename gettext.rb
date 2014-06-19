@@ -3,11 +3,11 @@ require "yaml"
 require "optparse"
 
 OPTIONS = {
-  :project => "Chyrp v2.5",
-  :maintainer => "Chyrp Team <email@chyrp.net>",
-  :domain  => nil,
-  :msgstr  => "",#"XXX",
-  :msgstr_filter => "",#"XXX :: %s",
+  :project => "Chyrp Lite",
+  :maintainer => "Xenocrat <hello@xenocrat.net>",
+  :domain => nil,
+  :msgstr => "",
+  :msgstr_filter => "",
   :exclude => [".git", "modules", "lib", "feathers", "themes", "config.yaml.php"],
   :keys    => ["name", "description", "plural", "notifications", "confirm"]
 }
@@ -24,17 +24,29 @@ ARGV.options do |o|
   o.separator ""
 
   o.on("--project=[val]", String,
-       "The name of the project the .pot file is for.") { OPTIONS[:project] }
+       "The name of the project the .pot file is for.") do |project|
+    OPTIONS[:project] = project
+  end
   o.on("--maintainer=[val]", String,
-       "The maintainer of the .pot file. (Firstname Lastname <foo@bar.com>)") { OPTIONS[:maintainer] }
+       "The maintainer of the .pot file. (Firstname Lastname <foo@bar.com>)") do |maintainer|
+    OPTIONS[:maintainer] = maintainer
+  end
   o.on("--domain=[val]", String,
-       "Domain to scan for translations.") { OPTIONS[:domain] }
+       "Domain to scan for translations.") do |domain|
+    OPTIONS[:domain] = domain
+  end
   o.on("--msgstr=[val]", String,
-       "Message string to translate all found translations to. Useful for debugging.") { OPTIONS[:mststr] }
+       "Message string to translate all found translations to. Useful for debugging.") do |msgstr|
+    OPTIONS[:mststr] = msgstr
+  end
   o.on("--exclude=[val1,val2]", Array,
-       "A list of directories to exclude from the scan.") { OPTIONS[:exclude] }
+       "A list of directories to exclude from the scan.") do |exclude|
+    OPTIONS[:exclude] = exclude
+  end
   o.on("--keys=[val1,val2]", Array,
-       "A list of YAML keys for which to generate translations.") { OPTIONS[:keys] }
+       "A list of YAML keys for which to generate translations.") do |keys|
+    OPTIONS[:keys] = keys
+  end
 
   o.separator ""
 

@@ -1,14 +1,14 @@
-# Chyrp v2.5 Translation File.
-# Copyright (C) 2013 Chyrp Team
-# This file is distributed under the same license as the Chyrp v2.5 package.
+# Chyrp Lite Translation File.
+# Copyright (C) 2014 Xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Chyrp v2.5\n"
-"Report-Msgid-Bugs-To: email@chyrp.net\n"
-"POT-Creation-Date: 2013-12-27 18:14+0000\n"
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2014-06-19 22:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,27 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: feathers/audio/audio.php:21
+#: feathers/audio/audio.php:6
+msgid "Title"
+msgstr ""
+
+#: feathers/audio/audio.php:10
+msgid "Audio File"
+msgstr ""
+
+#: feathers/audio/audio.php:14
 msgid "Description"
 msgstr ""
 
-#: feathers/audio/audio.php:48
-msgid "Error"
+#: feathers/audio/audio.php:31
+msgid "Couldn't upload audio file."
 msgstr ""
 
-#: feathers/audio/info.yaml:4
-msgid "Audio"
+#: feathers/audio/audio.php:116
+msgid "Your web browser does not support the <code>audio</code> element."
 msgstr ""
 
 #: feathers/audio/info.yaml:1
-msgid "An audio feather, including a flash player."
+#: feathers/audio/info.yaml:6
+msgid "Audio"
 msgstr ""
 
-#: feathers/audio/audio.php:12
-#, php-format
-msgid "(Max. file size: %s)"
+#: feathers/audio/info.yaml:4
+msgid "A feather for audio."
 msgstr ""
 
-#: feathers/audio/audio.php:125
-msgid "Your web browser does not support the <code>audio</code> element."
-msgstr ""

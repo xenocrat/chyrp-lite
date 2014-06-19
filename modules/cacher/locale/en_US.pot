@@ -1,14 +1,14 @@
-# Chyrp v2.5 Translation File.
-# Copyright (C) 2013 Chyrp Team
-# This file is distributed under the same license as the Chyrp v2.5 package.
+# Chyrp Lite Translation File.
+# Copyright (C) 2014 Xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Chyrp v2.5\n"
-"Report-Msgid-Bugs-To: email@chyrp.net\n"
-"POT-Creation-Date: 2013-12-27 18:14+0000\n"
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2014-06-19 22:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,52 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/cacher/pages/admin/cache_settings.twig:10
-msgid "Expire Cache After&hellip;"
+#: modules/cacher/cacher.php:106
+msgid "Cache"
+msgstr ""
+
+#: modules/cacher/cacher.php:136
+msgid "Cache cleared."
+msgstr ""
+
+#: modules/cacher/info.yaml:1
+msgid "Cacher"
 msgstr ""
 
 #: modules/cacher/info.yaml:4
 msgid "Caches pages, drastically reducing server load."
 msgstr ""
 
-#: modules/cacher/pages/admin/cache_settings.twig:14
-msgid "Exclude URLs"
-msgstr ""
-
-#: modules/cacher/info.yaml:7
-msgid "Cacher"
-msgstr ""
-
-#: modules/cacher/pages/admin/cache_settings.twig:28
-msgid "Clear Cache"
-msgstr ""
-
-#: modules/cacher/pages/admin/cache_settings.twig:19
-msgid "Memcache Servers"
-msgstr ""
-
-#: modules/cacher/cacher.php:119
-msgid "Invalid security key."
-msgstr ""
-
-#: modules/cacher/cacher.php:113
-#: modules/cacher/cacher.php:119
-#: modules/cacher/cacher.php:132
-msgid "Access Denied"
-msgstr ""
-
-#: modules/cacher/cacher.php:113
-#: modules/cacher/cacher.php:132
-msgid "You do not have sufficient privileges to change settings."
-msgstr ""
-
-#: modules/cacher/pages/admin/cache_settings.twig:15
-#: modules/cacher/pages/admin/cache_settings.twig:20
-msgid "(comma separated)"
-msgstr ""
-
-#: modules/cacher/pages/admin/cache_settings.twig:11
-msgid "(seconds)"
+#: modules/cacher/info.yaml:6
+msgid "Please make sure that /includes/caches is writable by the server. If you are not certain whether it is or not, CHMOD it to 777."
 msgstr ""
 
 #: modules/cacher/pages/admin/cache_settings.twig:3
@@ -70,15 +42,24 @@ msgstr ""
 msgid "Cache Settings"
 msgstr ""
 
-#: modules/cacher/cacher.php:127
-msgid "Settings updated."
+#: modules/cacher/pages/admin/cache_settings.twig:10
+msgid "Expire Cache After&hellip;"
 msgstr ""
 
-#: modules/cacher/info.yaml:1
-msgid "Please make sure that /includes/caches is writable by the server. If you are not certain whether it is or not, CHMOD it to 777."
+#: modules/cacher/pages/admin/cache_settings.twig:11
+msgid "(seconds)"
 msgstr ""
 
-#: modules/cacher/pages/admin/cache_settings.twig:25
-msgid "Update"
+#: modules/cacher/pages/admin/cache_settings.twig:14
+msgid "Exclude URLs"
+msgstr ""
+
+#: modules/cacher/pages/admin/cache_settings.twig:15
+#: modules/cacher/pages/admin/cache_settings.twig:20
+msgid "(comma separated)"
+msgstr ""
+
+#: modules/cacher/pages/admin/cache_settings.twig:19
+msgid "Memcache Servers"
 msgstr ""
 
