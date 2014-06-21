@@ -27,7 +27,7 @@ $(function(){
             "left": "0px",
             "background-color": "rgba(79, 79, 79, 0.5)"
         }).append(
-            $("<iframe>", {
+            [$("<iframe>", {
                 "id": "ChyrpHelp-frame",
                 "src": $(this).attr("href"),
                 "role": "contentinfo",
@@ -44,9 +44,27 @@ $(function(){
                 "overflow-y": "auto",
                 "border": "none",
                 "box-shadow": "0px 4px 16px 2px rgba(79, 79, 79, 0.5)"    
-            })
+            }),
+            $("<img>", {
+                "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/cancel.svg",
+                "alt": "<?php echo ( __("Cancel") ) ?>",
+                "role": "button",
+                "aria-label": "<?php echo ( __("Cancel") ) ?>"
+            }).css({
+                "display": "block",
+                "position": "absolute",
+                "width": "16px",
+                "height": "16px",
+                "top": "10%",
+                "right": "10%",
+                "padding-top": "8px",
+                "padding-right": "8px",
+                "cursor": "pointer"
+            }).click(function() {
+                $(this).parent().remove();
+            })]
         ).click(function() {
-                $(this).remove();
+            $(this).remove();
         }).insertAfter("#content");
         return false;
     });
@@ -57,7 +75,7 @@ var Write = {
         this.sort_feathers();
     },
     sort_feathers: function(){
-        // Make the Feathers sortable
+        // Make the selected tab the first tab
         $("#sub_nav").children(".selected").detach().prependTo("#sub_nav");
 
         // Collect feather names and prepare to serialize
