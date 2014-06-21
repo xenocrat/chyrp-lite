@@ -2655,3 +2655,10 @@ msgstr ""
 msgid "Upgrade me!"
 msgstr ""
 
+#: feathers/audio/audio.php:11
+#: feathers/photo/photo.php:11
+#: feathers/uploader/uploader.php:8
+#: feathers/video/video.php:11
+#, php-format
+msgid "(Max. file size: %s)"
+msgstr ""
