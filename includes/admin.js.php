@@ -28,13 +28,7 @@ $(function(){
     // Confirmations for group actions.
     if (Route.action == "edit_group") confirm_edit_group();
     if (Route.action == "delete_group") confirm_delete_group();
-
-    // Open help text in a popup window.
-    $(".help").on("click", function(){
-        window.open($(this).attr("href"), "help", "status=0, scrollbars=1, location=0, menubar=0, toolbar=0, resizable=1, height=450, width=400");
-        return false;
-    })
-})
+});
 
 function toggle_all() {
     var all_checked = true;

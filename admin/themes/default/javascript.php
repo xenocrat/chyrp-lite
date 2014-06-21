@@ -12,6 +12,44 @@ $(function(){
 
     if (Route.action == "modules" || Route.action == "feathers")
         Extend.init()
+
+    // Open help text in an iframe overlay
+    $(".help").on("click", function(){
+        $("<div>", {
+            "id": "ChyrpHelp-div",
+            "role": "region",
+        }).css({
+            "display": "block",
+            "position": "fixed",
+            "width": "100%",
+            "height": "100%",
+            "top": "0px",
+            "left": "0px",
+            "background-color": "rgba(79, 79, 79, 0.5)"
+        }).append(
+            $("<iframe>", {
+                "id": "ChyrpHelp-frame",
+                "src": $(this).attr("href"),
+                "role": "contentinfo",
+                "aria-label": "Help"
+            }).css({
+                "display": "block",
+                "position": "absolute",
+                "width": "80%",
+                "height": "80%",
+                "max-height": "640px",
+                "top": "10%",
+                "left": "10%",
+                "overflow-x": "hidden",
+                "overflow-y": "auto",
+                "border": "none",
+                "box-shadow": "0px 4px 16px 2px rgba(79, 79, 79, 0.5)"    
+            })
+        ).click(function() {
+                $(this).remove();
+        }).insertAfter("#content");
+        return false;
+    });
 })
 
 var Write = {

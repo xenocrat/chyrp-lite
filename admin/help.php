@@ -1,39 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="$theme.type; charset=utf-8"/>
+        <meta http-equiv="Content-Type" content="$theme.type; charset=utf-8">
         <title>Chyrp: <?php echo $title; ?></title>
         <style type="text/css">
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
-                margin: 0;
-                padding: 0;
-                border: 0;
-            }
-            html {
-                font-size: 62.5%;
+                margin: 0em;
+                padding: 0em;
+                border: 0em;
             }
             body {
-                font: 1.25em/1.5em normal Verdana, Helvetica, Arial, sans-serif;
-                color: #626262;
+                font: 14px sans-serif;
+                color: #4a4747;
+                line-height: 1.25em;
                 background: #fff;
-                padding: 1em 0 1em;
+                padding: 1em;
                 overflow: auto;
             }
             code {
-                color: #06B;
-                font-family: Monaco, monospace;
+                color: #5f5f5f;
+                font-family: monospace;
             }
             h2 {
                 margin-bottom: .75em;
             }
             .title {
-                color: #aaa;
+                color: #afafaf;
                 font-size: 2em;
                 font-weight: bold;
-                margin: .25em 0 .5em;
+                margin: 0.5em 0em;
                 text-align: center;
             }
             .body {
@@ -47,8 +44,9 @@
                 font-style: normal;
                 display: block;
                 padding: .25em 1em;
-                background: #f0f0f0;
+                background: #efefef;
                 margin: 0 -1em 1em;
+                white-space: pre-wrap;
             }
             .body ul,
             .body ol {
@@ -57,6 +55,28 @@
             .body li {
                 margin: 0;
             }
+            a:link {
+                color: #4a4747;
+                text-decoration: underline;
+            }
+            a:visited {
+                color: #4a4747;
+                text-decoration: underline;
+            }
+            a:hover {
+                color: #1e57ba;
+                text-decoration: underline;
+            }
+            a:focus {
+                outline: none;
+                color: #1e57ba;
+                text-decoration: underline;
+            }
+            a:active {
+                color: #1e57ba;
+                text-decoration: underline;
+            }
+
             a:link, a:visited {
                 color: #6B0;
             }
@@ -74,7 +94,9 @@
         </style>
     </head>
     <body>
-        <div class="title"><?php echo $title; ?></div>
+        <div class="title">
+            <?php echo $title; ?>
+        </div>
         <div class="body">
             <?php echo $body; ?>
         </div>
