@@ -93,11 +93,11 @@
             }
         </style>
     </head>
-    <body>
-        <div class="title">
+    <body role="document">
+        <div class="title" role="banner">
             <?php echo $title; ?>
         </div>
-        <div class="body">
+        <div class="body" role="main">
             <?php echo $body; ?>
         </div>
     </body>

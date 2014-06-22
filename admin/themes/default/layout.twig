@@ -15,10 +15,10 @@
         <script src="$theme_url/javascript.php?action=$route.action" type="text/javascript" charset="utf-8"></script>
 ${ trigger.call("admin_head") }
     </head>
-    <body>
-        <div id="header">
+    <body role="document">
+        <div id="header" role="banner">
             <h1><a href="$site.url">$site.name</a></h1>
-            <ul id="navigation">
+            <ul id="navigation" role="navigation">
 {% block navigation %}
                 {% for action, nav in navigation | items %}
                 {% if nav.show %}
@@ -28,12 +28,12 @@ ${ trigger.call("admin_head") }
 {% endblock %}
             </ul>
         </div>
-        <div id="welcome">
+        <div id="welcome" role="banner">
                 ${ "Hello, %s!" | translate | format(visitor.full_name | split | first | fallback(visitor.login | fallback("Guest" | translate))) }
                 <a id="welcome_viewsite" href="$site.url">${ "View Site" | translate }</a>
                 <a id="welcome_logout" href="{% url "/?action=logout" %}">${ "Log Out" | translate }</a>
         </div>
-        <ul id="sub_nav" class="${ route.action }_nav ">
+        <ul id="sub_nav" role="navigation" class="${ route.action }_nav ">
 {% block subnav %}
             {% if subnav[route.action] %}
             {% for action, nav in subnav[route.action] | items %}
@@ -44,20 +44,20 @@ ${ trigger.call("admin_head") }
             {% endif %}
 {% endblock %}
         </ul>
-        <div id="content">
+        <div id="content" role="main">
             {% if new_update %} $new_update {% endif %}
             {% for notice in flash.notices %}
-            <p class="message yay">$notice</p>
+            <p role="alert" class="message yay">$notice</p>
             {% endfor %}
             {% for warning in flash.warnings %}
-            <p class="message boo">$warning</p>
+            <p role="alert" class="message boo">$warning</p>
             {% endfor %}
             {% for message in flash.messages %}
-            <p class="message">$message</p>
+            <p role="alert" class="message">$message</p>
             {% endfor %}
 {% block content %}{% endblock %}
         </div>
-        <div id="footer">
+        <div id="footer" role="contentinfo">
             ${ "Chyrp loves you." | translate }
             <small class="copyright">
                 ${ "v%s &dash; &copy; %d" | translate | format(version, "now" | date("Y")) }
