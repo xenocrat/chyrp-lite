@@ -2,21 +2,21 @@
     /**
      * File: Common
      *
-     * Chyrp Lite - a lightweight blogging engine
+     * Chyrp Lite: an ultra-lightweight fork of the Chyrp blogging engine.
      *
      * Version:
-     *     v2014.06.14
+     *     v2014.06.28
      *
      * License:
      *     Modified MIT (See COPYING)
      *
      * Chyrp Copyright:
-     *     Copyright (c) 2012 Chyrp Team (See AUTHORS)
+     *     Copyright (c) 2014 Chyrp Team (See AUTHORS)
      */
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2014.06.14");
+    define('CHYRP_VERSION', "2014.06.28");
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
