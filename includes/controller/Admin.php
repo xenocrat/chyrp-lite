@@ -2169,22 +2169,6 @@
         }
 
         /**
-         * Function: update
-         * Chyrp Update.
-         */
-        public function update() {
-            if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to perform the update."));
-
-            if (isset($_GET['get_update']))
-                return $this->display("update",
-                                array("updating" => Update::get_update()));
-            else
-                return $this->display("update",
-                                array("changelog" => Update::get_changelog()));
-        }
-
-        /**
          * Function: help
          * Sets the $title and $body for various help IDs.
          */

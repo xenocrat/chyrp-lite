@@ -393,7 +393,8 @@ td.controls img {                           position: relative;
 /* @group Messages */
 p.message {                                 padding: 0.6em;
                                             margin-bottom: 1em;
-                                            background-color: #efefef;
+                                            background-color: #7a9acc;
+                                            color: #ffffff;
                                             border: none;
                                             border-radius: 0.4em }
 p.message.yay {                             background-color: #76b362;

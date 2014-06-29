@@ -1275,21 +1275,9 @@ msgstr ""
 msgid "Database configuration is not set. Please run the upgrader."
 msgstr ""
 
-#: includes/class/Update.php:33
+#: includes/class/Update.php:35
 #, php-format
-msgid "<p class='message'>Chyrp v%s is available, you have v%s. <a href='?action=update'>Learn More</a></p>"
-msgstr ""
-
-#: includes/class/Update.php:98
-msgid "<h2>Chyrp is up to date!</h2>"
-msgstr ""
-
-#: includes/class/Update.php:109
-msgid "<h2>File downloaded!</h2>"
-msgstr ""
-
-#: includes/class/Update.php:119
-msgid "<h2>Something Went Wrong!</h2>"
+msgid "<p role='alert' class='message'>Chyrp Lite v%s is available. You can <a href='%s'>learn more</a> or <a href='%s'>download</a> it.</p>"
 msgstr ""
 
 #: includes/controller/Admin.php:62
