@@ -5,7 +5,7 @@
      * Chyrp Lite: an ultra-lightweight fork of the Chyrp blogging engine.
      *
      * Version:
-     *     v2014.06.28
+     *     v2014.06.29
      *
      * License:
      *     Modified MIT (See COPYING)
