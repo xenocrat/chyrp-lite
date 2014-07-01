@@ -13,6 +13,7 @@ ruby gettext.rb ./modules/cacher/       --domain=cacher       > ./modules/cacher
 ruby gettext.rb ./modules/cascade/      --domain=cascade      > ./modules/cascade/locale/en_US.pot
 ruby gettext.rb ./modules/categorize/   --domain=categorize   > ./modules/categorize/locale/en_US.pot
 ruby gettext.rb ./modules/comments/     --domain=comments     > ./modules/comments/locale/en_US.pot
+ruby gettext.rb ./modules/homepage/     --domain=homepage     > ./modules/homepage/locale/en_US.pot
 ruby gettext.rb ./modules/lightbox/     --domain=lightbox     > ./modules/lightbox/locale/en_US.pot
 ruby gettext.rb ./modules/likes/        --domain=likes        > ./modules/likes/locale/en_US.pot
 ruby gettext.rb ./modules/markdown_lib/ --domain=markdown     > ./modules/markdown_lib/locale/en_US.pot
@@ -21,4 +22,4 @@ ruby gettext.rb ./modules/read_more/    --domain=read_more    > ./modules/read_m
 ruby gettext.rb ./modules/rights/       --domain=rights       > ./modules/rights/locale/en_US.pot
 ruby gettext.rb ./modules/tags/         --domain=tags         > ./modules/tags/locale/en_US.pot
 
-ruby gettext.rb ./themes/blossom/       --domain=blossom      > ./themes/blossom/locale/en_US.pot
+ruby gettext.rb ./themes/blossom/       --domain=theme        > ./themes/blossom/locale/en_US.pot

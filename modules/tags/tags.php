@@ -11,6 +11,16 @@
 
         static function __uninstall($confirm) {
             Route::current()->remove("tag/(name)/");
+
+            if ($confirm) {
+                $sql = SQL::current();
+
+                foreach($sql->select("post_attributes",
+                                     "*",
+                                     array("name" => "tags"))->fetchAll() as $post)  {
+                    $sql->delete("post_attributes", array("name" => "tags", "post_id" => $post["post_id"]));
+                }
+            }
         }
 
         public function admin_head() {
