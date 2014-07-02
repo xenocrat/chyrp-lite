@@ -1,7 +1,7 @@
                         ${ trigger.call("before_page_fields") }
                         <p class="main_options">
                             <label for="title">${ "Title" | translate }</label>
-                            <input class="text" type="text" name="title" value="${ page.title | escape }" id="title" />
+                            <input class="text" type="text" name="title" value="${ page.title | escape }" id="title">
                         </p>
                         <p class="main_options">
                             <label for="body">${ "Body" | translate }</label>
@@ -11,7 +11,15 @@
                         <div id="more_options" class="more_options">
                             <p class="more_options_option">
                                 <label for="slug">${ "Slug" | translate }</label>
-                                <input class="text" type="text" name="slug" value="${ page.slug | escape }" id="slug" />
+                                <input class="text" type="text" name="slug" value="${ page.slug | escape }" id="slug">
+                            </p>
+                            <p class="more_options_option">
+                                <label for="list_order">${ "Position in pages list" | translate }</label>
+                                <input type="number" name="list_order" id="list_order" value="${ page.list_order }" min="0" max="1024">
+                            </p>
+                            <p class="more_options_option">
+                                <label for="show_in_list">${ "Show in pages list?" | translate }</label>
+                                <input type="checkbox" name="show_in_list" id="show_in_list" tabindex="3"{% if page.show_in_list or route.action == "write_page" %} checked="checked"{% endif %}>&nbsp;
                             </p>
                             <p class="more_options_option">
                                 <label for="parent_id">${ "Parent" | translate }</label>
@@ -21,10 +29,6 @@
                                     <option value="$item.page.id"${ page.parent_id | option_selected(item.page.id) }>${ "&mdash;" | repeat(item.page.depth - 1) } ${ item.page.title | escape }</option>
                                     {% endfor %}
                                 </select>
-                            </p>
-                            <p class="more_options_option">
-                                <label for="show_in_list">${ "Show in pages list?" | translate }</label>
-                                <input type="checkbox" name="show_in_list" id="show_in_list" tabindex="3"{% if page.show_in_list or route.action == "write_page" %} checked="checked"{% endif %} />&nbsp;
                             </p>
                             {% if route.action == "write_page" %}
                             ${ trigger.call("new_page_options") }
@@ -36,9 +40,9 @@
                         <div class="buttons confirmation">
                             <button type="submit" class="yay" accesskey="s">
                                 {% if route.action == "write_page" %}
-                                <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Publish" | translate }
+                                <img src="$theme_url/images/icons/success.svg" alt="success">${ "Publish" | translate }
                                 {% else %}
-                                <img src="$theme_url/images/icons/success.svg" alt="success" />${ "Save" | translate }
+                                <img src="$theme_url/images/icons/success.svg" alt="success">${ "Save" | translate }
                                 {% endif %}
                             </button>
                         </div>

@@ -243,6 +243,7 @@ span.pages:last-child {                     margin: 0em 14em 0em 1em }
 /* @group Forms */
 label {                                     line-height: 2em }
 input[type="text"],
+input[type="number"],
 input[type="password"],
 textarea {                                  -moz-box-sizing: border-box;
                                             box-sizing: border-box;
@@ -254,10 +255,12 @@ textarea {                                  -moz-box-sizing: border-box;
 /* Removes shadow from Mobile Safari -> */  background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 textarea:focus,
 input[type="text"]:focus,
+input[type="number"]:focus,
 input[type="password"]:focus {              border-color: #1e57ba;
                                             outline: none }
 input[type="text"].digits {                 width: 3em !important }
 input[type="text"].error,
+input[type="number"].error,
 input[type="password"].error,
 textarea.error {                            background-color: #faebe4;
                                             border: 1px solid #d6bdb5 }
@@ -289,6 +292,7 @@ form.split button:first-child {             margin-left: 45% }
 form.split input {                          margin-bottom: 0.4em }
 form.split input[type="checkbox"] {         margin: 0em 0.4em 0.4em 0em }
 form.split input[type="text"],
+form.split input[type="number"],
 form.split input[type="password"],
 form.split textarea {                       width: 25% }
 form.split .split_multiple {                float: left;
@@ -497,6 +501,7 @@ span.tags_select a.tag_added {              top: 2px }
 .main_options select,
 .main_options textarea {                    display: block } 
 .main_options input[type="text"],
+.main_options input[type="number"],
 .main_options input[type="password"],
 .main_options textarea {                    width: 100%;
                                             margin: 0em }
@@ -529,6 +534,7 @@ div.more_options p select,
 div.more_options p textarea {               display: block }
 
 div.more_options p input[type="text"],
+div.more_options p input[type="number"],
 div.more_options p input[type="password"],
 div.more_options p textarea {               width: 100%;
                                             margin: 0em }
@@ -617,6 +623,7 @@ li.error .module_status {                   display: inline }
     form.split button {                         margin-left: 0em }
     input.text,
     input[type="text"],
+    input[type="number"],
     input[type="password"],
     input.file,
     textarea {                                  -moz-box-sizing: border-box;

@@ -330,7 +330,7 @@
                               null,
                               $_POST['parent_id'],
                               !empty($_POST['show_in_list']),
-                              0,
+                              intval($_POST['list_order'], 10),
                               (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             Flash::notice(__("Page created!"), $page->url());
@@ -371,7 +371,7 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
 
-            $page->update($_POST['title'], $_POST['body'], null, $_POST['parent_id'], !empty($_POST['show_in_list']), $page->list_order, null, $_POST['slug']);
+            $page->update($_POST['title'], $_POST['body'], null, $_POST['parent_id'], !empty($_POST['show_in_list']), intval($_POST['list_order'], 10), null, $_POST['slug']);
 
             if (!isset($_POST['ajax']))
                 Flash::notice(_f("Page updated. <a href=\"%s\">View Page &rarr;</a>",

@@ -207,7 +207,7 @@
 
         /**
          * Function: size
-         * Returns the amount of users in the.
+         * Returns the amount of users in the group.
          */
         public function size() {
             if ($this->no_results)
