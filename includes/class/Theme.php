@@ -76,7 +76,10 @@
                 $array[$page->id]["page"] = $page;
             }
 
-            return $this->pages_list[$start] = $array;
+            if (!isset($exclude))
+                return $this->pages_list[$start] = $array;
+            else
+                return $array;
         }
 
         /**

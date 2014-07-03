@@ -252,12 +252,12 @@
          * 
          * !! DEPRECATED AFTER 2.0 !!
          */
-        public function parent() {
-            if ($this->no_results or !$this->parent_id)
-                return false;
+        #public function parent() {
+        #    if ($this->no_results or !$this->parent_id)
+        #        return false;
 
-            return new self($this->parent_id);
-        }
+        #    return new self($this->parent_id);
+        #}
 
         /**
          * Function: children
@@ -265,12 +265,12 @@
          * 
          * !! DEPRECATED AFTER 2.0 !!
          */
-        public function children() {
-            if ($this->no_results)
-                return false;
+        #public function children() {
+        #    if ($this->no_results)
+        #        return false;
 
-            return self::find(array("where" => array("parent_id" => $this->id)));
-        }
+        #    return self::find(array("where" => array("parent_id" => $this->id)));
+        #}
 
         /**
          * Function: user
@@ -278,10 +278,10 @@
          * 
          * !! DEPRECATED AFTER 2.0 !!
          */
-        public function user() {
-            if ($this->no_results)
-                return false;
+        #public function user() {
+        #    if ($this->no_results)
+        #        return false;
 
-            return new User($this->user_id);
-        }
+        #    return new User($this->user_id);
+        #}
     }

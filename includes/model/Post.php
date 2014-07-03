@@ -791,10 +791,10 @@
          * 
          * !! DEPRECATED AFTER 2.0 !!
          */
-        public function user() {
-            deprecated("\$post.user", "2.0", "\$post.author", debug_backtrace());
-            return self::author();
-        }
+        #public function user() {
+        #    deprecated("\$post.user", "2.0", "\$post.author", debug_backtrace());
+        #    return self::author();
+        #}
 
         /**
          * Function: groups

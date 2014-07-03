@@ -233,12 +233,12 @@
          * 
          * !! DEPRECATED AFTER 2.0 !!
          */
-        public function group() {
-            if ($this->no_results)
-                return false;
+        #public function group() {
+        #    if ($this->no_results)
+        #        return false;
 
-            return new Group($this->group_id);
-        }
+        #    return new Group($this->group_id);
+        #}
 
         /**
          * Function: posts
@@ -246,12 +246,12 @@
          * 
          * !! DEPRECATED AFTER 2.0 !!
          */
-        public function posts() {
-            if ($this->no_results)
-                return false;
+        #public function posts() {
+        #    if ($this->no_results)
+        #        return false;
 
-            return Post::find(array("where" => array("user_id" => $this->id)));
-        }
+        #    return Post::find(array("where" => array("user_id" => $this->id)));
+        #}
 
         /**
          * Function: pages
@@ -259,10 +259,10 @@
          * 
          * !! DEPRECATED AFTER 2.0 !!
          */
-        public function pages() {
-            if ($this->no_results)
-                return false;
+        #public function pages() {
+        #    if ($this->no_results)
+        #        return false;
 
-            return Page::find(array("where" => array("user_id" => $this->id)));
-        }
+        #    return Page::find(array("where" => array("user_id" => $this->id)));
+        #}
     }

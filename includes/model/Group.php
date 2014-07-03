@@ -224,10 +224,10 @@
          * 
          * !! DEPRECATED AFTER 2.0 !!
          */
-        public function members() {
-            if ($this->no_results)
-                return false;
+        #public function members() {
+        #    if ($this->no_results)
+        #        return false;
 
-            return User::find(array("where" => array("group_id" => $this->id)));
-        }
+        #    return User::find(array("where" => array("group_id" => $this->id)));
+        #}
     }

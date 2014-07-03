@@ -185,7 +185,7 @@
         }
     
         static function manage_nav($navs) {
-            if (!Visitor::current()->group()->can('manage_categorize'))
+            if (!Visitor::current()->group->can('manage_categorize'))
                 return $navs;
     
             $navs["manage_category"] = array("title" => __("Categories", "categorize"),
@@ -200,7 +200,7 @@
         }
     
         public function admin_manage_category($admin) {
-            if (!Visitor::current()->group()->can('manage_categorize'))
+            if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
     
             $admin->display("manage_category", array(
@@ -209,7 +209,7 @@
         }
     
         public function admin_add_category($admin) {
-            if (!Visitor::current()->group()->can('manage_categorize'))
+            if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
     
             # deal with a good submission
@@ -225,7 +225,7 @@
         }
     
         public function admin_edit_category($admin) {
-            if (!Visitor::current()->group()->can("manage_categorize"))
+            if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
     
             if (empty($_REQUEST['id']))
@@ -244,7 +244,7 @@
         }
     
         public function admin_delete_category($admin) {
-            if (!Visitor::current()->group()->can("manage_categorize"))
+            if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
     
             Category::deleteCategory($_REQUEST['id']);
