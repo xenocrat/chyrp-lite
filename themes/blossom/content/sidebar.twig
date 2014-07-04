@@ -48,7 +48,7 @@
     <h4 id="label_my_pages">${ "Pages" | translate }</h4>
     <ul class="navigation sidebar_nav my_pages" aria-labelledby="label_my_pages">
       {% for item in theme.pages_list %}
-      <li{% if item.has_children %} class="parent"{% endif %}><a href="$item.page.url">$item.page.title</a></li>
+      <li class="page depth$item.page.depth{% if item.has_children %} parent{% endif %}"><a href="$item.page.url">$item.page.title</a></li>
       {% endfor %}
     </ul>
     {% endif %}

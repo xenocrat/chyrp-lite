@@ -99,7 +99,9 @@ ol {                                                list-style: decimal outside;
                                                     text-overflow: ellipsis;
                                                     border-bottom: 1px solid #d2d9d4 }
     ul.navigation li:last-child {                   border-bottom: none }
-    ul.navigation li.parent {                       font-weight: bold }
+    ul.navigation li.page.depth2 {                  padding-left: 2em }
+    ul.navigation li.page.depth3 {                  padding-left: 3em }
+    ul.navigation li.page.depth4 {                  padding-left: 4em }
     ul.sidebar_nav li {                             text-align: left;
                                                     font-size: 0.75em }
     ul.tail_nav li {                                text-align: center;

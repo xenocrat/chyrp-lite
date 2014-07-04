@@ -57,7 +57,9 @@ ${ trigger.call("head") }
     <ul role="navigation" class="navigation tail_nav">
     {% if theme.pages_list %}
       {% for item in theme.pages_list %}
-      <li{% if item.has_children %} class="parent"{% endif %}><a href="$item.page.url">$item.page.title</a></li>
+        {% if item.page.depth == 1 %}
+      <li class="page{% if item.has_children %} parent{% endif %}"><a href="$item.page.url">$item.page.title</a></li>
+        {% endif %}
       {% endfor %}
     {% endif %}
       <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">Email</a></li>
