@@ -153,7 +153,7 @@
             $set = array($config->set("module_like",
                                 array("showOnFront" => true,
                                       "likeWithText" => false,
-                                      "likeImage" => $config->chyrp_url."/modules/likes/images/like.png",
+                                      "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg",
                                       "likeText" => $likeText)));
         }
 
