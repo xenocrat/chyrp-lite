@@ -68,11 +68,11 @@ pre {                                               font-family: monospace;
                                                     font-size: 0.75em;
                                                     margin: 1em 0em }
     li > pre {                                      margin: 1em 0em 0em 0em }
-ul {                                                list-style: disc outside;
+ul {                                                list-style: disc inside;
                                                     margin: 1em 0em;
                                                     padding: 0em }
     ul li > ul {                                    list-style-type: circle }
-ol {                                                list-style: decimal outside;
+ol {                                                list-style: decimal inside;
                                                     margin: 1em 0em;
                                                     padding: 0em }
     ol li > ol {                                    list-style-type: lower-latin }
