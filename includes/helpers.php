@@ -542,9 +542,9 @@
      *     $string - String to sanitize.
      */
     function sanitize_html($text) {
-        $text = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $text);
-        $text = str_replace("<script", "&lt;script", $text);
-        $text = str_replace("</script", "&lt;/script", $text);
+        $text = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i","<$1$2>", $text);
+        $text = preg_replace("/<script[^>]*?>/i","&lt;script&gt;", $text);
+        $text = preg_replace("/<\/script[^>]*?>/i","&lt;/script&gt;", $text);
         return $text;
     }
 
