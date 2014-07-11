@@ -18,8 +18,13 @@
          * Checks if the a new version of Chyrp is available.
          */
         public static function check_update() {
-            if (!Config::current()->check_updates)
+            $config = Config::current();
+
+            if (!$config->check_updates)
                 return;
+
+            if ((time() - $config->check_updates_last) < 86400 )
+                return; # Check for updates once per day
 
             $xml = self::xml();
             $curver = CHYRP_VERSION;
@@ -36,6 +41,8 @@
                     break;
                 }
             }
+
+            $config->set("check_updates_last", time());
 
             return $return;
         }

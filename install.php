@@ -139,6 +139,7 @@
             $config->set("timezone", $_POST['timezone']);
             $config->set("locale", "en_US");
             $config->set("check_updates", true);
+            $config->set("check_updates_last", 0);
             $config->set("theme", "blossom");
             $config->set("admin_theme", "default");
             $config->set("posts_per_page", 5);
