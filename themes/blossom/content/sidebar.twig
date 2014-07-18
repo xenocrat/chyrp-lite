@@ -11,8 +11,9 @@
     </div>
 
     <ul class="navigation sidebar_nav" aria-label="${ "Links" | translate }">
-      <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">Email</a></li>
-      <li><a href="{% url "feed" %}" rel="alternate">Feed</a></li>
+      {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Index" | translate }</a></li>{% endif %}
+      <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">${ "Email" | translate }</a></li>
+      <li><a href="{% url "feed" %}" rel="alternate">${ "Feed" | translate }</a></li>
       {% if visitor.group.can("change_settings", "toggle_extensions") %}
       <li><a href="$site.chyrp_url/admin/">${ "Admin" | translate }</a></li>
       {% elseif visitor.group.can("add_post") %}
