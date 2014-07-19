@@ -78,11 +78,13 @@ code {                                              font-size: 0.8em;
 ul {                                                list-style: disc inside;
                                                     margin: 1em 0em;
                                                     padding: 0em }
-    ul li > ul {                                    list-style-type: circle }
+    ul li > ul {                                    list-style-type: circle;
+                                                    margin-left: 1em }
 ol {                                                list-style: decimal inside;
                                                     margin: 1em 0em;
                                                     padding: 0em }
-    ol li > ol {                                    list-style-type: lower-latin }
+    ol li > ol {                                    list-style-type: lower-latin;
+                                                    margin-left: 1em }
     ul.navigation {                                 list-style: none;
                                                     font-size: 1em;
                                                     -moz-box-sizing: border-box;
@@ -387,7 +389,7 @@ a:visited {                                         color: #5c6773;
 a:hover {                                           color: #000000;
                                                     text-decoration: none }
 a:focus {                                           outline: none;
-                                                    color: #000000;
+                                                    color: #42a66a;
                                                     text-decoration: none }
 a:active {                                          color: #000000;
                                                     text-decoration: none }
@@ -412,9 +414,9 @@ a:active {                                          color: #000000;
                                                     text-decoration: none;
                                                     border-bottom: 1px #000000 solid }
     section a:focus, p a:focus {                    outline: none;
-                                                    color: #000000;
+                                                    color: #42a66a;
                                                     text-decoration: none;
-                                                    border-bottom: 1px #000000 solid }
+                                                    border-bottom: 1px #42a66a solid }
     section a:active, p a:active {                  color: #000000;
                                                     text-decoration: none;
                                                     border-bottom: 1px #000000 solid }

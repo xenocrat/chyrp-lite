@@ -17,22 +17,30 @@ $(function(){
     $('<li>', {
             "id": "mobile_toggle",
             "role": "button",
-            "aria-label": "Menu",
         }).css({
             "cursor": "pointer"
-        }).click( function() {
-            if ( $(this).parent().hasClass("on") ) {
-                $(this).parent().removeClass("on");
+        }).append($("<a>", {
+            "id": "cheeseburger-link",
+            "href": "#",
+            "aria-label": "Menu"
+        }).on("click focus", function() {
+            if ( $(".mobile_nav").hasClass("on") ) {
+                $(".mobile_nav").removeClass("on");
             } else {
-                $(this).parent().addClass("on");
+                $(".mobile_nav").addClass("on");
             }
             return false;
         }).append($("<img>", {
-            "id": "cheeseburger",
+            "id": "cheeseburger-image",
             "src": "<?php echo ( THEME_URL."/images/cheeseburger.svg") ?>",
             "alt": "Menu"
-        })).appendTo("ul.tail_nav").parent().addClass("mobile_nav").parents("body").css({
+        }))).appendTo("ul.tail_nav").parent().addClass("mobile_nav").parents("body").css({
             "margin-bottom": "3em"
+        });
+
+        // Make the menu items keyboard accessible
+        $(".mobile_nav").children().on("focus", "a:not(#cheeseburger-link)", function() {
+            $(".mobile_nav").addClass("on");
         });
 })
 
