@@ -79,37 +79,43 @@ var Comment = {
         $("#comment_"+id).loader();
         $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "edit_comment", comment_id: id }, function(data) {
             if (isError(data)) return $("#comment_"+id).loader(true);
-            $("#comment_"+id).loader(true).fadeOut("fast", function(){ $(this).empty().append(data).fadeIn("fast", function(){
-                $("#more_options_link_"+id).click(function(){
-                    if ($("#more_options_"+id).css("display") == "none") {
-                        $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
-                        $("#more_options_"+id).slideDown("slow");
-                    } else {
-                        $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
-                        $("#more_options_"+id).slideUp("slow");
-                    }
-                    return false;
-                });
-                $("#comment_cancel_edit_"+id).click(function(){
-                    $("#comment_"+id).loader();
-                    $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id }, function(data){
-                        $("#comment_"+id).loader(true).replaceWith(data);
+            $("#comment_"+id).fadeOut("fast", function(){
+                $(this).loader(true);
+                $(this).empty().append(data).fadeIn("fast", function(){
+                    $("#more_options_link_"+id).click(function(){
+                        if ($("#more_options_"+id).css("display") == "none") {
+                            $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
+                            $("#more_options_"+id).slideDown("slow");
+                        } else {
+                            $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
+                            $("#more_options_"+id).slideUp("slow");
+                        }
+                        return false;
                     });
-                });
-                $("#comment_edit_"+id).ajaxForm({ beforeSubmit: function(){
-                    $("#comment_"+id).loader();
-                }, success: function(response){
-                    Comment.editing--;
-                    if (isError(response)) return $("#comment_"+id).loader(true);
-                    $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id, reason: "edited" }, function(data) {
-                        if (isError(data)) return $("#comment_"+id).loader(true);
-                        $("#comment_"+id).loader(true);
-                        $("#comment_"+id).fadeOut("fast", function(){
-                            $(this).replaceWith(data).fadeIn("fast");
-                        })
-                    }, "html");
-                } });
-            }) });
+                    $("#comment_cancel_edit_"+id).click(function(){
+                        $("#comment_"+id).loader();
+                        $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id }, function(data){
+                            $("#comment_"+id).fadeOut("fast", function(){
+                                $(this).loader(true);
+                                $(this).replaceWith(data).fadeIn("fast");
+                            });
+                        });
+                    });
+                    $("#comment_edit_"+id).ajaxForm({ beforeSubmit: function(){
+                        $("#comment_"+id).loader();
+                    }, success: function(response){
+                        Comment.editing--;
+                        if (isError(response)) return $("#comment_"+id).loader(true);
+                        $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id, reason: "edited" }, function(data) {
+                            if (isError(data)) return $("#comment_"+id).loader(true);
+                            $("#comment_"+id).fadeOut("fast", function(){
+                                $(this).loader(true);
+                                $(this).replaceWith(data).fadeIn("fast");
+                            });
+                        }, "html");
+                    } });
+                })
+            });
         }, "html");
     },
     destroy: function(id) {
@@ -121,7 +127,7 @@ var Comment = {
 
             $("#comment_"+id).fadeOut("fast", function(){
                 $(this).remove();
-            })
+            });
 
             if ($(".comment_count").size() && $(".comment_plural").size()) {
                 var count = parseInt($(".comment_count:first").text());

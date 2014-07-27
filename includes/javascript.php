@@ -38,7 +38,8 @@ var Post = {
         Post.id = id;
         $("#post_"+id).loader();
         $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "edit_post", id: id }, function(data) {
-            $("#post_"+id).loader(true).fadeOut("fast", function(){
+            $("#post_"+id).fadeOut("fast", function(){
+                $(this).loader(true);
                 $(this).replaceWith(data);
                 $("#post_edit_form_"+id).css("opacity", 0).animate({ opacity: 1 }, function(){
 <?php $trigger->call("ajax_post_edit_form_javascript"); ?>
@@ -63,7 +64,8 @@ var Post = {
                             id: id,
                             reason: "cancelled"
                         }, function(data) {
-                            $("#post_edit_form_"+id).loader(true).fadeOut("fast", function(){
+                            $("#post_edit_form_"+id).fadeOut("fast", function(){
+                                $(this).loader(true);
                                 $(this).replaceWith(data);
                                 $(this).hide().fadeIn("fast");
                             });
@@ -80,11 +82,13 @@ var Post = {
             return $("#post_edit_form_"+id).loader(true);
 
         if (Route.action != "drafts" && Route.action != "view" && $("#post_edit_form_"+id+" select#status").val() == "draft") {
-            $("#post_edit_form_"+id).loader(true).fadeOut("fast", function(){
+            $("#post_edit_form_"+id).fadeOut("fast", function(){
+                $(this).loader(true);
                 alert("<?php echo __("Post has been saved as a draft."); ?>");
             })
         } else if (Route.action == "drafts" && $("#post_edit_form_"+id+" select#status").val() != "draft") {
-            $("#post_edit_form_"+id).loader(true).fadeOut("fast", function(){
+            $("#post_edit_form_"+id).fadeOut("fast", function(){
+                $(this).loader(true);
                 alert("<?php echo __("Post has been published."); ?>");
             })
         } else {
@@ -94,7 +98,8 @@ var Post = {
                 id: id,
                 reason: "edited"
             }, function(data) {
-                $("#post_edit_form_"+id).loader(true).fadeOut("fast", function(){
+                $("#post_edit_form_"+id).fadeOut("fast", function(){
+                    $(this).loader(true);
                     $(this).replaceWith(data);
                     $("#post_"+id).hide().fadeIn("fast");
                 });
