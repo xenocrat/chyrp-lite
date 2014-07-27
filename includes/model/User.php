@@ -226,43 +226,4 @@
             $hasher = new PasswordHash(8, false);
             return $hasher->CheckPassword($password, $storedHash);
         }
-
-        /**
-         * Function: group
-         * Returns a user's group. Example: $user->group->can("do_something")
-         * 
-         * !! DEPRECATED AFTER 2.0 !!
-         */
-        #public function group() {
-        #    if ($this->no_results)
-        #        return false;
-
-        #    return new Group($this->group_id);
-        #}
-
-        /**
-         * Function: posts
-         * Returns all the posts of the user.
-         * 
-         * !! DEPRECATED AFTER 2.0 !!
-         */
-        #public function posts() {
-        #    if ($this->no_results)
-        #        return false;
-
-        #    return Post::find(array("where" => array("user_id" => $this->id)));
-        #}
-
-        /**
-         * Function: pages
-         * Returns all the pages of the user.
-         * 
-         * !! DEPRECATED AFTER 2.0 !!
-         */
-        #public function pages() {
-        #    if ($this->no_results)
-        #        return false;
-
-        #    return Page::find(array("where" => array("user_id" => $this->id)));
-        #}
     }

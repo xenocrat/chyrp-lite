@@ -245,43 +245,4 @@
 
             return url("page/".implode("/", array_reverse($url)), MainController::current());
         }
-
-        /**
-         * Function: parent
-         * Returns a page's parent. Example: $page->parent()->parent()->title
-         * 
-         * !! DEPRECATED AFTER 2.0 !!
-         */
-        #public function parent() {
-        #    if ($this->no_results or !$this->parent_id)
-        #        return false;
-
-        #    return new self($this->parent_id);
-        #}
-
-        /**
-         * Function: children
-         * Returns a page's children.
-         * 
-         * !! DEPRECATED AFTER 2.0 !!
-         */
-        #public function children() {
-        #    if ($this->no_results)
-        #        return false;
-
-        #    return self::find(array("where" => array("parent_id" => $this->id)));
-        #}
-
-        /**
-         * Function: user
-         * Returns a page's creator. Example: $page->user->full_name
-         * 
-         * !! DEPRECATED AFTER 2.0 !!
-         */
-        #public function user() {
-        #    if ($this->no_results)
-        #        return false;
-
-        #    return new User($this->user_id);
-        #}
     }

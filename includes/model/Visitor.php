@@ -51,24 +51,6 @@
         }
 
         /**
-         * Function: group
-         * Returns the user's <Group> or the "Guest Group".
-         * 
-         * !! DEPRECATED AFTER 2.0 !!
-         */
-        #public function group() {
-        #    if (!isset($this->group_id))
-        #        return new Group(Config::current()->guest_group);
-        #    elseif (isset($this->group_name))
-        #        return new Group(null, array("read_from" => array("id" => $this->group_id,
-        #                                                          "name" => $this->group_name)));
-        #    else {
-        #        $group = new Group($this->group_id);
-        #        return ($group->no_results) ? new Group(Config::current()->default_group) : $group ;
-        #    }
-        #}
-
-        /**
          * Function: current
          * Returns a singleton reference to the current visitor.
          */

@@ -347,19 +347,6 @@
                                    "X-Mailer: PHP/".phpversion();
             $sent = email($to, $subject, $message, $headers);
         }
-
-        # !! DEPRECATED AFTER 2.0 !!
-        #public function post() {
-        #    return new Post($this->post_id);
-        #}
-
-        # !! DEPRECATED AFTER 2.0 !!
-        #public function user() {
-        #    if ($this->user_id)
-        #        return new User($this->user_id);
-        #    else
-        #        return false;
-        #}
     }
 
     class Threaded extends Comment {

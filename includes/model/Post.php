@@ -786,17 +786,6 @@
         }
 
         /**
-         * Function: user
-         * Returns a post's user. Example: $post->user->login
-         * 
-         * !! DEPRECATED AFTER 2.0 !!
-         */
-        #public function user() {
-        #    deprecated("\$post.user", "2.0", "\$post.author", debug_backtrace());
-        #    return self::author();
-        #}
-
-        /**
          * Function: groups
          * Lists the groups who can view the post if the post's status is specific to certain groups.
          */
