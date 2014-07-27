@@ -12,7 +12,7 @@ $(function(){
 <?php endif; ?>
         $("#add_comment").append($(document.createElement("input")).attr({ type: "hidden", name: "ajax", value: "true", id: "ajax" }));
         $("#add_comment").ajaxForm({ dataType: "json", resetForm: true, beforeSubmit: function() {
-            $("#add_comment").loader();
+            $("#add_comment").parent().loader();
         }, success: function(json){
             $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: json.comment_id, reason: "added" }, function(data) {
                 if ($(".comment_count").size() && $(".comment_plural").size()) {
@@ -26,7 +26,7 @@ $(function(){
                 $(data).prependTo(".comments").hide().fadeIn("slow");
             }, "html")
         }, complete: function(){
-            $("#add_comment").loader(true);
+            $("#add_comment").parent().loader(true);
         } })
     }
 <?php echo "\n"; if (!isset($config->enable_ajax) or $config->enable_ajax): ?>
