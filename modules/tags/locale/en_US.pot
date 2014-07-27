@@ -26,7 +26,7 @@ msgid "Adds tagging functionality to posts."
 msgstr ""
 
 #: modules/tags/info.yaml:6
-msgid "Do you want to remove your Tags from the database?"
+msgid "Do you want to remove your tags from the database?"
 msgstr ""
 
 #: modules/tags/pages/admin/edit_tags.twig:3
