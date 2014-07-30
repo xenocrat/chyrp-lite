@@ -14,12 +14,14 @@ p {                                                 line-height: 1.4;
                                                     margin: 0em 0em 1em 0em }
     p:last-child {                                  margin-bottom: 0em }
 h1 {                                                font-family: sans-serif;
-                                                    font-size: 0.75em;
+                                                    font-size: 2em;
                                                     font-weight: normal;
                                                     text-transform: uppercase;
-                                                    margin: 1.33em 0em;
+                                                    margin: 0.5em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }
+    h1.banner {                                     font-size: 0.75em;
+                                                    margin: 1.33em 0em }
     h1:first-child {                                margin-top: 0em }
 h2 {                                                font-family: sans-serif;
                                                     font-size: 1.5em;
@@ -319,7 +321,7 @@ label {                                             display: block;
     div.admin, div.downloads {                      margin: 1em 0em 0em 0em }
     input + div.doaction, textarea + div.doaction { padding-top: 0.5em }
     div.search_box {                                text-align: center;
-                                                    margin-bottom: 1em }
+                                                    margin-bottom: 2em }
     div#tail {                                      display: none;
                                                     width: 100%;
                                                     clear: both;

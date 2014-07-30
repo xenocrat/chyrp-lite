@@ -28,7 +28,7 @@ ${ trigger.call("head") }
   </div>
   {% if ( route.action != "login" ) and ( route.action != "controls" ) and ( route.action != "register" ) and ( route.action != "lost_password" ) %}
   <div id="mast" role="banner">
-    <h1><a href="$site.url">$site.name</a></h1>
+    <h1 class="banner"><a href="$site.url">$site.name</a></h1>
     <div role="search" class="search_box">
       <form action="$site.url" method="get" accept-charset="utf-8">
         <input type="hidden" name="action" value="search" id="action">
@@ -56,6 +56,7 @@ ${ trigger.call("head") }
   <div id="tail">
     <ul role="navigation" class="navigation tail_nav">
     {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Index" | translate }</a></li>{% endif %}
+    {% if enabled_modules.discuss %}<li><a href="{% url "/discuss" %}" rel="">${ "Discuss" | translate }</a></li>{% endif %}
     {% if theme.pages_list %}
       {% for item in theme.pages_list %}
         {% if item.page.depth == 1 %}

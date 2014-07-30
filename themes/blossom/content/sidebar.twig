@@ -1,6 +1,6 @@
 <div id="sidebar" role="navigation">
 
-    <h1><a href="$site.url">$site.name</a></h1>
+    <h1 class="banner"><a href="$site.url">$site.name</a></h1>
 
     <div role="search" class="search_box">
       <form action="$site.url" method="get" accept-charset="utf-8">
@@ -10,8 +10,12 @@
       </form>
     </div>
 
+    {% if visitor.logged_in %}
+    <h4>${ "Hello, %s!" | translate | format(visitor.full_name | split(" ") | first | fallback(visitor.login)) }</h4>
+    {% endif %}
     <ul class="navigation sidebar_nav" aria-label="${ "Links" | translate }">
       {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Index" | translate }</a></li>{% endif %}
+      {% if enabled_modules.discuss %}<li><a href="{% url "/discuss" %}" rel="">${ "Discuss" | translate }</a></li>{% endif %}
       <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">${ "Email" | translate }</a></li>
       <li><a href="{% url "feed" %}" rel="alternate">${ "Feed" | translate }</a></li>
       {% if visitor.group.can("change_settings", "toggle_extensions") %}
