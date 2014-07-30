@@ -1770,7 +1770,7 @@ msgstr ""
 #: includes/controller/Admin.php:2443
 #: includes/controller/Main.php:828
 #, php-format
-msgid "Couldn't load template: <code>%s</code>"
+msgid "Couldn't load template: %s"
 msgstr ""
 
 #: includes/controller/Main.php:310
