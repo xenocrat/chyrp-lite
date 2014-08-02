@@ -127,15 +127,14 @@
 
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __likes (
-                                     id INTEGER(10) NOT NULL AUTO_INCREMENT,
+                                     id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                      post_id INTEGER NOT NULL,
                                      user_id INTEGER NOT NULL,
                                      timestamp DATETIME DEFAULT NULL,
-                                     session_hash VARCHAR(32) NOT NULL,
-                                     PRIMARY KEY (id),
-                                     KEY key_post_id (post_id),
-                                     UNIQUE key_post_id_sh_pair (post_id, session_hash)
-                                   ) DEFAULT CHARSET=utf8");
+                                     session_hash VARCHAR(32) NOT NULL
+                                   ) DEFAULT CHARSET=UTF8");
+            SQL::current()->query("CREATE INDEX key_post_id ON __likes (post_id)");
+            SQL::current()->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
 
             Group::add_permission("like_post", "Like Posts");
             Group::add_permission("unlike_post", "Unlike Posts");
