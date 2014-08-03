@@ -62,6 +62,7 @@
          *     $body - The Body for the new page.
          *     $user - The <User> or <User.id> of the page's author.
          *     $parent_id - The ID of the new page's parent page (0 for none).
+         *     $public - Whether the page can be viewed without permission.
          *     $show_in_list - Whether or not to show it in the pages list.
          *     $list_order - The order of the page in the list.
          *     $clean - The clean URL.
@@ -79,6 +80,7 @@
                             $body,
                             $user         = null,
                             $parent_id    = 0,
+                            $public      = false,
                             $show_in_list = true,
                             $list_order   = 0,
                             $clean        = "",
@@ -95,6 +97,7 @@
                                 "body" =>         $body,
                                 "user_id" =>      oneof($user_id,      $visitor->id),
                                 "parent_id" =>    oneof($parent_id,    0),
+                                "public" =>       oneof($public,       true),
                                 "show_in_list" => oneof($show_in_list, true),
                                 "list_order" =>   oneof($list_order,   0),
                                 "clean" =>        oneof($clean,        sanitize($title)),
@@ -124,6 +127,7 @@
          *     $body - The new Body.
          *     $user - The <User> or <User.id> of the page's author.
          *     $parent_id - The new parent ID.
+         *     $public - Whether the page can be viewed without permission.
          *     $show_in_list - Whether or not to show it in the pages list.
          *     $clean - The page's clean URL.
          *     $url - The page's unique URL.
@@ -134,6 +138,7 @@
                                $body         = null,
                                $user         = null,
                                $parent_id    = null,
+                               $public       = null,
                                $show_in_list = null,
                                $list_order   = null,
                                $clean        = null,
@@ -150,7 +155,7 @@
 
             $old = clone $this;
 
-            foreach (array("title", "body", "user_id", "parent_id", "show_in_list",
+            foreach (array("title", "body", "user_id", "parent_id", "public", "show_in_list",
                            "list_order", "clean", "url", "created_at", "updated_at") as $attr)
                 if ($attr == "updated_at" and $$attr === null)
                     $this->$attr = $$attr = datetime();
@@ -161,6 +166,7 @@
                                 "body" =>         $body,
                                 "user_id" =>      $user_id,
                                 "parent_id" =>    $parent_id,
+                                "public" =>       $public,
                                 "show_in_list" => $show_in_list,
                                 "list_order" =>   $list_order,
                                 "clean" =>        $clean,

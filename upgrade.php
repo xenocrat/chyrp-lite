@@ -11,7 +11,7 @@
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',        true);
-    define('CHYRP_VERSION', "2.1.2");
+    define('CHYRP_VERSION', "2014.08.02");
     define('CACHE_TWIG',   false);
     define('JAVASCRIPT',   false);
     define('ADMIN',        false);
@@ -1122,6 +1122,36 @@
         echo " -".test(true);
     }
 
+    /**
+     * Function: pages_public_column
+     * Adds the @public@ column to the "pages" table.
+     *
+     * Versions: 2.5 => Chyrp Lite 2014.08.02
+     */
+    function pages_public_column() {
+        if (SQL::current()->query("SELECT public FROM __pages"))
+            return;
+
+        echo __("Adding public column to pages table...").
+             test(SQL::current()->query("ALTER TABLE __pages ADD public BOOLEAN DEFAULT '1' AFTER body"));
+    }
+
+    /**
+     * Function: add_view_page_permission
+     * Adds the "View Pages" permission to the Groups table.
+     *
+     * Versions: 2.5 => Chyrp Lite 2014.08.02
+     */
+    function add_view_page_permission() {
+        if (SQL::current()->count("permissions", array("id" => "view_page", "group_id" => 0)))
+            return; # Permission already exists.
+
+        echo _f("Inserting permission \"%s\"...", "View Pages").
+            test(SQL::current()->insert("permissions",
+                                             array("id" => "view_page",
+                                                   "name" => "View Pages")));
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -1316,6 +1346,10 @@
 
         add_user_approved_column();
 
+        pages_public_column();
+
+        add_view_page_permission();
+
         # Perform Module/Feather upgrades.
 
         foreach ((array) Config::get("enabled_modules") as $module)
@@ -1361,7 +1395,7 @@
             <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("All done!"); ?></a>
 <?php else: ?>
             <h1 class="first"><?php echo __("Halt!"); ?></h1>
-            <p><?php echo __("That button may look ready for a-clickin&rsquo;, but please take these preemptive measures before indulging:"); ?></p>
+            <p><?php echo __("That button may look tempting, but please take these preemptive measures before indulging:"); ?></p>
             <ol>
                 <li><?php echo __("<strong>Make a backup of your installation.</strong> You never know."); ?></li>
                 <li><?php echo __("Disable any third-party Modules and Feathers."); ?></li>

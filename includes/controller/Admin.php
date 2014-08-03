@@ -329,6 +329,7 @@
                               $_POST['body'],
                               null,
                               $_POST['parent_id'],
+                              !empty($_POST['public']),
                               !empty($_POST['show_in_list']),
                               intval($_POST['list_order'], 10),
                               (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
@@ -371,7 +372,7 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
 
-            $page->update($_POST['title'], $_POST['body'], null, $_POST['parent_id'], !empty($_POST['show_in_list']), intval($_POST['list_order'], 10), null, $_POST['slug']);
+            $page->update($_POST['title'], $_POST['body'], null, $_POST['parent_id'], !empty($_POST['public']), !empty($_POST['show_in_list']), intval($_POST['list_order'], 10), null, $_POST['slug']);
 
             if (!isset($_POST['ajax']))
                 Flash::notice(_f("Page updated. <a href=\"%s\">View Page &rarr;</a>",
@@ -386,7 +387,7 @@
         public function reorder_pages() {
             foreach ($_POST['list_order'] as $id => $order) {
                 $page = new Page($id);
-                $page->update($page->title, $page->body, null, $page->parent_id, $page->show_in_list, $order, null, $page->url);
+                $page->update($page->title, $page->body, null, $page->parent_id, $page->public, $page->show_in_list, $order, null, $page->url);
             }
 
             Flash::notice(__("Pages reordered."), "/admin/?action=manage_pages");
@@ -430,7 +431,7 @@
                     if (isset($_POST['destroy_children']))
                         Page::delete($child->id, true);
                     else
-                        $child->update($child->title, $child->body, 0, $child->show_in_list, $child->list_order, $child->url);
+                        $child->update($child->title, $child->body, null, 0, $child->public, $child->show_in_list, $child->list_order, null, $child->url);
 
             Page::delete($_POST['id']);
 
@@ -950,7 +951,7 @@
                     $pages_atom.= '        </author>'."\r";
                     $pages_atom.= '        <content type="html">'.fix($page->body).'</content>'."\r";
 
-                    foreach (array("show_in_list", "list_order", "clean", "url") as $attr)
+                    foreach (array("public", "show_in_list", "list_order", "clean", "url") as $attr)
                         $pages_atom.= '        <chyrp:'.$attr.'>'.fix($page->$attr).'</chyrp:'.$attr.'>'."\r";
 
 
@@ -1140,6 +1141,7 @@
                                       $entry->content,
                                       ($user_id ? $user_id : $visitor->id),
                                       $attr->parent_id,
+                                      (bool) (int) $chyrp->public,
                                       (bool) (int) $chyrp->show_in_list,
                                       $chyrp->list_order,
                                       $chyrp->clean,

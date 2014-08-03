@@ -1,4 +1,4 @@
-<?php
+    <?php
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',        true);
@@ -201,6 +201,7 @@
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              title VARCHAR(250) DEFAULT '',
                              body LONGTEXT,
+                             public BOOLEAN DEFAULT '1',
                              show_in_list BOOLEAN DEFAULT '1',
                              list_order INTEGER DEFAULT 0,
                              clean VARCHAR(128) DEFAULT '',
@@ -270,6 +271,7 @@
                                      __("Delete Drafts"),
                                      __("Delete Own Posts"),
                                      __("Delete Own Drafts"),
+                                     __("View Pages"),
                                      __("Add Pages"),
                                      __("Edit Pages"),
                                      __("Delete Pages"),
@@ -297,6 +299,7 @@
                            "delete_draft" => "Delete Drafts",
                            "delete_own_post" => "Delete Own Posts",
                            "delete_own_draft" => "Delete Own Drafts",
+                           "view_page" => "View Pages",
                            "add_page" => "Add Pages",
                            "edit_page" => "Edit Pages",
                            "delete_page" => "Delete Pages",

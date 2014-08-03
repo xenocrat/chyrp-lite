@@ -441,6 +441,11 @@
             if ($page->no_results)
                 return false; # Page not found; the 404 handling is handled externally.
 
+            $visitor = Visitor::current();
+
+            if (!$page->public and !$visitor->group->can("view_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to view this page."));
+
             $this->display(array("pages/page", "pages/".$page->url), array("page" => $page), $page->title);
         }
 
