@@ -80,7 +80,7 @@
                             $body,
                             $user         = null,
                             $parent_id    = 0,
-                            $public      = false,
+                            $public       = true,
                             $show_in_list = true,
                             $list_order   = 0,
                             $clean        = "",
