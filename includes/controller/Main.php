@@ -830,12 +830,12 @@
 
             $file = ($file[0] == "/" or preg_match("/[a-zA-Z]:\\\/", $file)) ? $file : THEME_DIR."/".$file ;
             if (!file_exists($file.".twig"))
-                error(__("Template Missing"), _f("Couldn't load template: %s", array($file.".twig")));
+                error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($file.".twig")));
 
             try {
                 return $this->twig->getTemplate($file.".twig")->display($this->context);
             } catch (Exception $e) {
-                $prettify = $e->getMessage();
+                $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 $trace = debug_backtrace();
                 $twig = array("file" => $e->filename, "line" => $e->lineno);
                 array_unshift($trace, $twig);

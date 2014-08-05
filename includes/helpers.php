@@ -49,7 +49,7 @@
     function error($title, $body, $backtrace = array()) {
         # Sanitize input
         $title = fix($title);
-        $body = fix($body);
+        $body = sanitize_html($body);
 
         if (defined('MAIN_DIR') and !empty($backtrace))
             foreach ($backtrace as $index => &$trace) {

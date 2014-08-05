@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-08-03 12:18+0000\n"
+"POT-Creation-Date: 2014-08-05 19:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -1765,6 +1765,7 @@ msgid "Template Missing"
 msgstr ""
 
 #: includes/controller/Admin.php:2429
+#: includes/controller/Main.php:833
 #, php-format
 msgid "Couldn't load template: <code>%s</code>"
 msgstr ""
@@ -1919,11 +1920,6 @@ msgstr ""
 
 #: includes/controller/Main.php:690
 msgid "E-Mail could not be sent. Password change cancelled."
-msgstr ""
-
-#: includes/controller/Main.php:833
-#, php-format
-msgid "Couldn't load template: %s"
 msgstr ""
 
 #: includes/error.php:15
