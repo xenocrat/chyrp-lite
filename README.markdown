@@ -32,6 +32,7 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * Admin theme-specific components properly separated from core admin functions.
 * Various code cleanups and bug fixes.
 * &lt;br&gt; elements and utility classes banished from themes, feathers, modules.
+* Password hashing upgraded to SHA-512.
 
 #### Added features:
 * Refurbished admin theme: responsive HTML5.
@@ -45,7 +46,7 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 ## Requirements
 Chyrp will thrive on virtually any server setup, but we guarantee Chyrp to run on no less than:
 
-* PHP 5 >= 5.3.0
+* PHP 5 >= 5.3.2
 * MySQL:
   - MySQL 4.1+
 * SQLite:
