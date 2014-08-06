@@ -1,4 +1,4 @@
-    <?php
+<?php
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',        true);
@@ -20,8 +20,8 @@
 
     ob_start();
 
-    if (version_compare(PHP_VERSION, "5.3.0", "<"))
-        exit("Chyrp requires PHP 5.3.0 or greater. Installation cannot continue.");
+    if (version_compare(PHP_VERSION, "5.3.2", "<"))
+        exit("Chyrp requires PHP 5.3.2 or greater. Installation cannot continue.");
 
     require_once INCLUDES_DIR."/helpers.php";
 
@@ -216,7 +216,7 @@
             $sql->query("CREATE TABLE IF NOT EXISTS __users (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              login VARCHAR(64) DEFAULT '',
-                             password VARCHAR(60) DEFAULT '',
+                             password VARCHAR(128) DEFAULT '',
                              full_name VARCHAR(250) DEFAULT '',
                              email VARCHAR(128) DEFAULT '',
                              website VARCHAR(128) DEFAULT '',

@@ -204,11 +204,14 @@
          * 
          * Returns:
          *     The securely hashed password to be stored in the database.
+         *
+         * Note:
+         *     Base64 encodes 6 bits per character so we generate 16*6/8=12 bytes for the salt.
          */
         static function hashPassword($password) {
-            $hasher = new PasswordHash(8, false);
-            $hashedPassword = $hasher->HashPassword($password);
-            return $hashedPassword;
+            $salt = base64_encode(openssl_random_pseudo_bytes(12));
+            $param = '$6$'.$salt; # Selecting SHA-512 (>=PHP 5.3.2)
+            return crypt($password,$param);
         }
 
         /**
@@ -223,7 +226,7 @@
          *     @true@ or @false@
          */
         static function checkPassword($password, $storedHash) {
-            $hasher = new PasswordHash(8, false);
-            return $hasher->CheckPassword($password, $storedHash);
+            return crypt($password, $storedHash) == $storedHash;
         }
+
     }
