@@ -605,6 +605,8 @@ li.error .module_status {                   display: inline }
                                                 padding: 0em 0em 2em 1em;
                                                 font-size: 1em;
                                                 border: 1px solid #bfbfbf !important }
+    #sub_nav li:nth-child(odd) a {              border-right: none !important }
+    #sub_nav li:nth-child(odd):last-child a {   border-right: 1px solid #bfbfbf !important }
     #sub_nav {                                  margin-top: 1em }
     #sub_nav, #content {                        margin-left: 1em;
                                                 margin-right: 1em }
