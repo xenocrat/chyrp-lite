@@ -5,7 +5,7 @@
      * Chyrp Lite: an ultra-lightweight fork of the Chyrp blogging engine.
      *
      * Version:
-     *     v2014.08.02
+     *     v2014.08.09
      *
      * License:
      *     Modified MIT (See COPYING)
@@ -16,7 +16,7 @@
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2014.08.02");
+    define('CHYRP_VERSION', "2014.08.09");
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
@@ -128,10 +128,6 @@
     # File: YAML
     # Horde YAML parsing library.
     require_once INCLUDES_DIR."/lib/YAML.php";
-
-    # File: PasswordHash
-    # Secure hashing of user passwords
-    require_once INCLUDES_DIR."/lib/PasswordHash.php";
 
     # File: Config
     # See Also:

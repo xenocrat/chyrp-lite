@@ -21,7 +21,7 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * Modules: aggregator, Dropbox, emailblog, extension manager, paging, smartypants, submission.
 
 #### Modifications:
-* jQuery updated to 2.1.1, Form plugin updated to 3.51.0-2014.06.20.
+* jQuery updated to 2.1.1, Form plugin updated to 3.51.0.
 * Markdown Extra module updated to 1.4.1.
 * Textile module updated to 3.5.5.
 * Audio feather uses browser's native player, with broad format support for upload.

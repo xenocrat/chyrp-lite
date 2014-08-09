@@ -11,7 +11,7 @@
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',        true);
-    define('CHYRP_VERSION', "2014.08.02");
+    define('CHYRP_VERSION', "2014.08.09");
     define('CACHE_TWIG',   false);
     define('JAVASCRIPT',   false);
     define('ADMIN',        false);
@@ -1065,7 +1065,7 @@
      * Function: pages_public_column
      * Adds the @public@ column to the "pages" table.
      *
-     * Versions: 2.5 => Chyrp Lite 2014.08.02
+     * Versions: 2.5 => Chyrp Lite 2014.08.09
      */
     function pages_public_column() {
         if (SQL::current()->query("SELECT public FROM __pages"))
@@ -1079,7 +1079,7 @@
      * Function: add_view_page_permission
      * Adds the "View Pages" permission to the Groups table.
      *
-     * Versions: 2.5 => Chyrp Lite 2014.08.02
+     * Versions: 2.5 => Chyrp Lite 2014.08.09
      */
     function add_view_page_permission() {
         if (SQL::current()->count("permissions", array("id" => "view_page", "group_id" => 0)))
@@ -1095,7 +1095,7 @@
      * Function: update_user_password_column
      * Updates the @password@ column on the "users" table to have a length of 128.
      *
-     * Versions: 2.0 => Chyrp Lite 2014.08.02
+     * Versions: 2.0 => Chyrp Lite 2014.08.09
      */
     function update_user_password_column() {
         $sql = SQL::current();
