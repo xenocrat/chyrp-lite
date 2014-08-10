@@ -11,7 +11,7 @@
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',        true);
-    define('CHYRP_VERSION', "2014.08.09");
+    define('CHYRP_VERSION', "2014.08.10");
     define('CACHE_TWIG',   false);
     define('JAVASCRIPT',   false);
     define('ADMIN',        false);

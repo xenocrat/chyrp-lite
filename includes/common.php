@@ -16,7 +16,7 @@
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2014.08.09");
+    define('CHYRP_VERSION', "2014.08.10");
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
