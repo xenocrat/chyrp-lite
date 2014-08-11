@@ -24,7 +24,7 @@
                             </p>
                             <p class="more_options_option">
                                 <label for="show_in_list">${ "Show in pages list?" | translate }</label>
-                                <input type="checkbox" name="show_in_list" id="show_in_list" tabindex="3"{% if page.show_in_list or route.action == "write_page" %} checked="checked"{% endif %}>
+                                <input type="checkbox" name="show_in_list" id="show_in_list"{% if page.show_in_list or route.action == "write_page" %} checked="checked"{% endif %}>
                             </p>
                             <p class="more_options_option">
                                 <label for="list_order">${ "Position in pages list" | translate }</label>
@@ -36,7 +36,7 @@
                             </p>
                             <p class="more_options_option">
                                 <label for="public">${ "Allow everyone to view?" | translate }</label>
-                                <input type="checkbox" name="public" id="public" tabindex="3"{% if page.public %} checked="checked"{% endif %}>
+                                <input type="checkbox" name="public" id="public"{% if page.public %} checked="checked"{% endif %}>
                             </p>
                             {% if route.action == "write_page" %}
                             ${ trigger.call("new_page_options") }
