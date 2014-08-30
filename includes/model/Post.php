@@ -87,15 +87,15 @@
             fallback($this->clean, $this->url);
 
             foreach($this->attributes as $key => $val)
-                if (!empty($key)) {
-                     $keys = array("body", "caption", "description", "dialogue");
-                     if ( in_array( $key, $keys ) and Config::current()->enable_emoji)
-                         $this->$key =  emote($val);
-                     else
-                         $this->$key =  $val;
-                 }
+                if (!empty($key))
+                    $this->$key =  $val;
 
-            Trigger::current()->filter($this, "post");
+            $trigger = Trigger::current();
+
+            $trigger->filter($this, "post");
+
+            if (Config::current()->enable_emoji)
+                $trigger->priorities["markup_text"][] = array("priority" => 10, "function" => "emote");
 
             if ($this->filtered)
                 $this->filter();

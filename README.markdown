@@ -1,4 +1,4 @@
-##What is Chyrp Lite?
+## What is Chyrp Lite?
 
 Chyrp Lite is an ultra-lightweight fork of the Chyrp blogging engine. Chyrp Lite is a personal project tailored to my specific needs, but you are very welcome to use it too! If you are looking for more features than you see here, you may want to consider [Chyrp](http://chyrp.net/) instead.
 
