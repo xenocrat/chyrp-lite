@@ -88,14 +88,9 @@
 
             foreach($this->attributes as $key => $val)
                 if (!empty($key))
-                    $this->$key =  $val;
+                    $this->$key = $val;
 
-            $trigger = Trigger::current();
-
-            $trigger->filter($this, "post");
-
-            if (Config::current()->enable_emoji)
-                $trigger->priorities["markup_text"][] = array("priority" => 10, "function" => "emote");
+            Trigger::current()->filter($this, "post");
 
             if ($this->filtered)
                 $this->filter();
