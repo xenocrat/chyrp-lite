@@ -6,7 +6,6 @@
     class TextileLib extends Modules {
         public function __init() {
             $this->addAlias("markup_text", "textilize", 8);
-            $this->addAlias("preview", "textilize", 8);
         }
         static function textilize($text) {
             $parser = new \Netcarver\Textile\Parser('html5');
