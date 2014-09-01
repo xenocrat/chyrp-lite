@@ -1,6 +1,6 @@
 ## What is Chyrp Lite?
 
-Chyrp Lite is an ultra-lightweight fork of the Chyrp blogging engine. Chyrp Lite is a personal project tailored to my specific needs, but you are very welcome to use it too! If you are looking for more features than you see here, you may want to consider [Chyrp](http://chyrp.net/) instead.
+Chyrp Lite is an ultra-lightweight fork of the [Chyrp](http://chyrp.net/) blogging engine.
 
 ## What can Chyrp Lite do for me?
 With Chyrp Lite you can run your own blog on your own web server with minimal fuss. You can use Chyrp Lite to create a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. With the addition of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website, with blogging features on the side. Chyrp Lite provides a beautiful unobtrusive blog theme and a friendly administration environment – both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5.
@@ -11,6 +11,15 @@ Chyrp Lite is compatible with Chyrp. If you have a Chyrp blog, you can switch to
 Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. JavaScripts deemed unduly complex or maintenance-heavy have been removed, as have modules and feathers deemed non-essential. Accessibility is aided by semantic markup, comprehensive alt text and ARIA labels.
 
 Specifically, Chyrp Lite deviates from Chyrp as follows:
+
+#### Added features:
+* Refurbished admin theme: responsive HTML5.
+* Default HTML5 responsive theme: "Blossom".
+* Modules:
+  - Lightbox (image viewer).
+  - Sitemap (index your blog for search engines).
+  - Rights (set attribution and content licence per post).
+  - Homepage (replace the blog index with a homepage).
 
 #### Removed components:
 * RedactorJS, flexNav, jQueryUI.
@@ -34,17 +43,8 @@ Specifically, Chyrp Lite deviates from Chyrp as follows:
 * &lt;br&gt; elements and utility classes banished from themes, feathers, modules.
 * Password hashing upgraded to SHA-512.
 
-#### Added features:
-* Refurbished admin theme: responsive HTML5.
-* Default HTML5 responsive theme: "Blossom".
-* Modules:
-  - Lightbox (image viewer).
-  - Sitemap (index your blog for search engines).
-  - Rights (set attribution and content licence per post).
-  - Homepage (replace the blog index with a homepage).
-
 ## Requirements
-Chyrp will thrive on virtually any server setup, but we guarantee Chyrp to run on no less than:
+These are the earliest versions of the services with which Chyrp Lite has been tested:
 
 * PHP 5 >= 5.3.2
 * MySQL:
@@ -52,8 +52,6 @@ Chyrp will thrive on virtually any server setup, but we guarantee Chyrp to run o
 * SQLite:
   - SQLite 3+
   - PDO
-
-These requirements are more of guidelines, as these are the earliest versions of the services that we have tested Chyrp on. If you are successfully running Chyrp on an earlier version of these services, let us know.
 
 ## Installation
 You can install Chyrp Lite in four steps:

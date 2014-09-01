@@ -16,7 +16,9 @@ ARGV.options do |o|
   o.separator ""
 
   o.on("--exclude=[val1,val1]", Array,
-       "A list of directories to exclude from the scan.") { |OPTIONS[:exclude]| }
+       "A list of directories to exclude from the scan.") do |exclude|
+    OPTIONS[:exclude] = exclude
+  end
 
   o.separator ""
 
