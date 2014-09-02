@@ -77,6 +77,13 @@
             $main->display("feathers/".$post->feather, array("post" => $post, "ajax_reason" => $reason));
             break;
 
+        case "preview":
+            if (!isset($_POST['content']) or !isset($_POST['filter']))
+                break;
+
+            echo Trigger::current()->filter($_POST['content'], $_POST['filter']);
+            break;
+
         case "check_confirm":
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable extensions."));
