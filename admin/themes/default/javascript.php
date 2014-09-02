@@ -14,9 +14,19 @@ $(function(){
         Extend.init()
 
     // Open help text in an iframe overlay
-    $(".help").on("click", function(){
+    Help.init();
+
+});
+
+var Help = {
+    init: function() {
+        $(".help").on("click", function(){
+            Help.show($(this).attr("href"));
+            return false;
+        });
+    },
+    show: function(href) {
         $("<div>", {
-            "id": "ChyrpHelp-div",
             "role": "region",
         }).css({
             "display": "block",
@@ -28,10 +38,9 @@ $(function(){
             "background-color": "rgba(79, 79, 79, 0.5)"
         }).append(
             [$("<iframe>", {
-                "id": "ChyrpHelp-frame",
-                "src": $(this).attr("href"),
+                "src": href,
                 "role": "contentinfo",
-                "aria-label": "Help"
+                "aria-label": "<?php echo __("Help"); ?>"
             }).css({
                 "display": "block",
                 "position": "absolute",
@@ -43,13 +52,13 @@ $(function(){
                 "overflow-x": "hidden",
                 "overflow-y": "auto",
                 "border": "none",
-                "box-shadow": "0px 4px 16px 2px rgba(79, 79, 79, 0.5)"    
+                "box-shadow": "0px 4px 16px 2px rgba(79, 79, 79, 0.5)"
             }),
             $("<img>", {
-                "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/cancel.svg",
-                "alt": "<?php echo ( __("Cancel") ) ?>",
+                "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/close.svg",
+                "alt": "<?php echo __("Close"); ?>",
                 "role": "button",
-                "aria-label": "<?php echo ( __("Cancel") ) ?>"
+                "aria-label": "<?php echo __("Close"); ?>"
             }).css({
                 "display": "block",
                 "position": "absolute",
@@ -63,18 +72,34 @@ $(function(){
             }).click(function() {
                 $(this).parent().remove();
             })]
-        ).click(function() {
-            $(this).remove();
+        ).click(function(e) {
+            if (e.target === e.currentTarget)
+                $(this).remove();
         }).insertAfter("#content");
-        return false;
-    });
-})
+    }
+}
 
 var Write = {
-    init: function(){
+    init: function() {
         this.sort_feathers();
+
+        $("*[data-preview]").each(function() {
+            $("<img>", {
+                "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/magnifier.svg",
+                "alt": "<?php echo __("Preview"); ?>",
+                "title": "<?php echo __("Preview"); ?>",
+                "data-target": $(this).attr("id")
+            }).addClass("preview emblem").css({
+                "cursor": "pointer"
+            }).click(function(){
+                var content = $("#" + $(this).attr("data-target")).val();
+                var filter = $("#" + $(this).attr("data-target")).attr("data-preview");
+                if (content != "" && filter != "" )
+                    Write.ajax_previews(content, filter);
+            }).insertBefore($(this));
+        });
     },
-    sort_feathers: function(){
+    sort_feathers: function() {
         // Make the selected tab the first tab
         $("#sub_nav").children(".selected").detach().prependTo("#sub_nav");
 
@@ -87,6 +112,64 @@ var Write = {
 
         // Update feather order with current tab order
         $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", "action=reorder_feathers&"+ $.param(list));
+    },
+    ajax_previews: function(content, filter) {
+        $("<div>", {
+            "role": "region",
+        }).css({
+            "display": "block",
+            "position": "fixed",
+            "width": "100%",
+            "height": "100%",
+            "top": "0px",
+            "left": "0px",
+            "background-color": "rgba(79, 79, 79, 0.5)"
+        }).append(
+            [$("<div>", {
+                "role": "contentinfo",
+                "aria-label": "<?php echo __("Preview"); ?>"
+            }).addClass("preview_reset").css({
+                "display": "block",
+                "position": "absolute",
+                "background-color": "#fff",
+                "width": "80%",
+                "height": "80%",
+                "max-height": "640px",
+                "top": "10%",
+                "left": "10%",
+                "overflow-x": "hidden",
+                "overflow-y": "auto",
+                "border": "none",
+                "box-shadow": "0px 4px 16px 2px rgba(79, 79, 79, 0.5)",
+                "box-sizing": "border-box",
+                "padding": "2em"
+            }).load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                    action: "preview",
+                    content: content,
+                    filter: filter
+            }),
+            $("<img>", {
+                "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/close.svg",
+                "alt": "<?php echo __("Close"); ?>",
+                "role": "button",
+                "aria-label": "<?php echo __("Close"); ?>"
+            }).css({
+                "display": "block",
+                "position": "absolute",
+                "width": "16px",
+                "height": "16px",
+                "top": "10%",
+                "right": "10%",
+                "padding-top": "8px",
+                "padding-right": "8px",
+                "cursor": "pointer"
+            }).click(function() {
+                $(this).parent().remove();
+            })]
+        ).click(function(e) {
+            if (e.target === e.currentTarget)
+                $(this).remove();
+        }).insertAfter("#content");
     }
 }
 
@@ -98,7 +181,7 @@ var Extend = {
     action: null,
     confirmed: null,
     conflicts: 0,
-    init: function(){
+    init: function() {
         $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(Extend.ajax_toggle);
 
         if (Route.action != "modules")
@@ -112,8 +195,8 @@ var Extend = {
               return c.replace(/conflict([0-9])/g, '');
         }).find(".module_status").attr({
             src: "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/success.svg",
-            alt: "Blissful!",
-            title: "Blissful!"
+            alt: "<?php echo __("Blissful!"); ?>",
+            title: "<?php echo __("Blissful!"); ?>"
         });
     },
     check_conflicts: function() {
@@ -140,8 +223,8 @@ var Extend = {
                     $("#"+conflict).addClass("error conflict"+Extend.conflicts);
                     $(this).addClass("error conflict"+Extend.conflicts).find(".module_status").attr({
                         src: "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/error.svg",
-                        alt: "Conflicted!",
-                        title: "Conflicted!"
+                        alt: "<?php echo __("Conflicted!"); ?>",
+                        title: "<?php echo __("Conflicted!"); ?>"
                     });
                 }
             }
@@ -176,7 +259,7 @@ var Extend = {
             action: "check_confirm",
             check: Extend.extension.name,
             type: Extend.extension.type
-        }, function(data){
+        }, function(data) {
             if (data != "" && Extend.action == "disable")
                 Extend.confirmed = (confirm(data)) ? 1 : 0;
 

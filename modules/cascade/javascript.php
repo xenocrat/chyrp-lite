@@ -9,7 +9,7 @@
             busy: false,
             fail: false,
             state: null,
-            auto: <?php echo ( Config::current()->ajax_scroll_auto ? "true" : "false" ) ?>,
+            auto: <?php echo ( Config::current()->ajax_scroll_auto ? "true" : "false" ); ?>,
             init: function() {
                 if ( ChyrpAjaxScroll.auto ) {
                     $(window).on("scroll", window, ChyrpAjaxScroll.watch);

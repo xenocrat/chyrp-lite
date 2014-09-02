@@ -657,6 +657,7 @@ li.error .module_status {                   display: inline }
     table tbody tr td.show_on_home {            min-width: 64px }
     table tbody tr td.main {                    min-width: 248px }
     table tbody tr:last-child td {              border-bottom: none }
+    table tbody tr td:first-child {             border-left: none }
     table tbody tr td:last-child {              border-right: none }
     .boo, .yay, button, a.button,
     a.prev_page, a.next_page {                  float: none !important;

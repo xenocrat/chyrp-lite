@@ -12,7 +12,8 @@
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "photo"),
-                                  "optional" => true));
+                                  "optional" => true,
+                                  "preview" => "markup_text"));
 
             $this->setFilter("title", array("markup_title", "markup_post_title"));
             $this->setFilter("caption", array("markup_text", "markup_post_text"));

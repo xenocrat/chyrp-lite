@@ -4,12 +4,14 @@
             $this->setField(array("attr" => "quote",
                                   "type" => "text_block",
                                   "rows" => 5,
-                                  "label" => __("Quote", "quote")));
+                                  "label" => __("Quote", "quote"),
+                                  "preview" => "markup_text"));
             $this->setField(array("attr" => "source",
                                   "type" => "text_block",
                                   "rows" => 5,
                                   "label" => __("Source", "quote"),
-                                  "optional" => true));
+                                  "optional" => true,
+                                  "preview" => "markup_text"));
 
             $this->setFilter("quote", array("markup_text", "markup_post_text"));
             $this->setFilter("source", array("markup_text", "markup_post_text"));

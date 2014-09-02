@@ -1,11 +1,11 @@
                         ${ trigger.call("before_page_fields") }
                         <p class="main_options">
                             <label for="title">${ "Title" | translate }</label>
-                            <input class="text" type="text" name="title" value="${ page.title | escape }" id="title">
+                            <input class="text" type="text" name="title" value="${ page.title | escape }" id="title" data-preview="markup_title">
                         </p>
                         <p class="main_options">
                             <label for="body">${ "Body" | translate }</label>
-                            <textarea rows="12" name="body" id="body">${ page.body | escape }</textarea>
+                            <textarea rows="12" name="body" id="body" data-preview="markup_text">${ page.body | escape }</textarea>
                         </p>
                         ${ trigger.call("after_page_fields") }
                         <div id="more_options" class="more_options">

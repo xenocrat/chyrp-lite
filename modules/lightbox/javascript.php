@@ -6,9 +6,9 @@
 ?>
 <!-- --><script>
         var ChyrpLightbox = {
-            background: "<?php echo ( Config::current()->module_lightbox["background"] ) ?>",
-            spacing: Math.abs("<?php echo ( Config::current()->module_lightbox["spacing"] ) ?>"),
-            protect: <?php echo ( Config::current()->module_lightbox["protect"] ? "true" : "false" ) ?>,
+            background: "<?php echo Config::current()->module_lightbox["background"]; ?>",
+            spacing: Math.abs("<?php echo Config::current()->module_lightbox["spacing"]; ?>"),
+            protect: <?php echo ( Config::current()->module_lightbox["protect"] ? "true" : "false" ); ?>,
             active: false,
             styles: {
                 fg: {
@@ -18,6 +18,7 @@
                     "left": "0px",
                     "width": "auto",
                     "height": "auto",
+                    "cursor": "default",
                     "visibility": "hidden"
                 },
                 bg: {
@@ -34,7 +35,7 @@
                 },
                 image: {
                     "-webkit-tap-highlight-color": "rgba(0,0,0,0)",
-                    "cursor": "url('<?php echo ( Config::current()->chyrp_url."/modules/lightbox/images/zoom-in.svg") ?>'), pointer"
+                    "cursor": "url('<?php echo Config::current()->chyrp_url."/modules/lightbox/images/zoom-in.svg"; ?>'), pointer"
                 },
                 black: {
                     "background-color": "#000000"
@@ -81,7 +82,10 @@
                         "id": "ChyrpLightbox-bg",
                         "role": "img",
                         "aria-label": alt
-                    }).css(ChyrpLightbox.styles.bg).click(ChyrpLightbox.hide).append($("<img>", {
+                    }).css(ChyrpLightbox.styles.bg).click(function(e) {
+                        if (e.target === e.currentTarget)
+                            ChyrpLightbox.hide();
+                    }).append($("<img>", {
                         "id": "ChyrpLightbox-fg",
                         "src": href || src, // Load original (Photo Feather)
                         "alt": alt
@@ -108,11 +112,11 @@
                     "visibility": 'visible'
                 });
                 $("<img>", {
-                    "src": "<?php echo ( Config::current()->chyrp_url."/modules/lightbox/images/minimize.svg") ?>",
-                    "alt": "<?php echo ( __("Minimize", "lightbox") ) ?>",
-                    "title": "<?php echo ( __("Minimize", "lightbox") ) ?>",
+                    "src": "<?php echo Config::current()->chyrp_url."/modules/lightbox/images/minimize.svg"; ?>",
+                    "alt": "<?php echo __("Minimize", "lightbox"); ?>",
+                    "title": "<?php echo __("Minimize", "lightbox"); ?>",
                     "role": "button",
-                    "aria-label": "<?php echo ( __("Minimize", "lightbox") ) ?>"
+                    "aria-label": "<?php echo __("Minimize", "lightbox"); ?>"
                 }).css({
                     "display": "block",
                     "position": "absolute",
@@ -122,7 +126,7 @@
                 }).click(ChyrpLightbox.hide).appendTo("#ChyrpLightbox-bg");
                 bg.css({
                     "opacity": 1,
-                    "cursor": "url('<?php echo ( Config::current()->chyrp_url."/modules/lightbox/images/zoom-out.svg") ?>'), pointer"
+                    "cursor": "url('<?php echo Config::current()->chyrp_url."/modules/lightbox/images/zoom-out.svg"; ?>'), pointer"
                 });
             },
             hide: function() {

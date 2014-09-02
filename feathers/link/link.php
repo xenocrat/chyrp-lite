@@ -11,7 +11,8 @@
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "link"),
-                                  "optional" => true));
+                                  "optional" => true,
+                                  "preview" => "markup_text"));
 
             $this->setFilter("name", array("markup_title", "markup_post_title"));
             $this->setFilter("description", array("markup_text", "markup_post_text"));

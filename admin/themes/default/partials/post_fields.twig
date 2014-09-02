@@ -16,12 +16,12 @@
                                 {% endif %}
                             </label>
                             {% if field.type == "text" or field.type == "file" %}
-                            <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr{% if field.multiple == "true" %}[]" multiple{% else %}"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="${ field.attr }_field">
+                            <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr{% if field.multiple == "true" %}[]" multiple{% else %}"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="${ field.attr }_field"{% if field.preview %} data-preview="$field.preview"{% endif %}>
                             {% if field.type == "file" and post.filename and route.action == "edit_post" %}
                             <em>Current file name: <strong>${ post.filename | escape('') }</strong></em>
                             {% endif %}
                             {% elseif field.type == "text_block" %}
-                            <textarea {% if field.classes %} class="${ field.classes | join(" ") }"{% endif %} rows="${ field.rows | fallback(12) }" name="$field.attr" id="${ field.attr }_field">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
+                            <textarea {% if field.classes %} class="${ field.classes | join(" ") }"{% endif %} rows="${ field.rows | fallback(12) }" name="$field.attr" id="${ field.attr }_field"{% if field.preview %} data-preview="$field.preview"{% endif %}>{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
                             {% elseif field.type == "checkbox" %}
                             <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr"{% if field.checked %}checked="checked"{% endif %} id="${ field.attr }_field">
                             {% elseif field.type == "select" %}
