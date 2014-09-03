@@ -43,9 +43,9 @@
             .body pre {
                 font-style: normal;
                 display: block;
-                padding: .25em 1em;
+                padding: 0em;
                 background: #efefef;
-                margin: 0 -1em 1em;
+                margin: 1em;
                 white-space: pre-wrap;
             }
             .body ul,
