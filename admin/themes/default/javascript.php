@@ -83,6 +83,7 @@ var Write = {
     init: function() {
         this.sort_feathers();
 
+        // Insert buttons for ajax previews
         $("*[data-preview]").each(function() {
             $("<img>", {
                 "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/magnifier.svg",
@@ -94,8 +95,7 @@ var Write = {
             }).click(function(){
                 var content = $("#" + $(this).attr("data-target")).val();
                 var filter = $("#" + $(this).attr("data-target")).attr("data-preview");
-                if (content != "" && filter != "" )
-                    Write.ajax_previews(content, filter);
+                if (content != "") Write.ajax_previews(content, filter);
             }).insertBefore($(this));
         });
     },
@@ -128,7 +128,7 @@ var Write = {
             [$("<div>", {
                 "role": "contentinfo",
                 "aria-label": "<?php echo __("Preview"); ?>"
-            }).addClass("preview_reset").css({
+            }).addClass("css_reset").css({
                 "display": "block",
                 "position": "absolute",
                 "background-color": "#fff",
@@ -147,6 +147,10 @@ var Write = {
                     action: "preview",
                     content: content,
                     filter: filter
+            }, function() {
+                $(this).find("a").each(function() {
+                    $(this).attr("target","_blank"); // Force links to spawn a new viewport
+                } )
             }),
             $("<img>", {
                 "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/close.svg",

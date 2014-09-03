@@ -4,7 +4,8 @@
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "audio"),
-                                  "optional" => true));
+                                  "optional" => true,
+                                  "preview" => "markup_title"));
             $this->setField(array("attr" => "audio",
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),

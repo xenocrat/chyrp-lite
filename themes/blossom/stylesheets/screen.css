@@ -89,6 +89,9 @@ ol {                                                list-style: decimal inside;
                                                     padding: 0em }
     ol li > ol {                                    list-style-type: lower-latin;
                                                     margin-left: 1em }
+dl {                                                list-style: none }
+    dl dt {                                         font-weight: bold }
+    dl dd {                                         margin-left: 1em }
     ul.navigation {                                 list-style: none;
                                                     font-size: 1em;
                                                     -moz-box-sizing: border-box;

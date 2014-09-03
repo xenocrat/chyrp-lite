@@ -9,12 +9,14 @@
             $this->setField(array("attr" => "title",
                                   "type"=> "text",
                                   "label" => __("Title", "uploader"),
-                                  "optional" => true));         
+                                  "optional" => true,
+                                  "preview" => "markup_title"));         
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "uploader"),
                                   "preview" => "markup_text"));
 
+            $this->setFilter("title", array("markup_title", "markup_post_title"));
             $this->setFilter("caption", array("markup_text", "markup_post_text"));
 
             $this->respondTo("delete_post", "delete_file");

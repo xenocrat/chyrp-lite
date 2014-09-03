@@ -4,7 +4,8 @@
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "photo"),
-                                  "optional" => true));
+                                  "optional" => true,
+                                  "preview" => "markup_title"));
             $this->setField(array("attr" => "photo",
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),

@@ -4,7 +4,8 @@
             $this->setField(array("attr" => "name",
                                   "type" => "text",
                                   "label" => __("Title", "link"),
-                                  "optional" => true));
+                                  "optional" => true,
+                                  "preview" => "markup_title"));
             $this->setField(array("attr" => "source",
                                   "type" => "text",
                                   "label" => __("URL", "link")));

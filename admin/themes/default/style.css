@@ -9,7 +9,7 @@ fieldset,img {                              border: 0em }
 address,caption,cite,code,
 dfn,em,strong,th,var {                      font-style: normal;
                                             font-weight: normal }
-li {                                        list-style: none }
+ul {                                        list-style: none }
 input,textarea,select {                     font-family: inherit;
                                             font-size: inherit;
                                             font-weight: inherit }
@@ -568,6 +568,29 @@ li.error .module_status {                   display: inline }
 .detail .detail_multiple {                  float: left;
                                             padding-right: 2em }
 .detail .detail_multiple:last-child {       padding-right: 0em }
+/* @end */
+
+/* @group CSS Reset */
+.css_reset h4 {                             font-size: 0.9em }
+.css_reset h5 {                             font-size: 0.8em }
+.css_reset h6 {                             font-size: 0.7em }
+.css_reset ul {                             list-style: disc inside;
+                                            margin: 1em 0em;
+                                            padding: 0em }
+    .css_reset ul li > ul {                 list-style-type: circle;
+                                            margin-left: 1em }
+.css_reset ol {                             list-style: decimal inside;
+                                            margin: 1em 0em;
+                                            padding: 0em }
+    .css_reset ol li > ol {                 list-style-type: lower-latin;
+                                            margin-left: 1em }
+.css_reset dl {                             list-style: none }
+    .css_reset dl dt {                      font-weight: bold }
+    .css_reset dl dd {                      margin-left: 1em }
+.css_reset pre {                            margin: 2em }
+.css_reset blockquote {                     margin: 2em;
+                                            font-style: italic }
+    .css_reset blockquote em {              font-style: normal }
 /* @end */
 
 /* @media-query for small screens */
