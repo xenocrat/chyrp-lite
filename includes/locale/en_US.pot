@@ -127,7 +127,7 @@ msgstr ""
 
 #: admin/themes/default/javascript.php:90
 #: admin/themes/default/javascript.php:91
-#: admin/themes/default/javascript.php:130
+#: admin/themes/default/javascript.php:131
 #: admin/themes/default/pages/themes.twig:22
 msgid "Preview"
 msgstr ""

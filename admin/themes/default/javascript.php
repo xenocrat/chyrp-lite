@@ -95,7 +95,8 @@ var Write = {
             }).click(function(){
                 var content = $("#" + $(this).attr("data-target")).val();
                 var filter = $("#" + $(this).attr("data-target")).attr("data-preview");
-                if (content != "") Write.ajax_previews(content, filter);
+                if (content != "")
+                    Write.ajax_previews(content, filter);
             }).insertBefore($(this));
         });
     },
@@ -134,7 +135,6 @@ var Write = {
                 "background-color": "#fff",
                 "width": "80%",
                 "height": "80%",
-                "max-height": "640px",
                 "top": "10%",
                 "left": "10%",
                 "overflow-x": "hidden",
