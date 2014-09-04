@@ -34,13 +34,15 @@ h3 {                                                font-size: 1em;
                                                     padding: 0em;
                                                     line-height: 1 }
     h3.ribbon {                                     margin: 0em }
-    h3.archive {                                    margin-top: 2em }
+    h3.archive {                                    margin-top: 1em;
+                                                    clear: both }
 h4 {                                                font-size: 0.75em;
                                                     font-weight: normal;
                                                     text-transform: uppercase;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }
+    h4.archive {                                    font-size: 1.33em }
 h5, h6 {                                            font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
@@ -124,7 +126,10 @@ dl {                                                list-style: none }
                                                     padding-top: 0em;
                                                     padding-bottom: 0em;
                                                     line-height: 3em }
-    ul.archive li {                                 margin: 0em 0em 1em 2em }
+    ul.archive {                                    list-style: none;
+                                                    clear: both }
+    ul.archive:last-child {                         margin-bottom: 0em }
+    ul.archive li {                                 margin: 0em }
     ol.comments {                                   list-style: none;
                                                     padding: 0em;
                                                     margin: 0em }
@@ -249,6 +254,8 @@ button {                                            font: inherit;
                                                     line-height: normal }
 label {                                             display: block;
                                                     margin-top: 1em }
+    div.clear {                                     height: 0em;
+                                                    clear: both }
     div.shim {                                      margin-top: 2em }
     div#mast {                                      display: none;
                                                     width: 100%;
@@ -318,8 +325,6 @@ label {                                             display: block;
                                                     clear: both }
     div.photo_frame + div.photo_frame,
     div.photo_frame + p {                           margin-top: 1em }
-    ul.archive div.photo_frame {                    width: 320px;
-                                                    max-height: 320px }
     div.tags {                                      margin: 1.33em 0em 0em 0em;
                                                     font-size: 0.75em }
     div.doaction {                                  font-family: inherit;
@@ -360,6 +365,23 @@ label {                                             display: block;
     div#main > article.page {                       padding-bottom: 2em }
     div.standalone {                                margin-bottom: 0em;
                                                     padding-bottom: 2em }
+    ul.archive article.post {                       display: block;
+                                                    float: left;
+                                                    width: 160px;
+                                                    height: 160px;
+                                                    overflow: hidden;
+                                                    font-size: 0.75em;
+                                                    background-color: #fbfbf7;
+                                                    margin: 0em 0em 1.33em 1.33em;
+                                                    padding: 0.67em;
+                                                    border: 1px solid #c6ccc8;
+                                                    border-radius: 6px;
+                                                    background-image: -o-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -moz-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -webkit-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em) }
+
 article > header {                                  display: block;
                                                     width: 100%;
                                                     clear: both;
@@ -516,7 +538,7 @@ img {                                               border-style: none;
 @-ms-keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 960px) {
     body {                                          margin: 0em 16px 1em 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
@@ -553,6 +575,15 @@ img {                                               border-style: none;
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
                                                     border-bottom: 1px solid #d2d9d4 }
+}
+
+@media screen and (max-width: 480px) {
+    ul.archive li {                                 margin-left: 0em }
+    ul.archive article.post {                       -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    width: 100%;
+                                                    margin-left: 0em }
+    ul.archive article.post img {                   width: 100% }
 }
 
 @media screen and (min-width: 1200px) {

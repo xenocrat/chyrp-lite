@@ -3,31 +3,34 @@
 {% block content %}
   {% if archives %} {# List? (For all/yearly archives) #}
     <div class="standalone">
-      {% for archive in archives %}
-      {% if GET.year != null %}
+    {% for archive in archives %}
+    {% if GET.year != null %}
       <h3 id="label_${ archive.timestamp }_archive" class="archive"><a href="$archive.url">${ archive.timestamp | strftime("%B" | translate) }</a></h3>
       {% else %}
       <h3 id="label_${ archive.timestamp }_archive" class="archive"><a href="$archive.url">${ archive.timestamp | strftime("%B %Y" | translate) }</a></h3>
       {% endif %}
       <ul aria-labelledby="label_${ archive.timestamp }_archive" class="archive">
         {% for post in archive.posts %}
-          {% if post.title %}
-          <li>
-            <a href="$post.url">${ post.title | normalize | truncate(80) }</a>
-          </li>
-          {% else %}
-          <li>
-            <a href="$post.url">${ post.created_at | strftime("%d %b, %Y" | translate) }</a>
-            {% if post.feather == "photo" %}
-            <div class="photo_frame">
-              ${ feathers['photo'].image_link(post, 320, null, "quality=60") }
-            </div>
+        <li>
+          <article class="post $post.feather" id="post_$post.id">
+            <a href="$post.url">
+            {% if post.title %}
+              <h4 class="archive">${ post.title | normalize | truncate(20) }</h4>
+            {% else %}
+              <h4 class="archive">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
             {% endif %}
-          </li>
-          {% endif %}
+            </a>
+            {% if post.feather == "photo" %}
+            ${ feathers['photo'].image_link(post, 320, null, "quality=60") }
+            {% else %}
+            <p>${ post.excerpt | read_more("…more") }</p>
+            {% endif %}
+          </article>
+        </li>
         {% endfor %}
+        <div class="clear"></div>
       </ul>
-      {% endfor %}
+    {% endfor %}
     </div>
   {% endif %}
 
