@@ -11,7 +11,20 @@
       {% endif %}
       <ul aria-labelledby="label_${ archive.timestamp }_archive" class="archive">
         {% for post in archive.posts %}
-          {% if post.title %}<li><a href="$post.url">${ post.title | normalize | truncate(80) }</a></li>{% endif %}
+          {% if post.title %}
+          <li>
+            <a href="$post.url">${ post.title | normalize | truncate(80) }</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="$post.url">${ post.created_at | strftime("%d %b, %Y" | translate) }</a>
+            {% if post.feather == "photo" %}
+            <div class="photo_frame">
+              ${ feathers['photo'].image_link(post, 320, null, "quality=60") }
+            </div>
+            {% endif %}
+          </li>
+          {% endif %}
         {% endfor %}
       </ul>
       {% endfor %}

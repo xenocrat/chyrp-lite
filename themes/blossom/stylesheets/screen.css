@@ -318,6 +318,8 @@ label {                                             display: block;
                                                     clear: both }
     div.photo_frame + div.photo_frame,
     div.photo_frame + p {                           margin-top: 1em }
+    ul.archive div.photo_frame {                    width: 320px;
+                                                    max-height: 320px }
     div.tags {                                      margin: 1.33em 0em 0em 0em;
                                                     font-size: 0.75em }
     div.doaction {                                  font-family: inherit;
