@@ -6,8 +6,10 @@
         <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;$post.title&quot;">$post.title</a>
       </h2>
       {% endif %}
-      <section{% if post.description | length > 1000 %} class="columnized"{% endif %}>
+      <section class="description{% if post.description | length > 1000 %} columnized{% endif %}">
         ${ post.description | read_more("…more") }
-        $post.video_player
+      </section>
+      <section class="video">
+      	$post.video_player
       </section>
 {% endblock %}

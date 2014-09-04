@@ -126,9 +126,19 @@
             for ($i=0; $i < count($files); $i++) {
                 $list[$i]['name'] = $files[$i];
                 $list[$i]['link'] = uploaded($files[$i]);
+                $list[$i]['type'] = end(explode(".", strtolower($files[$i])));
             }
 
             return $list;
+        }
+
+        public function image_tag($filename, $max_width = 510, $max_height = null, $more_args = "quality=100") {
+            $config = Config::current();
+            return '<img src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'" alt="'.$filename.'" class="image">';
+        }
+
+        public function image_link($filename, $max_width = 510, $max_height = null, $more_args = "quality=100") {
+            return '<a href="'.uploaded($filename).'">'.$this->image_tag($filename, $max_width, $max_height, $more_args).'</a>';
         }
 
         public function add_option($options, $post = null) {

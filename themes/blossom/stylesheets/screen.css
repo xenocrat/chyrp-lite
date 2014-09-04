@@ -316,6 +316,8 @@ label {                                             display: block;
                                                     max-height: 1200px;
                                                     overflow: hidden;
                                                     clear: both }
+    div.photo_frame + div.photo_frame,
+    div.photo_frame + p {                           margin-top: 1em }
     div.tags {                                      margin: 1.33em 0em 0em 0em;
                                                     font-size: 0.75em }
     div.doaction {                                  font-family: inherit;
@@ -484,6 +486,7 @@ a:active {                                          color: #000000;
     div.doaction a.delete_link:hover {              background-color: #af2d2d }
     div.doaction a.post_delete_link:focus,
     div.doaction a.delete_link:focus {              background-color: #af2d2d }
+    div.photo_frame > a {                           border-bottom: none }
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
     a.rights_licence_link {                         display: block;

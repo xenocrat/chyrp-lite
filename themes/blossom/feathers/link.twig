@@ -4,7 +4,7 @@
       <h2>
         <a href="$post.source" class="link">$post.name</a>
       </h2>
-      <section{% if post.body | length > 800 %} class="columnized"{% endif %}>
+      <section class="description{% if post.description | length > 1000 %} columnized{% endif %}">
         ${ post.description | read_more("…more") }
       </section>
 {% endblock %}

@@ -6,12 +6,20 @@
         <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;$post.title&quot;">$post.title</a>
       </h2>
       {% endif %}
-      <section{% if post.caption | length > 1000 %} class="columnized"{% endif %}>
+      <section class="caption{% if post.caption | length > 1000 %} columnized{% endif %}">
         ${ post.caption | read_more("…more") }
-        <div class="doaction downloads">
-        {% for file in post.files %}
-          <a href="${ file.link | escape }">${ "Download" | translate } &quot;${ file.name | escape | truncate(20, "…", true) }&quot;</a>
-        {% endfor %}
+      </section>
+      <section class="downloads">
+      {% for file in post.files %}
+        {% if ( file.type == "jpg" ) or ( file.type == "jpeg" ) or ( file.type == "png" ) or ( file.type == "gif" ) or ( file.type == "tiff" ) or ( file.type == "bmp" ) %}
+        <div class="photo_frame">
+          ${ feathers['uploader'].image_link(file.name, 1200, null, "quality=80") }
         </div>
+        {% else %}
+        <p>
+          ${ "Download" | translate } <a href="${ file.link | escape }">&quot;${ file.name | escape | truncate(40, "…", true) }&quot;</a>
+        </p>
+        {% endif %}
+      {% endfor %}
       </section>
 {% endblock %}

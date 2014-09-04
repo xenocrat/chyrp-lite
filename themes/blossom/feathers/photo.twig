@@ -10,7 +10,7 @@
         ${ feathers['photo'].image_link(post, 1200, null, "quality=80") }
       </div>
       {% if post.caption %}
-      <section>
+      <section class="caption{% if post.caption | length > 1000 %} columnized{% endif %}">
         ${ post.caption | read_more("…more") }
       </section>
       {% endif %}
