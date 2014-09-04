@@ -3,45 +3,48 @@
 Chyrp Lite is an ultra-lightweight fork of the [Chyrp](http://chyrp.net/) blogging engine.
 
 ## What can Chyrp Lite do for me?
-With Chyrp Lite you can run your own blog on your own web server with minimal fuss. You can use Chyrp Lite to create a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. With the addition of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website, with blogging features on the side. Chyrp Lite provides a beautiful unobtrusive blog theme and a friendly administration environment – both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5.
+With Chyrp Lite you can run your own blog on your own web server with minimal fuss. You can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. With the addition of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website, with blogging features on the side.
 
-Chyrp Lite is compatible with Chyrp. If you have a Chyrp blog, you can switch to Chyrp Lite or vice versa!
+Chyrp Lite provides a beautiful unobtrusive blog theme and a friendly administration environment – both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5. Chyrp Lite is compatible with Chyrp. If you have a Chyrp blog, you can switch to Chyrp Lite.
+
+
+Specifically, Chyrp Lite offers the following "out of the box" features:
+
+#### Core:
+* Responsive and accessible HTML5 for all blog and admin pages.
+* Universal support for Markdown, Textile, or raw HTML.
+* One-click markup/markdown previews for posts and pages.
+* Trackback and Pingback support.
+* Personalise your blog using a powerful extensions framework.
+* Semantic markup makes it easy to customise themes or write your own.
+* A comprehensive rights model for managing your users and visitors.
+* SHA-512 password hashing for registered users of your blog.
+
+#### Feathers:
+* Text: write textual blog entries.
+* Photo: upload an image.
+* Quote: make a quotation.
+* Link: link to another website.
+* Video: upload a video file.
+* Audio: upload an audio file.
+* Uploader: create an image gallery or upload file attachments.
+
+#### Modules:
+* Cacher: cache your blog pages for reduced server load.
+* Categorize: give each of your blog entries a category.
+* Tags: apply multiple searchable tags to your blog entries.
+* Comments: a comprehensive comments system for your blog.
+* Likes: allow your visitors to show their appreciation.
+* Read More: excerpt long blog entries on the blog index.
+* Rights: set attribution and copyright/left for your entries.
+* Cascade: ajax-powered infinite scrolling for your blog.
+* Lightbox: on-page image viewer with image protection.
+* Sitemap: index your blog for search engines.
+* Rights: set attribution and content licence per post.
+* Homepage: replace the blog index with a homepage.
 
 ## How is Chyrp Lite different from Chyrp?
 Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. JavaScripts deemed unduly complex or maintenance-heavy have been removed, as have modules and feathers deemed non-essential. Accessibility is aided by semantic markup, comprehensive alt text and ARIA labels.
-
-Specifically, Chyrp Lite deviates from Chyrp as follows:
-
-#### Added features:
-* Refurbished admin theme: responsive HTML5.
-* Default HTML5 responsive theme: "Blossom".
-* Modules:
-  - Lightbox (image viewer).
-  - Sitemap (index your blog for search engines).
-  - Rights (set attribution and content licence per post).
-  - Homepage (replace the blog index with a homepage).
-
-#### Removed components:
-* RedactorJS, flexNav, jQueryUI.
-* Firecrest HTML4 blog theme.
-* Bookmarklet.
-* Post previews.
-* Feathers: chat, file.
-* Modules: aggregator, Dropbox, emailblog, extension manager, paging, smartypants, submission.
-
-#### Modifications:
-* jQuery updated to 2.1.1, Form plugin updated to 3.51.0.
-* Markdown Extra module updated to 1.4.1.
-* Textile module updated to 3.5.5.
-* Audio feather uses browser's native player, with broad format support for upload.
-* Video feather uses browser's native player, upload only with broad format support.
-* File feather has been replaced with multiple-file Uploader feather.
-* Recaptcha library relocated to Recaptcha module.
-* Pure CSS-styled ajax loader, no default widgets.
-* Admin theme-specific components properly separated from core admin functions.
-* Various code cleanups and bug fixes.
-* &lt;br&gt; elements and utility classes banished from themes, feathers, modules.
-* Password hashing upgraded to SHA-512.
 
 ## Requirements
 These are the earliest versions of the services with which Chyrp Lite has been tested:
