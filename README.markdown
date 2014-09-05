@@ -71,9 +71,9 @@ Keeping Chyrp Lite up to date is important to ensure your blog is as safe and as
 
 1. Download the latest version of Chyrp Lite.
 2. Copy your config file from `/includes/config.yaml.php` to somewhere safe.
-3. Disable any Modules/Feathers that you downloaded for the release you're upgrading from.
-4. Overwrite your current Chyrp installation files with the new ones.
-5. Restore your config file to /includes/.
+3. Disable any Modules/Feathers that you downloaded.
+4. Overwrite your current Chyrp installation files with the new ones, making sure to retain your [uploads](uploads/) folder.
+5. Restore your config file to `/includes/`.
 6. Upgrade by navigating to [upgrade.php](upgrade.php).
 7. Re-enable your Modules/Feathers.
 8. Run the upgrader again. It will run the Module/Feather upgrade tasks.
