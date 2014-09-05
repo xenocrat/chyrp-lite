@@ -12,7 +12,7 @@
                                   "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')))));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
-                                  "label" => __("Description"),
+                                  "label" => __("Description", "audio"),
                                   "optional" => true,
                                   "preview" => "markup_text"));
 

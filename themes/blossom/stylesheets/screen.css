@@ -81,6 +81,11 @@ code {                                              font-size: 0.8em;
                                                     display: inline-block;
                                                     background-color: #f7f5ed;
                                                     border: 1px solid #c6ccc8 }
+hr {                                                border: none;
+                                                    clear: both;
+                                                    border-top: 1px solid #ddd;
+                                                    margin: 1em 0em }
+    hr:last-child {                                 margin-bottom: 0em }
 ul {                                                list-style: disc inside;
                                                     margin: 1em 0em;
                                                     padding: 0em }
@@ -126,8 +131,7 @@ dl {                                                list-style: none }
                                                     padding-top: 0em;
                                                     padding-bottom: 0em;
                                                     line-height: 3em }
-    ul.archive {                                    list-style: none;
-                                                    clear: both }
+    ul.archive {                                    list-style: none }
     ul.archive:last-child {                         margin-bottom: 0em }
     ul.archive li {                                 margin: 0em }
     ol.comments {                                   list-style: none;

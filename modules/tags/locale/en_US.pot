@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-06-19 22:43+0000\n"
+"POT-Creation-Date: 2014-09-05 11:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -53,10 +53,10 @@ msgid "Posts Tagged"
 msgstr ""
 
 #: modules/tags/pages/admin/manage_tags.twig:45
-#: modules/tags/tags.php:46
-#: modules/tags/tags.php:103
-#: modules/tags/tags.php:114
-#: modules/tags/tags.php:438
+#: modules/tags/tags.php:56
+#: modules/tags/tags.php:113
+#: modules/tags/tags.php:124
+#: modules/tags/tags.php:448
 msgid "Tags"
 msgstr ""
 
@@ -81,62 +81,62 @@ msgstr ""
 msgid "Rename"
 msgstr ""
 
-#: modules/tags/tags.php:47
+#: modules/tags/tags.php:57
 msgid "(comma separated)"
 msgstr ""
 
-#: modules/tags/tags.php:127
+#: modules/tags/tags.php:137
 msgid "You do not have sufficient privileges to manage tags."
 msgstr ""
 
-#: modules/tags/tags.php:161
-#: modules/tags/tags.php:434
+#: modules/tags/tags.php:171
+#: modules/tags/tags.php:444
 #, php-format
 msgid "%s post tagged with &quot;%s&quot;"
 msgid_plural "%s posts tagged with &quot;%s&quot;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/tags/tags.php:195
-#: modules/tags/tags.php:257
+#: modules/tags/tags.php:205
+#: modules/tags/tags.php:267
 msgid "You do not have sufficient privileges to edit tags."
 msgstr ""
 
-#: modules/tags/tags.php:227
-#: modules/tags/tags.php:241
+#: modules/tags/tags.php:237
+#: modules/tags/tags.php:251
 msgid "Please specify the ID of the post whose tags you would like to edit."
 msgstr ""
 
-#: modules/tags/tags.php:249
+#: modules/tags/tags.php:259
 msgid "Tags updated."
 msgstr ""
 
-#: modules/tags/tags.php:279
+#: modules/tags/tags.php:289
 msgid "Tag renamed."
 msgstr ""
 
-#: modules/tags/tags.php:301
+#: modules/tags/tags.php:311
 msgid "Tag deleted."
 msgstr ""
 
-#: modules/tags/tags.php:337
+#: modules/tags/tags.php:347
 msgid "Posts tagged."
 msgstr ""
 
-#: modules/tags/tags.php:349
+#: modules/tags/tags.php:359
 msgid "No Tag"
 msgstr ""
 
-#: modules/tags/tags.php:379
+#: modules/tags/tags.php:389
 msgid "Invalid Tag"
 msgstr ""
 
-#: modules/tags/tags.php:390
+#: modules/tags/tags.php:400
 #, php-format
 msgid "Posts tagged with %s"
 msgstr ""
 
-#: modules/tags/tags.php:418
+#: modules/tags/tags.php:428
 msgid "No Tags"
 msgstr ""
 

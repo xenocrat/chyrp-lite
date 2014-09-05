@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-09-03 08:08+0000\n"
+"POT-Creation-Date: 2014-09-05 11:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -530,7 +530,7 @@ msgid "Enabled"
 msgstr ""
 
 #: admin/themes/default/pages/feathers.twig:15
-#: admin/themes/default/pages/feathers.twig:42
+#: admin/themes/default/pages/feathers.twig:41
 #: admin/themes/default/pages/modules.twig:16
 #: admin/themes/default/pages/modules.twig:54
 #, php-format
@@ -538,20 +538,20 @@ msgid "<a href=\"%s\">%s</a> v%s"
 msgstr ""
 
 #: admin/themes/default/pages/feathers.twig:24
-#: admin/themes/default/pages/feathers.twig:51
+#: admin/themes/default/pages/feathers.twig:50
 #: admin/themes/default/pages/modules.twig:35
 #: admin/themes/default/pages/modules.twig:73
 msgid "Disable"
 msgstr ""
 
 #: admin/themes/default/pages/feathers.twig:27
-#: admin/themes/default/pages/feathers.twig:54
+#: admin/themes/default/pages/feathers.twig:53
 #: admin/themes/default/pages/modules.twig:38
 #: admin/themes/default/pages/modules.twig:76
 msgid "Enable"
 msgstr ""
 
-#: admin/themes/default/pages/feathers.twig:35
+#: admin/themes/default/pages/feathers.twig:34
 #: admin/themes/default/pages/modules.twig:46
 msgid "Disabled"
 msgstr ""

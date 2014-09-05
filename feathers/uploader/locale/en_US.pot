@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-06-19 22:43+0000\n"
+"POT-Creation-Date: 2014-09-05 11:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -33,11 +33,11 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/uploader/uploader.php:15
+#: feathers/uploader/uploader.php:16
 msgid "Caption"
 msgstr ""
 
-#: feathers/uploader/uploader.php:138
+#: feathers/uploader/uploader.php:151
 msgid "Source"
 msgstr ""
 
