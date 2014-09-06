@@ -40,7 +40,6 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Cascade: ajax-powered infinite scrolling for your blog.
 * Lightbox: on-page image viewer with image protection.
 * Sitemap: index your blog for search engines.
-* Rights: set attribution and content licence per post.
 * Homepage: replace the blog index with a homepage.
 
 ## How is Chyrp Lite different from Chyrp?

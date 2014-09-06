@@ -6,16 +6,15 @@
     class MainController {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
-        public $urls = array('|/id/([0-9]+)/|'          => '/?action=view&id=$1',
-                             '|/page/(([^/]+)/)+|'      => '/?action=page&url=$2',
-                             '|/search/|'               => '/?action=search',
-                             '|/search/([^/]+)/|'       => '/?action=search&query=$1',
-                             '|/archive/([0-9]{4})/([0-9]{2})/|'
-                                                        => '/?action=archive&year=$1&month=$2',
-                             '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|'
-                                                        => '/?action=archive&year=$1&month=$2&day=$3',
-                             '|/([^/]+)/feed/([^/]+)/|' => '/?action=$1&feed&title=$2',
-                             '|/([^/]+)/feed/|'         => '/?action=$1&feed');
+        public $urls = array('|/id/([0-9]+)/|'                              => '/?action=view&id=$1',
+                             '|/page/(([^/]+)/)+|'                          => '/?action=page&url=$2',
+                             '|/search/|'                                   => '/?action=search',
+                             '|/search/([^/]+)/|'                           => '/?action=search&query=$1',
+                             '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&year=$1&month=$2&day=$3',
+                             '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&year=$1&month=$2',
+                             '|/archive/([0-9]{4})/|'                       => '/?action=archive&year=$1',
+                             '|/([^/]+)/feed/([^/]+)/|'                     => '/?action=$1&feed&title=$2',
+                             '|/([^/]+)/feed/|'                             => '/?action=$1&feed');
 
         # Boolean: $displayed
         # Has anything been displayed?

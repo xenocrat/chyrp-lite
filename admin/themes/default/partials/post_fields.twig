@@ -16,7 +16,7 @@
                                 {% endif %}
                             </label>
                             {% if field.type == "text" or field.type == "file" %}
-                            <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr{% if field.multiple == "true" %}[]" multiple{% else %}"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="${ field.attr }_field"{% if field.preview %} data-preview="$field.preview"{% endif %}>
+                            <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" {% if field.multiple == "true" %}name="$field.attr[]" multiple{% else %}name="$field.attr"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="${ field.attr }_field"{% if field.preview %} data-preview="$field.preview"{% endif %}>
                             {% if field.type == "file" and post.filename and route.action == "edit_post" %}
                             <em>Current file name: <strong>${ post.filename | escape('') }</strong></em>
                             {% endif %}

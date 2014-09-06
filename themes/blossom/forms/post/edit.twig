@@ -9,7 +9,7 @@
           {% endif %}
         </label>
         {% if field.type == "text" or field.type == "file" %}
-        <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr{% if field.multiple == "true" %}[]" multiple{% else %}"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="$field.attr">
+        <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" {% if field.multiple == "true" %}name="$field.attr[]" multiple{% else %}name="$field.attr"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="$field.attr">
         {% elseif field.type == "text_block" %}
         <textarea class="wide{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" rows="${ field.rows | fallback(12) }" name="$field.attr" id="$field.attr">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
         {% elseif field.type == "checkbox" %}

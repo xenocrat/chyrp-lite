@@ -42,7 +42,7 @@ h4 {                                                font-size: 0.75em;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }
-    h4.archive {                                    font-size: 1.33em }
+    h4.yearly {                                     font-size: 1.33em }
 h5, h6 {                                            font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
@@ -85,7 +85,8 @@ hr {                                                border: none;
                                                     clear: both;
                                                     border-top: 1px solid #ddd;
                                                     margin: 1em 0em }
-    hr:last-child {                                 margin-bottom: 0em }
+    hr:last-child {                                 margin: 0em;
+                                                    visibility: hidden }
 ul {                                                list-style: disc inside;
                                                     margin: 1em 0em;
                                                     padding: 0em }
@@ -131,9 +132,10 @@ dl {                                                list-style: none }
                                                     padding-top: 0em;
                                                     padding-bottom: 0em;
                                                     line-height: 3em }
-    ul.archive {                                    list-style: none }
+    ul.yearly {                                     list-style: none }
     ul.archive:last-child {                         margin-bottom: 0em }
-    ul.archive li {                                 margin: 0em }
+    ul.archive li {                                 margin: 0em 0em 0em 1em }
+    ul.yearly li {                                  margin: 0em }
     ol.comments {                                   list-style: none;
                                                     padding: 0em;
                                                     margin: 0em }

@@ -4,20 +4,17 @@
   {% if archives %} {# List? (For all/yearly archives) #}
     <div class="standalone">
     {% for archive in archives %}
-    {% if GET.year != null %}
-      <h3 id="label_${ archive.timestamp }_archive" class="archive"><a href="$archive.url">${ archive.timestamp | strftime("%B" | translate) }</a></h3>
-      {% else %}
       <h3 id="label_${ archive.timestamp }_archive" class="archive"><a href="$archive.url">${ archive.timestamp | strftime("%B %Y" | translate) }</a></h3>
-      {% endif %}
-      <ul aria-labelledby="label_${ archive.timestamp }_archive" class="archive">
+      <ul aria-labelledby="label_${ archive.timestamp }_archive" class="archive{% if GET.year != null %} yearly{% endif %}">
         {% for post in archive.posts %}
         <li>
+          {% if GET.year != null %} {# Yearly archive: display thumbnails #}
           <article class="post $post.feather" id="post_$post.id">
             <a href="$post.url">
             {% if post.title %}
-              <h4 class="archive">${ post.title | normalize | truncate(20) }</h4>
+              <h4 class="yearly">${ post.title | normalize | truncate(20) }</h4>
             {% else %}
-              <h4 class="archive">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
+              <h4 class="yearly">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
             {% endif %}
             </a>
             {% if post.feather == "photo" %}
@@ -26,12 +23,26 @@
             <p>${ post.excerpt | read_more("…more") }</p>
             {% endif %}
           </article>
+          {% else %} {# Complete archive: display titles to minimise content payload #}
+          <a href="$post.url">
+          {% if post.title %}
+            <h4>${ post.title | normalize | truncate(80) }</h4>
+          {% else %}
+            <h4>${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
+          {% endif %}
+          </a>
+          {% endif %}
         </li>
         {% endfor %}
       </ul>
       <hr>
     {% endfor %}
     </div>
+    {% if GET.year != null %}
+    <div role="navigation" class="next traversal">
+        <a href="{% url 'archive/%s/' | format(((archives | first).year) - 1) %}">${ "Archive of %s" | translate | format(((archives | first).year) - 1 ) }</a>
+    </div>
+    {% endif %}
   {% endif %}
 
   {% if posts.paginated %} {# Posts? (For daily/monthly archives) #}
