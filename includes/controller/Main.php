@@ -812,6 +812,7 @@
             $this->context["GET"]          = $_GET;
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["captcha"]      = generate_captcha();
+            $this->context["timestamp"]    = getdate();
 
             $this->context["visitor"]->logged_in = logged_in();
 

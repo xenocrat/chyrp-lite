@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-09-06 16:24+0000\n"
+"POT-Creation-Date: 2014-09-06 22:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -1284,7 +1284,7 @@ msgstr ""
 #: includes/controller/Main.php:579
 #: includes/controller/Main.php:615
 #: includes/controller/Main.php:630
-#: includes/controller/Main.php:841
+#: includes/controller/Main.php:842
 #: includes/helpers.php:1333
 #: includes/helpers.php:1335
 #: includes/helpers.php:1546
@@ -1779,12 +1779,12 @@ msgid "Extend"
 msgstr ""
 
 #: includes/controller/Admin.php:2456
-#: includes/controller/Main.php:832
+#: includes/controller/Main.php:833
 msgid "Template Missing"
 msgstr ""
 
 #: includes/controller/Admin.php:2456
-#: includes/controller/Main.php:832
+#: includes/controller/Main.php:833
 #, php-format
 msgid "Couldn't load template: <code>%s</code>"
 msgstr ""

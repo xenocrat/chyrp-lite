@@ -2,6 +2,11 @@
 
 {% block content %}
   {% if archives %} {# List? (For all/yearly archives) #}
+    {% if ( GET.year != null ) and ( timestamp.year > (archives | first).year ) %}
+    <div role="navigation" class="prev traversal">
+        <a href="{% url 'archive/%s/' | format(((archives | first).year) + 1) %}">${ "Archive of %s" | translate | format(((archives | first).year) + 1 ) }</a>
+    </div>
+    {% endif %}
     <div class="archive standalone">
     {% for archive in archives %}
       <h3 id="label_${ archive.timestamp }_archive" class="archive"><a href="$archive.url">${ archive.timestamp | strftime("%B %Y" | translate) }</a></h3>
