@@ -260,8 +260,6 @@ button {                                            font: inherit;
                                                     line-height: normal }
 label {                                             display: block;
                                                     margin-top: 1em }
-    div.clear {                                     height: 0em;
-                                                    clear: both }
     div.shim {                                      margin-top: 2em }
     div#mast {                                      display: none;
                                                     width: 100%;
@@ -371,6 +369,7 @@ label {                                             display: block;
     div#main > article.page {                       padding-bottom: 2em }
     div.standalone {                                margin-bottom: 0em;
                                                     padding-bottom: 2em }
+    div.archive.standalone {                        padding-bottom: 1em }
     ul.archive article.post {                       display: block;
                                                     float: left;
                                                     width: 160px;

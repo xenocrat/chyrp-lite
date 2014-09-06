@@ -2,7 +2,7 @@
 
 {% block content %}
   {% if archives %} {# List? (For all/yearly archives) #}
-    <div class="standalone">
+    <div class="archive standalone">
     {% for archive in archives %}
       <h3 id="label_${ archive.timestamp }_archive" class="archive"><a href="$archive.url">${ archive.timestamp | strftime("%B %Y" | translate) }</a></h3>
       <ul aria-labelledby="label_${ archive.timestamp }_archive" class="archive{% if GET.year != null %} yearly{% endif %}">
