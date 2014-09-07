@@ -65,7 +65,7 @@ ${ trigger.call("head") }
     {% endif %}
       <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">${ "Email" | translate }</a></li>
       <li><a href="{% url "feed" %}" rel="alternate">${ "Feed" | translate }</a></li>
-      <li><a href="{% url "archive" %}" rel="archives">${ "Archive" | translate }</a></li>
+      {% if theme.archives_list %}<li><a href="{% url 'archive/%s/' | format((theme.archives_list | first).year) %}" rel="archives">${ "Archive" | translate }</a></li>{% endif %}
       {% if visitor.group.can("change_settings", "toggle_extensions") %}
       <li><a href="$site.chyrp_url/admin/">${ "Admin" | translate }</a></li>
       {% elseif visitor.group.can("add_post") %}

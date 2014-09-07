@@ -17,8 +17,6 @@ $(function(){
     $('<li>', {
             "id": "mobile_toggle",
             "role": "button",
-        }).css({
-            "cursor": "pointer"
         }).append($("<a>", {
             "id": "cheeseburger-link",
             "href": "#",
@@ -34,6 +32,8 @@ $(function(){
             "id": "cheeseburger-image",
             "src": "<?php echo ( THEME_URL."/images/cheeseburger.svg") ?>",
             "alt": "Menu"
+        }).css({
+            "cursor": "pointer"
         }))).appendTo("ul.tail_nav").parent().addClass("mobile_nav").parents("body").css({
             "margin-bottom": "3em"
         });
