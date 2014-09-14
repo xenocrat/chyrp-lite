@@ -472,7 +472,7 @@
          */
         public function cookies_notification() {
             if (!isset($_SESSION['cookies_notified'])) {
-                Flash::notice(__("This website uses cookies. By continuing to browse the website you are agreeing to our use of cookies."));
+                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
                 $_SESSION['cookies_notified'] = true;
             }
         }

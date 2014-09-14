@@ -7,6 +7,11 @@
   </div>
   {% endif %}
   {% include "feathers/" ~ post.feather ~ ".twig" %}
+  {% if not post.next.no_results %}
+  <div role="navigation" class="next traversal">
+      <a href="$post.next.url">${ ( "Previous post" | translate ) }</a>
+  </div>
+  {% endif %}
   {% if enabled_modules.comments and (post.comment_count > 0 or post.commentable) %}
   <article role="complementary" class="commentary" id="comments">
     <ol class="comments" id="comments_$post.id">
@@ -25,9 +30,13 @@
     </div>
   </article>
   {% endif %}
-  {% if not post.next.no_results %}
-  <div role="navigation" class="next traversal">
-      <a href="$post.next.url">${ ( "Previous post" | translate ) }</a>
+  {% if enabled_modules.rights %}
+  <div class="rights_info" role="contentinfo">
+  {% if ( post['rights_holder'] ) and ( post['rights_licence'] == "All rights reserved" ) %}
+    ${post['rights_title']} &copy; ${post['rights_holder']}
+  {% else %}
+    $post.licence_mark
+  {% endif %}
   </div>
   {% endif %}
 {% endblock %}

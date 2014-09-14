@@ -283,7 +283,9 @@ label {                                             display: block;
                                                     clear: both;
                                                     text-align: center;
                                                     margin-top: 2em }
-    div.ribbon {                                    width: 100%;
+    div.ribbon {                                    -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    width: 100%;
                                                     text-align: center;
                                                     color: #ffffff;
                                                     background-color: #426aa6;
@@ -292,7 +294,7 @@ label {                                             display: block;
                                                     background-image: -webkit-linear-gradient(top, #426aa6 0%, #1d4b91 80%);
                                                     background-image: -ms-linear-gradient(top, #426aa6 0%, #1d4b91 80%);
                                                     background-image: linear-gradient(top, #426aa6 0%, #1d4b91 80%);
-                                                    padding: 0.5em 0em;
+                                                    padding: 0.5em;
                                                     margin-bottom: 1em;
                                                     border-radius: 6px }
     div.flash {                                     background-color: #af2d2d;
@@ -300,9 +302,7 @@ label {                                             display: block;
                                                     background-image: -moz-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
                                                     background-image: -webkit-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
                                                     background-image: -ms-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
-                                                    background-image: linear-gradient(top, #cc5252 0%, #af2d2d 80%);
-                                                    margin-bottom: 0em }
-    div.flash:last-of-type {                        margin-bottom: 1em }
+                                                    background-image: linear-gradient(top, #cc5252 0%, #af2d2d 80%) }
     div.metadata {                                  font-family: sans-serif;
                                                     font-weight: normal;
                                                     font-size: 0.6em;
@@ -340,6 +340,13 @@ label {                                             display: block;
     input + div.doaction, textarea + div.doaction { padding-top: 0.5em }
     div.search_box {                                text-align: center;
                                                     margin-bottom: 2em }
+    div.rights_info {                               margin-top: 3.34em;
+                                                    font-family: sans-serif;
+                                                    font-weight: normal;
+                                                    font-size: 0.6em;
+                                                    text-transform: uppercase;
+                                                    text-align: center;
+                                                    color: #9ea8a8 }
     div#tail {                                      display: none;
                                                     width: 100%;
                                                     clear: both;
@@ -365,7 +372,8 @@ label {                                             display: block;
                                                     background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     box-shadow: 0px 4px 8px 2px rgba(57,67,77,0.1) }
     div#main > article:last-child {                 margin-bottom: 0em }
-    div#main > article.commentary {                 padding: 0em 2em 2em 2em }
+    div#main > article.commentary {                 padding: 0em 2em 2em 2em;
+                                                    margin-top: 2em }
     div#main > article.page {                       padding-bottom: 2em }
     div.standalone {                                margin-bottom: 0em;
                                                     padding-bottom: 2em }
@@ -519,10 +527,11 @@ a:active {                                          color: #000000;
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
     a.rights_licence_link {                         display: block;
-                                                    position: absolute;
-                                                    top: 3em;
-                                                    width: 100%;
-                                                    text-align: center }
+                                                    margin: 1em 0em;
+                                                    opacity: 0.75 }
+    a.rights_licence_link:hover,
+    a.rights_licence_link:focus,
+    a.rights_licence_link:active {                  opacity: 1 }
 img {                                               border-style: none;
                                                     margin: 0em;
                                                     padding: 0em }
@@ -574,9 +583,9 @@ img {                                               border-style: none;
                                                     border-bottom: none;
                                                     -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
-                                                    -moz-transition: height 1s ease 0s;
-                                                    -webkit-transition: height 1s ease 0s;
-                                                    transition: height 1s ease 0s }
+                                                    -moz-transition: height 250ms ease 0s;
+                                                    -webkit-transition: height 250ms ease 0s;
+                                                    transition: height 250ms ease 0s }
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
                                                     border-bottom: 1px solid #d2d9d4 }
