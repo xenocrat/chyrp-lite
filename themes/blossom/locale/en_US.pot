@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-09-06 22:37+0000\n"
+"POT-Creation-Date: 2014-09-14 18:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -72,15 +72,15 @@ msgstr ""
 msgid "%d %b, %Y"
 msgstr ""
 
-#: themes/blossom/content/post.twig:38
+#: themes/blossom/content/post.twig:35
 msgid "Comments closed"
 msgstr ""
 
-#: themes/blossom/content/post.twig:41
+#: themes/blossom/content/post.twig:38
 msgid "View comments"
 msgstr ""
 
-#: themes/blossom/content/post.twig:42
+#: themes/blossom/content/post.twig:39
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
@@ -447,7 +447,7 @@ msgstr ""
 msgid "Next post"
 msgstr ""
 
-#: themes/blossom/pages/view.twig:30
+#: themes/blossom/pages/view.twig:12
 msgid "Previous post"
 msgstr ""
 

@@ -180,7 +180,7 @@ Called from:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 191
+	includes/ajax.php on line 198
 
 
 change_setting
@@ -304,7 +304,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 533
+	includes/controller/Main.php on line 530
 Arguments:
 	$user
 
@@ -312,7 +312,7 @@ Arguments:
 authenticate
 ------------
 Called from:
-	includes/controller/Main.php on line 589
+	includes/controller/Main.php on line 586
 
 
 feed_item
@@ -326,13 +326,13 @@ Arguments:
 ajax_post_edit_form_javascript
 ------------------------------
 Called from:
-	includes/javascript.php on line 45
+	includes/javascript.php on line 35
 
 
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 139
+	includes/javascript.php on line 129
 
 
 add_group
@@ -591,8 +591,8 @@ url_code
 Target:
 	Post::$url_attrs
 Called from:
-	includes/controller/Main.php on line 181
-	includes/controller/Main.php on line 213
+	includes/controller/Main.php on line 180
+	includes/controller/Main.php on line 212
 
 
 feed_url
