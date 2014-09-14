@@ -467,16 +467,14 @@
         }
 
         /**
-         * Function: toggle_admin
-         * Toggles the Admin control panel (if available).
+         * Function: cookies_notification
+         * Deliver a notification to comply with EU Directive 2002/58 on Privacy and Electronic Communications.
          */
-        public function toggle_admin() {
-            if (!isset($_SESSION['hide_admin']))
-                $_SESSION['hide_admin'] = true;
-            else
-                unset($_SESSION['hide_admin']);
-
-            redirect("/");
+        public function cookies_notification() {
+            if (!isset($_SESSION['cookies_notified'])) {
+                Flash::notice(__("This website uses cookies. By continuing to browse the website you are agreeing to our use of cookies."));
+                $_SESSION['cookies_notified'] = true;
+            }
         }
 
         /**
@@ -787,6 +785,8 @@
                     return $this->feed($context["posts"]);
             }
 
+            $this->cookies_notification();
+
             $this->context = array_merge($context, $this->context);
 
             $visitor = Visitor::current();
@@ -804,7 +804,6 @@
             $this->context["site"]         = $config;
             $this->context["visitor"]      = $visitor;
             $this->context["route"]        = Route::current();
-            $this->context["hide_admin"]   = isset($_COOKIE["hide_admin"]);
             $this->context["version"]      = CHYRP_VERSION;
             $this->context["now"]          = time();
             $this->context["debug"]        = DEBUG;

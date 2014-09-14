@@ -13,16 +13,6 @@ $(function(){
             alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
     })<?php echo "\n\n\n\n"; # Balance out the line numbers in this script and in the output to help debugging. ?>
 
-    $(".toggle_admin").click(function(){
-        if (!$("#admin_bar:visible, #controls:visible").size())
-            Cookie.destroy("hide_admin");
-        else
-            Cookie.set("hide_admin", "true", 30);
-
-        $("#admin_bar, #controls").slideToggle();
-        return false;
-    })
-
 <?php if (!isset($config->enable_ajax) or $config->enable_ajax): ?> Post.prepare_links()<?php endif; ?>
 })
 
