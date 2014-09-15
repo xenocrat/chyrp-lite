@@ -3,10 +3,9 @@
 Chyrp Lite is an ultra-lightweight fork of the [Chyrp](http://chyrp.net/) blogging engine.
 
 ## What can Chyrp Lite do for me?
-With Chyrp Lite you can run your own blog on your own web server with minimal fuss. You can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. With the addition of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website, with blogging features on the side.
+With Chyrp Lite you can run your own blog on your own web server with minimal fuss. Chyrp Lite provides a beautiful default blog theme and a friendly administration environment, both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5.
 
-Chyrp Lite provides a beautiful unobtrusive blog theme and a friendly administration environment – both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5. Chyrp Lite is compatible with Chyrp. If you have a Chyrp blog, you can switch to Chyrp Lite.
-
+Chyrp Lite is powered by a unique Feathers system that allows you to make your blog whatever you want it to be: you can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. With the addition of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website, with blogging features on the side.
 
 Specifically, Chyrp Lite offers the following "out of the box" features:
 
