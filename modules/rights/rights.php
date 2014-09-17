@@ -109,7 +109,7 @@
                 $mark = '<a rel="license" href="http://wiki.creativecommons.org/Public_domain" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/publicdomain.svg" alt="Public Domain" /></a>';
                 break;
                 default:
-                $mark = "";
+                $mark = "&copy;";
             }
 
             return $mark;

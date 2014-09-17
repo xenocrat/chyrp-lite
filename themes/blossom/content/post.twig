@@ -32,13 +32,16 @@
           {% endif %}
           {% if enabled_modules.comments %}
             {% if post.comment_status == "closed" %}
-              &bull; ${ "Comments closed" | translate }
+            &bull; ${ "Comments closed" | translate }
             {% else %}
-              &bull;
-              <a href="$post.url#comments" rel="bookmark" title="${ "View comments" | translate }">
-              ${ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }
-              </a>
+            &bull;
+            <a href="$post.url#comments" rel="bookmark" title="${ "View comments" | translate }">
+            ${ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }
+            </a>
             {% endif %}
+          {% endif %}
+          {% if enabled_modules.rights %}
+            &bull; $post.licence_mark ${post['rights_holder']}
           {% endif %}
         </div>
       </footer>

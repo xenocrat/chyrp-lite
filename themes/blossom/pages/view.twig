@@ -30,13 +30,4 @@
     </div>
   </article>
   {% endif %}
-  {% if enabled_modules.rights %}
-  <div class="rights_info" role="contentinfo">
-  {% if ( post['rights_holder'] ) and ( post['rights_licence'] == "All rights reserved" ) %}
-    ${post['rights_title']} &copy; ${post['rights_holder']}
-  {% else %}
-    $post.licence_mark
-  {% endif %}
-  </div>
-  {% endif %}
 {% endblock %}
