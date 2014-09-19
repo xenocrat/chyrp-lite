@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-09-14 18:40+0000\n"
+"POT-Creation-Date: 2014-09-19 20:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -114,41 +114,41 @@ msgstr ""
 msgid "The default theme provided with Chyrp Lite."
 msgstr ""
 
-#: admin/themes/default/javascript.php:43
+#: admin/themes/default/javascript.php:35
 msgid "Help"
 msgstr ""
 
-#: admin/themes/default/javascript.php:59
-#: admin/themes/default/javascript.php:61
-#: admin/themes/default/javascript.php:157
-#: admin/themes/default/javascript.php:159
+#: admin/themes/default/javascript.php:39
+#: admin/themes/default/javascript.php:41
+#: admin/themes/default/javascript.php:105
+#: admin/themes/default/javascript.php:107
 msgid "Close"
 msgstr ""
 
-#: admin/themes/default/javascript.php:90
-#: admin/themes/default/javascript.php:91
-#: admin/themes/default/javascript.php:131
+#: admin/themes/default/javascript.php:60
+#: admin/themes/default/javascript.php:61
+#: admin/themes/default/javascript.php:93
 #: admin/themes/default/pages/themes.twig:22
 msgid "Preview"
 msgstr ""
 
-#: admin/themes/default/javascript.php:202
-#: admin/themes/default/javascript.php:203
+#: admin/themes/default/javascript.php:140
+#: admin/themes/default/javascript.php:141
 #: admin/themes/default/pages/modules.twig:12
 #: admin/themes/default/pages/modules.twig:50
 msgid "Blissful!"
 msgstr ""
 
-#: admin/themes/default/javascript.php:230
-#: admin/themes/default/javascript.php:231
+#: admin/themes/default/javascript.php:168
+#: admin/themes/default/javascript.php:169
 msgid "Conflicted!"
 msgstr ""
 
-#: admin/themes/default/javascript.php:293
+#: admin/themes/default/javascript.php:231
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/themes/default/javascript.php:295
+#: admin/themes/default/javascript.php:233
 msgid "There was an error disabling the extension."
 msgstr ""
 

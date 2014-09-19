@@ -28,48 +28,18 @@ var Help = {
     show: function(href) {
         $("<div>", {
             "role": "region",
-        }).css({
-            "display": "block",
-            "position": "fixed",
-            "width": "100%",
-            "height": "100%",
-            "top": "0px",
-            "left": "0px",
-            "background-color": "rgba(79, 79, 79, 0.5)"
-        }).append(
+        }).addClass("overlay_background").append(
             [$("<iframe>", {
                 "src": href,
                 "role": "contentinfo",
                 "aria-label": "<?php echo __("Help"); ?>"
-            }).css({
-                "display": "block",
-                "position": "absolute",
-                "width": "80%",
-                "height": "80%",
-                "max-height": "640px",
-                "top": "10%",
-                "left": "10%",
-                "overflow-x": "hidden",
-                "overflow-y": "auto",
-                "border": "none",
-                "box-shadow": "0px 4px 16px 2px rgba(79, 79, 79, 0.5)"
-            }),
+            }).addClass("help_overlay"),
             $("<img>", {
                 "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/close.svg",
                 "alt": "<?php echo __("Close"); ?>",
                 "role": "button",
                 "aria-label": "<?php echo __("Close"); ?>"
-            }).css({
-                "display": "block",
-                "position": "absolute",
-                "width": "16px",
-                "height": "16px",
-                "top": "10%",
-                "right": "10%",
-                "padding-top": "8px",
-                "padding-right": "8px",
-                "cursor": "pointer"
-            }).click(function() {
+            }).addClass("close_overlay").click(function() {
                 $(this).parent().remove();
             })]
         ).click(function(e) {
@@ -117,33 +87,11 @@ var Write = {
     ajax_previews: function(content, filter) {
         $("<div>", {
             "role": "region",
-        }).css({
-            "display": "block",
-            "position": "fixed",
-            "width": "100%",
-            "height": "100%",
-            "top": "0px",
-            "left": "0px",
-            "background-color": "rgba(79, 79, 79, 0.5)"
-        }).append(
+        }).addClass("overlay_background").append(
             [$("<div>", {
                 "role": "contentinfo",
                 "aria-label": "<?php echo __("Preview"); ?>"
-            }).addClass("css_reset").css({
-                "display": "block",
-                "position": "absolute",
-                "background-color": "#fff",
-                "width": "80%",
-                "height": "80%",
-                "top": "10%",
-                "left": "10%",
-                "overflow-x": "hidden",
-                "overflow-y": "auto",
-                "border": "none",
-                "box-shadow": "0px 4px 16px 2px rgba(79, 79, 79, 0.5)",
-                "box-sizing": "border-box",
-                "padding": "2em"
-            }).load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+            }).addClass("preview_overlay css_reset").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
                     action: "preview",
                     content: content,
                     filter: filter
@@ -157,17 +105,7 @@ var Write = {
                 "alt": "<?php echo __("Close"); ?>",
                 "role": "button",
                 "aria-label": "<?php echo __("Close"); ?>"
-            }).css({
-                "display": "block",
-                "position": "absolute",
-                "width": "16px",
-                "height": "16px",
-                "top": "10%",
-                "right": "10%",
-                "padding-top": "8px",
-                "padding-right": "8px",
-                "cursor": "pointer"
-            }).click(function() {
+            }).addClass("close_overlay").click(function() {
                 $(this).parent().remove();
             })]
         ).click(function(e) {
