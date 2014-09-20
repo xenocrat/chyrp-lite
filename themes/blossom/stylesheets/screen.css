@@ -211,6 +211,9 @@ input {                                             -moz-box-sizing: border-box;
     input::-moz-placeholder {                       color: #c6ccc8 }
     input:-ms-input-placeholder {                   color: #c6ccc8 }
     input:input-placeholder {                       color: #c6ccc8 }
+    input[type='password'].weak {                   background-color: #ffb2b2 }
+    input[type='password'].good {                   background-color: #fff899 }
+    input[type='password'].strong {                 background-color: #b2ffd1 }
 input:focus {                                       outline: none;
                                                     background-color: #ffffff;
                                                     border: 1px solid #4e5a66 }

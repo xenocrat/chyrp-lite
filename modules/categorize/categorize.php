@@ -67,7 +67,7 @@
         }
     
         public function manage_posts_column_header() {
-            echo '<th class="post_category">'.__("Category", "category").'</th>';
+            echo '<th class="post_category">'.__("Category", "categorize").'</th>';
         }
     
         public function manage_posts_column($post) {

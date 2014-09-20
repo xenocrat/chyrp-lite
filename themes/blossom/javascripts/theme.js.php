@@ -12,6 +12,52 @@ function mailTo(domain, recipient) {
     return true;
 }
 
+// Password strength scoring
+function scorePassword(password) {
+    var score = 0;
+    if (!password)
+        return score;
+
+    // award every unique letter until 5 repetitions
+    var letters = new Object();
+    for (var i=0; i<password.length; i++) {
+        letters[password[i]] = (letters[password[i]] || 0) + 1;
+        score += 5.0 / letters[password[i]];
+    }
+
+    // bonus points for mixing it up
+    var variations = {
+        digits: /\d/.test(password),
+        lower: /[a-z]/.test(password),
+        upper: /[A-Z]/.test(password),
+        nonWords: /\W/.test(password)
+    }
+
+    variationCount = 0;
+    for (var check in variations) {
+        variationCount += (variations[check] == true) ? 1 : 0;
+    }
+    score += (variationCount - 1) * 10;
+
+    return parseInt(score);
+}
+
+// Colour-coded password strength indicator
+$(document).ready(function() {
+    $("input[type='password']").keyup(function(e) {
+        var score = scorePassword($(this).val());
+        if ( score == 0 ) {
+            $(this).removeClass("strong good weak");
+        } else if ( score >= 80 ) {
+            $(this).removeClass("good weak").addClass("strong");
+        } else if ( score >= 50 ) {
+            $(this).removeClass("strong weak").addClass("good");
+        } else if ( score <= 50 ) {
+            $(this).removeClass("strong good").addClass("weak");
+        }
+    });
+});
+
 // Cheeseburger mobile menu
 $(function(){
     $('<li>', {
@@ -20,7 +66,7 @@ $(function(){
         }).append($("<a>", {
             "id": "cheeseburger-link",
             "href": "#",
-            "aria-label": "Menu"
+            "aria-label": "<?php echo __("Menu", "theme"); ?>"
         }).on("click focus", function() {
             if ( $(".mobile_nav").hasClass("on") ) {
                 $(".mobile_nav").removeClass("on");
@@ -31,7 +77,7 @@ $(function(){
         }).append($("<img>", {
             "id": "cheeseburger-image",
             "src": "<?php echo ( THEME_URL."/images/cheeseburger.svg") ?>",
-            "alt": "Menu"
+            "alt": "<?php echo __("Menu", "theme"); ?>"
         }).css({
             "cursor": "pointer"
         }))).appendTo("ul.tail_nav").parent().addClass("mobile_nav").parents("body").css({
@@ -42,6 +88,6 @@ $(function(){
         $(".mobile_nav").children().on("focus", "a:not(#cheeseburger-link)", function() {
             $(".mobile_nav").addClass("on");
         });
-})
+});
 
 <!-- --></script>
