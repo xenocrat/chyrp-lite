@@ -578,7 +578,7 @@ div.overlay_background {                    display: block;
                                             top: 0px;
                                             left: 0px;
                                             background-color: rgba(79, 79, 79, 0.5) }
-iframe.help_overlay, div.preview_overlay {  -moz-box-sizing: border-box;
+iframe.overlay_help, div.overlay_preview {  -moz-box-sizing: border-box;
                                             box-sizing: border-box;    
                                             display: block;
                                             position: absolute;
@@ -591,10 +591,10 @@ iframe.help_overlay, div.preview_overlay {  -moz-box-sizing: border-box;
                                             overflow-y: auto;
                                             border: none;
                                             box-shadow: 0px 4px 16px 2px rgba(79, 79, 79, 0.5) }
-div.preview_overlay {                       padding: 2em;
+div.overlay_preview {                       padding: 2em;
                                             max-height: none;
                                             background-color: #fff }
-img.close_overlay {                         display: block;
+img.overlay_close_gadget {                  display: block;
                                             position: absolute;
                                             width: 16px;
                                             height: 16px;
@@ -758,12 +758,12 @@ img.close_overlay {                         display: block;
                                                 min-width: 220px }
     #content ul li img.screenshot {             width: 192px }
 
-    iframe.help_overlay, div.preview_overlay {  width: 100%;
+    iframe.overlay_help, div.overlay_preview {  width: 100%;
                                                 height: 100%;
                                                 max-height: none;
                                                 top: 0%;
                                                 left: 0% }
-    img.close_overlay {                         top: 0%;
+    img.overlay_close_gadget {                  top: 0%;
                                                 right: 0% }
 }
 /* @end */

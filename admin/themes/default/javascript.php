@@ -33,13 +33,13 @@ var Help = {
                 "src": href,
                 "role": "contentinfo",
                 "aria-label": "<?php echo __("Help"); ?>"
-            }).addClass("help_overlay"),
+            }).addClass("overlay_help"),
             $("<img>", {
                 "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/close.svg",
                 "alt": "<?php echo __("Close"); ?>",
                 "role": "button",
                 "aria-label": "<?php echo __("Close"); ?>"
-            }).addClass("close_overlay").click(function() {
+            }).addClass("overlay_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
         ).click(function(e) {
@@ -91,7 +91,7 @@ var Write = {
             [$("<div>", {
                 "role": "contentinfo",
                 "aria-label": "<?php echo __("Preview"); ?>"
-            }).addClass("preview_overlay css_reset").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+            }).addClass("overlay_preview css_reset").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
                     action: "preview",
                     content: content,
                     filter: filter
@@ -105,7 +105,7 @@ var Write = {
                 "alt": "<?php echo __("Close"); ?>",
                 "role": "button",
                 "aria-label": "<?php echo __("Close"); ?>"
-            }).addClass("close_overlay").click(function() {
+            }).addClass("overlay_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
         ).click(function(e) {
