@@ -52,7 +52,7 @@ $(document).ready(function() {
             $(this).removeClass("good weak").addClass("strong");
         } else if ( score >= 50 ) {
             $(this).removeClass("strong weak").addClass("good");
-        } else if ( score <= 50 ) {
+        } else if ( score <= 49 ) {
             $(this).removeClass("strong good").addClass("weak");
         }
     });
