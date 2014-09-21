@@ -630,18 +630,23 @@
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
 
-                $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
-                                User::hashPassword($_POST['new_password1']) :
-                                $visitor->password ;
+                if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
+                    Flash::warning(__("Passwords do not match."));
 
-                $visitor->update($visitor->login,
-                                 $password,
-                                 $_POST['email'],
-                                 $_POST['full_name'],
-                                 $_POST['website'],
-                                 $visitor->group->id);
+                if (!Flash::exists("warning")) {
+                    $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
+                                    User::hashPassword($_POST['new_password1']) :
+                                    $visitor->password ;
 
-                Flash::notice(__("Your profile has been updated."), "/");
+                    $visitor->update($visitor->login,
+                                     $password,
+                                     $_POST['email'],
+                                     $_POST['full_name'],
+                                     $_POST['website'],
+                                     $visitor->group->id);
+
+                    Flash::notice(__("Your profile has been updated."), "/");
+                }
             }
 
             $this->display("forms/user/controls", array(), __("Controls"));
