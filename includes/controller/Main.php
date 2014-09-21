@@ -633,6 +633,11 @@
                 if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
                     Flash::warning(__("Passwords do not match."));
 
+                if (empty($_POST['email']))
+                    Flash::warning(__("E-mail address cannot be blank."));
+                elseif (!preg_match("/^[_A-z0-9-]+((\.|\+)[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/", $_POST['email']))
+                    Flash::warning(__("Invalid e-mail address."));
+
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
                                     User::hashPassword($_POST['new_password1']) :

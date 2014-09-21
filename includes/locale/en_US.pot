@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-09-21 08:33+0000\n"
+"POT-Creation-Date: 2014-09-21 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -739,7 +739,7 @@ msgstr ""
 #: admin/themes/default/pages/manage_pages.twig:28
 #: admin/themes/default/pages/manage_posts.twig:37
 #: admin/themes/default/pages/manage_users.twig:33
-#: includes/controller/Main.php:652
+#: includes/controller/Main.php:657
 msgid "Controls"
 msgstr ""
 
@@ -1284,7 +1284,7 @@ msgstr ""
 #: includes/controller/Main.php:577
 #: includes/controller/Main.php:613
 #: includes/controller/Main.php:628
-#: includes/controller/Main.php:845
+#: includes/controller/Main.php:850
 #: includes/helpers.php:1333
 #: includes/helpers.php:1335
 #: includes/helpers.php:1546
@@ -1455,11 +1455,13 @@ msgstr ""
 
 #: includes/controller/Admin.php:500
 #: includes/controller/Main.php:504
+#: includes/controller/Main.php:637
 msgid "E-mail address cannot be blank."
 msgstr ""
 
 #: includes/controller/Admin.php:502
 #: includes/controller/Main.php:506
+#: includes/controller/Main.php:639
 msgid "Invalid e-mail address."
 msgstr ""
 
@@ -1780,12 +1782,12 @@ msgid "Extend"
 msgstr ""
 
 #: includes/controller/Admin.php:2456
-#: includes/controller/Main.php:836
+#: includes/controller/Main.php:841
 msgid "Template Missing"
 msgstr ""
 
 #: includes/controller/Admin.php:2456
-#: includes/controller/Main.php:836
+#: includes/controller/Main.php:841
 #, php-format
 msgid "Couldn't load template: <code>%s</code>"
 msgstr ""
@@ -1920,29 +1922,29 @@ msgstr ""
 msgid "You must be logged in to access this area."
 msgstr ""
 
-#: includes/controller/Main.php:648
+#: includes/controller/Main.php:653
 msgid "Your profile has been updated."
 msgstr ""
 
-#: includes/controller/Main.php:663
+#: includes/controller/Main.php:668
 msgid "Invalid user specified."
 msgstr ""
 
-#: includes/controller/Main.php:664
-#: includes/controller/Main.php:696
+#: includes/controller/Main.php:669
+#: includes/controller/Main.php:701
 msgid "Lost Password"
 msgstr ""
 
-#: includes/controller/Main.php:670
+#: includes/controller/Main.php:675
 msgid "Lost Password Request"
 msgstr ""
 
-#: includes/controller/Main.php:682
+#: includes/controller/Main.php:687
 #, php-format
 msgid "An e-mail has been sent to your e-mail address that contains a new password. Once you have logged in, you can change it at <a href=\"%s\">User Controls</a>."
 msgstr ""
 
-#: includes/controller/Main.php:692
+#: includes/controller/Main.php:697
 msgid "E-Mail could not be sent. Password change cancelled."
 msgstr ""
 
