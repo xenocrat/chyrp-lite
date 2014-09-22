@@ -47,13 +47,13 @@ $(document).ready(function() {
     $("input[type='password']").keyup(function(e) {
         var score = scorePassword($(this).val());
         if ( score == 0 ) {
-            $(this).removeClass("strong good weak");
+            $(this).removeClass("good okay weak");
         } else if ( score >= 80 ) {
-            $(this).removeClass("good weak").addClass("strong");
+            $(this).removeClass("okay weak").addClass("good");
         } else if ( score >= 50 ) {
-            $(this).removeClass("strong weak").addClass("good");
+            $(this).removeClass("good weak").addClass("okay");
         } else if ( score <= 49 ) {
-            $(this).removeClass("strong good").addClass("weak");
+            $(this).removeClass("good okay").addClass("weak");
         }
     });
 });
