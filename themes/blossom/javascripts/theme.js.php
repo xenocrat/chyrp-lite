@@ -47,7 +47,7 @@ $(document).ready(function() {
     $("input[type='password']#password1, input[type='password']#new_password1").keyup(function(e) {
         var score = scorePassword($(this).val());
         $(this).css({
-            "background": "url(<?php echo ( THEME_URL."/images/score.png"); ?>) no-repeat top left",
+            "background": "url(<?php echo ( THEME_URL."/images/score.png"); ?>) #fff no-repeat top left",
             "background-size": (score + "% 100%")
         });
     });
