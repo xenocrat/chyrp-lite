@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-09-20 22:13+0000\n"
+"POT-Creation-Date: 2014-09-24 21:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -369,8 +369,8 @@ msgstr ""
 msgid "Blossom"
 msgstr ""
 
-#: themes/blossom/javascripts/theme.js.php:69
-#: themes/blossom/javascripts/theme.js.php:80
+#: themes/blossom/javascripts/theme.js.php:78
+#: themes/blossom/javascripts/theme.js.php:89
 msgid "Menu"
 msgstr ""
 

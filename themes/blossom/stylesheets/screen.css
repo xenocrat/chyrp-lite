@@ -214,9 +214,7 @@ input:focus {                                       outline: none;
     input::-moz-placeholder {                       color: #c6ccc8 }
     input:-ms-input-placeholder {                   color: #c6ccc8 }
     input:input-placeholder {                       color: #c6ccc8 }
-    input[type='password'].weak:focus {             background-color: #ffb2b2 }
-    input[type='password'].okay:focus {             background-color: #fff899 }
-    input[type='password'].good:focus {             background-color: #b2ffd1 }
+    input.error {                                   background-color: #ffb2b2 }
     input#search_field {                            display: inline;
                                                     margin: 0em;
                                                     padding-right: 34px }

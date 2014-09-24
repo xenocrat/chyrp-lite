@@ -42,18 +42,27 @@ function scorePassword(password) {
     return parseInt(score);
 }
 
-// Colour-coded password strength indicator
+// Password helpers
 $(document).ready(function() {
-    $("input[type='password']").keyup(function(e) {
+    $("input[type='password']#password1, input[type='password']#new_password1").keyup(function(e) {
         var score = scorePassword($(this).val());
-        if ( score == 0 ) {
-            $(this).removeClass("good okay weak");
-        } else if ( score >= 80 ) {
-            $(this).removeClass("okay weak").addClass("good");
-        } else if ( score >= 50 ) {
-            $(this).removeClass("good weak").addClass("okay");
-        } else if ( score <= 49 ) {
-            $(this).removeClass("good okay").addClass("weak");
+        $(this).css({
+            "background": "url(<?php echo ( THEME_URL."/images/score.png"); ?>) no-repeat top left",
+            "background-size": (score + "% 100%")
+        });
+    });
+    $("input[type='password']#password1, input[type='password']#password2").keyup(function(e) {
+        if ( $("input[type='password']#password1").val() !== $("input[type='password']#password2").val() ) {
+            $("input[type='password']#password2").addClass("error");
+        } else {
+            $("input[type='password']#password2").removeClass("error");
+        }
+    });
+    $("input[type='password']#new_password1, input[type='password']#new_password2").keyup(function(e) {
+        if ( $("input[type='password']#new_password1").val() !== $("input[type='password']#new_password2").val() ) {
+            $("input[type='password']#new_password2").addClass("error");
+        } else {
+            $("input[type='password']#new_password2").removeClass("error");
         }
     });
 });
@@ -76,7 +85,7 @@ $(function(){
             return false;
         }).append($("<img>", {
             "id": "cheeseburger-image",
-            "src": "<?php echo ( THEME_URL."/images/cheeseburger.svg") ?>",
+            "src": "<?php echo ( THEME_URL."/images/cheeseburger.svg"); ?>",
             "alt": "<?php echo __("Menu", "theme"); ?>"
         }).css({
             "cursor": "pointer"
