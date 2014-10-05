@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-09-21 08:43+0000\n"
+"POT-Creation-Date: 2014-10-05 01:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -92,8 +92,8 @@ msgstr ""
 #: includes/controller/Admin.php:2165
 #: includes/controller/Admin.php:2184
 #: includes/controller/Admin.php:2190
-#: includes/controller/Main.php:376
-#: includes/controller/Main.php:446
+#: includes/controller/Main.php:383
+#: includes/controller/Main.php:453
 #: includes/helpers.php:91
 #: includes/uploaded.php:5
 #: index.php:19
@@ -739,7 +739,7 @@ msgstr ""
 #: admin/themes/default/pages/manage_pages.twig:28
 #: admin/themes/default/pages/manage_posts.twig:37
 #: admin/themes/default/pages/manage_users.twig:33
-#: includes/controller/Main.php:657
+#: includes/controller/Main.php:664
 msgid "Controls"
 msgstr ""
 
@@ -1275,16 +1275,16 @@ msgstr ""
 #: includes/controller/Admin.php:500
 #: includes/controller/Admin.php:502
 #: includes/controller/Admin.php:2471
-#: includes/controller/Main.php:312
-#: includes/controller/Main.php:407
-#: includes/controller/Main.php:490
-#: includes/controller/Main.php:548
-#: includes/controller/Main.php:551
-#: includes/controller/Main.php:559
-#: includes/controller/Main.php:577
-#: includes/controller/Main.php:613
-#: includes/controller/Main.php:628
-#: includes/controller/Main.php:850
+#: includes/controller/Main.php:318
+#: includes/controller/Main.php:414
+#: includes/controller/Main.php:497
+#: includes/controller/Main.php:555
+#: includes/controller/Main.php:558
+#: includes/controller/Main.php:566
+#: includes/controller/Main.php:584
+#: includes/controller/Main.php:620
+#: includes/controller/Main.php:635
+#: includes/controller/Main.php:857
 #: includes/helpers.php:1333
 #: includes/helpers.php:1335
 #: includes/helpers.php:1546
@@ -1292,7 +1292,7 @@ msgid "Error"
 msgstr ""
 
 #: includes/class/Route.php:230
-#: includes/error.php:131
+#: includes/error.php:130
 msgid "Route was initiated without a Controller."
 msgstr ""
 
@@ -1430,38 +1430,38 @@ msgid "You do not have sufficient privileges to add users."
 msgstr ""
 
 #: includes/controller/Admin.php:488
-#: includes/controller/Main.php:494
+#: includes/controller/Main.php:501
 #: install.php:111
 msgid "Please enter a username for your account."
 msgstr ""
 
 #: includes/controller/Admin.php:492
-#: includes/controller/Main.php:496
+#: includes/controller/Main.php:503
 msgid "That username is already in use."
 msgstr ""
 
 #: includes/controller/Admin.php:495
-#: includes/controller/Main.php:499
+#: includes/controller/Main.php:506
 #: install.php:114
 msgid "Password cannot be blank."
 msgstr ""
 
 #: includes/controller/Admin.php:497
-#: includes/controller/Main.php:501
-#: includes/controller/Main.php:634
+#: includes/controller/Main.php:508
+#: includes/controller/Main.php:641
 #: install.php:117
 msgid "Passwords do not match."
 msgstr ""
 
 #: includes/controller/Admin.php:500
-#: includes/controller/Main.php:504
-#: includes/controller/Main.php:637
+#: includes/controller/Main.php:511
+#: includes/controller/Main.php:644
 msgid "E-mail address cannot be blank."
 msgstr ""
 
 #: includes/controller/Admin.php:502
-#: includes/controller/Main.php:506
-#: includes/controller/Main.php:639
+#: includes/controller/Main.php:513
+#: includes/controller/Main.php:646
 msgid "Invalid e-mail address."
 msgstr ""
 
@@ -1782,180 +1782,180 @@ msgid "Extend"
 msgstr ""
 
 #: includes/controller/Admin.php:2456
-#: includes/controller/Main.php:841
+#: includes/controller/Main.php:848
 msgid "Template Missing"
 msgstr ""
 
 #: includes/controller/Admin.php:2456
-#: includes/controller/Main.php:841
+#: includes/controller/Main.php:848
 #, php-format
 msgid "Couldn't load template: <code>%s</code>"
 msgstr ""
 
-#: includes/controller/Main.php:309
+#: includes/controller/Main.php:315
 msgid "Archive"
 msgstr ""
 
-#: includes/controller/Main.php:312
+#: includes/controller/Main.php:318
 msgid "Please enter a valid year and month."
 msgstr ""
 
-#: includes/controller/Main.php:324
+#: includes/controller/Main.php:331
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: includes/controller/Main.php:343
+#: includes/controller/Main.php:350
 msgid "Please enter a search term."
 msgstr ""
 
-#: includes/controller/Main.php:365
+#: includes/controller/Main.php:372
 #, php-format
 msgid "Search results for \"%s\""
 msgstr ""
 
-#: includes/controller/Main.php:376
+#: includes/controller/Main.php:383
 msgid "You do not have sufficient privileges to view drafts."
 msgstr ""
 
-#: includes/controller/Main.php:385
+#: includes/controller/Main.php:392
 msgid "Drafts"
 msgstr ""
 
-#: includes/controller/Main.php:407
+#: includes/controller/Main.php:414
 msgid "The feather theme file for this post does not exist. The post cannot be displayed."
 msgstr ""
 
-#: includes/controller/Main.php:410
+#: includes/controller/Main.php:417
 msgid "This post is a draft."
 msgstr ""
 
-#: includes/controller/Main.php:416
+#: includes/controller/Main.php:423
 #, php-format
 msgid "This post is only visible by the following groups: %s."
 msgstr ""
 
-#: includes/controller/Main.php:446
+#: includes/controller/Main.php:453
 msgid "You do not have sufficient privileges to view this page."
 msgstr ""
 
-#: includes/controller/Main.php:475
+#: includes/controller/Main.php:482
 msgid "By browsing this website you are agreeing to our use of cookies."
 msgstr ""
 
-#: includes/controller/Main.php:487
+#: includes/controller/Main.php:494
 msgid "Registration Disabled"
 msgstr ""
 
-#: includes/controller/Main.php:487
+#: includes/controller/Main.php:494
 msgid "I'm sorry, but this site is not allowing registration."
 msgstr ""
 
-#: includes/controller/Main.php:490
-#: includes/controller/Main.php:548
-#: includes/controller/Main.php:577
+#: includes/controller/Main.php:497
+#: includes/controller/Main.php:555
+#: includes/controller/Main.php:584
 msgid "You're already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:509
+#: includes/controller/Main.php:516
 msgid "Incorrect captcha code. Please try again."
 msgstr ""
 
-#: includes/controller/Main.php:524
+#: includes/controller/Main.php:531
 msgid "The email address you provided has been sent details to confirm registration."
 msgstr ""
 
-#: includes/controller/Main.php:526
+#: includes/controller/Main.php:533
 msgid "There was an error emailing the activation link to your email address."
 msgstr ""
 
-#: includes/controller/Main.php:534
+#: includes/controller/Main.php:541
 msgid "Registration successful."
 msgstr ""
 
-#: includes/controller/Main.php:539
+#: includes/controller/Main.php:546
 msgid "Register"
 msgstr ""
 
-#: includes/controller/Main.php:551
+#: includes/controller/Main.php:558
 msgid "No token found."
 msgstr ""
 
-#: includes/controller/Main.php:556
+#: includes/controller/Main.php:563
 msgid "A user with that email doesn't seem to exist in our database."
 msgstr ""
 
-#: includes/controller/Main.php:559
+#: includes/controller/Main.php:566
 msgid "Invalid token."
 msgstr ""
 
-#: includes/controller/Main.php:566
+#: includes/controller/Main.php:573
 msgid "Your account is now active. Welcome aboard!"
 msgstr ""
 
-#: includes/controller/Main.php:568
+#: includes/controller/Main.php:575
 msgid "Your account has already been activated."
 msgstr ""
 
-#: includes/controller/Main.php:589
+#: includes/controller/Main.php:596
 msgid "Incorrect username and/or password, please try again."
 msgstr ""
 
-#: includes/controller/Main.php:600
+#: includes/controller/Main.php:607
 msgid "Logged in."
 msgstr ""
 
-#: includes/controller/Main.php:604
-#: includes/error.php:132
+#: includes/controller/Main.php:611
+#: includes/error.php:131
 msgid "Log In"
 msgstr ""
 
-#: includes/controller/Main.php:613
+#: includes/controller/Main.php:620
 msgid "You aren't logged in."
 msgstr ""
 
-#: includes/controller/Main.php:619
+#: includes/controller/Main.php:626
 msgid "Logged out."
 msgstr ""
 
-#: includes/controller/Main.php:628
+#: includes/controller/Main.php:635
 msgid "You must be logged in to access this area."
 msgstr ""
 
-#: includes/controller/Main.php:653
+#: includes/controller/Main.php:660
 msgid "Your profile has been updated."
 msgstr ""
 
-#: includes/controller/Main.php:668
+#: includes/controller/Main.php:675
 msgid "Invalid user specified."
 msgstr ""
 
-#: includes/controller/Main.php:669
-#: includes/controller/Main.php:701
+#: includes/controller/Main.php:676
+#: includes/controller/Main.php:708
 msgid "Lost Password"
 msgstr ""
 
-#: includes/controller/Main.php:675
+#: includes/controller/Main.php:682
 msgid "Lost Password Request"
 msgstr ""
 
-#: includes/controller/Main.php:687
+#: includes/controller/Main.php:694
 #, php-format
 msgid "An e-mail has been sent to your e-mail address that contains a new password. Once you have logged in, you can change it at <a href=\"%s\">User Controls</a>."
 msgstr ""
 
-#: includes/controller/Main.php:697
+#: includes/controller/Main.php:704
 msgid "E-Mail could not be sent. Password change cancelled."
 msgstr ""
 
 #: includes/error.php:15
-#: includes/error.php:126
+#: includes/error.php:125
 #: includes/helpers.php:83
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:123
+#: includes/error.php:122
 msgid "Backtrace"
 msgstr ""
 

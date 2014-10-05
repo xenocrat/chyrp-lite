@@ -2,11 +2,6 @@
 
 {% block content %}
   {% if archives %} {# List? (For all/yearly archives) #}
-    {% if ( GET.year != null ) and ( now | strftime("%Y") > (archives | first).year ) %}
-    <div role="navigation" class="prev traversal">
-        <a href="{% url 'archive/%s/' | format(((archives | first).year) + 1) %}">${ "Archive of %s" | translate | format(((archives | first).year) + 1 ) }</a>
-    </div>
-    {% endif %}
     <div class="archive standalone">
     {% for archive in archives %}
       <h3 id="label_${ archive.timestamp }_archive" class="archive"><a href="$archive.url">${ archive.timestamp | strftime("%B %Y" | translate) }</a></h3>
@@ -14,19 +9,18 @@
         {% for post in archive.posts %}
         <li>
           {% if GET.year != null %} {# Yearly archive: display thumbnails #}
-          <article class="post $post.feather" id="post_$post.id">
-            <a href="$post.url">
+          <article class="post archive $post.feather" id="post_$post.id">
             {% if post.title %}
-              <h4 class="yearly">${ post.title | normalize | truncate(20) }</h4>
+            <h4 class="yearly">${ post.title | normalize | truncate(20) }</h4>
             {% else %}
-              <h4 class="yearly">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
+            <h4 class="yearly">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
             {% endif %}
-            </a>
             {% if post.feather == "photo" %}
             ${ feathers['photo'].image_link(post, 320, null, "quality=60") }
             {% else %}
             <p>${ post.excerpt | read_more("…more") }</p>
             {% endif %}
+            <a href="$post.url" class="archive_post_link">$post.url</a>
           </article>
           {% else %} {# Complete archive: display titles to minimise content payload #}
           <a href="$post.url">
@@ -43,9 +37,9 @@
       <hr>
     {% endfor %}
     </div>
-    {% if GET.year != null %}
+    {% if archives_prec.no_results == false %} {# Found a post preceeding this archive #}
     <div role="navigation" class="next traversal">
-        <a href="{% url 'archive/%s/' | format(((archives | first).year) - 1) %}">${ "Archive of %s" | translate | format(((archives | first).year) - 1 ) }</a>
+        <a href="{% url 'archive/%s/' | format(archives_prec.created_at | strftime('%Y')) %}">${ "Archive of %s" | translate | format(archives_prec.created_at | strftime('%Y')) }</a>
     </div>
     {% endif %}
   {% endif %}

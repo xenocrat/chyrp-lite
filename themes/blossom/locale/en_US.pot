@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-09-24 21:34+0000\n"
+"POT-Creation-Date: 2014-10-05 01:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -67,8 +67,8 @@ msgid "Pinned"
 msgstr ""
 
 #: themes/blossom/content/post.twig:24
-#: themes/blossom/pages/archive.twig:22
-#: themes/blossom/pages/archive.twig:36
+#: themes/blossom/pages/archive.twig:16
+#: themes/blossom/pages/archive.twig:30
 msgid "%d %b, %Y"
 msgstr ""
 
@@ -187,8 +187,8 @@ msgid "Archive"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:74
-#: themes/blossom/pages/archive.twig:12
-#: themes/blossom/pages/archive.twig:61
+#: themes/blossom/pages/archive.twig:7
+#: themes/blossom/pages/archive.twig:55
 msgid "%B %Y"
 msgstr ""
 
@@ -369,8 +369,8 @@ msgstr ""
 msgid "Blossom"
 msgstr ""
 
-#: themes/blossom/javascripts/theme.js.php:78
-#: themes/blossom/javascripts/theme.js.php:89
+#: themes/blossom/javascripts/theme.js.php:79
+#: themes/blossom/javascripts/theme.js.php:90
 msgid "Menu"
 msgstr ""
 
@@ -391,19 +391,18 @@ msgstr ""
 msgid "Not found"
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:7
-#: themes/blossom/pages/archive.twig:48
-#: themes/blossom/pages/archive.twig:56
-#: themes/blossom/pages/archive.twig:61
+#: themes/blossom/pages/archive.twig:42
+#: themes/blossom/pages/archive.twig:50
+#: themes/blossom/pages/archive.twig:55
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:56
+#: themes/blossom/pages/archive.twig:50
 msgid "%d %B, %Y"
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:71
+#: themes/blossom/pages/archive.twig:65
 msgid "There aren't any posts in the timeframe you specified"
 msgstr ""
 

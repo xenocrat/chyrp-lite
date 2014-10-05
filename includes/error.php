@@ -89,7 +89,6 @@
                 padding: .75em 1em;
                 color: #777;
                 text-shadow: #fff 1px 1px 0px;
-                font: 1em normal sans-serif;
                 text-decoration: none;
                 border-radius: .5em;
             }

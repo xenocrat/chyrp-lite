@@ -207,7 +207,7 @@ input {                                             -moz-box-sizing: border-box;
                                                     background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 input:focus {                                       outline: none;
                                                     background-color: #ffffff;
-                                                    border: 1px solid #4e5a66 }
+                                                    border: 1px solid #d94c7b }
     input[type='checkbox'] {                        width: auto }
     input::-webkit-input-placeholder {              color: #c6ccc8 }
     input:-moz-placeholder {                        color: #c6ccc8 }
@@ -223,7 +223,7 @@ input:focus {                                       outline: none;
                                                     position: absolute;
                                                     width: 34px;
                                                     top: 0px;
-                                                    bottom: 2px;
+                                                    bottom: 1px;
                                                     right: 0px;
                                                     border: none;
                                                     margin: 0em;
@@ -231,6 +231,7 @@ input:focus {                                       outline: none;
                                                     background: transparent url(../images/search.svg) no-repeat center;
                                                     overflow: hidden;
                                                     color: transparent }
+    button#search_submit:focus {                    background-image: url(../images/search_alt.svg) }
     form.inline_edit input {                        width: 100% }
 select {                                            -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
@@ -253,7 +254,7 @@ textarea {                                          -moz-box-sizing: border-box;
                                                     border-radius: 0em;
                                                     background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 textarea:focus {                                    outline: none;
-                                                    border: 1px solid #4e5a66 }
+                                                    border: 1px solid #d94c7b }
     article.commentary textarea {                   max-width: none }
 button {                                            font: inherit;
                                                     font-size: inherit;
@@ -296,7 +297,7 @@ label {                                             display: block;
                                                     background-image: -ms-linear-gradient(top, #426aa6 0%, #1d4b91 80%);
                                                     background-image: linear-gradient(top, #426aa6 0%, #1d4b91 80%);
                                                     padding: 0.5em;
-                                                    margin-bottom: 1em;
+                                                    margin-bottom: 2em;
                                                     border-radius: 6px }
     div.flash {                                     background-color: #af2d2d;
                                                     background-image: -o-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
@@ -373,7 +374,8 @@ label {                                             display: block;
     div.standalone {                                margin-bottom: 0em;
                                                     padding-bottom: 2em }
     div.archive.standalone {                        padding-bottom: 1em }
-    ul.archive article.post {                       display: block;
+    ul.archive article.post.archive {               display: block;
+                                                    position: relative;
                                                     float: left;
                                                     width: 160px;
                                                     height: 160px;
@@ -389,7 +391,6 @@ label {                                             display: block;
                                                     background-image: -webkit-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em) }
-
 article > header {                                  display: block;
                                                     width: 100%;
                                                     clear: both;
@@ -417,21 +418,21 @@ article.audio audio {                               width: 100%;
                                                     max-width: 640px }                  
 a {                                                 border-bottom: 1px transparent solid;
                                                     -webkit-transition-property: color, border;
-                                                    -webkit-transition-duration: 500ms;
+                                                    -webkit-transition-duration: 250ms;
                                                     -moz-transition-property: color, border;
-                                                    -moz-transition-duration: 500ms;
+                                                    -moz-transition-duration: 250ms;
                                                     transition-property: color, border;
-                                                    transition-duration: 500ms }
+                                                    transition-duration: 250ms }
 a:link {                                            color: #5c6773;
                                                     text-decoration: none }
 a:visited {                                         color: #5c6773;
                                                     text-decoration: none }
-a:hover {                                           color: #000000;
+a:hover {                                           color: #d94c7b;
                                                     text-decoration: none }
 a:focus {                                           outline: none;
-                                                    color: #42a66a;
+                                                    color: #d94c7b;
                                                     text-decoration: none }
-a:active {                                          color: #000000;
+a:active {                                          color: #d94c7b;
                                                     text-decoration: none }
     h3.ribbon a {                                   color: #ffffff;
                                                     text-decoration: none;
@@ -460,37 +461,30 @@ a:active {                                          color: #000000;
     section a:visited, p a:visited {                color: #5c6773;
                                                     text-decoration: none;
                                                     border-bottom: 1px #9ea8a8 solid }
-    section a:hover, p a:hover {                    color: #000000;
+    section a:hover, p a:hover {                    color: #d94c7b;
                                                     text-decoration: none;
-                                                    border-bottom: 1px #000000 solid }
+                                                    border-bottom: 1px #d94c7b solid }
     section a:focus, p a:focus {                    outline: none;
-                                                    color: #42a66a;
+                                                    color: #d94c7b;
                                                     text-decoration: none;
-                                                    border-bottom: 1px #42a66a solid }
-    section a:active, p a:active {                  color: #000000;
+                                                    border-bottom: 1px #d94c7b solid }
+    section a:active, p a:active {                  color: #d94c7b;
                                                     text-decoration: none;
-                                                    border-bottom: 1px #000000 solid }
-    div.tags a, span.tags_select a {                padding: 0.2em 0.4em;
-                                                    margin: 0.2em 0em;
-                                                    border-radius: 0.4em;
-                                                    display: inline-block;
-                                                    position: relative;
-                                                    top: 0px;
-                                                    background-color: #ffffff;
-                                                    background-image: -o-linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
-                                                    background-image: -moz-linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
-                                                    background-image: -webkit-linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
-                                                    background-image: -ms-linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
-                                                    background-image: linear-gradient(top, #ffffff 20%, #fbfbf7 90%);
-                                                    border: 1px solid #c6ccc8 }
+                                                    border-bottom: 1px #d94c7b solid }
+    div.tags a, span.tags_select a {                display: inline-block;
+                                                    padding: 0.2em 0.4em;
+                                                    border: none;
+                                                    border-radius: 0.2em;
+                                                    color: #fbfbf7;
+                                                    background-color: #42a66a }
     div.tags a:hover, span.tags_select a:hover,
     div.tags a:focus, span.tags_select a:focus,
-    div.tags a:active, span.tags_select a:active {  top: 1px;
-                                                    color: inherit }
+    div.tags a:active, span.tags_select a:active {  color: #ffffff;
+                                                    background-color: #1d914b }
     div.metadata a {                                color: #9ea8a8 }
     div.metadata a:link, div.metadata a:visited {   color: #9ea8a8;
                                                     border-bottom: none }
-    div.metadata a:focus, div.metadata a:active {   color: #000000;
+    div.metadata a:focus, div.metadata a:active {   color: #d94c7b;
                                                     border-bottom: none }
     div.doaction a, button {                        white-space: nowrap;
                                                     padding: 0.4em 0.6em;
@@ -527,6 +521,18 @@ a:active {                                          color: #000000;
     a.rights_licence_link:hover, a.like:hover,
     a.rights_licence_link:focus, a.like:focus,
     a.rights_licence_link:active, a.like:active {   opacity: 1 }
+    a.archive_post_link {                           display: block;
+                                                    position: absolute;
+                                                    top: 0px;
+                                                    left: 0px;
+                                                    bottom: 0px;
+                                                    right: 0px;
+                                                    color: transparent;
+                                                    background-color: transparent }
+    a.archive_post_link:hover,
+    a.archive_post_link:focus,
+    a.archive_post_link:active {                    background-color: #d94c7b;
+                                                    mix-blend-mode: multiply }
 img {                                               border-style: none;
                                                     margin: 0em;
                                                     padding: 0em }
