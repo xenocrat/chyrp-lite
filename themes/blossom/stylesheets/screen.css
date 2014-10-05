@@ -114,7 +114,7 @@ dl {                                                list-style: none }
                                                     background-image: -webkit-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
-                                                    box-shadow: 0px 4px 8px 2px rgba(57,67,77,0.1) }
+                                                    box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
     ul.navigation li {                              display: block;
                                                     min-width: 4em;
                                                     padding: 0.67em 1em;
@@ -183,7 +183,7 @@ form, fieldset {                                    margin: 0em;
                                                     background-image: -webkit-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
-                                                    box-shadow: 0px 4px 8px 2px rgba(57,67,77,0.1) }
+                                                    box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
     form.comment_edit {                             width: 100%;
                                                     background-color: transparent;
                                                     margin-bottom: 0em;
@@ -297,7 +297,7 @@ label {                                             display: block;
                                                     background-image: -ms-linear-gradient(top, #426aa6 0%, #1d4b91 80%);
                                                     background-image: linear-gradient(top, #426aa6 0%, #1d4b91 80%);
                                                     padding: 0.5em;
-                                                    margin-bottom: 2em;
+                                                    margin-bottom: 1em;
                                                     border-radius: 6px }
     div.flash {                                     background-color: #af2d2d;
                                                     background-image: -o-linear-gradient(top, #cc5252 0%, #af2d2d 80%);
@@ -366,7 +366,7 @@ label {                                             display: block;
                                                     background-image: -webkit-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
-                                                    box-shadow: 0px 4px 8px 2px rgba(57,67,77,0.1) }
+                                                    box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
     div#main > article:last-child {                 margin-bottom: 0em }
     div#main > article.commentary {                 padding: 0em 2em 2em 2em;
                                                     margin-top: 2em }
