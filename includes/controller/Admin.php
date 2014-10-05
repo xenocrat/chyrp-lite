@@ -558,7 +558,10 @@
             $user = new User($_POST['id']);
 
             if ($user->no_results)
-                Flash::warning(__("User not found."), "/admin/?action=manage_user");
+                Flash::warning(__("User not found."), "/admin/?action=manage_users");
+
+            if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
+                Flash::warning(__("Passwords do not match."), "/admin/?action=manage_users");
 
             $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
                             User::hashPassword($_POST['new_password1']) :
