@@ -484,7 +484,8 @@ a:active {                                          color: #d94c7b;
     div.metadata a {                                color: #9ea8a8 }
     div.metadata a:link, div.metadata a:visited {   color: #9ea8a8;
                                                     border-bottom: none }
-    div.metadata a:focus, div.metadata a:active {   color: #d94c7b;
+    div.metadata a:hover, div.metadata a:focus,
+    div.metadata a:active {                         color: #d94c7b;
                                                     border-bottom: none }
     div.doaction a, button {                        white-space: nowrap;
                                                     padding: 0.4em 0.6em;

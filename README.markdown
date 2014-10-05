@@ -26,7 +26,7 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Link: link to another website.
 * Video: upload a video file.
 * Audio: upload an audio file.
-* Uploader: create an image gallery or upload file attachments.
+* Uploader: create an image gallery or upload multiple file attachments.
 
 #### Modules:
 * Cacher: cache your blog pages for reduced server load.
@@ -42,7 +42,7 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Homepage: replace the blog index with a homepage.
 
 ## How is Chyrp Lite different from Chyrp?
-Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. JavaScripts deemed unduly complex or maintenance-heavy have been removed, as have modules and feathers deemed non-essential. Accessibility is aided by semantic markup, comprehensive alt text and ARIA labels.
+Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. JavaScripts deemed unduly complex or maintenance-heavy have been removed, as have modules and feathers deemed non-essential. Accessibility is aided by semantic markup, comprehensive alt-text and ARIA labels.
 
 ## Requirements
 These are the earliest versions of the services with which Chyrp Lite has been tested:
