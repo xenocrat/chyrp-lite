@@ -403,7 +403,7 @@ p.message {                                 padding: 0.6em;
                                             border-radius: 0.4em }
 p.message.yay {                             background-color: #76b362;
                                             color: #ffffff }
-p.message.boo {                             background-color: #bd2f2f;
+p.message.boo {                             background-color: #d94c4c;
                                             color: #ffffff }
 p.message a:link,
 p.message a:visited,

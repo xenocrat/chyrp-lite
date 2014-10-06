@@ -18,11 +18,12 @@
                 }
             },
             watch: function() {
+                // Trigger fetch on scroll when 9/10 of the page has been viewed
                 var docViewTop = $(window).scrollTop();
-                var windowHeight = window.innerHeight ? window.innerHeight : $(window).height();
-                var docViewBottom = docViewTop + windowHeight;
-                var docViewed = docViewBottom - $(document).height();
-                if ( docViewed == 0 ) ChyrpAjaxScroll.fetch();
+                var winHeight = window.innerHeight ? window.innerHeight : $(window).height();
+                var docHeight = $(document).height();
+                var docViewBottom = docViewTop + winHeight;
+                if ( docViewBottom >= ( docHeight * 0.9 ) ) ChyrpAjaxScroll.fetch();
             },
             fetch: function() {
                 if ( !ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.fail ) {
