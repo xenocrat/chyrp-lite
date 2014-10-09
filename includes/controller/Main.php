@@ -478,7 +478,7 @@
          * Deliver a notification to comply with EU Directive 2002/58 on Privacy and Electronic Communications.
          */
         public function cookies_notification() {
-            if (!isset($_SESSION['cookies_notified'])) {
+            if (!isset($_SESSION['cookies_notified']) and Config::current()->cookies_notification) {
                 Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
                 $_SESSION['cookies_notified'] = true;
             }

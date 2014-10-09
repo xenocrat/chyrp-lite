@@ -2118,6 +2118,7 @@
                          $config->set("email", $_POST['email']),
                          $config->set("timezone", $_POST['timezone']),
                          $config->set("locale", $_POST['locale']),
+                         $config->set("cookies_notification", !empty($_POST['cookies_notification'])),
                          $config->set("check_updates", !empty($_POST['check_updates'])));
 
             if (!in_array(false, $set))

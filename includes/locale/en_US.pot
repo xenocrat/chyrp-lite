@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-05 19:21+0000\n"
+"POT-Creation-Date: 2014-10-09 20:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -86,12 +86,12 @@ msgstr ""
 #: includes/controller/Admin.php:2067
 #: includes/controller/Admin.php:2093
 #: includes/controller/Admin.php:2111
-#: includes/controller/Admin.php:2133
-#: includes/controller/Admin.php:2139
-#: includes/controller/Admin.php:2162
-#: includes/controller/Admin.php:2168
-#: includes/controller/Admin.php:2187
-#: includes/controller/Admin.php:2193
+#: includes/controller/Admin.php:2134
+#: includes/controller/Admin.php:2140
+#: includes/controller/Admin.php:2163
+#: includes/controller/Admin.php:2169
+#: includes/controller/Admin.php:2188
+#: includes/controller/Admin.php:2194
 #: includes/controller/Main.php:383
 #: includes/controller/Main.php:453
 #: includes/helpers.php:91
@@ -255,7 +255,7 @@ msgstr ""
 #: admin/themes/default/pages/content_settings.twig:71
 #: admin/themes/default/pages/edit_group.twig:24
 #: admin/themes/default/pages/edit_user.twig:43
-#: admin/themes/default/pages/general_settings.twig:60
+#: admin/themes/default/pages/general_settings.twig:67
 #: admin/themes/default/pages/route_settings.twig:42
 #: admin/themes/default/pages/user_settings.twig:40
 msgid "Update"
@@ -459,7 +459,7 @@ msgstr ""
 
 #: admin/themes/default/pages/export.twig:3
 #: admin/themes/default/pages/export.twig:54
-#: includes/controller/Admin.php:2288
+#: includes/controller/Admin.php:2289
 msgid "Export"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgid "What would you like to export?"
 msgstr ""
 
 #: admin/themes/default/pages/export.twig:10
-#: includes/controller/Admin.php:2268
+#: includes/controller/Admin.php:2269
 msgid "Posts"
 msgstr ""
 
@@ -494,20 +494,20 @@ msgid "(optional)"
 msgstr ""
 
 #: admin/themes/default/pages/export.twig:20
-#: includes/controller/Admin.php:2271
+#: includes/controller/Admin.php:2272
 msgid "Pages"
 msgstr ""
 
 #: admin/themes/default/pages/export.twig:30
 #: admin/themes/default/pages/manage_groups.twig:21
-#: includes/controller/Admin.php:2279
+#: includes/controller/Admin.php:2280
 msgid "Groups"
 msgstr ""
 
 #: admin/themes/default/pages/export.twig:40
 #: admin/themes/default/pages/manage_users.twig:24
-#: includes/controller/Admin.php:2274
-#: includes/controller/Admin.php:2309
+#: includes/controller/Admin.php:2275
+#: includes/controller/Admin.php:2310
 msgid "Users"
 msgstr ""
 
@@ -516,7 +516,7 @@ msgid "(warning: this also exports the hashed passwords, keep it safe)"
 msgstr ""
 
 #: admin/themes/default/pages/feathers.twig:3
-#: includes/controller/Admin.php:2319
+#: includes/controller/Admin.php:2320
 msgid "Feathers"
 msgstr ""
 
@@ -575,7 +575,7 @@ msgid "Chyrp URL"
 msgstr ""
 
 #: admin/themes/default/pages/general_settings.twig:22
-#: includes/controller/Admin.php:2226
+#: includes/controller/Admin.php:2227
 msgid "Alternate URL"
 msgstr ""
 
@@ -601,10 +601,18 @@ msgid "Language"
 msgstr ""
 
 #: admin/themes/default/pages/general_settings.twig:53
-msgid "Check for Updates?"
+msgid "Notify visitors about cookies?"
 msgstr ""
 
 #: admin/themes/default/pages/general_settings.twig:56
+msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:60
+msgid "Check for Updates?"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:63
 msgid "Check for the availability of new Chyrp versions."
 msgstr ""
 
@@ -614,7 +622,7 @@ msgstr ""
 #: admin/themes/default/pages/import.twig:76
 #: admin/themes/default/pages/import.twig:117
 #: admin/themes/default/pages/import.twig:153
-#: includes/controller/Admin.php:2286
+#: includes/controller/Admin.php:2287
 msgid "Import"
 msgstr ""
 
@@ -854,7 +862,7 @@ msgstr ""
 
 #: admin/themes/default/pages/modules.twig:3
 #: admin/themes/default/pages/modules.twig:6
-#: includes/controller/Admin.php:2317
+#: includes/controller/Admin.php:2318
 msgid "Modules"
 msgstr ""
 
@@ -873,7 +881,7 @@ msgid "Add User"
 msgstr ""
 
 #: admin/themes/default/pages/new_user.twig:9
-#: includes/controller/Admin.php:2428
+#: includes/controller/Admin.php:2429
 msgid "Settings"
 msgstr ""
 
@@ -1007,7 +1015,7 @@ msgstr ""
 
 #: admin/themes/default/pages/themes.twig:3
 #: admin/themes/default/pages/themes.twig:7
-#: includes/controller/Admin.php:2321
+#: includes/controller/Admin.php:2322
 msgid "Themes"
 msgstr ""
 
@@ -1067,7 +1075,7 @@ msgid "Add Page"
 msgstr ""
 
 #: admin/themes/default/pages/write_post.twig:3
-#: includes/controller/Admin.php:2415
+#: includes/controller/Admin.php:2416
 msgid "Write"
 msgstr ""
 
@@ -1141,7 +1149,7 @@ msgid "Timestamp"
 msgstr ""
 
 #: admin/themes/default/partials/post_fields.twig:81
-#: includes/controller/Admin.php:2222
+#: includes/controller/Admin.php:2223
 msgid "Trackbacks"
 msgstr ""
 
@@ -1274,7 +1282,7 @@ msgstr ""
 #: includes/controller/Admin.php:497
 #: includes/controller/Admin.php:500
 #: includes/controller/Admin.php:502
-#: includes/controller/Admin.php:2474
+#: includes/controller/Admin.php:2475
 #: includes/controller/Main.php:318
 #: includes/controller/Main.php:414
 #: includes/controller/Main.php:497
@@ -1335,9 +1343,9 @@ msgstr ""
 #: includes/controller/Admin.php:715
 #: includes/controller/Admin.php:768
 #: includes/controller/Admin.php:2111
-#: includes/controller/Admin.php:2139
-#: includes/controller/Admin.php:2168
-#: includes/controller/Admin.php:2193
+#: includes/controller/Admin.php:2140
+#: includes/controller/Admin.php:2169
+#: includes/controller/Admin.php:2194
 msgid "Invalid security key."
 msgstr ""
 
@@ -1641,9 +1649,9 @@ msgstr ""
 #: includes/controller/Admin.php:2001
 #: includes/controller/Admin.php:2034
 #: includes/controller/Admin.php:2093
-#: includes/controller/Admin.php:2133
-#: includes/controller/Admin.php:2162
-#: includes/controller/Admin.php:2187
+#: includes/controller/Admin.php:2134
+#: includes/controller/Admin.php:2163
+#: includes/controller/Admin.php:2188
 msgid "You do not have sufficient privileges to change settings."
 msgstr ""
 
@@ -1707,87 +1715,87 @@ msgstr ""
 msgid "Previewing theme &#8220;%s&#8221;. Press the theme's &#8220;Preview&#8221; button again to stop previewing."
 msgstr ""
 
-#: includes/controller/Admin.php:2124
-#: includes/controller/Admin.php:2153
-#: includes/controller/Admin.php:2178
-#: includes/controller/Admin.php:2200
+#: includes/controller/Admin.php:2125
+#: includes/controller/Admin.php:2154
+#: includes/controller/Admin.php:2179
+#: includes/controller/Admin.php:2201
 msgid "Settings updated."
 msgstr ""
 
-#: includes/controller/Admin.php:2212
+#: includes/controller/Admin.php:2213
 msgid "Filtering Results"
 msgstr ""
 
-#: includes/controller/Admin.php:2213
+#: includes/controller/Admin.php:2214
 msgid "Use this to search for specific items. You can either enter plain text to match the item with, or use keywords:"
 msgstr ""
 
-#: includes/controller/Admin.php:2214
+#: includes/controller/Admin.php:2215
 msgid "Keywords"
 msgstr ""
 
-#: includes/controller/Admin.php:2215
+#: includes/controller/Admin.php:2216
 msgid "Usage"
 msgstr ""
 
-#: includes/controller/Admin.php:2215
+#: includes/controller/Admin.php:2216
 msgid "Use this syntax to quickly match specific results. Keywords will modify the query to match items where <code>attr</code> is equal to <code>val</code> (case insensitive)."
 msgstr ""
 
-#: includes/controller/Admin.php:2218
+#: includes/controller/Admin.php:2219
 msgid "Post Slugs"
 msgstr ""
 
-#: includes/controller/Admin.php:2219
+#: includes/controller/Admin.php:2220
 msgid "Post slugs are strings to use for the URL of a post. They are directly responsible for the <code>(url)</code> attribute in a post's clean URL, or the <code>/?action=view&amp;url=<strong>foo</strong></code> in a post's dirty URL. A post slug should not contain any special characters other than hyphens."
 msgstr ""
 
-#: includes/controller/Admin.php:2223
+#: includes/controller/Admin.php:2224
 msgid "Trackbacks are special urls to posts from other blogs that your post is related to or references. The other blog will be notified of your post, and in some cases a comment will automatically be added to the post in question linking back to your post. It's basically a way to network between blogs via posts."
 msgstr ""
 
-#: includes/controller/Admin.php:2227
+#: includes/controller/Admin.php:2228
 msgid "An alternate URL will allow you to keep Chyrp in its own directory, while having your site URLs point to someplace else. For example, you could have Chyrp in a <code>/chyrp</code> directory, and have your site at <code>/</code>. There are two requirements for this to work."
 msgstr ""
 
-#: includes/controller/Admin.php:2228
+#: includes/controller/Admin.php:2229
 msgid "Create an <code>index.php</code> file in your destination directory with the following in it:"
 msgstr ""
 
-#: includes/controller/Admin.php:2232
+#: includes/controller/Admin.php:2233
 msgid "Move the .htaccess file from the original Chyrp directory, and change the <code>RewriteBase</code> line to reflect the new website location."
 msgstr ""
 
-#: includes/controller/Admin.php:2262
+#: includes/controller/Admin.php:2263
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:2305
+#: includes/controller/Admin.php:2306
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:2307
+#: includes/controller/Admin.php:2308
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:2311
+#: includes/controller/Admin.php:2312
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:2420
+#: includes/controller/Admin.php:2421
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:2433
+#: includes/controller/Admin.php:2434
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:2459
+#: includes/controller/Admin.php:2460
 #: includes/controller/Main.php:848
 msgid "Template Missing"
 msgstr ""
 
-#: includes/controller/Admin.php:2459
+#: includes/controller/Admin.php:2460
 #: includes/controller/Main.php:848
 #, php-format
 msgid "Couldn't load template: <code>%s</code>"
