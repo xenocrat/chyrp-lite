@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-09 20:05+0000\n"
+"POT-Creation-Date: 2014-10-10 19:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -163,7 +163,7 @@ msgid "Hello, %s!"
 msgstr ""
 
 #: admin/themes/default/layout.twig:33
-#: install.php:258
+#: install.php:259
 msgid "View Site"
 msgstr ""
 
@@ -489,7 +489,7 @@ msgstr ""
 #: admin/themes/default/pages/import.twig:109
 #: admin/themes/default/pages/import.twig:145
 #: admin/themes/default/partials/post_fields.twig:7
-#: install.php:579
+#: install.php:580
 msgid "(optional)"
 msgstr ""
 
@@ -561,12 +561,12 @@ msgid "Site Configuration"
 msgstr ""
 
 #: admin/themes/default/pages/general_settings.twig:9
-#: install.php:588
+#: install.php:589
 msgid "Site Name"
 msgstr ""
 
 #: admin/themes/default/pages/general_settings.twig:13
-#: install.php:592
+#: install.php:593
 msgid "Description"
 msgstr ""
 
@@ -588,7 +588,7 @@ msgid "Contact E-Mail Address"
 msgstr ""
 
 #: admin/themes/default/pages/general_settings.twig:36
-#: install.php:596
+#: install.php:597
 msgid "What time is it?"
 msgstr ""
 
@@ -671,34 +671,34 @@ msgstr ""
 
 #: admin/themes/default/pages/import.twig:86
 #: admin/themes/default/pages/import.twig:127
-#: install.php:557
+#: install.php:558
 msgid "Host"
 msgstr ""
 
 #: admin/themes/default/pages/import.twig:90
 #: admin/themes/default/pages/import.twig:131
-#: install.php:563
-#: install.php:611
+#: install.php:564
+#: install.php:612
 msgid "Username"
 msgstr ""
 
 #: admin/themes/default/pages/import.twig:94
 #: admin/themes/default/pages/import.twig:135
 #: admin/themes/default/pages/new_user.twig:24
-#: install.php:569
-#: install.php:615
-#: install.php:619
+#: install.php:570
+#: install.php:616
+#: install.php:620
 msgid "Password"
 msgstr ""
 
 #: admin/themes/default/pages/import.twig:98
 #: admin/themes/default/pages/import.twig:139
-#: install.php:574
+#: install.php:575
 msgid "Database"
 msgstr ""
 
 #: admin/themes/default/pages/import.twig:102
-#: install.php:579
+#: install.php:580
 msgid "Table Prefix"
 msgstr ""
 
@@ -2122,189 +2122,189 @@ msgstr ""
 msgid "Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it:\n<pre>%s</pre>"
 msgstr ""
 
-#: install.php:256
+#: install.php:257
 msgid "Change Settings"
 msgstr ""
 
-#: install.php:257
+#: install.php:258
 msgid "Toggle Extensions"
 msgstr ""
 
-#: install.php:259
+#: install.php:260
 msgid "View Private Posts"
 msgstr ""
 
-#: install.php:260
+#: install.php:261
 msgid "View Scheduled Posts"
 msgstr ""
 
-#: install.php:261
+#: install.php:262
 msgid "View Drafts"
 msgstr ""
 
-#: install.php:262
+#: install.php:263
 msgid "View Own Drafts"
 msgstr ""
 
-#: install.php:263
+#: install.php:264
 msgid "Add Posts"
 msgstr ""
 
-#: install.php:264
+#: install.php:265
 msgid "Add Drafts"
 msgstr ""
 
-#: install.php:265
+#: install.php:266
 msgid "Edit Posts"
 msgstr ""
 
-#: install.php:266
+#: install.php:267
 msgid "Edit Drafts"
 msgstr ""
 
-#: install.php:267
+#: install.php:268
 msgid "Edit Own Posts"
 msgstr ""
 
-#: install.php:268
+#: install.php:269
 msgid "Edit Own Drafts"
 msgstr ""
 
-#: install.php:269
+#: install.php:270
 msgid "Delete Posts"
 msgstr ""
 
-#: install.php:270
+#: install.php:271
 msgid "Delete Drafts"
 msgstr ""
 
-#: install.php:271
+#: install.php:272
 msgid "Delete Own Posts"
 msgstr ""
 
-#: install.php:272
+#: install.php:273
 msgid "Delete Own Drafts"
 msgstr ""
 
-#: install.php:273
+#: install.php:274
 msgid "View Pages"
 msgstr ""
 
-#: install.php:274
+#: install.php:275
 msgid "Add Pages"
 msgstr ""
 
-#: install.php:275
+#: install.php:276
 msgid "Edit Pages"
 msgstr ""
 
-#: install.php:276
+#: install.php:277
 msgid "Delete Pages"
 msgstr ""
 
-#: install.php:277
+#: install.php:278
 msgid "Add Users"
 msgstr ""
 
-#: install.php:278
+#: install.php:279
 msgid "Edit Users"
 msgstr ""
 
-#: install.php:279
+#: install.php:280
 msgid "Delete Users"
 msgstr ""
 
-#: install.php:280
+#: install.php:281
 msgid "Add Groups"
 msgstr ""
 
-#: install.php:281
+#: install.php:282
 msgid "Edit Groups"
 msgstr ""
 
-#: install.php:282
+#: install.php:283
 msgid "Delete Groups"
 msgstr ""
 
-#: install.php:510
-#: install.php:574
+#: install.php:511
+#: install.php:575
 msgid "(full path)"
 msgstr ""
 
-#: install.php:539
+#: install.php:540
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:541
+#: install.php:542
 msgid "Adapter"
 msgstr ""
 
-#: install.php:557
+#: install.php:558
 msgid "(usually ok as \"localhost\")"
 msgstr ""
 
-#: install.php:586
+#: install.php:587
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:589
+#: install.php:590
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:609
+#: install.php:610
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:619
+#: install.php:620
 msgid "(again)"
 msgstr ""
 
-#: install.php:623
+#: install.php:624
 msgid "E-Mail Address"
 msgstr ""
 
-#: install.php:627
+#: install.php:628
 msgid "Install! &rarr;"
 msgstr ""
 
-#: install.php:630
+#: install.php:631
 #: upgrade.php:1380
 msgid "Done!"
 msgstr ""
 
-#: install.php:632
+#: install.php:633
 msgid "Chyrp has been successfully installed and you have been logged in."
 msgstr ""
 
-#: install.php:634
+#: install.php:635
 msgid "So, what now?"
 msgstr ""
 
-#: install.php:636
+#: install.php:637
 msgid "<strong>Delete install.php</strong>, you won't need it anymore."
 msgstr ""
 
-#: install.php:638
+#: install.php:639
 msgid "CHMOD <code>/includes/caches</code> to 777."
 msgstr ""
 
-#: install.php:640
+#: install.php:641
 msgid "Look for a translation for your language."
 msgstr ""
 
-#: install.php:641
+#: install.php:642
 msgid "Install some Modules."
 msgstr ""
 
-#: install.php:642
+#: install.php:643
 msgid "Find some Feathers you want."
 msgstr ""
 
-#: install.php:643
+#: install.php:644
 msgid "Read &#8220;Getting Started&#8221;"
 msgstr ""
 
-#: install.php:645
+#: install.php:646
 msgid "Take me to my site! &rarr;"
 msgstr ""
 
