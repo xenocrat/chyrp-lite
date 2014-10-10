@@ -204,7 +204,7 @@ input {                                             -moz-box-sizing: border-box;
                                                     background-color: #ffffff;
                                                     border: 1px solid #c6ccc8;
                                                     border-radius: 0em;
-                                                    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
+/* Removes shadow from Mobile Safari -> */          background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 input:focus {                                       outline: none;
                                                     background-color: #ffffff;
                                                     border: 1px solid #d94c7b }
@@ -252,7 +252,7 @@ textarea {                                          -moz-box-sizing: border-box;
                                                     background-color: #ffffff;
                                                     border: 1px solid #c6ccc8;
                                                     border-radius: 0em;
-                                                    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
+/* Removes shadow from Mobile Safari -> */          background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 textarea:focus {                                    outline: none;
                                                     border: 1px solid #d94c7b }
     article.commentary textarea {                   max-width: none }

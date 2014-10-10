@@ -4,7 +4,7 @@
 
 {% block content %}
             <ul id="blog_themes" class="extend themes">
-                <h5>${ "Themes" | translate }</h5>
+                <h5>${ "Blog Themes" | translate }</h5>
                 {% for theme in themes %}
                 <li class="{% if theme.name == site.theme %}current{% endif %}" id="$theme.name">
                     <img src="$theme.screenshot" alt="${ ('"' ~ theme.info.name ~ '"') | escape } screenshot" class="screenshot">
