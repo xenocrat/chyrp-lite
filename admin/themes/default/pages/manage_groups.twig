@@ -41,12 +41,12 @@
                         </td>
                         <td class="group_default">
                         {% if group.id == site.default_group %}
-                            <img class="emblem" src="$theme_url/images/icons/success.svg" alt="yes">
+                            <img class="emblem" src="$theme_url/images/icons/success.svg" alt="${ "yes" | translate }">
                         {% endif %}
                         </td>
                         <td class="group_guest">
                         {% if group.id == site.guest_group %}
-                            <img class="emblem" src="$theme_url/images/icons/success.svg" alt="yes">
+                            <img class="emblem" src="$theme_url/images/icons/success.svg" alt="${ "yes" | translate }">
                         {% endif %}
                         </td>
                         ${ trigger.call("manage_groups_column", user) }

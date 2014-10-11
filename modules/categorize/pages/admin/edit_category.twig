@@ -21,8 +21,11 @@
                 </small>
             </p>
             <p>
-                <label for="show_on_home">${ "Show on home?" | translate("categorize") }</label>
+                <label for="show_on_home">${ "Listed?" | translate("categorize") }</label>
                 <input class="checkbox" type="checkbox" name="show_on_home" id="show_on_home"{% if categorize.show_on_home %} checked="checked"{% endif %}>
+                <small>
+                    ${ "Do you want to include this category in the categories list?" | translate("categorize") }
+                </small>
             </p>
             <p>
                 <button type="submit" name="update" class="yay"><img src="$theme_url/images/icons/success.svg" alt="update">${ "Update" | translate("categorize") }</button>

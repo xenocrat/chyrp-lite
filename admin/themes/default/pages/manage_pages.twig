@@ -23,6 +23,8 @@
                         <th class="page_title">${ "Title" | translate }</th>
                         <th class="page_created">${ "Created" | translate }</th>
                         <th class="page_updated">${ "Last Updated" | translate }</th>
+                        <th class="page_public">${ "Public?" | translate }</th>
+                        <th class="page_show">${ "Listed?" | translate }</th>
                         <th class="page_author">${ "Author" | translate }</th>
                         ${ trigger.call("manage_pages_column_header") }
                         <th class="controls" colspan="2">${ "Controls" | translate }</th>
@@ -39,6 +41,16 @@
                         </td>
                         <td class="page_updated">
                             {% if page.updated %}${ page.updated_at | strftime }{% else %}<span class="sub">${ "never" | translate }</span>{% endif %}
+                        </td>
+                        <td class="page_public">
+                            {% if page.public %}<img class="emblem" src="$theme_url/images/icons/success.svg" alt="${ "yes" | translate }">
+                            {% else %}&nbsp;
+                            {% endif %}
+                        </td>
+                        <td class="page_show">
+                            {% if page.show_in_list %}<img class="emblem" src="$theme_url/images/icons/success.svg" alt="${ "yes" | translate }">
+                            {% else %}&nbsp;
+                            {% endif %}
                         </td>
                         <td class="page_author">
                             $page.user.login

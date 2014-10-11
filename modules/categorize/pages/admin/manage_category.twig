@@ -19,7 +19,7 @@
         <table>
             <thead> 
                 <tr class="head">
-                    <th class="category_show">${ "Show" | translate("categorize") }</th>
+                    <th class="category_show">${ "Listed?" | translate("categorize") }</th>
                     <th class="category_name">${ "Name" | translate("categorize") }</th>
                     ${ trigger.call("manage_comments_column_header") }
                     <th class="controls" colspan="2">${ "Controls" | translate }</th>
@@ -29,7 +29,7 @@
                 {% for category in categorize %}
                 <tr id="category_$cat.id">
                     <td class="category_show">
-                        {% if category.show_on_home %}<img class="emblem" src="$theme_url/images/icons/success.svg">
+                        {% if category.show_on_home %}<img class="emblem" src="$theme_url/images/icons/success.svg" alt="${ "yes" | translate }">
                         {% else %}&nbsp;
                         {% endif %}
                     </td>

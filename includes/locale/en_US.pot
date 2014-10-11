@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-11 09:25+0000\n"
+"POT-Creation-Date: 2014-10-11 16:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -744,36 +744,43 @@ msgid "Guests?"
 msgstr ""
 
 #: admin/themes/default/pages/manage_groups.twig:30
-#: admin/themes/default/pages/manage_pages.twig:28
+#: admin/themes/default/pages/manage_pages.twig:30
 #: admin/themes/default/pages/manage_posts.twig:37
 #: admin/themes/default/pages/manage_users.twig:33
 #: includes/controller/Main.php:664
 msgid "Controls"
 msgstr ""
 
-#: admin/themes/default/pages/manage_groups.twig:53
-#: admin/themes/default/pages/manage_pages.twig:48
+#: admin/themes/default/pages/manage_groups.twig:44
+#: admin/themes/default/pages/manage_groups.twig:49
+#: admin/themes/default/pages/manage_pages.twig:46
 #: admin/themes/default/pages/manage_pages.twig:51
-#: admin/themes/default/pages/manage_posts.twig:56
-#: admin/themes/default/pages/manage_posts.twig:59
+msgid "yes"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:53
+#: admin/themes/default/pages/manage_pages.twig:60
+#: admin/themes/default/pages/manage_pages.twig:63
+#: admin/themes/default/pages/manage_posts.twig:57
+#: admin/themes/default/pages/manage_posts.twig:60
 #: admin/themes/default/pages/manage_users.twig:57
 #: admin/themes/default/pages/manage_users.twig:60
 msgid "edit"
 msgstr ""
 
 #: admin/themes/default/pages/manage_groups.twig:54
-#: admin/themes/default/pages/manage_pages.twig:49
-#: admin/themes/default/pages/manage_pages.twig:52
-#: admin/themes/default/pages/manage_posts.twig:57
-#: admin/themes/default/pages/manage_posts.twig:60
+#: admin/themes/default/pages/manage_pages.twig:61
+#: admin/themes/default/pages/manage_pages.twig:64
+#: admin/themes/default/pages/manage_posts.twig:58
+#: admin/themes/default/pages/manage_posts.twig:61
 #: admin/themes/default/pages/manage_users.twig:58
 #: admin/themes/default/pages/manage_users.twig:61
 msgid "delete"
 msgstr ""
 
 #: admin/themes/default/pages/manage_groups.twig:62
-#: admin/themes/default/pages/manage_pages.twig:65
-#: admin/themes/default/pages/manage_posts.twig:73
+#: admin/themes/default/pages/manage_pages.twig:77
+#: admin/themes/default/pages/manage_posts.twig:74
 #: admin/themes/default/pages/manage_users.twig:74
 #, php-format
 msgid "Page %d of %d"
@@ -813,16 +820,24 @@ msgid "Last Updated"
 msgstr ""
 
 #: admin/themes/default/pages/manage_pages.twig:26
+msgid "Public?"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:27
+msgid "Listed?"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:28
 #: admin/themes/default/pages/manage_posts.twig:35
 msgid "Author"
 msgstr ""
 
-#: admin/themes/default/pages/manage_pages.twig:41
+#: admin/themes/default/pages/manage_pages.twig:43
 msgid "never"
 msgstr ""
 
-#: admin/themes/default/pages/manage_pages.twig:57
-#: admin/themes/default/pages/manage_posts.twig:65
+#: admin/themes/default/pages/manage_pages.twig:69
+#: admin/themes/default/pages/manage_posts.twig:66
 #: admin/themes/default/pages/manage_users.twig:66
 msgid "(none)"
 msgstr ""
@@ -1100,11 +1115,11 @@ msgid "Show in pages list?"
 msgstr ""
 
 #: admin/themes/default/partials/page_fields.twig:30
-msgid "Position in pages list"
+msgid "Priority in pages list"
 msgstr ""
 
 #: admin/themes/default/partials/page_fields.twig:38
-msgid "Allow everyone to view?"
+msgid "Is this page public?"
 msgstr ""
 
 #: admin/themes/default/partials/page_fields.twig:51

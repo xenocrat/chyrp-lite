@@ -345,6 +345,8 @@ table thead tr th.page_updated,
 table thead tr th.page_author,
 table tbody tr td.page_created,
 table tbody tr td.page_updated,
+table tbody tr td.page_public,
+table tbody tr td.page_show,
 table tbody tr td.page_author {                 text-align: center }
 table thead tr th.group_name,
 table tbody tr td.group_name {                  text-align: left }

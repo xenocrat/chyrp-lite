@@ -27,7 +27,7 @@
                                 <input type="checkbox" name="show_in_list" id="show_in_list"{% if page.show_in_list or route.action == "write_page" %} checked="checked"{% endif %}>
                             </p>
                             <p class="more_options_option">
-                                <label for="list_order">${ "Position in pages list" | translate }</label>
+                                <label for="list_order">${ "Priority in pages list" | translate }</label>
                                 <select name="list_order" id="list_order">
                                     {% for item in theme.pages_list(0) %}
                                     <option value="$loop.index0"${ loop.index0 | option_selected(page.list_order) }>$loop.index0</option>
@@ -35,7 +35,7 @@
                                 </select>
                             </p>
                             <p class="more_options_option">
-                                <label for="public">${ "Allow everyone to view?" | translate }</label>
+                                <label for="public">${ "Is this page public?" | translate }</label>
                                 <input type="checkbox" name="public" id="public"{% if page.public %} checked="checked"{% endif %}>
                             </p>
                             {% if route.action == "write_page" %}
