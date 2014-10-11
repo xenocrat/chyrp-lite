@@ -19,7 +19,8 @@
                     <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
                     {% endif %}
                     <p class="module_description">
-                    $module.description {# translation is done in the controller #}
+                        $module.description {# translation is done in the controller #}
+                    </p>
                     {% if module.dependencies_needed %}
                     <p class="module_dependencies_message">
                         ${ "This Module requires the following Modules to be enabled:" | translate }
@@ -57,7 +58,8 @@
                     <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
                     {% endif %}
                     <p class="module_description">
-                    $module.description {# translation is done in the controller #}
+                        $module.description {# translation is done in the controller #}
+                    </p>
                     {% if module.dependencies_needed %}
                     <p class="module_dependencies_message">
                         ${ "This Module requires the following Modules to be enabled:" | translate }

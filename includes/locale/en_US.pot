@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-10 23:31+0000\n"
+"POT-Creation-Date: 2014-10-11 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -135,7 +135,7 @@ msgstr ""
 #: admin/themes/default/javascript.php:140
 #: admin/themes/default/javascript.php:141
 #: admin/themes/default/pages/modules.twig:12
-#: admin/themes/default/pages/modules.twig:50
+#: admin/themes/default/pages/modules.twig:51
 msgid "Blissful!"
 msgstr ""
 
@@ -530,29 +530,29 @@ msgid "Enabled"
 msgstr ""
 
 #: admin/themes/default/pages/feathers.twig:15
-#: admin/themes/default/pages/feathers.twig:41
+#: admin/themes/default/pages/feathers.twig:42
 #: admin/themes/default/pages/modules.twig:16
-#: admin/themes/default/pages/modules.twig:54
+#: admin/themes/default/pages/modules.twig:55
 #, php-format
 msgid "<a href=\"%s\">%s</a> v%s"
 msgstr ""
 
-#: admin/themes/default/pages/feathers.twig:24
-#: admin/themes/default/pages/feathers.twig:50
-#: admin/themes/default/pages/modules.twig:35
-#: admin/themes/default/pages/modules.twig:73
+#: admin/themes/default/pages/feathers.twig:25
+#: admin/themes/default/pages/feathers.twig:52
+#: admin/themes/default/pages/modules.twig:36
+#: admin/themes/default/pages/modules.twig:75
 msgid "Disable"
 msgstr ""
 
-#: admin/themes/default/pages/feathers.twig:27
-#: admin/themes/default/pages/feathers.twig:53
-#: admin/themes/default/pages/modules.twig:38
-#: admin/themes/default/pages/modules.twig:76
+#: admin/themes/default/pages/feathers.twig:28
+#: admin/themes/default/pages/feathers.twig:55
+#: admin/themes/default/pages/modules.twig:39
+#: admin/themes/default/pages/modules.twig:78
 msgid "Enable"
 msgstr ""
 
-#: admin/themes/default/pages/feathers.twig:34
-#: admin/themes/default/pages/modules.twig:46
+#: admin/themes/default/pages/feathers.twig:35
+#: admin/themes/default/pages/modules.twig:47
 msgid "Disabled"
 msgstr ""
 
@@ -866,8 +866,8 @@ msgstr ""
 msgid "Modules"
 msgstr ""
 
-#: admin/themes/default/pages/modules.twig:25
-#: admin/themes/default/pages/modules.twig:63
+#: admin/themes/default/pages/modules.twig:26
+#: admin/themes/default/pages/modules.twig:65
 msgid "This Module requires the following Modules to be enabled:"
 msgstr ""
 
