@@ -8,7 +8,7 @@ OPTIONS = {
   :domain => nil,
   :msgstr => "",
   :msgstr_filter => "",
-  :exclude => [".git", "modules", "lib", "feathers", "themes", "config.yaml.php"],
+  :exclude => [".git", "modules", "lib", "feathers", "themes", "admin/themes", "config.yaml.php"],
   :keys    => ["name", "description", "plural", "notifications", "confirm"]
 }
 

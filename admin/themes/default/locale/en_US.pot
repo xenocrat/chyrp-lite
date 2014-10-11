@@ -1,0 +1,1025 @@
+# Chyrp Lite Translation File.
+# Copyright (C) 2014 Xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2014-10-11 16:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: admin/themes/default/info.yaml:1
+msgid "Default"
+msgstr ""
+
+#: admin/themes/default/info.yaml:4
+msgid "The default theme provided with Chyrp Lite."
+msgstr ""
+
+#: admin/themes/default/layout.twig:32
+msgid "Guest"
+msgstr ""
+
+#: admin/themes/default/layout.twig:32
+#, php-format
+msgid "Hello, %s!"
+msgstr ""
+
+#: admin/themes/default/layout.twig:33
+msgid "View Site"
+msgstr ""
+
+#: admin/themes/default/layout.twig:34
+msgid "Log Out"
+msgstr ""
+
+#: admin/themes/default/layout.twig:61
+msgid "Chyrp loves you."
+msgstr ""
+
+#: admin/themes/default/layout.twig:63
+#, php-format
+msgid "v%s &dash; &copy; %d"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:3
+msgid "Content Settings"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:9
+msgid "Posts Per Page"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:13
+msgid "Feed Posts Limit"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:17
+msgid "Feed URL"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:21
+msgid "Allows you to set an alternative URL for <code>/feed/</code>."
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:23
+msgid "Allows you to set an alternative URL for <code>/?feed</code>."
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:28
+msgid "Uploads Path"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:31
+msgid "The directory to which files are uploaded, relative to your Chyrp install. Use <code>/../</code> to go up one directory."
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:35
+msgid "Enable Trackbacking"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:38
+msgid "Trackbacking allows sites to notify you when they link to or reference your posts."
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:42
+msgid "Send Pingbacks"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:45
+msgid "Attempts to notify sites to which your posts link."
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:49
+msgid "Enable XML-RPC Support"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:52
+msgid "XML-RPC support allows you to create and edit content via remote access to your site."
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:56
+msgid "Enable Inline Post Management"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:59
+msgid "Harness the power of AJAX for inline post/page editing."
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:63
+msgid "Enable Unicode Emoticons"
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:66
+msgid "Use Unicode Emoticons."
+msgstr ""
+
+#: admin/themes/default/pages/content_settings.twig:71
+#: admin/themes/default/pages/edit_group.twig:24
+#: admin/themes/default/pages/edit_user.twig:43
+#: admin/themes/default/pages/general_settings.twig:67
+#: admin/themes/default/pages/route_settings.twig:42
+#: admin/themes/default/pages/user_settings.twig:40
+msgid "Update"
+msgstr ""
+
+#: admin/themes/default/pages/delete_group.twig:3
+#, php-format
+msgid "Delete Group &#8220;%s&#8221;?"
+msgstr ""
+
+#: admin/themes/default/pages/delete_group.twig:6
+#, php-format
+msgid "Are you sure you want to delete the &#8220;%s&#8221; group?"
+msgstr ""
+
+#: admin/themes/default/pages/delete_group.twig:11
+msgid "Members:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_group.twig:18
+msgid "Move members to:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_group.twig:27
+msgid "New default group:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_group.twig:35
+msgid "New &#8220;guest&#8221; group:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_group.twig:44
+msgid "DESTROY!"
+msgstr ""
+
+#: admin/themes/default/pages/delete_group.twig:45
+#: admin/themes/default/pages/delete_page.twig:27
+#: admin/themes/default/pages/delete_post.twig:14
+#: admin/themes/default/pages/delete_user.twig:77
+msgid "Cancel"
+msgstr ""
+
+#: admin/themes/default/pages/delete_page.twig:3
+#, php-format
+msgid "Delete Page &#8220;%s&#8221;?"
+msgstr ""
+
+#: admin/themes/default/pages/delete_page.twig:6
+#: admin/themes/default/pages/delete_post.twig:6
+#, php-format
+msgid "Are you sure you want to delete &#8220;%s&#8221;?"
+msgstr ""
+
+#: admin/themes/default/pages/delete_page.twig:11
+msgid "Delete children?"
+msgstr ""
+
+#: admin/themes/default/pages/delete_page.twig:24
+#: admin/themes/default/pages/delete_post.twig:11
+#: admin/themes/default/pages/delete_user.twig:74
+msgid "Delete!"
+msgstr ""
+
+#: admin/themes/default/pages/delete_post.twig:3
+#, php-format
+msgid "Delete &#8220;%s&#8221;?"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:3
+#, php-format
+msgid "Delete User &#8220;%s&#8221;?"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:6
+#, php-format
+msgid "Are you sure you want to delete user &#8220;%s&#8221;?"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:11
+msgid "Full Name:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:16
+msgid "E-Mail:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:21
+msgid "Website:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:26
+msgid "Group:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:32
+msgid "Attribute posts to:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:41
+msgid "Delete posts:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:47
+msgid "Pages:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:58
+msgid "Attribute pages to:"
+msgstr ""
+
+#: admin/themes/default/pages/delete_user.twig:67
+msgid "Delete pages:"
+msgstr ""
+
+#: admin/themes/default/pages/edit_group.twig:3
+#, php-format
+msgid "Edit Group &#8220;%s&#8221;"
+msgstr ""
+
+#: admin/themes/default/pages/edit_group.twig:6
+#, php-format
+msgid "Editing Group &#8220;%s&#8221;"
+msgstr ""
+
+#: admin/themes/default/pages/edit_group.twig:10
+#: admin/themes/default/pages/manage_users.twig:28
+#: admin/themes/default/pages/new_group.twig:10
+msgid "Name"
+msgstr ""
+
+#: admin/themes/default/pages/edit_group.twig:13
+#: admin/themes/default/pages/new_group.twig:13
+msgid "Permissions"
+msgstr ""
+
+#: admin/themes/default/pages/edit_group.twig:25
+#: admin/themes/default/pages/edit_user.twig:44
+msgid "Delete"
+msgstr ""
+
+#: admin/themes/default/pages/edit_page.twig:3
+#: admin/themes/default/pages/edit_post.twig:3
+#, php-format
+msgid "Edit &#8220;%s&#8221;"
+msgstr ""
+
+#: admin/themes/default/pages/edit_page.twig:6
+#: admin/themes/default/pages/edit_post.twig:6
+#, php-format
+msgid "Editing &#8220;%s&#8221;"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:3
+#, php-format
+msgid "Edit User &#8220;%s&#8221;"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:6
+#, php-format
+msgid "Editing User &#8220;%s&#8221;"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:10
+#: admin/themes/default/pages/new_user.twig:34
+msgid "Full Name"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:14
+#: admin/themes/default/pages/new_user.twig:38
+msgid "E-Mail"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:18
+#: admin/themes/default/pages/manage_users.twig:31
+#: admin/themes/default/pages/new_user.twig:42
+msgid "Website"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:22
+#: admin/themes/default/pages/new_user.twig:11
+msgid "Login"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:26
+#: admin/themes/default/pages/manage_groups.twig:25
+#: admin/themes/default/pages/manage_users.twig:29
+#: admin/themes/default/pages/new_user.twig:15
+#: admin/themes/default/partials/post_fields.twig:51
+msgid "Group"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:34
+msgid "New Password?"
+msgstr ""
+
+#: admin/themes/default/pages/edit_user.twig:38
+#: admin/themes/default/pages/new_user.twig:28
+msgid "Confirm"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:3
+#: admin/themes/default/pages/export.twig:54
+msgid "Export"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:6
+msgid "What would you like to export?"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:10
+msgid "Posts"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:13
+#: admin/themes/default/pages/export.twig:23
+#: admin/themes/default/pages/export.twig:33
+#: admin/themes/default/pages/export.twig:46
+msgid "filter:"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:16
+#: admin/themes/default/pages/export.twig:26
+#: admin/themes/default/pages/export.twig:36
+#: admin/themes/default/pages/export.twig:49
+#: admin/themes/default/pages/general_settings.twig:23
+#: admin/themes/default/pages/import.twig:28
+#: admin/themes/default/pages/import.twig:53
+#: admin/themes/default/pages/import.twig:109
+#: admin/themes/default/pages/import.twig:145
+#: admin/themes/default/partials/post_fields.twig:7
+msgid "(optional)"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:20
+msgid "Pages"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:30
+#: admin/themes/default/pages/manage_groups.twig:21
+msgid "Groups"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:40
+#: admin/themes/default/pages/manage_users.twig:24
+msgid "Users"
+msgstr ""
+
+#: admin/themes/default/pages/export.twig:43
+msgid "(warning: this also exports the hashed passwords, keep it safe)"
+msgstr ""
+
+#: admin/themes/default/pages/feathers.twig:3
+msgid "Feathers"
+msgstr ""
+
+#: admin/themes/default/pages/feathers.twig:6
+msgid "Feather"
+msgstr ""
+
+#: admin/themes/default/pages/feathers.twig:8
+#: admin/themes/default/pages/modules.twig:8
+msgid "Enabled"
+msgstr ""
+
+#: admin/themes/default/pages/feathers.twig:15
+#: admin/themes/default/pages/feathers.twig:42
+#: admin/themes/default/pages/modules.twig:16
+#: admin/themes/default/pages/modules.twig:55
+#, php-format
+msgid "<a href=\"%s\">%s</a> v%s"
+msgstr ""
+
+#: admin/themes/default/pages/feathers.twig:25
+#: admin/themes/default/pages/feathers.twig:52
+#: admin/themes/default/pages/modules.twig:36
+#: admin/themes/default/pages/modules.twig:75
+msgid "Disable"
+msgstr ""
+
+#: admin/themes/default/pages/feathers.twig:28
+#: admin/themes/default/pages/feathers.twig:55
+#: admin/themes/default/pages/modules.twig:39
+#: admin/themes/default/pages/modules.twig:78
+msgid "Enable"
+msgstr ""
+
+#: admin/themes/default/pages/feathers.twig:35
+#: admin/themes/default/pages/modules.twig:47
+msgid "Disabled"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:3
+msgid "Site Configuration"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:9
+msgid "Site Name"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:13
+msgid "Description"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:17
+msgid "Chyrp URL"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:22
+msgid "Alternate URL"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:28
+msgid "Enter an alternate address here if you want your homepage URL to be different from the URL where Chyrp is normally available."
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:32
+msgid "Contact E-Mail Address"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:36
+msgid "What time is it?"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:39
+msgid "%m/%d/%y %H:%M"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:44
+msgid "Language"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:53
+msgid "Notify visitors about cookies?"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:56
+msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:60
+msgid "Check for Updates?"
+msgstr ""
+
+#: admin/themes/default/pages/general_settings.twig:63
+msgid "Check for the availability of new Chyrp versions."
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:3
+#: admin/themes/default/pages/import.twig:37
+#: admin/themes/default/pages/import.twig:61
+#: admin/themes/default/pages/import.twig:76
+#: admin/themes/default/pages/import.twig:117
+#: admin/themes/default/pages/import.twig:153
+msgid "Import"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:10
+msgid "Posts .atom File"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:14
+msgid "Pages .atom File"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:18
+msgid "Groups .yaml File"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:22
+msgid "Users .yaml File"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:27
+#: admin/themes/default/pages/import.twig:52
+#: admin/themes/default/pages/import.twig:108
+#: admin/themes/default/pages/import.twig:144
+msgid "What URL is used for embedded media?"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:32
+msgid "Usually something like <code>http://example.com/uploads/</code>."
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:47
+msgid "eXtended .XML File"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:57
+msgid "Usually something like <code>http://example.com/wp-content/uploads/</code>."
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:71
+msgid "Your Tumblr URL"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:73
+msgid "Note: Audio tumbles cannot be imported."
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:86
+#: admin/themes/default/pages/import.twig:127
+msgid "Host"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:90
+#: admin/themes/default/pages/import.twig:131
+msgid "Username"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:94
+#: admin/themes/default/pages/import.twig:135
+#: admin/themes/default/pages/new_user.twig:24
+msgid "Password"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:98
+#: admin/themes/default/pages/import.twig:139
+msgid "Database"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:102
+msgid "Table Prefix"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:104
+msgid "(if any)"
+msgstr ""
+
+#: admin/themes/default/pages/import.twig:113
+#: admin/themes/default/pages/import.twig:149
+msgid "Usually something like <code>http://example.com/images/</code>."
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:3
+msgid "Manage Groups"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:10
+msgid "Search all groups for user&hellip;"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:12
+#: admin/themes/default/pages/manage_pages.twig:15
+#: admin/themes/default/pages/manage_posts.twig:15
+#: admin/themes/default/pages/manage_users.twig:15
+msgid "Search"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:15
+#: admin/themes/default/pages/new_group.twig:3
+msgid "New Group"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:26
+msgid "Members"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:27
+msgid "Default?"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:28
+msgid "Guests?"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:30
+#: admin/themes/default/pages/manage_pages.twig:30
+#: admin/themes/default/pages/manage_posts.twig:37
+#: admin/themes/default/pages/manage_users.twig:33
+msgid "Controls"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:44
+#: admin/themes/default/pages/manage_groups.twig:49
+#: admin/themes/default/pages/manage_pages.twig:46
+#: admin/themes/default/pages/manage_pages.twig:51
+msgid "yes"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:53
+#: admin/themes/default/pages/manage_pages.twig:60
+#: admin/themes/default/pages/manage_pages.twig:63
+#: admin/themes/default/pages/manage_posts.twig:57
+#: admin/themes/default/pages/manage_posts.twig:60
+#: admin/themes/default/pages/manage_users.twig:57
+#: admin/themes/default/pages/manage_users.twig:60
+msgid "edit"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:54
+#: admin/themes/default/pages/manage_pages.twig:61
+#: admin/themes/default/pages/manage_pages.twig:64
+#: admin/themes/default/pages/manage_posts.twig:58
+#: admin/themes/default/pages/manage_posts.twig:61
+#: admin/themes/default/pages/manage_users.twig:58
+#: admin/themes/default/pages/manage_users.twig:61
+msgid "delete"
+msgstr ""
+
+#: admin/themes/default/pages/manage_groups.twig:62
+#: admin/themes/default/pages/manage_pages.twig:77
+#: admin/themes/default/pages/manage_posts.twig:74
+#: admin/themes/default/pages/manage_users.twig:74
+#, php-format
+msgid "Page %d of %d"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:3
+msgid "Manage Pages"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:11
+#: admin/themes/default/pages/manage_posts.twig:11
+#: admin/themes/default/pages/manage_users.twig:11
+msgid "Search&hellip;"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:19
+#: admin/themes/default/pages/manage_posts.twig:28
+msgid "Search Results"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:19
+msgid "Last 25 Pages"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:23
+#: admin/themes/default/pages/manage_posts.twig:32
+#: admin/themes/default/partials/page_fields.twig:3
+msgid "Title"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:24
+msgid "Created"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:25
+msgid "Last Updated"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:26
+msgid "Public?"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:27
+msgid "Listed?"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:28
+#: admin/themes/default/pages/manage_posts.twig:35
+msgid "Author"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:43
+msgid "never"
+msgstr ""
+
+#: admin/themes/default/pages/manage_pages.twig:69
+#: admin/themes/default/pages/manage_posts.twig:66
+#: admin/themes/default/pages/manage_users.twig:66
+msgid "(none)"
+msgstr ""
+
+#: admin/themes/default/pages/manage_posts.twig:3
+msgid "Manage Posts"
+msgstr ""
+
+#: admin/themes/default/pages/manage_posts.twig:18
+msgid "Browse by month:"
+msgstr ""
+
+#: admin/themes/default/pages/manage_posts.twig:28
+msgid "Last 25 Posts"
+msgstr ""
+
+#: admin/themes/default/pages/manage_posts.twig:33
+msgid "Posted"
+msgstr ""
+
+#: admin/themes/default/pages/manage_posts.twig:34
+#: admin/themes/default/partials/post_fields.twig:41
+msgid "Status"
+msgstr ""
+
+#: admin/themes/default/pages/manage_users.twig:3
+msgid "Manage Users"
+msgstr ""
+
+#: admin/themes/default/pages/manage_users.twig:18
+msgid "New User"
+msgstr ""
+
+#: admin/themes/default/pages/manage_users.twig:30
+msgid "Joined"
+msgstr ""
+
+#: admin/themes/default/pages/modules.twig:3
+#: admin/themes/default/pages/modules.twig:6
+msgid "Modules"
+msgstr ""
+
+#: admin/themes/default/pages/modules.twig:12
+#: admin/themes/default/pages/modules.twig:51
+msgid "Blissful!"
+msgstr ""
+
+#: admin/themes/default/pages/modules.twig:26
+#: admin/themes/default/pages/modules.twig:65
+msgid "This Module requires the following Modules to be enabled:"
+msgstr ""
+
+#: admin/themes/default/pages/new_group.twig:23
+msgid "Add Group"
+msgstr ""
+
+#: admin/themes/default/pages/new_user.twig:3
+#: admin/themes/default/pages/new_user.twig:47
+msgid "Add User"
+msgstr ""
+
+#: admin/themes/default/pages/new_user.twig:9
+msgid "Settings"
+msgstr ""
+
+#: admin/themes/default/pages/new_user.twig:32
+msgid "Information"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:3
+msgid "Route Settings"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:9
+msgid "Clean URLs?"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:11
+msgid "(recommended)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:13
+msgid "Gives your site prettier urls."
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:13
+msgid "Requires .htaccess support."
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:18
+msgid "Post View URL"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:19
+msgid "(requires clean URLs)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:24
+msgid "Syntax:"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:26
+msgid "Year submitted"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:26
+msgid "(ex. 2007)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:27
+msgid "Month submitted"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:27
+msgid "(ex. 12)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:28
+msgid "Day submitted"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:28
+msgid "(ex. 25)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:29
+msgid "Hour submitted"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:29
+msgid "(ex. 03)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:30
+msgid "Minute submitted"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:30
+msgid "(ex. 59)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:31
+msgid "Second submitted"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:31
+msgid "(ex. 30)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:32
+msgid "Post ID"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:33
+msgid "Post author (username)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:33
+msgid "(ex. Alex)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:34
+msgid "The non-unique sanitized name"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:34
+msgid "(ex. this_is_clean)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:35
+msgid "The unique form of (clean)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:35
+msgid "(ex. this_one_is_taken_2)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:36
+msgid "The post's feather"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:36
+msgid "(ex. text)"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:37
+msgid "The plural form of the post's feather"
+msgstr ""
+
+#: admin/themes/default/pages/route_settings.twig:37
+msgid "(ex. links)"
+msgstr ""
+
+#: admin/themes/default/pages/themes.twig:3
+msgid "Themes"
+msgstr ""
+
+#: admin/themes/default/pages/themes.twig:7
+msgid "Blog Themes"
+msgstr ""
+
+#: admin/themes/default/pages/themes.twig:15
+#: admin/themes/default/pages/themes.twig:37
+#, php-format
+msgid "%s v%s"
+msgstr ""
+
+#: admin/themes/default/pages/themes.twig:19
+#: admin/themes/default/pages/themes.twig:41
+msgid "Select"
+msgstr ""
+
+#: admin/themes/default/pages/themes.twig:22
+msgid "Preview"
+msgstr ""
+
+#: admin/themes/default/pages/themes.twig:29
+msgid "Admin Themes"
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:3
+msgid "User Settings"
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:9
+msgid "Registration"
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:11
+msgid "Allow people to register"
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:14
+msgid "Activate by email"
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:16
+msgid "Should users activate by email?"
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:19
+msgid "Enable Recaptcha"
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:21
+msgid "Use recaptcha to prevent bots from registering."
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:24
+msgid "Default User Group"
+msgstr ""
+
+#: admin/themes/default/pages/user_settings.twig:32
+msgid "&#8220;Guest&#8221; Group"
+msgstr ""
+
+#: admin/themes/default/pages/write_page.twig:3
+msgid "Add Page"
+msgstr ""
+
+#: admin/themes/default/pages/write_post.twig:3
+msgid "Write"
+msgstr ""
+
+#: admin/themes/default/partials/page_fields.twig:7
+msgid "Body"
+msgstr ""
+
+#: admin/themes/default/partials/page_fields.twig:13
+#: admin/themes/default/partials/post_fields.twig:69
+msgid "Slug"
+msgstr ""
+
+#: admin/themes/default/partials/page_fields.twig:17
+msgid "Parent"
+msgstr ""
+
+#: admin/themes/default/partials/page_fields.twig:26
+msgid "Show in pages list?"
+msgstr ""
+
+#: admin/themes/default/partials/page_fields.twig:30
+msgid "Priority in pages list"
+msgstr ""
+
+#: admin/themes/default/partials/page_fields.twig:38
+msgid "Is this page public?"
+msgstr ""
+
+#: admin/themes/default/partials/page_fields.twig:51
+#: admin/themes/default/partials/post_fields.twig:122
+#: admin/themes/default/partials/post_fields.twig:131
+msgid "Publish"
+msgstr ""
+
+#: admin/themes/default/partials/page_fields.twig:53
+#: admin/themes/default/partials/post_fields.twig:126
+#: admin/themes/default/partials/post_fields.twig:135
+msgid "Save"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:44
+msgid "Draft"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:46
+msgid "Public"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:47
+msgid "Private"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:48
+msgid "Scheduled"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:49
+msgid "Registered Only"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:62
+msgid "Pinned?"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:63
+msgid "(shows this post above all others)"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:75
+msgid "Timestamp"
+msgstr ""
+
+#: admin/themes/default/partials/post_fields.twig:81
+msgid "Trackbacks"
+msgstr ""
+
