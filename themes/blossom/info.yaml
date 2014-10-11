@@ -1,6 +1,7 @@
 name: Blossom
-url: http://chyrplite.net/
 version: 2.1
+url: http://chyrplite.net/
+description: The default theme provided with Chyrp Lite.
 author:
   name: Daniel Pimley
-  url: http://www.pimley.net/
+  url: http://pimley.net/
