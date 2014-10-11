@@ -148,7 +148,8 @@ small a, .small a, .sub a {                     color: #b3b5b5 }
                                                 margin: 0em 4em 1em 4em;
                                                 border: 1px solid #dfdfdf;
                                                 border-top: none;
-                                                position: relative }
+                                                position: relative;
+                                                overflow: hidden }
 div.pagination {                                clear: both;
                                                 text-align: center;
                                                 margin-top: 4em }
@@ -166,15 +167,12 @@ span.pages:last-child {                         margin: 0em 14em 0em 1em }
 #content ul#modules_enabled,
 #content ul#feathers_enabled {                  clear: both;
                                                 float: left }
-#content ul#modules_enabled > h5:only-child,
-#content ul#feathers_enabled > h5:only-child,
-#content ul#modules_disabled > h5:only-child,
-#content ul#feathers_disabled > h5:only-child { display: none }
+#content ul.extend > h5:only-child {            display: none }
 #content ul.extend > li {                       -moz-box-sizing: border-box;
                                                 box-sizing: border-box;
                                                 display: block;
                                                 width: 100%;
-                                                min-height: 7em;
+                                                min-height: 4em;
                                                 list-style: none;
                                                 padding: 1em;
                                                 margin: 1em 0em;
@@ -216,6 +214,15 @@ span.pages:last-child {                         margin: 0em 14em 0em 1em }
 #content ul#modules_enabled > li.conflict9,
 #content ul#modules_disabled > li.conflict9 {   background-color: #fad0ff;
                                                 border: 1px solid #d5afdb }
+#content ul.extend li.feather,
+#content ul.extend li.module {                  position: relative;
+                                                padding-right: 10em }
+#content ul.extend li.feather p:last-of-type,
+#content ul.extend li.module p:last-of-type {   margin-bottom: 0em }
+#content ul.extend li.module div.controls,
+#content ul.extend li.feather div.controls {    position: absolute;
+                                                top: 1.4em;
+                                                right: 1em }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {                text-decoration: none }
 #content ul.extend > li p:last-child {          margin-bottom: 0em }
@@ -725,29 +732,21 @@ img.overlay_close_gadget {                      display: block;
                                                 float: none;
                                                 clear: both }
     div.more_options p.more_options_option {    width: 100%;
-                                                min-height: none;
+                                                min-height: 0em;
                                                 margin: 0em 0em 1em 0em;
                                                 padding: 0em }
-    div.more_options > .more_options_option:nth-child(odd) {
-                                                padding-right: 0em }
-    div.more_options > .more_options_option:nth-child(even) {
-                                                padding-left: 0em }
-
-    #content ul.extend {                        width: 100% }
-    #content ul#modules_enabled,
-    #content ul#feathers_enabled {              padding-right: 0em;
-                                                float: none }
-    #content ul#modules_disabled,
-    #content ul#feathers_disabled {             padding-left: 0em;
-                                                float: none }
-    #content ul.extend > h5:only-child {        display: none }
+    div.more_options > .more_options_option {   padding-left: 0em !important;
+                                                padding-right: 0em !important }
     #content ul.extend > li > h3 {              line-height: 2em }
-
     #content ul.themes > li {                   width: 100%;
                                                 text-align: center;
                                                 margin-right: 0em;
                                                 min-width: 220px }
-    #content ul li img.screenshot {             width: 192px }
+    #content ul.extend li.module,
+    #content ul.extend li.feather {             padding-right: 1em }
+    #content ul.extend li.feather div.controls,
+    #content ul.extend li.module div.controls { position: static }
+    #content ul.themes img.screenshot {         width: 192px }
 
     iframe.overlay_help, div.overlay_preview {  width: 100%;
                                                 height: 100%;

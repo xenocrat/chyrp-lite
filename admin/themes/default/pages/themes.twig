@@ -6,13 +6,13 @@
             <ul id="blog_themes" class="extend themes">
                 <h5>${ "Blog Themes" | translate }</h5>
                 {% for theme in themes %}
-                <li class="{% if theme.name == site.theme %}current{% endif %}" id="$theme.name">
+                <li class="theme {% if theme.name == site.theme %}current{% endif %}" id="$theme.name">
                     <img src="$theme.screenshot" alt="${ ('"' ~ theme.info.name ~ '"') | escape } screenshot" class="screenshot">
                     <h3>
                         <a class="emblem module_author" href="$theme.info.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ theme.info.url | escape }">
                         </a>
-                        ${ "%s v%s" | translate | format(theme.name, theme.info.version) }
+                        ${ "%s v%s" | translate | format(theme.info.name | translate(theme.name), theme.info.version) }
                     </h3>
                     <div class="controls">
                         <a class="button" href="{% admin "change_theme&theme=" ~ theme.name %}">
@@ -28,13 +28,13 @@
             <ul id="admin_themes" class="extend themes">
                 <h5>${ "Admin Themes" | translate }</h5>
                 {% for theme in admin_themes %}
-                <li class="{% if theme.name == admin_theme %}current{% endif %}" id="$theme.name">
+                <li class="theme {% if theme.name == admin_theme %}current{% endif %}" id="$theme.name">
                     <img src="$theme.screenshot" alt="${ ('"' ~ theme.info.name ~ '"') | escape } screenshot" class="screenshot">
                     <h3>
                         <a class="emblem module_author" href="$theme.info.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ theme.info.url | escape }">
                         </a>
-                        ${ "%s v%s" | translate | format(theme.name, theme.info.version) }
+                        ${ "%s v%s" | translate | format(theme.info.name | translate(theme.name), theme.info.version) }
                     </h3>
                     <div class="controls">
                         <a class="button" href="% admin "change_admin_theme&theme=" ~ theme.name %}">

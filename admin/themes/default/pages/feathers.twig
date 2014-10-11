@@ -3,11 +3,11 @@
 {% block title %}${ "Feathers" | translate }{% endblock %}
 
 {% block content %}
-            <h2>${ "Feather" | translate }</h2>
+            <h2>${ "Feathers" | translate }</h2>
             <ul id="feathers_enabled" class="extend feathers">
                 <h5>${ "Enabled" | translate }</h5>
                 {% for safename, feather in enabled_feathers | items %}
-                <li class="${ feather.classes | join(" ") }" id="feather_$safename">
+                <li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
                         <a class="emblem feather_author" href="$feather.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ feather.author.url | escape }">
@@ -34,7 +34,7 @@
             <ul id="feathers_disabled" class="extend feathers">
                 <h5>${ "Disabled" | translate }</h5>
                 {% for safename, feather in disabled_feathers | items %}
-                <li class="${ feather.classes | join(" ") }" id="feather_$safename">
+                <li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
                         <a class="emblem feather_author" href="$feather.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ feather.author.url | escape }">

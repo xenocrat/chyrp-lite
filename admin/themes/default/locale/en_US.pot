@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-11 16:45+0000\n"
+"POT-Creation-Date: 2014-10-11 19:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -379,11 +379,8 @@ msgid "(warning: this also exports the hashed passwords, keep it safe)"
 msgstr ""
 
 #: admin/themes/default/pages/feathers.twig:3
-msgid "Feathers"
-msgstr ""
-
 #: admin/themes/default/pages/feathers.twig:6
-msgid "Feather"
+msgid "Feathers"
 msgstr ""
 
 #: admin/themes/default/pages/feathers.twig:8
