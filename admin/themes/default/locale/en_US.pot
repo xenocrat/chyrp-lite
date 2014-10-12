@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-12 00:47+0000\n"
+"POT-Creation-Date: 2014-10-12 09:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -23,6 +23,43 @@ msgstr ""
 
 #: admin/themes/default/info.yaml:4
 msgid "The default theme provided with Chyrp Lite."
+msgstr ""
+
+#: admin/themes/default/javascript.php:35
+msgid "Help"
+msgstr ""
+
+#: admin/themes/default/javascript.php:39
+#: admin/themes/default/javascript.php:41
+#: admin/themes/default/javascript.php:108
+msgid "Close"
+msgstr ""
+
+#: admin/themes/default/javascript.php:61
+#: admin/themes/default/javascript.php:62
+#: admin/themes/default/javascript.php:96
+#: admin/themes/default/pages/themes.twig:22
+msgid "Preview"
+msgstr ""
+
+#: admin/themes/default/javascript.php:143
+#: admin/themes/default/javascript.php:144
+#: admin/themes/default/pages/modules.twig:12
+#: admin/themes/default/pages/modules.twig:51
+msgid "Blissful!"
+msgstr ""
+
+#: admin/themes/default/javascript.php:171
+#: admin/themes/default/javascript.php:172
+msgid "Conflicted!"
+msgstr ""
+
+#: admin/themes/default/javascript.php:234
+msgid "There was an error enabling the extension."
+msgstr ""
+
+#: admin/themes/default/javascript.php:236
+msgid "There was an error disabling the extension."
 msgstr ""
 
 #: admin/themes/default/layout.twig:32
@@ -725,11 +762,6 @@ msgstr ""
 msgid "Modules"
 msgstr ""
 
-#: admin/themes/default/pages/modules.twig:12
-#: admin/themes/default/pages/modules.twig:51
-msgid "Blissful!"
-msgstr ""
-
 #: admin/themes/default/pages/modules.twig:26
 #: admin/themes/default/pages/modules.twig:65
 msgid "This Module requires the following Modules to be enabled:"
@@ -887,10 +919,6 @@ msgstr ""
 #: admin/themes/default/pages/themes.twig:19
 #: admin/themes/default/pages/themes.twig:41
 msgid "Select"
-msgstr ""
-
-#: admin/themes/default/pages/themes.twig:22
-msgid "Preview"
 msgstr ""
 
 #: admin/themes/default/pages/themes.twig:29

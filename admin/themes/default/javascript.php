@@ -32,13 +32,13 @@ var Help = {
             [$("<iframe>", {
                 "src": href,
                 "role": "contentinfo",
-                "aria-label": "<?php echo __("Help"); ?>"
+                "aria-label": "<?php echo __("Help", "theme"); ?>"
             }).addClass("overlay_help"),
             $("<img>", {
                 "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/close.svg",
-                "alt": "<?php echo __("Close"); ?>",
+                "alt": "<?php echo __("Close", "theme"); ?>",
                 "role": "button",
-                "aria-label": "<?php echo __("Close"); ?>"
+                "aria-label": "<?php echo __("Close", "theme"); ?>"
             }).addClass("overlay_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
@@ -55,19 +55,22 @@ var Write = {
 
         // Insert buttons for ajax previews
         $("*[data-preview]").each(function() {
-            $("<img>", {
-                "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/magnifier.svg",
-                "alt": "<?php echo __("Preview"); ?>",
-                "title": "<?php echo __("Preview"); ?>",
-                "data-target": $(this).attr("id")
-            }).addClass("preview emblem").css({
-                "cursor": "pointer"
-            }).click(function(){
+            $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
+                $("<img>", {
+                    "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/magnifier.svg",
+                    "alt": "<?php echo __("Preview", "theme"); ?>",
+                    "title": "<?php echo __("Preview", "theme"); ?>",
+                }).addClass("preview emblem").css({
+                    "cursor": "pointer"
+                })
+            ).click(function(e){
                 var content = $("#" + $(this).attr("data-target")).val();
                 var filter = $("#" + $(this).attr("data-target")).attr("data-preview");
-                if (content != "")
+                if (content != "") {
+                    e.preventDefault();
                     Write.ajax_previews(content, filter);
-            }).insertBefore($(this));
+                }
+            });
         });
     },
     sort_feathers: function() {
@@ -90,7 +93,7 @@ var Write = {
         }).addClass("overlay_background").append(
             [$("<div>", {
                 "role": "contentinfo",
-                "aria-label": "<?php echo __("Preview"); ?>"
+                "aria-label": "<?php echo __("Preview", "theme"); ?>"
             }).addClass("overlay_preview css_reset").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
                     action: "preview",
                     content: content,
@@ -102,7 +105,7 @@ var Write = {
             }),
             $("<img>", {
                 "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/close.svg",
-                "alt": "<?php echo __("Close"); ?>",
+                "alt": "<?php echo __("Close", "theme"); ?>",
                 "role": "button",
                 "aria-label": "<?php echo __("Close"); ?>"
             }).addClass("overlay_close_gadget").click(function() {
@@ -137,8 +140,8 @@ var Extend = {
               return c.replace(/conflict([0-9])/g, '');
         }).find(".module_status").attr({
             src: "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/success.svg",
-            alt: "<?php echo __("Blissful!"); ?>",
-            title: "<?php echo __("Blissful!"); ?>"
+            alt: "<?php echo __("Blissful!", "theme"); ?>",
+            title: "<?php echo __("Blissful!", "theme"); ?>"
         });
     },
     check_conflicts: function() {
@@ -165,8 +168,8 @@ var Extend = {
                     $("#"+conflict).addClass("error conflict"+Extend.conflicts);
                     $(this).addClass("error conflict"+Extend.conflicts).find(".module_status").attr({
                         src: "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/error.svg",
-                        alt: "<?php echo __("Conflicted!"); ?>",
-                        title: "<?php echo __("Conflicted!"); ?>"
+                        alt: "<?php echo __("Conflicted!", "theme"); ?>",
+                        title: "<?php echo __("Conflicted!", "theme"); ?>"
                     });
                 }
             }
@@ -228,9 +231,9 @@ var Extend = {
                 },
                 error: function() {
                     if (Extend.action == "enable")
-                        alert("<?php echo __("There was an error enabling the extension."); ?>");
+                        alert("<?php echo __("There was an error enabling the extension.", "theme"); ?>");
                     else
-                        alert("<?php echo __("There was an error disabling the extension."); ?>");
+                        alert("<?php echo __("There was an error disabling the extension.", "theme"); ?>");
                 }
             })
         }, "text")

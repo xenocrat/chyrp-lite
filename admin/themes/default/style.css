@@ -482,6 +482,10 @@ button[disabled="disabled"]:focus,
 button.disabled:focus {                         border-color: #7f7f7f }
 div.confirmation button,
 div.confirmation a.button {                     min-width: 10em }
+div.confirmation a.button + a.button,
+div.confirmation button + a.button,
+div.confirmation a.button + button,
+div.confirmation button + button {              margin-left: 1em }
 a.tag {                                         position: relative;
                                                 margin: 2px 0px;
                                                 text-decoration: none;

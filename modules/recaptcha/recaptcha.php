@@ -46,14 +46,22 @@
 
     class ReCaptchaCaptcha implements Captcha {
         static function getCaptcha() {
-            return recaptcha_get_html(Config::current()->module_recaptcha["public_key"]);
+            $public_key = Config::current()->module_recaptcha["public_key"];
+
+            if (!empty($public_key))
+                return recaptcha_get_html();
         }
 
         static function verifyCaptcha() {
-            $resp = recaptcha_check_answer(Config::current()->module_recaptcha["private_key"],
-                                 $_SERVER['REMOTE_ADDR'],
-                                 $_POST['recaptcha_challenge_field'],
-                                 $_POST['recaptcha_response_field']);
+            $private_key = Config::current()->module_recaptcha["private_key"];
+
+            if (empty($private_key))
+                return false;
+
+            $resp = recaptcha_check_answer($private_key,
+                                           $_SERVER['REMOTE_ADDR'],
+                                           $_POST['recaptcha_challenge_field'],
+                                           $_POST['recaptcha_response_field']);
             if (!$resp->is_valid)
                 return false;
             else
