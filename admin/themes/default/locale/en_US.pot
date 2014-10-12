@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-12 09:56+0000\n"
+"POT-Creation-Date: 2014-10-12 18:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -949,11 +949,11 @@ msgid "Should users activate by email?"
 msgstr ""
 
 #: admin/themes/default/pages/user_settings.twig:19
-msgid "Enable Recaptcha"
+msgid "Enable Captcha"
 msgstr ""
 
 #: admin/themes/default/pages/user_settings.twig:21
-msgid "Use recaptcha to prevent bots from registering."
+msgid "Use a Captcha module to prevent bots from registering."
 msgstr ""
 
 #: admin/themes/default/pages/user_settings.twig:24

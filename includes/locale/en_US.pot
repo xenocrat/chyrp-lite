@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-12 09:39+0000\n"
+"POT-Creation-Date: 2014-10-12 18:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -1329,7 +1329,7 @@ msgid "Install! &rarr;"
 msgstr ""
 
 #: install.php:631
-#: upgrade.php:1380
+#: upgrade.php:1396
 msgid "Done!"
 msgstr ""
 
@@ -1653,81 +1653,81 @@ msgstr ""
 msgid "Updating `password` column on `users` table..."
 msgstr ""
 
-#: upgrade.php:1160
+#: upgrade.php:1173
 msgid "Chyrp Upgrader"
 msgstr ""
 
-#: upgrade.php:1358
+#: upgrade.php:1374
 #, php-format
 msgid "Calling <span class=\"yay\">%s</span> Module's upgrader..."
 msgstr ""
 
-#: upgrade.php:1370
+#: upgrade.php:1386
 #, php-format
 msgid "Calling <span class=\"yay\">%s</span> Feather's upgrader..."
 msgstr ""
 
-#: upgrade.php:1383
+#: upgrade.php:1399
 msgid "What now?"
 msgstr ""
 
-#: upgrade.php:1385
+#: upgrade.php:1401
 msgid "Look through the results up there for any failed tasks."
 msgstr ""
 
-#: upgrade.php:1386
+#: upgrade.php:1402
 msgid "If any of your Modules or Feathers have new versions available for this release, check if an <code>upgrades.php</code> file exists in their main directory. If that file exists, run this upgrader again after enabling the Module or Feather and it will run the upgrade tasks."
 msgstr ""
 
-#: upgrade.php:1387
+#: upgrade.php:1403
 msgid "When you are done, you can delete this file. It doesn't pose any real threat on its own, but you should delete it anyway, just to be sure."
 msgstr ""
 
-#: upgrade.php:1389
+#: upgrade.php:1405
 msgid "Tips"
 msgstr ""
 
-#: upgrade.php:1391
+#: upgrade.php:1407
 msgid "If the admin area looks weird, try clearing your cache."
 msgstr ""
 
-#: upgrade.php:1392
+#: upgrade.php:1408
 msgid "As of v2.0, Chyrp uses time zones to determine timestamps. Please set your installation to the correct timezone at <a href=\"admin/index.php?action=general_settings\">General Settings</a>."
 msgstr ""
 
-#: upgrade.php:1393
+#: upgrade.php:1409
 msgid "Check the group permissions &ndash; they might have changed, and certain Admin functionality would be disabled until you enabled the permissions for the particular groups. <a href=\"admin/index.php?action=manage_groups\">Manage Groups &rarr;</a>"
 msgstr ""
 
-#: upgrade.php:1395
+#: upgrade.php:1411
 msgid "All done!"
 msgstr ""
 
-#: upgrade.php:1397
+#: upgrade.php:1413
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:1398
+#: upgrade.php:1414
 msgid "That button may look tempting, but please take these preemptive measures before indulging:"
 msgstr ""
 
-#: upgrade.php:1400
+#: upgrade.php:1416
 msgid "<strong>Make a backup of your installation.</strong> You never know."
 msgstr ""
 
-#: upgrade.php:1401
+#: upgrade.php:1417
 msgid "Disable any third-party Modules and Feathers."
 msgstr ""
 
-#: upgrade.php:1402
+#: upgrade.php:1418
 msgid "Ensure that the Chyrp installation directory is writable by the server."
 msgstr ""
 
-#: upgrade.php:1404
+#: upgrade.php:1420
 msgid "If any of the upgrade processes fail, you can safely keep refreshing &ndash; we will only attempt to redo tasks that are not already completed."
 msgstr ""
 
-#: upgrade.php:1406
+#: upgrade.php:1422
 msgid "Upgrade me!"
 msgstr ""
 

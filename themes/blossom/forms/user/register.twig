@@ -12,7 +12,7 @@
       <input type="password" name="password2" value="" id="password2">
       <label for="email">${ "Email" | translate }</label>
       <input type="email" name="email" value="${ POST.email | escape }" id="email">
-      {% if site.enable_recaptcha and enabled_modules.recaptcha %}$captcha{% endif %}
+      {% if site.enable_captcha %}$captcha{% endif %}
       ${ trigger.call("user_register") }
       <div class="doaction">
         <button type="submit">${ "Register" | translate }</button>

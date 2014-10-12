@@ -512,7 +512,7 @@
                 elseif (!preg_match("/^[_A-z0-9-]+((\.|\+)[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/", $_POST['email']))
                     Flash::warning(__("Invalid e-mail address."));
 
-                if ($config->enable_recaptcha and !check_captcha())
+                if ($config->enable_captcha and !check_captcha())
                     Flash::warning(__("Incorrect captcha code. Please try again."));
 
                 if (!Flash::exists("warning")) {

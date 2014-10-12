@@ -153,7 +153,7 @@
             $config->set("enable_emoji", true);
             $config->set("can_register", false);
             $config->set("email_activation", false);
-            $config->set("enable_recaptcha", false);
+            $config->set("enable_captcha", false);
             $config->set("default_group", 0);
             $config->set("guest_group", 0);
             $config->set("clean_urls", false);

@@ -2171,7 +2171,7 @@
             $config = Config::current();
             $set = array($config->set("can_register", !empty($_POST['can_register'])),
                          $config->set("email_activation", !empty($_POST['email_activation'])),
-                         $config->set("enable_recaptcha", !empty($_POST['enable_recaptcha'])),
+                         $config->set("enable_captcha", !empty($_POST['enable_captcha'])),
                          $config->set("default_group", $_POST['default_group']),
                          $config->set("guest_group", $_POST['guest_group']));
 

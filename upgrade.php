@@ -11,7 +11,7 @@
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',        true);
-    define('CHYRP_VERSION', "2014.08.10");
+    define('CHYRP_VERSION', "2014.10.12");
     define('CACHE_TWIG',   false);
     define('JAVASCRIPT',   false);
     define('ADMIN',        false);
@@ -1152,6 +1152,19 @@
         echo " -".test(true);
     }
 
+    /**
+     * Function: recaptcha_to_captcha
+     * Migrates the ReCAPTCHA setting to the new platform agnostic captcha setting.
+     *
+     * Versions: 2014.09.01 => 2014.10.12
+     */
+    function recaptcha_to_captcha() {
+        if (Config::check("enable_recaptcha")) {
+            Config::set("enable_captcha", Config::get("enable_recaptcha"), "Migrating captcha setting...");
+            Config::remove("enable_recaptcha");
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -1280,7 +1293,6 @@
         // Added in 2.5
         Config::fallback("admin_theme", "default");
         Config::fallback("email_activation", true);
-        Config::fallback("enable_recaptcha", true);
         Config::fallback("check_updates", true);
         Config::fallback("enable_emoji", true);
 
@@ -1289,6 +1301,8 @@
 
         // Chyrp Lite
         Config::fallback("check_updates_last", 0);
+        Config::fallback("cookies_notification", true);
+        Config::fallback("enable_captcha", false);
 
         move_upload();
 
@@ -1349,6 +1363,8 @@
         add_view_page_permission();
 
         update_user_password_column();
+
+        recaptcha_to_captcha();
 
         # Perform Module/Feather upgrades.
 
