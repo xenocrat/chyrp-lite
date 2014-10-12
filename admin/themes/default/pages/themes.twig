@@ -12,7 +12,7 @@
                         <a class="emblem module_author" href="$theme.info.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ theme.info.url | escape }">
                         </a>
-                        ${ "%s v%s" | translate | format(theme.info.name | translate(theme.name), theme.info.version) }
+                        ${ theme.info.name | translate(theme.name) }
                     </h3>
                     <div class="controls">
                         <a class="button" href="{% admin "change_theme&theme=" ~ theme.name %}">
@@ -34,7 +34,7 @@
                         <a class="emblem module_author" href="$theme.info.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ theme.info.url | escape }">
                         </a>
-                        ${ "%s v%s" | translate | format(theme.info.name | translate(theme.name), theme.info.version) }
+                        ${ theme.info.name | translate(theme.name) }
                     </h3>
                     <div class="controls">
                         <a class="button" href="% admin "change_admin_theme&theme=" ~ theme.name %}">

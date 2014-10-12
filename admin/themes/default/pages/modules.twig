@@ -13,7 +13,7 @@
                         <a class="emblem module_author" href="$module.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ module.author.url | escape }">
                         </a>
-                        ${ "<a href=\"%s\">%s</a> v%s" | translate | format(module.url, module.name | translate(safename), module.version) }
+                        ${ "<a href=\"%s\">%s</a>" | translate | format(module.url, module.name | translate(safename)) }
                     </h3>
                     {% if module.help %}
                     <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
@@ -52,7 +52,7 @@
                         <a class="emblem module_author" href="$module.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ module.author.url | escape }">
                         </a>
-                        ${ "<a href=\"%s\">%s</a> v%s" | translate | format(module.url, module.name | translate(safename), module.version) }
+                        ${ "<a href=\"%s\">%s</a>" | translate | format(module.url, module.name | translate(safename)) }
                     </h3>
                     {% if module.help %}
                     <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>

@@ -12,7 +12,7 @@
                         <a class="emblem feather_author" href="$feather.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ feather.author.url | escape }">
                         </a>
-                        ${ "<a href=\"%s\">%s</a> v%s" | translate | format(feather.url, feather.name | translate(safename), feather.version) }
+                        ${ "<a href=\"%s\">%s</a>" | translate | format(feather.url, feather.name | translate(safename)) }
                     </h3>
                     {% if feather.help %}
                     <a href="{% admin "help&id="~feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
@@ -39,7 +39,7 @@
                         <a class="emblem feather_author" href="$feather.author.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ feather.author.url | escape }">
                         </a>
-                        ${ "<a href=\"%s\">%s</a> v%s" | translate | format(feather.url, feather.name | translate(safename), feather.version) }
+                        ${ "<a href=\"%s\">%s</a>" | translate | format(feather.url, feather.name | translate(safename)) }
                     </h3>
                     {% if feather.help %}
                     <a href="{% admin "help&id="~feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
