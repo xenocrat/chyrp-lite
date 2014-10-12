@@ -105,10 +105,10 @@ small a, .small a, .sub a {                     color: #b3b5b5 }
 /* @group Footer */
 #footer {                                       width: 100%;
                                                 margin: 2em auto;
-                                                text-align: center }
+                                                text-align: center;
+                                                color: #b3b5b5 }
 #footer small.copyright {                       display: block;
                                                 margin-top: 1em;
-                                                color: #b3b5b5;
                                                 font-size: .8em }
 /* @end */
 
