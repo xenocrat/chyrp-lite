@@ -19,6 +19,7 @@ ruby gettext.rb ./modules/likes/        --domain=likes        > ./modules/likes/
 ruby gettext.rb ./modules/markdown_lib/ --domain=markdown     > ./modules/markdown_lib/locale/en_US.pot
 ruby gettext.rb ./modules/textile_lib/  --domain=textile      > ./modules/textile_lib/locale/en_US.pot
 ruby gettext.rb ./modules/read_more/    --domain=read_more    > ./modules/read_more/locale/en_US.pot
+ruby gettext.rb ./modules/recaptcha/    --domain=recaptcha    > ./modules/recaptcha/locale/en_US.pot
 ruby gettext.rb ./modules/rights/       --domain=rights       > ./modules/rights/locale/en_US.pot
 ruby gettext.rb ./modules/tags/         --domain=tags         > ./modules/tags/locale/en_US.pot
 

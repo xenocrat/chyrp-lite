@@ -7,15 +7,50 @@
             global $captchaHooks;
             $captchaHooks[] = "ReCaptchaCaptcha";
         }
+
+        static function __install() {
+            $set = array(Config::current()->set("module_recaptcha",
+                                            array("public_key" => null,
+                                                  "private_key" => null)));
+        }
+
+        static function __uninstall() {
+            Config::current()->remove("module_recaptcha");
+        }
+
+        static function admin_recaptcha_settings($admin) {
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
+    
+            if (empty($_POST))
+                return $admin->display("recaptcha_settings");
+    
+            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            $set = array(Config::current()->set("module_recaptcha",
+                                            array("public_key" => $_POST['public_key'],
+                                                  "private_key" => $_POST['private_key'])));
+
+            if (!in_array(false, $set))
+                Flash::notice(__("Settings updated."), "/admin/?action=recaptcha_settings");
+        }
+
+        static function settings_nav($navs) {
+            if (Visitor::current()->group->can("change_settings"))
+                $navs["recaptcha_settings"] = array("title" => __("ReCAPTCHA", "recaptcha"));
+            return $navs;
+        }
+
     }
 
     class ReCaptchaCaptcha implements Captcha {
         static function getCaptcha() {
-            return recaptcha_get_html(PUBLIC_KEY);
+            return recaptcha_get_html(Config::current()->module_recaptcha["public_key"]);
         }
 
         static function verifyCaptcha() {
-            $resp = recaptcha_check_answer(PRIVATE_KEY,
+            $resp = recaptcha_check_answer(Config::current()->module_recaptcha["private_key"],
                                  $_SERVER['REMOTE_ADDR'],
                                  $_POST['recaptcha_challenge_field'],
                                  $_POST['recaptcha_response_field']);
