@@ -58,8 +58,8 @@ var Write = {
             $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
                 $("<img>", {
                     "src": "<?php echo $config->chyrp_url."/admin/themes/".$config->admin_theme; ?>/images/icons/magnifier.svg",
-                    "alt": "<?php echo __("Preview", "theme"); ?>",
-                    "title": "<?php echo __("Preview", "theme"); ?>",
+                    "alt": "(<?php echo __("Preview this field", "theme"); ?>)",
+                    "title": "<?php echo __("Preview this field", "theme"); ?>",
                 }).addClass("preview emblem").css({
                     "cursor": "pointer"
                 })
