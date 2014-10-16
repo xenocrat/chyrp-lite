@@ -10,9 +10,9 @@
         ${ comment.edit_link("Edit" | translate, "") }
         ${ comment.delete_link("Delete" | translate, "") }
       </div>
-      <cite>
-        <small>
+      <div class="metadata">
+        <cite>
           ${ "<strong>%s</strong> on <a href=\"%s\" class=\"permalink\">%s</a>" | translate | format(comment.author_link, comment.post.url ~ "#comment_"~comment.id, comment.created_at | strftime("%d %B, %Y, at %I:%M %p" | translate)) }
-        </small>
-      </cite>
+        </cite>
+      </div>
     </li>

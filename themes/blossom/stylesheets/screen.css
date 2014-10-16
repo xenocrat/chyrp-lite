@@ -85,8 +85,7 @@ strong {                                            font: inherit;
                                                     font-weight: bold }
 cite {                                              font: inherit;
                                                     color: #9ea8a8 }
-small {                                             font-family: "Open Sans webfont";
-                                                    font-weight: normal;
+small {                                             font-weight: normal;
                                                     font-size: 0.6em;
                                                     text-transform: uppercase }
 blockquote {                                        font-size: 1em;
@@ -171,6 +170,7 @@ dl {                                                list-style: none }
                                                     left: -2em;
                                                     margin: 0em;
                                                     padding: 2em;
+                                                    padding-bottom: 0em;
                                                     border-bottom: 1px solid #c6ccc8 }
     ol.comments li:last-child {                     border-bottom: none }
     ol.comments li.no_comments {                    display: none }
@@ -321,8 +321,7 @@ label {                                             display: block;
                                                     margin-bottom: 1em;
                                                     border-radius: 0.2em }
     div.flash {                                     background-color: #d94c7b }
-    div.metadata {                                  font-family: "Open Sans webfont";
-                                                    font-weight: normal;
+    div.metadata {                                  font-weight: normal;
                                                     font-size: 0.6em;
                                                     text-transform: uppercase;
                                                     text-align: center;
@@ -334,7 +333,7 @@ label {                                             display: block;
                                                     width: 100%;
                                                     line-height: 2.2em;
                                                     padding: 0rem 2rem;
-                                                    margin-top: 2em;
+                                                    margin-top: 2rem;
                                                     background-color: #ffffff;
                                                     border-top: 1px solid #c6ccc8;
                                                     border-bottom-left-radius: 6px;
