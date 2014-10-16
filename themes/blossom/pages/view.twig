@@ -21,13 +21,13 @@
       <li class="no_comments"></li> {# Needed for AJAX commenting and XHTML Strict validation. #}
       {% endpaginate %}
       {% if post.commentable %}
-      <li>{% include "forms/comment/new.twig" %}</li>
+      <li class="new_comment">{% include "forms/comment/new.twig" %}</li>
       {% endif %}
     </ol>
-    <div class="comments_pagination traversal">
-      $comments.prev_link
-      $comments.next_link
-    </div>
   </article>
+  <div class="comments_pagination traversal">
+    $comments.prev_link
+    $comments.next_link
+  </div>
   {% endif %}
 {% endblock %}
