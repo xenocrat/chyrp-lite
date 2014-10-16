@@ -1,11 +1,11 @@
     <li id="comment_$comment.id">
-      <p>
+      <section class="comment">
       {% if comment.status == "denied" %}
       <em>${ "This comment is awaiting moderation." | translate }</em>
       {% else %}
       $comment.body
       {% endif %}
-      </p>
+      </section>
       <div class="doaction">
         ${ comment.edit_link("Edit" | translate, "") }
         ${ comment.delete_link("Delete" | translate, "") }

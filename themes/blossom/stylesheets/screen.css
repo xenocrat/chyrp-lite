@@ -1,8 +1,32 @@
+@font-face {
+                                                    font-family: 'Open Sans webfont';
+                                                    src: url('../../../fonts/OpenSans-Regular.woff') format('woff'),
+                                                         url('../../../fonts/OpenSans-Regular.ttf') format('truetype');
+                                                    font-weight: normal;
+                                                    font-style: normal;
+}
+
+@font-face {
+                                                    font-family: 'Open Sans webfont';
+                                                    src: url('../../../fonts/OpenSans-Semibold.woff') format('woff'),
+                                                         url('../../../fonts/OpenSans-Semibold.ttf') format('truetype');
+                                                    font-weight: bold;
+                                                    font-style: normal;
+}
+
+@font-face {
+                                                    font-family: 'Open Sans webfont';
+                                                    src: url('../../../fonts/OpenSans-Italic.woff') format('woff'),
+                                                         url('../../../fonts/OpenSans-Italic.ttf') format('truetype');
+                                                    font-weight: normal;
+                                                    font-style: italic;
+}
+
 *::-moz-selection {                                 color: #ffffff;
                                                     background-color: #42a66a }
 *::selection {                                      color: #ffffff;
                                                     background-color: #42a66a }
-body {                                              font-family: sans-serif;
+body {                                              font-family: "Open Sans webfont";
                                                     font-size: 16px;
                                                     color: #4e5a66;
                                                     line-height: 1.2;
@@ -12,7 +36,7 @@ body {                                              font-family: sans-serif;
                                                     max-width: 1800px }
 p {                                                 line-height: 1.4;
                                                     margin: 0em 0em 1em 0em }
-    p:last-child {                                  margin-bottom: 0em }
+    p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                                font-size: 2em;
                                                     font-weight: normal;
                                                     text-transform: uppercase;
@@ -61,7 +85,7 @@ strong {                                            font: inherit;
                                                     font-weight: bold }
 cite {                                              font: inherit;
                                                     color: #9ea8a8 }
-small {                                             font-family: sans-serif;
+small {                                             font-family: "Open Sans webfont";
                                                     font-weight: normal;
                                                     font-size: 0.6em;
                                                     text-transform: uppercase }
@@ -81,7 +105,8 @@ code {                                              font-size: 0.8em;
                                                     display: inline-block;
                                                     background-color: #f7f5ed;
                                                     border: 1px solid #c6ccc8 }
-hr {                                                border: none;
+hr {                                                width: 100%;
+                                                    border: none;
                                                     clear: both;
                                                     border-top: 1px solid #ddd;
                                                     margin: 1em 0em }
@@ -174,8 +199,8 @@ form, fieldset {                                    margin: 0em;
                                                     background-color: #fbfbf7;
                                                     -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
-                                                    margin: 0em auto 1em auto;
-                                                    padding: 2em 2em;
+                                                    margin: 0rem auto 2rem auto;
+                                                    padding: 1rem 2rem 2rem 2rem;
                                                     border: 1px solid #c6ccc8;
                                                     border-radius: 6px;
                                                     background-image: -o-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
@@ -231,7 +256,8 @@ input:focus {                                       outline: none;
                                                     background: transparent url(../images/search.svg) no-repeat center;
                                                     overflow: hidden;
                                                     color: transparent }
-    button#search_submit:focus {                    background-image: url(../images/search_alt.svg) }
+    button#search_submit:focus {                    background-image: url(../images/search_alt.svg);
+                                                    outline: none }
     form.inline_edit input {                        width: 100% }
 select {                                            -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
@@ -295,7 +321,7 @@ label {                                             display: block;
                                                     margin-bottom: 1em;
                                                     border-radius: 0.2em }
     div.flash {                                     background-color: #d94c7b }
-    div.metadata {                                  font-family: sans-serif;
+    div.metadata {                                  font-family: "Open Sans webfont";
                                                     font-weight: normal;
                                                     font-size: 0.6em;
                                                     text-transform: uppercase;
@@ -307,7 +333,7 @@ label {                                             display: block;
                                                     left: -2rem;
                                                     width: 100%;
                                                     line-height: 2.2em;
-                                                    padding: 0em 2rem;
+                                                    padding: 0rem 2rem;
                                                     margin-top: 2em;
                                                     background-color: #ffffff;
                                                     border-top: 1px solid #c6ccc8;
@@ -339,7 +365,6 @@ label {                                             display: block;
                                                     padding-top: 2em;
                                                     text-align: center;
                                                     margin: 0em }
-    div#recaptcha_widget_div {                      margin-bottom: 0.5em }
     div#main > article, div.standalone {            display: block;
                                                     position: relative;
                                                     -moz-box-sizing: border-box;
@@ -347,7 +372,7 @@ label {                                             display: block;
                                                     width: 100%;
                                                     clear: both;
                                                     background-color: #fbfbf7;
-                                                    margin: 0em auto 2em auto;
+                                                    margin: 0rem auto 2rem auto;
                                                     padding: 2rem 2rem 0rem 2rem;
                                                     border: 1px solid #c6ccc8;
                                                     border-radius: 6px;
@@ -357,13 +382,18 @@ label {                                             display: block;
                                                     background-image: -ms-linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
-    div#main > article:last-child {                 margin-bottom: 0em }
-    div#main > article.commentary {                 padding: 0em 2em 2em 2em;
-                                                    margin-top: 2em }
-    div#main > article.page {                       padding-bottom: 2em }
-    div.standalone {                                margin-bottom: 0em;
-                                                    padding-bottom: 2em }
-    div.archive.standalone {                        padding-bottom: 1em }
+    div#main > article:last-child {                 margin-bottom: 0rem }
+    div#main > article.commentary {                 padding: 0rem 2rem 2rem 2rem;
+                                                    margin-top: 2rem }
+    div#main > article.page {                       padding-bottom: 2rem }
+    div.standalone {                                margin-bottom: 0rem;
+                                                    padding-bottom: 2rem }
+    div.user_controls.standalone,
+    div.user_login.standalone
+    div.lost_password.standalone
+    div.user_register.standalone {                  max-width: 640px;
+                                                    margin-left: 0em }
+    div.archive.standalone {                        padding-bottom: 1rem }
     ul.archive article.post.archive {               display: block;
                                                     position: relative;
                                                     float: left;
@@ -393,6 +423,7 @@ article > section {                                 display: block;
                                                     margin: 1em 0em 0em 0em;
                                                     padding: 0em }
     article > section:first-child {                 margin-top: 0em }
+    article section.comment {                       margin-bottom: 1em }
 article > footer {                                  display: block;
                                                     width: 100%;
                                                     text-align: left;
@@ -421,7 +452,6 @@ a:focus {                                           outline: none;
 a:active {                                          color: #d94c7b;
                                                     text-decoration: none }
     h3.ribbon a {                                   color: #ffffff;
-                                                    text-decoration: none;
                                                     border-bottom: 1px #ffffff solid;
                                                     display: inline-block;
                                                     position: relative;
@@ -431,7 +461,7 @@ a:active {                                          color: #d94c7b;
     h3.ribbon a:active {                            top: 1px;
                                                     color: inherit }
     div.traversal a {                               display: inline-block;
-                                                    padding: 0.4em 0.6em;
+                                                    padding: 0.4em 0.8em;
                                                     min-width: 8em;
                                                     border: none;
                                                     border-radius: 0.2em;
@@ -442,20 +472,15 @@ a:active {                                          color: #d94c7b;
     div.traversal a:active {                        color: #ffffff;
                                                     background-color: #1d914b }
     section a:link, p a:link {                      color: #5c6773;
-                                                    text-decoration: none;
                                                     border-bottom: 1px #9ea8a8 solid }
     section a:visited, p a:visited {                color: #5c6773;
-                                                    text-decoration: none;
                                                     border-bottom: 1px #9ea8a8 solid }
     section a:hover, p a:hover {                    color: #d94c7b;
-                                                    text-decoration: none;
                                                     border-bottom: 1px #d94c7b solid }
     section a:focus, p a:focus {                    outline: none;
                                                     color: #d94c7b;
-                                                    text-decoration: none;
                                                     border-bottom: 1px #d94c7b solid }
     section a:active, p a:active {                  color: #d94c7b;
-                                                    text-decoration: none;
                                                     border-bottom: 1px #d94c7b solid }
     div.tags a, span.tags_select a {                display: inline-block;
                                                     padding: 0.2em 0.4em;
@@ -467,38 +492,29 @@ a:active {                                          color: #d94c7b;
     div.tags a:focus, span.tags_select a:focus,
     div.tags a:active, span.tags_select a:active {  color: #ffffff;
                                                     background-color: #1d914b }
-    div.metadata a {                                color: #9ea8a8 }
-    div.metadata a:link, div.metadata a:visited {   color: #9ea8a8;
+    div.metadata a {                                color: #9ea8a8;
                                                     border-bottom: none }
     div.metadata a:hover, div.metadata a:focus,
     div.metadata a:active {                         color: #d94c7b;
                                                     border-bottom: none }
     div.doaction a, button {                        white-space: nowrap;
-                                                    padding: 0.4em 0.6em;
+                                                    padding: 0.4em 0.8em;
                                                     border: none;
                                                     border-radius: 0.2em;
                                                     color: #ffffff;
                                                     background-color: #39434d }
-    div.doaction a:link {                           color: #ffffff;
-                                                    text-decoration: none }
-    div.doaction a:visited {                        color: #ffffff;
-                                                    text-decoration: none }
-    div.doaction a:hover, button:hover {            color: #ffffff;
-                                                    text-decoration: none;
-                                                    background-color: #000000 }
-    div.doaction a:focus, button:focus {            outline: none;
-                                                    color: #ffffff;
-                                                    text-decoration: none;
-                                                    background-color: #000000 }
-    div.doaction a:active {                         color: #ffffff;
-                                                    text-decoration: none;
+    div.doaction a:hover, button:hover,
+    div.doaction a:focus, button:focus,
+    div.doaction a:active, button:active {          color: #ffffff;
                                                     background-color: #39434d }
     div.doaction a.post_delete_link,
     div.doaction a.delete_link {                    background-color: #cc5252 }
     div.doaction a.post_delete_link:hover,
-    div.doaction a.delete_link:hover {              background-color: #af2d2d }
+    div.doaction a.delete_link:hover,
     div.doaction a.post_delete_link:focus,
-    div.doaction a.delete_link:focus {              background-color: #af2d2d }
+    div.doaction a.delete_link:focus,
+    div.doaction a.post_delete_link:active,
+    div.doaction a.delete_link:active {             background-color: #af2d2d }
     div.photo_frame > a {                           border-bottom: none }
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
@@ -545,7 +561,7 @@ img {                                               border-style: none;
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
     blockquote {                                    padding: 0em 1em }
-    form.inline_edit {                              padding: 1em }
+    form.inline_edit {                              padding: 0rem 1rem 1rem 1rem; }
     input, select {                                 width: 100% }
     table {                                         -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
@@ -555,9 +571,9 @@ img {                                               border-style: none;
     div#tail {                                      display: block }
     div#main > article {                            padding: 1rem 1rem 0rem 1rem }
     div.metadata {                                  left: -1rem;
-                                                    padding: 0em 1rem }
-    div.standalone {                                padding: 1em }
-    ul.archive li {                                 margin: 0em 0em 0em 1em }
+                                                    padding: 0rem 1rem }
+    div.standalone {                                padding: 1rem }
+    ul.archive li {                                 margin: 0rem 0rem 0rem 1rem }
     ul.tail_nav.mobile_nav {                        display: block;
                                                     position: fixed;
                                                     bottom: 0px;
