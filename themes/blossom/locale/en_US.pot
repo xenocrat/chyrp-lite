@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-16 20:00+0000\n"
+"POT-Creation-Date: 2014-10-17 20:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -458,5 +458,13 @@ msgstr ""
 
 #: themes/blossom/pages/view.twig:12
 msgid "Previous post"
+msgstr ""
+
+#: themes/blossom/pages/view.twig:29
+msgid "Newer comments"
+msgstr ""
+
+#: themes/blossom/pages/view.twig:30
+msgid "Older comments"
 msgstr ""
 

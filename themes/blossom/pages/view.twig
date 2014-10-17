@@ -26,8 +26,8 @@
     </ol>
   </article>
   <div class="comments_pagination traversal">
-    $comments.prev_link
-    $comments.next_link
+    ${ comments.prev_link( ( "Newer comments" | translate ), null, null, "comments" ) }
+    ${ comments.next_link( ( "Older comments" | translate ), null, null, "comments" ) }
   </div>
   {% endif %}
 {% endblock %}

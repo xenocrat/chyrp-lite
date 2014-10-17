@@ -141,13 +141,17 @@
          *     $text - The text for the link.
          *     $class - The CSS class for the link.
          *     $page - Page number to link to.
+         *     $anchor - An anchor target.
          */
-        public function next_link($text = null, $class = "next_page", $page = null) {
+        public function next_link($text = null, $class = "next_page", $page = null, $anchor = null) {
             if (!$this->next_page())
                 return;
 
+            if (isset($anchor))
+                $anchor = '#'.$anchor;
+
             fallback($text, __("Next &rarr;"));
-            echo '<a  rel="next" class="'.$class.'" id="next_page_'.$this->name.'" href="'.$this->next_page_url($page).'">'.
+            echo '<a  rel="next" class="'.$class.'" id="next_page_'.$this->name.'" href="'.$this->next_page_url($page).$anchor.'">'.
                      $text.
                  '</a>';
         }
@@ -160,13 +164,17 @@
          *     $text - The text for the link.
          *     $class - The CSS class for the link.
          *     $page - Page number to link to.
+         *     $anchor - An anchor target.
          */
-        public function prev_link($text = null, $class = "prev_page", $page = null) {
+        public function prev_link($text = null, $class = "prev_page", $page = null, $anchor = null) {
             if (!$this->prev_page())
                 return;
 
+            if (isset($anchor))
+                $anchor = '#'.$anchor;
+
             fallback($text, __("&larr; Previous"));
-            echo '<a rel="prev" class="'.$class.'" id="prev_page_'.$this->name.'" href="'.$this->prev_page_url($page).'">'.
+            echo '<a rel="prev" class="'.$class.'" id="prev_page_'.$this->name.'" href="'.$this->prev_page_url($page).$anchor.'">'.
                      $text.
                  '</a>';
         }
