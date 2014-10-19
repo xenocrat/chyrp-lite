@@ -87,10 +87,20 @@
     # Absolute path to /admin/themes
     define('ADMIN_THEMES_DIR', MAIN_DIR."/admin/themes");
 
+    # Constant: UPDATE_XML
+    # URL to the update feed
+    define('UPDATE_XML', "http://pimley.net/projects/downloads/chyrp-lite.xml");
+
+    # Constant: UPDATE_INTERVAL
+    # Interval in seconds between update checks
+    define('UPDATE_INTERVAL', 86400);
+
     # Constant: USE_ZLIB
     # Use zlib to provide GZIP compression
-    if (version_compare(PHP_VERSION, "5.4.4", "<")) define('USE_ZLIB', true);
-    else define('USE_ZLIB', false);
+    if (version_compare(PHP_VERSION, "5.4.4", "<"))
+        define('USE_ZLIB', true);
+    else
+        define('USE_ZLIB', false);
 
     # Set error reporting levels, and headers for Chyrp's JS files.
     if (JAVASCRIPT) {

@@ -9,7 +9,7 @@
          * Loads the update XML file.
          */
         private static function xml() {
-            $xml = simplexml_load_string(get_remote("http://pimley.net/projects/downloads/chyrp-lite.xml"));
+            $xml = simplexml_load_string(get_remote(UPDATE_XML));
             return $xml;
         }
 
@@ -23,7 +23,7 @@
             if (!$config->check_updates)
                 return;
 
-            if ((time() - $config->check_updates_last) < 86400 )
+            if ((time() - $config->check_updates_last) < UPDATE_INTERVAL )
                 return; # Check for updates once per day
 
             $xml = self::xml();
