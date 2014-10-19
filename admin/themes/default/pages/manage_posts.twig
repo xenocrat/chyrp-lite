@@ -41,7 +41,7 @@
                 {% for post in posts.paginated %}
                     <tr id="post_$post.id" class="post $post.status_class">
                         <td class="post_title main">
-                            <a href="$post.url">${ post.title | truncate(40, "…", true) }</a>
+                            <a href="$post.url">{% if post.title %}${ post.title | truncate(40, "…", true) }{% else %}${ "(Untitled)" | translate }{% endif %}</a>
                         </td>
                         <td class="post_date">
                             ${ post.created_at | strftime }

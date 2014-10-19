@@ -97,7 +97,9 @@ pre {                                               font-family: monospace;
                                                     font-size: 0.75em;
                                                     margin: 1em 0em }
     li > pre {                                      margin: 1em 0em 0em 0em }
-code {                                              font-size: 0.8em;
+code {                                              font-family: monospace;
+                                                    font-size: 0.75em;
+                                                    font-style: normal;
                                                     padding: 0.2em 0.4em;
                                                     margin: 0.2em 0em;
                                                     border-radius: 0.4em;
