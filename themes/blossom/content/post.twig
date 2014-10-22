@@ -1,5 +1,5 @@
     <article class="post $post.feather{% if post.pinned %} pinned{% endif %}" id="post_$post.id">
-      {% block content %}{% endblock %}
+{% block content %}{% endblock %}
       <footer>
         {% if ( post.linked_tags | length > 0 ) %}
         <div role="note" class="tags postinfo">

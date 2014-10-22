@@ -39,14 +39,14 @@ ${ trigger.call("head") }
   </div>
   {% endif %}
   <!-- Sidebar -->
-  {% include "content/sidebar.twig" %}
+{% include "content/sidebar.twig" %}
   {% if posts.prev_page %}
   <!-- Navigation -->
   <div role="navigation" class="prev traversal">${ posts.prev_link( ( "Newer posts" | translate ) ) }</div> 
   {% endif %}
   <!-- Content -->
   <div id="main" role="main">
-  {% block content %}{% endblock %}
+{% block content %}{% endblock %}
   </div>
   {% if posts.next_page %}
   <!-- Navigation -->
@@ -84,7 +84,7 @@ ${ trigger.call("head") }
       {% endif %}
     </ul>
   </div>
-  ${ trigger.call("end_content") }
+${ trigger.call("end_content") }
 </body>
 
 <!-- Queries: $sql_queries | Load Time: $theme.load_time -->

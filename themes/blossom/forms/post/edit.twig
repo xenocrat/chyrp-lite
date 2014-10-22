@@ -1,6 +1,6 @@
     <form id="post_edit_form_$post.id" class="inline_edit post_edit" action="{% admin "update_post" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
       <fieldset>
-      ${ trigger.call("before_ajax_edit_post_fields", feather) }
+${ trigger.call("before_ajax_edit_post_fields", feather) }
         {% for field in feather.fields %}
         <label for="$field.attr">
           $field.label

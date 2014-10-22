@@ -1,4 +1,4 @@
-<div id="sidebar" role="navigation">
+  <div id="sidebar" role="navigation">
 
     <h1 class="banner"><a href="$site.url">$site.name</a></h1>
 
@@ -35,7 +35,7 @@
       {% endif %}
     </ul>
 
-    ${ trigger.call("sidebar") }
+${ trigger.call("sidebar") }
 
     {% if categorize %}
     <h4 id="label_categories">${ "Categories" | translate }</h4>
@@ -77,4 +77,4 @@
     </ul>
     {% endif %}
 
-</div>
+  </div>

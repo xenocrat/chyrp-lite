@@ -1,17 +1,17 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
-  <div class="user_login standalone">
-    <h2>${ "Log in" | translate }</h2>
-    <form action="{% url "login" %}" method="post">
-      <label for="login">${ "Username" | translate }</label>
-      <input type="text" name="login" value="${ POST.login | escape }" id="login" tabindex="1">
-      <label for="password">${ "Password" | translate }</label>
-      <input type="password" name="password" value="" id="password" tabindex="2">
-      <div class="doaction">
-        <button name="submit" type="submit" id="submit" tabindex="3">${ "Log in" | translate }</button>
-        <a href="{% url "lost_password" %}">${ "Help!" | translate }</a>
-      </div>
-    </form>
-  </div>
+    <div class="user_login standalone">
+      <h2>${ "Log in" | translate }</h2>
+      <form action="{% url "login" %}" method="post">
+        <label for="login">${ "Username" | translate }</label>
+        <input type="text" name="login" value="${ POST.login | escape }" id="login" tabindex="1">
+        <label for="password">${ "Password" | translate }</label>
+        <input type="password" name="password" value="" id="password" tabindex="2">
+        <div class="doaction">
+          <button name="submit" type="submit" id="submit" tabindex="3">${ "Log in" | translate }</button>
+          <a href="{% url "lost_password" %}">${ "Help!" | translate }</a>
+        </div>
+      </form>
+    </div>
 {% endblock %}
