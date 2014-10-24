@@ -26,7 +26,7 @@
                                                     background-color: #42a66a }
 *::selection {                                      color: #ffffff;
                                                     background-color: #42a66a }
-body {                                              font-family: "Open Sans webfont";
+body {                                              font-family: "Open Sans webfont", sans-serif;
                                                     font-size: 16px;
                                                     color: #4e5a66;
                                                     line-height: 1.2;

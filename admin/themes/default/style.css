@@ -44,7 +44,7 @@ input,textarea,select {                         font-family: inherit;
 
 /* @group Core */
 body {                                          font-size: 14px;
-                                                font-family: "Open Sans webfont";
+                                                font-family: "Open Sans webfont", sans-serif;
                                                 line-height: 1.25em;
                                                 color: #4a4747;
                                                 background-color: #efefef;
@@ -61,7 +61,8 @@ h1 {                                            font-size: 2em }
 h3 {                                            font-size: 1em }
 h4, h5, h6 {                                    font-size: 1em }
 em {                                            font-style: italic }
-strong {                                        font-weight: bold }
+strong {                                        font-weight: bold;
+                                                font-style: normal }
 small , .small, .sub {                          color: #b3b5b5 }
 small, .small {                                 font-size: 0.8em;
                                                 line-height: 1.25em }
@@ -292,7 +293,8 @@ textarea.error {                                background-color: #faebe4;
 input[type="file"] {                            border: none }
 input.code,
 textarea.code,
-code {                                          font-family: monospace }
+code {                                          font-family: monospace;
+                                                font-style: normal }
 select {                                        -moz-box-sizing: border-box;
                                                 box-sizing: border-box }
 form.delete blockquote {                        margin: 0em 4em 1em 4em;
