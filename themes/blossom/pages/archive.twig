@@ -56,7 +56,7 @@
     </div>
     {% endif %}
     {% for post in posts.paginated %}
-    {% include "feathers/" ~ post.feather ~ ".twig" %}
+{% include "feathers/" ~ post.feather ~ ".twig" %}
     {% endfor %}
   {% endif %}
 

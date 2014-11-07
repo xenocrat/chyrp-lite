@@ -88,13 +88,20 @@
             $post->image = $this->image_tag($post);
         }
 
-        public function image_tag($post, $max_width = 510, $max_height = null, $more_args = "quality=100") {
+        public function image_tag($post, $max_width = 500, $max_height = null, $more_args = "quality=100") {
             $config = Config::current();
             $alt = !empty($post->alt_text) ? fix($post->alt_text, true) : $post->filename ;
-            return '<img src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'" alt="'.$alt.'" class="image">';
+
+            # Source set for responsive images
+            $srcset = array($config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
+                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width=960&amp;'.$more_args.' 960w',
+                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
+                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
+
+            return '<img srcset="'.implode(", ", $srcset).'" src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'" alt="'.$alt.'" class="image">';
         }
 
-        public function image_link($post, $max_width = 510, $max_height = null, $more_args = "quality=100") {
+        public function image_link($post, $max_width = 500, $max_height = null, $more_args = "quality=100") {
             $source = !empty($post->source) ? $post->source : uploaded($post->filename) ;
             return '<a href="'.$source.'">'.$this->image_tag($post, $max_width, $max_height, $more_args).'</a>';
         }

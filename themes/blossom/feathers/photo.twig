@@ -7,7 +7,7 @@
       </h2>
       {% endif %}
       <div class="photo_frame">
-        ${ feathers['photo'].image_link(post, 1200, null, "quality=80") }
+        ${ feathers['photo'].image_link(post, 1024, null, "quality=80") }
       </div>
       {% if post.caption %}
       <section class="caption{% if post.caption | length > 1000 %} columnized{% endif %}">
