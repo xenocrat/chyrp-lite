@@ -16,7 +16,7 @@
                     </h3>
                     <div class="controls">
                         <a class="button" href="{% admin "change_theme&theme=" ~ theme.name %}">
-                            <img src="$theme_url/images/icons/appearance.svg" alt="Select">${ "Select" | translate }
+                            <img src="$theme_url/images/icons/success.svg" alt="Select">${ "Select" | translate }
                         </a>
                         <a class="button${ preview | selected(theme.name, true) }" href="{% admin "preview_theme&theme=" ~ theme.name %}">
                             <img src="$theme_url/images/icons/magnifier.svg" alt="Preview">${ "Preview" | translate }
@@ -38,7 +38,7 @@
                     </h3>
                     <div class="controls">
                         <a class="button" href="% admin "change_admin_theme&theme=" ~ theme.name %}">
-                            <img src="$theme_url/images/icons/appearance.svg" alt="Select">${ "Select" | translate }
+                            <img src="$theme_url/images/icons/success.svg" alt="Select">${ "Select" | translate }
                         </a>
                     </div>
                 </li>
