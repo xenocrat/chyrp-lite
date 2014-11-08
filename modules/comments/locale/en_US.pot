@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-17 20:21+0000\n"
+"POT-Creation-Date: 2014-11-08 17:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -288,21 +288,21 @@ msgstr ""
 
 #: modules/comments/pages/admin/manage_comments.twig:76
 #: modules/comments/pages/admin/manage_spam.twig:64
-msgid "deny"
+msgid "Deny"
 msgstr ""
 
 #: modules/comments/pages/admin/manage_comments.twig:79
 #: modules/comments/pages/admin/manage_spam.twig:67
-msgid "approve"
+msgid "Approve"
 msgstr ""
 
 #: modules/comments/pages/admin/manage_comments.twig:82
-msgid "mark as spam"
+msgid "Mark as Spam"
 msgstr ""
 
 #: modules/comments/pages/admin/manage_comments.twig:85
 #: modules/comments/pages/admin/manage_spam.twig:70
-msgid "delete"
+msgid "Delete"
 msgstr ""
 
 #: modules/comments/pages/admin/manage_spam.twig:3

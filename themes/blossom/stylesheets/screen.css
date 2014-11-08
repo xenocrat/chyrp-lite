@@ -38,31 +38,28 @@ p {                                                 line-height: 1.4;
                                                     margin: 0em 0em 1em 0em }
     p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                                font-size: 2em;
-                                                    font-weight: normal;
-                                                    text-transform: uppercase;
+                                                    font-weight: bold;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }
     h1.banner {                                     font-size: 0.75em;
                                                     margin: 1.33em 0em }
 h2 {                                                font-size: 1.5em;
-                                                    font-weight: normal;
-                                                    text-transform: uppercase;
+                                                    font-weight: bold;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }
 h3 {                                                font-size: 1em;
-                                                    font-weight: normal;
-                                                    text-transform: uppercase;
+                                                    font-weight: bold;
                                                     margin: 1em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }
-    h3.ribbon {                                     margin: 0em }
+    h3.ribbon {                                     font-weight: normal;
+                                                    margin: 0em }
     h3.archive {                                    margin-top: 1em;
                                                     clear: both }
 h4 {                                                font-size: 0.75em;
-                                                    font-weight: normal;
-                                                    text-transform: uppercase;
+                                                    font-weight: bold;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }

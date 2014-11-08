@@ -411,6 +411,7 @@ table tbody tr td.category_show {               text-align: center }
 table thead tr th.tag_name,
 table tbody tr td.tag_name {                    text-align: left }
 table tbody tr td.tag_count {                   text-align: center }
+td.post_status {                                background-color: #f2fbff }
 tr.private td.post_status {                     background-color: #faebe4 }
 tr.public td.post_status {                      background-color: #ebfae4 }
 tr.denied td.comment_status {                   background-color: #faebe4 }
