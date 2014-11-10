@@ -24,7 +24,6 @@
 }
 /* @end */
 
-
 /* @group Reset */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,
 pre,code,form,fieldset,legend,
@@ -43,6 +42,10 @@ input,textarea,select {                         font-family: inherit;
 /* @end */
 
 /* @group Core */
+*::-moz-selection {                             color: #ffffff;
+                                                background-color: #4f4f4f }
+*::selection {                                  color: #ffffff;
+                                                background-color: #4f4f4f }
 body {                                          font-size: 14px;
                                                 font-family: "Open Sans webfont", sans-serif;
                                                 line-height: 1.25em;
