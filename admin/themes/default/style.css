@@ -82,6 +82,8 @@ a:focus {                                       outline: none;
 a:active {                                      color: #1e57ba;
                                                 text-decoration: underline }
 small a, .small a, .sub a {                     color: #b3b5b5 }
+img.logo {                                      width: 24px;
+                                                height: 24px }
 /* @end */
 
 /* @group Header */

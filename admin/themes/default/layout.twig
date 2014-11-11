@@ -58,7 +58,7 @@ ${ trigger.call("admin_head") }
 {% block content %}{% endblock %}
         </div>
         <div id="footer" role="contentinfo">
-            <img src="$theme_url/images/chyrp-lite.svg" alt="${ "Chyrp loves you." | translate }">
+            <img class="logo" src="$theme_url/images/chyrp-lite.svg" alt="${ "Chyrp loves you." | translate }">
             <small class="copyright">
                 ${ "v%s &dash; &copy; %d" | translate | format(version, "now" | date("Y")) }
             </small>
