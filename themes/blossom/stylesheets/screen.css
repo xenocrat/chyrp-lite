@@ -171,8 +171,8 @@ dl {                                                list-style: none }
                                                     padding: 2rem 2rem 0rem 2rem;
                                                     border-bottom: 1px solid #c6ccc8 }
     ol.comments li:last-child {                     border-bottom: none }
-    ol.comments li.no_comments {                    display: none }
-    ol.comments li.new_comment {                    padding-top: 1em }
+    ol.comments li#comment_shim {                   display: none }
+    ol.comments li.comment_form {                   padding-bottom: 2em }
 table {                                             border-collapse: collapse;
                                                     border-spacing: 0em;
                                                     width: 100%;
@@ -382,7 +382,7 @@ label {                                             display: block;
                                                     background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
                                                     box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
     div#main > article:last-child {                 margin-bottom: 0rem }
-    div#main > article.commentary {                 padding: 0rem 0rem 2rem 0rem;
+    div#main > article.commentary {                 padding: 0rem;
                                                     margin-top: 2rem }
     div#main > article.page {                       padding-bottom: 2rem }
     div.standalone {                                margin-bottom: 0rem;
@@ -568,13 +568,13 @@ img {                                               border-style: none;
     div#sidebar {                                   display: none }
     div#tail {                                      display: block }
     div#main > article {                            padding: 1rem 1rem 0rem 1rem }
-    div#main > article.commentary {                 padding: 0rem 0rem 1rem 0rem }
     div.standalone {                                padding: 1rem }
     div.metadata {                                  left: -1rem;
+                                                    margin-top: 1rem;
                                                     padding: 0rem 1rem }
     ol.comments li {                                margin: 0em;
                                                     padding: 1rem 1rem 0rem 1rem }
-    ol.comments li.new_comment {                    padding: 0em 1em 1em 1em }
+    ol.comments li.comment_form {                   padding: 0em 1rem 1rem 1rem }
     ul.archive li {                                 margin: 0rem 0rem 0rem 1rem }
     ul.tail_nav.mobile_nav {                        display: block;
                                                     position: fixed;

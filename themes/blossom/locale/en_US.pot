@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-22 06:34+0000\n"
+"POT-Creation-Date: 2014-11-16 18:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,26 +17,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: themes/blossom/content/comment.twig:4
+#: themes/blossom/content/comment.twig:3
+#, php-format
+msgid "%s replied:"
+msgstr ""
+
+#: themes/blossom/content/comment.twig:5
+#, php-format
+msgid "%s said:"
+msgstr ""
+
+#: themes/blossom/content/comment.twig:9
 msgid "This comment is awaiting moderation."
 msgstr ""
 
-#: themes/blossom/content/comment.twig:10
+#: themes/blossom/content/comment.twig:15
 msgid "Edit"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:11
+#: themes/blossom/content/comment.twig:16
 #: themes/blossom/content/post.twig:12
 msgid "Delete"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:15
+#: themes/blossom/content/comment.twig:17
+msgid "Reply"
+msgstr ""
+
+#: themes/blossom/content/comment.twig:21
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:15
+#: themes/blossom/content/comment.twig:21
 #, php-format
-msgid "<strong>%s</strong> on <a href=\"%s\" class=\"permalink\">%s</a>"
+msgid "<a href=\"%s\" class=\"permalink\">%s</a>"
 msgstr ""
 
 #: themes/blossom/content/post.twig:6
@@ -271,7 +285,7 @@ msgstr ""
 msgid "Your comment"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:22
+#: themes/blossom/forms/comment/new.twig:23
 msgid "Speak"
 msgstr ""
 
@@ -460,11 +474,11 @@ msgstr ""
 msgid "Previous post"
 msgstr ""
 
-#: themes/blossom/pages/view.twig:31
-msgid "Newer comments"
+#: themes/blossom/pages/view.twig:30
+msgid "Older comments"
 msgstr ""
 
-#: themes/blossom/pages/view.twig:32
-msgid "Older comments"
+#: themes/blossom/pages/view.twig:31
+msgid "Newer comments"
 msgstr ""
 

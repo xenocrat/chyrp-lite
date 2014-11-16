@@ -10,6 +10,9 @@ $(function(){
 <?php if ($config->auto_reload_comments and $config->enable_reload_comments): ?>
         var updater = setInterval("Comment.reload()", <?php echo $config->auto_reload_comments * 1000; ?>);
 <?php endif; ?>
+        $("#comments").on("click", ".comment_reply_link", function(){
+            $("#parent_id").val($(this).attr("data-comment_id")).val();
+        });
         $("#add_comment").append($(document.createElement("input")).attr({ type: "hidden", name: "ajax", value: "true", id: "ajax" }));
         $("#add_comment").ajaxForm({ dataType: "json", resetForm: true, beforeSubmit: function() {
             $("#add_comment").parent().loader();
@@ -23,7 +26,7 @@ $(function(){
                     $(".comment_plural").text(plural);
                 }
                 $("#last_comment").val(json.comment_timestamp);
-                $(data).prependTo(".comments").hide().fadeIn("slow");
+                $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
             }, "html")
         }, complete: function(){
             $("#add_comment").parent().loader(true);
@@ -67,7 +70,7 @@ var Comment = {
                     $("#last_comment").val(json.last_comment);
                     $.each(json.comment_ids, function(i, id) {
                         $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id }, function(data){
-                            $(data).prependTo(".comments").hide().fadeIn("slow");
+                            $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
                         }, "html");
                     });
                 }
