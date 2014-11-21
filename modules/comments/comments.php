@@ -76,7 +76,7 @@
             if (empty($_POST['author'])) error(__("Error"), __("Author can't be blank.", "comments"));
             if (empty($_POST['email']))  error(__("Error"), __("E-Mail address can't be blank.", "comments"));
 
-            fallback($parent, (int) !empty($_POST['parent_id']));
+            fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) !empty($_POST['notify']));
 
             Comment::create($_POST['body'],
@@ -768,5 +768,17 @@
                 return "(0)";
             else
                 return QueryBuilder::build_list($_SESSION['comments']);
+        }
+
+
+        /**
+         * Function: comment_get
+         * Returns a single comment using the supplied ID.
+         *
+         * Parameters:
+         *     $id - The ID of comment to grab.
+         */
+        public function comment_get($id) {
+            return $comment = new Comment($id);
         }
     }

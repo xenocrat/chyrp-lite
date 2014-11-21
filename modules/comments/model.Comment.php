@@ -27,7 +27,7 @@
             $this->body_unfiltered = $this->body;
             $group = ($this->user_id and !$this->user->no_results) ?
                          $this->user->group :
-                         new Group(Config::current()->guest_group) ;
+                         new Group(Config::current()->guest_group);
 
             $this->filtered = !isset($options["filter"]) or $options["filter"];
 
@@ -315,7 +315,7 @@
 
             $name = strtolower(get_class($this));
 
-            echo $before.'<a href="#comment" data-comment_id="'.$this->id.'" title="Reply to '.$this->author.'" class="'.($classes ? $classes." " : '').$name.'_reply_link replyto" id="comment_reply">'.$text.'</a>'.$after;
+            echo $before.'<a href="#new_comment" data-comment_id="'.$this->id.'" title="Reply to '.$this->author.'" class="'.($classes ? $classes." " : '').$name.'_reply_link replyto" id="comment_reply">'.$text.'</a>'.$after;
         }
 
         /**
@@ -346,42 +346,5 @@
                                    "Reply-To:".$config->email."\r\n".
                                    "X-Mailer: PHP/".phpversion();
             $sent = email($to, $subject, $message, $headers);
-        }
-    }
-
-    class Threaded extends Comment {
-    
-        public $parents  = array();
-        public $children = array();
-
-        function __construct($comments) {
-            foreach ($comments as $comment) {
-                if ($comment['parent_id'] === 0)
-                    $this->parents[$comment['id']][] = $comment;
-                else
-                    $this->children[$comment['parent_id']][] = $comment;
-            }
-        }
-    
-        private function format_comment($comment, $depth) {
-            for ($depth; $depth > 0; $depth--)
-                echo "\t";
-    
-            echo $comment['text'];
-            echo "\n";
-        }
-
-        private function print_parent($comment, $depth = 0) {
-            foreach ($comment as $c) {
-                $this->format_comment($c, $depth);
-    
-                if (isset($this->children[$c['id']]))
-                    $this->print_parent($this->children[$c['id']], $depth + 1);
-            }
-        }
-    
-        public function print_comments() {
-            foreach ($this->parents as $c)
-                $this->print_parent($c);
         }
     }

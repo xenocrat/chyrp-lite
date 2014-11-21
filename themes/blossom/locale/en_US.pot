@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-11-16 18:29+0000\n"
+"POT-Creation-Date: 2014-11-21 11:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: themes/blossom/content/comment.twig:3
 #, php-format
-msgid "%s replied:"
+msgid "%s replied to %s:"
 msgstr ""
 
 #: themes/blossom/content/comment.twig:5
