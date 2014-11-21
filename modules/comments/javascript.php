@@ -31,6 +31,7 @@ $(function(){
                 $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
             }, "html")
         }, complete: function(){
+            $("#parent_id").val("0"); // Reset the parent ID (in case the last comment was a reply).
             $("#add_comment").parent().loader(true);
         } })
     }
