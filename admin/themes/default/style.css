@@ -249,7 +249,7 @@ span.pages:last-child {                         margin: 0em 14em 0em 1em }
                                                 border: 1px solid #d5afdb }
 #content ul.extend li.feather,
 #content ul.extend li.module {                  position: relative;
-                                                padding-right: 10em }
+                                                padding-right: 12em }
 #content ul.extend li.feather p:last-of-type,
 #content ul.extend li.module p:last-of-type {   margin-bottom: 0em }
 #content ul.extend li.module div.controls,

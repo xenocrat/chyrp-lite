@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-19 09:06+0000\n"
+"POT-Creation-Date: 2014-11-21 14:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -377,6 +377,7 @@ msgid "What would you like to export?"
 msgstr ""
 
 #: admin/themes/default/pages/export.twig:10
+#: admin/themes/default/pages/manage_posts.twig:28
 msgid "Posts"
 msgstr ""
 
@@ -401,6 +402,7 @@ msgid "(optional)"
 msgstr ""
 
 #: admin/themes/default/pages/export.twig:20
+#: admin/themes/default/pages/manage_pages.twig:19
 msgid "Pages"
 msgstr ""
 
@@ -686,10 +688,6 @@ msgstr ""
 msgid "Search Results"
 msgstr ""
 
-#: admin/themes/default/pages/manage_pages.twig:19
-msgid "Last 25 Pages"
-msgstr ""
-
 #: admin/themes/default/pages/manage_pages.twig:23
 #: admin/themes/default/pages/manage_posts.twig:32
 #: admin/themes/default/partials/page_fields.twig:3
@@ -733,10 +731,6 @@ msgstr ""
 
 #: admin/themes/default/pages/manage_posts.twig:18
 msgid "Browse by month:"
-msgstr ""
-
-#: admin/themes/default/pages/manage_posts.twig:28
-msgid "Last 25 Posts"
 msgstr ""
 
 #: admin/themes/default/pages/manage_posts.twig:33

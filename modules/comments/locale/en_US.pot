@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-11-21 12:08+0000\n"
+"POT-Creation-Date: 2014-11-21 14:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -116,6 +116,7 @@ msgstr ""
 #: modules/comments/comments.php:284
 #: modules/comments/comments.php:451
 #: modules/comments/info.yaml:1
+#: modules/comments/pages/admin/manage_comments.twig:19
 msgid "Comments"
 msgstr ""
 
@@ -177,6 +178,7 @@ msgid "Denied"
 msgstr ""
 
 #: modules/comments/edit_form.php:25
+#: modules/comments/pages/admin/manage_spam.twig:20
 msgid "Spam"
 msgstr ""
 
@@ -262,10 +264,6 @@ msgstr ""
 msgid "Manage Comments"
 msgstr ""
 
-#: modules/comments/pages/admin/manage_comments.twig:19
-msgid "Last 25 Comments"
-msgstr ""
-
 #: modules/comments/pages/admin/manage_comments.twig:25
 #: modules/comments/pages/admin/manage_spam.twig:26
 msgid "Post"
@@ -316,10 +314,6 @@ msgstr ""
 #: modules/comments/pages/admin/manage_spam.twig:16
 #, php-format
 msgid "Delete All (%d)"
-msgstr ""
-
-#: modules/comments/pages/admin/manage_spam.twig:20
-msgid "Last 25 Spam"
 msgstr ""
 
 #: modules/comments/upgrades.php:4

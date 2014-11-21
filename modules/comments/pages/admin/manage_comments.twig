@@ -16,7 +16,7 @@
                     </div>
                 </fieldset>
             </form>
-            <h2>{% if GET.query %}${ "Search Results" | translate }{% else %}${ "Last 25 Comments" | translate("comments") }{% endif %}</h2>
+            <h2>{% if GET.query %}${ "Search Results" | translate }{% else %}${ "Comments" | translate("comments") }{% endif %}</h2>
             <form action="{% admin "bulk_comments" %}" method="post">
                 <table>
                     <thead>
