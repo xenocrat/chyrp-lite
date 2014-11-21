@@ -684,7 +684,8 @@ img.overlay_close_gadget {                      display: block;
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
     #welcome {                                  padding: 0em }
-    #welcome a {                                padding: 0em 0.5em }
+    #welcome a {                                padding: 0em 2em;
+                                                line-height: 4em }
     span.hello {                                display: none }
     #sub_nav li {                               -moz-box-sizing: border-box;
                                                 box-sizing: border-box;
