@@ -19,13 +19,13 @@ ${ trigger.call("admin_head") }
         <div id="header" role="banner">
             <h1><a href="$site.url">$site.name</a></h1>
             <ul id="navigation" role="navigation">
-{% block navigation %}
+                {% block navigation %}
                 {% for action, nav in navigation | items %}
                 {% if nav.show %}
                 <li class="$action{% if nav.selected %} selected{% endif %}"$nav.attributes><a href="{% admin action %}">$nav.title</a></li>
                 {% endif %}
                 {% endfor %}
-{% endblock %}
+                {% endblock %}
             </ul>
         </div>
         <div id="welcome" role="banner">
@@ -34,7 +34,7 @@ ${ trigger.call("admin_head") }
                 <a id="welcome_logout" href="{% url "/?action=logout" %}">${ "Log Out" | translate }</a>
         </div>
         <ul id="sub_nav" role="navigation" class="${ route.action }_nav ">
-{% block subnav %}
+            {% block subnav %}
             {% if subnav[route.action] %}
             {% for action, nav in subnav[route.action] | items %}
             {% if nav.show %}
@@ -42,7 +42,7 @@ ${ trigger.call("admin_head") }
             {% endif %}
             {% endfor %}
             {% endif %}
-{% endblock %}
+            {% endblock %}
         </ul>
         <div id="content" role="main">
             {% if new_update %} $new_update {% endif %}

@@ -29,7 +29,7 @@
                         <th class="user_group">${ "Group" | translate }</th>
                         <th class="user_joined">${ "Joined" | translate }</th>
                         <th class="user_website">${ "Website" | translate }</th>
-                        ${ trigger.call("manage_users_column_header") }
+${ trigger.call("manage_users_column_header") }
                         <th class="controls" colspan="2">${ "Controls" | translate }</th>
                     </tr>
                 </thead>
@@ -52,7 +52,7 @@
                         <td class="user_website">
                             {% if user.website != "" %}<a href="$user.website">$user.website</a>{% endif %}
                         </td>
-                        ${ trigger.call("manage_users_column", user) }
+${ trigger.call("manage_users_column", user) }
                         {% if user.editable and user.deletable %}
                         <td class="controls">${ user.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">') }</td>
                         <td class="controls">${ user.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">') }</td>

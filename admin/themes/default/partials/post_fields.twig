@@ -1,4 +1,4 @@
-                        ${ trigger.call("before_post_fields", feather) }
+${ trigger.call("before_post_fields", feather) }
                         {% for field in feather.fields %}
                         <p class="main_options">
                             <label for="${ field.attr }_field">
@@ -34,7 +34,7 @@
                             $field.extra
                         </p>
                         {% endfor %}
-                        ${ trigger.call("after_post_fields", feather) }
+${ trigger.call("after_post_fields", feather) }
                         <div id="more_options" class="more_options">
                             {% if visitor.group.can("add_post") %}
                             <p class="more_options_option">

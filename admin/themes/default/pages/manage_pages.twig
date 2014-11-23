@@ -26,7 +26,7 @@
                         <th class="page_public">${ "Public?" | translate }</th>
                         <th class="page_show">${ "Listed?" | translate }</th>
                         <th class="page_author">${ "Author" | translate }</th>
-                        ${ trigger.call("manage_pages_column_header") }
+${ trigger.call("manage_pages_column_header") }
                         <th class="controls" colspan="2">${ "Controls" | translate }</th>
                     </tr>
                 </thead>
@@ -55,7 +55,7 @@
                         <td class="page_author">
                             $page.user.login
                         </td>
-                        ${ trigger.call("manage_pages_column", page) }
+${ trigger.call("manage_pages_column", page) }
                         {% if page.editable and page.deletable %}
                         <td class="controls">${ page.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">') }</td>
                         <td class="controls">${ page.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">') }</td>

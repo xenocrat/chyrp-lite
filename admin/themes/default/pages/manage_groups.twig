@@ -26,7 +26,7 @@
                         <th class="group_size">${ "Members" | translate }</th>
                         <th class="group_default">${ "Default?" | translate }</th>
                         <th class="group_guest">${ "Guests?" | translate }</th>
-                        ${ trigger.call("manage_groups_column_header") }
+${ trigger.call("manage_groups_column_header") }
                         <th class="controls" colspan="2">${ "Controls" | translate }</th>
                     </tr>
                 </thead>
@@ -49,7 +49,7 @@
                             <img class="emblem" src="$theme_url/images/icons/success.svg" alt="${ "yes" | translate }">
                         {% endif %}
                         </td>
-                        ${ trigger.call("manage_groups_column", user) }
+${ trigger.call("manage_groups_column", user) }
                         <td class="controls">${ group.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">') }</td>
                         <td class="controls">${ group.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">') }</td>
                     </tr>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-11-21 14:54+0000\n"
+"POT-Creation-Date: 2014-11-23 12:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -25,43 +25,43 @@ msgstr ""
 msgid "The default theme provided with Chyrp Lite."
 msgstr ""
 
-#: admin/themes/default/javascript.php:35
+#: admin/themes/default/javascript.php:95
 msgid "Help"
 msgstr ""
 
-#: admin/themes/default/javascript.php:39
-#: admin/themes/default/javascript.php:41
-#: admin/themes/default/javascript.php:108
+#: admin/themes/default/javascript.php:99
+#: admin/themes/default/javascript.php:101
+#: admin/themes/default/javascript.php:168
 msgid "Close"
 msgstr ""
 
-#: admin/themes/default/javascript.php:61
-#: admin/themes/default/javascript.php:62
+#: admin/themes/default/javascript.php:121
+#: admin/themes/default/javascript.php:122
 msgid "Preview this field"
 msgstr ""
 
-#: admin/themes/default/javascript.php:96
+#: admin/themes/default/javascript.php:156
 #: admin/themes/default/pages/themes.twig:22
 msgid "Preview"
 msgstr ""
 
-#: admin/themes/default/javascript.php:143
-#: admin/themes/default/javascript.php:144
+#: admin/themes/default/javascript.php:203
+#: admin/themes/default/javascript.php:204
 #: admin/themes/default/pages/modules.twig:12
 #: admin/themes/default/pages/modules.twig:51
 msgid "Blissful!"
 msgstr ""
 
-#: admin/themes/default/javascript.php:171
-#: admin/themes/default/javascript.php:172
+#: admin/themes/default/javascript.php:231
+#: admin/themes/default/javascript.php:232
 msgid "Conflicted!"
 msgstr ""
 
-#: admin/themes/default/javascript.php:234
+#: admin/themes/default/javascript.php:294
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/themes/default/javascript.php:236
+#: admin/themes/default/javascript.php:296
 msgid "There was an error disabling the extension."
 msgstr ""
 
@@ -303,7 +303,6 @@ msgid "Permissions"
 msgstr ""
 
 #: admin/themes/default/pages/edit_group.twig:25
-#: admin/themes/default/pages/edit_user.twig:44
 msgid "Delete"
 msgstr ""
 

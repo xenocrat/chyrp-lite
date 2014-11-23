@@ -8,15 +8,75 @@
 <!-- --><script>
 $(function(){
     if (/(write)_/.test(Route.action))
-        Write.init()
+        Write.init();
 
     if (Route.action == "modules" || Route.action == "feathers")
-        Extend.init()
+        Extend.init();
+
+    if (Route.action == "new_user" || Route.action == "edit_user")
+        Users.init();
 
     // Open help text in an iframe overlay
     Help.init();
 
 });
+
+var Users = {
+    init: function() {
+        $(document).ready(function() {
+            $("input[type='password']#password1, input[type='password']#new_password1").keyup(function(e) {
+                var score = Users.score($(this).val());
+                var image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAAYCAIAAAC0rgCNAAAADklEQVR4AWPc8nA+LTEA8Y80+W/odekAAAAASUVORK5CYII=";
+                $(this).css({
+                    "background": "url('data:image/png;base64," + image + "') #fff no-repeat top left",
+                    "background-size": (score + "% 100%")
+                });
+            });
+            $("input[type='password']#password1, input[type='password']#password2").keyup(function(e) {
+                if ( $("input[type='password']#password1").val() !== $("input[type='password']#password2").val() ) {
+                    $("input[type='password']#password2").addClass("error");
+                } else {
+                    $("input[type='password']#password2").removeClass("error");
+                }
+            });
+            $("input[type='password']#new_password1, input[type='password']#new_password2").keyup(function(e) {
+                if ( $("input[type='password']#new_password1").val() !== $("input[type='password']#new_password2").val() ) {
+                    $("input[type='password']#new_password2").addClass("error");
+                } else {
+                    $("input[type='password']#new_password2").removeClass("error");
+                }
+            });
+        });
+    },
+    score: function(password) {
+        var score = 0;
+        if (!password)
+            return score;
+
+        // award every unique letter until 5 repetitions
+        var letters = new Object();
+        for (var i=0; i<password.length; i++) {
+            letters[password[i]] = (letters[password[i]] || 0) + 1;
+            score += 5.0 / letters[password[i]];
+        }
+
+        // bonus points for mixing it up
+        var variations = {
+            digits: /\d/.test(password),
+            lower: /[a-z]/.test(password),
+            upper: /[A-Z]/.test(password),
+            nonWords: /\W/.test(password)
+        }
+
+        variationCount = 0;
+        for (var check in variations) {
+            variationCount += (variations[check] == true) ? 1 : 0;
+        }
+        score += (variationCount - 1) * 10;
+
+        return parseInt(score);
+    }
+}
 
 var Help = {
     init: function() {

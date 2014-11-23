@@ -33,7 +33,7 @@
                         <th class="post_date">${ "Posted" | translate }</th>
                         <th class="post_status">${ "Status" | translate }</th>
                         <th class="post_author">${ "Author" | translate }</th>
-                        ${ trigger.call("manage_posts_column_header") }
+${ trigger.call("manage_posts_column_header") }
                         <th class="controls" colspan="2">${ "Controls" | translate }</th>
                     </tr>
                 </thead>
@@ -52,7 +52,7 @@
                         <td class="post_author">
                             $post.author.name
                         </td>
-                        ${ trigger.call("manage_posts_column", post) }
+${ trigger.call("manage_posts_column", post) }
                         {% if post.editable and post.deletable %}
                         <td class="controls">${ post.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">') }</td>
                         <td class="controls">${ post.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">') }</td>

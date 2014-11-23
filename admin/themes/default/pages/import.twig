@@ -32,7 +32,7 @@
                             ${ "Usually something like <code>http://example.com/uploads/</code>." | translate }
                         </small>
                     </p>
-                    ${ trigger.call("import_choose") }
+${ trigger.call("import_choose") }
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Import" | translate }</button>
                     </p>
@@ -155,5 +155,5 @@
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>
             </form>
-            ${ trigger.call("import_choose") }
+${ trigger.call("import_choose") }
 {% endblock %}
