@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-11-23 12:21+0000\n"
+"POT-Creation-Date: 2014-11-23 15:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -300,10 +300,6 @@ msgstr ""
 #: admin/themes/default/pages/edit_group.twig:13
 #: admin/themes/default/pages/new_group.twig:13
 msgid "Permissions"
-msgstr ""
-
-#: admin/themes/default/pages/edit_group.twig:25
-msgid "Delete"
 msgstr ""
 
 #: admin/themes/default/pages/edit_page.twig:3

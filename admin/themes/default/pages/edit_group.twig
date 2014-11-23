@@ -22,7 +22,6 @@
                     {% endfor %}
                     <p>
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
-                        ${ group.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="delete">'~ ("Delete" | translate), null, null, "button boo") }
                     </p>
                     <input type="hidden" name="id" value="$group.id" id="id">
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
