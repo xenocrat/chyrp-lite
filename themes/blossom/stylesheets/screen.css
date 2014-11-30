@@ -173,6 +173,7 @@ dl {                                                list-style: none }
     ol.comments li:last-child {                     border-bottom: none }
     ol.comments li#comment_shim {                   display: none }
     ol.comments li.comment_form {                   padding-bottom: 2em }
+    ol.comments li.reply {                          padding-left: 4rem }
 table {                                             border-collapse: collapse;
                                                     border-spacing: 0em;
                                                     width: 100%;
@@ -211,7 +212,7 @@ form, fieldset {                                    margin: 0em;
     form.comment_edit {                             width: 100%;
                                                     background-color: transparent;
                                                     margin-bottom: 0em;
-                                                    padding: 0em;
+                                                    padding: 0rem 0rem 2rem 0rem;
                                                     border: none }
 input {                                             -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
@@ -337,6 +338,8 @@ label {                                             display: block;
                                                     border-top: 1px solid #c6ccc8;
                                                     border-bottom-left-radius: 6px;
                                                     border-bottom-right-radius: 6px }
+    ol.comments li.reply div.metadata {             padding-left: 4rem;
+                                                    left: -4rem }
     div.comments_pagination {                       width: 100%;
                                                     clear: both;
                                                     text-align: center }
@@ -559,22 +562,13 @@ img {                                               border-style: none;
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
     blockquote {                                    padding: 0em 1em }
-    form.inline_edit {                              padding: 0rem 1rem 1rem 1rem; }
+    form.inline_edit {                              padding: 0rem 1rem 1rem 1rem }
+    form.comment_edit {                             padding: 0rem 0rem 1rem 0rem }
     input, select {                                 width: 100% }
-    table {                                         -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
-                                                    display: block }
-    div#mast {                                      display: block }
-    div#sidebar {                                   display: none }
-    div#tail {                                      display: block }
-    div#main > article {                            padding: 1rem 1rem 0rem 1rem }
-    div.standalone {                                padding: 1rem }
-    div.metadata {                                  left: -1rem;
-                                                    margin-top: 1rem;
-                                                    padding: 0rem 1rem }
     ol.comments li {                                margin: 0em;
                                                     padding: 1rem 1rem 0rem 1rem }
     ol.comments li.comment_form {                   padding: 0em 1rem 1rem 1rem }
+    ol.comments li.reply {                          padding-left: 2rem }
     ul.archive li {                                 margin: 0rem 0rem 0rem 1rem }
     ul.tail_nav.mobile_nav {                        display: block;
                                                     position: fixed;
@@ -597,6 +591,20 @@ img {                                               border-style: none;
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
                                                     border-bottom: 1px solid #d2d9d4 }
+    table {                                         -moz-box-sizing: border-box;
+                                                    box-sizing: border-box;
+                                                    display: block }
+    div#mast {                                      display: block }
+    div#sidebar {                                   display: none }
+    div#tail {                                      display: block }
+    div#main > article {                            padding: 1rem 1rem 0rem 1rem }
+    div.standalone {                                padding: 1rem }
+    div.metadata {                                  left: -1rem;
+                                                    margin-top: 1rem;
+                                                    padding: 0rem 1rem }
+    ol.comments li.reply div.metadata {             padding-left: 2rem;
+                                                    left: -2rem }
+
 }
 
 @media screen and (max-width: 480px) {

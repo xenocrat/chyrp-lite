@@ -1,4 +1,4 @@
-        <li id="comment_$comment.id">
+        <li id="comment_$comment.id"{% if comment.parent_id > 0 %} class="reply"{% endif %}>
           {% if comment.parent_id > 0 %}
           <h3>${ "%s replied to %s:" | translate | format(comment.author_link, modules['comments'].comment_get(comment.parent_id).author_link) }</h3>
           {% else %}
