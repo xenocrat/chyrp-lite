@@ -5,7 +5,7 @@
      * Chyrp Lite: an ultra-lightweight fork of the Chyrp blogging engine.
      *
      * Version:
-     *     v2014.10.12
+     *     v2014.12.12
      *
      * License:
      *     Modified MIT (See COPYING)
@@ -16,7 +16,7 @@
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2014.10.12");
+    define('CHYRP_VERSION', "2014.12.12");
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
