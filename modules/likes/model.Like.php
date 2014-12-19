@@ -126,22 +126,24 @@
         }
 
         static function install() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS __likes (
-                                     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                     post_id INTEGER NOT NULL,
-                                     user_id INTEGER NOT NULL,
-                                     timestamp DATETIME DEFAULT NULL,
-                                     session_hash VARCHAR(32) NOT NULL
-                                   ) DEFAULT CHARSET=UTF8");
+            $sql = SQL::current();
 
-            $constraints = SQL::current()->query("SELECT COUNT(*) AS unique_keys FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-                                                  WHERE (TABLE_SCHEMA = DATABASE()
-                                                    AND TABLE_NAME = '__likes'
-                                                    AND CONSTRAINT_TYPE = 'UNIQUE')")->fetchObject();
+            $sql->query("CREATE TABLE IF NOT EXISTS __likes (
+                          id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                          post_id INTEGER NOT NULL,
+                          user_id INTEGER NOT NULL,
+                          timestamp DATETIME DEFAULT NULL,
+                          session_hash VARCHAR(32) NOT NULL
+                        ) DEFAULT CHARSET=UTF8");
 
-            if ($constraints->unique_keys === 0) {
-              SQL::current()->query("CREATE INDEX key_post_id ON __likes (post_id)");
-              SQL::current()->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
+            $constraints = $sql->query("SELECT COUNT(*) AS unique_keys FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+                                        WHERE (TABLE_NAME = '__likes'
+                                          AND CONSTRAINT_NAME = 'key_post_id_sh_pair'
+                                          AND CONSTRAINT_TYPE = 'UNIQUE')")->fetchObject();
+
+            if ($constraints->unique_keys == 0) {
+              $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
+              $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
             }
 
             Group::add_permission("like_post", "Like Posts");

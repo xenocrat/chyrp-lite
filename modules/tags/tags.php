@@ -266,7 +266,6 @@
             if (!Visitor::current()->group->can("edit_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit tags.", "tags"));
 
-
             $sql = SQL::current();
 
             $tags = array();

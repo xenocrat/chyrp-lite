@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-11-21 14:54+0000\n"
+"POT-Creation-Date: 2014-12-19 19:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -56,7 +56,7 @@ msgstr ""
 #: modules/tags/tags.php:56
 #: modules/tags/tags.php:113
 #: modules/tags/tags.php:124
-#: modules/tags/tags.php:448
+#: modules/tags/tags.php:447
 msgid "Tags"
 msgstr ""
 
@@ -90,7 +90,7 @@ msgid "You do not have sufficient privileges to manage tags."
 msgstr ""
 
 #: modules/tags/tags.php:171
-#: modules/tags/tags.php:444
+#: modules/tags/tags.php:443
 #, php-format
 msgid "%s post tagged with &quot;%s&quot;"
 msgid_plural "%s posts tagged with &quot;%s&quot;"
@@ -111,32 +111,32 @@ msgstr ""
 msgid "Tags updated."
 msgstr ""
 
-#: modules/tags/tags.php:289
+#: modules/tags/tags.php:288
 msgid "Tag renamed."
 msgstr ""
 
-#: modules/tags/tags.php:311
+#: modules/tags/tags.php:310
 msgid "Tag deleted."
 msgstr ""
 
-#: modules/tags/tags.php:347
+#: modules/tags/tags.php:346
 msgid "Posts tagged."
 msgstr ""
 
-#: modules/tags/tags.php:359
+#: modules/tags/tags.php:358
 msgid "No Tag"
 msgstr ""
 
-#: modules/tags/tags.php:389
+#: modules/tags/tags.php:388
 msgid "Invalid Tag"
 msgstr ""
 
-#: modules/tags/tags.php:400
+#: modules/tags/tags.php:399
 #, php-format
 msgid "Posts tagged with %s"
 msgstr ""
 
-#: modules/tags/tags.php:428
+#: modules/tags/tags.php:427
 msgid "No Tags"
 msgstr ""
 
