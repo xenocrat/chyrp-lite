@@ -596,6 +596,7 @@ img.emblem {                                    display: inline;
                                                 top: 2px;
                                                 width: 16px;
                                                 height: 16px }
+img#likeImage_preview {                         vertical-align: middle }
 ul#feathers_enabled a.feather_enabler,
 ul#feathers_disabled a.feather_disabler,
 ul#modules_enabled a.module_enabler,
