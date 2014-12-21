@@ -522,10 +522,14 @@ a:active {                                          color: #d94c7b;
                                                     margin-top: 1em }
     a.rights_licence_link {                         position: relative;
                                                     top: 0.33em }
-    a.rights_licence_link, a.like {                 opacity: 0.5 }
-    a.rights_licence_link:hover, a.like:hover,
-    a.rights_licence_link:focus, a.like:focus,
-    a.rights_licence_link:active, a.like:active {   opacity: 1 }
+    a.rights_licence_link,
+    a.like > img {                                  opacity: 0.5 }
+    a.rights_licence_link:hover,
+    a.like > img:hover,
+    a.rights_licence_link:focus,
+    a.like > img:focus,
+    a.rights_licence_link:active,
+    a.like > img:active {                           opacity: 1 }
     a.archive_post_link {                           display: block;
                                                     position: absolute;
                                                     top: 0px;
