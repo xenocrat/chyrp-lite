@@ -506,7 +506,8 @@ a:active {                                          color: #d94c7b;
                                                     background-color: #39434d }
     div.doaction a:hover, button:hover,
     div.doaction a:focus, button:focus,
-    div.doaction a:active, button:active {          color: #ffffff;
+    div.doaction a:active, button:active {          outline: none;
+                                                    color: #ffffff;
                                                     background-color: #000000 }
     div.doaction a.post_delete_link,
     div.doaction a.delete_link {                    background-color: #cc5252 }
