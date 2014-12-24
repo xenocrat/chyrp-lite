@@ -493,11 +493,10 @@ a:active {                                          color: #d94c7b;
     div.tags a:focus, span.tags_select a:focus,
     div.tags a:active, span.tags_select a:active {  color: #ffffff;
                                                     background-color: #1d914b }
-    div.metadata a {                                color: #9ea8a8;
-                                                    border-bottom: none }
-    div.metadata a:hover, div.metadata a:focus,
-    div.metadata a:active {                         color: #d94c7b;
-                                                    border-bottom: none }
+    div.metadata a {                                color: #9ea8a8 }
+    div.metadata a:hover,
+    div.metadata a:focus,
+    div.metadata a:active {                         color: #d94c7b }
     div.doaction a, button {                        white-space: nowrap;
                                                     padding: 0.4em 0.8em;
                                                     border: none;
