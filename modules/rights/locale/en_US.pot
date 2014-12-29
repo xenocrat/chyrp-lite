@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-17 20:21+0000\n"
+"POT-Creation-Date: 2014-12-29 19:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -42,34 +42,42 @@ msgid "Licence"
 msgstr ""
 
 #: modules/rights/rights.php:42
+#: modules/rights/rights.php:110
 msgid "All rights reserved"
 msgstr ""
 
 #: modules/rights/rights.php:45
+#: modules/rights/rights.php:86
 msgid "Creative Commons BY"
 msgstr ""
 
 #: modules/rights/rights.php:48
+#: modules/rights/rights.php:89
 msgid "Creative Commons BY-ND"
 msgstr ""
 
 #: modules/rights/rights.php:51
+#: modules/rights/rights.php:92
 msgid "Creative Commons BY-SA"
 msgstr ""
 
 #: modules/rights/rights.php:54
+#: modules/rights/rights.php:95
 msgid "Creative Commons BY-NC"
 msgstr ""
 
 #: modules/rights/rights.php:57
+#: modules/rights/rights.php:98
 msgid "Creative Commons BY-NC-ND"
 msgstr ""
 
 #: modules/rights/rights.php:60
+#: modules/rights/rights.php:101
 msgid "Creative Commons BY-NC-SA"
 msgstr ""
 
 #: modules/rights/rights.php:63
+#: modules/rights/rights.php:104
 msgid "Creative Commons CC0"
 msgstr ""
 
@@ -78,6 +86,7 @@ msgid "Orphan Work"
 msgstr ""
 
 #: modules/rights/rights.php:69
+#: modules/rights/rights.php:107
 msgid "Public Domain"
 msgstr ""
 
