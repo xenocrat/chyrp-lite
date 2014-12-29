@@ -81,35 +81,33 @@
         }
 
         static function licence_mark($post) {
-            $chyrp = Config::current()->chyrp_url;
-
             switch ($post->rights_licence) {
                 case "Creative Commons BY":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by.svg" alt="Creative Commons BY" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by/4.0" class="rights_licence_link">'.__("Creative Commons BY", "rights").'</a>';
                 break;
                 case "Creative Commons BY-ND":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-nd.svg" alt="Creative Commons BY-ND" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0" class="rights_licence_link">'.__("Creative Commons BY-ND", "rights").'</a>';
                 break;
                 case "Creative Commons BY-SA":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-sa.svg" alt="Creative Commons BY-SA" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0" class="rights_licence_link">'.__("Creative Commons BY-SA", "rights").'</a>';
                 break;
                 case "Creative Commons BY-NC":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-nc.svg" alt="Creative Commons BY-NC" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0" class="rights_licence_link">'.__("Creative Commons BY-NC", "rights").'</a>';
                 break;
                 case "Creative Commons BY-NC-ND":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-nc-nd.svg" alt="Creative Commons BY-NC-ND" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0" class="rights_licence_link">'.__("Creative Commons BY-NC-ND", "rights").'</a>';
                 break;
                 case "Creative Commons BY-NC-SA":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-nc-sa.svg" alt="Creative Commons BY-NC-SA" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="rights_licence_link">'.__("Creative Commons BY-NC-SA", "rights").'</a>';
                 break;
                 case "Creative Commons CC0":
-                $mark = '<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/cc-zero.svg" alt="Creative Commons CC0" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0" class="rights_licence_link">'.__("Creative Commons CC0", "rights").'</a>';
                 break;
                 case "Public Domain":
-                $mark = '<a rel="license" href="http://wiki.creativecommons.org/Public_domain" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/publicdomain.svg" alt="Public Domain" /></a>';
+                $mark = '<a rel="license" href="http://wiki.creativecommons.org/Public_domain" class="rights_licence_link">'.__("Public Domain", "rights").'</a>';
                 break;
                 default:
-                $mark = "&copy;";
+                $mark = __("All rights reserved", "rights");
             }
 
             return $mark;

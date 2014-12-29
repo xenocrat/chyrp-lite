@@ -191,12 +191,12 @@
 
             if (!$hasPersonLiked) {
                 $returnStr.= "<a class='like' href=\"javascript:likes.toggle($post->id);\">";
-                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][6]."'> ";
+                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][6]."'>";
                 if ($likeSetting["likeWithText"]) {
-                    $returnStr.= "<span class='like'>".$likeSetting["likeText"][6]."</span> "; # $this->text_default[6] = "Like!"
-                    $returnStr.= "<span class='unlike'>".$likeSetting["likeText"][7]."</span> "; # $this->text_default[7] = "Unlike!"
+                    $returnStr.= "<span class='like'>".$likeSetting["likeText"][6]."</span>"; # $this->text_default[6] = "Like!"
+                    $returnStr.= "<span class='unlike'>".$likeSetting["likeText"][7]."</span>"; # $this->text_default[7] = "Unlike!"
                 }
-                $returnStr.= "</a><span class='text'>";
+                $returnStr.= "</a><span class='like_text'>";
                 if ($like->total_count == 0)
                     # $this->text_default[3] = "Be the first to like.";
                     $returnStr.= $like->getText($like->total_count, $likeSetting["likeText"][3]);
@@ -212,12 +212,12 @@
                     $returnStr.= "<a class='liked' href=\"javascript:likes.toggle($post->id);\">";
                 else
                     $returnStr.= "<a class='liked'>";
-                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][7]."'> ";
+                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][7]."'>";
                 if ($likeSetting["likeWithText"]) {
-                    $returnStr.= "<span class='like'>".$likeSetting["likeText"][6]."</span> "; # $this->text_default[6] = "Like!"
-                    $returnStr.= "<span class='unlike'>".$likeSetting["likeText"][7]."</span> "; # $this->text_default[7] = "Unlike!"
+                    $returnStr.= "<span class='like'>".$likeSetting["likeText"][6]."</span>"; # $this->text_default[6] = "Like!"
+                    $returnStr.= "<span class='unlike'>".$likeSetting["likeText"][7]."</span>"; # $this->text_default[7] = "Unlike!"
                 }
-                $returnStr.= "</a><span class='text'>";
+                $returnStr.= "</a><span class='like_text'>";
                 if ($like->total_count == 1)
                     # $this->text_default[0] = "You like this post.";
                     $returnStr.= $like->getText($like->total_count, $likeSetting["likeText"][0]);

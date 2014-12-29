@@ -28,7 +28,7 @@
             &bull; <a href="$post.category.url" rel="tag">$post.category.name</a>
           {% endif %}
           {% if enabled_modules.likes and visitor.group.can("like_post") %}
-            &bull; $post.get_likes
+            {% if post.get_likes %}&bull; $post.get_likes{% endif %}
           {% endif %}
           {% if enabled_modules.comments %}
             {% if post.comment_status == "closed" %}
@@ -41,7 +41,7 @@
             {% endif %}
           {% endif %}
           {% if enabled_modules.rights %}
-            &bull; $post.licence_mark ${post['rights_holder']}
+            &bull;{% if post['rights_holder'] %} &copy; ${post['rights_holder']},{% endif %} $post.licence_mark
           {% endif %}
         </div>
       </footer>
