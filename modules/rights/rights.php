@@ -77,10 +77,10 @@
         }
 
         public function post($post) {
-            $post->licence_mark = self::licence_mark($post);
+            $post->licence_link = self::licence_link($post);
         }
 
-        static function licence_mark($post) {
+        static function licence_link($post) {
             switch ($post->rights_licence) {
                 case "Creative Commons BY":
                 $mark = '<a rel="license" href="http://creativecommons.org/licenses/by/4.0" class="rights_licence_link">'.__("Creative Commons BY", "rights").'</a>';
