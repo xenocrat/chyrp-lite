@@ -188,6 +188,7 @@ div.pagination {                                clear: both;
                                                 margin-top: 4em }
 a.prev_page,
 a.next_page {                                   min-width: 10em }
+span.pages {                                    margin: 0em 1em }
 span.pages:first-child {                        margin: 0em 1em 0em 14em }
 span.pages:last-child {                         margin: 0em 14em 0em 1em }
 /* @end */
@@ -771,6 +772,8 @@ img.overlay_close_gadget {                      display: block;
                                                 -moz-box-sizing: border-box !important;
                                                 box-sizing: border-box !important }
     .boo.message, .yay.message {                margin: 0em 0em 1em 0em !important }
+    span.pages {                                display: inline-block;
+                                                margin-top: 1em}
     span.pages:first-child {                    margin-left: 1em }
     span.pages:last-child {                     margin-right: 1em }
     div.detail_multiple {                       width: 100%;

@@ -74,7 +74,7 @@
             {% if comments.paginated and comments.pages > 1 %}
             <div class="pagination">
                 $comments.prev_link
-                <span class="pages">${ "Page %d of %d" | translate | format(comments.page, comments.pages) }</span>
+                <span class="pages">${ "Page %d of %s" | translate | format(comments.page, comments.final_link(comments.pages)) }</span>
                 $comments.next_link
             </div>
             {% endif %}

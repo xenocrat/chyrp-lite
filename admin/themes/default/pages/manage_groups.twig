@@ -59,7 +59,7 @@ ${ trigger.call("manage_groups_column", user) }
             {% if groups.paginated and groups.pages > 1 %}
             <div class="pagination">
                 $groups.prev_link
-                <span class="pages">${ "Page %d of %d" | translate | format(groups.page, groups.pages) }</span>
+                <span class="pages">${ "Page %d of %s" | translate | format(groups.page, groups.final_link(groups.pages)) }</span>
                 $groups.next_link
             </div>
             {% endif %}

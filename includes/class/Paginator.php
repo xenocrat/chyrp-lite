@@ -151,7 +151,7 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Next &rarr;"));
-            echo '<a  rel="next" class="'.$class.'" id="next_page_'.$this->name.'" href="'.$this->next_page_url($page).$anchor.'">'.
+            return '<a  rel="next" class="'.$class.'" id="next_page_'.$this->name.'" href="'.$this->next_page_url($page).$anchor.'">'.
                      $text.
                  '</a>';
         }
@@ -174,7 +174,51 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; Previous"));
-            echo '<a rel="prev" class="'.$class.'" id="prev_page_'.$this->name.'" href="'.$this->prev_page_url($page).$anchor.'">'.
+            return '<a rel="prev" class="'.$class.'" id="prev_page_'.$this->name.'" href="'.$this->prev_page_url($page).$anchor.'">'.
+                     $text.
+                 '</a>';
+        }
+
+        /**
+         * Function: final_link
+         * Outputs a link to the final page.
+         *
+         * Parameters:
+         *     $text - The text for the link.
+         *     $class - The CSS class for the link.
+         *     $anchor - An anchor target.
+         */
+        public function final_link($text = null, $class = "final_page", $anchor = null) {
+            if (!$this->pages)
+                return;
+
+            if (isset($anchor))
+                $anchor = '#'.$anchor;
+
+            fallback($text, __("Final &rarr;"));
+            return '<a  rel="next" class="'.$class.'" id="final_page_'.$this->name.'" href="'.$this->next_page_url($this->pages).$anchor.'">'.
+                     $text.
+                 '</a>';
+        }
+
+        /**
+         * Function: first_link
+         * Outputs a link to the first page.
+         *
+         * Parameters:
+         *     $text - The text for the link.
+         *     $class - The CSS class for the link.
+         *     $anchor - An anchor target.
+         */
+        public function first_link($text = null, $class = "first_page", $anchor = null) {
+            if (!$this->pages)
+                return;
+
+            if (isset($anchor))
+                $anchor = '#'.$anchor;
+
+            fallback($text, __("&larr; First"));
+            return '<a rel="prev" class="'.$class.'" id="first_page_'.$this->name.'" href="'.$this->prev_page_url(1).$anchor.'">'.
                      $text.
                  '</a>';
         }

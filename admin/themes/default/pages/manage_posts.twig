@@ -71,7 +71,7 @@ ${ trigger.call("manage_posts_column", post) }
             {% if posts.paginated and posts.pages > 1 %}
             <div class="pagination">
                 $posts.prev_link
-                <span class="pages">${ "Page %d of %d" | translate | format(posts.page, posts.pages) }</span>
+                <span class="pages">${ "Page %d of %s" | translate | format(posts.page, posts.final_link(posts.pages)) }</span>
                 $posts.next_link
             </div>
             {% endif %}

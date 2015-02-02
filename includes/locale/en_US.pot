@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2014 Xenocrat
+# Copyright (C) 2015 Xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-19 08:27+0000\n"
+"POT-Creation-Date: 2015-02-02 21:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -217,6 +217,14 @@ msgstr ""
 
 #: includes/class/Paginator.php:176
 msgid "&larr; Previous"
+msgstr ""
+
+#: includes/class/Paginator.php:198
+msgid "Final &rarr;"
+msgstr ""
+
+#: includes/class/Paginator.php:220
+msgid "&larr; First"
 msgstr ""
 
 #: includes/class/Query.php:234
