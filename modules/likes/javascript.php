@@ -72,14 +72,14 @@
         likes.like = function(post_id) {
             this.makeCall(post_id,function(response) {
                 var postDom = $("#likes_post-"+post_id);
-                postDom.children("span.text").html(response.likeText);
+                postDom.children("span.like_text").html(response.likeText);
                 postDom.children("a.like").removeClass("like").addClass("liked");
             }, false);
         }
         likes.unlike = function(post_id) {
             this.makeCall(post_id,function(response) {
                 var postDom = $("#likes_post-"+post_id);
-                postDom.children("span.text").html(response.likeText);
+                postDom.children("span.like_text").html(response.likeText);
                 postDom.children("a.liked").removeClass("liked").addClass("like");
             }, true);
         }
