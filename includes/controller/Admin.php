@@ -1469,22 +1469,23 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $dbcon = $dbsel = false;
-            if ($link = @mysql_connect($_POST['host'], $_POST['username'], $_POST['password'])) {
-                $dbcon = true;
-                $dbsel = @mysql_select_db($_POST['database'], $link);
+            @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
+
+            if ($mysqli->connect_errno) {
+                Flash::warning(__("Could not connect to the specified TextPattern database."),
+                    "/admin/?action=import");
             }
 
-            if (!$dbcon or !$dbsel)
-                Flash::warning(__("Could not connect to the specified TextPattern database."),
-                               "/admin/?action=import");
+            $mysqli->query("SET NAMES 'utf8'");
 
-            mysql_query("SET NAMES 'utf8'");
+            $prefix = $mysqli->real_escape_string($_POST['prefix']);
+            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error"), $mysqli->error);
 
-            $get_posts = mysql_query("SELECT * FROM {$_POST['prefix']}textpattern ORDER BY ID ASC", $link) or error(__("Database Error"), mysql_error());
             $posts = array();
-            while ($post = mysql_fetch_array($get_posts))
+            while ($post = $result->fetch_assoc())
                 $posts[$post["ID"]] = $post;
+
+            $mysqli->close();
 
             foreach ($posts as $post) {
                 $regexp_url = preg_quote($_POST['media_url'], "/");
@@ -1522,8 +1523,6 @@
                 $trigger->call("import_textpattern_post", $post, $new_post);
             }
 
-            mysql_close($link);
-
             Flash::notice(__("TextPattern content successfully imported!"), "/admin/?action=import");
         }
 
@@ -1545,46 +1544,48 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $dbcon = $dbsel = false;
-            if ($link = @mysql_connect($_POST['host'], $_POST['username'], $_POST['password'])) {
-                $dbcon = true;
-                $dbsel = @mysql_select_db($_POST['database'], $link);
+            @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
+
+            if ($mysqli->connect_errno) {
+                Flash::warning(__("Could not connect to the specified MovableType database."),
+                    "/admin/?action=import");
             }
 
-            if (!$dbcon or !$dbsel)
-                Flash::warning(__("Could not connect to the specified MovableType database."),
-                               "/admin/?action=import");
+            $mysqli->query("SET NAMES 'utf8'");
 
-            mysql_query("SET NAMES 'utf8'");
+            $authors = array();
+            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error"), $mysqli->error);
 
-            $get_authors = mysql_query("SELECT * FROM mt_author ORDER BY author_id ASC", $link) or error(__("Database Error"), mysql_error());
-            $users = array();
-            while ($author = mysql_fetch_array($get_authors)) {
+            while ($author = $result->fetch_assoc()) {
                 # Try to figure out if this author is the same as the person doing the import.
-                if ($author["author_name"] == $visitor->login or
-                    $author["author_nickname"] == $visitor->login or
-                    $author["author_nickname"] == $visitor->full_name or
-                    $author["author_url"] == $visitor->website or
-                    $author["author_email"] == $visitor->email) {
+                if ($author["author_name"] == $visitor->login
+                    || $author["author_nickname"] == $visitor->login
+                    || $author["author_nickname"] == $visitor->full_name
+                    || $author["author_url"]      == $visitor->website
+                    || $author["author_email"]    == $visitor->email) {
                     $users[$author["author_id"]] = $visitor;
                 } else {
-                    $users[$author["author_id"]] = User::add($author["author_name"],
-                                                             $author["author_password"],
-                                                             $author["author_email"],
-                                                             ($author["author_nickname"] != $author["author_name"] ?
-                                                                                            $author["author_nickname"] : ""),
-                                                             $author["author_url"],
-                                                             ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
-                                                             $author["author_created_on"],
-                                                             false
+                    $users[$author["author_id"]] = User::add(
+                        $author["author_name"],
+                        $author["author_password"],
+                        $author["author_email"],
+                        ($author["author_nickname"] != $author["author_name"] ?
+                                                       $author["author_nickname"] : ""),
+                        $author["author_url"],
+                        ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
+                        $author["author_created_on"],
+                        false
                     );
                 }
             }
 
-            $get_posts = mysql_query("SELECT * FROM mt_entry ORDER BY entry_id ASC", $link) or error(__("Database Error"), mysql_error());
+            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error"), $mysqli->error);
+
             $posts = array();
-            while ($post = mysql_fetch_array($get_posts))
+            while ($post = $result->fetch_assoc())
                 $posts[$post["entry_id"]] = $post;
+
+            $mysqli->close();
 
             foreach ($posts as $post) {
                 $body = $post["entry_text"];
@@ -1629,8 +1630,6 @@
                     $trigger->call("import_movabletype_page", $post, $new_page, $link);
                 }
             }
-
-            mysql_close($link);
 
             Flash::notice(__("MovableType content successfully imported!"), "/admin/?action=import");
         }
