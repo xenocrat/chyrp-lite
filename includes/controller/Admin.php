@@ -1037,11 +1037,18 @@
          * Chyrp importing.
          */
         public function import_chyrp() {
+            $config  = Config::current();
+            $trigger = Trigger::current();
+            $visitor = Visitor::current();
+
+            if (!$visitor->group->can("add_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
+
             if (empty($_POST))
                 redirect("/admin/?action=import");
 
-            if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
+            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (isset($_FILES['posts_file']) and $_FILES['posts_file']['error'] == 0)
                 if (!$posts = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $posts->generator != "Chyrp")
@@ -1054,8 +1061,6 @@
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
 
-            $trigger = Trigger::current();
-            $visitor = Visitor::current();
             $sql = SQL::current();
 
             function media_url_scan(&$value) {
@@ -1163,13 +1168,16 @@
          * WordPress importing.
          */
         public function import_wordpress() {
-            if (empty($_POST))
-                redirect("/admin/?action=import");
+            $config = Config::current();
 
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
 
-            $config = Config::current();
+            if (empty($_POST))
+                redirect("/admin/?action=import");
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!in_array("text", $config->enabled_feathers))
                 error(__("Missing Feather"), __("Importing from WordPress requires the Text feather to be installed and enabled."));
@@ -1314,13 +1322,17 @@
          * Tumblr importing.
          */
         public function import_tumblr() {
-            if (empty($_POST))
-                redirect("/admin/?action=import");
+            $config = Config::current();
 
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
 
-            $config = Config::current();
+            if (empty($_POST))
+                redirect("/admin/?action=import");
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!in_array("text", $config->enabled_feathers) or
                 !in_array("video", $config->enabled_feathers) or
                 !in_array("audio", $config->enabled_feathers) or
@@ -1445,14 +1457,17 @@
          * TextPattern importing.
          */
         public function import_textpattern() {
-            if (empty($_POST))
-                redirect("/admin/?action=import");
+            $config  = Config::current();
+            $trigger = Trigger::current();
 
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
 
-            $config = Config::current();
-            $trigger = Trigger::current();
+            if (empty($_POST))
+                redirect("/admin/?action=import");
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             $dbcon = $dbsel = false;
             if ($link = @mysql_connect($_POST['host'], $_POST['username'], $_POST['password'])) {
@@ -1517,14 +1532,18 @@
          * MovableType importing.
          */
         public function import_movabletype() {
+            $config  = Config::current();
+            $trigger = Trigger::current();
+            $visitor = Visitor::current();
+
+            if (!$visitor->group->can("add_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
+
             if (empty($_POST))
                 redirect("/admin/?action=import");
 
-            if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
-
-            $config = Config::current();
-            $trigger = Trigger::current();
+            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             $dbcon = $dbsel = false;
             if ($link = @mysql_connect($_POST['host'], $_POST['username'], $_POST['password'])) {
@@ -1542,25 +1561,24 @@
             $users = array();
             while ($author = mysql_fetch_array($get_authors)) {
                 # Try to figure out if this author is the same as the person doing the import.
-                if ($author["author_name"] == Visitor::current()->login or
-                    $author["author_nickname"] == Visitor::current()->login or
-                    $author["author_nickname"] == Visitor::current()->full_name or
-                    $author["author_url"] == Visitor::current()->website or
-                    $author["author_email"] == Visitor::current()->email)
-                    $users[$author["author_id"]] = Visitor::current();
-                else
+                if ($author["author_name"] == $visitor->login or
+                    $author["author_nickname"] == $visitor->login or
+                    $author["author_nickname"] == $visitor->full_name or
+                    $author["author_url"] == $visitor->website or
+                    $author["author_email"] == $visitor->email) {
+                    $users[$author["author_id"]] = $visitor;
+                } else {
                     $users[$author["author_id"]] = User::add($author["author_name"],
                                                              $author["author_password"],
                                                              $author["author_email"],
                                                              ($author["author_nickname"] != $author["author_name"] ?
-                                                                 $author["author_nickname"] :
-                                                                 ""),
+                                                                                            $author["author_nickname"] : ""),
                                                              $author["author_url"],
-                                                             ($author["author_can_create_blog"] == "1" ?
-                                                                 Visitor::current()->group :
-                                                                 null),
+                                                             ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
                                                              $author["author_created_on"],
-                                                             false);
+                                                             false
+                    );
+                }
             }
 
             $get_posts = mysql_query("SELECT * FROM mt_entry ORDER BY entry_id ASC", $link) or error(__("Database Error"), mysql_error());

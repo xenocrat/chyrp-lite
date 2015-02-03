@@ -38,9 +38,9 @@ ${ trigger.call("manage_users_column_header") }
                     <tr id="user_$user.id" class="user">
                         <td class="user_name main">
                             {% if user.full_name != "" %}
-                            <a href="mailto:$user.email">$user.full_name</a> <span class="sub">($user.login)</span>
+                            <a href="mailto:${ user.email | escape }">$user.full_name</a> <span class="sub">($user.login)</span>
                             {% else %}
-                            <a href="mailto:$user.email">$user.login</a>
+                            <a href="mailto:${ user.email | escape }">$user.login</a>
                             {% endif %}
                         </td>
                         <td class="user_group">
@@ -50,7 +50,7 @@ ${ trigger.call("manage_users_column_header") }
                             ${ user.joined_at | strftime }
                         </td>
                         <td class="user_website">
-                            {% if user.website != "" %}<a href="$user.website">$user.website</a>{% endif %}
+                            {% if user.website != "" %}<a href="${ user.website | escape }">$user.website</a>{% endif %}
                         </td>
 ${ trigger.call("manage_users_column", user) }
                         {% if user.editable and user.deletable %}
