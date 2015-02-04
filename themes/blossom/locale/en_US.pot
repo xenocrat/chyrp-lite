@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-02-02 21:24+0000\n"
+"POT-Creation-Date: 2015-02-04 21:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -19,36 +19,41 @@ msgstr ""
 
 #: themes/blossom/content/comment.twig:3
 #, php-format
+msgid "%s:"
+msgstr ""
+
+#: themes/blossom/content/comment.twig:6
+#, php-format
 msgid "%s replied to %s:"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:5
+#: themes/blossom/content/comment.twig:8
 #, php-format
 msgid "%s said:"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:9
+#: themes/blossom/content/comment.twig:13
 msgid "This comment is awaiting moderation."
 msgstr ""
 
-#: themes/blossom/content/comment.twig:15
+#: themes/blossom/content/comment.twig:19
 msgid "Edit"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:16
+#: themes/blossom/content/comment.twig:20
 #: themes/blossom/content/post.twig:12
 msgid "Delete"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:17
+#: themes/blossom/content/comment.twig:21
 msgid "Reply"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:21
+#: themes/blossom/content/comment.twig:25
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:21
+#: themes/blossom/content/comment.twig:25
 #, php-format
 msgid "<a href=\"%s\" class=\"permalink\">%s</a>"
 msgstr ""
