@@ -215,11 +215,13 @@
             if ($post->no_results)
                 return false;
 
-            Comment::create($blog_name,
+            Comment::create($excerpt,
+                            $title,
+                            $url,
                             "",
-                            $_POST["url"],
-                            '<strong><a href="'.fix($url).'">'.fix($title).'</a></strong>'."\n".$excerpt,
                             $post,
+                            0,
+                            0,
                             "trackback");
         }
 
@@ -231,11 +233,13 @@
             if ($count)
                 return new IXR_Error(48, __("A ping from that URL is already registered.", "comments"));
 
-            Comment::create($title,
-                            "",
+            Comment::create($excerpt,
+                            $title,
                             $from,
-                            $excerpt,
+                            "",
                             $post,
+                            0,
+                            0,
                             "pingback");
         }
 
