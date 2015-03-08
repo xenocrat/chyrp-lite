@@ -1,0 +1,18 @@
+{% extends "layouts/default.twig" %}
+
+{% block content %}
+    <article class="page"> 
+      <h2>$page.title</h2>
+      <section>
+        $page.body
+      </section>
+      <footer>
+        {% if page.editable or page.deletable %}
+        <div class="doaction admin">
+          $page.edit_link
+          $page.delete_link
+        </div>
+        {% endif %}
+      </footer>
+    </article>
+{% endblock %}

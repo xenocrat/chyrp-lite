@@ -1,0 +1,18 @@
+{% extends "content/post.twig" %}
+
+{% block content %}
+      {% if post['title'] %}
+      <h2 class="post_title">
+        <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;$post.title&quot;">$post.title</a>
+        <h6 class="post_byline">${ "Written by %s" | translate | format(post.author.name) }</h6>
+      </h2>
+      {% endif %}
+      <div class="photo_frame">
+        ${ feathers['photo'].image_link(post, 1200, null, "quality=80") }
+      </div>
+      {% if post.caption %}
+      <section class="caption{% if post.caption | length > 1000 %} columnized{% endif %}">
+        ${ post.caption | read_more("…more") }
+      </section>
+      {% endif %}
+{% endblock %}

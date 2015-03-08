@@ -1,7 +1,7 @@
 name: Comments
 url: http://chyrplite.net/
-version: 1.0
-description: Adds commenting functionality to your posts.
+version: 1.1
+description: Adds commenting functionality to your posts, with pingback and trackback support.
 author:
   name: Chyrp Team
   url: http://chyrp.net/

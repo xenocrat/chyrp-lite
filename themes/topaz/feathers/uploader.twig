@@ -1,0 +1,26 @@
+{% extends "content/post.twig" %}
+
+{% block content %}
+      {% if post['title'] %}
+      <h2 class="post_title">
+        <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;$post.title&quot;">$post.title</a>
+        <h6 class="post_byline">${ "Written by %s" | translate | format(post.author.name) }</h6>
+      </h2>
+      {% endif %}
+      <section class="caption{% if post.caption | length > 1000 %} columnized{% endif %}">
+        ${ post.caption | read_more("…more") }
+      </section>
+      <section class="downloads">
+      {% for file in post.files %}
+        {% if ( file.type == "jpg" ) or ( file.type == "jpeg" ) or ( file.type == "png" ) or ( file.type == "gif" ) or ( file.type == "tiff" ) or ( file.type == "bmp" ) %}
+        <div class="photo_frame">
+          ${ feathers['uploader'].image_link(file.name, 1200, null, "quality=80") }
+        </div>
+        {% else %}
+        <p>
+          ${ "Download" | translate } <a href="${ file.link | escape }">&quot;${ file.name | escape | truncate(40, "…", true) }&quot;</a>
+        </p>
+        {% endif %}
+      {% endfor %}
+      </section>
+{% endblock %}

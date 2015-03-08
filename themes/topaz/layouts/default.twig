@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-type" content="$theme.type; charset=utf-8">
+  <title>{% block title %}$site.name{% if ( route.action == "index" ) and ( site.description ) %}: $site.description{% endif %}{% if title %} &raquo; ${ title | escape }{% endif %}{% endblock %}</title>
+  <meta name="description" content="$site.description">
+  <meta name="generator" content="Chyrp">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta name="viewport" content="initial-scale = 1.0">
+  <link rel="pingback" href="$site.chyrp_url/includes/xmlrpc.php">
+  <link rel="shortcut icon" href="$site.url/favicon.ico">
+  {% if site.clean_urls %}<link rel="canonical" href="{% if (post.url) %}$post.clean{% elseif page.url %}$page.clean {% else %}$site.url{% endif %}">{% endif %}
+  $theme.feeds
+  $theme.stylesheets
+  $theme.javascripts
+${ trigger.call("head") }
+</head>
+<body role="document">
+  <!-- Header -->
+  <div class="shim">
+  {% for type, messages in flash.all | items %}
+      {% for message in messages %}
+      <div class="ribbon flash">
+        <h3 role="alert" class="ribbon">$message</h3>
+      </div>
+      {% endfor %}
+  {% endfor %}
+  </div>
+  {% if ( route.action != "login" ) and ( route.action != "controls" ) and ( route.action != "register" ) and ( route.action != "lost_password" ) %}
+  <div id="mast" role="banner">
+    <h1 class="banner"><a href="$site.url">$site.name</a></h1>
+    <div role="search" class="search_box">
+      <form action="$site.url" method="get" accept-charset="utf-8">
+        <input type="hidden" name="action" value="search" id="action">
+        <input type="text" id="search_field" name="query" value="{% if route.action == "search" %}${ GET.query | escape }{% endif %}" placeholder="${ "Search…" | translate }" title="${ "Search this blog" | translate }">
+        <button type="submit" id="search_submit">${ "Search" | translate }</button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  <!-- Sidebar -->
+{% include "content/sidebar.twig" %}
+  {% if posts.prev_page %}
+  <!-- Navigation -->
+  <div role="navigation" class="prev traversal">${ posts.prev_link( ( "Newer posts" | translate ) ) }</div> 
+  {% endif %}
+  <!-- Content -->
+  <div id="main" role="main">
+{% block content %}{% endblock %}
+  </div>
+  {% if posts.next_page %}
+  <!-- Navigation -->
+  <div role="navigation" class="next traversal">${ posts.next_link( ( "Older posts" | translate ) ) }</div>
+  {% endif %}
+  <!-- Footer -->
+  <div id="tail">
+    <ul role="navigation" class="navigation tail_nav">
+    {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Index" | translate }</a></li>{% endif %}
+    {% if theme.pages_list %}
+      {% for item in theme.pages_list %}
+        {% if item.page.depth == 1 %}
+      <li class="page{% if item.has_children %} parent{% endif %}"><a href="$item.page.url">$item.page.title</a></li>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+      <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">${ "Email" | translate }</a></li>
+      <li><a href="{% url "feed" %}" rel="alternate">${ "Feed" | translate }</a></li>
+      {% if theme.archives_list %}<li><a href="{% url 'archive/%s/' | format((theme.archives_list | first).year) %}" rel="archives">${ "Archive" | translate }</a></li>{% endif %}
+      {% if visitor.group.can("change_settings", "toggle_extensions") %}
+      <li><a href="$site.chyrp_url/admin/">${ "Admin" | translate }</a></li>
+      {% elseif visitor.group.can("add_post") %}
+      <li><a href="{% admin "write_post" %}">${ "Write" | translate }</a></li>
+      {% elseif visitor.group.can("add_draft") %}
+      <li><a href="{% admin "write_post" %}">${ "Draft" | translate }</a></li>
+      {% endif %}
+      {% if visitor.logged_in %}
+        <li><a href="{% url "controls" %}">${ "Controls" | translate }</a></li>
+        <li><a href="{% url "logout" %}">${ "Log out" | translate }</a></li>
+      {% else %}
+        {% if site.can_register %}
+        <li><a href="{% url "register" %}">${ "Register" | translate }</a></li>
+        {% endif %}
+        <li><a href="{% url "login" %}">${ "Log in" | translate }</a></li>
+      {% endif %}
+    </ul>
+  </div>
+${ trigger.call("end_content") }
+</body>
+
+<!-- Queries: $sql_queries | Load Time: $theme.load_time -->
+{% if debug and visitor.group.name == "Admin" %}
+<!--
+{% for debug in sql_debug %}
+${ debug.query | replace("\t", "    ") | escape }
+${ "Called from %s on line %d at %ss." | translate | format(debug.file, debug.line, debug.time) }
+{% endfor %}
+-->
+{% endif %}
+</html>
