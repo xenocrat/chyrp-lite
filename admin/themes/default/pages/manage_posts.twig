@@ -17,7 +17,7 @@
                     <div class="detail_multiple">
                         <h3>${ "Browse by month:" | translate }</h3>
                         <select name="month" onchange="${ " $(this).parents('form.detail').submit()" }">
-                            <option value="">----------</option>
+                            <option value="">${ "[All]" | translate }</option>
                             {% for archive in theme.archives_list %}
                             <option value="${ archive.when | strftime("%Y-%m") }"${ GET.month | option_selected(archive.when | strftime("%Y-%m")) }>${ archive.when | strftime("%B %Y") } ($archive.count)</option>
                             {% endfor %}
