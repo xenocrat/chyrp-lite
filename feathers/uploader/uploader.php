@@ -5,7 +5,7 @@
                                   "type" => "file",
                                   "multiple" => "true",
                                   "label" => __("Files", "uploader"),
-                                  "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')))));
+                                  "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')), "uploader")));
             $this->setField(array("attr" => "title",
                                   "type"=> "text",
                                   "label" => __("Title", "uploader"),

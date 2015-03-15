@@ -22,6 +22,14 @@
                                                 font-weight: normal;
                                                 font-style: italic;
 }
+
+@font-face {
+                                                font-family: 'Open Sans webfont';
+                                                src: url('../../../fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                                                     url('../../../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                                                font-weight: bold;
+                                                font-style: italic;
+}
 /* @end */
 
 /* @group Reset */

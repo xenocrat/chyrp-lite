@@ -9,7 +9,7 @@
             $this->setField(array("attr" => "video",
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
-                                  "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')))));
+                                  "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')), "video")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "video"),

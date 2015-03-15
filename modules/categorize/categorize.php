@@ -80,7 +80,7 @@
             $categories = Category::getCategory();
     
             $fields_list[0]["value"] = "0";
-            $fields_list[0]["name"] = "- None -";
+            $fields_list[0]["name"] = __("[None]", "categorize");
             if (!isset($post->category_id))
                 $fields_list[0]["selected"] = true;
     

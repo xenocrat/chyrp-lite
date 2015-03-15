@@ -4,7 +4,7 @@ require "optparse"
 
 OPTIONS = {
   :project => "Chyrp Lite",
-  :maintainer => "Xenocrat <hello@xenocrat.net>",
+  :maintainer => "xenocrat <hello@xenocrat.net>",
   :domain => nil,
   :msgstr => "",
   :msgstr_filter => "",

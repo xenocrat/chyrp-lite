@@ -22,6 +22,14 @@
                                                     font-style: italic;
 }
 
+@font-face {
+                                                    font-family: 'Open Sans webfont';
+                                                    src: url('../../../fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                                                         url('../../../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                                                    font-weight: bold;
+                                                    font-style: italic;
+}
+
 *::-moz-selection {                                 color: #ffffff;
                                                     background-color: #42a66a }
 *::selection {                                      color: #ffffff;
@@ -524,6 +532,8 @@ a:active {                                          color: #d94c7b;
     a.like:hover > img, a.liked:hover > img,
     a.like:focus > img, a.liked:focus > img,
     a.like:active > img, a.liked:active > img {     opacity: 1 }
+    a.like > span.like, a.like > span.unlike,
+    a.liked > span.like, a.liked > span.unlike {    margin-right: 0.25em }
     a.archive_post_link {                           display: block;
                                                     position: absolute;
                                                     top: 0px;

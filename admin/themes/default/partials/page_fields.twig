@@ -16,7 +16,7 @@ ${ trigger.call("after_page_fields") }
                             <p class="more_options_option">
                                 <label for="parent_id">${ "Parent" | translate }</label>
                                 <select name="parent_id" id="parent_id">
-                                    <option value="0">----------</option>
+                                    <option value="0">${ "[None]" | translate }</option>
                                     {% for item in theme.pages_list(0, page.id) %}
                                     <option value="$item.page.id"${ page.parent_id | option_selected(item.page.id) }>${ "&mdash;" | repeat(item.page.depth - 1) } ${ item.page.title | escape }</option>
                                     {% endfor %}
