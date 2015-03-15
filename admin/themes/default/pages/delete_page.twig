@@ -1,9 +1,9 @@
 {% extends "layout.twig" %}
 
-{% block title %}${ "Delete Page &#8220;%s&#8221;?" | translate | format(page.title | escape) }{% endblock %}
+{% block title %}${ "Delete Page &#8220;%s&#8221;?" | translate | format(page.title | strip_tags) }{% endblock %}
 
 {% block content %}
-            <h1>${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title) }</h1>
+            <h1>${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title | strip_tags) }</h1>
             <form class="split" action="{% admin "destroy_page" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     {% if page.children %}

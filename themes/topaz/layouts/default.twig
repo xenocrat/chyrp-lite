@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-type" content="$theme.type; charset=utf-8">
-  <title>{% block title %}$site.name{% if ( route.action == "index" ) and ( site.description ) %}: $site.description{% endif %}{% if title %} &raquo; ${ title | escape }{% endif %}{% endblock %}</title>
+  <title>{% block title %}$site.name{% if ( route.action == "index" ) and ( site.description ) %}: $site.description{% endif %}{% if title %} &raquo; ${ title | strip_tags }{% endif %}{% endblock %}</title>
   <meta name="description" content="$site.description">
   <meta name="generator" content="Chyrp">
   <meta http-equiv="Content-Script-Type" content="text/javascript">

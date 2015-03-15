@@ -1,9 +1,9 @@
 {% extends "layout.twig" %}
 
-{% block title %}${ "Edit &#8220;%s&#8221;" | translate | format(page.title | escape) }{% endblock %}
+{% block title %}${ "Edit &#8220;%s&#8221;" | translate | format(page.title | strip_tags) }{% endblock %}
 
 {% block content %}
-            <h1>${ "Editing &#8220;%s&#8221;" | translate | format(page.title) }</h1>
+            <h1>${ "Editing &#8220;%s&#8221;" | translate | format(page.title | strip_tags) }</h1>
             <form id="edit_form" action="{% admin "update_page" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <fieldset>
 {% include "partials/page_fields.twig" %}
