@@ -248,7 +248,7 @@
         set_error_handler("error_panicker");
 
     # Redirect to the installer if there is no config.
-    if (!file_exists(INCLUDES_DIR."/config.yaml.php"))
+    if (!file_exists(INCLUDES_DIR."/config.json.php"))
         redirect("install.php");
 
     # Start the timer that keeps track of Chyrp's load time.

@@ -930,7 +930,7 @@
             $url = (ADMIN or $use_chyrp_url) ?
                        Config::current()->chyrp_url.$url :
                        Config::current()->url.$url ;
-        elseif (file_exists(INCLUDES_DIR."/config.yaml.php") and class_exists("Route") and !substr_count($url, "://"))
+        elseif (file_exists(INCLUDES_DIR."/config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
         header("Location: ".html_entity_decode($url));
