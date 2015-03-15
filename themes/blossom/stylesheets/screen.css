@@ -105,12 +105,12 @@ pre {                                               font-family: monospace;
 code {                                              font-family: monospace;
                                                     font-size: 0.75em;
                                                     font-style: normal;
+                                                    color: #4e5a66;
                                                     padding: 0.2em 0.4em;
                                                     margin: 0.2em 0em;
-                                                    border-radius: 0.4em;
+                                                    border-radius: 0.2em;
                                                     display: inline-block;
-                                                    background-color: #f7f5ed;
-                                                    border: 1px solid #c6ccc8 }
+                                                    background-color: #f7f5ed }
 hr {                                                width: 100%;
                                                     border: none;
                                                     clear: both;
