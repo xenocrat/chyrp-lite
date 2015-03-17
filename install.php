@@ -65,7 +65,7 @@
     $errors = array();
     $installed = false;
 
-    if (file_exists(INCLUDES_DIR."/config.yaml.php") and file_exists(MAIN_DIR."/.htaccess")) {
+    if (file_exists(INCLUDES_DIR."/config.json.php") and file_exists(MAIN_DIR."/.htaccess")) {
         $sql = SQL::current(true);
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
             error(__("Already Installed"), __("Chyrp is already correctly installed and configured."));

@@ -45,6 +45,9 @@
      * Returns what config file their install is set up for.
      */
     function config_file() {
+        if (file_exists(INCLUDES_DIR."/config.json.php"))
+            return INCLUDES_DIR."/config.json.php";
+
         if (file_exists(INCLUDES_DIR."/config.yaml.php"))
             return INCLUDES_DIR."/config.yaml.php";
 
@@ -82,8 +85,16 @@
         return (basename(config_file()) != "config.php" and basename(database_file()) != "database.php") or !database_file();
     }
 
+    /**
+     * Function: using_json
+     * Are they using JSON config storage?
+     */
+    function using_json() {
+        return file_exists(INCLUDES_DIR."/config.json.php");
+    }
+
     # Evaluate the code in their config files, but with the classes renamed, so we can safely retrieve the values.
-    if (!using_yaml()) {
+    if (!using_json() and !using_yaml()) {
         eval(str_replace(array("<?php", "?>", "Config"),
                          array("", "", "OldConfig"),
                          file_get_contents(config_file())));
@@ -125,6 +136,10 @@
         static $yaml = array("config" => array(),
                              "database" => array());
 
+        # Variable: $json
+        # Holds all of the JSON settings as a $key => $val array.
+        static $json = array();
+
         /**
          * Function: get
          * Returns a config setting.
@@ -133,7 +148,11 @@
          *     $setting - The setting to return.
          */
         static function get($setting) {
-            return (isset(Config::$yaml["config"][$setting])) ? Config::$yaml["config"][$setting] : false ;
+            if (using_json()) {
+                return (isset(Config::$json[$setting])) ? Config::$json[$setting] : false ;
+            } else {
+                return (isset(Config::$yaml["config"][$setting])) ? Config::$yaml["config"][$setting] : false ;
+            }
         }
 
         /**
@@ -151,13 +170,19 @@
             if (!isset($message))
                 $message = _f("Setting %s to %s...", array($setting, normalize(print_r($value, true))));
 
-            Config::$yaml["config"][$setting] = $value;
+            if (using_json()) {
+                Config::$json[$setting] = $value;
+                $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT);
 
-            $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                echo $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+            } else {
+                Config::$yaml["config"][$setting] = $value;
+                $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                $dump = $protection.YAML::dump(Config::$yaml["config"]);
 
-            $dump = $protection.YAML::dump(Config::$yaml["config"]);
-
-            echo $message.test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+                echo $message.test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+            }
         }
 
         /**
@@ -168,7 +193,11 @@
          *     $setting - Name of the config to check.
          */
         static function check($setting) {
-            return (isset(Config::$yaml["config"][$setting]));
+            if (using_json()) {
+                return (isset(Config::$json[$setting]));
+            } else {
+                return (isset(Config::$yaml["config"][$setting]));
+            }
         }
 
         /**
@@ -198,27 +227,34 @@
         static function remove($setting) {
             if (!self::check($setting)) return;
 
-            unset(Config::$yaml["config"][$setting]);
+            if (using_json()) {
+                unset(Config::$json[$setting]);
+                $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT);
 
-            $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                echo _f("Removing %s setting...", array($setting)).
+                     test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+            } else {
+                unset(Config::$yaml["config"][$setting]);
+                $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                $dump = $protection.YAML::dump(Config::$yaml["config"]);
 
-            $dump = $protection.YAML::dump(Config::$yaml["config"]);
-
-            echo _f("Removing %s setting...", array($setting)).
-                 test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+                echo _f("Removing %s setting...", array($setting)).
+                     test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+            }
         }
     }
 
-    if (using_yaml()) {
+    if (using_json()) {
+        Config::$json = json_decode(utf8_encode(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(config_file()))), true);
+    } elseif (using_yaml()) {
         Config::$yaml["config"] = YAML::load(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(config_file())));
-
         if (database_file())
             Config::$yaml["database"] = YAML::load(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(database_file())));
         else
             Config::$yaml["database"] = oneof(@Config::$yaml["config"]["sql"], array());
     } else {
         # $config and $sql here are loaded from the eval()'s above.
-
         foreach ($config as $name => $val)
             Config::$yaml["config"][$name] = $val;
 
@@ -986,6 +1022,10 @@
         if (file_exists(INCLUDES_DIR."/bookmarklet.php"))
             echo __("Removing `includes/bookmarklet.php` file...").
                  test(@unlink(INCLUDES_DIR."/bookmarklet.php"));
+
+        if (file_exists(INCLUDES_DIR."/config.yaml.php") and file_exists(INCLUDES_DIR."/config.json.php"))
+            echo __("Removing `includes//config.yaml.php` file...").
+                 test(@unlink(INCLUDES_DIR."/config.yaml.php"));
     }
 
     /**
@@ -1165,6 +1205,37 @@
         }
     }
 
+    /**
+     * Function: yaml_to_json
+     * Migrates configuration file format from YAML to JSON.
+     *
+     * Versions: 2015.03.15 => ????.??.??
+     */
+    function yaml_to_json() {
+        if (!using_json()) {
+            Config::$json = Config::$yaml["config"];
+
+            # Rebuild enabled_modules as a simple array
+            Config::$json["enabled_modules"] = array();
+
+            foreach (Config::$yaml["config"]["enabled_modules"] as $module)
+                Config::$json["enabled_modules"][] = $module;
+
+            # Rebuild enabled_feathers as a simple array
+            Config::$json["enabled_feathers"] = array();
+
+            foreach (Config::$yaml["config"]["enabled_feathers"] as $feather)
+                Config::$json["enabled_feathers"][] = $feather;
+
+            # Write JSON to file
+            $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+            $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT);
+
+            echo __("Migrating config to `config.json.php`...").
+                $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -1320,8 +1391,13 @@
         $sql = SQL::current();
 
         # Set the SQL info.
-        foreach (Config::$yaml["config"]["sql"] as $name => $value)
-            $sql->$name = $value;
+        if (using_json()) {
+            foreach (Config::$json["sql"] as $name => $value)
+                $sql->$name = $value;
+        } else {
+            foreach (Config::$yaml["config"]["sql"] as $name => $value)
+                $sql->$name = $value;
+        }
 
         # Initialize connection to SQL server.
         $sql->connect();
@@ -1353,6 +1429,8 @@
         add_group_id_to_permissions();
 
         group_permissions_to_db();
+
+        yaml_to_json();
 
         remove_old_files();
 
