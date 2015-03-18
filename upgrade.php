@@ -1288,8 +1288,8 @@
             pre.pane {
                 height: 15em;
                 overflow-y: auto;
-                margin: -2.68em -2.68em 4em;
-                padding: 2.5em;
+                margin: -2.68em -2em 4em;
+                padding: 2em;
                 background: #333;
                 color: #fff;
                 border-top-left-radius: 2.5em;
