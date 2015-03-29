@@ -37,9 +37,9 @@
       <hr>
     {% endfor %}
     </div>
-    {% if archives_prec.no_results == false %} {# Link to a previous year if we found a post preceeding this archive #}
+    {% if preceeding.no_results == false %} {# Link to a previous year if we found a post preceeding this archive #}
     <div role="navigation" class="next traversal">
-        <a href="{% url 'archive/%s/' | format(archives_prec.created_at | strftime('%Y')) %}">${ "Archive of %s" | translate | format(archives_prec.created_at | strftime('%Y')) }</a>
+        <a href="{% url 'archive/%s/' | format(preceeding.created_at | strftime('%Y')) %}">${ "Archive of %s" | translate | format(preceeding.created_at | strftime('%Y')) }</a>
     </div>
     {% endif %}
   {% endif %}
