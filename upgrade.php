@@ -1288,7 +1288,7 @@
             pre.pane {
                 height: 15em;
                 overflow-y: auto;
-                margin: -2.68em -2em 4em;
+                margin: -2.68em -2em 2em;
                 padding: 2em;
                 background: #333;
                 color: #fff;

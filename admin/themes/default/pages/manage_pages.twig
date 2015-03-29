@@ -73,8 +73,8 @@ ${ trigger.call("manage_pages_column", page) }
             </table>
             {% if pages.paginated and pages.pages > 1 %}
             <div class="pagination">
-                $pages.prev_link
                 <span class="pages">${ "Page %d of %s" | translate | format(pages.page, pages.final_link(pages.pages)) }</span>
+                $pages.prev_link
                 $pages.next_link
             </div>
             {% endif %}

@@ -30,7 +30,6 @@ ${ trigger.call("admin_head") }
         </div>
         <div id="welcome" role="banner">
                 <span class="hello">${ "Hello, %s!" | translate | format(visitor.full_name | split | first | fallback(visitor.login | fallback("Guest" | translate))) }</span>
-                <a id="welcome_viewsite" href="$site.url">${ "View Site" | translate }</a>
                 <a id="welcome_logout" href="{% url "/?action=logout" %}">${ "Log Out" | translate }</a>
         </div>
         <ul id="sub_nav" role="navigation" class="${ route.action }_nav ">

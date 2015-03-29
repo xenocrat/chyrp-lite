@@ -128,18 +128,10 @@ img.logo {                                      width: 24px;
 #header #navigation li a:focus {                background-color: #ffffff;
                                                 color: #4a4747;
                                                 text-decoration: none }
-#welcome {                                      background-color: #f2fbff;
+#welcome {                                      background-color: #ffffff;
                                                 padding: 0em 4em;
                                                 line-height: 3em;
-                                                border-top: 1px solid #b8cdd9;
-                                                border-bottom: 1px solid #b8cdd9 }
-#welcome a {                                    display: inline-block;
-                                                text-decoration: none;
-                                                margin: 0em;
-                                                padding: 0em 1em;
-                                                border-right: 1px solid #b8cdd9 }
-#welcome #welcome_viewsite {                    margin-left: 1em;
-                                                border-left: 1px solid #b8cdd9 }
+                                                border-bottom: 1px solid #dfdfdf }
 #content ul li {                                list-style: disc inside }
 /* @end */
 
@@ -193,12 +185,11 @@ img.logo {                                      width: 24px;
                                                 overflow: hidden }
 div.pagination {                                clear: both;
                                                 text-align: center;
-                                                margin-top: 4em }
+                                                margin-top: 1em }
 a.prev_page,
 a.next_page {                                   min-width: 10em }
-span.pages {                                    margin: 0em 1em }
-span.pages:first-child {                        margin: 0em 1em 0em 14em }
-span.pages:last-child {                         margin: 0em 14em 0em 1em }
+span.pages {                                    display: block;
+                                                margin-bottom: 1em }
 /* @end */
 
 /* @group Extend */
@@ -354,7 +345,7 @@ table {                                         width: 100%;
                                                 margin: 0em 0em 1em 0em;
                                                 overflow-x: scroll;
                                                 -webkit-overflow-scrolling: touch }
-table:last-child {                              margin-bottom: 0em }
+table:last-child, table.interactive {           margin-bottom: 0em }
 table thead tr {                                background-color: #4f4f4f;
                                                 color: #ffffff;
                                                 border: 1px solid #4f4f4f }
@@ -373,6 +364,7 @@ table tbody tr td.controls {                    text-align: center;
 table tbody tr td.controls {                    width: 4em }
 table thead tr th.post_title,
 table tbody tr td.post_title,
+table thead tr th.post_tags,
 table tbody tr td.post_tags {                   text-align: left }
 table thead tr th.post_date,
 table thead tr th.post_status,
@@ -472,7 +464,7 @@ a.prev_page {                                   -moz-box-sizing: border-box;
                                                 text-decoration: none;
                                                 line-height: 1.25em;
                                                 margin: 0em;
-                                                padding: 0.4em 0.6em 0.5em 0.6em;
+                                                padding: 0.4em 0.6em;
                                                 background-color: #f2fbff;
                                                 border: 1px solid #b8cdd9;
                                                 border-radius: 0.3em;
@@ -512,8 +504,7 @@ a.button.yay:focus,
 button.yay:active,
 a.button.yay:active {                           border-color: #189100 }
 button > img,
-a.button > img {                                margin-right: 4px;
-                                                position: relative;
+a.button > img {                                position: relative;
                                                 top: 2px;
                                                 width: 16px;
                                                 height: 16px }
@@ -591,6 +582,10 @@ div.more_options hr {                           margin: 0em;
 /* @end */
 
 /* @group Helpers & General */
+table.interactive + div.controls {              background-color: #fffecd;
+                                                padding: 1em;
+                                                border: 1px solid #dfdfdf;
+                                                border-top: none }
 div.controls h4 {                               display: inline }
 div.controls input {                            padding: 0.4em }
 div.confirmation {                              text-align: center;
@@ -694,10 +689,7 @@ img.overlay_close_gadget {                      display: block;
                                                 margin-right: 1% }
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
-    #welcome {                                  padding: 0em }
-    #welcome a {                                padding: 0em 2em;
-                                                line-height: 4em }
-    span.hello {                                display: none }
+    #welcome {                                  padding: 0em 1em }
     #sub_nav li {                               -moz-box-sizing: border-box;
                                                 box-sizing: border-box;
                                                 width: 50%;
@@ -766,7 +758,9 @@ img.overlay_close_gadget {                      display: block;
     table tbody tr td.checkbox,
     table tbody tr td.show_on_home {            min-width: 64px }
     table tbody tr td.main {                    min-width: 480px }
-    table tbody tr:last-child td {              border-bottom: none }
+    table tbody tr:last-child td,
+    table tbody tr td[rowspan="2"] {            border-bottom: none }
+
     table tbody tr td:first-child {             border-left: none }
     table tbody tr td:last-child {              border-right: none }
     .boo, .yay, button, a.button,
@@ -780,10 +774,8 @@ img.overlay_close_gadget {                      display: block;
                                                 -moz-box-sizing: border-box !important;
                                                 box-sizing: border-box !important }
     .boo.message, .yay.message {                margin: 0em 0em 1em 0em !important }
-    span.pages {                                display: inline-block;
-                                                margin-top: 1em}
-    span.pages:first-child {                    margin-left: 1em }
-    span.pages:last-child {                     margin-right: 1em }
+    span.pages {                                margin-top: 1em }
+    div.controls h4 {                           display: block }
     div.detail_multiple {                       width: 100%;
                                                 float: none;
                                                 clear: both;
