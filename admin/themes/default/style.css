@@ -98,40 +98,56 @@ img.logo {                                      width: 24px;
 #header {                                       background-color: #4f4f4f;
                                                 padding: 2em 0em 3em 0em;
                                                 color: #efefef;
+                                                text-align: center;
                                                 position: relative }
 #header h1 {                                    font-weight: normal;
-                                                margin: 0em 1em 0.5em 2em }
+                                                margin: 0em 1em 1em 1em }
 #header h1 a {                                  color: #ffffff;
                                                 text-decoration: none }
-#header #navigation {                           float: right;
-                                                position: absolute;
-                                                bottom: 0;
+
+
+
+
+
+
+#header #navigation {                           position: absolute;
+                                                bottom: 0em;
+                                                left: 4em;
                                                 right: 4em }
-#header #navigation li {                        display: inline }
-#header #navigation li a {                      float: left;
-                                                margin-left: 1em;
+#header #navigation li {                        display: block }
+#header #navigation li a {                      -moz-box-sizing: border-box;
+                                                box-sizing: border-box;
+                                                display: block;
+                                                float: left;
+                                                width: 24%;
+                                                margin-left: 0em;
+                                                margin-right: 1%;
+                                                padding: 0em 1em;
                                                 height: 3em;
                                                 line-height: 3em;
-                                                width: 8em;
                                                 text-align: center;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
                                                 text-decoration: none;
                                                 border-top-left-radius: 0.8em;
                                                 border-top-right-radius: 0.8em }
-#header #navigation li:first-child a {          margin-left: 0em }
+#header #navigation li:last-child a {           width: 25%;
+                                                margin-right: 0% }
+
+
+
+
 #header #navigation li a:link,
-#header #navigation li a:visited {              background-color: #dfdfdf;
+#header #navigation li a:visited {              background-color: #cfcfcf;
                                                 color: #5f5f5f;
                                                 text-decoration: none }
 #header #navigation li.selected a:link,
 #header #navigation li.selected a:visited,
 #header #navigation li a:hover,
-#header #navigation li a:focus {                background-color: #ffffff;
+#header #navigation li a:focus {                background-color: #efefef;
                                                 color: #4a4747;
                                                 text-decoration: none }
-#welcome {                                      background-color: #ffffff;
-                                                padding: 0em 4em;
-                                                line-height: 3em;
-                                                border-bottom: 1px solid #dfdfdf }
 #content ul li {                                list-style: disc inside }
 /* @end */
 
@@ -143,10 +159,12 @@ img.logo {                                      width: 24px;
 #footer small.copyright {                       display: block;
                                                 margin-top: 1em;
                                                 font-size: .8em }
+#welcome_logout {                               display: block;
+                                                margin-top: 1em }
 /* @end */
 
 /* @group Sub-Navigation */
-#sub_nav {                                      margin: 2em 4em 0em 4em }
+#sub_nav {                                      margin: 4em 4em 0em 4em }
 #sub_nav li {                                   display: block;
                                                 float: left;
                                                 position: relative;
@@ -155,9 +173,12 @@ img.logo {                                      width: 24px;
                                                 text-decoration: none;
                                                 font-size: 0.8em;
                                                 line-height: 3em;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
                                                 margin: 0em 0.5em 0em 0em;
                                                 padding: 0em 1em;
-                                                border: 1px solid transparent;
+                                                border: 1px solid #cfcfcf;
                                                 border-bottom: none;
                                                 border-top-left-radius: 0.8em;
                                                 border-top-right-radius: 0.8em }
@@ -507,7 +528,8 @@ button > img,
 a.button > img {                                position: relative;
                                                 top: 2px;
                                                 width: 16px;
-                                                height: 16px }
+                                                height: 16px;
+                                                margin-right: 4px }
 button[disabled="disabled"],
 button.disabled {                               background-color: #efefef;
                                                 border-color: #dfdfdf;
@@ -675,13 +697,8 @@ img.overlay_close_gadget {                      display: block;
 
 /* @media-query for small screens */
 @media screen and (max-width: 768px) {
-    #header {                                   text-align: center;
-                                                padding-bottom: 5em }
     #footer {                                   width: 100% }
-    #header #navigation {                       float: none;
-                                                position: absolute;
-                                                bottom: 0;
-                                                left: 0em;
+    #header #navigation {                       left: 0em;
                                                 right: 0em }
     #header #navigation li a {                  display: block;
                                                 width: 24%;
@@ -689,7 +706,6 @@ img.overlay_close_gadget {                      display: block;
                                                 margin-right: 1% }
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
-    #welcome {                                  padding: 0em 1em }
     #sub_nav li {                               -moz-box-sizing: border-box;
                                                 box-sizing: border-box;
                                                 width: 50%;
@@ -704,11 +720,10 @@ img.overlay_close_gadget {                      display: block;
                                                 float: left;
                                                 width: 100%;
                                                 margin: 0em;
-                                                padding: 0em 0em 2em 1em;
-                                                font-size: 1em;
-                                                border: 1px solid #bfbfbf !important }
+                                                padding: 0em 1em 2em 1em;
+                                                font-size: 1em }
     #sub_nav li:nth-child(odd) a {              border-right: none !important }
-    #sub_nav li:nth-child(odd):last-child a {   border-right: 1px solid #bfbfbf !important }
+    #sub_nav li:nth-child(odd):last-child a {   border-right: 1px solid #cfcfcf !important }
     #sub_nav {                                  margin-top: 1em }
     #sub_nav, #content {                        margin-left: 1em;
                                                 margin-right: 1em }
