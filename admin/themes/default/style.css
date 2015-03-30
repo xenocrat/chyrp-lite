@@ -115,8 +115,7 @@ img.logo {                                      width: 24px;
                                                 left: 4em;
                                                 right: 4em }
 #header #navigation li {                        display: block }
-#header #navigation li a {                      -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+#header #navigation li a {                      box-sizing: border-box;
                                                 display: block;
                                                 float: left;
                                                 width: 24%;
@@ -152,15 +151,16 @@ img.logo {                                      width: 24px;
 /* @end */
 
 /* @group Footer */
-#footer {                                       width: 100%;
+#footer {                                       box-sizing: border-box;
+                                                width: 100%;
                                                 margin: 2em auto;
+                                                padding: 0em 2em;
                                                 text-align: center;
                                                 color: #b3b5b5 }
-#footer small.copyright {                       display: block;
+#footer small.metadata {                        display: block;
                                                 margin-top: 1em;
                                                 font-size: .8em }
-#welcome_logout {                               display: block;
-                                                margin-top: 1em }
+#logout {                                       margin-top: 1em }
 /* @end */
 
 /* @group Sub-Navigation */
@@ -214,16 +214,14 @@ span.pages {                                    display: block;
 /* @end */
 
 /* @group Extend */
-#content ul.extend {                            -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+#content ul.extend {                            box-sizing: border-box;
                                                 width: 100%;
                                                 clear: both }
 #content ul#modules_enabled,
 #content ul#feathers_enabled {                  clear: both;
                                                 float: left }
 #content ul.extend > h5:only-child {            display: none }
-#content ul.extend > li {                       -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+#content ul.extend > li {                       box-sizing: border-box;
                                                 display: block;
                                                 width: 100%;
                                                 min-height: 4em;
@@ -297,8 +295,7 @@ label {                                         line-height: 2em }
 input[type="text"],
 input[type="number"],
 input[type="password"],
-textarea {                                      -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+textarea {                                      box-sizing: border-box;
                                                 width: 10em;
                                                 font-size: 1.25em;
                                                 padding: 0.2em;
@@ -321,8 +318,7 @@ input.code,
 textarea.code,
 code {                                          font-family: monospace;
                                                 font-style: normal }
-select {                                        -moz-box-sizing: border-box;
-                                                box-sizing: border-box }
+select {                                        box-sizing: border-box }
 form.delete blockquote {                        margin: 0em 4em 1em 4em;
                                                 font-style: italic }
 form.delete blockquote h2 {                     font-style: normal;
@@ -331,8 +327,7 @@ form.split p {                                  line-height: 2em }
 form.split > fieldset > p,
 form.split > fieldset > div {                   clear: both }
 form.split label,
-form.split h5 {                                 -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+form.split h5 {                                 box-sizing: border-box;
                                                 width: 45%;
                                                 float: left;
                                                 color: #7f7f7f;
@@ -476,8 +471,7 @@ p.message a:active {                            color: #ffffff;
 button,
 a.button,
 a.next_page,
-a.prev_page {                                   -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+a.prev_page {                                   box-sizing: border-box;
                                                 display: inline-block;
                                                 font-family: inherit;
                                                 font-size: 1.25em;
@@ -574,12 +568,10 @@ a.more_options_link {                           font-weight: bold;
                                                 text-decoration: none;
                                                 margin-top: 2em;
                                                 padding-bottom: 1em }
-div.more_options {                              -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+div.more_options {                              box-sizing: border-box;
                                                 margin: 0em;
                                                 padding: 1em }
-div.more_options > .more_options_option {       -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+div.more_options > .more_options_option {       box-sizing: border-box;
                                                 display: block;
                                                 width: 50%;
                                                 margin: 0em;
@@ -644,8 +636,7 @@ div.overlay_background {                        display: block;
                                                 top: 0px;
                                                 left: 0px;
                                                 background-color: rgba(79, 79, 79, 0.5) }
-iframe.overlay_help, div.overlay_preview {      -moz-box-sizing: border-box;
-                                                box-sizing: border-box;    
+iframe.overlay_help, div.overlay_preview {      box-sizing: border-box;    
                                                 display: block;
                                                 position: absolute;
                                                 width: 80%;
@@ -697,7 +688,6 @@ img.overlay_close_gadget {                      display: block;
 
 /* @media-query for small screens */
 @media screen and (max-width: 768px) {
-    #footer {                                   width: 100% }
     #header #navigation {                       left: 0em;
                                                 right: 0em }
     #header #navigation li a {                  display: block;
@@ -706,16 +696,14 @@ img.overlay_close_gadget {                      display: block;
                                                 margin-right: 1% }
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
-    #sub_nav li {                               -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+    #sub_nav li {                               box-sizing: border-box;
                                                 width: 50%;
                                                 height: 3em;
                                                 text-align: center;
                                                 overflow: visible }
     #sub_nav li:nth-child(odd) {                clear: both }
     #sub_nav li:nth-child(odd):last-child {     width: 100% }
-    #sub_nav li a {                             -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+    #sub_nav li a {                             box-sizing: border-box;
                                                 display: block;
                                                 float: left;
                                                 width: 100%;
@@ -745,8 +733,7 @@ img.overlay_close_gadget {                      display: block;
     input[type="number"],
     input[type="password"],
     input.file,
-    textarea {                                  -moz-box-sizing: border-box;
-                                                box-sizing: border-box;
+    textarea {                                  box-sizing: border-box;
                                                 margin-left: 0em !important;
                                                 margin-right: 0em !important;
                                                 width: 100% !important;
@@ -760,7 +747,6 @@ img.overlay_close_gadget {                      display: block;
     a.emblem > img,
     img.emblem {                                margin-right: 8px }
     table {                                     display: block;
-                                                -moz-box-sizing: border-box;
                                                 box-sizing: border-box;
                                                 width: 100%;
                                                 overflow-x: scroll;
@@ -778,6 +764,7 @@ img.overlay_close_gadget {                      display: block;
 
     table tbody tr td:first-child {             border-left: none }
     table tbody tr td:last-child {              border-right: none }
+    table.interactive + div.controls {          padding: 4em }
     .boo, .yay, button, a.button,
     a.prev_page, a.next_page {                  float: none !important;
                                                 clear: both !important;
@@ -786,7 +773,6 @@ img.overlay_close_gadget {                      display: block;
                                                 margin: 1em 0em 0em 0em !important;
                                                 padding: 1em !important;
                                                 text-align: center !important;
-                                                -moz-box-sizing: border-box !important;
                                                 box-sizing: border-box !important }
     .boo.message, .yay.message {                margin: 0em 0em 1em 0em !important }
     span.pages {                                margin-top: 1em }
