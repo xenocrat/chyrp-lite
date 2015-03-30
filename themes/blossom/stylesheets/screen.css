@@ -566,12 +566,11 @@ img {                                               border-style: none;
                                                     overflow: hidden;
                                                     border-bottom: none;
                                                     box-sizing: border-box;
-                                                    -moz-transition: height 250ms ease 0s;
-                                                    -webkit-transition: height 250ms ease 0s;
                                                     transition: height 250ms ease 0s }
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
                                                     border-bottom: 1px solid #d2d9d4 }
+    ul.tail_nav.mobile_nav.on li:first-child {      border-top: 1px solid #d2d9d4 }
     table {                                         box-sizing: border-box;
                                                     display: block }
     div#mast {                                      display: block }

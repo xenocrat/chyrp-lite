@@ -576,8 +576,6 @@ img {                                               border-style: none;
                                                     overflow: hidden;
                                                     border-bottom: none;
                                                     box-sizing: border-box;
-                                                    -moz-transition: height 250ms ease 0s;
-                                                    -webkit-transition: height 250ms ease 0s;
                                                     transition: height 250ms ease 0s }
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
