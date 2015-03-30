@@ -122,12 +122,12 @@ pre {                                               font-family: monospace;
 code {                                              font-family: monospace;
                                                     font-size: 0.75em;
                                                     font-style: normal;
-                                                    color: #4e5a66;
+                                                    color: #39434d;
+                                                    background-color: #fffefd;
                                                     padding: 0.2em 0.4em;
                                                     margin: 0.2em 0em;
                                                     border-radius: 0.2em;
-                                                    display: inline-block;
-                                                    background-color: #f2f1f0 }
+                                                    display: inline-block }
 hr {                                                width: 100%;
                                                     border: none;
                                                     clear: both;
@@ -150,7 +150,6 @@ dl {                                                list-style: none }
     dl dd {                                         margin-left: 1em }
     ul.navigation {                                 list-style: none;
                                                     font-size: 1em;
-                                                    -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
                                                     margin: 0em 0em 2em 0em;
                                                     padding: 0em;
@@ -181,8 +180,7 @@ dl {                                                list-style: none }
     ol.comments {                                   list-style: none;
                                                     padding: 0em;
                                                     margin: 0em }
-    ol.comments li {                                -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
+    ol.comments li {                                box-sizing: border-box;
                                                     display: block;
                                                     width: 100%;
                                                     margin: 0em;
@@ -214,7 +212,6 @@ form, fieldset {                                    margin: 0em;
                                                     position: relative }
     form.inline_edit {                              width: 100%;
                                                     clear: both;
-                                                    -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
                                                     background-color: #fffefd;
                                                     margin: 0rem auto 2rem auto;
@@ -226,8 +223,7 @@ form, fieldset {                                    margin: 0em;
                                                     margin-bottom: 0em;
                                                     padding: 0rem 0rem 2rem 0rem;
                                                     border: none }
-input {                                             -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
+input {                                             box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
                                                     max-width: 640px;
@@ -273,13 +269,11 @@ input:focus {                                       outline: none;
     button#search_submit:focus {                    background-image: url(../images/search_alt.svg);
                                                     outline: none }
     form.inline_edit input {                        width: 100% }
-select {                                            -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
+select {                                            box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
                                                     margin: 0.5em 0em }
-textarea {                                          -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
+textarea {                                          box-sizing: border-box;
                                                     display: block;
                                                     width: 100%;
                                                     height: 160px;
@@ -327,8 +321,7 @@ label {                                             display: block;
                                                     clear: both;
                                                     text-align: center;
                                                     margin-top: 2em }
-    div.ribbon {                                    -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
+    div.ribbon {                                    box-sizing: border-box;
                                                     width: 100%;
                                                     text-align: center;
                                                     color: #ffffff;
@@ -379,7 +372,6 @@ label {                                             display: block;
                                                     margin: 0em }
     div#main > article, div.standalone {            display: block;
                                                     position: relative;
-                                                    -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
                                                     width: 100%;
                                                     max-width: 1240px;
@@ -545,9 +537,6 @@ img {                                               border-style: none;
     div.photo_frame img {                           width: 100% }
     article img {                                   max-width: 100% }
 .ajax_loading {                                     background-size: 30px 30px;
-                                                    background-image: -webkit-linear-gradient(-45deg, #f2f1f0 25%, transparent 25%, transparent 50%, #f2f1f0 50%, #f2f1f0 75%, transparent 75%, transparent) !important;
-                                                    background-image: -moz-linear-gradient(-45deg, #f2f1f0 25%, transparent 25%, transparent 50%, #f2f1f0 50%, #f2f1f0 75%, transparent 75%, transparent) !important;
-                                                    background-image: -ms-linear-gradient(-45deg, #f2f1f0 25%, transparent 25%, transparent 50%, #f2f1f0 50%, #f2f1f0 75%, transparent 75%, transparent) !important;
                                                     background-image: linear-gradient(-45deg, #f2f1f0 25%, transparent 25%, transparent 50%, #f2f1f0 50%, #f2f1f0 75%, transparent 75%, transparent) !important;
                                                     -webkit-animation: stripes 1s linear infinite;
                                                     -moz-animation: stripes 1s linear infinite;
@@ -586,7 +575,6 @@ img {                                               border-style: none;
     ul.tail_nav.mobile_nav li {                     height: 0em;
                                                     overflow: hidden;
                                                     border-bottom: none;
-                                                    -moz-box-sizing: border-box;
                                                     box-sizing: border-box;
                                                     -moz-transition: height 250ms ease 0s;
                                                     -webkit-transition: height 250ms ease 0s;
@@ -594,8 +582,7 @@ img {                                               border-style: none;
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
                                                     border-bottom: 1px solid #d2d9d4 }
-    table {                                         -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
+    table {                                         box-sizing: border-box;
                                                     display: block }
     div#mast {                                      display: block }
     div#sidebar {                                   display: none }
@@ -612,8 +599,7 @@ img {                                               border-style: none;
 
 @media screen and (max-width: 480px) {
     ul.archive li {                                 margin-left: 0em }
-    ul.archive article.post {                       -moz-box-sizing: border-box;
-                                                    box-sizing: border-box;
+    ul.archive article.post {                       box-sizing: border-box;
                                                     width: 100%;
                                                     margin-left: 0em }
     ul.archive article.post img {                   width: 100% }
