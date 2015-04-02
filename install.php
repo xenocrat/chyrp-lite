@@ -375,31 +375,57 @@
             body {
                 font-size: 14px;
                 font-family: sans-serif;
-                color: #626262;
-                background: #e8e8e8;
+                line-height: 1.25;
+                color: #4a4747;
+                background: #efefef;
                 padding: 0em 0em 5em;
+            }
+            h1 {
+                font-size: 2em;
+                margin: 1em 0em;
+                text-align: center;
+                line-height: 1;
+            }
+            h1:first-child {
+                margin-top: 0em;
             }
             h2 {
                 font-size: 1.25em;
                 font-weight: bold;
+                margin: 0.75em 0em;
             }
-            input[type="password"], input[type="text"], textarea, select {
-                font-size: 1.25em;
-                width: 23.3em;
-                padding: .3em;
-                border: .1em solid #ddd;
-            }
+            input[type="text"],
+            input[type="number"],
+            input[type="password"],
             textarea {
-                width: 97.75%;
+                box-sizing: border-box;
+                font-size: 1.25em;
+                padding: 0.2em;
+                border: 1px solid #dfdfdf;
+                background-color: #ffffff;
+                background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
+            textarea:focus,
+            input[type="text"]:focus,
+            input[type="number"]:focus,
+            input[type="password"]:focus {
+                border-color: #1e57ba;
+                outline: none;
+            }
+            input[type="text"],
+            input[type="number"],
+            input[type="password"],
+            textarea,
             select {
                 width: 100%;
+                margin: 0em;
             }
+
             form hr {
-                border: 0em;
-                padding-bottom: 1em;
-                margin-bottom: 4em;
-                border-bottom: .1em dashed #ddd;
+                border: none;
+                clear: both;
+                border-top: 1px solid #ddd;
+                margin: 2em 0em;
             }
             form p {
                 padding-bottom: 1em;
@@ -414,13 +440,12 @@
                 margin-top: -1.5em !important;
             }
             .error {
-                padding: .6em .8em .5em 2.75em;
-                border-bottom: .1em solid #FBC2C4;
-                color: #D12F19;
-                background: #FBE3E4 url('./admin/themes/default/images/icons/failure.svg') no-repeat .7em center;
-            }
-            .error.last {
-                margin: 0em 0em 1em 0;
+                padding: 0.6em;
+                margin-bottom: 1em;
+                background-color: #d94c4c;
+                color: #ffffff;
+                border: none;
+                border-radius: 0.4em;
             }
             .window {
                 width: 30em;
@@ -429,23 +454,15 @@
                 margin: 5em auto 0em;
                 border-radius: 2em;
             }
-            h1 {
-                color: #ccc;
-                font-size: 3em;
-                margin: .25em 0em .5em;
-                text-align: center;
-                line-height: 1;
-            }
             code {
-                color: #06B;
                 font-family: monospace;
+                font-style: normal;
                 word-wrap: break-word;
             }
             label {
                 display: block;
                 font-weight: bold;
-                border-bottom: .1em dotted #ddd;
-                margin-bottom: .2em;
+                line-height: 1.5em
             }
             .footer {
                 color: #777;
@@ -457,46 +474,54 @@
                 color: #F22;
             }
             a:link, a:visited {
-                color: #6B0;
+                color: #4a4747;
+            }
+            a:hover, a:focus {
+                color: #1e57ba;
             }
             a.big,
             button {
-                background: #eee;
-                margin-top: 2em;
+                box-sizing: border-box;
                 display: block;
+                font-family: inherit;
+                font-size: 1.25em;
                 text-align: center;
-                padding: .75em 1em;
-                color: #777;
-                text-shadow: #fff .1em .1em 0em;
-                font: 1em sans-serif;
+                color: #4a4747;
                 text-decoration: none;
-                border: 0em;
+                line-height: 1.25em;
+                margin: 0.75em 0em;
+                padding: 0.4em 0.6em;
+                background-color: #f2fbff;
+                border: 1px solid #b8cdd9;
+                border-radius: 0.3em;
                 cursor: pointer;
-                border-radius: .5em;
+                text-decoration: none;
             }
             button {
                 width: 100%;
             }
-            a.big:hover,
-            button:hover {
-                background: #f5f5f5;
+            a.big:last-child,
+            button:last-child {
+                margin-bottom: 0em;
             }
+            a.big:hover,
+            button:hover,
+            a.big:focus,
+            button:focus,
             a.big:active,
             button:active {
-                background: #e0e0e0;
+                border-color: #1e57ba;
+                outline: none;
             }
             strong {
                 font-weight: normal;
                 color: #f00;
             }
-            ol {
+            ul, ol {
                 margin: 0em 0em 2em 2em;
             }
             p {
                 margin-bottom: 1em;
-            }
-            .center {
-                text-align: center;
             }
         </style>
         <script src="includes/lib/jquery.js" type="text/javascript" charset="utf-8"></script>
@@ -532,7 +557,7 @@
     </head>
     <body>
         <?php foreach ($errors as $error): ?>
-        <div class="error<?php if ($index + 1 == count($errors)) echo " last"; ?>"><?php echo $error; ?></div>
+        <div class="error"><?php echo $error; ?></div>
         <?php endforeach; ?>
         <div class="window">
         <?php if (!$installed): ?>
@@ -625,7 +650,7 @@
                     <input type="text" name="email" value="<?php value_fallback("email"); ?>" id="email">
                 </p>
 
-                <button type="submit"><?php echo __("Install! &rarr;"); ?></button>
+                <button type="submit"><?php echo __("Install!"); ?></button>
             </form>
         <?php else: ?>
             <h1><?php echo __("Done!"); ?></h1>
@@ -643,7 +668,7 @@
                 <li><a href="http://chyrp.net/extend/type/feather"><?php echo __("Find some Feathers you want."); ?></a></li>
                 <li><a href="README.markdown"><?php echo __("Read &#8220;Getting Started&#8221;"); ?></a></li>
             </ol>
-            <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site! &rarr;"); ?></a>
+            <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
         <?php endif; ?>
         </div>
     </body>

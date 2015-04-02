@@ -33,8 +33,8 @@
             body {
                 font-size: 14px;
                 font-family: sans-serif;
-                color: #626262;
-                background: #e8e8e8;
+                color: #4a4747;
+                background: #efefef;
                 padding: 0em 0em 5em;
             }
             .window {
@@ -45,26 +45,29 @@
                 border-radius: 2em;
             }
             h1 {
-                color: #ccc;
-                font-size: 3em;
-                margin: .25em 0em .5em;
+                font-size: 2em;
+                margin: 1em 0em;
                 text-align: center;
                 line-height: 1;
             }
+            h1:first-child {
+                margin-top: 0em;
+            }
             h2 {
                 font-size: 1.25em;
-                margin: 1em 0em 0em;
+                font-weight: bold;
+                margin: 0.75em 0em;
             }
             code {
-                color: #06B;
                 font-family: monospace;
+                font-style: normal;
                 word-wrap: break-word;
             }
             ul, ol {
-                margin: 1em 3em;
+                margin: 0em 0em 2em 2em;
             }
             ol.backtrace {
-                margin-top: .5em;
+                margin-top: 0.5em;
             }
             .footer {
                 color: #777;
@@ -77,37 +80,45 @@
                 font-size: 12px;
             }
             a:link, a:visited {
-                color: #6B0;
+                color: #4a4747;
             }
-            a:hover {
-                text-decoration: underline;
+            a:hover, a:focus {
+                color: #1e57ba;
             }
-            a.big {
-                background: #eee;
-                margin-top: 2em;
+            a.big,
+            button {
+                box-sizing: border-box;
                 display: block;
-                padding: .75em 1em;
-                color: #777;
-                text-shadow: #fff 1px 1px 0px;
+                font-family: inherit;
+                font-size: 1.25em;
+                text-align: center;
+                color: #4a4747;
                 text-decoration: none;
-                border-radius: .5em;
+                line-height: 1.25em;
+                margin: 0.75em 0em;
+                padding: 0.4em 0.6em;
+                background-color: #f2fbff;
+                border: 1px solid #b8cdd9;
+                border-radius: 0.3em;
+                cursor: pointer;
+                text-decoration: none;
             }
-            a.big:hover {
-                background: #f5f5f5;
+            button {
+                width: 100%;
             }
-            a.big:active {
-                background: #e0e0e0;
+            a.big:last-child,
+            button:last-child {
+                margin-bottom: 0em;
             }
-<?php if (!logged_in()): ?>
-            a.big.login {
-                float: right;
-                text-align: right;
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                background: #f5f5f5;
-                width: 42%;
+            a.big:hover,
+            button:hover,
+            a.big:focus,
+            button:focus,
+            a.big:active,
+            button:active {
+                border-color: #1e57ba;
+                outline: none;
             }
-<?php endif; ?>
             .clear {
                 clear: both;
             }
@@ -128,13 +139,13 @@
             <?php endif; ?>
                 <div class="clear"></div>
             <?php if (class_exists("Route") and !logged_in() and $body != __("Route was initiated without a Controller.")): ?>
-                <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log In"); ?> &rarr;</a>
+                <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
                 <div class="clear last"></div>
             </div>
         </div>
     <?php if (defined("CHYRP_VERSION")): ?>
-        <p class="footer">Chyrp Lite <?php echo CHYRP_VERSION; ?> &copy; Chyrp Team <?php echo date("Y"); ?></p>
+        <p class="footer">Chyrp Lite <?php echo CHYRP_VERSION; ?></p>
     <?php endif; ?>
     </body>
 </html>
