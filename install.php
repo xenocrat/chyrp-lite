@@ -657,7 +657,7 @@
             <p>
                 <?php echo __("Chyrp has been successfully installed and you have been logged in."); ?>
             </p>
-            <h2><?php echo __("So, what now?"); ?></h2>
+            <h2><?php echo __("What now?"); ?></h2>
             <ol>
                 <li><?php echo __("<strong>Delete install.php</strong>, you won't need it anymore."); ?></li>
             <?php if (!is_writable(INCLUDES_DIR."/caches")): ?>

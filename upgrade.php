@@ -1008,23 +1008,23 @@
      */
     function remove_old_files() {
         if (file_exists(INCLUDES_DIR."/config.php"))
-            echo __("Removing `includes/config.php` file...").
+            echo __("Removing `includes/config.php`...").
                  test(@unlink(INCLUDES_DIR."/config.php"));
 
         if (file_exists(INCLUDES_DIR."/database.php"))
-            echo __("Removing `includes/database.php` file...").
+            echo __("Removing `includes/database.php`...").
                  test(@unlink(INCLUDES_DIR."/database.php"));
 
         if (file_exists(INCLUDES_DIR."/rss.php"))
-            echo __("Removing `includes/rss.php` file...").
+            echo __("Removing `includes/rss.php`...").
                  test(@unlink(INCLUDES_DIR."/rss.php"));
 
         if (file_exists(INCLUDES_DIR."/bookmarklet.php"))
-            echo __("Removing `includes/bookmarklet.php` file...").
+            echo __("Removing `includes/bookmarklet.php`...").
                  test(@unlink(INCLUDES_DIR."/bookmarklet.php"));
 
         if (file_exists(INCLUDES_DIR."/config.yaml.php") and file_exists(INCLUDES_DIR."/config.json.php"))
-            echo __("Removing `includes//config.yaml.php` file...").
+            echo __("Removing `includes/config.yaml.php`...").
                  test(@unlink(INCLUDES_DIR."/config.yaml.php"));
     }
 
@@ -1230,8 +1230,10 @@
             # Write JSON to file
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
             $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT);
+            echo __("Converting config to JSON...").
+                $message.test(!json_last_error());
 
-            echo __("Migrating config to `config.json.php`...").
+            echo __("Writing `includes/config.json.php`...").
                 $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
         }
     }
@@ -1483,12 +1485,6 @@
                 <li><?php echo __("If any of your Modules or Feathers have new versions available for this release, check if an <code>upgrades.php</code> file exists in their main directory. If that file exists, run this upgrader again after enabling the Module or Feather and it will run the upgrade tasks."); ?></li>
                 <li><?php echo __("When you are done, you can delete this file. It shouldn't pose a threat, but you should delete it anyway, just to be safe and tidy."); ?></li>
             </ol>
-            <h1 class="tips"><?php echo __("Tips"); ?></h1>
-            <ul>
-                <li><?php echo __("If the admin area looks weird, try clearing your browser cache."); ?></li>
-                <li><?php echo __("Chyrp uses time zones to determine timestamps. Please set your installation to the correct timezone at the <a href=\"admin/index.php?action=general_settings\">General Settings</a> page."); ?></li>
-                <li><?php echo __("Check the permissions for your groups and pages &ndash; they might have changed."); ?></li>
-            </ul>
             <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("All done!"); ?></a>
 <?php else: ?>
             <h1><?php echo __("Halt!"); ?></h1>

@@ -57,8 +57,9 @@
                                         "",
                                         file_get_contents($this->file));
 
+                $this->json = json_decode(utf8_encode($contents), true);
                 if (json_last_error()) {
-                    Flash::warning(_f("Could not read configuration file <code>%s</code> because of JSON error: <code>%s</code>",
+                    Flash::warning(_f("Could not read <code>%s</code> because of JSON error: <code>%s</code>",
                                       array($this->file, json_last_error_msg())));
                     return false;
                 }
@@ -75,9 +76,15 @@
 
             # Generate the new JSON settings
             $contents.= json_encode($this->json, JSON_PRETTY_PRINT);
+            if (json_last_error()) {
+                Flash::warning(_f("Could not set \"<code>%s</code>\" because of JSON error: <code>%s</code>",
+                                  array($setting, json_last_error_msg())));
+                return false;
+            }
 
+            # Update the configuration file
             if (!@file_put_contents(INCLUDES_DIR."/config.json.php", $contents)) {
-                Flash::warning(_f("Could not set \"<code>%s</code>\" configuration setting because <code>%s</code> is not writable.",
+                Flash::warning(_f("Could not set \"<code>%s</code>\" because <code>%s</code> is not writable.",
                                   array($setting, "/includes/config.json.php")));
                 return false;
             } else
@@ -97,14 +104,15 @@
                                         "",
                                         file_get_contents($this->file));
 
+                $this->json = json_decode(utf8_encode($contents), true);
                 if (json_last_error()) {
-                    Flash::warning(_f("Could not read configuration file <code>%s</code> because of JSON error: <code>%s</code>",
+                    Flash::warning(_f("Could not read <code>%s</code> because of JSON error: <code>%s</code>",
                                       array($this->file, json_last_error_msg())));
                     return false;
                 }
             }
 
-            # Add the setting
+            # Remove the setting
             unset($this->json[$setting]);
 
             # Add the PHP protection!
@@ -112,8 +120,18 @@
 
             # Generate the new JSON settings
             $contents.= json_encode($this->json, JSON_PRETTY_PRINT);
+            if (json_last_error()) {
+                Flash::warning(_f("Could not remove \"<code>%s</code>\" because of JSON error: <code>%s</code>",
+                                  array($setting, json_last_error_msg())));
+                return false;
+            }
 
-            file_put_contents(INCLUDES_DIR."/config.json.php", $contents);
+            # Update the configuration file
+            if (!@file_put_contents(INCLUDES_DIR."/config.json.php", $contents)) {
+                Flash::warning(_f("Could not remove \"<code>%s</code>\" because <code>%s</code> is not writable.",
+                                  array($setting, "/includes/config.json.php")));
+                return false;
+            }
         }
 
         /**
