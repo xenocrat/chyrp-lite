@@ -144,8 +144,5 @@
                 <div class="clear last"></div>
             </div>
         </div>
-    <?php if (defined("CHYRP_VERSION")): ?>
-        <p class="footer">Chyrp Lite <?php echo CHYRP_VERSION; ?></p>
-    <?php endif; ?>
     </body>
 </html>
