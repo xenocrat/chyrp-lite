@@ -77,7 +77,7 @@ $(function(){
             "id": "cheeseburger-link",
             "href": "#",
             "aria-label": "<?php echo __("Menu", "theme"); ?>"
-        }).on("click focus", function() {
+        }).on("click", function() {
             if ( $(".mobile_nav").hasClass("on") ) {
                 $(".mobile_nav").removeClass("on");
             } else {
