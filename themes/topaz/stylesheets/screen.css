@@ -581,6 +581,7 @@ img {                                               border-style: none;
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
                                                     border-bottom: 1px solid #d2d9d4 }
+    a#cheeseburger-link {                           border: none }
     table {                                         box-sizing: border-box;
                                                     display: block }
     div#mast {                                      display: block }
