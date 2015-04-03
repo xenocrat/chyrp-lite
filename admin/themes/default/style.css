@@ -180,7 +180,7 @@ img.logo {                                      width: 24px;
                                                 overflow: hidden;
                                                 text-overflow: ellipsis;
                                                 margin: 0em 0.5em 0em 0em;
-                                                padding: 0em 1em;
+                                                padding: 0em 1.25em;
                                                 border: 1px solid #cfcfcf;
                                                 border-bottom: none;
                                                 border-top-left-radius: 0.8em;
