@@ -1245,6 +1245,45 @@
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <title><?php echo __("Chyrp Upgrader"); ?></title>
         <style type="text/css" media="screen">
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Regular.woff') format('woff'),
+                     url('./fonts/OpenSans-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Semibold.woff') format('woff'),
+                     url('./fonts/OpenSans-Semibold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Italic.woff') format('woff'),
+                     url('./fonts/OpenSans-Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                     url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                font-weight: bold;
+                font-style: italic;
+            }
+            *::-moz-selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            *::selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            html {
+                font-size: 16px;
+            }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
@@ -1254,7 +1293,7 @@
             }
             body {
                 font-size: 14px;
-                font-family: sans-serif;
+                font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.25;
                 color: #4a4747;
                 background: #efefef;
@@ -1292,7 +1331,7 @@
                 overflow-y: auto;
                 margin: 1em -2em 1em;
                 padding: 2em;
-                background: #333;
+                background: #4a4747;
                 color: #fff;
             }
             span.yay { color: #76b362; }
@@ -1333,6 +1372,7 @@
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
+                list-style-position: inside;
             }
             li {
                 margin-bottom: 1em;
@@ -1490,11 +1530,11 @@
             <h1><?php echo __("Halt!"); ?></h1>
             <p><?php echo __("Please take these preemptive measures before proceeding:"); ?></p>
             <ol>
-                <li><?php echo __("<strong>Make a backup of your installation.</strong> Better safe than sorry."); ?></li>
+                <li><?php echo __("<strong>Make a backup of your installation and database.</strong>"); ?></li>
                 <li><?php echo __("Disable any third-party Modules and Feathers."); ?></li>
-                <li><?php echo __("Ensure the Chyrp installation directory is writable by the server."); ?></li>
+                <li><?php echo __("Ensure Chyrp Lite's directory is writable by the server."); ?></li>
             </ol>
-            <p><?php echo __("If any of the upgrade processes fail, you can safely keep refreshing &ndash; we will only attempt to redo tasks that are not already completed."); ?></p>
+            <p><?php echo __("If any of the upgrade tasks fail, you can safely refresh and retry."); ?></p>
             <form action="upgrade.php" method="post">
                 <button type="submit" name="upgrade" value="yes"><?php echo __("Upgrade me!"); ?></button>
             </form>

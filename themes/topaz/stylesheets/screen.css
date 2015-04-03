@@ -30,6 +30,7 @@
                                                     font-style: italic;
 }
 
+html {                                              font-size: 16px }
 *::-moz-selection {                                 color: #ffffff;
                                                     background-color: #4e5a66 }
 *::selection {                                      color: #ffffff;

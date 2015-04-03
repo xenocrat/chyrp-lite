@@ -33,18 +33,20 @@
 /* @end */
 
 /* @group Reset */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,
-pre,code,form,fieldset,legend,
-input,textarea,p,blockquote,th,td {             margin: 0em;
+html {                                          font-size: 14px }
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, 
+pre, code, form, fieldset, legend, 
+input, textarea, p, blockquote, th, td {        margin: 0em;
                                                 padding: 0em }
 table {                                         border-collapse: collapse;
                                                 border-spacing: 0em }
-fieldset,img {                                  border: 0em }
-address,caption,cite,code,
-dfn,em,strong,th,var {                          font-style: normal;
+fieldset, img {                                 border: 0em }
+address, caption, cite, code, 
+dfn, em, strong, th, var {                      font-style: normal;
                                                 font-weight: normal }
 ul {                                            list-style: none }
-input,textarea,select {                         font-family: inherit;
+input, textarea, select {                       font-family: inherit;
                                                 font-size: inherit;
                                                 font-weight: inherit }
 /* @end */
@@ -168,11 +170,12 @@ img.logo {                                      width: 24px;
 #sub_nav li {                                   display: block;
                                                 float: left;
                                                 position: relative;
-                                                top: 0px }
+                                                top: 0px;
+                                                height: 3rem }
 #sub_nav li a {                                 display: inline-block;
                                                 text-decoration: none;
                                                 font-size: 0.8em;
-                                                line-height: 3em;
+                                                line-height: 3rem;
                                                 white-space: nowrap;
                                                 overflow: hidden;
                                                 text-overflow: ellipsis;
@@ -297,7 +300,7 @@ input[type="number"],
 input[type="password"],
 textarea {                                      box-sizing: border-box;
                                                 width: 10em;
-                                                font-size: 1.25em;
+                                                font-size: 1.25rem;
                                                 padding: 0.2em;
                                                 border: 1px solid #dfdfdf;
                                                 background-color: #ffffff;

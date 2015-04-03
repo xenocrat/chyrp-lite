@@ -365,6 +365,45 @@
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <title>Chyrp Installer</title>
         <style type="text/css" media="screen">
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Regular.woff') format('woff'),
+                     url('./fonts/OpenSans-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Semibold.woff') format('woff'),
+                     url('./fonts/OpenSans-Semibold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Italic.woff') format('woff'),
+                     url('./fonts/OpenSans-Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                     url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                font-weight: bold;
+                font-style: italic;
+            }
+            *::-moz-selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            *::selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            html {
+                font-size: 16px;
+            }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
@@ -374,7 +413,7 @@
             }
             body {
                 font-size: 14px;
-                font-family: sans-serif;
+                font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.25;
                 color: #4a4747;
                 background: #efefef;
@@ -394,11 +433,15 @@
                 font-weight: bold;
                 margin: 0.75em 0em;
             }
+            input, textarea, select {
+                font-family: inherit;
+                font-size: inherit;
+                font-weight: inherit;
+            }
             input[type="text"],
             input[type="number"],
             input[type="password"],
             textarea {
-                box-sizing: border-box;
                 font-size: 1.25em;
                 padding: 0.2em;
                 border: 1px solid #dfdfdf;
@@ -417,10 +460,10 @@
             input[type="password"],
             textarea,
             select {
+                box-sizing: border-box;
                 width: 100%;
                 margin: 0em;
             }
-
             form hr {
                 border: none;
                 clear: both;
@@ -441,7 +484,7 @@
             }
             .error {
                 padding: 0.6em;
-                margin-bottom: 1em;
+                margin: 1em;
                 background-color: #d94c4c;
                 color: #ffffff;
                 border: none;
@@ -451,8 +494,11 @@
                 width: 30em;
                 background: #fff;
                 padding: 2em;
-                margin: 5em auto 0em;
+                margin: 2em auto 0em auto;
                 border-radius: 2em;
+            }
+            .window:first-child {
+                margin-top: 5em;
             }
             code {
                 font-family: monospace;
@@ -469,9 +515,6 @@
                 margin-top: 1em;
                 font-size: .9em;
                 text-align: center;
-            }
-            .error {
-                color: #F22;
             }
             a:link, a:visited {
                 color: #4a4747;
@@ -519,6 +562,7 @@
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
+                list-style-position: inside;
             }
             p {
                 margin-bottom: 1em;

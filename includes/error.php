@@ -23,6 +23,45 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Chyrp: <?php echo $title; ?></title>
         <style type="text/css">
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('../fonts/OpenSans-Regular.woff') format('woff'),
+                     url('../fonts/OpenSans-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('../fonts/OpenSans-Semibold.woff') format('woff'),
+                     url('../fonts/OpenSans-Semibold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('../fonts/OpenSans-Italic.woff') format('woff'),
+                     url('../fonts/OpenSans-Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('../fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                     url('../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                font-weight: bold;
+                font-style: italic;
+            }
+            *::-moz-selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            *::selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            html {
+                font-size: 16px;
+            }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
@@ -32,7 +71,7 @@
             }
             body {
                 font-size: 14px;
-                font-family: sans-serif;
+                font-family: "Open Sans webfont", sans-serif;
                 color: #4a4747;
                 background: #efefef;
                 padding: 0em 0em 5em;
@@ -65,6 +104,7 @@
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
+                list-style-position: inside;
             }
             ol.backtrace {
                 margin-top: 0.5em;
@@ -119,9 +159,6 @@
                 border-color: #1e57ba;
                 outline: none;
             }
-            .clear {
-                clear: both;
-            }
         </style>
     </head>
     <body>
@@ -141,7 +178,6 @@
             <?php if (class_exists("Route") and !logged_in() and $body != __("Route was initiated without a Controller.")): ?>
                 <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
-                <div class="clear last"></div>
             </div>
         </div>
     </body>
