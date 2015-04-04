@@ -20,7 +20,7 @@
                 load_translator("theme", THEME_DIR."/locale/".$config->locale.".mo");
 
             # Load the theme's info into the Theme class.
-            foreach (YAML::load(THEME_DIR."/info.yaml") as $key => $val)
+            foreach (include THEME_DIR."/info.php" as $key => $val)
                 $this->$key = $val;
 
             $this->url = THEME_URL;

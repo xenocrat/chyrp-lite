@@ -1,5 +1,4 @@
 require "find"
-require "yaml"
 require "optparse"
 
 OPTIONS = {
@@ -8,8 +7,7 @@ OPTIONS = {
   :domain => nil,
   :msgstr => "",
   :msgstr_filter => "",
-  :exclude => [".git", "modules", "lib", "feathers", "themes", "admin/themes", "config.yaml.php"],
-  :keys    => ["name", "description", "plural", "notifications", "confirm"]
+  :exclude => [".git", "modules", "lib", "feathers", "themes", "admin", "config.json.php"]
 }
 
 # Shamelessly taken from the Twig lexer. :P
@@ -42,10 +40,6 @@ ARGV.options do |o|
   o.on("--exclude=[val1,val2]", Array,
        "A list of directories to exclude from the scan.") do |exclude|
     OPTIONS[:exclude] = exclude
-  end
-  o.on("--keys=[val1,val2]", Array,
-       "A list of YAML keys for which to generate translations.") do |keys|
-    OPTIONS[:keys] = keys
   end
 
   o.separator ""
@@ -81,23 +75,17 @@ class Gettext
           next
         end
       else
-        next unless path =~ /\.(php|twig|yaml)/
+        next unless path =~ /\.(php|twig)/
         @files << [cleaned, path] if File.read(path) =~ /(__|_f|_p)\((#{STRING})#{@domain}\)/
         @files << [cleaned, path] if File.read(path) =~ /Group::add_permission\(([^,]+), (#{STRING})\)/
         @files << [cleaned, path] if File.read(path) =~ /(#{STRING})\s*\|\s*translate#{@twig_domain}/
         @files << [cleaned, path] if File.read(path) =~ /(#{STRING})\s*\|\s*translate_plural\((#{STRING}),\s*.*?#{@domain}\)\s*\|\s*format\(.*?\)/
-        @files << [cleaned, path] if path =~ /\.yaml/
       end
     end
   end
 
   def do_scan
     @files.each do |cleaned, file|
-      if File.basename(file) =~ /\.yaml$/
-        scan_yaml file, cleaned
-        next
-      end
-
       counter = 1
       File.open(file, "r") do |infile|
         while line = infile.gets
@@ -194,41 +182,6 @@ class Gettext
                               :plural => $4 }
       elsif not @translations[$1][:places].include?(clean_filename + ":" + line.to_s)
         @translations[$1][:places] << clean_filename + ":" + line.to_s
-      end
-    end
-  end
-
-  def scan_yaml(filename, clean_filename)
-    info = YAML.load_file(filename)
-    counter = 0
-    info.each do |key, val|
-      counter += 1
-      next unless OPTIONS[:keys].include?(key)
-
-      if val.class == String
-        val.gsub!("\"", "\\\"")
-        val = '"'+val+'"'
-        if @translations[val].nil?
-          @translations[val] = { :places => [clean_filename + ":" + counter.to_s],
-                                 :filter => false,
-                                 :plural => false }
-        elsif not @translations[val][:places].include?(clean_filename + ":" + counter.to_s)
-          @translations[val][:places] << clean_filename + ":" + counter.to_s
-        end
-      end
-      if val.class == Array
-        val.each do |val|
-          val.gsub!("\"", "\\\"")
-          val = '"'+val+'"'
-          if @translations[val].nil?
-            @translations[val] = { :places => [clean_filename + ":" + counter.to_s],
-                                   :filter => false,
-                                   :plural => false }
-          elsif not @translations[val][:places].include?(clean_filename + ":" + counter.to_s)
-            @translations[val][:places] << clean_filename + ":" + counter.to_s
-          end
-          counter += 1
-        end
       end
     end
   end

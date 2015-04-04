@@ -1238,6 +1238,19 @@
         }
     }
 
+    /**
+     * Function: remove_admin_theme
+     * Removes the admin_theme setting since this feature has been removed.
+     *
+     * Versions: 2015.03.15 => ????.??.??
+     */
+    function remove_admin_theme() {
+        if (Config::check("admin_theme")) {
+            echo __("Removing `admin_theme` from config...").
+                test(Config::remove("admin_theme"));
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -1488,6 +1501,8 @@
         update_user_password_column();
 
         recaptcha_to_captcha();
+
+        remove_admin_theme();
 
         # Perform Module/Feather upgrades.
 

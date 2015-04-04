@@ -83,10 +83,6 @@
     # Absolute path to /themes
     define('THEMES_DIR', MAIN_DIR."/themes");
 
-    # Constant: ADMIN_THEMES_DIR
-    # Absolute path to /admin/themes
-    define('ADMIN_THEMES_DIR', MAIN_DIR."/admin/themes");
-
     # Constant: UPDATE_XML
     # URL to the update feed
     define('UPDATE_XML', "http://pimley.net/projects/downloads/chyrp-lite.xml");

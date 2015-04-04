@@ -1102,8 +1102,8 @@
             Modules::$instances[$module] = new $camelized;
             Modules::$instances[$module]->safename = $module;
 
-            foreach (YAML::load(MODULES_DIR."/".$module."/info.yaml") as $key => $val)
-                Modules::$instances[$module]->$key = (is_string($val)) ? __($val, $module) : $val ;
+            foreach (include MODULES_DIR."/".$module."/info.php" as $key => $val)
+                Modules::$instances[$module]->$key = $val;
         }
 
         # Instantiate all Feathers.
@@ -1125,8 +1125,8 @@
             Feathers::$instances[$feather] = new $camelized;
             Feathers::$instances[$feather]->safename = $feather;
 
-            foreach (YAML::load(FEATHERS_DIR."/".$feather."/info.yaml") as $key => $val)
-                Feathers::$instances[$feather]->$key = (is_string($val)) ? __($val, $feather) : $val ;
+            foreach (include FEATHERS_DIR."/".$feather."/info.php" as $key => $val)
+                Feathers::$instances[$feather]->$key = $val;
         }
 
         # Initialize all modules.

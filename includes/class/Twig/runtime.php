@@ -366,12 +366,12 @@ else {
 }
 
 function twig_translate_string_filter($string, $domain = "theme") {
-    $domain = ($domain == "theme" and ADMIN) ? "chyrp" : $domain ;
+    $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
     return __($string, $domain);
 }
 
 function twig_translate_plural_string_filter($single, $plural, $number, $domain = "theme") {
-    $domain = ($domain == "theme" and ADMIN) ? "chyrp" : $domain ;
+    $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
     return _p($single, $plural, $number, $domain);
 }
 

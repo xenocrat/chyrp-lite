@@ -89,11 +89,11 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable extensions."));
 
             $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $info = YAML::load($dir."/".$_POST['check']."/info.yaml");
+            $info = include $dir."/".$_POST['check']."/info.php";
             fallback($info["confirm"], "");
 
             if (!empty($info["confirm"]))
-                echo __($info["confirm"], $_POST['check']);
+                echo $info["confirm"];
 
             break;
 
@@ -125,12 +125,12 @@
             if (file_exists($folder."/".$_POST["extension"]."/locale/".$config->locale.".mo"))
                 load_translator($_POST["extension"], $folder."/".$_POST["extension"]."/locale/".$config->locale.".mo");
 
-            $info = YAML::load($folder."/".$_POST["extension"]."/info.yaml");
+            $info = include $folder."/".$_POST["extension"]."/info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
             foreach ($info["notifications"] as &$notification)
-                $notification = addslashes(__($notification, $_POST["extension"]));
+                $notification = addslashes($notification);
 
             require $folder."/".$_POST["extension"]."/".$_POST["extension"].".php";
 

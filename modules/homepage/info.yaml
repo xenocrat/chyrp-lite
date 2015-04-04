@@ -1,8 +1,0 @@
-name: Homepage
-url: http://chyrp.net/
-version: 1.0
-description: Display a homepage instead of the blog index.
-author:
-  name: Daniel Pimley
-  url: http://www.pimley.net/
-confirm: Do you want to delete the homepage?

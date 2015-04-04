@@ -4,7 +4,7 @@ require "rubygems"
 require "hpricot"
 require "yaml"
 
-open("includes/config.yaml.php") do |config_file|
+open("includes/config.json.php") do |config_file|
   CONFIG = YAML::load(config_file.read.sub(%Q{<?php header("Status: 403"); exit("Access denied."); ?>\n}, ''))
 end
 

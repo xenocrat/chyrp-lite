@@ -25,17 +25,15 @@
          * Prepares Twig.
          */
         private function __construct() {
-            $this->admin_theme = fallback(Config::current()->admin_theme, "default");
+            $config = Config::current();
 
-            $this->theme = new Twig_Loader(MAIN_DIR."/admin/themes/".$this->admin_theme,
+            $this->theme = new Twig_Loader(MAIN_DIR."/admin",
                                             (is_writable(INCLUDES_DIR."/caches") and !DEBUG) ?
                                                 INCLUDES_DIR."/caches" :
                                                 null);
-
-            $this->default = new Twig_Loader(MAIN_DIR."/admin/themes/default",
-                                            (is_writable(INCLUDES_DIR."/caches") and !DEBUG) ?
-                                                INCLUDES_DIR."/caches" :
-                                                null);
+            # Load the theme translator
+            if (file_exists(MAIN_DIR."/admin/locale/".$config->locale.".mo"))
+                load_translator("admin", MAIN_DIR."/admin/locale/".$config->locale.".mo");
         }
 
         /**
@@ -1652,7 +1650,8 @@
             $classes = array();
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(MODULES_DIR."/".$folder."/".$folder.".php") or !file_exists(MODULES_DIR."/".$folder."/info.yaml")) continue;
+                if (!file_exists(MODULES_DIR."/".$folder."/".$folder.".php") or !file_exists(MODULES_DIR."/".$folder."/info.php"))
+                  continue;
 
                 if (file_exists(MODULES_DIR."/".$folder."/locale/".$config->locale.".mo"))
                     load_translator($folder, MODULES_DIR."/".$folder."/locale/".$config->locale.".mo");
@@ -1662,7 +1661,7 @@
                 else
                     array_unshift($classes[$folder], $folder);
 
-                $info = YAML::load(MODULES_DIR."/".$folder."/info.yaml");
+                $info = include MODULES_DIR."/".$folder."/info.php";
 
                 $info["conflicts_true"] = array();
                 $info["depends_true"] = array();
@@ -1756,13 +1755,13 @@
                 return Flash::warning(__("Could not read feathers directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(FEATHERS_DIR."/".$folder."/".$folder.".php") or !file_exists(FEATHERS_DIR."/".$folder."/info.yaml"))
+                if (!file_exists(FEATHERS_DIR."/".$folder."/".$folder.".php") or !file_exists(FEATHERS_DIR."/".$folder."/info.php"))
                     continue;
 
                 if (file_exists(FEATHERS_DIR."/".$folder."/locale/".$config->locale.".mo"))
                     load_translator($folder, FEATHERS_DIR."/".$folder."/locale/".$config->locale.".mo");
 
-                $info = YAML::load(FEATHERS_DIR."/".$folder."/info.yaml");
+                $info = include FEATHERS_DIR."/".$folder."/info.php";
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
@@ -1818,13 +1817,13 @@
                 return Flash::warning(__("Could not read themes directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(THEMES_DIR."/".$folder."/info.yaml"))
+                if (!file_exists(THEMES_DIR."/".$folder."/info.php"))
                     continue;
 
                 if (file_exists(THEMES_DIR."/".$folder."/locale/".$config->locale.".mo"))
                     load_translator($folder, THEMES_DIR."/".$folder."/locale/".$config->locale.".mo");
 
-                $info = YAML::load(THEMES_DIR."/".$folder."/info.yaml");
+                $info = include THEMES_DIR."/".$folder."/info.php";
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
@@ -1852,42 +1851,6 @@
                                                                         $config->chyrp_url."/themes/".$folder."/screenshot.png" :
                                                                         ""),
                                                    "info" => $info);
-            }
-
-            if (!$open = @opendir(ADMIN_THEMES_DIR))
-                return Flash::warning(__("Could not read themes directory."));
-
-            while (($folder = readdir($open)) !== false) {
-                if (!file_exists(ADMIN_THEMES_DIR."/".$folder."/info.yaml"))
-                    continue;
-
-                if (file_exists(ADMIN_THEMES_DIR."/".$folder."/locale/".$config->locale.".mo"))
-                    load_translator($folder, ADMIN_THEMES_DIR."/".$folder."/locale/".$config->locale.".mo");
-
-                $info = YAML::load(ADMIN_THEMES_DIR."/".$folder."/info.yaml");
-
-                fallback($info["name"], $folder);
-                fallback($info["version"], "0");
-                fallback($info["url"]);
-                fallback($info["description"]);
-                fallback($info["author"], array("name" => "", "url" => ""));
-
-                $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                    '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' :
-                    $info["author"]["name"] ;
-                $info["description"] = preg_replace("/<code>(.+)<\/code>/se",
-                                                    "'<code>'.fix('\\1').'</code>'",
-                                                    $info["description"]);
-
-                $info["description"] = preg_replace("/<pre>(.+)<\/pre>/se",
-                                                    "'<pre>'.fix('\\1').'</pre>'",
-                                                    $info["description"]);
-
-                $this->context["admin_themes"][] = array("name" => $folder,
-                                                         "screenshot" => (file_exists(ADMIN_THEMES_DIR."/".$folder."/screenshot.png") ?
-                                                         $config->chyrp_url."/admin/themes/".$folder."/screenshot.png" :
-                                                         ""),
-                                                         "info" => $info);
             }
 
             closedir($open);
@@ -1940,12 +1903,9 @@
             if (file_exists($folder."/".$_GET[$type]."/locale/".$config->locale.".mo"))
                 load_translator($_GET[$type], $folder."/".$_GET[$type]."/locale/".$config->locale.".mo");
 
-            $info = YAML::load($folder."/".$_GET[$type]."/info.yaml");
+            $info = include $folder."/".$_GET[$type]."/info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
-
-            foreach ($info["notifications"] as &$notification)
-                $notification = __($notification, $_GET[$type]);
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
@@ -1957,12 +1917,10 @@
                 Flash::message($message);
 
             if ($type == "module")
-                Flash::notice(_f("&#8220;%s&#8221; module enabled.",
-                                 array($info["name"])),
+                Flash::notice(__("Module enabled."),
                               "/admin/?action=".pluralize($type));
             elseif ($type == "feather")
-                Flash::notice(_f("&#8220;%s&#8221; feather enabled.",
-                                 array($info["name"])),
+                Flash::notice(__("Feather enabled."),
                               "/admin/?action=".pluralize($type));
         }
 
@@ -1998,14 +1956,12 @@
             $config->set(($type == "module" ? "enabled_modules" : "enabled_feathers"),
                          array_diff($config->$enabled_array, array($_GET[$type])));
 
-            $info = YAML::load($folder."/".$_GET[$type]."/info.yaml");
+            $info = include $folder."/".$_GET[$type]."/info.php";
             if ($type == "module")
-                Flash::notice(_f("&#8220;%s&#8221; module disabled.",
-                                 array($info["name"])),
+                Flash::notice(__("Module disabled."),
                               "/admin/?action=".pluralize($type));
             elseif ($type == "feather")
-                Flash::notice(_f("&#8220;%s&#8221; feather disabled.",
-                                 array($info["name"])),
+                Flash::notice(__("Module disabled."),
                               "/admin/?action=".pluralize($type));
         }
 
@@ -2026,11 +1982,8 @@
             if (file_exists(THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo"))
                 load_translator($_GET['theme'], THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo");
 
-            $info = YAML::load(THEMES_DIR."/".$_GET['theme']."/info.yaml");
+            $info = include THEMES_DIR."/".$_GET['theme']."/info.php";
             fallback($info["notifications"], array());
-
-            foreach ($info["notifications"] as &$notification)
-                $notification = __($notification, $_GET['theme']);
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
@@ -2040,39 +1993,6 @@
                 @unlink($cache);
 
             Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
-        }
-
-        /**
-         * Function: change_admin_theme
-         * Changes the admin theme.
-         */
-        public function change_admin_theme() {
-            if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
-
-            if (empty($_GET['theme']))
-                error(__("No Theme Specified"), __("You did not specify a theme to switch to."));
-
-            $config = Config::current();
-            $config->set("admin_theme", $_GET['theme']);
-
-            if (file_exists(ADMIN_THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo"))
-                load_translator($_GET['theme'], ADMIN_THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo");
-
-            $info = YAML::load(ADMIN_THEMES_DIR."/".$_GET['theme']."/info.yaml");
-            fallback($info["notifications"], array());
-
-            foreach ($info["notifications"] as &$notification)
-                $notification = __($notification, $_GET['theme']);
-
-            foreach ($info["notifications"] as $message)
-                Flash::message($message);
-
-            # Clear the caches made by the previous theme.
-            foreach (glob(INCLUDES_DIR."/caches/*.cache") as $cache)
-                @unlink($cache);
-
-            Flash::notice(_f("Admin theme changed to &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
         }
 
         /**
@@ -2086,7 +2006,12 @@
             if (empty($_GET['theme']))
                 error(__("No Theme Specified"), __("You did not specify a theme to preview."));
 
-            $info = YAML::load(THEMES_DIR."/".$_GET['theme']."/info.yaml");
+            $config = Config::current();
+
+            if (file_exists(THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo"))
+                load_translator($_GET['theme'], THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo");
+
+            $info = include THEMES_DIR."/".$_GET['theme']."/info.php";
 
             # Clear the caches made by the previous theme.
             foreach (glob(INCLUDES_DIR."/caches/*.cache") as $cache)
@@ -2268,8 +2193,8 @@
             $pages = array("manage" => array());
 
             foreach (Config::current()->enabled_feathers as $index => $feather) {
-                $info = YAML::load(FEATHERS_DIR."/".$feather."/info.yaml");
-                $subnav["write"]["write_post&feather=".$feather] = array("title" => __($info["name"], $feather),
+                $info = include FEATHERS_DIR."/".$feather."/info.php";
+                $subnav["write"]["write_post&feather=".$feather] = array("title" => $info["name"],
                                                                          "show" => $visitor->group->can("add_draft", "add_post"),
                                                                          "attributes" => ' id="feathers['.$feather.']"',
                                                                          "selected" => (isset($_GET['feather']) and $_GET['feather'] == $feather) or
@@ -2384,27 +2309,26 @@
             $visitor = Visitor::current();
             $route   = Route::current();
 
-            $this->context["theme"]      = Theme::current();
-            $this->context["flash"]      = Flash::current();
-            $this->context["trigger"]    = $trigger;
-            $this->context["title"]      = $title;
-            $this->context["site"]       = Config::current();
-            $this->context["visitor"]    = $visitor;
-            $this->context["logged_in"]  = logged_in();
-            $this->context["new_update"] = Update::check_update();
-            $this->context["route"]      = $route;
-            $this->context["hide_admin"] = isset($_SESSION["hide_admin"]);
-            $this->context["now"]        = time();
-            $this->context["version"]    = CHYRP_VERSION;
-            $this->context["debug"]      = DEBUG;
-            $this->context["feathers"]   = Feathers::$instances;
-            $this->context["modules"]    = Modules::$instances;
-            $this->context["admin_theme"] = $this->admin_theme;
-            $this->context["theme_url"]  = Config::current()->chyrp_url."/admin/themes/".$this->admin_theme;
-            $this->context["POST"]       = $_POST;
-            $this->context["GET"]        = $_GET;
+            $this->context["theme"]       = Theme::current();
+            $this->context["flash"]       = Flash::current();
+            $this->context["trigger"]     = $trigger;
+            $this->context["title"]       = $title;
+            $this->context["site"]        = Config::current();
+            $this->context["visitor"]     = $visitor;
+            $this->context["logged_in"]   = logged_in();
+            $this->context["new_update"]  = Update::check_update();
+            $this->context["route"]       = $route;
+            $this->context["hide_admin"]  = isset($_SESSION["hide_admin"]);
+            $this->context["now"]         = time();
+            $this->context["version"]     = CHYRP_VERSION;
+            $this->context["debug"]       = DEBUG;
+            $this->context["feathers"]    = Feathers::$instances;
+            $this->context["modules"]     = Modules::$instances;
+            $this->context["theme_url"]   = Config::current()->chyrp_url."/admin";
+            $this->context["POST"]        = $_POST;
+            $this->context["GET"]         = $_GET;
 
-            $this->context["navigation"] = array();
+            $this->context["navigation"]  = array();
 
             $show = array("write" => array($visitor->group->can("add_draft", "add_post", "add_page")),
                           "manage" => array($visitor->group->can("view_own_draft",
@@ -2460,10 +2384,7 @@
 
             $this->context["sql_debug"]  = SQL::current()->debug;
 
-            $file = MAIN_DIR."/admin/themes/%s/pages/".$action.".twig";
-            $template = file_exists(sprintf($file, $this->admin_theme)) ?
-                sprintf($file, $this->admin_theme) :
-                sprintf($file, "default");
+            $template = MAIN_DIR."/admin/pages/".$action.".twig";
 
             $config = Config::current();
             if (!file_exists($template)) {
@@ -2480,17 +2401,12 @@
             # Try the theme first
             try {
                 $this->theme->getTemplate($template)->display($this->context);
-            } catch (Exception $t) {
-                # Fallback to the default
-                try {
-                    $this->default->getTemplate($template)->display($this->context);
-                } catch (Exception $e) {
-                    $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                    $trace = debug_backtrace();
-                    $twig = array("file" => $e->filename, "line" => $e->lineno);
-                    array_unshift($trace, $twig);
-                    error(__("Error"), $prettify, $trace);
-                }
+            } catch (Exception $e) {
+                $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
+                $trace = debug_backtrace();
+                $twig = array("file" => $e->filename, "line" => $e->lineno);
+                array_unshift($trace, $twig);
+                error(__("Error"), $prettify, $trace);
             }
         }
 
