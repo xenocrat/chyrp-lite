@@ -599,7 +599,7 @@ div.more_options hr {                           margin: 0em;
 /* @end */
 
 /* @group Helpers & General */
-table.interactive + div.controls {              background-color: #fffecd;
+table.interactive + div.controls {              background-color: #fffceb;
                                                 padding: 1em;
                                                 border: 1px solid #dfdfdf;
                                                 border-top: none }
