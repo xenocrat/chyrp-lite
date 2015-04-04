@@ -135,16 +135,8 @@
                           timestamp DATETIME DEFAULT NULL,
                           session_hash VARCHAR(32) NOT NULL
                         ) DEFAULT CHARSET=UTF8");
-
-            $constraints = $sql->query("SELECT COUNT(*) AS unique_keys FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-                                        WHERE (TABLE_NAME = '__likes'
-                                          AND CONSTRAINT_NAME = 'key_post_id_sh_pair'
-                                          AND CONSTRAINT_TYPE = 'UNIQUE')")->fetchObject();
-
-            if ($constraints->unique_keys == 0) {
-              $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
-              $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
-            }
+            $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
+            $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
 
             Group::add_permission("like_post", "Like Posts");
             Group::add_permission("unlike_post", "Unlike Posts");
