@@ -683,7 +683,10 @@ img.overlay_close_gadget {                      display: block;
 .css_reset dl {                                 list-style: none }
     .css_reset dl dt {                          font-weight: bold }
     .css_reset dl dd {                          margin-left: 1em }
-.css_reset pre {                                margin: 2em }
+.css_reset pre {                                font-family: monospace;
+                                                margin: 2em }
+.css_reset code {                               font-family: monospace;
+                                                font-size: 0.75em }
 .css_reset blockquote {                         margin: 2em;
                                                 font-style: italic }
     .css_reset blockquote em {                  font-style: normal }

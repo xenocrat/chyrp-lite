@@ -100,7 +100,6 @@ blockquote {                                        font-size: 1em;
                                                     margin: 0em 0em 2em 0em }
     blockquote:last-child {                         margin-bottom: 0em }
 pre {                                               font-family: monospace;
-                                                    font-size: 0.75em;
                                                     margin: 1em 0em }
     li > pre {                                      margin: 1em 0em 0em 0em }
 code {                                              font-family: monospace;
