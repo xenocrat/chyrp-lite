@@ -10,6 +10,7 @@
             spacing: Math.abs("<?php echo Config::current()->module_lightbox["spacing"]; ?>"),
             protect: <?php echo ( Config::current()->module_lightbox["protect"] ? "true" : "false" ); ?>,
             active: false,
+            state: null,
             styles: {
                 fg: {
                     "display": "block",
@@ -77,7 +78,8 @@
             },
             load: function() {
                 if ( ChyrpLightbox.active == false ) {
-                    var src = $(this).attr("src"), href = $(this).parent().attr('href'), alt = $(this).attr("alt");
+                    var src = $(this).parent().attr('href') || $(this).attr("src"), alt = $(this).attr("alt");
+                    if ( !!history.pushState && !ChyrpLightbox.protect ) history.pushState(ChyrpLightbox.state, alt, src );
                     $("<div>", {
                         "id": "ChyrpLightbox-bg",
                         "role": "img",
@@ -87,7 +89,7 @@
                             ChyrpLightbox.hide();
                     }).append($("<img>", {
                         "id": "ChyrpLightbox-fg",
-                        "src": href || src, // Load original (Photo Feather)
+                        "src": src, // Load original (Photo Feather)
                         "alt": alt
                     }).css(ChyrpLightbox.styles.fg).load(ChyrpLightbox.show).error(function() {
                         $(this).off("error"); this.src = src;
@@ -109,20 +111,8 @@
                     "left": Math.round( ( bgWidth - fgWidth ) / 2 ) + "px",
                     "width": fgWidth + "px",
                     "height": fgHeight + "px",
-                    "visibility": 'visible'
-                });
-                $("<img>", {
-                    "src": "<?php echo Config::current()->chyrp_url."/modules/lightbox/images/minimize.svg"; ?>",
-                    "alt": "<?php echo __("Minimize", "lightbox"); ?>",
-                    "title": "<?php echo __("Minimize", "lightbox"); ?>",
-                    "role": "button",
-                    "aria-label": "<?php echo __("Minimize", "lightbox"); ?>"
-                }).css({
-                    "display": "block",
-                    "position": "absolute",
-                    "top": Math.round( ( ( bgHeight - fgHeight ) / 2 ) + 8 ) + "px",
-                    "right": Math.round( ( ( bgWidth - fgWidth ) / 2 ) + 8 ) + "px",
-                    "cursor": "pointer"
+                    "visibility": 'visible',
+                    "cursor": "url('<?php echo Config::current()->chyrp_url."/modules/lightbox/images/zoom-out.svg"; ?>'), pointer"
                 }).click(ChyrpLightbox.hide).appendTo("#ChyrpLightbox-bg");
                 bg.css({
                     "opacity": 1,
