@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-03-15 09:20+0000\n"
+"POT-Creation-Date: 2015-04-04 22:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -394,14 +394,6 @@ msgstr ""
 
 #: themes/topaz/forms/user/register.twig:11
 msgid "(again)"
-msgstr ""
-
-#: themes/topaz/info.yaml:1
-msgid "Topaz"
-msgstr ""
-
-#: themes/topaz/info.yaml:4
-msgid "A minimalist theme for Chyrp Lite."
 msgstr ""
 
 #: themes/topaz/javascripts/theme.js.php:79

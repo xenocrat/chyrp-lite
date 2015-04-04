@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-03-15 09:20+0000\n"
+"POT-Creation-Date: 2015-04-04 22:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,27 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/likes/info.yaml:1
+#: modules/likes/info.php:3
 msgid "Likes"
 msgstr ""
 
-#: modules/likes/info.yaml:4
+#: modules/likes/info.php:6
 msgid "Allow users to “like” a post."
 msgstr ""
 
-#: modules/likes/info.yaml:6
+#: modules/likes/info.php:11
 msgid "Please remember to update the permission settings for each group."
 msgstr ""
 
-#: modules/likes/info.yaml:8
-msgid "Are you sure you want to remove all Likes from the database?"
-msgstr ""
-
-#: modules/likes/model.Like.php:149
+#: modules/likes/model.Like.php:141
 msgid "Like Posts"
 msgstr ""
 
-#: modules/likes/model.Like.php:150
+#: modules/likes/model.Like.php:142
 msgid "Unlike Posts"
 msgstr ""
 

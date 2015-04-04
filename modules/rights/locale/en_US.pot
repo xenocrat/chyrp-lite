@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-03-15 09:20+0000\n"
+"POT-Creation-Date: 2015-04-04 22:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/rights/info.yaml:1
+#: modules/rights/info.php:3
 msgid "Rights"
 msgstr ""
 
-#: modules/rights/info.yaml:4
+#: modules/rights/info.php:6
 msgid "Adds post options for attribution and assigning intellectual property rights."
 msgstr ""
 
-#: modules/rights/info.yaml:6
+#: modules/rights/info.php:10
 msgid "Do you want to remove rights data from the database?"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-03-15 09:20+0000\n"
+"POT-Creation-Date: 2015-04-04 22:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -115,7 +115,7 @@ msgstr ""
 
 #: modules/comments/comments.php:288
 #: modules/comments/comments.php:455
-#: modules/comments/info.yaml:1
+#: modules/comments/info.php:3
 #: modules/comments/pages/admin/manage_comments.twig:19
 msgid "Comments"
 msgstr ""
@@ -182,15 +182,15 @@ msgstr ""
 msgid "Spam"
 msgstr ""
 
-#: modules/comments/info.yaml:4
+#: modules/comments/info.php:6
 msgid "Adds commenting functionality to your posts, with pingback and trackback support."
 msgstr ""
 
-#: modules/comments/info.yaml:6
+#: modules/comments/info.php:11
 msgid "Please remember to update the permission settings for each group."
 msgstr ""
 
-#: modules/comments/info.yaml:8
+#: modules/comments/info.php:12
 msgid "Do you want to remove the Comments from the database?"
 msgstr ""
 
@@ -248,8 +248,15 @@ msgid "Comments Per Page"
 msgstr ""
 
 #: modules/comments/pages/admin/comment_settings.twig:36
-#, php-format
-msgid "Reload Comments Every %s Seconds"
+msgid "Reload Comments"
+msgstr ""
+
+#: modules/comments/pages/admin/comment_settings.twig:40
+msgid "Reload interval"
+msgstr ""
+
+#: modules/comments/pages/admin/comment_settings.twig:42
+msgid "(seconds)"
 msgstr ""
 
 #: modules/comments/pages/admin/delete_comment.twig:3

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-03-15 09:20+0000\n"
+"POT-Creation-Date: 2015-04-04 22:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: feathers/uploader/info.yaml:1
+#: feathers/uploader/info.php:3
 msgid "Uploader"
 msgstr ""
 
-#: feathers/uploader/info.yaml:4
-msgid "Upload files to your Chyrp site and make them available for visitors to download."
+#: feathers/uploader/info.php:6
+msgid "Upload files and make them available for visitors to download."
 msgstr ""
 
 #: feathers/uploader/uploader.php:7
