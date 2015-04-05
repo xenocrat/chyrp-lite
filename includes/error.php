@@ -101,6 +101,9 @@
                 font-family: monospace;
                 font-style: normal;
                 word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
