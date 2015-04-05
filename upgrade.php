@@ -408,18 +408,18 @@
      * Updates the PHP protection code in the config file.
      */
     function update_protection() {
-        if (!file_exists(INCLUDES_DIR."/config.yaml.php") or
-            substr_count(file_get_contents(INCLUDES_DIR."/config.yaml.php"),
+        if (!file_exists(INCLUDES_DIR."/config.json.php") or
+            substr_count(file_get_contents(INCLUDES_DIR."/config.json.php"),
                          "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>"))
             return;
 
-        $contents = file_get_contents(INCLUDES_DIR."/config.yaml.php");
+        $contents = file_get_contents(INCLUDES_DIR."/config.json.php");
         $new_error = preg_replace("/<\?php (.+) \?>/",
                                   "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>",
                                   $contents);
 
-        echo __("Updating protection code in config.yaml.php...").
-             test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $new_error), __("Try CHMODding the file to 777."));
+        echo __("Updating protection code in config.json.php...").
+             test(@file_put_contents(INCLUDES_DIR."/config.json.php", $new_error), __("Try CHMODding the file to 777."));
     }
 
     /**
@@ -614,7 +614,7 @@
     function add_sessions_table() {
         if (SQL::current()->query("SELECT * FROM __sessions")) return;
 
-        echo __("Creating `sessions` table...").
+        echo __("Creating ‘sessions’ table...").
              test(SQL::current()->query("CREATE TABLE __sessions (
                                              id VARCHAR(40) DEFAULT '',
                                              data LONGTEXT,
@@ -755,9 +755,9 @@
         if ($column->fetchObject()->Type == "varchar(32)")
             return;
 
-        echo __("Updating `status` column on `posts` table...")."\n";
+        echo __("Updating ‘status’ column on ‘posts’ table...")."\n";
 
-        echo " - ".__("Backing up `posts` table...").
+        echo " - ".__("Backing up ‘posts’ table...").
              test($backup = $sql->select("posts"));
 
         if (!$backup)
@@ -765,13 +765,13 @@
 
         $backups = $backup->fetchAll();
 
-        echo " - ".__("Dropping `posts` table...").
+        echo " - ".__("Dropping ‘posts’ table...").
              test($drop = $sql->query("DROP TABLE __posts"));
 
         if (!$drop)
             return;
 
-        echo " - ".__("Creating `posts` table...").
+        echo " - ".__("Creating ‘posts’ table...").
              test($create = $sql->query("CREATE TABLE IF NOT EXISTS __posts (
                                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                              xml LONGTEXT,
@@ -812,7 +812,7 @@
         if ($sql->select("post_attributes"))
             return;
 
-        echo __("Creating `post_attributes` table...").
+        echo __("Creating ‘post_attributes’ table...").
              test($sql->query("CREATE TABLE __post_attributes (
                                    post_id INTEGER NOT NULL ,
                                    name VARCHAR(100) DEFAULT '',
@@ -869,9 +869,9 @@
         }
 
         if (!in_array(false, $results)) {
-            echo __("Removing `xml` column from `posts` table...")."\n";
+            echo __("Removing ‘xml’ column from ‘posts’ table...")."\n";
 
-            echo " - ".__("Backing up `posts` table...").
+            echo " - ".__("Backing up ‘posts’ table...").
                  test($backup = $sql->select("posts"));
 
             if (!$backup)
@@ -879,13 +879,13 @@
 
             $backups = $backup->fetchAll();
 
-            echo " - ".__("Dropping `posts` table...").
+            echo " - ".__("Dropping ‘posts’ table...").
                  test($drop = $sql->query("DROP TABLE __posts"));
 
             if (!$drop)
                 return;
 
-            echo " - ".__("Creating `posts` table...").
+            echo " - ".__("Creating ‘posts’ table...").
                  test($create = $sql->query("CREATE TABLE IF NOT EXISTS __posts (
                                                  id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                                  feather VARCHAR(32) DEFAULT '',
@@ -933,10 +933,10 @@
 
         $backup = $permissions->fetchAll();
 
-        echo __("Dropping `permissions` table...").
+        echo __("Dropping ‘permissions’ table...").
              test($sql->query("DROP TABLE __permissions"));
 
-        echo __("Creating `permissions` table...").
+        echo __("Creating ‘permissions’ table...").
              test($sql->query("CREATE TABLE __permissions (
                                    id VARCHAR(100) DEFAULT '',
                                    name VARCHAR(100) DEFAULT '',
@@ -945,7 +945,7 @@
                                ) DEFAULT CHARSET=utf8"));
 
         foreach ($backup as $permission)
-            echo _f("Restoring permission `%s`...", array($permission["name"])).
+            echo _f("Restoring permission ‘%s’...", array($permission["name"])).
                  test($sql->insert("permissions",
                                    array("id" => $permission["id"],
                                          "name" => $permission["name"],
@@ -977,10 +977,10 @@
             $permissions[$group["id"]] = empty($group["permissions"]) ? array() : YAML::load($group["permissions"]) ;
         }
 
-        echo __("Dropping `groups` table...").
+        echo __("Dropping ‘groups’ table...").
              test($sql->query("DROP TABLE __groups"));
 
-        echo __("Creating `groups` table...").
+        echo __("Creating ‘groups’ table...").
              test($sql->query("CREATE TABLE __groups (
                                    id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                    name VARCHAR(100) DEFAULT '',
@@ -988,14 +988,14 @@
                                ) DEFAULT CHARSET=utf8"));
 
         foreach ($names as $id => $name)
-            echo _f("Restoring group `%s`...", array($name)).
+            echo _f("Restoring group ‘%s’...", array($name)).
                  test($sql->insert("groups",
                                    array("id" => $id,
                                         "name" => $name)));
 
         foreach ($permissions as $id => $permissions)
             foreach ($permissions as $permission)
-                echo _f("Restoring permission `%s` on group `%s`...", array($permission, $names[$id])).
+                echo _f("Restoring permission ‘%s’ on group ‘%s’...", array($permission, $names[$id])).
                      test($sql->insert("permissions",
                                        array("id" => $permission,
                                              "name" => $sql->select("permissions", "name", array("id" => $permission))->fetchColumn(),
@@ -1008,23 +1008,23 @@
      */
     function remove_old_files() {
         if (file_exists(INCLUDES_DIR."/config.php"))
-            echo __("Removing `includes/config.php`...").
+            echo __("Removing ‘includes/config.php’...").
                  test(@unlink(INCLUDES_DIR."/config.php"));
 
         if (file_exists(INCLUDES_DIR."/database.php"))
-            echo __("Removing `includes/database.php`...").
+            echo __("Removing ‘includes/database.php’...").
                  test(@unlink(INCLUDES_DIR."/database.php"));
 
         if (file_exists(INCLUDES_DIR."/rss.php"))
-            echo __("Removing `includes/rss.php`...").
+            echo __("Removing ‘includes/rss.php’...").
                  test(@unlink(INCLUDES_DIR."/rss.php"));
 
         if (file_exists(INCLUDES_DIR."/bookmarklet.php"))
-            echo __("Removing `includes/bookmarklet.php`...").
+            echo __("Removing ‘includes/bookmarklet.php’...").
                  test(@unlink(INCLUDES_DIR."/bookmarklet.php"));
 
         if (file_exists(INCLUDES_DIR."/config.yaml.php") and file_exists(INCLUDES_DIR."/config.json.php"))
-            echo __("Removing `includes/config.yaml.php`...").
+            echo __("Removing ‘includes/config.yaml.php’...").
                  test(@unlink(INCLUDES_DIR."/config.yaml.php"));
     }
 
@@ -1056,21 +1056,21 @@
         if ($column->fetchObject()->Type == "boolean")
             return;
 
-        echo __("Updating `approved` column on `users` table...")."\n";
+        echo __("Updating ‘approved’ column on ‘users’ table...")."\n";
 
-        echo " - ".__("Backing up `users` table...").
+        echo " - ".__("Backing up ‘users’ table...").
              test($backup = $sql->select("users"));
 
         if (!$backup) return;
 
         $backups = $backup->fetchAll();
 
-        echo " - ".__("Dropping `users` table...").
+        echo " - ".__("Dropping ‘users’ table...").
              test($drop = $sql->query("DROP TABLE __users"));
 
         if (!$drop) return;
 
-        echo " - ".__("Creating `users` table...").
+        echo " - ".__("Creating ‘users’ table...").
              test($create = $sql->query("CREATE TABLE IF NOT EXISTS `__users` (
                                             `id` int(11) NOT NULL AUTO_INCREMENT,
                                             `login` varchar(64) DEFAULT '',
@@ -1145,9 +1145,9 @@
         if ($column->fetchObject()->Type == "varchar(128)")
             return;
 
-        echo __("Updating `password` column on `users` table...")."\n";
+        echo __("Updating ‘password’ column on ‘users’ table...")."\n";
 
-        echo " - ".__("Backing up `users` table...").
+        echo " - ".__("Backing up ‘users’ table...").
              test($backup = $sql->select("users"));
 
         if (!$backup)
@@ -1155,13 +1155,13 @@
 
         $backups = $backup->fetchAll();
 
-        echo " - ".__("Dropping `users` table...").
+        echo " - ".__("Dropping ‘users’ table...").
              test($drop = $sql->query("DROP TABLE __users"));
 
         if (!$drop)
             return;
 
-        echo " - ".__("Creating `users` table...").
+        echo " - ".__("Creating ‘users’ table...").
              test($create = $sql->query("CREATE TABLE IF NOT EXISTS `__users` (
                                             `id` int(11) NOT NULL AUTO_INCREMENT,
                                             `login` varchar(64) DEFAULT '',
@@ -1233,7 +1233,7 @@
             echo __("Converting config to JSON...").
                 $message.test(!json_last_error());
 
-            echo __("Writing `includes/config.json.php`...").
+            echo __("Writing ‘includes/config.json.php’...").
                 $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
         }
     }
@@ -1245,10 +1245,8 @@
      * Versions: 2015.03.15 => ????.??.??
      */
     function remove_admin_theme() {
-        if (Config::check("admin_theme")) {
-            echo __("Removing `admin_theme` from config...").
-                test(Config::remove("admin_theme"));
-        }
+        if (Config::check("admin_theme"))
+            Config::remove("admin_theme");
     }
 
 ?>
@@ -1332,6 +1330,9 @@
                 font-family: monospace;
                 font-style: normal;
                 word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
             }
             a:link, a:visited {
                 color: #4a4747;
@@ -1420,7 +1421,6 @@
         Config::fallback("timezone", "America/New_York");
 
         // Added in 2.5
-        Config::fallback("admin_theme", "default");
         Config::fallback("email_activation", true);
         Config::fallback("check_updates", true);
         Config::fallback("enable_emoji", true);
@@ -1509,7 +1509,7 @@
         foreach ((array) Config::get("enabled_modules") as $module)
             if (file_exists(MAIN_DIR."/modules/".$module."/upgrades.php")) {
                 ob_start();
-                echo $begin = _f("Calling <span class=\"yay\">%s</span> Module's upgrader...", array($module))."\n";
+                echo $begin = _f("Calling ‘%s’ module's upgrader...", array($module))."\n";
                 require MAIN_DIR."/modules/".$module."/upgrades.php";
                 $buf = ob_get_contents();
                 if (ob_get_contents() == $begin)
@@ -1521,7 +1521,7 @@
         foreach ((array) Config::get("enabled_feathers") as $feather)
             if (file_exists(MAIN_DIR."/feathers/".$feather."/upgrades.php")) {
                 ob_start();
-                echo $begin = _f("Calling <span class=\"yay\">%s</span> Feather's upgrader...", array($feather))."\n";
+                echo $begin = _f("Calling ‘%s’ feather's upgrader...", array($feather))."\n";
                 require MAIN_DIR."/feathers/".$feather."/upgrades.php";
                 $buf = ob_get_contents();
                 if (ob_get_contents() == $begin)
