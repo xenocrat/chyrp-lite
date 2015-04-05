@@ -1662,6 +1662,8 @@
                     array_unshift($classes[$folder], $folder);
 
                 $info = include MODULES_DIR."/".$folder."/info.php";
+                if (gettype($info) != "array")
+                  continue;
 
                 $info["conflicts_true"] = array();
                 $info["depends_true"] = array();
@@ -1698,7 +1700,7 @@
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
                 fallback($info["url"]);
-                fallback($info["description"]);
+                fallback($info["description"], __("No description."));
                 fallback($info["author"], array("name" => "", "url" => ""));
                 fallback($info["help"]);
 
@@ -1762,11 +1764,13 @@
                     load_translator($folder, FEATHERS_DIR."/".$folder."/locale/".$config->locale.".mo");
 
                 $info = include FEATHERS_DIR."/".$folder."/info.php";
+                if (gettype($info) != "array")
+                  continue;
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
                 fallback($info["url"]);
-                fallback($info["description"]);
+                fallback($info["description"], __("No description."));
                 fallback($info["author"], array("name" => "", "url" => ""));
                 fallback($info["help"]);
 
