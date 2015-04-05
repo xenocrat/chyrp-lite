@@ -7,9 +7,9 @@
             <form class="detail" action="{% admin "update_tag" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     <p>
-                        <input type="text" name="name" value="${ tag.name | escape }" id="name" class="big" size="${ tag.name | length + 10 }">
-                        <button class="yay" name="delete">
-                            <img src="$theme_url/images/icons/success.svg" alt="delete"> ${ "Rename" | translate("tags") }
+                        <input type="text" name="name" value="${ tag.name | escape }" id="name">
+                        <button type="submit" class="yay">
+                            <img src="$theme_url/images/icons/success.svg" alt="success"> ${ "Rename" | translate("tags") }
                         </button>
                     </p>
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
