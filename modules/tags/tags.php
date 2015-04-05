@@ -212,7 +212,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::yaml_match($_GET['name'])))->fetchAll() as $tag) {
+                                       "value like" => self::tags_match($_GET['name'])))->fetchAll() as $tag) {
                 $post_tags = unserialize($tag["value"]);
 
                 $tags = array_merge($tags, $post_tags);
@@ -273,7 +273,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => "%\n".$_POST['original'].": \"%"))->fetchAll() as $tag) {
+                                       "value like" => self::tags_match($_POST['original'])))->fetchAll() as $tag) {
                 $tags = unserialize($tag["value"]);
                 unset($tags[$_POST['original']]);
 
@@ -294,7 +294,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::yaml_match($_GET['clean'])))->fetchAll() as $tag)  {
+                                       "value like" => self::tags_match($_GET['clean'])))->fetchAll() as $tag)  {
                 $tags = unserialize($tag["value"]);
                 unset($tags[$_GET['name']]);
 
@@ -363,7 +363,7 @@
 
             $likes = array();
             foreach ($tags as $name)
-                $likes[] = self::yaml_match($name);
+                $likes[] = self::tags_match($name);
 
             $attributes = $sql->select("post_attributes",
                                        array("value", "post_id"),
@@ -619,11 +619,8 @@
             return ($limit) ? array_slice($list, 0, $limit) : $list ;
         }
 
-        public function yaml_match($name) {
-            $dumped = serialize(array($name));
-            $quotes = preg_match("/- \"".preg_quote($name, "/")."\"/", $dumped);
-
-            return ($quotes ? "%: \"".$name."\"\n%" : "%: ".$name."\n%");
+        public function tags_match($name) {
+            return "%:\"".$name."\";%"; # Serialized notation of name as stored in db
         }
 
         public function tagsJS() {
