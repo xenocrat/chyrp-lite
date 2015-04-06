@@ -83,7 +83,7 @@
                     $("<div>", {
                         "id": "ChyrpLightbox-bg",
                         "role": "img",
-                        "aria-label": alt
+                        "aria-label": "<?php echo __('Click or touch anywhere to return to the page.') ?>"
                     }).css(ChyrpLightbox.styles.bg).click(function(e) {
                         if (e.target === e.currentTarget)
                             ChyrpLightbox.hide();
