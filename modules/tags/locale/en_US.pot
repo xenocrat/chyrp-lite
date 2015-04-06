@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-04 22:54+0000\n"
+"POT-Creation-Date: 2015-04-06 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -140,30 +140,7 @@ msgstr ""
 msgid "No Tags"
 msgstr ""
 
-#: modules/tags/upgrades.php:20
-msgid "Dropping old tags table..."
-msgstr ""
-
-#: modules/tags/upgrades.php:30
-msgid "Creating new tags table..."
-msgstr ""
-
-#: modules/tags/upgrades.php:34
-#, php-format
-msgid "Inserting tags for post #%s..."
-msgstr ""
-
-#: modules/tags/upgrades.php:47
-#: modules/tags/upgrades.php:92
-#, php-format
-msgid "Relocating tags for post #%d..."
-msgstr ""
-
-#: modules/tags/upgrades.php:64
-msgid "Removing `tags` table..."
-msgstr ""
-
-#: modules/tags/upgrades.php:105
-msgid "Removing old post attributes..."
+#: modules/tags/upgrades.php:24
+msgid "Updating tag serialization..."
 msgstr ""
 

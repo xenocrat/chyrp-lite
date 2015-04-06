@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-04 22:54+0000\n"
+"POT-Creation-Date: 2015-04-06 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,56 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/javascript.php:95
-msgid "Help"
-msgstr ""
-
-#: admin/javascript.php:99
-#: admin/javascript.php:101
-#: admin/javascript.php:168
-msgid "Close"
-msgstr ""
-
-#: admin/javascript.php:121
-#: admin/javascript.php:122
-msgid "Preview this field"
-msgstr ""
-
-#: admin/javascript.php:156
-#: admin/pages/themes.twig:22
-msgid "Preview"
-msgstr ""
-
-#: admin/javascript.php:203
-#: admin/javascript.php:204
-#: admin/pages/modules.twig:12
-#: admin/pages/modules.twig:51
-msgid "Blissful!"
-msgstr ""
-
-#: admin/javascript.php:231
-#: admin/javascript.php:232
-msgid "Conflicted!"
-msgstr ""
-
-#: admin/javascript.php:294
-msgid "There was an error enabling the extension."
-msgstr ""
-
-#: admin/javascript.php:296
-msgid "There was an error disabling the extension."
-msgstr ""
-
-#: admin/layout.twig:56
+#: admin/layout.twig:55
 msgid "Chyrp loves you."
 msgstr ""
 
-#: admin/layout.twig:57
+#: admin/layout.twig:56
 #, php-format
 msgid "Chyrp Lite v%s"
 msgstr ""
 
-#: admin/layout.twig:58
+#: admin/layout.twig:57
 msgid "Log out"
 msgstr ""
 
@@ -741,6 +701,11 @@ msgstr ""
 msgid "Modules"
 msgstr ""
 
+#: admin/pages/modules.twig:12
+#: admin/pages/modules.twig:51
+msgid "Blissful!"
+msgstr ""
+
 #: admin/pages/modules.twig:26
 #: admin/pages/modules.twig:65
 msgid "This Module requires the following Modules to be enabled:"
@@ -897,6 +862,10 @@ msgstr ""
 
 #: admin/pages/themes.twig:19
 msgid "Select"
+msgstr ""
+
+#: admin/pages/themes.twig:22
+msgid "Preview"
 msgstr ""
 
 #: admin/pages/user_settings.twig:3
