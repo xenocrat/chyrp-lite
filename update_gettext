@@ -17,6 +17,7 @@ ruby gettext.rb ./modules/highlighter/  --domain=highlighter  > ./modules/highli
 ruby gettext.rb ./modules/homepage/     --domain=homepage     > ./modules/homepage/locale/en_US.pot
 ruby gettext.rb ./modules/lightbox/     --domain=lightbox     > ./modules/lightbox/locale/en_US.pot
 ruby gettext.rb ./modules/likes/        --domain=likes        > ./modules/likes/locale/en_US.pot
+ruby gettext.rb ./modules/maptcha/      --domain=maptcha      > ./modules/maptcha/locale/en_US.pot
 ruby gettext.rb ./modules/markdown_lib/ --domain=markdown_lib > ./modules/markdown_lib/locale/en_US.pot
 ruby gettext.rb ./modules/textile_lib/  --domain=textile_lib  > ./modules/textile_lib/locale/en_US.pot
 ruby gettext.rb ./modules/read_more/    --domain=read_more    > ./modules/read_more/locale/en_US.pot
