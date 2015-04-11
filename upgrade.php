@@ -29,6 +29,14 @@
     define('THEMES_DIR',   MAIN_DIR."/themes");
     define('USE_ZLIB',     true);
 
+    # Constant: JSON_PRETTY_PRINT
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
+
+    # Constant: JSON_UNESCAPED_SLASHES
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_UNESCAPED_SLASHES')) define('JSON_UNESCAPED_SLASHES', 0);
+
     if (!AJAX and
         extension_loaded("zlib") and
         !ini_get("zlib.output_compression") and
@@ -173,7 +181,7 @@
             if (using_json()) {
                 Config::$json[$setting] = $value;
                 $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-                $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT);
+                $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
                 echo $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
             } else {
@@ -230,7 +238,7 @@
             if (using_json()) {
                 unset(Config::$json[$setting]);
                 $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-                $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT);
+                $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
                 echo _f("Removing %s setting...", array($setting)).
                      test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
@@ -1229,7 +1237,7 @@
 
             # Write JSON to file
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT);
+            $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
             echo __("Converting config to JSON...").
                 $message.test(!json_last_error());
 

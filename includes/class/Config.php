@@ -75,7 +75,7 @@
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
 
             # Generate the new JSON settings
-            $contents.= json_encode($this->json, JSON_PRETTY_PRINT);
+            $contents.= json_encode($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
             if (json_last_error()) {
                 Flash::warning(_f("Could not set \"<code>%s</code>\" because of JSON error: <code>%s</code>",
                                   array($setting, json_last_error_msg())));
@@ -119,7 +119,7 @@
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
 
             # Generate the new JSON settings
-            $contents.= json_encode($this->json, JSON_PRETTY_PRINT);
+            $contents.= json_encode($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
             if (json_last_error()) {
                 Flash::warning(_f("Could not remove \"<code>%s</code>\" because of JSON error: <code>%s</code>",
                                   array($setting, json_last_error_msg())));

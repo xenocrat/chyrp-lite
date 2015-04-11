@@ -98,6 +98,14 @@
     else
         define('USE_ZLIB', false);
 
+    # Constant: JSON_PRETTY_PRINT
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
+
+    # Constant: JSON_UNESCAPED_SLASHES
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_UNESCAPED_SLASHES')) define('JSON_UNESCAPED_SLASHES', 0);
+
     # Set error reporting levels, and headers for Chyrp's JS files.
     if (JAVASCRIPT) {
         error_reporting(0);
