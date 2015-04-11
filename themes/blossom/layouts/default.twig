@@ -55,7 +55,7 @@ ${ trigger.call("head") }
   <!-- Footer -->
   <div id="tail">
     <ul role="navigation" class="navigation tail_nav">
-    {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Index" | translate }</a></li>{% endif %}
+    {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Blog" | translate }</a></li>{% endif %}
     {% if theme.pages_list %}
       {% for item in theme.pages_list %}
         {% if item.page.depth == 1 %}
