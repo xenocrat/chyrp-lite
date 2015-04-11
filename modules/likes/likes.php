@@ -7,7 +7,8 @@
         }
 
         static function __uninstall($confirm) {
-            Like::uninstall();
+            if ($confirm)
+                Like::uninstall();
         }
 
         static function admin_like_settings($admin) {

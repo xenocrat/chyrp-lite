@@ -126,36 +126,38 @@
         }
 
         static function install() {
+            $config = Config::current();
             $sql = SQL::current();
 
-            $sql->query("CREATE TABLE IF NOT EXISTS __likes (
-                          id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                          post_id INTEGER NOT NULL,
-                          user_id INTEGER NOT NULL,
-                          timestamp DATETIME DEFAULT NULL,
-                          session_hash VARCHAR(32) NOT NULL
-                        ) DEFAULT CHARSET=UTF8");
-            $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
-            $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
+            if (!$config->module_like) {
+                $sql->query("CREATE TABLE IF NOT EXISTS __likes (
+                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                              post_id INTEGER NOT NULL,
+                              user_id INTEGER NOT NULL,
+                              timestamp DATETIME DEFAULT NULL,
+                              session_hash VARCHAR(32) NOT NULL
+                            ) DEFAULT CHARSET=UTF8");
+                $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
+                $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
 
-            Group::add_permission("like_post", "Like Posts");
-            Group::add_permission("unlike_post", "Unlike Posts");
+                Group::add_permission("like_post", "Like Posts");
+                Group::add_permission("unlike_post", "Unlike Posts");
 
-            $likeText = array(0 => "You like this.",
-                              1 => "You and 1 other like this.",
-                              2 => "You and %NUM% other like this.",
-                              3 => "Be the first to like.",
-                              4 => "1 person likes this.",
-                              5 => "%NUM% people like this.",
-                              6 => "Like!",
-                              7 => "Unlike!");
+                $likeText = array(0 => "You like this.",
+                                  1 => "You and 1 other like this.",
+                                  2 => "You and %NUM% other like this.",
+                                  3 => "Be the first to like.",
+                                  4 => "1 person likes this.",
+                                  5 => "%NUM% people like this.",
+                                  6 => "Like!",
+                                  7 => "Unlike!");
 
-            $config = Config::current();
-            $set = array($config->set("module_like",
-                                array("showOnFront" => true,
-                                      "likeWithText" => false,
-                                      "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg",
-                                      "likeText" => $likeText)));
+                $set = array($config->set("module_like",
+                                    array("showOnFront" => true,
+                                          "likeWithText" => false,
+                                          "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg",
+                                          "likeText" => $likeText)));
+            }
         }
 
         static function uninstall() {
