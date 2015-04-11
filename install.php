@@ -43,6 +43,10 @@
     $default_timezone = oneof(ini_get("date.timezone"), "Atlantic/Reykjavik");
     set_timezone($default_timezone);
 
+    # Ask PHP for the default locale and try to load a translator
+    if (file_exists(INCLUDES_DIR."/locale/".locale_get_default().".mo"))
+        load_translator("chyrp", INCLUDES_DIR."/locale/".locale_get_default().".mo");
+
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
     sanitize_input($_POST);
@@ -362,7 +366,8 @@
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title>Chyrp Installer</title>
+        <title><?php echo __("Chyrp Lite Installer"); ?></title>
+        <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css" media="screen">
             @font-face {
                 font-family: 'Open Sans webfont';
@@ -652,9 +657,7 @@
                         <input type="text" name="prefix" value="<?php value_fallback("prefix"); ?>" id="prefix">
                     </p>
                 </div>
-
                 <hr>
-
                 <h1><?php echo __("Website Setup"); ?></h1>
                 <p id="name_field">
                     <label for="name"><?php echo __("Site Name"); ?></label>
@@ -675,9 +678,7 @@
                     <?php endforeach; ?>
                     </select>
                 </p>
-
                 <hr>
-
                 <h1><?php echo __("Admin Account"); ?></h1>
                 <p id="login_field">
                     <label for="login"><?php echo __("Username"); ?></label>
@@ -695,7 +696,6 @@
                     <label for="email"><?php echo __("E-Mail Address"); ?></label>
                     <input type="text" name="email" value="<?php value_fallback("email"); ?>" id="email">
                 </p>
-
                 <button type="submit"><?php echo __("Install!"); ?></button>
             </form>
         <?php else: ?>

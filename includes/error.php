@@ -21,7 +21,8 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Chyrp: <?php echo $title; ?></title>
+        <title><?php echo $title; ?></title>
+        <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';

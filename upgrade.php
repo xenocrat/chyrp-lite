@@ -10,24 +10,24 @@
 
     header("Content-type: text/html; charset=UTF-8");
 
-    define('DEBUG',        true);
+    define('DEBUG',         true);
     define('CHYRP_VERSION', "2015.03.15");
-    define('CACHE_TWIG',   false);
-    define('JAVASCRIPT',   false);
-    define('ADMIN',        false);
-    define('AJAX',         false);
-    define('XML_RPC',      false);
-    define('TRACKBACK',    false);
-    define('UPGRADING',    true);
-    define('INSTALLING',   false);
-    define('TESTER',       true);
-    define('INDEX',        false);
-    define('MAIN_DIR',     dirname(__FILE__));
-    define('INCLUDES_DIR', dirname(__FILE__)."/includes");
-    define('MODULES_DIR',  MAIN_DIR."/modules");
-    define('FEATHERS_DIR', MAIN_DIR."/feathers");
-    define('THEMES_DIR',   MAIN_DIR."/themes");
-    define('USE_ZLIB',     true);
+    define('CACHE_TWIG',    false);
+    define('JAVASCRIPT',    false);
+    define('ADMIN',         false);
+    define('AJAX',          false);
+    define('XML_RPC',       false);
+    define('TRACKBACK',     false);
+    define('UPGRADING',     true);
+    define('INSTALLING',    false);
+    define('TESTER',        true);
+    define('INDEX',         false);
+    define('MAIN_DIR',      dirname(__FILE__));
+    define('INCLUDES_DIR',  dirname(__FILE__)."/includes");
+    define('MODULES_DIR',   MAIN_DIR."/modules");
+    define('FEATHERS_DIR',  MAIN_DIR."/feathers");
+    define('THEMES_DIR',    MAIN_DIR."/themes");
+    define('USE_ZLIB',      true);
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4
@@ -1262,7 +1262,8 @@
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title><?php echo __("Chyrp Upgrader"); ?></title>
+        <title><?php echo __("Chyrp Lite Upgrader"); ?></title>
+        <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css" media="screen">
             @font-face {
                 font-family: 'Open Sans webfont';
