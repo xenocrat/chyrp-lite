@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-06 00:00+0000\n"
+"POT-Creation-Date: 2015-04-11 18:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -39,19 +39,7 @@ msgstr ""
 msgid "Edit Tags for &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/tags/pages/admin/manage_tags.twig:3
-#: modules/tags/pages/admin/manage_tags.twig:6
-msgid "Manage Tags"
-msgstr ""
-
-#: modules/tags/pages/admin/manage_tags.twig:10
-msgid "Name"
-msgstr ""
-
-#: modules/tags/pages/admin/manage_tags.twig:11
-msgid "Posts Tagged"
-msgstr ""
-
+#: modules/tags/pages/admin/edit_tags.twig:10
 #: modules/tags/pages/admin/manage_tags.twig:45
 #: modules/tags/tags.php:56
 #: modules/tags/tags.php:113
@@ -60,11 +48,25 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: modules/tags/pages/admin/manage_tags.twig:71
+#: modules/tags/pages/admin/manage_tags.twig:3
+#: modules/tags/pages/admin/manage_tags.twig:6
+msgid "Manage Tags"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:10
+#: modules/tags/pages/admin/rename_tag.twig:10
+msgid "Name"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:11
+msgid "Posts Tagged"
+msgstr ""
+
+#: modules/tags/pages/admin/manage_tags.twig:75
 msgid "Tag Selected Post(s) with:"
 msgstr ""
 
-#: modules/tags/pages/admin/manage_tags.twig:73
+#: modules/tags/pages/admin/manage_tags.twig:77
 msgid "Tag"
 msgstr ""
 
@@ -77,7 +79,7 @@ msgstr ""
 msgid "Edit Tag &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/tags/pages/admin/rename_tag.twig:12
+#: modules/tags/pages/admin/rename_tag.twig:15
 msgid "Rename"
 msgstr ""
 

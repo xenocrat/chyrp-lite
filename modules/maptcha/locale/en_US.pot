@@ -17,31 +17,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/recaptcha/info.php:3
-msgid "reCAPTCHA"
+#: modules/maptcha/info.php:3
+msgid "MAPTCHA"
 msgstr ""
 
-#: modules/recaptcha/info.php:6
-msgid "Use reCAPTCHA to prevent spam."
+#: modules/maptcha/info.php:6
+msgid "Ask users to solve simple mathematics problems to prevent spam."
 msgstr ""
 
-#: modules/recaptcha/info.php:11
-msgid "Please remember to set the public and private keys on the ReCAPTCHA settings page."
+#: modules/maptcha/maptcha.php:27
+#, php-format
+msgid "How much is %d + %d ?"
 msgstr ""
 
-#: modules/recaptcha/pages/admin/recaptcha_settings.twig:3
-msgid "Recaptcha Settings"
-msgstr ""
-
-#: modules/recaptcha/pages/admin/recaptcha_settings.twig:9
-msgid "Public Key"
-msgstr ""
-
-#: modules/recaptcha/pages/admin/recaptcha_settings.twig:13
-msgid "Private Key"
-msgstr ""
-
-#: modules/recaptcha/recaptcha.php:41
-msgid "ReCAPTCHA"
+#: modules/maptcha/maptcha.php:28
+msgid "Yay mathemetics!"
 msgstr ""
 

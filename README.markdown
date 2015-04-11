@@ -11,13 +11,13 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 
 #### Core:
 * Responsive and accessible HTML5 for all blog and admin pages.
-* Universal support for Markdown, Textile, or raw HTML.
+* Universal support for plain text, Markdown, Textile, or raw HTML.
 * One-click markup/markdown previews for posts and pages.
-* Trackback and Pingback support.
+* Send and receive trackbacks pingbacks on your blog posts.
 * Personalise your blog using a powerful extensions framework.
 * Semantic markup makes it easy to customise themes or write your own.
 * A comprehensive rights model for managing your users and visitors.
-* SHA-512 password hashing for registered users of your blog.
+* Fully internationalized, with `getttext` localization support.
 
 #### Feathers:
 * Text: write textual blog entries.
@@ -26,7 +26,7 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Link: link to another website.
 * Video: upload a video file.
 * Audio: upload an audio file.
-* Uploader: create an image gallery or upload multiple file attachments.
+* Uploader: upload multiple files.
 
 #### Modules:
 * Cacher: cache your blog pages for reduced server load.
@@ -40,9 +40,10 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Lightbox: on-page image viewer with image protection.
 * Sitemap: index your blog for search engines.
 * Homepage: replace the blog index with a homepage.
+* Highlighter: syntax highlighting courtesy of [highlight.js](https://highlightjs.org/).
 
 ## How is Chyrp Lite different from Chyrp?
-Chyrp Lite is intended to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. JavaScripts deemed unduly complex or maintenance-heavy have been removed, as have modules and feathers deemed non-essential. Accessibility is aided by semantic markup, comprehensive alt-text and ARIA labels.
+The aim of Chyrp Lite is to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. Accessibility is aided by semantic markup and comprehensive ARIA labelling.
 
 ## Requirements
 These are the earliest versions of the services with which Chyrp Lite has been tested:

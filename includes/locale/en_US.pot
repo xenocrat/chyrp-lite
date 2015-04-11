@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-06 00:00+0000\n"
+"POT-Creation-Date: 2015-04-11 18:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -1360,7 +1360,7 @@ msgid "Install!"
 msgstr ""
 
 #: install.php:702
-#: upgrade.php:1534
+#: upgrade.php:1542
 msgid "Done!"
 msgstr ""
 
@@ -1369,7 +1369,7 @@ msgid "Chyrp has been successfully installed and you have been logged in."
 msgstr ""
 
 #: install.php:706
-#: upgrade.php:1537
+#: upgrade.php:1545
 msgid "What now?"
 msgstr ""
 
@@ -1389,358 +1389,358 @@ msgstr ""
 msgid "Take me to my site!"
 msgstr ""
 
-#: upgrade.php:171
+#: upgrade.php:179
 #, php-format
 msgid "Setting %s to %s..."
 msgstr ""
 
-#: upgrade.php:214
+#: upgrade.php:222
 #, php-format
 msgid "Adding %s setting..."
 msgstr ""
 
-#: upgrade.php:235
-#: upgrade.php:242
+#: upgrade.php:243
+#: upgrade.php:250
 #, php-format
 msgid "Removing %s setting..."
 msgstr ""
 
-#: upgrade.php:286
+#: upgrade.php:294
 msgid "success!"
 msgstr ""
 
-#: upgrade.php:288
+#: upgrade.php:296
 msgid "failed!"
 msgstr ""
 
-#: upgrade.php:311
+#: upgrade.php:319
 msgid "Generating .htaccess file..."
 msgstr ""
 
-#: upgrade.php:312
-#: upgrade.php:315
+#: upgrade.php:320
+#: upgrade.php:323
 msgid "Try creating the file and/or CHMODding it to 777 temporarily."
 msgstr ""
 
-#: upgrade.php:314
+#: upgrade.php:322
 msgid "Appending to .htaccess file..."
 msgstr ""
 
-#: upgrade.php:326
+#: upgrade.php:334
 msgid "Renaming tweets table to posts..."
 msgstr ""
 
-#: upgrade.php:330
+#: upgrade.php:338
 msgid "Renaming add_tweet permission to add_post..."
 msgstr ""
 
-#: upgrade.php:334
+#: upgrade.php:342
 msgid "Renaming edit_tweet permission to edit_post..."
 msgstr ""
 
-#: upgrade.php:338
+#: upgrade.php:346
 msgid "Renaming delete_tweet permission to delete_post..."
 msgstr ""
 
-#: upgrade.php:367
+#: upgrade.php:375
 msgid "Adding parent_id column to pages table..."
 msgstr ""
 
-#: upgrade.php:381
+#: upgrade.php:389
 msgid "Adding list_order column to pages table..."
 msgstr ""
 
-#: upgrade.php:402
+#: upgrade.php:410
 msgid "Moving /includes/config.yml.php to /includes/config.yaml.php..."
 msgstr ""
 
-#: upgrade.php:403
-#: upgrade.php:422
+#: upgrade.php:411
+#: upgrade.php:430
 msgid "Try CHMODding the file to 777."
 msgstr ""
 
-#: upgrade.php:421
+#: upgrade.php:429
 msgid "Updating protection code in config.json.php..."
 msgstr ""
 
-#: upgrade.php:454
+#: upgrade.php:462
 msgid "Renaming /upload directory to /uploads..."
 msgstr ""
 
-#: upgrade.php:454
+#: upgrade.php:462
 msgid "Try CHMODding the directory to 777."
 msgstr ""
 
-#: upgrade.php:489
+#: upgrade.php:497
 #, php-format
 msgid "Sanitizing XML data of post #%d..."
 msgstr ""
 
-#: upgrade.php:520
+#: upgrade.php:528
 msgid "Backing up current groups table..."
 msgstr ""
 
-#: upgrade.php:539
+#: upgrade.php:547
 msgid "Dropping old groups table..."
 msgstr ""
 
-#: upgrade.php:548
+#: upgrade.php:556
 msgid "Creating new groups table..."
 msgstr ""
 
-#: upgrade.php:552
+#: upgrade.php:560
 #, php-format
 msgid "Restoring group \"%s\"..."
 msgstr ""
 
-#: upgrade.php:572
-#: upgrade.php:653
+#: upgrade.php:580
+#: upgrade.php:661
 msgid "Creating new permissions table..."
 msgstr ""
 
-#: upgrade.php:602
-#: upgrade.php:1128
+#: upgrade.php:610
+#: upgrade.php:1136
 #, php-format
 msgid "Inserting permission \"%s\"..."
 msgstr ""
 
-#: upgrade.php:617
+#: upgrade.php:625
 msgid "Creating ‘sessions’ table..."
 msgstr ""
 
-#: upgrade.php:643
+#: upgrade.php:651
 msgid "Backing up current permissions table..."
 msgstr ""
 
-#: upgrade.php:650
+#: upgrade.php:658
 msgid "Dropping old permissions table..."
 msgstr ""
 
-#: upgrade.php:687
+#: upgrade.php:695
 #, php-format
 msgid "Restoring permission \"%s\"..."
 msgstr ""
 
-#: upgrade.php:715
+#: upgrade.php:723
 #, php-format
 msgid "Updating custom route %s to new format..."
 msgstr ""
 
-#: upgrade.php:730
+#: upgrade.php:738
 msgid "Removing database.yaml.php file..."
 msgstr ""
 
-#: upgrade.php:731
+#: upgrade.php:739
 msgid "Try deleting it manually."
 msgstr ""
 
-#: upgrade.php:758
+#: upgrade.php:766
 msgid "Updating ‘status’ column on ‘posts’ table..."
-msgstr ""
-
-#: upgrade.php:760
-#: upgrade.php:874
-msgid "Backing up ‘posts’ table..."
 msgstr ""
 
 #: upgrade.php:768
 #: upgrade.php:882
+msgid "Backing up ‘posts’ table..."
+msgstr ""
+
+#: upgrade.php:776
+#: upgrade.php:890
 msgid "Dropping ‘posts’ table..."
 msgstr ""
 
-#: upgrade.php:774
-#: upgrade.php:888
+#: upgrade.php:782
+#: upgrade.php:896
 msgid "Creating ‘posts’ table..."
 msgstr ""
 
-#: upgrade.php:789
-#: upgrade.php:795
-#: upgrade.php:1089
-#: upgrade.php:1095
-#: upgrade.php:1180
-#: upgrade.php:1186
+#: upgrade.php:797
+#: upgrade.php:803
+#: upgrade.php:1097
+#: upgrade.php:1103
+#: upgrade.php:1188
+#: upgrade.php:1194
 #, php-format
 msgid "Backup written to %s."
 msgstr ""
 
-#: upgrade.php:794
-#: upgrade.php:906
+#: upgrade.php:802
+#: upgrade.php:914
 #, php-format
 msgid "Restoring post #%d..."
 msgstr ""
 
-#: upgrade.php:815
+#: upgrade.php:823
 msgid "Creating ‘post_attributes’ table..."
 msgstr ""
 
-#: upgrade.php:867
+#: upgrade.php:875
 #, php-format
 msgid "Migrating attributes of post #%d..."
 msgstr ""
 
-#: upgrade.php:872
+#: upgrade.php:880
 msgid "Removing ‘xml’ column from ‘posts’ table..."
 msgstr ""
 
-#: upgrade.php:928
+#: upgrade.php:936
 msgid "Backing up permissions..."
 msgstr ""
 
-#: upgrade.php:936
+#: upgrade.php:944
 msgid "Dropping ‘permissions’ table..."
 msgstr ""
 
-#: upgrade.php:939
+#: upgrade.php:947
 msgid "Creating ‘permissions’ table..."
 msgstr ""
 
-#: upgrade.php:948
+#: upgrade.php:956
 #, php-format
 msgid "Restoring permission ‘%s’..."
 msgstr ""
 
-#: upgrade.php:966
+#: upgrade.php:974
 msgid "Backing up groups..."
 msgstr ""
 
-#: upgrade.php:980
+#: upgrade.php:988
 msgid "Dropping ‘groups’ table..."
 msgstr ""
 
-#: upgrade.php:983
+#: upgrade.php:991
 msgid "Creating ‘groups’ table..."
 msgstr ""
 
-#: upgrade.php:991
+#: upgrade.php:999
 #, php-format
 msgid "Restoring group ‘%s’..."
 msgstr ""
 
-#: upgrade.php:998
+#: upgrade.php:1006
 #, php-format
 msgid "Restoring permission ‘%s’ on group ‘%s’..."
 msgstr ""
 
-#: upgrade.php:1011
+#: upgrade.php:1019
 msgid "Removing ‘includes/config.php’..."
 msgstr ""
 
-#: upgrade.php:1015
+#: upgrade.php:1023
 msgid "Removing ‘includes/database.php’..."
 msgstr ""
 
-#: upgrade.php:1019
+#: upgrade.php:1027
 msgid "Removing ‘includes/rss.php’..."
 msgstr ""
 
-#: upgrade.php:1023
+#: upgrade.php:1031
 msgid "Removing ‘includes/bookmarklet.php’..."
 msgstr ""
 
-#: upgrade.php:1027
+#: upgrade.php:1035
 msgid "Removing ‘includes/config.yaml.php’..."
 msgstr ""
 
-#: upgrade.php:1041
+#: upgrade.php:1049
 msgid "Adding approved column to users table..."
 msgstr ""
 
-#: upgrade.php:1059
+#: upgrade.php:1067
 msgid "Updating ‘approved’ column on ‘users’ table..."
 msgstr ""
 
-#: upgrade.php:1061
-#: upgrade.php:1150
+#: upgrade.php:1069
+#: upgrade.php:1158
 msgid "Backing up ‘users’ table..."
 msgstr ""
 
-#: upgrade.php:1068
-#: upgrade.php:1158
+#: upgrade.php:1076
+#: upgrade.php:1166
 msgid "Dropping ‘users’ table..."
 msgstr ""
 
-#: upgrade.php:1073
-#: upgrade.php:1164
+#: upgrade.php:1081
+#: upgrade.php:1172
 msgid "Creating ‘users’ table..."
 msgstr ""
 
-#: upgrade.php:1094
-#: upgrade.php:1185
+#: upgrade.php:1102
+#: upgrade.php:1193
 #, php-format
 msgid "Restoring user #%d..."
 msgstr ""
 
-#: upgrade.php:1114
+#: upgrade.php:1122
 msgid "Adding public column to pages table..."
 msgstr ""
 
-#: upgrade.php:1148
+#: upgrade.php:1156
 msgid "Updating ‘password’ column on ‘users’ table..."
 msgstr ""
 
-#: upgrade.php:1233
+#: upgrade.php:1241
 msgid "Converting config to JSON..."
 msgstr ""
 
-#: upgrade.php:1236
+#: upgrade.php:1244
 msgid "Writing ‘includes/config.json.php’..."
 msgstr ""
 
-#: upgrade.php:1257
+#: upgrade.php:1265
 msgid "Chyrp Upgrader"
 msgstr ""
 
-#: upgrade.php:1512
+#: upgrade.php:1520
 #, php-format
 msgid "Calling ‘%s’ module's upgrader..."
 msgstr ""
 
-#: upgrade.php:1524
+#: upgrade.php:1532
 #, php-format
 msgid "Calling ‘%s’ feather's upgrader..."
 msgstr ""
 
-#: upgrade.php:1539
+#: upgrade.php:1547
 msgid "Look through the results up there for any failed tasks."
 msgstr ""
 
-#: upgrade.php:1540
+#: upgrade.php:1548
 msgid "If any of your Modules or Feathers have new versions available for this release, check if an <code>upgrades.php</code> file exists in their main directory. If that file exists, run this upgrader again after enabling the Module or Feather and it will run the upgrade tasks."
 msgstr ""
 
-#: upgrade.php:1541
+#: upgrade.php:1549
 msgid "When you are done, you can delete this file. It shouldn't pose a threat, but you should delete it anyway, just to be safe and tidy."
 msgstr ""
 
-#: upgrade.php:1543
+#: upgrade.php:1551
 msgid "All done!"
 msgstr ""
 
-#: upgrade.php:1545
+#: upgrade.php:1553
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:1546
+#: upgrade.php:1554
 msgid "Please take these preemptive measures before proceeding:"
 msgstr ""
 
-#: upgrade.php:1548
+#: upgrade.php:1556
 msgid "<strong>Make a backup of your installation and database.</strong>"
 msgstr ""
 
-#: upgrade.php:1549
+#: upgrade.php:1557
 msgid "Disable any third-party Modules and Feathers."
 msgstr ""
 
-#: upgrade.php:1550
+#: upgrade.php:1558
 msgid "Ensure Chyrp Lite's directory is writable by the server."
 msgstr ""
 
-#: upgrade.php:1552
+#: upgrade.php:1560
 msgid "If any of the upgrade tasks fail, you can safely refresh and retry."
 msgstr ""
 
-#: upgrade.php:1554
+#: upgrade.php:1562
 msgid "Upgrade me!"
 msgstr ""
 
