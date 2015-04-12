@@ -43,9 +43,11 @@
     $default_timezone = oneof(ini_get("date.timezone"), "Atlantic/Reykjavik");
     set_timezone($default_timezone);
 
-    # Ask PHP for the default locale and try to load a translator
-    if (file_exists(INCLUDES_DIR."/locale/".locale_get_default().".mo"))
-        load_translator("chyrp", INCLUDES_DIR."/locale/".locale_get_default().".mo");
+    # Ask PHP for the default locale and try to load an appropriate translator
+    $default_language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
+
+    if (file_exists(INCLUDES_DIR."/locale/".$default_language.".mo"))
+        load_translator("chyrp", INCLUDES_DIR."/locale/".$default_language.".mo");
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
