@@ -7,5 +7,5 @@ return array(
     "author"        => array(
         "name"      => "Chyrp Team",
         "url"       => "http://chyrp.net/"),
-    "confirm"		=> __("Do you want to remove your tags from the database?", "tags")
+    "confirm"       => __("Do you want to remove your tags from the database?", "tags")
 );

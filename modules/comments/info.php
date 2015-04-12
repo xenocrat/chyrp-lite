@@ -8,6 +8,6 @@ return array(
         "name"      => "Chyrp Team",
         "url"       => "http://chyrp.net/"),
     "notifications" => array(
-    	__("Please remember to update the permission settings for each group.", "comments")),
-    "confirm"		=> __("Do you want to remove comments from the database?", "comments")
+                        __("Please remember to update the permission settings for each group.", "comments")),
+    "confirm"       => __("Do you want to remove comments from the database?", "comments")
 );

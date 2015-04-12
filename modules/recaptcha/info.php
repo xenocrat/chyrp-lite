@@ -8,7 +8,7 @@ return array(
         "name"      => "Chyrp Team",
         "url"       => "http://chyrp.net/"),
     "notifications" => array(
-    	__("Please remember to set the public and private keys on the ReCAPTCHA settings page.", "recaptcha")),
+                       __("Please remember to set the public and private keys on the ReCAPTCHA settings page.", "recaptcha")),
     "conflicts"     => array(
-		"maptcha")
+                       "maptcha")
 );

@@ -7,5 +7,5 @@ return array(
     "author"        => array(
         "name"      => "Daniel Pimley",
         "url"       => "http://www.pimley.net/"),
-    "confirm" 		=> __("Do you want to remove rights data from the database?", "rights")
+    "confirm"       => __("Do you want to remove rights data from the database?", "rights")
 );

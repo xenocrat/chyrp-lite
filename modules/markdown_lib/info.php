@@ -8,7 +8,7 @@ return array(
         "name"      => "Chyrp team",
         "url"       => "http://chyrp.net/"),
     "conflicts"     => array(
-    	"textilize",
-        "markdown",
-        "textile_lib")
+                       "textilize",
+                       "markdown",
+                       "textile_lib")
 );

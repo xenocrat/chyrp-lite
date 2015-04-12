@@ -8,5 +8,5 @@ return array(
         "name"      => "Daniel Pimley",
         "url"       => "http://www.pimley.net/"),
     "conflicts"     => array(
-		"recaptcha")
+                       "recaptcha")
 );
