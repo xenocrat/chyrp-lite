@@ -74,12 +74,12 @@
     if (file_exists(INCLUDES_DIR."/config.json.php") and file_exists(MAIN_DIR."/.htaccess")) {
         $sql = SQL::current(true);
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            error(__("Already Installed"), __("Chyrp is already correctly installed and configured."));
+            error(__("Already Installed"), __("Chyrp is already fully installed and configured. You can delete this installer."));
     }
 
     if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR."/.htaccess")) or
         (file_exists(MAIN_DIR."/.htaccess") and !is_writable(MAIN_DIR."/.htaccess") and !$htaccess_has_chyrp))
-        $errors[] = _f("STOP! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
+        $errors[] = _f("Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
 
     if (!is_writable(INCLUDES_DIR))
         $errors[] = __("Chyrp's includes directory is not writable by the server. In order for the installer to generate your configuration files, please CHMOD or CHOWN it so that Chyrp can write to it.");

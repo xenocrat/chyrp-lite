@@ -1,9 +1,9 @@
 ## What is Chyrp Lite?
 
-Chyrp Lite is an ultra-lightweight fork of the [Chyrp](http://chyrp.net/) blogging engine.
+Chyrp Lite is an ultra-lightweight blogging engine, written in PHP.
 
 ## What can Chyrp Lite do for me?
-With Chyrp Lite you can run your own blog on your own web server with minimal fuss. Chyrp Lite provides a beautiful default blog theme and a friendly administration environment, both fully compatible with desktop computers and mobile devices, thanks to the power of responsive HTML5.
+With Chyrp Lite you can run your own blog on your own web server with minimal fuss. Chyrp Lite provides two beautiful blog themes and a friendly administration environment, all fully navigable on desktop computers and mobile devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
 
 Chyrp Lite is powered by a unique Feathers system that allows you to make your blog whatever you want it to be: you can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. With the addition of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website, with blogging features on the side.
 
@@ -13,8 +13,8 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Responsive and accessible HTML5 for all blog and admin pages.
 * Universal support for plain text, Markdown, Textile, or raw HTML.
 * One-click markup/markdown previews for posts and pages.
-* Send and receive trackbacks pingbacks on your blog posts.
-* Personalise your blog using a powerful extensions framework.
+* Send and receive trackbacks and pingbacks on your blog posts.
+* Personalise your blog using powerful extensions.
 * Semantic markup makes it easy to customise themes or write your own.
 * A comprehensive rights model for managing your users and visitors.
 * Fully internationalized, with `getttext` localization support.
@@ -41,9 +41,6 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Sitemap: index your blog for search engines.
 * Homepage: replace the blog index with a homepage.
 * Highlighter: syntax highlighting courtesy of [highlight.js](https://highlightjs.org/).
-
-## How is Chyrp Lite different from Chyrp?
-The aim of Chyrp Lite is to minimise complexity and client-side footprint for users, and to maximise reliability and ease of maintenance for administrators. Modifications to the engine and extensions strive for clean separation of content, style, and behaviour. Wherever possible, [Block, Element, Modifier](http://api.yandex.com/bem/) methodology has been enforced. Accessibility is aided by semantic markup and comprehensive ARIA labelling.
 
 ## Requirements
 These are the earliest versions of the services with which Chyrp Lite has been tested:
