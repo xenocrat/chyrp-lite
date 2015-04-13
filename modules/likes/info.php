@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Likes", "likes"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.1,
+    "version"       => 1.2,
     "description"   => __("Allow users to “like” a post.", "likes"),
     "author"        => array(
         "name"      => "Chyrp team",

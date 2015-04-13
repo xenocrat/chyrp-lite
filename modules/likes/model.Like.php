@@ -40,6 +40,9 @@
          * Adds a like to the database.
          */
         public function like() {
+          if (!Visitor::current()->group->can("like_post"))
+              show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts."));
+
         	if ($this->action == "like" and $this->post_id > 0) {
             	SQL::current()->insert("likes",
                                  array("post_id" => $this->post_id,
@@ -55,6 +58,9 @@
          * Removes a like from the database.
          */
         public function unlike() {
+          if (!Visitor::current()->group->can("unlike_post"))
+              show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts."));
+
             if ($this->action == "unlike" and $this->post_id > 0) {
             	SQL::current()->delete("likes", array("post_id" => $this->post_id,
                                                       "session_hash" => $this->session_hash),
@@ -105,26 +111,6 @@
         
         }
 
-        public function getText($count, $text) {
-        	global $likes_replace_count;
-        	$likes_replace_count = $count;
-        	if (!function_exists('likes_preg_cb')) {
-        		function likes_preg_cb($matches) {
-		        	global $likes_replace_count;
-        			$new_count = $likes_replace_count;
-        			if (isset($matches[2])) {
-        				$operator = $matches[3];
-        				$num = $matches[4];
-        				$new_count = $operator == "+" ? $likes_replace_count + $num : $likes_replace_count - $num;
-        			}
-        			return "<b>$new_count</b>";
-        		}
-        	}
-
-        	$text = preg_replace_callback('/(%NUM(([+-])([0-9]+))?%)/', "likes_preg_cb", $text);
-        	return $text;
-        }
-
         static function install() {
             $config = Config::current();
             $sql = SQL::current();
@@ -143,20 +129,10 @@
                 Group::add_permission("like_post", "Like Posts");
                 Group::add_permission("unlike_post", "Unlike Posts");
 
-                $likeText = array(0 => "You like this.",
-                                  1 => "You and 1 other like this.",
-                                  2 => "You and %NUM% other like this.",
-                                  3 => "Be the first to like.",
-                                  4 => "1 person likes this.",
-                                  5 => "%NUM% people like this.",
-                                  6 => "Like!",
-                                  7 => "Unlike!");
-
                 $set = array($config->set("module_like",
                                     array("showOnFront" => true,
                                           "likeWithText" => false,
-                                          "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg",
-                                          "likeText" => $likeText)));
+                                          "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg")));
             }
         }
 

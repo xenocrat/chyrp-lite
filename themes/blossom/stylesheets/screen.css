@@ -174,7 +174,6 @@ dl {                                                list-style: none }
     ol.comments li:last-child {                     border-bottom: none }
     ol.comments li#comment_shim {                   display: none }
     ol.comments li.comment_form {                   padding-bottom: 2em }
-    ol.comments li.reply {                          padding-left: 4rem }
 table {                                             border-collapse: collapse;
                                                     border-spacing: 0em;
                                                     width: 100%;
@@ -330,8 +329,6 @@ label {                                             display: block;
                                                     border-top: 1px solid #c6ccc8;
                                                     border-bottom-left-radius: 6px;
                                                     border-bottom-right-radius: 6px }
-    ol.comments li.reply div.metadata {             padding-left: 4rem;
-                                                    left: -4rem }
     div.comments_pagination {                       width: 100%;
                                                     clear: both;
                                                     text-align: center }
@@ -502,13 +499,10 @@ a:active {                                          color: #d94c7b;
     div.photo_frame > a {                           border-bottom: none }
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
-    a.like > img, a.liked > img {                   margin-right: 0.25em;
-                                                    opacity: 0.5 }
-    a.like:hover > img, a.liked:hover > img,
-    a.like:focus > img, a.liked:focus > img,
-    a.like:active > img, a.liked:active > img {     opacity: 1 }
-    a.like > span.like, a.like > span.unlike,
-    a.liked > span.like, a.liked > span.unlike {    margin-right: 0.25em }
+    a.likes > img {                                 opacity: 0.5 }
+    a.likes:hover > img,
+    a.likes:focus > img,
+    a.likes:active > img {                          opacity: 1 }
     a.archive_post_link {                           display: block;
                                                     position: absolute;
                                                     top: 0px;
@@ -549,7 +543,6 @@ img {                                               border-style: none;
     ol.comments li {                                margin: 0em;
                                                     padding: 1rem 1rem 0rem 1rem }
     ol.comments li.comment_form {                   padding: 0em 1rem 1rem 1rem }
-    ol.comments li.reply {                          padding-left: 2rem }
     ul.archive li {                                 margin: 0rem 0rem 0rem 1rem }
     ul.tail_nav.mobile_nav {                        display: block;
                                                     position: fixed;
@@ -580,8 +573,6 @@ img {                                               border-style: none;
     div.metadata {                                  left: -1rem;
                                                     margin-top: 1rem;
                                                     padding: 0rem 1rem }
-    ol.comments li.reply div.metadata {             padding-left: 2rem;
-                                                    left: -2rem }
 
 }
 

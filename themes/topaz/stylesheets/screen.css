@@ -511,13 +511,10 @@ a:active {                                          color: #000000;
     div.photo_frame > a {                           border-bottom: none }
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
-    a.like > img, a.liked > img {                   margin-right: 0.25em;
-                                                    opacity: 0.5 }
-    a.like:hover > img, a.liked:hover > img,
-    a.like:focus > img, a.liked:focus > img,
-    a.like:active > img, a.liked:active > img {     opacity: 1 }
-    a.like > span.like, a.like > span.unlike,
-    a.liked > span.like, a.liked > span.unlike {    margin-right: 0.25em }
+    a.likes > img {                                 opacity: 0.5 }
+    a.likes:hover > img,
+    a.likes:focus > img,
+    a.likes:active > img {                          opacity: 1 }
     a.archive_post_link {                           display: block;
                                                     position: absolute;
                                                     top: 0px;

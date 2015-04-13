@@ -23,19 +23,10 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $likeText = array();
-            foreach($_POST as $key => $value) {
-            	if (strstr($key, "likeText-")) {
-            		$exploded_array = explode("-", $key, 2);
-            		$likeText[$exploded_array[1]] = strip_tags(stripslashes($value));
-            	}
-            }
-
             $set = array($config->set("module_like",
                                 array("showOnFront" => isset($_POST['showOnFront']),
                                       "likeWithText" => isset($_POST['likeWithText']),
-                                      "likeImage" => $_POST['likeImage'],
-                                      "likeText" => $likeText)));
+                                      "likeImage" => $_POST['likeImage'])));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=like_settings");
@@ -43,16 +34,33 @@
 
         static function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
-                $navs["like_settings"] = array("title" => __("Like", "like"));
+                $navs["like_settings"] = array("title" => __("Likes", "likes"));
 
             return $navs;
         }
 
         static function route_like() {
-            $request["action"] = $_GET['action'];
-            $request["post_id"] = $_GET['post_id'];
+            $request["action"] = "like";
+            $request["post_id"] = (int) fallback($_GET['post_id'], 0);
 
             $like = new Like($request, Visitor::current()->id);
+            $like->like();
+
+            $post = new Post($request["post_id"]);
+
+            Flash::notice(__("Post liked."), $post->url()."#likes_post-".$request["post_id"]);
+        }
+
+        static function route_unlike() {
+            $request["action"] = "unlike";
+            $request["post_id"] = (int) fallback($_GET['post_id'], 0);
+
+            $like = new Like($request, Visitor::current()->id);
+            $like->unlike();
+
+            $post = new Post($request["post_id"]);
+
+            Flash::notice(__("Post unliked."), $post->url()."#likes_post-".$request["post_id"]);
         }
 
         static function stylesheets($styles) {
@@ -67,9 +75,9 @@
 
         static function ajax_like() {
             header("Content-type: text/json");
-            header("Content-Type: application/x-javascript", true);
 
-            if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"])) exit();
+            if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
+                exit();
             
             $user_id = Visitor::current()->id;
             $likeSetting = Config::current()->module_like;
@@ -82,21 +90,16 @@
                 $likeText = "";
                 switch ($like->action) {
                 	case "like":
-                        header("Content-type: text/json");
-                        header("Content-Type: application/x-javascript", true);
                         $like->like();
                         $like->fetchCount();
-                        if ($like->total_count == 1)
-                        	# $this->text_default[0] = "You like this post.";
-                            $likeText = $like->getText($like->total_count, $likeSetting["likeText"][0]);
+                        if ($like->total_count == 0)
+                            $likeText = __("No likes yet.", "likes");
+                        elseif ($like->total_count == 1)
+                            $likeText = _f("You like this.", $like->total_count, "likes");
                         elseif ($like->total_count == 2)
-                        	# $this->text_default[1] = "You and 1 person like this post.";
-                        	$likeText = $like->getText(1, $likeSetting["likeText"][1]);
-                        else {
-                            $like->total_count--;
-                        	# $this->text_default[2] = "You and %NUM% people like this post.";
-                        	$likeText = $like->getText($like->total_count, $likeSetting["likeText"][2]);
-                        }
+                            $likeText = _f("You and %d person likes this.", ($like->total_count - 1), "likes");
+                        else
+                            $likeText = _f("You and %d people like this.", ($like->total_count - 1), "likes");
                 	break;
                 	default: throw new Exception("invalid action");
                 }
@@ -112,9 +115,9 @@
 
         static function ajax_unlike() {
             header("Content-type: text/json");
-            header("Content-Type: application/x-javascript", true);
 
-            if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"])) exit();
+            if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
+                exit();
             
             $user_id = Visitor::current()->id;
             $likeSetting = Config::current()->module_like;
@@ -129,14 +132,12 @@
                     case "unlike":
                         $like->unlike();
                         $like->fetchCount();
-                        if ($like->total_count > 1) {
-                            # $this->text_default[5] = "%NUM% people like this post.";
-                            $likeText = $like->getText($like->total_count, $likeSetting["likeText"][5]);
-                        } elseif ($like->total_count == 1) {
-                            # $this->text_default[4] = "1 person likes this post.";
-                            $likeText = $like->getText($like->total_count, $likeSetting["likeText"][4]);
-                        } elseif ($like->total_count == 0)
-                            $likeText = $like->getText($like->total_count, $likeSetting["likeText"][3]);
+                        if ($like->total_count == 0)
+                            $likeText = __("No likes yet.", "likes");
+                        elseif ($like->total_count == 1)
+                            $likeText = _f("%d person likes this.", $like->total_count, "likes");
+                        else
+                            $likeText = _f("%d people like this.", $like->total_count, "likes");
                     break;
                     default: throw new Exception("invalid action");
                 }
@@ -165,12 +166,13 @@
 
         static function get_likes($post) {
             $config = Config::current();
+            $controller = MainController::current();
             $route = Route::current();
             $visitor = Visitor::current();
             $likeSetting = $config->module_like;
 
-            if (!$visitor->group->can("like_post")) return;
-            if ($likeSetting["showOnFront"] == false and $route->action == "index") return;
+            if ($likeSetting["showOnFront"] == false and $route->action == "index")
+                return;
 
             $request["action"] = $route->action;
             $request["post_id"] = $post->id;
@@ -191,47 +193,48 @@
             $returnStr = "<div class='likes' id='likes_post-$post->id'>";
 
             if (!$hasPersonLiked) {
-                $returnStr.= "<a class='like' href=\"javascript:likes.toggle($post->id);\">";
-                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][6]."'>";
-                if ($likeSetting["likeWithText"]) {
-                    $returnStr.= "<span class='like'>".$likeSetting["likeText"][6]."</span>"; # $this->text_default[6] = "Like!"
-                    $returnStr.= "<span class='unlike'>".$likeSetting["likeText"][7]."</span>"; # $this->text_default[7] = "Unlike!"
-                }
-                $returnStr.= "</a><span class='like_text'>";
-                if ($like->total_count == 0)
-                    # $this->text_default[3] = "Be the first to like.";
-                    $returnStr.= $like->getText($like->total_count, $likeSetting["likeText"][3]);
-                elseif ($like->total_count == 1)
-                    # $this->text_default[4] = "1 person likes this post.";
-                    $returnStr= $returnStr.$like->getText($like->total_count, $likeSetting["likeText"][4]);
-                elseif ($like->total_count > 1)
-                    # $this->text_default[5] = "%NUM% people like this post.";
-                    $returnStr.= $like->getText($like->total_count, $likeSetting["likeText"][5]);
-                $returnStr.= "</span>";
-            } else {
-                if ($visitor->group->can("unlike_post") and $hasPersonLiked)
-                    $returnStr.= "<a class='liked' href=\"javascript:likes.toggle($post->id);\">";
-                else
-                    $returnStr.= "<a class='liked'>";
-                $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='".$likeSetting["likeText"][7]."'>";
-                if ($likeSetting["likeWithText"]) {
-                    $returnStr.= "<span class='like'>".$likeSetting["likeText"][6]."</span>"; # $this->text_default[6] = "Like!"
-                    $returnStr.= "<span class='unlike'>".$likeSetting["likeText"][7]."</span>"; # $this->text_default[7] = "Unlike!"
-                }
-                $returnStr.= "</a><span class='like_text'>";
-                if ($like->total_count == 1)
-                    # $this->text_default[0] = "You like this post.";
-                    $returnStr.= $like->getText($like->total_count, $likeSetting["likeText"][0]);
-                elseif ($like->total_count == 2)
-                    # $this->text_default[1] = "You and 1 person like this post.";
-                    $returnStr.= $like->getText(1, $likeSetting["likeText"][1]);
-                else {
-                    $like->total_count--;
-                    # $this->text_default[2] = "You and %NUM% people like this post.";
-                    $returnStr.= $like->getText($like->total_count, $likeSetting["likeText"][2]);
+                if ($visitor->group->can("like_post")) {
+                    $returnStr.= "<a class=\"likes like\" href=\"".url("like", $controller)."?post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
+                    $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='Likes icon'>";
+                    if ($likeSetting["likeWithText"]) {
+                        $returnStr.= " <span class='like'>".__("Like!", "likes")."</span>";
+                        $returnStr.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
+                    }
+                    $returnStr.= "</a>";
                 }
 
+                $returnStr.= " <span class='like_text'>";
+                if ($like->total_count == 0)
+                    $returnStr.= __("No likes yet.", "likes");
+                elseif ($like->total_count == 1)
+                    $returnStr.= _f("%d person likes this.", $like->total_count, "likes");
+                else
+                    $returnStr.= _f("%d people like this.", $like->total_count, "likes");
                 $returnStr.= "</span>";
+
+
+            } else {
+                if ($visitor->group->can("unlike_post")) {
+                    $returnStr.= "<a class=\"likes liked\" href=\"".url("unlike", $controller)."?post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
+                    $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='Likes icon'>";
+                    if ($likeSetting["likeWithText"]) {
+                        $returnStr.= " <span class='like'>".__("Like!", "likes")."</span>";
+                        $returnStr.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
+                    }
+                    $returnStr.= "</a>";
+                }
+
+                $returnStr.= " <span class='like_text'>";
+                if ($like->total_count == 0)
+                    $returnStr.= __("No likes yet.", "likes");
+                elseif ($like->total_count == 1)
+                    $returnStr.= _f("You like this.", $like->total_count, "likes");
+                elseif ($like->total_count == 2)
+                    $returnStr.= _f("You and %d person likes this.", ($like->total_count - 1), "likes");
+                else
+                    $returnStr.= _f("You and %d people like this.", ($like->total_count - 1), "likes");
+                $returnStr.= "</span>";
+
             }
 
             $returnStr.= "</div>";
