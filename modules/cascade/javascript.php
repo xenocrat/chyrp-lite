@@ -57,6 +57,6 @@
                     }
                 }
             },
-        }
+        };
         $(document).ready(ChyrpAjaxScroll.init);
 <!-- --></script>
