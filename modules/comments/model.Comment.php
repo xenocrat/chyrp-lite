@@ -227,12 +227,12 @@
             SQL::current()->delete("comments", array("id" => $comment_id));
         }
 
-        public function editable($user = null) {
+        public function editable(User $user = null) {
             fallback($user, Visitor::current());
             return ($user->group->can("edit_comment") or ($user->group->can("edit_own_comment") and $user->id == $this->user_id));
         }
 
-        public function deletable($user = null) {
+        public function deletable(User $user = null) {
             fallback($user, Visitor::current());
             return ($user->group->can("delete_comment") or ($user->group->can("delete_own_comment") and $user->id == $this->user_id));
         }
@@ -298,26 +298,6 @@
         static function user_count($user_id) {
             $count = SQL::current()->count("comments", array("user_id" => $user_id));
             return $count;
-        }
-
-        /**
-         * Function: reply_to_link
-         * Outputs a Reply to comment link, if the <User.can> add comment and allow_nested_comments is checked.
-         *
-         * Parameters:
-         *     $text - The text to show for the link.
-         *     $before - If the link can be shown, show this before it.
-         *     $after - If the link can be shown, show this after it.
-         *     $classes - Extra CSS classes for the link, space-delimited.
-         */
-        public function replyto_link($text = null, $before = null, $after = null, $classes = "") {
-            if (!Config::current()->allow_nested_comments) return;
-
-            fallback($text, __("Reply"));
-
-            $name = strtolower(get_class($this));
-
-            echo $before.'<a href="#new_comment" data-comment_id="'.$this->id.'" title="Reply to '.$this->author.'" class="'.($classes ? $classes." " : '').$name.'_reply_link replyto" id="comment_reply">'.$text.'</a>'.$after;
         }
 
         /**

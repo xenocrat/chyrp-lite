@@ -16,11 +16,6 @@
                         <small>${ "Format: <code>strong, blockquote, em</code>" | translate("comments") }</small>
                     </p>
                     <p>
-                        <label for="allow_nested_comments">${ "Allow Replies" | translate("comments") }</label>
-                        <input type="checkbox" class="checkbox" name="allow_nested_comments"${ site.allow_nested_comments | checked }> ${ "enabled" | translate("comments") }
-                        <small>${ "Enables replying to a comment" | translate("comments") }</small>
-                    </p>
-                    <p>
                         <label for="default_comment_status">${ "Default Comment Status" | translate("comments") }</label>
                         <select name="default_comment_status">
                             <option value="approved"${ "approved" | option_selected(site.default_comment_status) }>${ "Approved" | translate("comments") }</option>

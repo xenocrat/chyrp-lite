@@ -34,7 +34,6 @@
             $config->set("akismet_api_key", null);
             $config->set("auto_reload_comments", 30);
             $config->set("enable_reload_comments", false);
-            $config->set("allow_nested_comments", false);
 
             Group::add_permission("add_comment", "Add Comments");
             Group::add_permission("add_comment_private", "Add Comments to Private Posts");
@@ -56,7 +55,6 @@
             $config->remove("akismet_api_key");
             $config->remove("auto_reload_comments");
             $config->remove("enable_reload_comments");
-            $config->remove("allow_nested_comments");
 
             Group::remove_permission("add_comment");
             Group::remove_permission("add_comment_private");
@@ -266,8 +264,7 @@
                          $config->set("default_comment_status", $_POST['default_comment_status']),
                          $config->set("comments_per_page", $_POST['comments_per_page']),
                          $config->set("auto_reload_comments", $_POST['auto_reload_comments']),
-                         $config->set("enable_reload_comments", isset($_POST['enable_reload_comments'])),
-                         $config->set("allow_nested_comments", isset($_POST['allow_nested_comments'])));
+                         $config->set("enable_reload_comments", isset($_POST['enable_reload_comments'])));
 
             if (!empty($_POST['akismet_api_key'])) {
                 $_POST['akismet_api_key'] = trim($_POST['akismet_api_key']);
@@ -702,7 +699,7 @@
             return fallback($this->latest_comments[$post->id], null);
         }
 
-        public function comments_get($options) {
+        public function comments_get(&$options) {
             if (ADMIN)
                 return;
 
@@ -772,17 +769,5 @@
                 return "(0)";
             else
                 return QueryBuilder::build_list($_SESSION['comments']);
-        }
-
-
-        /**
-         * Function: comment_get
-         * Returns a single comment using the supplied ID.
-         *
-         * Parameters:
-         *     $id - The ID of comment to grab.
-         */
-        public function comment_get($id) {
-            return $comment = new Comment($id);
         }
     }

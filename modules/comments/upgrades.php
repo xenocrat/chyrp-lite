@@ -13,8 +13,8 @@
         if (!Config::check("defensio_api_key"))
             Config::set("akismet_api_key", null, "Creating akismet_api_key setting...");
         else {
-            Config::remove("defensio_api_key", " ", "Removing defensio_api_key...");;
-            Config::set("akismet_api_key", " ", "Creating akismet_api_key setting...");
+            Config::remove("defensio_api_key");
+            Config::set("akismet_api_key", null, "Creating akismet_api_key setting...");
         }
     }
 
@@ -30,6 +30,11 @@
                 test(SQL::current()->query("ALTER TABLE __comments ADD notify INTEGER DEFAULT 0 AFTER parent_id"));
     }
 
+    function remove_nested_comments() {
+        if (Config::check("allow_nested_comments"))
+            Config::remove("allow_nested_comments");
+    }
+
     Config::fallback("auto_reload_comments", 30);
     Config::fallback("enable_reload_comments", false);
 
@@ -37,3 +42,4 @@
     remove_defensio_set_akismet();
     add_comment_parent_id_field();
     add_comment_notify_field();
+    remove_nested_comments();
