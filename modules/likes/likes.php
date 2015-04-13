@@ -48,7 +48,7 @@
 
             $post = new Post($request["post_id"]);
 
-            Flash::notice(__("Post liked."), $post->url()."#likes_post-".$request["post_id"]);
+            Flash::notice(__("Post liked.", "likes"), $post->url()."#likes_post-".$request["post_id"]);
         }
 
         static function route_unlike() {
@@ -60,7 +60,7 @@
 
             $post = new Post($request["post_id"]);
 
-            Flash::notice(__("Post unliked."), $post->url()."#likes_post-".$request["post_id"]);
+            Flash::notice(__("Post unliked.", "likes"), $post->url()."#likes_post-".$request["post_id"]);
         }
 
         static function stylesheets($styles) {
@@ -88,21 +88,21 @@
             try {
                 $like = new Like($_REQUEST, $user_id);
                 $likeText = "";
-                switch ($like->action) {
-                	case "like":
-                        $like->like();
-                        $like->fetchCount();
-                        if ($like->total_count == 0)
-                            $likeText = __("No likes yet.", "likes");
-                        elseif ($like->total_count == 1)
-                            $likeText = _f("You like this.", $like->total_count, "likes");
-                        elseif ($like->total_count == 2)
-                            $likeText = _f("You and %d person likes this.", ($like->total_count - 1), "likes");
-                        else
-                            $likeText = _f("You and %d people like this.", ($like->total_count - 1), "likes");
-                	break;
-                	default: throw new Exception("invalid action");
-                }
+
+                if ($like->action != "like")
+                    throw new Exception("invalid action");
+
+                $like->like();
+                $like->fetchCount();
+
+                if ($like->total_count == 0)
+                    $likeText = __("No likes yet.", "likes");
+                elseif ($like->total_count == 1)
+                    $likeText = _f("You like this.", $like->total_count, "likes");
+                elseif ($like->total_count == 2)
+                    $likeText = _f("You and %d person likes this.", ($like->total_count - 1), "likes");
+                else
+                    $likeText = _f("You and %d people like this.", ($like->total_count - 1), "likes");
 
                 $responseObj["likeText"] = $likeText;
             }
@@ -128,19 +128,19 @@
             try {
                 $like = new Like($_REQUEST, $user_id);
                 $likeText = "";
-                switch ($like->action) {
-                    case "unlike":
-                        $like->unlike();
-                        $like->fetchCount();
-                        if ($like->total_count == 0)
-                            $likeText = __("No likes yet.", "likes");
-                        elseif ($like->total_count == 1)
-                            $likeText = _f("%d person likes this.", $like->total_count, "likes");
-                        else
-                            $likeText = _f("%d people like this.", $like->total_count, "likes");
-                    break;
-                    default: throw new Exception("invalid action");
-                }
+
+                if ($like->action != "unlike")
+                    throw new Exception("invalid action");
+
+                $like->unlike();
+                $like->fetchCount();
+
+                if ($like->total_count == 0)
+                    $likeText = __("No likes yet.", "likes");
+                elseif ($like->total_count == 1)
+                    $likeText = _f("%d person likes this.", $like->total_count, "likes");
+                else
+                    $likeText = _f("%d people like this.", $like->total_count, "likes");
 
                 $responseObj["likeText"] = $likeText;
             }

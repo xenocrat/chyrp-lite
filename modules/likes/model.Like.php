@@ -41,7 +41,7 @@
          */
         public function like() {
           if (!Visitor::current()->group->can("like_post"))
-              show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts."));
+              show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts.", "likes"));
 
         	if ($this->action == "like" and $this->post_id > 0) {
             	SQL::current()->insert("likes",
@@ -59,7 +59,7 @@
          */
         public function unlike() {
           if (!Visitor::current()->group->can("unlike_post"))
-              show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts."));
+              show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts.", "likes"));
 
             if ($this->action == "unlike" and $this->post_id > 0) {
             	SQL::current()->delete("likes", array("post_id" => $this->post_id,
