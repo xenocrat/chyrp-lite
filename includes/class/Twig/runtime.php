@@ -75,11 +75,13 @@ $twig_filters = array(
     // debugging
     'inspect' =>          'twig_inspect_filter',
 
+    // getters and setters
     'uploaded' =>         'uploaded',
     'fallback' =>         'oneof',
     'selected' =>         'twig_selected_filter',
     'checked' =>          'twig_checked_filter',
-    'option_selected' =>  'twig_option_selected_filter'
+    'option_selected' =>  'twig_option_selected_filter',
+    'gravatar' =>         'twig_get_gravatar'
 );
 
 
@@ -482,4 +484,8 @@ function twig_excerpt_filter($text, $length = 200, $ending = "...", $exact = fal
 function twig_sort_filter($array) {
     asort($array);
     return $array;
+}
+
+function twig_get_gravatar($email, $size = 80, $img = false) {
+    return get_gravatar($email, $size, 'mm', 'g', $img);
 }
