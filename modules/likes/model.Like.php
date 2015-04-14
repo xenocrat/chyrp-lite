@@ -50,7 +50,7 @@
                                        "timestamp" => datetime(),
                                        "session_hash" => $this->session_hash));
         	}
-        	else throw new Exception("invalid params- action = $this->action and post_id = $this->post_id");
+        	else error(__("Error"), __("Invalid action or post ID.", "likes"));
         }
 
         /**
@@ -66,7 +66,7 @@
                                                       "session_hash" => $this->session_hash),
                                                 array("LIMIT" => 1));
         	}
-        	else throw new Exception("invalid params");
+        	else error(__("Error"), __("Invalid action or post ID.", "likes"));
         }
 
         public function fetchPeople() {

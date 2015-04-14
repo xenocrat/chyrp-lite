@@ -90,7 +90,7 @@
                 $likeText = "";
 
                 if ($like->action != "like")
-                    throw new Exception("invalid action");
+                    throw new Exception("Invalid action");
 
                 $like->like();
                 $like->fetchCount();
@@ -130,7 +130,7 @@
                 $likeText = "";
 
                 if ($like->action != "unlike")
-                    throw new Exception("invalid action");
+                    throw new Exception("Invalid action");
 
                 $like->unlike();
                 $like->fetchCount();

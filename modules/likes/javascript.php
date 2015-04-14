@@ -52,14 +52,14 @@
                             callback(response);
                         }
                         else {
-                            ChyrpLikes.log("unsuccessful request, response from server:"+ response);
+                            ChyrpLikes.log("unsuccessful request, response from server: " + response.error_text);
                         }
                     },
                     error:function (xhr, ajaxOptions, thrownError) {
                         ChyrpLikes.log('error in AJAX request.');
-                        ChyrpLikes.log('xhrObj:'+xhr);
-                        ChyrpLikes.log('thrownError:'+thrownError);
-                        ChyrpLikes.log('ajaxOptions:'+ajaxOptions);
+                        ChyrpLikes.log('xhrObj: ' + xhr);
+                        ChyrpLikes.log('thrownError: ' + thrownError);
+                        ChyrpLikes.log('ajaxOptions: ' + ajaxOptions);
                     },
                     complete:function() {
                         this.didPrevFinish = true;
