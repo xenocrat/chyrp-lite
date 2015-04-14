@@ -100,7 +100,7 @@
                 elseif ($like->total_count == 1)
                     $likeText = _f("You like this.", $like->total_count, "likes");
                 elseif ($like->total_count == 2)
-                    $likeText = _f("You and %d person likes this.", ($like->total_count - 1), "likes");
+                    $likeText = _f("You and %d person like this.", ($like->total_count - 1), "likes");
                 else
                     $likeText = _f("You and %d people like this.", ($like->total_count - 1), "likes");
 
@@ -166,7 +166,6 @@
 
         static function get_likes($post) {
             $config = Config::current();
-            $controller = MainController::current();
             $route = Route::current();
             $visitor = Visitor::current();
             $likeSetting = $config->module_like;
@@ -194,7 +193,7 @@
 
             if (!$hasPersonLiked) {
                 if ($visitor->group->can("like_post")) {
-                    $returnStr.= "<a class=\"likes like\" href=\"".url("like", $controller)."?post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
+                    $returnStr.= "<a class=\"likes like\" href=\"".$config->chyrp_url."/?action=like&post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
                     $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='Likes icon'>";
                     if ($likeSetting["likeWithText"]) {
                         $returnStr.= " <span class='like'>".__("Like!", "likes")."</span>";
@@ -215,7 +214,7 @@
 
             } else {
                 if ($visitor->group->can("unlike_post")) {
-                    $returnStr.= "<a class=\"likes liked\" href=\"".url("unlike", $controller)."?post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
+                    $returnStr.= "<a class=\"likes liked\" href=\"".$config->chyrp_url."/?action=unlike&post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
                     $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='Likes icon'>";
                     if ($likeSetting["likeWithText"]) {
                         $returnStr.= " <span class='like'>".__("Like!", "likes")."</span>";
@@ -230,7 +229,7 @@
                 elseif ($like->total_count == 1)
                     $returnStr.= _f("You like this.", $like->total_count, "likes");
                 elseif ($like->total_count == 2)
-                    $returnStr.= _f("You and %d person likes this.", ($like->total_count - 1), "likes");
+                    $returnStr.= _f("You and %d person like this.", ($like->total_count - 1), "likes");
                 else
                     $returnStr.= _f("You and %d people like this.", ($like->total_count - 1), "likes");
                 $returnStr.= "</span>";
