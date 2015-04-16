@@ -377,7 +377,8 @@ label {                                             display: block;
     div.user_controls.standalone,
     div.user_login.standalone,
     div.lost_password.standalone,
-    div.user_register.standalone {                  max-width: 640px }
+    div.user_register.standalone {                  max-width: 640px;
+                                                    margin-left: 0em }
     div.archive.standalone {                        padding-bottom: 1rem }
     ul.archive article.post.archive {               display: block;
                                                     position: relative;
@@ -571,6 +572,10 @@ img {                                               border-style: none;
     div#tail {                                      display: block }
     div#main > article {                            padding: 1rem 1rem 0rem 1rem }
     div.standalone {                                padding: 1rem }
+    div.user_controls.standalone,
+    div.user_login.standalone,
+    div.lost_password.standalone,
+    div.user_register.standalone {                  margin-left: auto }
     div.metadata {                                  left: -1rem;
                                                     margin-top: 1rem;
                                                     padding: 0rem 1rem }
@@ -585,7 +590,7 @@ img {                                               border-style: none;
     ul.archive article.post.archive img {           width: 100% }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1600px) {
     .columnized {                                   -moz-column-count: 2;
                                                     -moz-column-gap: 2em;
                                                     -webkit-column-count: 2;
