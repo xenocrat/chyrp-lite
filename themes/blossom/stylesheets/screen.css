@@ -40,7 +40,7 @@ body {                                              font-family: "Open Sans webf
                                                     color: #4e5a66;
                                                     line-height: 1.2;
                                                     background-color: #f7f5ed;
-                                                    margin: 0em 2em 2em 16em;
+                                                    margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
                                                     max-width: 1800px }
 p {                                                 line-height: 1.4;
@@ -505,16 +505,17 @@ a:active {                                          color: #d94c7b;
     a.likes:active > img {                          opacity: 1 }
     a.archive_post_link {                           display: block;
                                                     position: absolute;
-                                                    top: 0px;
-                                                    left: 0px;
-                                                    bottom: 0px;
-                                                    right: 0px;
+                                                    top: -1px;
+                                                    left: -1px;
+                                                    bottom: -1px;
+                                                    right: -1px;
                                                     color: transparent;
                                                     background-color: transparent }
     a.archive_post_link:hover,
     a.archive_post_link:focus,
     a.archive_post_link:active {                    background-color: #d94c7b;
-                                                    mix-blend-mode: multiply }
+                                                    mix-blend-mode: multiply;
+                                                    opacity: 0.8 }
 img {                                               border-style: none;
                                                     margin: 0em;
                                                     padding: 0em }
@@ -533,7 +534,7 @@ img {                                               border-style: none;
 @keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 
 @media screen and (max-width: 960px) {
-    body {                                          margin: 0em 16px 1em 16px }
+    body {                                          margin: 0rem 16px 1rem 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
     blockquote {                                    padding: 0em 1em }
@@ -585,7 +586,7 @@ img {                                               border-style: none;
 }
 
 @media screen and (min-width: 1200px) {
-        .columnized {                               -moz-column-count: 2;
+    .columnized {                                   -moz-column-count: 2;
                                                     -moz-column-gap: 2em;
                                                     -webkit-column-count: 2;
                                                     -webkit-column-gap: 2em;

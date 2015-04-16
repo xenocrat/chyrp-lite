@@ -69,7 +69,7 @@ $(document).ready(function() {
 });
 
 // Cheeseburger mobile menu
-$(function(){
+$(document).ready(function() {
     $('<li>', {
             "id": "mobile_toggle",
             "role": "button",
@@ -98,6 +98,11 @@ $(function(){
         $(".mobile_nav").children().on("focus", "a:not(#cheeseburger-link)", function() {
             $(".mobile_nav").addClass("on");
         });
+});
+
+// Prevent tabbing through yearly archive post previews
+$(document).ready(function() {
+    $("article.post.archive *").not(".archive_post_link").attr("tabindex", "-1")
 });
 
 <!-- --></script>

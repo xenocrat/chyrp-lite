@@ -40,7 +40,7 @@ body {                                              font-family: "Open Sans webf
                                                     color: #4e5a66;
                                                     line-height: 1.2;
                                                     background-color: #fcfbfa;
-                                                    margin: 0em 2em 2em 16em;
+                                                    margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
                                                     max-width: 1800px }
 p {                                                 line-height: 1.4;
@@ -335,8 +335,6 @@ label {                                             display: block;
                                                     text-align: center;
                                                     color: #9ea8a8;
                                                     display: block;
-                                                    position: relative;
-                                                    bottom: 0em;
                                                     width: 100%;
                                                     line-height: 2em;
                                                     padding: 2rem 0rem;
@@ -517,16 +515,17 @@ a:active {                                          color: #000000;
     a.likes:active > img {                          opacity: 1 }
     a.archive_post_link {                           display: block;
                                                     position: absolute;
-                                                    top: 0px;
-                                                    left: 0px;
-                                                    bottom: 0px;
-                                                    right: 0px;
+                                                    top: -1px;
+                                                    left: -1px;
+                                                    bottom: -1px;
+                                                    right: -1px;
                                                     color: transparent;
                                                     background-color: transparent }
     a.archive_post_link:hover,
     a.archive_post_link:focus,
     a.archive_post_link:active {                    background-color: #9ea8a8;
-                                                    mix-blend-mode: multiply }
+                                                    mix-blend-mode: multiply;
+                                                    opacity: 0.8 }
 img {                                               border-style: none;
                                                     margin: 0em;
                                                     padding: 0em }
@@ -545,7 +544,7 @@ img {                                               border-style: none;
 @keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 
 @media screen and (max-width: 960px) {
-    body {                                          margin: 0em 16px 1em 16px }
+    body {                                          margin: 0rem 16px 1rem 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
     h6.post_byline {                                padding-bottom: 1rem }
@@ -582,7 +581,6 @@ img {                                               border-style: none;
     div#mast {                                      display: block }
     div#sidebar {                                   display: none }
     div#tail {                                      display: block }
-
     div#main > article {                            padding: 1rem 1rem 0rem 1rem }
     div.standalone {                                padding: 1rem }
     div#main > article hr, div.standalone hr {      position: relative;
@@ -602,7 +600,7 @@ img {                                               border-style: none;
 }
 
 @media screen and (min-width: 1200px) {
-        .columnized {                               -moz-column-count: 2;
+    .columnized {                                   -moz-column-count: 2;
                                                     -moz-column-gap: 2em;
                                                     -webkit-column-count: 2;
                                                     -webkit-column-gap: 2em;

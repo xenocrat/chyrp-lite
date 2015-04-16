@@ -74,13 +74,13 @@ ${ trigger.call("head") }
       <li><a href="{% admin "write_post" %}">${ "Draft" | translate }</a></li>
       {% endif %}
       {% if visitor.logged_in %}
-        <li><a href="{% url "controls" %}">${ "Controls" | translate }</a></li>
-        <li><a href="{% url "logout" %}">${ "Log out" | translate }</a></li>
+      <li><a href="{% url "controls" %}">${ "Controls" | translate }</a></li>
+      <li><a href="{% url "logout" %}">${ "Log out" | translate }</a></li>
       {% else %}
-        {% if site.can_register %}
-        <li><a href="{% url "register" %}">${ "Register" | translate }</a></li>
-        {% endif %}
-        <li><a href="{% url "login" %}">${ "Log in" | translate }</a></li>
+      {% if site.can_register %}
+      <li><a href="{% url "register" %}">${ "Register" | translate }</a></li>
+      {% endif %}
+      <li><a href="{% url "login" %}">${ "Log in" | translate }</a></li>
       {% endif %}
     </ul>
   </div>
