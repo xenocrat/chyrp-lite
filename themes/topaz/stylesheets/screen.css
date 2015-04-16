@@ -36,7 +36,7 @@ html {                                              font-size: 16px }
 *::selection {                                      color: #ffffff;
                                                     background-color: #4e5a66 }
 body {                                              font-family: "Open Sans webfont", sans-serif;
-                                                    font-size: 16px;
+                                                    font-size: 1rem;
                                                     color: #4e5a66;
                                                     line-height: 1.2;
                                                     background-color: #fcfbfa;
@@ -399,7 +399,7 @@ label {                                             display: block;
                                                     overflow: hidden;
                                                     font-size: 0.75em;
                                                     margin: 0em 0em 1.33em 1.33em;
-                                                    padding: 0.67em;
+                                                    padding: 8px;
                                                     border: 1px solid #c6ccc8;
                                                     border-radius: 6px }
 article > header {                                  display: block;
@@ -592,10 +592,10 @@ img {                                               border-style: none;
 
 @media screen and (max-width: 480px) {
     ul.archive li {                                 margin-left: 0em }
-    ul.archive article.post {                       box-sizing: border-box;
+    ul.archive article.post.archive {               box-sizing: border-box;
                                                     width: 100%;
                                                     margin-left: 0em }
-    ul.archive article.post img {                   width: 100% }
+    ul.archive article.post.archive img {           width: 100% }
     div.metadata, div.doaction {                    text-align: center }
 }
 
