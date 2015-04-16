@@ -375,8 +375,8 @@ label {                                             display: block;
     div.standalone {                                margin-bottom: 0rem;
                                                     padding-bottom: 2rem }
     div.user_controls.standalone,
-    div.user_login.standalone
-    div.lost_password.standalone
+    div.user_login.standalone,
+    div.lost_password.standalone,
     div.user_register.standalone {                  max-width: 640px }
     div.archive.standalone {                        padding-bottom: 1rem }
     ul.archive article.post.archive {               display: block;
