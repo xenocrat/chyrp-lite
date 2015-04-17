@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-type" content="$theme.type; charset=utf-8">
+  <title>{% block title %}$site.name{% if ( route.action == "index" ) and ( site.description ) %}: $site.description{% endif %}{% if title %} &raquo; ${ title | strip_tags }{% endif %}{% endblock %}</title>
+  <meta name="description" content="$site.description">
+  <meta name="generator" content="Chyrp">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta name="viewport" content="initial-scale = 1.0">
+  <link rel="pingback" href="$site.chyrp_url/includes/xmlrpc.php">
+  <link rel="shortcut icon" href="$site.url/favicon.ico">
+  {% if site.clean_urls %}<link rel="canonical" href="{% if (post.url) %}$post.clean{% elseif page.url %}$page.clean {% else %}$site.url{% endif %}">{% endif %}
+  $theme.feeds
+  $theme.stylesheets
+  $theme.javascripts
+${ trigger.call("head") }
+</head>
+<body role="document">
+  <!-- Header -->
+  {% for type, messages in flash.all | items %}
+  {% for message in messages %}
+  <div class="ribbon flash">
+    <h3 role="alert" class="ribbon">$message</h3>
+  </div>
+  {% endfor %}
+  {% endfor %}
+  <div id="mast" role="banner">
+<div id="mast_box">
+      <h1 class="banner"><a href="$site.url">$site.name</a></h1>
+      <ul role="navigation" class="navigation">
+        <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">Email</a></li>
+        <li><a href="{% url "feed" %}">${ "Feed" | translate }</a></li>
+        {% if theme.archives_list %}<li><a href="{% url 'archive/%s/' | format((theme.archives_list | first).year) %}" rel="archives">${ "Archive" | translate }</a></li>{% endif %}
+        {% if visitor.group.can("change_settings", "toggle_extensions") %}
+        <li><a href="$site.chyrp_url/admin/">${ "Admin" | translate }</a></li>
+        {% elseif visitor.group.can("add_post") %}
+        <li><a href="{% admin "write_post" %}">${ "Write" | translate }</a></li>
+        {% elseif visitor.group.can("add_draft") %}
+        <li><a href="{% admin "write_post" %}">${ "Draft" | translate }</a></li>
+        {% endif %}
+        {% if visitor.logged_in %}
+        <li><a href="{% url "controls" %}">${ "Controls" | translate }</a></li>
+        <li><a href="{% url "logout" %}">${ "Log out" | translate }</a></li>
+        {% else %}
+        {% if site.can_register %}
+        <li><a href="{% url "register" %}">${ "Register" | translate }</a></li>
+        {% endif %}
+        <li><a href="{% url "login" %}">${ "Log in" | translate }</a></li>
+        {% endif %}
+      </ul>
+      <div role="search" class="search_box">
+        <form action="$site.url" method="get" accept-charset="utf-8">
+          <input type="hidden" name="action" value="search" id="action">
+          <input type="text" id="search_field" name="query" value="{% if route.action == "search" %}${ GET.query | escape }{% endif %}" placeholder="Search…" title="Search this blog">
+          <button type="submit" id="search_submit">${ "Search" | translate }</button>
+        </form>
+      </div>
+</div>
+  </div>
+  <!-- Content -->
+  <div id="main" role="main">
+{% block content %}{% endblock %}
+  </div>
+  {% if posts.prev_page or posts.next_page %}
+  <!-- Navigation -->
+  <div role="navigation" class="prev_next traversal">
+    {% if posts.prev_page %}${ posts.prev_link( ( "Newer posts" | translate ) ) }{% endif %}
+    {% if posts.next_page %}${ posts.next_link( ( "Older posts" | translate ) ) }{% endif %}
+  </div>
+  {% endif %}
+  <!-- Footer -->
+${ trigger.call("end_content") }
+</body>
+<!-- Queries: $sql_queries | Load Time: $theme.load_time -->
+{% if debug and visitor.group.name == "Admin" %}
+<!--
+{% for debug in sql_debug %}
+${ debug.query | replace("\t", "    ") | escape }
+${ "Called from %s on line %d at %ss." | translate | format(debug.file, debug.line, debug.time) }
+{% endfor %}
+-->
+{% endif %}
+</html>
