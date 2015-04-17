@@ -251,7 +251,8 @@ input:focus {                                       outline: none;
                                                     margin: 0em;
                                                     padding-right: 34px }
     div.search_box input[type='text'] {             width: 100% }
-    button#search_submit {                          display: block;
+    button#search_submit,
+    button#sidebar_search_submit {                  display: block;
                                                     position: absolute;
                                                     width: 34px;
                                                     top: 0px;
@@ -265,12 +266,14 @@ input:focus {                                       outline: none;
                                                     background: transparent url(../images/search.svg) no-repeat center;
                                                     overflow: hidden;
                                                     color: transparent }
-    button#search_submit:focus {                    background-image: url(../images/search_alt.svg);
+    button#search_submit:focus,
+    button#sidebar_search_submit:focus {            background-image: url(../images/search_alt.svg);
                                                     outline: none }
     form.inline_edit input {                        width: 100% }
 select {                                            box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
+                                                    max-width: 640px;
                                                     margin: 0.5em 0em }
 textarea {                                          box-sizing: border-box;
                                                     display: block;
@@ -388,7 +391,7 @@ label {                                             display: block;
     div.user_controls.standalone,
     div.user_login.standalone,
     div.lost_password.standalone,
-    div.user_register.standalone {                  max-width: 640px;
+    div.user_register.standalone {                  max-width: 384px;
                                                     margin-left: 0em }
     div.archive.standalone {                        padding-bottom: 1rem }
     ul.archive article.post.archive {               display: block;
@@ -480,6 +483,7 @@ a:active {                                          color: #000000;
                                                     border-bottom: 1px #000000 solid }
     div.tags a, span.tags_select a {                display: inline-block;
                                                     padding: 0.2em 0.4em;
+                                                    margin-bottom: 4px;
                                                     border: none;
                                                     border-radius: 0.2em;
                                                     color: #39434d;
@@ -549,7 +553,7 @@ img {                                               border-style: none;
                                                     margin: 0.8em 0em }
     h6.post_byline {                                padding-bottom: 1rem }
     blockquote {                                    padding: 0em 1em }
-    form.inline_edit {                              padding: 0rem 1rem 0rem 1rem }
+    form.inline_edit {                              padding: 0rem 1rem 1rem 1rem }
     form.comment_edit {                             padding: 0rem 0rem 1rem 0rem }
     input, select {                                 width: 100% }
     ol.comments li {                                margin: 0em;
