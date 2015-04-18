@@ -2,7 +2,6 @@
 
 body {                          background-color: #ffffff;
                                 margin: 2em }
-small {                         font-size: 0.33em }
 div#sidebar, div#tail,
 div.prev, div.next {            display: none }
 div.main > article,

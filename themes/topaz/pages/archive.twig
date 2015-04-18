@@ -25,9 +25,9 @@
           {% else %} {# Complete archive: display titles to minimise content payload #}
           <a href="$post.url">
           {% if post.title %}
-            <h4>${ post.title | normalize | truncate(80) }</h4>
+            <h4 class="archive">${ post.title | normalize | truncate(80) }</h4>
           {% else %}
-            <h4>${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
+            <h4 class="archive">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
           {% endif %}
           </a>
           {% endif %}

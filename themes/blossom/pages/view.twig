@@ -13,9 +13,9 @@
     </div>
   {% endif %}
   {% if enabled_modules.comments and (post.comment_count > 0 or post.commentable) %}
-    <article role="complementary" class="commentary" id="comments">
-      <ol class="comments" id="comments_$post.id">
-        {% paginate site.comments_per_page comments in ( post.comments | reverse ) as comment %}
+    <article role="complementary" class="commentary">
+      <ol id="comments" class="comments paginated" data-post="$post.id" data-timestamp="$post.latest_comment">
+        {% paginate site.comments_per_page comments in post.comments as comment %}
 {% include "content/comment.twig" %}
         {% endpaginate %}
         <li id="comment_shim"></li> {# Needed for AJAX commenting and XHTML Strict validation. #}
@@ -27,8 +27,8 @@
       </ol>
     </article>
     <div class="comments_pagination traversal">
-      ${ comments.prev_link( ( "Older comments" | translate ), null, null, "comments" ) }
       ${ comments.next_link( ( "Newer comments" | translate ), null, null, "comments" ) }
+      ${ comments.prev_link( ( "Older comments" | translate ), null, null, "comments" ) }
     </div>
   {% endif %}
 {% endblock %}

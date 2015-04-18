@@ -2,15 +2,11 @@
 
 {% block content %}
   {% if posts.paginated %}
-    <div class="ribbon">
-      <h3 role="status" class="ribbon">${ "Search results for &#8220;%s&#8221;" | translate | format(search | escape) }</h3>
-    </div>
+    <h3 role="status" class="filter">${ "Search results for &#8220;%s&#8221;" | translate | format(search | escape) }</h3>
   {% endif %}
   {% for post in posts.paginated %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
   {% else %}
-    <div class="ribbon flash">
-      <h3 role="status" class="ribbon">${ "Your search did not return any results" | translate }</h3>
-    </div>
+    <h3 role="status" class="filter">${ "Your search did not return any results." | translate }</h3>
   {% endfor %}
 {% endblock %}

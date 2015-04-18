@@ -73,6 +73,8 @@ h4 {                                                font-size: 0.75em;
                                                     padding: 0em;
                                                     line-height: 1 }
     h4.yearly {                                     font-size: 1.33em }
+    h4.archive {                                    font-size: 1em;
+                                                    font-weight: normal }
 h5, h6 {                                            font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
@@ -106,7 +108,7 @@ code {                                              font-family: monospace;
                                                     font-size: 0.75em;
                                                     font-style: normal;
                                                     color: #ffffff;
-                                                    background-color: #39434d;
+                                                    background-color: #afb3b0;
                                                     padding: 0.2em 0.4em;
                                                     margin: 0.2em 0em;
                                                     display: inline-block }

@@ -19,8 +19,8 @@ ${ trigger.call("head") }
   <!-- Header -->
   {% for type, messages in flash.all | items %}
   {% for message in messages %}
-  <div class="ribbon flash">
-    <h3 role="alert" class="ribbon">$message</h3>
+  <div class="flash">
+    <h3 role="alert" class="flash">$message</h3>
   </div>
   {% endfor %}
   {% endfor %}

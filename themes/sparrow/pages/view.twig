@@ -1,17 +1,23 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
+  {% if not post.prev.no_results %}
+  <div role="navigation" class="prev traversal">
+        <a href="$post.prev.url">${ ( "&larr; Next post" | translate ) }</a>
+  </div>
+  {% endif %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
-    <div role="navigation" class="prev_next traversal">
-          {% if not post.prev.no_results %}<a href="$post.prev.url">${ ( "Next post" | translate ) }</a>{% endif %}
-          {% if not post.next.no_results %}<a href="$post.next.url">${ ( "Previous post" | translate ) }</a>{% endif %}
-    </div>
+  {% if not post.next.no_results %}
+  <div role="navigation" class="next traversal">
+        <a href="$post.next.url">${ ( "Previous post &rarr;" | translate ) }</a>
+  </div>
+  {% endif %}
   {% if enabled_modules.comments and (post.comment_count > 0 or post.commentable) %}
-    <article role="complementary" class="commentary" id="comments">
-      <ol class="comments" id="comments_$post.id">
-        {% paginate site.comments_per_page comments in ( post.comments | reverse ) as comment %}
+    <article role="complementary" class="commentary">
+      <ol id="comments" class="comments" data-post="$post.id" data-timestamp="$post.latest_comment">
+        {% for comment in post.comments %}
 {% include "content/comment.twig" %}
-        {% endpaginate %}
+        {% endfor %}
         <li id="comment_shim"></li> {# Needed for AJAX commenting and XHTML Strict validation. #}
         {% if post.commentable %}
         <li class="comment_form">
@@ -20,9 +26,5 @@
         {% endif %}
       </ol>
     </article>
-    <div class="comments_pagination traversal">
-      ${ comments.prev_link( ( "Older comments" | translate ), null, null, "comments" ) }
-      ${ comments.next_link( ( "Newer comments" | translate ), null, null, "comments" ) }
-    </div>
   {% endif %}
 {% endblock %}

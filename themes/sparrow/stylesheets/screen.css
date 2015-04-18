@@ -63,7 +63,9 @@ h3 {                                                font-size: 1em;
                                                     margin: 1em 0em;
                                                     padding: 0em;
                                                     line-height: 1 }
-    h3.ribbon {                                     margin: 0em }
+    h3.flash {                                      margin: 0em }
+    h3.filter {                                     padding: 4rem 0em 0rem 4rem;
+                                                    margin-bottom: 0em }
     h3.archive {                                    margin-top: 1em;
                                                     clear: both }
 h4 {                                                font-size: 1em;
@@ -108,7 +110,7 @@ code {                                              font-family: monospace;
                                                     font-size: 0.75em;
                                                     font-style: normal;
                                                     color: #39434d;
-                                                    background-color: #fffefd;
+                                                    background-color: #e5e3da;
                                                     padding: 0.2em 0.4em;
                                                     margin: 0.2em 0em;
                                                     display: inline-block }
@@ -258,22 +260,15 @@ label {                                             display: block;
                                                     padding: 0em;
                                                     clear: both;
                                                     overflow: visible }
-    div.prev {                                      width: 100%;
-                                                    clear: both;
-                                                    text-align: center;
-                                                    margin-top: 4rem;
-                                                    margin-bottom: 4rem }
-    div.next, div.prev_next {                       width: 100%;
-                                                    clear: both;
-                                                    text-align: center;
-                                                    margin-top: 4rem }
-    div.ribbon {                                    box-sizing: border-box;
+    div.prev {                                      margin: 4rem 0em 0rem 2rem }
+    div.next {                                      text-align: right;
+                                                    margin: 0rem 2em 0rem 0rem }
+    div.flash {                                     box-sizing: border-box;
                                                     width: 100%;
                                                     text-align: center;
                                                     color: #ffffff;
-                                                    background-color: #99726d;
+                                                    background-color: #cc5252;
                                                     padding: 0.5em }
-    div.flash {                                     background-color: #cc5252 }
     div.metadata {                                  font-weight: normal;
                                                     font-size: 0.75em;
                                                     font-style: italic;
@@ -286,6 +281,7 @@ label {                                             display: block;
     article.commentary div.metadata {               padding: 0rem }
     div.comments_pagination {                       width: 100%;
                                                     clear: both;
+                                                    padding-top: 2rem;
                                                     text-align: center }
     div.photo_frame {                               width: 100%;
                                                     max-height: 1200px;
@@ -302,12 +298,6 @@ label {                                             display: block;
     div.speak {                                     margin-bottom: 0em }
     div.admin, div.downloads {                      margin: 1em 0em 0em 0em }
     input + div.doaction, textarea + div.doaction { padding-top: 0.5em }
-    div#tail {                                      display: none;
-                                                    width: 100%;
-                                                    clear: both;
-                                                    padding-top: 2em;
-                                                    text-align: center;
-                                                    margin: 0em }
     div#main > article, div.standalone,
     form.inline_edit {                              box-sizing: border-box;
                                                     display: block;
@@ -377,26 +367,15 @@ a:active {                                          color: #99726d;
     ul.navigation li > a {                          display: inline-block;
                                                     padding: 0em 1em 1em 0em }
 
-    h3.ribbon a {                                   color: #ffffff;
+    h3.flash a {                                    color: #ffffff;
                                                     border-bottom: 1px #ffffff solid;
                                                     display: inline-block;
                                                     position: relative;
                                                     top: 0px }
-    h3.ribbon a:hover,
-    h3.ribbon a:focus,
-    h3.ribbon a:active {                            top: 1px;
+    h3.flash a:hover,
+    h3.flash a:focus,
+    h3.flash a:active {                             top: 1px;
                                                     color: inherit }
-    div.traversal a {                               display: inline-block;
-                                                    padding: 0.4em 1.2em;
-                                                    min-width: 8em;
-                                                    color: #fffefd;
-                                                    background-color: #c2b9b4;
-                                                    border: none;
-                                                    border-radius: 0.2em }
-    div.traversal a:hover,
-    div.traversal a:focus,
-    div.traversal a:active {                        color: #fffefd;
-                                                    background-color: #99726d }
     section a:link, p a:link {                      color: #5c6773;
                                                     border-bottom: 1px #9ea8a8 solid }
     section a:visited, p a:visited {                color: #5c6773;
@@ -412,7 +391,7 @@ a:active {                                          color: #99726d;
                                                     position: relative;
                                                     top: 0px;
                                                     padding: 0.2em 0.4em;
-                                                    margin-bottom: 4px;
+                                                    margin: 2px 0em;
                                                     border: none;
                                                     border-radius: 0.2em;
                                                     color: #807d73;
@@ -426,7 +405,7 @@ a:active {                                          color: #99726d;
                                                     position: relative;
                                                     top: 0px;
                                                     padding: 0.2em 0.4em;
-                                                    margin-bottom: 4px;
+                                                    margin: 2px 0em;
                                                     border: none;
                                                     border-radius: 0.2em;
                                                     color: #ffffff;
@@ -548,7 +527,9 @@ img {                                               border-style: none;
     form.inline_edit {                              padding: 3rem 0em 0em 0em }
     div#main > article.commentary {                 padding: 0rem }
     div.metadata {                                  padding-bottom: 1rem }
-    div.prev_next {                                 margin-top: 2rem }
+    div.prev {                                      margin: 3rem 0em 0rem -2rem }
+    div.next {                                      margin: 2rem -2em 0rem 0rem }
+
     blockquote {                                    padding: 0em 1em }
     input, select {                                 width: 100% }
     table {                                         box-sizing: border-box;
@@ -567,6 +548,8 @@ img {                                               border-style: none;
     div#mast_box {                                  text-align: left;
                                                     padding: 4em 8rem 4rem 8rem }
     div.search_box {                                display: inline-block }
+    div.prev {                                      margin: 4rem 0em 0rem 4rem }
+    div.next {                                      margin: 0rem 4em 0rem 0rem }
     div#main > article, div.standalone,
     form.inline_edit {                              padding-left: 8rem;
                                                     padding-right: 8rem }

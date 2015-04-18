@@ -80,6 +80,8 @@ h4 {                                                font-size: 0.75em;
                                                     text-align: center;
                                                     padding-bottom: 0.5em;
                                                     border-bottom: 1px solid #ebedec }
+    h4.archive {                                    font-size: 1em;
+                                                    font-weight: normal }
 h5, h6 {                                            font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
@@ -109,8 +111,7 @@ cite {                                              font: inherit;
                                                     font-style: italic;
                                                     color: #9ea8a8 }
 small {                                             font-weight: normal;
-                                                    font-size: 0.6em;
-                                                    text-transform: uppercase }
+                                                    font-size: 0.8em }
 blockquote {                                        font-size: 1em;
                                                     font-style: italic;
                                                     padding: 0em 2em;
@@ -123,7 +124,7 @@ code {                                              font-family: monospace;
                                                     font-size: 0.75em;
                                                     font-style: normal;
                                                     color: #39434d;
-                                                    background-color: #fffefd;
+                                                    background-color: #e5e3e1;
                                                     padding: 0.2em 0.4em;
                                                     margin: 0.2em 0em;
                                                     display: inline-block }
