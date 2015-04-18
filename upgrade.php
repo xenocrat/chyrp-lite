@@ -270,8 +270,6 @@
             Config::$yaml["database"][$name] = $val;
     }
 
-    load_translator("chyrp", INCLUDES_DIR."/locale/".Config::get("locale").".mo");
-
     /**
      * Function: test
      * Attempts to perform a task, and displays a "success" or "failed" message determined by the outcome.
@@ -295,6 +293,9 @@
         else
             return " <span class=\"boo\">".__("failed!")."</span>\n".$info;
     }
+
+    # Load the translator
+    load_translator("chyrp", INCLUDES_DIR."/locale/".Config::get("locale").".mo");
 
     #---------------------------------------------
     # Upgrading Actions
@@ -1208,7 +1209,7 @@
      */
     function recaptcha_to_captcha() {
         if (Config::check("enable_recaptcha")) {
-            Config::set("enable_captcha", Config::get("enable_recaptcha"), "Migrating captcha setting...");
+            Config::set("enable_captcha", Config::get("enable_recaptcha"), __("Migrating captcha setting..."));
             Config::remove("enable_recaptcha");
         }
     }
@@ -1257,6 +1258,16 @@
             Config::remove("admin_theme");
     }
 
+    /**
+     * Function: theme_sanity_check
+     * Resets the blog theme to Blossom if the config setting is invalid.
+     *
+     * Versions: 2015.03.15 => ????.??.??
+     */
+    function theme_sanity_check() {
+        if (!file_exists(THEMES_DIR."/".Config::get("theme")."/info.php"))
+            Config::set("theme", "blossom", __("Resetting theme to Blossom..."));
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -1409,7 +1420,9 @@
         <div class="window">
 <?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or isset($_GET['task']) == "upgrade") : ?>
             <pre class="pane"><?php
+
         # Begin with file/config upgrade tasks.
+
         fix_htaccess();
 
         remove_beginning_slash_from_post_url();
@@ -1429,7 +1442,7 @@
         Config::fallback("sql", Config::$yaml["database"]);
         Config::fallback("timezone", "America/New_York");
 
-        // Added in 2.5
+        # Added in 2.5
         Config::fallback("email_activation", true);
         Config::fallback("check_updates", true);
         Config::fallback("enable_emoji", true);
@@ -1437,7 +1450,7 @@
         Config::remove("rss_posts");
         Config::remove("time_offset");
 
-        // Chyrp Lite
+        # Chyrp Lite
         Config::fallback("check_updates_last", 0);
         Config::fallback("cookies_notification", true);
         Config::fallback("enable_captcha", false);
@@ -1468,6 +1481,8 @@
 
         # Initialize connection to SQL server.
         $sql->connect();
+
+        # Perform core upgrade tasks.
 
         tweets_to_posts();
 
@@ -1513,6 +1528,10 @@
 
         remove_admin_theme();
 
+        # Perform tidy up tasks.
+
+        theme_sanity_check();
+
         # Perform Module/Feather upgrades.
 
         foreach ((array) Config::get("enabled_modules") as $module)
@@ -1541,7 +1560,6 @@
 ?>
 
 <?php echo __("Done!"); ?>
-
 </pre>
             <h1 class="what_now"><?php echo __("What now?"); ?></h1>
             <ol>
