@@ -288,15 +288,31 @@
             Flash::notice(__("Tag renamed.", "tags"), "/admin/?action=manage_tags");
         }
 
-        public function admin_delete_tag($admin) {
+        static function admin_delete_tag($admin) {
+            if (empty($_GET['name']) or empty($_GET['clean']))
+                redirect("/admin/?action=manage_tags");
+
+            $tag = array("name" => $_GET['name'],
+                         "clean" => $_GET['clean']);
+
+            $admin->display("delete_tag", array("tag" => $tag));
+        }
+
+        public function admin_destroy_tag() {
+            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['name']) or empty($_POST['clean']) or ($_POST['destroy'] != "indubitably"))
+                redirect("/admin/?action=manage_tags");
+
             $sql = SQL::current();
 
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::tags_match($_GET['clean'])))->fetchAll() as $tag)  {
+                                       "value like" => self::tags_match($_POST['clean'])))->fetchAll() as $tag)  {
                 $tags = unserialize($tag["value"]);
-                unset($tags[$_GET['name']]);
+                unset($tags[$_POST['name']]);
 
                 if (empty($tags))
                     $sql->delete("post_attributes", array("name" => "tags", "post_id" => $tag["post_id"]));
