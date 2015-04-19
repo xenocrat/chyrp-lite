@@ -3,7 +3,7 @@
 {% block title %}${ "Edit Tag" | translate("tags") }{% endblock %}
 
 {% block content %}
-            <h2>${ "Edit Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name) }</h2>
+            <h2>${ "Rename Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name) }</h2>
             <form class="split" action="{% admin "update_tag" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     <p>

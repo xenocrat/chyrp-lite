@@ -22,7 +22,7 @@
                         $tag.popularity
                     </td>
                     <td class="controls">
-                        <a class="edit_tag" href="{% admin "rename_tag&name="~ tag.clean %}"><img src="$theme_url/images/icons/edit.svg" alt="${ "edit" | translate }"></a>
+                        <a class="edit_tag" href="{% admin "rename_tag&clean="~ tag.clean %}"><img src="$theme_url/images/icons/edit.svg" alt="${ "edit" | translate }"></a>
                     </td>
                     <td class="controls">
                         <a class="delete_tag" href="{% admin "delete_tag&name="~ (tag.name | urlencode) ~"&clean="~ tag.clean %}"><img src="$theme_url/images/icons/delete.svg" alt="${ "delete" | translate }"></a>

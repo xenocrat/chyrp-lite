@@ -42,10 +42,10 @@
                 $selected = ($post and isset($post->tags[$tag["name"]])) ?
                                 ' class="tag_added"' :
                                 "" ;
-                $selector.= "\t\t\t\t\t\t\t\t".'<a class="tag" href="javascript:add_tag(\''.addslashes($tag["name"]).'\')"'.$selected.'>'.$tag["name"].'</a>'."\n";
+                $selector.= '<a class="tag" href="javascript:add_tag(\''.addslashes($tag["name"]).'\')"'.$selected.'>'.$tag["name"].'</a>'."\n";
             }
 
-            $selector.= "\t\t\t\t\t\t\t</span><br /><br />";
+            $selector.= "</span>";
 
             if (isset($post->tags))
                 $tags = array_keys($post->tags);
@@ -202,7 +202,10 @@
 
         public function admin_rename_tag($admin) {
             if (!Visitor::current()->group->can("edit_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit tags.", "tags"));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
+
+            if (empty($_GET['clean']))
+                error(__("No Tag Specified"), __("Please specify the tag you would like to rename.", "tags"));
 
             $sql = SQL::current();
 
@@ -212,7 +215,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::tags_match($_GET['name'])))->fetchAll() as $tag) {
+                                       "value like" => self::tags_match($_GET['clean'])))->fetchAll() as $tag) {
                 $post_tags = unserialize($tag["value"]);
 
                 $tags = array_merge($tags, $post_tags);
@@ -224,7 +227,7 @@
             $popularity = array_count_values($names);
 
             foreach ($popularity as $tag => $count)
-                if ($tags[$tag] == $_GET['name']) {
+                if ($tags[$tag] == $_GET['clean']) {
                     $tag = array("name" => $tag, "clean" => $tags[$tag]);
                     break;
                 }
@@ -264,7 +267,10 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("edit_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit tags.", "tags"));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
+
+            if (empty($_POST['original']) or empty($_POST['name']))
+                redirect("/admin/?action=manage_tags");
 
             $sql = SQL::current();
 
@@ -290,7 +296,7 @@
 
         static function admin_delete_tag($admin) {
             if (empty($_GET['name']) or empty($_GET['clean']))
-                redirect("/admin/?action=manage_tags");
+                error(__("No Tag Specified"), __("Please specify the tag you would like to delete.", "tags"));
 
             $tag = array("name" => $_GET['name'],
                          "clean" => $_GET['clean']);
@@ -301,6 +307,9 @@
         public function admin_destroy_tag() {
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (!Visitor::current()->group->can("edit_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
             if (empty($_POST['name']) or empty($_POST['clean']) or ($_POST['destroy'] != "indubitably"))
                 redirect("/admin/?action=manage_tags");
@@ -329,6 +338,9 @@
         public function admin_bulk_tag($admin) {
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (!Visitor::current()->group->can("edit_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add tags.", "tags"));
 
             if (empty($_POST['name']) or empty($_POST['post']))
                 redirect("/admin/?action=manage_tags");
