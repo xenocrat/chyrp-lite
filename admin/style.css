@@ -320,10 +320,11 @@ input[type="file"] {                            border: none }
 input.code,
 textarea.code,
 code {                                          font-family: monospace;
-                                                font-style: normal;
-                                                background-color: #efefef;
+                                                font-style: normal }
+code {                                          background-color: #efefef;
                                                 padding: 2px;
-                                                color: #4f4f4f }
+                                                color: #4f4f4f;
+                                                border: 1px solid #dfdfdf }
 select {                                        box-sizing: border-box }
 form.delete blockquote {                        margin: 0em 4em 1em 4em;
                                                 font-style: italic }
