@@ -35,11 +35,13 @@ ${ trigger.call("sidebar") }
     {% if categorize %}
     <h4 id="label_categories">${ "Categories" | translate }</h4>
     <ul class="navigation sidebar_nav categories" aria-labelledby="label_categories">
-      {% for cat in categorize %}
+    {% for cat in categorize %}
+      {% if cat.show_on_home %}
       <li>
         <a href="${ cat.url }">${ cat.name }</a>
       </li>
-      {% endfor %}
+      {% endif %}
+    {% endfor %}
     </ul>
     {% endif %}
     {% if theme.pages_list %}
