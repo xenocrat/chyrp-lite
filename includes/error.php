@@ -133,6 +133,7 @@
             button {
                 box-sizing: border-box;
                 display: block;
+                clear: both;
                 font-family: inherit;
                 font-size: 1.25em;
                 text-align: center;
@@ -165,10 +166,10 @@
             }
         </style>
     </head>
-    <body>
+    <body role="document">
         <div class="window">
             <h1><?php echo $title; ?></h1>
-            <div class="message">
+            <div role="alert" class="message">
                 <?php echo $body; ?>
             <?php if (!empty($backtrace)): ?>
                 <h2><?php echo __("Backtrace"); ?></h2>
@@ -178,7 +179,6 @@
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
-                <div class="clear"></div>
             <?php if (class_exists("Route") and !logged_in() and $body != __("Route was initiated without a Controller.")): ?>
                 <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>

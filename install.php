@@ -535,6 +535,7 @@
             button {
                 box-sizing: border-box;
                 display: block;
+                clear: both;
                 font-family: inherit;
                 font-size: 1.25em;
                 text-align: center;
@@ -608,9 +609,9 @@
             })
         </script>
     </head>
-    <body>
+    <body role="document">
         <?php foreach ($errors as $error): ?>
-        <div class="error"><?php echo $error; ?></div>
+        <div role="alert" class="error"><?php echo $error; ?></div>
         <?php endforeach; ?>
         <div class="window">
         <?php if (!$installed): ?>

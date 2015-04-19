@@ -1416,10 +1416,10 @@
             }
         </style>
     </head>
-    <body>
+    <body role="document">
         <div class="window">
 <?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or isset($_GET['task']) == "upgrade") : ?>
-            <pre class="pane"><?php
+            <pre role="status" class="pane"><?php
 
         # Begin with file/config upgrade tasks.
 
