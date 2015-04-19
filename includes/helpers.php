@@ -921,12 +921,12 @@
      * Redirects to the given URL and exits immediately.
      *
      * Parameters:
-     *     $url - The URL to redirect to. If it begins with @/@ it will be relative to the @Config.chyrp_url@.
+     *     $url - The URL to redirect to. If it begins with @/@ it will be relative to the @Config.url@.
      *     $use_chyrp_url - Use the @Config.chyrp_url@ instead of @Config.url@ for $urls beginning with @/@?
      */
     function redirect($url, $use_chyrp_url = false) {
         # Handle URIs without domain
-        if ($url[0] == "/")
+        if (strpos($url, "/") === 0)
             $url = (ADMIN or $use_chyrp_url) ?
                        Config::current()->chyrp_url.$url :
                        Config::current()->url.$url ;
