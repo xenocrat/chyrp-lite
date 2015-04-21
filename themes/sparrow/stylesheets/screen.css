@@ -147,9 +147,10 @@ dl {                                                list-style: none }
                                                     margin: 0em }
     ol.comments li {                                box-sizing: border-box;
                                                     display: block;
+                                                    position: relative;
                                                     width: 100%;
                                                     margin: 0em;
-                                                    padding: 2rem;
+                                                    padding: 2rem 2rem 2rem 96px;
                                                     background-color: #f5f4f0;
                                                     border: 1px solid #c2bcb8;
                                                     border-bottom: none }
@@ -389,7 +390,7 @@ a:active {                                          color: #99726d;
     div.tags a, span.tags_select a {                display: inline-block;
                                                     position: relative;
                                                     top: 0px;
-                                                    padding: 0.2em 0.4em;
+                                                    padding: 0em 0.4em;
                                                     margin: 2px 0em;
                                                     border: none;
                                                     border-radius: 0.2em;
@@ -403,7 +404,7 @@ a:active {                                          color: #99726d;
     div.category a.category {                       display: inline-block;
                                                     position: relative;
                                                     top: 0px;
-                                                    padding: 0.2em 0.4em;
+                                                    padding: 0em 0.4em;
                                                     margin: 2px 0em;
                                                     border: none;
                                                     border-radius: 0.2em;
@@ -500,6 +501,11 @@ img {                                               border-style: none;
                                                     padding: 0em }
     div.photo_frame img {                           width: 100% }
     article img {                                   max-width: 100% }
+    img.gravatar {                                  position: absolute;
+                                                    top: 2rem;
+                                                    left: 24px;
+                                                    width: 48px;
+                                                    height: 48px }
 .ajax_loading {                                     background-size: 30px 30px;
                                                     background-image: linear-gradient(-45deg, #f5f4f0 25%, transparent 25%, transparent 50%, #f5f4f0 50%, #f5f4f0 75%, transparent 75%, transparent) !important;
                                                     -webkit-animation: stripes 1s linear infinite;
@@ -515,6 +521,10 @@ img {                                               border-style: none;
 @media screen and (max-width: 640px) {
     html {                                          font-size: 14px }
     body {                                          margin-bottom: 3rem }
+    blockquote {                                    padding: 0em 1em }
+    input, select {                                 width: 100% }
+    table {                                         box-sizing: border-box;
+                                                    display: block }
     h1.banner {                                     margin-bottom: 2rem }
     div#mast_box {                                  padding: 3rem 1rem }
     div#main {                                      padding: 0em 3rem }
@@ -528,11 +538,12 @@ img {                                               border-style: none;
     div.metadata {                                  padding-bottom: 1rem }
     div.prev {                                      margin: 3rem 0em 0rem -2rem }
     div.next {                                      margin: 2rem -2em 0rem 0rem }
-
-    blockquote {                                    padding: 0em 1em }
-    input, select {                                 width: 100% }
-    table {                                         box-sizing: border-box;
-                                                    display: block }
+    ol.comments li {                                padding: 2rem }
+    img.gravatar {                                  position: static;
+                                                    width: 24px;
+                                                    height: 24px;
+                                                    vertical-align: middle;
+                                                    margin-right: 4px }
 }
 
 @media screen and (max-width: 420px) {
