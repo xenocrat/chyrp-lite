@@ -26,29 +26,29 @@
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('../fonts/OpenSans-Regular.woff') format('woff'),
-                     url('../fonts/OpenSans-Regular.ttf') format('truetype');
+                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Regular.woff') format('woff'),
+                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Regular.ttf') format('truetype');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('../fonts/OpenSans-Semibold.woff') format('woff'),
-                     url('../fonts/OpenSans-Semibold.ttf') format('truetype');
+                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Semibold.woff') format('woff'),
+                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Semibold.ttf') format('truetype');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('../fonts/OpenSans-Italic.woff') format('woff'),
-                     url('../fonts/OpenSans-Italic.ttf') format('truetype');
+                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Italic.woff') format('woff'),
+                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Italic.ttf') format('truetype');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('../fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                     url('../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -73,6 +73,7 @@
             body {
                 font-size: 14px;
                 font-family: "Open Sans webfont", sans-serif;
+                line-height: 1.5em;
                 color: #4a4747;
                 background: #efefef;
                 padding: 0em 0em 5em;
