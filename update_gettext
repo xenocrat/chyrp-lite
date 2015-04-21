@@ -26,5 +26,6 @@ ruby gettext.rb ./modules/rights/       --domain=rights       > ./modules/rights
 ruby gettext.rb ./modules/tags/         --domain=tags         > ./modules/tags/locale/en_US.pot
 
 ruby gettext.rb ./themes/blossom/       --domain=theme        > ./themes/blossom/locale/en_US.pot
+ruby gettext.rb ./themes/sparrow/       --domain=theme        > ./themes/sparrow/locale/en_US.pot
 ruby gettext.rb ./themes/topaz/         --domain=theme        > ./themes/topaz/locale/en_US.pot
 ruby gettext.rb ./admin/ 				--domain=theme        > ./admin/locale/en_US.pot
