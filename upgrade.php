@@ -1325,7 +1325,7 @@
             body {
                 font-size: 14px;
                 font-family: "Open Sans webfont", sans-serif;
-                line-height: 1.25;
+                line-height: 1.5em;
                 color: #4a4747;
                 background: #efefef;
                 padding: 0em 0em 5em;
@@ -1341,7 +1341,7 @@
                 font-size: 2em;
                 margin: 1em 0em;
                 text-align: center;
-                line-height: 1;
+                line-height: 1em;
             }
             h1:first-child {
                 margin-top: 0em;

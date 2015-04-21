@@ -3,7 +3,7 @@
 Chyrp Lite is an ultra-lightweight blogging engine, written in PHP.
 
 ## What can Chyrp Lite do for me?
-With Chyrp Lite you can run your own blog on your own web server with minimal fuss. Chyrp Lite provides two beautiful blog themes and a friendly administration environment, all fully navigable on desktop computers and mobile devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
+With Chyrp Lite you can run your own blog on your own web server with minimal fuss. Chyrp Lite provides three beautiful blog themes and a friendly administration environment, all fully navigable on desktop computers and mobile devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
 
 Chyrp Lite is powered by a unique Feathers system that allows you to make your blog whatever you want it to be: you can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. With the addition of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website, with blogging features on the side.
 

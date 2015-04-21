@@ -38,20 +38,19 @@ html {                                              font-size: 16px }
 body {                                              font-family: "Open Sans webfont", sans-serif;
                                                     font-size: 1rem;
                                                     color: #4e5a66;
-                                                    line-height: 1.2;
+                                                    line-height: 1.5em;
                                                     background-color: #fcfbfa;
                                                     margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
                                                     max-width: 1800px }
-p {                                                 line-height: 1.4;
-                                                    margin: 0em 0em 1em 0em }
+p {                                                 margin: 0em 0em 1em 0em }
     p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                                font-size: 2em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
-                                                    line-height: 1 }
+                                                    line-height: 1em }
     h1.banner {                                     font-size: 0.75em;
                                                     margin: 1.33em 0em }
 h2 {                                                font-size: 1.5em;
@@ -59,14 +58,14 @@ h2 {                                                font-size: 1.5em;
                                                     text-transform: none;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
-                                                    line-height: 1 }
+                                                    line-height: 1em }
     h2.post_title {                                 text-align: center }
 h3 {                                                font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1 }
+                                                    line-height: 1em }
     h3.ribbon {                                     margin: 0em }
     h3.archive {                                    margin-top: 1em;
                                                     clear: both }
@@ -75,7 +74,7 @@ h4 {                                                font-size: 0.75em;
                                                     text-transform: none;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
-                                                    line-height: 1 }
+                                                    line-height: 1em }
     h4.yearly {                                     font-size: 1.33em;
                                                     text-align: center;
                                                     padding-bottom: 0.5em;
@@ -87,7 +86,7 @@ h5, h6 {                                            font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1 }
+                                                    line-height: 1em }
     h6.post_byline {                                font-weight: normal;
                                                     font-style: italic;
                                                     font-size: 0.75em;
@@ -315,7 +314,8 @@ label {                                             display: block;
                                                     position: absolute;
                                                     top: 2rem;
                                                     left: 2rem;
-                                                    width: 12rem }
+                                                    width: 12rem;
+                                                    line-height: 1.2em }
     div.prev {                                      width: 100%;
                                                     clear: both;
                                                     text-align: center;
@@ -356,7 +356,7 @@ label {                                             display: block;
     div.tags {                                      margin: 1.33em 0em 0em 0em;
                                                     font-size: 0.75em }
     div.doaction {                                  font-family: inherit;
-                                                    line-height: 2;
+                                                    line-height: 2em;
                                                     text-align: right;
                                                     margin-bottom: 1em }
     div.doaction:last-child {                       margin-bottom: 0em }
