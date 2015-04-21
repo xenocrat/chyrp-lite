@@ -420,7 +420,7 @@
             body {
                 font-size: 14px;
                 font-family: "Open Sans webfont", sans-serif;
-                line-height: 1.25;
+                line-height: 1.5em;
                 color: #4a4747;
                 background: #efefef;
                 padding: 0em 0em 5em;
@@ -429,7 +429,7 @@
                 font-size: 2em;
                 margin: 1em 0em;
                 text-align: center;
-                line-height: 1;
+                line-height: 1em;
             }
             h1:first-child {
                 margin-top: 0em;
@@ -584,26 +584,11 @@
             $(function(){
                 $("#adapter").change(function(){
                     if ($(this).val() == "sqlite") {
-                        $(document.createElement("span"))
-                            .addClass("sub")
-                            .css("display", "none")
-                            .text("<?php echo __("(full path)"); ?>")
-                            .appendTo("#database_field label")
-                            .animate({ opacity: "show" })
-
-                        $("#host_field, #username_field, #password_field, #prefix_field")
-                            .children()
-                                .val("")
-                                    .closest("div")
-                                        .animate({ height: "hide", opacity: "hide" })
+                        $("#database_field label .sub").fadeIn("fast");
+                        $("#host_field, #username_field, #password_field, #prefix_field").children().val("").parent().fadeOut("fast");
                     } else {
-                        $("#database_field label .sub")
-                            .animate({ opacity: "hide" },
-                                function(){ $(this).remove() })
-
-                        $("#host_field, #username_field, #password_field, #prefix_field")
-                            .parent()
-                                .animate({ height: "show", opacity: "show" })
+                        $("#database_field label .sub").fadeOut("fast");
+                        $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                     }
                 })
             })
@@ -651,7 +636,11 @@
                     </p>
                 </div>
                 <p id="database_field">
-                    <label for="database"><?php echo __("Database"); ?> <?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? '<span class="sub">'.__("(full path)").'</span>' : "" ; ?></label>
+                    <label for="database"><?php echo __("Database"); ?>
+                        <span class="sub"<?php echo (!isset($_POST['adapter']) or $_POST['adapter'] != "sqlite") ? ' style="display: none"' : "" ; ?>>
+                            <?php echo __("(full path)"); ?>
+                        </span>
+                    </label>
                     <input type="text" name="database" value="<?php value_fallback("database"); ?>" id="database">
                 </p>
                 <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
