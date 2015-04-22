@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-11 18:49+0000\n"
+"POT-Creation-Date: 2015-04-22 17:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -860,11 +860,15 @@ msgstr ""
 msgid "Blog Themes"
 msgstr ""
 
-#: admin/pages/themes.twig:19
-msgid "Select"
+#: admin/pages/themes.twig:13
+msgid "Selected!"
 msgstr ""
 
 #: admin/pages/themes.twig:22
+msgid "Select"
+msgstr ""
+
+#: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 

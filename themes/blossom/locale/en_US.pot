@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-11 18:49+0000\n"
+"POT-Creation-Date: 2015-04-22 17:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -22,38 +22,29 @@ msgstr ""
 msgid "%s:"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:6
-#, php-format
-msgid "%s replied to %s:"
-msgstr ""
-
-#: themes/blossom/content/comment.twig:8
+#: themes/blossom/content/comment.twig:5
 #, php-format
 msgid "%s said:"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:13
+#: themes/blossom/content/comment.twig:9
 msgid "This comment is awaiting moderation."
 msgstr ""
 
-#: themes/blossom/content/comment.twig:19
+#: themes/blossom/content/comment.twig:15
 msgid "Edit"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:20
+#: themes/blossom/content/comment.twig:16
 #: themes/blossom/content/post.twig:12
 msgid "Delete"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:21
-msgid "Reply"
-msgstr ""
-
-#: themes/blossom/content/comment.twig:25
+#: themes/blossom/content/comment.twig:20
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:25
+#: themes/blossom/content/comment.twig:20
 #, php-format
 msgid "<a href=\"%s\" class=\"permalink\">%s</a>"
 msgstr ""
@@ -107,106 +98,106 @@ msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: themes/blossom/content/sidebar.twig:8
+#: themes/blossom/content/sidebar.twig:6
 #: themes/blossom/layouts/default.twig:35
 msgid "Search…"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:8
+#: themes/blossom/content/sidebar.twig:6
 #: themes/blossom/layouts/default.twig:35
 msgid "Search this blog"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:9
+#: themes/blossom/content/sidebar.twig:7
 #: themes/blossom/layouts/default.twig:36
 msgid "Search"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:14
+#: themes/blossom/content/sidebar.twig:11
 #, php-format
 msgid "Hello, %s!"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:16
+#: themes/blossom/content/sidebar.twig:13
 msgid "Links"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:17
+#: themes/blossom/content/sidebar.twig:14
 #: themes/blossom/layouts/default.twig:58
 msgid "Blog"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:18
+#: themes/blossom/content/sidebar.twig:15
 #: themes/blossom/forms/user/controls.twig:9
 #: themes/blossom/forms/user/register.twig:13
 #: themes/blossom/layouts/default.twig:66
 msgid "Email"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:19
+#: themes/blossom/content/sidebar.twig:16
 #: themes/blossom/layouts/default.twig:67
 msgid "Feed"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:21
+#: themes/blossom/content/sidebar.twig:18
 #: themes/blossom/layouts/default.twig:70
 msgid "Admin"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:23
+#: themes/blossom/content/sidebar.twig:20
 #: themes/blossom/layouts/default.twig:72
 msgid "Write"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:25
+#: themes/blossom/content/sidebar.twig:22
 #: themes/blossom/forms/post/edit.twig:30
 #: themes/blossom/layouts/default.twig:74
 msgid "Draft"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:28
+#: themes/blossom/content/sidebar.twig:25
 #: themes/blossom/forms/user/controls.twig:5
 #: themes/blossom/layouts/default.twig:77
 msgid "Controls"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:29
+#: themes/blossom/content/sidebar.twig:26
 #: themes/blossom/layouts/default.twig:78
 msgid "Log out"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:32
+#: themes/blossom/content/sidebar.twig:29
 #: themes/blossom/forms/user/register.twig:5
 #: themes/blossom/forms/user/register.twig:18
 #: themes/blossom/layouts/default.twig:81
 msgid "Register"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:34
+#: themes/blossom/content/sidebar.twig:31
 #: themes/blossom/forms/user/login.twig:5
 #: themes/blossom/forms/user/login.twig:12
 #: themes/blossom/layouts/default.twig:83
 msgid "Log in"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:41
+#: themes/blossom/content/sidebar.twig:36
 msgid "Categories"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:52
+#: themes/blossom/content/sidebar.twig:48
 msgid "Pages"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:61
+#: themes/blossom/content/sidebar.twig:56
 msgid "Recent Posts"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:70
+#: themes/blossom/content/sidebar.twig:64
 #: themes/blossom/layouts/default.twig:68
 msgid "Archive"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:74
+#: themes/blossom/content/sidebar.twig:68
 #: themes/blossom/pages/archive.twig:7
 #: themes/blossom/pages/archive.twig:55
 msgid "%B %Y"
@@ -268,29 +259,29 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:4
+#: themes/blossom/forms/comment/new.twig:3
 #, php-format
 msgid "%s's comment"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:6
+#: themes/blossom/forms/comment/new.twig:5
 msgid "Your name"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:8
+#: themes/blossom/forms/comment/new.twig:7
 msgid "Your email"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:10
+#: themes/blossom/forms/comment/new.twig:9
 msgid "Your website"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:12
+#: themes/blossom/forms/comment/new.twig:11
 #, php-format
 msgid "Your comment"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:23
+#: themes/blossom/forms/comment/new.twig:22
 msgid "Speak"
 msgstr ""
 
@@ -398,7 +389,7 @@ msgstr ""
 msgid "Older posts"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:95
+#: themes/blossom/layouts/default.twig:94
 #, php-format
 msgid "Called from %s on line %d at %ss."
 msgstr ""
@@ -472,10 +463,10 @@ msgid "Previous post"
 msgstr ""
 
 #: themes/blossom/pages/view.twig:30
-msgid "Older comments"
+msgid "Newer comments"
 msgstr ""
 
 #: themes/blossom/pages/view.twig:31
-msgid "Newer comments"
+msgid "Older comments"
 msgstr ""
 
