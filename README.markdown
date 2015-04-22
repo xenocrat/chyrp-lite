@@ -62,16 +62,17 @@ You can install Chyrp Lite in four steps:
 That's it! Chyrp Lite will be up and running and ready for you to use.
 
 ## Upgrading
-Chyrp Lite will tell you when a new version is available. You can update in eight steps:
+Chyrp Lite will tell you when a new version is available. You can update in nine steps:
 
-1. Download the latest version of Chyrp Lite.
-2. Copy your config file from `/includes/config.json.php` to somewhere safe.
-3. Disable any thrid-party Modules/Feathers that are installed.
-4. Overwrite your current Chyrp installation files with the new ones, making sure to retain your `/uploads/` folder.
-5. Restore your config file to `/includes/`.
-6. Run the upgrade process by navigating to [upgrade.php](upgrade.php).
-7. Re-enable your Modules/Feathers.
-8. Run the upgrade process again to run any Module/Feather upgrade tasks.
+1. __Backup your database before proceeding!__
+2. Download the latest version of Chyrp Lite.
+3. Copy your config file from `/includes/config.json.php` to somewhere safe.
+4. Disable any thrid-party Modules/Feathers that are installed.
+5. Overwrite your current Chyrp installation files with the new ones, making sure to retain your `/uploads/` folder.
+6. Restore your config file to `/includes/`.
+7. Run the upgrade process by navigating to [upgrade.php](upgrade.php).
+8. Re-enable your Modules/Feathers.
+9. Run the upgrade process again to run any Module/Feather upgrade tasks.
 
 ## Documentation
 The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation for users and developers.
