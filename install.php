@@ -693,7 +693,7 @@
         <?php else: ?>
             <h1><?php echo __("Done!"); ?></h1>
             <p>
-                <?php echo __("Chyrp has been successfully installed and you have been logged in."); ?>
+                <?php echo __("Chyrp Lite has been successfully installed."); ?>
             </p>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
@@ -701,7 +701,7 @@
             <?php if (!is_writable(INCLUDES_DIR."/caches")): ?>
                 <li><?php echo __("CHMOD <code>/includes/caches</code> to 777."); ?></li>
             <?php endif; ?>
-                <li><a href="https://github.com/xenocrat/chyrp-lite/wiki/Quick-Start-Guide"><?php echo __("Read the Quick Start Guide"); ?></a></li>
+                <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
             </ol>
             <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
         <?php endif; ?>
