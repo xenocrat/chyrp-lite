@@ -440,6 +440,8 @@ table tbody tr td.category_show {               text-align: center }
 table thead tr th.tag_name,
 table tbody tr td.tag_name {                    text-align: left }
 table tbody tr td.tag_count {                   text-align: center }
+table tbody tr td.placeholder {                 display: block;
+                                                border: none }
 td.post_status {                                background-color: #f2fbff }
 tr.private td.post_status {                     background-color: #faebe4 }
 tr.public td.post_status {                      background-color: #ebfae4 }
