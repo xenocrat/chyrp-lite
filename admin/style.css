@@ -79,6 +79,7 @@ strong {                                        font-weight: bold;
 small , .small, .sub {                          color: #b3b5b5 }
 small, .small {                                 font-size: 0.8em;
                                                 line-height: 1.25em }
+small li code, .small li code {                 line-height: 2em }
 p {                                             margin: 0em 0em 1em 0em }
 a:link {                                        color: #4a4747;
                                                 text-decoration: underline }
