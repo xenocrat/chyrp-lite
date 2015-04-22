@@ -1878,6 +1878,9 @@
                 else
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable feathers."));
 
+            if (empty($_GET[$type]))
+                error(__("No Extension Specified"), __("You did not specify an extension to enable."));
+
             if ($type == "module" and module_enabled($_GET[$type]))
                 Flash::warning(__("Module already enabled."), "/admin/?action=modules");
 
@@ -1901,7 +1904,7 @@
                 call_user_func(array($class_name, "__install"));
 
             $new = $config->$enabled_array;
-            array_push($new, $_GET[$type]);
+            $new[] = $_GET[$type];
             $config->set($enabled_array, $new);
 
             if (file_exists($folder."/".$_GET[$type]."/locale/".$config->locale.".mo"))
@@ -1944,6 +1947,9 @@
                 else
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable feathers."));
 
+            if (empty($_GET[$type]))
+                error(__("No Extension Specified"), __("You did not specify an extension to disable."));
+
             if ($type == "module" and !module_enabled($_GET[$type]))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
@@ -1957,8 +1963,10 @@
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), false);
 
-            $config->set(($type == "module" ? "enabled_modules" : "enabled_feathers"),
-                         array_diff($config->$enabled_array, array($_GET[$type])));
+            if (in_array($_GET[$type], $config->$enabled_array))
+              unset($config->$enabled_array[$_GET[$type]]);
+
+            $config->set(($type == "module" ? "enabled_modules" : "enabled_feathers"), $config->$enabled_array);
 
             $info = include $folder."/".$_GET[$type]."/info.php";
             if ($type == "module")
@@ -1978,7 +1986,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_GET['theme']))
-                error(__("No Theme Specified"), __("You did not specify a theme to switch to."));
+                error(__("No Theme Specified"), __("You did not specify the theme you wish to select."));
 
             $config = Config::current();
             $config->set("theme", $_GET['theme']);
