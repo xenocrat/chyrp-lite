@@ -20,7 +20,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title><?php echo $title; ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
