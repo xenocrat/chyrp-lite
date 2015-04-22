@@ -1084,9 +1084,9 @@
         $config = Config::current();
 
         # Instantiate all Modules.
-        foreach ($config->enabled_modules as $index => $module) {
-            if (!file_exists(MODULES_DIR."/".$module."/".$module.".php")) {
-                unset($config->enabled_modules[$index]);
+        foreach ($config->enabled_modules as $module) {
+            if (!file_exists(MODULES_DIR."/".$module."/".$module.".php") or !file_exists(MODULES_DIR."/".$module."/info.php")) {
+                unset($config->enabled_modules[$module]);
                 continue;
             }
 
@@ -1107,9 +1107,9 @@
         }
 
         # Instantiate all Feathers.
-        foreach ($config->enabled_feathers as $index => $feather) {
-            if (!file_exists(FEATHERS_DIR."/".$feather."/".$feather.".php")) {
-                unset($config->enabled_feathers[$index]);
+        foreach ($config->enabled_feathers as $feather) {
+            if (!file_exists(FEATHERS_DIR."/".$feather."/".$feather.".php") or !file_exists(FEATHERS_DIR."/".$feather."/info.php")) {
+                unset($config->enabled_feathers[$feather]);
                 continue;
             }
 
