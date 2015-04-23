@@ -398,7 +398,7 @@
      *     $number - If passed, and this number is 1, it will not pluralize.
      */
     function pluralize($string, $number = null) {
-        $uncountable = array("moose", "sheep", "fish", "series", "species",
+        $uncountable = array("moose", "sheep", "fish", "series", "species", "audio",
                              "rice", "money", "information", "equipment", "piss");
 
         if (in_array($string, $uncountable) or $number == 1)
