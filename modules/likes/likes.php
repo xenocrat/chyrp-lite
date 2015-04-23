@@ -99,10 +99,8 @@
                     $likeText = __("No likes yet.", "likes");
                 elseif ($like->total_count == 1)
                     $likeText = _f("You like this.", $like->total_count, "likes");
-                elseif ($like->total_count == 2)
-                    $likeText = _f("You and %d person like this.", ($like->total_count - 1), "likes");
                 else
-                    $likeText = _f("You and %d people like this.", ($like->total_count - 1), "likes");
+                    $likeText = sprintf(_p("You and %d person likes this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
 
                 $responseObj["likeText"] = $likeText;
             }
@@ -137,10 +135,9 @@
 
                 if ($like->total_count == 0)
                     $likeText = __("No likes yet.", "likes");
-                elseif ($like->total_count == 1)
-                    $likeText = _f("%d person likes this.", $like->total_count, "likes");
                 else
-                    $likeText = _f("%d people like this.", $like->total_count, "likes");
+                    $likeText = sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"), $like->total_count);
+
 
                 $responseObj["likeText"] = $likeText;
             }
@@ -205,10 +202,8 @@
                 $returnStr.= " <span class='like_text'>";
                 if ($like->total_count == 0)
                     $returnStr.= __("No likes yet.", "likes");
-                elseif ($like->total_count == 1)
-                    $returnStr.= _f("%d person likes this.", $like->total_count, "likes");
                 else
-                    $returnStr.= _f("%d people like this.", $like->total_count, "likes");
+                    $returnStr.= sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"), $like->total_count);
                 $returnStr.= "</span>";
 
 
@@ -228,10 +223,8 @@
                     $returnStr.= __("No likes yet.", "likes");
                 elseif ($like->total_count == 1)
                     $returnStr.= _f("You like this.", $like->total_count, "likes");
-                elseif ($like->total_count == 2)
-                    $returnStr.= _f("You and %d person like this.", ($like->total_count - 1), "likes");
                 else
-                    $returnStr.= _f("You and %d people like this.", ($like->total_count - 1), "likes");
+                    $returnStr.= $likeText = sprintf(_p("You and %d person likes this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
                 $returnStr.= "</span>";
 
             }
