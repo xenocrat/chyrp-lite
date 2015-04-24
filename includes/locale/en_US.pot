@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-22 17:59+0000\n"
+"POT-Creation-Date: 2015-04-24 19:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -113,16 +113,16 @@ msgstr ""
 #: includes/controller/Admin.php:1879
 #: includes/controller/Admin.php:1946
 #: includes/controller/Admin.php:1948
-#: includes/controller/Admin.php:1986
-#: includes/controller/Admin.php:2016
-#: includes/controller/Admin.php:2047
-#: includes/controller/Admin.php:2065
-#: includes/controller/Admin.php:2088
-#: includes/controller/Admin.php:2094
-#: includes/controller/Admin.php:2117
-#: includes/controller/Admin.php:2123
-#: includes/controller/Admin.php:2142
-#: includes/controller/Admin.php:2148
+#: includes/controller/Admin.php:1991
+#: includes/controller/Admin.php:2021
+#: includes/controller/Admin.php:2052
+#: includes/controller/Admin.php:2070
+#: includes/controller/Admin.php:2093
+#: includes/controller/Admin.php:2099
+#: includes/controller/Admin.php:2122
+#: includes/controller/Admin.php:2128
+#: includes/controller/Admin.php:2147
+#: includes/controller/Admin.php:2153
 #: includes/controller/Main.php:384
 #: includes/controller/Main.php:454
 #: includes/helpers.php:91
@@ -253,7 +253,7 @@ msgstr ""
 #: includes/controller/Admin.php:495
 #: includes/controller/Admin.php:498
 #: includes/controller/Admin.php:500
-#: includes/controller/Admin.php:2421
+#: includes/controller/Admin.php:2426
 #: includes/controller/Main.php:319
 #: includes/controller/Main.php:415
 #: includes/controller/Main.php:498
@@ -318,10 +318,10 @@ msgstr ""
 #: includes/controller/Admin.php:1332
 #: includes/controller/Admin.php:1468
 #: includes/controller/Admin.php:1543
-#: includes/controller/Admin.php:2065
-#: includes/controller/Admin.php:2094
-#: includes/controller/Admin.php:2123
-#: includes/controller/Admin.php:2148
+#: includes/controller/Admin.php:2070
+#: includes/controller/Admin.php:2099
+#: includes/controller/Admin.php:2128
+#: includes/controller/Admin.php:2153
 msgid "Invalid security key."
 msgstr ""
 
@@ -627,11 +627,11 @@ msgid "Could not read feathers directory."
 msgstr ""
 
 #: includes/controller/Admin.php:1812
-#: includes/controller/Admin.php:1986
-#: includes/controller/Admin.php:2047
-#: includes/controller/Admin.php:2088
-#: includes/controller/Admin.php:2117
-#: includes/controller/Admin.php:2142
+#: includes/controller/Admin.php:1991
+#: includes/controller/Admin.php:2052
+#: includes/controller/Admin.php:2093
+#: includes/controller/Admin.php:2122
+#: includes/controller/Admin.php:2147
 msgid "You do not have sufficient privileges to change settings."
 msgstr ""
 
@@ -676,177 +676,177 @@ msgstr ""
 msgid "Feather already disabled."
 msgstr ""
 
-#: includes/controller/Admin.php:1973
-#: includes/controller/Admin.php:1976
+#: includes/controller/Admin.php:1978
+#: includes/controller/Admin.php:1981
 msgid "Module disabled."
 msgstr ""
 
-#: includes/controller/Admin.php:1989
-#: includes/controller/Admin.php:2019
+#: includes/controller/Admin.php:1994
+#: includes/controller/Admin.php:2024
 msgid "No Theme Specified"
 msgstr ""
 
-#: includes/controller/Admin.php:1989
+#: includes/controller/Admin.php:1994
 msgid "You did not specify the theme you wish to select."
 msgstr ""
 
-#: includes/controller/Admin.php:2007
+#: includes/controller/Admin.php:2012
 #, php-format
 msgid "Theme changed to &#8220;%s&#8221;."
 msgstr ""
 
-#: includes/controller/Admin.php:2016
+#: includes/controller/Admin.php:2021
 msgid "You do not have sufficient privileges to preview themes."
 msgstr ""
 
-#: includes/controller/Admin.php:2019
+#: includes/controller/Admin.php:2024
 msgid "You did not specify a theme to preview."
 msgstr ""
 
-#: includes/controller/Admin.php:2034
+#: includes/controller/Admin.php:2039
 #, php-format
 msgid "Stopped previewing &#8220;%s&#8221;."
 msgstr ""
 
-#: includes/controller/Admin.php:2037
+#: includes/controller/Admin.php:2042
 #, php-format
 msgid "Previewing theme &#8220;%s&#8221;. Press the theme's &#8220;Preview&#8221; button again to stop previewing."
 msgstr ""
 
-#: includes/controller/Admin.php:2079
-#: includes/controller/Admin.php:2108
-#: includes/controller/Admin.php:2133
-#: includes/controller/Admin.php:2155
+#: includes/controller/Admin.php:2084
+#: includes/controller/Admin.php:2113
+#: includes/controller/Admin.php:2138
+#: includes/controller/Admin.php:2160
 msgid "Settings updated."
 msgstr ""
 
-#: includes/controller/Admin.php:2167
+#: includes/controller/Admin.php:2172
 msgid "Filtering Results"
 msgstr ""
 
-#: includes/controller/Admin.php:2168
+#: includes/controller/Admin.php:2173
 msgid "Use this to search for specific items. You can either enter plain text to match the item with, or use keywords:"
 msgstr ""
 
-#: includes/controller/Admin.php:2169
+#: includes/controller/Admin.php:2174
 msgid "Keywords"
 msgstr ""
 
-#: includes/controller/Admin.php:2170
+#: includes/controller/Admin.php:2175
 msgid "Usage"
 msgstr ""
 
-#: includes/controller/Admin.php:2170
+#: includes/controller/Admin.php:2175
 msgid "Use this syntax to quickly match specific results. Keywords will modify the query to match items where <code>attr</code> is equal to <code>val</code> (case insensitive)."
 msgstr ""
 
-#: includes/controller/Admin.php:2173
+#: includes/controller/Admin.php:2178
 msgid "Post Slugs"
 msgstr ""
 
-#: includes/controller/Admin.php:2174
+#: includes/controller/Admin.php:2179
 msgid "Post slugs are strings to use for the URL of a post. They are directly responsible for the <code>(url)</code> attribute in a post's clean URL, or the <code>/?action=view&amp;url=<strong>foo</strong></code> in a post's dirty URL. A post slug should not contain any special characters other than hyphens."
 msgstr ""
 
-#: includes/controller/Admin.php:2177
+#: includes/controller/Admin.php:2182
 msgid "Trackbacks"
 msgstr ""
 
-#: includes/controller/Admin.php:2178
+#: includes/controller/Admin.php:2183
 msgid "Trackbacks are special urls to posts from other blogs that your post is related to or references. The other blog will be notified of your post, and in some cases a comment will automatically be added to the post in question linking back to your post. It's basically a way to network between blogs via posts."
 msgstr ""
 
-#: includes/controller/Admin.php:2181
+#: includes/controller/Admin.php:2186
 msgid "Alternate URL"
 msgstr ""
 
-#: includes/controller/Admin.php:2182
+#: includes/controller/Admin.php:2187
 msgid "An alternate URL will allow you to keep Chyrp in its own directory, while having your site URLs point to someplace else. For example, you could have Chyrp in a <code>/chyrp</code> directory, and have your site at <code>/</code>. There are two requirements for this to work."
 msgstr ""
 
-#: includes/controller/Admin.php:2183
+#: includes/controller/Admin.php:2188
 msgid "Create an <code>index.php</code> file in your destination directory with the following in it:"
 msgstr ""
 
-#: includes/controller/Admin.php:2187
+#: includes/controller/Admin.php:2192
 msgid "Move the .htaccess file from the original Chyrp directory, and change the <code>RewriteBase</code> line to reflect the new website location."
 msgstr ""
 
-#: includes/controller/Admin.php:2217
+#: includes/controller/Admin.php:2222
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:2223
+#: includes/controller/Admin.php:2228
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:2226
+#: includes/controller/Admin.php:2231
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:2229
-#: includes/controller/Admin.php:2264
+#: includes/controller/Admin.php:2234
+#: includes/controller/Admin.php:2269
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:2234
+#: includes/controller/Admin.php:2239
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:2241
+#: includes/controller/Admin.php:2246
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:2243
+#: includes/controller/Admin.php:2248
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:2260
+#: includes/controller/Admin.php:2265
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:2262
+#: includes/controller/Admin.php:2267
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:2266
+#: includes/controller/Admin.php:2271
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:2272
+#: includes/controller/Admin.php:2277
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:2274
+#: includes/controller/Admin.php:2279
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:2276
+#: includes/controller/Admin.php:2281
 msgid "Themes"
 msgstr ""
 
-#: includes/controller/Admin.php:2369
+#: includes/controller/Admin.php:2374
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:2374
+#: includes/controller/Admin.php:2379
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:2382
+#: includes/controller/Admin.php:2387
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:2387
+#: includes/controller/Admin.php:2392
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:2410
+#: includes/controller/Admin.php:2415
 #: includes/controller/Main.php:849
 msgid "Template Missing"
 msgstr ""
 
-#: includes/controller/Admin.php:2410
+#: includes/controller/Admin.php:2415
 #: includes/controller/Main.php:849
 #, php-format
 msgid "Couldn't load template: <code>%s</code>"
