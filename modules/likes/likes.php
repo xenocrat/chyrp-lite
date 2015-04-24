@@ -224,7 +224,7 @@
                 elseif ($like->total_count == 1)
                     $returnStr.= _f("You like this.", $like->total_count, "likes");
                 else
-                    $returnStr.= $likeText = sprintf(_p("You and %d person likes this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
+                    $returnStr.= sprintf(_p("You and %d person likes this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
                 $returnStr.= "</span>";
 
             }
