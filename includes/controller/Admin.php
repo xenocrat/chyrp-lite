@@ -1960,13 +1960,18 @@
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
             $class_name = camelize($_GET[$type]);
+
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), false);
 
-            if (in_array($_GET[$type], $config->$enabled_array))
-              unset($config->$enabled_array[$_GET[$type]]);
+            $new = array();
 
-            $config->set(($type == "module" ? "enabled_modules" : "enabled_feathers"), $config->$enabled_array);
+            foreach ($config->$enabled_array as $extension) {
+              if ($extension != $_GET[$type])
+                $new[] = $extension;
+            }
+
+            $config->set($enabled_array, $new);
 
             $info = include $folder."/".$_GET[$type]."/info.php";
             if ($type == "module")

@@ -152,7 +152,7 @@
                 call_user_func(array($class_name, "__install"));
 
             $new = $config->$enabled_array;
-            array_push($new, $_POST["extension"]);
+            $new[] = $_POST["extension"];
             $config->set($enabled_array, $new);
 
             exit('{ "notifications": ['.
@@ -174,13 +174,21 @@
                 ($type == "feather" and !feather_enabled($_POST['extension'])))
                 exit("{ \"notifications\": [] }");
 
+            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+
             $class_name = camelize($_POST["extension"]);
+
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), ($_POST['confirm'] == "1"));
 
-            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $config->set($enabled_array,
-                         array_diff($config->$enabled_array, array($_POST['extension'])));
+            $new = array();
+
+            foreach ($config->$enabled_array as $extension) {
+              if ($extension != $_POST['extension'])
+                $new[] = $extension;
+            }
+
+            $config->set($enabled_array, $new);
 
             exit('{ "notifications": [] }');
 
