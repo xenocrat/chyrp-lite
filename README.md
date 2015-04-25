@@ -76,3 +76,11 @@ Chyrp Lite will tell you when a new version is available. You can update in nine
 
 ## Documentation
 The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation for users and developers.
+
+## Authors
+
+Chyrp Lite was created by the following people:
+
+* Lite Developer: Daniel Pimley
+* Chyrp Developer: Arian Xhezairi
+* Project Founder: Alex Suraci
