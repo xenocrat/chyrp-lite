@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-24 19:00+0000\n"
+"POT-Creation-Date: 2015-04-26 13:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -277,6 +277,15 @@ msgstr ""
 
 #: includes/class/SQL.php:47
 msgid "Database configuration is not set. Please run the upgrader."
+msgstr ""
+
+#: includes/class/Update.php:32
+msgid "<p role='alert' class='message boo'>Unable to check for updates.</p>"
+msgstr ""
+
+#: includes/class/Update.php:44
+#, php-format
+msgid "<p role='alert' class='message'>Chyrp Lite v%s is available. You can <a href='%s'>learn more</a> or <a href='%s'>download</a> it.</p>"
 msgstr ""
 
 #: includes/controller/Admin.php:60
