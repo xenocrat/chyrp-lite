@@ -859,8 +859,8 @@
 
         if (ini_get("allow_url_fopen")) {
             $content = @file_get_contents($url);
-            if (!$content or !strpos($http_response_header[0], " 200 OK"))
-                $content = "Server returned a message: $http_response_header[0]";
+            if (!$content or  (strpos($http_response_header[0], " 200 OK") === false))
+                $content = "Server returned a message: ".$http_response_header[0];
         } elseif (function_exists("curl_init")) {
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, $url);
@@ -871,7 +871,7 @@
             $status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
             curl_close($handle);
             if ($status != 200)
-                $content = "Server returned a message: $status";
+                $content = "Server returned a message: ".$status;
         } else {
             $path = (!isset($path)) ? '/' : $path ;
             if (isset($query)) $path.= '?'.$query;
