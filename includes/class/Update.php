@@ -9,7 +9,7 @@
          * Loads the update XML file.
          */
         private static function xml() {
-            $xml = simplexml_load_string(get_remote(UPDATE_XML));
+            $xml = simplexml_load_file(UPDATE_XML);
             return $xml;
         }
 
@@ -27,6 +27,10 @@
                 return; # Check for updates once per day
 
             $xml = self::xml();
+
+            if ($xml == false)
+                return __("<p role='alert' class='message boo'>Unable to check for updates.</p>");
+
             $curver = CHYRP_VERSION;
 
             foreach ($xml->channel->item as $item) {
