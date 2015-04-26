@@ -2,9 +2,17 @@
 Chyrp Lite is an ultra-lightweight blogging engine, written in PHP.
 
 ## What can Chyrp Lite do for me?
-With Chyrp Lite you can run your own blog on your own web server with minimal fuss. Chyrp Lite provides three beautiful blog themes and a friendly administration environment, all fully navigable on desktop computers and mobile devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
+With Chyrp Lite you can run your own blog on your own web server with minimal fuss.
+Chyrp Lite provides three beautiful blog themes and a friendly administration environment,
+all fully navigable on desktop computers and mobile devices, thanks to the power of
+responsive HTML5. Semantic markup and comprehensive ARIA labelling ensure your blog will
+be accessible to visitors who use assistive technologies.
 
-Chyrp Lite is powered by a unique Feathers system that allows you to make your blog whatever you want it to be: you can have a traditional blog, a tumbleblog, or add oodles of customisation and build a fully-featured web publishing platform. With the addition of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website, with blogging features on the side.
+Chyrp Lite is powered by a unique Feathers system that allows you to make your blog
+whatever you want it to be: you can have a traditional blog, a tumbleblog, or add oodles
+of customisation and build a fully-featured web publishing platform. With the addition
+of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website,
+with blogging features on the side.
 
 Specifically, Chyrp Lite offers the following "out of the box" features:
 
@@ -75,7 +83,8 @@ Chyrp Lite will tell you when a new version is available. You can update in nine
 9. Run the upgrade process again to run any Module/Feather upgrade tasks.
 
 ## Documentation
-The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation for users and developers.
+The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation
+for users and developers.
 
 ## Authors
 
@@ -84,3 +93,34 @@ Chyrp Lite was created by the following people:
 * Lite Developer: Daniel Pimley
 * Chyrp Developer: Arian Xhezairi
 * Project Founder: Alex Suraci
+
+## Licence
+
+Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley,
+and other contributors.
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+Except as contained in this notice, the name(s) of the above
+copyright holders shall not be used in advertising or otherwise
+to promote the sale, use or other dealings in this Software
+without prior written authorization.
