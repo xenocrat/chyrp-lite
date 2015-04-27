@@ -443,11 +443,11 @@ table tbody tr td.tag_name {                    text-align: left }
 table tbody tr td.tag_count {                   text-align: center }
 table tbody tr td.placeholder {                 display: block;
                                                 border: none }
-td.post_status {                                background-color: #f2fbff }
-tr.private td.post_status {                     background-color: #faebe4 }
-tr.public td.post_status {                      background-color: #ebfae4 }
-tr.denied td.comment_status {                   background-color: #faebe4 }
-tr.approved td.comment_status {                 background-color: #ebfae4 }
+table tbody tr td.post_status {                 background-color: #f2fbff }
+table tbody tr.private td.post_status {         background-color: #faebe4 }
+table tbody tr.public td.post_status {          background-color: #ebfae4 }
+table tbody tr.denied td.comment_status {       background-color: #faebe4 }
+table tbody tr.approved td.comment_status {     background-color: #ebfae4 }
 table tbody tr td.post_tags a,
 table tbody tr td.tag_name a,
 td.controls img {                               position: relative;
