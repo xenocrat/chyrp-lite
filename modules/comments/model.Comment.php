@@ -279,7 +279,7 @@
             if (!isset($this->id))
                 return __("a commentator", "comments");
             if ($this->author_url != "") # If a URL is set
-                return '<a href="'.$this->author_url.'">'.$this->author.'</a>';
+                return '<a href="'.fix($this->author_url, true).'">'.$this->author.'</a>';
             else # If not, just return their name
                 return $this->author;
         }
