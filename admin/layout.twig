@@ -39,7 +39,6 @@ ${ trigger.call("admin_head") }
             {% endblock %}
         </ul>
         <div id="content" role="main">
-            {% if new_update %} $new_update {% endif %}
             {% for notice in flash.notices %}
             <p role="alert" class="message yay">$notice</p>
             {% endfor %}
