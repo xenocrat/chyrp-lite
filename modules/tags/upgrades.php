@@ -1,32 +1,43 @@
 <?php
     /**
-     * Function: yaml_to_serialize
-     * Replaces YAML serializer with PHP's faster serialize() function.
+     * Function: tags_yaml_to_json
+     * Replaces YAML serializer with JSON.
      *
      * Versions: 2.1 => 2.2
      */
-    function yaml_to_serialize() {
+    function tags_yaml_to_json() {
         $sql = SQL::current();
         if (!$tags = $sql->select("post_attributes", array("post_id", "value"), array("name" => "tags")))
             return;
 
         $sql->error = "";
-        $yaml = 0;
+        $json_error = 0;
+        $yaml_count = 0;
+        $conversion = false;
 
         foreach ($tags->fetchAll() as $attr) {
-            if (!unserialize($attr["value"])) {
-              $yaml++;
+            if (!json_decode($attr["value"])) {
+              $yaml_count++;
+
+              $serialized = json_encode(YAML::load($attr["value"]), JSON_UNESCAPED_SLASHES);
+
+              if (!$serialized)
+                $json_error++;
+
               $sql->replace("post_attributes",
                             array("post_id", "name"),
                             array("post_id" => $attr["post_id"],
                                   "name" => "tags",
-                                  "value" => serialize(YAML::load($attr["value"]))));
+                                  "value" => $serialized));
             }
         }
 
-        if ($yaml > 0)
+        if (empty($sql->error) and empty($json_error))
+          $conversion = true;
+
+        if ($yaml_count > 0)
           echo __("Updating tag serialization...", "tags").
-            test(empty($sql->error));
+            test($conversion);
     }
 
-    yaml_to_serialize();
+    tags_yaml_to_json();

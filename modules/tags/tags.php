@@ -32,6 +32,24 @@
 <?php
         }
 
+        private function tags_serialize($tags) {
+            $serialized = json_encode($tags, JSON_UNESCAPED_SLASHES);
+
+            if (json_last_error() and ADMIN)
+                Flash::warning(_f("Could not serialize tags because of JSON error: <code>%s</code>", json_last_error_msg()));
+
+            return $serialized;
+        }
+
+        private function tags_unserialize($tags) {
+            $unserialized = json_decode(utf8_encode($tags), true);
+
+            if (json_last_error() and ADMIN)
+                Flash::warning(_f("Could not unserialize tags because of JSON error: <code>%s</code>", json_last_error_msg()));
+
+            return $unserialized;
+        }
+
         public function post_options($fields, $post = null) {
             $tags = self::list_tags(false);
             usort($tags, array($this, "sort_tags_name_desc"));
@@ -63,7 +81,8 @@
         }
 
         public function add_post($post) {
-            if (empty($_POST['tags'])) return;
+            if (empty($_POST['tags']))
+                return;
 
             $tags = explode(",", $_POST['tags']); # Split at the comma
             $tags = array_map("trim", $tags); # Remove whitespace
@@ -76,7 +95,7 @@
 
             SQL::current()->insert("post_attributes",
                                    array("name" => "tags",
-                                         "value" => serialize($tags),
+                                         "value" => self::tags_serialize($tags),
                                          "post_id" => $post->id));
         }
 
@@ -100,7 +119,7 @@
             SQL::current()->replace("post_attributes",
                                     array("post_id", "name"),
                                     array("name" => "tags",
-                                          "value" => serialize($tags),
+                                          "value" => self::tags_serialize($tags),
                                           "post_id" => $post->id));
         }
 
@@ -143,7 +162,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags"))->fetchAll() as $tag) {
-                $post_tags = unserialize($tag["value"]);
+                $post_tags = self::tags_unserialize($tag["value"]);
 
                 $tags = array_merge($tags, $post_tags);
 
@@ -216,7 +235,7 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_match($_GET['clean'])))->fetchAll() as $tag) {
-                $post_tags = unserialize($tag["value"]);
+                $post_tags = self::tags_unserialize($tag["value"]);
 
                 $tags = array_merge($tags, $post_tags);
 
@@ -280,7 +299,7 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_match($_POST['original'])))->fetchAll() as $tag) {
-                $tags = unserialize($tag["value"]);
+                $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['original']]);
 
                 $tags[$_POST['name']] = sanitize($_POST['name']);
@@ -288,7 +307,7 @@
                 $sql->update("post_attributes",
                              array("name" => "tags",
                                    "post_id" => $tag["post_id"]),
-                             array("value" => serialize($tags)));
+                             array("value" => self::tags_serialize($tags)));
             }
 
             Flash::notice(__("Tag renamed.", "tags"), "/admin/?action=manage_tags");
@@ -320,7 +339,7 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_match($_POST['clean'])))->fetchAll() as $tag)  {
-                $tags = unserialize($tag["value"]);
+                $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['name']]);
 
                 if (empty($tags))
@@ -329,7 +348,7 @@
                     $sql->update("post_attributes",
                                  array("name" => "tags",
                                        "post_id" => $tag["post_id"]),
-                                 array("value" => serialize($tags)));
+                                 array("value" => self::tags_serialize($tags)));
             }
 
             Flash::notice(__("Tag deleted.", "tags"), "/admin/?action=manage_tags");
@@ -358,7 +377,7 @@
                                          array("name" => "tags",
                                                "post_id" => $post_id));
                     if ($tags and $value = $tags->fetchColumn())
-                        $tags = unserialize($value);
+                        $tags = self::tags_unserialize($value);
                     else
                         $tags = array();
 
@@ -367,7 +386,7 @@
                     $sql->replace("post_attributes",
                                   array("post_id", "name"),
                                   array("name" => "tags",
-                                        "value" => serialize($tags),
+                                        "value" => self::tags_serialize($tags),
                                         "post_id" => $post_id));
                 }
 
@@ -401,7 +420,7 @@
             $ids = array();
             foreach ($attributes->fetchAll() as $index => $row) {
                 foreach ($tags as &$tag) {
-                    $search = array_search($tag, unserialize($row["value"]));
+                    $search = array_search($tag, self::tags_unserialize($row["value"]));
                     $tag = ($search) ? $search : $tag;
                 }
 
@@ -441,7 +460,7 @@
                                      null, null, null,
                                      array(array("table" => "post_attributes",
                                                  "where" => "post_id = posts.id")))->fetchAll() as $tag) {
-                    $post_tags = unserialize($tag["value"]);
+                    $post_tags = self::tags_unserialize($tag["value"]);
 
                     $tags = array_merge($tags, $post_tags);
 
@@ -487,7 +506,7 @@
             if (!empty($tags))
                 SQL::current()->insert("post_attributes",
                                        array("name" => "tags",
-                                             "value" => serialize($tags),
+                                             "value" => self::tags_serialize($tags),
                                              "post_id" => $post->id));
         }
 
@@ -516,7 +535,7 @@
             if (empty($tags))
                 return;
 
-            SQL::current()->insert("post_attributes", array("name" => "tags", "value" => serialize($tags), "post_id" => $post->id));
+            SQL::current()->insert("post_attributes", array("name" => "tags", "value" => self::tags_serialize($tags), "post_id" => $post->id));
         }
 
         public function metaWeblog_getPost($struct, $post) {
@@ -576,7 +595,7 @@
         }
 
         public function post($post) {
-            $tags = !empty($post->tags) ? unserialize($post->tags) : array() ;
+            $tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
             ksort($tags, SORT_STRING);
             $post->tags = $tags;
             $post->linked_tags = self::linked_tags($post->tags);
@@ -621,7 +640,7 @@
             $tags = array();
             $names = array();
             while ($attr = $attrs->fetchObject()) {
-                $post_tags = unserialize($attr->value);
+                $post_tags = self::tags_unserialize($attr->value);
 
                 $tags = array_merge($tags, $post_tags);
 
@@ -648,7 +667,7 @@
         }
 
         public function tags_match($name) {
-            return "%:\"".$name."\";%"; # Serialized notation of name as stored in db
+            return "%:\"".$name."\",%"; # Serialized notation of name as stored in db
         }
 
         public function tagsJS() {
@@ -716,7 +735,7 @@
                                  array("name" => "tags",
                                        "post_id" => $post->id));
             if ($tags and $value = $tags->fetchColumn())
-                $tags = unserialize($value);
+                $tags = self::tags_unserialize($value);
             else
                 $tags = array();
 
@@ -725,7 +744,7 @@
             $sql->replace("post_attributes",
                           array("post_id", "name"),
                           array("name" => "tags",
-                                "value" => serialize($tags),
+                                "value" => self::tags_serialize($tags),
                                 "post_id" => $post->id));
 
             exit("{ \"url\": \"".url("tag/".$tags[$tag], MainController::current())."\", \"tag\": \"".$_POST['name']."\" }");
