@@ -1215,12 +1215,12 @@
     }
 
     /**
-     * Function: yaml_to_json
+     * Function: config_yaml_to_json
      * Migrates configuration file format from YAML to JSON.
      *
      * Versions: 2015.03.15 => ????.??.??
      */
-    function yaml_to_json() {
+    function config_yaml_to_json() {
         if (!using_json()) {
             Config::$json = Config::$yaml["config"];
 
@@ -1512,7 +1512,7 @@
 
         group_permissions_to_db();
 
-        yaml_to_json();
+        config_yaml_to_json();
 
         remove_old_files();
 

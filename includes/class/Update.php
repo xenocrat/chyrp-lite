@@ -34,7 +34,8 @@
                     $updateurl = $item->updateurl;
                     $downloadurl = $item->downloadurl;
 
-                    Flash::message(_f("Chyrp Lite v%s is available. You can <a href='%s'>learn more</a> or <a href='%s'>download</a> it.", array($newver, $updateurl, $downloadurl)));
+                    Flash::message(_f("Chyrp Lite v%s is available. You can <a href='%s'>learn more</a> or <a href='%s'>download</a> it.",
+                                      array($newver, $updateurl, $downloadurl)));
 
                     $return = array("version" => (string) $item->version,
                                     "url" => (string) $item->updateurl,
