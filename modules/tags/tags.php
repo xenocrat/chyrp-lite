@@ -184,7 +184,7 @@
                 $step = 60 / $spread;
 
                 foreach ($popularity as $tag => $count)
-                    $cloud[] = array("size" => (100 + (($count - $min_qty) * $step)),
+                    $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
                                      "name" => $tag,
                                      "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"), $count, $tag),
@@ -484,7 +484,7 @@
 
                 $context = array();
                 foreach ($popularity as $tag => $count)
-                    $context[] = array("size" => (100 + (($count - $min_qty) * $step)),
+                    $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
                                        "name" => $tag,
                                        "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"), $count, $tag),
