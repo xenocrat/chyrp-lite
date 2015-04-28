@@ -29,7 +29,7 @@
                 if (isset($_FILES['photo']) and $_FILES['photo']['error'] == 0)
                     $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "bmp"));
                 else
-                    error(__("Error"), __("Couldn't upload photo."));
+                    error(__("Error"), __("Couldn't upload photo.", "photo"));
             } else
                 $filename = $_POST['filename'];
                 
