@@ -24,6 +24,27 @@
             $this->respondTo("post_options", "add_option");
         }
 
+        private function filenames_serialize($files) {
+            $serialized = json_encode($files, JSON_UNESCAPED_SLASHES);
+
+            if (json_last_error())
+                error(__("Error"), __("Failed to serialize files.", "uploader"));
+
+            return $serialized;
+        }
+
+        private function filenames_unserialize($files) {
+            $unserialized = json_decode(utf8_encode($files), true);
+
+            if (json_last_error())
+                $unserialized = unserialize($files); # Supporting the old method
+
+            if (!$unserialized)
+                error(__("Error"), __("Failed to unserialize files.", "uploader"));
+
+            return $unserialized;
+        }
+
         public function submit() {
             if (isset($_FILES['filenames'])) {
                 $files = array();
@@ -36,16 +57,16 @@
                                                     'error' => $_FILES['filenames']['error'][$i],
                                                     'size' => $_FILES['filenames']['size'][$i]));
                         else
-                            error(__("Error"), __("Failed to upload file."));
+                            error(__("Error"), __("Failed to upload file.", "uploader"));
                     }
                 } else {
                     if ($_FILES['filenames']['error'] == 0)
                         $files[] = upload($_FILES['filenames']);
                     else
-                        error(__("Error"), __("Failed to upload file."));
+                        error(__("Error"), __("Failed to upload file.", "uploader"));
                 }
             } else {
-                error(__("Error"), __("Failed to upload file."));
+                error(__("Error"), __("Failed to upload file.", "uploader"));
             }
 
             # Prepend scheme if a URL is detected in the source text
@@ -54,7 +75,7 @@
 
             fallback($_POST['slug'], sanitize($_POST['title']));
 
-            return Post::add(array("filenames" => serialize($files),
+            return Post::add(array("filenames" => self::filenames_serialize($files),
                                    "caption" => $_POST['caption'],
                                    "title" => $_POST['title']),
                              $_POST['slug'],
@@ -74,23 +95,23 @@
                                                     'error' => $_FILES['filenames']['error'][$i],
                                                     'size' => $_FILES['filenames']['size'][$i]));
                         else
-                            error(__("Error"), __("Failed to upload file."));
+                            error(__("Error"), __("Failed to upload file.", "uploader"));
                     }
                 } else {
                     if ($_FILES['filenames']['error'] == 0)
                         $files[] = upload($_FILES['filenames']);
                     else
-                        error(__("Error"), __("Failed to upload file."));
+                        error(__("Error"), __("Failed to upload file.", "uploader"));
                 }
             } else {
-                $files = unserialize($post->filenames);
+                $files = self::filenames_unserialize($post->filenames);
             }
 
             # Prepend scheme if a URL is detected in the source text
             if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['option']['source']))
                 $_POST['option']['source'] = "http://".$_POST['option']['source'];
 
-            $post->update(array("filenames" => serialize($files),
+            $post->update(array("filenames" => self::filenames_serialize($files),
                                 "caption" => $_POST['caption'],
                                 "title" => $_POST['title']));
         }
@@ -109,7 +130,7 @@
 
         public function delete_file($post) {
             if ($post->feather != "uploader") return;
-            $files = unserialize($post->filenames);
+            $files = self::filenames_unserialize($post->filenames);
             for ($i=0; $i < count($files); $i++) {
                 unlink(MAIN_DIR.Config::current()->uploads_path.$files[$i]);
             }
@@ -121,7 +142,7 @@
         }
 
         public function list_files($files, $params = array(), $post) {
-            $files = unserialize($files);
+            $files = self::filenames_unserialize($files);
             $list = array();
             for ($i=0; $i < count($files); $i++) {
                 $list[$i]['name'] = $files[$i];
