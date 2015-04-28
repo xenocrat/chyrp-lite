@@ -313,6 +313,7 @@ label {                                             display: block;
     div#main > article.page {                       padding-bottom: 4rem }
     div.standalone {                                margin-bottom: 0rem;
                                                     padding-bottom: 4rem }
+    div.tags.standalone {                           line-height: 2 }
     ul.archive article.post.archive {               display: block;
                                                     position: relative;
                                                     float: left;

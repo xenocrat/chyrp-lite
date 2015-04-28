@@ -389,6 +389,7 @@ label {                                             display: block;
     div#main > article.page {                       padding-bottom: 2rem }
     div.standalone {                                margin-bottom: 0rem;
                                                     padding-bottom: 2rem }
+    div.tags.standalone {                           line-height: 2 }
     div.user_controls.standalone,
     div.user_login.standalone,
     div.lost_password.standalone,

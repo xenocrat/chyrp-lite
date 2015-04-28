@@ -2,21 +2,17 @@
 
 {% block content %}
   {% if posts.paginated %}
-    <div class="ribbon">
-      <h3 class="ribbon">${ "Posts tagged with %s" | translate("tags") | format(tag | escape) }</h3>
-    </div>
+    <h3 role="status" class="filter">${ "Posts tagged with %s" | translate("tags") | format(tag | escape) }</h3>
   {% endif %}
   {% for post in posts.paginated %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
     {% else %}
-    <div class="ribbon">
-      <h3 class="ribbon">
+    <h3 role="status" class="filter">
     {% if reason == "tag_not_found" %}
       ${ "There are no posts with the tag you specified" | translate("tags") }
     {% else %}
       ${ "No tag specified" | translate("tags") }
     {% endif %}
-      </h3>
-    </div>
+    </h3>
   {% endfor %}
 {% endblock %}
