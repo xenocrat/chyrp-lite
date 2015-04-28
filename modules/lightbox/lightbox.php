@@ -3,7 +3,7 @@
         static function __install() {
             $set = array(Config::current()->set("module_lightbox",
                                             array("background" => "grey",
-                                                  "spacing" => "24",
+                                                  "spacing" => 24,
                                                   "protect" => true )));
         }
 
@@ -23,7 +23,7 @@
 
             $set = array(Config::current()->set("module_lightbox",
                                             array("background" => $_POST['background'],
-                                                  "spacing" => $_POST['spacing'],
+                                                  "spacing" => (int) $_POST['spacing'],
                                                   "protect" => isset($_POST['protect']))));
 
             if (!in_array(false, $set))

@@ -262,7 +262,7 @@
             $config = Config::current();
             $set = array($config->set("allowed_comment_html", explode(", ", $_POST['allowed_comment_html'])),
                          $config->set("default_comment_status", $_POST['default_comment_status']),
-                         $config->set("comments_per_page", $_POST['comments_per_page']),
+                         $config->set("comments_per_page", (int) $_POST['comments_per_page']),
                          $config->set("auto_reload_comments", $_POST['auto_reload_comments']),
                          $config->set("enable_reload_comments", isset($_POST['enable_reload_comments'])));
 

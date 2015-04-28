@@ -2099,8 +2099,8 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $config = Config::current();
-            $set = array($config->set("posts_per_page", $_POST['posts_per_page']),
-                         $config->set("feed_items", $_POST['feed_items']),
+            $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
+                         $config->set("feed_items", (int) $_POST['feed_items']),
                          $config->set("feed_url", $_POST['feed_url']),
                          $config->set("uploads_path", $_POST['uploads_path']),
                          $config->set("enable_trackbacking", !empty($_POST['enable_trackbacking'])),
