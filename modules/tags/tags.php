@@ -667,6 +667,11 @@
         }
 
         public function tags_match($name) {
+            if (!JSON_UNESCAPED_SLASHES)
+                $name = addcslashes($name, "\\\"/");
+            else
+                $name = addcslashes($name, "\\\"");
+
             return "%:\"".$name."\",%"; # Serialized notation of name as stored in db
         }
 
