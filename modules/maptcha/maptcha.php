@@ -25,7 +25,7 @@
 
             $html = "\n";
             $html.= '<label for="maptcha">'._f("How much is %d + %d ?", array($x, $y), "maptcha").'</label>'."\n";
-            $html.= '<input type="text" name="maptcha_response" value="" placeholder="'.__("Yay mathemetics!", "maptcha").'">'."\n";
+            $html.= '<input type="number" name="maptcha_response" value="" placeholder="'.__("Yay mathemetics!", "maptcha").'">'."\n";
             $html.= '<input type="hidden" name="maptcha_challenge" value="'.md5(($x + $y).$config->maptcha_hashkey).'">'."\n";
             return $html;
         }

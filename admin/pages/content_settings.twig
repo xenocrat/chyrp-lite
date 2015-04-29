@@ -7,11 +7,11 @@
                 <fieldset>
                     <p>
                         <label for="posts_per_page">${ "Posts Per Page" | translate }</label>
-                        <input class="text digits" type="text" name="posts_per_page" value="${ site.posts_per_page | escape }" size="2" id="posts_per_page">
+                        <input class="text digits" type="number" min="0" name="posts_per_page" value="${ site.posts_per_page | escape }" size="2" id="posts_per_page">
                     </p>
                     <p>
                         <label for="feed_items">${ "Feed Posts Limit" | translate }</label>
-                        <input class="text digits" type="text" name="feed_items" value="${ site.feed_items | escape }" size="2" id="feed_items">
+                        <input class="text digits" type="number" min="0" name="feed_items" value="${ site.feed_items | escape }" size="2" id="feed_items">
                     </p>
                     <p>
                         <label for="feed_url">${ "Feed URL" | translate }</label>
