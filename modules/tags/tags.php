@@ -35,7 +35,7 @@
         private function tags_serialize($tags) {
             $serialized = json_encode($tags, JSON_UNESCAPED_SLASHES);
 
-            if (json_last_error() and ADMIN)
+            if (json_last_error())
                 error(__("Error"), _f("Failed to serialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
 
             return $serialized;

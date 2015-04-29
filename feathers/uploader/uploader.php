@@ -27,7 +27,7 @@
         private function filenames_serialize($files) {
             $serialized = json_encode($files, JSON_UNESCAPED_SLASHES);
 
-            if (json_last_error() and ADMIN)
+            if (json_last_error())
                 error(__("Error"), _f("Failed to serialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
 
             return $serialized;
@@ -129,20 +129,32 @@
         }
 
         public function delete_file($post) {
-            if ($post->feather != "uploader") return;
+            if ($post->feather != "uploader")
+                return;
+
             $files = self::filenames_unserialize($post->filenames);
+
+            if (!$files)
+                return;
+
             for ($i=0; $i < count($files); $i++) {
                 unlink(MAIN_DIR.Config::current()->uploads_path.$files[$i]);
             }
         }
 
         public function filter_post($post) {
-            if ($post->feather != "uploader") return;
+            if ($post->feather != "uploader")
+                return;
+
             $post->files = $this->list_files($post->filenames, array(), $post);
         }
 
         public function list_files($files, $params = array(), $post) {
             $files = self::filenames_unserialize($files);
+
+            if (!$files)
+                return;
+
             $list = array();
             for ($i=0; $i < count($files); $i++) {
                 $list[$i]['name'] = $files[$i];
@@ -171,10 +183,12 @@
         }
 
         public function add_option($options, $post = null) {
-            if (isset($post) and $post->feather != "uploader") return;
+            if (isset($post) and $post->feather != "uploader")
+                return;
             elseif (Route::current()->action == "write_post")
                 if (!isset($_GET['feather']) and Config::current()->enabled_feathers[0] != "uploader" or
-                    isset($_GET['feather']) and $_GET['feather'] != "uploader") return;
+                    isset($_GET['feather']) and $_GET['feather'] != "uploader")
+                    return;
 
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "uploader"),
