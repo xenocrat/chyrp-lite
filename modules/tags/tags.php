@@ -36,7 +36,7 @@
             $serialized = json_encode($tags, JSON_UNESCAPED_SLASHES);
 
             if (json_last_error() and ADMIN)
-                Flash::warning(_f("Could not serialize tags because of JSON error: <code>%s</code>", json_last_error_msg()));
+                error(__("Error"), _f("Failed to serialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
 
             return $serialized;
         }
@@ -45,7 +45,7 @@
             $unserialized = json_decode(utf8_encode($tags), true);
 
             if (json_last_error() and ADMIN)
-                Flash::warning(_f("Could not unserialize tags because of JSON error: <code>%s</code>", json_last_error_msg()));
+                error(__("Error"), _f("Failed to unserialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
 
             return $unserialized;
         }

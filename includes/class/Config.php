@@ -25,7 +25,7 @@
             $this->json = json_decode(utf8_encode($contents), true);
 
             if (json_last_error())
-                error(__("Error"), _f("Could not read configuration file because of JSON error: <code>%s</code>",
+                error(__("Error"), _f("Failed to read configuration file because of JSON error: <code>%s</code>",
                                       json_last_error_msg()));
 
             $arrays = array("enabled_modules", "enabled_feathers", "routes");
@@ -59,7 +59,7 @@
                 $this->json = json_decode(utf8_encode($contents), true);
 
                 if (json_last_error())
-                    error(__("Error"), _f("Could not read <code>%s</code> because of JSON error: <code>%s</code>",
+                    error(__("Error"), _f("Failed to read <code>%s</code> because of JSON error: <code>%s</code>",
                                           array($this->file, json_last_error_msg())));
             }
 
@@ -76,12 +76,12 @@
             $contents.= json_encode($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             if (json_last_error())
-                error(__("Error"), _f("Could not set \"<code>%s</code>\" because of JSON error: <code>%s</code>",
+                error(__("Error"), _f("Failed to set \"<code>%s</code>\" because of JSON error: <code>%s</code>",
                                       array($setting, json_last_error_msg())));
 
             # Update the configuration file
             if (!@file_put_contents(INCLUDES_DIR."/config.json.php", $contents))
-                error(__("Error"), _f("Could not set \"<code>%s</code>\" because <code>%s</code> is not writable.",
+                error(__("Error"), _f("Failed to set \"<code>%s</code>\" because <code>%s</code> is not writable.",
                                       array($setting, "/includes/config.json.php")));
 
             return true;
@@ -103,7 +103,7 @@
                 $this->json = json_decode(utf8_encode($contents), true);
 
                 if (json_last_error())
-                    error(__("Error"), _f("Could not read <code>%s</code> because of JSON error: <code>%s</code>",
+                    error(__("Error"), _f("Failed to read <code>%s</code> because of JSON error: <code>%s</code>",
                                           array($this->file, json_last_error_msg())));
             }
 
@@ -117,12 +117,12 @@
             $contents.= json_encode($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             if (json_last_error())
-                error(__("Error"), _f("Could not remove \"<code>%s</code>\" because of JSON error: <code>%s</code>",
+                error(__("Error"), _f("Failed to remove \"<code>%s</code>\" because of JSON error: <code>%s</code>",
                                   array($setting, json_last_error_msg())));
 
             # Update the configuration file
             if (!@file_put_contents(INCLUDES_DIR."/config.json.php", $contents))
-                error(__("Error"), _f("Could not remove \"<code>%s</code>\" because <code>%s</code> is not writable.",
+                error(__("Error"), _f("Failed to remove \"<code>%s</code>\" because <code>%s</code> is not writable.",
                                   array($setting, "/includes/config.json.php")));
         }
 

@@ -27,8 +27,8 @@
         private function filenames_serialize($files) {
             $serialized = json_encode($files, JSON_UNESCAPED_SLASHES);
 
-            if (json_last_error())
-                error(__("Error"), __("Failed to serialize files.", "uploader"));
+            if (json_last_error() and ADMIN)
+                error(__("Error"), _f("Failed to serialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
 
             return $serialized;
         }
@@ -39,8 +39,8 @@
             if (json_last_error())
                 $unserialized = unserialize($files); # Supporting the old method
 
-            if (!$unserialized)
-                error(__("Error"), __("Failed to unserialize files.", "uploader"));
+            if (!$unserialized and ADMIN)
+                error(__("Error"), _f("Failed to serialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
 
             return $unserialized;
         }
