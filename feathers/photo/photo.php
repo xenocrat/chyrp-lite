@@ -79,12 +79,16 @@
         }
 
         public function delete_file($post) {
-            if ($post->feather != "photo") return;
+            if ($post->feather != "photo")
+                return;
+
             unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
         }
 
         public function filter_post($post) {
-            if ($post->feather != "photo") return;
+            if ($post->feather != "photo")
+                return;
+
             $post->image = $this->image_tag($post);
         }
 
@@ -107,10 +111,12 @@
         }
 
         public function add_option($options, $post = null) {
-            if (isset($post) and $post->feather != "photo") return;
+            if (isset($post) and $post->feather != "photo")
+                return;
             elseif (Route::current()->action == "write_post")
                 if (!isset($_GET['feather']) and Config::current()->enabled_feathers[0] != "photo" or
-                    isset($_GET['feather']) and $_GET['feather'] != "photo") return;
+                    isset($_GET['feather']) and $_GET['feather'] != "photo")
+                    return;
 
             $options[] = array("attr" => "option[alt_text]",
                                "label" => __("Alt-Text", "photo"),

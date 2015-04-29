@@ -71,12 +71,16 @@
         }
 
         public function delete_file($post) {
-            if ($post->feather != "audio") return;
+            if ($post->feather != "audio")
+                return;
+
             unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
         }
 
         public function filter_post($post) {
-            if ($post->feather != "audio") return;
+            if ($post->feather != "audio")
+                return;
+
             $post->audio_player = $this->audio_player($post->filename, array(), $post);
         }
 
@@ -105,6 +109,7 @@
 
         public function enclose_audio($post) {
             $config = Config::current();
+
             if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
                 return;
 

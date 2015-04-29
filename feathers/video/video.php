@@ -71,12 +71,16 @@
         }
 
         public function delete_file($post) {
-            if ($post->feather != "video") return;
+            if ($post->feather != "video")
+                return;
+
             unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
         }
 
         public function filter_post($post) {
-            if ($post->feather != "video") return;
+            if ($post->feather != "video")
+                return;
+
             $post->video_player = $this->video_player($post->filename, array(), $post);
         }
 
@@ -103,6 +107,7 @@
 
         public function enclose_video($post) {
             $config = Config::current();
+
             if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
                 return;
 
