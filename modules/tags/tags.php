@@ -224,7 +224,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
             if (empty($_GET['clean']))
-                error(__("No Tag Specified"), __("Please specify the tag you would like to rename.", "tags"));
+                error(__("No Tag Specified"), __("Please specify the tag you want to rename.", "tags"));
 
             $sql = SQL::current();
 
@@ -256,7 +256,7 @@
 
         public function admin_edit_tags($admin) {
             if (empty($_GET['id']))
-                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you would like to edit.", "tags"));
+                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_GET['id']);
             if (!$post->editable())
@@ -270,7 +270,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!isset($_POST['id']))
-                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you would like to edit.", "tags"));
+                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_POST['id']);
             if (!$post->editable())
@@ -315,7 +315,7 @@
 
         static function admin_delete_tag($admin) {
             if (empty($_GET['name']) or empty($_GET['clean']))
-                error(__("No Tag Specified"), __("Please specify the tag you would like to delete.", "tags"));
+                error(__("No Tag Specified"), __("Please specify the tag you want to delete.", "tags"));
 
             $tag = array("name" => $_GET['name'],
                          "clean" => $_GET['clean']);
@@ -577,7 +577,7 @@
                           LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
                             AND __post_attributes.name = 'tags'
                             AND __posts.id != $post->id
-                          WHERE __post_attributes.value LIKE '%$key: \"$tag\"%'
+                          WHERE __post_attributes.value LIKE '%$key:\"$tag\"%'
                           GROUP BY __posts.id
                           ORDER BY __posts.created_at DESC
                           LIMIT 5")->fetchAll();
