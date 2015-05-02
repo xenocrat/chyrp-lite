@@ -41,7 +41,7 @@
                 $unserialized = unserialize($filenames); # Supporting the old method
 
             if (!$unserialized and ADMIN)
-                error(__("Error"), _f("Failed to serialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
+                error(__("Error"), _f("Failed to unserialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
 
             return $unserialized;
         }
