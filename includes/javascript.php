@@ -31,6 +31,7 @@ var Post = {
             $("#post_"+id).fadeOut("fast", function(){
                 $(this).loader(true);
                 $(this).replaceWith(data);
+                $(window).scrollTop($("#post_edit_form_"+id).offset().top);
                 $("#post_edit_form_"+id).css("opacity", 0).animate({ opacity: 1 }, function(){
 <?php $trigger->call("ajax_post_edit_form_javascript"); ?>
                     $("#more_options_link_"+id).click(function(){
