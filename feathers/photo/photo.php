@@ -9,7 +9,7 @@
             $this->setField(array("attr" => "photo",
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),
-                                  "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')), "photo")));
+                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "photo")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "photo"),
