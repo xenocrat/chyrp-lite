@@ -1,16 +1,16 @@
 <?php
     class Uploader extends Feathers implements Feather {
         public function __init() {
+            $this->setField(array("attr" => "title",
+                                  "type"=> "text",
+                                  "label" => __("Title", "uploader"),
+                                  "optional" => true,
+                                  "preview" => "markup_title"));
             $this->setField(array("attr" => "uploads",
                                   "type" => "file",
                                   "multiple" => "true",
                                   "label" => __("Files", "uploader"),
                                   "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "uploader")));
-            $this->setField(array("attr" => "title",
-                                  "type"=> "text",
-                                  "label" => __("Title", "uploader"),
-                                  "optional" => true,
-                                  "preview" => "markup_title"));         
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "uploader"),
