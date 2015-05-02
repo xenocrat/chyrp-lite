@@ -87,8 +87,8 @@
             }
             h1 {
                 font-size: 2em;
-                margin: 1em 0em;
-                text-align: center;
+                margin: 0.5em 0em;
+                text-align: left;
                 line-height: 1;
             }
             h1:first-child {

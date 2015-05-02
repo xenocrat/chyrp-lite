@@ -1339,7 +1339,7 @@
             }
             h1 {
                 font-size: 2em;
-                margin: 1em 0em;
+                margin: 0.5em 0em;
                 text-align: center;
                 line-height: 1em;
             }
