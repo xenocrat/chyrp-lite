@@ -366,7 +366,7 @@ a:focus {                                           outline: none;
 a:active {                                          color: #99726d;
                                                     text-decoration: none }
     ul.navigation li > a {                          display: inline-block;
-                                                    padding: 0em 1em 1em 0em }
+                                                    margin: 0em 1em 1em 0em }
 
     h3.flash a {                                    color: #ffffff;
                                                     border-bottom: 1px #ffffff solid;
@@ -530,7 +530,7 @@ img {                                               border-style: none;
     div#mast_box {                                  padding: 3rem 1rem }
     div#main {                                      padding: 0em 3rem }
     ul.navigation li > a {                          display: inline-block;
-                                                    padding: 0em 0.5em 2em 0.5em }
+                                                    margin: 0em 0.5em 2em 0.5em }
     div.search_box {                                margin-top: 0em }
     button#search_submit {                          display: none }
     div#main > article, div.standalone,
