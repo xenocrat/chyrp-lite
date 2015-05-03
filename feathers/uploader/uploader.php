@@ -149,7 +149,7 @@
             return $list;
         }
 
-        public function image_tag($filename, $max_width = 510, $max_height = null, $more_args = "quality=100") {
+        public function image_tag($filename, $max_width = 500, $max_height = null, $more_args = "quality=100") {
             $config = Config::current();
 
             # Source set for responsive images
@@ -162,7 +162,7 @@
             return '<img srcset="'.implode(", ", $srcset).'" src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'" alt="'.$filename.'" class="image">';
         }
 
-        public function image_link($filename, $max_width = 510, $max_height = null, $more_args = "quality=100") {
+        public function image_link($filename, $max_width = 500, $max_height = null, $more_args = "quality=100") {
             return '<a href="'.uploaded($filename).'">'.$this->image_tag($filename, $max_width, $max_height, $more_args).'</a>';
         }
 
