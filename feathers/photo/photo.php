@@ -107,7 +107,7 @@
 
         public function image_link($post, $max_width = 500, $max_height = null, $more_args = "quality=100") {
             $source = !empty($post->source) ? $post->source : uploaded($post->filename) ;
-            return '<a href="'.$source.'">'.$this->image_tag($post, $max_width, $max_height, $more_args).'</a>';
+            return '<a href="'.$source.'" class="image_link">'.$this->image_tag($post, $max_width, $max_height, $more_args).'</a>';
         }
 
         public function add_option($options, $post = null) {

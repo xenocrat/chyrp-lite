@@ -10,7 +10,6 @@
             spacing: Math.abs("<?php echo Config::current()->module_lightbox["spacing"]; ?>"),
             protect: <?php echo ( Config::current()->module_lightbox["protect"] ? "true" : "false" ); ?>,
             active: false,
-            state: null,
             styles: {
                 fg: {
                     "display": "block",
@@ -51,12 +50,23 @@
                     "background-color": "inherit"
                 },
             },
+            state: {
+                doc: "<?php echo Config::current()->name; ?>",
+                url: "<?php echo Config::current()->url; ?>"
+            },
             init: function() {
                 if ( isNaN(ChyrpLightbox.spacing) ) ChyrpLightbox.spacing = 24;
                 $.extend( ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background] );
                 $("img.image").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
                 if ( ChyrpLightbox.protect ) $("img.image").not(".suppress_lightbox").on({ contextmenu: function() { return false } });
-                $(window).on({ resize: ChyrpLightbox.hide, orientationchange: ChyrpLightbox.hide, popstate: ChyrpLightbox.hide });
+                $(window).on({
+                    resize: ChyrpLightbox.hide,
+                    orientationchange: ChyrpLightbox.hide,
+                    popstate: function(e) {
+                        ChyrpLightbox.hide(true);
+                        if (!!e.originalEvent.state && !!e.originalEvent.state.image)
+                            ChyrpLightbox.load(e.originalEvent.state.image.alt, e.originalEvent.state.image.src);
+                }});
                 ChyrpLightbox.watch();
             },
             watch: function() {
@@ -76,10 +86,18 @@
                     observer.observe(target, config);
                 }
             },
-            load: function() {
+            load: function(alt, src) {
                 if ( ChyrpLightbox.active == false ) {
-                    var src = $(this).parent().attr('href') || $(this).attr("src"), alt = $(this).attr("alt");
-                    if ( !!history.pushState && !ChyrpLightbox.protect ) history.pushState(ChyrpLightbox.state, alt, src );
+                    if ( !src || !alt ) {
+                        src = $(this).parent(".image_link").attr("href") || $(this).attr("src"); // Load original (Photo/Uploader Feather)
+                        alt = $(this).attr("alt");
+                        if ( !!history.replaceState && !ChyrpLightbox.protect ) {
+                            // A hack to clone the objects before replaceState updates the values
+                            ChyrpLightbox.state.doc = document.title.toString();
+                            ChyrpLightbox.state.url = window.location.toString();
+                            history.replaceState({ "image": {"alt": alt, "src": src } }, alt, src );
+                        }
+                    }
                     $("<div>", {
                         "id": "ChyrpLightbox-bg",
                         "role": "img",
@@ -89,11 +107,9 @@
                             ChyrpLightbox.hide();
                     }).append($("<img>", {
                         "id": "ChyrpLightbox-fg",
-                        "src": src, // Load original (Photo Feather)
+                        "src": src,
                         "alt": alt
-                    }).css(ChyrpLightbox.styles.fg).load(ChyrpLightbox.show).error(function() {
-                        $(this).off("error"); this.src = src;
-                    })).appendTo("body");
+                    }).css(ChyrpLightbox.styles.fg).load(ChyrpLightbox.show)).appendTo("body");
                     ChyrpLightbox.active = true;
                     return false;
                 }
@@ -119,9 +135,11 @@
                     "cursor": "url('<?php echo Config::current()->chyrp_url."/modules/lightbox/images/zoom-out.svg"; ?>'), pointer"
                 });
             },
-            hide: function() {
+            hide: function(popped) {
                 $("#ChyrpLightbox-bg").remove();
                 ChyrpLightbox.active = false;
+                if (!(popped === true) && !!history.replaceState && !ChyrpLightbox.protect)
+                    history.replaceState(null, ChyrpLightbox.state.doc, ChyrpLightbox.state.url);
             }
         }
         $(document).ready(ChyrpLightbox.init);

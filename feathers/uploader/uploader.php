@@ -163,7 +163,7 @@
         }
 
         public function image_link($filename, $max_width = 500, $max_height = null, $more_args = "quality=100") {
-            return '<a href="'.uploaded($filename).'">'.$this->image_tag($filename, $max_width, $max_height, $more_args).'</a>';
+            return '<a href="'.uploaded($filename).'" class="image_link">'.$this->image_tag($filename, $max_width, $max_height, $more_args).'</a>';
         }
 
         public function add_option($options, $post = null) {
