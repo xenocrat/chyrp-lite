@@ -8,8 +8,8 @@
         var ChyrpAjaxScroll = {
             busy: false,
             fail: false,
-            state: null,
             auto: <?php echo ( Config::current()->ajax_scroll_auto ? "true" : "false" ); ?>,
+            clean: <?php echo ( Config::current()->clean_urls ? "true" : "false" ); ?>,
             init: function() {
                 if ( ChyrpAjaxScroll.auto ) {
                     $(window).on("scroll", window, ChyrpAjaxScroll.watch);
@@ -32,7 +32,13 @@
                     var next_page_url = $("#next_page_page").attr("href");
                     if ( next_page_url && last_post.length ) {
                         $.get(next_page_url, function(data){
-                            if ( !!history.replaceState ) history.replaceState(ChyrpAjaxScroll.state, '', next_page_url );
+                            if ( !!history.replaceState ) {
+                                if (ChyrpAjaxScroll.clean)
+                                    var next_page_query = next_page_url.slice(next_page_url.lastIndexOf("page/"));
+                                else
+                                    var next_page_query = next_page_url.slice(next_page_url.lastIndexOf("page="));
+                                history.replaceState({ "page": next_page_query }, '', next_page_url );
+                            }
                             // Insert new posts
                             $(".post").last().after($(data).find(".post"));
                             // Execute inline scripts
@@ -46,7 +52,8 @@
                             if ( ajax_page_link ) {
                                 // We found another page to load
                                 $("#next_page_page").replaceWith(ajax_page_link);
-                                if ( !ChyrpAjaxScroll.auto ) $("#next_page_page").click(ChyrpAjaxScroll.fetch);
+                                if ( !ChyrpAjaxScroll.auto )
+                                    $("#next_page_page").click(ChyrpAjaxScroll.fetch);
                                 ChyrpAjaxScroll.busy = false;
                             } else {
                                 // That's all Folks!
