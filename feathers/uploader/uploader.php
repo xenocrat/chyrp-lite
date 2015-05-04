@@ -158,8 +158,12 @@
                             $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
                             $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
 
+            $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="80vw"';
+            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename);
+            $tag.= '&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'"';
+            $tag.= ' alt="'.$filename.'" class="image">';
 
-            return '<img srcset="'.implode(", ", $srcset).'" src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'" alt="'.$filename.'" class="image">';
+            return $tag;
         }
 
         public function image_link($filename, $max_width = 500, $max_height = null, $more_args = "quality=100") {

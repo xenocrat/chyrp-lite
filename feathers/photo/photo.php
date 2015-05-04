@@ -102,7 +102,12 @@
                             $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
                             $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
 
-            return '<img srcset="'.implode(", ", $srcset).'" src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'" alt="'.$alt.'" class="image">';
+            $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="80vw"';
+            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename);
+            $tag.= '&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'"';
+            $tag.= ' alt="'.$alt.'" class="image">';
+
+            return $tag;
         }
 
         public function image_link($post, $max_width = 500, $max_height = null, $more_args = "quality=100") {
