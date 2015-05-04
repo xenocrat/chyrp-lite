@@ -7,79 +7,49 @@
             <p>
                 ${ "Are you sure you want to delete user &#8220;%s&#8221;?" | translate | format(user.login | escape) }
             </p>
-            <form class="split" action="{% admin "destroy_user" %}" method="post" accept-charset="utf-8">
+            <form class="delete split" action="{% admin "destroy_user" %}" method="post" accept-charset="utf-8">
                 <fieldset>
-                    {% if user.full_name %}
-                    <div>
-                        <h5>${ "Full Name:" | translate }</h5>
-                        <span class="split">$user.full_name</span>
-                    </div>
-                    {% endif %}
-                    <div>
-                        <h5>${ "E-Mail:" | translate }</h5>
-                        <span class="split">$user.email</span>
-                    </div>
-                    {% if user.website %}
-                    <div>
-                        <h5>${ "Website:" | translate }</h5>
-                        <span class="split">$user.website</span>
-                    </div>
-                    {% endif %}
-                    <div>
-                        <h5>${ "Group:" | translate }</h5>
-                        <span class="split">$user.group.name</span>
-                    </div>
                     {% if user.posts %}
                     {% if users %}
-                    <div>
-                        <h5>${ "Attribute posts to:" | translate }</h5>
+                    <p>
+                        <label for="move_posts">${ "Attribute posts to:" | translate }</label>
                         <select name="move_posts" id="move_posts">
                         {% for user in users %}
                             <option value="$user.id">$user.full_name ($user.login)</option>
                         {% endfor %}
                         </select>
-                    </div>
+                    </p>
                     {% endif %}
-                    <div>
-                        <h5>${ "Delete posts:" | translate }</h5>
+                    <p>
+                        <label for="posts_delete">${ "Delete posts:" | translate }</label>
                         <input type="checkbox" name="posts" value="delete" id="posts_delete" checked="checked">
-                    </div>
+                    </p>
                     {% endif %}
                     {% if user.pages %}
-                    <div>
-                        <h5>${ "Pages:" | translate }</h5>
-                        <ul>
-                        {% for post in user.pages %}
-                            <li>
-                                <a href="$post.url">$post.title</a>
-                            </li>
-                        {% endfor %}
-                        </ul>
-                    </div>
                     {% if users %}
-                    <div>
-                        <h5>${ "Attribute pages to:" | translate }</h5>
+                    <p>
+                        <label for="move_pages">${ "Attribute pages to:" | translate }</label>
                         <select name="move_pages" id="move_pages">
                         {% for user in users %}
                             <option value="$user.id">$user.full_name ($user.login)</option>
                         {% endfor %}
                         </select>
-                    </div>
+                    </p>
                     {% endif %}
-                    <div>
-                        <h5>${ "Delete pages:" | translate }</h5>
+                    <p>
+                        <label for="pages_delete">${ "Delete pages:" | translate }</label>
                         <input type="checkbox" name="pages" value="delete" id="pages_delete" checked="checked">
-                    </div>
+                    </p>
                     {% endif %}
 ${ trigger.call("delete_user_form") }
-                    <p class="buttons">
+                    <div class="confirmation">
                         <button name="destroy" value="indubitably" class="boo">
                             <img src="$theme_url/images/icons/delete.svg" alt="success">${ "Delete!" | translate }
                         </button>
                         <button name="destroy" value="bollocks" type="submit" class="yay">
                             <img src="$theme_url/images/icons/cancel.svg" alt="success">${ "Cancel" | translate }
                         </button>
-                    </p>
+                    </div>
                     <input type="hidden" name="id" value="$user.id" id="id">
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>

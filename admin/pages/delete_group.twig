@@ -7,42 +7,38 @@
             <p>
                 ${ "Are you sure you want to delete the &#8220;%s&#8221; group?" | translate | format(group.name | escape) }
             </p>
-            <form class="delete{% if group.id == visitor.group.id %} confirm{% endif %}" action="{% admin "destroy_group" %}" method="post" accept-charset="utf-8">
+            <form class="delete split{% if group.id == visitor.group.id %} confirm{% endif %}" action="{% admin "destroy_group" %}" method="post" accept-charset="utf-8">
                 <fieldset>
-                    <blockquote>
-                        {% if group.members %}
-                        <h2>${ "Members:" | translate }</h2>
-                        <ul>
-                            {% for member in group.members %}
-                            <li>${ member.full_name | fallback(member.login) }</li>
-                            {% endfor %}
-                        </ul>
-                        {% if groups %}
-                        <h2>${ "Move members to:" | translate }</h2>
-                        <select name="move_group" id="move_group" class="big2">
+                    {% if group.users and groups %}
+                    <p>
+                        <label for="move_group">${ "Move members to:" | translate }</label>
+                        <select name="move_group" id="move_group">
                             {% for group in groups %}
                             <option value="$group.id"${ group.id | option_selected(site.default_group) }>$group.name</option>
                             {% endfor %}
                         </select>
-                        {% endif %}
-                        {% endif %}
-                        {% if group.id == site.default_group and groups %}
-                        <h2>${ "New default group:" | translate }</h2>
-                        <select name="default_group" id="default_group" class="big2">
+                    </p>
+                    {% endif %}
+                    {% if group.id == site.default_group and groups %}
+                    <p>
+                        <label for="default_group">${ "New default group:" | translate }</label>
+                        <select name="default_group" id="default_group">
                             {% for group in groups %}
                             <option value="$group.id"${ group.id | option_selected(site.default_group) }>$group.name</option>
                             {% endfor %}
                         </select>
-                        {% endif %}
-                        {% if group.id == site.guest_group and groups %}
-                        <h2>${ "New &#8220;guest&#8221; group:" | translate }</h2>
-                        <select name="guest_group" id="guest_group" class="big2">
+                    </p>
+                    {% endif %}
+                    {% if group.id == site.guest_group and groups %}
+                    <p>
+                        <label for="guest_group">${ "New &#8220;guest&#8221; group:" | translate }</label>
+                        <select name="guest_group" id="guest_group">
                             {% for group in groups %}
                             <option value="$group.id"${ group.id | option_selected(site.default_group) }>$group.name</option>
                             {% endfor %}
                         </select>
-                        {% endif %}
-                    </blockquote>
+                    </p>
+                    {% endif %}
                     <div class="confirmation">
                         <button name="destroy" value="indubitably" class="boo">
                             <img src="$theme_url/images/icons/delete.svg" alt="success">${ "Delete!" | translate }

@@ -7,29 +7,22 @@
             <p>
                 ${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title | strip_tags) }
             </p>
-            <form class="split" action="{% admin "destroy_page" %}" method="post" accept-charset="utf-8">
+            <form class="delete split" action="{% admin "destroy_page" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     {% if page.children %}
-                    <div>
-                        <h5>${ "Delete children?" | translate }</h5>
-                        <input type="checkbox" name="destroy_children{# OH, THE HORROR! #}" value="" id="destroy_children">
-                    </div>
-                    <small>
-                    <ul>
-                        {% for child in page.children %}
-                            <li><a href="$child.url">$child.title</a></li>
-                        {% endfor %}
-                    </ul>
-                    </small>
+                    <p>
+                        <label for="destroy_children">${ "Delete children?" | translate }</label>
+                        <input type="checkbox" name="destroy_children" value="" id="destroy_children">
+                    </p>
                     {% endif %}
-                    <p class="buttons">
+                    <div class="confirmation">
                         <button name="destroy" value="indubitably" class="boo">
                             <img src="$theme_url/images/icons/delete.svg" alt="success">${ "Delete!" | translate }
                         </button>
                         <button name="destroy" value="bollocks" type="submit" class="yay">
                             <img src="$theme_url/images/icons/cancel.svg" alt="success">${ "Cancel" | translate }
                         </button>
-                    </p>
+                    </div>
                     <input type="hidden" name="id" value="$page.id" id="id">
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>
