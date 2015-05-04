@@ -27,7 +27,7 @@
                     "right": "0px",
                     "bottom": "0px",
                     "left": "0px",
-                    "z-index": 2147483647,
+                    "z-index": 2147483646,
                     "opacity": 0,
                     "transition-property": "opacity",
                     "transition-duration": "500ms",
