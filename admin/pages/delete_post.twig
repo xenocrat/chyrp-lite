@@ -3,7 +3,10 @@
 {% block title %}${ "Delete &#8220;%s&#8221;?" | translate | format(post.title | strip_tags) }{% endblock %}
 
 {% block content %}
-            <h1>${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(post.title | strip_tags) }</h1>
+            <h1>${ "Delete Post?" | translate }</h1>
+            <p>
+                ${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(post.title | strip_tags) }
+            </p>
             <form class="delete" action="{% admin "destroy_post" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     <div class="confirmation">

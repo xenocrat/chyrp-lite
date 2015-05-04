@@ -3,7 +3,10 @@
 {% block title %}${ "Delete Page &#8220;%s&#8221;?" | translate | format(page.title | strip_tags) }{% endblock %}
 
 {% block content %}
-            <h1>${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title | strip_tags) }</h1>
+            <h1>${ "Delete Page?" | translate }</h1>
+            <p>
+                ${ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title | strip_tags) }
+            </p>
             <form class="split" action="{% admin "destroy_page" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     {% if page.children %}

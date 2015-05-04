@@ -3,7 +3,10 @@
 {% block title %}${ "Delete Group &#8220;%s&#8221;?" | translate | format(group.name | escape) }{% endblock %}
 
 {% block content %}
-            <h1>${ "Are you sure you want to delete the &#8220;%s&#8221; group?" | translate | format(group.name | escape) }</h1>
+            <h1>${ "Delete Group?" | translate }</h1>
+            <p>
+                ${ "Are you sure you want to delete the &#8220;%s&#8221; group?" | translate | format(group.name | escape) }
+            </p>
             <form class="delete{% if group.id == visitor.group.id %} confirm{% endif %}" action="{% admin "destroy_group" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     <blockquote>
@@ -41,7 +44,7 @@
                         {% endif %}
                     </blockquote>
                     <div class="confirmation">
-                        <button name="destroy" value="indubitably" class="boo">${ "DESTROY!" | translate }</button>
+                        <button name="destroy" value="indubitably" class="boo">${ "Delete!" | translate }</button>
                         <button name="destroy" value="bollocks" type="submit" class="yay">${ "Cancel" | translate }</button>
                     </div>
                     <input type="hidden" name="id" value="$group.id" id="id">

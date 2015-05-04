@@ -3,7 +3,10 @@
 {% block title %}${ "Delete User &#8220;%s&#8221;?" | translate | format(user.login | escape) }{% endblock %}
 
 {% block content %}
-            <h1>${ "Are you sure you want to delete user &#8220;%s&#8221;?" | translate | format(user.login | escape) }</h1>
+            <h1>${ "Delete User?" | translate }</h1>
+            <p>
+                ${ "Are you sure you want to delete user &#8220;%s&#8221;?" | translate | format(user.login | escape) }
+            </p>
             <form class="split" action="{% admin "destroy_user" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     {% if user.full_name %}
