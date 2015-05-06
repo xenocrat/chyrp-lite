@@ -48,7 +48,7 @@
 
         public function submit() {
             if (!isset($_POST['filenames']))
-                if (isset($_FILES['uploads']) and is_array($_FILES['uploads']['error']) and array_product($_FILES['uploads']['error']) == 0 ) {
+                if (isset($_FILES['uploads']) and is_array($_FILES['uploads']['error']) and upload_tester($_FILES['uploads']['error'])) {
                     $filenames = array();
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++) {
                             $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
@@ -58,7 +58,7 @@
                                                     'size' => $_FILES['uploads']['size'][$i]));
                     }
                 } else
-                    error(__("Error"), __("Couldn't upload files.", "uploader"));
+                    error(__("Error"), __("You did not select any files to upload.", "uploader"));
             else {
                 $filenames = $_POST['filenames'];
             }
@@ -78,7 +78,7 @@
 
         public function update($post) {
             if (!isset($_POST['filenames']))
-                if (isset($_FILES['uploads']) and is_array($_FILES['uploads']['error']) and array_product($_FILES['uploads']['error']) == 0 ) {
+                if (isset($_FILES['uploads']) and is_array($_FILES['uploads']['error']) and upload_tester($_FILES['uploads']['error'])) {
                     $this->delete_files($post);
                     $filenames = array();
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++) {

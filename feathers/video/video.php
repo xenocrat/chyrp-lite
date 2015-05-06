@@ -27,10 +27,10 @@
 
         public function submit() {
             if (!isset($_POST['filename'])) {
-                if (isset($_FILES['video']) and $_FILES['video']['error'] == 0)
+                if (isset($_FILES['video']) and upload_tester($_FILES['video']['error']))
                     $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
                 else
-                    error(__("Error"), __("Couldn't upload video file.", "video"));
+                    error(__("Error"), __("You did not select a video to upload.", "video"));
             } else
                 $filename = $_POST['filename'];
 
@@ -43,7 +43,7 @@
 
         public function update($post) {
             if (!isset($_POST['filename']))
-                if (isset($_FILES['video']) and $_FILES['video']['error'] == 0) {
+                if (isset($_FILES['video']) and upload_tester($_FILES['video']['error'])) {
                     $this->delete_file($post);
                     $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
                 } else

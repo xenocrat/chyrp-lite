@@ -173,10 +173,10 @@
         ini_set("display_errors", 1);
 
         if (DEBUG) {
-    		if (!is_null($r))
-    			trigger_error(_f("%s is <strong>deprecated</strong> since version %s! Use %s instead.", array($f, $v, $r)));
-    		else
-    			trigger_error(_f("%s is <strong>deprecated</strong> since version %s.", $f, $v));
+            if (!is_null($r))
+                trigger_error(_f("%s is <strong>deprecated</strong> since version %s! Use %s instead.", array($f, $v, $r)));
+            else
+                trigger_error(_f("%s is <strong>deprecated</strong> since version %s.", $f, $v));
         }
 
         error_reporting(E_ALL | E_STRICT);
@@ -1375,6 +1375,45 @@
     }
 
     /**
+     * Function: upload_tester
+     * Returns true if files were successfully uploaded.
+     * Returns false if no file was selected for upload.
+     * Triggers an error page for all other fail states.
+     *
+     * Parameters:
+     *     $error - The ['error'] segment of the file array that is created during the file upload by PHP.
+     */
+    function upload_tester($error) {
+        if (is_array($error)) {
+            foreach ($error as $errors) {
+                $return = upload_tester($errors);
+            }
+            return $return;
+        }
+
+        switch ($error) {
+            case UPLOAD_ERR_INI_SIZE:
+                error(__("Error"), __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."));
+            case UPLOAD_ERR_FORM_SIZE:
+                error(__("Error"), __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive that was specified in the HTML form."));
+            case UPLOAD_ERR_PARTIAL:
+                error(__("Error"), __("The uploaded file was only partially uploaded."));
+            case UPLOAD_ERR_NO_TMP_DIR:
+                error(__("Error"), __("Missing a temporary folder."));
+            case UPLOAD_ERR_CANT_WRITE:
+                error(__("Error"), __("Failed to write file to disk."));
+            case UPLOAD_ERR_EXTENSION:
+                error(__("Error"), __("File upload was stopped by a PHP extension."));
+            case UPLOAD_ERR_NO_FILE: 
+                return false;
+            case UPLOAD_ERR_OK: 
+                return true;
+            default:
+                error(__("Error"), __("Unknown upload error."));
+        }
+    }
+
+    /**
      * Function: timer_start
      * Starts the timer.
      */
@@ -1815,12 +1854,12 @@
      *     http://gravatar.com/site/implement/images/php/
      */
     function get_gravatar($email, $s = 80, $d = "mm", $r = "g", $img = false, $atts = array()) {
-    	$url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
-    	if ($img) {
-    		$url = '<img class="gravatar" src="' . $url . '"';
-    		foreach ($atts as $key => $val)
-    			$url .= ' ' . $key . '="' . $val . '"';
-    		$url .= ">";
-    	}
-    	return $url;
+        $url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
+        if ($img) {
+            $url = '<img class="gravatar" src="' . $url . '"';
+            foreach ($atts as $key => $val)
+                $url .= ' ' . $key . '="' . $val . '"';
+            $url .= ">";
+        }
+        return $url;
     }

@@ -27,10 +27,10 @@
 
         public function submit() {
             if (!isset($_POST['filename'])) {
-                if (isset($_FILES['audio']) and $_FILES['audio']['error'] == 0)
+                if (isset($_FILES['audio']) and upload_tester($_FILES['audio']['error']))
                     $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
                 else
-                    error(__("Error"), __("Couldn't upload audio file.", "audio"));
+                    error(__("Error"), __("You did not select any audio to upload.", "audio"));
             } else
                 $filename = $_POST['filename'];
 
@@ -43,7 +43,7 @@
 
         public function update($post) {
             if (!isset($_POST['filename']))
-                if (isset($_FILES['audio']) and $_FILES['audio']['error'] == 0) {
+                if (isset($_FILES['audio']) and upload_tester($_FILES['audio']['error'])) {
                     $this->delete_file($post);
                     $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
                 } else
