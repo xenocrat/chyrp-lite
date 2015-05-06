@@ -569,7 +569,8 @@
 
         public function post_list_related_attr($attr, $post) {
             if (Route::current()->action != "view") return;
-
+            
+            $like = "%\"".tags_safe($key)."\":\"".$tag."\"%";
             $posts = array();
             foreach ($post->tags as $key => $tag) {
                 $posts = SQL::current()->query("SELECT DISTINCT __posts.id
@@ -577,7 +578,7 @@
                           LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
                             AND __post_attributes.name = 'tags'
                             AND __posts.id != $post->id
-                          WHERE __post_attributes.value LIKE '%$key:\"$tag\"%'
+                          WHERE __post_attributes.value LIKE '$like'
                           GROUP BY __posts.id
                           ORDER BY __posts.created_at DESC
                           LIMIT 5")->fetchAll();
@@ -666,13 +667,17 @@
             return ($limit) ? array_slice($list, 0, $limit) : $list ;
         }
 
-        public function tags_match($name) {
+        private function tags_match($name) {
+            return "%:\"".$name."\"%"; # Serialized notation of value as stored in db
+        }
+
+        private function tags_safe($name) {
             if (!JSON_UNESCAPED_SLASHES)
                 $name = addcslashes($name, "\\\"/");
             else
                 $name = addcslashes($name, "\\\"");
 
-            return "%:\"".$name."\",%"; # Serialized notation of name as stored in db
+            return $name;
         }
 
         public function tagsJS() {
