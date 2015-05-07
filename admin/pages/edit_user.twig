@@ -39,7 +39,7 @@
                         <input class="text" type="password" name="new_password2" value="" id="new_password2">
                     </p>
 ${ trigger.call("edit_user_fields", user) }
-                    <p>
+                    <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
                     <input type="hidden" name="id" value="$user.id" id="id">

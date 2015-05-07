@@ -19,7 +19,7 @@
                         <input class="checkbox" type="checkbox" name="permissions[$permission.id]" id="permission_$permission.id">
                     </p>
                     {% endfor %}
-                    <p>
+                    <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Add Group" | translate }</button>
                     </p>
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">

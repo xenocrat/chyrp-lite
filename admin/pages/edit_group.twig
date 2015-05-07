@@ -20,7 +20,7 @@
                         <input class="checkbox" type="checkbox" name="permissions[$permission.id]" id="permission_$permission.id"{% if group.can(permission.id) %} checked="checked"{% endif %}>
                     </p>
                     {% endfor %}
-                    <p>
+                    <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
                     <input type="hidden" name="id" value="$group.id" id="id">

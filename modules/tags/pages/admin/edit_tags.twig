@@ -10,7 +10,7 @@
                         <label for="name">${ "Tags" | translate("tags") }</label>
                         <input type="text" name="tags" value="${ post.tags | keys | join(", ") | escape }" id="tags">
                     </p>
-                    <p>
+                    <p class="buttons">
                         <button type="submit" class="yay">
                             <img src="$theme_url/images/icons/success.svg" alt="success"> ${ "Update" | translate }
                         </button>

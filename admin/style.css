@@ -342,6 +342,7 @@ form.split > fieldset > * > label {             box-sizing: border-box;
                                                 color: #7f7f7f;
                                                 text-align: right;
                                                 padding-right: 1em }
+form.split > fieldset > div.confirmation {      margin-top: 2em }
 form.split small,
 form.split .small,
 form.split .buttons {                           display: block;
