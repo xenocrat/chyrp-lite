@@ -234,7 +234,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::tags_match($_GET['clean'])))->fetchAll() as $tag) {
+                                       "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
                 $post_tags = self::tags_unserialize($tag["value"]);
 
                 $tags = array_merge($tags, $post_tags);
@@ -298,7 +298,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::tags_match($_POST['original'])))->fetchAll() as $tag) {
+                                       "value like" => self::tags_name_match($_POST['original'])))->fetchAll() as $tag) {
                 $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['original']]);
 
@@ -330,7 +330,7 @@
             if (!Visitor::current()->group->can("edit_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
-            if (empty($_POST['name']) or empty($_POST['clean']) or ($_POST['destroy'] != "indubitably"))
+            if (empty($_POST['name']) or ($_POST['destroy'] != "indubitably"))
                 redirect("/admin/?action=manage_tags");
 
             $sql = SQL::current();
@@ -338,7 +338,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::tags_match($_POST['clean'])))->fetchAll() as $tag)  {
+                                       "value like" => self::tags_name_match($_POST['name'])))->fetchAll() as $tag)  {
                 $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['name']]);
 
@@ -410,7 +410,7 @@
 
             $likes = array();
             foreach ($tags as $name)
-                $likes[] = self::tags_match($name);
+                $likes[] = self::tags_clean_match($name);
 
             $attributes = $sql->select("post_attributes",
                                        array("value", "post_id"),
@@ -570,9 +570,9 @@
         public function post_list_related_attr($attr, $post) {
             if (Route::current()->action != "view") return;
             
-            $like = "%\"".tags_safe($key)."\":\"".$tag."\"%";
             $posts = array();
             foreach ($post->tags as $key => $tag) {
+                $like = self::tags_name_match($key);
                 $posts = SQL::current()->query("SELECT DISTINCT __posts.id
                           FROM __posts
                           LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
@@ -667,8 +667,14 @@
             return ($limit) ? array_slice($list, 0, $limit) : $list ;
         }
 
-        private function tags_match($name) {
-            return "%:\"".$name."\"%"; # Serialized notation of value as stored in db
+        private function tags_name_match($name) {
+            # Serialized notation of key
+            return "%\"".self::tags_safe($name)."\":%";
+        }
+
+        private function tags_clean_match($clean) {
+            # Serialized notation of value
+            return "%:\"".$clean."\"%";
         }
 
         private function tags_safe($name) {
