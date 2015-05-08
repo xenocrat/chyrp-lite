@@ -8,7 +8,7 @@
                 <fieldset>
                     <p>
                         <label for="cache_expire">${ "Expire Cache After&hellip;" | translate("cacher") }</label>
-                        <input class="text" type="text" name="cache_expire" value="${ site.cache_expire | escape }" id="cache_expire"> <span class="sub">${ "(seconds)" | translate("cacher") }</span>
+                        <input class="text digits" type="number" name="cache_expire" value="${ site.cache_expire | escape }" id="cache_expire"> <span class="sub">${ "(seconds)" | translate("cacher") }</span>
                         <small>
                             <a href="{% admin "clear_cache" %}">${ "Clear the cache now!" | translate }</a>
                         </small>
@@ -22,9 +22,7 @@
                         <input class="text" type="text" name="cache_memcached_hosts" value="${ site.cache_memcached_hosts | join(", ") | escape }" id="cache_memcached_hosts"> <span class="sub">${ "(comma separated)" | translate("cacher") }</span>
                     </p>
                     <p class="buttons">
-                        <p>
-                            <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
-                        </p>
+                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>

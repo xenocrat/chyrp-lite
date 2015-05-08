@@ -20,7 +20,8 @@
             $xml = simplexml_load_file(UPDATE_XML);
 
             if ($xml == false) {
-                Flash::warning(__("Unable to check for updates."));
+                Flash::warning(_f("Unable to check for updates. Please visit <a href='%s'>GitHub</a> to see a list of available releases.",
+                                  "https://github.com/xenocrat/chyrp-lite/releases"));
                 return;
             }
 
