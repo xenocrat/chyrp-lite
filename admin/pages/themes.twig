@@ -15,7 +15,7 @@
                         <a class="emblem module_author" href="$theme.info.url">
                             <img src="$theme_url/images/icons/info.svg" alt="${ theme.info.url | escape }">
                         </a>
-                        ${ theme.info.name | translate(theme.name) }
+                        $theme.info.name {# translation is done in the controller #}
                     </h3>
                     <div class="controls">
                         <a class="button" href="{% admin "change_theme&theme=" ~ theme.name %}">

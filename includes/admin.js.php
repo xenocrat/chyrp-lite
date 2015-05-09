@@ -326,13 +326,7 @@ var Extend = {
     },
     reset_conflicts: function() {
         Extend.conflicts = 0;
-        $(".extend li.error").removeClass("error").attr('class', function(i, c) {
-              return c.replace(/conflict([0-9])/g, '');
-        }).find(".module_status").attr({
-            src: "<?php echo $config->chyrp_url; ?>/admin/images/icons/success.svg",
-            alt: "<?php echo __("Blissful!", "theme"); ?>",
-            title: "<?php echo __("Blissful!", "theme"); ?>"
-        });
+        $(".extend li.error").removeClass("error");
     },
     check_conflicts: function() {
         Extend.reset_conflicts(); // Reset all values
@@ -348,19 +342,13 @@ var Extend = {
                             "error",
                             /depended_by_(.+)/,
                             /needs_(.+)/,
-                            /depends_(.+)/,
-                            /conflict([0-9])/]);
+                            /depends_(.+)/]);
 
             for (i = 0; i < classes.length; i++) {
                 var conflict = classes[i].replace("conflict_", "module_");
                 if ($("#"+conflict).parent().attr("id") == "modules_enabled" ) {
                     Extend.conflicts++;
-                    $("#"+conflict).addClass("error conflict"+Extend.conflicts);
-                    $(this).addClass("error conflict"+Extend.conflicts).find(".module_status").attr({
-                        src: "<?php echo $config->chyrp_url; ?>/admin/images/icons/error.svg",
-                        alt: "<?php echo __("Conflicted!", "theme"); ?>",
-                        title: "<?php echo __("Conflicted!", "theme"); ?>"
-                    });
+                    $(this).addClass("error");
                 }
             }
         });

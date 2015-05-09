@@ -3,10 +3,10 @@
 {% block title %}${ "Manage Pages" | translate }{% endblock %}
 
 {% block content %}
-            <form class="detail" action="index.php" method="get" accept-charset="utf-8">
+            <form class="filters" action="index.php" method="get" accept-charset="utf-8">
                 <fieldset>
                     <input type="hidden" name="action" value="manage_pages">
-                    <div role="search" class="detail_single">
+                    <div role="search" class="filter_item">
                         <h3>
                             ${ "Search&hellip;" | translate }
                             <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>

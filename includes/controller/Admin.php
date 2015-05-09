@@ -1665,15 +1665,21 @@
                 if (gettype($info) != "array")
                   continue;
 
-                $info["conflicts_true"] = array();
-                $info["depends_true"] = array();
-
+                $conflicting_modules = array();
                 if (!empty($info["conflicts"])) {
                     $classes[$folder][] = "conflict";
 
                     foreach ((array) $info["conflicts"] as $conflict)
-                        if (file_exists(MODULES_DIR."/".$conflict."/".$conflict.".php"))
+                        if (file_exists(MODULES_DIR."/".$conflict."/".$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
+                            $conflicting_modules[] = $conflict; # Our shortlist of conflicting installed modules
+                        }
+
+                    foreach ((array) $info["conflicts"] as $conflict)
+                        if (array_search($conflict, $config->enabled_modules)) {
+                            $classes[$folder][] = "error"; # Flag an error state if a conflicting module is enabled
+                            break;
+                        }
                 }
 
                 $dependencies_needed = array();
@@ -1729,6 +1735,7 @@
                                                            "author" => $info["author"],
                                                            "help" => $info["help"],
                                                            "classes" => $classes[$folder],
+                                                           "conflicting_modules" => $conflicting_modules,
                                                            "dependencies_needed" => $dependencies_needed);
             }
 
