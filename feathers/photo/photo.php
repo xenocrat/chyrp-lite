@@ -25,13 +25,10 @@
         }
 
         public function submit() {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['photo']) and upload_tester($_FILES['photo']['error']))
-                    $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "bmp"));
-                else
-                    error(__("Error"), __("You did not select a photo to upload.", "photo"));
+            if (isset($_FILES['photo']) and upload_tester($_FILES['photo']['error']))
+                $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "bmp"));
             else
-                $filename = $_POST['filename'];
+                error(__("Error"), __("You did not select a photo to upload.", "photo"));
                 
             # Prepend scheme if a URL is detected in the source text
             if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['option']['source']))
@@ -47,14 +44,11 @@
         }
 
         public function update($post) {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['photo']) and upload_tester($_FILES['photo']['error'])) {
-                    $this->delete_file($post);
-                    $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tiff", "bmp"));
-                } else
-                    $filename = $post->filename;
-            else
-                $filename = $_POST['filename'];
+            if (isset($_FILES['photo']) and upload_tester($_FILES['photo']['error'])) {
+                $this->delete_file($post);
+                $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tiff", "bmp"));
+            } else
+                $filename = $post->filename;
             
             # Prepend scheme if a URL is detected in the source text
             if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['option']['source']))

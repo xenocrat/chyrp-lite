@@ -26,13 +26,10 @@
         }
 
         public function submit() {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['audio']) and upload_tester($_FILES['audio']['error']))
-                    $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
-                else
-                    error(__("Error"), __("You did not select any audio to upload.", "audio"));
+            if (isset($_FILES['audio']) and upload_tester($_FILES['audio']['error']))
+                $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
             else
-                $filename = $_POST['filename'];
+                error(__("Error"), __("You did not select any audio to upload.", "audio"));
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
@@ -42,14 +39,11 @@
         }
 
         public function update($post) {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['audio']) and upload_tester($_FILES['audio']['error'])) {
-                    $this->delete_file($post);
-                    $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
-                } else
-                    $filename = $post->filename;
-            else
-                $filename = $_POST['filename'];
+            if (isset($_FILES['audio']) and upload_tester($_FILES['audio']['error'])) {
+                $this->delete_file($post);
+                $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
+            } else
+                $filename = $post->filename;
 
             $post->update(array("title" => $_POST['title'],
                                 "filename" => $filename,

@@ -26,13 +26,10 @@
         }
 
         public function submit() {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['video']) and upload_tester($_FILES['video']['error']))
-                    $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
-                else
-                    error(__("Error"), __("You did not select a video to upload.", "video"));
+            if (isset($_FILES['video']) and upload_tester($_FILES['video']['error']))
+                $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
             else
-                $filename = $_POST['filename'];
+                error(__("Error"), __("You did not select a video to upload.", "video"));
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
@@ -42,14 +39,11 @@
         }
 
         public function update($post) {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['video']) and upload_tester($_FILES['video']['error'])) {
-                    $this->delete_file($post);
-                    $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
-                } else
-                    $filename = $post->filename;
-            else
-                $filename = $_POST['filename'];
+            if (isset($_FILES['video']) and upload_tester($_FILES['video']['error'])) {
+                $this->delete_file($post);
+                $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
+            } else
+                $filename = $post->filename;
 
             $post->update(array("title" => $_POST['title'],
                                 "filename" => $filename,
