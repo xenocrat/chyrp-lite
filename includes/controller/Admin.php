@@ -1672,34 +1672,35 @@
                     foreach ((array) $info["conflicts"] as $conflict)
                         if (file_exists(MODULES_DIR."/".$conflict."/".$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
-                            $conflicting_modules[] = $conflict; # Our shortlist of conflicting installed modules
-                        }
-
-                    foreach ((array) $info["conflicts"] as $conflict)
-                        if (array_search($conflict, $config->enabled_modules)) {
-                            $classes[$folder][] = "error"; # Flag an error state if a conflicting module is enabled
-                            break;
+                            $conflicting_modules[] = $conflict; # Shortlist of conflicting installed modules
+                            if (in_array($conflict, $config->enabled_modules))
+                                if (!in_array("error", $classes[$folder]))
+                                    $classes[$folder][] = "error";
                         }
                 }
 
                 $dependencies_needed = array();
-                if (!empty($info["depends"])) {
-                    $classes[$folder][] = "depends";
+                if (!empty($info["dependencies"])) {
+                    $classes[$folder][] = "dependencies";
 
-                    foreach ((array) $info["depends"] as $dependency) {
-                        if (!module_enabled($dependency)) {
+                    foreach ((array) $info["dependencies"] as $dependency) {
+                        if (!file_exists(MODULES_DIR."/".$dependency."/".$dependency.".php")) {
                             if (!in_array("missing_dependency", $classes[$folder]))
-                                $classes[$folder][] = "missing_dependency";
+                                $classes[$folder][] = "missing_dependency"; # Dependency is not installed
 
-                            $classes[$folder][] = "needs_".$dependency;
+                            if (!in_array("error", $classes[$folder]))
+                                $classes[$folder][] = "error";
+                        } else {
+                            if (!in_array($dependency, $config->enabled_modules))
+                                if (!in_array("error", $classes[$folder]))
+                                    $classes[$folder][] = "error";
 
-                            $dependencies_needed[] = $dependency;
+                            fallback($classes[$dependency], array());
+                            $classes[$dependency][] = "needed_by_".$folder;
                         }
 
-                        $classes[$folder][] = "depends_".$dependency;
-
-                        fallback($classes[$dependency], array());
-                        $classes[$dependency][] = "depended_by_".$folder;
+                        $classes[$folder][] = "needs_".$dependency;
+                        $dependencies_needed[] = $dependency;
                     }
                 }
 

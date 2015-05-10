@@ -256,6 +256,8 @@ li.module p.module_conflicts_message,
 li.module p.module_dependencies_message {       margin-bottom: 0em }
 li.module ol.module_conflicts_list,
 li.module ol.module_dependencies_list {         margin: 0em 0em 1em 1em }
+li.module:not(.error) .module_dependencies_message,
+li.module:not(.error) .module_dependencies_list,
 li.module:not(.error) .module_conflicts_message,
 li.module:not(.error) .module_conflicts_list {  display: none }
 li.module div.controls,

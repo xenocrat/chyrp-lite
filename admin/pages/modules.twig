@@ -86,7 +86,8 @@
                         <li class="$dependency"><code>$dependency</code></li>
                     {% endfor %}
                     </ol>
-                    {% else %}
+                    {% endif %}
+                    {% if not ( module.classes | join(" ") | contains("missing_dependency") ) %}
                     <div class="controls">
                         <a class="button module_disabler" href="{% admin "disable&module="~safename %}">
                             <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
