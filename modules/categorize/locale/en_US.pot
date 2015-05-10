@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-24 19:00+0000\n"
+"POT-Creation-Date: 2015-05-10 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -51,7 +51,7 @@ msgid "Category added."
 msgstr ""
 
 #: modules/categorize/categorize.php:229
-#: modules/categorize/categorize.php:248
+#: modules/categorize/categorize.php:260
 msgid "You do not have sufficient privileges to manage categories."
 msgstr ""
 
@@ -63,7 +63,11 @@ msgstr ""
 msgid "Category updated."
 msgstr ""
 
-#: modules/categorize/categorize.php:251
+#: modules/categorize/categorize.php:248
+msgid "Please specify the category you want to delete."
+msgstr ""
+
+#: modules/categorize/categorize.php:266
 msgid "Category deleted."
 msgstr ""
 
@@ -113,6 +117,16 @@ msgstr ""
 #: modules/categorize/pages/admin/add_category.twig:27
 #: modules/categorize/pages/admin/edit_category.twig:27
 msgid "Do you want to include this category in the categories list?"
+msgstr ""
+
+#: modules/categorize/pages/admin/delete_category.twig:3
+#: modules/categorize/pages/admin/delete_category.twig:6
+msgid "Delete Category?"
+msgstr ""
+
+#: modules/categorize/pages/admin/delete_category.twig:8
+#, php-format
+msgid "Are you sure you want to delete the category &#8220;%s&#8221;?"
 msgstr ""
 
 #: modules/categorize/pages/admin/edit_category.twig:3

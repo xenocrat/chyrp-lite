@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-24 19:00+0000\n"
+"POT-Creation-Date: 2015-05-10 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -384,15 +384,15 @@ msgstr ""
 msgid "Your search did not return any results."
 msgstr ""
 
-#: themes/sparrow/pages/tag.twig:6
+#: themes/sparrow/pages/tag.twig:5
 msgid "Posts tagged with %s"
 msgstr ""
 
-#: themes/sparrow/pages/tag.twig:15
+#: themes/sparrow/pages/tag.twig:12
 msgid "There are no posts with the tag you specified"
 msgstr ""
 
-#: themes/sparrow/pages/tag.twig:17
+#: themes/sparrow/pages/tag.twig:14
 msgid "No tag specified"
 msgstr ""
 

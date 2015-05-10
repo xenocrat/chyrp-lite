@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-24 19:00+0000\n"
+"POT-Creation-Date: 2015-05-10 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/layout.twig:55
+#: admin/layout.twig:54
 msgid "Chyrp loves you."
 msgstr ""
 
-#: admin/layout.twig:56
+#: admin/layout.twig:55
 #, php-format
 msgid "Chyrp Lite v%s"
 msgstr ""
 
-#: admin/layout.twig:57
+#: admin/layout.twig:56
 msgid "Log out"
 msgstr ""
 
@@ -112,111 +112,84 @@ msgid "Update"
 msgstr ""
 
 #: admin/pages/delete_group.twig:3
-#, php-format
-msgid "Delete Group &#8220;%s&#8221;?"
+#: admin/pages/delete_group.twig:6
+msgid "Delete Group?"
 msgstr ""
 
-#: admin/pages/delete_group.twig:6
+#: admin/pages/delete_group.twig:8
 #, php-format
 msgid "Are you sure you want to delete the &#8220;%s&#8221; group?"
 msgstr ""
 
-#: admin/pages/delete_group.twig:11
-msgid "Members:"
-msgstr ""
-
-#: admin/pages/delete_group.twig:18
+#: admin/pages/delete_group.twig:14
 msgid "Move members to:"
 msgstr ""
 
-#: admin/pages/delete_group.twig:27
+#: admin/pages/delete_group.twig:24
 msgid "New default group:"
 msgstr ""
 
-#: admin/pages/delete_group.twig:35
+#: admin/pages/delete_group.twig:34
 msgid "New &#8220;guest&#8221; group:"
 msgstr ""
 
 #: admin/pages/delete_group.twig:44
-msgid "DESTROY!"
+#: admin/pages/delete_page.twig:20
+#: admin/pages/delete_post.twig:14
+#: admin/pages/delete_user.twig:47
+msgid "Delete!"
 msgstr ""
 
-#: admin/pages/delete_group.twig:45
-#: admin/pages/delete_page.twig:27
-#: admin/pages/delete_post.twig:14
-#: admin/pages/delete_user.twig:77
+#: admin/pages/delete_group.twig:47
+#: admin/pages/delete_page.twig:23
+#: admin/pages/delete_post.twig:17
+#: admin/pages/delete_user.twig:50
 msgid "Cancel"
 msgstr ""
 
 #: admin/pages/delete_page.twig:3
-#, php-format
-msgid "Delete Page &#8220;%s&#8221;?"
+#: admin/pages/delete_page.twig:6
+msgid "Delete Page?"
 msgstr ""
 
-#: admin/pages/delete_page.twig:6
-#: admin/pages/delete_post.twig:6
+#: admin/pages/delete_page.twig:8
+#: admin/pages/delete_post.twig:8
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
 msgstr ""
 
-#: admin/pages/delete_page.twig:11
+#: admin/pages/delete_page.twig:14
 msgid "Delete children?"
 msgstr ""
 
-#: admin/pages/delete_page.twig:24
-#: admin/pages/delete_post.twig:11
-#: admin/pages/delete_user.twig:74
-msgid "Delete!"
-msgstr ""
-
 #: admin/pages/delete_post.twig:3
-#, php-format
-msgid "Delete &#8220;%s&#8221;?"
+#: admin/pages/delete_post.twig:6
+msgid "Delete Post?"
 msgstr ""
 
 #: admin/pages/delete_user.twig:3
-#, php-format
-msgid "Delete User &#8220;%s&#8221;?"
+#: admin/pages/delete_user.twig:6
+msgid "Delete User?"
 msgstr ""
 
-#: admin/pages/delete_user.twig:6
+#: admin/pages/delete_user.twig:8
 #, php-format
 msgid "Are you sure you want to delete user &#8220;%s&#8221;?"
 msgstr ""
 
-#: admin/pages/delete_user.twig:11
-msgid "Full Name:"
-msgstr ""
-
-#: admin/pages/delete_user.twig:16
-msgid "E-Mail:"
-msgstr ""
-
-#: admin/pages/delete_user.twig:21
-msgid "Website:"
-msgstr ""
-
-#: admin/pages/delete_user.twig:26
-msgid "Group:"
-msgstr ""
-
-#: admin/pages/delete_user.twig:32
+#: admin/pages/delete_user.twig:15
 msgid "Attribute posts to:"
 msgstr ""
 
-#: admin/pages/delete_user.twig:41
+#: admin/pages/delete_user.twig:24
 msgid "Delete posts:"
 msgstr ""
 
-#: admin/pages/delete_user.twig:47
-msgid "Pages:"
-msgstr ""
-
-#: admin/pages/delete_user.twig:58
+#: admin/pages/delete_user.twig:31
 msgid "Attribute pages to:"
 msgstr ""
 
-#: admin/pages/delete_user.twig:67
+#: admin/pages/delete_user.twig:40
 msgid "Delete pages:"
 msgstr ""
 
@@ -288,7 +261,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:25
 #: admin/pages/manage_users.twig:29
 #: admin/pages/new_user.twig:15
-#: admin/partials/post_fields.twig:51
+#: admin/partials/post_fields.twig:57
 msgid "Group"
 msgstr ""
 
@@ -366,28 +339,28 @@ msgstr ""
 
 #: admin/pages/feathers.twig:15
 #: admin/pages/feathers.twig:42
-#: admin/pages/modules.twig:16
-#: admin/pages/modules.twig:55
+#: admin/pages/modules.twig:15
+#: admin/pages/modules.twig:62
 #, php-format
 msgid "<a href=\"%s\">%s</a>"
 msgstr ""
 
 #: admin/pages/feathers.twig:25
 #: admin/pages/feathers.twig:52
-#: admin/pages/modules.twig:36
-#: admin/pages/modules.twig:75
+#: admin/pages/modules.twig:45
+#: admin/pages/modules.twig:93
 msgid "Disable"
 msgstr ""
 
 #: admin/pages/feathers.twig:28
 #: admin/pages/feathers.twig:55
-#: admin/pages/modules.twig:39
-#: admin/pages/modules.twig:78
+#: admin/pages/modules.twig:48
+#: admin/pages/modules.twig:96
 msgid "Enable"
 msgstr ""
 
 #: admin/pages/feathers.twig:35
-#: admin/pages/modules.twig:47
+#: admin/pages/modules.twig:55
 msgid "Disabled"
 msgstr ""
 
@@ -676,7 +649,7 @@ msgid "Posted"
 msgstr ""
 
 #: admin/pages/manage_posts.twig:34
-#: admin/partials/post_fields.twig:41
+#: admin/partials/post_fields.twig:47
 msgid "Status"
 msgstr ""
 
@@ -701,14 +674,14 @@ msgstr ""
 msgid "Modules"
 msgstr ""
 
-#: admin/pages/modules.twig:12
-#: admin/pages/modules.twig:51
-msgid "Blissful!"
+#: admin/pages/modules.twig:25
+#: admin/pages/modules.twig:72
+msgid "This module conflicts with the following installed modules:"
 msgstr ""
 
-#: admin/pages/modules.twig:26
-#: admin/pages/modules.twig:65
-msgid "This Module requires the following Modules to be enabled:"
+#: admin/pages/modules.twig:35
+#: admin/pages/modules.twig:82
+msgid "This module requires the following modules to be enabled:"
 msgstr ""
 
 #: admin/pages/new_group.twig:23
@@ -921,7 +894,7 @@ msgid "Body"
 msgstr ""
 
 #: admin/partials/page_fields.twig:13
-#: admin/partials/post_fields.twig:69
+#: admin/partials/post_fields.twig:75
 msgid "Slug"
 msgstr ""
 
@@ -946,50 +919,58 @@ msgid "Is this page public?"
 msgstr ""
 
 #: admin/partials/page_fields.twig:51
-#: admin/partials/post_fields.twig:122
-#: admin/partials/post_fields.twig:131
+#: admin/partials/post_fields.twig:128
+#: admin/partials/post_fields.twig:137
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:53
-#: admin/partials/post_fields.twig:126
-#: admin/partials/post_fields.twig:135
+#: admin/partials/page_fields.twig:55
+#: admin/partials/post_fields.twig:132
+#: admin/partials/post_fields.twig:141
 msgid "Save"
 msgstr ""
 
-#: admin/partials/post_fields.twig:44
+#: admin/partials/post_fields.twig:23
+msgid "Current file name:"
+msgstr ""
+
+#: admin/partials/post_fields.twig:25
+msgid "Current file names:"
+msgstr ""
+
+#: admin/partials/post_fields.twig:50
 msgid "Draft"
 msgstr ""
 
-#: admin/partials/post_fields.twig:46
+#: admin/partials/post_fields.twig:52
 msgid "Public"
 msgstr ""
 
-#: admin/partials/post_fields.twig:47
+#: admin/partials/post_fields.twig:53
 msgid "Private"
 msgstr ""
 
-#: admin/partials/post_fields.twig:48
+#: admin/partials/post_fields.twig:54
 msgid "Scheduled"
 msgstr ""
 
-#: admin/partials/post_fields.twig:49
+#: admin/partials/post_fields.twig:55
 msgid "Registered Only"
 msgstr ""
 
-#: admin/partials/post_fields.twig:62
+#: admin/partials/post_fields.twig:68
 msgid "Pinned?"
 msgstr ""
 
-#: admin/partials/post_fields.twig:63
+#: admin/partials/post_fields.twig:69
 msgid "(shows this post above all others)"
 msgstr ""
 
-#: admin/partials/post_fields.twig:75
+#: admin/partials/post_fields.twig:81
 msgid "Timestamp"
 msgstr ""
 
-#: admin/partials/post_fields.twig:81
+#: admin/partials/post_fields.twig:87
 msgid "Trackbacks"
 msgstr ""
 

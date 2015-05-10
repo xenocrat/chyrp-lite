@@ -28,7 +28,7 @@ Called from:
 delete_user_form
 ----------------
 Called from:
-	admin/pages/delete_user.twig on line 71
+	admin/pages/delete_user.twig on line 44
 
 
 edit_user_fields
@@ -157,7 +157,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 37
+	admin/partials/post_fields.twig on line 43
 Arguments:
 	feather
 
@@ -165,7 +165,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	includes/admin.js.php on line 435
+	includes/admin.js.php on line 444
 
 
 not_found
@@ -180,13 +180,13 @@ Called from:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 198
+	includes/ajax.php on line 206
 
 
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 72
+	includes/class/Config.php on line 70
 Arguments:
 	$setting, $value, $overwrite
 
@@ -218,7 +218,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 322
+	includes/common.php on line 346
 
 
 import_chyrp_group
@@ -326,13 +326,13 @@ Arguments:
 ajax_post_edit_form_javascript
 ------------------------------
 Called from:
-	includes/javascript.php on line 35
+	includes/javascript.php on line 36
 
 
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 129
+	includes/javascript.php on line 130
 
 
 add_group
@@ -487,7 +487,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 319
+	includes/common.php on line 343
 
 
 admin_determine_action
@@ -551,7 +551,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2239
+	includes/controller/Admin.php on line 2252
 
 
 settings_nav
@@ -559,7 +559,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2268
+	includes/controller/Admin.php on line 2281
 
 
 extend_nav
@@ -567,7 +567,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2278
+	includes/controller/Admin.php on line 2291
 
 
 admin_subnav
@@ -575,7 +575,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2289
+	includes/controller/Admin.php on line 2302
 
 
 nav_selected
@@ -583,7 +583,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2395
+	includes/controller/Admin.php on line 2408
 
 
 url_code
@@ -618,7 +618,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1580
+	includes/helpers.php on line 1619
 Arguments:
 	$query, $plain
 
@@ -628,7 +628,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1717
+	includes/helpers.php on line 1756
 
 
 group

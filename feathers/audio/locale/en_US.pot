@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-04-24 19:00+0000\n"
+"POT-Creation-Date: 2015-05-10 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -34,11 +34,11 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: feathers/audio/audio.php:33
-msgid "Couldn't upload audio file."
+#: feathers/audio/audio.php:32
+msgid "You did not select any audio to upload."
 msgstr ""
 
-#: feathers/audio/audio.php:118
+#: feathers/audio/audio.php:115
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr ""
 
