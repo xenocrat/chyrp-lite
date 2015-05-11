@@ -1667,7 +1667,7 @@
 
                 $conflicting_modules = array();
                 if (!empty($info["conflicts"])) {
-                    $classes[$folder][] = "conflict";
+                    $classes[$folder][] = "conflicts";
 
                     foreach ((array) $info["conflicts"] as $conflict)
                         if (file_exists(MODULES_DIR."/".$conflict."/".$conflict.".php")) {

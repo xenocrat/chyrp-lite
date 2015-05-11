@@ -329,12 +329,12 @@ var Extend = {
     check_errors: function() {
         Extend.reset_errors(); // Reset all values
 
-        $(".modules li.conflict").each(function() {
+        $(".modules li.conflicts").each(function() {
             var classes = $(this).attr("class").split(" ");
 
             classes.shift(); // Remove the module's safename class
 
-            classes.remove(["conflict",
+            classes.remove(["conflicts",
                             "dependencies",
                             "missing_dependency",
                             "error",
@@ -359,7 +359,7 @@ var Extend = {
                 return;
             }
 
-            classes.remove(["conflict",
+            classes.remove(["conflicts",
                             "dependencies",
                             "missing_dependency",
                             "error",

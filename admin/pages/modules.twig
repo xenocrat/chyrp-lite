@@ -26,7 +26,7 @@
                     </p>
                     <ol class="module_conflicts_list">
                     {% for conflict in module.conflicting_modules %}
-                        <li class="$conflict"><code>$conflict</code></li>
+                        <li class="$conflict">${ conflict | camelize }</li>
                     {% endfor %}
                     </ol>
                     {% endif %}
@@ -36,7 +36,7 @@
                     </p>
                     <ol class="module_dependencies_list">
                     {% for dependency in module.dependencies_needed %}
-                        <li class="$dependency"><code>$dependency</code></li>
+                        <li class="$dependency">${ dependency | camelize }</li>
                     {% endfor %}
                     </ol>
                     {% endif %}
@@ -73,7 +73,7 @@
                     </p>
                     <ol class="module_conflicts_list">
                     {% for conflict in module.conflicting_modules %}
-                        <li class="$conflict"><code>$conflict</code></li>
+                        <li class="$conflict">${ conflict | camelize }</li>
                     {% endfor %}
                     </ol>
                     {% endif %}
@@ -83,7 +83,7 @@
                     </p>
                     <ol class="module_dependencies_list">
                     {% for dependency in module.dependencies_needed %}
-                        <li class="$dependency"><code>$dependency</code></li>
+                        <li class="$dependency">${ dependency | camelize }</li>
                     {% endfor %}
                     </ol>
                     {% endif %}
