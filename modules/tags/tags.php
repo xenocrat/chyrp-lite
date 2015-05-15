@@ -302,7 +302,7 @@
                 $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['original']]);
 
-                $tags[$_POST['name']] = sanitize($_POST['name']);
+                $tags[str_replace(",", " ", $_POST['name'])] = sanitize($_POST['name']);
 
                 $sql->update("post_attributes",
                              array("name" => "tags",
