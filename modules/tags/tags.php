@@ -584,13 +584,13 @@
                           LIMIT 5")->fetchAll();
             }
 
-            $output = '<ul class="related_posts">
-                       <h3>Related Posts:</h3>';
+            $output = "\n".'<ul class="related_posts">';
+            $output.= "\n\t".'<h3>Related Posts:</h3>';
             foreach ($posts as $p) {
                 $post = new Post($p['id']);
-                $output.= '<li><h5><a href="'.$post->url().'">'.$post->title().'</a></h5></li>';
+                $output.= "\n\t".'<li><h5><a href="'.$post->url().'">'.$post->title().'</a></h5></li>';
             }
-            $output.= "</ul>";
+            $output.= "\n"."</ul>"."\n";
 
             return $output;
         }
