@@ -678,12 +678,14 @@
         }
 
         private function tags_safe($name) {
+            # Match escaping of JSON encoded data
             if (!JSON_UNESCAPED_SLASHES)
                 $name = addcslashes($name, "\\\"/");
             else
                 $name = addcslashes($name, "\\\"");
 
-            return $name;
+            # Return string escaped for SQL query
+            return SQL::current()->escape($name, false);
         }
 
         public function tagsJS() {
