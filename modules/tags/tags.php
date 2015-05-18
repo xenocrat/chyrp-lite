@@ -87,6 +87,8 @@
             $tags = explode(",", $_POST['tags']); # Split at the comma
             $tags = array_map("trim", $tags); # Remove whitespace
             $tags = array_map("strip_tags", $tags); # Remove HTML
+            foreach ($tags as &$name)
+                $name = is_numeric($name) ? "'".$name."'" : $name ;
             $tags = array_unique($tags); # Remove duplicates
             $tags = array_diff($tags, array("")); # Remove empties
             $tags_cleaned = array_map("sanitize", $tags);
@@ -110,6 +112,8 @@
             $tags = explode(",", $_POST['tags']); # Split at the comma
             $tags = array_map("trim", $tags); # Remove whitespace
             $tags = array_map("strip_tags", $tags); # Remove HTML
+            foreach ($tags as &$name)
+                $name = is_numeric($name) ? "'".$name."'" : $name ;
             $tags = array_unique($tags); # Remove duplicates
             $tags = array_diff($tags, array("")); # Remove empties
             $tags_cleaned = array_map("sanitize", $tags);
@@ -250,6 +254,8 @@
                     $tag = array("name" => $tag, "clean" => $tags[$tag]);
                     break;
                 }
+            if (!isset($tag))
+                error(__("Tag Not Found"), __("Could not find the specified tag in the database.", "tags"));
 
             $admin->display("rename_tag", array("tag" => $tag));
         }
@@ -291,6 +297,9 @@
             if (empty($_POST['original']) or empty($_POST['name']))
                 redirect("/admin/?action=manage_tags");
 
+            $_POST['name'] = str_replace(",", " ", $_POST['name']);
+            $_POST['name'] = is_numeric($_POST['name']) ? "'".$_POST['name']."'" : $_POST['name'] ;
+
             $sql = SQL::current();
 
             $tags = array();
@@ -302,7 +311,7 @@
                 $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['original']]);
 
-                $tags[str_replace(",", " ", $_POST['name'])] = sanitize($_POST['name']);
+                $tags[$_POST['name']] = sanitize($_POST['name']);
 
                 $sql->update("post_attributes",
                              array("name" => "tags",
@@ -314,11 +323,35 @@
         }
 
         static function admin_delete_tag($admin) {
-            if (empty($_GET['name']) or empty($_GET['clean']))
-                error(__("No Tag Specified"), __("Please specify the tag you want to delete.", "tags"));
+            if (empty($_GET['clean']))
+                error(__("No Tag Specified"), __("Please specify the tag you want to rename.", "tags"));
 
-            $tag = array("name" => $_GET['name'],
-                         "clean" => $_GET['clean']);
+            $sql = SQL::current();
+
+            $tags = array();
+            $names = array();
+
+            foreach($sql->select("post_attributes",
+                                 "*",
+                                 array("name" => "tags",
+                                       "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
+                $post_tags = self::tags_unserialize($tag["value"]);
+
+                $tags = array_merge($tags, $post_tags);
+
+                foreach ($post_tags as $name => $clean)
+                    $names[] = $name;
+            }
+
+            $popularity = array_count_values($names);
+
+            foreach ($popularity as $tag => $count)
+                if ($tags[$tag] == $_GET['clean']) {
+                    $tag = array("name" => $tag, "clean" => $tags[$tag]);
+                    break;
+                }
+            if (!isset($tag))
+                error(__("Tag Not Found"), __("Could not find the specified tag in the database.", "tags"));
 
             $admin->display("delete_tag", array("tag" => $tag));
         }
@@ -367,6 +400,8 @@
             $sql = SQL::current();
 
             foreach (array_map("trim", explode(",", $_POST['name'])) as $tag)
+                $tag = is_numeric($tag) ? "'".$tag."'" : $tag ;
+
                 foreach ($_POST['post'] as $post_id) {
                     $post = new Post($post_id);
                     if (!$post->editable())
