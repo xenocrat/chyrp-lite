@@ -708,15 +708,15 @@ img.overlay_close_gadget {                      display: block;
     #sub_nav, #content {                        margin-left: 1em;
                                                 margin-right: 1em }
     label {                                     display: block }
-    form.split label {                          width: 100%;
+    form.split > fieldset > * > label {         width: 100%;
                                                 float: none;
                                                 text-align: left;
-                                                padding: 4px 0% 5px }
+                                                padding: 0em }
     form.split label input {                    margin: 0em;
                                                 width: 3em !important }
     form.split small,
-    form.split .small {                         margin-left: 0em }
-    form.split button {                         margin-left: 0em }
+    form.split .small,
+    form.split .buttons {                         margin-left: 0em }
     input.text,
     input[type="text"],
     input[type="email"],
