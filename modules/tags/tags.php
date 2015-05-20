@@ -752,52 +752,52 @@
         }
 
         public function admin_head() {
-            ?><script type="text/javascript"><?php self::tagsJS(); ?></script><?php
+            ?>        <script type="text/javascript"><?php self::tagsJS(); ?></script><?php
         }
 
         public function tagsJS() {
-            ?>
-            $(function(){
-                function scanTags(){
-                    $(".tags_select a").each(function(){
-                        regexp = new RegExp("(, ?|^)"+ $(this).text() +"(, ?|$)", "g");
-                        if ($("#tags").val().match(regexp))
-                            $(this).addClass("tag_added");
-                        else
-                            $(this).removeClass("tag_added");
-                    });
-                }
-
-                scanTags();
-                $("#tags").on("keyup", scanTags);
-            })
-
-            function add_tag(name) {
-                if ($("#tags").val().match("(, |^)"+ name +"(, |$)")) {
-                    regexp = new RegExp("(, |^)"+ name +"(, |$)", "g");
-                    $("#tags").val($("#tags").val().replace(regexp, function(match, before, after){
-                        if (before == ", " && after == ", ")
-                            return ", ";
-                        else
-                            return "";
-                    }));
-
-                    $(".tags_select a").each(function(){
-                        if ($(this).text() == name)
-                            $(this).removeClass("tag_added");
-                    });
-                } else {
-                    if ($("#tags").val() == "")
-                        $("#tags").val(name);
+?>
+        $(function(){
+            function scanTags(){
+                $(".tags_select a").each(function(){
+                    regexp = new RegExp("(, ?|^)"+ $(this).text() +"(, ?|$)", "g");
+                    if ($("#tags").val().match(regexp))
+                        $(this).addClass("tag_added");
                     else
-                        $("#tags").val($("#tags").val().replace(/(, ?)?$/, ", "+ name));
-
-                    $(".tags_select a").each(function(){
-                        if ($(this).text() == name)
-                            $(this).addClass("tag_added");
-                    });
-                }
+                        $(this).removeClass("tag_added");
+                });
             }
-            <?php
+
+            scanTags();
+            $("#tags").on("keyup", scanTags);
+        })
+
+        function add_tag(name) {
+            if ($("#tags").val().match("(, |^)"+ name +"(, |$)")) {
+                regexp = new RegExp("(, |^)"+ name +"(, |$)", "g");
+                $("#tags").val($("#tags").val().replace(regexp, function(match, before, after){
+                    if (before == ", " && after == ", ")
+                        return ", ";
+                    else
+                        return "";
+                }));
+
+                $(".tags_select a").each(function(){
+                    if ($(this).text() == name)
+                        $(this).removeClass("tag_added");
+                });
+            } else {
+                if ($("#tags").val() == "")
+                    $("#tags").val(name);
+                else
+                    $("#tags").val($("#tags").val().replace(/(, ?)?$/, ", "+ name));
+
+                $(".tags_select a").each(function(){
+                    if ($(this).text() == name)
+                        $(this).addClass("tag_added");
+                });
+            }
+        }
+<?php
         }
     }

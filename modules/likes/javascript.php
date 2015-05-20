@@ -94,5 +94,6 @@
             }
         };
         $(document).ready(ChyrpLikes.init);
-<?php Trigger::current()->call("likes_javascript"); ?>
+
+<?php echo "\n"; Trigger::current()->call("likes_javascript"); ?>
 <!-- --></script>
