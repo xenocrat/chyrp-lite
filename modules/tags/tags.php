@@ -23,15 +23,6 @@
             }
         }
 
-        public function admin_head() {
-            $config = Config::current();
-?>
-        <script type="text/javascript">
-        <?php $this->tagsJS(); ?>
-        </script>
-<?php
-        }
-
         private function tags_serialize($tags) {
             $serialized = json_encode($tags, JSON_UNESCAPED_SLASHES);
 
@@ -51,24 +42,22 @@
         }
 
         public function post_options($fields, $post = null) {
-            $tags = self::list_tags(false);
-            usort($tags, array($this, "sort_tags_name_desc"));
-
-            $selector = '<span class="tags_select">'."\n";
-
-            foreach (array_reverse($tags) as $tag) {
-                $selected = ($post and isset($post->tags[$tag["name"]])) ?
-                                ' class="tag_added"' :
-                                "" ;
-                $selector.= '<a class="tag" href="javascript:add_tag(\''.addslashes($tag["name"]).'\')"'.$selected.'>'.$tag["name"].'</a>'."\n";
-            }
-
-            $selector.= "</span>";
+            $cloud = self::list_tags(false);
+            usort($cloud, array($this, "sort_tags_name_asc"));
 
             if (isset($post->tags))
                 $tags = array_keys($post->tags);
             else
                 $tags = array();
+
+            $selector = "\n".'<span class="tags_select">'."\n";
+
+            foreach ($cloud as $tag) {
+                $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
+                $selector.= '<a class="tag'.$selected.'" href="javascript:add_tag(\''.addslashes($tag["name"]).'\')">'.$tag["name"].'</a>'."\n";
+            }
+
+            $selector.= "</span>"."\n";
 
             $fields[] = array("attr" => "tags",
                               "label" => __("Tags", "tags"),
@@ -632,7 +621,7 @@
 
         public function post($post) {
             $tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
-            ksort($tags, SORT_STRING);
+            uksort($tags, array($this, "sort_tags_name_asc"));
             $post->tags = $tags;
             $post->linked_tags = self::linked_tags($post->tags);
         }
@@ -723,54 +712,6 @@
             return SQL::current()->escape($name, false);
         }
 
-        public function tagsJS() {
-            $config = Config::current();
-?>//<script>
-            $(function(){
-                function scanTags(){
-                    $(".tags_select a").each(function(){
-                        regexp = new RegExp("(, ?|^)"+ $(this).text() +"(, ?|$)", "g");
-                        if ($("#tags").val().match(regexp))
-                            $(this).addClass("tag_added");
-                        else
-                            $(this).removeClass("tag_added");
-                    })
-                }
-
-                scanTags();
-
-                $("#tags").on("keyup", scanTags);
-            })
-
-            function add_tag(name) {
-                if ($("#tags").val().match("(, |^)"+ name +"(, |$)")) {
-                    regexp = new RegExp("(, |^)"+ name +"(, |$)", "g");
-                    $("#tags").val($("#tags").val().replace(regexp, function(match, before, after){
-                        if (before == ", " && after == ", ")
-                            return ", ";
-                        else
-                            return "";
-                    }))
-
-                    $(".tags_select a").each(function(){
-                        if ($(this).text() == name)
-                            $(this).removeClass("tag_added");
-                    })
-                } else {
-                    if ($("#tags").val() == "")
-                        $("#tags").val(name);
-                    else
-                        $("#tags").val($("#tags").val().replace(/(, ?)?$/, ", "+ name));
-
-                    $(".tags_select a").each(function(){
-                        if ($(this).text() == name)
-                            $(this).addClass("tag_added");
-                    })
-                }
-            }
-<?php
-        }
-
         public function ajax_tag_post() {
             if (empty($_POST['name']) or empty($_POST['post']))
                 exit("{}");
@@ -808,5 +749,55 @@
 
             foreach ($post->tags as $tag => $clean)
                 echo "        <category scheme=\"".$config->url."/tag/\" term=\"".$clean."\" label=\"".fix($tag)."\" />\n";
+        }
+
+        public function admin_head() {
+            ?><script type="text/javascript"><?php self::tagsJS(); ?></script><?php
+        }
+
+        public function tagsJS() {
+            ?>
+            $(function(){
+                function scanTags(){
+                    $(".tags_select a").each(function(){
+                        regexp = new RegExp("(, ?|^)"+ $(this).text() +"(, ?|$)", "g");
+                        if ($("#tags").val().match(regexp))
+                            $(this).addClass("tag_added");
+                        else
+                            $(this).removeClass("tag_added");
+                    });
+                }
+
+                scanTags();
+                $("#tags").on("keyup", scanTags);
+            })
+
+            function add_tag(name) {
+                if ($("#tags").val().match("(, |^)"+ name +"(, |$)")) {
+                    regexp = new RegExp("(, |^)"+ name +"(, |$)", "g");
+                    $("#tags").val($("#tags").val().replace(regexp, function(match, before, after){
+                        if (before == ", " && after == ", ")
+                            return ", ";
+                        else
+                            return "";
+                    }));
+
+                    $(".tags_select a").each(function(){
+                        if ($(this).text() == name)
+                            $(this).removeClass("tag_added");
+                    });
+                } else {
+                    if ($("#tags").val() == "")
+                        $("#tags").val(name);
+                    else
+                        $("#tags").val($("#tags").val().replace(/(, ?)?$/, ", "+ name));
+
+                    $(".tags_select a").each(function(){
+                        if ($(this).text() == name)
+                            $(this).addClass("tag_added");
+                    });
+                }
+            }
+            <?php
         }
     }

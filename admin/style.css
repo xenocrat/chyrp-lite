@@ -537,7 +537,8 @@ a.tag {                                         position: relative;
                                                 border: 1px solid #e5d7a1;
                                                 border-radius: 0.2em;
                                                 background-color: #fffecd }
-span.tags_select a.tag_added {                  top: 2px }
+span.tags_select a.tag_added {                  top: 2px;
+                                                border-color: #ccb68f }
 /* @end */
 
 /* @group Options */
