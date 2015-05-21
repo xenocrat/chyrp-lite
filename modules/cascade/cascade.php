@@ -30,17 +30,7 @@
             return $navs;
         }
 
-
-        static function scripts($scripts) {
-            if (in_array(Route::current()->action, array("index",
-                                                         "archive",
-                                                         "search",
-                                                         "tag",
-                                                         "category",
-                                                         "alphabetical"))
-            ) {
-                $scripts[] = Config::current()->chyrp_url."/modules/cascade/javascript.php";
-                return $scripts;
-            }
+        static function javascript() {
+            include MODULES_DIR."/cascade/javascript.php";
         }
     }

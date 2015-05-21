@@ -1,10 +1,3 @@
-<?php
-    define('JAVASCRIPT', true);
-    require_once "../../includes/common.php";
-    error_reporting(0);
-    header("Content-Type: application/x-javascript");
-?>
-<!-- --><script>
         var ChyrpAjaxScroll = {
             busy: false,
             fail: false,
@@ -66,4 +59,3 @@
             },
         };
         $(document).ready(ChyrpAjaxScroll.init);
-<!-- --></script>
