@@ -35,7 +35,7 @@
         }
 
         private function filenames_unserialize($filenames) {
-            $unserialized = json_decode(utf8_encode($filenames), true);
+            $unserialized = json_decode($filenames, true);
 
             if (json_last_error())
                 $unserialized = unserialize($filenames); # Supporting the old method

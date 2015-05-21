@@ -254,7 +254,7 @@
     }
 
     if (using_json()) {
-        Config::$json = json_decode(utf8_encode(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(config_file()))), true);
+        Config::$json = json_decode(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(config_file())), true);
     } elseif (using_yaml()) {
         Config::$yaml["config"] = YAML::load(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(config_file())));
         if (database_file())

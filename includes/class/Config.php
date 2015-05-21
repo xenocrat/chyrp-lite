@@ -22,7 +22,7 @@
                                     "",
                                     file_get_contents(INCLUDES_DIR."/config.json.php"));
 
-            $this->json = json_decode(utf8_encode($contents), true);
+            $this->json = json_decode($contents, true);
 
             if (json_last_error())
                 error(__("Error"), _f("Failed to read configuration file because of JSON error: <code>%s</code>",
@@ -56,7 +56,7 @@
                                         "",
                                         file_get_contents($this->file));
 
-                $this->json = json_decode(utf8_encode($contents), true);
+                $this->json = json_decode($contents, true);
 
                 if (json_last_error())
                     error(__("Error"), _f("Failed to read <code>%s</code> because of JSON error: <code>%s</code>",
@@ -100,7 +100,7 @@
                                         "",
                                         file_get_contents($this->file));
 
-                $this->json = json_decode(utf8_encode($contents), true);
+                $this->json = json_decode($contents, true);
 
                 if (json_last_error())
                     error(__("Error"), _f("Failed to read <code>%s</code> because of JSON error: <code>%s</code>",
