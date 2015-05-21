@@ -186,7 +186,7 @@
             }
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query");
+            list($where, $params) = keywords(self::tags_safe($_GET['query']), "post_attributes.value LIKE :query");
 
             $visitor = Visitor::current();
             if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
