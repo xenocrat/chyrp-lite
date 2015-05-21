@@ -24,7 +24,7 @@
         }
 
         private function tags_serialize($tags) {
-            $serialized = json_encode($tags, JSON_UNESCAPED_SLASHES);
+            $serialized = json_encode($tags);
 
             if (json_last_error())
                 error(__("Error"), _f("Failed to serialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
@@ -33,7 +33,7 @@
         }
 
         private function tags_unserialize($tags) {
-            $unserialized = json_decode(utf8_encode($tags), true);
+            $unserialized = json_decode($tags, true);
 
             if (json_last_error() and ADMIN)
                 error(__("Error"), _f("Failed to unserialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
@@ -54,7 +54,7 @@
 
             foreach ($cloud as $tag) {
                 $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
-                $selector.= '<a class="tag'.$selected.'" href="javascript:add_tag(\''.addslashes($tag["name"]).'\')">'.$tag["name"].'</a>'."\n";
+                $selector.= '<a class="tag'.$selected.'" href="#tags" onclick="return ChyrpTags.add(event);">'.$tag["name"].'</a>'."\n";
             }
 
             $selector.= "</span>"."\n";
@@ -698,18 +698,15 @@
 
         private function tags_clean_match($clean) {
             # Serialized notation of value
-            return "%:\"".$clean."\"%";
+            return "%:\"".self::tags_safe($clean)."\"%";
         }
 
-        private function tags_safe($name) {
+        private function tags_safe($text) {
             # Match escaping of JSON encoded data
-            if (!JSON_UNESCAPED_SLASHES)
-                $name = addcslashes($name, "\\\"/");
-            else
-                $name = addcslashes($name, "\\\"");
+            $text = ltrim(rtrim(json_encode($text), "\""), "\"");
 
             # Return string escaped for SQL query
-            return SQL::current()->escape($name, false);
+            return SQL::current()->escape($text, false);
         }
 
         public function ajax_tag_post() {
@@ -752,52 +749,10 @@
         }
 
         public function admin_head() {
-            ?>        <script type="text/javascript"><?php self::tagsJS(); ?></script><?php
+            ?>        <script type="text/javascript"><?php echo("\n"); self::tagsJS(); ?>        </script><?php
         }
 
         public function tagsJS() {
-?>
-        $(function(){
-            function scanTags(){
-                $(".tags_select a").each(function(){
-                    regexp = new RegExp("(, ?|^)"+ $(this).text() +"(, ?|$)", "g");
-                    if ($("#tags").val().match(regexp))
-                        $(this).addClass("tag_added");
-                    else
-                        $(this).removeClass("tag_added");
-                });
-            }
-
-            scanTags();
-            $("#tags").on("keyup", scanTags);
-        })
-
-        function add_tag(name) {
-            if ($("#tags").val().match("(, |^)"+ name +"(, |$)")) {
-                regexp = new RegExp("(, |^)"+ name +"(, |$)", "g");
-                $("#tags").val($("#tags").val().replace(regexp, function(match, before, after){
-                    if (before == ", " && after == ", ")
-                        return ", ";
-                    else
-                        return "";
-                }));
-
-                $(".tags_select a").each(function(){
-                    if ($(this).text() == name)
-                        $(this).removeClass("tag_added");
-                });
-            } else {
-                if ($("#tags").val() == "")
-                    $("#tags").val(name);
-                else
-                    $("#tags").val($("#tags").val().replace(/(, ?)?$/, ", "+ name));
-
-                $(".tags_select a").each(function(){
-                    if ($(this).text() == name)
-                        $(this).addClass("tag_added");
-                });
-            }
-        }
-<?php
+            include MODULES_DIR."/tags/javascript.php";
         }
     }
