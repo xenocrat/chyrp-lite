@@ -145,6 +145,5 @@
             }
         };
         $(document).ready(Comment.init);
-
-<?php echo "\n"; Trigger::current()->call("comments_javascript"); ?>
+<?php Trigger::current()->call("comments_javascript"); ?>
 <!-- --></script>

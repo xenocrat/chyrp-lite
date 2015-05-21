@@ -5,16 +5,15 @@
     header("Content-Type: application/x-javascript");
 ?>
 <!-- --><script>
+<?php echo "\n/*\n\n\nBalance out the line numbers in this script and in the output to help debugging.\n\n*/\n"; ?>
         $(function(){
             // Scan AJAX responses for errors.
             $(document).ajaxComplete(function(event, request){
                 var response = request ? request.responseText : null;
                 if (isError(response))
                     alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
-            })<?php echo "\n\n\n\n"; # Balance out the line numbers in this script and in the output to help debugging. ?>
-
-            <?php if (!isset($config->enable_ajax) or $config->enable_ajax): ?>Post.prepare_links();<?php endif; ?>
-
+            })
+            <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("Post.prepare_links();\n"); else echo("// Ajax disabled\n"); ?>
         });
 
         var Route = {
@@ -127,6 +126,5 @@
                 });
             }
         }
-
-<?php echo "\n"; $trigger->call("javascript"); ?>
+<?php $trigger->call("javascript"); ?>
 <!-- --></script>
