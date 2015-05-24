@@ -32,14 +32,14 @@
 
 html {                                              font-size: 16px }
 *::-moz-selection {                                 color: #ffffff;
-                                                    background-color: #4e5a66 }
+                                                    background-color: #42a66a }
 *::selection {                                      color: #ffffff;
-                                                    background-color: #4e5a66 }
+                                                    background-color: #42a66a }
 body {                                              font-family: "Open Sans webfont", sans-serif;
                                                     font-size: 1rem;
                                                     color: #4e5a66;
                                                     line-height: 1.5em;
-                                                    background-color: #fcfbfa;
+                                                    background-color: #f7f5ed;
                                                     margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
                                                     max-width: 1800px }
@@ -47,7 +47,6 @@ p {                                                 margin: 0em 0em 1em 0em }
     p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                                font-size: 2em;
                                                     font-weight: bold;
-                                                    text-transform: none;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
                                                     line-height: 1em }
@@ -55,30 +54,24 @@ h1 {                                                font-size: 2em;
                                                     margin: 1.33em 0em }
 h2 {                                                font-size: 1.5em;
                                                     font-weight: bold;
-                                                    text-transform: none;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
                                                     line-height: 1em }
-    h2.post_title {                                 text-align: center }
 h3 {                                                font-size: 1em;
                                                     font-weight: bold;
-                                                    text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
                                                     line-height: 1em }
-    h3.ribbon {                                     margin: 0em }
+    h3.ribbon {                                     font-weight: normal;
+                                                    margin: 0em }
     h3.archive {                                    margin-top: 1em;
                                                     clear: both }
 h4 {                                                font-size: 0.75em;
                                                     font-weight: bold;
-                                                    text-transform: none;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
                                                     line-height: 1em }
-    h4.yearly {                                     font-size: 1.33em;
-                                                    text-align: center;
-                                                    padding-bottom: 0.5em;
-                                                    border-bottom: 1px solid #ebedec }
+    h4.yearly {                                     font-size: 1.33em }
     h4.archive {                                    font-size: 1em;
                                                     font-weight: normal }
 h5, h6 {                                            font-size: 1em;
@@ -87,14 +80,6 @@ h5, h6 {                                            font-size: 1em;
                                                     margin: 1em 0em;
                                                     padding: 0em;
                                                     line-height: 1em }
-    h6.post_byline {                                font-weight: normal;
-                                                    font-style: italic;
-                                                    font-size: 0.75em;
-                                                    text-align: center;
-                                                    color: #9ea8a8;
-                                                    margin-bottom: 2rem;
-                                                    padding-bottom: 2rem;
-                                                    border-bottom: 1px solid #ebedec }
     h1:first-child, h2:first-child,
     h3:first-child, h4:first-child,
     h5:first-child, h6:first-child {                margin-top: 0em }
@@ -104,13 +89,12 @@ em {                                                font: inherit;
                                                     font-style: italic }
     blockquote em {                                 font-style: normal }
 strong {                                            font: inherit;
-                                                    font-weight: bold;
-                                                    font-style: normal }
+                                                    font-weight: bold }
 cite {                                              font: inherit;
-                                                    font-style: italic;
                                                     color: #9ea8a8 }
 small {                                             font-weight: normal;
-                                                    font-size: 0.8em }
+                                                    font-size: 0.6em;
+                                                    text-transform: uppercase }
 blockquote {                                        font-size: 1em;
                                                     font-style: italic;
                                                     padding: 0em 2em;
@@ -122,15 +106,15 @@ pre {                                               font-family: monospace;
 code {                                              font-family: monospace;
                                                     font-size: 0.75em;
                                                     font-style: normal;
-                                                    color: #39434d;
-                                                    background-color: #e5e3e1;
+                                                    color: #ffffff;
+                                                    background-color: #afb3b0;
                                                     padding: 0.2em 0.4em;
                                                     margin: 0.2em 0em;
                                                     display: inline-block }
 hr {                                                width: 100%;
                                                     border: none;
                                                     clear: both;
-                                                    border-top: 1px solid #ebedec;
+                                                    border-top: 1px solid #ddd;
                                                     margin: 1em 0em }
     hr:last-child {                                 margin: 0em;
                                                     visibility: hidden }
@@ -150,14 +134,16 @@ dl {                                                list-style: none }
     ul.navigation {                                 list-style: none;
                                                     font-size: 1em;
                                                     box-sizing: border-box;
+                                                    background-color: #fbfbf7;
                                                     margin: 0em 0em 2em 0em;
                                                     padding: 0em;
                                                     border: 1px solid #c6ccc8;
-                                                    border-left: none;
-                                                    border-right: none }
+                                                    border-radius: 6px;
+                                                    background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
     ul.navigation li {                              display: block;
                                                     min-width: 4em;
-                                                    padding: 0.67em 0em;
+                                                    padding: 0.67em 1em;
                                                     margin: 0em;
                                                     white-space: normal;
                                                     text-overflow: ellipsis;
@@ -182,13 +168,13 @@ dl {                                                list-style: none }
     ol.comments li {                                box-sizing: border-box;
                                                     display: block;
                                                     width: 100%;
+                                                    top: 0em;
                                                     margin: 0em;
                                                     padding: 2rem 2rem 0rem 2rem;
                                                     border-bottom: 1px solid #c6ccc8 }
     ol.comments li:last-child {                     border-bottom: none }
     ol.comments li#comment_shim {                   display: none }
-    ol.comments li.comment_form {                   padding: 1rem 2rem 2rem 2rem;
-                                                    background-color: #f2f1f0 }
+    ol.comments li.comment_form {                   padding-bottom: 2em }
 table {                                             border-collapse: collapse;
                                                     border-spacing: 0em;
                                                     width: 100%;
@@ -211,12 +197,14 @@ form, fieldset {                                    margin: 0em;
                                                     position: relative }
     form.inline_edit {                              width: 100%;
                                                     clear: both;
+                                                    background-color: #fbfbf7;
                                                     box-sizing: border-box;
-                                                    background-color: #fffefd;
                                                     margin: 0rem auto 2rem auto;
                                                     padding: 1rem 2rem 2rem 2rem;
                                                     border: 1px solid #c6ccc8;
-                                                    border-radius: 0.4em }
+                                                    border-radius: 6px;
+                                                    background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
     form.comment_edit {                             width: 100%;
                                                     background-color: transparent;
                                                     margin-bottom: 0em;
@@ -239,7 +227,7 @@ input {                                             box-sizing: border-box;
 /* Removes shadow from Mobile Safari -> */          background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 input:focus {                                       outline: none;
                                                     background-color: #ffffff;
-                                                    border: 1px solid #4e5a66 }
+                                                    border: 1px solid #d94c7b }
     input[type='checkbox'] {                        width: auto }
     input::-webkit-input-placeholder {              color: #c6ccc8 }
     input:-moz-placeholder {                        color: #c6ccc8 }
@@ -261,8 +249,6 @@ input:focus {                                       outline: none;
                                                     border: none;
                                                     margin: 0em;
                                                     padding: 0em;
-                                                    border: none;
-                                                    border-radius: 0em;
                                                     background: transparent url(../images/search.svg) no-repeat center;
                                                     overflow: hidden;
                                                     color: transparent }
@@ -290,14 +276,12 @@ textarea {                                          box-sizing: border-box;
                                                     border-radius: 0em;
 /* Removes shadow from Mobile Safari -> */          background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 textarea:focus {                                    outline: none;
-                                                    border: 1px solid #548eb8 }
+                                                    border: 1px solid #d94c7b }
     article.commentary textarea {                   max-width: none }
 button {                                            font: inherit;
                                                     font-size: inherit;
                                                     cursor: pointer;
-                                                    line-height: normal;
-                                                    transition-property: color, border;
-                                                    transition-duration: 250ms }
+                                                    line-height: normal }
 label {                                             display: block;
                                                     margin-top: 1em }
     div.shim {                                      margin-top: 2em }
@@ -320,7 +304,7 @@ label {                                             display: block;
                                                     clear: both;
                                                     text-align: center;
                                                     margin-bottom: 2em }
-    div.next, div.prev_next {                       width: 100%;
+    div.next {                                      width: 100%;
                                                     clear: both;
                                                     text-align: center;
                                                     margin-top: 2em }
@@ -328,22 +312,28 @@ label {                                             display: block;
                                                     width: 100%;
                                                     text-align: center;
                                                     color: #ffffff;
-                                                    background-color: #9ea8a8;
+                                                    background-color: #426aa6;
                                                     padding: 0.5em;
                                                     margin-bottom: 1em;
                                                     border-radius: 0.2em }
-    div.flash {                                     background-color: #4e5a66 }
+    div.flash {                                     background-color: #d94c7b }
     div.metadata {                                  font-weight: normal;
-                                                    font-size: 0.75em;
-                                                    font-style: italic;
+                                                    font-size: 0.6em;
+                                                    text-transform: uppercase;
                                                     text-align: center;
                                                     color: #9ea8a8;
                                                     display: block;
+                                                    position: relative;
+                                                    bottom: 0em;
+                                                    left: -2rem;
                                                     width: 100%;
                                                     line-height: 2em;
-                                                    padding: 2rem 0rem;
+                                                    padding: 0rem 2rem;
                                                     margin-top: 2rem;
-                                                    border-top: 1px solid #ebedec }
+                                                    background-color: #ffffff;
+                                                    border-top: 1px solid #c6ccc8;
+                                                    border-bottom-left-radius: 6px;
+                                                    border-bottom-right-radius: 6px }
     div.comments_pagination {                       width: 100%;
                                                     clear: both;
                                                     text-align: center }
@@ -357,7 +347,6 @@ label {                                             display: block;
                                                     font-size: 0.75em }
     div.doaction {                                  font-family: inherit;
                                                     line-height: 2em;
-                                                    text-align: right;
                                                     margin-bottom: 1em }
     div.doaction:last-child {                       margin-bottom: 0em }
     div.speak {                                     margin-bottom: 0em }
@@ -375,17 +364,18 @@ label {                                             display: block;
                                                     position: relative;
                                                     box-sizing: border-box;
                                                     width: 100%;
-                                                    max-width: 1240px;
+                                                    max-width: 1620px;
                                                     clear: both;
-                                                    background-color: #fffefd;
+                                                    background-color: #fbfbf7;
                                                     margin: 0rem auto 2rem auto;
                                                     padding: 2rem 2rem 0rem 2rem;
                                                     border: 1px solid #c6ccc8;
-                                                    border-radius: 0.4em }
+                                                    border-radius: 6px;
+                                                    background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em);
+                                                    box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
     div#main > article:last-child {                 margin-bottom: 0rem }
     div#main > article.commentary {                 padding: 0rem;
-                                                    margin-top: 2rem;
-                                                    overflow: hidden }
+                                                    margin-top: 2rem }
     div#main > article.page {                       padding-bottom: 2rem }
     div.standalone {                                margin-bottom: 0rem;
                                                     padding-bottom: 2rem }
@@ -403,10 +393,12 @@ label {                                             display: block;
                                                     height: 160px;
                                                     overflow: hidden;
                                                     font-size: 0.75em;
+                                                    background-color: #fbfbf7;
                                                     margin: 0em 0em 1.33em 1.33em;
                                                     padding: 8px;
                                                     border: 1px solid #c6ccc8;
-                                                    border-radius: 6px }
+                                                    border-radius: 6px;
+                                                    background-image: linear-gradient(top, #ffffff 0em, #fbfbf7 10em) }
 article > header {                                  display: block;
                                                     width: 100%;
                                                     clear: both;
@@ -440,13 +432,12 @@ a:link {                                            color: #5c6773;
                                                     text-decoration: none }
 a:visited {                                         color: #5c6773;
                                                     text-decoration: none }
-a:hover {                                           color: #000000;
+a:hover {                                           color: #d94c7b;
                                                     text-decoration: none }
 a:focus {                                           outline: none;
-                                                    color: #000000;
-                                                    text-decoration: none;
-                                                    border-bottom: 1px #000000 solid }
-a:active {                                          color: #000000;
+                                                    color: #d94c7b;
+                                                    text-decoration: none }
+a:active {                                          color: #d94c7b;
                                                     text-decoration: none }
     h3.ribbon a {                                   color: #ffffff;
                                                     border-bottom: 1px #ffffff solid;
@@ -458,60 +449,62 @@ a:active {                                          color: #000000;
     h3.ribbon a:active {                            top: 1px;
                                                     color: inherit }
     div.traversal a {                               display: inline-block;
-                                                    padding: 0.4em 1.2em;
+                                                    padding: 0.4em 0.8em;
                                                     min-width: 8em;
-                                                    color: #fffefd;
-                                                    background-color: #9ea8a8;
                                                     border: none;
-                                                    border-radius: 1em }
+                                                    border-radius: 0.2em;
+                                                    color: #fbfbf7;
+                                                    background-color: #42a66a }
     div.traversal a:hover,
     div.traversal a:focus,
-    div.traversal a:active {                        color: #fffefd;
-                                                    background-color: #4e5a66 }
-    div.traversal a:first-child {                   border-top-left-radius: 2em;
-                                                    border-bottom-left-radius: 2em }
-    div.traversal a:last-child {                    border-top-right-radius: 2em;
-                                                    border-bottom-right-radius: 2em }
+    div.traversal a:active {                        color: #ffffff;
+                                                    background-color: #1d914b }
     section a:link, p a:link {                      color: #5c6773;
                                                     border-bottom: 1px #9ea8a8 solid }
     section a:visited, p a:visited {                color: #5c6773;
                                                     border-bottom: 1px #9ea8a8 solid }
-    section a:hover, p a:hover {                    color: #000000;
-                                                    border-bottom: 1px #000000 solid }
+    section a:hover, p a:hover {                    color: #d94c7b;
+                                                    border-bottom: 1px #d94c7b solid }
     section a:focus, p a:focus {                    outline: none;
-                                                    color: #000000;
-                                                    border-bottom: 1px #000000 solid }
-    section a:active, p a:active {                  color: #000000;
-                                                    border-bottom: 1px #000000 solid }
+                                                    color: #d94c7b;
+                                                    border-bottom: 1px #d94c7b solid }
+    section a:active, p a:active {                  color: #d94c7b;
+                                                    border-bottom: 1px #d94c7b solid }
     div.tags a, span.tags_select a {                display: inline-block;
                                                     padding: 0em 0.4em;
                                                     margin-bottom: 4px;
                                                     border: none;
                                                     border-radius: 0.2em;
-                                                    color: #39434d;
-                                                    border: 1px #c6ccc8 solid }
+                                                    color: #fbfbf7;
+                                                    background-color: #42a66a }
     div.tags a:hover, span.tags_select a:hover,
     div.tags a:focus, span.tags_select a:focus,
-    div.tags a:active, span.tags_select a:active {  color: #000000;
-                                                    border: 1px #4e5a66 solid }
+    div.tags a:active, span.tags_select a:active,
+    span.tags_select a.tag_added {                  color: #ffffff;
+                                                    background-color: #1d914b }
     div.metadata a {                                color: #9ea8a8 }
-    div.metadata a:hover {                          color: #000000 }
-    div.metadata a:focus {                          color: #000000;
-                                                    border-bottom: 1px #000000 solid }
-    div.metadata a:active {                         color: #000000 }
+    div.metadata a:hover,
+    div.metadata a:focus,
+    div.metadata a:active {                         color: #d94c7b }
     div.doaction a, button {                        white-space: nowrap;
-                                                    padding: 0.4em 1.2em;
-                                                    border-radius: 2em;
-                                                    color: #39434d;
-                                                    background-color: #fffefd;
-                                                    border: 1px #c6ccc8 solid }
+                                                    padding: 0.4em 0.8em;
+                                                    border: none;
+                                                    border-radius: 0.2em;
+                                                    color: #ffffff;
+                                                    background-color: #39434d }
     div.doaction a:hover, button:hover,
     div.doaction a:focus, button:focus,
     div.doaction a:active, button:active {          outline: none;
-                                                    color: #000000;
-                                                    border: 1px #4e5a66 solid }
+                                                    color: #ffffff;
+                                                    background-color: #000000 }
     div.doaction a.post_delete_link,
-    div.doaction a.delete_link {                    font-weight: bold }
+    div.doaction a.delete_link {                    background-color: #cc5252 }
+    div.doaction a.post_delete_link:hover,
+    div.doaction a.delete_link:hover,
+    div.doaction a.post_delete_link:focus,
+    div.doaction a.delete_link:focus,
+    div.doaction a.post_delete_link:active,
+    div.doaction a.delete_link:active {             background-color: #af2d2d }
     div.photo_frame > a {                           border-bottom: none }
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
@@ -529,7 +522,7 @@ a:active {                                          color: #000000;
                                                     background-color: transparent }
     a.archive_post_link:hover,
     a.archive_post_link:focus,
-    a.archive_post_link:active {                    background-color: #9ea8a8;
+    a.archive_post_link:active {                    background-color: #d94c7b;
                                                     mix-blend-mode: multiply;
                                                     opacity: 0.8 }
 img {                                               border-style: none;
@@ -538,7 +531,7 @@ img {                                               border-style: none;
     div.photo_frame img {                           width: 100% }
     article img {                                   max-width: 100% }
 .ajax_loading {                                     background-size: 30px 30px;
-                                                    background-image: linear-gradient(-45deg, #f2f1f0 25%, transparent 25%, transparent 50%, #f2f1f0 50%, #f2f1f0 75%, transparent 75%, transparent) !important;
+                                                    background-image: linear-gradient(-45deg, #f2f0e6 25%, transparent 25%, transparent 50%, #f2f0e6 50%, #f2f0e6 75%, transparent 75%, transparent) !important;
                                                     -webkit-animation: stripes 1s linear infinite;
                                                     -moz-animation: stripes 1s linear infinite;
                                                     -ms-animation: stripes 1s linear infinite;
@@ -553,15 +546,14 @@ img {                                               border-style: none;
     body {                                          margin: 0rem 16px 1rem 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
-    h6.post_byline {                                padding-bottom: 1rem }
     blockquote {                                    padding: 0em 1em }
     form.inline_edit {                              padding: 0rem 1rem 1rem 1rem }
     form.comment_edit {                             padding: 0rem 0rem 1rem 0rem }
     input, select {                                 width: 100% }
     ol.comments li {                                margin: 0em;
                                                     padding: 1rem 1rem 0rem 1rem }
-    ol.comments li.comment_form {                   padding: 1em }
-    ul.archive li {                                 margin: 0em 0em 0em 1em }
+    ol.comments li.comment_form {                   padding: 0em 1rem 1rem 1rem }
+    ul.archive li {                                 margin: 0rem 0rem 0rem 1rem }
     ul.tail_nav.mobile_nav {                        display: block;
                                                     position: fixed;
                                                     bottom: 0px;
@@ -570,7 +562,6 @@ img {                                               border-style: none;
                                                     height: auto;
                                                     margin: 0em;
                                                     padding: 0em;
-                                                    background-color: #fcfbfa;
                                                     border-bottom: none;
                                                     border-radius: 0em }
     ul.tail_nav.mobile_nav li {                     height: 0em;
@@ -581,7 +572,7 @@ img {                                               border-style: none;
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {       height: 3em;
                                                     border-bottom: 1px solid #d2d9d4 }
-    a#cheeseburger-link {                           border: none }
+    ul.tail_nav.mobile_nav.on li:first-child {      border-top: 1px solid #d2d9d4 }
     table {                                         box-sizing: border-box;
                                                     display: block }
     div#mast {                                      display: block }
@@ -593,11 +584,10 @@ img {                                               border-style: none;
     div.user_login.standalone,
     div.lost_password.standalone,
     div.user_register.standalone {                  margin-left: auto }
-    div#main > article hr, div.standalone hr {      position: relative;
-                                                    left: -1rem;
+    div.metadata {                                  left: -1rem;
+                                                    margin-top: 1rem;
                                                     padding: 0rem 1rem }
-    div.metadata {                                  margin-top: 1rem;
-                                                    padding: 1rem 0rem }
+
 }
 
 @media screen and (max-width: 480px) {
@@ -606,7 +596,6 @@ img {                                               border-style: none;
                                                     width: 100%;
                                                     margin-left: 0em }
     ul.archive article.post.archive img {           width: 100% }
-    div.metadata, div.doaction {                    text-align: center }
 }
 
 @media screen and (min-width: 1600px) {

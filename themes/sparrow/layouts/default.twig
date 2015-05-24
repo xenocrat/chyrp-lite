@@ -16,7 +16,7 @@
 ${ trigger.call("head") }
 </head>
 <body role="document">
-  <!-- Header -->
+  <!-- Mast -->
   {% for type, messages in flash.all | items %}
   {% for message in messages %}
   <div class="flash">
@@ -25,7 +25,7 @@ ${ trigger.call("head") }
   {% endfor %}
   {% endfor %}
   <div id="mast" role="banner">
-<div id="mast_box">
+    <div id="mast_box">
       <h1 class="banner"><a href="$site.url">$site.name</a></h1>
       <ul role="navigation" class="navigation">
         <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">Email</a></li>
@@ -55,17 +55,22 @@ ${ trigger.call("head") }
           <button type="submit" id="search_submit">${ "Search" | translate }</button>
         </form>
       </div>
-</div>
+    </div>
   </div>
+  {% if posts.prev_page %}
+  <!-- Navigation -->
+  <div role="navigation" class="prev traversal">
+    ${ posts.prev_link( ( "&larr; Newer posts" | translate ) ) }
+  </div>
+  {% endif %}
   <!-- Content -->
   <div id="main" role="main">
 {% block content %}{% endblock %}
   </div>
-  {% if posts.prev_page or posts.next_page %}
+  {% if posts.next_page %}
   <!-- Navigation -->
-  <div role="navigation" class="prev_next traversal">
-    {% if posts.prev_page %}${ posts.prev_link( ( "Newer posts" | translate ) ) }{% endif %}
-    {% if posts.next_page %}${ posts.next_link( ( "Older posts" | translate ) ) }{% endif %}
+  <div role="navigation" class="next traversal">
+    ${ posts.next_link( ( "Older posts &rarr;" | translate ) ) }
   </div>
   {% endif %}
   <!-- Footer -->
