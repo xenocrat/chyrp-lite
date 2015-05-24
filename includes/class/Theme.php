@@ -225,7 +225,7 @@
                 if (substr_count($file, ".inc.css") or (substr($file, -4) != ".css" and substr($file, -4) != ".php"))
                     continue;
 
-                $name = substr($file, 0, stripos($file, "."));
+                $name = substr($file, 0, strpos($file, "."));
                 switch ($name) {
                     case "aural":
                         $media = "aural";

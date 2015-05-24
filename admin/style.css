@@ -682,7 +682,7 @@ img.overlay_close_gadget {                      display: block;
 /* @end */
 
 /* @media-query for small screens */
-@media screen and (max-width: 768px) {
+@media handheld, screen and (max-width: 768px) {
     #header #navigation {                       left: 0em;
                                                 right: 0em }
     #header #navigation li a {                  display: block;
@@ -802,7 +802,7 @@ img.overlay_close_gadget {                      display: block;
     img.overlay_close_gadget {                  top: 0%;
                                                 right: 0% }
 }
-@media screen and (max-width: 540px) {
+@media handheld, screen and (max-width: 540px) {
     table tbody tr td.main {                    min-width: 240px }
 }
 /* @end */

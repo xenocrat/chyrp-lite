@@ -550,7 +550,18 @@ img {                                               border-style: none;
 @-ms-keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 
-@media screen and (max-width: 960px) {
+@media print {
+    body {                                          background-color: #ffffff;
+                                                    margin: 2em }
+    div#sidebar, div#tail,
+    div.prev, div.next {                            display: none }
+    div.main > article,
+    div.standalone {                                background-color: #ffffff;
+                                                    page-break-inside: avoid;
+                                                    border: 0.1em solid #c6ccc8 }
+}
+
+@media handheld, screen and (max-width: 960px) {
     body {                                          margin: 0rem 16px 1rem 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
@@ -601,7 +612,7 @@ img {                                               border-style: none;
                                                     padding: 1rem 0rem }
 }
 
-@media screen and (max-width: 480px) {
+@media handheld, screen and (max-width: 480px) {
     ul.archive li {                                 margin-left: 0em }
     ul.archive article.post.archive {               box-sizing: border-box;
                                                     width: 100%;
@@ -610,7 +621,7 @@ img {                                               border-style: none;
     div.metadata, div.doaction {                    text-align: center }
 }
 
-@media screen and (min-width: 1600px) {
+@media print and (min-width: 297mm), screen and (min-width: 1600px) {
     .columnized {                                   -moz-column-count: 2;
                                                     -moz-column-gap: 2em;
                                                     -webkit-column-count: 2;
