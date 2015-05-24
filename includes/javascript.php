@@ -5,23 +5,22 @@
     header("Content-Type: application/x-javascript");
 ?>
 <!-- --><script>
-<?php echo "\n/*\n\n\nBalance out the line numbers in this script and in the output to help debugging.\n\n*/\n"; ?>
-        $(function(){
+        <?php echo "/* Balance out the line numbers in this script and in the output to help debugging.\n\n\n\n\n        */\n"; ?>
+        $(function() {
             // Scan AJAX responses for errors.
             $(document).ajaxComplete(function(event, request){
                 var response = request ? request.responseText : null;
                 if (isError(response))
                     alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
             })
-            <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("Post.prepare_links();\n"); else echo("// Ajax disabled\n"); ?>
+            <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("Post.prepare_links();\n"); else echo("// Ajax disabled!\n"); ?>
         });
-
         var Route = {
             action: "<?php echo $_GET['action']; ?>"
         };
-
-        var site_url = "<?php echo $config->chyrp_url; ?>";
-
+        var Site = {
+            url: "<?php echo $config->chyrp_url; ?>"
+        };
         var Post = {
             id: 0,
             edit: function(id) {

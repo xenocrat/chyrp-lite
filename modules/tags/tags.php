@@ -3,6 +3,7 @@
         public function __init() {
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
             $this->addAlias("javascript", "tagsJS");
+            $this->addAlias("admin_javascript", "tagsJS");
         }
 
         static function __install() {
@@ -746,10 +747,6 @@
 
             foreach ($post->tags as $tag => $clean)
                 echo "        <category scheme=\"".$config->url."/tag/\" term=\"".$clean."\" label=\"".fix($tag)."\" />\n";
-        }
-
-        public function admin_head() {
-            ?>        <script type="text/javascript"><?php echo("\n"); self::tagsJS(); ?>        </script><?php
         }
 
         public function tagsJS() {

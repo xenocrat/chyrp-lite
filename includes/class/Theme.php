@@ -261,9 +261,12 @@
                 if (!empty($val) and $val != $route->action)
                     $args.= "&amp;".$key."=".urlencode($val);
 
-            $javascripts = array($config->chyrp_url."/includes/lib/gz.php?file=jquery.js",
-                                 $config->chyrp_url."/includes/lib/gz.php?file=plugins.js",
+            $javascripts = array($config->chyrp_url."/includes/lib/gz.php?file=common.js",
                                  $config->chyrp_url.'/includes/javascript.php?action='.$route->action.$args);
+
+            if (file_exists(MAIN_DIR."/includes/lib/custom.js"))
+                $javascripts[] = $config->chyrp_url."/includes/lib/gz.php?file=custom.js";
+
             Trigger::current()->filter($javascripts, "scripts");
 
             $javascripts = '<script src="'.

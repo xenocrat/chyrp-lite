@@ -37,7 +37,7 @@
                             $(this).addClass("tag_added");
                     });
                 }
-                return false; 
+                return false; // Suppress hyperlink
             }
         };
         $(document).ready(ChyrpTags.init);
