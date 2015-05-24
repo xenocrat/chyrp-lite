@@ -498,35 +498,24 @@
                                 $last_comment = $the_comment->created_at;
                         }
 
-                        $responseObj = array();
-                        $responseObj["comment_ids"] = $ids;
-                        $responseObj["last_comment"] = $last_comment;
+                        $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
                         echo json_encode($responseObj);
                     }
                     break;
                 case "show_comment":
                     $comment = new Comment($_POST['comment_id']);
                     $trigger->call("show_comment", $comment);
-
                     $main->display("content/comment", array("comment" => $comment));
                     break;
                 case "delete_comment":
                     $comment = new Comment($_POST['id']);
-                    if (!$comment->deletable())
-                        break;
-
-                    Comment::delete($_POST['id']);
+                    if ($comment->deletable())
+                        Comment::delete($_POST['id']);
                     break;
                 case "edit_comment":
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
-                    if (!$comment->editable())
-                        break;
-
-                    if ($theme->file_exists("forms/comment/edit"))
+                    if ($comment->editable())
                         $main->display("forms/comment/edit", array("comment" => $comment));
-                    else
-                        require "edit_form.php";
-
                     break;
             }
         }
