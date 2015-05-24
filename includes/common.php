@@ -5,7 +5,7 @@
      * Chyrp Lite: an ultra-lightweight fork of the Chyrp blogging engine.
      *
      * Version:
-     *     v2015.03.15
+     *     v2015.05.25
      *
      * Copyright:
      *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors.
@@ -40,7 +40,7 @@
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2015.03.15");
+    define('CHYRP_VERSION', "2015.05.25");
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?

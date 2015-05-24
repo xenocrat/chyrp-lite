@@ -11,7 +11,7 @@
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',         true);
-    define('CHYRP_VERSION', "2015.03.15");
+    define('CHYRP_VERSION', "2015.05.25");
     define('CACHE_TWIG',    false);
     define('JAVASCRIPT',    false);
     define('ADMIN',         false);
@@ -1218,7 +1218,7 @@
      * Function: config_yaml_to_json
      * Migrates configuration file format from YAML to JSON.
      *
-     * Versions: 2015.03.15 => ????.??.??
+     * Versions: 2015.03.15 => 2015.05.25
      */
     function config_yaml_to_json() {
         if (!using_json()) {
@@ -1251,7 +1251,7 @@
      * Function: remove_admin_theme
      * Removes the admin_theme setting since this feature has been removed.
      *
-     * Versions: 2015.03.15 => ????.??.??
+     * Versions: 2015.03.15 => 2015.05.25
      */
     function remove_admin_theme() {
         if (Config::check("admin_theme"))
@@ -1262,7 +1262,7 @@
      * Function: theme_sanity_check
      * Resets the blog theme to Blossom if the config setting is invalid.
      *
-     * Versions: 2015.03.15 => ????.??.??
+     * Versions: 2015.03.15 => 2015.05.25
      */
     function theme_sanity_check() {
         if (!file_exists(THEMES_DIR."/".Config::get("theme")."/info.php"))
