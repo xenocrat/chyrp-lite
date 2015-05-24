@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-05-10 10:10+0000\n"
+"POT-Creation-Date: 2015-05-24 16:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -322,15 +322,15 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:67
-msgid "Newer posts"
+#: themes/sparrow/layouts/default.twig:63
+msgid "&larr; Newer posts"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:68
-msgid "Older posts"
+#: themes/sparrow/layouts/default.twig:73
+msgid "Older posts &rarr;"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:79
+#: themes/sparrow/layouts/default.twig:84
 #, php-format
 msgid "Called from %s on line %d at %ss."
 msgstr ""

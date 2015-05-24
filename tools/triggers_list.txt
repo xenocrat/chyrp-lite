@@ -22,7 +22,7 @@ Arguments:
 admin_head
 ----------
 Called from:
-	admin/layout.twig on line 15
+	admin/layout.twig on line 14
 
 
 delete_user_form
@@ -42,7 +42,7 @@ Arguments:
 export_choose
 -------------
 Called from:
-	admin/pages/export.twig on line 52
+	admin/pages/export.twig on line 36
 
 
 import_choose
@@ -165,7 +165,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	includes/admin.js.php on line 444
+	includes/admin.js.php on line 432
 
 
 not_found
@@ -326,13 +326,13 @@ Arguments:
 ajax_post_edit_form_javascript
 ------------------------------
 Called from:
-	includes/javascript.php on line 36
+	includes/javascript.php on line 35
 
 
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 130
+	includes/javascript.php on line 128
 
 
 add_group
@@ -471,7 +471,7 @@ scripts
 Target:
 	$javascripts
 Called from:
-	includes/class/Theme.php on line 267
+	includes/class/Theme.php on line 290
 
 
 links
@@ -479,7 +479,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 319
+	includes/class/Theme.php on line 342
 
 
 visitor

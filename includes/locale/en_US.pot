@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-05-10 10:10+0000\n"
+"POT-Creation-Date: 2015-05-24 16:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: includes/admin.js.php:51
+#: includes/admin.js.php:48
 msgid "Toggle All"
 msgstr ""
 
-#: includes/admin.js.php:106
-#: includes/admin.js.php:120
-#: includes/javascript.php:39
+#: includes/admin.js.php:102
+#: includes/admin.js.php:116
+#: includes/javascript.php:38
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: includes/admin.js.php:108
-#: includes/admin.js.php:123
-#: includes/javascript.php:42
+#: includes/admin.js.php:104
+#: includes/admin.js.php:119
+#: includes/javascript.php:41
 msgid "More Options &darr;"
 msgstr ""
 
-#: includes/admin.js.php:142
+#: includes/admin.js.php:136
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: includes/admin.js.php:149
+#: includes/admin.js.php:142
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: includes/admin.js.php:300
+#: includes/admin.js.php:290
 msgid "Close"
 msgstr ""
 
@@ -1109,15 +1109,15 @@ msgstr ""
 msgid "and "
 msgstr ""
 
-#: includes/javascript.php:78
+#: includes/javascript.php:77
 msgid "Post has been saved as a draft."
 msgstr ""
 
-#: includes/javascript.php:83
+#: includes/javascript.php:82
 msgid "Post has been published."
 msgstr ""
 
-#: includes/javascript.php:122
+#: includes/javascript.php:121
 msgid "Are you sure you want to delete this post?\\n\\nIt cannot be restored if you do this. If you wish to hide it, save it as a draft."
 msgstr ""
 
@@ -1338,112 +1338,112 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:604
+#: install.php:603
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:606
+#: install.php:605
 msgid "Adapter"
 msgstr ""
 
-#: install.php:622
+#: install.php:621
 msgid "Host"
 msgstr ""
 
-#: install.php:622
+#: install.php:621
 msgid "(usually ok as \"localhost\")"
 msgstr ""
 
-#: install.php:628
-#: install.php:676
+#: install.php:627
+#: install.php:675
 msgid "Username"
 msgstr ""
 
-#: install.php:634
-#: install.php:680
-#: install.php:684
+#: install.php:633
+#: install.php:679
+#: install.php:683
 msgid "Password"
 msgstr ""
 
-#: install.php:639
+#: install.php:638
 msgid "Database"
 msgstr ""
 
-#: install.php:641
+#: install.php:640
 msgid "(full path)"
 msgstr ""
 
-#: install.php:648
+#: install.php:647
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:648
+#: install.php:647
 msgid "(optional)"
 msgstr ""
 
-#: install.php:653
+#: install.php:652
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:655
+#: install.php:654
 msgid "Site Name"
 msgstr ""
 
-#: install.php:656
+#: install.php:655
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:659
+#: install.php:658
 msgid "Description"
 msgstr ""
 
-#: install.php:663
+#: install.php:662
 msgid "What time is it?"
 msgstr ""
 
-#: install.php:674
+#: install.php:673
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:684
+#: install.php:683
 msgid "(again)"
 msgstr ""
 
-#: install.php:688
+#: install.php:687
 msgid "E-Mail Address"
 msgstr ""
 
-#: install.php:691
+#: install.php:690
 msgid "Install!"
 msgstr ""
 
-#: install.php:694
+#: install.php:693
 #: upgrade.php:1562
 msgid "Done!"
 msgstr ""
 
-#: install.php:696
+#: install.php:695
 msgid "Chyrp Lite has been successfully installed."
 msgstr ""
 
-#: install.php:698
+#: install.php:697
 #: upgrade.php:1564
 msgid "What now?"
 msgstr ""
 
-#: install.php:700
+#: install.php:699
 msgid "<strong>Delete install.php</strong>, you won't need it anymore."
 msgstr ""
 
-#: install.php:702
+#: install.php:701
 msgid "CHMOD <code>/includes/caches</code> to 777."
 msgstr ""
 
-#: install.php:704
+#: install.php:703
 msgid "Learn more about Chyrp Lite."
 msgstr ""
 
-#: install.php:706
+#: install.php:705
 msgid "Take me to my site!"
 msgstr ""
 

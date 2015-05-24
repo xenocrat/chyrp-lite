@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-05-10 10:10+0000\n"
+"POT-Creation-Date: 2015-05-24 16:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/layout.twig:54
+#: admin/layout.twig:53
 msgid "Chyrp loves you."
 msgstr ""
 
-#: admin/layout.twig:55
+#: admin/layout.twig:54
 #, php-format
 msgid "Chyrp Lite v%s"
 msgstr ""
 
-#: admin/layout.twig:56
+#: admin/layout.twig:55
 msgid "Log out"
 msgstr ""
 
@@ -59,7 +59,7 @@ msgid "Uploads Path"
 msgstr ""
 
 #: admin/pages/content_settings.twig:31
-msgid "The directory to which files are uploaded, relative to your Chyrp install. Use <code>/../</code> to go up one directory."
+msgid "The directory to which files are uploaded, relative to your Chyrp install."
 msgstr ""
 
 #: admin/pages/content_settings.twig:35
@@ -87,11 +87,11 @@ msgid "XML-RPC support allows you to create and edit content via remote access t
 msgstr ""
 
 #: admin/pages/content_settings.twig:56
-msgid "Enable Inline Post Management"
+msgid "Enable Inline Management"
 msgstr ""
 
 #: admin/pages/content_settings.twig:59
-msgid "Harness the power of AJAX for inline post/page editing."
+msgid "Ajax-powered inline editing of your blog content."
 msgstr ""
 
 #: admin/pages/content_settings.twig:63
@@ -275,7 +275,7 @@ msgid "Confirm"
 msgstr ""
 
 #: admin/pages/export.twig:3
-#: admin/pages/export.twig:54
+#: admin/pages/export.twig:38
 msgid "Export"
 msgstr ""
 
@@ -288,43 +288,30 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: admin/pages/export.twig:13
-#: admin/pages/export.twig:23
-#: admin/pages/export.twig:33
-#: admin/pages/export.twig:46
-msgid "filter:"
+#: admin/pages/export.twig:12
+#: admin/pages/export.twig:18
+#: admin/pages/export.twig:24
+#: admin/pages/export.twig:30
+msgid "filter (optional)"
 msgstr ""
 
 #: admin/pages/export.twig:16
-#: admin/pages/export.twig:26
-#: admin/pages/export.twig:36
-#: admin/pages/export.twig:49
-#: admin/pages/general_settings.twig:23
-#: admin/pages/import.twig:28
-#: admin/pages/import.twig:53
-#: admin/pages/import.twig:109
-#: admin/pages/import.twig:145
-#: admin/partials/post_fields.twig:7
-msgid "(optional)"
-msgstr ""
-
-#: admin/pages/export.twig:20
 #: admin/pages/manage_pages.twig:19
 msgid "Pages"
 msgstr ""
 
-#: admin/pages/export.twig:30
+#: admin/pages/export.twig:22
 #: admin/pages/manage_groups.twig:21
 msgid "Groups"
 msgstr ""
 
-#: admin/pages/export.twig:40
+#: admin/pages/export.twig:28
 #: admin/pages/manage_users.twig:24
 msgid "Users"
 msgstr ""
 
-#: admin/pages/export.twig:43
-msgid "(warning: this also exports the hashed passwords, keep it safe)"
+#: admin/pages/export.twig:33
+msgid "Warning: this also exports the hashed passwords, keep it safe!"
 msgstr ""
 
 #: admin/pages/feathers.twig:3
@@ -335,14 +322,6 @@ msgstr ""
 #: admin/pages/feathers.twig:8
 #: admin/pages/modules.twig:8
 msgid "Enabled"
-msgstr ""
-
-#: admin/pages/feathers.twig:15
-#: admin/pages/feathers.twig:42
-#: admin/pages/modules.twig:15
-#: admin/pages/modules.twig:62
-#, php-format
-msgid "<a href=\"%s\">%s</a>"
 msgstr ""
 
 #: admin/pages/feathers.twig:25
@@ -382,6 +361,15 @@ msgstr ""
 
 #: admin/pages/general_settings.twig:22
 msgid "Alternate URL"
+msgstr ""
+
+#: admin/pages/general_settings.twig:23
+#: admin/pages/import.twig:28
+#: admin/pages/import.twig:53
+#: admin/pages/import.twig:109
+#: admin/pages/import.twig:145
+#: admin/partials/post_fields.twig:7
+msgid "(optional)"
 msgstr ""
 
 #: admin/pages/general_settings.twig:28
