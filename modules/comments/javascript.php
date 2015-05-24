@@ -28,14 +28,7 @@
                         },
                         success: function(json) {
                             $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: json.comment_id, reason: "added" }, function(data) {
-                                if ($(".comment_count").size() && $(".comment_plural").size()) {
-                                    var count = parseInt($(".comment_count:first").text());
-                                    count++;
-                                    $(".comment_count").text(count);
-                                    var plural = (count == 1) ? "" : "s";
-                                    $(".comment_plural").text(plural);
-                                }
-                                $("#last_comment").val(json.comment_timestamp);
+                                $("#comments").attr("data-timestamp", json.comment_timestamp);
                                 $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
                             }, "html");
                         },
