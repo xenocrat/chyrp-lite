@@ -248,6 +248,9 @@
                     case "screen":
                         $media = "screen";
                         break;
+                    case "speech":
+                        $media = "speech";
+                        break;
                     case "tty":
                         $media = "tty";
                         break;
