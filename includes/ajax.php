@@ -78,6 +78,9 @@
             break;
 
         case "preview":
+            if (!$visitor->group->can("add_post") and !$visitor->group->can("add_draft") and !$visitor->group->can("add_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to preview content."));
+
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 break;
 
@@ -159,8 +162,6 @@
                  (!empty($info["notifications"]) ? '"'.implode('", "', $info["notifications"]).'"' : "").
                  '] }');
 
-            break;
-
         case "disable_module": case "disable_feather":
             $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;
 
@@ -192,9 +193,10 @@
 
             exit('{ "notifications": [] }');
 
-            break;
-
         case "reorder_feathers":
+            if (!$visitor->group->can("toggle_extensions"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to reorder feathers."));
+
             $reorder = oneof(@$_POST['list'], $config->enabled_feathers);
             foreach ($reorder as &$value)
                 $value = preg_replace("/feathers\[([^\]]+)\]/", "\\1", $value);
