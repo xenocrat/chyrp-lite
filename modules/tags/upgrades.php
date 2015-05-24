@@ -17,18 +17,17 @@
 
         foreach ($tags->fetchAll() as $attr) {
             if (!json_decode($attr["value"])) {
-              $yaml_count++;
+                $yaml_count++;
 
-              $serialized = json_encode(YAML::load($attr["value"]), JSON_UNESCAPED_SLASHES);
+                $serialized = json_encode(YAML::load($attr["value"]), JSON_UNESCAPED_SLASHES);
 
-              if (!$serialized)
+                if (!$serialized)
                 $json_error++;
 
-              $sql->replace("post_attributes",
-                            array("post_id", "name"),
-                            array("post_id" => $attr["post_id"],
-                                  "name" => "tags",
-                                  "value" => $serialized));
+                $sql->update("post_attributes",
+                             array("name" => "tags",
+                                   "post_id" => $attr["post_id"]),
+                             array("value" => $serialized));
             }
         }
 

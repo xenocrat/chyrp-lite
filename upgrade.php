@@ -1259,6 +1259,51 @@
     }
 
     /**
+     * Function: uploader_serialize_to_json
+     * Migrates Uploader Feather from PHP's serializer to JSON.
+     *
+     * Versions: 2015.03.15 => 2015.05.25
+     */
+    function uploader_serialize_to_json() {
+        $sql = SQL::current();
+        if (!$posts = $sql->select("posts", "posts.id", array("posts.feather" => "uploader")))
+            return;
+
+        $sql->error = "";
+        $json_error = 0;
+        $serialize_count = 0;
+        $conversion = false;
+
+        foreach($posts->fetchAll() as $post) {
+            if (!$query = $sql->select("post_attributes", "*", array("name" => "filenames", "post_id" => $post["id"])))
+                continue;
+
+            $attr = $query->fetchObject();
+
+            if (!json_decode($attr->value)) {
+                $serialize_count++;
+
+                $serialized = json_encode(unserialize($attr->value), JSON_UNESCAPED_SLASHES);
+
+                if (!$serialized)
+                    $json_error++;
+
+                $sql->update("post_attributes",
+                             array("name" => "filenames",
+                                   "post_id" => $attr->post_id),
+                             array("value" => $serialized));
+            }
+        }
+
+        if (empty($sql->error) and empty($json_error))
+          $conversion = true;
+
+        if ($serialize_count > 0)
+          echo __("Updating serialization of Uploader Feather...", "tags").
+            test($conversion);
+    }
+
+    /**
      * Function: theme_sanity_check
      * Resets the blog theme to Blossom if the config setting is invalid.
      *
@@ -1527,6 +1572,8 @@
         recaptcha_to_captcha();
 
         remove_admin_theme();
+
+        uploader_serialize_to_json();
 
         # Perform tidy up tasks.
 
