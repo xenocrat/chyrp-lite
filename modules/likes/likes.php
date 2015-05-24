@@ -246,4 +246,13 @@
                 return array_combine($image, $arr);
             }
         }
+
+        public function manage_posts_column_header() {
+            echo '<th class="post_likes">'.__("Likes", "tags").'</th>';
+        }
+
+        public function manage_posts_column($post) {
+            $like = new Like(array("post_id" => $post->id));
+            echo '<td class="post_likes">'.$like->fetchCount().'</td>';
+        }
     }

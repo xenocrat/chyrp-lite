@@ -374,11 +374,13 @@ table thead tr th.post_status,
 table thead tr th.post_author,
 table thead tr th.post_comments,
 table thead tr th.post_category,
+table tbody tr th.post_likes,
 table tbody tr td.post_date,
 table tbody tr td.post_status,
 table tbody tr td.post_author,
 table tbody tr td.post_comments,
-table tbody tr td.post_category {               text-align: center }
+table tbody tr td.post_category,
+table tbody tr td.post_likes {                  text-align: center }
 table thead tr th.user_name,
 table tbody tr td.user_name {                   text-align: left }
 table thead tr th.user_group,
