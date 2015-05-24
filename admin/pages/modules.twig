@@ -9,10 +9,10 @@
                 {% for safename, module in enabled_modules | items %}
                 <li class="module ${ module.classes | join(" ") }" id="module_$safename">
                     <h3>
-                        <a class="emblem module_author" href="$module.author.url">
-                            <img src="$theme_url/images/icons/info.svg" alt="${ module.author.url | escape }">
+                        <a class="emblem module_url" href="$module.url">
+                            <img src="$theme_url/images/icons/info.svg" alt="${ module.url | escape }">
                         </a>
-                        ${ "<a href=\"%s\">%s</a>" | translate | format(module.url, module.name) }
+                        $module.name {# translation is done in the controller #}
                     </h3>
                     {% if module.help %}
                     <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
@@ -56,10 +56,10 @@
                 {% for safename, module in disabled_modules | items %}
                 <li class="module ${ module.classes | join(" ") }" id="module_$safename">
                     <h3>
-                        <a class="emblem module_author" href="$module.author.url">
-                            <img src="$theme_url/images/icons/info.svg" alt="${ module.author.url | escape }">
+                        <a class="emblem module_url" href="$module.url">
+                            <img src="$theme_url/images/icons/info.svg" alt="${ module.url | escape }">
                         </a>
-                        ${ "<a href=\"%s\">%s</a>" | translate | format(module.url, module.name) }
+                        $module.name {# translation is done in the controller #}
                     </h3>
                     {% if module.help %}
                     <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>

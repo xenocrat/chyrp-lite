@@ -9,10 +9,10 @@
                 {% for safename, feather in enabled_feathers | items %}
                 <li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
-                        <a class="emblem feather_author" href="$feather.author.url">
-                            <img src="$theme_url/images/icons/info.svg" alt="${ feather.author.url | escape }">
+                        <a class="emblem feather_url" href="$feather.url">
+                            <img src="$theme_url/images/icons/info.svg" alt="${ feather.url | escape }">
                         </a>
-                        ${ "<a href=\"%s\">%s</a>" | translate | format(feather.url, feather.name) }
+                        $feather.name {# translation is done in the controller #}
                     </h3>
                     {% if feather.help %}
                     <a href="{% admin "help&id="~feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
@@ -36,10 +36,10 @@
                 {% for safename, feather in disabled_feathers | items %}
                 <li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
-                        <a class="emblem feather_author" href="$feather.author.url">
-                            <img src="$theme_url/images/icons/info.svg" alt="${ feather.author.url | escape }">
+                        <a class="emblem feather_url" href="$feather.url">
+                            <img src="$theme_url/images/icons/info.svg" alt="${ feather.url | escape }">
                         </a>
-                        ${ "<a href=\"%s\">%s</a>" | translate | format(feather.url, feather.name) }
+                        $feather.name {# translation is done in the controller #}
                     </h3>
                     {% if feather.help %}
                     <a href="{% admin "help&id="~feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
