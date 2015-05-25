@@ -325,8 +325,8 @@
                                "/?feed" :
                                "&amp;feed") ;
             $append.= $config->clean_urls ?
-                          "/".$this->clean :
-                          "&amp;title=".$this->clean ;
+                          "/".sanitize($this->title) :
+                          "&amp;title=".sanitize($this->title) ;
 
             # Create basic list of links (site and page Atom feeds):
             $feedurl = oneof(@$config->feed_url, url("feed"));
