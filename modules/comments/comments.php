@@ -34,7 +34,6 @@
             $config->set("akismet_api_key", null);
             $config->set("auto_reload_comments", 30);
             $config->set("enable_reload_comments", false);
-            $config->set("allow_nested_comments", false);
 
             Group::add_permission("add_comment", "Add Comments");
             Group::add_permission("add_comment_private", "Add Comments to Private Posts");
@@ -56,7 +55,6 @@
             $config->remove("akismet_api_key");
             $config->remove("auto_reload_comments");
             $config->remove("enable_reload_comments");
-            $config->remove("allow_nested_comments");
 
             Group::remove_permission("add_comment");
             Group::remove_permission("add_comment_private");
@@ -129,14 +127,14 @@
         }
 
         static function admin_destroy_comment() {
+            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_comments");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
-                show_403(__("Access Denied"), __("Invalid security key."));
 
             $comment = new Comment($_POST['id']);
             if (!$comment->deletable())
@@ -264,10 +262,9 @@
             $config = Config::current();
             $set = array($config->set("allowed_comment_html", explode(", ", $_POST['allowed_comment_html'])),
                          $config->set("default_comment_status", $_POST['default_comment_status']),
-                         $config->set("comments_per_page", $_POST['comments_per_page']),
-                         $config->set("auto_reload_comments", $_POST['auto_reload_comments']),
-                         $config->set("enable_reload_comments", isset($_POST['enable_reload_comments'])),
-                         $config->set("allow_nested_comments", isset($_POST['allow_nested_comments'])));
+                         $config->set("comments_per_page", (int) $_POST['comments_per_page']),
+                         $config->set("auto_reload_comments", (int) $_POST['auto_reload_comments']),
+                         $config->set("enable_reload_comments", isset($_POST['enable_reload_comments'])));
 
             if (!empty($_POST['akismet_api_key'])) {
                 $_POST['akismet_api_key'] = trim($_POST['akismet_api_key']);
@@ -501,35 +498,24 @@
                                 $last_comment = $the_comment->created_at;
                         }
 
-                        $responseObj = array();
-                        $responseObj["comment_ids"] = $ids;
-                        $responseObj["last_comment"] = $last_comment;
+                        $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
                         echo json_encode($responseObj);
                     }
                     break;
                 case "show_comment":
                     $comment = new Comment($_POST['comment_id']);
                     $trigger->call("show_comment", $comment);
-
                     $main->display("content/comment", array("comment" => $comment));
                     break;
                 case "delete_comment":
                     $comment = new Comment($_POST['id']);
-                    if (!$comment->deletable())
-                        break;
-
-                    Comment::delete($_POST['id']);
+                    if ($comment->deletable())
+                        Comment::delete($_POST['id']);
                     break;
                 case "edit_comment":
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
-                    if (!$comment->editable())
-                        break;
-
-                    if ($theme->file_exists("forms/comment/edit"))
+                    if ($comment->editable())
                         $main->display("forms/comment/edit", array("comment" => $comment));
-                    else
-                        require "edit_form.php";
-
                     break;
             }
         }
@@ -702,7 +688,7 @@
             return fallback($this->latest_comments[$post->id], null);
         }
 
-        public function comments_get($options) {
+        public function comments_get(&$options) {
             if (ADMIN)
                 return;
 
@@ -772,17 +758,5 @@
                 return "(0)";
             else
                 return QueryBuilder::build_list($_SESSION['comments']);
-        }
-
-
-        /**
-         * Function: comment_get
-         * Returns a single comment using the supplied ID.
-         *
-         * Parameters:
-         *     $id - The ID of comment to grab.
-         */
-        public function comment_get($id) {
-            return $comment = new Comment($id);
         }
     }

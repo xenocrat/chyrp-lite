@@ -3,10 +3,10 @@
 {% block title %}${ "Manage Comments" | translate("comments") }{% endblock %}
 
 {% block content %}
-            <form class="detail" action="index.php" method="get" accept-charset="utf-8">
+            <form class="filters" action="index.php" method="get" accept-charset="utf-8">
                 <fieldset>
                     <input type="hidden" name="action" value="manage_comments">
-                    <div role="search" class="detail_single">
+                    <div role="search" class="filter_item">
                         <h3>
                             ${ "Search&hellip;" | translate }
                             <a href="{% admin "help&id=filtering_results" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help" onerror="this.removeAttribute('onerror'); this.src='$theme_url/images/icons/help.svg'"></a>
@@ -18,7 +18,7 @@
             </form>
             <h2>{% if GET.query %}${ "Search Results" | translate }{% else %}${ "Comments" | translate("comments") }{% endif %}</h2>
             <form action="{% admin "bulk_comments" %}" method="post">
-                <table>
+                <table class="interactive">
                     <thead>
                         <tr class="head">
                             <th class="toggler"></th>
@@ -60,11 +60,11 @@
                             {% endif %}
                         </tr>
                         <tr class="comment_excerpt">
-                            <td colspan="100%">${ comment.body | truncate(100) }</td>
+                            <td colspan="6">${ comment.body | truncate(100) }</td>
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="100%"><span class="sub">${ "(none)" | translate }</span></td>
+                            <td class="placeholder"><span class="sub">${ "(none)" | translate }</span></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -89,8 +89,8 @@
             </form>
             {% if comments.paginated and comments.pages > 1 %}
             <div class="pagination">
-                $comments.prev_link
                 <span class="pages">${ "Page %d of %s" | translate | format(comments.page, comments.final_link(comments.pages)) }</span>
+                $comments.prev_link
                 $comments.next_link
             </div>
             {% endif %}

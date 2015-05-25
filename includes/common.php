@@ -5,18 +5,42 @@
      * Chyrp Lite: an ultra-lightweight fork of the Chyrp blogging engine.
      *
      * Version:
-     *     v2015.03.15
+     *     v2015.05.25
+     *
+     * Copyright:
+     *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors.
      *
      * License:
-     *     Modified MIT (See COPYING)
+     *     Permission is hereby granted, free of charge, to any person
+     *     obtaining a copy of this software and associated documentation
+     *     files (the "Software"), to deal in the Software without
+     *     restriction, including without limitation the rights to use,
+     *     copy, modify, merge, publish, distribute, sublicense, and/or sell
+     *     copies of the Software, and to permit persons to whom the
+     *     Software is furnished to do so, subject to the following
+     *     conditions:
      *
-     * Chyrp Copyright:
-     *     Copyright (c) 2015 Chyrp Team (See AUTHORS)
+     *     The above copyright notice and this permission notice shall be
+     *     included in all copies or substantial portions of the Software.
+     *
+     *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+     *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+     *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+     *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+     *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+     *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+     *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+     *     OTHER DEALINGS IN THE SOFTWARE.
+     *
+     *     Except as contained in this notice, the name(s) of the above
+     *     copyright holders shall not be used in advertising or otherwise
+     *     to promote the sale, use or other dealings in this Software
+     *     without prior written authorization.
      */
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2015.03.15");
+    define('CHYRP_VERSION', "2015.05.25");
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
@@ -83,13 +107,9 @@
     # Absolute path to /themes
     define('THEMES_DIR', MAIN_DIR."/themes");
 
-    # Constant: ADMIN_THEMES_DIR
-    # Absolute path to /admin/themes
-    define('ADMIN_THEMES_DIR', MAIN_DIR."/admin/themes");
-
     # Constant: UPDATE_XML
     # URL to the update feed
-    define('UPDATE_XML', "http://pimley.net/projects/downloads/chyrp-lite.xml");
+    define('UPDATE_XML', "http://chyrplite.net/update.xml");
 
     # Constant: UPDATE_INTERVAL
     # Interval in seconds between update checks
@@ -101,6 +121,14 @@
         define('USE_ZLIB', true);
     else
         define('USE_ZLIB', false);
+
+    # Constant: JSON_PRETTY_PRINT
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
+
+    # Constant: JSON_UNESCAPED_SLASHES
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_UNESCAPED_SLASHES')) define('JSON_UNESCAPED_SLASHES', 0);
 
     # Set error reporting levels, and headers for Chyrp's JS files.
     if (JAVASCRIPT) {
@@ -248,7 +276,7 @@
         set_error_handler("error_panicker");
 
     # Redirect to the installer if there is no config.
-    if (!file_exists(INCLUDES_DIR."/config.yaml.php"))
+    if (!file_exists(INCLUDES_DIR."/config.json.php"))
         redirect("install.php");
 
     # Start the timer that keeps track of Chyrp's load time.

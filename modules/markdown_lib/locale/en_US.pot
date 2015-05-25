@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-03-15 09:20+0000\n"
+"POT-Creation-Date: 2015-05-25 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/markdown_lib/info.yaml:1
+#: modules/markdown_lib/info.php:3
 msgid "Markdown Extra"
 msgstr ""
 
-#: modules/markdown_lib/info.yaml:4
-msgid "<a href=\"http://michelf.ca/projects/php-markdown/\">Markdown</a> support for posts, pages, and comments."
+#: modules/markdown_lib/info.php:6
+msgid "<a href='http://michelf.ca/projects/php-markdown/'>Markdown</a> support for posts, pages, and comments."
 msgstr ""
 

@@ -13,7 +13,7 @@
         </div>
         {% endif %}
         <div role="note" class="metadata">
-          <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;$post.title&quot;">
+          <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;">
           {% if post.status == "private" %}
             ${ "Private" | translate }
           {% elseif post.status == "scheduled" %}

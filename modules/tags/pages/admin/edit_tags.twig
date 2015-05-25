@@ -4,12 +4,15 @@
 
 {% block content %}
             <h2>${ "Edit Tags for &#8220;%s&#8221;" | translate("tags") | format(post.title) }</h2>
-            <form class="detail" action="{% admin "update_tags" %}" method="post" accept-charset="utf-8">
+            <form class="split" action="{% admin "update_tags" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     <p>
-                        <input type="text" name="tags" value="${ post.tags | keys | join(", ") | escape }" id="tags" class="big expand">
-                        <button class="yay" name="delete">
-                            <img src="$theme_url/images/icons/success.svg" alt="delete"> ${ "Update" | translate }
+                        <label for="name">${ "Tags" | translate("tags") }</label>
+                        <input type="text" name="tags" value="${ post.tags | keys | join(", ") | escape }" id="tags">
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay">
+                            <img src="$theme_url/images/icons/success.svg" alt="success"> ${ "Update" | translate }
                         </button>
                     </p>
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">

@@ -20,7 +20,7 @@
                 load_translator("theme", THEME_DIR."/locale/".$config->locale.".mo");
 
             # Load the theme's info into the Theme class.
-            foreach (YAML::load(THEME_DIR."/info.yaml") as $key => $val)
+            foreach (include THEME_DIR."/info.php" as $key => $val)
                 $this->$key = $val;
 
             $this->url = THEME_URL;
@@ -206,18 +206,13 @@
             $stylesheets = array();
             Trigger::current()->filter($stylesheets, "stylesheets");
 
+            $elements = "<!-- Styles -->";
             if (!empty($stylesheets))
-                $stylesheets = '<link rel="stylesheet" href="'.
-                               implode('" type="text/css" media="screen" charset="utf-8" />'."\n\t".'<link rel="stylesheet" href="', $stylesheets).
-                               '" type="text/css" media="screen" charset="utf-8" />';
-            else
-                $stylesheets = "";
-
-            if (file_exists(THEME_DIR."/style.css"))
-                $stylesheets = '<link rel="stylesheet" href="'.THEME_URL.'/style.css" type="text/css" media="screen" charset="utf-8" />'."\n\t";
+                foreach ($stylesheets as $stylesheet)
+                    $elements.= "\n".'<link rel="stylesheet" href="'.$stylesheet.'" type="text/css" media="all" charset="utf-8">';
 
             if (!file_exists(THEME_DIR."/stylesheets/") and !file_exists(THEME_DIR."/css/"))
-                return $stylesheets;
+                return $elements;
 
             $long  = (array) glob(THEME_DIR."/stylesheets/*");
             $short = (array) glob(THEME_DIR."/css/*");
@@ -230,22 +225,47 @@
                 if (substr_count($file, ".inc.css") or (substr($file, -4) != ".css" and substr($file, -4) != ".php"))
                     continue;
 
-                if ($file == "ie.css")
-                    $stylesheets.= "<!--[if IE]>";
-                if (preg_match("/^ie([0-9\.]+)\.css/", $file, $matches))
-                    $stylesheets.= "<!--[if IE ".$matches[1]."]>";
-                elseif (preg_match("/(lte?|gte?)ie([0-9\.]+)\.css/", $file, $matches))
-                    $stylesheets.= "<!--[if ".$matches[1]." IE ".$matches[2]."]>";
+                $name = substr($file, 0, strpos($file, "."));
+                switch ($name) {
+                    case "aural":
+                        $media = "aural";
+                        break;
+                    case "braille":
+                        $media = "braille";
+                        break;
+                    case "embossed":
+                        $media = "embossed";
+                        break;
+                    case "handheld":
+                        $media = "handheld";
+                        break;
+                    case "print":
+                        $media = "print";
+                        break;
+                    case "projection":
+                        $media = "projection";
+                        break;
+                    case "screen":
+                        $media = "screen";
+                        break;
+                    case "speech":
+                        $media = "speech";
+                        break;
+                    case "tty":
+                        $media = "tty";
+                        break;
+                    case "tv":
+                        $media = "tv";
+                        break;
+                    default:
+                        $media = "all";
+                        break;
+                }
 
-                $stylesheets.= '<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.($file == "print.css" ? "print" : "screen").'" charset="utf-8" />';
-
-                if ($file == "ie.css" or preg_match("/(lt|gt)?ie([0-9\.]+)\.css/", $file))
-                    $stylesheets.= "<![endif]-->";
-
-                $stylesheets.= "\n\t";
+                $elements.= "\n".'<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.$media.'" charset="utf-8">';
             }
 
-            return $stylesheets;
+            return $elements;
         }
 
         /**
@@ -261,14 +281,17 @@
                 if (!empty($val) and $val != $route->action)
                     $args.= "&amp;".$key."=".urlencode($val);
 
-            $javascripts = array($config->chyrp_url."/includes/lib/gz.php?file=jquery.js",
-                                 $config->chyrp_url."/includes/lib/gz.php?file=plugins.js",
+            $javascripts = array($config->chyrp_url."/includes/lib/gz.php?file=common.js",
                                  $config->chyrp_url.'/includes/javascript.php?action='.$route->action.$args);
+
+            if (file_exists(MAIN_DIR."/includes/lib/custom.js"))
+                $javascripts[] = $config->chyrp_url."/includes/lib/gz.php?file=custom.js";
+
             Trigger::current()->filter($javascripts, "scripts");
 
-            $javascripts = '<script src="'.
-                           implode('" type="text/javascript" charset="utf-8"></script>'."\n\t".'<script src="', $javascripts).
-                           '" type="text/javascript" charset="utf-8"></script>';
+            $elements = "<!-- JavaScripts -->";
+            foreach ($javascripts as $javascript)
+                $elements.= "\n".'<script src="'.$javascript.'" type="text/javascript" charset="utf-8"></script>';
 
             if (file_exists(THEME_DIR."/javascripts/") or file_exists(THEME_DIR."/js/")) {
                 $long  = (array) glob(THEME_DIR."/javascripts/*.js");
@@ -276,16 +299,16 @@
 
                 foreach(array_merge($long, $short) as $file)
                     if ($file and !substr_count($file, ".inc.js"))
-                        $javascripts.= "\n\t".'<script src="'.$config->chyrp_url.'/includes/lib/gz.php?file='.preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
+                        $elements.= "\n".'<script src="'.$config->chyrp_url.'/includes/lib/gz.php?file='.preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
 
                 $long  = (array) glob(THEME_DIR."/javascripts/*.php");
                 $short = (array) glob(THEME_DIR."/js/*.php");
                 foreach(array_merge($long, $short) as $file)
                     if ($file)
-                        $javascripts.= "\n\t".'<script src="'.$config->chyrp_url.preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
+                        $elements.= "\n".'<script src="'.$config->chyrp_url.preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
             }
 
-            return $javascripts;
+            return $elements;
         }
 
         /**
@@ -302,8 +325,8 @@
                                "/?feed" :
                                "&amp;feed") ;
             $append.= $config->clean_urls ?
-                          "/".urlencode($this->title) :
-                          "&amp;title=".urlencode($this->title) ;
+                          "/".$this->clean :
+                          "&amp;title=".$this->clean ;
 
             # Create basic list of links (site and page Atom feeds):
             $feedurl = oneof(@$config->feed_url, url("feed"));
@@ -312,7 +335,7 @@
 
             if ($request !== "/")
                 if ($pagefeedurl != $feedurl)
-                    $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml", "title" => "$this->title");
+                    $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml", "title" => fix($this->title, true));
 
             # Ask modules to pitch in by adding their own <link> tag items to $links.
             # Each item must be an array with "href" and "rel" properties (and optionally "title" and "type"):

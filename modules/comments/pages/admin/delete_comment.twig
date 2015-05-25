@@ -1,9 +1,12 @@
 {% extends "layout.twig" %}
 
-{% block title %}${ "Delete Comment" | translate("comments") }{% endblock %}
+{% block title %}${ "Delete Comment?" | translate("comments") }{% endblock %}
 
 {% block content %}
-            <h1>${ "Are you sure you want to delete this comment?" | translate("comments") }</h1>
+            <h1>${ "Delete Comment?" | translate("comments") }</h1>
+            <p>
+                ${ "Are you sure you want to delete this comment?" | translate("comments") }
+            </p>
             <form class="delete" action="{% admin "destroy_comment" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     <div class="confirmation">
@@ -11,11 +14,11 @@
                             <img src="$theme_url/images/icons/delete.svg" alt="success">${ "Delete!" | translate }
                         </button>
                         <button name="destroy" value="bollocks" type="submit" class="yay">
-                            <img src="$theme_url/images/icons/cancel.svg" alt="success">${ "Cancel" | translate }
+                            <img src="$theme_url/images/icons/cancel.svg" alt="cancel">${ "Cancel" | translate }
                         </button>
                     </div>
-                    <input type="hidden" name="id" value="$comment.id" id="id" />
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash" />
+                    <input type="hidden" name="id" value="$comment.id" id="id">
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

@@ -173,10 +173,10 @@
         ini_set("display_errors", 1);
 
         if (DEBUG) {
-    		if (!is_null($r))
-    			trigger_error(_f("%s is <strong>deprecated</strong> since version %s! Use %s instead.", array($f, $v, $r)));
-    		else
-    			trigger_error(_f("%s is <strong>deprecated</strong> since version %s.", $f, $v));
+            if (!is_null($r))
+                trigger_error(_f("%s is <strong>deprecated</strong> since version %s! Use %s instead.", array($f, $v, $r)));
+            else
+                trigger_error(_f("%s is <strong>deprecated</strong> since version %s.", $f, $v));
         }
 
         error_reporting(E_ALL | E_STRICT);
@@ -398,7 +398,7 @@
      *     $number - If passed, and this number is 1, it will not pluralize.
      */
     function pluralize($string, $number = null) {
-        $uncountable = array("moose", "sheep", "fish", "series", "species",
+        $uncountable = array("moose", "sheep", "fish", "series", "species", "audio",
                              "rice", "money", "information", "equipment", "piss");
 
         if (in_array($string, $uncountable) or $number == 1)
@@ -859,8 +859,8 @@
 
         if (ini_get("allow_url_fopen")) {
             $content = @file_get_contents($url);
-            if (!$content or !strpos($http_response_header[0], " 200 OK"))
-                $content = "Server returned a message: $http_response_header[0]";
+            if (!$content or  (strpos($http_response_header[0], " 200 OK") === false))
+                $content = "Server returned a message: ".$http_response_header[0];
         } elseif (function_exists("curl_init")) {
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, $url);
@@ -871,7 +871,7 @@
             $status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
             curl_close($handle);
             if ($status != 200)
-                $content = "Server returned a message: $status";
+                $content = "Server returned a message: ".$status;
         } else {
             $path = (!isset($path)) ? '/' : $path ;
             if (isset($query)) $path.= '?'.$query;
@@ -921,16 +921,16 @@
      * Redirects to the given URL and exits immediately.
      *
      * Parameters:
-     *     $url - The URL to redirect to. If it begins with @/@ it will be relative to the @Config.chyrp_url@.
+     *     $url - The URL to redirect to. If it begins with @/@ it will be relative to the @Config.url@.
      *     $use_chyrp_url - Use the @Config.chyrp_url@ instead of @Config.url@ for $urls beginning with @/@?
      */
     function redirect($url, $use_chyrp_url = false) {
         # Handle URIs without domain
-        if ($url[0] == "/")
+        if (strpos($url, "/") === 0)
             $url = (ADMIN or $use_chyrp_url) ?
                        Config::current()->chyrp_url.$url :
                        Config::current()->url.$url ;
-        elseif (file_exists(INCLUDES_DIR."/config.yaml.php") and class_exists("Route") and !substr_count($url, "://"))
+        elseif (file_exists(INCLUDES_DIR."/config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
         header("Location: ".html_entity_decode($url));
@@ -1084,9 +1084,9 @@
         $config = Config::current();
 
         # Instantiate all Modules.
-        foreach ($config->enabled_modules as $index => $module) {
-            if (!file_exists(MODULES_DIR."/".$module."/".$module.".php")) {
-                unset($config->enabled_modules[$index]);
+        foreach ($config->enabled_modules as $module) {
+            if (!file_exists(MODULES_DIR."/".$module."/".$module.".php") or !file_exists(MODULES_DIR."/".$module."/info.php")) {
+                unset($config->enabled_modules[$module]);
                 continue;
             }
 
@@ -1102,14 +1102,14 @@
             Modules::$instances[$module] = new $camelized;
             Modules::$instances[$module]->safename = $module;
 
-            foreach (YAML::load(MODULES_DIR."/".$module."/info.yaml") as $key => $val)
-                Modules::$instances[$module]->$key = (is_string($val)) ? __($val, $module) : $val ;
+            foreach (include MODULES_DIR."/".$module."/info.php" as $key => $val)
+                Modules::$instances[$module]->$key = $val;
         }
 
         # Instantiate all Feathers.
-        foreach ($config->enabled_feathers as $index => $feather) {
-            if (!file_exists(FEATHERS_DIR."/".$feather."/".$feather.".php")) {
-                unset($config->enabled_feathers[$index]);
+        foreach ($config->enabled_feathers as $feather) {
+            if (!file_exists(FEATHERS_DIR."/".$feather."/".$feather.".php") or !file_exists(FEATHERS_DIR."/".$feather."/info.php")) {
+                unset($config->enabled_feathers[$feather]);
                 continue;
             }
 
@@ -1125,8 +1125,8 @@
             Feathers::$instances[$feather] = new $camelized;
             Feathers::$instances[$feather]->safename = $feather;
 
-            foreach (YAML::load(FEATHERS_DIR."/".$feather."/info.yaml") as $key => $val)
-                Feathers::$instances[$feather]->$key = (is_string($val)) ? __($val, $feather) : $val ;
+            foreach (include FEATHERS_DIR."/".$feather."/info.php" as $key => $val)
+                Feathers::$instances[$feather]->$key = $val;
         }
 
         # Initialize all modules.
@@ -1372,6 +1372,45 @@
 
         $config = Config::current();
         return ($url ? $config->chyrp_url.$config->uploads_path.$file : MAIN_DIR.$config->uploads_path.$file);
+    }
+
+    /**
+     * Function: upload_tester
+     * Returns true if files were successfully uploaded.
+     * Returns false if no file was selected for upload.
+     * Triggers an error page for all other fail states.
+     *
+     * Parameters:
+     *     $error - The ['error'] segment of the file array that is created during the file upload by PHP.
+     */
+    function upload_tester($error) {
+        if (is_array($error)) {
+            foreach ($error as $errors) {
+                $return = upload_tester($errors);
+            }
+            return $return;
+        }
+
+        switch ($error) {
+            case UPLOAD_ERR_INI_SIZE:
+                error(__("Error"), __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."));
+            case UPLOAD_ERR_FORM_SIZE:
+                error(__("Error"), __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive that was specified in the HTML form."));
+            case UPLOAD_ERR_PARTIAL:
+                error(__("Error"), __("The uploaded file was only partially uploaded."));
+            case UPLOAD_ERR_NO_TMP_DIR:
+                error(__("Error"), __("Missing a temporary folder."));
+            case UPLOAD_ERR_CANT_WRITE:
+                error(__("Error"), __("Failed to write file to disk."));
+            case UPLOAD_ERR_EXTENSION:
+                error(__("Error"), __("File upload was stopped by a PHP extension."));
+            case UPLOAD_ERR_NO_FILE: 
+                return false;
+            case UPLOAD_ERR_OK: 
+                return true;
+            default:
+                error(__("Error"), __("Unknown upload error."));
+        }
     }
 
     /**
@@ -1815,12 +1854,12 @@
      *     http://gravatar.com/site/implement/images/php/
      */
     function get_gravatar($email, $s = 80, $d = "mm", $r = "g", $img = false, $atts = array()) {
-    	$url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
-    	if ($img) {
-    		$url = '<img src="' . $url . '"';
-    		foreach ($atts as $key => $val)
-    			$url .= ' ' . $key . '="' . $val . '"';
-    		$url .= " />";
-    	}
-    	return $url;
+        $url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
+        if ($img) {
+            $url = '<img class="gravatar" src="' . $url . '"';
+            foreach ($atts as $key => $val)
+                $url .= ' ' . $key . '="' . $val . '"';
+            $url .= ">";
+        }
+        return $url;
     }

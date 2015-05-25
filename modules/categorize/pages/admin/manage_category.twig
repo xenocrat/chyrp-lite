@@ -3,18 +3,6 @@
 {% block title %}${ "Manage Categories" | translate("categorize") }{% endblock %}
 
 {% block content %}
-        <form class="detail" action="index.php" method="get" accept-charset="utf-8">
-            <fieldset>
-                <input type="hidden" name="action" value="manage_categorize">
-                {% if visitor.group.can("manage_categorize") %}
-                <div class="detail_single">
-                    <a href="{% admin "add_category" %}" class="button yay"> 
-                        <img src="$theme_url/images/icons/add.svg" alt="add"> ${ "Add Category" | translate("categorize") }
-                    </a>
-                </div>
-                {% endif %}
-            </fieldset>
-        </form>
         <h2>${ "Manage Categories" | translate("categorize") }</h2>
         <table>
             <thead> 
@@ -47,10 +35,14 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="100%"><span class="sub">${ "(none)" | translate }</span></td>
+                    <td class="placeholder"><span class="sub">${ "(none)" | translate }</span></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-
+        <div class="controls">
+            <a href="{% admin "add_category" %}" class="button yay"> 
+                <img src="$theme_url/images/icons/add.svg" alt="add"> ${ "Add Category" | translate("categorize") }
+            </a>
+        </div>
 {% endblock %}

@@ -16,18 +16,18 @@
             <h4 class="yearly">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
             {% endif %}
             {% if post.feather == "photo" %}
-            ${ feathers['photo'].image_link(post, 320, null, "quality=60") }
+            ${ feathers['photo'].image_tag(post, 320, null, "quality=60") }
             {% else %}
             <p>${ post.excerpt | read_more("…more") }</p>
             {% endif %}
-            <a href="$post.url" class="archive_post_link">${ "Permanent link to" | translate } &quot;$post.title&quot;</a>
+            <a href="$post.url" class="archive_post_link">${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;</a>
           </article>
           {% else %} {# Complete archive: display titles to minimise content payload #}
           <a href="$post.url">
           {% if post.title %}
-            <h4>${ post.title | normalize | truncate(80) }</h4>
+            <h4 class="archive">${ post.title | normalize | truncate(80) }</h4>
           {% else %}
-            <h4>${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
+            <h4 class="archive">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
           {% endif %}
           </a>
           {% endif %}
@@ -37,9 +37,9 @@
       <hr>
     {% endfor %}
     </div>
-    {% if archives_prec.no_results == false %} {# Link to a previous year if we found a post preceeding this archive #}
+    {% if preceeding.no_results == false %} {# Link to a previous year if we found a post preceeding this archive #}
     <div role="navigation" class="next traversal">
-        <a href="{% url 'archive/%s/' | format(archives_prec.created_at | strftime('%Y')) %}">${ "Archive of %s" | translate | format(archives_prec.created_at | strftime('%Y')) }</a>
+      <a href="{% url 'archive/%s/' | format(preceeding.created_at | strftime('%Y')) %}">${ "Archive of %s" | translate | format(preceeding.created_at | strftime('%Y')) }</a>
     </div>
     {% endif %}
   {% endif %}

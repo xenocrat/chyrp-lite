@@ -16,11 +16,6 @@
                         <small>${ "Format: <code>strong, blockquote, em</code>" | translate("comments") }</small>
                     </p>
                     <p>
-                        <label for="allow_nested_comments">${ "Allow Replies" | translate("comments") }</label>
-                        <input type="checkbox" class="checkbox" name="allow_nested_comments"${ site.allow_nested_comments | checked }> ${ "enabled" | translate("comments") }
-                        <small>${ "Enables replying to a comment" | translate("comments") }</small>
-                    </p>
-                    <p>
                         <label for="default_comment_status">${ "Default Comment Status" | translate("comments") }</label>
                         <select name="default_comment_status">
                             <option value="approved"${ "approved" | option_selected(site.default_comment_status) }>${ "Approved" | translate("comments") }</option>
@@ -30,11 +25,16 @@
                     </p>
                     <p>
                         <label for="comments_per_page">${ "Comments Per Page" | translate("comments") }</label>
-                        <input class="text" type="text" name="comments_per_page" value="${ site.comments_per_page | escape }" size="2" id="comments_per_page">
+                        <input class="text digits" type="number" min="0" name="comments_per_page" value="${ site.comments_per_page | escape }" size="2" id="comments_per_page">
                     </p>
                     <p>
-                        <label for="auto_reload_comments">${ "Reload Comments Every %s Seconds" | translate("comments") | format("<input class=\"text digits\" type=\"text\" name=\"auto_reload_comments\" value=\"" ~ site.auto_reload_comments | escape ~ "\" size=\"2\" id=\"auto_reload_comments\">") }</label>
+                        <label for="enable_reload_comments">${ "Reload Comments" | translate("comments") }</label>
                         <input type="checkbox" class="checkbox" name="enable_reload_comments"${ site.enable_reload_comments | checked }> ${ "enabled" | translate("comments") }
+                    </p>
+                    <p>
+                        <label for="auto_reload_comments">${ "Reload interval" | translate("comments") }</label>
+                        <input class="text digits" type="number" min="10" max="3600" name="auto_reload_comments" value="${ site.auto_reload_comments | escape }" size="2" id="auto_reload_comments">
+                        <span class="sub">${ "(seconds)" | translate("comments") }</span>
                     </p>
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>

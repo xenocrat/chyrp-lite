@@ -64,7 +64,9 @@
         }
 
         public function set_feed_url($url, $post) {
-            if ($post->feather != "link") return;
+            if ($post->feather != "link")
+              return;
+
             return $url = $post->source;
         }
     }

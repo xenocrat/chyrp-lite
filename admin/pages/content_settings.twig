@@ -1,0 +1,77 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Content Settings" | translate }{% endblock %}
+
+{% block content %}
+            <form id="content_settings" class="split" action="{% admin "content_settings" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <fieldset>
+                    <p>
+                        <label for="posts_per_page">${ "Posts Per Page" | translate }</label>
+                        <input class="text digits" type="number" min="0" name="posts_per_page" value="${ site.posts_per_page | escape }" size="2" id="posts_per_page">
+                    </p>
+                    <p>
+                        <label for="feed_items">${ "Feed Posts Limit" | translate }</label>
+                        <input class="text digits" type="number" min="0" name="feed_items" value="${ site.feed_items | escape }" size="2" id="feed_items">
+                    </p>
+                    <p>
+                        <label for="feed_url">${ "Feed URL" | translate }</label>
+                        <input class="text" type="text" name="feed_url" value="${ site.feed_url | escape }" id="feed_url">
+                        <small>
+                            {% if site.clean_urls %}
+                            ${ "Allows you to set an alternative URL for <code>/feed/</code>." | translate }
+                            {% else %}
+                            ${ "Allows you to set an alternative URL for <code>/?feed</code>." | translate }
+                            {% endif %}
+                        </small>
+                    </p>
+                    <p>
+                        <label for="uploads_path">${ "Uploads Path" | translate }</label>
+                        <input class="text" type="text" name="uploads_path" value="${ site.uploads_path | escape }" id="uploads_path">
+                        <small>
+                            ${ "The directory to which files are uploaded, relative to your Chyrp install." | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="enable_trackbacking">${ "Enable Trackbacking" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="enable_trackbacking" id="enable_trackbacking"${ site.enable_trackbacking | checked }>
+                        <small>
+                            ${ "Trackbacking allows sites to notify you when they link to or reference your posts." | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="send_pingbacks">${ "Send Pingbacks" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="send_pingbacks" id="send_pingbacks"${ site.send_pingbacks | checked }>
+                        <small>
+                            ${ "Attempts to notify sites to which your posts link." | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="enable_xmlrpc">${ "Enable XML-RPC Support" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="enable_xmlrpc" id="enable_xmlrpc"${ site.enable_xmlrpc | checked }>
+                        <small>
+                            ${ "XML-RPC support allows you to create and edit content via remote access to your site." | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="enable_ajax">${ "Enable Inline Management" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="enable_ajax" id="enable_ajax"${ site.enable_ajax | checked }>
+                        <small>
+                            ${ "Ajax-powered inline editing of your blog content." | translate }
+                        </small>
+                    </p>
+                    <p>
+                        <label for="enable_emoji">${ "Enable Unicode Emoticons" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"${ site.enable_emoji | checked }>
+                        <small>
+                            ${ "Use Unicode Emoticons." | translate }
+                        </small>
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay">
+                            <img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }
+                        </button>
+                    </p>
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                </fieldset>
+            </form>
+{% endblock %}

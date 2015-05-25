@@ -78,6 +78,9 @@
             break;
 
         case "preview":
+            if (!$visitor->group->can("add_post") and !$visitor->group->can("add_draft") and !$visitor->group->can("add_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to preview content."));
+
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 break;
 
@@ -89,11 +92,11 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable extensions."));
 
             $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $info = YAML::load($dir."/".$_POST['check']."/info.yaml");
+            $info = include $dir."/".$_POST['check']."/info.php";
             fallback($info["confirm"], "");
 
             if (!empty($info["confirm"]))
-                echo __($info["confirm"], $_POST['check']);
+                echo $info["confirm"];
 
             break;
 
@@ -125,12 +128,12 @@
             if (file_exists($folder."/".$_POST["extension"]."/locale/".$config->locale.".mo"))
                 load_translator($_POST["extension"], $folder."/".$_POST["extension"]."/locale/".$config->locale.".mo");
 
-            $info = YAML::load($folder."/".$_POST["extension"]."/info.yaml");
+            $info = include $folder."/".$_POST["extension"]."/info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
             foreach ($info["notifications"] as &$notification)
-                $notification = addslashes(__($notification, $_POST["extension"]));
+                $notification = addslashes($notification);
 
             require $folder."/".$_POST["extension"]."/".$_POST["extension"].".php";
 
@@ -152,14 +155,12 @@
                 call_user_func(array($class_name, "__install"));
 
             $new = $config->$enabled_array;
-            array_push($new, $_POST["extension"]);
+            $new[] = $_POST["extension"];
             $config->set($enabled_array, $new);
 
             exit('{ "notifications": ['.
                  (!empty($info["notifications"]) ? '"'.implode('", "', $info["notifications"]).'"' : "").
                  '] }');
-
-            break;
 
         case "disable_module": case "disable_feather":
             $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;
@@ -174,19 +175,28 @@
                 ($type == "feather" and !feather_enabled($_POST['extension'])))
                 exit("{ \"notifications\": [] }");
 
+            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+
             $class_name = camelize($_POST["extension"]);
+
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), ($_POST['confirm'] == "1"));
 
-            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $config->set($enabled_array,
-                         array_diff($config->$enabled_array, array($_POST['extension'])));
+            $new = array();
+
+            foreach ($config->$enabled_array as $extension) {
+              if ($extension != $_POST['extension'])
+                $new[] = $extension;
+            }
+
+            $config->set($enabled_array, $new);
 
             exit('{ "notifications": [] }');
 
-            break;
-
         case "reorder_feathers":
+            if (!$visitor->group->can("toggle_extensions"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to reorder feathers."));
+
             $reorder = oneof(@$_POST['list'], $config->enabled_feathers);
             foreach ($reorder as &$value)
                 $value = preg_replace("/feathers\[([^\]]+)\]/", "\\1", $value);

@@ -54,6 +54,7 @@ $twig_filters = array(
     'pluralize' =>        'twig_pluralize_string_filter',
     'depluralize' =>      'twig_depluralize_string_filter',
     'sanitize' =>         'sanitize',
+    'sanitize_html' =>    'sanitize_html',
     'repeat' =>           'str_repeat',
 
     // array helpers
@@ -75,11 +76,13 @@ $twig_filters = array(
     // debugging
     'inspect' =>          'twig_inspect_filter',
 
+    // getters and setters
     'uploaded' =>         'uploaded',
     'fallback' =>         'oneof',
     'selected' =>         'twig_selected_filter',
     'checked' =>          'twig_checked_filter',
-    'option_selected' =>  'twig_option_selected_filter'
+    'option_selected' =>  'twig_option_selected_filter',
+    'gravatar' =>         'twig_get_gravatar'
 );
 
 
@@ -366,12 +369,12 @@ else {
 }
 
 function twig_translate_string_filter($string, $domain = "theme") {
-    $domain = ($domain == "theme" and ADMIN) ? "chyrp" : $domain ;
+    $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
     return __($string, $domain);
 }
 
 function twig_translate_plural_string_filter($single, $plural, $number, $domain = "theme") {
-    $domain = ($domain == "theme" and ADMIN) ? "chyrp" : $domain ;
+    $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
     return _p($single, $plural, $number, $domain);
 }
 
@@ -482,4 +485,8 @@ function twig_excerpt_filter($text, $length = 200, $ending = "...", $exact = fal
 function twig_sort_filter($array) {
     asort($array);
     return $array;
+}
+
+function twig_get_gravatar($email, $size = 80, $img = false) {
+    return get_gravatar($email, $size, 'mm', 'g', $img);
 }

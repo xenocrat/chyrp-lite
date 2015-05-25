@@ -2,10 +2,10 @@
     require_once INCLUDES_DIR."/class/Captcha.php";
     require_once "lib/recaptchalib.php";
 
-    class ReCaptcha extends Modules {
+    class Recaptcha extends Modules {
         public function __init() {
             global $captchaHooks;
-            $captchaHooks[] = "ReCaptchaCaptcha";
+            $captchaHooks[] = "RecaptchaCaptcha";
         }
 
         static function __install() {
@@ -44,7 +44,7 @@
 
     }
 
-    class ReCaptchaCaptcha implements Captcha {
+    class RecaptchaCaptcha implements Captcha {
         static function getCaptcha() {
             $public_key = Config::current()->module_recaptcha["public_key"];
 

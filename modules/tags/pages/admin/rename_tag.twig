@@ -3,17 +3,20 @@
 {% block title %}${ "Edit Tag" | translate("tags") }{% endblock %}
 
 {% block content %}
-            <h2>${ "Edit Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name) }</h2>
-            <form class="detail" action="{% admin "update_tag" %}" method="post" accept-charset="utf-8">
+            <h2>${ "Rename Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name) }</h2>
+            <form class="split" action="{% admin "update_tag" %}" method="post" accept-charset="utf-8">
                 <fieldset>
                     <p>
-                        <input type="text" name="name" value="${ tag.name | escape }" id="name" class="big" size="${ tag.name | length + 10 }">
-                        <button class="yay" name="delete">
-                            <img src="$theme_url/images/icons/success.svg" alt="delete"> ${ "Rename" | translate("tags") }
+                        <label for="name">${ "Name" | translate("tags") }</label>
+                        <input type="text" name="name" value="${ tag.name | escape }" id="name">
+                    </p>
+                    <p class="buttons">
+                        <button type="submit" class="yay">
+                            <img src="$theme_url/images/icons/success.svg" alt="success"> ${ "Rename" | translate("tags") }
                         </button>
                     </p>
                     <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
-                    <input type="hidden" name="original" value="${ tag.name | escape }" id="clean">
+                    <input type="hidden" name="original" value="${ tag.name | escape }" id="original">
                 </fieldset>
             </form>
 {% endblock %}

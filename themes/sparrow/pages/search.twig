@@ -1,0 +1,12 @@
+{% extends "layouts/default.twig" %}
+
+{% block content %}
+  {% if posts.paginated and search %}
+    <h3 role="status" class="filter">${ "Search results for &#8220;%s&#8221;" | translate | format(search | escape) }</h3>
+  {% endif %}
+  {% for post in posts.paginated %}
+{% include "feathers/" ~ post.feather ~ ".twig" %}
+  {% else %}
+    <h3 role="status" class="filter">${ "Your search did not return any results." | translate }</h3>
+  {% endfor %}
+{% endblock %}

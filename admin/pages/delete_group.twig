@@ -1,0 +1,54 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Delete Group?" | translate }{% endblock %}
+
+{% block content %}
+            <h1>${ "Delete Group?" | translate }</h1>
+            <p>
+                ${ "Are you sure you want to delete the &#8220;%s&#8221; group?" | translate | format(group.name | escape) }
+            </p>
+            <form class="delete split{% if group.id == visitor.group.id %} confirm{% endif %}" action="{% admin "destroy_group" %}" method="post" accept-charset="utf-8">
+                <fieldset>
+                    {% if group.users and groups %}
+                    <p>
+                        <label for="move_group">${ "Move members to:" | translate }</label>
+                        <select name="move_group" id="move_group">
+                            {% for group in groups %}
+                            <option value="$group.id"${ group.id | option_selected(site.default_group) }>$group.name</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    {% endif %}
+                    {% if group.id == site.default_group and groups %}
+                    <p>
+                        <label for="default_group">${ "New default group:" | translate }</label>
+                        <select name="default_group" id="default_group">
+                            {% for group in groups %}
+                            <option value="$group.id"${ group.id | option_selected(site.default_group) }>$group.name</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    {% endif %}
+                    {% if group.id == site.guest_group and groups %}
+                    <p>
+                        <label for="guest_group">${ "New &#8220;guest&#8221; group:" | translate }</label>
+                        <select name="guest_group" id="guest_group">
+                            {% for group in groups %}
+                            <option value="$group.id"${ group.id | option_selected(site.default_group) }>$group.name</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    {% endif %}
+                    <div class="confirmation">
+                        <button name="destroy" value="indubitably" class="boo">
+                            <img src="$theme_url/images/icons/delete.svg" alt="success">${ "Delete!" | translate }
+                        </button>
+                        <button name="destroy" value="bollocks" type="submit" class="yay">
+                            <img src="$theme_url/images/icons/cancel.svg" alt="success">${ "Cancel" | translate }
+                        </button>
+                    </div>
+                    <input type="hidden" name="id" value="$group.id" id="id">
+                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                </fieldset>
+            </form>
+{% endblock %}

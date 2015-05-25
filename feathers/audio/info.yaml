@@ -1,9 +1,0 @@
-name: Audio
-url: http://chyrplite.net/
-version: 1.0
-description: A feather for audio.
-author:
-  name: Daniel Pimley
-  url: http://pimley.net/
-plural: Audio
-uploader: true

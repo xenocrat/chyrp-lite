@@ -1,0 +1,103 @@
+{% extends "layout.twig" %}
+
+{% block title %}${ "Modules" | translate }{% endblock %}
+
+{% block content %}
+            <h2>${ "Modules" | translate }</h2>
+            <ul id="modules_enabled" class="extend modules">
+                <h5>${ "Enabled" | translate }</h5>
+                {% for safename, module in enabled_modules | items %}
+                <li class="module ${ module.classes | join(" ") }" id="module_$safename">
+                    <h3>
+                        <a class="emblem module_url" href="$module.url">
+                            <img src="$theme_url/images/icons/info.svg" alt="${ module.url | escape }">
+                        </a>
+                        $module.name {# translation is done in the controller #}
+                    </h3>
+                    {% if module.help %}
+                    <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
+                    {% endif %}
+                    <p class="module_description">
+                        $module.description {# translation is done in the controller #}
+                    </p>
+                    {% if module.conflicting_modules %}
+                    <p class="module_conflicts_message">
+                        ${ "This module conflicts with the following installed modules:" | translate }
+                    </p>
+                    <ol class="module_conflicts_list">
+                    {% for conflict in module.conflicting_modules %}
+                        <li class="$conflict">${ conflict | camelize }</li>
+                    {% endfor %}
+                    </ol>
+                    {% endif %}
+                    {% if module.dependencies_needed %}
+                    <p class="module_dependencies_message">
+                        ${ "This module requires the following modules to be enabled:" | translate }
+                    </p>
+                    <ol class="module_dependencies_list">
+                    {% for dependency in module.dependencies_needed %}
+                        <li class="$dependency">${ dependency | camelize }</li>
+                    {% endfor %}
+                    </ol>
+                    {% endif %}
+                    <div class="controls">
+                        <a class="button module_disabler" href="{% admin "disable&module="~safename %}">
+                            <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
+                        </a>
+                        <a class="button module_enabler" href="{% admin "enable&module="~safename %}">
+                            <img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <ul id="modules_disabled" class="extend modules">
+                <h5>${ "Disabled" | translate }</h5>
+                {% for safename, module in disabled_modules | items %}
+                <li class="module ${ module.classes | join(" ") }" id="module_$safename">
+                    <h3>
+                        <a class="emblem module_url" href="$module.url">
+                            <img src="$theme_url/images/icons/info.svg" alt="${ module.url | escape }">
+                        </a>
+                        $module.name {# translation is done in the controller #}
+                    </h3>
+                    {% if module.help %}
+                    <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
+                    {% endif %}
+                    <p class="module_description">
+                        $module.description {# translation is done in the controller #}
+                    </p>
+                    {% if module.conflicting_modules %}
+                    <p class="module_conflicts_message">
+                        ${ "This module conflicts with the following installed modules:" | translate }
+                    </p>
+                    <ol class="module_conflicts_list">
+                    {% for conflict in module.conflicting_modules %}
+                        <li class="$conflict">${ conflict | camelize }</li>
+                    {% endfor %}
+                    </ol>
+                    {% endif %}
+                    {% if module.dependencies_needed %}
+                    <p class="module_dependencies_message">
+                        ${ "This module requires the following modules to be enabled:" | translate }
+                    </p>
+                    <ol class="module_dependencies_list">
+                    {% for dependency in module.dependencies_needed %}
+                        <li class="$dependency">${ dependency | camelize }</li>
+                    {% endfor %}
+                    </ol>
+                    {% endif %}
+                    {% if not ( module.classes | join(" ") | contains("missing_dependency") ) %}
+                    <div class="controls">
+                        <a class="button module_disabler" href="{% admin "disable&module="~safename %}">
+                            <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
+                        </a>
+                        <a class="button module_enabler" href="{% admin "enable&module="~safename %}">
+                            <img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
+                        </a>
+                    </div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+{% endblock %}

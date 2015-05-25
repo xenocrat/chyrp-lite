@@ -20,9 +20,49 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Chyrp: <?php echo $title; ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title><?php echo $title; ?></title>
+        <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Regular.woff') format('woff'),
+                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Semibold.woff') format('woff'),
+                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Semibold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Italic.woff') format('woff'),
+                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                font-weight: bold;
+                font-style: italic;
+            }
+            *::-moz-selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            *::selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            html {
+                font-size: 16px;
+            }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
@@ -32,9 +72,10 @@
             }
             body {
                 font-size: 14px;
-                font-family: sans-serif;
-                color: #626262;
-                background: #e8e8e8;
+                font-family: "Open Sans webfont", sans-serif;
+                line-height: 1.5em;
+                color: #4a4747;
+                background: #efefef;
                 padding: 0em 0em 5em;
             }
             .window {
@@ -45,26 +86,33 @@
                 border-radius: 2em;
             }
             h1 {
-                color: #ccc;
-                font-size: 3em;
-                margin: .25em 0em .5em;
-                text-align: center;
+                font-size: 2em;
+                margin: 0.5em 0em;
+                text-align: left;
                 line-height: 1;
+            }
+            h1:first-child {
+                margin-top: 0em;
             }
             h2 {
                 font-size: 1.25em;
-                margin: 1em 0em 0em;
+                font-weight: bold;
+                margin: 0.75em 0em;
             }
             code {
-                color: #06B;
                 font-family: monospace;
+                font-style: normal;
                 word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
             }
             ul, ol {
-                margin: 1em 3em;
+                margin: 0em 0em 2em 2em;
+                list-style-position: inside;
             }
             ol.backtrace {
-                margin-top: .5em;
+                margin-top: 0.5em;
             }
             .footer {
                 color: #777;
@@ -77,46 +125,52 @@
                 font-size: 12px;
             }
             a:link, a:visited {
-                color: #6B0;
+                color: #4a4747;
             }
-            a:hover {
-                text-decoration: underline;
+            a:hover, a:focus {
+                color: #1e57ba;
             }
-            a.big {
-                background: #eee;
-                margin-top: 2em;
+            a.big,
+            button {
+                box-sizing: border-box;
                 display: block;
-                padding: .75em 1em;
-                color: #777;
-                text-shadow: #fff 1px 1px 0px;
-                text-decoration: none;
-                border-radius: .5em;
-            }
-            a.big:hover {
-                background: #f5f5f5;
-            }
-            a.big:active {
-                background: #e0e0e0;
-            }
-<?php if (!logged_in()): ?>
-            a.big.login {
-                float: right;
-                text-align: right;
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                background: #f5f5f5;
-                width: 42%;
-            }
-<?php endif; ?>
-            .clear {
                 clear: both;
+                font-family: inherit;
+                font-size: 1.25em;
+                text-align: center;
+                color: #4a4747;
+                text-decoration: none;
+                line-height: 1.25em;
+                margin: 0.75em 0em;
+                padding: 0.4em 0.6em;
+                background-color: #f2fbff;
+                border: 1px solid #b8cdd9;
+                border-radius: 0.3em;
+                cursor: pointer;
+                text-decoration: none;
+            }
+            button {
+                width: 100%;
+            }
+            a.big:last-child,
+            button:last-child {
+                margin-bottom: 0em;
+            }
+            a.big:hover,
+            button:hover,
+            a.big:focus,
+            button:focus,
+            a.big:active,
+            button:active {
+                border-color: #1e57ba;
+                outline: none;
             }
         </style>
     </head>
-    <body>
+    <body role="document">
         <div class="window">
             <h1><?php echo $title; ?></h1>
-            <div class="message">
+            <div role="alert" class="message">
                 <?php echo $body; ?>
             <?php if (!empty($backtrace)): ?>
                 <h2><?php echo __("Backtrace"); ?></h2>
@@ -126,15 +180,10 @@
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
-                <div class="clear"></div>
             <?php if (class_exists("Route") and !logged_in() and $body != __("Route was initiated without a Controller.")): ?>
-                <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log In"); ?> &rarr;</a>
+                <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
-                <div class="clear last"></div>
             </div>
         </div>
-    <?php if (defined("CHYRP_VERSION")): ?>
-        <p class="footer">Chyrp Lite <?php echo CHYRP_VERSION; ?> &copy; Chyrp Team <?php echo date("Y"); ?></p>
-    <?php endif; ?>
     </body>
 </html>

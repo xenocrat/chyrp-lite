@@ -10,24 +10,32 @@
 
     header("Content-type: text/html; charset=UTF-8");
 
-    define('DEBUG',        true);
-    define('CHYRP_VERSION', "2015.03.15");
-    define('CACHE_TWIG',   false);
-    define('JAVASCRIPT',   false);
-    define('ADMIN',        false);
-    define('AJAX',         false);
-    define('XML_RPC',      false);
-    define('TRACKBACK',    false);
-    define('UPGRADING',    true);
-    define('INSTALLING',   false);
-    define('TESTER',       true);
-    define('INDEX',        false);
-    define('MAIN_DIR',     dirname(__FILE__));
-    define('INCLUDES_DIR', dirname(__FILE__)."/includes");
-    define('MODULES_DIR',  MAIN_DIR."/modules");
-    define('FEATHERS_DIR', MAIN_DIR."/feathers");
-    define('THEMES_DIR',   MAIN_DIR."/themes");
-    define('USE_ZLIB',     true);
+    define('DEBUG',         true);
+    define('CHYRP_VERSION', "2015.05.25");
+    define('CACHE_TWIG',    false);
+    define('JAVASCRIPT',    false);
+    define('ADMIN',         false);
+    define('AJAX',          false);
+    define('XML_RPC',       false);
+    define('TRACKBACK',     false);
+    define('UPGRADING',     true);
+    define('INSTALLING',    false);
+    define('TESTER',        true);
+    define('INDEX',         false);
+    define('MAIN_DIR',      dirname(__FILE__));
+    define('INCLUDES_DIR',  dirname(__FILE__)."/includes");
+    define('MODULES_DIR',   MAIN_DIR."/modules");
+    define('FEATHERS_DIR',  MAIN_DIR."/feathers");
+    define('THEMES_DIR',    MAIN_DIR."/themes");
+    define('USE_ZLIB',      true);
+
+    # Constant: JSON_PRETTY_PRINT
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
+
+    # Constant: JSON_UNESCAPED_SLASHES
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_UNESCAPED_SLASHES')) define('JSON_UNESCAPED_SLASHES', 0);
 
     if (!AJAX and
         extension_loaded("zlib") and
@@ -45,6 +53,9 @@
      * Returns what config file their install is set up for.
      */
     function config_file() {
+        if (file_exists(INCLUDES_DIR."/config.json.php"))
+            return INCLUDES_DIR."/config.json.php";
+
         if (file_exists(INCLUDES_DIR."/config.yaml.php"))
             return INCLUDES_DIR."/config.yaml.php";
 
@@ -82,8 +93,16 @@
         return (basename(config_file()) != "config.php" and basename(database_file()) != "database.php") or !database_file();
     }
 
+    /**
+     * Function: using_json
+     * Are they using JSON config storage?
+     */
+    function using_json() {
+        return file_exists(INCLUDES_DIR."/config.json.php");
+    }
+
     # Evaluate the code in their config files, but with the classes renamed, so we can safely retrieve the values.
-    if (!using_yaml()) {
+    if (!using_json() and !using_yaml()) {
         eval(str_replace(array("<?php", "?>", "Config"),
                          array("", "", "OldConfig"),
                          file_get_contents(config_file())));
@@ -125,6 +144,10 @@
         static $yaml = array("config" => array(),
                              "database" => array());
 
+        # Variable: $json
+        # Holds all of the JSON settings as a $key => $val array.
+        static $json = array();
+
         /**
          * Function: get
          * Returns a config setting.
@@ -133,7 +156,11 @@
          *     $setting - The setting to return.
          */
         static function get($setting) {
-            return (isset(Config::$yaml["config"][$setting])) ? Config::$yaml["config"][$setting] : false ;
+            if (using_json()) {
+                return (isset(Config::$json[$setting])) ? Config::$json[$setting] : false ;
+            } else {
+                return (isset(Config::$yaml["config"][$setting])) ? Config::$yaml["config"][$setting] : false ;
+            }
         }
 
         /**
@@ -151,13 +178,19 @@
             if (!isset($message))
                 $message = _f("Setting %s to %s...", array($setting, normalize(print_r($value, true))));
 
-            Config::$yaml["config"][$setting] = $value;
+            if (using_json()) {
+                Config::$json[$setting] = $value;
+                $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-            $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                echo $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+            } else {
+                Config::$yaml["config"][$setting] = $value;
+                $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                $dump = $protection.YAML::dump(Config::$yaml["config"]);
 
-            $dump = $protection.YAML::dump(Config::$yaml["config"]);
-
-            echo $message.test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+                echo $message.test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+            }
         }
 
         /**
@@ -168,7 +201,11 @@
          *     $setting - Name of the config to check.
          */
         static function check($setting) {
-            return (isset(Config::$yaml["config"][$setting]));
+            if (using_json()) {
+                return (isset(Config::$json[$setting]));
+            } else {
+                return (isset(Config::$yaml["config"][$setting]));
+            }
         }
 
         /**
@@ -198,35 +235,40 @@
         static function remove($setting) {
             if (!self::check($setting)) return;
 
-            unset(Config::$yaml["config"][$setting]);
+            if (using_json()) {
+                unset(Config::$json[$setting]);
+                $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-            $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                echo _f("Removing %s setting...", array($setting)).
+                     test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+            } else {
+                unset(Config::$yaml["config"][$setting]);
+                $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+                $dump = $protection.YAML::dump(Config::$yaml["config"]);
 
-            $dump = $protection.YAML::dump(Config::$yaml["config"]);
-
-            echo _f("Removing %s setting...", array($setting)).
-                 test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+                echo _f("Removing %s setting...", array($setting)).
+                     test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+            }
         }
     }
 
-    if (using_yaml()) {
+    if (using_json()) {
+        Config::$json = json_decode(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(config_file())), true);
+    } elseif (using_yaml()) {
         Config::$yaml["config"] = YAML::load(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(config_file())));
-
         if (database_file())
             Config::$yaml["database"] = YAML::load(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(database_file())));
         else
             Config::$yaml["database"] = oneof(@Config::$yaml["config"]["sql"], array());
     } else {
         # $config and $sql here are loaded from the eval()'s above.
-
         foreach ($config as $name => $val)
             Config::$yaml["config"][$name] = $val;
 
         foreach ($sql as $name => $val)
             Config::$yaml["database"][$name] = $val;
     }
-
-    load_translator("chyrp", INCLUDES_DIR."/locale/".Config::get("locale").".mo");
 
     /**
      * Function: test
@@ -251,6 +293,9 @@
         else
             return " <span class=\"boo\">".__("failed!")."</span>\n".$info;
     }
+
+    # Load the translator
+    load_translator("chyrp", INCLUDES_DIR."/locale/".Config::get("locale").".mo");
 
     #---------------------------------------------
     # Upgrading Actions
@@ -372,18 +417,18 @@
      * Updates the PHP protection code in the config file.
      */
     function update_protection() {
-        if (!file_exists(INCLUDES_DIR."/config.yaml.php") or
-            substr_count(file_get_contents(INCLUDES_DIR."/config.yaml.php"),
+        if (!file_exists(INCLUDES_DIR."/config.json.php") or
+            substr_count(file_get_contents(INCLUDES_DIR."/config.json.php"),
                          "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>"))
             return;
 
-        $contents = file_get_contents(INCLUDES_DIR."/config.yaml.php");
+        $contents = file_get_contents(INCLUDES_DIR."/config.json.php");
         $new_error = preg_replace("/<\?php (.+) \?>/",
                                   "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>",
                                   $contents);
 
-        echo __("Updating protection code in config.yaml.php...").
-             test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $new_error), __("Try CHMODding the file to 777."));
+        echo __("Updating protection code in config.json.php...").
+             test(@file_put_contents(INCLUDES_DIR."/config.json.php", $new_error), __("Try CHMODding the file to 777."));
     }
 
     /**
@@ -578,7 +623,7 @@
     function add_sessions_table() {
         if (SQL::current()->query("SELECT * FROM __sessions")) return;
 
-        echo __("Creating `sessions` table...").
+        echo __("Creating ‘sessions’ table...").
              test(SQL::current()->query("CREATE TABLE __sessions (
                                              id VARCHAR(40) DEFAULT '',
                                              data LONGTEXT,
@@ -719,9 +764,9 @@
         if ($column->fetchObject()->Type == "varchar(32)")
             return;
 
-        echo __("Updating `status` column on `posts` table...")."\n";
+        echo __("Updating ‘status’ column on ‘posts’ table...")."\n";
 
-        echo " - ".__("Backing up `posts` table...").
+        echo " - ".__("Backing up ‘posts’ table...").
              test($backup = $sql->select("posts"));
 
         if (!$backup)
@@ -729,13 +774,13 @@
 
         $backups = $backup->fetchAll();
 
-        echo " - ".__("Dropping `posts` table...").
+        echo " - ".__("Dropping ‘posts’ table...").
              test($drop = $sql->query("DROP TABLE __posts"));
 
         if (!$drop)
             return;
 
-        echo " - ".__("Creating `posts` table...").
+        echo " - ".__("Creating ‘posts’ table...").
              test($create = $sql->query("CREATE TABLE IF NOT EXISTS __posts (
                                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                              xml LONGTEXT,
@@ -776,7 +821,7 @@
         if ($sql->select("post_attributes"))
             return;
 
-        echo __("Creating `post_attributes` table...").
+        echo __("Creating ‘post_attributes’ table...").
              test($sql->query("CREATE TABLE __post_attributes (
                                    post_id INTEGER NOT NULL ,
                                    name VARCHAR(100) DEFAULT '',
@@ -833,9 +878,9 @@
         }
 
         if (!in_array(false, $results)) {
-            echo __("Removing `xml` column from `posts` table...")."\n";
+            echo __("Removing ‘xml’ column from ‘posts’ table...")."\n";
 
-            echo " - ".__("Backing up `posts` table...").
+            echo " - ".__("Backing up ‘posts’ table...").
                  test($backup = $sql->select("posts"));
 
             if (!$backup)
@@ -843,13 +888,13 @@
 
             $backups = $backup->fetchAll();
 
-            echo " - ".__("Dropping `posts` table...").
+            echo " - ".__("Dropping ‘posts’ table...").
                  test($drop = $sql->query("DROP TABLE __posts"));
 
             if (!$drop)
                 return;
 
-            echo " - ".__("Creating `posts` table...").
+            echo " - ".__("Creating ‘posts’ table...").
                  test($create = $sql->query("CREATE TABLE IF NOT EXISTS __posts (
                                                  id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                                  feather VARCHAR(32) DEFAULT '',
@@ -897,10 +942,10 @@
 
         $backup = $permissions->fetchAll();
 
-        echo __("Dropping `permissions` table...").
+        echo __("Dropping ‘permissions’ table...").
              test($sql->query("DROP TABLE __permissions"));
 
-        echo __("Creating `permissions` table...").
+        echo __("Creating ‘permissions’ table...").
              test($sql->query("CREATE TABLE __permissions (
                                    id VARCHAR(100) DEFAULT '',
                                    name VARCHAR(100) DEFAULT '',
@@ -909,7 +954,7 @@
                                ) DEFAULT CHARSET=utf8"));
 
         foreach ($backup as $permission)
-            echo _f("Restoring permission `%s`...", array($permission["name"])).
+            echo _f("Restoring permission ‘%s’...", array($permission["name"])).
                  test($sql->insert("permissions",
                                    array("id" => $permission["id"],
                                          "name" => $permission["name"],
@@ -941,10 +986,10 @@
             $permissions[$group["id"]] = empty($group["permissions"]) ? array() : YAML::load($group["permissions"]) ;
         }
 
-        echo __("Dropping `groups` table...").
+        echo __("Dropping ‘groups’ table...").
              test($sql->query("DROP TABLE __groups"));
 
-        echo __("Creating `groups` table...").
+        echo __("Creating ‘groups’ table...").
              test($sql->query("CREATE TABLE __groups (
                                    id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                    name VARCHAR(100) DEFAULT '',
@@ -952,14 +997,14 @@
                                ) DEFAULT CHARSET=utf8"));
 
         foreach ($names as $id => $name)
-            echo _f("Restoring group `%s`...", array($name)).
+            echo _f("Restoring group ‘%s’...", array($name)).
                  test($sql->insert("groups",
                                    array("id" => $id,
                                         "name" => $name)));
 
         foreach ($permissions as $id => $permissions)
             foreach ($permissions as $permission)
-                echo _f("Restoring permission `%s` on group `%s`...", array($permission, $names[$id])).
+                echo _f("Restoring permission ‘%s’ on group ‘%s’...", array($permission, $names[$id])).
                      test($sql->insert("permissions",
                                        array("id" => $permission,
                                              "name" => $sql->select("permissions", "name", array("id" => $permission))->fetchColumn(),
@@ -972,20 +1017,24 @@
      */
     function remove_old_files() {
         if (file_exists(INCLUDES_DIR."/config.php"))
-            echo __("Removing `includes/config.php` file...").
+            echo __("Removing ‘includes/config.php’...").
                  test(@unlink(INCLUDES_DIR."/config.php"));
 
         if (file_exists(INCLUDES_DIR."/database.php"))
-            echo __("Removing `includes/database.php` file...").
+            echo __("Removing ‘includes/database.php’...").
                  test(@unlink(INCLUDES_DIR."/database.php"));
 
         if (file_exists(INCLUDES_DIR."/rss.php"))
-            echo __("Removing `includes/rss.php` file...").
+            echo __("Removing ‘includes/rss.php’...").
                  test(@unlink(INCLUDES_DIR."/rss.php"));
 
         if (file_exists(INCLUDES_DIR."/bookmarklet.php"))
-            echo __("Removing `includes/bookmarklet.php` file...").
+            echo __("Removing ‘includes/bookmarklet.php’...").
                  test(@unlink(INCLUDES_DIR."/bookmarklet.php"));
+
+        if (file_exists(INCLUDES_DIR."/config.yaml.php") and file_exists(INCLUDES_DIR."/config.json.php"))
+            echo __("Removing ‘includes/config.yaml.php’...").
+                 test(@unlink(INCLUDES_DIR."/config.yaml.php"));
     }
 
     /**
@@ -1016,21 +1065,21 @@
         if ($column->fetchObject()->Type == "boolean")
             return;
 
-        echo __("Updating `approved` column on `users` table...")."\n";
+        echo __("Updating ‘approved’ column on ‘users’ table...")."\n";
 
-        echo " - ".__("Backing up `users` table...").
+        echo " - ".__("Backing up ‘users’ table...").
              test($backup = $sql->select("users"));
 
         if (!$backup) return;
 
         $backups = $backup->fetchAll();
 
-        echo " - ".__("Dropping `users` table...").
+        echo " - ".__("Dropping ‘users’ table...").
              test($drop = $sql->query("DROP TABLE __users"));
 
         if (!$drop) return;
 
-        echo " - ".__("Creating `users` table...").
+        echo " - ".__("Creating ‘users’ table...").
              test($create = $sql->query("CREATE TABLE IF NOT EXISTS `__users` (
                                             `id` int(11) NOT NULL AUTO_INCREMENT,
                                             `login` varchar(64) DEFAULT '',
@@ -1105,9 +1154,9 @@
         if ($column->fetchObject()->Type == "varchar(128)")
             return;
 
-        echo __("Updating `password` column on `users` table...")."\n";
+        echo __("Updating ‘password’ column on ‘users’ table...")."\n";
 
-        echo " - ".__("Backing up `users` table...").
+        echo " - ".__("Backing up ‘users’ table...").
              test($backup = $sql->select("users"));
 
         if (!$backup)
@@ -1115,13 +1164,13 @@
 
         $backups = $backup->fetchAll();
 
-        echo " - ".__("Dropping `users` table...").
+        echo " - ".__("Dropping ‘users’ table...").
              test($drop = $sql->query("DROP TABLE __users"));
 
         if (!$drop)
             return;
 
-        echo " - ".__("Creating `users` table...").
+        echo " - ".__("Creating ‘users’ table...").
              test($create = $sql->query("CREATE TABLE IF NOT EXISTS `__users` (
                                             `id` int(11) NOT NULL AUTO_INCREMENT,
                                             `login` varchar(64) DEFAULT '',
@@ -1160,18 +1209,157 @@
      */
     function recaptcha_to_captcha() {
         if (Config::check("enable_recaptcha")) {
-            Config::set("enable_captcha", Config::get("enable_recaptcha"), "Migrating captcha setting...");
+            Config::set("enable_captcha", Config::get("enable_recaptcha"), __("Migrating captcha setting..."));
             Config::remove("enable_recaptcha");
         }
     }
 
+    /**
+     * Function: config_yaml_to_json
+     * Migrates configuration file format from YAML to JSON.
+     *
+     * Versions: 2015.03.15 => 2015.05.25
+     */
+    function config_yaml_to_json() {
+        if (!using_json()) {
+            Config::$json = Config::$yaml["config"];
+
+            # Rebuild enabled_modules as a simple array
+            Config::$json["enabled_modules"] = array();
+
+            foreach (Config::$yaml["config"]["enabled_modules"] as $module)
+                Config::$json["enabled_modules"][] = $module;
+
+            # Rebuild enabled_feathers as a simple array
+            Config::$json["enabled_feathers"] = array();
+
+            foreach (Config::$yaml["config"]["enabled_feathers"] as $feather)
+                Config::$json["enabled_feathers"][] = $feather;
+
+            # Write JSON to file
+            $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+            $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            echo __("Converting config to JSON...").
+                $message.test(!json_last_error());
+
+            echo __("Writing ‘includes/config.json.php’...").
+                $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+        }
+    }
+
+    /**
+     * Function: remove_admin_theme
+     * Removes the admin_theme setting since this feature has been removed.
+     *
+     * Versions: 2015.03.15 => 2015.05.25
+     */
+    function remove_admin_theme() {
+        if (Config::check("admin_theme"))
+            Config::remove("admin_theme");
+    }
+
+    /**
+     * Function: uploader_serialize_to_json
+     * Migrates Uploader Feather from PHP's serializer to JSON.
+     *
+     * Versions: 2015.03.15 => 2015.05.25
+     */
+    function uploader_serialize_to_json() {
+        $sql = SQL::current();
+        if (!$posts = $sql->select("posts", "posts.id", array("posts.feather" => "uploader")))
+            return;
+
+        $sql->error = "";
+        $json_error = 0;
+        $serialize_count = 0;
+        $conversion = false;
+
+        foreach($posts->fetchAll() as $post) {
+            if (!$query = $sql->select("post_attributes", "*", array("name" => "filenames", "post_id" => $post["id"])))
+                continue;
+
+            $attr = $query->fetchObject();
+
+            if (!json_decode($attr->value)) {
+                $serialize_count++;
+
+                $serialized = json_encode(unserialize($attr->value), JSON_UNESCAPED_SLASHES);
+
+                if (!$serialized)
+                    $json_error++;
+
+                $sql->update("post_attributes",
+                             array("name" => "filenames",
+                                   "post_id" => $attr->post_id),
+                             array("value" => $serialized));
+            }
+        }
+
+        if (empty($sql->error) and empty($json_error))
+          $conversion = true;
+
+        if ($serialize_count > 0)
+          echo __("Updating serialization of Uploader Feather...", "tags").
+            test($conversion);
+    }
+
+    /**
+     * Function: theme_sanity_check
+     * Resets the blog theme to Blossom if the config setting is invalid.
+     *
+     * Versions: 2015.03.15 => 2015.05.25
+     */
+    function theme_sanity_check() {
+        if (!file_exists(THEMES_DIR."/".Config::get("theme")."/info.php"))
+            Config::set("theme", "blossom", __("Resetting theme to Blossom..."));
+    }
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title><?php echo __("Chyrp Upgrader"); ?></title>
+        <title><?php echo __("Chyrp Lite Upgrader"); ?></title>
+        <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css" media="screen">
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Regular.woff') format('woff'),
+                     url('./fonts/OpenSans-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Semibold.woff') format('woff'),
+                     url('./fonts/OpenSans-Semibold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Italic.woff') format('woff'),
+                     url('./fonts/OpenSans-Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                     url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                font-weight: bold;
+                font-style: italic;
+            }
+            *::-moz-selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            *::selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            html {
+                font-size: 16px;
+            }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
@@ -1181,9 +1369,10 @@
             }
             body {
                 font-size: 14px;
-                font-family: sans-serif;
-                color: #626262;
-                background: #e8e8e8;
+                font-family: "Open Sans webfont", sans-serif;
+                line-height: 1.5em;
+                color: #4a4747;
+                background: #efefef;
                 padding: 0em 0em 5em;
             }
             .window {
@@ -1194,83 +1383,91 @@
                 border-radius: 2em;
             }
             h1 {
-                color: #ccc;
-                font-size: 3em;
-                margin: 1em 0em .5em;
+                font-size: 2em;
+                margin: 0.5em 0em;
                 text-align: center;
-                line-height: 1;
+                line-height: 1em;
             }
-            h1.first {
-                margin-top: .25em;
-            }
-            h1.what_now {
-                margin-top: .5em;
+            h1:first-child {
+                margin-top: 0em;
             }
             code {
-                color: #06B;
                 font-family: monospace;
+                font-style: normal;
                 word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
             }
             a:link, a:visited {
-                color: #6B0;
+                color: #4a4747;
+            }
+            a:hover, a:focus {
+                color: #1e57ba;
             }
             pre.pane {
                 height: 15em;
                 overflow-y: auto;
-                margin: -2.68em -2.68em 4em;
-                padding: 2.5em;
-                background: #333;
+                margin: 1em -2em 1em;
+                padding: 2em;
+                background: #4a4747;
                 color: #fff;
-                border-top-left-radius: 2.5em;
-                border-top-right-radius: 2.5em;
             }
-            span.yay { color: #0f0; }
-            span.boo { color: #f00; }
+            span.yay { color: #76b362; }
+            span.boo { color: #d94c4c; }
             a.big,
             button {
-                background: #eee;
+                box-sizing: border-box;
                 display: block;
+                font-family: inherit;
+                font-size: 1.25em;
                 text-align: center;
-                margin-top: 2em;
-                padding: .75em 1em;
-                color: #777;
-                text-shadow: #fff .1em .1em 0em;
-                font: 1em sans-serif;
+                color: #4a4747;
                 text-decoration: none;
-                border: 0em;
+                line-height: 1.25em;
+                margin: 0.75em 0em;
+                padding: 0.4em 0.6em;
+                background-color: #f2fbff;
+                border: 1px solid #b8cdd9;
+                border-radius: 0.3em;
                 cursor: pointer;
-                border-radius: .5em;
+                text-decoration: none;
             }
             button {
                 width: 100%;
             }
-            a.big:hover,
-            button:hover {
-                background: #f5f5f5;
+            a.big:last-child,
+            button:last-child {
+                margin-bottom: 0em;
             }
+            a.big:hover,
+            button:hover,
+            a.big:focus,
+            button:focus,
             a.big:active,
             button:active {
-                background: #e0e0e0;
+                border-color: #1e57ba;
+                outline: none;
             }
             ul, ol {
-                margin: 0em 0em 1em 2em;
+                margin: 0em 0em 2em 2em;
+                list-style-position: inside;
             }
             li {
-                margin-bottom: .5em;
-            }
-            ul {
-                margin-bottom: 1.5em;
+                margin-bottom: 1em;
             }
             p {
                 margin-bottom: 1em;
             }
         </style>
     </head>
-    <body>
+    <body role="document">
         <div class="window">
 <?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or isset($_GET['task']) == "upgrade") : ?>
-            <pre class="pane"><?php
+            <pre role="status" class="pane"><?php
+
         # Begin with file/config upgrade tasks.
+
         fix_htaccess();
 
         remove_beginning_slash_from_post_url();
@@ -1290,8 +1487,7 @@
         Config::fallback("sql", Config::$yaml["database"]);
         Config::fallback("timezone", "America/New_York");
 
-        // Added in 2.5
-        Config::fallback("admin_theme", "default");
+        # Added in 2.5
         Config::fallback("email_activation", true);
         Config::fallback("check_updates", true);
         Config::fallback("enable_emoji", true);
@@ -1299,7 +1495,7 @@
         Config::remove("rss_posts");
         Config::remove("time_offset");
 
-        // Chyrp Lite
+        # Chyrp Lite
         Config::fallback("check_updates_last", 0);
         Config::fallback("cookies_notification", true);
         Config::fallback("enable_captcha", false);
@@ -1320,11 +1516,18 @@
         $sql = SQL::current();
 
         # Set the SQL info.
-        foreach (Config::$yaml["config"]["sql"] as $name => $value)
-            $sql->$name = $value;
+        if (using_json()) {
+            foreach (Config::$json["sql"] as $name => $value)
+                $sql->$name = $value;
+        } else {
+            foreach (Config::$yaml["config"]["sql"] as $name => $value)
+                $sql->$name = $value;
+        }
 
         # Initialize connection to SQL server.
         $sql->connect();
+
+        # Perform core upgrade tasks.
 
         tweets_to_posts();
 
@@ -1354,6 +1557,8 @@
 
         group_permissions_to_db();
 
+        config_yaml_to_json();
+
         remove_old_files();
 
         add_user_approved_column();
@@ -1366,12 +1571,20 @@
 
         recaptcha_to_captcha();
 
+        remove_admin_theme();
+
+        uploader_serialize_to_json();
+
+        # Perform tidy up tasks.
+
+        theme_sanity_check();
+
         # Perform Module/Feather upgrades.
 
         foreach ((array) Config::get("enabled_modules") as $module)
             if (file_exists(MAIN_DIR."/modules/".$module."/upgrades.php")) {
                 ob_start();
-                echo $begin = _f("Calling <span class=\"yay\">%s</span> Module's upgrader...", array($module))."\n";
+                echo $begin = _f("Calling ‘%s’ module's upgrader...", array($module))."\n";
                 require MAIN_DIR."/modules/".$module."/upgrades.php";
                 $buf = ob_get_contents();
                 if (ob_get_contents() == $begin)
@@ -1383,7 +1596,7 @@
         foreach ((array) Config::get("enabled_feathers") as $feather)
             if (file_exists(MAIN_DIR."/feathers/".$feather."/upgrades.php")) {
                 ob_start();
-                echo $begin = _f("Calling <span class=\"yay\">%s</span> Feather's upgrader...", array($feather))."\n";
+                echo $begin = _f("Calling ‘%s’ feather's upgrader...", array($feather))."\n";
                 require MAIN_DIR."/feathers/".$feather."/upgrades.php";
                 $buf = ob_get_contents();
                 if (ob_get_contents() == $begin)
@@ -1394,30 +1607,23 @@
 ?>
 
 <?php echo __("Done!"); ?>
-
 </pre>
             <h1 class="what_now"><?php echo __("What now?"); ?></h1>
             <ol>
                 <li><?php echo __("Look through the results up there for any failed tasks."); ?></li>
                 <li><?php echo __("If any of your Modules or Feathers have new versions available for this release, check if an <code>upgrades.php</code> file exists in their main directory. If that file exists, run this upgrader again after enabling the Module or Feather and it will run the upgrade tasks."); ?></li>
-                <li><?php echo __("When you are done, you can delete this file. It doesn't pose any real threat on its own, but you should delete it anyway, just to be sure."); ?></li>
+                <li><?php echo __("When you are done, you can delete this file. It shouldn't pose a threat, but you should delete it anyway, just to be safe and tidy."); ?></li>
             </ol>
-            <h1 class="tips"><?php echo __("Tips"); ?></h1>
-            <ul>
-                <li><?php echo __("If the admin area looks weird, try clearing your cache."); ?></li>
-                <li><?php echo __("As of v2.0, Chyrp uses time zones to determine timestamps. Please set your installation to the correct timezone at <a href=\"admin/index.php?action=general_settings\">General Settings</a>."); ?></li>
-                <li><?php echo __("Check the group permissions &ndash; they might have changed, and certain Admin functionality would be disabled until you enabled the permissions for the particular groups. <a href=\"admin/index.php?action=manage_groups\">Manage Groups &rarr;</a>"); ?></li>
-            </ul>
             <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("All done!"); ?></a>
 <?php else: ?>
-            <h1 class="first"><?php echo __("Halt!"); ?></h1>
-            <p><?php echo __("That button may look tempting, but please take these preemptive measures before indulging:"); ?></p>
+            <h1><?php echo __("Halt!"); ?></h1>
+            <p><?php echo __("Please take these preemptive measures before proceeding:"); ?></p>
             <ol>
-                <li><?php echo __("<strong>Make a backup of your installation.</strong> You never know."); ?></li>
+                <li><?php echo __("<strong>Make a backup of your installation and database.</strong>"); ?></li>
                 <li><?php echo __("Disable any third-party Modules and Feathers."); ?></li>
-                <li><?php echo __("Ensure that the Chyrp installation directory is writable by the server."); ?></li>
+                <li><?php echo __("Ensure Chyrp Lite's directory is writable by the server."); ?></li>
             </ol>
-            <p><?php echo __("If any of the upgrade processes fail, you can safely keep refreshing &ndash; we will only attempt to redo tasks that are not already completed."); ?></p>
+            <p><?php echo __("If any of the upgrade tasks fail, you can safely refresh and retry."); ?></p>
             <form action="upgrade.php" method="post">
                 <button type="submit" name="upgrade" value="yes"><?php echo __("Upgrade me!"); ?></button>
             </form>

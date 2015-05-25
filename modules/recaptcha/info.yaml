@@ -1,9 +1,0 @@
-name: reCAPTCHA
-url: http://chyrplite.net/
-version: 1.2
-description: Use reCAPTCHA to prevent spam.
-author:
-  name: Chyrp Team
-  url: http://chyrp.net/
-notifications:
-  - Please remember to set the public and private keys on the ReCAPTCHA settings page.

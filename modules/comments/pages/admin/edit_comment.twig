@@ -13,15 +13,15 @@
                     <div id="more_options" class="more_options">
                         <p class="more_options_option">
                             <label for="author">${ "Author" | translate }</label>
-                            <input class="text" type="text" name="author" value="${ comment.author | escape }" id="author">
+                            <input class="text" type="text" name="author" value="${ comment.author | escape(true) }" id="author">
                         </p>
                         <p class="more_options_option">
                             <label for="author_email">${ "Author E-Mail" | translate }</label>
-                            <input class="text" type="text" name="author_email" value="${ comment.author_email | escape }" id="author_email">
+                            <input class="text" type="text" name="author_email" value="${ comment.author_email | escape(true) }" id="author_email">
                         </p>
                         <p class="more_options_option">
                             <label for="author_url">${ "Author Website" | translate }</label>
-                            <input class="text" type="text" name="author_url" value="${ comment.author_url | escape }" id="author_url">
+                            <input class="text" type="text" name="author_url" value="${ comment.author_url | escape(true) }" id="author_url">
                         </p>
                         {% if visitor.group.can("edit_comment") %} {# If they can edit all comments, not just this one. #}
                         <p class="more_options_option">

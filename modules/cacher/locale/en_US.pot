@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-03-15 09:20+0000\n"
+"POT-Creation-Date: 2015-05-25 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -25,15 +25,15 @@ msgstr ""
 msgid "Cache cleared."
 msgstr ""
 
-#: modules/cacher/info.yaml:1
+#: modules/cacher/info.php:3
 msgid "Cacher"
 msgstr ""
 
-#: modules/cacher/info.yaml:4
+#: modules/cacher/info.php:6
 msgid "Caches pages, drastically reducing server load."
 msgstr ""
 
-#: modules/cacher/info.yaml:6
+#: modules/cacher/info.php:11
 msgid "Please make sure that /includes/caches is writable by the server. If you are not certain whether it is or not, CHMOD it to 777."
 msgstr ""
 
@@ -50,16 +50,16 @@ msgstr ""
 msgid "(seconds)"
 msgstr ""
 
-#: modules/cacher/pages/admin/cache_settings.twig:14
+#: modules/cacher/pages/admin/cache_settings.twig:17
 msgid "Exclude URLs"
 msgstr ""
 
-#: modules/cacher/pages/admin/cache_settings.twig:15
-#: modules/cacher/pages/admin/cache_settings.twig:20
+#: modules/cacher/pages/admin/cache_settings.twig:18
+#: modules/cacher/pages/admin/cache_settings.twig:22
 msgid "(comma separated)"
 msgstr ""
 
-#: modules/cacher/pages/admin/cache_settings.twig:19
+#: modules/cacher/pages/admin/cache_settings.twig:21
 msgid "Memcache Servers"
 msgstr ""
 

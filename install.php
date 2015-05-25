@@ -43,6 +43,12 @@
     $default_timezone = oneof(ini_get("date.timezone"), "Atlantic/Reykjavik");
     set_timezone($default_timezone);
 
+    # Ask PHP for the default locale and try to load an appropriate translator
+    $default_language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
+
+    if (file_exists(INCLUDES_DIR."/locale/".$default_language.".mo"))
+        load_translator("chyrp", INCLUDES_DIR."/locale/".$default_language.".mo");
+
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
     sanitize_input($_POST);
@@ -65,15 +71,15 @@
     $errors = array();
     $installed = false;
 
-    if (file_exists(INCLUDES_DIR."/config.yaml.php") and file_exists(MAIN_DIR."/.htaccess")) {
+    if (file_exists(INCLUDES_DIR."/config.json.php") and file_exists(MAIN_DIR."/.htaccess")) {
         $sql = SQL::current(true);
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            error(__("Already Installed"), __("Chyrp is already correctly installed and configured."));
+            error(__("Already Installed"), __("Chyrp is already fully installed and configured. You can delete this installer."));
     }
 
     if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR."/.htaccess")) or
         (file_exists(MAIN_DIR."/.htaccess") and !is_writable(MAIN_DIR."/.htaccess") and !$htaccess_has_chyrp))
-        $errors[] = _f("STOP! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
+        $errors[] = _f("Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
 
     if (!is_writable(INCLUDES_DIR))
         $errors[] = __("Chyrp's includes directory is not writable by the server. In order for the installer to generate your configuration files, please CHMOD or CHOWN it so that Chyrp can write to it.");
@@ -141,7 +147,6 @@
             $config->set("check_updates", true);
             $config->set("check_updates_last", 0);
             $config->set("theme", "blossom");
-            $config->set("admin_theme", "default");
             $config->set("posts_per_page", 5);
             $config->set("feed_items", 20);
             $config->set("feed_url", "");
@@ -363,8 +368,48 @@
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title>Chyrp Installer</title>
+        <title><?php echo __("Chyrp Lite Installer"); ?></title>
+        <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css" media="screen">
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Regular.woff') format('woff'),
+                     url('./fonts/OpenSans-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Semibold.woff') format('woff'),
+                     url('./fonts/OpenSans-Semibold.ttf') format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Italic.woff') format('woff'),
+                     url('./fonts/OpenSans-Italic.ttf') format('truetype');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                     url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                font-weight: bold;
+                font-style: italic;
+            }
+            *::-moz-selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            *::selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            html {
+                font-size: 16px;
+            }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
@@ -374,32 +419,62 @@
             }
             body {
                 font-size: 14px;
-                font-family: sans-serif;
-                color: #626262;
-                background: #e8e8e8;
+                font-family: "Open Sans webfont", sans-serif;
+                line-height: 1.5em;
+                color: #4a4747;
+                background: #efefef;
                 padding: 0em 0em 5em;
+            }
+            h1 {
+                font-size: 2em;
+                margin: 0.5em 0em;
+                text-align: center;
+                line-height: 1em;
+            }
+            h1:first-child {
+                margin-top: 0em;
             }
             h2 {
                 font-size: 1.25em;
                 font-weight: bold;
+                margin: 0.75em 0em;
             }
-            input[type="password"], input[type="text"], textarea, select {
-                font-size: 1.25em;
-                width: 23.3em;
-                padding: .3em;
-                border: .1em solid #ddd;
+            input, textarea, select {
+                font-family: inherit;
+                font-size: inherit;
+                font-weight: inherit;
             }
+            input[type="text"],
+            input[type="number"],
+            input[type="password"],
             textarea {
-                width: 97.75%;
+                font-size: 1.25em;
+                padding: 0.2em;
+                border: 1px solid #dfdfdf;
+                background-color: #ffffff;
+                background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
+            textarea:focus,
+            input[type="text"]:focus,
+            input[type="number"]:focus,
+            input[type="password"]:focus {
+                border-color: #1e57ba;
+                outline: none;
+            }
+            input[type="text"],
+            input[type="number"],
+            input[type="password"],
+            textarea,
             select {
+                box-sizing: border-box;
                 width: 100%;
+                margin: 0em;
             }
             form hr {
-                border: 0em;
-                padding-bottom: 1em;
-                margin-bottom: 4em;
-                border-bottom: .1em dashed #ddd;
+                border: none;
+                clear: both;
+                border-top: 1px solid #ddd;
+                margin: 2em 0em;
             }
             form p {
                 padding-bottom: 1em;
@@ -414,38 +489,35 @@
                 margin-top: -1.5em !important;
             }
             .error {
-                padding: .6em .8em .5em 2.75em;
-                border-bottom: .1em solid #FBC2C4;
-                color: #D12F19;
-                background: #FBE3E4 url('./admin/themes/default/images/icons/failure.svg') no-repeat .7em center;
-            }
-            .error.last {
-                margin: 0em 0em 1em 0;
+                padding: 0.6em;
+                margin: 1em;
+                background-color: #d94c4c;
+                color: #ffffff;
+                border: none;
+                border-radius: 0.4em;
             }
             .window {
                 width: 30em;
                 background: #fff;
                 padding: 2em;
-                margin: 5em auto 0em;
+                margin: 2em auto 0em auto;
                 border-radius: 2em;
             }
-            h1 {
-                color: #ccc;
-                font-size: 3em;
-                margin: .25em 0em .5em;
-                text-align: center;
-                line-height: 1;
+            .window:first-child {
+                margin-top: 5em;
             }
             code {
-                color: #06B;
                 font-family: monospace;
+                font-style: normal;
                 word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
             }
             label {
                 display: block;
                 font-weight: bold;
-                border-bottom: .1em dotted #ddd;
-                margin-bottom: .2em;
+                line-height: 1.5em
             }
             .footer {
                 color: #777;
@@ -453,86 +525,77 @@
                 font-size: .9em;
                 text-align: center;
             }
-            .error {
-                color: #F22;
-            }
             a:link, a:visited {
-                color: #6B0;
+                color: #4a4747;
+            }
+            a:hover, a:focus {
+                color: #1e57ba;
             }
             a.big,
             button {
-                background: #eee;
-                margin-top: 2em;
+                box-sizing: border-box;
                 display: block;
+                clear: both;
+                font-family: inherit;
+                font-size: 1.25em;
                 text-align: center;
-                padding: .75em 1em;
-                color: #777;
-                text-shadow: #fff .1em .1em 0em;
-                font: 1em sans-serif;
+                color: #4a4747;
                 text-decoration: none;
-                border: 0em;
+                line-height: 1.25em;
+                margin: 0.75em 0em;
+                padding: 0.4em 0.6em;
+                background-color: #f2fbff;
+                border: 1px solid #b8cdd9;
+                border-radius: 0.3em;
                 cursor: pointer;
-                border-radius: .5em;
+                text-decoration: none;
             }
             button {
                 width: 100%;
             }
-            a.big:hover,
-            button:hover {
-                background: #f5f5f5;
+            a.big:last-child,
+            button:last-child {
+                margin-bottom: 0em;
             }
+            a.big:hover,
+            button:hover,
+            a.big:focus,
+            button:focus,
             a.big:active,
             button:active {
-                background: #e0e0e0;
+                border-color: #1e57ba;
+                outline: none;
             }
             strong {
                 font-weight: normal;
                 color: #f00;
             }
-            ol {
+            ul, ol {
                 margin: 0em 0em 2em 2em;
+                list-style-position: inside;
             }
             p {
                 margin-bottom: 1em;
             }
-            .center {
-                text-align: center;
-            }
         </style>
-        <script src="includes/lib/jquery.js" type="text/javascript" charset="utf-8"></script>
-        <script src="includes/lib/plugins.js" type="text/javascript" charset="utf-8"></script>
+        <script src="includes/lib/common.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">
             $(function(){
                 $("#adapter").change(function(){
                     if ($(this).val() == "sqlite") {
-                        $(document.createElement("span"))
-                            .addClass("sub")
-                            .css("display", "none")
-                            .text("<?php echo __("(full path)"); ?>")
-                            .appendTo("#database_field label")
-                            .animate({ opacity: "show" })
-
-                        $("#host_field, #username_field, #password_field, #prefix_field")
-                            .children()
-                                .val("")
-                                    .closest("div")
-                                        .animate({ height: "hide", opacity: "hide" })
+                        $("#database_field label .sub").fadeIn("fast");
+                        $("#host_field, #username_field, #password_field, #prefix_field").children().val("").parent().fadeOut("fast");
                     } else {
-                        $("#database_field label .sub")
-                            .animate({ opacity: "hide" },
-                                function(){ $(this).remove() })
-
-                        $("#host_field, #username_field, #password_field, #prefix_field")
-                            .parent()
-                                .animate({ height: "show", opacity: "show" })
+                        $("#database_field label .sub").fadeOut("fast");
+                        $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                     }
                 })
             })
         </script>
     </head>
-    <body>
+    <body role="document">
         <?php foreach ($errors as $error): ?>
-        <div class="error<?php if ($index + 1 == count($errors)) echo " last"; ?>"><?php echo $error; ?></div>
+        <div role="alert" class="error"><?php echo $error; ?></div>
         <?php endforeach; ?>
         <div class="window">
         <?php if (!$installed): ?>
@@ -572,7 +635,11 @@
                     </p>
                 </div>
                 <p id="database_field">
-                    <label for="database"><?php echo __("Database"); ?> <?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? '<span class="sub">'.__("(full path)").'</span>' : "" ; ?></label>
+                    <label for="database"><?php echo __("Database"); ?>
+                        <span class="sub"<?php echo (!isset($_POST['adapter']) or $_POST['adapter'] != "sqlite") ? ' style="display: none"' : "" ; ?>>
+                            <?php echo __("(full path)"); ?>
+                        </span>
+                    </label>
                     <input type="text" name="database" value="<?php value_fallback("database"); ?>" id="database">
                 </p>
                 <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
@@ -581,9 +648,7 @@
                         <input type="text" name="prefix" value="<?php value_fallback("prefix"); ?>" id="prefix">
                     </p>
                 </div>
-
                 <hr>
-
                 <h1><?php echo __("Website Setup"); ?></h1>
                 <p id="name_field">
                     <label for="name"><?php echo __("Site Name"); ?></label>
@@ -604,9 +669,7 @@
                     <?php endforeach; ?>
                     </select>
                 </p>
-
                 <hr>
-
                 <h1><?php echo __("Admin Account"); ?></h1>
                 <p id="login_field">
                     <label for="login"><?php echo __("Username"); ?></label>
@@ -624,26 +687,22 @@
                     <label for="email"><?php echo __("E-Mail Address"); ?></label>
                     <input type="text" name="email" value="<?php value_fallback("email"); ?>" id="email">
                 </p>
-
-                <button type="submit"><?php echo __("Install! &rarr;"); ?></button>
+                <button type="submit"><?php echo __("Install!"); ?></button>
             </form>
         <?php else: ?>
             <h1><?php echo __("Done!"); ?></h1>
             <p>
-                <?php echo __("Chyrp has been successfully installed and you have been logged in."); ?>
+                <?php echo __("Chyrp Lite has been successfully installed."); ?>
             </p>
-            <h2><?php echo __("So, what now?"); ?></h2>
+            <h2><?php echo __("What now?"); ?></h2>
             <ol>
                 <li><?php echo __("<strong>Delete install.php</strong>, you won't need it anymore."); ?></li>
             <?php if (!is_writable(INCLUDES_DIR."/caches")): ?>
                 <li><?php echo __("CHMOD <code>/includes/caches</code> to 777."); ?></li>
             <?php endif; ?>
-                <li><a href="http://chyrp.net/extend/type/translation"><?php echo __("Look for a translation for your language."); ?></a></li>
-                <li><a href="http://chyrp.net/extend/type/module"><?php echo __("Install some Modules."); ?></a></li>
-                <li><a href="http://chyrp.net/extend/type/feather"><?php echo __("Find some Feathers you want."); ?></a></li>
-                <li><a href="README.markdown"><?php echo __("Read &#8220;Getting Started&#8221;"); ?></a></li>
+                <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
             </ol>
-            <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site! &rarr;"); ?></a>
+            <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
         <?php endif; ?>
         </div>
     </body>

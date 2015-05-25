@@ -16,14 +16,14 @@
 ${ trigger.call("head") }
 </head>
 <body role="document">
-  <!-- Header -->
+  <!-- Mast -->
   <div class="shim">
   {% for type, messages in flash.all | items %}
-      {% for message in messages %}
-      <div class="ribbon flash">
-        <h3 role="alert" class="ribbon">$message</h3>
-      </div>
-      {% endfor %}
+    {% for message in messages %}
+    <div class="ribbon flash">
+      <h3 role="alert" class="ribbon">$message</h3>
+    </div>
+    {% endfor %}
   {% endfor %}
   </div>
   {% if ( route.action != "login" ) and ( route.action != "controls" ) and ( route.action != "register" ) and ( route.action != "lost_password" ) %}
@@ -40,28 +40,27 @@ ${ trigger.call("head") }
   {% endif %}
   <!-- Sidebar -->
 {% include "content/sidebar.twig" %}
-  {% if posts.prev_page %}
-  <!-- Navigation -->
-  <div role="navigation" class="prev traversal">${ posts.prev_link( ( "Newer posts" | translate ) ) }</div> 
-  {% endif %}
   <!-- Content -->
   <div id="main" role="main">
 {% block content %}{% endblock %}
   </div>
-  {% if posts.next_page %}
+  {% if posts.prev_page or posts.next_page %}
   <!-- Navigation -->
-  <div role="navigation" class="next traversal">${ posts.next_link( ( "Older posts" | translate ) ) }</div>
+  <div role="navigation" class="prev_next traversal">
+    {% if posts.prev_page %}${ posts.prev_link( ( "Newer posts" | translate ) ) }{% endif %}
+    {% if posts.next_page %}${ posts.next_link( ( "Older posts" | translate ) ) }{% endif %}
+  </div>
   {% endif %}
   <!-- Footer -->
   <div id="tail">
     <ul role="navigation" class="navigation tail_nav">
-    {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Index" | translate }</a></li>{% endif %}
+    {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Blog" | translate }</a></li>{% endif %}
     {% if theme.pages_list %}
-      {% for item in theme.pages_list %}
-        {% if item.page.depth == 1 %}
+    {% for item in theme.pages_list %}
+      {% if item.page.depth == 1 %}
       <li class="page{% if item.has_children %} parent{% endif %}"><a href="$item.page.url">$item.page.title</a></li>
-        {% endif %}
-      {% endfor %}
+      {% endif %}
+    {% endfor %}
     {% endif %}
       <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">${ "Email" | translate }</a></li>
       <li><a href="{% url "feed" %}" rel="alternate">${ "Feed" | translate }</a></li>
@@ -74,19 +73,18 @@ ${ trigger.call("head") }
       <li><a href="{% admin "write_post" %}">${ "Draft" | translate }</a></li>
       {% endif %}
       {% if visitor.logged_in %}
-        <li><a href="{% url "controls" %}">${ "Controls" | translate }</a></li>
-        <li><a href="{% url "logout" %}">${ "Log out" | translate }</a></li>
+      <li><a href="{% url "controls" %}">${ "Controls" | translate }</a></li>
+      <li><a href="{% url "logout" %}">${ "Log out" | translate }</a></li>
       {% else %}
-        {% if site.can_register %}
-        <li><a href="{% url "register" %}">${ "Register" | translate }</a></li>
-        {% endif %}
-        <li><a href="{% url "login" %}">${ "Log in" | translate }</a></li>
+      {% if site.can_register %}
+      <li><a href="{% url "register" %}">${ "Register" | translate }</a></li>
+      {% endif %}
+      <li><a href="{% url "login" %}">${ "Log in" | translate }</a></li>
       {% endif %}
     </ul>
   </div>
 ${ trigger.call("end_content") }
 </body>
-
 <!-- Queries: $sql_queries | Load Time: $theme.load_time -->
 {% if debug and visitor.group.name == "Admin" %}
 <!--

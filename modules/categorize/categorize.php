@@ -242,12 +242,27 @@
     
             $admin->display("edit_category", $fields, "Edit category");
         }
-    
+
         public function admin_delete_category($admin) {
+            if (empty($_REQUEST['id']))
+                error(__("No Category Specified"), __("Please specify the category you want to delete.", "categorize"));
+
+            $category = Category::getCategory( (int) $_REQUEST['id']);
+
+            $admin->display("delete_category", array("category" => $category));
+        }
+    
+        public function admin_destroy_category() {
+            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
-    
-            Category::deleteCategory($_REQUEST['id']);
+
+            if (empty($_POST['id']) or ($_POST['destroy'] != "indubitably"))
+                redirect("/admin/?action=manage_category");
+
+            Category::deleteCategory( (int) $_POST['id']);
             Flash::notice(__("Category deleted.", "categorize"), "/admin/?action=manage_category");
         }
     }

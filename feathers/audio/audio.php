@@ -9,7 +9,7 @@
             $this->setField(array("attr" => "audio",
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
-                                  "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')), "audio")));
+                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "audio")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
@@ -26,13 +26,10 @@
         }
 
         public function submit() {
-            if (!isset($_POST['filename'])) {
-                if (isset($_FILES['audio']) and $_FILES['audio']['error'] == 0)
-                    $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
-                else
-                    error(__("Error"), __("Couldn't upload audio file.", "audio"));
-            } else
-                $filename = $_POST['filename'];
+            if (isset($_FILES['audio']) and upload_tester($_FILES['audio']['error']))
+                $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
+            else
+                error(__("Error"), __("You did not select any audio to upload.", "audio"));
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
@@ -42,16 +39,11 @@
         }
 
         public function update($post) {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['audio']) and $_FILES['audio']['error'] == 0) {
-                    $this->delete_file($post);
-                    $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
-                } else
-                    $filename = $post->filename;
-            else {
+            if (isset($_FILES['audio']) and upload_tester($_FILES['audio']['error'])) {
                 $this->delete_file($post);
-                $filename = $_POST['filename'];
-            }
+                $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
+            } else
+                $filename = $post->filename;
 
             $post->update(array("title" => $_POST['title'],
                                 "filename" => $filename,
@@ -71,12 +63,16 @@
         }
 
         public function delete_file($post) {
-            if ($post->feather != "audio") return;
+            if ($post->feather != "audio")
+                return;
+
             unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
         }
 
         public function filter_post($post) {
-            if ($post->feather != "audio") return;
+            if ($post->feather != "audio")
+                return;
+
             $post->audio_player = $this->audio_player($post->filename, array(), $post);
         }
 
@@ -105,6 +101,7 @@
 
         public function enclose_audio($post) {
             $config = Config::current();
+
             if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
                 return;
 

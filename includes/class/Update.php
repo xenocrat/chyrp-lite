@@ -5,15 +5,6 @@
      */
     class Update {
         /**
-         * Function: xml
-         * Loads the update XML file.
-         */
-        private static function xml() {
-            $xml = simplexml_load_string(get_remote(UPDATE_XML));
-            return $xml;
-        }
-
-        /**
          * Function: check_update
          * Checks if the a new version of Chyrp is available.
          */
@@ -26,18 +17,31 @@
             if ((time() - $config->check_updates_last) < UPDATE_INTERVAL )
                 return; # Check for updates once per day
 
-            $xml = self::xml();
+            $xml = simplexml_load_file(UPDATE_XML);
+
+            if ($xml == false) {
+                Flash::warning(_f("Unable to check for updates. Please visit <a href='%s'>GitHub</a> to see a list of available releases.",
+                                  "https://github.com/xenocrat/chyrp-lite/releases"));
+                return;
+            }
+
             $curver = CHYRP_VERSION;
+            $return = false;
 
             foreach ($xml->channel->item as $item) {
                 $newver = $item->version;
 
-                if (version_compare($curver, $newver, ">="))
-                    $return = false;
-                else {
+                if (version_compare($curver, $newver, "<")) {
                     $updateurl = $item->updateurl;
                     $downloadurl = $item->downloadurl;
-                    $return = _f("<p role='alert' class='message'>Chyrp Lite v%s is available. You can <a href='%s'>learn more</a> or <a href='%s'>download</a> it.</p>", array($newver, $updateurl, $downloadurl));
+
+                    Flash::message(_f("Chyrp Lite v%s is available. You can <a href='%s'>learn more</a> or <a href='%s'>download</a> it.",
+                                      array($newver, $updateurl, $downloadurl)));
+
+                    $return = array("version" => (string) $item->version,
+                                    "url" => (string) $item->updateurl,
+                                    "download" => (string) $item->downloadurl);
+
                     break;
                 }
             }

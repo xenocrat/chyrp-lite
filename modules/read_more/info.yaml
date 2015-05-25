@@ -1,7 +1,0 @@
-name: Read More
-url: http://chyrp.net/
-version: 1.0
-description: Add “read more” links to your blog index by typing <code><!--more--></code> in your posts.
-author:
-  name: Chyrp Team
-  url: http://chyrp.net/

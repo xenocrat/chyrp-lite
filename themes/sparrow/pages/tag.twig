@@ -1,0 +1,18 @@
+{% extends "layouts/default.twig" %}
+
+{% block content %}
+  {% if posts.paginated %}
+    <h3 role="status" class="filter">${ "Posts tagged with %s" | translate("tags") | format(tag | escape) }</h3>
+  {% endif %}
+  {% for post in posts.paginated %}
+{% include "feathers/" ~ post.feather ~ ".twig" %}
+    {% else %}
+    <h3 role="status" class="filter">
+    {% if reason == "tag_not_found" %}
+      ${ "There are no posts with the tag you specified" | translate("tags") }
+    {% else %}
+      ${ "No tag specified" | translate("tags") }
+    {% endif %}
+    </h3>
+  {% endfor %}
+{% endblock %}

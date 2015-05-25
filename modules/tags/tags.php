@@ -3,6 +3,7 @@
         public function __init() {
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
             $this->addAlias("javascript", "tagsJS");
+            $this->addAlias("admin_javascript", "tagsJS");
         }
 
         static function __install() {
@@ -23,34 +24,41 @@
             }
         }
 
-        public function admin_head() {
-            $config = Config::current();
-?>
-        <script type="text/javascript">
-        <?php $this->tagsJS(); ?>
-        </script>
-<?php
+        private function tags_serialize($tags) {
+            $serialized = json_encode($tags);
+
+            if (json_last_error())
+                error(__("Error"), _f("Failed to serialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
+
+            return $serialized;
+        }
+
+        private function tags_unserialize($tags) {
+            $unserialized = json_decode($tags, true);
+
+            if (json_last_error() and ADMIN)
+                error(__("Error"), _f("Failed to unserialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
+
+            return $unserialized;
         }
 
         public function post_options($fields, $post = null) {
-            $tags = self::list_tags(false);
-            usort($tags, array($this, "sort_tags_name_desc"));
-
-            $selector = '<span class="tags_select">'."\n";
-
-            foreach (array_reverse($tags) as $tag) {
-                $selected = ($post and isset($post->tags[$tag["name"]])) ?
-                                ' class="tag_added"' :
-                                "" ;
-                $selector.= "\t\t\t\t\t\t\t\t".'<a class="tag" href="javascript:add_tag(\''.addslashes($tag["name"]).'\')"'.$selected.'>'.$tag["name"].'</a>'."\n";
-            }
-
-            $selector.= "\t\t\t\t\t\t\t</span><br /><br />";
+            $cloud = self::list_tags(false);
+            usort($cloud, array($this, "sort_tags_name_asc"));
 
             if (isset($post->tags))
                 $tags = array_keys($post->tags);
             else
                 $tags = array();
+
+            $selector = "\n".'<span class="tags_select">'."\n";
+
+            foreach ($cloud as $tag) {
+                $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
+                $selector.= '<a class="tag'.$selected.'" href="#tags" onclick="return ChyrpTags.add(event);">'.$tag["name"].'</a>'."\n";
+            }
+
+            $selector.= "</span>"."\n";
 
             $fields[] = array("attr" => "tags",
                               "label" => __("Tags", "tags"),
@@ -63,11 +71,14 @@
         }
 
         public function add_post($post) {
-            if (empty($_POST['tags'])) return;
+            if (empty($_POST['tags']))
+                return;
 
             $tags = explode(",", $_POST['tags']); # Split at the comma
             $tags = array_map("trim", $tags); # Remove whitespace
             $tags = array_map("strip_tags", $tags); # Remove HTML
+            foreach ($tags as &$name)
+                $name = is_numeric($name) ? "'".$name."'" : $name ;
             $tags = array_unique($tags); # Remove duplicates
             $tags = array_diff($tags, array("")); # Remove empties
             $tags_cleaned = array_map("sanitize", $tags);
@@ -76,7 +87,7 @@
 
             SQL::current()->insert("post_attributes",
                                    array("name" => "tags",
-                                         "value" => YAML::dump($tags),
+                                         "value" => self::tags_serialize($tags),
                                          "post_id" => $post->id));
         }
 
@@ -91,6 +102,8 @@
             $tags = explode(",", $_POST['tags']); # Split at the comma
             $tags = array_map("trim", $tags); # Remove whitespace
             $tags = array_map("strip_tags", $tags); # Remove HTML
+            foreach ($tags as &$name)
+                $name = is_numeric($name) ? "'".$name."'" : $name ;
             $tags = array_unique($tags); # Remove duplicates
             $tags = array_diff($tags, array("")); # Remove empties
             $tags_cleaned = array_map("sanitize", $tags);
@@ -100,7 +113,7 @@
             SQL::current()->replace("post_attributes",
                                     array("post_id", "name"),
                                     array("name" => "tags",
-                                          "value" => YAML::dump($tags),
+                                          "value" => self::tags_serialize($tags),
                                           "post_id" => $post->id));
         }
 
@@ -143,7 +156,7 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags"))->fetchAll() as $tag) {
-                $post_tags = YAML::load($tag["value"]);
+                $post_tags = self::tags_unserialize($tag["value"]);
 
                 $tags = array_merge($tags, $post_tags);
 
@@ -165,7 +178,7 @@
                 $step = 60 / $spread;
 
                 foreach ($popularity as $tag => $count)
-                    $cloud[] = array("size" => (100 + (($count - $min_qty) * $step)),
+                    $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
                                      "name" => $tag,
                                      "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"), $count, $tag),
@@ -174,7 +187,7 @@
             }
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query");
+            list($where, $params) = keywords(self::tags_safe($_GET['query']), "post_attributes.value LIKE :query");
 
             $visitor = Visitor::current();
             if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
@@ -202,7 +215,10 @@
 
         public function admin_rename_tag($admin) {
             if (!Visitor::current()->group->can("edit_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit tags.", "tags"));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
+
+            if (empty($_GET['clean']))
+                error(__("No Tag Specified"), __("Please specify the tag you want to rename.", "tags"));
 
             $sql = SQL::current();
 
@@ -212,8 +228,8 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::yaml_match($_GET['name'])))->fetchAll() as $tag) {
-                $post_tags = YAML::load($tag["value"]);
+                                       "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
+                $post_tags = self::tags_unserialize($tag["value"]);
 
                 $tags = array_merge($tags, $post_tags);
 
@@ -224,17 +240,19 @@
             $popularity = array_count_values($names);
 
             foreach ($popularity as $tag => $count)
-                if ($tags[$tag] == $_GET['name']) {
+                if ($tags[$tag] == $_GET['clean']) {
                     $tag = array("name" => $tag, "clean" => $tags[$tag]);
                     break;
                 }
+            if (!isset($tag))
+                error(__("Tag Not Found"), __("Could not find the specified tag in the database.", "tags"));
 
             $admin->display("rename_tag", array("tag" => $tag));
         }
 
         public function admin_edit_tags($admin) {
             if (empty($_GET['id']))
-                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you would like to edit.", "tags"));
+                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_GET['id']);
             if (!$post->editable())
@@ -248,7 +266,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!isset($_POST['id']))
-                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you would like to edit.", "tags"));
+                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_POST['id']);
             if (!$post->editable())
@@ -264,7 +282,13 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("edit_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit tags.", "tags"));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
+
+            if (empty($_POST['original']) or empty($_POST['name']))
+                redirect("/admin/?action=manage_tags");
+
+            $_POST['name'] = str_replace(",", " ", $_POST['name']);
+            $_POST['name'] = is_numeric($_POST['name']) ? "'".$_POST['name']."'" : $_POST['name'] ;
 
             $sql = SQL::current();
 
@@ -273,8 +297,8 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => "%\n".$_POST['original'].": \"%"))->fetchAll() as $tag) {
-                $tags = YAML::load($tag["value"]);
+                                       "value like" => self::tags_name_match($_POST['original'])))->fetchAll() as $tag) {
+                $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['original']]);
 
                 $tags[$_POST['name']] = sanitize($_POST['name']);
@@ -282,21 +306,64 @@
                 $sql->update("post_attributes",
                              array("name" => "tags",
                                    "post_id" => $tag["post_id"]),
-                             array("value" => YAML::dump($tags)));
+                             array("value" => self::tags_serialize($tags)));
             }
 
             Flash::notice(__("Tag renamed.", "tags"), "/admin/?action=manage_tags");
         }
 
-        public function admin_delete_tag($admin) {
+        static function admin_delete_tag($admin) {
+            if (empty($_GET['clean']))
+                error(__("No Tag Specified"), __("Please specify the tag you want to rename.", "tags"));
+
+            $sql = SQL::current();
+
+            $tags = array();
+            $names = array();
+
+            foreach($sql->select("post_attributes",
+                                 "*",
+                                 array("name" => "tags",
+                                       "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
+                $post_tags = self::tags_unserialize($tag["value"]);
+
+                $tags = array_merge($tags, $post_tags);
+
+                foreach ($post_tags as $name => $clean)
+                    $names[] = $name;
+            }
+
+            $popularity = array_count_values($names);
+
+            foreach ($popularity as $tag => $count)
+                if ($tags[$tag] == $_GET['clean']) {
+                    $tag = array("name" => $tag, "clean" => $tags[$tag]);
+                    break;
+                }
+            if (!isset($tag))
+                error(__("Tag Not Found"), __("Could not find the specified tag in the database.", "tags"));
+
+            $admin->display("delete_tag", array("tag" => $tag));
+        }
+
+        public function admin_destroy_tag() {
+            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (!Visitor::current()->group->can("edit_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
+
+            if (empty($_POST['name']) or ($_POST['destroy'] != "indubitably"))
+                redirect("/admin/?action=manage_tags");
+
             $sql = SQL::current();
 
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::yaml_match($_GET['clean'])))->fetchAll() as $tag)  {
-                $tags = YAML::load($tag["value"]);
-                unset($tags[$_GET['name']]);
+                                       "value like" => self::tags_name_match($_POST['name'])))->fetchAll() as $tag)  {
+                $tags = self::tags_unserialize($tag["value"]);
+                unset($tags[$_POST['name']]);
 
                 if (empty($tags))
                     $sql->delete("post_attributes", array("name" => "tags", "post_id" => $tag["post_id"]));
@@ -304,7 +371,7 @@
                     $sql->update("post_attributes",
                                  array("name" => "tags",
                                        "post_id" => $tag["post_id"]),
-                                 array("value" => YAML::dump($tags)));
+                                 array("value" => self::tags_serialize($tags)));
             }
 
             Flash::notice(__("Tag deleted.", "tags"), "/admin/?action=manage_tags");
@@ -314,12 +381,17 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            if (!Visitor::current()->group->can("edit_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add tags.", "tags"));
+
             if (empty($_POST['name']) or empty($_POST['post']))
                 redirect("/admin/?action=manage_tags");
 
             $sql = SQL::current();
 
             foreach (array_map("trim", explode(",", $_POST['name'])) as $tag)
+                $tag = is_numeric($tag) ? "'".$tag."'" : $tag ;
+
                 foreach ($_POST['post'] as $post_id) {
                     $post = new Post($post_id);
                     if (!$post->editable())
@@ -330,7 +402,7 @@
                                          array("name" => "tags",
                                                "post_id" => $post_id));
                     if ($tags and $value = $tags->fetchColumn())
-                        $tags = YAML::load($value);
+                        $tags = self::tags_unserialize($value);
                     else
                         $tags = array();
 
@@ -339,7 +411,7 @@
                     $sql->replace("post_attributes",
                                   array("post_id", "name"),
                                   array("name" => "tags",
-                                        "value" => YAML::dump($tags),
+                                        "value" => self::tags_serialize($tags),
                                         "post_id" => $post_id));
                 }
 
@@ -363,7 +435,7 @@
 
             $likes = array();
             foreach ($tags as $name)
-                $likes[] = self::yaml_match($name);
+                $likes[] = self::tags_clean_match($name);
 
             $attributes = $sql->select("post_attributes",
                                        array("value", "post_id"),
@@ -373,7 +445,7 @@
             $ids = array();
             foreach ($attributes->fetchAll() as $index => $row) {
                 foreach ($tags as &$tag) {
-                    $search = array_search($tag, YAML::load($row["value"]));
+                    $search = array_search($tag, self::tags_unserialize($row["value"]));
                     $tag = ($search) ? $search : $tag;
                 }
 
@@ -413,7 +485,7 @@
                                      null, null, null,
                                      array(array("table" => "post_attributes",
                                                  "where" => "post_id = posts.id")))->fetchAll() as $tag) {
-                    $post_tags = YAML::load($tag["value"]);
+                    $post_tags = self::tags_unserialize($tag["value"]);
 
                     $tags = array_merge($tags, $post_tags);
 
@@ -437,7 +509,7 @@
 
                 $context = array();
                 foreach ($popularity as $tag => $count)
-                    $context[] = array("size" => (100 + (($count - $min_qty) * $step)),
+                    $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
                                        "name" => $tag,
                                        "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"), $count, $tag),
@@ -459,7 +531,7 @@
             if (!empty($tags))
                 SQL::current()->insert("post_attributes",
                                        array("name" => "tags",
-                                             "value" => YAML::dump($tags),
+                                             "value" => self::tags_serialize($tags),
                                              "post_id" => $post->id));
         }
 
@@ -488,7 +560,7 @@
             if (empty($tags))
                 return;
 
-            SQL::current()->insert("post_attributes", array("name" => "tags", "value" => YAML::dump($tags), "post_id" => $post->id));
+            SQL::current()->insert("post_attributes", array("name" => "tags", "value" => self::tags_serialize($tags), "post_id" => $post->id));
         }
 
         public function metaWeblog_getPost($struct, $post) {
@@ -522,34 +594,35 @@
 
         public function post_list_related_attr($attr, $post) {
             if (Route::current()->action != "view") return;
-
+            
             $posts = array();
             foreach ($post->tags as $key => $tag) {
+                $like = self::tags_name_match($key);
                 $posts = SQL::current()->query("SELECT DISTINCT __posts.id
                           FROM __posts
                           LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
                             AND __post_attributes.name = 'tags'
                             AND __posts.id != $post->id
-                          WHERE __post_attributes.value LIKE '%$key: \"$tag\"%'
+                          WHERE __post_attributes.value LIKE '$like'
                           GROUP BY __posts.id
                           ORDER BY __posts.created_at DESC
                           LIMIT 5")->fetchAll();
             }
 
-            $output = '<ul class="related_posts">
-                       <h3>Related Posts:</h3>';
+            $output = "\n".'<ul class="related_posts">';
+            $output.= "\n\t".'<h3>Related Posts:</h3>';
             foreach ($posts as $p) {
                 $post = new Post($p['id']);
-                $output.= '<li><h5><a href="'.$post->url().'">'.$post->title().'</a></h5></li>';
+                $output.= "\n\t".'<li><h5><a href="'.$post->url().'">'.$post->title().'</a></h5></li>';
             }
-            $output.= "</ul>";
+            $output.= "\n"."</ul>"."\n";
 
             return $output;
         }
 
         public function post($post) {
-            $tags = !empty($post->tags) ? YAML::load($post->tags) : array() ;
-            ksort($tags, SORT_STRING);
+            $tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
+            uksort($tags, array($this, "sort_tags_name_asc"));
             $post->tags = $tags;
             $post->linked_tags = self::linked_tags($post->tags);
         }
@@ -593,7 +666,7 @@
             $tags = array();
             $names = array();
             while ($attr = $attrs->fetchObject()) {
-                $post_tags = YAML::load($attr->value);
+                $post_tags = self::tags_unserialize($attr->value);
 
                 $tags = array_merge($tags, $post_tags);
 
@@ -619,59 +692,22 @@
             return ($limit) ? array_slice($list, 0, $limit) : $list ;
         }
 
-        public function yaml_match($name) {
-            $dumped = YAML::dump(array($name));
-            $quotes = preg_match("/- \"".preg_quote($name, "/")."\"/", $dumped);
-
-            return ($quotes ? "%: \"".$name."\"\n%" : "%: ".$name."\n%");
+        private function tags_name_match($name) {
+            # Serialized notation of key
+            return "%\"".self::tags_safe($name)."\":%";
         }
 
-        public function tagsJS() {
-            $config = Config::current();
-?>//<script>
-            $(function(){
-                function scanTags(){
-                    $(".tags_select a").each(function(){
-                        regexp = new RegExp("(, ?|^)"+ $(this).text() +"(, ?|$)", "g");
-                        if ($("#tags").val().match(regexp))
-                            $(this).addClass("tag_added");
-                        else
-                            $(this).removeClass("tag_added");
-                    })
-                }
+        private function tags_clean_match($clean) {
+            # Serialized notation of value
+            return "%:\"".self::tags_safe($clean)."\"%";
+        }
 
-                scanTags();
+        private function tags_safe($text) {
+            # Match escaping of JSON encoded data
+            $text = ltrim(rtrim(json_encode($text), "\""), "\"");
 
-                $("#tags").on("keyup", scanTags);
-            })
-
-            function add_tag(name) {
-                if ($("#tags").val().match("(, |^)"+ name +"(, |$)")) {
-                    regexp = new RegExp("(, |^)"+ name +"(, |$)", "g");
-                    $("#tags").val($("#tags").val().replace(regexp, function(match, before, after){
-                        if (before == ", " && after == ", ")
-                            return ", ";
-                        else
-                            return "";
-                    }))
-
-                    $(".tags_select a").each(function(){
-                        if ($(this).text() == name)
-                            $(this).removeClass("tag_added");
-                    })
-                } else {
-                    if ($("#tags").val() == "")
-                        $("#tags").val(name);
-                    else
-                        $("#tags").val($("#tags").val().replace(/(, ?)?$/, ", "+ name));
-
-                    $(".tags_select a").each(function(){
-                        if ($(this).text() == name)
-                            $(this).addClass("tag_added");
-                    })
-                }
-            }
-<?php
+            # Return string escaped for SQL query
+            return SQL::current()->escape($text, false);
         }
 
         public function ajax_tag_post() {
@@ -691,7 +727,7 @@
                                  array("name" => "tags",
                                        "post_id" => $post->id));
             if ($tags and $value = $tags->fetchColumn())
-                $tags = YAML::load($value);
+                $tags = self::tags_unserialize($value);
             else
                 $tags = array();
 
@@ -700,7 +736,7 @@
             $sql->replace("post_attributes",
                           array("post_id", "name"),
                           array("name" => "tags",
-                                "value" => YAML::dump($tags),
+                                "value" => self::tags_serialize($tags),
                                 "post_id" => $post->id));
 
             exit("{ \"url\": \"".url("tag/".$tags[$tag], MainController::current())."\", \"tag\": \"".$_POST['name']."\" }");
@@ -711,5 +747,9 @@
 
             foreach ($post->tags as $tag => $clean)
                 echo "        <category scheme=\"".$config->url."/tag/\" term=\"".$clean."\" label=\"".fix($tag)."\" />\n";
+        }
+
+        public function tagsJS() {
+            include MODULES_DIR."/tags/javascript.php";
         }
     }

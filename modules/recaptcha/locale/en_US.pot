@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-03-15 09:20+0000\n"
+"POT-Creation-Date: 2015-05-25 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/recaptcha/info.yaml:1
+#: modules/recaptcha/info.php:3
 msgid "reCAPTCHA"
 msgstr ""
 
-#: modules/recaptcha/info.yaml:4
+#: modules/recaptcha/info.php:6
 msgid "Use reCAPTCHA to prevent spam."
 msgstr ""
 
-#: modules/recaptcha/info.yaml:6
+#: modules/recaptcha/info.php:11
 msgid "Please remember to set the public and private keys on the ReCAPTCHA settings page."
 msgstr ""
 

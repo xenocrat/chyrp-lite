@@ -9,7 +9,7 @@
             $this->setField(array("attr" => "video",
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
-                                  "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')), "video")));
+                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "video")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "video"),
@@ -26,13 +26,10 @@
         }
 
         public function submit() {
-            if (!isset($_POST['filename'])) {
-                if (isset($_FILES['video']) and $_FILES['video']['error'] == 0)
-                    $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
-                else
-                    error(__("Error"), __("Couldn't upload video file.", "video"));
-            } else
-                $filename = $_POST['filename'];
+            if (isset($_FILES['video']) and upload_tester($_FILES['video']['error']))
+                $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
+            else
+                error(__("Error"), __("You did not select a video to upload.", "video"));
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
@@ -42,16 +39,11 @@
         }
 
         public function update($post) {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['video']) and $_FILES['video']['error'] == 0) {
-                    $this->delete_file($post);
-                    $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
-                } else
-                    $filename = $post->filename;
-            else {
+            if (isset($_FILES['video']) and upload_tester($_FILES['video']['error'])) {
                 $this->delete_file($post);
-                $filename = $_POST['filename'];
-            }
+                $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
+            } else
+                $filename = $post->filename;
 
             $post->update(array("title" => $_POST['title'],
                                 "filename" => $filename,
@@ -71,12 +63,16 @@
         }
 
         public function delete_file($post) {
-            if ($post->feather != "video") return;
+            if ($post->feather != "video")
+                return;
+
             unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
         }
 
         public function filter_post($post) {
-            if ($post->feather != "video") return;
+            if ($post->feather != "video")
+                return;
+
             $post->video_player = $this->video_player($post->filename, array(), $post);
         }
 
@@ -103,6 +99,7 @@
 
         public function enclose_video($post) {
             $config = Config::current();
+
             if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
                 return;
 

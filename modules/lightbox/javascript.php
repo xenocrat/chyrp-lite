@@ -27,7 +27,7 @@
                     "right": "0px",
                     "bottom": "0px",
                     "left": "0px",
-                    "z-index": 2147483647,
+                    "z-index": 2147483646,
                     "opacity": 0,
                     "transition-property": "opacity",
                     "transition-duration": "500ms",
@@ -54,7 +54,7 @@
                 if ( isNaN(ChyrpLightbox.spacing) ) ChyrpLightbox.spacing = 24;
                 $.extend( ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background] );
                 $("img.image").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
-                if ( ChyrpLightbox.protect ) $("img.image").not(".suppress_lightbox").on({ contextmenu: function() { return false } });
+                if ( ChyrpLightbox.protect ) $("img.image").not(".suppress_lightbox").on({ contextmenu: function() { return false; } });
                 $(window).on({ resize: ChyrpLightbox.hide, orientationchange: ChyrpLightbox.hide, popstate: ChyrpLightbox.hide });
                 ChyrpLightbox.watch();
             },
@@ -75,23 +75,25 @@
                     observer.observe(target, config);
                 }
             },
-            load: function() {
+            load: function(alt, src) {
                 if ( ChyrpLightbox.active == false ) {
-                    var src = $(this).attr("src"), href = $(this).parent().attr('href'), alt = $(this).attr("alt");
+                    if ( !src || !alt ) {
+                        src = $(this).parent("a.image_link").attr("href") || $(this).attr("src"); // Load original (Photo/Uploader Feather)
+                        alt = $(this).attr("alt");
+                    }
                     $("<div>", {
                         "id": "ChyrpLightbox-bg",
                         "role": "img",
-                        "aria-label": alt
+                        "aria-label": "<?php echo __('Click or touch anywhere to return to the page.') ?>"
                     }).css(ChyrpLightbox.styles.bg).click(function(e) {
                         if (e.target === e.currentTarget)
                             ChyrpLightbox.hide();
                     }).append($("<img>", {
                         "id": "ChyrpLightbox-fg",
-                        "src": href || src, // Load original (Photo Feather)
+                        "src": src,
                         "alt": alt
-                    }).css(ChyrpLightbox.styles.fg).load(ChyrpLightbox.show).error(function() {
-                        $(this).off("error"); this.src = src;
-                    })).appendTo("body");
+                    }).css(ChyrpLightbox.styles.fg).load(ChyrpLightbox.show)).appendTo("body");
+
                     ChyrpLightbox.active = true;
                     return false;
                 }
@@ -99,7 +101,7 @@
             show: function() {
                 var fg = $("#ChyrpLightbox-fg"), fgWidth = fg.outerWidth(), fgHeight = fg.outerHeight();
                 var bg = $("#ChyrpLightbox-bg"), bgWidth = bg.outerWidth(), bgHeight = bg.outerHeight();
-                if ( ChyrpLightbox.protect ) $(fg).on({ contextmenu: function() { return false } });
+                if ( ChyrpLightbox.protect ) $(fg).on({ contextmenu: function() { return false; } });
                 while ( ( ( bgWidth - ( ChyrpLightbox.spacing * 2 ) ) < fgWidth ) || ( ( bgHeight - ( ChyrpLightbox.spacing * 2 ) ) < fgHeight ) ) {
                     Math.round(fgWidth = fgWidth * 0.99);
                     Math.round(fgHeight = fgHeight * 0.99);
@@ -109,20 +111,8 @@
                     "left": Math.round( ( bgWidth - fgWidth ) / 2 ) + "px",
                     "width": fgWidth + "px",
                     "height": fgHeight + "px",
-                    "visibility": 'visible'
-                });
-                $("<img>", {
-                    "src": "<?php echo Config::current()->chyrp_url."/modules/lightbox/images/minimize.svg"; ?>",
-                    "alt": "<?php echo __("Minimize", "lightbox"); ?>",
-                    "title": "<?php echo __("Minimize", "lightbox"); ?>",
-                    "role": "button",
-                    "aria-label": "<?php echo __("Minimize", "lightbox"); ?>"
-                }).css({
-                    "display": "block",
-                    "position": "absolute",
-                    "top": Math.round( ( ( bgHeight - fgHeight ) / 2 ) + 8 ) + "px",
-                    "right": Math.round( ( ( bgWidth - fgWidth ) / 2 ) + 8 ) + "px",
-                    "cursor": "pointer"
+                    "visibility": 'visible',
+                    "cursor": "url('<?php echo Config::current()->chyrp_url."/modules/lightbox/images/zoom-out.svg"; ?>'), pointer"
                 }).click(ChyrpLightbox.hide).appendTo("#ChyrpLightbox-bg");
                 bg.css({
                     "opacity": 1,

@@ -42,7 +42,7 @@
         <id>tag:<?php echo $tagged; ?></id>
         <updated><?php echo when("c", $updated); ?></updated>
         <published><?php echo when("c", $post->created_at); ?></published>
-        <link rel="alternate" type="<?php echo $theme->type; ?>" href="<?php echo fix($url); ?>" />
+        <link rel="alternate" type="<?php echo $theme->type; ?>" href="<?php echo fix($url, true); ?>" />
         <author>
             <name><?php echo fix($author); ?></name>
 <?php if (!empty($post->user->website)): ?>

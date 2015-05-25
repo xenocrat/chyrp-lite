@@ -123,7 +123,7 @@
             $memcached_hosts = empty($_POST['cache_memcached_hosts']) ? array() : explode(", ", $_POST['cache_memcached_hosts']);
 
             $config = Config::current();
-            if ($config->set("cache_expire", $_POST['cache_expire']) and $config->set("cache_exclude", $exclude) and $config->set("cache_memcached_hosts", $memcached_hosts))
+            if ($config->set("cache_expire", (int) $_POST['cache_expire']) and $config->set("cache_exclude", $exclude) and $config->set("cache_memcached_hosts", $memcached_hosts))
                 Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");
         }
 
