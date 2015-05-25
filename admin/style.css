@@ -676,6 +676,8 @@ img.overlay_close_gadget {                      display: block;
                                                 margin: 2em }
 .css_reset code {                               font-family: monospace;
                                                 font-size: 0.75em }
+      .css_reset pre code {                     background-color: transparent;
+                                                border: none }
 .css_reset blockquote {                         margin: 2em;
                                                 font-style: italic }
     .css_reset blockquote em {                  font-style: normal }
