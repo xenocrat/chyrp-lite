@@ -180,7 +180,7 @@ Called from:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 206
+	includes/ajax.php on line 208
 
 
 change_setting

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-05-24 16:06+0000\n"
+"POT-Creation-Date: 2015-05-25 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -48,7 +48,9 @@ msgstr ""
 #: includes/ajax.php:16
 #: includes/ajax.php:32
 #: includes/ajax.php:57
-#: includes/ajax.php:89
+#: includes/ajax.php:82
+#: includes/ajax.php:92
+#: includes/ajax.php:198
 #: includes/controller/Admin.php:60
 #: includes/controller/Admin.php:80
 #: includes/controller/Admin.php:88
@@ -167,46 +169,54 @@ msgstr ""
 msgid "You do not have sufficient privileges to delete this post."
 msgstr ""
 
-#: includes/ajax.php:89
+#: includes/ajax.php:82
+msgid "You do not have sufficient privileges to preview content."
+msgstr ""
+
+#: includes/ajax.php:92
 msgid "You do not have sufficient privileges to enable/disable extensions."
 msgstr ""
 
-#: includes/ajax.php:114
-#: includes/ajax.php:169
+#: includes/ajax.php:117
+#: includes/ajax.php:170
 #: includes/controller/Admin.php:1641
 #: includes/controller/Admin.php:1885
 #: includes/controller/Admin.php:1954
 msgid "You do not have sufficient privileges to enable/disable modules."
 msgstr ""
 
-#: includes/ajax.php:116
-#: includes/ajax.php:171
+#: includes/ajax.php:119
+#: includes/ajax.php:172
 #: includes/controller/Admin.php:1758
 #: includes/controller/Admin.php:1887
 #: includes/controller/Admin.php:1956
 msgid "You do not have sufficient privileges to enable/disable feathers."
 msgstr ""
 
-#: includes/ajax.php:139
+#: includes/ajax.php:142
 #: includes/controller/Admin.php:1927
 #, php-format
 msgid "Please create the <code>%s</code> directory at your Chyrp install's root and CHMOD it to 777."
 msgstr ""
 
-#: includes/ajax.php:141
+#: includes/ajax.php:144
 #: includes/controller/Admin.php:1929
 #, php-format
 msgid "Please CHMOD <code>%s</code> to 777."
 msgstr ""
 
-#: includes/ajax.php:146
+#: includes/ajax.php:149
 #: includes/controller/Admin.php:1906
 msgid "Item is not a module."
 msgstr ""
 
-#: includes/ajax.php:149
+#: includes/ajax.php:152
 #: includes/controller/Admin.php:1909
 msgid "Item is not a feather."
+msgstr ""
+
+#: includes/ajax.php:198
+msgid "You do not have sufficient privileges to reorder feathers."
 msgstr ""
 
 #: includes/class/Config.php:28
@@ -1418,7 +1428,7 @@ msgid "Install!"
 msgstr ""
 
 #: install.php:693
-#: upgrade.php:1562
+#: upgrade.php:1609
 msgid "Done!"
 msgstr ""
 
@@ -1427,7 +1437,7 @@ msgid "Chyrp Lite has been successfully installed."
 msgstr ""
 
 #: install.php:697
-#: upgrade.php:1564
+#: upgrade.php:1611
 msgid "What now?"
 msgstr ""
 
@@ -1748,65 +1758,65 @@ msgstr ""
 msgid "Writing ‘includes/config.json.php’..."
 msgstr ""
 
-#: upgrade.php:1269
+#: upgrade.php:1314
 msgid "Resetting theme to Blossom..."
 msgstr ""
 
-#: upgrade.php:1276
+#: upgrade.php:1321
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:1540
+#: upgrade.php:1587
 #, php-format
 msgid "Calling ‘%s’ module's upgrader..."
 msgstr ""
 
-#: upgrade.php:1552
+#: upgrade.php:1599
 #, php-format
 msgid "Calling ‘%s’ feather's upgrader..."
 msgstr ""
 
-#: upgrade.php:1566
+#: upgrade.php:1613
 msgid "Look through the results up there for any failed tasks."
 msgstr ""
 
-#: upgrade.php:1567
+#: upgrade.php:1614
 msgid "If any of your Modules or Feathers have new versions available for this release, check if an <code>upgrades.php</code> file exists in their main directory. If that file exists, run this upgrader again after enabling the Module or Feather and it will run the upgrade tasks."
 msgstr ""
 
-#: upgrade.php:1568
+#: upgrade.php:1615
 msgid "When you are done, you can delete this file. It shouldn't pose a threat, but you should delete it anyway, just to be safe and tidy."
 msgstr ""
 
-#: upgrade.php:1570
+#: upgrade.php:1617
 msgid "All done!"
 msgstr ""
 
-#: upgrade.php:1572
+#: upgrade.php:1619
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:1573
+#: upgrade.php:1620
 msgid "Please take these preemptive measures before proceeding:"
 msgstr ""
 
-#: upgrade.php:1575
+#: upgrade.php:1622
 msgid "<strong>Make a backup of your installation and database.</strong>"
 msgstr ""
 
-#: upgrade.php:1576
+#: upgrade.php:1623
 msgid "Disable any third-party Modules and Feathers."
 msgstr ""
 
-#: upgrade.php:1577
+#: upgrade.php:1624
 msgid "Ensure Chyrp Lite's directory is writable by the server."
 msgstr ""
 
-#: upgrade.php:1579
+#: upgrade.php:1626
 msgid "If any of the upgrade tasks fail, you can safely refresh and retry."
 msgstr ""
 
-#: upgrade.php:1581
+#: upgrade.php:1628
 msgid "Upgrade me!"
 msgstr ""
 
