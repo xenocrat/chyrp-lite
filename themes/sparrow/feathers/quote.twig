@@ -3,7 +3,7 @@
 {% block content %}
       {% if post['title'] %}
       <h2 class="post_title">
-        <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;${ post.title | escape(true) }&quot;">$post.title</a>
+        <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;">$post.title</a>
       </h2>
       {% endif %}
       <section class="quote{% if post.quote | length > 1000 %} columnized{% endif %}">
