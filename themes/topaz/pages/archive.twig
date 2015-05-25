@@ -20,7 +20,7 @@
             {% else %}
             <p>${ post.excerpt | read_more("…more") }</p>
             {% endif %}
-            <a href="$post.url" class="archive_post_link">${ "Permanent link to" | translate } &quot;$post.title&quot;</a>
+            <a href="$post.url" class="archive_post_link">${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;</a>
           </article>
           {% else %} {# Complete archive: display titles to minimise content payload #}
           <a href="$post.url">
