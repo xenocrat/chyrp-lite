@@ -2,7 +2,7 @@
 
 {% block content %}
       <h2 class="post_title">
-        <a href="$post.source" class="link">$post.name</a>
+        <a href="${ post.source | escape(true) }" class="link">$post.name</a>
       </h2>
       <section class="description{% if post.description | length > 1000 %} columnized{% endif %}">
         ${ post.description | read_more("…more") }

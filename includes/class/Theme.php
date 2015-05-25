@@ -325,8 +325,8 @@
                                "/?feed" :
                                "&amp;feed") ;
             $append.= $config->clean_urls ?
-                          "/".urlencode($this->title) :
-                          "&amp;title=".urlencode($this->title) ;
+                          "/".$this->clean :
+                          "&amp;title=".$this->clean ;
 
             # Create basic list of links (site and page Atom feeds):
             $feedurl = oneof(@$config->feed_url, url("feed"));
@@ -335,7 +335,7 @@
 
             if ($request !== "/")
                 if ($pagefeedurl != $feedurl)
-                    $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml", "title" => "$this->title");
+                    $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml", "title" => fix($this->title, true));
 
             # Ask modules to pitch in by adding their own <link> tag items to $links.
             # Each item must be an array with "href" and "rel" properties (and optionally "title" and "type"):
