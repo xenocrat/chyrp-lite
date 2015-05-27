@@ -262,7 +262,7 @@
                         break;
                 }
 
-                $elements.= "\n".'<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.$media.'" charset="utf-8">';
+                $elements.= "\n".'<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.$media.'">';
             }
 
             return $elements;
