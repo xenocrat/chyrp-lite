@@ -622,24 +622,32 @@
 
         public function post($post) {
             $tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
-            uksort($tags, array($this, "sort_tags_name_asc"));
+            uksort($tags, array($this, "sort_tags_asc"));
             $post->tags = $tags;
             $post->linked_tags = self::linked_tags($post->tags);
         }
 
-        public function sort_tags_name_asc($a, $b) {
+        private function sort_tags_asc($a, $b) {
+            return $this->mb_strcasecmp($a, $b, "UTF-8");
+        }
+
+        private function sort_tags_desc($a, $b) {
+            return $this->mb_strcasecmp($b, $a, "UTF-8");
+        }
+
+        private function sort_tags_name_asc($a, $b) {
             return $this->mb_strcasecmp($a["name"], $b["name"], "UTF-8");
         }
 
-        public function sort_tags_name_desc($a, $b) {
+        private function sort_tags_name_desc($a, $b) {
             return $this->mb_strcasecmp($b["name"], $a["name"], "UTF-8");
         }
 
-        public function sort_tags_popularity_asc($a, $b) {
+        private function sort_tags_popularity_asc($a, $b) {
             return $a["popularity"] > $b["popularity"];
         }
 
-        public function sort_tags_popularity_desc($a, $b) {
+        private function sort_tags_popularity_desc($a, $b) {
             return $a["popularity"] < $b["popularity"];
         }
 
