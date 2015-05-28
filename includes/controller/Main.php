@@ -13,7 +13,6 @@
                              '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&year=$1&month=$2&day=$3',
                              '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&year=$1&month=$2',
                              '|/archive/([0-9]{4})/|'                       => '/?action=archive&year=$1',
-                             '|/([^/]+)/feed/([^/]+)/|'                     => '/?action=$1&feed&title=$2',
                              '|/([^/]+)/feed/|'                             => '/?action=$1&feed');
 
         # Boolean: $displayed
@@ -66,16 +65,6 @@
             if (preg_match("/\/feed\/?$/", $route->request)) {
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
-
-                if ($route->arg[0] == "feed") # Don't set $route->action to "feed" (bottom of this function).
-                    return $route->action = "index";
-            }
-
-            # Feed with a title parameter
-            if (preg_match("/\/feed\/([^\/]+)\/?$/", $route->request, $title)) {
-                $this->feed = true;
-                $this->post_limit = $config->feed_items;
-                $_GET['title'] = $title[1];
 
                 if ($route->arg[0] == "feed") # Don't set $route->action to "feed" (bottom of this function).
                     return $route->action = "index";
@@ -586,7 +575,7 @@
                     $user = new User(array("login" => $_POST['login']));
 
                     if (!$user->approved)
-                        error(__("Error"), __("You cannot log in until you have activated your registration via email."));
+                        error(__("Error"), __("You cannot log in until you have activated your registration."));
 
                     $_SESSION['user_id'] = $user->id;
 

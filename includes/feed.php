@@ -3,11 +3,10 @@
     $trigger = Trigger::current();
     $theme = Theme::current();
 
-    $title = (!empty($_GET['title'])) ? ": ".html_entity_decode($_GET['title']) : "" ;
     echo "<".'?xml version="1.0" encoding="utf-8"?'.">\r";
 ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title><?php echo fix($config->name.$title); ?></title>
+    <title><?php echo fix($config->name); ?></title>
 <?php if (!empty($config->description)): ?>
     <subtitle><?php echo fix($config->description); ?></subtitle>
 <?php endif; ?>
@@ -28,8 +27,6 @@
                                1);
 
         $url = $post->url();
-        $title = $post->title();
-
         $trigger->filter($url, "feed_url", $post);
 
         if (!$post->user->no_results)
@@ -38,7 +35,7 @@
             $author = __("Guest");
 ?>
     <entry>
-        <title type="html"><?php echo fix(oneof($title, ucfirst($post->feather))); ?></title>
+        <title type="html"><?php echo fix(oneof($post->title(), ucfirst($post->feather))); ?></title>
         <id>tag:<?php echo $tagged; ?></id>
         <updated><?php echo when("c", $updated); ?></updated>
         <published><?php echo when("c", $post->created_at); ?></published>

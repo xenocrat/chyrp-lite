@@ -262,7 +262,7 @@
                         break;
                 }
 
-                $elements.= "\n".'<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.$media.'" charset="utf-8">';
+                $elements.= "\n".'<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.$media.'">';
             }
 
             return $elements;
@@ -318,24 +318,21 @@
         public function feeds() {
             # Compute the URL of the per-page feed (if any):
             $config = Config::current();
-            $request = ($config->clean_urls) ? rtrim(Route::current()->request, "/") : fix(Route::current()->request) ;
+            $route = Route::current();
+            $request = ($config->clean_urls) ? rtrim($route->request, "/") : fix($route->request) ;
             $append = $config->clean_urls ?
-                          "/feed" :
-                          ((count($_GET) == 1 and Route::current()->action == "index") ?
+                          "/feed/" :
+                          ((count($_GET) == 1 and $route->action == "index") ?
                                "/?feed" :
                                "&amp;feed") ;
-            $append.= $config->clean_urls ?
-                          "/".$this->clean :
-                          "&amp;title=".$this->clean ;
 
             # Create basic list of links (site and page Atom feeds):
-            $feedurl = oneof(@$config->feed_url, url("feed"));
+            $mainfeedurl = oneof(@$config->feed_url, url("feed"));
             $pagefeedurl = $config->url.$request.$append;
-            $links = array(array("href" => $feedurl, "type" => "application/atom+xml", "title" => $config->name));
+            $links = array(array("href" => $mainfeedurl, "type" => "application/atom+xml", "title" => $config->name));
 
-            if ($request !== "/")
-                if ($pagefeedurl != $feedurl)
-                    $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml", "title" => fix($this->title, true));
+            if ((MainController::current()->context["posts"]) and ($pagefeedurl != $mainfeedurl))
+                $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml");
 
             # Ask modules to pitch in by adding their own <link> tag items to $links.
             # Each item must be an array with "href" and "rel" properties (and optionally "title" and "type"):
@@ -356,10 +353,10 @@
                 if ($title)
                     $tag.= ' title="'.$title.'"';
 
-                $tags[] = $tag.' />';
+                $tags[] = $tag.'>';
             }
 
-            return implode("\n\t", $tags);
+            return "<!-- Feeds -->\n".implode("\n", $tags);
         }
 
         public function load_time() {
