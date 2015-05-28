@@ -1826,7 +1826,7 @@
      * Checks if the answer to a captcha is right.
      *
      * Returns:
-     *     A string containing an form input type
+     *     Whether or not the captcha was defeated
      */
     function check_captcha() {
         global $captchaHooks;
@@ -1862,4 +1862,44 @@
             $url .= ">";
         }
         return $url;
+    }
+
+    /**
+     * Function: activate
+     * Send an activation email to an unapproved user.
+     *
+     * Parameters:
+     *     $login - The user's registered login.
+     *     $email - The user's registered email address.
+     */
+    function activate($login, $email) {
+        $config  = Config::current();
+        $to      = $email;
+        $subject = _f("Activate your account at %s", $config->name);
+        $message = _f("Hello, %s.", fix($login));
+        $message.= "\n\n";
+        $message.= _f("You are receiving this message because you registered at %s.", $config->chyrp_url);
+        $message.= "\n";
+        $message.= _f("Visit this link to activate your account: %s",
+            $config->chyrp_url."/?action=validate&login=".fix($login)."&token=".token(array($login, $email)));
+        $headers = "From:".$config->email."\r\n".
+                   "Reply-To:".$config->email. "\r\n".
+                   "X-Mailer: PHP/".phpversion();
+
+        if (!email($to, $subject, $message, $headers))
+            error(__("Error"), __("Unable to email the activation link."));
+    }
+
+    /**
+     * Function: token
+     * Salt and hash a unique token.
+     *
+     * Parameters:
+     *     $items - The items to hash.
+     *
+     * Returns:
+     *     A unique token.
+     */
+    function token($items = array()) {
+        return sha1(implode((array) $items).md5(Config::current()->secure_hashkey));
     }

@@ -518,33 +518,15 @@
 
                 if (!Flash::exists("warning")) {
                     if ($config->email_activation) {
-                        $to      = $_POST['email'];
-                        $subject = _f($config->name." Registration Pending");
-                        $message = _f("Hello, ".fix($_POST['login']).
-                            ".\n\nYou are receiving this message because you recently registered at ".
-                            $config->chyrp_url."\nTo complete your registration, go to ".
-                            $config->chyrp_url."/?action=validate&login=".fix($_POST['login']).
-                            "&token=".sha1($_POST['login'].$_POST['email'].md5($config->secure_hashkey)));
-                        $headers = "From:".$config->email."\r\n" .
-                                   "Reply-To:".$config->email. "\r\n" .
-                                   "X-Mailer: PHP/".phpversion() ;
-
                         $user = User::add($_POST['login'], $_POST['password1'], $_POST['email'], "", "", 5, false);
-                        $sent = email($to, $subject, $message, $headers);
-
-                        if ($sent)
-                            Flash::notice(__("The email address you provided has been sent details to confirm registration."), "/");
-                        else
-                            Flash::notice(__("There was an error emailing the activation link to your email address."), "/");
+                        activate($user->login, $user->email);
                     } else {
                         $user = User::add($_POST['login'], $_POST['password1'], $_POST['email']);
-
-                        Trigger::current()->call("user_registered", $user);
-
                         $_SESSION['user_id'] = $user->id;
-
-                        Flash::notice(__("Registration successful."), "/");
                     }
+
+                    Trigger::current()->call("user_registered", $user);
+                    Flash::notice(__("Registration successful."), "/");
                 }
             }
 
@@ -567,7 +549,7 @@
             if ($user->no_results)
                 Flash::warning(__("A user with that email doesn't seem to exist in our database."), "/");
 
-            if (sha1($user->login.$user->email.md5(Config::current()->secure_hashkey)) !== $_GET['token'])
+            if (token(array($user->login, $user->email)) !== $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             if (!$user->approved or $user->group_id = 5) {
@@ -602,6 +584,10 @@
 
                 if (!Flash::exists("warning")) {
                     $user = new User(array("login" => $_POST['login']));
+
+                    if (!$user->approved)
+                        error(__("Error"), __("You cannot log in until you have activated your registration via email."));
+
                     $_SESSION['user_id'] = $user->id;
 
                     if (!isset($redirect)) {
