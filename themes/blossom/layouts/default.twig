@@ -52,18 +52,12 @@ ${ trigger.call("head") }
   <div role="navigation" class="next traversal">${ posts.next_link( ( "Older posts" | translate ) ) }</div>
   {% endif %}
   <!-- Footer -->
-<<<<<<< HEAD
-  <div id="tail" role="navigation">
-    <ul class="navigation tail_nav">
-    {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Blog" | translate }</a></li>{% endif %}
-=======
   <div id="tail">
     <ul role="menu" class="navigation tail_nav">
     {% if route.action != "index" %}
     <li role="presentation">
       <a role="menuitem" href="{% url "index" %}" rel="">${ "Blog" | translate }</a>
     </li>{% endif %}
->>>>>>> develop
     {% if theme.pages_list %}
     {% for item in theme.pages_list %}
       {% if item.page.depth == 1 %}

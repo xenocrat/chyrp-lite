@@ -325,12 +325,6 @@
                           ((count($_GET) == 1 and $route->action == "index") ?
                                "/?feed" :
                                "&amp;feed") ;
-<<<<<<< HEAD
-            $append.= $config->clean_urls ?
-                          "/".sanitize($this->title) :
-                          "&amp;title=".sanitize($this->title) ;
-=======
->>>>>>> develop
 
             # Create basic list of links (site and page Atom feeds):
             $mainfeedurl = oneof(@$config->feed_url, url("feed"));
