@@ -13,7 +13,6 @@
                              '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&year=$1&month=$2&day=$3',
                              '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&year=$1&month=$2',
                              '|/archive/([0-9]{4})/|'                       => '/?action=archive&year=$1',
-                             '|/([^/]+)/feed/([^/]+)/|'                     => '/?action=$1&feed&title=$2',
                              '|/([^/]+)/feed/|'                             => '/?action=$1&feed');
 
         # Boolean: $displayed
@@ -66,16 +65,6 @@
             if (preg_match("/\/feed\/?$/", $route->request)) {
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
-
-                if ($route->arg[0] == "feed") # Don't set $route->action to "feed" (bottom of this function).
-                    return $route->action = "index";
-            }
-
-            # Feed with a title parameter
-            if (preg_match("/\/feed\/([^\/]+)\/?$/", $route->request, $title)) {
-                $this->feed = true;
-                $this->post_limit = $config->feed_items;
-                $_GET['title'] = $title[1];
 
                 if ($route->arg[0] == "feed") # Don't set $route->action to "feed" (bottom of this function).
                     return $route->action = "index";
@@ -518,29 +507,15 @@
 
                 if (!Flash::exists("warning")) {
                     if ($config->email_activation) {
-                        $to      = $_POST['email'];
-                        $subject = _f($config->name." Registration Pending");
-                        $message = _f("Hello, ".fix($_POST['login']).".\n\nYou are receiving this message because you recently registered at ".$config->chyrp_url."\nTo complete your registration, go to ".$config->chyrp_url."/?action=validate&login=".fix($_POST['login'])."&token=".sha1($_POST['login'].$_POST['email']));
-                        $headers = "From:".$config->email."\r\n" .
-                                   "Reply-To:".$config->email. "\r\n" .
-                                   "X-Mailer: PHP/".phpversion() ;
-
                         $user = User::add($_POST['login'], $_POST['password1'], $_POST['email'], "", "", 5, false);
-                        $sent = email($to, $subject, $message, $headers);
-
-                        if ($sent)
-                            Flash::notice(__("The email address you provided has been sent details to confirm registration."), "/");
-                        else
-                            Flash::notice(__("There was an error emailing the activation link to your email address."), "/");
+                        activate($user->login, $user->email);
                     } else {
                         $user = User::add($_POST['login'], $_POST['password1'], $_POST['email']);
-
-                        Trigger::current()->call("user_registered", $user);
-
                         $_SESSION['user_id'] = $user->id;
-
-                        Flash::notice(__("Registration successful."), "/");
                     }
+
+                    Trigger::current()->call("user_registered", $user);
+                    Flash::notice(__("Registration successful."), "/");
                 }
             }
 
@@ -563,7 +538,7 @@
             if ($user->no_results)
                 Flash::warning(__("A user with that email doesn't seem to exist in our database."), "/");
 
-            if (sha1($user->login.$user->email) !== $_GET['token'])
+            if (token(array($user->login, $user->email)) !== $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             if (!$user->approved or $user->group_id = 5) {
@@ -598,6 +573,10 @@
 
                 if (!Flash::exists("warning")) {
                     $user = new User(array("login" => $_POST['login']));
+
+                    if (!$user->approved)
+                        error(__("Error"), __("You cannot log in until you have activated your registration."));
+
                     $_SESSION['user_id'] = $user->id;
 
                     if (!isset($redirect)) {

@@ -574,6 +574,9 @@
             if ($_POST['id'] == $visitor->id)
                 $_SESSION['password'] = $password;
 
+            if (!$user->approved)
+                activate($user->login, $user->email);
+
             Flash::notice(__("User updated."), "/admin/?action=manage_users");
         }
 

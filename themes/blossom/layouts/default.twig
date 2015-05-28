@@ -52,34 +52,67 @@ ${ trigger.call("head") }
   <div role="navigation" class="next traversal">${ posts.next_link( ( "Older posts" | translate ) ) }</div>
   {% endif %}
   <!-- Footer -->
+<<<<<<< HEAD
   <div id="tail" role="navigation">
     <ul class="navigation tail_nav">
     {% if route.action != "index" %}<li><a href="{% url "index" %}" rel="">${ "Blog" | translate }</a></li>{% endif %}
+=======
+  <div id="tail">
+    <ul role="menu" class="navigation tail_nav">
+    {% if route.action != "index" %}
+    <li role="presentation">
+      <a role="menuitem" href="{% url "index" %}" rel="">${ "Blog" | translate }</a>
+    </li>{% endif %}
+>>>>>>> develop
     {% if theme.pages_list %}
     {% for item in theme.pages_list %}
       {% if item.page.depth == 1 %}
-      <li class="page{% if item.has_children %} parent{% endif %}"><a href="$item.page.url">$item.page.title</a></li>
+      <li role="presentation" class="page{% if item.has_children %} parent{% endif %}">
+        <a role="menuitem" href="$item.page.url">$item.page.title</a>
+      </li>
       {% endif %}
     {% endfor %}
     {% endif %}
-      <li><a href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">${ "Email" | translate }</a></li>
-      <li><a href="{% url "feed" %}" rel="alternate">${ "Feed" | translate }</a></li>
-      {% if theme.archives_list %}<li><a href="{% url 'archive/%s/' | format((theme.archives_list | first).year) %}" rel="archives">${ "Archive" | translate }</a></li>{% endif %}
+      <li role="presentation">
+        <a role="menuitem" href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">${ "Email" | translate }</a>
+      </li>
+      <li role="presentation">
+        <a role="menuitem" href="{% url "feed" %}" rel="alternate">${ "Feed" | translate }</a>
+      </li>
+      {% if theme.archives_list %}
+      <li role="presentation">
+        <a role="menuitem" href="{% url 'archive/%s/' | format((theme.archives_list | first).year) %}" rel="archives">${ "Archive" | translate }</a>
+      </li>
+      {% endif %}
       {% if visitor.group.can("change_settings", "toggle_extensions") %}
-      <li><a href="$site.chyrp_url/admin/">${ "Admin" | translate }</a></li>
+      <li role="presentation">
+        <a role="menuitem" href="$site.chyrp_url/admin/">${ "Admin" | translate }</a>
+      </li>
       {% elseif visitor.group.can("add_post") %}
-      <li><a href="{% admin "write_post" %}">${ "Write" | translate }</a></li>
+      <li role="presentation">
+        <a role="menuitem" href="{% admin "write_post" %}">${ "Write" | translate }</a>
+      </li>
       {% elseif visitor.group.can("add_draft") %}
-      <li><a href="{% admin "write_post" %}">${ "Draft" | translate }</a></li>
+      <li role="presentation">
+        <a role="menuitem" href="{% admin "write_post" %}">${ "Draft" | translate }</a>
+      </li>
       {% endif %}
       {% if visitor.logged_in %}
-      <li><a href="{% url "controls" %}">${ "Controls" | translate }</a></li>
-      <li><a href="{% url "logout" %}">${ "Log out" | translate }</a></li>
+      <li role="presentation">
+        <a role="menuitem" href="{% url "controls" %}">${ "Controls" | translate }</a>
+      </li>
+      <li role="presentation">
+        <a role="menuitem" href="{% url "logout" %}">${ "Log out" | translate }</a>
+      </li>
       {% else %}
       {% if site.can_register %}
-      <li><a href="{% url "register" %}">${ "Register" | translate }</a></li>
+      <li role="presentation">
+        <a role="menuitem" href="{% url "register" %}">${ "Register" | translate }</a>
+      </li>
       {% endif %}
-      <li><a href="{% url "login" %}">${ "Log in" | translate }</a></li>
+      <li role="presentation">
+        <a role="menuitem" href="{% url "login" %}">${ "Log in" | translate }</a>
+      </li>
       {% endif %}
     </ul>
   </div>
