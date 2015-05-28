@@ -520,7 +520,11 @@
                     if ($config->email_activation) {
                         $to      = $_POST['email'];
                         $subject = _f($config->name." Registration Pending");
-                        $message = _f("Hello, ".fix($_POST['login']).".\n\nYou are receiving this message because you recently registered at ".$config->chyrp_url."\nTo complete your registration, go to ".$config->chyrp_url."/?action=validate&login=".fix($_POST['login'])."&token=".sha1($_POST['login'].$_POST['email']));
+                        $message = _f("Hello, ".fix($_POST['login']).
+                            ".\n\nYou are receiving this message because you recently registered at ".
+                            $config->chyrp_url."\nTo complete your registration, go to ".
+                            $config->chyrp_url."/?action=validate&login=".fix($_POST['login']).
+                            "&token=".sha1($_POST['login'].$_POST['email'].md5($config->secure_hashkey)));
                         $headers = "From:".$config->email."\r\n" .
                                    "Reply-To:".$config->email. "\r\n" .
                                    "X-Mailer: PHP/".phpversion() ;
@@ -563,7 +567,7 @@
             if ($user->no_results)
                 Flash::warning(__("A user with that email doesn't seem to exist in our database."), "/");
 
-            if (sha1($user->login.$user->email) !== $_GET['token'])
+            if (sha1($user->login.$user->email.md5(Config::current()->secure_hashkey)) !== $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             if (!$user->approved or $user->group_id = 5) {
