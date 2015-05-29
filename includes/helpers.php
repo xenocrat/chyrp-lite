@@ -1485,7 +1485,117 @@
     function timezones() {
         $zones = array();
 
-        $deprecated = array("Brazil/Acre", "Brazil/DeNoronha", "Brazil/East", "Brazil/West", "Canada/Atlantic", "Canada/Central", "Canada/East-Saskatchewan", "Canada/Eastern", "Canada/Mountain", "Canada/Newfoundland", "Canada/Pacific", "Canada/Saskatchewan", "Canada/Yukon", "CET", "Chile/Continental", "Chile/EasterIsland", "CST6CDT", "Cuba", "EET", "Egypt", "Eire", "EST", "EST5EDT", "Etc/GMT", "Etc/GMT+0", "Etc/GMT+1", "Etc/GMT+10", "Etc/GMT+11", "Etc/GMT+12", "Etc/GMT+2", "Etc/GMT+3", "Etc/GMT+4", "Etc/GMT+5", "Etc/GMT+6", "Etc/GMT+7", "Etc/GMT+8", "Etc/GMT+9", "Etc/GMT-0", "Etc/GMT-1", "Etc/GMT-10", "Etc/GMT-11", "Etc/GMT-12", "Etc/GMT-13", "Etc/GMT-14", "Etc/GMT-2", "Etc/GMT-3", "Etc/GMT-4", "Etc/GMT-5", "Etc/GMT-6", "Etc/GMT-7", "Etc/GMT-8", "Etc/GMT-9", "Etc/GMT0", "Etc/Greenwich", "Etc/UCT", "Etc/Universal", "Etc/UTC", "Etc/Zulu", "Factory", "GB", "GB-Eire", "GMT", "GMT+0", "GMT-0", "GMT0", "Greenwich", "Hongkong", "HST", "Iceland", "Iran", "Israel", "Jamaica", "Japan", "Kwajalein", "Libya", "MET", "Mexico/BajaNorte", "Mexico/BajaSur", "Mexico/General", "MST", "MST7MDT", "Navajo", "NZ", "NZ-CHAT", "Poland", "Portugal", "PRC", "PST8PDT", "ROC", "ROK", "Singapore", "Turkey", "UCT", "Universal", "US/Alaska", "US/Aleutian", "US/Arizona", "US/Central", "US/East-Indiana", "US/Eastern", "US/Hawaii", "US/Indiana-Starke", "US/Michigan", "US/Mountain", "US/Pacific", "US/Pacific-New", "US/Samoa", "UTC", "W-SU", "WET", "Zulu");
+        $deprecated = array("Brazil/Acre",
+                            "Brazil/DeNoronha",
+                            "Brazil/East",
+                            "Brazil/West",
+                            "Canada/Atlantic",
+                            "Canada/Central",
+                            "Canada/East-Saskatchewan",
+                            "Canada/Eastern",
+                            "Canada/Mountain",
+                            "Canada/Newfoundland",
+                            "Canada/Pacific",
+                            "Canada/Saskatchewan",
+                            "Canada/Yukon",
+                            "CET",
+                            "Chile/Continental",
+                            "Chile/EasterIsland",
+                            "CST6CDT",
+                            "Cuba",
+                            "EET",
+                            "Egypt",
+                            "Eire",
+                            "EST",
+                            "EST5EDT",
+                            "Etc/GMT",
+                            "Etc/GMT+0",
+                            "Etc/GMT+1",
+                            "Etc/GMT+10",
+                            "Etc/GMT+11",
+                            "Etc/GMT+12",
+                            "Etc/GMT+2",
+                            "Etc/GMT+3",
+                            "Etc/GMT+4",
+                            "Etc/GMT+5",
+                            "Etc/GMT+6",
+                            "Etc/GMT+7",
+                            "Etc/GMT+8",
+                            "Etc/GMT+9",
+                            "Etc/GMT-0",
+                            "Etc/GMT-1",
+                            "Etc/GMT-10",
+                            "Etc/GMT-11",
+                            "Etc/GMT-12",
+                            "Etc/GMT-13",
+                            "Etc/GMT-14",
+                            "Etc/GMT-2",
+                            "Etc/GMT-3",
+                            "Etc/GMT-4",
+                            "Etc/GMT-5",
+                            "Etc/GMT-6",
+                            "Etc/GMT-7",
+                            "Etc/GMT-8",
+                            "Etc/GMT-9",
+                            "Etc/GMT0",
+                            "Etc/Greenwich",
+                            "Etc/UCT",
+                            "Etc/Universal",
+                            "Etc/UTC",
+                            "Etc/Zulu",
+                            "Factory",
+                            "GB",
+                            "GB-Eire",
+                            "GMT",
+                            "GMT+0",
+                            "GMT-0",
+                            "GMT0",
+                            "Greenwich",
+                            "Hongkong",
+                            "HST",
+                            "Iceland",
+                            "Iran",
+                            "Israel",
+                            "Jamaica",
+                            "Japan",
+                            "Kwajalein",
+                            "Libya",
+                            "MET",
+                            "Mexico/BajaNorte",
+                            "Mexico/BajaSur",
+                            "Mexico/General",
+                            "MST",
+                            "MST7MDT",
+                            "Navajo",
+                            "NZ",
+                            "NZ-CHAT",
+                            "Poland",
+                            "Portugal",
+                            "PRC",
+                            "PST8PDT",
+                            "ROC",
+                            "ROK",
+                            "Singapore",
+                            "Turkey",
+                            "UCT",
+                            "Universal",
+                            "US/Alaska",
+                            "US/Aleutian",
+                            "US/Arizona",
+                            "US/Central",
+                            "US/East-Indiana",
+                            "US/Eastern",
+                            "US/Hawaii",
+                            "US/Indiana-Starke",
+                            "US/Michigan",
+                            "US/Mountain",
+                            "US/Pacific",
+                            "US/Pacific-New",
+                            "US/Samoa",
+                            "UTC",
+                            "W-SU",
+                            "WET",
+                            "Zulu");
 
         foreach (timezone_identifiers_list() as $zone)
             if (!in_array($zone, $deprecated))
@@ -1865,29 +1975,56 @@
     }
 
     /**
-     * Function: activate
-     * Send an activation email to an unapproved user.
+     * Function: correspond
+     * Send an e-mail correspondence to a user about an action we took.
      *
      * Parameters:
-     *     $login - The user's registered login.
-     *     $email - The user's registered email address.
+     *     $action - About which action are we corresponding with the user?
+     *     $parameters - An indexed array of parameters associated with this action.
      */
-    function activate($login, $email) {
+    function correspond($action, $parameters) {
         $config  = Config::current();
-        $to      = $email;
-        $subject = _f("Activate your account at %s", $config->name);
-        $message = _f("Hello, %s.", fix($login));
-        $message.= "\n\n";
-        $message.= _f("You are receiving this message because you registered at %s.", $config->chyrp_url);
-        $message.= "\n";
-        $message.= _f("Visit this link to activate your account: %s",
-            $config->chyrp_url."/?action=validate&login=".fix($login)."&token=".token(array($login, $email)));
+        $to      = $parameters["email"];
         $headers = "From:".$config->email."\r\n".
                    "Reply-To:".$config->email. "\r\n".
                    "X-Mailer: PHP/".phpversion();
 
+        switch ($action) {
+            case "activate":
+                $subject = _f("Activate your account at %s", $config->name);
+                $message = _f("Hello, %s.", fix($parameters["login"]));
+                $message.= "\n\n";
+                $message.= _f("You are receiving this message because you registered at %s.", $config->chyrp_url);
+                $message.= "\n";
+                $message.= _f("Visit this link to activate your account: %s",
+                    $config->chyrp_url."/?action=activate&login=".fix($parameters["login"]).
+                    "&token=".token(array($parameters["login"], $parameters["email"])));
+                break;
+
+            case "reset":
+                $subject = _f("Reset your password at %s", $config->name);
+                $message = _f("Hello, %s.", fix($parameters["login"]));
+                $message.= "\n\n";
+                $message.= _f("You are receiving this message because you requested a password reset at %s.", $config->chyrp_url);
+                $message.= "\n";
+                $message.= _f("Visit this link to reset your password: %s",
+                    $config->chyrp_url."/?action=reset&login=".fix($parameters["login"]).
+                    "&token=".token(array($parameters["login"], $parameters["email"])));
+                break;
+
+            case "password":
+                $subject = _f("Your new password for %s", $config->name);
+                $message = _f("Hello, %s.", fix($parameters["login"]));
+                $message.= "\n\n";
+                $message.= _f("Your new password is: %s", $parameters["password"]);
+                break;
+            
+            default:
+                return;
+        }
+
         if (!email($to, $subject, $message, $headers))
-            error(__("Error"), __("Unable to email the activation link."));
+            error(__("Error"), __("Unable to send e-mail."));
     }
 
     /**

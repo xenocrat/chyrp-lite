@@ -483,7 +483,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['login']))
-                error(__("Error"), __("Please enter a username for your account."));
+                error(__("Error"), __("Please enter a username for the account."));
 
             $check = new User(array("login" => $_POST['login']));
             if (!$check->no_results)
@@ -503,14 +503,26 @@
                 $_POST['website'] = 'http://' . $_POST['website'];
             }
 
-            User::add($_POST['login'],
-                      $_POST['password1'],
-                      $_POST['email'],
-                      $_POST['full_name'],
-                      $_POST['website'],
-                      $_POST['group']);
-
-            Flash::notice(__("User added."), "/admin/?action=manage_users");
+            if ($config->email_activation) {
+                $user = User::add($_POST['login'],
+                                  $_POST['password1'],
+                                  $_POST['email'],
+                                  $_POST['full_name'],
+                                  $_POST['website'],
+                                  $_POST['group'],
+                                  false);
+                correspond("activate", array("login" => $user->login,
+                                             "email" => $user->email));
+                Flash::notice(_f("User &#8220;%s&#8221; added and activation email sent.", $user->login), "/admin/?action=manage_users");
+            } else {
+                $user = User::add($_POST['login'],
+                                  $_POST['password1'],
+                                  $_POST['email'],
+                                  $_POST['full_name'],
+                                  $_POST['website'],
+                                  $_POST['group']);
+              Flash::notice(_f("User &#8220;%s&#8221; added.", $user->login), "/admin/?action=manage_users");
+            }
         }
 
         /**
@@ -575,7 +587,8 @@
                 $_SESSION['password'] = $password;
 
             if (!$user->approved)
-                activate($user->login, $user->email);
+                correspond("activate", array("login" => $user->login,
+                                             "email" => $user->email));
 
             Flash::notice(__("User updated."), "/admin/?action=manage_users");
         }

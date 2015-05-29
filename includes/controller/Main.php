@@ -481,10 +481,10 @@
         public function register() {
             $config = Config::current();
             if (!$config->can_register)
-                error(__("Registration Disabled"), __("I'm sorry, but this site is not allowing registration."));
+                error(__("Registration Disabled"), __("This site does not allow registration."));
 
             if (logged_in())
-                error(__("Error"), __("You're already logged in."));
+                error(__("Error"), __("You are already logged in."));
 
             if (!empty($_POST)) {
                 if (empty($_POST['login']))
@@ -507,15 +507,25 @@
 
                 if (!Flash::exists("warning")) {
                     if ($config->email_activation) {
-                        $user = User::add($_POST['login'], $_POST['password1'], $_POST['email'], "", "", 5, false);
-                        activate($user->login, $user->email);
+                        $user = User::add($_POST['login'],
+                                          $_POST['password1'],
+                                          $_POST['email'],
+                                          "",
+                                          "",
+                                          $config->default_group,
+                                          false);
+                        correspond("activate", array("login" => $user->login, 
+                                                     "email" => $user->email));
+                        Flash::notice(__("We have e-mailed you an activation link."), "/");
                     } else {
-                        $user = User::add($_POST['login'], $_POST['password1'], $_POST['email']);
+                        $user = User::add($_POST['login'],
+                                          $_POST['password1'],
+                                          $_POST['email']);
                         $_SESSION['user_id'] = $user->id;
+                        Flash::notice(__("Registration successful."), "/");
                     }
 
                     Trigger::current()->call("user_registered", $user);
-                    Flash::notice(__("Registration successful."), "/");
                 }
             }
 
@@ -523,12 +533,12 @@
         }
 
         /**
-         * Function: validate
-         * Approves a user registration for a given email.
+         * Function: activate
+         * Approves a user registration for a given login.
          */
-        public function validate() {
+        public function activate() {
             if (logged_in())
-                error(__("Error"), __("You're already logged in."));
+                error(__("Error"), __("You are already logged in."));
 
             if (empty($_GET['token']))
                 error(__("Error"), __("No token found."));
@@ -536,19 +546,54 @@
             $user = new User(array("login" => strip_tags($_GET['login'])));
 
             if ($user->no_results)
-                Flash::warning(__("A user with that email doesn't seem to exist in our database."), "/");
+                error(__("Error"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) !== $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
-            if (!$user->approved or $user->group_id = 5) {
+            if (!$user->approved) {
                 SQL::current()->update("users",
                                  array("login" => $user->login),
-                                 array("approved" => true, "group_id" => 2));
+                                 array("approved" => true));
 
-                Flash::notice(__("Your account is now active. Welcome aboard!"), "/?action=login");
+                Flash::notice(__("Your account is now active and you may log in."), "/?action=login");
             } else
                 Flash::notice(__("Your account has already been activated."), "/");
+        }
+
+        /**
+         * Function: reset
+         * Reset a user password for a given login.
+         */
+        public function reset() {
+            if (logged_in())
+                error(__("Error"), __("You are already logged in."));
+
+            if (empty($_GET['token']))
+                error(__("Error"), __("No token found."));
+
+            $user = new User(array("login" => strip_tags($_GET['login'])));
+
+            if ($user->no_results)
+                error(__("Error"), __("That username isn't in our database."));
+
+            if (token(array($user->login, $user->email)) !== $_GET['token'])
+                error(__("Error"), __("Invalid token."));
+
+            $new_password = random(8);
+
+            correspond("password", array("login" => $user->login,
+                                         "email" => $user->email,
+                                         "password" => $new_password));
+
+            $user->update($user->login,
+                          User::hashPassword($new_password),
+                          $user->email,
+                          $user->full_name,
+                          $user->website,
+                          $user->group_id);
+
+            Flash::notice(__("We have e-mailed you a new password."), "/?action=login");
         }
 
         /**
@@ -557,7 +602,7 @@
          */
         public function login() {
             if (logged_in())
-                error(__("Error"), __("You're already logged in."));
+                error(__("Error"), __("You are already logged in."));
 
             if (!empty($_POST)) {
                 fallback($_POST['login']);
@@ -569,13 +614,13 @@
                     return $trigger->call("authenticate");
 
                 if (!User::authenticate($_POST['login'], $_POST['password']))
-                    Flash::warning(__("Incorrect username and/or password, please try again."));
+                    Flash::warning(__("Incorrect username and/or password."));
 
                 if (!Flash::exists("warning")) {
                     $user = new User(array("login" => $_POST['login']));
 
                     if (!$user->approved)
-                        error(__("Error"), __("You cannot log in until you have activated your registration."));
+                        error(__("Error"), __("You must activate your account before you log in."));
 
                     $_SESSION['user_id'] = $user->id;
 
@@ -646,42 +691,22 @@
 
         /**
          * Function: lost_password
-         * Handles e-mailing lost passwords to a user's email address.
+         * E-mail a password reset link to the registered address of a user.
          */
         public function lost_password() {
+            if (logged_in())
+                error(__("Error"), __("You are already logged in."));
+
             if (!empty($_POST)) {
                 $user = new User(array("login" => $_POST['login']));
-                if ($user->no_results) {
+
+                if ($user->no_results)
                     Flash::warning(__("Invalid user specified."));
-                    return $this->display("forms/user/lost_password", array(), __("Lost Password"));
-                }
+                else {
+                    correspond("reset", array("login" => $user->login,
+                                              "email" => $user->email));
 
-                $new_password = random(16);
-
-                $sent = email($user->email,
-                              __("Lost Password Request"),
-                              _f("%s,\n\nWe have received a request for a new password for your account at %s.\n\nPlease log in with the following password, and feel free to change it once you've successfully logged in:\n\t%s",
-                                 array($user->login, Config::current()->name, $new_password)));
-
-                if ($sent) {
-                    $user->update($user->login,
-                                  User::hashPassword($new_password),
-                                  $user->email,
-                                  $user->full_name,
-                                  $user->website,
-                                  $user->group_id);
-
-                    Flash::notice(_f("An e-mail has been sent to your e-mail address that contains a new password. Once you have logged in, you can change it at <a href=\"%s\">User Controls</a>.", array(url("controls"))));
-                } else {
-                    # Set their password back to what it was originally.
-                    $user->update($user->login,
-                                  $user->password,
-                                  $user->email,
-                                  $user->full_name,
-                                  $user->website,
-                                  $user->group_id);
-
-                    Flash::warning(__("E-Mail could not be sent. Password change cancelled."));
+                    Flash::notice(__("We have e-mailed you a password reset link."), "/");
                 }
             }
 
