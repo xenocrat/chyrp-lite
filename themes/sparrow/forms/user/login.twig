@@ -8,6 +8,7 @@
         <input type="text" name="login" value="${ POST.login | escape }" id="login" tabindex="1">
         <label for="password">${ "Password" | translate }</label>
         <input type="password" name="password" value="" id="password" tabindex="2">
+${ trigger.call("user_login") }
         <div class="doaction">
           <button name="submit" type="submit" id="submit" tabindex="3">${ "Log in" | translate }</button>
           <a href="{% url "lost_password" %}">${ "Help!" | translate }</a>

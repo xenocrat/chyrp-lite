@@ -476,7 +476,7 @@
 
         /**
          * Function: register
-         * Process registration. If registration is disabled or if the user is already logged in, it will error.
+         * Register a visitor as a new user.
          */
         public function register() {
             $config = Config::current();
@@ -598,7 +598,7 @@
 
         /**
          * Function: login
-         * Process logging in. If the username and password are incorrect or if the user is already logged in, it will error.
+         * Logs in a user if they provide the username and password.
          */
         public function login() {
             if (logged_in())
@@ -608,10 +608,9 @@
                 fallback($_POST['login']);
                 fallback($_POST['password']);
 
-                $trigger = Trigger::current();
-
-                if ($trigger->exists("authenticate"))
-                    return $trigger->call("authenticate");
+                # Modules can implement "user_login and "user_authenticate" to offer two-factor authentication.
+                # "user_authenticate" trigger function can block the login process by creating a Flash::warning().
+                Trigger::current()->call("user_authenticate", $_POST);
 
                 if (!User::authenticate($_POST['login'], $_POST['password']))
                     Flash::warning(__("Incorrect username and/or password."));
@@ -638,7 +637,7 @@
 
         /**
          * Function: logout
-         * Logs the current user out. If they are not logged in, it will error.
+         * Logs out the current user.
          */
         public function logout() {
             if (!logged_in())
@@ -653,7 +652,7 @@
 
         /**
          * Function: controls
-         * Updates the current user when the form is submitted. Shows an error if they aren't logged in.
+         * Updates the current user when the form is submitted.
          */
         public function controls() {
             if (!logged_in())
@@ -700,14 +699,11 @@
             if (!empty($_POST)) {
                 $user = new User(array("login" => $_POST['login']));
 
-                if ($user->no_results)
-                    Flash::warning(__("Invalid user specified."));
-                else {
+                if (!$user->no_results)
                     correspond("reset", array("login" => $user->login,
                                               "email" => $user->email));
 
-                    Flash::notice(__("We have e-mailed you a password reset link."), "/");
-                }
+                Flash::notice(__("If that username is in our database, we will e-mail you a password reset link."), "/");
             }
 
             $this->display("forms/user/lost_password", array(), __("Lost Password"));
