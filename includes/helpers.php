@@ -2048,7 +2048,7 @@
                 $message = _f("Hello, %s.", fix($parameters["login"]));
                 $message.= "\n\n";
                 $message.= __("You are receiving this message because you requested a password reset.");
-                $message.= "\n";
+                $message.= "\n\n";
                 $message.= _f("Visit this link to reset your password:");
                 $message.= "\n";
                 $message.= $config->chyrp_url."/?action=reset&login=".fix($parameters["login"]).

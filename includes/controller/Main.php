@@ -672,7 +672,7 @@
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
                     Flash::warning(__("Invalid website URL."));
 
-                if (!empty($_POST['website']) and preg_match('~^(http://|https://){1}~', $_POST['website']) === 0)
+                if (!empty($_POST['website']) and preg_match('~^(http://|https://)~', $_POST['website']) === 0)
                     $_POST['website'] = "http://".$_POST['website'];
 
                 if (!Flash::exists("warning")) {
