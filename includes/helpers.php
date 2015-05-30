@@ -1998,7 +1998,7 @@
      *     Whether or not the string matches the criteria.
      */
     function is_url($string) {
-        return preg_match('~^(http://|https://)?([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[a-z]{2,63}/~', $string);
+        return preg_match('~^(http://|https://)?([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[a-z]{2,63}~', $string);
     }
 
     /**
@@ -2035,22 +2035,24 @@
                 $subject = _f("Activate your account at %s", $config->name);
                 $message = _f("Hello, %s.", fix($parameters["login"]));
                 $message.= "\n\n";
-                $message.= _f("You are receiving this message because you registered at %s", $config->url);
+                $message.= __("You are receiving this message because you registered a new account.");
                 $message.= "\n\n";
-                $message.= _f("Visit this link to activate your account: %s",
-                    $config->chyrp_url."/?action=activate&login=".fix($parameters["login"]).
-                    "&token=".token(array($parameters["login"], $parameters["email"])));
+                $message.= __("Visit this link to activate your account:");
+                $message.= "\n";
+                $message.= $config->chyrp_url."/?action=activate&login=".fix($parameters["login"]).
+                           "&token=".token(array($parameters["login"], $parameters["email"]));
                 break;
 
             case "reset":
                 $subject = _f("Reset your password at %s", $config->name);
                 $message = _f("Hello, %s.", fix($parameters["login"]));
                 $message.= "\n\n";
-                $message.= _f("You are receiving this message because you requested a password reset at %s", $config->url);
-                $message.= "\n\n";
-                $message.= _f("Visit this link to reset your password: %s",
-                    $config->chyrp_url."/?action=reset&login=".fix($parameters["login"]).
-                    "&token=".token(array($parameters["login"], $parameters["email"])));
+                $message.= __("You are receiving this message because you requested a password reset.");
+                $message.= "\n";
+                $message.= _f("Visit this link to reset your password:");
+                $message.= "\n";
+                $message.= $config->chyrp_url."/?action=reset&login=".fix($parameters["login"]).
+                           "&token=".token(array($parameters["login"], $parameters["email"]));
                 break;
 
             case "password":
