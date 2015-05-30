@@ -67,12 +67,27 @@
 
         static function route_add_comment() {
             $post = new Post($_POST['post_id'], array("drafts" => true));
+
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
 
-            if (empty($_POST['body']))   error(__("Error"), __("Message can't be blank.", "comments"));
-            if (empty($_POST['author'])) error(__("Error"), __("Author can't be blank.", "comments"));
-            if (empty($_POST['email']))  error(__("Error"), __("E-Mail address can't be blank.", "comments"));
+            if (empty($_POST['body']))
+                error(__("Error"), __("Message can't be blank.", "comments"));
+
+            if (empty($_POST['author']))
+                error(__("Error"), __("Author can't be blank.", "comments"));
+
+            if (empty($_POST['email']))
+                error(__("Error"), __("E-mail address can't be blank.", "comments"));
+
+            if (!is_email($_POST['email']))
+                error(__("Error"), __("Invalid e-mail address.", "comments"));
+
+            if (!empty($_POST['url']) and !is_url($_POST['url']))
+                error(__("Error"), __("Invalid website URL.", "comments"));
+
+            if (!empty($_POST['url']) and preg_match('~^(http://|https://){1}~', $_POST['url']) === 0)
+                $_POST['url'] = "http://".$_POST['url'];
 
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) !empty($_POST['notify']));
@@ -93,6 +108,26 @@
             $comment = new Comment($_POST['id']);
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
+
+            if (empty($_POST['body']))
+                error(__("Error"), __("Message can't be blank.", "comments"));
+
+            if (empty($_POST['author']))
+                error(__("Error"), __("Author can't be blank.", "comments"));
+
+            if (empty($_POST['author_email']))
+                error(__("Error"), __("E-mail address can't be blank.", "comments"));
+
+            if (!is_email($_POST['author_email']))
+                error(__("Error"), __("Invalid e-mail address.", "comments"));
+
+            if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
+                error(__("Error"), __("Invalid website URL.", "comments"));
+
+            if (!empty($_POST['author_url']) and preg_match('~^(http://|https://){1}~', $_POST['author_url']) === 0)
+                $_POST['author_url'] = "http://".$_POST['author_url'];
+
+            fallback($notify, (int) !empty($_POST['notify']));
 
             $visitor = Visitor::current();
             $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
