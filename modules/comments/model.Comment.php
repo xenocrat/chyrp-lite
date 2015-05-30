@@ -173,11 +173,8 @@
          *     $updated_at - The new comment's "last updated" timestamp.
          */
         static function add($body, $author, $url, $email, $ip, $agent, $status, $post, $user_id, $parent, $notify, $created_at = null, $updated_at = null) {
-            if (!empty($url)) # Add the http:// if it isn't there.
-                if (!@parse_url($url, PHP_URL_SCHEME))
-                    $url = "http://".$url;
-
             $ip = ip2long($ip);
+
             if ($ip === false)
                 $ip = 0;
 

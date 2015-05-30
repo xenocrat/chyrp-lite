@@ -499,7 +499,7 @@
 
                 if (empty($_POST['email']))
                     Flash::warning(__("E-mail address cannot be blank."));
-                elseif (!preg_match("/^[_A-z0-9-]+((\.|\+)[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/", $_POST['email']))
+                elseif (!is_email($_POST['email']))
                     Flash::warning(__("Invalid e-mail address."));
 
                 if ($config->enable_captcha and !check_captcha())
@@ -666,8 +666,14 @@
 
                 if (empty($_POST['email']))
                     Flash::warning(__("E-mail address cannot be blank."));
-                elseif (!preg_match("/^[_A-z0-9-]+((\.|\+)[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/", $_POST['email']))
+                elseif (!is_email($_POST['email']))
                     Flash::warning(__("Invalid e-mail address."));
+
+                if (!empty($_POST['website']) and !is_url($_POST['website']))
+                    Flash::warning(__("Invalid website URL."));
+
+                if (!empty($_POST['website']) and preg_match('~^(http://|https://){1}~', $_POST['website']) === 0)
+                    $_POST['website'] = "http://".$_POST['website'];
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?

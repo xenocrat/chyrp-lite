@@ -58,9 +58,9 @@
             } else
                 error(__("Error"), __("You did not select any files to upload.", "uploader"));
 
-            # Prepend scheme if a URL is detected in the source text
-            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['option']['source']))
-                $_POST['option']['source'] = "http://".$_POST['option']['source'];
+            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
+                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
 
             fallback($_POST['slug'], sanitize($_POST['title']));
 
@@ -87,9 +87,9 @@
             } else
                 $filenames = $post->filenames;
 
-            # Prepend scheme if a URL is detected in the source text
-            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['option']['source']))
-                $_POST['option']['source'] = "http://".$_POST['option']['source'];
+            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
+                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
 
             $post->update(array("filenames" => self::filenames_serialize($filenames),
                                 "caption" => $_POST['caption'],

@@ -1858,7 +1858,6 @@
     /**
      * Function: email
      * Send an email. Function arguments are exactly the same as the PHP mail() function.
-     *
      * This is intended so that modules can provide an email method if the server cannot use mail().
      */
     function email() {
@@ -1975,6 +1974,48 @@
     }
 
     /**
+     * Function: token
+     * Salt and hash a unique token.
+     *
+     * Parameters:
+     *     $items - The items to hash.
+     *
+     * Returns:
+     *     A unique token.
+     */
+    function token($items) {
+        return sha1(implode((array) $items).md5(Config::current()->secure_hashkey));
+    }
+
+    /**
+     * Function: is_url
+     * Tries to determine if a string is a URL beginning with a fully qualified domain name.
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     */
+    function is_url($string) {
+        return preg_match('~^(http://|https://)?([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[a-z]{2,63}/~', $string);
+    }
+
+    /**
+     * Function: is_email
+     * Tries to determine if a string is an e-mail address.
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     */
+    function is_email($string) {
+        return preg_match('~^([^@])+@([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[a-z]{2,63}$~', $string);
+    }
+
+    /**
      * Function: correspond
      * Send an e-mail correspondence to a user about an action we took.
      *
@@ -1994,8 +2035,8 @@
                 $subject = _f("Activate your account at %s", $config->name);
                 $message = _f("Hello, %s.", fix($parameters["login"]));
                 $message.= "\n\n";
-                $message.= _f("You are receiving this message because you registered at %s.", $config->chyrp_url);
-                $message.= "\n";
+                $message.= _f("You are receiving this message because you registered at %s", $config->url);
+                $message.= "\n\n";
                 $message.= _f("Visit this link to activate your account: %s",
                     $config->chyrp_url."/?action=activate&login=".fix($parameters["login"]).
                     "&token=".token(array($parameters["login"], $parameters["email"])));
@@ -2005,8 +2046,8 @@
                 $subject = _f("Reset your password at %s", $config->name);
                 $message = _f("Hello, %s.", fix($parameters["login"]));
                 $message.= "\n\n";
-                $message.= _f("You are receiving this message because you requested a password reset at %s.", $config->chyrp_url);
-                $message.= "\n";
+                $message.= _f("You are receiving this message because you requested a password reset at %s", $config->url);
+                $message.= "\n\n";
                 $message.= _f("Visit this link to reset your password: %s",
                     $config->chyrp_url."/?action=reset&login=".fix($parameters["login"]).
                     "&token=".token(array($parameters["login"], $parameters["email"])));
@@ -2025,18 +2066,4 @@
 
         if (!email($to, $subject, $message, $headers))
             error(__("Error"), __("Unable to send e-mail."));
-    }
-
-    /**
-     * Function: token
-     * Salt and hash a unique token.
-     *
-     * Parameters:
-     *     $items - The items to hash.
-     *
-     * Returns:
-     *     A unique token.
-     */
-    function token($items = array()) {
-        return sha1(implode((array) $items).md5(Config::current()->secure_hashkey));
     }

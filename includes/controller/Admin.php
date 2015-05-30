@@ -496,12 +496,14 @@
 
             if (empty($_POST['email']))
                 error(__("Error"), __("E-mail address cannot be blank."));
-            elseif (!preg_match("/^[_A-z0-9-]+((\.|\+)[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/", $_POST['email']))
+            elseif (!is_email($_POST['email']))
                 error(__("Error"), __("Invalid e-mail address."));
 
-            if (!empty($_POST['website']) and strpos($_POST['website'], '://') === false) {
-                $_POST['website'] = 'http://' . $_POST['website'];
-            }
+            if (!empty($_POST['website']) and !is_url($_POST['website']))
+              error(__("Error"), __("Invalid website URL."));
+
+            if (!empty($_POST['website']) and preg_match('~^(http://|https://){1}~', $_POST['website']) === 0)
+                $_POST['website'] = "http://".$_POST['website'];
 
             if ($config->email_activation) {
                 $user = User::add($_POST['login'],
@@ -577,11 +579,18 @@
                             User::hashPassword($_POST['new_password1']) :
                             $user->password ;
 
-            $website = (!empty($_POST['website']) and strpos($_POST['website'], '://') === false) ?
-                           $_POST['website'] = 'http://' . $_POST['website'] :
-                           $_POST['website'] ;
+            if (empty($_POST['email']))
+                error(__("Error"), __("E-mail address cannot be blank."));
+            elseif (!is_email($_POST['email']))
+                error(__("Error"), __("Invalid e-mail address."));
 
-            $user->update($_POST['login'], $password, $_POST['email'], $_POST['full_name'], $website, $_POST['group']);
+            if (!empty($_POST['website']) and !is_url($_POST['website']))
+              error(__("Error"), __("Invalid website URL."));
+
+            if (!empty($_POST['website']) and preg_match('~^(http://|https://)~', $_POST['website']) === 0)
+                $_POST['website'] = "http://".$_POST['website'];
+
+            $user->update($_POST['login'], $password, $_POST['email'], $_POST['full_name'], $_POST['website'], $_POST['group']);
 
             if ($_POST['id'] == $visitor->id)
                 $_SESSION['password'] = $password;

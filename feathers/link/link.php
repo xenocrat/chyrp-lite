@@ -25,9 +25,9 @@
             if (empty($_POST['source']))
                 error(__("Error"), __("URL can't be empty."));
 
-            # Prepend scheme if a URL is detected in the source text
-            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['source']))
-                $_POST['source'] = "http://".$_POST['source'];
+            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
+                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
 
             fallback($_POST['slug'], sanitize($_POST['name']));
 
@@ -42,9 +42,9 @@
             if (empty($_POST['source']))
                 error(__("Error"), __("URL can't be empty."));
 
-            # Prepend scheme if a URL is detected in the source text
-            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['source']))
-                $_POST['source'] = "http://".$_POST['source'];
+            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
+                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
 
             $post->update(array("name" => $_POST['name'],
                                 "source" => $_POST['source'],

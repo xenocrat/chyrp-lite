@@ -30,10 +30,10 @@
             else
                 error(__("Error"), __("You did not select a photo to upload.", "photo"));
                 
-            # Prepend scheme if a URL is detected in the source text
-            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['option']['source']))
-                $_POST['option']['source'] = "http://".$_POST['option']['source'];
-                
+            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
+                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
+
             fallback($_POST['slug'], sanitize($_POST['title']));
 
             return Post::add(array("title" => $_POST['title'],
@@ -50,9 +50,9 @@
             } else
                 $filename = $post->filename;
             
-            # Prepend scheme if a URL is detected in the source text
-            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['option']['source']))
-                $_POST['option']['source'] = "http://".$_POST['option']['source'];
+            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
+                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
             
             $post->update(array("title" => $_POST['title'],
                                 "filename" => $filename,
