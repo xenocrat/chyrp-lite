@@ -23,11 +23,12 @@
 
         public function submit() {
             if (empty($_POST['source']))
-                error(__("Error"), __("URL can't be empty."));
+                error(__("Error"), __("URL can't be empty.", "link"));
 
-            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
-                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
-                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
+            if (!is_url($_POST['source']))
+                error(__("Error"), __("Invalid URL.", "link"));
+
+            $_POST['source'] = add_scheme($_POST['source']);
 
             fallback($_POST['slug'], sanitize($_POST['name']));
 
@@ -40,11 +41,12 @@
 
         public function update($post) {
             if (empty($_POST['source']))
-                error(__("Error"), __("URL can't be empty."));
+                error(__("Error"), __("URL can't be empty.", "link"));
 
-            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
-                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
-                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
+            if (!is_url($_POST['source']))
+                error(__("Error"), __("Invalid URL.", "link"));
+
+            $_POST['source'] = add_scheme($_POST['source']);
 
             $post->update(array("name" => $_POST['name'],
                                 "source" => $_POST['source'],
@@ -65,7 +67,7 @@
 
         public function set_feed_url($url, $post) {
             if ($post->feather != "link")
-              return;
+                return;
 
             return $url = $post->source;
         }

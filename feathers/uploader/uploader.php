@@ -59,8 +59,7 @@
                 error(__("Error"), __("You did not select any files to upload.", "uploader"));
 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
-                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
-                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
+                $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
             fallback($_POST['slug'], sanitize($_POST['title']));
 
@@ -88,8 +87,7 @@
                 $filenames = $post->filenames;
 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
-                if (preg_match('~^(http://|https://)~', $_POST['option']['source']) === 0)
-                    $_POST['option']['source'] = "http://".$_POST['option']['source'];
+                $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
             $post->update(array("filenames" => self::filenames_serialize($filenames),
                                 "caption" => $_POST['caption'],

@@ -672,8 +672,8 @@
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
                     Flash::warning(__("Invalid website URL."));
 
-                if (!empty($_POST['website']) and preg_match('~^(http://|https://)~', $_POST['website']) === 0)
-                    $_POST['website'] = "http://".$_POST['website'];
+                if (!empty($_POST['website']))
+                    $_POST['website'] = add_scheme($_POST['website']);
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?

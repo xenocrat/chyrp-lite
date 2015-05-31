@@ -86,8 +86,8 @@
             if (!empty($_POST['url']) and !is_url($_POST['url']))
                 error(__("Error"), __("Invalid website URL.", "comments"));
 
-            if (!empty($_POST['url']) and preg_match('~^(http://|https://){1}~', $_POST['url']) === 0)
-                $_POST['url'] = "http://".$_POST['url'];
+            if (!empty($_POST['author_url']))
+                $_POST['author_url'] = add_scheme($_POST['author_url']);
 
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) !empty($_POST['notify']));
@@ -124,8 +124,8 @@
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
                 error(__("Error"), __("Invalid website URL.", "comments"));
 
-            if (!empty($_POST['author_url']) and preg_match('~^(http://|https://){1}~', $_POST['author_url']) === 0)
-                $_POST['author_url'] = "http://".$_POST['author_url'];
+            if (!empty($_POST['author_url']))
+                $_POST['author_url'] = add_scheme($_POST['author_url']);
 
             fallback($notify, (int) !empty($_POST['notify']));
 

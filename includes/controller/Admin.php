@@ -502,8 +502,8 @@
             if (!empty($_POST['website']) and !is_url($_POST['website']))
               error(__("Error"), __("Invalid website URL."));
 
-            if (!empty($_POST['website']) and preg_match('~^(http://|https://)~', $_POST['website']) === 0)
-                $_POST['website'] = "http://".$_POST['website'];
+            if (!empty($_POST['website']))
+                $_POST['website'] = add_scheme($_POST['website']);
 
             if ($config->email_activation) {
                 $user = User::add($_POST['login'],
@@ -587,8 +587,8 @@
             if (!empty($_POST['website']) and !is_url($_POST['website']))
               error(__("Error"), __("Invalid website URL."));
 
-            if (!empty($_POST['website']) and preg_match('~^(http://|https://)~', $_POST['website']) === 0)
-                $_POST['website'] = "http://".$_POST['website'];
+            if (!empty($_POST['website']))
+                $_POST['website'] = add_scheme($_POST['website']);
 
             $user->update($_POST['login'], $password, $_POST['email'], $_POST['full_name'], $_POST['website'], $_POST['group']);
 

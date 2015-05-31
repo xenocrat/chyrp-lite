@@ -1996,9 +1996,11 @@
      *
      * Returns:
      *     Whether or not the string matches the criteria.
+     * See Also:
+     *     <add_scheme>
      */
     function is_url($string) {
-        return preg_match('~^(http://|https://)?([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[a-z]{2,63}~', $string);
+        return preg_match('~^(http://|https://)?([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}~', $string);
     }
 
     /**
@@ -2012,7 +2014,24 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return preg_match('~^([^@])+@([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[a-z]{2,63}$~', $string);
+        return preg_match('~^([^@])+@([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}$~', $string);
+    }
+
+    /**
+     * Function: add_scheme
+     * Prefixes a URL with a scheme if no accepted scheme was detected.
+     *
+     * Parameters:
+     *     $url - The URL to analyse.
+     *
+     * Returns:
+     *     URL prefixed with scheme.
+     *
+     * See Also:
+     *     <is_url>
+     */
+    function add_scheme($url) {
+        return $url = preg_match('~^(http://|https://)~', $url) ? $url : "http://".$url ;
     }
 
     /**
