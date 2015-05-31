@@ -610,7 +610,7 @@
 
                 # Modules can implement "user_login and "user_authenticate" to offer two-factor authentication.
                 # "user_authenticate" trigger function can block the login process by creating a Flash::warning().
-                Trigger::current()->call("user_authenticate", $_POST);
+                Trigger::current()->call("user_authenticate");
 
                 if (!User::authenticate($_POST['login'], $_POST['password']))
                     Flash::warning(__("Incorrect username and/or password."));

@@ -2040,11 +2040,11 @@
      *
      * Parameters:
      *     $action - About which action are we corresponding with the user?
-     *     $parameters - An indexed array of parameters associated with this action.
+     *     $params - An indexed array of parameters associated with this action.
      */
-    function correspond($action, $parameters) {
+    function correspond($action, $params) {
         $config  = Config::current();
-        $to      = $parameters["email"];
+        $to      = $params["email"];
         $headers = "From:".$config->email."\r\n".
                    "Reply-To:".$config->email. "\r\n".
                    "X-Mailer: PHP/".phpversion();
@@ -2052,33 +2052,33 @@
         switch ($action) {
             case "activate":
                 $subject = _f("Activate your account at %s", $config->name);
-                $message = _f("Hello, %s.", fix($parameters["login"]));
+                $message = _f("Hello, %s.", fix($params["login"]));
                 $message.= "\n\n";
                 $message.= __("You are receiving this message because you registered a new account.");
                 $message.= "\n\n";
                 $message.= __("Visit this link to activate your account:");
                 $message.= "\n";
-                $message.= $config->chyrp_url."/?action=activate&login=".fix($parameters["login"]).
-                           "&token=".token(array($parameters["login"], $parameters["email"]));
+                $message.= $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
+                           "&token=".token(array($params["login"], $params["email"]));
                 break;
 
             case "reset":
                 $subject = _f("Reset your password at %s", $config->name);
-                $message = _f("Hello, %s.", fix($parameters["login"]));
+                $message = _f("Hello, %s.", fix($params["login"]));
                 $message.= "\n\n";
                 $message.= __("You are receiving this message because you requested a password reset.");
                 $message.= "\n\n";
                 $message.= _f("Visit this link to reset your password:");
                 $message.= "\n";
-                $message.= $config->chyrp_url."/?action=reset&login=".fix($parameters["login"]).
-                           "&token=".token(array($parameters["login"], $parameters["email"]));
+                $message.= $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
+                           "&token=".token(array($params["login"], $params["email"]));
                 break;
 
             case "password":
                 $subject = _f("Your new password for %s", $config->name);
-                $message = _f("Hello, %s.", fix($parameters["login"]));
+                $message = _f("Hello, %s.", fix($params["login"]));
                 $message.= "\n\n";
-                $message.= _f("Your new password is: %s", $parameters["password"]);
+                $message.= _f("Your new password is: %s", $params["password"]);
                 break;
             
             default:
