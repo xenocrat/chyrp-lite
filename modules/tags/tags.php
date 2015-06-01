@@ -717,4 +717,18 @@
         public function tagsJS() {
             include MODULES_DIR."/tags/javascript.php";
         }
+
+        public function import_chyrp_post($entry, $post) {
+            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
+            if (!isset($chyrp->content->tags)) return;
+
+            $sql = SQL::current();
+            $tags = self::tags_unserialize((string) $chyrp->content->tags);
+
+            SQL::current()->replace("post_attributes",
+                                    array("post_id", "name"),
+                                    array("name" => "tags",
+                                          "value" => self::tags_serialize($tags),
+                                          "post_id" => $post->id));
+        }
     }

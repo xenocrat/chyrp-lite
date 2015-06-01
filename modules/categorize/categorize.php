@@ -265,4 +265,17 @@
             Category::deleteCategory( (int) $_POST['id']);
             Flash::notice(__("Category deleted.", "categorize"), "/admin/?action=manage_category");
         }
+
+        public function import_chyrp_post($entry, $post) {
+            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
+            if (!isset($chyrp->content->category_id)) return;
+
+            $sql = SQL::current();
+            $id = (int) $chyrp->content->category_id;
+
+            SQL::current()->replace("post_attributes",
+                              array("name" => "category_id",
+                                    "value" => $id,
+                                    "post_id" => $post->id));
+        }
     }
