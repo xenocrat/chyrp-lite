@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-05-25 14:17+0000\n"
+"POT-Creation-Date: 2015-06-01 19:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/layout.twig:53
+#: admin/layout.twig:57
 msgid "Chyrp loves you."
 msgstr ""
 
-#: admin/layout.twig:54
+#: admin/layout.twig:58
 #, php-format
 msgid "Chyrp Lite v%s"
 msgstr ""
 
-#: admin/layout.twig:55
+#: admin/layout.twig:59
 msgid "Log out"
 msgstr ""
 
@@ -365,9 +365,6 @@ msgstr ""
 
 #: admin/pages/general_settings.twig:23
 #: admin/pages/import.twig:28
-#: admin/pages/import.twig:53
-#: admin/pages/import.twig:109
-#: admin/pages/import.twig:145
 #: admin/partials/post_fields.twig:7
 msgid "(optional)"
 msgstr ""
@@ -409,12 +406,12 @@ msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 
 #: admin/pages/import.twig:3
-#: admin/pages/import.twig:37
-#: admin/pages/import.twig:61
-#: admin/pages/import.twig:76
-#: admin/pages/import.twig:117
-#: admin/pages/import.twig:153
+#: admin/pages/import.twig:36
 msgid "Import"
+msgstr ""
+
+#: admin/pages/import.twig:6
+msgid "What would you like to import?"
 msgstr ""
 
 #: admin/pages/import.twig:10
@@ -434,64 +431,11 @@ msgid "Users .yaml File"
 msgstr ""
 
 #: admin/pages/import.twig:27
-#: admin/pages/import.twig:52
-#: admin/pages/import.twig:108
-#: admin/pages/import.twig:144
 msgid "What URL is used for embedded media?"
 msgstr ""
 
 #: admin/pages/import.twig:32
 msgid "Usually something like <code>http://example.com/uploads/</code>."
-msgstr ""
-
-#: admin/pages/import.twig:47
-msgid "eXtended .XML File"
-msgstr ""
-
-#: admin/pages/import.twig:57
-msgid "Usually something like <code>http://example.com/wp-content/uploads/</code>."
-msgstr ""
-
-#: admin/pages/import.twig:71
-msgid "Your Tumblr URL"
-msgstr ""
-
-#: admin/pages/import.twig:73
-msgid "Note: Audio tumbles cannot be imported."
-msgstr ""
-
-#: admin/pages/import.twig:86
-#: admin/pages/import.twig:127
-msgid "Host"
-msgstr ""
-
-#: admin/pages/import.twig:90
-#: admin/pages/import.twig:131
-msgid "Username"
-msgstr ""
-
-#: admin/pages/import.twig:94
-#: admin/pages/import.twig:135
-#: admin/pages/new_user.twig:24
-msgid "Password"
-msgstr ""
-
-#: admin/pages/import.twig:98
-#: admin/pages/import.twig:139
-msgid "Database"
-msgstr ""
-
-#: admin/pages/import.twig:102
-msgid "Table Prefix"
-msgstr ""
-
-#: admin/pages/import.twig:104
-msgid "(if any)"
-msgstr ""
-
-#: admin/pages/import.twig:113
-#: admin/pages/import.twig:149
-msgid "Usually something like <code>http://example.com/images/</code>."
 msgstr ""
 
 #: admin/pages/manage_groups.twig:3
@@ -683,6 +627,10 @@ msgstr ""
 
 #: admin/pages/new_user.twig:9
 msgid "Settings"
+msgstr ""
+
+#: admin/pages/new_user.twig:24
+msgid "Password"
 msgstr ""
 
 #: admin/pages/new_user.twig:32

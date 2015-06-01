@@ -15,6 +15,7 @@ ruby ./tools/gettext.rb ./modules/categorize/   --domain=categorize   > ./module
 ruby ./tools/gettext.rb ./modules/comments/     --domain=comments     > ./modules/comments/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/highlighter/  --domain=highlighter  > ./modules/highlighter/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/homepage/     --domain=homepage     > ./modules/homepage/locale/en_US.pot
+ruby ./tools/gettext.rb ./modules/importers/    --domain=importers    > ./modules/importers/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/lightbox/     --domain=lightbox     > ./modules/lightbox/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/likes/        --domain=likes        > ./modules/likes/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/maptcha/      --domain=maptcha      > ./modules/maptcha/locale/en_US.pot
