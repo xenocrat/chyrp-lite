@@ -172,12 +172,10 @@
 
             if (!in_array("text", $config->enabled_feathers) or
                 !in_array("video", $config->enabled_feathers) or
-                !in_array("audio", $config->enabled_feathers) or
-                !in_array("chat", $config->enabled_feathers) or
                 !in_array("photo", $config->enabled_feathers) or
                 !in_array("quote", $config->enabled_feathers) or
                 !in_array("link", $config->enabled_feathers))
-                error(__("Missing Feather", "importers"), __("Importing from Tumblr requires the Text, Video, Audio, Chat, Photo, Quote, and Link feathers to be installed and enabled.", "importers"));
+                error(__("Missing Feather", "importers"), __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"));
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
@@ -226,7 +224,7 @@
                 if ($post->attributes()->type == "audio")
                     break; # Can't import Audio posts since Tumblr has the files locked in to Amazon.
 
-                $translate_types = array("regular" => "text", "conversation" => "chat");
+                $translate_types = array("regular" => "text", "conversation" => "text");
 
                 $clean = "";
                 switch($post->attributes()->type) {
@@ -238,7 +236,7 @@
                         break;
                     case "video":
                         $values = array("embed" => $post->video_player,
-                                        "caption" => fallback($post->video_caption));
+                                        "description" => fallback($post->video_caption));
                         break;
                     case "conversation":
                         $title = fallback($post->conversation_title);
@@ -248,7 +246,7 @@
                             $lines[] = $line->attributes()->label." ".$line;
 
                         $values = array("title" => $title,
-                                        "dialogue" => implode("\n", $lines));
+                                        "body" => implode("<br>", $lines));
                         $clean = sanitize($title);
                         break;
                     case "photo":
@@ -472,10 +470,11 @@
         }
 
         public function import_choose() {
+            $config = Config::current();
 ?>
             <hr>
             <h2>WordPress</h2>
-            <form id="import_wordpress_form" class="split" action="<?php echo Config::current()->chyrp_url."/?action=import_wordpress"; ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+            <form id="import_wordpress_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_wordpress"; ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <fieldset>
                     <p>
                         <label for="xml_file"><?php echo __("eXtended .XML File", "importers"); ?></label>
@@ -492,9 +491,9 @@
                         </small>
                     </p>
                     <p class="buttons">
-                        <button type="submit" class="yay"><img src="<?php echo Config::current()->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+                        <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="<?php echo $config->secure_hashkey; ?>" id="hash">
                 </fieldset>
             </form>
             <hr>
@@ -507,14 +506,14 @@
                         <small><?php echo __("Note: Audio tumbles cannot be imported.", "importers"); ?></small>
                     </p>
                     <p class="buttons">
-                        <button type="submit" class="yay"><img src="<?php echo Config::current()->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+                        <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="<?php echo $config->secure_hashkey; ?>" id="hash">
                 </fieldset>
             </form>
             <hr>
             <h2>TextPattern</h2>
-            <form id="import_textpattern_form" class="split" action="<?php echo Config::current()->chyrp_url."/?action=import_textpattern"; ?>" method="post" accept-charset="utf-8">
+            <form id="import_textpattern_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_textpattern"; ?>" method="post" accept-charset="utf-8">
                 <fieldset>
                     <p>
                         <label for="host"><?php echo __("Host", "importers"); ?></label>
@@ -548,14 +547,14 @@
                         </small>
                     </p>
                     <p class="buttons">
-                        <button type="submit" class="yay"><img src="<?php echo Config::current()->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+                        <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="<?php echo $config->secure_hashkey; ?>" id="hash">
                 </fieldset>
             </form>
             <hr>
             <h2>MovableType</h2>
-            <form id="import_movabletype_form" class="split" action="<?php echo Config::current()->chyrp_url."/?action=import_movabletype"; ?>" method="post" accept-charset="utf-8">
+            <form id="import_movabletype_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_movabletype"; ?>" method="post" accept-charset="utf-8">
                 <fieldset>
                     <p>
                         <label for="host"><?php echo __("Host", "importers"); ?></label>
@@ -584,9 +583,9 @@
                         </small>
                     </p>
                     <p class="buttons">
-                        <button type="submit" class="yay"><img src="<?php echo Config::current()->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+                        <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="<?php echo $config->secure_hashkey; ?>" id="hash">
                 </fieldset>
             </form>
 <?php
