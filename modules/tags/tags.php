@@ -720,10 +720,15 @@
 
         public function import_chyrp_post($entry, $post) {
             $chyrp = $entry->children("http://chyrp.net/export/1.0/");
-            if (!isset($chyrp->content->tags)) return;
+
+            if (!isset($chyrp->content->tags))
+                return;
 
             $sql = SQL::current();
-            $tags = self::tags_unserialize((string) $chyrp->content->tags);
+            $tags = json_decode((string) $chyrp->content->tags, true);
+
+            if (json_last_error())
+                return;
 
             SQL::current()->replace("post_attributes",
                                     array("post_id", "name"),

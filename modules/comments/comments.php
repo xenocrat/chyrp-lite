@@ -557,7 +557,9 @@
 
         public function import_chyrp_post($entry, $post) {
             $chyrp = $entry->children("http://chyrp.net/export/1.0/");
-            if (!isset($chyrp->comment)) return;
+
+            if (!isset($chyrp->comment))
+                return;
 
             $sql = SQL::current();
 
