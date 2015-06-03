@@ -180,8 +180,10 @@
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
 
-            if (!parse_url($_POST['tumblr_url'], PHP_URL_SCHEME))
-                $_POST['tumblr_url'] = "http://".$_POST['tumblr_url'];
+            if (!empty($_POST['tumblr_url']) and !is_url($_POST['tumblr_url']))
+                error(__("Error"), __("Invalid Tumblr URL.", "importers"));
+
+            $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url']);
 
             set_time_limit(3600);
             $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
