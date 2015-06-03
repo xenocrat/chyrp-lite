@@ -74,14 +74,14 @@
 
         /**
          * Function: add
-         * Adds a user to the database with the passed username, password, and e-mail.
+         * Adds a user to the database with the passed username, password, and email.
          *
          * Calls the @add_user@ trigger with the inserted user.
          *
          * Parameters:
          *     $login - The Login for the new user.
          *     $password - The Password for the new user. Don't hash this, it's done in the function.
-         *     $email - The E-Mail for the new user.
+         *     $email - The email for the new user.
          *     $full_name - The full name of the user.
          *     $website - The user's website.
          *     $group - The user's group (defaults to the configured default group).
@@ -134,7 +134,7 @@
 
         /**
          * Function: update
-         * Updates the user with the given login, password, full name, e-mail, website, and <Group> ID.
+         * Updates the user with the given login, password, full name, email, website, and <Group> ID.
          *
          * Passes all of the arguments to the update_user trigger.
          *
@@ -142,7 +142,7 @@
          *     $login - The new Login to set.
          *     $password - The new Password to set, already encoded.
          *     $full_name - The new Full Name to set.
-         *     $email - The new E-Mail to set.
+         *     $email - The new email to set.
          *     $website - The new Website to set.
          *     $group_id - The new <Group> to set.
          *

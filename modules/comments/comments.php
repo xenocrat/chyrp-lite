@@ -78,10 +78,10 @@
                 error(__("Error"), __("Author can't be blank.", "comments"));
 
             if (empty($_POST['email']))
-                error(__("Error"), __("E-mail address can't be blank.", "comments"));
+                error(__("Error"), __("Email address can't be blank.", "comments"));
 
             if (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid e-mail address.", "comments"));
+                error(__("Error"), __("Invalid email address.", "comments"));
 
             if (!empty($_POST['url']) and !is_url($_POST['url']))
                 error(__("Error"), __("Invalid website URL.", "comments"));
@@ -116,10 +116,10 @@
                 error(__("Error"), __("Author can't be blank.", "comments"));
 
             if (empty($_POST['author_email']))
-                error(__("Error"), __("E-mail address can't be blank.", "comments"));
+                error(__("Error"), __("Email address can't be blank.", "comments"));
 
             if (!is_email($_POST['author_email']))
-                error(__("Error"), __("Invalid e-mail address.", "comments"));
+                error(__("Error"), __("Invalid email address.", "comments"));
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
                 error(__("Error"), __("Invalid website URL.", "comments"));

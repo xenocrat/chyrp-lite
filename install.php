@@ -123,7 +123,7 @@
             $errors[] = __("Passwords do not match.");
 
         if (empty($_POST['email']))
-            $errors[] = __("E-Mail address cannot be blank.");
+            $errors[] = __("Email address cannot be blank.");
 
         if (empty($errors)) {
 
@@ -684,7 +684,7 @@
                     <input type="password" name="password_2" value="<?php value_fallback("password_2"); ?>" id="password_2">
                 </p>
                 <p id="email_field">
-                    <label for="email"><?php echo __("E-Mail Address"); ?></label>
+                    <label for="email"><?php echo __("Email Address"); ?></label>
                     <input type="text" name="email" value="<?php value_fallback("email"); ?>" id="email">
                 </p>
                 <button type="submit"><?php echo __("Install!"); ?></button>

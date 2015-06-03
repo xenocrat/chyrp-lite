@@ -2005,7 +2005,7 @@
 
     /**
      * Function: is_email
-     * Tries to determine if a string is an e-mail address.
+     * Tries to determine if a string is an email address.
      *
      * Parameters:
      *     $string - The string to analyse.
@@ -2036,7 +2036,7 @@
 
     /**
      * Function: correspond
-     * Send an e-mail correspondence to a user about an action we took.
+     * Send an email correspondence to a user about an action we took.
      *
      * Parameters:
      *     $action - About which action are we corresponding with the user?
@@ -2086,5 +2086,5 @@
         }
 
         if (!email($to, $subject, $message, $headers))
-            error(__("Error"), __("Unable to send e-mail."));
+            error(__("Error"), __("Unable to send email."));
     }

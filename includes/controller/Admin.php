@@ -495,12 +495,12 @@
                 error(__("Error"), __("Passwords do not match."));
 
             if (empty($_POST['email']))
-                error(__("Error"), __("E-mail address cannot be blank."));
+                error(__("Error"), __("Email address cannot be blank."));
             elseif (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid e-mail address."));
+                error(__("Error"), __("Invalid email address."));
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
-              error(__("Error"), __("Invalid website URL."));
+                error(__("Error"), __("Invalid website URL."));
 
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
@@ -580,12 +580,12 @@
                             $user->password ;
 
             if (empty($_POST['email']))
-                error(__("Error"), __("E-mail address cannot be blank."));
+                error(__("Error"), __("Email address cannot be blank."));
             elseif (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid e-mail address."));
+                error(__("Error"), __("Invalid email address."));
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
-              error(__("Error"), __("Invalid website URL."));
+                error(__("Error"), __("Invalid website URL."));
 
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
@@ -1748,9 +1748,7 @@
                     $title = __("Alternate URL");
                     $body = "<p>".__("An alternate URL will allow you to keep Chyrp in its own directory, while having your site URLs point to someplace else. For example, you could have Chyrp in a <code>/chyrp</code> directory, and have your site at <code>/</code>. There are two requirements for this to work.")."</p>\n\n";
                     $body.= "<ol>\n\t<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n\n";
-                    $body.= "<pre><code>&lt;?php
-    require \"path/to/chyrp/index.php\";
-?&gt;</code></pre>";
+                    $body.= "<pre><code>&lt;?php\n    require \"path/to/chyrp/index.php\";\n?&gt;</code></pre>";
                     $body.= "</li>\n\t<li>".__("Move the .htaccess file from the original Chyrp directory, and change the <code>RewriteBase</code> line to reflect the new website location.")."</li>\n</ol>";
             }
 

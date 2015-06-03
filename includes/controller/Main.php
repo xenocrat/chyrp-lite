@@ -498,9 +498,9 @@
                     Flash::warning(__("Passwords do not match."));
 
                 if (empty($_POST['email']))
-                    Flash::warning(__("E-mail address cannot be blank."));
+                    Flash::warning(__("Email address cannot be blank."));
                 elseif (!is_email($_POST['email']))
-                    Flash::warning(__("Invalid e-mail address."));
+                    Flash::warning(__("Invalid email address."));
 
                 if ($config->enable_captcha and !check_captcha())
                     Flash::warning(__("Incorrect captcha code. Please try again."));
@@ -516,7 +516,7 @@
                                           false);
                         correspond("activate", array("login" => $user->login, 
                                                      "email" => $user->email));
-                        Flash::notice(__("We have e-mailed you an activation link."), "/");
+                        Flash::notice(__("We have emailed you an activation link."), "/");
                     } else {
                         $user = User::add($_POST['login'],
                                           $_POST['password1'],
@@ -593,7 +593,7 @@
                           $user->website,
                           $user->group_id);
 
-            Flash::notice(__("We have e-mailed you a new password."), "/?action=login");
+            Flash::notice(__("We have emailed you a new password."), "/?action=login");
         }
 
         /**
@@ -665,9 +665,9 @@
                     Flash::warning(__("Passwords do not match."));
 
                 if (empty($_POST['email']))
-                    Flash::warning(__("E-mail address cannot be blank."));
+                    Flash::warning(__("Email address cannot be blank."));
                 elseif (!is_email($_POST['email']))
-                    Flash::warning(__("Invalid e-mail address."));
+                    Flash::warning(__("Invalid email address."));
 
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
                     Flash::warning(__("Invalid website URL."));
@@ -696,7 +696,7 @@
 
         /**
          * Function: lost_password
-         * E-mail a password reset link to the registered address of a user.
+         * Email a password reset link to the registered address of a user.
          */
         public function lost_password() {
             if (logged_in())
@@ -709,7 +709,7 @@
                     correspond("reset", array("login" => $user->login,
                                               "email" => $user->email));
 
-                Flash::notice(__("If that username is in our database, we will e-mail you a password reset link."), "/");
+                Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }
 
             $this->display("forms/user/lost_password", array(), __("Lost Password"));
