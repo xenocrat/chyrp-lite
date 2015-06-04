@@ -255,4 +255,38 @@
             $like = new Like(array("post_id" => $post->id));
             echo '<td class="post_likes">'.$like->fetchCount().'</td>';
         }
+
+        public function import_chyrp_post($entry, $post) {
+            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
+
+            if (!isset($chyrp->like))
+                return;
+
+            foreach ($chyrp->like as $like) {
+                $session_hash = $like->children("http://chyrp.net/export/1.0/")->session_hash;
+                $timestamp = $like->children("http://chyrp.net/export/1.0/")->timestamp;
+
+                SQL::current()->insert("likes",
+                                 array("post_id" => $post->id,
+                                       "user_id" => 0,
+                                       "timestamp" => $timestamp,
+                                       "session_hash" => $session_hash));
+            }
+        }
+
+        public function posts_export($atom, $post) {
+            $likes = SQL::current()->select("likes",
+                                             "*",
+                                             array("post_id" => $post->id))->fetchAll();
+
+            foreach ($likes as $like) {
+                $atom.= "        <chyrp:like>\r";
+                $atom.= '            <chyrp:timestamp>'.$like["timestamp"].'</chyrp:timestamp>'."\r";
+                $atom.= '            <chyrp:session_hash>'.$like["session_hash"].'</chyrp:session_hash>'."\r";
+                $atom.= "        </chyrp:like>\r";
+            }
+
+            return $atom;
+        }
+
     }
