@@ -263,12 +263,15 @@
                 return;
 
             foreach ($chyrp->like as $like) {
-                $session_hash = $like->children("http://chyrp.net/export/1.0/")->session_hash;
-                $timestamp = $like->children("http://chyrp.net/export/1.0/")->timestamp;
+                $timestamp = $like->children("http://www.w3.org/2005/Atom")->published;
+                $session_hash = $like->children("http://chyrp.net/export/1.0/")->hash;
+                $login = $like->children("http://chyrp.net/export/1.0/")->login;
+
+                $user = new User(array("login" => (string) $login));
 
                 SQL::current()->insert("likes",
                                  array("post_id" => $post->id,
-                                       "user_id" => 0,
+                                       "user_id" => (!$user->no_results) ? $user->id : 0,
                                        "timestamp" => $timestamp,
                                        "session_hash" => $session_hash));
             }
@@ -280,9 +283,13 @@
                                              array("post_id" => $post->id))->fetchAll();
 
             foreach ($likes as $like) {
+                $user = new User($like["user_id"]);
+
                 $atom.= "        <chyrp:like>\r";
-                $atom.= '            <chyrp:timestamp>'.$like["timestamp"].'</chyrp:timestamp>'."\r";
-                $atom.= '            <chyrp:session_hash>'.$like["session_hash"].'</chyrp:session_hash>'."\r";
+                if (!$user->no_results)
+                $atom.= '            <chyrp:login>'.$user->login.'</chyrp:login>'."\r";
+                $atom.= '            <published>'.$like["timestamp"].'</published>'."\r";
+                $atom.= '            <chyrp:hash>'.$like["session_hash"].'</chyrp:hash>'."\r";
                 $atom.= "        </chyrp:like>\r";
             }
 
