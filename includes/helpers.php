@@ -2019,7 +2019,7 @@
 
     /**
      * Function: add_scheme
-     * Prefixes a URL with a scheme if no accepted scheme was detected.
+     * Prefixes a URL with a HTTP scheme if none was detected.
      *
      * Parameters:
      *     $url - The URL to analyse.
@@ -2031,7 +2031,7 @@
      *     <is_url>
      */
     function add_scheme($url) {
-        return $url = preg_match('~^(http://|https://)~', $url) ? $url : "http://".$url ;
+        return $url = preg_match('~^[[:alpha:]]([[:alnum:]]|\+|\.|-)*:~', $url) ? $url : "http://".$url ;
     }
 
     /**
@@ -2044,10 +2044,14 @@
      */
     function correspond($action, $params) {
         $config  = Config::current();
+        $trigger = Trigger::current();
+
         $to      = $params["email"];
         $headers = "From:".$config->email."\r\n".
                    "Reply-To:".$config->email. "\r\n".
                    "X-Mailer: PHP/".phpversion();
+        $subject = "";
+        $message = "";
 
         switch ($action) {
             case "activate":
@@ -2066,7 +2070,7 @@
                 $subject = _f("Reset your password at %s", $config->name);
                 $message = _f("Hello, %s.", fix($params["login"]));
                 $message.= "\n\n";
-                $message.= __("You are receiving this message because you requested a password reset.");
+                $message.= __("You are receiving this message because you requested a new password.");
                 $message.= "\n\n";
                 $message.= _f("Visit this link to reset your password:");
                 $message.= "\n";
@@ -2082,7 +2086,10 @@
                 break;
             
             default:
-                return;
+                if ($trigger->exists("correspond_".$action))
+                    $trigger->call("correspond_".$action, $params, $subject, $message);
+                else
+                    return;
         }
 
         if (!email($to, $subject, $message, $headers))
