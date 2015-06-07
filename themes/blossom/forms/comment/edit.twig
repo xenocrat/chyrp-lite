@@ -17,6 +17,8 @@
               <input class="text" type="email" name="author_email" value="$comment.author_email" id="author_email">
               <label for="created_at">${ "Timestap" | translate }</label>
               <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime("%B %d, %Y %H:%M:%S") }" id="created_at">
+              <label for="notify">${ "Notifications" | translate }</label>
+              <input type="checkbox" name="notify" id="notify"${ comment["notify"] | checked }>
             </div>
             <input type="hidden" name="id" value="$comment.id" id="id">
             <input type="hidden" name="ajax" value="true" id="ajax">

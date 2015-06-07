@@ -137,7 +137,7 @@
                              $_POST['author_url'],
                              $_POST['author_email'],
                              $status,
-                             $_POST['notify'],
+                             $notify,
                              $created_at);
 
             if (isset($_POST['ajax']))
