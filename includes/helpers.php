@@ -2000,7 +2000,7 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return preg_match('~^(http://|https://)?([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}~', $string);
+        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3})~', $string);
     }
 
     /**
@@ -2014,7 +2014,7 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return preg_match('~^([^@])+@([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}$~', $string);
+        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3})$~', $string);
     }
 
     /**
@@ -2041,6 +2041,7 @@
      * Parameters:
      *     $action - About which action are we corresponding with the user?
      *     $params - An indexed array of parameters associated with this action.
+     *               $params["email"] is required: the address to be emailed.
      */
     function correspond($action, $params) {
         $config  = Config::current();
