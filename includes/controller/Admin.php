@@ -1631,6 +1631,15 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            if (!empty($_POST['email']) and !is_email($_POST['email']))
+                error(__("Error"), __("Invalid email address."));
+
+            if (!is_url($_POST['chyrp_url']))
+                error(__("Error"), __("Invalid Chyrp URL."));
+
+            if (!empty($_POST['url']) and !is_url($_POST['url']))
+                error(__("Error"), __("Invalid alternate URL."));
+
             $config = Config::current();
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
@@ -1659,6 +1668,9 @@
 
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
+                error(__("Error"), __("Invalid feed URL."));
 
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
