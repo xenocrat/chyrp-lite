@@ -736,4 +736,13 @@
             else
                 return QueryBuilder::build_list($_SESSION['comments']);
         }
+
+        public function correspond_comment($params, &$subject, &$message) {
+            $subject = _f("New Comment at %s", Config::current()->name);
+            $message = _f("%s commented on a blog post:", fix($params["author"]));
+            $message.= "\n";
+            $message.= $params["post"]->url();
+            $message.= "\n\n";
+            $message.= '"'.truncate(strip_tags($params["body"])).'"';
+        }
     }

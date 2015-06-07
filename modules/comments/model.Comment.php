@@ -275,9 +275,10 @@
         public function author_link() {
             if (!isset($this->id))
                 return __("a commentator", "comments");
-            if ($this->author_url != "") # If a URL is set
+
+            if (is_url($this->author_url))
                 return '<a href="'.fix($this->author_url, true).'">'.$this->author.'</a>';
-            else # If not, just return their name
+            else
                 return $this->author;
         }
 
@@ -285,7 +286,7 @@
             $visitor = Visitor::current();
             if (!$visitor->group->can("add_comment")) return false;
 
-            # assume allowed comments by default
+            # Assume allowed comments by default
             return empty($post->comment_status) or
                    !($post->comment_status == "closed" or
                     ($post->comment_status == "registered_only" and !logged_in()) or
@@ -308,22 +309,15 @@
          */
         static function notify($author, $body, $post) {
             $post = new Post($post);
+
             $emails = SQL::current()->select("comments",
                                              "author_email",
                                              array("notify" => 1, "post_id" => $post->id))->fetchAll();
 
-            $list = array();
             foreach ($emails as $email)
-                $list[] = $email["author_email"];
-
-            $config = Config::current();
-
-            $to = implode(", ", $list);
-            $subject = $config->name.__("New Comment");
-            $message = __("There is a new comment at ").$post->url()."\n Poster: ".fix($author)."\n Message: ".fix($body);
-            $headers = "From:".$config->email."\r\n" .
-                                   "Reply-To:".$config->email."\r\n".
-                                   "X-Mailer: PHP/".phpversion();
-            $sent = email($to, $subject, $message, $headers);
+                correspond("comment", array("author" => $author,
+                                            "body" => $body,
+                                            "post" => $post,
+                                            "email" => $email));
         }
     }
