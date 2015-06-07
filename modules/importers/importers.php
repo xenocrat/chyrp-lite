@@ -530,7 +530,7 @@
             </form>
             <hr>
             <h2>Tumblr</h2>
-            <form id="import_tumblr_form" class="split" action="{% admin "import_tumblr" %}" method="post" accept-charset="utf-8">
+            <form id="import_tumblr_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_tumblr"; ?>" method="post" accept-charset="utf-8">
                 <fieldset>
                     <p>
                         <label for="tumblr_url"><?php echo __("Your Tumblr URL", "importers"); ?></label>
