@@ -39,7 +39,7 @@
                             <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime }" id="created_at">
                         </p>
                         <p class="more_options_option">
-                            <label for="notify">${ "Notifications" | translate }</label>
+                            <label for="notify">${ "Email Notifications" | translate }</label>
                             <input type="checkbox" name="notify" id="notify"${ comment["notify"] | checked }>
                         </p>
                         {% endif %}
