@@ -553,6 +553,7 @@
 
                 case "edit_comment":
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
+
                     if ($comment->editable())
                         $main->display("forms/comment/edit", array("comment" => $comment));
 

@@ -25,6 +25,10 @@
                         </p>
                         {% if visitor.group.can("edit_comment") %} {# If they can edit all comments, not just this one. #}
                         <p class="more_options_option">
+                            <label for="created_at">${ "Timestamp" | translate }</label>
+                            <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime }" id="created_at">
+                        </p>
+                        <p class="more_options_option">
                             <label for="status">${ "Status" | translate }</label>
                             <select name="status" id="status">
                                 <option value="approved"${ comment.status | option_selected("approved") }>${ "Approved" | translate }</option>
@@ -34,15 +38,11 @@
                                 <option value="trackback"${ comment.status | option_selected("trackback") }>${ "Trackback" | translate }</option>
                             </select>
                         </p>
-                        <p class="more_options_option">
-                            <label for="created_at">${ "Timestamp" | translate }</label>
-                            <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime }" id="created_at">
-                        </p>
+                        {% endif %}
                         <p class="more_options_option">
                             <label for="notify">${ "Email Notifications" | translate }</label>
                             <input type="checkbox" name="notify" id="notify"${ comment["notify"] | checked }>
                         </p>
-                        {% endif %}
                         ${ trigger.call("edit_comment_options", comment) }
                         <hr>
                     </div>

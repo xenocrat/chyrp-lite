@@ -226,12 +226,12 @@
 
         public function editable(User $user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("edit_comment") or ($user->group->can("edit_own_comment") and $user->id == $this->user_id));
+            return ($user->group->can("edit_comment") or ($user->group->can("edit_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
         }
 
         public function deletable(User $user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("delete_comment") or ($user->group->can("delete_own_comment") and $user->id == $this->user_id));
+            return ($user->group->can("delete_comment") or ($user->group->can("delete_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
         }
 
         /**
