@@ -15,7 +15,6 @@
             $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
         exit($body."HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +23,7 @@
         <title><?php echo $title; ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
+<?php if (class_exists("Config")): ?>
             @font-face {
                 font-family: 'Open Sans webfont';
                 src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Regular.woff') format('woff'),
@@ -52,6 +52,7 @@
                 font-weight: bold;
                 font-style: italic;
             }
+<?php endif ?>
             *::-moz-selection {
                 color: #ffffff;
                 background-color: #4f4f4f;
