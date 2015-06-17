@@ -543,7 +543,7 @@
             if (empty($_GET['token']))
                 error(__("Error"), __("No token found."));
 
-            $user = new User(array("login" => strip_tags($_GET['login'])));
+            $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
@@ -572,7 +572,7 @@
             if (empty($_GET['token']))
                 error(__("Error"), __("No token found."));
 
-            $user = new User(array("login" => strip_tags($_GET['login'])));
+            $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
