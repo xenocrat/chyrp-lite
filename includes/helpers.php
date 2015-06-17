@@ -531,7 +531,7 @@
      *     $string - String to unfix.
      */
     function unfix($string) {
-        return htmlspecialchars_decode($string, ENT_QUOTES, "utf-8");
+        return htmlspecialchars_decode($string, ENT_QUOTES);
     }
 
     /**
