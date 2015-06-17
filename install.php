@@ -399,10 +399,6 @@
                 font-weight: bold;
                 font-style: italic;
             }
-            *::-moz-selection {
-                color: #ffffff;
-                background-color: #4f4f4f;
-            }
             *::selection {
                 color: #ffffff;
                 background-color: #4f4f4f;
@@ -445,6 +441,8 @@
                 font-weight: inherit;
             }
             input[type="text"],
+            input[type="email"],
+            input[type="url"],
             input[type="number"],
             input[type="password"],
             textarea {
@@ -454,14 +452,18 @@
                 background-color: #ffffff;
                 background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
-            textarea:focus,
             input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="url"]:focus,
             input[type="number"]:focus,
-            input[type="password"]:focus {
+            input[type="password"]:focus,
+            textarea:focus {
                 border-color: #1e57ba;
                 outline: none;
             }
             input[type="text"],
+            input[type="email"],
+            input[type="url"],
             input[type="number"],
             input[type="password"],
             textarea,

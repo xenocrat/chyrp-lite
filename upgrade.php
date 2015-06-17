@@ -1349,10 +1349,6 @@
                 font-weight: bold;
                 font-style: italic;
             }
-            *::-moz-selection {
-                color: #ffffff;
-                background-color: #4f4f4f;
-            }
             *::selection {
                 color: #ffffff;
                 background-color: #4f4f4f;
