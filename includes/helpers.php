@@ -1996,6 +1996,7 @@
      *
      * Returns:
      *     Whether or not the string matches the criteria.
+     *
      * See Also:
      *     <add_scheme>
      */

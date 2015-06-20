@@ -227,35 +227,14 @@
 
                 $name = substr($file, 0, strpos($file, "."));
                 switch ($name) {
-                    case "aural":
-                        $media = "aural";
-                        break;
-                    case "braille":
-                        $media = "braille";
-                        break;
-                    case "embossed":
-                        $media = "embossed";
-                        break;
-                    case "handheld":
-                        $media = "handheld";
-                        break;
                     case "print":
                         $media = "print";
-                        break;
-                    case "projection":
-                        $media = "projection";
                         break;
                     case "screen":
                         $media = "screen";
                         break;
                     case "speech":
                         $media = "speech";
-                        break;
-                    case "tty":
-                        $media = "tty";
-                        break;
-                    case "tv":
-                        $media = "tv";
                         break;
                     default:
                         $media = "all";
