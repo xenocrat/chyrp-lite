@@ -1701,9 +1701,12 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            $correspond = (!empty($_POST['email_activation']) or !empty($_POST['email_correspondence'])) ? true : false ;
+
             $config = Config::current();
             $set = array($config->set("can_register", !empty($_POST['can_register'])),
                          $config->set("email_activation", !empty($_POST['email_activation'])),
+                         $config->set("email_correspondence", $correspond),
                          $config->set("enable_captcha", !empty($_POST['enable_captcha'])),
                          $config->set("default_group", $_POST['default_group']),
                          $config->set("guest_group", $_POST['guest_group']));

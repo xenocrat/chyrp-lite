@@ -16,6 +16,11 @@
                         ${ "Should users activate by email?" | translate }
                     </p>
                     <p>
+                        <label for="email_correspondence">${ "Email Correspondence" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="email_correspondence" id="email_correspondence"${ site.email_correspondence | checked }>
+                        ${ "Allow the site to send email correspondence to users?" | translate }
+                    </p>
+                    <p>
                         <label for="enable_captcha">${ "Enable Captcha" | translate }</label>
                         <input class="checkbox" type="checkbox" name="enable_captcha" id="enable_captcha"${ site.enable_captcha | checked }>
                         ${ "Use a Captcha module to prevent bots from registering." | translate }

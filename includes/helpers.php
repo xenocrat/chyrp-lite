@@ -2048,6 +2048,9 @@
         $config  = Config::current();
         $trigger = Trigger::current();
 
+        if (!$config->email_correspondence)
+            error(__("Undeliverable"), __("This site is configured not to send email correspondence."));
+
         $to      = $params["email"];
         $headers = "From:".$config->email."\r\n".
                    "Reply-To:".$config->email. "\r\n".

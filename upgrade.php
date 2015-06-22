@@ -1304,6 +1304,17 @@
     }
 
     /**
+     * Function: add_email_correspondence
+     * Adds the email_correspondence config setting.
+     *
+     * Versions: 2015.05.25 => ????.??.??
+     */
+    function add_email_correspondence() {
+        if (!Config::check("email_correspondence"))
+            Config::set("email_correspondence", true, __("Adding email correspondence setting..."));
+    }
+
+    /**
      * Function: theme_sanity_check
      * Resets the blog theme to Blossom if the config setting is invalid.
      *
@@ -1570,6 +1581,8 @@
         remove_admin_theme();
 
         uploader_serialize_to_json();
+
+        add_email_correspondence();
 
         # Perform tidy up tasks.
 
