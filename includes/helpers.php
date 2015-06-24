@@ -2001,7 +2001,7 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}|\[([[:alnum:]]|\:){3,45}\])~', $string);
+        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}|\[([[:alnum:]]|\:){3,45}\])~', $string);
     }
 
     /**
@@ -2015,7 +2015,7 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
+        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
     }
 
     /**
@@ -2049,7 +2049,7 @@
         $trigger = Trigger::current();
 
         if (!$config->email_correspondence)
-            error(__("Undeliverable"), __("This site is configured not to send email correspondence."));
+            return;
 
         $to      = $params["email"];
         $headers = "From:".$config->email."\r\n".
@@ -2098,5 +2098,5 @@
         }
 
         if (!email($to, $subject, $message, $headers))
-            error(__("Error"), __("Unable to send email."));
+            error(__("Undeliverable"), __("Unable to send email."));
     }
