@@ -31,10 +31,15 @@
             toggle_options();
             toggle_all();
             validate_slug();
+            if (Route.action == "user_settings")
+                toggle_correspondence();
 
             // Confirmations for group actions.
-            if (Route.action == "edit_group") confirm_edit_group();
-            if (Route.action == "delete_group") confirm_delete_group();
+            if (Route.action == "edit_group")
+                confirm_edit_group();
+
+            if (Route.action == "delete_group")
+                confirm_delete_group();
         });
         var Route = {
             action: "<?php echo fix($_GET['action']); ?>"
@@ -65,7 +70,8 @@
 
             // Some checkboxes are already checked when the page is loaded
             $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
-                if (!all_checked) return;
+                if (!all_checked)
+                    return;
                 all_checked = $(this).prop("checked");
             });
 
@@ -73,12 +79,14 @@
                 var action_all_checked = true;
 
                 $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
-                    if (!action_all_checked) return;
+                    if (!action_all_checked)
+                        return;
                     action_all_checked = $(this).prop("checked");
                 })
 
                 $("#toggle").parent().parent().find(":checkbox").not("#toggle").each(function(){
-                    if (!action_all_checked) return;
+                    if (!action_all_checked)
+                        return;
                     action_all_checked = $(this).prop("checked");
                 });
 
@@ -122,6 +130,16 @@
                     $("#more_options").slideToggle();
                 })
             }
+        }
+        function toggle_correspondence() {
+            $("#email_correspondence").click(function(){
+                if ($(this).prop("checked") == false )
+                    $("#email_activation").prop("checked", false);
+            });
+            $("#email_activation").click(function(){
+                if ($(this).prop("checked") == true )
+                    $("#email_correspondence").prop("checked", true);
+            });
         }
         function validate_slug() {
             $("input#slug").keyup(function(e){
