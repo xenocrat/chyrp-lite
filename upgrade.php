@@ -1299,7 +1299,7 @@
           $conversion = true;
 
         if ($serialize_count > 0)
-          echo __("Updating serialization of Uploader Feather...", "tags").
+          echo __("Updating serialization of Uploader Feather...").
             test($conversion);
     }
 
@@ -1312,6 +1312,99 @@
     function add_email_correspondence() {
         if (!Config::check("email_correspondence"))
             Config::set("email_correspondence", true, __("Adding email correspondence setting..."));
+    }
+
+    /**
+     * Function: migrate_file_feather
+     * Migrates posts from File Feather to Uploader Feather.
+     *
+     * Versions: 2015.05.25 => ????.??.??
+     */
+    function migrate_file_feather() {
+        $sql = SQL::current();
+        if (!$posts = $sql->select("posts", "posts.id", array("posts.feather" => "file")))
+            return;
+
+        $sql->error = "";
+        $json_error = 0;
+        $serialize_count = 0;
+        $conversion = false;
+
+        foreach($posts->fetchAll() as $post) {
+            if (!$query = $sql->select("post_attributes", "*", array("name" => "filename", "post_id" => $post["id"])))
+                continue;
+
+            $attr = $query->fetchObject();
+            $serialize_count++;
+
+            $serialized = json_encode((array) $attr->value, JSON_UNESCAPED_SLASHES);
+
+            if (!$serialized)
+                $json_error++;
+
+            $sql->update("posts",
+                         array("id" => $attr->post_id),
+                         array("feather" => "uploader"));
+
+            $sql->insert("post_attributes",
+                         array("name" => "filenames",
+                               "post_id" => $attr->post_id,
+                               "value" => $serialized));
+
+
+            $sql->delete("post_attributes",
+                         array("name" => "filename",
+                               "post_id" => $attr->post_id));
+        }
+
+        if (empty($sql->error) and empty($json_error))
+          $conversion = true;
+
+        if ($serialize_count > 0)
+          echo __("Migrating posts from File to Uploader...").
+            test($conversion);
+    }
+
+    /**
+     * Function: migrate_chat_feather
+     * Migrates posts from chat Feather to Uploader Feather.
+     *
+     * Versions: 2015.05.25 => ????.??.??
+     */
+    function migrate_chat_feather() {
+        $sql = SQL::current();
+        if (!$posts = $sql->select("posts", "posts.id", array("posts.feather" => "chat")))
+            return;
+
+        $sql->error = "";
+        $conversion = 0;
+
+        foreach($posts->fetchAll() as $post) {
+            if (!$query = $sql->select("post_attributes", "*", array("name" => "dialogue", "post_id" => $post["id"])))
+                continue;
+
+            $attr = $query->fetchObject();
+            $conversion++;
+            $dialogue = str_replace("\n", "<br>\n", $attr->value);
+
+            $sql->update("posts",
+                         array("id" => $attr->post_id),
+                         array("feather" => "text"));
+
+            $sql->insert("post_attributes",
+                         array("name" => "body",
+                               "post_id" => $attr->post_id,
+                               "value" => $dialogue));
+
+
+            $sql->delete("post_attributes",
+                         array("name" => "dialogue",
+                               "post_id" => $attr->post_id));
+        }
+
+        if ($conversion > 0)
+          echo __("Migrating posts from Chat to Text...").
+            test(empty($sql->error));
     }
 
     /**
@@ -1583,6 +1676,10 @@
         uploader_serialize_to_json();
 
         add_email_correspondence();
+
+        migrate_file_feather();
+
+        migrate_chat_feather();
 
         # Perform tidy up tasks.
 
