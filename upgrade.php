@@ -1367,7 +1367,7 @@
 
     /**
      * Function: migrate_chat_feather
-     * Migrates posts from chat Feather to Uploader Feather.
+     * Migrates posts from Chat Feather to Text Feather.
      *
      * Versions: 2015.05.25 => ????.??.??
      */
