@@ -1385,7 +1385,7 @@
 
             $attr = $query->fetchObject();
             $conversion++;
-            $dialogue = str_replace("\n", "<br>\n", $attr->value);
+            $dialogue = "<pre>".$attr->value."</pre>";
 
             $sql->update("posts",
                          array("id" => $attr->post_id),
