@@ -702,6 +702,11 @@
             if (logged_in())
                 error(__("Error"), __("You are already logged in."));
 
+            if (!Config::current()->email_correspondence) {
+                Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
+                return;
+            }
+
             if (!empty($_POST)) {
                 $user = new User(array("login" => $_POST['login']));
 
