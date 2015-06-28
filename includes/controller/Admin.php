@@ -323,13 +323,27 @@
             if (empty($_POST['title']) and empty($_POST['slug']))
                 error(__("Error"), __("Title and slug cannot be blank."));
 
+            $bump = new Page(null, array("where" => array("list_order" => (int) $_POST['list_order'])));
+
+            # If we are taking the list order of an existing page, bump it to the bottom of the list.
+            if (!$bump->no_results)
+                $bump->update(null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              count(Page::find()),
+                              null,
+                              null);
+
             $page = Page::add($_POST['title'],
                               $_POST['body'],
                               null,
                               $_POST['parent_id'],
                               !empty($_POST['public']),
                               !empty($_POST['show_in_list']),
-                              intval($_POST['list_order'], 10),
+                              (int) $_POST['list_order'],
                               (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             Flash::notice(__("Page created!"), $page->url());
@@ -370,25 +384,34 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
 
-            $page->update($_POST['title'], $_POST['body'], null, $_POST['parent_id'], !empty($_POST['public']), !empty($_POST['show_in_list']), intval($_POST['list_order'], 10), null, $_POST['slug']);
+            $swap = new Page(null, array("where" => array("list_order" => (int) $_POST['list_order'])));
+
+            # If we are taking the list order of an existing page, swap values with it.
+            if (!$swap->no_results)
+                $swap->update(null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              $page->list_order,
+                              null,
+                              null);
+
+            $page->update($_POST['title'],
+                          $_POST['body'],
+                          null,
+                          $_POST['parent_id'],
+                          !empty($_POST['public']),
+                          !empty($_POST['show_in_list']),
+                          (int) $_POST['list_order'],
+                          null,
+                          (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             if (!isset($_POST['ajax']))
                 Flash::notice(_f("Page updated. <a href=\"%s\">View Page &rarr;</a>",
                                  array($page->url())),
-                              "/admin/?action=manage_pages");
-        }
-
-        /**
-         * Function: reorder_pages
-         * Reorders pages.
-         */
-        public function reorder_pages() {
-            foreach ($_POST['list_order'] as $id => $order) {
-                $page = new Page($id);
-                $page->update($page->title, $page->body, null, $page->parent_id, $page->public, $page->show_in_list, $order, null, $page->url);
-            }
-
-            Flash::notice(__("Pages reordered."), "/admin/?action=manage_pages");
+                                 "/admin/?action=manage_pages");
         }
 
         /**
