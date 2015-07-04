@@ -521,6 +521,7 @@ img {                                               border-style: none;
 @keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 
 @media print {
+    html {                                          font-size: 4.2mm }
     body {                                          background-color: #ffffff;
                                                     margin: 2em }
     div.prev, div.next {                            display: none }

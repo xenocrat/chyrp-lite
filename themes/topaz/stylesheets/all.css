@@ -562,6 +562,7 @@ img {                                               border-style: none;
 }
 
 @media screen and (max-width: 960px) {
+    html {                                          font-size: 4.2mm }
     body {                                          margin: 0rem 16px 1rem 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
