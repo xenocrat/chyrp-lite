@@ -49,19 +49,19 @@ h1 {                                                font-size: 2em;
                                                     text-transform: none;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
 h2, h1.banner {                                     font-size: 1.5em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
 h3 {                                                font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h3.flash {                                      margin: 0em }
     h3.filter {                                     padding: 4rem 0em 0rem 4rem;
                                                     margin-bottom: 0em }
@@ -72,7 +72,7 @@ h4 {                                                font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h4.yearly {                                     font-size: 1.33em;
                                                     margin-bottom: 0.75em }
 h5, h6 {                                            font-size: 1em;
@@ -80,7 +80,7 @@ h5, h6 {                                            font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h1:first-child, h2:first-child,
     h3:first-child, h4:first-child,
     h5:first-child, h6:first-child {                margin-top: 0em }
