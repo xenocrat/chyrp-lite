@@ -1,19 +1,13 @@
-<?php
-    define('JAVASCRIPT', true);
-    require_once "../../includes/common.php";
-    error_reporting(0);
-    header("Content-Type: application/x-javascript");
-?>
-<!-- --><script>
-        var Comment = {
+        var ChyrpComment = {
             editing: 0,
             notice: 0,
+            interval: null,
             failed: false,
             init: function() {
                 if ($("#comments").size()) {
-                    <?php if ($config->auto_reload_comments and $config->enable_reload_comments): ?>
-                    var updater = setInterval("Comment.reload()", <?php echo $config->auto_reload_comments * 1000; ?>);
-                    <?php endif; ?>
+<?php if (Config::current()->auto_reload_comments and Config::current()->enable_reload_comments): ?>
+                    ChyrpComment.interval = setInterval("ChyrpComment.reload()", Math.abs(<?php echo Config::current()->auto_reload_comments * 1000; ?>));
+<?php endif; ?>
                     $("#add_comment").append($(document.createElement("input")).attr({
                         type: "hidden",
                         name: "ajax",
@@ -27,7 +21,7 @@
                             $("#add_comment").parent().loader();
                         },
                         success: function(json) {
-                            $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: json.comment_id, reason: "added" }, function(data) {
+                            $.post("<?php echo Config::current()->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: json.comment_id, reason: "added" }, function(data) {
                                 $("#comments").attr("data-timestamp", json.comment_timestamp);
                                 $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
                             }, "html");
@@ -37,51 +31,54 @@
                         }
                     });
                 }
-                <?php echo "\n"; if (!isset($config->enable_ajax) or $config->enable_ajax): ?>
+<?php if (!isset(Config::current()->enable_ajax) or Config::current()->enable_ajax): ?>
                 $("#comments").on("click", ".comment_edit_link", function() {
                     var id = $(this).attr("id").replace(/comment_edit_/, "");
-                    Comment.edit(id);
+                    ChyrpComment.edit(id);
                     return false;
                 });
                 $("#comments").on("click", ".comment_delete_link", function() {
                     var id = $(this).attr("id").replace(/comment_delete_/, "");
-                    Comment.notice++;
+                    ChyrpComment.notice++;
                     if (!confirm('<?php echo __("Are you sure you want to permanently delete this comment?", "comments"); ?>')) {
-                        Comment.notice--;
+                        ChyrpComment.notice--;
                         return false;
                     }
-                    Comment.notice--;
-                    Comment.destroy(id);
+                    ChyrpComment.notice--;
+                    ChyrpComment.destroy(id);
                     return false;
                 });
-                <?php endif; ?>
+<?php endif; ?>
             },
             reload: function() {
                 if ($("#comments").attr("data-post") == undefined) return;
                 var id = $("#comments").attr("data-post");
-                if (Comment.editing == 0 && Comment.notice == 0 && Comment.failed != true && $(".comments.paginated").children().size() < <?php echo $config->comments_per_page; ?>) {
+                if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && ChyrpComment.failed != true && $(".comments.paginated").children().size() < <?php echo Config::current()->comments_per_page; ?>) {
                     $.ajax({
                         type: "post",
                         dataType: "json",
-                        url: "<?php echo $config->chyrp_url; ?>/includes/ajax.php",
+                        url: "<?php echo Config::current()->chyrp_url; ?>/includes/ajax.php",
                         data: "action=reload_comments&post_id="+id+"&last_comment="+$("#comments").attr("data-timestamp"),
                         success: function(json) {
                             if ( json != null ) {
                                 $("#comments").attr("data-timestamp", json.last_comment);
                                 $.each(json.comment_ids, function(i, id) {
-                                    $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id }, function(data){
+                                    $.post("<?php echo Config::current()->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id }, function(data){
                                         $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
                                     }, "html");
                                 });
                             }
                         }
-                    }).fail( function() { Comment.failed = true });
+                    }).fail( function() {
+                        ChyrpComment.failed = true;
+                        clearInterval(ChyrpComment.interval);
+                    });
                 }
             },
             edit: function(id) {
-                Comment.editing++;
+                ChyrpComment.editing++;
                 $("#comment_"+id).loader();
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "edit_comment", comment_id: id }, function(data) {
+                $.post("<?php echo Config::current()->chyrp_url; ?>/includes/ajax.php", { action: "edit_comment", comment_id: id }, function(data) {
                     if (isError(data)) return $("#comment_"+id).loader(true);
                     $("#comment_"+id).fadeOut("fast", function(){
                         $(this).loader(true);
@@ -98,7 +95,7 @@
                             });
                             $("#comment_cancel_edit_"+id).click(function(){
                                 $("#comment_"+id).loader();
-                                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id }, function(data){
+                                $.post("<?php echo Config::current()->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id }, function(data){
                                     $("#comment_"+id).fadeOut("fast", function(){
                                         $(this).loader(true);
                                         $(this).replaceWith(data).fadeIn("fast");
@@ -110,9 +107,9 @@
                                     $("#comment_"+id).loader();
                                 },
                                 success: function(response) {
-                                    Comment.editing--;
+                                    ChyrpComment.editing--;
                                     if (isError(response)) return $("#comment_"+id).loader(true);
-                                    $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id, reason: "edited" }, function(data) {
+                                    $.post("<?php echo Config::current()->chyrp_url; ?>/includes/ajax.php", { action: "show_comment", comment_id: id, reason: "edited" }, function(data) {
                                         if (isError(data)) return $("#comment_"+id).loader(true);
                                         $("#comment_"+id).fadeOut("fast", function(){
                                             $(this).loader(true);
@@ -126,9 +123,9 @@
                 }, "html");
             },
             destroy: function(id) {
-                Comment.notice--;
+                ChyrpComment.notice--;
                 $("#comment_"+id).loader();
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "delete_comment", id: id }, function(response){
+                $.post("<?php echo Config::current()->chyrp_url; ?>/includes/ajax.php", { action: "delete_comment", id: id }, function(response){
                     $("#comment_"+id).loader(true);
                     if (isError(response)) return;
                     $("#comment_"+id).fadeOut("fast", function(){
@@ -137,6 +134,4 @@
                 }, "html");
             }
         };
-        $(document).ready(Comment.init);
-<?php Trigger::current()->call("comments_javascript"); ?>
-<!-- --></script>
+        $(document).ready(ChyrpComment.init);

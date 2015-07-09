@@ -491,9 +491,8 @@
             echo '<td class="post_comments"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
         }
 
-        static function scripts($scripts) {
-            $scripts[] = Config::current()->chyrp_url."/modules/comments/javascript.php";
-            return $scripts;
+        static function javascript() {
+            include MODULES_DIR."/comments/javascript.php";
         }
 
         static function ajax() {

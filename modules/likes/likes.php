@@ -68,9 +68,8 @@
             return $styles;
         }
 
-        static function scripts($scripts) {
-            $scripts[] = Config::current()->chyrp_url."/modules/likes/javascript.php";
-            return $scripts;
+        static function javascript() {
+            include MODULES_DIR."/likes/javascript.php";
         }
 
         static function ajax_like() {
