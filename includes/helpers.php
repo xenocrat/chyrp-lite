@@ -846,54 +846,56 @@
 
     /**
      * Function: get_remote
-     * Grabs the contents of a website/location.
+     * Retrieve the contents of a URL.
      *
      * Parameters:
-     *     $url - The URL of the location to grab.
+     *     $url - The URL of the resource to be retrieved.
+     *     $redirects - The maximum number of redirects to follow.
+     *     $timeout - The maximum number of seconds to wait.
      *
      * Returns:
      *     The response from the remote URL.
      */
-    function get_remote($url) {
+    function get_remote($url, $redirects = 0, $timeout = 10) {
         extract(parse_url($url), EXTR_SKIP);
+        $content = "";
 
         if (ini_get("allow_url_fopen")) {
-            $content = @file_get_contents($url);
-            if (!$content or  (strpos($http_response_header[0], " 200 OK") === false))
-                $content = "Server returned a message: ".$http_response_header[0];
+            $context = stream_context_create(array("http" => array("follow_location" => ($redirects == 0) ? 0 : 1 ,
+                                                                   "max_redirects" => $redirects,
+                                                                   "timeout" => $timeout)));
+            $content = @file_get_contents($url, false, $context);
         } elseif (function_exists("curl_init")) {
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, $url);
             curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 1);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+            curl_setopt($handle, CURLOPT_FOLLOWLOCATION, ($redirects == 0) ? false : true );
+            curl_setopt($handle, CURLOPT_MAXREDIRS, $redirects);
+            curl_setopt($handle, CURLOPT_CONNECTTIMEOUT_MS, $timeout * 1000 );
             $content = curl_exec($handle);
-            $status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
             curl_close($handle);
-            if ($status != 200)
-                $content = "Server returned a message: ".$status;
         } else {
-            $path = (!isset($path)) ? '/' : $path ;
-            if (isset($query)) $path.= '?'.$query;
             $port = (isset($port)) ? $port : 80 ;
+            $path = (!isset($path)) ? '/' : $path ;
 
-            $connect = @fsockopen($host, $port, $errno, $errstr, 2);
-            if (!$connect) return false;
+            if (isset($query))
+                $path.= '?'.$query;
 
-            # Send the GET headers
-            fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
-            fwrite($connect, "Host: ".$host."\r\n");
-            fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION."\r\n\r\n");
+            $connect = @fsockopen($host, $port, $errno, $errstr, $timeout);
 
-            $content = "";
-            while (!feof($connect)) {
-                $line = fgets($connect, 128);
-                if (preg_match("/\r\n/", $line)) continue;
+            if ($connect) {
+                # Send the GET headers
+                fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
+                fwrite($connect, "Host: ".$host."\r\n");
+                fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION."\r\n\r\n");
 
-                $content.= $line;
+                while (!feof($connect))
+                    $content.= fgets($connect);
+
+                fclose($connect);
             }
-
-            fclose($connect);
         }
 
         return $content;
