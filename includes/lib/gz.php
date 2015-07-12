@@ -1,8 +1,11 @@
 <?php
     # Constant: USE_ZLIB
-    # Use zlib to provide GZIP compression
-    if (version_compare(PHP_VERSION, "5.4.4", "<")) define('USE_ZLIB', true);
-    else define('USE_ZLIB', false);
+    # Use zlib to provide GZIP compression if the feature is supported and not buggy
+    # See Also: http://bugs.php.net/55544
+    if (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<"))
+        define('USE_ZLIB', true);
+    else
+        define('USE_ZLIB', false);
 
     $valid_files = "common.js custom.js";
     if (!in_array($_GET['file'], explode(" ", $valid_files)) and strpos($_GET['file'], "/themes/") === false)
