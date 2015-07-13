@@ -50,7 +50,7 @@
         function toggle_all() {
             var all_checked = true;
 
-            $(document.createElement("label")).attr("for", "toggle").text("<?php echo __("Toggle All"); ?>").appendTo("#toggler");
+            $(document.createElement("label")).attr("for", "toggle").text("<?php echo __("Toggle All", "theme"); ?>").appendTo("#toggler");
             $(document.createElement("input")).attr({
                 type: "checkbox",
                 name: "toggle",
@@ -107,9 +107,9 @@
         function toggle_options() {
             if ($("#more_options").size()) {
                 if (Cookie.get("show_more_options") == "true")
-                    var more_options_text = "<?php echo __("&uarr; Fewer Options"); ?>";
+                    var more_options_text = "<?php echo __("&uarr; Fewer Options", "theme"); ?>";
                 else
-                    var more_options_text = "<?php echo __("More Options &darr;"); ?>";
+                    var more_options_text = "<?php echo __("More Options &darr;", "theme"); ?>";
 
                 $(document.createElement("a")).attr({
                     id: "more_options_link",
@@ -121,10 +121,10 @@
 
                 $("#more_options_link").click(function(){
                     if ($("#more_options").css("display") == "none") {
-                        $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
+                        $(this).empty().append("<?php echo __("&uarr; Fewer Options", "theme"); ?>");
                         Cookie.set("show_more_options", "true", 30);
                     } else {
-                        $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
+                        $(this).empty().append("<?php echo __("More Options &darr;", "theme"); ?>");
                         Cookie.destroy("show_more_options");
                     }
                     $("#more_options").slideToggle();
@@ -151,13 +151,13 @@
         }
         function confirm_edit_group(msg) {
             $("form.confirm").submit(function(){
-                if (!confirm("<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?"); ?>"))
+                if (!confirm("<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>"))
                     return false;
             })
         }
         function confirm_delete_group(msg) {
             $("form.confirm").submit(function(){
-                if (!confirm("<?php echo __("You are a member of this group. Are you sure you want to delete it?"); ?>"))
+                if (!confirm("<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>"))
                     return false;
             })
         }
@@ -305,7 +305,7 @@
                         "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/close.svg",
                         "alt": "<?php echo __("Close", "theme"); ?>",
                         "role": "button",
-                        "aria-label": "<?php echo __("Close"); ?>"
+                        "aria-label": "<?php echo __("Close", "theme"); ?>"
                     }).addClass("overlay_close_gadget").click(function() {
                         $(this).parent().remove();
                     })]
