@@ -1,4 +1,6 @@
 <?php
+    define('USE_ZLIB', false);
+
     require_once "common.php";
 
     if (ini_get("memory_limit") < 48)
