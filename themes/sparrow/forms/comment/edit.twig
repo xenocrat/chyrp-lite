@@ -10,7 +10,7 @@
               <label for="author_email">${ "Author's email" | translate }</label>
               <input class="text" type="email" name="author_email" value="$comment.author_email" id="author_email">
               {% if visitor.group.can("edit_comment") %} {# If they can edit all comments, not just this one. #}
-              <label for="created_at">${ "Timestap" | translate }</label>
+              <label for="created_at">${ "Timestamp" | translate }</label>
               <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime("%B %d, %Y %H:%M:%S") }" id="created_at">
               <label for="status">${ "Status" | translate }</label>
               <select name="status" id="status">
