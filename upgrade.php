@@ -10,43 +10,37 @@
 
     header("Content-type: text/html; charset=UTF-8");
 
-    define('DEBUG',         true);
-    define('CHYRP_VERSION', "2015.05.25");
-    define('CACHE_TWIG',    false);
-    define('JAVASCRIPT',    false);
-    define('ADMIN',         false);
-    define('AJAX',          false);
-    define('XML_RPC',       false);
-    define('TRACKBACK',     false);
-    define('UPGRADING',     true);
-    define('INSTALLING',    false);
-    define('TESTER',        true);
-    define('INDEX',         false);
-    define('MAIN_DIR',      dirname(__FILE__));
-    define('INCLUDES_DIR',  dirname(__FILE__)."/includes");
-    define('MODULES_DIR',   MAIN_DIR."/modules");
-    define('FEATHERS_DIR',  MAIN_DIR."/feathers");
-    define('THEMES_DIR',    MAIN_DIR."/themes");
-    define('USE_ZLIB',      true);
+    define('DEBUG',          true);
+    define('CHYRP_VERSION',  "2015.06");
+    define('CHYRP_CODENAME', "Saxaul");
+    define('CACHE_TWIG',     false);
+    define('JAVASCRIPT',     false);
+    define('ADMIN',          false);
+    define('AJAX',           false);
+    define('XML_RPC',        false);
+    define('TRACKBACK',      false);
+    define('UPGRADING',      true);
+    define('INSTALLING',     false);
+    define('TESTER',         true);
+    define('INDEX',          false);
+    define('MAIN_DIR',       dirname(__FILE__));
+    define('INCLUDES_DIR',   dirname(__FILE__)."/includes");
+    define('MODULES_DIR',    MAIN_DIR."/modules");
+    define('FEATHERS_DIR',   MAIN_DIR."/feathers");
+    define('THEMES_DIR',     MAIN_DIR."/themes");
+    define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4
-    if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
+    if (!defined('JSON_PRETTY_PRINT'))
+        define('JSON_PRETTY_PRINT', 0);
 
     # Constant: JSON_UNESCAPED_SLASHES
     # Define a safe value to avoid warnings pre-5.4
-    if (!defined('JSON_UNESCAPED_SLASHES')) define('JSON_UNESCAPED_SLASHES', 0);
+    if (!defined('JSON_UNESCAPED_SLASHES'))
+        define('JSON_UNESCAPED_SLASHES', 0);
 
-    if (!AJAX and
-        extension_loaded("zlib") and
-        !ini_get("zlib.output_compression") and
-        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
-        USE_ZLIB) {
-        ob_start("ob_gzhandler");
-        header("Content-Encoding: gzip");
-    } else
-        ob_start();
+    ob_start();
 
     /**
      * Function: config_file
@@ -1307,7 +1301,7 @@
      * Function: add_email_correspondence
      * Adds the email_correspondence config setting.
      *
-     * Versions: 2015.05.25 => ????.??.??
+     * Versions: 2015.05.25 => 2015.06
      */
     function add_email_correspondence() {
         if (!Config::check("email_correspondence"))
@@ -1318,7 +1312,7 @@
      * Function: migrate_file_feather
      * Migrates posts from File Feather to Uploader Feather.
      *
-     * Versions: 2015.05.25 => ????.??.??
+     * Versions: 2015.05.25 => 2015.06
      */
     function migrate_file_feather() {
         $sql = SQL::current();
@@ -1369,7 +1363,7 @@
      * Function: migrate_chat_feather
      * Migrates posts from Chat Feather to Text Feather.
      *
-     * Versions: 2015.05.25 => ????.??.??
+     * Versions: 2015.05.25 => 2015.06
      */
     function migrate_chat_feather() {
         $sql = SQL::current();

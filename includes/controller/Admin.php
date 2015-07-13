@@ -1936,6 +1936,7 @@
             $this->context["hide_admin"]  = isset($_SESSION["hide_admin"]);
             $this->context["now"]         = time();
             $this->context["version"]     = CHYRP_VERSION;
+            $this->context["codename"]    = CHYRP_CODENAME;
             $this->context["debug"]       = DEBUG;
             $this->context["feathers"]    = Feathers::$instances;
             $this->context["modules"]     = Modules::$instances;

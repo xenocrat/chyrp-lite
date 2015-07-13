@@ -42,6 +42,10 @@
     # Chyrp's version number.
     define('CHYRP_VERSION', "2015.06");
 
+    # Constant: CHYRP_CODENAME
+    # The code name for this version.
+    define('CHYRP_CODENAME', "Saxaul");
+
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
     define('DEBUG', true);

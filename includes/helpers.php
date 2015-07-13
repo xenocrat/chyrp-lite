@@ -889,7 +889,7 @@
                 # Send the GET headers
                 fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
                 fwrite($connect, "Host: ".$host."\r\n");
-                fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION."\r\n\r\n");
+                fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
 
                 while (!feof($connect))
                     $content.= fgets($connect);
