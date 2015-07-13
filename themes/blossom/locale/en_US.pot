@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-06-01 19:05+0000\n"
+"POT-Creation-Date: 2015-07-13 19:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -212,49 +212,54 @@ msgid "Comment"
 msgstr ""
 
 #: themes/blossom/forms/comment/edit.twig:4
-#: themes/blossom/forms/post/edit.twig:28
-msgid "Status"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:6
-msgid "Approved"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:7
-msgid "Denied"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:8
-msgid "Spam"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:10
 #: themes/blossom/forms/post/edit.twig:25
 msgid "More Options &darr;"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:12
+#: themes/blossom/forms/comment/edit.twig:6
 msgid "Author"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:14
+#: themes/blossom/forms/comment/edit.twig:8
 msgid "Author's website"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:16
+#: themes/blossom/forms/comment/edit.twig:10
 msgid "Author's email"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:18
-msgid "Timestap"
+#: themes/blossom/forms/comment/edit.twig:13
+#: themes/blossom/forms/post/edit.twig:48
+msgid "Timestamp"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:24
+#: themes/blossom/forms/comment/edit.twig:15
+#: themes/blossom/forms/post/edit.twig:28
+msgid "Status"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:17
+msgid "Approved"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:18
+msgid "Denied"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:19
+msgid "Spam"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:22
+msgid "Email Notifications"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:28
 #: themes/blossom/forms/post/edit.twig:78
 msgid "Save"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:25
+#: themes/blossom/forms/comment/edit.twig:29
 #: themes/blossom/forms/post/edit.twig:79
 msgid "Cancel"
 msgstr ""
@@ -281,7 +286,11 @@ msgstr ""
 msgid "Your comment"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:22
+#: themes/blossom/forms/comment/new.twig:15
+msgid "Notify me when others comment"
+msgstr ""
+
+#: themes/blossom/forms/comment/new.twig:26
 msgid "Speak"
 msgstr ""
 
@@ -311,10 +320,6 @@ msgstr ""
 
 #: themes/blossom/forms/post/edit.twig:46
 msgid "Slug"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:48
-msgid "Timestamp"
 msgstr ""
 
 #: themes/blossom/forms/post/edit.twig:51
@@ -361,7 +366,7 @@ msgid "Lost password"
 msgstr ""
 
 #: themes/blossom/forms/user/lost_password.twig:7
-msgid "Please enter your username below and we will e-mail you a new password for your account."
+msgid "Please enter your username below and we will email you a new password for your account."
 msgstr ""
 
 #: themes/blossom/forms/user/lost_password.twig:11

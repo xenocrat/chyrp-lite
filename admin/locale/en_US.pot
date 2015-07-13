@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-06-01 19:05+0000\n"
+"POT-Creation-Date: 2015-07-13 19:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -16,6 +16,57 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: admin/admin.js.php:53
+msgid "Toggle All"
+msgstr ""
+
+#: admin/admin.js.php:110
+#: admin/admin.js.php:124
+msgid "&uarr; Fewer Options"
+msgstr ""
+
+#: admin/admin.js.php:112
+#: admin/admin.js.php:127
+msgid "More Options &darr;"
+msgstr ""
+
+#: admin/admin.js.php:154
+msgid "You are a member of this group. Are you sure the permissions are as you want them?"
+msgstr ""
+
+#: admin/admin.js.php:160
+msgid "You are a member of this group. Are you sure you want to delete it?"
+msgstr ""
+
+#: admin/admin.js.php:234
+msgid "Help"
+msgstr ""
+
+#: admin/admin.js.php:238
+#: admin/admin.js.php:240
+#: admin/admin.js.php:306
+#: admin/admin.js.php:308
+msgid "Close"
+msgstr ""
+
+#: admin/admin.js.php:259
+#: admin/admin.js.php:260
+msgid "Preview this field"
+msgstr ""
+
+#: admin/admin.js.php:294
+#: admin/pages/themes.twig:25
+msgid "Preview"
+msgstr ""
+
+#: admin/admin.js.php:440
+msgid "There was an error enabling the extension."
+msgstr ""
+
+#: admin/admin.js.php:442
+msgid "There was an error disabling the extension."
+msgstr ""
 
 #: admin/layout.twig:57
 msgid "Chyrp loves you."
@@ -107,7 +158,7 @@ msgstr ""
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:67
 #: admin/pages/route_settings.twig:42
-#: admin/pages/user_settings.twig:40
+#: admin/pages/user_settings.twig:45
 msgid "Update"
 msgstr ""
 
@@ -243,7 +294,7 @@ msgstr ""
 
 #: admin/pages/edit_user.twig:14
 #: admin/pages/new_user.twig:38
-msgid "E-Mail"
+msgid "Email"
 msgstr ""
 
 #: admin/pages/edit_user.twig:18
@@ -374,7 +425,7 @@ msgid "Enter an alternate address here if you want your homepage URL to be diffe
 msgstr ""
 
 #: admin/pages/general_settings.twig:32
-msgid "Contact E-Mail Address"
+msgid "Contact Email Address"
 msgstr ""
 
 #: admin/pages/general_settings.twig:36
@@ -777,10 +828,6 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: admin/pages/themes.twig:25
-msgid "Preview"
-msgstr ""
-
 #: admin/pages/user_settings.twig:3
 msgid "User Settings"
 msgstr ""
@@ -794,26 +841,34 @@ msgid "Allow people to register"
 msgstr ""
 
 #: admin/pages/user_settings.twig:14
-msgid "Activate by email"
+msgid "Email Correspondence"
 msgstr ""
 
 #: admin/pages/user_settings.twig:16
-msgid "Should users activate by email?"
+msgid "Allow the site to send email correspondence to users?"
 msgstr ""
 
 #: admin/pages/user_settings.twig:19
-msgid "Enable Captcha"
+msgid "Activate by email"
 msgstr ""
 
 #: admin/pages/user_settings.twig:21
-msgid "Use a Captcha module to prevent bots from registering."
+msgid "Should users activate by email?"
 msgstr ""
 
 #: admin/pages/user_settings.twig:24
+msgid "Enable Captcha"
+msgstr ""
+
+#: admin/pages/user_settings.twig:26
+msgid "Use a Captcha module to prevent bots from registering."
+msgstr ""
+
+#: admin/pages/user_settings.twig:29
 msgid "Default User Group"
 msgstr ""
 
-#: admin/pages/user_settings.twig:32
+#: admin/pages/user_settings.twig:37
 msgid "&#8220;Guest&#8221; Group"
 msgstr ""
 
@@ -850,17 +905,17 @@ msgstr ""
 msgid "Priority in pages list"
 msgstr ""
 
-#: admin/partials/page_fields.twig:38
+#: admin/partials/page_fields.twig:47
 msgid "Is this page public?"
 msgstr ""
 
-#: admin/partials/page_fields.twig:51
+#: admin/partials/page_fields.twig:60
 #: admin/partials/post_fields.twig:128
 #: admin/partials/post_fields.twig:137
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:55
+#: admin/partials/page_fields.twig:64
 #: admin/partials/post_fields.twig:132
 #: admin/partials/post_fields.twig:141
 msgid "Save"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-06-01 19:05+0000\n"
+"POT-Creation-Date: 2015-07-13 19:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -38,42 +38,42 @@ msgstr ""
 msgid "Post unliked."
 msgstr ""
 
-#: modules/likes/likes.php:99
-#: modules/likes/likes.php:137
-#: modules/likes/likes.php:204
-#: modules/likes/likes.php:223
+#: modules/likes/likes.php:98
+#: modules/likes/likes.php:136
+#: modules/likes/likes.php:203
+#: modules/likes/likes.php:222
 msgid "No likes yet."
 msgstr ""
 
-#: modules/likes/likes.php:101
-#: modules/likes/likes.php:225
+#: modules/likes/likes.php:100
+#: modules/likes/likes.php:224
 #, php-format
 msgid "You like this."
 msgstr ""
 
-#: modules/likes/likes.php:103
-#: modules/likes/likes.php:227
+#: modules/likes/likes.php:102
+#: modules/likes/likes.php:226
 #, php-format
 msgid "You and %d person likes this."
 msgid_plural "You and %d people like this."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/likes/likes.php:139
-#: modules/likes/likes.php:206
+#: modules/likes/likes.php:138
+#: modules/likes/likes.php:205
 #, php-format
 msgid "%d person likes this."
 msgid_plural "%d people like this."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/likes/likes.php:196
-#: modules/likes/likes.php:215
+#: modules/likes/likes.php:195
+#: modules/likes/likes.php:214
 msgid "Like!"
 msgstr ""
 
-#: modules/likes/likes.php:197
-#: modules/likes/likes.php:216
+#: modules/likes/likes.php:196
+#: modules/likes/likes.php:215
 msgid "Unlike!"
 msgstr ""
 
@@ -81,20 +81,20 @@ msgstr ""
 msgid "You do not have sufficient privileges to like posts."
 msgstr ""
 
-#: modules/likes/model.Like.php:53
-#: modules/likes/model.Like.php:69
+#: modules/likes/model.Like.php:54
+#: modules/likes/model.Like.php:72
 msgid "Invalid action or post ID."
 msgstr ""
 
-#: modules/likes/model.Like.php:62
+#: modules/likes/model.Like.php:63
 msgid "You do not have sufficient privileges to unlike posts."
 msgstr ""
 
-#: modules/likes/model.Like.php:129
+#: modules/likes/model.Like.php:131
 msgid "Like Posts"
 msgstr ""
 
-#: modules/likes/model.Like.php:130
+#: modules/likes/model.Like.php:132
 msgid "Unlike Posts"
 msgstr ""
 

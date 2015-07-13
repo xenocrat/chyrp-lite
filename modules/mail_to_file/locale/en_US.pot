@@ -17,37 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: feathers/photo/info.php:3
-#: feathers/photo/photo.php:11
-msgid "Photo"
+#: modules/mail_to_file/info.php:3
+msgid "Mail to File"
 msgstr ""
 
-#: feathers/photo/info.php:6
-msgid "Upload and display an image with a caption."
-msgstr ""
-
-#: feathers/photo/photo.php:6
-msgid "Title"
-msgstr ""
-
-#: feathers/photo/photo.php:12
-#, php-format
-msgid "(Max. file size: %s)"
-msgstr ""
-
-#: feathers/photo/photo.php:15
-msgid "Caption"
-msgstr ""
-
-#: feathers/photo/photo.php:31
-msgid "You did not select a photo to upload."
-msgstr ""
-
-#: feathers/photo/photo.php:117
-msgid "Alt-Text"
-msgstr ""
-
-#: feathers/photo/photo.php:122
-msgid "Source"
+#: modules/mail_to_file/info.php:6
+msgid "Redirects outgoing emails to a digest file."
 msgstr ""
 
