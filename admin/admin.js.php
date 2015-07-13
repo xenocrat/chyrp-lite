@@ -1,6 +1,6 @@
 <?php
     define('JAVASCRIPT', true);
-    require_once "common.php";
+    require_once "../includes/common.php";
     error_reporting(0);
     header("Content-Type: application/x-javascript");
     $route = Route::current(MainController::current());
