@@ -235,7 +235,8 @@ input:focus {                                       outline: none;
     input:-ms-input-placeholder {                   color: #c6ccc8 }
     input:input-placeholder {                       color: #c6ccc8 }
     input.error {                                   background-color: #ffb2b2 }
-    input#search_field {                            display: inline;
+    input#search_field,
+    input#sidebar_search_field {                    display: inline;
                                                     margin: 0em;
                                                     padding-right: 34px }
     div.search_box input[type='text'] {             width: 100% }
@@ -247,13 +248,14 @@ input:focus {                                       outline: none;
                                                     bottom: 1px;
                                                     right: 0px;
                                                     border: none;
+                                                    border-radius: 0em;
                                                     margin: 0em;
                                                     padding: 0em;
                                                     background: transparent url(../images/search.svg) no-repeat center;
                                                     overflow: hidden;
                                                     color: transparent }
     button#search_submit:focus,
-    button#sidebar_search_submit:focus {            background-image: url(../images/search_alt.svg);
+    button#sidebar_search_submit:focus {            background-color: #c6ccc8;
                                                     outline: none }
     form.inline_edit input {                        width: 100% }
 select {                                            box-sizing: border-box;
