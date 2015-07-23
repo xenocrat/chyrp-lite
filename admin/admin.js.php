@@ -228,11 +228,14 @@
                 $("<div>", {
                     "role": "region",
                 }).addClass("overlay_background").append(
-                    [$("<iframe>", {
-                        "src": href,
+                    [$("<div>", {
                         "role": "contentinfo",
                         "aria-label": "<?php echo __("Help", "theme"); ?>"
-                    }).addClass("overlay_help"),
+                    }).addClass("overlay_foreground").load(href + "&ajax=1", null, function() {
+                        $(this).find("a").each(function() {
+                            $(this).attr("target","_blank"); // Force links to spawn a new viewport
+                        } )
+                    }),
                     $("<img>", {
                         "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/close.svg",
                         "alt": "<?php echo __("Close", "theme"); ?>",
@@ -275,15 +278,16 @@
                 // Make the selected tab the first tab
                 $("#sub_nav").children(".selected").detach().prependTo("#sub_nav");
 
-                // Collect feather names and prepare to serialize
                 var feathers = new Array();
                 $("#sub_nav").children("[id]").each(function() {
                     feathers[feathers.length] = $(this).attr("id");
                 });
-                var list = { list: feathers };
 
                 // Update feather order with current tab order
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", "action=reorder_feathers&"+ $.param(list));
+                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                    action: "reorder_feathers",
+                    list: feathers
+                });
             },
             ajax_previews: function(content, filter) {
                 $("<div>", {
@@ -292,7 +296,7 @@
                     [$("<div>", {
                         "role": "contentinfo",
                         "aria-label": "<?php echo __("Preview", "theme"); ?>"
-                    }).addClass("overlay_preview css_reset").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                    }).addClass("overlay_foreground").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
                             action: "preview",
                             content: content,
                             filter: filter

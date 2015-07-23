@@ -1765,32 +1765,35 @@
          * Sets the $title and $body for various help IDs.
          */
         public function help() {
-            list($title, $body) = Trigger::current()->call("help_".$_GET['id']);
+            $help = Trigger::current()->call("help_".$_GET['id']);
 
             switch($_GET['id']) {
                 case "filtering_results":
-                    $title = __("Filtering Results");
-                    $body = "<p>".__("Use this to search for specific items. You can either enter plain text to match the item with, or use keywords:")."</pre>";
-                    $body.= "<h2>".__("Keywords")."</h2>";
-                    $body.= "<cite><strong>".__("Usage")."</strong>: <code>attr:val</code></cite>\n".__("Use this syntax to quickly match specific results. Keywords will modify the query to match items where <code>attr</code> is equal to <code>val</code> (case insensitive).");
+                    $help = "<h1>".__("Filtering Results")."</h1>\n";
+                    $help.= "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n";
+                    $help.= "<h2>".__("Keywords")."</h2>\n";
+                    $help.= "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
                     break;
                 case "slugs":
-                    $title = __("Post Slugs");
-                    $body = __("Post slugs are strings to use for the URL of a post. They are directly responsible for the <code>(url)</code> attribute in a post's clean URL, or the <code>/?action=view&amp;url=<strong>foo</strong></code> in a post's dirty URL. A post slug should not contain any special characters other than hyphens.");
+                    $help = "<h1>".__("Post Slugs")."</h1>\n";
+                    $help.= "<p>".__("A slug is the unique name used in a post's URL to identify it. Slugs are directly responsible for the <code>(url)</code> attribute in a post's clean URL and <code>&amp;url=</code> in a post's dirty URL. A post slug should not contain any special characters other than hyphens.")."</p>";
                     break;
                 case "trackbacks":
-                    $title = __("Trackbacks");
-                    $body = __("Trackbacks are special urls to posts from other blogs that your post is related to or references. The other blog will be notified of your post, and in some cases a comment will automatically be added to the post in question linking back to your post. It's basically a way to network between blogs via posts.");
+                    $help = "<h1>".__("Trackbacks")."</h1>\n";
+                    $help.= "<p>".__("Trackbacks are special URLs to posts from other blogs that your post is related to or references. The other blog will be notified of your post, and in some cases a comment will automatically be added to the post in question linking back to your post. It's basically a way to network between blogs via posts.")."</p>";
                     break;
                 case "alternate_urls":
-                    $title = __("Alternate URL");
-                    $body = "<p>".__("An alternate URL will allow you to keep Chyrp in its own directory, while having your site URLs point to someplace else. For example, you could have Chyrp in a <code>/chyrp</code> directory, and have your site at <code>/</code>. There are two requirements for this to work.")."</p>\n\n";
-                    $body.= "<ol>\n\t<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n\n";
-                    $body.= "<pre><code>&lt;?php\n    require \"path/to/chyrp/index.php\";\n?&gt;</code></pre>";
-                    $body.= "</li>\n\t<li>".__("Move the .htaccess file from the original Chyrp directory, and change the <code>RewriteBase</code> line to reflect the new website location.")."</li>\n</ol>";
+                    $help = "<h1>".__("Alternate URL")."</h1>\n";
+                    $help.= "<p>".__("An alternate URL will allow you to keep Chyrp contained in its own directory, while having your site URLs point to someplace else. For example, you could keep Chyrp in a <code>/chyrp</code> directory and still have your site accessible at <code>/</code>. There are two requirements for this to work:")."</p>\n";
+                    $help.= "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n";
+                    $help.= "<pre><code>&lt;?php\n    require \"path/to/chyrp/index.php\";\n?&gt;</code></pre>";
+                    $help.= "</li>\n<li>".__("Move the .htaccess file from the original install directory, and change the <code>RewriteBase</code> line to reflect the new website location.")."</li>\n</ol>";
             }
 
-            require "help.php";
+            if (!isset($_GET['ajax']))
+                echo "<!DOCTYPE html>\n";
+
+            exit($help);
         }
 
         /**
