@@ -423,7 +423,8 @@ table tbody tr td.tag_count {                   text-align: center }
 table tbody tr td.placeholder {                 display: block;
                                                 border: none }
 table tbody tr td.post_status {                 background-color: #f2fbff }
-table tbody tr.private td.post_status {         background-color: #faebe4 }
+table tbody tr.private td.post_status,
+table tbody tr.registered_only td.post_status { background-color: #faebe4 }
 table tbody tr.public td.post_status {          background-color: #ebfae4 }
 table tbody tr.denied td.comment_status {       background-color: #faebe4 }
 table tbody tr.approved td.comment_status {     background-color: #ebfae4 }

@@ -234,7 +234,7 @@
                     }).addClass("overlay_foreground").load(href + "&ajax=1", null, function() {
                         $(this).find("a").each(function() {
                             $(this).attr("target","_blank"); // Force links to spawn a new viewport
-                        } )
+                        })
                     }),
                     $("<img>", {
                         "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/close.svg",
@@ -303,7 +303,7 @@
                     }, function() {
                         $(this).find("a").each(function() {
                             $(this).attr("target","_blank"); // Force links to spawn a new viewport
-                        } )
+                        })
                     }),
                     $("<img>", {
                         "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/close.svg",
@@ -434,7 +434,7 @@
                             if (Extend.extension.type == "module")
                                 Extend.check_errors();
 
-                            $(json.notifications).each(function(){
+                            $(json.notifications).each(function() {
                                 if (this == "") return
                                     alert(this.replace(/<([^>]+)>\n?/gm, ""));
                             });
