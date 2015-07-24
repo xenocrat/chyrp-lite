@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-07-13 19:52+0000\n"
+"POT-Creation-Date: 2015-07-24 12:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -39,32 +39,32 @@ msgstr ""
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:234
+#: admin/admin.js.php:233
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:238
-#: admin/admin.js.php:240
-#: admin/admin.js.php:306
-#: admin/admin.js.php:308
+#: admin/admin.js.php:241
+#: admin/admin.js.php:243
+#: admin/admin.js.php:311
+#: admin/admin.js.php:313
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:259
-#: admin/admin.js.php:260
+#: admin/admin.js.php:263
+#: admin/admin.js.php:264
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:294
+#: admin/admin.js.php:299
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:440
+#: admin/admin.js.php:445
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:442
+#: admin/admin.js.php:447
 msgid "There was an error disabling the extension."
 msgstr ""
 
@@ -74,7 +74,7 @@ msgstr ""
 
 #: admin/layout.twig:58
 #, php-format
-msgid "Chyrp Lite v%s"
+msgid "Chyrp Lite &ldquo;%s&rdquo; v%s"
 msgstr ""
 
 #: admin/layout.twig:59
@@ -725,7 +725,7 @@ msgid "Year submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:26
-msgid "(ex. 2007)"
+msgid "(e.g. 2007)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:27
@@ -733,7 +733,7 @@ msgid "Month submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:27
-msgid "(ex. 12)"
+msgid "(e.g. 12)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:28
@@ -741,7 +741,7 @@ msgid "Day submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:28
-msgid "(ex. 25)"
+msgid "(e.g. 25)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:29
@@ -749,7 +749,7 @@ msgid "Hour submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:29
-msgid "(ex. 03)"
+msgid "(e.g. 03)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:30
@@ -757,7 +757,7 @@ msgid "Minute submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:30
-msgid "(ex. 59)"
+msgid "(e.g. 59)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:31
@@ -765,7 +765,7 @@ msgid "Second submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:31
-msgid "(ex. 30)"
+msgid "(e.g. 30)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:32
@@ -777,7 +777,7 @@ msgid "Post author (username)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:33
-msgid "(ex. Alex)"
+msgid "(e.g. Alex)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:34
@@ -785,7 +785,7 @@ msgid "The non-unique sanitized name"
 msgstr ""
 
 #: admin/pages/route_settings.twig:34
-msgid "(ex. this_is_clean)"
+msgid "(e.g. this_is_clean)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:35
@@ -793,7 +793,7 @@ msgid "The unique form of (clean)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:35
-msgid "(ex. this_one_is_taken_2)"
+msgid "(e.g. this_one_is_taken_2)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:36
@@ -801,7 +801,7 @@ msgid "The post's feather"
 msgstr ""
 
 #: admin/pages/route_settings.twig:36
-msgid "(ex. text)"
+msgid "(e.g. text)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:37
@@ -809,7 +809,7 @@ msgid "The plural form of the post's feather"
 msgstr ""
 
 #: admin/pages/route_settings.twig:37
-msgid "(ex. links)"
+msgid "(e.g. links)"
 msgstr ""
 
 #: admin/pages/themes.twig:3

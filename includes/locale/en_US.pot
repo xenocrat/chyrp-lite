@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-07-13 21:54+0000\n"
+"POT-Creation-Date: 2015-07-24 12:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: includes/ajax.php:57
 #: includes/ajax.php:82
 #: includes/ajax.php:92
-#: includes/ajax.php:198
+#: includes/ajax.php:189
 #: includes/controller/Admin.php:60
 #: includes/controller/Admin.php:80
 #: includes/controller/Admin.php:88
@@ -141,45 +141,45 @@ msgstr ""
 msgid "You do not have sufficient privileges to enable/disable extensions."
 msgstr ""
 
-#: includes/ajax.php:117
-#: includes/ajax.php:170
+#: includes/ajax.php:108
+#: includes/ajax.php:161
 #: includes/controller/Admin.php:1218
 #: includes/controller/Admin.php:1462
 #: includes/controller/Admin.php:1531
 msgid "You do not have sufficient privileges to enable/disable modules."
 msgstr ""
 
-#: includes/ajax.php:119
-#: includes/ajax.php:172
+#: includes/ajax.php:110
+#: includes/ajax.php:163
 #: includes/controller/Admin.php:1335
 #: includes/controller/Admin.php:1464
 #: includes/controller/Admin.php:1533
 msgid "You do not have sufficient privileges to enable/disable feathers."
 msgstr ""
 
-#: includes/ajax.php:142
+#: includes/ajax.php:133
 #: includes/controller/Admin.php:1504
 #, php-format
 msgid "Please create the <code>%s</code> directory at your Chyrp install's root and CHMOD it to 777."
 msgstr ""
 
-#: includes/ajax.php:144
+#: includes/ajax.php:135
 #: includes/controller/Admin.php:1506
 #, php-format
 msgid "Please CHMOD <code>%s</code> to 777."
 msgstr ""
 
-#: includes/ajax.php:149
+#: includes/ajax.php:140
 #: includes/controller/Admin.php:1483
 msgid "Item is not a module."
 msgstr ""
 
-#: includes/ajax.php:152
+#: includes/ajax.php:143
 #: includes/controller/Admin.php:1486
 msgid "Item is not a feather."
 msgstr ""
 
-#: includes/ajax.php:198
+#: includes/ajax.php:189
 msgid "You do not have sufficient privileges to reorder feathers."
 msgstr ""
 
@@ -208,7 +208,7 @@ msgstr ""
 #: includes/controller/Admin.php:1661
 #: includes/controller/Admin.php:1664
 #: includes/controller/Admin.php:1696
-#: includes/controller/Admin.php:2025
+#: includes/controller/Admin.php:2028
 #: includes/controller/Main.php:308
 #: includes/controller/Main.php:404
 #: includes/controller/Main.php:487
@@ -698,7 +698,7 @@ msgid "Filtering Results"
 msgstr ""
 
 #: includes/controller/Admin.php:1773
-msgid "Use this to search for specific items. You can either enter plain text to match the item with, or use keywords:"
+msgid "Use this search field to filter for specific items by entering plain text or keywords."
 msgstr ""
 
 #: includes/controller/Admin.php:1774
@@ -706,11 +706,7 @@ msgid "Keywords"
 msgstr ""
 
 #: includes/controller/Admin.php:1775
-msgid "Usage"
-msgstr ""
-
-#: includes/controller/Admin.php:1775
-msgid "Use this syntax to quickly match specific results. Keywords will modify the query to match items where <code>attr</code> is equal to <code>val</code> (case insensitive)."
+msgid "Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive)."
 msgstr ""
 
 #: includes/controller/Admin.php:1778
@@ -718,7 +714,7 @@ msgid "Post Slugs"
 msgstr ""
 
 #: includes/controller/Admin.php:1779
-msgid "Post slugs are strings to use for the URL of a post. They are directly responsible for the <code>(url)</code> attribute in a post's clean URL, or the <code>/?action=view&amp;url=<strong>foo</strong></code> in a post's dirty URL. A post slug should not contain any special characters other than hyphens."
+msgid "A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\")."
 msgstr ""
 
 #: includes/controller/Admin.php:1782
@@ -726,7 +722,7 @@ msgid "Trackbacks"
 msgstr ""
 
 #: includes/controller/Admin.php:1783
-msgid "Trackbacks are special urls to posts from other blogs that your post is related to or references. The other blog will be notified of your post, and in some cases a comment will automatically be added to the post in question linking back to your post. It's basically a way to network between blogs via posts."
+msgid "Trackbacks are special URLs that notify the authors of other blog posts that your post is related to or references. The other blogs will be informed when you publish your post, and in some cases a comment will automatically be added to their site linking back to your post."
 msgstr ""
 
 #: includes/controller/Admin.php:1786
@@ -734,7 +730,7 @@ msgid "Alternate URL"
 msgstr ""
 
 #: includes/controller/Admin.php:1787
-msgid "An alternate URL will allow you to keep Chyrp in its own directory, while having your site URLs point to someplace else. For example, you could have Chyrp in a <code>/chyrp</code> directory, and have your site at <code>/</code>. There are two requirements for this to work."
+msgid "An alternate URL will allow you to keep Chyrp contained in its own directory, while having your site URLs point to someplace else. For example, you could keep Chyrp in a <code>/chyrp</code> directory and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:"
 msgstr ""
 
 #: includes/controller/Admin.php:1788
@@ -742,84 +738,84 @@ msgid "Create an <code>index.php</code> file in your destination directory with 
 msgstr ""
 
 #: includes/controller/Admin.php:1790
-msgid "Move the .htaccess file from the original Chyrp directory, and change the <code>RewriteBase</code> line to reflect the new website location."
+msgid "Move the .htaccess file from the original install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location."
 msgstr ""
 
-#: includes/controller/Admin.php:1820
+#: includes/controller/Admin.php:1823
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:1826
+#: includes/controller/Admin.php:1829
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:1829
+#: includes/controller/Admin.php:1832
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:1832
-#: includes/controller/Admin.php:1867
+#: includes/controller/Admin.php:1835
+#: includes/controller/Admin.php:1870
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:1837
+#: includes/controller/Admin.php:1840
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:1844
+#: includes/controller/Admin.php:1847
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:1846
+#: includes/controller/Admin.php:1849
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:1863
+#: includes/controller/Admin.php:1866
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:1865
+#: includes/controller/Admin.php:1868
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:1869
+#: includes/controller/Admin.php:1872
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:1875
+#: includes/controller/Admin.php:1878
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:1877
+#: includes/controller/Admin.php:1880
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:1879
+#: includes/controller/Admin.php:1882
 msgid "Themes"
 msgstr ""
 
-#: includes/controller/Admin.php:1973
+#: includes/controller/Admin.php:1976
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:1978
+#: includes/controller/Admin.php:1981
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:1986
+#: includes/controller/Admin.php:1989
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:1991
+#: includes/controller/Admin.php:1994
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:2014
+#: includes/controller/Admin.php:2017
 #: includes/controller/Main.php:860
 msgid "Template Missing"
 msgstr ""
 
-#: includes/controller/Admin.php:2014
+#: includes/controller/Admin.php:2017
 #: includes/controller/Main.php:860
 #, php-format
 msgid "Couldn't load template: <code>%s</code>"
