@@ -1776,18 +1776,18 @@
                     break;
                 case "slugs":
                     $help = "<h1>".__("Post Slugs")."</h1>\n";
-                    $help.= "<p>".__("A slug is the unique name used in a post's URL to identify it. Slugs are directly responsible for the <code>(url)</code> attribute in a post's clean URL and <code>&amp;url=</code> in a post's dirty URL. A post slug should not contain any special characters other than hyphens.")."</p>";
+                    $help.= "<p>".__("A slug is the unique identifying name used in the URL of a post. Slugs are directly responsible for the <code>(url)</code> attribute in a clean URL and <code>&amp;url=</code> in a dirty URL. A slug should not contain any special characters other than hyphens.")."</p>";
                     break;
                 case "trackbacks":
                     $help = "<h1>".__("Trackbacks")."</h1>\n";
-                    $help.= "<p>".__("Trackbacks are special URLs to posts from other blogs that your post is related to or references. The other blog will be notified of your post, and in some cases a comment will automatically be added to the post in question linking back to your post. It's basically a way to network between blogs via posts.")."</p>";
+                    $help.= "<p>".__("Trackbacks are special URLs that notify the authors of other blog posts that your post is related to or references. The other blogs will be informed when you publish your post, and in some cases a comment will automatically be added to their site linking back to your post.")."</p>";
                     break;
                 case "alternate_urls":
                     $help = "<h1>".__("Alternate URL")."</h1>\n";
-                    $help.= "<p>".__("An alternate URL will allow you to keep Chyrp contained in its own directory, while having your site URLs point to someplace else. For example, you could keep Chyrp in a <code>/chyrp</code> directory and still have your site accessible at <code>/</code>. There are two requirements for this to work:")."</p>\n";
+                    $help.= "<p>".__("An alternate URL will allow you to keep Chyrp contained in its own directory, while having your site URLs point to someplace else. For example, you could keep Chyrp in a <code>/chyrp</code> directory and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:")."</p>\n";
                     $help.= "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n";
                     $help.= "<pre><code>&lt;?php\n    require \"path/to/chyrp/index.php\";\n?&gt;</code></pre>";
-                    $help.= "</li>\n<li>".__("Move the .htaccess file from the original install directory, and change the <code>RewriteBase</code> line to reflect the new website location.")."</li>\n</ol>";
+                    $help.= "</li>\n<li>".__("Move the .htaccess file from the original install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
             }
 
             if (!isset($_GET['ajax']))
