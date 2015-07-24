@@ -24,7 +24,7 @@
             if (Route.action == "new_user" || Route.action == "edit_user")
                 Users.init();
 
-            // Open help text in an iframe overlay
+            // Open help text in an overlay
             Help.init();
 
             // Interactive behaviour.
