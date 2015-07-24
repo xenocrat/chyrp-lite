@@ -1776,7 +1776,7 @@
                     break;
                 case "slugs":
                     $help = "<h1>".__("Post Slugs")."</h1>\n";
-                    $help.= "<p>".__("A slug is the unique identifying name used in the URL of a post. Slugs are directly responsible for the <code>(url)</code> attribute in a clean URL and <code>&amp;url=</code> in a dirty URL. A slug should not contain any special characters other than hyphens.")."</p>";
+                    $help.= "<p>".__("A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\").")."</p>";
                     break;
                 case "trackbacks":
                     $help = "<h1>".__("Trackbacks")."</h1>\n";
