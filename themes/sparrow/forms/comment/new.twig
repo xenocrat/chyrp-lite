@@ -11,7 +11,7 @@
             <label for="body">${ "Your comment" | translate | format(visitor.full_name | fallback(visitor.login)) }</label>
             {% endif %}
             <textarea name="body" id="new_comment"></textarea>
-            {% if visitor.logged_in %}
+            {% if visitor.logged_in and site.email_correspondence %}
             <label for="notify">${ "Notify me when others comment" | translate }</label>
             <input type="checkbox" name="notify" id="notify">
             {% endif %}

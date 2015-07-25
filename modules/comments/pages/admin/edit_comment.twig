@@ -39,10 +39,12 @@
                             </select>
                         </p>
                         {% endif %}
+                        {% if site.email_correspondence %}
                         <p class="more_options_option">
                             <label for="notify">${ "Email Notifications" | translate }</label>
                             <input type="checkbox" name="notify" id="notify"${ comment["notify"] | checked }>
                         </p>
+                        {% endif %}
                         ${ trigger.call("edit_comment_options", comment) }
                         <hr>
                     </div>

@@ -19,8 +19,10 @@
                 <option value="spam"{% if comment.status == "spam" %} selected="selected"{% endif %}>${ "Spam" | translate }</option>
               </select>
               {% endif %}
+              {% if site.email_correspondence %}
               <label for="notify">${ "Email Notifications" | translate }</label>
               <input type="checkbox" name="notify" id="notify"${ comment["notify"] | checked }>
+              {% endif %}
             </div>
             <input type="hidden" name="id" value="$comment.id" id="id">
             <input type="hidden" name="ajax" value="true" id="ajax">
