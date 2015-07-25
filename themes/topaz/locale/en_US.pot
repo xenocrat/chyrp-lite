@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-07-24 12:12+0000\n"
+"POT-Creation-Date: 2015-07-25 16:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -261,16 +261,16 @@ msgstr ""
 msgid "Spam"
 msgstr ""
 
-#: themes/topaz/forms/comment/edit.twig:22
+#: themes/topaz/forms/comment/edit.twig:23
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/topaz/forms/comment/edit.twig:28
+#: themes/topaz/forms/comment/edit.twig:30
 #: themes/topaz/forms/post/edit.twig:78
 msgid "Save"
 msgstr ""
 
-#: themes/topaz/forms/comment/edit.twig:29
+#: themes/topaz/forms/comment/edit.twig:31
 #: themes/topaz/forms/post/edit.twig:79
 msgid "Cancel"
 msgstr ""
