@@ -1999,7 +1999,7 @@
 
     /**
      * Function: is_url
-     * Tries to determine if a string is a URL beginning with a fully qualified domain name, IPv4 or IPv6 address.
+     * Tries to determine if a string is a URL beginning with a FQDN, IPv4 or IPv6 address.
      *
      * Parameters:
      *     $string - The string to analyse.
@@ -2011,7 +2011,7 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])($|/|:){1}~', $string);
+        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])($|/|:){1}~', $string);
     }
 
     /**
@@ -2025,7 +2025,7 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
+        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
     }
 
     /**
