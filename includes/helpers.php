@@ -897,11 +897,11 @@
                 fclose($connect);
 
                 # Search for 301 or 302 header and recurse with new location unless redirects are exhausted
-                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $content) !== false) {
-                    preg_match("~^Location: (.+)$~mi", $content, $matches);
+                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $content) and preg_match("~^Location:(.+)$~mi", $content, $matches)) {
+                    $location = ltrim(rtrim($matches[1]));
 
-                    if (!empty($matches[1]) and is_url($matches[1]))
-                            $content = get_remote(rtrim($matches[1]), $redirects - 1, $timeout);
+                    if (is_url($location))
+                        $content = get_remote($location, $redirects - 1, $timeout);
                 }
             }
         }
@@ -2011,7 +2011,7 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}|\[([[:alnum:]]|\:){3,45}\])~', $string);
+        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])($|/|:){1}~', $string);
     }
 
     /**
@@ -2025,7 +2025,7 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
+        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
     }
 
     /**
