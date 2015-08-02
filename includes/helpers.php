@@ -863,7 +863,9 @@
         if (ini_get("allow_url_fopen")) {
             $context = stream_context_create(array("http" => array("follow_location" => ($redirects == 0) ? 0 : 1 ,
                                                                    "max_redirects" => $redirects,
-                                                                   "timeout" => $timeout)));
+                                                                   "timeout" => $timeout,
+                                                                   "protocol_version" => 1.1,
+                                                                   "user_agent" => "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")")));
             $content = @file_get_contents($url, false, $context);
         } elseif (function_exists("curl_init")) {
             $handle = curl_init();
@@ -874,6 +876,8 @@
             curl_setopt($handle, CURLOPT_FOLLOWLOCATION, ($redirects == 0) ? false : true );
             curl_setopt($handle, CURLOPT_MAXREDIRS, $redirects);
             curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, $timeout);
+            curl_setopt($handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+            curl_setopt($handle, CURLOPT_USERAGENT, "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
             $content = curl_exec($handle);
             curl_close($handle);
         } else {
