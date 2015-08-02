@@ -868,17 +868,18 @@
         } elseif (function_exists("curl_init")) {
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, $url);
-            curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 1);
-            curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+            curl_setopt($handle, CURLOPT_HEADER, false);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($handle, CURLOPT_TIMEOUT, $timeout + 60);
             curl_setopt($handle, CURLOPT_FOLLOWLOCATION, ($redirects == 0) ? false : true );
             curl_setopt($handle, CURLOPT_MAXREDIRS, $redirects);
-            curl_setopt($handle, CURLOPT_CONNECTTIMEOUT_MS, $timeout * 1000 );
+            curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, $timeout);
             $content = curl_exec($handle);
             curl_close($handle);
         } else {
             $port = (isset($port)) ? $port : 80 ;
             $path = (!isset($path)) ? '/' : $path ;
+            $header = "";
 
             if (isset($query))
                 $path.= '?'.$query;
@@ -891,13 +892,16 @@
                 fwrite($connect, "Host: ".$host."\r\n");
                 fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
 
+                while (!feof($connect) and strpos($header, "\r\n\r\n") === false)
+                    $header.= fgets($connect);
+
                 while (!feof($connect))
                     $content.= fgets($connect);
 
                 fclose($connect);
 
                 # Search for 301 or 302 header and recurse with new location unless redirects are exhausted
-                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $content) and preg_match("~^Location:(.+)$~mi", $content, $matches)) {
+                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $header) and preg_match("~^Location:(.+)$~mi", $header, $matches)) {
                     $location = ltrim(rtrim($matches[1]));
 
                     if (is_url($location))
