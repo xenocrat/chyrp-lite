@@ -8,7 +8,7 @@ ${ trigger.call("before_post_fields", feather) }
                                 {% endif %}
                                 {% if field.help %}
                                 <span class="sub">
-                                    <a href="{% admin "help&id="~field.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+                                    <a href="{% admin "help&id="~field.help %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
                                 </span>
                                 {% endif %}
                                 {% if field.note %}
@@ -73,7 +73,7 @@ ${ trigger.call("after_post_fields", feather) }
                             <p class="more_options_option">
                                 <label for="slug">
                                     ${ "Slug" | translate }
-                                    <a href="{% admin "help&id=slugs" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+                                    <a href="{% admin "help&id=slugs" %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
                                 </label>
                                 <input class="text" type="text" name="slug" value="${ post.slug | escape }" id="slug">
                             </p>
@@ -85,7 +85,7 @@ ${ trigger.call("after_post_fields", feather) }
                             <p class="more_options_option">
                                 <label for="trackbacks">
                                     ${ "Trackbacks" | translate }
-                                    <a href="{% admin "help&id=trackbacks" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+                                    <a href="{% admin "help&id=trackbacks" %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
                                 </label>
 
                                 <input class="text" type="text" name="trackbacks" value="" id="trackbacks">
@@ -96,7 +96,7 @@ ${ trigger.call("after_post_fields", feather) }
                                     $field.label
                                     {% if field.help %}
                                     <span class="sub">
-                                        <a href="{% admin "help&id="~field.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+                                        <a href="{% admin "help&id="~field.help %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
                                     </span>
                                     {% endif %}
                                     {% if field.note %}
