@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-07-25 16:25+0000\n"
+"POT-Creation-Date: 2015-08-09 18:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -189,15 +189,19 @@ msgid "Pages"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:80
+msgid "Related Posts"
+msgstr ""
+
+#: themes/blossom/content/sidebar.twig:91
 msgid "Recent Posts"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:93
+#: themes/blossom/content/sidebar.twig:104
 #: themes/blossom/layouts/default.twig:78
 msgid "Archive"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:98
+#: themes/blossom/content/sidebar.twig:109
 #: themes/blossom/pages/archive.twig:7
 #: themes/blossom/pages/archive.twig:55
 msgid "%B %Y"

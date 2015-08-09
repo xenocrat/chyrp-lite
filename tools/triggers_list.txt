@@ -255,7 +255,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 528
+	includes/controller/Main.php on line 526
 Arguments:
 	$user
 
@@ -263,7 +263,7 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 613
+	includes/controller/Main.php on line 611
 
 
 feed_item
@@ -409,12 +409,22 @@ Called from:
 	includes/class/Route.php on line 173
 
 
+related_posts
+-------------
+Target:
+	$ids
+Called from:
+	includes/class/Theme.php on line 207
+Arguments:
+	$post, $limit
+
+
 stylesheets
 -----------
 Target:
 	$stylesheets
 Called from:
-	includes/class/Theme.php on line 207
+	includes/class/Theme.php on line 244
 
 
 scripts
@@ -422,7 +432,7 @@ scripts
 Target:
 	$javascripts
 Called from:
-	includes/class/Theme.php on line 269
+	includes/class/Theme.php on line 306
 
 
 links
@@ -430,7 +440,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 318
+	includes/class/Theme.php on line 355
 
 
 visitor
@@ -561,7 +571,7 @@ link_regexp
 Target:
 	$regexp
 Called from:
-	includes/helpers.php on line 916
+	includes/helpers.php on line 932
 
 
 keyword_search
@@ -569,7 +579,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1731
+	includes/helpers.php on line 1747
 Arguments:
 	$query, $plain
 
@@ -579,7 +589,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1867
+	includes/helpers.php on line 1883
 
 
 group
