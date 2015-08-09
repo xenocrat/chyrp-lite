@@ -537,7 +537,7 @@
                                   $_POST['group'],
                                   false);
                 correspond("activate", array("login" => $user->login,
-                                             "email" => $user->email));
+                                             "to" => $user->email));
                 Flash::notice(_f("User &#8220;%s&#8221; added and activation email sent.", $user->login), "/admin/?action=manage_users");
             } else {
                 $user = User::add($_POST['login'],
@@ -620,7 +620,7 @@
 
             if (!$user->approved)
                 correspond("activate", array("login" => $user->login,
-                                             "email" => $user->email));
+                                             "to" => $user->email));
 
             Flash::notice(__("User updated."), "/admin/?action=manage_users");
         }

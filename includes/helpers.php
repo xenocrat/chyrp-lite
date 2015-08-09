@@ -2060,61 +2060,61 @@
      * Parameters:
      *     $action - About which action are we corresponding with the user?
      *     $params - An indexed array of parameters associated with this action.
-     *               $params["email"] is required: the address to be emailed.
+     *               $params["to"] is required: the address to be emailed.
      */
     function correspond($action, $params) {
         $config  = Config::current();
         $trigger = Trigger::current();
 
-        if (!$config->email_correspondence)
+        if (!$config->email_correspondence or !isset($params["to"]))
             return;
 
-        $to      = $params["email"];
-        $headers = "From:".$config->email."\r\n".
-                   "Reply-To:".$config->email. "\r\n".
-                   "X-Mailer: PHP/".phpversion();
-        $subject = "";
-        $message = "";
+        $params["headers"] = "From:".$config->email."\r\n".
+                             "Reply-To:".$config->email. "\r\n".
+                             "X-Mailer: PHP/".phpversion();
+
+        fallback($params["subject"], "");
+        fallback($params["message"], "");
 
         switch ($action) {
             case "activate":
-                $subject = _f("Activate your account at %s", $config->name);
-                $message = _f("Hello, %s.", fix($params["login"]));
-                $message.= "\n\n";
-                $message.= __("You are receiving this message because you registered a new account.");
-                $message.= "\n\n";
-                $message.= __("Visit this link to activate your account:");
-                $message.= "\n";
-                $message.= $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
-                           "&token=".token(array($params["login"], $params["email"]));
+                $params["subject"] = _f("Activate your account at %s", $config->name);
+                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                                     "\n\n".
+                                     __("You are receiving this message because you registered a new account.").
+                                     "\n\n".
+                                     __("Visit this link to activate your account:").
+                                     "\n".
+                                     $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
+                                     "&token=".token(array($params["login"], $params["to"]));
                 break;
 
             case "reset":
-                $subject = _f("Reset your password at %s", $config->name);
-                $message = _f("Hello, %s.", fix($params["login"]));
-                $message.= "\n\n";
-                $message.= __("You are receiving this message because you requested a new password.");
-                $message.= "\n\n";
-                $message.= _f("Visit this link to reset your password:");
-                $message.= "\n";
-                $message.= $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
-                           "&token=".token(array($params["login"], $params["email"]));
+                $params["subject"] = _f("Reset your password at %s", $config->name);
+                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                                     "\n\n".
+                                     __("You are receiving this message because you requested a new password.").
+                                     "\n\n".
+                                     _f("Visit this link to reset your password:").
+                                     "\n".
+                                     $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
+                                     "&token=".token(array($params["login"], $params["to"]));
                 break;
 
             case "password":
-                $subject = _f("Your new password for %s", $config->name);
-                $message = _f("Hello, %s.", fix($params["login"]));
-                $message.= "\n\n";
-                $message.= _f("Your new password is: %s", $params["password"]);
+                $params["subject"] = _f("Your new password for %s", $config->name);
+                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                                     "\n\n".
+                                     _f("Your new password is: %s", $params["password"]);
                 break;
             
             default:
                 if ($trigger->exists("correspond_".$action))
-                    $trigger->call("correspond_".$action, $params, $subject, $message);
+                    $trigger->filter($params, "correspond_".$action);
                 else
                     return;
         }
 
-        if (!email($to, $subject, $message, $headers))
+        if (!email($params["to"], $params["subject"], $params["message"], $params["headers"]))
             error(__("Undeliverable"), __("Unable to send email."));
     }

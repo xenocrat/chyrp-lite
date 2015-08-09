@@ -274,7 +274,7 @@
 
         public function author_link() {
             if (!isset($this->id))
-                return __("a commentator", "comments");
+                return __("Anon", "comments");
 
             if (is_url($this->author_url))
                 return '<a href="'.fix($this->author_url, true).'">'.$this->author.'</a>';
@@ -308,16 +308,15 @@
          *     $post - The new comment post ID
          */
         static function notify($author, $body, $post) {
-            $post = new Post($post);
+            $notifications = SQL::current()->select("comments",
+                                                    "author_email",
+                                                    array("notify" => 1,
+                                                          "post_id" => $post))->fetchAll();
 
-            $emails = SQL::current()->select("comments",
-                                             "author_email",
-                                             array("notify" => 1, "post_id" => $post->id))->fetchAll();
-
-            foreach ($emails as $email)
+            foreach ($notifications as $notification)
                 correspond("comment", array("author" => $author,
                                             "body" => $body,
                                             "post" => $post,
-                                            "email" => $email));
+                                            "to" => $notification["author_email"]));
         }
     }
