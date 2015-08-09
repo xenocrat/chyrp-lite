@@ -249,13 +249,13 @@ label {                                             display: block;
                                                     border-bottom: 1px solid #c2bcb8 }
     div#mast_box {                                  box-sizing: border-box;
                                                     width: 100%;
-                                                    max-width: 1200px;
+                                                    max-width: 1024px;
                                                     text-align: center;
                                                     margin: 0em auto;
                                                     padding: 4em }
     div#main {                                      box-sizing: border-box;
                                                     width: 100%;
-                                                    max-width: 1200px;
+                                                    max-width: 1024px;
                                                     margin: 0em auto;
                                                     padding: 0em;
                                                     clear: both;

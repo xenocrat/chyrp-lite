@@ -42,7 +42,7 @@ body {                                              font-family: "Open Sans webf
                                                     background-color: #fcfbfa;
                                                     margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
-                                                    max-width: 1800px }
+                                                    max-width: 1200px }
 p {                                                 margin: 0em 0em 1em 0em }
     p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                                font-size: 2em;
@@ -375,7 +375,7 @@ label {                                             display: block;
                                                     position: relative;
                                                     box-sizing: border-box;
                                                     width: 100%;
-                                                    max-width: 1240px;
+                                                    max-width: 1024px;
                                                     clear: both;
                                                     background-color: #fffefd;
                                                     margin: 0rem auto 2rem auto;
@@ -622,7 +622,7 @@ img {                                               border-style: none;
     div.metadata, div.doaction {                    text-align: center }
 }
 
-@media print and (min-width: 297mm), screen and (min-width: 1600px) {
+@media print and (min-width: 297mm), screen and (min-width: 1200px) {
     .columnized {                                   -moz-column-count: 2;
                                                     -moz-column-gap: 2em;
                                                     -webkit-column-count: 2;
