@@ -284,7 +284,8 @@
 
         static function user_can($post) {
             $visitor = Visitor::current();
-            if (!$visitor->group->can("add_comment")) return false;
+            if (!$visitor->group->can("add_comment"))
+                return false;
 
             # Assume allowed comments by default
             return empty($post->comment_status) or
