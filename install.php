@@ -368,10 +368,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta charset="utf-8">
         <title><?php echo __("Chyrp Lite Installer"); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
-        <style type="text/css" media="screen">
+        <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
                 src: url('./fonts/OpenSans-Regular.woff') format('woff'),
