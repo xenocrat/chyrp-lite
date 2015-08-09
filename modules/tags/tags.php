@@ -549,32 +549,24 @@
             return $linked;
         }
 
-        public function post_list_related_attr($attr, $post) {
-            if (Route::current()->action != "view") return;
-            
-            $posts = array();
+        public function related_posts($ids, $post, $limit) {
             foreach ($post->tags as $key => $tag) {
                 $like = self::tags_name_match($key);
-                $posts = SQL::current()->query("SELECT DISTINCT __posts.id
-                          FROM __posts
-                          LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
-                            AND __post_attributes.name = 'tags'
-                            AND __posts.id != $post->id
-                          WHERE __post_attributes.value LIKE '$like'
-                          GROUP BY __posts.id
-                          ORDER BY __posts.created_at DESC
-                          LIMIT 5")->fetchAll();
+                $results = SQL::current()->query("SELECT DISTINCT __posts.id
+                                                  FROM __posts
+                                                  LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
+                                                    AND __post_attributes.name = 'tags'
+                                                    AND __posts.id != $post->id
+                                                  WHERE __post_attributes.value LIKE '$like'
+                                                  GROUP BY __posts.id
+                                                  ORDER BY __posts.created_at DESC
+                                                  LIMIT $limit")->fetchAll();
+                foreach ($results as $result)
+                    if (isset($result["id"]))
+                        $ids[] = $result["id"];
             }
 
-            $output = "\n".'<ul class="related_posts">';
-            $output.= "\n\t".'<h3>Related Posts:</h3>';
-            foreach ($posts as $p) {
-                $post = new Post($p['id']);
-                $output.= "\n\t".'<li><h5><a href="'.$post->url().'">'.$post->title().'</a></h5></li>';
-            }
-            $output.= "\n"."</ul>"."\n";
-
-            return $output;
+            return $ids;
         }
 
         public function post($post) {
