@@ -46,13 +46,7 @@
                              'mt.getPostCategories'      => 'this:mt_getPostCategories',
                              'mt.setPostCategories'      => 'this:mt_setPostCategories',
                              'mt.supportedTextFilters'   => 'this:mt_supportedTextFilters',
-                             'mt.supportedMethods'       => 'this:listMethods',
-
-                             # Chyrp
-                             "chyrp.getRecentPosts"      => "this:chyrp_getRecentPosts",
-                             "chyrp.newPost"             => "this:chyrp_newPost",
-                             "chyrp.getPost"             => "this:chyrp_getPost",
-                             "chyrp.editPost"            => "this:chyrp_editPost");
+                             'mt.supportedMethods'       => 'this:listMethods');
 
             Trigger::current()->filter($methods, "xmlrpc_methods");
 
