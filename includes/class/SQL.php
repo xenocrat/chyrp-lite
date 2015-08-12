@@ -366,7 +366,7 @@
 
             switch($this->method) {
                 case "pdo":
-                    $string = ltrim(rtrim($this->db->quote($string), "'"), "'");
+                    $string = trim($this->db->quote($string), "'");
                     break;
                 case "mysqli":
                     $string = $this->db->escape_string($string);

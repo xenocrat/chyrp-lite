@@ -906,7 +906,7 @@
 
                 # Search for 301 or 302 header and recurse with new location unless redirects are exhausted
                 if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $header) and preg_match("~^Location:(.+)$~mi", $header, $matches)) {
-                    $location = ltrim(rtrim($matches[1]));
+                    $location = trim($matches[1]);
 
                     if (is_url($location))
                         $content = get_remote($location, $redirects - 1, $timeout);
