@@ -103,11 +103,11 @@
         case "enable_module": case "enable_feather":
             $type = ($_POST['action'] == "enable_module") ? "module" : "feather" ;
 
-            if (!$visitor->group->can("change_settings"))
-                if ($type == "module")
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable modules.")."\"] }");
-                else
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable feathers.")."\"] }");
+            if (!$visitor->group->can("toggle_extensions"))
+                exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable extensions.")."\"] }");
+
+            if (empty($_POST["extension"]))
+                exit("{ \"notifications\": [\"".__("You did not specify an extension to enable.")."\"] }");
 
             if (($type == "module" and module_enabled($_POST['extension'])) or
                 ($type == "feather" and feather_enabled($_POST['extension'])))
@@ -156,11 +156,12 @@
         case "disable_module": case "disable_feather":
             $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;
 
-            if (!$visitor->group->can("change_settings"))
+            if (!$visitor->group->can("toggle_extensions"))
                 if ($type == "module")
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable modules.")."\"] }");
-                else
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable feathers.")."\"] }");
+                exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to disable extensions.")."\"] }");
+
+            if (empty($_POST["extension"]))
+                exit("{ \"notifications\": [\"".__("You did not specify an extension to disable.")."\"] }");
 
             if (($type == "module" and !module_enabled($_POST['extension'])) or
                 ($type == "feather" and !feather_enabled($_POST['extension'])))

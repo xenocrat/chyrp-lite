@@ -1458,10 +1458,7 @@
             $type = (isset($_GET['module'])) ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
-                if ($type == "module")
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable modules."));
-                else
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable feathers."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
             if (empty($_GET[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."));
@@ -1527,10 +1524,7 @@
             $type = (isset($_GET['module'])) ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
-                if ($type == "module")
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable modules."));
-                else
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable feathers."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
             if (empty($_GET[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."));
