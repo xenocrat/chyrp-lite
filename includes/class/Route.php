@@ -60,7 +60,7 @@
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
 
             if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0]))
-                exit("No-Go!");
+                exit("Bad Request.");
 
             if (method_exists($controller, "parse"))
                 $controller->parse($this);
