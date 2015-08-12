@@ -47,6 +47,7 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Lightbox: on-page image viewer with image protection.
 * Sitemap: index your blog for search engines.
 * Homepage: replace the blog index with a homepage.
+* reCAPTCHA/MAPTCHA: prevent spam.
 * Highlighter: syntax highlighting courtesy of [highlight.js](https://highlightjs.org/).
 
 ## Requirements
