@@ -358,5 +358,5 @@
     # First general-purpose trigger. There are many cases you may want to use @route_init@ instead of this, however.
     $trigger->call("runtime");
 
-    # Set the content-type to the theme's "type" setting, or "text/html".
-    header("Content-type: ".(INDEX ? fallback($theme->type, "text/html") : "text/html")."; charset=UTF-8");
+    # Set the content-type and charset.
+    header("Content-type: text/html; charset=UTF-8");
