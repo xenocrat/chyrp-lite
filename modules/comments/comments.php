@@ -86,6 +86,9 @@
             if (!empty($_POST['url']) and !is_url($_POST['url']))
                 error(__("Error"), __("Invalid website URL.", "comments"));
 
+            if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
+                error(__("Error"), __("Incorrect captcha code.", "comments"));
+
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 

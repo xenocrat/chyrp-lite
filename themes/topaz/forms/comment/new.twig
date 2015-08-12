@@ -8,6 +8,7 @@
             <input type="email" name="email" value="" id="email">
             <label for="url">${ "Your website" | translate }</label>
             <input type="url" name="url" value="" id="url">
+            {% if site.enable_captcha %}$captcha{% endif %}
             <label for="body">${ "Your comment" | translate | format(visitor.full_name | fallback(visitor.login)) }</label>
             {% endif %}
             <textarea name="body" id="new_comment"></textarea>
