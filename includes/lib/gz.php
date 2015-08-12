@@ -12,7 +12,7 @@
         exit("Access Denied.");
 
     if (substr_count($_GET['file'], "..") > 0 )
-        exit("GTFO.");
+        exit("Bad Request.");
 
     if (extension_loaded('zlib') and USE_ZLIB and !ini_get("zlib.output_compression")) {
         ob_start("ob_gzhandler");
@@ -20,7 +20,7 @@
     } else
         ob_start();
 
-    header("Content-Type: application/x-javascript");
+    header("Content-Type: application/javascript");
 
     if (strpos($_GET['file'], "/themes/") === 0) {
         # Constant: MAIN_DIR

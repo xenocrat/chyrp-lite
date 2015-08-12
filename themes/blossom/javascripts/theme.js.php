@@ -2,7 +2,7 @@
     define('JAVASCRIPT', true);
     require_once "../../../includes/common.php";
     error_reporting(0);
-    header("Content-Type: application/x-javascript");
+    header("Content-Type: application/javascript");
 ?>
 <!-- --><script>
 

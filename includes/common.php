@@ -146,7 +146,7 @@
     # Set error reporting levels, and headers for Chyrp's JS files.
     if (JAVASCRIPT) {
         error_reporting(0);
-        header("Content-Type: application/x-javascript");
+        header("Content-Type: application/javascript");
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else

@@ -37,9 +37,9 @@
             $config = Config::current();
 
             if (substr_count($_SERVER['REQUEST_URI'], "..") > 0 )
-                exit("GTFO.");
+                exit("Bad Request.");
             elseif (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action']))
-                exit("Nope!");
+                exit("Invalid route action.");
 
             $this->action =& $_GET['action'];
 
