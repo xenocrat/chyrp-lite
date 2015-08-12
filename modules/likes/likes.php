@@ -73,8 +73,6 @@
         }
 
         static function ajax_like() {
-            header("Content-type: text/json");
-
             if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
                 exit();
             
@@ -99,7 +97,7 @@
                 elseif ($like->total_count == 1)
                     $likeText = _f("You like this.", $like->total_count, "likes");
                 else
-                    $likeText = sprintf(_p("You and %d person likes this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
+                    $likeText = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
 
                 $responseObj["likeText"] = $likeText;
             }
@@ -107,12 +105,12 @@
                 $responseObj["success"] = false;
                 $responseObj["error_txt"] = $e->getMessage();
             }
+
+            header("Content-type: application/json; charset=utf-8");
             echo json_encode($responseObj);
         }
 
         static function ajax_unlike() {
-            header("Content-type: text/json");
-
             if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
                 exit();
             
@@ -144,6 +142,8 @@
                 $responseObj["success"] = false;
                 $responseObj["error_txt"] = $e->getMessage();
             }
+
+            header("Content-type: application/json; charset=utf-8");
             echo json_encode($responseObj);
         }
 
@@ -223,7 +223,7 @@
                 elseif ($like->total_count == 1)
                     $returnStr.= _f("You like this.", $like->total_count, "likes");
                 else
-                    $returnStr.= sprintf(_p("You and %d person likes this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
+                    $returnStr.= sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
                 $returnStr.= "</span>";
 
             }

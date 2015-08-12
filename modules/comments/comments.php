@@ -533,6 +533,7 @@
                         }
 
                         $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
+                        header("Content-type: application/json; charset=utf-8");
                         echo json_encode($responseObj);
                     }
                     break;
