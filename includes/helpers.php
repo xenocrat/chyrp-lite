@@ -1688,7 +1688,7 @@
         $times = array("year", "month", "day", "hour", "minute", "second");
 
         foreach ($matches as $match) {
-            list($test, $equals,) = explode(":", $match);
+            list($test, $equals) = explode(":", $match);
 
             if ($equals[0] == '"') {
                 if (substr($equals, -1) != '"')
