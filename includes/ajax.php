@@ -78,8 +78,8 @@
             break;
 
         case "preview":
-            if (!$visitor->group->can("add_post") and !$visitor->group->can("add_draft") and !$visitor->group->can("add_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to preview content."));
+            if (!logged_in())
+                show_403(__("Access Denied"), __("You must be logged in to preview content."));
 
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 break;
