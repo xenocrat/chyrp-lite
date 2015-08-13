@@ -15,7 +15,7 @@
                     alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
             });
 
-            if (/(write)_/.test(Route.action) || Route.action == "edit_post" || Route.action == "edit_page")
+            if (/(write)_/.test(Route.action) || /(edit)_/.test(Route.action))
                 Write.init();
 
             if (Route.action == "modules" || Route.action == "feathers")
