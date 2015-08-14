@@ -210,6 +210,7 @@ form, fieldset {                                    margin: 0em;
     div.search_box > form {                         display: inline-block;
                                                     position: relative }
     form.inline_edit {                              width: 100%;
+                                                    max-width: 1024px;
                                                     clear: both;
                                                     box-sizing: border-box;
                                                     background-color: #fffefd;
@@ -225,7 +226,7 @@ form, fieldset {                                    margin: 0em;
 input {                                             box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
-                                                    max-width: 640px;
+                                                    max-width: 960px;
                                                     margin: 0.5em 0em;
                                                     padding: 6px 4px;
                                                     background: none;
@@ -273,13 +274,13 @@ input:focus {                                       outline: none;
 select {                                            box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
-                                                    max-width: 640px;
+                                                    max-width: 960px;
                                                     margin: 0.5em 0em }
 textarea {                                          box-sizing: border-box;
                                                     display: block;
                                                     width: 100%;
                                                     height: 160px;
-                                                    max-width: 640px;
+                                                    max-width: 960px;
                                                     font: inherit;
                                                     font-size: inherit;
                                                     color: #4e5a66;
@@ -432,7 +433,7 @@ article > footer {                                  display: block;
 article.video video {                               width: 100%;
                                                     max-width: 1280px }
 article.audio audio {                               width: 100%;
-                                                    max-width: 640px }                  
+                                                    max-width: 960px }                  
 a {                                                 border-bottom: 1px transparent solid;
                                                     transition-property: color, border;
                                                     transition-duration: 250ms }
