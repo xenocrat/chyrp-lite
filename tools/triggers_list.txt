@@ -179,7 +179,7 @@ Called from:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 199
+	includes/ajax.php on line 200
 
 
 change_setting
@@ -361,7 +361,7 @@ Arguments:
 pingback
 --------
 Called from:
-	includes/xmlrpc.php on line 132
+	includes/xmlrpc.php on line 126
 Arguments:
 	$post, $linked_to, $linked_from, $title, $excerpt
 
@@ -512,7 +512,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1845
+	includes/controller/Admin.php on line 1839
 
 
 settings_nav
@@ -520,7 +520,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1874
+	includes/controller/Admin.php on line 1868
 
 
 extend_nav
@@ -528,7 +528,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1884
+	includes/controller/Admin.php on line 1878
 
 
 admin_subnav
@@ -536,7 +536,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1895
+	includes/controller/Admin.php on line 1889
 
 
 nav_selected
@@ -544,7 +544,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2002
+	includes/controller/Admin.php on line 1996
 
 
 url_code
@@ -579,7 +579,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1747
+	includes/helpers.php on line 1748
 Arguments:
 	$query, $plain
 
@@ -589,7 +589,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1883
+	includes/helpers.php on line 1884
 
 
 group
@@ -781,4 +781,4 @@ xmlrpc_methods
 Target:
 	$methods
 Called from:
-	includes/xmlrpc.php on line 57
+	includes/xmlrpc.php on line 51

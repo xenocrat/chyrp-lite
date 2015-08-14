@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-08-09 18:22+0000\n"
+"POT-Creation-Date: 2015-08-14 09:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -38,28 +38,28 @@ msgstr ""
 msgid "Post unliked."
 msgstr ""
 
-#: modules/likes/likes.php:98
-#: modules/likes/likes.php:136
+#: modules/likes/likes.php:96
+#: modules/likes/likes.php:134
 #: modules/likes/likes.php:203
 #: modules/likes/likes.php:222
 msgid "No likes yet."
 msgstr ""
 
-#: modules/likes/likes.php:100
+#: modules/likes/likes.php:98
 #: modules/likes/likes.php:224
 #, php-format
 msgid "You like this."
 msgstr ""
 
-#: modules/likes/likes.php:102
+#: modules/likes/likes.php:100
 #: modules/likes/likes.php:226
 #, php-format
-msgid "You and %d person likes this."
+msgid "You and %d person like this."
 msgid_plural "You and %d people like this."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/likes/likes.php:138
+#: modules/likes/likes.php:136
 #: modules/likes/likes.php:205
 #, php-format
 msgid "%d person likes this."
