@@ -1403,10 +1403,11 @@
      */
     function upload_tester($error) {
         if (is_array($error)) {
-            foreach ($error as $errors) {
-                $return = upload_tester($errors);
-            }
-            return $return;
+            foreach ($error as $errors)
+                if (!upload_tester($errors))
+                    return false;
+
+            return true;
         }
 
         switch ($error) {
