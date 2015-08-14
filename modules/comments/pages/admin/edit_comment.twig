@@ -7,7 +7,9 @@
             <form id="edit_form" action="{% admin "update_comment" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <fieldset>
                     <p class="main_options">
-                        <label for="body">${ "Body" | translate } </label>
+                        <label for="body">
+                            ${ "Body" | translate }
+                        </label>
                         <textarea rows="12" name="body" id="body" data-preview="markup_text">${ comment.body | escape }</textarea>
                     </p>
                     <div id="more_options" class="more_options">

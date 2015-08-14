@@ -2,7 +2,7 @@
     /**
      * File: Common
      *
-     * Chyrp Lite: an ultra-lightweight fork of the Chyrp blogging engine.
+     * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
      *     v2015.06
