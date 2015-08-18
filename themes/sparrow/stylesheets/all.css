@@ -49,19 +49,19 @@ h1 {                                                font-size: 2em;
                                                     text-transform: none;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
 h2, h1.banner {                                     font-size: 1.5em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
 h3 {                                                font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h3.flash {                                      margin: 0em }
     h3.filter {                                     padding: 4rem 0em 0rem 4rem;
                                                     margin-bottom: 0em }
@@ -72,7 +72,7 @@ h4 {                                                font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h4.yearly {                                     font-size: 1.33em;
                                                     margin-bottom: 0.75em }
 h5, h6 {                                            font-size: 1em;
@@ -80,7 +80,7 @@ h5, h6 {                                            font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h1:first-child, h2:first-child,
     h3:first-child, h4:first-child,
     h5:first-child, h6:first-child {                margin-top: 0em }
@@ -186,7 +186,7 @@ form, fieldset {                                    margin: 0em;
 input {                                             box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
-                                                    max-width: 640px;
+                                                    max-width: 800px;
                                                     margin: 0.5em 0em;
                                                     padding: 6px 4px;
                                                     background: none;
@@ -217,13 +217,13 @@ input:focus {                                       outline: none;
 select {                                            box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
-                                                    max-width: 640px;
+                                                    max-width: 800px;
                                                     margin: 0.5em 0em }
 textarea {                                          box-sizing: border-box;
                                                     display: block;
                                                     width: 100%;
                                                     height: 160px;
-                                                    max-width: 640px;
+                                                    max-width: 800px;
                                                     font: inherit;
                                                     font-size: inherit;
                                                     color: #4e5a66;
@@ -249,13 +249,13 @@ label {                                             display: block;
                                                     border-bottom: 1px solid #c2bcb8 }
     div#mast_box {                                  box-sizing: border-box;
                                                     width: 100%;
-                                                    max-width: 1200px;
+                                                    max-width: 1024px;
                                                     text-align: center;
                                                     margin: 0em auto;
                                                     padding: 4em }
     div#main {                                      box-sizing: border-box;
                                                     width: 100%;
-                                                    max-width: 1200px;
+                                                    max-width: 1024px;
                                                     margin: 0em auto;
                                                     padding: 0em;
                                                     clear: both;
@@ -349,7 +349,7 @@ article > footer {                                  display: block;
 article.video video {                               width: 100%;
                                                     max-width: 1280px }
 article.audio audio {                               width: 100%;
-                                                    max-width: 640px }                  
+                                                    max-width: 800px }                  
 a {                                                 border-bottom: 1px transparent solid;
                                                     transition-property: color, border;
                                                     transition-duration: 250ms }
@@ -521,6 +521,7 @@ img {                                               border-style: none;
 @keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 
 @media print {
+    html {                                          font-size: 4.2mm }
     body {                                          background-color: #ffffff;
                                                     margin: 2em }
     div.prev, div.next {                            display: none }
@@ -529,7 +530,7 @@ img {                                               border-style: none;
                                                     page-break-inside: avoid }
 }
 
-@media handheld, screen and (max-width: 640px) {
+@media screen and (max-width: 640px) {
     html {                                          font-size: 14px }
     body {                                          margin-bottom: 3rem }
     blockquote {                                    padding: 0em 1em }
@@ -557,7 +558,7 @@ img {                                               border-style: none;
                                                     margin-right: 4px }
 }
 
-@media handheld, screen and (max-width: 420px) {
+@media screen and (max-width: 420px) {
     ul.archive li {                                 margin-left: 0em }
     ul.archive article.post.archive {               box-sizing: border-box;
                                                     width: 100%;
@@ -565,7 +566,7 @@ img {                                               border-style: none;
     ul.archive article.post.archive img {           width: 100% }
 }
 
-@media handheld, screen and (min-width: 960px) {
+@media screen and (min-width: 960px) {
     div#mast_box {                                  text-align: left;
                                                     padding: 4em 8rem 4rem 8rem }
     div.search_box {                                display: inline-block }

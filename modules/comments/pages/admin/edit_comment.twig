@@ -7,8 +7,10 @@
             <form id="edit_form" action="{% admin "update_comment" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <fieldset>
                     <p class="main_options">
-                        <label for="body">${ "Body" | translate }</label>
-                        <textarea rows="12" name="body" id="body">${ comment.body | escape }</textarea>
+                        <label for="body">
+                            ${ "Body" | translate }
+                        </label>
+                        <textarea rows="12" name="body" id="body" data-preview="markup_text">${ comment.body | escape }</textarea>
                     </p>
                     <div id="more_options" class="more_options">
                         <p class="more_options_option">
@@ -16,7 +18,7 @@
                             <input class="text" type="text" name="author" value="${ comment.author | escape(true) }" id="author">
                         </p>
                         <p class="more_options_option">
-                            <label for="author_email">${ "Author E-Mail" | translate }</label>
+                            <label for="author_email">${ "Author Email" | translate }</label>
                             <input class="text" type="text" name="author_email" value="${ comment.author_email | escape(true) }" id="author_email">
                         </p>
                         <p class="more_options_option">
@@ -24,6 +26,10 @@
                             <input class="text" type="text" name="author_url" value="${ comment.author_url | escape(true) }" id="author_url">
                         </p>
                         {% if visitor.group.can("edit_comment") %} {# If they can edit all comments, not just this one. #}
+                        <p class="more_options_option">
+                            <label for="created_at">${ "Timestamp" | translate }</label>
+                            <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime }" id="created_at">
+                        </p>
                         <p class="more_options_option">
                             <label for="status">${ "Status" | translate }</label>
                             <select name="status" id="status">
@@ -34,9 +40,11 @@
                                 <option value="trackback"${ comment.status | option_selected("trackback") }>${ "Trackback" | translate }</option>
                             </select>
                         </p>
+                        {% endif %}
+                        {% if site.email_correspondence %}
                         <p class="more_options_option">
-                            <label for="created_at">${ "Timestamp" | translate }</label>
-                            <input class="text" type="text" name="created_at" value="${ comment.created_at | strftime }" id="created_at">
+                            <label for="notify">${ "Email Notifications" | translate }</label>
+                            <input type="checkbox" name="notify" id="notify"${ comment["notify"] | checked }>
                         </p>
                         {% endif %}
                         ${ trigger.call("edit_comment_options", comment) }

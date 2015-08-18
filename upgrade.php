@@ -10,43 +10,37 @@
 
     header("Content-type: text/html; charset=UTF-8");
 
-    define('DEBUG',         true);
-    define('CHYRP_VERSION', "2015.05.25");
-    define('CACHE_TWIG',    false);
-    define('JAVASCRIPT',    false);
-    define('ADMIN',         false);
-    define('AJAX',          false);
-    define('XML_RPC',       false);
-    define('TRACKBACK',     false);
-    define('UPGRADING',     true);
-    define('INSTALLING',    false);
-    define('TESTER',        true);
-    define('INDEX',         false);
-    define('MAIN_DIR',      dirname(__FILE__));
-    define('INCLUDES_DIR',  dirname(__FILE__)."/includes");
-    define('MODULES_DIR',   MAIN_DIR."/modules");
-    define('FEATHERS_DIR',  MAIN_DIR."/feathers");
-    define('THEMES_DIR',    MAIN_DIR."/themes");
-    define('USE_ZLIB',      true);
+    define('DEBUG',          true);
+    define('CHYRP_VERSION',  "2015.06");
+    define('CHYRP_CODENAME', "Saxaul");
+    define('CACHE_TWIG',     false);
+    define('JAVASCRIPT',     false);
+    define('ADMIN',          false);
+    define('AJAX',           false);
+    define('XML_RPC',        false);
+    define('TRACKBACK',      false);
+    define('UPGRADING',      true);
+    define('INSTALLING',     false);
+    define('TESTER',         true);
+    define('INDEX',          false);
+    define('MAIN_DIR',       dirname(__FILE__));
+    define('INCLUDES_DIR',   dirname(__FILE__)."/includes");
+    define('MODULES_DIR',    MAIN_DIR."/modules");
+    define('FEATHERS_DIR',   MAIN_DIR."/feathers");
+    define('THEMES_DIR',     MAIN_DIR."/themes");
+    define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4
-    if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
+    if (!defined('JSON_PRETTY_PRINT'))
+        define('JSON_PRETTY_PRINT', 0);
 
     # Constant: JSON_UNESCAPED_SLASHES
     # Define a safe value to avoid warnings pre-5.4
-    if (!defined('JSON_UNESCAPED_SLASHES')) define('JSON_UNESCAPED_SLASHES', 0);
+    if (!defined('JSON_UNESCAPED_SLASHES'))
+        define('JSON_UNESCAPED_SLASHES', 0);
 
-    if (!AJAX and
-        extension_loaded("zlib") and
-        !ini_get("zlib.output_compression") and
-        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
-        USE_ZLIB) {
-        ob_start("ob_gzhandler");
-        header("Content-Encoding: gzip");
-    } else
-        ob_start();
+    ob_start();
 
     /**
      * Function: config_file
@@ -1299,8 +1293,112 @@
           $conversion = true;
 
         if ($serialize_count > 0)
-          echo __("Updating serialization of Uploader Feather...", "tags").
+          echo __("Updating serialization of Uploader Feather...").
             test($conversion);
+    }
+
+    /**
+     * Function: add_email_correspondence
+     * Adds the email_correspondence config setting.
+     *
+     * Versions: 2015.05.25 => 2015.06
+     */
+    function add_email_correspondence() {
+        if (!Config::check("email_correspondence"))
+            Config::set("email_correspondence", true, __("Adding email correspondence setting..."));
+    }
+
+    /**
+     * Function: migrate_file_feather
+     * Migrates posts from File Feather to Uploader Feather.
+     *
+     * Versions: 2015.05.25 => 2015.06
+     */
+    function migrate_file_feather() {
+        $sql = SQL::current();
+        if (!$posts = $sql->select("posts", "posts.id", array("posts.feather" => "file")))
+            return;
+
+        $sql->error = "";
+        $json_error = 0;
+        $serialize_count = 0;
+        $conversion = false;
+
+        foreach($posts->fetchAll() as $post) {
+            if (!$query = $sql->select("post_attributes", "*", array("name" => "filename", "post_id" => $post["id"])))
+                continue;
+
+            $attr = $query->fetchObject();
+            $serialize_count++;
+
+            $serialized = json_encode((array) $attr->value, JSON_UNESCAPED_SLASHES);
+
+            if (!$serialized)
+                $json_error++;
+
+            $sql->update("posts",
+                         array("id" => $attr->post_id),
+                         array("feather" => "uploader"));
+
+            $sql->insert("post_attributes",
+                         array("name" => "filenames",
+                               "post_id" => $attr->post_id,
+                               "value" => $serialized));
+
+
+            $sql->delete("post_attributes",
+                         array("name" => "filename",
+                               "post_id" => $attr->post_id));
+        }
+
+        if (empty($sql->error) and empty($json_error))
+          $conversion = true;
+
+        if ($serialize_count > 0)
+          echo __("Migrating posts from File to Uploader...").
+            test($conversion);
+    }
+
+    /**
+     * Function: migrate_chat_feather
+     * Migrates posts from Chat Feather to Text Feather.
+     *
+     * Versions: 2015.05.25 => 2015.06
+     */
+    function migrate_chat_feather() {
+        $sql = SQL::current();
+        if (!$posts = $sql->select("posts", "posts.id", array("posts.feather" => "chat")))
+            return;
+
+        $sql->error = "";
+        $conversion = 0;
+
+        foreach($posts->fetchAll() as $post) {
+            if (!$query = $sql->select("post_attributes", "*", array("name" => "dialogue", "post_id" => $post["id"])))
+                continue;
+
+            $attr = $query->fetchObject();
+            $conversion++;
+            $dialogue = "<pre>".$attr->value."</pre>";
+
+            $sql->update("posts",
+                         array("id" => $attr->post_id),
+                         array("feather" => "text"));
+
+            $sql->insert("post_attributes",
+                         array("name" => "body",
+                               "post_id" => $attr->post_id,
+                               "value" => $dialogue));
+
+
+            $sql->delete("post_attributes",
+                         array("name" => "dialogue",
+                               "post_id" => $attr->post_id));
+        }
+
+        if ($conversion > 0)
+          echo __("Migrating posts from Chat to Text...").
+            test(empty($sql->error));
     }
 
     /**
@@ -1317,10 +1415,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta charset="utf-8">
         <title><?php echo __("Chyrp Lite Upgrader"); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
-        <style type="text/css" media="screen">
+        <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
                 src: url('./fonts/OpenSans-Regular.woff') format('woff'),
@@ -1348,10 +1446,6 @@
                      url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
                 font-weight: bold;
                 font-style: italic;
-            }
-            *::-moz-selection {
-                color: #ffffff;
-                background-color: #4f4f4f;
             }
             *::selection {
                 color: #ffffff;
@@ -1574,6 +1668,12 @@
         remove_admin_theme();
 
         uploader_serialize_to_json();
+
+        add_email_correspondence();
+
+        migrate_file_feather();
+
+        migrate_chat_feather();
 
         # Perform tidy up tasks.
 

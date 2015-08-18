@@ -9,7 +9,7 @@
                 {% for safename, module in enabled_modules | items %}
                 <li class="module ${ module.classes | join(" ") }" id="module_$safename">
                     <h3>
-                        <a class="emblem module_url" href="$module.url">
+                        <a class="emblem module_url" href="$module.url" target="_blank">
                             <img src="$theme_url/images/icons/info.svg" alt="${ module.url | escape }">
                         </a>
                         $module.name {# translation is done in the controller #}
@@ -56,7 +56,7 @@
                 {% for safename, module in disabled_modules | items %}
                 <li class="module ${ module.classes | join(" ") }" id="module_$safename">
                     <h3>
-                        <a class="emblem module_url" href="$module.url">
+                        <a class="emblem module_url" href="$module.url" target="_blank">
                             <img src="$theme_url/images/icons/info.svg" alt="${ module.url | escape }">
                         </a>
                         $module.name {# translation is done in the controller #}

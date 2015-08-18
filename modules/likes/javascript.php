@@ -1,10 +1,3 @@
-<?php
-    define('JAVASCRIPT', true);
-    require_once "../../includes/common.php";
-    error_reporting(0);
-    header("Content-Type: application/x-javascript");
-?>
-<!-- --><script>
         var ChyrpLikes = {
             action: "like",
             didPrevFinish: true,
@@ -94,5 +87,3 @@
             }
         };
         $(document).ready(ChyrpLikes.init);
-<?php Trigger::current()->call("likes_javascript"); ?>
-<!-- --></script>

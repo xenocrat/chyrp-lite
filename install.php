@@ -123,7 +123,7 @@
             $errors[] = __("Passwords do not match.");
 
         if (empty($_POST['email']))
-            $errors[] = __("E-Mail address cannot be blank.");
+            $errors[] = __("Email address cannot be blank.");
 
         if (empty($errors)) {
 
@@ -158,6 +158,7 @@
             $config->set("enable_emoji", true);
             $config->set("can_register", false);
             $config->set("email_activation", false);
+            $config->set("email_correspondence", true);
             $config->set("enable_captcha", false);
             $config->set("default_group", 0);
             $config->set("guest_group", 0);
@@ -367,10 +368,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta charset="utf-8">
         <title><?php echo __("Chyrp Lite Installer"); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
-        <style type="text/css" media="screen">
+        <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
                 src: url('./fonts/OpenSans-Regular.woff') format('woff'),
@@ -398,10 +399,6 @@
                      url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
                 font-weight: bold;
                 font-style: italic;
-            }
-            *::-moz-selection {
-                color: #ffffff;
-                background-color: #4f4f4f;
             }
             *::selection {
                 color: #ffffff;
@@ -445,6 +442,8 @@
                 font-weight: inherit;
             }
             input[type="text"],
+            input[type="email"],
+            input[type="url"],
             input[type="number"],
             input[type="password"],
             textarea {
@@ -454,14 +453,18 @@
                 background-color: #ffffff;
                 background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
-            textarea:focus,
             input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="url"]:focus,
             input[type="number"]:focus,
-            input[type="password"]:focus {
+            input[type="password"]:focus,
+            textarea:focus {
                 border-color: #1e57ba;
                 outline: none;
             }
             input[type="text"],
+            input[type="email"],
+            input[type="url"],
             input[type="number"],
             input[type="password"],
             textarea,
@@ -684,7 +687,7 @@
                     <input type="password" name="password_2" value="<?php value_fallback("password_2"); ?>" id="password_2">
                 </p>
                 <p id="email_field">
-                    <label for="email"><?php echo __("E-Mail Address"); ?></label>
+                    <label for="email"><?php echo __("Email Address"); ?></label>
                     <input type="text" name="email" value="<?php value_fallback("email"); ?>" id="email">
                 </p>
                 <button type="submit"><?php echo __("Install!"); ?></button>

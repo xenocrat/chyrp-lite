@@ -323,13 +323,27 @@
             if (empty($_POST['title']) and empty($_POST['slug']))
                 error(__("Error"), __("Title and slug cannot be blank."));
 
+            $bump = new Page(null, array("where" => array("list_order" => (int) $_POST['list_order'])));
+
+            # If we are taking the list order of an existing page, bump it to the bottom of the list.
+            if (!$bump->no_results)
+                $bump->update(null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              count(Page::find()),
+                              null,
+                              null);
+
             $page = Page::add($_POST['title'],
                               $_POST['body'],
                               null,
                               $_POST['parent_id'],
                               !empty($_POST['public']),
                               !empty($_POST['show_in_list']),
-                              intval($_POST['list_order'], 10),
+                              (int) $_POST['list_order'],
                               (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             Flash::notice(__("Page created!"), $page->url());
@@ -370,25 +384,34 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
 
-            $page->update($_POST['title'], $_POST['body'], null, $_POST['parent_id'], !empty($_POST['public']), !empty($_POST['show_in_list']), intval($_POST['list_order'], 10), null, $_POST['slug']);
+            $swap = new Page(null, array("where" => array("list_order" => (int) $_POST['list_order'])));
+
+            # If we are taking the list order of an existing page, swap values with it.
+            if (!$swap->no_results)
+                $swap->update(null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              $page->list_order,
+                              null,
+                              null);
+
+            $page->update($_POST['title'],
+                          $_POST['body'],
+                          null,
+                          $_POST['parent_id'],
+                          !empty($_POST['public']),
+                          !empty($_POST['show_in_list']),
+                          (int) $_POST['list_order'],
+                          null,
+                          (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             if (!isset($_POST['ajax']))
                 Flash::notice(_f("Page updated. <a href=\"%s\">View Page &rarr;</a>",
                                  array($page->url())),
-                              "/admin/?action=manage_pages");
-        }
-
-        /**
-         * Function: reorder_pages
-         * Reorders pages.
-         */
-        public function reorder_pages() {
-            foreach ($_POST['list_order'] as $id => $order) {
-                $page = new Page($id);
-                $page->update($page->title, $page->body, null, $page->parent_id, $page->public, $page->show_in_list, $order, null, $page->url);
-            }
-
-            Flash::notice(__("Pages reordered."), "/admin/?action=manage_pages");
+                                 "/admin/?action=manage_pages");
         }
 
         /**
@@ -483,7 +506,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['login']))
-                error(__("Error"), __("Please enter a username for your account."));
+                error(__("Error"), __("Please enter a username for the account."));
 
             $check = new User(array("login" => $_POST['login']));
             if (!$check->no_results)
@@ -495,22 +518,36 @@
                 error(__("Error"), __("Passwords do not match."));
 
             if (empty($_POST['email']))
-                error(__("Error"), __("E-mail address cannot be blank."));
-            elseif (!preg_match("/^[_A-z0-9-]+((\.|\+)[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/", $_POST['email']))
-                error(__("Error"), __("Invalid e-mail address."));
+                error(__("Error"), __("Email address cannot be blank."));
+            elseif (!is_email($_POST['email']))
+                error(__("Error"), __("Invalid email address."));
 
-            if (!empty($_POST['website']) and strpos($_POST['website'], '://') === false) {
-                $_POST['website'] = 'http://' . $_POST['website'];
+            if (!empty($_POST['website']) and !is_url($_POST['website']))
+                error(__("Error"), __("Invalid website URL."));
+
+            if (!empty($_POST['website']))
+                $_POST['website'] = add_scheme($_POST['website']);
+
+            if ($config->email_activation) {
+                $user = User::add($_POST['login'],
+                                  $_POST['password1'],
+                                  $_POST['email'],
+                                  $_POST['full_name'],
+                                  $_POST['website'],
+                                  $_POST['group'],
+                                  false);
+                correspond("activate", array("login" => $user->login,
+                                             "to" => $user->email));
+                Flash::notice(_f("User &#8220;%s&#8221; added and activation email sent.", $user->login), "/admin/?action=manage_users");
+            } else {
+                $user = User::add($_POST['login'],
+                                  $_POST['password1'],
+                                  $_POST['email'],
+                                  $_POST['full_name'],
+                                  $_POST['website'],
+                                  $_POST['group']);
+              Flash::notice(_f("User &#8220;%s&#8221; added.", $user->login), "/admin/?action=manage_users");
             }
-
-            User::add($_POST['login'],
-                      $_POST['password1'],
-                      $_POST['email'],
-                      $_POST['full_name'],
-                      $_POST['website'],
-                      $_POST['group']);
-
-            Flash::notice(__("User added."), "/admin/?action=manage_users");
         }
 
         /**
@@ -565,17 +602,25 @@
                             User::hashPassword($_POST['new_password1']) :
                             $user->password ;
 
-            $website = (!empty($_POST['website']) and strpos($_POST['website'], '://') === false) ?
-                           $_POST['website'] = 'http://' . $_POST['website'] :
-                           $_POST['website'] ;
+            if (empty($_POST['email']))
+                error(__("Error"), __("Email address cannot be blank."));
+            elseif (!is_email($_POST['email']))
+                error(__("Error"), __("Invalid email address."));
 
-            $user->update($_POST['login'], $password, $_POST['email'], $_POST['full_name'], $website, $_POST['group']);
+            if (!empty($_POST['website']) and !is_url($_POST['website']))
+                error(__("Error"), __("Invalid website URL."));
+
+            if (!empty($_POST['website']))
+                $_POST['website'] = add_scheme($_POST['website']);
+
+            $user->update($_POST['login'], $password, $_POST['email'], $_POST['full_name'], $_POST['website'], $_POST['group']);
 
             if ($_POST['id'] == $visitor->id)
                 $_SESSION['password'] = $password;
 
             if (!$user->approved)
-                activate($user->login, $user->email);
+                correspond("activate", array("login" => $user->login,
+                                             "to" => $user->email));
 
             Flash::notice(__("User updated."), "/admin/?action=manage_users");
         }
@@ -1051,11 +1096,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (isset($_FILES['posts_file']) and $_FILES['posts_file']['error'] == 0)
+            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']['error']))
                 if (!$posts = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $posts->generator != "Chyrp")
                     Flash::warning(__("Chyrp Posts export file is invalid."), "/admin/?action=import");
 
-            if (isset($_FILES['pages_file']) and $_FILES['pages_file']['error'] == 0)
+            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']['error']))
                 if (!$pages = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $pages->generator != "Chyrp")
                     Flash::warning(__("Chyrp Pages export file is invalid."), "/admin/?action=import");
 
@@ -1075,7 +1120,7 @@
                     }
             }
 
-            if (isset($_FILES['groups_file']) and $_FILES['groups_file']['error'] == 0) {
+            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']['error'])) {
                 $import = YAML::load($_FILES['groups_file']['tmp_name']);
 
                 foreach ($import["groups"] as $name => $permissions)
@@ -1087,7 +1132,7 @@
                         $sql->insert("permissions", array("id" => $id, "name" => $name));
             }
 
-            if (isset($_FILES['users_file']) and $_FILES['users_file']['error'] == 0) {
+            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file']['error'])) {
                 $users = YAML::load($_FILES['users_file']['tmp_name']);
 
                 foreach ($users as $login => $user) {
@@ -1108,7 +1153,7 @@
                 }
             }
 
-            if (isset($_FILES['posts_file']) and $_FILES['posts_file']['error'] == 0)
+            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']['error']))
                 foreach ($posts->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
 
@@ -1138,7 +1183,7 @@
                     $trigger->call("import_chyrp_post", $entry, $post);
                 }
 
-            if (isset($_FILES['pages_file']) and $_FILES['pages_file']['error'] == 0)
+            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']['error']))
                 foreach ($pages->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
@@ -1162,477 +1207,6 @@
                 }
 
             Flash::notice(__("Chyrp content successfully imported!"), "/admin/?action=import");
-        }
-
-        /**
-         * Function: import_wordpress
-         * WordPress importing.
-         */
-        public function import_wordpress() {
-            $config = Config::current();
-
-            if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
-
-            if (empty($_POST))
-                redirect("/admin/?action=import");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
-                show_403(__("Access Denied"), __("Invalid security key."));
-
-            if (!in_array("text", $config->enabled_feathers))
-                error(__("Missing Feather"), __("Importing from WordPress requires the Text feather to be installed and enabled."));
-
-            if (ini_get("memory_limit") < 20)
-                ini_set("memory_limit", "20M");
-
-            $trigger = Trigger::current();
-
-            $stupid_xml = file_get_contents($_FILES['xml_file']['tmp_name']);
-            $sane_xml = preg_replace(array("/<wp:comment_content>/", "/<\/wp:comment_content>/"),
-                                     array("<wp:comment_content><![CDATA[", "]]></wp:comment_content>"),
-                                     $stupid_xml);
-
-            $sane_xml = str_replace(array("<![CDATA[<![CDATA[", "]]>]]>"),
-                                    array("<![CDATA[", "]]>"),
-                                    $sane_xml);
-
-            $sane_xml = str_replace(array("xmlns:excerpt=\"http://wordpress.org/excerpt/1.0/\"",
-                                          "xmlns:excerpt=\"http://wordpress.org/export/1.1/excerpt/\""),
-                                    "xmlns:excerpt=\"http://wordpress.org/export/1.2/excerpt/\"",
-                                    $sane_xml);
-            $sane_xml = str_replace(array("xmlns:wp=\"http://wordpress.org/export/1.0/\"",
-                                          "xmlns:wp=\"http://wordpress.org/export/1.1/\""),
-                                    "xmlns:wp=\"http://wordpress.org/export/1.2/\"",
-                                    $sane_xml);
-
-            if (!substr_count($sane_xml, "xmlns:excerpt"))
-                $sane_xml = preg_replace("/xmlns:content=\"([^\"]+)\"(\s+)/m",
-                                         "xmlns:content=\"\\1\"\\2xmlns:excerpt=\"http://wordpress.org/export/1.2/excerpt/\"\\2",
-                                         $sane_xml);
-
-            $fix_amps_count = 1;
-            while ($fix_amps_count)
-                $sane_xml = preg_replace("/<wp:meta_value>(.+)&(?!amp;)(.+)<\/wp:meta_value>/m",
-                                         "<wp:meta_value>\\1&amp;\\2</wp:meta_value>",
-                                         $sane_xml, -1, $fix_amps_count);
-
-            # Remove null (x00) characters
-            $sane_xml = str_replace("", "", $sane_xml);
-
-            $xml = simplexml_load_string($sane_xml, "SimpleXMLElement", LIBXML_NOCDATA);
-
-            if (!$xml or !(substr_count($xml->channel->generator, "wordpress.org") or
-                           substr_count($xml->channel->generator, "wordpress.com")))
-                Flash::warning(__("File does not seem to be a valid WordPress export file, or could not be parsed. Please check your PHP error log."), "/admin/?action=import");
-
-            foreach ($xml->channel->item as $item) {
-                $wordpress = $item->children("http://wordpress.org/export/1.2/");
-                $content   = $item->children("http://purl.org/rss/1.0/modules/content/");
-                $contentencoded = $content->encoded;
-                if ($wordpress->post_type == "attachment" or $wordpress->status == "attachment" or $item->title == "zz_placeholder")
-                    continue;
-
-                $media = array();
-
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $contentencoded,
-                                   $media)) {
-                    $media_uris = array_unique($media[0]);
-                    foreach ($media_uris as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $contentencoded = str_replace($matched_url, $config->url.$config->uploads_path.$filename, $contentencoded);
-                    }
-                }
-                
-                $clean = (isset($wordpress->post_name) && $wordpress->post_name != '') ? $wordpress->post_name : sanitize($item->title) ;
-
-                $pinned = (isset($wordpress->is_sticky)) ? $wordpress->is_sticky : 0 ;
-
-                if (empty($wordpress->post_type) or $wordpress->post_type == "post") {
-                    $status_translate = array("publish" => "public",
-                                              "draft"   => "draft",
-                                              "private" => "private",
-                                              "static"  => "public",
-                                              "object"  => "public",
-                                              "inherit" => "public",
-                                              "future"  => "draft",
-                                              "pending" => "draft");
-
-                    $data = array("content" => array("title" => trim($item->title),
-                                                     "body" => trim($contentencoded),
-                                                     "imported_from" => "wordpress"),
-                                  "feather" => "text");
-                    
-                    $wp_post_format = null;
-                    if (isset($item->category)) {
-                        foreach ($item->category as $category) {
-                            if (!empty($category) and
-                                isset($category->attributes()->domain) and
-                                (substr_count($category->attributes()->domain, "post_format") > 0) and
-                                isset($category->attributes()->nicename)
-                            ) {
-                                $wp_post_format = (string) $category->attributes()->nicename;
-                                break;
-                            }
-                        }
-                    }
-                    
-                    if ($wp_post_format) {
-                        $trigger->filter($data,
-                                         "import_wordpress_post_".str_replace('post-format-', '', $wp_post_format),
-                                         $item);
-                    }
-                    
-                    $post = Post::add($data["content"],
-                                      $clean,
-                                      Post::check_url($clean),
-                                      $data["feather"],
-                                      null,
-                                      $pinned,
-                                      $status_translate[(string) $wordpress->status],
-                                      (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
-                                      null,
-                                      "",
-                                      false);
-
-                    $trigger->call("import_wordpress_post", $item, $post);
-
-                } elseif ($wordpress->post_type == "page") {
-                    $page = Page::add(trim($item->title),
-                                      trim($content->encoded),
-                                      null,
-                                      0,
-                                      true,
-                                      0,
-                                      $clean,
-                                      Page::check_url($clean),
-                                      (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date));
-
-                    $trigger->call("import_wordpress_page", $item, $page);
-                }
-            }
-
-            Flash::notice(__("WordPress content successfully imported!"), "/admin/?action=import");
-        }
-
-        /**
-         * Function: import_tumblr
-         * Tumblr importing.
-         */
-        public function import_tumblr() {
-            $config = Config::current();
-
-            if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
-
-            if (empty($_POST))
-                redirect("/admin/?action=import");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
-                show_403(__("Access Denied"), __("Invalid security key."));
-
-            if (!in_array("text", $config->enabled_feathers) or
-                !in_array("video", $config->enabled_feathers) or
-                !in_array("audio", $config->enabled_feathers) or
-                !in_array("chat", $config->enabled_feathers) or
-                !in_array("photo", $config->enabled_feathers) or
-                !in_array("quote", $config->enabled_feathers) or
-                !in_array("link", $config->enabled_feathers))
-                error(__("Missing Feather"), __("Importing from Tumblr requires the Text, Video, Audio, Chat, Photo, Quote, and Link feathers to be installed and enabled."));
-
-            if (ini_get("memory_limit") < 20)
-                ini_set("memory_limit", "20M");
-
-            if (!parse_url($_POST['tumblr_url'], PHP_URL_SCHEME))
-                $_POST['tumblr_url'] = "http://".$_POST['tumblr_url'];
-
-            set_time_limit(3600);
-            $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
-            $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url));
-            $api = preg_replace("/ ([a-z]+)\-([a-z]+)=/", " \\1_\\2=", $api);
-            $xml = simplexml_load_string($api);
-
-            if (!isset($xml->tumblelog))
-                Flash::warning(_f("Content could not be retrieved from the given URL. ". get_remote($url)),
-                                  "/admin/?action=import");
-
-            $already_in = $posts = array();
-            foreach ($xml->posts->post as $post) {
-                $posts[] = $post;
-                $already_in[] = $post->attributes()->id;
-            }
-
-            while ($xml->posts->attributes()->total > count($posts)) {
-                set_time_limit(3600);
-                $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url."&start=".count($posts)));
-                $api = preg_replace("/ ([a-z]+)\-([a-z]+)=/", " \\1_\\2=", $api);
-                $xml = simplexml_load_string($api, "SimpleXMLElement", LIBXML_NOCDATA);
-                foreach ($xml->posts->post as $post)
-                    if (!in_array($post->attributes()->id, $already_in)) {
-                        $posts[] = $post;
-                        $already_in[] = $post->attributes()->id;
-                    }
-            }
-
-            function reverse($a, $b) {
-                if (empty($a) or empty($b)) return 0;
-                return (strtotime($a->attributes()->date) < strtotime($b->attributes()->date)) ? -1 : 1 ;
-            }
-
-            set_time_limit(3600);
-            usort($posts, "reverse");
-
-            foreach ($posts as $key => $post) {
-                set_time_limit(3600);
-                if ($post->attributes()->type == "audio")
-                    break; # Can't import Audio posts since Tumblr has the files locked in to Amazon.
-
-                $translate_types = array("regular" => "text", "conversation" => "chat");
-
-                $clean = "";
-                switch($post->attributes()->type) {
-                    case "regular":
-                        $title = fallback($post->regular_title);
-                        $values = array("title" => $title,
-                                        "body" => $post->regular_body);
-                        $clean = sanitize($title);
-                        break;
-                    case "video":
-                        $values = array("embed" => $post->video_player,
-                                        "caption" => fallback($post->video_caption));
-                        break;
-                    case "conversation":
-                        $title = fallback($post->conversation_title);
-
-                        $lines = array();
-                        foreach ($post->conversation_line as $line)
-                            $lines[] = $line->attributes()->label." ".$line;
-
-                        $values = array("title" => $title,
-                                        "dialogue" => implode("\n", $lines));
-                        $clean = sanitize($title);
-                        break;
-                    case "photo":
-                        $values = array("filename" => upload_from_url($post->photo_url[0]),
-                                        "caption" => fallback($post->photo_caption));
-                        break;
-                    case "quote":
-                        $values = array("quote" => $post->quote_text,
-                                        "source" => preg_replace("/^&mdash; /", "",
-                                                                 fallback($post->quote_source)));
-                        break;
-                    case "link":
-                        $name = fallback($post->link_text);
-                        $values = array("name" => $name,
-                                        "source" => $post->link_url,
-                                        "description" => fallback($post->link_description));
-                        $clean = sanitize($name);
-                        break;
-                }
-
-                $values["imported_from"] = "tumblr";
-
-                $new_post = Post::add($values,
-                                      $clean,
-                                      Post::check_url($clean),
-                                      fallback($translate_types[(string) $post->attributes()->type], (string) $post->attributes()->type),
-                                      null,
-                                      null,
-                                      "public",
-                                      datetime((int) $post->attributes()->unix_timestamp),
-                                      null,
-                                      "",
-                                      false);
-
-                Trigger::current()->call("import_tumble", $post, $new_post);
-            }
-
-            Flash::notice(__("Tumblr content successfully imported!"), "/admin/?action=import");
-        }
-
-        /**
-         * Function: import_textpattern
-         * TextPattern importing.
-         */
-        public function import_textpattern() {
-            $config  = Config::current();
-            $trigger = Trigger::current();
-
-            if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
-
-            if (empty($_POST))
-                redirect("/admin/?action=import");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
-                show_403(__("Access Denied"), __("Invalid security key."));
-
-            @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
-
-            if ($mysqli->connect_errno) {
-                Flash::warning(__("Could not connect to the specified TextPattern database."),
-                    "/admin/?action=import");
-            }
-
-            $mysqli->query("SET NAMES 'utf8'");
-
-            $prefix = $mysqli->real_escape_string($_POST['prefix']);
-            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error"), $mysqli->error);
-
-            $posts = array();
-            while ($post = $result->fetch_assoc())
-                $posts[$post["ID"]] = $post;
-
-            $mysqli->close();
-
-            foreach ($posts as $post) {
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $post["Body"],
-                                   $media))
-                    foreach ($media[0] as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $post["Body"] = str_replace($matched_url, $config->url.$config->uploads_path.$filename, $post["Body"]);
-                    }
-
-                $status_translate = array(1 => "draft",
-                                          2 => "private",
-                                          3 => "draft",
-                                          4 => "public",
-                                          5 => "public");
-
-                $clean = fallback($post["url_title"], sanitize($post["Title"]));
-
-                $new_post = Post::add(array("title" => $post["Title"],
-                                            "body" => $post["Body"],
-                                            "imported_from" => "textpattern"),
-                                      $clean,
-                                      Post::check_url($clean),
-                                      "text",
-                                      null,
-                                      ($post["Status"] == "5"),
-                                      $status_translate[$post["Status"]],
-                                      $post["Posted"],
-                                      null,
-                                      "",
-                                      false);
-
-                $trigger->call("import_textpattern_post", $post, $new_post);
-            }
-
-            Flash::notice(__("TextPattern content successfully imported!"), "/admin/?action=import");
-        }
-
-        /**
-         * Function: import_movabletype
-         * MovableType importing.
-         */
-        public function import_movabletype() {
-            $config  = Config::current();
-            $trigger = Trigger::current();
-            $visitor = Visitor::current();
-
-            if (!$visitor->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
-
-            if (empty($_POST))
-                redirect("/admin/?action=import");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
-                show_403(__("Access Denied"), __("Invalid security key."));
-
-            @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
-
-            if ($mysqli->connect_errno) {
-                Flash::warning(__("Could not connect to the specified MovableType database."),
-                    "/admin/?action=import");
-            }
-
-            $mysqli->query("SET NAMES 'utf8'");
-
-            $authors = array();
-            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error"), $mysqli->error);
-
-            while ($author = $result->fetch_assoc()) {
-                # Try to figure out if this author is the same as the person doing the import.
-                if ($author["author_name"] == $visitor->login
-                    || $author["author_nickname"] == $visitor->login
-                    || $author["author_nickname"] == $visitor->full_name
-                    || $author["author_url"]      == $visitor->website
-                    || $author["author_email"]    == $visitor->email) {
-                    $users[$author["author_id"]] = $visitor;
-                } else {
-                    $users[$author["author_id"]] = User::add(
-                        $author["author_name"],
-                        $author["author_password"],
-                        $author["author_email"],
-                        ($author["author_nickname"] != $author["author_name"] ?
-                                                       $author["author_nickname"] : ""),
-                        $author["author_url"],
-                        ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
-                        $author["author_created_on"],
-                        false
-                    );
-                }
-            }
-
-            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error"), $mysqli->error);
-
-            $posts = array();
-            while ($post = $result->fetch_assoc())
-                $posts[$post["entry_id"]] = $post;
-
-            $mysqli->close();
-
-            foreach ($posts as $post) {
-                $body = $post["entry_text"];
-
-                if (!empty($post["entry_text_more"]))
-                    $body.= "\n\n<!--more-->\n\n".$post["entry_text_more"];
-
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $body,
-                                   $media))
-                    foreach ($media[0] as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $body = str_replace($matched_url, $config->url.$config->uploads_path.$filename, $body);
-                    }
-
-                $status_translate = array(1 => "draft",
-                                          2 => "public",
-                                          3 => "draft",
-                                          4 => "draft");
-
-                $clean = oneof($post["entry_basename"], sanitize($post["entry_title"]));
-
-                if (empty($post["entry_class"]) or $post["entry_class"] == "entry") {
-                    $new_post = Post::add(array("title" => $post["entry_title"],
-                                                "body" => $body,
-                                                "imported_from" => "movabletype"),
-                                          $clean,
-                                          Post::check_url($clean),
-                                          "text",
-                                          @$users[$post["entry_author_id"]],
-                                          false,
-                                          $status_translate[$post["entry_status"]],
-                                          oneof(@$post["entry_authored_on"], @$post["entry_created_on"], datetime()),
-                                          $post["entry_modified_on"],
-                                          "",
-                                          false);
-                    $trigger->call("import_movabletype_post", $post, $new_post, $link);
-                } elseif (@$post["entry_class"] == "page") {
-                    $new_page = Page::add($post["entry_title"], $body, null, 0, true, 0, $clean, Page::check_url($clean));
-                    $trigger->call("import_movabletype_page", $post, $new_page, $link);
-                }
-            }
-
-            Flash::notice(__("MovableType content successfully imported!"), "/admin/?action=import");
         }
 
         /**
@@ -1884,10 +1458,7 @@
             $type = (isset($_GET['module'])) ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
-                if ($type == "module")
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable modules."));
-                else
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable feathers."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
             if (empty($_GET[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."));
@@ -1953,10 +1524,7 @@
             $type = (isset($_GET['module'])) ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
-                if ($type == "module")
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable modules."));
-                else
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable feathers."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
             if (empty($_GET[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."));
@@ -2080,6 +1648,15 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            if (!empty($_POST['email']) and !is_email($_POST['email']))
+                error(__("Error"), __("Invalid email address."));
+
+            if (!is_url($_POST['chyrp_url']))
+                error(__("Error"), __("Invalid Chyrp URL."));
+
+            if (!empty($_POST['url']) and !is_url($_POST['url']))
+                error(__("Error"), __("Invalid alternate URL."));
+
             $config = Config::current();
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
@@ -2108,6 +1685,9 @@
 
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
+                error(__("Error"), __("Invalid feed URL."));
 
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
@@ -2138,9 +1718,12 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            $correspond = (!empty($_POST['email_activation']) or !empty($_POST['email_correspondence'])) ? true : false ;
+
             $config = Config::current();
             $set = array($config->set("can_register", !empty($_POST['can_register'])),
                          $config->set("email_activation", !empty($_POST['email_activation'])),
+                         $config->set("email_correspondence", $correspond),
                          $config->set("enable_captcha", !empty($_POST['enable_captcha'])),
                          $config->set("default_group", $_POST['default_group']),
                          $config->set("guest_group", $_POST['guest_group']));
@@ -2176,34 +1759,35 @@
          * Sets the $title and $body for various help IDs.
          */
         public function help() {
-            list($title, $body) = Trigger::current()->call("help_".$_GET['id']);
+            $help = Trigger::current()->call("help_".$_GET['id']);
 
             switch($_GET['id']) {
                 case "filtering_results":
-                    $title = __("Filtering Results");
-                    $body = "<p>".__("Use this to search for specific items. You can either enter plain text to match the item with, or use keywords:")."</pre>";
-                    $body.= "<h2>".__("Keywords")."</h2>";
-                    $body.= "<cite><strong>".__("Usage")."</strong>: <code>attr:val</code></cite>\n".__("Use this syntax to quickly match specific results. Keywords will modify the query to match items where <code>attr</code> is equal to <code>val</code> (case insensitive).");
+                    $help = "<h1>".__("Filtering Results")."</h1>\n";
+                    $help.= "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n";
+                    $help.= "<h2>".__("Keywords")."</h2>\n";
+                    $help.= "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
                     break;
                 case "slugs":
-                    $title = __("Post Slugs");
-                    $body = __("Post slugs are strings to use for the URL of a post. They are directly responsible for the <code>(url)</code> attribute in a post's clean URL, or the <code>/?action=view&amp;url=<strong>foo</strong></code> in a post's dirty URL. A post slug should not contain any special characters other than hyphens.");
+                    $help = "<h1>".__("Post Slugs")."</h1>\n";
+                    $help.= "<p>".__("A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\").")."</p>";
                     break;
                 case "trackbacks":
-                    $title = __("Trackbacks");
-                    $body = __("Trackbacks are special urls to posts from other blogs that your post is related to or references. The other blog will be notified of your post, and in some cases a comment will automatically be added to the post in question linking back to your post. It's basically a way to network between blogs via posts.");
+                    $help = "<h1>".__("Trackbacks")."</h1>\n";
+                    $help.= "<p>".__("Trackbacks are special URLs that notify the authors of other blog posts that your post is related to or references. The other blogs will be informed when you publish your post, and in some cases a comment will automatically be added to their site linking back to your post.")."</p>";
                     break;
                 case "alternate_urls":
-                    $title = __("Alternate URL");
-                    $body = "<p>".__("An alternate URL will allow you to keep Chyrp in its own directory, while having your site URLs point to someplace else. For example, you could have Chyrp in a <code>/chyrp</code> directory, and have your site at <code>/</code>. There are two requirements for this to work.")."</p>\n\n";
-                    $body.= "<ol>\n\t<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n\n";
-                    $body.= "<pre><code>&lt;?php
-    require \"path/to/chyrp/index.php\";
-?&gt;</code></pre>";
-                    $body.= "</li>\n\t<li>".__("Move the .htaccess file from the original Chyrp directory, and change the <code>RewriteBase</code> line to reflect the new website location.")."</li>\n</ol>";
+                    $help = "<h1>".__("Alternate URL")."</h1>\n";
+                    $help.= "<p>".__("An alternate URL will allow you to keep Chyrp contained in its own directory, while having your site URLs point to someplace else. For example, you could keep Chyrp in a <code>/chyrp</code> directory and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:")."</p>\n";
+                    $help.= "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n";
+                    $help.= "<pre><code>&lt;?php\n    require \"path/to/chyrp/index.php\";\n?&gt;</code></pre>";
+                    $help.= "</li>\n<li>".__("Move the .htaccess file from the original install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
             }
 
-            require "help.php";
+            if (!isset($_GET['ajax']))
+                echo "<!DOCTYPE html>\n";
+
+            exit($help);
         }
 
         /**
@@ -2349,6 +1933,7 @@
             $this->context["hide_admin"]  = isset($_SESSION["hide_admin"]);
             $this->context["now"]         = time();
             $this->context["version"]     = CHYRP_VERSION;
+            $this->context["codename"]    = CHYRP_CODENAME;
             $this->context["debug"]       = DEBUG;
             $this->context["feathers"]    = Feathers::$instances;
             $this->context["modules"]     = Modules::$instances;

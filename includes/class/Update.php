@@ -17,7 +17,7 @@
             if ((time() - $config->check_updates_last) < UPDATE_INTERVAL )
                 return; # Check for updates once per day
 
-            $xml = simplexml_load_file(UPDATE_XML);
+            $xml = simplexml_load_string(get_remote(UPDATE_XML, 3));
 
             if ($xml == false) {
                 Flash::warning(_f("Unable to check for updates. Please visit <a href='%s'>GitHub</a> to see a list of available releases.",

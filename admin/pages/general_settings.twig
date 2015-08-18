@@ -23,13 +23,13 @@
                             <span class="sub">${ "(optional)" | translate }</span>
                         </label>
                         <input class="text" type="text" name="url" value="{% if site.url != site.chyrp_url %}${ site.url | escape }{% endif %}" id="url">
-                        <a href="{% admin "help&id=alternate_urls" %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+                        <a href="{% admin "help&id=alternate_urls" %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
                         <small>
                             ${ "Enter an alternate address here if you want your homepage URL to be different from the URL where Chyrp is normally available." | translate }
                         </small>
                     </p>
                     <p>
-                        <label for="email">${ "Contact E-Mail Address" | translate }</label>
+                        <label for="email">${ "Contact Email Address" | translate }</label>
                         <input class="text" type="email" name="email" value="${ site.email | escape }" id="email">
                     </p>
                     <p>

@@ -7,19 +7,22 @@
                 foreach($sql->select("post_attributes",
                                      "*",
                                      array("name" => "rights_title"))->fetchAll() as $post)  {
-                    $sql->delete("post_attributes", array("name" => "rights_title", "post_id" => $post["post_id"]));
+                    $sql->delete("post_attributes", array("name" => "rights_title",
+                                                          "post_id" => $post["post_id"]));
                 }
 
                 foreach($sql->select("post_attributes",
                                      "*",
                                      array("name" => "rights_holder"))->fetchAll() as $post)  {
-                    $sql->delete("post_attributes", array("name" => "rights_holder", "post_id" => $post["post_id"]));
+                    $sql->delete("post_attributes", array("name" => "rights_holder",
+                                                          "post_id" => $post["post_id"]));
                 }
 
                 foreach($sql->select("post_attributes",
                                      "*",
                                      array("name" => "rights_licence"))->fetchAll() as $post)  {
-                    $sql->delete("post_attributes", array("name" => "rights_licence", "post_id" => $post["post_id"]));
+                    $sql->delete("post_attributes", array("name" => "rights_licence",
+                                                          "post_id" => $post["post_id"]));
                 }
             }
         }
@@ -112,5 +115,4 @@
 
             return $mark;
         }
-
     }

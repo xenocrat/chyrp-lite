@@ -175,7 +175,9 @@
             if (isset($this->recent_posts["$limit"]))
                 return $this->recent_posts["$limit"];
 
-            $results = Post::find(array("placeholders" => true));
+            $results = Post::find(array("placeholders" => true,
+                                        "where" => array("status" => "public"),
+                                        "order" => "created_at DESC, id DESC"));
             $posts = array();
 
             for ($i = 0; $i < $limit; $i++)
@@ -183,6 +185,41 @@
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
             return $this->recent_posts["$limit"] = $posts;
+        }
+
+        /**
+         * Function: related_posts
+         * Ask modules to contribute to a list of related posts.
+         *
+         * Parameters:
+         *     $post - List posts related to this post
+         *     $limit - Number of related posts to list
+         */
+        public function related_posts($post, $limit = 5) {
+            if ($post->no_results)
+                return;
+
+            if (isset($this->related_posts["$post->id"]["$limit"]))
+                return $this->related_posts["$post->id"]["$limit"];
+
+            $ids = array();
+
+            Trigger::current()->filter($ids, "related_posts", $post, $limit);
+
+            if (empty($ids))
+                return;
+
+            $results = Post::find(array("placeholders" => true,
+                                        "where" => array("id" => $ids),
+                                        "order" => "created_at DESC, id DESC"));
+
+            $posts = array();
+
+            for ($i = 0; $i < $limit; $i++)
+                if (isset($results[0][$i]))
+                    $posts[] = new Post(null, array("read_from" => $results[0][$i]));
+
+            return $this->related_posts["$post->id"]["$limit"] = $posts;
         }
 
         /**
@@ -227,35 +264,14 @@
 
                 $name = substr($file, 0, strpos($file, "."));
                 switch ($name) {
-                    case "aural":
-                        $media = "aural";
-                        break;
-                    case "braille":
-                        $media = "braille";
-                        break;
-                    case "embossed":
-                        $media = "embossed";
-                        break;
-                    case "handheld":
-                        $media = "handheld";
-                        break;
                     case "print":
                         $media = "print";
-                        break;
-                    case "projection":
-                        $media = "projection";
                         break;
                     case "screen":
                         $media = "screen";
                         break;
                     case "speech":
                         $media = "speech";
-                        break;
-                    case "tty":
-                        $media = "tty";
-                        break;
-                    case "tv":
-                        $media = "tv";
                         break;
                     default:
                         $media = "all";

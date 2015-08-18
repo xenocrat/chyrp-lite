@@ -531,7 +531,7 @@
      *     $string - String to unfix.
      */
     function unfix($string) {
-        return htmlspecialchars_decode($string, ENT_QUOTES, "utf-8");
+        return htmlspecialchars_decode($string, ENT_QUOTES);
     }
 
     /**
@@ -846,54 +846,72 @@
 
     /**
      * Function: get_remote
-     * Grabs the contents of a website/location.
+     * Retrieve the contents of a URL.
      *
      * Parameters:
-     *     $url - The URL of the location to grab.
+     *     $url - The URL of the resource to be retrieved.
+     *     $redirects - The maximum number of redirects to follow.
+     *     $timeout - The maximum number of seconds to wait.
      *
      * Returns:
      *     The response from the remote URL.
      */
-    function get_remote($url) {
+    function get_remote($url, $redirects = 0, $timeout = 10) {
         extract(parse_url($url), EXTR_SKIP);
+        $content = "";
 
         if (ini_get("allow_url_fopen")) {
-            $content = @file_get_contents($url);
-            if (!$content or  (strpos($http_response_header[0], " 200 OK") === false))
-                $content = "Server returned a message: ".$http_response_header[0];
+            $context = stream_context_create(array("http" => array("follow_location" => ($redirects == 0) ? 0 : 1 ,
+                                                                   "max_redirects" => $redirects,
+                                                                   "timeout" => $timeout,
+                                                                   "protocol_version" => 1.1,
+                                                                   "user_agent" => "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")")));
+            $content = @file_get_contents($url, false, $context);
         } elseif (function_exists("curl_init")) {
             $handle = curl_init();
             curl_setopt($handle, CURLOPT_URL, $url);
-            curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 1);
-            curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+            curl_setopt($handle, CURLOPT_HEADER, false);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($handle, CURLOPT_TIMEOUT, $timeout + 60);
+            curl_setopt($handle, CURLOPT_FOLLOWLOCATION, ($redirects == 0) ? false : true );
+            curl_setopt($handle, CURLOPT_MAXREDIRS, $redirects);
+            curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, $timeout);
+            curl_setopt($handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+            curl_setopt($handle, CURLOPT_USERAGENT, "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
             $content = curl_exec($handle);
-            $status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
             curl_close($handle);
-            if ($status != 200)
-                $content = "Server returned a message: ".$status;
         } else {
-            $path = (!isset($path)) ? '/' : $path ;
-            if (isset($query)) $path.= '?'.$query;
             $port = (isset($port)) ? $port : 80 ;
+            $path = (!isset($path)) ? '/' : $path ;
+            $header = "";
 
-            $connect = @fsockopen($host, $port, $errno, $errstr, 2);
-            if (!$connect) return false;
+            if (isset($query))
+                $path.= '?'.$query;
 
-            # Send the GET headers
-            fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
-            fwrite($connect, "Host: ".$host."\r\n");
-            fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION."\r\n\r\n");
+            $connect = @fsockopen($host, $port, $errno, $errstr, $timeout);
 
-            $content = "";
-            while (!feof($connect)) {
-                $line = fgets($connect, 128);
-                if (preg_match("/\r\n/", $line)) continue;
+            if ($connect) {
+                # Send the GET headers
+                fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
+                fwrite($connect, "Host: ".$host."\r\n");
+                fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
 
-                $content.= $line;
+                while (!feof($connect) and strpos($header, "\r\n\r\n") === false)
+                    $header.= fgets($connect);
+
+                while (!feof($connect))
+                    $content.= fgets($connect);
+
+                fclose($connect);
+
+                # Search for 301 or 302 header and recurse with new location unless redirects are exhausted
+                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $header) and preg_match("~^Location:(.+)$~mi", $header, $matches)) {
+                    $location = trim($matches[1]);
+
+                    if (is_url($location))
+                        $content = get_remote($location, $redirects - 1, $timeout);
+                }
             }
-
-            fclose($connect);
         }
 
         return $content;
@@ -1385,10 +1403,11 @@
      */
     function upload_tester($error) {
         if (is_array($error)) {
-            foreach ($error as $errors) {
-                $return = upload_tester($errors);
-            }
-            return $return;
+            foreach ($error as $errors)
+                if (!upload_tester($errors))
+                    return false;
+
+            return true;
         }
 
         switch ($error) {
@@ -1485,7 +1504,117 @@
     function timezones() {
         $zones = array();
 
-        $deprecated = array("Brazil/Acre", "Brazil/DeNoronha", "Brazil/East", "Brazil/West", "Canada/Atlantic", "Canada/Central", "Canada/East-Saskatchewan", "Canada/Eastern", "Canada/Mountain", "Canada/Newfoundland", "Canada/Pacific", "Canada/Saskatchewan", "Canada/Yukon", "CET", "Chile/Continental", "Chile/EasterIsland", "CST6CDT", "Cuba", "EET", "Egypt", "Eire", "EST", "EST5EDT", "Etc/GMT", "Etc/GMT+0", "Etc/GMT+1", "Etc/GMT+10", "Etc/GMT+11", "Etc/GMT+12", "Etc/GMT+2", "Etc/GMT+3", "Etc/GMT+4", "Etc/GMT+5", "Etc/GMT+6", "Etc/GMT+7", "Etc/GMT+8", "Etc/GMT+9", "Etc/GMT-0", "Etc/GMT-1", "Etc/GMT-10", "Etc/GMT-11", "Etc/GMT-12", "Etc/GMT-13", "Etc/GMT-14", "Etc/GMT-2", "Etc/GMT-3", "Etc/GMT-4", "Etc/GMT-5", "Etc/GMT-6", "Etc/GMT-7", "Etc/GMT-8", "Etc/GMT-9", "Etc/GMT0", "Etc/Greenwich", "Etc/UCT", "Etc/Universal", "Etc/UTC", "Etc/Zulu", "Factory", "GB", "GB-Eire", "GMT", "GMT+0", "GMT-0", "GMT0", "Greenwich", "Hongkong", "HST", "Iceland", "Iran", "Israel", "Jamaica", "Japan", "Kwajalein", "Libya", "MET", "Mexico/BajaNorte", "Mexico/BajaSur", "Mexico/General", "MST", "MST7MDT", "Navajo", "NZ", "NZ-CHAT", "Poland", "Portugal", "PRC", "PST8PDT", "ROC", "ROK", "Singapore", "Turkey", "UCT", "Universal", "US/Alaska", "US/Aleutian", "US/Arizona", "US/Central", "US/East-Indiana", "US/Eastern", "US/Hawaii", "US/Indiana-Starke", "US/Michigan", "US/Mountain", "US/Pacific", "US/Pacific-New", "US/Samoa", "UTC", "W-SU", "WET", "Zulu");
+        $deprecated = array("Brazil/Acre",
+                            "Brazil/DeNoronha",
+                            "Brazil/East",
+                            "Brazil/West",
+                            "Canada/Atlantic",
+                            "Canada/Central",
+                            "Canada/East-Saskatchewan",
+                            "Canada/Eastern",
+                            "Canada/Mountain",
+                            "Canada/Newfoundland",
+                            "Canada/Pacific",
+                            "Canada/Saskatchewan",
+                            "Canada/Yukon",
+                            "CET",
+                            "Chile/Continental",
+                            "Chile/EasterIsland",
+                            "CST6CDT",
+                            "Cuba",
+                            "EET",
+                            "Egypt",
+                            "Eire",
+                            "EST",
+                            "EST5EDT",
+                            "Etc/GMT",
+                            "Etc/GMT+0",
+                            "Etc/GMT+1",
+                            "Etc/GMT+10",
+                            "Etc/GMT+11",
+                            "Etc/GMT+12",
+                            "Etc/GMT+2",
+                            "Etc/GMT+3",
+                            "Etc/GMT+4",
+                            "Etc/GMT+5",
+                            "Etc/GMT+6",
+                            "Etc/GMT+7",
+                            "Etc/GMT+8",
+                            "Etc/GMT+9",
+                            "Etc/GMT-0",
+                            "Etc/GMT-1",
+                            "Etc/GMT-10",
+                            "Etc/GMT-11",
+                            "Etc/GMT-12",
+                            "Etc/GMT-13",
+                            "Etc/GMT-14",
+                            "Etc/GMT-2",
+                            "Etc/GMT-3",
+                            "Etc/GMT-4",
+                            "Etc/GMT-5",
+                            "Etc/GMT-6",
+                            "Etc/GMT-7",
+                            "Etc/GMT-8",
+                            "Etc/GMT-9",
+                            "Etc/GMT0",
+                            "Etc/Greenwich",
+                            "Etc/UCT",
+                            "Etc/Universal",
+                            "Etc/UTC",
+                            "Etc/Zulu",
+                            "Factory",
+                            "GB",
+                            "GB-Eire",
+                            "GMT",
+                            "GMT+0",
+                            "GMT-0",
+                            "GMT0",
+                            "Greenwich",
+                            "Hongkong",
+                            "HST",
+                            "Iceland",
+                            "Iran",
+                            "Israel",
+                            "Jamaica",
+                            "Japan",
+                            "Kwajalein",
+                            "Libya",
+                            "MET",
+                            "Mexico/BajaNorte",
+                            "Mexico/BajaSur",
+                            "Mexico/General",
+                            "MST",
+                            "MST7MDT",
+                            "Navajo",
+                            "NZ",
+                            "NZ-CHAT",
+                            "Poland",
+                            "Portugal",
+                            "PRC",
+                            "PST8PDT",
+                            "ROC",
+                            "ROK",
+                            "Singapore",
+                            "Turkey",
+                            "UCT",
+                            "Universal",
+                            "US/Alaska",
+                            "US/Aleutian",
+                            "US/Arizona",
+                            "US/Central",
+                            "US/East-Indiana",
+                            "US/Eastern",
+                            "US/Hawaii",
+                            "US/Indiana-Starke",
+                            "US/Michigan",
+                            "US/Mountain",
+                            "US/Pacific",
+                            "US/Pacific-New",
+                            "US/Samoa",
+                            "UTC",
+                            "W-SU",
+                            "WET",
+                            "Zulu");
 
         foreach (timezone_identifiers_list() as $zone)
             if (!in_array($zone, $deprecated))
@@ -1560,7 +1689,7 @@
         $times = array("year", "month", "day", "hour", "minute", "second");
 
         foreach ($matches as $match) {
-            list($test, $equals,) = explode(":", $match);
+            list($test, $equals) = explode(":", $match);
 
             if ($equals[0] == '"') {
                 if (substr($equals, -1) != '"')
@@ -1748,7 +1877,6 @@
     /**
      * Function: email
      * Send an email. Function arguments are exactly the same as the PHP mail() function.
-     *
      * This is intended so that modules can provide an email method if the server cannot use mail().
      */
     function email() {
@@ -1865,32 +1993,6 @@
     }
 
     /**
-     * Function: activate
-     * Send an activation email to an unapproved user.
-     *
-     * Parameters:
-     *     $login - The user's registered login.
-     *     $email - The user's registered email address.
-     */
-    function activate($login, $email) {
-        $config  = Config::current();
-        $to      = $email;
-        $subject = _f("Activate your account at %s", $config->name);
-        $message = _f("Hello, %s.", fix($login));
-        $message.= "\n\n";
-        $message.= _f("You are receiving this message because you registered at %s.", $config->chyrp_url);
-        $message.= "\n";
-        $message.= _f("Visit this link to activate your account: %s",
-            $config->chyrp_url."/?action=validate&login=".fix($login)."&token=".token(array($login, $email)));
-        $headers = "From:".$config->email."\r\n".
-                   "Reply-To:".$config->email. "\r\n".
-                   "X-Mailer: PHP/".phpversion();
-
-        if (!email($to, $subject, $message, $headers))
-            error(__("Error"), __("Unable to email the activation link."));
-    }
-
-    /**
      * Function: token
      * Salt and hash a unique token.
      *
@@ -1900,6 +2002,120 @@
      * Returns:
      *     A unique token.
      */
-    function token($items = array()) {
+    function token($items) {
         return sha1(implode((array) $items).md5(Config::current()->secure_hashkey));
+    }
+
+    /**
+     * Function: is_url
+     * Tries to determine if a string is a URL beginning with a FQDN, IPv4 or IPv6 address.
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     *
+     * See Also:
+     *     <add_scheme>
+     */
+    function is_url($string) {
+        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])($|/|:){1}~', $string);
+    }
+
+    /**
+     * Function: is_email
+     * Tries to determine if a string is an email address.
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     */
+    function is_email($string) {
+        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
+    }
+
+    /**
+     * Function: add_scheme
+     * Prefixes a URL with a HTTP scheme if none was detected.
+     *
+     * Parameters:
+     *     $url - The URL to analyse.
+     *
+     * Returns:
+     *     URL prefixed with scheme.
+     *
+     * See Also:
+     *     <is_url>
+     */
+    function add_scheme($url) {
+        return $url = preg_match('~^[[:alpha:]]([[:alnum:]]|\+|\.|-)*:~', $url) ? $url : "http://".$url ;
+    }
+
+    /**
+     * Function: correspond
+     * Send an email correspondence to a user about an action we took.
+     *
+     * Parameters:
+     *     $action - About which action are we corresponding with the user?
+     *     $params - An indexed array of parameters associated with this action.
+     *               $params["to"] is required: the address to be emailed.
+     */
+    function correspond($action, $params) {
+        $config  = Config::current();
+        $trigger = Trigger::current();
+
+        if (!$config->email_correspondence or !isset($params["to"]))
+            return;
+
+        $params["headers"] = "From:".$config->email."\r\n".
+                             "Reply-To:".$config->email. "\r\n".
+                             "X-Mailer: PHP/".phpversion();
+
+        fallback($params["subject"], "");
+        fallback($params["message"], "");
+
+        switch ($action) {
+            case "activate":
+                $params["subject"] = _f("Activate your account at %s", $config->name);
+                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                                     "\n\n".
+                                     __("You are receiving this message because you registered a new account.").
+                                     "\n\n".
+                                     __("Visit this link to activate your account:").
+                                     "\n".
+                                     $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
+                                     "&token=".token(array($params["login"], $params["to"]));
+                break;
+
+            case "reset":
+                $params["subject"] = _f("Reset your password at %s", $config->name);
+                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                                     "\n\n".
+                                     __("You are receiving this message because you requested a new password.").
+                                     "\n\n".
+                                     _f("Visit this link to reset your password:").
+                                     "\n".
+                                     $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
+                                     "&token=".token(array($params["login"], $params["to"]));
+                break;
+
+            case "password":
+                $params["subject"] = _f("Your new password for %s", $config->name);
+                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                                     "\n\n".
+                                     _f("Your new password is: %s", $params["password"]);
+                break;
+            
+            default:
+                if ($trigger->exists("correspond_".$action))
+                    $trigger->filter($params, "correspond_".$action);
+                else
+                    return;
+        }
+
+        if (!email($params["to"], $params["subject"], $params["message"], $params["headers"]))
+            error(__("Undeliverable"), __("Unable to send email."));
     }

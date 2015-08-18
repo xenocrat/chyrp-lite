@@ -53,8 +53,6 @@ input, textarea, select {                       font-family: inherit;
 /* @end */
 
 /* @group Core */
-*::-moz-selection {                             color: #ffffff;
-                                                background-color: #4f4f4f }
 *::selection {                                  color: #ffffff;
                                                 background-color: #4f4f4f }
 body {                                          font-size: 14px;
@@ -425,7 +423,8 @@ table tbody tr td.tag_count {                   text-align: center }
 table tbody tr td.placeholder {                 display: block;
                                                 border: none }
 table tbody tr td.post_status {                 background-color: #f2fbff }
-table tbody tr.private td.post_status {         background-color: #faebe4 }
+table tbody tr.private td.post_status,
+table tbody tr.registered_only td.post_status { background-color: #faebe4 }
 table tbody tr.public td.post_status {          background-color: #ebfae4 }
 table tbody tr.denied td.comment_status {       background-color: #faebe4 }
 table tbody tr.approved td.comment_status {     background-color: #ebfae4 }
@@ -621,19 +620,22 @@ img#likeImage_preview {                         vertical-align: middle }
 /* @end */
 
 /* @group Overlays */
-div.overlay_background {                        display: block;
+.overlay_background {                           display: block;
                                                 position: fixed;
                                                 width: 100%;
                                                 height: 100%;
                                                 top: 0px;
                                                 left: 0px;
-                                                background-color: rgba(79, 79, 79, 0.5) }
-iframe.overlay_help, div.overlay_preview {      box-sizing: border-box;    
+                                                background-color: rgba(79, 79, 79, 0.75) }
+.overlay_foreground {                           box-sizing: border-box;    
                                                 display: block;
                                                 position: absolute;
                                                 width: 80%;
-                                                height: 80%;
-                                                max-height: 640px;
+                                                height: auto;
+                                                min-height: 6rem;
+                                                max-height: 80%;
+                                                margin: 0em;
+                                                padding: 3rem;
                                                 top: 10%;
                                                 left: 10%;
                                                 overflow-x: hidden;
@@ -641,50 +643,62 @@ iframe.overlay_help, div.overlay_preview {      box-sizing: border-box;
                                                 border: none;
                                                 background-color: #fff;
                                                 box-shadow: 0px 4px 16px 2px rgba(79, 79, 79, 0.5) }
-div.overlay_preview {                           padding: 2em;
-                                                max-height: none;
-                                                background-color: #fff }
-img.overlay_close_gadget {                      display: block;
+.overlay_close_gadget {                         display: block;
                                                 position: absolute;
                                                 width: 16px;
                                                 height: 16px;
                                                 top: 10%;
                                                 right: 10%;
-                                                padding-top: 8px;
-                                                padding-right: 8px;
+                                                padding-top: 13px;
+                                                padding-right: 13px;
                                                 cursor: pointer }
-/* @end */
 
-/* @group CSS Reset */
-.css_reset h4 {                                 font-size: 0.9em }
-.css_reset h5 {                                 font-size: 0.8em }
-.css_reset h6 {                                 font-size: 0.7em }
-.css_reset ul {                                 list-style: disc inside;
+.overlay_foreground h1,
+.overlay_foreground h2,
+.overlay_foreground h3,
+.overlay_foreground h4,
+.overlay_foreground h5,
+.overlay_foreground h6 {                        margin: 1em 0em }
+.overlay_foreground h1:first-child,
+.overlay_foreground h2:first-child,
+.overlay_foreground h3:first-child,
+.overlay_foreground h4:first-child,
+.overlay_foreground h5:first-child,
+.overlay_foreground h6:first-child {            margin-top: 0em }
+.overlay_foreground h1 {                        font-size: 2em }
+.overlay_foreground h2 {                        font-size: 1.5em }
+.overlay_foreground h3 {                        font-size: 1em }
+.overlay_foreground h4 {                        font-size: 0.9em }
+.overlay_foreground h5 {                        font-size: 0.8em }
+.overlay_foreground h6 {                        font-size: 0.7em }
+.overlay_foreground ul {                        list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
-    .css_reset ul li > ul {                     list-style-type: circle;
+    .overlay_foreground ul li > ul {            list-style-type: circle;
                                                 margin-left: 1em }
-.css_reset ol {                                 list-style: decimal inside;
+.overlay_foreground ol {                        list-style: decimal inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
-    .css_reset ol li > ol {                     list-style-type: lower-latin;
+    .overlay_foreground ol li > ol {            list-style-type: lower-roman;
                                                 margin-left: 1em }
-.css_reset dl {                                 list-style: none }
-    .css_reset dl dt {                          font-weight: bold }
-    .css_reset dl dd {                          margin-left: 1em }
-.css_reset pre {                                font-family: monospace;
+.overlay_foreground dl {                        list-style: none }
+    .overlay_foreground dl dt {                 font-weight: bold }
+    .overlay_foreground dl dd {                 margin-left: 1em }
+.overlay_foreground pre {                       font-family: monospace;
                                                 margin: 2em }
-.css_reset code {                               font-family: monospace;
+.overlay_foreground code {                      font-family: monospace;
                                                 font-size: 0.75em }
-      .css_reset pre code {                     background-color: transparent;
+      .overlay_foreground pre code {            background-color: transparent;
                                                 border: none }
-.css_reset blockquote {                         margin: 2em;
+.overlay_foreground blockquote {                margin: 2em;
                                                 font-style: italic }
-    .css_reset blockquote em {                  font-style: normal }
+    .overlay_foreground blockquote em {         font-style: normal }
+    .overlay_foreground img {                   max-width: 100% }
+
 /* @end */
 
-/* @media-query for small screens */
-@media handheld, screen and (max-width: 768px) {
+/* @media Mobile */
+@media screen and (max-width: 768px) {
     #header #navigation {                       left: 0em;
                                                 right: 0em }
     #header #navigation li a {                  display: block;
@@ -796,15 +810,15 @@ img.overlay_close_gadget {                      display: block;
     #content ul.extend li.module div.controls { position: static }
     #content ul.themes img.screenshot {         width: 192px }
 
-    iframe.overlay_help, div.overlay_preview {  width: 100%;
-                                                height: 100%;
-                                                max-height: none;
-                                                top: 0%;
-                                                left: 0% }
-    img.overlay_close_gadget {                  top: 0%;
-                                                right: 0% }
+    .overlay_foreground {                       width: 90%;
+                                                max-height: 90%;
+                                                top: 5%;
+                                                left: 5% }
+    .overlay_close_gadget {                     top: 5%;
+                                                right: 5% }
 }
-@media handheld, screen and (max-width: 540px) {
+
+@media screen and (max-width: 540px) {
     table tbody tr td.main {                    min-width: 240px }
 }
 /* @end */

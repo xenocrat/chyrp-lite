@@ -111,6 +111,11 @@
         }
 
         public function audio_player($filename, $params = array(), $post) {
+            $trigger = Trigger::current();
+
+            if ($trigger->exists("audio_player"))
+                return $trigger->call("audio_player", $filename, $params, $post);
+
             $player = "\n".'<audio controls>';
             $player.= "\n\t".__("Your web browser does not support the <code>audio</code> element.", "audio");
             $player.= "\n\t".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';

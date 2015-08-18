@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-05-25 14:17+0000\n"
+"POT-Creation-Date: 2015-08-14 09:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -35,5 +35,15 @@ msgstr ""
 
 #: feathers/link/link.php:14
 msgid "Description"
+msgstr ""
+
+#: feathers/link/link.php:26
+#: feathers/link/link.php:44
+msgid "URL can't be empty."
+msgstr ""
+
+#: feathers/link/link.php:29
+#: feathers/link/link.php:47
+msgid "Invalid URL."
 msgstr ""
 

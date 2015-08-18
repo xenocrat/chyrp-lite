@@ -2,10 +2,10 @@
     /**
      * File: Common
      *
-     * Chyrp Lite: an ultra-lightweight fork of the Chyrp blogging engine.
+     * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2015.05.25
+     *     v2015.06
      *
      * Copyright:
      *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors.
@@ -40,7 +40,11 @@
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2015.05.25");
+    define('CHYRP_VERSION', "2015.06");
+
+    # Constant: CHYRP_CODENAME
+    # The code name for this version.
+    define('CHYRP_CODENAME', "Saxaul");
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
@@ -53,23 +57,28 @@
 
     # Constant: JAVASCRIPT
     # Is this the JavaScript file?
-    if (!defined('JAVASCRIPT')) define('JAVASCRIPT', false);
+    if (!defined('JAVASCRIPT'))
+        define('JAVASCRIPT', false);
 
     # Constant: ADMIN
     # Is the user in the admin area?
-    if (!defined('ADMIN')) define('ADMIN', false);
+    if (!defined('ADMIN'))
+        define('ADMIN', false);
 
     # Constant: AJAX
     # Is this being run from an AJAX request?
-    if (!defined('AJAX')) define('AJAX', isset($_POST['ajax']) and $_POST['ajax'] == "true");
+    if (!defined('AJAX'))
+        define('AJAX', isset($_POST['ajax']) and $_POST['ajax'] == "true");
 
     # Constant: XML_RPC
     # Is this being run from XML-RPC?
-    if (!defined('XML_RPC')) define('XML_RPC', false);
+    if (!defined('XML_RPC'))
+        define('XML_RPC', false);
 
     # Constant: TRACKBACK
     # Is this being run from a trackback request?
-    if (!defined('TRACKBACK')) define('TRACKBACK', false);
+    if (!defined('TRACKBACK'))
+        define('TRACKBACK', false);
 
     # Constant: UPGRADING
     # Is the user running the upgrader? (false)
@@ -116,24 +125,28 @@
     define('UPDATE_INTERVAL', 86400);
 
     # Constant: USE_ZLIB
-    # Use zlib to provide GZIP compression
-    if (version_compare(PHP_VERSION, "5.4.4", "<"))
-        define('USE_ZLIB', true);
-    else
-        define('USE_ZLIB', false);
+    # Use zlib to provide GZIP compression if the feature is supported and not buggy
+    # See Also: http://bugs.php.net/55544
+    if (!defined('USE_ZLIB'))
+        if (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<"))
+            define('USE_ZLIB', true);
+        else
+            define('USE_ZLIB', false);
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4
-    if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
+    if (!defined('JSON_PRETTY_PRINT'))
+        define('JSON_PRETTY_PRINT', 0);
 
     # Constant: JSON_UNESCAPED_SLASHES
     # Define a safe value to avoid warnings pre-5.4
-    if (!defined('JSON_UNESCAPED_SLASHES')) define('JSON_UNESCAPED_SLASHES', 0);
+    if (!defined('JSON_UNESCAPED_SLASHES'))
+        define('JSON_UNESCAPED_SLASHES', 0);
 
     # Set error reporting levels, and headers for Chyrp's JS files.
     if (JAVASCRIPT) {
         error_reporting(0);
-        header("Content-Type: application/x-javascript");
+        header("Content-Type: application/javascript");
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else
@@ -345,5 +358,5 @@
     # First general-purpose trigger. There are many cases you may want to use @route_init@ instead of this, however.
     $trigger->call("runtime");
 
-    # Set the content-type to the theme's "type" setting, or "text/html".
-    header("Content-type: ".(INDEX ? fallback($theme->type, "text/html") : "text/html")."; charset=UTF-8");
+    # Set the content-type and charset.
+    header("Content-type: text/html; charset=UTF-8");

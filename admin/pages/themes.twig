@@ -12,7 +12,7 @@
                         {% if theme.name == site.theme %}
                         <img class="emblem theme_status" src="$theme_url/images/icons/success.svg" alt="Selected!" title="${ "Selected!" | translate }">
                         {% endif %}
-                        <a class="emblem module_author" href="$theme.info.url">
+                        <a class="emblem module_author" href="$theme.info.url" target="_blank">
                             <img src="$theme_url/images/icons/info.svg" alt="${ theme.info.url | escape }">
                         </a>
                         $theme.info.name {# translation is done in the controller #}

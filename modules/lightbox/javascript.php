@@ -1,10 +1,3 @@
-<?php
-    define('JAVASCRIPT', true);
-    require_once "../../includes/common.php";
-    error_reporting(0);
-    header("Content-Type: application/x-javascript");
-?>
-<!-- --><script>
         var ChyrpLightbox = {
             background: "<?php echo Config::current()->module_lightbox["background"]; ?>",
             spacing: Math.abs("<?php echo Config::current()->module_lightbox["spacing"]; ?>"),
@@ -84,7 +77,7 @@
                     $("<div>", {
                         "id": "ChyrpLightbox-bg",
                         "role": "img",
-                        "aria-label": "<?php echo __('Click or touch anywhere to return to the page.') ?>"
+                        "aria-label": "<?php echo __("Click or touch anywhere to return to the page.", "lightbox") ?>"
                     }).css(ChyrpLightbox.styles.bg).click(function(e) {
                         if (e.target === e.currentTarget)
                             ChyrpLightbox.hide();
@@ -125,4 +118,3 @@
             }
         }
         $(document).ready(ChyrpLightbox.init);
-<!-- --></script>

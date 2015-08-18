@@ -109,6 +109,11 @@
         }
 
         public function video_player($filename, $params = array(), $post) {
+            $trigger = Trigger::current();
+
+            if ($trigger->exists("video_player"))
+                return $trigger->call("video_player", $filename, $params, $post);
+
             $player = "\n".'<video controls>';
             $player.= "\n\t".__("Your web browser does not support the <code>video</code> element.", "video");
             $player.= "\n\t".'<source src="'.uploaded($filename).'" type="'.$this->video_type($filename).'">';

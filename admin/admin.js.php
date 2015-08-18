@@ -1,8 +1,8 @@
 <?php
     define('JAVASCRIPT', true);
-    require_once "common.php";
+    require_once "../includes/common.php";
     error_reporting(0);
-    header("Content-Type: application/x-javascript");
+    header("Content-Type: application/javascript");
     $route = Route::current(MainController::current());
 ?>
 <!-- --><script>
@@ -15,7 +15,7 @@
                     alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
             });
 
-            if (/(write)_/.test(Route.action))
+            if (/(write)_/.test(Route.action) || /(edit)_/.test(Route.action))
                 Write.init();
 
             if (Route.action == "modules" || Route.action == "feathers")
@@ -24,17 +24,22 @@
             if (Route.action == "new_user" || Route.action == "edit_user")
                 Users.init();
 
-            // Open help text in an iframe overlay
+            // Open help text in an overlay
             Help.init();
 
             // Interactive behaviour.
             toggle_options();
             toggle_all();
             validate_slug();
+            if (Route.action == "user_settings")
+                toggle_correspondence();
 
             // Confirmations for group actions.
-            if (Route.action == "edit_group") confirm_edit_group();
-            if (Route.action == "delete_group") confirm_delete_group();
+            if (Route.action == "edit_group")
+                confirm_edit_group();
+
+            if (Route.action == "delete_group")
+                confirm_delete_group();
         });
         var Route = {
             action: "<?php echo fix($_GET['action']); ?>"
@@ -45,7 +50,7 @@
         function toggle_all() {
             var all_checked = true;
 
-            $(document.createElement("label")).attr("for", "toggle").text("<?php echo __("Toggle All"); ?>").appendTo("#toggler");
+            $(document.createElement("label")).attr("for", "toggle").text("<?php echo __("Toggle All", "theme"); ?>").appendTo("#toggler");
             $(document.createElement("input")).attr({
                 type: "checkbox",
                 name: "toggle",
@@ -65,7 +70,8 @@
 
             // Some checkboxes are already checked when the page is loaded
             $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
-                if (!all_checked) return;
+                if (!all_checked)
+                    return;
                 all_checked = $(this).prop("checked");
             });
 
@@ -73,12 +79,14 @@
                 var action_all_checked = true;
 
                 $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
-                    if (!action_all_checked) return;
+                    if (!action_all_checked)
+                        return;
                     action_all_checked = $(this).prop("checked");
                 })
 
                 $("#toggle").parent().parent().find(":checkbox").not("#toggle").each(function(){
-                    if (!action_all_checked) return;
+                    if (!action_all_checked)
+                        return;
                     action_all_checked = $(this).prop("checked");
                 });
 
@@ -99,9 +107,9 @@
         function toggle_options() {
             if ($("#more_options").size()) {
                 if (Cookie.get("show_more_options") == "true")
-                    var more_options_text = "<?php echo __("&uarr; Fewer Options"); ?>";
+                    var more_options_text = "<?php echo __("&uarr; Fewer Options", "theme"); ?>";
                 else
-                    var more_options_text = "<?php echo __("More Options &darr;"); ?>";
+                    var more_options_text = "<?php echo __("More Options &darr;", "theme"); ?>";
 
                 $(document.createElement("a")).attr({
                     id: "more_options_link",
@@ -113,15 +121,25 @@
 
                 $("#more_options_link").click(function(){
                     if ($("#more_options").css("display") == "none") {
-                        $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
+                        $(this).empty().append("<?php echo __("&uarr; Fewer Options", "theme"); ?>");
                         Cookie.set("show_more_options", "true", 30);
                     } else {
-                        $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
+                        $(this).empty().append("<?php echo __("More Options &darr;", "theme"); ?>");
                         Cookie.destroy("show_more_options");
                     }
                     $("#more_options").slideToggle();
                 })
             }
+        }
+        function toggle_correspondence() {
+            $("#email_correspondence").click(function(){
+                if ($(this).prop("checked") == false )
+                    $("#email_activation").prop("checked", false);
+            });
+            $("#email_activation").click(function(){
+                if ($(this).prop("checked") == true )
+                    $("#email_correspondence").prop("checked", true);
+            });
         }
         function validate_slug() {
             $("input#slug").keyup(function(e){
@@ -133,13 +151,13 @@
         }
         function confirm_edit_group(msg) {
             $("form.confirm").submit(function(){
-                if (!confirm("<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?"); ?>"))
+                if (!confirm("<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>"))
                     return false;
             })
         }
         function confirm_delete_group(msg) {
             $("form.confirm").submit(function(){
-                if (!confirm("<?php echo __("You are a member of this group. Are you sure you want to delete it?"); ?>"))
+                if (!confirm("<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>"))
                     return false;
             })
         }
@@ -210,11 +228,14 @@
                 $("<div>", {
                     "role": "region",
                 }).addClass("overlay_background").append(
-                    [$("<iframe>", {
-                        "src": href,
+                    [$("<div>", {
                         "role": "contentinfo",
                         "aria-label": "<?php echo __("Help", "theme"); ?>"
-                    }).addClass("overlay_help"),
+                    }).addClass("overlay_foreground").load(href + "&ajax=1", null, function() {
+                        $(this).find("a").each(function() {
+                            $(this).attr("target","_blank"); // Force links to spawn a new viewport
+                        })
+                    }),
                     $("<img>", {
                         "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/close.svg",
                         "alt": "<?php echo __("Close", "theme"); ?>",
@@ -231,7 +252,8 @@
         }
         var Write = {
             init: function() {
-                this.sort_feathers();
+                if (/(write)_/.test(Route.action))
+                    this.sort_feathers();
 
                 // Insert buttons for ajax previews
                 $("*[data-preview]").each(function() {
@@ -257,15 +279,16 @@
                 // Make the selected tab the first tab
                 $("#sub_nav").children(".selected").detach().prependTo("#sub_nav");
 
-                // Collect feather names and prepare to serialize
                 var feathers = new Array();
                 $("#sub_nav").children("[id]").each(function() {
                     feathers[feathers.length] = $(this).attr("id");
                 });
-                var list = { list: feathers };
 
                 // Update feather order with current tab order
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", "action=reorder_feathers&"+ $.param(list));
+                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                    action: "reorder_feathers",
+                    list: feathers
+                });
             },
             ajax_previews: function(content, filter) {
                 $("<div>", {
@@ -274,20 +297,20 @@
                     [$("<div>", {
                         "role": "contentinfo",
                         "aria-label": "<?php echo __("Preview", "theme"); ?>"
-                    }).addClass("overlay_preview css_reset").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                    }).addClass("overlay_foreground").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
                             action: "preview",
                             content: content,
                             filter: filter
                     }, function() {
                         $(this).find("a").each(function() {
                             $(this).attr("target","_blank"); // Force links to spawn a new viewport
-                        } )
+                        })
                     }),
                     $("<img>", {
                         "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/close.svg",
                         "alt": "<?php echo __("Close", "theme"); ?>",
                         "role": "button",
-                        "aria-label": "<?php echo __("Close"); ?>"
+                        "aria-label": "<?php echo __("Close", "theme"); ?>"
                     }).addClass("overlay_close_gadget").click(function() {
                         $(this).parent().remove();
                     })]
@@ -412,7 +435,7 @@
                             if (Extend.extension.type == "module")
                                 Extend.check_errors();
 
-                            $(json.notifications).each(function(){
+                            $(json.notifications).each(function() {
                                 if (this == "") return
                                     alert(this.replace(/<([^>]+)>\n?/gm, ""));
                             });

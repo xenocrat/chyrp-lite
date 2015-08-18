@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-05-25 14:17+0000\n"
+"POT-Creation-Date: 2015-08-14 09:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,16 +17,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/layout.twig:53
+#: admin/admin.js.php:53
+msgid "Toggle All"
+msgstr ""
+
+#: admin/admin.js.php:110
+#: admin/admin.js.php:124
+msgid "&uarr; Fewer Options"
+msgstr ""
+
+#: admin/admin.js.php:112
+#: admin/admin.js.php:127
+msgid "More Options &darr;"
+msgstr ""
+
+#: admin/admin.js.php:154
+msgid "You are a member of this group. Are you sure the permissions are as you want them?"
+msgstr ""
+
+#: admin/admin.js.php:160
+msgid "You are a member of this group. Are you sure you want to delete it?"
+msgstr ""
+
+#: admin/admin.js.php:233
+msgid "Help"
+msgstr ""
+
+#: admin/admin.js.php:241
+#: admin/admin.js.php:243
+#: admin/admin.js.php:311
+#: admin/admin.js.php:313
+msgid "Close"
+msgstr ""
+
+#: admin/admin.js.php:263
+#: admin/admin.js.php:264
+msgid "Preview this field"
+msgstr ""
+
+#: admin/admin.js.php:299
+#: admin/pages/themes.twig:25
+msgid "Preview"
+msgstr ""
+
+#: admin/admin.js.php:445
+msgid "There was an error enabling the extension."
+msgstr ""
+
+#: admin/admin.js.php:447
+msgid "There was an error disabling the extension."
+msgstr ""
+
+#: admin/layout.twig:57
 msgid "Chyrp loves you."
 msgstr ""
 
-#: admin/layout.twig:54
+#: admin/layout.twig:58
 #, php-format
-msgid "Chyrp Lite v%s"
+msgid "Chyrp Lite &ldquo;%s&rdquo; v%s"
 msgstr ""
 
-#: admin/layout.twig:55
+#: admin/layout.twig:59
 msgid "Log out"
 msgstr ""
 
@@ -107,7 +158,7 @@ msgstr ""
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:67
 #: admin/pages/route_settings.twig:42
-#: admin/pages/user_settings.twig:40
+#: admin/pages/user_settings.twig:45
 msgid "Update"
 msgstr ""
 
@@ -243,7 +294,7 @@ msgstr ""
 
 #: admin/pages/edit_user.twig:14
 #: admin/pages/new_user.twig:38
-msgid "E-Mail"
+msgid "Email"
 msgstr ""
 
 #: admin/pages/edit_user.twig:18
@@ -365,9 +416,6 @@ msgstr ""
 
 #: admin/pages/general_settings.twig:23
 #: admin/pages/import.twig:28
-#: admin/pages/import.twig:53
-#: admin/pages/import.twig:109
-#: admin/pages/import.twig:145
 #: admin/partials/post_fields.twig:7
 msgid "(optional)"
 msgstr ""
@@ -377,7 +425,7 @@ msgid "Enter an alternate address here if you want your homepage URL to be diffe
 msgstr ""
 
 #: admin/pages/general_settings.twig:32
-msgid "Contact E-Mail Address"
+msgid "Contact Email Address"
 msgstr ""
 
 #: admin/pages/general_settings.twig:36
@@ -409,12 +457,12 @@ msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 
 #: admin/pages/import.twig:3
-#: admin/pages/import.twig:37
-#: admin/pages/import.twig:61
-#: admin/pages/import.twig:76
-#: admin/pages/import.twig:117
-#: admin/pages/import.twig:153
+#: admin/pages/import.twig:36
 msgid "Import"
+msgstr ""
+
+#: admin/pages/import.twig:6
+msgid "What would you like to import?"
 msgstr ""
 
 #: admin/pages/import.twig:10
@@ -434,64 +482,11 @@ msgid "Users .yaml File"
 msgstr ""
 
 #: admin/pages/import.twig:27
-#: admin/pages/import.twig:52
-#: admin/pages/import.twig:108
-#: admin/pages/import.twig:144
 msgid "What URL is used for embedded media?"
 msgstr ""
 
 #: admin/pages/import.twig:32
 msgid "Usually something like <code>http://example.com/uploads/</code>."
-msgstr ""
-
-#: admin/pages/import.twig:47
-msgid "eXtended .XML File"
-msgstr ""
-
-#: admin/pages/import.twig:57
-msgid "Usually something like <code>http://example.com/wp-content/uploads/</code>."
-msgstr ""
-
-#: admin/pages/import.twig:71
-msgid "Your Tumblr URL"
-msgstr ""
-
-#: admin/pages/import.twig:73
-msgid "Note: Audio tumbles cannot be imported."
-msgstr ""
-
-#: admin/pages/import.twig:86
-#: admin/pages/import.twig:127
-msgid "Host"
-msgstr ""
-
-#: admin/pages/import.twig:90
-#: admin/pages/import.twig:131
-msgid "Username"
-msgstr ""
-
-#: admin/pages/import.twig:94
-#: admin/pages/import.twig:135
-#: admin/pages/new_user.twig:24
-msgid "Password"
-msgstr ""
-
-#: admin/pages/import.twig:98
-#: admin/pages/import.twig:139
-msgid "Database"
-msgstr ""
-
-#: admin/pages/import.twig:102
-msgid "Table Prefix"
-msgstr ""
-
-#: admin/pages/import.twig:104
-msgid "(if any)"
-msgstr ""
-
-#: admin/pages/import.twig:113
-#: admin/pages/import.twig:149
-msgid "Usually something like <code>http://example.com/images/</code>."
 msgstr ""
 
 #: admin/pages/manage_groups.twig:3
@@ -685,6 +680,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: admin/pages/new_user.twig:24
+msgid "Password"
+msgstr ""
+
 #: admin/pages/new_user.twig:32
 msgid "Information"
 msgstr ""
@@ -726,7 +725,7 @@ msgid "Year submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:26
-msgid "(ex. 2007)"
+msgid "(e.g. 2007)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:27
@@ -734,7 +733,7 @@ msgid "Month submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:27
-msgid "(ex. 12)"
+msgid "(e.g. 12)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:28
@@ -742,7 +741,7 @@ msgid "Day submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:28
-msgid "(ex. 25)"
+msgid "(e.g. 25)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:29
@@ -750,7 +749,7 @@ msgid "Hour submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:29
-msgid "(ex. 03)"
+msgid "(e.g. 03)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:30
@@ -758,7 +757,7 @@ msgid "Minute submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:30
-msgid "(ex. 59)"
+msgid "(e.g. 59)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:31
@@ -766,7 +765,7 @@ msgid "Second submitted"
 msgstr ""
 
 #: admin/pages/route_settings.twig:31
-msgid "(ex. 30)"
+msgid "(e.g. 30)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:32
@@ -778,7 +777,7 @@ msgid "Post author (username)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:33
-msgid "(ex. Alex)"
+msgid "(e.g. Alex)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:34
@@ -786,7 +785,7 @@ msgid "The non-unique sanitized name"
 msgstr ""
 
 #: admin/pages/route_settings.twig:34
-msgid "(ex. this_is_clean)"
+msgid "(e.g. this_is_clean)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:35
@@ -794,7 +793,7 @@ msgid "The unique form of (clean)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:35
-msgid "(ex. this_one_is_taken_2)"
+msgid "(e.g. this_one_is_taken_2)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:36
@@ -802,7 +801,7 @@ msgid "The post's feather"
 msgstr ""
 
 #: admin/pages/route_settings.twig:36
-msgid "(ex. text)"
+msgid "(e.g. text)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:37
@@ -810,7 +809,7 @@ msgid "The plural form of the post's feather"
 msgstr ""
 
 #: admin/pages/route_settings.twig:37
-msgid "(ex. links)"
+msgid "(e.g. links)"
 msgstr ""
 
 #: admin/pages/themes.twig:3
@@ -829,10 +828,6 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: admin/pages/themes.twig:25
-msgid "Preview"
-msgstr ""
-
 #: admin/pages/user_settings.twig:3
 msgid "User Settings"
 msgstr ""
@@ -846,26 +841,34 @@ msgid "Allow people to register"
 msgstr ""
 
 #: admin/pages/user_settings.twig:14
-msgid "Activate by email"
+msgid "Email Correspondence"
 msgstr ""
 
 #: admin/pages/user_settings.twig:16
-msgid "Should users activate by email?"
+msgid "Allow the site to send email correspondence to users?"
 msgstr ""
 
 #: admin/pages/user_settings.twig:19
-msgid "Enable Captcha"
+msgid "Activate by email"
 msgstr ""
 
 #: admin/pages/user_settings.twig:21
-msgid "Use a Captcha module to prevent bots from registering."
+msgid "Should users activate by email?"
 msgstr ""
 
 #: admin/pages/user_settings.twig:24
+msgid "Enable Captcha"
+msgstr ""
+
+#: admin/pages/user_settings.twig:26
+msgid "Use a Captcha module to prevent bots from registering."
+msgstr ""
+
+#: admin/pages/user_settings.twig:29
 msgid "Default User Group"
 msgstr ""
 
-#: admin/pages/user_settings.twig:32
+#: admin/pages/user_settings.twig:37
 msgid "&#8220;Guest&#8221; Group"
 msgstr ""
 
@@ -902,17 +905,17 @@ msgstr ""
 msgid "Priority in pages list"
 msgstr ""
 
-#: admin/partials/page_fields.twig:38
+#: admin/partials/page_fields.twig:47
 msgid "Is this page public?"
 msgstr ""
 
-#: admin/partials/page_fields.twig:51
+#: admin/partials/page_fields.twig:60
 #: admin/partials/post_fields.twig:128
 #: admin/partials/post_fields.twig:137
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:55
+#: admin/partials/page_fields.twig:64
 #: admin/partials/post_fields.twig:132
 #: admin/partials/post_fields.twig:141
 msgid "Save"

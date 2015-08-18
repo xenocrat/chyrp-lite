@@ -78,8 +78,8 @@
             break;
 
         case "preview":
-            if (!$visitor->group->can("add_post") and !$visitor->group->can("add_draft") and !$visitor->group->can("add_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to preview content."));
+            if (!logged_in())
+                show_403(__("Access Denied"), __("You must be logged in to preview content."));
 
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 break;
@@ -100,23 +100,14 @@
 
             break;
 
-        case "organize_pages":
-            foreach ($_POST['parent'] as $id => $parent)
-                $sql->update("pages", array("id" => $id), array("parent_id" => $parent));
-
-            foreach ($_POST['page_list'] as $index => $page)
-                $sql->update("pages", array("id" => $page), array("list_order" => $index));
-
-            break;
-
         case "enable_module": case "enable_feather":
             $type = ($_POST['action'] == "enable_module") ? "module" : "feather" ;
 
-            if (!$visitor->group->can("change_settings"))
-                if ($type == "module")
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable modules.")."\"] }");
-                else
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable feathers.")."\"] }");
+            if (!$visitor->group->can("toggle_extensions"))
+                exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable extensions.")."\"] }");
+
+            if (empty($_POST["extension"]))
+                exit("{ \"notifications\": [\"".__("You did not specify an extension to enable.")."\"] }");
 
             if (($type == "module" and module_enabled($_POST['extension'])) or
                 ($type == "feather" and feather_enabled($_POST['extension'])))
@@ -165,11 +156,12 @@
         case "disable_module": case "disable_feather":
             $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;
 
-            if (!$visitor->group->can("change_settings"))
+            if (!$visitor->group->can("toggle_extensions"))
                 if ($type == "module")
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable modules.")."\"] }");
-                else
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable feathers.")."\"] }");
+                exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to disable extensions.")."\"] }");
+
+            if (empty($_POST["extension"]))
+                exit("{ \"notifications\": [\"".__("You did not specify an extension to disable.")."\"] }");
 
             if (($type == "module" and !module_enabled($_POST['extension'])) or
                 ($type == "feather" and !feather_enabled($_POST['extension'])))

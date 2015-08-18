@@ -520,49 +520,6 @@
             }
         }
 
-        public function import_wordpress_post($item, $post) {
-            if (!isset($item->category)) return;
-
-            $tags = array();
-            foreach ($item->category as $tag)
-                if (isset($tag->attributes()->domain) and $tag->attributes()->domain == "tag" and !empty($tag) and isset($tag->attributes()->nicename))
-                    $tags[strip_tags(trim($tag))] = sanitize(strip_tags(trim($tag)));
-
-            if (!empty($tags))
-                SQL::current()->insert("post_attributes",
-                                       array("name" => "tags",
-                                             "value" => self::tags_serialize($tags),
-                                             "post_id" => $post->id));
-        }
-
-        public function import_movabletype_post($array, $post, $link) {
-            $get_pointers = mysql_query("SELECT * FROM mt_objecttag WHERE objecttag_object_id = {$array["entry_id"]} ORDER BY objecttag_object_id ASC", $link) or error(__("Database Error"), mysql_error());
-            if (!mysql_num_rows($get_pointers))
-                return;
-
-            $tags = array();
-            while ($pointer = mysql_fetch_array($get_pointers)) {
-                $get_dirty_tag = mysql_query("SELECT tag_name, tag_n8d_id FROM mt_tag WHERE tag_id = {$pointer["objecttag_tag_id"]}", $link) or error(__("Database Error"), mysql_error());
-                if (!mysql_num_rows($get_dirty_tag)) continue;
-
-                $dirty_tag = mysql_fetch_array($get_dirty_tag);
-                $dirty = $dirty_tag["tag_name"];
-
-                $clean_tag = mysql_query("SELECT tag_name FROM mt_tag WHERE tag_id = {$dirty_tag["tag_n8d_id"]}", $link) or error(__("Database Error"), mysql_error());
-                if (mysql_num_rows($clean_tag))
-                    $clean = mysql_result($clean_tag, 0);
-                else
-                    $clean = $dirty;
-
-                $tags[$dirty] = $clean;
-            }
-
-            if (empty($tags))
-                return;
-
-            SQL::current()->insert("post_attributes", array("name" => "tags", "value" => self::tags_serialize($tags), "post_id" => $post->id));
-        }
-
         public function metaWeblog_getPost($struct, $post) {
             if (!isset($post->tags))
                 $struct['mt_tags'] = "";
@@ -592,32 +549,24 @@
             return $linked;
         }
 
-        public function post_list_related_attr($attr, $post) {
-            if (Route::current()->action != "view") return;
-            
-            $posts = array();
+        public function related_posts($ids, $post, $limit) {
             foreach ($post->tags as $key => $tag) {
                 $like = self::tags_name_match($key);
-                $posts = SQL::current()->query("SELECT DISTINCT __posts.id
-                          FROM __posts
-                          LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
-                            AND __post_attributes.name = 'tags'
-                            AND __posts.id != $post->id
-                          WHERE __post_attributes.value LIKE '$like'
-                          GROUP BY __posts.id
-                          ORDER BY __posts.created_at DESC
-                          LIMIT 5")->fetchAll();
+                $results = SQL::current()->query("SELECT DISTINCT __posts.id
+                                                  FROM __posts
+                                                  LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
+                                                    AND __post_attributes.name = 'tags'
+                                                    AND __posts.id != $post->id
+                                                  WHERE __post_attributes.value LIKE '$like'
+                                                  GROUP BY __posts.id
+                                                  ORDER BY __posts.created_at DESC
+                                                  LIMIT $limit")->fetchAll();
+                foreach ($results as $result)
+                    if (isset($result["id"]))
+                        $ids[] = $result["id"];
             }
 
-            $output = "\n".'<ul class="related_posts">';
-            $output.= "\n\t".'<h3>Related Posts:</h3>';
-            foreach ($posts as $p) {
-                $post = new Post($p['id']);
-                $output.= "\n\t".'<li><h5><a href="'.$post->url().'">'.$post->title().'</a></h5></li>';
-            }
-            $output.= "\n"."</ul>"."\n";
-
-            return $output;
+            return $ids;
         }
 
         public function post($post) {

@@ -3,7 +3,7 @@
     <div role="search" class="search_box">
       <form action="$site.url" method="get" accept-charset="utf-8">
         <input type="hidden" name="action" value="search" id="action">
-        <input type="text" id="search_field" name="query" value="{% if route.action == "search" %}${ GET.query | escape }{% endif %}" placeholder="${ "Search…" | translate }" title="${ "Search this blog" | translate }">
+        <input type="text" id="sidebar_search_field" name="query" value="{% if route.action == "search" %}${ GET.query | escape }{% endif %}" placeholder="${ "Search…" | translate }" title="${ "Search this blog" | translate }">
         <button type="submit" id="sidebar_search_submit">${ "Search" | translate }</button>
       </form>
     </div>
@@ -76,7 +76,18 @@ ${ trigger.call("sidebar") }
       {% endfor %}
     </ul>
     {% endif %}
-    {% if theme.recent_posts %}
+    {% if ( route.action == "view" ) and theme.related_posts(post) %}
+    <h4 id="label_related_posts">${ "Related Posts" | translate }</h4>
+    <ul role="menu" class="navigation sidebar_nav related_posts" aria-labelledby="label_related_posts">
+    {% for post in theme.related_posts(post) %}
+      {% if post.title %}
+      <li role="presentation">
+        <a role="menuitem" href="$post.url">${ post.title | normalize | truncate(30) }</a>
+      </li>
+      {% endif %}
+    {% endfor %}
+    </ul>
+    {% elseif theme.recent_posts %}
     <h4 id="label_recent_posts">${ "Recent Posts" | translate }</h4>
     <ul role="menu" class="navigation sidebar_nav recent_posts" aria-labelledby="label_recent_posts">
     {% for post in theme.recent_posts %}

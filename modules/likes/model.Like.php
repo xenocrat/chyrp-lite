@@ -29,7 +29,7 @@
 
             # post info
             $this->total_count = 0;
-            $this->post_id = isset($req["post_id"]) ? (int)(fix($req["post_id"])) : null ;
+            $this->post_id = isset($req["post_id"]) ? (int) (fix($req["post_id"])) : null ;
 
             # inits
             $this->cookieInit();
@@ -40,17 +40,18 @@
          * Adds a like to the database.
          */
         public function like() {
-          if (!Visitor::current()->group->can("like_post"))
-              show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts.", "likes"));
+            if (!Visitor::current()->group->can("like_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts.", "likes"));
 
-        	if ($this->action == "like" and $this->post_id > 0) {
-            	SQL::current()->insert("likes",
-                                 array("post_id" => $this->post_id,
-                                       "user_id" => $this->user_id,
-                                       "timestamp" => datetime(),
-                                       "session_hash" => $this->session_hash));
-        	}
-        	else error(__("Error"), __("Invalid action or post ID.", "likes"));
+            if ($this->action == "like" and $this->post_id > 0) {
+            SQL::current()->insert("likes",
+                                   array("post_id" => $this->post_id,
+                                         "user_id" => $this->user_id,
+                                         "timestamp" => datetime(),
+                                         "session_hash" => $this->session_hash));
+            }
+            else
+                error(__("Error"), __("Invalid action or post ID.", "likes"));
         }
 
         /**
@@ -58,32 +59,34 @@
          * Removes a like from the database.
          */
         public function unlike() {
-          if (!Visitor::current()->group->can("unlike_post"))
-              show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts.", "likes"));
+            if (!Visitor::current()->group->can("unlike_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts.", "likes"));
 
             if ($this->action == "unlike" and $this->post_id > 0) {
-            	SQL::current()->delete("likes", array("post_id" => $this->post_id,
-                                                      "session_hash" => $this->session_hash),
-                                                array("LIMIT" => 1));
-        	}
-        	else error(__("Error"), __("Invalid action or post ID.", "likes"));
+                SQL::current()->delete("likes",
+                                       array("post_id" => $this->post_id,
+                                             "session_hash" => $this->session_hash),
+                                       array("LIMIT" => 1));
+            }
+            else
+                error(__("Error"), __("Invalid action or post ID.", "likes"));
         }
 
         public function fetchPeople() {
-        	$people = SQL::current()->select("likes",
-        	                                 "session_hash",
-        	                                 array("post_id" => $this->post_id))->fetchAll();
+            $people = SQL::current()->select("likes",
+                                             "session_hash",
+                                             array("post_id" => $this->post_id))->fetchAll();
 
-        	$this->total_count = count($people);
-        	return $people;
+            $this->total_count = count($people);
+            return $people;
         }
 
         public function fetchCount(){
             $count = SQL::current()->count("likes",
                                      array("post_id" => $this->post_id));
 
-        	$this->total_count = $count;
-        	return $count;
+            $this->total_count = $count;
+            return $count;
         }
 
         public function cookieInit() {
@@ -93,22 +96,21 @@
                 if ($this->action == null)
                     $this->session_hash = null;
                 else {
-                    $time = time();	
+                    $time = time(); 
                     setcookie("likes_sh", md5($this->getIP().$time), $time + 31104000, "/");
-                    # print($_SERVER["REMOTE_ADDR"]);
-                    # print(md5($_SERVER["REMOTE_ADDR"]));
                     $this->session_hash = md5($this->getIP().$time);
                 }
-            else $this->session_hash = fix($_COOKIE["likes_sh"]);
+            else
+                $this->session_hash = fix($_COOKIE["likes_sh"]);
         }
 
         private function getIP() {
-        	if (isset($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) === TRUE)
-            	return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
-        	elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) === TRUE)
-            	return $_SERVER['HTTP_X_FORWARDED_FOR'];
-        	else return $_SERVER['REMOTE_ADDR'];
-        
+            if (isset($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) === TRUE)
+                return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+            elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) === TRUE)
+                return $_SERVER['HTTP_X_FORWARDED_FOR'];
+            else
+                return $_SERVER['REMOTE_ADDR'];
         }
 
         static function install() {

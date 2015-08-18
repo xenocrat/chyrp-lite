@@ -42,7 +42,7 @@ body {                                              font-family: "Open Sans webf
                                                     background-color: #fcfbfa;
                                                     margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
-                                                    max-width: 1800px }
+                                                    max-width: 1200px }
 p {                                                 margin: 0em 0em 1em 0em }
     p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                                font-size: 2em;
@@ -50,7 +50,7 @@ h1 {                                                font-size: 2em;
                                                     text-transform: none;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h1.banner {                                     font-size: 0.75em;
                                                     margin: 1.33em 0em }
 h2 {                                                font-size: 1.5em;
@@ -58,14 +58,14 @@ h2 {                                                font-size: 1.5em;
                                                     text-transform: none;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h2.post_title {                                 text-align: center }
 h3 {                                                font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h3.ribbon {                                     margin: 0em }
     h3.archive {                                    margin-top: 1em;
                                                     clear: both }
@@ -74,7 +74,7 @@ h4 {                                                font-size: 0.75em;
                                                     text-transform: none;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h4.yearly {                                     font-size: 1.33em;
                                                     text-align: center;
                                                     padding-bottom: 0.5em;
@@ -86,7 +86,7 @@ h5, h6 {                                            font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1em }
+                                                    line-height: 1.2em }
     h6.post_byline {                                font-weight: normal;
                                                     font-style: italic;
                                                     font-size: 0.75em;
@@ -210,6 +210,7 @@ form, fieldset {                                    margin: 0em;
     div.search_box > form {                         display: inline-block;
                                                     position: relative }
     form.inline_edit {                              width: 100%;
+                                                    max-width: 1024px;
                                                     clear: both;
                                                     box-sizing: border-box;
                                                     background-color: #fffefd;
@@ -225,7 +226,7 @@ form, fieldset {                                    margin: 0em;
 input {                                             box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
-                                                    max-width: 640px;
+                                                    max-width: 960px;
                                                     margin: 0.5em 0em;
                                                     padding: 6px 4px;
                                                     background: none;
@@ -247,7 +248,8 @@ input:focus {                                       outline: none;
     input:-ms-input-placeholder {                   color: #c6ccc8 }
     input:input-placeholder {                       color: #c6ccc8 }
     input.error {                                   background-color: #ffb2b2 }
-    input#search_field {                            display: inline;
+    input#search_field,
+    input#sidebar_search_field {                    display: inline;
                                                     margin: 0em;
                                                     padding-right: 34px }
     div.search_box input[type='text'] {             width: 100% }
@@ -255,31 +257,30 @@ input:focus {                                       outline: none;
     button#sidebar_search_submit {                  display: block;
                                                     position: absolute;
                                                     width: 34px;
-                                                    top: 0px;
+                                                    top: 1px;
                                                     bottom: 1px;
-                                                    right: 0px;
-                                                    border: none;
-                                                    margin: 0em;
-                                                    padding: 0em;
+                                                    right: 1px;
                                                     border: none;
                                                     border-radius: 0em;
+                                                    margin: 0em;
+                                                    padding: 0em;
                                                     background: transparent url(../images/search.svg) no-repeat center;
                                                     overflow: hidden;
                                                     color: transparent }
     button#search_submit:focus,
-    button#sidebar_search_submit:focus {            background-image: url(../images/search_alt.svg);
+    button#sidebar_search_submit:focus {            background-color: #c6ccc8;
                                                     outline: none }
     form.inline_edit input {                        width: 100% }
 select {                                            box-sizing: border-box;
                                                     display: block;
                                                     width: 320px;
-                                                    max-width: 640px;
+                                                    max-width: 960px;
                                                     margin: 0.5em 0em }
 textarea {                                          box-sizing: border-box;
                                                     display: block;
                                                     width: 100%;
                                                     height: 160px;
-                                                    max-width: 640px;
+                                                    max-width: 960px;
                                                     font: inherit;
                                                     font-size: inherit;
                                                     color: #4e5a66;
@@ -375,7 +376,7 @@ label {                                             display: block;
                                                     position: relative;
                                                     box-sizing: border-box;
                                                     width: 100%;
-                                                    max-width: 1240px;
+                                                    max-width: 1024px;
                                                     clear: both;
                                                     background-color: #fffefd;
                                                     margin: 0rem auto 2rem auto;
@@ -432,7 +433,7 @@ article > footer {                                  display: block;
 article.video video {                               width: 100%;
                                                     max-width: 1280px }
 article.audio audio {                               width: 100%;
-                                                    max-width: 640px }                  
+                                                    max-width: 960px }                  
 a {                                                 border-bottom: 1px transparent solid;
                                                     transition-property: color, border;
                                                     transition-duration: 250ms }
@@ -561,7 +562,8 @@ img {                                               border-style: none;
                                                     border: 0.1em solid #c6ccc8 }
 }
 
-@media handheld, screen and (max-width: 960px) {
+@media screen and (max-width: 960px) {
+    html {                                          font-size: 4.2mm }
     body {                                          margin: 0rem 16px 1rem 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }
@@ -612,7 +614,7 @@ img {                                               border-style: none;
                                                     padding: 1rem 0rem }
 }
 
-@media handheld, screen and (max-width: 480px) {
+@media screen and (max-width: 480px) {
     ul.archive li {                                 margin-left: 0em }
     ul.archive article.post.archive {               box-sizing: border-box;
                                                     width: 100%;
@@ -621,7 +623,7 @@ img {                                               border-style: none;
     div.metadata, div.doaction {                    text-align: center }
 }
 
-@media print and (min-width: 297mm), screen and (min-width: 1600px) {
+@media print and (min-width: 297mm), screen and (min-width: 1200px) {
     .columnized {                                   -moz-column-count: 2;
                                                     -moz-column-gap: 2em;
                                                     -webkit-column-count: 2;

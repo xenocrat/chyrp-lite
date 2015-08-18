@@ -173,11 +173,8 @@
          *     $updated_at - The new comment's "last updated" timestamp.
          */
         static function add($body, $author, $url, $email, $ip, $agent, $status, $post, $user_id, $parent, $notify, $created_at = null, $updated_at = null) {
-            if (!empty($url)) # Add the http:// if it isn't there.
-                if (!@parse_url($url, PHP_URL_SCHEME))
-                    $url = "http://".$url;
-
             $ip = ip2long($ip);
+
             if ($ip === false)
                 $ip = 0;
 
@@ -229,12 +226,12 @@
 
         public function editable(User $user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("edit_comment") or ($user->group->can("edit_own_comment") and $user->id == $this->user_id));
+            return ($user->group->can("edit_comment") or ($user->group->can("edit_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
         }
 
         public function deletable(User $user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("delete_comment") or ($user->group->can("delete_own_comment") and $user->id == $this->user_id));
+            return ($user->group->can("delete_comment") or ($user->group->can("delete_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
         }
 
         /**
@@ -277,18 +274,20 @@
 
         public function author_link() {
             if (!isset($this->id))
-                return __("a commentator", "comments");
-            if ($this->author_url != "") # If a URL is set
+                return __("Anon", "comments");
+
+            if (is_url($this->author_url))
                 return '<a href="'.fix($this->author_url, true).'">'.$this->author.'</a>';
-            else # If not, just return their name
+            else
                 return $this->author;
         }
 
         static function user_can($post) {
             $visitor = Visitor::current();
-            if (!$visitor->group->can("add_comment")) return false;
+            if (!$visitor->group->can("add_comment"))
+                return false;
 
-            # assume allowed comments by default
+            # Assume allowed comments by default
             return empty($post->comment_status) or
                    !($post->comment_status == "closed" or
                     ($post->comment_status == "registered_only" and !logged_in()) or
@@ -310,23 +309,15 @@
          *     $post - The new comment post ID
          */
         static function notify($author, $body, $post) {
-            $post = new Post($post);
-            $emails = SQL::current()->select("comments",
-                                             "author_email",
-                                             array("notify" => 1, "post_id" => $post->id))->fetchAll();
+            $notifications = SQL::current()->select("comments",
+                                                    "author_email",
+                                                    array("notify" => 1,
+                                                          "post_id" => $post))->fetchAll();
 
-            $list = array();
-            foreach ($emails as $email)
-                $list[] = $email["author_email"];
-
-            $config = Config::current();
-
-            $to = implode(", ", $list);
-            $subject = $config->name.__("New Comment");
-            $message = __("There is a new comment at ").$post->url()."\n Poster: ".fix($author)."\n Message: ".fix($body);
-            $headers = "From:".$config->email."\r\n" .
-                                   "Reply-To:".$config->email."\r\n".
-                                   "X-Mailer: PHP/".phpversion();
-            $sent = email($to, $subject, $message, $headers);
+            foreach ($notifications as $notification)
+                correspond("comment", array("author" => $author,
+                                            "body" => $body,
+                                            "post" => $post,
+                                            "to" => $notification["author_email"]));
         }
     }

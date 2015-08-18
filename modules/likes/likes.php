@@ -68,14 +68,11 @@
             return $styles;
         }
 
-        static function scripts($scripts) {
-            $scripts[] = Config::current()->chyrp_url."/modules/likes/javascript.php";
-            return $scripts;
+        static function javascript() {
+            include MODULES_DIR."/likes/javascript.php";
         }
 
         static function ajax_like() {
-            header("Content-type: text/json");
-
             if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
                 exit();
             
@@ -100,7 +97,7 @@
                 elseif ($like->total_count == 1)
                     $likeText = _f("You like this.", $like->total_count, "likes");
                 else
-                    $likeText = sprintf(_p("You and %d person likes this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
+                    $likeText = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
 
                 $responseObj["likeText"] = $likeText;
             }
@@ -108,12 +105,12 @@
                 $responseObj["success"] = false;
                 $responseObj["error_txt"] = $e->getMessage();
             }
+
+            header("Content-type: application/json; charset=utf-8");
             echo json_encode($responseObj);
         }
 
         static function ajax_unlike() {
-            header("Content-type: text/json");
-
             if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
                 exit();
             
@@ -145,6 +142,8 @@
                 $responseObj["success"] = false;
                 $responseObj["error_txt"] = $e->getMessage();
             }
+
+            header("Content-type: application/json; charset=utf-8");
             echo json_encode($responseObj);
         }
 
@@ -224,7 +223,7 @@
                 elseif ($like->total_count == 1)
                     $returnStr.= _f("You like this.", $like->total_count, "likes");
                 else
-                    $returnStr.= sprintf(_p("You and %d person likes this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
+                    $returnStr.= sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
                 $returnStr.= "</span>";
 
             }
@@ -255,4 +254,45 @@
             $like = new Like(array("post_id" => $post->id));
             echo '<td class="post_likes">'.$like->fetchCount().'</td>';
         }
+
+        public function import_chyrp_post($entry, $post) {
+            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
+
+            if (!isset($chyrp->like))
+                return;
+
+            foreach ($chyrp->like as $like) {
+                $timestamp = $like->children("http://www.w3.org/2005/Atom")->published;
+                $session_hash = $like->children("http://chyrp.net/export/1.0/")->hash;
+                $login = $like->children("http://chyrp.net/export/1.0/")->login;
+
+                $user = new User(array("login" => (string) $login));
+
+                SQL::current()->insert("likes",
+                                 array("post_id" => $post->id,
+                                       "user_id" => (!$user->no_results) ? $user->id : 0,
+                                       "timestamp" => $timestamp,
+                                       "session_hash" => $session_hash));
+            }
+        }
+
+        public function posts_export($atom, $post) {
+            $likes = SQL::current()->select("likes",
+                                             "*",
+                                             array("post_id" => $post->id))->fetchAll();
+
+            foreach ($likes as $like) {
+                $user = new User($like["user_id"]);
+
+                $atom.= "        <chyrp:like>\r";
+                if (!$user->no_results)
+                $atom.= '            <chyrp:login>'.$user->login.'</chyrp:login>'."\r";
+                $atom.= '            <published>'.$like["timestamp"].'</published>'."\r";
+                $atom.= '            <chyrp:hash>'.$like["session_hash"].'</chyrp:hash>'."\r";
+                $atom.= "        </chyrp:like>\r";
+            }
+
+            return $atom;
+        }
+
     }

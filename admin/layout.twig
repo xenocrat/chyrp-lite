@@ -7,10 +7,10 @@
         <title>$site.name: {% block title %}$title{% endblock %}</title>
         <!-- Styles -->
         <link rel="shortcut icon" href="$site.url/favicon.ico">
-        <link rel="stylesheet" href="$theme_url/style.css" type="text/css" media="all">
+        <link rel="stylesheet" href="$theme_url/layout.css" type="text/css" media="all">
         <!-- JavaScripts -->
         <script src="$site.chyrp_url/includes/lib/gz.php?file=common.js" type="text/javascript" charset="utf-8"></script>
-        <script src="$site.chyrp_url/includes/admin.js.php?action=$route.action" type="text/javascript" charset="utf-8"></script>
+        <script src="$site.chyrp_url/admin/admin.js.php?action=$route.action" type="text/javascript" charset="utf-8"></script>
 ${ trigger.call("admin_head") }
     </head>
     <body role="document">
@@ -55,7 +55,7 @@ ${ trigger.call("admin_head") }
         </div>
         <div id="footer" role="contentinfo">
             <img class="logo" src="$theme_url/images/chyrp-lite.svg" alt="${ "Chyrp loves you." | translate }">
-            <small class="metadata">${ "Chyrp Lite v%s" | translate | format(version) }</small>
+            <small class="metadata">${ "Chyrp Lite &ldquo;%s&rdquo; v%s" | translate | format(codename, version) }</small>
             <a id="logout" class="button" href="{% url "/?action=logout" %}">${ "Log out" | translate }</a>
         </div>
     </body>

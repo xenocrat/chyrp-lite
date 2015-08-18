@@ -36,8 +36,7 @@
             return $navs;
         }
 
-        static function scripts($scripts) {
-            $scripts[] = Config::current()->chyrp_url."/modules/lightbox/javascript.php";
-            return $scripts;
+        static function javascript() {
+            include MODULES_DIR."/lightbox/javascript.php";
         }
     }

@@ -9,7 +9,7 @@
                 {% for safename, feather in enabled_feathers | items %}
                 <li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
-                        <a class="emblem feather_url" href="$feather.url">
+                        <a class="emblem feather_url" href="$feather.url" target="_blank">
                             <img src="$theme_url/images/icons/info.svg" alt="${ feather.url | escape }">
                         </a>
                         $feather.name {# translation is done in the controller #}
@@ -36,7 +36,7 @@
                 {% for safename, feather in disabled_feathers | items %}
                 <li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
                     <h3>
-                        <a class="emblem feather_url" href="$feather.url">
+                        <a class="emblem feather_url" href="$feather.url" target="_blank">
                             <img src="$theme_url/images/icons/info.svg" alt="${ feather.url | escape }">
                         </a>
                         $feather.name {# translation is done in the controller #}

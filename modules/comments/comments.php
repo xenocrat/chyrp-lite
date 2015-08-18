@@ -67,12 +67,30 @@
 
         static function route_add_comment() {
             $post = new Post($_POST['post_id'], array("drafts" => true));
+
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
 
-            if (empty($_POST['body']))   error(__("Error"), __("Message can't be blank.", "comments"));
-            if (empty($_POST['author'])) error(__("Error"), __("Author can't be blank.", "comments"));
-            if (empty($_POST['email']))  error(__("Error"), __("E-Mail address can't be blank.", "comments"));
+            if (empty($_POST['body']))
+                error(__("Error"), __("Message can't be blank.", "comments"));
+
+            if (empty($_POST['author']))
+                error(__("Error"), __("Author can't be blank.", "comments"));
+
+            if (empty($_POST['email']))
+                error(__("Error"), __("Email address can't be blank.", "comments"));
+
+            if (!is_email($_POST['email']))
+                error(__("Error"), __("Invalid email address.", "comments"));
+
+            if (!empty($_POST['url']) and !is_url($_POST['url']))
+                error(__("Error"), __("Invalid website URL.", "comments"));
+
+            if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
+                error(__("Error"), __("Incorrect captcha code.", "comments"));
+
+            if (!empty($_POST['author_url']))
+                $_POST['author_url'] = add_scheme($_POST['author_url']);
 
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) !empty($_POST['notify']));
@@ -94,6 +112,26 @@
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
+            if (empty($_POST['body']))
+                error(__("Error"), __("Message can't be blank.", "comments"));
+
+            if (empty($_POST['author']))
+                error(__("Error"), __("Author can't be blank.", "comments"));
+
+            if (empty($_POST['author_email']))
+                error(__("Error"), __("Email address can't be blank.", "comments"));
+
+            if (!is_email($_POST['author_email']))
+                error(__("Error"), __("Invalid email address.", "comments"));
+
+            if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
+                error(__("Error"), __("Invalid website URL.", "comments"));
+
+            if (!empty($_POST['author_url']))
+                $_POST['author_url'] = add_scheme($_POST['author_url']);
+
+            fallback($notify, (int) !empty($_POST['notify']));
+
             $visitor = Visitor::current();
             $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
             $created_at = ($visitor->group->can("edit_comment")) ? datetime($_POST['created_at']) : $comment->created_at ;
@@ -102,7 +140,7 @@
                              $_POST['author_url'],
                              $_POST['author_email'],
                              $status,
-                             $_POST['notify'],
+                             $notify,
                              $created_at);
 
             if (isset($_POST['ajax']))
@@ -456,9 +494,8 @@
             echo '<td class="post_comments"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
         }
 
-        static function scripts($scripts) {
-            $scripts[] = Config::current()->chyrp_url."/modules/comments/javascript.php";
-            return $scripts;
+        static function javascript() {
+            include MODULES_DIR."/comments/javascript.php";
         }
 
         static function ajax() {
@@ -499,30 +536,39 @@
                         }
 
                         $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
+                        header("Content-type: application/json; charset=utf-8");
                         echo json_encode($responseObj);
                     }
                     break;
+
                 case "show_comment":
                     $comment = new Comment($_POST['comment_id']);
                     $trigger->call("show_comment", $comment);
                     $main->display("content/comment", array("comment" => $comment));
                     break;
+
                 case "delete_comment":
                     $comment = new Comment($_POST['id']);
                     if ($comment->deletable())
                         Comment::delete($_POST['id']);
+
                     break;
+
                 case "edit_comment":
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
+
                     if ($comment->editable())
                         $main->display("forms/comment/edit", array("comment" => $comment));
+
                     break;
             }
         }
 
         public function import_chyrp_post($entry, $post) {
             $chyrp = $entry->children("http://chyrp.net/export/1.0/");
-            if (!isset($chyrp->comment)) return;
+
+            if (!isset($chyrp->comment))
+                return;
 
             $sql = SQL::current();
 
@@ -545,72 +591,6 @@
                              $post,
                              ($user_id ? $user_id : 0));
             }
-        }
-
-        static function import_wordpress_post($item, $post) {
-            $wordpress = $item->children("http://wordpress.org/export/1.0/");
-            if (!isset($wordpress->comment)) return;
-
-            foreach ($wordpress->comment as $comment) {
-                $comment = $comment->children("http://wordpress.org/export/1.0/");
-                fallback($comment->comment_content, "");
-                fallback($comment->comment_author, "");
-                fallback($comment->comment_author_url, "");
-                fallback($comment->comment_author_email, "");
-                fallback($comment->comment_author_IP, "");
-
-                Comment::add($comment->comment_content,
-                             $comment->comment_author,
-                             $comment->comment_author_url,
-                             $comment->comment_author_email,
-                             $comment->comment_author_IP,
-                             "",
-                             ((isset($comment->comment_approved) and $comment->comment_approved == "1") ? "approved" : "denied"),
-                             $comment->comment_date,
-                             null,
-                             $post,
-                             0);
-            }
-        }
-
-        static function import_textpattern_post($array, $post, $link) {
-            $get_comments = mysql_query("SELECT * FROM {$_POST['prefix']}txp_discuss WHERE parentid = {$array["ID"]} ORDER BY discussid ASC", $link) or error(__("Database Error"), mysql_error());
-
-            while ($comment = mysql_fetch_array($get_comments)) {
-                $translate_status = array(-1 => "spam",
-                                          0 => "denied",
-                                          1 => "approved");
-                $status = str_replace(array_keys($translate_status), array_values($translate_status), $comment["visible"]);
-
-                Comment::add($comment["message"],
-                             $comment["name"],
-                             $comment["web"],
-                             $comment["email"],
-                             $comment["ip"],
-                             "",
-                             $status,
-                             $comment["posted"],
-                             null,
-                             $post,
-                             0);
-            }
-        }
-
-        static function import_movabletype_post($array, $post, $link) {
-            $get_comments = mysql_query("SELECT * FROM mt_comment WHERE comment_entry_id = {$array["entry_id"]} ORDER BY comment_id ASC", $link) or error(__("Database Error"), mysql_error());
-
-            while ($comment = mysql_fetch_array($get_comments))
-                Comment::add($comment["comment_text"],
-                             $comment["comment_author"],
-                             $comment["comment_url"],
-                             $comment["comment_email"],
-                             $comment["comment_ip"],
-                             "",
-                             ($comment["comment_visible"] ? "approved" : "denied"),
-                             $comment["comment_created_on"],
-                             $comment["comment_modified_on"],
-                             $post,
-                             0);
         }
 
         static function view_feed($context) {
@@ -742,7 +722,8 @@
         }
 
         public function determine_action($action) {
-            if ($action != "manage") return;
+            if ($action != "manage")
+                return;
 
             if (Comment::any_editable() or Comment::any_deletable())
                 return "manage_comments";
@@ -758,5 +739,17 @@
                 return "(0)";
             else
                 return QueryBuilder::build_list($_SESSION['comments']);
+        }
+
+        public function correspond_comment($params) {
+            $post = new Post($params["post"]);
+
+            $params["subject"] = _f("New Comment at %s", Config::current()->name);
+            $params["message"] = _f("%s commented on a blog post:", fix($params["author"])).
+                                 "\n".
+                                 $post->url().
+                                 "\n\n".
+                                 '"'.truncate(strip_tags($params["body"])).'"';
+            return $params;
         }
     }

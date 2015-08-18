@@ -1,0 +1,181 @@
+# Chyrp Lite Translation File.
+# Copyright (C) 2015 xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2015-08-14 09:20+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/importers/importers.php:11
+#: modules/importers/importers.php:170
+#: modules/importers/importers.php:307
+#: modules/importers/importers.php:394
+msgid "You do not have sufficient privileges to import content."
+msgstr ""
+
+#: modules/importers/importers.php:20
+#: modules/importers/importers.php:183
+msgid "Missing Feather"
+msgstr ""
+
+#: modules/importers/importers.php:20
+msgid "Importing from WordPress requires the Text feather to be installed and enabled."
+msgstr ""
+
+#: modules/importers/importers.php:23
+msgid "You must select a WordPress export file."
+msgstr ""
+
+#: modules/importers/importers.php:66
+msgid "The file does not seem to be a valid WordPress export file."
+msgstr ""
+
+#: modules/importers/importers.php:159
+msgid "WordPress content successfully imported!"
+msgstr ""
+
+#: modules/importers/importers.php:183
+msgid "Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled."
+msgstr ""
+
+#: modules/importers/importers.php:186
+msgid "Invalid Tumblr URL."
+msgstr ""
+
+#: modules/importers/importers.php:200
+msgid "Could not retrieve content from the Tumblr URL. "
+msgstr ""
+
+#: modules/importers/importers.php:295
+msgid "Tumblr content successfully imported!"
+msgstr ""
+
+#: modules/importers/importers.php:316
+#: modules/importers/importers.php:403
+msgid "Host cannot be empty."
+msgstr ""
+
+#: modules/importers/importers.php:319
+#: modules/importers/importers.php:406
+msgid "Username cannot be empty."
+msgstr ""
+
+#: modules/importers/importers.php:322
+#: modules/importers/importers.php:409
+msgid "Password cannot be empty."
+msgstr ""
+
+#: modules/importers/importers.php:325
+#: modules/importers/importers.php:412
+msgid "Database cannot be empty."
+msgstr ""
+
+#: modules/importers/importers.php:330
+msgid "Could not connect to the TextPattern database."
+msgstr ""
+
+#: modules/importers/importers.php:337
+#: modules/importers/importers.php:424
+#: modules/importers/importers.php:449
+msgid "Database Error"
+msgstr ""
+
+#: modules/importers/importers.php:381
+msgid "TextPattern content successfully imported!"
+msgstr ""
+
+#: modules/importers/importers.php:417
+msgid "Could not connect to the MovableType database."
+msgstr ""
+
+#: modules/importers/importers.php:501
+msgid "MovableType content successfully imported!"
+msgstr ""
+
+#: modules/importers/importers.php:512
+msgid "eXtended .XML File"
+msgstr ""
+
+#: modules/importers/importers.php:517
+#: modules/importers/importers.php:573
+#: modules/importers/importers.php:609
+msgid "What URL is used for embedded media?"
+msgstr ""
+
+#: modules/importers/importers.php:518
+#: modules/importers/importers.php:574
+#: modules/importers/importers.php:610
+msgid "(optional)"
+msgstr ""
+
+#: modules/importers/importers.php:522
+msgid "Usually something like <code>http://example.com/wp-content/uploads/</code>."
+msgstr ""
+
+#: modules/importers/importers.php:526
+#: modules/importers/importers.php:541
+#: modules/importers/importers.php:582
+#: modules/importers/importers.php:618
+msgid "Import"
+msgstr ""
+
+#: modules/importers/importers.php:536
+msgid "Your Tumblr URL"
+msgstr ""
+
+#: modules/importers/importers.php:538
+msgid "Note: Audio tumbles cannot be imported."
+msgstr ""
+
+#: modules/importers/importers.php:551
+#: modules/importers/importers.php:592
+msgid "Host"
+msgstr ""
+
+#: modules/importers/importers.php:555
+#: modules/importers/importers.php:596
+msgid "Username"
+msgstr ""
+
+#: modules/importers/importers.php:559
+#: modules/importers/importers.php:600
+msgid "Password"
+msgstr ""
+
+#: modules/importers/importers.php:563
+#: modules/importers/importers.php:604
+msgid "Database"
+msgstr ""
+
+#: modules/importers/importers.php:567
+msgid "Table Prefix"
+msgstr ""
+
+#: modules/importers/importers.php:569
+msgid "(if any)"
+msgstr ""
+
+#: modules/importers/importers.php:578
+#: modules/importers/importers.php:614
+msgid "Usually something like <code>http://example.com/images/</code>."
+msgstr ""
+
+#: modules/importers/info.php:3
+msgid "Importers"
+msgstr ""
+
+#: modules/importers/info.php:6
+msgid "Adds additional import options for Wordpress, MovableType, TextPattern, and Tumblr."
+msgstr ""
+
