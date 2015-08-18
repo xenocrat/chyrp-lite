@@ -164,7 +164,7 @@
             }
         </style>
     </head>
-    <body role="document">
+    <body>
         <div class="window">
             <h1><?php echo $title; ?></h1>
             <div role="alert" class="message">
