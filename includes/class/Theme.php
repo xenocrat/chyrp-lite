@@ -347,7 +347,7 @@
             $pagefeedurl = $config->url.$request.$append;
             $links = array(array("href" => $mainfeedurl, "type" => "application/atom+xml", "title" => $config->name));
 
-            if ((MainController::current()->context["posts"]) and ($pagefeedurl != $mainfeedurl))
+            if (array_key_exists("posts", MainController::current()->context) and ($pagefeedurl != $mainfeedurl))
                 $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml");
 
             # Ask modules to pitch in by adding their own <link> tag items to $links.

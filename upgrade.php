@@ -1555,7 +1555,7 @@
             }
         </style>
     </head>
-    <body role="document">
+    <body>
         <div class="window">
 <?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or isset($_GET['task']) == "upgrade") : ?>
             <pre role="status" class="pane"><?php

@@ -596,7 +596,7 @@
             })
         </script>
     </head>
-    <body role="document">
+    <body>
         <?php foreach ($errors as $error): ?>
         <div role="alert" class="error"><?php echo $error; ?></div>
         <?php endforeach; ?>
