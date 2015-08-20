@@ -1,11 +1,9 @@
 <?php
-    if (!class_exists("MainController")) {
-        if (defined("INCLUDES_DIR")) {
-            require INCLUDES_DIR."/controller/Main.php";
-        } else {
-            header("Status: 403"); exit("Access denied."); # Undefined constants: xss protection.
-        }
-    }
+    if (!defined('DEBUG'))
+        exit("Access Denied."); # Direct access is verboten.
+
+    if (!class_exists("MainController"))
+        require INCLUDES_DIR."/controller/Main.php";
 
     if (class_exists("Route"))
         Route::current(MainController::current());
@@ -177,7 +175,7 @@
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
-            <?php if (class_exists("Route") and !logged_in() and $body != __("Route was initiated without a Controller.")): ?>
+            <?php if (class_exists("Route") and !logged_in() and $body != __("Route was initiated without a Controller.") and defined('ADMIN') and ADMIN): ?>
                 <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
             </div>
