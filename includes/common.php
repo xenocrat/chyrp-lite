@@ -38,6 +38,10 @@
      *     without prior written authorization.
      */
 
+    # Constant: DEBUG
+    # Should Chyrp use debugging processes?
+    define('DEBUG', true);
+
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
     define('CHYRP_VERSION', "2015.06");
@@ -45,10 +49,6 @@
     # Constant: CHYRP_CODENAME
     # The code name for this version.
     define('CHYRP_CODENAME', "Saxaul");
-
-    # Constant: DEBUG
-    # Should Chyrp use debugging processes?
-    define('DEBUG', true);
 
     # Constant: CACHE_TWIG
     # If defined, this will take priority over DEBUG and toggle Twig template caching.
@@ -90,7 +90,7 @@
 
     # Constant: TESTER
     # Is the site being run by the automated tester?
-    define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "tester.rb");
+    define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
 
     # Constant: INDEX
     # Is the requested file /index.php?
