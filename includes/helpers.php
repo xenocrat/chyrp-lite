@@ -38,6 +38,21 @@
     }
 
     /**
+     * Function: error_panicker
+     * Exits and states where the error occurred.
+     */
+    function error_panicker($errno, $message, $file, $line) {
+        if (error_reporting() === 0)
+            return; # Suppressed error.
+
+        ob_clean();
+        echo("ERROR: ".$message." (".$file." on line ".$line.")\n\n");
+        echo("BACKTRACE:\n");
+        debug_print_backtrace();
+        exit;
+    }
+
+    /**
      * Function: error
      * Shows an error message.
      *
@@ -107,17 +122,6 @@
     }
 
     /**
-     * Function: error_panicker
-     * Exits and states where the error occurred.
-     */
-    function error_panicker($errno, $message, $file, $line) {
-        if (error_reporting() === 0)
-            return; # Suppressed error.
-
-        exit("ERROR: ".$message." (".$file." on line ".$line.")");
-    }
-
-    /**
      * Function: show_403
      * Shows an error message with a 403 HTTP header.
      *
@@ -140,7 +144,7 @@
      function show_404() {
         header("HTTP/1.1 404 Not Found");
 
-        if (!defined('CHYRP_VERSION'))
+        if (!defined('DEBUG'))
             exit("404 Not Found");
 
         $theme = Theme::current();

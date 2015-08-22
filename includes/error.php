@@ -1,18 +1,25 @@
 <?php
-    if (!defined('DEBUG'))
+    if (empty($title) or empty($body))
         exit("Access Denied."); # Direct access is verboten.
 
-    if (!class_exists("MainController"))
-        require INCLUDES_DIR."/controller/Main.php";
+    if (function_exists("error_panicker"))
+        set_error_handler("error_panicker");
 
-    if (class_exists("Route"))
-        Route::current(MainController::current());
+    if (!function_exists("__") or
+        !function_exists("_f") or
+        !function_exists("fallback") or
+        !function_exists("logged_in") or
+        !class_exists("Config") or 
+        !array_key_exists("chyrp_url", Config::current()))
+        exit("ERROR: ".$title." (".$body.")");
 
     if (defined('AJAX') and AJAX or isset($_POST['ajax'])) {
         foreach ($backtrace as $trace)
             $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
         exit($body."HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
     }
+
+    $site = Config::current()->chyrp_url;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,36 +28,34 @@
         <title><?php echo $title; ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
-<?php if (class_exists("Config")): ?>
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Regular.woff') format('woff'),
-                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Regular.ttf') format('truetype');
+                src: url('<?php echo $site; ?>/fonts/OpenSans-Regular.woff') format('woff'),
+                     url('<?php echo $site; ?>/fonts/OpenSans-Regular.ttf') format('truetype');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Semibold.woff') format('woff'),
-                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Semibold.ttf') format('truetype');
+                src: url('<?php echo $site; ?>/fonts/OpenSans-Semibold.woff') format('woff'),
+                     url('<?php echo $site; ?>/fonts/OpenSans-Semibold.ttf') format('truetype');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Italic.woff') format('woff'),
-                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-Italic.ttf') format('truetype');
+                src: url('<?php echo $site; ?>/fonts/OpenSans-Italic.woff') format('woff'),
+                     url('<?php echo $site; ?>/fonts/OpenSans-Italic.ttf') format('truetype');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                     url('<?php echo Config::current()->chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                src: url('<?php echo $site; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff'),
+                     url('<?php echo $site; ?>/fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
                 font-weight: bold;
                 font-style: italic;
             }
-<?php endif ?>
             *::selection {
                 color: #ffffff;
                 background-color: #4f4f4f;
@@ -175,8 +180,8 @@
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
-            <?php if (class_exists("Route") and !logged_in() and $body != __("Route was initiated without a Controller.") and defined('ADMIN') and ADMIN): ?>
-                <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log in"); ?></a>
+            <?php if (!logged_in() and defined('ADMIN') and ADMIN): ?>
+                <a href="<?php echo $site; ?>/?action=login" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
             </div>
         </div>
