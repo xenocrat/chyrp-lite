@@ -3,6 +3,9 @@
 
     require_once "common.php";
 
+    # Clean the output buffer to prevent display_errors corrupting the served image
+    ob_clean();
+
     if (ini_get("memory_limit") < 48)
         ini_set("memory_limit", "48M");
 

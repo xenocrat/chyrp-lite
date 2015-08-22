@@ -224,12 +224,12 @@
             SQL::current()->delete("comments", array("id" => $comment_id));
         }
 
-        public function editable(User $user = null) {
+        public function editable($user = null) {
             fallback($user, Visitor::current());
             return ($user->group->can("edit_comment") or ($user->group->can("edit_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
         }
 
-        public function deletable(User $user = null) {
+        public function deletable($user = null) {
             fallback($user, Visitor::current());
             return ($user->group->can("delete_comment") or ($user->group->can("delete_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
         }

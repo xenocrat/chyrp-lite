@@ -22,7 +22,6 @@
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_video");
             $this->respondTo("filter_post", "filter_post");
-            $this->respondTo("post_options", "add_option");
         }
 
         public function submit() {
