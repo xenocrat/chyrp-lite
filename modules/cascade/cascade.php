@@ -31,6 +31,6 @@
         }
 
         static function javascript() {
-            include MODULES_DIR."/cascade/javascript.php";
+            include MODULES_DIR.DIR."cascade".DIR."javascript.php";
         }
     }

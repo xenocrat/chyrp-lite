@@ -37,6 +37,6 @@
         }
 
         static function javascript() {
-            include MODULES_DIR."/lightbox/javascript.php";
+            include MODULES_DIR.DIR."lightbox".DIR."javascript.php";
         }
     }

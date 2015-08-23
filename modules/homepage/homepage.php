@@ -33,6 +33,6 @@
 
         public function main_home($main) {
             $page = new Page(array("url" => "home"));
-            $main->display(array("pages/page", "pages/".$page->url), array("page" => $page), $page->title);
+            $main->display(array("pages".DIR."page", "pages".DIR.$page->url), array("page" => $page), $page->title);
         }
     }

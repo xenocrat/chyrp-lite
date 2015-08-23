@@ -13,9 +13,9 @@
 // mark the compiler as being included.  This use used by the public
 // `twig_load_compiler` function that loads the compiler system.
 define('TWIG_COMPILER_INCLUDED', true);
-require TWIG_BASE . '/lexer.php';
-require TWIG_BASE . '/parser.php';
-require TWIG_BASE . '/ast.php';
+require TWIG_BASE . DIRECTORY_SEPARATOR . 'lexer.php';
+require TWIG_BASE . DIRECTORY_SEPARATOR . 'parser.php';
+require TWIG_BASE . DIRECTORY_SEPARATOR . 'ast.php';
 
 
 function twig_compile($node, $fp=null)

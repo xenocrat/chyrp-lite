@@ -23,11 +23,12 @@
     define('INSTALLING',     false);
     define('TESTER',         true);
     define('INDEX',          false);
+    define('DIR',            defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : "/");
     define('MAIN_DIR',       dirname(__FILE__));
-    define('INCLUDES_DIR',   dirname(__FILE__)."/includes");
-    define('MODULES_DIR',    MAIN_DIR."/modules");
-    define('FEATHERS_DIR',   MAIN_DIR."/feathers");
-    define('THEMES_DIR',     MAIN_DIR."/themes");
+    define('INCLUDES_DIR',   dirname(__FILE__).DIR."includes");
+    define('MODULES_DIR',    MAIN_DIR.DIR."modules");
+    define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
+    define('THEMES_DIR',     MAIN_DIR.DIR."themes");
     define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
@@ -47,17 +48,17 @@
      * Returns what config file their install is set up for.
      */
     function config_file() {
-        if (file_exists(INCLUDES_DIR."/config.json.php"))
-            return INCLUDES_DIR."/config.json.php";
+        if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
+            return INCLUDES_DIR.DIR."config.json.php";
 
-        if (file_exists(INCLUDES_DIR."/config.yaml.php"))
-            return INCLUDES_DIR."/config.yaml.php";
+        if (file_exists(INCLUDES_DIR.DIR."config.yaml.php"))
+            return INCLUDES_DIR.DIR."config.yaml.php";
 
-        if (file_exists(INCLUDES_DIR."/config.yml.php"))
-            return INCLUDES_DIR."/config.yml.php";
+        if (file_exists(INCLUDES_DIR.DIR."config.yml.php"))
+            return INCLUDES_DIR.DIR."config.yml.php";
 
-        if (file_exists(INCLUDES_DIR."/config.php"))
-            return INCLUDES_DIR."/config.php";
+        if (file_exists(INCLUDES_DIR.DIR."config.php"))
+            return INCLUDES_DIR.DIR."config.php";
 
         exit("Config file not found.");
     }
@@ -67,14 +68,14 @@
      * Returns what database config file their install is set up for.
      */
     function database_file() {
-        if (file_exists(INCLUDES_DIR."/database.yaml.php"))
-            return INCLUDES_DIR."/database.yaml.php";
+        if (file_exists(INCLUDES_DIR.DIR."database.yaml.php"))
+            return INCLUDES_DIR.DIR."database.yaml.php";
 
-        if (file_exists(INCLUDES_DIR."/database.yml.php"))
-            return INCLUDES_DIR."/database.yml.php";
+        if (file_exists(INCLUDES_DIR.DIR."database.yml.php"))
+            return INCLUDES_DIR.DIR."database.yml.php";
 
-        if (file_exists(INCLUDES_DIR."/database.php"))
-            return INCLUDES_DIR."/database.php";
+        if (file_exists(INCLUDES_DIR.DIR."database.php"))
+            return INCLUDES_DIR.DIR."database.php";
 
         return false;
     }
@@ -92,7 +93,7 @@
      * Are they using JSON config storage?
      */
     function using_json() {
-        return file_exists(INCLUDES_DIR."/config.json.php");
+        return file_exists(INCLUDES_DIR.DIR."config.json.php");
     }
 
     # Evaluate the code in their config files, but with the classes renamed, so we can safely retrieve the values.
@@ -109,24 +110,24 @@
 
     # File: Helpers
     # Various functions used throughout Chyrp's code.
-    require_once INCLUDES_DIR."/helpers.php";
+    require_once INCLUDES_DIR.DIR."helpers.php";
 
     # File: Gettext
     # Gettext library.
-    require_once INCLUDES_DIR."/lib/gettext/gettext.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
 
     # File: Streams
     # Streams library.
-    require_once INCLUDES_DIR."/lib/gettext/streams.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
 
     # File: YAML
     # Horde YAML parsing library.
-    require_once INCLUDES_DIR."/lib/YAML.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."YAML.php";
 
     # File: SQL
     # See Also:
     #     <SQL>
-    require INCLUDES_DIR."/class/SQL.php";
+    require INCLUDES_DIR.DIR."class".DIR."SQL.php";
 
     /**
      * Class: Config
@@ -177,13 +178,13 @@
                 $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
                 $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-                echo $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+                echo $message.test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
             } else {
                 Config::$yaml["config"][$setting] = $value;
                 $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
                 $dump = $protection.YAML::dump(Config::$yaml["config"]);
 
-                echo $message.test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+                echo $message.test(@file_put_contents(INCLUDES_DIR.DIR."config.yaml.php", $dump));
             }
         }
 
@@ -235,14 +236,14 @@
                 $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
                 echo _f("Removing %s setting...", array($setting)).
-                     test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+                     test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
             } else {
                 unset(Config::$yaml["config"][$setting]);
                 $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
                 $dump = $protection.YAML::dump(Config::$yaml["config"]);
 
                 echo _f("Removing %s setting...", array($setting)).
-                     test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+                     test(@file_put_contents(INCLUDES_DIR.DIR."config.yaml.php", $dump));
             }
         }
     }
@@ -289,7 +290,7 @@
     }
 
     # Load the translator
-    load_translator("chyrp", INCLUDES_DIR."/locale/".Config::get("locale").".mo");
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.Config::get("locale").".mo");
 
     #---------------------------------------------
     # Upgrading Actions
@@ -310,12 +311,12 @@
 
         $htaccess = "<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteBase {$index}\nRewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule ^.+\$ index.php [L]\nRewriteRule ^.+\\.twig\$ index.php [L]\n</IfModule>";
 
-        if (!file_exists(MAIN_DIR."/.htaccess"))
+        if (!file_exists(MAIN_DIR.DIR.".htaccess"))
             echo __("Generating .htaccess file...").
-                 test(@file_put_contents(MAIN_DIR."/.htaccess", $htaccess), __("Try creating the file and/or CHMODding it to 777 temporarily."));
+                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess), __("Try creating the file and/or CHMODding it to 777 temporarily."));
         else
             echo __("Appending to .htaccess file...").
-                 test(@file_put_contents(MAIN_DIR."/.htaccess", "\n\n".$htaccess, FILE_APPEND), __("Try creating the file and/or CHMODding it to 777 temporarily."));
+                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND), __("Try creating the file and/or CHMODding it to 777 temporarily."));
     }
 
     /**
@@ -401,9 +402,9 @@
      * Versions: 1.1.2 => 1.1.3
      */
     function move_yml_yaml() {
-        if (file_exists(INCLUDES_DIR."/config.yml.php"))
+        if (file_exists(INCLUDES_DIR.DIR."config.yml.php"))
             echo __("Moving /includes/config.yml.php to /includes/config.yaml.php...").
-                 test(@rename(INCLUDES_DIR."/config.yml.php", INCLUDES_DIR."/config.yaml.php"), __("Try CHMODding the file to 777."));
+                 test(@rename(INCLUDES_DIR.DIR."config.yml.php", INCLUDES_DIR.DIR."config.yaml.php"), __("Try CHMODding the file to 777."));
     }
 
     /**
@@ -411,18 +412,18 @@
      * Updates the PHP protection code in the config file.
      */
     function update_protection() {
-        if (!file_exists(INCLUDES_DIR."/config.json.php") or
-            substr_count(file_get_contents(INCLUDES_DIR."/config.json.php"),
+        if (!file_exists(INCLUDES_DIR.DIR."config.json.php") or
+            substr_count(file_get_contents(INCLUDES_DIR.DIR."config.json.php"),
                          "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>"))
             return;
 
-        $contents = file_get_contents(INCLUDES_DIR."/config.json.php");
+        $contents = file_get_contents(INCLUDES_DIR.DIR."config.json.php");
         $new_error = preg_replace("/<\?php (.+) \?>/",
                                   "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>",
                                   $contents);
 
         echo __("Updating protection code in config.json.php...").
-             test(@file_put_contents(INCLUDES_DIR."/config.json.php", $new_error), __("Try CHMODding the file to 777."));
+             test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $new_error), __("Try CHMODding the file to 777."));
     }
 
     /**
@@ -453,8 +454,8 @@
      * Renames the "upload" directory to "uploads".
      */
     function move_upload() {
-        if (file_exists(MAIN_DIR."/upload") and !file_exists(MAIN_DIR."/uploads"))
-            echo __("Renaming /upload directory to /uploads...").test(@rename(MAIN_DIR."/upload", MAIN_DIR."/uploads"), __("Try CHMODding the directory to 777."));
+        if (file_exists(MAIN_DIR.DIR."upload") and !file_exists(MAIN_DIR.DIR."uploads"))
+            echo __("Renaming /upload directory to /uploads...").test(@rename(MAIN_DIR.DIR."upload", MAIN_DIR.DIR."uploads"), __("Try CHMODding the directory to 777."));
     }
 
     /**
@@ -729,9 +730,9 @@
      * Versions: 2.0rc1 => 2.0rc2
      */
     function remove_database_config_file() {
-        if (file_exists(INCLUDES_DIR."/database.yaml.php"))
+        if (file_exists(INCLUDES_DIR.DIR."database.yaml.php"))
             echo __("Removing database.yaml.php file...").
-                 test(@unlink(INCLUDES_DIR."/database.yaml.php"), __("Try deleting it manually."));
+                 test(@unlink(INCLUDES_DIR.DIR."database.yaml.php"), __("Try deleting it manually."));
     }
 
     /**
@@ -1010,25 +1011,25 @@
      * Removes old/unused files from previous installs.
      */
     function remove_old_files() {
-        if (file_exists(INCLUDES_DIR."/config.php"))
+        if (file_exists(INCLUDES_DIR.DIR."config.php"))
             echo __("Removing ‘includes/config.php’...").
-                 test(@unlink(INCLUDES_DIR."/config.php"));
+                 test(@unlink(INCLUDES_DIR.DIR."config.php"));
 
-        if (file_exists(INCLUDES_DIR."/database.php"))
+        if (file_exists(INCLUDES_DIR.DIR."database.php"))
             echo __("Removing ‘includes/database.php’...").
-                 test(@unlink(INCLUDES_DIR."/database.php"));
+                 test(@unlink(INCLUDES_DIR.DIR."database.php"));
 
-        if (file_exists(INCLUDES_DIR."/rss.php"))
+        if (file_exists(INCLUDES_DIR.DIR."rss.php"))
             echo __("Removing ‘includes/rss.php’...").
-                 test(@unlink(INCLUDES_DIR."/rss.php"));
+                 test(@unlink(INCLUDES_DIR.DIR."rss.php"));
 
-        if (file_exists(INCLUDES_DIR."/bookmarklet.php"))
+        if (file_exists(INCLUDES_DIR.DIR."bookmarklet.php"))
             echo __("Removing ‘includes/bookmarklet.php’...").
-                 test(@unlink(INCLUDES_DIR."/bookmarklet.php"));
+                 test(@unlink(INCLUDES_DIR.DIR."bookmarklet.php"));
 
-        if (file_exists(INCLUDES_DIR."/config.yaml.php") and file_exists(INCLUDES_DIR."/config.json.php"))
+        if (file_exists(INCLUDES_DIR.DIR."config.yaml.php") and file_exists(INCLUDES_DIR.DIR."config.json.php"))
             echo __("Removing ‘includes/config.yaml.php’...").
-                 test(@unlink(INCLUDES_DIR."/config.yaml.php"));
+                 test(@unlink(INCLUDES_DIR.DIR."config.yaml.php"));
     }
 
     /**
@@ -1237,7 +1238,7 @@
                 $message.test(!json_last_error());
 
             echo __("Writing ‘includes/config.json.php’...").
-                $message.test(@file_put_contents(INCLUDES_DIR."/config.json.php", $dump));
+                $message.test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
         }
     }
 
@@ -1408,7 +1409,7 @@
      * Versions: 2015.03.15 => 2015.05.25
      */
     function theme_sanity_check() {
-        if (!file_exists(THEMES_DIR."/".Config::get("theme")."/info.php"))
+        if (!file_exists(THEMES_DIR.DIR.Config::get("theme").DIR."info.php"))
             Config::set("theme", "blossom", __("Resetting theme to Blossom..."));
     }
 ?>
@@ -1682,10 +1683,10 @@
         # Perform Module/Feather upgrades.
 
         foreach ((array) Config::get("enabled_modules") as $module)
-            if (file_exists(MAIN_DIR."/modules/".$module."/upgrades.php")) {
+            if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
                 ob_start();
                 echo $begin = _f("Calling ‘%s’ module's upgrader...", array($module))."\n";
-                require MAIN_DIR."/modules/".$module."/upgrades.php";
+                require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
                 $buf = ob_get_contents();
                 if (ob_get_contents() == $begin)
                     ob_end_clean();
@@ -1694,10 +1695,10 @@
             }
 
         foreach ((array) Config::get("enabled_feathers") as $feather)
-            if (file_exists(MAIN_DIR."/feathers/".$feather."/upgrades.php")) {
+            if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
                 ob_start();
                 echo $begin = _f("Calling ‘%s’ feather's upgrader...", array($feather))."\n";
-                require MAIN_DIR."/feathers/".$feather."/upgrades.php";
+                require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
                 $buf = ob_get_contents();
                 if (ob_get_contents() == $begin)
                     ob_end_clean();

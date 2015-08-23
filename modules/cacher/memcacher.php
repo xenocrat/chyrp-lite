@@ -38,7 +38,6 @@
                 }
             }
 
-            //$disable_module = true;
             if ($disable_module)
                 cancel_module("cacher");
         }

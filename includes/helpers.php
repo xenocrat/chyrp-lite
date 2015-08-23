@@ -72,7 +72,7 @@
                     unset($backtrace[$index]);
                 } else {
                     $trace["line"] = fix($trace["line"]);
-                    $trace["file"] = fix(str_replace(MAIN_DIR."/", "", $trace["file"]));
+                    $trace["file"] = fix(str_replace(MAIN_DIR.DIR, "", $trace["file"]));
                 }
             }
 
@@ -113,7 +113,7 @@
                                                      "body" => $body,
                                                      "backtrace" => $backtrace));
         else
-            require INCLUDES_DIR."/error.php";
+            require INCLUDES_DIR.DIR."error.php";
 
         if ($buffer !== false)
             ob_end_flush();
@@ -952,7 +952,7 @@
             $url = (ADMIN or $use_chyrp_url) ?
                        Config::current()->chyrp_url.$url :
                        Config::current()->url.$url ;
-        elseif (file_exists(INCLUDES_DIR."/config.json.php") and class_exists("Route") and !substr_count($url, "://"))
+        elseif (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
         header("Location: ".html_entity_decode($url));
@@ -1107,15 +1107,15 @@
 
         # Instantiate all Modules.
         foreach ($config->enabled_modules as $module) {
-            if (!file_exists(MODULES_DIR."/".$module."/".$module.".php") or !file_exists(MODULES_DIR."/".$module."/info.php")) {
+            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
                 unset($config->enabled_modules[$module]);
                 continue;
             }
 
-            if (file_exists(MODULES_DIR."/".$module."/locale/".$config->locale.".mo"))
-                load_translator($module, MODULES_DIR."/".$module."/locale/".$config->locale.".mo");
+            if (file_exists(MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
 
-            require MODULES_DIR."/".$module."/".$module.".php";
+            require MODULES_DIR.DIR.$module.DIR.$module.".php";
 
             $camelized = camelize($module);
             if (!class_exists($camelized))
@@ -1124,21 +1124,21 @@
             Modules::$instances[$module] = new $camelized;
             Modules::$instances[$module]->safename = $module;
 
-            foreach (include MODULES_DIR."/".$module."/info.php" as $key => $val)
+            foreach (include MODULES_DIR.DIR.$module.DIR."info.php" as $key => $val)
                 Modules::$instances[$module]->$key = $val;
         }
 
         # Instantiate all Feathers.
         foreach ($config->enabled_feathers as $feather) {
-            if (!file_exists(FEATHERS_DIR."/".$feather."/".$feather.".php") or !file_exists(FEATHERS_DIR."/".$feather."/info.php")) {
+            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
                 unset($config->enabled_feathers[$feather]);
                 continue;
             }
 
-            if (file_exists(FEATHERS_DIR."/".$feather."/locale/".$config->locale.".mo"))
-                load_translator($feather, FEATHERS_DIR."/".$feather."/locale/".$config->locale.".mo");
+            if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
 
-            require FEATHERS_DIR."/".$feather."/".$feather.".php";
+            require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
             $camelized = camelize($feather);
             if (!class_exists($camelized))
@@ -1147,7 +1147,7 @@
             Feathers::$instances[$feather] = new $camelized;
             Feathers::$instances[$feather]->safename = $feather;
 
-            foreach (include FEATHERS_DIR."/".$feather."/info.php" as $key => $val)
+            foreach (include FEATHERS_DIR.DIR.$feather.DIR."info.php" as $key => $val)
                 Feathers::$instances[$feather]->$key = $val;
         }
 
@@ -1268,7 +1268,7 @@
      */
     function unique_filename($name, $path = "", $num = 2) {
         $path = rtrim($path, "/");
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path."/".$name))
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$name))
             return $name;
 
         $name = explode(".", $name);
@@ -1286,7 +1286,7 @@
         $ext = ".".array_pop($name);
 
         $try = implode(".", $name)."-".$num.$ext;
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path."/".$try))
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$try))
             return $try;
 
         return unique_filename(implode(".", $name).$ext, $path, $num + 1);
@@ -1307,7 +1307,7 @@
      */
     function upload($file, $extension = null, $path = "", $put = false) {
         $file_split = explode(".", $file['name']);
-        $path = rtrim($path, "/");
+        $path = rtrim($path, DIR);
         $dir = MAIN_DIR.Config::current()->uploads_path.$path;
 
         if (!file_exists($dir))
@@ -1351,9 +1351,9 @@
         $message = __("Couldn't upload file. CHMOD <code>".$dir."</code> to 777 and try again. If this problem persists, it's probably timing out; in which case, you must contact your system administrator to increase the maximum POST and upload sizes.");
 
         if ($put) {
-            if (!@copy($file['tmp_name'], $dir."/".$filename))
+            if (!@copy($file['tmp_name'], $dir.DIR.$filename))
                 error(__("Error"), $message);
-        } elseif (!@move_uploaded_file($file['tmp_name'], $dir."/".$filename))
+        } elseif (!@move_uploaded_file($file['tmp_name'], $dir.DIR.$filename))
             error(__("Error"), $message);
 
         return ($path ? $path."/".$filename : $filename);
@@ -1372,7 +1372,7 @@
      *     <upload>
      */
     function upload_from_url($url, $extension = null, $path = "") {
-        $file = tempnam(getcwd()."/tmp", "chyrp");
+        $file = tempnam(getcwd().DIR."tmp", "chyrp");
         file_put_contents($file, get_remote($url));
 
         $fake_file = array("name" => basename(parse_url($url, PHP_URL_PATH)),

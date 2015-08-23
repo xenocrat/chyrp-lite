@@ -1,6 +1,6 @@
 <?php
     require_once "model.Comment.php";
-    require_once "lib/Akismet.php";
+    require_once "lib".DIR."Akismet.php";
 
     class Comments extends Modules {
         public function __init() {
@@ -495,7 +495,7 @@
         }
 
         static function javascript() {
-            include MODULES_DIR."/comments/javascript.php";
+            include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
 
         static function ajax() {

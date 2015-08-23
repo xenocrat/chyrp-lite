@@ -466,7 +466,7 @@
             if (empty($posts))
                 return false;
 
-            $main->display(array("pages/tag", "pages/index"),
+            $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                            array("posts" => $posts, "tag" => $tag, "tags" => $tags),
                            _f("Posts tagged with %s", array($tag), "tags"));
         }
@@ -516,7 +516,7 @@
                                        "clean" => $tags[$tag],
                                        "url" => url("tag/".$tags[$tag], $main));
 
-                $main->display("pages/tags", array("tag_cloud" => $context), __("Tags", "tags"));
+                $main->display("pages".DIR."tags", array("tag_cloud" => $context), __("Tags", "tags"));
             }
         }
 

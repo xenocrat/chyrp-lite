@@ -17,7 +17,7 @@
 function twig_load_compiler()
 {
     if (!defined('TWIG_COMPILER_INCLUDED'))
-        require TWIG_BASE . '/compiler.php';
+        require TWIG_BASE . DIRECTORY_SEPARATOR . 'compiler.php';
 }
 
 
@@ -156,9 +156,7 @@ class Twig_BaseLoader
     private function evalTemplate($name, $fn=NULL)
     {
         $code = $this->compileTemplate($name, NULL, $fn);
-        # echo "ORIGINAL: <textarea rows=15 style=\"width: 100%\">".fix(print_r($code, true))."</textarea>";
         $code = preg_replace('/(?!echo twig_get_attribute.+)echo "[\\\\tn]+";/', "", $code); # Remove blank lines
-        #echo "STRIPPED: <textarea rows=15 style=\"width: 100%\">".fix(print_r($code, true))."</textarea>";
         eval('?>' . $code);
     }
 }
@@ -187,6 +185,6 @@ class Twig_Loader extends Twig_BaseLoader
                 array_push($path, $part);
         }
 
-        return $this->folder . '/' .  implode('/', $path) ;
+        return $this->folder . DIRECTORY_SEPARATOR .  implode(DIRECTORY_SEPARATOR, $path) ;
     }
 }

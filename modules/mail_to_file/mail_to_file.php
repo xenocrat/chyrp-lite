@@ -8,9 +8,9 @@
             $output.= "Content-Type: multipart/digest; boundary=\"---correspondence---\"\r\n";
             $output.= "\r\n---correspondence---\r\n";
 
-            if (!file_exists(MAIN_DIR."/digest.txt.php"))
+            if (!file_exists(MAIN_DIR.DIR."digest.txt.php"))
                 if (!@file_put_contents(MAIN_DIR."/digest.txt.php", $output))
-                    error(__("Error"), _f("Cannot write digest file <code>%s</code>", MAIN_DIR."/digest.txt.php", "mail_to_file"));
+                    error(__("Error"), _f("Cannot write digest file <code>%s</code>", MAIN_DIR.DIR."digest.txt.php", "mail_to_file"));
         }
 
         static function __uninstall($confirm) {
@@ -30,7 +30,7 @@
             $output.= $message."\r\n\r\n";
             $output.= "---correspondence---\r\n";
 
-            if (@file_put_contents(MAIN_DIR."/digest.txt.php", $output, FILE_APPEND))
+            if (@file_put_contents(MAIN_DIR.DIR."digest.txt.php", $output, FILE_APPEND))
                 return true;
             else
                 return false;

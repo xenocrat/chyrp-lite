@@ -7,8 +7,12 @@
     else
         define('USE_ZLIB', false);
 
+    # Constant: DIR
+    # Platform-agnostic directory separator
+    define('DIR', defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : "/");
+
     $valid_files = "common.js custom.js";
-    if (!in_array($_GET['file'], explode(" ", $valid_files)) and strpos($_GET['file'], "/themes/") === false)
+    if (!in_array($_GET['file'], explode(" ", $valid_files)) and strpos($_GET['file'], "/themes/") !== 0)
         exit("Access Denied.");
 
     if (substr_count($_GET['file'], "..") > 0 )
@@ -29,8 +33,8 @@
 
         header("Last-Modified: ".@date("r", filemtime(MAIN_DIR.$_GET['file'])));
 
-        if (file_exists(MAIN_DIR.$_GET['file']))
-            readfile(MAIN_DIR.$_GET['file']);
+        if (file_exists(MAIN_DIR.str_replace("/", DIR, $_GET['file'])))
+            readfile(MAIN_DIR.str_replace("/", DIR, $_GET['file']));
         else
             echo "alert('File not found: ".addslashes($_GET['file'])."')";
     } elseif (file_exists($_GET['file'])) {

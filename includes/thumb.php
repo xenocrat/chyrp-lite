@@ -10,7 +10,7 @@
         ini_set("memory_limit", "48M");
 
     if (!function_exists("gd_info"))
-        exit("GD not installed; image cannot be resized.");
+        exit(header("Location: ".$filename)); # GD not installed; image cannot be resized.
 
     $gd_info = gd_info();
     $gd_version = (substr_count(strtolower($gd_info["GD Version"]), "2.")) ? 2 : 1 ;
@@ -93,10 +93,10 @@
 
     # If it's already below the maximum, just redirect to it.
     if ($original_width <= $new_width and $original_height <= $new_height)
-        header("Location: ".$filename);
+        exit(header("Location: ".$filename));
 
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
-    $cache_file = INCLUDES_DIR."/caches/thumb_".$cache_filename;
+    $cache_file = INCLUDES_DIR.DIR."caches".DIR."thumb_".$cache_filename;
 
     if (isset($_GET['no_cache']) and $_GET['no_cache'] == "true" and file_exists($cache_file))
         unlink($cache_file);

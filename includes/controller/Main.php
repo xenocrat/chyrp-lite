@@ -35,7 +35,7 @@
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            $cache = (is_writable(INCLUDES_DIR."/caches") and
+            $cache = (is_writable(INCLUDES_DIR.DIR."caches") and
                       !DEBUG and
                       !PREVIEWING and
                       !defined('CACHE_TWIG') or CACHE_TWIG);
@@ -43,7 +43,7 @@
             if (defined('THEME_DIR'))
                 $this->twig = new Twig_Loader(THEME_DIR,
                                               $cache ?
-                                                  INCLUDES_DIR."/caches" :
+                                                  INCLUDES_DIR.DIR."caches" :
                                                   null) ;
         }
 
@@ -219,7 +219,7 @@
                                  array("id" => $post),
                                  array("status" => "public"));
 
-            $this->display("pages/index",
+            $this->display("pages".DIR."index",
                            array("posts" => new Paginator(Post::find(array("placeholders" => true)),
                                                           $this->post_limit)));
         }
@@ -308,7 +308,7 @@
                 $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
                 $depth = isset($_GET['day']) ? "day" : (isset($_GET['month']) ? "month" : (isset($_GET['year']) ? "year" : ""));
 
-                $this->display("pages/archive",
+                $this->display("pages".DIR."archive",
                                array("posts" => $posts,
                                      "archive" => array("year" => $_GET['year'],
                                                         "month" => strftime("%B", $timestamp),
@@ -354,7 +354,7 @@
             else
                 $posts = new Paginator(array());
 
-            $this->display(array("pages/search", "pages/index"),
+            $this->display(array("pages".DIR."search", "pages".DIR."index"),
                            array("posts" => $posts,
                                  "search" => $_GET['query']),
                            fix(_f("Search results for \"%s\"", array($_GET['query']))));
@@ -375,7 +375,7 @@
                                                                      "user_id" => $visitor->id))),
                                    $this->post_limit);
 
-            $this->display(array("pages/drafts", "pages/index"),
+            $this->display(array("pages".DIR."drafts", "pages".DIR."index"),
                            array("posts" => $posts),
                            __("Drafts"));
         }
@@ -410,7 +410,7 @@
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
                 Flash::message(_f("This post is only visible by the following groups: %s.", $post->groups()));
 
-            $this->display(array("pages/view", "pages/index"),
+            $this->display(array("pages".DIR."view", "pages".DIR."index"),
                            array("post" => $post, "posts" => array($post)),
                            $post->title());
         }
@@ -440,7 +440,7 @@
             if (!$page->public and !$visitor->group->can("view_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view this page."));
 
-            $this->display(array("pages/page", "pages/".$page->url), array("page" => $page), $page->title);
+            $this->display(array("pages".DIR."page", "pages".DIR.$page->url), array("page" => $page), $page->title);
         }
 
         /**
@@ -527,7 +527,7 @@
                 }
             }
 
-            $this->display("forms/user/register", array(), __("Register"));
+            $this->display("forms".DIR."user".DIR."register", array(), __("Register"));
         }
 
         /**
@@ -630,7 +630,7 @@
                 }
             }
 
-            $this->display("forms/user/login", array(), __("Log In"));
+            $this->display("forms".DIR."user".DIR."login", array(), __("Log In"));
         }
 
         /**
@@ -689,7 +689,7 @@
                 }
             }
 
-            $this->display("forms/user/controls", array(), __("Controls"));
+            $this->display("forms".DIR."user".DIR."controls", array(), __("Controls"));
         }
 
         /**
@@ -715,7 +715,7 @@
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }
 
-            $this->display("forms/user/lost_password", array(), __("Lost Password"));
+            $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost Password"));
         }
 
         /**
@@ -773,7 +773,7 @@
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
 
-            require INCLUDES_DIR."/feed.php";
+            require INCLUDES_DIR.DIR."feed.php";
         }
 
         /**
@@ -790,9 +790,9 @@
         public function display($file, $context = array(), $title = "") {
             if (is_array($file))
                 for ($i = 0; $i < count($file); $i++) {
-                    $check = ($file[$i][0] == "/" or preg_match("/[a-zA-Z]:\\\/", $file[$i])) ?
+                    $check = ($file[$i][0] == DIR or preg_match("/[a-zA-Z]:\\\/", $file[$i])) ?
                                  $file[$i] :
-                                 THEME_DIR."/".$file[$i] ;
+                                 THEME_DIR.DIR.$file[$i] ;
 
                     if (file_exists($check.".twig") or ($i + 1) == count($file))
                         return $this->display($file[$i], $context, $title);
@@ -851,9 +851,9 @@
 
             $this->context["sql_debug"] =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("main_context", "main_context_".str_replace("/", "_", $file)));
+            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $file)));
 
-            $file = ($file[0] == "/" or preg_match("/[a-zA-Z]:\\\/", $file)) ? $file : THEME_DIR."/".$file ;
+            $file = ($file[0] == DIR or preg_match("/[a-zA-Z]:\\\/", $file)) ? $file : THEME_DIR.DIR.$file ;
             if (!file_exists($file.".twig"))
                 error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($file.".twig")));
 

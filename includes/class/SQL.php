@@ -7,12 +7,12 @@
     # File: Query
     # See Also:
     #     <Query>
-    require_once INCLUDES_DIR."/class/Query.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Query.php";
 
     # File: QueryBuilder
     # See Also:
     #     <QueryBuilder>
-    require_once INCLUDES_DIR."/class/QueryBuilder.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."QueryBuilder.php";
 
     class SQL {
         # Array: $debug

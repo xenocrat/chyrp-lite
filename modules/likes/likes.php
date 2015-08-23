@@ -69,7 +69,7 @@
         }
 
         static function javascript() {
-            include MODULES_DIR."/likes/javascript.php";
+            include MODULES_DIR.DIR."likes".DIR."javascript.php";
         }
 
         static function ajax_like() {
@@ -233,11 +233,11 @@
         }
 
         public function get_like_images() {
-            $imagesDir = MODULES_DIR."/likes/images/";
+            $imagesDir = MODULES_DIR.DIR."likes".DIR."images".DIR;
             $images = glob($imagesDir . "*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
 
             foreach ($images as $image) {
-                $pattern = "/\/(\w.*)\/images\//";
+                $pattern = "/".preg_quote(DIR, "/")."(\w.*)".preg_quote(DIR, "/")."images".preg_quote(DIR, "/")."/";
                 $image = preg_replace($pattern, "", $images);
                 while (list($key, $val) = each($image))
                     $arr[] = Config::current()->chyrp_url."/modules/likes/images/$val";

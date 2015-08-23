@@ -10,8 +10,9 @@
     define('UPGRADING',    false);
     define('INSTALLING',   true);
     define('TESTER',       isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
+    define('DIR',          defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : "/");
     define('MAIN_DIR',     dirname(__FILE__));
-    define('INCLUDES_DIR', MAIN_DIR."/includes");
+    define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
     define('USE_ZLIB',     false);
 
     # Make sure E_STRICT is on so Chyrp remains errorless.
@@ -23,17 +24,17 @@
     if (version_compare(PHP_VERSION, "5.3.2", "<"))
         exit("Chyrp requires PHP 5.3.2 or greater. Installation cannot continue.");
 
-    require_once INCLUDES_DIR."/helpers.php";
+    require_once INCLUDES_DIR.DIR."helpers.php";
 
-    require_once INCLUDES_DIR."/lib/gettext/gettext.php";
-    require_once INCLUDES_DIR."/lib/gettext/streams.php";
-    require_once INCLUDES_DIR."/lib/YAML.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."YAML.php";
 
-    require_once INCLUDES_DIR."/class/Config.php";
-    require_once INCLUDES_DIR."/class/SQL.php";
-    require_once INCLUDES_DIR."/class/Model.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."SQL.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Model.php";
 
-    require_once INCLUDES_DIR."/model/User.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."User.php";
 
     # Prepare the Config interface.
     $config = Config::current();
@@ -46,8 +47,8 @@
     # Ask PHP for the default locale and try to load an appropriate translator
     $default_language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
 
-    if (file_exists(INCLUDES_DIR."/locale/".$default_language.".mo"))
-        load_translator("chyrp", INCLUDES_DIR."/locale/".$default_language.".mo");
+    if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$default_language.".mo"))
+        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$default_language.".mo");
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
@@ -71,14 +72,14 @@
     $errors = array();
     $installed = false;
 
-    if (file_exists(INCLUDES_DIR."/config.json.php") and file_exists(MAIN_DIR."/.htaccess")) {
+    if (file_exists(INCLUDES_DIR.DIR."config.json.php") and file_exists(MAIN_DIR.DIR.".htaccess")) {
         $sql = SQL::current(true);
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
             error(__("Already Installed"), __("Chyrp is already fully installed and configured. You can delete this installer."));
     }
 
-    if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR."/.htaccess")) or
-        (file_exists(MAIN_DIR."/.htaccess") and !is_writable(MAIN_DIR."/.htaccess") and !$htaccess_has_chyrp))
+    if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR.DIR.".htaccess")) or
+        (file_exists(MAIN_DIR.DIR.".htaccess") and !is_writable(MAIN_DIR.DIR.".htaccess") and !$htaccess_has_chyrp))
         $errors[] = _f("Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
 
     if (!is_writable(INCLUDES_DIR))
@@ -131,10 +132,10 @@
         if (empty($errors)) {
 
             if (!$htaccess_has_chyrp)
-                if (!file_exists(MAIN_DIR."/.htaccess")) {
-                    if (!@file_put_contents(MAIN_DIR."/.htaccess", $htaccess))
+                if (!file_exists(MAIN_DIR.DIR.".htaccess")) {
+                    if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
                         $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
-                } elseif (!@file_put_contents(MAIN_DIR."/.htaccess", "\n\n".$htaccess, FILE_APPEND)) {
+                } elseif (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND)) {
                     $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
                 }
 
@@ -704,7 +705,7 @@
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
                 <li><?php echo __("<strong>Delete install.php</strong>, you won't need it anymore."); ?></li>
-            <?php if (!is_writable(INCLUDES_DIR."/caches")): ?>
+            <?php if (!is_writable(INCLUDES_DIR.DIR."caches")): ?>
                 <li><?php echo __("CHMOD <code>/includes/caches</code> to 777."); ?></li>
             <?php endif; ?>
                 <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>

@@ -1,7 +1,7 @@
 <?php
-    require_once "lib/MarkdownInterface.php";
-    require_once "lib/Markdown.php";
-    require_once "lib/MarkdownExtra.php";
+    require_once "lib".DIR."MarkdownInterface.php";
+    require_once "lib".DIR."Markdown.php";
+    require_once "lib".DIR."MarkdownExtra.php";
 
     class MarkdownLib extends Modules {
         public function __init() {

@@ -1,7 +1,10 @@
 <?php
     define('ADMIN', true);
 
-    require_once "../includes/common.php";
+    if (!defined('DIRECTORY_SEPARATOR'))
+        define('DIRECTORY_SEPARATOR', '/');
+
+    require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 
     # Prepare the controller.
     $admin = AdminController::current();

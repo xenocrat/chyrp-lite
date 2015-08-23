@@ -6,7 +6,7 @@
 
     define('XML_RPC', true);
     require_once 'common.php';
-    require_once INCLUDES_DIR.'/lib/ixr.php';
+    require_once INCLUDES_DIR.DIR.'lib'.DIR.'ixr.php';
     if (!defined('XML_RPC_FEATHER')) define('XML_RPC_FEATHER', 'text');
 
     # Use the Main controller for any Route calls.

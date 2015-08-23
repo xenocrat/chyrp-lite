@@ -29,16 +29,16 @@
         $displayed = false;
 
         foreach ($config->enabled_modules as $module)
-            if (file_exists(MODULES_DIR."/".$module."/pages/".$route->action.".php"))
-                $displayed = require MODULES_DIR."/".$module."/pages/".$route->action.".php";
+            if (file_exists(MODULES_DIR.DIR.$module.DIR."pages".DIR.$route->action.".php"))
+                $displayed = require MODULES_DIR.DIR.$module.DIR."pages".DIR.$route->action.".php";
 
         if (!$displayed)
             foreach ($config->enabled_feathers as $feather)
-                if (file_exists(FEATHERS_DIR."/".$feather."/pages/".$route->action.".php"))
-                    $displayed = require FEATHERS_DIR."/".$feather."/pages/".$route->action.".php";
+                if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."pages".DIR.$route->action.".php"))
+                    $displayed = require FEATHERS_DIR.DIR.$feather.DIR."pages".DIR.$route->action.".php";
 
-        if (!$displayed and $theme->file_exists("pages/".$route->action))
-            $main->display("pages/".$route->action);
+        if (!$displayed and $theme->file_exists("pages".DIR.$route->action))
+            $main->display("pages".DIR.$route->action);
         elseif (!$displayed)
             show_404();
     }

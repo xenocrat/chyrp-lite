@@ -32,8 +32,8 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
 
             $title = $post->title();
-            $theme_file = THEME_DIR."/forms/feathers/".$post->feather.".php";
-            $default_file = FEATHERS_DIR."/".$post->feather."/fields.php";
+            $theme_file = THEME_DIR.DIR."forms".DIR."feathers".DIR.$post->feather.".php";
+            $default_file = FEATHERS_DIR.DIR.$post->feather.DIR."fields.php";
 
             $options = array();
             Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
@@ -92,7 +92,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable extensions."));
 
             $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $info = include $dir."/".$_POST['check']."/info.php";
+            $info = include $dir.DIR.$_POST['check'].DIR."info.php";
             fallback($info["confirm"], "");
 
             if (!empty($info["confirm"]))
@@ -116,17 +116,17 @@
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
-            if (file_exists($folder."/".$_POST["extension"]."/locale/".$config->locale.".mo"))
-                load_translator($_POST["extension"], $folder."/".$_POST["extension"]."/locale/".$config->locale.".mo");
+            if (file_exists($folder.DIR.$_POST["extension"].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_POST["extension"], $folder.DIR.$_POST["extension"].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include $folder."/".$_POST["extension"]."/info.php";
+            $info = include $folder.DIR.$_POST["extension"].DIR."info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
             foreach ($info["notifications"] as &$notification)
                 $notification = addslashes($notification);
 
-            require $folder."/".$_POST["extension"]."/".$_POST["extension"].".php";
+            require $folder.DIR.$_POST["extension"].DIR.$_POST["extension"].".php";
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))

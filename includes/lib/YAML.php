@@ -14,10 +14,13 @@
  * @package  Horde_Yaml
  */
 
-require "YAML/Dumper.php";
-require "YAML/Exception.php";
-require "YAML/Loader.php";
-require "YAML/Node.php";
+if (!defined('DIRECTORY_SEPARATOR'))
+    define('DIRECTORY_SEPARATOR', '/');
+
+require "YAML".DIRECTORY_SEPARATOR."Dumper.php";
+require "YAML".DIRECTORY_SEPARATOR."Exception.php";
+require "YAML".DIRECTORY_SEPARATOR."Loader.php";
+require "YAML".DIRECTORY_SEPARATOR."Node.php";
 
 /**
  * Horde YAML parser.

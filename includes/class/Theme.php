@@ -16,11 +16,11 @@
             $config = Config::current();
 
             # Load the theme translator
-            if (file_exists(THEME_DIR."/locale/".$config->locale.".mo"))
-                load_translator("theme", THEME_DIR."/locale/".$config->locale.".mo");
+            if (file_exists(THEME_DIR.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator("theme", THEME_DIR.DIR."locale".DIR.$config->locale.".mo");
 
             # Load the theme's info into the Theme class.
-            foreach (include THEME_DIR."/info.php" as $key => $val)
+            foreach (include THEME_DIR.DIR."info.php" as $key => $val)
                 $this->$key = $val;
 
             $this->url = THEME_URL;
@@ -230,7 +230,7 @@
          *     $file - The file's name
          */
         public function file_exists($file) {
-            return file_exists(THEME_DIR."/".$file.".twig");
+            return file_exists(THEME_DIR.DIR.$file.".twig");
         }
 
         /**
@@ -248,15 +248,15 @@
                 foreach ($stylesheets as $stylesheet)
                     $elements.= "\n".'<link rel="stylesheet" href="'.$stylesheet.'" type="text/css" media="all" charset="utf-8">';
 
-            if (!file_exists(THEME_DIR."/stylesheets/") and !file_exists(THEME_DIR."/css/"))
+            if (!file_exists(THEME_DIR.DIR."stylesheets".DIR) and !file_exists(THEME_DIR.DIR."css".DIR))
                 return $elements;
 
-            $long  = (array) glob(THEME_DIR."/stylesheets/*");
-            $short = (array) glob(THEME_DIR."/css/*");
+            $long  = (array) glob(THEME_DIR.DIR."stylesheets".DIR."*");
+            $short = (array) glob(THEME_DIR.DIR."css".DIR."*");
 
             $total = array_merge($long, $short);
             foreach($total as $file) {
-                $path = preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file);
+                $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file);
                 $file = basename($file);
 
                 if (substr_count($file, ".inc.css") or (substr($file, -4) != ".css" and substr($file, -4) != ".php"))
@@ -300,7 +300,7 @@
             $javascripts = array($config->chyrp_url."/includes/lib/gz.php?file=common.js",
                                  $config->chyrp_url.'/includes/javascript.php?action='.$route->action.$args);
 
-            if (file_exists(MAIN_DIR."/includes/lib/custom.js"))
+            if (file_exists(MAIN_DIR.DIR."includes".DIR."lib".DIR."custom.js"))
                 $javascripts[] = $config->chyrp_url."/includes/lib/gz.php?file=custom.js";
 
             Trigger::current()->filter($javascripts, "scripts");
@@ -309,19 +309,19 @@
             foreach ($javascripts as $javascript)
                 $elements.= "\n".'<script src="'.$javascript.'" type="text/javascript" charset="utf-8"></script>';
 
-            if (file_exists(THEME_DIR."/javascripts/") or file_exists(THEME_DIR."/js/")) {
-                $long  = (array) glob(THEME_DIR."/javascripts/*.js");
-                $short = (array) glob(THEME_DIR."/js/*.js");
+            if (file_exists(THEME_DIR.DIR."javascripts".DIR) or file_exists(THEME_DIR.DIR."js".DIR)) {
+                $long  = (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js");
+                $short = (array) glob(THEME_DIR.DIR."js".DIR."*.js");
 
                 foreach(array_merge($long, $short) as $file)
                     if ($file and !substr_count($file, ".inc.js"))
-                        $elements.= "\n".'<script src="'.$config->chyrp_url.'/includes/lib/gz.php?file='.preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
+                        $elements.= "\n".'<script src="'.$config->chyrp_url.'/includes/lib/gz.php?file='.preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
 
-                $long  = (array) glob(THEME_DIR."/javascripts/*.php");
-                $short = (array) glob(THEME_DIR."/js/*.php");
+                $long  = (array) glob(THEME_DIR.DIR."javascripts".DIR."*.php");
+                $short = (array) glob(THEME_DIR.DIR."js".DIR."*.php");
                 foreach(array_merge($long, $short) as $file)
                     if ($file)
-                        $elements.= "\n".'<script src="'.$config->chyrp_url.preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
+                        $elements.= "\n".'<script src="'.$config->chyrp_url.preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
             }
 
             return $elements;

@@ -96,25 +96,29 @@
     # Is the requested file /index.php?
     define('INDEX', (pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_BASENAME) == "index.php") and !ADMIN);
 
+    # Constant: DIR
+    # Platform-agnostic directory separator
+    define('DIR', defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : "/");
+
     # Constant: MAIN_DIR
     # Absolute path to the Chyrp root
     define('MAIN_DIR', dirname(dirname(__FILE__)));
 
     # Constant: INCLUDES_DIR
     # Absolute path to /includes
-    define('INCLUDES_DIR', MAIN_DIR."/includes");
+    define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
 
     # Constant: MODULES_DIR
     # Absolute path to /modules
-    define('MODULES_DIR', MAIN_DIR."/modules");
+    define('MODULES_DIR', MAIN_DIR.DIR."modules");
 
     # Constant: FEATHERS_DIR
     # Absolute path to /feathers
-    define('FEATHERS_DIR', MAIN_DIR."/feathers");
+    define('FEATHERS_DIR', MAIN_DIR.DIR."feathers");
 
     # Constant: THEMES_DIR
     # Absolute path to /themes
-    define('THEMES_DIR', MAIN_DIR."/themes");
+    define('THEMES_DIR', MAIN_DIR.DIR."themes");
 
     # Constant: UPDATE_XML
     # URL to the update feed
@@ -166,130 +170,130 @@
 
     # File: Helpers
     # Various functions used throughout Chyrp's code.
-    require_once INCLUDES_DIR."/helpers.php";
+    require_once INCLUDES_DIR.DIR."helpers.php";
 
     # File: Gettext
     # Gettext library.
-    require_once INCLUDES_DIR."/lib/gettext/gettext.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
 
     # File: Streams
     # Streams library.
-    require_once INCLUDES_DIR."/lib/gettext/streams.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
 
     # File: YAML
     # Horde YAML parsing library.
-    require_once INCLUDES_DIR."/lib/YAML.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."YAML.php";
 
     # File: Config
     # See Also:
     #     <Config>
-    require_once INCLUDES_DIR."/class/Config.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
 
     # File: SQL
     # See Also:
     #     <SQL>
-    require_once INCLUDES_DIR."/class/SQL.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."SQL.php";
 
     # File: Model
     # See Also:
     #     <Model>
-    require_once INCLUDES_DIR."/class/Model.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Model.php";
 
     # File: User
     # See Also:
     #     <User>
-    require_once INCLUDES_DIR."/model/User.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."User.php";
 
     # File: Visitor
     # See Also:
     #     <Visitor>
-    require_once INCLUDES_DIR."/model/Visitor.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."Visitor.php";
 
     # File: Post
     # See Also:
     #     <Post>
-    require_once INCLUDES_DIR."/model/Post.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."Post.php";
 
     # File: Page
     # See Also:
     #     <Page>
-    require_once INCLUDES_DIR."/model/Page.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."Page.php";
 
     # File: Group
     # See Also:
     #     <Group>
-    require_once INCLUDES_DIR."/model/Group.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."Group.php";
 
     # File: Session
     # See Also:
     #     <Session>
-    require_once INCLUDES_DIR."/class/Session.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Session.php";
 
     # File: Flash
     # See Also:
     #     <Flash>
-    require_once INCLUDES_DIR."/class/Flash.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Flash.php";
 
     # File: Theme
     # See Also:
     #     <Theme>
-    require_once INCLUDES_DIR."/class/Theme.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Theme.php";
 
     # File: Trigger
     # See Also:
     #     <Trigger>
-    require_once INCLUDES_DIR."/class/Trigger.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Trigger.php";
 
     # File: Module
     # See Also:
     #     <Module>
-    require_once INCLUDES_DIR."/class/Modules.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Modules.php";
 
     # File: Feathers
     # See Also:
     #     <Feathers>
-    require_once INCLUDES_DIR."/class/Feathers.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Feathers.php";
 
     # File: Paginator
     # See Also:
     #     <Paginator>
-    require_once INCLUDES_DIR."/class/Paginator.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Paginator.php";
 
     # File: Twig
     # Chyrp's templating engine.
-    require_once INCLUDES_DIR."/class/Twig.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Twig.php";
 
     # File: Route
     # See Also:
     #     <Route>
-    require_once INCLUDES_DIR."/class/Route.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Route.php";
 
     # File: Update
     # See Also:
     #     <Update>
-    require_once INCLUDES_DIR."/class/Update.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Update.php";
 
     # File: Main
     # See Also:
     #     <Main Controller>
-    require_once INCLUDES_DIR."/controller/Main.php";
+    require_once INCLUDES_DIR.DIR."controller".DIR."Main.php";
 
     # File: Admin
     # See Also:
     #     <Admin Controller>
-    require_once INCLUDES_DIR."/controller/Admin.php";
+    require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
     # File: Feather
     # See Also:
     #     <Feather>
-    require_once INCLUDES_DIR."/interface/Feather.php";
+    require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
 
     # Set the error handler to exit on error if this is being run from the tester.
     if (TESTER)
         set_error_handler("error_panicker");
 
     # Redirect to the installer if there is no config.
-    if (!file_exists(INCLUDES_DIR."/config.json.php"))
+    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect("install.php");
 
     # Start the timer that keeps track of Chyrp's load time.
@@ -320,7 +324,7 @@
     set_locale($config->locale);
 
     # Load the translation engine.
-    load_translator("chyrp", INCLUDES_DIR."/locale/".$config->locale.".mo");
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$config->locale.".mo");
 
     # Constant: PREVIEWING
     # Is the user previewing a theme?
@@ -328,7 +332,7 @@
 
     # Constant: THEME_DIR
     # Absolute path to /themes/(current/previewed theme)
-    define('THEME_DIR', MAIN_DIR."/themes/".(PREVIEWING ? $_SESSION['theme'] : $config->theme));
+    define('THEME_DIR', MAIN_DIR.DIR."themes".DIR.(PREVIEWING ? $_SESSION['theme'] : $config->theme));
 
     # Constant: THEME_URL
     # URL to /themes/(current/previewed theme)

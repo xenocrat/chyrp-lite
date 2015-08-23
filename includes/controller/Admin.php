@@ -27,13 +27,13 @@
         private function __construct() {
             $config = Config::current();
 
-            $this->theme = new Twig_Loader(MAIN_DIR."/admin",
-                                            (is_writable(INCLUDES_DIR."/caches") and !DEBUG) ?
-                                                INCLUDES_DIR."/caches" :
+            $this->theme = new Twig_Loader(MAIN_DIR.DIR."admin",
+                                            (is_writable(INCLUDES_DIR.DIR."caches") and !DEBUG) ?
+                                                INCLUDES_DIR.DIR."caches" :
                                                 null);
             # Load the theme translator
-            if (file_exists(MAIN_DIR."/admin/locale/".$config->locale.".mo"))
-                load_translator("admin", MAIN_DIR."/admin/locale/".$config->locale.".mo");
+            if (file_exists(MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo"))
+                load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
         }
 
         /**
@@ -1051,7 +1051,7 @@
 
             $trigger->filter($exports, "export");
 
-            require INCLUDES_DIR."/lib/zip.php";
+            require INCLUDES_DIR.DIR."lib".DIR."zip.php";
 
             $zip = new ZipFile();
             foreach ($exports as $filename => $content)
@@ -1227,18 +1227,18 @@
             $classes = array();
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(MODULES_DIR."/".$folder."/".$folder.".php") or !file_exists(MODULES_DIR."/".$folder."/info.php"))
+                if (!file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(MODULES_DIR.DIR.$folder.DIR."info.php"))
                   continue;
 
-                if (file_exists(MODULES_DIR."/".$folder."/locale/".$config->locale.".mo"))
-                    load_translator($folder, MODULES_DIR."/".$folder."/locale/".$config->locale.".mo");
+                if (file_exists(MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
+                    load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 if (!isset($classes[$folder]))
                     $classes[$folder] = array($folder);
                 else
                     array_unshift($classes[$folder], $folder);
 
-                $info = include MODULES_DIR."/".$folder."/info.php";
+                $info = include MODULES_DIR.DIR.$folder.DIR."info.php";
                 if (gettype($info) != "array")
                   continue;
 
@@ -1247,7 +1247,7 @@
                     $classes[$folder][] = "conflicts";
 
                     foreach ((array) $info["conflicts"] as $conflict)
-                        if (file_exists(MODULES_DIR."/".$conflict."/".$conflict.".php")) {
+                        if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
                             $conflicting_modules[] = $conflict; # Shortlist of conflicting installed modules
                             if (in_array($conflict, $config->enabled_modules))
@@ -1261,7 +1261,7 @@
                     $classes[$folder][] = "dependencies";
 
                     foreach ((array) $info["dependencies"] as $dependency) {
-                        if (!file_exists(MODULES_DIR."/".$dependency."/".$dependency.".php")) {
+                        if (!file_exists(MODULES_DIR.DIR.$dependency.DIR.$dependency.".php")) {
                             if (!in_array("missing_dependency", $classes[$folder]))
                                 $classes[$folder][] = "missing_dependency"; # Dependency is not installed
 
@@ -1342,13 +1342,13 @@
                 return Flash::warning(__("Could not read feathers directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(FEATHERS_DIR."/".$folder."/".$folder.".php") or !file_exists(FEATHERS_DIR."/".$folder."/info.php"))
+                if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
-                if (file_exists(FEATHERS_DIR."/".$folder."/locale/".$config->locale.".mo"))
-                    load_translator($folder, FEATHERS_DIR."/".$folder."/locale/".$config->locale.".mo");
+                if (file_exists(FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
+                    load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = include FEATHERS_DIR."/".$folder."/info.php";
+                $info = include FEATHERS_DIR.DIR.$folder.DIR."info.php";
                 if (gettype($info) != "array")
                   continue;
 
@@ -1406,13 +1406,13 @@
                 return Flash::warning(__("Could not read themes directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(THEMES_DIR."/".$folder."/info.php"))
+                if (!file_exists(THEMES_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
-                if (file_exists(THEMES_DIR."/".$folder."/locale/".$config->locale.".mo"))
-                    load_translator($folder, THEMES_DIR."/".$folder."/locale/".$config->locale.".mo");
+                if (file_exists(THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
+                    load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = include THEMES_DIR."/".$folder."/info.php";
+                $info = include THEMES_DIR.DIR.$folder.DIR."info.php";
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
@@ -1436,8 +1436,8 @@
                                                              $info["description"]);
 
                 $this->context["themes"][] = array("name" => $folder,
-                                                   "screenshot" => (file_exists(THEMES_DIR."/".$folder."/screenshot.png") ?
-                                                                        $config->chyrp_url."/themes/".$folder."/screenshot.png" :
+                                                   "screenshot" => (file_exists(THEMES_DIR.DIR.$folder.DIR."screenshot.png") ?
+                                                                        $config->chyrp_url.DIR."themes".DIR.$folder.DIR."screenshot.png" :
                                                                         ""),
                                                    "info" => $info);
             }
@@ -1472,7 +1472,7 @@
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
-            require $folder."/".$_GET[$type]."/".$_GET[$type].".php";
+            require $folder.DIR.$_GET[$type].DIR.$_GET[$type].".php";
 
             $class_name = camelize($_GET[$type]);
 
@@ -1489,10 +1489,10 @@
             $new[] = $_GET[$type];
             $config->set($enabled_array, $new);
 
-            if (file_exists($folder."/".$_GET[$type]."/locale/".$config->locale.".mo"))
-                load_translator($_GET[$type], $folder."/".$_GET[$type]."/locale/".$config->locale.".mo");
+            if (file_exists($folder.DIR.$_GET[$type].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_GET[$type], $folder.DIR.$_GET[$type].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include $folder."/".$_GET[$type]."/info.php";
+            $info = include $folder.DIR.$_GET[$type].DIR."info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
@@ -1552,7 +1552,6 @@
 
             $config->set($enabled_array, $new);
 
-            $info = include $folder."/".$_GET[$type]."/info.php";
             if ($type == "module")
                 Flash::notice(__("Module disabled."),
                               "/admin/?action=".pluralize($type));
@@ -1575,17 +1574,17 @@
             $config = Config::current();
             $config->set("theme", $_GET['theme']);
 
-            if (file_exists(THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo"))
-                load_translator($_GET['theme'], THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo");
+            if (file_exists(THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_GET['theme'], THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include THEMES_DIR."/".$_GET['theme']."/info.php";
+            $info = include THEMES_DIR.DIR.$_GET['theme'].DIR."info.php";
             fallback($info["notifications"], array());
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
 
             # Clear the caches made by the previous theme.
-            foreach ((array) glob(INCLUDES_DIR."/caches/*.cache") as $cache)
+            foreach ((array) glob(INCLUDES_DIR.DIR."caches".DIR."*.cache") as $cache)
                 @unlink($cache);
 
             Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
@@ -1604,13 +1603,13 @@
 
             $config = Config::current();
 
-            if (file_exists(THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo"))
-                load_translator($_GET['theme'], THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo");
+            if (file_exists(THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_GET['theme'], THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include THEMES_DIR."/".$_GET['theme']."/info.php";
+            $info = include THEMES_DIR.DIR.$_GET['theme'].DIR."info.php";
 
             # Clear the caches made by the previous theme.
-            foreach (glob(INCLUDES_DIR."/caches/*.cache") as $cache)
+            foreach (glob(INCLUDES_DIR.DIR."caches".DIR."*.cache") as $cache)
                 @unlink($cache);
 
             if (!empty($_SESSION['theme'])) {
@@ -1632,7 +1631,7 @@
 
             $locales = array();
 
-            if ($open = opendir(INCLUDES_DIR."/locale/")) {
+            if ($open = opendir(INCLUDES_DIR.DIR."locale".DIR)) {
                  while (($folder = readdir($open)) !== false) {
                     $split = explode(".", $folder);
                     if (end($split) == "mo")
@@ -1688,6 +1687,9 @@
 
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
                 error(__("Error"), __("Invalid feed URL."));
+
+            if (strpos($_POST['uploads_path'], DIR) !== 0)
+                $_POST['uploads_path'] = DIR.$_POST['uploads_path'];
 
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
@@ -1805,7 +1807,7 @@
             $pages = array("manage" => array());
 
             foreach (Config::current()->enabled_feathers as $index => $feather) {
-                $info = include FEATHERS_DIR."/".$feather."/info.php";
+                $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
                 $subnav["write"]["write_post&feather=".$feather] = array("title" => $info["name"],
                                                                          "show" => $visitor->group->can("add_draft", "add_post"),
                                                                          "attributes" => ' id="feathers['.$feather.']"',
@@ -1907,7 +1909,7 @@
 
             $trigger = Trigger::current();
 
-            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace("/", "_", $action)));
+            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
 
             # Are there any extension-added pages?
             foreach (array("write" => array(),
@@ -1997,15 +1999,15 @@
 
             $this->context["sql_debug"]  = SQL::current()->debug;
 
-            $template = MAIN_DIR."/admin/pages/".$action.".twig";
+            $template = MAIN_DIR.DIR."admin".DIR."pages".DIR.$action.".twig";
 
             $config = Config::current();
             if (!file_exists($template)) {
                 foreach (array(MODULES_DIR => $config->enabled_modules,
                                FEATHERS_DIR => $config->enabled_feathers) as $path => $try)
                     foreach ($try as $extension)
-                        if (file_exists($path."/".$extension."/pages/admin/".$action.".twig"))
-                            $template = $path."/".$extension."/pages/admin/".$action.".twig";
+                        if (file_exists($path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig"))
+                            $template = $path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig";
 
                 if (!file_exists($template))
                     error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($template)));

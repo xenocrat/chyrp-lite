@@ -69,9 +69,7 @@
      
             if (!empty($ids))
                 fallback($posts, Post::find(array("where" => array("id" => $ids))));
-     
-            // header("Content-Type: application/atom+xml; charset=UTF-8");
-     
+          
             if (!is_array($posts))
                 $posts = $posts->paginated;
      
@@ -82,7 +80,6 @@
             $output = '<?xml version=\'1.0\' encoding=\'UTF-8\'?>'.PHP_EOL;
             $output.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'."\n";
-            // echo $output;
      
             $output.= <<<EOD
     <url>
@@ -110,7 +107,6 @@ EOD;
             }
             $output.= "</urlset>";
 
-            file_put_contents($_SERVER["DOCUMENT_ROOT"]."/sitemap.xml", $output);
-            // Flash::notice(__("Sitemap generated successfully!"), "/");
+            file_put_contents($_SERVER["DOCUMENT_ROOT"].DIR."sitemap.xml", $output);
         }
     }

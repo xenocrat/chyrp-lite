@@ -1,7 +1,7 @@
 <?php
-    require_once "lib/Parser.php";
-    require_once "lib/DataBag.php";
-    require_once "lib/Tag.php";
+    require_once "lib".DIR."Parser.php";
+    require_once "lib".DIR."DataBag.php";
+    require_once "lib".DIR."Tag.php";
 
     class TextileLib extends Modules {
         public function __init() {
