@@ -41,9 +41,6 @@
      * :license: BSD.
      */
 
-    if (!defined('DIRECTORY_SEPARATOR'))
-        define('DIRECTORY_SEPARATOR', '/');
-
     if (!defined('TWIG_BASE'))
         define('TWIG_BASE', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Twig');
 

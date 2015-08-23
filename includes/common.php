@@ -98,7 +98,7 @@
 
     # Constant: DIR
     # Platform-agnostic directory separator
-    define('DIR', defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : "/");
+    define('DIR', DIRECTORY_SEPARATOR);
 
     # Constant: MAIN_DIR
     # Absolute path to the Chyrp root

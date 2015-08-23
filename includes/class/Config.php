@@ -3,7 +3,7 @@
         define("INCLUDES_DIR", dirname(__FILE__));
 
     if (!defined('DIR'))
-        define('DIR', defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : "/");
+        define('DIR', DIRECTORY_SEPARATOR);
 
     /**
      * Class: Config

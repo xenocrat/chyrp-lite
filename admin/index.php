@@ -1,9 +1,6 @@
 <?php
     define('ADMIN', true);
 
-    if (!defined('DIRECTORY_SEPARATOR'))
-        define('DIRECTORY_SEPARATOR', '/');
-
     require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 
     # Prepare the controller.

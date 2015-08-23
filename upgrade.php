@@ -23,7 +23,7 @@
     define('INSTALLING',     false);
     define('TESTER',         true);
     define('INDEX',          false);
-    define('DIR',            defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : "/");
+    define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(__FILE__));
     define('INCLUDES_DIR',   dirname(__FILE__).DIR."includes");
     define('MODULES_DIR',    MAIN_DIR.DIR."modules");

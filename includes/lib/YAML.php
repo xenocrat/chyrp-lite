@@ -14,9 +14,6 @@
  * @package  Horde_Yaml
  */
 
-if (!defined('DIRECTORY_SEPARATOR'))
-    define('DIRECTORY_SEPARATOR', '/');
-
 require "YAML".DIRECTORY_SEPARATOR."Dumper.php";
 require "YAML".DIRECTORY_SEPARATOR."Exception.php";
 require "YAML".DIRECTORY_SEPARATOR."Loader.php";

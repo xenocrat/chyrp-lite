@@ -9,7 +9,7 @@
 
     # Constant: DIR
     # Platform-agnostic directory separator
-    define('DIR', defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : "/");
+    define('DIR', DIRECTORY_SEPARATOR);
 
     $valid_files = "common.js custom.js";
     if (!in_array($_GET['file'], explode(" ", $valid_files)) and strpos($_GET['file'], "/themes/") !== 0)
