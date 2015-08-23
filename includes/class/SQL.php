@@ -66,9 +66,9 @@
                 if ($this->adapter == "mysql" and class_exists("MySQLi"))
                     $this->method = "mysqli";
                 elseif (class_exists("PDO") and
-                        ($this->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
-                         $this->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers()) or
-                         $this->adapter == "mysql" and in_array("mysql", PDO::getAvailableDrivers())))
+                       ($this->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
+                        $this->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers()) or
+                        $this->adapter == "mysql" and in_array("mysql", PDO::getAvailableDrivers())))
                     $this->method = "pdo";
                 else
                     error(__("Error"), _f("Could not find a database driver for <code>%s</code>.", $this->adapter));
