@@ -125,6 +125,9 @@
         if (empty($_POST['email']))
             $errors[] = __("Email address cannot be blank.");
 
+        if (!class_exists("MySQLi") and !class_exists("PDO"))
+            $errors[] = __("MySQLi or PDO is required for database access.");
+
         if (empty($errors)) {
 
             if (!$htaccess_has_chyrp)
@@ -174,9 +177,10 @@
 
             if ($sql->adapter == "mysql" and class_exists("MySQLi"))
                 $sql->method = "mysqli";
-            elseif ($sql->adapter == "mysql" and function_exists("mysql_connect"))
-                $sql->method = "mysql";
-            elseif ($sql->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()))
+            elseif (class_exists("PDO") and
+                        ($sql->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
+                         $sql->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers()) or
+                         $sql->adapter == "mysql" and in_array("mysql", PDO::getAvailableDrivers())))
                 $sql->method = "pdo";
 
             $sql->connect();
@@ -608,7 +612,7 @@
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
                     <select name="adapter" id="adapter">
                         <?php if ((class_exists("PDO") and in_array("mysql", PDO::getAvailableDrivers())) or
-                                  class_exists("MySQLi") or function_exists("mysql_query")): ?>
+                                  class_exists("MySQLi")): ?>
                         <option value="mysql"<?php selected("mysql", fallback($_POST['adapter'], "mysql")); ?>>MySQL</option>
                         <?php endif; ?>
                         <?php if (class_exists("PDO") and in_array("sqlite", PDO::getAvailableDrivers())): ?>

@@ -59,27 +59,26 @@
 
             $this->connected = false;
 
-            # We really don't need PDO anymore, since we have the two we supported with it hardcoded (kinda).
-            # Keeping this here for when/if we decide to add support for more database engines, like Postgres and MSSQL.
-            # if (class_exists("PDO") and (in_array("mysql", PDO::getAvailableDrivers()) or in_array("sqlite", PDO::getAvailableDrivers())))
-            #     return $this->method = "pdo";
+            # For MySQL databases we prefer the MySQLi adapter.
+            # We can try our luck with other databases by adding them to the PDO conditional below.
 
             if (isset($this->adapter)) {
                 if ($this->adapter == "mysql" and class_exists("MySQLi"))
                     $this->method = "mysqli";
-                elseif ($this->adapter == "mysql" and function_exists("mysql_connect"))
-                    $this->method = "mysql";
                 elseif (class_exists("PDO") and
                         ($this->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
-                         $this->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers())))
+                         $this->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers()) or
+                         $this->adapter == "mysql" and in_array("mysql", PDO::getAvailableDrivers())))
                     $this->method = "pdo";
+                else
+                    error(__("Error"), _f("Could not find a database driver for <code>%s</code>.", $this->adapter));
             } else
                 if (class_exists("MySQLi"))
                     $this->method = "mysqli";
-                elseif (function_exists("mysql_connect"))
-                    $this->method = "mysql";
                 elseif (class_exists("PDO") and in_array("mysql", PDO::getAvailableDrivers()))
                     $this->method = "pdo";
+                else
+                    error(__("Error"), __("MySQLi or PDO is required for database access."));
         }
 
         /**
@@ -148,20 +147,14 @@
                         $this->error = $error->getMessage();
                         return ($checking) ? false : error(__("Database Error"), $this->error) ;
                     }
+
                     break;
+
                 case "mysqli":
                     $this->db = @new MySQLi($this->host, $this->username, $this->password, $this->database);
                     $this->error = mysqli_connect_error();
 
                     if (mysqli_connect_errno())
-                        return ($checking) ? false : error(__("Database Error"), $this->error) ;
-
-                    break;
-                case "mysql":
-                    $this->db = @mysql_connect($this->host, $this->username, $this->password);
-                    $this->error = mysql_error();
-
-                    if (!$this->db or !@mysql_select_db($this->database))
                         return ($checking) ? false : error(__("Database Error"), $this->error) ;
 
                     break;
@@ -341,11 +334,9 @@
                 case "pdo":
                     return $this->db->lastInsertId($this->prefix.$table."_".$seq);
                     break;
+
                 case "mysqli":
                     return $this->db->insert_id;
-                    break;
-                case "mysql":
-                    return @mysql_insert_id();
                     break;
             }
         }
@@ -368,11 +359,9 @@
                 case "pdo":
                     $string = trim($this->db->quote($string), "'");
                     break;
+
                 case "mysqli":
                     $string = $this->db->escape_string($string);
-                    break;
-                case "mysql":
-                    $string = mysql_real_escape_string($string);
                     break;
             }
 
