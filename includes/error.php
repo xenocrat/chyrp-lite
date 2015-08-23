@@ -11,12 +11,12 @@
         !function_exists("logged_in") or
         !class_exists("Config") or 
         !array_key_exists("chyrp_url", Config::current()))
-        exit("ERROR: ".$title." (".$body.")");
+        exit("ERROR: ".$body); # Not safe to build a pretty page: report and exit.
 
     if (defined('AJAX') and AJAX or isset($_POST['ajax'])) {
         foreach ($backtrace as $trace)
             $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
-        exit($body."HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
+        exit($body."\nHEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
     }
 
     $site = Config::current()->chyrp_url;
