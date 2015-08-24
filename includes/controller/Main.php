@@ -783,18 +783,14 @@
          * If "posts" is in the context and the visitor requested a feed, they will be served.
          *
          * Parameters:
-         *     $file - The theme file to display.
+         *     $file - The theme file to display (relative to THEME_DIR).
          *     $context - The context for the file.
          *     $title - The title for the page.
          */
         public function display($file, $context = array(), $title = "") {
             if (is_array($file))
                 for ($i = 0; $i < count($file); $i++) {
-                    $check = ($file[$i][0] == DIR or preg_match("/[a-zA-Z]:\\\/", $file[$i])) ?
-                                 $file[$i] :
-                                 THEME_DIR.DIR.$file[$i] ;
-
-                    if (file_exists($check.".twig") or ($i + 1) == count($file))
+                    if (file_exists(THEME_DIR.DIR.$file[$i].".twig") or ($i + 1) == count($file))
                         return $this->display($file[$i], $context, $title);
                 }
 
@@ -853,7 +849,8 @@
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $file)));
 
-            $file = ($file[0] == DIR or preg_match("/[a-zA-Z]:\\\/", $file)) ? $file : THEME_DIR.DIR.$file ;
+            $file = THEME_DIR.DIR.$file;
+
             if (!file_exists($file.".twig"))
                 error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($file.".twig")));
 

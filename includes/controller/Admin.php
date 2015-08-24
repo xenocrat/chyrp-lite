@@ -1896,8 +1896,8 @@
          * Renders the page.
          *
          * Parameters:
-         *     $action - The template file to display, in (theme dir)/pages.
-         *     $context - Context for the template.
+         *     $action - The template file to display (relative to THEME_DIR/pages).
+         *     $context - The context for the template.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          */
         public function display($action, $context = array(), $title = "") {
@@ -2013,7 +2013,6 @@
                     error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($template)));
             }
 
-            # Try the theme first
             try {
                 $this->theme->getTemplate($template)->display($this->context);
             } catch (Exception $e) {

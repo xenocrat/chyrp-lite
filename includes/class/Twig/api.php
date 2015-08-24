@@ -103,7 +103,7 @@ class Twig_BaseLoader
 
     public function getCacheFilename($name)
     {
-        return $this->cache . '/twig_' . md5($name) . '.cache';
+        return $this->cache . DIRECTORY_SEPARATOR . 'twig_' . md5($name) . '.cache';
     }
 
     public function requireTemplate($name)
@@ -177,14 +177,24 @@ class Twig_Loader extends Twig_BaseLoader
 
     public function getFilename($name)
     {
-        if ($name[0] == '/' or preg_match("/[a-zA-Z]:\\\/", $name)) return $name;
+        # Chyrp sends absolute native paths determined in the controller's display() method.
+        # Twig template files contain POSIX paths but they could be absolute and resolvable.
 
-        $path = array();
+        $real = realpath($name); # Handles POSIX to native conversion if the file exists.
+
+        if ($real !== false) # Resolves to an absolute path.
+            return $real;
+
+        $path = array(); # Assume a relative POSIX path from a template file.
+
         foreach (explode('/', $name) as $part) {
-            if ($part[0] != '.')
-                array_push($path, $part);
+            if (!empty($part) and strpos($part, ".") !== 0) # Ignore "./"
+                $path[] = $part;
+
+            if (!empty($part) and strpos($part, "..") === 0) # Backtrack if "../"
+                array_pop($path);
         }
 
-        return $this->folder . DIRECTORY_SEPARATOR .  implode(DIRECTORY_SEPARATOR, $path) ;
+        return $this->folder . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $path);
     }
 }
