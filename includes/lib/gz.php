@@ -8,7 +8,7 @@
         define('USE_ZLIB', false);
 
     # Constant: DIR
-    # Platform-agnostic directory separator
+    # Native directory separator
     define('DIR', DIRECTORY_SEPARATOR);
 
     $valid_files = "common.js custom.js";

@@ -97,7 +97,7 @@
     define('INDEX', (pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_BASENAME) == "index.php") and !ADMIN);
 
     # Constant: DIR
-    # Platform-agnostic directory separator
+    # Native directory separator
     define('DIR', DIRECTORY_SEPARATOR);
 
     # Constant: MAIN_DIR

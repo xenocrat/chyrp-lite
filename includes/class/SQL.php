@@ -365,11 +365,6 @@
                     break;
             }
 
-            # I don't think this ever worked how it intended.
-            # I've tested PDO, MySQLi, and MySQL and they all
-            # properly escape with this disabled, but get double
-            # escaped with this uncommented:
-            # $string = str_replace('\\', '\\\\', $string);
             $string = str_replace('$', '\$', $string);
 
             if ($quotes and !is_numeric($string))
