@@ -28,9 +28,9 @@
             $config = Config::current();
 
             $this->theme = new Twig_Loader(MAIN_DIR.DIR."admin",
-                                            (is_writable(INCLUDES_DIR.DIR."caches") and !DEBUG) ?
-                                                INCLUDES_DIR.DIR."caches" :
-                                                null);
+                                          (is_writable(INCLUDES_DIR.DIR."caches") and !DEBUG) ? INCLUDES_DIR.DIR."caches" : null,
+                                          "UTF-8");
+
             # Load the theme translator
             if (file_exists(MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo"))
                 load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
@@ -1923,6 +1923,7 @@
             $visitor = Visitor::current();
             $route   = Route::current();
 
+            $this->context["dir"]         = DIR;
             $this->context["theme"]       = Theme::current();
             $this->context["flash"]       = Flash::current();
             $this->context["trigger"]     = $trigger;
@@ -1999,18 +2000,15 @@
 
             $this->context["sql_debug"]  = SQL::current()->debug;
 
-            $template = MAIN_DIR.DIR."admin".DIR."pages".DIR.$action.".twig";
+            $template = "pages".DIR.$action.".twig";
 
             $config = Config::current();
-            if (!file_exists($template)) {
+            if (!file_exists(MAIN_DIR.DIR."admin".DIR.$template)) {
                 foreach (array(MODULES_DIR => $config->enabled_modules,
                                FEATHERS_DIR => $config->enabled_feathers) as $path => $try)
                     foreach ($try as $extension)
                         if (file_exists($path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig"))
                             $template = $path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig";
-
-                if (!file_exists($template))
-                    error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($template)));
             }
 
             try {

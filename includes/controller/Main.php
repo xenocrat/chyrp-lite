@@ -42,9 +42,8 @@
 
             if (defined('THEME_DIR'))
                 $this->twig = new Twig_Loader(THEME_DIR,
-                                              $cache ?
-                                                  INCLUDES_DIR.DIR."caches" :
-                                                  null) ;
+                                              $cache ? INCLUDES_DIR.DIR."caches" : null,
+                                              "UTF-8");
         }
 
         /**
@@ -818,6 +817,7 @@
 
             $theme->title = $title;
 
+            $this->context["dir"]          = DIR;
             $this->context["theme"]        = $theme;
             $this->context["flash"]        = Flash::current();
             $this->context["trigger"]      = $trigger;
@@ -848,11 +848,6 @@
             $this->context["sql_debug"] =& SQL::current()->debug;
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $file)));
-
-            $file = THEME_DIR.DIR.$file;
-
-            if (!file_exists($file.".twig"))
-                error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($file.".twig")));
 
             try {
                 return $this->twig->getTemplate($file.".twig")->display($this->context);

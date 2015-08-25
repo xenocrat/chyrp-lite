@@ -11,8 +11,8 @@
 
 
 /**
- * Load the compiler system.  Call this before you access the
- * compiler!
+ * Load the compiler system.
+ * Call this before you access the compiler!
  */
 function twig_load_compiler()
 {
@@ -81,8 +81,8 @@ class Twig_Template
 }
 
 /**
- * Baseclass for custom loaders.  Subclasses have to provide a
- * getFilename method.
+ * Baseclass for custom loaders.
+ * Subclasses have to provide a getFilename method.
  */
 class Twig_BaseLoader
 {
@@ -115,8 +115,6 @@ class Twig_BaseLoader
                 return $cls;
             }
             $fn = $this->getFilename($name);
-            if (!file_exists($fn))
-                throw new Twig_TemplateNotFound($name);
             $cache_fn = $this->getCacheFilename($name);
             if (!file_exists($cache_fn) ||
                 filemtime($cache_fn) < filemtime($fn)) {
@@ -174,27 +172,16 @@ class Twig_Loader extends Twig_BaseLoader
         parent::__construct($cache, $charset);
         $this->folder = $folder;
     }
-
     public function getFilename($name)
     {
-        # Chyrp sends absolute native paths determined in the controller's display() method.
-        # Twig template files contain POSIX paths but they could be absolute and resolvable.
+        $path = $this->folder . DIRECTORY_SEPARATOR . $name;
 
-        $real = realpath($name); # Handles POSIX to native conversion if the file exists.
+        if (file_exists($path))
+            return $path;
 
-        if ($real !== false) # Resolves to an absolute path.
-            return $real;
+        if (file_exists($name))
+            return $name;
 
-        $path = array(); # Assume a relative POSIX path from a template file.
-
-        foreach (explode('/', $name) as $part) {
-            if (!empty($part) and strpos($part, ".") !== 0) # Ignore "./"
-                $path[] = $part;
-
-            if (!empty($part) and strpos($part, "..") === 0) # Backtrack if "../"
-                array_pop($path);
-        }
-
-        return $this->folder . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $path);
+        throw new Twig_TemplateNotFound($name);
     }
 }
