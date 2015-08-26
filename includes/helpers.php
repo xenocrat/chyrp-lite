@@ -1327,6 +1327,9 @@
 
         $file_ext = end($file_split);
 
+        if ($file_ext = "php")
+            $file_ext = "txt";
+
         if (is_array($extension)) {
             if (!in_array(strtolower($file_ext), $extension) and !in_array(strtolower($original_ext), $extension)) {
                 $list = "";
@@ -2056,6 +2059,32 @@
      */
     function add_scheme($url) {
         return $url = preg_match('~^[[:alpha:]]([[:alnum:]]|\+|\.|-)*:~', $url) ? $url : "http://".$url ;
+    }
+
+    /**
+     * Function: zip_download
+     * Generate and send a zip file attachment to the visitor.
+     *
+     * Parameters:
+     *     $files - An associative array of filename => content.
+     */
+    function zip_download($files) {
+        require "lib".DIR."zip.php";
+
+        $zip = new ZipFile();
+        foreach ($files as $filename => $content)
+            $zip->addFile($content, $filename);
+
+        $zip_contents = $zip->file();
+
+        $filename = sanitize(camelize(Config::current()->name), false, true)."_Export_".date("Y-m-d");
+        ob_clean();
+        header("Content-type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=\"".$filename.".zip\"");
+        if (!in_array("ob_gzhandler", ob_list_handlers()))
+            header("Content-length: ".strlen($zip_contents));
+        echo $zip_contents;
+        ob_flush();
     }
 
     /**

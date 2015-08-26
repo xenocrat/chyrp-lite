@@ -1050,21 +1050,7 @@
             }
 
             $trigger->filter($exports, "export");
-
-            require INCLUDES_DIR.DIR."lib".DIR."zip.php";
-
-            $zip = new ZipFile();
-            foreach ($exports as $filename => $content)
-                $zip->addFile($content, $filename);
-
-            $zip_contents = $zip->file();
-
-            $filename = sanitize(camelize($config->name), false, true)."_Export_".date("Y-m-d");
-            header("Content-type: application/octet-stream");
-            header("Content-Disposition: attachment; filename=\"".$filename.".zip\"");
-            header("Content-length: ".strlen($zip_contents)."\n\n");
-
-            echo $zip_contents;
+            zip_download($exports);
         }
 
         /**
