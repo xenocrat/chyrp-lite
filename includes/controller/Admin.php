@@ -1882,7 +1882,7 @@
          * Renders the page.
          *
          * Parameters:
-         *     $action - The template file to display (relative to THEME_DIR/pages).
+         *     $action - The template file to display (relative to admin/pages/ for core and pages/admin/ for modules).
          *     $context - The context for the template.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          */
