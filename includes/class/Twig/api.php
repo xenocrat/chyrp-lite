@@ -174,6 +174,9 @@ class Twig_Loader extends Twig_BaseLoader
     }
     public function getFilename($name)
     {
+        if (DIRECTORY_SEPARATOR != "/")
+            str_replace("/", DIRECTORY_SEPARATOR, $name);
+
         $path = $this->folder . DIRECTORY_SEPARATOR . $name;
 
         if (file_exists($path))

@@ -817,7 +817,6 @@
 
             $theme->title = $title;
 
-            $this->context["dir"]          = DIR;
             $this->context["theme"]        = $theme;
             $this->context["flash"]        = Flash::current();
             $this->context["trigger"]      = $trigger;

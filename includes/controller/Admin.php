@@ -1923,7 +1923,6 @@
             $visitor = Visitor::current();
             $route   = Route::current();
 
-            $this->context["dir"]         = DIR;
             $this->context["theme"]       = Theme::current();
             $this->context["flash"]       = Flash::current();
             $this->context["trigger"]     = $trigger;
