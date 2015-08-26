@@ -13,7 +13,7 @@
       {% for file in post.files %}
         {% if ( file.type == "jpg" ) or ( file.type == "jpeg" ) or ( file.type == "png" ) or ( file.type == "gif" ) or ( file.type == "tiff" ) or ( file.type == "bmp" ) %}
         <div class="photo_frame">
-          ${ feathers['uploader'].image_link(file.name, 1024, null, "quality=80") }
+          ${ feathers['uploader'].image_link(file.name, 1024, 2048, "quality=80", "80vw") }
         </div>
         {% else %}
         <p>

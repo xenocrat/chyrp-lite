@@ -82,7 +82,7 @@
             $post->image = $this->image_tag($post);
         }
 
-        public function image_tag($post, $max_width = 500, $max_height = null, $more_args = "quality=100") {
+        public function image_tag($post, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
             $config = Config::current();
             $alt = !empty($post->alt_text) ? fix($post->alt_text, true) : $post->filename ;
 
@@ -92,7 +92,7 @@
                             $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
                             $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
 
-            $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="80vw"';
+            $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.'"';
             $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($post->filename);
             $tag.= '&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'"';
             $tag.= ' alt="'.$alt.'" class="image">';
@@ -100,9 +100,9 @@
             return $tag;
         }
 
-        public function image_link($post, $max_width = 500, $max_height = null, $more_args = "quality=100") {
+        public function image_link($post, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
             $source = !empty($post->source) ? $post->source : uploaded($post->filename) ;
-            return '<a href="'.fix($source, true).'" class="image_link">'.$this->image_tag($post, $max_width, $max_height, $more_args).'</a>';
+            return '<a href="'.fix($source, true).'" class="image_link">'.$this->image_tag($post, $max_width, $max_height, $more_args, $sizes).'</a>';
         }
 
         public function add_option($options, $post = null) {
