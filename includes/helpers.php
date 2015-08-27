@@ -2062,29 +2062,37 @@
     }
 
     /**
-     * Function: zip_download
-     * Generate and send a zip file attachment to the visitor.
+     * Function: download
+     * Send a file attachment to the visitor.
      *
      * Parameters:
      *     $files - An associative array of filename => content.
      */
-    function zip_download($files) {
+    function download($content, $filename) {
+        ob_clean();
+        header("Content-type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=\"".$filename.".zip\"");
+        if (!in_array("ob_gzhandler", ob_list_handlers()))
+            header("Content-length: ".strlen($content));
+        echo $content;
+        ob_flush();
+    }
+
+    /**
+     * Function: zip
+     * Generate a Zip bitstream.
+     *
+     * Parameters:
+     *     $files - An associative array of filename => content.
+     */
+    function zip($files) {
         require "lib".DIR."zip.php";
 
         $zip = new ZipFile();
         foreach ($files as $filename => $content)
             $zip->addFile($content, $filename);
 
-        $zip_contents = $zip->file();
-
-        $filename = sanitize(camelize(Config::current()->name), false, true)."_Export_".date("Y-m-d");
-        ob_clean();
-        header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".$filename.".zip\"");
-        if (!in_array("ob_gzhandler", ob_list_handlers()))
-            header("Content-length: ".strlen($zip_contents));
-        echo $zip_contents;
-        ob_flush();
+        return $zip->file();
     }
 
     /**

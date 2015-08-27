@@ -1050,7 +1050,8 @@
             }
 
             $trigger->filter($exports, "export");
-            zip_download($exports);
+            $filename = sanitize(camelize(Config::current()->name), false, true)."_Export_".date("Y-m-d");
+            download(zip($exports), $filename);
         }
 
         /**
