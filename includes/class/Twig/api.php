@@ -154,7 +154,7 @@ class Twig_BaseLoader
     private function evalTemplate($name, $fn=NULL)
     {
         $code = $this->compileTemplate($name, NULL, $fn);
-        $code = preg_replace('/(?!echo twig_get_attribute.+)echo "[\\\\tn]+";/', "", $code); # Remove blank lines
+        $code = preg_replace('/echo (?!twig_get_attribute.+)"(\\\\r|\\\\n)+(\\\\t| )*";/', "", $code); # Remove blank lines
         eval('?>' . $code);
     }
 }
