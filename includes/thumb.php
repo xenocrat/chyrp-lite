@@ -187,6 +187,8 @@
     else
         $done($thumbnail);
 
+    ob_flush();
+
     # Clear memory.
     imagedestroy($image);
     imagedestroy($thumbnail);
