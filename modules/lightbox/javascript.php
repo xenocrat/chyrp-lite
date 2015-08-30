@@ -91,7 +91,7 @@
                     var ref = $(this).parent("a.image_link").attr("href");
                     $("<div>", {
                         "id": "ChyrpLightbox-bg",
-                        "role": "img"
+                        "role": "presentation"
                     }).css(ChyrpLightbox.styles.bg).click(function(e) {
                         if (e.target === e.currentTarget)
                             ChyrpLightbox.hide();
