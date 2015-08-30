@@ -35,7 +35,7 @@
                 params["post_id"] = post_id;
                 jQuery.ajax({
                     type: "POST",
-                    url: "<?php echo Config::current()->chyrp_url; ?>/includes/ajax.php",
+                    url: Site.url + "/includes/ajax.php",
                     data: params,
                     beforeSend: function() {
                         this.didPrevFinish = false;	

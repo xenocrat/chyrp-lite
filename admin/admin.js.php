@@ -237,7 +237,7 @@
                         })
                     }),
                     $("<img>", {
-                        "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/close.svg",
+                        "src": Site.url + "/admin/images/icons/close.svg",
                         "alt": "<?php echo __("Close", "theme"); ?>",
                         "role": "button",
                         "aria-label": "<?php echo __("Close", "theme"); ?>"
@@ -259,7 +259,7 @@
                 $("*[data-preview]").each(function() {
                     $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
                         $("<img>", {
-                            "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/magnifier.svg",
+                            "src": Site.url + "/admin/images/icons/magnifier.svg",
                             "alt": "(<?php echo __("Preview this field", "theme"); ?>)",
                             "title": "<?php echo __("Preview this field", "theme"); ?>",
                         }).addClass("preview emblem").css({
@@ -285,7 +285,7 @@
                 });
 
                 // Update feather order with current tab order
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                $.post(Site.url + "/includes/ajax.php", {
                     action: "reorder_feathers",
                     list: feathers
                 });
@@ -297,7 +297,7 @@
                     [$("<div>", {
                         "role": "contentinfo",
                         "aria-label": "<?php echo __("Preview", "theme"); ?>"
-                    }).addClass("overlay_foreground").load("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                    }).addClass("overlay_foreground").load(Site.url + "/includes/ajax.php", {
                             action: "preview",
                             content: content,
                             filter: filter
@@ -307,7 +307,7 @@
                         })
                     }),
                     $("<img>", {
-                        "src": "<?php echo $config->chyrp_url; ?>/admin/images/icons/close.svg",
+                        "src": Site.url + "/admin/images/icons/close.svg",
                         "alt": "<?php echo __("Close", "theme"); ?>",
                         "role": "button",
                         "aria-label": "<?php echo __("Close", "theme"); ?>"
@@ -411,7 +411,7 @@
 
                 Extend.extension.name = $(this).parents("li").attr("id").replace(Extend.extension.type + "_", "");
 
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                $.post(Site.url + "/includes/ajax.php", {
                     action: "check_confirm",
                     check: Extend.extension.name,
                     type: Extend.extension.type
@@ -422,7 +422,7 @@
                     $.ajax({
                         type: "post",
                         dataType: "json",
-                        url: "<?php echo $config->chyrp_url; ?>/includes/ajax.php",
+                        url: Site.url + "/includes/ajax.php",
                         data: {
                             action: Extend.action + "_" + Extend.extension.type,
                             extension: Extend.extension.name,
