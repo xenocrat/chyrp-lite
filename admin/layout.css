@@ -1,32 +1,56 @@
 /* @group WebFonts */
 @font-face {
                                                 font-family: 'Open Sans webfont';
-                                                src: url('../fonts/OpenSans-Regular.woff') format('woff'),
-                                                     url('../fonts/OpenSans-Regular.ttf') format('truetype');
+                                                src: url('../fonts/OpenSans-Regular.woff') format('woff');
                                                 font-weight: normal;
                                                 font-style: normal;
 }
 
 @font-face {
                                                 font-family: 'Open Sans webfont';
-                                                src: url('../fonts/OpenSans-Semibold.woff') format('woff'),
-                                                     url('../fonts/OpenSans-Semibold.ttf') format('truetype');
+                                                src: url('../fonts/OpenSans-Semibold.woff') format('woff');
                                                 font-weight: bold;
                                                 font-style: normal;
 }
 
 @font-face {
                                                 font-family: 'Open Sans webfont';
-                                                src: url('../fonts/OpenSans-Italic.woff') format('woff'),
-                                                     url('../fonts/OpenSans-Italic.ttf') format('truetype');
+                                                src: url('../fonts/OpenSans-Italic.woff') format('woff');
                                                 font-weight: normal;
                                                 font-style: italic;
 }
 
 @font-face {
                                                 font-family: 'Open Sans webfont';
-                                                src: url('../fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                                                     url('../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                                                src: url('../fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                                                font-weight: bold;
+                                                font-style: italic;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../fonts/Hack-Regular.woff') format('woff');
+                                                font-weight: normal;
+                                                font-style: normal;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../fonts/Hack-Bold.woff') format('woff');
+                                                font-weight: bold;
+                                                font-style: normal;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../fonts/Hack-Oblique.woff') format('woff');
+                                                font-weight: normal;
+                                                font-style: italic;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../fonts/Hack-BoldOblique.woff') format('woff');
                                                 font-weight: bold;
                                                 font-style: italic;
 }
@@ -309,7 +333,7 @@ textarea.error {                                background-color: #faebe4;
 input[type="file"] {                            border: none }
 input.code,
 textarea.code,
-code {                                          font-family: monospace;
+code {                                          font-family: "Hack webfont", monospace;
                                                 font-style: normal }
 code {                                          background-color: #efefef;
                                                 padding: 2px;
@@ -684,9 +708,9 @@ img#likeImage_preview {                         vertical-align: middle }
 .overlay_foreground dl {                        list-style: none }
     .overlay_foreground dl dt {                 font-weight: bold }
     .overlay_foreground dl dd {                 margin-left: 1em }
-.overlay_foreground pre {                       font-family: monospace;
+.overlay_foreground pre {                       font-family: "Hack webfont", monospace;
                                                 margin: 2em }
-.overlay_foreground code {                      font-family: monospace;
+.overlay_foreground code {                      font-family: "Hack webfont", monospace;
                                                 font-size: 0.75em }
       .overlay_foreground pre code {            background-color: transparent;
                                                 border: none }
