@@ -582,7 +582,7 @@ img {                                               border-style: none;
                                                     margin-right: 4px }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 460px) {
     ul.archive li {                                 margin-left: 0em }
     ul.archive article.post.archive {               box-sizing: border-box;
                                                     width: 100%;
