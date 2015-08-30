@@ -24,28 +24,33 @@
                     "opacity": 0,
                     "transition-property": "opacity",
                     "transition-duration": "500ms",
-                    "cursor": "wait"
-                },
+                    "cursor": "wait",
+                    "background-position": "top right",
+                    "background-repeat": "no-repeat",
+                    "background-size": "28px 28px"
+                    },
                 image: {
                     "-webkit-tap-highlight-color": "rgba(0,0,0,0)",
-                    "cursor": "url('<?php echo Config::current()->chyrp_url."/modules/lightbox/images/zoom-in.svg"; ?>') 6 6, pointer"
+                    "cursor": "url('" + Site.url + "/modules/lightbox/images/zoom-in.svg') 6 6, pointer"
                 },
                 black: {
-                    "background-color": "#000000"
+                    "background-color": "#000000",
+                    "background-image": "url('" + Site.url + "/modules/lightbox/images/close_white.svg')"
                 },
                 grey: {
-                    "background-color": "#3f3f3f"
+                    "background-color": "#3f3f3f",
+                    "background-image": "url('" + Site.url + "/modules/lightbox/images/close_white.svg')"
                 },
                 white: {
-                    "background-color": "#ffffff"
+                    "background-color": "#ffffff",
+                    "background-image": "url('" + Site.url + "/modules/lightbox/images/close_grey.svg')"
                 },
                 inherit: {
-                    "background-color": "inherit"
+                    "background-color": "inherit",
+                    "background-image": "url('" + Site.url + "/modules/lightbox/images/close_grey.svg')"
                 },
             },
             init: function() {
-                if ( isNaN(ChyrpLightbox.spacing) )
-                    ChyrpLightbox.spacing = 24;
                 $.extend( ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background] );
                 $("img.image").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
                 if ( ChyrpLightbox.protect )
@@ -128,7 +133,7 @@
                 });
                 bg.css({
                     "opacity": 1,
-                    "cursor": "url('<?php echo Config::current()->chyrp_url."/modules/lightbox/images/zoom-out.svg"; ?>') 6 6, pointer"
+                    "cursor": "url('" + Site.url + "/modules/lightbox/images/zoom-out.svg') 6 6, pointer"
                 });
             },
             hide: function() {
