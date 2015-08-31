@@ -84,6 +84,9 @@
             } else
                 $status = $type;
 
+            if (!logged_in())
+                $notify = 0; # Only logged-in users can request notifications
+
             if (!empty($config->akismet_api_key)) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
 
@@ -226,12 +229,12 @@
 
         public function editable($user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("edit_comment") or ($user->group->can("edit_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
+            return ($user->group->can("edit_comment") or (logged_in() and $user->group->can("edit_own_comment") and $user->id == $this->user_id));
         }
 
         public function deletable($user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("delete_comment") or ($user->group->can("delete_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
+            return ($user->group->can("delete_comment") or (logged_in() and $user->group->can("delete_own_comment") and $user->id == $this->user_id));
         }
 
         /**
