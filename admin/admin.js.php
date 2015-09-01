@@ -1,6 +1,6 @@
 <?php
     define('JAVASCRIPT', true);
-    require_once "../includes/common.php";
+    require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
     error_reporting(0);
     header("Content-Type: application/javascript");
     $route = Route::current(MainController::current());
