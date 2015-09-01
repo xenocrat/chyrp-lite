@@ -193,6 +193,14 @@
             foreach ($reorder as &$value)
                 $value = preg_replace("/feathers\[([^\]]+)\]/", "\\1", $value);
 
+            foreach ($config->enabled_feathers as $feather)
+                if (!in_array($feather, $reorder))
+                    exit; # Attempt to disable feather.
+
+            foreach ($reorder as $feather)
+                if (!in_array($feather, $config->enabled_feathers))
+                    exit; # Attempt to enable feather.
+
             $config->set("enabled_feathers", $reorder);
             break;
     }
