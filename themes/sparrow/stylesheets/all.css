@@ -258,7 +258,7 @@ textarea {                                          box-sizing: border-box;
                                                     border-radius: 0em;
 /* Removes shadow from Mobile Safari -> */          background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 textarea:focus {                                    outline: none;
-                                                    border: 1px solid #548eb8 }
+                                                    border: 1px solid #99726d }
     article.commentary textarea {                   max-width: none }
 button {                                            font: inherit;
                                                     font-size: inherit;
