@@ -23,7 +23,7 @@
             $post = new Post($_POST['id'], array("filter" => false, "drafts" => true));
 
             if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
+                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
                 $trigger->call("not_found");
                 exit;
             }
@@ -45,13 +45,13 @@
             break;
 
         case "delete_post":
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
+                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
                 $trigger->call("not_found");
                 exit;
             }
@@ -72,7 +72,7 @@
                 $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
+                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
                 $trigger->call("not_found");
                 exit;
             }
@@ -104,7 +104,7 @@
             break;
 
         case "enable_module": case "enable_feather":
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $type = ($_POST['action'] == "enable_module") ? "module" : "feather" ;
@@ -160,7 +160,7 @@
                  '] }');
 
         case "disable_module": case "disable_feather":
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;

@@ -447,7 +447,7 @@
          * Redirects to /feed (backwards compatibility).
          */
         public function rss() {
-            header("HTTP/1.1 301 Moved Permanently");
+            header($_SERVER["SERVER_PROTOCOL"]." 301 Moved Permanently");
             redirect(oneof(@Config::current()->feed_url, url("feed")));
         }
 

@@ -46,7 +46,7 @@
         }
         var Site = {
             url: "<?php echo $config->chyrp_url; ?>",
-            key: "<?php if (logged_in()) echo $config->secure_hashkey; ?>"
+            key: "<?php if (logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>"
         };
         function toggle_all() {
             var all_checked = true;

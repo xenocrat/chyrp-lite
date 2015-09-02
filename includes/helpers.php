@@ -142,7 +142,7 @@
      *     $scope - An array of values to extract into the scope.
      */
      function show_404() {
-        header("HTTP/1.1 404 Not Found");
+        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 
         if (!defined('DEBUG'))
             exit("404 Not Found");
