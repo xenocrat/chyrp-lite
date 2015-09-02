@@ -45,7 +45,8 @@
             action: "<?php echo fix($_GET['action']); ?>"
         }
         var Site = {
-            url: "<?php echo $config->chyrp_url; ?>"
+            url: "<?php echo $config->chyrp_url; ?>",
+            key: "<?php if (logged_in()) echo $config->secure_hashkey; ?>"
         };
         function toggle_all() {
             var all_checked = true;
@@ -420,13 +421,14 @@
                         Extend.confirmed = (confirm(data)) ? 1 : 0;
 
                     $.ajax({
-                        type: "post",
+                        type: "POST",
                         dataType: "json",
                         url: Site.url + "/includes/ajax.php",
                         data: {
                             action: Extend.action + "_" + Extend.extension.type,
                             extension: Extend.extension.name,
-                            confirm: Extend.confirmed
+                            confirm: Extend.confirmed,
+                            hash: Site.key
                         },
                         success: function(json) {
                             var extension = $("#" + Extend.extension.type + "_" + Extend.extension.name).detach();

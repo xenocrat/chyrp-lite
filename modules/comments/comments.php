@@ -108,7 +108,11 @@
             if (empty($_POST))
                 redirect("/admin/?action=manage_comments");
 
+            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             $comment = new Comment($_POST['id']);
+
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
@@ -548,7 +552,11 @@
                     break;
 
                 case "delete_comment":
+                    if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                        show_403(__("Access Denied"), __("Invalid security key."));
+
                     $comment = new Comment($_POST['id']);
+
                     if ($comment->deletable())
                         Comment::delete($_POST['id']);
 

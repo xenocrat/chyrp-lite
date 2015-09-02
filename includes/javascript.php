@@ -19,7 +19,8 @@
             action: "<?php echo $_GET['action']; ?>"
         };
         var Site = {
-            url: "<?php echo $config->chyrp_url; ?>"
+            url: "<?php echo $config->chyrp_url; ?>",
+            key: "<?php if (logged_in()) echo $config->secure_hashkey; ?>"
         };
         var Post = {
             id: 0,
@@ -106,9 +107,10 @@
                 }
             },
             destroy: function(id) {
-                $("#post_" + id).loader()
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "delete_post", id: id }, function(response) {
+                $("#post_" + id).loader();
+                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "delete_post", id: id, hash: Site.key }, function(response) {
                     $("#post_" + id).loader(true);
+
                     if (isError(response))
                         return;
 

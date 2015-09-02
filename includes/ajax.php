@@ -45,6 +45,9 @@
             break;
 
         case "delete_post":
+            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results) {
@@ -101,6 +104,9 @@
             break;
 
         case "enable_module": case "enable_feather":
+            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             $type = ($_POST['action'] == "enable_module") ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
@@ -154,6 +160,9 @@
                  '] }');
 
         case "disable_module": case "disable_feather":
+            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))

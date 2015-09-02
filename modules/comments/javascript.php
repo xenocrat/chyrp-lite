@@ -145,7 +145,7 @@
             destroy: function(id) {
                 ChyrpComment.notice--;
                 $("#comment_" + id).loader();
-                $.post(Site.url + "/includes/ajax.php", { action: "delete_comment", id: id }, function(response){
+                $.post(Site.url + "/includes/ajax.php", { action: "delete_comment", id: id, hash: Site.key }, function(response){
                     $("#comment_" + id).loader(true);
 
                     if (isError(response))
