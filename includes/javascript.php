@@ -45,16 +45,18 @@
                                 return false;
                             });
                             $("#post_edit_form_" + id).on( "submit", function(e){
-                                e.preventDefault();
-                                $(this).loader();
-                                $.ajax({
-                                    type: "POST",
-                                    url: $(this).attr("action"),
-                                    data: new FormData(this),
-                                    processData: false,
-                                    contentType: false,
-                                    dataType: "text"
-                                }).done(Post.updated);
+                                if ( !!window.FormData ) {
+                                    e.preventDefault();
+                                    $(this).loader();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: $(this).attr("action"),
+                                        data: new FormData(this),
+                                        processData: false,
+                                        contentType: false,
+                                        dataType: "text"
+                                    }).done(Post.updated);
+                                }
                             });
                             $("#post_cancel_edit_" + id).click(function(){
                                 $("#post_edit_form_" + id).loader();

@@ -15,24 +15,26 @@
                         id: "ajax"
                     }));
                     $("#add_comment").on( "submit", function(e){
-                        e.preventDefault();
-                        $("#add_comment").parent().loader();
-                        $.ajax({
-                            type: "POST",
-                            url: $(this).attr("action"),
-                            data: new FormData(this),
-                            processData: false,
-                            contentType: false,
-                            dataType: "json"
-                        }).done(function(json) {
-                            $("#add_comment").trigger('reset');
-                            $.post(Site.url + "/includes/ajax.php", { action: "show_comment", comment_id: json.comment_id, reason: "added" }, function(data) {
-                                $("#comments").attr("data-timestamp", json.comment_timestamp);
-                                $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
-                            }, "html");
-                        }).always(function() {
-                            $("#add_comment").parent().loader(true);
-                        });
+                        if ( !!window.FormData ) {
+                            e.preventDefault();
+                            $("#add_comment").parent().loader();
+                            $.ajax({
+                                type: "POST",
+                                url: $(this).attr("action"),
+                                data: new FormData(this),
+                                processData: false,
+                                contentType: false,
+                                dataType: "json"
+                            }).done(function(json) {
+                                $("#add_comment").trigger('reset');
+                                $.post(Site.url + "/includes/ajax.php", { action: "show_comment", comment_id: json.comment_id, reason: "added" }, function(data) {
+                                    $("#comments").attr("data-timestamp", json.comment_timestamp);
+                                    $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
+                                }, "html");
+                            }).always(function() {
+                                $("#add_comment").parent().loader(true);
+                            });
+                        }
                     });
                 }
 <?php if (!isset(Config::current()->enable_ajax) or Config::current()->enable_ajax): ?>
@@ -112,31 +114,33 @@
                                 });
                             });
                             $("#comment_edit_" + id).on( "submit", function(e){
-                                e.preventDefault();
-                                $("#comment_" + id).loader();
-                                $.ajax({
-                                    type: "POST",
-                                    url: $(this).attr("action"),
-                                    data: new FormData(this),
-                                    processData: false,
-                                    contentType: false,
-                                    dataType: "html"
-                                }).done(function(response) {
-                                    ChyrpComment.editing--;
+                                if ( !!window.FormData ) {
+                                    e.preventDefault();
+                                    $("#comment_" + id).loader();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: $(this).attr("action"),
+                                        data: new FormData(this),
+                                        processData: false,
+                                        contentType: false,
+                                        dataType: "html"
+                                    }).done(function(response) {
+                                        ChyrpComment.editing--;
 
-                                    if (isError(response))
-                                        return $("#comment_" + id).loader(true);
-
-                                    $.post(Site.url + "/includes/ajax.php", { action: "show_comment", comment_id: id, reason: "edited" }, function(data) {
-                                        if (isError(data))
+                                        if (isError(response))
                                             return $("#comment_" + id).loader(true);
 
-                                        $("#comment_" + id).fadeOut("fast", function(){
-                                            $(this).loader(true);
-                                            $(this).replaceWith(data).fadeIn("fast");
-                                        });
-                                    }, "html");
-                                });
+                                        $.post(Site.url + "/includes/ajax.php", { action: "show_comment", comment_id: id, reason: "edited" }, function(data) {
+                                            if (isError(data))
+                                                return $("#comment_" + id).loader(true);
+
+                                            $("#comment_" + id).fadeOut("fast", function(){
+                                                $(this).loader(true);
+                                                $(this).replaceWith(data).fadeIn("fast");
+                                            });
+                                        }, "html");
+                                    });
+                                }
                             });
                         })
                     });
