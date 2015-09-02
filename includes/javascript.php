@@ -27,7 +27,7 @@
             edit: function(id) {
                 Post.id = id;
                 $("#post_" + id).loader();
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "edit_post", id: id }, function(data) {
+                $.post(Site.url + "/includes/ajax.php", { action: "edit_post", id: id }, function(data) {
                     $("#post_" + id).fadeOut("fast", function(){
                         $(this).loader(true);
                         $(this).replaceWith(data);
@@ -58,7 +58,7 @@
                             });
                             $("#post_cancel_edit_" + id).click(function(){
                                 $("#post_edit_form_" + id).loader();
-                                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                                $.post(Site.url + "/includes/ajax.php", {
                                     action: "view_post",
                                     context: "all",
                                     id: id,
@@ -92,7 +92,7 @@
                         alert("<?php echo __("Post has been published."); ?>");
                     })
                 } else {
-                    $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
+                    $.post(Site.url + "/includes/ajax.php", {
                         action: "view_post",
                         context: "all",
                         id: id,
@@ -108,7 +108,7 @@
             },
             destroy: function(id) {
                 $("#post_" + id).loader();
-                $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "delete_post", id: id, hash: Site.key }, function(response) {
+                $.post(Site.url + "/includes/ajax.php", { action: "delete_post", id: id, hash: Site.key }, function(response) {
                     $("#post_" + id).loader(true);
 
                     if (isError(response))
