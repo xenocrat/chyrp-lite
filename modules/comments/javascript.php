@@ -14,21 +14,25 @@
                         value: "true",
                         id: "ajax"
                     }));
-                    $("#add_comment").ajaxForm({
-                        dataType: "json",
-                        resetForm: true,
-                        beforeSubmit: function() {
-                            $("#add_comment").parent().loader();
-                        },
-                        success: function(json) {
+                    $("#add_comment").on( "submit", function(e){
+                        e.preventDefault();
+                        $("#add_comment").parent().loader();
+                        $.ajax({
+                            type: "POST",
+                            url: $(this).attr("action"),
+                            data: new FormData(this),
+                            processData: false,
+                            contentType: false,
+                            dataType: "json"
+                        }).done(function(json) {
+                            $("#add_comment").trigger('reset');
                             $.post(Site.url + "/includes/ajax.php", { action: "show_comment", comment_id: json.comment_id, reason: "added" }, function(data) {
                                 $("#comments").attr("data-timestamp", json.comment_timestamp);
                                 $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
                             }, "html");
-                        },
-                        complete: function() {
+                        }).always(function() {
                             $("#add_comment").parent().loader(true);
-                        }
+                        });
                     });
                 }
 <?php if (!isset(Config::current()->enable_ajax) or Config::current()->enable_ajax): ?>
@@ -51,7 +55,9 @@
 <?php endif; ?>
             },
             reload: function() {
-                if ($("#comments").attr("data-post") == undefined) return;
+                if ($("#comments").attr("data-post") == undefined)
+                    return;
+
                 var id = $("#comments").attr("data-post");
                 if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && ChyrpComment.failed != true && $(".comments.paginated").children().size() < <?php echo Config::current()->comments_per_page; ?>) {
                     $.ajax({
@@ -79,7 +85,10 @@
                 ChyrpComment.editing++;
                 $("#comment_" + id).loader();
                 $.post(Site.url + "/includes/ajax.php", { action: "edit_comment", comment_id: id }, function(data) {
-                    if (isError(data)) return $("#comment_" + id).loader(true);
+
+                    if (isError(data))
+                        return $("#comment_" + id).loader(true);
+
                     $("#comment_" + id).fadeOut("fast", function(){
                         $(this).loader(true);
                         $(this).empty().append(data).fadeIn("fast", function(){
@@ -102,21 +111,32 @@
                                     });
                                 });
                             });
-                            $("#comment_edit_" + id).ajaxForm({
-                                beforeSubmit: function() {
-                                    $("#comment_" + id).loader();
-                                },
-                                success: function(response) {
+                            $("#comment_edit_" + id).on( "submit", function(e){
+                                e.preventDefault();
+                                $("#comment_" + id).loader();
+                                $.ajax({
+                                    type: "POST",
+                                    url: $(this).attr("action"),
+                                    data: new FormData(this),
+                                    processData: false,
+                                    contentType: false,
+                                    dataType: "html"
+                                }).done(function(response) {
                                     ChyrpComment.editing--;
-                                    if (isError(response)) return $("#comment_" + id).loader(true);
+
+                                    if (isError(response))
+                                        return $("#comment_" + id).loader(true);
+
                                     $.post(Site.url + "/includes/ajax.php", { action: "show_comment", comment_id: id, reason: "edited" }, function(data) {
-                                        if (isError(data)) return $("#comment_" + id).loader(true);
+                                        if (isError(data))
+                                            return $("#comment_" + id).loader(true);
+
                                         $("#comment_" + id).fadeOut("fast", function(){
                                             $(this).loader(true);
                                             $(this).replaceWith(data).fadeIn("fast");
                                         });
                                     }, "html");
-                                }
+                                });
                             });
                         })
                     });
@@ -127,7 +147,10 @@
                 $("#comment_" + id).loader();
                 $.post(Site.url + "/includes/ajax.php", { action: "delete_comment", id: id }, function(response){
                     $("#comment_" + id).loader(true);
-                    if (isError(response)) return;
+
+                    if (isError(response))
+                        return;
+
                     $("#comment_" + id).fadeOut("fast", function(){
                         $(this).remove();
                     });

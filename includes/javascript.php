@@ -25,36 +25,45 @@
             id: 0,
             edit: function(id) {
                 Post.id = id;
-                $("#post_"+id).loader();
+                $("#post_" + id).loader();
                 $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "edit_post", id: id }, function(data) {
-                    $("#post_"+id).fadeOut("fast", function(){
+                    $("#post_" + id).fadeOut("fast", function(){
                         $(this).loader(true);
                         $(this).replaceWith(data);
-                        $(window).scrollTop($("#post_edit_form_"+id).offset().top);
-                        $("#post_edit_form_"+id).css("opacity", 0).animate({ opacity: 1 }, function(){
+                        $(window).scrollTop($("#post_edit_form_" + id).offset().top);
+                        $("#post_edit_form_" + id).css("opacity", 0).animate({ opacity: 1 }, function(){
 <?php $trigger->call("ajax_post_edit_form_javascript"); ?>
-                            $("#more_options_link_"+id).click(function(){
-                                if ($("#more_options_"+id).css("display") == "none") {
+                            $("#more_options_link_" + id).click(function(){
+                                if ($("#more_options_" + id).css("display") == "none") {
                                     $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
-                                    $("#more_options_"+id).slideDown("slow");
+                                    $("#more_options_" + id).slideDown("slow");
                                 } else {
                                     $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
-                                    $("#more_options_"+id).slideUp("slow");
+                                    $("#more_options_" + id).slideUp("slow");
                                 }
                                 return false;
                             });
-                            $("#post_edit_form_"+id).ajaxForm({ beforeSubmit: function(){
-                                $("#post_edit_form_"+id).loader();
-                            }, success: Post.updated })
-                            $("#post_cancel_edit_"+id).click(function(){
-                                $("#post_edit_form_"+id).loader();
+                            $("#post_edit_form_" + id).on( "submit", function(e){
+                                e.preventDefault();
+                                $(this).loader();
+                                $.ajax({
+                                    type: "POST",
+                                    url: $(this).attr("action"),
+                                    data: new FormData(this),
+                                    processData: false,
+                                    contentType: false,
+                                    dataType: "text"
+                                }).done(Post.updated);
+                            });
+                            $("#post_cancel_edit_" + id).click(function(){
+                                $("#post_edit_form_" + id).loader();
                                 $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
                                     action: "view_post",
                                     context: "all",
                                     id: id,
                                     reason: "cancelled"
                                 }, function(data) {
-                                    $("#post_edit_form_"+id).fadeOut("fast", function(){
+                                    $("#post_edit_form_" + id).fadeOut("fast", function(){
                                         $(this).loader(true);
                                         $(this).replaceWith(data);
                                         $(this).hide().fadeIn("fast");
@@ -69,15 +78,15 @@
             updated: function(response){
                 id = Post.id;
                 if (isError(response))
-                    return $("#post_edit_form_"+id).loader(true);
+                    return $("#post_edit_form_" + id).loader(true);
 
-                if (Route.action != "drafts" && Route.action != "view" && $("#post_edit_form_"+id+" select#status").val() == "draft") {
-                    $("#post_edit_form_"+id).fadeOut("fast", function(){
+                if (Route.action != "drafts" && Route.action != "view" && $("#post_edit_form_" + id + " select#status").val() == "draft") {
+                    $("#post_edit_form_" + id).fadeOut("fast", function(){
                         $(this).loader(true);
                         alert("<?php echo __("Post has been saved as a draft."); ?>");
                     })
-                } else if (Route.action == "drafts" && $("#post_edit_form_"+id+" select#status").val() != "draft") {
-                    $("#post_edit_form_"+id).fadeOut("fast", function(){
+                } else if (Route.action == "drafts" && $("#post_edit_form_" + id + " select#status").val() != "draft") {
+                    $("#post_edit_form_" + id).fadeOut("fast", function(){
                         $(this).loader(true);
                         alert("<?php echo __("Post has been published."); ?>");
                     })
@@ -88,21 +97,22 @@
                         id: id,
                         reason: "edited"
                     }, function(data) {
-                        $("#post_edit_form_"+id).fadeOut("fast", function(){
+                        $("#post_edit_form_" + id).fadeOut("fast", function(){
                             $(this).loader(true);
                             $(this).replaceWith(data);
-                            $("#post_"+id).hide().fadeIn("fast");
+                            $("#post_" + id).hide().fadeIn("fast");
                         });
                     }, "html");
                 }
             },
             destroy: function(id) {
-                $("#post_"+id).loader()
+                $("#post_" + id).loader()
                 $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "delete_post", id: id }, function(response) {
-                    $("#post_"+id).loader(true);
-                    if (isError(response)) return;
+                    $("#post_" + id).loader(true);
+                    if (isError(response))
+                        return;
 
-                    $("#post_"+id).fadeOut("fast", function(){
+                    $("#post_" + id).fadeOut("fast", function(){
                         $(this).remove();
 
                         if (Route.action == "view")
