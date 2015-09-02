@@ -1327,7 +1327,7 @@
 
         $file_ext = end($file_split);
 
-        if ($file_ext = "php")
+        if ($file_ext == "php")
             $file_ext = "txt";
 
         if (is_array($extension)) {
