@@ -17,6 +17,9 @@
 
     switch($_POST['action']) {
         case "edit_post":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!isset($_POST['id']))
                 error(__("No ID Specified"), __("Please specify an ID of the post you would like to edit."));
 

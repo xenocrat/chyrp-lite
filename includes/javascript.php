@@ -20,14 +20,14 @@
         };
         var Site = {
             url: "<?php echo $config->chyrp_url; ?>",
-            key: "<?php if (logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>"
+            key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>"
         };
         var Post = {
             id: 0,
             edit: function(id) {
                 Post.id = id;
                 $("#post_" + id).loader();
-                $.post(Site.url + "/includes/ajax.php", { action: "edit_post", id: id }, function(data) {
+                $.post(Site.url + "/includes/ajax.php", { action: "edit_post", id: id, hash: Site.key }, function(data) {
                     $("#post_" + id).fadeOut("fast", function(){
                         $(this).loader(true);
                         $(this).replaceWith(data);

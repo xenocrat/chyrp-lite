@@ -563,6 +563,9 @@
                     break;
 
                 case "edit_comment":
+                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                        show_403(__("Access Denied"), __("Invalid security key."));
+
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
 
                     if ($comment->editable())

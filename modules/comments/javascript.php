@@ -86,7 +86,7 @@
             edit: function(id) {
                 ChyrpComment.editing++;
                 $("#comment_" + id).loader();
-                $.post(Site.url + "/includes/ajax.php", { action: "edit_comment", comment_id: id }, function(data) {
+                $.post(Site.url + "/includes/ajax.php", { action: "edit_comment", comment_id: id, hash: Site.key }, function(data) {
 
                     if (isError(data))
                         return $("#comment_" + id).loader(true);
