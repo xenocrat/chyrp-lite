@@ -251,7 +251,7 @@
         }
 
         public function admin_edit_tags($admin) {
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_GET['id']);
@@ -265,7 +265,7 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!isset($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_POST['id']);
@@ -668,7 +668,7 @@
         }
 
         public function ajax_tag_post() {
-            if (empty($_POST['name']) or empty($_POST['post']))
+            if (empty($_POST['name']) or empty($_POST['post']) or !is_numeric($_POST['post']))
                 exit("{}");
 
             $sql = SQL::current();
