@@ -20,8 +20,8 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!isset($_POST['id']))
-                error(__("No ID Specified"), __("Please specify an ID of the post you would like to edit."));
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a post."));
 
             $post = new Post($_POST['id'], array("filter" => false, "drafts" => true));
 
@@ -51,6 +51,9 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a post."));
+
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results) {
@@ -71,8 +74,10 @@
 
             $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
 
-            if (isset($_POST['id']))
-                $post = new Post($_POST['id'], array("drafts" => true));
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to view a post."));
+
+            $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results) {
                 header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");

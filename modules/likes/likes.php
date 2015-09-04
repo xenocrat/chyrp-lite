@@ -40,8 +40,11 @@
         }
 
         static function route_like() {
+            if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
+                error(__("Error"), __("An ID is required to like a post.", "likes"));
+
             $request["action"] = "like";
-            $request["post_id"] = (int) fallback($_GET['post_id'], 0);
+            $request["post_id"] = (int) $_GET['post_id'];
 
             $like = new Like($request, Visitor::current()->id);
             $like->like();
@@ -52,8 +55,11 @@
         }
 
         static function route_unlike() {
+            if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
+                error(__("Error"), __("An ID is required to unlike a post.", "likes"));
+
             $request["action"] = "unlike";
-            $request["post_id"] = (int) fallback($_GET['post_id'], 0);
+            $request["post_id"] = (int) $_GET['post_id'];
 
             $like = new Like($request, Visitor::current()->id);
             $like->unlike();
@@ -73,8 +79,8 @@
         }
 
         static function ajax_like() {
-            if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
-                exit();
+            if (!isset($_REQUEST["action"]) or empty($_REQUEST["post_id"]) or !is_numeric($_REQUEST['post_id']))
+                error(__("Error"), __("An ID is required to like a post.", "likes"));
             
             $user_id = Visitor::current()->id;
             $likeSetting = Config::current()->module_like;
@@ -111,8 +117,8 @@
         }
 
         static function ajax_unlike() {
-            if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
-                exit();
+            if (!isset($_REQUEST["action"]) or empty($_REQUEST["post_id"]) or !is_numeric($_REQUEST['post_id']))
+                error(__("Error"), __("An ID is required to unlike a post.", "likes"));
             
             $user_id = Visitor::current()->id;
             $likeSetting = Config::current()->module_like;

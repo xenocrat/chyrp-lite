@@ -155,7 +155,7 @@
          * Post editing.
          */
         public function edit_post() {
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a post."));
 
             $post = new Post($_GET['id'], array("drafts" => true, "filter" => false));
@@ -177,6 +177,9 @@
          * Updates a post when the form is submitted.
          */
         public function update_post() {
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to update a post."));
+
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if (isset($_POST['publish']))
@@ -206,7 +209,7 @@
          * Post deletion (confirm page).
          */
         public function delete_post() {
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
             $post = new Post($_GET['id'], array("drafts" => true));
@@ -222,7 +225,7 @@
          * Destroys a post (the real deal).
          */
         public function destroy_post() {
-            if (empty($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
             if ($_POST['destroy'] == "bollocks")
@@ -357,7 +360,7 @@
             if (!Visitor::current()->group->can("edit_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this page."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."));
 
             $this->display("edit_page",
@@ -378,6 +381,9 @@
 
             if (empty($_POST['title']) and empty($_POST['slug']))
                 error(__("Error"), __("Title and slug cannot be blank."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a page."));
 
             $page = new Page($_POST['id']);
 
@@ -558,7 +564,7 @@
             if (!Visitor::current()->group->can("edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this user."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."));
 
             $this->display("edit_user",
@@ -572,7 +578,7 @@
          * Updates a user when the form is submitted.
          */
         public function update_user() {
-            if (empty($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
@@ -633,7 +639,7 @@
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."));
 
             $this->display("delete_user",
@@ -649,7 +655,7 @@
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
-            if (empty($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."));
 
             if ($_POST['destroy'] == "bollocks")
@@ -741,7 +747,7 @@
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."));
 
             $this->display("edit_group",
@@ -787,7 +793,7 @@
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."));
 
             $this->display("delete_group",
@@ -804,7 +810,7 @@
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
-            if (!isset($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."));
 
             if ($_POST['destroy'] == "bollocks")
@@ -1646,8 +1652,8 @@
             $config = Config::current();
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
-                         $config->set("chyrp_url", rtrim($_POST['chyrp_url'], "/")),
-                         $config->set("url", rtrim(oneof($_POST['url'], $_POST['chyrp_url']), "/")),
+                         $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/")),
+                         $config->set("url", rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/")),
                          $config->set("email", $_POST['email']),
                          $config->set("timezone", $_POST['timezone']),
                          $config->set("locale", $_POST['locale']),
