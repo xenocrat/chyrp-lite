@@ -51,13 +51,16 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Highlighter: syntax highlighting courtesy of [highlight.js](https://highlightjs.org/).
 
 ## Requirements
-These are the earliest versions of the services with which Chyrp Lite has been tested:
 
 * PHP 5.3.2+
 * MySQL:
   - MySQL 4.1+
+  - MySQLi or PDO
 * SQLite:
   - SQLite 3+
+  - PDO
+* PostgreSQL:
+  - PostgreSQL 7.1+
   - PDO
 
 ## Installation
