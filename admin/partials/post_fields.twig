@@ -20,9 +20,15 @@ ${ trigger.call("before_post_fields", feather) }
                             <p>
                             {% if field.type == "file" and ( post.filename or post.filenames ) and route.action == "edit_post" %}
                                 {% if post.filename %}
-                                <em>${ "Current file name:" | translate } <strong>${ post.filename | escape('') }</strong></em>
+                                <em>${ "Current file name:" | translate }</em>
+                                <strong>${ post.filename | escape }</strong>
                                 {% else %}
-                                <em>${ "Current file names:" | translate } <strong>${ post.filenames | join(", ") | escape('') }</strong></em>
+                                <em>${ "Current file names:" | translate }</em>
+                                <strong>
+                                    <ul>
+                                        {% for name in post.filenames %}<li>${ name | escape }</li>{% endfor %}
+                                    </ul>
+                                </strong>
                                 {% endif %}
                             {% endif %}
                             </p>
