@@ -53,9 +53,9 @@
 
             $(document.createElement("label")).attr("for", "toggle").text("<?php echo __("Toggle All", "theme"); ?>").appendTo("#toggler");
             $(document.createElement("input")).attr({
-                type: "checkbox",
-                name: "toggle",
-                id: "toggle",
+                "type": "checkbox",
+                "name": "toggle",
+                "id": "toggle",
                 "class": "checkbox"
             }).appendTo("#toggler, .toggler");
 
@@ -113,8 +113,8 @@
                     var more_options_text = "<?php echo __("More Options &darr;", "theme"); ?>";
 
                 $(document.createElement("a")).attr({
-                    id: "more_options_link",
-                    href: "javascript:void(0)"
+                    "id": "more_options_link",
+                    "href": "javascript:void(0)"
                 }).addClass("more_options_link").append(more_options_text).insertBefore("#more_options");
 
                 if (Cookie.get("show_more_options") == null)
