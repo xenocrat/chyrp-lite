@@ -2010,7 +2010,7 @@
      *     A unique token.
      */
     function token($items) {
-        return sha1(implode((array) $items).md5(Config::current()->secure_hashkey));
+        return sha1(implode((array) $items).Config::current()->secure_hashkey);
     }
 
     /**
