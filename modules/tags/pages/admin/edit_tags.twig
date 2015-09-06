@@ -15,7 +15,7 @@
                             <img src="$theme_url/images/icons/success.svg" alt="success"> ${ "Update" | translate }
                         </button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                     <input type="hidden" name="id" value="$post.id" id="clean">
                 </fieldset>
             </form>

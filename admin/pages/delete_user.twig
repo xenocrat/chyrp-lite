@@ -51,7 +51,7 @@ ${ trigger.call("delete_user_form") }
                         </button>
                     </div>
                     <input type="hidden" name="id" value="$user.id" id="id">
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

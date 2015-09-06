@@ -43,7 +43,7 @@ ${ trigger.call("edit_user_fields", user) }
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
                     <input type="hidden" name="id" value="$user.id" id="id">
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

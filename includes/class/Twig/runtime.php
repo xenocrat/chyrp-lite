@@ -82,7 +82,8 @@ $twig_filters = array(
     'selected' =>         'twig_selected_filter',
     'checked' =>          'twig_checked_filter',
     'option_selected' =>  'twig_option_selected_filter',
-    'gravatar' =>         'twig_get_gravatar'
+    'gravatar' =>         'twig_get_gravatar',
+    'token' =>            'token'
 );
 
 

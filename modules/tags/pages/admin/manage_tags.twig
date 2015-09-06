@@ -75,7 +75,7 @@
                     <h4>${ "Tag Selected Post(s) with:" | translate("tags") }</h4>
                     <input type="text" name="name" value="" id="name">
                     <button type="submit">${ "Tag" | translate("tags") }</button>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </div>
             </form>
             {% if posts.paginated and posts.pages > 1 %}

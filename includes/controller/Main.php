@@ -817,6 +817,7 @@
 
             $theme->title = $title;
 
+            $this->context["ip"]           = $_SERVER["REMOTE_ADDR"];
             $this->context["theme"]        = $theme;
             $this->context["flash"]        = Flash::current();
             $this->context["trigger"]      = $trigger;

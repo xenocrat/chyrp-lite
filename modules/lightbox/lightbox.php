@@ -18,7 +18,7 @@
             if (empty($_POST))
                 return $admin->display("lightbox_settings");
     
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $set = array(Config::current()->set("module_lightbox",

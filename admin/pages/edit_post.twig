@@ -9,7 +9,7 @@
 {% include "partials/post_fields.twig" %}
                     <input type="hidden" name="id" value="$post.id" id="id">
                     <input type="hidden" name="feather" value="${ post.feather | escape(true) }" id="feather">
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

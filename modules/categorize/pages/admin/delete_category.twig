@@ -18,7 +18,7 @@
                         </button>
                     </div>
                     <input type="hidden" name="id" value="$category.id" id="id">
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

@@ -50,7 +50,7 @@
                         ${ trigger.call("edit_comment_options", comment) }
                         <hr>
                     </div>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                     <input type="hidden" name="id" value="$comment.id" id="id">
                     <div class="buttons confirmation">
                         <button type="submit" class="yay" accesskey="s">
