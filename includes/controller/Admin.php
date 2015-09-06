@@ -1086,7 +1086,7 @@
             if (empty($_POST))
                 redirect("/admin/?action=import");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']['error']))
