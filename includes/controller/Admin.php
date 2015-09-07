@@ -428,7 +428,7 @@
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a page."));
 
             $this->display("delete_page", array("page" => new Page($_GET['id'])));

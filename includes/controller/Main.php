@@ -545,7 +545,7 @@
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
 
-            if (token(array($user->login, $user->email)) !== $_GET['token'])
+            if (token(array($user->login, $user->email)) != $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             if (!$user->approved) {
@@ -574,7 +574,7 @@
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
 
-            if (token(array($user->login, $user->email)) !== $_GET['token'])
+            if (token(array($user->login, $user->email)) != $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             $new_password = random(8);
