@@ -44,11 +44,11 @@
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2015.06");
+    define('CHYRP_VERSION', "2015.07");
 
     # Constant: CHYRP_CODENAME
     # The code name for this version.
-    define('CHYRP_CODENAME', "Saxaul");
+    define('CHYRP_CODENAME', "Kordofan");
 
     # Constant: CACHE_TWIG
     # If defined, this will take priority over DEBUG and toggle Twig template caching.
@@ -183,6 +183,10 @@
     # File: YAML
     # Horde YAML parsing library.
     require_once INCLUDES_DIR.DIR."lib".DIR."YAML.php";
+
+    # File: Parsedown
+    # Markdown parsing library.
+    require_once INCLUDES_DIR.DIR."lib".DIR."Parsedown.php";
 
     # File: Config
     # See Also:
