@@ -1419,6 +1419,17 @@
     }
 
     /**
+     * Function: add_markdown
+     * Adds the enable_markdown config setting.
+     *
+     * Versions: 2015.06 => 2015.07
+     */
+    function add_markdown() {
+        if (!Config::check("enable_markdown"))
+            Config::set("enable_markdown", true, __("Adding Markdown setting..."));
+    }
+
+    /**
      * Function: theme_sanity_check
      * Resets the blog theme to Blossom if the config setting is invalid.
      *

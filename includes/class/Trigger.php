@@ -21,8 +21,13 @@
          * Add a filter to implement Unicode emoji support
          */
         private function __construct() {
-            if (Config::current()->enable_emoji)
+            $config = Config::current();
+
+            if ($config->enable_emoji)
                 $this->priorities["markup_text"][] = array("priority" => 10, "function" => "emote");   
+
+            if ($config->enable_markdown)
+                $this->priorities["markup_text"][] = array("priority" => 5, "function" => "markdown"); 
         }
 
         /**

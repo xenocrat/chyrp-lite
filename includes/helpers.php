@@ -256,6 +256,18 @@
     }
 
     /**
+     * Function: markdown
+     * Implements the Markdown parsing filter.
+     *
+     * Parameters:
+     *     $text - The body of the post/page to parse.
+     */
+    function markdown($text) {
+        $parsedown = new Parsedown();
+        return $parsedown->text($text);
+    }
+
+    /**
      * Function: load_translator
      * Loads a .mo file for gettext translation.
      *
