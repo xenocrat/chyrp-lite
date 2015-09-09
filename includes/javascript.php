@@ -62,7 +62,7 @@
                                 $("#post_edit_form_" + id).loader();
                                 $.post(Site.url + "/includes/ajax.php", {
                                     action: "view_post",
-                                    context: "all",
+                                    context: Route.action,
                                     id: id,
                                     reason: "cancelled"
                                 }, function(data) {
@@ -96,7 +96,7 @@
                 } else {
                     $.post(Site.url + "/includes/ajax.php", {
                         action: "view_post",
-                        context: "all",
+                        context: Route.action,
                         id: id,
                         reason: "edited"
                     }, function(data) {
