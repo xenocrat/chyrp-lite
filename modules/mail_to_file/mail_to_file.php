@@ -18,8 +18,8 @@
                 @unlink(MAIN_DIR."/digest.txt.php");
         }
 
-        public function send_mail(&$function) {
-            $function = array('MailToFile', 'mail_digest');
+        public function send_mail($function) {
+            return array('MailToFile', 'mail_digest');
         }
 
         public function mail_digest($to, $subject, $message, $headers) {
