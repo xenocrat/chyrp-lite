@@ -810,7 +810,7 @@
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
-            if (empty($_POST['id']) or !is_numeric($_GET['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."));
 
             if ($_POST['destroy'] == "bollocks")
@@ -1024,16 +1024,19 @@
 
                 $groups = Group::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
-                $groups_yaml = array("groups" => array(),
+                $groups_json = array("groups" => array(),
                                      "permissions" => array());
 
                 foreach (SQL::current()->select("permissions", "*", array("group_id" => 0))->fetchAll() as $permission)
-                    $groups_yaml["permissions"][$permission["id"]] = $permission["name"];
+                    $groups_json["permissions"][$permission["id"]] = $permission["name"];
 
                 foreach ($groups as $index => $group)
-                    $groups_yaml["groups"][$group->name] = $group->permissions;
+                    $groups_json["groups"][$group->name] = $group->permissions;
 
-                $exports["groups.yaml"] = YAML::dump($groups_yaml);
+                $exports["groups.json"] = json_encode($groups_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+                if (json_last_error())
+                    error(__("Error"), _f("Failed to export groups because of JSON error: <code>%s</code>", json_last_error_msg()));
             }
 
             if (isset($_POST['users'])) {
@@ -1041,18 +1044,21 @@
 
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
-                $users_yaml = array();
+                $users_json = array();
                 foreach ($users as $user) {
-                    $users_yaml[$user->login] = array();
+                    $users_json[$user->login] = array();
 
                     foreach ($user as $name => $attr)
                         if (!in_array($name, array("no_results", "group_id", "group", "id", "login", "belongs_to", "has_many", "has_one", "queryString")))
-                            $users_yaml[$user->login][$name] = $attr;
+                            $users_json[$user->login][$name] = $attr;
                         elseif ($name == "group_id")
-                            $users_yaml[$user->login]["group"] = $user->group->name;
+                            $users_json[$user->login]["group"] = $user->group->name;
                 }
 
-                $exports["users.yaml"] = YAML::dump($users_yaml);
+                $exports["users.json"] = json_encode($users_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+                if (json_last_error())
+                    error(__("Error"), _f("Failed to export users because of JSON error: <code>%s</code>", json_last_error_msg()));
             }
 
             $trigger->filter($exports, "export");
@@ -1114,7 +1120,10 @@
             }
 
             if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']['error'])) {
-                $import = YAML::load($_FILES['groups_file']['tmp_name']);
+                $import = json_decode(file_get_contents($_FILES['groups_file']['tmp_name']), true);
+
+                if (json_last_error())
+                    error(__("Error"), _f("Failed to import groups because of JSON error: <code>%s</code>", json_last_error_msg()));
 
                 foreach ($import["groups"] as $name => $permissions)
                     if (!$sql->count("groups", array("name" => $name)))
@@ -1126,7 +1135,10 @@
             }
 
             if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file']['error'])) {
-                $users = YAML::load($_FILES['users_file']['tmp_name']);
+                $users = json_decode(file_get_contents($_FILES['users_file']['tmp_name']), true);
+
+                if (json_last_error())
+                    error(__("Error"), _f("Failed to import users because of JSON error: <code>%s</code>", json_last_error_msg()));
 
                 foreach ($users as $login => $user) {
                     $group_id = $sql->select("groups", "id", array("name" => $user["group"]), "id DESC")->fetchColumn();
@@ -1733,8 +1745,8 @@
                          $config->set("email_activation", !empty($_POST['email_activation'])),
                          $config->set("email_correspondence", $correspond),
                          $config->set("enable_captcha", !empty($_POST['enable_captcha'])),
-                         $config->set("default_group", $_POST['default_group']),
-                         $config->set("guest_group", $_POST['guest_group']));
+                         $config->set("default_group", (int) $_POST['default_group']),
+                         $config->set("guest_group", (int) $_POST['guest_group']));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=user_settings");

@@ -8,7 +8,8 @@
      *     v2015.06
      *
      * Copyright:
-     *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors.
+     *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley,
+     *     and other contributors.
      *
      * License:
      *     Permission is hereby granted, free of charge, to any person
@@ -179,10 +180,6 @@
     # File: Streams
     # Streams library.
     require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
-
-    # File: YAML
-    # Horde YAML parsing library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."YAML.php";
 
     # File: Parsedown
     # Markdown parsing library.
