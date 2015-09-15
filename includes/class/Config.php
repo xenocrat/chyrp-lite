@@ -55,18 +55,6 @@
             if (isset($this->$setting) and $this->$setting == $value and !$overwrite)
                 return false;
 
-            if (isset($this->file) and file_exists($this->file)) {
-                $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
-                                        "",
-                                        file_get_contents($this->file));
-
-                $this->json = json_decode($contents, true);
-
-                if (json_last_error())
-                    error(__("Error"), _f("Failed to read <code>%s</code> because of JSON error: <code>%s</code>",
-                                          array($this->file, json_last_error_msg())));
-            }
-
             # Add the setting
             $this->json[$setting] = $this->$setting = $value;
 
@@ -99,18 +87,6 @@
          *     $setting - The name of the setting to remove.
          */
         public function remove($setting) {
-            if (isset($this->file) and file_exists($this->file)) {
-                $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
-                                        "",
-                                        file_get_contents($this->file));
-
-                $this->json = json_decode($contents, true);
-
-                if (json_last_error())
-                    error(__("Error"), _f("Failed to read <code>%s</code> because of JSON error: <code>%s</code>",
-                                          array($this->file, json_last_error_msg())));
-            }
-
             # Remove the setting
             unset($this->json[$setting]);
 
