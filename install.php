@@ -28,7 +28,6 @@
 
     require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
     require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
-    require_once INCLUDES_DIR.DIR."lib".DIR."YAML.php";
 
     require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
     require_once INCLUDES_DIR.DIR."class".DIR."SQL.php";
@@ -170,6 +169,7 @@
             $config->set("enable_xmlrpc", true);
             $config->set("enable_ajax", true);
             $config->set("enable_emoji", true);
+            $config->set("enable_markdown", true);
             $config->set("can_register", false);
             $config->set("email_activation", false);
             $config->set("email_correspondence", true);
