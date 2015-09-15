@@ -1708,6 +1708,9 @@
             if (strpos($_POST['uploads_path'], DIR) !== 0)
                 $_POST['uploads_path'] = DIR.$_POST['uploads_path'];
 
+            if (substr($_POST['uploads_path'], -1) != DIR)
+                $_POST['uploads_path'] = $_POST['uploads_path'].DIR;
+
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
                          $config->set("feed_items", (int) $_POST['feed_items']),

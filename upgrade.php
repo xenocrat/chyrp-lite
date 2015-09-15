@@ -188,8 +188,16 @@
         if (!file_exists(THEMES_DIR.DIR.Config::get("theme").DIR."info.php"))
             Config::set("theme", "blossom", __("Resetting theme to Blossom..."));
 
-        if (strpos(Config::get("uploads_path"), DIR) !== 0)
-            Config::set("uploads_path", DIR.Config::get("uploads_path"));
+        $uploads_path = Config::get("uploads_path");
+
+        if (strpos($uploads_path, DIR) !== 0)
+            $uploads_path = DIR.$uploads_path;
+
+        if (substr($uploads_path, -1) != DIR)
+            $uploads_path = $uploads_path.DIR;
+
+        if (Config::get("uploads_path") != $uploads_path)
+            Config::set("uploads_path", DIR.Config::get("uploads_path"), __("Repairing uploads path..."));
     }
 
     # Attempt to load the config file and initialize the configuration.
@@ -222,7 +230,7 @@
 
     /**
      * Function: fix_htaccess
-     * Repairs their .htaccess file.
+     * Repairs the .htaccess file.
      */
     function fix_htaccess() {
         $url = "http://".$_SERVER['HTTP_HOST'].str_replace("/upgrade.php", "", $_SERVER['REQUEST_URI']);
