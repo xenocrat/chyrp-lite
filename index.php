@@ -1,6 +1,6 @@
 <?php
     if (version_compare(PHP_VERSION, "5.3.2", "<"))
-        exit("Chyrp requires PHP 5.3.2 or greater.");
+        exit("Chyrp Lite requires PHP 5.3.2 or greater.");
 
     require_once "includes".DIRECTORY_SEPARATOR."common.php";
 
