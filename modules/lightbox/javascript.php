@@ -102,7 +102,7 @@
                         "title": alt
                     }).css(ChyrpLightbox.styles.fg).click(function(e) {
                         if (e.target === e.currentTarget)
-                            if (ref)
+                            if (ref && ChyrpLightbox.protect == false)
                                 window.location.assign(ref);
                             else
                                 ChyrpLightbox.hide();
