@@ -61,12 +61,12 @@
      *     $body - The message for the error dialog.
      *     $backtrace - The trace of the error.
      */
-    function error($title, $body, $backtrace = array()) {
-        # Sanitize input
-        $title = fix($title);
-        $body = sanitize_html($body);
+    function error($title = "", $body = "", $backtrace = array()) {
+        # Validate and sanitize input.
+        $title = oneof(fix($title), "Error");
+        $body = oneof(sanitize_html($body), "An unspecified error has occurred.");
 
-        if (defined('MAIN_DIR') and !empty($backtrace))
+        if (defined('DIR') and defined('MAIN_DIR') and !empty($backtrace))
             foreach ($backtrace as $index => &$trace) {
                 if (!isset($trace["file"]) or !isset($trace["line"])) {
                     unset($backtrace[$index]);
@@ -586,16 +586,16 @@
      * Parameters:
      *     $string - The string to sanitize.
      *     $force_lowercase - Force the string to lowercase?
-     *     $anal - If set to *true*, will remove all non-alphanumeric characters.
+     *     $strict - If set to *true*, will remove all non-alphanumeric characters.
      *     $trunc - Number of characters to truncate to (default 100, 0 to disable).
      */
-    function sanitize($string, $force_lowercase = true, $anal = false, $trunc = 100) {
+    function sanitize($string, $force_lowercase = true, $strict = false, $trunc = 100) {
         $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
                        "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
                        "—", "–", ",", "<", ".", ">", "/", "?");
         $clean = trim(str_replace($strip, "", strip_tags($string)));
         $clean = preg_replace('/\s+/', "-", $clean);
-        $clean = ($anal ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean);
+        $clean = ($strict ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean);
         $clean = ($trunc ? substr($clean, 0, $trunc) : $clean);
         return ($force_lowercase) ?
             (function_exists('mb_strtolower')) ?
