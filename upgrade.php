@@ -180,26 +180,6 @@
             return " <span class=\"boo\">".__("failed!")."</span>\n".$info;
     }
 
-    /**
-     * Function: sanity_check
-     * Resets various config settings if they are invalid.
-     */
-    function sanity_check() {
-        if (!file_exists(THEMES_DIR.DIR.Config::get("theme").DIR."info.php"))
-            Config::set("theme", "blossom", __("Resetting theme to Blossom..."));
-
-        $uploads_path = Config::get("uploads_path");
-
-        if (strpos($uploads_path, DIR) !== 0)
-            $uploads_path = DIR.$uploads_path;
-
-        if (substr($uploads_path, -1) != DIR)
-            $uploads_path = $uploads_path.DIR;
-
-        if (Config::get("uploads_path") != $uploads_path)
-            Config::set("uploads_path", DIR.Config::get("uploads_path"), __("Repairing uploads path..."));
-    }
-
     # Attempt to load the config file and initialize the configuration.
 
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
@@ -390,29 +370,49 @@
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Regular.woff') format('woff'),
-                     url('./fonts/OpenSans-Regular.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Semibold.woff') format('woff'),
-                     url('./fonts/OpenSans-Semibold.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Semibold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Italic.woff') format('woff'),
-                     url('./fonts/OpenSans-Italic.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                     url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                font-weight: bold;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Bold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Oblique.woff') format('woff');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-BoldOblique.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -455,7 +455,7 @@
                 margin-top: 0em;
             }
             code {
-                font-family: monospace;
+                font-family: "Hack webfont", monospace;
                 font-style: normal;
                 word-wrap: break-word;
                 background-color: #efefef;
@@ -567,7 +567,6 @@
                     ob_end_flush();
             }
 
-        sanity_check();
 ?>
 
 <?php echo __("Done!"); ?>

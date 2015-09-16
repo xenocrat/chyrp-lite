@@ -389,29 +389,49 @@
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Regular.woff') format('woff'),
-                     url('./fonts/OpenSans-Regular.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Semibold.woff') format('woff'),
-                     url('./fonts/OpenSans-Semibold.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Semibold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Italic.woff') format('woff'),
-                     url('./fonts/OpenSans-Italic.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                     url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                font-weight: bold;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Bold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Oblique.woff') format('woff');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-BoldOblique.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -525,7 +545,7 @@
                 margin-top: 5em;
             }
             code {
-                font-family: monospace;
+                font-family: "Hack webfont", monospace;
                 font-style: normal;
                 word-wrap: break-word;
                 background-color: #efefef;

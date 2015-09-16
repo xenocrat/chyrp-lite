@@ -30,29 +30,49 @@
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Regular.woff') format('woff'),
-                     url('<?php echo $site; ?>/fonts/OpenSans-Regular.ttf') format('truetype');
+                src: url('<?php echo $site; ?>/fonts/OpenSans-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Semibold.woff') format('woff'),
-                     url('<?php echo $site; ?>/fonts/OpenSans-Semibold.ttf') format('truetype');
+                src: url('<?php echo $site; ?>/fonts/OpenSans-Semibold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Italic.woff') format('woff'),
-                     url('<?php echo $site; ?>/fonts/OpenSans-Italic.ttf') format('truetype');
+                src: url('<?php echo $site; ?>/fonts/OpenSans-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                     url('<?php echo $site; ?>/fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                src: url('<?php echo $site; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                font-weight: bold;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('<?php echo $site; ?>/fonts/Hack-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('<?php echo $site; ?>/fonts/Hack-Bold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('<?php echo $site; ?>/fonts/Hack-Oblique.woff') format('woff');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('<?php echo $site; ?>/fonts/Hack-BoldOblique.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -100,7 +120,7 @@
                 margin: 0.75em 0em;
             }
             code {
-                font-family: monospace;
+                font-family: "Hack webfont", monospace;
                 font-style: normal;
                 word-wrap: break-word;
                 background-color: #efefef;
