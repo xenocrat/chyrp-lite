@@ -169,8 +169,12 @@
     } else
         ob_start();
 
+    # File: Error
+    # Error handling functions.
+    require_once INCLUDES_DIR.DIR."error.php";
+
     # File: Helpers
-    # Various functions used throughout Chyrp's code.
+    # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
     # File: Gettext
@@ -288,10 +292,6 @@
     # See Also:
     #     <Feather>
     require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
-
-    # Set the error handler to exit on error if this is being run from the tester.
-    if (TESTER)
-        set_error_handler("error_panicker");
 
     # Redirect to the installer if there is no config.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))

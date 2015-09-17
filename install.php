@@ -19,11 +19,12 @@
     error_reporting(E_ALL | E_STRICT);
     ini_set('display_errors', true);
 
-    ob_start();
-
     if (version_compare(PHP_VERSION, "5.3.2", "<"))
         exit("Chyrp requires PHP 5.3.2 or greater. Installation cannot continue.");
 
+    ob_start();
+
+    require_once INCLUDES_DIR.DIR."error.php";
     require_once INCLUDES_DIR.DIR."helpers.php";
 
     require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";

@@ -43,8 +43,12 @@
 
     ob_start();
 
+    # File: Error
+    # Error handling functions.
+    require_once INCLUDES_DIR.DIR."error.php";
+
     # File: Helpers
-    # Various functions used throughout Chyrp's code.
+    # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
     # File: Gettext

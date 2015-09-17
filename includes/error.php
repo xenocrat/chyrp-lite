@@ -1,25 +1,105 @@
 <?php
-    if (empty($title) or empty($body))
-        exit("Access Denied."); # Direct access is verboten.
-
-    if (function_exists("error_panicker"))
+    # Set the error handler to exit on error if this is being run from the tester.
+    if (defined('TESTER') and TESTER)
         set_error_handler("error_panicker");
+    else
+        set_error_handler("error_prettify");
 
-    if (!function_exists("__") or
-        !function_exists("_f") or
-        !function_exists("fallback") or
-        !function_exists("logged_in") or
-        !class_exists("Config") or 
-        !array_key_exists("chyrp_url", Config::current()))
-        exit("ERROR: ".$body); # Not safe to build a pretty page: report and exit.
+    /**
+     * Function: error_panicker
+     * Exits and states where the error occurred.
+     */
+    function error_panicker($errno, $message, $file, $line) {
+        if (error_reporting() === 0)
+            return; # Error reporting has been disabled.
 
-    if (defined('AJAX') and AJAX or isset($_POST['ajax'])) {
-        foreach ($backtrace as $trace)
-            $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
-        exit($body."\nHEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
+        if (($buffer = ob_get_contents()) !== false)
+            ob_clean();
+
+        echo("ERROR: ".$message." (".$file." on line ".$line.")");
+
+        if ($buffer !== false)
+            ob_end_flush();
+
+        exit;
     }
 
-    $site = Config::current()->chyrp_url;
+    /**
+     * Function: error_prettify
+     * Generates a pretty error message and exits.
+     */
+    function error_prettify($errno, $message, $file, $line) {
+        if (!(error_reporting() & $errno))
+            return; # Error reporting excludes this error.
+
+        error_log("ERROR: ".$message." (".$file." on line ".$line.")");
+        error(null, $message." (".$file." on line ".$line.")", debug_backtrace());
+    }
+
+    /**
+     * Function: error
+     * Displays an error message via direct call or error handler.
+     *
+     * Parameters:
+     *     $title - The title for the error dialog.
+     *     $body - The message for the error dialog.
+     *     $backtrace - The trace of the error.
+     */
+    function error($title = "", $body = "", $backtrace = array()) {
+        # Sanitize strings.
+        $title = htmlspecialchars($title, ENT_QUOTES, "utf-8", false);
+        $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i","<$1$2>", $body);
+        $body = preg_replace("/<script[^>]*?>/i","&lt;script&gt;", $body);
+        $body = preg_replace("/<\/script[^>]*?>/i","&lt;/script&gt;", $body);
+
+        if (!empty($backtrace) and defined('DIR') and defined('MAIN_DIR'))
+            foreach ($backtrace as $index => &$trace) {
+                if (!isset($trace["file"]) or !isset($trace["line"])) {
+                    unset($backtrace[$index]);
+                } else {
+                    $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "utf-8", false);
+                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "utf-8", false);
+                }
+            }
+
+        # Clean the output buffer before we begin.
+        if (($buffer = ob_get_contents()) !== false)
+            ob_clean();
+
+        # Report in plain text for the automated tester.
+        if (defined('TESTER') and TESTER)
+            exit("ERROR: ".$body);
+
+        # Report and exit if the error is in the core.
+        if (!function_exists("__") or
+            !function_exists("_f") or
+            !function_exists("fallback") or
+            !function_exists("oneof") or
+            !function_exists("logged_in") or
+            !class_exists("Config") or
+            !array_key_exists("chyrp_url", $config = Config::current()) or empty($site = $config->chyrp_url)) {
+
+            echo("ERROR: ".$body);
+
+            if (defined('AJAX') and AJAX or isset($_POST['ajax']))
+                echo("\nHEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
+
+            exit;
+        }
+
+        # Report with backtrace and appended token for JavaScripts
+        if (defined('AJAX') and AJAX or isset($_POST['ajax'])) {
+            foreach ($backtrace as $trace)
+                $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
+
+            exit($body."\nHEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
+        }
+
+        # Validate title and body text.
+        $title = oneof($title, __("Error"));
+        $body = oneof($body, __("An unspecified error has occurred."));
+
+        # Display the error.
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -207,3 +287,10 @@
         </div>
     </body>
 </html>
+<?php
+        # Flush the output buffer and exit.
+        if ($buffer !== false)
+            ob_end_flush();
+
+        exit;
+    }
