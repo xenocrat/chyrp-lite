@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-08-14 09:20+0000\n"
+"POT-Creation-Date: 2015-09-18 19:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:53
+#: admin/admin.js.php:54
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:110
-#: admin/admin.js.php:124
+#: admin/admin.js.php:111
+#: admin/admin.js.php:125
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:112
-#: admin/admin.js.php:127
+#: admin/admin.js.php:113
+#: admin/admin.js.php:128
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:154
+#: admin/admin.js.php:155
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: admin/admin.js.php:160
+#: admin/admin.js.php:161
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:233
+#: admin/admin.js.php:234
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:241
-#: admin/admin.js.php:243
-#: admin/admin.js.php:311
-#: admin/admin.js.php:313
+#: admin/admin.js.php:242
+#: admin/admin.js.php:244
+#: admin/admin.js.php:312
+#: admin/admin.js.php:314
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:263
 #: admin/admin.js.php:264
+#: admin/admin.js.php:265
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:299
+#: admin/admin.js.php:300
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:445
+#: admin/admin.js.php:447
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:447
+#: admin/admin.js.php:449
 msgid "There was an error disabling the extension."
 msgstr ""
 
@@ -150,10 +150,18 @@ msgid "Enable Unicode Emoticons"
 msgstr ""
 
 #: admin/pages/content_settings.twig:66
-msgid "Use Unicode Emoticons."
+msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:71
+#: admin/pages/content_settings.twig:70
+msgid "Enable Markdown"
+msgstr ""
+
+#: admin/pages/content_settings.twig:73
+msgid "Compose blog content using Markdown."
+msgstr ""
+
+#: admin/pages/content_settings.twig:78
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:67
@@ -312,7 +320,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:25
 #: admin/pages/manage_users.twig:29
 #: admin/pages/new_user.twig:15
-#: admin/partials/post_fields.twig:57
+#: admin/partials/post_fields.twig:63
 msgid "Group"
 msgstr ""
 
@@ -474,11 +482,11 @@ msgid "Pages .atom File"
 msgstr ""
 
 #: admin/pages/import.twig:18
-msgid "Groups .yaml File"
+msgid "Groups .json File"
 msgstr ""
 
 #: admin/pages/import.twig:22
-msgid "Users .yaml File"
+msgid "Users .json File"
 msgstr ""
 
 #: admin/pages/import.twig:27
@@ -632,7 +640,7 @@ msgid "Posted"
 msgstr ""
 
 #: admin/pages/manage_posts.twig:34
-#: admin/partials/post_fields.twig:47
+#: admin/partials/post_fields.twig:53
 msgid "Status"
 msgstr ""
 
@@ -885,7 +893,7 @@ msgid "Body"
 msgstr ""
 
 #: admin/partials/page_fields.twig:13
-#: admin/partials/post_fields.twig:75
+#: admin/partials/post_fields.twig:81
 msgid "Slug"
 msgstr ""
 
@@ -910,14 +918,14 @@ msgid "Is this page public?"
 msgstr ""
 
 #: admin/partials/page_fields.twig:60
-#: admin/partials/post_fields.twig:128
-#: admin/partials/post_fields.twig:137
+#: admin/partials/post_fields.twig:134
+#: admin/partials/post_fields.twig:143
 msgid "Publish"
 msgstr ""
 
 #: admin/partials/page_fields.twig:64
-#: admin/partials/post_fields.twig:132
-#: admin/partials/post_fields.twig:141
+#: admin/partials/post_fields.twig:138
+#: admin/partials/post_fields.twig:147
 msgid "Save"
 msgstr ""
 
@@ -925,43 +933,43 @@ msgstr ""
 msgid "Current file name:"
 msgstr ""
 
-#: admin/partials/post_fields.twig:25
+#: admin/partials/post_fields.twig:26
 msgid "Current file names:"
 msgstr ""
 
-#: admin/partials/post_fields.twig:50
+#: admin/partials/post_fields.twig:56
 msgid "Draft"
 msgstr ""
 
-#: admin/partials/post_fields.twig:52
+#: admin/partials/post_fields.twig:58
 msgid "Public"
 msgstr ""
 
-#: admin/partials/post_fields.twig:53
+#: admin/partials/post_fields.twig:59
 msgid "Private"
 msgstr ""
 
-#: admin/partials/post_fields.twig:54
+#: admin/partials/post_fields.twig:60
 msgid "Scheduled"
 msgstr ""
 
-#: admin/partials/post_fields.twig:55
+#: admin/partials/post_fields.twig:61
 msgid "Registered Only"
 msgstr ""
 
-#: admin/partials/post_fields.twig:68
+#: admin/partials/post_fields.twig:74
 msgid "Pinned?"
 msgstr ""
 
-#: admin/partials/post_fields.twig:69
+#: admin/partials/post_fields.twig:75
 msgid "(shows this post above all others)"
 msgstr ""
 
-#: admin/partials/post_fields.twig:81
+#: admin/partials/post_fields.twig:87
 msgid "Timestamp"
 msgstr ""
 
-#: admin/partials/post_fields.twig:87
+#: admin/partials/post_fields.twig:93
 msgid "Trackbacks"
 msgstr ""
 

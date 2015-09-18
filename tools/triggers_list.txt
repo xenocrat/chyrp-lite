@@ -5,13 +5,13 @@
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 455
+	admin/admin.js.php on line 457
 
 
 can_not_view_site
 -----------------
 Called from:
-	admin/index.php on line 15
+	admin/index.php on line 18
 	includes/ajax.php on line 14
 	index.php on line 17
 
@@ -19,7 +19,7 @@ Called from:
 end
 ---
 Called from:
-	admin/index.php on line 25
+	admin/index.php on line 28
 	index.php on line 46
 Arguments:
 	$route
@@ -162,7 +162,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 43
+	admin/partials/post_fields.twig on line 49
 Arguments:
 	feather
 
@@ -170,22 +170,22 @@ Arguments:
 not_found
 ---------
 Called from:
-	includes/ajax.php on line 27
-	includes/ajax.php on line 52
-	includes/ajax.php on line 73
-	includes/helpers.php on line 149
+	includes/ajax.php on line 30
+	includes/ajax.php on line 61
+	includes/ajax.php on line 84
+	includes/helpers.php on line 69
 
 
 ajax
 ----
 Called from:
-	includes/ajax.php on line 200
+	includes/ajax.php on line 225
 
 
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 70
+	includes/class/Config.php on line 62
 Arguments:
 	$setting, $value, $overwrite
 
@@ -217,13 +217,13 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 359
+	includes/common.php on line 364
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1128
+	includes/controller/Admin.php on line 1130
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -231,7 +231,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1152
+	includes/controller/Admin.php on line 1157
 Arguments:
 	$user
 
@@ -239,7 +239,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1183
+	includes/controller/Admin.php on line 1188
 Arguments:
 	$entry, $post
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1206
+	includes/controller/Admin.php on line 1211
 Arguments:
 	$entry, $page
 
@@ -255,7 +255,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 526
+	includes/controller/Main.php on line 525
 Arguments:
 	$user
 
@@ -263,7 +263,7 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 611
+	includes/controller/Main.php on line 610
 
 
 feed_item
@@ -277,13 +277,13 @@ Arguments:
 ajax_post_edit_form_javascript
 ------------------------------
 Called from:
-	includes/javascript.php on line 35
+	includes/javascript.php on line 36
 
 
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 128
+	includes/javascript.php on line 142
 
 
 add_group
@@ -448,7 +448,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 356
+	includes/common.php on line 361
 
 
 admin_determine_action
@@ -464,7 +464,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 930
+	includes/controller/Admin.php on line 936
 Arguments:
 	$post)
 
@@ -474,7 +474,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 949
+	includes/controller/Admin.php on line 955
 Arguments:
 	$post
 
@@ -484,7 +484,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 992
+	includes/controller/Admin.php on line 998
 Arguments:
 	$page)
 
@@ -494,7 +494,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1007
+	includes/controller/Admin.php on line 1013
 Arguments:
 	$page
 
@@ -504,7 +504,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1052
+	includes/controller/Admin.php on line 1064
 
 
 manage_nav
@@ -512,7 +512,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1839
+	includes/controller/Admin.php on line 1862
 
 
 settings_nav
@@ -520,7 +520,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1868
+	includes/controller/Admin.php on line 1891
 
 
 extend_nav
@@ -528,7 +528,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1878
+	includes/controller/Admin.php on line 1901
 
 
 admin_subnav
@@ -536,7 +536,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1889
+	includes/controller/Admin.php on line 1912
 
 
 nav_selected
@@ -544,7 +544,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 1996
+	includes/controller/Admin.php on line 2020
 
 
 url_code
@@ -552,8 +552,8 @@ url_code
 Target:
 	Post::$url_attrs
 Called from:
-	includes/controller/Main.php on line 169
-	includes/controller/Main.php on line 201
+	includes/controller/Main.php on line 168
+	includes/controller/Main.php on line 200
 
 
 feed_url
@@ -571,7 +571,7 @@ link_regexp
 Target:
 	$regexp
 Called from:
-	includes/helpers.php on line 932
+	includes/helpers.php on line 864
 
 
 keyword_search
@@ -579,7 +579,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1748
+	includes/helpers.php on line 1683
 Arguments:
 	$query, $plain
 
@@ -589,7 +589,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1884
+	includes/helpers.php on line 1819
 
 
 group
