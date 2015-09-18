@@ -1,13 +1,13 @@
 <?php
-    # Set the error handler to exit on error if this is being run from the tester.
+    # Set the appropriate error handler.
     if (defined('TESTER') and TESTER)
         set_error_handler("error_panicker");
     else
-        set_error_handler("error_prettify");
+        set_error_handler("error_composer");
 
     /**
      * Function: error_panicker
-     * Exits and states where the error occurred.
+     * Report in plain text for the automated tester and exit.
      */
     function error_panicker($errno, $message, $file, $line) {
         if (error_reporting() === 0)
@@ -16,6 +16,7 @@
         if (($buffer = ob_get_contents()) !== false)
             ob_clean();
 
+        error_log("ERROR: ".$message." (".$file." on line ".$line.")");
         echo("ERROR: ".$message." (".$file." on line ".$line.")");
 
         if ($buffer !== false)
@@ -25,10 +26,10 @@
     }
 
     /**
-     * Function: error_prettify
-     * Generates a pretty error message and exits.
+     * Function: error_composer
+     * Composes a message for the error() function to display.
      */
-    function error_prettify($errno, $message, $file, $line) {
+    function error_composer($errno, $message, $file, $line) {
         if (!(error_reporting() & $errno))
             return; # Error reporting excludes this error.
 
@@ -70,7 +71,7 @@
         if (defined('TESTER') and TESTER)
             exit("ERROR: ".$body);
 
-        # Report and exit if the error is in the core.
+        # Report and exit safely if the error is too deep in the core for a pretty error message.
         if (!function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
