@@ -36,7 +36,7 @@
         private function tags_unserialize($tags) {
             $unserialized = json_decode($tags, true);
 
-            if (json_last_error() and ADMIN)
+            if (json_last_error() and DEBUG)
                 error(__("Error"), _f("Failed to unserialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
 
             return $unserialized;

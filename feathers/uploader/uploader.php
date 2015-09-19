@@ -37,7 +37,7 @@
         private function filenames_unserialize($filenames) {
             $unserialized = json_decode($filenames, true);
 
-            if (json_last_error() and ADMIN)
+            if (json_last_error() and DEBUG)
                 error(__("Error"), _f("Failed to unserialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
 
             return $unserialized;
