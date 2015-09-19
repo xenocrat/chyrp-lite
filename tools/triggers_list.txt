@@ -255,7 +255,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 525
+	includes/controller/Main.php on line 530
 Arguments:
 	$user
 
@@ -263,7 +263,7 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 610
+	includes/controller/Main.php on line 615
 
 
 feed_item
