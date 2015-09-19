@@ -232,9 +232,14 @@
             fallback($_GET['month']);
             fallback($_GET['day']);
 
-            $preceeding = new Post(null, array("where" => array("created_at <" => datetime(mktime(0, 0, 0, is_numeric($_GET['month']) ? $_GET['month'] : 1 , is_numeric($_GET['day']) ? $_GET['day'] : 1 , is_numeric($_GET['year']) ? $_GET['year'] : 0 )),
-                                                                "status" => "public"),
-                                               "order" => "created_at DESC, id DESC"));
+            $lower_bound = mktime(0, 0, 0,
+                                  is_numeric($_GET['month']) ? (int) $_GET['month'] : 1 ,
+                                  is_numeric($_GET['day']) ? (int) $_GET['day'] : 1 ,
+                                  is_numeric($_GET['year']) ? (int) $_GET['year'] : 1970 );
+
+            $preceding = new Post(null, array("where" => array("created_at <" => datetime($lower_bound),
+                                                               "status" => "public"),
+                                              "order" => "created_at DESC, id DESC"));
 
             if (isset($_GET['year']) and isset($_GET['month']) and isset($_GET['day']))
                 $posts = new Paginator(Post::find(array("placeholders" => true,
@@ -297,7 +302,7 @@
 
                 $this->display("pages/archive",
                                array("archives" => $archives,
-                                     "preceeding" => $preceeding, # The post preceeding the date range chronologically.
+                                     "preceding" => $preceding, # The post preceding the date range chronologically.
                                      "archive_hierarchy" => $archive_hierarchy),
                                __("Archive"));
             } else {
@@ -314,7 +319,7 @@
                                                         "day" => strftime("%d", $timestamp),
                                                         "timestamp" => $timestamp,
                                                         "depth" => $depth),
-                                     "preceeding" => $preceeding),
+                                     "preceding" => $preceding),
                                _f("Archive of %s", array(strftime("%B %Y", $timestamp))));
             }
         }
