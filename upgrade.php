@@ -252,20 +252,10 @@
     }
 
     /**
-     * Function: add_email_correspondence
-     * Adds the email_correspondence config setting.
-     *
-     * Versions: 2015.05.25 => 2015.06
-     */
-    function add_email_correspondence() {
-        Config::fallback("email_correspondence", true);
-    }
-
-    /**
      * Function: migrate_file_feather
      * Migrates posts from File Feather to Uploader Feather.
      *
-     * Versions: 2015.05.25 => 2015.06
+     * Versions: 2015.06+
      */
     function migrate_file_feather() {
         $sql = SQL::current();
@@ -316,7 +306,7 @@
      * Function: migrate_chat_feather
      * Migrates posts from Chat Feather to Text Feather.
      *
-     * Versions: 2015.05.25 => 2015.06
+     * Versions: 2015.06+
      */
     function migrate_chat_feather() {
         $sql = SQL::current();
@@ -536,8 +526,6 @@
         # Perform core upgrade tasks.
 
         fix_htaccess();
-
-        add_email_correspondence();
 
         migrate_file_feather();
 
