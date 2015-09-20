@@ -40,7 +40,7 @@
         }
 
         static function route_like() {
-            if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
+            if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"));
 
             $request["action"] = "like";
@@ -55,7 +55,7 @@
         }
 
         static function route_unlike() {
-            if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
+            if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"));
 
             $request["action"] = "unlike";
