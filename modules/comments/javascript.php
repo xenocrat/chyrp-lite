@@ -3,11 +3,13 @@
             notice: 0,
             interval: null,
             failed: false,
+            reload: <?php if (Config::current()->enable_reload_comments) echo("true"); else echo("false"); ?>,
+            delay: Math.abs(<?php echo(Config::current()->auto_reload_comments * 1000); ?>),
             init: function() {
                 if ($("#comments").size()) {
-<?php if (Config::current()->auto_reload_comments and Config::current()->enable_reload_comments): ?>
-                    ChyrpComment.interval = setInterval("ChyrpComment.reload()", Math.abs(<?php echo Config::current()->auto_reload_comments * 1000; ?>));
-<?php endif; ?>
+                    if (Site.ajax && ChyrpComment.reload && ChyrpComment.delay > 0)
+                        ChyrpComment.interval = setInterval("ChyrpComment.reload()", ChyrpComment.delay);
+
                     $("#add_comment").append($(document.createElement("input")).attr({
                         type: "hidden",
                         name: "ajax",
@@ -37,24 +39,24 @@
                         }
                     });
                 }
-<?php if (!isset(Config::current()->enable_ajax) or Config::current()->enable_ajax): ?>
-                $("#comments").on("click", ".comment_edit_link", function() {
-                    var id = $(this).attr("id").replace(/comment_edit_/, "");
-                    ChyrpComment.edit(id);
-                    return false;
-                });
-                $("#comments").on("click", ".comment_delete_link", function() {
-                    var id = $(this).attr("id").replace(/comment_delete_/, "");
-                    ChyrpComment.notice++;
-                    if (!confirm('<?php echo __("Are you sure you want to permanently delete this comment?", "comments"); ?>')) {
-                        ChyrpComment.notice--;
+                if (Site.ajax) {
+                    $("#comments").on("click", ".comment_edit_link", function() {
+                        var id = $(this).attr("id").replace(/comment_edit_/, "");
+                        ChyrpComment.edit(id);
                         return false;
-                    }
-                    ChyrpComment.notice--;
-                    ChyrpComment.destroy(id);
-                    return false;
-                });
-<?php endif; ?>
+                    });
+                    $("#comments").on("click", ".comment_delete_link", function() {
+                        var id = $(this).attr("id").replace(/comment_delete_/, "");
+                        ChyrpComment.notice++;
+                        if (!confirm('<?php echo __("Are you sure you want to permanently delete this comment?", "comments"); ?>')) {
+                            ChyrpComment.notice--;
+                            return false;
+                        }
+                        ChyrpComment.notice--;
+                        ChyrpComment.destroy(id);
+                        return false;
+                    });
+                }
             },
             reload: function() {
                 if ($("#comments").attr("data-post") == undefined)

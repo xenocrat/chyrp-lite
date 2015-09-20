@@ -46,7 +46,8 @@
         }
         var Site = {
             url: "<?php echo $config->chyrp_url; ?>",
-            key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>"
+            key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
+            ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true"); else echo("false"); ?>
         };
         function toggle_all() {
             var all_checked = true;
@@ -329,12 +330,13 @@
             action: null,
             confirmed: null,
             init: function() {
-                $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(Extend.ajax_toggle);
+                if (Site.ajax)
+                    $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(Extend.ajax_toggle);
 
                 if (Route.action != "modules")
                     return;
 
-                this.check_errors()
+                this.check_errors();
             },
             reset_errors: function() {
                 $(".modules li.error").removeClass("error");

@@ -12,15 +12,18 @@
                 var response = request ? request.responseText : null;
                 if (isError(response))
                     alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
-            })
-            <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("Post.prepare_links();\n"); else echo("// Ajax disabled!\n"); ?>
+            });
+
+            if (Site.ajax)
+                Post.prepare_links();
         });
         var Route = {
             action: "<?php echo $_GET['action']; ?>"
         };
         var Site = {
             url: "<?php echo $config->chyrp_url; ?>",
-            key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>"
+            key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
+            ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true"); else echo("false"); ?>
         };
         var Post = {
             id: 0,

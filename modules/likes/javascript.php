@@ -2,11 +2,13 @@
             action: "like",
             didPrevFinish: true,
             init: function() {
-                $("div.likes a.likes").click(function() {
-                    ChyrpLikes.toggle($(this).attr("data-post_id"));
-                    return false;
-                });
-                ChyrpLikes.watch();
+                if (Site.ajax) {
+                    $("div.likes a.likes").click(function() {
+                        ChyrpLikes.toggle($(this).attr("data-post_id"));
+                        return false;
+                    });
+                    ChyrpLikes.watch();
+                }
             },
             watch: function() {
                 // Watch for DOM additions on blog pages
