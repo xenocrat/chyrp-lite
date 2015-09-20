@@ -1994,7 +1994,8 @@
      * Send a file attachment to the visitor.
      *
      * Parameters:
-     *     $files - An associative array of filename => content.
+     *     $content - The bitstream to be sent to the visitor.
+     *     $filename  - The name to be applied to the content.
      */
     function download($content, $filename) {
         ob_clean();
