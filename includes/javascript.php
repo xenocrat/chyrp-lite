@@ -27,17 +27,24 @@
         };
         var Post = {
             id: 0,
+            failed: false,
             edit: function(id) {
                 Post.id = id;
                 $("#post_" + id).loader();
-                $.post(Site.url + "/includes/ajax.php", { action: "edit_post", id: id, hash: Site.key }, function(data) {
+                $.post(Site.url + "/includes/ajax.php", {
+                    action: "edit_post",
+                    id: id,
+                    hash: Site.key
+                }, function(data) {
                     $("#post_" + id).fadeOut("fast", function(){
                         $(this).loader(true);
                         $(this).replaceWith(data);
                         $(window).scrollTop($("#post_edit_form_" + id).offset().top);
                         $("#post_edit_form_" + id).css("opacity", 0).animate({ opacity: 1 }, function(){
 <?php $trigger->call("ajax_post_edit_form_javascript"); ?>
-                            $("#more_options_link_" + id).click(function(){
+                            $("#more_options_link_" + id).click(function(e){
+                                e.preventDefault();
+
                                 if ($("#more_options_" + id).css("display") == "none") {
                                     $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
                                     $("#more_options_" + id).slideDown("slow");
@@ -45,10 +52,9 @@
                                     $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
                                     $("#more_options_" + id).slideUp("slow");
                                 }
-                                return false;
                             });
                             $("#post_edit_form_" + id).on( "submit", function(e){
-                                if ( !!window.FormData ) {
+                                if (!Post.failed && !!window.FormData) {
                                     e.preventDefault();
                                     $(this).loader();
                                     $.ajax({
@@ -57,34 +63,42 @@
                                         data: new FormData(this),
                                         processData: false,
                                         contentType: false,
-                                        dataType: "text"
+                                        dataType: "text",
+                                        error: Post.panic
                                     }).done(Post.updated);
                                 }
                             });
-                            $("#post_cancel_edit_" + id).click(function(){
-                                $("#post_edit_form_" + id).loader();
-                                $.post(Site.url + "/includes/ajax.php", {
-                                    action: "view_post",
-                                    context: Route.action,
-                                    id: id,
-                                    reason: "cancelled"
-                                }, function(data) {
-                                    $("#post_edit_form_" + id).fadeOut("fast", function(){
-                                        $(this).loader(true);
-                                        $(this).replaceWith(data);
-                                        $(this).hide().fadeIn("fast");
-                                    });
-                                }, "html");
-                                return false;
+                            $("#post_cancel_edit_" + id).click(function(e){
+                                e.preventDefault();
+
+                                if (!Post.failed) {
+                                    $("#post_edit_form_" + id).loader();
+                                    $.post(Site.url + "/includes/ajax.php", {
+                                        action: "view_post",
+                                        context: Route.action,
+                                        id: id,
+                                        reason: "cancelled"
+                                    }, function(data) {
+                                        $("#post_edit_form_" + id).fadeOut("fast", function(){
+                                            $(this).loader(true);
+                                            $(this).replaceWith(data);
+                                            $(this).hide().fadeIn("fast");
+                                        });
+                                    }, "html").fail(Post.panic);
+                                }
                             });
                         });
                     });
-                }, "html");
+                }, "html").fail(Post.panic);
             },
             updated: function(response){
                 id = Post.id;
-                if (isError(response))
-                    return $("#post_edit_form_" + id).loader(true);
+
+                if (isError(response)) {
+                    Post.panic();
+                    $("#post_edit_form_" + id).loader(true);
+                    return;
+                }
 
                 if (Route.action != "drafts" && Route.action != "view" && $("#post_edit_form_" + id + " select#status").val() == "draft") {
                     $("#post_edit_form_" + id).fadeOut("fast", function(){
@@ -108,16 +122,22 @@
                             $(this).replaceWith(data);
                             $("#post_" + id).hide().fadeIn("fast");
                         });
-                    }, "html");
+                    }, "html").fail(Post.panic);
                 }
             },
             destroy: function(id) {
                 $("#post_" + id).loader();
-                $.post(Site.url + "/includes/ajax.php", { action: "delete_post", id: id, hash: Site.key }, function(response) {
+                $.post(Site.url + "/includes/ajax.php", {
+                    action: "delete_post",
+                    id: id,
+                    hash: Site.key
+                }, function(response) {
                     $("#post_" + id).loader(true);
 
-                    if (isError(response))
+                    if (isError(response)) {
+                        Post.panic();
                         return;
+                    }
 
                     $("#post_" + id).fadeOut("fast", function(){
                         $(this).remove();
@@ -125,21 +145,30 @@
                         if (Route.action == "view")
                             window.location = "<?php echo $config->url; ?>";
                     });
-                }, "html");
+                }, "html").fail(Post.panic);
             },
             prepare_links: function(id) {
-                $(".post").last().parent().on("click", ".post_edit_link:not(.no_ajax)", function(){
-                    var id = $(this).attr("id").replace(/post_edit_/, "");
-                    Post.edit(id);
-                    return false;
+                $(".post").last().parent().on("click", ".post_edit_link:not(.no_ajax)", function(e){
+                    if (!Post.failed) {
+                        e.preventDefault();
+                        var id = $(this).attr("id").replace(/post_edit_/, "");
+                        Post.edit(id);
+                    }
                 });
+                $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(e){
+                    if (!Post.failed) {
+                        e.preventDefault();
 
-                $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(){
-                    if (!confirm("<?php echo __("Are you sure you want to delete this post?\\n\\nIt cannot be restored if you do this. If you wish to hide it, save it as a draft."); ?>")) return false
-                    var id = $(this).attr("id").replace(/post_delete_/, "");
-                    Post.destroy(id);
-                    return false;
+                        if (confirm("<?php echo __("Are you sure you want to delete this post?\\n\\nIt cannot be restored if you do this. If you wish to hide it, save it as a draft."); ?>")) {
+                            var id = $(this).attr("id").replace(/post_delete_/, "");
+                            Post.destroy(id);
+                        }
+                    }
                 });
+            },
+            panic: function() {
+                Post.failed = true;
+                alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
             }
         }
 <?php $trigger->call("javascript"); ?>

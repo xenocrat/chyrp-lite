@@ -22,7 +22,7 @@ ${ trigger.call("before_ajax_edit_post_fields", feather) }
         </select>
         {% endif %}
         {% endfor %}
-        <a id="more_options_link_$post.id" href="javascript:void(0)" class="more_options_link">${ "More Options &darr;" | translate("chyrp") }</a>
+        <a id="more_options_link_$post.id" href="#" class="more_options_link">${ "More Options &darr;" | translate("chyrp") }</a>
         <div id="more_options_$post.id" class="more_options" style="display: none">
         {% if visitor.group.can("add_post") %}
         <label for="status">${ "Status" | translate }</label>
@@ -76,7 +76,7 @@ ${ trigger.call("before_ajax_edit_post_fields", feather) }
         </div>
         <div class="doaction admin">
           <button type="submit" accesskey="s">${ "Save" | translate }</button>
-          <a href="javascript:void(0)" id="post_cancel_edit_$post.id" class="cancel">${ "Cancel" | translate }</a>
+          <a href="#" id="post_cancel_edit_$post.id" class="cancel">${ "Cancel" | translate }</a>
         </div>
         <input type="hidden" name="id" value="$post.id" id="id">
         <input type="hidden" name="feather" value="${ post.feather | escape }" id="feather">

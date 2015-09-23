@@ -1,13 +1,18 @@
         var ChyrpAjaxScroll = {
             busy: false,
-            fail: false,
+            failed: false,
             auto: <?php echo ( Config::current()->ajax_scroll_auto ? "true" : "false" ); ?>,
             clean: <?php echo ( Config::current()->clean_urls ? "true" : "false" ); ?>,
             init: function() {
                 if ( ChyrpAjaxScroll.auto ) {
                     $(window).on("scroll", window, ChyrpAjaxScroll.watch);
                 } else {
-                    $("#next_page_page").click(ChyrpAjaxScroll.fetch);
+                    $("#next_page_page").click(function(e) {
+                        if (!ChyrpAjaxScroll.failed) {
+                            e.preventDefault();
+                            ChyrpAjaxScroll.fetch;
+                        }
+                    });
                 }
             },
             watch: function() {
@@ -19,12 +24,12 @@
                 if ( docViewBottom >= ( docHeight * 0.8 ) ) ChyrpAjaxScroll.fetch();
             },
             fetch: function() {
-                if ( !ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.fail ) {
+                if ( !ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.failed ) {
                     ChyrpAjaxScroll.busy = true;
                     var last_post = $(".post").last();
                     var next_page_url = $("#next_page_page").attr("href");
                     if ( next_page_url && last_post.length ) {
-                        $.get(next_page_url, function(data){
+                        $.get(next_page_url, function(data) {
                             if ( !!history.replaceState ) {
                                 if (ChyrpAjaxScroll.clean)
                                     var next_page_query = next_page_url.slice(next_page_url.lastIndexOf("page/"));
@@ -52,10 +57,13 @@
                                 // That's all Folks!
                                 $("#next_page_page").fadeOut("fast");
                             }
-                        }).fail( function() { ChyrpAjaxScroll.fail = true });
-                        return false; // Suppress hyperlink if we can fetch
+                        }).fail(ChyrpAjaxScroll.panic);
                     }
                 }
             },
+            panic: function() {
+                ChyrpAjaxScroll.failed = true;
+                alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+            }
         };
         $(document).ready(ChyrpAjaxScroll.init);

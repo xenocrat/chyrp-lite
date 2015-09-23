@@ -74,6 +74,7 @@
             $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
                 if (!all_checked)
                     return;
+
                 all_checked = $(this).prop("checked");
             });
 
@@ -83,12 +84,14 @@
                 $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
                     if (!action_all_checked)
                         return;
+
                     action_all_checked = $(this).prop("checked");
                 })
 
                 $("#toggle").parent().parent().find(":checkbox").not("#toggle").each(function(){
                     if (!action_all_checked)
                         return;
+
                     action_all_checked = $(this).prop("checked");
                 });
 
@@ -115,13 +118,15 @@
 
                 $(document.createElement("a")).attr({
                     "id": "more_options_link",
-                    "href": "javascript:void(0)"
+                    "href": "#"
                 }).addClass("more_options_link").append(more_options_text).insertBefore("#more_options");
 
                 if (Cookie.get("show_more_options") == null)
                     $("#more_options").css("display", "none");
 
-                $("#more_options_link").click(function(){
+                $("#more_options_link").click(function(e){
+                    e.preventDefault();
+
                     if ($("#more_options").css("display") == "none") {
                         $(this).empty().append("<?php echo __("&uarr; Fewer Options", "theme"); ?>");
                         Cookie.set("show_more_options", "true", 30);
@@ -152,15 +157,15 @@
             })
         }
         function confirm_edit_group(msg) {
-            $("form.confirm").submit(function(){
+            $("form.confirm").submit(function(e){
                 if (!confirm("<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>"))
-                    return false;
+                    e.preventDefault();
             })
         }
         function confirm_delete_group(msg) {
-            $("form.confirm").submit(function(){
+            $("form.confirm").submit(function(e){
                 if (!confirm("<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>"))
-                    return false;
+                    e.preventDefault();
             })
         }
         var Users = {
@@ -221,9 +226,9 @@
         }
         var Help = {
             init: function() {
-                $(".help").on("click", function(){
+                $(".help").on("click", function(e){
+                    e.preventDefault();
                     Help.show($(this).attr("href"));
-                    return false;
                 });
             },
             show: function(href) {
@@ -329,9 +334,15 @@
             },
             action: null,
             confirmed: null,
+            failed: false,
             init: function() {
                 if (Site.ajax)
-                    $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(Extend.ajax_toggle);
+                    $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(function(e) {
+                        if (!Extend.failed) {
+                            e.preventDefault();
+                            Extend.ajax_toggle;
+                        }
+                    });
 
                 if (Route.action != "modules")
                     return;
@@ -402,22 +413,23 @@
                     Extend.action = "disable";
                 else if ($(this).parents("#modules_disabled").length || $(this).parents("#feathers_disabled").length)
                     Extend.action = "enable";
-                else
-                    return true; // Failed to decide action
 
                 if ($(this).parents("#modules_enabled").length || $(this).parents("#modules_disabled").length)
                     Extend.extension.type = "module";
                 else if ($(this).parents("#feathers_enabled").length || $(this).parents("#feathers_disabled").length)
                     Extend.extension.type = "feather";
-                else
-                    return true; // Failed to decide type
 
                 Extend.extension.name = $(this).parents("li").attr("id").replace(Extend.extension.type + "_", "");
+
+                if (Extend.action == null || Extend.extension.type == null || !Extend.extension.name) {
+                    Extend.failed = true;
+                    return;
+                }
 
                 $.post(Site.url + "/includes/ajax.php", {
                     action: "check_confirm",
                     check: Extend.extension.name,
-                    type: Extend.extension.type
+                    type: Extend.extension.type,
                 }, function(data) {
                     if (data != "" && Extend.action == "disable")
                         Extend.confirmed = (confirm(data)) ? 1 : 0;
@@ -451,9 +463,11 @@
                                 alert("<?php echo __("There was an error disabling the extension.", "theme"); ?>");
                         }
                     })
-                }, "text")
-
-                return false; // Suppress hyperlink
+                }, "text").fail(Extend.panic);
+            },
+            panic: function() {
+                Extend.failed = true;
+                alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
             }
         }
 <?php $trigger->call("admin_javascript"); ?>

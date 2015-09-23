@@ -1,11 +1,14 @@
         var ChyrpLikes = {
             action: "like",
+            failed: false,
             didPrevFinish: true,
             init: function() {
                 if (Site.ajax) {
-                    $("div.likes a.likes").click(function() {
-                        ChyrpLikes.toggle($(this).attr("data-post_id"));
-                        return false;
+                    $("div.likes a.likes").click(function(e) {
+                        if (!ChyrpLikes.failed) {
+                            e.preventDefault();
+                            ChyrpLikes.toggle($(this).attr("data-post_id"));
+                        }
                     });
                     ChyrpLikes.watch();
                 }
@@ -30,62 +33,61 @@
                 }
             },
             makeCall: function(post_id, callback, isUnlike) {
-                if (!this.didPrevFinish) return false;
-                if (isUnlike == true) this.action = "unlike"; else this.action = "like";
+                if (!ChyrpLikes.didPrevFinish)
+                    return false;
+
+                if (isUnlike == true)
+                    ChyrpLikes.action = "unlike";
+                else
+                    ChyrpLikes.action = "like";
+
                 params = {};
-                params["action"] = this.action;
+                params["action"] = ChyrpLikes.action;
                 params["post_id"] = post_id;
-                jQuery.ajax({
+                $.ajax({
                     type: "POST",
                     url: Site.url + "/includes/ajax.php",
                     data: params,
                     beforeSend: function() {
-                        this.didPrevFinish = false;	
+                        ChyrpLikes.didPrevFinish = false;	
                     },
-                    success:function(response) {
-                        if(response.success == true) {
+                    success: function(response) {
+                        if(response.success == true)
                             callback(response);
-                        }
-                        else {
-                            ChyrpLikes.log("unsuccessful request, response from server: " + response.error_text);
-                        }
+                        else
+                            ChyrpLikes.panic();
                     },
-                    error:function (xhr, ajaxOptions, thrownError) {
-                        ChyrpLikes.log('error in AJAX request.');
-                        ChyrpLikes.log('xhrObj: ' + xhr);
-                        ChyrpLikes.log('thrownError: ' + thrownError);
-                        ChyrpLikes.log('ajaxOptions: ' + ajaxOptions);
-                    },
-                    complete:function() {
-                        this.didPrevFinish = true;
+                    complete: function(response) {
+                        ChyrpLikes.didPrevFinish = true;
                     },
                     dataType: "json",
-                    cache: false
+                    cache: false,
+                    error: ChyrpLikes.panic
                 })
             },
             toggle: function(post_id) {
-                if ( $("#likes_post-"+post_id+" a.liked").length ) {
-                    this.unlike(post_id);
-                } else {
-                    this.like(post_id);
-                }
+                if ($("#likes_post-"+post_id+" a.liked").length)
+                    ChyrpLikes.unlike(post_id);
+                else
+                    ChyrpLikes.like(post_id);
             },
             like: function(post_id) {
-                this.makeCall(post_id,function(response) {
+                ChyrpLikes.makeCall(post_id,function(response) {
                     var postDom = $("#likes_post-"+post_id);
                     postDom.children("span.like_text").html(response.likeText);
                     postDom.children("a.like").removeClass("like").addClass("liked");
                 }, false);
             },
             unlike: function(post_id) {
-                this.makeCall(post_id,function(response) {
+                ChyrpLikes.makeCall(post_id,function(response) {
                     var postDom = $("#likes_post-"+post_id);
                     postDom.children("span.like_text").html(response.likeText);
                     postDom.children("a.liked").removeClass("liked").addClass("like");
                 }, true);
             },
-            log: function(obj){
-                if(typeof console != "undefined")console.log(obj);
+            panic: function() {
+                ChyrpLikes.failed = true;
+                alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
             }
         };
         $(document).ready(ChyrpLikes.init);
