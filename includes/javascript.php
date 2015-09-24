@@ -169,8 +169,7 @@
             panic: function() {
                 Post.failed = true;
                 alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
-                $("#post_" + Post.id).loader(true);
-                $("#post_edit_form_" + Post.id).loader(true);
+                $(".ajax_loading").loader(true);
             }
         }
 <?php $trigger->call("javascript"); ?>

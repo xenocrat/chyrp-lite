@@ -1,5 +1,4 @@
         var ChyrpComment = {
-            id: 0,
             editing: 0,
             notice: 0,
             interval: null,
@@ -101,7 +100,6 @@
                 }
             },
             edit: function(id) {
-                ChyrpComment.id = id;
                 ChyrpComment.editing++;
                 $("#comment_" + id).loader();
                 $.post(Site.url + "/includes/ajax.php", {
@@ -190,6 +188,7 @@
                 }, "html").fail(ChyrpComment.panic);
             },
             destroy: function(id) {
+                $("#comment_" + id).loader();
                 $.post(Site.url + "/includes/ajax.php", {
                     action: "delete_comment",
                     id: id,
@@ -208,7 +207,7 @@
             panic: function() {
                 ChyrpComment.failed = true;
                 alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
-                $("#comment_" + ChyrpComment.id).loader(true);
+                $(".ajax_loading").loader(true);
                 $("#add_comment > #ajax").val("false");
             }
         };
