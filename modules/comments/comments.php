@@ -530,6 +530,9 @@
                     if ($post->no_results)
                         break;
 
+                    $ids = array();
+                    $last_comment = "";
+
                     if ($post->latest_comment > $last_comment) {
                         $new_comments = $sql->select("comments",
                                                      "id, created_at",
@@ -542,19 +545,17 @@
                                                      "created_at ASC",
                                                      array(":visitor_id" => $visitor->id));
 
-                        $ids = array();
-                        $last_comment = "";
                         while ($the_comment = $new_comments->fetchObject()) {
                             $ids[] = $the_comment->id;
 
                             if (strtotime($last_comment) < strtotime($the_comment->created_at))
                                 $last_comment = $the_comment->created_at;
                         }
-
-                        $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
-                        header("Content-type: application/json; charset=utf-8");
-                        echo json_encode($responseObj);
                     }
+
+                    $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
+                    header("Content-type: application/json; charset=utf-8");
+                    echo json_encode($responseObj);
                     break;
 
                 case "show_comment":
