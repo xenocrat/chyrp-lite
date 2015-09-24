@@ -190,7 +190,6 @@
                 }, "html").fail(ChyrpComment.panic);
             },
             destroy: function(id) {
-                ChyrpComment.id = id;
                 $.post(Site.url + "/includes/ajax.php", {
                     action: "delete_comment",
                     id: id,
