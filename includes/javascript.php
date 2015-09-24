@@ -54,8 +54,9 @@
                                 }
                             });
                             $("#post_edit_form_" + id).on( "submit", function(e){
+                                e.preventDefault();
+
                                 if (!Post.failed && !!window.FormData) {
-                                    e.preventDefault();
                                     $(this).loader();
                                     $.ajax({
                                         type: "POST",
@@ -96,7 +97,6 @@
 
                 if (isError(response)) {
                     Post.panic();
-                    $("#post_edit_form_" + id).loader(true);
                     return;
                 }
 
@@ -169,6 +169,8 @@
             panic: function() {
                 Post.failed = true;
                 alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+                $("#post_" + Post.id).loader(true);
+                $("#post_edit_form_" + Post.id).loader(true);
             }
         }
 <?php $trigger->call("javascript"); ?>

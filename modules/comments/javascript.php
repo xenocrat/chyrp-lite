@@ -1,10 +1,12 @@
         var ChyrpComment = {
+            id: 0,
             editing: 0,
             notice: 0,
             interval: null,
             failed: false,
             reload: <?php if (Config::current()->enable_reload_comments) echo("true"); else echo("false"); ?>,
             delay: Math.abs(<?php echo(Config::current()->auto_reload_comments * 1000); ?>),
+            per_page: <?php echo Config::current()->comments_per_page; ?>,
             init: function() {
                 if ($("#comments").size()) {
                     if (Site.ajax && ChyrpComment.reload && ChyrpComment.delay > 0)
@@ -75,29 +77,31 @@
                     return;
 
                 var id = $("#comments").attr("data-post");
-                if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && ChyrpComment.failed != true && $(".comments.paginated").children().size() < <?php echo Config::current()->comments_per_page; ?>) {
+                if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && ChyrpComment.failed != true && $(".comments.paginated").children().size() < ChyrpComment.per_page) {
                     $.ajax({
                         type: "post",
                         dataType: "json",
                         url: Site.url + "/includes/ajax.php",
                         data: "action=reload_comments&post_id=" + id + "&last_comment=" + $("#comments").attr("data-timestamp"),
-                        error: ChyrpComment.panic
-                    }).done(function(json) {
-                        if (json != null) {
-                            $("#comments").attr("data-timestamp", json.last_comment);
-                            $.each(json.comment_ids, function(i, id) {
-                                $.post(Site.url + "/includes/ajax.php", {
-                                    action: "show_comment",
-                                    comment_id: id
-                                }, function(data){
-                                    $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
-                                }, "html").fail(ChyrpComment.panic);
-                            });
+                        error: ChyrpComment.panic,
+                        success: function(json) {
+                            if (json.comment_ids.length > 0) {
+                                $("#comments").attr("data-timestamp", json.last_comment);
+                                $.each(json.comment_ids, function(i, id) {
+                                    $.post(Site.url + "/includes/ajax.php", {
+                                        action: "show_comment",
+                                        comment_id: id
+                                    }, function(data){
+                                        $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
+                                    }, "html").fail(ChyrpComment.panic);
+                                });
+                            }
                         }
                     });
                 }
             },
             edit: function(id) {
+                ChyrpComment.id = id;
                 ChyrpComment.editing++;
                 $("#comment_" + id).loader();
                 $.post(Site.url + "/includes/ajax.php", {
@@ -107,7 +111,6 @@
                 }, function(data) {
                     if (isError(data)) {
                         ChyrpComment.panic();
-                        $("#comment_" + id).loader(true);
                         return;
                     }
 
@@ -139,11 +142,13 @@
                                             $(this).replaceWith(data).fadeIn("fast");
                                         });
                                     });
+                                    ChyrpComment.editing--;
                                 }
                             });
                             $("#comment_edit_" + id).on( "submit", function(e){
+                                e.preventDefault();
+
                                 if (!ChyrpComment.failed && !!window.FormData) {
-                                    e.preventDefault();
                                     $("#comment_" + id).loader();
                                     $.ajax({
                                         type: "POST",
@@ -152,32 +157,31 @@
                                         processData: false,
                                         contentType: false,
                                         dataType: "html",
-                                        error: ChyrpComment.panic
-                                    }).done(function(response) {
-                                        ChyrpComment.editing--;
+                                        error: ChyrpComment.panic,
+                                        success: function(response) {
+                                            ChyrpComment.editing--;
 
-                                        if (isError(response)) {
-                                            ChyrpComment.panic();
-                                            $("#comment_" + id).loader(true);
-                                            return;
-                                        }
-
-                                        $.post(Site.url + "/includes/ajax.php", {
-                                            action: "show_comment",
-                                            comment_id: id,
-                                            reason: "edited"
-                                        }, function(data) {
-                                            if (isError(data)) {
+                                            if (isError(response)) {
                                                 ChyrpComment.panic();
-                                                $("#comment_" + id).loader(true);
                                                 return;
                                             }
 
-                                            $("#comment_" + id).fadeOut("fast", function(){
-                                                $(this).loader(true);
-                                                $(this).replaceWith(data).fadeIn("fast");
-                                            });
-                                        }, "html").fail(ChyrpComment.panic);
+                                            $.post(Site.url + "/includes/ajax.php", {
+                                                action: "show_comment",
+                                                comment_id: id,
+                                                reason: "edited"
+                                            }, function(data) {
+                                                if (isError(data)) {
+                                                    ChyrpComment.panic();
+                                                    return;
+                                                }
+
+                                                $("#comment_" + id).fadeOut("fast", function(){
+                                                    $(this).loader(true);
+                                                    $(this).replaceWith(data).fadeIn("fast");
+                                                });
+                                            }, "html").fail(ChyrpComment.panic);
+                                        }
                                     });
                                 }
                             });
@@ -186,15 +190,12 @@
                 }, "html").fail(ChyrpComment.panic);
             },
             destroy: function(id) {
-                ChyrpComment.notice--;
-                $("#comment_" + id).loader();
+                ChyrpComment.id = id;
                 $.post(Site.url + "/includes/ajax.php", {
                     action: "delete_comment",
                     id: id,
                     hash: Site.key
                 }, function(response){
-                    $("#comment_" + id).loader(true);
-
                     if (isError(response)) {
                         ChyrpComment.panic();
                         return;
@@ -208,6 +209,8 @@
             panic: function() {
                 ChyrpComment.failed = true;
                 alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+                $("#comment_" + ChyrpComment.id).loader(true);
+                $("#add_comment > #ajax").val("false");
             }
         };
         $(document).ready(ChyrpComment.init);
