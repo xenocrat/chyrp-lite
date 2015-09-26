@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-09-19 15:26+0000\n"
+"POT-Creation-Date: 2015-09-26 15:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:54
+#: admin/admin.js.php:58
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:111
-#: admin/admin.js.php:125
+#: admin/admin.js.php:118
+#: admin/admin.js.php:134
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:113
-#: admin/admin.js.php:128
+#: admin/admin.js.php:120
+#: admin/admin.js.php:137
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:155
+#: admin/admin.js.php:164
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: admin/admin.js.php:161
+#: admin/admin.js.php:170
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:234
+#: admin/admin.js.php:203
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:242
-#: admin/admin.js.php:244
-#: admin/admin.js.php:312
-#: admin/admin.js.php:314
+#: admin/admin.js.php:211
+#: admin/admin.js.php:213
+#: admin/admin.js.php:281
+#: admin/admin.js.php:283
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:264
-#: admin/admin.js.php:265
+#: admin/admin.js.php:233
+#: admin/admin.js.php:234
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:300
+#: admin/admin.js.php:269
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:447
+#: admin/admin.js.php:424
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:449
+#: admin/admin.js.php:426
 msgid "There was an error disabling the extension."
 msgstr ""
 
@@ -138,11 +138,11 @@ msgid "XML-RPC support allows you to create and edit content via remote access t
 msgstr ""
 
 #: admin/pages/content_settings.twig:56
-msgid "Enable Inline Management"
+msgid "Enable Ajax"
 msgstr ""
 
 #: admin/pages/content_settings.twig:59
-msgid "Ajax-powered inline editing of your blog content."
+msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
 #: admin/pages/content_settings.twig:63
@@ -158,7 +158,7 @@ msgid "Enable Markdown"
 msgstr ""
 
 #: admin/pages/content_settings.twig:73
-msgid "Compose blog content using Markdown."
+msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
 #: admin/pages/content_settings.twig:78

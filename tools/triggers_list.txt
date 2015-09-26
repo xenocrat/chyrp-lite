@@ -5,7 +5,7 @@
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 457
+	admin/admin.js.php on line 436
 
 
 can_not_view_site
@@ -223,7 +223,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1130
+	includes/controller/Admin.php on line 1134
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -231,7 +231,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1157
+	includes/controller/Admin.php on line 1161
 Arguments:
 	$user
 
@@ -239,7 +239,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1188
+	includes/controller/Admin.php on line 1192
 Arguments:
 	$entry, $post
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1211
+	includes/controller/Admin.php on line 1215
 Arguments:
 	$entry, $page
 
@@ -277,13 +277,13 @@ Arguments:
 ajax_post_edit_form_javascript
 ------------------------------
 Called from:
-	includes/javascript.php on line 36
+	includes/javascript.php on line 66
 
 
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 142
+	includes/javascript.php on line 197
 
 
 add_group
@@ -464,7 +464,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 936
+	includes/controller/Admin.php on line 940
 Arguments:
 	$post)
 
@@ -474,7 +474,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 955
+	includes/controller/Admin.php on line 959
 Arguments:
 	$post
 
@@ -484,7 +484,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 998
+	includes/controller/Admin.php on line 1002
 Arguments:
 	$page)
 
@@ -494,7 +494,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1013
+	includes/controller/Admin.php on line 1017
 Arguments:
 	$page
 
@@ -504,7 +504,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1064
+	includes/controller/Admin.php on line 1068
 
 
 manage_nav
@@ -512,7 +512,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1862
+	includes/controller/Admin.php on line 1866
 
 
 settings_nav
@@ -520,7 +520,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1891
+	includes/controller/Admin.php on line 1895
 
 
 extend_nav
@@ -528,7 +528,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1901
+	includes/controller/Admin.php on line 1905
 
 
 admin_subnav
@@ -536,7 +536,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1912
+	includes/controller/Admin.php on line 1916
 
 
 nav_selected
@@ -544,7 +544,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2020
+	includes/controller/Admin.php on line 2024
 
 
 url_code
