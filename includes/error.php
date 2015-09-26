@@ -16,7 +16,9 @@
         if (($buffer = ob_get_contents()) !== false)
             ob_clean();
 
-        error_log("ERROR: ".$message." (".$file." on line ".$line.")");
+        if (defined('DEBUG') and DEBUG)
+            error_log("ERROR: ".$message." (".$file." on line ".$line.")");
+
         echo("ERROR: ".$message." (".$file." on line ".$line.")");
 
         if ($buffer !== false)
@@ -33,7 +35,9 @@
         if (!(error_reporting() & $errno))
             return; # Error reporting excludes this error.
 
-        error_log("ERROR: ".$message." (".$file." on line ".$line.")");
+        if (defined('DEBUG') and DEBUG)
+            error_log("ERROR: ".$message." (".$file." on line ".$line.")");
+
         error(null, $message." (".$file." on line ".$line.")", debug_backtrace());
     }
 
