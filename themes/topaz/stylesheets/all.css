@@ -272,6 +272,7 @@ input:focus {                                       outline: none;
     input:-ms-input-placeholder {                   color: #c6ccc8 }
     input:input-placeholder {                       color: #c6ccc8 }
     input.error {                                   background-color: #ffb2b2 }
+    input[type="password"].strong {                 border: 1px solid #76b362 }
     input#search_field,
     input#sidebar_search_field {                    display: inline;
                                                     margin: 0em;

@@ -8,7 +8,7 @@
         <?php echo "/* Balance out the line numbers in this script and in the output to help debugging.\n\n\n\n\n        */\n"; ?>
         $(function() {
             // Scan AJAX responses for errors.
-            $(document).ajaxComplete(function(event, request){
+            $(document).ajaxComplete(function(event, request) {
                 var response = request ? request.responseText : null;
                 if (isError(response))
                     alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
@@ -16,15 +16,37 @@
 
             if (Site.ajax)
                 Post.prepare_links();
+
+            if (Route.action == "register")
+                Passwords.check("input[type='password']#password1", "input[type='password']#password2");
+
+            if (Route.action == "controls")
+                Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
         });
         var Route = {
             action: "<?php echo $_GET['action']; ?>"
-        };
+        }
         var Site = {
             url: "<?php echo $config->chyrp_url; ?>",
             key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
             ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true"); else echo("false"); ?>
-        };
+        }
+        var Passwords = {
+            check: function(selector_source, selector_target) {
+                $(selector_source).keyup(function(e) {
+                    if (passwordStrength($(this).val()) < 75)
+                        $(this).removeClass("strong");
+                    else
+                        $(this).addClass("strong");
+                });
+                $(selector_source).parents("form").on("submit", function(e) {
+                    if ($(selector_source).val() !== $(selector_target).val()) {
+                        e.preventDefault();
+                        alert("<?php echo __("Passwords do not match."); ?>")
+                    }
+                });
+            }
+        }
         var Post = {
             id: 0,
             failed: false,
@@ -36,13 +58,13 @@
                     id: id,
                     hash: Site.key
                 }, function(data) {
-                    $("#post_" + id).fadeOut("fast", function(){
+                    $("#post_" + id).fadeOut("fast", function() {
                         $(this).loader(true);
                         $(this).replaceWith(data);
                         $(window).scrollTop($("#post_edit_form_" + id).offset().top);
-                        $("#post_edit_form_" + id).css("opacity", 0).animate({ opacity: 1 }, function(){
+                        $("#post_edit_form_" + id).css("opacity", 0).animate({ opacity: 1 }, function() {
 <?php $trigger->call("ajax_post_edit_form_javascript"); ?>
-                            $("#more_options_link_" + id).click(function(e){
+                            $("#more_options_link_" + id).click(function(e) {
                                 e.preventDefault();
 
                                 if ($("#more_options_" + id).css("display") == "none") {
@@ -53,7 +75,7 @@
                                     $("#more_options_" + id).slideUp("slow");
                                 }
                             });
-                            $("#post_edit_form_" + id).on( "submit", function(e){
+                            $("#post_edit_form_" + id).on("submit", function(e) {
                                 e.preventDefault();
 
                                 if (!Post.failed && !!window.FormData) {
@@ -69,7 +91,7 @@
                                     }).done(Post.updated);
                                 }
                             });
-                            $("#post_cancel_edit_" + id).click(function(e){
+                            $("#post_cancel_edit_" + id).click(function(e) {
                                 e.preventDefault();
 
                                 if (!Post.failed) {
@@ -80,7 +102,7 @@
                                         id: id,
                                         reason: "cancelled"
                                     }, function(data) {
-                                        $("#post_edit_form_" + id).fadeOut("fast", function(){
+                                        $("#post_edit_form_" + id).fadeOut("fast", function() {
                                             $(this).loader(true);
                                             $(this).replaceWith(data);
                                             $(this).hide().fadeIn("fast");
@@ -92,7 +114,7 @@
                     });
                 }, "html").fail(Post.panic);
             },
-            updated: function(response){
+            updated: function(response) {
                 id = Post.id;
 
                 if (isError(response)) {
@@ -101,12 +123,12 @@
                 }
 
                 if (Route.action != "drafts" && Route.action != "view" && $("#post_edit_form_" + id + " select#status").val() == "draft") {
-                    $("#post_edit_form_" + id).fadeOut("fast", function(){
+                    $("#post_edit_form_" + id).fadeOut("fast", function() {
                         $(this).loader(true);
                         alert("<?php echo __("Post has been saved as a draft."); ?>");
                     })
                 } else if (Route.action == "drafts" && $("#post_edit_form_" + id + " select#status").val() != "draft") {
-                    $("#post_edit_form_" + id).fadeOut("fast", function(){
+                    $("#post_edit_form_" + id).fadeOut("fast", function() {
                         $(this).loader(true);
                         alert("<?php echo __("Post has been published."); ?>");
                     })
@@ -117,7 +139,7 @@
                         id: id,
                         reason: "edited"
                     }, function(data) {
-                        $("#post_edit_form_" + id).fadeOut("fast", function(){
+                        $("#post_edit_form_" + id).fadeOut("fast", function() {
                             $(this).loader(true);
                             $(this).replaceWith(data);
                             $("#post_" + id).hide().fadeIn("fast");
@@ -139,7 +161,7 @@
                         return;
                     }
 
-                    $("#post_" + id).fadeOut("fast", function(){
+                    $("#post_" + id).fadeOut("fast", function() {
                         $(this).remove();
 
                         if (Route.action == "view")
@@ -148,14 +170,14 @@
                 }, "html").fail(Post.panic);
             },
             prepare_links: function(id) {
-                $(".post").last().parent().on("click", ".post_edit_link:not(.no_ajax)", function(e){
+                $(".post").last().parent().on("click", ".post_edit_link:not(.no_ajax)", function(e) {
                     if (!Post.failed) {
                         e.preventDefault();
                         var id = $(this).attr("id").replace(/post_edit_/, "");
                         Post.edit(id);
                     }
                 });
-                $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(e){
+                $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(e) {
                     if (!Post.failed) {
                         e.preventDefault();
 

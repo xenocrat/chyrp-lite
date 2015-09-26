@@ -9,7 +9,7 @@
         <?php echo "/* Balance out the line numbers in this script and in the output to help debugging.\n\n\n\n\n        */\n"; ?>
         $(function() {
             // Scan AJAX responses for errors.
-            $(document).ajaxComplete(function(event, request){
+            $(document).ajaxComplete(function(event, request) {
                 var response = request ? request.responseText : null;
                 if (isError(response))
                     alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
@@ -21,8 +21,11 @@
             if (Route.action == "modules" || Route.action == "feathers")
                 Extend.init();
 
-            if (Route.action == "new_user" || Route.action == "edit_user")
-                Users.init();
+            if (Route.action == "new_user")
+                Passwords.check("input[type='password']#password1", "input[type='password']#password2");
+
+            if (Route.action == "edit_user")
+                Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
 
             // Open help text in an overlay
             Help.init();
@@ -48,7 +51,7 @@
             url: "<?php echo $config->chyrp_url; ?>",
             key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
             ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true"); else echo("false"); ?>
-        };
+        }
         function toggle_all() {
             var all_checked = true;
 
@@ -60,35 +63,35 @@
                 "class": "checkbox"
             }).appendTo("#toggler, .toggler");
 
-            $("#toggle").click(function(){
-                $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
+            $("#toggle").click(function() {
+                $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function() {
                     $(this).prop("checked", $("#toggle").prop("checked"));
-                })
+                });
 
-                $(this).parent().parent().find(":checkbox").not("#toggle").each(function(){
+                $(this).parent().parent().find(":checkbox").not("#toggle").each(function() {
                     $(this).prop("checked", $("#toggle").prop("checked"));
-                })
+                });
             });
 
             // Some checkboxes are already checked when the page is loaded
-            $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
+            $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function() {
                 if (!all_checked)
                     return;
 
                 all_checked = $(this).prop("checked");
             });
 
-            $(":checkbox:not(#toggle)").click(function(){
+            $(":checkbox:not(#toggle)").click(function() {
                 var action_all_checked = true;
 
-                $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function(){
+                $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function() {
                     if (!action_all_checked)
                         return;
 
                     action_all_checked = $(this).prop("checked");
-                })
+                });
 
-                $("#toggle").parent().parent().find(":checkbox").not("#toggle").each(function(){
+                $("#toggle").parent().parent().find(":checkbox").not("#toggle").each(function() {
                     if (!action_all_checked)
                         return;
 
@@ -102,8 +105,8 @@
             if ($("#toggler").length);
                 $("#toggle").prop("checked", all_checked);
 
-            $("td:has(:checkbox)").click(function(e){
-                $(this).find(":checkbox").each(function(){
+            $("td:has(:checkbox)").click(function(e) {
+                $(this).find(":checkbox").each(function() {
                     if (e.target != this)
                         $(this).prop("checked", !($(this).prop("checked")));
                 });
@@ -124,7 +127,7 @@
                 if (Cookie.get("show_more_options") == null)
                     $("#more_options").css("display", "none");
 
-                $("#more_options_link").click(function(e){
+                $("#more_options_link").click(function(e) {
                     e.preventDefault();
 
                     if ($("#more_options").css("display") == "none") {
@@ -135,98 +138,58 @@
                         Cookie.destroy("show_more_options");
                     }
                     $("#more_options").slideToggle();
-                })
+                });
             }
         }
         function toggle_correspondence() {
-            $("#email_correspondence").click(function(){
+            $("#email_correspondence").click(function() {
                 if ($(this).prop("checked") == false )
                     $("#email_activation").prop("checked", false);
             });
-            $("#email_activation").click(function(){
+            $("#email_activation").click(function() {
                 if ($(this).prop("checked") == true )
                     $("#email_correspondence").prop("checked", true);
             });
         }
         function validate_slug() {
-            $("input#slug").keyup(function(e){
+            $("input#slug").keyup(function(e) {
                 if (/^([a-zA-Z0-9\-\._:]*)$/.test($(this).val()))
                     $(this).removeClass("error");
                 else
                     $(this).addClass("error");
-            })
+            });
         }
         function confirm_edit_group(msg) {
-            $("form.confirm").submit(function(e){
+            $("form.confirm").submit(function(e) {
                 if (!confirm("<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>"))
                     e.preventDefault();
-            })
+            });
         }
         function confirm_delete_group(msg) {
-            $("form.confirm").submit(function(e){
+            $("form.confirm").submit(function(e) {
                 if (!confirm("<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>"))
                     e.preventDefault();
-            })
+            });
         }
-        var Users = {
-            init: function() {
-                $(document).ready(function() {
-                    $("input[type='password']#password1, input[type='password']#new_password1").keyup(function(e) {
-                        var score = Users.score($(this).val());
-                        var image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAAYCAIAAAC0rgCNAAAADklEQVR4AWPc8nA+LTEA8Y80+W/odekAAAAASUVORK5CYII=";
-                        $(this).css({
-                            "background": "url('data:image/png;base64," + image + "') #fff no-repeat top left",
-                            "background-size": (score + "% 100%")
-                        });
-                    });
-                    $("input[type='password']#password1, input[type='password']#password2").keyup(function(e) {
-                        if ( $("input[type='password']#password1").val() !== $("input[type='password']#password2").val() ) {
-                            $("input[type='password']#password2").addClass("error");
-                        } else {
-                            $("input[type='password']#password2").removeClass("error");
-                        }
-                    });
-                    $("input[type='password']#new_password1, input[type='password']#new_password2").keyup(function(e) {
-                        if ( $("input[type='password']#new_password1").val() !== $("input[type='password']#new_password2").val() ) {
-                            $("input[type='password']#new_password2").addClass("error");
-                        } else {
-                            $("input[type='password']#new_password2").removeClass("error");
-                        }
-                    });
+        var Passwords = {
+            check: function(selector_source, selector_target) {
+                $(selector_source).keyup(function(e) {
+                    if (passwordStrength($(this).val()) < 75)
+                        $(this).removeClass("strong");
+                    else
+                        $(this).addClass("strong");
                 });
-            },
-            score: function(password) {
-                var score = 0;
-                if (!password)
-                    return score;
-
-                // award every unique letter until 5 repetitions
-                var letters = new Object();
-                for (var i=0; i<password.length; i++) {
-                    letters[password[i]] = (letters[password[i]] || 0) + 1;
-                    score += 5.0 / letters[password[i]];
-                }
-
-                // bonus points for mixing it up
-                var variations = {
-                    digits: /\d/.test(password),
-                    lower: /[a-z]/.test(password),
-                    upper: /[A-Z]/.test(password),
-                    nonWords: /\W/.test(password)
-                }
-
-                variationCount = 0;
-                for (var check in variations) {
-                    variationCount += (variations[check] == true) ? 1 : 0;
-                }
-                score += (variationCount - 1) * 10;
-
-                return parseInt(score);
+                $(selector_source).parents("form").on( "submit", function(e) {
+                    if ($(selector_source).val() !== $(selector_target).val()) {
+                        e.preventDefault();
+                        alert("<?php echo __("Passwords do not match."); ?>")
+                    }
+                });
             }
         }
         var Help = {
             init: function() {
-                $(".help").on("click", function(e){
+                $(".help").on("click", function(e) {
                     e.preventDefault();
                     Help.show($(this).attr("href"));
                 });
@@ -272,7 +235,7 @@
                         }).addClass("preview emblem").css({
                             "cursor": "pointer"
                         })
-                    ).click(function(e){
+                    ).click(function(e) {
                         var content = $("#" + $(this).attr("data-target")).val();
                         var filter = $("#" + $(this).attr("data-target")).attr("data-preview");
                         if (content != "") {

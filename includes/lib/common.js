@@ -50,44 +50,79 @@ function isError(text) {
   return /HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW$/m.test(text);
 }
 
+// Award a numeric score for the strength of a password.
+function passwordStrength(password) {
+    var score = 0;
+    var frequency = new Object();
+
+    if (!password)
+        return score;
+
+    // Calculate the frequency of each char in the password.
+    for (var i = 0; i < password.length; i++) {
+        frequency[password[i]] = (frequency[password[i]] || 0) + 1;
+
+    }
+
+	// Award each unique char and punish more than 10 occurrences.
+    for (var item in frequency)
+        score += (11 - frequency[item]);
+
+    // Award bonus points for different character types.
+    var variations = {
+        digits: /\d/.test(password),
+        lower: /[a-z]/.test(password),
+        upper: /[A-Z]/.test(password),
+        nonWords: /\W/.test(password)
+    }
+
+    variationCount = 0;
+    for (var check in variations) {
+        variationCount += (variations[check] == true) ? 1 : 0;
+    }
+    score += (variationCount - 1) * 10;
+
+    return parseInt(score);
+}
+
 Array.prototype.indicesOf = function(value) {
-  var results = []
+  var results = [];
 
   for (var j = 0; j < this.length; j++)
     if (typeof value != "string") {
       if (value.test(this[j]))
-        results.push(j)
+        results.push(j);
     } else if (this[j] == value)
-      results.push(j)
+      results.push(j);
 
-  return results
+  return results;
 }
 
 Array.prototype.find = function(match) {
-  var matches = []
+  var matches = [];
 
   for (var f = 0; f < this.length; f++)
     if (match.test(this[f]))
-      matches.push(this[f])
+      matches.push(this[f]);
 
-  return matches
+  return matches;
 }
 
 Array.prototype.remove = function(value) {
   if (value instanceof Array) {
     for (var r = 0; r < value.length; r++)
-      this.remove(value[r])
+      this.remove(value[r]);
 
-    return
+    return;
   }
 
-  var indices = this.indicesOf(value)
+  var indices = this.indicesOf(value);
 
   if (indices.length == 0)
-    return
+    return;
 
   for (var h = 0; h < indices.length; h++)
-    this.splice(indices[h] - h, 1)
+    this.splice(indices[h] - h, 1);
 
-  return this
+  return this;
 }

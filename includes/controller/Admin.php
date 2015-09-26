@@ -522,6 +522,8 @@
                 error(__("Error"), __("Password cannot be blank."));
             elseif ($_POST['password1'] != $_POST['password2'])
                 error(__("Error"), __("Passwords do not match."));
+            elseif (password_strength($_POST['password1']) < 75)
+                Flash::message(__("Please consider setting a stronger password for this user."));
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."));
@@ -603,6 +605,8 @@
 
             if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
                 Flash::warning(__("Passwords do not match."), "/admin/?action=manage_users");
+            elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 75)
+                Flash::message(__("Please consider setting a stronger password for this user."));
 
             $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
                             User::hashPassword($_POST['new_password1']) :
