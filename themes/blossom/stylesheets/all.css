@@ -67,6 +67,7 @@ body {                                              font-family: "Open Sans webf
                                                     margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
                                                     max-width: 1200px }
+    body.mobile_nav {                               margin-bottom: 3rem }
 p {                                                 margin: 0em 0em 1em 0em }
     p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                                font-size: 2em;

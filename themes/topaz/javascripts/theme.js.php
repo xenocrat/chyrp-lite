@@ -6,45 +6,39 @@
 ?>
 <!-- --><script>
 
-// Obfuscated mailto
+// Obfuscated mailto.
 function mailTo(domain, recipient) {
     location.assign(('mailto:' + recipient + '@' + domain));
     return true;
 }
 
-// Cheeseburger mobile menu
+// Mobile navigation menu.
 $(document).ready(function() {
     $('<li>', {
             "id": "mobile_toggle",
-            "role": "button",
+            "role": "presentation"
         }).append($("<a>", {
-            "id": "cheeseburger-link",
+            "id": "mobile_toggle_link",
             "href": "#",
+            "role": "menuitem",
             "aria-label": "<?php echo __("Menu", "theme"); ?>"
-        }).on("click", function() {
+        }).on("click", function(e) {
+            e.preventDefault();
             if ( $(".mobile_nav").hasClass("on") ) {
                 $(".mobile_nav").removeClass("on");
             } else {
                 $(".mobile_nav").addClass("on");
             }
-            return false;
-        }).append($("<img>", {
-            "id": "cheeseburger-image",
-            "src": "<?php echo ( THEME_URL."/images/cheeseburger.svg"); ?>",
-            "alt": "<?php echo __("Menu", "theme"); ?>"
-        }).css({
-            "cursor": "pointer"
-        }))).appendTo("ul.tail_nav").parent().addClass("mobile_nav").parents("body").css({
-            "margin-bottom": "3em"
-        });
+        }).text("<?php echo __("Menu", "theme"); ?>")).appendTo("ul.tail_nav").parent().addClass("mobile_nav");
+        $("body").addClass("mobile_nav");
 
         // Make the menu items keyboard accessible
-        $(".mobile_nav").children().on("focus", "a:not(#cheeseburger-link)", function() {
+        $(".mobile_nav").children().on("focus", "a:not(#mobile_toggle_link)", function() {
             $(".mobile_nav").addClass("on");
         });
 });
 
-// Prevent tabbing through yearly archive post previews
+// Prevent tabbing through yearly archive post previews.
 $(document).ready(function() {
     $("article.post.archive *").not(".archive_post_link").attr("tabindex", "-1")
 });
