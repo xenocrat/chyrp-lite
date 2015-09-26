@@ -2015,13 +2015,47 @@
      *     $files - An associative array of filename => content.
      */
     function zip($files) {
-        require "lib".DIR."zip.php";
+        require_once "lib".DIR."zip.php";
 
         $zip = new ZipFile();
         foreach ($files as $filename => $content)
             $zip->addFile($content, $filename);
 
         return $zip->file();
+    }
+
+    /**
+     * Function: password_strength
+     * Award a numeric score for the strength of a password.
+     *
+     * Parameters:
+     *     $password - The password string to score.
+     *
+     * Returns:
+     *     A numeric score for the password strength.
+     */
+    function password_strength($password = "") {
+        $score = 0;
+
+        if (empty($password))
+            return $score;
+
+        # Calculate the frequency of each char in the password.
+        $frequency = array_count_values(str_split($password));
+
+        # Award each unique char and punish more than 10 occurrences.
+        foreach ($frequency as $occurrences)
+            $score += (11 - $occurrences);
+
+        # Award bonus points for different character types.
+        $variations = array("digits" => preg_match("/\d/", $password),
+                            "lower" => preg_match("/[a-z]/", $password),
+                            "upper" => preg_match("/[A-Z]/", $password),
+                            "nonWords" => preg_match("/\W/", $password));
+
+        $score += (array_sum($variations) - 1) * 10;
+
+        return intval($score);
     }
 
     /**

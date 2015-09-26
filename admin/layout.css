@@ -330,6 +330,7 @@ input[type="number"].error,
 input[type="password"].error,
 textarea.error {                                background-color: #faebe4;
                                                 border: 1px solid #d6bdb5 }
+input[type="password"].strong {                 border: 1px solid #76b362 }
 input[type="file"] {                            border: none }
 input.code,
 textarea.code,
