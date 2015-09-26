@@ -17,7 +17,7 @@
                         value: "true",
                         id: "ajax"
                     }));
-                    $("#add_comment").on( "submit", function(e){
+                    $("#add_comment").on("submit", function(e){
                         if (!ChyrpComment.failed && !!window.FormData) {
                             e.preventDefault();
                             $("#add_comment").parent().loader();
@@ -143,7 +143,7 @@
                                     ChyrpComment.editing--;
                                 }
                             });
-                            $("#comment_edit_" + id).on( "submit", function(e){
+                            $("#comment_edit_" + id).on("submit", function(e){
                                 e.preventDefault();
 
                                 if (!ChyrpComment.failed && !!window.FormData) {
