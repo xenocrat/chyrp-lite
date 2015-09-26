@@ -800,7 +800,9 @@ img#likeImage_preview {                         vertical-align: middle }
     table tbody tr td:first-child {             border-left: none }
     table tbody tr td:last-child {              border-right: none }
     table.interactive + div.controls {          padding: 4em }
-    .boo, .yay, button, a.button,
+    button, a.button,
+    button.boo, a.button.boo,
+    button.yay, a.button.yay,
     a.prev_page, a.next_page {                  float: none !important;
                                                 clear: both !important;
                                                 display: block !important;
@@ -816,7 +818,8 @@ img#likeImage_preview {                         vertical-align: middle }
                                                 max-width: 100%;
                                                 float: none;
                                                 clear: both;
-                                                margin-bottom: 1em }
+                                                margin-bottom: 1em;
+                                                padding-right: 0em }
     div.more_options p.more_options_option {    width: 100%;
                                                 min-height: 0em;
                                                 margin: 0em 0em 1em 0em;
