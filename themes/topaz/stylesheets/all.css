@@ -567,10 +567,10 @@ img {                                               border-style: none;
     article img {                                   max-width: 100% }
 .ajax_loading {                                     background-size: 30px 30px;
                                                     background-image: linear-gradient(-45deg, #f2f1f0 25%, transparent 25%, transparent 50%, #f2f1f0 50%, #f2f1f0 75%, transparent 75%, transparent) !important;
-                                                    -webkit-animation: stripes 1s linear infinite;
-                                                    -moz-animation: stripes 1s linear infinite;
-                                                    -ms-animation: stripes 1s linear infinite;
-                                                    animation: stripes 1s linear infinite }
+                                                    -webkit-animation: stripes 2s linear infinite;
+                                                    -moz-animation: stripes 2s linear infinite;
+                                                    -ms-animation: stripes 2s linear infinite;
+                                                    animation: stripes 2s linear infinite }
     .ajax_loading .doaction {                       visibility: hidden }
 @-webkit-keyframes stripes {                        from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @-moz-keyframes stripes {                           from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
