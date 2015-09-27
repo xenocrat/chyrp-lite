@@ -95,7 +95,7 @@ Chyrp Lite was created by the following people:
 * Chyrp Developer: Arian Xhezairi
 * Project Founder: Alex Suraci
 
-## Licence
+## License
 
 Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley,
 and other contributors.
@@ -125,3 +125,27 @@ Except as contained in this notice, the name(s) of the above
 copyright holders shall not be used in advertising or otherwise
 to promote the sale, use or other dealings in this Software
 without prior written authorization.
+
+### Twig template engine
+[BSD License](http://www.opensource.org/licenses/bsd-license.php) / [GNU General Public License v1.0](https://gnu.org/licenses/old-licenses/gpl-1.0.txt)
+
+### Parsedown.php
+[MIT License](https://raw.githubusercontent.com/erusev/parsedown/master/LICENSE.txt)
+
+### gettext.php
+[GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt)
+
+### Incutio XML-RPC Library
+[BSD License](http://www.opensource.org/licenses/bsd-license.php)
+
+### zip.php
+[GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt)
+
+### Open Sans
+[Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+### Hack
+[Hack Open Font License](https://raw.githubusercontent.com/chrissimpkins/Hack/master/LICENSE.md)
+
+### Akismet.php
+[BSD License](http://www.opensource.org/licenses/bsd-license.php BSD License)
