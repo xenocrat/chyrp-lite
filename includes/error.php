@@ -71,6 +71,12 @@
         if (($buffer = ob_get_contents()) !== false)
             ob_clean();
 
+        # Attempt to set headers to sane values.
+        if (!headers_sent()) {
+            header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
+            header("Content-type: text/html; charset=UTF-8");
+        }
+
         # Report in plain text for the automated tester.
         if (defined('TESTER') and TESTER)
             exit("ERROR: ".$body);
