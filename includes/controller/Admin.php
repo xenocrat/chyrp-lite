@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Admin Controller
-     * The logic behind the Admin area.
+     * The logic controlling the administration console.
      */
     class AdminController {
         # Boolean: $displayed

@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Main Controller
-     * The logic behind the Chyrp install.
+     * The logic controlling the blog.
      */
     class MainController {
         # Array: $urls

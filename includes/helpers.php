@@ -1841,36 +1841,6 @@
     }
 
     /**
-     * Function: delete_dir
-     * Removes directories recursively.
-     *
-     * License GPLv2, Source http://candycms.org/
-     */
-    function delete_dir($dir) {
-       if (substr($dir, strlen($dir)-1, 1) != '/')
-           $dir .= '/';
-
-       if ($handle = opendir($dir)) {
-           while ($obj = readdir($handle)) {
-               if ($obj != '.' && $obj != '..')
-                   if (is_dir($dir.$obj))
-                       if (!delete_dir($dir.$obj))
-                           return false;
-                   elseif (is_file($dir.$obj))
-                       if (!unlink($dir.$obj)) 
-                           return false; 
-           }
-
-           closedir($handle);
-
-           if (!@rmdir($dir))
-               return false;
-           return true;
-       }
-       return false;
-    }
-
-    /**
      * Function: generate_captcha
      * Generates a captcha form element.
      *
