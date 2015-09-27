@@ -1,7 +1,7 @@
 <?php
     /**
      * File: Helpers
-     * Various functions used throughout Chyrp's code.
+     * Various functions used throughout the codebase.
      */
 
     # Integer: $time_start
