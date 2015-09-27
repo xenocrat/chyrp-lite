@@ -172,15 +172,15 @@
             });
         }
         var Passwords = {
-            check: function(selector_source, selector_target) {
-                $(selector_source).keyup(function(e) {
+            check: function(selector_primary, selector_confirm) {
+                $(selector_primary).keyup(function(e) {
                     if (passwordStrength($(this).val()) < 75)
                         $(this).removeClass("strong");
                     else
                         $(this).addClass("strong");
                 });
-                $(selector_source).parents("form").on( "submit", function(e) {
-                    if ($(selector_source).val() !== $(selector_target).val()) {
+                $(selector_primary).parents("form").on("submit", function(e) {
+                    if ($(selector_primary).val() !== $(selector_confirm).val()) {
                         e.preventDefault();
                         alert("<?php echo __("Passwords do not match."); ?>")
                     }
