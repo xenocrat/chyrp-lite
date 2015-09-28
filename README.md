@@ -92,12 +92,10 @@ Chyrp Lite was created by the following people:
 * Chyrp Developer: Arian Xhezairi
 * Project Founder: Alex Suraci
 
-## Licenses
+## License
 
-#### Chyrp Lite
-
-Copyright 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley,
-and other contributors.
+Chyrp Lite is Copyright 2015 Alex Suraci, Arian Xhezairi,
+Daniel Pimley, and other contributors.
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -125,44 +123,25 @@ copyright holders shall not be used in advertising or otherwise
 to promote the sale, use or other dealings in this Software
 without prior written authorization.
 
-#### Twig
-Copyright 2008 Armin Ronacher.
-[BSD License](http://www.opensource.org/licenses/bsd-license.php)
-(with portions [GNU General Public License v1.0](https://gnu.org/licenses/old-licenses/gpl-1.0.txt)).
-
-#### jQuery
-Copyright jQuery Foundation and other contributors.
-[MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).
-
-#### Parsedown.php
-Copyright 2013 Emanuil Rusev.
-[MIT License](https://raw.githubusercontent.com/erusev/parsedown/master/LICENSE.txt).
-
-#### Highlighter.js
-Copyright 2006 Ivan Sagalaev.
-[BSD License](https://raw.githubusercontent.com/isagalaev/highlight.js/master/LICENSE).
-
-#### Open Sans
-Copyright 2010-2011 Google Corporation.
-[Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
-
-#### Hack
-Copyright 2015 Christopher Simpkins.
-[Hack Open Font License](https://raw.githubusercontent.com/chrissimpkins/Hack/master/LICENSE.md).
-
-#### gettext.php
-Copyright 2003, 2009 Danilo Segan.
-Copyright 2005 Nico Kaiser.
-[GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
-
-#### ixr.php
-Copyright 2010 Simon Willison.
-[BSD License](http://www.opensource.org/licenses/bsd-license.php).
-
-#### zip.php
-Copyright phpMyAdmin.
-[GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
-
-#### Akismet.php
-Copyright Alex Potsides.
-[BSD License](http://www.opensource.org/licenses/bsd-license.php BSD License).
+Twig is Copyright 2008 Armin Ronacher,
+distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php)
+with portions distributed under the [GNU General Public License v1.0](https://gnu.org/licenses/old-licenses/gpl-1.0.txt).
+jQuery is Copyright jQuery Foundation and other contributors,
+distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).
+Parsedown is Copyright 2013 Emanuil Rusev,
+distributed under the [MIT License](https://raw.githubusercontent.com/erusev/parsedown/master/LICENSE.txt).
+Highlighter.js is Copyright 2006 Ivan Sagalaev,
+distributed under the [BSD License](https://raw.githubusercontent.com/isagalaev/highlight.js/master/LICENSE).
+Open Sans is Copyright 2010-2011 Google Corporation,
+distributed under the [Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
+Open Sans is a trademark of Google and may be registered in certain jurisdictions.
+Hack is Copyright 2015 Christopher Simpkins,
+distributed under the [Hack Open Font License](https://raw.githubusercontent.com/chrissimpkins/Hack/master/LICENSE.md).
+PHP-gettext is Copyright 2003-2009 Danilo Segan, Copyright 2005 Nico Kaiser,
+distributed under the [GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
+The Incutio XML-RPC Library is Copyright 2010 Simon Willison,
+distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php).
+zip.php is Copyright phpMyAdmin,
+distributed under the [GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
+Akismet.php is Copyright Alex Potsides,
+distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php BSD License).
