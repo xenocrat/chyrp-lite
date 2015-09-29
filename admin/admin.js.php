@@ -11,8 +11,8 @@
             // Scan AJAX responses for errors.
             $(document).ajaxComplete(function(event, request) {
                 var response = request ? request.responseText : null;
-                if (isError(response))
-                    alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
+                if (isError(response) && !!console.log)
+                    console.log(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
             });
 
             if (/(write)_/.test(Route.action) || /(edit)_/.test(Route.action))
