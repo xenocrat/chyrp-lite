@@ -223,7 +223,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1134
+	includes/controller/Admin.php on line 1132
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -231,7 +231,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1161
+	includes/controller/Admin.php on line 1159
 Arguments:
 	$user
 
@@ -239,7 +239,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1192
+	includes/controller/Admin.php on line 1190
 Arguments:
 	$entry, $post
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1215
+	includes/controller/Admin.php on line 1213
 Arguments:
 	$entry, $page
 
@@ -464,7 +464,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 940
+	includes/controller/Admin.php on line 938
 Arguments:
 	$post)
 
@@ -474,7 +474,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 959
+	includes/controller/Admin.php on line 957
 Arguments:
 	$post
 
@@ -484,7 +484,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1002
+	includes/controller/Admin.php on line 1000
 Arguments:
 	$page)
 
@@ -494,7 +494,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1017
+	includes/controller/Admin.php on line 1015
 Arguments:
 	$page
 
@@ -504,7 +504,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1068
+	includes/controller/Admin.php on line 1066
 
 
 manage_nav
@@ -512,7 +512,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1866
+	includes/controller/Admin.php on line 1864
 
 
 settings_nav
@@ -520,7 +520,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1895
+	includes/controller/Admin.php on line 1893
 
 
 extend_nav
@@ -528,7 +528,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1905
+	includes/controller/Admin.php on line 1903
 
 
 admin_subnav
@@ -536,7 +536,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1916
+	includes/controller/Admin.php on line 1914
 
 
 nav_selected
@@ -544,7 +544,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2024
+	includes/controller/Admin.php on line 2022
 
 
 url_code
