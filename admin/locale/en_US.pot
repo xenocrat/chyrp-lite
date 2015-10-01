@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-09-28 19:47+0000\n"
+"POT-Creation-Date: 2015-10-01 22:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -114,7 +114,7 @@ msgid "The directory to which files are uploaded, relative to your Chyrp install
 msgstr ""
 
 #: admin/pages/content_settings.twig:35
-msgid "Enable Trackbacking"
+msgid "Trackbacking"
 msgstr ""
 
 #: admin/pages/content_settings.twig:38
@@ -130,7 +130,7 @@ msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
 #: admin/pages/content_settings.twig:49
-msgid "Enable XML-RPC Support"
+msgid "XML-RPC Support"
 msgstr ""
 
 #: admin/pages/content_settings.twig:52
@@ -138,7 +138,7 @@ msgid "XML-RPC support allows you to create and edit content via remote access t
 msgstr ""
 
 #: admin/pages/content_settings.twig:56
-msgid "Enable Ajax"
+msgid "Ajax"
 msgstr ""
 
 #: admin/pages/content_settings.twig:59
@@ -146,7 +146,7 @@ msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
 #: admin/pages/content_settings.twig:63
-msgid "Enable Unicode Emoticons"
+msgid "Unicode Emoticons"
 msgstr ""
 
 #: admin/pages/content_settings.twig:66
@@ -154,7 +154,7 @@ msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
 #: admin/pages/content_settings.twig:70
-msgid "Enable Markdown"
+msgid "Markdown"
 msgstr ""
 
 #: admin/pages/content_settings.twig:73
@@ -165,7 +165,7 @@ msgstr ""
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:67
-#: admin/pages/route_settings.twig:42
+#: admin/pages/route_settings.twig:49
 #: admin/pages/user_settings.twig:45
 msgid "Update"
 msgstr ""
@@ -429,7 +429,7 @@ msgid "(optional)"
 msgstr ""
 
 #: admin/pages/general_settings.twig:28
-msgid "Enter an alternate address here if you want your homepage URL to be different from the URL where Chyrp is normally available."
+msgid "Have your site URLs point someplace other than your install directory."
 msgstr ""
 
 #: admin/pages/general_settings.twig:32
@@ -701,7 +701,7 @@ msgid "Route Settings"
 msgstr ""
 
 #: admin/pages/route_settings.twig:9
-msgid "Clean URLs?"
+msgid "Clean URLs"
 msgstr ""
 
 #: admin/pages/route_settings.twig:11
@@ -716,107 +716,115 @@ msgstr ""
 msgid "Requires .htaccess support."
 msgstr ""
 
-#: admin/pages/route_settings.twig:18
+#: admin/pages/route_settings.twig:17
+msgid "Homepage"
+msgstr ""
+
+#: admin/pages/route_settings.twig:20
+msgid "Make the default route a homepage instead of the blog index."
+msgstr ""
+
+#: admin/pages/route_settings.twig:25
 msgid "Post View URL"
 msgstr ""
 
-#: admin/pages/route_settings.twig:19
+#: admin/pages/route_settings.twig:26
 msgid "(requires clean URLs)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:24
+#: admin/pages/route_settings.twig:31
 msgid "Syntax:"
 msgstr ""
 
-#: admin/pages/route_settings.twig:26
+#: admin/pages/route_settings.twig:33
 msgid "Year submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:26
+#: admin/pages/route_settings.twig:33
 msgid "(e.g. 2007)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:27
+#: admin/pages/route_settings.twig:34
 msgid "Month submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:27
+#: admin/pages/route_settings.twig:34
 msgid "(e.g. 12)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:28
+#: admin/pages/route_settings.twig:35
 msgid "Day submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:28
+#: admin/pages/route_settings.twig:35
 msgid "(e.g. 25)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:29
+#: admin/pages/route_settings.twig:36
 msgid "Hour submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:29
+#: admin/pages/route_settings.twig:36
 msgid "(e.g. 03)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:30
+#: admin/pages/route_settings.twig:37
 msgid "Minute submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:30
+#: admin/pages/route_settings.twig:37
 msgid "(e.g. 59)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:38
 msgid "Second submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:38
 msgid "(e.g. 30)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:32
+#: admin/pages/route_settings.twig:39
 msgid "Post ID"
 msgstr ""
 
-#: admin/pages/route_settings.twig:33
+#: admin/pages/route_settings.twig:40
 msgid "Post author (username)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:33
+#: admin/pages/route_settings.twig:40
 msgid "(e.g. Alex)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:34
+#: admin/pages/route_settings.twig:41
 msgid "The non-unique sanitized name"
 msgstr ""
 
-#: admin/pages/route_settings.twig:34
+#: admin/pages/route_settings.twig:41
 msgid "(e.g. this_is_clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:42
 msgid "The unique form of (clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:42
 msgid "(e.g. this_one_is_taken_2)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:43
 msgid "The post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:43
 msgid "(e.g. text)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:37
+#: admin/pages/route_settings.twig:44
 msgid "The plural form of the post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:37
+#: admin/pages/route_settings.twig:44
 msgid "(e.g. links)"
 msgstr ""
 

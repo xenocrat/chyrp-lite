@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-09-30 19:16+0000\n"
+"POT-Creation-Date: 2015-10-01 22:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -266,7 +266,7 @@ msgstr ""
 #: includes/controller/Admin.php:1673
 #: includes/controller/Admin.php:1676
 #: includes/controller/Admin.php:1708
-#: includes/controller/Admin.php:2044
+#: includes/controller/Admin.php:2064
 #: includes/controller/Main.php:310
 #: includes/controller/Main.php:406
 #: includes/controller/Main.php:489
@@ -753,7 +753,7 @@ msgstr ""
 #: includes/controller/Admin.php:1690
 #: includes/controller/Admin.php:1729
 #: includes/controller/Admin.php:1757
-#: includes/controller/Admin.php:1779
+#: includes/controller/Admin.php:1799
 msgid "Settings updated."
 msgstr ""
 
@@ -761,120 +761,133 @@ msgstr ""
 msgid "Invalid feed URL."
 msgstr ""
 
-#: includes/controller/Admin.php:1791
+#: includes/controller/Admin.php:1780
+msgid "My Awesome Homepage"
+msgstr ""
+
+#: includes/controller/Admin.php:1781
+msgid "Nothing here yet!"
+msgstr ""
+
+#: includes/controller/Admin.php:1788
+#, php-format
+msgid "Page created. <a href=\"%s\">View Page &rarr;</a>"
+msgstr ""
+
+#: includes/controller/Admin.php:1811
 msgid "Filtering Results"
 msgstr ""
 
-#: includes/controller/Admin.php:1792
+#: includes/controller/Admin.php:1812
 msgid "Use this search field to filter for specific items by entering plain text or keywords."
 msgstr ""
 
-#: includes/controller/Admin.php:1793
+#: includes/controller/Admin.php:1813
 msgid "Keywords"
 msgstr ""
 
-#: includes/controller/Admin.php:1794
+#: includes/controller/Admin.php:1814
 msgid "Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive)."
 msgstr ""
 
-#: includes/controller/Admin.php:1797
+#: includes/controller/Admin.php:1817
 msgid "Post Slugs"
 msgstr ""
 
-#: includes/controller/Admin.php:1798
+#: includes/controller/Admin.php:1818
 msgid "A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\")."
 msgstr ""
 
-#: includes/controller/Admin.php:1801
+#: includes/controller/Admin.php:1821
 msgid "Trackbacks"
 msgstr ""
 
-#: includes/controller/Admin.php:1802
+#: includes/controller/Admin.php:1822
 msgid "Trackbacks are special URLs that notify the authors of other blog posts that your post is related to or references. The other blogs will be informed when you publish your post, and in some cases a comment will automatically be added to their site linking back to your post."
 msgstr ""
 
-#: includes/controller/Admin.php:1805
+#: includes/controller/Admin.php:1825
 msgid "Alternate URL"
 msgstr ""
 
-#: includes/controller/Admin.php:1806
+#: includes/controller/Admin.php:1826
 msgid "If you enter an alternate URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite in a <code>/chyrp</code> directory on your web server and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:"
 msgstr ""
 
-#: includes/controller/Admin.php:1807
+#: includes/controller/Admin.php:1827
 msgid "Create an <code>index.php</code> file in your destination directory with the following in it:"
 msgstr ""
 
-#: includes/controller/Admin.php:1809
+#: includes/controller/Admin.php:1829
 msgid "Move the .htaccess file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location."
 msgstr ""
 
-#: includes/controller/Admin.php:1842
+#: includes/controller/Admin.php:1862
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:1848
+#: includes/controller/Admin.php:1868
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:1851
+#: includes/controller/Admin.php:1871
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:1854
-#: includes/controller/Admin.php:1889
+#: includes/controller/Admin.php:1874
+#: includes/controller/Admin.php:1909
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:1859
+#: includes/controller/Admin.php:1879
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:1866
+#: includes/controller/Admin.php:1886
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:1868
+#: includes/controller/Admin.php:1888
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:1885
+#: includes/controller/Admin.php:1905
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:1887
+#: includes/controller/Admin.php:1907
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:1891
+#: includes/controller/Admin.php:1911
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:1897
+#: includes/controller/Admin.php:1917
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:1899
+#: includes/controller/Admin.php:1919
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:1901
+#: includes/controller/Admin.php:1921
 msgid "Themes"
 msgstr ""
 
-#: includes/controller/Admin.php:1996
+#: includes/controller/Admin.php:2016
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:2001
+#: includes/controller/Admin.php:2021
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:2009
+#: includes/controller/Admin.php:2029
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:2014
+#: includes/controller/Admin.php:2034
 msgid "Extend"
 msgstr ""
 
@@ -1492,7 +1505,7 @@ msgid "Install!"
 msgstr ""
 
 #: install.php:732
-#: upgrade.php:564
+#: upgrade.php:576
 msgid "Done!"
 msgstr ""
 
@@ -1501,7 +1514,7 @@ msgid "Chyrp Lite has been successfully installed."
 msgstr ""
 
 #: install.php:736
-#: upgrade.php:566
+#: upgrade.php:578
 msgid "What now?"
 msgstr ""
 
@@ -1518,7 +1531,7 @@ msgid "Learn more about Chyrp Lite."
 msgstr ""
 
 #: install.php:744
-#: upgrade.php:572
+#: upgrade.php:584
 msgid "Take me to my site!"
 msgstr ""
 
@@ -1566,57 +1579,57 @@ msgstr ""
 msgid "Migrating posts from Chat to Text..."
 msgstr ""
 
-#: upgrade.php:362
+#: upgrade.php:372
 msgid "Chyrp Lite Upgrader"
-msgstr ""
-
-#: upgrade.php:541
-#, php-format
-msgid "Calling ‘%s’ module's upgrader..."
 msgstr ""
 
 #: upgrade.php:553
 #, php-format
+msgid "Calling ‘%s’ module's upgrader..."
+msgstr ""
+
+#: upgrade.php:565
+#, php-format
 msgid "Calling ‘%s’ feather's upgrader..."
 msgstr ""
 
-#: upgrade.php:568
+#: upgrade.php:580
 msgid "Look through the results up there for any failed tasks."
 msgstr ""
 
-#: upgrade.php:569
+#: upgrade.php:581
 msgid "Fix any problems reported by failed tasks and execute this upgrader again if necessary until all tasks succeed."
 msgstr ""
 
-#: upgrade.php:570
+#: upgrade.php:582
 msgid "You can delete <code>upgrade.php</code> once you are finished."
 msgstr ""
 
-#: upgrade.php:574
+#: upgrade.php:586
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:575
+#: upgrade.php:587
 msgid "Please take these preemptive measures before proceeding:"
 msgstr ""
 
-#: upgrade.php:577
+#: upgrade.php:589
 msgid "<strong>Make a backup of your installation and database.</strong>"
 msgstr ""
 
-#: upgrade.php:578
+#: upgrade.php:590
 msgid "Disable any third-party Modules and Feathers."
 msgstr ""
 
-#: upgrade.php:579
+#: upgrade.php:591
 msgid "Ensure Chyrp Lite's directory is writable by the server."
 msgstr ""
 
-#: upgrade.php:581
+#: upgrade.php:593
 msgid "If any of the upgrade tasks fail, you can safely refresh and retry."
 msgstr ""
 
-#: upgrade.php:583
+#: upgrade.php:595
 msgid "Upgrade me!"
 msgstr ""
 

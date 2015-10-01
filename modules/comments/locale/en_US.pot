@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-09-28 19:47+0000\n"
+"POT-Creation-Date: 2015-10-01 22:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -249,10 +249,6 @@ msgstr ""
 
 #: modules/comments/pages/admin/comment_settings.twig:31
 msgid "Reload Comments"
-msgstr ""
-
-#: modules/comments/pages/admin/comment_settings.twig:32
-msgid "enabled"
 msgstr ""
 
 #: modules/comments/pages/admin/comment_settings.twig:35
