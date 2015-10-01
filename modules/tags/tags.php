@@ -707,6 +707,6 @@
         }
 
         public function tagsJS() {
-            include MODULES_DIR."/tags/javascript.php";
+            include MODULES_DIR.DIR."tags".DIR."javascript.php";
         }
     }
