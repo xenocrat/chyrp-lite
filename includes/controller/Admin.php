@@ -416,7 +416,7 @@
 
             if (!isset($_POST['ajax']))
                 Flash::notice(_f("Page updated. <a href=\"%s\">View Page &rarr;</a>",
-                                 array($page->url())),
+                                 $page->url()),
                                  "/admin/?action=manage_pages");
         }
 
@@ -1771,9 +1771,29 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            $route = Route::current();
+
+            if (!empty($_POST['enable_homepage'])) {
+                $route->add("/", "page;url=home");
+
+                if (Page::check_url("home") == "home" ) {
+                    $page = Page::add(__("My Awesome Homepage"),
+                                      __("Nothing here yet!"),
+                                      null,
+                                      0,
+                                      true,
+                                      true,
+                                      0,
+                                      "home");
+                    Flash::message(_f("Page created. <a href=\"%s\">View Page &rarr;</a>", $page->url()));
+                }
+            } else
+                $route->remove("/");
+
             $config = Config::current();
             $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
-                         $config->set("post_url", $_POST['post_url']));
+                         $config->set("post_url", $_POST['post_url']),
+                         $config->set("enable_homepage", !empty($_POST['enable_homepage'])));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=route_settings");

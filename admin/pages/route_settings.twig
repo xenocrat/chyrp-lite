@@ -14,6 +14,13 @@
                         </small>
                     </p>
                     <p>
+                        <label for="enable_homepage">${ "Homepage?" | translate }</label>
+                        <input class="checkbox" type="checkbox" name="enable_homepage" id="enable_homepage"${ site.enable_homepage | checked }>
+                        <small>
+                            ${ "Make the default route a homepage instead of the blog index." | translate }
+                        </small>
+                    </p>
+                    <p>
                         <label for="post_url">
                             ${ "Post View URL" | translate }
                             <span class="sub">${ "(requires clean URLs)" | translate }</span>

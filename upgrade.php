@@ -354,6 +354,16 @@
         Config::fallback("enable_markdown", true);
     }
 
+    /**
+     * Function: add_homepage
+     * Adds the enable_homepage config setting.
+     *
+     * Versions: 2015.06 => 2015.07
+     */
+    function add_homepage() {
+        Config::fallback("enable_homepage", false);
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -532,6 +542,8 @@
         migrate_chat_feather();
 
         add_markdown();
+
+        add_homepage();
 
         # Perform Module/Feather upgrades.
 
