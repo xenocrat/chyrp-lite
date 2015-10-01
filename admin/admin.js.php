@@ -303,7 +303,7 @@
                     $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(function(e) {
                         if (!Extend.failed) {
                             e.preventDefault();
-                            Extend.ajax_toggle;
+                            Extend.ajax_toggle(e);
                         }
                     });
 
@@ -369,23 +369,23 @@
                 Extend.action = null;
                 Extend.confirmed = null;
             },
-            ajax_toggle: function() {
+            ajax_toggle: function(e) {
                 Extend.ajax_reset(); // Reset all values
 
-                if ($(this).parents("#modules_enabled").length || $(this).parents("#feathers_enabled").length)
+                if ($(e.target).parents("#modules_enabled").length || $(e.target).parents("#feathers_enabled").length)
                     Extend.action = "disable";
-                else if ($(this).parents("#modules_disabled").length || $(this).parents("#feathers_disabled").length)
+                else if ($(e.target).parents("#modules_disabled").length || $(e.target).parents("#feathers_disabled").length)
                     Extend.action = "enable";
 
-                if ($(this).parents("#modules_enabled").length || $(this).parents("#modules_disabled").length)
+                if ($(e.target).parents("#modules_enabled").length || $(e.target).parents("#modules_disabled").length)
                     Extend.extension.type = "module";
-                else if ($(this).parents("#feathers_enabled").length || $(this).parents("#feathers_disabled").length)
+                else if ($(e.target).parents("#feathers_enabled").length || $(e.target).parents("#feathers_disabled").length)
                     Extend.extension.type = "feather";
 
-                Extend.extension.name = $(this).parents("li").attr("id").replace(Extend.extension.type + "_", "");
+                Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
 
                 if (Extend.action == null || Extend.extension.type == null || !Extend.extension.name) {
-                    Extend.failed = true;
+                    Extend.panic();
                     return;
                 }
 
