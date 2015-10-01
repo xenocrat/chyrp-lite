@@ -6,7 +6,7 @@
             <form id="route_settings" class="split" action="{% admin "route_settings" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <fieldset>
                     <p>
-                        <label for="clean_urls">${ "Clean URLs?" | translate }</label>
+                        <label for="clean_urls">${ "Clean URLs" | translate }</label>
                         <input type="checkbox" name="clean_urls" id="clean_urls"${ site.clean_urls | checked }>
                         <span class="sub">${ "(recommended)" | translate }</span>
                         <small>
@@ -14,7 +14,7 @@
                         </small>
                     </p>
                     <p>
-                        <label for="enable_homepage">${ "Homepage?" | translate }</label>
+                        <label for="enable_homepage">${ "Homepage" | translate }</label>
                         <input class="checkbox" type="checkbox" name="enable_homepage" id="enable_homepage"${ site.enable_homepage | checked }>
                         <small>
                             ${ "Make the default route a homepage instead of the blog index." | translate }
