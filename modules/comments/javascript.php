@@ -208,7 +208,7 @@
                 ChyrpComment.failed = true;
                 alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
                 $(".ajax_loading").loader(true);
-                $("#add_comment > #ajax").val("false");
+                $("#comments form input[name='ajax']").remove();
             }
         };
         $(document).ready(ChyrpComment.init);
