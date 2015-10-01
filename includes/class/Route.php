@@ -141,7 +141,7 @@
          *
          * Parameters:
          *     $url - The clean URL.
-         *     $use_chyrp_url - Use @Config.chyrp_url@ instead of @Config.url@, when the @$url@ begins with "/"?
+         *     $controller - The controller to use. If omitted the current controller will be used.
          *
          * Returns:
          *     A clean or dirty URL, depending on @Config.clean_urls@.
