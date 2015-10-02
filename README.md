@@ -7,9 +7,8 @@ be accessible to visitors who use assistive technologies.
 
 Chyrp Lite is powered by a unique Feathers system that allows you to make your blog
 whatever you want it to be: you can have a traditional blog, a tumbleblog, or add oodles
-of customisation and build a fully-featured web publishing platform. With the addition
-of the bundled Homepage module you can use Chyrp Lite as the CMS for a static website,
-with blogging features on the side.
+of customisation and build a fully-featured web publishing platform with blogging
+features on the side.
 
 Specifically, Chyrp Lite offers the following "out of the box" features:
 
@@ -43,7 +42,6 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Cascade: ajax-powered infinite scrolling for your blog.
 * Lightbox: on-page image viewer with image protection.
 * Sitemap: index your blog for search engines.
-* Homepage: replace the blog index with a homepage.
 * reCAPTCHA/MAPTCHA: prevent spam.
 * Highlighter: syntax highlighting for your code snippets.
 
