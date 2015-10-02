@@ -21,9 +21,9 @@
                         $module.description {# translation is done in the controller #}
                     </p>
                     {% if module.conflicting_modules %}
-                    <p class="module_conflicts_message">
+                    <h4 class="module_conflicts_message">
                         ${ "This module conflicts with the following installed modules:" | translate }
-                    </p>
+                    </h4>
                     <ol class="module_conflicts_list">
                     {% for conflict in module.conflicting_modules %}
                         <li class="$conflict">${ conflict | camelize }</li>
@@ -31,9 +31,9 @@
                     </ol>
                     {% endif %}
                     {% if module.dependencies_needed %}
-                    <p class="module_dependencies_message">
+                    <h4 class="module_dependencies_message">
                         ${ "This module requires the following modules to be enabled:" | translate }
-                    </p>
+                    </h4>
                     <ol class="module_dependencies_list">
                     {% for dependency in module.dependencies_needed %}
                         <li class="$dependency">${ dependency | camelize }</li>
@@ -68,9 +68,9 @@
                         $module.description {# translation is done in the controller #}
                     </p>
                     {% if module.conflicting_modules %}
-                    <p class="module_conflicts_message">
+                    <h4 class="module_conflicts_message">
                         ${ "This module conflicts with the following installed modules:" | translate }
-                    </p>
+                    </h4>
                     <ol class="module_conflicts_list">
                     {% for conflict in module.conflicting_modules %}
                         <li class="$conflict">${ conflict | camelize }</li>
@@ -78,9 +78,9 @@
                     </ol>
                     {% endif %}
                     {% if module.dependencies_needed %}
-                    <p class="module_dependencies_message">
+                    <h4 class="module_dependencies_message">
                         ${ "This module requires the following modules to be enabled:" | translate }
-                    </p>
+                    </h4>
                     <ol class="module_dependencies_list">
                     {% for dependency in module.dependencies_needed %}
                         <li class="$dependency">${ dependency | camelize }</li>

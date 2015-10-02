@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-01 22:05+0000\n"
+"POT-Creation-Date: 2015-10-02 17:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -853,7 +853,7 @@ msgid "Registration"
 msgstr ""
 
 #: admin/pages/user_settings.twig:11
-msgid "Allow people to register"
+msgid "Allow people to register."
 msgstr ""
 
 #: admin/pages/user_settings.twig:14
