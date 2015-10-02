@@ -1772,6 +1772,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $route = Route::current();
+            $config = Config::current();
 
             if (!empty($_POST['enable_homepage'])) {
                 $route->add("/", "page;url=home");
@@ -1787,10 +1788,9 @@
                                       "home");
                     Flash::message(_f("Page created. <a href=\"%s\">View Page &rarr;</a>", $page->url()));
                 }
-            } else
-                $route->remove("/");
+            } elseif ($config->enable_homepage)
+                $route->remove("/"); # Remove the route only if the setting was previously enabled.
 
-            $config = Config::current();
             $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
                          $config->set("post_url", $_POST['post_url']),
                          $config->set("enable_homepage", !empty($_POST['enable_homepage'])));

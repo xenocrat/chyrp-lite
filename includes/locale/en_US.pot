@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-01 22:05+0000\n"
+"POT-Creation-Date: 2015-10-02 17:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -761,15 +761,15 @@ msgstr ""
 msgid "Invalid feed URL."
 msgstr ""
 
-#: includes/controller/Admin.php:1780
+#: includes/controller/Admin.php:1781
 msgid "My Awesome Homepage"
 msgstr ""
 
-#: includes/controller/Admin.php:1781
+#: includes/controller/Admin.php:1782
 msgid "Nothing here yet!"
 msgstr ""
 
-#: includes/controller/Admin.php:1788
+#: includes/controller/Admin.php:1789
 #, php-format
 msgid "Page created. <a href=\"%s\">View Page &rarr;</a>"
 msgstr ""
