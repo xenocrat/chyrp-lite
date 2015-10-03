@@ -1774,7 +1774,7 @@
             $route = Route::current();
             $config = Config::current();
 
-            if (!empty($_POST['enable_homepage'])) {
+            if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
                 $route->add("/", "page;url=home");
 
                 if (Page::check_url("home") == "home" ) {
@@ -1786,10 +1786,10 @@
                                       true,
                                       0,
                                       "home");
-                    Flash::message(_f("Page created. <a href=\"%s\">View Page &rarr;</a>", $page->url()));
+                    Flash::notice(_f("Page created. <a href=\"%s\">View Page &rarr;</a>", $page->url()));
                 }
-            } elseif ($config->enable_homepage)
-                $route->remove("/"); # Remove the route only if the setting was previously enabled.
+            } elseif (empty($_POST['enable_homepage']) and $config->enable_homepage)
+                $route->remove("/");
 
             $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
                          $config->set("post_url", $_POST['post_url']),

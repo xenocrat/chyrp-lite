@@ -189,7 +189,9 @@ img.logo {                                      width: 24px;
 /* @end */
 
 /* @group Sub-Navigation */
-#sub_nav {                                      margin: 4em 4em 0em 4em }
+#sub_nav {                                      margin: 4em 4em 0em 4em;
+                                                height: 3rem;
+                                                overflow: hidden }
 #sub_nav li {                                   display: block;
                                                 float: left;
                                                 position: relative;
@@ -732,6 +734,10 @@ img#likeImage_preview {                         vertical-align: middle }
                                                 margin-right: 1% }
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
+    #sub_nav {                                  margin-top: 1em;
+                                                height: auto }
+    #sub_nav, #content {                        margin-left: 1em;
+                                                margin-right: 1em }
     #sub_nav li {                               box-sizing: border-box;
                                                 width: 50%;
                                                 height: 3em;
@@ -748,9 +754,6 @@ img#likeImage_preview {                         vertical-align: middle }
                                                 font-size: 1em }
     #sub_nav li:nth-child(odd) a {              border-right: none !important }
     #sub_nav li:nth-child(odd):last-child a {   border-right: 1px solid #cfcfcf !important }
-    #sub_nav {                                  margin-top: 1em }
-    #sub_nav, #content {                        margin-left: 1em;
-                                                margin-right: 1em }
     label {                                     display: block }
     form.split > fieldset > * > label {         width: 100%;
                                                 float: none;
