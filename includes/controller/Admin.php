@@ -1827,6 +1827,27 @@
                     $help.= "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n";
                     $help.= "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>";
                     $help.= "</li>\n<li>".__("Move the .htaccess file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                    break;
+                case "markdown":
+                    $help = "<h1>".__("Markdown Basics")."</h1>\n";
+                    $help.= "<p>".__("Markdown is a format for writing structured documents in plain text. Here are the basics:")."</p>\n";
+                    $help.= "<table>\n<thead>\n";
+                    $help.= "<tr>\n<th>".__("Markdown")."</th>\n";
+                    $help.= "<th>".__("Result")."</th>\n</tr>\n";
+                    $help.= "</thead>\n";
+                    $help.= "<tbody>\n";
+                    $help.= "<tr>\n<td>".__("## Heading")."</td>\n"."<td><h2>".__("Heading")."</h2></td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("### Heading")."</td>\n"."<td><h3>".__("Heading")."</h3></td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("*Emphasis*")."</td>\n"."<td><em>".__("Emphasis")."</em></td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("~~Strikethrough~~")."</td>\n"."<td><del>".__("Strikethrough")."</del></td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("**Strong**")."</td>\n"."<td><strong>".__("Strong")."</strong></td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("[title](url)")."</td>\n"."<td><a href=".'"#"'.">".__("Hyperlink")."</a></td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("[alt](url)")."</td>\n"."<td>".__("Image")."</td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n";
+                    $help.= "<tr>\n<td>".__("1. List of items")."</td>\n"."<td><ol><li>".__("List of items")."</li></ol></em></td>\n</tr>\n";
+                    $help.= "</tbody>\n</table>";
+                    break;
             }
 
             if (!isset($_GET['ajax']))

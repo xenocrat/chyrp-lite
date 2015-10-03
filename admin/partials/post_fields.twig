@@ -2,6 +2,9 @@ ${ trigger.call("before_post_fields", feather) }
                         {% for field in feather.fields %}
                         <p class="main_options">
                             <label for="${ field.attr }_field">
+                                {% if field.preview == "markup_text" and site.enable_markdown %}
+                                <a href="{% admin "help&id=markdown" %}" target="_blank" class="help emblem markdown"><img src="$theme_url/images/icons/markdown.svg" alt="Markdown help"></a>
+                                {% endif %}
                                 $field.label
                                 {% if field.optional %}
                                 <span class="sub">${ "(optional)" | translate }</span>

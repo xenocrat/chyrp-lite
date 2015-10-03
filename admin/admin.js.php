@@ -232,17 +232,15 @@
                             "src": Site.url + "/admin/images/icons/magnifier.svg",
                             "alt": "(<?php echo __("Preview this field", "theme"); ?>)",
                             "title": "<?php echo __("Preview this field", "theme"); ?>",
-                        }).addClass("preview emblem").css({
-                            "cursor": "pointer"
-                        })
-                    ).click(function(e) {
-                        var content = $("#" + $(this).attr("data-target")).val();
-                        var filter = $("#" + $(this).attr("data-target")).attr("data-preview");
+                        }).addClass("emblem preview").click(function(e) {
+                        var content = $("#" + $(this).parent().attr("data-target")).val();
+                        var filter = $("#" + $(this).parent().attr("data-target")).attr("data-preview");
                         if (content != "") {
                             e.preventDefault();
                             Write.ajax_previews(content, filter);
                         }
-                    });
+                    })
+                    );
                 });
             },
             sort_feathers: function() {

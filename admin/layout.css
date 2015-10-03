@@ -351,7 +351,7 @@ form.split > fieldset > * > label {             box-sizing: border-box;
                                                 float: left;
                                                 color: #7f7f7f;
                                                 text-align: right;
-                                                padding-right: 1em }
+                                                padding: 0.25em 1em 0em 0em }
 form.split > fieldset > div.confirmation {      margin-top: 2em }
 form.split small,
 form.split .small,
@@ -636,6 +636,9 @@ img.emblem {                                    display: inline;
                                                 top: 2px;
                                                 width: 16px;
                                                 height: 16px }
+a.emblem.markdown > img {                       width: 26px }
+img.emblem.preview {                            cursor: pointer;
+                                                float: right }
 .filters .filter_item {                         box-sizing: border-box;
                                                 float: left;
                                                 max-width: 50%;
@@ -698,6 +701,12 @@ img#likeImage_preview {                         vertical-align: middle }
 .overlay_foreground h4 {                        font-size: 0.9em }
 .overlay_foreground h5 {                        font-size: 0.8em }
 .overlay_foreground h6 {                        font-size: 0.7em }
+.overlay_foreground table h1,
+.overlay_foreground table h2,
+.overlay_foreground table h3,
+.overlay_foreground table h4,
+.overlay_foreground table h5,
+.overlay_foreground table h6 {                  margin: 0em }
 .overlay_foreground ul {                        list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
@@ -782,9 +791,7 @@ img#likeImage_preview {                         vertical-align: middle }
     }
     select {                                    width: 100%;
                                                 margin-bottom: 2em }
-    a.emblem > img,
-    img.emblem {                                margin-right: 8px }
-    table {                                     display: block;
+    #content table {                            display: block;
                                                 box-sizing: border-box;
                                                 width: 100%;
                                                 overflow-x: scroll;
@@ -793,15 +800,14 @@ img#likeImage_preview {                         vertical-align: middle }
     table tbody tr td {                         min-width: 10em;
                                                 padding-top: 1em;
                                                 padding-bottom: 1em }
-    table tbody tr td.controls,
-    table tbody tr td.checkbox,
-    table tbody tr td.show_on_home {            min-width: 64px }
-    table tbody tr td.main {                    min-width: 480px }
-    table tbody tr:last-child td,
-    table tbody tr td[rowspan="2"] {            border-bottom: none }
-
-    table tbody tr td:first-child {             border-left: none }
-    table tbody tr td:last-child {              border-right: none }
+    #content table tbody tr td.controls,
+    #content table tbody tr td.checkbox,
+    #content table tbody tr td.show_on_home {   min-width: 64px }
+    #content table tbody tr td.main {           min-width: 480px }
+    #content table tbody tr:last-child td,
+    #content table tbody tr td[rowspan="2"] {   border-bottom: none }
+    #content table tbody tr td:first-child {    border-left: none }
+    #content table tbody tr td:last-child {     border-right: none }
     table.interactive + div.controls {          padding: 4em }
     button, a.button,
     button.boo, a.button.boo,
