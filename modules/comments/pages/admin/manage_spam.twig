@@ -24,7 +24,7 @@
                         <tr class="head">
                             <th class="toggler"></th>
                             <th class="comment_post">${ "Post" | translate("comments") }</th>
-                            <th class="comment_auhtor">${ "Author" | translate("comments") }</th>
+                            <th class="comment_author">${ "Author" | translate("comments") }</th>
                             <th class="comment_date">${ "Added" | translate("comments") }</th>
                             ${ trigger.call("manage_comments_column_header") }
                             <th class="controls" colspan="2">${ "Controls" | translate }</th>
@@ -37,7 +37,7 @@
                                 <input type="checkbox" name="comment[$comment.id]" value="" id="comment_checkbox_$comment.id">
                             </td>
                             <td class="comment_post main"><a href="$comment.post.url#comment_$comment.id">${ comment.post.title | truncate }</a></td>
-                            <td class="comment_auhtor">${ comment.user.full_name | fallback(comment.user.login) | fallback(comment.author) }</td>
+                            <td class="comment_author">${ comment.user.full_name | fallback(comment.user.login) | fallback(comment.author) }</td>
                             <td class="comment_date">${ comment.created_at | strftime }</td>
                             ${ trigger.call("manage_comments_column", comment) }
                             {% if comment.editable and comment.deletable %}
