@@ -95,7 +95,9 @@
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 break;
 
-            echo Trigger::current()->filter(sanitize_html($_POST['content']), $_POST['filter']);
+            $sanitized = sanitize_html($_POST['content']);
+
+            echo Trigger::current()->filter($sanitized, $_POST['filter']);
             break;
 
         case "check_confirm":
