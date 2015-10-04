@@ -474,14 +474,26 @@
      *     $string - String to sanitize.
      */
     function sanitize_html($text) {
-        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", function ($matches) {
-                                      fallback($matches[1], "");
-                                      fallback($matches[2], "");
-                                      $href = ($matches[1] == "a") ? preg_filter("/.+?( href=\"(#|http:\/\/|https:\/\/)[^ ]+\").+/", "$1", $matches[0]) : "" ;
+        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", function ($match) {
+                                      fallback($match[1], "");
+                                      fallback($match[2], "");
+
+                                      switch ($match[1]) {
+                                          case "a":
+                                              $whitelist = preg_filter("/.+?( href=\"(#|http:\/\/|https:\/\/)[^ \"]+\").+/", "$1", $match[0]);
+                                              break;
+                                          case "img":
+                                              $whitelist = preg_filter("/.+?( src=\"(http:\/\/|https:\/\/)[^ \"]+\").+/", "$1", $match[0]).
+                                                           preg_filter("/.+?( alt=\"[^\"]+\").+/", "$1", $match[0]);
+                                              break;
+                                          default:
+                                              $whitelist = "";
+                                      }
+
                                       return "<".
-                                             $matches[1].
-                                             $href.
-                                             $matches[2].
+                                             $match[1].
+                                             $whitelist.
+                                             $match[2].
                                              ">";
                                       }, $text);
 
