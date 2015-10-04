@@ -1808,45 +1808,46 @@
 
             switch($_GET['id']) {
                 case "filtering_results":
-                    $help = "<h1>".__("Filtering Results")."</h1>\n";
-                    $help.= "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n";
-                    $help.= "<h2>".__("Keywords")."</h2>\n";
-                    $help.= "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
+                    $help = "<h1>".__("Filtering Results")."</h1>\n".
+                            "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n".
+                            "<h2>".__("Keywords")."</h2>\n".
+                            "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
                     break;
                 case "slugs":
-                    $help = "<h1>".__("Post Slugs")."</h1>\n";
-                    $help.= "<p>".__("A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\").")."</p>";
+                    $help = "<h1>".__("Post Slugs")."</h1>\n".
+                            "<p>".__("A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\").")."</p>";
                     break;
                 case "trackbacks":
-                    $help = "<h1>".__("Trackbacks")."</h1>\n";
-                    $help.= "<p>".__("Trackbacks are special URLs that notify the authors of other blog posts that your post is related to or references. The other blogs will be informed when you publish your post, and in some cases a comment will automatically be added to their site linking back to your post.")."</p>";
+                    $help = "<h1>".__("Trackbacks")."</h1>\n".
+                            "<p>".__("Trackbacks are special URLs that notify the authors of other blog posts that your post is related to or references. The other blogs will be informed when you publish your post, and in some cases a comment will automatically be added to their site linking back to your post.")."</p>";
                     break;
                 case "alternate_urls":
-                    $help = "<h1>".__("Alternate URL")."</h1>\n";
-                    $help.= "<p>".__("If you enter an alternate URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite in a <code>/chyrp</code> directory on your web server and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:")."</p>\n";
-                    $help.= "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n";
-                    $help.= "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>";
-                    $help.= "</li>\n<li>".__("Move the .htaccess file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                    $help = "<h1>".__("Alternate URL")."</h1>\n".
+                            "<p>".__("If you enter an alternate URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite in a <code>/chyrp</code> directory on your web server and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:")."</p>\n".
+                            "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n".
+                            "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
+                            "</li>\n<li>".__("Move the .htaccess file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
                     break;
                 case "markdown":
-                    $help = "<h1>".__("Markdown Basics")."</h1>\n";
-                    $help.= "<p>".__("Markdown is a format for writing structured documents in plain text. Here are the basics:")."</p>\n";
-                    $help.= "<table>\n<thead>\n";
-                    $help.= "<tr>\n<th>".__("Markdown")."</th>\n";
-                    $help.= "<th>".__("Result")."</th>\n</tr>\n";
-                    $help.= "</thead>\n";
-                    $help.= "<tbody>\n";
-                    $help.= "<tr>\n<td>".__("## Heading")."</td>\n"."<td><h2>".__("Heading")."</h2></td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("### Heading")."</td>\n"."<td><h3>".__("Heading")."</h3></td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("*Emphasis*")."</td>\n"."<td><em>".__("Emphasis")."</em></td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("~~Strikethrough~~")."</td>\n"."<td><del>".__("Strikethrough")."</del></td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("**Strong**")."</td>\n"."<td><strong>".__("Strong")."</strong></td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("[title](url)")."</td>\n"."<td><a href=".'"#"'.">".__("Hyperlink")."</a></td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("[alt](url)")."</td>\n"."<td>".__("Image")."</td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n";
-                    $help.= "<tr>\n<td>".__("1. List of items")."</td>\n"."<td><ol><li>".__("List of items")."</li></ol></em></td>\n</tr>\n";
-                    $help.= "</tbody>\n</table>";
+                    $help = "<h1>".__("Markdown")."</h1>\n".
+                            "<p>".__("Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:")."</p>\n".
+                            "<table>\n<thead>\n".
+                            "<tr>\n<th>".__("Markdown")."</th>\n".
+                            "<th>".__("Result")."</th>\n</tr>\n".
+                            "</thead>\n".
+                            "<tbody>\n".
+                            "<tr>\n<td>".__("## Heading")."</td>\n"."<td><h2>".__("Heading")."</h2></td>\n</tr>\n".
+                            "<tr>\n<td>".__("### Heading")."</td>\n"."<td><h3>".__("Heading")."</h3></td>\n</tr>\n".
+                            "<tr>\n<td>".__("*Emphasis*")."</td>\n"."<td><em>".__("Emphasis")."</em></td>\n</tr>\n".
+                            "<tr>\n<td>".__("~~Strikethrough~~")."</td>\n"."<td><del>".__("Strikethrough")."</del></td>\n</tr>\n".
+                            "<tr>\n<td>".__("**Strong**")."</td>\n"."<td><strong>".__("Strong")."</strong></td>\n</tr>\n".
+                            "<tr>\n<td>".__("&crarr;")."</td>\n"."<td>".__("New paragraph")."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("[title](URL)")."</td>\n"."<td>".'<a href="#">'.__("Hyperlink")."</a></td>\n</tr>\n".
+                            "<tr>\n<td>".__("![description](URL)")."</td>\n"."<td>".'<img src="'.Config::current()->chyrp_url.'/admin/images/icons/picture.svg" alt="'.__("An image added with Markdown.").'" class="emblem">'."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n".
+                            "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n".
+                            "<tr>\n<td>".__("1. List of items")."</td>\n"."<td><ol><li>".__("List of items")."</li></ol></em></td>\n</tr>\n".
+                            "</tbody>\n</table>";
                     break;
             }
 

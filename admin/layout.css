@@ -797,7 +797,7 @@ img#likeImage_preview {                         vertical-align: middle }
                                                 overflow-x: scroll;
                                                 border: 1px solid #ddd;
                                                 -webkit-overflow-scrolling: touch }
-    table tbody tr td {                         min-width: 10em;
+    #content table tbody tr td {                min-width: 10em;
                                                 padding-top: 1em;
                                                 padding-bottom: 1em }
     #content table tbody tr td.controls,
