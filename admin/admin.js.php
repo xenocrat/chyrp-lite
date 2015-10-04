@@ -223,7 +223,7 @@
         var Write = {
             init: function() {
                 if (/(write)_/.test(Route.action))
-                    this.sort_feathers();
+                    Write.sort_feathers();
 
                 // Insert buttons for ajax previews
                 $("*[data-preview]").each(function() {
@@ -233,13 +233,13 @@
                             "alt": "(<?php echo __("Preview this field", "theme"); ?>)",
                             "title": "<?php echo __("Preview this field", "theme"); ?>",
                         }).addClass("emblem preview").click(function(e) {
-                        var content = $("#" + $(this).parent().attr("data-target")).val();
-                        var filter = $("#" + $(this).parent().attr("data-target")).attr("data-preview");
-                        if (content != "") {
-                            e.preventDefault();
-                            Write.ajax_previews(content, filter);
-                        }
-                    })
+                            var content = $("#" + $(this).parent().attr("data-target")).val();
+                            var filter = $("#" + $(this).parent().attr("data-target")).attr("data-preview");
+                            if (content != "") {
+                                e.preventDefault();
+                                Write.ajax_previews(content, filter);
+                            }
+                        })
                     );
                 });
             },
@@ -308,7 +308,7 @@
                 if (Route.action != "modules")
                     return;
 
-                this.check_errors();
+                Extend.check_errors();
             },
             reset_errors: function() {
                 $(".modules li.error").removeClass("error");
