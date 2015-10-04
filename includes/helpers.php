@@ -474,7 +474,17 @@
      *     $string - String to sanitize.
      */
     function sanitize_html($text) {
-        $text = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i","<$1$2>", $text);
+        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", function ($matches) {
+                                      fallback($matches[1], "");
+                                      fallback($matches[2], "");
+                                      $href = ($matches[1] == "a") ? preg_filter("/.+?( href=\"(#|http:\/\/|https:\/\/)[^ ]+\").+/", "$1", $matches[0]) : "" ;
+                                      return "<".
+                                             $matches[1].
+                                             $href.
+                                             $matches[2].
+                                             ">";
+                                      }, $text);
+
         $text = preg_replace("/<script[^>]*?>/i","&lt;script&gt;", $text);
         $text = preg_replace("/<\/script[^>]*?>/i","&lt;/script&gt;", $text);
         return $text;
