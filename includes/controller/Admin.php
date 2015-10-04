@@ -1842,8 +1842,8 @@
                             "<tr>\n<td>".__("~~Strikethrough~~")."</td>\n"."<td><del>".__("Strikethrough")."</del></td>\n</tr>\n".
                             "<tr>\n<td>".__("**Strong**")."</td>\n"."<td><strong>".__("Strong")."</strong></td>\n</tr>\n".
                             "<tr>\n<td>".__("&crarr;")."</td>\n"."<td>".__("New paragraph")."</td>\n</tr>\n".
-                            "<tr>\n<td>".__("[title](URL)")."</td>\n"."<td>".'<a href="#">'.__("Hyperlink")."</a></td>\n</tr>\n".
-                            "<tr>\n<td>".__("![description](URL)")."</td>\n"."<td>".'<img src="'.Config::current()->chyrp_url.'/admin/images/icons/picture.svg" alt="'.__("An image added with Markdown.").'" class="emblem">'."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("[title](URL)")."</td>\n"."<td>".__("Hyperlink")."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("![description](URL)")."</td>\n"."<td>".__("Image")."</td>\n</tr>\n".
                             "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n".
                             "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n".
                             "<tr>\n<td>".__("1. List of items")."</td>\n"."<td><ol><li>".__("List of items")."</li></ol></em></td>\n</tr>\n".

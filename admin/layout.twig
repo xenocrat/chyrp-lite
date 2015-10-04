@@ -33,7 +33,7 @@ ${ trigger.call("admin_head") }
             {% if subnav[route.action] %}
             {% for action, nav in subnav[route.action] | items %}
             {% if nav.show %}
-            <li${ route.action | selected(nav.selected, action) }$nav.attributes  role="presentation">
+            <li${ route.action | selected(nav.selected, action) }$nav.attributes role="presentation">
                 <a role="menuitem" href="{% admin action %}">$nav.title</a>
             </li>
             {% endif %}
