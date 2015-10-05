@@ -499,8 +499,7 @@
                         break;
                     case "alt":
                         if (in_array($element[1], array("area",
-                                                        "img",
-                                                        "input")))
+                                                        "img")))
                             $whitelist.= $attribute[0];
 
                         break;
@@ -1964,7 +1963,12 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])($|/|:){1}~', $string);
+        if (preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?)($|/|:){1}~', $string) or //FQDN
+            preg_match('~^(http://|https://)?([[:digit:]]|\.){7,15}($|/|:){1}~', $string) or //IPv4
+            preg_match('~^(http://|https://)?(\[([[:alnum:]]|\:){3,45}\])($|/|:){1}~', $string)) //IPv6
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -1978,7 +1982,12 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
+        if (preg_match('~^[^@]+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?)$~', $string) or //FQDN
+            preg_match('~^[^@]+@([[:digit:]]|\.){7,15}$~', $string) or //IPv4
+            preg_match('~^[^@]+@(\[([[:alnum:]]|\:){3,45}\])$~', $string)) //IPv6
+            return true;
+        else
+            return false;
     }
 
     /**
