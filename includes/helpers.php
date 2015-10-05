@@ -474,28 +474,45 @@
      *     $string - String to sanitize.
      */
     function sanitize_html($text) {
-        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", function ($match) {
-                                      fallback($match[1], "");
-                                      fallback($match[2], "");
+        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", function ($element) {
+            fallback($element[2], "");
+            $whitelist = "";
+            preg_match_all("/ ([a-z][a-z0-9]*)=(\"([^\"]+)\"|\'([^\']+)\')/", $element[0], $attributes, PREG_SET_ORDER);
 
-                                      switch ($match[1]) {
-                                          case "a":
-                                              $whitelist = preg_filter("/.+?( href=\"(#|http:\/\/|https:\/\/)[^ \"]+\").+/", "$1", $match[0]);
-                                              break;
-                                          case "img":
-                                              $whitelist = preg_filter("/.+?( src=\"(http:\/\/|https:\/\/)[^ \"]+\").+/", "$1", $match[0]).
-                                                           preg_filter("/.+?( alt=\"[^\"]+\").+/", "$1", $match[0]);
-                                              break;
-                                          default:
-                                              $whitelist = "";
-                                      }
+            foreach ($attributes as $attribute) {
+                switch ($attribute[1]) {
+                    case "src":
+                        if (in_array($element[1], array("audio",
+                                                        "iframe",
+                                                        "img",
+                                                        "source",
+                                                        "track",
+                                                        "video")) and is_url(trim($attribute[2], "\"'")))
+                            $whitelist.= $attribute[0];
 
-                                      return "<".
-                                             $match[1].
-                                             $whitelist.
-                                             $match[2].
-                                             ">";
-                                      }, $text);
+                        break;
+                    case "href":
+                        if (in_array($element[1], array("a",
+                                                        "area")) and is_url(trim($attribute[2], "\"'")))
+                            $whitelist.= $attribute[0];
+
+                        break;
+                    case "alt":
+                        if (in_array($element[1], array("area",
+                                                        "img",
+                                                        "input")))
+                            $whitelist.= $attribute[0];
+
+                        break;
+                }
+            }
+
+            return "<".
+                 $element[1].
+                 $whitelist.
+                 $element[2].
+                 ">";
+        }, $text);
 
         $text = preg_replace("/<script[^>]*?>/i","&lt;script&gt;", $text);
         $text = preg_replace("/<\/script[^>]*?>/i","&lt;/script&gt;", $text);
