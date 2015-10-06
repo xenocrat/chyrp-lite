@@ -475,31 +475,35 @@
      */
     function sanitize_html($text) {
         $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", function ($element) {
+            $name = strtolower($element[1]);
             fallback($element[2], "");
             $whitelist = "";
-            preg_match_all("/ ([a-z][a-z0-9]*)=(\"([^\"]+)\"|\'([^\']+)\')/", $element[0], $attributes, PREG_SET_ORDER);
+            preg_match_all("/ ([a-z]+)=(\"[^\"]+\"|\'[^\']+\')/i", $element[0], $attributes, PREG_SET_ORDER);
 
             foreach ($attributes as $attribute) {
-                switch ($attribute[1]) {
+                $label = strtolower($attribute[1]);
+                $content = trim($attribute[2], "\"'");
+
+                switch ($label) {
                     case "src":
-                        if (in_array($element[1], array("audio",
-                                                        "iframe",
-                                                        "img",
-                                                        "source",
-                                                        "track",
-                                                        "video")) and is_url(trim($attribute[2], "\"'")))
+                        if (in_array($name, array("audio",
+                                                  "iframe",
+                                                  "img",
+                                                  "source",
+                                                  "track",
+                                                  "video")) and is_url($content))
                             $whitelist.= $attribute[0];
 
                         break;
                     case "href":
-                        if (in_array($element[1], array("a",
-                                                        "area")) and is_url(trim($attribute[2], "\"'")))
+                        if (in_array($name, array("a",
+                                                  "area")) and is_url($content))
                             $whitelist.= $attribute[0];
 
                         break;
                     case "alt":
-                        if (in_array($element[1], array("area",
-                                                        "img")))
+                        if (in_array($name, array("area",
+                                                  "img")))
                             $whitelist.= $attribute[0];
 
                         break;
@@ -1963,9 +1967,9 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        if (preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?)($|/|:){1}~', $string) or //FQDN
-            preg_match('~^(http://|https://)?([[:digit:]]|\.){7,15}($|/|:){1}~', $string) or //IPv4
-            preg_match('~^(http://|https://)?(\[([[:alnum:]]|\:){3,45}\])($|/|:){1}~', $string)) //IPv6
+        if (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]+[a-z]{2,63}\.?)($|/)~i', $string) or //FQDN
+            preg_match('~^(http://|https://)?([0-9\.]{7,15})($|/)~', $string) or //IPv4
+            preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,45}\])($|/)~i', $string)) //IPv6
             return true;
         else
             return false;
@@ -1982,9 +1986,9 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        if (preg_match('~^[^@]+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?)$~', $string) or //FQDN
-            preg_match('~^[^@]+@([[:digit:]]|\.){7,15}$~', $string) or //IPv4
-            preg_match('~^[^@]+@(\[([[:alnum:]]|\:){3,45}\])$~', $string)) //IPv6
+        if (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]+[a-z]{2,63}\.?)$~i', $string) or //FQDN
+            preg_match('~^[^ @]+@([0-9\.]{7,15})$~', $string) or //IPv4
+            preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,45}\])$~i', $string)) //IPv6
             return true;
         else
             return false;
@@ -2004,7 +2008,7 @@
      *     <is_url>
      */
     function add_scheme($url) {
-        return $url = preg_match('~^[[:alpha:]]([[:alnum:]]|\+|\.|-)*:~', $url) ? $url : "http://".$url ;
+        return $url = preg_match('~^[a-z][a-z0-9\+\.\-]+:~i', $url) ? $url : "http://".$url ;
     }
 
     /**
