@@ -5,7 +5,7 @@
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 436
+	admin/admin.js.php on line 434
 
 
 can_not_view_site
@@ -134,19 +134,19 @@ Called from:
 after_page_fields
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 10
+	admin/partials/page_fields.twig on line 15
 
 
 new_page_options
 ----------------
 Called from:
-	admin/partials/page_fields.twig on line 51
+	admin/partials/page_fields.twig on line 56
 
 
 edit_page_options
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 53
+	admin/partials/page_fields.twig on line 58
 Arguments:
 	page
 
@@ -162,7 +162,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 49
+	admin/partials/post_fields.twig on line 52
 Arguments:
 	feather
 
@@ -179,7 +179,7 @@ Called from:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 225
+	includes/ajax.php on line 227
 
 
 change_setting
@@ -512,7 +512,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1884
+	includes/controller/Admin.php on line 1906
 
 
 settings_nav
@@ -520,7 +520,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1913
+	includes/controller/Admin.php on line 1935
 
 
 extend_nav
@@ -528,7 +528,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1923
+	includes/controller/Admin.php on line 1945
 
 
 admin_subnav
@@ -536,7 +536,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1934
+	includes/controller/Admin.php on line 1956
 
 
 nav_selected
@@ -544,7 +544,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2042
+	includes/controller/Admin.php on line 2064
 
 
 url_code
@@ -571,7 +571,7 @@ link_regexp
 Target:
 	$regexp
 Called from:
-	includes/helpers.php on line 864
+	includes/helpers.php on line 906
 
 
 keyword_search
@@ -579,7 +579,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1683
+	includes/helpers.php on line 1725
 Arguments:
 	$query, $plain
 
@@ -589,7 +589,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1819
+	includes/helpers.php on line 1861
 
 
 group

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-02 17:10+0000\n"
+"POT-Creation-Date: 2015-10-07 20:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -23,10 +23,10 @@ msgstr ""
 #: includes/ajax.php:52
 #: includes/ajax.php:66
 #: includes/ajax.php:93
-#: includes/ajax.php:103
-#: includes/ajax.php:116
-#: includes/ajax.php:172
-#: includes/ajax.php:207
+#: includes/ajax.php:105
+#: includes/ajax.php:118
+#: includes/ajax.php:174
+#: includes/ajax.php:209
 #: includes/controller/Admin.php:60
 #: includes/controller/Admin.php:80
 #: includes/controller/Admin.php:88
@@ -109,8 +109,8 @@ msgstr ""
 
 #: includes/ajax.php:21
 #: includes/ajax.php:52
-#: includes/ajax.php:116
-#: includes/ajax.php:172
+#: includes/ajax.php:118
+#: includes/ajax.php:174
 #: includes/controller/Admin.php:140
 #: includes/controller/Admin.php:195
 #: includes/controller/Admin.php:235
@@ -186,53 +186,53 @@ msgstr ""
 msgid "You must be logged in to preview content."
 msgstr ""
 
-#: includes/ajax.php:103
+#: includes/ajax.php:105
 msgid "You do not have sufficient privileges to enable/disable extensions."
 msgstr ""
 
-#: includes/ajax.php:121
+#: includes/ajax.php:123
 #: includes/controller/Admin.php:1471
 msgid "You do not have sufficient privileges to enable extensions."
 msgstr ""
 
-#: includes/ajax.php:124
+#: includes/ajax.php:126
 #: includes/controller/Admin.php:1474
 msgid "You did not specify an extension to enable."
 msgstr ""
 
-#: includes/ajax.php:147
+#: includes/ajax.php:149
 #: includes/controller/Admin.php:1511
 #, php-format
 msgid "Please create the <code>%s</code> directory at your Chyrp install's root and CHMOD it to 777."
 msgstr ""
 
-#: includes/ajax.php:149
+#: includes/ajax.php:151
 #: includes/controller/Admin.php:1513
 #, php-format
 msgid "Please CHMOD <code>%s</code> to 777."
 msgstr ""
 
-#: includes/ajax.php:154
+#: includes/ajax.php:156
 #: includes/controller/Admin.php:1490
 msgid "Item is not a module."
 msgstr ""
 
-#: includes/ajax.php:157
+#: includes/ajax.php:159
 #: includes/controller/Admin.php:1493
 msgid "Item is not a feather."
 msgstr ""
 
-#: includes/ajax.php:178
+#: includes/ajax.php:180
 #: includes/controller/Admin.php:1540
 msgid "You do not have sufficient privileges to disable extensions."
 msgstr ""
 
-#: includes/ajax.php:181
+#: includes/ajax.php:183
 #: includes/controller/Admin.php:1543
 msgid "You did not specify an extension to disable."
 msgstr ""
 
-#: includes/ajax.php:207
+#: includes/ajax.php:209
 msgid "You do not have sufficient privileges to reorder feathers."
 msgstr ""
 
@@ -266,7 +266,7 @@ msgstr ""
 #: includes/controller/Admin.php:1673
 #: includes/controller/Admin.php:1676
 #: includes/controller/Admin.php:1708
-#: includes/controller/Admin.php:2064
+#: includes/controller/Admin.php:2086
 #: includes/controller/Main.php:310
 #: includes/controller/Main.php:406
 #: includes/controller/Main.php:489
@@ -285,16 +285,16 @@ msgstr ""
 #: includes/controller/Main.php:705
 #: includes/controller/Main.php:864
 #: includes/error.php:110
-#: includes/helpers.php:1286
-#: includes/helpers.php:1288
-#: includes/helpers.php:1350
-#: includes/helpers.php:1352
-#: includes/helpers.php:1354
-#: includes/helpers.php:1356
-#: includes/helpers.php:1358
-#: includes/helpers.php:1360
-#: includes/helpers.php:1366
-#: includes/helpers.php:1649
+#: includes/helpers.php:1328
+#: includes/helpers.php:1330
+#: includes/helpers.php:1392
+#: includes/helpers.php:1394
+#: includes/helpers.php:1396
+#: includes/helpers.php:1398
+#: includes/helpers.php:1400
+#: includes/helpers.php:1402
+#: includes/helpers.php:1408
+#: includes/helpers.php:1691
 msgid "Error"
 msgstr ""
 
@@ -822,72 +822,167 @@ msgstr ""
 msgid "Move the .htaccess file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location."
 msgstr ""
 
-#: includes/controller/Admin.php:1862
+#: includes/controller/Admin.php:1832
+#: includes/controller/Admin.php:1835
+msgid "Markdown"
+msgstr ""
+
+#: includes/controller/Admin.php:1833
+msgid "Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:"
+msgstr ""
+
+#: includes/controller/Admin.php:1836
+msgid "Result"
+msgstr ""
+
+#: includes/controller/Admin.php:1839
+msgid "## Heading"
+msgstr ""
+
+#: includes/controller/Admin.php:1839
+#: includes/controller/Admin.php:1840
+msgid "Heading"
+msgstr ""
+
+#: includes/controller/Admin.php:1840
+msgid "### Heading"
+msgstr ""
+
+#: includes/controller/Admin.php:1841
+msgid "*Emphasis*"
+msgstr ""
+
+#: includes/controller/Admin.php:1841
+msgid "Emphasis"
+msgstr ""
+
+#: includes/controller/Admin.php:1842
+msgid "~~Strikethrough~~"
+msgstr ""
+
+#: includes/controller/Admin.php:1842
+msgid "Strikethrough"
+msgstr ""
+
+#: includes/controller/Admin.php:1843
+msgid "**Strong**"
+msgstr ""
+
+#: includes/controller/Admin.php:1843
+msgid "Strong"
+msgstr ""
+
+#: includes/controller/Admin.php:1844
+msgid "&crarr;"
+msgstr ""
+
+#: includes/controller/Admin.php:1844
+msgid "New paragraph"
+msgstr ""
+
+#: includes/controller/Admin.php:1845
+msgid "[title](URL)"
+msgstr ""
+
+#: includes/controller/Admin.php:1845
+msgid "Hyperlink"
+msgstr ""
+
+#: includes/controller/Admin.php:1846
+msgid "![description](URL)"
+msgstr ""
+
+#: includes/controller/Admin.php:1846
+msgid "Image"
+msgstr ""
+
+#: includes/controller/Admin.php:1847
+msgid "`Code`"
+msgstr ""
+
+#: includes/controller/Admin.php:1847
+msgid "Code"
+msgstr ""
+
+#: includes/controller/Admin.php:1848
+msgid "- List of items"
+msgstr ""
+
+#: includes/controller/Admin.php:1848
+#: includes/controller/Admin.php:1849
+msgid "List of items"
+msgstr ""
+
+#: includes/controller/Admin.php:1849
+msgid "1. List of items"
+msgstr ""
+
+#: includes/controller/Admin.php:1884
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:1868
+#: includes/controller/Admin.php:1890
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:1871
+#: includes/controller/Admin.php:1893
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:1874
-#: includes/controller/Admin.php:1909
+#: includes/controller/Admin.php:1896
+#: includes/controller/Admin.php:1931
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:1879
+#: includes/controller/Admin.php:1901
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:1886
+#: includes/controller/Admin.php:1908
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:1888
+#: includes/controller/Admin.php:1910
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:1905
+#: includes/controller/Admin.php:1927
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:1907
+#: includes/controller/Admin.php:1929
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:1911
+#: includes/controller/Admin.php:1933
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:1917
+#: includes/controller/Admin.php:1939
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:1919
+#: includes/controller/Admin.php:1941
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:1921
+#: includes/controller/Admin.php:1943
 msgid "Themes"
 msgstr ""
 
-#: includes/controller/Admin.php:2016
+#: includes/controller/Admin.php:2038
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:2021
+#: includes/controller/Admin.php:2043
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:2029
+#: includes/controller/Admin.php:2051
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:2034
+#: includes/controller/Admin.php:2056
 msgid "Extend"
 msgstr ""
 
@@ -1094,97 +1189,97 @@ msgstr ""
 msgid "%s is <strong>deprecated</strong> since version %s."
 msgstr ""
 
-#: includes/helpers.php:1270
-#: includes/helpers.php:1275
+#: includes/helpers.php:1312
+#: includes/helpers.php:1317
 msgid "Invalid Extension"
 msgstr ""
 
-#: includes/helpers.php:1270
+#: includes/helpers.php:1312
 #, php-format
 msgid "Only %s files are accepted."
 msgstr ""
 
-#: includes/helpers.php:1275
+#: includes/helpers.php:1317
 #, php-format
 msgid "Only %s files are supported."
 msgstr ""
 
-#: includes/helpers.php:1350
+#: includes/helpers.php:1392
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:1352
+#: includes/helpers.php:1394
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive that was specified in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:1354
+#: includes/helpers.php:1396
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:1356
+#: includes/helpers.php:1398
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:1358
+#: includes/helpers.php:1400
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1360
+#: includes/helpers.php:1402
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:1366
+#: includes/helpers.php:1408
 msgid "Unknown upload error."
 msgstr ""
 
-#: includes/helpers.php:1804
+#: includes/helpers.php:1846
 msgid "and "
 msgstr ""
 
-#: includes/helpers.php:2056
+#: includes/helpers.php:2108
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:2057
-#: includes/helpers.php:2069
-#: includes/helpers.php:2081
+#: includes/helpers.php:2109
+#: includes/helpers.php:2121
+#: includes/helpers.php:2133
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:2059
+#: includes/helpers.php:2111
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:2061
+#: includes/helpers.php:2113
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2068
+#: includes/helpers.php:2120
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2071
+#: includes/helpers.php:2123
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2080
+#: includes/helpers.php:2132
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2083
+#: includes/helpers.php:2135
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/helpers.php:2094
+#: includes/helpers.php:2146
 msgid "Undeliverable"
 msgstr ""
 
-#: includes/helpers.php:2094
+#: includes/helpers.php:2146
 msgid "Unable to send email."
 msgstr ""
 
