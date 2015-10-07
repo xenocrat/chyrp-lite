@@ -53,9 +53,9 @@
     function error($title = "", $body = "", $backtrace = array()) {
         # Sanitize strings.
         $title = htmlspecialchars($title, ENT_QUOTES, "utf-8", false);
-        $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i","<$1$2>", $body);
-        $body = preg_replace("/<script[^>]*?>/i","&lt;script&gt;", $body);
-        $body = preg_replace("/<\/script[^>]*?>/i","&lt;/script&gt;", $body);
+        $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
+        $body = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $body);
+        $body = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $body);
 
         if (!empty($backtrace) and defined('DIR') and defined('MAIN_DIR'))
             foreach ($backtrace as $index => &$trace) {

@@ -517,8 +517,8 @@
                  ">";
         }, $text);
 
-        $text = preg_replace("/<script[^>]*?>/i","&lt;script&gt;", $text);
-        $text = preg_replace("/<\/script[^>]*?>/i","&lt;/script&gt;", $text);
+        $text = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $text);
+        $text = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $text);
         return $text;
     }
 
