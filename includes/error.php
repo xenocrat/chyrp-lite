@@ -88,7 +88,7 @@
             !function_exists("oneof") or
             !function_exists("logged_in") or
             !class_exists("Config") or
-            !array_key_exists("chyrp_url", $config = Config::current()) or empty($site = $config->chyrp_url)) {
+            empty($site = Config::current()->chyrp_url)) {
 
             echo("ERROR: ".$body);
 
