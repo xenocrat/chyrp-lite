@@ -1967,9 +1967,9 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        if (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]+[a-z]{2,63}\.?)($|/)~i', $string) or //FQDN
-            preg_match('~^(http://|https://)?([0-9\.]{7,15})($|/)~', $string) or //IPv4
-            preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,45}\])($|/)~i', $string)) //IPv6
+        if (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/)~i', $string) or //FQDN
+            preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/)~', $string) or //IPv4
+            preg_match('~^(http://|https://)?(\[[a-f0-9\:]{2,44}[a-f0-9]\])($|/)~i', $string)) //IPv6
             return true;
         else
             return false;
@@ -1986,9 +1986,9 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        if (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]+[a-z]{2,63}\.?)$~i', $string) or //FQDN
-            preg_match('~^[^ @]+@([0-9\.]{7,15})$~', $string) or //IPv4
-            preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,45}\])$~i', $string)) //IPv6
+        if (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or //FQDN
+            preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or //IPv4
+            preg_match('~^[^ @]+@(\[[a-f0-9\:]{2,44}[a-f0-9]\])$~i', $string)) //IPv6
             return true;
         else
             return false;
