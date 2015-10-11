@@ -34,6 +34,7 @@
             toggle_options();
             toggle_all();
             validate_slug();
+
             if (Route.action == "user_settings")
                 toggle_correspondence();
 

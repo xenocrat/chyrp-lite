@@ -1955,7 +1955,7 @@
 
     /**
      * Function: is_url
-     * Tries to determine if a string is a URL beginning with a FQDN, IPv4 or IPv6 address.
+     * Does the string look like a website URL?
      *
      * Parameters:
      *     $string - The string to analyse.
@@ -1967,17 +1967,14 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        if (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/)~i', $string) or //FQDN
-            preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/)~', $string) or //IPv4
-            preg_match('~^(http://|https://)?(\[[a-f0-9\:]{2,44}[a-f0-9]\])($|/)~i', $string)) //IPv6
-            return true;
-        else
-            return false;
+        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/)~i', $string) or //FQDN
+                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/)~', $string) or //IPv4
+                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/)~i', $string));                           //IPv6
     }
 
     /**
      * Function: is_email
-     * Tries to determine if a string is an email address.
+     * Does the string look like an email address?
      *
      * Parameters:
      *     $string - The string to analyse.
@@ -1986,12 +1983,9 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        if (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or //FQDN
-            preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or //IPv4
-            preg_match('~^[^ @]+@(\[[a-f0-9\:]{2,44}[a-f0-9]\])$~i', $string)) //IPv6
-            return true;
-        else
-            return false;
+        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or //FQDN
+                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or //IPv4
+                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));                           //IPv6
     }
 
     /**
