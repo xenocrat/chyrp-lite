@@ -202,7 +202,10 @@
                     [$("<div>", {
                         "role": "contentinfo",
                         "aria-label": "<?php echo __("Help", "theme"); ?>"
-                    }).addClass("overlay_foreground").load(href + "&ajax=1", null, function() {
+                    }).addClass("overlay_foreground").load(href + "&ajax=1", null, function(response) {
+                        if (isError(response))
+                            $(this).text("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+
                         $(this).find("a").each(function() {
                             $(this).attr("target","_blank"); // Force links to spawn a new viewport
                         })
@@ -270,7 +273,10 @@
                             action: "preview",
                             content: content,
                             filter: filter
-                    }, function() {
+                    }, function(response) {
+                        if (isError(response))
+                            $(this).text("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+
                         $(this).find("a").each(function() {
                             $(this).attr("target","_blank"); // Force links to spawn a new viewport
                         })
