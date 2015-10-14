@@ -77,33 +77,6 @@
     }
 
     /**
-     * Function: deprecated
-     * Returns a warning if a deprecated function has been used.
-     *
-     * Parameters:
-     *     $f The function that was called
-     *     $v Chyrp version that deprecated the function
-     *     $r Optional. The function that should have been called
-     */
-    function deprecated($f, $v, $r = null, $trace) {    
-        if (!logged_in())
-            return;
-
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
-        if (DEBUG) {
-            if (!is_null($r))
-                trigger_error(_f("%s is <strong>deprecated</strong> since version %s! Use %s instead.", array($f, $v, $r)));
-            else
-                trigger_error(_f("%s is <strong>deprecated</strong> since version %s.", $f, $v));
-        }
-
-        error_reporting(E_ALL | E_STRICT);
-        ini_set("display_errors", 0);
-    }
-
-    /**
      * Function: logged_in
      * Returns whether or not they are logged in by returning the <Visitor.$id> (which defaults to 0).
      */
@@ -214,11 +187,18 @@
      *
      * Returns:
      *     The encoding name used by locale-aware functions.
+     *
+     * Author:
+     *     http://www.onphp5.com/article/22
+     *
+     * Notes:
+     *     "en_US" will not be set because this is the default and
+     *     may have been chosen because no translation is available
+     *     for the system locale.
      */
-    function set_locale($locale) { # originally via http://www.onphp5.com/article/22; heavily modified
-        if ($locale == "en_US") return; # en_US is the default in Chyrp; their system may have
-                                        # its own locale setting and no Chyrp translation available
-                                        # for their locale, so let's just leave it alone.
+    function set_locale($locale) {
+        if ($locale == "en_US")
+            return;
 
         list($lang, $cty) = explode("_", $locale);
         $locales = array($locale.".UTF-8", $lang, "en_US.UTF-8", "en");
