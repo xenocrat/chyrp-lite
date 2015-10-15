@@ -25,7 +25,7 @@
         }
 
         public function submit() {
-            if (isset($_FILES['photo']) and upload_tester($_FILES['photo']['error']))
+            if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
                 $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "bmp"));
             else
                 error(__("Error"), __("You did not select a photo to upload.", "photo"));
@@ -43,7 +43,7 @@
         }
 
         public function update($post) {
-            if (isset($_FILES['photo']) and upload_tester($_FILES['photo']['error'])) {
+            if (isset($_FILES['photo']) and upload_tester($_FILES['photo'])) {
                 $this->delete_file($post);
                 $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tiff", "bmp"));
             } else

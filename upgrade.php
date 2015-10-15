@@ -364,6 +364,16 @@
         Config::fallback("enable_homepage", false);
     }
 
+    /**
+     * Function: add_uploads_limit
+     * Adds the uploads_limit config setting.
+     *
+     * Versions: 2015.06 => 2015.07
+     */
+    function add_uploads_limit() {
+        Config::fallback("uploads_limit", 10);
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -544,6 +554,8 @@
         add_markdown();
 
         add_homepage();
+
+        add_uploads_limit();
 
         # Perform Module/Feather upgrades.
 

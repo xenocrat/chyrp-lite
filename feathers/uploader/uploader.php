@@ -44,15 +44,15 @@
         }
 
         public function submit() {
-            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads']['error'])) {
+            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
                 if (is_array($_FILES['uploads']['name']))
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
                             $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
-                                                    'type' => $_FILES['uploads']['type'][$i],
-                                                    'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                                    'error' => $_FILES['uploads']['error'][$i],
-                                                    'size' => $_FILES['uploads']['size'][$i]));
+                                                        'type' => $_FILES['uploads']['type'][$i],
+                                                        'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                                        'error' => $_FILES['uploads']['error'][$i],
+                                                        'size' => $_FILES['uploads']['size'][$i]));
                 else
                     $filenames[] = upload($_FILES['uploads']);
             } else
@@ -71,16 +71,16 @@
         }
 
         public function update($post) {
-            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads']['error'])) {
+            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $this->delete_files($post);
                 $filenames = array();
                 if (is_array($_FILES['uploads']['name']))
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
                             $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
-                                                    'type' => $_FILES['uploads']['type'][$i],
-                                                    'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                                    'error' => $_FILES['uploads']['error'][$i],
-                                                    'size' => $_FILES['uploads']['size'][$i]));
+                                                        'type' => $_FILES['uploads']['type'][$i],
+                                                        'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                                        'error' => $_FILES['uploads']['error'][$i],
+                                                        'size' => $_FILES['uploads']['size'][$i]));
                 else
                     $filenames[] = upload($_FILES['uploads']);
             } else

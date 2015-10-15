@@ -192,9 +192,9 @@
      *     http://www.onphp5.com/article/22
      *
      * Notes:
-     *     "en_US" will not be set because this is the default and
-     *     may have been chosen because no translation is available
-     *     for the system locale.
+     *     en_US will not be set because this is the default for Chyrp and
+     *     may have been chosen due to there being no translation available
+     *     that macthes the system locale.
      */
     function set_locale($locale) {
         if ($locale == "en_US")
@@ -1356,18 +1356,26 @@
      * Triggers an error page for all other fail states.
      *
      * Parameters:
-     *     $error - The ['error'] segment of the file array that is created during the file upload by PHP.
+     *     $file - The file array that is created by PHP.
      */
-    function upload_tester($error) {
-        if (is_array($error)) {
-            foreach ($error as $errors)
-                if (!upload_tester($errors))
+    function upload_tester($file) {
+        if (empty($file))
+            return false; # Upload size exceeded post_max_size directive in ini.php.
+
+        # Recurse to test multiple uploads file by file.
+        if (is_array($file['name'])) {
+            for ($i=0; $i < count($file['error']); $i++)
+                if (!upload_tester(array('name' => $file['name'][$i],
+                                         'type' => $file['type'][$i],
+                                         'tmp_name' => $file['tmp_name'][$i],
+                                         'error' => $file['error'][$i],
+                                         'size' => $file['size'][$i])))
                     return false;
 
             return true;
         }
 
-        switch ($error) {
+        switch ($file['error']) {
             case UPLOAD_ERR_INI_SIZE:
                 error(__("Error"), __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."));
             case UPLOAD_ERR_FORM_SIZE:
@@ -1380,9 +1388,14 @@
                 error(__("Error"), __("Failed to write file to disk."));
             case UPLOAD_ERR_EXTENSION:
                 error(__("Error"), __("File upload was stopped by a PHP extension."));
-            case UPLOAD_ERR_NO_FILE: 
+            case UPLOAD_ERR_NO_FILE:
                 return false;
-            case UPLOAD_ERR_OK: 
+            case UPLOAD_ERR_OK:
+                $limit = Config::current()->uploads_limit;
+
+                if ($file['size'] > ($limit * 1048576))
+                    error(__("Error"), _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $limit));
+
                 return true;
             default:
                 error(__("Error"), __("Unknown upload error."));
@@ -1456,127 +1469,14 @@
 
     /**
      * Function: timezones
-     * Returns an array of timezones that have unique offsets. Doesn't count deprecated timezones.
+     * Returns an array of timezones that have unique offsets.
      */
     function timezones() {
         $zones = array();
 
-        $deprecated = array("Brazil/Acre",
-                            "Brazil/DeNoronha",
-                            "Brazil/East",
-                            "Brazil/West",
-                            "Canada/Atlantic",
-                            "Canada/Central",
-                            "Canada/East-Saskatchewan",
-                            "Canada/Eastern",
-                            "Canada/Mountain",
-                            "Canada/Newfoundland",
-                            "Canada/Pacific",
-                            "Canada/Saskatchewan",
-                            "Canada/Yukon",
-                            "CET",
-                            "Chile/Continental",
-                            "Chile/EasterIsland",
-                            "CST6CDT",
-                            "Cuba",
-                            "EET",
-                            "Egypt",
-                            "Eire",
-                            "EST",
-                            "EST5EDT",
-                            "Etc/GMT",
-                            "Etc/GMT+0",
-                            "Etc/GMT+1",
-                            "Etc/GMT+10",
-                            "Etc/GMT+11",
-                            "Etc/GMT+12",
-                            "Etc/GMT+2",
-                            "Etc/GMT+3",
-                            "Etc/GMT+4",
-                            "Etc/GMT+5",
-                            "Etc/GMT+6",
-                            "Etc/GMT+7",
-                            "Etc/GMT+8",
-                            "Etc/GMT+9",
-                            "Etc/GMT-0",
-                            "Etc/GMT-1",
-                            "Etc/GMT-10",
-                            "Etc/GMT-11",
-                            "Etc/GMT-12",
-                            "Etc/GMT-13",
-                            "Etc/GMT-14",
-                            "Etc/GMT-2",
-                            "Etc/GMT-3",
-                            "Etc/GMT-4",
-                            "Etc/GMT-5",
-                            "Etc/GMT-6",
-                            "Etc/GMT-7",
-                            "Etc/GMT-8",
-                            "Etc/GMT-9",
-                            "Etc/GMT0",
-                            "Etc/Greenwich",
-                            "Etc/UCT",
-                            "Etc/Universal",
-                            "Etc/UTC",
-                            "Etc/Zulu",
-                            "Factory",
-                            "GB",
-                            "GB-Eire",
-                            "GMT",
-                            "GMT+0",
-                            "GMT-0",
-                            "GMT0",
-                            "Greenwich",
-                            "Hongkong",
-                            "HST",
-                            "Iceland",
-                            "Iran",
-                            "Israel",
-                            "Jamaica",
-                            "Japan",
-                            "Kwajalein",
-                            "Libya",
-                            "MET",
-                            "Mexico/BajaNorte",
-                            "Mexico/BajaSur",
-                            "Mexico/General",
-                            "MST",
-                            "MST7MDT",
-                            "Navajo",
-                            "NZ",
-                            "NZ-CHAT",
-                            "Poland",
-                            "Portugal",
-                            "PRC",
-                            "PST8PDT",
-                            "ROC",
-                            "ROK",
-                            "Singapore",
-                            "Turkey",
-                            "UCT",
-                            "Universal",
-                            "US/Alaska",
-                            "US/Aleutian",
-                            "US/Arizona",
-                            "US/Central",
-                            "US/East-Indiana",
-                            "US/Eastern",
-                            "US/Hawaii",
-                            "US/Indiana-Starke",
-                            "US/Michigan",
-                            "US/Mountain",
-                            "US/Pacific",
-                            "US/Pacific-New",
-                            "US/Samoa",
-                            "UTC",
-                            "W-SU",
-                            "WET",
-                            "Zulu");
-
-        foreach (timezone_identifiers_list() as $zone)
-            if (!in_array($zone, $deprecated))
-                $zones[] = array("name" => $zone,
-                                 "now" => time_in_timezone($zone));
+        foreach (timezone_identifiers_list(DateTimeZone::ALL) as $zone)
+            $zones[] = array("name" => $zone,
+                             "now" => time_in_timezone($zone));
 
         function by_time($a, $b) {
             return (int) ($a["now"] > $b["now"]);

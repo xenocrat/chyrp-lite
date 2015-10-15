@@ -164,7 +164,8 @@
             $config->set("posts_per_page", 5);
             $config->set("feed_items", 20);
             $config->set("feed_url", "");
-            $config->set("uploads_path", "/uploads/");
+            $config->set("uploads_path", DIR."uploads".DIR);
+            $config->set("uploads_limit", 10);
             $config->set("enable_trackbacking", true);
             $config->set("send_pingbacks", false);
             $config->set("enable_xmlrpc", true);

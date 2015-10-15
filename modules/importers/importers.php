@@ -19,7 +19,7 @@
             if (!in_array("text", $config->enabled_feathers))
                 error(__("Missing Feather", "importers"), __("Importing from WordPress requires the Text feather to be installed and enabled.", "importers"));
 
-            if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']['error']))
+            if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
                 error(__("Error"), __("You must select a WordPress export file.", "importers"));
 
             if (ini_get("memory_limit") < 20)

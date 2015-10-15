@@ -8,7 +8,7 @@
                 <fieldset>
 {% include "partials/page_fields.twig" %}
                     <input type="hidden" name="hash" value="${ ip | token }" id="hash">
-                    <input type="hidden" name="id" value="$page.id" id="id">
+                    <input type="hidden" name="id" value="$page.id" id="page_id">
                 </fieldset>
             </form>
 {% endblock %}

@@ -1097,11 +1097,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']['error']))
+            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
                 if (!$posts = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $posts->generator != "Chyrp")
                     Flash::warning(__("Chyrp Posts export file is invalid."), "/admin/?action=import");
 
-            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']['error']))
+            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
                 if (!$pages = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $pages->generator != "Chyrp")
                     Flash::warning(__("Chyrp Pages export file is invalid."), "/admin/?action=import");
 
@@ -1121,7 +1121,7 @@
                     }
             }
 
-            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']['error'])) {
+            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file'])) {
                 $import = json_decode(file_get_contents($_FILES['groups_file']['tmp_name']), true);
 
                 if (json_last_error())
@@ -1136,7 +1136,7 @@
                         $sql->insert("permissions", array("id" => $id, "name" => $name));
             }
 
-            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file']['error'])) {
+            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file'])) {
                 $users = json_decode(file_get_contents($_FILES['users_file']['tmp_name']), true);
 
                 if (json_last_error())
@@ -1160,7 +1160,7 @@
                 }
             }
 
-            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']['error']))
+            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
                 foreach ($posts->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
 
@@ -1190,7 +1190,7 @@
                     $trigger->call("import_chyrp_post", $entry, $post);
                 }
 
-            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']['error']))
+            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
                 foreach ($pages->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
@@ -1718,6 +1718,7 @@
                          $config->set("feed_items", (int) $_POST['feed_items']),
                          $config->set("feed_url", $_POST['feed_url']),
                          $config->set("uploads_path", $_POST['uploads_path']),
+                         $config->set("uploads_limit", (int) $_POST['uploads_limit']),
                          $config->set("enable_trackbacking", !empty($_POST['enable_trackbacking'])),
                          $config->set("send_pingbacks", !empty($_POST['send_pingbacks'])),
                          $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc'])),
