@@ -5,7 +5,7 @@
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 434
+	admin/admin.js.php on line 441
 
 
 can_not_view_site
@@ -512,7 +512,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1906
+	includes/controller/Admin.php on line 1907
 
 
 settings_nav
@@ -520,7 +520,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1935
+	includes/controller/Admin.php on line 1936
 
 
 extend_nav
@@ -528,7 +528,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1945
+	includes/controller/Admin.php on line 1946
 
 
 admin_subnav
@@ -536,7 +536,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1956
+	includes/controller/Admin.php on line 1957
 
 
 nav_selected
@@ -544,7 +544,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2064
+	includes/controller/Admin.php on line 2065
 
 
 url_code
@@ -571,7 +571,7 @@ link_regexp
 Target:
 	$regexp
 Called from:
-	includes/helpers.php on line 906
+	includes/helpers.php on line 886
 
 
 keyword_search
@@ -579,7 +579,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1725
+	includes/helpers.php on line 1605
 Arguments:
 	$query, $plain
 
@@ -589,7 +589,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1861
+	includes/helpers.php on line 1741
 
 
 group

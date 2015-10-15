@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-07 20:57+0000\n"
+"POT-Creation-Date: 2015-10-15 12:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:58
+#: admin/admin.js.php:59
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:118
-#: admin/admin.js.php:134
+#: admin/admin.js.php:119
+#: admin/admin.js.php:135
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:120
-#: admin/admin.js.php:137
+#: admin/admin.js.php:121
+#: admin/admin.js.php:138
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:164
+#: admin/admin.js.php:165
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: admin/admin.js.php:170
+#: admin/admin.js.php:171
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:203
+#: admin/admin.js.php:204
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:211
-#: admin/admin.js.php:213
-#: admin/admin.js.php:279
-#: admin/admin.js.php:281
+#: admin/admin.js.php:215
+#: admin/admin.js.php:217
+#: admin/admin.js.php:286
+#: admin/admin.js.php:288
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:233
-#: admin/admin.js.php:234
+#: admin/admin.js.php:237
+#: admin/admin.js.php:238
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:267
+#: admin/admin.js.php:271
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:422
+#: admin/admin.js.php:429
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:424
+#: admin/admin.js.php:431
 msgid "There was an error disabling the extension."
 msgstr ""
 
@@ -90,7 +90,7 @@ msgid "Posts Per Page"
 msgstr ""
 
 #: admin/pages/content_settings.twig:13
-msgid "Feed Posts Limit"
+msgid "Posts in Feed"
 msgstr ""
 
 #: admin/pages/content_settings.twig:17
@@ -110,58 +110,66 @@ msgid "Uploads Path"
 msgstr ""
 
 #: admin/pages/content_settings.twig:31
-msgid "The directory to which files are uploaded, relative to your Chyrp install."
+msgid "The directory to which files are uploaded, relative to your installation directory."
 msgstr ""
 
 #: admin/pages/content_settings.twig:35
+msgid "Upload Size Limit"
+msgstr ""
+
+#: admin/pages/content_settings.twig:37
+msgid "(Megabytes)"
+msgstr ""
+
+#: admin/pages/content_settings.twig:40
 msgid "Trackbacking"
 msgstr ""
 
-#: admin/pages/content_settings.twig:38
+#: admin/pages/content_settings.twig:43
 msgid "Trackbacking allows sites to notify you when they link to or reference your posts."
 msgstr ""
 
-#: admin/pages/content_settings.twig:42
+#: admin/pages/content_settings.twig:47
 msgid "Send Pingbacks"
 msgstr ""
 
-#: admin/pages/content_settings.twig:45
+#: admin/pages/content_settings.twig:50
 msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
-#: admin/pages/content_settings.twig:49
+#: admin/pages/content_settings.twig:54
 msgid "XML-RPC Support"
 msgstr ""
 
-#: admin/pages/content_settings.twig:52
+#: admin/pages/content_settings.twig:57
 msgid "XML-RPC support allows you to create and edit content via remote access to your site."
 msgstr ""
 
-#: admin/pages/content_settings.twig:56
+#: admin/pages/content_settings.twig:61
 msgid "Ajax"
 msgstr ""
 
-#: admin/pages/content_settings.twig:59
+#: admin/pages/content_settings.twig:64
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
-#: admin/pages/content_settings.twig:63
+#: admin/pages/content_settings.twig:68
 msgid "Unicode Emoticons"
 msgstr ""
 
-#: admin/pages/content_settings.twig:66
+#: admin/pages/content_settings.twig:71
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:70
+#: admin/pages/content_settings.twig:75
 msgid "Markdown"
 msgstr ""
 
-#: admin/pages/content_settings.twig:73
+#: admin/pages/content_settings.twig:78
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:78
+#: admin/pages/content_settings.twig:83
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:67
