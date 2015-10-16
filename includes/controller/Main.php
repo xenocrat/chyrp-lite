@@ -880,7 +880,8 @@
          */
         public static function & current() {
             static $instance = null;
-            return $instance = (empty($instance)) ? new self() : $instance ;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
         }
     }
 

@@ -229,7 +229,8 @@
             if (!isset($controller) and empty($instance))
                 error(__("Error"), __("Route was initiated without a Controller."), debug_backtrace());
 
-            return $instance = (empty($instance)) ? new self($controller) : $instance ;
+            $instance = (empty($instance)) ? new self($controller) : $instance ;
+            return $instance;
         }
     }
 
