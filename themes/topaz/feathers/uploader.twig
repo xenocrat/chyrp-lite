@@ -10,17 +10,16 @@
       <section class="caption{% if post.caption | length > 1000 %} columnized{% endif %}">
         ${ post.caption | read_more("…more") }
       </section>
-      <section class="downloads">
       {% for file in post.files %}
-        {% if ( file.type == "jpg" ) or ( file.type == "jpeg" ) or ( file.type == "png" ) or ( file.type == "gif" ) or ( file.type == "tiff" ) or ( file.type == "bmp" ) %}
-        <div class="photo_frame">
-          ${ feathers['uploader'].image_link(file.name, 1024, 2048, "quality=80", "80vw") }
-        </div>
+        {% if "jpg jpeg png gif tif tiff bmp" | contains(file.type) %}
+      <section class="photo">
+        ${ feathers['uploader'].image_link(file.name, 1024, 2048, "quality=80", "80vw") }
+      </section>
         {% else %}
-        <p>
-          ${ "Download" | translate } <a href="${ file.link | escape }">&quot;${ file.name | escape | truncate(40, "…", true) }&quot;</a>
-        </p>
+      <section class="attachment">
+        ${ "File attachment:" | translate }
+        <a href="${ file.link | escape }">&quot;${ file.name | escape | truncate(40, "…", true) }&quot;</a>
+      </section>
         {% endif %}
       {% endfor %}
-      </section>
 {% endblock %}

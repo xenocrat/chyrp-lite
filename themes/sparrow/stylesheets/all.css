@@ -308,12 +308,6 @@ label {                                             display: block;
                                                     clear: both;
                                                     padding-top: 2rem;
                                                     text-align: center }
-    div.photo_frame {                               width: 100%;
-                                                    max-height: 1200px;
-                                                    overflow: hidden;
-                                                    clear: both }
-    div.photo_frame + div.photo_frame,
-    div.photo_frame + p {                           margin-top: 1em }
     div.tags {                                      margin: 1.33em 0em 0em 0em;
                                                     font-size: 0.75em }
     div.doaction {                                  font-family: inherit;
@@ -361,7 +355,13 @@ article > section {                                 display: block;
                                                     margin: 1em 0em 0em 0em;
                                                     padding: 0em }
     article > section:first-child {                 margin-top: 0em }
-    article section.comment {                       margin-bottom: 1em }
+    article > section.comment {                     margin-bottom: 1em }
+    article > section.photo {                       width: 100%;
+                                                    max-height: 1200px;
+                                                    overflow: hidden;
+                                                    clear: both }
+    article > section.photo + article > section.photo,
+    article > section.photo + p {                   margin-top: 1em }
 article > footer {                                  display: block;
                                                     width: 100%;
                                                     text-align: left;
@@ -497,7 +497,7 @@ a:active {                                          color: #99726d;
                                                     border: none }
     div.doaction a.post_delete_link,
     div.doaction a.delete_link {                    font-weight: bold }
-    div.photo_frame > a {                           border-bottom: none }
+    article > section.photo > a {                   border-bottom: none }
     div.doaction a.post_delete_link:hover,
     div.doaction a.delete_link:hover,
     div.doaction a.post_delete_link:focus,
@@ -526,7 +526,7 @@ a:active {                                          color: #99726d;
 img {                                               border-style: none;
                                                     margin: 0em;
                                                     padding: 0em }
-    div.photo_frame img {                           width: 100% }
+    article > section.photo img {                   width: 100% }
     article img {                                   max-width: 100% }
     img.gravatar {                                  position: absolute;
                                                     top: 2rem;

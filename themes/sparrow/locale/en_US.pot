@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-07 20:57+0000\n"
+"POT-Creation-Date: 2015-10-16 11:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -98,8 +98,8 @@ msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: themes/sparrow/feathers/uploader.twig:20
-msgid "Download"
+#: themes/sparrow/feathers/uploader.twig:19
+msgid "File attachment:"
 msgstr ""
 
 #: themes/sparrow/forms/comment/edit.twig:2
