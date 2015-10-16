@@ -60,6 +60,9 @@
         public function pingback_ping($args) {
             $config = Config::current();
 
+            if (!Config::current()->enable_xmlrpc)
+                throw new Exception(__("XML-RPC support is disabled for this site."));
+
             $linked_from = str_replace('&amp;', '&', $args[0]);
             $linked_to   = str_replace('&amp;', '&', $args[1]);
 
@@ -140,16 +143,14 @@
             $result  = array();
 
             foreach ($this->getRecentPosts($args[3]) as $post) {
-                $struct = array(
-                                'postid'            => $post->id,
+                $struct = array('postid'            => $post->id,
                                 'userid'            => $post->user_id,
                                 'title'             => $post->title,
                                 'dateCreated'       => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)),
                                 'description'       => $post->body,
                                 'link'              => $post->url(),
                                 'permaLink'         => $post->url(),
-                                'mt_basename'       => $post->url,
-                                'mt_allow_pings'    => (int) $config->enable_trackbacking);
+                                'mt_basename'       => $post->url);
 
                 $result[] = $trigger->filter($struct, 'metaWeblog_getPost', $post);
             }
@@ -196,16 +197,14 @@
             $this->auth($args[1], $args[2]);
 
             $post = new Post($args[0], array('filter' => false));
-            $struct = array(
-                            'postid'            => $post->id,
+            $struct = array('postid'            => $post->id,
                             'userid'            => $post->user_id,
                             'title'             => $post->title,
                             'dateCreated'       => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)),
                             'description'       => $post->body,
                             'link'              => $post->url(),
                             'permaLink'         => $post->url(),
-                            'mt_basename'       => $post->url,
-                            'mt_allow_pings'    => (int) Config::current()->enable_trackbacking);
+                            'mt_basename'       => $post->url);
 
             Trigger::current()->filter($struct, 'metaWeblog_getPost', $post);
             return array($struct);
@@ -246,9 +245,7 @@
             $trigger = Trigger::current();
             $trigger->call('metaWeblog_newPost_preQuery', $args[3]);
 
-            $post = Post::add(
-                              array(
-                                    'title' => $args[3]['title'],
+            $post = Post::add(array('title' => $args[3]['title'],
                                     'body'  => $body),
                               $clean,
                               $url);
@@ -305,8 +302,7 @@
             $trigger = Trigger::current();
             $trigger->call('metaWeblog_editPost_preQuery', $args[3], $post);
 
-            $post->update(
-                          array('title' => $args[3]['title'], 'body' => $body ),
+            $post->update(array('title' => $args[3]['title'], 'body' => $body ),
                           null,
                           null,
                           $status,
@@ -346,8 +342,7 @@
             $this->auth($args[1], $args[2]);
 
             $config = Config::current();
-            return array(array(
-                               'url'      => $config->url,
+            return array(array('url'      => $config->url,
                                'blogName' => $config->name,
                                'blogid'   => 1));
         }
@@ -360,8 +355,7 @@
             $this->auth($args[1], $args[2]);
             global $user;
 
-            return array(array(
-                               'userid'    => $user->id,
+            return array(array('userid'    => $user->id,
                                'nickname'  => $user->full_name,
                                'firstname' => '',
                                'lastname'  => '',
@@ -379,8 +373,7 @@
             $result = array();
 
             foreach ($this->getRecentPosts($args[3]) as $post) {
-                $result[] = array(
-                                  'postid'      => $post->id,
+                $result[] = array('postid'      => $post->id,
                                   'userid'      => $post->user_id,
                                   'title'       => $post->title,
                                   'dateCreated' => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)));
@@ -397,8 +390,7 @@
             $this->auth($args[1], $args[2]);
 
             $categories = array();
-            return Trigger::current()->filter(
-                                              $categories,
+            return Trigger::current()->filter($categories,
                                               'mt_getCategoryList');
         }
 
@@ -413,8 +405,7 @@
                 return new IXR_Error(500, __("Post not found."));
 
             $categories = array();
-            return Trigger::current()->filter(
-                                              $categories,
+            return Trigger::current()->filter($categories,
                                               'mt_getPostCategories',
                                               new Post($args[0], array('filter' => false)));
         }
@@ -466,9 +457,7 @@
             if (!$user->group->can('view_draft', 'edit_draft', 'edit_post', 'delete_draft', 'delete_post'))
                 $where['user_id'] = $user->id;
 
-            return Post::find(
-                              array(
-                                    'where'  => $where,
+            return Post::find(array('where'  => $where,
                                     'order'  => 'created_at DESC, id DESC',
                                     'limit'  => $limit),
                               array('filter' => false));
@@ -497,15 +486,8 @@
             if (!User::authenticate($login, $password))
                 throw new Exception(__("Login incorrect."));
             else
-                $user = new User(
-                                 null,
-                                 array(
-                                       'where' => array(
-                                                        'login' => $login
-                                                        )
-                                       )
-                                 );
-
+                $user = new User(null,
+                                 array('where' => array('login' => $login)));
 
             if (!$user->group->can("{$do}_own_post", "{$do}_post", "{$do}_draft", "{$do}_own_draft"))
                 throw new Exception(_f("You don't have permission to %s posts/drafts.", array($do)));

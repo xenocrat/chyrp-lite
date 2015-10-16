@@ -19,7 +19,7 @@ Specifically, Chyrp Lite offers the following "out of the box" features:
 * Responsive and accessible HTML5 for all blog and admin pages.
 * Universal support for plain text, Markdown, or raw HTML.
 * One-click markup/markdown previews for posts and pages.
-* Send and receive trackbacks and pingbacks on your blog posts.
+* Send and receive pingbacks on your blog posts.
 * Personalise your blog using powerful extensions.
 * Semantic markup makes it easy to customise themes or write your own.
 * A comprehensive rights model for managing your users and visitors.

@@ -252,28 +252,6 @@
             return $fields;
         }
 
-        static function trackback_receive($url, $title, $excerpt, $blog_name) {
-            $sql = SQL::current();
-            $count = $sql->count("comments",
-                                 array("post_id" => $_GET['id'],
-                                       "author_url" => $_POST['url']));
-            if ($count)
-                trackback_respond(true, __("A ping from that URL is already registered.", "comments"));
-
-            $post = new Post($_GET["id"]);
-            if ($post->no_results)
-                return false;
-
-            Comment::create($excerpt,
-                            $title,
-                            $url,
-                            "",
-                            $post,
-                            0,
-                            0,
-                            "trackback");
-        }
-
         public function pingback($post, $to, $from, $title, $excerpt) {
             $sql = SQL::current();
             $count = $sql->count("comments",

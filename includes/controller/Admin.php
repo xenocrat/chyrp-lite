@@ -1184,7 +1184,6 @@
                                       ($entry->updated == $entry->published) ?
                                           null :
                                           datetime($entry->updated),
-                                      "",
                                       false);
 
                     $trigger->call("import_chyrp_post", $entry, $post);
@@ -1719,7 +1718,6 @@
                          $config->set("feed_url", $_POST['feed_url']),
                          $config->set("uploads_path", $_POST['uploads_path']),
                          $config->set("uploads_limit", (int) $_POST['uploads_limit']),
-                         $config->set("enable_trackbacking", !empty($_POST['enable_trackbacking'])),
                          $config->set("send_pingbacks", !empty($_POST['send_pingbacks'])),
                          $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc'])),
                          $config->set("enable_ajax", !empty($_POST['enable_ajax'])),
@@ -1817,10 +1815,6 @@
                 case "slugs":
                     $help = "<h1>".__("Post Slugs")."</h1>\n".
                             "<p>".__("A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\").")."</p>";
-                    break;
-                case "trackbacks":
-                    $help = "<h1>".__("Trackbacks")."</h1>\n".
-                            "<p>".__("Trackbacks are special URLs that notify the authors of other blog posts that your post is related to or references. The other blogs will be informed when you publish your post, and in some cases a comment will automatically be added to their site linking back to your post.")."</p>";
                     break;
                 case "alternate_urls":
                     $help = "<h1>".__("Alternate URL")."</h1>\n".

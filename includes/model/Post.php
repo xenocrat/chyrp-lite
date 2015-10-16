@@ -163,7 +163,6 @@
          *     $status - Post status
          *     $created_at - New @created_at@ timestamp for the post.
          *     $updated_at - New @updated_at@ timestamp for the post, or @false@ to not updated it.
-         *     $trackbacks - URLs separated by " " to send trackbacks to.
          *     $pingbacks - Send pingbacks?
          *     $options - Options for the post.
          *
@@ -182,7 +181,6 @@
                             $status     = "",
                             $created_at = null,
                             $updated_at = null,
-                            $trackbacks = "",
                             $pingbacks  = true,
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
@@ -200,7 +198,6 @@
                                       datetime($_POST['created_at']) :
                                       datetime());
             fallback($updated_at, oneof(@$_POST['updated_at'], $created_at));
-            fallback($trackbacks, oneof(@$_POST['trackbacks'], ""));
             fallback($options,    oneof(@$_POST['option'], array()));
 
             if (isset($clean) and !isset($url))
@@ -235,17 +232,6 @@
                                    "value"   => $value));
 
             $post = new self($id, array("drafts" => true));
-
-            if ($trackbacks !== "") {
-                $trackbacks = explode(",", $trackbacks);
-                $trackbacks = array_map("trim", $trackbacks);
-                $trackbacks = array_map("strip_tags", $trackbacks);
-                $trackbacks = array_unique($trackbacks);
-                $trackbacks = array_diff($trackbacks, array(""));
-
-                foreach ($trackbacks as $url)
-                    trackback_send($post, $url);
-            }
 
             if (Config::current()->send_pingbacks and $pingbacks)
                 foreach ($values as $key => $value)
@@ -663,17 +649,6 @@
                     if (isset($this->$filter["field"]) and !empty($this->$filter["field"]))
                         $trigger->filter($this->$filter["field"], $filter["name"], $this);
                 }
-        }
-
-        /**
-         * Function: trackback_url
-         * Returns the posts trackback URL.
-         */
-        public function trackback_url() {
-            if ($this->no_results) return
-                false;
-
-            return Config::current()->chyrp_url."/includes/trackback.php?id=".$this->id;
         }
 
         /**

@@ -48,8 +48,6 @@ ${ trigger.call("before_ajax_edit_post_fields", feather) }
         <label for="created_at">${ "Timestamp" | translate }</label>
         <input class="text" type="text" name="created_at" value="${ post.created_at | fallback(now | date("r")) | strftime }" id="created_at">
         <input type="hidden" name="original_time" value="${ post.created_at | fallback(now | date("r")) | strftime }">
-        <label for="trackbacks">${ "Trackbacks" | translate }</label>
-        <input class="text" type="text" name="trackbacks" value="" id="trackbacks">
         {% for field in options %}
           <label for="${ field.attr | replace("[", "_") | replace("]", "") }">
           $field.label

@@ -76,11 +76,6 @@
     if (!defined('XML_RPC'))
         define('XML_RPC', false);
 
-    # Constant: TRACKBACK
-    # Is this being run from a trackback request?
-    if (!defined('TRACKBACK'))
-        define('TRACKBACK', false);
-
     # Constant: UPGRADING
     # Is the user running the upgrader? (false)
     define('UPGRADING', false);

@@ -37,13 +37,6 @@
                         <span class="sub">${ "(Megabytes)" | translate }</span>
                     </p>
                     <p>
-                        <label for="enable_trackbacking">${ "Trackbacking" | translate }</label>
-                        <input class="checkbox" type="checkbox" name="enable_trackbacking" id="enable_trackbacking"${ site.enable_trackbacking | checked }>
-                        <small>
-                            ${ "Trackbacking allows sites to notify you when they link to or reference your posts." | translate }
-                        </small>
-                    </p>
-                    <p>
                         <label for="send_pingbacks">${ "Send Pingbacks" | translate }</label>
                         <input class="checkbox" type="checkbox" name="send_pingbacks" id="send_pingbacks"${ site.send_pingbacks | checked }>
                         <small>
@@ -54,7 +47,7 @@
                         <label for="enable_xmlrpc">${ "XML-RPC Support" | translate }</label>
                         <input class="checkbox" type="checkbox" name="enable_xmlrpc" id="enable_xmlrpc"${ site.enable_xmlrpc | checked }>
                         <small>
-                            ${ "XML-RPC support allows you to create and edit content via remote access to your site." | translate }
+                            ${ "XML-RPC support allows you to manipulate blog content remotely and receive pingbacks." | translate }
                         </small>
                     </p>
                     <p>

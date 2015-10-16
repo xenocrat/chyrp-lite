@@ -374,6 +374,15 @@
         Config::fallback("uploads_limit", 10);
     }
 
+    /**
+     * Function: remove_trackbacking
+     * Removes the enable_trackbacking config setting.
+     *
+     * Versions: 2015.06 => 2015.07
+     */
+    function remove_trackbacking() {
+        Config::remove("enable_trackbacking");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -556,6 +565,8 @@
         add_homepage();
 
         add_uploads_limit();
+
+        remove_trackbacking();
 
         # Perform Module/Feather upgrades.
 

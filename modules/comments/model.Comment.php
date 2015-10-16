@@ -36,7 +36,7 @@
             $trigger->filter($this, "comment");
 
             if ($this->filtered) {
-                if (($this->status != "pingback" and $this->status != "trackback") and !$group->can("code_in_comments"))
+                if ($this->status != "pingback" and !$group->can("code_in_comments"))
                     $this->body = strip_tags($this->body, "<".join("><", Config::current()->allowed_comment_html).">");
 
                 $this->body_unfiltered = $this->body;
@@ -68,10 +68,10 @@
          *     $post - The <Post> they're commenting on.
          *     $parent - The <Comment> they're replying to.
          *     $notify - Notification on follow-up comments.
-         *     $type - The type of comment. Optional, used for trackbacks/pingbacks.
+         *     $type - The type of comment. Optional, used for pingbacks.
          */
         static function create($body, $author, $url, $email, $post, $parent, $notify, $type = null) {
-            if (!self::user_can($post->id) and !in_array($type, array("trackback", "pingback")))
+            if (!self::user_can($post->id) and $type != "pingback")
                 return;
 
             $config = Config::current();

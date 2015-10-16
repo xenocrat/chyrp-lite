@@ -6,7 +6,6 @@
     define('ADMIN',        false);
     define('AJAX',         false);
     define('XML_RPC',      false);
-    define('TRACKBACK',    false);
     define('UPGRADING',    false);
     define('INSTALLING',   true);
     define('TESTER',       isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
@@ -166,7 +165,6 @@
             $config->set("feed_url", "");
             $config->set("uploads_path", DIR."uploads".DIR);
             $config->set("uploads_limit", 10);
-            $config->set("enable_trackbacking", true);
             $config->set("send_pingbacks", false);
             $config->set("enable_xmlrpc", true);
             $config->set("enable_ajax", true);
