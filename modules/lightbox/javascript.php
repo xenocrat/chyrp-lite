@@ -52,9 +52,9 @@
             },
             init: function() {
                 $.extend( ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background] );
-                $("img.image").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
+                $("section img").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
                 if ( ChyrpLightbox.protect )
-                    $("img.image").not(".suppress_lightbox").on({
+                    $("section img").not(".suppress_lightbox").on({
                         contextmenu: function() { return false; }
                     });
                 $(window).on({
@@ -72,9 +72,9 @@
                         mutations.forEach(function(mutation) {
                             for (var i = 0; i < mutation.addedNodes.length; ++i) {
                                 var item = mutation.addedNodes[i];
-                                $(item).find("img.image").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
+                                $(item).find("section img").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
                                 if ( ChyrpLightbox.protect )
-                                    $(item).find("img.image").not(".suppress_lightbox").on({
+                                    $(item).find("section img").not(".suppress_lightbox").on({
                                         contextmenu: function() { return false; }
                                     });
                             }
