@@ -1269,7 +1269,7 @@
         foreach (array("tar.gz", "tar.bz", "tar.bz2") as $ext) {
             list($first, $second) = explode(".", $ext);
             $file_first =& $file_split[count($file_split) - 2];
-            if ($file_first == $first and end($file_split) == $second) {
+            if (strcasecmp($file_first, $first) == 0 and strcasecmp(end($file_split), $second) == 0) {
                 $file_first = $first.".".$second;
                 array_pop($file_split);
             }
@@ -1277,7 +1277,7 @@
 
         $file_ext = end($file_split);
 
-        if ($file_ext == "php")
+        if (in_array(strtolower($file_ext), array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
             $file_ext = "txt";
 
         if (is_array($extension)) {
