@@ -434,7 +434,7 @@ article > section {                                 display: block;
                                                     margin: 1em 0em 0em 0em;
                                                     padding: 0em }
     article > section:first-child {                 margin-top: 0em }
-    article > section.comment {                     margin-bottom: 1em }
+    article section.comment {                       margin-bottom: 1em }
     article > section.photo {                       width: 100%;
                                                     max-height: 1200px;
                                                     overflow: hidden;
