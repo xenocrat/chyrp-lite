@@ -6,12 +6,6 @@
 ?>
 <!-- --><script>
 
-// Obfuscated mailto.
-function mailTo(domain, recipient) {
-    location.assign(('mailto:' + recipient + '@' + domain));
-    return true;
-}
-
 // Mobile navigation menu.
 $(document).ready(function() {
     $('<li>', {
@@ -36,11 +30,6 @@ $(document).ready(function() {
         $(".mobile_nav").children().on("focus", "a:not(#mobile_toggle_link)", function() {
             $(".mobile_nav").addClass("on");
         });
-});
-
-// Prevent tabbing through yearly archive post previews.
-$(document).ready(function() {
-    $("article.post.archive *").not(".archive_post_link").attr("tabindex", "-1")
 });
 
 <!-- --></script>

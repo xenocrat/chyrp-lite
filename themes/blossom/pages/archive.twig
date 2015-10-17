@@ -18,7 +18,7 @@
             {% if post.feather == "photo" %}
             ${ feathers['photo'].image_tag(post, 156, null, "quality=60", "20vw") }
             {% else %}
-            <p>${ post.excerpt | read_more("…more") }</p>
+            <p>${ post.excerpt | read_more("&hellip;more") | strip_tags }</p>
             {% endif %}
             <a href="$post.url" class="archive_post_link">${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;</a>
           </article>
