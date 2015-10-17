@@ -683,23 +683,27 @@
      */
     function pingback_url($url) {
         extract(parse_url($url), EXTR_SKIP);
+
+        $path = (!isset($path)) ? '/' : $path ;
+        $port = (isset($port)) ? $port : 80 ;
+
+        if (isset($query))
+            $path.= '?'.$query;
+
         if (!isset($host))
             return false;
 
-        $path = (!isset($path)) ? '/' : $path ;
-        if (isset($query)) $path.= '?'.$query;
-        $port = (isset($port)) ? $port : 80 ;
-
-        # Connect
         $connect = @fsockopen($host, $port, $errno, $errstr, 2);
-        if (!$connect) return false;
 
-        # Send the GET headers
-        fwrite($connect, "GET $path HTTP/1.1\r\n");
+        if (!$connect)
+            return false;
+
+        # Send the GET headers.
+        fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
         fwrite($connect, "Host: $host\r\n");
         fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
 
-        # Check for X-Pingback header
+        # Check for X-Pingback header.
         $headers = "";
         while (!feof($connect)) {
             $line = fgets($connect, 512);
@@ -711,14 +715,13 @@
             if (preg_match("/X-Pingback: (.+)/i", $line, $matches))
                 return trim($matches[1]);
 
-            # Nothing's found so far, so grab the content-type
-            # for the <link> search afterwards
+            # Save the content-type in case we need to <link> search.
             if (preg_match("/Content-Type: (.+)/i", $headers, $matches))
                 $content_type = trim($matches[1]);
         }
 
-        # No header found, check for <link>
-        if (preg_match('/(image|audio|video|model)/i', $content_type))
+        # X-Pingback header not found, <link> search if the content can be parsed.
+        if (!preg_match("~(text/html|text/sgml|text/xml|text/plain)~i", $content_type))
             return false;
 
         $size = 0;
@@ -785,7 +788,7 @@
             $connect = @fsockopen($host, $port, $errno, $errstr, $timeout);
 
             if ($connect) {
-                # Send the GET headers
+                # Send the GET headers.
                 fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
                 fwrite($connect, "Host: ".$host."\r\n");
                 fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
@@ -798,7 +801,7 @@
 
                 fclose($connect);
 
-                # Search for 301 or 302 header and recurse with new location unless redirects are exhausted
+                # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
                 if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $header) and preg_match("~^Location:(.+)$~mi", $header, $matches)) {
                     $location = trim($matches[1]);
 

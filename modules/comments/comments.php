@@ -258,7 +258,7 @@
                                  array("post_id" => $post->id,
                                        "author_url" => $from));
             if ($count)
-                return new IXR_Error(48, __("A ping from that URL is already registered.", "comments"));
+                return new IXR_Error(48, __("A ping from your URL is already registered.", "comments"));
 
             Comment::create($excerpt,
                             $title,

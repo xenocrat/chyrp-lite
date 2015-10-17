@@ -58,21 +58,19 @@
         # Receive and register pingbacks. Calls the @pingback@ trigger.
         #
         public function pingback_ping($args) {
-            $config = Config::current();
-
-            if (!Config::current()->enable_xmlrpc)
-                throw new Exception(__("XML-RPC support is disabled for this site."));
-
+            $config      = Config::current();
             $linked_from = str_replace('&amp;', '&', $args[0]);
             $linked_to   = str_replace('&amp;', '&', $args[1]);
-
-            $cleaned_url = str_replace(array("http://www.", "http://"), "", $config->url);
+            $chyrp_url   = str_replace(array("http://www.", "http://"), "", $config->url);
 
             if ($linked_to == $linked_from)
                 return new IXR_ERROR(0, __("The from and to URLs cannot be the same."));
 
-            if (!substr_count($linked_to, $cleaned_url))
-                return new IXR_Error(0, __("There doesn't seem to be a valid link in your request."));
+            if (!is_url($linked_to) or !substr_count($linked_to, $chyrp_url))
+                return new IXR_Error(32, __("The URL for our page is not valid."));
+
+            if (!is_url($linked_from))
+                return new IXR_Error(16, __("The URL for your page is not valid."));
 
             if (preg_match("/url=([^&#]+)/", $linked_to, $url))
                 $post = new Post(array("url" => $url[1]));
@@ -82,53 +80,43 @@
                                                                  true);
 
             if (!$post)
-                return new IXR_Error(33, __("I can't find a post from that URL."));
-
-            # Wait for the "from" server to publish
-            sleep(1);
-
-            $from = parse_url($linked_from);
-
-            if (empty($from["host"]))
-                return false;
-
-            if (empty($from["scheme"]) or $from["scheme"] != "http")
-                $linked_from = "http://".$linked_from;
+                return new IXR_Error(33, __("We have not published at that URL."));
 
             # Grab the page that linked here.
-            $content = get_remote($linked_from);
+            $content = get_remote(add_scheme($linked_from));
+
+            if (empty($content))
+                return new IXR_Error(16, __("You have not published at that URL."));
 
             # Get the title of the page.
             preg_match("/<title>([^<]+)<\/title>/i", $content, $title);
             $title = $title[1];
 
             if (empty($title))
-                return new IXR_Error(32, __("There isn't a title on that page."));
+                return new IXR_Error(0, __("The page you published has no title."));
 
             $content = strip_tags($content, "<a>");
-
             $url = preg_quote($linked_to, "/");
+
+            # Search the page for our link.
             if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
                 $url = str_replace("&", "&amp;", preg_quote($linked_to, "/"));
                 if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
                     $url = str_replace("&", "&#038;", preg_quote($linked_to, "/"));
                     if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context))
-                        return false;
+                        return new IXR_Error(17, __("The page you published does not link to our page."));
                 }
             }
 
-            $context[1] = truncate($context[1], 100, "...", true);
-
+            # Build an excerpt of up to 300 characters surrounding the link.
             $excerpt = strip_tags(str_replace($context[0], $context[1], $content));
-
             $match = preg_quote($context[1], "/");
             $excerpt = preg_replace("/.*?\s(.{0,100}{$match}.{0,100})\s.*/s", "\\1", $excerpt);
-
-            $excerpt = "[...] ".trim(normalize($excerpt))." [...]";
+            $excerpt = "&hellip; ".truncate(trim(normalize($excerpt)), 300, "", true)."&hellip;";
 
             Trigger::current()->call("pingback", $post, $linked_to, $linked_from, $title, $excerpt);
 
-            return _f("Pingback from %s to %s registered!", array($linked_from, $linked_to));
+            return __("Pingback registered!");
         }
 
         #
