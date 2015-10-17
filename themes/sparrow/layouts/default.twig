@@ -72,7 +72,7 @@ ${ trigger.call("head") }
       <div role="search" class="search_box">
         <form action="$site.url" method="get" accept-charset="utf-8">
           <input type="hidden" name="action" value="search" id="action">
-          <input type="text" id="search_field" name="query" value="{% if route.action == "search" %}${ GET.query | escape }{% endif %}" placeholder="Search…" title="Search this blog">
+          <input type="text" id="search_field" name="query" value="{% if route.action == "search" %}${ GET.query | escape }{% endif %}" placeholder="Search&hellip;" title="Search this blog">
           <button type="submit" id="search_submit">${ "Search" | translate }</button>
         </form>
       </div>

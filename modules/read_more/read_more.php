@@ -31,7 +31,7 @@
             $body = truncate($text, $breakpoint, "", true, true); # Truncation will retain the closing tag of the read_more link.
 
             return str_replace("e51b2b9a58824dd068d8777ec6e97e4d",
-                               fix((!isset($string) or $string instanceof Post) ? __("…more", "read_more") : $string),
+                               fix((!isset($string) or $string instanceof Post) ? __("&hellip;more", "read_more") : $string),
                                $body);
         }
 

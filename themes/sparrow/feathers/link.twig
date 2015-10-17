@@ -5,6 +5,6 @@
         <a href="${ post.source | strip_tags | escape(true) }" class="link">$post.name</a>
       </h2>
       <section class="description{% if post.description | length > 1000 %} columnized{% endif %}">
-        ${ post.description | read_more("…more") }
+        ${ post.description | read_more("&hellip;more") }
       </section>
 {% endblock %}

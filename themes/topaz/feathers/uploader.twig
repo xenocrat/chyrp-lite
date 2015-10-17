@@ -8,7 +8,7 @@
       </h2>
       {% endif %}
       <section class="caption{% if post.caption | length > 1000 %} columnized{% endif %}">
-        ${ post.caption | read_more("…more") }
+        ${ post.caption | read_more("&hellip;more") }
       </section>
       {% for file in post.files %}
         {% if "jpg jpeg png gif tif tiff bmp" | contains(file.type) %}
@@ -18,7 +18,7 @@
         {% else %}
       <section class="attachment">
         ${ "File attachment:" | translate }
-        <a href="${ file.link | escape }">&quot;${ file.name | escape | truncate(40, "…", true) }&quot;</a>
+        <a href="${ file.link | escape }">&quot;${ file.name | escape | truncate(40, "&hellip;", true) }&quot;</a>
       </section>
         {% endif %}
       {% endfor %}
