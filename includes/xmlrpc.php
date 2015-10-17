@@ -61,12 +61,13 @@
             $config      = Config::current();
             $linked_from = str_replace('&amp;', '&', $args[0]);
             $linked_to   = str_replace('&amp;', '&', $args[1]);
-            $chyrp_url   = str_replace(array("http://www.", "http://"), "", $config->url);
+            $chyrp_host  = str_replace(array("http://www.", "http://"), "", $config->url);
+            $from_url    = add_scheme($linked_from);
 
             if ($linked_to == $linked_from)
                 return new IXR_ERROR(0, __("The from and to URLs cannot be the same."));
 
-            if (!is_url($linked_to) or !substr_count($linked_to, $chyrp_url))
+            if (!is_url($linked_to) or !substr_count($linked_to, $chyrp_host))
                 return new IXR_Error(32, __("The URL for our page is not valid."));
 
             if (!is_url($linked_from))
@@ -83,7 +84,7 @@
                 return new IXR_Error(33, __("We have not published at that URL."));
 
             # Grab the page that linked here.
-            $content = get_remote(add_scheme($linked_from));
+            $content = get_remote($from_url);
 
             if (empty($content))
                 return new IXR_Error(16, __("You have not published at that URL."));
@@ -114,7 +115,7 @@
             $excerpt = preg_replace("/.*?\s(.{0,100}{$match}.{0,100})\s.*/s", "\\1", $excerpt);
             $excerpt = "&hellip; ".truncate(trim(normalize($excerpt)), 300, "", true)."&hellip;";
 
-            Trigger::current()->call("pingback", $post, $linked_to, $linked_from, $title, $excerpt);
+            Trigger::current()->call("pingback", $post, $linked_to, $from_url, $title, $excerpt);
 
             return __("Pingback registered!");
         }
