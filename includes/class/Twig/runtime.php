@@ -129,10 +129,9 @@ function unretarded_array_unshift(&$arr, &$val) {
 }
 
 /**
- * This is called like an ordinary filter just with the name of the filter
- * as first argument.  Currently we just raise an exception here but it
- * would make sense in the future to allow dynamic filter lookup for plugins
- * or something like that.
+ * This is called like an ordinary filter but with the name of the filter
+ * as the first argument.  If we find a Trigger matching the name of the
+ * filter we call it with the args and return the result to the compiler.
  */
 function twig_missing_filter($name)
 {
