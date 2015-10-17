@@ -233,6 +233,7 @@
 
             $post = new self($id, array("drafts" => true));
 
+            # Send pingbacks.
             if (Config::current()->send_pingbacks and $pingbacks)
                 foreach ($values as $key => $value)
                     send_pingbacks($value, $post);

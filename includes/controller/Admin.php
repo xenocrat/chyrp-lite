@@ -1814,7 +1814,7 @@
                     break;
                 case "slugs":
                     $help = "<h1>".__("Post Slugs")."</h1>\n".
-                            "<p>".__("A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\").")."</p>";
+                            "<p>".__("The slug is the URL-friendly identifying name for this post. You can enter the slug yourself or have it auto-generated when the post is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
                     break;
                 case "alternate_urls":
                     $help = "<h1>".__("Alternate URL")."</h1>\n".
