@@ -3,7 +3,7 @@
 
     require_once "common.php";
 
-    # Clean the output buffer to prevent display_errors corrupting the served image
+    # Clean the output buffer to prevent display_errors corrupting the served image.
     ob_clean();
 
     if (ini_get("memory_limit") < 48)
@@ -156,7 +156,7 @@
     if ($done == "imagepng")
         imagealphablending($thumbnail, false);
 
-    # if square crop is desired, original dimensions need to be set to square ratio
+    # if square crop is desired, original dimensions need to be set to square ratio.
     if ( isset($_GET['square']) ) {
         if ($original_width > $original_height) {
             $original_width = $original_height;

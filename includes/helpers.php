@@ -1190,7 +1190,7 @@
      * Moves an uploaded file to the uploads directory.
      *
      * Parameters:
-     *     $file - The $_FILES value.
+     *     $file - The file array created by PHP.
      *     $extension - An array of valid extensions (case-insensitive).
      *     $path - A sub-folder in the uploads directory (optional).
      *     $put - Use copy() instead of move_uploaded_file()?
@@ -1299,7 +1299,7 @@
      * Triggers an error page for all other fail states.
      *
      * Parameters:
-     *     $file - The file array that is created by PHP.
+     *     $file - The file array created by PHP.
      */
     function upload_tester($file) {
         if (empty($file))
@@ -1839,7 +1839,7 @@
     function download($content, $filename) {
         ob_clean();
         header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".$filename.".zip\"");
+        header("Content-Disposition: attachment; filename=\"".$filename."\"");
         if (!in_array("ob_gzhandler", ob_list_handlers()))
             header("Content-length: ".strlen($content));
         echo $content;
