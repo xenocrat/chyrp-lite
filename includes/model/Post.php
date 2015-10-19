@@ -31,7 +31,8 @@
          *     <Model::grab>
          */
         public function __construct($post_id = null, $options = array()) {
-            if (!isset($post_id) and empty($options)) return;
+            if (!isset($post_id) and empty($options))
+                return;
 
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
@@ -39,6 +40,7 @@
                 $options["where"] = array();
 
             $has_status = false;
+
             foreach ($options["where"] as $key => $val)
                 if (is_int($key) and substr_count($val, "status") or $key == "status")
                     $has_status = true;
