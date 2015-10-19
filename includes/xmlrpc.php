@@ -58,33 +58,36 @@
         # Receive and register pingbacks. Calls the @pingback@ trigger.
         #
         public function pingback_ping($args) {
-            $config      = Config::current();
-            $linked_from = str_replace('&amp;', '&', $args[0]);
-            $linked_to   = str_replace('&amp;', '&', $args[1]);
-            $chyrp_host  = str_replace(array("http://www.", "http://"), "", $config->url);
-            $from_url    = add_scheme($linked_from);
+            $config     = Config::current();
+            $source     = str_replace('&amp;', '&', $args[0]);
+            $target     = str_replace('&amp;', '&', $args[1]);
+            $source_url = add_scheme($source);
+            $chyrp_host = str_replace(array("http://www.",
+                                            "http://",
+                                            "https://www.",
+                                            "https://"), "", $config->url);
 
-            if ($linked_to == $linked_from)
+            if ($target == $source)
                 return new IXR_ERROR(0, __("The from and to URLs cannot be the same."));
 
-            if (!is_url($linked_to) or !substr_count($linked_to, $chyrp_host))
+            if (!is_url($target) or !substr_count($target, $chyrp_host))
                 return new IXR_Error(32, __("The URL for our page is not valid."));
 
-            if (!is_url($linked_from))
+            if (!is_url($source) or substr_count($source, $chyrp_host))
                 return new IXR_Error(16, __("The URL for your page is not valid."));
 
-            if (preg_match("/url=([^&#]+)/", $linked_to, $url))
+            if (preg_match("/url=([^&#]+)/", $target, $url))
                 $post = new Post(array("url" => $url[1]));
             else
                 $post = MainController::current()->post_from_url(null,
-                                                                 str_replace(rtrim($config->url, "/"), "/", $linked_to),
+                                                                 str_replace(rtrim($config->url, "/"), "/", $target),
                                                                  true);
 
             if (!$post)
                 return new IXR_Error(33, __("We have not published at that URL."));
 
             # Grab the page that linked here.
-            $content = get_remote($from_url);
+            $content = get_remote($source_url);
 
             if (empty($content))
                 return new IXR_Error(16, __("You have not published at that URL."));
@@ -97,13 +100,13 @@
                 return new IXR_Error(0, __("The page you published has no title."));
 
             $content = strip_tags($content, "<a>");
-            $url = preg_quote($linked_to, "/");
+            $url = preg_quote($target, "/");
 
             # Search the page for our link.
             if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
-                $url = str_replace("&", "&amp;", preg_quote($linked_to, "/"));
+                $url = str_replace("&", "&amp;", preg_quote($target, "/"));
                 if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
-                    $url = str_replace("&", "&#038;", preg_quote($linked_to, "/"));
+                    $url = str_replace("&", "&#038;", preg_quote($target, "/"));
                     if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context))
                         return new IXR_Error(17, __("The page you published does not link to our page."));
                 }
@@ -111,11 +114,11 @@
 
             # Build an excerpt of up to 300 characters surrounding the link.
             $excerpt = strip_tags(str_replace($context[0], $context[1], $content));
-            $match = preg_quote($context[1], "/");
+            $match   = preg_quote($context[1], "/");
             $excerpt = preg_replace("/.*?\s(.{0,100}{$match}.{0,100})\s.*/s", "\\1", $excerpt);
             $excerpt = "&hellip; ".truncate(trim(normalize($excerpt)), 300, "", true)."&hellip;";
 
-            Trigger::current()->call("pingback", $post, $linked_to, $from_url, $title, $excerpt);
+            Trigger::current()->call("pingback", $post, $target, $source_url, $title, $excerpt);
 
             return __("Pingback registered!");
         }

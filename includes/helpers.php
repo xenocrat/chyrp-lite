@@ -684,13 +684,18 @@
     function pingback_url($url) {
         extract(parse_url($url), EXTR_SKIP);
 
+        $config = Config::current();
         $path = (!isset($path)) ? '/' : $path ;
         $port = (isset($port)) ? $port : 80 ;
+        $chyrp_host = str_replace(array("http://www.",
+                                        "http://",
+                                        "https://www.",
+                                        "https://"), "", $config->url);
 
         if (isset($query))
             $path.= '?'.$query;
 
-        if (!isset($host))
+        if (!isset($host) or substr_count($url, $chyrp_host))
             return false;
 
         $connect = @fsockopen($host, $port, $errno, $errstr, 2);
