@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-16 11:10+0000\n"
+"POT-Creation-Date: 2015-10-19 09:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -100,7 +100,7 @@ msgstr[1] ""
 
 #: themes/topaz/content/sidebar.twig:6
 #: themes/topaz/layouts/default.twig:35
-msgid "Search…"
+msgid "Search&hellip;"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:6
@@ -270,12 +270,12 @@ msgid "Email Notifications"
 msgstr ""
 
 #: themes/topaz/forms/comment/edit.twig:31
-#: themes/topaz/forms/post/edit.twig:78
+#: themes/topaz/forms/post/edit.twig:76
 msgid "Save"
 msgstr ""
 
 #: themes/topaz/forms/comment/edit.twig:32
-#: themes/topaz/forms/post/edit.twig:79
+#: themes/topaz/forms/post/edit.twig:77
 msgid "Cancel"
 msgstr ""
 
@@ -337,10 +337,6 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: themes/topaz/forms/post/edit.twig:51
-msgid "Trackbacks"
-msgstr ""
-
 #: themes/topaz/forms/user/controls.twig:7
 msgid "Full name"
 msgstr ""
@@ -396,8 +392,8 @@ msgstr ""
 msgid "(again)"
 msgstr ""
 
-#: themes/topaz/javascripts/theme.js.php:24
-#: themes/topaz/javascripts/theme.js.php:32
+#: themes/topaz/javascripts/theme.js.php:18
+#: themes/topaz/javascripts/theme.js.php:26
 msgid "Menu"
 msgstr ""
 

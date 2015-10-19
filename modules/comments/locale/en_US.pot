@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-07 20:57+0000\n"
+"POT-Creation-Date: 2015-10-19 09:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -87,13 +87,13 @@ msgid "An ID is required to update a comment."
 msgstr ""
 
 #: modules/comments/comments.php:123
-#: modules/comments/comments.php:369
+#: modules/comments/comments.php:347
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr ""
 
 #: modules/comments/comments.php:170
 #: modules/comments/comments.php:185
-#: modules/comments/comments.php:575
+#: modules/comments/comments.php:553
 msgid "An ID is required to delete a comment."
 msgstr ""
 
@@ -103,7 +103,7 @@ msgid "You do not have sufficient privileges to delete this comment."
 msgstr ""
 
 #: modules/comments/comments.php:209
-#: modules/comments/comments.php:376
+#: modules/comments/comments.php:354
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr ""
 
@@ -136,59 +136,58 @@ msgid "Registered Only"
 msgstr ""
 
 #: modules/comments/comments.php:261
-#: modules/comments/comments.php:283
-msgid "A ping from that URL is already registered."
+msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:336
-#: modules/comments/comments.php:503
+#: modules/comments/comments.php:314
+#: modules/comments/comments.php:481
 #: modules/comments/info.php:3
 #: modules/comments/pages/admin/manage_comments.twig:19
 msgid "Comments"
 msgstr ""
 
-#: modules/comments/comments.php:348
+#: modules/comments/comments.php:326
 #, php-format
 msgid "Comments (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:352
+#: modules/comments/comments.php:330
 #, php-format
 msgid "Spam (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:364
-#: modules/comments/comments.php:589
+#: modules/comments/comments.php:342
+#: modules/comments/comments.php:567
 msgid "An ID is required to edit a comment."
 msgstr ""
 
-#: modules/comments/comments.php:409
+#: modules/comments/comments.php:387
 msgid "Selected comments deleted."
 msgstr ""
 
-#: modules/comments/comments.php:430
+#: modules/comments/comments.php:408
 msgid "Selected comments denied."
 msgstr ""
 
-#: modules/comments/comments.php:445
+#: modules/comments/comments.php:423
 msgid "Selected comments approved."
 msgstr ""
 
-#: modules/comments/comments.php:459
+#: modules/comments/comments.php:437
 msgid "Selected comments marked as spam."
 msgstr ""
 
-#: modules/comments/comments.php:563
+#: modules/comments/comments.php:541
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:635
+#: modules/comments/comments.php:613
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
 #: modules/comments/info.php:6
-msgid "Adds commenting functionality to your posts, with pingback and trackback support."
+msgid "Adds commenting functionality to your posts, with pingback support."
 msgstr ""
 
 #: modules/comments/info.php:11
@@ -326,21 +325,5 @@ msgstr ""
 
 #: modules/comments/pages/admin/manage_spam.twig:20
 msgid "Spam"
-msgstr ""
-
-#: modules/comments/upgrades.php:4
-msgid "Removing signature column from comments table..."
-msgstr ""
-
-#: modules/comments/upgrades.php:8
-msgid "Adding updated_at column to comments table..."
-msgstr ""
-
-#: modules/comments/upgrades.php:23
-msgid "Adding parent_id column to comments table..."
-msgstr ""
-
-#: modules/comments/upgrades.php:29
-msgid "Adding notify column to comments table..."
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-16 11:10+0000\n"
+"POT-Creation-Date: 2015-10-19 09:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -150,12 +150,12 @@ msgid "Email Notifications"
 msgstr ""
 
 #: themes/sparrow/forms/comment/edit.twig:31
-#: themes/sparrow/forms/post/edit.twig:78
+#: themes/sparrow/forms/post/edit.twig:76
 msgid "Save"
 msgstr ""
 
 #: themes/sparrow/forms/comment/edit.twig:32
-#: themes/sparrow/forms/post/edit.twig:79
+#: themes/sparrow/forms/post/edit.twig:77
 msgid "Cancel"
 msgstr ""
 
@@ -220,10 +220,6 @@ msgstr ""
 
 #: themes/sparrow/forms/post/edit.twig:46
 msgid "Slug"
-msgstr ""
-
-#: themes/sparrow/forms/post/edit.twig:51
-msgid "Trackbacks"
 msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:5

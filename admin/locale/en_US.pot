@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-15 12:01+0000\n"
+"POT-Creation-Date: 2015-10-19 09:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -122,54 +122,46 @@ msgid "(Megabytes)"
 msgstr ""
 
 #: admin/pages/content_settings.twig:40
-msgid "Trackbacking"
-msgstr ""
-
-#: admin/pages/content_settings.twig:43
-msgid "Trackbacking allows sites to notify you when they link to or reference your posts."
-msgstr ""
-
-#: admin/pages/content_settings.twig:47
 msgid "Send Pingbacks"
 msgstr ""
 
-#: admin/pages/content_settings.twig:50
+#: admin/pages/content_settings.twig:43
 msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
-#: admin/pages/content_settings.twig:54
+#: admin/pages/content_settings.twig:47
 msgid "XML-RPC Support"
 msgstr ""
 
-#: admin/pages/content_settings.twig:57
-msgid "XML-RPC support allows you to create and edit content via remote access to your site."
+#: admin/pages/content_settings.twig:50
+msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr ""
 
-#: admin/pages/content_settings.twig:61
+#: admin/pages/content_settings.twig:54
 msgid "Ajax"
 msgstr ""
 
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:57
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
-#: admin/pages/content_settings.twig:68
+#: admin/pages/content_settings.twig:61
 msgid "Unicode Emoticons"
 msgstr ""
 
-#: admin/pages/content_settings.twig:71
+#: admin/pages/content_settings.twig:64
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:75
+#: admin/pages/content_settings.twig:68
 msgid "Markdown"
 msgstr ""
 
-#: admin/pages/content_settings.twig:78
+#: admin/pages/content_settings.twig:71
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:83
+#: admin/pages/content_settings.twig:76
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:67
@@ -934,14 +926,14 @@ msgid "Is this page public?"
 msgstr ""
 
 #: admin/partials/page_fields.twig:65
-#: admin/partials/post_fields.twig:137
-#: admin/partials/post_fields.twig:146
+#: admin/partials/post_fields.twig:129
+#: admin/partials/post_fields.twig:138
 msgid "Publish"
 msgstr ""
 
 #: admin/partials/page_fields.twig:69
-#: admin/partials/post_fields.twig:141
-#: admin/partials/post_fields.twig:150
+#: admin/partials/post_fields.twig:133
+#: admin/partials/post_fields.twig:142
 msgid "Save"
 msgstr ""
 
@@ -983,9 +975,5 @@ msgstr ""
 
 #: admin/partials/post_fields.twig:90
 msgid "Timestamp"
-msgstr ""
-
-#: admin/partials/post_fields.twig:96
-msgid "Trackbacks"
 msgstr ""
 

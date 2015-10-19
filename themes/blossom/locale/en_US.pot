@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-16 11:09+0000\n"
+"POT-Creation-Date: 2015-10-19 09:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -100,7 +100,7 @@ msgstr[1] ""
 
 #: themes/blossom/content/sidebar.twig:6
 #: themes/blossom/layouts/default.twig:35
-msgid "Search…"
+msgid "Search&hellip;"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:6
@@ -259,12 +259,12 @@ msgid "Email Notifications"
 msgstr ""
 
 #: themes/blossom/forms/comment/edit.twig:31
-#: themes/blossom/forms/post/edit.twig:78
+#: themes/blossom/forms/post/edit.twig:76
 msgid "Save"
 msgstr ""
 
 #: themes/blossom/forms/comment/edit.twig:32
-#: themes/blossom/forms/post/edit.twig:79
+#: themes/blossom/forms/post/edit.twig:77
 msgid "Cancel"
 msgstr ""
 
@@ -326,10 +326,6 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: themes/blossom/forms/post/edit.twig:51
-msgid "Trackbacks"
-msgstr ""
-
 #: themes/blossom/forms/user/controls.twig:7
 msgid "Full name"
 msgstr ""
@@ -385,8 +381,8 @@ msgstr ""
 msgid "(again)"
 msgstr ""
 
-#: themes/blossom/javascripts/theme.js.php:24
-#: themes/blossom/javascripts/theme.js.php:32
+#: themes/blossom/javascripts/theme.js.php:18
+#: themes/blossom/javascripts/theme.js.php:26
 msgid "Menu"
 msgstr ""
 

@@ -217,7 +217,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 364
+	includes/common.php on line 359
 
 
 import_chyrp_group
@@ -239,7 +239,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1190
+	includes/controller/Admin.php on line 1189
 Arguments:
 	$entry, $post
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1213
+	includes/controller/Admin.php on line 1212
 Arguments:
 	$entry, $page
 
@@ -321,7 +321,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 256
+	includes/model/Post.php on line 245
 Arguments:
 	$post, $options
 
@@ -329,7 +329,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 345
+	includes/model/Post.php on line 334
 Arguments:
 	$this, $old, $options
 
@@ -350,20 +350,12 @@ Arguments:
 	$this, $old
 
 
-trackback_receive
------------------
-Called from:
-	includes/trackback.php on line 26
-Arguments:
-	$url, $title, $excerpt, $blog_name
-
-
 pingback
 --------
 Called from:
-	includes/xmlrpc.php on line 126
+	includes/xmlrpc.php on line 121
 Arguments:
-	$post, $linked_to, $linked_from, $title, $excerpt
+	$post, $target, $source_url, $title, $excerpt
 
 
 
@@ -448,7 +440,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 361
+	includes/common.php on line 356
 
 
 admin_determine_action
@@ -512,7 +504,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1907
+	includes/controller/Admin.php on line 1901
 
 
 settings_nav
@@ -520,7 +512,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1936
+	includes/controller/Admin.php on line 1930
 
 
 extend_nav
@@ -528,7 +520,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1946
+	includes/controller/Admin.php on line 1940
 
 
 admin_subnav
@@ -536,7 +528,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1957
+	includes/controller/Admin.php on line 1951
 
 
 nav_selected
@@ -544,7 +536,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2065
+	includes/controller/Admin.php on line 2059
 
 
 url_code
@@ -571,7 +563,7 @@ link_regexp
 Target:
 	$regexp
 Called from:
-	includes/helpers.php on line 886
+	includes/helpers.php on line 834
 
 
 keyword_search
@@ -579,7 +571,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1605
+	includes/helpers.php on line 1553
 Arguments:
 	$query, $plain
 
@@ -589,7 +581,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1741
+	includes/helpers.php on line 1689
 
 
 group
@@ -669,7 +661,7 @@ post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 93
+	includes/model/Post.php on line 95
 
 
 before_add_post
@@ -677,7 +669,7 @@ before_add_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 218
+	includes/model/Post.php on line 217
 
 
 before_update_post
@@ -685,7 +677,7 @@ before_update_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 325
+	includes/model/Post.php on line 314
 
 
 url_vals
@@ -693,7 +685,7 @@ url_vals
 Target:
 	$vals
 Called from:
-	includes/model/Post.php on line 509
+	includes/model/Post.php on line 498
 Arguments:
 	$this
 
@@ -703,7 +695,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 529
+	includes/model/Post.php on line 518
 
 
 title
@@ -711,7 +703,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 554
+	includes/model/Post.php on line 543
 Arguments:
 	$post
 
@@ -721,7 +713,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 571
+	includes/model/Post.php on line 560
 Arguments:
 	$post
 
@@ -731,7 +723,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 588
+	includes/model/Post.php on line 577
 Arguments:
 	$post
 
@@ -741,7 +733,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 645
+	includes/model/Post.php on line 634
 
 
 post_url_token
@@ -749,7 +741,7 @@ post_url_token
 Target:
 	$tokens
 Called from:
-	includes/model/Post.php on line 701
+	includes/model/Post.php on line 679
 
 
 user
