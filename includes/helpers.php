@@ -1937,7 +1937,6 @@
                                      $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
                                      "&token=".token(array($params["login"], $params["to"]));
                 break;
-
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", fix($params["login"])).
@@ -1949,14 +1948,12 @@
                                      $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
                                      "&token=".token(array($params["login"], $params["to"]));
                 break;
-
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
                 $params["message"] = _f("Hello, %s.", fix($params["login"])).
                                      "\n\n".
                                      _f("Your new password is: %s", $params["password"]);
                 break;
-            
             default:
                 if ($trigger->exists("correspond_".$action))
                     $trigger->filter($params, "correspond_".$action);
