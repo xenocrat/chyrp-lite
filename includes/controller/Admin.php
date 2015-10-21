@@ -1706,17 +1706,18 @@
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
                 error(__("Error"), __("Invalid feed URL."));
 
-            if (strpos($_POST['uploads_path'], DIR) !== 0)
-                $_POST['uploads_path'] = DIR.$_POST['uploads_path'];
+            $separator = preg_quote(DIR, "~");
+            preg_match("~^(".$separator.")?(.*?)(".$separator.")?$~", $_POST['uploads_path'], $matches);
 
-            if (substr($_POST['uploads_path'], -1) != DIR)
-                $_POST['uploads_path'] = $_POST['uploads_path'].DIR;
+            fallback($matches[1], DIR);
+            fallback($matches[2], "uploads");
+            fallback($matches[3], DIR);
 
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
                          $config->set("feed_items", (int) $_POST['feed_items']),
                          $config->set("feed_url", $_POST['feed_url']),
-                         $config->set("uploads_path", $_POST['uploads_path']),
+                         $config->set("uploads_path", $matches[1].$matches[2].$matches[3]),
                          $config->set("uploads_limit", (int) $_POST['uploads_limit']),
                          $config->set("send_pingbacks", !empty($_POST['send_pingbacks'])),
                          $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc'])),
