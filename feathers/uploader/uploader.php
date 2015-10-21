@@ -143,13 +143,13 @@
             $config = Config::current();
 
             # Source set for responsive images
-            $srcset = array($config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
-                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width=960&amp;'.$more_args.' 960w',
-                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
-                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
+            $srcset = array($config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
+                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width=960&amp;'.$more_args.' 960w',
+                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
+                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
 
             $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.'"';
-            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename);
+            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename);
             $tag.= '&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'"';
             $tag.= ' alt="'.$filename.'" class="image">';
 

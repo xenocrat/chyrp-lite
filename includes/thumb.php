@@ -1,4 +1,9 @@
 <?php
+    /**
+     * File: Thumb
+     * Generates compressed image thumbnails for uploaded files.
+     */
+
     define('USE_ZLIB', false);
 
     require_once "common.php";
@@ -9,18 +14,25 @@
     if (ini_get("memory_limit") < 48)
         ini_set("memory_limit", "48M");
 
-    if (!function_exists("gd_info"))
-        exit(header("Location: ".rtrim(fallback($_GET['file'])))); # GD not installed; image cannot be resized.
-
-    $gd_info = gd_info();
-    $gd_version = (substr_count(strtolower($gd_info["GD Version"]), "2.")) ? 2 : 1 ;
-
+    $config = Config::current();
     $quality = fallback($_GET["quality"], 80);
     $filename = rtrim(fallback($_GET['file']));
+    $filepath = MAIN_DIR.$config->uploads_path.$filename;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
+    $url = $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).$filename;
 
-    if (!file_exists($filename))
+    if (!function_exists("gd_info"))
+        exit(header("Location: ".$url)); # GD not installed; redirect to the original.
+
+    $gd_info = gd_info();
+    preg_match("/\d+/", $gd_info["GD Version"], $match);
+    $gd_version = (int) $match[0];
+
+    if (!file_exists($filepath))
         display_error("Image Not Found");
+
+    if (substr_count($filename, DIR) > 0)
+        display_error("Invalid file name"); # Directory separator not allowed in name.
 
     function display_error($string) {
         $thumbnail = imagecreatetruecolor(oneof(@$_GET['max_width'], 100), 18);
@@ -31,7 +43,7 @@
         exit;
     }
 
-    list($original_width, $original_height, $type, $attr) = getimagesize($filename);
+    list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
 
     $new_width = (int) fallback($_GET["max_width"], 0);
     $new_height = (int) fallback($_GET["max_height"], 0);
@@ -93,7 +105,7 @@
 
     # If it's already below the maximum, just redirect to it.
     if ($original_width <= $new_width and $original_height <= $new_height)
-        exit(header("Location: ".$filename));
+        exit(header("Location: ".$url));
 
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
     $cache_file = INCLUDES_DIR.DIR."caches".DIR."thumb_".$cache_filename;
@@ -102,7 +114,7 @@
         unlink($cache_file);
 
     # Serve a cache if it exists and the original image has not changed.
-    if (file_exists($cache_file) and filemtime($cache_file) > filemtime($filename)) {
+    if (file_exists($cache_file) and filemtime($cache_file) > filemtime($filepath)) {
         header("Last-Modified: ".gmdate('D, d M Y H:i:s', filemtime($cache_file)).' GMT');
         header("Content-type: image/".($extension == "jpg" ? "jpeg" : $extension));
         header("Cache-Control: public");
@@ -115,40 +127,39 @@
     # Verify that the image is able to be thumbnailed, and prepare variables used later in the script.
     switch ($type) {
         case IMAGETYPE_GIF:
-            $image = imagecreatefromgif($filename);
+            $image = imagecreatefromgif($filepath);
             $done = (function_exists("imagegif")) ? "imagegif" : "imagejpeg" ;
             $mime = (function_exists("imagegif")) ? "image/gif" : "image/jpeg" ;
             break;
 
         case IMAGETYPE_JPEG:
-            $image = imagecreatefromjpeg($filename);
+            $image = imagecreatefromjpeg($filepath);
             $done = "imagejpeg";
             $mime = "image/jpeg";
             break;
 
         case IMAGETYPE_PNG:
-            $image = imagecreatefrompng($filename);
+            $image = imagecreatefrompng($filepath);
             $done = "imagepng";
             $mime = "image/png";
             break;
 
         case IMAGETYPE_BMP:
-            $image = imagecreatefromwbmp($filename);
+            $image = imagecreatefromwbmp($filepath);
             $done = "imagewbmp";
             $mime = "image/bmp";
             break;
 
         default:
-            display_error("Unsupported image type.");
-            break;
+            exit(header("Location: ".$url)); # Unsupported type, redirect to the original.
     }
 
     if (!$image)
         display_error("Image could not be created.");
 
     # Decide what functions to use.
-    $create = ($gd_version == 2) ? "imagecreatetruecolor" : "imagecreate" ;
-    $copy = ($gd_version == 2 and $original_width < 4096) ? "imagecopyresampled" : "imagecopyresized" ;
+    $create = ($gd_version >= 2) ? "imagecreatetruecolor" : "imagecreate" ;
+    $copy = ($gd_version >= 2 and $original_width < 4096) ? "imagecopyresampled" : "imagecopyresized" ;
 
     # Create the final resized image.
     $thumbnail = $create($new_width, $new_height);
@@ -167,7 +178,7 @@
 
     $copy($thumbnail, $image, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
 
-    header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filename))." GMT");
+    header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
     header("Content-type: ".$mime);
     header("Content-Disposition: inline; filename=".$filename.".".$extension);
 
