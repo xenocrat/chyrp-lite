@@ -22,21 +22,24 @@
     $url = $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).$filename;
 
     if (!function_exists("gd_info"))
-        exit(header("Location: ".$url)); # GD not installed; redirect to the original.
+        exit(header("Location: ".$url)); # GD not installed.
 
     $gd_info = gd_info();
     preg_match("/\d+/", $gd_info["GD Version"], $match);
     $gd_version = (int) $match[0];
 
-    if (!file_exists($filepath))
-        display_error("Image Not Found");
+    if ($gd_version < 2)
+        exit(header("Location: ".$url)); # GD version too low.
 
-    if (substr_count($filename, DIR) > 0)
-        display_error("Invalid file name"); # Directory separator not allowed in name.
+    if (substr_count($filename, DIR))
+        display_error(_f("Image name %s contains illegal characters.", $filename));
+
+    if (!file_exists($filepath))
+        display_error(_f("Image file %s was not found.", $filename));
 
     function display_error($string) {
-        $thumbnail = imagecreatetruecolor(oneof(@$_GET['max_width'], 100), 18);
-        imagestring($thumbnail, 1, 5, 5, $string, imagecolorallocate($thumbnail, 255, 255, 255));
+        $thumbnail = imagecreatetruecolor(oneof(@$_GET['max_width'], 100), 16);
+        imagestring($thumbnail, 1, 4, 4, $string, imagecolorallocate($thumbnail, 255, 255, 255));
         header("Content-type: image/png");
         header("Content-Disposition: inline; filename=error.png");
         imagepng($thumbnail);
@@ -131,38 +134,37 @@
             $done = (function_exists("imagegif")) ? "imagegif" : "imagejpeg" ;
             $mime = (function_exists("imagegif")) ? "image/gif" : "image/jpeg" ;
             break;
-
         case IMAGETYPE_JPEG:
             $image = imagecreatefromjpeg($filepath);
             $done = "imagejpeg";
             $mime = "image/jpeg";
             break;
-
         case IMAGETYPE_PNG:
             $image = imagecreatefrompng($filepath);
             $done = "imagepng";
             $mime = "image/png";
             break;
-
         case IMAGETYPE_BMP:
             $image = imagecreatefromwbmp($filepath);
             $done = "imagewbmp";
             $mime = "image/bmp";
             break;
-
         default:
-            exit(header("Location: ".$url)); # Unsupported type, redirect to the original.
+            if (DEBUG)
+                error_log("WARNING: Unsupported image type (".$type.")");
+
+            exit(header("Location: ".$url));
     }
 
-    if (!$image)
-        display_error("Image could not be created.");
+    if (!$image) {
+        if (DEBUG)
+            error_log("ERROR: Failed to generate image from file (".$filename.")");
 
-    # Decide what functions to use.
-    $create = ($gd_version >= 2) ? "imagecreatetruecolor" : "imagecreate" ;
-    $copy = ($gd_version >= 2 and $original_width < 4096) ? "imagecopyresampled" : "imagecopyresized" ;
+        exit(header("Location: ".$url));
+    }
 
     # Create the final resized image.
-    $thumbnail = $create($new_width, $new_height);
+    $thumbnail = imagecreatetruecolor($new_width, $new_height);
 
     if ($done == "imagepng")
         imagealphablending($thumbnail, false);
@@ -176,7 +178,7 @@
         }
     }
 
-    $copy($thumbnail, $image, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
+    imagecopyresampled($thumbnail, $image, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
 
     header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
     header("Content-type: ".$mime);
