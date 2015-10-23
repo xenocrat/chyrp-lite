@@ -16,7 +16,7 @@
             <h4 class="yearly">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
             {% endif %}
             {% if post.feather == "photo" %}
-            ${ feathers['photo'].image_tag(post, 156, null, "quality=60", "20vw") }
+            ${ feathers['photo'].image_tag(post, 156, null, "quality=60&amp;square=1", "20vw") }
             {% else %}
             <p>${ post.excerpt | read_more("&hellip;more") | strip_tags }</p>
             {% endif %}

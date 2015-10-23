@@ -37,7 +37,7 @@
         display_error(_f("Image file %s was not found.", $filename));
 
     function display_error($string) {
-        $thumbnail = imagecreatetruecolor(oneof(@$_GET['max_width'], 100), 16);
+        $thumbnail = imagecreatetruecolor(oneof(@$_GET['max_width'], 128), 16);
         imagestring($thumbnail, 1, 4, 4, $string, imagecolorallocate($thumbnail, 255, 255, 255));
         header("Content-type: image/png");
         header("Content-Disposition: inline; filename=error.png");
