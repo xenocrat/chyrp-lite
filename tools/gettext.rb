@@ -76,7 +76,9 @@ class Gettext
         end
       else
         next unless path =~ /\.(php|twig)/
-        @files << [cleaned, path] if File.read(path) =~ /(__|_f|_p)\((#{STRING})#{@domain}\)/
+        @files << [cleaned, path] if File.read(path) =~ /__\((#{STRING})#{@domain}\)/
+        @files << [cleaned, path] if File.read(path) =~ /_f\((#{STRING}), .*?#{@domain}\)/
+        @files << [cleaned, path] if File.read(path) =~ /_p\((#{STRING}), (#{STRING}), .*?#{@domain}\)/
         @files << [cleaned, path] if File.read(path) =~ /Group::add_permission\(([^,]+), (#{STRING})\)/
         @files << [cleaned, path] if File.read(path) =~ /(#{STRING})\s*\|\s*translate#{@twig_domain}/
         @files << [cleaned, path] if File.read(path) =~ /(#{STRING})\s*\|\s*translate_plural\((#{STRING}),\s*.*?#{@domain}\)\s*\|\s*format\(.*?\)/
