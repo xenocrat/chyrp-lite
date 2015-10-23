@@ -25,14 +25,13 @@
         exit(header("Location: ".$url)); # GD not installed.
 
     $gd_info = gd_info();
-    preg_match("/\d+/", $gd_info["GD Version"], $match);
-    $gd_version = (int) $match[0];
+    preg_match("/\d[\d\.]*/", $gd_info["GD Version"], $gd_version);
 
-    if ($gd_version < 2)
+    if (version_compare($gd_version[0], "2.0.28", "<"))
         exit(header("Location: ".$url)); # GD version too low.
 
     if (substr_count($filename, DIR))
-        display_error(_f("Image name %s contains illegal characters.", $filename));
+        display_error(_f("Image name %s is not allowed.", $filename));
 
     if (!file_exists($filepath))
         display_error(_f("Image file %s was not found.", $filename));
@@ -131,8 +130,8 @@
     switch ($type) {
         case IMAGETYPE_GIF:
             $image = imagecreatefromgif($filepath);
-            $done = (function_exists("imagegif")) ? "imagegif" : "imagejpeg" ;
-            $mime = (function_exists("imagegif")) ? "image/gif" : "image/jpeg" ;
+            $done = "imagegif";
+            $mime = "image/gif";
             break;
         case IMAGETYPE_JPEG:
             $image = imagecreatefromjpeg($filepath);
@@ -150,15 +149,12 @@
             $mime = "image/bmp";
             break;
         default:
-            if (DEBUG)
-                error_log("WARNING: Unsupported image type (".$type.")");
-
             exit(header("Location: ".$url));
     }
 
     if (!$image) {
         if (DEBUG)
-            error_log("ERROR: Failed to generate image from file (".$filename.")");
+            error_log("ERROR: Failed to generate thumbnail. (".$filename.")");
 
         exit(header("Location: ".$url));
     }
