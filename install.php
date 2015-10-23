@@ -89,7 +89,7 @@
 
     if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR.DIR.".htaccess")) or
         (file_exists(MAIN_DIR.DIR.".htaccess") and !is_writable(MAIN_DIR.DIR.".htaccess") and !$htaccess_has_chyrp))
-        $errors[] = _f("Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
+        $errors[] = _f("Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it: <pre>%s</pre>", array(fix($htaccess)));
 
     if (!is_writable(INCLUDES_DIR))
         $errors[] = __("Chyrp's includes directory is not writable by the server. In order for the installer to generate your configuration files, please CHMOD or CHOWN it so that Chyrp can write to it.");
@@ -106,7 +106,7 @@
                                       "adapter"  => $_POST['adapter']));
 
             if (!$sql->connect(true))
-                $errors[] = _f("Could not connect to the specified database:\n<pre>%s</pre>", array($sql->error));
+                $errors[] = _f("Could not connect to the specified database: <pre>%s</pre>", array($sql->error));
             elseif ($_POST['adapter'] == "pgsql") {
                 new Query($sql, "CREATE FUNCTION year(timestamp) RETURNS double precision AS 'select extract(year from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
                 new Query($sql, "CREATE FUNCTION month(timestamp) RETURNS double precision AS 'select extract(month from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
@@ -143,9 +143,9 @@
             if (!$htaccess_has_chyrp)
                 if (!file_exists(MAIN_DIR.DIR.".htaccess")) {
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
-                        $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
+                        $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it: <pre>%s</pre>", array(fix($htaccess)));
                 } elseif (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND)) {
-                    $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
+                    $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it: <pre>%s</pre>", array(fix($htaccess)));
                 }
 
             $config->set("sql", array());

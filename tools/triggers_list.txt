@@ -504,7 +504,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1901
+	includes/controller/Admin.php on line 1902
 
 
 settings_nav
@@ -512,7 +512,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1930
+	includes/controller/Admin.php on line 1931
 
 
 extend_nav
@@ -520,7 +520,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1940
+	includes/controller/Admin.php on line 1941
 
 
 admin_subnav
@@ -528,7 +528,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1951
+	includes/controller/Admin.php on line 1952
 
 
 nav_selected
@@ -536,7 +536,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2059
+	includes/controller/Admin.php on line 2060
 
 
 url_code

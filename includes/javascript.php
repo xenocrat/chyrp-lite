@@ -181,7 +181,7 @@
                     if (!Post.failed) {
                         e.preventDefault();
 
-                        if (confirm("<?php echo __("Are you sure you want to delete this post?\\n\\nIt cannot be restored if you do this. If you wish to hide it, save it as a draft."); ?>")) {
+                        if (confirm("<?php echo __("Are you sure you want to delete this post? If you wish to hide it, save it as a draft."); ?>")) {
                             var id = $(this).attr("id").replace(/post_delete_/, "");
                             Post.destroy(id);
                         }
