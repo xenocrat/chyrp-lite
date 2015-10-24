@@ -51,11 +51,11 @@
                 },
             },
             init: function() {
-                $.extend( ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background] );
+                $.extend(ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background]);
                 $("section img").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
-                if ( ChyrpLightbox.protect )
+                if (ChyrpLightbox.protect)
                     $("section img").not(".suppress_lightbox").on({
-                        contextmenu: function() { return false; }
+                        contextmenu: function(e) { e.preventDefault(); }
                     });
                 $(window).on({
                     resize: ChyrpLightbox.hide,
@@ -65,17 +65,17 @@
                 ChyrpLightbox.watch();
             },
             watch: function() {
-                // Watch for DOM additions on blog pages
-                if ( !!window.MutationObserver && $(".post").length ) {
+                // Watch for DOM additions on blog pages.
+                if (!!window.MutationObserver && $(".post").length) {
                     var target = $(".post").last().parent()[0];
                     var observer = new MutationObserver(function(mutations) {
                         mutations.forEach(function(mutation) {
                             for (var i = 0; i < mutation.addedNodes.length; ++i) {
                                 var item = mutation.addedNodes[i];
                                 $(item).find("section img").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
-                                if ( ChyrpLightbox.protect )
+                                if (ChyrpLightbox.protect)
                                     $(item).find("section img").not(".suppress_lightbox").on({
-                                        contextmenu: function() { return false; }
+                                        contextmenu: function(e) { e.preventDefault(); }
                                     });
                             }
                         });
@@ -85,7 +85,7 @@
                 }
             },
             load: function() {
-                if ( ChyrpLightbox.active == false ) {
+                if (ChyrpLightbox.active == false) {
                     var src = $(this).attr("src");
                     var alt = $(this).attr("alt");
                     var ref = $(this).parent("a.image_link").attr("href");
@@ -115,17 +115,17 @@
             show: function() {
                 var fg = $("#ChyrpLightbox-fg"), fgWidth = fg.outerWidth(), fgHeight = fg.outerHeight();
                 var bg = $("#ChyrpLightbox-bg"), bgWidth = bg.outerWidth(), bgHeight = bg.outerHeight();
-                if ( ChyrpLightbox.protect )
+                if (ChyrpLightbox.protect)
                     $(fg).on({
                         contextmenu: function() { return false; }
                     });
-                while ( ( ( bgWidth - ( ChyrpLightbox.spacing * 2 ) ) < fgWidth ) || ( ( bgHeight - ( ChyrpLightbox.spacing * 2 ) ) < fgHeight ) ) {
+                while (((bgWidth - (ChyrpLightbox.spacing * 2)) < fgWidth) || ((bgHeight - (ChyrpLightbox.spacing * 2)) < fgHeight)) {
                     Math.round(fgWidth = fgWidth * 0.99);
                     Math.round(fgHeight = fgHeight * 0.99);
                 }
                 fg.css({
-                    "top": Math.round( ( bgHeight - fgHeight ) / 2 ) + "px",
-                    "left": Math.round( ( bgWidth - fgWidth ) / 2 ) + "px",
+                    "top": Math.round((bgHeight - fgHeight) / 2) + "px",
+                    "left": Math.round((bgWidth - fgWidth) / 2) + "px",
                     "width": fgWidth + "px",
                     "height": fgHeight + "px",
                     "visibility": "visible",

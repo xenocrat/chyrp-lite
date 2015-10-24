@@ -14,16 +14,16 @@
                 }
             },
             watch: function() {
-                // Watch for DOM additions on blog pages
-                if ( !!window.MutationObserver && $(".post").length ) {
+                // Watch for DOM additions on blog pages.
+                if (!!window.MutationObserver && $(".post").length) {
                     var target = $(".post").last().parent()[0];
                     var observer = new MutationObserver(function(mutations) {
                         mutations.forEach(function(mutation) {
                             for (var i = 0; i < mutation.addedNodes.length; ++i) {
                                 var item = mutation.addedNodes[i];
-                                $(item).find("div.likes a.likes").click(function() {
+                                $(item).find("div.likes a.likes").click(function(e) {
+                                    e.preventDefault();
                                     ChyrpLikes.toggle($(this).attr("data-post_id"));
-                                    return false;
                                 });
                             }
                         });

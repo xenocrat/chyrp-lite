@@ -27,7 +27,7 @@
             if (Route.action == "edit_user")
                 Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
 
-            // Open help text in an overlay
+            // Open help text in an overlay.
             Help.init();
 
             // Interactive behaviour.
@@ -50,7 +50,7 @@
         }
         var Site = {
             url: "<?php echo $config->chyrp_url; ?>",
-            key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
+            key: "<?php if (logged_in() and preg_match("~^".preg_quote($config->url, "~").".*~", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
             ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true"); else echo("false"); ?>
         }
         function toggle_all() {
@@ -74,7 +74,7 @@
                 });
             });
 
-            // Some checkboxes are already checked when the page is loaded
+            // Some checkboxes are already checked when the page is loaded.
             $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function() {
                 if (!all_checked)
                     return;
@@ -144,11 +144,11 @@
         }
         function toggle_correspondence() {
             $("#email_correspondence").click(function() {
-                if ($(this).prop("checked") == false )
+                if ($(this).prop("checked") == false)
                     $("#email_activation").prop("checked", false);
             });
             $("#email_activation").click(function() {
-                if ($(this).prop("checked") == true )
+                if ($(this).prop("checked") == true)
                     $("#email_correspondence").prop("checked", true);
             });
         }
@@ -207,7 +207,7 @@
                             $(this).text("<?php echo __("Oops! Something went wrong on this web page."); ?>");
 
                         $(this).find("a").each(function() {
-                            $(this).attr("target","_blank"); // Force links to spawn a new viewport
+                            $(this).attr("target","_blank"); // Force links to spawn a new viewport.
                         })
                     }),
                     $("<img>", {
@@ -229,7 +229,7 @@
                 if (/(write)_/.test(Route.action))
                     Write.sort_feathers();
 
-                // Insert buttons for ajax previews
+                // Insert buttons for ajax previews.
                 $("*[data-preview]").each(function() {
                     $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
                         $("<img>", {
@@ -248,7 +248,7 @@
                 });
             },
             sort_feathers: function() {
-                // Make the selected tab the first tab
+                // Make the selected tab the first tab.
                 $("#sub_nav").children(".selected").detach().prependTo("#sub_nav");
 
                 var feathers = new Array();
@@ -256,7 +256,7 @@
                     feathers[feathers.length] = $(this).attr("id");
                 });
 
-                // Update feather order with current tab order
+                // Update feather order with current tab order.
                 $.post(Site.url + "/includes/ajax.php", {
                     action: "reorder_feathers",
                     list: feathers
@@ -278,7 +278,7 @@
                             $(this).text("<?php echo __("Oops! Something went wrong on this web page."); ?>");
 
                         $(this).find("a").each(function() {
-                            $(this).attr("target","_blank"); // Force links to spawn a new viewport
+                            $(this).attr("target","_blank"); // Force links to spawn a new viewport.
                         })
                     }),
                     $("<img>", {
@@ -321,12 +321,12 @@
                 $(".modules li.error").removeClass("error");
             },
             check_errors: function() {
-                Extend.reset_errors(); // Reset all values
+                Extend.reset_errors(); // Reset all values.
 
                 $(".modules li.conflicts").each(function() {
                     var classes = $(this).attr("class").split(" ");
 
-                    classes.shift(); // Remove the module's safename class
+                    classes.shift(); // Remove the module's safename class.
 
                     classes.remove(["conflicts",
                                     "dependencies",
@@ -337,7 +337,7 @@
 
                     for (i = 0; i < classes.length; i++) {
                         var conflict = classes[i].replace("conflict_", "module_");
-                        if ($("#"+conflict).parent().attr("id") == "modules_enabled" ) {
+                        if ($("#"+conflict).parent().attr("id") == "modules_enabled") {
                             $(this).addClass("error");
                         }
                     }
@@ -346,7 +346,7 @@
                 $(".modules li.dependencies").each(function() {
                     var classes = $(this).attr("class").split(" ");
 
-                    classes.shift(); // Remove the module's safename class
+                    classes.shift(); // Remove the module's safename class.
 
                     if (classes.indexOf("missing_dependency") >= 0) {
                         $(this).addClass("error");
@@ -362,7 +362,7 @@
 
                     for (i = 0; i < classes.length; i++) {
                         var dependency = classes[i].replace("needs_", "module_");
-                        if ($("#"+dependency).parent().attr("id") == "modules_disabled" ) {
+                        if ($("#"+dependency).parent().attr("id") == "modules_disabled") {
                             $(this).addClass("error");
                         }
                     }
@@ -375,7 +375,7 @@
                 Extend.confirmed = null;
             },
             ajax_toggle: function(e) {
-                Extend.ajax_reset(); // Reset all values
+                Extend.ajax_reset(); // Reset all values.
 
                 if ($(e.target).parents("#modules_enabled").length || $(e.target).parents("#feathers_enabled").length)
                     Extend.action = "disable";

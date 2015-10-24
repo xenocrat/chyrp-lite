@@ -28,7 +28,7 @@
         }
         var Site = {
             url: "<?php echo $config->chyrp_url; ?>",
-            key: "<?php if (logged_in() and preg_match("/^".preg_quote($config->url, "/").".*/", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
+            key: "<?php if (logged_in() and preg_match("~^".preg_quote($config->url, "~").".*~", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
             ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true"); else echo("false"); ?>
         }
         var Passwords = {
@@ -58,12 +58,16 @@
                     id: id,
                     hash: Site.key
                 }, function(data) {
+                    if (isError(data)) {
+                        Post.panic();
+                        return;
+                    }
+
                     $("#post_" + id).fadeOut("fast", function() {
                         $(this).loader(true);
                         $(this).replaceWith(data);
                         $(window).scrollTop($("#post_edit_form_" + id).offset().top);
                         $("#post_edit_form_" + id).css("opacity", 0).animate({ opacity: 1 }, function() {
-<?php $trigger->call("ajax_post_edit_form_javascript"); ?>
                             $("#more_options_link_" + id).click(function(e) {
                                 e.preventDefault();
 
