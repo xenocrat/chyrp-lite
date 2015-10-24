@@ -3,7 +3,6 @@
     require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
     error_reporting(0);
     header("Content-Type: application/javascript");
-    $route = Route::current(MainController::current());
 ?>
 <!-- --><script>
         <?php echo "/* Balance out the line numbers in this script and in the output to help debugging.\n\n\n\n\n        */\n"; ?>
