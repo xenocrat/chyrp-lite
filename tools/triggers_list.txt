@@ -5,7 +5,7 @@
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 441
+	admin/admin.js.php on line 440
 
 
 can_not_view_site
@@ -167,6 +167,22 @@ Arguments:
 	feather
 
 
+audio_player
+------------
+Called from:
+	feathers/audio/audio.php on line 116
+Arguments:
+	$filename, $params, $post
+
+
+video_player
+------------
+Called from:
+	feathers/video/video.php on line 114
+Arguments:
+	$filename, $params, $post
+
+
 not_found
 ---------
 Called from:
@@ -274,16 +290,10 @@ Arguments:
 	$post
 
 
-ajax_post_edit_form_javascript
-------------------------------
-Called from:
-	includes/javascript.php on line 66
-
-
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 197
+	includes/javascript.php on line 201
 
 
 add_group
@@ -356,6 +366,127 @@ Called from:
 	includes/xmlrpc.php on line 121
 Arguments:
 	$post, $target, $source_url, $title, $excerpt
+
+
+manage_comments_column_header
+-----------------------------
+Called from:
+	modules/categorize/pages/admin/manage_category.twig on line 12
+	modules/comments/pages/admin/manage_comments.twig on line 29
+	modules/comments/pages/admin/manage_spam.twig on line 29
+
+
+show_comment
+------------
+Called from:
+	modules/comments/comments.php on line 544
+Arguments:
+	$comment
+
+
+add_comment
+-----------
+Called from:
+	modules/comments/model.Comment.php on line 201
+Arguments:
+	$new
+
+
+update_comment
+--------------
+Called from:
+	modules/comments/model.Comment.php on line 219
+Arguments:
+	$this, $body, $author, $url, $email, $status, $notify, $timestamp, $update_timestamp
+
+
+delete_comment
+--------------
+Called from:
+	modules/comments/model.Comment.php on line 225
+Arguments:
+	new self($comment_id)
+
+
+edit_comment_options
+--------------------
+Called from:
+	modules/comments/pages/admin/edit_comment.twig on line 49
+Arguments:
+	comment
+
+
+manage_comments_column
+----------------------
+Called from:
+	modules/comments/pages/admin/manage_comments.twig on line 53
+	modules/comments/pages/admin/manage_spam.twig on line 42
+Arguments:
+	comment
+
+
+feed_comment
+------------
+Called from:
+	modules/comments/pages/comments_feed.php on line 28
+Arguments:
+	$comment
+
+
+comments_feed_item
+------------------
+Called from:
+	modules/comments/pages/comments_feed.php on line 51
+Arguments:
+	$comment->id
+
+
+import_wordpress_post
+---------------------
+Called from:
+	modules/importers/importers.php on line 142
+Arguments:
+	$item, $post
+
+
+import_wordpress_page
+---------------------
+Called from:
+	modules/importers/importers.php on line 155
+Arguments:
+	$item, $page
+
+
+import_tumble
+-------------
+Called from:
+	modules/importers/importers.php on line 292
+Arguments:
+	$post, $new_post
+
+
+import_textpattern_post
+-----------------------
+Called from:
+	modules/importers/importers.php on line 378
+Arguments:
+	$post, $new_post
+
+
+import_movabletype_post
+-----------------------
+Called from:
+	modules/importers/importers.php on line 494
+Arguments:
+	$post, $new_post, $link
+
+
+import_movabletype_page
+-----------------------
+Called from:
+	modules/importers/importers.php on line 497
+Arguments:
+	$post, $new_page, $link
 
 
 
@@ -774,3 +905,35 @@ Target:
 	$methods
 Called from:
 	includes/xmlrpc.php on line 51
+
+
+cacher_regenerate_triggers
+--------------------------
+Target:
+	$regenerate
+Called from:
+	modules/cacher/cacher.php on line 75
+
+
+cacher_regenerate_posts_triggers
+--------------------------------
+Target:
+	$post_triggers
+Called from:
+	modules/cacher/cacher.php on line 80
+
+
+comment
+-------
+Target:
+	$this
+Called from:
+	modules/comments/model.Comment.php on line 36
+
+
+filter_comment
+--------------
+Target:
+	$this
+Called from:
+	modules/comments/model.Comment.php on line 46
