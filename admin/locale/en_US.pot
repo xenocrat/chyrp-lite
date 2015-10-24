@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-23 21:49+0000\n"
+"POT-Creation-Date: 2015-10-24 18:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:59
+#: admin/admin.js.php:58
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:119
-#: admin/admin.js.php:135
+#: admin/admin.js.php:118
+#: admin/admin.js.php:134
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:121
-#: admin/admin.js.php:138
+#: admin/admin.js.php:120
+#: admin/admin.js.php:137
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:165
+#: admin/admin.js.php:164
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: admin/admin.js.php:171
+#: admin/admin.js.php:170
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:204
+#: admin/admin.js.php:203
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:215
-#: admin/admin.js.php:217
-#: admin/admin.js.php:286
-#: admin/admin.js.php:288
+#: admin/admin.js.php:214
+#: admin/admin.js.php:216
+#: admin/admin.js.php:285
+#: admin/admin.js.php:287
 msgid "Close"
 msgstr ""
 
+#: admin/admin.js.php:236
 #: admin/admin.js.php:237
-#: admin/admin.js.php:238
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:271
+#: admin/admin.js.php:270
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:429
+#: admin/admin.js.php:428
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:431
+#: admin/admin.js.php:430
 msgid "There was an error disabling the extension."
 msgstr ""
 

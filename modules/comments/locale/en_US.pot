@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-19 09:38+0000\n"
+"POT-Creation-Date: 2015-10-24 18:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -325,5 +325,10 @@ msgstr ""
 
 #: modules/comments/pages/admin/manage_spam.twig:20
 msgid "Spam"
+msgstr ""
+
+#: modules/comments/pages/comments_feed.php:11
+#, php-format
+msgid "Comments at &#8220;%s&#8221;"
 msgstr ""
 

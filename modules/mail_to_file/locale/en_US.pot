@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-19 09:38+0000\n"
+"POT-Creation-Date: 2015-10-24 18:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -23,5 +23,10 @@ msgstr ""
 
 #: modules/mail_to_file/info.php:6
 msgid "Redirects outgoing emails to a digest file."
+msgstr ""
+
+#: modules/mail_to_file/mail_to_file.php:13
+#, php-format
+msgid "Cannot write digest file <code>%s</code>"
 msgstr ""
 
