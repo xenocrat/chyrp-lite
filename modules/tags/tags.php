@@ -55,7 +55,7 @@
 
             foreach ($cloud as $tag) {
                 $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
-                $selector.= '<a class="tag'.$selected.'" href="#tags" onclick="return ChyrpTags.add(event);">'.$tag["name"].'</a>'."\n";
+                $selector.= '<a class="tag'.$selected.'" href="#tags">'.$tag["name"].'</a>'."\n";
             }
 
             $selector.= "</span>"."\n";
@@ -74,13 +74,13 @@
             if (empty($_POST['tags']))
                 return;
 
-            $tags = explode(",", $_POST['tags']); # Split at the comma
-            $tags = array_map("trim", $tags); # Remove whitespace
-            $tags = array_map("strip_tags", $tags); # Remove HTML
+            $tags = explode(",", $_POST['tags']); # Split at the comma.
+            $tags = array_map("trim", $tags); # Remove whitespace.
+            $tags = array_map("strip_tags", $tags); # Remove HTML.
             foreach ($tags as &$name)
                 $name = is_numeric($name) ? "'".$name."'" : $name ;
-            $tags = array_unique($tags); # Remove duplicates
-            $tags = array_diff($tags, array("")); # Remove empties
+            $tags = array_unique($tags); # Remove duplicates.
+            $tags = array_diff($tags, array("")); # Remove empties.
             $tags_cleaned = array_map("sanitize", $tags);
 
             $tags = array_combine($tags, $tags_cleaned);
@@ -99,13 +99,13 @@
                 return;
             }
 
-            $tags = explode(",", $_POST['tags']); # Split at the comma
-            $tags = array_map("trim", $tags); # Remove whitespace
-            $tags = array_map("strip_tags", $tags); # Remove HTML
+            $tags = explode(",", $_POST['tags']); # Split at the comma.
+            $tags = array_map("trim", $tags); # Remove whitespace.
+            $tags = array_map("strip_tags", $tags); # Remove HTML.
             foreach ($tags as &$name)
                 $name = is_numeric($name) ? "'".$name."'" : $name ;
-            $tags = array_unique($tags); # Remove duplicates
-            $tags = array_diff($tags, array("")); # Remove empties
+            $tags = array_unique($tags); # Remove duplicates.
+            $tags = array_diff($tags, array("")); # Remove empties.
             $tags_cleaned = array_map("sanitize", $tags);
 
             $tags = array_combine($tags, $tags_cleaned);
