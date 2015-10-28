@@ -572,12 +572,14 @@ img {                                               border-style: none;
                                                     -ms-animation: stripes 2s linear infinite;
                                                     animation: stripes 2s linear infinite }
     .ajax_loading .doaction {                       visibility: hidden }
+
 @-webkit-keyframes stripes {                        from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @-moz-keyframes stripes {                           from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @-ms-keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @keyframes stripes {                                from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 
 @media print {
+    html {                                          font-size: 4.2mm }
     body {                                          background-color: #ffffff;
                                                     margin: 2em }
     div#sidebar, div#tail,
@@ -589,7 +591,6 @@ img {                                               border-style: none;
 }
 
 @media screen and (max-width: 960px) {
-    html {                                          font-size: 4.2mm }
     body {                                          margin: 0rem 16px 1rem 16px }
     h2 {                                            font-size: 1.25em;
                                                     margin: 0.8em 0em }

@@ -540,6 +540,7 @@ img {                                               border-style: none;
                                                     -ms-animation: stripes 2s linear infinite;
                                                     animation: stripes 2s linear infinite }
     .ajax_loading .doaction {                       visibility: hidden }
+
 @-webkit-keyframes stripes {                        from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @-moz-keyframes stripes {                           from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @-ms-keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
