@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-24 18:34+0000\n"
+"POT-Creation-Date: 2015-10-28 00:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -282,7 +282,7 @@ msgstr ""
 #: includes/controller/Main.php:646
 #: includes/controller/Main.php:661
 #: includes/controller/Main.php:705
-#: includes/controller/Main.php:864
+#: includes/controller/Main.php:868
 #: includes/error.php:110
 #: includes/helpers.php:1256
 #: includes/helpers.php:1258
