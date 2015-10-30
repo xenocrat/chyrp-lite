@@ -830,10 +830,20 @@
      *     An array of all URLs found in the string.
      */
     function grab_urls($string) {
-        $regexp = "/<a[^>]+href=[\"|']([^\"]+)[\"|']>[^<]+<\/a>/";
-        preg_match_all(Trigger::current()->filter($regexp, "link_regexp"), stripslashes($string), $matches);
-        $matches = $matches[1];
-        return $matches;
+        $expressions = array("/<a[^>]+href=[\"|']([^\"']+)[\"|']>[^<]+<\/a>/");
+        $urls = array();
+
+        if (Config::current()->enable_markdown)
+            $expressions[] = "/!\[[^\]]+\]\(([^\)]+)\)/";
+
+        Trigger::current()->filter($expressions, "link_regexp");
+
+        foreach ($expressions as $expression) {
+            preg_match_all($expression, stripslashes($string), $matches);
+            $urls = array_merge($urls, $matches[1]);
+        }
+
+        return $urls;
     }
 
     /**

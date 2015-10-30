@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-28 00:23+0000\n"
+"POT-Creation-Date: 2015-10-30 21:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -284,17 +284,17 @@ msgstr ""
 #: includes/controller/Main.php:705
 #: includes/controller/Main.php:868
 #: includes/error.php:110
-#: includes/helpers.php:1256
-#: includes/helpers.php:1258
-#: includes/helpers.php:1328
-#: includes/helpers.php:1330
-#: includes/helpers.php:1332
-#: includes/helpers.php:1334
-#: includes/helpers.php:1336
+#: includes/helpers.php:1266
+#: includes/helpers.php:1268
 #: includes/helpers.php:1338
-#: includes/helpers.php:1345
-#: includes/helpers.php:1349
-#: includes/helpers.php:1519
+#: includes/helpers.php:1340
+#: includes/helpers.php:1342
+#: includes/helpers.php:1344
+#: includes/helpers.php:1346
+#: includes/helpers.php:1348
+#: includes/helpers.php:1355
+#: includes/helpers.php:1359
+#: includes/helpers.php:1529
 msgid "Error"
 msgstr ""
 
@@ -1170,102 +1170,102 @@ msgstr ""
 msgid "The requested page could not be located."
 msgstr ""
 
-#: includes/helpers.php:1240
-#: includes/helpers.php:1245
+#: includes/helpers.php:1250
+#: includes/helpers.php:1255
 msgid "Invalid Extension"
 msgstr ""
 
-#: includes/helpers.php:1240
+#: includes/helpers.php:1250
 #, php-format
 msgid "Only %s files are accepted."
 msgstr ""
 
-#: includes/helpers.php:1245
+#: includes/helpers.php:1255
 #, php-format
 msgid "Only %s files are supported."
 msgstr ""
 
-#: includes/helpers.php:1328
+#: includes/helpers.php:1338
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:1330
+#: includes/helpers.php:1340
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive that was specified in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:1332
+#: includes/helpers.php:1342
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:1334
+#: includes/helpers.php:1344
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:1336
+#: includes/helpers.php:1346
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1338
+#: includes/helpers.php:1348
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:1345
+#: includes/helpers.php:1355
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:1349
+#: includes/helpers.php:1359
 msgid "Unknown upload error."
 msgstr ""
 
-#: includes/helpers.php:1674
+#: includes/helpers.php:1684
 msgid "and "
 msgstr ""
 
-#: includes/helpers.php:1930
+#: includes/helpers.php:1940
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:1931
-#: includes/helpers.php:1942
-#: includes/helpers.php:1953
+#: includes/helpers.php:1941
+#: includes/helpers.php:1952
+#: includes/helpers.php:1963
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:1933
+#: includes/helpers.php:1943
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:1935
+#: includes/helpers.php:1945
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:1941
+#: includes/helpers.php:1951
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:1944
+#: includes/helpers.php:1954
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:1952
+#: includes/helpers.php:1962
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:1955
+#: includes/helpers.php:1965
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/helpers.php:1965
+#: includes/helpers.php:1975
 msgid "Undeliverable"
 msgstr ""
 
-#: includes/helpers.php:1965
+#: includes/helpers.php:1975
 msgid "Unable to send email."
 msgstr ""
 
