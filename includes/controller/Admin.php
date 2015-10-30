@@ -2077,8 +2077,12 @@
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 $trace = debug_backtrace();
-                $twig = array("file" => $e->filename, "line" => $e->lineno);
-                array_unshift($trace, $twig);
+
+                if (property_exists($e, "filename") and property_exists($e, "lineno")) {
+                    $twig = array("file" => $e->filename, "line" => $e->lineno);
+                    array_unshift($trace, $twig);
+                }
+
                 error(__("Error"), $prettify, $trace);
             }
         }
