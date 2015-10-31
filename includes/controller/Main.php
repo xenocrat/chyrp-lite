@@ -187,21 +187,6 @@
         }
 
         /**
-         * Function: key_regexp
-         * Converts the values in $config->post_url to regular expressions.
-         *
-         * Parameters:
-         *     $key - Input URL with the keys from <Post.$url_attrs>.
-         *
-         * Returns:
-         *     $key values replaced with their regular expressions from <Routes->$code>.
-         */
-        private function key_regexp($key) {
-            Trigger::current()->filter(Post::$url_attrs, "url_code");
-            return str_replace(array_keys(Post::$url_attrs), array_values(Post::$url_attrs), str_replace("/", "\\/", $key));
-        }
-
-        /**
          * Function: index
          * Grabs the posts for the main page.
          */
@@ -448,32 +433,12 @@
         }
 
         /**
-         * Function: rss
-         * Redirects to /feed (backwards compatibility).
-         */
-        public function rss() {
-            header($_SERVER["SERVER_PROTOCOL"]." 301 Moved Permanently");
-            redirect(oneof(@Config::current()->feed_url, url("feed")));
-        }
-
-        /**
          * Function: id
          * Views a post by its static ID.
          */
         public function id() {
             $post = new Post($_GET['id']);
             redirect($post->url());
-        }
-
-        /**
-         * Function: cookies_notification
-         * Deliver a notification to comply with EU Directive 2002/58 on Privacy and Electronic Communications.
-         */
-        private function cookies_notification() {
-            if (!isset($_SESSION['cookies_notified']) and Config::current()->cookies_notification) {
-                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
-                $_SESSION['cookies_notified'] = true;
-            }
         }
 
         /**
@@ -812,8 +777,6 @@
                     return $this->feed($context["posts"]);
             }
 
-            $this->cookies_notification();
-
             $this->context = array_merge($context, $this->context);
 
             $visitor = Visitor::current();
@@ -853,6 +816,11 @@
             $this->context["sql_debug"] =& SQL::current()->debug;
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $file)));
+
+            if (!isset($_SESSION['cookies_notified']) and $config->cookies_notification) {
+                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
+                $_SESSION['cookies_notified'] = true;
+            }
 
             try {
                 return $this->twig->getTemplate($file.".twig")->display($this->context);
