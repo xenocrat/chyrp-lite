@@ -271,7 +271,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 530
+	includes/controller/Main.php on line 495
 Arguments:
 	$user
 
@@ -279,7 +279,7 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 615
+	includes/controller/Main.php on line 580
 
 
 feed_item
@@ -676,7 +676,6 @@ Target:
 	Post::$url_attrs
 Called from:
 	includes/controller/Main.php on line 168
-	includes/controller/Main.php on line 200
 
 
 feed_url
@@ -692,9 +691,9 @@ Arguments:
 link_regexp
 -----------
 Target:
-	$regexp
+	$expressions
 Called from:
-	includes/helpers.php on line 834
+	includes/helpers.php on line 839
 
 
 keyword_search
@@ -702,7 +701,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1553
+	includes/helpers.php on line 1563
 Arguments:
 	$query, $plain
 
@@ -712,7 +711,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1689
+	includes/helpers.php on line 1699
 
 
 group
