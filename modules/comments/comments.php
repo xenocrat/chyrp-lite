@@ -760,8 +760,8 @@
             return $params;
         }
 
-        static function cacher_regenerate_posts_triggers($post_triggers) {
+        static function cacher_regenerate_posts_triggers($regenerate_posts) {
             $triggers = array("add_comment", "update_comment", "delete_comment");
-            return array_merge($post_triggers, $triggers);
+            return array_merge($regenerate_posts, $triggers);
         }
     }
