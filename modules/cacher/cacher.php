@@ -1,22 +1,10 @@
 <?php
     require_once "filecacher.php";
-    require_once "memcacher.php";
 
     class Cacher extends Modules {
         public function __init() {
             $config = Config::current();
-
-            if (!empty($config->cache_exclude))
-                foreach ($config->cache_exclude as &$exclude)
-                    if (!preg_match('~^(http://|https://)~i', $exclude))
-                        $exclude = $config->url."/".ltrim($exclude, "/");
-
-            if (!empty($config->cache_memcached_hosts))
-              $this->cacher = new MemCacher(self_url(), $config);
-            else
-              $this->cacher = new FileCacher(self_url(), $config);
-
-            # Prepare actions that should result in new cache files.
+            $this->cacher = new FileCacher(self_url(), $config);
             $this->prepare_cache_updaters();
         }
 
@@ -24,14 +12,12 @@
             $config = Config::current();
             $config->set("cache_expire", 3600);
             $config->set("cache_exclude", array());
-            $config->set("cache_memcached_hosts", array());
         }
 
         static function __uninstall() {
             $config = Config::current();
             $config->remove("cache_expire");
             $config->remove("cache_exclude");
-            $config->remove("cache_memcached_hosts");
         }
 
         public function route_init($route) {
@@ -42,7 +28,7 @@
                 !$this->cacher->url_available() or
                 Flash::exists())
                 return;
-        
+
             $cache = $this->cacher->get($route);
         
             foreach($cache['headers'] as $header)
@@ -122,13 +108,13 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $exclude = (empty($_POST['cache_exclude'])) ? array() : trim(explode(",", $_POST['cache_exclude'])) ;
-            $memcached_hosts = (empty($_POST['cache_memcached_hosts'])) ? array() : trim(explode(",", $_POST['cache_memcached_hosts']));
+            $exclude = (empty($_POST['cache_exclude'])) ?
+                            array() :
+                            array_filter(explode(",", str_replace(array("\r\n", "\n", "\r"), ",", $_POST['cache_exclude']))) ;
 
             $config = Config::current();
             $set = array($config->set("cache_expire", (int) $_POST['cache_expire']),
-                         $config->set("cache_exclude", $exclude),
-                         $config->set("cache_memcached_hosts", $memcached_hosts));
+                         $config->set("cache_exclude", $exclude));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");

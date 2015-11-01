@@ -15,11 +15,7 @@
                     </p>
                     <p>
                         <label for="cache_exclude">${ "Exclude URLs" | translate("cacher") }</label>
-                        <input class="text" type="text" name="cache_exclude" value="${ site.cache_exclude | join(", ") | escape }" id="cache_exclude"> <span class="sub">${ "(comma separated)" | translate("cacher") }</span>
-                    </p>
-                    <p>
-                        <label for="cache_memcached_hosts">${ "Memcache Servers" | translate("cacher")}</label>
-                        <input class="text" type="text" name="cache_memcached_hosts" value="${ site.cache_memcached_hosts | join(", ") | escape }" id="cache_memcached_hosts"> <span class="sub">${ "(comma separated)" | translate("cacher") }</span>
+                        <textarea name="cache_exclude" id="cache_exclude" rows="12">${ site.cache_exclude | join(", ") | escape }</textarea>
                     </p>
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
