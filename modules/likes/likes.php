@@ -309,4 +309,8 @@
             return $atom;
         }
 
+        static function cacher_regenerate_triggers($regenerate) {
+            $triggers = array("route_like", "route_unlike", "ajax_like", "ajax_unlike");
+            return array_merge($regenerate, $triggers);
+        }
     }

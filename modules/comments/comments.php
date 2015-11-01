@@ -188,6 +188,7 @@
                 redirect("/admin/?action=manage_comments");
 
             $comment = new Comment($_POST['id']);
+
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
@@ -695,11 +696,6 @@
             return Comment::user_can($post);
         }
 
-        public function cacher_regenerate_posts_triggers($array) {
-            $array = array_merge($array, array("add_comment", "update_comment", "delete_comment"));
-            return $array;
-        }
-
         public function posts_export($atom, $post) {
             $comments = Comment::find(array("where" => array("post_id" => $post->id)),
                                       array("filter" => false));
@@ -762,5 +758,10 @@
                                  "\n\n".
                                  '"'.truncate(strip_tags($params["body"])).'"';
             return $params;
+        }
+
+        static function cacher_regenerate_posts_triggers($post_triggers) {
+            $triggers = array("add_comment", "update_comment", "delete_comment");
+            return array_merge($post_triggers, $triggers);
         }
     }

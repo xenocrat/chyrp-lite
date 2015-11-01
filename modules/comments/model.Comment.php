@@ -198,7 +198,7 @@
                                "updated_at" => oneof($updated_at, "0000-00-00 00:00:00")));
 
             $new = new self($sql->latest("comments"));
-            Trigger::current()->call("add_comment", $new);
+            Trigger::current()->call("add_comment", $new->post_id, $new->id);
             self::notify(strip_tags($author), $body, $post);
             return $new;
         }
@@ -216,13 +216,16 @@
                                "created_at" => $timestamp,
                                "updated_at" => ($update_timestamp) ? datetime() : $this->updated_at));
 
-            Trigger::current()->call("update_comment", $this, $body, $author, $url, $email, $status, $notify, $timestamp, $update_timestamp);
+            Trigger::current()->call("update_comment", $this->post_id, $this->id);
         }
 
         static function delete($comment_id) {
             $trigger = Trigger::current();
-            if ($trigger->exists("delete_comment"))
-                $trigger->call("delete_comment", new self($comment_id));
+
+            if ($trigger->exists("delete_comment")) {
+                $new = new self($comment_id);
+                $trigger->call("delete_comment", $new->post_id, $new->id);
+            }
 
             SQL::current()->delete("comments", array("id" => $comment_id));
         }
