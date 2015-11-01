@@ -28,7 +28,7 @@
         }
         var Site = {
             url: "<?php echo $config->chyrp_url; ?>",
-            key: "<?php if (logged_in() and preg_match("~^".preg_quote($config->url, "~").".*~", $_SERVER["HTTP_REFERER"])) echo token($_SERVER["REMOTE_ADDR"]); ?>",
+            key: "<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>",
             ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true"); else echo("false"); ?>
         }
         var Passwords = {
