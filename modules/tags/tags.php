@@ -312,7 +312,7 @@
             Flash::notice(__("Tag renamed.", "tags"), "/admin/?action=manage_tags");
         }
 
-        static function admin_delete_tag($admin) {
+        public function admin_delete_tag($admin) {
             if (empty($_GET['clean']))
                 error(__("No Tag Specified"), __("Please specify the tag you want to rename.", "tags"));
 
