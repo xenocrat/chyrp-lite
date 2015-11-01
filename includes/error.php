@@ -90,7 +90,7 @@
             !class_exists("Config") or
             empty($site = Config::current()->chyrp_url)) {
 
-            echo("ERROR: ".$body);
+            echo("<!DOCTYPE html>\n<h1>ERROR:</h1>\n<p>".$body."</p>");
 
             if (defined('AJAX') and AJAX or isset($_POST['ajax']))
                 echo("\nHEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
