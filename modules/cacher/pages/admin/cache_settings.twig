@@ -15,7 +15,10 @@
                     </p>
                     <p>
                         <label for="cache_exclude">${ "Exclude URLs" | translate("cacher") }</label>
-                        <textarea name="cache_exclude" id="cache_exclude" rows="12">${ site.cache_exclude | join(", ") | escape }</textarea>
+                        <textarea name="cache_exclude" id="cache_exclude" rows="12">${ site.cache_exclude | join(", \n") | escape }</textarea>
+                        <small>
+                            ${ "A comma separated list of URLs that will not be cached." | translate }
+                        </small>
                     </p>
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>

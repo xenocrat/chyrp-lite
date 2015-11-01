@@ -23,7 +23,7 @@
         public function route_init($route) {
             if (!empty($_POST) or
                 !($route->controller instanceof MainController) or
-                in_array($this->url, Config::current()->cache_exclude) or
+                in_array($this->cacher->url, Config::current()->cache_exclude) or
                 $this->cancelled or
                 !$this->cacher->url_available() or
                 Flash::exists())
@@ -39,7 +39,7 @@
 
         public function end($route) {
             if (!($route->controller instanceof MainController) or
-                in_array($this->url, Config::current()->cache_exclude) or
+                in_array($this->cacher->url, Config::current()->cache_exclude) or
                 $this->cancelled or
                 $this->cacher->url_available() or
                 Flash::exists())
@@ -110,7 +110,7 @@
 
             $exclude = (empty($_POST['cache_exclude'])) ?
                             array() :
-                            array_filter(explode(",", str_replace(array("\r\n", "\n", "\r"), ",", $_POST['cache_exclude']))) ;
+                            explode(",", str_replace(array("\n", "\r", " "), "", $_POST['cache_exclude'])) ;
 
             $config = Config::current();
             $set = array($config->set("cache_expire", (int) $_POST['cache_expire']),

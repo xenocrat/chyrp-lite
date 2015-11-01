@@ -5,7 +5,7 @@
             $this->path = INCLUDES_DIR.DIR."caches".DIR.sanitize($this->user);
 
             $this->caches = INCLUDES_DIR.DIR."caches";
-            $this->url = $url;
+            $this->url = rawurldecode($url); # Percent decode for URL exclusion list comparison.
             $this->file = $this->path.DIR.md5($this->url).".html";
 
             # If the cache directory is not writable, disable this module and cancel execution.
