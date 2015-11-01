@@ -4,7 +4,7 @@
 
 {% block content %}
 	<h2>${ "Editing Category &#8220;%s&#8221;" | translate("categorize") | format(categorize.name | escape) }</h2>
-	<form id="edit_category" class="split" action="{% admin "edit_category" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<form id="edit_category" class="split" action="{% admin "update_category" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
         <fieldset>
             <p>
                 <label for="name">${ "Name" | translate("categorize") }</label>
@@ -28,7 +28,7 @@
                 </small>
             </p>
             <p class="buttons">
-                <button type="submit" name="update" class="yay"><img src="$theme_url/images/icons/success.svg" alt="update">${ "Update" | translate("categorize") }</button>
+                <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="update">${ "Update" | translate("categorize") }</button>
             </p>
             <input type="hidden" name="id" value="$categorize.id" id="id">
             <input type="hidden" name="hash" value="${ ip | token }" id="hash">
