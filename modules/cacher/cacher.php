@@ -1,32 +1,28 @@
 <?php
     require_once "filecacher.php";
     require_once "memcacher.php";
+
     class Cacher extends Modules {
         public function __init() {
-            # Prepare actions that should result in new cache files.
-            $this->prepare_cache_updaters();
-
             $config = Config::current();
-            $config->cache_exclude = (array) $config->cache_exclude;
 
             if (!empty($config->cache_exclude))
                 foreach ($config->cache_exclude as &$exclude)
-                    if (substr($exclude, 7) != "http://")
+                    if (!preg_match('~^(http://|https://)~i', $exclude))
                         $exclude = $config->url."/".ltrim($exclude, "/");
-        
-            if(count((array)$config->cache_memcached_hosts) > 0){
+
+            if (!empty($config->cache_memcached_hosts))
               $this->cacher = new MemCacher(self_url(), $config);
-            }else{
+            else
               $this->cacher = new FileCacher(self_url(), $config);
-            }
-        
+
             # Prepare actions that should result in new cache files.
             $this->prepare_cache_updaters();
         }
 
         static function __install() {
             $config = Config::current();
-            $config->set("cache_expire", 1800);
+            $config->set("cache_expire", 3600);
             $config->set("cache_exclude", array());
             $config->set("cache_memcached_hosts", array());
         }
@@ -50,7 +46,7 @@
             $cache = $this->cacher->get($route);
         
             foreach($cache['headers'] as $header)
-              header($header);
+                header($header);
         
             exit($cache['contents']);
         }
@@ -67,17 +63,24 @@
         }
 
         public function prepare_cache_updaters() {
-            $regenerate = array("add_post",    "add_page",
-                                "update_post", "update_page",
-                                "delete_post", "delete_page",
+            $regenerate = array("add_post",
+                                "add_page",
+                                "update_post",
+                                "update_page",
+                                "delete_post",
+                                "delete_page",
                                 "change_setting");
 
             Trigger::current()->filter($regenerate, "cacher_regenerate_triggers");
+
             foreach ($regenerate as $action)
                 $this->addAlias($action, "regenerate");
 
             $post_triggers = array();
-            foreach (Trigger::current()->filter($post_triggers, "cacher_regenerate_posts_triggers") as $action)
+
+            Trigger::current()->filter($post_triggers, "cacher_regenerate_posts_triggers");
+
+            foreach ($post_triggers as $action)
                 $this->addAlias($action, "remove_post_cache");
         }
 
@@ -118,16 +121,22 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $exclude = (empty($_POST['cache_exclude']) ? array() : explode(", ", $_POST['cache_exclude']));
-        
-            $memcached_hosts = empty($_POST['cache_memcached_hosts']) ? array() : explode(", ", $_POST['cache_memcached_hosts']);
+            $exclude = (empty($_POST['cache_exclude'])) ? array() : trim(explode(",", $_POST['cache_exclude'])) ;
+            $memcached_hosts = (empty($_POST['cache_memcached_hosts'])) ? array() : trim(explode(",", $_POST['cache_memcached_hosts']));
 
             $config = Config::current();
-            if ($config->set("cache_expire", (int) $_POST['cache_expire']) and $config->set("cache_exclude", $exclude) and $config->set("cache_memcached_hosts", $memcached_hosts))
+            $set = array($config->set("cache_expire", (int) $_POST['cache_expire']),
+                         $config->set("cache_exclude", $exclude),
+                         $config->set("cache_memcached_hosts", $memcached_hosts));
+
+            if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");
         }
 
         public function admin_clear_cache() {
+            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 

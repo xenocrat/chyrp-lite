@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-24 18:34+0000\n"
+"POT-Creation-Date: 2015-11-01 10:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/cacher/cacher.php:106
+#: modules/cacher/cacher.php:109
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:136
+#: modules/cacher/cacher.php:145
 msgid "Cache cleared."
 msgstr ""
 

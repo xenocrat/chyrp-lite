@@ -16,11 +16,11 @@
             $this->remove_expired();
         }
 
-        public function url_available(){
+        public function url_available() {
             return file_exists($this->file);
         }
 
-        public function get(){
+        public function get() {
             if (DEBUG)
                 error_log("SERVING cache file for ".$this->url."...");
 
@@ -32,7 +32,7 @@
             return $cache;
         }
 
-        public function set($value){
+        public function set($value) {
             if (DEBUG)
                 error_log("GENERATING cache file for ".$this->url."...");
 
@@ -43,7 +43,7 @@
             file_put_contents($this->file, $value);
         }
 
-        public function remove_expired(){
+        public function remove_expired() {
             foreach ((array) glob($this->caches.DIR."*".DIR."*.html") as $file) {
                 if (time() - filemtime($file) > Config::current()->cache_expire)
                     @unlink($file);
@@ -67,6 +67,7 @@
                 error_log("REGENERATING local user ".$this->user."...");
 
             $directory = (isset($user)) ? $this->caches.DIR.$user : $this->path ;
+
             foreach ((array) glob($directory.DIR."*.html") as $file)
                 @unlink($file);
         }

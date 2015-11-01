@@ -10,7 +10,7 @@
                         <label for="cache_expire">${ "Expire Cache After&hellip;" | translate("cacher") }</label>
                         <input class="text digits" type="number" name="cache_expire" value="${ site.cache_expire | escape }" id="cache_expire"> <span class="sub">${ "(seconds)" | translate("cacher") }</span>
                         <small>
-                            <a href="{% admin "clear_cache" %}">${ "Clear the cache now!" | translate }</a>
+                            <a href="{% admin "clear_cache" ~ "&hash=" ~ ip | token %}">${ "Clear the cache now!" | translate }</a>
                         </small>
                     </p>
                     <p>
