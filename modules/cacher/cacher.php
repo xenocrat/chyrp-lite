@@ -132,4 +132,3 @@
             Flash::notice(__("Cache cleared.", "cacher"), "/admin/?action=cache_settings");
         }
     }
-

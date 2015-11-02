@@ -1,5 +1,5 @@
 <?php
-    class FileCacher{
+    class FileCacher {
         public function __construct($url, $config) {
             $this->user = (logged_in()) ? Visitor::current()->login : "guest" ;
             $this->path = INCLUDES_DIR.DIR."caches".DIR.sanitize($this->user);
@@ -80,4 +80,3 @@
                 @unlink($file);
         }
     }
-
