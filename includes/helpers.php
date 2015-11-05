@@ -454,7 +454,7 @@
      *     $string - String to sanitize.
      */
     function sanitize_html($text) {
-        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", function ($element) {
+        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( \/)?>/i", function ($element) {
             $name = strtolower($element[1]);
             fallback($element[2], "");
             $whitelist = "";
@@ -821,7 +821,7 @@
 
     /**
      * Function: grab_urls
-     * Crawls a string for links.
+     * Crawls a string and grabs hyperlinks from it.
      *
      * Parameters:
      *     $string - The string to crawl.
@@ -830,18 +830,21 @@
      *     An array of all URLs found in the string.
      */
     function grab_urls($string) {
-        $expressions = array("/<a[^>]+href=[\"|']([^\"']+)[\"|']>[^<]+<\/a>/");
+        $expressions = array("/<a[^>]+href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/");
         $urls = array();
 
         if (Config::current()->enable_markdown)
             $expressions[] = "/!\[[^\]]+\]\(([^\)]+)\)/";
 
-        Trigger::current()->filter($expressions, "link_regexp");
+        Trigger::current()->filter($expressions, "link_regexp"); # Modules can support other syntaxes.
 
         foreach ($expressions as $expression) {
             preg_match_all($expression, stripslashes($string), $matches);
             $urls = array_merge($urls, $matches[1]);
         }
+
+        foreach ($urls as &$url)
+            trim($url, " \"'");
 
         return $urls;
     }
