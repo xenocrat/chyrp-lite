@@ -1,7 +1,7 @@
 <?php
     /**
-     * Function: remove_trackbacking
-     * Removes the enable_trackbacking config setting.
+     * Function: remove_memcached_hosts
+     * Removes the cache_memcached_hosts config setting.
      *
      * Versions: 2015.06 => 2015.07
      */
