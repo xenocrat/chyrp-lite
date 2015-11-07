@@ -177,6 +177,7 @@
             $config->set("default_group", 0);
             $config->set("guest_group", 0);
             $config->set("clean_urls", false);
+            $config->set("enable_homepage", false);
             $config->set("post_url", "(year)/(month)/(day)/(url)/");
             $config->set("enabled_modules", array());
             $config->set("enabled_feathers", array("text"));
