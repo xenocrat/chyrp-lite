@@ -446,7 +446,8 @@
         public static function & current($settings = false) {
             if ($settings) {
                 static $loaded_settings = null;
-                return $loaded_settings = new self($settings);
+                $loaded_settings = new self($settings);
+                return $loaded_settings;
             } else {
                 static $instance = null;
                 $instance = (empty($instance)) ? new self() : $instance ;
