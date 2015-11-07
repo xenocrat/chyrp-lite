@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-24 18:34+0000\n"
+"POT-Creation-Date: 2015-11-07 16:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -87,101 +87,101 @@ msgid "An ID is required to update a comment."
 msgstr ""
 
 #: modules/comments/comments.php:123
-#: modules/comments/comments.php:347
+#: modules/comments/comments.php:348
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr ""
 
 #: modules/comments/comments.php:170
 #: modules/comments/comments.php:185
-#: modules/comments/comments.php:553
+#: modules/comments/comments.php:554
 msgid "An ID is required to delete a comment."
 msgstr ""
 
 #: modules/comments/comments.php:175
-#: modules/comments/comments.php:192
+#: modules/comments/comments.php:193
 msgid "You do not have sufficient privileges to delete this comment."
 msgstr ""
 
-#: modules/comments/comments.php:209
-#: modules/comments/comments.php:354
+#: modules/comments/comments.php:210
+#: modules/comments/comments.php:355
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr ""
 
-#: modules/comments/comments.php:225
+#: modules/comments/comments.php:226
 msgid "You do not have sufficient privileges to delete comments."
 msgstr ""
 
-#: modules/comments/comments.php:229
+#: modules/comments/comments.php:230
 msgid "All spam deleted."
 msgstr ""
 
-#: modules/comments/comments.php:237
+#: modules/comments/comments.php:238
 msgid "Comment Status"
 msgstr ""
 
-#: modules/comments/comments.php:239
+#: modules/comments/comments.php:240
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:242
+#: modules/comments/comments.php:243
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:245
+#: modules/comments/comments.php:246
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:248
+#: modules/comments/comments.php:249
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:261
+#: modules/comments/comments.php:262
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:314
-#: modules/comments/comments.php:481
+#: modules/comments/comments.php:315
+#: modules/comments/comments.php:482
 #: modules/comments/info.php:3
 #: modules/comments/pages/admin/manage_comments.twig:19
 msgid "Comments"
 msgstr ""
 
-#: modules/comments/comments.php:326
+#: modules/comments/comments.php:327
 #, php-format
 msgid "Comments (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:330
+#: modules/comments/comments.php:331
 #, php-format
 msgid "Spam (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:342
-#: modules/comments/comments.php:567
+#: modules/comments/comments.php:343
+#: modules/comments/comments.php:568
 msgid "An ID is required to edit a comment."
 msgstr ""
 
-#: modules/comments/comments.php:387
+#: modules/comments/comments.php:388
 msgid "Selected comments deleted."
 msgstr ""
 
-#: modules/comments/comments.php:408
+#: modules/comments/comments.php:409
 msgid "Selected comments denied."
 msgstr ""
 
-#: modules/comments/comments.php:423
+#: modules/comments/comments.php:424
 msgid "Selected comments approved."
 msgstr ""
 
-#: modules/comments/comments.php:437
+#: modules/comments/comments.php:438
 msgid "Selected comments marked as spam."
 msgstr ""
 
-#: modules/comments/comments.php:541
+#: modules/comments/comments.php:542
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:613
+#: modules/comments/comments.php:614
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
@@ -206,7 +206,7 @@ msgstr ""
 msgid "Your comment has been marked as spam. It has to be reviewed and/or approved by an admin."
 msgstr ""
 
-#: modules/comments/model.Comment.php:280
+#: modules/comments/model.Comment.php:283
 msgid "Anon"
 msgstr ""
 

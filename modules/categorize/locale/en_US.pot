@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-10-24 18:34+0000\n"
+"POT-Creation-Date: 2015-11-07 16:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -46,28 +46,29 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: modules/categorize/categorize.php:219
+#: modules/categorize/categorize.php:217
 msgid "Category added."
 msgstr ""
 
-#: modules/categorize/categorize.php:229
-#: modules/categorize/categorize.php:260
+#: modules/categorize/categorize.php:226
+#: modules/categorize/categorize.php:240
+#: modules/categorize/categorize.php:263
 msgid "You do not have sufficient privileges to manage categories."
 msgstr ""
 
-#: modules/categorize/categorize.php:232
+#: modules/categorize/categorize.php:229
 msgid "An ID is required to edit a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:237
+#: modules/categorize/categorize.php:246
 msgid "Category updated."
 msgstr ""
 
-#: modules/categorize/categorize.php:248
+#: modules/categorize/categorize.php:251
 msgid "Please specify the category you want to delete."
 msgstr ""
 
-#: modules/categorize/categorize.php:266
+#: modules/categorize/categorize.php:269
 msgid "Category deleted."
 msgstr ""
 

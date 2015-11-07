@@ -379,7 +379,7 @@ Called from:
 show_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 544
+	modules/comments/comments.php on line 545
 Arguments:
 	$comment
 
@@ -389,7 +389,7 @@ add_comment
 Called from:
 	modules/comments/model.Comment.php on line 201
 Arguments:
-	$new
+	$new->post_id, $new->id
 
 
 update_comment
@@ -397,15 +397,15 @@ update_comment
 Called from:
 	modules/comments/model.Comment.php on line 219
 Arguments:
-	$this, $body, $author, $url, $email, $status, $notify, $timestamp, $update_timestamp
+	$this->post_id, $this->id
 
 
 delete_comment
 --------------
 Called from:
-	modules/comments/model.Comment.php on line 225
+	modules/comments/model.Comment.php on line 227
 Arguments:
-	new self($comment_id)
+	$new->post_id, $new->id
 
 
 edit_comment_options
@@ -701,7 +701,7 @@ keyword_search
 Target:
 	$keywords
 Called from:
-	includes/helpers.php on line 1563
+	includes/helpers.php on line 1566
 Arguments:
 	$query, $plain
 
@@ -711,7 +711,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1699
+	includes/helpers.php on line 1702
 
 
 group
@@ -911,15 +911,15 @@ cacher_regenerate_triggers
 Target:
 	$regenerate
 Called from:
-	modules/cacher/cacher.php on line 75
+	modules/cacher/cacher.php on line 60
 
 
 cacher_regenerate_posts_triggers
 --------------------------------
 Target:
-	$post_triggers
+	$regenerate_posts
 Called from:
-	modules/cacher/cacher.php on line 80
+	modules/cacher/cacher.php on line 67
 
 
 comment
