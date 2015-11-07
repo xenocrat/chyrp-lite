@@ -7,7 +7,7 @@ be accessible to visitors who use assistive technologies.
 
 With Chyrp Lite's system of Feathers and Pages you can make your blog whatever you want
 it to be: you can have a traditional blog, a tumbleblog, or add oodles of customisation
-and build a fully-featured web publishing platform with blogging features on the side.
+and build a web publishing platform with blogging features on the side.
 
 Feathers support different types of content in your blog posts: you can restrict yourself
 to absolute textual purity, or you can turn on everything and blog a multimedia rainbow.
