@@ -1325,7 +1325,7 @@
 
         # Recurse to test multiple uploads file by file.
         if (is_array($file['name'])) {
-            for ($i=0; $i < count($file['error']); $i++)
+            for ($i=0; $i < count($file['name']); $i++)
                 if (!upload_tester(array('name' => $file['name'][$i],
                                          'type' => $file['type'][$i],
                                          'tmp_name' => $file['tmp_name'][$i],
