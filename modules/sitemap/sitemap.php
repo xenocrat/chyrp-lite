@@ -11,11 +11,11 @@
         }
 
         static function __install() {
-            $set = array(Config::current()->set("module_sitemap",
-                                          array("blog_changefreq" => "daily",
-                                                "archives_changefreq" => "weekly",
-                                                "pages_changefreq" => "yearly",
-                                                "posts_changefreq" => "monthly")));
+            $set = array(Config::current()->set("module_sitemap",                         # Add these strings to the .pot file.
+                                                array("blog_changefreq" => "daily",       # __("daily", "sitemap");
+                                                      "archives_changefreq" => "weekly",  # __("weekly", "sitemap");
+                                                      "pages_changefreq" => "yearly",     # __("yearly", "sitemap");
+                                                      "posts_changefreq" => "monthly"))); # __("monthly", "sitemap");
         }
 
         static function __uninstall() {
@@ -62,51 +62,63 @@
                                              array("posts.status" => "public"),
                                              array("posts.id DESC"),
                                              array())->fetchAll();
-     
+
             $ids = array();
             foreach ($result as $index => $row)
                 $ids[] = $row["id"];
-     
+
             if (!empty($ids))
                 fallback($posts, Post::find(array("where" => array("id" => $ids))));
+            else
+                $posts = array();
           
             if (!is_array($posts))
                 $posts = $posts->paginated;
-     
+
+            $pages = Page::find(array("where" => array("show_in_list" => true),
+                                      "order" => "list_order ASC"));
+
             $config = Config::current();
             $sitemap_settings = Config::current()->module_sitemap;
-      
-            $title = (!empty($_GET['title'])) ? ": ".html_entity_decode($_GET['title']) : "" ;
-            $output = '<?xml version=\'1.0\' encoding=\'UTF-8\'?>'.PHP_EOL;
-            $output.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'."\n";
-     
-            $output.= <<<EOD
-    <url>
-      <loc>$config->url/</loc>
-      <lastmod>{$posts[0]->updated_at}</lastmod>
-      <changefreq>{$sitemap_settings["blog_changefreq"]}</changefreq>
-    </url>
-    <url>
-      <loc>$config->url/archive/</loc>
-      <changefreq>{$sitemap_settings["archives_changefreq"]}</changefreq>
-    </url>\n
-EOD;
-     
+
+            $output = "<?xml version='1.0' encoding='UTF-8'?>".PHP_EOL;
+            $output.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'.
+                      ' xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'."\n";
+
+            $output.= "  <url>\n".
+                      "    <loc>$config->url/</loc>\n".
+                      "    <lastmod>".$posts[0]->updated_at."</lastmod>\n".
+                      "    <changefreq>".$sitemap_settings["blog_changefreq"]."</changefreq>\n".
+                      "  </url>\n".
+                      "  <url>\n".
+                      "    <loc>$config->url/archive/</loc>\n".
+                      "    <changefreq>".$sitemap_settings["archives_changefreq"]."</changefreq>\n".
+                      "  </url>\n";
+
             foreach ($posts as $post) {
                 $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
+                $priority = ($post->pinned) ? "    <priority>1.0</priority>\n" : "" ;
                 $url = $post->url();
-     
-            $output.= <<<EOD
-    <url>
-      <loc>$url</loc>
-      <lastmod>$updated</lastmod>
-      <changefreq>{$sitemap_settings["posts_changefreq"]}</changefreq>
-    </url>\n
-EOD;
-            }
-            $output.= "</urlset>";
 
+                $output.= "  <url>\n".
+                          "    <loc>$url</loc>\n".
+                          "    <lastmod>$updated</lastmod>\n".
+                          "    <changefreq>".$sitemap_settings["posts_changefreq"]."</changefreq>\n".$priority.
+                          "  </url>\n";
+            }
+
+            foreach ($pages as $page) {
+                $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
+                $url = $page->url();
+
+                $output.= "  <url>\n".
+                          "    <loc>$url</loc>\n".
+                          "    <lastmod>$updated</lastmod>\n".
+                          "    <changefreq>".$sitemap_settings["pages_changefreq"]."</changefreq>\n".
+                          "  </url>\n";
+            }
+
+            $output.= "</urlset>";
             file_put_contents($_SERVER["DOCUMENT_ROOT"].DIR."sitemap.xml", $output);
         }
     }

@@ -1,0 +1,75 @@
+# Chyrp Lite Translation File.
+# Copyright (C) 2015 xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2015-11-08 11:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/sitemap/info.php:3
+msgid "Sitemap Generator"
+msgstr ""
+
+#: modules/sitemap/info.php:6
+msgid "Allows the creation of sitemap.xml for all your Chyrp-powered blog content."
+msgstr ""
+
+#: modules/sitemap/info.php:11
+msgid "Please remember to give write permissions to sitemap.xml on the root directory of the site."
+msgstr ""
+
+#: modules/sitemap/pages/admin/sitemap_settings.twig:3
+msgid "Sitemap Settings"
+msgstr ""
+
+#: modules/sitemap/pages/admin/sitemap_settings.twig:9
+msgid "Blog Change Frequency"
+msgstr ""
+
+#: modules/sitemap/pages/admin/sitemap_settings.twig:17
+msgid "Archive Change Frequency"
+msgstr ""
+
+#: modules/sitemap/pages/admin/sitemap_settings.twig:25
+msgid "Pages Change Frequency"
+msgstr ""
+
+#: modules/sitemap/pages/admin/sitemap_settings.twig:33
+msgid "Posts Change Frequency"
+msgstr ""
+
+#: modules/sitemap/pages/admin/sitemap_settings.twig:42
+msgid "These values hint to search engines how often they should crawl the page."
+msgstr ""
+
+#: modules/sitemap/sitemap.php:15
+msgid "daily"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:16
+msgid "weekly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:17
+msgid "yearly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:18
+msgid "monthly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:27
+msgid "Sitemap"
+msgstr ""
+

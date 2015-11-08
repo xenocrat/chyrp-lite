@@ -9,7 +9,7 @@
                         <label for="blog_changefreq">${ "Blog Change Frequency" | translate("sitemap") }</label>
                         <select name="blog_changefreq">
                             {% for key, val in modules['sitemap'].change_frequency | items %}
-                            <option value="$val" ${ val | option_selected(site.module_sitemap.blog_changefreq) }>$val</option>
+                            <option value="$val" ${ val | option_selected(site.module_sitemap.blog_changefreq) }>${ val | translate("sitemap") }</option>
                             {% endfor %}
                         </select>
                     </p>
@@ -17,7 +17,7 @@
                         <label for="archives_changefreq">${ "Archive Change Frequency" | translate("sitemap") }</label>
                         <select name="archives_changefreq">
                             {% for key, val in modules['sitemap'].change_frequency | items %}
-                            <option value="$val" ${ val | option_selected(site.module_sitemap.archives_changefreq) }>$val</option>
+                            <option value="$val" ${ val | option_selected(site.module_sitemap.archives_changefreq) }>${ val | translate("sitemap") }</option>
                             {% endfor %}
                         </select>
                     </p>
@@ -25,7 +25,7 @@
                         <label for="pages_changefreq">${ "Pages Change Frequency" | translate("sitemap") }</label>
                         <select name="pages_changefreq">
                             {% for key, val in modules['sitemap'].change_frequency | items %}
-                            <option value="$val" ${ val | option_selected(site.module_sitemap.pages_changefreq) }>$val</option>
+                            <option value="$val" ${ val | option_selected(site.module_sitemap.pages_changefreq) }>${ val | translate("sitemap") }</option>
                             {% endfor %}
                         </select>
                     </p>
@@ -33,9 +33,14 @@
                         <label for="posts_changefreq">${ "Posts Change Frequency" | translate("sitemap") }</label>
                         <select name="posts_changefreq">
                             {% for key, val in modules['sitemap'].change_frequency | items %}
-                            <option value="$val" ${ val | option_selected(site.module_sitemap.posts_changefreq) }>$val</option>
+                            <option value="$val" ${ val | option_selected(site.module_sitemap.posts_changefreq) }>${ val | translate("sitemap") }</option>
                             {% endfor %}
                         </select>
+                    </p>
+                    <p>
+                        <small>
+                            ${ "These values hint to search engines how often they should crawl the page." | translate("sitemap") }
+                        </small>
                     </p>
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
