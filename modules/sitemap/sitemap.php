@@ -3,19 +3,24 @@
 
         public $change_frequency = array();
 
-        public function __init() {
-            $this->change_frequency = array("daily", "weekly", "monthly", "yearly");
+        public function __init() {                      # Add these strings to the .pot file.
+            $this->change_frequency = array("hourly",   # __("hourly", "sitemap");
+                                            "daily",    # __("daily", "sitemap");
+                                            "weekly",   # __("weekly", "sitemap");
+                                            "monthly",  # __("monthly", "sitemap");
+                                            "yearly",   # __("yearly", "sitemap");
+                                            "never");   # __("never", "sitemap");
 
             $this->addAlias("add_post", "make_sitemap", 8);
             $this->addAlias("update_post", "make_sitemap", 8);
         }
 
         static function __install() {
-            $set = array(Config::current()->set("module_sitemap",                         # Add these strings to the .pot file.
-                                                array("blog_changefreq" => "daily",       # __("daily", "sitemap");
-                                                      "archives_changefreq" => "weekly",  # __("weekly", "sitemap");
-                                                      "pages_changefreq" => "yearly",     # __("yearly", "sitemap");
-                                                      "posts_changefreq" => "monthly"))); # __("monthly", "sitemap");
+            $set = array(Config::current()->set("module_sitemap",
+                                                array("blog_changefreq" => "daily",
+                                                      "archives_changefreq" => "weekly",
+                                                      "pages_changefreq" => "yearly",
+                                                      "posts_changefreq" => "monthly")));
         }
 
         static function __uninstall() {

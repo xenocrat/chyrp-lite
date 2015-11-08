@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-08 11:12+0000\n"
+"POT-Creation-Date: 2015-11-08 19:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -34,42 +34,50 @@ msgid "Sitemap Settings"
 msgstr ""
 
 #: modules/sitemap/pages/admin/sitemap_settings.twig:9
-msgid "Blog Change Frequency"
+msgid "Revisit the Index"
 msgstr ""
 
 #: modules/sitemap/pages/admin/sitemap_settings.twig:17
-msgid "Archive Change Frequency"
+msgid "Revisit the Archive"
 msgstr ""
 
 #: modules/sitemap/pages/admin/sitemap_settings.twig:25
-msgid "Pages Change Frequency"
+msgid "Revisit Pages"
 msgstr ""
 
 #: modules/sitemap/pages/admin/sitemap_settings.twig:33
-msgid "Posts Change Frequency"
+msgid "Revisit Posts"
 msgstr ""
 
 #: modules/sitemap/pages/admin/sitemap_settings.twig:42
-msgid "These values hint to search engines how often they should crawl the page."
+msgid "These values hint to search engines how often they should crawl your site."
 msgstr ""
 
-#: modules/sitemap/sitemap.php:15
+#: modules/sitemap/sitemap.php:7
+msgid "hourly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:8
 msgid "daily"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:16
+#: modules/sitemap/sitemap.php:9
 msgid "weekly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:17
-msgid "yearly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:18
+#: modules/sitemap/sitemap.php:10
 msgid "monthly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:27
+#: modules/sitemap/sitemap.php:11
+msgid "yearly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:12
+msgid "never"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:32
 msgid "Sitemap"
 msgstr ""
 
