@@ -233,7 +233,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 359
+	includes/common.php on line 362
 
 
 import_chyrp_group
@@ -571,7 +571,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 356
+	includes/common.php on line 359
 
 
 admin_determine_action
