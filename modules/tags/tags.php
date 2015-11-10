@@ -603,6 +603,7 @@
         private function mb_strcasecmp($str1, $str2, $encoding = null) {
             if (null === $encoding)
                 $encoding = mb_internal_encoding();
+
             $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
             $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
             return substr_compare(mb_strtoupper($str1, $encoding), mb_strtoupper($str2, $encoding), 0);
@@ -622,6 +623,7 @@
 
             $tags = array();
             $names = array();
+
             while ($attr = $attrs->fetchObject()) {
                 $post_tags = self::tags_unserialize($attr->value);
 
@@ -637,6 +639,7 @@
             $popularity = array_count_values($names);
 
             $list = array();
+
             foreach ($popularity as $name => $number)
                 $list[$name] = array("name" => $name,
                                      "popularity" => $number,
@@ -661,7 +664,7 @@
 
         private function tags_safe($text) {
             # Match escaping of JSON encoded data
-            $text = ltrim(rtrim(json_encode($text), "\""), "\"");
+            $text = trim(json_encode($text), "\"");
 
             # Return string escaped for SQL query
             return SQL::current()->escape($text, false);
@@ -683,6 +686,7 @@
                                  "value",
                                  array("name" => "tags",
                                        "post_id" => $post->id));
+
             if ($tags and $value = $tags->fetchColumn())
                 $tags = self::tags_unserialize($value);
             else
