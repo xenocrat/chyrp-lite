@@ -228,7 +228,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_posts");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -445,7 +445,7 @@
             if (empty($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_pages");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -660,7 +660,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_users");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -815,7 +815,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_groups");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
