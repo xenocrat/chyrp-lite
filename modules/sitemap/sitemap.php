@@ -18,7 +18,6 @@
         static function __install() {
             $set = array(Config::current()->set("module_sitemap",
                                                 array("blog_changefreq" => "daily",
-                                                      "archives_changefreq" => "weekly",
                                                       "pages_changefreq" => "yearly",
                                                       "posts_changefreq" => "monthly")));
         }
@@ -48,7 +47,6 @@
 
             $set = array($config->set("module_sitemap",
                                 array("blog_changefreq" => $_POST['blog_changefreq'],
-                                      "archives_changefreq" => $_POST['archives_changefreq'],
                                       "pages_changefreq" => $_POST['pages_changefreq'],
                                       "posts_changefreq" => $_POST['posts_changefreq'])));
 
@@ -90,34 +88,32 @@
             $output.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
 
             $output.= "  <url>\n".
-                      "    <loc>$config->url/</loc>\n".
+                      "    <loc>".$config->url."/</loc>\n".
                       "    <lastmod>".$posts[0]->updated_at."</lastmod>\n".
                       "    <changefreq>".$sitemap_settings["blog_changefreq"]."</changefreq>\n".
                       "  </url>\n".
                       "  <url>\n".
-                      "    <loc>$config->url/archive/</loc>\n".
-                      "    <changefreq>".$sitemap_settings["archives_changefreq"]."</changefreq>\n".
+                      "    <loc>".url("archive/", MainController::current())."</loc>\n".
+                      "    <changefreq>".$sitemap_settings["blog_changefreq"]."</changefreq>\n".
                       "  </url>\n";
 
             foreach ($posts as $post) {
                 $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
                 $priority = ($post->pinned) ? "    <priority>1.0</priority>\n" : "" ;
-                $url = $post->url();
 
                 $output.= "  <url>\n".
-                          "    <loc>$url</loc>\n".
-                          "    <lastmod>$updated</lastmod>\n".
+                          "    <loc>".$post->url()."</loc>\n".
+                          "    <lastmod>".$updated."</lastmod>\n".
                           "    <changefreq>".$sitemap_settings["posts_changefreq"]."</changefreq>\n".$priority.
                           "  </url>\n";
             }
 
             foreach ($pages as $page) {
                 $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
-                $url = $page->url();
 
                 $output.= "  <url>\n".
-                          "    <loc>$url</loc>\n".
-                          "    <lastmod>$updated</lastmod>\n".
+                          "    <loc>".$page->url()."</loc>\n".
+                          "    <lastmod>".$updated."</lastmod>\n".
                           "    <changefreq>".$sitemap_settings["pages_changefreq"]."</changefreq>\n".
                           "  </url>\n";
             }

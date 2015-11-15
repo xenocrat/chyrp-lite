@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-08 19:02+0000\n"
+"POT-Creation-Date: 2015-11-15 11:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -22,7 +22,7 @@ msgid "Sitemap Generator"
 msgstr ""
 
 #: modules/sitemap/info.php:6
-msgid "Allows the creation of sitemap.xml for all your Chyrp-powered blog content."
+msgid "Creates a <em>sitemap.xml</em> file on your server to help search engines index your blog."
 msgstr ""
 
 #: modules/sitemap/info.php:11
@@ -34,23 +34,19 @@ msgid "Sitemap Settings"
 msgstr ""
 
 #: modules/sitemap/pages/admin/sitemap_settings.twig:9
-msgid "Revisit the Index"
+msgid "Blog is Updated"
 msgstr ""
 
 #: modules/sitemap/pages/admin/sitemap_settings.twig:17
-msgid "Revisit the Archive"
+msgid "Pages are Edited"
 msgstr ""
 
 #: modules/sitemap/pages/admin/sitemap_settings.twig:25
-msgid "Revisit Pages"
+msgid "Posts are Edited"
 msgstr ""
 
-#: modules/sitemap/pages/admin/sitemap_settings.twig:33
-msgid "Revisit Posts"
-msgstr ""
-
-#: modules/sitemap/pages/admin/sitemap_settings.twig:42
-msgid "These values hint to search engines how often they should crawl your site."
+#: modules/sitemap/pages/admin/sitemap_settings.twig:34
+msgid "These values hint to search engines how frequently they should crawl your site."
 msgstr ""
 
 #: modules/sitemap/sitemap.php:7
@@ -77,7 +73,7 @@ msgstr ""
 msgid "never"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:32
+#: modules/sitemap/sitemap.php:31
 msgid "Sitemap"
 msgstr ""
 
