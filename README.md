@@ -13,17 +13,15 @@ Feathers support different types of content in your blog posts: you can restrict
 to absolute textual purity, or you can turn on everything and blog a multimedia rainbow.
 Pages allow you to publish articles on your site that are independent of your blog content.
 
-Specifically, Chyrp Lite offers the following "out of the box" features:
+## What are the key features?
 
 #### Core:
-* Responsive and accessible HTML5 for all blog and admin pages.
+* Responsive and accessible, W3C validated HTML5 for all themes.
 * Universal support for plain text, Markdown, or raw HTML.
-* One-click markup/markdown previews for posts and pages.
-* Send and receive pingbacks on your blog posts.
+* Average blog page is fewer than 10 requests and under 500 KB.
 * Personalise your blog using powerful extensions.
-* Semantic markup makes it easy to customise themes or write your own.
-* A comprehensive rights model for managing your users and visitors.
-* Fully internationalized, with `getttext` localization support.
+* Theme development is easy with the Twig template engine.
+* Comprehensive rights model for managing your users and visitors.
 
 #### Feathers:
 * Text: write textual blog entries.
