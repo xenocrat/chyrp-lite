@@ -117,6 +117,9 @@
 
     # Serve a cache if it exists and the original image has not changed.
     if (file_exists($cache_file) and filemtime($cache_file) > filemtime($filepath)) {
+        if (DEBUG)
+            error_log("SERVING image thumbnail for ".$filename."...");
+
         header("Last-Modified: ".gmdate('D, d M Y H:i:s', filemtime($cache_file)).' GMT');
         header("Content-type: image/".($extension == "jpg" ? "jpeg" : $extension));
         header("Cache-Control: public");
@@ -129,35 +132,39 @@
     # Verify that the image is able to be thumbnailed, and prepare variables used later in the script.
     switch ($type) {
         case IMAGETYPE_GIF:
-            $image = imagecreatefromgif($filepath);
-            $done = "imagegif";
-            $mime = "image/gif";
-            break;
+            if (imagetypes() & IMG_GIF) {
+                $image = imagecreatefromgif($filepath);
+                $done = "imagegif";
+                $mime = "image/gif";
+                break;
+            }
         case IMAGETYPE_JPEG:
-            $image = imagecreatefromjpeg($filepath);
-            $done = "imagejpeg";
-            $mime = "image/jpeg";
-            break;
+            if (imagetypes() & IMG_JPG) {
+                $image = imagecreatefromjpeg($filepath);
+                $done = "imagejpeg";
+                $mime = "image/jpeg";
+                break;
+            }
         case IMAGETYPE_PNG:
-            $image = imagecreatefrompng($filepath);
-            $done = "imagepng";
-            $mime = "image/png";
-            break;
+            if (imagetypes() & IMG_PNG) {
+                $image = imagecreatefrompng($filepath);
+                $done = "imagepng";
+                $mime = "image/png";
+                break;
+            }
         case IMAGETYPE_BMP:
-            $image = imagecreatefromwbmp($filepath);
-            $done = "imagewbmp";
-            $mime = "image/bmp";
-            break;
+            if (imagetypes() & IMG_WBMP) {
+                $image = imagecreatefromwbmp($filepath);
+                $done = "imagewbmp";
+                $mime = "image/bmp";
+                break;
+            }
         default:
-            exit(header("Location: ".$url));
+            exit(header("Location: ".$url)); # Switch will flow through to here if image type is unsupported.
     }
 
-    if (!$image) {
-        if (DEBUG)
-            error_log("ERROR: Failed to generate thumbnail. (".$filename.")");
-
-        exit(header("Location: ".$url));
-    }
+    if (DEBUG)
+        error_log("GENERATING image thumbnail for ".$filename."...");
 
     # Create the final resized image.
     $thumbnail = imagecreatetruecolor($new_width, $new_height);
