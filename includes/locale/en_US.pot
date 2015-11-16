@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-10 18:28+0000\n"
+"POT-Creation-Date: 2015-11-16 20:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -283,7 +283,7 @@ msgstr ""
 #: includes/controller/Main.php:626
 #: includes/controller/Main.php:670
 #: includes/controller/Main.php:836
-#: includes/error.php:110
+#: includes/error.php:113
 #: includes/helpers.php:1269
 #: includes/helpers.php:1271
 #: includes/helpers.php:1341
@@ -342,7 +342,7 @@ msgid "Could not find a database driver for <code>%s</code>."
 msgstr ""
 
 #: includes/class/SQL.php:81
-#: install.php:139
+#: install.php:138
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
@@ -457,7 +457,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:522
 #: includes/controller/Main.php:463
-#: install.php:130
+#: install.php:129
 msgid "Password cannot be blank."
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 #: includes/controller/Main.php:465
 #: includes/controller/Main.php:632
 #: includes/javascript.php:45
-#: install.php:133
+#: install.php:132
 msgid "Passwords do not match."
 msgstr ""
 
@@ -479,7 +479,7 @@ msgstr ""
 #: includes/controller/Admin.php:614
 #: includes/controller/Main.php:468
 #: includes/controller/Main.php:635
-#: install.php:136
+#: install.php:135
 msgid "Email address cannot be blank."
 msgstr ""
 
@@ -1041,7 +1041,7 @@ msgid "You are already logged in."
 msgstr ""
 
 #: includes/controller/Main.php:458
-#: install.php:127
+#: install.php:126
 msgid "Please enter a username for your account."
 msgstr ""
 
@@ -1140,21 +1140,21 @@ msgstr ""
 msgid "By browsing this website you are agreeing to our use of cookies."
 msgstr ""
 
-#: includes/error.php:104
-#: includes/error.php:290
+#: includes/error.php:107
+#: includes/error.php:293
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:111
+#: includes/error.php:114
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:287
+#: includes/error.php:290
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:295
+#: includes/error.php:298
 msgid "Log in"
 msgstr ""
 
@@ -1371,264 +1371,264 @@ msgstr ""
 msgid "You don't have permission to %s posts/drafts."
 msgstr ""
 
-#: install.php:87
+#: install.php:86
 msgid "Already Installed"
 msgstr ""
 
-#: install.php:87
+#: install.php:86
 msgid "Chyrp is already fully installed and configured. You can delete this installer."
 msgstr ""
 
-#: install.php:92
+#: install.php:91
 #, php-format
 msgid "Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it: <pre>%s</pre>"
 msgstr ""
 
-#: install.php:95
+#: install.php:94
 msgid "Chyrp's includes directory is not writable by the server. In order for the installer to generate your configuration files, please CHMOD or CHOWN it so that Chyrp can write to it."
 msgstr ""
 
-#: install.php:99
+#: install.php:98
 msgid "SQLite database file could not be created. Please make sure your server has write permissions to the location for the database."
 msgstr ""
 
-#: install.php:109
+#: install.php:108
 #, php-format
 msgid "Could not connect to the specified database: <pre>%s</pre>"
 msgstr ""
 
-#: install.php:121
+#: install.php:120
 msgid "Please enter a name for your website."
 msgstr ""
 
-#: install.php:124
+#: install.php:123
 msgid "Time zone cannot be blank."
 msgstr ""
 
-#: install.php:146
-#: install.php:148
+#: install.php:145
+#: install.php:147
 #, php-format
 msgid "Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it: <pre>%s</pre>"
 msgstr ""
 
-#: install.php:279
+#: install.php:278
 msgid "Change Settings"
 msgstr ""
 
-#: install.php:280
+#: install.php:279
 msgid "Toggle Extensions"
 msgstr ""
 
-#: install.php:281
+#: install.php:280
 msgid "View Site"
 msgstr ""
 
-#: install.php:282
+#: install.php:281
 msgid "View Private Posts"
 msgstr ""
 
-#: install.php:283
+#: install.php:282
 msgid "View Scheduled Posts"
 msgstr ""
 
-#: install.php:284
+#: install.php:283
 msgid "View Drafts"
 msgstr ""
 
-#: install.php:285
+#: install.php:284
 msgid "View Own Drafts"
 msgstr ""
 
-#: install.php:286
+#: install.php:285
 msgid "Add Posts"
 msgstr ""
 
-#: install.php:287
+#: install.php:286
 msgid "Add Drafts"
 msgstr ""
 
-#: install.php:288
+#: install.php:287
 msgid "Edit Posts"
 msgstr ""
 
-#: install.php:289
+#: install.php:288
 msgid "Edit Drafts"
 msgstr ""
 
-#: install.php:290
+#: install.php:289
 msgid "Edit Own Posts"
 msgstr ""
 
-#: install.php:291
+#: install.php:290
 msgid "Edit Own Drafts"
 msgstr ""
 
-#: install.php:292
+#: install.php:291
 msgid "Delete Posts"
 msgstr ""
 
-#: install.php:293
+#: install.php:292
 msgid "Delete Drafts"
 msgstr ""
 
-#: install.php:294
+#: install.php:293
 msgid "Delete Own Posts"
 msgstr ""
 
-#: install.php:295
+#: install.php:294
 msgid "Delete Own Drafts"
 msgstr ""
 
-#: install.php:296
+#: install.php:295
 msgid "View Pages"
 msgstr ""
 
-#: install.php:297
+#: install.php:296
 msgid "Add Pages"
 msgstr ""
 
-#: install.php:298
+#: install.php:297
 msgid "Edit Pages"
 msgstr ""
 
-#: install.php:299
+#: install.php:298
 msgid "Delete Pages"
 msgstr ""
 
-#: install.php:300
+#: install.php:299
 msgid "Add Users"
 msgstr ""
 
-#: install.php:301
+#: install.php:300
 msgid "Edit Users"
 msgstr ""
 
-#: install.php:302
+#: install.php:301
 msgid "Delete Users"
 msgstr ""
 
-#: install.php:303
+#: install.php:302
 msgid "Add Groups"
 msgstr ""
 
-#: install.php:304
+#: install.php:303
 msgid "Edit Groups"
 msgstr ""
 
-#: install.php:305
+#: install.php:304
 msgid "Delete Groups"
 msgstr ""
 
-#: install.php:388
+#: install.php:387
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:642
+#: install.php:641
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:644
+#: install.php:643
 msgid "Adapter"
 msgstr ""
 
-#: install.php:660
+#: install.php:659
 msgid "Host"
 msgstr ""
 
-#: install.php:660
+#: install.php:659
 msgid "(usually ok as \"localhost\")"
 msgstr ""
 
-#: install.php:666
-#: install.php:714
+#: install.php:665
+#: install.php:713
 msgid "Username"
 msgstr ""
 
-#: install.php:672
-#: install.php:718
-#: install.php:722
+#: install.php:671
+#: install.php:717
+#: install.php:721
 msgid "Password"
 msgstr ""
 
-#: install.php:677
+#: install.php:676
 msgid "Database"
 msgstr ""
 
-#: install.php:679
+#: install.php:678
 msgid "(full path)"
 msgstr ""
 
-#: install.php:686
+#: install.php:685
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:686
+#: install.php:685
 msgid "(optional)"
 msgstr ""
 
-#: install.php:691
+#: install.php:690
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:693
+#: install.php:692
 msgid "Site Name"
 msgstr ""
 
-#: install.php:694
+#: install.php:693
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:697
+#: install.php:696
 msgid "Description"
 msgstr ""
 
-#: install.php:701
+#: install.php:700
 msgid "What time is it?"
 msgstr ""
 
-#: install.php:712
+#: install.php:711
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:722
+#: install.php:721
 msgid "(again)"
 msgstr ""
 
-#: install.php:726
+#: install.php:725
 msgid "Email Address"
 msgstr ""
 
-#: install.php:729
+#: install.php:728
 msgid "Install!"
 msgstr ""
 
-#: install.php:732
+#: install.php:731
 #: upgrade.php:599
 msgid "Done!"
 msgstr ""
 
-#: install.php:734
+#: install.php:733
 msgid "Chyrp Lite has been successfully installed."
 msgstr ""
 
-#: install.php:736
+#: install.php:735
 #: upgrade.php:601
 msgid "What now?"
 msgstr ""
 
-#: install.php:738
+#: install.php:737
 msgid "<strong>Delete install.php</strong>, you won't need it anymore."
 msgstr ""
 
-#: install.php:740
+#: install.php:739
 msgid "CHMOD <code>/includes/caches</code> to 777."
 msgstr ""
 
-#: install.php:742
+#: install.php:741
 msgid "Learn more about Chyrp Lite."
 msgstr ""
 
-#: install.php:744
+#: install.php:743
 #: upgrade.php:607
 msgid "Take me to my site!"
 msgstr ""
