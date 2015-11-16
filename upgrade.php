@@ -1,11 +1,9 @@
 <?php
     /**
      * File: Upgrader
-     * A task-based general-purpose Chyrp upgrader.
+     * A task-based gerneral purpose upgrader for Chyrp Lite, enabled modules and enabled extensions.
      *
      * Performs upgrade functions based on individual tasks, and checks whether or not they need to be done.
-     *
-     * Version-agnostic. Completely safe to be run at all times, by anyone.
      */
 
     header("Content-type: text/html; charset=UTF-8");
@@ -18,10 +16,9 @@
     define('ADMIN',          false);
     define('AJAX',           false);
     define('XML_RPC',        false);
-    define('TRACKBACK',      false);
     define('UPGRADING',      true);
     define('INSTALLING',     false);
-    define('TESTER',         true);
+    define('TESTER',         false);
     define('INDEX',          false);
     define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(__FILE__));
@@ -40,6 +37,12 @@
     # Define a safe value to avoid warnings pre-5.4
     if (!defined('JSON_UNESCAPED_SLASHES'))
         define('JSON_UNESCAPED_SLASHES', 0);
+
+    if (version_compare(PHP_VERSION, "5.3.2", "<"))
+        exit("Chyrp Lite requires PHP 5.3.2 or greater.");
+
+    # Make sure E_STRICT is on so Chyrp remains errorless.
+    error_reporting(E_ALL | E_STRICT);
 
     ob_start();
 
@@ -66,14 +69,9 @@
 
     /**
      * Class: Config
-     * Handles writing to whichever config file they're using.
+     * Handles writing to the config file.
      */
     class Config {
-        # Array: $yaml
-        # Stores all of the YAML data.
-        static $yaml = array("config" => array(),
-                             "database" => array());
-
         # Variable: $json
         # Holds all of the JSON settings as a $key => $val array.
         static $json = array();
@@ -149,7 +147,8 @@
          *     $setting - The setting to remove.
          */
         static function remove($setting) {
-            if (!self::check($setting)) return;
+            if (!self::check($setting))
+                return;
 
             unset(Config::$json[$setting]);
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
