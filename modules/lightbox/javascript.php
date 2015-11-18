@@ -24,30 +24,22 @@
                     "opacity": 0,
                     "transition-property": "opacity",
                     "transition-duration": "500ms",
-                    "cursor": "wait",
-                    "background-position": "top right",
-                    "background-repeat": "no-repeat",
-                    "background-size": "28px 28px"
+                    "cursor": "wait"
                     },
                 image: {
-                    "-webkit-tap-highlight-color": "rgba(0,0,0,0)",
-                    "cursor": "url('" + Site.url + "/modules/lightbox/images/zoom-in.svg') 6 6, pointer"
+                    "-webkit-tap-highlight-color": "rgba(0,0,0,0)"
                 },
                 black: {
-                    "background-color": "#000000",
-                    "background-image": "url('" + Site.url + "/modules/lightbox/images/close_white.svg')"
+                    "background-color": "#000000"
                 },
                 grey: {
-                    "background-color": "#3f3f3f",
-                    "background-image": "url('" + Site.url + "/modules/lightbox/images/close_white.svg')"
+                    "background-color": "#3f3f3f"
                 },
                 white: {
-                    "background-color": "#ffffff",
-                    "background-image": "url('" + Site.url + "/modules/lightbox/images/close_grey.svg')"
+                    "background-color": "#ffffff"
                 },
                 inherit: {
-                    "background-color": "inherit",
-                    "background-image": "url('" + Site.url + "/modules/lightbox/images/close_grey.svg')"
+                    "background-color": "inherit"
                 },
             },
             init: function() {

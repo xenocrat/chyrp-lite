@@ -23,7 +23,7 @@
 
             $set = array(Config::current()->set("module_lightbox",
                                             array("background" => $_POST['background'],
-                                                  "spacing" => ((int) $_POST['spacing'] < 28) ? 28 : (int) $_POST['spacing'],
+                                                  "spacing" => ((int) $_POST['spacing'] < 0) ? 0 : (int) $_POST['spacing'],
                                                   "protect" => isset($_POST['protect']))));
 
             if (!in_array(false, $set))
