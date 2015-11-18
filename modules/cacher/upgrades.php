@@ -5,6 +5,9 @@
      *
      * Versions: 2015.06 => 2015.07
      */
+    if (!defined('UPGRADING'))
+        exit;
+
     function remove_memcached_hosts() {
         Config::remove("cache_memcached_hosts");
     }
