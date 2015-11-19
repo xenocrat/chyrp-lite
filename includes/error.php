@@ -14,7 +14,7 @@
 
     /**
      * Function: error_snitcher
-     * Adds errors to the $error global when installing or upgrading.
+     * Adds errors to $error when installing or upgrading.
      */
     function error_snitcher($errno, $message, $file, $line) {
         global $errors;
