@@ -44,6 +44,8 @@
 
     require_once INCLUDES_DIR.DIR."model".DIR."User.php";
 
+    $installed = false;
+
     # Prepare the Config interface.
     $config = Config::current();
 
@@ -69,7 +71,8 @@
     $index = (parse_url($url, PHP_URL_PATH)) ? "/".trim(parse_url($url, PHP_URL_PATH), "/")."/" : "/" ;
     $htaccess = "<IfModule mod_rewrite.c>\n".
                 "RewriteEngine On\n".
-                "RewriteBase {$index}\nRewriteCond %{REQUEST_FILENAME} !-f\n".
+                "RewriteBase {$index}\n".
+                "RewriteCond %{REQUEST_FILENAME} !-f\n".
                 "RewriteCond %{REQUEST_FILENAME} !-d\n".
                 "RewriteRule ^.+\$ index.php [L]\n".
                 "RewriteRule ^.+\\.twig\$ index.php [L]\n".
@@ -87,25 +90,22 @@
                                       "([\s]*)<\\/IfModule>/",
                                       file_get_contents(MAIN_DIR.DIR.".htaccess")));
 
-    $errors = array();
-    $installed = false;
-
     if (file_exists(INCLUDES_DIR.DIR."config.json.php") and file_exists(MAIN_DIR.DIR.".htaccess")) {
         $sql = SQL::current(true);
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            error(__("Already Installed"), __("Chyrp is already fully installed and configured. You can delete this installer."));
+            error(__("Already Installed"), __("Chyrp is already fully installed and configured."));
     }
 
     if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR.DIR.".htaccess")) or
         (file_exists(MAIN_DIR.DIR.".htaccess") and !is_writable(MAIN_DIR.DIR.".htaccess") and !$htaccess_has_chyrp))
-        $errors[] = _f("Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it: <pre>%s</pre>", array(fix($htaccess)));
+        $errors[] = __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable.");
 
     if (!is_writable(INCLUDES_DIR))
-        $errors[] = __("Chyrp's includes directory is not writable by the server. In order for the installer to generate your configuration files, please CHMOD or CHOWN it so that Chyrp can write to it.");
+        $errors[] = __("Please CHMOD or CHOWN the <code>includes</code> directory to make it writable.");
 
     if (!empty($_POST)) {
         if ($_POST['adapter'] == "sqlite" and !@is_writable(dirname($_POST['database'])))
-            $errors[] = __("SQLite database file could not be created. Please make sure your server has write permissions to the location for the database.");
+            $errors[] = __("Please make sure your server has write permissions to the SQLite database.");
         else {
             $sql = SQL::current(array("host"     => $_POST['host'],
                                       "username" => $_POST['username'],
@@ -115,7 +115,7 @@
                                       "adapter"  => $_POST['adapter']));
 
             if (!$sql->connect(true))
-                $errors[] = _f("Could not connect to the specified database: <pre>%s</pre>", array($sql->error));
+                $errors[] = __("Could not connect to the specified database:")."\n".fix($sql->error);
             elseif ($_POST['adapter'] == "pgsql") {
                 new Query($sql, "CREATE FUNCTION year(timestamp) RETURNS double precision AS 'select extract(year from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
                 new Query($sql, "CREATE FUNCTION month(timestamp) RETURNS double precision AS 'select extract(month from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
@@ -150,12 +150,12 @@
         if (empty($errors)) {
 
             if (!$htaccess_has_chyrp)
-                if (!file_exists(MAIN_DIR.DIR.".htaccess")) {
+                if (!file_exists(MAIN_DIR.DIR.".htaccess"))
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
-                        $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it: <pre>%s</pre>", array(fix($htaccess)));
-                } elseif (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND)) {
-                    $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it: <pre>%s</pre>", array(fix($htaccess)));
-                }
+                        $errors[] = __("Clean URLs will not be available because the <code>.htaccess</code> file is not writable.");
+                else
+                    if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND))
+                        $errors[] = __("Clean URLs will not be available because the <code>.htaccess</code> file is not writable.");
 
             $config->set("sql", array());
             $config->set("name", $_POST['name']);
@@ -536,14 +536,6 @@
                 float: left;
                 margin-top: -1.5em !important;
             }
-            .error {
-                padding: 0.6em;
-                margin: 1em;
-                background-color: #d94c4c;
-                color: #ffffff;
-                border: none;
-                border-radius: 0.4em;
-            }
             .window {
                 width: 30em;
                 background: #fff;
@@ -579,6 +571,22 @@
             a:hover, a:focus {
                 color: #1e57ba;
             }
+            pre.pane {
+                height: 15em;
+                overflow-y: auto;
+                margin: 1em -2em 1em -2em;
+                padding: 2em;
+                background: #4a4747;
+                color: #fff;
+            }
+            pre.pane:empty {
+                display: none;
+            }
+            pre.pane:empty + h1 {
+                margin-top: 0em;
+            }
+            span.yay { color: #76b362; }
+            span.boo { color: #d94c4c; }
             a.big,
             button {
                 box-sizing: border-box;
@@ -620,7 +628,7 @@
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
-                list-style-position: inside;
+                list-style-position: outside;
             }
             p {
                 margin-bottom: 1em;
@@ -642,11 +650,14 @@
         </script>
     </head>
     <body>
-        <?php foreach ($errors as $error): ?>
-        <div role="alert" class="error"><?php echo $error; ?></div>
-        <?php endforeach; ?>
         <div class="window">
-        <?php if (!$installed): ?>
+            <pre role="status" class="pane"><?php
+
+foreach ($errors as $error)
+    echo '<span role="alert">'.$error."</span>\n";
+
+          ?></pre>
+<?php if (!$installed): ?>
             <form action="install.php" method="post" accept-charset="utf-8">
                 <h1><?php echo __("Database Setup"); ?></h1>
                 <p id="adapter_field">
@@ -737,21 +748,21 @@
                 </p>
                 <button type="submit"><?php echo __("Install!"); ?></button>
             </form>
-        <?php else: ?>
+<?php else: ?>
             <h1><?php echo __("Done!"); ?></h1>
             <p>
                 <?php echo __("Chyrp Lite has been successfully installed."); ?>
             </p>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("<strong>Delete install.php</strong>, you won't need it anymore."); ?></li>
+                <li><?php echo __("<strong>Delete <code>install.php</code></strong>, you won't need it anymore."); ?></li>
             <?php if (!is_writable(INCLUDES_DIR.DIR."caches")): ?>
                 <li><?php echo __("CHMOD <code>/includes/caches</code> to 777."); ?></li>
             <?php endif; ?>
                 <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
             </ol>
             <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
-        <?php endif; ?>
+<?php endif; ?>
         </div>
     </body>
 </html>

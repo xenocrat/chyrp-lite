@@ -18,7 +18,7 @@
     define('XML_RPC',        false);
     define('UPGRADING',      true);
     define('INSTALLING',     false);
-    define('TESTER',         false);
+    define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
     define('INDEX',          false);
     define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(__FILE__));
@@ -186,13 +186,13 @@
     # Attempt to load the config file and initialize the configuration.
 
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        exit("Config file not found.");
+        redirect("install.php");
 
     Config::$json = json_decode(preg_replace("/<\?php(.+)\?>\n?/s", "",
                                 file_get_contents(INCLUDES_DIR.DIR."config.json.php")), true);
 
     if (json_last_error())
-        exit("Config file corrupted.");
+        $errors[] = fix(json_last_error_msg());
 
     # Prepare the SQL interface and initialize the connection to SQL server.
 
@@ -236,7 +236,8 @@
 
         $htaccess = "<IfModule mod_rewrite.c>\n".
                     "RewriteEngine On\n".
-                    "RewriteBase {$index}\nRewriteCond %{REQUEST_FILENAME} !-f\n".
+                    "RewriteBase {$index}\n".
+                    "RewriteCond %{REQUEST_FILENAME} !-f\n".
                     "RewriteCond %{REQUEST_FILENAME} !-d\n".
                     "RewriteRule ^.+\$ index.php [L]\n".
                     "RewriteRule ^.+\\.twig\$ index.php [L]\n".
@@ -244,103 +245,12 @@
 
         if (!file_exists(MAIN_DIR.DIR.".htaccess"))
             echo __("Generating .htaccess file...").
-                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess), __("Try creating the file and/or CHMODding it to 777 temporarily."));
+                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess),
+                      __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable."));
         else
             echo __("Appending to .htaccess file...").
-                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND), __("Try creating the file and/or CHMODding it to 777 temporarily."));
-    }
-
-    /**
-     * Function: migrate_file_feather
-     * Migrates posts from File Feather to Uploader Feather.
-     *
-     * Versions: 2015.06+
-     */
-    function migrate_file_feather() {
-        $sql = SQL::current();
-        if (!$posts = $sql->select("posts", "posts.id", array("posts.feather" => "file")))
-            return;
-
-        $sql->error = "";
-        $json_error = 0;
-        $serialize_count = 0;
-        $conversion = false;
-
-        foreach($posts->fetchAll() as $post) {
-            if (!$query = $sql->select("post_attributes", "*", array("name" => "filename", "post_id" => $post["id"])))
-                continue;
-
-            $attr = $query->fetchObject();
-            $serialize_count++;
-
-            $serialized = json_encode((array) $attr->value, JSON_UNESCAPED_SLASHES);
-
-            if (!$serialized)
-                $json_error++;
-
-            $sql->update("posts",
-                         array("id" => $attr->post_id),
-                         array("feather" => "uploader"));
-
-            $sql->insert("post_attributes",
-                         array("name" => "filenames",
-                               "post_id" => $attr->post_id,
-                               "value" => $serialized));
-
-
-            $sql->delete("post_attributes",
-                         array("name" => "filename",
-                               "post_id" => $attr->post_id));
-        }
-
-        if (empty($sql->error) and empty($json_error))
-          $conversion = true;
-
-        if ($serialize_count > 0)
-          echo __("Migrating posts from File to Uploader...").
-            test($conversion);
-    }
-
-    /**
-     * Function: migrate_chat_feather
-     * Migrates posts from Chat Feather to Text Feather.
-     *
-     * Versions: 2015.06+
-     */
-    function migrate_chat_feather() {
-        $sql = SQL::current();
-        if (!$posts = $sql->select("posts", "posts.id", array("posts.feather" => "chat")))
-            return;
-
-        $sql->error = "";
-        $conversion = 0;
-
-        foreach($posts->fetchAll() as $post) {
-            if (!$query = $sql->select("post_attributes", "*", array("name" => "dialogue", "post_id" => $post["id"])))
-                continue;
-
-            $attr = $query->fetchObject();
-            $conversion++;
-            $dialogue = "<pre>".$attr->value."</pre>";
-
-            $sql->update("posts",
-                         array("id" => $attr->post_id),
-                         array("feather" => "text"));
-
-            $sql->insert("post_attributes",
-                         array("name" => "body",
-                               "post_id" => $attr->post_id,
-                               "value" => $dialogue));
-
-
-            $sql->delete("post_attributes",
-                         array("name" => "dialogue",
-                               "post_id" => $attr->post_id));
-        }
-
-        if ($conversion > 0)
-          echo __("Migrating posts from Chat to Text...").
-            test(empty($sql->error));
+                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND),
+                      __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable."));
     }
 
     /**
@@ -493,10 +403,16 @@
             pre.pane {
                 height: 15em;
                 overflow-y: auto;
-                margin: 1em -2em 1em;
+                margin: 1em -2em 1em -2em;
                 padding: 2em;
                 background: #4a4747;
                 color: #fff;
+            }
+            pre.pane:empty {
+                display: none;
+            }
+            pre.pane:empty + h1 {
+                margin-top: 0em;
             }
             span.yay { color: #76b362; }
             span.boo { color: #d94c4c; }
@@ -536,7 +452,7 @@
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
-                list-style-position: inside;
+                list-style-position: outside;
             }
             li {
                 margin-bottom: 1em;
@@ -551,56 +467,53 @@
 <?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or isset($_GET['task']) == "upgrade") : ?>
             <pre role="status" class="pane"><?php
 
-        # Perform core upgrade tasks.
+# Perform core upgrade tasks.
 
-        fix_htaccess();
+fix_htaccess();
 
-        migrate_file_feather();
+add_markdown();
 
-        migrate_chat_feather();
+add_homepage();
 
-        add_markdown();
+add_uploads_limit();
 
-        add_homepage();
+remove_trackbacking();
 
-        add_uploads_limit();
+# Perform Module/Feather upgrades.
 
-        remove_trackbacking();
+foreach ((array) Config::get("enabled_modules") as $module)
+    if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
+        ob_start();
+        echo $begin = _f("Calling ‘%s’ module's upgrader...", array($module))."\n";
+        require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
-        # Perform Module/Feather upgrades.
+        if (ob_get_contents() == $begin)
+            ob_end_clean();
+        else
+            ob_end_flush();
+    }
 
-        foreach ((array) Config::get("enabled_modules") as $module)
-            if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
-                ob_start();
-                echo $begin = _f("Calling ‘%s’ module's upgrader...", array($module))."\n";
-                require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
-                $buf = ob_get_contents();
-                if (ob_get_contents() == $begin)
-                    ob_end_clean();
-                else
-                    ob_end_flush();
-            }
+foreach ((array) Config::get("enabled_feathers") as $feather)
+    if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
+        ob_start();
+        echo $begin = _f("Calling ‘%s’ feather's upgrader...", array($feather))."\n";
+        require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 
-        foreach ((array) Config::get("enabled_feathers") as $feather)
-            if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
-                ob_start();
-                echo $begin = _f("Calling ‘%s’ feather's upgrader...", array($feather))."\n";
-                require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
-                $buf = ob_get_contents();
-                if (ob_get_contents() == $begin)
-                    ob_end_clean();
-                else
-                    ob_end_flush();
-            }
+        if (ob_get_contents() == $begin)
+            ob_end_clean();
+        else
+            ob_end_flush();
+    }
 
-?>
+foreach ($errors as $error)
+    echo '<span role="alert">'.$error."</span>\n";
 
-<?php echo __("Done!"); ?>
-</pre>
+          ?></pre>
             <h1 class="what_now"><?php echo __("What now?"); ?></h1>
             <ol>
-                <li><?php echo __("Look through the results up there for any failed tasks."); ?></li>
-                <li><?php echo __("Fix any problems reported by failed tasks and execute this upgrader again if necessary until all tasks succeed."); ?></li>
+                <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
+                <li><?php echo __("Fix any problems reported."); ?></li>
+                <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
                 <li><?php echo __("You can delete <code>upgrade.php</code> once you are finished."); ?></li>
             </ol>
             <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("Take me to my site!"); ?></a>

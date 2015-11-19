@@ -2,11 +2,29 @@
     ini_set('display_errors', false);
     ini_set('error_log', MAIN_DIR.DIR."error_log.txt");
 
+    $errors = array();
+
     # Set the appropriate error handler.
-    if (defined('TESTER') and TESTER)
+    if (TESTER)
         set_error_handler("error_panicker");
+    elseif (INSTALLING or UPGRADING)
+        set_error_handler("error_snitcher");
     else
         set_error_handler("error_composer");
+
+    /**
+     * Function: error_snitcher
+     * Adds errors to the $error global when installing or upgrading.
+     */
+    function error_snitcher($errno, $message, $file, $line) {
+        global $errors;
+
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
+        $errors[] = $message." (".$file." on line ".$line.")";
+        return true;
+    }
 
     /**
      * Function: error_panicker
@@ -16,18 +34,13 @@
         if (error_reporting() === 0)
             return; # Error reporting has been disabled.
 
-        if (($buffer = ob_get_contents()) !== false)
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
+        if (ob_get_contents() !== false)
             ob_clean();
 
-        if (defined('DEBUG') and DEBUG)
-            error_log("ERROR: ".$message." (".$file." on line ".$line.")");
-
-        echo("ERROR: ".$message." (".$file." on line ".$line.")");
-
-        if ($buffer !== false)
-            ob_end_flush();
-
-        exit;
+        exit("ERROR: ".$message." (".$file." on line ".$line.")");
     }
 
     /**
@@ -38,8 +51,8 @@
         if (!(error_reporting() & $errno))
             return; # Error reporting excludes this error.
 
-        if (defined('DEBUG') and DEBUG)
-            error_log("ERROR: ".$message." (".$file." on line ".$line.")");
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
         error(null, $message." (".$file." on line ".$line.")", debug_backtrace());
     }
@@ -60,7 +73,7 @@
         $body = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $body);
         $body = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $body);
 
-        if (!empty($backtrace) and defined('DIR') and defined('MAIN_DIR'))
+        if (!empty($backtrace))
             foreach ($backtrace as $index => &$trace) {
                 if (!isset($trace["file"]) or !isset($trace["line"])) {
                     unset($backtrace[$index]);
@@ -71,7 +84,7 @@
             }
 
         # Clean the output buffer before we begin.
-        if (($buffer = ob_get_contents()) !== false)
+        if (ob_get_contents() !== false)
             ob_clean();
 
         # Attempt to set headers to sane values.
@@ -81,7 +94,7 @@
         }
 
         # Report in plain text for the automated tester.
-        if (defined('TESTER') and TESTER)
+        if (TESTER)
             exit("ERROR: ".$body);
 
         # Report and exit safely if the error is too deep in the core for a pretty error message.
@@ -91,22 +104,16 @@
             !function_exists("oneof") or
             !function_exists("logged_in") or
             !class_exists("Config") or
-            !property_exists($config = Config::current(), "chyrp_url") or empty($site = $config->chyrp_url)) {
+            !method_exists("Config", "current") or
+            !property_exists($config = Config::current(), "chyrp_url") or empty($site = $config->chyrp_url))
+            exit("<!DOCTYPE html>\n<h1>ERROR:</h1>\n<p>".$body."</p>");
 
-            echo("<!DOCTYPE html>\n<h1>ERROR:</h1>\n<p>".$body."</p>");
-
-            if (defined('AJAX') and AJAX or isset($_POST['ajax']))
-                echo("\nHEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
-
-            exit;
-        }
-
-        # Report with backtrace and appended token for JavaScripts
-        if (defined('AJAX') and AJAX or isset($_POST['ajax'])) {
+        # Report with backtrace and magic words for JavaScript.
+        if (AJAX) {
             foreach ($backtrace as $trace)
                 $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
 
-            exit($body."\nHEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
+            exit($body."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
         }
 
         # Validate title and body text.
@@ -294,7 +301,7 @@
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
-            <?php if (!logged_in() and defined('ADMIN') and ADMIN): ?>
+            <?php if (!logged_in() and ADMIN): ?>
                 <a href="<?php echo $site; ?>/?action=login" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
             </div>
@@ -302,9 +309,6 @@
     </body>
 </html>
 <?php
-        # Flush the output buffer and exit.
-        if ($buffer !== false)
-            ob_end_flush();
-
+        # Terminate execution.
         exit;
     }
