@@ -13,26 +13,12 @@
         set_error_handler("error_composer");
 
     /**
-     * Function: error_snitcher
-     * Adds errors to $error when installing or upgrading.
-     */
-    function error_snitcher($errno, $message, $file, $line) {
-        global $errors;
-
-        if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
-
-        $errors[] = $message." (".$file." on line ".$line.")";
-        return true;
-    }
-
-    /**
      * Function: error_panicker
      * Report in plain text for the automated tester and exit.
      */
     function error_panicker($errno, $message, $file, $line) {
         if (error_reporting() === 0)
-            return; # Error reporting has been disabled.
+            return true; # Error reporting has been disabled.
 
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
@@ -40,7 +26,21 @@
         if (ob_get_contents() !== false)
             ob_clean();
 
-        exit("ERROR: ".$message." (".$file." on line ".$line.")");
+        exit(htmlspecialchars("ERROR: ".$message." (".$file." on line ".$line.")", ENT_QUOTES, "utf-8", false));
+    }
+
+    /**
+     * Function: error_snitcher
+     * Informs the user of errors when installing or upgrading.
+     */
+    function error_snitcher($errno, $message, $file, $line) {
+        global $errors;
+
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
+        $errors[] = htmlspecialchars($message." (".$file." on line ".$line.")", ENT_QUOTES, "utf-8", false);
+        return true;
     }
 
     /**
@@ -49,7 +49,7 @@
      */
     function error_composer($errno, $message, $file, $line) {
         if (!(error_reporting() & $errno))
-            return; # Error reporting excludes this error.
+            return true; # Error reporting excludes this error.
 
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
@@ -230,7 +230,7 @@
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
-                list-style-position: inside;
+                list-style-position: outside;
             }
             ol.backtrace {
                 margin-top: 0.5em;
