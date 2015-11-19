@@ -22,7 +22,7 @@
 
         public function get() {
             if (DEBUG)
-                error_log("SERVING cache file for ".$this->url."...");
+                error_log("SERVING cache file for ".$this->url);
 
             $cache = array('contents' => file_get_contents($this->file), 'headers' => array());
 
@@ -34,7 +34,7 @@
 
         public function set($value) {
             if (DEBUG)
-                error_log("GENERATING cache file for ".$this->url."...");
+                error_log("GENERATING cache file for ".$this->url);
 
             # Generate the user's directory.
             if (!file_exists($this->path))
@@ -64,7 +64,7 @@
 
         public function regenerate_local($user = null) {
             if (DEBUG)
-                error_log("REGENERATING local user ".$this->user."...");
+                error_log("REGENERATING local user ".$this->user);
 
             $directory = (isset($user)) ? $this->caches.DIR.$user : $this->path ;
 
@@ -74,7 +74,7 @@
 
         public function remove_caches_for($url) {
             if (DEBUG)
-                error_log("REMOVING caches for ".$url."...");
+                error_log("REMOVING caches for ".$url);
 
             foreach ((array) glob($this->caches.DIR."*".DIR.md5($url).".html") as $file)
                 @unlink($file);

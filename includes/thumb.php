@@ -118,7 +118,7 @@
     # Serve a cache if it exists and the original image has not changed.
     if (file_exists($cache_file) and filemtime($cache_file) > filemtime($filepath)) {
         if (DEBUG)
-            error_log("SERVING image thumbnail for ".$filename."...");
+            error_log("SERVING image thumbnail for ".$filename);
 
         header("Last-Modified: ".gmdate('D, d M Y H:i:s', filemtime($cache_file)).' GMT');
         header("Content-type: image/".($extension == "jpg" ? "jpeg" : $extension));
@@ -164,7 +164,7 @@
     }
 
     if (DEBUG)
-        error_log("GENERATING image thumbnail for ".$filename."...");
+        error_log("GENERATING image thumbnail for ".$filename);
 
     # Create the final resized image.
     $thumbnail = imagecreatetruecolor($new_width, $new_height);
