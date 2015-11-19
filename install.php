@@ -44,21 +44,21 @@
 
     require_once INCLUDES_DIR.DIR."model".DIR."User.php";
 
+    # Has Chyrp Lite been installed?
     $installed = false;
 
     # Prepare the Config interface.
     $config = Config::current();
 
-    # Atlantic/Reykjavik is 0 offset. Set it so the timezones() function is
-    # always accurate, even if the server has its own timezone settings.
-    $default_timezone = oneof(ini_get("date.timezone"), "Atlantic/Reykjavik");
-    set_timezone($default_timezone);
+    # Atlantic/Reykjavik is 0 offset.
+    $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
+    set_timezone($timezone);
 
     # Ask PHP for the default locale and try to load an appropriate translator
-    $default_language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
+    $language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
 
-    if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$default_language.".mo"))
-        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$default_language.".mo");
+    if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$language.".mo"))
+        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
@@ -721,7 +721,7 @@ foreach ($errors as $error)
                     <label for="timezone"><?php echo __("What time is it?"); ?></label>
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
-                        <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], oneof(@$_POST['timezone'], $default_timezone)); ?>>
+                        <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>
                             <?php echo strftime("%I:%M %p on %B %d, %Y", $zone["now"]); ?> &mdash;
                             <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone["name"]); ?>
                         </option>
