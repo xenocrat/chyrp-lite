@@ -102,7 +102,7 @@ ${ trigger.call("end_content") }
 <!--
 {% for debug in sql_debug %}
 ${ debug.query | replace("\t", "    ") | escape }
-${ "Called from %s on line %d at %ss." | translate | format(debug.file, debug.line, debug.time) }
+${ "Called from %s on line %d at %s seconds." | translate | format(debug.file, debug.line, debug.time) }
 {% endfor %}
 -->
 {% endif %}

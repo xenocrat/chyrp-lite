@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-16 22:36+0000\n"
+"POT-Creation-Date: 2015-11-18 23:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -283,7 +283,7 @@ msgstr ""
 #: includes/controller/Main.php:626
 #: includes/controller/Main.php:670
 #: includes/controller/Main.php:836
-#: includes/error.php:113
+#: includes/error.php:120
 #: includes/helpers.php:1269
 #: includes/helpers.php:1271
 #: includes/helpers.php:1341
@@ -1140,21 +1140,21 @@ msgstr ""
 msgid "By browsing this website you are agreeing to our use of cookies."
 msgstr ""
 
-#: includes/error.php:107
-#: includes/error.php:293
+#: includes/error.php:114
+#: includes/error.php:300
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:114
+#: includes/error.php:121
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:290
+#: includes/error.php:297
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:298
+#: includes/error.php:305
 msgid "Log in"
 msgstr ""
 
@@ -1376,25 +1376,25 @@ msgid "Already Installed"
 msgstr ""
 
 #: install.php:96
-msgid "Chyrp is already fully installed and configured. You can delete this installer."
+msgid "Chyrp is already fully installed and configured."
 msgstr ""
 
 #: install.php:101
-#, php-format
-msgid "Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it: <pre>%s</pre>"
+#: upgrade.php:249
+#: upgrade.php:253
+msgid "Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable."
 msgstr ""
 
 #: install.php:104
-msgid "Chyrp's includes directory is not writable by the server. In order for the installer to generate your configuration files, please CHMOD or CHOWN it so that Chyrp can write to it."
+msgid "Please CHMOD or CHOWN the <code>includes</code> directory to make it writable."
 msgstr ""
 
 #: install.php:108
-msgid "SQLite database file could not be created. Please make sure your server has write permissions to the location for the database."
+msgid "Please make sure your server has write permissions to the SQLite database."
 msgstr ""
 
 #: install.php:118
-#, php-format
-msgid "Could not connect to the specified database: <pre>%s</pre>"
+msgid "Could not connect to the specified database:"
 msgstr ""
 
 #: install.php:130
@@ -1406,9 +1406,8 @@ msgid "Time zone cannot be blank."
 msgstr ""
 
 #: install.php:155
-#: install.php:157
-#, php-format
-msgid "Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it: <pre>%s</pre>"
+#: install.php:158
+msgid "Clean URLs will not be available because the <code>.htaccess</code> file is not writable."
 msgstr ""
 
 #: install.php:288
@@ -1523,113 +1522,112 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:651
+#: install.php:662
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:653
+#: install.php:664
 msgid "Adapter"
 msgstr ""
 
-#: install.php:669
+#: install.php:680
 msgid "Host"
 msgstr ""
 
-#: install.php:669
+#: install.php:680
 msgid "(usually ok as \"localhost\")"
 msgstr ""
 
-#: install.php:675
-#: install.php:723
+#: install.php:686
+#: install.php:734
 msgid "Username"
 msgstr ""
 
-#: install.php:681
-#: install.php:727
-#: install.php:731
+#: install.php:692
+#: install.php:738
+#: install.php:742
 msgid "Password"
 msgstr ""
 
-#: install.php:686
+#: install.php:697
 msgid "Database"
 msgstr ""
 
-#: install.php:688
+#: install.php:699
 msgid "(full path)"
 msgstr ""
 
-#: install.php:695
+#: install.php:706
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:695
+#: install.php:706
 msgid "(optional)"
 msgstr ""
 
-#: install.php:700
+#: install.php:711
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:702
+#: install.php:713
 msgid "Site Name"
 msgstr ""
 
-#: install.php:703
+#: install.php:714
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:706
+#: install.php:717
 msgid "Description"
 msgstr ""
 
-#: install.php:710
+#: install.php:721
 msgid "What time is it?"
 msgstr ""
 
-#: install.php:721
+#: install.php:732
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:731
+#: install.php:742
 msgid "(again)"
 msgstr ""
 
-#: install.php:735
+#: install.php:746
 msgid "Email Address"
 msgstr ""
 
-#: install.php:738
+#: install.php:749
 msgid "Install!"
 msgstr ""
 
-#: install.php:741
-#: upgrade.php:598
+#: install.php:752
 msgid "Done!"
 msgstr ""
 
-#: install.php:743
+#: install.php:754
 msgid "Chyrp Lite has been successfully installed."
 msgstr ""
 
-#: install.php:745
-#: upgrade.php:600
+#: install.php:756
+#: upgrade.php:512
 msgid "What now?"
 msgstr ""
 
-#: install.php:747
-msgid "<strong>Delete install.php</strong>, you won't need it anymore."
+#: install.php:758
+msgid "<strong>Delete <code>install.php</code></strong>, you won't need it anymore."
 msgstr ""
 
-#: install.php:749
+#: install.php:760
 msgid "CHMOD <code>/includes/caches</code> to 777."
 msgstr ""
 
-#: install.php:751
+#: install.php:762
 msgid "Learn more about Chyrp Lite."
 msgstr ""
 
-#: install.php:753
-#: upgrade.php:606
+#: install.php:764
+#: upgrade.php:519
 msgid "Take me to my site!"
 msgstr ""
 
@@ -1656,78 +1654,69 @@ msgstr ""
 msgid "failed!"
 msgstr ""
 
-#: upgrade.php:246
+#: upgrade.php:247
 msgid "Generating .htaccess file..."
 msgstr ""
 
-#: upgrade.php:247
-#: upgrade.php:250
-msgid "Try creating the file and/or CHMODding it to 777 temporarily."
-msgstr ""
-
-#: upgrade.php:249
+#: upgrade.php:251
 msgid "Appending to .htaccess file..."
 msgstr ""
 
 #: upgrade.php:300
-msgid "Migrating posts from File to Uploader..."
-msgstr ""
-
-#: upgrade.php:342
-msgid "Migrating posts from Chat to Text..."
-msgstr ""
-
-#: upgrade.php:390
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:575
+#: upgrade.php:487
 #, php-format
 msgid "Calling ‘%s’ module's upgrader..."
 msgstr ""
 
-#: upgrade.php:587
+#: upgrade.php:499
 #, php-format
 msgid "Calling ‘%s’ feather's upgrader..."
 msgstr ""
 
-#: upgrade.php:602
-msgid "Look through the results up there for any failed tasks."
+#: upgrade.php:514
+msgid "Look above for any reports of failed tasks or errors."
 msgstr ""
 
-#: upgrade.php:603
-msgid "Fix any problems reported by failed tasks and execute this upgrader again if necessary until all tasks succeed."
+#: upgrade.php:515
+msgid "Fix any problems reported."
 msgstr ""
 
-#: upgrade.php:604
+#: upgrade.php:516
+msgid "Execute this upgrader again until all tasks succeed."
+msgstr ""
+
+#: upgrade.php:517
 msgid "You can delete <code>upgrade.php</code> once you are finished."
 msgstr ""
 
-#: upgrade.php:608
+#: upgrade.php:521
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:609
+#: upgrade.php:522
 msgid "Please take these preemptive measures before proceeding:"
 msgstr ""
 
-#: upgrade.php:611
+#: upgrade.php:524
 msgid "<strong>Make a backup of your installation and database.</strong>"
 msgstr ""
 
-#: upgrade.php:612
+#: upgrade.php:525
 msgid "Disable any third-party Modules and Feathers."
 msgstr ""
 
-#: upgrade.php:613
+#: upgrade.php:526
 msgid "Ensure Chyrp Lite's directory is writable by the server."
 msgstr ""
 
-#: upgrade.php:615
+#: upgrade.php:528
 msgid "If any of the upgrade tasks fail, you can safely refresh and retry."
 msgstr ""
 
-#: upgrade.php:617
+#: upgrade.php:530
 msgid "Upgrade me!"
 msgstr ""
 

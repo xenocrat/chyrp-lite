@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-07 16:33+0000\n"
+"POT-Creation-Date: 2015-11-18 23:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -333,10 +333,10 @@ msgstr ""
 
 #: themes/sparrow/layouts/default.twig:105
 #, php-format
-msgid "Called from %s on line %d at %ss."
+msgid "Called from %s on line %d at %s seconds."
 msgstr ""
 
-#: themes/sparrow/pages/404.twig:5
+#: themes/sparrow/pages/404.twig:4
 msgid "Not found"
 msgstr ""
 
