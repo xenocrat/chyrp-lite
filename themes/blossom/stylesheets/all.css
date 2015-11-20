@@ -62,7 +62,7 @@ html {                                              font-size: 16px }
 body {                                              font-family: "Open Sans webfont", sans-serif;
                                                     font-size: 1rem;
                                                     color: #4e5a66;
-                                                    line-height: 1.5em;
+                                                    line-height: 1.5;
                                                     background-color: #f7f5ed;
                                                     margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
@@ -74,19 +74,19 @@ h1 {                                                font-size: 2em;
                                                     font-weight: bold;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h1.banner {                                     font-size: 0.75em;
                                                     margin: 1.33em 0em }
 h2 {                                                font-size: 1.5em;
                                                     font-weight: bold;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
 h3 {                                                font-size: 1em;
                                                     font-weight: bold;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h3.ribbon {                                     font-weight: normal;
                                                     margin: 0em }
     h3.archive {                                    margin-top: 1em;
@@ -95,7 +95,7 @@ h4 {                                                font-size: 0.75em;
                                                     font-weight: bold;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h4.yearly {                                     font-size: 1.33em }
     h4.archive {                                    font-size: 1em;
                                                     font-weight: normal }
@@ -104,7 +104,7 @@ h5, h6 {                                            font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h1:first-child, h2:first-child,
     h3:first-child, h4:first-child,
     h5:first-child, h6:first-child {                margin-top: 0em }
@@ -328,7 +328,7 @@ label {                                             display: block;
                                                     top: 2rem;
                                                     left: 2rem;
                                                     width: 12rem;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     div.prev {                                      width: 100%;
                                                     clear: both;
                                                     text-align: center;

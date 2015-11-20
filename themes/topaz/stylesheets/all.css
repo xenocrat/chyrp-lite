@@ -62,7 +62,7 @@ html {                                              font-size: 16px }
 body {                                              font-family: "Open Sans webfont", sans-serif;
                                                     font-size: 1rem;
                                                     color: #4e5a66;
-                                                    line-height: 1.5em;
+                                                    line-height: 1.5;
                                                     background-color: #fcfbfa;
                                                     margin: 0rem 2rem 2rem 16rem;
                                                     min-width: 288px;
@@ -75,7 +75,7 @@ h1 {                                                font-size: 2em;
                                                     text-transform: none;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h1.banner {                                     font-size: 0.75em;
                                                     margin: 1.33em 0em }
 h2 {                                                font-size: 1.5em;
@@ -83,14 +83,14 @@ h2 {                                                font-size: 1.5em;
                                                     text-transform: none;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h2.post_title {                                 text-align: center }
 h3 {                                                font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h3.ribbon {                                     margin: 0em }
     h3.archive {                                    margin-top: 1em;
                                                     clear: both }
@@ -99,7 +99,7 @@ h4 {                                                font-size: 0.75em;
                                                     text-transform: none;
                                                     margin: 1.33em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h4.yearly {                                     font-size: 1.33em;
                                                     text-align: center;
                                                     padding-bottom: 0.5em;
@@ -111,7 +111,7 @@ h5, h6 {                                            font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h6.post_byline {                                font-weight: normal;
                                                     font-style: italic;
                                                     font-size: 0.75em;
@@ -342,7 +342,7 @@ label {                                             display: block;
                                                     top: 2rem;
                                                     left: 2rem;
                                                     width: 12rem;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     div.prev {                                      width: 100%;
                                                     clear: both;
                                                     text-align: center;
