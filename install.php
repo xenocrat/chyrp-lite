@@ -557,7 +557,7 @@
             label {
                 display: block;
                 font-weight: bold;
-                line-height: 1.5em
+                line-height: 1.5;
             }
             .footer {
                 color: #777;
@@ -597,7 +597,7 @@
                 text-align: center;
                 color: #4a4747;
                 text-decoration: none;
-                line-height: 1.25em;
+                line-height: 1.25;
                 margin: 0.75em 0em;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;

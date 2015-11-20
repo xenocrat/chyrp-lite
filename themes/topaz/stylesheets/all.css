@@ -377,7 +377,7 @@ label {                                             display: block;
     div.tags {                                      margin: 1.33em 0em 0em 0em;
                                                     font-size: 0.75em }
     div.doaction {                                  font-family: inherit;
-                                                    line-height: 2em;
+                                                    line-height: 2;
                                                     text-align: right;
                                                     margin-bottom: 1em }
     div.doaction:last-child {                       margin-bottom: 0em }
