@@ -194,7 +194,7 @@
             body {
                 font-size: 14px;
                 font-family: "Open Sans webfont", sans-serif;
-                line-height: 1.5em;
+                line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
                 padding: 0em 0em 5em;

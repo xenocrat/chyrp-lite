@@ -462,7 +462,7 @@
             body {
                 font-size: 14px;
                 font-family: "Open Sans webfont", sans-serif;
-                line-height: 1.5em;
+                line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
                 padding: 0em 0em 5em;
@@ -471,7 +471,7 @@
                 font-size: 2em;
                 margin: 0.5em 0em;
                 text-align: center;
-                line-height: 1em;
+                line-height: 1;
             }
             h1:first-child {
                 margin-top: 0em;
