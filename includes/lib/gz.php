@@ -41,6 +41,6 @@
         header("Last-Modified: ".@date("r", filemtime($_GET['file'])));
         readfile($_GET['file']);
     } else
-        echo "alert('File not found: ".addslashes($_GET['file'])."')";
+        exit("File Not Found.");
 
     ob_end_flush();
