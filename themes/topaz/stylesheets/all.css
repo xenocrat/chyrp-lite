@@ -543,7 +543,7 @@ a:active {                                          color: #000000;
     article > section.photo > a {                   border-bottom: none }
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
-    a.likes > img {                                 opacity: 0.5 }
+    a.likes > img {                                 opacity: 0.8 }
     a.likes:hover > img,
     a.likes:focus > img,
     a.likes:active > img {                          opacity: 1 }

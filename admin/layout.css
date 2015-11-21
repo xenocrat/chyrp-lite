@@ -646,7 +646,9 @@ img.emblem.preview {                            cursor: pointer;
 .filters .filter_item:last-of-type {            padding-right: 0em }
 .filters .filter_item:only-of-type {            float: none;
                                                 max-width: 100% }
-img#likeImage_preview {                         vertical-align: middle }
+img#likeImage_preview {                         max-width: 28px;
+                                                max-height: 28px;
+                                                vertical-align: middle }
 /* @end */
 
 /* @group Overlays */
