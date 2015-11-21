@@ -500,7 +500,7 @@ a:active {                                          color: #d94c7b;
     section a:active, p a:active {                  color: #d94c7b;
                                                     border-bottom: 1px #d94c7b solid }
     div.tags a, span.tags_select a {                display: inline-block;
-                                                    padding: 0em 0.4em;
+                                                    padding: 0.2em 0.4em;
                                                     margin-bottom: 4px;
                                                     border: none;
                                                     border-radius: 0.2em;

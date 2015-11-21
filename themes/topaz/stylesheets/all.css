@@ -511,7 +511,7 @@ a:active {                                          color: #000000;
     section a:active, p a:active {                  color: #000000;
                                                     border-bottom: 1px #000000 solid }
     div.tags a, span.tags_select a {                display: inline-block;
-                                                    padding: 0em 0.4em;
+                                                    padding: 0.2em 0.4em;
                                                     margin-bottom: 4px;
                                                     border: none;
                                                     border-radius: 0.2em;
