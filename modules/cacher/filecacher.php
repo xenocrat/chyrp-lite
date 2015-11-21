@@ -56,7 +56,7 @@
 
         public function regenerate() {
             if (DEBUG)
-                error_log("REGENERATING");
+                error_log("REGENERATING caches");
 
             foreach ((array) glob($this->caches.DIR."*".DIR."*.html") as $file)
                 @unlink($file);
@@ -64,7 +64,7 @@
 
         public function regenerate_local($user = null) {
             if (DEBUG)
-                error_log("REGENERATING local user ".$this->user);
+                error_log("REGENERATING caches for local user ".$this->user);
 
             $directory = (isset($user)) ? $this->caches.DIR.$user : $this->path ;
 
