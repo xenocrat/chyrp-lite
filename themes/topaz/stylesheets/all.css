@@ -543,10 +543,12 @@ a:active {                                          color: #000000;
     article > section.photo > a {                   border-bottom: none }
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
-    a.likes > img {                                 opacity: 0.8 }
+    a.likes > img {                                 display: inline-block;
+                                                    position: relative;
+                                                    top: 0px }
     a.likes:hover > img,
     a.likes:focus > img,
-    a.likes:active > img {                          opacity: 1 }
+    a.likes:active > img {                          top: 1px }
     a.archive_post_link {                           display: block;
                                                     position: absolute;
                                                     top: -1px;
