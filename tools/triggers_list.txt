@@ -5,7 +5,7 @@
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 440
+	admin/admin.js.php on line 429
 
 
 can_not_view_site
@@ -209,7 +209,7 @@ Arguments:
 parse_url
 ---------
 Called from:
-	includes/class/Route.php on line 68
+	includes/class/Route.php on line 75
 Arguments:
 	$this
 
@@ -217,7 +217,7 @@ Arguments:
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 92
+	includes/class/Route.php on line 99
 Arguments:
 	$this
 
@@ -225,7 +225,7 @@ Arguments:
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 131
+	includes/class/Route.php on line 138
 Arguments:
 	$this
 
@@ -233,7 +233,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 362
+	includes/common.php on line 358
 
 
 import_chyrp_group
@@ -293,7 +293,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 201
+	includes/javascript.php on line 190
 
 
 add_group
@@ -529,7 +529,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 173
+	includes/class/Route.php on line 180
 
 
 related_posts
@@ -555,7 +555,7 @@ scripts
 Target:
 	$javascripts
 Called from:
-	includes/class/Theme.php on line 306
+	includes/class/Theme.php on line 303
 
 
 links
@@ -563,7 +563,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 355
+	includes/class/Theme.php on line 352
 
 
 visitor
@@ -571,7 +571,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 359
+	includes/common.php on line 355
 
 
 admin_determine_action

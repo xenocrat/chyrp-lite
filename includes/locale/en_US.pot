@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-18 23:52+0000\n"
+"POT-Creation-Date: 2015-11-23 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -240,7 +240,7 @@ msgstr ""
 #: includes/class/Config.php:76
 #: includes/class/Config.php:100
 #: includes/class/Config.php:105
-#: includes/class/Route.php:230
+#: includes/class/Route.php:237
 #: includes/class/SQL.php:47
 #: includes/class/SQL.php:74
 #: includes/class/SQL.php:81
@@ -283,7 +283,7 @@ msgstr ""
 #: includes/controller/Main.php:626
 #: includes/controller/Main.php:670
 #: includes/controller/Main.php:836
-#: includes/error.php:120
+#: includes/error.php:122
 #: includes/helpers.php:1269
 #: includes/helpers.php:1271
 #: includes/helpers.php:1341
@@ -328,7 +328,7 @@ msgstr ""
 msgid "Database Error"
 msgstr ""
 
-#: includes/class/Route.php:230
+#: includes/class/Route.php:237
 msgid "Route was initiated without a Controller."
 msgstr ""
 
@@ -465,7 +465,7 @@ msgstr ""
 #: includes/controller/Admin.php:607
 #: includes/controller/Main.php:465
 #: includes/controller/Main.php:632
-#: includes/javascript.php:45
+#: includes/javascript.php:34
 #: install.php:142
 msgid "Passwords do not match."
 msgstr ""
@@ -1140,21 +1140,21 @@ msgstr ""
 msgid "By browsing this website you are agreeing to our use of cookies."
 msgstr ""
 
-#: includes/error.php:114
-#: includes/error.php:300
+#: includes/error.php:116
+#: includes/error.php:302
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:121
+#: includes/error.php:123
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:297
+#: includes/error.php:299
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:305
+#: includes/error.php:307
 msgid "Log in"
 msgstr ""
 
@@ -1269,27 +1269,27 @@ msgstr ""
 msgid "Unable to send email."
 msgstr ""
 
-#: includes/javascript.php:75
+#: includes/javascript.php:64
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: includes/javascript.php:78
+#: includes/javascript.php:67
 msgid "More Options &darr;"
 msgstr ""
 
-#: includes/javascript.php:132
+#: includes/javascript.php:121
 msgid "Post has been saved as a draft."
 msgstr ""
 
-#: includes/javascript.php:137
+#: includes/javascript.php:126
 msgid "Post has been published."
 msgstr ""
 
-#: includes/javascript.php:188
+#: includes/javascript.php:177
 msgid "Are you sure you want to delete this post? If you wish to hide it, save it as a draft."
 msgstr ""
 
-#: includes/javascript.php:197
+#: includes/javascript.php:186
 msgid "Oops! Something went wrong on this web page."
 msgstr ""
 

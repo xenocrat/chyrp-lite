@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-18 23:53+0000\n"
+"POT-Creation-Date: 2015-11-23 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -392,8 +392,8 @@ msgstr ""
 msgid "(again)"
 msgstr ""
 
-#: themes/topaz/javascripts/theme.js.php:18
-#: themes/topaz/javascripts/theme.js.php:26
+#: themes/topaz/javascripts/theme.js.php:16
+#: themes/topaz/javascripts/theme.js.php:24
 msgid "Menu"
 msgstr ""
 
