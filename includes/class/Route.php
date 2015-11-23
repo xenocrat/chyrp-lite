@@ -36,10 +36,15 @@
 
             $config = Config::current();
 
-            if (substr_count($_SERVER['REQUEST_URI'], "..") > 0 )
-                exit("Bad Request.");
-            elseif (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action']))
+            if (substr_count($_SERVER['REQUEST_URI'], "..") > 0 ) {
+                header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+                exit("Malformed URI.");
+            }
+
+            if (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action'])) {
+                header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
                 exit("Invalid Action.");
+            }
 
             $this->action =& $_GET['action'];
 
@@ -59,8 +64,10 @@
                                  preg_replace("/{$this->safe_path}?/", "", $_SERVER['REQUEST_URI'], 1) ;
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
 
-            if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0]))
-                exit("Bad Request.");
+            if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0])) {
+                header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+                exit("Invalid Action.");
+            }
 
             if (method_exists($controller, "parse"))
                 $controller->parse($this);

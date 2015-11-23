@@ -7,10 +7,11 @@
     # Set the appropriate error handler.
     if (TESTER)
         set_error_handler("error_panicker");
-    elseif (INSTALLING or UPGRADING)
-        set_error_handler("error_snitcher");
     else
-        set_error_handler("error_composer");
+        if (INSTALLING or UPGRADING)
+            set_error_handler("error_snitcher");
+        else
+            set_error_handler("error_composer");
 
     /**
      * Function: error_panicker
@@ -74,14 +75,13 @@
         $body = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $body);
 
         if (!empty($backtrace))
-            foreach ($backtrace as $index => &$trace) {
+            foreach ($backtrace as $index => &$trace)
                 if (!isset($trace["file"]) or !isset($trace["line"])) {
                     unset($backtrace[$index]);
                 } else {
                     $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "utf-8", false);
                     $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "utf-8", false);
                 }
-            }
 
         # Clean the output buffer before we begin.
         if (ob_get_contents() !== false)
@@ -91,11 +91,13 @@
         if (!headers_sent()) {
             header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
             header("Content-type: text/html; charset=UTF-8");
+            header("Cache-Control: no-cache, must-revalidate");
+            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
         }
 
         # Report in plain text for the automated tester.
         if (TESTER)
-            exit("ERROR: ".$body);
+            exit("ERROR: ".strip_tags($body));
 
         # Report and exit safely if the error is too deep in the core for a pretty error message.
         if (!function_exists("__") or
