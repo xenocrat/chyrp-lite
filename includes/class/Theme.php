@@ -340,7 +340,7 @@
                                "&amp;feed") ;
 
             # Create basic list of links (site and page Atom feeds):
-            $mainfeedurl = oneof(@$config->feed_url, url("feed"));
+            $mainfeedurl = oneof($config->feed_url, url("feed"));
             $pagefeedurl = $config->url.$request.$append;
             $links = array(array("href" => $mainfeedurl, "type" => "application/atom+xml", "title" => $config->name));
 
