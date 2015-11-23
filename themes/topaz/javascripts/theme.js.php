@@ -1,8 +1,6 @@
 <?php
     define('JAVASCRIPT', true);
-    require_once "../../../includes/common.php";
-    error_reporting(0);
-    header("Content-Type: application/javascript");
+        require_once dirname(dirname(dirname(dirname(__FILE__)))).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 ?>
 <!-- --><script>
 
