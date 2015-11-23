@@ -251,15 +251,15 @@
             if (!file_exists(THEME_DIR.DIR."stylesheets".DIR) and !file_exists(THEME_DIR.DIR."css".DIR))
                 return $elements;
 
-            $long  = (array) glob(THEME_DIR.DIR."stylesheets".DIR."*");
-            $short = (array) glob(THEME_DIR.DIR."css".DIR."*");
+            foreach(array_merge((array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
+                                (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css.php"),
+                                (array) glob(THEME_DIR.DIR."css".DIR."*.css"),
+                                (array) glob(THEME_DIR.DIR."css".DIR."*.css.php")) as $file) {
 
-            $total = array_merge($long, $short);
-            foreach($total as $file) {
                 $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file);
                 $file = basename($file);
 
-                if (substr_count($file, ".inc.css") or (substr($file, -4) != ".css" and substr($file, -4) != ".php"))
+                if (!$file or substr_count($file, ".inc.css"))
                     continue;
 
                 $name = substr($file, 0, strpos($file, "."));
@@ -297,31 +297,28 @@
                 if (!empty($val) and $val != $route->action)
                     $args.= "&amp;".$key."=".urlencode($val);
 
-            $javascripts = array($config->chyrp_url."/includes/lib/gz.php?file=common.js",
+            $javascripts = array($config->chyrp_url."/includes/lib/common.js",
                                  $config->chyrp_url.'/includes/javascript.php?action='.$route->action.$args);
-
-            if (file_exists(MAIN_DIR.DIR."includes".DIR."lib".DIR."custom.js"))
-                $javascripts[] = $config->chyrp_url."/includes/lib/gz.php?file=custom.js";
 
             Trigger::current()->filter($javascripts, "scripts");
 
             $elements = "<!-- JavaScripts -->";
+
             foreach ($javascripts as $javascript)
                 $elements.= "\n".'<script src="'.$javascript.'" type="text/javascript" charset="utf-8"></script>';
 
             if (file_exists(THEME_DIR.DIR."javascripts".DIR) or file_exists(THEME_DIR.DIR."js".DIR)) {
-                $long  = (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js");
-                $short = (array) glob(THEME_DIR.DIR."js".DIR."*.js");
+                foreach(array_merge((array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
+                                    (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js.php"),
+                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js"),
+                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js.php")) as $file) {
 
-                foreach(array_merge($long, $short) as $file)
-                    if ($file and !substr_count($file, ".inc.js"))
-                        $elements.= "\n".'<script src="'.$config->chyrp_url.'/includes/lib/gz.php?file='.preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
+                    if (substr_count($file, ".inc.js"))
+                        continue;
 
-                $long  = (array) glob(THEME_DIR.DIR."javascripts".DIR."*.php");
-                $short = (array) glob(THEME_DIR.DIR."js".DIR."*.php");
-                foreach(array_merge($long, $short) as $file)
-                    if ($file)
-                        $elements.= "\n".'<script src="'.$config->chyrp_url.preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
+                    $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file);
+                    $elements.= "\n".'<script src="'.$config->chyrp_url.$path.'" type="text/javascript" charset="utf-8"></script>';
+                }
             }
 
             return $elements;
@@ -357,10 +354,10 @@
             # Generate <link> tags:
             $tags = array();
             foreach ($links as $link) {
-                $rel = oneof(@$link["rel"], "alternate");
+                $rel = oneof(fallback($link["rel"], ""), "alternate");
                 $href = $link["href"];
-                $type = @$link["type"];
-                $title = @$link["title"];
+                $type = fallback($link["type"], false);
+                $title = fallback($link["title"], false);
                 $tag = '<link rel="'.$rel.'" href="'.$link["href"].'"';
 
                 if ($type)

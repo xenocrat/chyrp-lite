@@ -128,7 +128,11 @@
     # Use zlib to provide GZIP compression if the feature is supported and not buggy
     # See Also: http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
-        if (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<"))
+        if (extension_loaded("zlib") and
+            !ini_get("zlib.output_compression") and
+            isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
+            substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
+            (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<")))
             define('USE_ZLIB', true);
         else
             define('USE_ZLIB', false);
@@ -143,25 +147,17 @@
     if (!defined('JSON_UNESCAPED_SLASHES'))
         define('JSON_UNESCAPED_SLASHES', 0);
 
-    # Set error reporting levels, and headers for Chyrp's JS files.
-    if (JAVASCRIPT) {
+    # Set error reporting levels.
+    if (JAVASCRIPT)
         error_reporting(0);
-        header("Content-Type: application/javascript");
-        header("Cache-Control: no-cache, must-revalidate");
-        header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
-    } else
+    else
         if (DEBUG)
             error_reporting(E_ALL | E_STRICT);
         else
             error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
     # Use GZip compression if available.
-    if (!AJAX and
-        extension_loaded("zlib") and
-        !ini_get("zlib.output_compression") and
-        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
-        USE_ZLIB) {
+    if (USE_ZLIB and !AJAX) {
         ob_start("ob_gzhandler");
         header("Content-Encoding: gzip");
     } else
@@ -362,4 +358,9 @@
     $trigger->call("runtime");
 
     # Set the content-type and charset.
-    header("Content-type: text/html; charset=UTF-8");
+    if (JAVASCRIPT) {
+        header("Content-Type: application/javascript");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+    } else
+        header("Content-type: text/html; charset=UTF-8");
