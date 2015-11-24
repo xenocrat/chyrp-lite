@@ -469,8 +469,9 @@
             }
             h1 {
                 font-size: 2em;
-                margin: 0.5em 0em;
                 text-align: center;
+                font-weight: bold;
+                margin: 0.5em 0em;
                 line-height: 1;
             }
             h1:first-child {
@@ -478,6 +479,7 @@
             }
             h2 {
                 font-size: 1.25em;
+                text-align: center;
                 font-weight: bold;
                 margin: 0.75em 0em;
             }
@@ -751,11 +753,11 @@ foreach ($errors as $error)
 <?php else: ?>
             <h1><?php echo __("Done!"); ?></h1>
             <p>
-                <?php echo __("Chyrp Lite has been successfully installed."); ?>
+                <?php echo __("Chyrp Lite has been successfully installed. Go to your site and log in to get started."); ?>
             </p>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("<strong>Delete <code>install.php</code></strong>, you won't need it anymore."); ?></li>
+                <li><?php echo __("Delete <code>install.php</code>, you won't need it anymore."); ?></li>
             <?php if (!is_writable(INCLUDES_DIR.DIR."caches")): ?>
                 <li><?php echo __("CHMOD <code>/includes/caches</code> to 777."); ?></li>
             <?php endif; ?>
