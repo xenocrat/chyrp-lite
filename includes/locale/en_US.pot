@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-24 11:22+0000\n"
+"POT-Creation-Date: 2015-11-24 11:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -283,7 +283,7 @@ msgstr ""
 #: includes/controller/Main.php:626
 #: includes/controller/Main.php:670
 #: includes/controller/Main.php:836
-#: includes/error.php:122
+#: includes/error.php:126
 #: includes/helpers.php:1269
 #: includes/helpers.php:1271
 #: includes/helpers.php:1341
@@ -1140,21 +1140,21 @@ msgstr ""
 msgid "By browsing this website you are agreeing to our use of cookies."
 msgstr ""
 
-#: includes/error.php:116
-#: includes/error.php:302
+#: includes/error.php:120
+#: includes/error.php:306
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:123
+#: includes/error.php:127
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:299
+#: includes/error.php:303
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:307
+#: includes/error.php:311
 msgid "Log in"
 msgstr ""
 

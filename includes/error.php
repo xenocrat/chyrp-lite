@@ -107,8 +107,12 @@
             !function_exists("logged_in") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
-            !property_exists($config = Config::current(), "chyrp_url") or empty($site = $config->chyrp_url))
+            !property_exists(Config::current(), "chyrp_url") or
+            empty(Config::current()->chyrp_url))
             exit("<!DOCTYPE html>\n<h1>ERROR:</h1>\n<p>".$body."</p>");
+
+        $config = Config::current();
+        $site = $config->chyrp_url;
 
         # Report with backtrace and magic words for JavaScript.
         if (AJAX) {
