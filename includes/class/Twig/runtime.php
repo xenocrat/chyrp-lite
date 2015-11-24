@@ -82,7 +82,8 @@ $twig_filters = array(
     'selected' =>         'twig_selected_filter',
     'checked' =>          'twig_checked_filter',
     'option_selected' =>  'twig_option_selected_filter',
-    'gravatar' =>         'twig_get_gravatar'
+    'gravatar' =>         'twig_get_gravatar',
+    'token' =>            'token'
 );
 
 
@@ -128,10 +129,9 @@ function unretarded_array_unshift(&$arr, &$val) {
 }
 
 /**
- * This is called like an ordinary filter just with the name of the filter
- * as first argument.  Currently we just raise an exception here but it
- * would make sense in the future to allow dynamic filter lookup for plugins
- * or something like that.
+ * This is called like an ordinary filter but with the name of the filter
+ * as the first argument.  If we find a Trigger matching the name of the
+ * filter we call it with the args and return the result to the compiler.
  */
 function twig_missing_filter($name)
 {
@@ -462,9 +462,8 @@ function twig_length_filter($thing) {
 }
 
 function twig_escape_filter($string, $quotes = true, $decode = true) {
-    if (!is_string($string)) # Certain post attributes might be parsed from YAML to an array,
-        return $string;      # in which case the module provides a value. However, the attr
-                             # is still passed to the "fallback" and "fix" filters when editing.
+    if (!is_string($string)) 
+        return $string;
 
     $safe = fix($string, $quotes);
     return $decode ? preg_replace("/&amp;(#?[A-Za-z0-9]+);/", "&\\1;", $safe) : $safe ;

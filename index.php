@@ -1,8 +1,8 @@
 <?php
     if (version_compare(PHP_VERSION, "5.3.2", "<"))
-        exit("Chyrp requires PHP 5.3.2 or greater.");
+        exit("Chyrp Lite requires PHP 5.3.2 or greater.");
 
-    require_once "includes/common.php";
+    require_once "includes".DIRECTORY_SEPARATOR."common.php";
 
     # Prepare the controller.
     $main = MainController::current();
@@ -12,7 +12,7 @@
 
     # Check if the user can view the site.
     if (!$visitor->group->can("view_site") and
-        !in_array($route->action, array("login", "logout", "register", "lost_password")))
+        !in_array($route->action, array("login", "logout", "register", "activate", "lost_password", "reset")))
         if ($trigger->exists("can_not_view_site"))
             $trigger->call("can_not_view_site");
         else
@@ -29,16 +29,16 @@
         $displayed = false;
 
         foreach ($config->enabled_modules as $module)
-            if (file_exists(MODULES_DIR."/".$module."/pages/".$route->action.".php"))
-                $displayed = require MODULES_DIR."/".$module."/pages/".$route->action.".php";
+            if (file_exists(MODULES_DIR.DIR.$module.DIR."pages".DIR.$route->action.".php"))
+                $displayed = require MODULES_DIR.DIR.$module.DIR."pages".DIR.$route->action.".php";
 
         if (!$displayed)
             foreach ($config->enabled_feathers as $feather)
-                if (file_exists(FEATHERS_DIR."/".$feather."/pages/".$route->action.".php"))
-                    $displayed = require FEATHERS_DIR."/".$feather."/pages/".$route->action.".php";
+                if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."pages".DIR.$route->action.".php"))
+                    $displayed = require FEATHERS_DIR.DIR.$feather.DIR."pages".DIR.$route->action.".php";
 
-        if (!$displayed and $theme->file_exists("pages/".$route->action))
-            $main->display("pages/".$route->action);
+        if (!$displayed and $theme->file_exists("pages".DIR.$route->action))
+            $main->display("pages".DIR.$route->action);
         elseif (!$displayed)
             show_404();
     }

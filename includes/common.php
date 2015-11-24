@@ -5,10 +5,11 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2015.06
+     *     v2015.07
      *
      * Copyright:
-     *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors.
+     *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley,
+     *     and other contributors.
      *
      * License:
      *     Permission is hereby granted, free of charge, to any person
@@ -38,17 +39,17 @@
      *     without prior written authorization.
      */
 
+    # Constant: DEBUG
+    # Should Chyrp use debugging processes?
+    define('DEBUG', false);
+
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2015.06");
+    define('CHYRP_VERSION', "2015.07");
 
     # Constant: CHYRP_CODENAME
     # The code name for this version.
-    define('CHYRP_CODENAME', "Saxaul");
-
-    # Constant: DEBUG
-    # Should Chyrp use debugging processes?
-    define('DEBUG', true);
+    define('CHYRP_CODENAME', "Kordofan");
 
     # Constant: CACHE_TWIG
     # If defined, this will take priority over DEBUG and toggle Twig template caching.
@@ -75,11 +76,6 @@
     if (!defined('XML_RPC'))
         define('XML_RPC', false);
 
-    # Constant: TRACKBACK
-    # Is this being run from a trackback request?
-    if (!defined('TRACKBACK'))
-        define('TRACKBACK', false);
-
     # Constant: UPGRADING
     # Is the user running the upgrader? (false)
     define('UPGRADING', false);
@@ -90,11 +86,15 @@
 
     # Constant: TESTER
     # Is the site being run by the automated tester?
-    define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "tester.rb");
+    define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
 
     # Constant: INDEX
     # Is the requested file /index.php?
     define('INDEX', (pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_BASENAME) == "index.php") and !ADMIN);
+
+    # Constant: DIR
+    # Native directory separator
+    define('DIR', DIRECTORY_SEPARATOR);
 
     # Constant: MAIN_DIR
     # Absolute path to the Chyrp root
@@ -102,19 +102,19 @@
 
     # Constant: INCLUDES_DIR
     # Absolute path to /includes
-    define('INCLUDES_DIR', MAIN_DIR."/includes");
+    define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
 
     # Constant: MODULES_DIR
     # Absolute path to /modules
-    define('MODULES_DIR', MAIN_DIR."/modules");
+    define('MODULES_DIR', MAIN_DIR.DIR."modules");
 
     # Constant: FEATHERS_DIR
     # Absolute path to /feathers
-    define('FEATHERS_DIR', MAIN_DIR."/feathers");
+    define('FEATHERS_DIR', MAIN_DIR.DIR."feathers");
 
     # Constant: THEMES_DIR
     # Absolute path to /themes
-    define('THEMES_DIR', MAIN_DIR."/themes");
+    define('THEMES_DIR', MAIN_DIR.DIR."themes");
 
     # Constant: UPDATE_XML
     # URL to the update feed
@@ -128,7 +128,11 @@
     # Use zlib to provide GZIP compression if the feature is supported and not buggy
     # See Also: http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
-        if (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<"))
+        if (extension_loaded("zlib") and
+            !ini_get("zlib.output_compression") and
+            isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
+            substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
+            (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<")))
             define('USE_ZLIB', true);
         else
             define('USE_ZLIB', false);
@@ -143,153 +147,148 @@
     if (!defined('JSON_UNESCAPED_SLASHES'))
         define('JSON_UNESCAPED_SLASHES', 0);
 
-    # Set error reporting levels, and headers for Chyrp's JS files.
-    if (JAVASCRIPT) {
+    # Set error reporting levels.
+    if (JAVASCRIPT)
         error_reporting(0);
-        header("Content-Type: application/javascript");
-        header("Cache-Control: no-cache, must-revalidate");
-        header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
-    } else
-        error_reporting(E_ALL | E_STRICT); # Make sure E_STRICT is on so Chyrp remains errorless.
+    else
+        if (DEBUG)
+            error_reporting(E_ALL | E_STRICT);
+        else
+            error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
     # Use GZip compression if available.
-    if (!AJAX and
-        extension_loaded("zlib") and
-        !ini_get("zlib.output_compression") and
-        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
-        USE_ZLIB) {
+    if (USE_ZLIB and !AJAX) {
         ob_start("ob_gzhandler");
         header("Content-Encoding: gzip");
     } else
         ob_start();
 
+    # File: Error
+    # Error handling functions.
+    require_once INCLUDES_DIR.DIR."error.php";
+
     # File: Helpers
-    # Various functions used throughout Chyrp's code.
-    require_once INCLUDES_DIR."/helpers.php";
+    # Various functions used throughout the codebase.
+    require_once INCLUDES_DIR.DIR."helpers.php";
 
     # File: Gettext
     # Gettext library.
-    require_once INCLUDES_DIR."/lib/gettext/gettext.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
 
     # File: Streams
     # Streams library.
-    require_once INCLUDES_DIR."/lib/gettext/streams.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
 
-    # File: YAML
-    # Horde YAML parsing library.
-    require_once INCLUDES_DIR."/lib/YAML.php";
+    # File: Parsedown
+    # Markdown parsing library.
+    require_once INCLUDES_DIR.DIR."lib".DIR."Parsedown.php";
 
     # File: Config
     # See Also:
     #     <Config>
-    require_once INCLUDES_DIR."/class/Config.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
 
     # File: SQL
     # See Also:
     #     <SQL>
-    require_once INCLUDES_DIR."/class/SQL.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."SQL.php";
 
     # File: Model
     # See Also:
     #     <Model>
-    require_once INCLUDES_DIR."/class/Model.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Model.php";
 
     # File: User
     # See Also:
     #     <User>
-    require_once INCLUDES_DIR."/model/User.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."User.php";
 
     # File: Visitor
     # See Also:
     #     <Visitor>
-    require_once INCLUDES_DIR."/model/Visitor.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."Visitor.php";
 
     # File: Post
     # See Also:
     #     <Post>
-    require_once INCLUDES_DIR."/model/Post.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."Post.php";
 
     # File: Page
     # See Also:
     #     <Page>
-    require_once INCLUDES_DIR."/model/Page.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."Page.php";
 
     # File: Group
     # See Also:
     #     <Group>
-    require_once INCLUDES_DIR."/model/Group.php";
+    require_once INCLUDES_DIR.DIR."model".DIR."Group.php";
 
     # File: Session
     # See Also:
     #     <Session>
-    require_once INCLUDES_DIR."/class/Session.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Session.php";
 
     # File: Flash
     # See Also:
     #     <Flash>
-    require_once INCLUDES_DIR."/class/Flash.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Flash.php";
 
     # File: Theme
     # See Also:
     #     <Theme>
-    require_once INCLUDES_DIR."/class/Theme.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Theme.php";
 
     # File: Trigger
     # See Also:
     #     <Trigger>
-    require_once INCLUDES_DIR."/class/Trigger.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Trigger.php";
 
     # File: Module
     # See Also:
     #     <Module>
-    require_once INCLUDES_DIR."/class/Modules.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Modules.php";
 
     # File: Feathers
     # See Also:
     #     <Feathers>
-    require_once INCLUDES_DIR."/class/Feathers.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Feathers.php";
 
     # File: Paginator
     # See Also:
     #     <Paginator>
-    require_once INCLUDES_DIR."/class/Paginator.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Paginator.php";
 
     # File: Twig
     # Chyrp's templating engine.
-    require_once INCLUDES_DIR."/class/Twig.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Twig.php";
 
     # File: Route
     # See Also:
     #     <Route>
-    require_once INCLUDES_DIR."/class/Route.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Route.php";
 
     # File: Update
     # See Also:
     #     <Update>
-    require_once INCLUDES_DIR."/class/Update.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Update.php";
 
     # File: Main
     # See Also:
     #     <Main Controller>
-    require_once INCLUDES_DIR."/controller/Main.php";
+    require_once INCLUDES_DIR.DIR."controller".DIR."Main.php";
 
     # File: Admin
     # See Also:
     #     <Admin Controller>
-    require_once INCLUDES_DIR."/controller/Admin.php";
+    require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
     # File: Feather
     # See Also:
     #     <Feather>
-    require_once INCLUDES_DIR."/interface/Feather.php";
-
-    # Set the error handler to exit on error if this is being run from the tester.
-    if (TESTER)
-        set_error_handler("error_panicker");
+    require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
 
     # Redirect to the installer if there is no config.
-    if (!file_exists(INCLUDES_DIR."/config.json.php"))
+    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect("install.php");
 
     # Start the timer that keeps track of Chyrp's load time.
@@ -320,7 +319,7 @@
     set_locale($config->locale);
 
     # Load the translation engine.
-    load_translator("chyrp", INCLUDES_DIR."/locale/".$config->locale.".mo");
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$config->locale.".mo");
 
     # Constant: PREVIEWING
     # Is the user previewing a theme?
@@ -328,7 +327,7 @@
 
     # Constant: THEME_DIR
     # Absolute path to /themes/(current/previewed theme)
-    define('THEME_DIR', MAIN_DIR."/themes/".(PREVIEWING ? $_SESSION['theme'] : $config->theme));
+    define('THEME_DIR', MAIN_DIR.DIR."themes".DIR.(PREVIEWING ? $_SESSION['theme'] : $config->theme));
 
     # Constant: THEME_URL
     # URL to /themes/(current/previewed theme)
@@ -359,4 +358,9 @@
     $trigger->call("runtime");
 
     # Set the content-type and charset.
-    header("Content-type: text/html; charset=UTF-8");
+    if (JAVASCRIPT) {
+        header("Content-Type: application/javascript");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+    } else
+        header("Content-type: text/html; charset=UTF-8");

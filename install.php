@@ -6,48 +6,59 @@
     define('ADMIN',        false);
     define('AJAX',         false);
     define('XML_RPC',      false);
-    define('TRACKBACK',    false);
     define('UPGRADING',    false);
     define('INSTALLING',   true);
-    define('TESTER',       isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "tester.rb");
+    define('TESTER',       isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
+    define('DIR',          DIRECTORY_SEPARATOR);
     define('MAIN_DIR',     dirname(__FILE__));
-    define('INCLUDES_DIR', MAIN_DIR."/includes");
+    define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
     define('USE_ZLIB',     false);
 
-    # Make sure E_STRICT is on so Chyrp remains errorless.
-    error_reporting(E_ALL | E_STRICT);
-    ini_set('display_errors', true);
+    # Constant: JSON_PRETTY_PRINT
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_PRETTY_PRINT'))
+        define('JSON_PRETTY_PRINT', 0);
 
-    ob_start();
+    # Constant: JSON_UNESCAPED_SLASHES
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_UNESCAPED_SLASHES'))
+        define('JSON_UNESCAPED_SLASHES', 0);
 
     if (version_compare(PHP_VERSION, "5.3.2", "<"))
         exit("Chyrp requires PHP 5.3.2 or greater. Installation cannot continue.");
 
-    require_once INCLUDES_DIR."/helpers.php";
+    # Make sure E_STRICT is on so Chyrp remains errorless.
+    error_reporting(E_ALL | E_STRICT);
 
-    require_once INCLUDES_DIR."/lib/gettext/gettext.php";
-    require_once INCLUDES_DIR."/lib/gettext/streams.php";
-    require_once INCLUDES_DIR."/lib/YAML.php";
+    ob_start();
 
-    require_once INCLUDES_DIR."/class/Config.php";
-    require_once INCLUDES_DIR."/class/SQL.php";
-    require_once INCLUDES_DIR."/class/Model.php";
+    require_once INCLUDES_DIR.DIR."error.php";
+    require_once INCLUDES_DIR.DIR."helpers.php";
 
-    require_once INCLUDES_DIR."/model/User.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
+
+    require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."SQL.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Model.php";
+
+    require_once INCLUDES_DIR.DIR."model".DIR."User.php";
+
+    # Has Chyrp Lite been installed?
+    $installed = false;
 
     # Prepare the Config interface.
     $config = Config::current();
 
-    # Atlantic/Reykjavik is 0 offset. Set it so the timezones() function is
-    # always accurate, even if the server has its own timezone settings.
-    $default_timezone = oneof(ini_get("date.timezone"), "Atlantic/Reykjavik");
-    set_timezone($default_timezone);
+    # Atlantic/Reykjavik is 0 offset.
+    $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
+    set_timezone($timezone);
 
     # Ask PHP for the default locale and try to load an appropriate translator
-    $default_language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
+    $language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
 
-    if (file_exists(INCLUDES_DIR."/locale/".$default_language.".mo"))
-        load_translator("chyrp", INCLUDES_DIR."/locale/".$default_language.".mo");
+    if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$language.".mo"))
+        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
@@ -58,35 +69,43 @@
     $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
     $url = $protocol.$_SERVER['HTTP_HOST'].str_replace("/install.php", "", $_SERVER['REQUEST_URI']);
     $index = (parse_url($url, PHP_URL_PATH)) ? "/".trim(parse_url($url, PHP_URL_PATH), "/")."/" : "/" ;
-    $htaccess = "<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteBase {$index}\nRewriteCond %{REQUEST_FILENAME} !-f\n".
-                "RewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule ^.+$ index.php [L]\n</IfModule>";
+    $htaccess = "<IfModule mod_rewrite.c>\n".
+                "RewriteEngine On\n".
+                "RewriteBase {$index}\n".
+                "RewriteCond %{REQUEST_FILENAME} !-f\n".
+                "RewriteCond %{REQUEST_FILENAME} !-d\n".
+                "RewriteRule ^.+\$ index.php [L]\n".
+                "RewriteRule ^.+\\.twig\$ index.php [L]\n".
+                "</IfModule>";
 
     $path = preg_quote($index, "/");
-    $htaccess_has_chyrp = (file_exists(MAIN_DIR."/.htaccess") and
-                           preg_match("/<IfModule mod_rewrite\.c>\n([\s]*)RewriteEngine On\n([\s]*)RewriteBase {$path}\n".
-                                      "([\s]*)RewriteCond %\{REQUEST_FILENAME\} !-f\n([\s]*)RewriteCond %\{REQUEST_FILENAME\}".
-                                      " !-d\n([\s]*)RewriteRule \^\.\+\\$ index\.php \[L\]\n([\s]*)<\/IfModule>/",
-                                      file_get_contents(MAIN_DIR."/.htaccess")));
+    $htaccess_has_chyrp = (file_exists(MAIN_DIR.DIR.".htaccess") and
+                           preg_match("/<IfModule mod_rewrite\\.c>\n".
+                                      "([\s]*)RewriteEngine On\n".
+                                      "([\s]*)RewriteBase {$path}\n".
+                                      "([\s]*)RewriteCond %\\{REQUEST_FILENAME\\} !-f\n".
+                                      "([\s]*)RewriteCond %\\{REQUEST_FILENAME\\} !-d\n".
+                                      "([\s]*)RewriteRule \\^\\.\\+\\$ index\\.php \\[L\\]\n".
+                                      "([\s]*)RewriteRule \\^\\.\\+\\\\.twig\\$ index\\.php \\[L\\]\n".
+                                      "([\s]*)<\\/IfModule>/",
+                                      file_get_contents(MAIN_DIR.DIR.".htaccess")));
 
-    $errors = array();
-    $installed = false;
-
-    if (file_exists(INCLUDES_DIR."/config.json.php") and file_exists(MAIN_DIR."/.htaccess")) {
+    if (file_exists(INCLUDES_DIR.DIR."config.json.php") and file_exists(MAIN_DIR.DIR.".htaccess")) {
         $sql = SQL::current(true);
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            error(__("Already Installed"), __("Chyrp is already fully installed and configured. You can delete this installer."));
+            error(__("Already Installed"), __("Chyrp is already fully installed and configured."));
     }
 
-    if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR."/.htaccess")) or
-        (file_exists(MAIN_DIR."/.htaccess") and !is_writable(MAIN_DIR."/.htaccess") and !$htaccess_has_chyrp))
-        $errors[] = _f("Stop! Before you go any further, you must create a .htaccess file in Chyrp's install directory and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
+    if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR.DIR.".htaccess")) or
+        (file_exists(MAIN_DIR.DIR.".htaccess") and !is_writable(MAIN_DIR.DIR.".htaccess") and !$htaccess_has_chyrp))
+        $errors[] = __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable.");
 
     if (!is_writable(INCLUDES_DIR))
-        $errors[] = __("Chyrp's includes directory is not writable by the server. In order for the installer to generate your configuration files, please CHMOD or CHOWN it so that Chyrp can write to it.");
+        $errors[] = __("Please CHMOD or CHOWN the <code>includes</code> directory to make it writable.");
 
     if (!empty($_POST)) {
         if ($_POST['adapter'] == "sqlite" and !@is_writable(dirname($_POST['database'])))
-            $errors[] = __("SQLite database file could not be created. Please make sure your server has write permissions to the location for the database.");
+            $errors[] = __("Please make sure your server has write permissions to the SQLite database.");
         else {
             $sql = SQL::current(array("host"     => $_POST['host'],
                                       "username" => $_POST['username'],
@@ -96,7 +115,7 @@
                                       "adapter"  => $_POST['adapter']));
 
             if (!$sql->connect(true))
-                $errors[] = _f("Could not connect to the specified database:\n<pre>%s</pre>", array($sql->error));
+                $errors[] = __("Could not connect to the specified database:")."\n".fix($sql->error);
             elseif ($_POST['adapter'] == "pgsql") {
                 new Query($sql, "CREATE FUNCTION year(timestamp) RETURNS double precision AS 'select extract(year from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
                 new Query($sql, "CREATE FUNCTION month(timestamp) RETURNS double precision AS 'select extract(month from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
@@ -125,15 +144,18 @@
         if (empty($_POST['email']))
             $errors[] = __("Email address cannot be blank.");
 
+        if (!class_exists("MySQLi") and !class_exists("PDO"))
+            $errors[] = __("MySQLi or PDO is required for database access.");
+
         if (empty($errors)) {
 
             if (!$htaccess_has_chyrp)
-                if (!file_exists(MAIN_DIR."/.htaccess")) {
-                    if (!@file_put_contents(MAIN_DIR."/.htaccess", $htaccess))
-                        $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
-                } elseif (!@file_put_contents(MAIN_DIR."/.htaccess", "\n\n".$htaccess, FILE_APPEND)) {
-                    $errors[] = _f("Could not generate .htaccess file. Clean URLs will not be available unless you create it and put this in it:\n<pre>%s</pre>", array(fix($htaccess)));
-                }
+                if (!file_exists(MAIN_DIR.DIR.".htaccess"))
+                    if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
+                        $errors[] = __("Clean URLs will not be available because the <code>.htaccess</code> file is not writable.");
+                else
+                    if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND))
+                        $errors[] = __("Clean URLs will not be available because the <code>.htaccess</code> file is not writable.");
 
             $config->set("sql", array());
             $config->set("name", $_POST['name']);
@@ -150,12 +172,13 @@
             $config->set("posts_per_page", 5);
             $config->set("feed_items", 20);
             $config->set("feed_url", "");
-            $config->set("uploads_path", "/uploads/");
-            $config->set("enable_trackbacking", true);
+            $config->set("uploads_path", DIR."uploads".DIR);
+            $config->set("uploads_limit", 10);
             $config->set("send_pingbacks", false);
             $config->set("enable_xmlrpc", true);
             $config->set("enable_ajax", true);
             $config->set("enable_emoji", true);
+            $config->set("enable_markdown", true);
             $config->set("can_register", false);
             $config->set("email_activation", false);
             $config->set("email_correspondence", true);
@@ -163,6 +186,7 @@
             $config->set("default_group", 0);
             $config->set("guest_group", 0);
             $config->set("clean_urls", false);
+            $config->set("enable_homepage", false);
             $config->set("post_url", "(year)/(month)/(day)/(url)/");
             $config->set("enabled_modules", array());
             $config->set("enabled_feathers", array("text"));
@@ -174,9 +198,10 @@
 
             if ($sql->adapter == "mysql" and class_exists("MySQLi"))
                 $sql->method = "mysqli";
-            elseif ($sql->adapter == "mysql" and function_exists("mysql_connect"))
-                $sql->method = "mysql";
-            elseif ($sql->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()))
+            elseif (class_exists("PDO") and
+                        ($sql->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
+                         $sql->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers()) or
+                         $sql->adapter == "mysql" and in_array("mysql", PDO::getAvailableDrivers())))
                 $sql->method = "pdo";
 
             $sql->connect();
@@ -374,29 +399,49 @@
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Regular.woff') format('woff'),
-                     url('./fonts/OpenSans-Regular.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Semibold.woff') format('woff'),
-                     url('./fonts/OpenSans-Semibold.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Semibold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-Italic.woff') format('woff'),
-                     url('./fonts/OpenSans-Italic.ttf') format('truetype');
+                src: url('./fonts/OpenSans-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                     url('./fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                font-weight: bold;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Bold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Oblique.woff') format('woff');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-BoldOblique.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -417,22 +462,24 @@
             body {
                 font-size: 14px;
                 font-family: "Open Sans webfont", sans-serif;
-                line-height: 1.5em;
+                line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
                 padding: 0em 0em 5em;
             }
             h1 {
                 font-size: 2em;
-                margin: 0.5em 0em;
                 text-align: center;
-                line-height: 1em;
+                font-weight: bold;
+                margin: 0.5em 0em;
+                line-height: 1;
             }
             h1:first-child {
                 margin-top: 0em;
             }
             h2 {
                 font-size: 1.25em;
+                text-align: center;
                 font-weight: bold;
                 margin: 0.75em 0em;
             }
@@ -491,14 +538,6 @@
                 float: left;
                 margin-top: -1.5em !important;
             }
-            .error {
-                padding: 0.6em;
-                margin: 1em;
-                background-color: #d94c4c;
-                color: #ffffff;
-                border: none;
-                border-radius: 0.4em;
-            }
             .window {
                 width: 30em;
                 background: #fff;
@@ -510,7 +549,7 @@
                 margin-top: 5em;
             }
             code {
-                font-family: monospace;
+                font-family: "Hack webfont", monospace;
                 font-style: normal;
                 word-wrap: break-word;
                 background-color: #efefef;
@@ -520,7 +559,7 @@
             label {
                 display: block;
                 font-weight: bold;
-                line-height: 1.5em
+                line-height: 1.5;
             }
             .footer {
                 color: #777;
@@ -534,6 +573,22 @@
             a:hover, a:focus {
                 color: #1e57ba;
             }
+            pre.pane {
+                height: 15em;
+                overflow-y: auto;
+                margin: 1em -2em 1em -2em;
+                padding: 2em;
+                background: #4a4747;
+                color: #fff;
+            }
+            pre.pane:empty {
+                display: none;
+            }
+            pre.pane:empty + h1 {
+                margin-top: 0em;
+            }
+            span.yay { color: #76b362; }
+            span.boo { color: #d94c4c; }
             a.big,
             button {
                 box-sizing: border-box;
@@ -544,7 +599,7 @@
                 text-align: center;
                 color: #4a4747;
                 text-decoration: none;
-                line-height: 1.25em;
+                line-height: 1.25;
                 margin: 0.75em 0em;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;
@@ -575,7 +630,7 @@
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
-                list-style-position: inside;
+                list-style-position: outside;
             }
             p {
                 margin-bottom: 1em;
@@ -597,18 +652,21 @@
         </script>
     </head>
     <body>
-        <?php foreach ($errors as $error): ?>
-        <div role="alert" class="error"><?php echo $error; ?></div>
-        <?php endforeach; ?>
         <div class="window">
-        <?php if (!$installed): ?>
+            <pre role="status" class="pane"><?php
+
+foreach ($errors as $error)
+    echo '<span role="alert">'.$error."</span>\n";
+
+          ?></pre>
+<?php if (!$installed): ?>
             <form action="install.php" method="post" accept-charset="utf-8">
                 <h1><?php echo __("Database Setup"); ?></h1>
                 <p id="adapter_field">
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
                     <select name="adapter" id="adapter">
                         <?php if ((class_exists("PDO") and in_array("mysql", PDO::getAvailableDrivers())) or
-                                  class_exists("MySQLi") or function_exists("mysql_query")): ?>
+                                  class_exists("MySQLi")): ?>
                         <option value="mysql"<?php selected("mysql", fallback($_POST['adapter'], "mysql")); ?>>MySQL</option>
                         <?php endif; ?>
                         <?php if (class_exists("PDO") and in_array("sqlite", PDO::getAvailableDrivers())): ?>
@@ -665,7 +723,7 @@
                     <label for="timezone"><?php echo __("What time is it?"); ?></label>
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
-                        <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], oneof(@$_POST['timezone'], $default_timezone)); ?>>
+                        <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>
                             <?php echo strftime("%I:%M %p on %B %d, %Y", $zone["now"]); ?> &mdash;
                             <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone["name"]); ?>
                         </option>
@@ -692,21 +750,21 @@
                 </p>
                 <button type="submit"><?php echo __("Install!"); ?></button>
             </form>
-        <?php else: ?>
+<?php else: ?>
             <h1><?php echo __("Done!"); ?></h1>
             <p>
-                <?php echo __("Chyrp Lite has been successfully installed."); ?>
+                <?php echo __("Chyrp Lite has been successfully installed. Go to your site and log in to get started."); ?>
             </p>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("<strong>Delete install.php</strong>, you won't need it anymore."); ?></li>
-            <?php if (!is_writable(INCLUDES_DIR."/caches")): ?>
+                <li><?php echo __("Delete <code>install.php</code>, you won't need it anymore."); ?></li>
+            <?php if (!is_writable(INCLUDES_DIR.DIR."caches")): ?>
                 <li><?php echo __("CHMOD <code>/includes/caches</code> to 777."); ?></li>
             <?php endif; ?>
                 <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
             </ol>
             <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
-        <?php endif; ?>
+<?php endif; ?>
         </div>
     </body>
 </html>

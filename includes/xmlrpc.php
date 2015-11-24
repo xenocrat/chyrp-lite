@@ -6,7 +6,7 @@
 
     define('XML_RPC', true);
     require_once 'common.php';
-    require_once INCLUDES_DIR.'/lib/ixr.php';
+    require_once INCLUDES_DIR.DIR.'lib'.DIR.'ixr.php';
     if (!defined('XML_RPC_FEATHER')) define('XML_RPC_FEATHER', 'text');
 
     # Use the Main controller for any Route calls.
@@ -58,74 +58,69 @@
         # Receive and register pingbacks. Calls the @pingback@ trigger.
         #
         public function pingback_ping($args) {
-            $config = Config::current();
+            $config     = Config::current();
+            $source     = str_replace('&amp;', '&', $args[0]);
+            $target     = str_replace('&amp;', '&', $args[1]);
+            $source_url = add_scheme($source);
+            $chyrp_host = str_replace(array("http://www.",
+                                            "http://",
+                                            "https://www.",
+                                            "https://"), "", $config->url);
 
-            $linked_from = str_replace('&amp;', '&', $args[0]);
-            $linked_to   = str_replace('&amp;', '&', $args[1]);
-
-            $cleaned_url = str_replace(array("http://www.", "http://"), "", $config->url);
-
-            if ($linked_to == $linked_from)
+            if ($target == $source)
                 return new IXR_ERROR(0, __("The from and to URLs cannot be the same."));
 
-            if (!substr_count($linked_to, $cleaned_url))
-                return new IXR_Error(0, __("There doesn't seem to be a valid link in your request."));
+            if (!is_url($target) or !substr_count($target, $chyrp_host))
+                return new IXR_Error(32, __("The URL for our page is not valid."));
 
-            if (preg_match("/url=([^&#]+)/", $linked_to, $url))
+            if (!is_url($source) or substr_count($source, $chyrp_host))
+                return new IXR_Error(16, __("The URL for your page is not valid."));
+
+            if (preg_match("/url=([^&#]+)/", $target, $url))
                 $post = new Post(array("url" => $url[1]));
             else
                 $post = MainController::current()->post_from_url(null,
-                                                                 str_replace(rtrim($config->url, "/"), "/", $linked_to),
+                                                                 str_replace(rtrim($config->url, "/"), "/", $target),
                                                                  true);
 
             if (!$post)
-                return new IXR_Error(33, __("I can't find a post from that URL."));
-
-            # Wait for the "from" server to publish
-            sleep(1);
-
-            $from = parse_url($linked_from);
-
-            if (empty($from["host"]))
-                return false;
-
-            if (empty($from["scheme"]) or $from["scheme"] != "http")
-                $linked_from = "http://".$linked_from;
+                return new IXR_Error(33, __("We have not published at that URL."));
 
             # Grab the page that linked here.
-            $content = get_remote($linked_from);
+            $content = get_remote($source_url);
+
+            if (empty($content))
+                return new IXR_Error(16, __("You have not published at that URL."));
 
             # Get the title of the page.
             preg_match("/<title>([^<]+)<\/title>/i", $content, $title);
             $title = $title[1];
 
             if (empty($title))
-                return new IXR_Error(32, __("There isn't a title on that page."));
+                return new IXR_Error(0, __("The page you published has no title."));
 
             $content = strip_tags($content, "<a>");
+            $url = preg_quote($target, "/");
 
-            $url = preg_quote($linked_to, "/");
+            # Search the page for our link.
             if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
-                $url = str_replace("&", "&amp;", preg_quote($linked_to, "/"));
+                $url = str_replace("&", "&amp;", preg_quote($target, "/"));
                 if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
-                    $url = str_replace("&", "&#038;", preg_quote($linked_to, "/"));
+                    $url = str_replace("&", "&#038;", preg_quote($target, "/"));
                     if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context))
-                        return false;
+                        return new IXR_Error(17, __("The page you published does not link to our page."));
                 }
             }
 
-            $context[1] = truncate($context[1], 100, "...", true);
-
+            # Build an excerpt of up to 300 characters surrounding the link.
             $excerpt = strip_tags(str_replace($context[0], $context[1], $content));
-
-            $match = preg_quote($context[1], "/");
+            $match   = preg_quote($context[1], "/");
             $excerpt = preg_replace("/.*?\s(.{0,100}{$match}.{0,100})\s.*/s", "\\1", $excerpt);
+            $excerpt = "&hellip; ".truncate(trim(normalize($excerpt)), 300, "", true)."&hellip;";
 
-            $excerpt = "[...] ".trim(normalize($excerpt))." [...]";
+            Trigger::current()->call("pingback", $post, $target, $source_url, $title, $excerpt);
 
-            Trigger::current()->call("pingback", $post, $linked_to, $linked_from, $title, $excerpt);
-
-            return _f("Pingback from %s to %s registered!", array($linked_from, $linked_to));
+            return __("Pingback registered!");
         }
 
         #
@@ -140,16 +135,14 @@
             $result  = array();
 
             foreach ($this->getRecentPosts($args[3]) as $post) {
-                $struct = array(
-                                'postid'            => $post->id,
+                $struct = array('postid'            => $post->id,
                                 'userid'            => $post->user_id,
                                 'title'             => $post->title,
                                 'dateCreated'       => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)),
                                 'description'       => $post->body,
                                 'link'              => $post->url(),
                                 'permaLink'         => $post->url(),
-                                'mt_basename'       => $post->url,
-                                'mt_allow_pings'    => (int) $config->enable_trackbacking);
+                                'mt_basename'       => $post->url);
 
                 $result[] = $trigger->filter($struct, 'metaWeblog_getPost', $post);
             }
@@ -196,16 +189,14 @@
             $this->auth($args[1], $args[2]);
 
             $post = new Post($args[0], array('filter' => false));
-            $struct = array(
-                            'postid'            => $post->id,
+            $struct = array('postid'            => $post->id,
                             'userid'            => $post->user_id,
                             'title'             => $post->title,
                             'dateCreated'       => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)),
                             'description'       => $post->body,
                             'link'              => $post->url(),
                             'permaLink'         => $post->url(),
-                            'mt_basename'       => $post->url,
-                            'mt_allow_pings'    => (int) Config::current()->enable_trackbacking);
+                            'mt_basename'       => $post->url);
 
             Trigger::current()->filter($struct, 'metaWeblog_getPost', $post);
             return array($struct);
@@ -246,9 +237,7 @@
             $trigger = Trigger::current();
             $trigger->call('metaWeblog_newPost_preQuery', $args[3]);
 
-            $post = Post::add(
-                              array(
-                                    'title' => $args[3]['title'],
+            $post = Post::add(array('title' => $args[3]['title'],
                                     'body'  => $body),
                               $clean,
                               $url);
@@ -305,8 +294,7 @@
             $trigger = Trigger::current();
             $trigger->call('metaWeblog_editPost_preQuery', $args[3], $post);
 
-            $post->update(
-                          array('title' => $args[3]['title'], 'body' => $body ),
+            $post->update(array('title' => $args[3]['title'], 'body' => $body ),
                           null,
                           null,
                           $status,
@@ -346,8 +334,7 @@
             $this->auth($args[1], $args[2]);
 
             $config = Config::current();
-            return array(array(
-                               'url'      => $config->url,
+            return array(array('url'      => $config->url,
                                'blogName' => $config->name,
                                'blogid'   => 1));
         }
@@ -360,8 +347,7 @@
             $this->auth($args[1], $args[2]);
             global $user;
 
-            return array(array(
-                               'userid'    => $user->id,
+            return array(array('userid'    => $user->id,
                                'nickname'  => $user->full_name,
                                'firstname' => '',
                                'lastname'  => '',
@@ -379,8 +365,7 @@
             $result = array();
 
             foreach ($this->getRecentPosts($args[3]) as $post) {
-                $result[] = array(
-                                  'postid'      => $post->id,
+                $result[] = array('postid'      => $post->id,
                                   'userid'      => $post->user_id,
                                   'title'       => $post->title,
                                   'dateCreated' => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)));
@@ -397,8 +382,7 @@
             $this->auth($args[1], $args[2]);
 
             $categories = array();
-            return Trigger::current()->filter(
-                                              $categories,
+            return Trigger::current()->filter($categories,
                                               'mt_getCategoryList');
         }
 
@@ -413,8 +397,7 @@
                 return new IXR_Error(500, __("Post not found."));
 
             $categories = array();
-            return Trigger::current()->filter(
-                                              $categories,
+            return Trigger::current()->filter($categories,
                                               'mt_getPostCategories',
                                               new Post($args[0], array('filter' => false)));
         }
@@ -466,9 +449,7 @@
             if (!$user->group->can('view_draft', 'edit_draft', 'edit_post', 'delete_draft', 'delete_post'))
                 $where['user_id'] = $user->id;
 
-            return Post::find(
-                              array(
-                                    'where'  => $where,
+            return Post::find(array('where'  => $where,
                                     'order'  => 'created_at DESC, id DESC',
                                     'limit'  => $limit),
                               array('filter' => false));
@@ -497,15 +478,8 @@
             if (!User::authenticate($login, $password))
                 throw new Exception(__("Login incorrect."));
             else
-                $user = new User(
-                                 null,
-                                 array(
-                                       'where' => array(
-                                                        'login' => $login
-                                                        )
-                                       )
-                                 );
-
+                $user = new User(null,
+                                 array('where' => array('login' => $login)));
 
             if (!$user->group->can("{$do}_own_post", "{$do}_post", "{$do}_draft", "{$do}_own_draft"))
                 throw new Exception(_f("You don't have permission to %s posts/drafts.", array($do)));

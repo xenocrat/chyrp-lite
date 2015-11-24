@@ -41,15 +41,14 @@
      * :license: BSD.
      */
 
-
     if (!defined('TWIG_BASE'))
-        define('TWIG_BASE', dirname(__FILE__) . '/Twig');
+        define('TWIG_BASE', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Twig');
 
     define('TWIG_VERSION', '0.1-dev');
 
 
     // the systems we load automatically on initialization.  The compiler
     // and other stuff is loaded on first request.
-    require TWIG_BASE . '/exceptions.php';
-    require TWIG_BASE . '/runtime.php';
-    require TWIG_BASE . '/api.php';
+    require TWIG_BASE . DIRECTORY_SEPARATOR . 'exceptions.php';
+    require TWIG_BASE . DIRECTORY_SEPARATOR . 'runtime.php';
+    require TWIG_BASE . DIRECTORY_SEPARATOR . 'api.php';

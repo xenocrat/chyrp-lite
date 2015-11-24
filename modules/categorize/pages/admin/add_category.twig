@@ -30,7 +30,7 @@
             <p class="buttons">
                 <button type="submit" name="add" class="yay"><img src="$theme_url/images/icons/success.svg" alt="update">${ "Add" | translate("keywords") }</button>
             </p>
-            <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+            <input type="hidden" name="hash" value="${ ip | token }" id="hash">
         </fieldset>
     </form>
 {% endblock %}

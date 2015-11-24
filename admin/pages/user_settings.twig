@@ -8,7 +8,7 @@
                     <p>
                         <label for="can_register">${ "Registration" | translate }</label>
                         <input class="checkbox" type="checkbox" name="can_register" id="can_register"${ site.can_register | checked }>
-                        ${ "Allow people to register" | translate }
+                        ${ "Allow people to register." | translate }
                     </p>
                     <p>
                         <label for="email_correspondence">${ "Email Correspondence" | translate }</label>
@@ -44,7 +44,7 @@
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

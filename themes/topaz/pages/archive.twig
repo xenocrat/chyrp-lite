@@ -16,9 +16,9 @@
             <h4 class="yearly">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
             {% endif %}
             {% if post.feather == "photo" %}
-            ${ feathers['photo'].image_tag(post, 320, null, "quality=60") }
+            ${ feathers['photo'].image_tag(post, 156, null, "quality=60&amp;square=1", "20vw") }
             {% else %}
-            <p>${ post.excerpt | read_more("…more") }</p>
+            <p>${ post.excerpt | read_more("&hellip;more") | strip_tags }</p>
             {% endif %}
             <a href="$post.url" class="archive_post_link">${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;</a>
           </article>
@@ -37,9 +37,9 @@
       <hr>
     {% endfor %}
     </div>
-    {% if preceeding.no_results == false %} {# Link to a previous year if we found a post preceeding this archive #}
+    {% if preceding.no_results == false %} {# Link to a previous year if we found a post preceding this archive #}
     <div role="navigation" class="next traversal">
-      <a href="{% url 'archive/%s/' | format(preceeding.created_at | strftime('%Y')) %}">${ "Archive of %s" | translate | format(preceeding.created_at | strftime('%Y')) }</a>
+      <a href="{% url 'archive/%s/' | format(preceding.created_at | strftime('%Y')) %}">${ "Archive of %s" | translate | format(preceding.created_at | strftime('%Y')) }</a>
     </div>
     {% endif %}
   {% endif %}

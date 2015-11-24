@@ -15,11 +15,11 @@
                         <input type="file" name="pages_file" value="" id="pages_file">
                     </p>
                     <p>
-                        <label for="groups_file">${ "Groups .yaml File" | translate }</label>
+                        <label for="groups_file">${ "Groups .json File" | translate }</label>
                         <input type="file" name="groups_file" value="" id="groups_file">
                     </p>
                     <p>
-                        <label for="users_file">${ "Users .yaml File" | translate }</label>
+                        <label for="users_file">${ "Users .json File" | translate }</label>
                         <input type="file" name="users_file" value="" id="users_file">
                     </p>
                     <p>
@@ -35,7 +35,7 @@
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Import" | translate }</button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </fieldset>
              </form>
 ${ trigger.call("import_choose") }

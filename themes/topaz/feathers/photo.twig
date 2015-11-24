@@ -7,12 +7,12 @@
         <h6 class="post_byline">${ "Written by %s" | translate | format(post.author.name) }</h6>
       </h2>
       {% endif %}
-      <div class="photo_frame">
-        ${ feathers['photo'].image_link(post, 1200, null, "quality=80") }
-      </div>
+      <section class="photo">
+        ${ feathers['photo'].image_link(post, 1024, 2048, "quality=80", "80vw") }
+      </section>
       {% if post.caption %}
       <section class="caption{% if post.caption | length > 1000 %} columnized{% endif %}">
-        ${ post.caption | read_more("…more") }
+        ${ post.caption | read_more("&hellip;more") }
       </section>
       {% endif %}
 {% endblock %}

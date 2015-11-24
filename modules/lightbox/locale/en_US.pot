@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-08-14 09:20+0000\n"
+"POT-Creation-Date: 2015-11-23 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -24,10 +24,6 @@ msgstr ""
 
 #: modules/lightbox/info.php:6
 msgid "A lightbox for your images."
-msgstr ""
-
-#: modules/lightbox/javascript.php:80
-msgid "Click or touch anywhere to return to the page."
 msgstr ""
 
 #: modules/lightbox/pages/admin/lightbox_settings.twig:3

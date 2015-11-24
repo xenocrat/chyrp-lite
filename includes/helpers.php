@@ -1,7 +1,7 @@
 <?php
     /**
      * File: Helpers
-     * Various functions used throughout Chyrp's code.
+     * Various functions used throughout the codebase.
      */
 
     # Integer: $time_start
@@ -38,86 +38,6 @@
     }
 
     /**
-     * Function: error
-     * Shows an error message.
-     *
-     * Parameters:
-     *     $title - The title for the error dialog.
-     *     $body - The message for the error dialog.
-     *     $backtrace - The trace of the error.
-     */
-    function error($title, $body, $backtrace = array()) {
-        # Sanitize input
-        $title = fix($title);
-        $body = sanitize_html($body);
-
-        if (defined('MAIN_DIR') and !empty($backtrace))
-            foreach ($backtrace as $index => &$trace) {
-                if (!isset($trace["file"]) or !isset($trace["line"])) {
-                    unset($backtrace[$index]);
-                } else {
-                    $trace["line"] = fix($trace["line"]);
-                    $trace["file"] = fix(str_replace(MAIN_DIR."/", "", $trace["file"]));
-                }
-            }
-
-        # Clear all output sent before this error.
-        if (($buffer = ob_get_contents()) !== false) {
-            ob_end_clean();
-
-            # Since the header might already be set to gzip, start output buffering again.
-            if (extension_loaded("zlib") and !ini_get("zlib.output_compression") and
-                isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-                substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
-                USE_ZLIB) {
-                ob_start("ob_gzhandler");
-                header("Content-Encoding: gzip");
-            } else
-                ob_start();
-        } elseif (!UPGRADING) {
-            # If output buffering is not started, assume this
-            # is sent from the Session class or somewhere deep.
-            error_log($title.": ".$body);
-
-            foreach ($backtrace as $index => $trace)
-                error_log("    ".($index + 1).": "._f("%s on line %d", array($trace["file"], $trace["line"])));
-
-            exit;
-        }
-
-        if (TESTER)
-            exit("ERROR: ".$body);
-
-        if ($title == __("Access Denied"))
-            $_SESSION['redirect_to'] = self_url();
-
-        # Display the error.
-        if (defined('THEME_DIR') and class_exists("Theme") and Theme::current()->file_exists("pages/error"))
-            MainController::current()->display("pages/error",
-                                               array("title" => $title,
-                                                     "body" => $body,
-                                                     "backtrace" => $backtrace));
-        else
-            require INCLUDES_DIR."/error.php";
-
-        if ($buffer !== false)
-            ob_end_flush();
-
-        exit;
-    }
-
-    /**
-     * Function: error_panicker
-     * Exits and states where the error occurred.
-     */
-    function error_panicker($errno, $message, $file, $line) {
-        if (error_reporting() === 0)
-            return; # Suppressed error.
-
-        exit("ERROR: ".$message." (".$file." on line ".$line.")");
-    }
-
-    /**
      * Function: show_403
      * Shows an error message with a 403 HTTP header.
      *
@@ -138,9 +58,9 @@
      *     $scope - An array of values to extract into the scope.
      */
      function show_404() {
-        header("HTTP/1.1 404 Not Found");
+        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 
-        if (!defined('CHYRP_VERSION'))
+        if (!defined('DEBUG'))
             exit("404 Not Found");
 
         $theme = Theme::current();
@@ -154,33 +74,6 @@
             error(__("404 Not Found"), __("The requested page could not be located."));
 
         exit;
-    }
-
-    /**
-     * Function: deprecated
-     * Returns a warning if a deprecated function has been used.
-     *
-     * Parameters:
-     *     $f The function that was called
-     *     $v Chyrp version that deprecated the function
-     *     $r Optional. The function that should have been called
-     */
-    function deprecated($f, $v, $r = null, $trace) {    
-        if (!logged_in())
-            return;
-
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-
-        if (DEBUG) {
-            if (!is_null($r))
-                trigger_error(_f("%s is <strong>deprecated</strong> since version %s! Use %s instead.", array($f, $v, $r)));
-            else
-                trigger_error(_f("%s is <strong>deprecated</strong> since version %s.", $f, $v));
-        }
-
-        error_reporting(E_ALL | E_STRICT);
-        ini_set("display_errors", 0);
     }
 
     /**
@@ -252,6 +145,18 @@
     }
 
     /**
+     * Function: markdown
+     * Implements the Markdown parsing filter.
+     *
+     * Parameters:
+     *     $text - The body of the post/page to parse.
+     */
+    function markdown($text) {
+        $parsedown = new Parsedown();
+        return $parsedown->text($text);
+    }
+
+    /**
      * Function: load_translator
      * Loads a .mo file for gettext translation.
      *
@@ -282,11 +187,18 @@
      *
      * Returns:
      *     The encoding name used by locale-aware functions.
+     *
+     * Author:
+     *     http://www.onphp5.com/article/22
+     *
+     * Notes:
+     *     en_US will not be set because this is the default for Chyrp and
+     *     may have been chosen due to there being no translation available
+     *     that macthes the system locale.
      */
-    function set_locale($locale) { # originally via http://www.onphp5.com/article/22; heavily modified
-        if ($locale == "en_US") return; # en_US is the default in Chyrp; their system may have
-                                        # its own locale setting and no Chyrp translation available
-                                        # for their locale, so let's just leave it alone.
+    function set_locale($locale) {
+        if ($locale == "en_US")
+            return;
 
         list($lang, $cty) = explode("_", $locale);
         $locales = array($locale.".UTF-8", $lang, "en_US.UTF-8", "en");
@@ -542,9 +454,51 @@
      *     $string - String to sanitize.
      */
     function sanitize_html($text) {
-        $text = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i","<$1$2>", $text);
-        $text = preg_replace("/<script[^>]*?>/i","&lt;script&gt;", $text);
-        $text = preg_replace("/<\/script[^>]*?>/i","&lt;/script&gt;", $text);
+        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( \/)?>/i", function ($element) {
+            $name = strtolower($element[1]);
+            fallback($element[2], "");
+            $whitelist = "";
+            preg_match_all("/ ([a-z]+)=(\"[^\"]+\"|\'[^\']+\')/i", $element[0], $attributes, PREG_SET_ORDER);
+
+            foreach ($attributes as $attribute) {
+                $label = strtolower($attribute[1]);
+                $content = trim($attribute[2], "\"'");
+
+                switch ($label) {
+                    case "src":
+                        if (in_array($name, array("audio",
+                                                  "iframe",
+                                                  "img",
+                                                  "source",
+                                                  "track",
+                                                  "video")) and is_url($content))
+                            $whitelist.= $attribute[0];
+
+                        break;
+                    case "href":
+                        if (in_array($name, array("a",
+                                                  "area")) and is_url($content))
+                            $whitelist.= $attribute[0];
+
+                        break;
+                    case "alt":
+                        if (in_array($name, array("area",
+                                                  "img")))
+                            $whitelist.= $attribute[0];
+
+                        break;
+                }
+            }
+
+            return "<".
+                 $element[1].
+                 $whitelist.
+                 $element[2].
+                 ">";
+        }, $text);
+
+        $text = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $text);
+        $text = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $text);
         return $text;
     }
 
@@ -570,16 +524,16 @@
      * Parameters:
      *     $string - The string to sanitize.
      *     $force_lowercase - Force the string to lowercase?
-     *     $anal - If set to *true*, will remove all non-alphanumeric characters.
+     *     $strict - If set to *true*, will remove all non-alphanumeric characters.
      *     $trunc - Number of characters to truncate to (default 100, 0 to disable).
      */
-    function sanitize($string, $force_lowercase = true, $anal = false, $trunc = 100) {
+    function sanitize($string, $force_lowercase = true, $strict = false, $trunc = 100) {
         $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
                        "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
                        "—", "–", ",", "<", ".", ">", "/", "?");
         $clean = trim(str_replace($strip, "", strip_tags($string)));
         $clean = preg_replace('/\s+/', "-", $clean);
-        $clean = ($anal ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean);
+        $clean = ($strict ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean);
         $clean = ($trunc ? substr($clean, 0, $trunc) : $clean);
         return ($force_lowercase) ?
             (function_exists('mb_strtolower')) ?
@@ -605,7 +559,7 @@
 
     /**
      * Function: truncate
-     * Truncates a string to the given length, optionally taking into account HTML tags, and/or keeping words in tact.
+     * Truncates a string to the given length, optionally taking into account HTML tags, and/or keeping words intact.
      *
      * Parameters:
      *     $text - String to shorten.
@@ -698,74 +652,6 @@
     }
 
     /**
-     * Function: trackback_respond
-     * Responds to a trackback request.
-     *
-     * Parameters:
-     *     $error - Is this an error?
-     *     $message - Message to return.
-     */
-    function trackback_respond($error = false, $message = "") {
-        header("Content-Type: text/xml; charset=utf-8");
-
-        if ($error) {
-            echo '<?xml version="1.0" encoding="utf-8"?'.">\n";
-            echo "<response>\n";
-            echo "<error>1</error>\n";
-            echo "<message>".$message."</message>\n";
-            echo "</response>";
-            exit;
-        } else {
-            echo '<?xml version="1.0" encoding="utf-8"?'.">\n";
-            echo "<response>\n";
-            echo "<error>0</error>\n";
-            echo "</response>";
-        }
-
-        exit;
-    }
-
-    /**
-     * Function: trackback_send
-     * Sends a trackback request.
-     *
-     * Parameters:
-     *     $post - The post we're sending from.
-     *     $target - The URL we're sending to.
-     */
-    function trackback_send($post, $target) {
-        if (empty($target)) return false;
-
-        $target = parse_url($target);
-        $title = $post->title();
-        fallback($title, ucfirst($post->feather)." Post #".$post->id);
-        $excerpt = strip_tags(truncate($post->excerpt(), 255));
-
-        if (!empty($target["query"])) $target["query"] = "?".$target["query"];
-        if (empty($target["port"])) $target["port"] = 80;
-
-        $connect = fsockopen($target["host"], $target["port"]);
-        if (!$connect) return false;
-
-        $config = Config::current();
-        $query = "url=".rawurlencode($post->url())."&".
-                 "title=".rawurlencode($title)."&".
-                 "blog_name=".rawurlencode($config->name)."&".
-                 "excerpt=".rawurlencode($excerpt);
-
-        fwrite($connect, "POST ".$target["path"].$target["query"]." HTTP/1.1\n");
-        fwrite($connect, "Host: ".$target["host"]."\n");
-        fwrite($connect, "Content-type: application/x-www-form-urlencoded\n");
-        fwrite($connect, "Content-length: ". strlen($query)."\n");
-        fwrite($connect, "Connection: close\n\n");
-        fwrite($connect, $query);
-
-        fclose($connect);
-
-        return true;
-    }
-
-    /**
      * Function: send_pingbacks
      * Sends pingback requests to the URLs in a string.
      *
@@ -776,11 +662,11 @@
     function send_pingbacks($string, $post) {
         foreach (grab_urls($string) as $url)
             if ($ping_url = pingback_url($url)) {
-                require_once INCLUDES_DIR."/lib/ixr.php";
+                require_once INCLUDES_DIR.DIR."lib".DIR."ixr.php";
 
                 $client = new IXR_Client($ping_url);
                 $client->timeout = 3;
-                $client->useragent.= " -- Chyrp/".CHYRP_VERSION;
+                $client->useragent = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
                 $client->query("pingback.ping", $post->url(), $url);
             }
     }
@@ -797,46 +683,62 @@
      */
     function pingback_url($url) {
         extract(parse_url($url), EXTR_SKIP);
-        if (!isset($host)) return false;
 
+        $config = Config::current();
         $path = (!isset($path)) ? '/' : $path ;
-        if (isset($query)) $path.= '?'.$query;
         $port = (isset($port)) ? $port : 80 ;
+        $chyrp_host = str_replace(array("http://www.",
+                                        "http://",
+                                        "https://www.",
+                                        "https://"), "", $config->url);
 
-        # Connect
+        if (isset($query))
+            $path.= '?'.$query;
+
+        if (!isset($host) or substr_count($url, $chyrp_host))
+            return false;
+
         $connect = @fsockopen($host, $port, $errno, $errstr, 2);
-        if (!$connect) return false;
 
-        # Send the GET headers
-        fwrite($connect, "GET $path HTTP/1.1\r\n");
+        if (!$connect)
+            return false;
+
+        # Send the GET headers.
+        fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
         fwrite($connect, "Host: $host\r\n");
-        fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION."\r\n\r\n");
+        fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
 
-        # Check for X-Pingback header
+        # Check for X-Pingback header.
         $headers = "";
         while (!feof($connect)) {
             $line = fgets($connect, 512);
-            if (trim($line) == "") break;
+            if (trim($line) == "")
+                break;
+
             $headers.= trim($line)."\n";
 
             if (preg_match("/X-Pingback: (.+)/i", $line, $matches))
                 return trim($matches[1]);
 
-            # Nothing's found so far, so grab the content-type
-            # for the <link> search afterwards
+            # Save the content-type in case we need to <link> search.
             if (preg_match("/Content-Type: (.+)/i", $headers, $matches))
                 $content_type = trim($matches[1]);
         }
 
-        # No header found, check for <link>
-        if (preg_match('/(image|audio|video|model)/i', $content_type)) return false;
+        # X-Pingback header not found, <link> search if the content can be parsed.
+        if (!preg_match("~(text/html|text/sgml|text/xml|text/plain)~i", $content_type))
+            return false;
+
         $size = 0;
         while (!feof($connect)) {
             $line = fgets($connect, 1024);
             if (preg_match("/<link rel=[\"|']pingback[\"|'] href=[\"|']([^\"]+)[\"|'] ?\/?>/i", $line, $link))
                 return $link[1];
+
             $size += strlen($line);
-            if ($size > 2048) return false;
+
+            if ($size > 2048)
+                return false;
         }
 
         fclose($connect);
@@ -891,7 +793,7 @@
             $connect = @fsockopen($host, $port, $errno, $errstr, $timeout);
 
             if ($connect) {
-                # Send the GET headers
+                # Send the GET headers.
                 fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
                 fwrite($connect, "Host: ".$host."\r\n");
                 fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
@@ -904,7 +806,7 @@
 
                 fclose($connect);
 
-                # Search for 301 or 302 header and recurse with new location unless redirects are exhausted
+                # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
                 if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $header) and preg_match("~^Location:(.+)$~mi", $header, $matches)) {
                     $location = trim($matches[1]);
 
@@ -919,7 +821,7 @@
 
     /**
      * Function: grab_urls
-     * Crawls a string for links.
+     * Crawls a string and grabs hyperlinks from it.
      *
      * Parameters:
      *     $string - The string to crawl.
@@ -928,10 +830,23 @@
      *     An array of all URLs found in the string.
      */
     function grab_urls($string) {
-        $regexp = "/<a[^>]+href=[\"|']([^\"]+)[\"|']>[^<]+<\/a>/";
-        preg_match_all(Trigger::current()->filter($regexp, "link_regexp"), stripslashes($string), $matches);
-        $matches = $matches[1];
-        return $matches;
+        $expressions = array("/<a[^>]+href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/");
+        $urls = array();
+
+        if (Config::current()->enable_markdown)
+            $expressions[] = "/!\[[^\]]+\]\(([^\)]+)\)/";
+
+        Trigger::current()->filter($expressions, "link_regexp"); # Modules can support other syntaxes.
+
+        foreach ($expressions as $expression) {
+            preg_match_all($expression, stripslashes($string), $matches);
+            $urls = array_merge($urls, $matches[1]);
+        }
+
+        foreach ($urls as &$url)
+            $url = trim($url, " \"'");
+
+        return $urls;
     }
 
     /**
@@ -948,7 +863,7 @@
             $url = (ADMIN or $use_chyrp_url) ?
                        Config::current()->chyrp_url.$url :
                        Config::current()->url.$url ;
-        elseif (file_exists(INCLUDES_DIR."/config.json.php") and class_exists("Route") and !substr_count($url, "://"))
+        elseif (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
         header("Location: ".html_entity_decode($url));
@@ -1103,15 +1018,15 @@
 
         # Instantiate all Modules.
         foreach ($config->enabled_modules as $module) {
-            if (!file_exists(MODULES_DIR."/".$module."/".$module.".php") or !file_exists(MODULES_DIR."/".$module."/info.php")) {
+            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
                 unset($config->enabled_modules[$module]);
                 continue;
             }
 
-            if (file_exists(MODULES_DIR."/".$module."/locale/".$config->locale.".mo"))
-                load_translator($module, MODULES_DIR."/".$module."/locale/".$config->locale.".mo");
+            if (file_exists(MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
 
-            require MODULES_DIR."/".$module."/".$module.".php";
+            require MODULES_DIR.DIR.$module.DIR.$module.".php";
 
             $camelized = camelize($module);
             if (!class_exists($camelized))
@@ -1120,21 +1035,21 @@
             Modules::$instances[$module] = new $camelized;
             Modules::$instances[$module]->safename = $module;
 
-            foreach (include MODULES_DIR."/".$module."/info.php" as $key => $val)
+            foreach (include MODULES_DIR.DIR.$module.DIR."info.php" as $key => $val)
                 Modules::$instances[$module]->$key = $val;
         }
 
         # Instantiate all Feathers.
         foreach ($config->enabled_feathers as $feather) {
-            if (!file_exists(FEATHERS_DIR."/".$feather."/".$feather.".php") or !file_exists(FEATHERS_DIR."/".$feather."/info.php")) {
+            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
                 unset($config->enabled_feathers[$feather]);
                 continue;
             }
 
-            if (file_exists(FEATHERS_DIR."/".$feather."/locale/".$config->locale.".mo"))
-                load_translator($feather, FEATHERS_DIR."/".$feather."/locale/".$config->locale.".mo");
+            if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
 
-            require FEATHERS_DIR."/".$feather."/".$feather.".php";
+            require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
             $camelized = camelize($feather);
             if (!class_exists($camelized))
@@ -1143,7 +1058,7 @@
             Feathers::$instances[$feather] = new $camelized;
             Feathers::$instances[$feather]->safename = $feather;
 
-            foreach (include FEATHERS_DIR."/".$feather."/info.php" as $key => $val)
+            foreach (include FEATHERS_DIR.DIR.$feather.DIR."info.php" as $key => $val)
                 Feathers::$instances[$feather]->$key = $val;
         }
 
@@ -1264,7 +1179,7 @@
      */
     function unique_filename($name, $path = "", $num = 2) {
         $path = rtrim($path, "/");
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path."/".$name))
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$name))
             return $name;
 
         $name = explode(".", $name);
@@ -1282,7 +1197,7 @@
         $ext = ".".array_pop($name);
 
         $try = implode(".", $name)."-".$num.$ext;
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path."/".$try))
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$try))
             return $try;
 
         return unique_filename(implode(".", $name).$ext, $path, $num + 1);
@@ -1293,7 +1208,7 @@
      * Moves an uploaded file to the uploads directory.
      *
      * Parameters:
-     *     $file - The $_FILES value.
+     *     $file - The file array created by PHP.
      *     $extension - An array of valid extensions (case-insensitive).
      *     $path - A sub-folder in the uploads directory (optional).
      *     $put - Use copy() instead of move_uploaded_file()?
@@ -1303,7 +1218,7 @@
      */
     function upload($file, $extension = null, $path = "", $put = false) {
         $file_split = explode(".", $file['name']);
-        $path = rtrim($path, "/");
+        $path = rtrim($path, DIR);
         $dir = MAIN_DIR.Config::current()->uploads_path.$path;
 
         if (!file_exists($dir))
@@ -1315,13 +1230,16 @@
         foreach (array("tar.gz", "tar.bz", "tar.bz2") as $ext) {
             list($first, $second) = explode(".", $ext);
             $file_first =& $file_split[count($file_split) - 2];
-            if ($file_first == $first and end($file_split) == $second) {
+            if (strcasecmp($file_first, $first) == 0 and strcasecmp(end($file_split), $second) == 0) {
                 $file_first = $first.".".$second;
                 array_pop($file_split);
             }
         }
 
         $file_ext = end($file_split);
+
+        if (in_array(strtolower($file_ext), array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
+            $file_ext = "txt";
 
         if (is_array($extension)) {
             if (!in_array(strtolower($file_ext), $extension) and !in_array(strtolower($original_ext), $extension)) {
@@ -1347,9 +1265,9 @@
         $message = __("Couldn't upload file. CHMOD <code>".$dir."</code> to 777 and try again. If this problem persists, it's probably timing out; in which case, you must contact your system administrator to increase the maximum POST and upload sizes.");
 
         if ($put) {
-            if (!@copy($file['tmp_name'], $dir."/".$filename))
+            if (!@copy($file['tmp_name'], $dir.DIR.$filename))
                 error(__("Error"), $message);
-        } elseif (!@move_uploaded_file($file['tmp_name'], $dir."/".$filename))
+        } elseif (!@move_uploaded_file($file['tmp_name'], $dir.DIR.$filename))
             error(__("Error"), $message);
 
         return ($path ? $path."/".$filename : $filename);
@@ -1368,7 +1286,7 @@
      *     <upload>
      */
     function upload_from_url($url, $extension = null, $path = "") {
-        $file = tempnam(getcwd()."/tmp", "chyrp");
+        $file = tempnam(getcwd().DIR."tmp", "chyrp");
         file_put_contents($file, get_remote($url));
 
         $fake_file = array("name" => basename(parse_url($url, PHP_URL_PATH)),
@@ -1389,7 +1307,7 @@
             return "";
 
         $config = Config::current();
-        return ($url ? $config->chyrp_url.$config->uploads_path.$file : MAIN_DIR.$config->uploads_path.$file);
+        return ($url ? $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).$file : MAIN_DIR.$config->uploads_path.$file);
     }
 
     /**
@@ -1399,18 +1317,26 @@
      * Triggers an error page for all other fail states.
      *
      * Parameters:
-     *     $error - The ['error'] segment of the file array that is created during the file upload by PHP.
+     *     $file - The file array created by PHP.
      */
-    function upload_tester($error) {
-        if (is_array($error)) {
-            foreach ($error as $errors)
-                if (!upload_tester($errors))
+    function upload_tester($file) {
+        if (empty($file))
+            return false; # Upload size exceeded post_max_size directive in ini.php.
+
+        # Recurse to test multiple uploads file by file.
+        if (is_array($file['name'])) {
+            for ($i=0; $i < count($file['name']); $i++)
+                if (!upload_tester(array('name' => $file['name'][$i],
+                                         'type' => $file['type'][$i],
+                                         'tmp_name' => $file['tmp_name'][$i],
+                                         'error' => $file['error'][$i],
+                                         'size' => $file['size'][$i])))
                     return false;
 
             return true;
         }
 
-        switch ($error) {
+        switch ($file['error']) {
             case UPLOAD_ERR_INI_SIZE:
                 error(__("Error"), __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."));
             case UPLOAD_ERR_FORM_SIZE:
@@ -1423,9 +1349,14 @@
                 error(__("Error"), __("Failed to write file to disk."));
             case UPLOAD_ERR_EXTENSION:
                 error(__("Error"), __("File upload was stopped by a PHP extension."));
-            case UPLOAD_ERR_NO_FILE: 
+            case UPLOAD_ERR_NO_FILE:
                 return false;
-            case UPLOAD_ERR_OK: 
+            case UPLOAD_ERR_OK:
+                $limit = Config::current()->uploads_limit;
+
+                if ($file['size'] > ($limit * 1048576))
+                    error(__("Error"), _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $limit));
+
                 return true;
             default:
                 error(__("Error"), __("Unknown upload error."));
@@ -1499,127 +1430,14 @@
 
     /**
      * Function: timezones
-     * Returns an array of timezones that have unique offsets. Doesn't count deprecated timezones.
+     * Returns an array of timezones that have unique offsets.
      */
     function timezones() {
         $zones = array();
 
-        $deprecated = array("Brazil/Acre",
-                            "Brazil/DeNoronha",
-                            "Brazil/East",
-                            "Brazil/West",
-                            "Canada/Atlantic",
-                            "Canada/Central",
-                            "Canada/East-Saskatchewan",
-                            "Canada/Eastern",
-                            "Canada/Mountain",
-                            "Canada/Newfoundland",
-                            "Canada/Pacific",
-                            "Canada/Saskatchewan",
-                            "Canada/Yukon",
-                            "CET",
-                            "Chile/Continental",
-                            "Chile/EasterIsland",
-                            "CST6CDT",
-                            "Cuba",
-                            "EET",
-                            "Egypt",
-                            "Eire",
-                            "EST",
-                            "EST5EDT",
-                            "Etc/GMT",
-                            "Etc/GMT+0",
-                            "Etc/GMT+1",
-                            "Etc/GMT+10",
-                            "Etc/GMT+11",
-                            "Etc/GMT+12",
-                            "Etc/GMT+2",
-                            "Etc/GMT+3",
-                            "Etc/GMT+4",
-                            "Etc/GMT+5",
-                            "Etc/GMT+6",
-                            "Etc/GMT+7",
-                            "Etc/GMT+8",
-                            "Etc/GMT+9",
-                            "Etc/GMT-0",
-                            "Etc/GMT-1",
-                            "Etc/GMT-10",
-                            "Etc/GMT-11",
-                            "Etc/GMT-12",
-                            "Etc/GMT-13",
-                            "Etc/GMT-14",
-                            "Etc/GMT-2",
-                            "Etc/GMT-3",
-                            "Etc/GMT-4",
-                            "Etc/GMT-5",
-                            "Etc/GMT-6",
-                            "Etc/GMT-7",
-                            "Etc/GMT-8",
-                            "Etc/GMT-9",
-                            "Etc/GMT0",
-                            "Etc/Greenwich",
-                            "Etc/UCT",
-                            "Etc/Universal",
-                            "Etc/UTC",
-                            "Etc/Zulu",
-                            "Factory",
-                            "GB",
-                            "GB-Eire",
-                            "GMT",
-                            "GMT+0",
-                            "GMT-0",
-                            "GMT0",
-                            "Greenwich",
-                            "Hongkong",
-                            "HST",
-                            "Iceland",
-                            "Iran",
-                            "Israel",
-                            "Jamaica",
-                            "Japan",
-                            "Kwajalein",
-                            "Libya",
-                            "MET",
-                            "Mexico/BajaNorte",
-                            "Mexico/BajaSur",
-                            "Mexico/General",
-                            "MST",
-                            "MST7MDT",
-                            "Navajo",
-                            "NZ",
-                            "NZ-CHAT",
-                            "Poland",
-                            "Portugal",
-                            "PRC",
-                            "PST8PDT",
-                            "ROC",
-                            "ROK",
-                            "Singapore",
-                            "Turkey",
-                            "UCT",
-                            "Universal",
-                            "US/Alaska",
-                            "US/Aleutian",
-                            "US/Arizona",
-                            "US/Central",
-                            "US/East-Indiana",
-                            "US/Eastern",
-                            "US/Hawaii",
-                            "US/Indiana-Starke",
-                            "US/Michigan",
-                            "US/Mountain",
-                            "US/Pacific",
-                            "US/Pacific-New",
-                            "US/Samoa",
-                            "UTC",
-                            "W-SU",
-                            "WET",
-                            "Zulu");
-
-        foreach (timezone_identifiers_list() as $zone)
-            if (!in_array($zone, $deprecated))
-                $zones[] = array("name" => $zone,
-                                 "now" => time_in_timezone($zone));
+        foreach (timezone_identifiers_list(DateTimeZone::ALL) as $zone)
+            $zones[] = array("name" => $zone,
+                             "now" => time_in_timezone($zone));
 
         function by_time($a, $b) {
             return (int) ($a["now"] > $b["now"]);
@@ -1906,36 +1724,6 @@
     }
 
     /**
-     * Function: delete_dir
-     * Removes directories recursively.
-     *
-     * License GPLv2, Source http://candycms.org/
-     */
-    function delete_dir($dir) {
-       if (substr($dir, strlen($dir)-1, 1) != '/')
-           $dir .= '/';
-
-       if ($handle = opendir($dir)) {
-           while ($obj = readdir($handle)) {
-               if ($obj != '.' && $obj != '..')
-                   if (is_dir($dir.$obj))
-                       if (!delete_dir($dir.$obj))
-                           return false;
-                   elseif (is_file($dir.$obj))
-                       if (!unlink($dir.$obj)) 
-                           return false; 
-           }
-
-           closedir($handle);
-
-           if (!@rmdir($dir))
-               return false;
-           return true;
-       }
-       return false;
-    }
-
-    /**
      * Function: generate_captcha
      * Generates a captcha form element.
      *
@@ -2003,12 +1791,12 @@
      *     A unique token.
      */
     function token($items) {
-        return sha1(implode((array) $items).md5(Config::current()->secure_hashkey));
+        return sha1(implode((array) $items).Config::current()->secure_hashkey);
     }
 
     /**
      * Function: is_url
-     * Tries to determine if a string is a URL beginning with a FQDN, IPv4 or IPv6 address.
+     * Does the string look like a website URL?
      *
      * Parameters:
      *     $string - The string to analyse.
@@ -2020,12 +1808,14 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return preg_match('~^(http://|https://)?(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])($|/|:){1}~', $string);
+        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}/)~i', $string) or //FQDN
+                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}/)~', $string) or //IPv4
+                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5}/)~i', $string));                           //IPv6
     }
 
     /**
      * Function: is_email
-     * Tries to determine if a string is an email address.
+     * Does the string look like an email address?
      *
      * Parameters:
      *     $string - The string to analyse.
@@ -2034,7 +1824,9 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return preg_match('~^([^@])+@(([[:alnum:]]([[:alnum:]]|\-){0,61}[[:alnum:]]\.)+[[:alpha:]]{2,63}\.?|([[:digit:]]|\.){7,15}|\[([[:alnum:]]|\:){3,45}\])$~', $string);
+        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or //FQDN
+                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or //IPv4
+                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));                           //IPv6
     }
 
     /**
@@ -2051,7 +1843,76 @@
      *     <is_url>
      */
     function add_scheme($url) {
-        return $url = preg_match('~^[[:alpha:]]([[:alnum:]]|\+|\.|-)*:~', $url) ? $url : "http://".$url ;
+        return $url = preg_match('~^[a-z][a-z0-9\+\.\-]+:~i', $url) ? $url : "http://".$url ;
+    }
+
+    /**
+     * Function: download
+     * Send a file attachment to the visitor.
+     *
+     * Parameters:
+     *     $content - The bitstream to be sent to the visitor.
+     *     $filename  - The name to be applied to the content.
+     */
+    function download($content, $filename) {
+        ob_clean();
+        header("Content-type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=\"".$filename."\"");
+        if (!in_array("ob_gzhandler", ob_list_handlers()))
+            header("Content-length: ".strlen($content));
+        echo $content;
+        ob_flush();
+    }
+
+    /**
+     * Function: zip
+     * Generate a Zip bitstream.
+     *
+     * Parameters:
+     *     $files - An associative array of filename => content.
+     */
+    function zip($files) {
+        require_once "lib".DIR."zip.php";
+
+        $zip = new ZipFile();
+        foreach ($files as $filename => $content)
+            $zip->addFile($content, $filename);
+
+        return $zip->file();
+    }
+
+    /**
+     * Function: password_strength
+     * Award a numeric score for the strength of a password.
+     *
+     * Parameters:
+     *     $password - The password string to score.
+     *
+     * Returns:
+     *     A numeric score for the password strength.
+     */
+    function password_strength($password = "") {
+        $score = 0;
+
+        if (empty($password))
+            return $score;
+
+        # Calculate the frequency of each char in the password.
+        $frequency = array_count_values(str_split($password));
+
+        # Award each unique char and punish more than 10 occurrences.
+        foreach ($frequency as $occurrences)
+            $score += (11 - $occurrences);
+
+        # Award bonus points for different character types.
+        $variations = array("digits" => preg_match("/\d/", $password),
+                            "lower" => preg_match("/[a-z]/", $password),
+                            "upper" => preg_match("/[A-Z]/", $password),
+                            "nonWords" => preg_match("/\W/", $password));
+
+        $score += (array_sum($variations) - 1) * 10;
+
+        return intval($score);
     }
 
     /**
@@ -2089,7 +1950,6 @@
                                      $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
                                      "&token=".token(array($params["login"], $params["to"]));
                 break;
-
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", fix($params["login"])).
@@ -2101,14 +1961,12 @@
                                      $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
                                      "&token=".token(array($params["login"], $params["to"]));
                 break;
-
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
                 $params["message"] = _f("Hello, %s.", fix($params["login"])).
                                      "\n\n".
                                      _f("Your new password is: %s", $params["password"]);
                 break;
-            
             default:
                 if ($trigger->exists("correspond_".$action))
                     $trigger->filter($params, "correspond_".$action);

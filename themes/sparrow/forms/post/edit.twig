@@ -22,7 +22,7 @@ ${ trigger.call("before_ajax_edit_post_fields", feather) }
         </select>
         {% endif %}
         {% endfor %}
-        <a id="more_options_link_$post.id" href="javascript:void(0)" class="more_options_link">${ "More Options &darr;" | translate("chyrp") }</a>
+        <a id="more_options_link_$post.id" href="#" class="more_options_link">${ "More Options &darr;" | translate("chyrp") }</a>
         <div id="more_options_$post.id" class="more_options" style="display: none">
         {% if visitor.group.can("add_post") %}
         <label for="status">${ "Status" | translate }</label>
@@ -48,8 +48,6 @@ ${ trigger.call("before_ajax_edit_post_fields", feather) }
         <label for="created_at">${ "Timestamp" | translate }</label>
         <input class="text" type="text" name="created_at" value="${ post.created_at | fallback(now | date("r")) | strftime }" id="created_at">
         <input type="hidden" name="original_time" value="${ post.created_at | fallback(now | date("r")) | strftime }">
-        <label for="trackbacks">${ "Trackbacks" | translate }</label>
-        <input class="text" type="text" name="trackbacks" value="" id="trackbacks">
         {% for field in options %}
           <label for="${ field.attr | replace("[", "_") | replace("]", "") }">
           $field.label
@@ -61,26 +59,26 @@ ${ trigger.call("before_ajax_edit_post_fields", feather) }
           {% endif %}
           </label>
           {% if field.type == "text" or field.type == "file" %}
-          <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr" value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="$field.attr">
+          <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr" value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="${ field.attr | replace("[", "_") | replace("]", "") }">
             {% elseif field.type == "text_block" %}
-          <textarea class="wide{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" rows="${ field.rows | fallback(12) }" name="$field.attr" id="$field.attr">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
+          <textarea class="wide{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" rows="${ field.rows | fallback(12) }" name="$field.attr" id="${ field.attr | replace("[", "_") | replace("]", "") }">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
           {% elseif field.type == "select" %}
-          <select name="$field.attr" id="$field.attr"{% if field.classes %} class="${ field.classes | join(" ") }"{% endif %}>
+          <select name="$field.attr" id="${ field.attr | replace("[", "_") | replace("]", "") }"{% if field.classes %} class="${ field.classes | join(" ") }"{% endif %}>
             {% for option in field.options %}
             <option value="${ option.value | escape }"${ option.selected | option_selected(true) }>${ option.name | escape }</option>
             {% endfor %}
           </select>
           {% endif %}
-          <div class="postinfo">$field.extra</div>
+          $field.extra
         {% endfor %}
         </div>
         <div class="doaction admin">
           <button type="submit" accesskey="s">${ "Save" | translate }</button>
-          <a href="javascript:void(0)" id="post_cancel_edit_$post.id" class="cancel">${ "Cancel" | translate }</a>
+          <a href="#" id="post_cancel_edit_$post.id" class="cancel">${ "Cancel" | translate }</a>
         </div>
         <input type="hidden" name="id" value="$post.id" id="id">
         <input type="hidden" name="feather" value="${ post.feather | escape }" id="feather">
-        <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+        <input type="hidden" name="hash" value="${ ip | token }" id="hash">
         <input type="hidden" name="ajax" value="true" id="ajax">
       </fieldset>
     </form>

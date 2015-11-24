@@ -1,6 +1,6 @@
 <?php
     require_once "model.Comment.php";
-    require_once "lib/Akismet.php";
+    require_once "lib".DIR."Akismet.php";
 
     class Comments extends Modules {
         public function __init() {
@@ -66,6 +66,9 @@
         }
 
         static function route_add_comment() {
+            if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
+                error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"));
+
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
             if (!Comment::user_can($post))
@@ -108,7 +111,14 @@
             if (empty($_POST))
                 redirect("/admin/?action=manage_comments");
 
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to update a comment.", "comments"));
+
             $comment = new Comment($_POST['id']);
+
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
@@ -156,6 +166,9 @@
         }
 
         static function admin_delete_comment($admin) {
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
+
             $comment = new Comment($_GET['id']);
 
             if (!$comment->deletable())
@@ -165,16 +178,17 @@
         }
 
         static function admin_destroy_comment() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (empty($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_comments");
 
             $comment = new Comment($_POST['id']);
+
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
@@ -239,35 +253,13 @@
             return $fields;
         }
 
-        static function trackback_receive($url, $title, $excerpt, $blog_name) {
-            $sql = SQL::current();
-            $count = $sql->count("comments",
-                                 array("post_id" => $_GET['id'],
-                                       "author_url" => $_POST['url']));
-            if ($count)
-                trackback_respond(true, __("A ping from that URL is already registered.", "comments"));
-
-            $post = new Post($_GET["id"]);
-            if ($post->no_results)
-                return false;
-
-            Comment::create($excerpt,
-                            $title,
-                            $url,
-                            "",
-                            $post,
-                            0,
-                            0,
-                            "trackback");
-        }
-
         public function pingback($post, $to, $from, $title, $excerpt) {
             $sql = SQL::current();
             $count = $sql->count("comments",
                                  array("post_id" => $post->id,
                                        "author_url" => $from));
             if ($count)
-                return new IXR_Error(48, __("A ping from that URL is already registered.", "comments"));
+                return new IXR_Error(48, __("A ping from your URL is already registered.", "comments"));
 
             Comment::create($excerpt,
                             $title,
@@ -294,7 +286,7 @@
             if (empty($_POST))
                 return $admin->display("comment_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $config = Config::current();
@@ -347,7 +339,7 @@
         }
 
         public function admin_edit_comment($admin) {
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a comment.", "comments"));
 
             $comment = new Comment($_GET['id'], array("filter" => false));
@@ -495,7 +487,7 @@
         }
 
         static function javascript() {
-            include MODULES_DIR."/comments/javascript.php";
+            include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
 
         static function ajax() {
@@ -508,11 +500,17 @@
 
             switch($_POST['action']) {
                 case "reload_comments":
+                    if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
+                        exit;
+
                     $post = new Post($_POST['post_id']);
                     $last_comment = fallback($_POST['last_comment'], $post->created_at);
 
                     if ($post->no_results)
                         break;
+
+                    $ids = array();
+                    $last_comment = "";
 
                     if ($post->latest_comment > $last_comment) {
                         $new_comments = $sql->select("comments",
@@ -526,35 +524,49 @@
                                                      "created_at ASC",
                                                      array(":visitor_id" => $visitor->id));
 
-                        $ids = array();
-                        $last_comment = "";
                         while ($the_comment = $new_comments->fetchObject()) {
                             $ids[] = $the_comment->id;
 
                             if (strtotime($last_comment) < strtotime($the_comment->created_at))
                                 $last_comment = $the_comment->created_at;
                         }
-
-                        $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
-                        header("Content-type: application/json; charset=utf-8");
-                        echo json_encode($responseObj);
                     }
+
+                    $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
+                    header("Content-type: application/json; charset=utf-8");
+                    echo json_encode($responseObj);
                     break;
 
                 case "show_comment":
+                    if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
+                        error(__("Error"), __("An ID is required to show a comment.", "comments"));
+
                     $comment = new Comment($_POST['comment_id']);
                     $trigger->call("show_comment", $comment);
                     $main->display("content/comment", array("comment" => $comment));
                     break;
 
                 case "delete_comment":
+                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                        show_403(__("Access Denied"), __("Invalid security key."));
+
+                    if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                        error(__("Error"), __("An ID is required to delete a comment.", "comments"));
+
                     $comment = new Comment($_POST['id']);
+
                     if ($comment->deletable())
                         Comment::delete($_POST['id']);
 
                     break;
 
                 case "edit_comment":
+                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                        show_403(__("Access Denied"), __("Invalid security key."));
+
+                    if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
+                        error(__("Error"), __("An ID is required to edit a comment.", "comments"));
+
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
 
                     if ($comment->editable())
@@ -684,11 +696,6 @@
             return Comment::user_can($post);
         }
 
-        public function cacher_regenerate_posts_triggers($array) {
-            $array = array_merge($array, array("add_comment", "update_comment", "delete_comment"));
-            return $array;
-        }
-
         public function posts_export($atom, $post) {
             $comments = Comment::find(array("where" => array("post_id" => $post->id)),
                                       array("filter" => false));
@@ -730,7 +737,7 @@
         }
 
         public function route_comments_rss() {
-            header("HTTP/1.1 301 Moved Permanently");
+            header($_SERVER["SERVER_PROTOCOL"]." 301 Moved Permanently");
             redirect("comments_feed/");
         }
 
@@ -751,5 +758,10 @@
                                  "\n\n".
                                  '"'.truncate(strip_tags($params["body"])).'"';
             return $params;
+        }
+
+        static function cacher_regenerate_posts_triggers($regenerate_posts) {
+            $triggers = array("add_comment", "update_comment", "delete_comment");
+            return array_merge($regenerate_posts, $triggers);
         }
     }

@@ -1,5 +1,5 @@
 <?php
-    require_once INCLUDES_DIR."/class/Captcha.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Captcha.php";
 
     class Maptcha extends Modules {
         public function __init() {

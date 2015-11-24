@@ -1,32 +1,56 @@
 /* @group WebFonts */
 @font-face {
                                                 font-family: 'Open Sans webfont';
-                                                src: url('../fonts/OpenSans-Regular.woff') format('woff'),
-                                                     url('../fonts/OpenSans-Regular.ttf') format('truetype');
+                                                src: url('../fonts/OpenSans-Regular.woff') format('woff');
                                                 font-weight: normal;
                                                 font-style: normal;
 }
 
 @font-face {
                                                 font-family: 'Open Sans webfont';
-                                                src: url('../fonts/OpenSans-Semibold.woff') format('woff'),
-                                                     url('../fonts/OpenSans-Semibold.ttf') format('truetype');
+                                                src: url('../fonts/OpenSans-Semibold.woff') format('woff');
                                                 font-weight: bold;
                                                 font-style: normal;
 }
 
 @font-face {
                                                 font-family: 'Open Sans webfont';
-                                                src: url('../fonts/OpenSans-Italic.woff') format('woff'),
-                                                     url('../fonts/OpenSans-Italic.ttf') format('truetype');
+                                                src: url('../fonts/OpenSans-Italic.woff') format('woff');
                                                 font-weight: normal;
                                                 font-style: italic;
 }
 
 @font-face {
                                                 font-family: 'Open Sans webfont';
-                                                src: url('../fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                                                     url('../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                                                src: url('../fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                                                font-weight: bold;
+                                                font-style: italic;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../fonts/Hack-Regular.woff') format('woff');
+                                                font-weight: normal;
+                                                font-style: normal;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../fonts/Hack-Bold.woff') format('woff');
+                                                font-weight: bold;
+                                                font-style: normal;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../fonts/Hack-Oblique.woff') format('woff');
+                                                font-weight: normal;
+                                                font-style: italic;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../fonts/Hack-BoldOblique.woff') format('woff');
                                                 font-weight: bold;
                                                 font-style: italic;
 }
@@ -57,7 +81,7 @@ input, textarea, select {                       font-family: inherit;
                                                 background-color: #4f4f4f }
 body {                                          font-size: 14px;
                                                 font-family: "Open Sans webfont", sans-serif;
-                                                line-height: 1.5em;
+                                                line-height: 1.5;
                                                 color: #4a4747;
                                                 background-color: #efefef;
                                                 min-width: 320px }
@@ -77,8 +101,8 @@ strong {                                        font-weight: bold;
                                                 font-style: normal }
 small , .small, .sub {                          color: #b3b5b5 }
 small, .small {                                 font-size: 0.8em;
-                                                line-height: 1.25em }
-small li code, .small li code {                 line-height: 2em }
+                                                line-height: 1.25 }
+small li code, .small li code {                 line-height: 2 }
 p {                                             margin: 0em 0em 1em 0em }
 a:link {                                        color: #4a4747;
                                                 text-decoration: underline }
@@ -124,8 +148,8 @@ img.logo {                                      width: 24px;
                                                 margin-left: 0em;
                                                 margin-right: 1%;
                                                 padding: 0em 1em;
-                                                height: 3em;
-                                                line-height: 3em;
+                                                height: 3rem;
+                                                line-height: 3rem;
                                                 text-align: center;
                                                 white-space: nowrap;
                                                 overflow: hidden;
@@ -165,7 +189,9 @@ img.logo {                                      width: 24px;
 /* @end */
 
 /* @group Sub-Navigation */
-#sub_nav {                                      margin: 4em 4em 0em 4em }
+#sub_nav {                                      margin: 4em 4em 0em 4em;
+                                                height: 3rem;
+                                                overflow: hidden }
 #sub_nav li {                                   display: block;
                                                 float: left;
                                                 position: relative;
@@ -278,7 +304,7 @@ li.feather div.controls {                       position: absolute;
 /* @end */
 
 /* @group Forms */
-label {                                         line-height: 2em }
+label {                                         line-height: 2 }
 input[type="text"],
 input[type="email"],
 input[type="url"],
@@ -306,17 +332,18 @@ input[type="number"].error,
 input[type="password"].error,
 textarea.error {                                background-color: #faebe4;
                                                 border: 1px solid #d6bdb5 }
+input[type="password"].strong {                 border: 1px solid #76b362 }
 input[type="file"] {                            border: none }
 input.code,
 textarea.code,
-code {                                          font-family: monospace;
+code {                                          font-family: "Hack webfont", monospace;
                                                 font-style: normal }
 code {                                          background-color: #efefef;
                                                 padding: 2px;
                                                 color: #4f4f4f;
                                                 border: 1px solid #dfdfdf }
 select {                                        box-sizing: border-box }
-form.split > fieldset > * {                     line-height: 2em;
+form.split > fieldset > * {                     line-height: 2;
                                                 clear: both }
 form.split > fieldset > * > label {             box-sizing: border-box;
                                                 width: 45%;
@@ -324,7 +351,7 @@ form.split > fieldset > * > label {             box-sizing: border-box;
                                                 float: left;
                                                 color: #7f7f7f;
                                                 text-align: right;
-                                                padding-right: 1em }
+                                                padding: 0.25em 1em 0em 0em }
 form.split > fieldset > div.confirmation {      margin-top: 2em }
 form.split small,
 form.split .small,
@@ -467,7 +494,7 @@ a.prev_page {                                   box-sizing: border-box;
                                                 font-size: 1.25rem;
                                                 color: #4a4747;
                                                 text-decoration: none;
-                                                line-height: 1.25em;
+                                                line-height: 1.25;
                                                 margin: 0em;
                                                 padding: 0.4em 0.6em;
                                                 background-color: #f2fbff;
@@ -532,7 +559,7 @@ div.confirmation button + button {              margin-left: 1em }
 a.tag {                                         position: relative;
                                                 margin: 2px 0px;
                                                 text-decoration: none;
-                                                line-height: 2em;
+                                                line-height: 2;
                                                 padding: 0em 0.2em;
                                                 white-space: nowrap;
                                                 border: 1px solid #e5d7a1;
@@ -609,6 +636,9 @@ img.emblem {                                    display: inline;
                                                 top: 2px;
                                                 width: 16px;
                                                 height: 16px }
+a.emblem.markdown > img {                       width: 26px }
+img.emblem.preview {                            cursor: pointer;
+                                                float: right }
 .filters .filter_item {                         box-sizing: border-box;
                                                 float: left;
                                                 max-width: 50%;
@@ -616,7 +646,9 @@ img.emblem {                                    display: inline;
 .filters .filter_item:last-of-type {            padding-right: 0em }
 .filters .filter_item:only-of-type {            float: none;
                                                 max-width: 100% }
-img#likeImage_preview {                         vertical-align: middle }
+img#likeImage_preview {                         max-width: 28px;
+                                                max-height: 28px;
+                                                vertical-align: middle }
 /* @end */
 
 /* @group Overlays */
@@ -671,6 +703,12 @@ img#likeImage_preview {                         vertical-align: middle }
 .overlay_foreground h4 {                        font-size: 0.9em }
 .overlay_foreground h5 {                        font-size: 0.8em }
 .overlay_foreground h6 {                        font-size: 0.7em }
+.overlay_foreground table h1,
+.overlay_foreground table h2,
+.overlay_foreground table h3,
+.overlay_foreground table h4,
+.overlay_foreground table h5,
+.overlay_foreground table h6 {                  margin: 0em }
 .overlay_foreground ul {                        list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
@@ -684,9 +722,9 @@ img#likeImage_preview {                         vertical-align: middle }
 .overlay_foreground dl {                        list-style: none }
     .overlay_foreground dl dt {                 font-weight: bold }
     .overlay_foreground dl dd {                 margin-left: 1em }
-.overlay_foreground pre {                       font-family: monospace;
+.overlay_foreground pre {                       font-family: "Hack webfont", monospace;
                                                 margin: 2em }
-.overlay_foreground code {                      font-family: monospace;
+.overlay_foreground code {                      font-family: "Hack webfont", monospace;
                                                 font-size: 0.75em }
       .overlay_foreground pre code {            background-color: transparent;
                                                 border: none }
@@ -707,6 +745,10 @@ img#likeImage_preview {                         vertical-align: middle }
                                                 margin-right: 1% }
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
+    #sub_nav {                                  margin-top: 1em;
+                                                height: auto }
+    #sub_nav, #content {                        margin-left: 1em;
+                                                margin-right: 1em }
     #sub_nav li {                               box-sizing: border-box;
                                                 width: 50%;
                                                 height: 3em;
@@ -723,9 +765,6 @@ img#likeImage_preview {                         vertical-align: middle }
                                                 font-size: 1em }
     #sub_nav li:nth-child(odd) a {              border-right: none !important }
     #sub_nav li:nth-child(odd):last-child a {   border-right: 1px solid #cfcfcf !important }
-    #sub_nav {                                  margin-top: 1em }
-    #sub_nav, #content {                        margin-left: 1em;
-                                                margin-right: 1em }
     label {                                     display: block }
     form.split > fieldset > * > label {         width: 100%;
                                                 float: none;
@@ -754,28 +793,27 @@ img#likeImage_preview {                         vertical-align: middle }
     }
     select {                                    width: 100%;
                                                 margin-bottom: 2em }
-    a.emblem > img,
-    img.emblem {                                margin-right: 8px }
-    table {                                     display: block;
+    #content table {                            display: block;
                                                 box-sizing: border-box;
                                                 width: 100%;
                                                 overflow-x: scroll;
                                                 border: 1px solid #ddd;
                                                 -webkit-overflow-scrolling: touch }
-    table tbody tr td {                         min-width: 10em;
+    #content table tbody tr td {                min-width: 10em;
                                                 padding-top: 1em;
                                                 padding-bottom: 1em }
-    table tbody tr td.controls,
-    table tbody tr td.checkbox,
-    table tbody tr td.show_on_home {            min-width: 64px }
-    table tbody tr td.main {                    min-width: 480px }
-    table tbody tr:last-child td,
-    table tbody tr td[rowspan="2"] {            border-bottom: none }
-
-    table tbody tr td:first-child {             border-left: none }
-    table tbody tr td:last-child {              border-right: none }
+    #content table tbody tr td.controls,
+    #content table tbody tr td.checkbox,
+    #content table tbody tr td.show_on_home {   min-width: 64px }
+    #content table tbody tr td.main {           min-width: 480px }
+    #content table tbody tr:last-child td,
+    #content table tbody tr td[rowspan="2"] {   border-bottom: none }
+    #content table tbody tr td:first-child {    border-left: none }
+    #content table tbody tr td:last-child {     border-right: none }
     table.interactive + div.controls {          padding: 4em }
-    .boo, .yay, button, a.button,
+    button, a.button,
+    button.boo, a.button.boo,
+    button.yay, a.button.yay,
     a.prev_page, a.next_page {                  float: none !important;
                                                 clear: both !important;
                                                 display: block !important;
@@ -791,14 +829,15 @@ img#likeImage_preview {                         vertical-align: middle }
                                                 max-width: 100%;
                                                 float: none;
                                                 clear: both;
-                                                margin-bottom: 1em }
+                                                margin-bottom: 1em;
+                                                padding-right: 0em }
     div.more_options p.more_options_option {    width: 100%;
                                                 min-height: 0em;
                                                 margin: 0em 0em 1em 0em;
                                                 padding: 0em }
     div.more_options > .more_options_option {   padding-left: 0em !important;
                                                 padding-right: 0em !important }
-    #content ul.extend > li > h3 {              line-height: 2em }
+    #content ul.extend > li > h3 {              line-height: 2 }
     #content ul.themes > li {                   width: 100%;
                                                 text-align: center;
                                                 margin-right: 0em;

@@ -22,11 +22,10 @@
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_video");
             $this->respondTo("filter_post", "filter_post");
-            $this->respondTo("post_options", "add_option");
         }
 
         public function submit() {
-            if (isset($_FILES['video']) and upload_tester($_FILES['video']['error']))
+            if (isset($_FILES['video']) and upload_tester($_FILES['video']))
                 $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
             else
                 error(__("Error"), __("You did not select a video to upload.", "video"));
@@ -39,7 +38,7 @@
         }
 
         public function update($post) {
-            if (isset($_FILES['video']) and upload_tester($_FILES['video']['error'])) {
+            if (isset($_FILES['video']) and upload_tester($_FILES['video'])) {
                 $this->delete_file($post);
                 $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
             } else

@@ -37,22 +37,22 @@
         private function filenames_unserialize($filenames) {
             $unserialized = json_decode($filenames, true);
 
-            if (json_last_error() and ADMIN)
+            if (json_last_error() and DEBUG)
                 error(__("Error"), _f("Failed to unserialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
 
             return $unserialized;
         }
 
         public function submit() {
-            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads']['error'])) {
+            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
                 if (is_array($_FILES['uploads']['name']))
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
                             $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
-                                                    'type' => $_FILES['uploads']['type'][$i],
-                                                    'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                                    'error' => $_FILES['uploads']['error'][$i],
-                                                    'size' => $_FILES['uploads']['size'][$i]));
+                                                        'type' => $_FILES['uploads']['type'][$i],
+                                                        'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                                        'error' => $_FILES['uploads']['error'][$i],
+                                                        'size' => $_FILES['uploads']['size'][$i]));
                 else
                     $filenames[] = upload($_FILES['uploads']);
             } else
@@ -71,16 +71,16 @@
         }
 
         public function update($post) {
-            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads']['error'])) {
+            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $this->delete_files($post);
                 $filenames = array();
                 if (is_array($_FILES['uploads']['name']))
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
                             $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
-                                                    'type' => $_FILES['uploads']['type'][$i],
-                                                    'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                                    'error' => $_FILES['uploads']['error'][$i],
-                                                    'size' => $_FILES['uploads']['size'][$i]));
+                                                        'type' => $_FILES['uploads']['type'][$i],
+                                                        'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                                        'error' => $_FILES['uploads']['error'][$i],
+                                                        'size' => $_FILES['uploads']['size'][$i]));
                 else
                     $filenames[] = upload($_FILES['uploads']);
             } else
@@ -134,30 +134,30 @@
             for ($i=0; $i < count($filenames); $i++) {
                 $list[$i]['name'] = $filenames[$i];
                 $list[$i]['link'] = uploaded($filenames[$i]);
-                $list[$i]['type'] = end(explode(".", strtolower($filenames[$i])));
+                $list[$i]['type'] = strtolower(pathinfo($filenames[$i], PATHINFO_EXTENSION));
             }
             return $list;
         }
 
-        public function image_tag($filename, $max_width = 500, $max_height = null, $more_args = "quality=100") {
+        public function image_tag($filename, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
             $config = Config::current();
 
             # Source set for responsive images
-            $srcset = array($config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
-                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width=960&amp;'.$more_args.' 960w',
-                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
-                            $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
+            $srcset = array($config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
+                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width=960&amp;'.$more_args.' 960w',
+                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
+                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
 
-            $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="80vw"';
-            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($filename);
+            $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.'"';
+            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename);
             $tag.= '&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'"';
             $tag.= ' alt="'.$filename.'" class="image">';
 
             return $tag;
         }
 
-        public function image_link($filename, $max_width = 500, $max_height = null, $more_args = "quality=100") {
-            return '<a href="'.uploaded($filename).'" class="image_link">'.$this->image_tag($filename, $max_width, $max_height, $more_args).'</a>';
+        public function image_link($filename, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
+            return '<a href="'.uploaded($filename).'" class="image_link">'.$this->image_tag($filename, $max_width, $max_height, $more_args, $sizes).'</a>';
         }
 
         public function add_option($options, $post = null) {

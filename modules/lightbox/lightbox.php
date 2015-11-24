@@ -18,12 +18,12 @@
             if (empty($_POST))
                 return $admin->display("lightbox_settings");
     
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $set = array(Config::current()->set("module_lightbox",
                                             array("background" => $_POST['background'],
-                                                  "spacing" => (int) $_POST['spacing'],
+                                                  "spacing" => ((int) $_POST['spacing'] < 0) ? 0 : (int) $_POST['spacing'],
                                                   "protect" => isset($_POST['protect']))));
 
             if (!in_array(false, $set))
@@ -37,6 +37,6 @@
         }
 
         static function javascript() {
-            include MODULES_DIR."/lightbox/javascript.php";
+            include MODULES_DIR.DIR."lightbox".DIR."javascript.php";
         }
     }

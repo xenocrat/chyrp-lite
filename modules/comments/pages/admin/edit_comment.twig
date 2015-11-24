@@ -37,7 +37,6 @@
                                 <option value="denied"${ comment.status | option_selected("denied") }>${ "Denied" | translate }</option>
                                 <option value="spam"${ comment.status | option_selected("spam") }>${ "Spam" | translate }</option>
                                 <option value="pingback"${ comment.status | option_selected("pingback") }>${ "Pingback" | translate }</option>
-                                <option value="trackback"${ comment.status | option_selected("trackback") }>${ "Trackback" | translate }</option>
                             </select>
                         </p>
                         {% endif %}
@@ -50,7 +49,7 @@
                         ${ trigger.call("edit_comment_options", comment) }
                         <hr>
                     </div>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                     <input type="hidden" name="id" value="$comment.id" id="id">
                     <div class="buttons confirmation">
                         <button type="submit" class="yay" accesskey="s">

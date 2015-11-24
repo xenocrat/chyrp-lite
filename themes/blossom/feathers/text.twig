@@ -2,11 +2,11 @@
 
 {% block content %}
       {% if post['title'] %}
-      <h2>
+      <h2 class="post_title">
         <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;">$post.title</a>
       </h2>
       {% endif %}
       <section class="body{% if post.body | length > 1000 %} columnized{% endif %}">
-        ${ post.body | read_more("…more") }
+        ${ post.body | read_more("&hellip;more") }
       </section>
 {% endblock %}

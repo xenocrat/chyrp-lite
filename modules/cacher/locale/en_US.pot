@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-08-14 09:20+0000\n"
+"POT-Creation-Date: 2015-11-23 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/cacher/cacher.php:106
+#: modules/cacher/cacher.php:96
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:136
+#: modules/cacher/cacher.php:132
 msgid "Cache cleared."
 msgstr ""
 
@@ -50,16 +50,15 @@ msgstr ""
 msgid "(seconds)"
 msgstr ""
 
+#: modules/cacher/pages/admin/cache_settings.twig:13
+msgid "Clear the cache now!"
+msgstr ""
+
 #: modules/cacher/pages/admin/cache_settings.twig:17
 msgid "Exclude URLs"
 msgstr ""
 
-#: modules/cacher/pages/admin/cache_settings.twig:18
-#: modules/cacher/pages/admin/cache_settings.twig:22
-msgid "(comma separated)"
-msgstr ""
-
-#: modules/cacher/pages/admin/cache_settings.twig:21
-msgid "Memcache Servers"
+#: modules/cacher/pages/admin/cache_settings.twig:20
+msgid "A comma separated list of URLs that will not be cached."
 msgstr ""
 

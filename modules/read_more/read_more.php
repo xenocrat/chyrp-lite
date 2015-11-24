@@ -1,16 +1,11 @@
 <?php
     class ReadMore extends Modules {
         public function __init() {
-            $this->addAlias("markup_post_text", "makesafe", 8);
+            $this->addAlias("markup_post_text", "makesafe", 4); # Replace "<!--more-->" before markup modules filter it.
         }
 
-        # Replace the "read more" indicator before markup modules get to it.
         static function makesafe($text, $post = null) {
-            # Catch HTML entities and convert back to literals
-            if (is_string($text))
-                $text = str_replace("&lt;!--more--&gt;", "<!--more-->", $text);
-
-            if (!is_string($text) or !preg_match("/<!--more(\((.+)\))?-->/", $text))
+            if (!is_string($text) or strpos($text, "<!--more-->") === false)
                 return $text;
 
             $controller = Route::current()->controller;
@@ -19,35 +14,29 @@
 
             $url = (isset($post) and !$post->no_results) ? $post->url() : "#" ;
 
-            # For the curious: e51b2b9a58824dd068d8777ec6e97e4d is a md5 of "replace me!"
-            return preg_replace("/<!--more(\((.+)\))?-->/", '<a class="read_more" href="'.$url.'">e51b2b9a58824dd068d8777ec6e97e4d</a>(((more\\1)))', $text);
+            return str_replace("<!--more-->", '<a class="read_more" href="'.$url.'">e51b2b9a58824dd068d8777ec6e97e4d</a>', $text);
         }
 
-        # To be used in the Twig template as ${ post.body | read_more("Read more...") }
         static function read_more($text, $string = null) {
-            if (!substr_count($text, "e51b2b9a58824dd068d8777ec6e97e4d"))
+            if (!substr_count($text, "e51b2b9a58824dd068d8777ec6e97e4d")) # md5 hash of "replace me!"
                 return $text;
 
-            if (Route::current()->action == "view")
-                return preg_replace('/(<p>)?<a class="read_more" href="([^"]+)">e51b2b9a58824dd068d8777ec6e97e4d<\/a>\(\(\(more(\((.+)\))?\)\)\)(<\/p>(\n\n<\/p>(\n\n)?)?)?/', "", $text);
+            if (Route::current()->action == "view" or (isset($_POST['context']) and $_POST['context'] == "view"))
+                return preg_replace('/(<p>)?<a class="read_more" href="([^"]+)">e51b2b9a58824dd068d8777ec6e97e4d<\/a>(<\/p>)?/', "", $text);
 
-            preg_match_all("/e51b2b9a58824dd068d8777ec6e97e4d(\(\(\(more(\((.+)\))?\)\)\))/",
-                           preg_replace("/<[^>]+>/", "", html_entity_decode(str_replace("&nbsp;", " ", $text), ENT_QUOTES, 'UTF-8')),
-                           $more, PREG_OFFSET_CAPTURE);
-            $body = truncate($text, $more[1][0][1], "", true, true);
+            $plaintext = preg_replace("/<[^>]+>/", "", preg_replace("/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i", " ", $text));
 
-            $body.= @$more[3][0];
+            $breakpoint = strpos($plaintext, "e51b2b9a58824dd068d8777ec6e97e4d") + strlen("e51b2b9a58824dd068d8777ec6e97e4d");
 
-            if (!empty($more[2][0]))
-                $string = $more[2][0];
-            elseif (!isset($string) or $string instanceof Post) # If it's called from anywhere but Twig the post will be passed as a second argument.
-                $string = __("Read More &raquo;", "theme");
+            $body = truncate($text, $breakpoint, "", true, true); # Truncation will retain the closing tag of the read_more link.
 
-            return str_replace("e51b2b9a58824dd068d8777ec6e97e4d", $string, $body);
+            return str_replace("e51b2b9a58824dd068d8777ec6e97e4d",
+                               fix((!isset($string) or $string instanceof Post) ? __("&hellip;more", "read_more") : $string),
+                               $body);
         }
 
         static function title_from_excerpt($text) {
-            $split = preg_split("/(<p>)?<a class=\"read_more\" href=\"([^\"]+)\">e51b2b9a58824dd068d8777ec6e97e4d<\/a>(<\/p>(\n\n<\/p>(\n\n)?)?|<br \/>)?/", $text);
+            $split = preg_split('/(<p>)?<a class="read_more" href="([^"]+)">e51b2b9a58824dd068d8777ec6e97e4d<\/a>(<\/p>)?/', $text);
             return $split[0];
         }
     }

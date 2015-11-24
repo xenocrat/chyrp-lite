@@ -7,7 +7,7 @@
       </h2>
       {% endif %}
       <section class="description{% if post.description | length > 1000 %} columnized{% endif %}">
-        ${ post.description | read_more("…more") }
+        ${ post.description | read_more("&hellip;more") }
       </section>
       <section class="audio">
       	$post.audio_player

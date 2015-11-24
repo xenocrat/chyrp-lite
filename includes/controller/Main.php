@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Main Controller
-     * The logic behind the Chyrp install.
+     * The logic controlling the blog.
      */
     class MainController {
         # Array: $urls
@@ -35,16 +35,15 @@
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            $cache = (is_writable(INCLUDES_DIR."/caches") and
+            $cache = (is_writable(INCLUDES_DIR.DIR."caches") and
                       !DEBUG and
                       !PREVIEWING and
                       !defined('CACHE_TWIG') or CACHE_TWIG);
 
             if (defined('THEME_DIR'))
                 $this->twig = new Twig_Loader(THEME_DIR,
-                                              $cache ?
-                                                  INCLUDES_DIR."/caches" :
-                                                  null) ;
+                                              $cache ? INCLUDES_DIR.DIR."caches" : null,
+                                              "UTF-8");
         }
 
         /**
@@ -188,21 +187,6 @@
         }
 
         /**
-         * Function: key_regexp
-         * Converts the values in $config->post_url to regular expressions.
-         *
-         * Parameters:
-         *     $key - Input URL with the keys from <Post.$url_attrs>.
-         *
-         * Returns:
-         *     $key values replaced with their regular expressions from <Routes->$code>.
-         */
-        private function key_regexp($key) {
-            Trigger::current()->filter(Post::$url_attrs, "url_code");
-            return str_replace(array_keys(Post::$url_attrs), array_values(Post::$url_attrs), str_replace("/", "\\/", $key));
-        }
-
-        /**
          * Function: index
          * Grabs the posts for the main page.
          */
@@ -219,7 +203,7 @@
                                  array("id" => $post),
                                  array("status" => "public"));
 
-            $this->display("pages/index",
+            $this->display("pages".DIR."index",
                            array("posts" => new Paginator(Post::find(array("placeholders" => true)),
                                                           $this->post_limit)));
         }
@@ -233,9 +217,14 @@
             fallback($_GET['month']);
             fallback($_GET['day']);
 
-            $preceeding = new Post(null, array("where" => array("created_at <" => datetime(mktime(0, 0, 0, is_numeric($_GET['month']) ? $_GET['month'] : 1 , is_numeric($_GET['day']) ? $_GET['day'] : 1 , is_numeric($_GET['year']) ? $_GET['year'] : 0 )),
-                                                                "status" => "public"),
-                                               "order" => "created_at DESC, id DESC"));
+            $lower_bound = mktime(0, 0, 0,
+                                  is_numeric($_GET['month']) ? (int) $_GET['month'] : 1 ,
+                                  is_numeric($_GET['day']) ? (int) $_GET['day'] : 1 ,
+                                  is_numeric($_GET['year']) ? (int) $_GET['year'] : 1970 );
+
+            $preceding = new Post(null, array("where" => array("created_at <" => datetime($lower_bound),
+                                                               "status" => "public"),
+                                              "order" => "created_at DESC, id DESC"));
 
             if (isset($_GET['year']) and isset($_GET['month']) and isset($_GET['day']))
                 $posts = new Paginator(Post::find(array("placeholders" => true,
@@ -298,7 +287,7 @@
 
                 $this->display("pages/archive",
                                array("archives" => $archives,
-                                     "preceeding" => $preceeding, # The post preceeding the date range chronologically.
+                                     "preceding" => $preceding, # The post preceding the date range chronologically.
                                      "archive_hierarchy" => $archive_hierarchy),
                                __("Archive"));
             } else {
@@ -308,14 +297,14 @@
                 $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
                 $depth = isset($_GET['day']) ? "day" : (isset($_GET['month']) ? "month" : (isset($_GET['year']) ? "year" : ""));
 
-                $this->display("pages/archive",
+                $this->display("pages".DIR."archive",
                                array("posts" => $posts,
                                      "archive" => array("year" => $_GET['year'],
                                                         "month" => strftime("%B", $timestamp),
                                                         "day" => strftime("%d", $timestamp),
                                                         "timestamp" => $timestamp,
                                                         "depth" => $depth),
-                                     "preceeding" => $preceeding),
+                                     "preceding" => $preceding),
                                _f("Archive of %s", array(strftime("%B %Y", $timestamp))));
             }
         }
@@ -354,7 +343,7 @@
             else
                 $posts = new Paginator(array());
 
-            $this->display(array("pages/search", "pages/index"),
+            $this->display(array("pages".DIR."search", "pages".DIR."index"),
                            array("posts" => $posts,
                                  "search" => $_GET['query']),
                            fix(_f("Search results for \"%s\"", array($_GET['query']))));
@@ -375,7 +364,7 @@
                                                                      "user_id" => $visitor->id))),
                                    $this->post_limit);
 
-            $this->display(array("pages/drafts", "pages/index"),
+            $this->display(array("pages".DIR."drafts", "pages".DIR."index"),
                            array("posts" => $posts),
                            __("Drafts"));
         }
@@ -410,7 +399,7 @@
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
                 Flash::message(_f("This post is only visible by the following groups: %s.", $post->groups()));
 
-            $this->display(array("pages/view", "pages/index"),
+            $this->display(array("pages".DIR."view", "pages".DIR."index"),
                            array("post" => $post, "posts" => array($post)),
                            $post->title());
         }
@@ -440,16 +429,7 @@
             if (!$page->public and !$visitor->group->can("view_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view this page."));
 
-            $this->display(array("pages/page", "pages/".$page->url), array("page" => $page), $page->title);
-        }
-
-        /**
-         * Function: rss
-         * Redirects to /feed (backwards compatibility).
-         */
-        public function rss() {
-            header("HTTP/1.1 301 Moved Permanently");
-            redirect(oneof(@Config::current()->feed_url, url("feed")));
+            $this->display(array("pages".DIR.$page->url, "pages".DIR."page"), array("page" => $page), $page->title);
         }
 
         /**
@@ -459,17 +439,6 @@
         public function id() {
             $post = new Post($_GET['id']);
             redirect($post->url());
-        }
-
-        /**
-         * Function: cookies_notification
-         * Deliver a notification to comply with EU Directive 2002/58 on Privacy and Electronic Communications.
-         */
-        public function cookies_notification() {
-            if (!isset($_SESSION['cookies_notified']) and Config::current()->cookies_notification) {
-                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
-                $_SESSION['cookies_notified'] = true;
-            }
         }
 
         /**
@@ -527,7 +496,7 @@
                 }
             }
 
-            $this->display("forms/user/register", array(), __("Register"));
+            $this->display("forms".DIR."user".DIR."register", array(), __("Register"));
         }
 
         /**
@@ -546,7 +515,7 @@
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
 
-            if (token(array($user->login, $user->email)) !== $_GET['token'])
+            if (token(array($user->login, $user->email)) != $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             if (!$user->approved) {
@@ -575,7 +544,7 @@
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
 
-            if (token(array($user->login, $user->email)) !== $_GET['token'])
+            if (token(array($user->login, $user->email)) != $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             $new_password = random(8);
@@ -630,7 +599,7 @@
                 }
             }
 
-            $this->display("forms/user/login", array(), __("Log In"));
+            $this->display("forms".DIR."user".DIR."login", array(), __("Log In"));
         }
 
         /**
@@ -689,7 +658,7 @@
                 }
             }
 
-            $this->display("forms/user/controls", array(), __("Controls"));
+            $this->display("forms".DIR."user".DIR."controls", array(), __("Controls"));
         }
 
         /**
@@ -715,7 +684,7 @@
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }
 
-            $this->display("forms/user/lost_password", array(), __("Lost Password"));
+            $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost Password"));
         }
 
         /**
@@ -773,7 +742,7 @@
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
 
-            require INCLUDES_DIR."/feed.php";
+            require INCLUDES_DIR.DIR."feed.php";
         }
 
         /**
@@ -783,18 +752,14 @@
          * If "posts" is in the context and the visitor requested a feed, they will be served.
          *
          * Parameters:
-         *     $file - The theme file to display.
+         *     $file - The theme file to display (relative to THEME_DIR).
          *     $context - The context for the file.
          *     $title - The title for the page.
          */
         public function display($file, $context = array(), $title = "") {
             if (is_array($file))
                 for ($i = 0; $i < count($file); $i++) {
-                    $check = ($file[$i][0] == "/" or preg_match("/[a-zA-Z]:\\\/", $file[$i])) ?
-                                 $file[$i] :
-                                 THEME_DIR."/".$file[$i] ;
-
-                    if (file_exists($check.".twig") or ($i + 1) == count($file))
+                    if (file_exists(THEME_DIR.DIR.$file[$i].".twig") or ($i + 1) == count($file))
                         return $this->display($file[$i], $context, $title);
                 }
 
@@ -812,8 +777,6 @@
                     return $this->feed($context["posts"]);
             }
 
-            $this->cookies_notification();
-
             $this->context = array_merge($context, $this->context);
 
             $visitor = Visitor::current();
@@ -822,6 +785,7 @@
 
             $theme->title = $title;
 
+            $this->context["ip"]           = $_SERVER["REMOTE_ADDR"];
             $this->context["theme"]        = $theme;
             $this->context["flash"]        = Flash::current();
             $this->context["trigger"]      = $trigger;
@@ -851,19 +815,24 @@
 
             $this->context["sql_debug"] =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("main_context", "main_context_".str_replace("/", "_", $file)));
+            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $file)));
 
-            $file = ($file[0] == "/" or preg_match("/[a-zA-Z]:\\\/", $file)) ? $file : THEME_DIR."/".$file ;
-            if (!file_exists($file.".twig"))
-                error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($file.".twig")));
+            if (!isset($_SESSION['cookies_notified']) and $config->cookies_notification) {
+                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
+                $_SESSION['cookies_notified'] = true;
+            }
 
             try {
                 return $this->twig->getTemplate($file.".twig")->display($this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 $trace = debug_backtrace();
-                $twig = array("file" => $e->filename, "line" => $e->lineno);
-                array_unshift($trace, $twig);
+
+                if (property_exists($e, "filename") and property_exists($e, "lineno")) {
+                    $twig = array("file" => $e->filename, "line" => $e->lineno);
+                    array_unshift($trace, $twig);
+                }
+
                 error(__("Error"), $prettify, $trace);
             }
         }
@@ -883,7 +852,7 @@
          */
         public static function & current() {
             static $instance = null;
-            return $instance = (empty($instance)) ? new self() : $instance ;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
         }
     }
-

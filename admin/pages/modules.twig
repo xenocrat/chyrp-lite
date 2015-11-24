@@ -15,15 +15,15 @@
                         $module.name {# translation is done in the controller #}
                     </h3>
                     {% if module.help %}
-                    <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
+                    <a href="{% admin "help&id=" ~ module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
                     {% endif %}
                     <p class="module_description">
                         $module.description {# translation is done in the controller #}
                     </p>
                     {% if module.conflicting_modules %}
-                    <p class="module_conflicts_message">
+                    <h4 class="module_conflicts_message">
                         ${ "This module conflicts with the following installed modules:" | translate }
-                    </p>
+                    </h4>
                     <ol class="module_conflicts_list">
                     {% for conflict in module.conflicting_modules %}
                         <li class="$conflict">${ conflict | camelize }</li>
@@ -31,9 +31,9 @@
                     </ol>
                     {% endif %}
                     {% if module.dependencies_needed %}
-                    <p class="module_dependencies_message">
+                    <h4 class="module_dependencies_message">
                         ${ "This module requires the following modules to be enabled:" | translate }
-                    </p>
+                    </h4>
                     <ol class="module_dependencies_list">
                     {% for dependency in module.dependencies_needed %}
                         <li class="$dependency">${ dependency | camelize }</li>
@@ -41,10 +41,10 @@
                     </ol>
                     {% endif %}
                     <div class="controls">
-                        <a class="button module_disabler" href="{% admin "disable&module="~safename %}">
+                        <a class="button module_disabler" href="{% admin "disable&module=" ~ safename ~ "&hash=" ~ ip | token %}">
                             <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
                         </a>
-                        <a class="button module_enabler" href="{% admin "enable&module="~safename %}">
+                        <a class="button module_enabler" href="{% admin "enable&module=" ~ safename ~ "&hash=" ~ ip | token %}">
                             <img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
                         </a>
                     </div>
@@ -62,15 +62,15 @@
                         $module.name {# translation is done in the controller #}
                     </h3>
                     {% if module.help %}
-                    <a href="{% admin "help&id="~module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
+                    <a href="{% admin "help&id=" ~ module.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
                     {% endif %}
                     <p class="module_description">
                         $module.description {# translation is done in the controller #}
                     </p>
                     {% if module.conflicting_modules %}
-                    <p class="module_conflicts_message">
+                    <h4 class="module_conflicts_message">
                         ${ "This module conflicts with the following installed modules:" | translate }
-                    </p>
+                    </h4>
                     <ol class="module_conflicts_list">
                     {% for conflict in module.conflicting_modules %}
                         <li class="$conflict">${ conflict | camelize }</li>
@@ -78,9 +78,9 @@
                     </ol>
                     {% endif %}
                     {% if module.dependencies_needed %}
-                    <p class="module_dependencies_message">
+                    <h4 class="module_dependencies_message">
                         ${ "This module requires the following modules to be enabled:" | translate }
-                    </p>
+                    </h4>
                     <ol class="module_dependencies_list">
                     {% for dependency in module.dependencies_needed %}
                         <li class="$dependency">${ dependency | camelize }</li>
@@ -89,10 +89,10 @@
                     {% endif %}
                     {% if not ( module.classes | join(" ") | contains("missing_dependency") ) %}
                     <div class="controls">
-                        <a class="button module_disabler" href="{% admin "disable&module="~safename %}">
+                        <a class="button module_disabler" href="{% admin "disable&module=" ~ safename ~ "&hash=" ~ ip | token %}">
                             <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
                         </a>
-                        <a class="button module_enabler" href="{% admin "enable&module="~safename %}">
+                        <a class="button module_enabler" href="{% admin "enable&module=" ~ safename ~ "&hash=" ~ ip | token %}">
                             <img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
                         </a>
                     </div>

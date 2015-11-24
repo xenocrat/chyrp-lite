@@ -13,13 +13,13 @@
             if (empty($_POST))
                 redirect("/admin/?action=import");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!in_array("text", $config->enabled_feathers))
                 error(__("Missing Feather", "importers"), __("Importing from WordPress requires the Text feather to be installed and enabled.", "importers"));
 
-            if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']['error']))
+            if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
                 error(__("Error"), __("You must select a WordPress export file.", "importers"));
 
             if (ini_get("memory_limit") < 20)
@@ -172,7 +172,7 @@
             if (empty($_POST))
                 redirect("/admin/?action=import");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!in_array("text", $config->enabled_feathers) or
@@ -309,7 +309,7 @@
             if (empty($_POST))
                 redirect("/admin/?action=import");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['host']))
@@ -396,7 +396,7 @@
             if (empty($_POST))
                 redirect("/admin/?action=import");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['host']))
@@ -525,7 +525,7 @@
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
                     </p>
-                    <input type="hidden" name="hash" value="<?php echo $config->secure_hashkey; ?>" id="hash">
+                    <input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
                 </fieldset>
             </form>
             <hr>
@@ -540,7 +540,7 @@
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
                     </p>
-                    <input type="hidden" name="hash" value="<?php echo $config->secure_hashkey; ?>" id="hash">
+                    <input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
                 </fieldset>
             </form>
             <hr>
@@ -581,7 +581,7 @@
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
                     </p>
-                    <input type="hidden" name="hash" value="<?php echo $config->secure_hashkey; ?>" id="hash">
+                    <input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
                 </fieldset>
             </form>
             <hr>
@@ -617,7 +617,7 @@
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
                     </p>
-                    <input type="hidden" name="hash" value="<?php echo $config->secure_hashkey; ?>" id="hash">
+                    <input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
                 </fieldset>
             </form>
 <?php

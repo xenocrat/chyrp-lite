@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Admin Controller
-     * The logic behind the Admin area.
+     * The logic controlling the administration console.
      */
     class AdminController {
         # Boolean: $displayed
@@ -27,13 +27,13 @@
         private function __construct() {
             $config = Config::current();
 
-            $this->theme = new Twig_Loader(MAIN_DIR."/admin",
-                                            (is_writable(INCLUDES_DIR."/caches") and !DEBUG) ?
-                                                INCLUDES_DIR."/caches" :
-                                                null);
+            $this->theme = new Twig_Loader(MAIN_DIR.DIR."admin",
+                                          (is_writable(INCLUDES_DIR.DIR."caches") and !DEBUG) ? INCLUDES_DIR.DIR."caches" : null,
+                                          "UTF-8");
+
             # Load the theme translator
-            if (file_exists(MAIN_DIR."/admin/locale/".$config->locale.".mo"))
-                load_translator("admin", MAIN_DIR."/admin/locale/".$config->locale.".mo");
+            if (file_exists(MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo"))
+                load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
         }
 
         /**
@@ -136,7 +136,7 @@
             if (!$visitor->group->can("add_post", "add_draft"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to create posts."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
@@ -155,7 +155,7 @@
          * Post editing.
          */
         public function edit_post() {
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a post."));
 
             $post = new Post($_GET['id'], array("drafts" => true, "filter" => false));
@@ -177,6 +177,9 @@
          * Updates a post when the form is submitted.
          */
         public function update_post() {
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to update a post."));
+
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if (isset($_POST['publish']))
@@ -188,7 +191,7 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             Feathers::$instances[$post->feather]->update($post);
@@ -206,7 +209,7 @@
          * Post deletion (confirm page).
          */
         public function delete_post() {
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
             $post = new Post($_GET['id'], array("drafts" => true));
@@ -222,13 +225,13 @@
          * Destroys a post (the real deal).
          */
         public function destroy_post() {
-            if (empty($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_posts");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $post = new Post($_POST['id'], array("drafts" => true));
@@ -317,7 +320,7 @@
             if (!Visitor::current()->group->can("add_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to create pages."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['title']) and empty($_POST['slug']))
@@ -357,7 +360,7 @@
             if (!Visitor::current()->group->can("edit_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this page."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."));
 
             $this->display("edit_page",
@@ -373,11 +376,14 @@
             if (!Visitor::current()->group->can("edit_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit pages."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['title']) and empty($_POST['slug']))
                 error(__("Error"), __("Title and slug cannot be blank."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a page."));
 
             $page = new Page($_POST['id']);
 
@@ -410,7 +416,7 @@
 
             if (!isset($_POST['ajax']))
                 Flash::notice(_f("Page updated. <a href=\"%s\">View Page &rarr;</a>",
-                                 array($page->url())),
+                                 $page->url()),
                                  "/admin/?action=manage_pages");
         }
 
@@ -422,7 +428,7 @@
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a page."));
 
             $this->display("delete_page", array("page" => new Page($_GET['id'])));
@@ -439,10 +445,10 @@
             if (empty($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_pages");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $page = new Page($_POST['id']);
@@ -502,7 +508,7 @@
             if (!Visitor::current()->group->can("add_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['login']))
@@ -516,6 +522,8 @@
                 error(__("Error"), __("Password cannot be blank."));
             elseif ($_POST['password1'] != $_POST['password2'])
                 error(__("Error"), __("Passwords do not match."));
+            elseif (password_strength($_POST['password1']) < 75)
+                Flash::message(__("Please consider setting a stronger password for this user."));
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."));
@@ -558,7 +566,7 @@
             if (!Visitor::current()->group->can("edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this user."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."));
 
             $this->display("edit_user",
@@ -572,10 +580,10 @@
          * Updates a user when the form is submitted.
          */
         public function update_user() {
-            if (empty($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $visitor = Visitor::current();
@@ -596,11 +604,11 @@
                 Flash::warning(__("User not found."), "/admin/?action=manage_users");
 
             if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
-                Flash::warning(__("Passwords do not match."), "/admin/?action=manage_users");
+                error(__("Error"), __("Passwords do not match."));
+            elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 75)
+                Flash::message(__("Please consider setting a stronger password for this user."));
 
-            $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
-                            User::hashPassword($_POST['new_password1']) :
-                            $user->password ;
+            $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."));
@@ -633,7 +641,7 @@
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."));
 
             $this->display("delete_user",
@@ -649,13 +657,13 @@
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
-            if (empty($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_users");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $sql = SQL::current();
@@ -725,7 +733,7 @@
             if (!Visitor::current()->group->can("add_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to create groups."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             Group::add($_POST['name'], array_keys($_POST['permissions']));
@@ -741,7 +749,7 @@
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."));
 
             $this->display("edit_group",
@@ -757,7 +765,7 @@
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $permissions = array_keys($_POST['permissions']);
@@ -787,7 +795,7 @@
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."));
 
             $this->display("delete_group",
@@ -804,13 +812,13 @@
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
-            if (!isset($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."));
 
-            if ($_POST['destroy'] == "bollocks")
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_groups");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $group = new Group($_POST['id']);
@@ -1018,16 +1026,19 @@
 
                 $groups = Group::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
-                $groups_yaml = array("groups" => array(),
+                $groups_json = array("groups" => array(),
                                      "permissions" => array());
 
                 foreach (SQL::current()->select("permissions", "*", array("group_id" => 0))->fetchAll() as $permission)
-                    $groups_yaml["permissions"][$permission["id"]] = $permission["name"];
+                    $groups_json["permissions"][$permission["id"]] = $permission["name"];
 
                 foreach ($groups as $index => $group)
-                    $groups_yaml["groups"][$group->name] = $group->permissions;
+                    $groups_json["groups"][$group->name] = $group->permissions;
 
-                $exports["groups.yaml"] = YAML::dump($groups_yaml);
+                $exports["groups.json"] = json_encode($groups_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+                if (json_last_error())
+                    error(__("Error"), _f("Failed to export groups because of JSON error: <code>%s</code>", json_last_error_msg()));
             }
 
             if (isset($_POST['users'])) {
@@ -1035,36 +1046,26 @@
 
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
-                $users_yaml = array();
+                $users_json = array();
                 foreach ($users as $user) {
-                    $users_yaml[$user->login] = array();
+                    $users_json[$user->login] = array();
 
                     foreach ($user as $name => $attr)
                         if (!in_array($name, array("no_results", "group_id", "group", "id", "login", "belongs_to", "has_many", "has_one", "queryString")))
-                            $users_yaml[$user->login][$name] = $attr;
+                            $users_json[$user->login][$name] = $attr;
                         elseif ($name == "group_id")
-                            $users_yaml[$user->login]["group"] = $user->group->name;
+                            $users_json[$user->login]["group"] = $user->group->name;
                 }
 
-                $exports["users.yaml"] = YAML::dump($users_yaml);
+                $exports["users.json"] = json_encode($users_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+                if (json_last_error())
+                    error(__("Error"), _f("Failed to export users because of JSON error: <code>%s</code>", json_last_error_msg()));
             }
 
             $trigger->filter($exports, "export");
-
-            require INCLUDES_DIR."/lib/zip.php";
-
-            $zip = new ZipFile();
-            foreach ($exports as $filename => $content)
-                $zip->addFile($content, $filename);
-
-            $zip_contents = $zip->file();
-
-            $filename = sanitize(camelize($config->name), false, true)."_Export_".date("Y-m-d");
-            header("Content-type: application/octet-stream");
-            header("Content-Disposition: attachment; filename=\"".$filename.".zip\"");
-            header("Content-length: ".strlen($zip_contents)."\n\n");
-
-            echo $zip_contents;
+            $filename = sanitize(camelize(Config::current()->name), false, true)."_Export_".date("Y-m-d");
+            download(zip($exports), $filename.".zip");
         }
 
         /**
@@ -1093,14 +1094,14 @@
             if (empty($_POST))
                 redirect("/admin/?action=import");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']['error']))
+            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
                 if (!$posts = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $posts->generator != "Chyrp")
                     Flash::warning(__("Chyrp Posts export file is invalid."), "/admin/?action=import");
 
-            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']['error']))
+            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
                 if (!$pages = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $pages->generator != "Chyrp")
                     Flash::warning(__("Chyrp Pages export file is invalid."), "/admin/?action=import");
 
@@ -1120,8 +1121,11 @@
                     }
             }
 
-            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']['error'])) {
-                $import = YAML::load($_FILES['groups_file']['tmp_name']);
+            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file'])) {
+                $import = json_decode(file_get_contents($_FILES['groups_file']['tmp_name']), true);
+
+                if (json_last_error())
+                    error(__("Error"), _f("Failed to import groups because of JSON error: <code>%s</code>", json_last_error_msg()));
 
                 foreach ($import["groups"] as $name => $permissions)
                     if (!$sql->count("groups", array("name" => $name)))
@@ -1132,8 +1136,11 @@
                         $sql->insert("permissions", array("id" => $id, "name" => $name));
             }
 
-            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file']['error'])) {
-                $users = YAML::load($_FILES['users_file']['tmp_name']);
+            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file'])) {
+                $users = json_decode(file_get_contents($_FILES['users_file']['tmp_name']), true);
+
+                if (json_last_error())
+                    error(__("Error"), _f("Failed to import users because of JSON error: <code>%s</code>", json_last_error_msg()));
 
                 foreach ($users as $login => $user) {
                     $group_id = $sql->select("groups", "id", array("name" => $user["group"]), "id DESC")->fetchColumn();
@@ -1153,7 +1160,7 @@
                 }
             }
 
-            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']['error']))
+            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
                 foreach ($posts->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
 
@@ -1177,13 +1184,12 @@
                                       ($entry->updated == $entry->published) ?
                                           null :
                                           datetime($entry->updated),
-                                      "",
                                       false);
 
                     $trigger->call("import_chyrp_post", $entry, $post);
                 }
 
-            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']['error']))
+            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
                 foreach ($pages->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
@@ -1227,18 +1233,18 @@
             $classes = array();
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(MODULES_DIR."/".$folder."/".$folder.".php") or !file_exists(MODULES_DIR."/".$folder."/info.php"))
+                if (!file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(MODULES_DIR.DIR.$folder.DIR."info.php"))
                   continue;
 
-                if (file_exists(MODULES_DIR."/".$folder."/locale/".$config->locale.".mo"))
-                    load_translator($folder, MODULES_DIR."/".$folder."/locale/".$config->locale.".mo");
+                if (file_exists(MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
+                    load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 if (!isset($classes[$folder]))
                     $classes[$folder] = array($folder);
                 else
                     array_unshift($classes[$folder], $folder);
 
-                $info = include MODULES_DIR."/".$folder."/info.php";
+                $info = include MODULES_DIR.DIR.$folder.DIR."info.php";
                 if (gettype($info) != "array")
                   continue;
 
@@ -1247,7 +1253,7 @@
                     $classes[$folder][] = "conflicts";
 
                     foreach ((array) $info["conflicts"] as $conflict)
-                        if (file_exists(MODULES_DIR."/".$conflict."/".$conflict.".php")) {
+                        if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
                             $conflicting_modules[] = $conflict; # Shortlist of conflicting installed modules
                             if (in_array($conflict, $config->enabled_modules))
@@ -1261,7 +1267,7 @@
                     $classes[$folder][] = "dependencies";
 
                     foreach ((array) $info["dependencies"] as $dependency) {
-                        if (!file_exists(MODULES_DIR."/".$dependency."/".$dependency.".php")) {
+                        if (!file_exists(MODULES_DIR.DIR.$dependency.DIR.$dependency.".php")) {
                             if (!in_array("missing_dependency", $classes[$folder]))
                                 $classes[$folder][] = "missing_dependency"; # Dependency is not installed
 
@@ -1342,13 +1348,13 @@
                 return Flash::warning(__("Could not read feathers directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(FEATHERS_DIR."/".$folder."/".$folder.".php") or !file_exists(FEATHERS_DIR."/".$folder."/info.php"))
+                if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
-                if (file_exists(FEATHERS_DIR."/".$folder."/locale/".$config->locale.".mo"))
-                    load_translator($folder, FEATHERS_DIR."/".$folder."/locale/".$config->locale.".mo");
+                if (file_exists(FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
+                    load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = include FEATHERS_DIR."/".$folder."/info.php";
+                $info = include FEATHERS_DIR.DIR.$folder.DIR."info.php";
                 if (gettype($info) != "array")
                   continue;
 
@@ -1406,13 +1412,13 @@
                 return Flash::warning(__("Could not read themes directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(THEMES_DIR."/".$folder."/info.php"))
+                if (!file_exists(THEMES_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
-                if (file_exists(THEMES_DIR."/".$folder."/locale/".$config->locale.".mo"))
-                    load_translator($folder, THEMES_DIR."/".$folder."/locale/".$config->locale.".mo");
+                if (file_exists(THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
+                    load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = include THEMES_DIR."/".$folder."/info.php";
+                $info = include THEMES_DIR.DIR.$folder.DIR."info.php";
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
@@ -1436,8 +1442,8 @@
                                                              $info["description"]);
 
                 $this->context["themes"][] = array("name" => $folder,
-                                                   "screenshot" => (file_exists(THEMES_DIR."/".$folder."/screenshot.png") ?
-                                                                        $config->chyrp_url."/themes/".$folder."/screenshot.png" :
+                                                   "screenshot" => (file_exists(THEMES_DIR.DIR.$folder.DIR."screenshot.png") ?
+                                                                        $config->chyrp_url.DIR."themes".DIR.$folder.DIR."screenshot.png" :
                                                                         ""),
                                                    "info" => $info);
             }
@@ -1457,6 +1463,9 @@
 
             $type = (isset($_GET['module'])) ? "module" : "feather" ;
 
+            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
@@ -1472,7 +1481,7 @@
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
-            require $folder."/".$_GET[$type]."/".$_GET[$type].".php";
+            require $folder.DIR.$_GET[$type].DIR.$_GET[$type].".php";
 
             $class_name = camelize($_GET[$type]);
 
@@ -1489,10 +1498,10 @@
             $new[] = $_GET[$type];
             $config->set($enabled_array, $new);
 
-            if (file_exists($folder."/".$_GET[$type]."/locale/".$config->locale.".mo"))
-                load_translator($_GET[$type], $folder."/".$_GET[$type]."/locale/".$config->locale.".mo");
+            if (file_exists($folder.DIR.$_GET[$type].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_GET[$type], $folder.DIR.$_GET[$type].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include $folder."/".$_GET[$type]."/info.php";
+            $info = include $folder.DIR.$_GET[$type].DIR."info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
@@ -1523,6 +1532,9 @@
 
             $type = (isset($_GET['module'])) ? "module" : "feather" ;
 
+            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
@@ -1552,7 +1564,6 @@
 
             $config->set($enabled_array, $new);
 
-            $info = include $folder."/".$_GET[$type]."/info.php";
             if ($type == "module")
                 Flash::notice(__("Module disabled."),
                               "/admin/?action=".pluralize($type));
@@ -1566,6 +1577,9 @@
          * Changes the theme.
          */
         public function change_theme() {
+            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
@@ -1575,17 +1589,17 @@
             $config = Config::current();
             $config->set("theme", $_GET['theme']);
 
-            if (file_exists(THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo"))
-                load_translator($_GET['theme'], THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo");
+            if (file_exists(THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_GET['theme'], THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include THEMES_DIR."/".$_GET['theme']."/info.php";
+            $info = include THEMES_DIR.DIR.$_GET['theme'].DIR."info.php";
             fallback($info["notifications"], array());
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
 
             # Clear the caches made by the previous theme.
-            foreach ((array) glob(INCLUDES_DIR."/caches/*.cache") as $cache)
+            foreach ((array) glob(INCLUDES_DIR.DIR."caches".DIR."*.cache") as $cache)
                 @unlink($cache);
 
             Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
@@ -1596,6 +1610,9 @@
          * Previews the theme.
          */
         public function preview_theme() {
+            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to preview themes."));
 
@@ -1604,13 +1621,13 @@
 
             $config = Config::current();
 
-            if (file_exists(THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo"))
-                load_translator($_GET['theme'], THEMES_DIR."/".$_GET['theme']."/locale/".$config->locale.".mo");
+            if (file_exists(THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_GET['theme'], THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include THEMES_DIR."/".$_GET['theme']."/info.php";
+            $info = include THEMES_DIR.DIR.$_GET['theme'].DIR."info.php";
 
             # Clear the caches made by the previous theme.
-            foreach (glob(INCLUDES_DIR."/caches/*.cache") as $cache)
+            foreach (glob(INCLUDES_DIR.DIR."caches".DIR."*.cache") as $cache)
                 @unlink($cache);
 
             if (!empty($_SESSION['theme'])) {
@@ -1632,7 +1649,7 @@
 
             $locales = array();
 
-            if ($open = opendir(INCLUDES_DIR."/locale/")) {
+            if ($open = opendir(INCLUDES_DIR.DIR."locale".DIR)) {
                  while (($folder = readdir($open)) !== false) {
                     $split = explode(".", $folder);
                     if (end($split) == "mo")
@@ -1645,7 +1662,7 @@
                 return $this->display("general_settings", array("locales" => $locales,
                                                                 "timezones" => timezones()));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!empty($_POST['email']) and !is_email($_POST['email']))
@@ -1660,8 +1677,8 @@
             $config = Config::current();
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
-                         $config->set("chyrp_url", rtrim($_POST['chyrp_url'], "/")),
-                         $config->set("url", rtrim(oneof($_POST['url'], $_POST['chyrp_url']), "/")),
+                         $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/")),
+                         $config->set("url", rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/")),
                          $config->set("email", $_POST['email']),
                          $config->set("timezone", $_POST['timezone']),
                          $config->set("locale", $_POST['locale']),
@@ -1683,22 +1700,30 @@
             if (empty($_POST))
                 return $this->display("content_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
                 error(__("Error"), __("Invalid feed URL."));
 
+            $separator = preg_quote(DIR, "~");
+            preg_match("~^(".$separator.")?(.*?)(".$separator.")?$~", $_POST['uploads_path'], $matches);
+
+            fallback($matches[1], DIR);
+            fallback($matches[2], "uploads");
+            fallback($matches[3], DIR);
+
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
                          $config->set("feed_items", (int) $_POST['feed_items']),
                          $config->set("feed_url", $_POST['feed_url']),
-                         $config->set("uploads_path", $_POST['uploads_path']),
-                         $config->set("enable_trackbacking", !empty($_POST['enable_trackbacking'])),
+                         $config->set("uploads_path", $matches[1].$matches[2].$matches[3]),
+                         $config->set("uploads_limit", (int) $_POST['uploads_limit']),
                          $config->set("send_pingbacks", !empty($_POST['send_pingbacks'])),
                          $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc'])),
                          $config->set("enable_ajax", !empty($_POST['enable_ajax'])),
-                         $config->set("enable_emoji", !empty($_POST['enable_emoji'])));
+                         $config->set("enable_emoji", !empty($_POST['enable_emoji'])),
+                         $config->set("enable_markdown", !empty($_POST['enable_markdown'])));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=content_settings");
@@ -1715,7 +1740,7 @@
             if (empty($_POST))
                 return $this->display("user_settings", array("groups" => Group::find(array("order" => "id DESC"))));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $correspond = (!empty($_POST['email_activation']) or !empty($_POST['email_correspondence'])) ? true : false ;
@@ -1725,8 +1750,8 @@
                          $config->set("email_activation", !empty($_POST['email_activation'])),
                          $config->set("email_correspondence", $correspond),
                          $config->set("enable_captcha", !empty($_POST['enable_captcha'])),
-                         $config->set("default_group", $_POST['default_group']),
-                         $config->set("guest_group", $_POST['guest_group']));
+                         $config->set("default_group", (int) $_POST['default_group']),
+                         $config->set("guest_group", (int) $_POST['guest_group']));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=user_settings");
@@ -1743,12 +1768,32 @@
             if (empty($_POST))
                 return $this->display("route_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            $route = Route::current();
             $config = Config::current();
+
+            if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
+                $route->add("/", "page;url=home");
+
+                if (Page::check_url("home") == "home" ) {
+                    $page = Page::add(__("My Awesome Homepage"),
+                                      __("Nothing here yet!"),
+                                      null,
+                                      0,
+                                      true,
+                                      true,
+                                      0,
+                                      "home");
+                    Flash::notice(_f("Page created. <a href=\"%s\">View Page &rarr;</a>", $page->url()));
+                }
+            } elseif (empty($_POST['enable_homepage']) and $config->enable_homepage)
+                $route->remove("/");
+
             $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
-                         $config->set("post_url", $_POST['post_url']));
+                         $config->set("post_url", $_POST['post_url']),
+                         $config->set("enable_homepage", !empty($_POST['enable_homepage'])));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=route_settings");
@@ -1763,25 +1808,43 @@
 
             switch($_GET['id']) {
                 case "filtering_results":
-                    $help = "<h1>".__("Filtering Results")."</h1>\n";
-                    $help.= "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n";
-                    $help.= "<h2>".__("Keywords")."</h2>\n";
-                    $help.= "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
+                    $help = "<h1>".__("Filtering Results")."</h1>\n".
+                            "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n".
+                            "<h2>".__("Keywords")."</h2>\n".
+                            "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
                     break;
                 case "slugs":
-                    $help = "<h1>".__("Post Slugs")."</h1>\n";
-                    $help.= "<p>".__("A slug is the unique identifying name used in the URL of a post. A slug should not contain any special characters other than hyphen (\"-\") and underscore (\"_\").")."</p>";
-                    break;
-                case "trackbacks":
-                    $help = "<h1>".__("Trackbacks")."</h1>\n";
-                    $help.= "<p>".__("Trackbacks are special URLs that notify the authors of other blog posts that your post is related to or references. The other blogs will be informed when you publish your post, and in some cases a comment will automatically be added to their site linking back to your post.")."</p>";
+                    $help = "<h1>".__("Post Slugs")."</h1>\n".
+                            "<p>".__("The slug is the URL-friendly identifying name for this post. You can enter the slug yourself or have it auto-generated when the post is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
                     break;
                 case "alternate_urls":
-                    $help = "<h1>".__("Alternate URL")."</h1>\n";
-                    $help.= "<p>".__("An alternate URL will allow you to keep Chyrp contained in its own directory, while having your site URLs point to someplace else. For example, you could keep Chyrp in a <code>/chyrp</code> directory and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:")."</p>\n";
-                    $help.= "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n";
-                    $help.= "<pre><code>&lt;?php\n    require \"path/to/chyrp/index.php\";\n?&gt;</code></pre>";
-                    $help.= "</li>\n<li>".__("Move the .htaccess file from the original install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                    $help = "<h1>".__("Alternate URL")."</h1>\n".
+                            "<p>".__("If you enter an alternate URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite in a <code>/chyrp</code> directory on your web server and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:")."</p>\n".
+                            "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n".
+                            "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
+                            "</li>\n<li>".__("Move the .htaccess file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                    break;
+                case "markdown":
+                    $help = "<h1>".__("Markdown")."</h1>\n".
+                            "<p>".__("Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:")."</p>\n".
+                            "<table>\n<thead>\n".
+                            "<tr>\n<th>".__("Markdown")."</th>\n".
+                            "<th>".__("Result")."</th>\n</tr>\n".
+                            "</thead>\n".
+                            "<tbody>\n".
+                            "<tr>\n<td>".__("## Heading")."</td>\n"."<td><h2>".__("Heading")."</h2></td>\n</tr>\n".
+                            "<tr>\n<td>".__("### Heading")."</td>\n"."<td><h3>".__("Heading")."</h3></td>\n</tr>\n".
+                            "<tr>\n<td>".__("*Emphasis*")."</td>\n"."<td><em>".__("Emphasis")."</em></td>\n</tr>\n".
+                            "<tr>\n<td>".__("~~Strikethrough~~")."</td>\n"."<td><del>".__("Strikethrough")."</del></td>\n</tr>\n".
+                            "<tr>\n<td>".__("**Strong**")."</td>\n"."<td><strong>".__("Strong")."</strong></td>\n</tr>\n".
+                            "<tr>\n<td>".__("&crarr;")."</td>\n"."<td>".__("New paragraph")."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("[title](URL)")."</td>\n"."<td>".__("Hyperlink")."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("![description](URL)")."</td>\n"."<td>".__("Image")."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n".
+                            "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n".
+                            "<tr>\n<td>".__("1. List of items")."</td>\n"."<td><ol><li>".__("List of items")."</li></ol></em></td>\n</tr>\n".
+                            "</tbody>\n</table>";
+                    break;
             }
 
             if (!isset($_GET['ajax']))
@@ -1805,7 +1868,7 @@
             $pages = array("manage" => array());
 
             foreach (Config::current()->enabled_feathers as $index => $feather) {
-                $info = include FEATHERS_DIR."/".$feather."/info.php";
+                $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
                 $subnav["write"]["write_post&feather=".$feather] = array("title" => $info["name"],
                                                                          "show" => $visitor->group->can("add_draft", "add_post"),
                                                                          "attributes" => ' id="feathers['.$feather.']"',
@@ -1894,8 +1957,8 @@
          * Renders the page.
          *
          * Parameters:
-         *     $action - The template file to display, in (theme dir)/pages.
-         *     $context - Context for the template.
+         *     $action - The template file to display (relative to admin/pages/ for core and pages/admin/ for modules).
+         *     $context - The context for the template.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          */
         public function display($action, $context = array(), $title = "") {
@@ -1907,7 +1970,7 @@
 
             $trigger = Trigger::current();
 
-            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace("/", "_", $action)));
+            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
 
             # Are there any extension-added pages?
             foreach (array("write" => array(),
@@ -1921,6 +1984,7 @@
             $visitor = Visitor::current();
             $route   = Route::current();
 
+            $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
             $this->context["theme"]       = Theme::current();
             $this->context["flash"]       = Flash::current();
             $this->context["trigger"]     = $trigger;
@@ -1997,28 +2061,28 @@
 
             $this->context["sql_debug"]  = SQL::current()->debug;
 
-            $template = MAIN_DIR."/admin/pages/".$action.".twig";
+            $template = "pages".DIR.$action.".twig";
 
             $config = Config::current();
-            if (!file_exists($template)) {
+            if (!file_exists(MAIN_DIR.DIR."admin".DIR.$template)) {
                 foreach (array(MODULES_DIR => $config->enabled_modules,
                                FEATHERS_DIR => $config->enabled_feathers) as $path => $try)
                     foreach ($try as $extension)
-                        if (file_exists($path."/".$extension."/pages/admin/".$action.".twig"))
-                            $template = $path."/".$extension."/pages/admin/".$action.".twig";
-
-                if (!file_exists($template))
-                    error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($template)));
+                        if (file_exists($path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig"))
+                            $template = $path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig";
             }
 
-            # Try the theme first
             try {
                 $this->theme->getTemplate($template)->display($this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 $trace = debug_backtrace();
-                $twig = array("file" => $e->filename, "line" => $e->lineno);
-                array_unshift($trace, $twig);
+
+                if (property_exists($e, "filename") and property_exists($e, "lineno")) {
+                    $twig = array("file" => $e->filename, "line" => $e->lineno);
+                    array_unshift($trace, $twig);
+                }
+
                 error(__("Error"), $prettify, $trace);
             }
         }
@@ -2029,6 +2093,7 @@
          */
         public static function & current() {
             static $instance = null;
-            return $instance = (empty($instance)) ? new self() : $instance ;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
         }
     }

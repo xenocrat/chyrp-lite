@@ -2,6 +2,9 @@ ${ trigger.call("before_post_fields", feather) }
                         {% for field in feather.fields %}
                         <p class="main_options">
                             <label for="${ field.attr }_field">
+                                {% if field.preview == "markup_text" and site.enable_markdown %}
+                                <a href="{% admin "help&id=markdown" %}" target="_blank" class="help emblem markdown"><img src="$theme_url/images/icons/markdown.svg" alt="Markdown help"></a>
+                                {% endif %}
                                 $field.label
                                 {% if field.optional %}
                                 <span class="sub">${ "(optional)" | translate }</span>
@@ -20,9 +23,15 @@ ${ trigger.call("before_post_fields", feather) }
                             <p>
                             {% if field.type == "file" and ( post.filename or post.filenames ) and route.action == "edit_post" %}
                                 {% if post.filename %}
-                                <em>${ "Current file name:" | translate } <strong>${ post.filename | escape('') }</strong></em>
+                                <em>${ "Current file name:" | translate }</em>
+                                <strong>${ post.filename | escape }</strong>
                                 {% else %}
-                                <em>${ "Current file names:" | translate } <strong>${ post.filenames | join(", ") | escape('') }</strong></em>
+                                <em>${ "Current file names:" | translate }</em>
+                                <strong>
+                                    <ul>
+                                        {% for name in post.filenames %}<li>${ name | escape }</li>{% endfor %}
+                                    </ul>
+                                </strong>
                                 {% endif %}
                             {% endif %}
                             </p>
@@ -81,14 +90,6 @@ ${ trigger.call("after_post_fields", feather) }
                                 <label for="created_at">${ "Timestamp" | translate }</label>
                                 <input class="text" type="text" name="created_at" value="${ post.created_at | fallback(now | date("r")) | strftime }" id="created_at">
                                 <input type="hidden" name="original_time" value="${ post.created_at | fallback(now | date("r")) | strftime }">
-                            </p>
-                            <p class="more_options_option">
-                                <label for="trackbacks">
-                                    ${ "Trackbacks" | translate }
-                                    <a href="{% admin "help&id=trackbacks" %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
-                                </label>
-
-                                <input class="text" type="text" name="trackbacks" value="" id="trackbacks">
                             </p>
                             {% for field in options %}
                             <p class="more_options_option">

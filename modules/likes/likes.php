@@ -20,7 +20,7 @@
             if (empty($_POST))
                 return $admin->display("like_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != $config->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $set = array($config->set("module_like",
@@ -40,8 +40,11 @@
         }
 
         static function route_like() {
+            if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
+                error(__("Error"), __("An ID is required to like a post.", "likes"));
+
             $request["action"] = "like";
-            $request["post_id"] = (int) fallback($_GET['post_id'], 0);
+            $request["post_id"] = (int) $_GET['post_id'];
 
             $like = new Like($request, Visitor::current()->id);
             $like->like();
@@ -52,8 +55,11 @@
         }
 
         static function route_unlike() {
+            if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
+                error(__("Error"), __("An ID is required to unlike a post.", "likes"));
+
             $request["action"] = "unlike";
-            $request["post_id"] = (int) fallback($_GET['post_id'], 0);
+            $request["post_id"] = (int) $_GET['post_id'];
 
             $like = new Like($request, Visitor::current()->id);
             $like->unlike();
@@ -69,21 +75,25 @@
         }
 
         static function javascript() {
-            include MODULES_DIR."/likes/javascript.php";
+            include MODULES_DIR.DIR."likes".DIR."javascript.php";
         }
 
         static function ajax_like() {
-            if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
-                exit();
+            if (!isset($_POST["action"]) or empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
+                error(__("Error"), __("An ID is required to like a post.", "likes"));
             
             $user_id = Visitor::current()->id;
             $likeSetting = Config::current()->module_like;
+
+            $request["action"] = "like";
+            $request["post_id"] = (int) $_POST['post_id'];
+
             $responseObj = array();
             $responseObj["uid"] = $user_id;
             $responseObj["success"] = true;
-            
+
             try {
-                $like = new Like($_REQUEST, $user_id);
+                $like = new Like($request, $user_id);
                 $likeText = "";
 
                 if ($like->action != "like")
@@ -111,17 +121,21 @@
         }
 
         static function ajax_unlike() {
-            if (!isset($_REQUEST["action"]) or !isset($_REQUEST["post_id"]))
-                exit();
+            if (!isset($_POST["action"]) or empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
+                error(__("Error"), __("An ID is required to unlike a post.", "likes"));
             
             $user_id = Visitor::current()->id;
             $likeSetting = Config::current()->module_like;
+
+            $request["action"] = "unlike";
+            $request["post_id"] = (int) $_POST['post_id'];
+
             $responseObj = array();
             $responseObj["uid"] = $user_id;
             $responseObj["success"] = true;
-            
+
             try {
-                $like = new Like($_REQUEST, $user_id);
+                $like = new Like($request, $user_id);
                 $likeText = "";
 
                 if ($like->action != "unlike")
@@ -233,11 +247,11 @@
         }
 
         public function get_like_images() {
-            $imagesDir = MODULES_DIR."/likes/images/";
+            $imagesDir = MODULES_DIR.DIR."likes".DIR."images".DIR;
             $images = glob($imagesDir . "*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
 
             foreach ($images as $image) {
-                $pattern = "/\/(\w.*)\/images\//";
+                $pattern = "/".preg_quote(DIR, "/")."(\w.*)".preg_quote(DIR, "/")."images".preg_quote(DIR, "/")."/";
                 $image = preg_replace($pattern, "", $images);
                 while (list($key, $val) = each($image))
                     $arr[] = Config::current()->chyrp_url."/modules/likes/images/$val";
@@ -295,4 +309,8 @@
             return $atom;
         }
 
+        static function cacher_regenerate_triggers($regenerate) {
+            $triggers = array("route_like", "route_unlike", "ajax_like", "ajax_unlike");
+            return array_merge($regenerate, $triggers);
+        }
     }

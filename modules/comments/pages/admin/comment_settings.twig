@@ -29,7 +29,7 @@
                     </p>
                     <p>
                         <label for="enable_reload_comments">${ "Reload Comments" | translate("comments") }</label>
-                        <input type="checkbox" class="checkbox" name="enable_reload_comments"${ site.enable_reload_comments | checked }> ${ "enabled" | translate("comments") }
+                        <input type="checkbox" class="checkbox" name="enable_reload_comments"${ site.enable_reload_comments | checked }>
                     </p>
                     <p>
                         <label for="auto_reload_comments">${ "Reload interval" | translate("comments") }</label>
@@ -39,7 +39,7 @@
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

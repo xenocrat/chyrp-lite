@@ -18,10 +18,10 @@
                         $theme.info.name {# translation is done in the controller #}
                     </h3>
                     <div class="controls">
-                        <a class="button" href="{% admin "change_theme&theme=" ~ theme.name %}">
+                        <a class="button" href="{% admin "change_theme&theme=" ~ theme.name ~ "&hash=" ~ ip | token %}">
                             <img src="$theme_url/images/icons/success.svg" alt="Select">${ "Select" | translate }
                         </a>
-                        <a class="button${ preview | selected(theme.name, true) }" href="{% admin "preview_theme&theme=" ~ theme.name %}">
+                        <a class="button${ preview | selected(theme.name, true) }" href="{% admin "preview_theme&theme=" ~ theme.name ~ "&hash=" ~ ip | token %}">
                             <img src="$theme_url/images/icons/magnifier.svg" alt="Preview">${ "Preview" | translate }
                         </a>
                     </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-08-14 09:20+0000\n"
+"POT-Creation-Date: 2015-11-23 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:53
+#: admin/admin.js.php:47
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:110
-#: admin/admin.js.php:124
+#: admin/admin.js.php:107
+#: admin/admin.js.php:123
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:112
-#: admin/admin.js.php:127
+#: admin/admin.js.php:109
+#: admin/admin.js.php:126
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:154
+#: admin/admin.js.php:153
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: admin/admin.js.php:160
+#: admin/admin.js.php:159
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:233
+#: admin/admin.js.php:192
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:241
-#: admin/admin.js.php:243
-#: admin/admin.js.php:311
-#: admin/admin.js.php:313
+#: admin/admin.js.php:203
+#: admin/admin.js.php:205
+#: admin/admin.js.php:274
+#: admin/admin.js.php:276
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:263
-#: admin/admin.js.php:264
+#: admin/admin.js.php:225
+#: admin/admin.js.php:226
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:299
+#: admin/admin.js.php:259
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:445
+#: admin/admin.js.php:417
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:447
+#: admin/admin.js.php:419
 msgid "There was an error disabling the extension."
 msgstr ""
 
@@ -74,7 +74,7 @@ msgstr ""
 
 #: admin/layout.twig:58
 #, php-format
-msgid "Chyrp Lite &ldquo;%s&rdquo; v%s"
+msgid "Chyrp Lite &ldquo;%s&rdquo;"
 msgstr ""
 
 #: admin/layout.twig:59
@@ -90,7 +90,7 @@ msgid "Posts Per Page"
 msgstr ""
 
 #: admin/pages/content_settings.twig:13
-msgid "Feed Posts Limit"
+msgid "Posts in Feed"
 msgstr ""
 
 #: admin/pages/content_settings.twig:17
@@ -110,54 +110,62 @@ msgid "Uploads Path"
 msgstr ""
 
 #: admin/pages/content_settings.twig:31
-msgid "The directory to which files are uploaded, relative to your Chyrp install."
+msgid "The directory to which files are uploaded, relative to your installation directory."
 msgstr ""
 
 #: admin/pages/content_settings.twig:35
-msgid "Enable Trackbacking"
+msgid "Upload Size Limit"
 msgstr ""
 
-#: admin/pages/content_settings.twig:38
-msgid "Trackbacking allows sites to notify you when they link to or reference your posts."
+#: admin/pages/content_settings.twig:37
+msgid "(Megabytes)"
 msgstr ""
 
-#: admin/pages/content_settings.twig:42
+#: admin/pages/content_settings.twig:40
 msgid "Send Pingbacks"
 msgstr ""
 
-#: admin/pages/content_settings.twig:45
+#: admin/pages/content_settings.twig:43
 msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
-#: admin/pages/content_settings.twig:49
-msgid "Enable XML-RPC Support"
+#: admin/pages/content_settings.twig:47
+msgid "XML-RPC Support"
 msgstr ""
 
-#: admin/pages/content_settings.twig:52
-msgid "XML-RPC support allows you to create and edit content via remote access to your site."
+#: admin/pages/content_settings.twig:50
+msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr ""
 
-#: admin/pages/content_settings.twig:56
-msgid "Enable Inline Management"
+#: admin/pages/content_settings.twig:54
+msgid "Ajax"
 msgstr ""
 
-#: admin/pages/content_settings.twig:59
-msgid "Ajax-powered inline editing of your blog content."
+#: admin/pages/content_settings.twig:57
+msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
-#: admin/pages/content_settings.twig:63
-msgid "Enable Unicode Emoticons"
+#: admin/pages/content_settings.twig:61
+msgid "Unicode Emoticons"
 msgstr ""
 
-#: admin/pages/content_settings.twig:66
-msgid "Use Unicode Emoticons."
+#: admin/pages/content_settings.twig:64
+msgid "Display emoticons as Unicode emoji."
+msgstr ""
+
+#: admin/pages/content_settings.twig:68
+msgid "Markdown"
 msgstr ""
 
 #: admin/pages/content_settings.twig:71
+msgid "Compose blog content using Markdown text formatting."
+msgstr ""
+
+#: admin/pages/content_settings.twig:76
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:67
-#: admin/pages/route_settings.twig:42
+#: admin/pages/route_settings.twig:49
 #: admin/pages/user_settings.twig:45
 msgid "Update"
 msgstr ""
@@ -312,7 +320,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:25
 #: admin/pages/manage_users.twig:29
 #: admin/pages/new_user.twig:15
-#: admin/partials/post_fields.twig:57
+#: admin/partials/post_fields.twig:66
 msgid "Group"
 msgstr ""
 
@@ -416,12 +424,12 @@ msgstr ""
 
 #: admin/pages/general_settings.twig:23
 #: admin/pages/import.twig:28
-#: admin/partials/post_fields.twig:7
+#: admin/partials/post_fields.twig:10
 msgid "(optional)"
 msgstr ""
 
 #: admin/pages/general_settings.twig:28
-msgid "Enter an alternate address here if you want your homepage URL to be different from the URL where Chyrp is normally available."
+msgid "Have your site URLs point someplace other than your install directory."
 msgstr ""
 
 #: admin/pages/general_settings.twig:32
@@ -474,11 +482,11 @@ msgid "Pages .atom File"
 msgstr ""
 
 #: admin/pages/import.twig:18
-msgid "Groups .yaml File"
+msgid "Groups .json File"
 msgstr ""
 
 #: admin/pages/import.twig:22
-msgid "Users .yaml File"
+msgid "Users .json File"
 msgstr ""
 
 #: admin/pages/import.twig:27
@@ -632,7 +640,7 @@ msgid "Posted"
 msgstr ""
 
 #: admin/pages/manage_posts.twig:34
-#: admin/partials/post_fields.twig:47
+#: admin/partials/post_fields.twig:56
 msgid "Status"
 msgstr ""
 
@@ -693,7 +701,7 @@ msgid "Route Settings"
 msgstr ""
 
 #: admin/pages/route_settings.twig:9
-msgid "Clean URLs?"
+msgid "Clean URLs"
 msgstr ""
 
 #: admin/pages/route_settings.twig:11
@@ -708,107 +716,115 @@ msgstr ""
 msgid "Requires .htaccess support."
 msgstr ""
 
-#: admin/pages/route_settings.twig:18
+#: admin/pages/route_settings.twig:17
+msgid "Homepage"
+msgstr ""
+
+#: admin/pages/route_settings.twig:20
+msgid "Make the default route a homepage instead of the blog index."
+msgstr ""
+
+#: admin/pages/route_settings.twig:25
 msgid "Post View URL"
 msgstr ""
 
-#: admin/pages/route_settings.twig:19
+#: admin/pages/route_settings.twig:26
 msgid "(requires clean URLs)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:24
+#: admin/pages/route_settings.twig:31
 msgid "Syntax:"
 msgstr ""
 
-#: admin/pages/route_settings.twig:26
+#: admin/pages/route_settings.twig:33
 msgid "Year submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:26
+#: admin/pages/route_settings.twig:33
 msgid "(e.g. 2007)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:27
+#: admin/pages/route_settings.twig:34
 msgid "Month submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:27
+#: admin/pages/route_settings.twig:34
 msgid "(e.g. 12)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:28
+#: admin/pages/route_settings.twig:35
 msgid "Day submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:28
+#: admin/pages/route_settings.twig:35
 msgid "(e.g. 25)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:29
+#: admin/pages/route_settings.twig:36
 msgid "Hour submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:29
+#: admin/pages/route_settings.twig:36
 msgid "(e.g. 03)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:30
+#: admin/pages/route_settings.twig:37
 msgid "Minute submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:30
+#: admin/pages/route_settings.twig:37
 msgid "(e.g. 59)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:38
 msgid "Second submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:38
 msgid "(e.g. 30)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:32
+#: admin/pages/route_settings.twig:39
 msgid "Post ID"
 msgstr ""
 
-#: admin/pages/route_settings.twig:33
+#: admin/pages/route_settings.twig:40
 msgid "Post author (username)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:33
+#: admin/pages/route_settings.twig:40
 msgid "(e.g. Alex)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:34
+#: admin/pages/route_settings.twig:41
 msgid "The non-unique sanitized name"
 msgstr ""
 
-#: admin/pages/route_settings.twig:34
+#: admin/pages/route_settings.twig:41
 msgid "(e.g. this_is_clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:42
 msgid "The unique form of (clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:42
 msgid "(e.g. this_one_is_taken_2)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:43
 msgid "The post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:43
 msgid "(e.g. text)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:37
+#: admin/pages/route_settings.twig:44
 msgid "The plural form of the post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:37
+#: admin/pages/route_settings.twig:44
 msgid "(e.g. links)"
 msgstr ""
 
@@ -837,7 +853,7 @@ msgid "Registration"
 msgstr ""
 
 #: admin/pages/user_settings.twig:11
-msgid "Allow people to register"
+msgid "Allow people to register."
 msgstr ""
 
 #: admin/pages/user_settings.twig:14
@@ -880,88 +896,84 @@ msgstr ""
 msgid "Write"
 msgstr ""
 
-#: admin/partials/page_fields.twig:7
+#: admin/partials/page_fields.twig:11
 msgid "Body"
 msgstr ""
 
-#: admin/partials/page_fields.twig:13
-#: admin/partials/post_fields.twig:75
+#: admin/partials/page_fields.twig:18
+#: admin/partials/post_fields.twig:84
 msgid "Slug"
 msgstr ""
 
-#: admin/partials/page_fields.twig:17
+#: admin/partials/page_fields.twig:22
 msgid "Parent"
 msgstr ""
 
-#: admin/partials/page_fields.twig:19
+#: admin/partials/page_fields.twig:24
 msgid "[None]"
 msgstr ""
 
-#: admin/partials/page_fields.twig:26
+#: admin/partials/page_fields.twig:31
 msgid "Show in pages list?"
 msgstr ""
 
-#: admin/partials/page_fields.twig:30
+#: admin/partials/page_fields.twig:35
 msgid "Priority in pages list"
 msgstr ""
 
-#: admin/partials/page_fields.twig:47
+#: admin/partials/page_fields.twig:52
 msgid "Is this page public?"
 msgstr ""
 
-#: admin/partials/page_fields.twig:60
-#: admin/partials/post_fields.twig:128
-#: admin/partials/post_fields.twig:137
+#: admin/partials/page_fields.twig:65
+#: admin/partials/post_fields.twig:129
+#: admin/partials/post_fields.twig:138
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:64
-#: admin/partials/post_fields.twig:132
-#: admin/partials/post_fields.twig:141
+#: admin/partials/page_fields.twig:69
+#: admin/partials/post_fields.twig:133
+#: admin/partials/post_fields.twig:142
 msgid "Save"
 msgstr ""
 
-#: admin/partials/post_fields.twig:23
+#: admin/partials/post_fields.twig:26
 msgid "Current file name:"
 msgstr ""
 
-#: admin/partials/post_fields.twig:25
+#: admin/partials/post_fields.twig:29
 msgid "Current file names:"
 msgstr ""
 
-#: admin/partials/post_fields.twig:50
+#: admin/partials/post_fields.twig:59
 msgid "Draft"
 msgstr ""
 
-#: admin/partials/post_fields.twig:52
+#: admin/partials/post_fields.twig:61
 msgid "Public"
 msgstr ""
 
-#: admin/partials/post_fields.twig:53
+#: admin/partials/post_fields.twig:62
 msgid "Private"
 msgstr ""
 
-#: admin/partials/post_fields.twig:54
+#: admin/partials/post_fields.twig:63
 msgid "Scheduled"
 msgstr ""
 
-#: admin/partials/post_fields.twig:55
+#: admin/partials/post_fields.twig:64
 msgid "Registered Only"
 msgstr ""
 
-#: admin/partials/post_fields.twig:68
+#: admin/partials/post_fields.twig:77
 msgid "Pinned?"
 msgstr ""
 
-#: admin/partials/post_fields.twig:69
+#: admin/partials/post_fields.twig:78
 msgid "(shows this post above all others)"
 msgstr ""
 
-#: admin/partials/post_fields.twig:81
+#: admin/partials/post_fields.twig:90
 msgid "Timestamp"
-msgstr ""
-
-#: admin/partials/post_fields.twig:87
-msgid "Trackbacks"
 msgstr ""
 

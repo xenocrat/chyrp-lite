@@ -1,5 +1,9 @@
 <?php
-    if (!defined("INCLUDES_DIR")) define("INCLUDES_DIR", dirname(__FILE__));
+    if (!defined("INCLUDES_DIR"))
+        define("INCLUDES_DIR", dirname(__FILE__));
+
+    if (!defined('DIR'))
+        define('DIR', DIRECTORY_SEPARATOR);
 
     /**
      * Class: Config
@@ -15,12 +19,12 @@
          * Loads the configuration JSON file.
          */
         private function __construct() {
-            if (!file_exists(INCLUDES_DIR."/config.json.php"))
+            if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
                 return false;
 
             $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
                                     "",
-                                    file_get_contents(INCLUDES_DIR."/config.json.php"));
+                                    file_get_contents(INCLUDES_DIR.DIR."config.json.php"));
 
             $this->json = json_decode($contents, true);
 
@@ -51,18 +55,6 @@
             if (isset($this->$setting) and $this->$setting == $value and !$overwrite)
                 return false;
 
-            if (isset($this->file) and file_exists($this->file)) {
-                $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
-                                        "",
-                                        file_get_contents($this->file));
-
-                $this->json = json_decode($contents, true);
-
-                if (json_last_error())
-                    error(__("Error"), _f("Failed to read <code>%s</code> because of JSON error: <code>%s</code>",
-                                          array($this->file, json_last_error_msg())));
-            }
-
             # Add the setting
             $this->json[$setting] = $this->$setting = $value;
 
@@ -76,13 +68,13 @@
             $contents.= json_encode($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             if (json_last_error())
-                error(__("Error"), _f("Failed to set \"<code>%s</code>\" because of JSON error: <code>%s</code>",
+                error(__("Error"), _f("Failed to set <code>%s</code> because of JSON error: <code>%s</code>",
                                       array($setting, json_last_error_msg())));
 
             # Update the configuration file
-            if (!@file_put_contents(INCLUDES_DIR."/config.json.php", $contents))
-                error(__("Error"), _f("Failed to set \"<code>%s</code>\" because <code>%s</code> is not writable.",
-                                      array($setting, "/includes/config.json.php")));
+            if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
+                error(__("Error"), _f("Failed to set <code>%s</code> because <code>%s</code> is not writable.",
+                                      array($setting, DIR."includes".DIR."config.json.php")));
 
             return true;
         }
@@ -95,18 +87,6 @@
          *     $setting - The name of the setting to remove.
          */
         public function remove($setting) {
-            if (isset($this->file) and file_exists($this->file)) {
-                $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
-                                        "",
-                                        file_get_contents($this->file));
-
-                $this->json = json_decode($contents, true);
-
-                if (json_last_error())
-                    error(__("Error"), _f("Failed to read <code>%s</code> because of JSON error: <code>%s</code>",
-                                          array($this->file, json_last_error_msg())));
-            }
-
             # Remove the setting
             unset($this->json[$setting]);
 
@@ -117,13 +97,13 @@
             $contents.= json_encode($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             if (json_last_error())
-                error(__("Error"), _f("Failed to remove \"<code>%s</code>\" because of JSON error: <code>%s</code>",
+                error(__("Error"), _f("Failed to remove <code>%s</code> because of JSON error: <code>%s</code>",
                                   array($setting, json_last_error_msg())));
 
             # Update the configuration file
-            if (!@file_put_contents(INCLUDES_DIR."/config.json.php", $contents))
-                error(__("Error"), _f("Failed to remove \"<code>%s</code>\" because <code>%s</code> is not writable.",
-                                  array($setting, "/includes/config.json.php")));
+            if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
+                error(__("Error"), _f("Failed to remove <code>%s</code> because <code>%s</code> is not writable.",
+                                  array($setting, DIR."includes".DIR."config.json.php")));
         }
 
         /**
@@ -132,6 +112,7 @@
          */
         public static function & current() {
             static $instance = null;
-            return $instance = (empty($instance)) ? new self() : $instance ;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
         }
     }

@@ -10,21 +10,20 @@
                         <label for="cache_expire">${ "Expire Cache After&hellip;" | translate("cacher") }</label>
                         <input class="text digits" type="number" name="cache_expire" value="${ site.cache_expire | escape }" id="cache_expire"> <span class="sub">${ "(seconds)" | translate("cacher") }</span>
                         <small>
-                            <a href="{% admin "clear_cache" %}">${ "Clear the cache now!" | translate }</a>
+                            <a href="{% admin "clear_cache" ~ "&hash=" ~ ip | token %}">${ "Clear the cache now!" | translate("cacher") }</a>
                         </small>
                     </p>
                     <p>
                         <label for="cache_exclude">${ "Exclude URLs" | translate("cacher") }</label>
-                        <input class="text" type="text" name="cache_exclude" value="${ site.cache_exclude | join(", ") | escape }" id="cache_exclude"> <span class="sub">${ "(comma separated)" | translate("cacher") }</span>
-                    </p>
-                    <p>
-                        <label for="cache_memcached_hosts">${ "Memcache Servers" | translate("cacher")}</label>
-                        <input class="text" type="text" name="cache_memcached_hosts" value="${ site.cache_memcached_hosts | join(", ") | escape }" id="cache_memcached_hosts"> <span class="sub">${ "(comma separated)" | translate("cacher") }</span>
+                        <textarea name="cache_exclude" id="cache_exclude" rows="12">${ site.cache_exclude | join(", \n") | escape }</textarea>
+                        <small>
+                            ${ "A comma separated list of URLs that will not be cached." | translate("cacher") }
+                        </small>
                     </p>
                     <p class="buttons">
                         <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
                     </p>
-                    <input type="hidden" name="hash" value="$site.secure_hashkey" id="hash">
+                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
                 </fieldset>
             </form>
 {% endblock %}

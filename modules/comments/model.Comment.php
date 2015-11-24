@@ -36,7 +36,7 @@
             $trigger->filter($this, "comment");
 
             if ($this->filtered) {
-                if (($this->status != "pingback" and $this->status != "trackback") and !$group->can("code_in_comments"))
+                if ($this->status != "pingback" and !$group->can("code_in_comments"))
                     $this->body = strip_tags($this->body, "<".join("><", Config::current()->allowed_comment_html).">");
 
                 $this->body_unfiltered = $this->body;
@@ -68,10 +68,10 @@
          *     $post - The <Post> they're commenting on.
          *     $parent - The <Comment> they're replying to.
          *     $notify - Notification on follow-up comments.
-         *     $type - The type of comment. Optional, used for trackbacks/pingbacks.
+         *     $type - The type of comment. Optional, used for pingbacks.
          */
         static function create($body, $author, $url, $email, $post, $parent, $notify, $type = null) {
-            if (!self::user_can($post->id) and !in_array($type, array("trackback", "pingback")))
+            if (!self::user_can($post->id) and $type != "pingback")
                 return;
 
             $config = Config::current();
@@ -83,6 +83,9 @@
                 $type = "comment";
             } else
                 $status = $type;
+
+            if (!logged_in())
+                $notify = 0; # Only logged-in users can request notifications
 
             if (!empty($config->akismet_api_key)) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
@@ -195,7 +198,7 @@
                                "updated_at" => oneof($updated_at, "0000-00-00 00:00:00")));
 
             $new = new self($sql->latest("comments"));
-            Trigger::current()->call("add_comment", $new);
+            Trigger::current()->call("add_comment", $new->post_id, $new->id);
             self::notify(strip_tags($author), $body, $post);
             return $new;
         }
@@ -213,25 +216,28 @@
                                "created_at" => $timestamp,
                                "updated_at" => ($update_timestamp) ? datetime() : $this->updated_at));
 
-            Trigger::current()->call("update_comment", $this, $body, $author, $url, $email, $status, $notify, $timestamp, $update_timestamp);
+            Trigger::current()->call("update_comment", $this->post_id, $this->id);
         }
 
         static function delete($comment_id) {
             $trigger = Trigger::current();
-            if ($trigger->exists("delete_comment"))
-                $trigger->call("delete_comment", new self($comment_id));
+
+            if ($trigger->exists("delete_comment")) {
+                $new = new self($comment_id);
+                $trigger->call("delete_comment", $new->post_id, $new->id);
+            }
 
             SQL::current()->delete("comments", array("id" => $comment_id));
         }
 
-        public function editable(User $user = null) {
+        public function editable($user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("edit_comment") or ($user->group->can("edit_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
+            return ($user->group->can("edit_comment") or (logged_in() and $user->group->can("edit_own_comment") and $user->id == $this->user_id));
         }
 
-        public function deletable(User $user = null) {
+        public function deletable($user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("delete_comment") or ($user->group->can("delete_own_comment") and $user->id == $this->user_id and $this->user_id != 0));
+            return ($user->group->can("delete_comment") or (logged_in() and $user->group->can("delete_own_comment") and $user->id == $this->user_id));
         }
 
         /**

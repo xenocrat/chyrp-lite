@@ -15,7 +15,7 @@
             if (empty($_POST))
                 return $admin->display("cascade_settings");
     
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
     
             $set = array( Config::current()->set("ajax_scroll_auto", isset($_POST['auto'])) );
@@ -31,6 +31,6 @@
         }
 
         static function javascript() {
-            include MODULES_DIR."/cascade/javascript.php";
+            include MODULES_DIR.DIR."cascade".DIR."javascript.php";
         }
     }

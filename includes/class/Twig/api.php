@@ -11,13 +11,13 @@
 
 
 /**
- * Load the compiler system.  Call this before you access the
- * compiler!
+ * Load the compiler system.
+ * Call this before you access the compiler!
  */
 function twig_load_compiler()
 {
     if (!defined('TWIG_COMPILER_INCLUDED'))
-        require TWIG_BASE . '/compiler.php';
+        require TWIG_BASE . DIRECTORY_SEPARATOR . 'compiler.php';
 }
 
 
@@ -81,8 +81,8 @@ class Twig_Template
 }
 
 /**
- * Baseclass for custom loaders.  Subclasses have to provide a
- * getFilename method.
+ * Baseclass for custom loaders.
+ * Subclasses have to provide a getFilename method.
  */
 class Twig_BaseLoader
 {
@@ -103,7 +103,7 @@ class Twig_BaseLoader
 
     public function getCacheFilename($name)
     {
-        return $this->cache . '/twig_' . md5($name) . '.cache';
+        return $this->cache . DIRECTORY_SEPARATOR . 'twig_' . md5($name) . '.cache';
     }
 
     public function requireTemplate($name)
@@ -115,8 +115,6 @@ class Twig_BaseLoader
                 return $cls;
             }
             $fn = $this->getFilename($name);
-            if (!file_exists($fn))
-                throw new Twig_TemplateNotFound($name);
             $cache_fn = $this->getCacheFilename($name);
             if (!file_exists($cache_fn) ||
                 filemtime($cache_fn) < filemtime($fn)) {
@@ -156,9 +154,7 @@ class Twig_BaseLoader
     private function evalTemplate($name, $fn=NULL)
     {
         $code = $this->compileTemplate($name, NULL, $fn);
-        # echo "ORIGINAL: <textarea rows=15 style=\"width: 100%\">".fix(print_r($code, true))."</textarea>";
-        $code = preg_replace('/(?!echo twig_get_attribute.+)echo "[\\\\tn]+";/', "", $code); # Remove blank lines
-        #echo "STRIPPED: <textarea rows=15 style=\"width: 100%\">".fix(print_r($code, true))."</textarea>";
+        $code = preg_replace('/echo (?!twig_get_attribute.+)"(\\\\r|\\\\n)+(\\\\t|\\s)*";/', "", $code); # Remove blank lines
         eval('?>' . $code);
     }
 }
@@ -176,17 +172,19 @@ class Twig_Loader extends Twig_BaseLoader
         parent::__construct($cache, $charset);
         $this->folder = $folder;
     }
-
     public function getFilename($name)
     {
-        if ($name[0] == '/' or preg_match("/[a-zA-Z]:\\\/", $name)) return $name;
+        if (DIRECTORY_SEPARATOR != "/")
+            str_replace("/", DIRECTORY_SEPARATOR, $name);
 
-        $path = array();
-        foreach (explode('/', $name) as $part) {
-            if ($part[0] != '.')
-                array_push($path, $part);
-        }
+        $path = $this->folder . DIRECTORY_SEPARATOR . $name;
 
-        return $this->folder . '/' .  implode('/', $path) ;
+        if (file_exists($path))
+            return $path;
+
+        if (file_exists($name))
+            return $name;
+
+        throw new Twig_TemplateNotFound($name);
     }
 }

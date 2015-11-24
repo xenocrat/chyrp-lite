@@ -36,7 +36,7 @@
         private function tags_unserialize($tags) {
             $unserialized = json_decode($tags, true);
 
-            if (json_last_error() and ADMIN)
+            if (json_last_error() and DEBUG)
                 error(__("Error"), _f("Failed to unserialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
 
             return $unserialized;
@@ -55,7 +55,7 @@
 
             foreach ($cloud as $tag) {
                 $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
-                $selector.= '<a class="tag'.$selected.'" href="#tags" onclick="return ChyrpTags.add(event);">'.$tag["name"].'</a>'."\n";
+                $selector.= '<a class="tag'.$selected.'" href="#tags">'.$tag["name"].'</a>'."\n";
             }
 
             $selector.= "</span>"."\n";
@@ -74,13 +74,13 @@
             if (empty($_POST['tags']))
                 return;
 
-            $tags = explode(",", $_POST['tags']); # Split at the comma
-            $tags = array_map("trim", $tags); # Remove whitespace
-            $tags = array_map("strip_tags", $tags); # Remove HTML
+            $tags = explode(",", $_POST['tags']); # Split at the comma.
+            $tags = array_map("trim", $tags); # Remove whitespace.
+            $tags = array_map("strip_tags", $tags); # Remove HTML.
             foreach ($tags as &$name)
                 $name = is_numeric($name) ? "'".$name."'" : $name ;
-            $tags = array_unique($tags); # Remove duplicates
-            $tags = array_diff($tags, array("")); # Remove empties
+            $tags = array_unique($tags); # Remove duplicates.
+            $tags = array_diff($tags, array("")); # Remove empties.
             $tags_cleaned = array_map("sanitize", $tags);
 
             $tags = array_combine($tags, $tags_cleaned);
@@ -99,13 +99,13 @@
                 return;
             }
 
-            $tags = explode(",", $_POST['tags']); # Split at the comma
-            $tags = array_map("trim", $tags); # Remove whitespace
-            $tags = array_map("strip_tags", $tags); # Remove HTML
+            $tags = explode(",", $_POST['tags']); # Split at the comma.
+            $tags = array_map("trim", $tags); # Remove whitespace.
+            $tags = array_map("strip_tags", $tags); # Remove HTML.
             foreach ($tags as &$name)
                 $name = is_numeric($name) ? "'".$name."'" : $name ;
-            $tags = array_unique($tags); # Remove duplicates
-            $tags = array_diff($tags, array("")); # Remove empties
+            $tags = array_unique($tags); # Remove duplicates.
+            $tags = array_diff($tags, array("")); # Remove empties.
             $tags_cleaned = array_map("sanitize", $tags);
 
             $tags = array_combine($tags, $tags_cleaned);
@@ -251,7 +251,7 @@
         }
 
         public function admin_edit_tags($admin) {
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_GET['id']);
@@ -262,10 +262,10 @@
         }
 
         public function admin_update_tags($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!isset($_POST['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_POST['id']);
@@ -278,7 +278,7 @@
         }
 
         public function admin_update_tag($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("edit_post"))
@@ -312,7 +312,7 @@
             Flash::notice(__("Tag renamed.", "tags"), "/admin/?action=manage_tags");
         }
 
-        static function admin_delete_tag($admin) {
+        public function admin_delete_tag($admin) {
             if (empty($_GET['clean']))
                 error(__("No Tag Specified"), __("Please specify the tag you want to rename.", "tags"));
 
@@ -347,7 +347,7 @@
         }
 
         public function admin_destroy_tag() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("edit_post"))
@@ -378,7 +378,7 @@
         }
 
         public function admin_bulk_tag($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("edit_post"))
@@ -466,7 +466,7 @@
             if (empty($posts))
                 return false;
 
-            $main->display(array("pages/tag", "pages/index"),
+            $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                            array("posts" => $posts, "tag" => $tag, "tags" => $tags),
                            _f("Posts tagged with %s", array($tag), "tags"));
         }
@@ -516,7 +516,7 @@
                                        "clean" => $tags[$tag],
                                        "url" => url("tag/".$tags[$tag], $main));
 
-                $main->display("pages/tags", array("tag_cloud" => $context), __("Tags", "tags"));
+                $main->display("pages".DIR."tags", array("tag_cloud" => $context), __("Tags", "tags"));
             }
         }
 
@@ -603,6 +603,7 @@
         private function mb_strcasecmp($str1, $str2, $encoding = null) {
             if (null === $encoding)
                 $encoding = mb_internal_encoding();
+
             $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
             $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
             return substr_compare(mb_strtoupper($str1, $encoding), mb_strtoupper($str2, $encoding), 0);
@@ -622,6 +623,7 @@
 
             $tags = array();
             $names = array();
+
             while ($attr = $attrs->fetchObject()) {
                 $post_tags = self::tags_unserialize($attr->value);
 
@@ -637,6 +639,7 @@
             $popularity = array_count_values($names);
 
             $list = array();
+
             foreach ($popularity as $name => $number)
                 $list[$name] = array("name" => $name,
                                      "popularity" => $number,
@@ -661,14 +664,14 @@
 
         private function tags_safe($text) {
             # Match escaping of JSON encoded data
-            $text = ltrim(rtrim(json_encode($text), "\""), "\"");
+            $text = trim(json_encode($text), "\"");
 
             # Return string escaped for SQL query
             return SQL::current()->escape($text, false);
         }
 
         public function ajax_tag_post() {
-            if (empty($_POST['name']) or empty($_POST['post']))
+            if (empty($_POST['name']) or empty($_POST['post']) or !is_numeric($_POST['post']))
                 exit("{}");
 
             $sql = SQL::current();
@@ -683,6 +686,7 @@
                                  "value",
                                  array("name" => "tags",
                                        "post_id" => $post->id));
+
             if ($tags and $value = $tags->fetchColumn())
                 $tags = self::tags_unserialize($value);
             else
@@ -707,6 +711,6 @@
         }
 
         public function tagsJS() {
-            include MODULES_DIR."/tags/javascript.php";
+            include MODULES_DIR.DIR."tags".DIR."javascript.php";
         }
     }

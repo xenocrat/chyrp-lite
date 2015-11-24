@@ -1,7 +1,7 @@
           <form id="comment_edit_$comment.id" class="comment_edit" action="{% admin "update_comment" %}" method="post" accept-charset="utf-8">
             <label for="body">${ "Comment" | translate }</label>
             <textarea name="body" rows="8" cols="40" class="wide">$comment.body</textarea>
-            <a id="more_options_link_$comment.id" href="javascript:void(0)" class="more_options_link">${ "More Options &darr;" | translate("chyrp") }</a>
+            <a id="more_options_link_$comment.id" href="#" class="more_options_link">${ "More Options &darr;" | translate("chyrp") }</a>
             <div id="more_options_$comment.id" class="more_options" style="display: none">
               <label for="author">${ "Author" | translate }</label>
               <input class="text" type="text" name="author" value="$comment.author" id="author">
@@ -25,9 +25,10 @@
               {% endif %}
             </div>
             <input type="hidden" name="id" value="$comment.id" id="id">
-            <input type="hidden" name="ajax" value="true" id="ajax">
+            <input type="hidden" name="hash" value="${ ip | token }" id="hash">
+            <input type="hidden" name="ajax" value="true">
             <div class="doaction speak">
               <button type="submit" accesskey="s">${ "Save" | translate }</button>
-              <a href="javascript:void(0)" id="comment_cancel_edit_$comment.id" class="cancel">${ "Cancel" | translate }</a>
+              <a href="#" id="comment_cancel_edit_$comment.id" class="cancel">${ "Cancel" | translate }</a>
             </div>
           </form>

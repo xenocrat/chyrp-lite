@@ -1,31 +1,55 @@
 @font-face {
                                                     font-family: 'Open Sans webfont';
-                                                    src: url('../../../fonts/OpenSans-Regular.woff') format('woff'),
-                                                         url('../../../fonts/OpenSans-Regular.ttf') format('truetype');
+                                                    src: url('../../../fonts/OpenSans-Regular.woff') format('woff');
                                                     font-weight: normal;
                                                     font-style: normal;
 }
 
 @font-face {
                                                     font-family: 'Open Sans webfont';
-                                                    src: url('../../../fonts/OpenSans-Semibold.woff') format('woff'),
-                                                         url('../../../fonts/OpenSans-Semibold.ttf') format('truetype');
+                                                    src: url('../../../fonts/OpenSans-Semibold.woff') format('woff');
                                                     font-weight: bold;
                                                     font-style: normal;
 }
 
 @font-face {
                                                     font-family: 'Open Sans webfont';
-                                                    src: url('../../../fonts/OpenSans-Italic.woff') format('woff'),
-                                                         url('../../../fonts/OpenSans-Italic.ttf') format('truetype');
+                                                    src: url('../../../fonts/OpenSans-Italic.woff') format('woff');
                                                     font-weight: normal;
                                                     font-style: italic;
 }
 
 @font-face {
                                                     font-family: 'Open Sans webfont';
-                                                    src: url('../../../fonts/OpenSans-SemiboldItalic.woff') format('woff'),
-                                                         url('../../../fonts/OpenSans-SemiboldItalic.ttf') format('truetype');
+                                                    src: url('../../../fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                                                    font-weight: bold;
+                                                    font-style: italic;
+}
+
+@font-face {
+                                                    font-family: 'Hack webfont';
+                                                    src: url('../../../fonts/Hack-Regular.woff') format('woff');
+                                                    font-weight: normal;
+                                                    font-style: normal;
+}
+
+@font-face {
+                                                    font-family: 'Hack webfont';
+                                                    src: url('../../../fonts/Hack-Bold.woff') format('woff');
+                                                    font-weight: bold;
+                                                    font-style: normal;
+}
+
+@font-face {
+                                                    font-family: 'Hack webfont';
+                                                    src: url('../../../fonts/Hack-Oblique.woff') format('woff');
+                                                    font-weight: normal;
+                                                    font-style: italic;
+}
+
+@font-face {
+                                                    font-family: 'Hack webfont';
+                                                    src: url('../../../fonts/Hack-BoldOblique.woff') format('woff');
                                                     font-weight: bold;
                                                     font-style: italic;
 }
@@ -38,7 +62,7 @@ html {                                              font-size: 16px }
 body {                                              font-family: "Open Sans webfont", sans-serif;
                                                     font-size: 1rem;
                                                     color: #4e5a66;
-                                                    line-height: 1.5em;
+                                                    line-height: 1.5;
                                                     background-color: #fcfbf7;
                                                     margin: 0em 0em 4rem 0em;
                                                     min-width: 288px }
@@ -49,19 +73,19 @@ h1 {                                                font-size: 2em;
                                                     text-transform: none;
                                                     margin: 0.5em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
 h2, h1.banner {                                     font-size: 1.5em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 0.67em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
 h3 {                                                font-size: 1em;
                                                     font-weight: bold;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h3.flash {                                      margin: 0em }
     h3.filter {                                     padding: 4rem 0em 0rem 4rem;
                                                     margin-bottom: 0em }
@@ -72,7 +96,7 @@ h4 {                                                font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h4.yearly {                                     font-size: 1.33em;
                                                     margin-bottom: 0.75em }
 h5, h6 {                                            font-size: 1em;
@@ -80,7 +104,7 @@ h5, h6 {                                            font-size: 1em;
                                                     text-transform: none;
                                                     margin: 1em 0em;
                                                     padding: 0em;
-                                                    line-height: 1.2em }
+                                                    line-height: 1.2 }
     h1:first-child, h2:first-child,
     h3:first-child, h4:first-child,
     h5:first-child, h6:first-child {                margin-top: 0em }
@@ -102,10 +126,10 @@ blockquote {                                        font-size: 1em;
                                                     padding: 0em 2em;
                                                     margin: 0em 0em 2em 0em }
     blockquote:last-child {                         margin-bottom: 0em }
-pre {                                               font-family: monospace;
+pre {                                               font-family: "Hack webfont", monospace;
                                                     margin: 1em 0em }
     li > pre {                                      margin: 1em 0em 0em 0em }
-code {                                              font-family: monospace;
+code {                                              font-family: "Hack webfont", monospace;
                                                     font-size: 0.75em;
                                                     font-style: normal;
                                                     color: #39434d;
@@ -208,6 +232,7 @@ input:focus {                                       outline: none;
     input:-ms-input-placeholder {                   color: #c2bcb8 }
     input:input-placeholder {                       color: #c2bcb8 }
     input.error {                                   background-color: #ff8080 }
+    input[type="password"].strong {                 border: 1px solid #76b362 }
     input#search_field {                            display: inline;
                                                     margin: 0em;
                                                     padding-right: 34px }
@@ -234,7 +259,7 @@ textarea {                                          box-sizing: border-box;
                                                     border-radius: 0em;
 /* Removes shadow from Mobile Safari -> */          background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 textarea:focus {                                    outline: none;
-                                                    border: 1px solid #548eb8 }
+                                                    border: 1px solid #99726d }
     article.commentary textarea {                   max-width: none }
 button {                                            font: inherit;
                                                     font-size: inherit;
@@ -283,16 +308,10 @@ label {                                             display: block;
                                                     clear: both;
                                                     padding-top: 2rem;
                                                     text-align: center }
-    div.photo_frame {                               width: 100%;
-                                                    max-height: 1200px;
-                                                    overflow: hidden;
-                                                    clear: both }
-    div.photo_frame + div.photo_frame,
-    div.photo_frame + p {                           margin-top: 1em }
     div.tags {                                      margin: 1.33em 0em 0em 0em;
                                                     font-size: 0.75em }
     div.doaction {                                  font-family: inherit;
-                                                    line-height: 2em;
+                                                    line-height: 2;
                                                     margin-bottom: 1em }
     div.doaction:last-child {                       margin-bottom: 0em }
     div.speak {                                     margin-bottom: 0em }
@@ -317,8 +336,8 @@ label {                                             display: block;
     ul.archive article.post.archive {               display: block;
                                                     position: relative;
                                                     float: left;
-                                                    width: 160px;
-                                                    height: 160px;
+                                                    width: 156px;
+                                                    height: 156px;
                                                     overflow: hidden;
                                                     font-size: 0.75em;
                                                     margin: 0em 0em 2.66em 1.33em;
@@ -337,6 +356,12 @@ article > section {                                 display: block;
                                                     padding: 0em }
     article > section:first-child {                 margin-top: 0em }
     article section.comment {                       margin-bottom: 1em }
+    article > section.photo {                       width: 100%;
+                                                    max-height: 1024px;
+                                                    overflow: hidden;
+                                                    clear: both }
+    article > section.photo + article > section.photo,
+    article > section.photo + p {                   margin-top: 1em }
 article > footer {                                  display: block;
                                                     width: 100%;
                                                     text-align: left;
@@ -391,7 +416,7 @@ a:active {                                          color: #99726d;
     div.tags a, span.tags_select a {                display: inline-block;
                                                     position: relative;
                                                     top: 0px;
-                                                    padding: 0em 0.4em;
+                                                    padding: 0.2em 0.4em;
                                                     margin: 2px 0em;
                                                     border: none;
                                                     border-radius: 0.2em;
@@ -406,7 +431,7 @@ a:active {                                          color: #99726d;
     div.category a.category {                       display: inline-block;
                                                     position: relative;
                                                     top: 0px;
-                                                    padding: 0em 0.4em;
+                                                    padding: 0.2em 0.4em;
                                                     margin: 2px 0em;
                                                     border: none;
                                                     border-radius: 0.2em;
@@ -472,7 +497,7 @@ a:active {                                          color: #99726d;
                                                     border: none }
     div.doaction a.post_delete_link,
     div.doaction a.delete_link {                    font-weight: bold }
-    div.photo_frame > a {                           border-bottom: none }
+    article > section.photo > a {                   border-bottom: none }
     div.doaction a.post_delete_link:hover,
     div.doaction a.delete_link:hover,
     div.doaction a.post_delete_link:focus,
@@ -481,10 +506,12 @@ a:active {                                          color: #99726d;
     div.doaction a.delete_link:active {             background-color: #cc5252 }
     a.more_options_link {                           display: inline-block;
                                                     margin-top: 1em }
-    a.likes > img {                                 opacity: 0.5 }
+    a.likes > img {                                 display: inline-block;
+                                                    position: relative;
+                                                    top: 0px }
     a.likes:hover > img,
     a.likes:focus > img,
-    a.likes:active > img {                          opacity: 1 }
+    a.likes:active > img {                          top: 1px }
     a.archive_post_link {                           display: block;
                                                     position: absolute;
                                                     top: -1px;
@@ -501,7 +528,7 @@ a:active {                                          color: #99726d;
 img {                                               border-style: none;
                                                     margin: 0em;
                                                     padding: 0em }
-    div.photo_frame img {                           width: 100% }
+    article > section.photo img {                   width: 100% }
     article img {                                   max-width: 100% }
     img.gravatar {                                  position: absolute;
                                                     top: 2rem;
@@ -509,12 +536,13 @@ img {                                               border-style: none;
                                                     width: 48px;
                                                     height: 48px }
 .ajax_loading {                                     background-size: 30px 30px;
-                                                    background-image: linear-gradient(-45deg, #f5f4f0 25%, transparent 25%, transparent 50%, #f5f4f0 50%, #f5f4f0 75%, transparent 75%, transparent) !important;
-                                                    -webkit-animation: stripes 1s linear infinite;
-                                                    -moz-animation: stripes 1s linear infinite;
-                                                    -ms-animation: stripes 1s linear infinite;
-                                                    animation: stripes 1s linear infinite }
+                                                    background-image: linear-gradient(-45deg, #ebeae6 25%, transparent 25%, transparent 50%, #ebeae6 50%, #ebeae6 75%, transparent 75%, transparent) !important;
+                                                    -webkit-animation: stripes 2s linear infinite;
+                                                    -moz-animation: stripes 2s linear infinite;
+                                                    -ms-animation: stripes 2s linear infinite;
+                                                    animation: stripes 2s linear infinite }
     .ajax_loading .doaction {                       visibility: hidden }
+
 @-webkit-keyframes stripes {                        from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @-moz-keyframes stripes {                           from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
 @-ms-keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
@@ -558,7 +586,7 @@ img {                                               border-style: none;
                                                     margin-right: 4px }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 460px) {
     ul.archive li {                                 margin-left: 0em }
     ul.archive article.post.archive {               box-sizing: border-box;
                                                     width: 100%;

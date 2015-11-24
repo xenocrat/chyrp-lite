@@ -1,6 +1,6 @@
 <?php
-    require_once INCLUDES_DIR."/class/Captcha.php";
-    require_once "lib/recaptchalib.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Captcha.php";
+    require_once "lib".DIR."recaptchalib.php";
 
     class Recaptcha extends Modules {
         public function __init() {
@@ -25,7 +25,7 @@
             if (empty($_POST))
                 return $admin->display("recaptcha_settings");
     
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $set = array(Config::current()->set("module_recaptcha",

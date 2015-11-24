@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-08-14 09:20+0000\n"
+"POT-Creation-Date: 2015-11-23 17:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -35,16 +35,16 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: themes/sparrow/content/comment.twig:16
-#: themes/sparrow/content/post.twig:17
+#: themes/sparrow/content/comment.twig:15
+#: themes/sparrow/content/post.twig:16
 msgid "Delete"
 msgstr ""
 
-#: themes/sparrow/content/comment.twig:21
+#: themes/sparrow/content/comment.twig:20
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr ""
 
-#: themes/sparrow/content/comment.twig:21
+#: themes/sparrow/content/comment.twig:20
 #, php-format
 msgid "<a href=\"%s\" class=\"permalink\">%s</a>"
 msgstr ""
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:21
+#: themes/sparrow/content/post.twig:20
 #: themes/sparrow/feathers/audio.twig:6
 #: themes/sparrow/feathers/photo.twig:6
 #: themes/sparrow/feathers/quote.twig:6
@@ -64,42 +64,42 @@ msgstr ""
 msgid "Permanent link to"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:23
+#: themes/sparrow/content/post.twig:22
 #: themes/sparrow/forms/post/edit.twig:32
 msgid "Private"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:25
+#: themes/sparrow/content/post.twig:24
 msgid "Scheduled"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:27
+#: themes/sparrow/content/post.twig:26
 msgid "Pinned"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:29
+#: themes/sparrow/content/post.twig:28
 #: themes/sparrow/pages/archive.twig:16
 #: themes/sparrow/pages/archive.twig:30
 msgid "%d %b, %Y"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:37
+#: themes/sparrow/content/post.twig:36
 msgid "Comments closed"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:40
+#: themes/sparrow/content/post.twig:39
 msgid "View comments"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:41
+#: themes/sparrow/content/post.twig:40
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: themes/sparrow/feathers/uploader.twig:20
-msgid "Download"
+#: themes/sparrow/feathers/uploader.twig:19
+msgid "File attachment:"
 msgstr ""
 
 #: themes/sparrow/forms/comment/edit.twig:2
@@ -149,13 +149,13 @@ msgstr ""
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:30
-#: themes/sparrow/forms/post/edit.twig:78
+#: themes/sparrow/forms/comment/edit.twig:31
+#: themes/sparrow/forms/post/edit.twig:76
 msgid "Save"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:31
-#: themes/sparrow/forms/post/edit.twig:79
+#: themes/sparrow/forms/comment/edit.twig:32
+#: themes/sparrow/forms/post/edit.twig:77
 msgid "Cancel"
 msgstr ""
 
@@ -220,10 +220,6 @@ msgstr ""
 
 #: themes/sparrow/forms/post/edit.twig:46
 msgid "Slug"
-msgstr ""
-
-#: themes/sparrow/forms/post/edit.twig:51
-msgid "Trackbacks"
 msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:5
@@ -337,10 +333,10 @@ msgstr ""
 
 #: themes/sparrow/layouts/default.twig:105
 #, php-format
-msgid "Called from %s on line %d at %ss."
+msgid "Called from %s on line %d at %s seconds."
 msgstr ""
 
-#: themes/sparrow/pages/404.twig:5
+#: themes/sparrow/pages/404.twig:4
 msgid "Not found"
 msgstr ""
 

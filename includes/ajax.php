@@ -17,13 +17,16 @@
 
     switch($_POST['action']) {
         case "edit_post":
-            if (!isset($_POST['id']))
-                error(__("No ID Specified"), __("Please specify an ID of the post you would like to edit."));
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a post."));
 
             $post = new Post($_POST['id'], array("filter" => false, "drafts" => true));
 
             if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
+                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
                 $trigger->call("not_found");
                 exit;
             }
@@ -32,8 +35,8 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
 
             $title = $post->title();
-            $theme_file = THEME_DIR."/forms/feathers/".$post->feather.".php";
-            $default_file = FEATHERS_DIR."/".$post->feather."/fields.php";
+            $theme_file = THEME_DIR.DIR."forms".DIR."feathers".DIR.$post->feather.".php";
+            $default_file = FEATHERS_DIR.DIR.$post->feather.DIR."fields.php";
 
             $options = array();
             Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
@@ -45,10 +48,16 @@
             break;
 
         case "delete_post":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a post."));
+
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
+                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
                 $trigger->call("not_found");
                 exit;
             }
@@ -65,11 +74,13 @@
 
             $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
 
-            if (isset($_POST['id']))
-                $post = new Post($_POST['id'], array("drafts" => true));
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to view a post."));
+
+            $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
+                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
                 $trigger->call("not_found");
                 exit;
             }
@@ -84,7 +95,9 @@
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 break;
 
-            echo Trigger::current()->filter($_POST['content'], $_POST['filter']);
+            $sanitized = sanitize_html($_POST['content']);
+
+            echo Trigger::current()->filter($sanitized, $_POST['filter']);
             break;
 
         case "check_confirm":
@@ -92,7 +105,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable extensions."));
 
             $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $info = include $dir."/".$_POST['check']."/info.php";
+            $info = include $dir.DIR.$_POST['check'].DIR."info.php";
             fallback($info["confirm"], "");
 
             if (!empty($info["confirm"]))
@@ -101,6 +114,9 @@
             break;
 
         case "enable_module": case "enable_feather":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             $type = ($_POST['action'] == "enable_module") ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
@@ -116,17 +132,17 @@
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
-            if (file_exists($folder."/".$_POST["extension"]."/locale/".$config->locale.".mo"))
-                load_translator($_POST["extension"], $folder."/".$_POST["extension"]."/locale/".$config->locale.".mo");
+            if (file_exists($folder.DIR.$_POST["extension"].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_POST["extension"], $folder.DIR.$_POST["extension"].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include $folder."/".$_POST["extension"]."/info.php";
+            $info = include $folder.DIR.$_POST["extension"].DIR."info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
             foreach ($info["notifications"] as &$notification)
                 $notification = addslashes($notification);
 
-            require $folder."/".$_POST["extension"]."/".$_POST["extension"].".php";
+            require $folder.DIR.$_POST["extension"].DIR.$_POST["extension"].".php";
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
@@ -154,6 +170,9 @@
                  '] }');
 
         case "disable_module": case "disable_feather":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
@@ -192,6 +211,14 @@
             $reorder = oneof(@$_POST['list'], $config->enabled_feathers);
             foreach ($reorder as &$value)
                 $value = preg_replace("/feathers\[([^\]]+)\]/", "\\1", $value);
+
+            foreach ($config->enabled_feathers as $feather)
+                if (!in_array($feather, $reorder))
+                    exit; # Attempt to disable feather.
+
+            foreach ($reorder as $feather)
+                if (!in_array($feather, $config->enabled_feathers))
+                    exit; # Attempt to enable feather.
 
             $config->set("enabled_feathers", $reorder);
             break;

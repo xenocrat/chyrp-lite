@@ -1,7 +1,10 @@
 <?php
+    if (version_compare(PHP_VERSION, "5.3.2", "<"))
+        exit("Chyrp Lite requires PHP 5.3.2 or greater.");
+
     define('ADMIN', true);
 
-    require_once "../includes/common.php";
+    require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 
     # Prepare the controller.
     $admin = AdminController::current();
