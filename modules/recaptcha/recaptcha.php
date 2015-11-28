@@ -49,7 +49,7 @@
             $public_key = Config::current()->module_recaptcha["public_key"];
 
             if (!empty($public_key))
-                return recaptcha_get_html($public_key);
+                return recaptcha_get_html();
         }
 
         static function verifyCaptcha() {
