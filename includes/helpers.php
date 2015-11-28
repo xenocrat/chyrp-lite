@@ -1855,13 +1855,15 @@
      *     $filename  - The name to be applied to the content.
      */
     function download($content, $filename) {
-        ob_clean();
+        ob_start();
         header("Content-type: application/octet-stream");
         header("Content-Disposition: attachment; filename=\"".$filename."\"");
+
         if (!in_array("ob_gzhandler", ob_list_handlers()))
             header("Content-length: ".strlen($content));
+
         echo $content;
-        ob_flush();
+        ob_end_flush();
     }
 
     /**

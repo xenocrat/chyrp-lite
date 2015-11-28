@@ -673,7 +673,7 @@ foreach ($errors as $error)
                         <option value="sqlite"<?php selected("sqlite", fallback($_POST['adapter'], "mysql")); ?>>SQLite 3</option>
                         <?php endif; ?>
                         <?php if (class_exists("PDO") and in_array("pgsql", PDO::getAvailableDrivers())): ?>
-                        <option value="pgsql"<?php selected("pgsql", oneof(@$_POST['adapter'], "mysql")); ?>>PostgreSQL</option>
+                        <option value="pgsql"<?php selected("pgsql", fallback($_POST['adapter'], "mysql")); ?>>PostgreSQL</option>
                         <?php endif; ?>
                     </select>
                 </p>

@@ -1,10 +1,4 @@
 <?php
-    if (!defined("INCLUDES_DIR"))
-        define("INCLUDES_DIR", dirname(__FILE__));
-
-    if (!defined('DIR'))
-        define('DIR', DIRECTORY_SEPARATOR);
-
     /**
      * Class: Config
      * Holds all of the configuration variables for the entire site, as well as Module settings.

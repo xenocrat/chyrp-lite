@@ -14,9 +14,14 @@
     if (ini_get("memory_limit") < 48)
         ini_set("memory_limit", "48M");
 
+    if (empty($_GET['file'])) {
+        header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+        exit("Missing Argument.");
+    }
+
     $config = Config::current();
     $quality = fallback($_GET["quality"], 80);
-    $filename = rtrim(fallback($_GET['file']));
+    $filename = oneof(trim($_GET['file']), DIR);
     $filepath = MAIN_DIR.$config->uploads_path.$filename;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
     $url = $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).$filename;
@@ -37,7 +42,7 @@
         display_error(_f("Image file %s was not found.", $filename));
 
     function display_error($string) {
-        $thumbnail = imagecreatetruecolor(oneof(@$_GET['max_width'], 128), 16);
+        $thumbnail = imagecreatetruecolor(oneof(fallback($_GET['max_width']), 128), 16);
         imagestring($thumbnail, 1, 4, 4, $string, imagecolorallocate($thumbnail, 255, 255, 255));
         header("Content-type: image/png");
         header("Content-Disposition: inline; filename=error.png");
