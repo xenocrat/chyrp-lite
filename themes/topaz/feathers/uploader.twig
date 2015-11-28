@@ -11,14 +11,14 @@
         ${ post.caption | read_more("&hellip;more") }
       </section>
       {% for file in post.files %}
-        {% if "jpg jpeg png gif tif tiff bmp" | contains(file.type) %}
+        {% if "jpg jpeg png gif tiff bmp" | contains(file.type) %}
       <section class="photo">
         ${ feathers['uploader'].image_link(file.name, 1024, 2048, "quality=80", "80vw") }
       </section>
         {% else %}
       <section class="attachment">
         ${ "File attachment:" | translate }
-        <a href="${ file.link | escape }">&quot;${ file.name | escape | truncate(40, "&hellip;", true) }&quot;</a>
+        <a href="{% if "txt xhtml dhtml markdown md" | contains(file.type) %}${ file.link | escape }{% else %}${ file.name | download }{% endif %}">&quot;${ file.name | escape | truncate(40, "&hellip;", true) }&quot;</a>
       </section>
         {% endif %}
       {% endfor %}

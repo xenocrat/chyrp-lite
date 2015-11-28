@@ -78,6 +78,7 @@ $twig_filters = array(
 
     // getters and setters
     'uploaded' =>         'uploaded',
+    'download' =>         'twig_download',
     'fallback' =>         'oneof',
     'selected' =>         'twig_selected_filter',
     'checked' =>          'twig_checked_filter',
@@ -488,4 +489,8 @@ function twig_sort_filter($array) {
 
 function twig_get_gravatar($email, $size = 80, $img = false) {
     return get_gravatar($email, $size, 'mm', 'g', $img);
+}
+
+function twig_download($filename) {
+    return Config::current()->chyrp_url."/includes/download.php?file=".urlencode($filename);
 }
