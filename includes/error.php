@@ -37,6 +37,9 @@
     function error_snitcher($errno, $message, $file, $line) {
         global $errors;
 
+        if (error_reporting() === 0)
+            return true; # Error suppressed by @ operator.
+
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
