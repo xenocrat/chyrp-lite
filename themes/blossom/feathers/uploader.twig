@@ -17,7 +17,7 @@
         {% else %}
       <section class="attachment">
         ${ "File attachment:" | translate }
-        <a href="{% if "txt xhtml dhtml markdown md" | contains(file.type) %}${ file.name | uploaded }{% else %}${ file.name | download }{% endif %}">&quot;${ file.name | escape | truncate(40, "&hellip;", true) }&quot;</a>
+        &quot;<a href="{% if "txt xhtml dhtml markdown md" | contains(file.type) %}${ file.name | uploaded }{% else %}${ file.name | download }{% endif %}">${ file.name | escape | truncate(40, "&hellip;", true) }</a>&quot; (${ file.size | filesizeformat})
       </section>
         {% endif %}
       {% endfor %}

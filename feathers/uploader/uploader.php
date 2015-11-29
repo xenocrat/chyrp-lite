@@ -134,6 +134,7 @@
             for ($i=0; $i < count($filenames); $i++) {
                 $list[$i]['name'] = $filenames[$i];
                 $list[$i]['type'] = strtolower(pathinfo($filenames[$i], PATHINFO_EXTENSION));
+                $list[$i]['size'] = filesize(MAIN_DIR.Config::current()->uploads_path.$filenames[$i]);
             }
             return $list;
         }
