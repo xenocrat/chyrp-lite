@@ -133,7 +133,6 @@
             $list = array();
             for ($i=0; $i < count($filenames); $i++) {
                 $list[$i]['name'] = $filenames[$i];
-                $list[$i]['link'] = uploaded($filenames[$i]);
                 $list[$i]['type'] = strtolower(pathinfo($filenames[$i], PATHINFO_EXTENSION));
             }
             return $list;
