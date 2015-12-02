@@ -5,7 +5,7 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2015.07
+     *     v2016.01
      *
      * Copyright:
      *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley,
@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2015.07");
+    define('CHYRP_VERSION', "2016.01");
 
     # Constant: CHYRP_CODENAME
     # The code name for this version.
-    define('CHYRP_CODENAME', "Kordofan");
+    define('CHYRP_CODENAME', "Socotra");
 
     # Constant: CACHE_TWIG
     # If defined, this will take priority over DEBUG and toggle Twig template caching.
