@@ -22,9 +22,9 @@
     $config = Config::current();
     $quality = (int) fallback($_GET["quality"], 80);
     $filename = oneof(trim($_GET['file']), DIR);
-    $filepath = MAIN_DIR.$config->uploads_path.$filename;
+    $filepath = uploaded($filename, false);;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
-    $url = $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).$filename;
+    $url = uploaded($filename);
     $new_width = (int) fallback($_GET["max_width"], 0);
     $new_height = (int) fallback($_GET["max_height"], 0);
 

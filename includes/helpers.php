@@ -1301,6 +1301,7 @@
      *
      * Parameters:
      *     $file - Filename relative to the uploads directory.
+     *     $url - Whether to return a URL or a filesystem path.
      */
     function uploaded($file, $url = true) {
         if (empty($file))

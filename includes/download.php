@@ -27,7 +27,7 @@
     }
 
     $filename = oneof(trim($_GET['file']), DIR);
-    $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
+    $filepath = uploaded($filename, false);
 
     if (substr_count($filename, DIR)) {
         header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
