@@ -3,31 +3,31 @@
 {% block title %}${ "Like Settings" | translate("likes") }{% endblock %}
 
 {% block content %}
-            <form id="like_settings" class="split" action="{% admin "like_settings" %}" method="post">
-                <fieldset>
-                    <p>
-                        <label for="likeImage">${ "Like Button Image" | translate("likes") }</label>
-                        <select name="likeImage" onchange="${ "$('#likeImage_preview').attr('src',$(this).val());" }">
-                            {% for key, val in modules['likes'].get_like_images | items %}
-                            <option value="$val" ${ val | option_selected(site.module_like.likeImage) }>${ key | split(".") | first | camelize }</option>
-                            {% endfor %}
-                        </select>
-                        <img id="likeImage_preview" src="$site.module_like.likeImage" alt="${ "Likes Image" | translate("likes") }">
-                    </p>
-                    <p>
-                        <label for="likeWithText">${ "Like With Text" | translate("likes") }</label>
-                        <input type="checkbox" class="checkbox" name="likeWithText"${ site.module_like.likeWithText | checked }>
-                        <small>${ "Enables like with text links (i.e. Like/Unlike)." | translate("likes") }</small>
-                    </p>
-                    <p>
-                        <label for="showOnFront">${ "Show On Front Page" | translate("likes") }</label>
-                        <input type="checkbox" class="checkbox" name="showOnFront"${ site.module_like.showOnFront | checked }>
-                        <small>${ "Enables like functionality on front page posts." | translate("likes") }</small>
-                    </p>
-                    <p class="buttons">
-                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
-                    </p>
-                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
-                </fieldset>
-            </form>
+<form id="like_settings" class="split" action="{% admin "like_settings" %}" method="post">
+<fieldset>
+<p>
+<label for="likeImage">${ "Like Button Image" | translate("likes") }</label>
+<select name="likeImage" onchange="${ "$('#likeImage_preview').attr('src',$(this).val());" }">
+{% for key, val in modules['likes'].get_like_images | items %}
+<option value="$val" ${ val | option_selected(site.module_like.likeImage) }>${ key | split(".") | first | camelize }</option>
+{% endfor %}
+</select>
+<img id="likeImage_preview" src="$site.module_like.likeImage" alt="${ "Likes Image" | translate("likes") }">
+</p>
+<p>
+<label for="likeWithText">${ "Like With Text" | translate("likes") }</label>
+<input type="checkbox" class="checkbox" name="likeWithText"${ site.module_like.likeWithText | checked }>
+<small>${ "Enables like with text links (i.e. Like/Unlike)." | translate("likes") }</small>
+</p>
+<p>
+<label for="showOnFront">${ "Show On Front Page" | translate("likes") }</label>
+<input type="checkbox" class="checkbox" name="showOnFront"${ site.module_like.showOnFront | checked }>
+<small>${ "Enables like functionality on front page posts." | translate("likes") }</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Update" | translate }</button>
+</p>
+<input type="hidden" name="hash" value="${ ip | token }" id="hash">
+</fieldset>
+</form>
 {% endblock %}

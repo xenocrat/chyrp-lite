@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html lang="${ site.locale | split("_") | first }">
-    <head>
-        <meta charset="utf-8">
-        <meta name="robots" content="noindex">
-        <meta name="viewport" content="initial-scale = 1.0">
-        <title>$site.name: {% block title %}$title{% endblock %}</title>
-        <!-- Styles -->
-        <link rel="shortcut icon" href="$site.url/favicon.ico">
-        <link rel="stylesheet" href="$theme_url/layout.css" type="text/css" media="all">
-        <!-- JavaScripts -->
-        <script src="$site.chyrp_url/includes/lib/common.js" type="text/javascript" charset="utf-8"></script>
-        <script src="$site.chyrp_url/admin/admin.js.php?action=$route.action" type="text/javascript" charset="utf-8"></script>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="initial-scale = 1.0">
+<title>$site.name: {% block title %}$title{% endblock %}</title>
+<!-- Styles -->
+<link rel="shortcut icon" href="$site.url/favicon.ico">
+<link rel="stylesheet" href="$theme_url/layout.css" type="text/css" media="all">
+<!-- JavaScripts -->
+<script src="$site.chyrp_url/includes/lib/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="$site.chyrp_url/admin/admin.js.php?action=$route.action" type="text/javascript" charset="utf-8"></script>
 ${ trigger.call("admin_head") }
-    </head>
-    <body>
-        <div id="header" role="banner">
-            <h1><a href="$site.url">$site.name</a></h1>
-            <ul id="navigation" role="menubar">
-                {% block navigation %}
-                {% for action, nav in navigation | items %}
-                {% if nav.show %}
-                <li role="presentation" class="$action{% if nav.selected %} selected{% endif %}"$nav.attributes>
-                    <a role="menuitem" href="{% admin action %}">$nav.title</a>
-                </li>
-                {% endif %}
-                {% endfor %}
-                {% endblock %}
-            </ul>
-        </div>
-        <ul id="sub_nav" role="menubar" class="${ route.action }_nav ">
-            {% block subnav %}
-            {% if subnav[route.action] %}
-            {% for action, nav in subnav[route.action] | items %}
-            {% if nav.show %}
-            <li${ route.action | selected(nav.selected, action) }$nav.attributes role="presentation">
-                <a role="menuitem" href="{% admin action %}">$nav.title</a>
-            </li>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-            {% endblock %}
-        </ul>
-        <div id="content" role="main">
-            {% for notice in flash.notices %}
-            <p role="alert" class="message yay">$notice</p>
-            {% endfor %}
-            {% for warning in flash.warnings %}
-            <p role="alert" class="message boo">$warning</p>
-            {% endfor %}
-            {% for message in flash.messages %}
-            <p role="alert" class="message">$message</p>
-            {% endfor %}
+</head>
+<body>
+<div id="header" role="banner">
+<h1><a href="$site.url">$site.name</a></h1>
+<ul id="navigation" role="menubar">
+{% block navigation %}
+{% for action, nav in navigation | items %}
+{% if nav.show %}
+<li role="presentation" class="$action{% if nav.selected %} selected{% endif %}"$nav.attributes>
+<a role="menuitem" href="{% admin action %}">$nav.title</a>
+</li>
+{% endif %}
+{% endfor %}
+{% endblock %}
+</ul>
+</div>
+<ul id="sub_nav" role="menubar" class="${ route.action }_nav ">
+{% block subnav %}
+{% if subnav[route.action] %}
+{% for action, nav in subnav[route.action] | items %}
+{% if nav.show %}
+<li${ route.action | selected(nav.selected, action) }$nav.attributes role="presentation">
+<a role="menuitem" href="{% admin action %}">$nav.title</a>
+</li>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endblock %}
+</ul>
+<div id="content" role="main">
+{% for notice in flash.notices %}
+<p role="alert" class="message yay">$notice</p>
+{% endfor %}
+{% for warning in flash.warnings %}
+<p role="alert" class="message boo">$warning</p>
+{% endfor %}
+{% for message in flash.messages %}
+<p role="alert" class="message">$message</p>
+{% endfor %}
 {% block content %}{% endblock %}
-        </div>
-        <div id="footer" role="contentinfo">
-            <img class="logo" src="$theme_url/images/chyrp-lite.svg" alt="${ "Chyrp loves you." | translate }">
-            <small class="metadata">${ "Chyrp Lite &ldquo;%s&rdquo;" | translate | format(codename) }</small>
-            <a id="logout" class="button" href="{% url "/?action=logout" %}">${ "Log out" | translate }</a>
-        </div>
-    </body>
+</div>
+<div id="footer" role="contentinfo">
+<img class="logo" src="$theme_url/images/chyrp-lite.svg" alt="${ "Chyrp loves you." | translate }">
+<small class="metadata">${ "Chyrp Lite &ldquo;%s&rdquo;" | translate | format(codename) }</small>
+<a id="logout" class="button" href="{% url "/?action=logout" %}">${ "Log out" | translate }</a>
+</div>
+</body>
 </html>

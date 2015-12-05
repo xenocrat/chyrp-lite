@@ -3,40 +3,40 @@
 {% block title %}${ "Import" | translate }{% endblock %}
 
 {% block content %}
-            <h2>${ "What would you like to import?" | translate }</h2>
-            <form id="import_chyrp_form" class="split" action="{% admin "import_chyrp" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                <fieldset>
-                    <p>
-                        <label for="posts_file">${ "Posts .atom File" | translate }</label>
-                        <input type="file" name="posts_file" value="" id="posts_file">
-                    </p>
-                    <p>
-                        <label for="pages_file">${ "Pages .atom File" | translate }</label>
-                        <input type="file" name="pages_file" value="" id="pages_file">
-                    </p>
-                    <p>
-                        <label for="groups_file">${ "Groups .json File" | translate }</label>
-                        <input type="file" name="groups_file" value="" id="groups_file">
-                    </p>
-                    <p>
-                        <label for="users_file">${ "Users .json File" | translate }</label>
-                        <input type="file" name="users_file" value="" id="users_file">
-                    </p>
-                    <p>
-                        <label for="media_url">
-                            ${ "What URL is used for embedded media?" | translate }
-                            <span class="sub">${ "(optional)" | translate }</span>
-                        </label>
-                        <input class="text" type="text" name="media_url" value="" id="media_url">
-                        <small>
-                            ${ "Usually something like <code>http://example.com/uploads/</code>." | translate }
-                        </small>
-                    </p>
-                    <p class="buttons">
-                        <button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Import" | translate }</button>
-                    </p>
-                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
-                </fieldset>
-             </form>
+<h2>${ "What would you like to import?" | translate }</h2>
+<form id="import_chyrp_form" class="split" action="{% admin "import_chyrp" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<fieldset>
+<p>
+<label for="posts_file">${ "Posts .atom File" | translate }</label>
+<input type="file" name="posts_file" value="" id="posts_file">
+</p>
+<p>
+<label for="pages_file">${ "Pages .atom File" | translate }</label>
+<input type="file" name="pages_file" value="" id="pages_file">
+</p>
+<p>
+<label for="groups_file">${ "Groups .json File" | translate }</label>
+<input type="file" name="groups_file" value="" id="groups_file">
+</p>
+<p>
+<label for="users_file">${ "Users .json File" | translate }</label>
+<input type="file" name="users_file" value="" id="users_file">
+</p>
+<p>
+<label for="media_url">
+${ "What URL is used for embedded media?" | translate }
+<span class="sub">${ "(optional)" | translate }</span>
+</label>
+<input class="text" type="text" name="media_url" value="" id="media_url">
+<small>
+${ "Usually something like <code>http://example.com/uploads/</code>." | translate }
+</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="$theme_url/images/icons/success.svg" alt="success">${ "Import" | translate }</button>
+</p>
+<input type="hidden" name="hash" value="${ ip | token }" id="hash">
+</fieldset>
+</form>
 ${ trigger.call("import_choose") }
 {% endblock %}

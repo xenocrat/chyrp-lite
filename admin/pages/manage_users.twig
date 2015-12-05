@@ -3,76 +3,76 @@
 {% block title %}${ "Manage Users" | translate }{% endblock %}
 
 {% block content %}
-            <form class="filters" action="index.php" method="get" accept-charset="utf-8">
-                <fieldset>
-                    <input type="hidden" name="action" value="manage_users">
-                    <div role="search" class="filter_item">
-                        <h3>
-                            ${ "Search&hellip;" | translate }
-                            <a href="{% admin "help&id=filtering_results" %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
-                        </h3>
-                        <input class="text" type="text" name="query" value="${ GET.query | escape }" id="query">
-                        <button type="submit">${ "Search" | translate }</button>
-                        {% if visitor.group.can("add_user") %}
-                        <a href="{% admin "new_user" %}" class="button yay">
-                            <img src="$theme_url/images/icons/add.svg" alt="add"> ${ "New User" | translate }
-                        </a>
-                        {% endif %}
-                    </div>
-                </fieldset>
-            </form>
-            <h2>${ "Users" | translate }</h2>
-            <table border="0" cellspacing="0" cellpadding="0" class="wide">
-                <thead>
-                    <tr class="head">
-                        <th class="user_name">${ "Name" | translate }</th>
-                        <th class="user_group">${ "Group" | translate }</th>
-                        <th class="user_joined">${ "Joined" | translate }</th>
-                        <th class="user_website">${ "Website" | translate }</th>
+<form class="filters" action="index.php" method="get" accept-charset="utf-8">
+<fieldset>
+<input type="hidden" name="action" value="manage_users">
+<div role="search" class="filter_item">
+<h3>
+${ "Search&hellip;" | translate }
+<a href="{% admin "help&id=filtering_results" %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+</h3>
+<input class="text" type="text" name="query" value="${ GET.query | escape }" id="query">
+<button type="submit">${ "Search" | translate }</button>
+{% if visitor.group.can("add_user") %}
+<a href="{% admin "new_user" %}" class="button yay">
+<img src="$theme_url/images/icons/add.svg" alt="add"> ${ "New User" | translate }
+</a>
+{% endif %}
+</div>
+</fieldset>
+</form>
+<h2>${ "Users" | translate }</h2>
+<table border="0" cellspacing="0" cellpadding="0" class="wide">
+<thead>
+<tr class="head">
+<th class="user_name">${ "Name" | translate }</th>
+<th class="user_group">${ "Group" | translate }</th>
+<th class="user_joined">${ "Joined" | translate }</th>
+<th class="user_website">${ "Website" | translate }</th>
 ${ trigger.call("manage_users_column_header") }
-                        <th class="controls" colspan="2">${ "Controls" | translate }</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for user in users.paginated %}
-                    <tr id="user_$user.id" class="user">
-                        <td class="user_name main">
-                            {% if user.full_name != "" %}
-                            <a href="mailto:${ user.email | escape(true) }">$user.full_name</a> <span class="sub">($user.login)</span>
-                            {% else %}
-                            <a href="mailto:${ user.email | escape(true) }">$user.login</a>
-                            {% endif %}
-                        </td>
-                        <td class="user_group">
-                            ${ user.group.name | escape }
-                        </td>
-                        <td class="user_joined">
-                            ${ user.joined_at | strftime }
-                        </td>
-                        <td class="user_website">
-                            {% if user.website != "" %}<a href="${ user.website | escape(true) }">$user.website</a>{% endif %}
-                        </td>
+<th class="controls" colspan="2">${ "Controls" | translate }</th>
+</tr>
+</thead>
+<tbody>
+{% for user in users.paginated %}
+<tr id="user_$user.id" class="user">
+<td class="user_name main">
+{% if user.full_name != "" %}
+<a href="mailto:${ user.email | escape(true) }">$user.full_name</a> <span class="sub">($user.login)</span>
+{% else %}
+<a href="mailto:${ user.email | escape(true) }">$user.login</a>
+{% endif %}
+</td>
+<td class="user_group">
+${ user.group.name | escape }
+</td>
+<td class="user_joined">
+${ user.joined_at | strftime }
+</td>
+<td class="user_website">
+{% if user.website != "" %}<a href="${ user.website | escape(true) }">$user.website</a>{% endif %}
+</td>
 ${ trigger.call("manage_users_column", user) }
-                        {% if user.editable and user.deletable %}
-                        <td class="controls">${ user.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">') }</td>
-                        <td class="controls">${ user.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">') }</td>
-                        {% else %}
-                        ${ user.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }
-                        ${ user.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }
-                        {% endif %}
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td class="placeholder"><span class="sub">${ "(none)" | translate }</span></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            {% if users.paginated and users.pages > 1 %}
-            <div class="pagination">
-                <span class="pages">${ "Page %d of %s" | translate | format(users.page, users.final_link(users.pages)) }</span>
-                $users.prev_link
-                $users.next_link
-            </div>
-            {% endif %}
+{% if user.editable and user.deletable %}
+<td class="controls">${ user.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">') }</td>
+<td class="controls">${ user.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">') }</td>
+{% else %}
+${ user.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }
+${ user.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }
+{% endif %}
+</tr>
+{% else %}
+<tr>
+<td class="placeholder"><span class="sub">${ "(none)" | translate }</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% if users.paginated and users.pages > 1 %}
+<div class="pagination">
+<span class="pages">${ "Page %d of %s" | translate | format(users.page, users.final_link(users.pages)) }</span>
+$users.prev_link
+$users.next_link
+</div>
+{% endif %}
 {% endblock %}

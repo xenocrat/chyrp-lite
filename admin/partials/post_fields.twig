@@ -1,146 +1,146 @@
 ${ trigger.call("before_post_fields", feather) }
-                        {% for field in feather.fields %}
-                        <p class="main_options">
-                            <label for="${ field.attr }_field">
-                                {% if field.preview == "markup_text" and site.enable_markdown %}
-                                <a href="{% admin "help&id=markdown" %}" target="_blank" class="help emblem markdown"><img src="$theme_url/images/icons/markdown.svg" alt="Markdown help"></a>
-                                {% endif %}
-                                $field.label
-                                {% if field.optional %}
-                                <span class="sub">${ "(optional)" | translate }</span>
-                                {% endif %}
-                                {% if field.help %}
-                                <span class="sub">
-                                    <a href="{% admin "help&id="~field.help %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
-                                </span>
-                                {% endif %}
-                                {% if field.note %}
-                                <span class="sub">$field.note</span>
-                                {% endif %}
-                            </label>
-                            {% if field.type == "text" or field.type == "file" %}
-                            <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" {% if field.multiple == "true" %}name="$field.attr[]" multiple{% else %}name="$field.attr"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="${ field.attr }_field"{% if field.preview %} data-preview="$field.preview"{% endif %}>
-                            <p>
-                            {% if field.type == "file" and ( post.filename or post.filenames ) and route.action == "edit_post" %}
-                                {% if post.filename %}
-                                <em>${ "Current file name:" | translate }</em>
-                                <strong>${ post.filename | escape }</strong>
-                                {% else %}
-                                <em>${ "Current file names:" | translate }</em>
-                                <strong>
-                                    <ul>
-                                        {% for name in post.filenames %}<li>${ name | escape }</li>{% endfor %}
-                                    </ul>
-                                </strong>
-                                {% endif %}
-                            {% endif %}
-                            </p>
-                            {% elseif field.type == "text_block" %}
-                            <textarea {% if field.classes %} class="${ field.classes | join(" ") }"{% endif %} rows="${ field.rows | fallback(12) }" name="$field.attr" id="${ field.attr }_field"{% if field.preview %} data-preview="$field.preview"{% endif %}>{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
-                            {% elseif field.type == "checkbox" %}
-                            <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr"{% if field.checked %}checked="checked"{% endif %} id="${ field.attr }_field">
-                            {% elseif field.type == "select" %}
-                            <select name="$field.attr" id="${ field.attr }_field"{% if field.classes %} class="${ field.classes | join(" ") }"{% endif %}>
-                                {% for value, name in field.options | items %}
-                                <option value="${ value | escape }"{% if not field.no_value %}${ value | option_selected(post[field.attr]) }{% endif %}>${ name | escape }</option>
-                                {% endfor %}
-                            </select>
-                            {% endif %}
-                            $field.extra
-                        </p>
-                        {% endfor %}
+{% for field in feather.fields %}
+<p class="main_options">
+<label for="${ field.attr }_field">
+{% if field.preview == "markup_text" and site.enable_markdown %}
+<a href="{% admin "help&id=markdown" %}" target="_blank" class="help emblem markdown"><img src="$theme_url/images/icons/markdown.svg" alt="Markdown help"></a>
+{% endif %}
+$field.label
+{% if field.optional %}
+<span class="sub">${ "(optional)" | translate }</span>
+{% endif %}
+{% if field.help %}
+<span class="sub">
+<a href="{% admin "help&id="~field.help %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+</span>
+{% endif %}
+{% if field.note %}
+<span class="sub">$field.note</span>
+{% endif %}
+</label>
+{% if field.type == "text" or field.type == "file" %}
+<input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" {% if field.multiple == "true" %}name="$field.attr[]" multiple{% else %}name="$field.attr"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="${ field.attr }_field"{% if field.preview %} data-preview="$field.preview"{% endif %}>
+<p>
+{% if field.type == "file" and ( post.filename or post.filenames ) and route.action == "edit_post" %}
+{% if post.filename %}
+<em>${ "Current file name:" | translate }</em>
+<strong>${ post.filename | escape }</strong>
+{% else %}
+<em>${ "Current file names:" | translate }</em>
+<strong>
+<ul>
+{% for name in post.filenames %}<li>${ name | escape }</li>{% endfor %}
+</ul>
+</strong>
+{% endif %}
+{% endif %}
+</p>
+{% elseif field.type == "text_block" %}
+<textarea {% if field.classes %} class="${ field.classes | join(" ") }"{% endif %} rows="${ field.rows | fallback(12) }" name="$field.attr" id="${ field.attr }_field"{% if field.preview %} data-preview="$field.preview"{% endif %}>{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
+{% elseif field.type == "checkbox" %}
+<input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr"{% if field.checked %}checked="checked"{% endif %} id="${ field.attr }_field">
+{% elseif field.type == "select" %}
+<select name="$field.attr" id="${ field.attr }_field"{% if field.classes %} class="${ field.classes | join(" ") }"{% endif %}>
+{% for value, name in field.options | items %}
+<option value="${ value | escape }"{% if not field.no_value %}${ value | option_selected(post[field.attr]) }{% endif %}>${ name | escape }</option>
+{% endfor %}
+</select>
+{% endif %}
+$field.extra
+</p>
+{% endfor %}
 ${ trigger.call("after_post_fields", feather) }
-                        <div id="more_options" class="more_options">
-                            {% if visitor.group.can("add_post") %}
-                            <p class="more_options_option">
-                                <label for="status">${ "Status" | translate }</label>
-                                <select name="status" id="status">
-                                    {% if route.action == "edit_post" %}
-                                    <option value="draft"${ post.status | option_selected("draft") }>${ "Draft" | translate }</option>
-                                    {% endif %}
-                                    <option value="public"${ post.status | option_selected("public") }>${ "Public" | translate }</option>
-                                    <option value="private"${ post.status | option_selected("private") }>${ "Private" | translate }</option>
-                                    <option value="scheduled"${ post.status | option_selected("scheduled") }>${ "Scheduled" | translate }</option>
-                                    <option value="registered_only"${ post.status | option_selected("registered_only") }>${ "Registered Only" | translate }</option>
-                                    {% if groups %}
-                                    <optgroup label="${ "Group" | translate }">
-                                        {% for group in groups %}
-                                        <option value="{$group.id}"${ post.status | option_selected("{"~ group.id ~"}") }>${ group.name | escape }</option>
-                                        {% endfor %}
-                                    </optgroup>
-                                    {% endif %}
-                                </select>
-                            </p>
-                            {% endif %}
-                            <p class="more_options_option">
-                                <label for="pinned">
-                                    ${ "Pinned?" | translate }
-                                    <span class="sub">${ "(shows this post above all others)" | translate }</span>
-                                </label>
-                                <input type="checkbox" name="pinned" id="pinned"{% if post.pinned %} checked="checked"{% endif %}>
-                            </p>
-                            <p class="more_options_option">
-                                <label for="slug">
-                                    ${ "Slug" | translate }
-                                    <a href="{% admin "help&id=slugs" %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
-                                </label>
-                                <input class="text" type="text" name="slug" value="${ post.slug | escape }" id="slug">
-                            </p>
-                            <p class="more_options_option">
-                                <label for="created_at">${ "Timestamp" | translate }</label>
-                                <input class="text" type="text" name="created_at" value="${ post.created_at | fallback(now | date("r")) | strftime }" id="created_at">
-                                <input type="hidden" name="original_time" value="${ post.created_at | fallback(now | date("r")) | strftime }">
-                            </p>
-                            {% for field in options %}
-                            <p class="more_options_option">
-                                <label for="${ field.attr | replace("[", "_") | replace("]", "") }">
-                                    $field.label
-                                    {% if field.help %}
-                                    <span class="sub">
-                                        <a href="{% admin "help&id="~field.help %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
-                                    </span>
-                                    {% endif %}
-                                    {% if field.note %}
-                                    <span class="sub">$field.note</span>
-                                    {% endif %}
-                                </label>
-                                {% if field.type == "text" or field.type == "file" %}
-                                <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr" value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="$field.attr">
-                                {% elseif field.type == "text_block" %}
-                                <textarea class="wide{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" rows="${ field.rows | fallback(12) }" name="$field.attr" id="$field.attr" cols="50">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
-                                {% elseif field.type == "checkbox" %}
-                                <input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr"{% if field.checked %}checked="checked"{% endif %} id="${ field.attr }_field">
-                                {% elseif field.type == "select" %}
-                                <select name="$field.attr" id="$field.attr"{% if field.classes %} class="${ field.classes | join(" ") }"{% endif %}>
-                                    {% for option in field.options %}
-                                    <option value="${ option.value | escape }"${ option.selected | option_selected(true) }>${ option.name | escape }</option>
-                                    {% endfor %}
-                                </select>
-                                {% endif %}
-                                $field.extra
-                            </p>
-                            {% endfor %}
-                            <hr>
-                        </div>
-                        <div class="buttons confirmation">
-                            {% if route.action == "edit_post" %}
-                            {% if visitor.group.can("add_post") and post.status == "draft" %}
-                            <button type="submit" class="yay" accesskey="s" id="publish" name="publish">
-                                <img src="$theme_url/images/icons/success.svg" alt="success">${ "Publish" | translate }
-                            </button>
-                            {% endif %}
-                            <button type="submit" accesskey="s" id="save">
-                                <img src="$theme_url/images/icons/save.svg" alt="success">${ "Save" | translate }
-                            </button>
-                            {% else %}
-                            {% if visitor.group.can("add_post") %}
-                            <button type="submit" class="yay" accesskey="s" id="publish">
-                                <img src="$theme_url/images/icons/success.svg" alt="success">${ "Publish" | translate }
-                            </button>
-                            {% endif %}
-                            <button type="submit" accesskey="s" id="save" name="draft" value="true">
-                                <img src="$theme_url/images/icons/save.svg" alt="success">${ "Save" | translate }
-                            </button>
-                            {% endif %}
-                        </div>
-                    </div>
+<div id="more_options" class="more_options">
+{% if visitor.group.can("add_post") %}
+<p class="more_options_option">
+<label for="status">${ "Status" | translate }</label>
+<select name="status" id="status">
+{% if route.action == "edit_post" %}
+<option value="draft"${ post.status | option_selected("draft") }>${ "Draft" | translate }</option>
+{% endif %}
+<option value="public"${ post.status | option_selected("public") }>${ "Public" | translate }</option>
+<option value="private"${ post.status | option_selected("private") }>${ "Private" | translate }</option>
+<option value="scheduled"${ post.status | option_selected("scheduled") }>${ "Scheduled" | translate }</option>
+<option value="registered_only"${ post.status | option_selected("registered_only") }>${ "Registered Only" | translate }</option>
+{% if groups %}
+<optgroup label="${ "Group" | translate }">
+{% for group in groups %}
+<option value="{$group.id}"${ post.status | option_selected("{"~ group.id ~"}") }>${ group.name | escape }</option>
+{% endfor %}
+</optgroup>
+{% endif %}
+</select>
+</p>
+{% endif %}
+<p class="more_options_option">
+<label for="pinned">
+${ "Pinned?" | translate }
+<span class="sub">${ "(shows this post above all others)" | translate }</span>
+</label>
+<input type="checkbox" name="pinned" id="pinned"{% if post.pinned %} checked="checked"{% endif %}>
+</p>
+<p class="more_options_option">
+<label for="slug">
+${ "Slug" | translate }
+<a href="{% admin "help&id=slugs" %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+</label>
+<input class="text" type="text" name="slug" value="${ post.slug | escape }" id="slug">
+</p>
+<p class="more_options_option">
+<label for="created_at">${ "Timestamp" | translate }</label>
+<input class="text" type="text" name="created_at" value="${ post.created_at | fallback(now | date("r")) | strftime }" id="created_at">
+<input type="hidden" name="original_time" value="${ post.created_at | fallback(now | date("r")) | strftime }">
+</p>
+{% for field in options %}
+<p class="more_options_option">
+<label for="${ field.attr | replace("[", "_") | replace("]", "") }">
+$field.label
+{% if field.help %}
+<span class="sub">
+<a href="{% admin "help&id="~field.help %}" target="_blank" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="help"></a>
+</span>
+{% endif %}
+{% if field.note %}
+<span class="sub">$field.note</span>
+{% endif %}
+</label>
+{% if field.type == "text" or field.type == "file" %}
+<input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr" value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="$field.attr">
+{% elseif field.type == "text_block" %}
+<textarea class="wide{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" rows="${ field.rows | fallback(12) }" name="$field.attr" id="$field.attr" cols="50">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
+{% elseif field.type == "checkbox" %}
+<input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr"{% if field.checked %}checked="checked"{% endif %} id="${ field.attr }_field">
+{% elseif field.type == "select" %}
+<select name="$field.attr" id="$field.attr"{% if field.classes %} class="${ field.classes | join(" ") }"{% endif %}>
+{% for option in field.options %}
+<option value="${ option.value | escape }"${ option.selected | option_selected(true) }>${ option.name | escape }</option>
+{% endfor %}
+</select>
+{% endif %}
+$field.extra
+</p>
+{% endfor %}
+<hr>
+</div>
+<div class="buttons confirmation">
+{% if route.action == "edit_post" %}
+{% if visitor.group.can("add_post") and post.status == "draft" %}
+<button type="submit" class="yay" accesskey="s" id="publish" name="publish">
+<img src="$theme_url/images/icons/success.svg" alt="success">${ "Publish" | translate }
+</button>
+{% endif %}
+<button type="submit" accesskey="s" id="save">
+<img src="$theme_url/images/icons/save.svg" alt="success">${ "Save" | translate }
+</button>
+{% else %}
+{% if visitor.group.can("add_post") %}
+<button type="submit" class="yay" accesskey="s" id="publish">
+<img src="$theme_url/images/icons/success.svg" alt="success">${ "Publish" | translate }
+</button>
+{% endif %}
+<button type="submit" accesskey="s" id="save" name="draft" value="true">
+<img src="$theme_url/images/icons/save.svg" alt="success">${ "Save" | translate }
+</button>
+{% endif %}
+</div>
+</div>

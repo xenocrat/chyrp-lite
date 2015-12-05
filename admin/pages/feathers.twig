@@ -3,59 +3,59 @@
 {% block title %}${ "Feathers" | translate }{% endblock %}
 
 {% block content %}
-            <h2>${ "Feathers" | translate }</h2>
-            <ul id="feathers_enabled" class="extend feathers">
-                <h5>${ "Enabled" | translate }</h5>
-                {% for safename, feather in enabled_feathers | items %}
-                <li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
-                    <h3>
-                        <a class="emblem feather_url" href="$feather.url" target="_blank">
-                            <img src="$theme_url/images/icons/info.svg" alt="${ feather.url | escape }">
-                        </a>
-                        $feather.name {# translation is done in the controller #}
-                    </h3>
-                    {% if feather.help %}
-                    <a href="{% admin "help&id=" ~ feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
-                    {% endif %}
-                    <p class="feather_description">
-                        $feather.description {# translation is done in the controller #}
-                    </p>
-                    <div class="controls">
-                        <a class="button feather_disabler" href="{% admin "disable&feather=" ~ safename ~ "&hash=" ~ ip | token %}">
-                            <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
-                        </a>
-                        <a class="button feather_enabler" href="{% admin "enable&feather=" ~ safename ~ "&hash=" ~ ip | token %}">
-                            <img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
-                        </a>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-            <ul id="feathers_disabled" class="extend feathers">
-                <h5>${ "Disabled" | translate }</h5>
-                {% for safename, feather in disabled_feathers | items %}
-                <li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
-                    <h3>
-                        <a class="emblem feather_url" href="$feather.url" target="_blank">
-                            <img src="$theme_url/images/icons/info.svg" alt="${ feather.url | escape }">
-                        </a>
-                        $feather.name {# translation is done in the controller #}
-                    </h3>
-                    {% if feather.help %}
-                    <a href="{% admin "help&id=" ~ feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
-                    {% endif %}
-                    <p class="feather_description">
-                        $feather.description {# translation is done in the controller #}
-                    </p>
-                    <div class="controls">
-                        <a class="button feather_disabler" href="{% admin "disable&feather=" ~ safename ~ "&hash=" ~ ip | token %}">
-                            <img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
-                        </a>
-                        <a class="button feather_enabler" href="{% admin "enable&feather=" ~ safename ~ "&hash=" ~ ip | token %}">
-                            <img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
-                        </a>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
+<h2>${ "Feathers" | translate }</h2>
+<ul id="feathers_enabled" class="extend feathers">
+<h5>${ "Enabled" | translate }</h5>
+{% for safename, feather in enabled_feathers | items %}
+<li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
+<h3>
+<a class="emblem feather_url" href="$feather.url" target="_blank">
+<img src="$theme_url/images/icons/info.svg" alt="${ feather.url | escape }">
+</a>
+$feather.name {# translation is done in the controller #}
+</h3>
+{% if feather.help %}
+<a href="{% admin "help&id=" ~ feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
+{% endif %}
+<p class="feather_description">
+$feather.description {# translation is done in the controller #}
+</p>
+<div class="controls">
+<a class="button feather_disabler" href="{% admin "disable&feather=" ~ safename ~ "&hash=" ~ ip | token %}">
+<img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
+</a>
+<a class="button feather_enabler" href="{% admin "enable&feather=" ~ safename ~ "&hash=" ~ ip | token %}">
+<img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
+</a>
+</div>
+</li>
+{% endfor %}
+</ul>
+<ul id="feathers_disabled" class="extend feathers">
+<h5>${ "Disabled" | translate }</h5>
+{% for safename, feather in disabled_feathers | items %}
+<li class="feather ${ feather.classes | join(" ") }" id="feather_$safename">
+<h3>
+<a class="emblem feather_url" href="$feather.url" target="_blank">
+<img src="$theme_url/images/icons/info.svg" alt="${ feather.url | escape }">
+</a>
+$feather.name {# translation is done in the controller #}
+</h3>
+{% if feather.help %}
+<a href="{% admin "help&id=" ~ feather.help %}" class="help emblem"><img src="$theme_url/images/icons/help.svg" alt="Help"></a>
+{% endif %}
+<p class="feather_description">
+$feather.description {# translation is done in the controller #}
+</p>
+<div class="controls">
+<a class="button feather_disabler" href="{% admin "disable&feather=" ~ safename ~ "&hash=" ~ ip | token %}">
+<img src="$theme_url/images/icons/deny.svg" alt="Disable">${ "Disable" | translate }
+</a>
+<a class="button feather_enabler" href="{% admin "enable&feather=" ~ safename ~ "&hash=" ~ ip | token %}">
+<img src="$theme_url/images/icons/add.svg" alt="Enable">${ "Enable" | translate }
+</a>
+</div>
+</li>
+{% endfor %}
+</ul>
 {% endblock %}

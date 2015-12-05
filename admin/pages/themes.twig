@@ -3,29 +3,29 @@
 {% block title %}${ "Themes" | translate }{% endblock %}
 
 {% block content %}
-            <h2>${ "Blog Themes" | translate }</h2>
-            <ul id="blog_themes" class="extend themes">
-                {% for theme in themes %}
-                <li class="theme {% if theme.name == site.theme %}current{% endif %}" id="$theme.name">
-                    <img src="$theme.screenshot" alt="${ ('"' ~ theme.info.description ~ '"') | escape } screenshot" class="screenshot" title="${ theme.info.description | escape }">
-                    <h3>
-                        {% if theme.name == site.theme %}
-                        <img class="emblem theme_status" src="$theme_url/images/icons/success.svg" alt="Selected!" title="${ "Selected!" | translate }">
-                        {% endif %}
-                        <a class="emblem module_author" href="$theme.info.url" target="_blank">
-                            <img src="$theme_url/images/icons/info.svg" alt="${ theme.info.url | escape }">
-                        </a>
-                        $theme.info.name {# translation is done in the controller #}
-                    </h3>
-                    <div class="controls">
-                        <a class="button" href="{% admin "change_theme&theme=" ~ theme.name ~ "&hash=" ~ ip | token %}">
-                            <img src="$theme_url/images/icons/success.svg" alt="Select">${ "Select" | translate }
-                        </a>
-                        <a class="button${ preview | selected(theme.name, true) }" href="{% admin "preview_theme&theme=" ~ theme.name ~ "&hash=" ~ ip | token %}">
-                            <img src="$theme_url/images/icons/magnifier.svg" alt="Preview">${ "Preview" | translate }
-                        </a>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
+<h2>${ "Blog Themes" | translate }</h2>
+<ul id="blog_themes" class="extend themes">
+{% for theme in themes %}
+<li class="theme {% if theme.name == site.theme %}current{% endif %}" id="$theme.name">
+<img src="$theme.screenshot" alt="${ ('"' ~ theme.info.description ~ '"') | escape } screenshot" class="screenshot" title="${ theme.info.description | escape }">
+<h3>
+{% if theme.name == site.theme %}
+<img class="emblem theme_status" src="$theme_url/images/icons/success.svg" alt="Selected!" title="${ "Selected!" | translate }">
+{% endif %}
+<a class="emblem module_author" href="$theme.info.url" target="_blank">
+<img src="$theme_url/images/icons/info.svg" alt="${ theme.info.url | escape }">
+</a>
+$theme.info.name {# translation is done in the controller #}
+</h3>
+<div class="controls">
+<a class="button" href="{% admin "change_theme&theme=" ~ theme.name ~ "&hash=" ~ ip | token %}">
+<img src="$theme_url/images/icons/success.svg" alt="Select">${ "Select" | translate }
+</a>
+<a class="button${ preview | selected(theme.name, true) }" href="{% admin "preview_theme&theme=" ~ theme.name ~ "&hash=" ~ ip | token %}">
+<img src="$theme_url/images/icons/magnifier.svg" alt="Preview">${ "Preview" | translate }
+</a>
+</div>
+</li>
+{% endfor %}
+</ul>
 {% endblock %}

@@ -1,23 +1,23 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
-    <div class="user_controls standalone">
-      <h2>${ "Controls" | translate }</h2>
-      <form action="{% url "controls" %}" method="post">
-        <label for="full_name">${ "Full name" | translate }</label>
-        <input type="text" name="full_name" value="${ visitor.full_name | escape }" id="full_name" tabindex="1">
-        <label for="email">${ "Email" | translate }</label>
-        <input type="email" name="email" value="${ visitor.email | escape }" id="email" tabindex="2">
-        <label for="website">${ "Website" | translate }</label>
-        <input type="text" name="website" value="${ visitor.website | escape }" id="website" tabindex="3">
-        <label for="new_password1">${ "New password?" | translate }</label>
-        <input type="password" name="new_password1" value="" id="new_password1">
-        <label for="new_password2">${ "Confirm" | translate }</label>
-        <input type="password" name="new_password2" value="" id="new_password2">
+<div class="user_controls standalone">
+<h2>${ "Controls" | translate }</h2>
+<form action="{% url "controls" %}" method="post">
+<label for="full_name">${ "Full name" | translate }</label>
+<input type="text" name="full_name" value="${ visitor.full_name | escape }" id="full_name" tabindex="1">
+<label for="email">${ "Email" | translate }</label>
+<input type="email" name="email" value="${ visitor.email | escape }" id="email" tabindex="2">
+<label for="website">${ "Website" | translate }</label>
+<input type="text" name="website" value="${ visitor.website | escape }" id="website" tabindex="3">
+<label for="new_password1">${ "New password?" | translate }</label>
+<input type="password" name="new_password1" value="" id="new_password1">
+<label for="new_password2">${ "Confirm" | translate }</label>
+<input type="password" name="new_password2" value="" id="new_password2">
 ${ trigger.call("user_controls") }
-        <div class="doaction">
-          <button name="submit" type="submit" id="submit" tabindex="4">${ "Update" | translate }</button>
-        </div>
-      </form>
-    </div>
+<div class="doaction">
+<button name="submit" type="submit" id="submit" tabindex="4">${ "Update" | translate }</button>
+</div>
+</form>
+</div>
 {% endblock %}

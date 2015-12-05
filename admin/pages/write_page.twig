@@ -3,10 +3,10 @@
 {% block title %}${ "Add Page" | translate }{% endblock %}
 
 {% block content %}
-            <form id="write_form" action="{% admin "add_page" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                <fieldset>
+<form id="write_form" action="{% admin "add_page" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<fieldset>
 {% include "partials/page_fields.twig" %}
-                    <input type="hidden" name="hash" value="${ ip | token }" id="hash">
-                </fieldset>
-            </form>
+<input type="hidden" name="hash" value="${ ip | token }" id="hash">
+</fieldset>
+</form>
 {% endblock %}
