@@ -304,6 +304,12 @@ li.feather div.controls {                       position: absolute;
 /* @end */
 
 /* @group Forms */
+input::-webkit-input-placeholder,
+input:-moz-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder,
+input:input-placeholder {                       color: #ddd;
+                                                opacity: 1 }
 label {                                         line-height: 2 }
 input[type="text"],
 input[type="email"],
@@ -774,7 +780,7 @@ img#likeImage_preview {                         max-width: 28px;
                                                 width: 3em !important }
     form.split small,
     form.split .small,
-    form.split .buttons {                         margin-left: 0em }
+    form.split .buttons {                       margin-left: 0em }
     input.text,
     input[type="text"],
     input[type="email"],
