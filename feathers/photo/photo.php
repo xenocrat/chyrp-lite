@@ -72,7 +72,10 @@
             if ($post->feather != "photo")
                 return;
 
-            unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
+            $filepath = uploaded($post->filename, false);
+
+            if (file_exists($filepath))
+                unlink($filepath);
         }
 
         public function filter_post($post) {

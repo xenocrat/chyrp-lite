@@ -65,7 +65,10 @@
             if ($post->feather != "audio")
                 return;
 
-            unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
+            $filepath = uploaded($post->filename, false);
+
+            if (file_exists($filepath))
+                unlink($filepath);
         }
 
         public function filter_post($post) {
@@ -116,8 +119,8 @@
                 return $trigger->call("audio_player", $filename, $params, $post);
 
             $player = "\n".'<audio controls>';
-            $player.= "\n\t".__("Your web browser does not support the <code>audio</code> element.", "audio");
-            $player.= "\n\t".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
+            $player.= "\n".__("Your web browser does not support the <code>audio</code> element.", "audio");
+            $player.= "\n".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
             $player.= "\n".'</audio>'."\n";
 
             return $player;
