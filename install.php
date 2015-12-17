@@ -54,11 +54,14 @@
     $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
     set_timezone($timezone);
 
-    # Ask PHP for the default locale and try to load an appropriate translator
-    $language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
+    if (class_exists("Locale")) {
+        # Ask PHP for the default locale and try to load an appropriate translator.
+        $locale = Locale::getDefault();
+        $language = Locale::getPrimaryLanguage($locale)."_".Locale::getRegion($locale);
 
-    if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$language.".mo"))
-        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
+        if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$language.".mo"))
+            load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
+    }
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
