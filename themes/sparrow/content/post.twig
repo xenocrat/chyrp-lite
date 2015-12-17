@@ -1,48 +1,48 @@
-<article class="post $post.feather{% if post.pinned %} pinned{% endif %}" id="post_$post.id">
+<article class="post {{ post.feather }}{{ post.pinned ? ' pinned' : '' }}" id="post_{{ post.id }}">
 {% block content %}{% endblock %}
 <footer>
-{% if ( post.linked_tags | length > 0 ) or ( enabled_modules.categorize and post.category.id != 0 ) %}
+{% if (module_enabled("tags") and post.linked_tags | length > 0) or (module_enabled("categorize") and post.category is defined) %}
 <div role="note" class="category tags postinfo">
-{% if enabled_modules.categorize and post.category.id != 0 %}
-<a class="category category$post.category.id" href="$post.category.url" rel="tag">$post.category.name</a>
+{% if module_enabled("categorize") and post.category is defined %}
+<a class="category category_{{ post.category.id }}" href="{{ post.category.url }}" rel="tag">{{ post.category.name }}</a>
 {% endif %}
-{% if ( post.linked_tags | length > 0 ) %}
-<a href="{% url "tags" %}">${ "Tags" | translate }:</a> ${ post.linked_tags | join(" ") }
+{% if (module_enabled("tags") and post.linked_tags | length > 0) %}
+<a href="{{ url('tags') }}">{{ "Tags" | translate }}:</a> {{ post.linked_tags | join(" ") }}
 {% endif %}
 </div>
 {% endif %}
 {% if post.editable or post.deletable %}
 <div class="doaction admin">
-$post.edit_link ${ post.delete_link("Delete" | translate) }
+{{ post.edit_link }} {{ post.delete_link("Delete" | translate) }}
 </div>
 {% endif %}
 <div role="note" class="metadata">
-<a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;">
+<a href="{{ post.grab_url }}" rel="bookmark" title="{{ 'Permanent link to' | translate }} &quot;{{ post.title | striptags | fix(true) }}&quot;">
 {% if post.status == "private" %}
-${ "Private" | translate }
+{{ "Private" | translate }}
 {% elseif post.status == "scheduled" %}
-${ "Scheduled" | translate }
+{{ "Scheduled" | translate }}
 {% elseif post.pinned %}
-${ "Pinned" | translate }
+{{ "Pinned" | translate }}
 {% else %}
-${ post.created_at | strftime("%d %b, %Y" | translate) }
+{{ post.created_at | strftimeformat("%d %b, %Y" | translate) }}
 {% endif %}
 </a>
-{% if enabled_modules.likes and visitor.group.can("like_post") %}
-{% if post.get_likes %}&bull; $post.get_likes{% endif %}
+{% if module_enabled("likes") and visitor.group.can("like_post") %}
+{% if post.get_likes %}&bull; {{ post.get_likes }}{% endif %}
 {% endif %}
-{% if enabled_modules.comments %}
+{% if module_enabled("comments") %}
 {% if post.comment_status == "closed" %}
-&bull; ${ "Comments closed" | translate }
+&bull; {{ "Comments closed" | translate }}
 {% else %}
 &bull;
-<a href="$post.url#comments" rel="bookmark" title="${ "View comments" | translate }">
-${ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }
+<a href="{{ post.grab_url }}#comments" rel="bookmark" title="{{ "View comments" | translate }}">
+{{ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }}
 </a>
 {% endif %}
 {% endif %}
-{% if enabled_modules.rights %}
-&bull;{% if post['rights_holder'] %} &copy; ${post['rights_holder']},{% endif %} $post.licence_link
+{% if module_enabled("rights") and post.rights_holder is defined %}
+&bull;{% if post.rights_holder is not empty %} &copy; {{ post.rights_holder }},{% endif %} {{ post.licence_link }}
 {% endif %}
 </div>
 </footer>

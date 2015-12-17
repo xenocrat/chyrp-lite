@@ -444,40 +444,40 @@ div.category a.category:active {                top: 1px;
                                                 color: #ffffff;
                                                 background-color: #949799;
                                                 border: 1px #949799 solid }
-div.category a.category1:link,
-div.category a.category1:visited {              background-color: #71b67b;
+div.category a.category_1:link,
+div.category a.category_1:visited {             background-color: #71b67b;
                                                 border: 1px #71b67b solid }
-div.category a.category1:focus,
-div.category a.category1:hover,
-div.category a.category1:active {               background-color: #609c69;
+div.category a.category_1:focus,
+div.category a.category_1:hover,
+div.category a.category_1:active {              background-color: #609c69;
                                                 border: 1px #609c69 solid }
-div.category a.category2:link,
-div.category a.category2:visited {              background-color: #ed5fb4;
+div.category a.category_2:link,
+div.category a.category_2:visited {             background-color: #ed5fb4;
                                                 border: 1px #ed5fb4 solid }
-div.category a.category2:focus,
-div.category a.category2:hover,
-div.category a.category2:active {               background-color: #d455a1;
+div.category a.category_2:focus,
+div.category a.category_2:hover,
+div.category a.category_2:active {              background-color: #d455a1;
                                                 border: 1px #d455a1 solid }
-div.category a.category3:link,
-div.category a.category3:visited {              background-color: #61bdf0;
+div.category a.category_3:link,
+div.category a.category_3:visited {             background-color: #61bdf0;
                                                 border: 1px #61bdf0 solid }
-div.category a.category3:focus,
-div.category a.category3:hover,
-div.category a.category3:active {               background-color: #56a9d6;
+div.category a.category_3:focus,
+div.category a.category_3:hover,
+div.category a.category_3:active {              background-color: #56a9d6;
                                                 border: 1px #56a9d6 solid }
-div.category a.category4:link,
-div.category a.category4:visited {              background-color: #e0922f;
+div.category a.category_4:link,
+div.category a.category_4:visited {             background-color: #e0922f;
                                                 border: 1px #e0922f solid }
-div.category a.category4:focus,
-div.category a.category4:hover,
-div.category a.category4:active {               background-color: #c7832a;
+div.category a.category_4:focus,
+div.category a.category_4:hover,
+div.category a.category_4:active {              background-color: #c7832a;
                                                 border: 1px #c7832a solid }
-div.category a.category5:link,
-div.category a.category5:visited {              background-color: #9764a5;
+div.category a.category_5:link,
+div.category a.category_5:visited {             background-color: #9764a5;
                                                 border: 1px #9764a5 solid }
-div.category a.category5:focus,
-div.category a.category5:hover,
-div.category a.category5:active {               background-color: #80568c;
+div.category a.category_5:focus,
+div.category a.category_5:hover,
+div.category a.category_5:active {              background-color: #80568c;
                                                 border: 1px #80568c solid }
 div.metadata a {                                color: #999491 }
 div.metadata a:hover {                          color: #000000 }

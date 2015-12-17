@@ -2,7 +2,7 @@
 return array(
     "name"        	=> __("Sparrow", "sparrow"),
     "url"         	=> "http://chyrplite.net/",
-    "version"     	=> 1.0,
+    "version"     	=> 2.0,
     "description" 	=> __("An unobtrusive tumbleblog theme for Chyrp Lite.", "sparrow"),
     "author"      	=> array(
         "name"    	=> "Daniel Pimley",

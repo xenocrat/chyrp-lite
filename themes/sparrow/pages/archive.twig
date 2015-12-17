@@ -1,33 +1,36 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
-{% if archives %} {# List? (For all/yearly archives) #}
+{% if archives is not empty %}
+{# List? (For all/yearly archives) #}
 <div class="archive standalone">
 {% for archive in archives %}
-<h3 id="label_${ archive.timestamp }_archive" class="archive"><a href="$archive.url">${ archive.timestamp | strftime("%B %Y" | translate) }</a></h3>
-<ul aria-labelledby="label_${ archive.timestamp }_archive" class="archive{% if GET.year != null %} yearly{% endif %}">
+<h3 id="label_{{ archive.timestamp }}_archive" class="archive"><a href="{{ archive.url }}">{{ archive.timestamp | strftime("%B %Y" | translate) }}</a></h3>
+<ul aria-labelledby="label_{{ archive.timestamp }}_archive" class="archive{{ GET.year != null ? ' yearly' : '' }}">
 {% for post in archive.posts %}
 <li>
-{% if GET.year != null %} {# Yearly archive: display thumbnails #}
-<article class="post archive $post.feather" id="post_$post.id">
+{% if GET.year != null %}
+{# Yearly archive: display thumbnails #}
+<article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
 {% if post.title %}
-<h4 class="yearly">${ post.title | normalize | truncate(20) }</h4>
+<h4 class="yearly">{{ post.title | normalize | truncate(20) }}</h4>
 {% else %}
-<h4 class="yearly">${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
+<h4 class="yearly">{{ post.created_at | strftime("%d %b, %Y" | translate) }}</h4>
 {% endif %}
 {% if post.feather == "photo" %}
-${ feathers['photo'].image_tag(post, 156, null, "quality=60&amp;square=1", "20vw") }
+{{ feathers['photo'].image_tag(post, 156, null, "quality=60&amp;square=1", "20vw") }}
 {% else %}
-<p>${ post.excerpt | read_more("&hellip;more") | strip_tags }</p>
+<p>{{ post.excerpt | read_more("&hellip;more") | striptags }}</p>
 {% endif %}
-<a href="$post.url" class="archive_post_link">${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;</a>
+<a href="{{ post.grab_url }}" class="archive_post_link">{{ "Permanent link to &#8220;%s&#8221;" | translate | format(post.title | striptags | fix(true)) }}</a>
 </article>
-{% else %} {# Complete archive: display titles to minimise content payload #}
-<a href="$post.url">
-{% if post.title %}
-<h4>${ post.title | normalize | truncate(80) }</h4>
 {% else %}
-<h4>${ post.created_at | strftime("%d %b, %Y" | translate) }</h4>
+{# Complete archive: display titles to minimise content payload #}
+<a href="{{ post.grab_url }}">
+{% if post.title is not empty %}
+<h4>{{ post.title | normalize | truncate(80) }}</h4>
+{% else %}
+<h4>{{ post.created_at | strftime("%d %b, %Y" | translate) }}</h4>
 {% endif %}
 </a>
 {% endif %}
@@ -37,26 +40,29 @@ ${ feathers['photo'].image_tag(post, 156, null, "quality=60&amp;square=1", "20vw
 <hr>
 {% endfor %}
 </div>
-{% if preceding.no_results == false %} {# Link to a previous year if we found a post preceding this archive #}
+{% if preceding.no_results == false %}
+{# Link to a previous year if we found a post preceding this archive #}
 <div role="navigation" class="next traversal">
-<a href="{% url 'archive/%s/' | format(preceding.created_at | strftime('%Y')) %}">${ "Archive of %s &rarr;" | translate | format(preceding.created_at | strftime('%Y')) }</a>
+<a href="{{ url("archive/%s/") | format(preceding.created_at | strftime('%Y')) }}">{{ "Archive of %s &rarr;" | translate | format(preceding.created_at | strftime('%Y')) }}</a>
 </div>
 {% endif %}
 {% endif %}
 
-{% if posts.paginated %} {# Posts? (For daily/monthly archives) #}
+{% if posts is defined %}
+{# Posts? (For daily/monthly archives) #}
 {% if archive.depth == "day" %}
-<h3 role="status" class="filter">${ "Archive of %s" | translate | format(archive.timestamp | strftime("%d %B, %Y" | translate)) }</h3>
+<h3 role="status" class="filter">{{ "Archive of %s" | translate | format(archive.timestamp | strftime("%d %B, %Y" | translate)) }}</h3>
 {% endif %}
 {% if archive.depth == "month" %}
-<h3 role="status" class="filter">${ "Archive of %s" | translate | format(archive.timestamp | strftime("%B %Y" | translate)) }</h3>
+<h3 role="status" class="filter">{{ "Archive of %s" | translate | format(archive.timestamp | strftime("%B %Y" | translate)) }}</h3>
 {% endif %}
 {% for post in posts.paginated %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
 {% endfor %}
 {% endif %}
 
-{% if not archives and not posts.paginated %} {# No results #}
-<h3 role="status" class="filter">${ "There aren't any posts in the timeframe you specified" | translate }</h3>
+{% if archives is empty and posts is not defined %}
+{# No results #}
+<h3 role="status" class="filter">{{ "There aren't any posts in the timeframe you specified" | translate }}</h3>
 {% endif %}
 {% endblock %}

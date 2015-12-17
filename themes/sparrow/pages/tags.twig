@@ -1,16 +1,16 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
-{% if tag_cloud %}
+{% if tag_cloud is empty %}
 <div class="tags standalone">
-<h2>${ "Tag cloud" | translate }</h2>
+<h2>{{ "Tag cloud" | translate }}</h2>
 {% for tag in tag_cloud %}
-<a class="tag" href="$tag.url" style="font-size: $tag.size%" title="$tag.title">$tag.name</a>
+<a class="tag" href="{{ tag.url }}" style="font-size: {{ tag.size }}%" title="{{ tag.title }}">{{ tag.name }}</a>
 {% endfor %}
 </div>
 {% else %}
 <div class="ribbon">
-<h3 class="ribbon">${ "There aren't any tags yet" | translate }</h3>
+<h3 class="ribbon">{{ "There aren't any tags yet" | translate }}</h3>
 </div>
 {% endif %}
 {% endblock %}
