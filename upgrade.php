@@ -484,7 +484,7 @@ remove_trackbacking();
 foreach ((array) Config::get("enabled_modules") as $module)
     if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
         ob_start();
-        echo $begin = _f("Calling ‘%s’ module's upgrader...", array($module))."\n";
+        echo $begin = _f("Calling %s module's upgrader...", array($module))."\n";
         require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
         if (ob_get_contents() == $begin)
@@ -496,7 +496,7 @@ foreach ((array) Config::get("enabled_modules") as $module)
 foreach ((array) Config::get("enabled_feathers") as $feather)
     if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
         ob_start();
-        echo $begin = _f("Calling ‘%s’ feather's upgrader...", array($feather))."\n";
+        echo $begin = _f("Calling %s feather's upgrader...", array($feather))."\n";
         require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 
         if (ob_get_contents() == $begin)
