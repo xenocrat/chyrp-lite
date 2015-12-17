@@ -1,72 +1,74 @@
-${ trigger.call("before_page_fields") }
+{{ trigger.call("before_page_fields") }}
 <p class="main_options">
-<label for="title">${ "Title" | translate } </label>
-<input class="text" type="text" name="title" value="${ page.title | escape }" id="title" data-preview="markup_title">
+<label for="title">{{ "Title" | translate }}</label>
+<input class="text" type="text" name="title" value="{{ page.title is defined ? page.title | fix : '' }}" id="title" data-preview="markup_title">
 </p>
 <p class="main_options">
 <label for="body">
 {% if site.enable_markdown %}
-<a href="{% admin "help&id=markdown" %}" target="_blank" class="help emblem markdown"><img src="$theme_url/images/icons/markdown.svg" alt="Markdown help"></a>
+<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ theme_url }}/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
-${ "Body" | translate }
+{{ "Body" | translate }}
 </label>
-<textarea rows="12" name="body" id="body" data-preview="markup_text">${ page.body | escape }</textarea>
+<textarea rows="12" name="body" id="body" data-preview="markup_text">{{ page.body is defined ? page.body | fix : "" }}</textarea>
 </p>
-${ trigger.call("after_page_fields") }
+{{ trigger.call("after_page_fields") }}
 <div id="more_options" class="more_options">
 <p class="more_options_option">
-<label for="slug">${ "Slug" | translate }</label>
-<input class="text" type="text" name="slug" value="${ page.slug | escape }" id="slug">
+<label for="slug">{{ "Slug" | translate }}</label>
+<input class="text" type="text" name="slug" value="{{ page.slug is defined ? page.slug | fix : '' }}" id="slug">
 </p>
 <p class="more_options_option">
-<label for="parent_id">${ "Parent" | translate }</label>
+<label for="parent_id">{{ "Parent" | translate }}</label>
 <select name="parent_id" id="parent_id">
-<option value="0">${ "[None]" | translate }</option>
+<option value="0">{{ "[None]" | translate }}</option>
+{% if page is defined %}
 {% for item in theme.pages_list(0, page.id) %}
-<option value="$item.page.id"${ page.parent_id | option_selected(item.page.id) }>${ "&mdash;" | repeat(item.page.depth - 1) } ${ item.page.title | escape }</option>
+<option value="{{ item.page.id }}"{{ page.parent_id is defined ? page.parent_id | selected(item.page.id) : "" }}>{{ "&nbsp;" | repeat(item.page.depth - 1) }}{{ item.page.title | striptags | fix }}</option>
 {% endfor %}
+{% else %}
+{% for item in theme.pages_list(0) %}
+<option value="{{ item.page.id }}"{{ page.parent_id is defined ? page.parent_id | selected(item.page.id) : "" }}>{{ "&nbsp;" | repeat(item.page.depth - 1) }}{{ item.page.title | striptags | fix }}</option>
+{% endfor %}
+{% endif %}
 </select>
 </p>
 <p class="more_options_option">
-<label for="show_in_list">${ "Show in pages list?" | translate }</label>
-<input type="checkbox" name="show_in_list" id="show_in_list"{% if page.show_in_list or route.action == "write_page" %} checked="checked"{% endif %}>
+<label for="show_in_list">{{ "Show in pages list?" | translate }}</label>
+<input type="checkbox" name="show_in_list" id="show_in_list"{{ page.show_in_list is defined ? page.show_in_list | checked : " checked" }}>
 </p>
 <p class="more_options_option">
-<label for="list_order">${ "Priority in pages list" | translate }</label>
+<label for="list_order">{{ "Priority in pages list" | translate }}</label>
 <select name="list_order" id="list_order">
 {% if route.action == "write_page" %}
 {# Ensure an option for current page total +1 is available and selected #}
 <option value="0">1</option>
 {% for item in theme.pages_list(0) %}
-<option value="$loop.index"${ loop.index | option_selected(loop.last) }>${loop.index +1 }</option>
+<option value="{{ loop.index }}"{{ loop.index | selected(loop.last) }}>{{ loop.index +1 }}</option>
 {% endfor %}
 {% else %}
 {# Option count should equal the current page total when editing a page #}
 {% for item in theme.pages_list(0) %}
-<option value="$loop.index0"${ loop.index0 | option_selected(page.list_order) }>${loop.index0 +1 }</option>
+<option value="{{ loop.index0 }}"{{ loop.index0 | selected(page.list_order) }}>{{ loop.index0 +1 }}</option>
 {% endfor %}
 {% endif %}
 </select>
 </p>
 <p class="more_options_option">
-<label for="public">${ "Is this page public?" | translate }</label>
-<input type="checkbox" name="public" id="public"{% if page.public %} checked="checked"{% endif %}>
+<label for="public">{{ "Is this page public?" | translate }}</label>
+<input type="checkbox" name="public" id="public"{{ page.public is defined ? page.public | checked : "" }}>
 </p>
-{% if route.action == "write_page" %}
-${ trigger.call("new_page_options") }
-{% else %}
-${ trigger.call("edit_page_options", page) }
-{% endif %}
+{{ route.action == "write_page" ? trigger.call("new_page_options") : trigger.call("edit_page_options", page) }}
 <hr>
 </div>
 <div class="buttons confirmation">
 {% if route.action == "write_page" %}
 <button type="submit" class="yay" accesskey="s">
-<img src="$theme_url/images/icons/success.svg" alt="success">${ "Publish" | translate }
+<img src="{{ theme_url }}/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
 </button>
 {% else %}
 <button type="submit" accesskey="s">
-<img src="$theme_url/images/icons/success.svg" alt="success">${ "Save" | translate }
+<img src="{{ theme_url }}/images/icons/success.svg" alt="success">{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>
