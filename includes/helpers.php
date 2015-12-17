@@ -138,7 +138,7 @@
         );
 
         foreach($emoji as $key => $value) {
-            $text =  str_ireplace($key, '<span class="emoji">'.$value.'</span>', $text);
+            $text =  str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
         }
         
         return $text;
@@ -876,6 +876,24 @@
      */
     function url($url, $controller = null) {
         return Route::current()->url($url, $controller);
+    }
+
+    /**
+     * Function: admin_url
+     * Returns an admin URL.
+     *
+     * Parameters:
+     *     $action - The admin action.
+     *     $variables - An indexed array of parameters.
+     *
+     */
+    function admin_url($action = "", $params = array()) {
+        $request = !empty($action) ? array("action=".$action) : array() ;
+
+        foreach ($params as $key => $value)
+            $request[] = urlencode($key)."=".urlencode($value);
+
+        return Config::current()->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
     }
 
     /**
@@ -1770,7 +1788,7 @@
      * Source:
      *     http://gravatar.com/site/implement/images/php/
      */
-    function get_gravatar($email, $s = 80, $d = "mm", $r = "g", $img = false, $atts = array()) {
+    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g", $atts = array()) {
         $url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
         if ($img) {
             $url = '<img class="gravatar" src="' . $url . '"';

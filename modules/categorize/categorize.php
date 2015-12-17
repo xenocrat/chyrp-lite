@@ -71,7 +71,7 @@
         }
 
         public function manage_posts_column($post) {
-            echo (isset($post->category->name) && $post->category->id != FALSE)
+            echo (isset($post->category->name) && $post->category->id != false)
                 ? '<td class="post_category">'.$post->category->name.'</td>'
                 : '<td class="post_category">&nbsp;</td>';
         }
@@ -81,15 +81,17 @@
 
             $fields_list[0]["value"] = "0";
             $fields_list[0]["name"] = __("[None]", "categorize");
-            if (!isset($post->category_id))
+
+            if (!isset($post->category_id) or $post->category_id == 0)
                 $fields_list[0]["selected"] = true;
+            else
+                $fields_list[0]["selected"] = false;
 
             if (!empty($categories)) # make sure we don't try to process an empty list.
                 foreach ($categories as $category) {
                     $fields_list[$category["id"]]["value"] = $category["id"];
                     $fields_list[$category["id"]]["name"] = $category["name"];
-                    if (isset($post->category_id))
-                        $fields_list[$category["id"]]["selected"] = ($post ? $post->category_id == $category["id"] : true);
+                    $fields_list[$category["id"]]["selected"] = ($post ? $post->category_id == $category["id"] : false);
                 }
 
             $fields[] = array("attr" => "option[category_id]",

@@ -27,9 +27,26 @@
         private function __construct() {
             $config = Config::current();
 
-            $this->theme = new Twig_Loader(MAIN_DIR.DIR."admin",
-                                          (is_writable(INCLUDES_DIR.DIR."caches") and !DEBUG) ? INCLUDES_DIR.DIR."caches" : null,
-                                          "UTF-8");
+            $cache = (is_writable(INCLUDES_DIR.DIR."caches") and !DEBUG);
+            $loaders[] = new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin");
+
+            foreach ($config->enabled_modules as $extension)
+                if (file_exists(MODULES_DIR.DIR.$extension.DIR."admin"))
+                    $loaders[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$extension.DIR."admin");
+
+            foreach ($config->enabled_feathers as $extension)
+                if (file_exists(FEATHERS_DIR.DIR.$extension.DIR."admin"))
+                    $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$extension.DIR."admin");
+
+            $loader = new Twig_Loader_Chain($loaders);
+            $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
+                                                              "strict_variables" => (DEBUG) ? true : false,
+                                                              "charset" => "UTF-8",
+                                                              "cache" => ($cache) ? INCLUDES_DIR.DIR."caches" : false,
+                                                              "autoescape" => false));
+            $this->twig->addExtension(new Leaf());
+            $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+            $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
 
             # Load the theme translator
             if (file_exists(MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo"))
@@ -1868,12 +1885,14 @@
             $pages = array("manage" => array());
 
             foreach (Config::current()->enabled_feathers as $index => $feather) {
+                $selected = ((isset($_GET['feather']) and $_GET['feather'] == $feather) or
+                            (!isset($_GET['feather']) and $action == "write_post" and !$index)) ? "write_post" : false ;
+
                 $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
                 $subnav["write"]["write_post&feather=".$feather] = array("title" => $info["name"],
                                                                          "show" => $visitor->group->can("add_draft", "add_post"),
                                                                          "attributes" => ' id="feathers['.$feather.']"',
-                                                                         "selected" => (isset($_GET['feather']) and $_GET['feather'] == $feather) or
-                                                                                       (!isset($_GET['feather']) and $action == "write_post" and !$index));
+                                                                         "selected" => $selected);
             }
 
             # Write navs
@@ -2056,33 +2075,15 @@
                                                                                      "/_editor$/"), $action)));
 
             $this->subnav_context($route->action);
-
             $trigger->filter($this->context["selected"], "nav_selected");
-
             $this->context["sql_debug"]  = SQL::current()->debug;
-
             $template = "pages".DIR.$action.".twig";
 
-            $config = Config::current();
-            if (!file_exists(MAIN_DIR.DIR."admin".DIR.$template)) {
-                foreach (array(MODULES_DIR => $config->enabled_modules,
-                               FEATHERS_DIR => $config->enabled_feathers) as $path => $try)
-                    foreach ($try as $extension)
-                        if (file_exists($path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig"))
-                            $template = $path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig";
-            }
-
             try {
-                $this->theme->getTemplate($template)->display($this->context);
+                $this->twig->display($template, $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 $trace = debug_backtrace();
-
-                if (property_exists($e, "filename") and property_exists($e, "lineno")) {
-                    $twig = array("file" => $e->filename, "line" => $e->lineno);
-                    array_unshift($trace, $twig);
-                }
-
                 error(__("Error"), $prettify, $trace);
             }
         }

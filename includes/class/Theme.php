@@ -35,8 +35,8 @@
          *     $exclude - Page ID to exclude from the list. Used in the admin area.
          */
         public function pages_list($start = 0, $exclude = null) {
-            if (isset($this->pages_list[$start]))
-                return $this->pages_list[$start];
+            if (isset($this->pages_list_cache[$start]))
+                return $this->pages_list_cache[$start];
 
             $this->linear_children = array();
             $this->pages_flat = array();
@@ -52,7 +52,7 @@
             $pages = Page::find(array("where" => $where, "order" => "list_order ASC"));
 
             if (empty($pages))
-                return $this->pages_list[$start] = array();
+                return $this->pages_list_cache[$start] = array();
 
             foreach ($pages as $page)
                 $this->end_tags_for[$page->id] = $this->children[$page->id] = array();
@@ -77,7 +77,7 @@
             }
 
             if (!isset($exclude))
-                return $this->pages_list[$start] = $array;
+                return $this->pages_list_cache[$start] = $array;
             else
                 return $array;
         }
@@ -131,8 +131,8 @@
          *     The array. Each entry as "month", "year", and "url" values, stored as an array.
          */
         public function archives_list($limit = 0, $order_by = "created_at", $order = "desc") {
-            if (isset($this->archives_list["$limit,$order_by,$order"]))
-                return $this->archives_list["$limit,$order_by,$order"];
+            if (isset($this->archives_list_cache["$limit,$order_by,$order"]))
+                return $this->archives_list_cache["$limit,$order_by,$order"];
 
             $sql = SQL::current();
             $dates = $sql->select("posts",
@@ -149,6 +149,7 @@
 
             $archives = array();
             $grouped = array();
+
             while ($date = $dates->fetchObject())
                 if (isset($grouped[$date->month." ".$date->year]))
                     $archives[$grouped[$date->month." ".$date->year]]["count"]++;
@@ -161,7 +162,7 @@
                                         "count" => $date->posts);
                 }
 
-            return $this->archives_list["$limit,$order_by,$order"] = $archives;
+            return $this->archives_list_cache["$limit,$order_by,$order"] = $archives;
         }
 
         /**
@@ -172,8 +173,8 @@
          *     $limit - Number of posts to list
          */
         public function recent_posts($limit = 5) {
-            if (isset($this->recent_posts["$limit"]))
-                return $this->recent_posts["$limit"];
+            if (isset($this->recent_posts_cache["$limit"]))
+                return $this->recent_posts_cache["$limit"];
 
             $results = Post::find(array("placeholders" => true,
                                         "where" => array("status" => "public"),
@@ -184,7 +185,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->recent_posts["$limit"] = $posts;
+            return $this->recent_posts_cache["$limit"] = $posts;
         }
 
         /**
@@ -199,8 +200,8 @@
             if ($post->no_results)
                 return;
 
-            if (isset($this->related_posts["$post->id"]["$limit"]))
-                return $this->related_posts["$post->id"]["$limit"];
+            if (isset($this->related_posts_cache["$post->id"]["$limit"]))
+                return $this->related_posts_cache["$post->id"]["$limit"];
 
             $ids = array();
 
@@ -219,7 +220,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->related_posts["$post->id"]["$limit"] = $posts;
+            return $this->related_posts_cache["$post->id"]["$limit"] = $posts;
         }
 
         /**

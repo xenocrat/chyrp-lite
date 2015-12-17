@@ -141,7 +141,7 @@ function toggle_correspondence() {
     });
 }
 function validate_slug() {
-    $("input#slug").keyup(function(e) {
+    $("input[name='slug']").keyup(function(e) {
         if (/^([a-zA-Z0-9\-\._:]*)$/.test($(this).val()))
             $(this).removeClass("error");
         else

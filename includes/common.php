@@ -260,7 +260,7 @@
 
     # File: Twig
     # Chyrp's templating engine.
-    require_once INCLUDES_DIR.DIR."class".DIR."Twig.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."twig".DIR."Autoloader.php";
 
     # File: Route
     # See Also:
@@ -293,6 +293,10 @@
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
+
+    # Register Twig's autoloader and load Chyrp's extension.
+    Twig_Autoloader::register();
+    require_once INCLUDES_DIR.DIR."class".DIR."Leaf.php";
 
     # Load the config settings.
     $config = Config::current();

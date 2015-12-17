@@ -80,11 +80,6 @@
          *     note - A minor note to display next to the label text.
          */
         protected function setField($options) {
-            fallback($options["classes"], array());
-
-            if (isset($options["class"]))
-                $options["classes"][] = $options["class"];
-
             $this->fields[$options["attr"]] = $options;
         }
     }

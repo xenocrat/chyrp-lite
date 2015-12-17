@@ -40,10 +40,17 @@
                       !PREVIEWING and
                       !defined('CACHE_TWIG') or CACHE_TWIG);
 
-            if (defined('THEME_DIR'))
-                $this->twig = new Twig_Loader(THEME_DIR,
-                                              $cache ? INCLUDES_DIR.DIR."caches" : null,
-                                              "UTF-8");
+            if (defined('THEME_DIR')) {
+                $loader = new Twig_Loader_Filesystem(THEME_DIR);
+                $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
+                                                                  "strict_variables" => (DEBUG) ? true : false,
+                                                                  "charset" => "UTF-8",
+                                                                  "cache" => ($cache) ? INCLUDES_DIR.DIR."caches" : false,
+                                                                  "autoescape" => false));
+                $this->twig->addExtension(new Leaf());
+                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+            }
         }
 
         /**
@@ -823,16 +830,10 @@
             }
 
             try {
-                return $this->twig->getTemplate($file.".twig")->display($this->context);
+                return $this->twig->display($file.".twig", $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 $trace = debug_backtrace();
-
-                if (property_exists($e, "filename") and property_exists($e, "lineno")) {
-                    $twig = array("file" => $e->filename, "line" => $e->lineno);
-                    array_unshift($trace, $twig);
-                }
-
                 error(__("Error"), $prettify, $trace);
             }
         }

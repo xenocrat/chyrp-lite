@@ -20,23 +20,15 @@
                 parent::__construct($_SESSION['user_id']);
         }
 
-        /**
-         * Function: __get
-         * A detour around belongs_to "group" to account for the default Guest group.
-         */
-        public function __get($name) {
-            if (isset($this->$name))
-                return $this->$name;
-            elseif ($name == "group") {
-                if (!isset($this->group_id))
-                    return new Group(Config::current()->guest_group);
-                elseif (isset($this->group_name))
-                    return new Group(null, array("read_from" => array("id" => $this->group_id,
-                                                                      "name" => $this->group_name)));
-                else {
-                    $group = new Group($this->group_id);
-                    return ($group->no_results) ? new Group(Config::current()->default_group) : $group ;
-                }
+        public function group() {
+            if (!isset($this->group_id))
+                return new Group(Config::current()->guest_group);
+            elseif (isset($this->group_name))
+                return new Group(null, array("read_from" => array("id" => $this->group_id,
+                                                                  "name" => $this->group_name)));
+            else {
+                $group = new Group($this->group_id);
+                return ($group->no_results) ? new Group(Config::current()->default_group) : $group ;
             }
         }
 
