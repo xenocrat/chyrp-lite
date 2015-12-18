@@ -17,7 +17,7 @@
 </div>
 {% endif %}
 <div role="note" class="metadata">
-<a href="{{ post.grab_url }}" rel="bookmark" title="{{ 'Permanent link to' | translate }} &quot;{{ post.title | striptags | fix(true) }}&quot;">
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to' | translate }} &quot;{{ post.title | striptags | fix(true) }}&quot;">
 {% if post.status == "private" %}
 {{ "Private" | translate }}
 {% elseif post.status == "scheduled" %}
@@ -36,7 +36,7 @@
 &bull; {{ "Comments closed" | translate }}
 {% else %}
 &bull;
-<a href="{{ post.grab_url }}#comments" rel="bookmark" title="{{ "View comments" | translate }}">
+<a href="{{ post.url() }}#comments" rel="bookmark" title="{{ "View comments" | translate }}">
 {{ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }}
 </a>
 {% endif %}

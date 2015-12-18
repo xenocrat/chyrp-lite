@@ -17,7 +17,7 @@
 <div class="metadata">
 {{ comment.author_email | gravatar(80, true) }}
 <cite>
-{{ '<a href="%s" class="permalink">%s</a>' | format(comment.post.grab_url ~ "#comment_" ~ comment.id, comment.created_at | strftimeformat("%d %B, %Y, at %I:%M %p" | translate)) }}
+{{ '<a href="%s" class="permalink">%s</a>' | format(comment.post.url() ~ "#comment_" ~ comment.id, comment.created_at | strftimeformat("%d %B, %Y, at %I:%M %p" | translate)) }}
 </cite>
 </div>
 </li>

@@ -3,13 +3,13 @@
 {% block content %}
 {% if not post.prev.no_results %}
 <div role="navigation" class="prev traversal">
-<a href="{{ post.prev.grab_url }}">{{ ( "&larr; Next post" | translate ) }}</a>
+<a href="{{ post.prev.url() }}">{{ ( "&larr; Next post" | translate ) }}</a>
 </div>
 {% endif %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
 {% if not post.next.no_results %}
 <div role="navigation" class="next traversal">
-<a href="{{ post.next.grab_url }}">{{ ( "Previous post &rarr;" | translate ) }}</a>
+<a href="{{ post.next.url() }}">{{ ( "Previous post &rarr;" | translate ) }}</a>
 </div>
 {% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}

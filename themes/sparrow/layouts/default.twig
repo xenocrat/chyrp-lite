@@ -34,9 +34,9 @@
 <li role="presentation">
 <a role="menuitem" href="{{ url("feed") }}">{{ "Feed" | translate }}</a>
 </li>
-{% if theme.archives_list is not empty %}
+{% if theme.archives_list() is not empty %}
 <li role="presentation">
-<a role="menuitem" href="{{ url('archive/%s' | format((theme.archives_list | first).year)) }}" rel="archives">{{ "Archive" | translate }}</a>
+<a role="menuitem" href="{{ url('archive/%s' | format((theme.archives_list() | first).year)) }}" rel="archives">{{ "Archive" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
@@ -73,13 +73,13 @@
 <div role="search" class="search_box">
 <form action="{{ site.url }}" method="get" accept-charset="utf-8">
 <input type="hidden" name="action" value="search" id="action">
-<input type="text" id="search_field" name="query" value="{{ route.action == 'search' ? GET.query | fix : '' }}" placeholder="Search&hellip;" title="Search this blog">
+<input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix : '' }}" placeholder="Search&hellip;" title="Search this blog">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>
 </form>
 </div>
 </div>
 </div>
-{% if posts is defined and posts.prev_page is defined %}
+{% if posts is defined and posts.prev_page() %}
 <!-- Navigation -->
 <div role="navigation" class="prev traversal">
 {{ posts.prev_link( ( "&larr; Newer posts" | translate ) ) }}
@@ -89,7 +89,7 @@
 <div id="main" role="main">
 {% block content %}{% endblock %}
 </div>
-{% if posts is defined and posts.next_page is defined %}
+{% if posts is defined and posts.next_page() %}
 <!-- Navigation -->
 <div role="navigation" class="next traversal">
 {{ posts.next_link( ( "Older posts &rarr;" | translate ) ) }}
