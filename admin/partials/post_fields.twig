@@ -64,7 +64,7 @@
 <option value="private"{{ post is defined ? post.status | selected("private") : "" }}>{{ "Private" | translate }}</option>
 <option value="scheduled"{{ post is defined ? post.status | selected("scheduled") : "" }}>{{ "Scheduled" | translate }}</option>
 <option value="registered_only"{{ post is defined ? post.status | selected("registered_only") : "" }}>{{ "Registered Only" | translate }}</option>
-{% if groups is defined and groups is not empty %}
+{% if groups is not empty %}
 <optgroup label="{{ "Group" | translate }}">
 {% for group in groups %}
 <option value="{{ '{' ~ group.id ~ '}' }}"{{ post is defined ? post.status | selected('{' ~ group.id ~ '}') : "" }}>{{ group.name | fix }}</option>
