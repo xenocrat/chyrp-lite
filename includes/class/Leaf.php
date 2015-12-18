@@ -33,10 +33,6 @@
          */
         public function getFilters() {
             return array(   
-                # Native functions
-                new Twig_SimpleFilter("count",                 "count"),
-                new Twig_SimpleFilter("slashes",               "addslashes"),
-
                 # Helpers
                 new Twig_SimpleFilter("camelize",              "camelize"),
                 new Twig_SimpleFilter("decamelize",            "decamelize"),
@@ -173,7 +169,7 @@
         array_shift($try);
 
         foreach ($try as $value)
-            if ((is_array($value) and in_array($test, $value)) or ($test === $value))
+            if ((is_array($value) and in_array($test, $value)) or ($test == $value))
                 return " selected";
     }
 

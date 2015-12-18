@@ -468,14 +468,6 @@
         }
 
         /**
-         * Function: grab_url
-         * Wrapper for grabbing post URLs in Twig templates.
-         */
-        public function grab_url() {
-            return $this->url();
-        }
-
-        /**
          * Function: url
          * Returns a post's URL.
          */

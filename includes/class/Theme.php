@@ -8,9 +8,13 @@
         # The title for the current page.
         public $title = "";
 
+        # Array: $cache
+        # Query cache for methods.
+        private $cache = array();
+
         /**
          * Function: __construct
-         * Loads the Twig parser into <Theme>, and sets up the theme l10n domain.
+         * Loads the theme's info and l10n domain.
          */
         private function __construct() {
             $config = Config::current();
@@ -35,8 +39,8 @@
          *     $exclude - Page ID to exclude from the list. Used in the admin area.
          */
         public function pages_list($start = 0, $exclude = null) {
-            if (isset($this->pages_list_cache[$start]))
-                return $this->pages_list_cache[$start];
+            if (isset($this->cache["pages_list"][$start]))
+                return $this->cache["pages_list"][$start];
 
             $this->linear_children = array();
             $this->pages_flat = array();
@@ -52,7 +56,7 @@
             $pages = Page::find(array("where" => $where, "order" => "list_order ASC"));
 
             if (empty($pages))
-                return $this->pages_list_cache[$start] = array();
+                return $this->cache["pages_list"][$start] = array();
 
             foreach ($pages as $page)
                 $this->end_tags_for[$page->id] = $this->children[$page->id] = array();
@@ -77,7 +81,7 @@
             }
 
             if (!isset($exclude))
-                return $this->pages_list_cache[$start] = $array;
+                return $this->cache["pages_list"][$start] = $array;
             else
                 return $array;
         }
@@ -131,8 +135,8 @@
          *     The array. Each entry as "month", "year", and "url" values, stored as an array.
          */
         public function archives_list($limit = 0, $order_by = "created_at", $order = "desc") {
-            if (isset($this->archives_list_cache["$limit,$order_by,$order"]))
-                return $this->archives_list_cache["$limit,$order_by,$order"];
+            if (isset($this->cache["archives_list"]["$limit,$order_by,$order"]))
+                return $this->cache["archives_list"]["$limit,$order_by,$order"];
 
             $sql = SQL::current();
             $dates = $sql->select("posts",
@@ -162,7 +166,7 @@
                                         "count" => $date->posts);
                 }
 
-            return $this->archives_list_cache["$limit,$order_by,$order"] = $archives;
+            return $this->cache["archives_list"]["$limit,$order_by,$order"] = $archives;
         }
 
         /**
@@ -173,8 +177,8 @@
          *     $limit - Number of posts to list
          */
         public function recent_posts($limit = 5) {
-            if (isset($this->recent_posts_cache["$limit"]))
-                return $this->recent_posts_cache["$limit"];
+            if (isset($this->cache["recent_posts"]["$limit"]))
+                return $this->cache["recent_posts"]["$limit"];
 
             $results = Post::find(array("placeholders" => true,
                                         "where" => array("status" => "public"),
@@ -185,7 +189,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->recent_posts_cache["$limit"] = $posts;
+            return $this->cache["recent_posts"]["$limit"] = $posts;
         }
 
         /**
@@ -200,8 +204,8 @@
             if ($post->no_results)
                 return;
 
-            if (isset($this->related_posts_cache["$post->id"]["$limit"]))
-                return $this->related_posts_cache["$post->id"]["$limit"];
+            if (isset($this->cache["related_posts"]["$post->id"]["$limit"]))
+                return $this->cache["related_posts"]["$post->id"]["$limit"];
 
             $ids = array();
 
@@ -220,7 +224,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->related_posts_cache["$post->id"]["$limit"] = $posts;
+            return $this->cache["related_posts"]["$post->id"]["$limit"] = $posts;
         }
 
         /**
