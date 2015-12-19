@@ -803,6 +803,7 @@
             $this->context["visitor"]      = $visitor;
             $this->context["route"]        = Route::current();
             $this->context["version"]      = CHYRP_VERSION;
+            $this->context["codename"]     = CHYRP_CODENAME;
             $this->context["now"]          = time();
             $this->context["debug"]        = DEBUG;
             $this->context["POST"]         = $_POST;
@@ -813,10 +814,12 @@
             $this->context["visitor"]->logged_in = logged_in();
 
             $this->context["enabled_modules"] = array();
+
             foreach ($config->enabled_modules as $module)
                 $this->context["enabled_modules"][$module] = true;
 
             $context["enabled_feathers"] = array();
+
             foreach ($config->enabled_feathers as $feather)
                 $this->context["enabled_feathers"][$feather] = true;
 
