@@ -1,7 +1,7 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
-{% if tag_cloud is empty %}
+{% if tag_cloud is not empty %}
 <div class="tags standalone">
 <h2>{{ "Tag cloud" | translate }}</h2>
 {% for tag in tag_cloud %}
@@ -9,8 +9,6 @@
 {% endfor %}
 </div>
 {% else %}
-<div class="ribbon">
-<h3 class="ribbon">{{ "There aren't any tags yet" | translate }}</h3>
-</div>
+<h3 role="status" class="filter">{{ "There aren't any tags yet" | translate }}</h3>
 {% endif %}
 {% endblock %}

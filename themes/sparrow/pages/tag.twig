@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if posts.paginated %}
-<h3 role="status" class="filter">{{ "Posts tagged with &#8220;%s&#8221;" | translate | format(tag | fix) }}</h3>
+<h3 role="status" class="filter">{{ "Posts tagged with %s" | translate | format(tag | fix) }}</h3>
 {% endif %}
 {% for post in posts.paginated %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
