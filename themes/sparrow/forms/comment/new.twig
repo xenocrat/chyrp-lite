@@ -8,8 +8,8 @@
 <input type="email" name="email" value="" id="comment_email_field">
 <label for="comment_url_field">{{ "Your website" | translate }}</label>
 <input type="url" name="url" value="" id="comment_url_field">
-{% if site.enable_captcha %}{{ captcha }}{% endif %}
-<label for="comment_body_field">{{ "Your comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
+{% if site.enable_captcha and captcha != false %}{{ captcha }}{% endif %}
+<label for="comment_body_field">{{ "Your comment" | translate }}</label>
 {% endif %}
 <textarea name="body" id="comment_body_field"></textarea>
 {% if visitor.logged_in and site.email_correspondence %}

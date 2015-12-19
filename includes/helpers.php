@@ -1752,7 +1752,7 @@
     function generate_captcha() {
         global $captchaHooks;
         if (!$captchaHooks)
-           return 0;
+           return false;
         return call_user_func($captchaHooks[0] . "::getCaptcha");
     }
 
