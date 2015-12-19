@@ -2,28 +2,28 @@
 {% if visitor.logged_in %}
 <label for="body">{{ "%s's comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
 {% else %}
-<label for="author">{{ "Your name" | translate }}</label>
-<input type="text" name="author" value="" id="author">
-<label for="email">{{ "Your email" | translate }}</label>
-<input type="email" name="email" value="" id="email">
-<label for="url">{{ "Your website" | translate }}</label>
-<input type="url" name="url" value="" id="url">
+<label for="comment_author_field">{{ "Your name" | translate }}</label>
+<input type="text" name="author" value="" id="comment_author_field">
+<label for="comment_email_field">{{ "Your email" | translate }}</label>
+<input type="email" name="email" value="" id="comment_email_field">
+<label for="comment_url_field">{{ "Your website" | translate }}</label>
+<input type="url" name="url" value="" id="comment_url_field">
 {% if site.enable_captcha %}{{ captcha }}{% endif %}
-<label for="body">{{ "Your comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
+<label for="comment_body_field">{{ "Your comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
 {% endif %}
-<textarea name="body" id="new_comment"></textarea>
+<textarea name="body" id="comment_body_field"></textarea>
 {% if visitor.logged_in and site.email_correspondence %}
-<label for="notify">{{ "Notify me when others comment" | translate }}</label>
-<input type="checkbox" name="notify" id="notify">
+<label for="comment_notify_field">{{ "Notify me when others comment" | translate }}</label>
+<input type="checkbox" name="notify" id="comment_notify_field">
 {% endif %}
 <div class="doaction speak">
 {% if visitor.logged_in %}
-<input type="hidden" name="author" value="{{ visitor.full_name | oneof(visitor.login) }}" id="author">
-<input type="hidden" name="email" value="{{ visitor.email }}" id="email">
-<input type="hidden" name="url" value="{{ visitor.website }}" id="url">
+<input type="hidden" name="author" value="{{ visitor.full_name | oneof(visitor.login) }}">
+<input type="hidden" name="email" value="{{ visitor.email }}">
+<input type="hidden" name="url" value="{{ visitor.website }}">
 {% endif %}
-<input type="hidden" name="parent_id" value="0" id="parent_id">
-<input type="hidden" name="post_id" value="{{ post.id }}" id="post_id">
+<input type="hidden" name="parent_id" value="0">
+<input type="hidden" name="post_id" value="{{ post.id }}">
 <button type="submit">{{ "Speak" | translate }}</button>
 </div>
 </form>

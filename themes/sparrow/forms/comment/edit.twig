@@ -1,32 +1,32 @@
 <form id="comment_edit_{{ comment.id }}" class="comment_edit" action="{{ admin('update_comment') }}" method="post" accept-charset="utf-8">
-<label for="body">{{ "Comment" | translate }}</label>
-<textarea name="body" rows="8" cols="40" class="wide">{{ comment.body }}</textarea>
+<label for="comment_body_{{ comment.id }}">{{ "Comment" | translate }}</label>
+<textarea name="body" id="comment_body_{{ comment.id }}">{{ comment.body }}</textarea>
 <a id="more_options_link_{{ comment.id }}" href="#" class="more_options_link">{{ "More Options &darr;" | translate("chyrp") }}</a>
 <div id="more_options_{{ comment.id }}" class="more_options" style="display: none">
-<label for="author">{{ "Author" | translate }}</label>
-<input class="text" type="text" name="author" value="{{ comment.author }}" id="author">
-<label for="author_url">{{ "Author's website" | translate }}</label>
-<input class="text" type="url" name="author_url" value="{{ comment.author_url }}" id="author_url">
-<label for="author_email">{{ "Author's email" | translate }}</label>
-<input class="text" type="email" name="author_email" value="{{ comment.author_email }}" id="author_email">
+<label for="comment_author_{{ comment.id }}">{{ "Author" | translate }}</label>
+<input class="text" type="text" name="author" value="{{ comment.author }}" id="comment_author_{{ comment.id }}">
+<label for="comment_author_url_{{ comment.id }}">{{ "Author's website" | translate }}</label>
+<input class="text" type="url" name="author_url" value="{{ comment.author_url }}" id="comment_author_url_{{ comment.id }}">
+<label for="comment_author_email_{{ comment.id }}">{{ "Author's email" | translate }}</label>
+<input class="text" type="email" name="author_email" value="{{ comment.author_email }}" id="comment_author_email_{{ comment.id }}">
 {% if visitor.group.can("edit_comment") %}
 {# If they can edit all comments, not just this one. #}
-<label for="created_at">{{ "Timestamp" | translate }}</label>
-<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftime('%B %d, %Y %H:%M:%S') }}" id="created_at">
-<label for="status">{{ "Status" | translate }}</label>
-<select name="status" id="status">
+<label for="comment_created_at_{{ comment.id }}">{{ "Timestamp" | translate }}</label>
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftime('%B %d, %Y %H:%M:%S') }}" id="comment_created_at_{{ comment.id }}">
+<label for="comment_status_{{ comment.id }}">{{ "Status" | translate }}</label>
+<select name="status" id="comment_status_{{ comment.id }}">
 <option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate }}</option>
 <option value="denied"{{ comment.status | selected("denied") }}>{{ "Denied" | translate }}</option>
 <option value="spam"{{ comment.status | selected("spam") }}>{{ "Spam" | translate }}</option>
 </select>
 {% endif %}
 {% if site.email_correspondence %}
-<label for="notify">{{ "Email Notifications" | translate }}</label>
-<input type="checkbox" name="notify" id="notify"{{ comment.notify | checked }}>
+<label for="comment_notify_{{ comment.id }}">{{ "Email Notifications" | translate }}</label>
+<input type="checkbox" name="notify" id="comment_notify_{{ comment.id }}"{{ comment.notify | checked }}>
 {% endif %}
 </div>
-<input type="hidden" name="id" value="{{ comment.id }}" id="id">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="id" value="{{ comment.id }}">
+<input type="hidden" name="hash" value="{{ ip | token }}">
 <input type="hidden" name="ajax" value="true">
 <div class="doaction speak">
 <button type="submit" accesskey="s">{{ "Save" | translate }}</button>

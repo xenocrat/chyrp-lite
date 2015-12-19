@@ -81,9 +81,9 @@
 <button type="submit" accesskey="s">{{ "Save" | translate }}</button>
 <a href="#" id="post_cancel_edit_{{ post.id }}" class="cancel">{{ "Cancel" | translate }}</a>
 </div>
-<input type="hidden" name="id" value="{{ post.id }}" id="id">
-<input type="hidden" name="feather" value="{{ post.feather | fix }}" id="feather">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
-<input type="hidden" name="ajax" value="true" id="ajax">
+<input type="hidden" name="id" value="{{ post.id }}">
+<input type="hidden" name="feather" value="{{ post.feather | fix }}">
+<input type="hidden" name="hash" value="{{ ip | token }}">
+<input type="hidden" name="ajax" value="true">
 </fieldset>
 </form>
