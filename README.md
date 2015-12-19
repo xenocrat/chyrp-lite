@@ -122,9 +122,8 @@ copyright holders shall not be used in advertising or otherwise
 to promote the sale, use or other dealings in this Software
 without prior written authorization.
 
-Twig is Copyright 2008 Armin Ronacher,
-distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php)
-with portions distributed under the [GNU General Public License v1.0](https://gnu.org/licenses/old-licenses/gpl-1.0.txt).
+Copyright 2009-2014 by the Twig Team,
+distributed under the [new BSD License](https://raw.githubusercontent.com/twigphp/Twig/1.x/LICENSE).
 jQuery is Copyright jQuery Foundation and other contributors,
 distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).
 Parsedown is Copyright 2013 Emanuil Rusev,
