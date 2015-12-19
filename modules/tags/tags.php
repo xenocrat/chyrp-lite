@@ -202,6 +202,7 @@
                                         "params" => $params));
 
             $ids = array();
+
             foreach ($results[0] as $result)
                 $ids[] = $result["id"];
 
@@ -248,6 +249,7 @@
                     $tag = array("name" => $tag, "clean" => $tags[$tag]);
                     break;
                 }
+
             if (!isset($tag))
                 error(__("Tag Not Found"), __("Could not find the specified tag in the database.", "tags"));
 
@@ -259,6 +261,7 @@
                 error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_GET['id']);
+
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
@@ -273,6 +276,7 @@
                 error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
 
             $post = new Post($_POST['id']);
+
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
@@ -298,6 +302,7 @@
 
             $tags = array();
             $clean = array();
+
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
@@ -344,6 +349,7 @@
                     $tag = array("name" => $tag, "clean" => $tags[$tag]);
                     break;
                 }
+
             if (!isset($tag))
                 error(__("Tag Not Found"), __("Could not find the specified tag in the database.", "tags"));
 
@@ -398,6 +404,7 @@
 
                 foreach ($_POST['post'] as $post_id) {
                     $post = new Post($post_id);
+
                     if (!$post->editable())
                         continue;
 
@@ -438,6 +445,7 @@
             $tags = explode(" ", $_GET['name']);
 
             $likes = array();
+
             foreach ($tags as $name)
                 $likes[] = self::tags_clean_match($name);
 
@@ -447,6 +455,7 @@
                                              "value like all" => $likes));
 
             $ids = array();
+
             foreach ($attributes->fetchAll() as $index => $row) {
                 foreach ($tags as &$tag) {
                     $search = array_search($tag, self::tags_unserialize($row["value"]));
@@ -506,12 +515,14 @@
                 $min_qty = min($popularity);
 
                 $spread = $max_qty - $min_qty;
+
                 if ($spread == 0)
                     $spread = 1;
 
                 $step = 250 / $spread; # Increase for bigger difference.
 
                 $context = array();
+
                 foreach ($popularity as $tag => $count)
                     $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
@@ -565,6 +576,7 @@
                                                   GROUP BY __posts.id
                                                   ORDER BY __posts.created_at DESC
                                                   LIMIT $limit")->fetchAll();
+
                 foreach ($results as $result)
                     if (isset($result["id"]))
                         $ids[] = $result["id"];
