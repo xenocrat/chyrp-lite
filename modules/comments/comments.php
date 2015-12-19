@@ -615,7 +615,7 @@
 
             $comments = $post->comments;
 
-            require "pages/comments_feed.php";
+            require "comments_feed.php";
         }
 
         static function metaWeblog_getPost($struct, $post) {

@@ -64,7 +64,7 @@
                               "label" => __("Tags", "tags"),
                               "note" => __("(comma separated)", "tags"),
                               "type" => "text",
-                              "value" => implode(", ", $tags),
+                              "value" => fix(implode(", ", $tags), true),
                               "extra" => $selector);
 
             return $fields;

@@ -1,0 +1,65 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Edit Comment" | translate("comments") }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Editing Comment" | translate("comments") }}</h1>
+<form id="edit_form" action="{{ admin_url('update_comment') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<fieldset>
+<p class="main_options">
+<label for="body">
+{% if site.enable_markdown %}
+<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ theme_url }}/images/icons/markdown.svg" alt="Markdown help"></a>
+{% endif %}
+{{ "Body" | translate("comments") }}
+</label>
+<textarea rows="12" name="body" id="body" data-preview="markup_text">{{ comment.body | fix }}</textarea>
+</p>
+<div id="more_options" class="more_options">
+<p class="more_options_option">
+<label for="author">{{ "Author" | translate("comments") }}</label>
+<input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author">
+</p>
+<p class="more_options_option">
+<label for="author_email">{{ "Author Email" | translate("comments") }}</label>
+<input class="text" type="text" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email">
+</p>
+<p class="more_options_option">
+<label for="author_url">{{ "Author Website" | translate("comments") }}</label>
+<input class="text" type="text" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url">
+</p>
+{% if visitor.group.can("edit_comment") %}{# If they can edit all comments, not just this one. #}
+<p class="more_options_option">
+<label for="created_at">{{ "Timestamp" | translate("comments") }}</label>
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat }}" id="created_at">
+</p>
+<p class="more_options_option">
+<label for="status">{{ "Status" | translate("comments") }}</label>
+<select name="status" id="status">
+<option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate("comments") }}</option>
+<option value="denied"{{ comment.status | selected("denied") }}>{{ "Denied" | translate("comments") }}</option>
+<option value="spam"{{ comment.status | selected("spam") }}>{{ "Spam" | translate("comments") }}</option>
+<option value="pingback"[{ comment.status | selected("pingback") }}>{{ "Pingback" | translate("comments") }}</option>
+</select>
+</p>
+{% endif %}
+{% if site.email_correspondence %}
+<p class="more_options_option">
+<label for="notify">{{ "Email Notifications" | translate("comments") }}</label>
+<input type="checkbox" name="notify" id="notify"{{ comment.notify | checked }}>
+</p>
+{% endif %}
+{{ trigger.call("edit_comment_options", comment) }}
+<hr>
+</div>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="id" value="{{ comment.id }}" id="id">
+<div class="buttons confirmation">
+<button type="submit" class="yay" accesskey="s">
+<img src="{{ theme_url }}/images/icons/success.svg" alt="success">{{ "Save" | translate("comments") }}
+</button>
+{{ comment.delete_link('<img src="' ~ theme_url ~ '/images/icons/delete.svg" alt="delete">' ~ ("Delete" | translate("comments")), null, null, "button boo") }}
+</div>
+</fieldset>
+</form>
+{% endblock %}

@@ -513,11 +513,9 @@
 <input type="file" name="xml_file" value="" id="xml_file">
 </p>
 <p>
-<label for="media_url">
-<?php echo __("What URL is used for embedded media?", "importers"); ?>
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-</label>
+<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
 <input class="text" type="text" name="media_url" value="" id="media_url">
+<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/wp-content/uploads/</code>.", "importers"); ?>
 </small>
@@ -569,11 +567,9 @@
 <span class="sub"><?php echo __("(if any)", "importers"); ?></span>
 </p>
 <p>
-<label for="media_url">
-<?php echo __("What URL is used for embedded media?", "importers"); ?>
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-</label>
+<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
 <input class="text" type="text" name="media_url" value="" id="media_url">
+<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
 </small>
@@ -605,11 +601,9 @@
 <input class="text" type="text" name="database" value="" id="database">
 </p>
 <p>
-<label for="media_url">
-<?php echo __("What URL is used for embedded media?", "importers"); ?>
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-</label>
+<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
 <input class="text" type="text" name="media_url" value="" id="media_url">
+<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
 </small>
