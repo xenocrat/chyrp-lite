@@ -150,13 +150,8 @@
         return false;
     }
 
-    function twig_filter_inspect($thing) {
-        if (ini_get("xdebug.var_display_max_depth") == -1)
-            return var_dump($thing);
-        else
-            return '<pre class="chyrp_inspect"><code>'.
-                   fix(var_export($thing, true)).
-                   '</code></pre>';
+    function twig_filter_inspect($variable) {
+        return '<pre class="chyrp_inspect"><code>'.fix(var_export($variable, true)).'</code></pre>';
     }
 
     function twig_filter_checked($test) {
