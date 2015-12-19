@@ -1701,7 +1701,7 @@
         $count = 0;
         $items = array();
         foreach ($array as $item) {
-            $string = (is_string($item) and $quotes) ? "&#8220;".$item."&#8221;" : $item ;
+            $string = (is_string($item) and $quotes) ? __("&#8220;").$item.__("&#8221;") : $item ;
             if (count($array) == ++$count and $count !== 1)
                 $items[] = __("and ").$string;
             else
