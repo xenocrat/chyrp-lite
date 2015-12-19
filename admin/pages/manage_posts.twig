@@ -17,7 +17,7 @@
 {% if theme.archives_list() is not empty %}
 <div class="filter_item">
 <h3>{{ "Browse by month:" | translate }}</h3>
-<select name="month" onchange="$(this).parents('form.detail').submit()">
+<select name="month" onchange="$(this).parents('form.filters').submit()">
 <option value="">{{ "[All]" | translate }}</option>
 {% for archive in theme.archives_list() %}
 <option value="{{ archive.when | strftimeformat('%Y-%m') }}"{{ GET.month is defined ? GET.month | selected(archive.when | strftimeformat("%Y-%m")) : "" }}>{{ archive.when | strftimeformat("%B %Y") }} ({{ archive.count }})</option>
@@ -27,7 +27,7 @@
 {% endif %}
 </fieldset>
 </form>
-<h2>{% if GET.query is not empty %}{{ "Search Results" | translate }}{% else %}{{ "Posts" | translate }}{% endif %}</h2>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Posts" | translate }}</h2>
 <table>
 <thead>
 <tr class="head">
@@ -43,7 +43,7 @@
 {% for post in posts.paginated %}
 <tr id="post_{{ post.id }}" class="post {{ post.status_class }}">
 <td class="post_title main">
-<a href="{{ post.url() }}">{% if post.title %}{{ post.title | truncate(40, "&hellip;", true) }}{% else %}{{ "(Untitled)" | translate }}{% endif %}</a>
+<a href="{{ post.url() }}">{{ post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="post_date">
 {{ post.created_at | strftimeformat }}
@@ -55,12 +55,15 @@
 {{ post.author.name is defined ? post.author.name : "" }}
 </td>
 {{ trigger.call("manage_posts_column", post) }}
-{% if post.editable and post.deletable %}
-<td class="controls">{{ post.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ('edit' | translate) ~'">') }}</td>
-<td class="controls">{{ post.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ('delete' | translate) ~'">') }}</td>
-{% elseif post.editable or post.deletable %}
-{{ post.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ('edit' | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }}
-{{ post.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ('delete' | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }}
+{% if post.editable() or post.deletable() %}
+<td class="controls"{{ not post.deletable() ? ' colspan="2"' : '' }}>
+{{ post.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+</td>
+<td class="controls"{{ not post.editable() ? ' colspan="2"' : '' }}>
+{{ post.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+</td>
+{% else %}
+<td class="controls" colspan="2">&nbsp;</td>
 {% endif %}
 </tr>
 {% else %}
@@ -68,7 +71,6 @@
 <td class="placeholder"><span class="sub">{{ "(none)" | translate }}</span></td>
 </tr>
 {% endfor %}
-
 </tbody>
 </table>
 {% if posts.paginated is defined and posts.pages > 1 %}

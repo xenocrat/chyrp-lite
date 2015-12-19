@@ -5,7 +5,7 @@
 {% block content %}
 <h1>{{ "Delete Page?" | translate }}</h1>
 <p>
-{{ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title | striptags) }}
+{{ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title | striptags | oneof("[Untitled]" | translate)) }}
 </p>
 <form class="delete split" action="{{ admin_url('destroy_page') }}" method="post" accept-charset="utf-8">
 <fieldset>

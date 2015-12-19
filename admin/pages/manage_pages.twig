@@ -16,7 +16,7 @@
 </div>
 </fieldset>
 </form>
-<h2>{% if GET.query is not empty %}{{ "Search Results" | translate }}{% else %}{{ "Pages" | translate }}{% endif %}</h2>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Pages" | translate }}</h2>
 <table>
 <thead>
 <tr class="head">
@@ -34,7 +34,7 @@
 {% for page in pages.paginated %}
 <tr id="page_{{ page.id }}" class="page">
 <td class="page_title main">
-<a href="{{ page.url() }}">{{ page.title | truncate }}</a>
+<a href="{{ page.url() }}">{{ page.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="page_created">
 {{ page.created_at | strftimeformat }}
@@ -44,24 +44,29 @@
 </td>
 <td class="page_public">
 {% if page.public %}<img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
-{% else %}&nbsp;
+{% else %}
+&nbsp;
 {% endif %}
 </td>
 <td class="page_show">
 {% if page.show_in_list %}<img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
-{% else %}&nbsp;
+{% else %}
+&nbsp;
 {% endif %}
 </td>
 <td class="page_author">
 {{ page.user.login is defined ? page.user.login : "" }}
 </td>
 {{ trigger.call("manage_pages_column", page) }}
-{% if page.editable and page.deletable %}
-<td class="controls">{{ page.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ('edit' | translate) ~'">') }}</td>
-<td class="controls">{{ page.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ('delete' | translate) ~'">') }}</td>
+{% if page.editable() or page.deletable() %}
+<td class="controls"{{ not page.deletable() ? ' colspan="2"' : '' }}>
+{{ page.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+</td>
+<td class="controls"{{ not page.editable() ? ' colspan="2"' : '' }}>
+{{ page.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+</td>
 {% else %}
-{{ page.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ('edit' | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }}
-{{ page.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ('delete' | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }}
+<td class="controls" colspan="2">&nbsp;</td>
 {% endif %}
 </tr>
 {% else %}

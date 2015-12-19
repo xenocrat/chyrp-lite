@@ -21,7 +21,7 @@
 </div>
 </fieldset>
 </form>
-<h2>{{ "Users" | translate }}</h2>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Users" | translate }}</h2>
 <table>
 <thead>
 <tr class="head">
@@ -54,11 +54,11 @@
 </td>
 {{ trigger.call("manage_users_column", user) }}
 {% if user.editable and user.deletable %}
-<td class="controls">{{ user.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ('edit' | translate) ~'">') }}</td>
-<td class="controls">{{ user.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ('delete' | translate) ~'">') }}</td>
+<td class="controls">{{ user.edit_link('<img src="' ~ theme_url ~ '/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}</td>
+<td class="controls">{{ user.delete_link('<img src="' ~ theme_url ~ '/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}</td>
 {% else %}
-{{ user.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ('edit' | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }}
-{{ user.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ('delete' | translate) ~'">', '<td class="controls" colspan="2">', '</td>') }}
+{{ user.edit_link('<img src="' ~ theme_url ~ '/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', '<td class="controls" colspan="2">', '</td>') }}
+{{ user.delete_link('<img src="' ~ theme_url ~ '/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', '<td class="controls" colspan="2">', '</td>') }}
 {% endif %}
 </tr>
 {% else %}

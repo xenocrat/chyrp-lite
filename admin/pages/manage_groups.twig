@@ -18,7 +18,7 @@
 </div>
 </fieldset>
 </form>
-<h2>{{ "Groups" | translate }}</h2>
+<h2>{{ GET.search is defined ? "Search Results" | translate : "Groups" | translate }}</h2>
 <table>
 <thead>
 <tr class="head">
@@ -42,16 +42,20 @@
 <td class="group_default">
 {% if group.id == site.default_group %}
 <img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{% else %}
+&nbsp;
 {% endif %}
 </td>
 <td class="group_guest">
 {% if group.id == site.guest_group %}
 <img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{% else %}
+&nbsp;
 {% endif %}
 </td>
 {{ trigger.call("manage_groups_column", groups) }}
-<td class="controls">{{ group.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ('edit' | translate) ~'">') }}</td>
-<td class="controls">{{ group.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ('delete' | translate) ~'">') }}</td>
+<td class="controls">{{ group.edit_link('<img src="' ~ theme_url ~ '/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}</td>
+<td class="controls">{{ group.delete_link('<img src="' ~ theme_url ~ '/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}</td>
 </tr>
 {% endfor %}
 </tbody>
