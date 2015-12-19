@@ -21,6 +21,7 @@
                 # Helpers
                 new Twig_SimpleFunction("url",                 "url"),
                 new Twig_SimpleFunction("admin_url",           "admin_url"),
+                new Twig_SimpleFunction("self_url",            "self_url"),
                 new Twig_SimpleFunction("module_enabled",      "module_enabled"),
                 new Twig_SimpleFunction("feather_enabled",     "feather_enabled"),
                 new Twig_SimpleFunction("password_strength",   "password_strength")
