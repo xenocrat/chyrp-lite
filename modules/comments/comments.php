@@ -42,6 +42,8 @@
             Group::add_permission("delete_comment", "Delete Comments");
             Group::add_permission("delete_own_comment", "Delete Own Comments");
             Group::add_permission("code_in_comments", "Can Use HTML In Comments");
+
+            Route::current()->add("comment/(id)/", "comment");
         }
 
         static function __uninstall($confirm) {
@@ -63,6 +65,47 @@
             Group::remove_permission("delete_comment");
             Group::remove_permission("delete_own_comment");
             Group::remove_permission("code_in_comments");
+
+            Route::current()->remove("comment/(id)/");
+        }
+
+        public function main_comment($main) {
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                Flash::warning(__("Please enter an ID to search for a comment.", "comments"), "/");
+
+            $parent_id = (int) $_GET['id'];
+            $comment = new Comment($parent_id);
+
+            if ($comment->no_results)
+                Flash::warning(__("The comment you searched for cannot be found. Perhaps it has been removed.", "comments"), "/");
+
+            $post = new Post($comment->post_id);
+
+            if ($post->no_results)
+                Flash::warning(__("The comment you searched for is associated with a post that cannot be found.", "comments"), "/");
+
+            if (!$post->theme_exists())
+                error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
+
+            if ($post->status == "draft")
+                Flash::message(__("This post is a draft."));
+
+            if ($post->status == "scheduled")
+                Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
+
+            if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
+                Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
+
+            $main->display(array("pages".DIR."view", "pages".DIR."index"),
+                           array("post" => $post,
+                                 "posts" => array($post),
+                                 "parent_id" => $parent_id),
+                           $post->title());
+        }
+
+        public function parse_urls($urls) {
+            $urls["/\/comment\/([0-9]+)/"] = "/?action=comment&id=$1";
+            return $urls;
         }
 
         static function route_add_comment() {

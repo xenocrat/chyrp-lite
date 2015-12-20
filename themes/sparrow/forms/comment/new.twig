@@ -22,7 +22,7 @@
 <input type="hidden" name="email" value="{{ visitor.email }}">
 <input type="hidden" name="url" value="{{ visitor.website }}">
 {% endif %}
-<input type="hidden" name="parent_id" value="0">
+<input type="hidden" name="parent_id" value="{{ parent_id is defined ? parent_id : '0' }}">
 <input type="hidden" name="post_id" value="{{ post.id }}">
 <button type="submit">{{ "Speak" | translate }}</button>
 </div>
