@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-23 17:14+0000\n"
+"POT-Creation-Date: 2015-12-20 17:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -107,67 +107,67 @@ msgstr ""
 msgid "eXtended .XML File"
 msgstr ""
 
-#: modules/importers/importers.php:517
-#: modules/importers/importers.php:573
-#: modules/importers/importers.php:609
+#: modules/importers/importers.php:516
+#: modules/importers/importers.php:570
+#: modules/importers/importers.php:604
 msgid "What URL is used for embedded media?"
 msgstr ""
 
 #: modules/importers/importers.php:518
-#: modules/importers/importers.php:574
-#: modules/importers/importers.php:610
+#: modules/importers/importers.php:572
+#: modules/importers/importers.php:606
 msgid "(optional)"
 msgstr ""
 
-#: modules/importers/importers.php:522
+#: modules/importers/importers.php:520
 msgid "Usually something like <code>http://example.com/wp-content/uploads/</code>."
 msgstr ""
 
-#: modules/importers/importers.php:526
-#: modules/importers/importers.php:541
-#: modules/importers/importers.php:582
-#: modules/importers/importers.php:618
+#: modules/importers/importers.php:524
+#: modules/importers/importers.php:539
+#: modules/importers/importers.php:578
+#: modules/importers/importers.php:612
 msgid "Import"
 msgstr ""
 
-#: modules/importers/importers.php:536
+#: modules/importers/importers.php:534
 msgid "Your Tumblr URL"
 msgstr ""
 
-#: modules/importers/importers.php:538
+#: modules/importers/importers.php:536
 msgid "Note: Audio tumbles cannot be imported."
 msgstr ""
 
-#: modules/importers/importers.php:551
-#: modules/importers/importers.php:592
+#: modules/importers/importers.php:549
+#: modules/importers/importers.php:588
 msgid "Host"
 msgstr ""
 
-#: modules/importers/importers.php:555
-#: modules/importers/importers.php:596
+#: modules/importers/importers.php:553
+#: modules/importers/importers.php:592
 msgid "Username"
 msgstr ""
 
-#: modules/importers/importers.php:559
-#: modules/importers/importers.php:600
+#: modules/importers/importers.php:557
+#: modules/importers/importers.php:596
 msgid "Password"
 msgstr ""
 
-#: modules/importers/importers.php:563
-#: modules/importers/importers.php:604
+#: modules/importers/importers.php:561
+#: modules/importers/importers.php:600
 msgid "Database"
 msgstr ""
 
-#: modules/importers/importers.php:567
+#: modules/importers/importers.php:565
 msgid "Table Prefix"
 msgstr ""
 
-#: modules/importers/importers.php:569
+#: modules/importers/importers.php:567
 msgid "(if any)"
 msgstr ""
 
-#: modules/importers/importers.php:578
-#: modules/importers/importers.php:614
+#: modules/importers/importers.php:574
+#: modules/importers/importers.php:608
 msgid "Usually something like <code>http://example.com/images/</code>."
 msgstr ""
 

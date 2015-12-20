@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-23 17:14+0000\n"
+"POT-Creation-Date: 2015-12-20 17:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,6 +17,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: modules/lightbox/admin/pages/lightbox_settings.twig:3
+msgid "Lightbox Settings"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:9
+msgid "Background"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:11
+msgid "Black"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:12
+msgid "Grey"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:13
+msgid "White"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:14
+msgid "Inherit"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:18
+msgid "Spacing"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:20
+msgid "(pixels)"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:23
+msgid "Protect"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:25
+msgid "Prevent visitors from saving images?"
+msgstr ""
+
 #: modules/lightbox/info.php:3
 #: modules/lightbox/lightbox.php:35
 msgid "Lightbox"
@@ -24,45 +64,5 @@ msgstr ""
 
 #: modules/lightbox/info.php:6
 msgid "A lightbox for your images."
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:3
-msgid "Lightbox Settings"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:9
-msgid "Background"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:11
-msgid "Black"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:12
-msgid "Grey"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:13
-msgid "White"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:14
-msgid "Inherit"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:18
-msgid "Spacing"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:20
-msgid "(pixels)"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:23
-msgid "Protect"
-msgstr ""
-
-#: modules/lightbox/pages/admin/lightbox_settings.twig:25
-msgid "Prevent visitors from saving images?"
 msgstr ""
 
