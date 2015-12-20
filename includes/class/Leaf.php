@@ -24,7 +24,10 @@
                 new Twig_SimpleFunction("self_url",            "self_url"),
                 new Twig_SimpleFunction("module_enabled",      "module_enabled"),
                 new Twig_SimpleFunction("feather_enabled",     "feather_enabled"),
-                new Twig_SimpleFunction("password_strength",   "password_strength")
+                new Twig_SimpleFunction("password_strength",   "password_strength"),
+
+                # Custom functions
+                new Twig_SimpleFunction("paginate",             "twig_function_paginate")
             );
         }
 
@@ -87,6 +90,13 @@
                 return new Twig_SimpleFilter($name, get_class($module)."::".$name);
 
         return false;
+    }
+
+    function twig_function_paginate($array, $per_page, $name = "page") {
+        while (in_array($name, Paginator::$names))
+            $name.= "_";
+
+        return new Paginator($array, $per_page, $name);
     }
 
     function twig_filter_translate_string($string, $domain = "theme") {
