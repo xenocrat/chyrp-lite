@@ -404,10 +404,11 @@
                 Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
 
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
-                Flash::message(_f("This post is only visible by the following groups: %s.", $post->groups()));
+                Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
 
             $this->display(array("pages".DIR."view", "pages".DIR."index"),
-                           array("post" => $post, "posts" => array($post)),
+                           array("post" => $post,
+                                 "posts" => array($post)),
                            $post->title());
         }
 

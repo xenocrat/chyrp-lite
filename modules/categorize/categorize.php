@@ -131,6 +131,7 @@
                                                  "value" => $category->id));
 
             $ids = array();
+
             foreach ($attributes->fetchAll() as $index => $row)
                 $ids[] = $row["post_id"];
 
