@@ -177,6 +177,7 @@ ol.comments li {                                box-sizing: border-box;
                                                 background-color: #f5f4f0;
                                                 border: 1px solid #c2bcb8;
                                                 border-bottom: none }
+ol.comments li.highlighted {                    background-color: #fffecd }
 ol.comments li:last-child {                     border-bottom: 1px solid #c2bcb8 }
 ol.comments li#comment_shim {                   display: none }
 ol.comments li.comment_form {                   padding: 1rem 2rem 2rem 2rem }
