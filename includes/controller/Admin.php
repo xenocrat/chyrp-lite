@@ -177,6 +177,9 @@
 
             $post = new Post($_GET['id'], array("drafts" => true, "filter" => false));
 
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
@@ -197,10 +200,10 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."));
 
-            $post = new Post($_POST['id'], array("drafts" => true));
-
             if (isset($_POST['publish']))
                 $_POST['status'] = "public";
+
+            $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
                 Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
@@ -214,8 +217,7 @@
             Feathers::$instances[$post->feather]->update($post);
 
             if (!isset($_POST['ajax']))
-                Flash::notice(_f("Post updated. <a href=\"%s\">View Post &rarr;</a>",
-                                 array($post->url())),
+                Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
                               "/admin/?action=manage_posts");
             else
                 exit((string) $_POST['id']);
@@ -230,6 +232,9 @@
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
             $post = new Post($_GET['id'], array("drafts" => true));
+
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
 
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
@@ -252,6 +257,10 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $post = new Post($_POST['id'], array("drafts" => true));
+
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
@@ -343,19 +352,7 @@
             if (empty($_POST['title']) and empty($_POST['slug']))
                 error(__("Error"), __("Title and slug cannot be blank."));
 
-            $bump = new Page(null, array("where" => array("list_order" => (int) $_POST['list_order'])));
-
-            # If we are taking the list order of an existing page, bump it to the bottom of the list.
-            if (!$bump->no_results)
-                $bump->update(null,
-                              null,
-                              null,
-                              null,
-                              null,
-                              null,
-                              count(Page::find()),
-                              null,
-                              null);
+            $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page = Page::add($_POST['title'],
                               $_POST['body'],
@@ -363,7 +360,7 @@
                               $_POST['parent_id'],
                               !empty($_POST['public']),
                               !empty($_POST['show_in_list']),
-                              (int) $_POST['list_order'],
+                              $list_order,
                               (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             Flash::notice(__("Page created!"), $page->url());
@@ -380,8 +377,13 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."));
 
+            $page = new Page($_GET['id'], array("filter" => false));
+
+            if ($page->no_results)
+                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+
             $this->display("edit_page",
-                           array("page" => new Page($_GET['id'], array("filter" => false)),
+                           array("page" => $page,
                                  "pages" => Page::find(array("where" => array("id not" => $_GET['id'])))));
         }
 
@@ -407,19 +409,7 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
 
-            $swap = new Page(null, array("where" => array("list_order" => (int) $_POST['list_order'])));
-
-            # If we are taking the list order of an existing page, swap values with it.
-            if (!$swap->no_results)
-                $swap->update(null,
-                              null,
-                              null,
-                              null,
-                              null,
-                              null,
-                              $page->list_order,
-                              null,
-                              null);
+            $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page->update($_POST['title'],
                           $_POST['body'],
@@ -427,13 +417,12 @@
                           $_POST['parent_id'],
                           !empty($_POST['public']),
                           !empty($_POST['show_in_list']),
-                          (int) $_POST['list_order'],
+                          $list_order,
                           null,
                           (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             if (!isset($_POST['ajax']))
-                Flash::notice(_f("Page updated. <a href=\"%s\">View Page &rarr;</a>",
-                                 $page->url()),
+                Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
                                  "/admin/?action=manage_pages");
         }
 
@@ -448,7 +437,12 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a page."));
 
-            $this->display("delete_page", array("page" => new Page($_GET['id'])));
+            $page = new Page($_GET['id']);
+
+            if ($page->no_results)
+                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+
+            $this->display("delete_page", array("page" => $page));
         }
 
         /**
@@ -470,12 +464,22 @@
 
             $page = new Page($_POST['id']);
 
-            if (!$page->no_results)
-                foreach ($page->children as $child)
-                    if (isset($_POST['destroy_children']))
-                        Page::delete($child->id, true);
-                    else
-                        $child->update($child->title, $child->body, null, 0, $child->public, $child->show_in_list, $child->list_order, null, $child->url);
+            if ($page->no_results)
+                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+
+            foreach ($page->children as $child)
+                if (isset($_POST['destroy_children']))
+                    Page::delete($child->id, true);
+                else
+                    $child->update($child->title,
+                                   $child->body,
+                                   null,
+                                   0,
+                                   $child->public,
+                                   $child->show_in_list,
+                                   $child->list_order,
+                                   null,
+                                   $child->url);
 
             Page::delete($_POST['id']);
 
@@ -1803,7 +1807,7 @@
                                       true,
                                       0,
                                       "home");
-                    Flash::notice(_f("Page created. <a href=\"%s\">View Page &rarr;</a>", $page->url()));
+                    Flash::notice(__("Page created.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>');
                 }
             } elseif (empty($_POST['enable_homepage']) and $config->enable_homepage)
                 $route->remove("/");
