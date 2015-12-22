@@ -34,8 +34,12 @@
             $model_name = get_class($this);
             $placeholders = (isset($this->__placeholders) and $this->__placeholders);
 
-            Trigger::current()->filter($filtered, $model_name."_".$name."_attr", $this);
-            $this->$name = $filtered;
+            $trigger = Trigger::current();
+
+            if ($trigger->exists($model_name."_".$name."_attr")) {
+                $trigger->filter($filtered, $model_name."_".$name."_attr", $this);
+                $this->$name = $filtered;
+            }
 
             $this->belongs_to = (array) $this->belongs_to;
             $this->has_many   = (array) $this->has_many;
