@@ -258,7 +258,7 @@
 
         public function admin_edit_tags($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified", "tags"), __("An ID is required to edit tags.", "tags"));
+                error(__("No ID Specified"), __("An ID is required to edit tags.", "tags"));
 
             $post = new Post($_GET['id']);
 
@@ -276,7 +276,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified", "tags"), __("An ID is required to update tags.", "tags"));
+                error(__("No ID Specified"), __("An ID is required to update tags.", "tags"));
 
             $post = new Post($_POST['id']);
 
@@ -448,7 +448,7 @@
 
         public function main_tag($main) {
             if (!isset($_GET['name']))
-                return $main->resort(array("pages/tag", "pages/index"),
+                return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
                                      array("reason" => "no_tag_specified"),
                                         __("No Tag", "tags"));
 
@@ -480,7 +480,7 @@
             $tag = list_notate($tags, true);
 
             if (empty($ids))
-                return $main->resort(array("pages/tag", "pages/index"),
+                return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
                                      array("reason" => "tag_not_found"),
                                         __("Invalid Tag", "tags"));
 
@@ -521,7 +521,7 @@
                 $popularity = array_count_values($names);
 
                 if (empty($popularity))
-                    return $main->resort("pages/tags", array("tag_cloud" => array()), __("No Tags", "tags"));
+                    return $main->resort("pages".DIR."tags", array("tag_cloud" => array()), __("No Tags", "tags"));
 
                 $max_qty = max($popularity);
                 $min_qty = min($popularity);
