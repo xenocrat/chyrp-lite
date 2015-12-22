@@ -167,7 +167,8 @@ ul.archive li {                                 margin: 0em 0em 0em 1em }
 ul.yearly li {                                  margin: 0em }
 ol.comments {                                   list-style: none;
                                                 padding: 0em;
-                                                margin: 0em }
+                                                margin: 0em;
+                                                border-bottom: 1px solid #c2bcb8 }
 ol.comments li {                                box-sizing: border-box;
                                                 display: block;
                                                 position: relative;
@@ -178,7 +179,6 @@ ol.comments li {                                box-sizing: border-box;
                                                 border: 1px solid #c2bcb8;
                                                 border-bottom: none }
 ol.comments li.highlighted {                    background-color: #fffecd }
-ol.comments li:last-child {                     border-bottom: 1px solid #c2bcb8 }
 ol.comments li#comment_shim {                   display: none }
 ol.comments li.comment_form {                   padding: 1rem 2rem 2rem 2rem }
 table {                                         border-collapse: collapse;
