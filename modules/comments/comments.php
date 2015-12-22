@@ -41,7 +41,7 @@
             Group::add_permission("edit_own_comment", "Edit Own Comments");
             Group::add_permission("delete_comment", "Delete Comments");
             Group::add_permission("delete_own_comment", "Delete Own Comments");
-            Group::add_permission("code_in_comments", "Can Use HTML In Comments");
+            Group::add_permission("code_in_comments", "Can Use HTML in Comments");
 
             Route::current()->add("comment/(id)/", "comment");
         }
@@ -206,7 +206,7 @@
             if (isset($_POST['ajax']))
                 exit("{ \"comment_id\": \"".$_POST['id']."\", \"comment_timestamp\": \"".$created_at."\" }");
 
-            if (!Comment::any_editable() and !Comment::any_deletable())
+            if (!$visitor->group->can("edit_comment", "delete_comment"))
                 Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
 
             if ($status == "spam")
