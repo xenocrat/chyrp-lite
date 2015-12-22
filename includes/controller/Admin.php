@@ -457,7 +457,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a post."));
+                error(__("No ID Specified"), __("An ID is required to delete a page."));
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_pages");
@@ -1835,8 +1835,8 @@
                             "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
                     break;
                 case "slugs":
-                    $help = "<h1>".__("Post Slugs")."</h1>\n".
-                            "<p>".__("The slug is the URL-friendly identifying name for this post. You can enter the slug yourself or have it auto-generated when the post is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
+                    $help = "<h1>".__("Slugs")."</h1>\n".
+                            "<p>".__("The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
                     break;
                 case "alternate_urls":
                     $help = "<h1>".__("Alternate URL")."</h1>\n".

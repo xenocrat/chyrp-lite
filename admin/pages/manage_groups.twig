@@ -54,8 +54,20 @@
 {% endif %}
 </td>
 {{ trigger.call("manage_groups_column", groups) }}
-<td class="controls">{{ group.edit_link('<img src="' ~ theme_url ~ '/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}</td>
-<td class="controls">{{ group.delete_link('<img src="' ~ theme_url ~ '/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}</td>
+{% if group.editable() or group.deletable() %}
+{% if group.editable() %}
+<td class="controls"{{ not group.deletable() ? ' colspan="2"' : '' }}>
+{{ group.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+</td>
+{% endif %}
+{% if group.deletable() %}
+<td class="controls"{{ not group.editable() ? ' colspan="2"' : '' }}>
+{{ group.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+</td>
+{% endif %}
+{% else %}
+<td class="controls" colspan="2">&nbsp;</td>
+{% endif %}
 </tr>
 {% endfor %}
 </tbody>
