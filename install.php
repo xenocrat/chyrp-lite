@@ -284,65 +284,44 @@
                              updated_at DATETIME DEFAULT NULL,
                              PRIMARY KEY (id)
                          ) DEFAULT CHARSET=utf8");
-
-            # This is to let the gettext scanner add these strings to the .pot file.
-            # They are translated on display via Twig.
-            # We don't want translated strings in the database.
-            /* $translations = array(__("Change Settings"),
-                                     __("Toggle Extensions"),
-                                     __("View Site"),
-                                     __("View Private Posts"),
-                                     __("View Scheduled Posts"),
-                                     __("View Drafts"),
-                                     __("View Own Drafts"),
-                                     __("Add Posts"),
-                                     __("Add Drafts"),
-                                     __("Edit Posts"),
-                                     __("Edit Drafts"),
-                                     __("Edit Own Posts"),
-                                     __("Edit Own Drafts"),
-                                     __("Delete Posts"),
-                                     __("Delete Drafts"),
-                                     __("Delete Own Posts"),
-                                     __("Delete Own Drafts"),
-                                     __("View Pages"),
-                                     __("Add Pages"),
-                                     __("Edit Pages"),
-                                     __("Delete Pages"),
-                                     __("Add Users"),
-                                     __("Edit Users"),
-                                     __("Delete Users"),
-                                     __("Add Groups"),
-                                     __("Edit Groups"),
-                                     __("Delete Groups")); */
-
-            $names = array("change_settings" => "Change Settings",
-                           "toggle_extensions" => "Toggle Extensions",
-                           "view_site" => "View Site",
-                           "view_private" => "View Private Posts",
-                           "view_scheduled" => "View Scheduled Posts",
-                           "view_draft" => "View Drafts",
-                           "view_own_draft" => "View Own Drafts",
-                           "add_post" => "Add Posts",
-                           "add_draft" => "Add Drafts",
-                           "edit_post" => "Edit Posts",
-                           "edit_draft" => "Edit Drafts",
-                           "edit_own_post" => "Edit Own Posts",
-                           "edit_own_draft" => "Edit Own Drafts",
-                           "delete_post" => "Delete Posts",
-                           "delete_draft" => "Delete Drafts",
-                           "delete_own_post" => "Delete Own Posts",
-                           "delete_own_draft" => "Delete Own Drafts",
-                           "view_page" => "View Pages",
-                           "add_page" => "Add Pages",
-                           "edit_page" => "Edit Pages",
-                           "delete_page" => "Delete Pages",
-                           "add_user" => "Add Users",
-                           "edit_user" => "Edit Users",
-                           "delete_user" => "Delete Users",
-                           "add_group" => "Add Groups",
-                           "edit_group" => "Edit Groups",
-                           "delete_group" => "Delete Groups");
+                                                                        # Add these strings to the .pot file.
+            $names = array("change_settings" => "Change Settings",      # __("Change Settings");
+                           "toggle_extensions" => "Toggle Extensions",  # __("Toggle Extensions");
+                           "view_site" => "View Site",                  # __("View Site");
+                           "view_private" => "View Private Posts",      # __("View Private Posts");
+                           "view_scheduled" => "View Scheduled Posts",  # __("View Scheduled Posts");
+                           "view_draft" => "View Drafts",               # __("View Drafts");
+                           "view_own_draft" => "View Own Drafts",       # __("View Own Drafts");
+                           "add_post" => "Add Posts",                   # __("Add Posts");
+                           "add_draft" => "Add Drafts",                 # __("Add Drafts");
+                           "edit_post" => "Edit Posts",                 # __("Edit Posts");
+                           "edit_draft" => "Edit Drafts",               # __("Edit Drafts");
+                           "edit_own_post" => "Edit Own Posts",         # __("Edit Own Posts");
+                           "edit_own_draft" => "Edit Own Drafts",       # __("Edit Own Drafts");
+                           "delete_post" => "Delete Posts",             # __("Delete Posts");
+                           "delete_draft" => "Delete Drafts",           # __("Delete Drafts");
+                           "delete_own_post" => "Delete Own Posts",     # __("Delete Own Posts");
+                           "delete_own_draft" => "Delete Own Drafts",   # __("Delete Own Drafts");
+                           "view_page" => "View Pages",                 # __("View Pages");
+                           "add_page" => "Add Pages",                   # __("Add Pages");
+                           "edit_page" => "Edit Pages",                 # __("Edit Pages");
+                           "delete_page" => "Delete Pages",             # __("Delete Pages");
+                           "add_user" => "Add Users",                   # __("Add Users");
+                           "edit_user" => "Edit Users",                 # __("Edit Users");
+                           "delete_user" => "Delete Users",             # __("Delete Users");
+                           "add_group" => "Add Groups",                 # __("Add Groups");
+                           "edit_group" => "Edit Groups",               # __("Edit Groups");
+                           "delete_group" => "Delete Groups");          # __("Delete Groups");
+                                                                        # __("Manage Categories");
+                                                                        # __("Add Comments");
+                                                                        # __("Add Comments to Private Posts");
+                                                                        # __("Edit Comments");
+                                                                        # __("Edit Own Comments");
+                                                                        # __("Delete Comments");
+                                                                        # __("Delete Own Comments");
+                                                                        # __("Can Use HTML in Comments");
+                                                                        # __("Like Posts");
+                                                                        # __("Unlike Posts");
 
             foreach ($names as $id => $name)
                 $sql->replace("permissions",
