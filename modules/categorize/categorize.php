@@ -228,47 +228,71 @@
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
 
-            if (empty($_GET['id']))
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a category.", "categorize"));
 
-            $fields["categorize"] = Category::getCategory($_GET['id']);
+            $category = Category::getCategory($_GET['id']);
+
+            if (empty($category))
+                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+
+            $fields["categorize"] = $category;
             $admin->display("edit_category", $fields, "Edit category");
         }
 
         public function admin_update_category($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
 
-            if (empty($_POST['id']) or empty($_POST['name']))
-                redirect("/admin/?action=manage_category");
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                error(__("No ID Specified"), __("An ID is required to update a category.", "categorize"));
+
+            if (empty($_GET['name']))
+                error(__("No Name Specified"), __("A name is required to update a category.", "categorize"));
+
+            $category = Category::getCategory($_POST['id']);
+
+            if (empty($category))
+                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
 
             Category::updateCategory($_POST);
             Flash::notice(__("Category updated.", "categorize"), "/admin/?action=manage_category");
         }
 
         public function admin_delete_category($admin) {
-            if (empty($_GET['id']))
-                error(__("No Category Specified"), __("Please specify the category you want to delete.", "categorize"));
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"));
 
-            $category = Category::getCategory( (int) $_GET['id']);
+            $category = Category::getCategory($_GET['id']);
+
+            if (empty($category))
+                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
 
             $admin->display("delete_category", array("category" => $category));
         }
 
         public function admin_destroy_category() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
 
-            if (empty($_POST['id']) or ($_POST['destroy'] != "indubitably"))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"));
+
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_category");
 
-            Category::deleteCategory( (int) $_POST['id']);
+            $category = Category::getCategory($_POST['id']);
+
+            if (empty($category))
+                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+
+            Category::deleteCategory($category->id);
             Flash::notice(__("Category deleted.", "categorize"), "/admin/?action=manage_category");
         }
     }

@@ -223,7 +223,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
             if (empty($_GET['clean']))
-                error(__("No Tag Specified"), __("Please specify the tag you want to rename.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"));
 
             $sql = SQL::current();
 
@@ -251,21 +251,24 @@
                 }
 
             if (!isset($tag))
-                error(__("Tag Not Found"), __("Could not find the specified tag in the database.", "tags"));
+                Flash::warning(__("Tag not found.", "tags"), "/admin/?action=manage_tags");
 
             $admin->display("rename_tag", array("tag" => $tag));
         }
 
         public function admin_edit_tags($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
+                error(__("No ID Specified", "tags"), __("An ID is required to edit tags.", "tags"));
 
             $post = new Post($_GET['id']);
+
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/admin/?action=manage_tags");
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            $admin->display("edit_tags", array("post" => new Post($_GET['id'])));
+            $admin->display("edit_tags", array("post" => $post));
         }
 
         public function admin_update_tags($admin) {
@@ -273,9 +276,12 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("Please specify the ID of the post whose tags you want to edit.", "tags"));
+                error(__("No ID Specified", "tags"), __("An ID is required to update tags.", "tags"));
 
             $post = new Post($_POST['id']);
+
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/admin/?action=manage_tags");
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
@@ -286,14 +292,14 @@
         }
 
         public function admin_update_tag($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("edit_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['original']) or empty($_POST['name']))
-                redirect("/admin/?action=manage_tags");
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"));
 
             $_POST['name'] = str_replace(",", " ", $_POST['name']);
             $_POST['name'] = is_numeric($_POST['name']) ? "'".$_POST['name']."'" : $_POST['name'] ;
@@ -323,7 +329,7 @@
 
         public function admin_delete_tag($admin) {
             if (empty($_GET['clean']))
-                error(__("No Tag Specified"), __("Please specify the tag you want to rename.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"));
 
             $sql = SQL::current();
 
@@ -351,19 +357,22 @@
                 }
 
             if (!isset($tag))
-                error(__("Tag Not Found"), __("Could not find the specified tag in the database.", "tags"));
+                Flash::warning(__("Tag not found.", "tags"), "/admin/?action=manage_tags");
 
             $admin->display("delete_tag", array("tag" => $tag));
         }
 
         public function admin_destroy_tag() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("edit_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
-            if (empty($_POST['name']) or ($_POST['destroy'] != "indubitably"))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['name']))
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"));
+
+            if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_tags");
 
             $sql = SQL::current();
@@ -388,14 +397,17 @@
         }
 
         public function admin_bulk_tag($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("edit_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add tags.", "tags"));
 
-            if (empty($_POST['name']) or empty($_POST['post']))
-                redirect("/admin/?action=manage_tags");
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['post']))
+                Flash::warning(__("No posts selected.", "tags"), "/admin/?action=manage_tags");
+
+            if (empty($_POST['name']))
+                Flash::warning(__("No tag specified.", "tags"), "/admin/?action=manage_tags");
 
             $sql = SQL::current();
 

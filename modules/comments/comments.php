@@ -114,6 +114,9 @@
 
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
+            if ($post->no_results)
+                error(__("Error"), __("Post not found."));
+
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
 
@@ -162,6 +165,9 @@
 
             $comment = new Comment($_POST['id']);
 
+            if ($comment->no_results)
+                error(__("Error"), __("Comment not found.", "comments"));
+
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
@@ -188,6 +194,7 @@
             $visitor = Visitor::current();
             $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
             $created_at = ($visitor->group->can("edit_comment")) ? datetime($_POST['created_at']) : $comment->created_at ;
+
             $comment->update($_POST['body'],
                              $_POST['author'],
                              $_POST['author_url'],
@@ -199,13 +206,13 @@
             if (isset($_POST['ajax']))
                 exit("{ \"comment_id\": \"".$_POST['id']."\", \"comment_timestamp\": \"".$created_at."\" }");
 
-            if ($_POST['status'] == "spam")
-                Flash::notice(__("Comment updated."), "/admin/?action=manage_spam");
+            if (!Comment::any_editable() and !Comment::any_deletable())
+                Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
+
+            if ($status == "spam")
+                Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_spam");
             else
-                Flash::notice(_f("Comment updated. <a href=\"%s\">View Comment &rarr;</a>",
-                                 array($comment->post->url()."#comment_".$comment->id),
-                                 "comments"),
-                              "/admin/?action=manage_comments");
+                Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_comments");
         }
 
         static function admin_delete_comment($admin) {
@@ -213,6 +220,9 @@
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
 
             $comment = new Comment($_GET['id']);
+
+            if ($comment->no_results)
+                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
 
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
@@ -231,6 +241,9 @@
                 redirect("/admin/?action=manage_comments");
 
             $comment = new Comment($_POST['id']);
+
+            if ($comment->no_results)
+                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
 
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
@@ -386,6 +399,9 @@
                 error(__("No ID Specified"), __("An ID is required to edit a comment.", "comments"));
 
             $comment = new Comment($_GET['id'], array("filter" => false));
+
+            if ($comment->no_results)
+                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
 
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
