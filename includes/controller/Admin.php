@@ -353,6 +353,7 @@
                 error(__("Error"), __("Title and slug cannot be blank."));
 
             fallback($_POST['status'], "public");
+
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed"));
             $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
@@ -413,6 +414,7 @@
                 Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
 
             fallback($_POST['status'], "public");
+
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed"));
             $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
