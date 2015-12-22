@@ -57,7 +57,7 @@
             $show_on_home = (isset($post['show_on_home'])) ? 1 : 0;
             $clean = sanitize(fallback($_POST['clean'], $_POST['name']));
             $name = $post['name'];
-            $id = (int) $post['id'];
+            $id = $post['id'];
             SQL::current()->update("categorize", "`id` = :id",
                 array("name" => ":name", "clean" => ":clean", "show_on_home" => ":show_on_home"),
                 array(":id" => $id, ":name" => $name, ":clean" => $clean, ":show_on_home" => $show_on_home));

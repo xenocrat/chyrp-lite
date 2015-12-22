@@ -109,19 +109,25 @@
         }
 
         public function main_context($context) {
-            $context["categorize"] = Category::getCategoryList();
+            $categories = Category::getCategoryList();
+            $context["categorize"] = array();
+
+            foreach ($categories as $category)
+                if ($category["show_on_home"])
+                    $context["categorize"][] = $category;
+
             return $context;
         }
 
         public function main_category($main) {
-            # make sure we have enough information to continue
+            # make sure we have enough information to continue.
             if (!isset($_GET['name']))
                 $reason = "no_category_requested";
             elseif (!$category = Category::getCategorybyClean($_GET['name']))
                 $reason = "category_not_found";
 
             if (isset($reason))
-                return $main->resort(array("pages/category", "pages/index"),
+                return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
                                      array("reason" => $reason),
                                         __("Invalid Category", "categorize"));
 
@@ -136,7 +142,7 @@
                 $ids[] = $row["post_id"];
 
             if (empty($ids))
-                return $main->resort(array("pages/category", "pages/index"),
+                return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
                                      array("reason" => "category_not_found"),
                                         __("Invalid Category", "categorize"));
 
@@ -147,44 +153,9 @@
             if (empty($posts))
                 return false;
 
-            $main->display(array("pages/category", "pages/index"),
+            $main->display(array("pages".DIR."category", "pages".DIR."index"),
                            array("posts" => $posts, "category" => $category->name),
                               _f("Posts in category %s", $_GET['name'], "categorize"));
-        }
-
-        public function main_index($main) {
-            $ids = array();
-
-            # this mammoth query allows searching for posts on the main page in 1 query
-            $record = SQL::current()->query("SELECT __posts.id FROM __posts
-                        LEFT JOIN __post_attributes
-                            ON (__posts.id = __post_attributes.post_id
-                            AND __post_attributes.name = 'category_id')
-                        LEFT JOIN __categorize
-                            ON (__post_attributes.value = __categorize.id
-                            AND __post_attributes.name = 'category_id')
-                        WHERE (__categorize.show_on_home = 1
-                            OR __post_attributes.value IS NULL
-                            OR __post_attributes.value = 0)
-                        GROUP BY __posts.id
-                    ");
-
-            foreach ($record->fetchAll() as $entry)
-                $ids[] = $entry['id'];
-
-            if (empty($ids))
-                return false;
-
-            $posts = new Paginator(Post::find(array("placeholders" => true,
-                                            "where" => array("id" => $ids))),
-                                            Config::current()->posts_per_page);
-
-            if (empty($posts))
-                return false;
-
-            $main->display(array("pages/index"),
-                           array("posts" => $posts));
-            return true;
         }
 
         static function manage_nav($navs) {
@@ -192,13 +163,13 @@
                 return $navs;
 
             $navs["manage_category"] = array("title" => __("Categories", "categorize"),
-                                             "selected" => array("add_category", "delete_category", "edit_category"));
+                                             "selected" => array("new_category", "delete_category", "edit_category"));
 
             return $navs;
         }
 
         static function manage_nav_pages($pages) {
-            array_push($pages, "manage_category", "add_category", "delete_category", "edit_category");
+            array_push($pages, "manage_category", "new_category", "delete_category", "edit_category");
             return $pages;
         }
 
@@ -209,19 +180,22 @@
             $admin->display("manage_category", array("categorize" => Category::getCategory()));
         }
 
+        public function admin_new_category($admin) {
+            if (!Visitor::current()->group->can('manage_categorize'))
+                show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
+
+            $admin->display("new_category");
+        }
+
         public function admin_add_category($admin) {
             if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
-            # Deal with a good submission
-            if (isset($_POST['add']))
-                if (!empty($_POST['name'])) {
-                    Category::addCategory($_POST);
-                    Flash::notice(__("Category added.", "categorize"), "/admin/?action=manage_category");
-                } else
-                    $fields['categorize'] = array("name" => $_POST['name']);
+            if (empty($_POST['name']))
+                error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"));
 
-            $admin->display("add_category", $fields = array()); # We land here when we aren't posting
+            Category::addCategory($_POST);
+            Flash::notice(__("Category added.", "categorize"), "/admin/?action=manage_category");
         }
 
         public function admin_edit_category($admin) {
@@ -247,11 +221,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a category.", "categorize"));
 
-            if (empty($_GET['name']))
-                error(__("No Name Specified"), __("A name is required to update a category.", "categorize"));
+            if (empty($_POST['name']))
+                error(__("No Name Specified", "categorize"), __("A name is required to update a category.", "categorize"));
 
             $category = Category::getCategory($_POST['id']);
 
