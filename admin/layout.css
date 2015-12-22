@@ -615,6 +615,7 @@ div.more_options p input[type="email"],
 div.more_options p input[type="url"],
 div.more_options p input[type="number"],
 div.more_options p input[type="password"],
+div.more_options p select,
 div.more_options p textarea {                   width: 100%;
                                                 margin: 0em }
 div.more_options hr {                           margin: 0em;

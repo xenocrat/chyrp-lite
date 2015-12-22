@@ -352,14 +352,17 @@
             if (empty($_POST['title']) and empty($_POST['slug']))
                 error(__("Error"), __("Title and slug cannot be blank."));
 
+            fallback($_POST['status'], "public");
+            $public = in_array($_POST['status'], array("listed", "public"));
+            $listed = in_array($_POST['status'], array("listed"));
             $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page = Page::add($_POST['title'],
                               $_POST['body'],
                               null,
                               $_POST['parent_id'],
-                              !empty($_POST['public']),
-                              !empty($_POST['show_in_list']),
+                              $public,
+                              $listed,
                               $list_order,
                               (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
@@ -409,14 +412,17 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
 
+            fallback($_POST['status'], "public");
+            $public = in_array($_POST['status'], array("listed", "public"));
+            $listed = in_array($_POST['status'], array("listed"));
             $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page->update($_POST['title'],
                           $_POST['body'],
                           null,
                           $_POST['parent_id'],
-                          !empty($_POST['public']),
-                          !empty($_POST['show_in_list']),
+                          $public,
+                          $listed,
                           $list_order,
                           null,
                           (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));

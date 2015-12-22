@@ -1,7 +1,7 @@
 {{ trigger.call("before_page_fields") }}
 <p class="main_options">
 <label for="title">{{ "Title" | translate }}</label>
-<input class="text" type="text" name="title" value="{{ page.title is defined ? page.title | fix : '' }}" id="title" data-preview="markup_title">
+<input class="text" type="text" name="title" value="{{ page is defined ? page.title | fix : '' }}" id="title" data-preview="markup_title">
 </p>
 <p class="main_options">
 <label for="body">
@@ -10,13 +10,38 @@
 {% endif %}
 {{ "Body" | translate }}
 </label>
-<textarea rows="12" name="body" id="body" data-preview="markup_text">{{ page.body is defined ? page.body | fix : "" }}</textarea>
+<textarea rows="12" name="body" id="body" data-preview="markup_text">{{ page is defined ? page.body | fix : "" }}</textarea>
 </p>
 {{ trigger.call("after_page_fields") }}
 <div id="more_options" class="more_options">
 <p class="more_options_option">
-<label for="slug">{{ "Slug" | translate }}</label>
-<input class="text" type="text" name="slug" value="{{ page.slug is defined ? page.slug | fix : '' }}" id="slug">
+<label for="slug">
+{{ "Slug" | translate }}
+<a href="{{ admin_url('help', {'id': 'slugs'}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+</label>
+<input class="text" type="text" name="slug" value="{{ page is defined ? page.slug | fix : '' }}" id="slug">
+</p>
+<p class="more_options_option">
+<label for="status">{{ "Status" | translate }}</label>
+<select name="status" id="status">
+{% if page is defined %}
+<option value="listed"{{ (page.public and page.show_in_list) | selected(true) }}>{{ "Listed" | translate }}</option>
+<option value="public"{{ (page.public and not page.show_in_list) | selected(true) }}>{{ "Public" | translate }}</option>
+<option value="private"{{ (not page.public and not page.show_in_list) | selected(true) }}>{{ "Private" | translate }}</option>
+{% else %}
+<option value="listed" selected>{{ "Listed" | translate }}</option>
+<option value="public">{{ "Public" | translate }}</option>
+<option value="private">{{ "Private" | translate }}</option>
+{% endif %}
+</select>
+</p>
+<p class="more_options_option">
+<label for="list_priority">{{ "Priority in pages list" | translate }}</label>
+<select name="list_priority" id="list_priority">
+<option value="0"{{ page is defined ? page.list_order | selected(0,1,2) : "" }}>{{ "High" | translate }}</option>
+<option value="4"{{ page is defined ? page.list_order | selected(3,4,5) : " selected" }}>{{ "Medium" | translate }}</option>
+<option value="8"{{ page is defined ? page.list_order | selected(6,7,8) : "" }}>{{ "Low" | translate }}</option>
+</select>
 </p>
 <p class="more_options_option">
 <label for="parent_id">{{ "Parent" | translate }}</label>
@@ -24,29 +49,13 @@
 <option value="0">{{ "[None]" | translate }}</option>
 {% if page is defined %}
 {% for item in theme.pages_list(0, page.id) %}
-<option value="{{ item.page.id }}"{{ page.parent_id is defined ? page.parent_id | selected(item.page.id) : "" }}>{{ "&nbsp;&nbsp;" | repeat(item.page.depth - 1) }}{{ item.page.title | striptags | fix }}</option>
+<option value="{{ item.page.id }}"{{ page is defined ? page.parent_id | selected(item.page.id) : "" }}>{{ "&nbsp;&nbsp;&nbsp;&nbsp;" | repeat(item.page.depth - 1) }}{{ item.page.title | striptags | fix }}</option>
 {% endfor %}
 {% else %}
 {% for item in theme.pages_list(0) %}
-<option value="{{ item.page.id }}"{{ page.parent_id is defined ? page.parent_id | selected(item.page.id) : "" }}>{{ "&nbsp;&nbsp;" | repeat(item.page.depth - 1) }}{{ item.page.title | striptags | fix }}</option>
+<option value="{{ item.page.id }}"{{ page is defined ? page.parent_id | selected(item.page.id) : "" }}>{{ "&nbsp;&nbsp;&nbsp;&nbsp;" | repeat(item.page.depth - 1) }}{{ item.page.title | striptags | fix }}</option>
 {% endfor %}
 {% endif %}
-</select>
-</p>
-<p class="more_options_option">
-<label for="public">{{ "Is this page public?" | translate }}</label>
-<input type="checkbox" name="public" id="public"{{ page.public is defined ? page.public | checked : "" }}>
-</p>
-<p class="more_options_option">
-<label for="show_in_list">{{ "Show in pages list?" | translate }}</label>
-<input type="checkbox" name="show_in_list" id="show_in_list"{{ page.show_in_list is defined ? page.show_in_list | checked : " checked" }}>
-</p>
-<p class="more_options_option">
-<label for="list_priority">{{ "Priority in pages list" | translate }}</label>
-<select name="list_priority" id="list_priority">
-<option value="0"{{ page.list_order | selected(0,1,2) }}>{{ "High" | translate }}</option>
-<option value="4"{{ page.list_order | selected(3,4,5) }}>{{ "Medium" | translate }}</option>
-<option value="8"{{ page.list_order | selected(6,7,8) }}>{{ "Low" | translate }}</option>
 </select>
 </p>
 {{ route.action == "write_page" ? trigger.call("new_page_options") : trigger.call("edit_page_options", page) }}
