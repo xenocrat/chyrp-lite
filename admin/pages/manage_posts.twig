@@ -56,12 +56,16 @@
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 {% if post.editable() or post.deletable() %}
+{% if post.editable() %}
 <td class="controls"{{ not post.deletable() ? ' colspan="2"' : '' }}>
 {{ post.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
+{% endif %}
+{% if post.deletable() %}
 <td class="controls"{{ not post.editable() ? ' colspan="2"' : '' }}>
 {{ post.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
+{% endif %}
 {% else %}
 <td class="controls" colspan="2">&nbsp;</td>
 {% endif %}

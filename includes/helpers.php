@@ -888,6 +888,9 @@
      *
      */
     function admin_url($action = "", $params = array()) {
+        if ($action == "logout")
+            return url("logout", MainController::current());
+
         $request = !empty($action) ? array("action=".$action) : array() ;
 
         foreach ($params as $key => $value)

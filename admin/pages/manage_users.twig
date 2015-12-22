@@ -53,12 +53,19 @@
 {% if user.website is not empty %}<a href="{{ user.website | fix(true) }}">{{ user.website }}</a>{% endif %}
 </td>
 {{ trigger.call("manage_users_column", user) }}
-{% if user.editable and user.deletable %}
-<td class="controls">{{ user.edit_link('<img src="' ~ theme_url ~ '/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}</td>
-<td class="controls">{{ user.delete_link('<img src="' ~ theme_url ~ '/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}</td>
+{% if user.editable() or user.deletable() %}
+{% if user.editable() %}
+<td class="controls"{{ not user.deletable() ? ' colspan="2"' : '' }}>
+{{ user.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+</td>
+{% endif %}
+{% if user.deletable() %}
+<td class="controls"{{ not user.editable() ? ' colspan="2"' : '' }}>
+{{ user.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+</td>
+{% endif %}
 {% else %}
-{{ user.edit_link('<img src="' ~ theme_url ~ '/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', '<td class="controls" colspan="2">', '</td>') }}
-{{ user.delete_link('<img src="' ~ theme_url ~ '/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', '<td class="controls" colspan="2">', '</td>') }}
+<td class="controls" colspan="2">&nbsp;</td>
 {% endif %}
 </tr>
 {% else %}

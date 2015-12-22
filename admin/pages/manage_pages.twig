@@ -59,12 +59,16 @@
 </td>
 {{ trigger.call("manage_pages_column", page) }}
 {% if page.editable() or page.deletable() %}
+{% if page.editable() %}
 <td class="controls"{{ not page.deletable() ? ' colspan="2"' : '' }}>
 {{ page.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
+{% endif %}
+{% if page.deletable() %}
 <td class="controls"{{ not page.editable() ? ' colspan="2"' : '' }}>
 {{ page.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
+{% endif %}
 {% else %}
 <td class="controls" colspan="2">&nbsp;</td>
 {% endif %}

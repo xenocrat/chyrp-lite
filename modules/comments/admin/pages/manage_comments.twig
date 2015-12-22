@@ -53,12 +53,16 @@
 </td>
 {{ trigger.call("manage_comments_column", comment) }}
 {% if comment.editable() or comment.deletable() %}
+{% if comment.editable() %}
 <td class="controls"{{ not comment.deletable() ? ' colspan="2"' : '' }}>
 {{ comment.edit_link('<img src="' ~ theme_url ~ '/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
+{% endif %}
+{% if comment.deletable() %}
 <td class="controls"{{ not comment.editable() ? ' colspan="2"' : '' }}>
 {{ comment.delete_link('<img src="' ~ theme_url ~ '/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
+{% endif %}
 {% else %}
 <td class="controls" colspan="2">&nbsp;</td>
 {% endif %}
