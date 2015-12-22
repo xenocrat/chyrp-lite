@@ -94,7 +94,7 @@
 
     function twig_function_paginate($array, $per_page, $name = "page") {
         while (in_array($name, Paginator::$names))
-            $name.= "_";
+            $name = "_".$name."_";
 
         return new Paginator($array, $per_page, $name);
     }
