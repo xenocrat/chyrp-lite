@@ -343,6 +343,7 @@
     # Load the Visitor.
     $visitor = Visitor::current();
 
+    # Prepare hooks for captcha providers.
     $captchaHooks = array();
 
     # Prepare the notifier.

@@ -282,8 +282,7 @@
     function _p($single, $plural, $number, $domain = "chyrp") {
         global $l10n;
         return isset($l10n[$domain]) ?
-                     $l10n[$domain]->ngettext($single, $plural, $number) :
-                   (($number != 1) ? $plural : $single) ;
+                     $l10n[$domain]->ngettext($single, $plural, $number) : (($number != 1) ? $plural : $single) ;
     }
 
     /**
@@ -390,7 +389,7 @@
 
     /**
      * Function: when
-     * Returns date formatting for a string that isn't a regular time() value
+     * Returns date formatting for a string that isn't a regular time() value.
      *
      * Parameters:
      *     $formatting - The formatting for date().
