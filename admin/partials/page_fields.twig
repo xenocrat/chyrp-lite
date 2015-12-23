@@ -27,10 +27,12 @@
 {% if page is defined %}
 <option value="listed"{{ (page.public and page.show_in_list) | selected(true) }}>{{ "Public and visible in pages list" | translate }}</option>
 <option value="public"{{ (page.public and not page.show_in_list) | selected(true) }}>{{ "Public" | translate }}</option>
+<option value="teased"{{ (not page.public and page.show_in_list) | selected(true) }}>{{ "Private and visible in pages list" | translate }}</option>
 <option value="private"{{ (not page.public and not page.show_in_list) | selected(true) }}>{{ "Private" | translate }}</option>
 {% else %}
 <option value="listed" selected>{{ "Public and visible in pages list" | translate }}</option>
 <option value="public">{{ "Public" | translate }}</option>
+<option value="teased">{{ "Private and visible in pages list" | translate }}</option>
 <option value="private">{{ "Private" | translate }}</option>
 {% endif %}
 </select>

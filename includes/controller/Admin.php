@@ -355,7 +355,7 @@
             fallback($_POST['status'], "public");
 
             $public = in_array($_POST['status'], array("listed", "public"));
-            $listed = in_array($_POST['status'], array("listed"));
+            $listed = in_array($_POST['status'], array("listed", "teased"));
             $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page = Page::add($_POST['title'],
@@ -416,7 +416,7 @@
             fallback($_POST['status'], "public");
 
             $public = in_array($_POST['status'], array("listed", "public"));
-            $listed = in_array($_POST['status'], array("listed"));
+            $listed = in_array($_POST['status'], array("listed", "teased"));
             $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page->update($_POST['title'],
