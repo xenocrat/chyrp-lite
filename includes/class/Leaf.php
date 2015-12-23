@@ -53,8 +53,9 @@
                 new Twig_SimpleFilter("gravatar",              "get_gravatar"),
 
                 # Custom filters
-                new Twig_SimpleFilter("translate",             "twig_filter_translate_string"),
-                new Twig_SimpleFilter("translate_plural",      "twig_filter_translate_plural_string"),
+                new Twig_SimpleFilter("translate",             "twig_filter_translate"),
+                new Twig_SimpleFilter("translate_plural",      "twig_filter_translate_plural"),
+                new Twig_SimpleFilter("translate_search",      "twig_filter_translate_search"),
                 new Twig_SimpleFilter("strftimeformat",        "twig_filter_strftime_format"),
                 new Twig_SimpleFilter("filesizeformat",        "twig_filter_filesize_format"),
                 new Twig_SimpleFilter("repeat",                "twig_filter_repeat"),
@@ -92,6 +93,10 @@
         return false;
     }
 
+    /**
+     * Function: twig_function_paginate
+     * Paginates an array of items using the Paginator class.
+     */
     function twig_function_paginate($array, $per_page, $name = "page") {
         while (in_array($name, Paginator::$names))
             $name = "_".$name."_";
@@ -99,20 +104,54 @@
         return new Paginator($array, $per_page, $name);
     }
 
-    function twig_filter_translate_string($string, $domain = "theme") {
+    /**
+     * Function: twig_filter_translate
+     * Returns a translated string.
+     */
+    function twig_filter_translate($string, $domain = "theme") {
         $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
         return __($string, $domain);
     }
 
-    function twig_filter_translate_plural_string($single, $plural, $number, $domain = "theme") {
+    /**
+     * Function: twig_filter_translate_plural
+     * Returns a plural (or not) form of a translated string.
+     */
+    function twig_filter_translate_plural($single, $plural, $number, $domain = "theme") {
         $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
         return _p($single, $plural, $number, $domain);
     }
 
+    /**
+     * Function: twig_filter_translate_search
+     * Searches the available domains for a translation of the string.
+     */
+    function twig_filter_translate_search($string, $exclude = array("chyrp", "theme")) {
+        global $l10n;
+
+        foreach (array_keys($l10n) as $domain)
+            if (!in_array($domain, $exclude)) {
+                $translation = $l10n[$domain]->translate($string);
+
+                if (!empty($translation))
+                    return $translation;
+            }
+
+        return $string;
+    }
+
+    /**
+     * Function: 
+     * Returns date formatting for a string that isn't a regular time() value.
+     */
     function twig_filter_strftime_format($timestamp, $format='%x %X') {
         return when($format, $timestamp, true);
     }
 
+    /**
+     * Function: 
+     * Returns a string containing a formatted filesize value.
+     */
     function twig_filter_filesize_format($bytes) {
         if (is_array($bytes))
             $bytes = max($bytes);
@@ -134,6 +173,10 @@
         return _f("%s KB", $value);
     }
 
+    /**
+     * Function: 
+     * Returns the string repeated n times.
+     */
     function twig_filter_repeat($string, $repetitions = 1) {
         $concat = "";
 
@@ -144,10 +187,18 @@
         return $concat;
     }
 
-    function twig_filter_match($str, $match) {
-        return preg_match($match, $str);
+    /**
+     * Function: 
+     * Returns whether or not the string matches the regular expression.
+     */
+    function twig_filter_match($string, $regex) {
+        return preg_match($regex, $string);
     }
 
+    /**
+     * Function: 
+     * Does the haystack variable contain the needle variable?
+     */
     function twig_filter_contains($haystack, $needle) {
         if (is_array($haystack))
             return in_array($needle, $haystack);
@@ -161,15 +212,27 @@
         return false;
     }
 
+    /**
+     * Function: 
+     * Exports a variable for inspection.
+     */
     function twig_filter_inspect($variable) {
         return '<pre class="chyrp_inspect"><code>'.fix(var_export($variable, true)).'</code></pre>';
     }
 
+    /**
+     * Function: 
+     * Returns a HTML @checked@ attribute if the test evalutaes to true.
+     */
     function twig_filter_checked($test) {
         if ($test)
             return " checked";
     }
 
+    /**
+     * Function: 
+     * Returns a HTML @selected@ attribute if the test matches any of the passed arguments.
+     */
     function twig_filter_selected($test) {
         $try = func_get_args();
         array_shift($try);
@@ -179,6 +242,10 @@
                 return " selected";
     }
 
+    /**
+     * Function: 
+     * Returns a download link for a file located in the uploads directory.
+     */
     function twig_filter_download($filename) {
         return Config::current()->chyrp_url."/includes/download.php?file=".urlencode($filename);
     }
