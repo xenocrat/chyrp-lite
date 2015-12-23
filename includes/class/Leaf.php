@@ -126,7 +126,7 @@
      * Function: twig_filter_translate_search
      * Searches the available domains for a translation of the string.
      */
-    function twig_filter_translate_search($string, $exclude = array("chyrp", "theme")) {
+    function twig_filter_translate_search($string, $exclude = array("theme")) {
         global $l10n;
 
         foreach (array_keys($l10n) as $domain)

@@ -16,7 +16,7 @@
 <hr>
 {% for permission in permissions %}
 <p>
-<label for="permission_{{ permission.id }}">{{ permission.name | translate }}</label>
+<label for="permission_{{ permission.id }}">{{ permission.name | translate_search }}</label>
 <input class="checkbox" type="checkbox" name="permissions[{{ permission.id }}]" id="permission_{{ permission.id }}"{{ group.can(permission.id) | checked }}>
 </p>
 {% endfor %}
