@@ -12,7 +12,7 @@
 <input type="password" name="password2" value="" id="password2">
 <label for="email">{{ "Email" | translate }}</label>
 <input type="email" name="email" value="{{ POST.email | fix }}" id="email">
-{% if site.enable_captcha %}{{ captcha }}{% endif %}
+{% if site.enable_captcha and captcha != false %}{{ captcha }}{% endif %}
 {{ trigger.call("user_register") }}
 <div class="doaction">
 <button type="submit">{{ "Register" | translate }}</button>
