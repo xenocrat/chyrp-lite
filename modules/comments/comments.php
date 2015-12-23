@@ -34,14 +34,14 @@
             $config->set("akismet_api_key", null);
             $config->set("auto_reload_comments", 30);
             $config->set("enable_reload_comments", false);
-
-            Group::add_permission("add_comment", "Add Comments");
-            Group::add_permission("add_comment_private", "Add Comments to Private Posts");
-            Group::add_permission("edit_comment", "Edit Comments");
-            Group::add_permission("edit_own_comment", "Edit Own Comments");
-            Group::add_permission("delete_comment", "Delete Comments");
-            Group::add_permission("delete_own_comment", "Delete Own Comments");
-            Group::add_permission("code_in_comments", "Can Use HTML in Comments");
+                                                                                            # Add these strings to the .pot file:
+            Group::add_permission("add_comment", "Add Comments");                           # __("Add Comments");
+            Group::add_permission("add_comment_private", "Add Comments to Private Posts");  # __("Add Comments to Private Posts");
+            Group::add_permission("edit_comment", "Edit Comments");                         # __("Edit Comments");
+            Group::add_permission("edit_own_comment", "Edit Own Comments");                 # __("Edit Own Comments");
+            Group::add_permission("delete_comment", "Delete Comments");                     # __("Delete Comments");
+            Group::add_permission("delete_own_comment", "Delete Own Comments");             # __("Delete Own Comments");
+            Group::add_permission("code_in_comments", "Can Use HTML in Comments");          # __("Can Use HTML in Comments");
 
             Route::current()->add("comment/(id)/", "comment");
         }

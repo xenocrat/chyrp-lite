@@ -312,16 +312,6 @@
                            "add_group" => "Add Groups",                 # __("Add Groups");
                            "edit_group" => "Edit Groups",               # __("Edit Groups");
                            "delete_group" => "Delete Groups");          # __("Delete Groups");
-                                                                        # __("Manage Categories");
-                                                                        # __("Add Comments");
-                                                                        # __("Add Comments to Private Posts");
-                                                                        # __("Edit Comments");
-                                                                        # __("Edit Own Comments");
-                                                                        # __("Delete Comments");
-                                                                        # __("Delete Own Comments");
-                                                                        # __("Can Use HTML in Comments");
-                                                                        # __("Like Posts");
-                                                                        # __("Unlike Posts");
 
             foreach ($names as $id => $name)
                 $sql->replace("permissions",

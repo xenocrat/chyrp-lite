@@ -10,8 +10,8 @@
         }
 
         static function __install() {
-            Category::installCategorize();
-            Group::add_permission("manage_categorize", "Manage Categories");
+            Category::installCategorize();                                      # Add this string to the .pot file:
+            Group::add_permission("manage_categorize", "Manage Categories");    # __("Manage Categories");
             Route::current()->add("category/(name)/", "category");
         }
 
