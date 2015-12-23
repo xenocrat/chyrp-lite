@@ -34,17 +34,13 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
 
-            $title = $post->title();
-            $theme_file = THEME_DIR.DIR."forms".DIR."feathers".DIR.$post->feather.".php";
-            $default_file = FEATHERS_DIR.DIR.$post->feather.DIR."fields.php";
-
             $options = array();
             Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
 
-            $main->display("forms/post/edit", array("post" => $post,
-                                                    "feather" => Feathers::$instances[$post->feather],
-                                                    "options" => $options,
-                                                    "groups" => Group::find(array("order" => "id ASC"))));
+            $main->display("forms".DIR."post".DIR."edit", array("post" => $post,
+                                                                "feather" => Feathers::$instances[$post->feather],
+                                                                "options" => $options,
+                                                                "groups" => Group::find(array("order" => "id ASC"))));
             break;
 
         case "delete_post":
@@ -85,7 +81,7 @@
                 exit;
             }
 
-            $main->display("feathers/".$post->feather, array("post" => $post, "ajax_reason" => $reason));
+            $main->display("feathers".DIR.$post->feather, array("post" => $post, "ajax_reason" => $reason));
             break;
 
         case "preview":
