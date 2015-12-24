@@ -438,7 +438,9 @@ div.category a.category {                       display: inline-block;
                                                 border-radius: 0.2em;
                                                 color: #ffffff;
                                                 background-color: #4e5a66;
-                                                border: 1px #4e5a66 solid }
+                                                border: 1px #4e5a66 solid;
+                                                transition-property: border;
+                                                transition-duration: 0ms }
 div.category a.category:hover,
 div.category a.category:focus,
 div.category a.category:active {                top: 1px;
