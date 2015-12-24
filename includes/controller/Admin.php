@@ -279,7 +279,7 @@
 
             fallback($_GET['query'], "");
 
-            list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "post_attributes");
+            list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
             if (!empty($_GET['month']))
                 $where["created_at like"] = $_GET['month']."-%";
@@ -294,6 +294,7 @@
                                         "params" => $params));
 
             $ids = array();
+
             foreach ($results[0] as $result)
                 $ids[] = $result["id"];
 
@@ -1840,7 +1841,7 @@
                     $help = "<h1>".__("Filtering Results")."</h1>\n".
                             "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n".
                             "<h2>".__("Keywords")."</h2>\n".
-                            "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
+                            "<p>".__("Use the syntax <code>attr:val;</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
                     break;
                 case "slugs":
                     $help = "<h1>".__("Slugs")."</h1>\n".

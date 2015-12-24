@@ -1501,7 +1501,7 @@
      * Parameters:
      *     $query - The query to parse.
      *     $plain - WHERE syntax to search for non-keyword queries.
-     *     $table - If specified, the keywords will be checked against this table's columns for validity.
+     *     $table - Check this table to ensure the keywords are valid.
      *
      * Returns:
      *     An array containing the "WHERE" queries and the corresponding parameters.
@@ -1510,83 +1510,61 @@
         if (!trim($query))
             return array(array(), array());
 
-        $search  = array();
-        $matches = array();
-        $where   = array();
-        $params  = array();
+        $strings  = array(); # Non-keyword values found in the query.
+        $keywords = array(); # Keywords (attr:val;) found in the query.
+        $where    = array(); # Parameters validated and added to WHERE.
+        $filters  = array(); # Table column filters to be validated.
+        $params   = array(); # Parameters for the non-keyword filter.
 
-        if ($table)
+        foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment)
+            if (!substr_count($fragment, ":") or empty($table))
+                $strings[] = trim($fragment);
+            else
+                $keywords[] = trim($fragment);
+
+        $dates = array("year" => __("year"),
+                       "month" => __("month"),
+                       "day" => __("day"),
+                       "hour" => __("hour"),
+                       "minute" => __("minute"),
+                       "second" => __("second"));
+
+        foreach ($keywords as $keyword) {
+            list($attr, $val) = explode(":", $keyword);
+
+            if (in_array($attr, $dates)) {
+                $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
+            } elseif ($attr == "author") {
+                $user = new User(array("login" => $val));
+                !($table == "users") ? $where["user_id"] = $user->id : $where["id"] = $user->id;
+            } elseif ($attr == "group") {
+                $group = new Group(array("name" => $val));
+                $where["group_id"] = $val = ($group->no_results) ? 0 : $group->id;
+            } else
+                $filters[$attr] = $val;
+        }
+
+        # Check the validity of keywords if a table name was supplied.
+        if ($table) {
             $columns = SQL::current()->select($table)->fetch();
 
-        $queries = explode(" ", $query);
-        foreach ($queries as $query)
-            if (!preg_match("/([a-z0-9_]+):(.+)/", $query))
-                $search[] = $query;
-            else
-                $matches[] = $query;
-
-        $times = array("year", "month", "day", "hour", "minute", "second");
-
-        foreach ($matches as $match) {
-            list($test, $equals) = explode(":", $match);
-
-            if ($equals[0] == '"') {
-                if (substr($equals, -1) != '"')
-                    foreach ($search as $index => $part) {
-                        $equals.= " ".$part;
-
-                        unset($search[$index]);
-
-                        if (substr($part, -1) == '"')
-                            break;
-                    }
-
-                $equals = ltrim(trim($equals, '"'), '"');
-            }
-
-            if (in_array($test, $times)) {
-                if ($equals == "today")
-                    $where["created_at like"] = date("%Y-m-d %");
-                elseif ($equals == "yesterday")
-                    $where["created_at like"] = date("%Y-m-d %", now("-1 day"));
-                elseif ($equals == "tomorrow")
-                    error(__("Error"), "Unfortunately our flux capacitor is currently having issues. Try again yesterday.");
+            foreach ($filters as $attr => $val)
+                if (isset($columns[$attr]))
+                    $where[$attr] = $val;
                 else
-                    $where[strtoupper($test)."(created_at)"] = $equals;
-            } elseif ($test == "author") {
-                $user = new User(array("login" => $equals));
-                if ($user->no_results and $equals == "me") {
-                  !($table == "users") ? $where["user_id"] = Visitor::current()->id : $where["id"] = Visitor::current()->id;
-                } else
-                    !($table == "users") ? $where["user_id"] = $user->id : $where["id"] = $user->id;
-            } elseif ($test == "group") {
-                $group = new Group(array("name" => $equals));
-                $where["group_id"] = $equals = ($group->no_results) ? 0 : $group->id;
-            } else
-                $where[$test] = $equals;
+                    $strings[] = $val; # No such column: add to non-keyword values.
         }
 
-        if ($table)
-            foreach ($where as $col => $val)
-                if (!isset($where[$col])) {
-                    if ($table == "posts") {
-                        $where["post_attributes.name"] = $col;
-                        $where["post_attributes.value like"] = "%".$val."%";
-                    }
-
-                    unset($where[$col]);
-                }
-
-        if (!empty($search)) {
+        if (!empty($strings)) {
             $where[] = $plain;
-            $params[":query"] = "%".join(" ", $search)."%";
+            $params[":query"] = "%".join(" ", $strings)."%";
         }
 
-        $keywords = array($where, $params);
+        $search = array($where, $params);
 
-        Trigger::current()->filter($keywords, "keyword_search", $query, $plain);
+        Trigger::current()->filter($search, "keyword_search", $query, $plain);
 
-        return $keywords;
+        return $search;
     }
 
     /**
