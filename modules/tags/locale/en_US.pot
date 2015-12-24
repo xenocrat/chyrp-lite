@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-12-20 17:42+0000\n"
+"POT-Creation-Date: 2015-12-24 14:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: modules/tags/tags.php:64
 #: modules/tags/tags.php:130
 #: modules/tags/tags.php:141
-#: modules/tags/tags.php:534
+#: modules/tags/tags.php:546
 msgid "Tags"
 msgstr ""
 
@@ -110,7 +110,7 @@ msgid "You do not have sufficient privileges to manage tags."
 msgstr ""
 
 #: modules/tags/tags.php:188
-#: modules/tags/tags.php:530
+#: modules/tags/tags.php:542
 #, php-format
 msgid "%s post tagged with &quot;%s&quot;"
 msgid_plural "%s posts tagged with &quot;%s&quot;"
@@ -118,63 +118,86 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: modules/tags/tags.php:223
-#: modules/tags/tags.php:293
+#: modules/tags/tags.php:296
 msgid "You do not have sufficient privileges to rename tags."
 msgstr ""
 
 #: modules/tags/tags.php:226
-#: modules/tags/tags.php:326
+#: modules/tags/tags.php:302
+#: modules/tags/tags.php:332
+#: modules/tags/tags.php:373
+msgid "No Tag Specified"
+msgstr ""
+
+#: modules/tags/tags.php:226
+#: modules/tags/tags.php:302
 msgid "Please specify the tag you want to rename."
 msgstr ""
 
 #: modules/tags/tags.php:254
-#: modules/tags/tags.php:354
-msgid "Could not find the specified tag in the database."
+#: modules/tags/tags.php:360
+msgid "Tag not found."
 msgstr ""
 
 #: modules/tags/tags.php:261
-#: modules/tags/tags.php:276
-msgid "Please specify the ID of the post whose tags you want to edit."
+msgid "An ID is required to edit tags."
 msgstr ""
 
-#: modules/tags/tags.php:285
+#: modules/tags/tags.php:279
+msgid "An ID is required to update tags."
+msgstr ""
+
+#: modules/tags/tags.php:291
 msgid "Tags updated."
 msgstr ""
 
-#: modules/tags/tags.php:321
+#: modules/tags/tags.php:327
 msgid "Tag renamed."
 msgstr ""
 
-#: modules/tags/tags.php:364
+#: modules/tags/tags.php:332
+#: modules/tags/tags.php:373
+msgid "Please specify the tag you want to delete."
+msgstr ""
+
+#: modules/tags/tags.php:367
 msgid "You do not have sufficient privileges to delete tags."
 msgstr ""
 
-#: modules/tags/tags.php:387
+#: modules/tags/tags.php:396
 msgid "Tag deleted."
 msgstr ""
 
-#: modules/tags/tags.php:395
+#: modules/tags/tags.php:401
 msgid "You do not have sufficient privileges to add tags."
 msgstr ""
 
-#: modules/tags/tags.php:429
-msgid "Posts tagged."
+#: modules/tags/tags.php:407
+msgid "No posts selected."
+msgstr ""
+
+#: modules/tags/tags.php:410
+msgid "No tag specified."
 msgstr ""
 
 #: modules/tags/tags.php:441
+msgid "Posts tagged."
+msgstr ""
+
+#: modules/tags/tags.php:453
 msgid "No Tag"
 msgstr ""
 
-#: modules/tags/tags.php:473
+#: modules/tags/tags.php:485
 msgid "Invalid Tag"
 msgstr ""
 
-#: modules/tags/tags.php:484
+#: modules/tags/tags.php:496
 #, php-format
 msgid "Posts tagged with %s"
 msgstr ""
 
-#: modules/tags/tags.php:512
+#: modules/tags/tags.php:524
 msgid "No Tags"
 msgstr ""
 

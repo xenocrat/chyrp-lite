@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-12-20 17:42+0000\n"
+"POT-Creation-Date: 2015-12-24 14:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -562,26 +562,24 @@ msgstr ""
 msgid 'yes'
 msgstr ""
 
-#: admin/pages/manage_groups.twig:57
-#: admin/pages/manage_pages.twig:63
-#: admin/pages/manage_posts.twig:60
-#: admin/pages/manage_users.twig:57
-#: admin/pages/manage_users.twig:60
+#: admin/pages/manage_groups.twig:60
+#: admin/pages/manage_pages.twig:64
+#: admin/pages/manage_posts.twig:61
+#: admin/pages/manage_users.twig:59
 msgid 'edit'
 msgstr ""
 
-#: admin/pages/manage_groups.twig:58
-#: admin/pages/manage_pages.twig:66
-#: admin/pages/manage_posts.twig:63
-#: admin/pages/manage_users.twig:58
-#: admin/pages/manage_users.twig:61
+#: admin/pages/manage_groups.twig:65
+#: admin/pages/manage_pages.twig:69
+#: admin/pages/manage_posts.twig:66
+#: admin/pages/manage_users.twig:64
 msgid 'delete'
 msgstr ""
 
-#: admin/pages/manage_groups.twig:65
-#: admin/pages/manage_pages.twig:81
-#: admin/pages/manage_posts.twig:78
-#: admin/pages/manage_users.twig:73
+#: admin/pages/manage_groups.twig:77
+#: admin/pages/manage_pages.twig:85
+#: admin/pages/manage_posts.twig:82
+#: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
 msgstr ""
@@ -627,9 +625,9 @@ msgstr ""
 msgid "never"
 msgstr ""
 
-#: admin/pages/manage_pages.twig:74
-#: admin/pages/manage_posts.twig:71
-#: admin/pages/manage_users.twig:66
+#: admin/pages/manage_pages.twig:78
+#: admin/pages/manage_posts.twig:75
+#: admin/pages/manage_users.twig:73
 msgid "(none)"
 msgstr ""
 
@@ -650,6 +648,7 @@ msgid "Posted"
 msgstr ""
 
 #: admin/pages/manage_posts.twig:36
+#: admin/partials/page_fields.twig:25
 #: admin/partials/post_fields.twig:60
 msgid "Status"
 msgstr ""
@@ -907,38 +906,64 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: admin/partials/page_fields.twig:18
+#: admin/partials/page_fields.twig:19
 #: admin/partials/post_fields.twig:86
 msgid "Slug"
 msgstr ""
 
-#: admin/partials/page_fields.twig:22
-msgid "Parent"
+#: admin/partials/page_fields.twig:28
+#: admin/partials/page_fields.twig:33
+msgid "Public and visible in pages list"
 msgstr ""
 
-#: admin/partials/page_fields.twig:24
-msgid "[None]"
+#: admin/partials/page_fields.twig:29
+#: admin/partials/page_fields.twig:34
+#: admin/partials/post_fields.twig:63
+msgid "Public"
 msgstr ""
 
-#: admin/partials/page_fields.twig:37
-msgid "Show in pages list?"
+#: admin/partials/page_fields.twig:30
+#: admin/partials/page_fields.twig:35
+msgid "Private and visible in pages list"
+msgstr ""
+
+#: admin/partials/page_fields.twig:31
+#: admin/partials/page_fields.twig:36
+#: admin/partials/post_fields.twig:64
+msgid "Private"
 msgstr ""
 
 #: admin/partials/page_fields.twig:41
 msgid "Priority in pages list"
 msgstr ""
 
-#: admin/partials/page_fields.twig:58
-msgid "Is this page public?"
+#: admin/partials/page_fields.twig:43
+msgid "High"
 msgstr ""
 
-#: admin/partials/page_fields.twig:67
+#: admin/partials/page_fields.twig:44
+msgid "Medium"
+msgstr ""
+
+#: admin/partials/page_fields.twig:45
+msgid "Low"
+msgstr ""
+
+#: admin/partials/page_fields.twig:49
+msgid "Parent"
+msgstr ""
+
+#: admin/partials/page_fields.twig:51
+msgid "[None]"
+msgstr ""
+
+#: admin/partials/page_fields.twig:69
 #: admin/partials/post_fields.twig:135
 #: admin/partials/post_fields.twig:144
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:71
+#: admin/partials/page_fields.twig:73
 #: admin/partials/post_fields.twig:139
 #: admin/partials/post_fields.twig:148
 msgid "Save"
@@ -956,20 +981,12 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: admin/partials/post_fields.twig:63
-msgid "Public"
-msgstr ""
-
-#: admin/partials/post_fields.twig:64
-msgid "Private"
-msgstr ""
-
 #: admin/partials/post_fields.twig:65
 msgid "Scheduled"
 msgstr ""
 
 #: admin/partials/post_fields.twig:66
-msgid "Registered Only"
+msgid "Visible only to registered users"
 msgstr ""
 
 #: admin/partials/post_fields.twig:79
