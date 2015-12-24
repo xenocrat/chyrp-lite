@@ -11,7 +11,7 @@
 </section>
 {% if post.caption %}
 <section class="caption{{ post.caption | length > 1000 ? ' longform' : '' }}">
-{{ post.caption | read_more("&hellip;more") }}
+{{ post.caption }}
 </section>
 {% endif %}
 {% endblock %}

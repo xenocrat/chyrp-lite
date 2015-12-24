@@ -7,7 +7,7 @@
 </h2>
 {% endif %}
 <section class="description{{ post.description | length > 1000 ? ' longform' : '' }}">
-{{ post.description | read_more("&hellip;more") }}
+{{ post.description }}
 </section>
 <section class="audio">
 {{ post.audio_player }}

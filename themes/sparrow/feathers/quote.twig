@@ -8,7 +8,7 @@
 {% endif %}
 <section class="quote{% if post.quote | length > 1000 %} longform{% endif %}">
 <blockquote>
-{{ post.quote | read_more("&hellip;more") }}
+{{ post.quote }}
 </blockquote>
 <p>{{ "&mdash; " ~ post.source | striptags | fix }}</p>
 </section>
