@@ -1325,12 +1325,12 @@
 
                 $info["description"] = __($info["description"], $folder);
 
-                $info["description"] = preg_replace_callback("/<code>(.+)<\/code>/s",
+                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
-                $info["description"] = preg_replace_callback("/<pre>(.+)<\/pre>/s",
+                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
                                                              },
@@ -1396,12 +1396,12 @@
 
                 $info["description"] = __($info["description"], $folder);
 
-                $info["description"] = preg_replace_callback("/<code>(.+)<\/code>/s",
+                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
-                $info["description"] = preg_replace_callback("/<pre>(.+)<\/pre>/s",
+                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
                                                              },
@@ -1459,12 +1459,12 @@
                     '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' :
                     $info["author"]["name"] ;
 
-                $info["description"] = preg_replace_callback("/<code>(.+)<\/code>/s",
+                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
-                $info["description"] = preg_replace_callback("/<pre>(.+)<\/pre>/s",
+                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
                                                              },
