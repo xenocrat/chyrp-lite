@@ -1504,7 +1504,7 @@
      *     An array containing the "WHERE" queries and the corresponding parameters.
      */
     function keywords($query, $plain, $table = null) {
-        if (!trim($query))
+        if (empty(trim($query)))
             return array(array(), array());
 
         $strings  = array(); # Non-keyword values found in the query.
@@ -1514,7 +1514,7 @@
         $params   = array(); # Parameters for the non-keyword filter.
 
         foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment)
-            if (!substr_count($fragment, ":") or empty($table))
+            if (!substr_count($fragment, ":"))
                 $strings[] = trim($fragment);
             else
                 $keywords[] = trim($fragment);
@@ -1542,7 +1542,7 @@
         }
 
         # Check the validity of keywords if a table name was supplied.
-        if ($table) {
+        if (!empty($table)) {
             $columns = SQL::current()->select($table)->fetch();
 
             foreach ($filters as $attr => $val)
@@ -1550,7 +1550,8 @@
                     $where[$attr] = $val;
                 else
                     $strings[] = $val; # No such column: add to non-keyword values.
-        }
+        } else
+            $strings = array_merge($strings, $filters); # Cannot validate: merge with non-keyword values.
 
         if (!empty($strings)) {
             $where[] = $plain;
@@ -1600,7 +1601,7 @@
             }
 
             if (is_array($val)) {
-                if (in_array(0, array_keys($val))) { # Numeric-indexed things need to be added as duplicates
+                if (in_array(0, array_keys($val))) { # Numeric-indexed things need to be added as duplicates.
                     foreach ($val as $dup) {
                         $xml = $object->addChild($key);
                         arr2xml($xml, $dup);
@@ -1724,7 +1725,7 @@
      * Generates a captcha form element.
      *
      * Returns:
-     *     A string containing an form input type
+     *     A string containing an form input type.
      */
     function generate_captcha() {
         global $captchaHooks;
@@ -1738,7 +1739,7 @@
      * Checks if the answer to a captcha is right.
      *
      * Returns:
-     *     Whether or not the captcha was defeated
+     *     Whether or not the captcha was defeated.
      */
     function check_captcha() {
         global $captchaHooks;
@@ -1760,7 +1761,7 @@
      *     $atts - Optional, additional key/value attributes to include in the IMG tag
      *
      * Returns:
-     *     String containing either just a URL or a complete image tag
+     *     String containing either just a URL or a complete image tag.
      *
      * Source:
      *     http://gravatar.com/site/implement/images/php/
