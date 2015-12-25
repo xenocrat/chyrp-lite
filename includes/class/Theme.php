@@ -19,7 +19,7 @@
         private function __construct() {
             $config = Config::current();
 
-            # Load the theme translator
+            # Load the theme translator.
             if (file_exists(THEME_DIR.DIR."locale".DIR.$config->locale.".mo"))
                 load_translator("theme", THEME_DIR.DIR."locale".DIR.$config->locale.".mo");
 

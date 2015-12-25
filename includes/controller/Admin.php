@@ -48,7 +48,7 @@
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
 
-            # Load the theme translator
+            # Load the theme translator.
             if (file_exists(MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo"))
                 load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
         }
