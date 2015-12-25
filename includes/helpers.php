@@ -46,7 +46,7 @@
      *     $body - The message for the error dialog.
      */
     function show_403($title, $body) {
-        header("Status: 403");
+        header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
         error($title, $body);
     }
 
@@ -59,9 +59,6 @@
      */
      function show_404() {
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-
-        if (!defined('DEBUG'))
-            exit("404 Not Found");
 
         $theme = Theme::current();
         $main = MainController::current();

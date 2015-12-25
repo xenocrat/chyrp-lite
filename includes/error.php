@@ -92,7 +92,6 @@
 
         # Attempt to set headers to sane values.
         if (!headers_sent()) {
-            header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
             header("Content-type: text/html; charset=UTF-8");
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
