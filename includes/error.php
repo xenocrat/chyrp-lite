@@ -95,6 +95,9 @@
             header("Content-type: text/html; charset=UTF-8");
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+
+            if (!empty($backtrace))
+                header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
         }
 
         # Report in plain text for the automated tester.
