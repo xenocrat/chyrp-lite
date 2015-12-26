@@ -1258,28 +1258,23 @@
         if (in_array(strtolower($file_ext), array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
             $file_ext = "txt";
 
-        if (is_array($extension)) {
-            if (!in_array(strtolower($file_ext), $extension) and !in_array(strtolower($original_ext), $extension)) {
-                $list = "";
-                for ($i = 0; $i < count($extension); $i++) {
-                    $comma = "";
-                    if (($i + 1) != count($extension)) $comma = ", ";
-                    if (($i + 2) == count($extension)) $comma = ", and ";
-                    $list.= "<code>*.".$extension[$i]."</code>".$comma;
-                }
-                error(__("Invalid Extension"), _f("Only %s files are accepted.", array($list)));
-            }
-        } elseif (isset($extension) and
-                  strtolower($file_ext) != strtolower($extension) and
-                  strtolower($original_ext) != strtolower($extension))
-            error(__("Invalid Extension"), _f("Only %s files are supported.", array("*.".$extension)));
+        if (!empty($extension)) {
+            $extensions = array();
+
+            foreach ((array) $extension as $string)
+                $extensions[] = strtolower($string);
+
+            if (!in_array(strtolower($file_ext), $extensions) and
+                !in_array(strtolower($original_ext), $extensions))
+                error(__("Unsupported File Type"), _f("Only files of the following types are accepted: %s.", implode(", ", $extensions)));
+        }
 
         array_pop($file_split);
         $file_clean = implode(".", $file_split);
         $file_clean = sanitize($file_clean, false).".".$file_ext;
         $filename = unique_filename($file_clean, $path);
 
-        $message = __("Couldn't upload file. CHMOD <code>".$dir."</code> to 777 and try again. If this problem persists, it's probably timing out; in which case, you must contact your system administrator to increase the maximum POST and upload sizes.");
+        $message = _f("Failed to put file in directory <code>%s</code>. CHMOD it to 777 and try again.", $dir);
 
         if ($put) {
             if (!@copy($file['tmp_name'], $dir.DIR.$filename))
@@ -1287,7 +1282,7 @@
         } elseif (!@move_uploaded_file($file['tmp_name'], $dir.DIR.$filename))
             error(__("Error"), $message);
 
-        return ($path ? $path."/".$filename : $filename);
+        return ($path ? $path.DIR.$filename : $filename);
     }
 
     /**
