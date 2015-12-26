@@ -42,9 +42,10 @@
 {% endif %}
 </select>
 {% endif %}
-<label for="pinned_{{ post.id }}">{{ "Pinned?" | translate }}</label>
+<label for="pinned_{{ post.id }}">{{ "Pinned?" | translate }}
+<span class="sub">{{ "(shows this post above all others)" | translate }}</span>
+</label>
 <input id="pinned_{{ post.id }}" type="checkbox" name="pinned"{{ post.pinned | checked }}>
-<small>{{ "(shows this post above all others)" | translate }}</small>
 <label for="slug_{{ post.id }}">{{ "Slug" | translate }}</label>
 <input id="slug_{{ post.id }}" class="text" type="text" name="slug" value="{{ post.slug | fix }}">
 <label for="created_at_{{ post.id }}">{{ "Timestamp" | translate }}</label>

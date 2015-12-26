@@ -5,13 +5,13 @@
 <h2>{{ "Register" | translate }}</h2>
 <form action="{{ url('register') }}" method="post">
 <label for="login">{{ "Username" | translate }}</label>
-<input type="text" name="login" value="{{ POST.login is defined ? POST.login | fix : '' }}" id="login">
+<input type="text" name="login" value="{{ POST.login is defined ? POST.login | fix(true) : '' }}" id="login">
 <label for="password1">{{ "Password" | translate }}</label>
 <input type="password" name="password1" value="" id="password1">
 <label for="password2">{{ "Password " | translate }}<span class="sub">{{ "(again)" | translate }}</span></label>
 <input type="password" name="password2" value="" id="password2">
 <label for="email">{{ "Email" | translate }}</label>
-<input type="email" name="email" value="{{ POST.email | fix }}" id="email">
+<input type="email" name="email" value="{{ POST.email | fix(true) }}" id="email">
 {% if site.enable_captcha and captcha != false %}{{ captcha }}{% endif %}
 {{ trigger.call("user_register") }}
 <div class="doaction">

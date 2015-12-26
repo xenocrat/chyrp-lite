@@ -12,7 +12,7 @@
 {% if GET.year != null %}
 {# Yearly archive: display thumbnails #}
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
-{% if post.title %}
+{% if post.title is not empty %}
 <h4 class="yearly">{{ post.title | normalize | truncate(20) }}</h4>
 {% else %}
 <h4 class="yearly">{{ post.created_at | strftimeformat("%d %b, %Y" | translate) }}</h4>

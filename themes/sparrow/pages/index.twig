@@ -4,8 +4,6 @@
 {% for post in posts.paginated %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
 {% else %}
-<div class="ribbon">
-<h3 class="ribbon">{{ "No posts" | translate }}</h3>
-</div>
+<h3 role="status" class="filter">{{ "No posts" | translate }}</h3>
 {% endfor %}
 {% endblock %}

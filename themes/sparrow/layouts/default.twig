@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? site.description : "" }}{{ title ? "&raquo;" ~ title | striptags : "" }}{% endblock %}</title>
+<title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? ": " ~ site.description : "" }}{{ title ? " &raquo; " ~ title | striptags : "" }}{% endblock %}</title>
 <meta name="description" content="{{ site.description }}">
 <meta name="generator" content="Chyrp Lite">
 <meta name="viewport" content="initial-scale = 1.0">
@@ -29,7 +29,7 @@
 <h1 class="banner"><a href="{{ site.url }}">{{ site.name }}</a></h1>
 <ul role="menubar" class="navigation">
 <li role="presentation">
-<a role="menuitem" href="#" onclick="mailTo('{{ site.email | split('@') | last }}','{{ site.email | split('@') | first }}')">Email</a>
+<a role="menuitem" href="#" onclick="mailTo('{{ site.email | split('@') | last }}','{{ site.email | split('@') | first }}')">{{ "Email" | translate }}</a>
 </li>
 <li role="presentation">
 <a role="menuitem" href="{{ url("feed") }}">{{ "Feed" | translate }}</a>
@@ -73,7 +73,7 @@
 <div role="search" class="search_box">
 <form action="{{ site.url }}" method="get" accept-charset="utf-8">
 <input type="hidden" name="action" value="search" id="action">
-<input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix : '' }}" placeholder="Search&hellip;" title="Search this blog">
+<input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix : '' }}" placeholder="Search&hellip;" aria-label="{{ 'Search this blog' | translate }}">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>
 </form>
 </div>
