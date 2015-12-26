@@ -1549,9 +1549,10 @@
                 if (isset($columns[$attr]))
                     $where[$attr] = $val;
                 else
-                    $strings[] = $val; # No such column: add to non-keyword values.
+                    $strings[] = $attr." ".$val; # No such column: add to non-keyword values.
         } else
-            $strings = array_merge($strings, $filters); # Cannot validate: merge with non-keyword values.
+            foreach ($filters as $attr => $val)
+                $strings[] = $attr." ".$val; # Cannot validate: add all to non-keyword values.
 
         if (!empty($strings)) {
             $where[] = $plain;
