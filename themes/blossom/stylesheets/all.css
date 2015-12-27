@@ -618,7 +618,6 @@ article img {                                   max-width: 100% }
     ul.tail_nav.mobile_nav.on li,
     ul.tail_nav.mobile_nav li#mobile_toggle {   height: 3em;
                                                 border-bottom: 1px solid #d2d9d4 }
-    ul.tail_nav.mobile_nav.on li:first-child {  border-top: 1px solid #d2d9d4 }
     table {                                     box-sizing: border-box;
                                                 display: block }
     div#mast {                                  display: block }

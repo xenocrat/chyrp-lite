@@ -12,7 +12,7 @@
 {% if GET.year != null %}
 {# Yearly archive: display thumbnails #}
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
-{% if post.title is not empty %}
+{% if post.title is not empty and post.feather != "photo" %}
 <h4 class="yearly">{{ post.title | striptags | normalize | truncate(20) }}</h4>
 {% endif %}
 {% if post.feather == "photo" %}
