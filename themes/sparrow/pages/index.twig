@@ -1,9 +1,11 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
+{% if reason is not defined %}{# Some modules define reason in error states #}
 {% for post in posts.paginated %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
 {% else %}
 <h3 role="status" class="filter">{{ "No posts" | translate }}</h3>
 {% endfor %}
+{% endif %}
 {% endblock %}
