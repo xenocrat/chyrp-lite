@@ -8,7 +8,7 @@
 {% endif %}
 {% if post.editable or post.deletable %}
 <div class="doaction admin">
-{{ post.edit_link }} {{ post.delete_link("Delete" | translate) }}
+{{ post.edit_link() }} {{ post.delete_link("Delete" | translate) }}
 </div>
 {% endif %}
 <div role="note" class="metadata">
@@ -34,7 +34,7 @@
 &bull; {{ "Comments closed" | translate }}
 {% else %}
 &bull;
-<a href="{{ post.url() }}#comments" rel="bookmark" title="{{ "View comments" | translate }}">
+<a href="{{ post.url() }}#comments" rel="bookmark" title="{{ 'View comments' | translate }}">
 {{ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }}
 </a>
 {% endif %}

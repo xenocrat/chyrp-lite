@@ -1,6 +1,7 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
+{% if reason is not defined %}{# Some modules define reason in error states #}
 {% for post in posts.paginated %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
 {% else %}
@@ -8,4 +9,5 @@
 <h3 class="ribbon">{{ "No posts" | translate }}</h3>
 </div>
 {% endfor %}
+{% endif %}
 {% endblock %}
