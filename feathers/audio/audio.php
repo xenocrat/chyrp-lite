@@ -9,7 +9,8 @@
             $this->setField(array("attr" => "audio",
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
-                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "audio")));
+                                  "multiple" => false,
+                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "audio")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),

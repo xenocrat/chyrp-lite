@@ -8,9 +8,9 @@
                                   "preview" => "markup_title"));
             $this->setField(array("attr" => "uploads",
                                   "type" => "file",
-                                  "multiple" => "true",
+                                  "multiple" => true,
                                   "label" => __("Files", "uploader"),
-                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "uploader")));
+                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "uploader")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "uploader"),

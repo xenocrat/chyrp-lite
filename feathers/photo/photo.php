@@ -9,7 +9,8 @@
             $this->setField(array("attr" => "photo",
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),
-                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "photo")));
+                                  "multiple" => false,
+                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "photo")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "photo"),
@@ -60,6 +61,7 @@
         public function title($post) {
             return oneof($post->title, $post->title_from_excerpt());
         }
+
         public function excerpt($post) {
             return $post->caption;
         }
