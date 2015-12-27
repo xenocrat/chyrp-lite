@@ -49,15 +49,10 @@
 <label for="parent_id">{{ "Parent" | translate }}</label>
 <select name="parent_id" id="parent_id">
 <option value="0">{{ "[None]" | translate }}</option>
-{% if page is defined %}
-{% for item in theme.pages_list(0, page.id) %}
-<option value="{{ item.page.id }}"{{ page is defined ? page.parent_id | selected(item.page.id) : "" }}>{{ "&nbsp;&nbsp;&nbsp;&nbsp;" | repeat(item.page.depth - 1) }}{{ item.page.title | striptags | fix }}</option>
+{% if page is defined %}{% set exclude = page.id %}{% else %}{% set exclude = null %}{% endif %}
+{% for item in theme.pages_list(0, exclude) %}
+<option value="{{ item.id }}"{{ page is defined ? page.parent_id | selected(item.id) : "" }}>{{ "&nbsp;&nbsp;&nbsp;&nbsp;" | repeat(item.depth - 1) }}{{ item.title | striptags | fix }}</option>
 {% endfor %}
-{% else %}
-{% for item in theme.pages_list(0) %}
-<option value="{{ item.page.id }}"{{ page is defined ? page.parent_id | selected(item.page.id) : "" }}>{{ "&nbsp;&nbsp;&nbsp;&nbsp;" | repeat(item.page.depth - 1) }}{{ item.page.title | striptags | fix }}</option>
-{% endfor %}
-{% endif %}
 </select>
 </p>
 {{ route.action == "write_page" ? trigger.call("new_page_options") : trigger.call("edit_page_options", page) }}

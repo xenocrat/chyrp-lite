@@ -42,15 +42,17 @@
             if (isset($this->caches["pages_list"][$start]))
                 return $this->caches["pages_list"][$start];
 
-            $this->linear_children = array();
-            $this->pages_flat = array();
-            $this->children = array();
-            $this->end_tags_for = array();
+            $this->caches["pages"]["flat"] = array();
+            $this->caches["pages"]["children"] = array();
 
-            if ($start and !is_numeric($start))
-                $begin_page = new Page(array("url" => $start));
+            if (!empty($start) and !is_numeric($start)) {
+                $from = new Page(array("url" => $start));
 
-            $start = ($start and !is_numeric($start)) ? $begin_page->id : $start ;
+                if (!$from->no_results)
+                    $start = $from->id;
+                else
+                    $start = (int) $start;
+            }
 
             $where = ADMIN ? array("id not" => $exclude) : array("show_in_list" => true) ;
             $pages = Page::find(array("where" => $where, "order" => "list_order ASC"));
@@ -59,67 +61,37 @@
                 return $this->caches["pages_list"][$start] = array();
 
             foreach ($pages as $page)
-                $this->end_tags_for[$page->id] = $this->children[$page->id] = array();
-
-            foreach ($pages as $page)
                 if ($page->parent_id != 0)
-                    $this->children[$page->parent_id][] = $page;
+                    $this->caches["pages"]["children"][$page->parent_id][] = $page;
 
             foreach ($pages as $page)
                 if ((!$start and $page->parent_id == 0) or ($start and $page->id == $start))
                     $this->recurse_pages($page);
 
-            $array = array();
-            foreach ($this->pages_flat as $page) {
-                $array[$page->id]["has_children"] = !empty($this->children[$page->id]);
-
-                if ($array[$page->id]["has_children"])
-                    $this->end_tags_for[$this->get_last_linear_child($page->id)][] = array("</ul>", "</li>");
-
-                $array[$page->id]["end_tags"] =& $this->end_tags_for[$page->id];
-                $array[$page->id]["page"] = $page;
-            }
-
             if (!isset($exclude))
-                return $this->caches["pages_list"][$start] = $array;
+                return $this->caches["pages_list"][$start] = $this->caches["pages"]["flat"];
             else
-                return $array;
-        }
-
-        /**
-         * Function: get_last_linear_child
-         * Gets the last linear child of a page.
-         *
-         * Parameters:
-         *     $page - Page to get the last linear child of.
-         *     $origin - Where to start.
-         */
-        public function get_last_linear_child($page, $origin = null) {
-            fallback($origin, $page);
-
-            $this->linear_children[$origin] = $page;
-            foreach ($this->children[$page] as $child)
-                $this->get_last_linear_child($child->id, $origin);
-
-            return $this->linear_children[$origin];
+                return $this->caches["pages"]["flat"];
         }
 
         /**
          * Function: recurse_pages
-         * Prepares the pages into <Theme.$pages_flat>.
+         * Populates the page cache and gives each page @depth@ and @children@ attributes.
          *
          * Parameters:
          *     $page - Page to start recursion at.
          */
-        public function recurse_pages($page) {
+        private function recurse_pages($page) {
             $page->depth = oneof(@$page->depth, 1);
+            $page->children = (isset($this->caches["pages"]["children"][$page->id])) ? true : false ;
 
-            $this->pages_flat[] = $page;
+            $this->caches["pages"]["flat"][] = $page;
 
-            foreach ($this->children[$page->id] as $child) {
-                $child->depth = $page->depth + 1;
-                $this->recurse_pages($child);
-            }
+            if (isset($this->caches["pages"]["children"][$page->id]))
+                foreach ($this->caches["pages"]["children"][$page->id] as $child) {
+                    $child->depth = $page->depth + 1;
+                    $this->recurse_pages($child);
+                }
         }
 
         /**
