@@ -2,9 +2,9 @@
 
 {% block content %}
 <h2 class="post_title">
-<a href="${ post.source | strip_tags | escape(true) }" class="link">$post.name</a>
+<a href="{{ post.source | striptags | fix(true) }}" class="link">{{ post.name }}</a>
 </h2>
-<section class="description{% if post.description | length > 1000 %} columnized{% endif %}">
-${ post.description | read_more("&hellip;more") }
+<section class="description{{ post.description | length > 1000 ? ' longform' : '' }}">
+{{ post.description }}
 </section>
 {% endblock %}

@@ -5,7 +5,7 @@
 {% include "feathers/" ~ post.feather ~ ".twig" %}
 {% else %}
 <div class="ribbon">
-<h3 class="ribbon">${ "No posts" | translate }</h3>
+<h3 class="ribbon">{{ "No posts" | translate }}</h3>
 </div>
 {% endfor %}
 {% endblock %}

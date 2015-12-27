@@ -196,6 +196,7 @@ ol.comments li {                                box-sizing: border-box;
                                                 margin: 0em;
                                                 padding: 2rem 2rem 0rem 2rem;
                                                 border-bottom: 1px solid #c6ccc8 }
+ol.comments li.highlighted {                    background-color: #fffecd }
 ol.comments li:last-child {                     border-bottom: none }
 ol.comments li#comment_shim {                   display: none }
 ol.comments li.comment_form {                   padding-bottom: 2em }
@@ -644,7 +645,7 @@ article img {                                   max-width: 100% }
 }
 
 @media print and (min-width: 297mm), screen and (min-width: 1200px) {
-    .columnized {                               -moz-column-count: 2;
+    .longform {                                 -moz-column-count: 2;
                                                 -moz-column-gap: 2em;
                                                 -webkit-column-count: 2;
                                                 -webkit-column-gap: 2em;

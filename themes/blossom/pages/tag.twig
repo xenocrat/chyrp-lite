@@ -1,22 +1,24 @@
 {% extends "layouts/default.twig" %}
 
 {% block content %}
-{% if posts.paginated %}
+{% if posts.paginated is defined and posts.paginated is not empty %}
 <div class="ribbon">
-<h3 class="ribbon">${ "Posts tagged with %s" | translate("tags") | format(tag | escape) }</h3>
+<h3 class="ribbon">{{ "Posts tagged with %s" | translate | format(tag | fix) }}</h3>
 </div>
-{% endif %}
 {% for post in posts.paginated %}
 {% include "feathers/" ~ post.feather ~ ".twig" %}
+{% endfor %}
 {% else %}
 <div class="ribbon">
 <h3 class="ribbon">
 {% if reason == "tag_not_found" %}
-${ "There are no posts with the tag you specified" | translate("tags") }
+{{ "There are no posts with the tag you specified" | translate }}
+{% elseif reason == "no_tag_specified" %}
+{{ "No tag specified" | translate }}
 {% else %}
-${ "No tag specified" | translate("tags") }
+{{ "Oops! Something went wrong." | translate }}
 {% endif %}
 </h3>
 </div>
-{% endfor %}
+{% endif %}
 {% endblock %}

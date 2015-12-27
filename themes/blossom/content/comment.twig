@@ -1,22 +1,24 @@
-<li id="comment_$comment.id">
+<li id="comment_{{ comment.id }}"{% if parent_id is defined and parent_id == comment.id %} class="highlighted"{% endif %}>
 {% if comment.status == "pingback" %}
-<h3>${ "%s:" | translate | format(comment.author_link) }</h3>
+<h3>{{ "%s:" | translate | format(comment.author_link) }}</h3>
 {% else %}
-<h3>${ "%s said:" | translate | format(comment.author_link) }</h3>
+<h3>{{ "%s said:" | translate | format(comment.author_link) }}</h3>
 {% endif %}
 <section class="comment">
 {% if comment.status == "denied" %}
-<em>${ "This comment is awaiting moderation." | translate }</em>
+<em>{{ "This comment is awaiting moderation." | translate }}</em>
 {% else %}
-$comment.body
+{{ comment.body }}
 {% endif %}
 </section>
 <div class="doaction">
-${ comment.edit_link("Edit" | translate) } ${ comment.delete_link("Delete" | translate) }
+{{ comment.edit_link("Edit" | translate) }} {{ comment.delete_link("Delete" | translate) }}
 </div>
 <div class="metadata">
 <cite>
-${ "<a href=\"%s\" class=\"permalink\">%s</a>" | translate | format(comment.post.url ~ "#comment_"~comment.id, comment.created_at | strftime("%d %B, %Y, at %I:%M %p" | translate)) }
+<a href="{{ url('comment/%d') | format(comment.id) }}" class="permalink">
+{{ comment.created_at | strftimeformat("%d %B, %Y, at %I:%M %p" | translate) }}
+</a>
 </cite>
 </div>
 </li>

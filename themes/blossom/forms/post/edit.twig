@@ -1,84 +1,90 @@
-<form id="post_edit_form_$post.id" class="inline_edit post_edit" action="{% admin "update_post" %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form id="post_edit_form_{{ post.id }}" class="inline_edit post_edit" action="{{ admin_url('update_post') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <fieldset>
-${ trigger.call("before_ajax_edit_post_fields", feather) }
+{{ trigger.call("before_ajax_edit_post_fields", feather) }}
 {% for field in feather.fields %}
-<label for="$field.attr">
-$field.label
-{% if field.optional %}
-<span class="sub">${ "(optional)" | translate }</span>
+<label for="{{ field.attr }}_field_{{ post.id }}">
+{{ field.label }}
+{% if field.optional is defined and field.optional %}
+<span class="sub">{{ "(optional)" | translate }}</span>
 {% endif %}
 </label>
-{% if field.type == "text" or field.type == "file" %}
-<input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" {% if field.multiple == "true" %}name="$field.attr[]" multiple{% else %}name="$field.attr"{% endif %} value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="$field.attr">
+{% if field.type == "text" %}
+<input id="{{ field.attr }}_field_{{ post.id }}" class="text" type="text" name="{{ field.attr }}"{{ field.preview is defined ? ' data-preview="'~field.preview~'"' : '' }} value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
+{% elseif field.type == "file" %}
+<input id="{{ field.attr }}_field_{{ post.id }}" class="file" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
 {% elseif field.type == "text_block" %}
-<textarea class="wide{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" rows="${ field.rows | fallback(12) }" name="$field.attr" id="$field.attr">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
+<textarea id="{{ field.attr }}_field_{{ post.id }}" name="{{ field.attr }}" rows="12">{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : ""}}</textarea>
 {% elseif field.type == "checkbox" %}
-<input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr"{% if field.checked %}checked="checked"{% endif %} id="$field.attr">
+<input id="{{ field.attr }}_field_{{ post.id }}" class="{{ field.type }}" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
-<select name="$field.attr" id="$field.attr"{% if field.classes %} class="${ field.classes | join(" ") }"{% endif %}>
-{% for value, name in field.options | items %}
-<option value="${ value | escape }"{% if not field.no_value %}${ value | option_selected(post[field.attr]) }{% endif %}>${ name | escape }</option>
+<select id="{{ field.attr }}_field_{{ post.id }}" name="{{ field.attr }}">
+{% for value, name in field.options %}
+<option value="{{ value | fix }}"{{ attribute(post, field.attr) is defined ? value | selected(attribute(post, field.attr)) : "" }}>{{ name | fix }}</option>
 {% endfor %}
 </select>
 {% endif %}
 {% endfor %}
-<a id="more_options_link_$post.id" href="#" class="more_options_link">${ "More Options &darr;" | translate("chyrp") }</a>
-<div id="more_options_$post.id" class="more_options" style="display: none">
+<a id="more_options_link_{{ post.id }}" href="#" class="more_options_link">{{ "More Options &darr;" | translate("chyrp") }}</a>
+<div id="more_options_{{ post.id }}" class="more_options" style="display: none">
 {% if visitor.group.can("add_post") %}
-<label for="status">${ "Status" | translate }</label>
-<select name="status" id="status">
-<option value="draft"{% if post.status == "draft" %} selected="selected"{% endif %}>${ "Draft" | translate }</option>
-<option value="public"{% if post.status == "public" %} selected="selected"{% endif %}>${ "Public" | translate }</option>
-<option value="private"{% if post.status == "private" %} selected="selected"{% endif %}>${ "Private" | translate }</option>
-<option value="registered_only"{% if post.status == "registered_only" %} selected="selected"{% endif %}>${ "Registered Only" | translate }</option>
-{% if groups %}
-<optgroup label="${ "Group" | translate }">
+<label for="status_{{ post.id }}">{{ "Status" | translate }}</label>
+<select id="status_{{ post.id }}" name="status">
+<option value="draft"{{ post.status | selected("draft") }}>{{ "Draft" | translate }}</option>
+<option value="public"{{ post.status | selected("public") }}>{{ "Public" | translate }}</option>
+<option value="private"{{ post.status | selected("private") }}>{{ "Private" | translate }}</option>
+<option value="registered_only"{{ post.status | selected("registered_only") }}>{{ "Registered Only" | translate }}</option>
+{% if groups is not empty %}
+<optgroup label="{{ "Group" | translate }}">
 {% for group in groups %}
-<option value="{$group.id}"${ post.status | option_selected("{"~ group.id ~"}") }>${ group.name | escape }</option>
+<option value="{{ '{' ~ group.id ~ '}' }}"{{ post.status | selected("{" ~ group.id ~ "}") }}>{{ group.name | fix }}</option>
 {% endfor %}
 </optgroup>
 {% endif %}
 </select>
 {% endif %}
-<label for="pinned">${ "Pinned?" | translate }</label>
-<input type="checkbox" name="pinned" id="pinned"{% if post.pinned %} checked="checked"{% endif %}>
-<small>${ "(shows this post above all others)" | translate }</small>
-<label for="slug">${ "Slug" | translate }</label>
-<input class="text" type="text" name="slug" value="${ post.slug | escape }" id="slug">
-<label for="created_at">${ "Timestamp" | translate }</label>
-<input class="text" type="text" name="created_at" value="${ post.created_at | fallback(now | date("r")) | strftime }" id="created_at">
-<input type="hidden" name="original_time" value="${ post.created_at | fallback(now | date("r")) | strftime }">
+<label for="pinned_{{ post.id }}">{{ "Pinned?" | translate }}
+<span class="sub">{{ "(shows this post above all others)" | translate }}</span>
+</label>
+<input id="pinned_{{ post.id }}" type="checkbox" name="pinned"{{ post.pinned | checked }}>
+<label for="slug_{{ post.id }}">{{ "Slug" | translate }}</label>
+<input id="slug_{{ post.id }}" class="text" type="text" name="slug" value="{{ post.slug | fix }}">
+<label for="created_at_{{ post.id }}">{{ "Timestamp" | translate }}</label>
+<input id="created_at_{{ post.id }}" class="text" type="text" name="created_at" value="{{ post.created_at is not empty ? post.created_at : now | date('r') | strftimeformat }}">
+<input type="hidden" name="original_time" value="{{ post.created_at is not empty ? post.created_at : now | date('r') | strftimeformat }}">
 {% for field in options %}
-<label for="${ field.attr | replace("[", "_") | replace("]", "") }">
-$field.label
-{% if field.help %}
-<span class="sub doaction"><a href="{% admin "help&id="~field.help %}" class="help emblem">?</a></span>
-{% endif %}
-{% if field.note %}
-<span class="sub">$field.note</span>
+<label for="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}">
+{{ field.label }}
+{% if field.note is defined %}
+<span class="sub">{{ field.note }}</span>
 {% endif %}
 </label>
-{% if field.type == "text" or field.type == "file" %}
-<input class="$field.type{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" type="$field.type" name="$field.attr" value="{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(true, false)) }{% endif %}" id="${ field.attr | replace("[", "_") | replace("]", "") }">
+{% if field.type == "text" %}
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" class="text" type="text" name="{{ field.attr }}" value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
+{% elseif field.type == "file" %}
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" class="file" type="file" {{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
 {% elseif field.type == "text_block" %}
-<textarea class="wide{% if field.classes %} ${ field.classes | join(" ") }{% endif %}" rows="${ field.rows | fallback(12) }" name="$field.attr" id="${ field.attr | replace("[", "_") | replace("]", "") }">{% if not field.no_value %}${ field.value | fallback(post[field.attr] | escape(false, false)) }{% endif %}</textarea>
+<textarea id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" name="{{ field.attr }}" rows="12">{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
+{% elseif field.type == "checkbox" %}
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" class="{{ field.type }}" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
-<select name="$field.attr" id="${ field.attr | replace("[", "_") | replace("]", "") }"{% if field.classes %} class="${ field.classes | join(" ") }"{% endif %}>
+<select id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" name="{{ field.attr }}">
 {% for option in field.options %}
-<option value="${ option.value | escape }"${ option.selected | option_selected(true) }>${ option.name | escape }</option>
+<option value="{{ option.value | fix }}"{{ option.selected | selected(true) }}>{{ option.name | fix }}</option>
 {% endfor %}
 </select>
 {% endif %}
-$field.extra
+{% if field.extra is defined %}
+{{ field.extra }}
+{% endif %}
 {% endfor %}
 </div>
 <div class="doaction admin">
-<button type="submit" accesskey="s">${ "Save" | translate }</button>
-<a href="#" id="post_cancel_edit_$post.id" class="cancel">${ "Cancel" | translate }</a>
+<button type="submit" accesskey="s">{{ "Save" | translate }}</button>
+<a href="#" id="post_cancel_edit_{{ post.id }}" class="cancel">{{ "Cancel" | translate }}</a>
 </div>
-<input type="hidden" name="id" value="$post.id" id="id">
-<input type="hidden" name="feather" value="${ post.feather | escape }" id="feather">
-<input type="hidden" name="hash" value="${ ip | token }" id="hash">
-<input type="hidden" name="ajax" value="true" id="ajax">
+<input type="hidden" name="id" value="{{ post.id }}">
+<input type="hidden" name="feather" value="{{ post.feather | fix }}">
+<input type="hidden" name="hash" value="{{ ip | token }}">
+<input type="hidden" name="ajax" value="true">
 </fieldset>
 </form>
