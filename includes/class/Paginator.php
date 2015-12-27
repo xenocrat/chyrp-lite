@@ -58,7 +58,7 @@
          * Returns:
          *     A paginated array of length $per_page or smaller.
          */
-        public function __construct($array, $per_page = 5, $name = "page", $model = null, $page = null) {
+        public function __construct($array, $per_page = 10, $name = "page", $model = null, $page = null) {
             self::$names[] = $name;
 
             $this->array = (array) $array;
@@ -143,15 +143,15 @@
          *     $page - Page number to link to.
          *     $anchor - An anchor target.
          */
-        public function next_link($text = null, $class = "next_page", $page = null, $anchor = null) {
+        public function next_link($text = null, $class = "next_page", $page = null, $anchor = "") {
             if (!$this->next_page())
                 return;
 
-            if (isset($anchor))
+            if (!empty($anchor))
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Next &rarr;"));
-            return '<a  rel="next" class="'.$class.'" id="next_page_'.$this->name.'" href="'.$this->next_page_url($page).$anchor.'">'.
+            return '<a  rel="next" class="'.$class.'" id="pagination_next_'.$this->name.'" href="'.$this->next_page_url($page).$anchor.'">'.
                      $text.
                  '</a>';
         }
@@ -166,15 +166,15 @@
          *     $page - Page number to link to.
          *     $anchor - An anchor target.
          */
-        public function prev_link($text = null, $class = "prev_page", $page = null, $anchor = null) {
+        public function prev_link($text = null, $class = "prev_page", $page = null, $anchor = "") {
             if (!$this->prev_page())
                 return;
 
-            if (isset($anchor))
+            if (!empty($anchor))
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; Previous"));
-            return '<a rel="prev" class="'.$class.'" id="prev_page_'.$this->name.'" href="'.$this->prev_page_url($page).$anchor.'">'.
+            return '<a rel="prev" class="'.$class.'" id="pagination_prev_'.$this->name.'" href="'.$this->prev_page_url($page).$anchor.'">'.
                      $text.
                  '</a>';
         }
@@ -188,15 +188,15 @@
          *     $class - The CSS class for the link.
          *     $anchor - An anchor target.
          */
-        public function final_link($text = null, $class = "final_page", $anchor = null) {
+        public function final_link($text = null, $class = "final_page", $anchor = "") {
             if (!$this->pages)
                 return;
 
-            if (isset($anchor))
+            if (!empty($anchor))
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Final &rarr;"));
-            return '<a  rel="next" class="'.$class.'" id="final_page_'.$this->name.'" href="'.$this->next_page_url($this->pages).$anchor.'">'.
+            return '<a  rel="next" class="'.$class.'" id="pagination_final_'.$this->name.'" href="'.$this->next_page_url($this->pages).$anchor.'">'.
                      $text.
                  '</a>';
         }
@@ -210,15 +210,15 @@
          *     $class - The CSS class for the link.
          *     $anchor - An anchor target.
          */
-        public function first_link($text = null, $class = "first_page", $anchor = null) {
+        public function first_link($text = null, $class = "first_page", $anchor = "") {
             if (!$this->pages)
                 return;
 
-            if (isset($anchor))
+            if (!empty($anchor))
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; First"));
-            return '<a rel="prev" class="'.$class.'" id="first_page_'.$this->name.'" href="'.$this->prev_page_url(1).$anchor.'">'.
+            return '<a rel="prev" class="'.$class.'" id="pagination_first_'.$this->name.'" href="'.$this->prev_page_url(1).$anchor.'">'.
                      $text.
                  '</a>';
         }

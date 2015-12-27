@@ -7,7 +7,7 @@ var ChyrpAjaxScroll = {
         if (ChyrpAjaxScroll.auto) {
             $(window).on("scroll", window, ChyrpAjaxScroll.watch);
         } else {
-            $("#next_page_page").click(function(e) {
+            $("#pagination_next_page").click(function(e) {
                 if (!ChyrpAjaxScroll.failed) {
                     e.preventDefault();
                     ChyrpAjaxScroll.fetch;
@@ -27,7 +27,7 @@ var ChyrpAjaxScroll = {
         if (!ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.failed) {
             ChyrpAjaxScroll.busy = true;
             var last_post = $(".post").last();
-            var next_page_url = $("#next_page_page").attr("href");
+            var next_page_url = $("#pagination_next_page").attr("href");
             if (next_page_url && last_post.length) {
                 $.get(next_page_url, function(data) {
                     if (!!history.replaceState) {
@@ -46,16 +46,16 @@ var ChyrpAjaxScroll = {
                     // Update the page description.
                     $(".pages").last().replaceWith($(data).find(".pages").last());
                     // Search for the next page link.
-                    var ajax_page_link = $(data).find("#next_page_page").last();
+                    var ajax_page_link = $(data).find("#pagination_next_page").last();
                     if (ajax_page_link) {
                         // We found another page to load.
-                        $("#next_page_page").replaceWith(ajax_page_link);
+                        $("#pagination_next_page").replaceWith(ajax_page_link);
                         if (!ChyrpAjaxScroll.auto)
-                            $("#next_page_page").click(ChyrpAjaxScroll.fetch);
+                            $("#pagination_next_page").click(ChyrpAjaxScroll.fetch);
                         ChyrpAjaxScroll.busy = false;
                     } else {
                         // That's all Folks!
-                        $("#next_page_page").fadeOut("fast");
+                        $("#pagination_next_page").fadeOut("fast");
                     }
                 }).fail(ChyrpAjaxScroll.panic);
             }
