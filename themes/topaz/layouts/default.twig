@@ -2,38 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>{% block title %}$site.name{% if ( route.action == "index" ) and ( site.description ) %}: $site.description{% endif %}{% if title %} &raquo; ${ title | strip_tags }{% endif %}{% endblock %}</title>
-<meta name="description" content="$site.description">
+<title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? ": " ~ site.description : "" }}{{ title ? " &raquo; " ~ title | striptags : "" }}{% endblock %}</title>
+<meta name="description" content="{{ site.description }}">
 <meta name="generator" content="Chyrp Lite">
 <meta name="viewport" content="initial-scale = 1.0">
-<link rel="pingback" href="$site.chyrp_url/includes/xmlrpc.php">
-<link rel="EditURI" type="application/rsd+xml" href="$site.chyrp_url/includes/rsd.php">
-<link rel="shortcut icon" href="$site.url/favicon.ico">
-{% if route.action == "index" %}<link rel="canonical" href="$site.url">{% endif %}
-$theme.feeds
-$theme.stylesheets
-$theme.javascripts
-${ trigger.call("head") }
+<link rel="pingback" href="{{ site.chyrp_url }}/includes/xmlrpc.php">
+<link rel="EditURI" type="application/rsd+xml" href="{{ site.chyrp_url }}/includes/rsd.php">
+<link rel="shortcut icon" href="{{ site.url }}/favicon.ico">
+{% if route.action == "index" %}<link rel="canonical" href="{{ site.url }}">{% endif %}
+{{ theme.feeds }}
+{{ theme.stylesheets }}
+{{ theme.javascripts }}
+{{ trigger.call("head") }}
 </head>
 <body>
 <!-- Mast -->
 <div class="shim">
-{% for type, messages in flash.all | items %}
-{% for message in messages %}
+{% for flashes in flash.all %}
+{% for text in flashes %}
 <div class="ribbon flash">
-<h3 role="alert" class="ribbon">$message</h3>
+<h3 role="alert" class="ribbon">{{ text }}</h3>
 </div>
 {% endfor %}
 {% endfor %}
 </div>
-{% if ( route.action != "login" ) and ( route.action != "controls" ) and ( route.action != "register" ) and ( route.action != "lost_password" ) %}
+{% if not ["login", "controls", "register", "lost_password"] | contains(route.action) %}
 <div id="mast" role="banner">
-<h1 class="banner"><a href="$site.url">$site.name</a></h1>
+<h1 class="banner"><a href="{{ site.url }}">{{ site.name }}</a></h1>
 <div role="search" class="search_box">
-<form action="$site.url" method="get" accept-charset="utf-8">
+<form action="{{ site.url }}" method="get" accept-charset="utf-8">
 <input type="hidden" name="action" value="search" id="action">
-<input type="text" id="search_field" name="query" value="{% if route.action == "search" %}${ GET.query | escape }{% endif %}" placeholder="${ "Search&hellip;" | translate }" title="${ "Search this blog" | translate }">
-<button type="submit" id="search_submit">${ "Search" | translate }</button>
+<input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" title="{{ 'Search this blog' | translate }}">
+<button type="submit" id="search_submit">{{ "Search" | translate }}</button>
 </form>
 </div>
 </div>
@@ -44,11 +44,11 @@ ${ trigger.call("head") }
 <div id="main" role="main">
 {% block content %}{% endblock %}
 </div>
-{% if posts.prev_page or posts.next_page %}
+{% if posts.paginated is defined and (posts.prev_page() or posts.next_page()) %}
 <!-- Navigation -->
 <div role="navigation" class="prev_next traversal">
-{% if posts.prev_page %}${ posts.prev_link( ( "Newer posts" | translate ) ) }{% endif %}
-{% if posts.next_page %}${ posts.next_link( ( "Older posts" | translate ) ) }{% endif %}
+{% if posts.paginated is defined and posts.prev_page() %}{{ posts.prev_link("Newer posts" | translate) }}{% endif %}
+{% if posts.paginated is defined and posts.next_page() %}{{ posts.next_link("Older posts" | translate) }}{% endif %}
 </div>
 {% endif %}
 <!-- Footer -->
@@ -56,69 +56,69 @@ ${ trigger.call("head") }
 <ul role="menu" class="navigation tail_nav">
 {% if route.action != "index" %}
 <li role="presentation">
-<a role="menuitem" href="{% url "index" %}" rel="">${ "Blog" | translate }</a>
+<a role="menuitem" href="{{ url('index') }}">{{ "Blog" | translate }}</a>
 </li>
 {% endif %}
-{% if theme.pages_list %}
+{% if theme.pages_list is not empty %}
 {% for item in theme.pages_list %}
-{% if item.page.depth == 1 %}
-<li role="presentation" class="page{% if item.has_children %} parent{% endif %}">
-<a role="menuitem" href="$item.page.url">$item.page.title</a>
+{% if item.depth == 1 %}
+<li role="presentation" class="page">
+<a role="menuitem" href="{{ item.url }}">{{ item.title }}</a>
 </li>
 {% endif %}
 {% endfor %}
 {% endif %}
 <li role="presentation">
-<a role="menuitem" href="#" onclick="mailTo('${ site.email | split('@') | last }','${ site.email | split('@') | first }')">${ "Email" | translate }</a>
+<a role="menuitem" href="#" onclick="mailTo('{{ site.email | split('@') | last }}','{{ site.email | split('@') | first }}')">{{ "Email" | translate }}</a>
 </li>
 <li role="presentation">
-<a role="menuitem" href="{% url "feed" %}" rel="alternate">${ "Feed" | translate }</a>
+<a role="menuitem" href="{{ url('feed') }}" rel="alternate">{{ "Feed" | translate }}</a>
 </li>
-{% if theme.archives_list %}
+{% if theme.archives_list is not empty %}
 <li role="presentation">
-<a role="menuitem" href="{% url 'archive/%s/' | format((theme.archives_list | first).year) %}" rel="archives">${ "Archive" | translate }</a>
+<a role="menuitem" href="{{ url('archive/%s' | format((theme.archives_list() | first).year)) }}" rel="archives">{{ "Archive" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
 <li role="presentation">
-<a role="menuitem" href="$site.chyrp_url/admin/">${ "Admin" | translate }</a>
+<a role="menuitem" href="{{ admin_url() }}">{{ "Admin" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_post") %}
 <li role="presentation">
-<a role="menuitem" href="{% admin "write_post" %}">${ "Write" | translate }</a>
+<a role="menuitem" href="{{ admin_url('write_post') }}">{{ "Write" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_draft") %}
 <li role="presentation">
-<a role="menuitem" href="{% admin "write_post" %}">${ "Draft" | translate }</a>
+<a role="menuitem" href="{{ admin_url('write_post') }}">{{ "Draft" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.logged_in %}
 <li role="presentation">
-<a role="menuitem" href="{% url "controls" %}">${ "Controls" | translate }</a>
+<a role="menuitem" href="{{ url('controls') }}">{{ "Controls" | translate }}</a>
 </li>
 <li role="presentation">
-<a role="menuitem" href="{% url "logout" %}">${ "Log out" | translate }</a>
+<a role="menuitem" href="{{ url('logout') }}">{{ "Log out" | translate }}</a>
 </li>
 {% else %}
 {% if site.can_register %}
 <li role="presentation">
-<a role="menuitem" href="{% url "register" %}">${ "Register" | translate }</a>
+<a role="menuitem" href="{{ url('register') }}">{{ "Register" | translate }}</a>
 </li>
 {% endif %}
 <li role="presentation">
-<a role="menuitem" href="{% url "login" %}">${ "Log in" | translate }</a>
+<a role="menuitem" href="{{ url('login') }}">{{ "Log in" | translate }}</a>
 </li>
 {% endif %}
 </ul>
 </div>
-${ trigger.call("end_content") }
+{{ trigger.call("end_content") }}
 </body>
-<!-- Queries: $sql_queries | Load Time: $theme.load_time -->
+<!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time }} -->
 {% if debug and visitor.group.name == "Admin" %}
 <!--
 {% for debug in sql_debug %}
-${ debug.query | replace("\t", "    ") | escape }
-${ "Called from %s on line %d at %s seconds." | translate | format(debug.file, debug.line, debug.time) }
+{{ debug.query | replace("\t", "    ") | fix }}
+{{ "Called from %s on line %d at %s seconds." | translate | format(debug.file, debug.line, debug.time) }}
 {% endfor %}
 -->
 {% endif %}
