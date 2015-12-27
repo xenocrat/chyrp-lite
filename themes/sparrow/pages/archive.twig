@@ -13,25 +13,19 @@
 {# Yearly archive: display thumbnails #}
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
 {% if post.title is not empty %}
-<h4 class="yearly">{{ post.title | normalize | truncate(20) }}</h4>
-{% else %}
-<h4 class="yearly">{{ post.created_at | strftimeformat("%d %b, %Y" | translate) }}</h4>
+<h4 class="yearly">{{ post.title | striptags | normalize | truncate(20) }}</h4>
 {% endif %}
 {% if post.feather == "photo" %}
 {{ feathers['photo'].image_tag(post, 156, null, "quality=60&amp;square=1", "20vw") }}
 {% else %}
-<p>{{ post.excerpt | striptags }}</p>
+<p>{{ post.excerpt() | striptags | normalize }}</p>
 {% endif %}
-<a href="{{ post.url() }}" class="archive_post_link">{{ "Permanent link to &#8220;%s&#8221;" | translate | format(post.title | striptags | fix(true)) }}</a>
+<a href="{{ post.url() }}" class="archive_post_link">{{ "Permanent link to &#8220;%s&#8221;" | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}</a>
 </article>
 {% else %}
 {# Complete archive: display titles to minimise content payload #}
 <a href="{{ post.url() }}">
-{% if post.title is not empty %}
-<h4>{{ post.title | normalize | truncate(80) }}</h4>
-{% else %}
-<h4>{{ post.created_at | strftimeformat("%d %b, %Y" | translate) }}</h4>
-{% endif %}
+<h4>{{ post.title() | oneof(post.slug) | striptags | normalize | truncate(80) }}</h4>
 </a>
 {% endif %}
 </li>

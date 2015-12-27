@@ -17,7 +17,7 @@
 </div>
 {% endif %}
 <div role="note" class="metadata">
-<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to' | translate }} &quot;{{ post.title | oneof(post.url) | striptags | fix(true) }}&quot;">
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}">
 {% if post.status == "private" %}
 {{ "Private" | translate }}
 {% elseif post.status == "scheduled" %}
@@ -31,7 +31,7 @@
 {% if module_enabled("likes") and visitor.group.can("like_post") %}
 {{ post.get_likes ? "&bull; " ~ post.get_likes : "" }}
 {% endif %}
-{% if module_enabled("comments") and post.comment_status is defined and post.comment_count is defined %}
+{% if module_enabled("comments") and post.comment_status is defined %}
 {% if post.comment_status == "closed" %}
 &bull; {{ "Comments closed" | translate }}
 {% else %}

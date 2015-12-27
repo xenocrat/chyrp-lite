@@ -12,6 +12,8 @@
 {{ "There are no posts with the tag you specified" | translate }}
 {% elseif reason == "no_tag_specified" %}
 {{ "No tag specified" | translate }}
+{% else %}
+{{ "Oops! Something went wrong." | translate }}
 {% endif %}
 </h3>
 {% endif %}
