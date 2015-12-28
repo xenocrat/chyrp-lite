@@ -885,7 +885,7 @@
      */
     function admin_url($action = "", $params = array()) {
         if ($action == "logout")
-            return url("logout", MainController::current());
+            return Config::current()->chyrp_url."/?action=logout";
 
         $request = !empty($action) ? array("action=".$action) : array() ;
 
