@@ -292,6 +292,16 @@
     function remove_trackbacking() {
         Config::remove("enable_trackbacking");
     }
+
+    /**
+     * Function: add_admin_per_page
+     * Adds the admin_per_page config setting.
+     *
+     * Versions: 2015.07 => 2016.01
+     */
+    function add_admin_per_page() {
+        Config::fallback("admin_per_page", 25);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -478,6 +488,8 @@ add_homepage();
 add_uploads_limit();
 
 remove_trackbacking();
+
+add_admin_per_page();
 
 # Perform Module/Feather upgrades.
 

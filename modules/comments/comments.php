@@ -274,7 +274,7 @@
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
                                                                                   "params" => $params)),
-                                                              25)));
+                                                              Config::current()->admin_per_page)));
         }
 
         static function admin_purge_spam() {
@@ -426,7 +426,7 @@
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
                                                                                   "params" => $params)),
-                                                              25)));
+                                                              Config::current()->admin_per_page)));
         }
 
         static function admin_bulk_comments() {

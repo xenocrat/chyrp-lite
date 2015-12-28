@@ -6,12 +6,16 @@
 <form id="content_settings" class="split" action="{{ admin_url('content_settings') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <fieldset>
 <p>
-<label for="posts_per_page">{{ "Posts Per Page" | translate }}</label>
+<label for="posts_per_page">{{ "Posts Per Blog Page" | translate }}</label>
 <input class="text digits" type="number" min="0" name="posts_per_page" value="{{ site.posts_per_page | fix }}" size="2" id="posts_per_page">
 </p>
 <p>
 <label for="feed_items">{{ "Posts in Feed" | translate }}</label>
 <input class="text digits" type="number" min="0" name="feed_items" value="{{ site.feed_items | fix }}" size="2" id="feed_items">
+</p>
+<p>
+<label for="admin_per_page">{{ "Items Per Admin Page" | translate }}</label>
+<input class="text digits" type="number" min="0" name="admin_per_page" value="{{ site.admin_per_page | fix }}" size="2" id="admin_per_page">
 </p>
 <p>
 <label for="feed_url">{{ "Feed URL" | translate }}</label>

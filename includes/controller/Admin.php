@@ -302,7 +302,7 @@
                 $posts = new Paginator(Post::find(array("placeholders" => true,
                                                         "drafts" => true,
                                                         "where" => array("id" => $ids))),
-                                       25);
+                                       Config::current()->admin_per_page);
             else
                 $posts = new Paginator(array());
 
@@ -501,6 +501,7 @@
          */
         public function manage_pages() {
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("edit_page") and !$visitor->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pages."));
 
@@ -510,7 +511,8 @@
             $this->display("manage_pages",
                            array("pages" => new Paginator(Page::find(array("placeholders" => true,
                                                                            "where" => $where,
-                                                                           "params" => $params)), 25)));
+                                                                           "params" => $params)),
+                                                          Config::current()->admin_per_page)));
         }
 
         /**
@@ -545,6 +547,7 @@
                 error(__("Error"), __("Please enter a username for the account."));
 
             $check = new User(array("login" => $_POST['login']));
+
             if (!$check->no_results)
                 error(__("Error"), __("That username is already in use."));
 
@@ -730,6 +733,7 @@
          */
         public function manage_users() {
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("edit_user") and !$visitor->group->can("delete_user") and !$visitor->group->can("add_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage users."));
 
@@ -740,7 +744,7 @@
                            array("users" => new Paginator(User::find(array("placeholders" => true,
                                                                            "where" => $where,
                                                                            "params" => $params)),
-                                                          25)));
+                                                          Config::current()->admin_per_page)));
         }
 
         /**
@@ -852,10 +856,12 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $group = new Group($_POST['id']);
+
             foreach ($group->users as $user)
                 $user->update($user->login, $user->password, $user->email, $user->full_name, $user->website, $_POST['move_group']);
 
             $config = Config::current();
+
             if (!empty($_POST['default_group']))
                 $config->set("default_group", $_POST['default_group']);
             if (!empty($_POST['guest_group']))
@@ -872,17 +878,20 @@
          */
         public function manage_groups() {
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("edit_group") and !$visitor->group->can("delete_group") and !$visitor->group->can("add_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage groups."));
 
             if (!empty($_GET['search'])) {
                 $user = new User(array("login" => $_GET['search']));
+
                 if (!$user->no_results)
-                    $groups = new Paginator(array($user->group), 10);
+                    $groups = new Paginator(array($user->group));
                 else
-                    $groups = new Paginator(array(), 10);
+                    $groups = new Paginator(array());
             } else
-                $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")), 10);
+                $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
+                                        Config::current()->admin_per_page);
 
             $this->display("manage_groups",
                            array("groups" => $groups));
@@ -911,6 +920,7 @@
                     $where["created_at like"] = $_GET['month']."-%";
 
                 $visitor = Visitor::current();
+
                 if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
                     $where["user_id"] = $visitor->id;
 
@@ -932,6 +942,7 @@
                     $posts = new Paginator(array());
 
                 $latest_timestamp = 0;
+
                 foreach ($posts as $post)
                     if (strtotime($post->created_at) > $latest_timestamp)
                         $latest_timestamp = strtotime($post->created_at);
@@ -1001,6 +1012,7 @@
                                     array("filter" => false));
 
                 $latest_timestamp = 0;
+
                 foreach ($pages as $page)
                     if (strtotime($page->created_at) > $latest_timestamp)
                         $latest_timestamp = strtotime($page->created_at);
@@ -1077,6 +1089,7 @@
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
                 $users_json = array();
+
                 foreach ($users as $user) {
                     $users_json[$user->login] = array();
 
@@ -1144,6 +1157,7 @@
                 $config = Config::current();
 
                 $regexp_url = preg_quote($_POST['media_url'], "/");
+
                 if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/", $value, $media))
                     foreach ($media[0] as $matched_url) {
                         $filename = upload_from_url($matched_url);
@@ -1682,6 +1696,7 @@
             if ($open = opendir(INCLUDES_DIR.DIR."locale".DIR)) {
                  while (($folder = readdir($open)) !== false) {
                     $split = explode(".", $folder);
+
                     if (end($split) == "mo")
                         $locales[] = array("code" => $split[0], "name" => lang_code($split[0]));
                 }
@@ -1746,6 +1761,7 @@
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
                          $config->set("feed_items", (int) $_POST['feed_items']),
+                         $config->set("admin_per_page", (int) $_POST['admin_per_page']),
                          $config->set("feed_url", $_POST['feed_url']),
                          $config->set("uploads_path", $matches[1].$matches[2].$matches[3]),
                          $config->set("uploads_limit", (int) $_POST['uploads_limit']),
