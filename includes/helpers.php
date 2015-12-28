@@ -880,7 +880,7 @@
      *
      * Parameters:
      *     $action - The admin action.
-     *     $variables - An indexed array of parameters.
+     *     $params - An indexed array of parameters.
      *
      */
     function admin_url($action = "", $params = array()) {
