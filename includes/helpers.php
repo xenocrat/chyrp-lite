@@ -1848,32 +1848,16 @@
      *     $filename  - The name to be applied to the content.
      */
     function download($content, $filename) {
-        ob_start();
-        header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".$filename."\"");
+        if (!headers_sent()) {
+            header("Content-type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=\"".$filename."\"");
 
-        if (!in_array("ob_gzhandler", ob_list_handlers()))
-            header("Content-length: ".strlen($content));
+            if (!in_array("ob_gzhandler", ob_list_handlers()))
+                header("Content-length: ".strlen($content));
 
-        echo $content;
-        ob_end_flush();
-    }
-
-    /**
-     * Function: zip
-     * Generate a Zip bitstream.
-     *
-     * Parameters:
-     *     $files - An associative array of filename => content.
-     */
-    function zip($files) {
-        require_once "lib".DIR."zip.php";
-
-        $zip = new ZipFile();
-        foreach ($files as $filename => $content)
-            $zip->addFile($content, $filename);
-
-        return $zip->file();
+            echo $content;
+        } else
+            error(__("Error"), __("Unable to deliver file attachement."));
     }
 
     /**

@@ -1107,8 +1107,30 @@
             }
 
             $trigger->filter($exports, "export");
+
             $filename = sanitize(camelize(Config::current()->name), false, true)."_Export_".date("Y-m-d");
-            download(zip($exports), $filename.".zip");
+            $filelock = tmpfile(); # Temporary file handle: unsetting this will auto-delete the file.
+            $filepath = realpath(stream_get_meta_data($filelock)["uri"]);
+
+            if (class_exists("ZipArchive")) {
+                $zip = new ZipArchive;
+                $num = $zip->open($filepath, ZipArchive::CREATE);
+
+                if ($num === true) {
+                    foreach ($exports as $name => $contents)
+                        $zip->addFromString($name, $contents);
+
+                    $zip->close();
+                    download(file_get_contents($filepath), $filename.".zip");
+                } else
+                    error(__("Error"), _f("Failed to export because of ZipArchive error code %d", $num));
+            } else {
+                if (count($exports) > 1)
+                    Flash::warning(__("You may select only one item because this version of PHP lacks ZipArchive support."),
+                                   "/admin/?action=export");
+
+                download(reset($exports), key($exports));
+            }
         }
 
         /**
