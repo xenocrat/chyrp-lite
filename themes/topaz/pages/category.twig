@@ -10,13 +10,7 @@
 {% endfor %}
 {% elseif reason is defined %}
 <div class="ribbon">
-<h3 class="ribbon">
-{% if reason == "category_not_found" %}
-{{ "The category you requested was not found" | translate }}
-{% elseif reason == "no_category_requested" %}
-{{ "You did not request a category" | translate }}
-{% endif %}
-</h3>
+<h3 class="ribbon">{{ reason }}</h3>
 </div>
 {% endif %}
 {% endblock %}

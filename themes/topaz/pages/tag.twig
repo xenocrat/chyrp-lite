@@ -10,13 +10,7 @@
 {% endfor %}
 {% elseif reason is defined %}
 <div class="ribbon">
-<h3 class="ribbon">
-{% if reason == "tag_not_found" %}
-{{ "There are no posts with the tag you specified" | translate }}
-{% elseif reason == "no_tag_specified" %}
-{{ "You did not specify a tag" | translate }}
-{% endif %}
-</h3>
+<h3 class="ribbon">{{ reason }}</h3>
 </div>
 {% endif %}
 {% endblock %}

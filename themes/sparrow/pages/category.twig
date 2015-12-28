@@ -7,12 +7,6 @@
 {% include "feathers/" ~ post.feather ~ ".twig" %}
 {% endfor %}
 {% elseif reason is defined %}
-<h3 role="status" class="filter">
-{% if reason == "category_not_found" %}
-{{ "The category you requested was not found" | translate }}
-{% elseif reason == "no_category_requested" %}
-{{ "You did not request a category" | translate }}
-{% endif %}
-</h3>
+<h3 role="status" class="filter">{{ reason }}</h3>
 {% endif %}
 {% endblock %}
