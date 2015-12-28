@@ -97,7 +97,7 @@
      * Function: twig_function_paginate
      * Paginates an array of items using the Paginator class.
      */
-    function twig_function_paginate($array, $per_page, $name = "page") {
+    function twig_function_paginate($array, $per_page = 10, $name = "page") {
             $name = str_replace("_", "", $name)."_page"; # This is important for clean URL parsing.
 
         if (in_array($name, Paginator::$names))
