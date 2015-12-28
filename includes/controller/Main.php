@@ -829,7 +829,7 @@
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $file)));
 
-            if (!isset($_SESSION['cookies_notified']) and $config->cookies_notification) {
+            if ($config->cookies_notification and !isset($_SESSION['cookies_notified']) and !logged_in()) {
                 Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
                 $_SESSION['cookies_notified'] = true;
             }
