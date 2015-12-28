@@ -75,8 +75,8 @@
      */
     function twig_callback_missing_function($name) {
         foreach (Modules::$instances as $module)
-            if (is_callable(array($module, $name)))
-                return new Twig_SimpleFunction($name, get_class($module)."::".$name);
+            if (is_callable(array($module, "twig_".$name)))
+                return new Twig_SimpleFunction($name, get_class($module)."::twig_".$name);
 
         return false;
     }
@@ -87,8 +87,8 @@
      */
     function twig_callback_missing_filter($name) {
         foreach (Modules::$instances as $module)
-            if (is_callable(array($module, $name)))
-                return new Twig_SimpleFilter($name, get_class($module)."::".$name);
+            if (is_callable(array($module, "twig_".$name)))
+                return new Twig_SimpleFilter($name, get_class($module)."::twig_".$name);
 
         return false;
     }
@@ -126,7 +126,7 @@
 
     /**
      * Function: twig_filter_translate_search
-     * Searches the available domains for a translation of the string.
+     * Searches registered l10n domains for a translation of the string.
      */
     function twig_filter_translate_search($string, $exclude = array("theme")) {
         global $l10n;
