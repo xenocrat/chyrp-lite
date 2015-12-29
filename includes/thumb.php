@@ -8,7 +8,7 @@
 
     require_once "common.php";
 
-    # Clean the output buffer to prevent display_errors corrupting the served image.
+    # Clean the output buffer to guard against image corruption.
     ob_clean();
 
     if (ini_get("memory_limit") < 48)
