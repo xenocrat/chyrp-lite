@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ site.locale | split('_') | first }}">
 <head>
 <meta charset="utf-8">
 <title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? ": " ~ site.description : "" }}{{ title ? " &raquo; " ~ title | striptags : "" }}{% endblock %}</title>
