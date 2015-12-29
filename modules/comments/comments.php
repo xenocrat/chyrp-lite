@@ -355,6 +355,7 @@
             if (!empty($_POST['akismet_api_key'])) {
                 $_POST['akismet_api_key'] = trim($_POST['akismet_api_key']);
                 $akismet = new Akismet($config->url, $_POST['akismet_api_key']);
+
                 if (!$akismet->isKeyValid()) {
                     Flash::warning(__("Invalid Akismet API key."), "/admin/?action=comment_settings");
                     $set[] = false;
