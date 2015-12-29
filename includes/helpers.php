@@ -1844,20 +1844,30 @@
      * Send a file attachment to the visitor.
      *
      * Parameters:
-     *     $content - The bitstream to be sent to the visitor.
-     *     $filename  - The name to be applied to the content.
+     *     $contents - The bitstream to be delivered to the visitor.
+     *     $filename - The name to be applied to the content upon download.
+     *     $filepath - Optional filepath to be used instead of @contents@.
      */
-    function download($content, $filename) {
+    function download($contents = "", $filename = "caconym", $filepath = null) {
         if (!headers_sent()) {
             header("Content-type: application/octet-stream");
             header("Content-Disposition: attachment; filename=\"".$filename."\"");
 
-            if (!in_array("ob_gzhandler", ob_list_handlers()))
-                header("Content-length: ".strlen($content));
+            if (file_exists($filepath)) {
+                if (!in_array("ob_gzhandler", ob_list_handlers()))
+                    header("Content-length: ".filesize($filepath));
 
-            echo $content;
+                readfile($filepath);
+            } else {
+                if (!in_array("ob_gzhandler", ob_list_handlers()))
+                    header("Content-length: ".strlen($contents));
+
+                echo $contents;
+            }
+
+            exit;
         } else
-            error(__("Error"), __("Unable to deliver file attachement."));
+            error(__("Error"), __("Unable to deliver file attachement because HTTP headers were already sent."));
     }
 
     /**

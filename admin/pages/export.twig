@@ -30,7 +30,7 @@
 <input class="text" type="text" name="filter_users" value="" id="filter_users" aria-label="{{ 'filter (optional)' | translate }}" placeholder="{{ 'filter (optional)' | translate }}">
 <a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
 <small>
-<strong>{{ "Warning: this also exports the hashed passwords, keep it safe!" | translate }}</strong>
+{{ "Warning: this file will contain the hashed password for each user – keep it safe!" | translate }}
 </small>
 </p>
 {{ trigger.call("export_choose") }}
