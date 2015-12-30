@@ -325,6 +325,7 @@ var Extend = {
 
             for (i = 0; i < classes.length; i++) {
                 var conflict = classes[i].replace("conflict_", "module_");
+
                 if ($("#"+conflict).parent().attr("id") == "modules_enabled") {
                     $(this).addClass("error");
                 }
@@ -350,6 +351,7 @@ var Extend = {
 
             for (i = 0; i < classes.length; i++) {
                 var dependency = classes[i].replace("needs_", "module_");
+
                 if ($("#"+dependency).parent().attr("id") == "modules_disabled") {
                     $(this).addClass("error");
                 }
