@@ -41,7 +41,7 @@
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
-    define('DEBUG', true);
+    define('DEBUG', false);
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
