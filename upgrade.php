@@ -527,7 +527,7 @@ foreach ($errors as $error)
                 <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
                 <li><?php echo __("Fix any problems reported."); ?></li>
                 <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
-                <li><?php echo __("You can delete upgrade.php once you are finished."); ?></li>
+                <li><?php echo __("You can delete <em>upgrade.php</em> once you are finished."); ?></li>
             </ol>
             <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php else: ?>

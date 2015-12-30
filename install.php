@@ -733,9 +733,9 @@ foreach ($errors as $error)
             </p>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("Delete install.php, you won't need it anymore."); ?></li>
+                <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>
             <?php if (!is_writable(CACHES_DIR)): ?>
-                <li><?php echo _f("Please make %s writable by the server.", CACHES_DIR) ?></li>
+                <li><?php echo _f("Please make <em>%s</em> writable by the server.", CACHES_DIR) ?></li>
             <?php endif; ?>
                 <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
             </ol>
