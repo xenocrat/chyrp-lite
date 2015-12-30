@@ -93,7 +93,7 @@ Chyrp Lite was created by the following people:
 
 ## License
 
-Chyrp Lite is Copyright 2015 Alex Suraci, Arian Xhezairi,
+Chyrp Lite is Copyright 2008-2015 Alex Suraci, Arian Xhezairi,
 Daniel Pimley, and other contributors.
 
 Permission is hereby granted, free of charge, to any person
@@ -122,7 +122,7 @@ copyright holders shall not be used in advertising or otherwise
 to promote the sale, use or other dealings in this Software
 without prior written authorization.
 
-Twig is Copyright 2009-2014 by the Twig Team,
+Twig is Copyright 2009-2014 the Twig Team,
 distributed under the [new BSD License](https://raw.githubusercontent.com/twigphp/Twig/1.x/LICENSE).
 jQuery is Copyright jQuery Foundation and other contributors,
 distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).

@@ -35,17 +35,14 @@
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            $cache = (is_writable(INCLUDES_DIR.DIR."caches") and
-                      !DEBUG and
-                      !PREVIEWING and
-                      !defined('CACHE_TWIG') or CACHE_TWIG);
+            $cache = (is_writable(CACHES_DIR) and !PREVIEWING and (!DEBUG or CACHE_TWIG));
 
             if (defined('THEME_DIR')) {
                 $loader = new Twig_Loader_Filesystem(THEME_DIR);
                 $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
                                                                   "strict_variables" => (DEBUG) ? true : false,
                                                                   "charset" => "UTF-8",
-                                                                  "cache" => ($cache) ? INCLUDES_DIR.DIR."caches" : false,
+                                                                  "cache" => ($cache) ? CACHES_DIR : false,
                                                                   "autoescape" => false));
                 $this->twig->addExtension(new Leaf());
                 $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");

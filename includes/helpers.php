@@ -1018,7 +1018,11 @@
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
 
+        if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
+            Flash::warning(_f("Execution of %s has been cancelled because the module could not continue.", camelize(sanitize($target))));
+
         $config = Config::current();
+
         foreach ($config->enabled_modules as $module)
             if ($module != $target)
                 $this_disabled[] = $module;
@@ -1046,6 +1050,7 @@
             require MODULES_DIR.DIR.$module.DIR.$module.".php";
 
             $camelized = camelize($module);
+
             if (!class_exists($camelized))
                 continue;
 
@@ -1069,6 +1074,7 @@
             require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
             $camelized = camelize($feather);
+
             if (!class_exists($camelized))
                 continue;
 

@@ -138,21 +138,24 @@
             foreach ($info["notifications"] as &$notification)
                 $notification = addslashes($notification);
 
+            if (!empty(Modules::$instances[$_POST["extension"]]->cancelled))
+                error(__("Module Cancelled"), __("The module has cancelled execution because of an error."));
+
             require $folder.DIR.$_POST["extension"].DIR.$_POST["extension"].".php";
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the <code>%s</code> directory at your Chyrp install's root and CHMOD it to 777.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please create the directory %s in your install directory.", array($config->uploads_path));
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please CHMOD <code>%s</code> to 777.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please make %s writable by the server.", array($config->uploads_path));
 
             $class_name = camelize($_POST["extension"]);
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                error("", __("Item is not a module."));
+                error(__("Error"), __("Item is not a module."));
 
             if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                error("", __("Item is not a feather."));
+                error(__("Error"), __("Item is not a feather."));
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));

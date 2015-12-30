@@ -8,8 +8,8 @@
      *     v2016.01
      *
      * Copyright:
-     *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley,
-     *     and other contributors.
+     *     Chyrp Lite is Copyright 2008-2015 Alex Suraci, Arian Xhezairi,
+     *     Daniel Pimley, and other contributors.
      *
      * License:
      *     Permission is hereby granted, free of charge, to any person
@@ -41,7 +41,7 @@
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
-    define('DEBUG', false);
+    define('DEBUG', true);
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
@@ -52,8 +52,7 @@
     define('CHYRP_CODENAME', "Socotra");
 
     # Constant: CACHE_TWIG
-    # If defined, this will take priority over DEBUG and toggle Twig template caching.
-    # Do not enable this during theme development.
+    # Override DEBUG to enable Twig template caching.
     define('CACHE_TWIG', true);
 
     # Constant: JAVASCRIPT
@@ -103,6 +102,10 @@
     # Constant: INCLUDES_DIR
     # Absolute path to /includes
     define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
+
+    # Constant: CACHES_DIR
+    # Absolute path to /includes/caches
+    define('CACHES_DIR', INCLUDES_DIR.DIR."caches");
 
     # Constant: MODULES_DIR
     # Absolute path to /modules

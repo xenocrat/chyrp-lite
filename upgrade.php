@@ -22,7 +22,8 @@
     define('INDEX',          false);
     define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(__FILE__));
-    define('INCLUDES_DIR',   dirname(__FILE__).DIR."includes");
+    define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
+    define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
     define('MODULES_DIR',    MAIN_DIR.DIR."modules");
     define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
     define('THEMES_DIR',     MAIN_DIR.DIR."themes");
@@ -526,7 +527,7 @@ foreach ($errors as $error)
                 <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
                 <li><?php echo __("Fix any problems reported."); ?></li>
                 <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
-                <li><?php echo __("You can delete <code>upgrade.php</code> once you are finished."); ?></li>
+                <li><?php echo __("You can delete upgrade.php once you are finished."); ?></li>
             </ol>
             <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php else: ?>

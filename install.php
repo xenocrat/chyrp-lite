@@ -1,18 +1,22 @@
 <?php
     header("Content-type: text/html; charset=UTF-8");
 
-    define('DEBUG',        true);
-    define('JAVASCRIPT',   false);
-    define('ADMIN',        false);
-    define('AJAX',         false);
-    define('XML_RPC',      false);
-    define('UPGRADING',    false);
-    define('INSTALLING',   true);
-    define('TESTER',       isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-    define('DIR',          DIRECTORY_SEPARATOR);
-    define('MAIN_DIR',     dirname(__FILE__));
-    define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
-    define('USE_ZLIB',     false);
+    define('DEBUG',          true);
+    define('CHYRP_VERSION',  "2016.01");
+    define('CHYRP_CODENAME', "Socotra");
+    define('CACHE_TWIG',     false);
+    define('JAVASCRIPT',     false);
+    define('ADMIN',          false);
+    define('AJAX',           false);
+    define('XML_RPC',        false);
+    define('UPGRADING',      false);
+    define('INSTALLING',     true);
+    define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
+    define('DIR',            DIRECTORY_SEPARATOR);
+    define('MAIN_DIR',       dirname(__FILE__));
+    define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
+    define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
+    define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4
@@ -729,9 +733,9 @@ foreach ($errors as $error)
             </p>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("Delete <code>install.php</code>, you won't need it anymore."); ?></li>
-            <?php if (!is_writable(INCLUDES_DIR.DIR."caches")): ?>
-                <li><?php echo __("CHMOD <code>/includes/caches</code> to 777."); ?></li>
+                <li><?php echo __("Delete install.php, you won't need it anymore."); ?></li>
+            <?php if (!is_writable(CACHES_DIR)): ?>
+                <li><?php echo _f("Please make %s writable by the server.", CACHES_DIR) ?></li>
             <?php endif; ?>
                 <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
             </ol>

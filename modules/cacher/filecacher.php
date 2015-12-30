@@ -1,15 +1,14 @@
 <?php
     class FileCacher {
         public function __construct($url, $config) {
-            $this->user = (logged_in()) ? Visitor::current()->login : "guest" ;
-            $this->path = INCLUDES_DIR.DIR."caches".DIR.sanitize($this->user);
+            $this->user   = (logged_in()) ? Visitor::current()->login : "guest" ;
+            $this->caches = CACHES_DIR.DIR."filecacher";
+            $this->path   = $this->caches.DIR.sanitize($this->user);
+            $this->url    = rawurldecode($url); # Percent decode for URL exclusion list comparison.
+            $this->file   = $this->path.DIR.md5($this->url).".html";
 
-            $this->caches = INCLUDES_DIR.DIR."caches";
-            $this->url = rawurldecode($url); # Percent decode for URL exclusion list comparison.
-            $this->file = $this->path.DIR.md5($this->url).".html";
-
-            # If the cache directory is not writable, disable this module and cancel execution.
-            if (!is_writable($this->caches))
+            # If the cache directory does not exist and cannot be created, or is not writable, cancel execution.
+            if ((!file_exists($this->caches) and !@mkdir($this->caches)) or !is_writable($this->caches))
                 cancel_module("cacher");
 
             # Remove all expired files.

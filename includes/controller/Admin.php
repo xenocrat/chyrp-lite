@@ -27,7 +27,7 @@
         private function __construct() {
             $config = Config::current();
 
-            $cache = (is_writable(INCLUDES_DIR.DIR."caches") and !DEBUG);
+            $cache = (is_writable(CACHES_DIR) and (!DEBUG or CACHE_TWIG));
             $loaders[] = new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin");
 
             foreach ($config->enabled_modules as $extension)
@@ -42,7 +42,7 @@
             $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
                                                               "strict_variables" => (DEBUG) ? true : false,
                                                               "charset" => "UTF-8",
-                                                              "cache" => ($cache) ? INCLUDES_DIR.DIR."caches" : false,
+                                                              "cache" => ($cache) ? CACHES_DIR : false,
                                                               "autoescape" => false));
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
@@ -1309,10 +1309,12 @@
                     array_unshift($classes[$folder], $folder);
 
                 $info = include MODULES_DIR.DIR.$folder.DIR."info.php";
+
                 if (gettype($info) != "array")
                   continue;
 
                 $conflicting_modules = array();
+
                 if (!empty($info["conflicts"])) {
                     $classes[$folder][] = "conflicts";
 
@@ -1320,6 +1322,7 @@
                         if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
                             $conflicting_modules[] = $conflict; # Shortlist of conflicting installed modules
+
                             if (in_array($conflict, $config->enabled_modules))
                                 if (!in_array("error", $classes[$folder]))
                                     $classes[$folder][] = "error";
@@ -1327,6 +1330,7 @@
                 }
 
                 $dependencies_needed = array();
+
                 if (!empty($info["dependencies"])) {
                     $classes[$folder][] = "dependencies";
 
@@ -1375,7 +1379,9 @@
                                               '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' :
                                               $info["author"]["name"] ;
 
-                $category = (module_enabled($folder)) ? "enabled_modules" : "disabled_modules" ;
+                $category = (module_enabled($folder) or !empty(Modules::$instances[$folder]->cancelled)) ?
+                            "enabled_modules" : "disabled_modules" ;
+
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
                                                            "url" => $info["url"],
@@ -1419,6 +1425,7 @@
                     load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 $info = include FEATHERS_DIR.DIR.$folder.DIR."info.php";
+
                 if (gettype($info) != "array")
                   continue;
 
@@ -1545,6 +1552,9 @@
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
+            if (!empty(Modules::$instances[$_GET[$type]]->cancelled))
+                error(__("Module Cancelled"), __("The module has cancelled execution because of an error."));
+
             require $folder.DIR.$_GET[$type].DIR.$_GET[$type].".php";
 
             $class_name = camelize($_GET[$type]);
@@ -1571,19 +1581,17 @@
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the <code>%s</code> directory at your Chyrp install's root and CHMOD it to 777.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please create the directory %s in your install directory.", array($config->uploads_path));
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please CHMOD <code>%s</code> to 777.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please make %s writable by the server.", array($config->uploads_path));
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
 
             if ($type == "module")
-                Flash::notice(__("Module enabled."),
-                              "/admin/?action=".pluralize($type));
+                Flash::notice(__("Module enabled."), "/admin/?action=".pluralize($type));
             elseif ($type == "feather")
-                Flash::notice(__("Feather enabled."),
-                              "/admin/?action=".pluralize($type));
+                Flash::notice(__("Feather enabled."), "/admin/?action=".pluralize($type));
         }
 
         /**
@@ -1605,7 +1613,7 @@
             if (empty($_GET[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."));
 
-            if ($type == "module" and !module_enabled($_GET[$type]))
+            if ($type == "module" and !module_enabled($_GET[$type]) and empty(Modules::$instances[$_GET[$type]]->cancelled))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
             if ($type == "feather" and !feather_enabled($_GET[$type]))
