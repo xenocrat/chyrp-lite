@@ -1245,9 +1245,7 @@
                                       (bool) (int) $chyrp->pinned,
                                       $chyrp->status,
                                       datetime($entry->published),
-                                      ($entry->updated == $entry->published) ?
-                                          null :
-                                          datetime($entry->updated),
+                                      ($entry->updated == $entry->published) ? null : datetime($entry->updated),
                                       false);
 
                     $trigger->call("import_chyrp_post", $entry, $post);
@@ -1289,7 +1287,8 @@
 
             $config = Config::current();
 
-            $this->context["enabled_modules"] = $this->context["disabled_modules"] = array();
+            $this->context["enabled_modules"]  = array();
+            $this->context["disabled_modules"] = array();
 
             if (!$open = @opendir(MODULES_DIR))
                 return Flash::warning(__("Could not read modules directory."));
@@ -1376,11 +1375,10 @@
                                                              $info["description"]);
 
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                                              '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' :
-                                              $info["author"]["name"] ;
+                    '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
                 $category = (module_enabled($folder) or !empty(Modules::$instances[$folder]->cancelled)) ?
-                            "enabled_modules" : "disabled_modules" ;
+                    "enabled_modules" : "disabled_modules" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
@@ -1412,7 +1410,8 @@
 
             $config = Config::current();
 
-            $this->context["enabled_feathers"] = $this->context["disabled_feathers"] = array();
+            $this->context["enabled_feathers"]  = array();
+            $this->context["disabled_feathers"] = array();
 
             if (!$open = @opendir(FEATHERS_DIR))
                 return Flash::warning(__("Could not read feathers directory."));
@@ -1450,8 +1449,7 @@
                                                              $info["description"]);
 
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                                              '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' :
-                                              $info["author"]["name"] ;
+                    '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
                 $category = (feather_enabled($folder)) ? "enabled_feathers" : "disabled_feathers" ;
                 $this->context[$category][$folder] = array("name" => $info["name"],
@@ -1498,8 +1496,7 @@
                 fallback($info["author"], array("name" => "", "url" => ""));
 
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                    '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' :
-                    $info["author"]["name"] ;
+                    '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' : $info["author"]["name"] ;
 
                 $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
@@ -1514,8 +1511,7 @@
 
                 $this->context["themes"][] = array("name" => $folder,
                                                    "screenshot" => (file_exists(THEMES_DIR.DIR.$folder.DIR."screenshot.png") ?
-                                                                        $config->chyrp_url.DIR."themes".DIR.$folder.DIR."screenshot.png" :
-                                                                        ""),
+                                                        $config->chyrp_url.DIR."themes".DIR.$folder.DIR."screenshot.png" : ""),
                                                    "info" => $info);
             }
 

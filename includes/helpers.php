@@ -1014,19 +1014,18 @@
      *     $reason - Why was execution cancelled?
      *
      * Note:
-     *     A module can disable itself in its __construct method.
+     *     A module can cancel itself in its __construct method.
      */
      function cancel_module($target, $reason = "") {
         $this_disabled = array();
+        $message = empty($reason) ?
+            _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) : $reason ;
 
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
 
         if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
-            if (!empty($reason))
-                Flash::warning($reason);
-            else
-                Flash::warning(_f("Execution of %s has been cancelled because the module could not continue.", camelize($target)));
+            Flash::warning($message);
 
         $config = Config::current();
 

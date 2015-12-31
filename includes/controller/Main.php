@@ -272,6 +272,7 @@
 
                 $archives = array();
                 $archive_hierarchy = array();
+
                 while ($time = $timestamps->fetchObject()) {
                     $year = mktime(0, 0, 0, 1, 0, $time->year);
                     $month = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
@@ -299,7 +300,11 @@
                     error(__("Error"), __("Please enter a valid year and month."));
 
                 $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
-                $depth = isset($_GET['day']) ? "day" : (isset($_GET['month']) ? "month" : (isset($_GET['year']) ? "year" : ""));
+
+                $depth = isset($_GET['day']) ?
+                    "day" : (isset($_GET['month']) ?
+                        "month" : (isset($_GET['year']) ?
+                            "year" : ""));
 
                 $this->display("pages".DIR."archive",
                                array("posts" => $posts,
@@ -650,8 +655,7 @@
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
-                                    User::hashPassword($_POST['new_password1']) :
-                                    $visitor->password ;
+                        User::hashPassword($_POST['new_password1']) : $visitor->password ;
 
                     $visitor->update($visitor->login,
                                      $password,
