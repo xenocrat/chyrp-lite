@@ -1865,7 +1865,7 @@
             header("Content-type: application/octet-stream");
             header("Content-Disposition: attachment; filename=\"".$filename."\"");
 
-            if (file_exists($filepath)) {
+            if (isset($filepath) and file_exists($filepath)) {
                 if (!in_array("ob_gzhandler", ob_list_handlers()))
                     header("Content-length: ".filesize($filepath));
 
@@ -1879,7 +1879,7 @@
 
             exit;
         } else
-            error(__("Error"), __("Unable to deliver file attachement because HTTP headers were already sent."));
+            error(__("Error"), __("Unable to deliver file attachment because HTTP headers were already sent."));
     }
 
     /**
