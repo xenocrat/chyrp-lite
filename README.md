@@ -93,7 +93,7 @@ Chyrp Lite was created by the following people:
 
 ## License
 
-Chyrp Lite is Copyright 2008-2015 Alex Suraci, Arian Xhezairi,
+Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
 Daniel Pimley, and other contributors.
 
 Permission is hereby granted, free of charge, to any person
