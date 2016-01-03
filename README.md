@@ -65,7 +65,7 @@ You can install Chyrp Lite in four steps:
 1. If using MySQL, create a MySQL database with a username and password.
 2. Download the [latest release](https://github.com/xenocrat/chyrp-lite/releases), unzip, and upload to your web server.
 3. Open your web browser and navigate to where you uploaded Chyrp Lite.
-4. Follow through the installer at [install.php](install.php).
+4. Run the installation process by visiting [install.php](install.php) in your web browser.
 
 That's it! Chyrp Lite will be up and running and ready for you to use.
 
@@ -75,9 +75,9 @@ Chyrp Lite will tell you when a new version is available. You can update in six 
 1. __Backup your database before proceeding!__
 2. Download the latest version of Chyrp Lite.
 3. Copy your config file from _/includes/config.json.php_ to somewhere safe.
-4. Overwrite your current Chyrp installation files with the new ones, making sure to retain your `/uploads/` folder.
+4. Overwrite your current version with the new one, making sure to retain your _uploads_ folder.
 5. Restore your config file to _/includes/_.
-6. Run the upgrade process by navigating to [upgrade.php](upgrade.php).
+6. Run the upgrade process by visiting [upgrade.php](upgrade.php) in your web browser.
 
 ## Documentation
 The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation
