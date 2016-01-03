@@ -74,9 +74,9 @@ Chyrp Lite will tell you when a new version is available. You can update in six 
 
 1. __Backup your database before proceeding!__
 2. Download the latest version of Chyrp Lite.
-3. Copy your config file from `/includes/config.json.php` to somewhere safe.
+3. Copy your config file from _/includes/config.json.php_ to somewhere safe.
 4. Overwrite your current Chyrp installation files with the new ones, making sure to retain your `/uploads/` folder.
-5. Restore your config file to `/includes/`.
+5. Restore your config file to _/includes/_.
 6. Run the upgrade process by navigating to [upgrade.php](upgrade.php).
 
 ## Documentation
@@ -123,7 +123,7 @@ to promote the sale, use or other dealings in this Software
 without prior written authorization.
 
 Twig is Copyright 2009-2014 the Twig Team,
-distributed under the [new BSD License](https://raw.githubusercontent.com/twigphp/Twig/1.x/LICENSE).
+distributed under the [new BSD License](https://raw.githubusercontent.com/twigphp/Twig/master/LICENSE).
 jQuery is Copyright jQuery Foundation and other contributors,
 distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).
 Parsedown is Copyright 2013 Emanuil Rusev,
