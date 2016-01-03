@@ -1889,10 +1889,10 @@
                     break;
                 case "alternate_urls":
                     $help = "<h1>".__("Alternate URL")."</h1>\n".
-                            "<p>".__("If you enter an alternate URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite in a <code>/chyrp</code> directory on your web server and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:")."</p>\n".
-                            "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n".
+                            "<p>".__("If you enter an alternate URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite in a <em>/chyrp</em> directory on your web server and still have your site accessible at the destination directory <em>/</em>. There are two requirements for this to work:")."</p>\n".
+                            "<ol>\n<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n".
                             "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
-                            "</li>\n<li>".__("Move the .htaccess file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                            "</li>\n<li>".__("Move the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
                     break;
                 case "markdown":
                     $help = "<h1>".__("Markdown")."</h1>\n".
