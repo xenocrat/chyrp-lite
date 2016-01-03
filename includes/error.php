@@ -112,12 +112,13 @@
             !function_exists("logged_in") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
-            !property_exists(Config::current(), "chyrp_url") or
-            empty(Config::current()->chyrp_url))
+            !property_exists(Config::current(), "url") or
+            !property_exists(Config::current(), "chyrp_url"))
             exit("<!DOCTYPE html>\n<h1>ERROR:</h1>\n<p>".$body."</p>");
 
         $config = Config::current();
-        $site = $config->chyrp_url;
+        $url = $config->url;
+        $chyrp_url = $config->chyrp_url;
 
         # Report with backtrace and magic words for JavaScript.
         if (AJAX) {
@@ -142,49 +143,49 @@
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Regular.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Semibold.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Semibold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Italic.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('<?php echo $site; ?>/fonts/Hack-Regular.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('<?php echo $site; ?>/fonts/Hack-Bold.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Bold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('<?php echo $site; ?>/fonts/Hack-Oblique.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Oblique.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('<?php echo $site; ?>/fonts/Hack-BoldOblique.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-BoldOblique.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -313,7 +314,7 @@
                 </ol>
             <?php endif; ?>
             <?php if (!logged_in() and ADMIN): ?>
-                <a href="<?php echo $site; ?>/?action=login" class="big login"><?php echo __("Log in"); ?></a>
+                <a href="<?php echo $url; ?>/?action=login" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
             </div>
         </div>
