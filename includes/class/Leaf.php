@@ -143,7 +143,7 @@
     }
 
     /**
-     * Function: 
+     * Function: twig_filter_strftime_format
      * Returns date formatting for a string that isn't a regular time() value.
      */
     function twig_filter_strftime_format($timestamp, $format='%x %X') {
@@ -151,7 +151,7 @@
     }
 
     /**
-     * Function: 
+     * Function: twig_filter_filesize_format
      * Returns a string containing a formatted filesize value.
      */
     function twig_filter_filesize_format($bytes) {
@@ -176,7 +176,7 @@
     }
 
     /**
-     * Function: 
+     * Function: twig_filter_repeat
      * Returns the string repeated n times.
      */
     function twig_filter_repeat($string, $repetitions = 1) {
@@ -190,15 +190,15 @@
     }
 
     /**
-     * Function: 
-     * Returns whether or not the string matches the regular expression.
+     * Function: twig_filter_match
+     * Try to match a string against an array of regular expressions, or a single regular expression.
      */
-    function twig_filter_match($string, $regex) {
-        return preg_match($regex, $string);
+    function twig_filter_match($haystack, $try) {
+        return match($try, $haystack);
     }
 
     /**
-     * Function: 
+     * Function: twig_filter_contains
      * Does the haystack variable contain the needle variable?
      */
     function twig_filter_contains($haystack, $needle) {
@@ -215,7 +215,7 @@
     }
 
     /**
-     * Function: 
+     * Function: twig_filter_inspect
      * Exports a variable for inspection.
      */
     function twig_filter_inspect($variable) {
@@ -223,7 +223,7 @@
     }
 
     /**
-     * Function: 
+     * Function: twig_filter_checked
      * Returns a HTML @checked@ attribute if the test evalutaes to true.
      */
     function twig_filter_checked($test) {
@@ -232,8 +232,8 @@
     }
 
     /**
-     * Function: 
-     * Returns a HTML @selected@ attribute if the test matches any of the passed arguments.
+     * Function: twig_filter_selected
+     * Returns a HTML @selected@ attribute if the test matches any of the supplied arguments.
      */
     function twig_filter_selected($test) {
         $try = func_get_args();
@@ -245,7 +245,7 @@
     }
 
     /**
-     * Function: 
+     * Function: twig_filter_download
      * Returns a download link for a file located in the uploads directory.
      */
     function twig_filter_download($filename) {
