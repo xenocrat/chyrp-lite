@@ -762,16 +762,18 @@
          * If "posts" is in the context and the visitor requested a feed, they will be served.
          *
          * Parameters:
-         *     $file - The theme file to display (relative to THEME_DIR).
+         *     $file - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
          *     $context - The context for the file.
          *     $title - The title for the page.
          */
         public function display($file, $context = array(), $title = "") {
-            if (is_array($file))
-                for ($i = 0; $i < count($file); $i++) {
-                    if (file_exists(THEME_DIR.DIR.$file[$i].".twig") or ($i + 1) == count($file))
-                        return $this->display($file[$i], $context, $title);
-                }
+            if (is_array($file)) {
+                foreach ($file as $try)
+                    if (file_exists(THEME_DIR.DIR.$try.".twig"))
+                        return $this->display($try, $context, $title);
+
+                error(__("Twig Error"), __("No files exist in the supplied array of fallbacks."), debug_backtrace());
+            }
 
             $this->displayed = true;
 
@@ -839,8 +841,7 @@
                 return $this->twig->display($file.".twig", $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                $trace = debug_backtrace();
-                error(__("Error"), $prettify, $trace);
+                error(__("Twig Error"), $prettify, debug_backtrace());
             }
         }
 

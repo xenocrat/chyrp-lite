@@ -2029,7 +2029,7 @@
          * Renders the page.
          *
          * Parameters:
-         *     $action - The template file to display (relative to admin/pages/ for core and pages/admin/ for modules).
+         *     $action - The template file to display (sans ".twig") relative to admin/pages/ for core and extensions.
          *     $context - The context for the template.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          */
@@ -2136,8 +2136,7 @@
                 $this->twig->display($template, $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                $trace = debug_backtrace();
-                error(__("Error"), $prettify, $trace);
+                error(__("Twig Error"), $prettify, debug_backtrace());
             }
         }
 
