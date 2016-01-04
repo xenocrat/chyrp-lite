@@ -244,6 +244,10 @@
                 margin: 0em 0em 2em 2em;
                 list-style-position: outside;
             }
+            ul:last-child,
+            ol:last-child {
+                margin-bottom: 0em;
+            }
             ol.backtrace {
                 margin-top: 0.5em;
             }
