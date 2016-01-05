@@ -34,7 +34,7 @@
         exit("Malformed URI.");
     }
 
-    if (!file_exists($filepath)) {
+    if (!is_readable($filepath) or is_dir($filepath)) {
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
         exit("File Not Found.");
     }

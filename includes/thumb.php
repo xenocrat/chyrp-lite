@@ -40,7 +40,7 @@
     if (substr_count($filename, DIR))
         display_error(_f("Image name %s is not allowed.", $filename));
 
-    if (!file_exists($filepath))
+    if (!is_readable($filepath) or is_dir($filepath))
         display_error(_f("Image file %s was not found.", $filename));
 
     function display_error($string) {
