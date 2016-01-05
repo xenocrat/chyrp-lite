@@ -43,7 +43,6 @@
 <p>
 <label for="locale">{{ "Language" | translate }}</label>
 <select name="locale" id="locale">
-<option value="en_US"{{ "en_US" | selected(site.locale) }}>English (US)</option>
 {% for locale in locales %}
 <option value="{{ locale.code }}"{{ locale.code | selected(site.locale) }}>{{ locale.name }}</option>
 {% endfor %}

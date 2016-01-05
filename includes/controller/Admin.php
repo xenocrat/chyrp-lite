@@ -28,7 +28,7 @@
             $config = Config::current();
 
             $cache = (is_writable(CACHES_DIR) and (!DEBUG or CACHE_TWIG));
-            $loaders[] = new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin");
+            $loaders = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
             foreach ($config->enabled_modules as $extension)
                 if (file_exists(MODULES_DIR.DIR.$extension.DIR."admin"))
@@ -1716,12 +1716,13 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             $locales = array();
+            $locales[] = array("code" => "en_US", "name" => lang_code("en_US")); # Default locale.
 
             if ($open = opendir(INCLUDES_DIR.DIR."locale".DIR)) {
                  while (($folder = readdir($open)) !== false) {
                     $split = explode(".", $folder);
 
-                    if (end($split) == "mo")
+                    if (end($split) == "mo" and $split[0] != "en_US")
                         $locales[] = array("code" => $split[0], "name" => lang_code($split[0]));
                 }
                 closedir($open);

@@ -177,52 +177,54 @@
 
     /**
      * Function: set_locale
-     * Set locale in a platform-independent way
+     * Sets the locale with fallbacks for platform-specific quirks.
      *
      * Parameters:
-     *     $locale - the locale name (@en_US@, @uk_UA@, @fr_FR@ etc.)
+     *     $locale - The locale name (e.g. @en_US@, @uk_UA@, @fr_FR@)
+     *     $charset - The charset to use when setting the locale.
+     *     $force - Force "en_US" to be set?
      *
      * Returns:
-     *     The encoding name used by locale-aware functions.
-     *
-     * Author:
-     *     http://www.onphp5.com/article/22
+     *     The new current locale, or false if it could not be set.
      *
      * Notes:
-     *     en_US will not be set because this is the default for Chyrp and
-     *     may have been chosen due to there being no translation available
-     *     that macthes the system locale.
+     *     en_US is Chyrp Lite's default locale: it may have been chosen
+     *     because there is no translation for the current system locale.
      */
-    function set_locale($locale) {
-        if ($locale == "en_US")
+    function set_locale($locale, $charset = "UTF-8", $force = false) {
+        if ($locale == "en_US" and !$force)
             return;
 
-        list($lang, $cty) = explode("_", $locale);
-        $locales = array($locale.".UTF-8", $lang, "en_US.UTF-8", "en");
+        $pieces = explode("_", $locale);
+        $language = $pieces[0];
+        $locales = array($locale.".".$charset, $locale, $language);
         $result = setlocale(LC_ALL, $locales);
 
-        return (!strpos($result, 'UTF-8')) ? "CP".preg_replace('~\.(\d+)$~', "\\1", $result) : "UTF-8" ;
+        if (DEBUG)
+            error_log("LOCALE ".(is_string($result) ? $result : "unrecognized"));
+
+        return $result;
     }
 
     /**
      * Function: lang_code
-     * Returns the passed language code (e.g. en_US) to the human-readable text (e.g. English (US))
+     * Converts a language code to a display name.
      *
      * Parameters:
-     *     $code - The language code to convert
-     *
-     * Author:
-     *     TextPattern devs, modified to fit with Chyrp.
+     *     $code - The language code to convert.
      */
     function lang_code($code) {
+        if (class_exists("Locale"))
+            return Locale::getDisplayName($code, $code);
+
         $langs = array("ar_DZ" => "جزائري عربي",
                        "ca_ES" => "Català",
                        "cs_CZ" => "Čeština",
                        "da_DK" => "Dansk",
                        "de_DE" => "Deutsch",
                        "el_GR" => "Ελληνικά",
-                       "en_GB" => "English (GB)",
-                       "en_US" => "English (US)",
+                       "en_GB" => "English (United Kingdom)",
+                       "en_US" => "English (United States)",
                        "es_ES" => "Español",
                        "et_EE" => "Eesti",
                        "fi_FI" => "Suomi",
@@ -250,7 +252,7 @@
                        "zh_CN" => "中文(简体)",
                        "zh_TW" => "中文(繁體)",
                        "bg_BG" => "Български");
-        return (isset($langs[$code])) ? str_replace(array_keys($langs), array_values($langs), $code) : $code ;
+        return (isset($langs[$code])) ? str_replace($code, $langs[$code], $code) : $code ;
     }
 
     /**
@@ -1013,7 +1015,7 @@
      *     $target - Module name to disable.
      *     $reason - Why was execution cancelled?
      *
-     * Note:
+     * Notes:
      *     A module can cancel itself in its __construct method.
      */
      function cancel_module($target, $reason = "") {
@@ -1865,7 +1867,7 @@
             header("Content-type: application/octet-stream");
             header("Content-Disposition: attachment; filename=\"".$filename."\"");
 
-            if (isset($filepath) and file_exists($filepath)) {
+            if (isset($filepath) and is_readable($filepath) and !is_dir($filepath)) {
                 if (!in_array("ob_gzhandler", ob_list_handlers()))
                     header("Content-length: ".filesize($filepath));
 
