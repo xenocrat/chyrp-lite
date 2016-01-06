@@ -177,33 +177,42 @@
 
     /**
      * Function: set_locale
-     * Sets the locale with fallbacks for platform-specific quirks.
+     * Try to set the locale with fallbacks for platform-specific quirks.
      *
      * Parameters:
      *     $locale - The locale name (e.g. @en_US@, @uk_UA@, @fr_FR@)
-     *     $charset - The charset to use when setting the locale.
-     *     $force - Force "en_US" to be set?
-     *
-     * Returns:
-     *     The new current locale, or false if it could not be set.
      *
      * Notes:
-     *     en_US is Chyrp Lite's default locale: it may have been chosen
-     *     because there is no translation for the current system locale.
+     *     Precedence is given to UTF-8 with a fallback to Windows 1252.
      */
-    function set_locale($locale, $charset = "UTF-8", $force = false) {
-        if ($locale == "en_US" and !$force)
-            return;
+    function set_locale($locale) {
+        $posix = array($locale.".UTF-8",                  // E.g. "en_US.UTF-8"
+                       $locale.".UTF8",                   // E.g. "en_US.UTF8"
+                       $locale);                          // E.g. "en_US"
+        $win32 = array(str_replace("_", "-", $locale));   // E.g. "en-US"
 
-        $pieces = explode("_", $locale);
-        $language = $pieces[0];
-        $locales = array($locale.".".$charset, $locale, $language);
-        $result = setlocale(LC_ALL, $locales);
+        if (class_exists("Locale")) {
+            $language = Locale::getDisplayLanguage($locale, "en_US");
+            $region = Locale::getDisplayRegion("en_US", "en_US");
+            array_unshift($win32,
+                          $language."_".$region.".UTF-8", // E.g. "English_United States.UTF-8"
+                          $language.".UTF-8",             // E.g. "English.UTF-8"
+                          $language."_".$region.".1252",  // E.g. "English_United States.1252"
+                          $language.".1252",              // E.g. "English.1252"
+                          $language);                     // E.g. "English"
+
+            # Set the ICU locale.
+            Locale::setDefault($locale);
+
+            if (DEBUG)
+                error_log("LOCALE (ICU) ".Locale::getDefault());
+        }
+
+        # Set the PHP locale.
+        setlocale(LC_ALL, array_merge($posix, $win32));
 
         if (DEBUG)
-            error_log("LOCALE ".(is_string($result) ? $result : "unrecognized"));
-
-        return $result;
+            error_log("LOCALE (PHP) ".setlocale(LC_ALL, 0));
     }
 
     /**
@@ -214,45 +223,7 @@
      *     $code - The language code to convert.
      */
     function lang_code($code) {
-        if (class_exists("Locale"))
-            return Locale::getDisplayName($code, $code);
-
-        $langs = array("ar_DZ" => "جزائري عربي",
-                       "ca_ES" => "Català",
-                       "cs_CZ" => "Čeština",
-                       "da_DK" => "Dansk",
-                       "de_DE" => "Deutsch",
-                       "el_GR" => "Ελληνικά",
-                       "en_GB" => "English (United Kingdom)",
-                       "en_US" => "English (United States)",
-                       "es_ES" => "Español",
-                       "et_EE" => "Eesti",
-                       "fi_FI" => "Suomi",
-                       "fr_FR" => "Français",
-                       "gl_GZ" => "Galego (Galiza)",
-                       "he_IL" => "עברית",
-                       "hu_HU" => "Magyar",
-                       "id_ID" => "Bahasa Indonesia",
-                       "is_IS" => "Íslenska",
-                       "it_IT" => "Italiano",
-                       "ja_JP" => "日本語",
-                       "lv_LV" => "Latviešu",
-                       "nl_NL" => "Nederlands",
-                       "no_NO" => "Norsk",
-                       "pl_PL" => "Polski",
-                       "pt_PT" => "Português",
-                       "ro_RO" => "Română",
-                       "ru_RU" => "Русский",
-                       "sk_SK" => "Slovenčina",
-                       "sq_AL" => "Shqip",
-                       "sv_SE" => "Svenska",
-                       "th_TH" => "ไทย",
-                       "uk_UA" => "Українська",
-                       "vi_VN" => "Tiếng Việt",
-                       "zh_CN" => "中文(简体)",
-                       "zh_TW" => "中文(繁體)",
-                       "bg_BG" => "Български");
-        return (isset($langs[$code])) ? str_replace($code, $langs[$code], $code) : $code ;
+        return (class_exists("Locale")) ? Locale::getDisplayName($code, $code) : $code ;
     }
 
     /**
