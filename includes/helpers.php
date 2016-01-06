@@ -195,8 +195,6 @@
             $language = Locale::getDisplayLanguage($locale, "en_US");
             $region = Locale::getDisplayRegion("en_US", "en_US");
             array_unshift($win32,
-                          $language."_".$region.".UTF-8", // E.g. "English_United States.UTF-8"
-                          $language.".UTF-8",             // E.g. "English.UTF-8"
                           $language."_".$region.".1252",  // E.g. "English_United States.1252"
                           $language.".1252",              // E.g. "English.1252"
                           $language);                     // E.g. "English"
