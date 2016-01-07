@@ -1,8 +1,8 @@
 var ChyrpAjaxScroll = {
     busy: false,
     failed: false,
-    auto: <?php echo ( Config::current()->ajax_scroll_auto ? "true" : "false" ); ?>,
-    clean: <?php echo ( Config::current()->clean_urls ? "true" : "false" ); ?>,
+    auto: <?php echo(Config::current()->ajax_scroll_auto ? "true" : "false"); ?>,
+    clean: <?php echo(Config::current()->clean_urls ? "true" : "false"); ?>,
     init: function() {
         if (ChyrpAjaxScroll.auto) {
             $(window).on("scroll", window, ChyrpAjaxScroll.watch);
@@ -74,7 +74,7 @@ var ChyrpAjaxScroll = {
     },
     panic: function() {
         ChyrpAjaxScroll.failed = true;
-        alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
     }
 };
 $(document).ready(ChyrpAjaxScroll.init);

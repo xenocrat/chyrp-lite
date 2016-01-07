@@ -3,7 +3,7 @@ var ChyrpComment = {
     notice: 0,
     interval: null,
     failed: false,
-    reload: <?php if (Config::current()->enable_reload_comments) echo("true"); else echo("false"); ?>,
+    reload: <?php echo(Config::current()->enable_reload_comments ? "true" : "false" ); ?>,
     delay: Math.abs(<?php echo(Config::current()->auto_reload_comments * 1000); ?>),
     per_page: <?php echo Config::current()->comments_per_page; ?>,
     init: function() {
@@ -119,10 +119,10 @@ var ChyrpComment = {
                         e.preventDefault();
 
                         if ($("#more_options_" + id).css("display") == "none") {
-                            $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
+                            $(this).empty().append('<?php echo __("&uarr; Fewer Options"); ?>');
                             $("#more_options_" + id).slideDown("slow");
                         } else {
-                            $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
+                            $(this).empty().append('<?php echo __("More Options &darr;"); ?>');
                             $("#more_options_" + id).slideUp("slow");
                         }
                     });
@@ -206,7 +206,7 @@ var ChyrpComment = {
     },
     panic: function() {
         ChyrpComment.failed = true;
-        alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
         $(".ajax_loading").loader(true);
         $("#comments form input[name='ajax']").remove();
     }

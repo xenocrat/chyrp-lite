@@ -1,7 +1,7 @@
 var ChyrpLightbox = {
     background: "<?php echo Config::current()->module_lightbox["background"]; ?>",
     spacing: Math.abs("<?php echo Config::current()->module_lightbox["spacing"]; ?>"),
-    protect: <?php echo ( Config::current()->module_lightbox["protect"] ? "true" : "false" ); ?>,
+    protect: <?php echo(Config::current()->module_lightbox["protect"] ? "true" : "false"); ?>,
     active: false,
     styles: {
         fg: {

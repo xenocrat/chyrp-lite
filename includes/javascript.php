@@ -16,9 +16,10 @@ var Route = {
     action: "<?php echo $_GET['action']; ?>"
 }
 var Site = {
-    url: "<?php echo $config->chyrp_url; ?>",
-    key: "<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>",
-    ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true\n"); else echo("false\n"); ?>
+    url: '<?php echo $config->chyrp_url; ?>',
+    key: '<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>',
+    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?>
+
 }
 var Passwords = {
     check: function(selector_primary, selector_confirm) {
@@ -31,7 +32,7 @@ var Passwords = {
         $(selector_primary).parents("form").on("submit", function(e) {
             if ($(selector_primary).val() !== $(selector_confirm).val()) {
                 e.preventDefault();
-                alert("<?php echo __("Passwords do not match."); ?>")
+                alert('<?php echo __("Passwords do not match."); ?>');
             }
         });
     }
@@ -61,10 +62,10 @@ var Post = {
                         e.preventDefault();
 
                         if ($("#more_options_" + id).css("display") == "none") {
-                            $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
+                            $(this).empty().append('<?php echo __("&uarr; Fewer Options"); ?>');
                             $("#more_options_" + id).slideDown("slow");
                         } else {
-                            $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
+                            $(this).empty().append('<?php echo __("More Options &darr;"); ?>');
                             $("#more_options_" + id).slideUp("slow");
                         }
                     });
@@ -118,12 +119,12 @@ var Post = {
         if (Route.action != "drafts" && Route.action != "view" && $("#post_edit_form_" + id + " select#status").val() == "draft") {
             $("#post_edit_form_" + id).fadeOut("fast", function() {
                 $(this).loader(true);
-                alert("<?php echo __("Post has been saved as a draft."); ?>");
+                alert('<?php echo __("Post has been saved as a draft."); ?>');
             })
         } else if (Route.action == "drafts" && $("#post_edit_form_" + id + " select#status").val() != "draft") {
             $("#post_edit_form_" + id).fadeOut("fast", function() {
                 $(this).loader(true);
-                alert("<?php echo __("Post has been published."); ?>");
+                alert('<?php echo __("Post has been published."); ?>');
             })
         } else {
             $.post(Site.url + "/includes/ajax.php", {
@@ -158,7 +159,7 @@ var Post = {
                 $(this).remove();
 
                 if (Route.action == "view")
-                    window.location = "<?php echo $config->url; ?>";
+                    window.location = '<?php echo $config->url; ?>';
             });
         }, "html").fail(Post.panic);
     },
@@ -174,7 +175,7 @@ var Post = {
             if (!Post.failed) {
                 e.preventDefault();
 
-                if (confirm("<?php echo __("Are you sure you want to delete this post? If you wish to hide it, save it as a draft."); ?>")) {
+                if (confirm('<?php echo __("Are you sure you want to delete this post? If you wish to hide it, save it as a draft."); ?>')) {
                     var id = $(this).attr("id").replace(/post_delete_/, "");
                     Post.destroy(id);
                 }
@@ -183,7 +184,7 @@ var Post = {
     },
     panic: function() {
         Post.failed = true;
-        alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
         $(".ajax_loading").loader(true);
     }
 }
