@@ -15,6 +15,9 @@
         else
             show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
+    if (empty($_POST['action']))
+        error("Missing Argument", "You must specify an action.");
+
     switch($_POST['action']) {
         case "edit_post":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -92,8 +95,9 @@
                 break;
 
             $sanitized = sanitize_html($_POST['content']);
-
-            echo Trigger::current()->filter($sanitized, $_POST['filter']);
+            Trigger::current()->filter($sanitized, $_POST['filter']);
+            $admin = AdminController::current();
+            $admin->display("standalone", array("body" => $sanitized), __("Preview"));
             break;
 
         case "check_confirm":

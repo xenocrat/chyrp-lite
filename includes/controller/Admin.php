@@ -1875,6 +1875,9 @@
          * Sets the $title and $body for various help IDs.
          */
         public function help() {
+            if (empty($_GET['id']))
+                error(__("Missing Argument"), __("An ID is required to display a help page."));
+
             $help = Trigger::current()->call("help_".$_GET['id']);
 
             switch($_GET['id']) {
@@ -1918,10 +1921,7 @@
                     break;
             }
 
-            if (!isset($_GET['ajax']))
-                echo "<!DOCTYPE html>\n";
-
-            exit($help);
+            $this->display("standalone", array("body" => $help), __("Help"));
         }
 
         /**

@@ -15,7 +15,7 @@ $(function() {
     if (Route.action == "edit_user")
         Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
 
-    // Open help text in an overlay.
+    // Open help text in an iframe.
     Help.init();
 
     // Interactive behaviour.
@@ -187,24 +187,17 @@ var Help = {
     show: function(href) {
         $("<div>", {
             "role": "region",
-        }).addClass("overlay_background").append(
-            [$("<div>", {
-                "role": 'contentinfo',
+        }).addClass("iframe_background").append(
+            [$("<iframe>", {
+                "src": href,
                 "aria-label": '<?php echo __("Help", "theme"); ?>'
-            }).addClass("overlay_foreground").load(href + "&ajax=1", null, function(response) {
-                if (isError(response))
-                    $(this).text('<?php echo __("Oops! Something went wrong on this web page."); ?>');
-
-                $(this).find("a").each(function() {
-                    $(this).attr("target","_blank"); // Force links to spawn a new viewport.
-                })
-            }),
+            }).addClass("iframe_foreground"),
             $("<img>", {
                 "src": Site.url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "theme"); ?>',
                 "role": 'button',
                 "aria-label": '<?php echo __("Close", "theme"); ?>'
-            }).addClass("overlay_close_gadget").click(function() {
+            }).addClass("iframe_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
         ).click(function(e) {
@@ -252,36 +245,57 @@ var Write = {
         });
     },
     ajax_previews: function(content, filter) {
+        var uid = Math.floor(Math.random()*1000000000000).toString(16);
+
+        // Build a form targeting a named iframe.
+        $("<form>", {
+            "id": uid,
+            "action": Site.url + "/includes/ajax.php",
+            "method": "post",
+            "accept-charset": "utf-8",
+            "target": uid,
+            "style": "display: none;"
+        }).append(
+            [$("<input>", {
+                "type": "hidden",
+                "name": "action",
+                "value": "preview"
+            }),
+            $("<input>", {
+                "type": "hidden",
+                "name": "filter",
+                "value": filter
+            }),
+            $("<input>", {
+                "type": "hidden",
+                "name": "content",
+                "value": content
+            })]
+        ).insertAfter("#content");
+
+        // Build and display the named iframe.
         $("<div>", {
             "role": "region",
-        }).addClass("overlay_background").append(
-            [$("<div>", {
-                "role": 'contentinfo',
+        }).addClass("iframe_background").append(
+            [$("<iframe>", {
+                "name": uid,
                 "aria-label": '<?php echo __("Preview", "theme"); ?>'
-            }).addClass("overlay_foreground").load(Site.url + "/includes/ajax.php", {
-                    action: "preview",
-                    content: content,
-                    filter: filter
-            }, function(response) {
-                if (isError(response))
-                    $(this).text('<?php echo __("Oops! Something went wrong on this web page."); ?>');
-
-                $(this).find("a").each(function() {
-                    $(this).attr("target","_blank"); // Force links to spawn a new viewport.
-                })
-            }),
+            }).addClass("iframe_foreground"),
             $("<img>", {
                 "src": Site.url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "theme"); ?>',
                 "role": 'button',
                 "aria-label": '<?php echo __("Close", "theme"); ?>'
-            }).addClass("overlay_close_gadget").click(function() {
+            }).addClass("iframe_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
         ).click(function(e) {
             if (e.target === e.currentTarget)
                 $(this).remove();
         }).insertAfter("#content");
+
+        // Submit the form and destroy it immediately.
+        $("#" + uid).submit().remove();
     }
 }
 var Extend = {
