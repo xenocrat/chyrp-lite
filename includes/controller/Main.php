@@ -762,13 +762,13 @@
          * If "posts" is in the context and the visitor requested a feed, they will be served.
          *
          * Parameters:
-         *     $file - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
+         *     $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
          *     $context - The context for the file.
          *     $title - The title for the page.
          */
-        public function display($file, $context = array(), $title = "") {
-            if (is_array($file)) {
-                foreach ($file as $try)
+        public function display($template, $context = array(), $title = "") {
+            if (is_array($template)) {
+                foreach ($template as $try)
                     if (file_exists(THEME_DIR.DIR.$try.".twig"))
                         return $this->display($try, $context, $title);
 
@@ -830,7 +830,7 @@
 
             $this->context["sql_debug"] =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $file)));
+            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
             if ($config->cookies_notification and !isset($_SESSION['cookies_notified']) and !logged_in()) {
                 Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
@@ -838,7 +838,7 @@
             }
 
             try {
-                return $this->twig->display($file.".twig", $this->context);
+                return $this->twig->display($template.".twig", $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 error(__("Twig Error"), $prettify, debug_backtrace());
@@ -849,8 +849,8 @@
          * Function: resort
          * Queue a failpage in the event that none of the routes are successful.
          */
-        public function resort($file, $context, $title = null) {
-            $this->fallback = array($file, $context, $title);
+        public function resort($template, $context, $title = null) {
+            $this->fallback = array($template, $context, $title);
             return false;
         }
 
