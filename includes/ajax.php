@@ -94,6 +94,11 @@
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 break;
 
+            if (!headers_sent()) {
+                header("Cache-Control: no-cache, must-revalidate");
+                header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+            }
+
             $sanitized = sanitize_html($_POST['content']);
             Trigger::current()->filter($sanitized, $_POST['filter']);
             $main->display("content".DIR."preview", array("body" => $sanitized), __("Preview"));
