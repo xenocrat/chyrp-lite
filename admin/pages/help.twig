@@ -78,8 +78,8 @@ input, textarea, select {           font-family: inherit;
                                     font-weight: inherit }
 *::selection {                      color: #ffffff;
                                     background-color: #4f4f4f }
-body {                              font-size: 14px;
-                                    font-family: "Open Sans webfont", sans-serif;
+body {                              font-family: "Open Sans webfont", sans-serif;
+                                    font-size: 1rem;
                                     line-height: 1.5;
                                     color: #4a4747;
                                     margin: 2rem;
@@ -87,22 +87,22 @@ body {                              font-size: 14px;
 h1, h2, h3, h4, h5, h6 {            font-weight: bold;
                                     font-style: normal;
                                     font-variant: normal;
-                                    margin: 1rem 0em }
-h1:first-child, h2:first-child,
-h3:first-child, h4:first-child,
-h5:first-child, h6:first-child {    margin-top: 0em }
+                                    margin: 1rem 0em;
+                                    padding: 0em }
 h1 {                                font-size: 2em }
 h2 {                                font-size: 1.5em }
 h3 {                                font-size: 1em }
 h4 {                                font-size: 0.9em }
 h5 {                                font-size: 0.8em }
 h6 {                                font-size: 0.7em }
-table h1,
-table h2,
-table h3,
-table h4,
-table h5,
-table h6 {                          margin: 0em }
+h1:first-child, h2:first-child,
+h3:first-child, h4:first-child,
+h5:first-child, h6:first-child {    margin-top: 0em }
+h1:last-child, h2:last-child,
+h3:last-child, h4:last-child,
+h5:last-child, h6:last-child {      margin-bottom: 0em }
+sup {                               vertical-align: super;
+                                    font-size: 0.5em }
 em {                                font-style: italic }
 strong {                            font-weight: bold;
                                     font-style: normal }
@@ -110,6 +110,7 @@ small {                             color: #b3b5b5;
                                     font-size: 0.8em;
                                     line-height: 1.25 }
 p {                                 margin: 0em 0em 1em 0em }
+p:last-child, p:empty {             margin-bottom: 0em }
 ul {                                list-style: disc inside;
                                     margin: 1em 0em;
                                     padding: 0em }

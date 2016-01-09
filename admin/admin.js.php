@@ -39,8 +39,10 @@ var Route = {
 var Site = {
     url: '<?php echo $config->chyrp_url; ?>',
     key: '<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>',
-    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?>
-
+    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
+}
+var Theme = {
+    preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?> 
 }
 function toggle_all() {
     var all_checked = true;
@@ -212,22 +214,23 @@ var Write = {
             Write.sort_feathers();
 
         // Insert buttons for ajax previews.
-        $("*[data-preview]").each(function() {
-            $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
-                $("<img>", {
-                    "src": Site.url + '/admin/images/icons/magnifier.svg',
-                    "alt": '(<?php echo __("Preview this field", "theme"); ?>)',
-                    "title": '<?php echo __("Preview this field", "theme"); ?>',
-                }).addClass("emblem preview").click(function(e) {
-                    var content = $("#" + $(this).parent().attr("data-target")).val();
-                    var filter = $("#" + $(this).parent().attr("data-target")).attr("data-preview");
-                    if (content != "") {
-                        e.preventDefault();
-                        Write.ajax_previews(content, filter);
-                    }
-                })
-            );
-        });
+        if (Theme.preview)
+            $("*[data-preview]").each(function() {
+                $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
+                    $("<img>", {
+                        "src": Site.url + '/admin/images/icons/magnifier.svg',
+                        "alt": '(<?php echo __("Preview this field", "theme"); ?>)',
+                        "title": '<?php echo __("Preview this field", "theme"); ?>',
+                    }).addClass("emblem preview").click(function(e) {
+                        var content = $("#" + $(this).parent().attr("data-target")).val();
+                        var filter = $("#" + $(this).parent().attr("data-target")).attr("data-preview");
+                        if (content != "") {
+                            e.preventDefault();
+                            Write.ajax_previews(content, filter);
+                        }
+                    })
+                );
+            });
     },
     sort_feathers: function() {
         // Make the selected tab the first tab.

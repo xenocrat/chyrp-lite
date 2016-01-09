@@ -16,7 +16,7 @@
             show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
     if (empty($_POST['action']))
-        error("Missing Argument", "You must specify an action.");
+        error(__("Missing Argument"), __("You must specify an action."));
 
     switch($_POST['action']) {
         case "edit_post":
@@ -96,8 +96,7 @@
 
             $sanitized = sanitize_html($_POST['content']);
             Trigger::current()->filter($sanitized, $_POST['filter']);
-            $admin = AdminController::current();
-            $admin->display("standalone", array("body" => $sanitized), __("Preview"));
+            $main->display("content".DIR."preview", array("body" => $sanitized), __("Preview"));
             break;
 
         case "check_confirm":

@@ -1921,7 +1921,7 @@
                     break;
             }
 
-            $this->display("standalone", array("body" => $help), __("Help"));
+            $this->display("help", array("body" => $help), __("Help"));
         }
 
         /**
