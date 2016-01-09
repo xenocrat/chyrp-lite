@@ -79,8 +79,8 @@ input, textarea, select {                       font-family: inherit;
 /* @group core */
 *::selection {                                  color: #ffffff;
                                                 background-color: #4f4f4f }
-body {                                          font-size: 14px;
-                                                font-family: "Open Sans webfont", sans-serif;
+body {                                          font-family: "Open Sans webfont", sans-serif;
+                                                font-size: 1rem;
                                                 line-height: 1.5;
                                                 color: #4a4747;
                                                 background-color: #efefef;
@@ -673,7 +673,6 @@ img#likeImage_preview {                         max-width: 28px;
                                                 min-height: 6rem;
                                                 max-height: 80%;
                                                 margin: 0em;
-                                                padding: 3rem;
                                                 top: 10%;
                                                 left: 10%;
                                                 overflow-x: hidden;
