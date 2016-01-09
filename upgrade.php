@@ -364,7 +364,7 @@
                 background-color: #4f4f4f;
             }
             html {
-                font-size: 16px;
+                font-size: 14px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
@@ -374,7 +374,7 @@
                 border: 0em;
             }
             body {
-                font-size: 14px;
+                font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
                 color: #4a4747;
@@ -404,6 +404,17 @@
                 background-color: #efefef;
                 padding: 2px;
                 color: #4f4f4f;
+            }
+            strong {
+                font-weight: normal;
+                color: #f00;
+            }
+            ul, ol {
+                margin: 0em 0em 2em 2em;
+                list-style-position: outside;
+            }
+            li {
+                margin-bottom: 1em;
             }
             a:link, a:visited {
                 color: #4a4747;
@@ -460,13 +471,6 @@
             button:active {
                 border-color: #1e57ba;
                 outline: none;
-            }
-            ul, ol {
-                margin: 0em 0em 2em 2em;
-                list-style-position: outside;
-            }
-            li {
-                margin-bottom: 1em;
             }
             p {
                 margin-bottom: 1em;

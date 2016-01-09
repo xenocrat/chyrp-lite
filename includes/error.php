@@ -120,17 +120,17 @@
         $url = $config->url;
         $chyrp_url = $config->chyrp_url;
 
+        # Validate title and body text.
+        $title = oneof($title, __("Error"));
+        $body = oneof($body, __("An unspecified error has occurred."));
+
         # Report with backtrace and magic words for JavaScript.
         if (AJAX) {
             foreach ($backtrace as $trace)
                 $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
 
-            exit($body."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
+            exit($title.": ".$body."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
         }
-
-        # Validate title and body text.
-        $title = oneof($title, __("Error"));
-        $body = oneof($body, __("An unspecified error has occurred."));
 
         # Display the error.
 ?>
@@ -194,7 +194,7 @@
                 background-color: #4f4f4f;
             }
             html {
-                font-size: 16px;
+                font-size: 14px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
@@ -204,7 +204,7 @@
                 border: 0em;
             }
             body {
-                font-size: 14px;
+                font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
                 color: #4a4747;
@@ -239,6 +239,10 @@
                 background-color: #efefef;
                 padding: 2px;
                 color: #4f4f4f;
+            }
+            strong {
+                font-weight: normal;
+                color: #f00;
             }
             ul, ol {
                 margin: 0em 0em 2em 2em;
@@ -301,6 +305,12 @@
             button:active {
                 border-color: #1e57ba;
                 outline: none;
+            }
+            p {
+                margin-bottom: 1em;
+            }
+            p:last-child, p:empty {
+                margin-bottom: 0em
             }
         </style>
     </head>
