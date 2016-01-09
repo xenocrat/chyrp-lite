@@ -66,6 +66,7 @@ body {                                          font-family: "Open Sans webfont"
                                                 margin: 0rem 2rem 2rem 16rem;
                                                 min-width: 288px;
                                                 max-width: 1200px }
+body.preview {                                  margin: 4rem }
 body.mobile_nav {                               margin-bottom: 3rem }
 p {                                             margin: 0em 0em 1em 0em }
 p:last-child, p:empty {                         margin-bottom: 0em }
@@ -74,8 +75,8 @@ h1 {                                            font-size: 2em;
                                                 margin: 0.5em 0em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
-h1.banner {                                     font-size: 0.75em;
-                                                margin: 1.33em 0em }
+h1.banner {                                     font-size: 1em;
+                                                margin: 1em 0em }
 h2 {                                            font-size: 1.5em;
                                                 font-weight: bold;
                                                 margin: 0.67em 0em;
@@ -90,20 +91,14 @@ h3.ribbon {                                     font-weight: normal;
                                                 margin: 0em }
 h3.archive {                                    margin-top: 1em;
                                                 clear: both }
-h4 {                                            font-size: 0.75em;
+h4, h5, h6 {                                    font-size: 1em;
                                                 font-weight: bold;
-                                                margin: 1.33em 0em;
+                                                margin: 1em 0em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
 h4.yearly {                                     font-size: 1.33em }
 h4.archive {                                    font-size: 1em;
                                                 font-weight: normal }
-h5, h6 {                                        font-size: 1em;
-                                                font-weight: bold;
-                                                text-transform: none;
-                                                margin: 1em 0em;
-                                                padding: 0em;
-                                                line-height: 1.2 }
 h1:first-child, h2:first-child,
 h3:first-child, h4:first-child,
 h5:first-child, h6:first-child {                margin-top: 0em }
@@ -213,7 +208,7 @@ table thead tr {                                background-color: #4e5a66;
 table thead tr th {                             padding: 0.5em;
                                                 font-weight: bold }
 table tbody tr td {                             padding: 0.5em;
-                                                border: 1px solid #c6ccc8;
+                                                border: 1px solid #4e5a66;
                                                 vertical-align: middle }
 form, fieldset {                                margin: 0em;
                                                 padding: 0em;

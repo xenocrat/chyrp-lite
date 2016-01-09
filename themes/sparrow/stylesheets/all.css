@@ -65,6 +65,7 @@ body {                                          font-family: "Open Sans webfont"
                                                 background-color: #fcfbf7;
                                                 margin: 0em 0em 4rem 0em;
                                                 min-width: 288px }
+body.preview {                                  margin: 4rem }
 p {                                             margin: 0em 0em 1em 0em }
 p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                            font-size: 2em;
@@ -188,9 +189,9 @@ table {                                         border-collapse: collapse;
                                                 overflow-x: scroll;
                                                 -webkit-overflow-scrolling: touch }
 table:last-child {                              margin-bottom: 0em }
-table thead tr {                                background-color: #4e5a66;
+table thead tr {                                background-color: #c2bcb8;
                                                 color: #fbfbf7;
-                                                border: 1px solid #4e5a66 }
+                                                border: 1px solid #c2bcb8 }
 table thead tr th {                             padding: 0.5em;
                                                 font-weight: bold }
 table tbody tr td {                             padding: 0.5em;

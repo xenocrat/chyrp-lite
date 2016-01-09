@@ -7,9 +7,6 @@
 <button type="submit" id="sidebar_search_submit">{{ "Search" | translate }}</button>
 </form>
 </div>
-{% if visitor.logged_in %}
-<h4>{{ "Hello, %s!" | translate | format(visitor.login) }}</h4>
-{% endif %}
 <ul role="menu" class="navigation sidebar_nav" aria-label="{{ 'Links' | translate }}">
 {% if route.action != "index" %}
 <li role="presentation">
