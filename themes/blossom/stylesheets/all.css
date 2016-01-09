@@ -125,8 +125,8 @@ li > pre {                                      margin: 1em 0em 0em 0em }
 code {                                          font-family: "Hack webfont", monospace;
                                                 font-size: 0.75em;
                                                 font-style: normal;
-                                                color: #ffffff;
-                                                background-color: #afb3b0;
+                                                color: #39434d;
+                                                background-color: #e5e2dc;
                                                 padding: 0.2em 0.4em;
                                                 margin: 0.2em 0em;
                                                 display: inline-block }
