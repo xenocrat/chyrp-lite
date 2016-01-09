@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-12-24 14:55+0000\n"
+"POT-Creation-Date: 2016-01-09 23:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -30,24 +30,24 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/photo/photo.php:12
+#: feathers/photo/photo.php:13
 #, php-format
-msgid "(Max. file size: %s)"
+msgid "(Max. file size: %s Megabytes)"
 msgstr ""
 
-#: feathers/photo/photo.php:15
+#: feathers/photo/photo.php:16
 msgid "Caption"
 msgstr ""
 
-#: feathers/photo/photo.php:31
+#: feathers/photo/photo.php:32
 msgid "You did not select a photo to upload."
 msgstr ""
 
-#: feathers/photo/photo.php:120
+#: feathers/photo/photo.php:122
 msgid "Alt-Text"
 msgstr ""
 
-#: feathers/photo/photo.php:125
+#: feathers/photo/photo.php:127
 msgid "Source"
 msgstr ""
 

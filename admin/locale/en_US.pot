@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-12-24 14:55+0000\n"
+"POT-Creation-Date: 2016-01-09 23:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:47
+#: admin/admin.js.php:50
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:107
-#: admin/admin.js.php:123
+#: admin/admin.js.php:110
+#: admin/admin.js.php:126
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:109
-#: admin/admin.js.php:126
+#: admin/admin.js.php:112
+#: admin/admin.js.php:129
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:153
+#: admin/admin.js.php:156
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: admin/admin.js.php:159
+#: admin/admin.js.php:162
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:192
+#: admin/admin.js.php:195
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:203
-#: admin/admin.js.php:205
-#: admin/admin.js.php:274
-#: admin/admin.js.php:276
+#: admin/admin.js.php:199
+#: admin/admin.js.php:201
+#: admin/admin.js.php:289
+#: admin/admin.js.php:291
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:225
-#: admin/admin.js.php:226
+#: admin/admin.js.php:222
+#: admin/admin.js.php:223
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:259
+#: admin/admin.js.php:285
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:417
+#: admin/admin.js.php:437
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:419
+#: admin/admin.js.php:439
 msgid "There was an error disabling the extension."
 msgstr ""
 
@@ -86,7 +86,7 @@ msgid "Content Settings"
 msgstr ""
 
 #: admin/pages/content_settings.twig:9
-msgid "Posts Per Page"
+msgid "Posts Per Blog Page"
 msgstr ""
 
 #: admin/pages/content_settings.twig:13
@@ -94,77 +94,81 @@ msgid "Posts in Feed"
 msgstr ""
 
 #: admin/pages/content_settings.twig:17
+msgid "Items Per Admin Page"
+msgstr ""
+
+#: admin/pages/content_settings.twig:21
 msgid "Feed URL"
 msgstr ""
 
-#: admin/pages/content_settings.twig:20
+#: admin/pages/content_settings.twig:24
 msgid "Allows you to set an alternative URL for <code>/feed/</code>."
 msgstr ""
 
-#: admin/pages/content_settings.twig:20
+#: admin/pages/content_settings.twig:24
 msgid "Allows you to set an alternative URL for <code>/?feed</code>."
 msgstr ""
 
-#: admin/pages/content_settings.twig:24
+#: admin/pages/content_settings.twig:28
 msgid "Uploads Path"
 msgstr ""
 
-#: admin/pages/content_settings.twig:27
+#: admin/pages/content_settings.twig:31
 msgid "The directory to which files are uploaded, relative to your installation directory."
 msgstr ""
 
-#: admin/pages/content_settings.twig:31
+#: admin/pages/content_settings.twig:35
 msgid "Upload Size Limit"
 msgstr ""
 
-#: admin/pages/content_settings.twig:33
+#: admin/pages/content_settings.twig:37
 msgid "(Megabytes)"
 msgstr ""
 
-#: admin/pages/content_settings.twig:36
+#: admin/pages/content_settings.twig:40
 msgid "Send Pingbacks"
 msgstr ""
 
-#: admin/pages/content_settings.twig:39
+#: admin/pages/content_settings.twig:43
 msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
-#: admin/pages/content_settings.twig:43
+#: admin/pages/content_settings.twig:47
 msgid "XML-RPC Support"
 msgstr ""
 
-#: admin/pages/content_settings.twig:46
+#: admin/pages/content_settings.twig:50
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr ""
 
-#: admin/pages/content_settings.twig:50
+#: admin/pages/content_settings.twig:54
 msgid "Ajax"
 msgstr ""
 
-#: admin/pages/content_settings.twig:53
+#: admin/pages/content_settings.twig:57
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
-#: admin/pages/content_settings.twig:57
+#: admin/pages/content_settings.twig:61
 msgid "Unicode Emoticons"
 msgstr ""
 
-#: admin/pages/content_settings.twig:60
+#: admin/pages/content_settings.twig:64
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:68
 msgid "Markdown"
 msgstr ""
 
-#: admin/pages/content_settings.twig:67
+#: admin/pages/content_settings.twig:71
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:72
+#: admin/pages/content_settings.twig:76
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
-#: admin/pages/general_settings.twig:67
+#: admin/pages/general_settings.twig:66
 #: admin/pages/route_settings.twig:49
 #: admin/pages/user_settings.twig:45
 msgid "Update"
@@ -381,7 +385,7 @@ msgid "Users"
 msgstr ""
 
 #: admin/pages/export.twig:33
-msgid "Warning: this also exports the hashed passwords, keep it safe!"
+msgid "Warning: this file will contain the hashed password for each user – keep it safe!"
 msgstr ""
 
 #: admin/pages/feathers.twig:3
@@ -459,19 +463,19 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: admin/pages/general_settings.twig:53
+#: admin/pages/general_settings.twig:52
 msgid "Notify visitors about cookies?"
 msgstr ""
 
-#: admin/pages/general_settings.twig:56
+#: admin/pages/general_settings.twig:55
 msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
 msgstr ""
 
-#: admin/pages/general_settings.twig:60
+#: admin/pages/general_settings.twig:59
 msgid "Check for Updates?"
 msgstr ""
 
-#: admin/pages/general_settings.twig:63
+#: admin/pages/general_settings.twig:62
 msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 
@@ -957,13 +961,13 @@ msgstr ""
 msgid "[None]"
 msgstr ""
 
-#: admin/partials/page_fields.twig:69
+#: admin/partials/page_fields.twig:64
 #: admin/partials/post_fields.twig:135
 #: admin/partials/post_fields.twig:144
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:73
+#: admin/partials/page_fields.twig:68
 #: admin/partials/post_fields.twig:139
 #: admin/partials/post_fields.twig:148
 msgid "Save"

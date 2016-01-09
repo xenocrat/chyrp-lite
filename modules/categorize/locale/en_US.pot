@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-12-24 14:55+0000\n"
+"POT-Creation-Date: 2016-01-09 23:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -96,9 +96,21 @@ msgstr ""
 msgid "[None]"
 msgstr ""
 
+#: modules/categorize/categorize.php:125
+msgid "You did not specify a category"
+msgstr ""
+
+#: modules/categorize/categorize.php:127
+msgid "The category you specified was not found"
+msgstr ""
+
 #: modules/categorize/categorize.php:132
 #: modules/categorize/categorize.php:147
 msgid "Invalid Category"
+msgstr ""
+
+#: modules/categorize/categorize.php:146
+msgid "There are no posts in the category you specified"
 msgstr ""
 
 #: modules/categorize/categorize.php:158

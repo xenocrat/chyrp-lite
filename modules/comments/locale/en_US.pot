@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-12-24 14:55+0000\n"
+"POT-Creation-Date: 2016-01-09 23:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -139,8 +139,8 @@ msgid "Manage Comments"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:19
-#: modules/comments/comments.php:371
-#: modules/comments/comments.php:541
+#: modules/comments/comments.php:372
+#: modules/comments/comments.php:542
 #: modules/comments/info.php:3
 msgid "Comments"
 msgstr ""
@@ -267,12 +267,12 @@ msgstr ""
 #: modules/comments/comments.php:169
 #: modules/comments/comments.php:225
 #: modules/comments/comments.php:246
-#: modules/comments/comments.php:404
+#: modules/comments/comments.php:405
 msgid "Comment not found."
 msgstr ""
 
 #: modules/comments/comments.php:172
-#: modules/comments/comments.php:407
+#: modules/comments/comments.php:408
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr ""
 
@@ -284,7 +284,7 @@ msgstr ""
 
 #: modules/comments/comments.php:220
 #: modules/comments/comments.php:238
-#: modules/comments/comments.php:613
+#: modules/comments/comments.php:614
 msgid "An ID is required to delete a comment."
 msgstr ""
 
@@ -294,7 +294,7 @@ msgid "You do not have sufficient privileges to delete this comment."
 msgstr ""
 
 #: modules/comments/comments.php:266
-#: modules/comments/comments.php:414
+#: modules/comments/comments.php:415
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr ""
 
@@ -330,42 +330,42 @@ msgstr ""
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:383
+#: modules/comments/comments.php:384
 #, php-format
 msgid "Comments (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:387
+#: modules/comments/comments.php:388
 #, php-format
 msgid "Spam (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:399
-#: modules/comments/comments.php:627
+#: modules/comments/comments.php:400
+#: modules/comments/comments.php:628
 msgid "An ID is required to edit a comment."
 msgstr ""
 
-#: modules/comments/comments.php:447
+#: modules/comments/comments.php:448
 msgid "Selected comments deleted."
 msgstr ""
 
-#: modules/comments/comments.php:468
+#: modules/comments/comments.php:469
 msgid "Selected comments denied."
 msgstr ""
 
-#: modules/comments/comments.php:483
+#: modules/comments/comments.php:484
 msgid "Selected comments approved."
 msgstr ""
 
-#: modules/comments/comments.php:497
+#: modules/comments/comments.php:498
 msgid "Selected comments marked as spam."
 msgstr ""
 
-#: modules/comments/comments.php:601
+#: modules/comments/comments.php:602
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:673
+#: modules/comments/comments.php:674
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""

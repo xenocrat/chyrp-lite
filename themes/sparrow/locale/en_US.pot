@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-12-24 14:55+0000\n"
+"POT-Creation-Date: 2016-01-09 23:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -49,7 +49,14 @@ msgid "Tags"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:20
-msgid 'Permanent link to'
+#: themes/sparrow/feathers/audio.twig:6
+#: themes/sparrow/feathers/photo.twig:6
+#: themes/sparrow/feathers/quote.twig:6
+#: themes/sparrow/feathers/text.twig:6
+#: themes/sparrow/feathers/uploader.twig:6
+#: themes/sparrow/feathers/video.twig:6
+#, php-format
+msgid 'Permanent link to &#8220;%s&#8221;'
 msgstr ""
 
 #: themes/sparrow/content/post.twig:22
@@ -66,8 +73,6 @@ msgid "Pinned"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:28
-#: themes/sparrow/pages/archive.twig:18
-#: themes/sparrow/pages/archive.twig:33
 msgid "%d %b, %Y"
 msgstr ""
 
@@ -76,7 +81,7 @@ msgid "Comments closed"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:39
-msgid "View comments"
+msgid 'View comments'
 msgstr ""
 
 #: themes/sparrow/content/post.twig:40
@@ -85,16 +90,6 @@ msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
-
-#: themes/sparrow/feathers/audio.twig:6
-#: themes/sparrow/feathers/photo.twig:6
-#: themes/sparrow/feathers/quote.twig:6
-#: themes/sparrow/feathers/text.twig:6
-#: themes/sparrow/feathers/uploader.twig:6
-#: themes/sparrow/feathers/video.twig:6
-#, php-format
-msgid 'Permanent link to &#8220;%s&#8221;'
-msgstr ""
 
 #: themes/sparrow/feathers/uploader.twig:19
 msgid "File attachment:"
@@ -122,7 +117,7 @@ msgid "Author's email"
 msgstr ""
 
 #: themes/sparrow/forms/comment/edit.twig:14
-#: themes/sparrow/forms/post/edit.twig:50
+#: themes/sparrow/forms/post/edit.twig:51
 msgid "Timestamp"
 msgstr ""
 
@@ -148,12 +143,12 @@ msgid "Email Notifications"
 msgstr ""
 
 #: themes/sparrow/forms/comment/edit.twig:32
-#: themes/sparrow/forms/post/edit.twig:81
+#: themes/sparrow/forms/post/edit.twig:82
 msgid "Save"
 msgstr ""
 
 #: themes/sparrow/forms/comment/edit.twig:33
-#: themes/sparrow/forms/post/edit.twig:82
+#: themes/sparrow/forms/post/edit.twig:83
 msgid "Cancel"
 msgstr ""
 
@@ -211,11 +206,11 @@ msgstr ""
 msgid "Pinned?"
 msgstr ""
 
-#: themes/sparrow/forms/post/edit.twig:47
+#: themes/sparrow/forms/post/edit.twig:46
 msgid "(shows this post above all others)"
 msgstr ""
 
-#: themes/sparrow/forms/post/edit.twig:48
+#: themes/sparrow/forms/post/edit.twig:49
 msgid "Slug"
 msgstr ""
 
@@ -230,6 +225,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:9
 #: themes/sparrow/forms/user/register.twig:13
+#: themes/sparrow/layouts/default.twig:32
 msgid "Email"
 msgstr ""
 
@@ -316,6 +312,14 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
+#: themes/sparrow/layouts/default.twig:76
+msgid 'Search&hellip;'
+msgstr ""
+
+#: themes/sparrow/layouts/default.twig:76
+msgid 'Search this blog'
+msgstr ""
+
 #: themes/sparrow/layouts/default.twig:77
 msgid "Search"
 msgstr ""
@@ -338,39 +342,44 @@ msgid "Not found"
 msgstr ""
 
 #: themes/sparrow/pages/archive.twig:8
-#: themes/sparrow/pages/archive.twig:57
+#: themes/sparrow/pages/archive.twig:51
 msgid "%B %Y"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:25
+#: themes/sparrow/pages/archive.twig:23
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:46
+#: themes/sparrow/pages/archive.twig:40
 #, php-format
 msgid "Archive of %s &rarr;"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:54
+#: themes/sparrow/pages/archive.twig:48
 msgid "%d %B, %Y"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:54
-#: themes/sparrow/pages/archive.twig:57
+#: themes/sparrow/pages/archive.twig:48
+#: themes/sparrow/pages/archive.twig:51
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:66
+#: themes/sparrow/pages/archive.twig:60
 msgid "There aren't any posts in the timeframe you specified"
 msgstr ""
 
-#: themes/sparrow/pages/drafts.twig:6
+#: themes/sparrow/pages/category.twig:5
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr ""
+
+#: themes/sparrow/pages/drafts.twig:5
 msgid "Drafts"
 msgstr ""
 
-#: themes/sparrow/pages/drafts.twig:13
+#: themes/sparrow/pages/drafts.twig:10
 msgid "You don't have any drafts"
 msgstr ""
 
@@ -392,20 +401,12 @@ msgstr ""
 msgid "Posts tagged with %s"
 msgstr ""
 
-#: themes/sparrow/pages/tag.twig:12
-msgid "There are no posts with the tag you specified"
-msgstr ""
-
-#: themes/sparrow/pages/tag.twig:14
-msgid "No tag specified"
-msgstr ""
-
 #: themes/sparrow/pages/tags.twig:6
 msgid "Tag cloud"
 msgstr ""
 
 #: themes/sparrow/pages/tags.twig:12
-msgid "There aren't any tags yet"
+msgid "Nothing here yet!"
 msgstr ""
 
 #: themes/sparrow/pages/view.twig:6
