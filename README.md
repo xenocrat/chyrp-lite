@@ -74,9 +74,9 @@ Chyrp Lite will tell you when a new version is available. You can update in six 
 
 1. __Backup your database before proceeding!__
 2. Download the latest version of Chyrp Lite.
-3. Copy your config file from _/includes/config.json.php_ to somewhere safe.
+3. Copy your config file from _includes/config.json.php_ to somewhere safe.
 4. Overwrite your current version with the new one, making sure to retain your _uploads_ folder.
-5. Restore your config file to _/includes/_.
+5. Restore your config file to _includes_.
 6. Run the upgrade process by visiting [upgrade.php](upgrade.php) in your web browser.
 
 ## Documentation
