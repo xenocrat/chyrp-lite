@@ -101,7 +101,7 @@
 
             $sanitized = sanitize_html($_POST['content']);
             Trigger::current()->filter($sanitized, $_POST['filter']);
-            $main->display("content".DIR."preview", array("body" => $sanitized), __("Preview"));
+            $main->display("content".DIR."preview", array("content" => $sanitized), __("Preview"));
             break;
 
         case "check_confirm":
