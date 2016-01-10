@@ -7,7 +7,7 @@
 </head>
 <body class="preview">
 <div class="standalone">
-{{ content }}
+{{ filter == "markup_title" ? "<h2>" ~ content ~ "</h2>" : content }}
 </div>
 </body>
 </html>
