@@ -6,8 +6,14 @@
 <title>{{ title }}</title>
 </head>
 <body class="preview">
-<div class="standalone">
-{{ filter == "markup_title" ? "<h2>" ~ content ~ "</h2>" : content }}
-</div>
+<article>
+{% if filter | contains("title") %}
+<h2>{{ content }}</h2>
+{% else %}
+<section>
+{{ content }}
+</section>
+{% endif %}
+</article>
 </body>
 </html>

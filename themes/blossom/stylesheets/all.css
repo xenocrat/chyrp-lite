@@ -583,7 +583,7 @@ article img {                                   max-width: 100% }
                                                 border: 0.1em solid #d2d9d4 }
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 959px) {
     body {                                      margin: 0rem 16px 1rem 16px }
     h2 {                                        font-size: 1.25em;
                                                 margin: 0.8em 0em }
@@ -630,7 +630,7 @@ article img {                                   max-width: 100% }
 
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 479px) {
     ul.archive li {                             margin-left: 0em }
     ul.archive article.post.archive {           box-sizing: border-box;
                                                 width: 100%;

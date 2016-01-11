@@ -562,7 +562,7 @@ img.gravatar {                                  position: absolute;
                                                 page-break-inside: avoid }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 639px) {
     html {                                      font-size: 14px }
     body {                                      margin-bottom: 3rem }
     blockquote {                                padding: 0em 1em }
@@ -590,7 +590,7 @@ img.gravatar {                                  position: absolute;
                                                 margin-right: 4px }
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 459px) {
     ul.archive li {                             margin-left: 0em }
     ul.archive article.post.archive {           box-sizing: border-box;
                                                 width: 100%;
@@ -598,7 +598,7 @@ img.gravatar {                                  position: absolute;
     ul.archive article.post.archive img {       width: 100% }
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 959px) {
     div#mast_box {                              text-align: left;
                                                 padding: 4em 8rem 4rem 8rem }
     div.search_box {                            display: inline-block }

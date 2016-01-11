@@ -7,7 +7,13 @@
 </head>
 <body class="preview">
 <article>
-{{ filter == "markup_title" ? "<h2>" ~ content ~ "</h2>" : content }}
+{% if filter | contains("title") %}
+<h2>{{ content }}</h2>
+{% else %}
+<section>
+{{ content }}
+</section>
+{% endif %}
 </article>
 </body>
 </html>

@@ -692,7 +692,7 @@ img#likeImage_preview {                         max-width: 28px;
 /* @end */
 
 /* @media mobile */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     #header #navigation {                       left: 0em;
                                                 right: 0em }
     #header #navigation li a {                  display: block;
@@ -813,7 +813,7 @@ img#likeImage_preview {                         max-width: 28px;
                                                 right: 5% }
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 539px) {
     table tbody tr td.main {                    min-width: 240px }
 }
 /* @end */
