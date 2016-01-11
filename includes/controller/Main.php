@@ -791,7 +791,6 @@
 
             $this->context = array_merge($context, $this->context);
 
-            $visitor = Visitor::current();
             $config = Config::current();
             $theme = Theme::current();
 
@@ -805,7 +804,7 @@
             $this->context["feathers"]     = Feathers::$instances;
             $this->context["title"]        = $title;
             $this->context["site"]         = $config;
-            $this->context["visitor"]      = $visitor;
+            $this->context["visitor"]      = Visitor::current();
             $this->context["route"]        = Route::current();
             $this->context["version"]      = CHYRP_VERSION;
             $this->context["codename"]     = CHYRP_CODENAME;
@@ -815,6 +814,7 @@
             $this->context["GET"]          = $_GET;
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["captcha"]      = generate_captcha();
+            $this->context["theme_url"]    = THEME_URL;
 
             $this->context["visitor"]->logged_in = logged_in();
 
