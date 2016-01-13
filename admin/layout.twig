@@ -7,7 +7,7 @@
 <title>{{ site.name }}: {% block title %}{{ title }}{% endblock %}</title>
 <!-- Styles -->
 <link rel="shortcut icon" href="{{ site.chyrp_url }}/favicon.ico">
-<link rel="mask-icon" href="{{ theme_url }}/images/chyrp-lite.svg" color="#4f4f4f">
+<link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
 <link rel="stylesheet" href="{{ theme_url }}/layout.css" type="text/css" media="all">
 <!-- JavaScripts -->
 <script src="{{ site.chyrp_url }}/includes/lib/common.js" type="text/javascript" charset="utf-8"></script>
@@ -55,7 +55,7 @@
 {% block content %}{% endblock %}
 </div>
 <div id="footer" role="contentinfo">
-<img class="logo" src="{{ theme_url }}/images/chyrp-lite.svg" alt="{{ 'Chyrp loves you.' | translate }}">
+<img class="logo" src="{{ site.chyrp_url }}/favicon.svg" alt="{{ 'Chyrp loves you.' | translate }}">
 <small class="metadata">{{ "Chyrp Lite &ldquo;%s&rdquo;" | translate | format(codename) }}</small>
 <a id="logout" class="button" href="{{ admin_url('logout') }}">{{ "Log out" | translate }}</a>
 </div>

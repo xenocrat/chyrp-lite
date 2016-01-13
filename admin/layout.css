@@ -180,8 +180,8 @@ img.logo {                                      width: 24px;
                                                 width: 100%;
                                                 margin: 2em auto;
                                                 padding: 0em 2em;
-                                                text-align: center;
-                                                color: #b3b5b5 }
+                                                text-align: center }
+#footer small {                                 color: #4f4f4f }
 #footer small.metadata {                        display: block;
                                                 margin-top: 1em;
                                                 font-size: .8em }
