@@ -1745,6 +1745,10 @@
                 error(__("Error"), __("Invalid canonical URL."));
 
             $config = Config::current();
+
+            if (!empty($_POST['check_updates']) and !$config->check_updates)
+                Update::check_update();
+
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
                          $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/")),
@@ -2055,6 +2059,7 @@
             }
 
             $visitor = Visitor::current();
+            $config = Config::current();
             $route = Route::current();
 
             $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
@@ -2062,7 +2067,7 @@
             $this->context["flash"]       = Flash::current();
             $this->context["trigger"]     = $trigger;
             $this->context["title"]       = $title;
-            $this->context["site"]        = Config::current();
+            $this->context["site"]        = $config;
             $this->context["visitor"]     = $visitor;
             $this->context["logged_in"]   = logged_in();
             $this->context["route"]       = $route;
@@ -2130,7 +2135,8 @@
             $this->context["sql_debug"]  = SQL::current()->debug;
             $template = "pages".DIR.$action.".twig";
 
-            Update::check_update();
+            if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
+                Update::check_update();
 
             try {
                 $this->twig->display($template, $this->context);
