@@ -17,7 +17,7 @@
 {% for category in categorize %}
 <tr id="category_{{ category.id }}">
 <td class="category_show">
-{% if category.show_on_home %}<img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{% if category.show_on_home %}<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}&nbsp;
 {% endif %}
 </td>
@@ -25,11 +25,11 @@
 {{ category.name | truncate }}
 </td>
 <td class="controls">
-<a href="{{ admin_url('edit_category', {'id': category.id}) }}"><img src="{{ theme_url }}/images/icons/edit.svg"
+<a href="{{ admin_url('edit_category', {'id': category.id}) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg"
 alt="{{ 'edit' | translate }}"></a>
 </td>
 <td class="controls">
-<a href="{{ admin_url('delete_category', {'id': category.id}) }}"><img src="{{ theme_url }}/images/icons/delete.svg"
+<a href="{{ admin_url('delete_category', {'id': category.id}) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg"
 alt="{{ 'delete' | translate }}"></a>
 </td>
 </tr>
@@ -42,7 +42,7 @@ alt="{{ 'delete' | translate }}"></a>
 </table>
 <div class="controls">
 <a href="{{ admin_url('new_category') }}" class="button yay"> 
-<img src="{{ theme_url }}/images/icons/add.svg" alt="add"> {{ "Add Category" | translate("categorize") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add"> {{ "Add Category" | translate("categorize") }}
 </a>
 </div>
 {% endblock %}

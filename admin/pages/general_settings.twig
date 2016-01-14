@@ -19,11 +19,11 @@
 </p>
 <p>
 <label for="url">
-{{ "Alternate URL" | translate }}
+{{ "Canonical URL" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
 <input class="text" type="text" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix : '' }}" id="url">
-<a href="{{ admin_url('help', {'id': 'alternate_urls'}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+<a href="{{ admin_url('help', {'id': 'canonical_url'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Have your site URLs point someplace other than your install directory." | translate }}
 </small>
@@ -63,7 +63,7 @@
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ theme_url }}/images/icons/success.svg" alt="success">{{ "Update" | translate }}</button>
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Update" | translate }}</button>
 </p>
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 </fieldset>

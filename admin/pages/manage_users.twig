@@ -9,13 +9,13 @@
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_user") %}
 <a href="{{ admin_url('new_user') }}" class="button yay">
-<img src="{{ theme_url }}/images/icons/add.svg" alt="add"> {{ "New User" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add"> {{ "New User" | translate }}
 </a>
 {% endif %}
 </div>
@@ -56,12 +56,12 @@
 {% if user.editable() or user.deletable() %}
 {% if user.editable() %}
 <td class="controls"{{ not user.deletable() ? ' colspan="2"' : '' }}>
-{{ user.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ user.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
 {% endif %}
 {% if user.deletable() %}
 <td class="controls"{{ not user.editable() ? ' colspan="2"' : '' }}>
-{{ user.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ user.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
 {% endif %}
 {% else %}

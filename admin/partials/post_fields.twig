@@ -3,7 +3,7 @@
 <p class="main_options">
 <label for="{{ field.attr }}_field">
 {% if field.preview is defined and field.preview == "markup_text" and site.enable_markdown %}
-<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ theme_url }}/images/icons/markdown.svg" alt="Markdown help"></a>
+<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ field.label }}
 {% if field.optional is defined and field.optional %}
@@ -11,7 +11,7 @@
 {% endif %}
 {% if field.help is defined %}
 <span class="sub">
-<a href="{{ admin_url('help', {'id': field.help}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+<a href="{{ admin_url('help', {'id': field.help}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </span>
 {% endif %}
 {% if field.note is defined %}
@@ -84,7 +84,7 @@
 <p class="more_options_option">
 <label for="slug">
 {{ "Slug" | translate }}
-<a href="{{ admin_url('help', {'id': 'slugs'}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+<a href="{{ admin_url('help', {'id': 'slugs'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </label>
 <input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.slug | fix : '' }}">
 </p>
@@ -99,7 +99,7 @@
 {{ field.label }}
 {% if field.help is defined %}
 <span class="sub">
-<a href="{{ admin_url('help', {'id': field.help}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+<a href="{{ admin_url('help', {'id': field.help}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </span>
 {% endif %}
 {% if field.note is defined %}
@@ -132,20 +132,20 @@
 {% if route.action == "edit_post" %}
 {% if visitor.group.can("add_post") and post.status == "draft" %}
 <button type="submit" class="yay" accesskey="s" id="publish" name="publish">
-<img src="{{ theme_url }}/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" accesskey="s" id="save">
-<img src="{{ theme_url }}/images/icons/save.svg" alt="success">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="success">{{ "Save" | translate }}
 </button>
 {% else %}
 {% if visitor.group.can("add_post") %}
 <button type="submit" class="yay" accesskey="s" id="publish">
-<img src="{{ theme_url }}/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" accesskey="s" id="save" name="draft" value="true">
-<img src="{{ theme_url }}/images/icons/save.svg" alt="success">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="success">{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>

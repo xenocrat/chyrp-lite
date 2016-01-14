@@ -12,7 +12,7 @@
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_group") %}
 <a href="{{ admin_url('new_group') }}" class="button yay">
-<img src="{{ theme_url }}/images/icons/add.svg" alt="add"> {{ "New Group" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add"> {{ "New Group" | translate }}
 </a>
 {% endif %}
 </div>
@@ -41,14 +41,14 @@
 </td>
 <td class="group_default">
 {% if group.id == site.default_group %}
-<img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}
 &nbsp;
 {% endif %}
 </td>
 <td class="group_guest">
 {% if group.id == site.guest_group %}
-<img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}
 &nbsp;
 {% endif %}
@@ -57,12 +57,12 @@
 {% if group.editable() or group.deletable() %}
 {% if group.editable() %}
 <td class="controls"{{ not group.deletable() ? ' colspan="2"' : '' }}>
-{{ group.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ group.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
 {% endif %}
 {% if group.deletable() %}
 <td class="controls"{{ not group.editable() ? ' colspan="2"' : '' }}>
-{{ group.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ group.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
 {% endif %}
 {% else %}

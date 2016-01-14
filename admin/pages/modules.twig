@@ -10,12 +10,12 @@
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(" ") : '' }}" id="module_{{ safename }}">
 <h3>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
-<img src="{{ theme_url }}/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
+<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
 </a>
 {{ module.name }}{# translation is done in the controller #}
 </h3>
 {% if module.help %}
-<a href="{{ admin_url('help', {'id': module.help}) }}" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="Help"></a>
+<a href="{{ admin_url('help', {'id': module.help}) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
@@ -42,10 +42,10 @@
 {% endif %}
 <div class="controls">
 <a class="button module_disabler" href="{{ admin_url('disable', {'module': safename, 'hash': ip | token }) }}">
-<img src="{{ theme_url }}/images/icons/deny.svg" alt="Disable">{{ "Disable" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="Disable">{{ "Disable" | translate }}
 </a>
 <a class="button module_enabler" href="{{ admin_url('enable', {'module': safename, 'hash': ip | token }) }}">
-<img src="{{ theme_url }}/images/icons/add.svg" alt="Enable">{{ "Enable" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="Enable">{{ "Enable" | translate }}
 </a>
 </div>
 </li>
@@ -57,12 +57,12 @@
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(" ") : '' }}" id="module_{{ safename }}">
 <h3>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
-<img src="{{ theme_url }}/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
+<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
 </a>
 {{ module.name }}{# translation is done in the controller #}
 </h3>
 {% if module.help %}
-<a href="{{ admin_url('help', {'id': module.help}) }}" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="Help"></a>
+<a href="{{ admin_url('help', {'id': module.help}) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
@@ -90,10 +90,10 @@
 {% if module.classes is defined and not (module.classes | contains("missing_dependency")) %}
 <div class="controls">
 <a class="button module_disabler" href="{{ admin_url('disable', {'module': safename, 'hash': ip | token }) }}">
-<img src="{{ theme_url }}/images/icons/deny.svg" alt="Disable">{{ "Disable" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="Disable">{{ "Disable" | translate }}
 </a>
 <a class="button module_enabler" href="{{ admin_url('enable', {'module': safename, 'hash': ip | token }) }}">
-<img src="{{ theme_url }}/images/icons/add.svg" alt="Enable">{{ "Enable" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="Enable">{{ "Enable" | translate }}
 </a>
 </div>
 {% endif %}

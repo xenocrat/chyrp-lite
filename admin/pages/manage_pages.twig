@@ -9,7 +9,7 @@
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
@@ -43,13 +43,13 @@
 {% if page.updated %}{{ page.updated_at | strftimeformat }}{% else %}<span class="sub">{{ "never" | translate }}</span>{% endif %}
 </td>
 <td class="page_public">
-{% if page.public %}<img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{% if page.public %}<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}
 &nbsp;
 {% endif %}
 </td>
 <td class="page_show">
-{% if page.show_in_list %}<img class="emblem" src="{{ theme_url }}/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{% if page.show_in_list %}<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}
 &nbsp;
 {% endif %}
@@ -61,12 +61,12 @@
 {% if page.editable() or page.deletable() %}
 {% if page.editable() %}
 <td class="controls"{{ not page.deletable() ? ' colspan="2"' : '' }}>
-{{ page.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ page.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
 {% endif %}
 {% if page.deletable() %}
 <td class="controls"{{ not page.editable() ? ' colspan="2"' : '' }}>
-{{ page.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ page.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
 {% endif %}
 {% else %}

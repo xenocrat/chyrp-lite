@@ -10,19 +10,19 @@
 <img src="{{ theme.screenshot }}" alt="&#8220;{{ theme.info.description | fix }}&#8220; screenshot" class="screenshot" title="{{ theme.info.description | fix }}">
 <h3>
 {% if theme.name == site.theme %}
-<img class="emblem theme_status" src="{{ theme_url }}/images/icons/success.svg" alt="Selected!" title="{{ 'Selected!' | translate }}">
+<img class="emblem theme_status" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="Selected!" title="{{ 'Selected!' | translate }}">
 {% endif %}
 <a class="emblem module_author" href="{{ theme.info.url }}" target="_blank">
-<img src="{{ theme_url }}/images/icons/info.svg" alt="{{ theme.info.url | fix }}">
+<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ theme.info.url | fix }}">
 </a>
 {{ theme.info.name }}{# translation is done in the controller #}
 </h3>
 <div class="controls">
 <a class="button" href="{{ admin_url('change_theme', {'theme': theme.name, 'hash': ip | token }) }}">
-<img src="{{ theme_url }}/images/icons/success.svg" alt="Select">{{ "Select" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="Select">{{ "Select" | translate }}
 </a>
 <a class="button{{ preview | selected(theme.name) }}" href="{{ admin_url('preview_theme', {'theme': theme.name, 'hash': ip | token }) }}">
-<img src="{{ theme_url }}/images/icons/magnifier.svg" alt="Preview">{{ "Preview" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/magnifier.svg" alt="Preview">{{ "Preview" | translate }}
 </a>
 </div>
 </li>

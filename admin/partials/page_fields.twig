@@ -6,7 +6,7 @@
 <p class="main_options">
 <label for="body">
 {% if site.enable_markdown %}
-<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ theme_url }}/images/icons/markdown.svg" alt="Markdown help"></a>
+<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ "Body" | translate }}
 </label>
@@ -17,7 +17,7 @@
 <p class="more_options_option">
 <label for="slug">
 {{ "Slug" | translate }}
-<a href="{{ admin_url('help', {'id': 'slugs'}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+<a href="{{ admin_url('help', {'id': 'slugs'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </label>
 <input class="text" type="text" name="slug" value="{{ page is defined ? page.slug | fix : '' }}" id="slug">
 </p>
@@ -61,11 +61,11 @@
 <div class="buttons confirmation">
 {% if route.action == "write_page" %}
 <button type="submit" class="yay" accesskey="s">
-<img src="{{ theme_url }}/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
 </button>
 {% else %}
 <button type="submit" accesskey="s">
-<img src="{{ theme_url }}/images/icons/success.svg" alt="success">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>

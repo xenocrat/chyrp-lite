@@ -22,10 +22,10 @@
 {{ tag.popularity }}
 </td>
 <td class="controls">
-<a class="edit_tag" href="{{ admin_url('rename_tag', {'clean': tag.clean}) }}"><img src="{{ theme_url }}/images/icons/edit.svg" alt="{{ 'edit' | translate }}"></a>
+<a class="edit_tag" href="{{ admin_url('rename_tag', {'clean': tag.clean}) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg" alt="{{ 'edit' | translate }}"></a>
 </td>
 <td class="controls">
-<a class="delete_tag" href="{{ admin_url('delete_tag', {'clean': tag.clean}) }}"><img src="{{ theme_url }}/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
+<a class="delete_tag" href="{{ admin_url('delete_tag', {'clean': tag.clean}) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
 </td>
 </tr>
 {% else %}
@@ -61,7 +61,7 @@
 {% endfor %}
 </td>
 <td class="controls">
-<a class="edit_tag edit_link" href="{{ admin_url('edit_tags', {'id': post.id}) }}">{{ '<img src="' ~ theme_url ~ '/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">' }}</a>
+<a class="edit_tag edit_link" href="{{ admin_url('edit_tags', {'id': post.id}) }}">{{ '<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">' }}</a>
 </td>
 </tr>
 {% else %}

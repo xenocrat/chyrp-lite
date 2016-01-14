@@ -9,7 +9,7 @@
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ theme_url }}/images/icons/help.svg" alt="help"></a>
+<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
@@ -58,12 +58,12 @@
 {% if post.editable() or post.deletable() %}
 {% if post.editable() %}
 <td class="controls"{{ not post.deletable() ? ' colspan="2"' : '' }}>
-{{ post.edit_link('<img src="' ~ theme_url ~'/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ post.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
 {% endif %}
 {% if post.deletable() %}
 <td class="controls"{{ not post.editable() ? ' colspan="2"' : '' }}>
-{{ post.delete_link('<img src="' ~ theme_url ~'/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ post.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
 {% endif %}
 {% else %}
