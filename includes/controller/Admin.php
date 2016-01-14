@@ -1742,7 +1742,7 @@
                 error(__("Error"), __("Invalid Chyrp URL."));
 
             if (!empty($_POST['url']) and !is_url($_POST['url']))
-                error(__("Error"), __("Invalid alternate URL."));
+                error(__("Error"), __("Invalid canonical URL."));
 
             $config = Config::current();
             $set = array($config->set("name", $_POST['name']),
@@ -1891,9 +1891,9 @@
                     $help = "<h1>".__("Slugs")."</h1>\n".
                             "<p>".__("The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
                     break;
-                case "alternate_urls":
-                    $help = "<h1>".__("Alternate URL")."</h1>\n".
-                            "<p>".__("If you enter an alternate URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite in a <em>/chyrp</em> directory on your web server and still have your site accessible at the destination directory. There are two requirements for this to work:")."</p>\n".
+                case "canonical_url":
+                    $help = "<h1>".__("Canonical URL")."</h1>\n".
+                            "<p>".__("If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:")."</p>\n".
                             "<ol>\n<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n".
                             "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
                             "</li>\n<li>".__("Move the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
@@ -2055,7 +2055,6 @@
             }
 
             $visitor = Visitor::current();
-            $config = Config::current();
             $route = Route::current();
 
             $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
@@ -2063,19 +2062,16 @@
             $this->context["flash"]       = Flash::current();
             $this->context["trigger"]     = $trigger;
             $this->context["title"]       = $title;
-            $this->context["site"]        = $config;
+            $this->context["site"]        = Config::current();
             $this->context["visitor"]     = $visitor;
             $this->context["logged_in"]   = logged_in();
-            $this->context["new_update"]  = Update::check_update();
             $this->context["route"]       = $route;
-            $this->context["hide_admin"]  = isset($_SESSION["hide_admin"]);
             $this->context["now"]         = time();
             $this->context["version"]     = CHYRP_VERSION;
             $this->context["codename"]    = CHYRP_CODENAME;
             $this->context["debug"]       = DEBUG;
             $this->context["feathers"]    = Feathers::$instances;
             $this->context["modules"]     = Modules::$instances;
-            $this->context["theme_url"]   = $config->chyrp_url."/admin";
             $this->context["POST"]        = $_POST;
             $this->context["GET"]         = $_GET;
 
@@ -2133,6 +2129,8 @@
             $trigger->filter($this->context["selected"], "nav_selected");
             $this->context["sql_debug"]  = SQL::current()->debug;
             $template = "pages".DIR.$action.".twig";
+
+            Update::check_update();
 
             try {
                 $this->twig->display($template, $this->context);
