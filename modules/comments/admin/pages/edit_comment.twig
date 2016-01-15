@@ -7,35 +7,36 @@
 <form id="edit_form" action="{{ admin_url('update_comment') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <fieldset>
 <p class="main_options">
-<label for="body_field_field_{{ comment.id }}">
+<label for="body_field">
 {% if site.enable_markdown %}
 <a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ "Body" | translate("comments") }}
 </label>
-<textarea rows="12" name="body" id="body_field_{{ comment.id }}" data-preview="markup_text">{{ comment.body | fix }}</textarea>
+<textarea rows="12" name="body" id="body_field" data-preview="markup_text">{{ comment.body | fix }}</textarea>
 </p>
 <div id="more_options" class="more_options">
 <p class="more_options_option">
-<label for="author_field_{{ comment.id }}">{{ "Author" | translate("comments") }}</label>
-<input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author_field_{{ comment.id }}">
+<label for="author_field">{{ "Author" | translate("comments") }}</label>
+<input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author_field">
 </p>
 <p class="more_options_option">
-<label for="author_email_field_{{ comment.id }}">{{ "Author Email" | translate("comments") }}</label>
-<input class="text" type="text" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email_field_{{ comment.id }}">
+<label for="author_email_field">{{ "Author Email" | translate("comments") }}</label>
+<input class="text" type="text" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email_field">
 </p>
 <p class="more_options_option">
-<label for="author_url_field_{{ comment.id }}">{{ "Author Website" | translate("comments") }}</label>
-<input class="text" type="text" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field_{{ comment.id }}">
+<label for="author_url_field">{{ "Author Website" | translate("comments") }}</label>
+<input class="text" type="text" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field">
 </p>
-{% if visitor.group.can("edit_comment") %}{# If they can edit all comments, not just this one. #}
+{% if visitor.group.can("edit_comment") %}
+{# If they can edit all comments, not just this one. #}
 <p class="more_options_option">
-<label for="created_at_field_{{ comment.id }}">{{ "Timestamp" | translate("comments") }}</label>
-<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat }}" id="created_at_field_{{ comment.id }}">
+<label for="created_at_field">{{ "Timestamp" | translate("comments") }}</label>
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat }}" id="created_at_field">
 </p>
 <p class="more_options_option">
-<label for="status_field_{{ comment.id }}">{{ "Status" | translate("comments") }}</label>
-<select name="status" id="status_field_{{ comment.id }}">
+<label for="status_field">{{ "Status" | translate("comments") }}</label>
+<select name="status" id="status_field">
 <option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate("comments") }}</option>
 <option value="denied"{{ comment.status | selected("denied") }}>{{ "Denied" | translate("comments") }}</option>
 <option value="spam"{{ comment.status | selected("spam") }}>{{ "Spam" | translate("comments") }}</option>
@@ -45,15 +46,15 @@
 {% endif %}
 {% if site.email_correspondence %}
 <p class="more_options_option">
-<label for="notify_field_{{ comment.id }}">{{ "Email Notifications" | translate("comments") }}</label>
-<input type="checkbox" name="notify" id="notify_field_{{ comment.id }}"{{ comment.notify | checked }}>
+<label for="notify_field">{{ "Email Notifications" | translate("comments") }}</label>
+<input type="checkbox" name="notify" id="notify_field"{{ comment.notify | checked }}>
 </p>
 {% endif %}
 {{ trigger.call("edit_comment_options", comment) }}
 <hr>
 </div>
-<input type="hidden" name="hash" value="{{ ip | token }}">
-<input type="hidden" name="id" value="{{ comment.id }}">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash_field">
+<input type="hidden" name="id" value="{{ comment.id }}" id="id_field">
 <div class="buttons confirmation">
 <button type="submit" class="yay" accesskey="s">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Save" | translate("comments") }}
