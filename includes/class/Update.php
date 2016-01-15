@@ -6,7 +6,7 @@
     class Update {
         /**
          * Function: check_update
-         * Checks if the a new version of Chyrp is available.
+         * Checks if a new version of Chyrp is available.
          */
         public static function check_update() {
             $config = Config::current();
