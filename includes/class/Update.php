@@ -15,15 +15,15 @@
             $config->set("check_updates_last", time());
 
             if ($xml == false) {
-                Flash::warning(_f("Unable to check for updates. Please visit <a href=\"%s\">GitHub</a> to see a list of releases.",
-                                  "https://github.com/xenocrat/chyrp-lite/releases"));
+                Flash::warning(__("Update check failed.").
+                                  ' <a href="'.UPDATE_PAGE.'">'.__("Go to GitHub &rarr;").'</a>');
                 return;
             }
 
             foreach ($xml->channel->item as $item) {
                 if (version_compare(CHYRP_VERSION, $item->version, "<")) {
-                    Flash::message(_f("Chyrp Lite v%s is available. You can <a href=\"%s\">learn more</a> or <a href=\"%s\">download it</a>.",
-                                      array($item->version, $item->updateurl, $item->downloadurl)));
+                    Flash::message(_f("Chyrp Lite v%s is available.", $item->version).
+                                   ' <a href="'.$item->updateurl.'">'.__("Go to GitHub &rarr;").'</a>');
                     break;
                 }
             }

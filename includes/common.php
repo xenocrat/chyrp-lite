@@ -92,43 +92,47 @@
     define('INDEX', (pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_BASENAME) == "index.php") and !ADMIN);
 
     # Constant: DIR
-    # Native directory separator
+    # Native directory separator.
     define('DIR', DIRECTORY_SEPARATOR);
 
     # Constant: MAIN_DIR
-    # Absolute path to the Chyrp root
+    # Absolute path to the Chyrp root.
     define('MAIN_DIR', dirname(dirname(__FILE__)));
 
     # Constant: INCLUDES_DIR
-    # Absolute path to /includes
+    # Absolute path to /includes.
     define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
 
     # Constant: CACHES_DIR
-    # Absolute path to /includes/caches
+    # Absolute path to /includes/caches.
     define('CACHES_DIR', INCLUDES_DIR.DIR."caches");
 
     # Constant: MODULES_DIR
-    # Absolute path to /modules
+    # Absolute path to /modules.
     define('MODULES_DIR', MAIN_DIR.DIR."modules");
 
     # Constant: FEATHERS_DIR
-    # Absolute path to /feathers
+    # Absolute path to /feathers.
     define('FEATHERS_DIR', MAIN_DIR.DIR."feathers");
 
     # Constant: THEMES_DIR
-    # Absolute path to /themes
+    # Absolute path to /themes.
     define('THEMES_DIR', MAIN_DIR.DIR."themes");
 
     # Constant: UPDATE_XML
-    # URL to the update feed
+    # URL to the update feed.
     define('UPDATE_XML', "http://chyrplite.net/update.xml");
 
     # Constant: UPDATE_INTERVAL
-    # Interval in seconds between update checks
+    # Interval in seconds between update checks.
     define('UPDATE_INTERVAL', 86400);
 
+    # Constant: UPDATE_PAGE
+    # URL to the list of releases.
+    define('UPDATE_PAGE', "https://github.com/xenocrat/chyrp-lite/releases");
+
     # Constant: USE_ZLIB
-    # Use zlib to provide GZIP compression if the feature is supported and not buggy
+    # Use zlib to provide GZIP compression if the feature is supported and not buggy.
     # See Also: http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
         if (extension_loaded("zlib") and
