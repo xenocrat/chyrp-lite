@@ -1747,7 +1747,7 @@
             $config = Config::current();
 
             if (!empty($_POST['check_updates']) and !$config->check_updates)
-                Update::check_update();
+                Update::check();
 
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
@@ -2132,11 +2132,11 @@
 
             $this->subnav_context($route->action);
             $trigger->filter($this->context["selected"], "nav_selected");
-            $this->context["sql_debug"]  = SQL::current()->debug;
+            $this->context["sql_debug"] = SQL::current()->debug;
             $template = "pages".DIR.$action.".twig";
 
             if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
-                Update::check_update();
+                Update::check();
 
             try {
                 $this->twig->display($template, $this->context);
