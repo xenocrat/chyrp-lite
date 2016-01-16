@@ -479,7 +479,7 @@
     </head>
     <body>
         <div class="window">
-<?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or isset($_GET['task']) == "upgrade") : ?>
+<?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) : ?>
             <pre role="status" class="pane"><?php
 
 # Perform core upgrade tasks.
