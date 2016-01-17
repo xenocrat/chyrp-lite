@@ -364,7 +364,6 @@ form.split .small,
 form.split .buttons {                           display: block;
                                                 margin: 0em 0em 1rem 45% }
 form.split input {                              margin-bottom: 0.4em }
-form.split input[type="checkbox"] {             margin: 0em 0.5em 0.5em 0em }
 form.split input[type="text"],
 form.split input[type="email"],
 form.split input[type="url"],
@@ -639,7 +638,7 @@ hr {                                            border: none;
 a.emblem > img,
 img.emblem {                                    display: inline;
                                                 position: relative;
-                                                top: 2px;
+                                                top: 4px;
                                                 width: 16px;
                                                 height: 16px }
 a.emblem.markdown > img {                       width: 26px }

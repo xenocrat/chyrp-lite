@@ -60,6 +60,7 @@
 <p>
 <label for="enable_emoji">{{ "Unicode Emoticons" | translate }}</label>
 <input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"{{ site.enable_emoji | checked }}>
+<a href="{{ admin_url('help', {'id': 'unicode_emoticons'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Display emoticons as Unicode emoji." | translate }}
 </small>

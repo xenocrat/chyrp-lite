@@ -1902,6 +1902,40 @@
                             "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
                             "</li>\n<li>".__("Move the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
                     break;
+                case "unicode_emoticons":
+                    $help = "<h1>".__("Unicode Emoticons")."</h1>\n".
+                            "<p>".__("You can have some emoticons converted to equivalent Unicode emoji when your content is displayed. Your original content is not modified, so you can turn this feature on and off at any time. The following conversions will occur:")."</p>\n".
+                            "<table>\n<thead>\n".
+                            "<tr>\n<th>".__("Emoticon")."</th>\n".
+                            "<th>".__("Emoji")."</th>\n</tr>\n".
+                            "</thead>\n".
+                            "<tbody>\n".
+                            "<tr>\n<td>o:-)</td>\n"."<td>".emote("o:-)")."</td>\n</tr>\n".
+                            "<tr>\n<td>>:-)</td>\n"."<td>".emote(">:-)")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-)</td>\n"."<td>".emote(":-)")."</td>\n</tr>\n".
+                            "<tr>\n<td>^_^</td>\n"."<td>".emote("^_^")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-D</td>\n"."<td>".emote(":-D")."</td>\n</tr>\n".
+                            "<tr>\n<td>;-)</td>\n"."<td>".emote(";-)")."</td>\n</tr>\n".
+                            "<tr>\n<td><3</td>\n"."<td>".emote("<3")."</td>\n</tr>\n".
+                            "<tr>\n<td>B-)</td>\n"."<td>".emote("B-)")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-></td>\n"."<td>".emote(":->")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-||</td>\n"."<td>".emote(":-||")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-|</td>\n"."<td>".emote(":-|")."</td>\n</tr>\n".
+                            "<tr>\n<td>-_-</td>\n"."<td>".emote("-_-")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-/</td>\n"."<td>".emote(":-/")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-s</td>\n"."<td>".emote(":-s")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-*</td>\n"."<td>".emote(":-*")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-P</td>\n"."<td>".emote(":-P")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-(</td>\n"."<td>".emote(":-(")."</td>\n</tr>\n".
+                            "<tr>\n<td>:`(</td>\n"."<td>".emote(":`(")."</td>\n</tr>\n".
+                            "<tr>\n<td>:((</td>\n"."<td>".emote(":((")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-o</td>\n"."<td>".emote(":-o")."</td>\n</tr>\n".
+                            "<tr>\n<td>O_O</td>\n"."<td>".emote("O_O")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-$</td>\n"."<td>".emote(":-$")."</td>\n</tr>\n".
+                            "<tr>\n<td>x_x</td>\n"."<td>".emote("x_x")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-x</td>\n"."<td>".emote(":-x")."</td>\n</tr>\n".
+                            "</tbody>\n</table>";
+                    break;
                 case "markdown":
                     $help = "<h1>".__("Markdown")."</h1>\n".
                             "<p>".__("Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:")."</p>\n".
@@ -1916,7 +1950,7 @@
                             "<tr>\n<td>".__("~~Strikethrough~~")."</td>\n"."<td><del>".__("Strikethrough")."</del></td>\n</tr>\n".
                             "<tr>\n<td>".__("**Strong**")."</td>\n"."<td><strong>".__("Strong")."</strong></td>\n</tr>\n".
                             "<tr>\n<td>".__("&crarr;")."</td>\n"."<td>".__("New paragraph")."</td>\n</tr>\n".
-                            "<tr>\n<td>".__("[title](URL)")."</td>\n"."<td>".__("Hyperlink")."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("[title](URL)")."</td>\n".'<td><a href="#">'.__("Hyperlink")."</a></td>\n</tr>\n".
                             "<tr>\n<td>".__("![description](URL)")."</td>\n"."<td>".__("Image")."</td>\n</tr>\n".
                             "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n".
                             "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n".
