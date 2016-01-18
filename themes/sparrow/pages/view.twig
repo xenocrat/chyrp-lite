@@ -1,4 +1,4 @@
-{% extends "layouts/default.twig" %}
+{% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
 {% if not post.prev.no_results %}
@@ -6,7 +6,7 @@
 <a href="{{ post.prev.url() }}">{{ "&larr; Next post" | translate }}</a>
 </div>
 {% endif %}
-{% include "feathers/" ~ post.feather ~ ".twig" %}
+{% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% if not post.next.no_results %}
 <div role="navigation" class="next traversal">
 <a href="{{ post.next.url() }}">{{ "Previous post &rarr;" | translate }}</a>
@@ -16,12 +16,12 @@
 <article role="complementary" class="commentary">
 <ol id="comments" class="comments" data-post="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
 {% for comment in post.comments %}
-{% include "content/comment.twig" %}
+{% include "content" ~ DIR ~ "comment.twig" %}
 {% endfor %}
 <li id="comment_shim"></li>{# Needed for AJAX commenting. #}
 {% if post.commentable %}
 <li class="comment_form">
-{% include "forms/comment/new.twig" %}
+{% include "forms" ~ DIR ~ "comment" ~ DIR ~ "new.twig" %}
 </li>
 {% endif %}
 </ol>

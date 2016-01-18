@@ -1,4 +1,4 @@
-{% extends "layouts/default.twig" %}
+{% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
 {% if archives is defined and archives is not empty %}
@@ -55,7 +55,7 @@
 </div>
 {% endif %}
 {% for post in posts.paginated %}
-{% include "feathers/" ~ post.feather ~ ".twig" %}
+{% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% endfor %}
 {% endif %}
 

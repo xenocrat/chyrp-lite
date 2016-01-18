@@ -1,11 +1,11 @@
-{% extends "layouts/default.twig" %}
+{% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
 {% if posts.paginated is not empty %}
 <h3 role="status" class="filter">{{ "Drafts" | translate }}</h3>
 {% endif %}
 {% for post in posts.paginated %}
-{% include "feathers/" ~ post.feather ~ ".twig" %}
+{% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% else %}
 <h3 role="status" class="filter">{{ "You don't have any drafts" | translate }}</h3>
 {% endfor %}

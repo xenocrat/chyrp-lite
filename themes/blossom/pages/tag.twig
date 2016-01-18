@@ -1,4 +1,4 @@
-{% extends "layouts/default.twig" %}
+{% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
 {% if posts.paginated is defined and posts.paginated is not empty %}
@@ -6,7 +6,7 @@
 <h3 class="ribbon">{{ "Posts tagged with %s" | translate | format(tag | fix) }}</h3>
 </div>
 {% for post in posts.paginated %}
-{% include "feathers/" ~ post.feather ~ ".twig" %}
+{% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% endfor %}
 {% elseif reason is defined %}
 <div class="ribbon">

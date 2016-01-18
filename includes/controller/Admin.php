@@ -1126,7 +1126,7 @@
                     $zip->close();
                     download(null, $filename.".zip", $filepath);
                 } else
-                    error(__("Error"), _f("Failed to export files because of ZipArchive error code %d", $err));
+                    error(__("Error"), _f("Failed to export files because of ZipArchive error: <code>%s</code>", zip_errors($err)));
             } else
                 download(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
         }
@@ -2096,25 +2096,26 @@
             $config = Config::current();
             $route = Route::current();
 
-            $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
-            $this->context["theme"]       = Theme::current();
-            $this->context["flash"]       = Flash::current();
-            $this->context["trigger"]     = $trigger;
-            $this->context["title"]       = $title;
-            $this->context["site"]        = $config;
-            $this->context["visitor"]     = $visitor;
-            $this->context["logged_in"]   = logged_in();
-            $this->context["route"]       = $route;
-            $this->context["now"]         = time();
-            $this->context["version"]     = CHYRP_VERSION;
-            $this->context["codename"]    = CHYRP_CODENAME;
-            $this->context["debug"]       = DEBUG;
-            $this->context["feathers"]    = Feathers::$instances;
-            $this->context["modules"]     = Modules::$instances;
-            $this->context["POST"]        = $_POST;
-            $this->context["GET"]         = $_GET;
+            $this->context["ip"]         = $_SERVER["REMOTE_ADDR"];
+            $this->context["DIR"]        = DIR;
+            $this->context["theme"]      = Theme::current();
+            $this->context["flash"]      = Flash::current();
+            $this->context["trigger"]    = $trigger;
+            $this->context["title"]      = $title;
+            $this->context["site"]       = $config;
+            $this->context["visitor"]    = $visitor;
+            $this->context["logged_in"]  = logged_in();
+            $this->context["route"]      = $route;
+            $this->context["now"]        = time();
+            $this->context["version"]    = CHYRP_VERSION;
+            $this->context["codename"]   = CHYRP_CODENAME;
+            $this->context["debug"]      = DEBUG;
+            $this->context["feathers"]   = Feathers::$instances;
+            $this->context["modules"]    = Modules::$instances;
+            $this->context["POST"]       = $_POST;
+            $this->context["GET"]        = $_GET;
 
-            $this->context["navigation"]  = array();
+            $this->context["navigation"] = array();
 
             $show = array("write" => array($visitor->group->can("add_draft", "add_post", "add_page")),
                           "manage" => array($visitor->group->can("view_own_draft",

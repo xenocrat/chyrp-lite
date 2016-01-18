@@ -1,4 +1,4 @@
-{% extends "layouts/default.twig" %}
+{% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
 {% if archives is defined and archives is not empty %}
@@ -51,7 +51,7 @@
 <h3 role="status" class="filter">{{ "Archive of %s" | translate | format(archive.timestamp | strftimeformat("%B %Y" | translate)) }}</h3>
 {% endif %}
 {% for post in posts.paginated %}
-{% include "feathers/" ~ post.feather ~ ".twig" %}
+{% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% endfor %}
 {% endif %}
 

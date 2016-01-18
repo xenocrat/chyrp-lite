@@ -6,7 +6,7 @@
 <h1>{{ "Editing &#8220;%s&#8221;" | translate | format(page.title | striptags | oneof("[Untitled]" | translate)) }}</h1>
 <form id="edit_form" action="{{ admin_url('update_page') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <fieldset>
-{% include "partials/page_fields.twig" %}
+{% include "partials" ~ DIR ~ "page_fields.twig" %}
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 <input type="hidden" name="id" value="{{ page.id }}" id="page_id">
 </fieldset>
