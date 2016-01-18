@@ -1112,21 +1112,21 @@
                 Flash::warning(__("You did not select anything to export."), "/admin/?action=export");
 
             $filename = sanitize(camelize(Config::current()->name), false, true)."_Export_".date("Y-m-d");
-            $filelock = tmpfile(); # Temporary file handle: unsetting this will auto-delete the file.
+            $filelock = tmpfile(); # Temporary file handle: deleted when unset or script execution ends.
             $filepath = realpath(stream_get_meta_data($filelock)["uri"]);
 
             if (class_exists("ZipArchive")) {
                 $zip = new ZipArchive;
-                $num = $zip->open($filepath, ZipArchive::CREATE);
+                $err = $zip->open($filepath, ZipArchive::CREATE);
 
-                if ($num === true) {
+                if ($err === true) {
                     foreach ($exports as $name => $contents)
                         $zip->addFromString($name, $contents);
 
                     $zip->close();
                     download(null, $filename.".zip", $filepath);
                 } else
-                    error(__("Error"), _f("Failed to export files because of ZipArchive error code %d", $num));
+                    error(__("Error"), _f("Failed to export files because of ZipArchive error code %d", $err));
             } else
                 download(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
         }
@@ -1181,7 +1181,7 @@
                 if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/", $value, $media))
                     foreach ($media[0] as $matched_url) {
                         $filename = upload_from_url($matched_url);
-                        $value = str_replace($matched_url, $config->url.$config->uploads_path.$filename, $value);
+                        $value = str_replace($matched_url, uploaded($filename), $value);
                     }
             }
 

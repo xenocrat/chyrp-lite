@@ -105,10 +105,10 @@
 
     if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR.DIR.".htaccess")) or
         (file_exists(MAIN_DIR.DIR.".htaccess") and !is_writable(MAIN_DIR.DIR.".htaccess") and !$htaccess_has_chyrp))
-        $errors[] = __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable.");
+        $errors[] = __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable.");
 
     if (!is_writable(INCLUDES_DIR))
-        $errors[] = __("Please CHMOD or CHOWN the <code>includes</code> directory to make it writable.");
+        $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
     if (!empty($_POST)) {
         if ($_POST['adapter'] == "sqlite" and !@is_writable(dirname($_POST['database'])))
@@ -159,10 +159,10 @@
             if (!$htaccess_has_chyrp)
                 if (!file_exists(MAIN_DIR.DIR.".htaccess"))
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
-                        $errors[] = __("Clean URLs will not be available because the <code>.htaccess</code> file is not writable.");
+                        $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
                 else
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND))
-                        $errors[] = __("Clean URLs will not be available because the <code>.htaccess</code> file is not writable.");
+                        $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
 
             $config->set("sql", array());
             $config->set("name", $_POST['name']);

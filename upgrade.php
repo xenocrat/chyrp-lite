@@ -247,11 +247,11 @@
         if (!file_exists(MAIN_DIR.DIR.".htaccess"))
             echo __("Generating .htaccess file...").
                  test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess),
-                      __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable."));
+                      __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
         else
             echo __("Appending to .htaccess file...").
                  test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND),
-                      __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable."));
+                      __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
     }
 
     /**

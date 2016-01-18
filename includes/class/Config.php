@@ -68,7 +68,7 @@
             # Update the configuration file
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
                 error(__("Error"), _f("Failed to set <code>%s</code> because <em>%s</em> is not writable.",
-                                      array($setting, DIR."includes".DIR."config.json.php")));
+                                      array($setting, "config.json.php")));
 
             return true;
         }
@@ -97,7 +97,7 @@
             # Update the configuration file
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
                 error(__("Error"), _f("Failed to remove <code>%s</code> because <em>%s</em> is not writable.",
-                                  array($setting, DIR."includes".DIR."config.json.php")));
+                                  array($setting, "config.json.php")));
         }
 
         /**

@@ -84,7 +84,7 @@
                     $media_uris = array_unique($media[0]);
                     foreach ($media_uris as $matched_url) {
                         $filename = upload_from_url($matched_url);
-                        $contentencoded = str_replace($matched_url, $config->url.$config->uploads_path.$filename, $contentencoded);
+                        $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
                     }
                 }
                 
@@ -350,7 +350,7 @@
                                    $media))
                     foreach ($media[0] as $matched_url) {
                         $filename = upload_from_url($matched_url);
-                        $post["Body"] = str_replace($matched_url, $config->url.$config->uploads_path.$filename, $post["Body"]);
+                        $post["Body"] = str_replace($matched_url, uploaded($filename), $post["Body"]);
                     }
 
                 $status_translate = array(1 => "draft",
@@ -467,7 +467,7 @@
                                    $media))
                     foreach ($media[0] as $matched_url) {
                         $filename = upload_from_url($matched_url);
-                        $body = str_replace($matched_url, $config->url.$config->uploads_path.$filename, $body);
+                        $body = str_replace($matched_url, uploaded($filename), $body);
                     }
 
                 $status_translate = array(1 => "draft",
