@@ -1077,6 +1077,7 @@
 
         $args = func_get_args();
         array_shift($args);
+
         if (count($args) > 1) {
             foreach ($args as $arg) {
                 $fallback = $arg;
@@ -1102,6 +1103,7 @@
     function oneof() {
         $last = null;
         $args = func_get_args();
+
         foreach ($args as $index => $arg) {
             if (!isset($arg) or (is_string($arg) and trim($arg) === "") or $arg === array() or (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"))
                 $last = $arg;
@@ -1142,8 +1144,8 @@
             $pattern.= "!@#$%^&*()?~";
 
         $len = strlen($pattern) - 1;
-
         $key = "";
+
         for($i = 0; $i < $length; $i++)
             $key.= $pattern[rand(0, $len)];
 
@@ -1160,10 +1162,11 @@
      *     $num - Number suffix from which to start increasing if the filename exists.
      *
      * Returns:
-     *     A unique version of the given $name.
+     *     A unique version of the supplied filename.
      */
     function unique_filename($name, $path = "", $num = 2) {
         $path = rtrim($path, "/");
+
         if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$name))
             return $name;
 
@@ -1173,6 +1176,7 @@
         foreach (array("tar.gz", "tar.bz", "tar.bz2") as $extension) {
             list($first, $second) = explode(".", $extension);
             $file_first =& $name[count($name) - 2];
+
             if ($file_first == $first and end($name) == $second) {
                 $file_first = $first.".".$second;
                 array_pop($name);
@@ -1180,8 +1184,8 @@
         }
 
         $ext = ".".array_pop($name);
-
         $try = implode(".", $name)."-".$num.$ext;
+
         if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$try))
             return $try;
 
@@ -1190,24 +1194,32 @@
 
     /**
      * Function: upload
-     * Moves an uploaded file to the uploads directory.
+     * Validates and moves an uploaded file to the uploads directory.
      *
      * Parameters:
      *     $file - The file array created by PHP.
-     *     $extension - An array of valid extensions (case-insensitive).
-     *     $path - A sub-folder in the uploads directory (optional).
-     *     $put - Use copy() instead of move_uploaded_file()?
+     *     $filter - An array of valid extensions (case-insensitive).
+     *     $path - A sub-directory in the uploads directory (optional).
      *
      * Returns:
-     *     The resulting filename from the upload.
+     *     The filename of the upload relative to the uploads directory.
      */
-    function upload($file, $extension = null, $path = "", $put = false) {
+    function upload($file, $filter = null, $path = "") {
         $file_split = explode(".", $file['name']);
         $path = rtrim($path, DIR);
         $dir = MAIN_DIR.Config::current()->uploads_path.$path;
 
         if (!file_exists($dir))
             mkdir($dir, 0777, true);
+
+        if (!is_uploaded_file($file['tmp_name']))
+            show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", fix($file['name'])));
+
+        if (!is_dir($dir))
+            error(__("Error"), _f("Upload destination <em>%s</em> is not a directory.", fix($dir)));
+
+        if (!is_writable($dir))
+            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($dir)));
 
         $original_ext = end($file_split);
 
@@ -1226,7 +1238,7 @@
         if (in_array(strtolower($file_ext), array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
             $file_ext = "txt";
 
-        if (!empty($extension)) {
+        if (!empty($filter)) {
             $extensions = array();
 
             foreach ((array) $extension as $string)
@@ -1242,37 +1254,27 @@
         $file_clean = sanitize($file_clean, false).".".$file_ext;
         $filename = unique_filename($file_clean, $path);
 
-        $message = _f("Failed to put file in directory <code>%s</code>. CHMOD it to 777 and try again.", $dir);
-
-        if ($put) {
-            if (!@copy($file['tmp_name'], $dir.DIR.$filename))
-                error(__("Error"), $message);
-        } elseif (!@move_uploaded_file($file['tmp_name'], $dir.DIR.$filename))
-            error(__("Error"), $message);
-
+        move_uploaded_file($file['tmp_name'], $dir.DIR.$filename);
         return ($path ? $path.DIR.$filename : $filename);
     }
 
     /**
      * Function: upload_from_url
-     * Copy a file from a specified URL to their upload directory.
+     * Copy a file from a specified URL to the uploads directory.
      *
      * Parameters:
-     *     $url - The URL to copy.
-     *     $extension - An array of valid extensions (case-insensitive).
-     *     $path - A sub-folder in the uploads directory (optional).
+     *     $url - The URL to use as the source for the upload.
      *
      * See Also:
      *     <upload>
      */
-    function upload_from_url($url, $extension = null, $path = "") {
-        $file = tempnam(getcwd().DIR."tmp", "chyrp");
-        file_put_contents($file, get_remote($url));
+    function upload_from_url($url) {
+        $file_ext = reset(explode("?", end(explode(".", $url))));
+        $filename = unique_filename(md5($url).".".$file_ext);
+        $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
 
-        $fake_file = array("name" => basename(parse_url($url, PHP_URL_PATH)),
-                           "tmp_name" => $file);
-
-        return upload($fake_file, $extension, $path, true);
+        file_put_contents($filepath, get_remote($url));
+        return $filename;
     }
 
     /**
