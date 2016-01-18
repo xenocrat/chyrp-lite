@@ -1347,6 +1347,41 @@
     }
 
     /**
+     * Function: zip_errors
+     * Converts a ZipArchive error code into a human-readable message.
+     *
+     * Parameters:
+     *     $code - The error code returned by ZipArchive.
+     *
+     * Returns:
+     *     The error message corresponding to the supplied error code.
+     */
+    function zip_errors($code) {
+        switch ($code) {
+            case ER_EXISTS:
+                return __("File already exists.");
+            case ER_INCONS:
+                return __("Zip archive inconsistent.");
+            case ER_INVAL:
+                return __("Invalid argument.");
+            case ER_MEMORY:
+                return __("Malloc failure.");
+            case ER_NOENT:
+                return __("No such file.");
+            case ER_NOZIP:
+                return __("Not a zip archive.");
+            case ER_OPEN:
+                return __("Cannot open file.");
+            case ER_READ:
+                return __("Read error.");
+            case ER_SEEK:
+                return __("Seek error.");
+            default:
+                return __("Unknown error.");
+        }
+    }
+
+    /**
      * Function: timer_start
      * Starts the timer.
      */
