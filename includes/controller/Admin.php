@@ -1746,8 +1746,8 @@
 
             $config = Config::current();
 
-            if (!empty($_POST['check_updates']) and !$config->check_updates)
-                Update::check();
+            $check_updates_last = (!empty($_POST['check_updates']) and !$config->check_updates) ?
+                0 : $config->check_updates_last ;
 
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
@@ -1757,7 +1757,8 @@
                          $config->set("timezone", $_POST['timezone']),
                          $config->set("locale", $_POST['locale']),
                          $config->set("cookies_notification", !empty($_POST['cookies_notification'])),
-                         $config->set("check_updates", !empty($_POST['check_updates'])));
+                         $config->set("check_updates", !empty($_POST['check_updates'])),
+                         $config->set("check_updates_last", $check_updates_last));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=general_settings");
