@@ -1268,12 +1268,14 @@
      * See Also:
      *     <upload>
      */
-    function upload_from_url($url) {
-        $file_ext = reset(explode("?", end(explode(".", $url))));
-        $filename = unique_filename(md5($url).".".$file_ext);
+    function upload_from_url($url, $redirects = 3, $timeout = 10) {
+        preg_match("~\.[a-z0-9]+(?=($|\?))~i", $url, $file_ext);
+        fallback($file_ext[0], "");
+
+        $filename = unique_filename(md5($url).".".$file_ext[0]);
         $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
 
-        file_put_contents($filepath, get_remote($url));
+        file_put_contents($filepath, get_remote($url, $redirects, $timeout));
         return $filename;
     }
 
@@ -1358,23 +1360,23 @@
      */
     function zip_errors($code) {
         switch ($code) {
-            case ER_EXISTS:
+            case ZipArchive::ER_EXISTS:
                 return __("File already exists.");
-            case ER_INCONS:
+            case ZipArchive::ER_INCONS:
                 return __("Zip archive inconsistent.");
-            case ER_INVAL:
+            case ZipArchive::ER_INVAL:
                 return __("Invalid argument.");
-            case ER_MEMORY:
+            case ZipArchive::ER_MEMORY:
                 return __("Malloc failure.");
-            case ER_NOENT:
+            case ZipArchive::ER_NOENT:
                 return __("No such file.");
-            case ER_NOZIP:
+            case ZipArchive::ER_NOZIP:
                 return __("Not a zip archive.");
-            case ER_OPEN:
+            case ZipArchive::ER_OPEN:
                 return __("Cannot open file.");
-            case ER_READ:
+            case ZipArchive::ER_READ:
                 return __("Read error.");
-            case ER_SEEK:
+            case ZipArchive::ER_SEEK:
                 return __("Seek error.");
             default:
                 return __("Unknown error.");
