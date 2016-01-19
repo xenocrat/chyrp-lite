@@ -727,10 +727,7 @@ foreach ($errors as $error)
                 <button type="submit"><?php echo __("Install!"); ?></button>
             </form>
 <?php else: ?>
-            <h1><?php echo __("Done!"); ?></h1>
-            <p>
-                <?php echo __("Chyrp Lite has been successfully installed. Go to your site and log in to get started."); ?>
-            </p>
+            <h1><?php echo __("Chyrp Lite has been installed"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
                 <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>

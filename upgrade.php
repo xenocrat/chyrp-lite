@@ -397,6 +397,12 @@
             h1:first-child {
                 margin-top: 0em;
             }
+            h2 {
+                font-size: 1.25em;
+                text-align: center;
+                font-weight: bold;
+                margin: 0.75em 0em;
+            }
             code {
                 font-family: "Hack webfont", monospace;
                 font-style: normal;
@@ -526,7 +532,8 @@ foreach ($errors as $error)
     echo '<span role="alert">'.$error."</span>\n";
 
           ?></pre>
-            <h1 class="what_now"><?php echo __("What now?"); ?></h1>
+            <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
+            <h2><?php echo __("What now?"); ?></h2>
             <ol>
                 <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
                 <li><?php echo __("Fix any problems reported."); ?></li>
