@@ -38,7 +38,7 @@
             if (DEBUG)
                 error_log("INSTALLING UPDATE: ".$url); 
 
-            $filename = upload_from_url($url);
+            $filename = upload_from_url($url, 3, 30);
             $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
 
             $zip = new ZipArchive;
