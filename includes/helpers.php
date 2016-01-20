@@ -1262,7 +1262,7 @@
      */
     function upload_from_url($url, $redirects = 3, $timeout = 10) {
         preg_match("~\.[a-z0-9]+(?=($|\?))~i", $url, $file_ext);
-        fallback($file_ext[0], "");
+        fallback($file_ext[0], "bin"); # Assume unknown binary file.
 
         $filename = unique_filename(md5($url).".".$file_ext[0]);
         $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
