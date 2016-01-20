@@ -1164,10 +1164,8 @@
      * Returns:
      *     A unique version of the supplied filename.
      */
-    function unique_filename($name, $path = "", $num = 2) {
-        $path = rtrim($path, "/");
-
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$name))
+    function unique_filename($name, $num = 2) {
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$name))
             return $name;
 
         $name = explode(".", $name);
@@ -1186,10 +1184,10 @@
         $ext = ".".array_pop($name);
         $try = implode(".", $name)."-".$num.$ext;
 
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$try))
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$try))
             return $try;
 
-        return unique_filename(implode(".", $name).$ext, $path, $num + 1);
+        return unique_filename(implode(".", $name).$ext, $num + 1);
     }
 
     /**
@@ -1199,27 +1197,19 @@
      * Parameters:
      *     $file - The file array created by PHP.
      *     $filter - An array of valid extensions (case-insensitive).
-     *     $path - A sub-directory in the uploads directory (optional).
      *
      * Returns:
      *     The filename of the upload relative to the uploads directory.
      */
-    function upload($file, $filter = null, $path = "") {
+    function upload($file, $filter = null) {
         $file_split = explode(".", $file['name']);
-        $path = rtrim($path, DIR);
-        $dir = MAIN_DIR.Config::current()->uploads_path.$path;
-
-        if (!file_exists($dir))
-            mkdir($dir, 0777, true);
+        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
 
         if (!is_uploaded_file($file['tmp_name']))
             show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", fix($file['name'])));
 
-        if (!is_dir($dir))
-            error(__("Error"), _f("Upload destination <em>%s</em> is not a directory.", fix($dir)));
-
-        if (!is_writable($dir))
-            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($dir)));
+        if (!is_writable($uploads_path))
+            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
 
         $original_ext = end($file_split);
 
@@ -1241,7 +1231,7 @@
         if (!empty($filter)) {
             $extensions = array();
 
-            foreach ((array) $extension as $string)
+            foreach ((array) $filter as $string)
                 $extensions[] = strtolower($string);
 
             if (!in_array(strtolower($file_ext), $extensions) and
@@ -1252,10 +1242,10 @@
         array_pop($file_split);
         $file_clean = implode(".", $file_split);
         $file_clean = sanitize($file_clean, false).".".$file_ext;
-        $filename = unique_filename($file_clean, $path);
+        $filename = unique_filename($file_clean);
 
-        move_uploaded_file($file['tmp_name'], $dir.DIR.$filename);
-        return ($path ? $path.DIR.$filename : $filename);
+        move_uploaded_file($file['tmp_name'], $uploads_path.$filename);
+        return $filename;
     }
 
     /**
@@ -1263,7 +1253,9 @@
      * Copy a file from a specified URL to the uploads directory.
      *
      * Parameters:
-     *     $url - The URL to use as the source for the upload.
+     *     $url - The URL of the resource to be copied.
+     *     $redirects - The maximum number of redirects to follow.
+     *     $timeout - The maximum number of seconds to wait.
      *
      * See Also:
      *     <upload>
@@ -1761,7 +1753,7 @@
      *     $d - Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
      *     $r - Maximum rating (inclusive) [ g | pg | r | x ]
      *     $img - True to return a complete IMG tag False for just the URL
-     *     $atts - Optional, additional key/value attributes to include in the IMG tag
+     *     $atts - Additional key/value attributes to add to the IMG tag (optional).
      *
      * Returns:
      *     String containing either just a URL or a complete image tag.
@@ -1853,25 +1845,16 @@
      * Parameters:
      *     $contents - The bitstream to be delivered to the visitor.
      *     $filename - The name to be applied to the content upon download.
-     *     $filepath - Optional filepath to be used instead of @contents@.
      */
-    function download($contents = "", $filename = "caconym", $filepath = null) {
+    function download($contents = "", $filename = "caconym") {
         if (!headers_sent()) {
             header("Content-type: application/octet-stream");
             header("Content-Disposition: attachment; filename=\"".$filename."\"");
 
-            if (isset($filepath) and is_readable($filepath) and !is_dir($filepath)) {
-                if (!in_array("ob_gzhandler", ob_list_handlers()))
-                    header("Content-length: ".filesize($filepath));
+            if (!in_array("ob_gzhandler", ob_list_handlers()))
+                header("Content-length: ".strlen($contents));
 
-                readfile($filepath);
-            } else {
-                if (!in_array("ob_gzhandler", ob_list_handlers()))
-                    header("Content-length: ".strlen($contents));
-
-                echo $contents;
-            }
-
+            echo $contents;
             exit;
         } else
             error(__("Error"), __("Unable to deliver file attachment because HTTP headers were already sent."));

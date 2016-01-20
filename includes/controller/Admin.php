@@ -1111,20 +1111,21 @@
             if (empty($exports))
                 Flash::warning(__("You did not select anything to export."), "/admin/?action=export");
 
-            $filename = sanitize(camelize(Config::current()->name), false, true)."_Export_".date("Y-m-d");
-            $filelock = tmpfile(); # Temporary file handle: deleted when unset or script execution ends.
-            $filepath = realpath(stream_get_meta_data($filelock)["uri"]);
+            $filename = sanitize(camelize($config->name), false, true)."_Export_".date("Y-m-d");
+            $filepath = tempnam(sys_get_temp_dir(), "zip");
 
             if (class_exists("ZipArchive")) {
                 $zip = new ZipArchive;
-                $err = $zip->open($filepath, ZipArchive::CREATE);
+                $err = $zip->open($filepath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
                 if ($err === true) {
                     foreach ($exports as $name => $contents)
                         $zip->addFromString($name, $contents);
 
                     $zip->close();
-                    download(null, $filename.".zip", $filepath);
+                    $bitstream = file_get_contents($filepath);
+                    unlink($filepath);
+                    download($bitstream, $filename.".zip");
                 } else
                     error(__("Error"), _f("Failed to export files because of ZipArchive error: <code>%s</code>", zip_errors($err)));
             } else
