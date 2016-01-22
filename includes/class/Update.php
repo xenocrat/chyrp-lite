@@ -45,7 +45,28 @@
             $err = $zip->open($filepath);
 
             if ($err === true) {
-                $zip->extractTo(MAIN_DIR);
+                for ($i=0; $i < $zip->numFiles; $i++) { 
+                    $name = $zip->getNameIndex($i);
+
+                    if ($name != rtrim($name, "/"))
+                        continue; # Skip this item because it is a folder.
+
+                    $folders = explode("/", $name);
+                    array_shift($folders); # Disregard the base directory.
+
+                    $itemname = array_pop($folders);
+                    $itempath = MAIN_DIR;
+
+                    foreach ($folders as $folder) {
+                        $itempath.= DIR.$folder;
+
+                        if (!file_exists($itempath))
+                            mkdir($itempath, 0755);
+                    }
+
+                    copy("zip://".$filepath."#".$name, $itempath.DIR.$itemname);
+                }
+
                 $zip->close();
                 unlink($filepath);
                 redirect("/upgrade.php?upgrade=yes", true);
