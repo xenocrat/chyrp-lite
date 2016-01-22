@@ -1351,6 +1351,9 @@
      *     The error message corresponding to the supplied error code.
      */
     function zip_errors($code) {
+        if (!class_exists("ZipArchive"))
+            return __("ZipArchive not available.");
+
         switch ($code) {
             case ZipArchive::ER_EXISTS:
                 return __("File already exists.");
