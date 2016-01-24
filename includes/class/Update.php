@@ -20,7 +20,7 @@
 
             foreach ($xml->channel->item as $item) {
                 if (version_compare(CHYRP_VERSION, $item->version, "<")) {
-                    #if (Config::current()->auto_update and class_exists("ZipArchive"))
+                    #if (Config::current()->install_updates and class_exists("ZipArchive"))
                     #    self::install($item->downloadurl);
 
                     Flash::message(_f("Chyrp Lite v%s is available.", $item->version).
@@ -32,7 +32,7 @@
 
         /**
          * Function: install
-         * Download and install Chyrp Lite updates from the web.
+         * Download and install Chyrp Lite updates from GitHub.
          */
         private static function install($url) {
             if (DEBUG)
