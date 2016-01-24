@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-01-09 23:13+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -186,7 +186,7 @@ msgid "(optional)"
 msgstr ""
 
 #: themes/sparrow/forms/post/edit.twig:32
-#: themes/sparrow/layouts/default.twig:52
+#: themes/sparrow/layouts/default.twig:53
 msgid "Draft"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgid "Slug"
 msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:5
-#: themes/sparrow/layouts/default.twig:57
+#: themes/sparrow/layouts/default.twig:58
 msgid "Controls"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:9
 #: themes/sparrow/forms/user/register.twig:13
-#: themes/sparrow/layouts/default.twig:32
+#: themes/sparrow/layouts/default.twig:33
 msgid "Email"
 msgstr ""
 
@@ -247,7 +247,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/login.twig:5
 #: themes/sparrow/forms/user/login.twig:13
-#: themes/sparrow/layouts/default.twig:69
+#: themes/sparrow/layouts/default.twig:70
 msgid "Log in"
 msgstr ""
 
@@ -280,7 +280,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/register.twig:5
 #: themes/sparrow/forms/user/register.twig:18
-#: themes/sparrow/layouts/default.twig:65
+#: themes/sparrow/layouts/default.twig:66
 msgid "Register"
 msgstr ""
 
@@ -292,47 +292,47 @@ msgstr ""
 msgid "(again)"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:35
+#: themes/sparrow/layouts/default.twig:36
 msgid "Feed"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:39
+#: themes/sparrow/layouts/default.twig:40
 msgid "Archive"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:44
+#: themes/sparrow/layouts/default.twig:45
 msgid "Admin"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:48
+#: themes/sparrow/layouts/default.twig:49
 msgid "Write"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:60
+#: themes/sparrow/layouts/default.twig:61
 msgid "Log out"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:76
+#: themes/sparrow/layouts/default.twig:77
 msgid 'Search&hellip;'
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:76
+#: themes/sparrow/layouts/default.twig:77
 msgid 'Search this blog'
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:77
+#: themes/sparrow/layouts/default.twig:78
 msgid "Search"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:85
+#: themes/sparrow/layouts/default.twig:86
 msgid "&larr; Newer posts"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:95
+#: themes/sparrow/layouts/default.twig:96
 msgid "Older posts &rarr;"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:106
+#: themes/sparrow/layouts/default.twig:107
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

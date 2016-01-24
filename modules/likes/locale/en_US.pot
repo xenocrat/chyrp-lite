@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-01-09 23:13+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -30,7 +30,7 @@ msgid "Like With Text"
 msgstr ""
 
 #: modules/likes/admin/pages/like_settings.twig:20
-msgid "Enables like with text links (i.e. Like/Unlike)."
+msgid "Enables text descriptions in like/unlike links."
 msgstr ""
 
 #: modules/likes/admin/pages/like_settings.twig:23

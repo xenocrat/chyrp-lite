@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-01-09 23:14+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -68,16 +68,16 @@ msgstr ""
 msgid "There was an error disabling the extension."
 msgstr ""
 
-#: admin/layout.twig:57
+#: admin/layout.twig:58
 msgid 'Chyrp loves you.'
 msgstr ""
 
-#: admin/layout.twig:58
+#: admin/layout.twig:59
 #, php-format
 msgid "Chyrp Lite &ldquo;%s&rdquo;"
 msgstr ""
 
-#: admin/layout.twig:59
+#: admin/layout.twig:60
 msgid "Log out"
 msgstr ""
 
@@ -153,19 +153,19 @@ msgstr ""
 msgid "Unicode Emoticons"
 msgstr ""
 
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:65
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:68
+#: admin/pages/content_settings.twig:69
 msgid "Markdown"
 msgstr ""
 
-#: admin/pages/content_settings.twig:71
+#: admin/pages/content_settings.twig:72
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:76
+#: admin/pages/content_settings.twig:77
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:66
@@ -434,7 +434,7 @@ msgid "Chyrp URL"
 msgstr ""
 
 #: admin/pages/general_settings.twig:22
-msgid "Alternate URL"
+msgid "Canonical URL"
 msgstr ""
 
 #: admin/pages/general_settings.twig:23
@@ -961,13 +961,13 @@ msgstr ""
 msgid "[None]"
 msgstr ""
 
-#: admin/partials/page_fields.twig:64
+#: admin/partials/page_fields.twig:68
 #: admin/partials/post_fields.twig:135
 #: admin/partials/post_fields.twig:144
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:68
+#: admin/partials/page_fields.twig:72
 #: admin/partials/post_fields.twig:139
 #: admin/partials/post_fields.twig:148
 msgid "Save"
