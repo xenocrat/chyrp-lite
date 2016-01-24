@@ -55,7 +55,11 @@
 {% endfor %}
 </select>
 </p>
-{{ route.action == "write_page" ? trigger.call("new_page_options") : trigger.call("edit_page_options", page) }}
+{% if route.action == "write_page" %}
+{{ trigger.call("new_page_options") }}
+{% else %}
+{{ trigger.call("edit_page_options", page) }}
+{% endif %}
 <hr>
 </div>
 <div class="buttons confirmation">
