@@ -7,7 +7,7 @@ OPTIONS = {
   :domain => nil,
   :msgstr => "",
   :msgstr_filter => "",
-  :exclude => [".git", "modules", "lib", "feathers", "themes", "admin", "config.json.php"]
+  :exclude => [".git", "modules", "lib", "feathers", "themes", "admin"]
 }
 
 # Shamelessly taken from the Twig lexer. :P
