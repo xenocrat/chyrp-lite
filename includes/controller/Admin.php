@@ -1929,8 +1929,8 @@
                             "<tr>\n<td>:-*</td>\n"."<td>".emote(":-*")."</td>\n</tr>\n".
                             "<tr>\n<td>:-P</td>\n"."<td>".emote(":-P")."</td>\n</tr>\n".
                             "<tr>\n<td>:-(</td>\n"."<td>".emote(":-(")."</td>\n</tr>\n".
-                            "<tr>\n<td>:`(</td>\n"."<td>".emote(":`(")."</td>\n</tr>\n".
-                            "<tr>\n<td>:((</td>\n"."<td>".emote(":((")."</td>\n</tr>\n".
+                            "<tr>\n<td>;_;</td>\n"."<td>".emote(";_;")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-((</td>\n"."<td>".emote(":-((")."</td>\n</tr>\n".
                             "<tr>\n<td>:-o</td>\n"."<td>".emote(":-o")."</td>\n</tr>\n".
                             "<tr>\n<td>O_O</td>\n"."<td>".emote("O_O")."</td>\n</tr>\n".
                             "<tr>\n<td>:-$</td>\n"."<td>".emote(":-$")."</td>\n</tr>\n".
