@@ -177,6 +177,7 @@
             $config->set("check_updates_last", 0);
             $config->set("theme", "blossom");
             $config->set("posts_per_page", 5);
+            $config->set("admin_per_page", 25);
             $config->set("feed_items", 20);
             $config->set("feed_url", "");
             $config->set("uploads_path", DIR."uploads".DIR);
