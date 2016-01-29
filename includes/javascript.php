@@ -23,7 +23,7 @@ var Site = {
 var Passwords = {
     check: function(selector_primary, selector_confirm) {
         $(selector_primary).keyup(function(e) {
-            if (passwordStrength($(this).val()) < 75)
+            if (passwordStrength($(this).val()) < 100)
                 $(this).removeClass("strong");
             else
                 $(this).addClass("strong");

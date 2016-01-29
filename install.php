@@ -100,7 +100,7 @@
     if (file_exists(INCLUDES_DIR.DIR."config.json.php") and file_exists(MAIN_DIR.DIR.".htaccess")) {
         $sql = SQL::current(true);
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            error(__("Already Installed"), __("Chyrp is already fully installed and configured."));
+            error(__("Already Installed"), __("Chyrp Lite is already fully installed and configured."));
     }
 
     if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR.DIR.".htaccess")) or
@@ -477,15 +477,6 @@
                 background-color: #ffffff;
                 background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
-            input[type="text"]:focus,
-            input[type="email"]:focus,
-            input[type="url"]:focus,
-            input[type="number"]:focus,
-            input[type="password"]:focus,
-            textarea:focus {
-                border-color: #1e57ba;
-                outline: none;
-            }
             input[type="text"],
             input[type="email"],
             input[type="url"],
@@ -496,6 +487,18 @@
                 box-sizing: border-box;
                 width: 100%;
                 margin: 0em;
+            }
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="url"]:focus,
+            input[type="number"]:focus,
+            input[type="password"]:focus,
+            textarea:focus {
+                border-color: #1e57ba;
+                outline: none;
+            }
+            input[type="password"].strong {
+                border: 1px solid #76b362
             }
             form hr {
                 border: none;
@@ -624,8 +627,14 @@
                         $("#database_field label .sub").fadeOut("fast");
                         $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                     }
-                })
-            })
+                });
+                $("input[type='password']#password_1").keyup(function(e) {
+                    if (passwordStrength($(this).val()) < 100)
+                        $(this).removeClass("strong");
+                    else
+                        $(this).addClass("strong");
+                });
+            });
         </script>
     </head>
     <body>
