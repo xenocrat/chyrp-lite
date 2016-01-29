@@ -267,7 +267,7 @@
 
     # File: Twig
     # Chyrp's templating engine.
-    require_once INCLUDES_DIR.DIR."lib".DIR."twig".DIR."Autoloader.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."Twig".DIR."Autoloader.php";
 
     # File: Route
     # See Also:
