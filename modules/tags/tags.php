@@ -636,7 +636,7 @@
             if (!function_exists("mb_strtoupper"))
                 return substr_compare(strtoupper($str1), strtoupper($str2), 0);
 
-            if (null === $encoding)
+            if (empty($encoding))
                 $encoding = mb_internal_encoding();
 
             return substr_compare(mb_strtoupper($str1, $encoding), mb_strtoupper($str2, $encoding), 0);
