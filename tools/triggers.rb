@@ -4,7 +4,7 @@ require "find"
 require "optparse"
 
 OPTIONS = {
-  :exclude => [".git", "lib", "themes", "config.json.php"]
+  :exclude => [".git", "lib", "themes"]
 }
 
 ARGV.options do |o|
@@ -51,7 +51,7 @@ class Triggers
         next unless path =~ /\.(php|twig)/
         @files << [cleaned, path] if File.read(path) =~ /(\$trigger|Trigger::current\(\))->call\("[^"]+"(.*?)\)/
         @files << [cleaned, path] if File.read(path) =~ /(\$trigger|Trigger::current\(\))->filter\(([^,]+), ?"[^"]+"(.*?)\)/
-        @files << [cleaned, path] if File.read(path) =~ /\$\{ ?trigger\.call\("[^"]+"(, ?(.+))?\) ?\}/
+        @files << [cleaned, path] if File.read(path) =~ /\{\{ ?trigger\.call\("[^"]+"(, ?(.+))?\) ?\}\}/
       end
     end
   end
@@ -95,7 +95,7 @@ class Triggers
   end
 
   def scan_twig_call(text, line, filename, clean_filename)
-    text.gsub(/\$\{ ?trigger\.call\("([^"]+)"(, ?(.+))?\) ?\}/) do
+    text.gsub(/\{\{ ?trigger\.call\("([^"]+)"(, ?(.+))?\) ?\}\}/) do
       if @triggers[:calls][$1].nil?
         @triggers[:calls][$1] = { :places => [clean_filename + ":" + line.to_s],
                                   :arguments => $3 }

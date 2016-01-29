@@ -1,66 +1,82 @@
 {% extends "layout.twig" %}
 
-{% block title %}${ "Manage Groups" | translate }{% endblock %}
+{% block title %}{{ "Manage Groups" | translate }}{% endblock %}
 
 {% block content %}
-            <form class="filters" action="index.php" method="get" accept-charset="utf-8">
-                <fieldset>
-                    <input type="hidden" name="action" value="manage_groups">
-                    <div role="search" class="filter_item">
-                        <h3>${ "Search all groups for user&hellip;" | translate }</h3>
-                        <input class="text" type="text" name="search" value="${ GET.search | escape }" id="search">
-                        <button type="submit">${ "Search" | translate }</button>
-                        {% if visitor.group.can("add_group") %}
-                        <a href="{% admin "new_group" %}" class="button yay">
-                            <img src="$theme_url/images/icons/add.svg" alt="add"> ${ "New Group" | translate }
-                        </a>
-                        {% endif %}
-                    </div>
-                </fieldset>
-            </form>
-            <h2>${ "Groups" | translate }</h2>
-            <table border="0" cellspacing="0" cellpadding="0" class="wide">
-                <thead>
-                    <tr class="head">
-                        <th class="group_name">${ "Group" | translate }</th>
-                        <th class="group_size">${ "Members" | translate }</th>
-                        <th class="group_default">${ "Default?" | translate }</th>
-                        <th class="group_guest">${ "Guests?" | translate }</th>
-${ trigger.call("manage_groups_column_header") }
-                        <th class="controls" colspan="2">${ "Controls" | translate }</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for group in groups.paginated %}
-                    <tr id="user_$user.id" class="user">
-                        <td class="group_name main">
-                            ${ group.name | escape }
-                        </td>
-                        <td class="group_size">
-                            <a href="${ route.url('/admin/?action=manage_users&query=group%3A'~group.name) }">${ group.size | escape }</a>
-                        </td>
-                        <td class="group_default">
-                        {% if group.id == site.default_group %}
-                            <img class="emblem" src="$theme_url/images/icons/success.svg" alt="${ "yes" | translate }">
-                        {% endif %}
-                        </td>
-                        <td class="group_guest">
-                        {% if group.id == site.guest_group %}
-                            <img class="emblem" src="$theme_url/images/icons/success.svg" alt="${ "yes" | translate }">
-                        {% endif %}
-                        </td>
-${ trigger.call("manage_groups_column", user) }
-                        <td class="controls">${ group.edit_link('<img src="'~ theme_url ~'/images/icons/edit.svg" alt="'~ ("edit" | translate) ~'">') }</td>
-                        <td class="controls">${ group.delete_link('<img src="'~ theme_url ~'/images/icons/delete.svg" alt="'~ ("delete" | translate) ~'">') }</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            {% if groups.paginated and groups.pages > 1 %}
-            <div class="pagination">
-                <span class="pages">${ "Page %d of %s" | translate | format(groups.page, groups.final_link(groups.pages)) }</span>
-                $groups.prev_link
-                $groups.next_link
-            </div>
-            {% endif %}
+<form class="filters" action="index.php" method="get" accept-charset="utf-8">
+<fieldset>
+<input type="hidden" name="action" value="manage_groups">
+<div role="search" class="filter_item">
+<h3>{{ "Search all groups for user&hellip;" | translate }}</h3>
+<input class="text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true) : '' }}" id="search">
+<button type="submit">{{ "Search" | translate }}</button>
+{% if visitor.group.can("add_group") %}
+<a href="{{ admin_url('new_group') }}" class="button yay">
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add"> {{ "New Group" | translate }}
+</a>
+{% endif %}
+</div>
+</fieldset>
+</form>
+<h2>{{ GET.search is defined ? "Search Results" | translate : "Groups" | translate }}</h2>
+<table>
+<thead>
+<tr class="head">
+<th class="group_name">{{ "Group" | translate }}</th>
+<th class="group_size">{{ "Members" | translate }}</th>
+<th class="group_default">{{ "Default?" | translate }}</th>
+<th class="group_guest">{{ "Guests?" | translate }}</th>
+{{ trigger.call("manage_groups_column_header") }}
+<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+{% for group in groups.paginated %}
+<tr id="group_{{ group.id }}" class="group">
+<td class="group_name main">
+{{ group.name | fix }}
+</td>
+<td class="group_size">
+<a href="{{ admin_url('manage_users', {'query': 'group:' ~ group.name}) }}">{{ group.size | fix }}</a>
+</td>
+<td class="group_default">
+{% if group.id == site.default_group %}
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{% else %}
+&nbsp;
+{% endif %}
+</td>
+<td class="group_guest">
+{% if group.id == site.guest_group %}
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{% else %}
+&nbsp;
+{% endif %}
+</td>
+{{ trigger.call("manage_groups_column", groups) }}
+{% if group.editable() or group.deletable() %}
+{% if group.editable() %}
+<td class="controls"{{ not group.deletable() ? ' colspan="2"' : '' }}>
+{{ group.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+</td>
+{% endif %}
+{% if group.deletable() %}
+<td class="controls"{{ not group.editable() ? ' colspan="2"' : '' }}>
+{{ group.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+</td>
+{% endif %}
+{% else %}
+<td class="controls" colspan="2">&nbsp;</td>
+{% endif %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% if groups.paginated is not empty and groups.pages > 1 %}
+<div class="pagination">
+<span class="pages">{{ "Page %d of %s" | translate | format(groups.page, groups.final_link(groups.pages)) }}</span>
+{{ groups.prev_link }}
+{{ groups.next_link }}
+</div>
+{% endif %}
 {% endblock %}

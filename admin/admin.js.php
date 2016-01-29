@@ -15,7 +15,7 @@ $(function() {
     if (Route.action == "edit_user")
         Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
 
-    // Open help text in an overlay.
+    // Open help text in an iframe.
     Help.init();
 
     // Interactive behaviour.
@@ -37,14 +37,17 @@ var Route = {
     action: "<?php echo fix($_GET['action']); ?>"
 }
 var Site = {
-    url: "<?php echo $config->chyrp_url; ?>",
-    key: "<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>",
-    ajax: <?php if (!isset($config->enable_ajax) or $config->enable_ajax) echo("true\n"); else echo("false\n"); ?>
+    url: '<?php echo $config->chyrp_url; ?>',
+    key: '<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>',
+    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
+}
+var Theme = {
+    preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?> 
 }
 function toggle_all() {
     var all_checked = true;
 
-    $(document.createElement("label")).attr("for", "toggle").text("<?php echo __("Toggle All", "theme"); ?>").appendTo("#toggler");
+    $(document.createElement("label")).attr("for", "toggle").text('<?php echo __("Toggle All", "theme"); ?>').appendTo("#toggler");
     $(document.createElement("input")).attr({
         "type": "checkbox",
         "name": "toggle",
@@ -104,9 +107,9 @@ function toggle_all() {
 function toggle_options() {
     if ($("#more_options").size()) {
         if (Cookie.get("show_more_options") == "true")
-            var more_options_text = "<?php echo __("&uarr; Fewer Options", "theme"); ?>";
+            var more_options_text = '<?php echo __("&uarr; Fewer Options", "theme"); ?>';
         else
-            var more_options_text = "<?php echo __("More Options &darr;", "theme"); ?>";
+            var more_options_text = '<?php echo __("More Options &darr;", "theme"); ?>';
 
         $(document.createElement("a")).attr({
             "id": "more_options_link",
@@ -120,10 +123,10 @@ function toggle_options() {
             e.preventDefault();
 
             if ($("#more_options").css("display") == "none") {
-                $(this).empty().append("<?php echo __("&uarr; Fewer Options", "theme"); ?>");
+                $(this).empty().append('<?php echo __("&uarr; Fewer Options", "theme"); ?>');
                 Cookie.set("show_more_options", "true", 30);
             } else {
-                $(this).empty().append("<?php echo __("More Options &darr;", "theme"); ?>");
+                $(this).empty().append('<?php echo __("More Options &darr;", "theme"); ?>');
                 Cookie.destroy("show_more_options");
             }
             $("#more_options").slideToggle();
@@ -141,7 +144,7 @@ function toggle_correspondence() {
     });
 }
 function validate_slug() {
-    $("input#slug").keyup(function(e) {
+    $("input[name='slug']").keyup(function(e) {
         if (/^([a-zA-Z0-9\-\._:]*)$/.test($(this).val()))
             $(this).removeClass("error");
         else
@@ -150,20 +153,20 @@ function validate_slug() {
 }
 function confirm_edit_group(msg) {
     $("form.confirm").submit(function(e) {
-        if (!confirm("<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>"))
+        if (!confirm('<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>'))
             e.preventDefault();
     });
 }
 function confirm_delete_group(msg) {
     $("form.confirm").submit(function(e) {
-        if (!confirm("<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>"))
+        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>'))
             e.preventDefault();
     });
 }
 var Passwords = {
     check: function(selector_primary, selector_confirm) {
         $(selector_primary).keyup(function(e) {
-            if (passwordStrength($(this).val()) < 75)
+            if (passwordStrength($(this).val()) < 100)
                 $(this).removeClass("strong");
             else
                 $(this).addClass("strong");
@@ -171,7 +174,7 @@ var Passwords = {
         $(selector_primary).parents("form").on("submit", function(e) {
             if ($(selector_primary).val() !== $(selector_confirm).val()) {
                 e.preventDefault();
-                alert("<?php echo __("Passwords do not match."); ?>")
+                alert('<?php echo __("Passwords do not match."); ?>');
             }
         });
     }
@@ -186,24 +189,17 @@ var Help = {
     show: function(href) {
         $("<div>", {
             "role": "region",
-        }).addClass("overlay_background").append(
-            [$("<div>", {
-                "role": "contentinfo",
-                "aria-label": "<?php echo __("Help", "theme"); ?>"
-            }).addClass("overlay_foreground").load(href + "&ajax=1", null, function(response) {
-                if (isError(response))
-                    $(this).text("<?php echo __("Oops! Something went wrong on this web page."); ?>");
-
-                $(this).find("a").each(function() {
-                    $(this).attr("target","_blank"); // Force links to spawn a new viewport.
-                })
-            }),
+        }).addClass("iframe_background").append(
+            [$("<iframe>", {
+                "src": href,
+                "aria-label": '<?php echo __("Help", "theme"); ?>'
+            }).addClass("iframe_foreground"),
             $("<img>", {
-                "src": Site.url + "/admin/images/icons/close.svg",
-                "alt": "<?php echo __("Close", "theme"); ?>",
-                "role": "button",
-                "aria-label": "<?php echo __("Close", "theme"); ?>"
-            }).addClass("overlay_close_gadget").click(function() {
+                "src": Site.url + '/admin/images/icons/close.svg',
+                "alt": '<?php echo __("Close", "theme"); ?>',
+                "role": 'button',
+                "aria-label": '<?php echo __("Close", "theme"); ?>'
+            }).addClass("iframe_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
         ).click(function(e) {
@@ -218,22 +214,23 @@ var Write = {
             Write.sort_feathers();
 
         // Insert buttons for ajax previews.
-        $("*[data-preview]").each(function() {
-            $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
-                $("<img>", {
-                    "src": Site.url + "/admin/images/icons/magnifier.svg",
-                    "alt": "(<?php echo __("Preview this field", "theme"); ?>)",
-                    "title": "<?php echo __("Preview this field", "theme"); ?>",
-                }).addClass("emblem preview").click(function(e) {
-                    var content = $("#" + $(this).parent().attr("data-target")).val();
-                    var filter = $("#" + $(this).parent().attr("data-target")).attr("data-preview");
-                    if (content != "") {
-                        e.preventDefault();
-                        Write.ajax_previews(content, filter);
-                    }
-                })
-            );
-        });
+        if (Theme.preview)
+            $("*[data-preview]").each(function() {
+                $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
+                    $("<img>", {
+                        "src": Site.url + '/admin/images/icons/magnifier.svg',
+                        "alt": '(<?php echo __("Preview this field", "theme"); ?>)',
+                        "title": '<?php echo __("Preview this field", "theme"); ?>',
+                    }).addClass("emblem preview").click(function(e) {
+                        var content = $("#" + $(this).parent().attr("data-target")).val();
+                        var filter = $("#" + $(this).parent().attr("data-target")).attr("data-preview");
+                        if (content != "") {
+                            e.preventDefault();
+                            Write.ajax_previews(content, filter);
+                        }
+                    })
+                );
+            });
     },
     sort_feathers: function() {
         // Make the selected tab the first tab.
@@ -251,36 +248,57 @@ var Write = {
         });
     },
     ajax_previews: function(content, filter) {
+        var uid = Math.floor(Math.random()*1000000000000).toString(16);
+
+        // Build a form targeting a named iframe.
+        $("<form>", {
+            "id": uid,
+            "action": Site.url + "/includes/ajax.php",
+            "method": "post",
+            "accept-charset": "utf-8",
+            "target": uid,
+            "style": "display: none;"
+        }).append(
+            [$("<input>", {
+                "type": "hidden",
+                "name": "action",
+                "value": "preview"
+            }),
+            $("<input>", {
+                "type": "hidden",
+                "name": "filter",
+                "value": filter
+            }),
+            $("<input>", {
+                "type": "hidden",
+                "name": "content",
+                "value": content
+            })]
+        ).insertAfter("#content");
+
+        // Build and display the named iframe.
         $("<div>", {
             "role": "region",
-        }).addClass("overlay_background").append(
-            [$("<div>", {
-                "role": "contentinfo",
-                "aria-label": "<?php echo __("Preview", "theme"); ?>"
-            }).addClass("overlay_foreground").load(Site.url + "/includes/ajax.php", {
-                    action: "preview",
-                    content: content,
-                    filter: filter
-            }, function(response) {
-                if (isError(response))
-                    $(this).text("<?php echo __("Oops! Something went wrong on this web page."); ?>");
-
-                $(this).find("a").each(function() {
-                    $(this).attr("target","_blank"); // Force links to spawn a new viewport.
-                })
-            }),
+        }).addClass("iframe_background").append(
+            [$("<iframe>", {
+                "name": uid,
+                "aria-label": '<?php echo __("Preview", "theme"); ?>'
+            }).addClass("iframe_foreground"),
             $("<img>", {
-                "src": Site.url + "/admin/images/icons/close.svg",
-                "alt": "<?php echo __("Close", "theme"); ?>",
-                "role": "button",
-                "aria-label": "<?php echo __("Close", "theme"); ?>"
-            }).addClass("overlay_close_gadget").click(function() {
+                "src": Site.url + '/admin/images/icons/close.svg',
+                "alt": '<?php echo __("Close", "theme"); ?>',
+                "role": 'button',
+                "aria-label": '<?php echo __("Close", "theme"); ?>'
+            }).addClass("iframe_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
         ).click(function(e) {
             if (e.target === e.currentTarget)
                 $(this).remove();
         }).insertAfter("#content");
+
+        // Submit the form and destroy it immediately.
+        $("#" + uid).submit().remove();
     }
 }
 var Extend = {
@@ -325,6 +343,7 @@ var Extend = {
 
             for (i = 0; i < classes.length; i++) {
                 var conflict = classes[i].replace("conflict_", "module_");
+
                 if ($("#"+conflict).parent().attr("id") == "modules_enabled") {
                     $(this).addClass("error");
                 }
@@ -350,6 +369,7 @@ var Extend = {
 
             for (i = 0; i < classes.length; i++) {
                 var dependency = classes[i].replace("needs_", "module_");
+
                 if ($("#"+dependency).parent().attr("id") == "modules_disabled") {
                     $(this).addClass("error");
                 }
@@ -414,16 +434,16 @@ var Extend = {
                 },
                 error: function() {
                     if (Extend.action == "enable")
-                        alert("<?php echo __("There was an error enabling the extension.", "theme"); ?>");
+                        alert('<?php echo __("There was an error enabling the extension.", "theme"); ?>');
                     else
-                        alert("<?php echo __("There was an error disabling the extension.", "theme"); ?>");
+                        alert('<?php echo __("There was an error disabling the extension.", "theme"); ?>');
                 }
             })
         }, "text").fail(Extend.panic);
     },
     panic: function() {
         Extend.failed = true;
-        alert("<?php echo __("Oops! Something went wrong on this web page."); ?>");
+        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
     }
 }
 <?php $trigger->call("admin_javascript"); ?>

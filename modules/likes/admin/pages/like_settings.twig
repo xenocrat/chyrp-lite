@@ -1,0 +1,33 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Like Settings" | translate("likes") }}{% endblock %}
+
+{% block content %}
+<form id="like_settings" class="split" action="{{ admin_url('like_settings') }}" method="post">
+<fieldset>
+<p>
+<label for="likeImage">{{ "Like Button Image" | translate("likes") }}</label>
+<select name="likeImage" onchange="$('#likeImage_preview').attr('src', $(this).val());">
+{% for key, val in modules['likes'].get_like_images() %}
+<option value="{{ val }}"{{ val | selected(site.module_like.likeImage) }}>{{ key | split(".") | first | camelize }}</option>
+{% endfor %}
+</select>
+<img id="likeImage_preview" src="{{ site.module_like.likeImage }}" alt="{{ 'Likes Image' | translate('likes') }}">
+</p>
+<p>
+<label for="likeWithText">{{ "Like With Text" | translate("likes") }}</label>
+<input type="checkbox" class="checkbox" name="likeWithText"{{ site.module_like.likeWithText | checked }}>
+<small>{{ "Enables text descriptions in like/unlike links." | translate("likes") }}</small>
+</p>
+<p>
+<label for="showOnFront">{{ "Show On Front Page" | translate("likes") }}</label>
+<input type="checkbox" class="checkbox" name="showOnFront"{{ site.module_like.showOnFront | checked }}>
+<small>{{ "Enables like functionality on front page posts." | translate("likes") }}</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

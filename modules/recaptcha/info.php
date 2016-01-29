@@ -2,7 +2,7 @@
 return array(
     "name"          => __("reCAPTCHA", "recaptcha"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.2,
+    "version"       => 1.3,
     "description"   => __("Use reCAPTCHA to prevent spam.", "recaptcha"),
     "author"        => array(
         "name"      => "Chyrp Team",

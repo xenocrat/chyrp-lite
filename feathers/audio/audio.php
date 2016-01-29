@@ -9,7 +9,8 @@
             $this->setField(array("attr" => "audio",
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
-                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "audio")));
+                                  "multiple" => false,
+                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "audio")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
@@ -65,7 +66,10 @@
             if ($post->feather != "audio")
                 return;
 
-            unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
+            $filepath = uploaded($post->filename, false);
+
+            if (file_exists($filepath))
+                unlink($filepath);
         }
 
         public function filter_post($post) {
@@ -116,8 +120,8 @@
                 return $trigger->call("audio_player", $filename, $params, $post);
 
             $player = "\n".'<audio controls>';
-            $player.= "\n\t".__("Your web browser does not support the <code>audio</code> element.", "audio");
-            $player.= "\n\t".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
+            $player.= "\n".__("Your web browser does not support the <code>audio</code> element.", "audio");
+            $player.= "\n".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
             $player.= "\n".'</audio>'."\n";
 
             return $player;

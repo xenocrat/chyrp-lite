@@ -1,6 +1,6 @@
 var ChyrpTags = {
     init: function() {
-        $("form #tags").on("keyup", ChyrpTags.scan).trigger("keyup");
+        $("form input[name='tags']").on("keyup", ChyrpTags.scan).trigger("keyup");
         $("form span.tags_select a").on("click", ChyrpTags.add);
         ChyrpTags.watch();
     },
@@ -12,7 +12,7 @@ var ChyrpTags = {
                 mutations.forEach(function(mutation) {
                     for (var i = 0; i < mutation.addedNodes.length; ++i) {
                         var item = mutation.addedNodes[i];
-                        $(item).find("#tags").on("keyup", ChyrpTags.scan).trigger("keyup");
+                        $(item).find("input[name='tags']").on("keyup", ChyrpTags.scan).trigger("keyup");
                         $(item).find("span.tags_select a").on("click", ChyrpTags.add);
                     }
                 });
@@ -33,7 +33,7 @@ var ChyrpTags = {
     },
     add: function(e) {
         e.preventDefault();
-        var name = $(e.target).text(), tags = $(e.target).parent().siblings("#tags");
+        var name = $(e.target).text(), tags = $(e.target).parent().siblings("input[name='tags']");
 
         if ($(tags).val().match("(, |^)" + name + "(, |$)")) {
             regexp = new RegExp("(, |^)" + name + "(, |$)", "g");

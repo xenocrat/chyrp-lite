@@ -35,15 +35,19 @@
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            $cache = (is_writable(INCLUDES_DIR.DIR."caches") and
-                      !DEBUG and
-                      !PREVIEWING and
-                      !defined('CACHE_TWIG') or CACHE_TWIG);
+            $cache = (is_writable(CACHES_DIR) and !PREVIEWING and (!DEBUG or CACHE_TWIG));
 
-            if (defined('THEME_DIR'))
-                $this->twig = new Twig_Loader(THEME_DIR,
-                                              $cache ? INCLUDES_DIR.DIR."caches" : null,
-                                              "UTF-8");
+            if (defined('THEME_DIR')) {
+                $loader = new Twig_Loader_Filesystem(THEME_DIR);
+                $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
+                                                                  "strict_variables" => (DEBUG) ? true : false,
+                                                                  "charset" => "UTF-8",
+                                                                  "cache" => ($cache) ? CACHES_DIR : false,
+                                                                  "autoescape" => false));
+                $this->twig->addExtension(new Leaf());
+                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+            }
         }
 
         /**
@@ -268,6 +272,7 @@
 
                 $archives = array();
                 $archive_hierarchy = array();
+
                 while ($time = $timestamps->fetchObject()) {
                     $year = mktime(0, 0, 0, 1, 0, $time->year);
                     $month = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
@@ -295,7 +300,11 @@
                     error(__("Error"), __("Please enter a valid year and month."));
 
                 $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
-                $depth = isset($_GET['day']) ? "day" : (isset($_GET['month']) ? "month" : (isset($_GET['year']) ? "year" : ""));
+
+                $depth = isset($_GET['day']) ?
+                    "day" : (isset($_GET['month']) ?
+                        "month" : (isset($_GET['year']) ?
+                            "year" : ""));
 
                 $this->display("pages".DIR."archive",
                                array("posts" => $posts,
@@ -333,6 +342,7 @@
                                         "params" => $params));
 
             $ids = array();
+
             foreach ($results[0] as $result)
                 $ids[] = $result["id"];
 
@@ -397,10 +407,11 @@
                 Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
 
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
-                Flash::message(_f("This post is only visible by the following groups: %s.", $post->groups()));
+                Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
 
             $this->display(array("pages".DIR."view", "pages".DIR."index"),
-                           array("post" => $post, "posts" => array($post)),
+                           array("post" => $post,
+                                 "posts" => array($post)),
                            $post->title());
         }
 
@@ -644,8 +655,7 @@
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
-                                    User::hashPassword($_POST['new_password1']) :
-                                    $visitor->password ;
+                        User::hashPassword($_POST['new_password1']) : $visitor->password ;
 
                     $visitor->update($visitor->login,
                                      $password,
@@ -752,16 +762,18 @@
          * If "posts" is in the context and the visitor requested a feed, they will be served.
          *
          * Parameters:
-         *     $file - The theme file to display (relative to THEME_DIR).
+         *     $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
          *     $context - The context for the file.
          *     $title - The title for the page.
          */
-        public function display($file, $context = array(), $title = "") {
-            if (is_array($file))
-                for ($i = 0; $i < count($file); $i++) {
-                    if (file_exists(THEME_DIR.DIR.$file[$i].".twig") or ($i + 1) == count($file))
-                        return $this->display($file[$i], $context, $title);
-                }
+        public function display($template, $context = array(), $title = "") {
+            if (is_array($template)) {
+                foreach ($template as $try)
+                    if (file_exists(THEME_DIR.DIR.$try.".twig"))
+                        return $this->display($try, $context, $title);
+
+                error(__("Twig Error"), __("No files exist in the supplied array of fallbacks."), debug_backtrace());
+            }
 
             $this->displayed = true;
 
@@ -779,13 +791,13 @@
 
             $this->context = array_merge($context, $this->context);
 
-            $visitor = Visitor::current();
             $config = Config::current();
             $theme = Theme::current();
 
             $theme->title = $title;
 
             $this->context["ip"]           = $_SERVER["REMOTE_ADDR"];
+            $this->context["DIR"]          = DIR;
             $this->context["theme"]        = $theme;
             $this->context["flash"]        = Flash::current();
             $this->context["trigger"]      = $trigger;
@@ -793,9 +805,10 @@
             $this->context["feathers"]     = Feathers::$instances;
             $this->context["title"]        = $title;
             $this->context["site"]         = $config;
-            $this->context["visitor"]      = $visitor;
+            $this->context["visitor"]      = Visitor::current();
             $this->context["route"]        = Route::current();
             $this->context["version"]      = CHYRP_VERSION;
+            $this->context["codename"]     = CHYRP_CODENAME;
             $this->context["now"]          = time();
             $this->context["debug"]        = DEBUG;
             $this->context["POST"]         = $_POST;
@@ -806,34 +819,29 @@
             $this->context["visitor"]->logged_in = logged_in();
 
             $this->context["enabled_modules"] = array();
+
             foreach ($config->enabled_modules as $module)
                 $this->context["enabled_modules"][$module] = true;
 
             $context["enabled_feathers"] = array();
+
             foreach ($config->enabled_feathers as $feather)
                 $this->context["enabled_feathers"][$feather] = true;
 
             $this->context["sql_debug"] =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $file)));
+            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
-            if (!isset($_SESSION['cookies_notified']) and $config->cookies_notification) {
+            if ($config->cookies_notification and !isset($_SESSION['cookies_notified']) and !logged_in()) {
                 Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
                 $_SESSION['cookies_notified'] = true;
             }
 
             try {
-                return $this->twig->getTemplate($file.".twig")->display($this->context);
+                return $this->twig->display($template.".twig", $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                $trace = debug_backtrace();
-
-                if (property_exists($e, "filename") and property_exists($e, "lineno")) {
-                    $twig = array("file" => $e->filename, "line" => $e->lineno);
-                    array_unshift($trace, $twig);
-                }
-
-                error(__("Error"), $prettify, $trace);
+                error(__("Twig Error"), $prettify, debug_backtrace());
             }
         }
 
@@ -841,8 +849,8 @@
          * Function: resort
          * Queue a failpage in the event that none of the routes are successful.
          */
-        public function resort($file, $context, $title = null) {
-            $this->fallback = array($file, $context, $title);
+        public function resort($template, $context, $title = null) {
+            $this->fallback = array($template, $context, $title);
             return false;
         }
 

@@ -8,14 +8,18 @@
         # The title for the current page.
         public $title = "";
 
+        # Array: $caches
+        # Query caches for methods.
+        private $caches = array();
+
         /**
          * Function: __construct
-         * Loads the Twig parser into <Theme>, and sets up the theme l10n domain.
+         * Loads the theme's info and l10n domain.
          */
         private function __construct() {
             $config = Config::current();
 
-            # Load the theme translator
+            # Load the theme translator.
             if (file_exists(THEME_DIR.DIR."locale".DIR.$config->locale.".mo"))
                 load_translator("theme", THEME_DIR.DIR."locale".DIR.$config->locale.".mo");
 
@@ -35,87 +39,59 @@
          *     $exclude - Page ID to exclude from the list. Used in the admin area.
          */
         public function pages_list($start = 0, $exclude = null) {
-            if (isset($this->pages_list[$start]))
-                return $this->pages_list[$start];
+            if (isset($this->caches["pages_list"][$start]))
+                return $this->caches["pages_list"][$start];
 
-            $this->linear_children = array();
-            $this->pages_flat = array();
-            $this->children = array();
-            $this->end_tags_for = array();
+            $this->caches["pages"]["flat"] = array();
+            $this->caches["pages"]["children"] = array();
 
-            if ($start and !is_numeric($start))
-                $begin_page = new Page(array("url" => $start));
+            if (!empty($start) and !is_numeric($start)) {
+                $from = new Page(array("url" => $start));
 
-            $start = ($start and !is_numeric($start)) ? $begin_page->id : $start ;
+                if (!$from->no_results)
+                    $start = $from->id;
+                else
+                    $start = (int) $start;
+            }
 
             $where = ADMIN ? array("id not" => $exclude) : array("show_in_list" => true) ;
             $pages = Page::find(array("where" => $where, "order" => "list_order ASC"));
 
             if (empty($pages))
-                return $this->pages_list[$start] = array();
-
-            foreach ($pages as $page)
-                $this->end_tags_for[$page->id] = $this->children[$page->id] = array();
+                return $this->caches["pages_list"][$start] = array();
 
             foreach ($pages as $page)
                 if ($page->parent_id != 0)
-                    $this->children[$page->parent_id][] = $page;
+                    $this->caches["pages"]["children"][$page->parent_id][] = $page;
 
             foreach ($pages as $page)
                 if ((!$start and $page->parent_id == 0) or ($start and $page->id == $start))
                     $this->recurse_pages($page);
 
-            $array = array();
-            foreach ($this->pages_flat as $page) {
-                $array[$page->id]["has_children"] = !empty($this->children[$page->id]);
-
-                if ($array[$page->id]["has_children"])
-                    $this->end_tags_for[$this->get_last_linear_child($page->id)][] = array("</ul>", "</li>");
-
-                $array[$page->id]["end_tags"] =& $this->end_tags_for[$page->id];
-                $array[$page->id]["page"] = $page;
-            }
-
             if (!isset($exclude))
-                return $this->pages_list[$start] = $array;
+                return $this->caches["pages_list"][$start] = $this->caches["pages"]["flat"];
             else
-                return $array;
-        }
-
-        /**
-         * Function: get_last_linear_child
-         * Gets the last linear child of a page.
-         *
-         * Parameters:
-         *     $page - Page to get the last linear child of.
-         *     $origin - Where to start.
-         */
-        public function get_last_linear_child($page, $origin = null) {
-            fallback($origin, $page);
-
-            $this->linear_children[$origin] = $page;
-            foreach ($this->children[$page] as $child)
-                $this->get_last_linear_child($child->id, $origin);
-
-            return $this->linear_children[$origin];
+                return $this->caches["pages"]["flat"];
         }
 
         /**
          * Function: recurse_pages
-         * Prepares the pages into <Theme.$pages_flat>.
+         * Populates the page cache and gives each page @depth@ and @children@ attributes.
          *
          * Parameters:
          *     $page - Page to start recursion at.
          */
-        public function recurse_pages($page) {
+        private function recurse_pages($page) {
             $page->depth = oneof(@$page->depth, 1);
+            $page->children = (isset($this->caches["pages"]["children"][$page->id])) ? true : false ;
 
-            $this->pages_flat[] = $page;
+            $this->caches["pages"]["flat"][] = $page;
 
-            foreach ($this->children[$page->id] as $child) {
-                $child->depth = $page->depth + 1;
-                $this->recurse_pages($child);
-            }
+            if (isset($this->caches["pages"]["children"][$page->id]))
+                foreach ($this->caches["pages"]["children"][$page->id] as $child) {
+                    $child->depth = $page->depth + 1;
+                    $this->recurse_pages($child);
+                }
         }
 
         /**
@@ -131,8 +107,8 @@
          *     The array. Each entry as "month", "year", and "url" values, stored as an array.
          */
         public function archives_list($limit = 0, $order_by = "created_at", $order = "desc") {
-            if (isset($this->archives_list["$limit,$order_by,$order"]))
-                return $this->archives_list["$limit,$order_by,$order"];
+            if (isset($this->caches["archives_list"]["$limit,$order_by,$order"]))
+                return $this->caches["archives_list"]["$limit,$order_by,$order"];
 
             $sql = SQL::current();
             $dates = $sql->select("posts",
@@ -149,6 +125,7 @@
 
             $archives = array();
             $grouped = array();
+
             while ($date = $dates->fetchObject())
                 if (isset($grouped[$date->month." ".$date->year]))
                     $archives[$grouped[$date->month." ".$date->year]]["count"]++;
@@ -161,7 +138,7 @@
                                         "count" => $date->posts);
                 }
 
-            return $this->archives_list["$limit,$order_by,$order"] = $archives;
+            return $this->caches["archives_list"]["$limit,$order_by,$order"] = $archives;
         }
 
         /**
@@ -172,8 +149,8 @@
          *     $limit - Number of posts to list
          */
         public function recent_posts($limit = 5) {
-            if (isset($this->recent_posts["$limit"]))
-                return $this->recent_posts["$limit"];
+            if (isset($this->caches["recent_posts"]["$limit"]))
+                return $this->caches["recent_posts"]["$limit"];
 
             $results = Post::find(array("placeholders" => true,
                                         "where" => array("status" => "public"),
@@ -184,7 +161,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->recent_posts["$limit"] = $posts;
+            return $this->caches["recent_posts"]["$limit"] = $posts;
         }
 
         /**
@@ -199,8 +176,8 @@
             if ($post->no_results)
                 return;
 
-            if (isset($this->related_posts["$post->id"]["$limit"]))
-                return $this->related_posts["$post->id"]["$limit"];
+            if (isset($this->caches["related_posts"]["$post->id"]["$limit"]))
+                return $this->caches["related_posts"]["$post->id"]["$limit"];
 
             $ids = array();
 
@@ -219,7 +196,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->related_posts["$post->id"]["$limit"] = $posts;
+            return $this->caches["related_posts"]["$post->id"]["$limit"] = $posts;
         }
 
         /**

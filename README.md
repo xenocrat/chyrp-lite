@@ -65,7 +65,7 @@ You can install Chyrp Lite in four steps:
 1. If using MySQL, create a MySQL database with a username and password.
 2. Download the [latest release](https://github.com/xenocrat/chyrp-lite/releases), unzip, and upload to your web server.
 3. Open your web browser and navigate to where you uploaded Chyrp Lite.
-4. Follow through the installer at [install.php](install.php).
+4. Run the installation process by visiting [install.php](install.php) in your web browser.
 
 That's it! Chyrp Lite will be up and running and ready for you to use.
 
@@ -74,10 +74,10 @@ Chyrp Lite will tell you when a new version is available. You can update in six 
 
 1. __Backup your database before proceeding!__
 2. Download the latest version of Chyrp Lite.
-3. Copy your config file from `/includes/config.json.php` to somewhere safe.
-4. Overwrite your current Chyrp installation files with the new ones, making sure to retain your `/uploads/` folder.
-5. Restore your config file to `/includes/`.
-6. Run the upgrade process by navigating to [upgrade.php](upgrade.php).
+3. Copy your config file from _includes/config.json.php_ to somewhere safe.
+4. Overwrite your current version with the new one, making sure to retain your _uploads_ folder.
+5. Restore your config file to _includes_.
+6. Run the upgrade process by visiting [upgrade.php](upgrade.php) in your web browser.
 
 ## Documentation
 The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation
@@ -93,15 +93,15 @@ Chyrp Lite was created by the following people:
 
 ## License
 
-Chyrp Lite is Copyright 2015 Alex Suraci, Arian Xhezairi,
+Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
 Daniel Pimley, and other contributors.
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
 files (the "Software"), to deal in the Software without
 restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
+copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the
 Software is furnished to do so, subject to the following
 conditions:
 
@@ -122,9 +122,8 @@ copyright holders shall not be used in advertising or otherwise
 to promote the sale, use or other dealings in this Software
 without prior written authorization.
 
-Twig is Copyright 2008 Armin Ronacher,
-distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php)
-with portions distributed under the [GNU General Public License v1.0](https://gnu.org/licenses/old-licenses/gpl-1.0.txt).
+Twig is Copyright 2009-2014 the Twig Team,
+distributed under the [new BSD License](https://raw.githubusercontent.com/twigphp/Twig/master/LICENSE).
 jQuery is Copyright jQuery Foundation and other contributors,
 distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).
 Parsedown is Copyright 2013 Emanuil Rusev,
@@ -139,8 +138,6 @@ distributed under the [Hack Open Font License](https://raw.githubusercontent.com
 PHP-gettext is Copyright 2003-2009 Danilo Segan, Copyright 2005 Nico Kaiser,
 distributed under the [GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
 The Incutio XML-RPC Library is Copyright 2010 Simon Willison,
-distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php).
-zip.php is Copyright phpMyAdmin,
-distributed under the [GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
+distributed under the [new BSD License](http://www.opensource.org/licenses/bsd-license.php).
 Akismet.php is Copyright Alex Potsides,
 distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php BSD License).

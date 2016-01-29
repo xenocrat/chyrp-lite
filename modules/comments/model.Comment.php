@@ -290,6 +290,7 @@
 
         static function user_can($post) {
             $visitor = Visitor::current();
+            
             if (!$visitor->group->can("add_comment"))
                 return false;
 

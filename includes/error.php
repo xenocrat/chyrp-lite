@@ -37,6 +37,9 @@
     function error_snitcher($errno, $message, $file, $line) {
         global $errors;
 
+        if (error_reporting() === 0)
+            return true; # Error suppressed by @ operator.
+
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
@@ -89,10 +92,12 @@
 
         # Attempt to set headers to sane values.
         if (!headers_sent()) {
-            header($_SERVER["SERVER_PROTOCOL"]." 200 OK");
             header("Content-type: text/html; charset=UTF-8");
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+
+            if (!empty($backtrace))
+                header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
         }
 
         # Report in plain text for the automated tester.
@@ -107,24 +112,25 @@
             !function_exists("logged_in") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
-            !property_exists(Config::current(), "chyrp_url") or
-            empty(Config::current()->chyrp_url))
+            !property_exists(Config::current(), "url") or
+            !property_exists(Config::current(), "chyrp_url"))
             exit("<!DOCTYPE html>\n<h1>ERROR:</h1>\n<p>".$body."</p>");
 
         $config = Config::current();
-        $site = $config->chyrp_url;
+        $url = $config->url;
+        $chyrp_url = $config->chyrp_url;
+
+        # Validate title and body text.
+        $title = oneof($title, __("Error"));
+        $body = oneof($body, __("An unspecified error has occurred."));
 
         # Report with backtrace and magic words for JavaScript.
         if (AJAX) {
             foreach ($backtrace as $trace)
                 $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
 
-            exit($body."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
+            exit($title.": ".$body."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
         }
-
-        # Validate title and body text.
-        $title = oneof($title, __("Error"));
-        $body = oneof($body, __("An unspecified error has occurred."));
 
         # Display the error.
 ?>
@@ -137,49 +143,49 @@
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Regular.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Semibold.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Semibold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-Italic.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $site; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('<?php echo $site; ?>/fonts/Hack-Regular.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('<?php echo $site; ?>/fonts/Hack-Bold.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Bold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('<?php echo $site; ?>/fonts/Hack-Oblique.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Oblique.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('<?php echo $site; ?>/fonts/Hack-BoldOblique.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-BoldOblique.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -188,7 +194,7 @@
                 background-color: #4f4f4f;
             }
             html {
-                font-size: 16px;
+                font-size: 14px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
@@ -198,7 +204,7 @@
                 border: 0em;
             }
             body {
-                font-size: 14px;
+                font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
                 color: #4a4747;
@@ -234,9 +240,17 @@
                 padding: 2px;
                 color: #4f4f4f;
             }
+            strong {
+                font-weight: normal;
+                color: #f00;
+            }
             ul, ol {
                 margin: 0em 0em 2em 2em;
                 list-style-position: outside;
+            }
+            ul:last-child,
+            ol:last-child {
+                margin-bottom: 0em;
             }
             ol.backtrace {
                 margin-top: 0.5em;
@@ -292,6 +306,12 @@
                 border-color: #1e57ba;
                 outline: none;
             }
+            p {
+                margin-bottom: 1em;
+            }
+            p:last-child, p:empty {
+                margin-bottom: 0em
+            }
         </style>
     </head>
     <body>
@@ -308,7 +328,7 @@
                 </ol>
             <?php endif; ?>
             <?php if (!logged_in() and ADMIN): ?>
-                <a href="<?php echo $site; ?>/?action=login" class="big login"><?php echo __("Log in"); ?></a>
+                <a href="<?php echo $url; ?>/?action=login" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
             </div>
         </div>

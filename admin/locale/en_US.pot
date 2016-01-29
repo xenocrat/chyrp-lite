@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-23 17:14+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,67 +17,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:47
+#: admin/admin.js.php:50
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:107
-#: admin/admin.js.php:123
+#: admin/admin.js.php:110
+#: admin/admin.js.php:126
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:109
-#: admin/admin.js.php:126
+#: admin/admin.js.php:112
+#: admin/admin.js.php:129
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:153
+#: admin/admin.js.php:156
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: admin/admin.js.php:159
+#: admin/admin.js.php:162
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:192
+#: admin/admin.js.php:195
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:203
-#: admin/admin.js.php:205
-#: admin/admin.js.php:274
-#: admin/admin.js.php:276
+#: admin/admin.js.php:199
+#: admin/admin.js.php:201
+#: admin/admin.js.php:289
+#: admin/admin.js.php:291
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:225
-#: admin/admin.js.php:226
+#: admin/admin.js.php:222
+#: admin/admin.js.php:223
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:259
+#: admin/admin.js.php:285
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:417
+#: admin/admin.js.php:437
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:419
+#: admin/admin.js.php:439
 msgid "There was an error disabling the extension."
 msgstr ""
 
-#: admin/layout.twig:57
-msgid "Chyrp loves you."
+#: admin/layout.twig:58
+msgid 'Chyrp loves you.'
 msgstr ""
 
-#: admin/layout.twig:58
+#: admin/layout.twig:59
 #, php-format
 msgid "Chyrp Lite &ldquo;%s&rdquo;"
 msgstr ""
 
-#: admin/layout.twig:59
+#: admin/layout.twig:60
 msgid "Log out"
 msgstr ""
 
@@ -86,7 +86,7 @@ msgid "Content Settings"
 msgstr ""
 
 #: admin/pages/content_settings.twig:9
-msgid "Posts Per Page"
+msgid "Posts Per Blog Page"
 msgstr ""
 
 #: admin/pages/content_settings.twig:13
@@ -94,14 +94,18 @@ msgid "Posts in Feed"
 msgstr ""
 
 #: admin/pages/content_settings.twig:17
-msgid "Feed URL"
+msgid "Items Per Admin Page"
 msgstr ""
 
 #: admin/pages/content_settings.twig:21
+msgid "Feed URL"
+msgstr ""
+
+#: admin/pages/content_settings.twig:24
 msgid "Allows you to set an alternative URL for <code>/feed/</code>."
 msgstr ""
 
-#: admin/pages/content_settings.twig:23
+#: admin/pages/content_settings.twig:24
 msgid "Allows you to set an alternative URL for <code>/?feed</code>."
 msgstr ""
 
@@ -149,22 +153,22 @@ msgstr ""
 msgid "Unicode Emoticons"
 msgstr ""
 
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:65
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:68
+#: admin/pages/content_settings.twig:69
 msgid "Markdown"
 msgstr ""
 
-#: admin/pages/content_settings.twig:71
+#: admin/pages/content_settings.twig:72
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:76
+#: admin/pages/content_settings.twig:77
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
-#: admin/pages/general_settings.twig:67
+#: admin/pages/general_settings.twig:66
 #: admin/pages/route_settings.twig:49
 #: admin/pages/user_settings.twig:45
 msgid "Update"
@@ -209,6 +213,17 @@ msgstr ""
 #: admin/pages/delete_page.twig:3
 #: admin/pages/delete_page.twig:6
 msgid "Delete Page?"
+msgstr ""
+
+#: admin/pages/delete_page.twig:8
+#: admin/pages/delete_post.twig:8
+#: admin/pages/edit_page.twig:3
+#: admin/pages/edit_page.twig:6
+#: admin/pages/edit_post.twig:3
+#: admin/pages/edit_post.twig:6
+#: admin/pages/manage_pages.twig:37
+#: admin/pages/manage_posts.twig:46
+msgid "[Untitled]"
 msgstr ""
 
 #: admin/pages/delete_page.twig:8
@@ -296,18 +311,18 @@ msgid "Editing User &#8220;%s&#8221;"
 msgstr ""
 
 #: admin/pages/edit_user.twig:10
-#: admin/pages/new_user.twig:34
+#: admin/pages/new_user.twig:33
 msgid "Full Name"
 msgstr ""
 
 #: admin/pages/edit_user.twig:14
-#: admin/pages/new_user.twig:38
+#: admin/pages/new_user.twig:37
 msgid "Email"
 msgstr ""
 
 #: admin/pages/edit_user.twig:18
 #: admin/pages/manage_users.twig:31
-#: admin/pages/new_user.twig:42
+#: admin/pages/new_user.twig:41
 msgid "Website"
 msgstr ""
 
@@ -320,7 +335,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:25
 #: admin/pages/manage_users.twig:29
 #: admin/pages/new_user.twig:15
-#: admin/partials/post_fields.twig:66
+#: admin/partials/post_fields.twig:68
 msgid "Group"
 msgstr ""
 
@@ -343,7 +358,7 @@ msgid "What would you like to export?"
 msgstr ""
 
 #: admin/pages/export.twig:10
-#: admin/pages/manage_posts.twig:28
+#: admin/pages/manage_posts.twig:30
 msgid "Posts"
 msgstr ""
 
@@ -351,7 +366,7 @@ msgstr ""
 #: admin/pages/export.twig:18
 #: admin/pages/export.twig:24
 #: admin/pages/export.twig:30
-msgid "filter (optional)"
+msgid 'filter (optional)'
 msgstr ""
 
 #: admin/pages/export.twig:16
@@ -370,7 +385,7 @@ msgid "Users"
 msgstr ""
 
 #: admin/pages/export.twig:33
-msgid "Warning: this also exports the hashed passwords, keep it safe!"
+msgid "Warning: this file will contain the hashed password for each user – keep it safe!"
 msgstr ""
 
 #: admin/pages/feathers.twig:3
@@ -419,7 +434,7 @@ msgid "Chyrp URL"
 msgstr ""
 
 #: admin/pages/general_settings.twig:22
-msgid "Alternate URL"
+msgid "Canonical URL"
 msgstr ""
 
 #: admin/pages/general_settings.twig:23
@@ -448,24 +463,24 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: admin/pages/general_settings.twig:53
+#: admin/pages/general_settings.twig:52
 msgid "Notify visitors about cookies?"
 msgstr ""
 
-#: admin/pages/general_settings.twig:56
+#: admin/pages/general_settings.twig:55
 msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
 msgstr ""
 
-#: admin/pages/general_settings.twig:60
+#: admin/pages/general_settings.twig:59
 msgid "Check for Updates?"
 msgstr ""
 
-#: admin/pages/general_settings.twig:63
+#: admin/pages/general_settings.twig:62
 msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 
 #: admin/pages/import.twig:3
-#: admin/pages/import.twig:36
+#: admin/pages/import.twig:34
 msgid "Import"
 msgstr ""
 
@@ -489,11 +504,11 @@ msgstr ""
 msgid "Users .json File"
 msgstr ""
 
-#: admin/pages/import.twig:27
+#: admin/pages/import.twig:26
 msgid "What URL is used for embedded media?"
 msgstr ""
 
-#: admin/pages/import.twig:32
+#: admin/pages/import.twig:30
 msgid "Usually something like <code>http://example.com/uploads/</code>."
 msgstr ""
 
@@ -514,7 +529,15 @@ msgstr ""
 
 #: admin/pages/manage_groups.twig:15
 #: admin/pages/new_group.twig:3
+#: admin/pages/new_group.twig:6
 msgid "New Group"
+msgstr ""
+
+#: admin/pages/manage_groups.twig:21
+#: admin/pages/manage_pages.twig:19
+#: admin/pages/manage_posts.twig:30
+#: admin/pages/manage_users.twig:24
+msgid "Search Results"
 msgstr ""
 
 #: admin/pages/manage_groups.twig:26
@@ -531,42 +554,36 @@ msgstr ""
 
 #: admin/pages/manage_groups.twig:30
 #: admin/pages/manage_pages.twig:30
-#: admin/pages/manage_posts.twig:37
+#: admin/pages/manage_posts.twig:39
 #: admin/pages/manage_users.twig:33
 msgid "Controls"
 msgstr ""
 
 #: admin/pages/manage_groups.twig:44
-#: admin/pages/manage_groups.twig:49
+#: admin/pages/manage_groups.twig:51
 #: admin/pages/manage_pages.twig:46
-#: admin/pages/manage_pages.twig:51
-msgid "yes"
+#: admin/pages/manage_pages.twig:52
+msgid 'yes'
 msgstr ""
 
-#: admin/pages/manage_groups.twig:53
-#: admin/pages/manage_pages.twig:60
-#: admin/pages/manage_pages.twig:63
-#: admin/pages/manage_posts.twig:57
-#: admin/pages/manage_posts.twig:60
-#: admin/pages/manage_users.twig:57
-#: admin/pages/manage_users.twig:60
-msgid "edit"
-msgstr ""
-
-#: admin/pages/manage_groups.twig:54
-#: admin/pages/manage_pages.twig:61
+#: admin/pages/manage_groups.twig:60
 #: admin/pages/manage_pages.twig:64
-#: admin/pages/manage_posts.twig:58
 #: admin/pages/manage_posts.twig:61
-#: admin/pages/manage_users.twig:58
-#: admin/pages/manage_users.twig:61
-msgid "delete"
+#: admin/pages/manage_users.twig:59
+msgid 'edit'
 msgstr ""
 
-#: admin/pages/manage_groups.twig:61
-#: admin/pages/manage_pages.twig:76
-#: admin/pages/manage_posts.twig:73
-#: admin/pages/manage_users.twig:73
+#: admin/pages/manage_groups.twig:65
+#: admin/pages/manage_pages.twig:69
+#: admin/pages/manage_posts.twig:66
+#: admin/pages/manage_users.twig:64
+msgid 'delete'
+msgstr ""
+
+#: admin/pages/manage_groups.twig:77
+#: admin/pages/manage_pages.twig:85
+#: admin/pages/manage_posts.twig:82
+#: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
 msgstr ""
@@ -581,13 +598,8 @@ msgstr ""
 msgid "Search&hellip;"
 msgstr ""
 
-#: admin/pages/manage_pages.twig:19
-#: admin/pages/manage_posts.twig:28
-msgid "Search Results"
-msgstr ""
-
 #: admin/pages/manage_pages.twig:23
-#: admin/pages/manage_posts.twig:32
+#: admin/pages/manage_posts.twig:34
 #: admin/partials/page_fields.twig:3
 msgid "Title"
 msgstr ""
@@ -609,7 +621,7 @@ msgid "Listed?"
 msgstr ""
 
 #: admin/pages/manage_pages.twig:28
-#: admin/pages/manage_posts.twig:35
+#: admin/pages/manage_posts.twig:37
 msgid "Author"
 msgstr ""
 
@@ -617,9 +629,9 @@ msgstr ""
 msgid "never"
 msgstr ""
 
-#: admin/pages/manage_pages.twig:69
-#: admin/pages/manage_posts.twig:66
-#: admin/pages/manage_users.twig:66
+#: admin/pages/manage_pages.twig:78
+#: admin/pages/manage_posts.twig:75
+#: admin/pages/manage_users.twig:73
 msgid "(none)"
 msgstr ""
 
@@ -627,25 +639,22 @@ msgstr ""
 msgid "Manage Posts"
 msgstr ""
 
-#: admin/pages/manage_posts.twig:18
+#: admin/pages/manage_posts.twig:19
 msgid "Browse by month:"
 msgstr ""
 
-#: admin/pages/manage_posts.twig:20
+#: admin/pages/manage_posts.twig:21
 msgid "[All]"
 msgstr ""
 
-#: admin/pages/manage_posts.twig:33
+#: admin/pages/manage_posts.twig:35
 msgid "Posted"
 msgstr ""
 
-#: admin/pages/manage_posts.twig:34
-#: admin/partials/post_fields.twig:56
+#: admin/pages/manage_posts.twig:36
+#: admin/partials/page_fields.twig:25
+#: admin/partials/post_fields.twig:60
 msgid "Status"
-msgstr ""
-
-#: admin/pages/manage_posts.twig:44
-msgid "(Untitled)"
 msgstr ""
 
 #: admin/pages/manage_users.twig:3
@@ -653,6 +662,7 @@ msgid "Manage Users"
 msgstr ""
 
 #: admin/pages/manage_users.twig:18
+#: admin/pages/new_user.twig:6
 msgid "New User"
 msgstr ""
 
@@ -680,7 +690,7 @@ msgid "Add Group"
 msgstr ""
 
 #: admin/pages/new_user.twig:3
-#: admin/pages/new_user.twig:47
+#: admin/pages/new_user.twig:46
 msgid "Add User"
 msgstr ""
 
@@ -692,7 +702,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: admin/pages/new_user.twig:32
+#: admin/pages/new_user.twig:31
 msgid "Information"
 msgstr ""
 
@@ -837,7 +847,7 @@ msgid "Blog Themes"
 msgstr ""
 
 #: admin/pages/themes.twig:13
-msgid "Selected!"
+msgid 'Selected!'
 msgstr ""
 
 #: admin/pages/themes.twig:22
@@ -900,80 +910,98 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: admin/partials/page_fields.twig:18
-#: admin/partials/post_fields.twig:84
+#: admin/partials/page_fields.twig:19
+#: admin/partials/post_fields.twig:86
 msgid "Slug"
 msgstr ""
 
-#: admin/partials/page_fields.twig:22
-msgid "Parent"
+#: admin/partials/page_fields.twig:28
+#: admin/partials/page_fields.twig:33
+msgid "Public and visible in pages list"
 msgstr ""
 
-#: admin/partials/page_fields.twig:24
-msgid "[None]"
-msgstr ""
-
-#: admin/partials/page_fields.twig:31
-msgid "Show in pages list?"
-msgstr ""
-
-#: admin/partials/page_fields.twig:35
-msgid "Priority in pages list"
-msgstr ""
-
-#: admin/partials/page_fields.twig:52
-msgid "Is this page public?"
-msgstr ""
-
-#: admin/partials/page_fields.twig:65
-#: admin/partials/post_fields.twig:129
-#: admin/partials/post_fields.twig:138
-msgid "Publish"
-msgstr ""
-
-#: admin/partials/page_fields.twig:69
-#: admin/partials/post_fields.twig:133
-#: admin/partials/post_fields.twig:142
-msgid "Save"
-msgstr ""
-
-#: admin/partials/post_fields.twig:26
-msgid "Current file name:"
-msgstr ""
-
-#: admin/partials/post_fields.twig:29
-msgid "Current file names:"
-msgstr ""
-
-#: admin/partials/post_fields.twig:59
-msgid "Draft"
-msgstr ""
-
-#: admin/partials/post_fields.twig:61
+#: admin/partials/page_fields.twig:29
+#: admin/partials/page_fields.twig:34
+#: admin/partials/post_fields.twig:63
 msgid "Public"
 msgstr ""
 
-#: admin/partials/post_fields.twig:62
+#: admin/partials/page_fields.twig:30
+#: admin/partials/page_fields.twig:35
+msgid "Private and visible in pages list"
+msgstr ""
+
+#: admin/partials/page_fields.twig:31
+#: admin/partials/page_fields.twig:36
+#: admin/partials/post_fields.twig:64
 msgid "Private"
 msgstr ""
 
-#: admin/partials/post_fields.twig:63
+#: admin/partials/page_fields.twig:41
+msgid "Priority in pages list"
+msgstr ""
+
+#: admin/partials/page_fields.twig:43
+msgid "High"
+msgstr ""
+
+#: admin/partials/page_fields.twig:44
+msgid "Medium"
+msgstr ""
+
+#: admin/partials/page_fields.twig:45
+msgid "Low"
+msgstr ""
+
+#: admin/partials/page_fields.twig:49
+msgid "Parent"
+msgstr ""
+
+#: admin/partials/page_fields.twig:51
+msgid "[None]"
+msgstr ""
+
+#: admin/partials/page_fields.twig:68
+#: admin/partials/post_fields.twig:135
+#: admin/partials/post_fields.twig:144
+msgid "Publish"
+msgstr ""
+
+#: admin/partials/page_fields.twig:72
+#: admin/partials/post_fields.twig:139
+#: admin/partials/post_fields.twig:148
+msgid "Save"
+msgstr ""
+
+#: admin/partials/post_fields.twig:28
+msgid "Current file name:"
+msgstr ""
+
+#: admin/partials/post_fields.twig:31
+msgid "Current file names:"
+msgstr ""
+
+#: admin/partials/post_fields.twig:62
+msgid "Draft"
+msgstr ""
+
+#: admin/partials/post_fields.twig:65
 msgid "Scheduled"
 msgstr ""
 
-#: admin/partials/post_fields.twig:64
-msgid "Registered Only"
+#: admin/partials/post_fields.twig:66
+msgid "Visible only to registered users"
 msgstr ""
 
-#: admin/partials/post_fields.twig:77
+#: admin/partials/post_fields.twig:79
 msgid "Pinned?"
 msgstr ""
 
-#: admin/partials/post_fields.twig:78
+#: admin/partials/post_fields.twig:80
 msgid "(shows this post above all others)"
 msgstr ""
 
-#: admin/partials/post_fields.twig:90
+#: admin/partials/post_fields.twig:92
 msgid "Timestamp"
 msgstr ""
 

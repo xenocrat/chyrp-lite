@@ -15,6 +15,9 @@
         else
             show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
+    if (empty($_POST['action']))
+        error(__("Missing Argument"), __("You must specify an action."));
+
     switch($_POST['action']) {
         case "edit_post":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -34,17 +37,13 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
 
-            $title = $post->title();
-            $theme_file = THEME_DIR.DIR."forms".DIR."feathers".DIR.$post->feather.".php";
-            $default_file = FEATHERS_DIR.DIR.$post->feather.DIR."fields.php";
-
             $options = array();
             Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
 
-            $main->display("forms/post/edit", array("post" => $post,
-                                                    "feather" => Feathers::$instances[$post->feather],
-                                                    "options" => $options,
-                                                    "groups" => Group::find(array("order" => "id ASC"))));
+            $main->display("forms".DIR."post".DIR."edit", array("post" => $post,
+                                                                "feather" => Feathers::$instances[$post->feather],
+                                                                "options" => $options,
+                                                                "groups" => Group::find(array("order" => "id ASC"))));
             break;
 
         case "delete_post":
@@ -85,7 +84,7 @@
                 exit;
             }
 
-            $main->display("feathers/".$post->feather, array("post" => $post, "ajax_reason" => $reason));
+            $main->display("feathers".DIR.$post->feather, array("post" => $post, "ajax_reason" => $reason));
             break;
 
         case "preview":
@@ -95,9 +94,15 @@
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 break;
 
-            $sanitized = sanitize_html($_POST['content']);
+            if (!headers_sent()) {
+                header("Cache-Control: no-cache, must-revalidate");
+                header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+            }
 
-            echo Trigger::current()->filter($sanitized, $_POST['filter']);
+            $sanitized = sanitize_html($_POST['content']);
+            Trigger::current()->filter($sanitized, $_POST['filter']);
+            $main->display("content".DIR."preview", array("content" => $sanitized,
+                                                          "filter" => $_POST['filter']), __("Preview"));
             break;
 
         case "check_confirm":
@@ -142,21 +147,24 @@
             foreach ($info["notifications"] as &$notification)
                 $notification = addslashes($notification);
 
+            if (!empty(Modules::$instances[$_POST["extension"]]->cancelled))
+                error(__("Module Cancelled"), __("The module has cancelled execution because of an error."));
+
             require $folder.DIR.$_POST["extension"].DIR.$_POST["extension"].".php";
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the <code>%s</code> directory at your Chyrp install's root and CHMOD it to 777.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", array($config->uploads_path));
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please CHMOD <code>%s</code> to 777.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
             $class_name = camelize($_POST["extension"]);
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                error("", __("Item is not a module."));
+                error(__("Error"), __("Item is not a module."));
 
             if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                error("", __("Item is not a feather."));
+                error(__("Error"), __("Item is not a feather."));
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));

@@ -46,7 +46,7 @@
      *     $body - The message for the error dialog.
      */
     function show_403($title, $body) {
-        header("Status: 403");
+        header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
         error($title, $body);
     }
 
@@ -59,9 +59,6 @@
      */
      function show_404() {
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-
-        if (!defined('DEBUG'))
-            exit("404 Not Found");
 
         $theme = Theme::current();
         $main = MainController::current();
@@ -86,59 +83,44 @@
 
     /**
      * Function: emote
-     * Converts emoticon symbols to the correct Unicode counterpart.
+     * Converts emoticons to equivalent Unicode emoji.
      *
      * Parameters:
      *     $text - The body of the post/page to parse.
+     *
+     * See Also:
+     *     http://www.unicode.org/charts/PDF/U1F600.pdf
      */
     function emote($text) {
         $emoji = array(
-            ':angry:' => '&#x1f620;',
-            ':blush:' => '&#x1f633;',
-            ':bored:' => '&#x1f629;',
-            'B)'      => '&#x1f60e;',
-            '8)'      => '&#x1f60e;',
-            ':\'('    => '&#x1f622;',
-            '=\'('    => '&#x1f622;',
-            ':cry:'   => '&#x1f622;',
-            '^_^'     => '&#x1f601;',
-            'x_x'     => '&#x1f635;',
-            '>:-)'    => '&#x1f608;',
-            'o:-)'    => '&#x1f607;',
-            ':-*'     => '&#x1f618;',
-            ':-|'     => '&#x1f611;',
-            ':-\\'    => '&#x1f615;',
-            ':-/'     => '&#x1f615;',
-            ':-s'     => '&#x1f616;',
-            ':-D'     => '&#x1f603;',
-            ':D'      => '&#x1f603;',
-            '=D'      => '&#x1f603;',
-            '<3'      => '&#x1f60d;',
-            ':love:'  => '&#x1f60d;',
-            ':P'      => '&#x1f61b;',
-            ':-P'     => '&#x1f61b;',
-            ':p'      => '&#x1f61b;',
-            ':-p'     => '&#x1f61b;',
-            ':ooo:'   => '&#x1f62e;',
-            ':-('     => '&#x1f61f;',
-            ':('      => '&#x1f61f;',
-            '=('      => '&#x1f61f;',
-            ':('      => '&#x1f61f;',
-            ':O'      => '&#x1f632;',
-            ':-O'     => '&#x1f632;',
-            ':)'      => '&#x1f600;',
-            ':-)'     => '&#x1f600;',
-            '=)'      => '&#x1f60a;',
-            ':->'     => '&#x1f60f;',
-            ':>'      => '&#x1f60f;',
-            'O_O'     => '&#x1f632;',
-            ':-x'     => '&#x1f636;',
-            ';-)'     => '&#x1f609;',
-            ';)'      => '&#x1f609;'
+            'o:-)' => '&#x1f607;',
+            '>:-)' => '&#x1f608;',
+            ':-)'  => '&#x1f600;',
+            '^_^'  => '&#x1f601;',
+            ':-D'  => '&#x1f603;',
+            ';-)'  => '&#x1f609;',
+            '<3'   => '&#x1f60d;',
+            'B-)'  => '&#x1f60e;',
+            ':->'  => '&#x1f60f;',
+            ':-||' => '&#x1f62c;',
+            ':-|'  => '&#x1f611;',
+            '-_-'  => '&#x1f612;',
+            ':-/'  => '&#x1f615;',
+            ':-s'  => '&#x1f616;',
+            ':-*'  => '&#x1f618;',
+            ':-P'  => '&#x1f61b;',
+            ':-((' => '&#x1f629;',
+            ':-('  => '&#x1f61f;',
+            ';_;'  => '&#x1f622;',
+            ':-o'  => '&#x1f62e;',
+            'O_O'  => '&#x1f632;',
+            ':-$'  => '&#x1f633;',
+            'x_x'  => '&#x1f635;',
+            ':-x'  => '&#x1f636;'
         );
 
         foreach($emoji as $key => $value) {
-            $text =  str_ireplace($key, '<span class="emoji">'.$value.'</span>', $text);
+            $text =  str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
         }
         
         return $text;
@@ -180,80 +162,51 @@
 
     /**
      * Function: set_locale
-     * Set locale in a platform-independent way
+     * Try to set the locale with fallbacks for platform-specific quirks.
      *
      * Parameters:
-     *     $locale - the locale name (@en_US@, @uk_UA@, @fr_FR@ etc.)
-     *
-     * Returns:
-     *     The encoding name used by locale-aware functions.
-     *
-     * Author:
-     *     http://www.onphp5.com/article/22
+     *     $locale - The locale name (e.g. @en_US@, @uk_UA@, @fr_FR@)
      *
      * Notes:
-     *     en_US will not be set because this is the default for Chyrp and
-     *     may have been chosen due to there being no translation available
-     *     that macthes the system locale.
+     *     Precedence is given to UTF-8 with a fallback to Windows 1252.
      */
     function set_locale($locale) {
-        if ($locale == "en_US")
-            return;
+        $posix = array($locale.".UTF-8",                  // E.g. "en_US.UTF-8"
+                       $locale.".UTF8",                   // E.g. "en_US.UTF8"
+                       $locale);                          // E.g. "en_US"
+        $win32 = array(str_replace("_", "-", $locale));   // E.g. "en-US"
 
-        list($lang, $cty) = explode("_", $locale);
-        $locales = array($locale.".UTF-8", $lang, "en_US.UTF-8", "en");
-        $result = setlocale(LC_ALL, $locales);
+        if (class_exists("Locale")) {
+            $language = Locale::getDisplayLanguage($locale, "en_US");
+            $region = Locale::getDisplayRegion("en_US", "en_US");
+            array_unshift($win32,
+                          $language."_".$region.".1252",  // E.g. "English_United States.1252"
+                          $language.".1252",              // E.g. "English.1252"
+                          $language);                     // E.g. "English"
 
-        return (!strpos($result, 'UTF-8')) ? "CP".preg_replace('~\.(\d+)$~', "\\1", $result) : "UTF-8" ;
+            # Set the ICU locale.
+            Locale::setDefault($locale);
+
+            if (DEBUG)
+                error_log("LOCALE (ICU) ".Locale::getDefault());
+        }
+
+        # Set the PHP locale.
+        setlocale(LC_ALL, array_merge($posix, $win32));
+
+        if (DEBUG)
+            error_log("LOCALE (PHP) ".setlocale(LC_ALL, 0));
     }
 
     /**
      * Function: lang_code
-     * Returns the passed language code (e.g. en_US) to the human-readable text (e.g. English (US))
+     * Converts a language code to a display name.
      *
      * Parameters:
-     *     $code - The language code to convert
-     *
-     * Author:
-     *     TextPattern devs, modified to fit with Chyrp.
+     *     $code - The language code to convert.
      */
     function lang_code($code) {
-        $langs = array("ar_DZ" => "جزائري عربي",
-                       "ca_ES" => "Català",
-                       "cs_CZ" => "Čeština",
-                       "da_DK" => "Dansk",
-                       "de_DE" => "Deutsch",
-                       "el_GR" => "Ελληνικά",
-                       "en_GB" => "English (GB)",
-                       "en_US" => "English (US)",
-                       "es_ES" => "Español",
-                       "et_EE" => "Eesti",
-                       "fi_FI" => "Suomi",
-                       "fr_FR" => "Français",
-                       "gl_GZ" => "Galego (Galiza)",
-                       "he_IL" => "עברית",
-                       "hu_HU" => "Magyar",
-                       "id_ID" => "Bahasa Indonesia",
-                       "is_IS" => "Íslenska",
-                       "it_IT" => "Italiano",
-                       "ja_JP" => "日本語",
-                       "lv_LV" => "Latviešu",
-                       "nl_NL" => "Nederlands",
-                       "no_NO" => "Norsk",
-                       "pl_PL" => "Polski",
-                       "pt_PT" => "Português",
-                       "ro_RO" => "Română",
-                       "ru_RU" => "Русский",
-                       "sk_SK" => "Slovenčina",
-                       "sq_AL" => "Shqip",
-                       "sv_SE" => "Svenska",
-                       "th_TH" => "ไทย",
-                       "uk_UA" => "Українська",
-                       "vi_VN" => "Tiếng Việt",
-                       "zh_CN" => "中文(简体)",
-                       "zh_TW" => "中文(繁體)",
-                       "bg_BG" => "Български");
-        return (isset($langs[$code])) ? str_replace(array_keys($langs), array_values($langs), $code) : $code ;
+        return (class_exists("Locale")) ? Locale::getDisplayName($code, $code) : $code ;
     }
 
     /**
@@ -281,9 +234,8 @@
      */
     function _p($single, $plural, $number, $domain = "chyrp") {
         global $l10n;
-        return isset($l10n[$domain]) ?
-                     $l10n[$domain]->ngettext($single, $plural, $number) :
-                   (($number != 1) ? $plural : $single) ;
+        return (isset($l10n[$domain])) ?
+                     $l10n[$domain]->ngettext($single, $plural, $number) : (($number != 1) ? $plural : $single) ;
     }
 
     /**
@@ -390,7 +342,7 @@
 
     /**
      * Function: when
-     * Returns date formatting for a string that isn't a regular time() value
+     * Returns date formatting for a string that isn't a regular time() value.
      *
      * Parameters:
      *     $formatting - The formatting for date().
@@ -879,6 +831,27 @@
     }
 
     /**
+     * Function: admin_url
+     * Returns an admin URL.
+     *
+     * Parameters:
+     *     $action - The admin action.
+     *     $params - An indexed array of parameters.
+     *
+     */
+    function admin_url($action = "", $params = array()) {
+        if ($action == "logout")
+            return Config::current()->url."/?action=logout";
+
+        $request = !empty($action) ? array("action=".$action) : array() ;
+
+        foreach ($params as $key => $value)
+            $request[] = urlencode($key)."=".urlencode($value);
+
+        return Config::current()->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
+    }
+
+    /**
      * Function: self_url
      * Returns the current URL.
      */
@@ -994,14 +967,24 @@
      *
      * Parameters:
      *     $target - Module name to disable.
+     *     $reason - Why was execution cancelled?
+     *
+     * Notes:
+     *     A module can cancel itself in its __construct method.
      */
-     function cancel_module($target) {
+     function cancel_module($target, $reason = "") {
         $this_disabled = array();
+        $message = empty($reason) ?
+            _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) : $reason ;
 
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
 
+        if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
+            Flash::warning($message);
+
         $config = Config::current();
+
         foreach ($config->enabled_modules as $module)
             if ($module != $target)
                 $this_disabled[] = $module;
@@ -1029,6 +1012,7 @@
             require MODULES_DIR.DIR.$module.DIR.$module.".php";
 
             $camelized = camelize($module);
+
             if (!class_exists($camelized))
                 continue;
 
@@ -1052,6 +1036,7 @@
             require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
             $camelized = camelize($feather);
+
             if (!class_exists($camelized))
                 continue;
 
@@ -1092,6 +1077,7 @@
 
         $args = func_get_args();
         array_shift($args);
+
         if (count($args) > 1) {
             foreach ($args as $arg) {
                 $fallback = $arg;
@@ -1117,6 +1103,7 @@
     function oneof() {
         $last = null;
         $args = func_get_args();
+
         foreach ($args as $index => $arg) {
             if (!isset($arg) or (is_string($arg) and trim($arg) === "") or $arg === array() or (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"))
                 $last = $arg;
@@ -1157,8 +1144,8 @@
             $pattern.= "!@#$%^&*()?~";
 
         $len = strlen($pattern) - 1;
-
         $key = "";
+
         for($i = 0; $i < $length; $i++)
             $key.= $pattern[rand(0, $len)];
 
@@ -1175,11 +1162,10 @@
      *     $num - Number suffix from which to start increasing if the filename exists.
      *
      * Returns:
-     *     A unique version of the given $name.
+     *     A unique version of the supplied filename.
      */
-    function unique_filename($name, $path = "", $num = 2) {
-        $path = rtrim($path, "/");
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$name))
+    function unique_filename($name, $num = 2) {
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$name))
             return $name;
 
         $name = explode(".", $name);
@@ -1188,6 +1174,7 @@
         foreach (array("tar.gz", "tar.bz", "tar.bz2") as $extension) {
             list($first, $second) = explode(".", $extension);
             $file_first =& $name[count($name) - 2];
+
             if ($file_first == $first and end($name) == $second) {
                 $file_first = $first.".".$second;
                 array_pop($name);
@@ -1195,34 +1182,34 @@
         }
 
         $ext = ".".array_pop($name);
-
         $try = implode(".", $name)."-".$num.$ext;
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$path.DIR.$try))
+
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$try))
             return $try;
 
-        return unique_filename(implode(".", $name).$ext, $path, $num + 1);
+        return unique_filename(implode(".", $name).$ext, $num + 1);
     }
 
     /**
      * Function: upload
-     * Moves an uploaded file to the uploads directory.
+     * Validates and moves an uploaded file to the uploads directory.
      *
      * Parameters:
      *     $file - The file array created by PHP.
-     *     $extension - An array of valid extensions (case-insensitive).
-     *     $path - A sub-folder in the uploads directory (optional).
-     *     $put - Use copy() instead of move_uploaded_file()?
+     *     $filter - An array of valid extensions (case-insensitive).
      *
      * Returns:
-     *     The resulting filename from the upload.
+     *     The filename of the upload relative to the uploads directory.
      */
-    function upload($file, $extension = null, $path = "", $put = false) {
+    function upload($file, $filter = null) {
         $file_split = explode(".", $file['name']);
-        $path = rtrim($path, DIR);
-        $dir = MAIN_DIR.Config::current()->uploads_path.$path;
+        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
 
-        if (!file_exists($dir))
-            mkdir($dir, 0777, true);
+        if (!is_uploaded_file($file['tmp_name']))
+            show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", fix($file['name'])));
+
+        if (!is_writable($uploads_path))
+            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
 
         $original_ext = end($file_split);
 
@@ -1241,58 +1228,47 @@
         if (in_array(strtolower($file_ext), array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
             $file_ext = "txt";
 
-        if (is_array($extension)) {
-            if (!in_array(strtolower($file_ext), $extension) and !in_array(strtolower($original_ext), $extension)) {
-                $list = "";
-                for ($i = 0; $i < count($extension); $i++) {
-                    $comma = "";
-                    if (($i + 1) != count($extension)) $comma = ", ";
-                    if (($i + 2) == count($extension)) $comma = ", and ";
-                    $list.= "<code>*.".$extension[$i]."</code>".$comma;
-                }
-                error(__("Invalid Extension"), _f("Only %s files are accepted.", array($list)));
-            }
-        } elseif (isset($extension) and
-                  strtolower($file_ext) != strtolower($extension) and
-                  strtolower($original_ext) != strtolower($extension))
-            error(__("Invalid Extension"), _f("Only %s files are supported.", array("*.".$extension)));
+        if (!empty($filter)) {
+            $extensions = array();
+
+            foreach ((array) $filter as $string)
+                $extensions[] = strtolower($string);
+
+            if (!in_array(strtolower($file_ext), $extensions) and
+                !in_array(strtolower($original_ext), $extensions))
+                error(__("Unsupported File Type"), _f("Only files of the following types are accepted: %s.", implode(", ", $extensions)));
+        }
 
         array_pop($file_split);
         $file_clean = implode(".", $file_split);
         $file_clean = sanitize($file_clean, false).".".$file_ext;
-        $filename = unique_filename($file_clean, $path);
+        $filename = unique_filename($file_clean);
 
-        $message = __("Couldn't upload file. CHMOD <code>".$dir."</code> to 777 and try again. If this problem persists, it's probably timing out; in which case, you must contact your system administrator to increase the maximum POST and upload sizes.");
-
-        if ($put) {
-            if (!@copy($file['tmp_name'], $dir.DIR.$filename))
-                error(__("Error"), $message);
-        } elseif (!@move_uploaded_file($file['tmp_name'], $dir.DIR.$filename))
-            error(__("Error"), $message);
-
-        return ($path ? $path."/".$filename : $filename);
+        move_uploaded_file($file['tmp_name'], $uploads_path.$filename);
+        return $filename;
     }
 
     /**
      * Function: upload_from_url
-     * Copy a file from a specified URL to their upload directory.
+     * Copy a file from a specified URL to the uploads directory.
      *
      * Parameters:
-     *     $url - The URL to copy.
-     *     $extension - An array of valid extensions (case-insensitive).
-     *     $path - A sub-folder in the uploads directory (optional).
+     *     $url - The URL of the resource to be copied.
+     *     $redirects - The maximum number of redirects to follow.
+     *     $timeout - The maximum number of seconds to wait.
      *
      * See Also:
      *     <upload>
      */
-    function upload_from_url($url, $extension = null, $path = "") {
-        $file = tempnam(getcwd().DIR."tmp", "chyrp");
-        file_put_contents($file, get_remote($url));
+    function upload_from_url($url, $redirects = 3, $timeout = 10) {
+        preg_match("~\.[a-z0-9]+(?=($|\?))~i", $url, $file_ext);
+        fallback($file_ext[0], "bin"); # Assume unknown binary file.
 
-        $fake_file = array("name" => basename(parse_url($url, PHP_URL_PATH)),
-                           "tmp_name" => $file);
+        $filename = unique_filename(md5($url).".".$file_ext[0]);
+        $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
 
-        return upload($fake_file, $extension, $path, true);
+        file_put_contents($filepath, get_remote($url, $redirects, $timeout));
+        return $filename;
     }
 
     /**
@@ -1301,6 +1277,7 @@
      *
      * Parameters:
      *     $file - Filename relative to the uploads directory.
+     *     $url - Whether to return a URL or a filesystem path.
      */
     function uploaded($file, $url = true) {
         if (empty($file))
@@ -1360,6 +1337,44 @@
                 return true;
             default:
                 error(__("Error"), __("Unknown upload error."));
+        }
+    }
+
+    /**
+     * Function: zip_errors
+     * Converts a ZipArchive error code into a human-readable message.
+     *
+     * Parameters:
+     *     $code - The error code returned by ZipArchive.
+     *
+     * Returns:
+     *     The error message corresponding to the supplied error code.
+     */
+    function zip_errors($code) {
+        if (!class_exists("ZipArchive"))
+            return __("ZipArchive not available.");
+
+        switch ($code) {
+            case ZipArchive::ER_EXISTS:
+                return __("File already exists.");
+            case ZipArchive::ER_INCONS:
+                return __("Zip archive inconsistent.");
+            case ZipArchive::ER_INVAL:
+                return __("Invalid argument.");
+            case ZipArchive::ER_MEMORY:
+                return __("Malloc failure.");
+            case ZipArchive::ER_NOENT:
+                return __("No such file.");
+            case ZipArchive::ER_NOZIP:
+                return __("Not a zip archive.");
+            case ZipArchive::ER_OPEN:
+                return __("Cannot open file.");
+            case ZipArchive::ER_READ:
+                return __("Read error.");
+            case ZipArchive::ER_SEEK:
+                return __("Seek error.");
+            default:
+                return __("Unknown error.");
         }
     }
 
@@ -1480,92 +1495,74 @@
      * Parameters:
      *     $query - The query to parse.
      *     $plain - WHERE syntax to search for non-keyword queries.
-     *     $table - If specified, the keywords will be checked against this table's columns for validity.
+     *     $table - Check this table to ensure the keywords are valid.
      *
      * Returns:
      *     An array containing the "WHERE" queries and the corresponding parameters.
      */
     function keywords($query, $plain, $table = null) {
-        if (!trim($query))
+        $trimmed = trim($query);
+
+        if (empty($trimmed))
             return array(array(), array());
 
-        $search  = array();
-        $matches = array();
-        $where   = array();
-        $params  = array();
+        $strings  = array(); # Non-keyword values found in the query.
+        $keywords = array(); # Keywords (attr:val;) found in the query.
+        $where    = array(); # Parameters validated and added to WHERE.
+        $filters  = array(); # Table column filters to be validated.
+        $params   = array(); # Parameters for the non-keyword filter.
 
-        if ($table)
+        foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment)
+            if (!substr_count($fragment, ":"))
+                $strings[] = trim($fragment);
+            else
+                $keywords[] = trim($fragment);
+
+        $dates = array("year" => __("year"),
+                       "month" => __("month"),
+                       "day" => __("day"),
+                       "hour" => __("hour"),
+                       "minute" => __("minute"),
+                       "second" => __("second"));
+
+        foreach ($keywords as $keyword) {
+            list($attr, $val) = explode(":", $keyword);
+
+            if (in_array($attr, $dates)) {
+                $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
+            } elseif ($attr == "author") {
+                $user = new User(array("login" => $val));
+                !($table == "users") ? $where["user_id"] = $user->id : $where["id"] = $user->id;
+            } elseif ($attr == "group") {
+                $group = new Group(array("name" => $val));
+                $where["group_id"] = $val = ($group->no_results) ? 0 : $group->id;
+            } else
+                $filters[$attr] = $val;
+        }
+
+        # Check the validity of keywords if a table name was supplied.
+        if (!empty($table)) {
             $columns = SQL::current()->select($table)->fetch();
 
-        $queries = explode(" ", $query);
-        foreach ($queries as $query)
-            if (!preg_match("/([a-z0-9_]+):(.+)/", $query))
-                $search[] = $query;
-            else
-                $matches[] = $query;
-
-        $times = array("year", "month", "day", "hour", "minute", "second");
-
-        foreach ($matches as $match) {
-            list($test, $equals) = explode(":", $match);
-
-            if ($equals[0] == '"') {
-                if (substr($equals, -1) != '"')
-                    foreach ($search as $index => $part) {
-                        $equals.= " ".$part;
-
-                        unset($search[$index]);
-
-                        if (substr($part, -1) == '"')
-                            break;
-                    }
-
-                $equals = ltrim(trim($equals, '"'), '"');
-            }
-
-            if (in_array($test, $times)) {
-                if ($equals == "today")
-                    $where["created_at like"] = date("%Y-m-d %");
-                elseif ($equals == "yesterday")
-                    $where["created_at like"] = date("%Y-m-d %", now("-1 day"));
-                elseif ($equals == "tomorrow")
-                    error(__("Error"), "Unfortunately our flux capacitor is currently having issues. Try again yesterday.");
+            foreach ($filters as $attr => $val)
+                if (isset($columns[$attr]))
+                    $where[$attr] = $val;
                 else
-                    $where[strtoupper($test)."(created_at)"] = $equals;
-            } elseif ($test == "author") {
-                $user = new User(array("login" => $equals));
-                if ($user->no_results and $equals == "me") {
-                  !($table == "users") ? $where["user_id"] = Visitor::current()->id : $where["id"] = Visitor::current()->id;
-                } else
-                    !($table == "users") ? $where["user_id"] = $user->id : $where["id"] = $user->id;
-            } elseif ($test == "group") {
-                $group = new Group(array("name" => $equals));
-                $where["group_id"] = $equals = ($group->no_results) ? 0 : $group->id;
-            } else
-                $where[$test] = $equals;
-        }
+                    $strings[] = $attr." ".$val; # No such column: add to non-keyword values.
+        } else
+            foreach ($filters as $attr => $val)
+                $strings[] = $attr." ".$val; # Cannot validate: add all to non-keyword values.
 
-        if ($table)
-            foreach ($where as $col => $val)
-                if (!isset($where[$col])) {
-                    if ($table == "posts") {
-                        $where["post_attributes.name"] = $col;
-                        $where["post_attributes.value like"] = "%".$val."%";
-                    }
-
-                    unset($where[$col]);
-                }
-
-        if (!empty($search)) {
+        if (!empty($strings)) {
             $where[] = $plain;
-            $params[":query"] = "%".join(" ", $search)."%";
+            $params[":query"] = "%".join(" ", $strings)."%";
         }
 
-        $keywords = array($where, $params);
+        $search = array($where, $params);
 
-        Trigger::current()->filter($keywords, "keyword_search", $query, $plain);
+        Trigger::current()->filter($search, "keyword_search", $query, $plain);
 
-        return $keywords;
+        return $search;
     }
 
     /**
@@ -1604,7 +1601,7 @@
             }
 
             if (is_array($val)) {
-                if (in_array(0, array_keys($val))) { # Numeric-indexed things need to be added as duplicates
+                if (in_array(0, array_keys($val))) { # Numeric-indexed things need to be added as duplicates.
                     foreach ($val as $dup) {
                         $xml = $object->addChild($key);
                         arr2xml($xml, $dup);
@@ -1682,7 +1679,7 @@
         $count = 0;
         $items = array();
         foreach ($array as $item) {
-            $string = (is_string($item) and $quotes) ? "&#8220;".$item."&#8221;" : $item ;
+            $string = (is_string($item) and $quotes) ? __("&#8220;").$item.__("&#8221;") : $item ;
             if (count($array) == ++$count and $count !== 1)
                 $items[] = __("and ").$string;
             else
@@ -1728,12 +1725,12 @@
      * Generates a captcha form element.
      *
      * Returns:
-     *     A string containing an form input type
+     *     A string containing an form input type.
      */
     function generate_captcha() {
         global $captchaHooks;
         if (!$captchaHooks)
-           return 0;
+           return false;
         return call_user_func($captchaHooks[0] . "::getCaptcha");
     }
 
@@ -1742,7 +1739,7 @@
      * Checks if the answer to a captcha is right.
      *
      * Returns:
-     *     Whether or not the captcha was defeated
+     *     Whether or not the captcha was defeated.
      */
     function check_captcha() {
         global $captchaHooks;
@@ -1761,15 +1758,15 @@
      *     $d - Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
      *     $r - Maximum rating (inclusive) [ g | pg | r | x ]
      *     $img - True to return a complete IMG tag False for just the URL
-     *     $atts - Optional, additional key/value attributes to include in the IMG tag
+     *     $atts - Additional key/value attributes to add to the IMG tag (optional).
      *
      * Returns:
-     *     String containing either just a URL or a complete image tag
+     *     String containing either just a URL or a complete image tag.
      *
      * Source:
      *     http://gravatar.com/site/implement/images/php/
      */
-    function get_gravatar($email, $s = 80, $d = "mm", $r = "g", $img = false, $atts = array()) {
+    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g", $atts = array()) {
         $url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
         if ($img) {
             $url = '<img class="gravatar" src="' . $url . '"';
@@ -1851,34 +1848,21 @@
      * Send a file attachment to the visitor.
      *
      * Parameters:
-     *     $content - The bitstream to be sent to the visitor.
-     *     $filename  - The name to be applied to the content.
+     *     $contents - The bitstream to be delivered to the visitor.
+     *     $filename - The name to be applied to the content upon download.
      */
-    function download($content, $filename) {
-        ob_clean();
-        header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".$filename."\"");
-        if (!in_array("ob_gzhandler", ob_list_handlers()))
-            header("Content-length: ".strlen($content));
-        echo $content;
-        ob_flush();
-    }
+    function download($contents = "", $filename = "caconym") {
+        if (!headers_sent()) {
+            header("Content-type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=\"".$filename."\"");
 
-    /**
-     * Function: zip
-     * Generate a Zip bitstream.
-     *
-     * Parameters:
-     *     $files - An associative array of filename => content.
-     */
-    function zip($files) {
-        require_once "lib".DIR."zip.php";
+            if (!in_array("ob_gzhandler", ob_list_handlers()))
+                header("Content-length: ".strlen($contents));
 
-        $zip = new ZipFile();
-        foreach ($files as $filename => $content)
-            $zip->addFile($content, $filename);
-
-        return $zip->file();
+            echo $contents;
+            exit;
+        } else
+            error(__("Error"), __("Unable to deliver file attachment because HTTP headers were already sent."));
     }
 
     /**

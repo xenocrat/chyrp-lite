@@ -1,4 +1,4 @@
-/* @group WebFonts */
+/* @group webfonts */
 @font-face {
                                                 font-family: 'Open Sans webfont';
                                                 src: url('../fonts/OpenSans-Regular.woff') format('woff');
@@ -56,7 +56,7 @@
 }
 /* @end */
 
-/* @group Reset */
+/* @group reset */
 html {                                          font-size: 14px }
 body, div, dl, dt, dd, ul, ol, li,
 h1, h2, h3, h4, h5, h6,
@@ -76,11 +76,11 @@ input, textarea, select {                       font-family: inherit;
                                                 font-weight: inherit }
 /* @end */
 
-/* @group Core */
+/* @group core */
 *::selection {                                  color: #ffffff;
                                                 background-color: #4f4f4f }
-body {                                          font-size: 14px;
-                                                font-family: "Open Sans webfont", sans-serif;
+body {                                          font-family: "Open Sans webfont", sans-serif;
+                                                font-size: 1rem;
                                                 line-height: 1.5;
                                                 color: #4a4747;
                                                 background-color: #efefef;
@@ -120,7 +120,7 @@ img.logo {                                      width: 24px;
                                                 height: 24px }
 /* @end */
 
-/* @group Header */
+/* @group header */
 #header {                                       background-color: #4f4f4f;
                                                 padding: 2em 0em 3em 0em;
                                                 color: #efefef;
@@ -175,20 +175,20 @@ img.logo {                                      width: 24px;
                                                 text-decoration: none }
 /* @end */
 
-/* @group Footer */
+/* @group footer */
 #footer {                                       box-sizing: border-box;
                                                 width: 100%;
                                                 margin: 2em auto;
                                                 padding: 0em 2em;
-                                                text-align: center;
-                                                color: #b3b5b5 }
+                                                text-align: center }
+#footer small {                                 color: #4f4f4f }
 #footer small.metadata {                        display: block;
                                                 margin-top: 1em;
                                                 font-size: .8em }
 #logout {                                       margin-top: 1em }
 /* @end */
 
-/* @group Sub-Navigation */
+/* @group sub-navigation */
 #sub_nav {                                      margin: 4em 4em 0em 4em;
                                                 height: 3rem;
                                                 overflow: hidden }
@@ -223,7 +223,7 @@ img.logo {                                      width: 24px;
                                                 border-bottom: none }
 /* @end */
 
-/* @group Content */
+/* @group content */
 #content {                                      clear: both;
                                                 background-color: #ffffff;
                                                 padding: 2em 1em 1em 1em;
@@ -241,7 +241,7 @@ span.pages {                                    display: block;
                                                 margin-bottom: 1em }
 /* @end */
 
-/* @group Extend */
+/* @group extend */
 #content ul.extend {                            box-sizing: border-box;
                                                 width: 100%;
                                                 clear: both }
@@ -303,7 +303,13 @@ li.feather div.controls {                       position: absolute;
                                                 border: 1px solid #dfdfdf }
 /* @end */
 
-/* @group Forms */
+/* @group forms */
+input::-webkit-input-placeholder,
+input:-moz-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder,
+input:input-placeholder {                       color: #ddd;
+                                                opacity: 1 }
 label {                                         line-height: 2 }
 input[type="text"],
 input[type="email"],
@@ -358,7 +364,6 @@ form.split .small,
 form.split .buttons {                           display: block;
                                                 margin: 0em 0em 1rem 45% }
 form.split input {                              margin-bottom: 0.4em }
-form.split input[type="checkbox"] {             margin: 0em 0.5em 0.5em 0em }
 form.split input[type="text"],
 form.split input[type="email"],
 form.split input[type="url"],
@@ -368,7 +373,7 @@ form.split textarea {                           width: 33% }
 form.detail input {                             padding: 0.3em }
 /* @end */
 
-/* @group Tables */
+/* @group tables */
 table {                                         width: 100%;
                                                 margin: 0em 0em 1em 0em;
                                                 overflow-x: scroll;
@@ -463,7 +468,7 @@ td.controls img {                               position: relative;
                                                 height: 16px }
 /* @end */
 
-/* @group Messages */
+/* @group messages */
 p.message {                                     padding: 0.6em;
                                                 margin-bottom: 1em;
                                                 background-color: #7a9acc;
@@ -483,7 +488,7 @@ p.message a:active {                            color: #ffffff;
 
 /* @end */
 
-/* @group Buttons */
+/* @group buttons */
 .buttons {                                      clear: both }
 button,
 a.button,
@@ -569,7 +574,7 @@ span.tags_select a.tag_added {                  top: 2px;
                                                 border-color: #ccb68f }
 /* @end */
 
-/* @group Options */
+/* @group options */
 .main_options input,
 .main_options select,
 .main_options textarea {                        display: block } 
@@ -591,17 +596,15 @@ a.more_options_link {                           font-weight: bold;
 div.more_options {                              box-sizing: border-box;
                                                 margin: 0em;
                                                 padding: 1em }
-div.more_options > .more_options_option {       box-sizing: border-box;
+.more_options_option {                          box-sizing: border-box;
                                                 display: block;
                                                 width: 50%;
                                                 margin: 0em;
                                                 min-height: 5em;
                                                 float: left }
-div.more_options > .more_options_option:nth-child(odd) { 
-                                                clear: both;
+.more_options_option:nth-of-type(odd) {         clear: both;
                                                 padding-right: 1em }
-div.more_options > .more_options_option:nth-child(even) { 
-                                                padding-left: 1em }
+.more_options_option:nth-of-type(even) {        padding-left: 1em }
 div.more_options p input,
 div.more_options p select,
 div.more_options p textarea {                   display: block }
@@ -611,13 +614,15 @@ div.more_options p input[type="email"],
 div.more_options p input[type="url"],
 div.more_options p input[type="number"],
 div.more_options p input[type="password"],
+div.more_options p select,
 div.more_options p textarea {                   width: 100%;
                                                 margin: 0em }
 div.more_options hr {                           margin: 0em;
+                                                padding: 0em;
                                                 visibility: hidden }
 /* @end */
 
-/* @group Helpers & General */
+/* @group helpers & general */
 table.interactive + div.controls {              background-color: #fffceb;
                                                 padding: 1em;
                                                 border: 1px solid #dfdfdf;
@@ -633,7 +638,7 @@ hr {                                            border: none;
 a.emblem > img,
 img.emblem {                                    display: inline;
                                                 position: relative;
-                                                top: 2px;
+                                                top: 4px;
                                                 width: 16px;
                                                 height: 16px }
 a.emblem.markdown > img {                       width: 26px }
@@ -651,23 +656,22 @@ img#likeImage_preview {                         max-width: 28px;
                                                 vertical-align: middle }
 /* @end */
 
-/* @group Overlays */
-.overlay_background {                           display: block;
+/* @group iframes */
+.iframe_background {                            display: block;
                                                 position: fixed;
                                                 width: 100%;
                                                 height: 100%;
                                                 top: 0px;
                                                 left: 0px;
                                                 background-color: rgba(79, 79, 79, 0.75) }
-.overlay_foreground {                           box-sizing: border-box;    
+.iframe_foreground {                            box-sizing: border-box;    
                                                 display: block;
                                                 position: absolute;
                                                 width: 80%;
-                                                height: auto;
+                                                height: 80%;
                                                 min-height: 6rem;
                                                 max-height: 80%;
                                                 margin: 0em;
-                                                padding: 3rem;
                                                 top: 10%;
                                                 left: 10%;
                                                 overflow-x: hidden;
@@ -675,7 +679,7 @@ img#likeImage_preview {                         max-width: 28px;
                                                 border: none;
                                                 background-color: #fff;
                                                 box-shadow: 0px 4px 16px 2px rgba(79, 79, 79, 0.5) }
-.overlay_close_gadget {                         display: block;
+.iframe_close_gadget {                          display: block;
                                                 position: absolute;
                                                 width: 16px;
                                                 height: 16px;
@@ -684,59 +688,10 @@ img#likeImage_preview {                         max-width: 28px;
                                                 padding-top: 13px;
                                                 padding-right: 13px;
                                                 cursor: pointer }
-
-.overlay_foreground h1,
-.overlay_foreground h2,
-.overlay_foreground h3,
-.overlay_foreground h4,
-.overlay_foreground h5,
-.overlay_foreground h6 {                        margin: 1em 0em }
-.overlay_foreground h1:first-child,
-.overlay_foreground h2:first-child,
-.overlay_foreground h3:first-child,
-.overlay_foreground h4:first-child,
-.overlay_foreground h5:first-child,
-.overlay_foreground h6:first-child {            margin-top: 0em }
-.overlay_foreground h1 {                        font-size: 2em }
-.overlay_foreground h2 {                        font-size: 1.5em }
-.overlay_foreground h3 {                        font-size: 1em }
-.overlay_foreground h4 {                        font-size: 0.9em }
-.overlay_foreground h5 {                        font-size: 0.8em }
-.overlay_foreground h6 {                        font-size: 0.7em }
-.overlay_foreground table h1,
-.overlay_foreground table h2,
-.overlay_foreground table h3,
-.overlay_foreground table h4,
-.overlay_foreground table h5,
-.overlay_foreground table h6 {                  margin: 0em }
-.overlay_foreground ul {                        list-style: disc inside;
-                                                margin: 1em 0em;
-                                                padding: 0em }
-    .overlay_foreground ul li > ul {            list-style-type: circle;
-                                                margin-left: 1em }
-.overlay_foreground ol {                        list-style: decimal inside;
-                                                margin: 1em 0em;
-                                                padding: 0em }
-    .overlay_foreground ol li > ol {            list-style-type: lower-roman;
-                                                margin-left: 1em }
-.overlay_foreground dl {                        list-style: none }
-    .overlay_foreground dl dt {                 font-weight: bold }
-    .overlay_foreground dl dd {                 margin-left: 1em }
-.overlay_foreground pre {                       font-family: "Hack webfont", monospace;
-                                                margin: 2em }
-.overlay_foreground code {                      font-family: "Hack webfont", monospace;
-                                                font-size: 0.75em }
-      .overlay_foreground pre code {            background-color: transparent;
-                                                border: none }
-.overlay_foreground blockquote {                margin: 2em;
-                                                font-style: italic }
-    .overlay_foreground blockquote em {         font-style: normal }
-    .overlay_foreground img {                   max-width: 100% }
-
 /* @end */
 
-/* @media Mobile */
-@media screen and (max-width: 768px) {
+/* @media mobile */
+@media screen and (max-width: 767px) {
     #header #navigation {                       left: 0em;
                                                 right: 0em }
     #header #navigation li a {                  display: block;
@@ -774,7 +729,7 @@ img#likeImage_preview {                         max-width: 28px;
                                                 width: 3em !important }
     form.split small,
     form.split .small,
-    form.split .buttons {                         margin-left: 0em }
+    form.split .buttons {                       margin-left: 0em }
     input.text,
     input[type="text"],
     input[type="email"],
@@ -849,15 +804,15 @@ img#likeImage_preview {                         max-width: 28px;
     #content ul.extend li.module div.controls { position: static }
     #content ul.themes img.screenshot {         width: 192px }
 
-    .overlay_foreground {                       width: 90%;
-                                                max-height: 90%;
+    .iframe_foreground {                        width: 90%;
+                                                height: 90%;
                                                 top: 5%;
                                                 left: 5% }
-    .overlay_close_gadget {                     top: 5%;
+    .iframe_close_gadget {                      top: 5%;
                                                 right: 5% }
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 539px) {
     table tbody tr td.main {                    min-width: 240px }
 }
 /* @end */

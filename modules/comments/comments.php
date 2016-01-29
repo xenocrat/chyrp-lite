@@ -34,14 +34,16 @@
             $config->set("akismet_api_key", null);
             $config->set("auto_reload_comments", 30);
             $config->set("enable_reload_comments", false);
+                                                                                            # Add these strings to the .pot file:
+            Group::add_permission("add_comment", "Add Comments");                           # __("Add Comments");
+            Group::add_permission("add_comment_private", "Add Comments to Private Posts");  # __("Add Comments to Private Posts");
+            Group::add_permission("edit_comment", "Edit Comments");                         # __("Edit Comments");
+            Group::add_permission("edit_own_comment", "Edit Own Comments");                 # __("Edit Own Comments");
+            Group::add_permission("delete_comment", "Delete Comments");                     # __("Delete Comments");
+            Group::add_permission("delete_own_comment", "Delete Own Comments");             # __("Delete Own Comments");
+            Group::add_permission("code_in_comments", "Can Use HTML in Comments");          # __("Can Use HTML in Comments");
 
-            Group::add_permission("add_comment", "Add Comments");
-            Group::add_permission("add_comment_private", "Add Comments to Private Posts");
-            Group::add_permission("edit_comment", "Edit Comments");
-            Group::add_permission("edit_own_comment", "Edit Own Comments");
-            Group::add_permission("delete_comment", "Delete Comments");
-            Group::add_permission("delete_own_comment", "Delete Own Comments");
-            Group::add_permission("code_in_comments", "Can Use HTML In Comments");
+            Route::current()->add("comment/(id)/", "comment");
         }
 
         static function __uninstall($confirm) {
@@ -63,6 +65,47 @@
             Group::remove_permission("delete_comment");
             Group::remove_permission("delete_own_comment");
             Group::remove_permission("code_in_comments");
+
+            Route::current()->remove("comment/(id)/");
+        }
+
+        public function main_comment($main) {
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                Flash::warning(__("Please enter an ID to search for a comment.", "comments"), "/");
+
+            $parent_id = (int) $_GET['id'];
+            $comment = new Comment($parent_id);
+
+            if ($comment->no_results)
+                Flash::warning(__("The comment you searched for cannot be found. Perhaps it has been removed.", "comments"), "/");
+
+            $post = new Post($comment->post_id);
+
+            if ($post->no_results)
+                Flash::warning(__("The comment you searched for is associated with a post that cannot be found.", "comments"), "/");
+
+            if (!$post->theme_exists())
+                error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
+
+            if ($post->status == "draft")
+                Flash::message(__("This post is a draft."));
+
+            if ($post->status == "scheduled")
+                Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
+
+            if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
+                Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
+
+            $main->display(array("pages".DIR."view", "pages".DIR."index"),
+                           array("post" => $post,
+                                 "posts" => array($post),
+                                 "parent_id" => $parent_id),
+                           $post->title());
+        }
+
+        public function parse_urls($urls) {
+            $urls["/\/comment\/([0-9]+)/"] = "/?action=comment&id=$1";
+            return $urls;
         }
 
         static function route_add_comment() {
@@ -70,6 +113,9 @@
                 error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"));
 
             $post = new Post($_POST['post_id'], array("drafts" => true));
+
+            if ($post->no_results)
+                error(__("Error"), __("Post not found."));
 
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
@@ -119,6 +165,9 @@
 
             $comment = new Comment($_POST['id']);
 
+            if ($comment->no_results)
+                error(__("Error"), __("Comment not found.", "comments"));
+
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
@@ -145,6 +194,7 @@
             $visitor = Visitor::current();
             $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
             $created_at = ($visitor->group->can("edit_comment")) ? datetime($_POST['created_at']) : $comment->created_at ;
+
             $comment->update($_POST['body'],
                              $_POST['author'],
                              $_POST['author_url'],
@@ -156,13 +206,13 @@
             if (isset($_POST['ajax']))
                 exit("{ \"comment_id\": \"".$_POST['id']."\", \"comment_timestamp\": \"".$created_at."\" }");
 
-            if ($_POST['status'] == "spam")
-                Flash::notice(__("Comment updated."), "/admin/?action=manage_spam");
+            if (!$visitor->group->can("edit_comment", "delete_comment"))
+                Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
+
+            if ($status == "spam")
+                Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_spam");
             else
-                Flash::notice(_f("Comment updated. <a href=\"%s\">View Comment &rarr;</a>",
-                                 array($comment->post->url()."#comment_".$comment->id),
-                                 "comments"),
-                              "/admin/?action=manage_comments");
+                Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_comments");
         }
 
         static function admin_delete_comment($admin) {
@@ -170,6 +220,9 @@
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
 
             $comment = new Comment($_GET['id']);
+
+            if ($comment->no_results)
+                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
 
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
@@ -188,6 +241,9 @@
                 redirect("/admin/?action=manage_comments");
 
             $comment = new Comment($_POST['id']);
+
+            if ($comment->no_results)
+                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
 
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
@@ -218,7 +274,7 @@
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
                                                                                   "params" => $params)),
-                                                              25)));
+                                                              Config::current()->admin_per_page)));
         }
 
         static function admin_purge_spam() {
@@ -299,6 +355,7 @@
             if (!empty($_POST['akismet_api_key'])) {
                 $_POST['akismet_api_key'] = trim($_POST['akismet_api_key']);
                 $akismet = new Akismet($config->url, $_POST['akismet_api_key']);
+
                 if (!$akismet->isKeyValid()) {
                     Flash::warning(__("Invalid Akismet API key."), "/admin/?action=comment_settings");
                     $set[] = false;
@@ -344,6 +401,9 @@
 
             $comment = new Comment($_GET['id'], array("filter" => false));
 
+            if ($comment->no_results)
+                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
+
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
@@ -367,7 +427,7 @@
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
                                                                                   "params" => $params)),
-                                                              25)));
+                                                              Config::current()->admin_per_page)));
         }
 
         static function admin_bulk_comments() {
@@ -615,7 +675,7 @@
 
             $comments = $post->comments;
 
-            require "pages/comments_feed.php";
+            require "comments_feed.php";
         }
 
         static function metaWeblog_getPost($struct, $post) {

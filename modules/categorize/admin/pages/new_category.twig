@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "New Category" | translate("categorize") }}{% endblock %}
+
+{% block content %}
+<h2>{{ "New Category" | translate("categorize") }}</h2>
+<form id="add_category" class="split" action="{{ admin_url('add_category') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<fieldset>
+<p>
+<label for="name">{{ "Name" | translate("categorize") }}</label>
+<input class="text" type="text" name="name" value="" id="name">
+</p>
+<p>
+<label for="clean">
+{{ "URL" | translate("categorize") }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="text" name="clean" value="" id="clean">
+<small>
+{{ "Enter a &#8220;clean&#8221; name here if you want the category name to appear differently in the URL." | translate("categorize") }}
+</small>
+</p>
+<p>
+<label for="show_on_home">{{ "Listed?" | translate("categorize") }}</label>
+<input class="checkbox" type="checkbox" name="show_on_home" id="show_on_home" checked="checked">
+<small>
+{{ "Do you want to include this category in the categories list?" | translate("categorize") }}
+</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="update">{{ "Add" | translate("categorize") }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

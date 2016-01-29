@@ -251,4 +251,22 @@
 
             return url("page/".implode("/", array_reverse($url)), MainController::current());
         }
+
+        /**
+         * Function: author
+         * Returns a page's author. Example: $page->author->name
+         */
+        public function author() {
+            if ($this->no_results)
+                return false;
+
+            $author = array("nick"    => $this->user->login,
+                            "name"    => oneof($this->user->full_name, $this->user->login),
+                            "website" => $this->user->website,
+                            "email"   => $this->user->email,
+                            "joined"  => $this->user->joined_at,
+                            "group"   => $this->user->group->name);
+
+            return (object) $author;
+        }
     }

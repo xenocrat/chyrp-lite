@@ -5,7 +5,7 @@
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 429
+	admin/admin.js.php on line 449
 
 
 can_not_view_site
@@ -28,7 +28,7 @@ Arguments:
 admin_head
 ----------
 Called from:
-	admin/layout.twig on line 14
+	admin/layout.twig on line 15
 
 
 delete_user_form
@@ -54,7 +54,7 @@ Called from:
 import_choose
 -------------
 Called from:
-	admin/pages/import.twig on line 41
+	admin/pages/import.twig on line 39
 
 
 manage_groups_column_header
@@ -66,9 +66,9 @@ Called from:
 manage_groups_column
 --------------------
 Called from:
-	admin/pages/manage_groups.twig on line 52
+	admin/pages/manage_groups.twig on line 56
 Arguments:
-	user
+	groups
 
 
 manage_pages_column_header
@@ -80,7 +80,7 @@ Called from:
 manage_pages_column
 -------------------
 Called from:
-	admin/pages/manage_pages.twig on line 58
+	admin/pages/manage_pages.twig on line 60
 Arguments:
 	page
 
@@ -88,13 +88,13 @@ Arguments:
 manage_posts_column_header
 --------------------------
 Called from:
-	admin/pages/manage_posts.twig on line 36
+	admin/pages/manage_posts.twig on line 38
 
 
 manage_posts_column
 -------------------
 Called from:
-	admin/pages/manage_posts.twig on line 55
+	admin/pages/manage_posts.twig on line 57
 Arguments:
 	post
 
@@ -116,7 +116,7 @@ Arguments:
 new_user_fields
 ---------------
 Called from:
-	admin/pages/new_user.twig on line 45
+	admin/pages/new_user.twig on line 44
 
 
 post_view_url_settings
@@ -140,13 +140,13 @@ Called from:
 new_page_options
 ----------------
 Called from:
-	admin/partials/page_fields.twig on line 56
+	admin/partials/page_fields.twig on line 59
 
 
 edit_page_options
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 58
+	admin/partials/page_fields.twig on line 61
 Arguments:
 	page
 
@@ -162,7 +162,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 52
+	admin/partials/post_fields.twig on line 56
 Arguments:
 	feather
 
@@ -170,7 +170,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 116
+	feathers/audio/audio.php on line 120
 Arguments:
 	$filename, $params, $post
 
@@ -178,7 +178,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 114
+	feathers/video/video.php on line 118
 Arguments:
 	$filename, $params, $post
 
@@ -186,22 +186,22 @@ Arguments:
 not_found
 ---------
 Called from:
-	includes/ajax.php on line 30
-	includes/ajax.php on line 61
-	includes/ajax.php on line 84
-	includes/helpers.php on line 69
+	includes/ajax.php on line 33
+	includes/ajax.php on line 60
+	includes/ajax.php on line 83
+	includes/helpers.php on line 66
 
 
 ajax
 ----
 Called from:
-	includes/ajax.php on line 227
+	includes/ajax.php on line 235
 
 
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 62
+	includes/class/Config.php on line 56
 Arguments:
 	$setting, $value, $overwrite
 
@@ -233,13 +233,13 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 358
+	includes/common.php on line 370
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1132
+	includes/controller/Admin.php on line 1197
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1159
+	includes/controller/Admin.php on line 1224
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1189
+	includes/controller/Admin.php on line 1252
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1212
+	includes/controller/Admin.php on line 1275
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 495
+	includes/controller/Main.php on line 506
 Arguments:
 	$user
 
@@ -279,7 +279,7 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 580
+	includes/controller/Main.php on line 591
 
 
 feed_item
@@ -371,17 +371,50 @@ Arguments:
 manage_comments_column_header
 -----------------------------
 Called from:
-	modules/categorize/pages/admin/manage_category.twig on line 12
-	modules/comments/pages/admin/manage_comments.twig on line 29
-	modules/comments/pages/admin/manage_spam.twig on line 29
+	modules/categorize/admin/pages/manage_category.twig on line 12
+	modules/comments/admin/pages/manage_comments.twig on line 29
+	modules/comments/admin/pages/manage_spam.twig on line 29
+
+
+edit_comment_options
+--------------------
+Called from:
+	modules/comments/admin/pages/edit_comment.twig on line 53
+Arguments:
+	comment
+
+
+manage_comments_column
+----------------------
+Called from:
+	modules/comments/admin/pages/manage_comments.twig on line 54
+	modules/comments/admin/pages/manage_spam.twig on line 48
+Arguments:
+	comment
 
 
 show_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 545
+	modules/comments/comments.php on line 605
 Arguments:
 	$comment
+
+
+feed_comment
+------------
+Called from:
+	modules/comments/comments_feed.php on line 28
+Arguments:
+	$comment
+
+
+comments_feed_item
+------------------
+Called from:
+	modules/comments/comments_feed.php on line 51
+Arguments:
+	$comment->id
 
 
 add_comment
@@ -406,39 +439,6 @@ Called from:
 	modules/comments/model.Comment.php on line 227
 Arguments:
 	$new->post_id, $new->id
-
-
-edit_comment_options
---------------------
-Called from:
-	modules/comments/pages/admin/edit_comment.twig on line 49
-Arguments:
-	comment
-
-
-manage_comments_column
-----------------------
-Called from:
-	modules/comments/pages/admin/manage_comments.twig on line 53
-	modules/comments/pages/admin/manage_spam.twig on line 42
-Arguments:
-	comment
-
-
-feed_comment
-------------
-Called from:
-	modules/comments/pages/comments_feed.php on line 28
-Arguments:
-	$comment
-
-
-comments_feed_item
-------------------
-Called from:
-	modules/comments/pages/comments_feed.php on line 51
-Arguments:
-	$comment->id
 
 
 import_wordpress_post
@@ -537,7 +537,7 @@ related_posts
 Target:
 	$ids
 Called from:
-	includes/class/Theme.php on line 207
+	includes/class/Theme.php on line 184
 Arguments:
 	$post, $limit
 
@@ -547,7 +547,7 @@ stylesheets
 Target:
 	$stylesheets
 Called from:
-	includes/class/Theme.php on line 244
+	includes/class/Theme.php on line 221
 
 
 scripts
@@ -555,7 +555,7 @@ scripts
 Target:
 	$javascripts
 Called from:
-	includes/class/Theme.php on line 303
+	includes/class/Theme.php on line 280
 
 
 links
@@ -563,7 +563,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 352
+	includes/class/Theme.php on line 329
 
 
 visitor
@@ -571,7 +571,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 355
+	includes/common.php on line 367
 
 
 admin_determine_action
@@ -579,7 +579,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 99
+	includes/controller/Admin.php on line 116
 
 
 post_export_url
@@ -587,7 +587,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 938
+	includes/controller/Admin.php on line 979
 Arguments:
 	$post)
 
@@ -597,7 +597,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 957
+	includes/controller/Admin.php on line 998
 Arguments:
 	$post
 
@@ -607,7 +607,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1000
+	includes/controller/Admin.php on line 1042
 Arguments:
 	$page)
 
@@ -617,7 +617,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1015
+	includes/controller/Admin.php on line 1057
 Arguments:
 	$page
 
@@ -627,7 +627,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1066
+	includes/controller/Admin.php on line 1109
 
 
 manage_nav
@@ -635,7 +635,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 1902
+	includes/controller/Admin.php on line 2015
 
 
 settings_nav
@@ -643,7 +643,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 1931
+	includes/controller/Admin.php on line 2044
 
 
 extend_nav
@@ -651,7 +651,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 1941
+	includes/controller/Admin.php on line 2054
 
 
 admin_subnav
@@ -659,7 +659,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 1952
+	includes/controller/Admin.php on line 2065
 
 
 nav_selected
@@ -667,7 +667,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2060
+	includes/controller/Admin.php on line 2171
 
 
 url_code
@@ -675,7 +675,7 @@ url_code
 Target:
 	Post::$url_attrs
 Called from:
-	includes/controller/Main.php on line 168
+	includes/controller/Main.php on line 172
 
 
 feed_url
@@ -693,15 +693,15 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 839
+	includes/helpers.php on line 791
 
 
 keyword_search
 --------------
 Target:
-	$keywords
+	$search
 Called from:
-	includes/helpers.php on line 1566
+	includes/helpers.php on line 1561
 Arguments:
 	$query, $plain
 
@@ -711,7 +711,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1702
+	includes/helpers.php on line 1697
 
 
 group

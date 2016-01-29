@@ -9,8 +9,8 @@
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2015.07");
-    define('CHYRP_CODENAME', "Kordofan");
+    define('CHYRP_VERSION',  "2016.01");
+    define('CHYRP_CODENAME', "Socotra");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('ADMIN',          false);
@@ -22,7 +22,8 @@
     define('INDEX',          false);
     define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(__FILE__));
-    define('INCLUDES_DIR',   dirname(__FILE__).DIR."includes");
+    define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
+    define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
     define('MODULES_DIR',    MAIN_DIR.DIR."modules");
     define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
     define('THEMES_DIR',     MAIN_DIR.DIR."themes");
@@ -246,11 +247,11 @@
         if (!file_exists(MAIN_DIR.DIR.".htaccess"))
             echo __("Generating .htaccess file...").
                  test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess),
-                      __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable."));
+                      __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
         else
             echo __("Appending to .htaccess file...").
                  test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND),
-                      __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable."));
+                      __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
     }
 
     /**
@@ -291,6 +292,16 @@
      */
     function remove_trackbacking() {
         Config::remove("enable_trackbacking");
+    }
+
+    /**
+     * Function: add_admin_per_page
+     * Adds the admin_per_page config setting.
+     *
+     * Versions: 2015.07 => 2016.01
+     */
+    function add_admin_per_page() {
+        Config::fallback("admin_per_page", 25);
     }
 ?>
 <!DOCTYPE html>
@@ -353,7 +364,7 @@
                 background-color: #4f4f4f;
             }
             html {
-                font-size: 16px;
+                font-size: 14px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
@@ -363,7 +374,7 @@
                 border: 0em;
             }
             body {
-                font-size: 14px;
+                font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
                 color: #4a4747;
@@ -386,6 +397,12 @@
             h1:first-child {
                 margin-top: 0em;
             }
+            h2 {
+                font-size: 1.25em;
+                text-align: center;
+                font-weight: bold;
+                margin: 0.75em 0em;
+            }
             code {
                 font-family: "Hack webfont", monospace;
                 font-style: normal;
@@ -393,6 +410,17 @@
                 background-color: #efefef;
                 padding: 2px;
                 color: #4f4f4f;
+            }
+            strong {
+                font-weight: normal;
+                color: #f00;
+            }
+            ul, ol {
+                margin: 0em 0em 2em 2em;
+                list-style-position: outside;
+            }
+            li {
+                margin-bottom: 1em;
             }
             a:link, a:visited {
                 color: #4a4747;
@@ -450,13 +478,6 @@
                 border-color: #1e57ba;
                 outline: none;
             }
-            ul, ol {
-                margin: 0em 0em 2em 2em;
-                list-style-position: outside;
-            }
-            li {
-                margin-bottom: 1em;
-            }
             p {
                 margin-bottom: 1em;
             }
@@ -464,7 +485,7 @@
     </head>
     <body>
         <div class="window">
-<?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or isset($_GET['task']) == "upgrade") : ?>
+<?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) : ?>
             <pre role="status" class="pane"><?php
 
 # Perform core upgrade tasks.
@@ -479,12 +500,14 @@ add_uploads_limit();
 
 remove_trackbacking();
 
+add_admin_per_page();
+
 # Perform Module/Feather upgrades.
 
 foreach ((array) Config::get("enabled_modules") as $module)
     if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
         ob_start();
-        echo $begin = _f("Calling ‘%s’ module's upgrader...", array($module))."\n";
+        echo $begin = _f("Calling %s module's upgrader...", array($module))."\n";
         require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
         if (ob_get_contents() == $begin)
@@ -496,7 +519,7 @@ foreach ((array) Config::get("enabled_modules") as $module)
 foreach ((array) Config::get("enabled_feathers") as $feather)
     if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
         ob_start();
-        echo $begin = _f("Calling ‘%s’ feather's upgrader...", array($feather))."\n";
+        echo $begin = _f("Calling %s feather's upgrader...", array($feather))."\n";
         require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 
         if (ob_get_contents() == $begin)
@@ -509,12 +532,13 @@ foreach ($errors as $error)
     echo '<span role="alert">'.$error."</span>\n";
 
           ?></pre>
-            <h1 class="what_now"><?php echo __("What now?"); ?></h1>
+            <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
+            <h2><?php echo __("What now?"); ?></h2>
             <ol>
                 <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
                 <li><?php echo __("Fix any problems reported."); ?></li>
                 <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
-                <li><?php echo __("You can delete <code>upgrade.php</code> once you are finished."); ?></li>
+                <li><?php echo __("You can delete <em>upgrade.php</em> once you are finished."); ?></li>
             </ol>
             <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php else: ?>

@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-23 17:14+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: modules/cascade/admin/pages/cascade_settings.twig:3
+msgid "Cascade Settings"
+msgstr ""
+
+#: modules/cascade/admin/pages/cascade_settings.twig:9
+msgid "Automatic"
+msgstr ""
+
+#: modules/cascade/admin/pages/cascade_settings.twig:11
+msgid "Load more posts when the visitor scrolls to the bottom of the page?"
+msgstr ""
+
 #: modules/cascade/cascade.php:29
 #: modules/cascade/info.php:3
 msgid "Cascade"
@@ -24,17 +36,5 @@ msgstr ""
 
 #: modules/cascade/info.php:6
 msgid "Adds ajax-powered infinite scrolling to your blog."
-msgstr ""
-
-#: modules/cascade/pages/admin/cascade_settings.twig:3
-msgid "Cascade Settings"
-msgstr ""
-
-#: modules/cascade/pages/admin/cascade_settings.twig:9
-msgid "Automatic"
-msgstr ""
-
-#: modules/cascade/pages/admin/cascade_settings.twig:11
-msgid "Load more posts when the visitor scrolls to the bottom of the page?"
 msgstr ""
 

@@ -1,9 +1,7 @@
 <?php
     define('JAVASCRIPT', true);
-        require_once dirname(dirname(dirname(dirname(__FILE__)))).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
+    require_once dirname(dirname(dirname(dirname(__FILE__)))).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 ?>
-<!-- --><script>
-
 // Mobile navigation menu.
 $(document).ready(function() {
     $('<li>', {
@@ -24,10 +22,8 @@ $(document).ready(function() {
         }).text("<?php echo __("Menu", "theme"); ?>")).appendTo("ul.tail_nav").parent().addClass("mobile_nav");
         $("body").addClass("mobile_nav");
 
-        // Make the menu items keyboard accessible
-        $(".mobile_nav").children().on("focus", "a:not(#mobile_toggle_link)", function() {
+        // Make the menu items keyboard accessible.
+        $("ul.tail_nav.mobile_nav").on("focus", "a:not(#mobile_toggle_link)", function() {
             $(".mobile_nav").addClass("on");
         });
 });
-
-<!-- --></script>

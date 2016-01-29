@@ -61,7 +61,7 @@
 
             $actions = func_get_args();
 
-            if (end($actions) !== true) {# OR comparison
+            if (end($actions) !== true) { # OR comparison
                 foreach ($actions as $action)
                     if (in_array($action, $this->permissions))
                         return true;

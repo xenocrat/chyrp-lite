@@ -8,18 +8,25 @@
 
     require_once "common.php";
 
-    # Clean the output buffer to prevent display_errors corrupting the served image.
+    # Clean the output buffer to guard against image corruption.
     ob_clean();
 
     if (ini_get("memory_limit") < 48)
         ini_set("memory_limit", "48M");
 
+    if (empty($_GET['file'])) {
+        header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+        exit("Missing Argument.");
+    }
+
     $config = Config::current();
-    $quality = fallback($_GET["quality"], 80);
-    $filename = rtrim(fallback($_GET['file']));
-    $filepath = MAIN_DIR.$config->uploads_path.$filename;
+    $quality = (int) fallback($_GET["quality"], 80);
+    $filename = oneof(trim($_GET['file']), DIR);
+    $filepath = uploaded($filename, false);;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
-    $url = $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).$filename;
+    $url = uploaded($filename);
+    $new_width = (int) fallback($_GET["max_width"], 0);
+    $new_height = (int) fallback($_GET["max_height"], 0);
 
     if (!function_exists("gd_info"))
         exit(header("Location: ".$url)); # GD not installed.
@@ -33,11 +40,12 @@
     if (substr_count($filename, DIR))
         display_error(_f("Image name %s is not allowed.", $filename));
 
-    if (!file_exists($filepath))
+    if (!is_readable($filepath) or !is_file($filepath))
         display_error(_f("Image file %s was not found.", $filename));
 
     function display_error($string) {
-        $thumbnail = imagecreatetruecolor(oneof(@$_GET['max_width'], 128), 16);
+        $thumbnail = imagecreatetruecolor(($_GET['max_width']) ? $_GET['max_width'] : 640,
+                                          ($_GET['max_height']) ? $_GET['max_height'] : 16);
         imagestring($thumbnail, 1, 4, 4, $string, imagecolorallocate($thumbnail, 255, 255, 255));
         header("Content-type: image/png");
         header("Content-Disposition: inline; filename=error.png");
@@ -46,9 +54,6 @@
     }
 
     list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
-
-    $new_width = (int) fallback($_GET["max_width"], 0);
-    $new_height = (int) fallback($_GET["max_height"], 0);
 
     $crop_x = 0;
     $crop_y = 0;
@@ -110,7 +115,7 @@
         exit(header("Location: ".$url));
 
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
-    $cache_file = INCLUDES_DIR.DIR."caches".DIR."thumb_".$cache_filename;
+    $cache_file = CACHES_DIR.DIR."thumb_".$cache_filename;
 
     if (isset($_GET['no_cache']) and $_GET['no_cache'] == "true" and file_exists($cache_file))
         unlink($cache_file);

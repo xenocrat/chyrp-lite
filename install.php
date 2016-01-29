@@ -1,18 +1,22 @@
 <?php
     header("Content-type: text/html; charset=UTF-8");
 
-    define('DEBUG',        true);
-    define('JAVASCRIPT',   false);
-    define('ADMIN',        false);
-    define('AJAX',         false);
-    define('XML_RPC',      false);
-    define('UPGRADING',    false);
-    define('INSTALLING',   true);
-    define('TESTER',       isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-    define('DIR',          DIRECTORY_SEPARATOR);
-    define('MAIN_DIR',     dirname(__FILE__));
-    define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
-    define('USE_ZLIB',     false);
+    define('DEBUG',          true);
+    define('CHYRP_VERSION',  "2016.01");
+    define('CHYRP_CODENAME', "Socotra");
+    define('CACHE_TWIG',     false);
+    define('JAVASCRIPT',     false);
+    define('ADMIN',          false);
+    define('AJAX',           false);
+    define('XML_RPC',        false);
+    define('UPGRADING',      false);
+    define('INSTALLING',     true);
+    define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
+    define('DIR',            DIRECTORY_SEPARATOR);
+    define('MAIN_DIR',       dirname(__FILE__));
+    define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
+    define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
+    define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4
@@ -54,11 +58,14 @@
     $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
     set_timezone($timezone);
 
-    # Ask PHP for the default locale and try to load an appropriate translator
-    $language = locale_get_primary_language(locale_get_default())."-".locale_get_region(locale_get_default());
+    if (class_exists("Locale")) {
+        # Ask PHP for the default locale and try to load an appropriate translator.
+        $locale = Locale::getDefault();
+        $language = Locale::getPrimaryLanguage($locale)."_".Locale::getRegion($locale);
 
-    if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$language.".mo"))
-        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
+        if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$language.".mo"))
+            load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
+    }
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
@@ -93,15 +100,15 @@
     if (file_exists(INCLUDES_DIR.DIR."config.json.php") and file_exists(MAIN_DIR.DIR.".htaccess")) {
         $sql = SQL::current(true);
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            error(__("Already Installed"), __("Chyrp is already fully installed and configured."));
+            error(__("Already Installed"), __("Chyrp Lite is already fully installed and configured."));
     }
 
     if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR.DIR.".htaccess")) or
         (file_exists(MAIN_DIR.DIR.".htaccess") and !is_writable(MAIN_DIR.DIR.".htaccess") and !$htaccess_has_chyrp))
-        $errors[] = __("Please CHMOD or CHOWN the <code>.htaccess</code> file to make it writable.");
+        $errors[] = __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable.");
 
     if (!is_writable(INCLUDES_DIR))
-        $errors[] = __("Please CHMOD or CHOWN the <code>includes</code> directory to make it writable.");
+        $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
     if (!empty($_POST)) {
         if ($_POST['adapter'] == "sqlite" and !@is_writable(dirname($_POST['database'])))
@@ -152,10 +159,10 @@
             if (!$htaccess_has_chyrp)
                 if (!file_exists(MAIN_DIR.DIR.".htaccess"))
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
-                        $errors[] = __("Clean URLs will not be available because the <code>.htaccess</code> file is not writable.");
+                        $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
                 else
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND))
-                        $errors[] = __("Clean URLs will not be available because the <code>.htaccess</code> file is not writable.");
+                        $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
 
             $config->set("sql", array());
             $config->set("name", $_POST['name']);
@@ -170,6 +177,7 @@
             $config->set("check_updates_last", 0);
             $config->set("theme", "blossom");
             $config->set("posts_per_page", 5);
+            $config->set("admin_per_page", 25);
             $config->set("feed_items", 20);
             $config->set("feed_url", "");
             $config->set("uploads_path", DIR."uploads".DIR);
@@ -281,65 +289,34 @@
                              updated_at DATETIME DEFAULT NULL,
                              PRIMARY KEY (id)
                          ) DEFAULT CHARSET=utf8");
-
-            # This is to let the gettext scanner add these strings to the .pot file.
-            # They are translated on display via Twig.
-            # We don't want translated strings in the database.
-            /* $translations = array(__("Change Settings"),
-                                     __("Toggle Extensions"),
-                                     __("View Site"),
-                                     __("View Private Posts"),
-                                     __("View Scheduled Posts"),
-                                     __("View Drafts"),
-                                     __("View Own Drafts"),
-                                     __("Add Posts"),
-                                     __("Add Drafts"),
-                                     __("Edit Posts"),
-                                     __("Edit Drafts"),
-                                     __("Edit Own Posts"),
-                                     __("Edit Own Drafts"),
-                                     __("Delete Posts"),
-                                     __("Delete Drafts"),
-                                     __("Delete Own Posts"),
-                                     __("Delete Own Drafts"),
-                                     __("View Pages"),
-                                     __("Add Pages"),
-                                     __("Edit Pages"),
-                                     __("Delete Pages"),
-                                     __("Add Users"),
-                                     __("Edit Users"),
-                                     __("Delete Users"),
-                                     __("Add Groups"),
-                                     __("Edit Groups"),
-                                     __("Delete Groups")); */
-
-            $names = array("change_settings" => "Change Settings",
-                           "toggle_extensions" => "Toggle Extensions",
-                           "view_site" => "View Site",
-                           "view_private" => "View Private Posts",
-                           "view_scheduled" => "View Scheduled Posts",
-                           "view_draft" => "View Drafts",
-                           "view_own_draft" => "View Own Drafts",
-                           "add_post" => "Add Posts",
-                           "add_draft" => "Add Drafts",
-                           "edit_post" => "Edit Posts",
-                           "edit_draft" => "Edit Drafts",
-                           "edit_own_post" => "Edit Own Posts",
-                           "edit_own_draft" => "Edit Own Drafts",
-                           "delete_post" => "Delete Posts",
-                           "delete_draft" => "Delete Drafts",
-                           "delete_own_post" => "Delete Own Posts",
-                           "delete_own_draft" => "Delete Own Drafts",
-                           "view_page" => "View Pages",
-                           "add_page" => "Add Pages",
-                           "edit_page" => "Edit Pages",
-                           "delete_page" => "Delete Pages",
-                           "add_user" => "Add Users",
-                           "edit_user" => "Edit Users",
-                           "delete_user" => "Delete Users",
-                           "add_group" => "Add Groups",
-                           "edit_group" => "Edit Groups",
-                           "delete_group" => "Delete Groups");
+                                                                        # Add these strings to the .pot file.
+            $names = array("change_settings" => "Change Settings",      # __("Change Settings");
+                           "toggle_extensions" => "Toggle Extensions",  # __("Toggle Extensions");
+                           "view_site" => "View Site",                  # __("View Site");
+                           "view_private" => "View Private Posts",      # __("View Private Posts");
+                           "view_scheduled" => "View Scheduled Posts",  # __("View Scheduled Posts");
+                           "view_draft" => "View Drafts",               # __("View Drafts");
+                           "view_own_draft" => "View Own Drafts",       # __("View Own Drafts");
+                           "add_post" => "Add Posts",                   # __("Add Posts");
+                           "add_draft" => "Add Drafts",                 # __("Add Drafts");
+                           "edit_post" => "Edit Posts",                 # __("Edit Posts");
+                           "edit_draft" => "Edit Drafts",               # __("Edit Drafts");
+                           "edit_own_post" => "Edit Own Posts",         # __("Edit Own Posts");
+                           "edit_own_draft" => "Edit Own Drafts",       # __("Edit Own Drafts");
+                           "delete_post" => "Delete Posts",             # __("Delete Posts");
+                           "delete_draft" => "Delete Drafts",           # __("Delete Drafts");
+                           "delete_own_post" => "Delete Own Posts",     # __("Delete Own Posts");
+                           "delete_own_draft" => "Delete Own Drafts",   # __("Delete Own Drafts");
+                           "view_page" => "View Pages",                 # __("View Pages");
+                           "add_page" => "Add Pages",                   # __("Add Pages");
+                           "edit_page" => "Edit Pages",                 # __("Edit Pages");
+                           "delete_page" => "Delete Pages",             # __("Delete Pages");
+                           "add_user" => "Add Users",                   # __("Add Users");
+                           "edit_user" => "Edit Users",                 # __("Edit Users");
+                           "delete_user" => "Delete Users",             # __("Delete Users");
+                           "add_group" => "Add Groups",                 # __("Add Groups");
+                           "edit_group" => "Edit Groups",               # __("Edit Groups");
+                           "delete_group" => "Delete Groups");          # __("Delete Groups");
 
             foreach ($names as $id => $name)
                 $sql->replace("permissions",
@@ -450,7 +427,7 @@
                 background-color: #4f4f4f;
             }
             html {
-                font-size: 16px;
+                font-size: 14px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
@@ -460,7 +437,7 @@
                 border: 0em;
             }
             body {
-                font-size: 14px;
+                font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
                 color: #4a4747;
@@ -500,15 +477,6 @@
                 background-color: #ffffff;
                 background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
-            input[type="text"]:focus,
-            input[type="email"]:focus,
-            input[type="url"]:focus,
-            input[type="number"]:focus,
-            input[type="password"]:focus,
-            textarea:focus {
-                border-color: #1e57ba;
-                outline: none;
-            }
             input[type="text"],
             input[type="email"],
             input[type="url"],
@@ -519,6 +487,18 @@
                 box-sizing: border-box;
                 width: 100%;
                 margin: 0em;
+            }
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="url"]:focus,
+            input[type="number"]:focus,
+            input[type="password"]:focus,
+            textarea:focus {
+                border-color: #1e57ba;
+                outline: none;
+            }
+            input[type="password"].strong {
+                border: 1px solid #76b362
             }
             form hr {
                 border: none;
@@ -555,6 +535,14 @@
                 background-color: #efefef;
                 padding: 2px;
                 color: #4f4f4f;
+            }
+            strong {
+                font-weight: normal;
+                color: #f00;
+            }
+            ul, ol {
+                margin: 0em 0em 2em 2em;
+                list-style-position: outside;
             }
             label {
                 display: block;
@@ -624,14 +612,6 @@
                 border-color: #1e57ba;
                 outline: none;
             }
-            strong {
-                font-weight: normal;
-                color: #f00;
-            }
-            ul, ol {
-                margin: 0em 0em 2em 2em;
-                list-style-position: outside;
-            }
             p {
                 margin-bottom: 1em;
             }
@@ -647,8 +627,14 @@
                         $("#database_field label .sub").fadeOut("fast");
                         $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                     }
-                })
-            })
+                });
+                $("input[type='password']#password_1").keyup(function(e) {
+                    if (passwordStrength($(this).val()) < 100)
+                        $(this).removeClass("strong");
+                    else
+                        $(this).addClass("strong");
+                });
+            });
         </script>
     </head>
     <body>
@@ -673,7 +659,7 @@ foreach ($errors as $error)
                         <option value="sqlite"<?php selected("sqlite", fallback($_POST['adapter'], "mysql")); ?>>SQLite 3</option>
                         <?php endif; ?>
                         <?php if (class_exists("PDO") and in_array("pgsql", PDO::getAvailableDrivers())): ?>
-                        <option value="pgsql"<?php selected("pgsql", oneof(@$_POST['adapter'], "mysql")); ?>>PostgreSQL</option>
+                        <option value="pgsql"<?php selected("pgsql", fallback($_POST['adapter'], "mysql")); ?>>PostgreSQL</option>
                         <?php endif; ?>
                     </select>
                 </p>
@@ -751,15 +737,12 @@ foreach ($errors as $error)
                 <button type="submit"><?php echo __("Install!"); ?></button>
             </form>
 <?php else: ?>
-            <h1><?php echo __("Done!"); ?></h1>
-            <p>
-                <?php echo __("Chyrp Lite has been successfully installed. Go to your site and log in to get started."); ?>
-            </p>
+            <h1><?php echo __("Chyrp Lite has been installed"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("Delete <code>install.php</code>, you won't need it anymore."); ?></li>
-            <?php if (!is_writable(INCLUDES_DIR.DIR."caches")): ?>
-                <li><?php echo __("CHMOD <code>/includes/caches</code> to 777."); ?></li>
+                <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>
+            <?php if (!is_writable(CACHES_DIR)): ?>
+                <li><?php echo _f("Please make <em>%s</em> writable by the server.", CACHES_DIR) ?></li>
             <?php endif; ?>
                 <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
             </ol>

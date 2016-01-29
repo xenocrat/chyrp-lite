@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-23 17:14+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,14 +17,78 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: modules/categorize/admin/pages/delete_category.twig:3
+#: modules/categorize/admin/pages/delete_category.twig:6
+msgid "Delete Category?"
+msgstr ""
+
+#: modules/categorize/admin/pages/delete_category.twig:8
+#, php-format
+msgid "Are you sure you want to delete the category &#8220;%s&#8221;?"
+msgstr ""
+
+#: modules/categorize/admin/pages/edit_category.twig:3
+#, php-format
+msgid "Edit Category &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/categorize/admin/pages/edit_category.twig:6
+#, php-format
+msgid "Editing Category &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/categorize/admin/pages/edit_category.twig:10
+#: modules/categorize/admin/pages/manage_category.twig:11
+#: modules/categorize/admin/pages/new_category.twig:10
+msgid "Name"
+msgstr ""
+
+#: modules/categorize/admin/pages/edit_category.twig:15
+#: modules/categorize/admin/pages/new_category.twig:15
+msgid "URL"
+msgstr ""
+
+#: modules/categorize/admin/pages/edit_category.twig:20
+#: modules/categorize/admin/pages/new_category.twig:20
+msgid "Enter a &#8220;clean&#8221; name here if you want the category name to appear differently in the URL."
+msgstr ""
+
+#: modules/categorize/admin/pages/edit_category.twig:24
+#: modules/categorize/admin/pages/manage_category.twig:10
+#: modules/categorize/admin/pages/new_category.twig:24
+msgid "Listed?"
+msgstr ""
+
+#: modules/categorize/admin/pages/edit_category.twig:27
+#: modules/categorize/admin/pages/new_category.twig:27
+msgid "Do you want to include this category in the categories list?"
+msgstr ""
+
+#: modules/categorize/admin/pages/edit_category.twig:31
+msgid "Update"
+msgstr ""
+
+#: modules/categorize/admin/pages/manage_category.twig:3
+#: modules/categorize/admin/pages/manage_category.twig:6
 #: modules/categorize/categorize.php:14
-#: modules/categorize/pages/admin/manage_category.twig:3
-#: modules/categorize/pages/admin/manage_category.twig:6
 msgid "Manage Categories"
 msgstr ""
 
+#: modules/categorize/admin/pages/manage_category.twig:45
+msgid "Add Category"
+msgstr ""
+
+#: modules/categorize/admin/pages/new_category.twig:3
+#: modules/categorize/admin/pages/new_category.twig:6
+msgid "New Category"
+msgstr ""
+
+#: modules/categorize/admin/pages/new_category.twig:31
+msgid "Add"
+msgstr ""
+
 #: modules/categorize/categorize.php:70
-#: modules/categorize/categorize.php:96
+#: modules/categorize/categorize.php:98
 msgid "Category"
 msgstr ""
 
@@ -32,43 +96,80 @@ msgstr ""
 msgid "[None]"
 msgstr ""
 
-#: modules/categorize/categorize.php:124
-#: modules/categorize/categorize.php:138
+#: modules/categorize/categorize.php:125
+msgid "You did not specify a category"
+msgstr ""
+
+#: modules/categorize/categorize.php:127
+msgid "The category you specified was not found"
+msgstr ""
+
+#: modules/categorize/categorize.php:132
+#: modules/categorize/categorize.php:147
 msgid "Invalid Category"
 msgstr ""
 
-#: modules/categorize/categorize.php:149
+#: modules/categorize/categorize.php:146
+msgid "There are no posts in the category you specified"
+msgstr ""
+
+#: modules/categorize/categorize.php:158
 #, php-format
 msgid "Posts in category %s"
 msgstr ""
 
-#: modules/categorize/categorize.php:191
+#: modules/categorize/categorize.php:165
 msgid "Categories"
 msgstr ""
 
-#: modules/categorize/categorize.php:217
+#: modules/categorize/categorize.php:195
+#: modules/categorize/categorize.php:228
+msgid "No Name Specified"
+msgstr ""
+
+#: modules/categorize/categorize.php:195
+msgid "A name is required to add a category."
+msgstr ""
+
+#: modules/categorize/categorize.php:198
 msgid "Category added."
 msgstr ""
 
-#: modules/categorize/categorize.php:226
-#: modules/categorize/categorize.php:240
-#: modules/categorize/categorize.php:263
+#: modules/categorize/categorize.php:203
+#: modules/categorize/categorize.php:219
+#: modules/categorize/categorize.php:253
 msgid "You do not have sufficient privileges to manage categories."
 msgstr ""
 
-#: modules/categorize/categorize.php:229
+#: modules/categorize/categorize.php:206
 msgid "An ID is required to edit a category."
 msgstr ""
 
+#: modules/categorize/categorize.php:211
+#: modules/categorize/categorize.php:233
 #: modules/categorize/categorize.php:246
+#: modules/categorize/categorize.php:267
+msgid "Category not found."
+msgstr ""
+
+#: modules/categorize/categorize.php:225
+msgid "An ID is required to update a category."
+msgstr ""
+
+#: modules/categorize/categorize.php:228
+msgid "A name is required to update a category."
+msgstr ""
+
+#: modules/categorize/categorize.php:236
 msgid "Category updated."
 msgstr ""
 
-#: modules/categorize/categorize.php:251
-msgid "Please specify the category you want to delete."
+#: modules/categorize/categorize.php:241
+#: modules/categorize/categorize.php:259
+msgid "An ID is required to delete a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:269
+#: modules/categorize/categorize.php:270
 msgid "Category deleted."
 msgstr ""
 
@@ -86,65 +187,5 @@ msgstr ""
 
 #: modules/categorize/info.php:12
 msgid "Do you want to remove your Categories from the database? This will also remove all category entries from your posts."
-msgstr ""
-
-#: modules/categorize/pages/admin/add_category.twig:3
-#: modules/categorize/pages/admin/add_category.twig:6
-msgid "New Category"
-msgstr ""
-
-#: modules/categorize/pages/admin/add_category.twig:10
-#: modules/categorize/pages/admin/edit_category.twig:10
-#: modules/categorize/pages/admin/manage_category.twig:11
-msgid "Name"
-msgstr ""
-
-#: modules/categorize/pages/admin/add_category.twig:15
-#: modules/categorize/pages/admin/edit_category.twig:15
-msgid "URL"
-msgstr ""
-
-#: modules/categorize/pages/admin/add_category.twig:20
-#: modules/categorize/pages/admin/edit_category.twig:20
-msgid "Enter a “clean” name here if your category name contains characters that cannot be displayed in a URL, or if you want the category name to appear differently in the URL."
-msgstr ""
-
-#: modules/categorize/pages/admin/add_category.twig:24
-#: modules/categorize/pages/admin/edit_category.twig:24
-#: modules/categorize/pages/admin/manage_category.twig:10
-msgid "Listed?"
-msgstr ""
-
-#: modules/categorize/pages/admin/add_category.twig:27
-#: modules/categorize/pages/admin/edit_category.twig:27
-msgid "Do you want to include this category in the categories list?"
-msgstr ""
-
-#: modules/categorize/pages/admin/delete_category.twig:3
-#: modules/categorize/pages/admin/delete_category.twig:6
-msgid "Delete Category?"
-msgstr ""
-
-#: modules/categorize/pages/admin/delete_category.twig:8
-#, php-format
-msgid "Are you sure you want to delete the category &#8220;%s&#8221;?"
-msgstr ""
-
-#: modules/categorize/pages/admin/edit_category.twig:3
-#, php-format
-msgid "Edit Category - %s"
-msgstr ""
-
-#: modules/categorize/pages/admin/edit_category.twig:6
-#, php-format
-msgid "Editing Category &#8220;%s&#8221;"
-msgstr ""
-
-#: modules/categorize/pages/admin/edit_category.twig:31
-msgid "Update"
-msgstr ""
-
-#: modules/categorize/pages/admin/manage_category.twig:45
-msgid "Add Category"
 msgstr ""
 

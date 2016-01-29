@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ site.locale | split('_') | first }}">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{ theme.url }}/stylesheets/all.css" type="text/css" media="all">
+<title>{{ title }}</title>
+</head>
+<body class="preview">
+<article>
+{% if filter | contains("title") %}
+<h2>{{ content }}</h2>
+{% else %}
+<section>
+{{ content }}
+</section>
+{% endif %}
+</article>
+</body>
+</html>

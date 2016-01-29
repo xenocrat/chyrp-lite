@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-23 17:14+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -16,6 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/recaptcha/admin/pages/recaptcha_settings.twig:3
+msgid "Recaptcha Settings"
+msgstr ""
+
+#: modules/recaptcha/admin/pages/recaptcha_settings.twig:9
+msgid "Public Key"
+msgstr ""
+
+#: modules/recaptcha/admin/pages/recaptcha_settings.twig:13
+msgid "Private Key"
+msgstr ""
 
 #: modules/recaptcha/info.php:3
 msgid "reCAPTCHA"
@@ -27,18 +39,6 @@ msgstr ""
 
 #: modules/recaptcha/info.php:11
 msgid "Please remember to set the public and private keys on the ReCAPTCHA settings page."
-msgstr ""
-
-#: modules/recaptcha/pages/admin/recaptcha_settings.twig:3
-msgid "Recaptcha Settings"
-msgstr ""
-
-#: modules/recaptcha/pages/admin/recaptcha_settings.twig:9
-msgid "Public Key"
-msgstr ""
-
-#: modules/recaptcha/pages/admin/recaptcha_settings.twig:13
-msgid "Private Key"
 msgstr ""
 
 #: modules/recaptcha/recaptcha.php:41

@@ -1,15 +1,17 @@
-{% extends "content/post.twig" %}
+{% extends "content" ~ DIR ~ "post.twig" %}
 
 {% block content %}
-      {% if post['title'] %}
-      <h2 class="post_title">
-        <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;">$post.title</a>
-      </h2>
-      {% endif %}
-      <section class="description{% if post.description | length > 1000 %} columnized{% endif %}">
-        ${ post.description | read_more("&hellip;more") }
-      </section>
-      <section class="audio">
-      	$post.audio_player
-      </section>
+{% if post.title is not empty %}
+<h2 class="post_title">
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
+</h2>
+{% endif %}
+{% if post.description is not empty %}
+<section class="description{{ post.description | length > 1000 ? ' longform' : '' }}">
+{{ post.description }}
+</section>
+{% endif %}
+<section class="audio">
+{{ post.audio_player }}
+</section>
 {% endblock %}

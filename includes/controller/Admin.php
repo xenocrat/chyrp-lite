@@ -27,11 +27,28 @@
         private function __construct() {
             $config = Config::current();
 
-            $this->theme = new Twig_Loader(MAIN_DIR.DIR."admin",
-                                          (is_writable(INCLUDES_DIR.DIR."caches") and !DEBUG) ? INCLUDES_DIR.DIR."caches" : null,
-                                          "UTF-8");
+            $cache = (is_writable(CACHES_DIR) and (!DEBUG or CACHE_TWIG));
+            $loaders = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-            # Load the theme translator
+            foreach ($config->enabled_modules as $extension)
+                if (file_exists(MODULES_DIR.DIR.$extension.DIR."admin"))
+                    $loaders[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$extension.DIR."admin");
+
+            foreach ($config->enabled_feathers as $extension)
+                if (file_exists(FEATHERS_DIR.DIR.$extension.DIR."admin"))
+                    $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$extension.DIR."admin");
+
+            $loader = new Twig_Loader_Chain($loaders);
+            $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
+                                                              "strict_variables" => (DEBUG) ? true : false,
+                                                              "charset" => "UTF-8",
+                                                              "cache" => ($cache) ? CACHES_DIR : false,
+                                                              "autoescape" => false));
+            $this->twig->addExtension(new Leaf());
+            $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+            $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+
+            # Load the theme translator.
             if (file_exists(MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo"))
                 load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
         }
@@ -160,6 +177,9 @@
 
             $post = new Post($_GET['id'], array("drafts" => true, "filter" => false));
 
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
@@ -180,10 +200,10 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."));
 
-            $post = new Post($_POST['id'], array("drafts" => true));
-
             if (isset($_POST['publish']))
                 $_POST['status'] = "public";
+
+            $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
                 Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
@@ -197,8 +217,7 @@
             Feathers::$instances[$post->feather]->update($post);
 
             if (!isset($_POST['ajax']))
-                Flash::notice(_f("Post updated. <a href=\"%s\">View Post &rarr;</a>",
-                                 array($post->url())),
+                Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
                               "/admin/?action=manage_posts");
             else
                 exit((string) $_POST['id']);
@@ -214,6 +233,9 @@
 
             $post = new Post($_GET['id'], array("drafts" => true));
 
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
@@ -225,16 +247,20 @@
          * Destroys a post (the real deal).
          */
         public function destroy_post() {
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."));
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_posts");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             $post = new Post($_POST['id'], array("drafts" => true));
+
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
@@ -253,7 +279,7 @@
 
             fallback($_GET['query'], "");
 
-            list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "post_attributes");
+            list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
             if (!empty($_GET['month']))
                 $where["created_at like"] = $_GET['month']."-%";
@@ -268,6 +294,7 @@
                                         "params" => $params));
 
             $ids = array();
+
             foreach ($results[0] as $result)
                 $ids[] = $result["id"];
 
@@ -275,7 +302,7 @@
                 $posts = new Paginator(Post::find(array("placeholders" => true,
                                                         "drafts" => true,
                                                         "where" => array("id" => $ids))),
-                                       25);
+                                       Config::current()->admin_per_page);
             else
                 $posts = new Paginator(array());
 
@@ -326,27 +353,19 @@
             if (empty($_POST['title']) and empty($_POST['slug']))
                 error(__("Error"), __("Title and slug cannot be blank."));
 
-            $bump = new Page(null, array("where" => array("list_order" => (int) $_POST['list_order'])));
+            fallback($_POST['status'], "public");
 
-            # If we are taking the list order of an existing page, bump it to the bottom of the list.
-            if (!$bump->no_results)
-                $bump->update(null,
-                              null,
-                              null,
-                              null,
-                              null,
-                              null,
-                              count(Page::find()),
-                              null,
-                              null);
+            $public = in_array($_POST['status'], array("listed", "public"));
+            $listed = in_array($_POST['status'], array("listed", "teased"));
+            $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page = Page::add($_POST['title'],
                               $_POST['body'],
                               null,
                               $_POST['parent_id'],
-                              !empty($_POST['public']),
-                              !empty($_POST['show_in_list']),
-                              (int) $_POST['list_order'],
+                              $public,
+                              $listed,
+                              $list_order,
                               (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             Flash::notice(__("Page created!"), $page->url());
@@ -363,8 +382,13 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."));
 
+            $page = new Page($_GET['id'], array("filter" => false));
+
+            if ($page->no_results)
+                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+
             $this->display("edit_page",
-                           array("page" => new Page($_GET['id'], array("filter" => false)),
+                           array("page" => $page,
                                  "pages" => Page::find(array("where" => array("id not" => $_GET['id'])))));
         }
 
@@ -390,33 +414,24 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
 
-            $swap = new Page(null, array("where" => array("list_order" => (int) $_POST['list_order'])));
+            fallback($_POST['status'], "public");
 
-            # If we are taking the list order of an existing page, swap values with it.
-            if (!$swap->no_results)
-                $swap->update(null,
-                              null,
-                              null,
-                              null,
-                              null,
-                              null,
-                              $page->list_order,
-                              null,
-                              null);
+            $public = in_array($_POST['status'], array("listed", "public"));
+            $listed = in_array($_POST['status'], array("listed", "teased"));
+            $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page->update($_POST['title'],
                           $_POST['body'],
                           null,
                           $_POST['parent_id'],
-                          !empty($_POST['public']),
-                          !empty($_POST['show_in_list']),
-                          (int) $_POST['list_order'],
+                          $public,
+                          $listed,
+                          $list_order,
                           null,
                           (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
             if (!isset($_POST['ajax']))
-                Flash::notice(_f("Page updated. <a href=\"%s\">View Page &rarr;</a>",
-                                 $page->url()),
+                Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
                                  "/admin/?action=manage_pages");
         }
 
@@ -431,7 +446,12 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a page."));
 
-            $this->display("delete_page", array("page" => new Page($_GET['id'])));
+            $page = new Page($_GET['id']);
+
+            if ($page->no_results)
+                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+
+            $this->display("delete_page", array("page" => $page));
         }
 
         /**
@@ -442,23 +462,33 @@
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
-            if (empty($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a post."));
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a page."));
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_pages");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             $page = new Page($_POST['id']);
 
-            if (!$page->no_results)
-                foreach ($page->children as $child)
-                    if (isset($_POST['destroy_children']))
-                        Page::delete($child->id, true);
-                    else
-                        $child->update($child->title, $child->body, null, 0, $child->public, $child->show_in_list, $child->list_order, null, $child->url);
+            if ($page->no_results)
+                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+
+            foreach ($page->children as $child)
+                if (isset($_POST['destroy_children']))
+                    Page::delete($child->id, true);
+                else
+                    $child->update($child->title,
+                                   $child->body,
+                                   null,
+                                   0,
+                                   $child->public,
+                                   $child->show_in_list,
+                                   $child->list_order,
+                                   null,
+                                   $child->url);
 
             Page::delete($_POST['id']);
 
@@ -471,6 +501,7 @@
          */
         public function manage_pages() {
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("edit_page") and !$visitor->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pages."));
 
@@ -480,7 +511,8 @@
             $this->display("manage_pages",
                            array("pages" => new Paginator(Page::find(array("placeholders" => true,
                                                                            "where" => $where,
-                                                                           "params" => $params)), 25)));
+                                                                           "params" => $params)),
+                                                          Config::current()->admin_per_page)));
         }
 
         /**
@@ -515,6 +547,7 @@
                 error(__("Error"), __("Please enter a username for the account."));
 
             $check = new User(array("login" => $_POST['login']));
+
             if (!$check->no_results)
                 error(__("Error"), __("That username is already in use."));
 
@@ -522,7 +555,7 @@
                 error(__("Error"), __("Password cannot be blank."));
             elseif ($_POST['password1'] != $_POST['password2'])
                 error(__("Error"), __("Passwords do not match."));
-            elseif (password_strength($_POST['password1']) < 75)
+            elseif (password_strength($_POST['password1']) < 100)
                 Flash::message(__("Please consider setting a stronger password for this user."));
 
             if (empty($_POST['email']))
@@ -700,6 +733,7 @@
          */
         public function manage_users() {
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("edit_user") and !$visitor->group->can("delete_user") and !$visitor->group->can("add_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage users."));
 
@@ -710,7 +744,7 @@
                            array("users" => new Paginator(User::find(array("placeholders" => true,
                                                                            "where" => $where,
                                                                            "params" => $params)),
-                                                          25)));
+                                                          Config::current()->admin_per_page)));
         }
 
         /**
@@ -822,10 +856,12 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $group = new Group($_POST['id']);
+
             foreach ($group->users as $user)
                 $user->update($user->login, $user->password, $user->email, $user->full_name, $user->website, $_POST['move_group']);
 
             $config = Config::current();
+
             if (!empty($_POST['default_group']))
                 $config->set("default_group", $_POST['default_group']);
             if (!empty($_POST['guest_group']))
@@ -842,17 +878,20 @@
          */
         public function manage_groups() {
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("edit_group") and !$visitor->group->can("delete_group") and !$visitor->group->can("add_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage groups."));
 
             if (!empty($_GET['search'])) {
                 $user = new User(array("login" => $_GET['search']));
+
                 if (!$user->no_results)
-                    $groups = new Paginator(array($user->group), 10);
+                    $groups = new Paginator(array($user->group));
                 else
-                    $groups = new Paginator(array(), 10);
+                    $groups = new Paginator(array());
             } else
-                $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")), 10);
+                $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
+                                        Config::current()->admin_per_page);
 
             $this->display("manage_groups",
                            array("groups" => $groups));
@@ -881,6 +920,7 @@
                     $where["created_at like"] = $_GET['month']."-%";
 
                 $visitor = Visitor::current();
+
                 if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
                     $where["user_id"] = $visitor->id;
 
@@ -902,6 +942,7 @@
                     $posts = new Paginator(array());
 
                 $latest_timestamp = 0;
+
                 foreach ($posts as $post)
                     if (strtotime($post->created_at) > $latest_timestamp)
                         $latest_timestamp = strtotime($post->created_at);
@@ -971,6 +1012,7 @@
                                     array("filter" => false));
 
                 $latest_timestamp = 0;
+
                 foreach ($pages as $page)
                     if (strtotime($page->created_at) > $latest_timestamp)
                         $latest_timestamp = strtotime($page->created_at);
@@ -1047,6 +1089,7 @@
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
                 $users_json = array();
+
                 foreach ($users as $user) {
                     $users_json[$user->login] = array();
 
@@ -1064,8 +1107,29 @@
             }
 
             $trigger->filter($exports, "export");
-            $filename = sanitize(camelize(Config::current()->name), false, true)."_Export_".date("Y-m-d");
-            download(zip($exports), $filename.".zip");
+
+            if (empty($exports))
+                Flash::warning(__("You did not select anything to export."), "/admin/?action=export");
+
+            $filename = sanitize(camelize($config->name), false, true)."_Export_".date("Y-m-d");
+            $filepath = tempnam(sys_get_temp_dir(), "zip");
+
+            if (class_exists("ZipArchive")) {
+                $zip = new ZipArchive;
+                $err = $zip->open($filepath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+                if ($err === true) {
+                    foreach ($exports as $name => $contents)
+                        $zip->addFromString($name, $contents);
+
+                    $zip->close();
+                    $bitstream = file_get_contents($filepath);
+                    unlink($filepath);
+                    download($bitstream, $filename.".zip");
+                } else
+                    error(__("Error"), _f("Failed to export files because of ZipArchive error: <code>%s</code>", zip_errors($err)));
+            } else
+                download(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
         }
 
         /**
@@ -1114,10 +1178,11 @@
                 $config = Config::current();
 
                 $regexp_url = preg_quote($_POST['media_url'], "/");
+
                 if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/", $value, $media))
                     foreach ($media[0] as $matched_url) {
                         $filename = upload_from_url($matched_url);
-                        $value = str_replace($matched_url, $config->url.$config->uploads_path.$filename, $value);
+                        $value = str_replace($matched_url, uploaded($filename), $value);
                     }
             }
 
@@ -1181,9 +1246,7 @@
                                       (bool) (int) $chyrp->pinned,
                                       $chyrp->status,
                                       datetime($entry->published),
-                                      ($entry->updated == $entry->published) ?
-                                          null :
-                                          datetime($entry->updated),
+                                      ($entry->updated == $entry->published) ? null : datetime($entry->updated),
                                       false);
 
                     $trigger->call("import_chyrp_post", $entry, $post);
@@ -1225,7 +1288,8 @@
 
             $config = Config::current();
 
-            $this->context["enabled_modules"] = $this->context["disabled_modules"] = array();
+            $this->context["enabled_modules"]  = array();
+            $this->context["disabled_modules"] = array();
 
             if (!$open = @opendir(MODULES_DIR))
                 return Flash::warning(__("Could not read modules directory."));
@@ -1245,10 +1309,12 @@
                     array_unshift($classes[$folder], $folder);
 
                 $info = include MODULES_DIR.DIR.$folder.DIR."info.php";
+
                 if (gettype($info) != "array")
                   continue;
 
                 $conflicting_modules = array();
+
                 if (!empty($info["conflicts"])) {
                     $classes[$folder][] = "conflicts";
 
@@ -1256,6 +1322,7 @@
                         if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
                             $conflicting_modules[] = $conflict; # Shortlist of conflicting installed modules
+
                             if (in_array($conflict, $config->enabled_modules))
                                 if (!in_array("error", $classes[$folder]))
                                     $classes[$folder][] = "error";
@@ -1263,6 +1330,7 @@
                 }
 
                 $dependencies_needed = array();
+
                 if (!empty($info["dependencies"])) {
                     $classes[$folder][] = "dependencies";
 
@@ -1296,22 +1364,23 @@
 
                 $info["description"] = __($info["description"], $folder);
 
-                $info["description"] = preg_replace_callback("/<code>(.+)<\/code>/s",
+                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
-                $info["description"] = preg_replace_callback("/<pre>(.+)<\/pre>/s",
+                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
                                                              },
                                                              $info["description"]);
 
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                                              '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' :
-                                              $info["author"]["name"] ;
+                    '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
-                $category = (module_enabled($folder)) ? "enabled_modules" : "disabled_modules" ;
+                $category = (module_enabled($folder) or !empty(Modules::$instances[$folder]->cancelled)) ?
+                    "enabled_modules" : "disabled_modules" ;
+
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
                                                            "url" => $info["url"],
@@ -1342,7 +1411,8 @@
 
             $config = Config::current();
 
-            $this->context["enabled_feathers"] = $this->context["disabled_feathers"] = array();
+            $this->context["enabled_feathers"]  = array();
+            $this->context["disabled_feathers"] = array();
 
             if (!$open = @opendir(FEATHERS_DIR))
                 return Flash::warning(__("Could not read feathers directory."));
@@ -1355,6 +1425,7 @@
                     load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 $info = include FEATHERS_DIR.DIR.$folder.DIR."info.php";
+
                 if (gettype($info) != "array")
                   continue;
 
@@ -1367,20 +1438,19 @@
 
                 $info["description"] = __($info["description"], $folder);
 
-                $info["description"] = preg_replace_callback("/<code>(.+)<\/code>/s",
+                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
-                $info["description"] = preg_replace_callback("/<pre>(.+)<\/pre>/s",
+                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
                                                              },
                                                              $info["description"]);
 
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                                              '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' :
-                                              $info["author"]["name"] ;
+                    '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
                 $category = (feather_enabled($folder)) ? "enabled_feathers" : "disabled_feathers" ;
                 $this->context[$category][$folder] = array("name" => $info["name"],
@@ -1427,15 +1497,14 @@
                 fallback($info["author"], array("name" => "", "url" => ""));
 
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                    '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' :
-                    $info["author"]["name"] ;
+                    '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' : $info["author"]["name"] ;
 
-                $info["description"] = preg_replace_callback("/<code>(.+)<\/code>/s",
+                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
-                $info["description"] = preg_replace_callback("/<pre>(.+)<\/pre>/s",
+                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
                                                              },
@@ -1443,8 +1512,7 @@
 
                 $this->context["themes"][] = array("name" => $folder,
                                                    "screenshot" => (file_exists(THEMES_DIR.DIR.$folder.DIR."screenshot.png") ?
-                                                                        $config->chyrp_url.DIR."themes".DIR.$folder.DIR."screenshot.png" :
-                                                                        ""),
+                                                        $config->chyrp_url.DIR."themes".DIR.$folder.DIR."screenshot.png" : ""),
                                                    "info" => $info);
             }
 
@@ -1481,6 +1549,9 @@
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
+            if (!empty(Modules::$instances[$_GET[$type]]->cancelled))
+                error(__("Module Cancelled"), __("The module has cancelled execution because of an error."));
+
             require $folder.DIR.$_GET[$type].DIR.$_GET[$type].".php";
 
             $class_name = camelize($_GET[$type]);
@@ -1507,19 +1578,17 @@
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the <code>%s</code> directory at your Chyrp install's root and CHMOD it to 777.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", array($config->uploads_path));
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please CHMOD <code>%s</code> to 777.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
 
             if ($type == "module")
-                Flash::notice(__("Module enabled."),
-                              "/admin/?action=".pluralize($type));
+                Flash::notice(__("Module enabled."), "/admin/?action=".pluralize($type));
             elseif ($type == "feather")
-                Flash::notice(__("Feather enabled."),
-                              "/admin/?action=".pluralize($type));
+                Flash::notice(__("Feather enabled."), "/admin/?action=".pluralize($type));
         }
 
         /**
@@ -1541,7 +1610,7 @@
             if (empty($_GET[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."));
 
-            if ($type == "module" and !module_enabled($_GET[$type]))
+            if ($type == "module" and !module_enabled($_GET[$type]) and empty(Modules::$instances[$_GET[$type]]->cancelled))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
             if ($type == "feather" and !feather_enabled($_GET[$type]))
@@ -1648,11 +1717,13 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             $locales = array();
+            $locales[] = array("code" => "en_US", "name" => lang_code("en_US")); # Default locale.
 
             if ($open = opendir(INCLUDES_DIR.DIR."locale".DIR)) {
                  while (($folder = readdir($open)) !== false) {
                     $split = explode(".", $folder);
-                    if (end($split) == "mo")
+
+                    if (end($split) == "mo" and $split[0] != "en_US")
                         $locales[] = array("code" => $split[0], "name" => lang_code($split[0]));
                 }
                 closedir($open);
@@ -1672,9 +1743,13 @@
                 error(__("Error"), __("Invalid Chyrp URL."));
 
             if (!empty($_POST['url']) and !is_url($_POST['url']))
-                error(__("Error"), __("Invalid alternate URL."));
+                error(__("Error"), __("Invalid canonical URL."));
 
             $config = Config::current();
+
+            $check_updates_last = (!empty($_POST['check_updates']) and !$config->check_updates) ?
+                0 : $config->check_updates_last ;
+
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
                          $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/")),
@@ -1683,7 +1758,8 @@
                          $config->set("timezone", $_POST['timezone']),
                          $config->set("locale", $_POST['locale']),
                          $config->set("cookies_notification", !empty($_POST['cookies_notification'])),
-                         $config->set("check_updates", !empty($_POST['check_updates'])));
+                         $config->set("check_updates", !empty($_POST['check_updates'])),
+                         $config->set("check_updates_last", $check_updates_last));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=general_settings");
@@ -1716,6 +1792,7 @@
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
                          $config->set("feed_items", (int) $_POST['feed_items']),
+                         $config->set("admin_per_page", (int) $_POST['admin_per_page']),
                          $config->set("feed_url", $_POST['feed_url']),
                          $config->set("uploads_path", $matches[1].$matches[2].$matches[3]),
                          $config->set("uploads_limit", (int) $_POST['uploads_limit']),
@@ -1786,7 +1863,7 @@
                                       true,
                                       0,
                                       "home");
-                    Flash::notice(_f("Page created. <a href=\"%s\">View Page &rarr;</a>", $page->url()));
+                    Flash::notice(__("Page created.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>');
                 }
             } elseif (empty($_POST['enable_homepage']) and $config->enable_homepage)
                 $route->remove("/");
@@ -1804,6 +1881,9 @@
          * Sets the $title and $body for various help IDs.
          */
         public function help() {
+            if (empty($_GET['id']))
+                error(__("Missing Argument"), __("An ID is required to display a help page."));
+
             $help = Trigger::current()->call("help_".$_GET['id']);
 
             switch($_GET['id']) {
@@ -1811,18 +1891,52 @@
                     $help = "<h1>".__("Filtering Results")."</h1>\n".
                             "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n".
                             "<h2>".__("Keywords")."</h2>\n".
-                            "<p>".__("Use the syntax <code>attr:val</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
+                            "<p>".__("Use the syntax <code>attr:val;</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
                     break;
                 case "slugs":
-                    $help = "<h1>".__("Post Slugs")."</h1>\n".
-                            "<p>".__("The slug is the URL-friendly identifying name for this post. You can enter the slug yourself or have it auto-generated when the post is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
+                    $help = "<h1>".__("Slugs")."</h1>\n".
+                            "<p>".__("The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
                     break;
-                case "alternate_urls":
-                    $help = "<h1>".__("Alternate URL")."</h1>\n".
-                            "<p>".__("If you enter an alternate URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite in a <code>/chyrp</code> directory on your web server and still have your site accessible at the destination directory <code>/</code>. There are two requirements for this to work:")."</p>\n".
-                            "<ol>\n<li>".__("Create an <code>index.php</code> file in your destination directory with the following in it:")."\n".
+                case "canonical_url":
+                    $help = "<h1>".__("Canonical URL")."</h1>\n".
+                            "<p>".__("If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:")."</p>\n".
+                            "<ol>\n<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n".
                             "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
-                            "</li>\n<li>".__("Move the .htaccess file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                            "</li>\n<li>".__("Move the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                    break;
+                case "unicode_emoticons":
+                    $help = "<h1>".__("Unicode Emoticons")."</h1>\n".
+                            "<p>".__("You can have some emoticons converted to equivalent Unicode emoji when your content is displayed. Your original content is not modified, so you can turn this feature on and off at any time. The following conversions will occur:")."</p>\n".
+                            "<table>\n<thead>\n".
+                            "<tr>\n<th>".__("Emoticon")."</th>\n".
+                            "<th>".__("Emoji")."</th>\n</tr>\n".
+                            "</thead>\n".
+                            "<tbody>\n".
+                            "<tr>\n<td>o:-)</td>\n"."<td>".emote("o:-)")."</td>\n</tr>\n".
+                            "<tr>\n<td>>:-)</td>\n"."<td>".emote(">:-)")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-)</td>\n"."<td>".emote(":-)")."</td>\n</tr>\n".
+                            "<tr>\n<td>^_^</td>\n"."<td>".emote("^_^")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-D</td>\n"."<td>".emote(":-D")."</td>\n</tr>\n".
+                            "<tr>\n<td>;-)</td>\n"."<td>".emote(";-)")."</td>\n</tr>\n".
+                            "<tr>\n<td><3</td>\n"."<td>".emote("<3")."</td>\n</tr>\n".
+                            "<tr>\n<td>B-)</td>\n"."<td>".emote("B-)")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-></td>\n"."<td>".emote(":->")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-||</td>\n"."<td>".emote(":-||")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-|</td>\n"."<td>".emote(":-|")."</td>\n</tr>\n".
+                            "<tr>\n<td>-_-</td>\n"."<td>".emote("-_-")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-/</td>\n"."<td>".emote(":-/")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-s</td>\n"."<td>".emote(":-s")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-*</td>\n"."<td>".emote(":-*")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-P</td>\n"."<td>".emote(":-P")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-(</td>\n"."<td>".emote(":-(")."</td>\n</tr>\n".
+                            "<tr>\n<td>;_;</td>\n"."<td>".emote(";_;")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-((</td>\n"."<td>".emote(":-((")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-o</td>\n"."<td>".emote(":-o")."</td>\n</tr>\n".
+                            "<tr>\n<td>O_O</td>\n"."<td>".emote("O_O")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-$</td>\n"."<td>".emote(":-$")."</td>\n</tr>\n".
+                            "<tr>\n<td>x_x</td>\n"."<td>".emote("x_x")."</td>\n</tr>\n".
+                            "<tr>\n<td>:-x</td>\n"."<td>".emote(":-x")."</td>\n</tr>\n".
+                            "</tbody>\n</table>";
                     break;
                 case "markdown":
                     $help = "<h1>".__("Markdown")."</h1>\n".
@@ -1838,7 +1952,7 @@
                             "<tr>\n<td>".__("~~Strikethrough~~")."</td>\n"."<td><del>".__("Strikethrough")."</del></td>\n</tr>\n".
                             "<tr>\n<td>".__("**Strong**")."</td>\n"."<td><strong>".__("Strong")."</strong></td>\n</tr>\n".
                             "<tr>\n<td>".__("&crarr;")."</td>\n"."<td>".__("New paragraph")."</td>\n</tr>\n".
-                            "<tr>\n<td>".__("[title](URL)")."</td>\n"."<td>".__("Hyperlink")."</td>\n</tr>\n".
+                            "<tr>\n<td>".__("[title](URL)")."</td>\n".'<td><a href="#">'.__("Hyperlink")."</a></td>\n</tr>\n".
                             "<tr>\n<td>".__("![description](URL)")."</td>\n"."<td>".__("Image")."</td>\n</tr>\n".
                             "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n".
                             "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n".
@@ -1847,10 +1961,7 @@
                     break;
             }
 
-            if (!isset($_GET['ajax']))
-                echo "<!DOCTYPE html>\n";
-
-            exit($help);
+            $this->display("help", array("content" => $help), __("Help"));
         }
 
         /**
@@ -1868,12 +1979,14 @@
             $pages = array("manage" => array());
 
             foreach (Config::current()->enabled_feathers as $index => $feather) {
+                $selected = ((isset($_GET['feather']) and $_GET['feather'] == $feather) or
+                            (!isset($_GET['feather']) and $action == "write_post" and !$index)) ? "write_post" : false ;
+
                 $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
                 $subnav["write"]["write_post&feather=".$feather] = array("title" => $info["name"],
                                                                          "show" => $visitor->group->can("add_draft", "add_post"),
                                                                          "attributes" => ' id="feathers['.$feather.']"',
-                                                                         "selected" => (isset($_GET['feather']) and $_GET['feather'] == $feather) or
-                                                                                       (!isset($_GET['feather']) and $action == "write_post" and !$index));
+                                                                         "selected" => $selected);
             }
 
             # Write navs
@@ -1957,7 +2070,7 @@
          * Renders the page.
          *
          * Parameters:
-         *     $action - The template file to display (relative to admin/pages/ for core and pages/admin/ for modules).
+         *     $action - The template file to display (sans ".twig") relative to admin/pages/ for core and extensions.
          *     $context - The context for the template.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          */
@@ -1982,30 +2095,29 @@
             }
 
             $visitor = Visitor::current();
-            $route   = Route::current();
+            $config = Config::current();
+            $route = Route::current();
 
-            $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
-            $this->context["theme"]       = Theme::current();
-            $this->context["flash"]       = Flash::current();
-            $this->context["trigger"]     = $trigger;
-            $this->context["title"]       = $title;
-            $this->context["site"]        = Config::current();
-            $this->context["visitor"]     = $visitor;
-            $this->context["logged_in"]   = logged_in();
-            $this->context["new_update"]  = Update::check_update();
-            $this->context["route"]       = $route;
-            $this->context["hide_admin"]  = isset($_SESSION["hide_admin"]);
-            $this->context["now"]         = time();
-            $this->context["version"]     = CHYRP_VERSION;
-            $this->context["codename"]    = CHYRP_CODENAME;
-            $this->context["debug"]       = DEBUG;
-            $this->context["feathers"]    = Feathers::$instances;
-            $this->context["modules"]     = Modules::$instances;
-            $this->context["theme_url"]   = Config::current()->chyrp_url."/admin";
-            $this->context["POST"]        = $_POST;
-            $this->context["GET"]         = $_GET;
+            $this->context["ip"]         = $_SERVER["REMOTE_ADDR"];
+            $this->context["DIR"]        = DIR;
+            $this->context["theme"]      = Theme::current();
+            $this->context["flash"]      = Flash::current();
+            $this->context["trigger"]    = $trigger;
+            $this->context["title"]      = $title;
+            $this->context["site"]       = $config;
+            $this->context["visitor"]    = $visitor;
+            $this->context["logged_in"]  = logged_in();
+            $this->context["route"]      = $route;
+            $this->context["now"]        = time();
+            $this->context["version"]    = CHYRP_VERSION;
+            $this->context["codename"]   = CHYRP_CODENAME;
+            $this->context["debug"]      = DEBUG;
+            $this->context["feathers"]   = Feathers::$instances;
+            $this->context["modules"]    = Modules::$instances;
+            $this->context["POST"]       = $_POST;
+            $this->context["GET"]        = $_GET;
 
-            $this->context["navigation"]  = array();
+            $this->context["navigation"] = array();
 
             $show = array("write" => array($visitor->group->can("add_draft", "add_post", "add_page")),
                           "manage" => array($visitor->group->can("view_own_draft",
@@ -2056,34 +2168,18 @@
                                                                                      "/_editor$/"), $action)));
 
             $this->subnav_context($route->action);
-
             $trigger->filter($this->context["selected"], "nav_selected");
-
-            $this->context["sql_debug"]  = SQL::current()->debug;
-
+            $this->context["sql_debug"] = SQL::current()->debug;
             $template = "pages".DIR.$action.".twig";
 
-            $config = Config::current();
-            if (!file_exists(MAIN_DIR.DIR."admin".DIR.$template)) {
-                foreach (array(MODULES_DIR => $config->enabled_modules,
-                               FEATHERS_DIR => $config->enabled_feathers) as $path => $try)
-                    foreach ($try as $extension)
-                        if (file_exists($path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig"))
-                            $template = $path.DIR.$extension.DIR."pages".DIR."admin".DIR.$action.".twig";
-            }
+            if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
+                Update::check();
 
             try {
-                $this->theme->getTemplate($template)->display($this->context);
+                $this->twig->display($template, $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                $trace = debug_backtrace();
-
-                if (property_exists($e, "filename") and property_exists($e, "lineno")) {
-                    $twig = array("file" => $e->filename, "line" => $e->lineno);
-                    array_unshift($trace, $twig);
-                }
-
-                error(__("Error"), $prettify, $trace);
+                error(__("Twig Error"), $prettify, debug_backtrace());
             }
         }
 

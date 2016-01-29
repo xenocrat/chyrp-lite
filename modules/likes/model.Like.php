@@ -127,9 +127,9 @@
                             ) DEFAULT CHARSET=UTF8");
                 $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
                 $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
-
-                Group::add_permission("like_post", "Like Posts");
-                Group::add_permission("unlike_post", "Unlike Posts");
+                                                                        # Add these strings to the .pot file:
+                Group::add_permission("like_post", "Like Posts");       # __("Like Posts");
+                Group::add_permission("unlike_post", "Unlike Posts");   # __("Unlike Posts");
 
                 $set = array($config->set("module_like",
                                     array("showOnFront" => true,

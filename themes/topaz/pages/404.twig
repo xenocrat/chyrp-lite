@@ -1,7 +1,7 @@
-{% extends "layouts/default.twig" %}
+{% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-    <div class="ribbon flash">
-      <h3 role="status" class="ribbon">${ "Not found" | translate }</h3>
-    </div>
+<div class="ribbon flash">
+<h3 role="status" class="ribbon">{{ "Not found" | translate }}</h3>
+</div>
 {% endblock %}

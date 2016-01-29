@@ -1,0 +1,43 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Sitemap Settings" | translate("sitemap") }}{% endblock %}
+
+{% block content %}
+<form id="sitemap_settings" class="split" action="{{ admin_url('sitemap_settings') }}" method="post">
+<fieldset>
+<p>
+<label for="blog_changefreq">{{ "Blog is Updated" | translate("sitemap") }}</label>
+<select name="blog_changefreq">
+{% for key, val in modules['sitemap'].change_frequency %}
+<option value="{{ val }}"{{ val | selected(site.module_sitemap['blog_changefreq']) }}>{{ val | translate("sitemap") }}</option>
+{% endfor %}
+</select>
+</p>
+<p>
+<label for="pages_changefreq">{{ "Pages are Edited" | translate("sitemap") }}</label>
+<select name="pages_changefreq">
+{% for key, val in modules['sitemap'].change_frequency %}
+<option value="{{ val }}"{{ val | selected(site.module_sitemap['pages_changefreq']) }}>{{ val | translate("sitemap") }}</option>
+{% endfor %}
+</select>
+</p>
+<p>
+<label for="posts_changefreq">{{ "Posts are Edited" | translate("sitemap") }}</label>
+<select name="posts_changefreq">
+{% for key, val in modules['sitemap'].change_frequency %}
+<option value="{{ val }}"{{ val | selected(site.module_sitemap['posts_changefreq']) }}>{{ val | translate("sitemap") }}</option>
+{% endfor %}
+</select>
+</p>
+<p>
+<small>
+{{ "These values hint to search engines how frequently they should crawl your site." | translate("sitemap") }}
+</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

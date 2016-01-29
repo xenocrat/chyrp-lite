@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-23 17:14+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,13 +17,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: modules/likes/admin/pages/like_settings.twig:3
+msgid "Like Settings"
+msgstr ""
+
+#: modules/likes/admin/pages/like_settings.twig:9
+msgid "Like Button Image"
+msgstr ""
+
+#: modules/likes/admin/pages/like_settings.twig:18
+msgid "Like With Text"
+msgstr ""
+
+#: modules/likes/admin/pages/like_settings.twig:20
+msgid "Enables text descriptions in like/unlike links."
+msgstr ""
+
+#: modules/likes/admin/pages/like_settings.twig:23
+msgid "Show On Front Page"
+msgstr ""
+
+#: modules/likes/admin/pages/like_settings.twig:25
+msgid "Enables like functionality on front page posts."
+msgstr ""
+
 #: modules/likes/info.php:3
 #: modules/likes/likes.php:37
 msgid "Likes"
 msgstr ""
 
 #: modules/likes/info.php:6
-msgid "Allow users to “like” a post."
+msgid "Allow users to &#8220;like&#8221; a post."
 msgstr ""
 
 #: modules/likes/info.php:11
@@ -106,33 +130,5 @@ msgstr ""
 
 #: modules/likes/model.Like.php:132
 msgid "Unlike Posts"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:3
-msgid "Like Settings"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:9
-msgid "Like Button Image"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:15
-msgid "Likes Image"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:18
-msgid "Like With Text"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:20
-msgid "Enables like with text links (i.e. Like/Unlike)."
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:23
-msgid "Show On Front Page"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:25
-msgid "Enables like functionality on front page posts."
 msgstr ""
 

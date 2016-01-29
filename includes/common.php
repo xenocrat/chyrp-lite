@@ -5,19 +5,19 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2015.07
+     *     v2016.01
      *
      * Copyright:
-     *     Copyright (c) 2015 Alex Suraci, Arian Xhezairi, Daniel Pimley,
-     *     and other contributors.
+     *     Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
+     *     Daniel Pimley, and other contributors.
      *
      * License:
      *     Permission is hereby granted, free of charge, to any person
      *     obtaining a copy of this software and associated documentation
      *     files (the "Software"), to deal in the Software without
      *     restriction, including without limitation the rights to use,
-     *     copy, modify, merge, publish, distribute, sublicense, and/or sell
-     *     copies of the Software, and to permit persons to whom the
+     *     copy, modify, merge, publish, distribute, sublicense, and/or
+     *     sell copies of the Software, and to permit persons to whom the
      *     Software is furnished to do so, subject to the following
      *     conditions:
      *
@@ -45,15 +45,14 @@
 
     # Constant: CHYRP_VERSION
     # Chyrp's version number.
-    define('CHYRP_VERSION', "2015.07");
+    define('CHYRP_VERSION', "2016.01");
 
     # Constant: CHYRP_CODENAME
     # The code name for this version.
-    define('CHYRP_CODENAME', "Kordofan");
+    define('CHYRP_CODENAME', "Socotra");
 
     # Constant: CACHE_TWIG
-    # If defined, this will take priority over DEBUG and toggle Twig template caching.
-    # Do not enable this during theme development.
+    # Override DEBUG to enable Twig template caching.
     define('CACHE_TWIG', true);
 
     # Constant: JAVASCRIPT
@@ -93,39 +92,47 @@
     define('INDEX', (pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_BASENAME) == "index.php") and !ADMIN);
 
     # Constant: DIR
-    # Native directory separator
+    # Native directory separator.
     define('DIR', DIRECTORY_SEPARATOR);
 
     # Constant: MAIN_DIR
-    # Absolute path to the Chyrp root
+    # Absolute path to the Chyrp root.
     define('MAIN_DIR', dirname(dirname(__FILE__)));
 
     # Constant: INCLUDES_DIR
-    # Absolute path to /includes
+    # Absolute path to /includes.
     define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
 
+    # Constant: CACHES_DIR
+    # Absolute path to /includes/caches.
+    define('CACHES_DIR', INCLUDES_DIR.DIR."caches");
+
     # Constant: MODULES_DIR
-    # Absolute path to /modules
+    # Absolute path to /modules.
     define('MODULES_DIR', MAIN_DIR.DIR."modules");
 
     # Constant: FEATHERS_DIR
-    # Absolute path to /feathers
+    # Absolute path to /feathers.
     define('FEATHERS_DIR', MAIN_DIR.DIR."feathers");
 
     # Constant: THEMES_DIR
-    # Absolute path to /themes
+    # Absolute path to /themes.
     define('THEMES_DIR', MAIN_DIR.DIR."themes");
 
     # Constant: UPDATE_XML
-    # URL to the update feed
+    # URL to the update feed.
     define('UPDATE_XML', "http://chyrplite.net/update.xml");
 
     # Constant: UPDATE_INTERVAL
-    # Interval in seconds between update checks
+    # Interval in seconds between update checks.
     define('UPDATE_INTERVAL', 86400);
 
+    # Constant: UPDATE_PAGE
+    # URL to the list of releases.
+    define('UPDATE_PAGE', "https://github.com/xenocrat/chyrp-lite/releases");
+
     # Constant: USE_ZLIB
-    # Use zlib to provide GZIP compression if the feature is supported and not buggy
+    # Use zlib to provide GZIP compression if the feature is supported and not buggy.
     # See Also: http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
         if (extension_loaded("zlib") and
@@ -260,7 +267,7 @@
 
     # File: Twig
     # Chyrp's templating engine.
-    require_once INCLUDES_DIR.DIR."class".DIR."Twig.php";
+    require_once INCLUDES_DIR.DIR."lib".DIR."Twig".DIR."Autoloader.php";
 
     # File: Route
     # See Also:
@@ -293,6 +300,10 @@
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
+
+    # Register Twig's autoloader and load Chyrp's extension.
+    Twig_Autoloader::register();
+    require_once INCLUDES_DIR.DIR."class".DIR."Leaf.php";
 
     # Load the config settings.
     $config = Config::current();
@@ -339,6 +350,7 @@
     # Load the Visitor.
     $visitor = Visitor::current();
 
+    # Prepare hooks for captcha providers.
     $captchaHooks = array();
 
     # Prepare the notifier.

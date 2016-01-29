@@ -8,9 +8,9 @@
                                   "preview" => "markup_title"));
             $this->setField(array("attr" => "uploads",
                                   "type" => "file",
-                                  "multiple" => "true",
+                                  "multiple" => true,
                                   "label" => __("Files", "uploader"),
-                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "uploader")));
+                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "uploader")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "uploader"),
@@ -111,7 +111,10 @@
                 return;
 
             for ($i=0; $i < count($post->filenames); $i++) {
-                unlink(MAIN_DIR.Config::current()->uploads_path.$post->filenames[$i]);
+                $filepath = uploaded($filenames[$i], false);
+
+                if (file_exists($filepath))
+                    unlink($filepath);
             }
         }
 
@@ -132,9 +135,10 @@
         private function list_files($filenames) {
             $list = array();
             for ($i=0; $i < count($filenames); $i++) {
+                $filepath = uploaded($filenames[$i], false);
                 $list[$i]['name'] = $filenames[$i];
-                $list[$i]['link'] = uploaded($filenames[$i]);
                 $list[$i]['type'] = strtolower(pathinfo($filenames[$i], PATHINFO_EXTENSION));
+                $list[$i]['size'] = file_exists($filepath) ? filesize($filepath) : 0 ;
             }
             return $list;
         }

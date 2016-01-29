@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2015 xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2015-11-23 17:14+0000\n"
+"POT-Creation-Date: 2016-01-24 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -16,6 +16,26 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:3
+msgid "Sitemap Settings"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:9
+msgid "Blog is Updated"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:17
+msgid "Pages are Edited"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:25
+msgid "Posts are Edited"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:34
+msgid "These values hint to search engines how frequently they should crawl your site."
+msgstr ""
 
 #: modules/sitemap/info.php:3
 msgid "Sitemap Generator"
@@ -27,26 +47,6 @@ msgstr ""
 
 #: modules/sitemap/info.php:11
 msgid "Please remember to give write permissions to sitemap.xml on the root directory of the site."
-msgstr ""
-
-#: modules/sitemap/pages/admin/sitemap_settings.twig:3
-msgid "Sitemap Settings"
-msgstr ""
-
-#: modules/sitemap/pages/admin/sitemap_settings.twig:9
-msgid "Blog is Updated"
-msgstr ""
-
-#: modules/sitemap/pages/admin/sitemap_settings.twig:17
-msgid "Pages are Edited"
-msgstr ""
-
-#: modules/sitemap/pages/admin/sitemap_settings.twig:25
-msgid "Posts are Edited"
-msgstr ""
-
-#: modules/sitemap/pages/admin/sitemap_settings.twig:34
-msgid "These values hint to search engines how frequently they should crawl your site."
 msgstr ""
 
 #: modules/sitemap/sitemap.php:7

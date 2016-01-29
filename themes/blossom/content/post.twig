@@ -1,47 +1,47 @@
-    <article class="post $post.feather{% if post.pinned %} pinned{% endif %}" id="post_$post.id">
+<article class="post {{ post.feather }}{{ post.pinned ? ' pinned' : '' }}" id="post_{{ post.id }}">
 {% block content %}{% endblock %}
-      <footer>
-        {% if ( post.linked_tags | length > 0 ) %}
-        <div role="note" class="tags postinfo">
-          <a href="{% url "tags" %}">${ "Tags" | translate }:</a> ${ post.linked_tags | join(" ") }
-        </div>
-        {% endif %}
-        {% if post.editable or post.deletable %}
-        <div class="doaction admin">
-          $post.edit_link ${ post.delete_link("Delete" | translate) }
-        </div>
-        {% endif %}
-        <div role="note" class="metadata">
-          <a href="$post.url" rel="bookmark" title="${ "Permanent link to" | translate } &quot;${ post.title | strip_tags | escape(true) }&quot;">
-          {% if post.status == "private" %}
-            ${ "Private" | translate }
-          {% elseif post.status == "scheduled" %}
-            ${ "Scheduled" | translate }
-          {% elseif post.pinned %}
-            ${ "Pinned" | translate }
-          {% else %}
-            ${ post.created_at | strftime("%d %b, %Y" | translate) }
-          {% endif %}
-          </a>
-          {% if enabled_modules.categorize and post.category.id != 0 %}
-            &bull; <a href="$post.category.url" rel="tag">$post.category.name</a>
-          {% endif %}
-          {% if enabled_modules.likes and visitor.group.can("like_post") %}
-            {% if post.get_likes %}&bull; $post.get_likes{% endif %}
-          {% endif %}
-          {% if enabled_modules.comments %}
-            {% if post.comment_status == "closed" %}
-            &bull; ${ "Comments closed" | translate }
-            {% else %}
-            &bull;
-            <a href="$post.url#comments" rel="bookmark" title="${ "View comments" | translate }">
-            ${ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }
-            </a>
-            {% endif %}
-          {% endif %}
-          {% if enabled_modules.rights %}
-            &bull;{% if post['rights_holder'] %} &copy; ${post['rights_holder']},{% endif %} $post.licence_link
-          {% endif %}
-        </div>
-      </footer>
-    </article>
+<footer>
+{% if (module_enabled("tags") and post.linked_tags | length > 0) %}
+<div role="note" class="tags postinfo">
+<a href="{{ url('tags') }}">{{ "Tags" | translate }}:</a> {{ post.linked_tags | join(" ") }}
+</div>
+{% endif %}
+{% if post.editable or post.deletable %}
+<div class="doaction admin">
+{{ post.edit_link() }} {{ post.delete_link("Delete" | translate) }}
+</div>
+{% endif %}
+<div role="note" class="metadata">
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title() | striptags | fix(true)) }}">
+{% if post.status == "private" %}
+{{ "Private" | translate }}
+{% elseif post.status == "scheduled" %}
+{{ "Scheduled" | translate }}
+{% elseif post.pinned %}
+{{ "Pinned" | translate }}
+{% else %}
+{{ post.created_at | strftimeformat("%d %b, %Y" | translate) }}
+{% endif %}
+</a>
+{% if module_enabled("categorize") and post.category is defined %}
+&bull; <a href="{{ post.category.url }}" rel="tag">{{ post.category.name }}</a>
+{% endif %}
+{% if module_enabled("likes") and visitor.group.can("like_post") %}
+{{ post.get_likes ? "&bull; " ~ post.get_likes : "" }}
+{% endif %}
+{% if module_enabled("comments") and post.comment_status is defined and post.comment_count is defined %}
+{% if post.comment_status == "closed" %}
+&bull; {{ "Comments closed" | translate }}
+{% else %}
+&bull;
+<a href="{{ post.url() }}#comments" rel="bookmark" title="{{ 'View comments' | translate }}">
+{{ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }}
+</a>
+{% endif %}
+{% endif %}
+{% if module_enabled("rights") and post.rights_holder is defined %}
+&bull;{% if post.rights_holder is not empty %} &copy; {{ post.rights_holder }},{% endif %} {{ post.licence_link }}
+{% endif %}
+</div>
+</footer>
+</article>

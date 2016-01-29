@@ -482,7 +482,7 @@
                                  array('where' => array('login' => $login)));
 
             if (!$user->group->can("{$do}_own_post", "{$do}_post", "{$do}_draft", "{$do}_own_draft"))
-                throw new Exception(_f("You don't have permission to %s posts/drafts.", array($do)));
+                throw new Exception(_f("You don't have permission to do that.", array($do)));
         }
 
         #

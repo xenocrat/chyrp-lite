@@ -1,0 +1,37 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Edit Category &#8220;%s&#8221;" | translate("categorize") | format(categorize.name | striptags) }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Editing Category &#8220;%s&#8221;" | translate("categorize") | format(categorize.name | striptags) }}</h2>
+<form id="edit_category" class="split" action="{{ admin_url('update_category') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<fieldset>
+<p>
+<label for="name">{{ "Name" | translate("categorize") }}</label>
+<input class="text" type="text" name="name" value="{{ categorize.name | fix(true) }}" id="name">
+</p>
+<p>
+<label for="clean">
+{{ "URL" | translate("categorize") }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="text" name="clean" value="{{ categorize.clean | fix(true) }}" id="clean">
+<small>
+{{ "Enter a &#8220;clean&#8221; name here if you want the category name to appear differently in the URL." | translate("categorize") }}
+</small>
+</p>
+<p>
+<label for="show_on_home">{{ "Listed?" | translate("categorize") }}</label>
+<input class="checkbox" type="checkbox" name="show_on_home" id="show_on_home"{{ categorize.show_on_home | checked }}>
+<small>
+{{ "Do you want to include this category in the categories list?" | translate("categorize") }}
+</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="update">{{ "Update" | translate("categorize") }}</button>
+</p>
+<input type="hidden" name="id" value="{{ categorize.id }}" id="id">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

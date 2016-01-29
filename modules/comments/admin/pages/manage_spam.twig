@@ -1,0 +1,90 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Manage Spam" | translate("comments") }}{% endblock %}
+
+{% block content %}
+<form class="filters" action="index.php" method="get" accept-charset="utf-8">
+<fieldset>
+<input type="hidden" name="action" value="manage_comments">
+<div role="search" class="filter_item">
+<h3>
+{{ "Search&hellip;" | translate }}
+<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+</h3>
+<input class="text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
+<button type="submit" class="inline">{{ "Search" | translate }}</button>
+<a class="button boo" href="{{ admin_url('purge_spam') }}"><img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="deny">{{ "Delete All (%d)" | translate("comments") | format(comments.total) }}</a>
+</div>
+</fieldset>
+</form>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Spam" | translate("comments") }}</h2>
+<form action="{{ admin_url('bulk_comments', {'from': 'spam'}) }}" method="post">
+<table class="interactive">
+<thead>
+<tr class="head">
+<th class="toggler"></th>
+<th class="comment_post">{{ "Post" | translate("comments") }}</th>
+<th class="comment_author">{{ "Author" | translate("comments") }}</th>
+<th class="comment_date">{{ "Added" | translate("comments") }}</th>
+{{ trigger.call("manage_comments_column_header") }}
+<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+{% for comment in comments.paginated %}
+<tr id="comment_{{ comment.id }}" class="comment {{ comment.status }}">
+<td rowspan="2" class="checkbox">
+<input type="checkbox" name="comment[{{ comment.id }}]" value="" id="comment_checkbox_{{ comment.id }}">
+</td>
+<td class="comment_post main"><a href="{{ comment.post.url() }}#comment_{{ comment.id }}">
+{{ comment.post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+</td>
+<td class="comment_author">
+{{ not comment.user.no_results ? comment.user.full_name | oneof(comment.user.login, comment.author) : comment.author }}
+</td>
+<td class="comment_date">
+{{ comment.created_at | strftimeformat }}
+</td>
+{{ trigger.call("manage_comments_column", comment) }}
+{% if comment.editable() or comment.deletable() %}
+<td class="controls"{{ not comment.deletable() ? ' colspan="2"' : '' }}>
+{{ comment.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+</td>
+<td class="controls"{{ not comment.editable() ? ' colspan="2"' : '' }}>
+{{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+</td>
+{% else %}
+<td class="controls" colspan="2">&nbsp;</td>
+{% endif %}
+</tr>
+<tr class="comment_excerpt">
+<td colspan="5">{{ comment.body | truncate(100, "&hellip;") }}</td>
+</tr>
+{% else %}
+<tr>
+<td class="placeholder"><span class="sub">{{ "(none)" | translate }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="controls">
+<h4>{{ "With selected:" | translate("comments") }}</h4>
+<button name="deny">
+<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="deny"> {{ "Deny" | translate("comments") }}
+</button>
+<button class="yay" name="approve">
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="approve"> {{ "Approve" | translate("comments") }}
+</button>
+<button class="boo" name="delete">
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="delete"> {{ "Delete" | translate("comments") }}
+</button>
+</div>
+</form>
+{% if comments.paginated is not empty and comments.pages > 1 %}
+<div class="pagination">
+<span class="pages">{{ "Page %d of %s" | translate | format(comments.page, comments.final_link(comments.pages)) }}</span>
+{{ comments.prev_link }}
+{{ comments.next_link }}
+</div>
+{% endif %}
+{% endblock %}

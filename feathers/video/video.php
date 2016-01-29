@@ -9,7 +9,8 @@
             $this->setField(array("attr" => "video",
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
-                                  "note" => _f("(Max. file size: %s)", ini_get('upload_max_filesize'), "video")));
+                                  "multiple" => false,
+                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "video")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "video"),
@@ -65,7 +66,10 @@
             if ($post->feather != "video")
                 return;
 
-            unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
+            $filepath = uploaded($post->filename, false);
+
+            if (file_exists($filepath))
+                unlink($filepath);
         }
 
         public function filter_post($post) {
@@ -114,8 +118,8 @@
                 return $trigger->call("video_player", $filename, $params, $post);
 
             $player = "\n".'<video controls>';
-            $player.= "\n\t".__("Your web browser does not support the <code>video</code> element.", "video");
-            $player.= "\n\t".'<source src="'.uploaded($filename).'" type="'.$this->video_type($filename).'">';
+            $player.= "\n".__("Your web browser does not support the <code>video</code> element.", "video");
+            $player.= "\n".'<source src="'.uploaded($filename).'" type="'.$this->video_type($filename).'">';
             $player.= "\n".'</video>'."\n";
 
             return $player;
