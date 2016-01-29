@@ -1501,7 +1501,9 @@
      *     An array containing the "WHERE" queries and the corresponding parameters.
      */
     function keywords($query, $plain, $table = null) {
-        if (empty(trim($query)))
+        $trimmed = trim($query);
+
+        if (empty($trimmed))
             return array(array(), array());
 
         $strings  = array(); # Non-keyword values found in the query.
