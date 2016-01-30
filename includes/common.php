@@ -44,7 +44,7 @@
     define('DEBUG', false);
 
     # Constant: CHYRP_VERSION
-    # Chyrp's version number.
+    # Version number for this release.
     define('CHYRP_VERSION', "2016.01");
 
     # Constant: CHYRP_CODENAME
@@ -56,7 +56,7 @@
     define('CACHE_TWIG', true);
 
     # Constant: JAVASCRIPT
-    # Is this the JavaScript file?
+    # Are we serving a JavaScript file?
     if (!defined('JAVASCRIPT'))
         define('JAVASCRIPT', false);
 
@@ -186,10 +186,6 @@
     # Streams library.
     require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
 
-    # File: Parsedown
-    # Markdown parsing library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."Parsedown.php";
-
     # File: Config
     # See Also:
     #     <Config>
@@ -265,10 +261,6 @@
     #     <Paginator>
     require_once INCLUDES_DIR.DIR."class".DIR."Paginator.php";
 
-    # File: Twig
-    # Chyrp's templating engine.
-    require_once INCLUDES_DIR.DIR."lib".DIR."Twig".DIR."Autoloader.php";
-
     # File: Route
     # See Also:
     #     <Route>
@@ -301,9 +293,8 @@
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
 
-    # Register Twig's autoloader and load Chyrp's extension.
-    Twig_Autoloader::register();
-    require_once INCLUDES_DIR.DIR."class".DIR."Leaf.php";
+    # Register our autoloader.
+    spl_autoload_register("autoload");
 
     # Load the config settings.
     $config = Config::current();

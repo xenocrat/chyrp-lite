@@ -1961,3 +1961,24 @@
         if (!email($params["to"], $params["subject"], $params["message"], $params["headers"]))
             error(__("Undeliverable"), __("Unable to send email."));
     }
+
+    /**
+     * Function: autoload
+     * Autoload classes on demand.
+     *
+     * Parameters:
+     *     $class - The name of the class to load.
+     */
+    function autoload($class) {
+        if (0 === strpos($class, "Parsedown"))
+            $filepath = INCLUDES_DIR.DIR."lib".DIR."Parsedown.php";
+
+        if (0 === strpos($class, "Leaf"))
+            $filepath = INCLUDES_DIR.DIR."class".DIR."Leaf.php";
+
+        if (0 === strpos($class, "Twig"))
+            $filepath = INCLUDES_DIR.DIR."lib".DIR.str_replace(array('_', "\0"), array(DIR, ''), $class).".php";
+
+        if (isset($filepath) and is_file($filepath))
+            require $filepath;
+    }
