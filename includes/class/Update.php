@@ -9,8 +9,10 @@
          * Checks if a newer version of Chyrp Lite is available.
          */
         public static function check() {
+            $config = Config::current();
+
             $xml = simplexml_load_string(get_remote(UPDATE_XML, 3));
-            Config::current()->set("check_updates_last", time());
+            $config->set("check_updates_last", time());
 
             if ($xml == false) {
                 Flash::warning(__("Unable to check for updates.").
@@ -20,11 +22,12 @@
 
             foreach ($xml->channel->item as $item) {
                 if (version_compare(CHYRP_VERSION, $item->version, "<")) {
-                    #if (Config::current()->install_updates and class_exists("ZipArchive"))
+                    #if ($config->install_updates and !Flash::exists())
                     #    self::install($item->downloadurl);
+                    #else
+                        Flash::message(_f("Chyrp Lite v%s is available.", $item->version).
+                                          ' <a href="'.$item->updateurl.'" target="_blank">'.__("Go to GitHub &rarr;").'</a>');
 
-                    Flash::message(_f("Chyrp Lite v%s is available.", $item->version).
-                                   ' <a href="'.$item->updateurl.'" target="_blank">'.__("Go to GitHub &rarr;").'</a>');
                     break;
                 }
             }
@@ -35,11 +38,14 @@
          * Download and install Chyrp Lite updates from GitHub.
          */
         private static function install($url) {
+            if (!class_exists("ZipArchive"))
+                return;
+
             if (DEBUG)
                 error_log("INSTALLING UPDATE: ".$url); 
 
             $filename = upload_from_url($url, 3, 30);
-            $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
+            $filepath = uploaded($filename, false);
 
             $zip = new ZipArchive;
             $err = $zip->open($filepath);
