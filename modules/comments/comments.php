@@ -813,9 +813,9 @@
 
             $params["subject"] = _f("New Comment at %s", Config::current()->name);
             $params["message"] = _f("%s commented on a blog post:", fix($params["author"])).
-                                 "\n".
+                                 PHP_EOL.
                                  $post->url().
-                                 "\n\n".
+                                 PHP_EOL.PHP_EOL.
                                  '"'.truncate(strip_tags($params["body"])).'"';
             return $params;
         }
