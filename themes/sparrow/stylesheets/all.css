@@ -266,7 +266,6 @@ article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
                                                 cursor: pointer;
-                                                line-height: normal;
                                                 transition-property: color, border;
                                                 transition-duration: 250ms }
 label {                                         display: block;
@@ -488,7 +487,9 @@ div.metadata a:hover {                          color: #000000 }
 div.metadata a:focus {                          color: #000000;
                                                 border-bottom: 1px #000000 solid }
 div.metadata a:active {                         color: #000000 }
-div.doaction a, button {                        white-space: nowrap;
+div.doaction a, button {                        display: inline-block;
+                                                line-height: normal;
+                                                white-space: nowrap;
                                                 padding: 0.4em 1.2em;
                                                 border-radius: 0.2em;
                                                 color: #fffefd;

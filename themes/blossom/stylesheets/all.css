@@ -305,8 +305,7 @@ textarea:focus {                                outline: none;
 article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
-                                                cursor: pointer;
-                                                line-height: normal }
+                                                cursor: pointer }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.shim {                                      margin-top: 2em }
@@ -511,7 +510,9 @@ div.metadata a {                                color: #9ea8a8 }
 div.metadata a:hover,
 div.metadata a:focus,
 div.metadata a:active {                         color: #d94c7b }
-div.doaction a, button {                        white-space: nowrap;
+div.doaction a, button {                        display: inline-block;
+                                                line-height: normal;
+                                                white-space: nowrap;
                                                 padding: 0.4em 0.8em;
                                                 border: none;
                                                 border-radius: 0.2em;
