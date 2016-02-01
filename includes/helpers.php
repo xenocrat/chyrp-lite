@@ -1926,29 +1926,29 @@
             case "activate":
                 $params["subject"] = _f("Activate your account at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", fix($params["login"])).
-                                     "\n\n".
+                                     PHP_EOL.PHP_EOL.
                                      __("You are receiving this message because you registered a new account.").
-                                     "\n\n".
+                                     PHP_EOL.PHP_EOL.
                                      __("Visit this link to activate your account:").
-                                     "\n".
+                                     PHP_EOL.
                                      $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
                                      "&token=".token(array($params["login"], $params["to"]));
                 break;
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", fix($params["login"])).
-                                     "\n\n".
+                                     PHP_EOL.PHP_EOL.
                                      __("You are receiving this message because you requested a new password.").
-                                     "\n\n".
+                                     PHP_EOL.PHP_EOL.
                                      _f("Visit this link to reset your password:").
-                                     "\n".
+                                     PHP_EOL.
                                      $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
                                      "&token=".token(array($params["login"], $params["to"]));
                 break;
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
                 $params["message"] = _f("Hello, %s.", fix($params["login"])).
-                                     "\n\n".
+                                     PHP_EOL.PHP_EOL.
                                      _f("Your new password is: %s", $params["password"]);
                 break;
             default:
@@ -1960,4 +1960,25 @@
 
         if (!email($params["to"], $params["subject"], $params["message"], $params["headers"]))
             error(__("Undeliverable"), __("Unable to send email."));
+    }
+
+    /**
+     * Function: autoload
+     * Autoload classes on demand.
+     *
+     * Parameters:
+     *     $class - The name of the class to load.
+     */
+    function autoload($class) {
+        if (0 === strpos($class, "Parsedown"))
+            $filepath = INCLUDES_DIR.DIR."lib".DIR."Parsedown.php";
+
+        if (0 === strpos($class, "Leaf"))
+            $filepath = INCLUDES_DIR.DIR."class".DIR."Leaf.php";
+
+        if (0 === strpos($class, "Twig"))
+            $filepath = INCLUDES_DIR.DIR."lib".DIR.str_replace(array('_', "\0"), array(DIR, ''), $class).".php";
+
+        if (isset($filepath) and is_file($filepath))
+            require $filepath;
     }

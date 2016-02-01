@@ -52,7 +52,7 @@
 {{ post.status_name }}
 </td>
 <td class="post_author">
-{{ post.author.name ? post.author.name : "" }}
+{{ post.author.name is defined ? post.author.name : "" }}
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 {% if post.editable() or post.deletable() %}

@@ -233,7 +233,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 370
+	includes/common.php on line 361
 
 
 import_chyrp_group
@@ -571,7 +571,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 367
+	includes/common.php on line 358
 
 
 admin_determine_action
@@ -635,7 +635,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2015
+	includes/controller/Admin.php on line 2014
 
 
 settings_nav
@@ -643,7 +643,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2044
+	includes/controller/Admin.php on line 2043
 
 
 extend_nav
@@ -651,7 +651,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2054
+	includes/controller/Admin.php on line 2053
 
 
 admin_subnav
@@ -659,7 +659,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2065
+	includes/controller/Admin.php on line 2064
 
 
 nav_selected
@@ -667,7 +667,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2171
+	includes/controller/Admin.php on line 2170
 
 
 url_code
@@ -701,7 +701,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 1561
+	includes/helpers.php on line 1563
 Arguments:
 	$query, $plain
 
@@ -711,7 +711,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1697
+	includes/helpers.php on line 1699
 
 
 group

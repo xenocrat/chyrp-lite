@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-01-29 10:14+0000\n"
+"POT-Creation-Date: 2016-01-30 17:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -89,12 +89,12 @@ msgstr ""
 #: includes/controller/Admin.php:1686
 #: includes/controller/Admin.php:1717
 #: includes/controller/Admin.php:1737
-#: includes/controller/Admin.php:1774
-#: includes/controller/Admin.php:1780
-#: includes/controller/Admin.php:1815
-#: includes/controller/Admin.php:1821
-#: includes/controller/Admin.php:1843
-#: includes/controller/Admin.php:1849
+#: includes/controller/Admin.php:1773
+#: includes/controller/Admin.php:1779
+#: includes/controller/Admin.php:1814
+#: includes/controller/Admin.php:1820
+#: includes/controller/Admin.php:1842
+#: includes/controller/Admin.php:1848
 #: includes/controller/Main.php:370
 #: includes/controller/Main.php:441
 #: includes/helpers.php:1209
@@ -108,7 +108,7 @@ msgid "You are not allowed to view this site."
 msgstr ""
 
 #: includes/ajax.php:19
-#: includes/controller/Admin.php:1885
+#: includes/controller/Admin.php:1884
 msgid "Missing Argument"
 msgstr ""
 
@@ -138,9 +138,9 @@ msgstr ""
 #: includes/controller/Admin.php:1650
 #: includes/controller/Admin.php:1683
 #: includes/controller/Admin.php:1737
-#: includes/controller/Admin.php:1780
-#: includes/controller/Admin.php:1821
-#: includes/controller/Admin.php:1849
+#: includes/controller/Admin.php:1779
+#: includes/controller/Admin.php:1820
+#: includes/controller/Admin.php:1848
 msgid "Invalid security key."
 msgstr ""
 
@@ -246,7 +246,7 @@ msgstr ""
 #: includes/class/SQL.php:47
 #: includes/class/SQL.php:74
 #: includes/class/SQL.php:81
-#: includes/class/Update.php:75
+#: includes/class/Update.php:81
 #: includes/controller/Admin.php:354
 #: includes/controller/Admin.php:407
 #: includes/controller/Admin.php:547
@@ -268,7 +268,7 @@ msgstr ""
 #: includes/controller/Admin.php:1740
 #: includes/controller/Admin.php:1743
 #: includes/controller/Admin.php:1746
-#: includes/controller/Admin.php:1783
+#: includes/controller/Admin.php:1782
 #: includes/controller/Main.php:300
 #: includes/controller/Main.php:401
 #: includes/controller/Main.php:465
@@ -295,7 +295,7 @@ msgstr ""
 #: includes/helpers.php:1328
 #: includes/helpers.php:1335
 #: includes/helpers.php:1339
-#: includes/helpers.php:1863
+#: includes/helpers.php:1865
 msgid "Error"
 msgstr ""
 
@@ -386,21 +386,21 @@ msgstr ""
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
-#: includes/class/Update.php:16
+#: includes/class/Update.php:18
 msgid "Unable to check for updates."
 msgstr ""
 
-#: includes/class/Update.php:17
-#: includes/class/Update.php:27
+#: includes/class/Update.php:19
+#: includes/class/Update.php:29
 msgid "Go to GitHub &rarr;"
 msgstr ""
 
-#: includes/class/Update.php:26
+#: includes/class/Update.php:28
 #, php-format
 msgid "Chyrp Lite v%s is available."
 msgstr ""
 
-#: includes/class/Update.php:75
+#: includes/class/Update.php:81
 #, php-format
 msgid "Failed to install Chyrp Lite update because of ZipArchive error: <code>%s</code>"
 msgstr ""
@@ -502,7 +502,7 @@ msgid "Page updated."
 msgstr ""
 
 #: includes/controller/Admin.php:434
-#: includes/controller/Admin.php:1866
+#: includes/controller/Admin.php:1865
 msgid "View page &rarr;"
 msgstr ""
 
@@ -757,9 +757,9 @@ msgstr ""
 #: includes/controller/Admin.php:1473
 #: includes/controller/Admin.php:1653
 #: includes/controller/Admin.php:1717
-#: includes/controller/Admin.php:1774
-#: includes/controller/Admin.php:1815
-#: includes/controller/Admin.php:1843
+#: includes/controller/Admin.php:1773
+#: includes/controller/Admin.php:1814
+#: includes/controller/Admin.php:1842
 msgid "You do not have sufficient privileges to change settings."
 msgstr ""
 
@@ -841,258 +841,258 @@ msgstr ""
 msgid "Invalid canonical URL."
 msgstr ""
 
-#: includes/controller/Admin.php:1765
-#: includes/controller/Admin.php:1806
-#: includes/controller/Admin.php:1834
-#: includes/controller/Admin.php:1876
+#: includes/controller/Admin.php:1764
+#: includes/controller/Admin.php:1805
+#: includes/controller/Admin.php:1833
+#: includes/controller/Admin.php:1875
 msgid "Settings updated."
 msgstr ""
 
-#: includes/controller/Admin.php:1783
+#: includes/controller/Admin.php:1782
 msgid "Invalid feed URL."
 msgstr ""
 
-#: includes/controller/Admin.php:1858
+#: includes/controller/Admin.php:1857
 msgid "My Awesome Homepage"
 msgstr ""
 
-#: includes/controller/Admin.php:1859
+#: includes/controller/Admin.php:1858
 msgid "Nothing here yet!"
 msgstr ""
 
-#: includes/controller/Admin.php:1866
+#: includes/controller/Admin.php:1865
 msgid "Page created."
 msgstr ""
 
-#: includes/controller/Admin.php:1885
+#: includes/controller/Admin.php:1884
 msgid "An ID is required to display a help page."
 msgstr ""
 
-#: includes/controller/Admin.php:1891
+#: includes/controller/Admin.php:1890
 msgid "Filtering Results"
 msgstr ""
 
-#: includes/controller/Admin.php:1892
+#: includes/controller/Admin.php:1891
 msgid "Use this search field to filter for specific items by entering plain text or keywords."
 msgstr ""
 
-#: includes/controller/Admin.php:1893
+#: includes/controller/Admin.php:1892
 msgid "Keywords"
 msgstr ""
 
-#: includes/controller/Admin.php:1894
+#: includes/controller/Admin.php:1893
 msgid "Use the syntax <code>attr:val;</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive)."
 msgstr ""
 
-#: includes/controller/Admin.php:1897
+#: includes/controller/Admin.php:1896
 msgid "Slugs"
 msgstr ""
 
-#: includes/controller/Admin.php:1898
+#: includes/controller/Admin.php:1897
 msgid "The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\")."
 msgstr ""
 
-#: includes/controller/Admin.php:1901
+#: includes/controller/Admin.php:1900
 msgid "Canonical URL"
 msgstr ""
 
-#: includes/controller/Admin.php:1902
+#: includes/controller/Admin.php:1901
 msgid "If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
 msgstr ""
 
-#: includes/controller/Admin.php:1903
+#: includes/controller/Admin.php:1902
 msgid "Create an <em>index.php</em> file in your destination directory with the following in it:"
 msgstr ""
 
-#: includes/controller/Admin.php:1905
+#: includes/controller/Admin.php:1904
 msgid "Move the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location."
 msgstr ""
 
-#: includes/controller/Admin.php:1908
+#: includes/controller/Admin.php:1907
 msgid "Unicode Emoticons"
 msgstr ""
 
-#: includes/controller/Admin.php:1909
+#: includes/controller/Admin.php:1908
 msgid "You can have some emoticons converted to equivalent Unicode emoji when your content is displayed. Your original content is not modified, so you can turn this feature on and off at any time. The following conversions will occur:"
 msgstr ""
 
-#: includes/controller/Admin.php:1911
+#: includes/controller/Admin.php:1910
 msgid "Emoticon"
 msgstr ""
 
-#: includes/controller/Admin.php:1912
+#: includes/controller/Admin.php:1911
 msgid "Emoji"
 msgstr ""
 
-#: includes/controller/Admin.php:1942
-#: includes/controller/Admin.php:1945
+#: includes/controller/Admin.php:1941
+#: includes/controller/Admin.php:1944
 msgid "Markdown"
 msgstr ""
 
-#: includes/controller/Admin.php:1943
+#: includes/controller/Admin.php:1942
 msgid "Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:"
 msgstr ""
 
-#: includes/controller/Admin.php:1946
+#: includes/controller/Admin.php:1945
 msgid "Result"
 msgstr ""
 
-#: includes/controller/Admin.php:1949
+#: includes/controller/Admin.php:1948
 msgid "## Heading"
 msgstr ""
 
+#: includes/controller/Admin.php:1948
 #: includes/controller/Admin.php:1949
-#: includes/controller/Admin.php:1950
 msgid "Heading"
 msgstr ""
 
-#: includes/controller/Admin.php:1950
+#: includes/controller/Admin.php:1949
 msgid "### Heading"
 msgstr ""
 
-#: includes/controller/Admin.php:1951
+#: includes/controller/Admin.php:1950
 msgid "*Emphasis*"
 msgstr ""
 
-#: includes/controller/Admin.php:1951
+#: includes/controller/Admin.php:1950
 msgid "Emphasis"
 msgstr ""
 
-#: includes/controller/Admin.php:1952
+#: includes/controller/Admin.php:1951
 msgid "~~Strikethrough~~"
 msgstr ""
 
-#: includes/controller/Admin.php:1952
+#: includes/controller/Admin.php:1951
 msgid "Strikethrough"
 msgstr ""
 
-#: includes/controller/Admin.php:1953
+#: includes/controller/Admin.php:1952
 msgid "**Strong**"
 msgstr ""
 
-#: includes/controller/Admin.php:1953
+#: includes/controller/Admin.php:1952
 msgid "Strong"
 msgstr ""
 
-#: includes/controller/Admin.php:1954
+#: includes/controller/Admin.php:1953
 msgid "&crarr;"
 msgstr ""
 
-#: includes/controller/Admin.php:1954
+#: includes/controller/Admin.php:1953
 msgid "New paragraph"
 msgstr ""
 
-#: includes/controller/Admin.php:1955
+#: includes/controller/Admin.php:1954
 msgid "[title](URL)"
 msgstr ""
 
-#: includes/controller/Admin.php:1955
+#: includes/controller/Admin.php:1954
 msgid "Hyperlink"
 msgstr ""
 
-#: includes/controller/Admin.php:1956
+#: includes/controller/Admin.php:1955
 msgid "![description](URL)"
 msgstr ""
 
-#: includes/controller/Admin.php:1956
+#: includes/controller/Admin.php:1955
 msgid "Image"
 msgstr ""
 
-#: includes/controller/Admin.php:1957
+#: includes/controller/Admin.php:1956
 msgid "`Code`"
 msgstr ""
 
-#: includes/controller/Admin.php:1957
+#: includes/controller/Admin.php:1956
 msgid "Code"
 msgstr ""
 
-#: includes/controller/Admin.php:1958
+#: includes/controller/Admin.php:1957
 msgid "- List of items"
 msgstr ""
 
+#: includes/controller/Admin.php:1957
 #: includes/controller/Admin.php:1958
-#: includes/controller/Admin.php:1959
 msgid "List of items"
 msgstr ""
 
-#: includes/controller/Admin.php:1959
+#: includes/controller/Admin.php:1958
 msgid "1. List of items"
 msgstr ""
 
-#: includes/controller/Admin.php:1964
+#: includes/controller/Admin.php:1963
 msgid "Help"
 msgstr ""
 
-#: includes/controller/Admin.php:1993
+#: includes/controller/Admin.php:1992
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:1999
+#: includes/controller/Admin.php:1998
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:2002
+#: includes/controller/Admin.php:2001
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:2005
-#: includes/controller/Admin.php:2040
+#: includes/controller/Admin.php:2004
+#: includes/controller/Admin.php:2039
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:2010
+#: includes/controller/Admin.php:2009
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:2017
+#: includes/controller/Admin.php:2016
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:2019
+#: includes/controller/Admin.php:2018
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:2036
+#: includes/controller/Admin.php:2035
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:2038
+#: includes/controller/Admin.php:2037
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:2042
+#: includes/controller/Admin.php:2041
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:2048
+#: includes/controller/Admin.php:2047
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:2050
+#: includes/controller/Admin.php:2049
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:2052
+#: includes/controller/Admin.php:2051
 msgid "Themes"
 msgstr ""
 
-#: includes/controller/Admin.php:2146
+#: includes/controller/Admin.php:2145
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:2151
+#: includes/controller/Admin.php:2150
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:2159
+#: includes/controller/Admin.php:2158
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:2164
+#: includes/controller/Admin.php:2163
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:2182
+#: includes/controller/Admin.php:2181
 #: includes/controller/Main.php:775
 #: includes/controller/Main.php:844
 msgid "Twig Error"
@@ -1396,90 +1396,90 @@ msgstr ""
 msgid "Unknown error."
 msgstr ""
 
-#: includes/helpers.php:1519
+#: includes/helpers.php:1521
 msgid "year"
 msgstr ""
 
-#: includes/helpers.php:1520
+#: includes/helpers.php:1522
 msgid "month"
 msgstr ""
 
-#: includes/helpers.php:1521
+#: includes/helpers.php:1523
 msgid "day"
 msgstr ""
 
-#: includes/helpers.php:1522
+#: includes/helpers.php:1524
 msgid "hour"
 msgstr ""
 
-#: includes/helpers.php:1523
+#: includes/helpers.php:1525
 msgid "minute"
 msgstr ""
 
-#: includes/helpers.php:1524
+#: includes/helpers.php:1526
 msgid "second"
 msgstr ""
 
-#: includes/helpers.php:1680
+#: includes/helpers.php:1682
 msgid "&#8220;"
 msgstr ""
 
-#: includes/helpers.php:1680
+#: includes/helpers.php:1682
 msgid "&#8221;"
 msgstr ""
 
-#: includes/helpers.php:1682
+#: includes/helpers.php:1684
 msgid "and "
 msgstr ""
 
-#: includes/helpers.php:1863
+#: includes/helpers.php:1865
 msgid "Unable to deliver file attachment because HTTP headers were already sent."
 msgstr ""
 
-#: includes/helpers.php:1925
+#: includes/helpers.php:1927
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:1926
-#: includes/helpers.php:1937
-#: includes/helpers.php:1948
+#: includes/helpers.php:1928
+#: includes/helpers.php:1939
+#: includes/helpers.php:1950
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:1928
+#: includes/helpers.php:1930
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:1930
+#: includes/helpers.php:1932
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:1936
+#: includes/helpers.php:1938
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:1939
+#: includes/helpers.php:1941
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:1947
+#: includes/helpers.php:1949
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:1950
+#: includes/helpers.php:1952
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/helpers.php:1960
+#: includes/helpers.php:1962
 msgid "Undeliverable"
 msgstr ""
 
-#: includes/helpers.php:1960
+#: includes/helpers.php:1962
 msgid "Unable to send email."
 msgstr ""
 

@@ -1747,8 +1747,7 @@
 
             $config = Config::current();
 
-            $check_updates_last = (!empty($_POST['check_updates']) and !$config->check_updates) ?
-                0 : $config->check_updates_last ;
+            $check_updates_last = (empty($_POST['check_updates'])) ? 0 : $config->check_updates_last ;
 
             $set = array($config->set("name", $_POST['name']),
                          $config->set("description", $_POST['description']),
