@@ -122,9 +122,9 @@
         public function main_category($main) {
             # make sure we have enough information to continue.
             if (!isset($_GET['name']))
-                $reason = __("You did not specify a category", "categorize");
+                $reason = __("You did not specify a category.", "categorize");
             elseif (!$category = Category::getCategorybyClean($_GET['name']))
-                $reason = __("The category you specified was not found", "categorize");
+                $reason = __("The category you specified was not found.", "categorize");
 
             if (isset($reason))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
@@ -143,7 +143,7 @@
 
             if (empty($ids))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
-                                     array("reason" => __("There are no posts in the category you specified", "categorize")),
+                                     array("reason" => __("There are no posts in the category you specified.", "categorize")),
                                         __("Invalid Category", "categorize"));
 
             $posts = new Paginator(Post::find(array("placeholders" => true,

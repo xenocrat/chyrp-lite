@@ -450,7 +450,7 @@
         public function main_tag($main) {
             if (!isset($_GET['name']))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
-                                     array("reason" => __("You did not specify a tag", "tags")),
+                                     array("reason" => __("You did not specify a tag.", "tags")),
                                         __("No Tag", "tags"));
 
             $sql = SQL::current();
@@ -482,7 +482,7 @@
 
             if (empty($ids))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
-                                     array("reason" => __("There are no posts with the tag you specified", "tags")),
+                                     array("reason" => __("There are no posts with the tag you specified.", "tags")),
                                         __("Invalid Tag", "tags"));
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
