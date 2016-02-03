@@ -21,10 +21,11 @@
             }
 
             foreach ($xml->channel->item as $item) {
-                if (version_compare(CHYRP_VERSION, $item->version, "<")) {
-                    #if ($config->install_updates and !Flash::exists())
-                    #    self::install($item->downloadurl);
-                    #else
+                if (version_compare(CHYRP_VERSION, $item->version, "<") and version_compare(PHP_VERSION, $item->requires, ">=")) {
+                    #if ($config->install_updates and class_exists("ZipArchive")) {
+                    #    if (!Flash::exists())
+                    #        self::install($item->downloadurl);
+                    #} else
                         Flash::message(_f("Chyrp Lite v%s is available.", $item->version).
                                           ' <a href="'.$item->updateurl.'" target="_blank">'.__("Go to GitHub &rarr;").'</a>');
 
@@ -38,9 +39,6 @@
          * Download and install Chyrp Lite updates from GitHub.
          */
         private static function install($url) {
-            if (!class_exists("ZipArchive"))
-                return;
-
             if (DEBUG)
                 error_log("INSTALLING UPDATE: ".$url); 
 
