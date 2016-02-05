@@ -55,7 +55,8 @@
                                 "update_page",
                                 "delete_post",
                                 "delete_page",
-                                "change_setting");
+                                "change_setting",
+                                "preview_theme");
 
             Trigger::current()->filter($regenerate, "cacher_regenerate_triggers");
 
@@ -108,6 +109,9 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            if ($_POST['clear_cache'] == "indubitably")
+                self::admin_clear_cache();
+
             $exclude = (empty($_POST['cache_exclude'])) ?
                             array() :
                             explode(",", str_replace(array("\n", "\r", " "), "", $_POST['cache_exclude'])) ;
@@ -121,7 +125,7 @@
         }
 
         public function admin_clear_cache() {
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("change_settings"))

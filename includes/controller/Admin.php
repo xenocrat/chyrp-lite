@@ -1472,10 +1472,11 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
+            if (!empty($_SESSION['theme']))
+                Flash::message(__("You are currently previewing a theme.").
+                                 ' <a href="'.admin_url("preview_theme").'">'.__("Stop &rarr;").'</a>');
+
             $config = Config::current();
-
-            $this->context["preview"] = !empty($_SESSION['theme']) ? $_SESSION['theme'] : "" ;
-
             $this->context["themes"] = array();
 
             if (!$open = @opendir(THEMES_DIR))
@@ -1489,6 +1490,9 @@
                     load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 $info = include THEMES_DIR.DIR.$folder.DIR."info.php";
+
+                if (gettype($info) != "array")
+                  continue;
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
@@ -1517,7 +1521,6 @@
             }
 
             closedir($open);
-
             $this->display("themes");
         }
 
@@ -1529,32 +1532,32 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            $type = (isset($_GET['module'])) ? "module" : "feather" ;
+            $type = (isset($_POST['module'])) ? "module" : "feather" ;
 
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
-            if (empty($_GET[$type]))
+            if (empty($_POST[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."));
 
-            if ($type == "module" and module_enabled($_GET[$type]))
+            if ($type == "module" and module_enabled($_POST[$type]))
                 Flash::warning(__("Module already enabled."), "/admin/?action=modules");
 
-            if ($type == "feather" and feather_enabled($_GET[$type]))
+            if ($type == "feather" and feather_enabled($_POST[$type]))
                 Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
 
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
-            if (!empty(Modules::$instances[$_GET[$type]]->cancelled))
+            if (!empty(Modules::$instances[$_POST[$type]]->cancelled))
                 error(__("Module Cancelled"), __("The module has cancelled execution because of an error."));
 
-            require $folder.DIR.$_GET[$type].DIR.$_GET[$type].".php";
+            require $folder.DIR.$_POST[$type].DIR.$_POST[$type].".php";
 
-            $class_name = camelize($_GET[$type]);
+            $class_name = camelize($_POST[$type]);
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
                 Flash::warning(__("Item is not a module."), "/admin/?action=modules");
@@ -1566,13 +1569,13 @@
                 call_user_func(array($class_name, "__install"));
 
             $new = $config->$enabled_array;
-            $new[] = $_GET[$type];
+            $new[] = $_POST[$type];
             $config->set($enabled_array, $new);
 
-            if (file_exists($folder.DIR.$_GET[$type].DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($_GET[$type], $folder.DIR.$_GET[$type].DIR."locale".DIR.$config->locale.".mo");
+            if (file_exists($folder.DIR.$_POST[$type].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_POST[$type], $folder.DIR.$_POST[$type].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include $folder.DIR.$_GET[$type].DIR."info.php";
+            $info = include $folder.DIR.$_POST[$type].DIR."info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
@@ -1586,9 +1589,9 @@
                 Flash::message($message);
 
             if ($type == "module")
-                Flash::notice(__("Module enabled."), "/admin/?action=".pluralize($type));
+                Flash::notice(__("Module enabled."), "/admin/?action=modules");
             elseif ($type == "feather")
-                Flash::notice(__("Feather enabled."), "/admin/?action=".pluralize($type));
+                Flash::notice(__("Feather enabled."), "/admin/?action=feathers");
         }
 
         /**
@@ -1599,27 +1602,27 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            $type = (isset($_GET['module'])) ? "module" : "feather" ;
+            $type = (isset($_POST['module'])) ? "module" : "feather" ;
 
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
-            if (empty($_GET[$type]))
+            if (empty($_POST[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."));
 
-            if ($type == "module" and !module_enabled($_GET[$type]) and empty(Modules::$instances[$_GET[$type]]->cancelled))
+            if ($type == "module" and !module_enabled($_POST[$type]) and empty(Modules::$instances[$_POST[$type]]->cancelled))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
-            if ($type == "feather" and !feather_enabled($_GET[$type]))
+            if ($type == "feather" and !feather_enabled($_POST[$type]))
                 Flash::warning(__("Feather already disabled."), "/admin/?action=feathers");
 
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
-            $class_name = camelize($_GET[$type]);
+            $class_name = camelize($_POST[$type]);
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), false);
@@ -1627,18 +1630,16 @@
             $new = array();
 
             foreach ($config->$enabled_array as $extension) {
-              if ($extension != $_GET[$type])
+              if ($extension != $_POST[$type])
                 $new[] = $extension;
             }
 
             $config->set($enabled_array, $new);
 
             if ($type == "module")
-                Flash::notice(__("Module disabled."),
-                              "/admin/?action=".pluralize($type));
+                Flash::notice(__("Module disabled."), "/admin/?action=modules");
             elseif ($type == "feather")
-                Flash::notice(__("Module disabled."),
-                              "/admin/?action=".pluralize($type));
+                Flash::notice(__("Module disabled."), "/admin/?action=feathers");
         }
 
         /**
@@ -1646,30 +1647,30 @@
          * Changes the theme.
          */
         public function change_theme() {
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            if (empty($_GET['theme']))
-                error(__("No Theme Specified"), __("You did not specify the theme you wish to select."));
+            if (empty($_POST['theme']))
+                error(__("No Theme Specified"), __("You did not specify a theme to select or preview."));
+
+            if ($_POST['change'] != "indubitably")
+                self::preview_theme();
 
             $config = Config::current();
-            $config->set("theme", $_GET['theme']);
+            $theme = $_POST['theme'];
+            $config->set("theme", $theme);
 
-            if (file_exists(THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($_GET['theme'], THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo");
+            if (file_exists(THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include THEMES_DIR.DIR.$_GET['theme'].DIR."info.php";
+            $info = include THEMES_DIR.DIR.$theme.DIR."info.php";
             fallback($info["notifications"], array());
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
-
-            # Clear the caches made by the previous theme.
-            foreach ((array) glob(INCLUDES_DIR.DIR."caches".DIR."*.cache") as $cache)
-                @unlink($cache);
 
             Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
         }
@@ -1679,33 +1680,21 @@
          * Previews the theme.
          */
         public function preview_theme() {
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            Trigger::current()->call("preview_theme", !empty($_POST['theme']));
+
+            if (empty($_POST['theme'])) {
+                unset($_SESSION['theme']);
+                Flash::notice(__("Preview stopped."), "/admin/?action=themes");
+            }
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to preview themes."));
 
-            if (empty($_GET['theme']))
-                error(__("No Theme Specified"), __("You did not specify a theme to preview."));
-
-            $config = Config::current();
-
-            if (file_exists(THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($_GET['theme'], THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo");
-
-            $info = include THEMES_DIR.DIR.$_GET['theme'].DIR."info.php";
-
-            # Clear the caches made by the previous theme.
-            foreach (glob(INCLUDES_DIR.DIR."caches".DIR."*.cache") as $cache)
-                @unlink($cache);
-
-            if (!empty($_SESSION['theme'])) {
-                unset($_SESSION['theme']);
-                Flash::notice(_f("Stopped previewing &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
-            } else {
-                $_SESSION['theme'] = $_GET['theme'];
-                Flash::notice(_f("Previewing theme &#8220;%s&#8221;. Press the theme's &#8220;Preview&#8221; button again to stop previewing.", array($info["name"])), "/");
-            }
+            $_SESSION['theme'] = $_POST['theme'];
+            Flash::notice(__("Preview started."), "/");
         }
 
         /**
@@ -2020,6 +2009,7 @@
 
             $pages["manage"][] = "new_user";
             $pages["manage"][] = "new_group";
+
             foreach (array_keys($subnav["manage"]) as $manage)
                 $pages["manage"] = array_merge($pages["manage"], array($manage,
                                                                        preg_replace_callback("/manage_(.+)/",
@@ -2075,13 +2065,10 @@
          */
         public function display($action, $context = array(), $title = "") {
             $this->displayed = true;
-
             fallback($title, camelize($action, true));
-
             $this->context = array_merge($context, $this->context);
 
             $trigger = Trigger::current();
-
             $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
 
             # Are there any extension-added pages?
@@ -2163,8 +2150,7 @@
             $this->context["navigation"]["extend"] = array("title" => __("Extend"),
                                                            "show" => in_array(true, $show["extend"]),
                                                            "selected" => (in_array($action, $extend) or
-                                                                         match(array("/_extend$/",
-                                                                                     "/_editor$/"), $action)));
+                                                                         match("/_extend$/", $action)));
 
             $this->subnav_context($route->action);
             $trigger->filter($this->context["selected"], "nav_selected");
