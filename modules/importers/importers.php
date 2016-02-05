@@ -521,7 +521,7 @@
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
 <input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
 </fieldset>
@@ -536,7 +536,7 @@
 <small><?php echo __("Note: Audio tumbles cannot be imported.", "importers"); ?></small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
 <input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
 </fieldset>
@@ -575,7 +575,7 @@
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
 <input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
 </fieldset>
@@ -609,7 +609,7 @@
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
 <input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
 </fieldset>

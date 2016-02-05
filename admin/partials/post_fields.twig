@@ -132,20 +132,20 @@
 {% if route.action == "edit_post" %}
 {% if visitor.group.can("add_post") and post.status == "draft" %}
 <button type="submit" class="yay" accesskey="s" id="publish" name="publish">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" accesskey="s" id="save">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="success">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% else %}
 {% if visitor.group.can("add_post") %}
 <button type="submit" class="yay" accesskey="s" id="publish">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" accesskey="s" id="save" name="draft" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="success">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>

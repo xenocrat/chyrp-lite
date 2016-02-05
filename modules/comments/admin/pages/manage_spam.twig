@@ -13,7 +13,7 @@
 </h3>
 <input class="text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
-<a class="button boo" href="{{ admin_url('purge_spam') }}"><img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="deny">{{ "Delete All (%d)" | translate("comments") | format(comments.total) }}</a>
+<a class="button boo" href="{{ admin_url('purge_spam') }}"><img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Delete All (%d)" | translate("comments") | format(comments.total) }}</a>
 </div>
 </fieldset>
 </form>
@@ -70,13 +70,13 @@
 <div class="controls">
 <h4>{{ "With selected:" | translate("comments") }}</h4>
 <button name="deny">
-<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="deny"> {{ "Deny" | translate("comments") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Deny" | translate("comments") }}
 </button>
 <button class="yay" name="approve">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="approve"> {{ "Approve" | translate("comments") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Approve" | translate("comments") }}
 </button>
 <button class="boo" name="delete">
-<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="delete"> {{ "Delete" | translate("comments") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Delete" | translate("comments") }}
 </button>
 </div>
 </form>
