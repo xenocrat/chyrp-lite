@@ -55,9 +55,6 @@ Pages allow you to publish articles on your site that are independent of your bl
 * SQLite:
   - SQLite 3+
   - PDO
-* PostgreSQL:
-  - PostgreSQL 7.1+
-  - PDO
 
 ## Installation
 You can install Chyrp Lite in four steps:

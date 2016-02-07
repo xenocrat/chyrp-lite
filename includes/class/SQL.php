@@ -67,7 +67,6 @@
                     $this->method = "mysqli";
                 elseif (class_exists("PDO") and
                        ($this->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
-                        $this->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers()) or
                         $this->adapter == "mysql" and in_array("mysql", PDO::getAvailableDrivers())))
                     $this->method = "pdo";
                 else
@@ -189,26 +188,10 @@
             $query = str_replace("__", $this->prefix, $query);
 
             if ($this->adapter == "sqlite")
-                $query = str_ireplace(" DEFAULT CHARSET=utf8", "", str_ireplace("AUTO_INCREMENT", "AUTOINCREMENT", $query));
-
-            if ($this->adapter == "pgsql")
-                $query = str_ireplace(array("CREATE TABLE IF NOT EXISTS",
-                                            "INTEGER PRIMARY KEY AUTO_INCREMENT",
-                                            ") DEFAULT CHARSET=utf8",
-                                            "TINYINT",
-                                            "DATETIME",
-                                            "DEFAULT '0000-00-00 00:00:00'",
-                                            "LONGTEXT",
-                                            "REPLACE INTO"),
-                                      array("CREATE TABLE",
-                                            "SERIAL PRIMARY KEY",
-                                            ")",
-                                            "SMALLINT",
-                                            "TIMESTAMP",
-                                            "",
-                                            "TEXT",
-                                            "INSERT INTO"),
-                                      $query);
+                $query = str_ireplace(array(" DEFAULT CHARSET=utf8",
+                                            "AUTO_INCREMENT"),
+                                      array("",
+                                            "AUTOINCREMENT"), $query);
 
             $query = new Query($this, $query, $params, $throw_exceptions);
 
@@ -320,7 +303,6 @@
         /**
          * Function: latest
          * Returns the last inserted sequential value.
-         * Both function arguments are only relevant for PostgreSQL.
          *
          * Parameters:
          *     $table - Table to get the latest value from.

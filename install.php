@@ -123,14 +123,6 @@
 
             if (!$sql->connect(true))
                 $errors[] = __("Could not connect to the specified database:")."\n".fix($sql->error);
-            elseif ($_POST['adapter'] == "pgsql") {
-                new Query($sql, "CREATE FUNCTION year(timestamp) RETURNS double precision AS 'select extract(year from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
-                new Query($sql, "CREATE FUNCTION month(timestamp) RETURNS double precision AS 'select extract(month from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
-                new Query($sql, "CREATE FUNCTION day(timestamp) RETURNS double precision AS 'select extract(day from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
-                new Query($sql, "CREATE FUNCTION hour(timestamp) RETURNS double precision AS 'select extract(hour from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
-                new Query($sql, "CREATE FUNCTION minute(timestamp) RETURNS double precision AS 'select extract(minute from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
-                new Query($sql, "CREATE FUNCTION second(timestamp) RETURNS double precision AS 'select extract(second from $1);' LANGUAGE SQL IMMUTABLE RETURNS NULL ON NULL INPUT");
-            }
         }
 
         if (empty($_POST['name']))
@@ -206,10 +198,7 @@
 
             if ($sql->adapter == "mysql" and class_exists("MySQLi"))
                 $sql->method = "mysqli";
-            elseif (class_exists("PDO") and
-                        ($sql->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
-                         $sql->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers()) or
-                         $sql->adapter == "mysql" and in_array("mysql", PDO::getAvailableDrivers())))
+            else
                 $sql->method = "pdo";
 
             $sql->connect();
@@ -651,15 +640,11 @@ foreach ($errors as $error)
                 <p id="adapter_field">
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
                     <select name="adapter" id="adapter">
-                        <?php if ((class_exists("PDO") and in_array("mysql", PDO::getAvailableDrivers())) or
-                                  class_exists("MySQLi")): ?>
+                        <?php if ((class_exists("PDO") and in_array("mysql", PDO::getAvailableDrivers())) or class_exists("MySQLi")): ?>
                         <option value="mysql"<?php selected("mysql", fallback($_POST['adapter'], "mysql")); ?>>MySQL</option>
                         <?php endif; ?>
                         <?php if (class_exists("PDO") and in_array("sqlite", PDO::getAvailableDrivers())): ?>
-                        <option value="sqlite"<?php selected("sqlite", fallback($_POST['adapter'], "mysql")); ?>>SQLite 3</option>
-                        <?php endif; ?>
-                        <?php if (class_exists("PDO") and in_array("pgsql", PDO::getAvailableDrivers())): ?>
-                        <option value="pgsql"<?php selected("pgsql", fallback($_POST['adapter'], "mysql")); ?>>PostgreSQL</option>
+                        <option value="sqlite"<?php selected("sqlite", fallback($_POST['adapter'], "mysql")); ?>>SQLite</option>
                         <?php endif; ?>
                     </select>
                 </p>
