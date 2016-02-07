@@ -76,9 +76,6 @@
                         if (!$result)
                             throw new PDOException;
                     } catch (PDOException $error) {
-                        if (!empty($error->errorInfo[1]) and $error->errorInfo[1] == 17)
-                            return new self($sql, $query, $params, $throw_exceptions);
-
                         return $this->handle($error);
                     }
 

@@ -129,7 +129,7 @@
                             throw new PDOException("No database specified.");
 
                         if ($this->adapter == "sqlite") {
-                            $this->db = new PDO("sqlite:".$this->database, null, null, array(PDO::ATTR_PERSISTENT => true));
+                            $this->db = new PDO("sqlite:".$this->database, null, null, array(PDO::ATTR_PERSISTENT => false));
                             $this->db->sqliteCreateFunction("YEAR", array($this, "year_from_datetime"), 1);
                             $this->db->sqliteCreateFunction("MONTH", array($this, "month_from_datetime"), 1);
                             $this->db->sqliteCreateFunction("DAY", array($this, "day_from_datetime"), 1);
