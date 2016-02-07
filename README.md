@@ -128,7 +128,7 @@ jQuery is Copyright jQuery Foundation and other contributors,
 distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).
 Parsedown is Copyright 2013 Emanuil Rusev,
 distributed under the [MIT License](https://raw.githubusercontent.com/erusev/parsedown/master/LICENSE.txt).
-Highlighter.js is Copyright 2006 Ivan Sagalaev,
+Highlight.js is Copyright 2006 Ivan Sagalaev,
 distributed under the [BSD License](https://raw.githubusercontent.com/isagalaev/highlight.js/master/LICENSE).
 Open Sans is Copyright 2010-2011 Google Corporation,
 distributed under the [Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
