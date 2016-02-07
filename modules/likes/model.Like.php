@@ -117,7 +117,7 @@
             $config = Config::current();
             $sql = SQL::current();
 
-            if (!$config->module_like) {
+            if (!property_exists($config, "module_like")) {
                 $sql->query("CREATE TABLE IF NOT EXISTS __likes (
                               id INTEGER PRIMARY KEY AUTO_INCREMENT,
                               post_id INTEGER NOT NULL,
