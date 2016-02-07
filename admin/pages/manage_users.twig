@@ -15,7 +15,7 @@
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_user") %}
 <a href="{{ admin_url('new_user') }}" class="button yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add"> {{ "New User" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add">{{ "New User" | translate }}
 </a>
 {% endif %}
 </div>
