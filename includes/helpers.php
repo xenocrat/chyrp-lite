@@ -23,13 +23,17 @@
                                  array("Session", "write"),
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
-        $host = $_SERVER['HTTP_HOST'];
-        if (is_numeric(str_replace(".", "", $host)))
-            $domain = $host;
-        elseif (count(explode(".", $host)) >= 2)
-            $domain = preg_replace("/^www\./", ".", $host);
+
+        if (!class_exists("Config"))
+            return;
+
+        preg_match('~^(http://|https://)?([^/]+)(/|:[0-9]{1,5}/)~i', Config::current()->chyrp_url, $url);
+        $host = fallback($url[2], "");
+
+        if (is_numeric(str_replace(".", "", $host)) or preg_match('~^\[[a-f0-9\:]{3,39}\]$~', $host))
+            $domain = $host; // IPv4 or IPv6 address.
         else
-            $domain = "";
+            $domain = ".".preg_replace("~^www\.~", "", $host);
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
         session_name("ChyrpSession");
