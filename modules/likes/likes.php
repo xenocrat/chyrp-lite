@@ -3,7 +3,8 @@
 
     class Likes extends Modules {
         static function __install() {
-            Like::install();
+            if (!property_exists(Config::current(), "module_like"))
+                Like::install();
         }
 
         static function __uninstall($confirm) {

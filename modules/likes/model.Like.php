@@ -117,25 +117,23 @@
             $config = Config::current();
             $sql = SQL::current();
 
-            if (!property_exists($config, "module_like")) {
-                $sql->query("CREATE TABLE IF NOT EXISTS __likes (
-                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                              post_id INTEGER NOT NULL,
-                              user_id INTEGER NOT NULL,
-                              timestamp DATETIME DEFAULT NULL,
-                              session_hash VARCHAR(32) NOT NULL
-                            ) DEFAULT CHARSET=UTF8");
-                $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
-                $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
-                                                                        # Add these strings to the .pot file:
-                Group::add_permission("like_post", "Like Posts");       # __("Like Posts");
-                Group::add_permission("unlike_post", "Unlike Posts");   # __("Unlike Posts");
+            $sql->query("CREATE TABLE IF NOT EXISTS __likes (
+                          id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                          post_id INTEGER NOT NULL,
+                          user_id INTEGER NOT NULL,
+                          timestamp DATETIME DEFAULT NULL,
+                          session_hash VARCHAR(32) NOT NULL
+                        ) DEFAULT CHARSET=UTF8");
+            $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
+            $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
+                                                                    # Add these strings to the .pot file:
+            Group::add_permission("like_post", "Like Posts");       # __("Like Posts");
+            Group::add_permission("unlike_post", "Unlike Posts");   # __("Unlike Posts");
 
-                $set = array($config->set("module_like",
-                                    array("showOnFront" => true,
-                                          "likeWithText" => false,
-                                          "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg")));
-            }
+            $set = array($config->set("module_like",
+                                array("showOnFront" => true,
+                                      "likeWithText" => false,
+                                      "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg")));
         }
 
         static function uninstall() {
