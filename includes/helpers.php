@@ -16,7 +16,7 @@
      * Function: session
      * Begins Chyrp's custom session storage whatnots.
      */
-    function session() {
+    function session($domain = "") {
         session_set_save_handler(array("Session", "open"),
                                  array("Session", "close"),
                                  array("Session", "read"),
@@ -24,10 +24,8 @@
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
 
-        if (class_exists("Config"))
-            preg_match('~^(http://|https://)?([^/]+)($|/|:[0-9]{1,5})~i', Config::current()->chyrp_url, $url);
-
-        $domain = (!empty($url)) ? preg_replace("~^www\.~", "", $url[2]) : $_SERVER["SERVER_ADDR"] ;
+        $domain = preg_replace("~^www\.~", "",
+            oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
         session_name("ChyrpSession");
@@ -838,15 +836,20 @@
      *
      */
     function admin_url($action = "", $params = array()) {
+        $config = Config::current();
+
+        if ($action == "login")
+            return $config->url."/?action=login";
+
         if ($action == "logout")
-            return Config::current()->url."/?action=logout";
+            return $config->url."/?action=logout";
 
         $request = !empty($action) ? array("action=".$action) : array() ;
 
         foreach ($params as $key => $value)
             $request[] = urlencode($key)."=".urlencode($value);
 
-        return Config::current()->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
+        return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
     }
 
     /**
