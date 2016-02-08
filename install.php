@@ -74,7 +74,7 @@
     sanitize_input($_REQUEST);
 
     $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
-    $url = $protocol.$_SERVER['HTTP_HOST'].str_replace("/install.php", "", $_SERVER['REQUEST_URI']);
+    $url = $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER["SERVER_NAME"]).str_replace("/install.php", "", $_SERVER['REQUEST_URI']);
     $index = (parse_url($url, PHP_URL_PATH)) ? "/".trim(parse_url($url, PHP_URL_PATH), "/")."/" : "/" ;
     $htaccess = "<IfModule mod_rewrite.c>\n".
                 "RewriteEngine On\n".
