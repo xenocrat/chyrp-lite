@@ -24,16 +24,10 @@
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
 
-        if (!class_exists("Config"))
-            return;
+        if (class_exists("Config"))
+            preg_match('~^(http://|https://)?([^/]+)($|/|:[0-9]{1,5})~i', Config::current()->chyrp_url, $url);
 
-        preg_match('~^(http://|https://)?([^/]+)(/|:[0-9]{1,5}/)~i', Config::current()->chyrp_url, $url);
-        $host = fallback($url[2], "");
-
-        if (is_numeric(str_replace(".", "", $host)) or preg_match('~^\[[a-f0-9\:]{3,39}\]$~', $host))
-            $domain = $host; // IPv4 or IPv6 address.
-        else
-            $domain = ".".preg_replace("~^www\.~", "", $host);
+        $domain = (!empty($url)) ? preg_replace("~^www\.~", "", $url[2]) : $_SERVER["SERVER_ADDR"] ;
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
         session_name("ChyrpSession");
@@ -1809,9 +1803,9 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}/)~i', $string) or //FQDN
-                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}/)~', $string) or //IPv4
-                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5}/)~i', $string));                           //IPv6
+        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5})~i', $string) or //FQDN
+                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5})~', $string) or //IPv4
+                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                           //IPv6
     }
 
     /**
