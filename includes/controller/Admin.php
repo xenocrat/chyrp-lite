@@ -1516,7 +1516,7 @@
 
                 $this->context["themes"][] = array("name" => $folder,
                                                    "screenshot" => (file_exists(THEMES_DIR.DIR.$folder.DIR."screenshot.png") ?
-                                                        $config->chyrp_url.DIR."themes".DIR.$folder.DIR."screenshot.png" : ""),
+                                                        $config->chyrp_url."/themes/".$folder."/screenshot.png" : ""),
                                                    "info" => $info);
             }
 
