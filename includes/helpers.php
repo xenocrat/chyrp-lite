@@ -15,6 +15,9 @@
     /**
      * Function: session
      * Begins Chyrp's custom session storage whatnots.
+     *
+     * Parameters:
+     *     $domain - The cookie domain (optional).
      */
     function session($domain = "") {
         session_set_save_handler(array("Session", "open"),
@@ -166,7 +169,7 @@
      * Notes:
      *     Precedence is given to UTF-8 with a fallback to Windows 1252.
      */
-    function set_locale($locale) {
+    function set_locale($locale = "en_US") {
         $posix = array($locale.".UTF-8",                  // E.g. "en_US.UTF-8"
                        $locale.".UTF8",                   // E.g. "en_US.UTF8"
                        $locale);                          // E.g. "en_US"
@@ -182,16 +185,10 @@
 
             # Set the ICU locale.
             Locale::setDefault($locale);
-
-            if (DEBUG)
-                error_log("LOCALE (ICU) ".Locale::getDefault());
         }
 
         # Set the PHP locale.
         setlocale(LC_ALL, array_merge($posix, $win32));
-
-        if (DEBUG)
-            error_log("LOCALE (PHP) ".setlocale(LC_ALL, 0));
     }
 
     /**
@@ -359,7 +356,7 @@
      * Returns a standard datetime string based on either the passed timestamp or their time offset, usually for MySQL inserts.
      *
      * Parameters:
-     *     $when - An optional timestamp.
+     *     $when - A timestamp (optional).
      */
     function datetime($when = null) {
         fallback($when, time());
@@ -1794,7 +1791,7 @@
 
     /**
      * Function: is_url
-     * Does the string look like a website URL?
+     * Does the string look like a web URL?
      *
      * Parameters:
      *     $string - The string to analyse.
