@@ -1151,6 +1151,7 @@
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
+            $sql = SQL::current();
 
             if (!$visitor->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
@@ -1172,7 +1173,8 @@
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
 
-            $sql = SQL::current();
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
 
             function media_url_scan(&$value) {
                 $config = Config::current();

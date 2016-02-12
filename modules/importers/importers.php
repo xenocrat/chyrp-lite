@@ -6,6 +6,7 @@
          */
         public function route_import_wordpress() {
             $config = Config::current();
+            $trigger = Trigger::current();
 
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "importers"));
@@ -25,7 +26,8 @@
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
 
-            $trigger = Trigger::current();
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
 
             $stupid_xml = file_get_contents($_FILES['xml_file']['tmp_name']);
             $sane_xml = preg_replace(array("/<wp:comment_content>/", "/<\/wp:comment_content>/"),
@@ -190,7 +192,9 @@
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
 
-            set_time_limit(3600);
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
+
             $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
             $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url));
             $api = preg_replace("/ ([a-z]+)\-([a-z]+)=/", " \\1_\\2=", $api);
@@ -208,7 +212,6 @@
             }
 
             while ($xml->posts->attributes()->total > count($posts)) {
-                set_time_limit(3600);
                 $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url."&start=".count($posts)));
                 $api = preg_replace("/ ([a-z]+)\-([a-z]+)=/", " \\1_\\2=", $api);
                 $xml = simplexml_load_string($api, "SimpleXMLElement", LIBXML_NOCDATA);
@@ -224,11 +227,9 @@
                 return (strtotime($a->attributes()->date) < strtotime($b->attributes()->date)) ? -1 : 1 ;
             }
 
-            set_time_limit(3600);
             usort($posts, "reverse");
 
             foreach ($posts as $key => $post) {
-                set_time_limit(3600);
                 if ($post->attributes()->type == "audio")
                     break; # Can't import Audio posts since Tumblr has the files locked in to Amazon.
 
@@ -324,6 +325,12 @@
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "importers"));
 
+            if (ini_get("memory_limit") < 20)
+                ini_set("memory_limit", "20M");
+
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
+
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
             if ($mysqli->connect_errno) {
@@ -410,6 +417,12 @@
 
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "importers"));
+
+            if (ini_get("memory_limit") < 20)
+                ini_set("memory_limit", "20M");
+
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
