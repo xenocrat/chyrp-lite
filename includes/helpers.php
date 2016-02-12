@@ -1727,8 +1727,10 @@
      */
     function generate_captcha() {
         global $captchaHooks;
+
         if (!$captchaHooks)
            return false;
+
         return call_user_func($captchaHooks[0] . "::getCaptcha");
     }
 
@@ -1741,8 +1743,10 @@
      */
     function check_captcha() {
         global $captchaHooks;
+
         if (!$captchaHooks)
            return true;
+
         return call_user_func($captchaHooks[0] . "::verifyCaptcha");
     }
 
