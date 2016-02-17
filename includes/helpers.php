@@ -1966,21 +1966,24 @@
 
     /**
      * Function: autoload
-     * Autoload classes on demand.
+     * Autoload PSR-0 classes on demand by scanning lib directories.
      *
      * Parameters:
      *     $class - The name of the class to load.
      */
     function autoload($class) {
-        if (0 === strpos($class, "Parsedown"))
-            $filepath = INCLUDES_DIR.DIR."lib".DIR."Parsedown.php";
+        $filepath = str_replace(array("_", "\\", "\0"),
+                                array(DIR, DIR, ""),
+                                ltrim($class, "\\")).".php";
 
-        if (0 === strpos($class, "Leaf"))
-            $filepath = INCLUDES_DIR.DIR."class".DIR."Leaf.php";
+        if (file_exists(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
+            require INCLUDES_DIR.DIR."lib".DIR.$filepath;
+            return;
+        }
 
-        if (0 === strpos($class, "Twig"))
-            $filepath = INCLUDES_DIR.DIR."lib".DIR.str_replace(array('_', "\0"), array(DIR, ''), $class).".php";
-
-        if (isset($filepath) and is_file($filepath))
-            require $filepath;
+        foreach (Config::current()->enabled_modules as $module)
+            if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
+                require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
+                return;
+            }
     }
