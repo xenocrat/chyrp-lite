@@ -1,6 +1,5 @@
 <?php
     require_once "model.Comment.php";
-    require_once "lib".DIR."Akismet.php";
 
     class Comments extends Modules {
         public function __init() {
