@@ -27,7 +27,9 @@
         private function __construct() {
             $config = Config::current();
 
-            $cache = (is_writable(CACHES_DIR) and (!DEBUG or CACHE_TWIG));
+            $cache = (is_writable(CACHES_DIR.DIR."twig") and (!DEBUG or CACHE_TWIG)) ?
+                CACHES_DIR.DIR."twig" : false ;
+
             $loaders = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
             foreach ($config->enabled_modules as $extension)
@@ -39,10 +41,10 @@
                     $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$extension.DIR."admin");
 
             $loader = new Twig_Loader_Chain($loaders);
-            $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
-                                                              "strict_variables" => (DEBUG) ? true : false,
+            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                              "strict_variables" => DEBUG,
                                                               "charset" => "UTF-8",
-                                                              "cache" => ($cache) ? CACHES_DIR : false,
+                                                              "cache" => $cache,
                                                               "autoescape" => false));
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");

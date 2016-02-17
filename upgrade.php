@@ -303,6 +303,20 @@
     function add_admin_per_page() {
         Config::fallback("admin_per_page", 25);
     }
+
+    /**
+     * Function: mkdir_caches
+     * Makes new caching directories.
+     *
+     * Versions: 2016.01 => 2016.02
+     */
+    function mkdir_caches() {
+        if (!file_exists(CACHES_DIR.DIR."twig"))
+            echo __("Making directory <em>includes/caches/twig</em>...").test(@mkdir(CACHES_DIR.DIR."twig"));
+
+        if (!file_exists(CACHES_DIR.DIR."thumbs"))
+            echo __("Making directory <em>includes/caches/thumbs</em>...").test(@mkdir(CACHES_DIR.DIR."thumbs"));
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -501,6 +515,8 @@ add_uploads_limit();
 remove_trackbacking();
 
 add_admin_per_page();
+
+mkdir_caches();
 
 # Perform Module/Feather upgrades.
 

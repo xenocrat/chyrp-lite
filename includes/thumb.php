@@ -115,7 +115,7 @@
         exit(header("Location: ".$url));
 
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
-    $cache_file = CACHES_DIR.DIR."thumb_".$cache_filename;
+    $cache_file = CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename;
 
     if (isset($_GET['no_cache']) and $_GET['no_cache'] == "true" and file_exists($cache_file))
         unlink($cache_file);
