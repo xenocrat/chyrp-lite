@@ -14,7 +14,7 @@
 
             if (!self::validate($xml))
                 return Flash::warning(__("Unable to check for new Chyrp Lite versions.").
-                                         ' <a href="'.UPDATE_PAGE.'" target="_blank">'.
+                                         ' <a href="'.fix(UPDATE_PAGE, true).'" target="_blank">'.
                                          __("Go to GitHub &rarr;").'</a>');
 
             foreach ($xml->channel->item as $item)
