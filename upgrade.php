@@ -442,8 +442,12 @@
             pre.pane:empty + h1 {
                 margin-top: 0em;
             }
-            span.yay { color: #76b362; }
-            span.boo { color: #d94c4c; }
+            span.yay {
+                color: #76b362;
+            }
+            span.boo {
+                color: #d94c4c;
+            }
             a.big,
             button {
                 box-sizing: border-box;
@@ -531,7 +535,7 @@ foreach ((array) Config::get("enabled_feathers") as $feather)
 foreach ($errors as $error)
     echo '<span role="alert">'.$error."</span>\n";
 
-          ?></pre>
+            ?></pre>
             <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>

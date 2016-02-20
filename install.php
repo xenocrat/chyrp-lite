@@ -564,8 +564,12 @@
             pre.pane:empty + h1 {
                 margin-top: 0em;
             }
-            span.yay { color: #76b362; }
-            span.boo { color: #d94c4c; }
+            span.yay {
+                color: #76b362;
+            }
+            span.boo {
+                color: #d94c4c;
+            }
             a.big,
             button {
                 box-sizing: border-box;
