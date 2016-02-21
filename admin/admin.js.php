@@ -39,10 +39,11 @@ var Route = {
 var Site = {
     url: '<?php echo $config->chyrp_url; ?>',
     key: '<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>',
-    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
+    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?>
 }
 var Theme = {
-    preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?> 
+    preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
+    wysiwyg: <?php echo($trigger->call("admin_wysiwyg") ? "true" : "false"); ?>
 }
 function toggle_all() {
     var all_checked = true;
@@ -214,7 +215,7 @@ var Write = {
             Write.sort_feathers();
 
         // Insert buttons for ajax previews.
-        if (Theme.preview)
+        if (Theme.preview && !Theme.wysiwyg)
             $("*[data-preview]").each(function() {
                 $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
                     $("<img>", {
