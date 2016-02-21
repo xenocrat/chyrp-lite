@@ -127,6 +127,8 @@ Parsedown is Copyright 2013 Emanuil Rusev,
 distributed under the [MIT License](https://raw.githubusercontent.com/erusev/parsedown/master/LICENSE.txt).
 Highlight.js is Copyright 2006 Ivan Sagalaev,
 distributed under the [BSD License](https://raw.githubusercontent.com/isagalaev/highlight.js/master/LICENSE).
+SimpleMDE is Copyright 2015 Next Step Webs, Inc.,
+distributed under the [MIT License](https://raw.githubusercontent.com/NextStepWebs/simplemde-markdown-editor/master/LICENSE).
 Open Sans is Copyright 2010-2011 Google Corporation,
 distributed under the [Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
 Open Sans is a trademark of Google and may be registered in certain jurisdictions.
