@@ -1,6 +1,6 @@
 <?php
     class SimpleMarkdown extends Modules {
-        static function admin_wysiwyg() {
+        static function admin_write_wysiwyg() {
           return true;
         }
 

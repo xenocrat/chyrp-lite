@@ -41,10 +41,6 @@ var Site = {
     key: '<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?>
 }
-var Theme = {
-    preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
-    wysiwyg: <?php echo($trigger->call("admin_wysiwyg") ? "true" : "false"); ?>
-}
 function toggle_all() {
     var all_checked = true;
 
@@ -210,12 +206,14 @@ var Help = {
     }
 }
 var Write = {
+    preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
+    wysiwyg: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
         if (/(write)_/.test(Route.action))
             Write.sort_feathers();
 
         // Insert buttons for ajax previews.
-        if (Theme.preview && !Theme.wysiwyg)
+        if (Write.preview && !Write.wysiwyg)
             $("*[data-preview]").each(function() {
                 $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
                     $("<img>", {
