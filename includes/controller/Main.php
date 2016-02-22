@@ -459,6 +459,7 @@
          */
         public function register() {
             $config = Config::current();
+
             if (!$config->can_register)
                 error(__("Registration Disabled"), __("This site does not allow registration."));
 
@@ -493,8 +494,12 @@
                                           "",
                                           $config->default_group,
                                           false);
+
                         correspond("activate", array("login" => $user->login, 
-                                                     "to" => $user->email));
+                                                     "to"    => $user->email,
+                                                     "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                                "&token=".token(array($user->login, $user->email), 0)));
+
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     } else {
                         $user = User::add($_POST['login'],
@@ -527,7 +532,7 @@
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
 
-            if (token(array($user->login, $user->email)) != $_GET['token'])
+            if (token(array($user->login, $user->email), 0) != $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             if (!$user->approved) {
@@ -556,7 +561,7 @@
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
 
-            if (token(array($user->login, $user->email)) != $_GET['token'])
+            if (token(array($user->login, $user->email), 86400) != $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             $new_password = random(8);
@@ -680,7 +685,9 @@
             if (logged_in())
                 error(__("Error"), __("You are already logged in."));
 
-            if (!Config::current()->email_correspondence) {
+            $config = Config::current();
+
+            if (!$config->email_correspondence) {
                 Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
                 return;
             }
@@ -690,7 +697,9 @@
 
                 if (!$user->no_results)
                     correspond("reset", array("login" => $user->login,
-                                              "to" => $user->email));
+                                              "to"    => $user->email,
+                                              "link"  => $config->url."/?action=reset&login=".fix($user->login).
+                                                         "&token=".token(array($user->login, $user->email), 86400)));
 
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }
@@ -704,6 +713,7 @@
          */
         public function random() {
             $sql = SQL::current();
+
             if (isset($_GET['feather'])) {
                 $feather = preg_replace( '|[^a-z]|i', '', $_GET['feather'] );
                 $random = $sql->select("posts",

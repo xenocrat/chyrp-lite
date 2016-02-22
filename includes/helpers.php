@@ -1781,16 +1781,18 @@
 
     /**
      * Function: token
-     * Salt and hash a unique token.
+     * Salt and hash a unique timed token.
      *
      * Parameters:
      *     $items - The items to hash.
+     *     $expire - Expire the token after n seconds, 0 to disable.
      *
      * Returns:
-     *     A unique token.
+     *     A unique timed token.
      */
-    function token($items) {
-        return sha1(implode((array) $items).Config::current()->secure_hashkey);
+    function token($items, $expire = 3600) {
+        $slice = (!empty($expire) and is_int($expire)) ? floor(time() / $expire) : "" ;
+        return sha1(implode((array) $items).Config::current()->secure_hashkey.$slice);
     }
 
     /**
@@ -1933,8 +1935,7 @@
                                      PHP_EOL.PHP_EOL.
                                      __("Visit this link to activate your account:").
                                      PHP_EOL.
-                                     $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
-                                     "&token=".token(array($params["login"], $params["to"]));
+                                     $params["link"];
                 break;
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
@@ -1944,8 +1945,7 @@
                                      PHP_EOL.PHP_EOL.
                                      _f("Visit this link to reset your password:").
                                      PHP_EOL.
-                                     $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
-                                     "&token=".token(array($params["login"], $params["to"]));
+                                     $params["link"];
                 break;
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
