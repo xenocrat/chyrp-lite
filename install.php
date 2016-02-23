@@ -142,6 +142,8 @@
 
         if (empty($_POST['email']))
             $errors[] = __("Email address cannot be blank.");
+        elseif (!is_email($_POST['email']))
+            $errors[] = __("Invalid email address.");
 
         if (!class_exists("MySQLi") and !class_exists("PDO"))
             $errors[] = __("MySQLi or PDO is required for database access.");
@@ -621,11 +623,17 @@
                         $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                     }
                 });
-                $("input[type='password']#password_1").keyup(function(e) {
+                $("#password_1").keyup(function(e) {
                     if (passwordStrength($(this).val()) < 100)
                         $(this).removeClass("strong");
                     else
                         $(this).addClass("strong");
+                });
+                $(("#installer").on("submit", function(e) {
+                    if ($("#password_1").val() !== $("#password_2").val()) {
+                        e.preventDefault();
+                        alert('<?php echo __("Passwords do not match."); ?>');
+                    }
                 });
             });
         </script>
@@ -639,7 +647,7 @@ foreach ($errors as $error)
 
           ?></pre>
 <?php if (!$installed): ?>
-            <form action="install.php" method="post" accept-charset="utf-8">
+            <form action="install.php" method="post" accept-charset="utf-8" id="installer">
                 <h1><?php echo __("Database Setup"); ?></h1>
                 <p id="adapter_field">
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
