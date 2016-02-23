@@ -13,7 +13,7 @@ $(function() {
         Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
 });
 var Route = {
-    action: "<?php echo $_GET['action']; ?>"
+    action: "<?php echo fix(@$_GET['action']); ?>"
 }
 var Site = {
     url: '<?php echo $config->chyrp_url; ?>',
