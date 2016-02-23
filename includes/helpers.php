@@ -1781,13 +1781,13 @@
 
     /**
      * Function: token
-     * Salt and hash a unique token.
+     * Salt and hash a unique token using the supplied data.
      *
      * Parameters:
      *     $items - An array of items to hash.
      *
      * Returns:
-     *     A unique token.
+     *     A unique token salted with the secure hashkey.
      */
     function token($items) {
         return sha1(implode((array) $items).Config::current()->secure_hashkey);
@@ -1875,7 +1875,7 @@
      *     $password - The password string to score.
      *
      * Returns:
-     *     A numeric score for the password strength.
+     *     A numeric score for the strength of the password.
      */
     function password_strength($password = "") {
         $score = 0;
