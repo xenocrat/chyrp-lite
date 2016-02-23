@@ -571,6 +571,8 @@
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
 
+            $config = Config::current();
+
             if ($config->email_activation) {
                 $user = User::add($_POST['login'],
                                   $_POST['password1'],
@@ -579,8 +581,12 @@
                                   $_POST['website'],
                                   $_POST['group'],
                                   false);
+
                 correspond("activate", array("login" => $user->login,
-                                             "to" => $user->email));
+                                             "to"    => $user->email,
+                                             "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                        "&token=".token(array($user->login, $user->email))));
+
                 Flash::notice(_f("User &#8220;%s&#8221; added and activation email sent.", $user->login), "/admin/?action=manage_users");
             } else {
                 $user = User::add($_POST['login'],
@@ -589,6 +595,7 @@
                                   $_POST['full_name'],
                                   $_POST['website'],
                                   $_POST['group']);
+
               Flash::notice(_f("User &#8220;%s&#8221; added.", $user->login), "/admin/?action=manage_users");
             }
         }
@@ -622,6 +629,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $visitor = Visitor::current();
+            $config = Config::current();
 
             if (!$visitor->group->can("edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
@@ -640,7 +648,7 @@
 
             if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
                 error(__("Error"), __("Passwords do not match."));
-            elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 75)
+            elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 100)
                 Flash::message(__("Please consider setting a stronger password for this user."));
 
             $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
@@ -656,14 +664,21 @@
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
 
-            $user->update($_POST['login'], $password, $_POST['email'], $_POST['full_name'], $_POST['website'], $_POST['group']);
+            $user->update($_POST['login'],
+                          $password,
+                          $_POST['email'],
+                          $_POST['full_name'],
+                          $_POST['website'],
+                          $_POST['group']);
 
             if ($_POST['id'] == $visitor->id)
                 $_SESSION['password'] = $password;
 
-            if (!$user->approved)
+            if (!$user->approved and $config->email_activation)
                 correspond("activate", array("login" => $user->login,
-                                             "to" => $user->email));
+                                             "to"    => $user->email,
+                                             "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                        "&token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User updated."), "/admin/?action=manage_users");
         }
