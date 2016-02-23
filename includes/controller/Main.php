@@ -461,7 +461,7 @@
             $config = Config::current();
 
             if (!$config->can_register)
-                error(__("Registration Disabled"), __("This site does not allow registration."));
+                Flash::notice(__("This site does not allow registration."), "/");
 
             if (logged_in())
                 error(__("Error"), __("You are already logged in."));
@@ -495,7 +495,7 @@
                                           $config->default_group,
                                           false);
 
-                        correspond("activate", array("login" => $user->login, 
+                        correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
                                                      "link"  => $config->url."/?action=activate&login=".fix($user->login).
                                                                 "&token=".token(array($user->login, $user->email))));
@@ -603,7 +603,7 @@
                     $user = new User(array("login" => $_POST['login']));
 
                     if (!$user->approved)
-                        error(__("Error"), __("You must activate your account before you log in."));
+                        Flash::notice(__("You must activate your account before you log in."), "/");
 
                     $_SESSION['user_id'] = $user->id;
 
@@ -687,10 +687,8 @@
 
             $config = Config::current();
 
-            if (!$config->email_correspondence) {
+            if (!$config->email_correspondence)
                 Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
-                return;
-            }
 
             if (!empty($_POST)) {
                 $user = new User(array("login" => $_POST['login']));
