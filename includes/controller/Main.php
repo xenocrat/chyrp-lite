@@ -498,7 +498,7 @@
                         correspond("activate", array("login" => $user->login, 
                                                      "to"    => $user->email,
                                                      "link"  => $config->url."/?action=activate&login=".fix($user->login).
-                                                                "&token=".token(array($user->login, $user->email), 0)));
+                                                                "&token=".token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     } else {
@@ -532,7 +532,7 @@
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
 
-            if (token(array($user->login, $user->email), 0) != $_GET['token'])
+            if (token(array($user->login, $user->email)) != $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             if (!$user->approved) {
@@ -561,7 +561,7 @@
             if ($user->no_results)
                 error(__("Error"), __("That username isn't in our database."));
 
-            if (token(array($user->login, $user->email), 86400) != $_GET['token'])
+            if (token(array($user->login, $user->email)) != $_GET['token'])
                 error(__("Error"), __("Invalid token."));
 
             $new_password = random(8);
@@ -699,7 +699,7 @@
                     correspond("reset", array("login" => $user->login,
                                               "to"    => $user->email,
                                               "link"  => $config->url."/?action=reset&login=".fix($user->login).
-                                                         "&token=".token(array($user->login, $user->email), 86400)));
+                                                         "&token=".token(array($user->login, $user->email))));
 
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }

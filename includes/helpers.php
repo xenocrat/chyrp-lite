@@ -1781,18 +1781,16 @@
 
     /**
      * Function: token
-     * Salt and hash a unique timed token.
+     * Salt and hash a unique token.
      *
      * Parameters:
-     *     $items - The items to hash.
-     *     $expire - Expire the token after n seconds, 0 to disable.
+     *     $items - An array of items to hash.
      *
      * Returns:
-     *     A unique timed token.
+     *     A unique token.
      */
-    function token($items, $expire = 3600) {
-        $slice = (!empty($expire) and is_int($expire)) ? floor(time() / $expire) : "" ;
-        return sha1(implode((array) $items).Config::current()->secure_hashkey.$slice);
+    function token($items) {
+        return sha1(implode((array) $items).Config::current()->secure_hashkey);
     }
 
     /**
