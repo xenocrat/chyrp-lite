@@ -132,7 +132,7 @@
             $config = Config::current();
 
             if (empty($config->enabled_feathers))
-                error(__("No Feathers"), __("Please install a feather or two in order to add a post."));
+                Flash::notice(__("Please install a feather or two in order to add a post."), "/admin/?action=feathers");
 
             Trigger::current()->filter($options, array("write_post_options", "post_options"));
 
@@ -1311,7 +1311,7 @@
             $this->context["disabled_modules"] = array();
 
             if (!$open = @opendir(MODULES_DIR))
-                return Flash::warning(__("Could not read modules directory."));
+                error(__("Error"), __("Could not read modules directory."));
 
             $classes = array();
 
@@ -1434,7 +1434,7 @@
             $this->context["disabled_feathers"] = array();
 
             if (!$open = @opendir(FEATHERS_DIR))
-                return Flash::warning(__("Could not read feathers directory."));
+                error(__("Error"), __("Could not read feathers directory."));
 
             while (($folder = readdir($open)) !== false) {
                 if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
@@ -1499,7 +1499,7 @@
             $this->context["themes"] = array();
 
             if (!$open = @opendir(THEMES_DIR))
-                return Flash::warning(__("Could not read themes directory."));
+                error(__("Error"), __("Could not read themes directory."));
 
             while (($folder = readdir($open)) !== false) {
                 if (!file_exists(THEMES_DIR.DIR.$folder.DIR."info.php"))
