@@ -1884,8 +1884,34 @@
         }
 
         /**
+         * Function: login
+         * Mask for MainController's login responder.
+         */
+        public function login() {
+            if (logged_in())
+                Flash::notice(__("You are already logged in."), "/admin/");
+
+            $url = (Config::current()->clean_urls) ? "/login/" : "/?action=login" ;
+            redirect($url);
+        }
+
+        /**
+         * Function: logout
+         * Logs out the current user.
+         */
+        public function logout() {
+            if (!logged_in())
+                Flash::notice(__("You aren't logged in."), "/");
+
+            session_destroy();
+            session();
+
+            Flash::notice(__("Logged out."), "/");
+        }
+
+        /**
          * Function: help
-         * Sets the $title and $body for various help IDs.
+         * Serves help pages for core pages and extensions.
          */
         public function help() {
             if (empty($_GET['id']))
@@ -1909,7 +1935,7 @@
                             "<p>".__("If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:")."</p>\n".
                             "<ol>\n<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n".
                             "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
-                            "</li>\n<li>".__("Move the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                            "</li>\n<li>".__("Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
                     break;
                 case "unicode_emoticons":
                     $help = "<h1>".__("Unicode Emoticons")."</h1>\n".
