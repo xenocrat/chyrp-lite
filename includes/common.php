@@ -48,7 +48,7 @@
     define('CHYRP_VERSION', "2016.02");
 
     # Constant: CHYRP_CODENAME
-    # The code name for this version.
+    # The codename for this version.
     define('CHYRP_CODENAME', "Russet");
 
     # Constant: CACHE_TWIG
