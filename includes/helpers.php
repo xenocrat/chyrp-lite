@@ -825,21 +825,14 @@
 
     /**
      * Function: admin_url
-     * Returns an admin URL.
+     * Builds an admin URL from the supplied components.
      *
      * Parameters:
      *     $action - The admin action.
      *     $params - An indexed array of parameters.
-     *
      */
     function admin_url($action = "", $params = array()) {
         $config = Config::current();
-
-        if ($action == "login")
-            return $config->url."/?action=login";
-
-        if ($action == "logout")
-            return $config->url."/?action=logout";
 
         $request = !empty($action) ? array("action=".$action) : array() ;
 
@@ -899,34 +892,6 @@
      */
     function decamelize($string) {
         return strtolower(preg_replace("/([a-z])([A-Z])/", "\\1_\\2", $string));
-    }
-
-    /**
-     * Function: selected
-     * If $val1 == $val2, outputs or returns @ selected="selected"@
-     *
-     * Parameters:
-     *     $val1 - First value.
-     *     $val2 - Second value.
-     *     $return - Return @ selected="selected"@ instead of outputting it
-     */
-    function selected($val1, $val2, $return = false) {
-        if ($val1 == $val2)
-            if ($return)
-                return ' selected="selected"';
-            else
-                echo ' selected="selected"';
-    }
-
-    /**
-     * Function: checked
-     * If $val == 1 (true), outputs ' checked="checked"'
-     *
-     * Parameters:
-     *     $val - Value to check.
-     */
-    function checked($val) {
-        if ($val == 1) echo ' checked="checked"';
     }
 
     /**

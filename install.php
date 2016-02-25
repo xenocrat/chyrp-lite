@@ -357,6 +357,11 @@
     function value_fallback($index, $fallback = "") {
         echo (isset($_POST[$index])) ? fix($_POST[$index]) : $fallback ;
     }
+
+    function selected($val1, $val2) {
+        if ($val1 == $val2)
+                echo " selected";
+    }
 ?>
 <!DOCTYPE html>
 <html>
