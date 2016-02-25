@@ -466,7 +466,7 @@
                 Flash::notice(__("This site does not allow registration."), "/");
 
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
                 if (empty($_POST['login']))
@@ -524,10 +524,10 @@
          */
         public function activate() {
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Error"), __("No token found."));
+                error(__("Error"), __("Unique token not found."));
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
@@ -542,7 +542,7 @@
                                  array("login" => $user->login),
                                  array("approved" => true));
 
-                Flash::notice(__("Your account is now active and you may log in."), "/?action=login");
+                Flash::notice(__("Your account is now active and you may log in."), "login");
             } else
                 Flash::notice(__("Your account has already been activated."), "/");
         }
@@ -553,10 +553,10 @@
          */
         public function reset() {
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Error"), __("No token found."));
+                error(__("Error"), __("Unique token not found."));
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
@@ -579,7 +579,7 @@
                           $user->website,
                           $user->group_id);
 
-            Flash::notice(__("We have emailed you a new password."), "/?action=login");
+            Flash::notice(__("We have emailed you a new password."), "login");
         }
 
         /**
@@ -588,7 +588,7 @@
          */
         public function login() {
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
                 fallback($_POST['login']);
@@ -627,10 +627,9 @@
          */
         public function logout() {
             if (!logged_in())
-                error(__("Error"), __("You aren't logged in."));
+                Flash::notice(__("You aren't logged in."), "/");
 
             session_destroy();
-
             session();
 
             Flash::notice(__("Logged out."), "/");
@@ -642,7 +641,7 @@
          */
         public function controls() {
             if (!logged_in())
-                Flash::notice(__("You must be logged in to access this area."), "/");
+                Flash::notice(__("You must be logged in to access user controls."), "login");
 
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
@@ -685,7 +684,7 @@
          */
         public function lost_password() {
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             $config = Config::current();
 
