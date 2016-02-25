@@ -110,6 +110,7 @@
             !function_exists("fallback") or
             !function_exists("oneof") or
             !function_exists("logged_in") or
+            !function_exists("admin_url") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
             !property_exists(Config::current(), "url") or
@@ -328,7 +329,7 @@
                 </ol>
             <?php endif; ?>
             <?php if (!logged_in() and ADMIN): ?>
-                <a href="<?php echo $url; ?>/?action=login" class="big login"><?php echo __("Log in"); ?></a>
+                <a href="<?php echo admin_url('login'); ?>" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
             </div>
         </div>
