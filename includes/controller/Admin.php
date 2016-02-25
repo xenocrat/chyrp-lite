@@ -61,15 +61,15 @@
          */
         public function parse($route) {
             $visitor = Visitor::current();
+            $config = Config::current();
 
             # Protect non-responder functions.
             if (in_array($route->action, array("__construct", "parse", "subnav_context", "display", "current")))
                 show_404();
 
             if (empty($route->action) or $route->action == "write") {
-                # "Write > Post", if they can add posts or drafts.
-                if (($visitor->group->can("add_post") or $visitor->group->can("add_draft")) and
-                    !empty(Config::current()->enabled_feathers))
+                # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
+                if (($visitor->group->can("add_post") or $visitor->group->can("add_draft")) and !empty($config->enabled_feathers))
                     return $route->action = "write_post";
 
                 # "Write > Page", if they can add pages.
@@ -132,7 +132,7 @@
             $config = Config::current();
 
             if (empty($config->enabled_feathers))
-                Flash::notice(__("Please install a feather or two in order to add a post."), "/admin/?action=feathers");
+                Flash::notice(__("You must enable at least one feather in order to write a post."), "/admin/?action=feathers");
 
             Trigger::current()->filter($options, array("write_post_options", "post_options"));
 
@@ -1911,7 +1911,7 @@
 
         /**
          * Function: help
-         * Serves help pages for core pages and extensions.
+         * Serves help pages for core and extensions.
          */
         public function help() {
             if (empty($_GET['id']))
