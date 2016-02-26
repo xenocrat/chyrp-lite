@@ -1891,6 +1891,7 @@
             if (logged_in())
                 Flash::notice(__("You are already logged in."), "/admin/");
 
+            $_SESSION['redirect_to'] = "/admin/";
             $url = (Config::current()->clean_urls) ? "/login/" : "/?action=login" ;
             redirect($url);
         }
