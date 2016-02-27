@@ -638,8 +638,7 @@
                                                                 "id not" => $_POST['id'])));
 
             if (!$check_name->no_results)
-                Flash::notice(_f("Login &#8220;%s&#8221; is already in use.", array($_POST['login'])),
-                              "/admin/?action=edit_user&id=".$_POST['id']);
+                error(__("Error"), __("That username is already in use."));
 
             $user = new User($_POST['id']);
 

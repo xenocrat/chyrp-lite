@@ -471,7 +471,10 @@
             if (!empty($_POST)) {
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
-                elseif (count(User::find(array("where" => array("login" => $_POST['login'])))))
+
+                $check = new User(array("login" => $_POST['login']));
+
+                if (!$check->no_results)
                     Flash::warning(__("That username is already in use."));
 
                 if (empty($_POST['password1']))
