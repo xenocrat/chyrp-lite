@@ -62,7 +62,7 @@
         /* End XML Stuff */
 
         public function parse_urls($urls) {
-            $urls["/\/category\/(.*?)/"] = "/?action=category&name=$1";
+            $urls["|/category/(.*?)/|"] = "/?action=category&name=$1";
             return $urls;
         }
 
