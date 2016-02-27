@@ -488,7 +488,7 @@
                     Flash::warning(__("Invalid email address."));
 
                 if ($config->enable_captcha and !check_captcha())
-                    Flash::warning(__("Incorrect captcha code. Please try again."));
+                    Flash::warning(__("Incorrect captcha code."));
 
                 if (!Flash::exists("warning")) {
                     if ($config->email_activation) {
