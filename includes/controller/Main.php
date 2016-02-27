@@ -527,15 +527,15 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Error"), __("Unique token not found."));
+                error(__("Missing Token"), __("You must supply an authentication token."));
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                error(__("Error"), __("That username isn't in our database."));
+                error(__("Unknown User"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Error"), __("Invalid token."));
+                error(__("Invalid Token"), __("The authentication token is not valid."));
 
             if (!$user->approved) {
                 SQL::current()->update("users",
@@ -556,15 +556,15 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Error"), __("Unique token not found."));
+                error(__("Missing Token"), __("You must supply an authentication token."));
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                error(__("Error"), __("That username isn't in our database."));
+                error(__("Unknown User"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Error"), __("Invalid token."));
+                error(__("Invalid Token"), __("The authentication token is not valid."));
 
             $new_password = random(8);
 
@@ -640,8 +640,10 @@
          * Updates the current user when the form is submitted.
          */
         public function controls() {
-            if (!logged_in())
+            if (!logged_in()) {
+                $_SESSION['redirect_to'] = "controls";
                 Flash::notice(__("You must be logged in to access user controls."), "login");
+            }
 
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
