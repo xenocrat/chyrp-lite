@@ -103,7 +103,7 @@
         }
 
         public function parse_urls($urls) {
-            $urls["/\/comment\/([0-9]+)/"] = "/?action=comment&id=$1";
+            $urls["|/comment/([0-9]+)/|"] = "/?action=comment&id=$1";
             return $urls;
         }
 
@@ -120,25 +120,25 @@
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
 
             if (empty($_POST['body']))
-                error(__("Error"), __("Message can't be blank.", "comments"));
+                Flash::warning(__("Message can't be blank.", "comments"));
 
             if (empty($_POST['author']))
-                error(__("Error"), __("Author can't be blank.", "comments"));
+                Flash::warning(__("Author can't be blank.", "comments"));
 
             if (empty($_POST['email']))
-                error(__("Error"), __("Email address can't be blank.", "comments"));
+                Flash::warning(__("Email address can't be blank.", "comments"));
 
             if (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid email address.", "comments"));
+                Flash::warning(__("Invalid email address.", "comments"));
 
             if (!empty($_POST['url']) and !is_url($_POST['url']))
-                error(__("Error"), __("Invalid website URL.", "comments"));
+                Flash::warning(__("Invalid website URL.", "comments"));
 
             if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
-                error(__("Error"), __("Incorrect captcha code.", "comments"));
+                Flash::warning(__("Incorrect captcha code.", "comments"));
 
-            if (!empty($_POST['author_url']))
-                $_POST['author_url'] = add_scheme($_POST['author_url']);
+            if (Flash::exists("warning"))
+                redirect($post->url());
 
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) !empty($_POST['notify']));
@@ -202,16 +202,10 @@
                              $notify,
                              $created_at);
 
-            if (isset($_POST['ajax']))
-                exit("{ \"comment_id\": \"".$_POST['id']."\", \"comment_timestamp\": \"".$created_at."\" }");
-
             if (!$visitor->group->can("edit_comment", "delete_comment"))
                 Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
 
-            if ($status == "spam")
-                Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_spam");
-            else
-                Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_comments");
+            Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_comments");
         }
 
         static function admin_delete_comment($admin) {

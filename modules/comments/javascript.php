@@ -10,42 +10,6 @@ var ChyrpComment = {
         if ($("#comments").size()) {
             if (Site.ajax && ChyrpComment.reload && ChyrpComment.delay > 0)
                 ChyrpComment.interval = setInterval(ChyrpComment.reload, ChyrpComment.delay);
-
-            $("#add_comment").append($(document.createElement("input")).attr({
-                type: "hidden",
-                name: "ajax",
-                value: "true",
-                id: "ajax"
-            }));
-            $("#add_comment").on("submit", function(e){
-                if (!ChyrpComment.failed && !!window.FormData) {
-                    e.preventDefault();
-                    $("#add_comment").parent().loader();
-                    $.ajax({
-                        type: "POST",
-                        url: $(this).attr("action"),
-                        data: new FormData(this),
-                        processData: false,
-                        contentType: false,
-                        dataType: "json",
-                        error: ChyrpComment.panic,
-                        success: function(json) {
-                            $("#add_comment").trigger('reset');
-                            $.post(Site.url + "/includes/ajax.php", {
-                                action: "show_comment",
-                                comment_id: json.comment_id,
-                                reason: "added"
-                            }, function(data) {
-                                $("#comments").attr("data-timestamp", json.comment_timestamp);
-                                $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
-                            }, "html").fail(ChyrpComment.panic);
-                        },
-                        complete: function() {
-                            $("#add_comment").parent().loader(true);
-                        }
-                    });
-                }
-            });
         }
 
         if (Site.ajax) {
@@ -76,6 +40,7 @@ var ChyrpComment = {
             return;
 
         var id = $("#comments").attr("data-post");
+
         if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && ChyrpComment.failed != true && $(".comments.paginated").children().size() < ChyrpComment.per_page) {
             $.ajax({
                 type: "post",
@@ -166,8 +131,7 @@ var ChyrpComment = {
 
                                     $.post(Site.url + "/includes/ajax.php", {
                                         action: "show_comment",
-                                        comment_id: id,
-                                        reason: "edited"
+                                        comment_id: id
                                     }, function(data) {
                                         if (isError(data)) {
                                             ChyrpComment.panic();
