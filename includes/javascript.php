@@ -94,7 +94,7 @@ var Post = {
                                 reason: "cancelled"
                             }, function(data) {
                                 if (isError(data)) {
-                                    ChyrpComment.panic();
+                                    Post.panic();
                                     return;
                                 }
 
@@ -135,7 +135,7 @@ var Post = {
                 reason: "edited"
             }, function(data) {
                 if (isError(data)) {
-                    ChyrpComment.panic();
+                    Post.panic();
                     return;
                 }
 
