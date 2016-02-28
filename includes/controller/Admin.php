@@ -218,11 +218,11 @@
 
             Feathers::$instances[$post->feather]->update($post);
 
-            if (!isset($_POST['ajax']))
-                Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
-                              "/admin/?action=manage_posts");
-            else
-                exit((string) $_POST['id']);
+            if (isset($_POST['ajax']))
+                exit((string) $post->id);
+
+            Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
+                          "/admin/?action=manage_posts");    
         }
 
         /**
@@ -432,9 +432,8 @@
                           null,
                           (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
-            if (!isset($_POST['ajax']))
-                Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
-                                 "/admin/?action=manage_pages");
+            Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
+                          "/admin/?action=manage_pages");
         }
 
         /**
