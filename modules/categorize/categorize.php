@@ -230,7 +230,7 @@
             $category = Category::getCategory($_POST['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+                show_404();
 
             Category::updateCategory($_POST);
             Flash::notice(__("Category updated.", "categorize"), "/admin/?action=manage_category");
@@ -264,7 +264,7 @@
             $category = Category::getCategory($_POST['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+                show_404();
 
             Category::deleteCategory($category->id);
             Flash::notice(__("Category deleted.", "categorize"), "/admin/?action=manage_category");
