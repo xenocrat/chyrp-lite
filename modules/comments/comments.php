@@ -597,7 +597,7 @@
                     if ($comment->no_results)
                         show_404();
 
-                    $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason)));
+                    $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason));
                     break;
 
                 case "delete_comment":
