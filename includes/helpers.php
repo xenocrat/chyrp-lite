@@ -70,7 +70,7 @@
         $theme = Theme::current();
         $main = MainController::current();
 
-        if (TESTER or ADMIN or !$theme->file_exists("pages/404"))
+        if (TESTER or ADMIN or AJAX or !$theme->file_exists("pages/404"))
             error($title, $body);
 
         $main->display("pages/404", array("reason" => $body), $title);
