@@ -93,10 +93,14 @@ var Post = {
                                 id: id,
                                 reason: "cancelled"
                             }, function(data) {
+                                if (isError(data)) {
+                                    ChyrpComment.panic();
+                                    return;
+                                }
+
                                 $("#post_edit_form_" + id).fadeOut("fast", function() {
                                     $(this).loader(true);
-                                    $(this).replaceWith(data);
-                                    $(this).hide().fadeIn("fast");
+                                    $(this).replaceWith(data).fadeIn("fast");
                                 });
                             }, "html").fail(Post.panic);
                         }
@@ -137,8 +141,7 @@ var Post = {
 
                 $("#post_edit_form_" + id).fadeOut("fast", function() {
                     $(this).loader(true);
-                    $(this).replaceWith(data);
-                    $("#post_" + id).hide().fadeIn("fast");
+                    $(this).replaceWith(data).fadeIn("fast");
                 });
             }, "html").fail(Post.panic);
         }
