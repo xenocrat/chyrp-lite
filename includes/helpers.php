@@ -54,9 +54,9 @@
      * Shows a 404 error message and immediately exits.
      *
      * Parameters:
-     *     $scope - An array of values to extract into the scope.
+     *     $context - The context to be supplied to Twig.
      */
-     function show_404() {
+     function show_404($context = array()) {
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 
         $theme = Theme::current();
@@ -64,11 +64,10 @@
 
         Trigger::current()->call("not_found");
 
-        if ($theme->file_exists("pages/404"))
-            $main->display("pages/404", array(), "404");
-        else
-            error(__("404 Not Found"), __("The requested page could not be located."));
+        if (ADMIN or !$theme->file_exists("pages/404"))
+            error(__("404 Not Found"), __("The requested resource could not be located."));
 
+        $main->display("pages/404", $context, "404");
         exit;
     }
 
