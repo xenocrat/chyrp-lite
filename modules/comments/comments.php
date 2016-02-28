@@ -76,18 +76,15 @@
             $comment = new Comment($parent_id);
 
             if ($comment->no_results)
-                show_404(array("reason" => "The comment you searched for cannot be found. Perhaps it has been removed."));
+                show_404(__("Not Found", "comments"), __("The comment cannot be found. Perhaps it has been deleted.", "comments"));
 
             $post = new Post($comment->post_id);
 
             if ($post->no_results)
-                show_404(array("reason" => "The comment you searched for is associated with a post that cannot be found."));
+                show_404(__("Not Found", "comments"), __("The post cannot be found. Perhaps it has been deleted.", "comments"));
 
             if (!$post->theme_exists())
                 error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
-
-            if ($post->status == "draft")
-                Flash::message(__("This post is a draft."));
 
             if ($post->status == "scheduled")
                 Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
@@ -114,7 +111,7 @@
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
             if ($post->no_results)
-                show_404();
+                show_404(__("Not Found", "comments"), __("The post cannot be found. Perhaps it has been deleted.", "comments"));
 
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
