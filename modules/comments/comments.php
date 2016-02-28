@@ -76,12 +76,12 @@
             $comment = new Comment($parent_id);
 
             if ($comment->no_results)
-                Flash::warning(__("The comment you searched for cannot be found. Perhaps it has been removed.", "comments"), "/");
+                show_404(array("reason" => "The comment you searched for cannot be found. Perhaps it has been removed."));
 
             $post = new Post($comment->post_id);
 
             if ($post->no_results)
-                Flash::warning(__("The comment you searched for is associated with a post that cannot be found.", "comments"), "/");
+                show_404(array("reason" => "The comment you searched for is associated with a post that cannot be found."));
 
             if (!$post->theme_exists())
                 error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
@@ -114,7 +114,7 @@
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
             if ($post->no_results)
-                error(__("Error"), __("Post not found."));
+                show_404();
 
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
@@ -165,7 +165,7 @@
             $comment = new Comment($_POST['id']);
 
             if ($comment->no_results)
-                error(__("Error"), __("Comment not found.", "comments"));
+                show_404();
 
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
@@ -239,7 +239,7 @@
             $comment = new Comment($_POST['id']);
 
             if ($comment->no_results)
-                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
+                show_404();
 
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
