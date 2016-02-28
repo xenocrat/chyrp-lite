@@ -37,10 +37,8 @@ var Passwords = {
     }
 }
 var Post = {
-    id: 0,
     failed: false,
     edit: function(id) {
-        Post.id = id;
         $("#post_" + id).loader();
         $.post(Site.url + "/includes/ajax.php", {
             action: "edit_post",
@@ -108,12 +106,12 @@ var Post = {
         }, "html").fail(Post.panic);
     },
     updated: function(response) {
-        id = Post.id;
-
         if (isError(response)) {
             Post.panic();
             return;
         }
+
+        var id = Math.abs(response);
 
         if (Route.action != "drafts" && Route.action != "view" && $("#post_edit_form_" + id + " select#status").val() == "draft") {
             $("#post_edit_form_" + id).fadeOut("fast", function() {
@@ -132,6 +130,11 @@ var Post = {
                 id: id,
                 reason: "edited"
             }, function(data) {
+                if (isError(data)) {
+                    ChyrpComment.panic();
+                    return;
+                }
+
                 $("#post_edit_form_" + id).fadeOut("fast", function() {
                     $(this).loader(true);
                     $(this).replaceWith(data);
