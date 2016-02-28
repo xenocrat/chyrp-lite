@@ -91,23 +91,6 @@ var ChyrpComment = {
                             $("#more_options_" + id).slideUp("slow");
                         }
                     });
-                    $("#comment_cancel_edit_" + id).click(function(e){
-                        e.preventDefault();
-
-                        if (!ChyrpComment.failed) {
-                            $("#comment_" + id).loader();
-                            $.post(Site.url + "/includes/ajax.php", {
-                                action: "show_comment",
-                                comment_id: id
-                            }, function(data){
-                                $("#comment_" + id).fadeOut("fast", function(){
-                                    $(this).loader(true);
-                                    $(this).replaceWith(data).fadeIn("fast");
-                                });
-                            });
-                            ChyrpComment.editing--;
-                        }
-                    });
                     $("#comment_edit_" + id).on("submit", function(e){
                         e.preventDefault();
 
@@ -119,35 +102,58 @@ var ChyrpComment = {
                                 data: new FormData(this),
                                 processData: false,
                                 contentType: false,
-                                dataType: "html",
+                                dataType: "text",
                                 error: ChyrpComment.panic,
-                                success: function(response) {
-                                    ChyrpComment.editing--;
+                            }).done(ChyrpComment.updated);
+                        }
+                    });
+                    $("#comment_cancel_edit_" + id).click(function(e){
+                        e.preventDefault();
 
-                                    if (isError(response)) {
-                                        ChyrpComment.panic();
-                                        return;
-                                    }
-
-                                    $.post(Site.url + "/includes/ajax.php", {
-                                        action: "show_comment",
-                                        comment_id: id
-                                    }, function(data) {
-                                        if (isError(data)) {
-                                            ChyrpComment.panic();
-                                            return;
-                                        }
-
-                                        $("#comment_" + id).fadeOut("fast", function(){
-                                            $(this).loader(true);
-                                            $(this).replaceWith(data).fadeIn("fast");
-                                        });
-                                    }, "html").fail(ChyrpComment.panic);
-                                }
+                        if (!ChyrpComment.failed) {
+                            $("#comment_" + id).loader();
+                            $.post(Site.url + "/includes/ajax.php", {
+                                action: "show_comment",
+                                context: Route.action,
+                                comment_id: id,
+                                reason: "cancelled"
+                            }, function(data){
+                                $("#comment_" + id).fadeOut("fast", function(){
+                                    $(this).loader(true);
+                                    $(this).replaceWith(data).fadeIn("fast");
+                                });
                             });
+                            ChyrpComment.editing--;
                         }
                     });
                 })
+            });
+        }, "html").fail(ChyrpComment.panic);
+    },
+    updated: function(response) {
+        ChyrpComment.editing--;
+
+        if (isError(response)) {
+            ChyrpComment.panic();
+            return;
+        }
+
+        var id = Math.abs(response);
+
+        $.post(Site.url + "/includes/ajax.php", {
+            action: "show_comment",
+            context: Route.action,
+            comment_id: id,
+            reason: "edited"
+        }, function(data) {
+            if (isError(data)) {
+                ChyrpComment.panic();
+                return;
+            }
+
+            $("#comment_" + id).fadeOut("fast", function(){
+                $(this).loader(true);
+                $(this).replaceWith(data).fadeIn("fast");
             });
         }, "html").fail(ChyrpComment.panic);
     },

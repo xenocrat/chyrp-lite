@@ -202,6 +202,9 @@
                              $notify,
                              $created_at);
 
+            if (isset($_POST['ajax']))
+                exit((string) $comment->id);
+
             if (!$visitor->group->can("edit_comment", "delete_comment"))
                 Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
 
@@ -243,15 +246,8 @@
 
             Comment::delete($_POST['id']);
 
-            if (isset($_POST['ajax']))
-                exit;
-
             Flash::notice(__("Comment deleted."));
-
-            if ($comment->status == "spam")
-                redirect("/admin/?action=manage_spam");
-            else
-                redirect("/admin/?action=manage_comments");
+            redirect("/admin/?action=manage_".(($comment->status == "spam") ? "spam" : "comments"));
         }
 
         static function admin_manage_spam($admin) {
@@ -591,12 +587,17 @@
                     break;
 
                 case "show_comment":
+                    $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
+
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to show a comment.", "comments"));
 
                     $comment = new Comment($_POST['comment_id']);
-                    $trigger->call("show_comment", $comment);
-                    $main->display("content/comment", array("comment" => $comment));
+
+                    if ($comment->no_results)
+                        show_404();
+
+                    $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason)));
                     break;
 
                 case "delete_comment":
@@ -608,9 +609,13 @@
 
                     $comment = new Comment($_POST['id']);
 
-                    if ($comment->deletable())
-                        Comment::delete($_POST['id']);
+                    if ($comment->no_results)
+                        show_404();
 
+                    if (!$comment->deletable())
+                        show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
+
+                    Comment::delete($_POST['id']);
                     break;
 
                 case "edit_comment":
@@ -622,9 +627,13 @@
 
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
 
-                    if ($comment->editable())
-                        $main->display("forms/comment/edit", array("comment" => $comment));
+                    if ($comment->no_results)
+                        show_404();
 
+                    if (!$comment->editable())
+                        show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
+
+                    $main->display("forms/comment/edit", array("comment" => $comment));
                     break;
             }
         }
