@@ -118,6 +118,11 @@ var ChyrpComment = {
                                 comment_id: id,
                                 reason: "cancelled"
                             }, function(data){
+                                if (isError(data)) {
+                                    ChyrpComment.panic();
+                                    return;
+                                }
+
                                 $("#comment_" + id).fadeOut("fast", function(){
                                     $(this).loader(true);
                                     $(this).replaceWith(data).fadeIn("fast");
