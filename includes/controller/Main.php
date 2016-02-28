@@ -778,7 +778,7 @@
          *
          * Parameters:
          *     $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
-         *     $context - The context for the file.
+         *     $context - The context to be supplied to Twig.
          *     $title - The title for the page.
          */
         public function display($template, $context = array(), $title = "") {
