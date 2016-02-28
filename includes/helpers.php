@@ -46,6 +46,10 @@
      */
     function show_403($title, $body) {
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+
+        fallback($title, __("403 Forbidden"));
+        fallback($body, __("You do not have sufficient privileges to access this resource."));
+
         error($title, $body);
     }
 
@@ -54,20 +58,22 @@
      * Shows a 404 error message and immediately exits.
      *
      * Parameters:
-     *     $context - The context to be supplied to Twig.
+     *     $title - The title for the error dialog.
+     *     $body - The message for the error dialog.
      */
-     function show_404($context = array()) {
+     function show_404($title, $body) {
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+
+        fallback($title, __("404 Not Found"));
+        fallback($body, __("The requested resource could not be located."));
 
         $theme = Theme::current();
         $main = MainController::current();
 
-        Trigger::current()->call("not_found");
+        if (TESTER or ADMIN or !$theme->file_exists("pages/404"))
+            error($title, $body);
 
-        if (ADMIN or !$theme->file_exists("pages/404"))
-            error(__("404 Not Found"), __("The requested resource could not be located."));
-
-        $main->display("pages/404", $context, "404");
+        $main->display("pages/404", array("reason" => $body), $title);
         exit;
     }
 
