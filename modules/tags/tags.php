@@ -287,7 +287,7 @@
             $post = new Post($_POST['id']);
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_tags");
+                show_404();
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
