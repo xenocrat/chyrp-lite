@@ -28,11 +28,8 @@
 
             $post = new Post($_POST['id'], array("filter" => false, "drafts" => true));
 
-            if ($post->no_results) {
-                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-                $trigger->call("not_found");
-                exit;
-            }
+            if ($post->no_results)
+                show_404();
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
@@ -55,11 +52,8 @@
 
             $post = new Post($_POST['id'], array("drafts" => true));
 
-            if ($post->no_results) {
-                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-                $trigger->call("not_found");
-                exit;
-            }
+            if ($post->no_results)
+                show_404();
 
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
@@ -78,11 +72,8 @@
 
             $post = new Post($_POST['id'], array("drafts" => true));
 
-            if ($post->no_results) {
-                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-                $trigger->call("not_found");
-                exit;
-            }
+            if ($post->no_results)
+                show_404();
 
             $main->display("feathers".DIR.$post->feather, array("post" => $post, "ajax_reason" => $reason));
             break;
