@@ -208,7 +208,7 @@
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+                show_404();
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
@@ -261,7 +261,7 @@
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+                show_404();
 
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
@@ -414,7 +414,7 @@
             $page = new Page($_POST['id']);
 
             if ($page->no_results)
-                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+                show_404();
 
             fallback($_POST['status'], "public");
 
@@ -475,7 +475,7 @@
             $page = new Page($_POST['id']);
 
             if ($page->no_results)
-                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+                show_404();
 
             foreach ($page->children as $child)
                 if (isset($_POST['destroy_children']))
@@ -610,8 +610,13 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."));
 
+            $user = new User($_GET['id']);
+
+            if ($user->no_results)
+                Flash::warning(__("User not found."), "/admin/?action=manage_users");
+
             $this->display("edit_user",
-                           array("user" => new User($_GET['id']),
+                           array("user" => $user,
                                  "groups" => Group::find(array("order" => "id ASC",
                                                                "where" => array("id not" => Config::current()->guest_group)))));
         }
@@ -642,7 +647,7 @@
             $user = new User($_POST['id']);
 
             if ($user->no_results)
-                Flash::warning(__("User not found."), "/admin/?action=manage_users");
+                show_404();
 
             if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
                 error(__("Error"), __("Passwords do not match."));
@@ -785,6 +790,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            $check = new Group(null, array("where" => array("name" => $_POST['name'])));
+
+            if (!$check->no_results)
+                error(__("Error"), __("That group name is already in use."));
+
             Group::add($_POST['name'], array_keys($_POST['permissions']));
 
             Flash::notice(__("Group added."), "/admin/?action=manage_groups");
@@ -801,8 +811,13 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."));
 
+            $group = new Group($_GET['id']);
+
+            if ($group->no_results)
+                Flash::warning(__("Group not found."), "/admin/?action=manage_groups");
+
             $this->display("edit_group",
-                           array("group" => new Group($_GET['id']),
+                           array("group" => $group,
                                  "permissions" => SQL::current()->select("permissions", "*", array("group_id" => 0))->fetchAll()));
         }
 
@@ -823,13 +838,12 @@
                                                                  "id not" => $_POST['id'])));
 
             if (!$check_name->no_results)
-                Flash::notice(_f("Group name &#8220;%s&#8221; is already in use.", array($_POST['name'])),
-                              "/admin/?action=edit_group&id=".$_POST['id']);
+                error(__("Error"), __("That group name is already in use."));
 
             $group = new Group($_POST['id']);
 
             if ($group->no_results)
-                Flash::warning(__("Group not found."), "/admin/?action=manage_groups");
+                show_404();
 
             $group->update($_POST['name'], $permissions);
 
@@ -2104,7 +2118,7 @@
          *
          * Parameters:
          *     $action - The template file to display (sans ".twig") relative to admin/pages/ for core and extensions.
-         *     $context - The context for the template.
+         *     $context - The context to be supplied to Twig.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          */
         public function display($action, $context = array(), $title = "") {
