@@ -287,7 +287,7 @@
             $post = new Post($_POST['id']);
 
             if ($post->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));

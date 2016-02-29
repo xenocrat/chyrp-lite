@@ -208,7 +208,7 @@
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
@@ -261,7 +261,7 @@
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
@@ -414,7 +414,7 @@
             $page = new Page($_POST['id']);
 
             if ($page->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Page not found."));
 
             fallback($_POST['status'], "public");
 
@@ -475,7 +475,7 @@
             $page = new Page($_POST['id']);
 
             if ($page->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Page not found."));
 
             foreach ($page->children as $child)
                 if (isset($_POST['destroy_children']))
@@ -647,7 +647,7 @@
             $user = new User($_POST['id']);
 
             if ($user->no_results)
-                show_404();
+                show_404(__("Not Found"), __("User not found."));
 
             if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
                 error(__("Error"), __("Passwords do not match."));
@@ -843,7 +843,7 @@
             $group = new Group($_POST['id']);
 
             if ($group->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Group not found."));
 
             $group->update($_POST['name'], $permissions);
 

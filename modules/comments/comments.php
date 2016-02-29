@@ -76,12 +76,12 @@
             $comment = new Comment($parent_id);
 
             if ($comment->no_results)
-                show_404(__("Not Found", "comments"), __("The comment cannot be found. Perhaps it has been deleted.", "comments"));
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             $post = new Post($comment->post_id);
 
             if ($post->no_results)
-                show_404(__("Not Found", "comments"), __("The post cannot be found. Perhaps it has been deleted.", "comments"));
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->theme_exists())
                 error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
@@ -111,7 +111,7 @@
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
             if ($post->no_results)
-                show_404(__("Not Found", "comments"), __("The post cannot be found. Perhaps it has been deleted.", "comments"));
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
@@ -162,7 +162,7 @@
             $comment = new Comment($_POST['id']);
 
             if ($comment->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
@@ -236,7 +236,7 @@
             $comment = new Comment($_POST['id']);
 
             if ($comment->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
@@ -592,7 +592,7 @@
                     $comment = new Comment($_POST['comment_id']);
 
                     if ($comment->no_results)
-                        show_404();
+                        show_404(__("Not Found"), __("Comment not found.", "comments"));
 
                     $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason));
                     break;
@@ -607,7 +607,7 @@
                     $comment = new Comment($_POST['id']);
 
                     if ($comment->no_results)
-                        show_404();
+                        show_404(__("Not Found"), __("Comment not found.", "comments"));
 
                     if (!$comment->deletable())
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
@@ -625,7 +625,7 @@
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
 
                     if ($comment->no_results)
-                        show_404();
+                        show_404(__("Not Found"), __("Comment not found.", "comments"));
 
                     if (!$comment->editable())
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));

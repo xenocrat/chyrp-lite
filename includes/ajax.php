@@ -29,7 +29,7 @@
             $post = new Post($_POST['id'], array("filter" => false, "drafts" => true));
 
             if ($post->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
@@ -53,7 +53,7 @@
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
@@ -73,7 +73,7 @@
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
-                show_404();
+                show_404(__("Not Found"), __("Post not found."));
 
             $main->display("feathers".DIR.$post->feather, array("post" => $post, "ajax_reason" => $reason));
             break;
