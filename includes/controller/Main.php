@@ -286,7 +286,7 @@
 
                     $archives[$month] = array("posts" => $posts,
                                               "year" => $time->year,
-                                              "month" => strftime("%B", $month),
+                                              "month" => when("%B", $month, true),
                                               "timestamp" => $month,
                                               "url" => url("archive/".when("Y/m/", $time->created_at)));
 
@@ -312,12 +312,12 @@
                 $this->display("pages".DIR."archive",
                                array("posts" => $posts,
                                      "archive" => array("year" => $_GET['year'],
-                                                        "month" => strftime("%B", $timestamp),
-                                                        "day" => strftime("%d", $timestamp),
+                                                        "month" => when("%B", $timestamp, true),
+                                                        "day" => when("%d", $timestamp, true),
                                                         "timestamp" => $timestamp,
                                                         "depth" => $depth),
                                      "preceding" => $preceding),
-                               _f("Archive of %s", array(strftime("%B %Y", $timestamp))));
+                               _f("Archive of %s", array(when("%B %Y", $timestamp, true))));
             }
         }
 
@@ -407,7 +407,7 @@
                 Flash::message(__("This post is a draft."));
 
             if ($post->status == "scheduled")
-                Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
+                Flash::message(_f("This post is scheduled to be published at %s.", when("%R %d %b, %Y", $post->created_at, true)));
 
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
                 Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));

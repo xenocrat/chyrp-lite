@@ -87,7 +87,7 @@
                 error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
 
             if ($post->status == "scheduled")
-                Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
+                Flash::message(_f("This post is scheduled to be published at %s.", when("%R %d %b, %Y", $post->created_at, true)));
 
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
                 Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));

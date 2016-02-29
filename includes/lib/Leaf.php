@@ -148,7 +148,7 @@
      * Function: twig_filter_strftime_format
      * Returns date formatting for a string that isn't a regular time() value.
      */
-    function twig_filter_strftime_format($timestamp, $format='%x %X') {
+    function twig_filter_strftime_format($timestamp, $format="%c") {
         return when($format, $timestamp, true);
     }
 

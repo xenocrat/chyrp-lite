@@ -712,7 +712,7 @@ foreach ($errors as $error)
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
                         <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>
-                            <?php echo strftime("%I:%M %p on %B %d, %Y", $zone["now"]); ?> &mdash;
+                            <?php echo when("%I:%M %p on %B %d, %Y", $zone["now"], true); ?> &mdash;
                             <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone["name"]); ?>
                         </option>
                     <?php endforeach; ?>
