@@ -48,14 +48,14 @@
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 
         fallback($title, __("403 Forbidden"));
-        fallback($body, __("You do not have sufficient privileges to access this resource."));
+        fallback($body, __("You do not have permission to access this resource."));
 
         error($title, $body);
     }
 
     /**
      * Function: show_404
-     * Shows a 404 error message and immediately exits.
+     * Shows an error message with a 404 HTTP header.
      *
      * Parameters:
      *     $title - The title for the error dialog.
@@ -65,7 +65,7 @@
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 
         fallback($title, __("404 Not Found"));
-        fallback($body, __("The requested resource could not be located."));
+        fallback($body, __("The requested resource was not found."));
 
         $theme = Theme::current();
         $main = MainController::current();
