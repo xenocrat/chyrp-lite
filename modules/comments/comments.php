@@ -84,10 +84,10 @@
                 show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->theme_exists())
-                error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
+                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."));
 
             if ($post->status == "scheduled")
-                Flash::message(_f("This post is scheduled to be published at %s.", when("%R %d %b, %Y", $post->created_at, true)));
+                Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
 
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
                 Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
