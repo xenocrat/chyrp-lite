@@ -680,6 +680,7 @@
             return false;
 
         $size = 0;
+
         while (!feof($connect)) {
             $line = fgets($connect, 1024);
             if (preg_match("/<link rel=[\"|']pingback[\"|'] href=[\"|']([^\"]+)[\"|'] ?\/?>/i", $line, $link))
