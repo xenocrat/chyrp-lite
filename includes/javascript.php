@@ -67,9 +67,21 @@ var Post = {
                         }
                     });
                     $("#post_edit_form_" + id).on("submit", function(e) {
-                        e.preventDefault();
-
                         if (!Post.failed && !!window.FormData) {
+                            e.preventDefault();
+                            var empties = false;
+                            $(this).find("input[type='text'], textarea").not(".optional, .more_options *").each(function() {
+                                if ($(this).val() == "") {
+                                    empties = true;
+                                    return false;
+                                }
+                            });
+
+                            if (empties) {
+                                alert('<?php echo __("Please complete all mandatory fields before submitting the form."); ?>');
+                                return;
+                            }
+
                             $(this).loader();
                             $.ajax({
                                 type: "POST",
@@ -191,6 +203,7 @@ var Post = {
         Post.failed = true;
         alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
         $(".ajax_loading").loader(true);
+        $("form.inline_edit.post_edit input[name='ajax']").remove();
     }
 }
 <?php $trigger->call("javascript"); ?>

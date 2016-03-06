@@ -10,17 +10,32 @@ var ChyrpComment = {
         if ($("#comments").size()) {
             if (Site.ajax && ChyrpComment.reload && ChyrpComment.delay > 0)
                 ChyrpComment.interval = setInterval(ChyrpComment.reload, ChyrpComment.delay);
+
+            $("#add_comment").on("submit", function(e){
+                var empties = false;
+                $(this).find("input[type='text'], textarea").each(function() {
+                    if ($(this).val() == "") {
+                        empties = true;
+                        return false;
+                    }
+                });
+
+                if (empties) {
+                    e.preventDefault();
+                    alert('<?php echo __("Please complete all mandatory fields before submitting the form."); ?>');
+                }
+            });
         }
 
         if (Site.ajax) {
-            $("#comments").on("click", ".comment_edit_link", function(e) {
+            $("#comments").on("click", ".comment_edit_link:not(.no_ajax)", function(e) {
                 if (!ChyrpComment.failed) {
                     e.preventDefault();
                     var id = $(this).attr("id").replace(/comment_edit_/, "");
                     ChyrpComment.edit(id);
                 }
             });
-            $("#comments").on("click", ".comment_delete_link", function(e) {
+            $("#comments").on("click", ".comment_delete_link:not(.no_ajax)", function(e) {
                 if (!ChyrpComment.failed) {
                     e.preventDefault();
                     ChyrpComment.notice++;
@@ -92,9 +107,21 @@ var ChyrpComment = {
                         }
                     });
                     $("#comment_edit_" + id).on("submit", function(e){
-                        e.preventDefault();
-
                         if (!ChyrpComment.failed && !!window.FormData) {
+                            e.preventDefault();
+                            var empties = false;
+                            $(this).find("input[type='text'], textarea").each(function() {
+                                if ($(this).val() == "") {
+                                    empties = true;
+                                    return false;
+                                }
+                            });
+
+                            if (empties) {
+                                alert('<?php echo __("Please complete all mandatory fields before submitting the form."); ?>');
+                                return;
+                            }
+
                             $("#comment_" + id).loader();
                             $.ajax({
                                 type: "POST",
