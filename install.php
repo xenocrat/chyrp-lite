@@ -111,18 +111,28 @@
         $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
     if (!empty($_POST)) {
+
+        $settings = ($_POST['adapter'] == "sqlite") ?
+            array("host"     => "",
+                  "username" => "",
+                  "password" => "",
+                  "database" => $_POST['database'],
+                  "prefix"   => "",
+                  "adapter"  => $_POST['adapter']) :
+            array("host"     => $_POST['host'],
+                  "username" => $_POST['username'],
+                  "password" => $_POST['password'],
+                  "database" => $_POST['database'],
+                  "prefix"   => $_POST['prefix'],
+                  "adapter"  => $_POST['adapter']) ;
+
         if ($_POST['adapter'] == "sqlite" and !@is_writable(dirname($_POST['database'])))
             $errors[] = __("Please make sure your server has write permissions to the SQLite database.");
         else {
-            $sql = SQL::current(array("host"     => $_POST['host'],
-                                      "username" => $_POST['username'],
-                                      "password" => $_POST['password'],
-                                      "database" => $_POST['database'],
-                                      "prefix"   => $_POST['prefix'],
-                                      "adapter"  => $_POST['adapter']));
+            $sql = SQL::current($settings);
 
             if (!$sql->connect(true))
-                $errors[] = __("Could not connect to the specified database:")."\n".fix($sql->error);
+                $errors[] = __("Could not connect to the database:")."\n".fix($sql->error);
         }
 
         if (empty($_POST['name']))
@@ -158,6 +168,8 @@
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND))
                         $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
 
+
+            # Build the configuration file.
             $config->set("sql", array());
             $config->set("name", $_POST['name']);
             $config->set("description", $_POST['description']);
@@ -195,17 +207,14 @@
             $config->set("routes", array());
             $config->set("secure_hashkey", md5(random(32, true)));
 
-            foreach (array("host", "username", "password", "database", "prefix", "adapter") as $field)
-                $sql->set($field, $_POST[$field], true);
+            # Add SQL settings to the configuration.
+            foreach ($settings as $field => $value)
+                $sql->set($field, $value, true);
 
-            if ($sql->adapter == "mysql" and class_exists("MySQLi"))
-                $sql->method = "mysqli";
-            else
-                $sql->method = "pdo";
-
+            # Reconnect to the database.
             $sql->connect();
 
-            # Posts table
+            # Posts table.
             $sql->query("CREATE TABLE IF NOT EXISTS __posts (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              feather VARCHAR(32) DEFAULT '',
@@ -226,7 +235,7 @@
                              PRIMARY KEY (post_id, name)
                          ) DEFAULT CHARSET=utf8");
 
-            # Pages table
+            # Pages table.
             $sql->query("CREATE TABLE IF NOT EXISTS __pages (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              title VARCHAR(250) DEFAULT '',
@@ -242,7 +251,7 @@
                              updated_at DATETIME DEFAULT NULL
                          ) DEFAULT CHARSET=utf8");
 
-            # Users table
+            # Users table.
             $sql->query("CREATE TABLE IF NOT EXISTS __users (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              login VARCHAR(64) DEFAULT '',
@@ -256,14 +265,14 @@
                              UNIQUE (login)
                          ) DEFAULT CHARSET=utf8");
 
-            # Groups table
+            # Groups table.
             $sql->query("CREATE TABLE IF NOT EXISTS __groups (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              name VARCHAR(100) DEFAULT '',
                              UNIQUE (name)
                          ) DEFAULT CHARSET=utf8");
 
-            # Permissions table
+            # Permissions table.
             $sql->query("CREATE TABLE IF NOT EXISTS __permissions (
                              id VARCHAR(100) DEFAULT '',
                              name VARCHAR(100) DEFAULT '',
@@ -271,7 +280,7 @@
                              PRIMARY KEY (id, group_id)
                          ) DEFAULT CHARSET=utf8");
 
-            # Sessions table
+            # Sessions table.
             $sql->query("CREATE TABLE IF NOT EXISTS __sessions (
                              id VARCHAR(40) DEFAULT '',
                              data LONGTEXT,
@@ -322,7 +331,7 @@
                             "banned" => array(),
                             "guest"  => array("view_site"));
 
-            # Insert the default groups (see above)
+            # Insert the default groups (see above).
             $group_id = array();
             foreach ($groups as $name => $permissions) {
                 $sql->replace("groups", "name", array("name" => ucfirst($name)));
@@ -618,23 +627,26 @@
         </style>
         <script src="includes/lib/common.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">
+            function toggle_adapter() {
+                if ($("#adapter").val() == "sqlite") {
+                    $("#database_field label .sub").fadeIn("fast");
+                    $("#host_field, #username_field, #password_field, #prefix_field").fadeOut("fast");
+                } else {
+                    $("#database_field label .sub").fadeOut("fast");
+                    $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
+                }
+            }
             $(function(){
-                $("#adapter").change(function(){
-                    if ($(this).val() == "sqlite") {
-                        $("#database_field label .sub").fadeIn("fast");
-                        $("#host_field, #username_field, #password_field, #prefix_field").children().val("").parent().fadeOut("fast");
-                    } else {
-                        $("#database_field label .sub").fadeOut("fast");
-                        $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
-                    }
-                });
+                $("#adapter").change(toggle_adapter).trigger("change");
+
                 $("#password_1").keyup(function(e) {
                     if (passwordStrength($(this).val()) < 100)
                         $(this).removeClass("strong");
                     else
                         $(this).addClass("strong");
                 });
-                $(("#installer").on("submit", function(e) {
+
+                $("#installer").on("submit", function(e) {
                     if ($("#password_1").val() !== $("#password_2").val()) {
                         e.preventDefault();
                         alert('<?php echo __("Passwords do not match."); ?>');
@@ -665,38 +677,30 @@ foreach ($errors as $error)
                         <?php endif; ?>
                     </select>
                 </p>
-                <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
-                    <p id="host_field">
-                        <label for="host"><?php echo __("Host"); ?> <span class="sub"><?php echo __("(usually ok as \"localhost\")"); ?></span></label>
-                        <input type="text" name="host" value="<?php value_fallback("host", ((isset($_ENV['DATABASE_SERVER'])) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
-                    </p>
-                </div>
-                <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
-                    <p id="username_field">
-                        <label for="username"><?php echo __("Username"); ?></label>
-                        <input type="text" name="username" value="<?php value_fallback("username"); ?>" id="username">
-                    </p>
-                </div>
-                <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
-                    <p id="password_field">
-                        <label for="password"><?php echo __("Password"); ?></label>
-                        <input type="password" name="password" value="<?php value_fallback("password"); ?>" id="password">
-                    </p>
-                </div>
+                <p id="host_field">
+                    <label for="host"><?php echo __("Host"); ?> <span class="sub"><?php echo __("(usually ok as \"localhost\")"); ?></span></label>
+                    <input type="text" name="host" value="<?php value_fallback("host", ((isset($_ENV['DATABASE_SERVER'])) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
+                </p>
+                <p id="username_field">
+                    <label for="username"><?php echo __("Username"); ?></label>
+                    <input type="text" name="username" value="<?php value_fallback("username"); ?>" id="username">
+                </p>
+                <p id="password_field">
+                    <label for="password"><?php echo __("Password"); ?></label>
+                    <input type="password" name="password" value="<?php value_fallback("password"); ?>" id="password">
+                </p>
                 <p id="database_field">
                     <label for="database"><?php echo __("Database"); ?>
-                        <span class="sub"<?php echo (!isset($_POST['adapter']) or $_POST['adapter'] != "sqlite") ? ' style="display: none"' : "" ; ?>>
+                        <span class="sub">
                             <?php echo __("(full path)"); ?>
                         </span>
                     </label>
                     <input type="text" name="database" value="<?php value_fallback("database"); ?>" id="database">
                 </p>
-                <div<?php echo (isset($_POST['adapter']) and $_POST['adapter'] == "sqlite") ? ' style="display: none"' : "" ; ?>>
-                    <p id="prefix_field">
-                        <label for="prefix"><?php echo __("Table Prefix"); ?> <span class="sub"><?php echo __("(optional)"); ?></span></label>
-                        <input type="text" name="prefix" value="<?php value_fallback("prefix"); ?>" id="prefix">
-                    </p>
-                </div>
+                <p id="prefix_field">
+                    <label for="prefix"><?php echo __("Table Prefix"); ?> <span class="sub"><?php echo __("(optional)"); ?></span></label>
+                    <input type="text" name="prefix" value="<?php value_fallback("prefix"); ?>" id="prefix">
+                </p>
                 <hr>
                 <h1><?php echo __("Website Setup"); ?></h1>
                 <p id="name_field">
