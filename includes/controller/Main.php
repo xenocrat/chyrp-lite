@@ -751,11 +751,14 @@
                                              array(),
                                              Config::current()->feed_items);
             $ids = array();
+
             foreach ($result->fetchAll() as $index => $row)
                 $ids[] = $row["id"];
 
             if (!empty($ids))
                 fallback($posts, Post::find(array("where" => array("id" => $ids))));
+            else
+                fallback($posts, array());
 
             header("Content-Type: application/atom+xml; charset=UTF-8");
 
@@ -763,6 +766,7 @@
                 $posts = $posts->paginated;
 
             $latest_timestamp = 0;
+
             foreach ($posts as $post)
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
