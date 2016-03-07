@@ -40,11 +40,11 @@
          * The class constructor is private so there is only one connection.
          *
          * Parameters:
-         *     $settings - Settings to load instead of the config.
+         *     $settings - An array of settings, or @true@ to silence errors.
          */
         private function __construct($settings = array()) {
             if (!UPGRADING and !INSTALLING and !isset(Config::current()->sql))
-                error(__("Error"), __("Database configuration is not set. Please run the upgrader."));
+                error(__("Error"), __("Database configuration is not set."));
 
             $database = (!UPGRADING) ? oneof(@Config::current()->sql, array()) : Config::get("sql") ;
 
