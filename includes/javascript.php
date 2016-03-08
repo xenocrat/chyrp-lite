@@ -40,6 +40,12 @@ var Post = {
     failed: false,
     edit: function(id) {
         $("#post_" + id).loader();
+
+        if (Site.key == "") {
+            Post.panic('<?php echo __("It appears your web browser did not send a referrer header."); ?>');
+            return;
+        }
+
         $.post(Site.url + "/includes/ajax.php", {
             action: "edit_post",
             id: id,
@@ -199,9 +205,10 @@ var Post = {
             }
         });
     },
-    panic: function() {
+    panic: function(message) {
+        message = (typeof message !== "undefined") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         Post.failed = true;
-        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+        alert(message);
         $(".ajax_loading").loader(true);
         $("form.inline_edit.post_edit input[name='ajax']").remove();
     }

@@ -82,6 +82,12 @@ var ChyrpComment = {
     edit: function(id) {
         ChyrpComment.editing++;
         $("#comment_" + id).loader();
+
+        if (Site.key == "") {
+            ChyrpComment.panic('<?php echo __("It appears your web browser did not send a referrer header."); ?>');
+            return;
+        }
+
         $.post(Site.url + "/includes/ajax.php", {
             action: "edit_comment",
             comment_id: id,
@@ -206,9 +212,10 @@ var ChyrpComment = {
             });
         }, "html").fail(ChyrpComment.panic);
     },
-    panic: function() {
+    panic: function(message) {
+        message = (typeof message !== "undefined") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         ChyrpComment.failed = true;
-        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+        alert(message);
         $(".ajax_loading").loader(true);
         $("#comments form input[name='ajax']").remove();
     }

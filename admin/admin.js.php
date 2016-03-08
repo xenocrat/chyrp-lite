@@ -409,6 +409,11 @@ var Extend = {
             if (data != "" && Extend.action == "disable")
                 Extend.confirmed = (confirm(data)) ? 1 : 0;
 
+            if (Site.key == "") {
+                Extend.panic('<?php echo __("It appears your web browser did not send a referrer header."); ?>');
+                return;
+            }
+
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -440,9 +445,10 @@ var Extend = {
             })
         }, "text").fail(Extend.panic);
     },
-    panic: function() {
+    panic: function(message) {
+        message = (typeof message !== "undefined") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         Extend.failed = true;
-        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+        alert(message);
     }
 }
 <?php $trigger->call("admin_javascript"); ?>
