@@ -89,7 +89,7 @@
                         $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
                     }
                 }
-                
+
                 $clean = (isset($wordpress->post_name) && $wordpress->post_name != '') ? $wordpress->post_name : sanitize($item->title) ;
 
                 $pinned = (isset($wordpress->is_sticky)) ? $wordpress->is_sticky : 0 ;
@@ -108,7 +108,7 @@
                                                      "body" => trim($contentencoded),
                                                      "imported_from" => "wordpress"),
                                   "feather" => "text");
-                    
+
                     $wp_post_format = null;
                     if (isset($item->category)) {
                         foreach ($item->category as $category) {
@@ -122,13 +122,13 @@
                             }
                         }
                     }
-                    
+
                     if ($wp_post_format) {
                         $trigger->filter($data,
                                          "import_wordpress_post_".str_replace('post-format-', '', $wp_post_format),
                                          $item);
                     }
-                    
+
                     $post = Post::add($data["content"],
                                       $clean,
                                       Post::check_url($clean),
@@ -184,7 +184,12 @@
                 !in_array("link", $config->enabled_feathers))
                 error(__("Missing Feather", "importers"), __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"));
 
+            $_POST['tumblr_url'] = trim($_POST['tumblr_url']);
+
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
+                error(__("Error"), __("Invalid URL.", "importers"));
+
+            if (!preg_match("/^(http(s)?:\/\/)?(www\.)?[a-z0-9][a-z0-9-]+[a-z0-9]+\.tumblr\.com(\/)?$/i", $_POST['tumblr_url']))
                 error(__("Error"), __("Invalid Tumblr URL.", "importers"));
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url']);
@@ -546,6 +551,9 @@
 <p>
 <label for="tumblr_url"><?php echo __("Your Tumblr URL", "importers"); ?></label>
 <input class="text" type="text" name="tumblr_url" value="" id="tumblr_url">
+<small>
+<?php echo __("Something like <code>http://example.tumblr.com</code>.", "importers"); ?>
+</small>
 <small><?php echo __("Note: Audio tumbles cannot be imported.", "importers"); ?></small>
 </p>
 <p class="buttons">
