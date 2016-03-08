@@ -66,7 +66,7 @@
                 elseif (class_exists("PDO") and in_array($this->adapter, PDO::getAvailableDrivers()))
                     $this->method = "pdo";
                 else
-                    error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", fix($this->adapter)));
+                    error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", $this->adapter));
             } else
                 if (class_exists("MySQLi"))
                     $this->method = "mysqli";
@@ -155,7 +155,7 @@
                     break;
 
                 default:
-                    error(__("Error"), _f("Database driver <code>%s</code> is unrecognised.", fix($this->method)));
+                    error(__("Error"), _f("Database driver <code>%s</code> is unrecognised.", $this->method));
             }
 
             if ($this->adapter == "mysql")
