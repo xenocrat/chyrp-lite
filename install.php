@@ -111,7 +111,7 @@
         $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
     if (!empty($_POST)) {
-
+        # Build the SQL settings based on user input.
         $settings = ($_POST['adapter'] == "sqlite") ?
             array("host"     => "",
                   "username" => "",
@@ -159,7 +159,7 @@
             $errors[] = __("MySQLi or PDO is required for database access.");
 
         if (empty($errors)) {
-
+            # Add rewrites to the .htaccess file.
             if (!$htaccess_has_chyrp)
                 if (!file_exists(MAIN_DIR.DIR.".htaccess"))
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
