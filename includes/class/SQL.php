@@ -60,17 +60,13 @@
             $this->connected = false;
 
             # For MySQL databases we prefer the MySQLi adapter.
-            # We can try our luck with other databases by adding them to the PDO conditional below.
-
             if (isset($this->adapter)) {
                 if ($this->adapter == "mysql" and class_exists("MySQLi"))
                     $this->method = "mysqli";
-                elseif (class_exists("PDO") and
-                       ($this->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
-                        $this->adapter == "mysql" and in_array("mysql", PDO::getAvailableDrivers())))
+                elseif (class_exists("PDO") and in_array($this->adapter, PDO::getAvailableDrivers()))
                     $this->method = "pdo";
                 else
-                    error(__("Error"), _f("Could not find a database driver for <code>%s</code>.", $this->adapter));
+                    error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", fix($this->adapter)));
             } else
                 if (class_exists("MySQLi"))
                     $this->method = "mysqli";
@@ -157,6 +153,9 @@
                         return ($checking) ? false : error(__("Database Error"), $this->error) ;
 
                     break;
+
+                default:
+                    error(__("Error"), _f("Database driver <code>%s</code> is unrecognised.", fix($this->method)));
             }
 
             if ($this->adapter == "mysql")
