@@ -126,7 +126,7 @@
         foreach($emoji as $key => $value) {
             $text =  str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
         }
-        
+
         return $text;
     }
 
@@ -1754,10 +1754,13 @@
 
     /**
      * Function: add_scheme
-     * Prefixes a URL with a HTTP scheme if none was detected.
+     * Prefixes a URL with a scheme if none was detected.
+     * Replaces the existing scheme if different to $scheme.
+     * Default scheme is http://.
      *
      * Parameters:
      *     $url - The URL to analyse.
+     *     $scheme - The scheme for the URL (optional).
      *
      * Returns:
      *     URL prefixed with scheme.
@@ -1765,8 +1768,8 @@
      * See Also:
      *     <is_url>
      */
-    function add_scheme($url) {
-        return $url = preg_match('~^[a-z][a-z0-9\+\.\-]+:~i', $url) ? $url : "http://".$url ;
+    function add_scheme($url, $scheme = "http://") {
+        return preg_replace('~^([a-z]+://)?(.+)~i', $scheme.'${2}', $url);
     }
 
     /**
