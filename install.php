@@ -111,6 +111,16 @@
         $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
     if (!empty($_POST)) {
+        # Assure an absolute path for the SQLite database
+        if ($_POST['adapter'] == "sqlite") {
+            $db_pwd = realpath(dirname($_POST['database']));
+
+            if (!$db_pwd)
+                $errors[] = __("Please make sure your server has executable permissions on all directories in the hierarchy to the SQLite database.");
+            else
+                $_POST['database'] = $db_pwd.DIRECTORY_SEPARATOR.basename($_POST['database']);
+        }
+
         # Build the SQL settings based on user input.
         $settings = ($_POST['adapter'] == "sqlite") ?
             array("host"     => "",
@@ -692,7 +702,7 @@ foreach ($errors as $error)
                 <p id="database_field">
                     <label for="database"><?php echo __("Database"); ?>
                         <span class="sub">
-                            <?php echo __("(full path)"); ?>
+                            <?php echo __("(absolute or relative path)"); ?>
                         </span>
                     </label>
                     <input type="text" name="database" value="<?php value_fallback("database"); ?>" id="database">
