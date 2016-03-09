@@ -1769,10 +1769,7 @@
      *     <is_url>
      */
     function add_scheme($url, $scheme = "http://") {
-        if (substr($url, 0, strlen($scheme)) !== $scheme or $scheme === '') {
-            $url = preg_replace('~^([a-z]+://)?([a-z].*)~', $scheme.'${2}', $url);
-        }
-        return $url;
+        return preg_replace('~^([a-z]+://)?(.+)~i', $scheme.'${2}', $url);
     }
 
     /**
