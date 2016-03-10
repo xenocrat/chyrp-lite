@@ -67,13 +67,7 @@
                     $this->method = "pdo";
                 else
                     error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", $this->adapter));
-            } else
-                if (class_exists("MySQLi"))
-                    $this->method = "mysqli";
-                elseif (class_exists("PDO") and in_array("mysql", PDO::getAvailableDrivers()))
-                    $this->method = "pdo";
-                else
-                    error(__("Error"), __("MySQLi or PDO is required for database access."));
+            }
         }
 
         /**
