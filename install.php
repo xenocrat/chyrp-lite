@@ -85,11 +85,10 @@
                 "RewriteRule ^.+\\.twig\$ index.php [L]\n".
                 "</IfModule>";
 
-    $path = preg_quote($index, "/");
     $htaccess_has_chyrp = (file_exists(MAIN_DIR.DIR.".htaccess") and
                            preg_match("/<IfModule mod_rewrite\\.c>\n".
                                       "([\s]*)RewriteEngine On\n".
-                                      "([\s]*)RewriteBase {$path}\n".
+                                      "([\s]*)RewriteBase ".preg_quote($index, "/")."\n".
                                       "([\s]*)RewriteCond %\\{REQUEST_FILENAME\\} !-f\n".
                                       "([\s]*)RewriteCond %\\{REQUEST_FILENAME\\} !-d\n".
                                       "([\s]*)RewriteRule \\^\\.\\+\\$ index\\.php \\[L\\]\n".
@@ -118,7 +117,7 @@
             if (!$db_pwd)
                 $errors[] = __("Please make sure your server has executable permissions on all directories in the hierarchy to the SQLite database.");
             else
-                $_POST['database'] = $db_pwd.DIRECTORY_SEPARATOR.basename($_POST['database']);
+                $_POST['database'] = $db_pwd.DIR.basename($_POST['database']);
         }
 
         # Build the SQL settings based on user input.
@@ -170,14 +169,15 @@
 
         if (empty($errors)) {
             # Add rewrites to the .htaccess file.
-            if (!$htaccess_has_chyrp)
-                if (!file_exists(MAIN_DIR.DIR.".htaccess"))
+            if (!$htaccess_has_chyrp) {
+                if (!file_exists(MAIN_DIR.DIR.".htaccess")) {
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
                         $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
-                else
+                } else {
                     if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND))
                         $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
-
+                }
+            }
 
             # Build the configuration file.
             $config->set("sql", array());

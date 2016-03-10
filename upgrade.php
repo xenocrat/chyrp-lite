@@ -220,11 +220,10 @@
         $url = "http://".$_SERVER['HTTP_HOST'].str_replace("/upgrade.php", "", $_SERVER['REQUEST_URI']);
         $index = (parse_url($url, PHP_URL_PATH)) ? "/".trim(parse_url($url, PHP_URL_PATH), "/")."/" : "/" ;
 
-        $path = preg_quote($index, "/");
         $htaccess_has_chyrp = (file_exists(MAIN_DIR.DIR.".htaccess") and
                                preg_match("/<IfModule mod_rewrite\\.c>\n".
                                           "([\\s]*)RewriteEngine On\n".
-                                          "([\\s]*)RewriteBase {$path}\n".
+                                          "([\\s]*)RewriteBase ".preg_quote($index, "/")."\n".
                                           "([\\s]*)RewriteCond %\\{REQUEST_FILENAME\\} !-f\n".
                                           "([\\s]*)RewriteCond %\\{REQUEST_FILENAME\\} !-d\n".
                                           "([\\s]*)RewriteRule \\^\\.\\+\\$ index\\.php \\[L\\]\n".
