@@ -1755,21 +1755,22 @@
     /**
      * Function: add_scheme
      * Prefixes a URL with a scheme if none was detected.
-     * Replaces the existing scheme if different to $scheme.
-     * Default scheme is http://.
+     * Overwrites existing scheme if $scheme is supplied.
      *
      * Parameters:
      *     $url - The URL to analyse.
      *     $scheme - The scheme for the URL (optional).
      *
      * Returns:
-     *     URL prefixed with scheme.
+     *     URL prefixed with a scheme (http:// by default).
      *
      * See Also:
      *     <is_url>
      */
-    function add_scheme($url, $scheme = "http://") {
-        return preg_replace('~^([a-z]+://)?(.+)~i', $scheme.'${2}', $url);
+    function add_scheme($url, $scheme = null) {
+        preg_match('~^([a-z]+://)?(.+)~i', $url, $matches);
+        $matches[1] = (isset($scheme)) ? $scheme : oneof($matches[1], "http://") ;
+        return $url = $matches[1].$matches[2];
     }
 
     /**
