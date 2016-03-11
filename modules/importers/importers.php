@@ -192,7 +192,7 @@
             if (!preg_match("/^(http(s)?:\/\/)?(www\.)?[a-z0-9][a-z0-9-]+[a-z0-9]+\.tumblr\.com(\/)?$/i", $_POST['tumblr_url']))
                 error(__("Error"), __("Invalid Tumblr URL.", "importers"));
 
-            $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url']);
+            $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
