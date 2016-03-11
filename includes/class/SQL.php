@@ -67,7 +67,8 @@
                     $this->method = "pdo";
                 else
                     error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", $this->adapter));
-            }
+            } else
+                $this->method = "";
         }
 
         /**
