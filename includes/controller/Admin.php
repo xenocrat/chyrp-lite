@@ -222,7 +222,7 @@
                 exit((string) $post->id);
 
             Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
-                          "/admin/?action=manage_posts");    
+                          "/admin/?action=manage_posts");
         }
 
         /**
@@ -790,6 +790,8 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            fallback($_POST['permissions'], array());
+
             $check = new Group(null, array("where" => array("name" => $_POST['name'])));
 
             if (!$check->no_results)
@@ -832,7 +834,7 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $permissions = array_keys($_POST['permissions']);
+            fallback($_POST['permissions'], array());
 
             $check_name = new Group(null, array("where" => array("name" => $_POST['name'],
                                                                  "id not" => $_POST['id'])));
@@ -845,7 +847,7 @@
             if ($group->no_results)
                 show_404(__("Not Found"), __("Group not found."));
 
-            $group->update($_POST['name'], $permissions);
+            $group->update($_POST['name'], array_keys($_POST['permissions']));
 
             Flash::notice(__("Group updated."), "/admin/?action=manage_groups");
         }
