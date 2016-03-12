@@ -138,7 +138,6 @@
                                       $status_translate[(string) $wordpress->status],
                                       (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
                                       null,
-                                      "",
                                       false);
 
                     $trigger->call("import_wordpress_post", $item, $post);
@@ -292,7 +291,6 @@
                                       "public",
                                       datetime((int) $post->attributes()->unix_timestamp),
                                       null,
-                                      "",
                                       false);
 
                 Trigger::current()->call("import_tumble", $post, $new_post);
@@ -384,7 +382,6 @@
                                       $status_translate[$post["Status"]],
                                       $post["Posted"],
                                       null,
-                                      "",
                                       false);
 
                 $trigger->call("import_textpattern_post", $post, $new_post);
@@ -507,7 +504,6 @@
                                           $status_translate[$post["entry_status"]],
                                           oneof(@$post["entry_authored_on"], @$post["entry_created_on"], datetime()),
                                           $post["entry_modified_on"],
-                                          "",
                                           false);
                     $trigger->call("import_movabletype_post", $post, $new_post, $link);
                 } elseif (@$post["entry_class"] == "page") {
