@@ -13,7 +13,8 @@
     $route = Route::current($admin);
 
     # Check if the user can view the site.
-    if (!$visitor->group->can("view_site"))
+    if (!$visitor->group->can("view_site") and
+        !in_array($route->action, array("login", "logout")))
         if ($trigger->exists("can_not_view_site"))
             $trigger->call("can_not_view_site");
         else
