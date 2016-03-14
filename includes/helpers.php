@@ -856,7 +856,7 @@
      */
     function self_url() {
         $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
-        return $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
     }
 
     /**
