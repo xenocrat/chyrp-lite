@@ -88,6 +88,8 @@ Chyrp Lite was created by the following people:
 * Chyrp Developer: Arian Xhezairi
 * Project Founder: Alex Suraci
 
+&hellip;and other contributors.
+
 ## License
 
 Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
