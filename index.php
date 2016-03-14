@@ -17,7 +17,7 @@
             $trigger->call("can_not_view_site");
         else {
             if (!logged_in()) {
-                $_SESSION['redirect_to'] = $route->action;
+                $_SESSION['redirect_to'] = self_url();
                 Flash::notice(__("You must be logged in to view this site."), "login");
             } else
                 show_403(__("Access Denied"), __("You are not allowed to view this site.")); # Banned user.
