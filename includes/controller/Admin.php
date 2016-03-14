@@ -22,7 +22,7 @@
 
         /**
          * Function: __construct
-         * Prepares Twig.
+         * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
             $config = Config::current();

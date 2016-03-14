@@ -31,7 +31,7 @@
 
         /**
          * Function: __construct
-         * Loads the Twig parser into <Theme>, and sets up the theme l10n domain.
+         * Loads the Twig parser. Theme class sets up the l10n domain.
          */
         private function __construct() {
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
