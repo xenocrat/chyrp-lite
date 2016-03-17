@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-01-24 13:00+0000\n"
+"POT-Creation-Date: 2016-03-17 20:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -26,27 +26,31 @@ msgstr ""
 msgid "Expire Cache After&hellip;"
 msgstr ""
 
-#: modules/cacher/admin/pages/cache_settings.twig:11
+#: modules/cacher/admin/pages/cache_settings.twig:12
 msgid "(seconds)"
 msgstr ""
 
-#: modules/cacher/admin/pages/cache_settings.twig:13
-msgid "Clear the cache now!"
+#: modules/cacher/admin/pages/cache_settings.twig:15
+msgid "Cache Control"
 msgstr ""
 
 #: modules/cacher/admin/pages/cache_settings.twig:17
+msgid "Clear Cache"
+msgstr ""
+
+#: modules/cacher/admin/pages/cache_settings.twig:21
 msgid "Exclude URLs"
 msgstr ""
 
-#: modules/cacher/admin/pages/cache_settings.twig:20
+#: modules/cacher/admin/pages/cache_settings.twig:24
 msgid "A comma separated list of URLs that will not be cached."
 msgstr ""
 
-#: modules/cacher/cacher.php:96
+#: modules/cacher/cacher.php:97
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:132
+#: modules/cacher/cacher.php:136
 msgid "Cache cleared."
 msgstr ""
 

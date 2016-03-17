@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-01-24 13:00+0000\n"
+"POT-Creation-Date: 2016-03-17 19:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -97,11 +97,11 @@ msgid "[None]"
 msgstr ""
 
 #: modules/categorize/categorize.php:125
-msgid "You did not specify a category"
+msgid "You did not specify a category."
 msgstr ""
 
 #: modules/categorize/categorize.php:127
-msgid "The category you specified was not found"
+msgid "The category you specified was not found."
 msgstr ""
 
 #: modules/categorize/categorize.php:132
@@ -110,7 +110,7 @@ msgid "Invalid Category"
 msgstr ""
 
 #: modules/categorize/categorize.php:146
-msgid "There are no posts in the category you specified"
+msgid "There are no posts in the category you specified."
 msgstr ""
 
 #: modules/categorize/categorize.php:158
