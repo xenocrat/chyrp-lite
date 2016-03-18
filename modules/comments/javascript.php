@@ -84,7 +84,7 @@ var ChyrpComment = {
         $("#comment_" + id).loader();
 
         if (Site.key == "") {
-            ChyrpComment.panic('<?php echo __("It appears your web browser did not send a referrer header."); ?>');
+            ChyrpComment.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
             return;
         }
 

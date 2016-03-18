@@ -410,7 +410,7 @@ var Extend = {
                 Extend.confirmed = (confirm(data)) ? 1 : 0;
 
             if (Site.key == "") {
-                Extend.panic('<?php echo __("It appears your web browser did not send a referrer header."); ?>');
+                Extend.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
                 return;
             }
 

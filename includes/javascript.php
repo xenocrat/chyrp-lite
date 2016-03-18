@@ -42,7 +42,7 @@ var Post = {
         $("#post_" + id).loader();
 
         if (Site.key == "") {
-            Post.panic('<?php echo __("It appears your web browser did not send a referrer header."); ?>');
+            Post.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
             return;
         }
 
