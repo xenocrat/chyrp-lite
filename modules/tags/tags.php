@@ -708,39 +708,6 @@
             return SQL::current()->escape($text, false);
         }
 
-        public function ajax_tag_post() {
-            if (empty($_POST['name']) or empty($_POST['post']) or !is_numeric($_POST['post']))
-                exit("{}");
-
-            $sql = SQL::current();
-
-            $post = new Post($_POST['post']);
-            $tag = $_POST['name'];
-
-            if (!$post->editable())
-                exit("{}");
-
-            $tags = $sql->select("post_attributes",
-                                 "value",
-                                 array("name" => "tags",
-                                       "post_id" => $post->id));
-
-            if ($tags and $value = $tags->fetchColumn())
-                $tags = self::tags_unserialize($value);
-            else
-                $tags = array();
-
-            $tags[$tag] = sanitize($tag);
-
-            $sql->replace("post_attributes",
-                          array("post_id", "name"),
-                          array("name" => "tags",
-                                "value" => self::tags_serialize($tags),
-                                "post_id" => $post->id));
-
-            exit("{ \"url\": \"".url("tag/".$tags[$tag], MainController::current())."\", \"tag\": \"".$_POST['name']."\" }");
-        }
-
         function feed_item($post) {
             $config = Config::current();
 
