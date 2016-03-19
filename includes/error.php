@@ -130,7 +130,7 @@
             foreach ($backtrace as $trace)
                 $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
 
-            exit($title.": ".$body."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
+            exit($title.": ".strip_tags($body)."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
         }
 
         # Display the error.
