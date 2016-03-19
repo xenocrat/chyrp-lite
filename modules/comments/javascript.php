@@ -172,7 +172,7 @@ var ChyrpComment = {
         ChyrpComment.editing--;
 
         if (isError(response)) {
-            ChyrpComment.panic();
+            ChyrpComment.panic('<?php echo __("The comment could not be updated because of an error.", "comments"); ?>');
             return;
         }
 
@@ -197,6 +197,12 @@ var ChyrpComment = {
     },
     destroy: function(id) {
         $("#comment_" + id).loader();
+
+        if (Site.key == "") {
+            ChyrpComment.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
+            return;
+        }
+
         $.post(Site.url + "/includes/ajax.php", {
             action: "delete_comment",
             id: id,

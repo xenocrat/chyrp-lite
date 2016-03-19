@@ -129,7 +129,7 @@ var Post = {
     },
     updated: function(response) {
         if (isError(response)) {
-            Post.panic();
+            Post.panic('<?php echo __("The post could not be updated because of an error."); ?>');
             return;
         }
 
@@ -166,6 +166,12 @@ var Post = {
     },
     destroy: function(id) {
         $("#post_" + id).loader();
+
+        if (Site.key == "") {
+            Post.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
+            return;
+        }
+
         $.post(Site.url + "/includes/ajax.php", {
             action: "delete_post",
             id: id,
