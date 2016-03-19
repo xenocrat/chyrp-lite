@@ -213,7 +213,7 @@ var ChyrpComment = {
         }, "html").fail(ChyrpComment.panic);
     },
     panic: function(message) {
-        message = (typeof message !== "undefined") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         ChyrpComment.failed = true;
         alert(message);
         $(".ajax_loading").loader(true);

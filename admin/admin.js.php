@@ -446,7 +446,7 @@ var Extend = {
         }, "text").fail(Extend.panic);
     },
     panic: function(message) {
-        message = (typeof message !== "undefined") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         Extend.failed = true;
         alert(message);
     }
