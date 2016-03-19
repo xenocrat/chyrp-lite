@@ -119,6 +119,7 @@
 
             header("Content-type: application/json; charset=utf-8");
             echo json_encode($responseObj);
+            exit;
         }
 
         static function ajax_unlike() {
@@ -160,6 +161,7 @@
 
             header("Content-type: application/json; charset=utf-8");
             echo json_encode($responseObj);
+            exit;
         }
 
         static function delete_post($post) {

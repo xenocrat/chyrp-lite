@@ -41,7 +41,7 @@
                                                                 "feather" => Feathers::$instances[$post->feather],
                                                                 "options" => $options,
                                                                 "groups" => Group::find(array("order" => "id ASC"))));
-            break;
+            exit;
 
         case "delete_post":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -59,7 +59,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
             Post::delete($_POST['id']);
-            break;
+            exit;
 
         case "view_post":
             fallback($_POST['offset'], 0);
@@ -76,14 +76,14 @@
                 show_404(__("Not Found"), __("Post not found."));
 
             $main->display("feathers".DIR.$post->feather, array("post" => $post, "ajax_reason" => $reason));
-            break;
+            exit;
 
         case "preview":
             if (!logged_in())
                 show_403(__("Access Denied"), __("You must be logged in to preview content."));
 
             if (!isset($_POST['content']) or !isset($_POST['filter']))
-                break;
+                exit;
 
             if (!headers_sent()) {
                 header("Cache-Control: no-cache, must-revalidate");
@@ -94,7 +94,7 @@
             Trigger::current()->filter($sanitized, $_POST['filter']);
             $main->display("content".DIR."preview", array("content" => $sanitized,
                                                           "filter" => $_POST['filter']), __("Preview"));
-            break;
+            exit;
 
         case "check_confirm":
             if (!$visitor->group->can("toggle_extensions"))
@@ -107,7 +107,7 @@
             if (!empty($info["confirm"]))
                 echo $info["confirm"];
 
-            break;
+            exit;
 
         case "enable_module": case "enable_feather":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -220,10 +220,13 @@
                     exit; # Attempt to enable feather.
 
             $config->set("enabled_feathers", $reorder);
-            break;
+            exit;
     }
 
     $trigger->call("ajax");
 
     if (!empty($_POST['action']))
         $trigger->call("ajax_".$_POST['action']);
+
+    header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+    exit("Invalid Action.");

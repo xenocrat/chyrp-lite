@@ -553,7 +553,7 @@
                     $last_comment = fallback($_POST['last_comment'], $post->created_at);
 
                     if ($post->no_results)
-                        break;
+                        show_404(__("Not Found"), __("Post not found."));
 
                     $ids = array();
                     $last_comment = "";
@@ -581,7 +581,7 @@
                     $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
                     header("Content-type: application/json; charset=utf-8");
                     echo json_encode($responseObj);
-                    break;
+                    exit;
 
                 case "show_comment":
                     $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
@@ -595,7 +595,7 @@
                         show_404(__("Not Found"), __("Comment not found.", "comments"));
 
                     $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason));
-                    break;
+                    exit;
 
                 case "delete_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -613,7 +613,7 @@
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
                     Comment::delete($_POST['id']);
-                    break;
+                    exit;
 
                 case "edit_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -631,7 +631,7 @@
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
                     $main->display("forms/comment/edit", array("comment" => $comment));
-                    break;
+                    exit;
             }
         }
 
