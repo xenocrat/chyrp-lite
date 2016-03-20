@@ -410,7 +410,11 @@ var Extend = {
                 Extend.confirmed = (confirm(data)) ? 1 : 0;
 
             if (Site.key == "") {
-                Extend.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
+                if (Extend.action == "enable")
+                    Extend.panic('<?php echo __("The module cannot be enabled because your web browser did not send proper credentials.", "theme"); ?>');
+                else
+                    Extend.panic('<?php echo __("The module cannot be disabled because your web browser did not send proper credentials.", "theme"); ?>');
+
                 return;
             }
 

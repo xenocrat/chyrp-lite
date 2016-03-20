@@ -42,7 +42,7 @@ var Post = {
         $("#post_" + id).loader();
 
         if (Site.key == "") {
-            Post.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
+            Post.panic('<?php echo __("The post cannot be edited because your web browser did not send proper credentials."); ?>');
             return;
         }
 
@@ -168,7 +168,7 @@ var Post = {
         $("#post_" + id).loader();
 
         if (Site.key == "") {
-            Post.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
+            Post.panic('<?php echo __("The post cannot be deleted because your web browser did not send proper credentials."); ?>');
             return;
         }
 

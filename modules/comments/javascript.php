@@ -84,7 +84,7 @@ var ChyrpComment = {
         $("#comment_" + id).loader();
 
         if (Site.key == "") {
-            ChyrpComment.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
+            ChyrpComment.panic('<?php echo __("The comment cannot be edited because your web browser did not send proper credentials.", "comments"); ?>');
             return;
         }
 
@@ -199,7 +199,7 @@ var ChyrpComment = {
         $("#comment_" + id).loader();
 
         if (Site.key == "") {
-            ChyrpComment.panic('<?php echo __("The action was cancelled because your web browser did not send proper credentials."); ?>');
+            ChyrpComment.panic('<?php echo __("The comment cannot be deleted because your web browser did not send proper credentials.", "comments"); ?>');
             return;
         }
 
