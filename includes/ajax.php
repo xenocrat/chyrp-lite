@@ -228,5 +228,6 @@
     if (!empty($_POST['action']))
         $trigger->call("ajax_".$_POST['action']);
 
+    # Serve an error if no responders were found.
     header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
     exit("Invalid Action.");
