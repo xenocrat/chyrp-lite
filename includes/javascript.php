@@ -84,7 +84,7 @@ var Post = {
                             });
 
                             if (empties) {
-                                alert('<?php echo __("Please complete all mandatory fields before submitting the form."); ?>');
+                                alert('<?php echo __("Please complete all mandatory fields in the edit form."); ?>');
                                 return;
                             }
 
