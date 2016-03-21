@@ -85,6 +85,20 @@ function passwordStrength(password) {
     return parseInt(score);
 }
 
+// Does the string look like a web URL?
+function isURL(text) {
+	return (/^(http:\/\/|https:\/\/)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|\/|:[0-9]{1,5})/i.test(text) ||
+			/^(http:\/\/|https:\/\/)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|\/|:[0-9]{1,5})/.test(text) ||
+			/^(http:\/\/|https:\/\/)?(\[[a-f0-9\:]{3,39}\])($|\/|:[0-9]{1,5})/i.test(text));
+}
+
+// Does the string look like an email address?
+function isEmail(text) {
+	return (/^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$/i.test(text) ||
+			/^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$/.test(text) ||
+			/^[^ @]+@(\[[a-f0-9\:]{3,39}\])$/i.test(text));
+}
+
 // Obfuscated mailto.
 function mailTo(domain, recipient) {
     location.assign(('mailto:' + recipient + '@' + domain));
