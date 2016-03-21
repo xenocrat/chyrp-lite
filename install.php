@@ -137,7 +137,7 @@
         if (empty($_POST['login']))
             $errors[] = __("Please enter a username for your account.");
 
-        if (empty($_POST['password_1']))
+        if (empty($_POST['password_1']) or empty($_POST['password_2']))
             $errors[] = __("Password cannot be blank.");
 
         if ($_POST['password_1'] != $_POST['password_2'])
@@ -327,6 +327,7 @@
 
             # Insert the default groups (see above).
             $group_id = array();
+
             foreach ($groups as $name => $permissions) {
                 $sql->replace("groups", "name", array("name" => ucfirst($name)));
 
@@ -352,6 +353,9 @@
                                    "group_id" => $group_id["admin"],
                                    "approved" => true,
                                    "joined_at" => datetime()));
+
+            if (password_strength($_POST['password_1']) < 100)
+                $errors[] = __("Please consider setting a stronger password for your admin account.");
 
             $installed = true;
         }
