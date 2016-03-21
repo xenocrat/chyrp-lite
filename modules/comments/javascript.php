@@ -22,7 +22,19 @@ var ChyrpComment = {
 
                 if (empties) {
                     e.preventDefault();
-                    alert('<?php echo __("Please complete all mandatory fields before submitting the form."); ?>');
+                    alert('<?php echo __("Please complete all fields in the comment form.", "comments"); ?>');
+                }
+
+                if (!isEmail($("#add_comment input[name='email']").val())) {
+                    e.preventDefault();
+                    alert('<?php echo __("Invalid email address.", "comments"); ?>');
+                }
+
+                var url_field = $("#add_comment input[name='url']");
+
+                if (url_field.val() != "" && !isURL(url_field.val())) {
+                    e.preventDefault();
+                    alert('<?php echo __("Invalid website URL.", "comments"); ?>');
                 }
             });
         }
@@ -124,7 +136,19 @@ var ChyrpComment = {
                             });
 
                             if (empties) {
-                                alert('<?php echo __("Please complete all mandatory fields before submitting the form."); ?>');
+                                alert('<?php echo __("Please complete all fields in the comment form.", "comments"); ?>');
+                                return;
+                            }
+
+                            if (!isEmail($("#comment_edit_" + id + " input[name='author_email']").val())) {
+                                alert('<?php echo __("Invalid email address.", "comments"); ?>');
+                                return;
+                            }
+
+                            var url_field = $("#comment_edit_" + id + " input[name='author_url']");
+
+                            if (url_field.val() != "" && !isURL(url_field.val())) {
+                                alert('<?php echo __("Invalid website URL.", "comments"); ?>');
                                 return;
                             }
 
