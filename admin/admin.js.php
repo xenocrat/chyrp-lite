@@ -3,18 +3,6 @@
     require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 ?>
 $(function() {
-    if (/(write)_/.test(Route.action) || /(edit)_/.test(Route.action))
-        Write.init();
-
-    if (Route.action == "modules" || Route.action == "feathers")
-        Extend.init();
-
-    if (Route.action == "new_user")
-        Passwords.check("input[type='password']#password1", "input[type='password']#password2");
-
-    if (Route.action == "edit_user")
-        Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
-
     // Open help text in an iframe.
     Help.init();
 
@@ -22,9 +10,21 @@ $(function() {
     toggle_all();
     toggle_options();
     validate_slug();
+    validate_email();
+    validate_url();
 
-    if (Route.action == "user_settings")
-        toggle_correspondence();
+    if (/(write)_/.test(Route.action) || /(edit)_/.test(Route.action))
+        Write.init();
+
+    if (Route.action == "modules" || Route.action == "feathers")
+        Extend.init();
+
+    // Password validation for users.
+    if (Route.action == "new_user")
+        validate_passwords("input[type='password']#password1", "input[type='password']#password2");
+
+    if (Route.action == "edit_user")
+        validate_passwords("input[type='password']#new_password1", "input[type='password']#new_password2");
 
     // Confirmations for group actions.
     if (Route.action == "edit_group")
@@ -32,6 +32,10 @@ $(function() {
 
     if (Route.action == "delete_group")
         confirm_delete_group();
+
+    // Require email correspondence for activation emails.
+    if (Route.action == "user_settings")
+        toggle_correspondence();
 });
 var Route = {
     action: "<?php echo fix(@$_GET['action']); ?>"
@@ -148,6 +152,36 @@ function validate_slug() {
             $(this).addClass("error");
     });
 }
+function validate_email() {
+    $("body").on("keyup", "input[type='email']", function(e) {
+        if ($(this).val() != "" && !isEmail($(this).val()))
+            $(this).addClass("error");
+        else
+            $(this).removeClass("error");
+    });
+}
+function validate_url() {
+    $("body").on("keyup", "input[type='url']", function(e) {
+        if ($(this).val() != "" && !isURL($(this).val()))
+            $(this).addClass("error");
+        else
+            $(this).removeClass("error");
+    });
+}
+function validate_passwords(selector_primary, selector_confirm) {
+    $(selector_primary).keyup(function(e) {
+        if (passwordStrength($(this).val()) < 100)
+            $(this).removeClass("strong");
+        else
+            $(this).addClass("strong");
+    });
+    $(selector_primary).parents("form").on("submit", function(e) {
+        if ($(selector_primary).val() !== $(selector_confirm).val()) {
+            e.preventDefault();
+            alert('<?php echo __("Passwords do not match."); ?>');
+        }
+    });
+}
 function confirm_edit_group(msg) {
     $("form.confirm").submit(function(e) {
         if (!confirm('<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>'))
@@ -159,22 +193,6 @@ function confirm_delete_group(msg) {
         if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>'))
             e.preventDefault();
     });
-}
-var Passwords = {
-    check: function(selector_primary, selector_confirm) {
-        $(selector_primary).keyup(function(e) {
-            if (passwordStrength($(this).val()) < 100)
-                $(this).removeClass("strong");
-            else
-                $(this).addClass("strong");
-        });
-        $(selector_primary).parents("form").on("submit", function(e) {
-            if ($(selector_primary).val() !== $(selector_confirm).val()) {
-                e.preventDefault();
-                alert('<?php echo __("Passwords do not match."); ?>');
-            }
-        });
-    }
 }
 var Help = {
     init: function() {
