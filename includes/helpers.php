@@ -1731,8 +1731,8 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5})~i', $string) or //FQDN
-                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5})~', $string) or //IPv4
+        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~i', $string) or //FQDN
+                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~', $string) or //IPv4
                 preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                           //IPv6
     }
 
