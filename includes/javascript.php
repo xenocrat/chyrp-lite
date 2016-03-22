@@ -5,12 +5,6 @@
 $(function() {
     if (Site.ajax)
         Post.prepare_links();
-
-    if (Route.action == "register")
-        Passwords.check("input[type='password']#password1", "input[type='password']#password2");
-
-    if (Route.action == "controls")
-        Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
 });
 var Route = {
     action: "<?php echo fix(@$_GET['action']); ?>"
@@ -19,22 +13,6 @@ var Site = {
     url: '<?php echo $config->chyrp_url; ?>',
     key: '<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
-}
-var Passwords = {
-    check: function(selector_primary, selector_confirm) {
-        $(selector_primary).keyup(function(e) {
-            if (passwordStrength($(this).val()) < 100)
-                $(this).removeClass("strong");
-            else
-                $(this).addClass("strong");
-        });
-        $(selector_primary).parents("form").on("submit", function(e) {
-            if ($(selector_primary).val() !== $(selector_confirm).val()) {
-                e.preventDefault();
-                alert('<?php echo __("Passwords do not match."); ?>');
-            }
-        });
-    }
 }
 var Post = {
     failed: false,
