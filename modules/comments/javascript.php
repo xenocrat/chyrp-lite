@@ -13,7 +13,7 @@ var ChyrpComment = {
 
             $("#add_comment").on("submit", function(e){
                 var empties = false;
-                $(this).find("input[type='text'], textarea").each(function() {
+                $(this).find("input[type='text'], textarea").not(".optional").each(function() {
                     if ($(this).val() == "") {
                         empties = true;
                         return false;
@@ -22,7 +22,7 @@ var ChyrpComment = {
 
                 if (empties) {
                     e.preventDefault();
-                    alert('<?php echo __("Please complete all fields in the comment form.", "comments"); ?>');
+                    alert('<?php echo __("Please complete all mandatory fields in the comment form.", "comments"); ?>');
                 }
 
                 if (!isEmail($("#add_comment input[name='email']").val())) {
@@ -128,7 +128,7 @@ var ChyrpComment = {
                         if (!ChyrpComment.failed && !!window.FormData) {
                             e.preventDefault();
                             var empties = false;
-                            $(this).find("input[type='text'], textarea").each(function() {
+                            $(this).find("input[type='text'], textarea").not(".optional").each(function() {
                                 if ($(this).val() == "") {
                                     empties = true;
                                     return false;
@@ -136,7 +136,7 @@ var ChyrpComment = {
                             });
 
                             if (empties) {
-                                alert('<?php echo __("Please complete all fields in the comment form.", "comments"); ?>');
+                                alert('<?php echo __("Please complete all mandatory fields in the comment form.", "comments"); ?>');
                                 return;
                             }
 
