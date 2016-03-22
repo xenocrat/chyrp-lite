@@ -19,8 +19,8 @@ $(function() {
     Help.init();
 
     // Interactive behaviour.
-    toggle_options();
     toggle_all();
+    toggle_options();
     validate_slug();
 
     if (Route.action == "user_settings")
