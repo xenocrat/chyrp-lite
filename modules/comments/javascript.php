@@ -13,9 +13,10 @@ var ChyrpComment = {
 
             $("#add_comment").on("submit", function(e){
                 var empties = false;
-                $(this).find("input[type='text'], textarea").not(".optional").each(function() {
+                $(this).find("input.text, textarea").not(".optional").each(function() {
                     if ($(this).val() == "") {
                         empties = true;
+                        $(this).focus();
                         return false;
                     }
                 });
@@ -128,9 +129,10 @@ var ChyrpComment = {
                         if (!ChyrpComment.failed && !!window.FormData) {
                             e.preventDefault();
                             var empties = false;
-                            $(this).find("input[type='text'], textarea").not(".optional").each(function() {
+                            $(this).find("input.text, textarea").not(".optional").each(function() {
                                 if ($(this).val() == "") {
                                     empties = true;
+                                    $(this).focus();
                                     return false;
                                 }
                             });
