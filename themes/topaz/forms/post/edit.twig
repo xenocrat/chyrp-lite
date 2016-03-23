@@ -11,11 +11,11 @@
 {% if field.type == "text" %}
 <input id="{{ field.attr }}_field_{{ post.id }}" class="text{{ field.optional is defined and field.optional ? ' optional' : '' }}" type="text" name="{{ field.attr }}"{{ field.preview is defined ? ' data-preview="'~field.preview~'"' : '' }} value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
 {% elseif field.type == "file" %}
-<input id="{{ field.attr }}_field_{{ post.id }}" class="file" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
+<input id="{{ field.attr }}_field_{{ post.id }}" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
 {% elseif field.type == "text_block" %}
-<textarea id="{{ field.attr }}_field_{{ post.id }}" class="text{{ field.optional is defined and field.optional ? ' optional' : '' }}" name="{{ field.attr }}" rows="12">{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : ""}}</textarea>
+<textarea id="{{ field.attr }}_field_{{ post.id }}"{{ field.optional is defined and field.optional ? ' class="optional"' : '' }} name="{{ field.attr }}" rows="12">{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : ""}}</textarea>
 {% elseif field.type == "checkbox" %}
-<input id="{{ field.attr }}_field_{{ post.id }}" class="{{ field.type }}" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
+<input id="{{ field.attr }}_field_{{ post.id }}" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
 <select id="{{ field.attr }}_field_{{ post.id }}" name="{{ field.attr }}">
 {% for value, name in field.options %}
@@ -61,11 +61,11 @@
 {% if field.type == "text" %}
 <input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" class="text" type="text" name="{{ field.attr }}" value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
 {% elseif field.type == "file" %}
-<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" class="file" type="file" {{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" type="file" {{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" name="{{ field.attr }}" rows="12">{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
 {% elseif field.type == "checkbox" %}
-<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" class="{{ field.type }}" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
 <select id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field_{{ post.id }}" name="{{ field.attr }}">
 {% for option in field.options %}

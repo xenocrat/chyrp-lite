@@ -54,9 +54,10 @@ var Post = {
                         if (!Post.failed && !!window.FormData) {
                             e.preventDefault();
                             var empties = false;
-                            $(this).find("input[type='text'], textarea").not(".optional, .more_options *").each(function() {
+                            $(this).find("input.text, textarea").not(".optional, .more_options *").each(function() {
                                 if ($(this).val() == "") {
                                     empties = true;
+                                    $(this).focus();
                                     return false;
                                 }
                             });
