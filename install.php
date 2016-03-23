@@ -137,7 +137,7 @@
         if (empty($_POST['login']))
             $errors[] = __("Please enter a username for your account.");
 
-        if (empty($_POST['password_1']) or empty($_POST['password_2']))
+        if (empty($_POST['password_1']))
             $errors[] = __("Password cannot be blank.");
 
         if ($_POST['password_1'] != $_POST['password_2'])
@@ -500,8 +500,18 @@
                 border-color: #1e57ba;
                 outline: none;
             }
+            input[type="text"].error,
+            input[type="email"].error,
+            input[type="url"].error,
+            input[type="number"].error,
+            input[type="password"].error,
+            textarea.error {
+                background-color: #faebe4;
+                border: 1px solid #d51800;
+            }
             input[type="password"].strong {
-                border: 1px solid #76b362
+                background-color: #ebfae4;
+                border: 1px solid #189100;
             }
             form hr {
                 border: none;
@@ -634,18 +644,25 @@
                     $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                 }
             }
-            $(function(){
+            $(function() {
                 $("#adapter").change(toggle_adapter).trigger("change");
 
                 $("#password_1").keyup(function(e) {
-                    if (passwordStrength($(this).val()) < 100)
-                        $(this).removeClass("strong");
-                    else
+                    if (passwordStrength($(this).val()) > 99)
                         $(this).addClass("strong");
+                    else
+                        $(this).removeClass("strong");
+                });
+
+                $("#password_1, #password_2").keyup(function(e) {
+                    if ($("#password_1").val() != $("#password_2").val())
+                        $("#password_2").addClass("error");
+                    else
+                        $("#password_2").removeClass("error");
                 });
 
                 $("#installer").on("submit", function(e) {
-                    if ($("#password_1").val() !== $("#password_2").val()) {
+                    if ($("#password_1").val() != $("#password_2").val()) {
                         e.preventDefault();
                         alert('<?php echo __("Passwords do not match."); ?>');
                     }

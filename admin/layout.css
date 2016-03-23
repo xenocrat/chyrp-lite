@@ -337,8 +337,9 @@ input[type="url"].error,
 input[type="number"].error,
 input[type="password"].error,
 textarea.error {                                background-color: #faebe4;
-                                                border: 1px solid #d6bdb5 }
-input[type="password"].strong {                 border: 1px solid #76b362 }
+                                                border: 1px solid #d51800 }
+input[type="password"].strong {                 background-color: #ebfae4;
+                                                border: 1px solid #189100 }
 input[type="file"] {                            border: none }
 input[disabled],
 input.disabled {                                cursor: not-allowed }

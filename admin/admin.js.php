@@ -170,13 +170,19 @@ function validate_url() {
 }
 function validate_passwords(selector_primary, selector_confirm) {
     $(selector_primary).keyup(function(e) {
-        if (passwordStrength($(this).val()) < 100)
-            $(this).removeClass("strong");
-        else
+        if (passwordStrength($(this).val()) > 99)
             $(this).addClass("strong");
+        else
+            $(this).removeClass("strong");
+    });
+    $(selector_primary + "," + selector_confirm).keyup(function(e) {
+        if ($(selector_primary).val() != $(selector_confirm).val())
+            $(selector_confirm).addClass("error");
+        else
+            $(selector_confirm).removeClass("error");
     });
     $(selector_primary).parents("form").on("submit", function(e) {
-        if ($(selector_primary).val() !== $(selector_confirm).val()) {
+        if ($(selector_primary).val() != $(selector_confirm).val()) {
             e.preventDefault();
             alert('<?php echo __("Passwords do not match."); ?>');
         }

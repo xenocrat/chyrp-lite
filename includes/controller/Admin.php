@@ -552,7 +552,7 @@
             if (!$check->no_results)
                 error(__("Error"), __("That username is already in use."));
 
-            if (empty($_POST['password1']) or empty($_POST['password2']))
+            if (empty($_POST['password1']))
                 error(__("Error"), __("Password cannot be blank."));
             elseif ($_POST['password1'] != $_POST['password2'])
                 error(__("Error"), __("Passwords do not match."));
