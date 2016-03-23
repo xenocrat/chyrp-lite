@@ -138,7 +138,7 @@
                 redirect($post->url());
 
             fallback($parent, (int) $_POST['parent_id'], 0);
-            fallback($notify, (int) !empty($_POST['notify']));
+            fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
             Comment::create($_POST['body'],
                             $_POST['author'],
@@ -185,7 +185,7 @@
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
-            fallback($notify, (int) !empty($_POST['notify']));
+            fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
             $visitor = Visitor::current();
             $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
