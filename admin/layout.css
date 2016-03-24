@@ -366,7 +366,9 @@ form.split small,
 form.split .small,
 form.split .buttons {                           display: block;
                                                 margin: 0em 0em 1rem 45% }
-form.split input {                              margin-bottom: 0.4em }
+form.split input, form.split label + button {   margin-bottom: 0.5em }
+form.split input + input {                      display: block;
+                                                margin-left: 45% }
 form.split input[type="text"],
 form.split input[type="email"],
 form.split input[type="url"],
