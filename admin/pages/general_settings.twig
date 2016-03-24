@@ -15,14 +15,14 @@
 </p>
 <p>
 <label for="chyrp_url">{{ "Chyrp URL" | translate }}</label>
-<input class="text" type="text" name="chyrp_url" value="{{ site.chyrp_url | fix }}" id="chyrp_url">
+<input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix }}" id="chyrp_url">
 </p>
 <p>
 <label for="url">
 {{ "Canonical URL" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
-<input class="text" type="text" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix : '' }}" id="url">
+<input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix : '' }}" id="url">
 <a href="{{ admin_url('help', {'id': 'canonical_url'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Have your site URLs point someplace other than your install directory." | translate }}

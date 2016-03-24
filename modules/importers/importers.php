@@ -528,7 +528,7 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="text" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/wp-content/uploads/</code>.", "importers"); ?>
@@ -546,7 +546,7 @@
 <fieldset>
 <p>
 <label for="tumblr_url"><?php echo __("Your Tumblr URL", "importers"); ?></label>
-<input class="text" type="text" name="tumblr_url" value="" id="tumblr_url">
+<input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
 <small>
 <?php echo __("Something like <code>http://example.tumblr.com</code>.", "importers"); ?>
 </small>
@@ -585,7 +585,7 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="text" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
@@ -619,7 +619,7 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="text" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>

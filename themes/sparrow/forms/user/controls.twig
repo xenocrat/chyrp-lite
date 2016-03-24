@@ -9,7 +9,7 @@
 <label for="email">{{ "Email" | translate }}</label>
 <input type="email" name="email" value="{{ visitor.email | fix(true) }}" id="email" tabindex="2">
 <label for="website">{{ "Website" | translate }}</label>
-<input type="text" name="website" value="{{ visitor.website | fix(true) }}" id="website" tabindex="3">
+<input type="url" name="website" value="{{ visitor.website | fix(true) }}" id="website" tabindex="3">
 <label for="new_password1">{{ "New password?" | translate }}</label>
 <input type="password" name="new_password1" value="" id="new_password1">
 <label for="new_password2">{{ "Confirm" | translate }}</label>
