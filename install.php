@@ -667,6 +667,13 @@
                         alert('<?php echo __("Passwords do not match."); ?>');
                     }
                 });
+
+                $("#email").keyup(function(e) {
+                    if ($(this).val() != "" && !isEmail($(this).val()))
+                        $(this).addClass("error");
+                    else
+                        $(this).removeClass("error");
+                });
             });
         </script>
     </head>
@@ -753,7 +760,7 @@ foreach ($errors as $error)
                 </p>
                 <p id="email_field">
                     <label for="email"><?php echo __("Email Address"); ?></label>
-                    <input type="text" name="email" value="<?php value_fallback("email"); ?>" id="email">
+                    <input type="email" name="email" value="<?php value_fallback("email"); ?>" id="email">
                 </p>
                 <button type="submit"><?php echo __("Install!"); ?></button>
             </form>
