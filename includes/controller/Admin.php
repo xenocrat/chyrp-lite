@@ -1949,7 +1949,7 @@
                     $help = "<h1>".__("Canonical URL")."</h1>\n".
                             "<p>".__("If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:")."</p>\n".
                             "<ol>\n<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n".
-                            "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
+                            "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n</code></pre>".
                             "</li>\n<li>".__("Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
                     break;
                 case "unicode_emoticons":
