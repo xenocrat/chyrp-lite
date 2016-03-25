@@ -79,10 +79,18 @@
 
     /**
      * Function: logged_in
-     * Returns whether or not they are logged in by returning the <Visitor.$id> (which defaults to 0).
+     * Returns whether or not the visitor is logged in.
      */
     function logged_in() {
         return (class_exists("Visitor") and isset(Visitor::current()->id) and Visitor::current()->id != 0);
+    }
+
+    /**
+     * Function: same_origin
+     * Returns whether or not the request was referred from another resource on this site.
+     */
+    function same_origin() {
+        return (strpos(@$_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
     }
 
     /**

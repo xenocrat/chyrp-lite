@@ -4,18 +4,37 @@
 ?>
 $(function() {
     if (Site.ajax)
-        Post.prepare_links();
+        Post.init();
 });
 var Route = {
     action: "<?php echo fix(@$_GET['action']); ?>"
 }
 var Site = {
     url: '<?php echo $config->chyrp_url; ?>',
-    key: '<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>',
+    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
 var Post = {
     failed: false,
+    init: function() {
+        $(".post").last().parent().on("click", ".post_edit_link:not(.no_ajax)", function(e) {
+            if (!Post.failed) {
+                e.preventDefault();
+                var id = $(this).attr("id").replace(/post_edit_/, "");
+                Post.edit(id);
+            }
+        });
+        $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(e) {
+            if (!Post.failed) {
+                e.preventDefault();
+
+                if (confirm('<?php echo __("Are you sure you want to delete this post? If you wish to hide it, save it as a draft."); ?>')) {
+                    var id = $(this).attr("id").replace(/post_delete_/, "");
+                    Post.destroy(id);
+                }
+            }
+        });
+    },
     edit: function(id) {
         $("#post_" + id).loader();
 
@@ -170,25 +189,6 @@ var Post = {
                     window.location = '<?php echo $config->url; ?>';
             });
         }, "html").fail(Post.panic);
-    },
-    prepare_links: function(id) {
-        $(".post").last().parent().on("click", ".post_edit_link:not(.no_ajax)", function(e) {
-            if (!Post.failed) {
-                e.preventDefault();
-                var id = $(this).attr("id").replace(/post_edit_/, "");
-                Post.edit(id);
-            }
-        });
-        $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(e) {
-            if (!Post.failed) {
-                e.preventDefault();
-
-                if (confirm('<?php echo __("Are you sure you want to delete this post? If you wish to hide it, save it as a draft."); ?>')) {
-                    var id = $(this).attr("id").replace(/post_delete_/, "");
-                    Post.destroy(id);
-                }
-            }
-        });
     },
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
