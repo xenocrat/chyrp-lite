@@ -8,7 +8,7 @@
 <input type="hidden" name="action" value="manage_groups">
 <div role="search" class="filter_item">
 <h3>{{ "Search all groups for user&hellip;" | translate }}</h3>
-<input class="text filter" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true) : '' }}" id="search">
+<input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_group") %}
 <a href="{{ admin_url('new_group') }}" class="button yay">
