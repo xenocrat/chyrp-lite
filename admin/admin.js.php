@@ -176,7 +176,7 @@ function validate_passwords(selector_primary, selector_confirm) {
             $(this).removeClass("strong");
     });
     $(selector_primary + "," + selector_confirm).keyup(function(e) {
-        if ($(selector_primary).val() != $(selector_confirm).val())
+        if ($(selector_primary).val() != "" && $(selector_primary).val() != $(selector_confirm).val())
             $(selector_confirm).addClass("error");
         else
             $(selector_confirm).removeClass("error");

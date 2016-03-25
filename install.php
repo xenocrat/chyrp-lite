@@ -655,7 +655,7 @@
                 });
 
                 $("#password_1, #password_2").keyup(function(e) {
-                    if ($("#password_1").val() != $("#password_2").val())
+                    if ($("#password_1").val() != "" && $("#password_1").val() != $("#password_2").val())
                         $("#password_2").addClass("error");
                     else
                         $("#password_2").removeClass("error");
