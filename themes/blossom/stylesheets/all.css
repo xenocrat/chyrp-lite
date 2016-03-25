@@ -202,13 +202,13 @@ table {                                         border-collapse: collapse;
                                                 overflow-x: scroll;
                                                 -webkit-overflow-scrolling: touch }
 table:last-child {                              margin-bottom: 0em }
-table thead tr {                                background-color: #4e5a66;
+table thead tr {                                background-color: #39434d;
                                                 color: #fbfbf7;
-                                                border: 1px solid #4e5a66 }
+                                                border: 1px solid #39434d }
 table thead tr th {                             padding: 0.5em;
                                                 font-weight: bold }
 table tbody tr td {                             padding: 0.5em;
-                                                border: 1px solid #4e5a66;
+                                                border: 1px solid #39434d;
                                                 vertical-align: middle }
 form, fieldset {                                margin: 0em;
                                                 padding: 0em;
