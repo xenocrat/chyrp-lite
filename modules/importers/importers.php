@@ -528,7 +528,7 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="wordpress_media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/wp-content/uploads/</code>.", "importers"); ?>
@@ -537,7 +537,7 @@
 <p class="buttons">
 <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
+<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="wordpress_hash">
 </fieldset>
 </form>
 <hr>
@@ -555,7 +555,7 @@
 <p class="buttons">
 <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
+<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="tumblr_hash">
 </fieldset>
 </form>
 <hr>
@@ -585,7 +585,7 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="textpattern_media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
@@ -594,7 +594,7 @@
 <p class="buttons">
 <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
+<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="textpattern_hash">
 </fieldset>
 </form>
 <hr>
@@ -619,7 +619,7 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="movabletype_media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
@@ -628,7 +628,7 @@
 <p class="buttons">
 <button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
+<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="movabletype_hash">
 </fieldset>
 </form>
 <?php
