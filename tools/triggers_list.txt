@@ -5,13 +5,13 @@
 admin_write_wysiwyg
 -------------------
 Called from:
-	admin/admin.js.php on line 210
+	admin/admin.js.php on line 234
 
 
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 454
+	admin/admin.js.php on line 482
 
 
 can_not_view_site
@@ -298,7 +298,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 216
+	includes/javascript.php on line 201
 
 
 add_group
@@ -690,7 +690,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 792
+	includes/helpers.php on line 800
 
 
 keyword_search
@@ -698,7 +698,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 1534
+	includes/helpers.php on line 1542
 Arguments:
 	$query, $plain
 
@@ -708,7 +708,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1621
+	includes/helpers.php on line 1629
 
 
 group
