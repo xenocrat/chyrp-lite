@@ -111,7 +111,8 @@
                               $visitor->id,
                               $parent,
                               $notify);
-                    error(__("Spam Comment"), __("Your comment has been marked as spam. It has to be reviewed and/or approved by an admin.", "comments"));
+
+                    Flash::notice(__("Your comment is awaiting moderation.", "comments"), $post->url());
                 } else {
                     $comment = self::add($body,
                                          $author,
@@ -127,11 +128,7 @@
 
                     fallback($_SESSION['comments'], array());
                     $_SESSION['comments'][] = $comment->id;
-
-                    if (isset($_POST['ajax']))
-                        exit("{ \"comment_id\": \"".$comment->id."\", \"comment_timestamp\": \"".$comment->created_at."\" }");
-
-                    Flash::notice(__("Comment added."), $post->url()."#comments");
+                    Flash::notice(__("Comment added."), $post->url());
                 }
             } else {
                 $comment = self::add($body,
@@ -148,11 +145,7 @@
 
                 fallback($_SESSION['comments'], array());
                 $_SESSION['comments'][] = $comment->id;
-
-                if (isset($_POST['ajax']))
-                    exit("{ \"comment_id\": \"".$comment->id."\", \"comment_timestamp\": \"".$comment->created_at."\" }");
-
-                Flash::notice(__("Comment added."), $post->url()."#comment");
+                Flash::notice(__("Comment added."), $post->url());
             }
         }
 

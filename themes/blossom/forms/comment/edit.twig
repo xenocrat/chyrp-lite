@@ -6,7 +6,7 @@
 <label for="comment_author_{{ comment.id }}">{{ "Author" | translate }}</label>
 <input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="comment_author_{{ comment.id }}">
 <label for="comment_author_url_{{ comment.id }}">{{ "Author's website" | translate }}</label>
-<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="comment_author_url_{{ comment.id }}">
+<input class="text optional" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="comment_author_url_{{ comment.id }}" class="optional">
 <label for="comment_author_email_{{ comment.id }}">{{ "Author's email" | translate }}</label>
 <input class="text" type="email" name="author_email" value="{{ comment.author_email | fix(true) }}" id="comment_author_email_{{ comment.id }}">
 {% if visitor.group.can("edit_comment") %}

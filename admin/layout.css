@@ -270,10 +270,10 @@ span.pages {                                    display: block;
 #content ul.extend li.feather,
 #content ul.extend li.module {                  position: relative;
                                                 padding-right: 12em }
-ul#feathers_enabled a.feather_enabler,
-ul#feathers_disabled a.feather_disabler,
-ul#modules_enabled a.module_enabler,
-ul#modules_disabled a.module_disabler {         display: none !important }
+ul#feathers_enabled .feather_enabler,
+ul#feathers_disabled .feather_disabler,
+ul#modules_enabled .module_enabler,
+ul#modules_disabled .module_disabler {         display: none !important }
 li.feather p:last-of-type,
 li.module p:last-of-type,
 li.module p.module_conflicts_message,
@@ -319,7 +319,7 @@ input[type="password"],
 textarea {                                      box-sizing: border-box;
                                                 width: 10em;
                                                 font-size: 1.25rem;
-                                                padding: 0.2em;
+                                                padding: 0.25em;
                                                 border: 1px solid #dfdfdf;
                                                 background-color: #ffffff;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
@@ -337,15 +337,18 @@ input[type="url"].error,
 input[type="number"].error,
 input[type="password"].error,
 textarea.error {                                background-color: #faebe4;
-                                                border: 1px solid #d6bdb5 }
-input[type="password"].strong {                 border: 1px solid #76b362 }
+                                                border: 1px solid #d51800 }
+input[type="password"].strong {                 background-color: #ebfae4;
+                                                border: 1px solid #189100 }
 input[type="file"] {                            border: none }
+input[disabled],
+input.disabled {                                cursor: not-allowed }
 input.code,
 textarea.code,
 code {                                          font-family: "Hack webfont", monospace;
                                                 font-style: normal }
 code {                                          background-color: #efefef;
-                                                padding: 2px;
+                                                padding: 0px 2px;
                                                 color: #4f4f4f;
                                                 border: 1px solid #dfdfdf }
 select {                                        box-sizing: border-box }
@@ -363,7 +366,12 @@ form.split small,
 form.split .small,
 form.split .buttons {                           display: block;
                                                 margin: 0em 0em 1rem 45% }
-form.split input {                              margin-bottom: 0.4em }
+form.split input,
+form.split textarea,
+form.split select,
+form.split label + button {                     margin-bottom: 0.5em }
+form.split input + input:not(.filter) {         display: block;
+                                                margin-left: 45% }
 form.split input[type="text"],
 form.split input[type="email"],
 form.split input[type="url"],
@@ -498,7 +506,6 @@ a.prev_page {                                   box-sizing: border-box;
                                                 font-family: inherit;
                                                 font-size: 1.25rem;
                                                 color: #4a4747;
-                                                text-decoration: none;
                                                 line-height: 1.25;
                                                 margin: 0em;
                                                 padding: 0.4em 0.6em;
@@ -516,7 +523,6 @@ a.button:focus,
 a.next_page:focus,
 a.prev_page:focus,
 a.button:active,
-a.button.selected,
 a.next_page:active,
 a.prev_page:active {                            border-color: #1e57ba;
                                                 outline: none }
@@ -546,14 +552,14 @@ a.button > img {                                position: relative;
                                                 width: 16px;
                                                 height: 16px;
                                                 margin-right: 4px }
-button[disabled="disabled"],
+button[disabled],
 button.disabled {                               background-color: #efefef;
                                                 border-color: #dfdfdf;
                                                 color: #7f7f7f;
                                                 cursor: not-allowed }
-button[disabled="disabled"]:hover,
+button[disabled]:hover,
 button.disabled:hover,
-button[disabled="disabled"]:focus,
+button[disabled]:focus,
 button.disabled:focus {                         border-color: #7f7f7f }
 div.confirmation button,
 div.confirmation a.button {                     min-width: 10em }
@@ -565,10 +571,10 @@ a.tag {                                         position: relative;
                                                 margin: 2px 0px;
                                                 text-decoration: none;
                                                 line-height: 2;
-                                                padding: 0em 0.2em;
+                                                padding: 0em 0.25em;
                                                 white-space: nowrap;
                                                 border: 1px solid #e5d7a1;
-                                                border-radius: 0.2em;
+                                                border-radius: 0.25em;
                                                 background-color: #fffecd }
 span.tags_select a.tag_added {                  top: 2px;
                                                 border-color: #ccb68f }
@@ -663,6 +669,7 @@ img#likeImage_preview {                         max-width: 28px;
                                                 height: 100%;
                                                 top: 0px;
                                                 left: 0px;
+/* Prevent SimpleMDE overlapping -> */          z-index: 1;
                                                 background-color: rgba(79, 79, 79, 0.75) }
 .iframe_foreground {                            box-sizing: border-box;    
                                                 display: block;
@@ -725,8 +732,6 @@ img#likeImage_preview {                         max-width: 28px;
                                                 float: none;
                                                 text-align: left;
                                                 padding: 0em }
-    form.split label input {                    margin: 0em;
-                                                width: 3em !important }
     form.split small,
     form.split .small,
     form.split .buttons {                       margin-left: 0em }
@@ -736,7 +741,7 @@ img#likeImage_preview {                         max-width: 28px;
     input[type="url"],
     input[type="number"],
     input[type="password"],
-    input.file,
+    input[type="file"],
     textarea {                                  box-sizing: border-box;
                                                 margin-left: 0em !important;
                                                 margin-right: 0em !important;
@@ -744,10 +749,8 @@ img#likeImage_preview {                         max-width: 28px;
                                                 font-size: 16px !important;
                                                 padding-top: 0.5em;
                                                 padding-bottom: 0.5em }
-    textarea {                                  -webkit-overflow-scrolling: touch;
-    }
-    select {                                    width: 100%;
-                                                margin-bottom: 2em }
+    textarea {                                  -webkit-overflow-scrolling: touch }
+    select {                                    width: 100% }
     #content table {                            display: block;
                                                 box-sizing: border-box;
                                                 width: 100%;
@@ -767,8 +770,6 @@ img#likeImage_preview {                         max-width: 28px;
     #content table tbody tr td:last-child {     border-right: none }
     table.interactive + div.controls {          padding: 4em }
     button, a.button,
-    button.boo, a.button.boo,
-    button.yay, a.button.yay,
     a.prev_page, a.next_page {                  float: none !important;
                                                 clear: both !important;
                                                 display: block !important;
@@ -777,6 +778,7 @@ img#likeImage_preview {                         max-width: 28px;
                                                 padding: 1em !important;
                                                 text-align: center !important;
                                                 box-sizing: border-box !important }
+    form.split label + button {                 margin-top: 0em !important }
     .boo.message, .yay.message {                margin: 0em 0em 1em 0em !important }
     span.pages {                                margin-top: 1em }
     div.controls h4 {                           display: block }

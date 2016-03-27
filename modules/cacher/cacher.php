@@ -55,7 +55,8 @@
                                 "update_page",
                                 "delete_post",
                                 "delete_page",
-                                "change_setting");
+                                "change_setting",
+                                "preview_theme");
 
             Trigger::current()->filter($regenerate, "cacher_regenerate_triggers");
 
@@ -108,24 +109,25 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $exclude = (empty($_POST['cache_exclude'])) ?
-                            array() :
-                            explode(",", str_replace(array("\n", "\r", " "), "", $_POST['cache_exclude'])) ;
+            if ($_POST['clear_cache'] == "indubitably")
+                self::admin_clear_cache();
+
+            fallback($_POST['cache_exclude'], array());
 
             $config = Config::current();
             $set = array($config->set("cache_expire", (int) $_POST['cache_expire']),
-                         $config->set("cache_exclude", $exclude));
+                         $config->set("cache_exclude", array_filter($_POST['cache_exclude'])));
 
             if (!in_array(false, $set))
                 Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");
         }
 
         public function admin_clear_cache() {
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             $this->regenerate();
 

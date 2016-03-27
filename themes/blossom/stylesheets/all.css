@@ -202,13 +202,13 @@ table {                                         border-collapse: collapse;
                                                 overflow-x: scroll;
                                                 -webkit-overflow-scrolling: touch }
 table:last-child {                              margin-bottom: 0em }
-table thead tr {                                background-color: #4e5a66;
+table thead tr {                                background-color: #39434d;
                                                 color: #fbfbf7;
-                                                border: 1px solid #4e5a66 }
+                                                border: 1px solid #39434d }
 table thead tr th {                             padding: 0.5em;
                                                 font-weight: bold }
 table tbody tr td {                             padding: 0.5em;
-                                                border: 1px solid #4e5a66;
+                                                border: 1px solid #39434d;
                                                 vertical-align: middle }
 form, fieldset {                                margin: 0em;
                                                 padding: 0em;
@@ -257,7 +257,6 @@ input:input-placeholder {                       color: #c6ccc8;
                                                 opacity: 1 }
 input[type='checkbox'] {                        width: auto }
 input.error {                                   background-color: #ffb2b2 }
-input[type="password"].strong {                 border: 1px solid #42a66a }
 input#search_field,
 input#sidebar_search_field {                    display: inline;
                                                 margin: 0em;
@@ -639,11 +638,7 @@ article img {                                   max-width: 100% }
     ul.archive article.post.archive img {       width: 100% }
 }
 
-@media print and (min-width: 297mm), screen and (min-width: 1200px) {
-    .longform {                                 -moz-column-count: 2;
-                                                -moz-column-gap: 2em;
-                                                -webkit-column-count: 2;
-                                                -webkit-column-gap: 2em;
-                                                column-count: 2;
+@media print and (min-width: 297mm) {
+    .longform {                                 column-count: 2;
                                                 column-gap: 2em }
 }

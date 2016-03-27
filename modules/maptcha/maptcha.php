@@ -26,7 +26,7 @@
             $html = "\n";
             $html.= '<label for="maptcha">'._f("How much is %d + %d ?", array($x, $y), "maptcha").'</label>'."\n";
             $html.= '<input type="number" name="maptcha_response" value="" placeholder="'.__("Yay mathemetics!", "maptcha").'">'."\n";
-            $html.= '<input type="hidden" name="maptcha_challenge" value="'.md5(($x + $y).$config->maptcha_hashkey).'">'."\n";
+            $html.= '<input type="hidden" name="maptcha_challenge" value="'.sha1(strval($x + $y).$config->maptcha_hashkey).'">'."\n";
             return $html;
         }
 
@@ -36,7 +36,7 @@
             if (!isset($_POST['maptcha_response']) or !isset($_POST['maptcha_challenge']))
                 return false;
 
-            if (md5(preg_replace("/[^0-9]/", "", $_POST['maptcha_response']).$config->maptcha_hashkey) != $_POST['maptcha_challenge'])
+            if (sha1(preg_replace("/[^0-9]/", "", $_POST['maptcha_response']).$config->maptcha_hashkey) != $_POST['maptcha_challenge'])
                 return false;
             else
                 return true;

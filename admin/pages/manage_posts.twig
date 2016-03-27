@@ -11,7 +11,7 @@
 {{ "Search&hellip;" | translate }}
 <a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
-<input class="text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
+<input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 </div>
 {% if theme.archives_list() is not empty %}

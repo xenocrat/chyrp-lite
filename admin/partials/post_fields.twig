@@ -21,7 +21,7 @@
 {% if field.type == "text" %}
 <input id="{{ field.attr }}_field" class="text" type="text" name="{{ field.attr }}"{{ field.preview is defined ? ' data-preview="' ~ field.preview ~ '"' : ''}} value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
 {% elseif field.type == "file" %}
-<input id="{{ field.attr }}_field" class="file" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
+<input id="{{ field.attr }}_field" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
 <p>
 {% if (post.filename is defined or post.filenames is defined) and route.action == "edit_post" %}
 {% if post.filename is defined %}
@@ -40,7 +40,7 @@
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field.attr }}_field" name="{{ field.attr }}" rows="12"{{ field.preview is defined ? ' data-preview="'~field.preview~'"' : '' }}>{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
 {% elseif field.type == "checkbox" %}
-<input id="{{ field.attr }}_field" class="{{ field.type }}" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
+<input id="{{ field.attr }}_field" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
 <select id="{{ field.attr }}_field" name="{{ field.attr }}">
 {% for value, name in field.options %}
@@ -90,8 +90,8 @@
 </p>
 <p class="more_options_option">
 <label for="created_at">{{ "Timestamp" | translate }}</label>
-<input id="created_at" class="text" type="text" name="created_at" value="{{ post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) | strftimeformat : now | date("r") | strftimeformat }}">
-<input type="hidden" name="original_time" value="{{ post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) | strftimeformat : now | date("r") | strftimeformat }}">
+<input id="created_at" class="text" type="text" name="created_at" value="{{ post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) | strftimeformat : now | date('r') | strftimeformat }}">
+<input type="hidden" name="original_time" value="{{ post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) | strftimeformat : now | date('r') | strftimeformat }}">
 </p>
 {% for field in options %}
 <p class="more_options_option">
@@ -109,11 +109,11 @@
 {% if field.type == "text" %}
 <input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" class="text" type="text" name="{{ field.attr }}" value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
 {% elseif field.type == "file" %}
-<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" class="file" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" name="{{ field.attr }}" rows="12">{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
 {% elseif field.type == "checkbox" %}
-<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" class="{{ field.type }}" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
 <select id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" name="{{ field.attr }}">
 {% for option in field.options %}
@@ -132,20 +132,20 @@
 {% if route.action == "edit_post" %}
 {% if visitor.group.can("add_post") and post.status == "draft" %}
 <button type="submit" class="yay" accesskey="s" id="publish" name="publish">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" accesskey="s" id="save">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="success">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% else %}
 {% if visitor.group.can("add_post") %}
 <button type="submit" class="yay" accesskey="s" id="publish">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" accesskey="s" id="save" name="draft" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="success">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>

@@ -3,28 +3,28 @@
     require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 ?>
 $(function() {
+    // Open help text in an iframe.
+    Help.init();
+
+    // Interactive behaviour.
+    toggle_all();
+    toggle_options();
+    validate_slug();
+    validate_email();
+    validate_url();
+
     if (/(write)_/.test(Route.action) || /(edit)_/.test(Route.action))
         Write.init();
 
     if (Route.action == "modules" || Route.action == "feathers")
         Extend.init();
 
+    // Password validation for users.
     if (Route.action == "new_user")
-        Passwords.check("input[type='password']#password1", "input[type='password']#password2");
+        validate_passwords("input[type='password']#password1", "input[type='password']#password2");
 
     if (Route.action == "edit_user")
-        Passwords.check("input[type='password']#new_password1", "input[type='password']#new_password2");
-
-    // Open help text in an iframe.
-    Help.init();
-
-    // Interactive behaviour.
-    toggle_options();
-    toggle_all();
-    validate_slug();
-
-    if (Route.action == "user_settings")
-        toggle_correspondence();
+        validate_passwords("input[type='password']#new_password1", "input[type='password']#new_password2");
 
     // Confirmations for group actions.
     if (Route.action == "edit_group")
@@ -32,17 +32,18 @@ $(function() {
 
     if (Route.action == "delete_group")
         confirm_delete_group();
+
+    // Require email correspondence for activation emails.
+    if (Route.action == "user_settings")
+        toggle_correspondence();
 });
 var Route = {
-    action: "<?php echo fix($_GET['action']); ?>"
+    action: "<?php echo fix(@$_GET['action']); ?>"
 }
 var Site = {
     url: '<?php echo $config->chyrp_url; ?>',
-    key: '<?php if (logged_in() and strpos($_SERVER["HTTP_REFERER"], $config->url) === 0) echo token($_SERVER["REMOTE_ADDR"]); ?>',
+    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
-}
-var Theme = {
-    preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?> 
 }
 function toggle_all() {
     var all_checked = true;
@@ -151,6 +152,42 @@ function validate_slug() {
             $(this).addClass("error");
     });
 }
+function validate_email() {
+    $("body").on("keyup", "input[type='email']", function(e) {
+        if ($(this).val() != "" && !isEmail($(this).val()))
+            $(this).addClass("error");
+        else
+            $(this).removeClass("error");
+    });
+}
+function validate_url() {
+    $("body").on("keyup", "input[type='url']", function(e) {
+        if ($(this).val() != "" && !isURL($(this).val()))
+            $(this).addClass("error");
+        else
+            $(this).removeClass("error");
+    });
+}
+function validate_passwords(selector_primary, selector_confirm) {
+    $(selector_primary).keyup(function(e) {
+        if (passwordStrength($(this).val()) > 99)
+            $(this).addClass("strong");
+        else
+            $(this).removeClass("strong");
+    });
+    $(selector_primary + "," + selector_confirm).keyup(function(e) {
+        if ($(selector_primary).val() != "" && $(selector_primary).val() != $(selector_confirm).val())
+            $(selector_confirm).addClass("error");
+        else
+            $(selector_confirm).removeClass("error");
+    });
+    $(selector_primary).parents("form").on("submit", function(e) {
+        if ($(selector_primary).val() != $(selector_confirm).val()) {
+            e.preventDefault();
+            alert('<?php echo __("Passwords do not match."); ?>');
+        }
+    });
+}
 function confirm_edit_group(msg) {
     $("form.confirm").submit(function(e) {
         if (!confirm('<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>'))
@@ -162,22 +199,6 @@ function confirm_delete_group(msg) {
         if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>'))
             e.preventDefault();
     });
-}
-var Passwords = {
-    check: function(selector_primary, selector_confirm) {
-        $(selector_primary).keyup(function(e) {
-            if (passwordStrength($(this).val()) < 100)
-                $(this).removeClass("strong");
-            else
-                $(this).addClass("strong");
-        });
-        $(selector_primary).parents("form").on("submit", function(e) {
-            if ($(selector_primary).val() !== $(selector_confirm).val()) {
-                e.preventDefault();
-                alert('<?php echo __("Passwords do not match."); ?>');
-            }
-        });
-    }
 }
 var Help = {
     init: function() {
@@ -209,12 +230,14 @@ var Help = {
     }
 }
 var Write = {
+    preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
+    wysiwyg: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
         if (/(write)_/.test(Route.action))
             Write.sort_feathers();
 
         // Insert buttons for ajax previews.
-        if (Theme.preview)
+        if (Write.preview && !Write.wysiwyg)
             $("*[data-preview]").each(function() {
                 $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
                     $("<img>", {
@@ -410,6 +433,15 @@ var Extend = {
             if (data != "" && Extend.action == "disable")
                 Extend.confirmed = (confirm(data)) ? 1 : 0;
 
+            if (Site.key == "") {
+                if (Extend.action == "enable")
+                    Extend.panic('<?php echo __("The module cannot be enabled because your web browser did not send proper credentials.", "theme"); ?>');
+                else
+                    Extend.panic('<?php echo __("The module cannot be disabled because your web browser did not send proper credentials.", "theme"); ?>');
+
+                return;
+            }
+
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -441,9 +473,10 @@ var Extend = {
             })
         }, "text").fail(Extend.panic);
     },
-    panic: function() {
+    panic: function(message) {
+        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         Extend.failed = true;
-        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+        alert(message);
     }
 }
 <?php $trigger->call("admin_javascript"); ?>

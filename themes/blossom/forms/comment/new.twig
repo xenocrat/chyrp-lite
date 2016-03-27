@@ -3,11 +3,11 @@
 <label for="body">{{ "%s's comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
 {% else %}
 <label for="comment_author_field">{{ "Your name" | translate }}</label>
-<input type="text" name="author" value="" id="comment_author_field">
+<input type="text" name="author" value="" id="comment_author_field" class="text">
 <label for="comment_email_field">{{ "Your email" | translate }}</label>
-<input type="email" name="email" value="" id="comment_email_field">
+<input type="email" name="email" value="" id="comment_email_field" class="text">
 <label for="comment_url_field">{{ "Your website" | translate }}</label>
-<input type="url" name="url" value="" id="comment_url_field">
+<input type="url" name="url" value="" id="comment_url_field" class="text optional">
 {% if site.enable_captcha and captcha != false %}{{ captcha }}{% endif %}
 <label for="comment_body_field">{{ "Your comment" | translate }}</label>
 {% endif %}

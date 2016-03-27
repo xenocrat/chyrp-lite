@@ -7,22 +7,22 @@
 <fieldset>
 <p>
 <label for="name">{{ "Site Name" | translate }}</label>
-<input class="text" type="text" name="name" value="{{ site.name | fix }}" id="name">
+<input class="text" type="text" name="name" value="{{ site.name | fix(true) }}" id="name">
 </p>
 <p>
 <label for="description">{{ "Description" | translate }}</label>
-<textarea name="description" rows="2">{{ site.description | fix(false, false) }}</textarea>
+<input class="text" type="text" name="description" value="{{ site.description | fix(true) }}" id="description">
 </p>
 <p>
 <label for="chyrp_url">{{ "Chyrp URL" | translate }}</label>
-<input class="text" type="text" name="chyrp_url" value="{{ site.chyrp_url | fix }}" id="chyrp_url">
+<input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix(true) }}" id="chyrp_url">
 </p>
 <p>
 <label for="url">
 {{ "Canonical URL" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
-<input class="text" type="text" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix : '' }}" id="url">
+<input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix(true) : '' }}" id="url">
 <a href="{{ admin_url('help', {'id': 'canonical_url'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Have your site URLs point someplace other than your install directory." | translate }}
@@ -30,7 +30,7 @@
 </p>
 <p>
 <label for="email">{{ "Contact Email Address" | translate }}</label>
-<input class="text" type="email" name="email" value="{{ site.email | fix }}" id="email">
+<input class="text" type="email" name="email" value="{{ site.email | fix(true) }}" id="email">
 </p>
 <p>
 <label for="timezone">{{ "What time is it?" | translate }}</label>
@@ -63,7 +63,7 @@
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Update" | translate }}</button>
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}</button>
 </p>
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 </fieldset>

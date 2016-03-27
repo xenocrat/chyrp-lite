@@ -15,21 +15,20 @@
     /**
      * Function: session
      * Begins Chyrp's custom session storage whatnots.
+     *
+     * Parameters:
+     *     $domain - The cookie domain (optional).
      */
-    function session() {
+    function session($domain = "") {
         session_set_save_handler(array("Session", "open"),
                                  array("Session", "close"),
                                  array("Session", "read"),
                                  array("Session", "write"),
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
-        $host = $_SERVER['HTTP_HOST'];
-        if (is_numeric(str_replace(".", "", $host)))
-            $domain = $host;
-        elseif (count(explode(".", $host)) >= 2)
-            $domain = preg_replace("/^www\./", ".", $host);
-        else
-            $domain = "";
+
+        $domain = preg_replace("~^www\.~", "",
+            oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
         session_name("ChyrpSession");
@@ -47,38 +46,51 @@
      */
     function show_403($title, $body) {
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+
+        fallback($title, __("403 Forbidden"));
+        fallback($body, __("You do not have permission to access this resource."));
+
         error($title, $body);
     }
 
     /**
      * Function: show_404
-     * Shows a 404 error message and immediately exits.
+     * Shows an error message with a 404 HTTP header.
      *
      * Parameters:
-     *     $scope - An array of values to extract into the scope.
+     *     $title - The title for the error dialog.
+     *     $body - The message for the error dialog.
      */
-     function show_404() {
+     function show_404($title, $body) {
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+
+        fallback($title, __("404 Not Found"));
+        fallback($body, __("The requested resource was not found."));
 
         $theme = Theme::current();
         $main = MainController::current();
 
-        Trigger::current()->call("not_found");
+        if (TESTER or ADMIN or AJAX or !$theme->file_exists("pages/404"))
+            error($title, $body);
 
-        if ($theme->file_exists("pages/404"))
-            $main->display("pages/404", array(), "404");
-        else
-            error(__("404 Not Found"), __("The requested page could not be located."));
-
+        $main->display("pages/404", array("reason" => $body), $title);
         exit;
     }
 
     /**
      * Function: logged_in
-     * Returns whether or not they are logged in by returning the <Visitor.$id> (which defaults to 0).
+     * Returns whether or not the visitor is logged in.
      */
     function logged_in() {
         return (class_exists("Visitor") and isset(Visitor::current()->id) and Visitor::current()->id != 0);
+    }
+
+    /**
+     * Function: same_origin
+     * Returns whether or not the request was referred from another resource on this site.
+     */
+    function same_origin() {
+        return (strpos(@$_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
     }
 
     /**
@@ -122,7 +134,7 @@
         foreach($emoji as $key => $value) {
             $text =  str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
         }
-        
+
         return $text;
     }
 
@@ -170,7 +182,7 @@
      * Notes:
      *     Precedence is given to UTF-8 with a fallback to Windows 1252.
      */
-    function set_locale($locale) {
+    function set_locale($locale = "en_US") {
         $posix = array($locale.".UTF-8",                  // E.g. "en_US.UTF-8"
                        $locale.".UTF8",                   // E.g. "en_US.UTF8"
                        $locale);                          // E.g. "en_US"
@@ -186,16 +198,10 @@
 
             # Set the ICU locale.
             Locale::setDefault($locale);
-
-            if (DEBUG)
-                error_log("LOCALE (ICU) ".Locale::getDefault());
         }
 
         # Set the PHP locale.
         setlocale(LC_ALL, array_merge($posix, $win32));
-
-        if (DEBUG)
-            error_log("LOCALE (PHP) ".setlocale(LC_ALL, 0));
     }
 
     /**
@@ -363,7 +369,7 @@
      * Returns a standard datetime string based on either the passed timestamp or their time offset, usually for MySQL inserts.
      *
      * Parameters:
-     *     $when - An optional timestamp.
+     *     $when - A timestamp (optional).
      */
     function datetime($when = null) {
         fallback($when, time());
@@ -662,8 +668,10 @@
 
         # Check for X-Pingback header.
         $headers = "";
+
         while (!feof($connect)) {
             $line = fgets($connect, 512);
+
             if (trim($line) == "")
                 break;
 
@@ -682,8 +690,10 @@
             return false;
 
         $size = 0;
+
         while (!feof($connect)) {
             $line = fgets($connect, 1024);
+
             if (preg_match("/<link rel=[\"|']pingback[\"|'] href=[\"|']([^\"]+)[\"|'] ?\/?>/i", $line, $link))
                 return $link[1];
 
@@ -694,7 +704,6 @@
         }
 
         fclose($connect);
-
         return false;
     }
 
@@ -832,23 +841,21 @@
 
     /**
      * Function: admin_url
-     * Returns an admin URL.
+     * Builds an admin URL from the supplied components.
      *
      * Parameters:
      *     $action - The admin action.
      *     $params - An indexed array of parameters.
-     *
      */
     function admin_url($action = "", $params = array()) {
-        if ($action == "logout")
-            return Config::current()->url."/?action=logout";
+        $config = Config::current();
 
         $request = !empty($action) ? array("action=".$action) : array() ;
 
         foreach ($params as $key => $value)
             $request[] = urlencode($key)."=".urlencode($value);
 
-        return Config::current()->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
+        return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
     }
 
     /**
@@ -857,7 +864,7 @@
      */
     function self_url() {
         $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
-        return $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
     }
 
     /**
@@ -901,34 +908,6 @@
      */
     function decamelize($string) {
         return strtolower(preg_replace("/([a-z])([A-Z])/", "\\1_\\2", $string));
-    }
-
-    /**
-     * Function: selected
-     * If $val1 == $val2, outputs or returns @ selected="selected"@
-     *
-     * Parameters:
-     *     $val1 - First value.
-     *     $val2 - Second value.
-     *     $return - Return @ selected="selected"@ instead of outputting it
-     */
-    function selected($val1, $val2, $return = false) {
-        if ($val1 == $val2)
-            if ($return)
-                return ' selected="selected"';
-            else
-                echo ' selected="selected"';
-    }
-
-    /**
-     * Function: checked
-     * If $val == 1 (true), outputs ' checked="checked"'
-     *
-     * Parameters:
-     *     $val - Value to check.
-     */
-    function checked($val) {
-        if ($val == 1) echo ' checked="checked"';
     }
 
     /**
@@ -1616,55 +1595,6 @@
     }
 
     /**
-     * Function: relative_time
-     * Returns the difference between the given timestamps or now.
-     *
-     * Parameters:
-     *     $time - Timestamp to compare to.
-     *     $from - Timestamp to compare from. If not specified, defaults to now.
-     *
-     * Returns:
-     *     A string formatted like "3 days ago" or "3 days from now".
-     */
-    function relative_time($when, $from = null) {
-        fallback($from, time());
-
-        $time = (is_numeric($when)) ? $when : strtotime($when) ;
-
-        $difference = $from - $time;
-
-        if ($difference < 0) {
-            $word = "from now";
-            $difference = -$difference;
-        } elseif ($difference > 0)
-            $word = "ago";
-        else
-            return "just now";
-
-        $units = array("second"     => 1,
-                       "minute"     => 60,
-                       "hour"       => 60 * 60,
-                       "day"        => 60 * 60 * 24,
-                       "week"       => 60 * 60 * 24 * 7,
-                       "month"      => 60 * 60 * 24 * 30,
-                       "year"       => 60 * 60 * 24 * 365,
-                       "decade"     => 60 * 60 * 24 * 365 * 10,
-                       "century"    => 60 * 60 * 24 * 365 * 100,
-                       "millennium" => 60 * 60 * 24 * 365 * 1000);
-
-        $possible_units = array();
-        foreach ($units as $name => $val)
-            if (($name == "week" and $difference >= ($val * 2)) or # Only say "weeks" after two have passed.
-                ($name != "week" and $difference >= $val))
-                $unit = $possible_units[] = $name;
-
-        $precision = (int) in_array("year", $possible_units);
-        $amount = round($difference / $units[$unit], $precision);
-
-        return $amount." ".pluralize($unit, $amount)." ".$word;
-    }
-
-    /**
      * Function: list_notate
      * Notates an array as a list of things.
      *
@@ -1729,8 +1659,10 @@
      */
     function generate_captcha() {
         global $captchaHooks;
+
         if (!$captchaHooks)
            return false;
+
         return call_user_func($captchaHooks[0] . "::getCaptcha");
     }
 
@@ -1743,8 +1675,10 @@
      */
     function check_captcha() {
         global $captchaHooks;
+
         if (!$captchaHooks)
            return true;
+
         return call_user_func($captchaHooks[0] . "::verifyCaptcha");
     }
 
@@ -1779,13 +1713,13 @@
 
     /**
      * Function: token
-     * Salt and hash a unique token.
+     * Salt and hash a unique token using the supplied data.
      *
      * Parameters:
-     *     $items - The items to hash.
+     *     $items - An array of items to hash.
      *
      * Returns:
-     *     A unique token.
+     *     A unique token salted with the secure hashkey.
      */
     function token($items) {
         return sha1(implode((array) $items).Config::current()->secure_hashkey);
@@ -1793,7 +1727,7 @@
 
     /**
      * Function: is_url
-     * Does the string look like a website URL?
+     * Does the string look like a web URL?
      *
      * Parameters:
      *     $string - The string to analyse.
@@ -1805,9 +1739,9 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}/)~i', $string) or //FQDN
-                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}/)~', $string) or //IPv4
-                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5}/)~i', $string));                           //IPv6
+        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~i', $string) or //FQDN
+                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~', $string) or //IPv4
+                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                           //IPv6
     }
 
     /**
@@ -1828,19 +1762,23 @@
 
     /**
      * Function: add_scheme
-     * Prefixes a URL with a HTTP scheme if none was detected.
+     * Prefixes a URL with a scheme if none was detected.
+     * Overwrites existing scheme if $scheme is supplied.
      *
      * Parameters:
      *     $url - The URL to analyse.
+     *     $scheme - The scheme for the URL (optional).
      *
      * Returns:
-     *     URL prefixed with scheme.
+     *     URL prefixed with a scheme (http:// by default).
      *
      * See Also:
      *     <is_url>
      */
-    function add_scheme($url) {
-        return $url = preg_match('~^[a-z][a-z0-9\+\.\-]+:~i', $url) ? $url : "http://".$url ;
+    function add_scheme($url, $scheme = null) {
+        preg_match('~^([a-z]+://)?(.+)~i', $url, $matches);
+        $matches[1] = (isset($scheme)) ? $scheme : oneof($matches[1], "http://") ;
+        return $url = $matches[1].$matches[2];
     }
 
     /**
@@ -1873,7 +1811,7 @@
      *     $password - The password string to score.
      *
      * Returns:
-     *     A numeric score for the password strength.
+     *     A numeric score for the strength of the password.
      */
     function password_strength($password = "") {
         $score = 0;
@@ -1931,8 +1869,7 @@
                                      PHP_EOL.PHP_EOL.
                                      __("Visit this link to activate your account:").
                                      PHP_EOL.
-                                     $config->chyrp_url."/?action=activate&login=".fix($params["login"]).
-                                     "&token=".token(array($params["login"], $params["to"]));
+                                     $params["link"];
                 break;
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
@@ -1942,8 +1879,7 @@
                                      PHP_EOL.PHP_EOL.
                                      _f("Visit this link to reset your password:").
                                      PHP_EOL.
-                                     $config->chyrp_url."/?action=reset&login=".fix($params["login"]).
-                                     "&token=".token(array($params["login"], $params["to"]));
+                                     $params["link"];
                 break;
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
@@ -1964,21 +1900,24 @@
 
     /**
      * Function: autoload
-     * Autoload classes on demand.
+     * Autoload PSR-0 classes on demand by scanning lib directories.
      *
      * Parameters:
      *     $class - The name of the class to load.
      */
     function autoload($class) {
-        if (0 === strpos($class, "Parsedown"))
-            $filepath = INCLUDES_DIR.DIR."lib".DIR."Parsedown.php";
+        $filepath = str_replace(array("_", "\\", "\0"),
+                                array(DIR, DIR, ""),
+                                ltrim($class, "\\")).".php";
 
-        if (0 === strpos($class, "Leaf"))
-            $filepath = INCLUDES_DIR.DIR."class".DIR."Leaf.php";
+        if (file_exists(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
+            require INCLUDES_DIR.DIR."lib".DIR.$filepath;
+            return;
+        }
 
-        if (0 === strpos($class, "Twig"))
-            $filepath = INCLUDES_DIR.DIR."lib".DIR.str_replace(array('_', "\0"), array(DIR, ''), $class).".php";
-
-        if (isset($filepath) and is_file($filepath))
-            require $filepath;
+        foreach (Config::current()->enabled_modules as $module)
+            if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
+                require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
+                return;
+            }
     }

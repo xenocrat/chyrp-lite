@@ -144,6 +144,11 @@
             return $navs;
         }
 
+        static function manage_pages($pages) {
+            array_push($pages, "rename_tag");
+            return $pages;
+        }
+
         static function manage_nav_pages($pages) {
             array_push($pages, "manage_tags", "rename_tag", "delete_tag", "edit_tags");
             return $pages;
@@ -282,7 +287,7 @@
             $post = new Post($_POST['id']);
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_tags");
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
@@ -450,7 +455,7 @@
         public function main_tag($main) {
             if (!isset($_GET['name']))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
-                                     array("reason" => __("You did not specify a tag", "tags")),
+                                     array("reason" => __("You did not specify a tag.", "tags")),
                                         __("No Tag", "tags"));
 
             $sql = SQL::current();
@@ -482,7 +487,7 @@
 
             if (empty($ids))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
-                                     array("reason" => __("There are no posts with the tag you specified", "tags")),
+                                     array("reason" => __("There are no posts with the tag you specified.", "tags")),
                                         __("Invalid Tag", "tags"));
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
@@ -701,39 +706,6 @@
 
             # Return string escaped for SQL query
             return SQL::current()->escape($text, false);
-        }
-
-        public function ajax_tag_post() {
-            if (empty($_POST['name']) or empty($_POST['post']) or !is_numeric($_POST['post']))
-                exit("{}");
-
-            $sql = SQL::current();
-
-            $post = new Post($_POST['post']);
-            $tag = $_POST['name'];
-
-            if (!$post->editable())
-                exit("{}");
-
-            $tags = $sql->select("post_attributes",
-                                 "value",
-                                 array("name" => "tags",
-                                       "post_id" => $post->id));
-
-            if ($tags and $value = $tags->fetchColumn())
-                $tags = self::tags_unserialize($value);
-            else
-                $tags = array();
-
-            $tags[$tag] = sanitize($tag);
-
-            $sql->replace("post_attributes",
-                          array("post_id", "name"),
-                          array("name" => "tags",
-                                "value" => self::tags_serialize($tags),
-                                "post_id" => $post->id));
-
-            exit("{ \"url\": \"".url("tag/".$tags[$tag], MainController::current())."\", \"tag\": \"".$_POST['name']."\" }");
         }
 
         function feed_item($post) {

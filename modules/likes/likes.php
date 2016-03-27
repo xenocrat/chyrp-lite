@@ -3,7 +3,8 @@
 
     class Likes extends Modules {
         static function __install() {
-            Like::install();
+            if (!property_exists(Config::current(), "module_like"))
+                Like::install();
         }
 
         static function __uninstall($confirm) {
@@ -118,6 +119,7 @@
 
             header("Content-type: application/json; charset=utf-8");
             echo json_encode($responseObj);
+            exit;
         }
 
         static function ajax_unlike() {
@@ -159,6 +161,7 @@
 
             header("Content-type: application/json; charset=utf-8");
             echo json_encode($responseObj);
+            exit;
         }
 
         static function delete_post($post) {

@@ -234,7 +234,6 @@ input:input-placeholder {                       color: #c6ccc8;
                                                 opacity: 1 }
 input[type='checkbox'] {                        width: auto }
 input.error {                                   background-color: #ff8080 }
-input[type="password"].strong {                 border: 1px solid #76b362 }
 input#search_field {                            display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }

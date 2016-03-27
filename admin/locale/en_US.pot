@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-01-24 13:00+0000\n"
+"POT-Creation-Date: 2016-03-25 15:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,54 +17,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:50
+#: admin/admin.js.php:51
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:110
-#: admin/admin.js.php:126
+#: admin/admin.js.php:111
+#: admin/admin.js.php:127
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:112
-#: admin/admin.js.php:129
+#: admin/admin.js.php:113
+#: admin/admin.js.php:130
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:156
+#: admin/admin.js.php:193
 msgid "You are a member of this group. Are you sure the permissions are as you want them?"
 msgstr ""
 
-#: admin/admin.js.php:162
+#: admin/admin.js.php:199
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:195
+#: admin/admin.js.php:216
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:199
-#: admin/admin.js.php:201
-#: admin/admin.js.php:289
-#: admin/admin.js.php:291
+#: admin/admin.js.php:220
+#: admin/admin.js.php:222
+#: admin/admin.js.php:312
+#: admin/admin.js.php:314
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:222
-#: admin/admin.js.php:223
+#: admin/admin.js.php:245
+#: admin/admin.js.php:246
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:285
+#: admin/admin.js.php:308
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:437
+#: admin/admin.js.php:438
+msgid "The module cannot be enabled because your web browser did not send proper credentials."
+msgstr ""
+
+#: admin/admin.js.php:440
+msgid "The module cannot be disabled because your web browser did not send proper credentials."
+msgstr ""
+
+#: admin/admin.js.php:469
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:439
+#: admin/admin.js.php:471
 msgid "There was an error disabling the extension."
 msgstr ""
 
@@ -398,22 +406,22 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: admin/pages/feathers.twig:25
-#: admin/pages/feathers.twig:52
-#: admin/pages/modules.twig:45
-#: admin/pages/modules.twig:93
+#: admin/pages/feathers.twig:28
+#: admin/pages/feathers.twig:63
+#: admin/pages/modules.twig:48
+#: admin/pages/modules.twig:104
 msgid "Disable"
 msgstr ""
 
-#: admin/pages/feathers.twig:28
-#: admin/pages/feathers.twig:55
-#: admin/pages/modules.twig:48
-#: admin/pages/modules.twig:96
+#: admin/pages/feathers.twig:35
+#: admin/pages/feathers.twig:70
+#: admin/pages/modules.twig:55
+#: admin/pages/modules.twig:111
 msgid "Enable"
 msgstr ""
 
-#: admin/pages/feathers.twig:35
-#: admin/pages/modules.twig:55
+#: admin/pages/feathers.twig:43
+#: admin/pages/modules.twig:63
 msgid "Disabled"
 msgstr ""
 
@@ -676,12 +684,12 @@ msgid "Modules"
 msgstr ""
 
 #: admin/pages/modules.twig:25
-#: admin/pages/modules.twig:72
+#: admin/pages/modules.twig:80
 msgid "This module conflicts with the following installed modules:"
 msgstr ""
 
 #: admin/pages/modules.twig:35
-#: admin/pages/modules.twig:82
+#: admin/pages/modules.twig:90
 msgid "This module requires the following modules to be enabled:"
 msgstr ""
 
@@ -844,10 +852,6 @@ msgstr ""
 
 #: admin/pages/themes.twig:6
 msgid "Blog Themes"
-msgstr ""
-
-#: admin/pages/themes.twig:13
-msgid 'Selected!'
 msgstr ""
 
 #: admin/pages/themes.twig:22

@@ -36,7 +36,10 @@
          * Returns a list of filters to add to the existing list.
          */
         public function getFilters() {
-            return array(   
+            return array(
+                # PHP
+                new Twig_SimpleFilter("repeat",                "str_repeat"),
+
                 # Helpers
                 new Twig_SimpleFilter("camelize",              "camelize"),
                 new Twig_SimpleFilter("decamelize",            "decamelize"),
@@ -58,7 +61,6 @@
                 new Twig_SimpleFilter("translate_search",      "twig_filter_translate_search"),
                 new Twig_SimpleFilter("strftimeformat",        "twig_filter_strftime_format"),
                 new Twig_SimpleFilter("filesizeformat",        "twig_filter_filesize_format"),
-                new Twig_SimpleFilter("repeat",                "twig_filter_repeat"),
                 new Twig_SimpleFilter("match",                 "twig_filter_match"),
                 new Twig_SimpleFilter("contains",              "twig_filter_contains"),
                 new Twig_SimpleFilter("inspect",               "twig_filter_inspect"),
@@ -146,7 +148,7 @@
      * Function: twig_filter_strftime_format
      * Returns date formatting for a string that isn't a regular time() value.
      */
-    function twig_filter_strftime_format($timestamp, $format='%x %X') {
+    function twig_filter_strftime_format($timestamp, $format="%c") {
         return when($format, $timestamp, true);
     }
 
@@ -173,20 +175,6 @@
 
         $value = number_format($bytes / 1024, 1);
         return _f("%s KB", $value);
-    }
-
-    /**
-     * Function: twig_filter_repeat
-     * Returns the string repeated n times.
-     */
-    function twig_filter_repeat($string, $repetitions = 1) {
-        $concat = "";
-
-        if (is_string($string))
-            for ($i=0; $i < $repetitions; $i++)
-                $concat.= $string;
-
-        return $concat;
     }
 
     /**

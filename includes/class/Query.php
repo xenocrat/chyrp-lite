@@ -36,7 +36,7 @@
             $this->throw_exceptions = $throw_exceptions;
             $this->queryString = $query;
 
-            if ($count and defined('DEBUG') and DEBUG) {
+            if ($count and DEBUG) {
                 $trace = debug_backtrace();
                 $target = $trace[$index = 0];
 
@@ -48,6 +48,7 @@
                         break;
 
                 $logQuery = $query;
+
                 foreach ($params as $name => $val)
                     $logQuery = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/", str_replace("\\", "\\\\", $this->sql->escape($val))."\\1", $logQuery);
 
@@ -75,10 +76,8 @@
 
                         if (!$result)
                             throw new PDOException;
-                    } catch (PDOException $error) {
-                        if (!empty($error->errorInfo[1]) and $error->errorInfo[1] == 17)
-                            return new self($sql, $query, $params, $throw_exceptions);
 
+                    } catch (PDOException $error) {
                         return $this->handle($error);
                     }
 
@@ -97,6 +96,7 @@
                     try {
                         if (!$this->query = $this->db->query($query))
                             throw new Exception($this->db->error);
+
                     } catch (Exception $error) {
                         return $this->handle($error);
                     }
@@ -199,13 +199,17 @@
 
             if (UPGRADING or $this->sql->silence_errors) return false;
 
+            $backtrace = $error->getTrace();
             $message = $error->getMessage();
 
-            $message.= "\n\n<pre>".print_r($this->queryString, true)."\n\n<pre>".print_r($this->params, true)."</pre>\n\n<pre>".$error->getTraceAsString()."</pre>";
+            $message.= "\n\n<h2>".__("Query String")."</h2>\n".
+                       "<pre>".print_r($this->queryString, true)."</pre>".
+                       "\n\n<h2>".__("Parameters")."</h2>\n".
+                       "<pre>".print_r($this->params, true)."</pre>";
 
             if (XML_RPC or $this->throw_exceptions)
                 throw new Exception($message);
 
-            error(__("Database Error"), $message);
+            error(__("Database Error"), $message, $backtrace);
         }
     }

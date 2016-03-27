@@ -55,9 +55,6 @@ Pages allow you to publish articles on your site that are independent of your bl
 * SQLite:
   - SQLite 3+
   - PDO
-* PostgreSQL:
-  - PostgreSQL 7.1+
-  - PDO
 
 ## Installation
 You can install Chyrp Lite in four steps:
@@ -90,6 +87,8 @@ Chyrp Lite was created by the following people:
 * Lite Developer: Daniel Pimley
 * Chyrp Developer: Arian Xhezairi
 * Project Founder: Alex Suraci
+
+&hellip;and other contributors.
 
 ## License
 
@@ -128,8 +127,10 @@ jQuery is Copyright jQuery Foundation and other contributors,
 distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).
 Parsedown is Copyright 2013 Emanuil Rusev,
 distributed under the [MIT License](https://raw.githubusercontent.com/erusev/parsedown/master/LICENSE.txt).
-Highlighter.js is Copyright 2006 Ivan Sagalaev,
+Highlight.js is Copyright 2006 Ivan Sagalaev,
 distributed under the [BSD License](https://raw.githubusercontent.com/isagalaev/highlight.js/master/LICENSE).
+SimpleMDE is Copyright 2015 Next Step Webs, Inc.,
+distributed under the [MIT License](https://raw.githubusercontent.com/NextStepWebs/simplemde-markdown-editor/master/LICENSE).
 Open Sans is Copyright 2010-2011 Google Corporation,
 distributed under the [Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
 Open Sans is a trademark of Google and may be registered in certain jurisdictions.

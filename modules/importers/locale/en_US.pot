@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-01-24 13:00+0000\n"
+"POT-Creation-Date: 2016-03-25 15:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,157 +17,165 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/importers/importers.php:11
-#: modules/importers/importers.php:170
-#: modules/importers/importers.php:307
-#: modules/importers/importers.php:394
+#: modules/importers/importers.php:12
+#: modules/importers/importers.php:171
+#: modules/importers/importers.php:311
+#: modules/importers/importers.php:403
 msgid "You do not have sufficient privileges to import content."
 msgstr ""
 
-#: modules/importers/importers.php:20
-#: modules/importers/importers.php:183
+#: modules/importers/importers.php:21
+#: modules/importers/importers.php:184
 msgid "Missing Feather"
 msgstr ""
 
-#: modules/importers/importers.php:20
+#: modules/importers/importers.php:21
 msgid "Importing from WordPress requires the Text feather to be installed and enabled."
 msgstr ""
 
-#: modules/importers/importers.php:23
+#: modules/importers/importers.php:24
 msgid "You must select a WordPress export file."
 msgstr ""
 
-#: modules/importers/importers.php:66
+#: modules/importers/importers.php:68
 msgid "The file does not seem to be a valid WordPress export file."
 msgstr ""
 
-#: modules/importers/importers.php:159
+#: modules/importers/importers.php:160
 msgid "WordPress content successfully imported!"
 msgstr ""
 
-#: modules/importers/importers.php:183
+#: modules/importers/importers.php:184
 msgid "Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled."
 msgstr ""
 
-#: modules/importers/importers.php:186
+#: modules/importers/importers.php:189
+msgid "Invalid URL."
+msgstr ""
+
+#: modules/importers/importers.php:192
 msgid "Invalid Tumblr URL."
 msgstr ""
 
-#: modules/importers/importers.php:200
+#: modules/importers/importers.php:208
 msgid "Could not retrieve content from the Tumblr URL. "
 msgstr ""
 
-#: modules/importers/importers.php:295
+#: modules/importers/importers.php:299
 msgid "Tumblr content successfully imported!"
 msgstr ""
 
-#: modules/importers/importers.php:316
-#: modules/importers/importers.php:403
+#: modules/importers/importers.php:320
+#: modules/importers/importers.php:412
 msgid "Host cannot be empty."
 msgstr ""
 
-#: modules/importers/importers.php:319
-#: modules/importers/importers.php:406
+#: modules/importers/importers.php:323
+#: modules/importers/importers.php:415
 msgid "Username cannot be empty."
 msgstr ""
 
-#: modules/importers/importers.php:322
-#: modules/importers/importers.php:409
+#: modules/importers/importers.php:326
+#: modules/importers/importers.php:418
 msgid "Password cannot be empty."
 msgstr ""
 
-#: modules/importers/importers.php:325
-#: modules/importers/importers.php:412
+#: modules/importers/importers.php:329
+#: modules/importers/importers.php:421
 msgid "Database cannot be empty."
 msgstr ""
 
-#: modules/importers/importers.php:330
+#: modules/importers/importers.php:340
 msgid "Could not connect to the TextPattern database."
 msgstr ""
 
-#: modules/importers/importers.php:337
-#: modules/importers/importers.php:424
-#: modules/importers/importers.php:449
+#: modules/importers/importers.php:347
+#: modules/importers/importers.php:439
+#: modules/importers/importers.php:464
 msgid "Database Error"
 msgstr ""
 
-#: modules/importers/importers.php:381
+#: modules/importers/importers.php:390
 msgid "TextPattern content successfully imported!"
 msgstr ""
 
-#: modules/importers/importers.php:417
+#: modules/importers/importers.php:432
 msgid "Could not connect to the MovableType database."
 msgstr ""
 
-#: modules/importers/importers.php:501
+#: modules/importers/importers.php:515
 msgid "MovableType content successfully imported!"
 msgstr ""
 
-#: modules/importers/importers.php:512
+#: modules/importers/importers.php:526
 msgid "eXtended .XML File"
 msgstr ""
 
-#: modules/importers/importers.php:516
-#: modules/importers/importers.php:570
-#: modules/importers/importers.php:604
+#: modules/importers/importers.php:530
+#: modules/importers/importers.php:587
+#: modules/importers/importers.php:621
 msgid "What URL is used for embedded media?"
 msgstr ""
 
-#: modules/importers/importers.php:518
-#: modules/importers/importers.php:572
-#: modules/importers/importers.php:606
+#: modules/importers/importers.php:532
+#: modules/importers/importers.php:589
+#: modules/importers/importers.php:623
 msgid "(optional)"
 msgstr ""
 
-#: modules/importers/importers.php:520
+#: modules/importers/importers.php:534
 msgid "Usually something like <code>http://example.com/wp-content/uploads/</code>."
 msgstr ""
 
-#: modules/importers/importers.php:524
-#: modules/importers/importers.php:539
-#: modules/importers/importers.php:578
-#: modules/importers/importers.php:612
+#: modules/importers/importers.php:538
+#: modules/importers/importers.php:556
+#: modules/importers/importers.php:595
+#: modules/importers/importers.php:629
 msgid "Import"
 msgstr ""
 
-#: modules/importers/importers.php:534
+#: modules/importers/importers.php:548
 msgid "Your Tumblr URL"
 msgstr ""
 
-#: modules/importers/importers.php:536
-msgid "Note: Audio tumbles cannot be imported."
-msgstr ""
-
-#: modules/importers/importers.php:549
-#: modules/importers/importers.php:588
-msgid "Host"
+#: modules/importers/importers.php:551
+msgid "Something like <code>http://example.tumblr.com</code>."
 msgstr ""
 
 #: modules/importers/importers.php:553
-#: modules/importers/importers.php:592
+msgid "Note: Audio tumbles cannot be imported."
+msgstr ""
+
+#: modules/importers/importers.php:566
+#: modules/importers/importers.php:605
+msgid "Host"
+msgstr ""
+
+#: modules/importers/importers.php:570
+#: modules/importers/importers.php:609
 msgid "Username"
 msgstr ""
 
-#: modules/importers/importers.php:557
-#: modules/importers/importers.php:596
+#: modules/importers/importers.php:574
+#: modules/importers/importers.php:613
 msgid "Password"
 msgstr ""
 
-#: modules/importers/importers.php:561
-#: modules/importers/importers.php:600
+#: modules/importers/importers.php:578
+#: modules/importers/importers.php:617
 msgid "Database"
 msgstr ""
 
-#: modules/importers/importers.php:565
+#: modules/importers/importers.php:582
 msgid "Table Prefix"
 msgstr ""
 
-#: modules/importers/importers.php:567
+#: modules/importers/importers.php:584
 msgid "(if any)"
 msgstr ""
 
-#: modules/importers/importers.php:574
-#: modules/importers/importers.php:608
+#: modules/importers/importers.php:591
+#: modules/importers/importers.php:625
 msgid "Usually something like <code>http://example.com/images/</code>."
 msgstr ""
 

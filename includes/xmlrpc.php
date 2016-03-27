@@ -105,8 +105,10 @@
             # Search the page for our link.
             if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
                 $url = str_replace("&", "&amp;", preg_quote($target, "/"));
+
                 if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
                     $url = str_replace("&", "&#038;", preg_quote($target, "/"));
+
                     if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context))
                         return new IXR_Error(17, __("The page you published does not link to our page."));
                 }

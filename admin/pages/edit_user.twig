@@ -16,7 +16,7 @@
 </p>
 <p>
 <label for="website">{{ "Website" | translate }}</label>
-<input class="text" type="text" name="website" value="{{ user.website | fix(true) }}" id="website">
+<input class="text" type="url" name="website" value="{{ user.website | fix(true) }}" id="website">
 </p>
 <p>
 <label for="login">{{ "Login" | translate }}</label>
@@ -40,7 +40,7 @@
 </p>
 {{ trigger.call("edit_user_fields", user) }}
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Update" | translate }}</button>
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}</button>
 </p>
 <input type="hidden" name="id" value="{{ user.id }}" id="id">
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">

@@ -5,7 +5,7 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2016.01
+     *     v2016.02
      *
      * Copyright:
      *     Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2016.01");
+    define('CHYRP_VERSION', "2016.02");
 
     # Constant: CHYRP_CODENAME
-    # The code name for this version.
-    define('CHYRP_CODENAME', "Socotra");
+    # The codename for this version.
+    define('CHYRP_CODENAME', "Russet");
 
     # Constant: CACHE_TWIG
     # Override DEBUG to enable Twig template caching.
@@ -350,14 +350,14 @@
     # Initiate the extensions.
     init_extensions();
 
-    # Prepare the trigger class
+    # Prepare the trigger class.
     $trigger = Trigger::current();
 
     # Filter the visitor immediately after the Modules are initialized.
     # Example usage scenario: custom auth systems (e.g. OpenID)
     $trigger->filter($visitor, "visitor");
 
-    # First general-purpose trigger. There are many cases you may want to use @route_init@ instead of this, however.
+    # First general-purpose trigger. There are many cases you may want to use @route_init@ instead of this.
     $trigger->call("runtime");
 
     # Set the content-type and charset.
@@ -367,3 +367,7 @@
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else
         header("Content-type: text/html; charset=UTF-8");
+
+    # Be sociable but safe if the site is using the HTTPS protocol.
+    if (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443)
+        header("Referrer-Policy: origin-when-cross-origin");

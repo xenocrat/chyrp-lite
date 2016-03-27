@@ -1,6 +1,5 @@
 <?php
     require_once "model.Comment.php";
-    require_once "lib".DIR."Akismet.php";
 
     class Comments extends Modules {
         public function __init() {
@@ -77,21 +76,18 @@
             $comment = new Comment($parent_id);
 
             if ($comment->no_results)
-                Flash::warning(__("The comment you searched for cannot be found. Perhaps it has been removed.", "comments"), "/");
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             $post = new Post($comment->post_id);
 
             if ($post->no_results)
-                Flash::warning(__("The comment you searched for is associated with a post that cannot be found.", "comments"), "/");
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->theme_exists())
-                error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
-
-            if ($post->status == "draft")
-                Flash::message(__("This post is a draft."));
+                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."));
 
             if ($post->status == "scheduled")
-                Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
+                Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
 
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
                 Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
@@ -104,7 +100,7 @@
         }
 
         public function parse_urls($urls) {
-            $urls["/\/comment\/([0-9]+)/"] = "/?action=comment&id=$1";
+            $urls["|/comment/([0-9]+)/|"] = "/?action=comment&id=$1";
             return $urls;
         }
 
@@ -115,34 +111,34 @@
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
             if ($post->no_results)
-                error(__("Error"), __("Post not found."));
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
 
             if (empty($_POST['body']))
-                error(__("Error"), __("Message can't be blank.", "comments"));
+                Flash::warning(__("Message can't be blank.", "comments"));
 
             if (empty($_POST['author']))
-                error(__("Error"), __("Author can't be blank.", "comments"));
+                Flash::warning(__("Author can't be blank.", "comments"));
 
             if (empty($_POST['email']))
-                error(__("Error"), __("Email address can't be blank.", "comments"));
+                Flash::warning(__("Email address can't be blank.", "comments"));
 
             if (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid email address.", "comments"));
+                Flash::warning(__("Invalid email address.", "comments"));
 
             if (!empty($_POST['url']) and !is_url($_POST['url']))
-                error(__("Error"), __("Invalid website URL.", "comments"));
+                Flash::warning(__("Invalid website URL.", "comments"));
 
             if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
-                error(__("Error"), __("Incorrect captcha code.", "comments"));
+                Flash::warning(__("Incorrect captcha code.", "comments"));
 
-            if (!empty($_POST['author_url']))
-                $_POST['author_url'] = add_scheme($_POST['author_url']);
+            if (Flash::exists("warning"))
+                redirect($post->url());
 
             fallback($parent, (int) $_POST['parent_id'], 0);
-            fallback($notify, (int) !empty($_POST['notify']));
+            fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
             Comment::create($_POST['body'],
                             $_POST['author'],
@@ -166,7 +162,7 @@
             $comment = new Comment($_POST['id']);
 
             if ($comment->no_results)
-                error(__("Error"), __("Comment not found.", "comments"));
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
@@ -189,7 +185,7 @@
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
-            fallback($notify, (int) !empty($_POST['notify']));
+            fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
             $visitor = Visitor::current();
             $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
@@ -204,15 +200,12 @@
                              $created_at);
 
             if (isset($_POST['ajax']))
-                exit("{ \"comment_id\": \"".$_POST['id']."\", \"comment_timestamp\": \"".$created_at."\" }");
+                exit((string) $comment->id);
 
             if (!$visitor->group->can("edit_comment", "delete_comment"))
                 Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
 
-            if ($status == "spam")
-                Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_spam");
-            else
-                Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_comments");
+            Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_comments");
         }
 
         static function admin_delete_comment($admin) {
@@ -243,22 +236,15 @@
             $comment = new Comment($_POST['id']);
 
             if ($comment->no_results)
-                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
             Comment::delete($_POST['id']);
 
-            if (isset($_POST['ajax']))
-                exit;
-
             Flash::notice(__("Comment deleted."));
-
-            if ($comment->status == "spam")
-                redirect("/admin/?action=manage_spam");
-            else
-                redirect("/admin/?action=manage_comments");
+            redirect("/admin/?action=manage_".(($comment->status == "spam") ? "spam" : "comments"));
         }
 
         static function admin_manage_spam($admin) {
@@ -567,7 +553,7 @@
                     $last_comment = fallback($_POST['last_comment'], $post->created_at);
 
                     if ($post->no_results)
-                        break;
+                        show_404(__("Not Found"), __("Post not found."));
 
                     $ids = array();
                     $last_comment = "";
@@ -595,16 +581,21 @@
                     $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
                     header("Content-type: application/json; charset=utf-8");
                     echo json_encode($responseObj);
-                    break;
+                    exit;
 
                 case "show_comment":
+                    $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
+
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to show a comment.", "comments"));
 
                     $comment = new Comment($_POST['comment_id']);
-                    $trigger->call("show_comment", $comment);
-                    $main->display("content/comment", array("comment" => $comment));
-                    break;
+
+                    if ($comment->no_results)
+                        show_404(__("Not Found"), __("Comment not found.", "comments"));
+
+                    $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason));
+                    exit;
 
                 case "delete_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -615,10 +606,14 @@
 
                     $comment = new Comment($_POST['id']);
 
-                    if ($comment->deletable())
-                        Comment::delete($_POST['id']);
+                    if ($comment->no_results)
+                        show_404(__("Not Found"), __("Comment not found.", "comments"));
 
-                    break;
+                    if (!$comment->deletable())
+                        show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
+
+                    Comment::delete($_POST['id']);
+                    exit;
 
                 case "edit_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -629,10 +624,14 @@
 
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
 
-                    if ($comment->editable())
-                        $main->display("forms/comment/edit", array("comment" => $comment));
+                    if ($comment->no_results)
+                        show_404(__("Not Found"), __("Comment not found.", "comments"));
 
-                    break;
+                    if (!$comment->editable())
+                        show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
+
+                    $main->display("forms/comment/edit", array("comment" => $comment));
+                    exit;
             }
         }
 

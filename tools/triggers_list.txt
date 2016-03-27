@@ -2,16 +2,22 @@
  Trigger Calls
 ==============================================
 
+admin_write_wysiwyg
+-------------------
+Called from:
+	admin/admin.js.php on line 234
+
+
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 449
+	admin/admin.js.php on line 482
 
 
 can_not_view_site
 -----------------
 Called from:
-	admin/index.php on line 18
+	admin/index.php on line 19
 	includes/ajax.php on line 14
 	index.php on line 17
 
@@ -19,8 +25,8 @@ Called from:
 end
 ---
 Called from:
-	admin/index.php on line 28
-	index.php on line 46
+	admin/index.php on line 29
+	index.php on line 51
 Arguments:
 	$route
 
@@ -183,19 +189,10 @@ Arguments:
 	$filename, $params, $post
 
 
-not_found
----------
-Called from:
-	includes/ajax.php on line 33
-	includes/ajax.php on line 60
-	includes/ajax.php on line 83
-	includes/helpers.php on line 66
-
-
 ajax
 ----
 Called from:
-	includes/ajax.php on line 235
+	includes/ajax.php on line 226
 
 
 change_setting
@@ -239,7 +236,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1197
+	includes/controller/Admin.php on line 1230
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -247,7 +244,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1224
+	includes/controller/Admin.php on line 1257
 Arguments:
 	$user
 
@@ -255,7 +252,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1252
+	includes/controller/Admin.php on line 1285
 Arguments:
 	$entry, $post
 
@@ -263,15 +260,23 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1275
+	includes/controller/Admin.php on line 1308
 Arguments:
 	$entry, $page
+
+
+preview_theme
+-------------
+Called from:
+	includes/controller/Admin.php on line 1716
+Arguments:
+	!empty($_POST['theme'])
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 506
+	includes/controller/Main.php on line 517
 Arguments:
 	$user
 
@@ -279,7 +284,7 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 591
+	includes/controller/Main.php on line 602
 
 
 feed_item
@@ -293,7 +298,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 190
+	includes/javascript.php on line 201
 
 
 add_group
@@ -363,7 +368,7 @@ Arguments:
 pingback
 --------
 Called from:
-	includes/xmlrpc.php on line 121
+	includes/xmlrpc.php on line 123
 Arguments:
 	$post, $target, $source_url, $title, $excerpt
 
@@ -393,14 +398,6 @@ Arguments:
 	comment
 
 
-show_comment
-------------
-Called from:
-	modules/comments/comments.php on line 605
-Arguments:
-	$comment
-
-
 feed_comment
 ------------
 Called from:
@@ -420,7 +417,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model.Comment.php on line 201
+	modules/comments/model.Comment.php on line 194
 Arguments:
 	$new->post_id, $new->id
 
@@ -428,7 +425,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model.Comment.php on line 219
+	modules/comments/model.Comment.php on line 212
 Arguments:
 	$this->post_id, $this->id
 
@@ -436,7 +433,7 @@ Arguments:
 delete_comment
 --------------
 Called from:
-	modules/comments/model.Comment.php on line 227
+	modules/comments/model.Comment.php on line 220
 Arguments:
 	$new->post_id, $new->id
 
@@ -444,7 +441,7 @@ Arguments:
 import_wordpress_post
 ---------------------
 Called from:
-	modules/importers/importers.php on line 142
+	modules/importers/importers.php on line 143
 Arguments:
 	$item, $post
 
@@ -452,7 +449,7 @@ Arguments:
 import_wordpress_page
 ---------------------
 Called from:
-	modules/importers/importers.php on line 155
+	modules/importers/importers.php on line 156
 Arguments:
 	$item, $page
 
@@ -460,7 +457,7 @@ Arguments:
 import_tumble
 -------------
 Called from:
-	modules/importers/importers.php on line 292
+	modules/importers/importers.php on line 296
 Arguments:
 	$post, $new_post
 
@@ -468,7 +465,7 @@ Arguments:
 import_textpattern_post
 -----------------------
 Called from:
-	modules/importers/importers.php on line 378
+	modules/importers/importers.php on line 387
 Arguments:
 	$post, $new_post
 
@@ -476,7 +473,7 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/importers/importers.php on line 494
+	modules/importers/importers.php on line 508
 Arguments:
 	$post, $new_post, $link
 
@@ -484,7 +481,7 @@ Arguments:
 import_movabletype_page
 -----------------------
 Called from:
-	modules/importers/importers.php on line 497
+	modules/importers/importers.php on line 511
 Arguments:
 	$post, $new_page, $link
 
@@ -579,7 +576,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 116
+	includes/controller/Admin.php on line 118
 
 
 post_export_url
@@ -587,7 +584,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 979
+	includes/controller/Admin.php on line 1010
 Arguments:
 	$post)
 
@@ -597,7 +594,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 998
+	includes/controller/Admin.php on line 1029
 Arguments:
 	$post
 
@@ -607,7 +604,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1042
+	includes/controller/Admin.php on line 1073
 Arguments:
 	$page)
 
@@ -617,7 +614,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1057
+	includes/controller/Admin.php on line 1088
 Arguments:
 	$page
 
@@ -627,7 +624,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1109
+	includes/controller/Admin.php on line 1140
 
 
 manage_nav
@@ -635,7 +632,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2014
+	includes/controller/Admin.php on line 2063
 
 
 settings_nav
@@ -643,7 +640,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2043
+	includes/controller/Admin.php on line 2093
 
 
 extend_nav
@@ -651,7 +648,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2053
+	includes/controller/Admin.php on line 2103
 
 
 admin_subnav
@@ -659,7 +656,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2064
+	includes/controller/Admin.php on line 2114
 
 
 nav_selected
@@ -667,7 +664,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2170
+	includes/controller/Admin.php on line 2216
 
 
 url_code
@@ -675,7 +672,7 @@ url_code
 Target:
 	Post::$url_attrs
 Called from:
-	includes/controller/Main.php on line 172
+	includes/controller/Main.php on line 175
 
 
 feed_url
@@ -693,7 +690,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 791
+	includes/helpers.php on line 800
 
 
 keyword_search
@@ -701,7 +698,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 1563
+	includes/helpers.php on line 1542
 Arguments:
 	$query, $plain
 
@@ -711,7 +708,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1699
+	includes/helpers.php on line 1629
 
 
 group
@@ -911,7 +908,7 @@ cacher_regenerate_triggers
 Target:
 	$regenerate
 Called from:
-	modules/cacher/cacher.php on line 60
+	modules/cacher/cacher.php on line 61
 
 
 cacher_regenerate_posts_triggers
@@ -919,7 +916,7 @@ cacher_regenerate_posts_triggers
 Target:
 	$regenerate_posts
 Called from:
-	modules/cacher/cacher.php on line 67
+	modules/cacher/cacher.php on line 68
 
 
 comment

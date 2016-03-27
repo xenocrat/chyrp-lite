@@ -7,33 +7,33 @@
 <fieldset>
 <p>
 <label for="posts_per_page">{{ "Posts Per Blog Page" | translate }}</label>
-<input class="text digits" type="number" min="0" name="posts_per_page" value="{{ site.posts_per_page | fix }}" size="2" id="posts_per_page">
+<input class="text digits" type="number" min="0" name="posts_per_page" value="{{ site.posts_per_page | fix(true) }}" size="2" id="posts_per_page">
 </p>
 <p>
 <label for="feed_items">{{ "Posts in Feed" | translate }}</label>
-<input class="text digits" type="number" min="0" name="feed_items" value="{{ site.feed_items | fix }}" size="2" id="feed_items">
+<input class="text digits" type="number" min="0" name="feed_items" value="{{ site.feed_items | fix(true) }}" size="2" id="feed_items">
 </p>
 <p>
 <label for="admin_per_page">{{ "Items Per Admin Page" | translate }}</label>
-<input class="text digits" type="number" min="0" name="admin_per_page" value="{{ site.admin_per_page | fix }}" size="2" id="admin_per_page">
+<input class="text digits" type="number" min="0" name="admin_per_page" value="{{ site.admin_per_page | fix(true) }}" size="2" id="admin_per_page">
 </p>
 <p>
 <label for="feed_url">{{ "Feed URL" | translate }}</label>
-<input class="text" type="text" name="feed_url" value="{{ site.feed_url | fix }}" id="feed_url">
+<input class="text" type="url" name="feed_url" value="{{ site.feed_url | fix(true) }}" id="feed_url">
 <small>
 {{ site.clean_urls ? "Allows you to set an alternative URL for <code>/feed/</code>." | translate : "Allows you to set an alternative URL for <code>/?feed</code>." | translate }}
 </small>
 </p>
 <p>
 <label for="uploads_path">{{ "Uploads Path" | translate }}</label>
-<input class="text" type="text" name="uploads_path" value="{{ site.uploads_path | fix }}" id="uploads_path">
+<input class="text" type="text" name="uploads_path" value="{{ site.uploads_path | fix(true) }}" id="uploads_path">
 <small>
 {{ "The directory to which files are uploaded, relative to your installation directory." | translate }}
 </small>
 </p>
 <p>
 <label for="uploads_limit">{{ "Upload Size Limit" | translate }}</label>
-<input class="text digits" type="number" min="0" name="uploads_limit" value="{{ site.uploads_limit | fix }}" size="3" id="uploads_limit">
+<input class="text digits" type="number" min="0" name="uploads_limit" value="{{ site.uploads_limit | fix(true) }}" size="3" id="uploads_limit">
 <span class="sub">{{ "(Megabytes)" | translate }}</span>
 </p>
 <p>
@@ -74,7 +74,7 @@
 </p>
 <p class="buttons">
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Update" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">

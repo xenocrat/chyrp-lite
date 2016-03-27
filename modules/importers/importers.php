@@ -6,6 +6,7 @@
          */
         public function route_import_wordpress() {
             $config = Config::current();
+            $trigger = Trigger::current();
 
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "importers"));
@@ -25,7 +26,8 @@
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
 
-            $trigger = Trigger::current();
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
 
             $stupid_xml = file_get_contents($_FILES['xml_file']['tmp_name']);
             $sane_xml = preg_replace(array("/<wp:comment_content>/", "/<\/wp:comment_content>/"),
@@ -87,7 +89,7 @@
                         $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
                     }
                 }
-                
+
                 $clean = (isset($wordpress->post_name) && $wordpress->post_name != '') ? $wordpress->post_name : sanitize($item->title) ;
 
                 $pinned = (isset($wordpress->is_sticky)) ? $wordpress->is_sticky : 0 ;
@@ -106,7 +108,7 @@
                                                      "body" => trim($contentencoded),
                                                      "imported_from" => "wordpress"),
                                   "feather" => "text");
-                    
+
                     $wp_post_format = null;
                     if (isset($item->category)) {
                         foreach ($item->category as $category) {
@@ -120,13 +122,13 @@
                             }
                         }
                     }
-                    
+
                     if ($wp_post_format) {
                         $trigger->filter($data,
                                          "import_wordpress_post_".str_replace('post-format-', '', $wp_post_format),
                                          $item);
                     }
-                    
+
                     $post = Post::add($data["content"],
                                       $clean,
                                       Post::check_url($clean),
@@ -136,7 +138,6 @@
                                       $status_translate[(string) $wordpress->status],
                                       (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
                                       null,
-                                      "",
                                       false);
 
                     $trigger->call("import_wordpress_post", $item, $post);
@@ -182,15 +183,22 @@
                 !in_array("link", $config->enabled_feathers))
                 error(__("Missing Feather", "importers"), __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"));
 
+            $_POST['tumblr_url'] = trim($_POST['tumblr_url']);
+
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
+                error(__("Error"), __("Invalid URL.", "importers"));
+
+            if (!preg_match("/^(http(s)?:\/\/)?(www\.)?[a-z0-9][a-z0-9-]+[a-z0-9]+\.tumblr\.com(\/)?$/i", $_POST['tumblr_url']))
                 error(__("Error"), __("Invalid Tumblr URL.", "importers"));
 
-            $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url']);
+            $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
 
-            set_time_limit(3600);
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
+
             $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
             $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url));
             $api = preg_replace("/ ([a-z]+)\-([a-z]+)=/", " \\1_\\2=", $api);
@@ -208,7 +216,6 @@
             }
 
             while ($xml->posts->attributes()->total > count($posts)) {
-                set_time_limit(3600);
                 $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url."&start=".count($posts)));
                 $api = preg_replace("/ ([a-z]+)\-([a-z]+)=/", " \\1_\\2=", $api);
                 $xml = simplexml_load_string($api, "SimpleXMLElement", LIBXML_NOCDATA);
@@ -224,11 +231,9 @@
                 return (strtotime($a->attributes()->date) < strtotime($b->attributes()->date)) ? -1 : 1 ;
             }
 
-            set_time_limit(3600);
             usort($posts, "reverse");
 
             foreach ($posts as $key => $post) {
-                set_time_limit(3600);
                 if ($post->attributes()->type == "audio")
                     break; # Can't import Audio posts since Tumblr has the files locked in to Amazon.
 
@@ -286,7 +291,6 @@
                                       "public",
                                       datetime((int) $post->attributes()->unix_timestamp),
                                       null,
-                                      "",
                                       false);
 
                 Trigger::current()->call("import_tumble", $post, $new_post);
@@ -323,6 +327,12 @@
 
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "importers"));
+
+            if (ini_get("memory_limit") < 20)
+                ini_set("memory_limit", "20M");
+
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
@@ -372,7 +382,6 @@
                                       $status_translate[$post["Status"]],
                                       $post["Posted"],
                                       null,
-                                      "",
                                       false);
 
                 $trigger->call("import_textpattern_post", $post, $new_post);
@@ -410,6 +419,12 @@
 
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "importers"));
+
+            if (ini_get("memory_limit") < 20)
+                ini_set("memory_limit", "20M");
+
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
@@ -489,7 +504,6 @@
                                           $status_translate[$post["entry_status"]],
                                           oneof(@$post["entry_authored_on"], @$post["entry_created_on"], datetime()),
                                           $post["entry_modified_on"],
-                                          "",
                                           false);
                     $trigger->call("import_movabletype_post", $post, $new_post, $link);
                 } elseif (@$post["entry_class"] == "page") {
@@ -514,16 +528,16 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="text" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="wordpress_media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/wp-content/uploads/</code>.", "importers"); ?>
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
+<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="wordpress_hash">
 </fieldset>
 </form>
 <hr>
@@ -532,13 +546,16 @@
 <fieldset>
 <p>
 <label for="tumblr_url"><?php echo __("Your Tumblr URL", "importers"); ?></label>
-<input class="text" type="text" name="tumblr_url" value="" id="tumblr_url">
+<input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
+<small>
+<?php echo __("Something like <code>http://example.tumblr.com</code>.", "importers"); ?>
+</small>
 <small><?php echo __("Note: Audio tumbles cannot be imported.", "importers"); ?></small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
+<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="tumblr_hash">
 </fieldset>
 </form>
 <hr>
@@ -568,16 +585,16 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="text" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="textpattern_media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
+<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="textpattern_hash">
 </fieldset>
 </form>
 <hr>
@@ -602,16 +619,16 @@
 </p>
 <p>
 <label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="text" name="media_url" value="" id="media_url">
+<input class="text" type="url" name="media_url" value="" id="movabletype_media_url">
 <span class="sub"><?php echo __("(optional)", "importers"); ?></span>
 <small>
 <?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="success"><?php echo __("Import", "importers"); ?></button>
+<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
 </p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="hash">
+<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="movabletype_hash">
 </fieldset>
 </form>
 <?php

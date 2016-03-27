@@ -65,7 +65,7 @@
         if ($new_width <= $original_width and $new_height <= $original_height and $xscale == $yscale)
             return;
 
-        if ( isset($_GET['square']) ) {
+        if (isset($_GET['square'])) {
             if ( $new_width === 0 )
                 $new_width = $new_height;
 
@@ -115,7 +115,7 @@
         exit(header("Location: ".$url));
 
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
-    $cache_file = CACHES_DIR.DIR."thumb_".$cache_filename;
+    $cache_file = CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename;
 
     if (isset($_GET['no_cache']) and $_GET['no_cache'] == "true" and file_exists($cache_file))
         unlink($cache_file);
@@ -196,7 +196,7 @@
         imagesavealpha($thumbnail, true);
 
     # Generate the cache image.
-    if (!isset($_GET['no_cache']) or $_GET['no_cache'] == "false")
+    if ((!isset($_GET['no_cache']) or $_GET['no_cache'] == "false") and is_writable(CACHES_DIR.DIR."thumbs"))
         if ($done == "imagejpeg")
             $done($thumbnail, $cache_file, $quality);
         else

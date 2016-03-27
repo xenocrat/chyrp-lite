@@ -8,11 +8,13 @@
         # An array of clean URL => dirty URL translations.
         public $urls = array('|/id/([0-9]+)/|'                              => '/?action=view&id=$1',
                              '|/page/(([^/]+)/)+|'                          => '/?action=page&url=$2',
-                             '|/search/|'                                   => '/?action=search',
                              '|/search/([^/]+)/|'                           => '/?action=search&query=$1',
+                             '|/search/|'                                   => '/?action=search',
                              '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&year=$1&month=$2&day=$3',
                              '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&year=$1&month=$2',
                              '|/archive/([0-9]{4})/|'                       => '/?action=archive&year=$1',
+                             '|/random/([^/]+)/|'                           => '/?action=random&feather=$1',
+                             '|/random/|'                                   => '/?action=random',
                              '|/([^/]+)/feed/|'                             => '/?action=$1&feed');
 
         # Boolean: $displayed
@@ -29,20 +31,21 @@
 
         /**
          * Function: __construct
-         * Loads the Twig parser into <Theme>, and sets up the theme l10n domain.
+         * Loads the Twig parser. Theme class sets up the l10n domain.
          */
         private function __construct() {
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            $cache = (is_writable(CACHES_DIR) and !PREVIEWING and (!DEBUG or CACHE_TWIG));
+            $cache = (is_writable(CACHES_DIR.DIR."twig") and !PREVIEWING and (!DEBUG or CACHE_TWIG)) ?
+                CACHES_DIR.DIR."twig" : false ;
 
             if (defined('THEME_DIR')) {
                 $loader = new Twig_Loader_Filesystem(THEME_DIR);
-                $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
-                                                                  "strict_variables" => (DEBUG) ? true : false,
+                $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                                  "strict_variables" => DEBUG,
                                                                   "charset" => "UTF-8",
-                                                                  "cache" => ($cache) ? CACHES_DIR : false,
+                                                                  "cache" => $cache,
                                                                   "autoescape" => false));
                 $this->twig->addExtension(new Leaf());
                 $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
@@ -283,7 +286,7 @@
 
                     $archives[$month] = array("posts" => $posts,
                                               "year" => $time->year,
-                                              "month" => strftime("%B", $month),
+                                              "month" => when("%B", $month, true),
                                               "timestamp" => $month,
                                               "url" => url("archive/".when("Y/m/", $time->created_at)));
 
@@ -309,12 +312,12 @@
                 $this->display("pages".DIR."archive",
                                array("posts" => $posts,
                                      "archive" => array("year" => $_GET['year'],
-                                                        "month" => strftime("%B", $timestamp),
-                                                        "day" => strftime("%d", $timestamp),
+                                                        "month" => when("%B", $timestamp, true),
+                                                        "day" => when("%d", $timestamp, true),
                                                         "timestamp" => $timestamp,
                                                         "depth" => $depth),
                                      "preceding" => $preceding),
-                               _f("Archive of %s", array(strftime("%B %Y", $timestamp))));
+                               _f("Archive of %s", array(when("%B %Y", $timestamp, true))));
             }
         }
 
@@ -398,13 +401,13 @@
                 $this->feed = false;
 
             if (!$post->theme_exists())
-                error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
+                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."));
 
             if ($post->status == "draft")
                 Flash::message(__("This post is a draft."));
 
             if ($post->status == "scheduled")
-                Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
+                Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
 
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
                 Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
@@ -458,16 +461,20 @@
          */
         public function register() {
             $config = Config::current();
+
             if (!$config->can_register)
-                error(__("Registration Disabled"), __("This site does not allow registration."));
+                Flash::notice(__("This site does not allow registration."), "/");
 
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
-                elseif (count(User::find(array("where" => array("login" => $_POST['login'])))))
+
+                $check = new User(array("login" => $_POST['login']));
+
+                if (!$check->no_results)
                     Flash::warning(__("That username is already in use."));
 
                 if (empty($_POST['password1']))
@@ -481,7 +488,7 @@
                     Flash::warning(__("Invalid email address."));
 
                 if ($config->enable_captcha and !check_captcha())
-                    Flash::warning(__("Incorrect captcha code. Please try again."));
+                    Flash::warning(__("Incorrect captcha code."));
 
                 if (!Flash::exists("warning")) {
                     if ($config->email_activation) {
@@ -492,8 +499,12 @@
                                           "",
                                           $config->default_group,
                                           false);
-                        correspond("activate", array("login" => $user->login, 
-                                                     "to" => $user->email));
+
+                        correspond("activate", array("login" => $user->login,
+                                                     "to"    => $user->email,
+                                                     "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                                "&token=".token(array($user->login, $user->email))));
+
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     } else {
                         $user = User::add($_POST['login'],
@@ -516,25 +527,25 @@
          */
         public function activate() {
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Error"), __("No token found."));
+                error(__("Missing Token"), __("You must supply an authentication token."));
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                error(__("Error"), __("That username isn't in our database."));
+                error(__("Unknown User"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Error"), __("Invalid token."));
+                error(__("Invalid Token"), __("The authentication token is not valid."));
 
             if (!$user->approved) {
                 SQL::current()->update("users",
                                  array("login" => $user->login),
                                  array("approved" => true));
 
-                Flash::notice(__("Your account is now active and you may log in."), "/?action=login");
+                Flash::notice(__("Your account is now active and you may log in."), "login");
             } else
                 Flash::notice(__("Your account has already been activated."), "/");
         }
@@ -545,18 +556,18 @@
          */
         public function reset() {
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Error"), __("No token found."));
+                error(__("Missing Token"), __("You must supply an authentication token."));
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                error(__("Error"), __("That username isn't in our database."));
+                error(__("Unknown User"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Error"), __("Invalid token."));
+                error(__("Invalid Token"), __("The authentication token is not valid."));
 
             $new_password = random(8);
 
@@ -571,7 +582,7 @@
                           $user->website,
                           $user->group_id);
 
-            Flash::notice(__("We have emailed you a new password."), "/?action=login");
+            Flash::notice(__("We have emailed you a new password."), "login");
         }
 
         /**
@@ -580,7 +591,7 @@
          */
         public function login() {
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
                 fallback($_POST['login']);
@@ -597,7 +608,7 @@
                     $user = new User(array("login" => $_POST['login']));
 
                     if (!$user->approved)
-                        error(__("Error"), __("You must activate your account before you log in."));
+                        Flash::notice(__("You must activate your account before you log in."), "/");
 
                     $_SESSION['user_id'] = $user->id;
 
@@ -619,10 +630,9 @@
          */
         public function logout() {
             if (!logged_in())
-                error(__("Error"), __("You aren't logged in."));
+                Flash::notice(__("You aren't logged in."), "/");
 
             session_destroy();
-
             session();
 
             Flash::notice(__("Logged out."), "/");
@@ -633,8 +643,10 @@
          * Updates the current user when the form is submitted.
          */
         public function controls() {
-            if (!logged_in())
-                error(__("Error"), __("You must be logged in to access this area."));
+            if (!logged_in()) {
+                $_SESSION['redirect_to'] = "controls";
+                Flash::notice(__("You must be logged in to access user controls."), "login");
+            }
 
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
@@ -677,19 +689,21 @@
          */
         public function lost_password() {
             if (logged_in())
-                error(__("Error"), __("You are already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
-            if (!Config::current()->email_correspondence) {
+            $config = Config::current();
+
+            if (!$config->email_correspondence)
                 Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
-                return;
-            }
 
             if (!empty($_POST)) {
                 $user = new User(array("login" => $_POST['login']));
 
                 if (!$user->no_results)
                     correspond("reset", array("login" => $user->login,
-                                              "to" => $user->email));
+                                              "to"    => $user->email,
+                                              "link"  => $config->url."/?action=reset&login=".fix($user->login).
+                                                         "&token=".token(array($user->login, $user->email))));
 
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }
@@ -703,6 +717,7 @@
          */
         public function random() {
             $sql = SQL::current();
+
             if (isset($_GET['feather'])) {
                 $feather = preg_replace( '|[^a-z]|i', '', $_GET['feather'] );
                 $random = $sql->select("posts",
@@ -736,11 +751,14 @@
                                              array(),
                                              Config::current()->feed_items);
             $ids = array();
+
             foreach ($result->fetchAll() as $index => $row)
                 $ids[] = $row["id"];
 
             if (!empty($ids))
                 fallback($posts, Post::find(array("where" => array("id" => $ids))));
+            else
+                fallback($posts, array());
 
             header("Content-Type: application/atom+xml; charset=UTF-8");
 
@@ -748,6 +766,7 @@
                 $posts = $posts->paginated;
 
             $latest_timestamp = 0;
+
             foreach ($posts as $post)
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
@@ -763,7 +782,7 @@
          *
          * Parameters:
          *     $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
-         *     $context - The context for the file.
+         *     $context - The context to be supplied to Twig.
          *     $title - The title for the page.
          */
         public function display($template, $context = array(), $title = "") {

@@ -8,20 +8,27 @@
 <fieldset>
 <p>
 <label for="cache_expire">{{ "Expire Cache After&hellip;" | translate("cacher") }}</label>
-<input class="text digits" type="number" name="cache_expire" value="{{ site.cache_expire | fix(true) }}" id="cache_expire"> <span class="sub">{{ "(seconds)" | translate("cacher") }}</span>
-<small>
-<a href="{{ admin_url('clear_cache', {'hash': ip | token }) }}">{{ "Clear the cache now!" | translate("cacher") }}</a>
-</small>
+<input class="text digits" type="number" name="cache_expire" value="{{ site.cache_expire | fix(true) }}" id="cache_expire">
+<span class="sub">{{ "(seconds)" | translate("cacher") }}</span>
 </p>
 <p>
-<label for="cache_exclude">{{ "Exclude URLs" | translate("cacher") }}</label>
-<textarea name="cache_exclude" id="cache_exclude" rows="12">{{ site.cache_exclude | join(", \n") | fix }}</textarea>
+<label>{{ "Cache Control" | translate("cacher") }}</label>
+<button name="clear_cache" value="indubitably" class="boo">
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Clear Cache" | translate("cacher") }}
+</button>
+</p>
+<p>
+<label for="cache_exclude_0">{{ "Exclude URLs" | translate("cacher") }}</label>
+<input class="text" type="url" name="cache_exclude[0]" value="" id="cache_exclude_0">
+{% for exclusion in site.cache_exclude %}
+<input class="text" type="url" name="cache_exclude[{{ loop.index }}]" value="{{ exclusion | fix('true') }}" id="cache_exclude_{{ loop.index }}">
+{% endfor %}
 <small>
-{{ "A comma separated list of URLs that will not be cached." | translate("cacher") }}
+{{ "A list of URLs that will not be cached; enter one at a time." | translate("cacher") }}
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="success">{{ "Update" | translate }}</button>
+<button name="clear_cache" value="undecidedly" type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}</button>
 </p>
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 </fieldset>

@@ -62,7 +62,7 @@
         /* End XML Stuff */
 
         public function parse_urls($urls) {
-            $urls["/\/category\/(.*?)/"] = "/?action=category&name=$1";
+            $urls["|/category/(.*?)/|"] = "/?action=category&name=$1";
             return $urls;
         }
 
@@ -122,9 +122,9 @@
         public function main_category($main) {
             # make sure we have enough information to continue.
             if (!isset($_GET['name']))
-                $reason = __("You did not specify a category", "categorize");
+                $reason = __("You did not specify a category.", "categorize");
             elseif (!$category = Category::getCategorybyClean($_GET['name']))
-                $reason = __("The category you specified was not found", "categorize");
+                $reason = __("The category you specified was not found.", "categorize");
 
             if (isset($reason))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
@@ -143,7 +143,7 @@
 
             if (empty($ids))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
-                                     array("reason" => __("There are no posts in the category you specified", "categorize")),
+                                     array("reason" => __("There are no posts in the category you specified.", "categorize")),
                                         __("Invalid Category", "categorize"));
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
@@ -230,7 +230,7 @@
             $category = Category::getCategory($_POST['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+                show_404(__("Not Found"), __("Category not found.", "categorize"));
 
             Category::updateCategory($_POST);
             Flash::notice(__("Category updated.", "categorize"), "/admin/?action=manage_category");
@@ -264,7 +264,7 @@
             $category = Category::getCategory($_POST['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+                show_404(__("Not Found"), __("Category not found.", "categorize"));
 
             Category::deleteCategory($category->id);
             Flash::notice(__("Category deleted.", "categorize"), "/admin/?action=manage_category");

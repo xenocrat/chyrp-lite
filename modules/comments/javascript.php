@@ -11,52 +11,44 @@ var ChyrpComment = {
             if (Site.ajax && ChyrpComment.reload && ChyrpComment.delay > 0)
                 ChyrpComment.interval = setInterval(ChyrpComment.reload, ChyrpComment.delay);
 
-            $("#add_comment").append($(document.createElement("input")).attr({
-                type: "hidden",
-                name: "ajax",
-                value: "true",
-                id: "ajax"
-            }));
             $("#add_comment").on("submit", function(e){
-                if (!ChyrpComment.failed && !!window.FormData) {
+                var empties = false;
+                $(this).find("input.text, textarea").not(".optional").each(function() {
+                    if ($(this).val() == "") {
+                        empties = true;
+                        $(this).focus();
+                        return false;
+                    }
+                });
+
+                if (empties) {
                     e.preventDefault();
-                    $("#add_comment").parent().loader();
-                    $.ajax({
-                        type: "POST",
-                        url: $(this).attr("action"),
-                        data: new FormData(this),
-                        processData: false,
-                        contentType: false,
-                        dataType: "json",
-                        error: ChyrpComment.panic,
-                        success: function(json) {
-                            $("#add_comment").trigger('reset');
-                            $.post(Site.url + "/includes/ajax.php", {
-                                action: "show_comment",
-                                comment_id: json.comment_id,
-                                reason: "added"
-                            }, function(data) {
-                                $("#comments").attr("data-timestamp", json.comment_timestamp);
-                                $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
-                            }, "html").fail(ChyrpComment.panic);
-                        },
-                        complete: function() {
-                            $("#add_comment").parent().loader(true);
-                        }
-                    });
+                    alert('<?php echo __("Please complete all mandatory fields in the comment form.", "comments"); ?>');
+                }
+
+                if (!isEmail($("#add_comment input[name='email']").val())) {
+                    e.preventDefault();
+                    alert('<?php echo __("Invalid email address.", "comments"); ?>');
+                }
+
+                var url_field = $("#add_comment input[name='url']");
+
+                if (url_field.val() != "" && !isURL(url_field.val())) {
+                    e.preventDefault();
+                    alert('<?php echo __("Invalid website URL.", "comments"); ?>');
                 }
             });
         }
 
         if (Site.ajax) {
-            $("#comments").on("click", ".comment_edit_link", function(e) {
+            $("#comments").on("click", ".comment_edit_link:not(.no_ajax)", function(e) {
                 if (!ChyrpComment.failed) {
                     e.preventDefault();
                     var id = $(this).attr("id").replace(/comment_edit_/, "");
                     ChyrpComment.edit(id);
                 }
             });
-            $("#comments").on("click", ".comment_delete_link", function(e) {
+            $("#comments").on("click", ".comment_delete_link:not(.no_ajax)", function(e) {
                 if (!ChyrpComment.failed) {
                     e.preventDefault();
                     ChyrpComment.notice++;
@@ -76,6 +68,7 @@ var ChyrpComment = {
             return;
 
         var id = $("#comments").attr("data-post");
+
         if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && ChyrpComment.failed != true && $(".comments.paginated").children().size() < ChyrpComment.per_page) {
             $.ajax({
                 type: "post",
@@ -102,6 +95,12 @@ var ChyrpComment = {
     edit: function(id) {
         ChyrpComment.editing++;
         $("#comment_" + id).loader();
+
+        if (Site.key == "") {
+            ChyrpComment.panic('<?php echo __("The comment cannot be edited because your web browser did not send proper credentials.", "comments"); ?>');
+            return;
+        }
+
         $.post(Site.url + "/includes/ajax.php", {
             action: "edit_comment",
             comment_id: id,
@@ -126,6 +125,47 @@ var ChyrpComment = {
                             $("#more_options_" + id).slideUp("slow");
                         }
                     });
+                    $("#comment_edit_" + id).on("submit", function(e){
+                        if (!ChyrpComment.failed && !!window.FormData) {
+                            e.preventDefault();
+                            var empties = false;
+                            $(this).find("input.text, textarea").not(".optional").each(function() {
+                                if ($(this).val() == "") {
+                                    empties = true;
+                                    $(this).focus();
+                                    return false;
+                                }
+                            });
+
+                            if (empties) {
+                                alert('<?php echo __("Please complete all mandatory fields in the comment form.", "comments"); ?>');
+                                return;
+                            }
+
+                            if (!isEmail($("#comment_edit_" + id + " input[name='author_email']").val())) {
+                                alert('<?php echo __("Invalid email address.", "comments"); ?>');
+                                return;
+                            }
+
+                            var url_field = $("#comment_edit_" + id + " input[name='author_url']");
+
+                            if (url_field.val() != "" && !isURL(url_field.val())) {
+                                alert('<?php echo __("Invalid website URL.", "comments"); ?>');
+                                return;
+                            }
+
+                            $("#comment_" + id).loader();
+                            $.ajax({
+                                type: "POST",
+                                url: $(this).attr("action"),
+                                data: new FormData(this),
+                                processData: false,
+                                contentType: false,
+                                dataType: "text",
+                                error: ChyrpComment.panic,
+                            }).done(ChyrpComment.updated);
+                        }
+                    });
                     $("#comment_cancel_edit_" + id).click(function(e){
                         e.preventDefault();
 
@@ -133,8 +173,15 @@ var ChyrpComment = {
                             $("#comment_" + id).loader();
                             $.post(Site.url + "/includes/ajax.php", {
                                 action: "show_comment",
-                                comment_id: id
+                                context: Route.action,
+                                comment_id: id,
+                                reason: "cancelled"
                             }, function(data){
+                                if (isError(data)) {
+                                    ChyrpComment.panic();
+                                    return;
+                                }
+
                                 $("#comment_" + id).fadeOut("fast", function(){
                                     $(this).loader(true);
                                     $(this).replaceWith(data).fadeIn("fast");
@@ -143,52 +190,45 @@ var ChyrpComment = {
                             ChyrpComment.editing--;
                         }
                     });
-                    $("#comment_edit_" + id).on("submit", function(e){
-                        e.preventDefault();
-
-                        if (!ChyrpComment.failed && !!window.FormData) {
-                            $("#comment_" + id).loader();
-                            $.ajax({
-                                type: "POST",
-                                url: $(this).attr("action"),
-                                data: new FormData(this),
-                                processData: false,
-                                contentType: false,
-                                dataType: "html",
-                                error: ChyrpComment.panic,
-                                success: function(response) {
-                                    ChyrpComment.editing--;
-
-                                    if (isError(response)) {
-                                        ChyrpComment.panic();
-                                        return;
-                                    }
-
-                                    $.post(Site.url + "/includes/ajax.php", {
-                                        action: "show_comment",
-                                        comment_id: id,
-                                        reason: "edited"
-                                    }, function(data) {
-                                        if (isError(data)) {
-                                            ChyrpComment.panic();
-                                            return;
-                                        }
-
-                                        $("#comment_" + id).fadeOut("fast", function(){
-                                            $(this).loader(true);
-                                            $(this).replaceWith(data).fadeIn("fast");
-                                        });
-                                    }, "html").fail(ChyrpComment.panic);
-                                }
-                            });
-                        }
-                    });
                 })
+            });
+        }, "html").fail(ChyrpComment.panic);
+    },
+    updated: function(response) {
+        ChyrpComment.editing--;
+
+        if (isError(response)) {
+            ChyrpComment.panic('<?php echo __("The comment could not be updated because of an error.", "comments"); ?>');
+            return;
+        }
+
+        var id = Math.abs(response);
+
+        $.post(Site.url + "/includes/ajax.php", {
+            action: "show_comment",
+            context: Route.action,
+            comment_id: id,
+            reason: "edited"
+        }, function(data) {
+            if (isError(data)) {
+                ChyrpComment.panic();
+                return;
+            }
+
+            $("#comment_" + id).fadeOut("fast", function(){
+                $(this).loader(true);
+                $(this).replaceWith(data).fadeIn("fast");
             });
         }, "html").fail(ChyrpComment.panic);
     },
     destroy: function(id) {
         $("#comment_" + id).loader();
+
+        if (Site.key == "") {
+            ChyrpComment.panic('<?php echo __("The comment cannot be deleted because your web browser did not send proper credentials.", "comments"); ?>');
+            return;
+        }
+
         $.post(Site.url + "/includes/ajax.php", {
             action: "delete_comment",
             id: id,
@@ -204,9 +244,10 @@ var ChyrpComment = {
             });
         }, "html").fail(ChyrpComment.panic);
     },
-    panic: function() {
+    panic: function(message) {
+        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         ChyrpComment.failed = true;
-        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+        alert(message);
         $(".ajax_loading").loader(true);
         $("#comments form input[name='ajax']").remove();
     }

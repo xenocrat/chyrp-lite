@@ -22,12 +22,14 @@
 
         /**
          * Function: __construct
-         * Prepares Twig.
+         * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
             $config = Config::current();
 
-            $cache = (is_writable(CACHES_DIR) and (!DEBUG or CACHE_TWIG));
+            $cache = (is_writable(CACHES_DIR.DIR."twig") and (!DEBUG or CACHE_TWIG)) ?
+                CACHES_DIR.DIR."twig" : false ;
+
             $loaders = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
             foreach ($config->enabled_modules as $extension)
@@ -39,10 +41,10 @@
                     $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$extension.DIR."admin");
 
             $loader = new Twig_Loader_Chain($loaders);
-            $this->twig = new Twig_Environment($loader, array("debug" => (DEBUG) ? true : false,
-                                                              "strict_variables" => (DEBUG) ? true : false,
+            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                              "strict_variables" => DEBUG,
                                                               "charset" => "UTF-8",
-                                                              "cache" => ($cache) ? CACHES_DIR : false,
+                                                              "cache" => $cache,
                                                               "autoescape" => false));
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
@@ -59,15 +61,15 @@
          */
         public function parse($route) {
             $visitor = Visitor::current();
+            $config = Config::current();
 
             # Protect non-responder functions.
             if (in_array($route->action, array("__construct", "parse", "subnav_context", "display", "current")))
                 show_404();
 
             if (empty($route->action) or $route->action == "write") {
-                # "Write > Post", if they can add posts or drafts.
-                if (($visitor->group->can("add_post") or $visitor->group->can("add_draft")) and
-                    !empty(Config::current()->enabled_feathers))
+                # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
+                if (($visitor->group->can("add_post") or $visitor->group->can("add_draft")) and !empty($config->enabled_feathers))
                     return $route->action = "write_post";
 
                 # "Write > Page", if they can add pages.
@@ -130,7 +132,7 @@
             $config = Config::current();
 
             if (empty($config->enabled_feathers))
-                error(__("No Feathers"), __("Please install a feather or two in order to add a post."));
+                Flash::notice(__("You must enable at least one feather in order to write a post."), "/admin/?action=feathers");
 
             Trigger::current()->filter($options, array("write_post_options", "post_options"));
 
@@ -206,7 +208,7 @@
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
@@ -216,11 +218,11 @@
 
             Feathers::$instances[$post->feather]->update($post);
 
-            if (!isset($_POST['ajax']))
-                Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
-                              "/admin/?action=manage_posts");
-            else
-                exit((string) $_POST['id']);
+            if (isset($_POST['ajax']))
+                exit((string) $post->id);
+
+            Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
+                          "/admin/?action=manage_posts");
         }
 
         /**
@@ -259,7 +261,7 @@
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
@@ -412,7 +414,7 @@
             $page = new Page($_POST['id']);
 
             if ($page->no_results)
-                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+                show_404(__("Not Found"), __("Page not found."));
 
             fallback($_POST['status'], "public");
 
@@ -430,9 +432,8 @@
                           null,
                           (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
 
-            if (!isset($_POST['ajax']))
-                Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
-                                 "/admin/?action=manage_pages");
+            Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
+                          "/admin/?action=manage_pages");
         }
 
         /**
@@ -474,7 +475,7 @@
             $page = new Page($_POST['id']);
 
             if ($page->no_results)
-                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+                show_404(__("Not Found"), __("Page not found."));
 
             foreach ($page->children as $child)
                 if (isset($_POST['destroy_children']))
@@ -551,7 +552,7 @@
             if (!$check->no_results)
                 error(__("Error"), __("That username is already in use."));
 
-            if (empty($_POST['password1']) or empty($_POST['password2']))
+            if (empty($_POST['password1']))
                 error(__("Error"), __("Password cannot be blank."));
             elseif ($_POST['password1'] != $_POST['password2'])
                 error(__("Error"), __("Passwords do not match."));
@@ -569,6 +570,8 @@
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
 
+            $config = Config::current();
+
             if ($config->email_activation) {
                 $user = User::add($_POST['login'],
                                   $_POST['password1'],
@@ -577,8 +580,12 @@
                                   $_POST['website'],
                                   $_POST['group'],
                                   false);
+
                 correspond("activate", array("login" => $user->login,
-                                             "to" => $user->email));
+                                             "to"    => $user->email,
+                                             "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                        "&token=".token(array($user->login, $user->email))));
+
                 Flash::notice(_f("User &#8220;%s&#8221; added and activation email sent.", $user->login), "/admin/?action=manage_users");
             } else {
                 $user = User::add($_POST['login'],
@@ -587,6 +594,7 @@
                                   $_POST['full_name'],
                                   $_POST['website'],
                                   $_POST['group']);
+
               Flash::notice(_f("User &#8220;%s&#8221; added.", $user->login), "/admin/?action=manage_users");
             }
         }
@@ -602,8 +610,13 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."));
 
+            $user = new User($_GET['id']);
+
+            if ($user->no_results)
+                Flash::warning(__("User not found."), "/admin/?action=manage_users");
+
             $this->display("edit_user",
-                           array("user" => new User($_GET['id']),
+                           array("user" => $user,
                                  "groups" => Group::find(array("order" => "id ASC",
                                                                "where" => array("id not" => Config::current()->guest_group)))));
         }
@@ -620,6 +633,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $visitor = Visitor::current();
+            $config = Config::current();
 
             if (!$visitor->group->can("edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
@@ -628,17 +642,16 @@
                                                                 "id not" => $_POST['id'])));
 
             if (!$check_name->no_results)
-                Flash::notice(_f("Login &#8220;%s&#8221; is already in use.", array($_POST['login'])),
-                              "/admin/?action=edit_user&id=".$_POST['id']);
+                error(__("Error"), __("That username is already in use."));
 
             $user = new User($_POST['id']);
 
             if ($user->no_results)
-                Flash::warning(__("User not found."), "/admin/?action=manage_users");
+                show_404(__("Not Found"), __("User not found."));
 
             if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
                 error(__("Error"), __("Passwords do not match."));
-            elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 75)
+            elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 100)
                 Flash::message(__("Please consider setting a stronger password for this user."));
 
             $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
@@ -654,14 +667,21 @@
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
 
-            $user->update($_POST['login'], $password, $_POST['email'], $_POST['full_name'], $_POST['website'], $_POST['group']);
+            $user->update($_POST['login'],
+                          $password,
+                          $_POST['email'],
+                          $_POST['full_name'],
+                          $_POST['website'],
+                          $_POST['group']);
 
             if ($_POST['id'] == $visitor->id)
                 $_SESSION['password'] = $password;
 
-            if (!$user->approved)
+            if (!$user->approved and $config->email_activation)
                 correspond("activate", array("login" => $user->login,
-                                             "to" => $user->email));
+                                             "to"    => $user->email,
+                                             "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                        "&token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User updated."), "/admin/?action=manage_users");
         }
@@ -770,6 +790,13 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            fallback($_POST['permissions'], array());
+
+            $check = new Group(null, array("where" => array("name" => $_POST['name'])));
+
+            if (!$check->no_results)
+                error(__("Error"), __("That group name is already in use."));
+
             Group::add($_POST['name'], array_keys($_POST['permissions']));
 
             Flash::notice(__("Group added."), "/admin/?action=manage_groups");
@@ -786,8 +813,13 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."));
 
+            $group = new Group($_GET['id']);
+
+            if ($group->no_results)
+                Flash::warning(__("Group not found."), "/admin/?action=manage_groups");
+
             $this->display("edit_group",
-                           array("group" => new Group($_GET['id']),
+                           array("group" => $group,
                                  "permissions" => SQL::current()->select("permissions", "*", array("group_id" => 0))->fetchAll()));
         }
 
@@ -802,21 +834,20 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $permissions = array_keys($_POST['permissions']);
+            fallback($_POST['permissions'], array());
 
             $check_name = new Group(null, array("where" => array("name" => $_POST['name'],
                                                                  "id not" => $_POST['id'])));
 
             if (!$check_name->no_results)
-                Flash::notice(_f("Group name &#8220;%s&#8221; is already in use.", array($_POST['name'])),
-                              "/admin/?action=edit_group&id=".$_POST['id']);
+                error(__("Error"), __("That group name is already in use."));
 
             $group = new Group($_POST['id']);
 
             if ($group->no_results)
-                Flash::warning(__("Group not found."), "/admin/?action=manage_groups");
+                show_404(__("Not Found"), __("Group not found."));
 
-            $group->update($_POST['name'], $permissions);
+            $group->update($_POST['name'], array_keys($_POST['permissions']));
 
             Flash::notice(__("Group updated."), "/admin/?action=manage_groups");
         }
@@ -1151,6 +1182,7 @@
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
+            $sql = SQL::current();
 
             if (!$visitor->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
@@ -1172,7 +1204,8 @@
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
 
-            $sql = SQL::current();
+            if (ini_get("max_execution_time") !== 0)
+                set_time_limit(300);
 
             function media_url_scan(&$value) {
                 $config = Config::current();
@@ -1292,7 +1325,7 @@
             $this->context["disabled_modules"] = array();
 
             if (!$open = @opendir(MODULES_DIR))
-                return Flash::warning(__("Could not read modules directory."));
+                error(__("Error"), __("Could not read modules directory."));
 
             $classes = array();
 
@@ -1415,7 +1448,7 @@
             $this->context["disabled_feathers"] = array();
 
             if (!$open = @opendir(FEATHERS_DIR))
-                return Flash::warning(__("Could not read feathers directory."));
+                error(__("Error"), __("Could not read feathers directory."));
 
             while (($folder = readdir($open)) !== false) {
                 if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
@@ -1472,14 +1505,15 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
+            if (!empty($_SESSION['theme']))
+                Flash::message(__("You are currently previewing a theme.").
+                                 ' <a href="'.admin_url("preview_theme").'">'.__("Stop &rarr;").'</a>');
+
             $config = Config::current();
-
-            $this->context["preview"] = !empty($_SESSION['theme']) ? $_SESSION['theme'] : "" ;
-
             $this->context["themes"] = array();
 
             if (!$open = @opendir(THEMES_DIR))
-                return Flash::warning(__("Could not read themes directory."));
+                error(__("Error"), __("Could not read themes directory."));
 
             while (($folder = readdir($open)) !== false) {
                 if (!file_exists(THEMES_DIR.DIR.$folder.DIR."info.php"))
@@ -1489,6 +1523,9 @@
                     load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 $info = include THEMES_DIR.DIR.$folder.DIR."info.php";
+
+                if (gettype($info) != "array")
+                  continue;
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
@@ -1512,12 +1549,11 @@
 
                 $this->context["themes"][] = array("name" => $folder,
                                                    "screenshot" => (file_exists(THEMES_DIR.DIR.$folder.DIR."screenshot.png") ?
-                                                        $config->chyrp_url.DIR."themes".DIR.$folder.DIR."screenshot.png" : ""),
+                                                        $config->chyrp_url."/themes/".$folder."/screenshot.png" : ""),
                                                    "info" => $info);
             }
 
             closedir($open);
-
             $this->display("themes");
         }
 
@@ -1529,32 +1565,32 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            $type = (isset($_GET['module'])) ? "module" : "feather" ;
+            $type = (isset($_POST['module'])) ? "module" : "feather" ;
 
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
-            if (empty($_GET[$type]))
+            if (empty($_POST[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."));
 
-            if ($type == "module" and module_enabled($_GET[$type]))
+            if ($type == "module" and module_enabled($_POST[$type]))
                 Flash::warning(__("Module already enabled."), "/admin/?action=modules");
 
-            if ($type == "feather" and feather_enabled($_GET[$type]))
+            if ($type == "feather" and feather_enabled($_POST[$type]))
                 Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
 
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
-            if (!empty(Modules::$instances[$_GET[$type]]->cancelled))
+            if (!empty(Modules::$instances[$_POST[$type]]->cancelled))
                 error(__("Module Cancelled"), __("The module has cancelled execution because of an error."));
 
-            require $folder.DIR.$_GET[$type].DIR.$_GET[$type].".php";
+            require $folder.DIR.$_POST[$type].DIR.$_POST[$type].".php";
 
-            $class_name = camelize($_GET[$type]);
+            $class_name = camelize($_POST[$type]);
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
                 Flash::warning(__("Item is not a module."), "/admin/?action=modules");
@@ -1566,13 +1602,13 @@
                 call_user_func(array($class_name, "__install"));
 
             $new = $config->$enabled_array;
-            $new[] = $_GET[$type];
+            $new[] = $_POST[$type];
             $config->set($enabled_array, $new);
 
-            if (file_exists($folder.DIR.$_GET[$type].DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($_GET[$type], $folder.DIR.$_GET[$type].DIR."locale".DIR.$config->locale.".mo");
+            if (file_exists($folder.DIR.$_POST[$type].DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($_POST[$type], $folder.DIR.$_POST[$type].DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include $folder.DIR.$_GET[$type].DIR."info.php";
+            $info = include $folder.DIR.$_POST[$type].DIR."info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
@@ -1586,9 +1622,9 @@
                 Flash::message($message);
 
             if ($type == "module")
-                Flash::notice(__("Module enabled."), "/admin/?action=".pluralize($type));
+                Flash::notice(__("Module enabled."), "/admin/?action=modules");
             elseif ($type == "feather")
-                Flash::notice(__("Feather enabled."), "/admin/?action=".pluralize($type));
+                Flash::notice(__("Feather enabled."), "/admin/?action=feathers");
         }
 
         /**
@@ -1599,27 +1635,27 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            $type = (isset($_GET['module'])) ? "module" : "feather" ;
+            $type = (isset($_POST['module'])) ? "module" : "feather" ;
 
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
-            if (empty($_GET[$type]))
+            if (empty($_POST[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."));
 
-            if ($type == "module" and !module_enabled($_GET[$type]) and empty(Modules::$instances[$_GET[$type]]->cancelled))
+            if ($type == "module" and !module_enabled($_POST[$type]) and empty(Modules::$instances[$_POST[$type]]->cancelled))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
-            if ($type == "feather" and !feather_enabled($_GET[$type]))
+            if ($type == "feather" and !feather_enabled($_POST[$type]))
                 Flash::warning(__("Feather already disabled."), "/admin/?action=feathers");
 
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
 
-            $class_name = camelize($_GET[$type]);
+            $class_name = camelize($_POST[$type]);
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), false);
@@ -1627,18 +1663,16 @@
             $new = array();
 
             foreach ($config->$enabled_array as $extension) {
-              if ($extension != $_GET[$type])
+              if ($extension != $_POST[$type])
                 $new[] = $extension;
             }
 
             $config->set($enabled_array, $new);
 
             if ($type == "module")
-                Flash::notice(__("Module disabled."),
-                              "/admin/?action=".pluralize($type));
+                Flash::notice(__("Module disabled."), "/admin/?action=modules");
             elseif ($type == "feather")
-                Flash::notice(__("Module disabled."),
-                              "/admin/?action=".pluralize($type));
+                Flash::notice(__("Module disabled."), "/admin/?action=feathers");
         }
 
         /**
@@ -1646,30 +1680,30 @@
          * Changes the theme.
          */
         public function change_theme() {
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            if (empty($_GET['theme']))
-                error(__("No Theme Specified"), __("You did not specify the theme you wish to select."));
+            if (empty($_POST['theme']))
+                error(__("No Theme Specified"), __("You did not specify a theme to select or preview."));
+
+            if ($_POST['change'] != "indubitably")
+                self::preview_theme();
 
             $config = Config::current();
-            $config->set("theme", $_GET['theme']);
+            $theme = $_POST['theme'];
+            $config->set("theme", $theme);
 
-            if (file_exists(THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($_GET['theme'], THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo");
+            if (file_exists(THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include THEMES_DIR.DIR.$_GET['theme'].DIR."info.php";
+            $info = include THEMES_DIR.DIR.$theme.DIR."info.php";
             fallback($info["notifications"], array());
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
-
-            # Clear the caches made by the previous theme.
-            foreach ((array) glob(INCLUDES_DIR.DIR."caches".DIR."*.cache") as $cache)
-                @unlink($cache);
 
             Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
         }
@@ -1679,33 +1713,21 @@
          * Previews the theme.
          */
         public function preview_theme() {
-            if (!isset($_GET['hash']) or $_GET['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            Trigger::current()->call("preview_theme", !empty($_POST['theme']));
+
+            if (empty($_POST['theme'])) {
+                unset($_SESSION['theme']);
+                Flash::notice(__("Preview stopped."), "/admin/?action=themes");
+            }
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to preview themes."));
 
-            if (empty($_GET['theme']))
-                error(__("No Theme Specified"), __("You did not specify a theme to preview."));
-
-            $config = Config::current();
-
-            if (file_exists(THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($_GET['theme'], THEMES_DIR.DIR.$_GET['theme'].DIR."locale".DIR.$config->locale.".mo");
-
-            $info = include THEMES_DIR.DIR.$_GET['theme'].DIR."info.php";
-
-            # Clear the caches made by the previous theme.
-            foreach (glob(INCLUDES_DIR.DIR."caches".DIR."*.cache") as $cache)
-                @unlink($cache);
-
-            if (!empty($_SESSION['theme'])) {
-                unset($_SESSION['theme']);
-                Flash::notice(_f("Stopped previewing &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
-            } else {
-                $_SESSION['theme'] = $_GET['theme'];
-                Flash::notice(_f("Previewing theme &#8220;%s&#8221;. Press the theme's &#8220;Preview&#8221; button again to stop previewing.", array($info["name"])), "/");
-            }
+            $_SESSION['theme'] = $_POST['theme'];
+            Flash::notice(__("Preview started."), "/");
         }
 
         /**
@@ -1876,8 +1898,35 @@
         }
 
         /**
+         * Function: login
+         * Mask for MainController's login responder.
+         */
+        public function login() {
+            if (logged_in())
+                Flash::notice(__("You are already logged in."), "/admin/");
+
+            $_SESSION['redirect_to'] = "/admin/";
+            $url = (Config::current()->clean_urls) ? "/login/" : "/?action=login" ;
+            redirect($url);
+        }
+
+        /**
+         * Function: logout
+         * Logs out the current user.
+         */
+        public function logout() {
+            if (!logged_in())
+                Flash::notice(__("You aren't logged in."), "/");
+
+            session_destroy();
+            session();
+
+            Flash::notice(__("Logged out."), "/");
+        }
+
+        /**
          * Function: help
-         * Sets the $title and $body for various help IDs.
+         * Serves help pages for core and extensions.
          */
         public function help() {
             if (empty($_GET['id']))
@@ -1900,8 +1949,8 @@
                     $help = "<h1>".__("Canonical URL")."</h1>\n".
                             "<p>".__("If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:")."</p>\n".
                             "<ol>\n<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n".
-                            "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n?&gt;</code></pre>".
-                            "</li>\n<li>".__("Move the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                            "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n</code></pre>".
+                            "</li>\n<li>".__("Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
                     break;
                 case "unicode_emoticons":
                     $help = "<h1>".__("Unicode Emoticons")."</h1>\n".
@@ -2020,6 +2069,7 @@
 
             $pages["manage"][] = "new_user";
             $pages["manage"][] = "new_group";
+
             foreach (array_keys($subnav["manage"]) as $manage)
                 $pages["manage"] = array_merge($pages["manage"], array($manage,
                                                                        preg_replace_callback("/manage_(.+)/",
@@ -2070,18 +2120,15 @@
          *
          * Parameters:
          *     $action - The template file to display (sans ".twig") relative to admin/pages/ for core and extensions.
-         *     $context - The context for the template.
+         *     $context - The context to be supplied to Twig.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          */
         public function display($action, $context = array(), $title = "") {
             $this->displayed = true;
-
             fallback($title, camelize($action, true));
-
             $this->context = array_merge($context, $this->context);
 
             $trigger = Trigger::current();
-
             $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
 
             # Are there any extension-added pages?
@@ -2163,8 +2210,7 @@
             $this->context["navigation"]["extend"] = array("title" => __("Extend"),
                                                            "show" => in_array(true, $show["extend"]),
                                                            "selected" => (in_array($action, $extend) or
-                                                                         match(array("/_extend$/",
-                                                                                     "/_editor$/"), $action)));
+                                                                         match("/_extend$/", $action)));
 
             $this->subnav_context($route->action);
             $trigger->filter($this->context["selected"], "nav_selected");

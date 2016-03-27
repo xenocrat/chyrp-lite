@@ -9,8 +9,8 @@
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.01");
-    define('CHYRP_CODENAME', "Socotra");
+    define('CHYRP_VERSION',  "2016.02");
+    define('CHYRP_CODENAME', "Russet");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('ADMIN',          false);
@@ -217,32 +217,15 @@
      * Repairs the .htaccess file.
      */
     function fix_htaccess() {
-        $url = "http://".$_SERVER['HTTP_HOST'].str_replace("/upgrade.php", "", $_SERVER['REQUEST_URI']);
+        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
+        $url = $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).str_replace("/upgrade.php", "", $_SERVER['REQUEST_URI']);
         $index = (parse_url($url, PHP_URL_PATH)) ? "/".trim(parse_url($url, PHP_URL_PATH), "/")."/" : "/" ;
-
-        $path = preg_quote($index, "/");
+        $htaccess = preg_replace("~%\\{CHYRP_PATH\\}~", $index, file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
         $htaccess_has_chyrp = (file_exists(MAIN_DIR.DIR.".htaccess") and
-                               preg_match("/<IfModule mod_rewrite\\.c>\n".
-                                          "([\\s]*)RewriteEngine On\n".
-                                          "([\\s]*)RewriteBase {$path}\n".
-                                          "([\\s]*)RewriteCond %\\{REQUEST_FILENAME\\} !-f\n".
-                                          "([\\s]*)RewriteCond %\\{REQUEST_FILENAME\\} !-d\n".
-                                          "([\\s]*)RewriteRule \\^\\.\\+\\$ index\\.php \\[L\\]\n".
-                                          "(([\\s]*)RewriteRule \\^\\.\\+\\\\.twig\\$ index\\.php \\[L\\]\n)?".
-                                          "([\\s]*)<\\/IfModule>/",
-                                          file_get_contents(MAIN_DIR.DIR.".htaccess")));
+                               preg_match("~".preg_quote($htaccess, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")));
 
         if ($htaccess_has_chyrp)
             return;
-
-        $htaccess = "<IfModule mod_rewrite.c>\n".
-                    "RewriteEngine On\n".
-                    "RewriteBase {$index}\n".
-                    "RewriteCond %{REQUEST_FILENAME} !-f\n".
-                    "RewriteCond %{REQUEST_FILENAME} !-d\n".
-                    "RewriteRule ^.+\$ index.php [L]\n".
-                    "RewriteRule ^.+\\.twig\$ index.php [L]\n".
-                    "</IfModule>";
 
         if (!file_exists(MAIN_DIR.DIR.".htaccess"))
             echo __("Generating .htaccess file...").
@@ -442,8 +425,12 @@
             pre.pane:empty + h1 {
                 margin-top: 0em;
             }
-            span.yay { color: #76b362; }
-            span.boo { color: #d94c4c; }
+            span.yay {
+                color: #76b362;
+            }
+            span.boo {
+                color: #d94c4c;
+            }
             a.big,
             button {
                 box-sizing: border-box;
@@ -531,7 +518,7 @@ foreach ((array) Config::get("enabled_feathers") as $feather)
 foreach ($errors as $error)
     echo '<span role="alert">'.$error."</span>\n";
 
-          ?></pre>
+            ?></pre>
             <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
