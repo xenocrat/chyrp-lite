@@ -526,6 +526,7 @@ a.button:active,
 a.next_page:active,
 a.prev_page:active {                            border-color: #1e57ba;
                                                 outline: none }
+div.pagination a.prev_page + a.next_page {      margin-left: 1em }
 button.boo,
 a.button.boo {                                  color: #3e3634;
                                                 background-color: #faebe4;
