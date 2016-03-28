@@ -1916,12 +1916,12 @@
          */
         public function logout() {
             if (!logged_in())
-                Flash::notice(__("You aren't logged in."), "/");
+                Flash::notice(__("You aren't logged in."), Config::current()->url);
 
             session_destroy();
             session();
 
-            Flash::notice(__("Logged out."), "/");
+            Flash::notice(__("Logged out."), Config::current()->url); # Supply full URL for compatibility with canonical URLs.
         }
 
         /**
