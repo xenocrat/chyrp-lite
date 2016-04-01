@@ -24,11 +24,13 @@ var ChyrpComment = {
                 if (empties) {
                     e.preventDefault();
                     alert('<?php echo __("Please complete all mandatory fields in the comment form.", "comments"); ?>');
+                    return;
                 }
 
                 if (!isEmail($("#add_comment input[name='email']").val())) {
                     e.preventDefault();
                     alert('<?php echo __("Invalid email address.", "comments"); ?>');
+                    return;
                 }
 
                 var url_field = $("#add_comment input[name='url']");
@@ -36,6 +38,7 @@ var ChyrpComment = {
                 if (url_field.val() != "" && !isURL(url_field.val())) {
                     e.preventDefault();
                     alert('<?php echo __("Invalid website URL.", "comments"); ?>');
+                    return;
                 }
             });
         }

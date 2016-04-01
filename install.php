@@ -731,7 +731,7 @@ foreach ($errors as $error)
                 </p>
                 <p id="description_field">
                     <label for="description"><?php echo __("Description"); ?></label>
-                    <textarea name="description" rows="2" cols="40"><?php value_fallback("description"); ?></textarea>
+                    <input type="text" name="description" value="<?php value_fallback("description"); ?>" id="description">
                 </p>
                 <p id="timezone_field">
                     <label for="timezone"><?php echo __("What time is it?"); ?></label>
