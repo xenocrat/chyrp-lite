@@ -205,9 +205,10 @@
 
         case "reorder_feathers":
             if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to reorder feathers."));
+                exit; # This user cannot reorder feathers.
 
             $reorder = oneof(@$_POST['list'], $config->enabled_feathers);
+
             foreach ($reorder as &$value)
                 $value = preg_replace("/feathers\[([^\]]+)\]/", "\\1", $value);
 
