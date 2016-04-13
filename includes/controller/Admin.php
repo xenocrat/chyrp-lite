@@ -491,7 +491,7 @@
                                    null,
                                    $child->url);
 
-            Page::delete($_POST['id']);
+            Page::delete($page->id);
 
             Flash::notice(__("Page deleted."), "/admin/?action=manage_pages");
         }
