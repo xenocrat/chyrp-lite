@@ -198,6 +198,7 @@
 
             if ($like->session_hash != null) {
                 $people = $like->fetchPeople();
+
                 if (count($people) != 0)
                     foreach ($people as $person)
                         if ($person["session_hash"] == $like->session_hash) {
@@ -212,6 +213,7 @@
                 if ($visitor->group->can("like_post")) {
                     $returnStr.= "<a class=\"likes like\" href=\"".$config->chyrp_url."/?action=like&post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
                     $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='Likes icon'>";
+
                     if ($likeSetting["likeWithText"]) {
                         $returnStr.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $returnStr.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
@@ -220,6 +222,7 @@
                 }
 
                 $returnStr.= " <span class='like_text'>";
+
                 if ($like->total_count == 0)
                     $returnStr.= __("No likes yet.", "likes");
                 else
@@ -231,6 +234,7 @@
                 if ($visitor->group->can("unlike_post")) {
                     $returnStr.= "<a class=\"likes liked\" href=\"".$config->chyrp_url."/?action=unlike&post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
                     $returnStr.= "<img src=\"".$likeSetting["likeImage"]."\" alt='Likes icon'>";
+
                     if ($likeSetting["likeWithText"]) {
                         $returnStr.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $returnStr.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
@@ -239,6 +243,7 @@
                 }
 
                 $returnStr.= " <span class='like_text'>";
+
                 if ($like->total_count == 0)
                     $returnStr.= __("No likes yet.", "likes");
                 elseif ($like->total_count == 1)
