@@ -28,7 +28,7 @@
 {{ post.created_at | strftimeformat("%d %b, %Y" | translate) }}
 {% endif %}
 </a>
-{% if module_enabled("likes") and visitor.group.can("like_post") %}
+{% if module_enabled("likes") %}
 {{ post.get_likes ? "&bull; " ~ post.get_likes : "" }}
 {% endif %}
 {% if module_enabled("comments") and post.comment_status is defined %}
