@@ -46,7 +46,7 @@ var ChyrpLikes = {
         params["post_id"] = post_id;
         $.ajax({
             type: "POST",
-            url: Site.url + "/includes/ajax.php",
+            url: Site.chyrp_url + "/includes/ajax.php",
             data: params,
             beforeSend: function() {
                 ChyrpLikes.didPrevFinish = false;	

@@ -9,14 +9,13 @@
     # Parse the route.
     $route = Route::current($main);
 
-    if (!$visitor->group->can("view_site"))
-        if ($trigger->exists("can_not_view_site"))
-            $trigger->call("can_not_view_site");
-        else
-            show_403(__("Access Denied"), __("You are not allowed to view this site."));
+    if (empty($_POST['action'])) {
+        header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+        exit("Missing Argument.");
+    }
 
-    if (empty($_POST['action']))
-        error(__("Missing Argument"), __("You must specify an action."));
+    if (!$visitor->group->can("view_site"))
+        show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
     switch($_POST['action']) {
         case "edit_post":
@@ -43,7 +42,7 @@
                                                                 "groups" => Group::find(array("order" => "id ASC"))));
             exit;
 
-        case "delete_post":
+        case "destroy_post":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -78,6 +77,24 @@
             $main->display("feathers".DIR.$post->feather, array("post" => $post, "ajax_reason" => $reason));
             exit;
 
+        case "destroy_page":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a page."));
+
+            $page = new Page($_POST['id']);
+
+            if ($page->no_results)
+                show_404(__("Not Found"), __("Page not found."));
+
+            if (!Visitor::current()->group->can("delete_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
+
+            Page::delete($page->id, true);
+            exit;
+
         case "preview":
             if (!logged_in())
                 show_403(__("Access Denied"), __("You must be logged in to preview content."));
@@ -96,12 +113,12 @@
                                                           "filter" => $_POST['filter']), __("Preview"));
             exit;
 
-        case "check_confirm":
+        case "confirm":
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable extensions."));
 
             $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $info = include $dir.DIR.$_POST['check'].DIR."info.php";
+            $info = include $dir.DIR.$_POST['extension'].DIR."info.php";
             fallback($info["confirm"], "");
 
             if (!empty($info["confirm"]))
@@ -109,11 +126,11 @@
 
             exit;
 
-        case "enable_module": case "enable_feather":
+        case "enable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $type = ($_POST['action'] == "enable_module") ? "module" : "feather" ;
+            $type = ($_POST['type'] == "module") ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
                 exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable extensions.")."\"] }");
@@ -164,15 +181,13 @@
             $new[] = $_POST["extension"];
             $config->set($enabled_array, $new);
 
-            exit('{ "notifications": ['.
-                 (!empty($info["notifications"]) ? '"'.implode('", "', $info["notifications"]).'"' : "").
-                 '] }');
+            exit('{ "notifications": ['.(!empty($info["notifications"]) ? '"'.implode('", "', $info["notifications"]).'"' : "").'] }');
 
-        case "disable_module": case "disable_feather":
+        case "disable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;
+            $type = ($_POST['type'] == "module") ? "module" : "feather" ;
 
             if (!$visitor->group->can("toggle_extensions"))
                 if ($type == "module")
@@ -203,7 +218,7 @@
 
             exit('{ "notifications": [] }');
 
-        case "reorder_feathers":
+        case "sort_feathers":
             if (!$visitor->group->can("toggle_extensions"))
                 exit; # This user cannot reorder feathers.
 
@@ -225,9 +240,7 @@
     }
 
     $trigger->call("ajax");
-
-    if (!empty($_POST['action']))
-        $trigger->call("ajax_".$_POST['action']);
+    $trigger->call("ajax_".$_POST['action']);
 
     # Serve an error if no responders were found.
     header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");

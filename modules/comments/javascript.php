@@ -76,14 +76,14 @@ var ChyrpComment = {
             $.ajax({
                 type: "post",
                 dataType: "json",
-                url: Site.url + "/includes/ajax.php",
+                url: Site.chyrp_url + "/includes/ajax.php",
                 data: "action=reload_comments&post_id=" + id + "&last_comment=" + $("#comments").attr("data-timestamp"),
                 error: ChyrpComment.panic,
                 success: function(json) {
                     if (json.comment_ids.length > 0) {
                         $("#comments").attr("data-timestamp", json.last_comment);
                         $.each(json.comment_ids, function(i, id) {
-                            $.post(Site.url + "/includes/ajax.php", {
+                            $.post(Site.chyrp_url + "/includes/ajax.php", {
                                 action: "show_comment",
                                 comment_id: id
                             }, function(data){
@@ -104,7 +104,7 @@ var ChyrpComment = {
             return;
         }
 
-        $.post(Site.url + "/includes/ajax.php", {
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
             action: "edit_comment",
             comment_id: id,
             hash: Site.key
@@ -174,7 +174,7 @@ var ChyrpComment = {
 
                         if (!ChyrpComment.failed) {
                             $("#comment_" + id).loader();
-                            $.post(Site.url + "/includes/ajax.php", {
+                            $.post(Site.chyrp_url + "/includes/ajax.php", {
                                 action: "show_comment",
                                 context: Route.action,
                                 comment_id: id,
@@ -207,7 +207,7 @@ var ChyrpComment = {
 
         var id = Math.abs(response);
 
-        $.post(Site.url + "/includes/ajax.php", {
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
             action: "show_comment",
             context: Route.action,
             comment_id: id,
@@ -232,8 +232,8 @@ var ChyrpComment = {
             return;
         }
 
-        $.post(Site.url + "/includes/ajax.php", {
-            action: "delete_comment",
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
+            action: "destroy_comment",
             id: id,
             hash: Site.key
         }, function(response){

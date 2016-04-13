@@ -27,7 +27,7 @@ var ChyrpLightbox = {
             "cursor": "wait"
             },
         image: {
-            "cursor": "url('" + Site.url + "/modules/lightbox/images/zoom-in.svg') 6 6, pointer",
+            "cursor": "url('" + Site.chyrp_url + "/modules/lightbox/images/zoom-in.svg') 6 6, pointer",
             "-webkit-tap-highlight-color": "rgba(0,0,0,0)"
         },
         black: {
@@ -126,7 +126,7 @@ var ChyrpLightbox = {
         });
         bg.css({
             "opacity": 1,
-            "cursor": "url('" + Site.url + "/modules/lightbox/images/zoom-out.svg') 6 6, pointer"
+            "cursor": "url('" + Site.chyrp_url + "/modules/lightbox/images/zoom-out.svg') 6 6, pointer"
         });
     },
     hide: function() {
