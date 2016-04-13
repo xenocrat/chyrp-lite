@@ -44,6 +44,7 @@
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"));
 
+            $request = array();
             $request["action"] = "like";
             $request["post_id"] = (int) $_GET['post_id'];
 
@@ -59,6 +60,7 @@
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"));
 
+            $request = array();
             $request["action"] = "unlike";
             $request["post_id"] = (int) $_GET['post_id'];
 
@@ -86,6 +88,7 @@
             $user_id = Visitor::current()->id;
             $likeSetting = Config::current()->module_like;
 
+            $request = array();
             $request["action"] = "like";
             $request["post_id"] = (int) $_POST['post_id'];
 
@@ -129,6 +132,7 @@
             $user_id = Visitor::current()->id;
             $likeSetting = Config::current()->module_like;
 
+            $request = array();
             $request["action"] = "unlike";
             $request["post_id"] = (int) $_POST['post_id'];
 
