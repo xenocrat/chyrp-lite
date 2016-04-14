@@ -86,8 +86,6 @@
                 error(__("Error"), __("An ID is required to like a post.", "likes"));
             
             $user_id = Visitor::current()->id;
-            $likeSetting = Config::current()->module_like;
-
             $request = array();
             $request["action"] = "like";
             $request["post_id"] = (int) $_POST['post_id'];
@@ -130,8 +128,6 @@
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"));
             
             $user_id = Visitor::current()->id;
-            $likeSetting = Config::current()->module_like;
-
             $request = array();
             $request["action"] = "unlike";
             $request["post_id"] = (int) $_POST['post_id'];
@@ -205,7 +201,8 @@
                             $hasPersonLiked = true;
                             break;
                         }
-            } else $like->fetchCount();
+            } else
+                $like->fetchCount();
 
             $returnStr = "<div class='likes' id='likes_post-$post->id'>";
 
@@ -218,6 +215,7 @@
                         $returnStr.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $returnStr.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
                     }
+
                     $returnStr.= "</a>";
                 }
 
@@ -227,9 +225,8 @@
                     $returnStr.= __("No likes yet.", "likes");
                 else
                     $returnStr.= sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"), $like->total_count);
+
                 $returnStr.= "</span>";
-
-
             } else {
                 if ($visitor->group->can("unlike_post")) {
                     $returnStr.= "<a class=\"likes liked\" href=\"".$config->chyrp_url."/?action=unlike&post_id=".$request["post_id"]."\" data-post_id=\"".$request["post_id"]."\">";
@@ -239,6 +236,7 @@
                         $returnStr.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $returnStr.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
                     }
+
                     $returnStr.= "</a>";
                 }
 
@@ -250,8 +248,8 @@
                     $returnStr.= _f("You like this.", $like->total_count, "likes");
                 else
                     $returnStr.= sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
-                $returnStr.= "</span>";
 
+                $returnStr.= "</span>";
             }
 
             $returnStr.= "</div>";
@@ -265,6 +263,7 @@
             foreach ($images as $image) {
                 $pattern = "/".preg_quote(DIR, "/")."(\w.*)".preg_quote(DIR, "/")."images".preg_quote(DIR, "/")."/";
                 $image = preg_replace($pattern, "", $images);
+
                 while (list($key, $val) = each($image))
                     $arr[] = Config::current()->chyrp_url."/modules/likes/images/$val";
 
@@ -309,10 +308,10 @@
 
             foreach ($likes as $like) {
                 $user = new User($like["user_id"]);
+                $login = (!$user->no_results) ? $user->login : "" ;
 
                 $atom.= "        <chyrp:like>\r";
-                if (!$user->no_results)
-                $atom.= '            <chyrp:login>'.$user->login.'</chyrp:login>'."\r";
+                $atom.= '            <chyrp:login>'.$login.'</chyrp:login>'."\r";
                 $atom.= '            <published>'.$like["timestamp"].'</published>'."\r";
                 $atom.= '            <chyrp:hash>'.$like["session_hash"].'</chyrp:hash>'."\r";
                 $atom.= "        </chyrp:like>\r";
