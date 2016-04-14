@@ -57,7 +57,7 @@
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
-            Post::delete($_POST['id']);
+            Post::delete($post->id);
             exit;
 
         case "view_post":
