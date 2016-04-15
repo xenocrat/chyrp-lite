@@ -52,37 +52,40 @@ var ChyrpLikes = {
                 ChyrpLikes.didPrevFinish = false;	
             },
             success: function(response) {
-                if(response.success == true)
-                    callback(response);
-                else
+                if (isError(response)) {
                     ChyrpLikes.panic();
+                    return;
+                }
+
+                if (response != "")
+                    callback(response);
             },
             complete: function(response) {
                 ChyrpLikes.didPrevFinish = true;
             },
-            dataType: "json",
+            dataType: "html",
             cache: false,
             error: ChyrpLikes.panic
         })
     },
     toggle: function(post_id) {
-        if ($("#likes_post-"+post_id+" a.liked").length)
+        if ($("#likes_" + post_id + " a.liked").length)
             ChyrpLikes.unlike(post_id);
         else
             ChyrpLikes.like(post_id);
     },
     like: function(post_id) {
         ChyrpLikes.makeCall(post_id,function(response) {
-            var postDom = $("#likes_post-"+post_id);
-            postDom.children("span.like_text").html(response.likeText);
-            postDom.children("a.like").removeClass("like").addClass("liked");
+            var div = $("#likes_" + post_id);
+            div.children("span.like_text").html(response);
+            div.children("a.like").removeClass("like").addClass("liked");
         }, false);
     },
     unlike: function(post_id) {
         ChyrpLikes.makeCall(post_id,function(response) {
-            var postDom = $("#likes_post-"+post_id);
-            postDom.children("span.like_text").html(response.likeText);
-            postDom.children("a.liked").removeClass("liked").addClass("like");
+            var div = $("#likes_" + post_id);
+            div.children("span.like_text").html(response);
+            div.children("a.liked").removeClass("liked").addClass("like");
         }, true);
     },
     panic: function() {
