@@ -32,7 +32,7 @@ var ChyrpLikes = {
             observer.observe(target, config);
         }
     },
-    makeCall: function(post_id, callback, isUnlike) {
+    send: function(post_id, callback, isUnlike) {
         if (!ChyrpLikes.didPrevFinish)
             return false;
 
@@ -41,13 +41,13 @@ var ChyrpLikes = {
         else
             ChyrpLikes.action = "like";
 
-        params = {};
-        params["action"] = ChyrpLikes.action;
-        params["post_id"] = post_id;
         $.ajax({
             type: "POST",
             url: Site.chyrp_url + "/includes/ajax.php",
-            data: params,
+            data: {
+                "action": ChyrpLikes.action,
+                "post_id": post_id
+            },
             beforeSend: function() {
                 ChyrpLikes.didPrevFinish = false;	
             },
@@ -75,14 +75,14 @@ var ChyrpLikes = {
             ChyrpLikes.like(post_id);
     },
     like: function(post_id) {
-        ChyrpLikes.makeCall(post_id,function(response) {
+        ChyrpLikes.send(post_id,function(response) {
             var div = $("#likes_" + post_id);
             div.children("span.like_text").html(response);
             div.children("a.like").removeClass("like").addClass("liked");
         }, false);
     },
     unlike: function(post_id) {
-        ChyrpLikes.makeCall(post_id,function(response) {
+        ChyrpLikes.send(post_id,function(response) {
             var div = $("#likes_" + post_id);
             div.children("span.like_text").html(response);
             div.children("a.liked").removeClass("liked").addClass("like");
