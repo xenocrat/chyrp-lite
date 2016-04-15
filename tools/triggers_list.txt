@@ -5,20 +5,19 @@
 admin_write_wysiwyg
 -------------------
 Called from:
-	admin/admin.js.php on line 234
+	admin/admin.js.php on line 235
 
 
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 482
+	admin/admin.js.php on line 484
 
 
 can_not_view_site
 -----------------
 Called from:
 	admin/index.php on line 19
-	includes/ajax.php on line 14
 	index.php on line 17
 
 
@@ -192,7 +191,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 226
+	includes/ajax.php on line 242
 
 
 change_setting
@@ -298,7 +297,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 201
+	includes/javascript.php on line 250
 
 
 add_group

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-03-25 15:07+0000\n"
+"POT-Creation-Date: 2016-04-15 15:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,16 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: includes/ajax.php:16
-#: includes/ajax.php:24
-#: includes/ajax.php:35
-#: includes/ajax.php:48
-#: includes/ajax.php:59
-#: includes/ajax.php:83
-#: includes/ajax.php:101
-#: includes/ajax.php:114
-#: includes/ajax.php:173
-#: includes/ajax.php:208
+#: includes/ajax.php:18
+#: includes/ajax.php:23
+#: includes/ajax.php:34
+#: includes/ajax.php:47
+#: includes/ajax.php:58
+#: includes/ajax.php:82
+#: includes/ajax.php:93
+#: includes/ajax.php:100
+#: includes/ajax.php:118
+#: includes/ajax.php:131
+#: includes/ajax.php:188
 #: includes/controller/Admin.php:79
 #: includes/controller/Admin.php:99
 #: includes/controller/Admin.php:107
@@ -102,24 +103,16 @@ msgstr ""
 msgid "Access Denied"
 msgstr ""
 
-#: includes/ajax.php:16
+#: includes/ajax.php:18
 #: index.php:23
 msgid "You are not allowed to view this site."
 msgstr ""
 
-#: includes/ajax.php:19
-#: includes/controller/Admin.php:1933
-msgid "Missing Argument"
-msgstr ""
-
-#: includes/ajax.php:19
-msgid "You must specify an action."
-msgstr ""
-
-#: includes/ajax.php:24
-#: includes/ajax.php:48
-#: includes/ajax.php:114
-#: includes/ajax.php:173
+#: includes/ajax.php:23
+#: includes/ajax.php:47
+#: includes/ajax.php:82
+#: includes/ajax.php:131
+#: includes/ajax.php:188
 #: includes/controller/Admin.php:159
 #: includes/controller/Admin.php:217
 #: includes/controller/Admin.php:253
@@ -144,9 +137,10 @@ msgstr ""
 msgid "Invalid security key."
 msgstr ""
 
-#: includes/ajax.php:27
-#: includes/ajax.php:51
-#: includes/ajax.php:71
+#: includes/ajax.php:26
+#: includes/ajax.php:50
+#: includes/ajax.php:70
+#: includes/ajax.php:85
 #: includes/controller/Admin.php:178
 #: includes/controller/Admin.php:203
 #: includes/controller/Admin.php:234
@@ -165,14 +159,15 @@ msgstr ""
 msgid "No ID Specified"
 msgstr ""
 
-#: includes/ajax.php:27
+#: includes/ajax.php:26
 #: includes/controller/Admin.php:178
 msgid "An ID is required to edit a post."
 msgstr ""
 
-#: includes/ajax.php:32
-#: includes/ajax.php:56
-#: includes/ajax.php:76
+#: includes/ajax.php:31
+#: includes/ajax.php:55
+#: includes/ajax.php:75
+#: includes/ajax.php:90
 #: includes/controller/Admin.php:211
 #: includes/controller/Admin.php:264
 #: includes/controller/Admin.php:417
@@ -182,9 +177,9 @@ msgstr ""
 msgid "Not Found"
 msgstr ""
 
-#: includes/ajax.php:32
-#: includes/ajax.php:56
-#: includes/ajax.php:76
+#: includes/ajax.php:31
+#: includes/ajax.php:55
+#: includes/ajax.php:75
 #: includes/controller/Admin.php:183
 #: includes/controller/Admin.php:211
 #: includes/controller/Admin.php:239
@@ -197,73 +192,93 @@ msgstr ""
 msgid "Post not found."
 msgstr ""
 
-#: includes/ajax.php:35
+#: includes/ajax.php:34
 msgid "You do not have sufficient privileges to edit posts."
 msgstr ""
 
-#: includes/ajax.php:51
+#: includes/ajax.php:50
 #: includes/controller/Admin.php:234
 #: includes/controller/Admin.php:256
 msgid "An ID is required to delete a post."
 msgstr ""
 
-#: includes/ajax.php:59
+#: includes/ajax.php:58
 #: includes/controller/Admin.php:242
 #: includes/controller/Admin.php:267
 msgid "You do not have sufficient privileges to delete this post."
 msgstr ""
 
-#: includes/ajax.php:71
+#: includes/ajax.php:70
 msgid "An ID is required to view a post."
 msgstr ""
 
-#: includes/ajax.php:83
+#: includes/ajax.php:85
+#: includes/controller/Admin.php:448
+#: includes/controller/Admin.php:470
+msgid "An ID is required to delete a page."
+msgstr ""
+
+#: includes/ajax.php:90
+#: includes/controller/Admin.php:390
+#: includes/controller/Admin.php:417
+#: includes/controller/Admin.php:453
+#: includes/controller/Admin.php:478
+msgid "Page not found."
+msgstr ""
+
+#: includes/ajax.php:93
+#: includes/controller/Admin.php:445
+#: includes/controller/Admin.php:464
+msgid "You do not have sufficient privileges to delete pages."
+msgstr ""
+
+#: includes/ajax.php:100
 msgid "You must be logged in to preview content."
 msgstr ""
 
-#: includes/ajax.php:96
+#: includes/ajax.php:113
 msgid "Preview"
 msgstr ""
 
-#: includes/ajax.php:101
+#: includes/ajax.php:118
 msgid "You do not have sufficient privileges to enable/disable extensions."
 msgstr ""
 
-#: includes/ajax.php:119
+#: includes/ajax.php:136
 #: includes/controller/Admin.php:1574
 msgid "You do not have sufficient privileges to enable extensions."
 msgstr ""
 
-#: includes/ajax.php:122
+#: includes/ajax.php:139
 #: includes/controller/Admin.php:1577
 msgid "You did not specify an extension to enable."
 msgstr ""
 
-#: includes/ajax.php:142
+#: includes/ajax.php:159
 #: includes/controller/Admin.php:1589
 msgid "Module Cancelled"
 msgstr ""
 
-#: includes/ajax.php:142
+#: includes/ajax.php:159
 #: includes/controller/Admin.php:1589
 msgid "The module has cancelled execution because of an error."
 msgstr ""
 
-#: includes/ajax.php:148
+#: includes/ajax.php:165
 #: includes/controller/Admin.php:1617
 #, php-format
 msgid "Please create the directory <em>%s</em> in your install directory."
 msgstr ""
 
-#: includes/ajax.php:150
+#: includes/ajax.php:167
 #: includes/controller/Admin.php:1619
 #: install.php:773
 #, php-format
 msgid "Please make <em>%s</em> writable by the server."
 msgstr ""
 
-#: includes/ajax.php:155
-#: includes/ajax.php:158
+#: includes/ajax.php:172
+#: includes/ajax.php:175
 #: includes/class/Config.php:26
 #: includes/class/Config.php:65
 #: includes/class/Config.php:70
@@ -317,28 +332,24 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/ajax.php:155
+#: includes/ajax.php:172
 #: includes/controller/Admin.php:1596
 msgid "Item is not a module."
 msgstr ""
 
-#: includes/ajax.php:158
+#: includes/ajax.php:175
 #: includes/controller/Admin.php:1599
 msgid "Item is not a feather."
 msgstr ""
 
-#: includes/ajax.php:179
+#: includes/ajax.php:194
 #: includes/controller/Admin.php:1644
 msgid "You do not have sufficient privileges to disable extensions."
 msgstr ""
 
-#: includes/ajax.php:182
+#: includes/ajax.php:197
 #: includes/controller/Admin.php:1647
 msgid "You did not specify an extension to disable."
-msgstr ""
-
-#: includes/ajax.php:208
-msgid "You do not have sufficient privileges to reorder feathers."
 msgstr ""
 
 #: includes/class/Model.php:467
@@ -476,13 +487,6 @@ msgstr ""
 msgid "An ID is required to edit a page."
 msgstr ""
 
-#: includes/controller/Admin.php:390
-#: includes/controller/Admin.php:417
-#: includes/controller/Admin.php:453
-#: includes/controller/Admin.php:478
-msgid "Page not found."
-msgstr ""
-
 #: includes/controller/Admin.php:403
 msgid "You do not have sufficient privileges to edit pages."
 msgstr ""
@@ -494,16 +498,6 @@ msgstr ""
 #: includes/controller/Admin.php:435
 #: includes/controller/Admin.php:1887
 msgid "View page &rarr;"
-msgstr ""
-
-#: includes/controller/Admin.php:445
-#: includes/controller/Admin.php:464
-msgid "You do not have sufficient privileges to delete pages."
-msgstr ""
-
-#: includes/controller/Admin.php:448
-#: includes/controller/Admin.php:470
-msgid "An ID is required to delete a page."
 msgstr ""
 
 #: includes/controller/Admin.php:496
@@ -871,6 +865,10 @@ msgstr ""
 #: includes/controller/Admin.php:1924
 #: includes/controller/Main.php:638
 msgid "Logged out."
+msgstr ""
+
+#: includes/controller/Admin.php:1933
+msgid "Missing Argument"
 msgstr ""
 
 #: includes/controller/Admin.php:1933
@@ -1500,44 +1498,53 @@ msgstr ""
 msgid "Unable to send email."
 msgstr ""
 
-#: includes/javascript.php:31
+#: includes/javascript.php:33
 msgid "Are you sure you want to delete this post? If you wish to hide it, save it as a draft."
 msgstr ""
 
-#: includes/javascript.php:42
+#: includes/javascript.php:44
 msgid "The post cannot be edited because your web browser did not send proper credentials."
 msgstr ""
 
-#: includes/javascript.php:65
+#: includes/javascript.php:67
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: includes/javascript.php:68
+#: includes/javascript.php:70
 msgid "More Options &darr;"
 msgstr ""
 
-#: includes/javascript.php:85
+#: includes/javascript.php:87
 msgid "Please complete all mandatory fields in the edit form."
 msgstr ""
 
-#: includes/javascript.php:130
+#: includes/javascript.php:132
 msgid "The post could not be updated because of an error."
 msgstr ""
 
-#: includes/javascript.php:139
+#: includes/javascript.php:141
 msgid "Post has been saved as a draft."
 msgstr ""
 
-#: includes/javascript.php:144
+#: includes/javascript.php:146
 msgid "Post has been published."
 msgstr ""
 
-#: includes/javascript.php:169
+#: includes/javascript.php:171
 msgid "The post cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
-#: includes/javascript.php:194
+#: includes/javascript.php:196
+#: includes/javascript.php:244
 msgid "Oops! Something went wrong on this web page."
+msgstr ""
+
+#: includes/javascript.php:210
+msgid "Are you sure you want to delete this page? Child pages will also be deleted."
+msgstr ""
+
+#: includes/javascript.php:221
+msgid "The page cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
 #: includes/lib/Leaf.php:168
