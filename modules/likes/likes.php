@@ -99,8 +99,8 @@
             elseif ($like->total_count == 1)
                 $response = _f("You like this.", $like->total_count, "likes");
             else
-                $response = sprintf(_p("You and %d person like this.",
-                                       "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
+                $response = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
+                                    ($like->total_count - 1));
 
             exit($response);
         }
@@ -124,8 +124,8 @@
             if ($like->total_count == 0)
                 $response = __("No likes yet.", "likes");
             else
-                $response = sprintf(_p("%d person likes this.",
-                                       "%d people like this.", $like->total_count, "likes"), $like->total_count);
+                $response = sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"),
+                                    $like->total_count);
 
             exit($response);
         }
@@ -192,8 +192,8 @@
                 if ($like->total_count == 0)
                     $html.= __("No likes yet.", "likes");
                 else
-                    $html.= sprintf(_p("%d person likes this.",
-                                       "%d people like this.", $like->total_count, "likes"), $like->total_count);
+                    $html.= sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"),
+                                    $like->total_count);
 
                 $html.= "</span>";
             } else {
@@ -219,8 +219,8 @@
                 elseif ($like->total_count == 1)
                     $html.= _f("You like this.", $like->total_count, "likes");
                 else
-                    $html.= sprintf(_p("You and %d person like this.",
-                                       "You and %d people like this.", ($like->total_count - 1), "likes"), ($like->total_count - 1));
+                    $html.= sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
+                                    ($like->total_count - 1));
 
                 $html.= "</span>";
             }
