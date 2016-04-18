@@ -1,7 +1,6 @@
 var ChyrpLikes = {
-    action: "like",
     failed: false,
-    didPrevFinish: true,
+    busy: false,
     init: function() {
         if (Site.ajax) {
             $("div.likes a.likes").click(function(e) {
@@ -33,23 +32,18 @@ var ChyrpLikes = {
         }
     },
     send: function(post_id, callback, isUnlike) {
-        if (!ChyrpLikes.didPrevFinish)
+        if (ChyrpLikes.busy)
             return false;
-
-        if (isUnlike == true)
-            ChyrpLikes.action = "unlike";
-        else
-            ChyrpLikes.action = "like";
 
         $.ajax({
             type: "POST",
             url: Site.chyrp_url + "/includes/ajax.php",
             data: {
-                "action": ChyrpLikes.action,
+                "action": (isUnlike) ? "unlike" : "like",
                 "post_id": post_id
             },
             beforeSend: function() {
-                ChyrpLikes.didPrevFinish = false;	
+                ChyrpLikes.busy = true;	
             },
             success: function(response) {
                 if (isError(response)) {
@@ -61,32 +55,26 @@ var ChyrpLikes = {
                     callback(response);
             },
             complete: function(response) {
-                ChyrpLikes.didPrevFinish = true;
+                ChyrpLikes.busy = false;
             },
             dataType: "html",
             cache: false,
             error: ChyrpLikes.panic
-        })
+        });
     },
     toggle: function(post_id) {
         if ($("#likes_" + post_id + " a.liked").length)
-            ChyrpLikes.unlike(post_id);
+            ChyrpLikes.send(post_id, function(response) {
+                var div = $("#likes_" + post_id);
+                div.children("span.like_text").html(response);
+                div.children("a.liked").removeClass("liked").addClass("like");
+            }, true);
         else
-            ChyrpLikes.like(post_id);
-    },
-    like: function(post_id) {
-        ChyrpLikes.send(post_id,function(response) {
-            var div = $("#likes_" + post_id);
-            div.children("span.like_text").html(response);
-            div.children("a.like").removeClass("like").addClass("liked");
-        }, false);
-    },
-    unlike: function(post_id) {
-        ChyrpLikes.send(post_id,function(response) {
-            var div = $("#likes_" + post_id);
-            div.children("span.like_text").html(response);
-            div.children("a.liked").removeClass("liked").addClass("like");
-        }, true);
+            ChyrpLikes.send(post_id, function(response) {
+                var div = $("#likes_" + post_id);
+                div.children("span.like_text").html(response);
+                div.children("a.like").removeClass("like").addClass("liked");
+            }, false);
     },
     panic: function() {
         ChyrpLikes.failed = true;
