@@ -99,12 +99,7 @@
         }
 
         private function getIP() {
-            if (isset($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) === TRUE)
-                return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
-            elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) === TRUE)
-                return $_SERVER['HTTP_X_FORWARDED_FOR'];
-            else
-                return $_SERVER['REMOTE_ADDR'];
+            return oneof(@$_SERVER['HTTP_X_CLUSTER_CLIENT_IP'], @$_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['REMOTE_ADDR']);
         }
 
         static function install() {
