@@ -115,7 +115,7 @@
 
         case "confirm":
             if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable extensions."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $info = include $dir.DIR.$_POST['extension'].DIR."info.php";
@@ -130,35 +130,49 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $type = ($_POST['type'] == "module") ? "module" : "feather" ;
-
             if (!$visitor->group->can("toggle_extensions"))
                 exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable extensions.")."\"] }");
+
+            $type = ($_POST['type'] == "module") ? "module" : "feather" ;
 
             if (empty($_POST["extension"]))
                 exit("{ \"notifications\": [\"".__("You did not specify an extension to enable.")."\"] }");
 
-            if (($type == "module" and module_enabled($_POST['extension'])) or
-                ($type == "feather" and feather_enabled($_POST['extension'])))
-                exit("{ \"notifications\": [] }");
-
+            $name          = $_POST["extension"];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
+            $class_name    = camelize($name);
 
-            if (file_exists($folder.DIR.$_POST["extension"].DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($_POST["extension"], $folder.DIR.$_POST["extension"].DIR."locale".DIR.$config->locale.".mo");
+            if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
+                show_404(__("Not Found"), __("Extension not found."));
 
-            $info = include $folder.DIR.$_POST["extension"].DIR."info.php";
+            require $folder.DIR.$name.DIR.$name.".php";
+
+            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
+                show_404(__("Not Found"), __("Module not found."));
+
+            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
+                show_404(__("Not Found"), __("Feather not found."));
+
+            if ($type == "module" and (module_enabled($_POST['extension']) or !empty(Modules::$instances[$name]->cancelled)))
+                exit("{ \"notifications\": [\"".__("Module already enabled.")."\"] }");
+
+            if ($type == "feather" and feather_enabled($_POST['extension']))
+                exit("{ \"notifications\": [\"".__("Feather already enabled.")."\"] }");
+
+            if (file_exists($folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
+
+            if (method_exists($class_name, "__install"))
+                call_user_func(array($class_name, "__install"));
+
+            $new = $config->$enabled_array;
+            $new[] = $name;
+            $config->set($enabled_array, $new);
+
+            $info = include $folder.DIR.$name.DIR."info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
-
-            foreach ($info["notifications"] as &$notification)
-                $notification = addslashes($notification);
-
-            if (!empty(Modules::$instances[$_POST["extension"]]->cancelled))
-                error(__("Module Cancelled"), __("The module has cancelled execution because of an error."));
-
-            require $folder.DIR.$_POST["extension"].DIR.$_POST["extension"].".php";
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
@@ -166,20 +180,8 @@
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
                     $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
-            $class_name = camelize($_POST["extension"]);
-
-            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                error(__("Error"), __("Item is not a module."));
-
-            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                error(__("Error"), __("Item is not a feather."));
-
-            if (method_exists($class_name, "__install"))
-                call_user_func(array($class_name, "__install"));
-
-            $new = $config->$enabled_array;
-            $new[] = $_POST["extension"];
-            $config->set($enabled_array, $new);
+            foreach ($info["notifications"] as &$notification)
+                $notification = addslashes(strip_tags($notification));
 
             exit('{ "notifications": ['.(!empty($info["notifications"]) ? '"'.implode('", "', $info["notifications"]).'"' : "").'] }');
 
@@ -187,22 +189,29 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $type = ($_POST['type'] == "module") ? "module" : "feather" ;
-
             if (!$visitor->group->can("toggle_extensions"))
-                if ($type == "module")
                 exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to disable extensions.")."\"] }");
+
+            $type = ($_POST['type'] == "module") ? "module" : "feather" ;
 
             if (empty($_POST["extension"]))
                 exit("{ \"notifications\": [\"".__("You did not specify an extension to disable.")."\"] }");
 
-            if (($type == "module" and !module_enabled($_POST['extension'])) or
-                ($type == "feather" and !feather_enabled($_POST['extension'])))
-                exit("{ \"notifications\": [] }");
-
+            $name          = $_POST["extension"];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $class_name    = camelize($name);
 
-            $class_name = camelize($_POST["extension"]);
+            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
+                show_404(__("Not Found"), __("Module not found."));
+
+            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
+                show_404(__("Not Found"), __("Feather not found."));
+
+            if ($type == "module" and !module_enabled($name) and empty(Modules::$instances[$name]->cancelled))
+                exit("{ \"notifications\": [\"".__("Module already disabled.")."\"] }");
+
+            if ($type == "feather" and feather_enabled($name))
+                exit("{ \"notifications\": [\"".__("Feather already disabled.")."\"] }");
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), ($_POST['confirm'] == "1"));
@@ -210,32 +219,22 @@
             $new = array();
 
             foreach ($config->$enabled_array as $extension) {
-              if ($extension != $_POST['extension'])
+              if ($extension != $name)
                 $new[] = $extension;
             }
 
             $config->set($enabled_array, $new);
 
+            if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
+                unset($_SESSION['latest_feather']);
+
             exit('{ "notifications": [] }');
 
-        case "sort_feathers":
-            if (!$visitor->group->can("toggle_extensions"))
-                exit; # This user cannot reorder feathers.
+        case "latest_feather":
+            if (empty($_POST['feather']) or !in_array($_POST['feather'], $config->enabled_feathers))
+                show_404(__("Not Found"), __("Feather not found."));
 
-            $reorder = oneof(@$_POST['list'], $config->enabled_feathers);
-
-            foreach ($reorder as &$value)
-                $value = preg_replace("/feathers\[([^\]]+)\]/", "\\1", $value);
-
-            foreach ($config->enabled_feathers as $feather)
-                if (!in_array($feather, $reorder))
-                    exit; # Attempt to disable feather.
-
-            foreach ($reorder as $feather)
-                if (!in_array($feather, $config->enabled_feathers))
-                    exit; # Attempt to enable feather.
-
-            $config->set("enabled_feathers", $reorder);
+            $_SESSION['latest_feather'] = $_POST['feather'];
             exit;
     }
 

@@ -235,7 +235,7 @@ var Write = {
     wysiwyg: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
         if (/(write)_/.test(Route.action))
-            Write.sort_feathers();
+            Write.latest_feather();
 
         // Insert buttons for ajax previews.
         if (Write.preview && !Write.wysiwyg)
@@ -256,19 +256,12 @@ var Write = {
                 );
             });
     },
-    sort_feathers: function() {
-        // Make the selected tab the first tab.
-        $("#sub_nav").children(".selected").detach().prependTo("#sub_nav");
-
-        var feathers = new Array();
-        $("#sub_nav").children("[id]").each(function() {
-            feathers[feathers.length] = $(this).attr("id");
-        });
-
-        // Update feather order with current tab order.
+    latest_feather: function() {
+        // Validate and remember the latest feather.
+        var selected = $("#sub_nav").children(".selected").attr("id").replace(/feathers\[([^\]]+)\]/, "$1");
         $.post(Site.chyrp_url + "/includes/ajax.php", {
-            action: "sort_feathers",
-            list: feathers
+            action: "latest_feather",
+            feather: selected
         });
     },
     ajax_previews: function(content, filter) {
