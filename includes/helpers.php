@@ -279,6 +279,7 @@
                               "/child/i" => "children",
                               "/cow/i" => "kine",
                               "/goose/i" => "geese",
+                              "/datum$/i" => "data",
                               "/(penis)$/i" => "\\1es", # Take that, Rails!
                               "/(ax|test)is$/i" => "\\1es",
                               "/(octop|vir)us$/i" => "\\1ii",
@@ -321,6 +322,7 @@
                               "/children/i" => "child",
                               "/kine/i" => "cow",
                               "/geese/i" => "goose",
+                              "/data$/i" => "datum",
                               "/(penis)es$/i" => "\\1",
                               "/(ax|test)es$/i" => "\\1is",
                               "/(octopi|viri|cact)i$/i" => "\\1us",
