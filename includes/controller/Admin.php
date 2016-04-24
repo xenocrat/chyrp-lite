@@ -1614,7 +1614,7 @@
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
 
-            Flash::notice(__("Extension enabled."), "/admin/?action=feathers");
+            Flash::notice(__("Extension enabled."), "/admin/?action=".pluralize($type));
         }
 
         /**
@@ -1667,7 +1667,7 @@
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
 
-            Flash::notice(__("Extension disabled."), "/admin/?action=modules");
+            Flash::notice(__("Extension disabled."), "/admin/?action=".pluralize($type));
         }
 
         /**
