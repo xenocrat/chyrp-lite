@@ -851,7 +851,6 @@
      */
     function admin_url($action = "", $params = array()) {
         $config = Config::current();
-
         $request = !empty($action) ? array("action=".$action) : array() ;
 
         foreach ($params as $key => $value)
@@ -923,8 +922,7 @@
      *     Whether or not the requested module is enabled.
      */
     function module_enabled($name) {
-        $config = Config::current();
-        return in_array($name, $config->enabled_modules);
+        return in_array($name, Config::current()->enabled_modules);
     }
 
     /**
@@ -938,8 +936,7 @@
      *     Whether or not the requested feather is enabled.
      */
     function feather_enabled($name) {
-        $config = Config::current();
-        return in_array($name, $config->enabled_feathers);
+        return in_array($name, Config::current()->enabled_feathers);
     }
 
     /**
@@ -954,7 +951,9 @@
      *     A module can cancel itself in its __construct method.
      */
      function cancel_module($target, $reason = "") {
+        $config = Config::current();
         $this_disabled = array();
+
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) : $reason ;
 
@@ -963,8 +962,6 @@
 
         if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
             Flash::warning($message);
-
-        $config = Config::current();
 
         foreach ($config->enabled_modules as $module)
             if ($module != $target)
