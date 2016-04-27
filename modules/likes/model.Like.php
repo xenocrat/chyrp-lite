@@ -10,7 +10,6 @@
         public $belongs_to = array("post", "user");
         public $post_id;
         public $user_id;
-        public $user_name;
         public $session_hash;
         public $total_count;
 
@@ -20,16 +19,13 @@
          *     <Model::grab>
          */
         public function __construct($post_id = null, $user_id = null) {
-            # user info
+            # User attributes.
             $this->user_id = isset($user_id) ? $user_id : Visitor::current()->id ;
-            $this->user_name = null;
+            $this->session_hash = md5($this->user_id.$_SERVER['REMOTE_ADDR']);
 
-            # post info
+            # Post attributes.
             $this->total_count = 0;
             $this->post_id = !empty($post_id) ? $post_id : null ;
-
-            # inits
-            $this->cookieInit();
         }
 
         /**
@@ -90,18 +86,6 @@
             return $count;
         }
 
-        public function cookieInit() {
-            if (!isset($_COOKIE["likes_sh"])) {
-                $this->session_hash = md5($this->user_id.$this->getIP());
-                setcookie("likes_sh", $this->session_hash, time() + 31104000, "/");
-            } else
-                $this->session_hash = fix($_COOKIE["likes_sh"]);
-        }
-
-        private function getIP() {
-            return oneof(@$_SERVER['HTTP_X_CLUSTER_CLIENT_IP'], @$_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['REMOTE_ADDR']);
-        }
-
         static function install() {
             $config = Config::current();
             $sql = SQL::current();
@@ -115,6 +99,7 @@
                               timestamp DATETIME DEFAULT NULL,
                               session_hash VARCHAR(32) NOT NULL,
                               KEY key_post_id (post_id),
+                              UNIQUE key_post_user_pair (post_id, user_id),
                               UNIQUE key_post_id_sh_pair (post_id, session_hash)
                             ) DEFAULT CHARSET=utf8");
             } else {
@@ -127,6 +112,7 @@
                               session_hash VARCHAR(32) NOT NULL
                             )");
                 $sql->query("CREATE INDEX IF NOT EXISTS key_post_id ON __likes (post_id)");
+                $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_post_user_pair ON __likes (post_id, user_id)");
                 $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_post_id_sh_pair ON __likes (post_id, session_hash)");
             }
                                                                     # Add these strings to the .pot file:
