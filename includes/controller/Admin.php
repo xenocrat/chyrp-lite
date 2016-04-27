@@ -1607,9 +1607,9 @@
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", $config->uploads_path);
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", $config->uploads_path);
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
@@ -1700,7 +1700,7 @@
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
 
-            Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
+            Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", fix($info["name"])), "/admin/?action=themes");
         }
 
         /**
@@ -1910,13 +1910,15 @@
          * Logs out the current user.
          */
         public function logout() {
+            $config = Config::current();
+
             if (!logged_in())
-                Flash::notice(__("You aren't logged in."), Config::current()->url);
+                Flash::notice(__("You aren't logged in."), $config->url);
 
             session_destroy();
             session();
 
-            Flash::notice(__("Logged out."), Config::current()->url); # Supply full URL for compatibility with canonical URLs.
+            Flash::notice(__("Logged out."), $config->url); # Supply full URL for compatibility with canonical URLs.
         }
 
         /**
