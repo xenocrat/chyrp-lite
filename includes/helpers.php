@@ -90,7 +90,7 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        return (strpos(@$_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
+        return (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
     }
 
     /**
