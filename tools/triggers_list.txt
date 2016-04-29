@@ -485,6 +485,56 @@ Arguments:
 	$post, $new_page, $link
 
 
+before_ajax_edit_post_fields
+----------------------------
+Called from:
+	themes/blossom/forms/post/edit.twig on line 3
+	themes/sparrow/forms/post/edit.twig on line 3
+	themes/topaz/forms/post/edit.twig on line 3
+Arguments:
+	feather
+
+
+user_controls
+-------------
+Called from:
+	themes/blossom/forms/user/controls.twig on line 17
+	themes/sparrow/forms/user/controls.twig on line 17
+	themes/topaz/forms/user/controls.twig on line 17
+
+
+user_login
+----------
+Called from:
+	themes/blossom/forms/user/login.twig on line 11
+	themes/sparrow/forms/user/login.twig on line 11
+	themes/topaz/forms/user/login.twig on line 11
+
+
+user_register
+-------------
+Called from:
+	themes/blossom/forms/user/register.twig on line 16
+	themes/sparrow/forms/user/register.twig on line 16
+	themes/topaz/forms/user/register.twig on line 16
+
+
+end_head
+--------
+Called from:
+	themes/blossom/layouts/default.twig on line 17
+	themes/sparrow/layouts/default.twig on line 17
+	themes/topaz/layouts/default.twig on line 17
+
+
+end_content
+-----------
+Called from:
+	themes/blossom/layouts/default.twig on line 114
+	themes/sparrow/layouts/default.twig on line 100
+	themes/topaz/layouts/default.twig on line 113
+
+
 
 ==============================================
  Trigger Filters
