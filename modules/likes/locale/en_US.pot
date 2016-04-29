@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-04-15 15:59+0000\n"
+"POT-Creation-Date: 2016-04-29 17:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -56,7 +56,7 @@ msgstr ""
 
 #: modules/likes/likes.php:44
 #: modules/likes/likes.php:83
-#: modules/likes/model.Like.php:50
+#: modules/likes/model.Like.php:46
 msgid "An ID is required to like a post."
 msgstr ""
 
@@ -66,7 +66,7 @@ msgstr ""
 
 #: modules/likes/likes.php:59
 #: modules/likes/likes.php:110
-#: modules/likes/model.Like.php:73
+#: modules/likes/model.Like.php:69
 msgid "An ID is required to unlike a post."
 msgstr ""
 
@@ -113,19 +113,19 @@ msgstr ""
 msgid "Unlike!"
 msgstr ""
 
-#: modules/likes/model.Like.php:41
+#: modules/likes/model.Like.php:37
 msgid "You do not have sufficient privileges to like posts."
 msgstr ""
 
-#: modules/likes/model.Like.php:59
+#: modules/likes/model.Like.php:55
 msgid "You do not have sufficient privileges to unlike posts."
 msgstr ""
 
-#: modules/likes/model.Like.php:138
+#: modules/likes/model.Like.php:119
 msgid "Like Posts"
 msgstr ""
 
-#: modules/likes/model.Like.php:139
+#: modules/likes/model.Like.php:120
 msgid "Unlike Posts"
 msgstr ""
 

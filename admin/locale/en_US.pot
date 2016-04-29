@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-04-15 16:00+0000\n"
+"POT-Creation-Date: 2016-04-29 17:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -45,8 +45,8 @@ msgstr ""
 
 #: admin/admin.js.php:221
 #: admin/admin.js.php:223
-#: admin/admin.js.php:313
-#: admin/admin.js.php:315
+#: admin/admin.js.php:306
+#: admin/admin.js.php:308
 msgid "Close"
 msgstr ""
 
@@ -55,24 +55,24 @@ msgstr ""
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:309
+#: admin/admin.js.php:302
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:439
+#: admin/admin.js.php:432
 msgid "The module cannot be enabled because your web browser did not send proper credentials."
 msgstr ""
 
-#: admin/admin.js.php:441
+#: admin/admin.js.php:434
 msgid "The module cannot be disabled because your web browser did not send proper credentials."
 msgstr ""
 
-#: admin/admin.js.php:471
+#: admin/admin.js.php:464
 msgid "There was an error enabling the extension."
 msgstr ""
 
-#: admin/admin.js.php:473
+#: admin/admin.js.php:466
 msgid "There was an error disabling the extension."
 msgstr ""
 
