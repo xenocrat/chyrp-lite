@@ -8,11 +8,9 @@
 </form>
 </div>
 <ul role="menu" class="navigation sidebar_nav" aria-label="{{ 'Links' | translate }}">
-{% if route.action != "index" %}
 <li role="presentation">
 <a role="menuitem" href="{{ url('index') }}">{{ "Blog" | translate }}</a>
 </li>
-{% endif %}
 <li role="presentation">
 <a role="menuitem" href="#" onclick="mailTo('{{ site.email | split('@') | last }}','{{ site.email | split('@') | first }}')">{{ "Email" | translate }}</a>
 </li>
@@ -50,7 +48,6 @@
 </li>
 {% endif %}
 </ul>
-{{ trigger.call("sidebar") }}
 {% if module_enabled("categorize") and categorize is not empty %}
 <h4 id="label_categories">{{ "Categories" | translate }}</h4>
 <ul role="menu" class="navigation sidebar_nav categories" aria-labelledby="label_categories">

@@ -8,10 +8,8 @@
      */
     class Like extends Model {
         public $belongs_to = array("post", "user");
-        public $action;
         public $post_id;
         public $user_id;
-        public $user_name;
         public $session_hash;
         public $total_count;
 
@@ -20,19 +18,14 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($req = null, $user_id = null) {
-            $this->action = isset($req["action"]) ? ($req["action"] == "unlike" ? "unlike" : "like") : null ;
-
-            # user info
+        public function __construct($post_id = null, $user_id = null) {
+            # User attributes.
             $this->user_id = isset($user_id) ? $user_id : Visitor::current()->id ;
-            $this->user_name = null;
+            $this->session_hash = md5($this->user_id.$_SERVER['REMOTE_ADDR']);
 
-            # post info
+            # Post attributes.
             $this->total_count = 0;
-            $this->post_id = isset($req["post_id"]) ? (int) (fix($req["post_id"])) : null ;
-
-            # inits
-            $this->cookieInit();
+            $this->post_id = !empty($post_id) ? $post_id : null ;
         }
 
         /**
@@ -43,15 +36,14 @@
             if (!Visitor::current()->group->can("like_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts.", "likes"));
 
-            if ($this->action == "like" and $this->post_id > 0) {
-            SQL::current()->insert("likes",
-                                   array("post_id" => $this->post_id,
-                                         "user_id" => $this->user_id,
-                                         "timestamp" => datetime(),
-                                         "session_hash" => $this->session_hash));
-            }
-            else
-                error(__("Error"), __("Invalid action or post ID.", "likes"));
+            if (!empty($this->post_id)) {
+                SQL::current()->insert("likes",
+                                       array("post_id" => $this->post_id,
+                                             "user_id" => $this->user_id,
+                                             "timestamp" => datetime(),
+                                             "session_hash" => $this->session_hash));
+            } else
+                error(__("Error"), __("An ID is required to like a post.", "likes"));
         }
 
         /**
@@ -62,19 +54,24 @@
             if (!Visitor::current()->group->can("unlike_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts.", "likes"));
 
-            if ($this->action == "unlike" and $this->post_id > 0) {
-                SQL::current()->delete("likes",
-                                       array("post_id" => $this->post_id,
-                                             "session_hash" => $this->session_hash),
-                                       array("LIMIT" => 1));
-            }
-            else
-                error(__("Error"), __("Invalid action or post ID.", "likes"));
+            if (!empty($this->post_id)) {
+                if (!empty($this->user_id))
+                    SQL::current()->delete("likes",
+                                           array("post_id" => $this->post_id,
+                                                 "user_id" => $this->user_id),
+                                           array("LIMIT" => 1));
+                else
+                    SQL::current()->delete("likes",
+                                           array("post_id" => $this->post_id,
+                                                 "session_hash" => $this->session_hash),
+                                           array("LIMIT" => 1));
+            } else
+                error(__("Error"), __("An ID is required to unlike a post.", "likes"));
         }
 
         public function fetchPeople() {
             $people = SQL::current()->select("likes",
-                                             "session_hash",
+                                             "session_hash, user_id",
                                              array("post_id" => $this->post_id))->fetchAll();
 
             $this->total_count = count($people);
@@ -89,43 +86,35 @@
             return $count;
         }
 
-        public function cookieInit() {
-            if(!isset($_COOKIE["likes_sh"]))    
-                # cookie not there 
-                # set null session if action is null
-                if ($this->action == null)
-                    $this->session_hash = null;
-                else {
-                    $time = time(); 
-                    setcookie("likes_sh", md5($this->getIP().$time), $time + 31104000, "/");
-                    $this->session_hash = md5($this->getIP().$time);
-                }
-            else
-                $this->session_hash = fix($_COOKIE["likes_sh"]);
-        }
-
-        private function getIP() {
-            if (isset($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) === TRUE)
-                return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
-            elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) === TRUE)
-                return $_SERVER['HTTP_X_FORWARDED_FOR'];
-            else
-                return $_SERVER['REMOTE_ADDR'];
-        }
-
         static function install() {
             $config = Config::current();
             $sql = SQL::current();
 
-            $sql->query("CREATE TABLE IF NOT EXISTS __likes (
-                          id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                          post_id INTEGER NOT NULL,
-                          user_id INTEGER NOT NULL,
-                          timestamp DATETIME DEFAULT NULL,
-                          session_hash VARCHAR(32) NOT NULL
-                        ) DEFAULT CHARSET=UTF8");
-            $sql->query("CREATE INDEX key_post_id ON __likes (post_id)");
-            $sql->query("CREATE UNIQUE INDEX key_post_id_sh_pair ON __likes (post_id, session_hash)");
+            if ($sql->adapter == "mysql") {
+                # SQLite does not support KEY or UNIQUE in CREATE.
+                $sql->query("CREATE TABLE IF NOT EXISTS __likes (
+                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                              post_id INTEGER NOT NULL,
+                              user_id INTEGER NOT NULL,
+                              timestamp DATETIME DEFAULT NULL,
+                              session_hash VARCHAR(32) NOT NULL,
+                              KEY key_post_id (post_id),
+                              UNIQUE key_post_user_pair (post_id, user_id),
+                              UNIQUE key_post_id_sh_pair (post_id, session_hash)
+                            ) DEFAULT CHARSET=utf8");
+            } else {
+                # MySQL does not support CREATE INDEX IF NOT EXISTS.
+                $sql->query("CREATE TABLE IF NOT EXISTS __likes (
+                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                              post_id INTEGER NOT NULL,
+                              user_id INTEGER NOT NULL,
+                              timestamp DATETIME DEFAULT NULL,
+                              session_hash VARCHAR(32) NOT NULL
+                            )");
+                $sql->query("CREATE INDEX IF NOT EXISTS key_post_id ON __likes (post_id)");
+                $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_post_user_pair ON __likes (post_id, user_id)");
+                $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_post_id_sh_pair ON __likes (post_id, session_hash)");
+            }
                                                                     # Add these strings to the .pot file:
             Group::add_permission("like_post", "Like Posts");       # __("Like Posts");
             Group::add_permission("unlike_post", "Unlike Posts");   # __("Unlike Posts");
@@ -144,5 +133,4 @@
 
             Config::current()->remove("module_like");
         }
-
     }

@@ -90,7 +90,7 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        return (strpos(@$_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
+        return (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
     }
 
     /**
@@ -279,6 +279,7 @@
                               "/child/i" => "children",
                               "/cow/i" => "kine",
                               "/goose/i" => "geese",
+                              "/datum$/i" => "data",
                               "/(penis)$/i" => "\\1es", # Take that, Rails!
                               "/(ax|test)is$/i" => "\\1es",
                               "/(octop|vir)us$/i" => "\\1ii",
@@ -321,6 +322,7 @@
                               "/children/i" => "child",
                               "/kine/i" => "cow",
                               "/geese/i" => "goose",
+                              "/data$/i" => "datum",
                               "/(penis)es$/i" => "\\1",
                               "/(ax|test)es$/i" => "\\1is",
                               "/(octopi|viri|cact)i$/i" => "\\1us",
@@ -849,7 +851,6 @@
      */
     function admin_url($action = "", $params = array()) {
         $config = Config::current();
-
         $request = !empty($action) ? array("action=".$action) : array() ;
 
         foreach ($params as $key => $value)
@@ -921,8 +922,7 @@
      *     Whether or not the requested module is enabled.
      */
     function module_enabled($name) {
-        $config = Config::current();
-        return in_array($name, $config->enabled_modules);
+        return in_array($name, Config::current()->enabled_modules);
     }
 
     /**
@@ -936,8 +936,7 @@
      *     Whether or not the requested feather is enabled.
      */
     function feather_enabled($name) {
-        $config = Config::current();
-        return in_array($name, $config->enabled_feathers);
+        return in_array($name, Config::current()->enabled_feathers);
     }
 
     /**
@@ -952,7 +951,9 @@
      *     A module can cancel itself in its __construct method.
      */
      function cancel_module($target, $reason = "") {
+        $config = Config::current();
         $this_disabled = array();
+
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) : $reason ;
 
@@ -961,8 +962,6 @@
 
         if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
             Flash::warning($message);
-
-        $config = Config::current();
 
         foreach ($config->enabled_modules as $module)
             if ($module != $target)

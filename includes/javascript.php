@@ -5,12 +5,14 @@
 $(function() {
     if (Site.ajax)
         Post.init();
+        Page.init();
 });
 var Route = {
     action: "<?php echo fix(@$_GET['action']); ?>"
 }
 var Site = {
-    url: '<?php echo $config->chyrp_url; ?>',
+    url: '<?php echo $config->url; ?>',
+    chyrp_url: '<?php echo $config->chyrp_url; ?>',
     key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
@@ -43,7 +45,7 @@ var Post = {
             return;
         }
 
-        $.post(Site.url + "/includes/ajax.php", {
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
             action: "edit_post",
             id: id,
             hash: Site.key
@@ -103,7 +105,7 @@ var Post = {
 
                         if (!Post.failed) {
                             $("#post_edit_form_" + id).loader();
-                            $.post(Site.url + "/includes/ajax.php", {
+                            $.post(Site.chyrp_url + "/includes/ajax.php", {
                                 action: "view_post",
                                 context: Route.action,
                                 id: id,
@@ -144,7 +146,7 @@ var Post = {
                 alert('<?php echo __("Post has been published."); ?>');
             })
         } else {
-            $.post(Site.url + "/includes/ajax.php", {
+            $.post(Site.chyrp_url + "/includes/ajax.php", {
                 action: "view_post",
                 context: Route.action,
                 id: id,
@@ -170,8 +172,8 @@ var Post = {
             return;
         }
 
-        $.post(Site.url + "/includes/ajax.php", {
-            action: "delete_post",
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
+            action: "destroy_post",
             id: id,
             hash: Site.key
         }, function(response) {
@@ -186,7 +188,7 @@ var Post = {
                 $(this).remove();
 
                 if (Route.action == "view")
-                    window.location = '<?php echo $config->url; ?>';
+                    window.location = Site.url;
             });
         }, "html").fail(Post.panic);
     },
@@ -196,6 +198,53 @@ var Post = {
         alert(message);
         $(".ajax_loading").loader(true);
         $("form.inline_edit.post_edit input[name='ajax']").remove();
+    }
+}
+var Page = {
+    failed: false,
+    init: function() {
+        $(".page_delete_link:not(.no_ajax)").on("click", function(e) {
+            if (!Page.failed) {
+                e.preventDefault();
+
+                if (confirm('<?php echo __("Are you sure you want to delete this page? Child pages will also be deleted."); ?>')) {
+                    var id = $(this).attr("id").replace(/page_delete_/, "");
+                    Page.destroy(id);
+                }
+            }
+        });
+    },
+    destroy: function(id) {
+        $("#page_" + id).loader();
+
+        if (Site.key == "") {
+            Page.panic('<?php echo __("The page cannot be deleted because your web browser did not send proper credentials."); ?>');
+            return;
+        }
+
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
+            action: "destroy_page",
+            id: id,
+            hash: Site.key
+        }, function(response) {
+            $("#page_" + id).loader(true);
+
+            if (isError(response)) {
+                Page.panic();
+                return;
+            }
+
+            $("#page_" + id).fadeOut("fast", function() {
+                $(this).remove();
+                window.location = Site.url;
+            });
+        }, "html").fail(Page.panic);
+    },
+    panic: function(message) {
+        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+        Page.failed = true;
+        alert(message);
+        $(".ajax_loading").loader(true);
     }
 }
 <?php $trigger->call("javascript"); ?>

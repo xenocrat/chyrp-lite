@@ -41,7 +41,8 @@ var Route = {
     action: "<?php echo fix(@$_GET['action']); ?>"
 }
 var Site = {
-    url: '<?php echo $config->chyrp_url; ?>',
+    url: '<?php echo $config->url; ?>',
+    chyrp_url: '<?php echo $config->chyrp_url; ?>',
     key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
@@ -216,7 +217,7 @@ var Help = {
                 "aria-label": '<?php echo __("Help", "theme"); ?>'
             }).addClass("iframe_foreground"),
             $("<img>", {
-                "src": Site.url + '/admin/images/icons/close.svg',
+                "src": Site.chyrp_url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "theme"); ?>',
                 "role": 'button',
                 "aria-label": '<?php echo __("Close", "theme"); ?>'
@@ -234,14 +235,14 @@ var Write = {
     wysiwyg: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
         if (/(write)_/.test(Route.action))
-            Write.sort_feathers();
+            Write.latest_feather();
 
         // Insert buttons for ajax previews.
         if (Write.preview && !Write.wysiwyg)
             $("*[data-preview]").each(function() {
                 $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
                     $("<img>", {
-                        "src": Site.url + '/admin/images/icons/magnifier.svg',
+                        "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
                         "alt": '(<?php echo __("Preview this field", "theme"); ?>)',
                         "title": '<?php echo __("Preview this field", "theme"); ?>',
                     }).addClass("emblem preview").click(function(e) {
@@ -255,19 +256,12 @@ var Write = {
                 );
             });
     },
-    sort_feathers: function() {
-        // Make the selected tab the first tab.
-        $("#sub_nav").children(".selected").detach().prependTo("#sub_nav");
-
-        var feathers = new Array();
-        $("#sub_nav").children("[id]").each(function() {
-            feathers[feathers.length] = $(this).attr("id");
-        });
-
-        // Update feather order with current tab order.
-        $.post(Site.url + "/includes/ajax.php", {
-            action: "reorder_feathers",
-            list: feathers
+    latest_feather: function() {
+        // Validate and remember the latest feather.
+        var selected = $("#sub_nav").children(".selected").attr("id").replace(/feathers\[([^\]]+)\]/, "$1");
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
+            action: "latest_feather",
+            feather: selected
         });
     },
     ajax_previews: function(content, filter) {
@@ -276,7 +270,7 @@ var Write = {
         // Build a form targeting a named iframe.
         $("<form>", {
             "id": uid,
-            "action": Site.url + "/includes/ajax.php",
+            "action": Site.chyrp_url + "/includes/ajax.php",
             "method": "post",
             "accept-charset": "utf-8",
             "target": uid,
@@ -308,7 +302,7 @@ var Write = {
                 "aria-label": '<?php echo __("Preview", "theme"); ?>'
             }).addClass("iframe_foreground"),
             $("<img>", {
-                "src": Site.url + '/admin/images/icons/close.svg',
+                "src": Site.chyrp_url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "theme"); ?>',
                 "role": 'button',
                 "aria-label": '<?php echo __("Close", "theme"); ?>'
@@ -425,9 +419,9 @@ var Extend = {
             return;
         }
 
-        $.post(Site.url + "/includes/ajax.php", {
-            action: "check_confirm",
-            check: Extend.extension.name,
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
+            action: "confirm",
+            extension: Extend.extension.name,
             type: Extend.extension.type,
         }, function(data) {
             if (data != "" && Extend.action == "disable")
@@ -445,10 +439,11 @@ var Extend = {
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: Site.url + "/includes/ajax.php",
+                url: Site.chyrp_url + "/includes/ajax.php",
                 data: {
-                    action: Extend.action + "_" + Extend.extension.type,
+                    action: Extend.action,
                     extension: Extend.extension.name,
+                    type: Extend.extension.type,
                     confirm: Extend.confirmed,
                     hash: Site.key
                 },
@@ -460,7 +455,7 @@ var Extend = {
                         Extend.check_errors();
 
                     $(json.notifications).each(function() {
-                        if (this == "") return
+                        if (this != "")
                             alert(this.replace(/<([^>]+)>\n?/gm, ""));
                     });
                 },

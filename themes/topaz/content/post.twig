@@ -26,7 +26,7 @@
 {% if module_enabled("categorize") and post.category is defined %}
 &bull; <a href="{{ post.category.url }}" rel="tag">{{ post.category.name }}</a>
 {% endif %}
-{% if module_enabled("likes") and visitor.group.can("like_post") %}
+{% if module_enabled("likes") %}
 {{ post.get_likes ? "&bull; " ~ post.get_likes : "" }}
 {% endif %}
 {% if module_enabled("comments") and post.comment_status is defined and post.comment_count is defined %}

@@ -121,7 +121,7 @@ copyright holders shall not be used in advertising or otherwise
 to promote the sale, use or other dealings in this Software
 without prior written authorization.
 
-Twig is Copyright 2009-2014 the Twig Team,
+Twig is Copyright 2009-2016 the Twig Team,
 distributed under the [new BSD License](https://raw.githubusercontent.com/twigphp/Twig/master/LICENSE).
 jQuery is Copyright jQuery Foundation and other contributors,
 distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).

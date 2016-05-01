@@ -1,7 +1,7 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-<article class="page"> 
+<article id="page_{{ page.id }}" class="page"> 
 <h2>{{ page.title }}</h2>
 <section>
 {{ page.body }}

@@ -5,20 +5,19 @@
 admin_write_wysiwyg
 -------------------
 Called from:
-	admin/admin.js.php on line 234
+	admin/admin.js.php on line 235
 
 
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 482
+	admin/admin.js.php on line 477
 
 
 can_not_view_site
 -----------------
 Called from:
 	admin/index.php on line 19
-	includes/ajax.php on line 14
 	index.php on line 17
 
 
@@ -192,7 +191,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 226
+	includes/ajax.php on line 241
 
 
 change_setting
@@ -236,7 +235,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1230
+	includes/controller/Admin.php on line 1222
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -244,7 +243,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1257
+	includes/controller/Admin.php on line 1249
 Arguments:
 	$user
 
@@ -252,7 +251,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1285
+	includes/controller/Admin.php on line 1277
 Arguments:
 	$entry, $post
 
@@ -260,7 +259,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1308
+	includes/controller/Admin.php on line 1300
 Arguments:
 	$entry, $page
 
@@ -268,7 +267,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1716
+	includes/controller/Admin.php on line 1711
 Arguments:
 	!empty($_POST['theme'])
 
@@ -298,7 +297,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 201
+	includes/javascript.php on line 250
 
 
 add_group
@@ -486,6 +485,56 @@ Arguments:
 	$post, $new_page, $link
 
 
+before_ajax_edit_post_fields
+----------------------------
+Called from:
+	themes/blossom/forms/post/edit.twig on line 3
+	themes/sparrow/forms/post/edit.twig on line 3
+	themes/topaz/forms/post/edit.twig on line 3
+Arguments:
+	feather
+
+
+user_controls
+-------------
+Called from:
+	themes/blossom/forms/user/controls.twig on line 17
+	themes/sparrow/forms/user/controls.twig on line 17
+	themes/topaz/forms/user/controls.twig on line 17
+
+
+user_login
+----------
+Called from:
+	themes/blossom/forms/user/login.twig on line 11
+	themes/sparrow/forms/user/login.twig on line 11
+	themes/topaz/forms/user/login.twig on line 11
+
+
+user_register
+-------------
+Called from:
+	themes/blossom/forms/user/register.twig on line 16
+	themes/sparrow/forms/user/register.twig on line 16
+	themes/topaz/forms/user/register.twig on line 16
+
+
+end_head
+--------
+Called from:
+	themes/blossom/layouts/default.twig on line 17
+	themes/sparrow/layouts/default.twig on line 17
+	themes/topaz/layouts/default.twig on line 17
+
+
+end_content
+-----------
+Called from:
+	themes/blossom/layouts/default.twig on line 114
+	themes/sparrow/layouts/default.twig on line 100
+	themes/topaz/layouts/default.twig on line 113
+
+
 
 ==============================================
  Trigger Filters
@@ -576,7 +625,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 118
+	includes/controller/Admin.php on line 110
 
 
 post_export_url
@@ -584,7 +633,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1010
+	includes/controller/Admin.php on line 1002
 Arguments:
 	$post)
 
@@ -594,7 +643,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1029
+	includes/controller/Admin.php on line 1021
 Arguments:
 	$post
 
@@ -604,7 +653,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1073
+	includes/controller/Admin.php on line 1065
 Arguments:
 	$page)
 
@@ -614,7 +663,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1088
+	includes/controller/Admin.php on line 1080
 Arguments:
 	$page
 
@@ -624,7 +673,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1140
+	includes/controller/Admin.php on line 1132
 
 
 manage_nav
@@ -632,7 +681,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2063
+	includes/controller/Admin.php on line 2060
 
 
 settings_nav
@@ -640,7 +689,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2093
+	includes/controller/Admin.php on line 2090
 
 
 extend_nav
@@ -648,7 +697,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2103
+	includes/controller/Admin.php on line 2100
 
 
 admin_subnav
@@ -656,7 +705,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2114
+	includes/controller/Admin.php on line 2111
 
 
 nav_selected
@@ -664,7 +713,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2216
+	includes/controller/Admin.php on line 2213
 
 
 url_code
@@ -690,7 +739,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 800
+	includes/helpers.php on line 802
 
 
 keyword_search
@@ -698,7 +747,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 1542
+	includes/helpers.php on line 1541
 Arguments:
 	$query, $plain
 
@@ -708,7 +757,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1629
+	includes/helpers.php on line 1628
 
 
 group

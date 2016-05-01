@@ -14,7 +14,7 @@
 {{ theme.feeds }}
 {{ theme.stylesheets }}
 {{ theme.javascripts }}
-{{ trigger.call("head") }}
+{{ trigger.call("end_head") }}
 </head>
 <body>
 <!-- Mast -->
@@ -56,11 +56,9 @@
 <!-- Footer -->
 <div id="tail">
 <ul role="menu" class="navigation tail_nav">
-{% if route.action != "index" %}
 <li role="presentation">
 <a role="menuitem" href="{{ url('index') }}">{{ "Blog" | translate }}</a>
 </li>
-{% endif %}
 {% if theme.pages_list is not empty %}
 {% for item in theme.pages_list %}
 {% if item.depth == 1 %}

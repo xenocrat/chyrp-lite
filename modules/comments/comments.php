@@ -241,7 +241,7 @@
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
-            Comment::delete($_POST['id']);
+            Comment::delete($comment->id);
 
             Flash::notice(__("Comment deleted."));
             redirect("/admin/?action=manage_".(($comment->status == "spam") ? "spam" : "comments"));
@@ -561,7 +561,7 @@
                     if ($post->latest_comment > $last_comment) {
                         $new_comments = $sql->select("comments",
                                                      "id, created_at",
-                                                     array("post_id" => $_POST['post_id'],
+                                                     array("post_id" => $post->id,
                                                            "created_at >" => $_POST['last_comment'],
                                                            "status not" => "spam", "status != 'denied' OR (
                                                               (user_id != 0 AND user_id = :visitor_id) OR (
@@ -597,7 +597,7 @@
                     $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason));
                     exit;
 
-                case "delete_comment":
+                case "destroy_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                         show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -612,7 +612,7 @@
                     if (!$comment->deletable())
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
-                    Comment::delete($_POST['id']);
+                    Comment::delete($comment->id);
                     exit;
 
                 case "edit_comment":

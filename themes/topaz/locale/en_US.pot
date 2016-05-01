@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-03-25 15:07+0000\n"
+"POT-Creation-Date: 2016-04-29 18:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -110,86 +110,86 @@ msgstr ""
 msgid 'Links'
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:13
-#: themes/topaz/layouts/default.twig:60
+#: themes/topaz/content/sidebar.twig:12
+#: themes/topaz/layouts/default.twig:59
 msgid "Blog"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:17
+#: themes/topaz/content/sidebar.twig:15
 #: themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
-#: themes/topaz/layouts/default.twig:73
+#: themes/topaz/layouts/default.twig:71
 msgid "Email"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:20
-#: themes/topaz/layouts/default.twig:76
+#: themes/topaz/content/sidebar.twig:18
+#: themes/topaz/layouts/default.twig:74
 msgid "Feed"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:24
-#: themes/topaz/layouts/default.twig:85
+#: themes/topaz/content/sidebar.twig:22
+#: themes/topaz/layouts/default.twig:83
 msgid "Admin"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:28
-#: themes/topaz/layouts/default.twig:89
+#: themes/topaz/content/sidebar.twig:26
+#: themes/topaz/layouts/default.twig:87
 msgid "Write"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:32
+#: themes/topaz/content/sidebar.twig:30
 #: themes/topaz/forms/post/edit.twig:32
-#: themes/topaz/layouts/default.twig:93
+#: themes/topaz/layouts/default.twig:91
 msgid "Draft"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:37
+#: themes/topaz/content/sidebar.twig:35
 #: themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:98
+#: themes/topaz/layouts/default.twig:96
 msgid "Controls"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:40
-#: themes/topaz/layouts/default.twig:101
+#: themes/topaz/content/sidebar.twig:38
+#: themes/topaz/layouts/default.twig:99
 msgid "Log out"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:45
+#: themes/topaz/content/sidebar.twig:43
 #: themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:18
-#: themes/topaz/layouts/default.twig:106
+#: themes/topaz/layouts/default.twig:104
 msgid "Register"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:49
+#: themes/topaz/content/sidebar.twig:47
 #: themes/topaz/forms/user/login.twig:5
 #: themes/topaz/forms/user/login.twig:13
-#: themes/topaz/layouts/default.twig:110
+#: themes/topaz/layouts/default.twig:108
 msgid "Log in"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:55
+#: themes/topaz/content/sidebar.twig:52
 msgid "Categories"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:67
+#: themes/topaz/content/sidebar.twig:64
 msgid "Pages"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:77
+#: themes/topaz/content/sidebar.twig:74
 msgid "Related Posts"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:86
+#: themes/topaz/content/sidebar.twig:83
 msgid "Recent Posts"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:97
-#: themes/topaz/layouts/default.twig:80
+#: themes/topaz/content/sidebar.twig:94
+#: themes/topaz/layouts/default.twig:78
 msgid "Archive"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:102
+#: themes/topaz/content/sidebar.twig:99
 #: themes/topaz/pages/archive.twig:8
 #: themes/topaz/pages/archive.twig:54
 msgid "%B %Y"
@@ -392,7 +392,7 @@ msgstr ""
 msgid "Older posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:122
+#: themes/topaz/layouts/default.twig:120
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

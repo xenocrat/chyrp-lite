@@ -317,7 +317,7 @@
                                                         "timestamp" => $timestamp,
                                                         "depth" => $depth),
                                      "preceding" => $preceding),
-                               _f("Archive of %s", array(when("%B %Y", $timestamp, true))));
+                               _f("Archive of %s", when("%B %Y", $timestamp, true)));
             }
         }
 
@@ -359,7 +359,7 @@
             $this->display(array("pages".DIR."search", "pages".DIR."index"),
                            array("posts" => $posts,
                                  "search" => $_GET['query']),
-                           fix(_f("Search results for \"%s\"", array($_GET['query']))));
+                           fix(_f("Search results for \"%s\"", $_GET['query'])));
         }
 
         /**

@@ -75,8 +75,6 @@
                 # "Write > Page", if they can add pages.
                 if ($visitor->group->can("add_page"))
                     return $route->action = "write_page";
-                else
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to view this area."));
             }
 
             if (empty($route->action) or $route->action == "manage") {
@@ -95,24 +93,18 @@
                 # "Manage > Groups", if they can manage groups.
                 if ($visitor->group->can("edit_group") or $visitor->group->can("delete_group"))
                     return $route->action = "manage_groups";
-                else
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to view this area."));
             }
 
             if (empty($route->action) or $route->action == "settings") {
                 # "General Settings", if they can configure the installation.
                 if ($visitor->group->can("change_settings"))
                     return $route->action = "general_settings";
-                else
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to view this area."));
             }
 
             if (empty($route->action) or $route->action == "extend") {
                 # "Modules", if they can can enable/disable extensions.
                 if ($visitor->group->can("toggle_extensions"))
                     return $route->action = "modules";
-                else
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to view this area."));
             }
 
             Trigger::current()->filter($route->action, "admin_determine_action");
@@ -136,7 +128,7 @@
 
             Trigger::current()->filter($options, array("write_post_options", "post_options"));
 
-            fallback($_GET['feather'], reset($config->enabled_feathers));
+            fallback($_GET['feather'], @$_SESSION['latest_feather'], reset($config->enabled_feathers));
 
             $this->display("write_post",
                            array("groups" => Group::find(array("order" => "id ASC")),
@@ -266,7 +258,7 @@
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
-            Post::delete($_POST['id']);
+            Post::delete($post->id);
 
             Flash::notice(__("Post deleted."), "/admin/?action=manage_posts");
         }
@@ -491,7 +483,7 @@
                                    null,
                                    $child->url);
 
-            Page::delete($_POST['id']);
+            Page::delete($page->id);
 
             Flash::notice(__("Page deleted."), "/admin/?action=manage_pages");
         }
@@ -1317,7 +1309,7 @@
          */
         public function modules() {
             if (!Visitor::current()->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable modules."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             $config = Config::current();
 
@@ -1440,7 +1432,7 @@
          */
         public function feathers() {
             if (!Visitor::current()->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable feathers."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             $config = Config::current();
 
@@ -1486,6 +1478,7 @@
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
                 $category = (feather_enabled($folder)) ? "enabled_feathers" : "disabled_feathers" ;
+
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
                                                            "url" => $info["url"],
@@ -1565,66 +1558,63 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            $type = (isset($_POST['module'])) ? "module" : "feather" ;
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
+            $type = (isset($_POST['module'])) ? "module" : "feather" ;
+
             if (empty($_POST[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."));
 
-            if ($type == "module" and module_enabled($_POST[$type]))
-                Flash::warning(__("Module already enabled."), "/admin/?action=modules");
-
-            if ($type == "feather" and feather_enabled($_POST[$type]))
-                Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
-
+            $name          = $_POST[$type];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
+            $class_name    = camelize($name);
 
-            if (!empty(Modules::$instances[$_POST[$type]]->cancelled))
-                error(__("Module Cancelled"), __("The module has cancelled execution because of an error."));
+            if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
+                show_404(__("Not Found"), __("Extension not found."));
 
-            require $folder.DIR.$_POST[$type].DIR.$_POST[$type].".php";
-
-            $class_name = camelize($_POST[$type]);
+            require $folder.DIR.$name.DIR.$name.".php";
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                Flash::warning(__("Item is not a module."), "/admin/?action=modules");
+                show_404(__("Not Found"), __("Module not found."));
 
             if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                Flash::warning(__("Item is not a feather."), "/admin/?action=feathers");
+                show_404(__("Not Found"), __("Feather not found."));
+
+            if ($type == "module" and (module_enabled($name) or !empty(Modules::$instances[$name]->cancelled)))
+                Flash::warning(__("Module already enabled."), "/admin/?action=modules");
+
+            if ($type == "feather" and feather_enabled($name))
+                Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
+
+            if (file_exists($folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo"))
+                load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
 
             $new = $config->$enabled_array;
-            $new[] = $_POST[$type];
+            $new[] = $name;
             $config->set($enabled_array, $new);
 
-            if (file_exists($folder.DIR.$_POST[$type].DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($_POST[$type], $folder.DIR.$_POST[$type].DIR."locale".DIR.$config->locale.".mo");
-
-            $info = include $folder.DIR.$_POST[$type].DIR."info.php";
+            $info = include $folder.DIR.$name.DIR."info.php";
             fallback($info["uploader"], false);
             fallback($info["notifications"], array());
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", $config->uploads_path);
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
+                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", $config->uploads_path);
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
 
-            if ($type == "module")
-                Flash::notice(__("Module enabled."), "/admin/?action=modules");
-            elseif ($type == "feather")
-                Flash::notice(__("Feather enabled."), "/admin/?action=feathers");
+            Flash::notice(__("Extension enabled."), "/admin/?action=".pluralize($type));
         }
 
         /**
@@ -1635,27 +1625,32 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            $type = (isset($_POST['module'])) ? "module" : "feather" ;
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
+            $type = (isset($_POST['module'])) ? "module" : "feather" ;
+
             if (empty($_POST[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."));
 
-            if ($type == "module" and !module_enabled($_POST[$type]) and empty(Modules::$instances[$_POST[$type]]->cancelled))
+            $name          = $_POST[$type];
+            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $class_name    = camelize($name);
+
+            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
+                show_404(__("Not Found"), __("Module not found."));
+
+            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
+                show_404(__("Not Found"), __("Feather not found."));
+
+            if ($type == "module" and !module_enabled($name) and empty(Modules::$instances[$name]->cancelled))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
-            if ($type == "feather" and !feather_enabled($_POST[$type]))
+            if ($type == "feather" and !feather_enabled($name))
                 Flash::warning(__("Feather already disabled."), "/admin/?action=feathers");
-
-            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
-
-            $class_name = camelize($_POST[$type]);
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), false);
@@ -1663,16 +1658,16 @@
             $new = array();
 
             foreach ($config->$enabled_array as $extension) {
-              if ($extension != $_POST[$type])
+              if ($extension != $name)
                 $new[] = $extension;
             }
 
             $config->set($enabled_array, $new);
 
-            if ($type == "module")
-                Flash::notice(__("Module disabled."), "/admin/?action=modules");
-            elseif ($type == "feather")
-                Flash::notice(__("Module disabled."), "/admin/?action=feathers");
+            if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
+                unset($_SESSION['latest_feather']);
+
+            Flash::notice(__("Extension disabled."), "/admin/?action=".pluralize($type));
         }
 
         /**
@@ -1705,7 +1700,7 @@
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
 
-            Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", array($info["name"])), "/admin/?action=themes");
+            Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", fix($info["name"])), "/admin/?action=themes");
         }
 
         /**
@@ -1915,13 +1910,15 @@
          * Logs out the current user.
          */
         public function logout() {
+            $config = Config::current();
+
             if (!logged_in())
-                Flash::notice(__("You aren't logged in."), Config::current()->url);
+                Flash::notice(__("You aren't logged in."), $config->url);
 
             session_destroy();
             session();
 
-            Flash::notice(__("Logged out."), Config::current()->url); # Supply full URL for compatibility with canonical URLs.
+            Flash::notice(__("Logged out."), $config->url); # Supply full URL for compatibility with canonical URLs.
         }
 
         /**
