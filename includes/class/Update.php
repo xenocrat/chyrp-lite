@@ -35,7 +35,7 @@
             foreach ($xml->channel->item as $item)
                 if (!isset($item->version) or
                     !isset($item->codename) or
-                    !isset($item->updateurl) or !is_url($item->updateurl)
+                    !isset($item->updateurl) or !is_url($item->updateurl))
                     return false;
 
             return true;

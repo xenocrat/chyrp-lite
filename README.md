@@ -45,6 +45,7 @@ Pages allow you to publish articles on your site that are independent of your bl
 * Sitemap: index your blog for search engines.
 * reCAPTCHA/MAPTCHA: prevent spam.
 * Highlighter: syntax highlighting for your code snippets.
+* SimpleMDE: WYSIWYG-esque editor for Markdown content.
 
 ## Requirements
 
