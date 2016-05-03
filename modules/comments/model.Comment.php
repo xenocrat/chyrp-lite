@@ -87,6 +87,9 @@
             if (!logged_in())
                 $notify = 0; # Only logged-in users can request notifications
 
+            fallback($_SERVER['HTTP_REFERER'], "");
+            fallback($_SERVER['HTTP_USER_AGENT'], "");
+
             if (!empty($config->akismet_api_key)) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
 
