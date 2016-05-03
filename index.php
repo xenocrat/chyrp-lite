@@ -2,6 +2,8 @@
     if (version_compare(PHP_VERSION, "5.3.2", "<"))
         exit("Chyrp Lite requires PHP 5.3.2 or greater.");
 
+    define('MAIN', true);
+
     require_once "includes".DIRECTORY_SEPARATOR."common.php";
 
     # Prepare the controller.

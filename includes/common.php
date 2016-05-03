@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2016.02");
+    define('CHYRP_VERSION', "2016.03");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Russet");
+    define('CHYRP_CODENAME', "Chestnut");
 
     # Constant: CACHE_TWIG
     # Override DEBUG to enable Twig template caching.
@@ -59,6 +59,11 @@
     # Are we serving a JavaScript file?
     if (!defined('JAVASCRIPT'))
         define('JAVASCRIPT', false);
+
+    # Constant: MAIN
+    # Is this being run from index.php?
+    if (!defined('MAIN'))
+        define('MAIN', false);
 
     # Constant: ADMIN
     # Is the user in the admin area?
@@ -286,9 +291,15 @@
     #     <Feather>
     require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
 
-    # Redirect to the installer if there is no config.
-    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+    # Handle a missing config file with redirect or error.
+    if (!file_exists(INCLUDES_DIR.DIR."config.json.php")) {
+        if (!MAIN) {
+            header($_SERVER["SERVER_PROTOCOL"]." 501 Not Implemented");
+            exit("Configuration Required.");
+        }
+
         redirect("install.php");
+    }
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();

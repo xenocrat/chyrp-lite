@@ -2,10 +2,11 @@
     header("Content-type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.02");
-    define('CHYRP_CODENAME', "Russet");
+    define('CHYRP_VERSION',  "2016.03");
+    define('CHYRP_CODENAME', "Chestnut");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
+    define('MAIN',           false);
     define('ADMIN',          false);
     define('AJAX',           false);
     define('XML_RPC',        false);
