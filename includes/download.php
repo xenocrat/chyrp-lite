@@ -6,6 +6,7 @@
 
     define('DEBUG',        false);
     define('JAVASCRIPT',   false);
+    define('MAIN',         false);
     define('ADMIN',        false);
     define('AJAX',         false);
     define('XML_RPC',      false);
@@ -17,9 +18,22 @@
     define('INCLUDES_DIR', dirname(__FILE__));
     define('USE_ZLIB',     false);
 
+    # Constant: JSON_PRETTY_PRINT
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_PRETTY_PRINT'))
+        define('JSON_PRETTY_PRINT', 0);
+
+    # Constant: JSON_UNESCAPED_SLASHES
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_UNESCAPED_SLASHES'))
+        define('JSON_UNESCAPED_SLASHES', 0);
+
     require_once "error.php";
     require_once "helpers.php";
     require_once "class".DIR."Config.php";
+
+    # Sanitize input depending on magic_quotes_gpc's enabled status.
+    sanitize_input($_GET);
 
     if (empty($_GET['file'])) {
         header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
