@@ -980,6 +980,9 @@
         # Instantiate all Modules.
         foreach ($config->enabled_modules as $module) {
             if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
+                if (DEBUG)
+                    error_log("WARNING: Module is missing or damaged: ".$module);
+
                 unset($config->enabled_modules[$module]);
                 continue;
             }
@@ -1004,6 +1007,9 @@
         # Instantiate all Feathers.
         foreach ($config->enabled_feathers as $feather) {
             if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
+                if (DEBUG)
+                    error_log("WARNING: Feather is missing or damaged: ".$feather);
+
                 unset($config->enabled_feathers[$feather]);
                 continue;
             }
