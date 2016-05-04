@@ -26,12 +26,12 @@
 {% if (post.filename is defined or post.filenames is defined) and route.action == "edit_post" %}
 {% if post.filename is defined %}
 <em>{{ "Current file name:" | translate }}</em>
-<strong>{{ post.filename | fix }}</strong>
+<strong><a href="{{ post.filename | fix | uploaded }}" target="_blank">{{ post.filename | fix }}</a></strong>
 {% elseif post.filenames is defined and post.filenames is not empty %}
 <em>{{ "Current file names:" | translate }}</em>
 <strong>
 <ul>
-{% for name in post.filenames %}<li>{{ name | fix }}</li>{% endfor %}
+{% for name in post.filenames %}<li><a href="{{ name | fix | uploaded }}" target="_blank">{{ name | fix }}</a></li>{% endfor %}
 </ul>
 </strong>
 {% endif %}
