@@ -239,7 +239,6 @@ input#search_field {                            display: inline;
                                                 padding-right: 34px }
 div.search_box input[type='text'] {             width: 10em;
                                                 display: inline-block }
-form.inline_edit input {                        width: 100% }
 select {                                        box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
@@ -317,8 +316,7 @@ div.doaction:last-child {                       margin-bottom: 0em }
 div.speak {                                     margin-bottom: 0em }
 div.admin, div.downloads {                      margin: 1em 0em 0em 0em }
 input + div.doaction, textarea + div.doaction { padding-top: 0.5em }
-div#main > article, div.standalone,
-form.inline_edit {                              box-sizing: border-box;
+div#main > article, div.standalone {            box-sizing: border-box;
                                                 display: block;
                                                 position: relative;
                                                 width: 100%;
@@ -577,7 +575,6 @@ img.gravatar {                                  position: absolute;
     div.search_box {                            margin-top: 0em }
     button#search_submit {                      display: none }
     div#main > article, div.standalone,
-    form.inline_edit {                          padding: 3rem 0em 0em 0em }
     div#main > article.commentary {             padding: 0rem }
     div.metadata {                              padding-bottom: 1rem }
     div.prev {                                  margin: 3rem 0em 0rem -2rem }
@@ -604,8 +601,7 @@ img.gravatar {                                  position: absolute;
     div.search_box {                            display: inline-block }
     div.prev {                                  margin: 4rem 0em 0rem 4rem }
     div.next {                                  margin: 0rem 4em 0rem 0rem }
-    div#main > article, div.standalone,
-    form.inline_edit {                          padding-left: 8rem;
+    div#main > article, div.standalone {        padding-left: 8rem;
                                                 padding-right: 8rem }
     div#main > article.commentary {             padding: 0rem 8rem }
 }

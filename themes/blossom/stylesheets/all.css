@@ -216,17 +216,6 @@ form, fieldset {                                margin: 0em;
                                                 border: none }
 div.search_box > form {                         display: inline-block;
                                                 position: relative }
-form.inline_edit {                              width: 100%;
-                                                max-width: 1024px;
-                                                clear: both;
-                                                background-color: #fbfbf7;
-                                                box-sizing: border-box;
-                                                margin: 0rem auto 2rem auto;
-                                                padding: 1rem 2rem 2rem 2rem;
-                                                border: 1px solid #c6ccc8;
-                                                border-radius: 6px;
-                                                background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
-                                                box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05) }
 form.comment_edit {                             width: 100%;
                                                 background-color: transparent;
                                                 margin-bottom: 0em;
@@ -280,7 +269,6 @@ button#sidebar_search_submit {                  display: block;
 button#search_submit:focus,
 button#sidebar_search_submit:focus {            background-color: #c6ccc8;
                                                 outline: none }
-form.inline_edit input {                        width: 100% }
 select {                                        box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
@@ -589,7 +577,6 @@ article img {                                   max-width: 100% }
     h2 {                                        font-size: 1.25em;
                                                 margin: 0.8em 0em }
     blockquote {                                padding: 0em 1em }
-    form.inline_edit {                          padding: 0rem 1rem 1rem 1rem }
     form.comment_edit {                         padding: 0rem 0rem 1rem 0rem }
     input, select {                             width: 100% }
     ol.comments li {                            margin: 0em;
