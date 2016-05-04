@@ -256,7 +256,7 @@ input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
 input:-ms-input-placeholder,
-input:input-placeholder {                       color: #c6ccc8;
+input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
 input[type='checkbox'] {                        width: auto }
 input.error {                                   background-color: #ffb2b2 }
