@@ -18,30 +18,6 @@
         show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
     switch($_POST['action']) {
-        case "edit_post":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
-            if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a post."));
-
-            $post = new Post($_POST['id'], array("filter" => false, "drafts" => true));
-
-            if ($post->no_results)
-                show_404(__("Not Found"), __("Post not found."));
-
-            if (!$post->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
-
-            $options = array();
-            Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
-
-            $main->display("forms".DIR."post".DIR."edit", array("post" => $post,
-                                                                "feather" => Feathers::$instances[$post->feather],
-                                                                "options" => $options,
-                                                                "groups" => Group::find(array("order" => "id ASC"))));
-            exit;
-
         case "destroy_post":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -58,23 +34,6 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
             Post::delete($post->id);
-            exit;
-
-        case "view_post":
-            fallback($_POST['offset'], 0);
-            fallback($_POST['context']);
-
-            $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
-
-            if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to view a post."));
-
-            $post = new Post($_POST['id'], array("drafts" => true));
-
-            if ($post->no_results)
-                show_404(__("Not Found"), __("Post not found."));
-
-            $main->display("feathers".DIR.$post->feather, array("post" => $post, "ajax_reason" => $reason));
             exit;
 
         case "destroy_page":
@@ -102,10 +61,8 @@
             if (!isset($_POST['content']) or !isset($_POST['filter']))
                 exit;
 
-            if (!headers_sent()) {
-                header("Cache-Control: no-cache, must-revalidate");
-                header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
-            }
+            header("Cache-Control: no-cache, must-revalidate");
+            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
             $sanitized = sanitize_html($_POST['content']);
             Trigger::current()->filter($sanitized, $_POST['filter']);

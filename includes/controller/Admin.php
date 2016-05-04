@@ -210,9 +210,6 @@
 
             Feathers::$instances[$post->feather]->update($post);
 
-            if (isset($_POST['ajax']))
-                exit((string) $post->id);
-
             Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
                           "/admin/?action=manage_posts");
         }
