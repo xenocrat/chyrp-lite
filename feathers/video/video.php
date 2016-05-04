@@ -4,8 +4,7 @@
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "video"),
-                                  "optional" => true,
-                                  "preview" => "markup_title"));
+                                  "optional" => true));
             $this->setField(array("attr" => "video",
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
