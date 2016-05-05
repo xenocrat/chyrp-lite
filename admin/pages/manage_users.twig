@@ -25,7 +25,7 @@
 <table>
 <thead>
 <tr class="head">
-<th class="user_name">{{ "Name" | translate }}</th>
+<th class="user_name">{{ "Login (name)" | translate }}</th>
 <th class="user_group">{{ "Group" | translate }}</th>
 <th class="user_joined">{{ "Joined" | translate }}</th>
 <th class="user_website">{{ "Website" | translate }}</th>
@@ -37,11 +37,8 @@
 {% for user in users.paginated %}
 <tr id="user_{{ user.id }}" class="user">
 <td class="user_name main">
-{% if user.full_name is not empty %}
-<a href="mailto:{{ user.email | fix(true) }}">{{ user.full_name }}</a> <span class="sub">({{ user.login }})</span>
-{% else %}
 <a href="mailto:{{ user.email | fix(true) }}">{{ user.login }}</a>
-{% endif %}
+{% if user.full_name is not empty %}<span class="sub">({{ user.full_name }})</span>{% endif %}
 </td>
 <td class="user_group">
 {{ user.group.name | fix }}

@@ -1495,6 +1495,7 @@
         $where    = array(); # Parameters validated and added to WHERE.
         $filters  = array(); # Table column filters to be validated.
         $params   = array(); # Parameters for the non-keyword filter.
+        $columns  = !empty($table) ? SQL::current()->select($table)->fetch() : array() ;
 
         foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment)
             if (!substr_count($fragment, ":"))
@@ -1512,22 +1513,24 @@
         foreach ($keywords as $keyword) {
             list($attr, $val) = explode(":", $keyword);
 
-            if (in_array($attr, $dates)) {
-                $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
-            } elseif ($attr == "author") {
+            if (isset($columns["full_name"]) and $attr == "name") {
+                $where["full_name"] = $val;
+            } elseif (isset($columns["user_id"]) and $attr == "author") {
                 $user = new User(array("login" => $val));
-                !($table == "users") ? $where["user_id"] = $user->id : $where["id"] = $user->id;
-            } elseif ($attr == "group") {
+                $where["user_id"] = $user->id;
+            } elseif (isset($columns["group_id"]) and $attr == "group") {
                 $group = new Group(array("name" => $val));
-                $where["group_id"] = $val = ($group->no_results) ? 0 : $group->id;
+                $where["group_id"] = ($group->no_results) ? 0 : $group->id;
+            } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
+                $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
+            } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
+                $where[strtoupper(array_search($attr, $dates))."(joined_at)"] = $val;
             } else
                 $filters[$attr] = $val;
         }
 
         # Check the validity of keywords if a table name was supplied.
         if (!empty($table)) {
-            $columns = SQL::current()->select($table)->fetch();
-
             foreach ($filters as $attr => $val)
                 if (isset($columns[$attr]))
                     $where[$attr] = $val;

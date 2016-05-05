@@ -55,7 +55,7 @@
 {% endif %}
 </td>
 <td class="page_author">
-{{ page.author.name is defined ? page.author.name : "" }}
+{{ page.author.nick is defined ? page.author.nick : "" }}
 </td>
 {{ trigger.call("manage_pages_column", page) }}
 {% if page.editable() or page.deletable() %}
