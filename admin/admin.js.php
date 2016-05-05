@@ -154,7 +154,7 @@ function validate_slug() {
     });
 }
 function validate_email() {
-    $("body").on("keyup", "input[type='email']", function(e) {
+    $("input[type='email']").keyup(function(e) {
         if ($(this).val() != "" && !isEmail($(this).val()))
             $(this).addClass("error");
         else
@@ -162,7 +162,7 @@ function validate_email() {
     });
 }
 function validate_url() {
-    $("body").on("keyup", "input[type='url']", function(e) {
+    $("input[type='url']").keyup(function(e) {
         if ($(this).val() != "" && !isURL($(this).val()))
             $(this).addClass("error");
         else
