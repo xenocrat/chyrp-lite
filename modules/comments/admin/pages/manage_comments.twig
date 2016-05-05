@@ -43,7 +43,7 @@
 {% endif %}
 </td>
 <td class="comment_author">
-{{ not comment.user.no_results ? comment.user.full_name | oneof(comment.user.login, comment.author) : comment.author }}
+{{ not comment.user.no_results ? comment.user.login : comment.author }}
 </td>
 <td class="comment_date">
 {{ comment.created_at | strftimeformat }}

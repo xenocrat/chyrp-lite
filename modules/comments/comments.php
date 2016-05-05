@@ -252,7 +252,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "body LIKE :query");
+            list($where, $params) = keywords($_GET['query'], "body LIKE :query", "comments");
 
             $where["status"] = "spam";
 
@@ -401,7 +401,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "body LIKE :query");
+            list($where, $params) = keywords($_GET['query'], "body LIKE :query", "comments");
 
             $where[] = "status != 'spam'";
 
