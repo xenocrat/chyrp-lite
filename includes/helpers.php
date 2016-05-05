@@ -1513,14 +1513,14 @@
         foreach ($keywords as $keyword) {
             list($attr, $val) = explode(":", $keyword);
 
-            if (isset($columns["full_name"]) and $attr == "name") {
-                $where["full_name"] = $val;
+            if ($attr == "password") {
+                $strings[] = $attr;
             } elseif (isset($columns["user_id"]) and $attr == "author") {
                 $user = new User(array("login" => $val));
-                $where["user_id"] = $user->id;
+                $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
             } elseif (isset($columns["group_id"]) and $attr == "group") {
                 $group = new Group(array("name" => $val));
-                $where["group_id"] = ($group->no_results) ? 0 : $group->id;
+                $where["group_id"] = ($group->no_results) ? 0 : $group->id ;
             } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
                 $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
             } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
