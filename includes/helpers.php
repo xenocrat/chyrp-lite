@@ -1474,7 +1474,7 @@
 
     /**
      * Function: keywords
-     * Handle keyword-searching.
+     * Parse keyword searches for values in specific database columns.
      *
      * Parameters:
      *     $query - The query to parse.
@@ -1510,35 +1510,38 @@
                        "minute" => __("minute"),
                        "second" => __("second"));
 
+        # Contextual conversions of some keywords.
         foreach ($keywords as $keyword) {
             list($attr, $val) = explode(":", $keyword);
 
             if ($attr == "password") {
+                # Prevent searches for hashed passwords.
                 $strings[] = $attr;
             } elseif (isset($columns["user_id"]) and $attr == "author") {
+                # Filter by "author" (login).
                 $user = new User(array("login" => $val));
                 $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
             } elseif (isset($columns["group_id"]) and $attr == "group") {
+                # Filter by group name.
                 $group = new Group(array("name" => $val));
                 $where["group_id"] = ($group->no_results) ? 0 : $group->id ;
             } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
+                # Filter by date/time of creation.
                 $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
             } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
+                # Filter by date/time of joining.
                 $where[strtoupper(array_search($attr, $dates))."(joined_at)"] = $val;
             } else
                 $filters[$attr] = $val;
         }
 
         # Check the validity of keywords if a table name was supplied.
-        if (!empty($table)) {
-            foreach ($filters as $attr => $val)
-                if (isset($columns[$attr]))
-                    $where[$attr] = $val;
-                else
-                    $strings[] = $attr." ".$val; # No such column: add to non-keyword values.
-        } else
-            foreach ($filters as $attr => $val)
-                $strings[] = $attr." ".$val; # Cannot validate: add all to non-keyword values.
+        foreach ($filters as $attr => $val) {
+            if (isset($columns[$attr]))
+                $where[$attr] = $val;
+            else
+                $strings[] = $attr." ".$val; # No such column: add to non-keyword values.
+        }
 
         if (!empty($strings)) {
             $where[] = $plain;
