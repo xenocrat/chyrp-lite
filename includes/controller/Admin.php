@@ -1933,7 +1933,7 @@
                     $help = "<h1>".__("Filtering Results")."</h1>\n".
                             "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n".
                             "<h2>".__("Keywords")."</h2>\n".
-                            "<p>".__("Use the syntax <code>attr:val;</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive). The keyword can be the name of a database column, the name of an <code>author</code> or a <code>group</code>, or a date/time. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016.")."</p>";
+                            "<p>".__("Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code> (case insensitive). The keyword can be the name of a database column, the name of an <code>author</code> or a <code>group</code>, or a date/time. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016.")."</p>";
                     break;
                 case "slugs":
                     $help = "<h1>".__("Slugs")."</h1>\n".
