@@ -17,7 +17,8 @@
          * Returns: @true@ unless it detects a self-identified bot.
          */
         static function open() {
-            return self::$allow = !preg_match("/(bot|crawler|slurp|spider)\b/i", oneof(@$_SERVER['HTTP_USER_AGENT'], ""));
+            $ua = oneof(@$_SERVER['HTTP_USER_AGENT'], "");
+            return self::$allow = !preg_match("/(bot|crawler|slurp|spider)\b/i", $ua);
         }
 
         /**
@@ -53,7 +54,7 @@
          *     $data - Data to write.
          */
         static function write($id, $data) {
-            if (empty($data) or $data == self::$data or !self::$allow)
+            if (!self::$allow or empty($data) or $data == self::$data)
                 return;
 
             $sql = SQL::current();
