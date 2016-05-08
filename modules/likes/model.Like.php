@@ -99,8 +99,8 @@
                               timestamp DATETIME DEFAULT NULL,
                               session_hash VARCHAR(32) NOT NULL,
                               KEY key_post_id (post_id),
-                              UNIQUE key_post_user_pair (post_id, user_id),
-                              UNIQUE key_post_id_sh_pair (post_id, session_hash)
+                              KEY key_user_id (post_id, user_id),
+                              UNIQUE key_session_hash (post_id, session_hash)
                             ) DEFAULT CHARSET=utf8");
             } else {
                 # MySQL does not support CREATE INDEX IF NOT EXISTS.
@@ -112,8 +112,8 @@
                               session_hash VARCHAR(32) NOT NULL
                             )");
                 $sql->query("CREATE INDEX IF NOT EXISTS key_post_id ON __likes (post_id)");
-                $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_post_user_pair ON __likes (post_id, user_id)");
-                $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_post_id_sh_pair ON __likes (post_id, session_hash)");
+                $sql->query("CREATE INDEX IF NOT EXISTS key_user_id ON __likes (post_id, user_id)");
+                $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_session_hash ON __likes (post_id, session_hash)");
             }
                                                                     # Add these strings to the .pot file:
             Group::add_permission("like_post", "Like Posts");       # __("Like Posts");

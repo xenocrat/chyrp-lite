@@ -156,18 +156,21 @@
             $hasPersonLiked = false;
             $people = $like->fetchPeople();
 
-            if (logged_in())
-                foreach ($people as $person)
+            if (logged_in()) {
+                foreach ($people as $person) {
                     if ($person["user_id"] == $like->user_id) {
                         $hasPersonLiked = true;
                         break;
                     }
-            else
-                foreach ($people as $person)
+                }
+            } else {
+                foreach ($people as $person) {
                     if ($person["session_hash"] == $like->session_hash) {
                         $hasPersonLiked = true;
                         break;
                     }
+                }
+            }
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
 
