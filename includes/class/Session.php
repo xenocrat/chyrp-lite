@@ -10,10 +10,10 @@
 
         /**
          * Function: open
-         * Returns: @true@
+         * Returns: @true@ unless it detects a self-identified bot.
          */
         static function open() {
-            return true;
+            return !preg_match("/(bot|crawler|slurp|spider)\b/i", oneof(@$_SERVER['HTTP_USER_AGENT'], ""));
         }
 
         /**
