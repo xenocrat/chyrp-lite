@@ -8,12 +8,16 @@
         # Caches session data.
         static $data = "";
 
+        # Variable: $allow
+        # Allow this session?
+        static $allow = true;
+
         /**
          * Function: open
          * Returns: @true@ unless it detects a self-identified bot.
          */
         static function open() {
-            return !preg_match("/(bot|crawler|slurp|spider)\b/i", oneof(@$_SERVER['HTTP_USER_AGENT'], ""));
+            return self::$allow = !preg_match("/(bot|crawler|slurp|spider)\b/i", oneof(@$_SERVER['HTTP_USER_AGENT'], ""));
         }
 
         /**
@@ -49,7 +53,7 @@
          *     $data - Data to write.
          */
         static function write($id, $data) {
-            if (empty($data) or $data == self::$data)
+            if (empty($data) or $data == self::$data or !self::$allow)
                 return;
 
             $sql = SQL::current();
