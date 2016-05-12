@@ -18,12 +18,20 @@
 </head>
 <body>
 <!-- Mast -->
-{% for flashes in flash.all %}
-{% for text in flashes %}
-<div class="flash">
-<h3 role="alert" class="flash">{{ text }}</h3>
+{% for notice in flash.notices %}
+<div class="flash notice">
+<h3 role="alert" class="flash">{{ notice }}</h3>
 </div>
 {% endfor %}
+{% for warning in flash.warnings %}
+<div class="flash warning">
+<h3 role="alert" class="flash">{{ warning }}</h3>
+</div>
+{% endfor %}
+{% for message in flash.messages %}
+<div class="flash message">
+<h3 role="alert" class="flash">{{ message }}</h3>
+</div>
 {% endfor %}
 <div id="mast" role="banner">
 <div id="mast_box">

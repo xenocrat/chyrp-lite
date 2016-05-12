@@ -19,12 +19,20 @@
 <body>
 <!-- Mast -->
 <div class="shim">
-{% for flashes in flash.all %}
-{% for text in flashes %}
-<div class="ribbon flash">
-<h3 role="alert" class="ribbon">{{ text }}</h3>
+{% for notice in flash.notices %}
+<div class="ribbon flash notice">
+<h3 role="alert" class="ribbon">{{ notice }}</h3>
 </div>
 {% endfor %}
+{% for warning in flash.warnings %}
+<div class="ribbon flash warning">
+<h3 role="alert" class="ribbon">{{ warning }}</h3>
+</div>
+{% endfor %}
+{% for message in flash.messages %}
+<div class="ribbon flash message">
+<h3 role="alert" class="ribbon">{{ message }}</h3>
+</div>
 {% endfor %}
 </div>
 {% if not ["login", "controls", "register", "lost_password"] | contains(route.action) %}
