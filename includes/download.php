@@ -53,6 +53,9 @@
         exit("File Not Found.");
     }
 
+    if (DEBUG)
+        error_log("SERVING file download for ".$filename);
+
     header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
     header("Content-type: application/octet-stream");
     header("Content-Disposition: attachment; filename=\"".$filename."\"");
