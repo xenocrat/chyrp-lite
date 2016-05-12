@@ -2,8 +2,6 @@
     class Tags extends Modules {
         public function __init() {
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
-            $this->addAlias("javascript", "tagsJS");
-            $this->addAlias("admin_javascript", "tagsJS");
         }
 
         static function __install() {
@@ -715,7 +713,7 @@
                 echo "        <category scheme=\"".$config->url."/tag/\" term=\"".$clean."\" label=\"".fix($tag)."\" />\n";
         }
 
-        public function tagsJS() {
+        public function admin_javascript() {
             include MODULES_DIR.DIR."tags".DIR."javascript.php";
         }
     }

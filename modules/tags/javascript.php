@@ -2,24 +2,6 @@ var ChyrpTags = {
     init: function() {
         $("form input[name='tags']").on("keyup", ChyrpTags.scan).trigger("keyup");
         $("form span.tags_select a").on("click", ChyrpTags.add);
-        ChyrpTags.watch();
-    },
-    watch: function() {
-        // Watch for DOM additions on blog pages.
-        if (!!window.MutationObserver && $(".post").length) {
-            var target = $(".post").last().parent()[0];
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    for (var i = 0; i < mutation.addedNodes.length; ++i) {
-                        var item = mutation.addedNodes[i];
-                        $(item).find("input[name='tags']").on("keyup", ChyrpTags.scan).trigger("keyup");
-                        $(item).find("span.tags_select a").on("click", ChyrpTags.add);
-                    }
-                });
-            });
-            var config = { childList: true, subtree: true };
-            observer.observe(target, config);
-        }
     },
     scan: function(e) {
         $(e.target).siblings("span.tags_select").children("a.tag").each(function(){
