@@ -8,9 +8,9 @@
         # Caches session data.
         static $data = "";
 
-        # Variable: $allow
-        # Allow this session?
-        static $allow = true;
+        # Variable: $deny
+        # Deny this session?
+        static $deny = false;
 
         /**
          * Function: open
@@ -18,7 +18,7 @@
          */
         static function open() {
             $ua = oneof(@$_SERVER['HTTP_USER_AGENT'], "");
-            return self::$allow = !preg_match("/(bot|crawler|slurp|spider)\b/i", $ua);
+            return !(self::$deny = preg_match("/(bot|crawler|slurp|spider)\b/i", $ua));
         }
 
         /**
@@ -54,7 +54,7 @@
          *     $data - Data to write.
          */
         static function write($id, $data) {
-            if (!self::$allow or empty($data) or $data == self::$data)
+            if (self::$deny or empty($data) or $data == self::$data)
                 return;
 
             $sql = SQL::current();
