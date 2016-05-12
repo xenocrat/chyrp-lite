@@ -233,11 +233,11 @@ var Flash = {
         var alert = $("<p>", {"role": "alert"}).addClass(classes).html(msg).fader(5000);
         $("#content").prepend(alert);
 
-        var wintop = $(window).scrollTop();
-        var objtop = $("#content").offset().top;
+        var bodyViewTop = $("body").scrollTop();
+        var flashHeight = $("#content").offset().top;
 
-        if (wintop > objtop)
-            $(window).scrollTop(objtop);
+        if (bodyViewTop > flashHeight)
+            $("body").stop().animate({scrollTop: flashHeight}, "fast");
     }
 }
 var Help = {
