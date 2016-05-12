@@ -138,7 +138,7 @@
                     $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
             foreach ($info["notifications"] as &$notification)
-                $notification = addslashes(strip_tags($notification));
+                $notification = addslashes($notification);
 
             exit('{ "notifications": ['.(!empty($info["notifications"]) ? '"'.implode('", "', $info["notifications"]).'"' : "").'] }');
 

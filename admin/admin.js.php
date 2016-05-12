@@ -6,6 +6,9 @@ $(function() {
     // Open help text in an iframe.
     Help.init();
 
+    // Dynamic behaviour for Flashes.
+    Flash.init();
+
     // Interactive behaviour.
     toggle_all();
     toggle_options();
@@ -37,15 +40,6 @@ $(function() {
     if (Route.action == "user_settings")
         toggle_correspondence();
 });
-var Route = {
-    action: "<?php echo fix(@$_GET['action']); ?>"
-}
-var Site = {
-    url: '<?php echo $config->url; ?>',
-    chyrp_url: '<?php echo $config->chyrp_url; ?>',
-    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
-    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
-}
 function toggle_all() {
     var all_checked = true;
 
@@ -185,7 +179,7 @@ function validate_passwords(selector_primary, selector_confirm) {
     $(selector_primary).parents("form").on("submit", function(e) {
         if ($(selector_primary).val() != $(selector_confirm).val()) {
             e.preventDefault();
-            alert('<?php echo __("Passwords do not match."); ?>');
+            Flash.warning('<?php echo __("Passwords do not match."); ?>');
         }
     });
 }
@@ -200,6 +194,51 @@ function confirm_delete_group(msg) {
         if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>'))
             e.preventDefault();
     });
+}
+var Route = {
+    action: "<?php echo fix(@$_GET['action']); ?>"
+}
+var Site = {
+    url: '<?php echo $config->url; ?>',
+    chyrp_url: '<?php echo $config->chyrp_url; ?>',
+    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
+    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
+}
+var Flash = {
+    init: function() {
+        $("p[role='alert'].message").fader(5000);
+    },
+    notice: function(msg) {
+        if (!(msg instanceof Array))
+            msg = new Array(msg);
+
+        for (var n = 0; n < msg.length; n++)
+            Flash.alert("message yay", msg);
+    },
+    warning: function(msg) {
+        if (!(msg instanceof Array))
+            msg = new Array(msg);
+
+        for (var w = 0; w < msg.length; w++)
+            Flash.alert("message boo", msg);
+    },
+    message: function(msg) {
+        if (!(msg instanceof Array))
+            msg = new Array(msg);
+
+        for (var m = 0; m < msg.length; m++)
+            Flash.alert("message", msg);
+    },
+    alert: function(classes, msg) {
+        var alert = $("<p>", {"role": "alert"}).addClass(classes).html(msg).fader(5000);
+        $("#content").prepend(alert);
+
+        var wintop = $(window).scrollTop();
+        var objtop = $("#content").offset().top;
+
+        if (wintop > objtop)
+            $(window).scrollTop(objtop);
+    }
 }
 var Help = {
     init: function() {
@@ -325,20 +364,20 @@ var Extend = {
     },
     action: null,
     confirmed: null,
+    busy: false,
     failed: false,
     init: function() {
         if (Site.ajax)
             $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(function(e) {
-                if (!Extend.failed) {
+                if (!Extend.failed && !Extend.busy) {
                     e.preventDefault();
+                    Extend.busy = true;
                     Extend.ajax_toggle(e);
                 }
             });
 
-        if (Route.action != "modules")
-            return;
-
-        Extend.check_errors();
+        if (Route.action == "modules")
+            Extend.check_errors();
     },
     reset_errors: function() {
         $(".modules li.error").removeClass("error");
@@ -428,11 +467,7 @@ var Extend = {
                 Extend.confirmed = (confirm(data)) ? 1 : 0;
 
             if (Site.key == "") {
-                if (Extend.action == "enable")
-                    Extend.panic('<?php echo __("The module cannot be enabled because your web browser did not send proper credentials.", "theme"); ?>');
-                else
-                    Extend.panic('<?php echo __("The module cannot be disabled because your web browser did not send proper credentials.", "theme"); ?>');
-
+                Extend.panic('<?php echo __("The extension cannot be toggled because your web browser did not send proper credentials.", "theme"); ?>');
                 return;
             }
 
@@ -454,24 +489,23 @@ var Extend = {
                     if (Extend.extension.type == "module")
                         Extend.check_errors();
 
-                    $(json.notifications).each(function() {
-                        if (this != "")
-                            alert(this.replace(/<([^>]+)>\n?/gm, ""));
-                    });
-                },
-                error: function() {
+                    Flash.message(json.notifications);
+
                     if (Extend.action == "enable")
-                        alert('<?php echo __("There was an error enabling the extension.", "theme"); ?>');
+                        Flash.notice('<?php echo __("Extension enabled."); ?>');
                     else
-                        alert('<?php echo __("There was an error disabling the extension.", "theme"); ?>');
-                }
-            })
+                        Flash.notice('<?php echo __("Extension disabled."); ?>');
+
+                    Extend.busy = false;
+                },
+                error: Extend.panic
+            });
         }, "text").fail(Extend.panic);
     },
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         Extend.failed = true;
-        alert(message);
+        Flash.warning(message);
     }
 }
 <?php $trigger->call("admin_javascript"); ?>
