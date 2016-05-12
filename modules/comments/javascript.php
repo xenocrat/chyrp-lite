@@ -242,9 +242,7 @@ var ChyrpComment = {
                 return;
             }
 
-            $("#comment_" + id).fadeOut("fast", function(){
-                $(this).remove();
-            });
+            $("#comment_" + id).fader(0);
         }, "html").fail(ChyrpComment.panic);
     },
     panic: function(message) {
