@@ -101,7 +101,7 @@ function toggle_all() {
     });
 }
 function toggle_options() {
-    if ($("#more_options").size()) {
+    if ($("#more_options").length) {
         if (Cookie.get("show_more_options") == "true")
             var more_options_text = '<?php echo __("&uarr; Fewer Options", "theme"); ?>';
         else
