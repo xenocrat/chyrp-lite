@@ -53,9 +53,9 @@ var Cookie = {
   	}
 }
 
-// Used to check if AJAX responses are errors.
-function isError(text) {
-  return /<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->/.test(text);
+// Determine if AJAX responses are errors.
+function isError(response) {
+	return /<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->/.test(response);
 }
 
 // Award a numeric score for the strength of a password.
