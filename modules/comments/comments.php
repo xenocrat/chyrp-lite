@@ -198,7 +198,7 @@
                              $notify,
                              $created_at);
 
-            if (isset($_POST['ajax']))
+            if (!empty($_POST['ajax']))
                 exit(__("Comment updated.", "comments"));
 
             if (!$visitor->group->can("edit_comment", "delete_comment"))

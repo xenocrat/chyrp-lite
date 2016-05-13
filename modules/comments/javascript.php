@@ -7,7 +7,7 @@ var ChyrpComment = {
     delay: Math.abs(<?php echo(Config::current()->auto_reload_comments * 1000); ?>),
     per_page: <?php echo Config::current()->comments_per_page; ?>,
     init: function() {
-        if (Site.ajax && $("#comments").size()) {
+        if (Site.ajax && $("#comments").length) {
             if (ChyrpComment.reload && ChyrpComment.delay > 0)
                 ChyrpComment.interval = setInterval(ChyrpComment.fetch, ChyrpComment.delay);
 
@@ -69,7 +69,7 @@ var ChyrpComment = {
         var id = comments.attr("data-post");
         var ts = comments.attr("data-timestamp");
 
-        if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && !ChyrpComment.failed && $("#comments .comment").size() < ChyrpComment.per_page) {
+        if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && !ChyrpComment.failed && $("#comments .comment").length < ChyrpComment.per_page) {
             $.ajax({
                 type: "POST",
                 dataType: "json",
