@@ -32,7 +32,7 @@ var Post = {
         });
     },
     destroy: function(id) {
-        $("#post_" + id).loader();
+        var thisPost = $("#post_" + id).loader();
 
         if (Site.key == "") {
             Post.panic('<?php echo __("The post cannot be deleted because your web browser did not send proper credentials."); ?>');
@@ -44,14 +44,14 @@ var Post = {
             id: id,
             hash: Site.key
         }, function(response) {
-            $("#post_" + id).loader(true);
+            thisPost.loader(true);
 
             if (isError(response)) {
                 Post.panic();
                 return;
             }
 
-            $("#post_" + id).fadeOut("fast", function() {
+            thisPost.fadeOut("fast", function() {
                 $(this).remove();
 
                 if (Route.action == "view")
@@ -81,7 +81,7 @@ var Page = {
         });
     },
     destroy: function(id) {
-        $("#page_" + id).loader();
+        var thisPage = $("#page_" + id).loader();
 
         if (Site.key == "") {
             Page.panic('<?php echo __("The page cannot be deleted because your web browser did not send proper credentials."); ?>');
@@ -93,14 +93,14 @@ var Page = {
             id: id,
             hash: Site.key
         }, function(response) {
-            $("#page_" + id).loader(true);
+            thisPage.loader(true);
 
             if (isError(response)) {
                 Page.panic();
                 return;
             }
 
-            $("#page_" + id).fadeOut("fast", function() {
+            thisPage.fadeOut("fast", function() {
                 $(this).remove();
                 window.location = Site.url;
             });
