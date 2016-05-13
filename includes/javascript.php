@@ -3,9 +3,10 @@
     require_once "common.php";
 ?>
 $(function() {
-    if (Site.ajax)
+    if (Site.ajax) {
         Post.init();
         Page.init();
+    }
 });
 var Route = {
     action: "<?php echo fix(@$_GET['action']); ?>"
