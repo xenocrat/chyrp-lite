@@ -9,7 +9,7 @@ var ChyrpComment = {
     init: function() {
         if (Site.ajax && $("#comments").size()) {
             if (ChyrpComment.reload && ChyrpComment.delay > 0)
-                ChyrpComment.interval = setInterval(ChyrpComment.reload, ChyrpComment.delay);
+                ChyrpComment.interval = setInterval(ChyrpComment.fetch, ChyrpComment.delay);
 
             $("#add_comment:not(.no_ajax)").on("submit.validator", function(e) {
                 if (!ChyrpComment.failed && !!window.FormData) {
@@ -61,23 +61,24 @@ var ChyrpComment = {
             });
         }
     },
-    reload: function() {
+    fetch: function() {
         if (ChyrpComment.failed || $("#comments").attr("data-post") == undefined)
             return;
 
-        var id = $("#comments").attr("data-post");
+        var comments = $("#comments");
+        var id = comments.attr("data-post");
+        var ts = comments.attr("data-timestamp");
 
-        if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && ChyrpComment.failed != true && $(".comments.paginated").children().size() < ChyrpComment.per_page) {
+        if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && !ChyrpComment.failed && $("#comments .comment").size() < ChyrpComment.per_page) {
             $.ajax({
-                type: "post",
+                type: "POST",
                 dataType: "json",
                 url: Site.chyrp_url + "/includes/ajax.php",
                 data: {
-                    "action": "reload_comments",
-                    "post_id": id,
-                    "last_comment": $("#comments").attr("data-timestamp")
+                    action: "reload_comments",
+                    post_id: id,
+                    last_comment: ts
                 },
-                error: ChyrpComment.panic,
                 success: function(json) {
                     if (json.comment_ids.length > 0) {
                         $("#comments").attr("data-timestamp", json.last_comment);
@@ -90,7 +91,8 @@ var ChyrpComment = {
                             }, "html").fail(ChyrpComment.panic);
                         });
                     }
-                }
+                },
+                error: ChyrpComment.panic
             });
         }
     },
