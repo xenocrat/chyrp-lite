@@ -476,22 +476,22 @@ td.controls img {                               position: relative;
                                                 height: 16px }
 /* @end */
 
-/* @group messages */
-p.message {                                     padding: 0.6em;
+/* @group flashes */
+p.flash {                                       padding: 0.6em;
                                                 margin-bottom: 1em;
                                                 background-color: #7a9acc;
                                                 color: #ffffff;
                                                 border: none;
                                                 border-radius: 0.4em }
-p.message.yay {                                 background-color: #76b362;
+p.flash.notice {                                background-color: #76b362;
                                                 color: #ffffff }
-p.message.boo {                                 background-color: #d94c4c;
+p.flash.warning {                               background-color: #d94c4c;
                                                 color: #ffffff }
-p.message a:link,
-p.message a:visited,
-p.message a:hover,
-p.message a:focus,
-p.message a:active {                            color: #ffffff;
+p.flash a:link,
+p.flash a:visited,
+p.flash a:hover,
+p.flash a:focus,
+p.flash a:active {                            color: #ffffff;
                                                 text-decoration: underline }
 
 /* @end */
@@ -780,7 +780,7 @@ img#likeImage_preview {                         max-width: 28px;
                                                 text-align: center !important;
                                                 box-sizing: border-box !important }
     form.split label + button {                 margin-top: 0em !important }
-    .boo.message, .yay.message {                margin: 0em 0em 1em 0em !important }
+    p.flash {                                   margin: 0em 0em 1em 0em !important }
     span.pages {                                margin-top: 1em }
     div.controls h4 {                           display: block }
     .filters .filter_item {                     width: 100%;

@@ -185,7 +185,7 @@ function validate_passwords(selector_primary, selector_confirm) {
 }
 function confirm_edit_group(msg) {
     $("form.confirm").submit(function(e) {
-        if (!confirm('<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>'))
+        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to update the permissions?", "theme"); ?>'))
             e.preventDefault();
     });
 }
@@ -206,38 +206,39 @@ var Site = {
 }
 var Flash = {
     init: function() {
-        $("p[role='alert'].message").fader(5000);
+        $("p[role='alert'].flash").fader(5000);
     },
     notice: function(msg) {
         if (!(msg instanceof Array))
             msg = new Array(msg);
 
         for (var n = 0; n < msg.length; n++)
-            Flash.alert("message yay", msg);
+            Flash.alert("flash notice", msg);
     },
     warning: function(msg) {
         if (!(msg instanceof Array))
             msg = new Array(msg);
 
         for (var w = 0; w < msg.length; w++)
-            Flash.alert("message boo", msg);
+            Flash.alert("flash warning", msg);
     },
     message: function(msg) {
         if (!(msg instanceof Array))
             msg = new Array(msg);
 
         for (var m = 0; m < msg.length; m++)
-            Flash.alert("message", msg);
+            Flash.alert("flash message", msg);
     },
     alert: function(classes, msg) {
-        var alert = $("<p>", {"role": "alert"}).addClass(classes).html(msg).fader(5000);
-        $("#content").prepend(alert);
+        $("#content").prepend(
+            [$("<p>", {"role": "alert"}).addClass(classes).html(msg).fader(5000)]
+        );
 
         var bodyViewTop = $("body").scrollTop();
-        var flashHeight = $("#content").offset().top;
+        var flashOffset = $("#content").offset().top;
 
-        if (bodyViewTop > flashHeight)
-            $("body").stop().animate({scrollTop: flashHeight}, "fast");
+        if (bodyViewTop > flashOffset)
+            $("body").stop().animate({scrollTop: flashOffset}, "fast");
     }
 }
 var Help = {
