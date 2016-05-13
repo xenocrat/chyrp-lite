@@ -84,16 +84,18 @@
             exit;
 
         case "enable":
+            header("Content-type: application/json; charset=UTF-8");
+
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
-                exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable extensions.")."\"] }");
+                exit(json_encode(array("notifications" => array(__("You do not have sufficient privileges to enable extensions.")))));
 
             $type = ($_POST['type'] == "module") ? "module" : "feather" ;
 
             if (empty($_POST["extension"]))
-                exit("{ \"notifications\": [\"".__("You did not specify an extension to enable.")."\"] }");
+                exit(json_encode(array("notifications" => array(__("You did not specify an extension to enable.")))));
 
             $name          = $_POST["extension"];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
@@ -112,10 +114,10 @@
                 show_404(__("Not Found"), __("Feather not found."));
 
             if ($type == "module" and (module_enabled($_POST['extension']) or !empty(Modules::$instances[$name]->cancelled)))
-                exit("{ \"notifications\": [\"".__("Module already enabled.")."\"] }");
+                exit(json_encode(array("notifications" => array(__("Module already enabled.")))));
 
             if ($type == "feather" and feather_enabled($_POST['extension']))
-                exit("{ \"notifications\": [\"".__("Feather already enabled.")."\"] }");
+                exit(json_encode(array("notifications" => array(__("Feather already enabled.")))));
 
             if (file_exists($folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo"))
                 load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
@@ -137,22 +139,21 @@
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
                     $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
-            foreach ($info["notifications"] as &$notification)
-                $notification = addslashes($notification);
-
-            exit('{ "notifications": ['.(!empty($info["notifications"]) ? '"'.implode('", "', $info["notifications"]).'"' : "").'] }');
+            exit(json_encode(array("notifications" => $info["notifications"])));
 
         case "disable":
+            header("Content-type: application/json; charset=UTF-8");
+
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
-                exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to disable extensions.")."\"] }");
+                exit(json_encode(array("notifications" => array(__("You do not have sufficient privileges to disable extensions.")))));
 
             $type = ($_POST['type'] == "module") ? "module" : "feather" ;
 
             if (empty($_POST["extension"]))
-                exit("{ \"notifications\": [\"".__("You did not specify an extension to disable.")."\"] }");
+                exit(json_encode(array("notifications" => array(__("You did not specify an extension to disable.")))));
 
             $name          = $_POST["extension"];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
@@ -165,10 +166,10 @@
                 show_404(__("Not Found"), __("Feather not found."));
 
             if ($type == "module" and !module_enabled($name) and empty(Modules::$instances[$name]->cancelled))
-                exit("{ \"notifications\": [\"".__("Module already disabled.")."\"] }");
+                exit(json_encode(array("notifications" => array(__("Module already disabled.")))));
 
             if ($type == "feather" and feather_enabled($name))
-                exit("{ \"notifications\": [\"".__("Feather already disabled.")."\"] }");
+                exit(json_encode(array("notifications" => array(__("Feather already disabled.")))));
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), ($_POST['confirm'] == "1"));
@@ -185,7 +186,7 @@
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
 
-            exit('{ "notifications": [] }');
+            exit(json_encode(array("notifications" => array())));
 
         case "latest_feather":
             if (empty($_POST['feather']) or !in_array($_POST['feather'], $config->enabled_feathers))
