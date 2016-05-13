@@ -335,6 +335,7 @@
         </div>
     </body>
 </html>
+<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->
 <?php
         # Terminate execution.
         exit;
