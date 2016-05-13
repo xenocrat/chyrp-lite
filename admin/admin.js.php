@@ -506,7 +506,7 @@ var Extend = {
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         Extend.failed = true;
-        Flash.warning(message);
+        alert(message);
     }
 }
 <?php $trigger->call("admin_javascript"); ?>
