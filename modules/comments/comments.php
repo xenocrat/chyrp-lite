@@ -122,31 +122,30 @@
             if (empty($_POST['author']))
                 Flash::warning(__("Author can't be blank.", "comments"));
 
-            if (empty($_POST['email']))
+            if (empty($_POST['author_email']))
                 Flash::warning(__("Email address can't be blank.", "comments"));
-
-            if (!is_email($_POST['email']))
+            elseif (!is_email($_POST['author_email']))
                 Flash::warning(__("Invalid email address.", "comments"));
 
-            if (!empty($_POST['url']) and !is_url($_POST['url']))
+            if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
                 Flash::warning(__("Invalid website URL.", "comments"));
 
             if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
                 Flash::warning(__("Incorrect captcha code.", "comments"));
 
-            if (Flash::exists("warning"))
-                redirect($post->url());
-
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
-            Comment::create($_POST['body'],
-                            $_POST['author'],
-                            $_POST['url'],
-                            $_POST['email'],
-                            $post,
-                            $parent,
-                            $notify);
+            if (Flash::exists("warning"))
+                redirect($post->url());
+
+            Flash::notice(Comment::create($_POST['body'],
+                                          $_POST['author'],
+                                          $_POST['author_url'],
+                                          $_POST['author_email'],
+                                          $post,
+                                          $parent,
+                                          $notify), $post->url());
         }
 
         static function admin_update_comment() {
@@ -200,7 +199,7 @@
                              $created_at);
 
             if (isset($_POST['ajax']))
-                exit((string) $comment->id);
+                exit(__("Comment updated.", "comments"));
 
             if (!$visitor->group->can("edit_comment", "delete_comment"))
                 Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
@@ -556,7 +555,6 @@
                         show_404(__("Not Found"), __("Post not found."));
 
                     $ids = array();
-                    $last_comment = "";
 
                     if ($post->latest_comment > $last_comment) {
                         $new_comments = $sql->select("comments",
@@ -578,14 +576,14 @@
                         }
                     }
 
-                    $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
-                    header("Content-type: application/json; charset=utf-8");
-                    echo json_encode($responseObj);
+                    $response = array("comment_ids" => $ids,
+                                      "last_comment" => $last_comment);
+
+                    header("Content-type: application/json; charset=UTF-8");
+                    echo json_encode($response);
                     exit;
 
                 case "show_comment":
-                    $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
-
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to show a comment.", "comments"));
 
@@ -594,7 +592,7 @@
                     if ($comment->no_results)
                         show_404(__("Not Found"), __("Comment not found.", "comments"));
 
-                    $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason));
+                    $main->display("content".DIR."comment", array("comment" => $comment));
                     exit;
 
                 case "destroy_comment":
@@ -630,8 +628,31 @@
                     if (!$comment->editable())
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
-                    $main->display("forms/comment/edit", array("comment" => $comment));
+                    $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
                     exit;
+
+                case "validate_comment":
+                    header("Content-type: application/json; charset=UTF-8");
+                    $notifications = array();
+
+                    if (empty($_POST['body']))
+                        $notifications[] = __("Message can't be blank.", "comments");
+
+                    if (empty($_POST['author']))
+                        $notifications[] = __("Author can't be blank.", "comments");
+
+                    if (empty($_POST['author_email']))
+                        $notifications[] = __("Email address can't be blank.", "comments");
+                    elseif (!is_email($_POST['author_email']))
+                        $notifications[] = __("Invalid email address.", "comments");
+
+                    if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
+                        $notifications[] = __("Invalid website URL.", "comments");
+
+                    if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
+                        $notifications[] = __("Incorrect captcha code.", "comments");
+
+                    exit(json_encode(array("notifications" => $notifications)));
             }
         }
 

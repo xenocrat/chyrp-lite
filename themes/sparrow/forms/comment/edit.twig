@@ -6,7 +6,7 @@
 <label for="comment_author_{{ comment.id }}">{{ "Author" | translate }}</label>
 <input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="comment_author_{{ comment.id }}">
 <label for="comment_author_url_{{ comment.id }}">{{ "Author's website" | translate }}</label>
-<input class="text optional" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="comment_author_url_{{ comment.id }}" class="optional">
+<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="comment_author_url_{{ comment.id }}">
 <label for="comment_author_email_{{ comment.id }}">{{ "Author's email" | translate }}</label>
 <input class="text" type="email" name="author_email" value="{{ comment.author_email | fix(true) }}" id="comment_author_email_{{ comment.id }}">
 {% if visitor.group.can("edit_comment") %}
@@ -28,6 +28,7 @@
 <input type="hidden" name="id" value="{{ comment.id }}">
 <input type="hidden" name="hash" value="{{ ip | token }}">
 <input type="hidden" name="ajax" value="true">
+<input type="hidden" name="action" value="validate_comment">
 <div class="doaction speak">
 <button type="submit" accesskey="s">{{ "Save" | translate }}</button>
 <a href="#" id="comment_cancel_edit_{{ comment.id }}" class="cancel">{{ "Cancel" | translate }}</a>

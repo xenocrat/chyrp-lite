@@ -115,7 +115,7 @@
                               $parent,
                               $notify);
 
-                    Flash::notice(__("Your comment is awaiting moderation.", "comments"), $post->url());
+                    return __("Your comment is awaiting moderation.", "comments");
                 } else {
                     $comment = self::add($body,
                                          $author,
@@ -131,7 +131,7 @@
 
                     fallback($_SESSION['comments'], array());
                     $_SESSION['comments'][] = $comment->id;
-                    Flash::notice(__("Comment added."), $post->url());
+                    return __("Comment added.", "comments");
                 }
             } else {
                 $comment = self::add($body,
@@ -148,7 +148,7 @@
 
                 fallback($_SESSION['comments'], array());
                 $_SESSION['comments'][] = $comment->id;
-                Flash::notice(__("Comment added."), $post->url());
+                return __("Comment added.", "comments");
             }
         }
 
