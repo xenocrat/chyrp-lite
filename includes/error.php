@@ -125,7 +125,7 @@
         $title = oneof($title, __("Error"));
         $body = oneof($body, __("An unspecified error has occurred."));
 
-        # Report with backtrace and magic words for JavaScript.
+        # Report in plain text with backtrace and magic words for JavaScript.
         if (AJAX) {
             foreach ($backtrace as $trace)
                 $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
