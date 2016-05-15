@@ -617,6 +617,7 @@
                         unset($_SESSION['redirect_to']);
                     }
 
+                    Trigger::current()->call("user_logged_in", $user);
                     Flash::notice(__("Logged in."), $redirect);
                 }
             }
@@ -632,8 +633,13 @@
             if (!logged_in())
                 Flash::notice(__("You aren't logged in."), "/");
 
+            $cookies_notified = isset($_SESSION['cookies_notified']);
+
             session_destroy();
             session();
+
+            if ($cookies_notified)
+                $_SESSION['cookies_notified'] = true;
 
             Flash::notice(__("Logged out."), "/");
         }

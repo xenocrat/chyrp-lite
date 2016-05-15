@@ -1912,8 +1912,13 @@
             if (!logged_in())
                 Flash::notice(__("You aren't logged in."), $config->url);
 
+           $cookies_notified = isset($_SESSION['cookies_notified']);
+
             session_destroy();
             session();
+
+            if ($cookies_notified)
+                $_SESSION['cookies_notified'] = true;
 
             Flash::notice(__("Logged out."), $config->url); # Supply full URL for compatibility with canonical URLs.
         }
