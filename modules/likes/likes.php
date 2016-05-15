@@ -153,28 +153,9 @@
                 return;
 
             $like = new Like($post->id, $visitor->id);
-            $hasPersonLiked = false;
-            $people = $like->fetchPeople();
-
-            if (logged_in()) {
-                foreach ($people as $person) {
-                    if ($person["user_id"] == $like->user_id) {
-                        $hasPersonLiked = true;
-                        break;
-                    }
-                }
-            } else {
-                foreach ($people as $person) {
-                    if ($person["session_hash"] == $like->session_hash) {
-                        $hasPersonLiked = true;
-                        break;
-                    }
-                }
-            }
-
             $html = '<div class="likes" id="likes_'.$post->id.'">';
 
-            if (!$hasPersonLiked) {
+            if (!$like->resolve()) {
                 if ($visitor->group->can("like_post")) {
                     $html.= "<a class=\"likes like\" href=\"".
                                 $config->chyrp_url."/?action=like&post_id=".
@@ -299,5 +280,9 @@
         static function cacher_regenerate_triggers($regenerate) {
             $triggers = array("route_like", "route_unlike", "ajax_like", "ajax_unlike");
             return array_merge($regenerate, $triggers);
+        }
+
+        public function user_logged_in($user) {
+            $_SESSION["likes"] = array();
         }
     }
