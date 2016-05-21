@@ -857,7 +857,7 @@
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
-            if ($config->cookies_notification and !isset($_SESSION['cookies_notified']) and !logged_in()) {
+            if ($config->cookies_notification and empty($_SESSION['cookies_notified']) and !logged_in()) {
                 Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
                 $_SESSION['cookies_notified'] = true;
             }
