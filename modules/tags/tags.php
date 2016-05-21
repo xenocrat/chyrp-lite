@@ -163,8 +163,8 @@
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags"))->fetchAll() as $tag) {
-                $post_tags = self::tags_unserialize($tag["value"]);
 
+                $post_tags = self::tags_unserialize($tag["value"]);
                 $tags = array_merge($tags, $post_tags);
 
                 foreach ($post_tags as $name => $clean)
@@ -172,13 +172,14 @@
             }
 
             $popularity = array_count_values($names);
-
             $cloud = array();
+
             if (!empty($popularity)) {
                 $max_qty = max($popularity);
                 $min_qty = min($popularity);
 
                 $spread = $max_qty - $min_qty;
+
                 if ($spread == 0)
                     $spread = 1;
 
@@ -230,7 +231,6 @@
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"));
 
             $sql = SQL::current();
-
             $tags = array();
             $names = array();
 
@@ -238,8 +238,8 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
-                $post_tags = self::tags_unserialize($tag["value"]);
 
+                $post_tags = self::tags_unserialize($tag["value"]);
                 $tags = array_merge($tags, $post_tags);
 
                 foreach ($post_tags as $name => $clean)
@@ -309,7 +309,6 @@
             $_POST['name'] = is_numeric($_POST['name']) ? "'".$_POST['name']."'" : $_POST['name'] ;
 
             $sql = SQL::current();
-
             $tags = array();
             $clean = array();
 
@@ -317,9 +316,9 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_name_match($_POST['original'])))->fetchAll() as $tag) {
+
                 $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['original']]);
-
                 $tags[$_POST['name']] = sanitize($_POST['name']);
 
                 $sql->update("post_attributes",
@@ -336,7 +335,6 @@
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"));
 
             $sql = SQL::current();
-
             $tags = array();
             $names = array();
 
@@ -344,8 +342,8 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
-                $post_tags = self::tags_unserialize($tag["value"]);
 
+                $post_tags = self::tags_unserialize($tag["value"]);
                 $tags = array_merge($tags, $post_tags);
 
                 foreach ($post_tags as $name => $clean)
@@ -385,6 +383,7 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_name_match($_POST['name'])))->fetchAll() as $tag)  {
+
                 $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['name']]);
 
@@ -457,9 +456,7 @@
                                         __("No Tag", "tags"));
 
             $sql = SQL::current();
-
             $tags = explode(" ", $_GET['name']);
-
             $likes = array();
 
             foreach ($tags as $name)
@@ -506,6 +503,7 @@
             if ($sql->count("post_attributes", array("name" => "tags")) > 0) {
                 $tags = array();
                 $names = array();
+
                 foreach($sql->select("posts",
                                      "post_attributes.*",
                                      array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
@@ -514,8 +512,8 @@
                                      null, null, null,
                                      array(array("table" => "post_attributes",
                                                  "where" => "post_id = posts.id")))->fetchAll() as $tag) {
-                    $post_tags = self::tags_unserialize($tag["value"]);
 
+                    $post_tags = self::tags_unserialize($tag["value"]);
                     $tags = array_merge($tags, $post_tags);
 
                     foreach ($post_tags as $name => $clean)
@@ -529,7 +527,6 @@
 
                 $max_qty = max($popularity);
                 $min_qty = min($popularity);
-
                 $spread = $max_qty - $min_qty;
 
                 if ($spread == 0)
@@ -574,6 +571,7 @@
                 return array();
 
             $linked = array();
+
             foreach ($tags as $tag => $clean)
                 $linked[] = '<a class="tag" href="'.url("tag/".urlencode($clean), MainController::current()).'" rel="tag">'.$tag.'</a>';
 
@@ -662,7 +660,6 @@
 
             while ($attr = $attrs->fetchObject()) {
                 $post_tags = self::tags_unserialize($attr->value);
-
                 $tags = array_merge($tags, $post_tags);
 
                 foreach ($post_tags as $name => $clean)
@@ -673,7 +670,6 @@
                 return array();
 
             $popularity = array_count_values($names);
-
             $list = array();
 
             foreach ($popularity as $name => $number)
