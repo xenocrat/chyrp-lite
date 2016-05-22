@@ -213,21 +213,21 @@ var Flash = {
             msg = new Array(msg);
 
         for (var n = 0; n < msg.length; n++)
-            Flash.alert("flash notice", msg);
+            Flash.alert("flash notice", msg[n]);
     },
     warning: function(msg) {
         if (!(msg instanceof Array))
             msg = new Array(msg);
 
         for (var w = 0; w < msg.length; w++)
-            Flash.alert("flash warning", msg);
+            Flash.alert("flash warning", msg[w]);
     },
     message: function(msg) {
         if (!(msg instanceof Array))
             msg = new Array(msg);
 
         for (var m = 0; m < msg.length; m++)
-            Flash.alert("flash message", msg);
+            Flash.alert("flash message", msg[m]);
     },
     alert: function(classes, msg) {
         $("#content").prepend(
