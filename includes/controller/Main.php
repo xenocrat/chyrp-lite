@@ -611,6 +611,7 @@
                         Flash::notice(__("You must activate your account before you log in."), "/");
 
                     $_SESSION['user_id'] = $user->id;
+                    $_SESSION['cookies_notified'] = true;
 
                     if (!isset($redirect)) {
                         $redirect = oneof(@$_SESSION['redirect_to'], "/");
@@ -633,13 +634,12 @@
             if (!logged_in())
                 Flash::notice(__("You aren't logged in."), "/");
 
-            $cookies_notified = isset($_SESSION['cookies_notified']);
+            $cookies_notified = !empty($_SESSION['cookies_notified']);
 
             session_destroy();
             session();
 
-            if ($cookies_notified)
-                $_SESSION['cookies_notified'] = true;
+            $_SESSION['cookies_notified'] = $cookies_notified;
 
             Flash::notice(__("Logged out."), "/");
         }
@@ -857,7 +857,7 @@
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
-            if ($config->cookies_notification and empty($_SESSION['cookies_notified']) and !logged_in()) {
+            if ($config->cookies_notification and empty($_SESSION['cookies_notified'])) {
                 Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
                 $_SESSION['cookies_notified'] = true;
             }
