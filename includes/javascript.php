@@ -9,7 +9,7 @@ $(function() {
     }
 });
 var Route = {
-    action: "<?php echo fix(@$_GET['action']); ?>"
+    action: "<?php echo fix(@$_GET['action'], true); ?>"
 }
 var Site = {
     url: '<?php echo $config->url; ?>',
