@@ -15,7 +15,7 @@ $.fn.loader = function(remove) {
 
 // Fade and remove element after delay.
 $.fn.fader = function(ms) {
-	return $(this).delay(ms).fadeOut("fast", function() {
+	return $(this).addClass("ajax_fading").delay(ms).fadeOut("fast", function() {
 		       $(this).remove();
 		   });
 }
