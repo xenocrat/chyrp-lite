@@ -13,13 +13,6 @@ $.fn.loader = function(remove) {
   return this;
 }
 
-// Fade and remove element after delay.
-$.fn.fader = function(ms) {
-	return $(this).addClass("ajax_fading").delay(ms).fadeOut("fast", function() {
-		       $(this).remove();
-		   });
-}
-
 // Cookie management
 var Cookie = {
   	set: function (name, value, days) {

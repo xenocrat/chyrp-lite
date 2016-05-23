@@ -6,9 +6,6 @@ $(function() {
     // Open help text in an iframe.
     Help.init();
 
-    // Dynamic behaviour for Flashes.
-    Flash.init();
-
     // Interactive behaviour.
     toggle_all();
     toggle_options();
@@ -205,40 +202,55 @@ var Site = {
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
 var Flash = {
-    init: function() {
-        $("p[role='alert'].flash").fader(5000);
+    last: {
+        string: "",
+        timestamp: Date.now()
     },
-    notice: function(msg) {
-        if (!(msg instanceof Array))
-            msg = new Array(msg);
+    notice: function(strings) {
+        if (!(strings instanceof Array))
+            strings = new Array(strings);
 
-        for (var n = 0; n < msg.length; n++)
-            Flash.alert("flash notice", msg[n]);
+        for (var n = 0; n < strings.length; n++)
+            Flash.alert("flash notice", strings[n]);
     },
-    warning: function(msg) {
-        if (!(msg instanceof Array))
-            msg = new Array(msg);
+    warning: function(strings) {
+        if (!(strings instanceof Array))
+            strings = new Array(strings);
 
-        for (var w = 0; w < msg.length; w++)
-            Flash.alert("flash warning", msg[w]);
+        for (var w = 0; w < strings.length; w++)
+            Flash.alert("flash warning", strings[w]);
     },
-    message: function(msg) {
-        if (!(msg instanceof Array))
-            msg = new Array(msg);
+    message: function(strings) {
+        if (!(strings instanceof Array))
+            strings = new Array(strings);
 
-        for (var m = 0; m < msg.length; m++)
-            Flash.alert("flash message", msg[m]);
+        for (var m = 0; m < strings.length; m++)
+            Flash.alert("flash message", strings[m]);
     },
-    alert: function(classes, msg) {
-        $("#content").prepend(
-            [$("<p>", {"role": "alert"}).addClass(classes).html(msg).fader(5000)]
-        );
+    alert: function(classes, string) {
+        var now = Date.now();
 
+        // Retire previous flashes after an interval of 1000ms and add the new flash.
+        if (string !== Flash.last.string) {
+            if (now > Flash.last.timestamp + 1000)
+                $("p[role='alert'].flash").stop().delay(400).fadeOut("fast", function() {
+                    $(this).remove();
+                });
+
+            $("#content").prepend(
+                [$("<p>", {"role": "alert"}).addClass(classes).html(string)]
+            );
+        }
+
+        // Scroll to the top of the content area.
         var bodyViewTop = $("body").scrollTop();
         var flashOffset = $("#content").offset().top;
 
         if (bodyViewTop > flashOffset)
             $("body").stop().animate({scrollTop: flashOffset}, "fast");
+
+        Flash.last.string = string;
+        Flash.last.timestamp = now;
     }
 }
 var Help = {

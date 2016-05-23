@@ -237,7 +237,9 @@ var ChyrpComment = {
                 return;
             }
 
-            thisItem.fader(0);
+            thisItem.fadeOut("fast", function() {
+                $(this).remove();
+            });
         }, "html").fail(ChyrpComment.panic);
     },
     panic: function(message) {
