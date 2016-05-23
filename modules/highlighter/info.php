@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Syntax Highlighting", "highlighter"),
     "url"           => "https://highlightjs.org/",
-    "version"       => 1.0,
+    "version"       => 1.1,
     "description"   => __("Adds syntax highlighting to nested <code>&lt;pre&gt;&lt;code&gt;</code> blocks.", "highlighter"),
     "author"        => array(
         "name"      => "Daniel Pimley",
