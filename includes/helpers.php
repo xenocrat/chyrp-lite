@@ -47,8 +47,8 @@
     function show_403($title = "", $body = "") {
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 
-        oneof($title, __("403 Forbidden"));
-        oneof($body, __("You do not have permission to access this resource."));
+        $title = oneof($title, __("403 Forbidden"));
+        $body = oneof($body, __("You do not have permission to access this resource."));
 
         error($title, $body);
     }
@@ -64,8 +64,8 @@
      function show_404($title = "", $body = "") {
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 
-        oneof($title, __("404 Not Found"));
-        oneof($body, __("The requested resource was not found."));
+        $title = oneof($title, __("404 Not Found"));
+        $body = oneof($body, __("The requested resource was not found."));
 
         $theme = Theme::current();
         $main = MainController::current();
