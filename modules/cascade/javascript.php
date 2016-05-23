@@ -62,7 +62,7 @@ var ChyrpAjaxScroll = {
                             this_next_obj.click(ChyrpAjaxScroll.fetch);
                     } else {
                         // That's all folks!
-                        this_next_obj.fadeOut("fast");
+                        this_next_obj.remove();
                     }
                 }).fail(ChyrpAjaxScroll.panic);
             }
