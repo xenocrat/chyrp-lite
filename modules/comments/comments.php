@@ -78,13 +78,16 @@
             if ($comment->no_results)
                 show_404(__("Not Found"), __("Comment not found.", "comments"));
 
-            $post = new Post($comment->post_id);
+            $post = new Post($comment->post_id, array("drafts" => true));
 
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->theme_exists())
                 error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."));
+
+            if ($post->status == "draft")
+                Flash::message(__("This post is a draft."));
 
             if ($post->status == "scheduled")
                 Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
@@ -548,7 +551,7 @@
                     if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                         exit;
 
-                    $post = new Post($_POST['post_id']);
+                    $post = new Post($_POST['post_id'], array("drafts" => true));
                     $last_comment = fallback($_POST['last_comment'], $post->created_at);
 
                     if ($post->no_results)
@@ -829,7 +832,7 @@
         }
 
         public function correspond_comment($params) {
-            $post = new Post($params["post"]);
+            $post = new Post($params["post"], array("drafts" => true));
 
             $params["subject"] = _f("New Comment at %s", Config::current()->name);
             $params["message"] = _f("%s commented on a blog post:", fix($params["author"])).
