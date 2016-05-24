@@ -107,7 +107,10 @@
 
             $length = filesize(uploaded($post->filename, false));
 
-            echo '<link rel="enclosure" href="'.uploaded($post->filename).'" type="'.$this->video_type($post->filename).'" title="'.truncate(strip_tags($post->description)).'" length="'.$length.'" />';
+            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
+                        '" type="'.$this->video_type($post->filename).
+                        '" title="'.truncate(strip_tags($post->title())).
+                        '" length="'.$length.'" />'."\n";
         }
 
         public function video_player($filename, $params = array(), $post) {

@@ -109,7 +109,10 @@
 
             $length = filesize(uploaded($post->filename, false));
 
-            echo '<link rel="enclosure" href="'.uploaded($post->filename).'" type="'.$this->audio_type($post->filename).'" title="'.truncate(strip_tags($post->description)).'" length="'.$length.'" />';
+            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
+                        '" type="'.$this->audio_type($post->filename).
+                        '" title="'.truncate(strip_tags($post->title())).
+                        '" length="'.$length.'" />'."\n";
         }
 
         public function audio_player($filename, $params = array(), $post) {
