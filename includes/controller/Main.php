@@ -796,11 +796,6 @@
                 $url = $post->url();
                 $trigger->filter($url, "feed_url", $post);
 
-                if (!$post->user->no_results) {
-                    $author_name = oneof($post->user->full_name, $post->user->login);
-                    $author_uri = $post->user->website;
-                }
-
                 $atom->entry(oneof($post->title(), ucfirst($post->feather)),
                              $tagged,
                              $post->feed_content(),
