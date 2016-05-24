@@ -750,6 +750,9 @@
          * Grabs posts for the feed.
          */
         public function feed($posts = null) {
+            $config = Config::current();
+            $trigger = Trigger::current();
+
             $result = SQL::current()->select("posts",
                                              "posts.id",
                                              array("posts.status" => "public"),
@@ -766,8 +769,6 @@
             else
                 fallback($posts, array());
 
-            header("Content-Type: application/atom+xml; charset=UTF-8");
-
             if (!is_array($posts))
                 $posts = $posts->paginated;
 
@@ -777,7 +778,41 @@
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
 
-            require INCLUDES_DIR.DIR."feed.php";
+            $atom = new AtomFeed();
+
+            $atom->open($config->name,
+                        $config->description,
+                        null,
+                        $latest_timestamp,
+                        array($config->url));
+
+            foreach ($posts as $post) {
+                $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
+
+                $tagged = substr(strstr(url("id/".$post->id), "//"), 2);
+                $tagged = str_replace("#", "/", $tagged);
+                $tagged = preg_replace("/(".preg_quote(parse_url($post->url(), PHP_URL_HOST)).")/",
+                                       "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
+
+                $url = $post->url();
+                $trigger->filter($url, "feed_url", $post);
+
+                $author_name = (!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : __("Guest") ;
+                $author_uri = (!$post->user->no_results and !empty($post->user->website)) ? $post->user->website : "" ;
+
+                $atom->entry(oneof($post->title(), ucfirst($post->feather)),
+                             $tagged,
+                             $post->feed_content(),
+                             $url,
+                             $post->created_at,
+                             $updated,
+                             $author_name,
+                             $author_uri);
+
+                $trigger->call("feed_item", $post);
+            }
+
+            $atom->close();
         }
 
         /**

@@ -689,16 +689,48 @@
         }
 
         static function view_feed($context) {
+            $config = Config::current();
+            $trigger = Trigger::current();
+
             $post = $context["post"];
-
-            $title = $post->title();
-            fallback($title, ucfirst($post->feather)." Post #".$post->id);
-
-            $title = _f("Comments on &#8220;%s&#8221;", array(fix($title)), "comments");
-
             $comments = $post->comments;
+            $latest_timestamp = 0;
+            $title = _f("Comments on &#8220;%s&#8221;", fix(oneof($post->title(), ucfirst($post->feather))), "comments");
 
-            require "comments_feed.php";
+            foreach ($comments as $comment)
+                if (strtotime($comment->created_at) > $latest_timestamp)
+                    $latest_timestamp = strtotime($comment->created_at);
+
+            $atom = new AtomFeed();
+
+            $atom->open($title,
+                        null,
+                        null,
+                        $latest_timestamp);
+
+            foreach ($comments as $comment) {
+                $trigger->call("feed_comment", $comment);
+
+                $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
+
+                $tagged = substr(strstr(url("id/".$comment->post->id)."#comment_".$comment->id, "//"), 2);
+                $tagged = str_replace("#", "/", $tagged);
+                $tagged = preg_replace("/(".preg_quote(parse_url($comment->post->url(), PHP_URL_HOST)).")/",
+                                       "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
+
+                $atom->entry(_f("Comment #%d", $comment->id, "comments"),
+                             $tagged,
+                             $comment->body,
+                             $comment->post->url()."#comment_".$comment->id,
+                             $comment->created_at,
+                             $updated,
+                             $comment->author,
+                             $comment->author_url);
+
+                $trigger->call("comments_feed_item", $comment->id);
+            }
+
+            $atom->close();
         }
 
         static function metaWeblog_getPost($struct, $post) {
@@ -786,21 +818,21 @@
             foreach ($comments as $comment) {
                 $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
 
-                $atom.= "        <chyrp:comment>\r";
-                $atom.= '            <updated>'.when("c", $updated).'</updated>'."\r";
-                $atom.= '            <published>'.when("c", $comment->created_at).'</published>'."\r";
-                $atom.= '            <author chyrp:user_id="'.$comment->user_id.'">'."\r";
-                $atom.= "                <name>".fix($comment->author)."</name>\r";
-                if (!empty($comment->author_url))
-                $atom.= "                <uri>".fix($comment->author_url)."</uri>\r";
-                $atom.= "                <email>".fix($comment->author_email)."</email>\r";
-                $atom.= "                <chyrp:login>".fix(@$comment->user->login)."</chyrp:login>\r";
-                $atom.= "                <chyrp:ip>".long2ip($comment->author_ip)."</chyrp:ip>\r";
-                $atom.= "                <chyrp:agent>".fix($comment->author_agent)."</chyrp:agent>\r";
-                $atom.= "            </author>\r";
-                $atom.= "            <content>".fix($comment->body)."</content>\r";
-                $atom.= "                <chyrp:status>".fix($comment->status)."</chyrp:status>\r";
-                $atom.= "        </chyrp:comment>\r";
+                $atom.= "        <chyrp:comment>\r".
+                        '            <updated>'.when("c", $updated).'</updated>'."\r".
+                        '            <published>'.when("c", $comment->created_at).'</published>'."\r".
+                        '            <author chyrp:user_id="'.$comment->user_id.'">'."\r".
+                        "                <name>".fix($comment->author)."</name>\r".
+                        (!empty($comment->author_url) ? 
+                        "                <uri>".fix($comment->author_url)."</uri>\r" : "").
+                        "                <email>".fix($comment->author_email)."</email>\r".
+                        "                <chyrp:login>".fix(@$comment->user->login)."</chyrp:login>\r".
+                        "                <chyrp:ip>".long2ip($comment->author_ip)."</chyrp:ip>\r".
+                        "                <chyrp:agent>".fix($comment->author_agent)."</chyrp:agent>\r".
+                        "            </author>\r".
+                        "            <content>".fix($comment->body)."</content>\r".
+                        "                <chyrp:status>".fix($comment->status)."</chyrp:status>\r".
+                        "        </chyrp:comment>\r";
             }
 
             return $atom;
@@ -817,11 +849,6 @@
 
             if (Comment::any_editable() or Comment::any_deletable())
                 return "manage_comments";
-        }
-
-        public function route_comments_rss() {
-            header($_SERVER["SERVER_PROTOCOL"]." 301 Moved Permanently");
-            redirect("comments_feed/");
         }
 
         static function visitor_comments() {
