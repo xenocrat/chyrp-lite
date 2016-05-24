@@ -54,7 +54,7 @@ var Post = {
             thisPost.fadeOut("fast", function() {
                 $(this).remove();
 
-                if (Route.action == "view")
+                if (!$(".post").length)
                     window.location = Site.url;
             });
         }, "html").fail(Post.panic);
