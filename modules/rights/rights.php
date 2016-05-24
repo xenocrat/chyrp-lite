@@ -83,6 +83,11 @@
             $post->licence_link = self::licence_link($post);
         }
 
+        public function feed_item($post) {
+            if (!empty($post->rights_licence))
+               printf("        <rights>%s</rights>\n", $post->rights_licence);
+        }
+
         static function licence_link($post) {
             switch ($post->rights_licence) {
                 case "Creative Commons BY":
