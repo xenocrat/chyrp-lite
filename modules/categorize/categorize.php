@@ -25,7 +25,7 @@
 
         public function feed_item($post) {
             if (!empty($post->category_id) OR $post->category != 0)
-               printf("\t<category term=\"%s\" />\n", Category::getCategory($post->category_id)->name);
+               printf("        <category term=\"%s\" />\n", Category::getCategory($post->category_id)->name);
         }
 
         /* XML Stuff */
