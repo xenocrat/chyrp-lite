@@ -783,8 +783,7 @@
             $atom->open($config->name,
                         $config->description,
                         null,
-                        $latest_timestamp,
-                        array($config->url));
+                        $latest_timestamp);
 
             foreach ($posts as $post) {
                 $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
@@ -797,8 +796,10 @@
                 $url = $post->url();
                 $trigger->filter($url, "feed_url", $post);
 
-                $author_name = (!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : __("Guest") ;
-                $author_uri = (!$post->user->no_results and !empty($post->user->website)) ? $post->user->website : "" ;
+                if (!$post->user->no_results) {
+                    $author_name = oneof($post->user->full_name, $post->user->login);
+                    $author_uri = $post->user->website;
+                }
 
                 $atom->entry(oneof($post->title(), ucfirst($post->feather)),
                              $tagged,
@@ -806,8 +807,8 @@
                              $url,
                              $post->created_at,
                              $updated,
-                             $author_name,
-                             $author_uri);
+                             ((!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : null),
+                             ((!$post->user->no_results) ? $post->user->website : null));
 
                 $trigger->call("feed_item", $post);
             }
