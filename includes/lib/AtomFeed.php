@@ -6,7 +6,16 @@
     class AtomFeed {
         # Variable: $count
         # The number of entries outputted.
-        static $count = 0;
+        public $count = 0;
+
+        /**
+         * Function: __construct
+         * Sets headers for the Atom feed.
+         */
+        public function __construct() {
+            if (!headers_sent())
+                header("Content-Type: application/atom+xml; charset=UTF-8");
+        }
 
         /**
          * Function: open
@@ -21,10 +30,7 @@
          * See Also:
          *     https://tools.ietf.org/html/rfc4287
          */
-        static function open($title, $subtitle = "", $id = "", $updated = 0) {
-            if (!headers_sent())
-                header("Content-Type: application/atom+xml; charset=UTF-8");
-
+        public function open($title, $subtitle = "", $id = "", $updated = 0) {
             $chyrp_id = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
 
             echo        '<?xml version="1.0" encoding="utf-8"?>'."\r";
@@ -60,9 +66,8 @@
          * Notes:
          *     The entry remains open to allow triggered insertions.
          */
-        static function entry($title, $id, $content, $link, $published, $updated = 0, $name = "", $uri = "", $email = "") {
+        public function entry($title, $id, $content, $link, $published, $updated = 0, $name = "", $uri = "", $email = "") {
             self::split();
-            self::$count++;
 
             echo        "    <entry>\n";
             echo        '        <title type="html">'.fix($title)."</title>\n";
@@ -81,14 +86,16 @@
 
             echo        "        </author>\n";
             echo        '        <content type="html">'.fix($content)."</content>\n";
+
+            $this->count++;
         }
 
         /**
          * Function: split
          * Output a closing entry tag if appropriate.
          */
-        private static function split() {
-            if (self::$count > 0)
+        private function split() {
+            if ($this->count > 0)
                 echo    "    </entry>\n";
         }
 
@@ -96,7 +103,7 @@
          * Function: close
          * Output the closing feed tag.
          */
-        static function close() {
+        public function close() {
             self::split();
             echo        "</feed>\n";
         }
