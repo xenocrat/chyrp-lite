@@ -161,12 +161,13 @@
         private function list_files($filenames) {
             $list = array();
 
-            for ($i=0; $i < count($filenames); $i++) {
-                $filepath = uploaded($filenames[$i], false);
-                $list[$i]['name'] = $filenames[$i];
-                $list[$i]['type'] = strtolower(pathinfo($filenames[$i], PATHINFO_EXTENSION));
+            foreach ($filenames as $filename) {
+                $filepath = uploaded($filename, false);
+                $list[$i]['name'] = $filename;
+                $list[$i]['type'] = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
                 $list[$i]['size'] = file_exists($filepath) ? filesize($filepath) : 0 ;
             }
+
             return $list;
         }
 
@@ -194,10 +195,9 @@
         public function add_option($options, $post = null) {
             if (isset($post) and $post->feather != "uploader")
                 return;
-            elseif (Route::current()->action == "write_post")
-                if (!isset($_GET['feather']) and Config::current()->enabled_feathers[0] != "uploader" or
-                    isset($_GET['feather']) and $_GET['feather'] != "uploader")
-                    return;
+
+            if (Route::current()->action == "write_post" and $_GET['feather'] != "uploader")
+                return;
 
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "uploader"),

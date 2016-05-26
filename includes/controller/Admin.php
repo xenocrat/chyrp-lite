@@ -126,9 +126,9 @@
             if (empty($config->enabled_feathers))
                 Flash::notice(__("You must enable at least one feather in order to write a post."), "/admin/?action=feathers");
 
-            Trigger::current()->filter($options, array("write_post_options", "post_options"));
-
             fallback($_GET['feather'], @$_SESSION['latest_feather'], reset($config->enabled_feathers));
+
+            Trigger::current()->filter($options, array("write_post_options", "post_options"));
 
             $this->display("write_post",
                            array("groups" => Group::find(array("order" => "id ASC")),
