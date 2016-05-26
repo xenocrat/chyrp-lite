@@ -182,8 +182,8 @@
          */
          public function grab($column) {
             $all = $this->fetchAll();
-
             $result = array();
+
             foreach ($all as $row)
                 $result[] = $row[$column];
 
@@ -197,15 +197,16 @@
         public function handle($error) {
             $this->sql->error = $error;
 
-            if (UPGRADING or $this->sql->silence_errors) return false;
+            if (UPGRADING or $this->sql->silence_errors)
+                return false;
 
             $backtrace = $error->getTrace();
             $message = $error->getMessage();
 
             $message.= "\n\n<h2>".__("Query String")."</h2>\n".
-                       "<pre>".print_r($this->queryString, true)."</pre>".
+                       "<pre>".fix(print_r($this->queryString, true))."</pre>".
                        "\n\n<h2>".__("Parameters")."</h2>\n".
-                       "<pre>".print_r($this->params, true)."</pre>";
+                       "<pre>".fix(print_r($this->params, true))."</pre>";
 
             if (XML_RPC or $this->throw_exceptions)
                 throw new Exception($message);

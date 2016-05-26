@@ -66,7 +66,7 @@
                 elseif (class_exists("PDO") and in_array($this->adapter, PDO::getAvailableDrivers()))
                     $this->method = "pdo";
                 else
-                    error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", $this->adapter));
+                    error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", fix($this->adapter)));
             } else
                 $this->method = "";
         }
@@ -135,7 +135,7 @@
                         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     } catch (PDOException $error) {
                         $this->error = $error->getMessage();
-                        return ($checking) ? false : error(__("Database Error"), $this->error) ;
+                        return ($checking) ? false : error(__("Database Error"), fix($this->error)) ;
                     }
 
                     break;
@@ -145,12 +145,12 @@
                     $this->error = mysqli_connect_error();
 
                     if (mysqli_connect_errno())
-                        return ($checking) ? false : error(__("Database Error"), $this->error) ;
+                        return ($checking) ? false : error(__("Database Error"), fix($this->error)) ;
 
                     break;
 
                 default:
-                    error(__("Error"), _f("Database driver <code>%s</code> is unrecognised.", $this->method));
+                    error(__("Error"), _f("Database driver <code>%s</code> is unrecognised.", fix($this->method)));
             }
 
             if ($this->adapter == "mysql")

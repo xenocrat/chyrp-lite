@@ -28,7 +28,8 @@
             $serialized = json_encode($files, JSON_UNESCAPED_SLASHES);
 
             if (json_last_error())
-                error(__("Error"), _f("Failed to serialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
+                error(__("Error"), _f("Failed to serialize files because of JSON error: <code>%s</code>",
+                                      fix(json_last_error_msg()), "uploader"));
 
             return $serialized;
         }
@@ -37,7 +38,8 @@
             $unserialized = json_decode($filenames, true);
 
             if (json_last_error() and DEBUG)
-                error(__("Error"), _f("Failed to unserialize files because of JSON error: <code>%s</code>", json_last_error_msg(), "uploader"));
+                error(__("Error"), _f("Failed to unserialize files because of JSON error: <code>%s</code>",
+                                      fix(json_last_error_msg()), "uploader"));
 
             return $unserialized;
         }
@@ -45,6 +47,7 @@
         public function submit() {
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
+
                 if (is_array($_FILES['uploads']['name']))
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
                             $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
@@ -73,6 +76,7 @@
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $this->delete_files($post);
                 $filenames = array();
+
                 if (is_array($_FILES['uploads']['name']))
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
                             $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
@@ -133,6 +137,7 @@
 
         private function list_files($filenames) {
             $list = array();
+
             for ($i=0; $i < count($filenames); $i++) {
                 $filepath = uploaded($filenames[$i], false);
                 $list[$i]['name'] = $filenames[$i];

@@ -24,9 +24,10 @@
 
             if (json_last_error())
                 error(__("Error"), _f("Failed to read configuration file because of JSON error: <code>%s</code>",
-                                      json_last_error_msg()));
+                                      fix(json_last_error_msg())));
 
             $arrays = array("enabled_modules", "enabled_feathers", "routes");
+
             foreach ($this->json as $setting => $value)
                 if (in_array($setting, $arrays) and empty($value))
                     $this->$setting = array();
@@ -63,12 +64,12 @@
 
             if (json_last_error())
                 error(__("Error"), _f("Failed to set <code>%s</code> because of JSON error: <code>%s</code>",
-                                      array($setting, json_last_error_msg())));
+                                      array(fix($setting), fix(json_last_error_msg()))));
 
             # Update the configuration file
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                error(__("Error"), _f("Failed to set <code>%s</code> because <em>%s</em> is not writable.",
-                                      array($setting, "config.json.php")));
+                error(__("Error"), _f("Failed to set <code>%s</code> because <em>config.json.php</em> is not writable.",
+                                      fix($setting)));
 
             return true;
         }
@@ -92,12 +93,12 @@
 
             if (json_last_error())
                 error(__("Error"), _f("Failed to remove <code>%s</code> because of JSON error: <code>%s</code>",
-                                  array($setting, json_last_error_msg())));
+                                  array($setting, fix(json_last_error_msg()))));
 
             # Update the configuration file
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                error(__("Error"), _f("Failed to remove <code>%s</code> because <em>%s</em> is not writable.",
-                                  array($setting, "config.json.php")));
+                error(__("Error"), _f("Failed to remove <code>%s</code> because <em>config.json.php</em> is not writable.",
+                                  fix($setting)));
         }
 
         /**

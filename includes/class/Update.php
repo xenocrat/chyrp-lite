@@ -19,7 +19,7 @@
 
             foreach ($xml->channel->item as $item)
                 if (version_compare(CHYRP_VERSION, $item->version, "<"))
-                    return Flash::message(_f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->codename, true)).
+                    return Flash::message(_f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->codename)).
                                              ' <a href="'.fix($item->updateurl, true).'" target="_blank">'.
                                              __("Go to GitHub &rarr;").'</a>');
         }
