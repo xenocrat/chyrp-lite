@@ -113,11 +113,17 @@
             if ($post->feather != "uploader")
                 return;
 
-            for ($i=0; $i < count($post->filenames); $i++) {
-                $filepath = uploaded($filenames[$i], false);
+            $trigger = Trigger::current();
 
-                if (file_exists($filepath))
-                    unlink($filepath);
+            foreach ($post->filenames as $filename) {
+                $filepath = uploaded($filename, false);
+
+                if (file_exists($filepath)) {
+                    if ($trigger->exists("delete_upload"))
+                        $trigger->call("delete_upload", $filename);
+                    else
+                        unlink($filepath);
+                }
             }
         }
 
@@ -150,7 +156,7 @@
         public function image_tag($filename, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
             $config = Config::current();
 
-            # Source set for responsive images
+            # Source set for responsive images.
             $srcset = array($config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
                             $config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width=960&amp;'.$more_args.' 960w',
                             $config->chyrp_url.'/includes/thumb.php?file='.urlencode($filename).'&amp;max_width=640&amp;'.$more_args.' 640w',

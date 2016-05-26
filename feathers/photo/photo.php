@@ -73,10 +73,15 @@
             if ($post->feather != "photo")
                 return;
 
+            $trigger = Trigger::current();
             $filepath = uploaded($post->filename, false);
 
-            if (file_exists($filepath))
-                unlink($filepath);
+            if (file_exists($filepath)) {
+                if ($trigger->exists("delete_upload"))
+                    $trigger->call("delete_upload", $post->filename);
+                else
+                    unlink($filepath);
+            }
         }
 
         public function filter_post($post) {
@@ -90,7 +95,7 @@
             $config = Config::current();
             $alt = !empty($post->alt_text) ? fix($post->alt_text, true) : $post->filename ;
 
-            # Source set for responsive images
+            # Source set for responsive images.
             $srcset = array($config->chyrp_url.'/includes/thumb.php?file='.urlencode($post->filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
                             $config->chyrp_url.'/includes/thumb.php?file='.urlencode($post->filename).'&amp;max_width=960&amp;'.$more_args.' 960w',
                             $config->chyrp_url.'/includes/thumb.php?file='.urlencode($post->filename).'&amp;max_width=640&amp;'.$more_args.' 640w',

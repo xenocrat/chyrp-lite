@@ -65,10 +65,15 @@
             if ($post->feather != "audio")
                 return;
 
+            $trigger = Trigger::current();
             $filepath = uploaded($post->filename, false);
 
-            if (file_exists($filepath))
-                unlink($filepath);
+            if (file_exists($filepath)) {
+                if ($trigger->exists("delete_upload"))
+                    $trigger->call("delete_upload", $post->filename);
+                else
+                    unlink($filepath);
+            }
         }
 
         public function filter_post($post) {
@@ -81,6 +86,7 @@
         public function audio_type($filename) {
             $file_split = explode(".", $filename);
             $file_ext = strtolower(end($file_split));
+
             switch($file_ext) {
                 case "mp3":
                     return "audio/mpeg";
