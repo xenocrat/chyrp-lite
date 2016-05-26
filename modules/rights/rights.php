@@ -28,7 +28,6 @@
         }
 
         public function post_options($fields, $post = null) {
-
             $fields[] = array("attr" => "option[rights_title]",
                               "label" => __("Original Work", "rights"),
                               "type" => "text",

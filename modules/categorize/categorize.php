@@ -87,7 +87,7 @@
             else
                 $fields_list[0]["selected"] = false;
 
-            if (!empty($categories)) # make sure we don't try to process an empty list.
+            if (!empty($categories)) # Make sure we don't try to process an empty list.
                 foreach ($categories as $category) {
                     $fields_list[$category["id"]]["value"] = $category["id"];
                     $fields_list[$category["id"]]["name"] = $category["name"];
@@ -120,7 +120,7 @@
         }
 
         public function main_category($main) {
-            # make sure we have enough information to continue.
+            # Make sure we have enough information to continue.
             if (!isset($_GET['name']))
                 $reason = __("You did not specify a category.", "categorize");
             elseif (!$category = Category::getCategorybyClean($_GET['name']))
