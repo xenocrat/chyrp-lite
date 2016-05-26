@@ -19,6 +19,7 @@
             $this->setFilter("caption", array("markup_text", "markup_post_text"));
 
             $this->respondTo("delete_post", "delete_files");
+            $this->respondTo("feed_item", "enclose_uploaded");
             $this->respondTo("post","post");
             $this->respondTo("filter_post","filter_post");
             $this->respondTo("post_options", "add_option");
@@ -98,7 +99,7 @@
         }
 
         public function title($post) {
-            return oneof($post->title,$post->title_from_excerpt());
+            return oneof($post->title, $post->title_from_excerpt());
         }
 
         public function excerpt($post) {
@@ -139,6 +140,22 @@
                 return;
 
             $post->files = self::list_files($post->filenames);
+        }
+
+        public function enclose_uploaded($post) {
+            $config = Config::current();
+
+            if ($post->feather != "uploader")
+                return;
+
+            foreach ($post->filenames as $filename) {
+                if (!file_exists(uploaded($filename, false)))
+                    continue;
+
+                echo '        <link rel="enclosure" href="'.uploaded($filename).
+                            '" title="'.truncate(strip_tags($post->title())).
+                            '" length="'.filesize(uploaded($filename, false)).'" />'."\n";
+            }
         }
 
         private function list_files($filenames) {

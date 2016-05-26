@@ -111,12 +111,10 @@
             if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
                 return;
 
-            $length = filesize(uploaded($post->filename, false));
-
             echo '        <link rel="enclosure" href="'.uploaded($post->filename).
                         '" type="'.$this->video_type($post->filename).
                         '" title="'.truncate(strip_tags($post->title())).
-                        '" length="'.$length.'" />'."\n";
+                        '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
         public function video_player($filename, $params = array(), $post) {
