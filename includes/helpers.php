@@ -770,7 +770,9 @@
                 fclose($connect);
 
                 # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
-                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $header) and preg_match("~^Location:(.+)$~mi", $header, $matches)) {
+                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $header)
+                                   and preg_match("~^Location:(.+)$~mi", $header, $matches)) {
+
                     $location = trim($matches[1]);
 
                     if (is_url($location))
@@ -864,7 +866,9 @@
      * Returns the current URL.
      */
     function self_url() {
-        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
+        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
+                     "https://" : "http://" ;
+
         return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
     }
 
@@ -1089,7 +1093,9 @@
         $args = func_get_args();
 
         foreach ($args as $index => $arg) {
-            if (!isset($arg) or (is_string($arg) and trim($arg) === "") or $arg === array() or (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"))
+            if (!isset($arg) or
+                (is_string($arg) and trim($arg) === "") or $arg === array() or
+                (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"))
                 $last = $arg;
             else
                 return $arg;
@@ -1099,10 +1105,13 @@
 
             $next = $args[$index + 1];
 
-            $incomparable = ((is_array($arg) and !is_array($next)) or        # This is a big check but it should cover most "incomparable" cases.
-                             (!is_array($arg) and is_array($next)) or        # Using simple type comparison wouldn't work too well, for example
-                             (is_object($arg) and !is_object($next)) or      # when "" would take priority over 1 in oneof("", 1) because they're
-                             (!is_object($arg) and is_object($next)) or      # different types.
+            # This is a big check but it should cover most "incomparable" cases.
+            # Using simple type comparison wouldn't work too well, for example:
+            # in oneof("", 1) "" would take priority over 1 because of type difference.
+            $incomparable = ((is_array($arg) and !is_array($next)) or
+                             (!is_array($arg) and is_array($next)) or
+                             (is_object($arg) and !is_object($next)) or
+                             (!is_object($arg) and is_object($next)) or
                              (is_resource($arg) and !is_resource($next)) or
                              (!is_resource($arg) and is_resource($next)));
 
@@ -1201,6 +1210,7 @@
         foreach (array("tar.gz", "tar.bz", "tar.bz2") as $ext) {
             list($first, $second) = explode(".", $ext);
             $file_first =& $file_split[count($file_split) - 2];
+
             if (strcasecmp($file_first, $first) == 0 and strcasecmp(end($file_split), $second) == 0) {
                 $file_first = $first.".".$second;
                 array_pop($file_split);
@@ -1268,7 +1278,10 @@
             return "";
 
         $config = Config::current();
-        return ($url ? $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($file) : MAIN_DIR.$config->uploads_path.$file);
+
+        return ($url ?
+                $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($file) :
+                MAIN_DIR.$config->uploads_path.$file);
     }
 
     /**
@@ -1752,7 +1765,7 @@
     function is_url($string) {
         return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~i', $string) or //FQDN
                 preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~', $string) or //IPv4
-                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                           //IPv6
+                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                                         //IPv6
     }
 
     /**
