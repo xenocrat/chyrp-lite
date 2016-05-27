@@ -622,8 +622,6 @@
     function send_pingbacks($string, $post) {
         foreach (grab_urls($string) as $url)
             if ($ping_url = pingback_url($url)) {
-                require_once INCLUDES_DIR.DIR."lib".DIR."ixr.php";
-
                 $client = new IXR_Client($ping_url);
                 $client->timeout = 3;
                 $client->useragent = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
