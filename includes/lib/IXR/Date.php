@@ -11,7 +11,8 @@
  * @license    BSD License http://www.opensource.org/licenses/bsd-license.php
  */
 
-class IXR_Date {
+class IXR_Date
+{
     var $year;
     var $month;
     var $day;

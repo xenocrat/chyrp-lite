@@ -10,6 +10,7 @@
  * @copyright (c) 2004-2005 Jason Stirk
  * @license   BSD License http://www.opensource.org/licenses/bsd-license.php
  */
+
 class IXR_ClientSSL extends IXR_Client
 {
     /**
