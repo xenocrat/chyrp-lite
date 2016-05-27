@@ -163,9 +163,9 @@
 
             foreach ($filenames as $filename) {
                 $filepath = uploaded($filename, false);
-                $list[$i]['name'] = $filename;
-                $list[$i]['type'] = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-                $list[$i]['size'] = file_exists($filepath) ? filesize($filepath) : 0 ;
+                $list[] = array("name" => $filename,
+                                "type" => strtolower(pathinfo($filename, PATHINFO_EXTENSION)),
+                                "size" => (file_exists($filepath) ? filesize($filepath) : 0 ));
             }
 
             return $list;
