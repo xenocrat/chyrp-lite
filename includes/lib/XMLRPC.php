@@ -1,20 +1,7 @@
 <?php
-    /**
-     * File: XML-RPC
-     * Extensible XML-RPC interface for remotely controlling your Chyrp install.
-     */
-
-    define('XML_RPC', true);
-    require_once 'common.php';
-    require_once INCLUDES_DIR.DIR.'lib'.DIR.'ixr.php';
-    if (!defined('XML_RPC_FEATHER')) define('XML_RPC_FEATHER', 'text');
-
-    # Use the Main controller for any Route calls.
-    Route::current(MainController::current());
-
     #
     # Class: XMLRPC
-    # Provides functionality for using external clients, services, etc. for accessing and adding to Chyrp.
+    # Extensible XML-RPC interface for remotely controlling your Chyrp install.
     #
     class XMLRPC extends IXR_Server {
         #
@@ -212,12 +199,13 @@
             $this->auth($args[1], $args[2], 'add');
             global $user;
 
-            # Support for extended body
+            # Support for extended body.
             $body = $args[3]['description'];
+
             if (!empty($args[3]['mt_text_more']))
                 $body .= '<!--more-->'.$args[3]['mt_text_more'];
 
-            # Add excerpt to body so it isn't lost
+            # Add excerpt to body so it isn't lost.
             if (!empty($args[3]['mt_excerpt']))
                 $body = $args[3]['mt_excerpt']."\n\n".$body;
 
@@ -249,7 +237,7 @@
 
             $trigger->call('metaWeblog_newPost', $args[3], $post);
 
-            # Send any and all pingbacks to URLs in the body
+            # Send any and all pingbacks to URLs in the body.
             if (Config::current()->send_pingbacks)
                 send_pingbacks($args[3]['description'], $post);
 
@@ -470,13 +458,14 @@
 
         #
         # Function: auth
-        # Authenticates a given login and password, and checks for appropriate permission
+        # Authenticates a given login and password, and checks for appropriate permission.
         #
         private function auth($login, $password, $do = 'add') {
             if (!Config::current()->enable_xmlrpc)
                 throw new Exception(__("XML-RPC support is disabled for this site."));
 
             global $user;
+
             if (!User::authenticate($login, $password))
                 throw new Exception(__("Login incorrect."));
             else
@@ -491,7 +480,9 @@
         # Function: error_handler
         #
         public static function error_handler($errno, $errstr, $errfile, $errline) {
-            if (error_reporting() === 0 or $errno == E_STRICT) return;
+            if (error_reporting() === 0 or $errno == E_STRICT)
+                return;
+
             throw new Exception(sprintf("%s in %s on line %s", $errstr, $errfile, $errline));
         }
 
@@ -502,7 +493,4 @@
             $ixr_error = new IXR_Error(500, $exception->getMessage());
             echo $ixr_error->getXml();
         }
-
     }
-    $server = new XMLRPC();
-    ?>
