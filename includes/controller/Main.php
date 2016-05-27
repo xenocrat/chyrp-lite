@@ -67,7 +67,7 @@
             if (in_array($route->arg[0], array("__construct", "parse", "post_from_url", "display", "current")))
                 show_404();
 
-            # Feed
+            # Discover feeds.
             if (preg_match("/\/feed\/?$/", $route->request)) {
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
@@ -76,7 +76,7 @@
                     return $route->action = "index";
             }
 
-            # Paginator
+            # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $page_matches)) {
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
@@ -85,15 +85,15 @@
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
             }
 
-            # Viewing a post by its ID
+            # Viewing a post by its ID.
             if ($route->arg[0] == "id") {
                 $_GET['id'] = $route->arg[1];
                 return $route->action = "id";
             }
 
-            # Archive
+            # Archive.
             if ($route->arg[0] == "archive") {
-                # Make sure they're numeric; there might be a /page/ in there.
+                # Make sure they're numeric; could be a "/page/" in there.
                 if (isset($route->arg[1]) and is_numeric($route->arg[1]))
                     $_GET['year'] = $route->arg[1];
                 if (isset($route->arg[2]) and is_numeric($route->arg[2]))
@@ -104,7 +104,7 @@
                 return $route->action = "archive";
             }
 
-            # Searching
+            # Search.
             if ($route->arg[0] == "search") {
                 if (isset($route->arg[1]))
                     $_GET['query'] = $route->arg[1];
