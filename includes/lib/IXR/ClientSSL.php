@@ -2,7 +2,7 @@
 /**
  * Client for communicating with a XML-RPC Server over HTTPS.
  *
- * @package IXR
+ * @package   IXR
  *
  * @author    Jason Stirk <jstirk@gmm.com.au>
  * @link      http://blog.griffin.homelinux.org/projects/xmlrpc/

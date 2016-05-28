@@ -37,16 +37,40 @@
 
     ob_start();
 
+    # File: Error
+    # Error handling functions.
     require_once INCLUDES_DIR.DIR."error.php";
+
+    # File: Helpers
+    # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
+    # File: Gettext
+    # Gettext library.
     require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
+
+    # File: Streams
+    # Streams library.
     require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
 
+    # File: Config
+    # See Also:
+    #     <Config>
     require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
-    require_once INCLUDES_DIR.DIR."class".DIR."SQL.php";
+
+    # File: SQL
+    # See Also:
+    #     <SQL>
+    require INCLUDES_DIR.DIR."class".DIR."SQL.php";
+
+    # File: Model
+    # See Also:
+    #     <Model>
     require_once INCLUDES_DIR.DIR."class".DIR."Model.php";
 
+    # File: User
+    # See Also:
+    #     <User>
     require_once INCLUDES_DIR.DIR."model".DIR."User.php";
 
     # Has Chyrp Lite been installed?

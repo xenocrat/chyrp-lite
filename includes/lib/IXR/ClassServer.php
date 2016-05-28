@@ -8,6 +8,8 @@
  * It is intended to assist in organization of your XML-RPC methods by allowing
  * you to "write once" in your existing model classes and present them.
  *
+ * @package   IXR
+ *
  * @author    Jason Stirk <jstirk@gmm.com.au>
  * @link      http://blog.griffin.homelinux.org/projects/xmlrpc/
  * @version   1.0.1 19Apr2005 17:40 +0800
