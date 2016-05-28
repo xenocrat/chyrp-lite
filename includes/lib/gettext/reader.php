@@ -35,9 +35,9 @@
  */
 class gettext_reader {
   //public:
-   var $error = 0; // public variable that holds error code (0 if no error)
+  var $error = 0; // public variable that holds error code (0 if no error)
 
-   //private:
+  //private:
   var $BYTEORDER = 0;        // 0: low endian, 1: big endian
   var $STREAM = NULL;
   var $short_circuit = false;
@@ -432,5 +432,3 @@ class gettext_reader {
 
   }
 }
-
-?>

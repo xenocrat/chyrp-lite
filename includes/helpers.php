@@ -164,11 +164,10 @@
         if (isset($l10n[$domain]))
             return;
 
-        if (is_readable($mofile))
-            $input = new CachedFileReader($mofile);
-        else
+        if (!is_readable($mofile))
             return;
 
+        $input = new CachedFileReader($mofile);
         $l10n[$domain] = new gettext_reader($input);
     }
 

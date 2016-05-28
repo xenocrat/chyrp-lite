@@ -183,14 +183,6 @@
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
-    # File: Gettext
-    # Gettext library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
-
-    # File: Streams
-    # Streams library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
-
     # File: Config
     # See Also:
     #     <Config>
@@ -328,7 +320,7 @@
     # Begin the session.
     session();
 
-    # Set the locale for gettext.
+    # Set the locale.
     set_locale($config->locale);
 
     # Load the translation engine.

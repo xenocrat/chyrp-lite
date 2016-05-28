@@ -45,14 +45,6 @@
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
-    # File: Gettext
-    # Gettext library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
-
-    # File: Streams
-    # Streams library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
-
     # File: Config
     # See Also:
     #     <Config>
@@ -72,6 +64,9 @@
     # See Also:
     #     <User>
     require_once INCLUDES_DIR.DIR."model".DIR."User.php";
+
+    # Register our autoloader.
+    spl_autoload_register("autoload");
 
     # Has Chyrp Lite been installed?
     $installed = false;

@@ -56,18 +56,13 @@
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
-    # File: Gettext
-    # Gettext library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
-
-    # File: Streams
-    # Streams library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
-
     # File: SQL
     # See Also:
     #     <SQL>
     require INCLUDES_DIR.DIR."class".DIR."SQL.php";
+
+    # Register our autoloader.
+    spl_autoload_register("autoload");
 
     /**
      * Class: Config
