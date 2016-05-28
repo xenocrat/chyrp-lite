@@ -1227,7 +1227,8 @@
 
             if (!in_array(strtolower($file_ext), $extensions) and
                 !in_array(strtolower($original_ext), $extensions))
-                error(__("Unsupported File Type"), _f("Only files of the following types are accepted: %s.", implode(", ", $extensions)));
+                error(__("Unsupported File Type"),
+                      _f("Only files of the following types are accepted: %s.", implode(", ", $extensions)));
         }
 
         array_pop($file_split);
@@ -1898,7 +1899,7 @@
                                      PHP_EOL.PHP_EOL.
                                      __("You are receiving this message because you requested a new password.").
                                      PHP_EOL.PHP_EOL.
-                                     _f("Visit this link to reset your password:").
+                                     __("Visit this link to reset your password:").
                                      PHP_EOL.
                                      $params["link"];
                 break;

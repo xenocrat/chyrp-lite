@@ -1100,7 +1100,8 @@
                 $exports["groups.json"] = json_encode($groups_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
                 if (json_last_error())
-                    error(__("Error"), _f("Failed to export groups because of JSON error: <code>%s</code>", json_last_error_msg()));
+                    error(__("Error"),
+                          _f("Failed to export groups because of JSON error: <code>%s</code>", fix(json_last_error_msg())));
             }
 
             if (isset($_POST['users'])) {
@@ -1123,7 +1124,8 @@
                 $exports["users.json"] = json_encode($users_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
                 if (json_last_error())
-                    error(__("Error"), _f("Failed to export users because of JSON error: <code>%s</code>", json_last_error_msg()));
+                    error(__("Error"),
+                          _f("Failed to export users because of JSON error: <code>%s</code>", fix(json_last_error_msg())));
             }
 
             $trigger->filter($exports, "export");
@@ -1212,7 +1214,8 @@
                 $import = json_decode(file_get_contents($_FILES['groups_file']['tmp_name']), true);
 
                 if (json_last_error())
-                    error(__("Error"), _f("Failed to import groups because of JSON error: <code>%s</code>", json_last_error_msg()));
+                    error(__("Error"),
+                          _f("Failed to import groups because of JSON error: <code>%s</code>", fix(json_last_error_msg())));
 
                 foreach ($import["groups"] as $name => $permissions)
                     if (!$sql->count("groups", array("name" => $name)))
@@ -1227,7 +1230,8 @@
                 $users = json_decode(file_get_contents($_FILES['users_file']['tmp_name']), true);
 
                 if (json_last_error())
-                    error(__("Error"), _f("Failed to import users because of JSON error: <code>%s</code>", json_last_error_msg()));
+                    error(__("Error"),
+                          _f("Failed to import users because of JSON error: <code>%s</code>", fix(json_last_error_msg())));
 
                 foreach ($users as $login => $user) {
                     $group_id = $sql->select("groups", "id", array("name" => $user["group"]), "id DESC")->fetchColumn();

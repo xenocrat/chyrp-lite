@@ -26,8 +26,8 @@
             $serialized = json_encode($tags);
 
             if (json_last_error())
-                error(__("Error"), _f("Failed to serialize tags because of JSON error: <code>%s</code>",
-                                      fix(json_last_error_msg()), "tags"));
+                error(__("Error"),
+                      _f("Failed to serialize tags because of JSON error: <code>%s</code>", fix(json_last_error_msg()), "tags"));
 
             return $serialized;
         }
@@ -36,8 +36,8 @@
             $unserialized = json_decode($tags, true);
 
             if (json_last_error() and DEBUG)
-                error(__("Error"), _f("Failed to unserialize tags because of JSON error: <code>%s</code>",
-                                      fix(json_last_error_msg()), "tags"));
+                error(__("Error"),
+                      _f("Failed to unserialize tags because of JSON error: <code>%s</code>", fix(json_last_error_msg()), "tags"));
 
             return $unserialized;
         }
