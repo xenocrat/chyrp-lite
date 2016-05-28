@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-04-29 18:49+0000\n"
+"POT-Creation-Date: 2016-05-28 16:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -29,24 +29,24 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/video/video.php:11
+#: feathers/video/video.php:10
 msgid "Video File"
 msgstr ""
 
-#: feathers/video/video.php:13
+#: feathers/video/video.php:12
 #, php-format
 msgid "(Max. file size: %s Megabytes)"
 msgstr ""
 
-#: feathers/video/video.php:16
+#: feathers/video/video.php:15
 msgid "Description"
 msgstr ""
 
-#: feathers/video/video.php:32
+#: feathers/video/video.php:31
 msgid "You did not select a video to upload."
 msgstr ""
 
-#: feathers/video/video.php:121
+#: feathers/video/video.php:127
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr ""
 

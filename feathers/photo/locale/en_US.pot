@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-04-29 18:49+0000\n"
+"POT-Creation-Date: 2016-05-28 16:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: feathers/photo/info.php:3
-#: feathers/photo/photo.php:11
+#: feathers/photo/photo.php:10
 msgid "Photo"
 msgstr ""
 
@@ -30,24 +30,24 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/photo/photo.php:13
+#: feathers/photo/photo.php:12
 #, php-format
 msgid "(Max. file size: %s Megabytes)"
 msgstr ""
 
-#: feathers/photo/photo.php:16
+#: feathers/photo/photo.php:15
 msgid "Caption"
 msgstr ""
 
-#: feathers/photo/photo.php:32
+#: feathers/photo/photo.php:31
 msgid "You did not select a photo to upload."
 msgstr ""
 
-#: feathers/photo/photo.php:122
+#: feathers/photo/photo.php:125
 msgid "Alt-Text"
 msgstr ""
 
-#: feathers/photo/photo.php:127
+#: feathers/photo/photo.php:130
 msgid "Source"
 msgstr ""
 

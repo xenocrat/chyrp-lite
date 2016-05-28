@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-04-29 18:49+0000\n"
+"POT-Creation-Date: 2016-05-28 16:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -29,34 +29,34 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/uploader/uploader.php:12
+#: feathers/uploader/uploader.php:11
 msgid "Files"
 msgstr ""
 
-#: feathers/uploader/uploader.php:13
+#: feathers/uploader/uploader.php:12
 #, php-format
 msgid "(Max. file size: %s Megabytes)"
 msgstr ""
 
-#: feathers/uploader/uploader.php:16
+#: feathers/uploader/uploader.php:15
 msgid "Caption"
 msgstr ""
 
-#: feathers/uploader/uploader.php:32
+#: feathers/uploader/uploader.php:33
 #, php-format
 msgid "Failed to serialize files because of JSON error: <code>%s</code>"
 msgstr ""
 
-#: feathers/uploader/uploader.php:41
+#: feathers/uploader/uploader.php:43
 #, php-format
 msgid "Failed to unserialize files because of JSON error: <code>%s</code>"
 msgstr ""
 
-#: feathers/uploader/uploader.php:59
+#: feathers/uploader/uploader.php:62
 msgid "You did not select any files to upload."
 msgstr ""
 
-#: feathers/uploader/uploader.php:176
+#: feathers/uploader/uploader.php:203
 msgid "Source"
 msgstr ""
 

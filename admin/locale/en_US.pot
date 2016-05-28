@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-04-29 18:49+0000\n"
+"POT-Creation-Date: 2016-05-28 16:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,63 +17,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:52
+#: admin/admin.js.php:43
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:112
-#: admin/admin.js.php:128
+#: admin/admin.js.php:103
+#: admin/admin.js.php:119
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:114
-#: admin/admin.js.php:131
+#: admin/admin.js.php:105
+#: admin/admin.js.php:122
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:194
-msgid "You are a member of this group. Are you sure the permissions are as you want them?"
+#: admin/admin.js.php:185
+msgid "You are a member of this group. Are you sure you want to update the permissions?"
 msgstr ""
 
-#: admin/admin.js.php:200
+#: admin/admin.js.php:191
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:217
+#: admin/admin.js.php:269
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:221
-#: admin/admin.js.php:223
-#: admin/admin.js.php:306
-#: admin/admin.js.php:308
+#: admin/admin.js.php:273
+#: admin/admin.js.php:275
+#: admin/admin.js.php:358
+#: admin/admin.js.php:360
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:246
-#: admin/admin.js.php:247
+#: admin/admin.js.php:298
+#: admin/admin.js.php:299
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:302
+#: admin/admin.js.php:354
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:432
-msgid "The module cannot be enabled because your web browser did not send proper credentials."
-msgstr ""
-
-#: admin/admin.js.php:434
-msgid "The module cannot be disabled because your web browser did not send proper credentials."
-msgstr ""
-
-#: admin/admin.js.php:464
-msgid "There was an error enabling the extension."
-msgstr ""
-
-#: admin/admin.js.php:466
-msgid "There was an error disabling the extension."
+#: admin/admin.js.php:483
+msgid "The extension cannot be toggled because your web browser did not send proper credentials."
 msgstr ""
 
 #: admin/layout.twig:58
@@ -286,7 +274,6 @@ msgid "Editing Group &#8220;%s&#8221;"
 msgstr ""
 
 #: admin/pages/edit_group.twig:10
-#: admin/pages/manage_users.twig:28
 #: admin/pages/new_group.twig:10
 msgid "Name"
 msgstr ""
@@ -577,21 +564,21 @@ msgstr ""
 #: admin/pages/manage_groups.twig:60
 #: admin/pages/manage_pages.twig:64
 #: admin/pages/manage_posts.twig:61
-#: admin/pages/manage_users.twig:59
+#: admin/pages/manage_users.twig:56
 msgid 'edit'
 msgstr ""
 
 #: admin/pages/manage_groups.twig:65
 #: admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:66
-#: admin/pages/manage_users.twig:64
+#: admin/pages/manage_users.twig:61
 msgid 'delete'
 msgstr ""
 
 #: admin/pages/manage_groups.twig:77
 #: admin/pages/manage_pages.twig:85
 #: admin/pages/manage_posts.twig:82
-#: admin/pages/manage_users.twig:80
+#: admin/pages/manage_users.twig:77
 #, php-format
 msgid "Page %d of %s"
 msgstr ""
@@ -639,7 +626,7 @@ msgstr ""
 
 #: admin/pages/manage_pages.twig:78
 #: admin/pages/manage_posts.twig:75
-#: admin/pages/manage_users.twig:73
+#: admin/pages/manage_users.twig:70
 msgid "(none)"
 msgstr ""
 
@@ -672,6 +659,10 @@ msgstr ""
 #: admin/pages/manage_users.twig:18
 #: admin/pages/new_user.twig:6
 msgid "New User"
+msgstr ""
+
+#: admin/pages/manage_users.twig:28
+msgid "Login (name)"
 msgstr ""
 
 #: admin/pages/manage_users.twig:30
