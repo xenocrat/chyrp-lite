@@ -653,7 +653,7 @@
                 margin-bottom: 1em;
             }
         </style>
-        <script src="includes/lib/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="includes/common.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">
             function toggle_adapter() {
                 if ($("#adapter").val() == "sqlite") {

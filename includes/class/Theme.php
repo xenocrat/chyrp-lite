@@ -274,7 +274,7 @@
                 if (!empty($val) and $val != $route->action)
                     $args.= "&amp;".$key."=".urlencode($val);
 
-            $javascripts = array($config->chyrp_url."/includes/lib/common.js",
+            $javascripts = array($config->chyrp_url."/includes/common.js",
                                  $config->chyrp_url.'/includes/javascript.php?action='.$route->action.$args);
 
             Trigger::current()->filter($javascripts, "scripts");
