@@ -167,8 +167,8 @@
         if (!is_readable($mofile))
             return;
 
-        $input = new CachedFileReader($mofile);
-        $l10n[$domain] = new gettext_reader($input);
+        $input = new gettext_CachedFileReader($mofile);
+        $l10n[$domain] = new gettext_Reader($input);
     }
 
     /**
