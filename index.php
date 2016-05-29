@@ -13,16 +13,20 @@
     $route = Route::current($main);
 
     # Check if the user can view the site.
-    if (!$visitor->group->can("view_site") and
-        !in_array($route->action, array("login", "logout", "register", "activate", "lost_password", "reset")))
+    if (!$visitor->group->can("view_site") and !in_array($route->action, array("login",
+                                                                               "logout",
+                                                                               "register",
+                                                                               "activate",
+                                                                               "lost_password",
+                                                                               "reset")))
         if ($trigger->exists("can_not_view_site"))
             $trigger->call("can_not_view_site");
         else {
-            if (!logged_in()) {
-                $_SESSION['redirect_to'] = self_url();
-                Flash::notice(__("You must be logged in to view this site."), "login");
-            } else
+            if (logged_in())
                 show_403(__("Access Denied"), __("You are not allowed to view this site.")); # Banned user.
+
+            $_SESSION['redirect_to'] = self_url();
+            Flash::notice(__("You must be logged in to view this site."), "login");
         }
 
     # Execute the appropriate Controller responder.
