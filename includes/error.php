@@ -100,8 +100,8 @@
                 header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
         }
 
-        # Report in plain text for the automated tester.
-        if (TESTER)
+        # Report in plain text for the automated tester and RPC queries.
+        if (TESTER or XML_RPC)
             exit("ERROR: ".strip_tags($body));
 
         # Report and exit safely if the error is too deep in the core for a pretty error message.
