@@ -20,26 +20,25 @@
 
 */
 
-// Simple class to wrap file streams, string streams, etc.
-// seek is essential, and it should be byte stream
-class StreamReader {
-  // should return a string [FIXME: perhaps return array of bytes?]
-  function read($bytes) {
-    return false;
-  }
+// Preloads entire file in memory first, then creates a StringReader
+// over it (it assumes knowledge of StringReader internals)
+class gettext_CachedFileReader extends gettext_StringReader {
+  function __construct($filename) {
+    if (file_exists($filename)) {
 
-  // should return new position
-  function seekto($position) {
-    return false;
-  }
+      $length=filesize($filename);
+      $fd = fopen($filename,'rb');
 
-  // returns current position
-  function currentpos() {
-    return false;
-  }
+      if (!$fd) {
+        $this->error = 3; // Cannot read file, probably permissions
+        return false;
+      }
+      $this->_str = fread($fd, $length);
+      fclose($fd);
 
-  // returns length of entire stream (limit for seekto()s)
-  function length() {
-    return false;
+    } else {
+      $this->error = 2; // File doesn't exist
+      return false;
+    }
   }
 }
