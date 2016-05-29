@@ -22,7 +22,7 @@ class IXR_ClassServer extends IXR_Server
     var $_objects;
     var $_delim;
 
-    function IXR_ClassServer($delim = '.', $wait = false)
+    function __construct($delim = '.', $wait = false)
     {
         $this->IXR_Server(array(), false, $wait);
         $this->_delimiter = $delim;

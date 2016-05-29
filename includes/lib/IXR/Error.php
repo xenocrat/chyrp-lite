@@ -16,7 +16,7 @@ class IXR_Error
     var $code;
     var $message;
 
-    function IXR_Error($code, $message)
+    function __construct($code, $message)
     {
         $this->code = $code;
         $this->message = htmlspecialchars($message);

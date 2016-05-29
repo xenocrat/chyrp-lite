@@ -31,7 +31,7 @@ class IXR_Message
     // The XML parser
     var $_parser;
 
-    function IXR_Message($message)
+    function __construct($message)
     {
         $this->message =& $message;
     }

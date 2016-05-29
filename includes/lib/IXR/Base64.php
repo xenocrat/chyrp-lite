@@ -15,7 +15,7 @@ class IXR_Base64
 {
     var $data;
 
-    function IXR_Base64($data)
+    function __construct($data)
     {
         $this->data = $data;
     }

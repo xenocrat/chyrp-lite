@@ -16,7 +16,7 @@ class IXR_IntrospectionServer extends IXR_Server
     var $signatures;
     var $help;
 
-    function IXR_IntrospectionServer()
+    function __construct()
     {
         $this->setCallbacks();
         $this->setCapabilities();

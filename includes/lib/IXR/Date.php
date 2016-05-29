@@ -21,7 +21,7 @@ class IXR_Date
     var $second;
     var $timezone;
 
-    function IXR_Date($time)
+    function __construct($time)
     {
         // $time can be a PHP timestamp or an ISO one
         if (is_numeric($time)) {
