@@ -52,7 +52,7 @@ class IXR_ClientSSL extends IXR_Client
      */
     function __construct($server, $path = false, $port = 443, $timeout = false)
     {
-        parent::IXR_Client($server, $path, $port, $timeout);
+        parent::__construct($server, $path, $port, $timeout);
         $this->useragent = 'The Incutio XML-RPC PHP Library for SSL';
 
         // Set class fields

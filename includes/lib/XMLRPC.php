@@ -37,7 +37,7 @@
 
             Trigger::current()->filter($methods, "xmlrpc_methods");
 
-            $this->IXR_Server($methods);
+            parent::__construct($methods);
         }
 
         #
