@@ -16,7 +16,6 @@
     define('DIR',          DIRECTORY_SEPARATOR);
     define('MAIN_DIR',     dirname(dirname(__FILE__)));
     define('INCLUDES_DIR', dirname(__FILE__));
-    define('USE_ZLIB',     false);
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4
