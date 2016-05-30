@@ -119,8 +119,7 @@
             if ($type == "feather" and feather_enabled($_POST['extension']))
                 exit(json_encode(array("notifications" => array(__("Feather already enabled.")))));
 
-            if (file_exists($folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));

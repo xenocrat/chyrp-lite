@@ -51,8 +51,7 @@
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
 
             # Load the theme translator.
-            if (file_exists(MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo"))
-                load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
+            load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
         }
 
         /**
@@ -1326,8 +1325,7 @@
                 if (!file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(MODULES_DIR.DIR.$folder.DIR."info.php"))
                   continue;
 
-                if (file_exists(MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
-                    load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 if (!isset($classes[$folder]))
                     $classes[$folder] = array($folder);
@@ -1447,8 +1445,7 @@
                 if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
-                if (file_exists(FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
-                    load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 $info = include FEATHERS_DIR.DIR.$folder.DIR."info.php";
 
@@ -1513,8 +1510,7 @@
                 if (!file_exists(THEMES_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
-                if (file_exists(THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
-                    load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 $info = include THEMES_DIR.DIR.$folder.DIR."info.php";
 
@@ -1592,8 +1588,7 @@
             if ($type == "feather" and feather_enabled($name))
                 Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
 
-            if (file_exists($folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
@@ -1692,8 +1687,7 @@
             $theme = $_POST['theme'];
             $config->set("theme", $theme);
 
-            if (file_exists(THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
 
             $info = include THEMES_DIR.DIR.$theme.DIR."info.php";
             fallback($info["notifications"], array());

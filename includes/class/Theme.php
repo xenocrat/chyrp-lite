@@ -20,8 +20,7 @@
             $config = Config::current();
 
             # Load the theme translator.
-            if (file_exists(THEME_DIR.DIR."locale".DIR.$config->locale.".mo"))
-                load_translator("theme", THEME_DIR.DIR."locale".DIR.$config->locale.".mo");
+            load_translator("theme", THEME_DIR.DIR."locale".DIR.$config->locale.".mo");
 
             # Load the theme's info into the Theme class.
             foreach (include THEME_DIR.DIR."info.php" as $key => $val)

@@ -200,7 +200,7 @@
 
     $sql->connect();
 
-    # Load the translator
+    # Load the translator.
 
     load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.Config::get("locale").".mo");
 

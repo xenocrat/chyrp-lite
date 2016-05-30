@@ -82,9 +82,7 @@
         # Ask PHP for the default locale and try to load an appropriate translator.
         $locale = Locale::getDefault();
         $language = Locale::getPrimaryLanguage($locale)."_".Locale::getRegion($locale);
-
-        if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$language.".mo"))
-            load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
+        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
     }
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
@@ -114,7 +112,7 @@
         $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
     if (!empty($_POST)) {
-        # Assure an absolute path for the SQLite database
+        # Assure an absolute path for the SQLite database.
         if ($_POST['adapter'] == "sqlite") {
             $db_pwd = realpath(dirname($_POST['database']));
 
