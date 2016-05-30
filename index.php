@@ -1,7 +1,4 @@
 <?php
-    if (version_compare(PHP_VERSION, "5.3.2", "<"))
-        exit("Chyrp Lite requires PHP 5.3.2 or greater.");
-
     define('MAIN', true);
 
     require_once "includes".DIRECTORY_SEPARATOR."common.php";
@@ -18,7 +15,7 @@
                                                                                "register",
                                                                                "activate",
                                                                                "lost_password",
-                                                                               "reset")))
+                                                                               "reset"))) {
         if ($trigger->exists("can_not_view_site"))
             $trigger->call("can_not_view_site");
         else {
@@ -28,6 +25,7 @@
             $_SESSION['redirect_to'] = self_url();
             Flash::notice(__("You must be logged in to view this site."), "login");
         }
+    }
 
     # Execute the appropriate Controller responder.
     $route->init();
