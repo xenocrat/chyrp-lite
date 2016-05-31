@@ -1322,8 +1322,9 @@
             $classes = array();
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(MODULES_DIR.DIR.$folder.DIR."info.php"))
-                  continue;
+                if (!file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php") or
+                    !file_exists(MODULES_DIR.DIR.$folder.DIR."info.php"))
+                    continue;
 
                 load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
@@ -1335,7 +1336,7 @@
                 $info = include MODULES_DIR.DIR.$folder.DIR."info.php";
 
                 if (gettype($info) != "array")
-                  continue;
+                    continue;
 
                 $conflicting_modules = array();
 
@@ -1402,8 +1403,7 @@
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
-                $category = (module_enabled($folder) or !empty(Modules::$instances[$folder]->cancelled)) ?
-                    "enabled_modules" : "disabled_modules" ;
+                $category = (!empty(Modules::$instances[$folder])) ? "enabled_modules" : "disabled_modules" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
@@ -1442,7 +1442,8 @@
                 error(__("Error"), __("Could not read feathers directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
+                if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or
+                    !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
                 load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
@@ -1450,7 +1451,7 @@
                 $info = include FEATHERS_DIR.DIR.$folder.DIR."info.php";
 
                 if (gettype($info) != "array")
-                  continue;
+                    continue;
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
@@ -1475,7 +1476,7 @@
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
-                $category = (feather_enabled($folder)) ? "enabled_feathers" : "disabled_feathers" ;
+                $category = (!empty(Feathers::$instances[$folder])) ? "enabled_feathers" : "disabled_feathers" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
@@ -1568,34 +1569,33 @@
 
             $name          = $_POST[$type];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $updated_array = $config->$enabled_array;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
+
+            if ($type == "module" and !empty(Modules::$instances[$name]))
+                Flash::warning(__("Module already enabled."), "/admin/?action=modules");
+
+            if ($type == "feather" and !empty(Feathers::$instances[$name]))
+                Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
                 show_404(__("Not Found"), __("Extension not found."));
 
             require $folder.DIR.$name.DIR.$name.".php";
 
-            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                show_404(__("Not Found"), __("Module not found."));
-
-            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                show_404(__("Not Found"), __("Feather not found."));
-
-            if ($type == "module" and (module_enabled($name) or !empty(Modules::$instances[$name]->cancelled)))
-                Flash::warning(__("Module already enabled."), "/admin/?action=modules");
-
-            if ($type == "feather" and feather_enabled($name))
-                Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
+            if (!is_subclass_of($class_name, camelize(pluralize($type))))
+                show_404(__("Not Found"), __("Extension not found."));
 
             load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
 
-            $new = $config->$enabled_array;
-            $new[] = $name;
-            $config->set($enabled_array, $new);
+            if (!in_array($name, $updated_array))
+                $updated_array[] = $name;
+
+            $config->set($enabled_array, $updated_array);
 
             $info = include $folder.DIR.$name.DIR."info.php";
             fallback($info["uploader"], false);
@@ -1634,6 +1634,7 @@
 
             $name          = $_POST[$type];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $updated_array = array();
             $class_name    = camelize($name);
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
@@ -1642,23 +1643,21 @@
             if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
                 show_404(__("Not Found"), __("Feather not found."));
 
-            if ($type == "module" and !module_enabled($name) and empty(Modules::$instances[$name]->cancelled))
+            if ($type == "module" and empty(Modules::$instances[$name]))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
-            if ($type == "feather" and !feather_enabled($name))
+            if ($type == "feather" and empty(Feathers::$instances[$name]))
                 Flash::warning(__("Feather already disabled."), "/admin/?action=feathers");
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), false);
 
-            $new = array();
-
             foreach ($config->$enabled_array as $extension) {
-              if ($extension != $name)
-                $new[] = $extension;
+                if ($extension != $name)
+                    $updated_array[] = $extension;
             }
 
-            $config->set($enabled_array, $new);
+            $config->set($enabled_array, $updated_array);
 
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);

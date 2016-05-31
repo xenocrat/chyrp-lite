@@ -923,7 +923,7 @@
      *     Whether or not the requested module is enabled.
      */
     function module_enabled($name) {
-        return in_array($name, Config::current()->enabled_modules);
+        return (!empty(Modules::$instances[$name]) and empty(Modules::$instances[$name]->cancelled));
     }
 
     /**
@@ -937,12 +937,12 @@
      *     Whether or not the requested feather is enabled.
      */
     function feather_enabled($name) {
-        return in_array($name, Config::current()->enabled_feathers);
+        return (!empty(Feathers::$instances[$name]) and empty(Feathers::$instances[$name]->cancelled));
     }
 
     /**
      * Function: cancel_module
-     * Temporarily removes a module from $config->enabled_modules.
+     * Temporarily declares a module cancelled (disabled).
      *
      * Parameters:
      *     $target - Module name to disable.
@@ -952,23 +952,42 @@
      *     A module can cancel itself in its __construct method.
      */
      function cancel_module($target, $reason = "") {
-        $config = Config::current();
-        $this_disabled = array();
-
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) : $reason ;
 
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
 
+        if (DEBUG)
+            error_log("WARNING: ".strip_tags($message));
+
         if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
             Flash::warning($message);
+    }
 
-        foreach ($config->enabled_modules as $module)
-            if ($module != $target)
-                $this_disabled[] = $module;
+    /**
+     * Function: cancel_feather
+     * Temporarily declares a feather cancelled (disabled).
+     *
+     * Parameters:
+     *     $target - Feather name to disable.
+     *     $reason - Why was execution cancelled?
+     *
+     * Notes:
+     *     A feather can cancel itself in its __construct method.
+     */
+     function cancel_feather($target, $reason = "") {
+        $message = empty($reason) ?
+            _f("Execution of %s has been cancelled because the feather could not continue.", camelize($target)) : $reason ;
 
-        return $config->enabled_modules = $this_disabled;
+        if (isset(Feathers::$instances[$target]))
+            Feathers::$instances[$target]->cancelled = true;
+
+        if (DEBUG)
+            error_log("WARNING: ".strip_tags($message));
+
+        if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
+            Flash::warning($message);
     }
 
     /**
@@ -980,25 +999,24 @@
 
         # Instantiate all Modules.
         foreach ($config->enabled_modules as $module) {
-            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
-                if (DEBUG)
-                    error_log("WARNING: Module is missing or damaged: ".$module);
+            $class_name = camelize($module);
 
-                unset($config->enabled_modules[$module]);
+            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or
+                !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
+                cancel_module($module, _f("%s module is missing.", $class_name));
                 continue;
             }
 
-            if (file_exists(MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
 
             require MODULES_DIR.DIR.$module.DIR.$module.".php";
 
-            $camelized = camelize($module);
-
-            if (!class_exists($camelized))
+            if (!class_exists($class_name)) {
+                cancel_module($module, _f("%s module is damaged.", $class_name));
                 continue;
+            }
 
-            Modules::$instances[$module] = new $camelized;
+            Modules::$instances[$module] = new $class_name;
             Modules::$instances[$module]->safename = $module;
 
             foreach (include MODULES_DIR.DIR.$module.DIR."info.php" as $key => $val)
@@ -1007,39 +1025,39 @@
 
         # Instantiate all Feathers.
         foreach ($config->enabled_feathers as $feather) {
-            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
-                if (DEBUG)
-                    error_log("WARNING: Feather is missing or damaged: ".$feather);
+            $class_name = camelize($feather);
 
-                unset($config->enabled_feathers[$feather]);
+            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or
+                !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
+                cancel_feather($feather, _f("%s feather is missing.", $class_name));
                 continue;
             }
 
-            if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
 
             require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
-            $camelized = camelize($feather);
-
-            if (!class_exists($camelized))
+            if (!class_exists($class_name)) {
+                cancel_feather($feather, _f("%s feather is damaged.", $class_name));
                 continue;
+            }
 
-            Feathers::$instances[$feather] = new $camelized;
+            Feathers::$instances[$feather] = new $class_name;
             Feathers::$instances[$feather]->safename = $feather;
 
             foreach (include FEATHERS_DIR.DIR.$feather.DIR."info.php" as $key => $val)
                 Feathers::$instances[$feather]->$key = $val;
         }
 
-        # Initialize all modules.
-        foreach (Feathers::$instances as $feather)
-            if (method_exists($feather, "__init"))
-                $feather->__init();
-
+        # Initialize all Modules.
         foreach (Modules::$instances as $module)
             if (method_exists($module, "__init"))
                 $module->__init();
+
+        # Initialize all Feathers.
+        foreach (Feathers::$instances as $feather)
+            if (method_exists($feather, "__init"))
+                $feather->__init();
     }
 
     /**
