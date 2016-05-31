@@ -12,6 +12,14 @@
 <label for="comment_body_field">{{ "Your comment" | translate }}</label>
 {% endif %}
 <textarea name="body" id="comment_body_field"></textarea>
+<small>
+{% if site.enable_markdown %}{{ "Markdown is allowed." | translate }} {% endif %}
+{% if site.allowed_comment_html is not empty %}
+{{ "HTML tags allowed: &lt;%s&gt;." | translate | format(site.allowed_comment_html | join("&gt;, &lt;") | fix ) }}
+{% else %}
+{{ "HTML is not allowed." | translate }}
+{% endif %}
+</small>
 {% if visitor.logged_in and site.email_correspondence %}
 <label for="comment_notify_field">{{ "Notify me when others comment" | translate }}</label>
 <input type="checkbox" name="notify" id="comment_notify_field">
