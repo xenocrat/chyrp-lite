@@ -17,15 +17,15 @@ Called from:
 can_not_view_site
 -----------------
 Called from:
-	admin/index.php on line 19
-	index.php on line 19
+	admin/index.php on line 15
+	index.php on line 20
 
 
 end
 ---
 Called from:
-	admin/index.php on line 29
-	index.php on line 53
+	admin/index.php on line 26
+	index.php on line 55
 Arguments:
 	$route
 
@@ -202,7 +202,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 199
+	includes/ajax.php on line 198
 
 
 change_setting
@@ -246,7 +246,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1222
+	includes/controller/Admin.php on line 1221
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -254,7 +254,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1250
+	includes/controller/Admin.php on line 1249
 Arguments:
 	$user
 
@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1278
+	includes/controller/Admin.php on line 1277
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1301
+	includes/controller/Admin.php on line 1300
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1712
+	includes/controller/Admin.php on line 1706
 Arguments:
 	!empty($_POST['theme'])
 
@@ -592,7 +592,7 @@ related_posts
 Target:
 	$ids
 Called from:
-	includes/class/Theme.php on line 184
+	includes/class/Theme.php on line 183
 Arguments:
 	$post, $limit
 
@@ -602,7 +602,7 @@ stylesheets
 Target:
 	$stylesheets
 Called from:
-	includes/class/Theme.php on line 221
+	includes/class/Theme.php on line 220
 
 
 scripts
@@ -610,7 +610,7 @@ scripts
 Target:
 	$javascripts
 Called from:
-	includes/class/Theme.php on line 280
+	includes/class/Theme.php on line 279
 
 
 links
@@ -618,7 +618,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 329
+	includes/class/Theme.php on line 328
 
 
 visitor
@@ -634,7 +634,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 110
+	includes/controller/Admin.php on line 109
 
 
 post_export_url
@@ -642,7 +642,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 999
+	includes/controller/Admin.php on line 998
 Arguments:
 	$post)
 
@@ -652,7 +652,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1018
+	includes/controller/Admin.php on line 1017
 Arguments:
 	$post
 
@@ -662,7 +662,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1062
+	includes/controller/Admin.php on line 1061
 Arguments:
 	$page)
 
@@ -672,7 +672,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1077
+	includes/controller/Admin.php on line 1076
 Arguments:
 	$page
 
@@ -682,7 +682,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1131
+	includes/controller/Admin.php on line 1130
 
 
 manage_nav
@@ -690,7 +690,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2065
+	includes/controller/Admin.php on line 2059
 
 
 settings_nav
@@ -698,7 +698,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2095
+	includes/controller/Admin.php on line 2089
 
 
 extend_nav
@@ -706,7 +706,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2105
+	includes/controller/Admin.php on line 2099
 
 
 admin_subnav
@@ -714,7 +714,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2116
+	includes/controller/Admin.php on line 2110
 
 
 nav_selected
@@ -722,7 +722,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2218
+	includes/controller/Admin.php on line 2212
 
 
 url_code
