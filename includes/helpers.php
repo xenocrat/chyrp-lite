@@ -1011,7 +1011,7 @@
 
             require MODULES_DIR.DIR.$module.DIR.$module.".php";
 
-            if (!class_exists($class_name)) {
+            if (!is_subclass_of($class_name, "Modules")) {
                 cancel_module($module, _f("%s module is damaged.", $class_name));
                 continue;
             }
@@ -1037,7 +1037,7 @@
 
             require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
-            if (!class_exists($class_name)) {
+            if (!is_subclass_of($class_name, "Feathers")) {
                 cancel_feather($feather, _f("%s feather is damaged.", $class_name));
                 continue;
             }
