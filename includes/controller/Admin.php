@@ -1637,17 +1637,17 @@
             $updated_array = array();
             $class_name    = camelize($name);
 
-            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                show_404(__("Not Found"), __("Module not found."));
-
-            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                show_404(__("Not Found"), __("Feather not found."));
-
             if ($type == "module" and empty(Modules::$instances[$name]))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
             if ($type == "feather" and empty(Feathers::$instances[$name]))
                 Flash::warning(__("Feather already disabled."), "/admin/?action=feathers");
+
+            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
+                show_404(__("Not Found"), __("Module not found."));
+
+            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
+                show_404(__("Not Found"), __("Feather not found."));
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), false);
