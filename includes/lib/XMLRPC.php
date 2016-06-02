@@ -60,7 +60,7 @@
             if (!is_url($target) or !substr_count($target, $chyrp_host))
                 return new IXR_Error(32, __("The URL for our page is not valid."));
 
-            if (!is_url($source) or substr_count($source, $chyrp_host))
+            if (!is_url($source))
                 return new IXR_Error(16, __("The URL for your page is not valid."));
 
             if (preg_match("/url=([^&#]+)/", $target, $url))

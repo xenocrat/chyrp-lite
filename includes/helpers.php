@@ -652,7 +652,7 @@
         if (isset($query))
             $path.= '?'.$query;
 
-        if (!isset($host) or substr_count($url, $chyrp_host))
+        if (!isset($host))
             return false;
 
         $connect = @fsockopen($host, $port, $errno, $errstr, 2);
@@ -660,35 +660,30 @@
         if (!$connect)
             return false;
 
+        $remote_headers = "";
+        $remote_bytes = 0;
+
         # Send the GET headers.
         fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
         fwrite($connect, "Host: $host\r\n");
         fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
 
         # Check for X-Pingback header.
-        $headers = "";
-
         while (!feof($connect)) {
             $line = fgets($connect, 512);
 
             if (trim($line) == "")
                 break;
 
-            $headers.= trim($line)."\n";
+            $remote_headers.= trim($line)."\n";
 
             if (preg_match("/X-Pingback: (.+)/i", $line, $matches))
                 return trim($matches[1]);
-
-            # Save the content-type in case we need to <link> search.
-            if (preg_match("/Content-Type: (.+)/i", $headers, $matches))
-                $content_type = trim($matches[1]);
         }
 
         # X-Pingback header not found, <link> search if the content can be parsed.
-        if (!preg_match("~(text/html|text/sgml|text/xml|text/plain)~i", $content_type))
+        if (!preg_match("~Content-Type:\s+(text/html|text/sgml|text/xml|text/plain)~im", $remote_headers))
             return false;
-
-        $size = 0;
 
         while (!feof($connect)) {
             $line = fgets($connect, 1024);
@@ -696,9 +691,9 @@
             if (preg_match("/<link rel=[\"|']pingback[\"|'] href=[\"|']([^\"]+)[\"|'] ?\/?>/i", $line, $link))
                 return $link[1];
 
-            $size += strlen($line);
+            $remote_bytes += strlen($line);
 
-            if ($size > 2048)
+            if ($remote_bytes > 2048)
                 return false;
         }
 
@@ -796,7 +791,7 @@
         $urls = array();
 
         if (Config::current()->enable_markdown)
-            $expressions[] = "/!\[[^\]]+\]\(([^\)]+)\)/";
+            $expressions[] = "/\[[^\]]+\]\(([^\)]+)\)/";
 
         Trigger::current()->filter($expressions, "link_regexp"); # Modules can support other syntaxes.
 
@@ -820,7 +815,7 @@
      *     $use_chyrp_url - Use the @Config.chyrp_url@ instead of @Config.url@ for $urls beginning with @/@?
      */
     function redirect($url, $use_chyrp_url = false) {
-        # Handle URIs without domain
+        # Handle URIs without domain.
         if (strpos($url, "/") === 0)
             $url = (ADMIN or $use_chyrp_url) ?
                        Config::current()->chyrp_url.$url :
