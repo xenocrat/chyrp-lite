@@ -67,7 +67,8 @@
                 $post = new Post(array("url" => $url[1]));
             else
                 $post = MainController::current()->post_from_url(null,
-                                                                 str_replace(rtrim($config->url, "/"), "/", $target),
+                                                                 str_replace(rtrim($config->url, "/"),
+                                                                             "/", $target),
                                                                  true);
 
             if (!$post)
@@ -79,33 +80,32 @@
             if (empty($content))
                 return new IXR_Error(16, __("You have not published at that URL."));
 
-            # Get the title of the page.
+            # Get the title and body of the page.
             preg_match("/<title>([^<]+)<\/title>/i", $content, $title);
-            $title = $title[1];
+            preg_match("/<body[^>]*>(.+)<\/body>/ims", $content, $body);
 
-            if (empty($title))
-                return new IXR_Error(0, __("The page you published has no title."));
+            if (empty($title[1]) or empty($body[1]))
+                return new IXR_Error(0, __("Your page could not be parsed."));
 
-            $content = strip_tags($content, "<a>");
+            $title = fix($title[1]);
+            $body = strip_tags($body[1], "<a>");
             $url = preg_quote($target, "/");
 
             # Search the page for our link.
-            if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
+            if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
                 $url = str_replace("&", "&amp;", preg_quote($target, "/"));
 
-                if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
+                if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
                     $url = str_replace("&", "&#038;", preg_quote($target, "/"));
 
-                    if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context))
-                        return new IXR_Error(17, __("The page you published does not link to our page."));
+                    if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context))
+                        return new IXR_Error(17, __("Your page does not link to our page."));
                 }
             }
 
-            # Build an excerpt of up to 300 characters surrounding the link.
-            $excerpt = strip_tags(str_replace($context[0], $context[1], $content));
-            $match   = preg_quote($context[1], "/");
-            $excerpt = preg_replace("/.*?\s(.{0,100}{$match}.{0,100})\s.*/s", "\\1", $excerpt);
-            $excerpt = "&hellip; ".truncate(trim(normalize($excerpt)), 300, "", true)."&hellip;";
+            # Build an excerpt of up to 400 characters surrounding the link.
+            $regex = "/.*([^>]{0,200}".preg_quote($context[0], "/")."[^<]{0,200}).*/ms";
+            $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 400);
 
             Trigger::current()->call("pingback", $post, $target, $source_url, $title, $excerpt);
 

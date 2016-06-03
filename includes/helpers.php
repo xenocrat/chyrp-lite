@@ -642,12 +642,8 @@
         extract(parse_url($url), EXTR_SKIP);
 
         $config = Config::current();
-        $path = (!isset($path)) ? '/' : $path ;
+        $path = (isset($path)) ? $path : '/' ;
         $port = (isset($port)) ? $port : 80 ;
-        $chyrp_host = str_replace(array("http://www.",
-                                        "http://",
-                                        "https://www.",
-                                        "https://"), "", $config->url);
 
         if (isset($query))
             $path.= '?'.$query;
@@ -740,7 +736,6 @@
         } else {
             $port = (isset($port)) ? $port : 80 ;
             $path = (!isset($path)) ? '/' : $path ;
-            $header = "";
 
             if (isset($query))
                 $path.= '?'.$query;
@@ -748,13 +743,15 @@
             $connect = @fsockopen($host, $port, $errno, $errstr, $timeout);
 
             if ($connect) {
+                $remote_headers = "";
+
                 # Send the GET headers.
                 fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
                 fwrite($connect, "Host: ".$host."\r\n");
                 fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
 
-                while (!feof($connect) and strpos($header, "\r\n\r\n") === false)
-                    $header.= fgets($connect);
+                while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false)
+                    $remote_headers.= fgets($connect);
 
                 while (!feof($connect))
                     $content.= fgets($connect);
@@ -762,8 +759,8 @@
                 fclose($connect);
 
                 # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
-                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $header)
-                                   and preg_match("~^Location:(.+)$~mi", $header, $matches)) {
+                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)
+                                   and preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
 
                     $location = trim($matches[1]);
 
