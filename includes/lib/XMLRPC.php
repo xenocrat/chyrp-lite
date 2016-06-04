@@ -46,8 +46,8 @@
         #
         public function pingback_ping($args) {
             $config     = Config::current();
-            $source     = add_scheme(str_replace('&amp;', '&', $args[0]));
-            $target     = add_scheme(str_replace('&amp;', '&', $args[1]));
+            $source     = add_scheme($args[0]);
+            $target     = add_scheme($args[1]);
             $chyrp_host = str_replace(array("http://www.",
                                             "http://",
                                             "https://www.",
@@ -92,10 +92,10 @@
 
             # Search the page for our link.
             if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
-                $url = str_replace("&", "&amp;", preg_quote($target, "/"));
+                $url = str_replace("&amp;", "&", preg_quote($target, "/"));
 
                 if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
-                    $url = str_replace("&", "&#038;", preg_quote($target, "/"));
+                    $url = str_replace("&amp;", "&#038;", preg_quote($target, "/"));
 
                     if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context))
                         return new IXR_Error(17, __("Your page does not link to our page."));
