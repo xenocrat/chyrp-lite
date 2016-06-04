@@ -735,7 +735,7 @@
             curl_close($handle);
         } else {
             $port = (isset($port)) ? $port : 80 ;
-            $path = (!isset($path)) ? '/' : $path ;
+            $path = (isset($path)) ? $path : '/' ;
 
             if (isset($query))
                 $path.= '?'.$query;

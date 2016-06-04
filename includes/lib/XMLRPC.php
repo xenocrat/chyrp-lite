@@ -46,9 +46,8 @@
         #
         public function pingback_ping($args) {
             $config     = Config::current();
-            $source     = str_replace('&amp;', '&', $args[0]);
-            $target     = str_replace('&amp;', '&', $args[1]);
-            $source_url = add_scheme($source);
+            $source     = add_scheme(str_replace('&amp;', '&', $args[0]));
+            $target     = add_scheme(str_replace('&amp;', '&', $args[1]));
             $chyrp_host = str_replace(array("http://www.",
                                             "http://",
                                             "https://www.",
@@ -75,7 +74,7 @@
                 return new IXR_Error(33, __("We have not published at that URL."));
 
             # Grab the page that linked here.
-            $content = get_remote($source_url);
+            $content = get_remote($source);
 
             if (empty($content))
                 return new IXR_Error(16, __("You have not published at that URL."));
@@ -107,7 +106,7 @@
             $regex = "/.*([^>]{0,200}".preg_quote($context[0], "/")."[^<]{0,200}).*/ms";
             $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 400);
 
-            Trigger::current()->call("pingback", $post, $target, $source_url, $title, $excerpt);
+            Trigger::current()->call("pingback", $post, $target, $source, $title, $excerpt);
 
             return __("Pingback registered!");
         }
