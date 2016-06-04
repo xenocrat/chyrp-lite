@@ -103,7 +103,7 @@
             }
 
             # Build an excerpt of up to 400 characters surrounding the link.
-            $regex = "/.*([^>]{0,200}".preg_quote($context[0], "/")."[^<]{0,200}).*/ms";
+            $regex = "/.*?\b([^>]{0,200}".preg_quote($context[0], "/")."[^<]{0,200})\b.*/ms";
             $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 400);
 
             Trigger::current()->call("pingback", $post, $target, $source, $title, $excerpt);
