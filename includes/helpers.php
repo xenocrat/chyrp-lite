@@ -531,9 +531,6 @@
      *     CakePHP team, code style modified.
      */
     function truncate($text, $length = 100, $ending = "...", $exact = false, $html = false) {
-        if (is_array($ending))
-            extract($ending);
-
         if ($html) {
             if (strlen(preg_replace("/<[^>]+>/", "", $text)) <= $length)
                 return $text;
@@ -542,6 +539,7 @@
             $openTags = array();
             $truncate = "";
             preg_match_all("/(<\/?([\w+]+)[^>]*>)?([^<>]*)/", $text, $tags, PREG_SET_ORDER);
+
             foreach ($tags as $tag) {
                 if (!preg_match('/img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param/s', $tag[2])
                     and preg_match('/<[\w]+[^>]*>/s', $tag[0]))
@@ -553,8 +551,8 @@
                 }
 
                 $truncate .= $tag[1];
-
                 $contentLength = strlen(preg_replace("/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i", " ", $tag[3]));
+
                 if ($contentLength + $totalLength > $length) {
                     $left = $length - $totalLength;
                     $entitiesLength = 0;
@@ -591,6 +589,7 @@
                 if ($html) {
                     $bits = substr($truncate, $spacepos);
                     preg_match_all('/<\/([a-z]+)>/', $bits, $droppedTags, PREG_SET_ORDER);
+
                     if (!empty($droppedTags))
                         foreach ($droppedTags as $closingTag)
                             if (!in_array($closingTag[1], $openTags))
@@ -642,8 +641,8 @@
         extract(parse_url($url), EXTR_SKIP);
 
         $config = Config::current();
-        $path = (isset($path)) ? $path : '/' ;
-        $port = (isset($port)) ? $port : 80 ;
+        fallback($path, '/');
+        fallback($port, 80);
 
         if (isset($query))
             $path.= '?'.$query;
@@ -734,8 +733,8 @@
             $content = curl_exec($handle);
             curl_close($handle);
         } else {
-            $port = (isset($port)) ? $port : 80 ;
-            $path = (isset($path)) ? $path : '/' ;
+            fallback($path, '/');
+            fallback($port, 80);
 
             if (isset($query))
                 $path.= '?'.$query;
