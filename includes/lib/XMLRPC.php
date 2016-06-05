@@ -46,12 +46,17 @@
         #
         public function pingback_ping($args) {
             $config     = Config::current();
+            $trigger    = Trigger::current();
             $source     = add_scheme($args[0]);
             $target     = add_scheme($args[1]);
             $chyrp_host = str_replace(array("http://www.",
                                             "http://",
                                             "https://www.",
                                             "https://"), "", $config->url);
+
+            # No need to continue without a responder for the pingback trigger.
+            if (!$trigger->exists("pingback"))
+                throw new Exception(__("Pingback support is disabled for this site."));
 
             if ($target == $source)
                 return new IXR_ERROR(0, __("The from and to URLs cannot be the same."));
@@ -106,9 +111,8 @@
             $regex = "/.*?\b([^>]{0,100}".preg_quote($context[0], "/")."[^<]*)\b.*/ms";
             $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 300);
 
-            Trigger::current()->call("pingback", $post, $target, $source, $title, $excerpt);
-
-            return __("Pingback registered!");
+            # Pingback responder must return a single string on success or IXR_Error on failure.
+            return $trigger->call("pingback", $post, $target, $source, $title, $excerpt);
         }
 
         #

@@ -68,7 +68,7 @@
          *     $post - The <Post> they're commenting on.
          *     $parent - The <Comment> they're replying to.
          *     $notify - Notification on follow-up comments.
-         *     $type - The type of comment. Optional, used for pingbacks.
+         *     $type - The type of comment (optional).
          */
         static function create($body, $author, $url, $email, $post, $parent, $notify, $type = null) {
             if (!self::user_can($post->id) and $type != "pingback")

@@ -301,7 +301,9 @@
             $sql = SQL::current();
             $count = $sql->count("comments",
                                  array("post_id" => $post->id,
+                                       "status" => "pingback",
                                        "author_url" => $from));
+
             if ($count)
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "comments"));
 
@@ -313,6 +315,8 @@
                             0,
                             0,
                             "pingback");
+
+            return __("Pingback registered!", "comments");
         }
 
         static function delete_post($post) {
