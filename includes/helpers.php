@@ -41,8 +41,8 @@
      * Shows an error message with a 403 HTTP header.
      *
      * Parameters:
-     *     $title - The title for the error dialog.
-     *     $body - The message for the error dialog.
+     *     $title - The title for the error dialog (optional).
+     *     $body - The message for the error dialog (optional).
      */
     function show_403($title = "", $body = "") {
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
@@ -58,8 +58,8 @@
      * Shows an error message with a 404 HTTP header.
      *
      * Parameters:
-     *     $title - The title for the error dialog.
-     *     $body - The message for the error dialog.
+     *     $title - The title for the error dialog (optional).
+     *     $body - The message for the error dialog (optional).
      */
      function show_404($title = "", $body = "") {
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
@@ -521,11 +521,11 @@
      * Truncates a string to the given length, optionally taking into account HTML tags, and/or keeping words intact.
      *
      * Parameters:
-     *     $text - String to shorten.
-     *     $length - Length to truncate to.
+     *     $text - The string to be truncated.
+     *     $length - The truncated length.
      *     $ending - What to place at the end, e.g. "...".
-     *     $exact - Break words?
-     *     $html - Auto-close cut-off HTML tags?
+     *     $exact - Break words to truncate exactly?
+     *     $html - Auto-close any cut-off HTML tags?
      *
      * Author:
      *     CakePHP team, code style modified.
