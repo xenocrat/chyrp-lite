@@ -34,6 +34,11 @@
     # Sanitize input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
 
+    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "GET") {
+        header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
+        exit("Invalid Method.");
+    }
+
     if (empty($_GET['file'])) {
         header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
         exit("Missing Argument.");

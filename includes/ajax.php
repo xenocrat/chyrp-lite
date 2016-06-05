@@ -9,6 +9,11 @@
     # Parse the route.
     $route = Route::current($main);
 
+    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "POST") {
+        header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
+        exit("Invalid Method.");
+    }
+
     if (empty($_POST['action'])) {
         header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
         exit("Missing Argument.");

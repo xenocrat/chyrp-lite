@@ -34,7 +34,8 @@ class IXR_Server
     {
         if (!$data) {
             if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
-            	header('Content-Type: text/plain'); // merged from WP #9093
+                header('Content-Type: text/plain');
+                header($_SERVER['SERVER_PROTOCOL'].' 405 Method Not Allowed');
                 die('XML-RPC server accepts POST requests only.');
             }
 
@@ -180,7 +181,6 @@ EOD;
 
     function multiCall($methodcalls)
     {
-        // See http://www.xmlrpc.com/discuss/msgReader$1208
         $return = array();
         foreach ($methodcalls as $call) {
             $method = $call['methodName'];
