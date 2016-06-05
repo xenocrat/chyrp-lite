@@ -107,9 +107,9 @@
                 }
             }
 
-            # Build an excerpt of up to 300 characters surrounding the link.
-            $regex = "/.*?\b([^>]{0,100}".preg_quote($context[0], "/")."[^<]*)\b.*/ms";
-            $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 300);
+            # Build an excerpt of up to 200 characters surrounding the link.
+            $regex = "/.*?\b([^\.>]{0,100}".preg_quote($context[0], "/")."[^<]*)\b.*/ms";
+            $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 200);
 
             # Pingback responder must return a single string on success or IXR_Error on failure.
             return $trigger->call("pingback", $post, $target, $source, $title, $excerpt);
