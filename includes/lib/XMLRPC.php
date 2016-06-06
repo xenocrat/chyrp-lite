@@ -86,14 +86,22 @@
 
             # Get the title and body of the page.
             preg_match("/<title>([^<]+)<\/title>/i", $content, $title);
-            preg_match("/<body[^>]*>(.+)<\/body>/ims", $content, $body);
+            preg_match("/<body[^>]*>(.+)<\/body>/is", $content, $body);
+            preg_match("/<meta charset=[\"\']?([^\"\'>]+)/i", $content, $charset);
 
             if (empty($title[1]) or empty($body[1]))
                 return new IXR_Error(0, __("Your page could not be parsed."));
 
-            $title = fix($title[1]);
+            $title = trim(fix($title[1]));
             $body = strip_tags($body[1], "<a>");
+            $charset = oneof($charset[1], "UTF-8");
             $url = preg_quote($target, "/");
+
+            # Convert the source encoding to UTF-8 if possible to ensure we render it correctly.
+            if (function_exists("mb_convert_encoding")) {
+                $title = mb_convert_encoding($title, "UTF-8", $charset);
+                $body = mb_convert_encoding($body, "UTF-8", $charset);
+            }
 
             # Search the page for our link.
             if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
@@ -107,8 +115,8 @@
                 }
             }
 
-            # Build an excerpt of up to 200 characters surrounding the link.
-            $regex = "/.*?\b([^\.>]{0,100}".preg_quote($context[0], "/")."[^<]*)\b.*/ms";
+            # Build an excerpt of up to 200 characters. Tries to start with the sentence containing the link.
+            $regex = "/.*?\b([^\.>]{0,100}".preg_quote($context[0], "/")."[^<]*)\b.*/s";
             $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 200);
 
             # Pingback responder must return a single string on success or IXR_Error on failure.
