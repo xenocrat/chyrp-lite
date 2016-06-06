@@ -518,95 +518,36 @@
 
     /**
      * Function: truncate
-     * Truncates a string to the given length, optionally taking into account HTML tags, and/or keeping words intact.
+     * Truncates a string to the given length, optionally breaking at the nearest word.
      *
      * Parameters:
      *     $text - The string to be truncated.
      *     $length - The truncated length.
-     *     $ending - What to place at the end, e.g. "...".
+     *     $ellipsis - A string to place at the truncation point.
      *     $exact - Break words to truncate exactly?
-     *     $html - Auto-close any cut-off HTML tags?
-     *
-     * Author:
-     *     CakePHP team, code style modified.
+     *     $encoding - The character encoding of the string.
      */
-    function truncate($text, $length = 100, $ending = "...", $exact = false, $html = false) {
-        if ($html) {
-            if (strlen(preg_replace("/<[^>]+>/", "", $text)) <= $length)
+    function truncate($text, $length = 100, $ellipsis = "...", $exact = false, $encoding = "UTF-8") {
+        if (function_exists("mb_strlen") and function_exists("mb_substr")) {
+            if (mb_strlen($text, $encoding) <= $length)
                 return $text;
 
-            $totalLength = strlen($ending);
-            $openTags = array();
-            $truncate = "";
-            preg_match_all("/(<\/?([\w+]+)[^>]*>)?([^<>]*)/", $text, $tags, PREG_SET_ORDER);
-
-            foreach ($tags as $tag) {
-                if (!preg_match('/img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param/s', $tag[2])
-                    and preg_match('/<[\w]+[^>]*>/s', $tag[0]))
-                    array_unshift($openTags, $tag[2]);
-                elseif (preg_match('/<\/([\w]+)[^>]*>/s', $tag[0], $closeTag)) {
-                    $pos = array_search($closeTag[1], $openTags);
-                    if ($pos !== false)
-                        array_splice($openTags, $pos, 1);
-                }
-
-                $truncate .= $tag[1];
-                $contentLength = strlen(preg_replace("/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i", " ", $tag[3]));
-
-                if ($contentLength + $totalLength > $length) {
-                    $left = $length - $totalLength;
-                    $entitiesLength = 0;
-                    if (preg_match_all("/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i", $tag[3], $entities, PREG_OFFSET_CAPTURE))
-                        foreach ($entities[0] as $entity)
-                            if ($entity[1] + 1 - $entitiesLength <= $left) {
-                                $left--;
-                                $entitiesLength += strlen($entity[0]);
-                            } else
-                                break;
-
-                    $truncate .= substr($tag[3], 0 , $left + $entitiesLength);
-
-                    break;
-                } else {
-                    $truncate .= $tag[3];
-                    $totalLength += $contentLength;
-                }
-
-                if ($totalLength >= $length)
-                    break;
-            }
+            $breakpoint = $length - mb_strlen($ellipsis, $encoding);
+            $truncation = mb_substr($text, 0, $breakpoint, $encoding);
+            $remainder  = mb_substr($text, $breakpoint, null, $encoding);
         } else {
             if (strlen($text) <= $length)
                 return $text;
-            else
-                $truncate = substr($text, 0, $length - strlen($ending));
+
+            $breakpoint = $length - strlen($ellipsis);
+            $truncation = substr($text, 0, $breakpoint);
+            $remainder  = substr($text, $breakpoint);
         }
 
-        if (!$exact) {
-            $spacepos = strrpos($truncate, " ");
+        if (!$exact and !preg_match("/^\s/", $remainder))
+            $truncation = preg_replace("/(.+)\s.*/s", "$1", $truncation);
 
-            if (isset($spacepos)) {
-                if ($html) {
-                    $bits = substr($truncate, $spacepos);
-                    preg_match_all('/<\/([a-z]+)>/', $bits, $droppedTags, PREG_SET_ORDER);
-
-                    if (!empty($droppedTags))
-                        foreach ($droppedTags as $closingTag)
-                            if (!in_array($closingTag[1], $openTags))
-                                array_unshift($openTags, $closingTag[1]);
-                }
-
-                $truncate = substr($truncate, 0, $spacepos);
-            }
-        }
-
-        $truncate .= $ending;
-
-        if ($html)
-            foreach ($openTags as $tag)
-                $truncate .= '</'.$tag.'>';
-
-        return $truncate;
+        return $truncation.$ellipsis;
     }
 
     /**
