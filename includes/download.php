@@ -47,7 +47,7 @@
         error(__("Error"), __("Malformed URI."), null, 400);
 
     if (!is_readable($filepath) or !is_file($filepath))
-        error(__("Not Found"), __("Post not found."), null, 404);
+        error(__("Not Found"), __("File not found."), null, 404);
 
     if (DEBUG)
         error_log("SERVING file download for ".$filename);
