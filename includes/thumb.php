@@ -39,10 +39,10 @@
         exit(header("Location: ".$url)); # GD version too low.
 
     if (substr_count($filename, DIR))
-        display_error(_f("Image name %s is not allowed.", $filename));
+        display_error(__("Malformed URI."));
 
     if (!is_readable($filepath) or !is_file($filepath))
-        display_error(_f("Image file %s was not found.", $filename));
+        display_error(__("File not found."));
 
     function display_error($string) {
         $thumbnail = imagecreatetruecolor(($_GET['max_width']) ? $_GET['max_width'] : 640,
