@@ -46,11 +46,6 @@ var Cookie = {
   	}
 }
 
-// Determine if AJAX responses are errors.
-function isError(response) {
-	return /<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->/.test(response);
-}
-
 // Award a numeric score for the strength of a password.
 function passwordStrength(password) {
     var score = 0;

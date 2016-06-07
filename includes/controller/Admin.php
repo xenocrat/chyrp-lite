@@ -166,7 +166,7 @@
          */
         public function edit_post() {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a post."));
+                error(__("No ID Specified"), __("An ID is required to edit a post."), null, 400);
 
             $post = new Post($_GET['id'], array("drafts" => true, "filter" => false));
 
@@ -191,7 +191,7 @@
          */
         public function update_post() {
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update a post."));
+                error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
             if (isset($_POST['publish']))
                 $_POST['status'] = "public";
@@ -219,7 +219,7 @@
          */
         public function delete_post() {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a post."));
+                error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
             $post = new Post($_GET['id'], array("drafts" => true));
 
@@ -241,7 +241,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a post."));
+                error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_posts");
@@ -370,7 +370,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this page."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a page."));
+                error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
 
             $page = new Page($_GET['id'], array("filter" => false));
 
@@ -397,7 +397,7 @@
                 error(__("Error"), __("Title and slug cannot be blank."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a page."));
+                error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
 
             $page = new Page($_POST['id']);
 
@@ -433,7 +433,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a page."));
+                error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
 
             $page = new Page($_GET['id']);
 
@@ -455,7 +455,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a page."));
+                error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_pages");
@@ -596,7 +596,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this user."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a user."));
+                error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
 
             $user = new User($_GET['id']);
 
@@ -615,7 +615,7 @@
          */
         public function update_user() {
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a user."));
+                error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -683,7 +683,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a user."));
+                error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
             $this->display("delete_user",
                            array("user" => new User($_GET['id']),
@@ -699,7 +699,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a user."));
+                error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_users");
@@ -799,7 +799,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a group."));
+                error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
 
             $group = new Group($_GET['id']);
 
@@ -849,7 +849,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a group."));
+                error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
             $this->display("delete_group",
                            array("group" => new Group($_GET['id']),
@@ -866,7 +866,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a group."));
+                error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_groups");
@@ -1925,7 +1925,7 @@
          */
         public function help() {
             if (empty($_GET['id']))
-                error(__("Missing Argument"), __("An ID is required to display a help page."));
+                error(__("Missing Argument"), __("An ID is required to display a help page."), null, 400);
 
             $help = Trigger::current()->call("help_".$_GET['id']);
 

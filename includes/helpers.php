@@ -45,12 +45,10 @@
      *     $body - The message for the error dialog (optional).
      */
     function show_403($title = "", $body = "") {
-        header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
-
         $title = oneof($title, __("403 Forbidden"));
         $body = oneof($body, __("You do not have permission to access this resource."));
 
-        error($title, $body);
+        error($title, $body, null, 403);
     }
 
     /**
@@ -62,8 +60,6 @@
      *     $body - The message for the error dialog (optional).
      */
      function show_404($title = "", $body = "") {
-        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-
         $title = oneof($title, __("404 Not Found"));
         $body = oneof($body, __("The requested resource was not found."));
 
@@ -71,8 +67,9 @@
         $main = MainController::current();
 
         if (TESTER or ADMIN or AJAX or !$theme->file_exists("pages".DIR."404"))
-            error($title, $body);
+            error($title, $body, null, 404);
 
+        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
         $main->display("pages".DIR."404", array("reason" => $body), $title);
         exit;
     }

@@ -109,7 +109,7 @@
 
         static function route_add_comment() {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
-                error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"), null, 400);
 
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
@@ -159,7 +159,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to update a comment.", "comments"), null, 400);
 
             $comment = new Comment($_POST['id']);
 
@@ -212,7 +212,7 @@
 
         static function admin_delete_comment($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
             $comment = new Comment($_GET['id']);
 
@@ -230,7 +230,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_comments");
@@ -389,7 +389,7 @@
 
         public function admin_edit_comment($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to edit a comment.", "comments"), null, 400);
 
             $comment = new Comment($_GET['id'], array("filter" => false));
 
@@ -592,7 +592,7 @@
 
                 case "show_comment":
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
-                        error(__("Error"), __("An ID is required to show a comment.", "comments"));
+                        error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
 
                     $comment = new Comment($_POST['comment_id']);
 
@@ -607,7 +607,7 @@
                         show_403(__("Access Denied"), __("Invalid security key."));
 
                     if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                        error(__("Error"), __("An ID is required to delete a comment.", "comments"));
+                        error(__("Error"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
                     $comment = new Comment($_POST['id']);
 
@@ -625,7 +625,7 @@
                         show_403(__("Access Denied"), __("Invalid security key."));
 
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
-                        error(__("Error"), __("An ID is required to edit a comment.", "comments"));
+                        error(__("Error"), __("An ID is required to edit a comment.", "comments"), null, 400);
 
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
 

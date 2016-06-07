@@ -41,7 +41,7 @@
 
         static function route_like() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
-                error(__("Error"), __("An ID is required to like a post.", "likes"));
+                error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
             $post = new Post($_GET['post_id']);
 
@@ -56,7 +56,7 @@
 
         static function route_unlike() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
-                error(__("Error"), __("An ID is required to unlike a post.", "likes"));
+                error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
             $post = new Post($_GET['post_id']);
 
@@ -80,7 +80,7 @@
 
         static function ajax_like() {
             if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
-                error(__("Error"), __("An ID is required to like a post.", "likes"));
+                error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
             if (!Visitor::current()->group->can("like_post"))
                 exit; # JavaScript does not know if the visitor can toggle likes on/off.
@@ -107,7 +107,7 @@
 
         static function ajax_unlike() {
             if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
-                error(__("Error"), __("An ID is required to unlike a post.", "likes"));
+                error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
             if (!Visitor::current()->group->can("unlike_post"))
                 exit; # JavaScript does not know if the visitor can toggle likes on/off.

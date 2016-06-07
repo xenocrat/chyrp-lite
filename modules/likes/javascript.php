@@ -46,11 +46,6 @@ var ChyrpLikes = {
                 ChyrpLikes.busy = true;	
             },
             success: function(response) {
-                if (isError(response)) {
-                    ChyrpLikes.panic();
-                    return;
-                }
-
                 if (response != "")
                     callback(response);
             },

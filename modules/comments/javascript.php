@@ -25,11 +25,6 @@ var ChyrpComment = {
                         dataType: "json",
                         error: ChyrpComment.panic,
                     }).done(function(response) {
-                        if (isError(response)) {
-                            ChyrpComment.panic();
-                            return;
-                        }
-
                         if (response.notifications.length) {
                             alert(response.notifications[0]);
                         } else {
@@ -111,11 +106,6 @@ var ChyrpComment = {
             comment_id: id,
             hash: Site.key
         }, function(data) {
-            if (isError(data)) {
-                ChyrpComment.panic();
-                return;
-            }
-
             thisItem.fadeOut("fast", function() {
                 $(this).loader(true);
                 $(this).empty().append(data).fadeIn("fast", function() {
@@ -148,11 +138,6 @@ var ChyrpComment = {
                                 dataType: "json",
                                 error: ChyrpComment.panic,
                             }).done(function(response) {
-                                if (isError(response)) {
-                                    ChyrpComment.panic();
-                                    return;
-                                }
-
                                 if (response.notifications.length) {
                                     $(thisItem).loader(true);
                                     alert(response.notifications[0]);
@@ -171,21 +156,11 @@ var ChyrpComment = {
                                 }).done(function(response) {
                                     ChyrpComment.editing--;
 
-                                    if (isError(response)) {
-                                        ChyrpComment.panic();
-                                        return;
-                                    }
-
                                     // Load the updated post.
                                     $.post(Site.chyrp_url + "/includes/ajax.php", {
                                         action: "show_comment",
                                         comment_id: id
                                     }, function(data) {
-                                        if (isError(data)) {
-                                            ChyrpComment.panic();
-                                            return;
-                                        }
-
                                         thisItem.fadeOut("fast", function() {
                                             $(this).replaceWith(data).fadeIn("fast");
                                         });
@@ -203,11 +178,6 @@ var ChyrpComment = {
                                 action: "show_comment",
                                 comment_id: id
                             }, function(data){
-                                if (isError(data)) {
-                                    ChyrpComment.panic();
-                                    return;
-                                }
-
                                 thisItem.fadeOut("fast", function() {
                                     $(this).replaceWith(data).fadeIn("fast");
                                 });
@@ -232,11 +202,6 @@ var ChyrpComment = {
             id: id,
             hash: Site.key
         }, function(response){
-            if (isError(response)) {
-                ChyrpComment.panic();
-                return;
-            }
-
             thisItem.fadeOut("fast", function() {
                 $(this).remove();
             });

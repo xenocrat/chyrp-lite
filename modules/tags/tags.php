@@ -230,7 +230,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
             if (empty($_GET['clean']))
-                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
 
             $sql = SQL::current();
             $tags = array();
@@ -264,7 +264,7 @@
 
         public function admin_edit_tags($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit tags.", "tags"));
+                error(__("No ID Specified"), __("An ID is required to edit tags.", "tags"), null, 400);
 
             $post = new Post($_GET['id']);
 
@@ -282,7 +282,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update tags.", "tags"));
+                error(__("No ID Specified"), __("An ID is required to update tags.", "tags"), null, 400);
 
             $post = new Post($_POST['id']);
 
@@ -305,7 +305,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['original']) or empty($_POST['name']))
-                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
 
             $_POST['name'] = str_replace(",", " ", $_POST['name']);
             $_POST['name'] = is_numeric($_POST['name']) ? "'".$_POST['name']."'" : $_POST['name'] ;
@@ -334,7 +334,7 @@
 
         public function admin_delete_tag($admin) {
             if (empty($_GET['clean']))
-                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
             $sql = SQL::current();
             $tags = array();
@@ -374,7 +374,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['name']))
-                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_tags");

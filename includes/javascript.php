@@ -44,14 +44,7 @@ var Post = {
             id: id,
             hash: Site.key
         }, function(response) {
-            thisPost.loader(true);
-
-            if (isError(response)) {
-                Post.panic();
-                return;
-            }
-
-            thisPost.fadeOut("fast", function() {
+            thisPost.loader(true).fadeOut("fast", function() {
                 $(this).remove();
 
                 if (!$(".post").length)
@@ -93,14 +86,7 @@ var Page = {
             id: id,
             hash: Site.key
         }, function(response) {
-            thisPage.loader(true);
-
-            if (isError(response)) {
-                Page.panic();
-                return;
-            }
-
-            thisPage.fadeOut("fast", function() {
+            thisPage.loader(true).fadeOut("fast", function() {
                 $(this).remove();
                 window.location = Site.url;
             });

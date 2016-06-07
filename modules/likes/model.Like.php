@@ -67,7 +67,7 @@
 
                 $_SESSION["likes"][$this->post_id] = !empty($this->user_id);
             } else
-                error(__("Error"), __("An ID is required to like a post.", "likes"));
+                error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
         }
 
         /**
@@ -87,7 +87,7 @@
 
                 unset($_SESSION["likes"][$this->post_id]);
             } else
-                error(__("Error"), __("An ID is required to unlike a post.", "likes"));
+                error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
         }
 
         public function fetchPeople() {

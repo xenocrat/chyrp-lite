@@ -9,15 +9,11 @@
     # Parse the route.
     $route = Route::current($main);
 
-    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "POST") {
-        header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
-        exit("Invalid Method.");
-    }
+    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "POST")
+        error(__("Error"), __("This resource accepts POST requests only."), null, 405);
 
-    if (empty($_POST['action'])) {
-        header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
-        exit("Missing Argument.");
-    }
+    if (empty($_POST['action']))
+        error(__("Error"), __("Missing argument."), null, 400);
 
     if (!$visitor->group->can("view_site"))
         show_403(__("Access Denied"), __("You are not allowed to view this site."));
@@ -28,7 +24,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a post."));
+                error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
             $post = new Post($_POST['id'], array("drafts" => true));
 
@@ -46,7 +42,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a page."));
+                error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
 
             $page = new Page($_POST['id']);
 
@@ -202,5 +198,4 @@
     $trigger->call("ajax_".$_POST['action']);
 
     # Serve an error if no responders were found.
-    header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
-    exit("Invalid Action.");
+    error(__("Error"), __("Invalid action."), null, 400);

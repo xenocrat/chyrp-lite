@@ -19,7 +19,7 @@
      */
     function error_panicker($errno, $message, $file, $line) {
         if (error_reporting() === 0)
-            return true; # Error reporting has been disabled.
+            return true; # Error reporting excludes this error.
 
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
@@ -69,8 +69,9 @@
      *     $title - The title for the error dialog.
      *     $body - The message for the error dialog.
      *     $backtrace - The trace of the error.
+     *     $code - Numeric HTTP status code to set.
      */
-    function error($title = "", $body = "", $backtrace = array()) {
+    function error($title = "", $body = "", $backtrace = array(), $code = 500) {
         # Sanitize strings.
         $title = htmlspecialchars($title, ENT_QUOTES, "utf-8", false);
         $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
@@ -96,12 +97,47 @@
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
-            if (!empty($backtrace))
-                header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+            switch ($code) {
+                case 400:
+                    header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+                    break;
+
+                case 403:
+                    header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+                    break;
+
+                case 404:
+                    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+                    break;
+
+                case 405:
+                    header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
+                    break;
+
+                case 409:
+                    header($_SERVER["SERVER_PROTOCOL"]." 409 Conflict");
+                    break;
+
+                case 410:
+                    header($_SERVER["SERVER_PROTOCOL"]." 410 Gone");
+                    break;
+
+                case 501:
+                    header($_SERVER["SERVER_PROTOCOL"]." 501 Not Implemented");
+                    break;
+
+                case 503:
+                    header($_SERVER["SERVER_PROTOCOL"]." 503 Service Unavailable");
+                    break;
+
+                default:
+                    header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+                    break;
+            }
         }
 
-        # Report in plain text for the automated tester and RPC queries.
-        if (TESTER or XML_RPC)
+        # Report in plain text for the automated tester, RPC and AJAX queries.
+        if (TESTER or XML_RPC or AJAX)
             exit("ERROR: ".strip_tags($body));
 
         # Report and exit safely if the error is too deep in the core for a pretty error message.
@@ -124,14 +160,6 @@
         # Validate title and body text.
         $title = oneof($title, __("Error"));
         $body = oneof($body, __("An unspecified error has occurred."));
-
-        # Report in plain text with backtrace and magic words for JavaScript.
-        if (AJAX) {
-            foreach ($backtrace as $trace)
-                $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
-
-            exit($title.": ".strip_tags($body)."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
-        }
 
         # Display the error.
 ?>
@@ -335,7 +363,6 @@
         </div>
     </body>
 </html>
-<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->
 <?php
         # Terminate execution.
         exit;

@@ -14,15 +14,11 @@
     if (ini_get("memory_limit") < 48)
         ini_set("memory_limit", "48M");
 
-    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "GET") {
-        header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
-        exit("Invalid Method.");
-    }
+    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "GET")
+        error(__("Error"), __("This resource accepts GET requests only."), null, 405);
 
-    if (empty($_GET['file'])) {
-        header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
-        exit("Missing Argument.");
-    }
+    if (empty($_GET['file']))
+        error(__("Error"), __("Missing argument."), null, 400);
 
     $config = Config::current();
     $quality = (int) fallback($_GET["quality"], 80);

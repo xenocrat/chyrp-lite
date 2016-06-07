@@ -33,11 +33,6 @@ var ChyrpAjaxScroll = {
 
             if (this_next_url && this_post_obj.length) {
                 $.get(this_next_url, function(data) {
-                    if (isError(data)) {
-                        ChyrpAjaxScroll.panic();
-                        return;
-                    }
-
                     var this_next_num = Number(this_next_url.match(/page[=\/]([0-9]+)/i)[1]);
                     var ajax_next_obj = $(data).find("#pagination_next_page");
                     var ajax_next_title = $(data).filter("title").text();

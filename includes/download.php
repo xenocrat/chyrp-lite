@@ -34,28 +34,20 @@
     # Sanitize input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);
 
-    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "GET") {
-        header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
-        exit("Invalid Method.");
-    }
+    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "GET")
+        error(__("Error"), __("This resource accepts GET requests only."), null, 405);
 
-    if (empty($_GET['file'])) {
-        header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
-        exit("Missing Argument.");
-    }
+    if (empty($_GET['file']))
+        error(__("Error"), __("Missing argument."), null, 400);
 
     $filename = oneof(trim($_GET['file']), DIR);
     $filepath = uploaded($filename, false);
 
-    if (substr_count($filename, DIR)) {
-        header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
-        exit("Malformed URI.");
-    }
+    if (substr_count($filename, DIR))
+        error(__("Error"), __("Malformed URI."), null, 400);
 
-    if (!is_readable($filepath) or !is_file($filepath)) {
-        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-        exit("File Not Found.");
-    }
+    if (!is_readable($filepath) or !is_file($filepath))
+        error(__("Not Found"), __("Post not found."), null, 404);
 
     if (DEBUG)
         error_log("SERVING file download for ".$filename);
