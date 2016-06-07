@@ -87,7 +87,7 @@
             # Get the title and body of the page.
             preg_match("/<title>([^<]+)<\/title>/i", $content, $title);
             preg_match("/<body[^>]*>(.+)<\/body>/is", $content, $body);
-            preg_match("/<meta charset=[\"\']?([^\"\'>]+)/i", $content, $charset);
+            preg_match("/<meta charset=[\"\']?([^ \"\'\/>]+)/i", $content, $charset);
 
             if (empty($title[1]) or empty($body[1]))
                 return new IXR_Error(0, __("Your page could not be parsed."));
