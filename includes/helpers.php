@@ -1265,24 +1265,35 @@
 
         switch ($file['error']) {
             case UPLOAD_ERR_INI_SIZE:
-                error(__("Error"), __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."));
+                error(__("Error"),
+                      __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."),
+                      null, 413);
             case UPLOAD_ERR_FORM_SIZE:
-                error(__("Error"), __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive that was specified in the HTML form."));
+                error(__("Error"),
+                      __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive that was specified in the HTML form."),
+                      null, 413);
             case UPLOAD_ERR_PARTIAL:
-                error(__("Error"), __("The uploaded file was only partially uploaded."));
+                error(__("Error"),
+                      __("The uploaded file was only partially uploaded."),
+                      null, 400);
             case UPLOAD_ERR_NO_TMP_DIR:
-                error(__("Error"), __("Missing a temporary folder."));
+                error(__("Error"),
+                      __("Missing a temporary folder."));
             case UPLOAD_ERR_CANT_WRITE:
-                error(__("Error"), __("Failed to write file to disk."));
+                error(__("Error"),
+                      __("Failed to write file to disk."));
             case UPLOAD_ERR_EXTENSION:
-                error(__("Error"), __("File upload was stopped by a PHP extension."));
+                error(__("Error"),
+                      __("File upload was stopped by a PHP extension."));
             case UPLOAD_ERR_NO_FILE:
                 return false;
             case UPLOAD_ERR_OK:
                 $limit = Config::current()->uploads_limit;
 
                 if ($file['size'] > ($limit * 1048576))
-                    error(__("Error"), _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $limit));
+                    error(__("Error"),
+                          _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $limit),
+                          null, 413);
 
                 return true;
             default:

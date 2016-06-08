@@ -101,42 +101,35 @@
                 case 400:
                     header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
                     break;
-
                 case 403:
                     header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
                     break;
-
                 case 404:
                     header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
                     break;
-
                 case 405:
                     header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
                     break;
-
                 case 409:
                     header($_SERVER["SERVER_PROTOCOL"]." 409 Conflict");
                     break;
-
                 case 410:
                     header($_SERVER["SERVER_PROTOCOL"]." 410 Gone");
                     break;
-
+                case 413:
+                    header($_SERVER["SERVER_PROTOCOL"]." 413 Payload Too Large");
+                    break;
                 case 422:
                     header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Entity");
                     break;
-
                 case 501:
                     header($_SERVER["SERVER_PROTOCOL"]." 501 Not Implemented");
                     break;
-
                 case 503:
                     header($_SERVER["SERVER_PROTOCOL"]." 503 Service Unavailable");
                     break;
-
                 default:
                     header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
-                    break;
             }
         }
 
