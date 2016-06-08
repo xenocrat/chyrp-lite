@@ -26,7 +26,7 @@
     $filepath = uploaded($filename, false);;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
     $url = uploaded($filename);
-    $new_width = (int) fallback($_GET["max_width"], 0);
+    $new_width = (int) fallback($_GET["max_width"], 640);
     $new_height = (int) fallback($_GET["max_height"], 0);
 
     if (!function_exists("gd_info"))
@@ -39,20 +39,10 @@
         exit(header("Location: ".$url)); # GD version too low.
 
     if (substr_count($filename, DIR))
-        display_error(__("Malformed URI."));
+        error(__("Error"), __("Malformed URI."), null, 400);
 
     if (!is_readable($filepath) or !is_file($filepath))
-        display_error(__("File not found."));
-
-    function display_error($string) {
-        $thumbnail = imagecreatetruecolor(($_GET['max_width']) ? $_GET['max_width'] : 640,
-                                          ($_GET['max_height']) ? $_GET['max_height'] : 16);
-        imagestring($thumbnail, 1, 4, 4, $string, imagecolorallocate($thumbnail, 255, 255, 255));
-        header("Content-type: image/png");
-        header("Content-Disposition: inline; filename=error.png");
-        imagepng($thumbnail);
-        exit;
-    }
+        error(__("Not Found"), __("File not found."), null, 404);
 
     list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
 
@@ -60,8 +50,8 @@
     $crop_y = 0;
 
     function resize(&$crop_x, &$crop_y, &$new_width, &$new_height, $original_width, $original_height) {
-        $xscale = ($new_width / $original_width);
-        $yscale = $new_height / $original_height;
+        $xscale = ($new_width > 0) ? $new_width / $original_width : 0 ;
+        $yscale = ($new_height > 0) ? $new_height / $original_height : 0 ;
 
         if ($new_width <= $original_width and $new_height <= $original_height and $xscale == $yscale)
             return;
@@ -84,22 +74,22 @@
             return;
 
         } else {
-    
+
             if ($new_width and !$new_height)
                 return $new_height = ($new_width / $original_width) * $original_height;
             elseif (!$new_width and $new_height)
                 return $new_width = ($new_height / $original_height) * $original_width;
-    
+
             if ($xscale != $yscale) {
                 if ($original_width * $yscale <= $new_width)
                     $new_width = $original_width * $yscale;
-    
+
                 if ($original_height * $xscale <= $new_height)
                     $new_height = $original_height * $xscale;
             }
-    
-            $xscale = ($new_width / $original_width);
-            $yscale = $new_height / $original_height;
+
+            $xscale = ($new_width > 0) ? $new_width / $original_width : 0 ;
+            $yscale = ($new_height > 0) ? $new_height / $original_height : 0 ;
     
             if (round($xscale, 3) == round($yscale, 3))
                 return;
