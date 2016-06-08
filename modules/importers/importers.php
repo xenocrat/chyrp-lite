@@ -18,10 +18,11 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!in_array("text", $config->enabled_feathers))
-                error(__("Missing Feather", "importers"), __("Importing from WordPress requires the Text feather to be installed and enabled.", "importers"));
+                error(__("Missing Feather", "importers"),
+                      __("Importing from WordPress requires the Text feather to be installed and enabled.", "importers"), null, 501);
 
             if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
-                error(__("Error"), __("You must select a WordPress export file.", "importers"));
+                error(__("Error"), __("You must select a WordPress export file.", "importers"), null, 422);
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
@@ -181,15 +182,16 @@
                 !in_array("photo", $config->enabled_feathers) or
                 !in_array("quote", $config->enabled_feathers) or
                 !in_array("link", $config->enabled_feathers))
-                error(__("Missing Feather", "importers"), __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"));
+                error(__("Missing Feather", "importers"),
+                      __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"), null, 501);
 
             $_POST['tumblr_url'] = trim($_POST['tumblr_url']);
 
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
-                error(__("Error"), __("Invalid URL.", "importers"));
+                error(__("Error"), __("Invalid URL.", "importers"), null, 422);
 
             if (!preg_match("/^(http(s)?:\/\/)?(www\.)?[a-z0-9][a-z0-9-]+[a-z0-9]+\.tumblr\.com(\/)?$/i", $_POST['tumblr_url']))
-                error(__("Error"), __("Invalid Tumblr URL.", "importers"));
+                error(__("Error"), __("Invalid Tumblr URL.", "importers"), null, 422);
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
@@ -317,16 +319,16 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['host']))
-                error(__("Error"), __("Host cannot be empty.", "importers"));
+                error(__("Error"), __("Host cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['username']))
-                error(__("Error"), __("Username cannot be empty.", "importers"));
+                error(__("Error"), __("Username cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['password']))
-                error(__("Error"), __("Password cannot be empty.", "importers"));
+                error(__("Error"), __("Password cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['database']))
-                error(__("Error"), __("Database cannot be empty.", "importers"));
+                error(__("Error"), __("Database cannot be empty.", "importers"), null, 422);
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
@@ -344,7 +346,7 @@
             $mysqli->query("SET NAMES 'utf8'");
 
             $prefix = $mysqli->real_escape_string($_POST['prefix']);
-            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error", "importers"), $mysqli->error);
+            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
 
             $posts = array();
             while ($post = $result->fetch_assoc())
@@ -409,16 +411,16 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['host']))
-                error(__("Error"), __("Host cannot be empty.", "importers"));
+                error(__("Error"), __("Host cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['username']))
-                error(__("Error"), __("Username cannot be empty.", "importers"));
+                error(__("Error"), __("Username cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['password']))
-                error(__("Error"), __("Password cannot be empty.", "importers"));
+                error(__("Error"), __("Password cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['database']))
-                error(__("Error"), __("Database cannot be empty.", "importers"));
+                error(__("Error"), __("Database cannot be empty.", "importers"), null, 422);
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
@@ -436,7 +438,7 @@
             $mysqli->query("SET NAMES 'utf8'");
 
             $authors = array();
-            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error", "importers"), $mysqli->error);
+            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
 
             while ($author = $result->fetch_assoc()) {
                 # Try to figure out if this author is the same as the person doing the import.
@@ -461,7 +463,7 @@
                 }
             }
 
-            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error", "importers"), $mysqli->error);
+            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
 
             $posts = array();
             while ($post = $result->fetch_assoc())
