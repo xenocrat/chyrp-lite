@@ -122,6 +122,10 @@
                     header($_SERVER["SERVER_PROTOCOL"]." 410 Gone");
                     break;
 
+                case 422:
+                    header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Entity");
+                    break;
+
                 case 501:
                     header($_SERVER["SERVER_PROTOCOL"]." 501 Not Implemented");
                     break;
