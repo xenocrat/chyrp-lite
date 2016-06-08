@@ -341,7 +341,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['title']) and empty($_POST['slug']))
-                error(__("Error"), __("Title and slug cannot be blank."));
+                error(__("Error"), __("Title and slug cannot be blank."), null, 422);
 
             fallback($_POST['status'], "public");
 
@@ -394,7 +394,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['title']) and empty($_POST['slug']))
-                error(__("Error"), __("Title and slug cannot be blank."));
+                error(__("Error"), __("Title and slug cannot be blank."), null, 422);
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
@@ -533,27 +533,27 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['login']))
-                error(__("Error"), __("Please enter a username for the account."));
+                error(__("Error"), __("Please enter a username for the account."), null, 422);
 
             $check = new User(array("login" => $_POST['login']));
 
             if (!$check->no_results)
-                error(__("Error"), __("That username is already in use."));
+                error(__("Error"), __("That username is already in use."), null, 409);
 
             if (empty($_POST['password1']))
-                error(__("Error"), __("Password cannot be blank."));
+                error(__("Error"), __("Password cannot be blank."), null, 422);
             elseif ($_POST['password1'] != $_POST['password2'])
-                error(__("Error"), __("Passwords do not match."));
+                error(__("Error"), __("Passwords do not match."), null, 422);
             elseif (password_strength($_POST['password1']) < 100)
                 Flash::message(__("Please consider setting a stronger password for this user."));
 
             if (empty($_POST['email']))
-                error(__("Error"), __("Email address cannot be blank."));
+                error(__("Error"), __("Email address cannot be blank."), null, 422);
             elseif (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid email address."));
+                error(__("Error"), __("Invalid email address."), null, 422);
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
-                error(__("Error"), __("Invalid website URL."));
+                error(__("Error"), __("Invalid website URL."), null, 422);
 
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
@@ -630,7 +630,7 @@
                                                                 "id not" => $_POST['id'])));
 
             if (!$check_name->no_results)
-                error(__("Error"), __("That username is already in use."));
+                error(__("Error"), __("That username is already in use."), null, 409);
 
             $user = new User($_POST['id']);
 
@@ -638,19 +638,19 @@
                 show_404(__("Not Found"), __("User not found."));
 
             if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
-                error(__("Error"), __("Passwords do not match."));
+                error(__("Error"), __("Passwords do not match."), null, 422);
             elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 100)
                 Flash::message(__("Please consider setting a stronger password for this user."));
 
             $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
 
             if (empty($_POST['email']))
-                error(__("Error"), __("Email address cannot be blank."));
+                error(__("Error"), __("Email address cannot be blank."), null, 422);
             elseif (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid email address."));
+                error(__("Error"), __("Invalid email address."), null, 422);
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
-                error(__("Error"), __("Invalid website URL."));
+                error(__("Error"), __("Invalid website URL."), null, 422);
 
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
@@ -783,7 +783,7 @@
             $check = new Group(null, array("where" => array("name" => $_POST['name'])));
 
             if (!$check->no_results)
-                error(__("Error"), __("That group name is already in use."));
+                error(__("Error"), __("That group name is already in use."), null, 409);
 
             Group::add($_POST['name'], array_keys($_POST['permissions']));
 
@@ -828,7 +828,7 @@
                                                                  "id not" => $_POST['id'])));
 
             if (!$check_name->no_results)
-                error(__("Error"), __("That group name is already in use."));
+                error(__("Error"), __("That group name is already in use."), null, 409);
 
             $group = new Group($_POST['id']);
 
@@ -1565,7 +1565,7 @@
             $type = (isset($_POST['module'])) ? "module" : "feather" ;
 
             if (empty($_POST[$type]))
-                error(__("No Extension Specified"), __("You did not specify an extension to enable."));
+                error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
 
             $name          = $_POST[$type];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
@@ -1630,7 +1630,7 @@
             $type = (isset($_POST['module'])) ? "module" : "feather" ;
 
             if (empty($_POST[$type]))
-                error(__("No Extension Specified"), __("You did not specify an extension to disable."));
+                error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
 
             $name          = $_POST[$type];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
@@ -1677,7 +1677,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST['theme']))
-                error(__("No Theme Specified"), __("You did not specify a theme to select or preview."));
+                error(__("No Theme Specified"), __("You did not specify a theme to select or preview."), null, 400);
 
             if ($_POST['change'] != "indubitably")
                 self::preview_theme();
@@ -1748,13 +1748,13 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!empty($_POST['email']) and !is_email($_POST['email']))
-                error(__("Error"), __("Invalid email address."));
+                error(__("Error"), __("Invalid email address."), null, 422);
 
             if (!is_url($_POST['chyrp_url']))
-                error(__("Error"), __("Invalid Chyrp URL."));
+                error(__("Error"), __("Invalid Chyrp URL."), null, 422);
 
             if (!empty($_POST['url']) and !is_url($_POST['url']))
-                error(__("Error"), __("Invalid canonical URL."));
+                error(__("Error"), __("Invalid canonical URL."), null, 422);
 
             $config = Config::current();
 
@@ -1790,7 +1790,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
-                error(__("Error"), __("Invalid feed URL."));
+                error(__("Error"), __("Invalid feed URL."), null, 422);
 
             $separator = preg_quote(DIR, "~");
             preg_match("~^(".$separator.")?(.*?)(".$separator.")?$~", $_POST['uploads_path'], $matches);

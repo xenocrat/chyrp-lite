@@ -300,7 +300,7 @@
                                __("Archive"));
             } else {
                 if (!is_numeric($_GET['year']) or !is_numeric($_GET['month']))
-                    error(__("Error"), __("Please enter a valid year and month."));
+                    error(__("Error"), __("Please enter a valid year and month."), null, 422);
 
                 $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
 
@@ -401,7 +401,7 @@
                 $this->feed = false;
 
             if (!$post->theme_exists())
-                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."));
+                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."), null, 501);
 
             if ($post->status == "draft")
                 Flash::message(__("This post is a draft."));
@@ -530,15 +530,15 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Missing Token"), __("You must supply an authentication token."));
+                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                error(__("Unknown User"), __("That username isn't in our database."));
+                show_404(__("Unknown User"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Invalid Token"), __("The authentication token is not valid."));
+                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
 
             if (!$user->approved) {
                 SQL::current()->update("users",
@@ -559,15 +559,15 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Missing Token"), __("You must supply an authentication token."));
+                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                error(__("Unknown User"), __("That username isn't in our database."));
+                show_404(__("Unknown User"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Invalid Token"), __("The authentication token is not valid."));
+                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
 
             $new_password = random(8);
 
