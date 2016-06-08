@@ -48,7 +48,15 @@
         $title = oneof($title, __("403 Forbidden"));
         $body = oneof($body, __("You do not have permission to access this resource."));
 
-        error($title, $body, null, 403);
+        $theme = Theme::current();
+        $main = MainController::current();
+
+        if (TESTER or ADMIN or AJAX or !$theme->file_exists("pages".DIR."403"))
+            error($title, $body, null, 403);
+
+        header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+        $main->display("pages".DIR."403", array("reason" => $body), $title);
+        exit;
     }
 
     /**
