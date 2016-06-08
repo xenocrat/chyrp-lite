@@ -84,7 +84,7 @@
                 show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->theme_exists())
-                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."));
+                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."), null, 501);
 
             if ($post->status == "draft")
                 Flash::message(__("This post is a draft."));
@@ -170,19 +170,19 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
             if (empty($_POST['body']))
-                error(__("Error"), __("Message can't be blank.", "comments"));
+                error(__("Error"), __("Message can't be blank.", "comments"), null, 422);
 
             if (empty($_POST['author']))
-                error(__("Error"), __("Author can't be blank.", "comments"));
+                error(__("Error"), __("Author can't be blank.", "comments"), null, 422);
 
             if (empty($_POST['author_email']))
-                error(__("Error"), __("Email address can't be blank.", "comments"));
+                error(__("Error"), __("Email address can't be blank.", "comments"), null, 422);
 
             if (!is_email($_POST['author_email']))
-                error(__("Error"), __("Invalid email address.", "comments"));
+                error(__("Error"), __("Invalid email address.", "comments"), null, 422);
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                error(__("Error"), __("Invalid website URL.", "comments"));
+                error(__("Error"), __("Invalid website URL.", "comments"), null, 422);
 
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
