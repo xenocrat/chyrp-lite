@@ -1779,11 +1779,11 @@
      */
     function download($contents = "", $filename = "caconym") {
         if (!headers_sent()) {
-            header("Content-type: application/octet-stream");
+            header("Content-Type: application/octet-stream");
             header("Content-Disposition: attachment; filename=\"".$filename."\"");
 
             if (!in_array("ob_gzhandler", ob_list_handlers()))
-                header("Content-length: ".strlen($contents));
+                header("Content-Length: ".strlen($contents));
 
             echo $contents;
             exit;
