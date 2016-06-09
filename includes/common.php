@@ -142,14 +142,18 @@
         define('USE_OB', true);
 
     # Constant: USE_ZLIB
-    # Use zlib to provide GZIP compression if the feature is supported and not buggy.
-    # See Also: http://bugs.php.net/55544
+    # Use ZLIB to provide GZIP compression.
     if (!defined('USE_ZLIB'))
-        if (extension_loaded("zlib") and
-            !ini_get("zlib.output_compression") and
-            isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-            substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
-            (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<")))
+        if (
+                # Is the ZLIB extension available and not already enabled?
+                extension_loaded("zlib") and !ini_get("zlib.output_compression") and
+
+                # Has the user agent told us it can accept GZIP compressed content?
+                isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
+
+                # Is this a version of PHP with a working implementation? http://bugs.php.net/55544
+                (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<"))
+            )
             define('USE_ZLIB', true);
         else
             define('USE_ZLIB', false);
@@ -175,10 +179,9 @@
 
     # Start output buffering.
     if (USE_OB)
-        if (USE_ZLIB and !AJAX) {
+        if (USE_ZLIB and !AJAX)
             ob_start("ob_gzhandler");
-            header("Content-Encoding: gzip");
-        } else
+        else
             ob_start();
 
     # File: Error
