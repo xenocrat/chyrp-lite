@@ -1826,6 +1826,29 @@
     }
 
     /**
+     * Function: shorthand_bytes
+     * Decode shorthand bytes notation from php.ini.
+     *
+     * Parameters:
+     *     $value - The value from ini_get().
+     *
+     * Returns:
+     *     Absolute byte value of the shorthand notation.
+     */
+    function shorthand_bytes($value) {
+        switch (substr($value, -1)) {
+            case 'K': case 'k':
+                return (int) $value * 1024;
+            case 'M': case 'm':
+                return (int) $value * 1048576;
+            case 'G': case 'g':
+                return (int) $value * 1073741824;
+            default:
+                return $value;
+        }
+    }
+
+    /**
      * Function: correspond
      * Send an email correspondence to a user about an action we took.
      *
