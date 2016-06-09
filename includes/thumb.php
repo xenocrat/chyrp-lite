@@ -8,10 +8,7 @@
 
     require_once "common.php";
 
-    # Clean the output buffer to guard against image corruption.
-    ob_clean();
-
-    if (ini_get("memory_limit") < 48)
+    if (shorthand_bytes(ini_get("memory_limit")) < 50331648)
         ini_set("memory_limit", "48M");
 
     if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "GET")
@@ -199,8 +196,8 @@
     else
         $done($thumbnail);
 
-    ob_flush();
-
-    # Clear memory.
+    # Clear memory and flush the output buffer.
     imagedestroy($image);
     imagedestroy($thumbnail);
+
+    ob_end_flush();
