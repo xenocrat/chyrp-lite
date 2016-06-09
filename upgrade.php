@@ -28,6 +28,7 @@
     define('MODULES_DIR',    MAIN_DIR.DIR."modules");
     define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
     define('THEMES_DIR',     MAIN_DIR.DIR."themes");
+    define('USE_OB',         true);
     define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT

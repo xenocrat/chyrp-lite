@@ -136,6 +136,11 @@
     # URL to the list of releases.
     define('UPDATE_PAGE', "https://github.com/xenocrat/chyrp-lite/releases");
 
+    # Constant: USE_OB
+    # Use output buffering.
+    if (!defined('USE_OB'))
+        define('USE_OB', true);
+
     # Constant: USE_ZLIB
     # Use zlib to provide GZIP compression if the feature is supported and not buggy.
     # See Also: http://bugs.php.net/55544
@@ -168,12 +173,13 @@
         else
             error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
-    # Use GZip compression if available.
-    if (USE_ZLIB and !AJAX) {
-        ob_start("ob_gzhandler");
-        header("Content-Encoding: gzip");
-    } else
-        ob_start();
+    # Start output buffering.
+    if (USE_OB)
+        if (USE_ZLIB and !AJAX) {
+            ob_start("ob_gzhandler");
+            header("Content-Encoding: gzip");
+        } else
+            ob_start();
 
     # File: Error
     # Error handling functions.
