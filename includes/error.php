@@ -93,7 +93,7 @@
 
         # Attempt to set headers to sane values.
         if (!headers_sent()) {
-            header("Content-type: text/html; charset=UTF-8");
+            header("Content-Type: text/html; charset=UTF-8");
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
