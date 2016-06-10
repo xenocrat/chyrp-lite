@@ -133,12 +133,10 @@
             }
         }
 
-        # Report in plain text for the automated tester, RPC and AJAX queries.
-        if (TESTER or XML_RPC or AJAX)
-            exit("ERROR: ".strip_tags($body));
-
-        # Report and exit safely if the error is too deep in the core for a pretty error message.
-        if (!function_exists("__") or
+        # Report in plain text for the automated tester, RPC and AJAX queries
+        # or if the error was too deep in the core for a pretty error message.
+        if (TESTER or XML_RPC or AJAX or
+            !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
             !function_exists("oneof") or
@@ -148,7 +146,7 @@
             !method_exists("Config", "current") or
             !property_exists(Config::current(), "url") or
             !property_exists(Config::current(), "chyrp_url"))
-            exit("<!DOCTYPE html>\n<h1>ERROR:</h1>\n<p>".$body."</p>");
+            exit("ERROR: ".strip_tags($body));
 
         $config = Config::current();
         $url = $config->url;
