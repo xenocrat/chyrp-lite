@@ -142,17 +142,29 @@
         define('USE_OB', true);
 
     # Constant: USE_ZLIB
-    # Use ZLIB to provide GZIP compression.
+    # Use zlib to provide content compression.
     if (!defined('USE_ZLIB'))
         if (
-                # Is the ZLIB extension available and not already enabled?
-                extension_loaded("zlib") and !ini_get("zlib.output_compression") and
+                # Is the zlib extension available and not already enabled?
+                extension_loaded("zlib") and
+                !ini_get("zlib.output_compression")
 
-                # Has the user agent told us it can accept GZIP compressed content?
-                isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
+                and
 
-                # Is this a version of PHP with a working implementation? http://bugs.php.net/55544
-                (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<"))
+                # Has the user agent sent an Accept-Encoding header?
+                isset($_SERVER['HTTP_ACCEPT_ENCODING'])
+
+                and
+
+                # Has the user agent told us it can accept gzip or deflate?
+                (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") or
+                 substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"))
+
+                and
+
+                # Is this version of PHP buggy? http://bugs.php.net/55544
+                (version_compare(PHP_VERSION, "5.4.6", ">=") or
+                 version_compare(PHP_VERSION, "5.4.0", "<"))
             )
             define('USE_ZLIB', true);
         else
