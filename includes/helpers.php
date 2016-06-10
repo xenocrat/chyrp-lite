@@ -1830,10 +1830,10 @@
      * Decode shorthand bytes notation from php.ini.
      *
      * Parameters:
-     *     $value - The value from ini_get().
+     *     $value - The value returned by ini_get().
      *
      * Returns:
-     *     Absolute byte value of the shorthand notation.
+     *     A byte value or the input if decoding failed.
      */
     function shorthand_bytes($value) {
         switch (substr($value, -1)) {
