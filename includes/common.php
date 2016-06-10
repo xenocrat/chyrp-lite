@@ -350,11 +350,11 @@
     define('PREVIEWING', !ADMIN and !empty($_SESSION['theme']));
 
     # Constant: THEME_DIR
-    # Absolute path to /themes/(current/previewed theme)
+    # Absolute path to the theme (current or previewed).
     define('THEME_DIR', MAIN_DIR.DIR."themes".DIR.(PREVIEWING ? $_SESSION['theme'] : $config->theme));
 
     # Constant: THEME_URL
-    # URL to /themes/(current/previewed theme)
+    # Absolute URL to the theme (current or previewed).
     define('THEME_URL', $config->chyrp_url."/themes/".(PREVIEWING ? $_SESSION['theme'] : $config->theme));
 
     # Initialize the theme.
@@ -376,10 +376,9 @@
     $trigger = Trigger::current();
 
     # Filter the visitor immediately after the Modules are initialized.
-    # Example usage scenario: custom auth systems (e.g. OpenID)
     $trigger->filter($visitor, "visitor");
 
-    # First general-purpose trigger. There are many cases you may want to use @route_init@ instead of this.
+    # First general-purpose trigger.
     $trigger->call("runtime");
 
     # Set the content-type and charset.
