@@ -388,7 +388,7 @@
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else
-        header("Content-type: text/html; charset=UTF-8");
+        header("Content-Type: text/html; charset=UTF-8");
 
     # Be sociable but safe if the site is using the HTTPS protocol.
     if (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443)

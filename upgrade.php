@@ -6,7 +6,7 @@
      * Performs upgrade functions based on individual tasks, and checks whether or not they need to be done.
      */
 
-    header("Content-type: text/html; charset=UTF-8");
+    header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
     define('CHYRP_VERSION',  "2016.03");

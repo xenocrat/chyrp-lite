@@ -177,7 +177,7 @@
     imagecopyresampled($thumbnail, $image, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
 
     header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
-    header("Content-type: ".$mime);
+    header("Content-Type: ".$mime);
     header("Content-Disposition: inline; filename=".$filename.".".$extension);
 
     if ($done == "imagepng")

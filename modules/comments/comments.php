@@ -587,7 +587,7 @@
                     $response = array("comment_ids" => $ids,
                                       "last_comment" => $last_comment);
 
-                    header("Content-type: application/json; charset=UTF-8");
+                    header("Content-Type: application/json; charset=UTF-8");
                     echo json_encode($response);
                     exit;
 
@@ -640,7 +640,7 @@
                     exit;
 
                 case "validate_comment":
-                    header("Content-type: application/json; charset=UTF-8");
+                    header("Content-Type: application/json; charset=UTF-8");
                     $notifications = array();
 
                     if (empty($_POST['body']))

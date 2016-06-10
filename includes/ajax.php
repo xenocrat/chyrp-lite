@@ -87,7 +87,7 @@
             exit;
 
         case "enable":
-            header("Content-type: application/json; charset=UTF-8");
+            header("Content-Type: application/json; charset=UTF-8");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -142,7 +142,7 @@
             exit(json_encode(array("notifications" => $info["notifications"])));
 
         case "disable":
-            header("Content-type: application/json; charset=UTF-8");
+            header("Content-Type: application/json; charset=UTF-8");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
