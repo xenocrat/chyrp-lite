@@ -20,7 +20,6 @@
     define('UPGRADING',      true);
     define('INSTALLING',     false);
     define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-    define('INDEX',          false);
     define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(__FILE__));
     define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
