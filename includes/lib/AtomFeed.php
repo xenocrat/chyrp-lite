@@ -10,7 +10,7 @@
 
         /**
          * Function: __construct
-         * Sets headers for the Atom feed.
+         * Sets the Atom feed header.
          */
         public function __construct() {
             if (!headers_sent())
