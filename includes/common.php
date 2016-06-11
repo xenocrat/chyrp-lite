@@ -73,7 +73,7 @@
     # Constant: AJAX
     # Is this being run from an AJAX request?
     if (!defined('AJAX'))
-        define('AJAX', isset($_POST['ajax']) and $_POST['ajax'] == "true");
+        define('AJAX', !empty($_POST['ajax']));
 
     # Constant: XML_RPC
     # Is this being run from XML-RPC?
@@ -91,10 +91,6 @@
     # Constant: TESTER
     # Is the site being run by the automated tester?
     define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-
-    # Constant: INDEX
-    # Is the requested file /index.php?
-    define('INDEX', (pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_BASENAME) == "index.php") and !ADMIN);
 
     # Constant: DIR
     # Native directory separator.
