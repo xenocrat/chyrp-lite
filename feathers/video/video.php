@@ -9,7 +9,7 @@
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "video")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "video")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "video"),

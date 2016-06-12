@@ -9,7 +9,7 @@
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "photo")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "photo")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "photo"),

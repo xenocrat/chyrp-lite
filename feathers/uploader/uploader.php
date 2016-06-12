@@ -7,9 +7,9 @@
                                   "optional" => true));
             $this->setField(array("attr" => "uploads",
                                   "type" => "file",
-                                  "multiple" => true,
                                   "label" => __("Files", "uploader"),
-                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "uploader")));
+                                  "multiple" => true,
+                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "uploader")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "uploader"),

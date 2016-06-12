@@ -9,7 +9,7 @@
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "audio")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "audio")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
