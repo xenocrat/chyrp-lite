@@ -1290,7 +1290,7 @@
             case UPLOAD_ERR_OK:
                 $limit = Config::current()->uploads_limit;
 
-                if ($file['size'] > ($limit * 1048576))
+                if ($file['size'] > ($limit * 1000000))
                     error(__("Error"),
                           _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $limit),
                           null, 413);
@@ -1298,44 +1298,6 @@
                 return true;
             default:
                 error(__("Error"), __("Unknown upload error."));
-        }
-    }
-
-    /**
-     * Function: zip_errors
-     * Converts a ZipArchive error code into a human-readable message.
-     *
-     * Parameters:
-     *     $code - The error code returned by ZipArchive.
-     *
-     * Returns:
-     *     The error message corresponding to the supplied error code.
-     */
-    function zip_errors($code) {
-        if (!class_exists("ZipArchive"))
-            return __("ZipArchive not available.");
-
-        switch ($code) {
-            case ZipArchive::ER_EXISTS:
-                return __("File already exists.");
-            case ZipArchive::ER_INCONS:
-                return __("Zip archive inconsistent.");
-            case ZipArchive::ER_INVAL:
-                return __("Invalid argument.");
-            case ZipArchive::ER_MEMORY:
-                return __("Malloc failure.");
-            case ZipArchive::ER_NOENT:
-                return __("No such file.");
-            case ZipArchive::ER_NOZIP:
-                return __("Not a zip archive.");
-            case ZipArchive::ER_OPEN:
-                return __("Cannot open file.");
-            case ZipArchive::ER_READ:
-                return __("Read error.");
-            case ZipArchive::ER_SEEK:
-                return __("Seek error.");
-            default:
-                return __("Unknown error.");
         }
     }
 
