@@ -529,7 +529,7 @@
      *     $text - The string to be truncated.
      *     $length - The truncated length.
      *     $ellipsis - A string to place at the truncation point.
-     *     $exact - Break words to truncate exactly?
+     *     $exact - Split words to return the exact length requested?
      *     $encoding - The character encoding of the string.
      */
     function truncate($text, $length = 100, $ellipsis = "...", $exact = false, $encoding = "UTF-8") {
@@ -1270,7 +1270,7 @@
                       null, 413);
             case UPLOAD_ERR_FORM_SIZE:
                 error(__("Error"),
-                      __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive that was specified in the HTML form."),
+                      __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."),
                       null, 413);
             case UPLOAD_ERR_PARTIAL:
                 error(__("Error"),
@@ -1286,6 +1286,8 @@
                 error(__("Error"),
                       __("File upload was stopped by a PHP extension."));
             case UPLOAD_ERR_NO_FILE:
+                # This is not necessarily an error e.g. no new file when a post was edited.
+                # The caller should handle a true/false return value and act appropriately.
                 return false;
             case UPLOAD_ERR_OK:
                 $limit = Config::current()->uploads_limit;
@@ -1297,7 +1299,7 @@
 
                 return true;
             default:
-                error(__("Error"), __("Unknown upload error."));
+                error(__("Error"), _f("File upload failed with error %d.", $file['error']));
         }
     }
 
