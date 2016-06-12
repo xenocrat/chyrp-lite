@@ -924,8 +924,12 @@
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to export content."));
 
-            if (empty($_POST))
+            if (empty($_POST)) {
+                if (!class_exists("ZipArchive"))
+                    Flash::message(__("Multiple exports are not possible because the ZipArchive extension is not available."));
+
                 return $this->display("export");
+            }
 
             $config = Config::current();
             $trigger = Trigger::current();
@@ -1148,7 +1152,7 @@
                     unlink($filepath);
                     download($bitstream, $filename.".zip");
                 } else
-                    error(__("Error"), _f("Failed to export files because of ZipArchive error: <code>%s</code>", zip_errors($err)));
+                    error(__("Error"), _f("Failed to export files because of ZipArchive error %d.", $err));
             } else
                 download(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
         }
