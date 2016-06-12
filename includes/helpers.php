@@ -1786,7 +1786,6 @@
                 header("Content-Length: ".strlen($contents));
 
             echo $contents;
-            exit;
         } else
             error(__("Error"), __("Unable to deliver file attachment because HTTP headers were already sent."));
     }
