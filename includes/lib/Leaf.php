@@ -166,17 +166,17 @@
         if (is_string($bytes))
             $bytes = intval($bytes);
 
-        if ($bytes >= 1073741824) {
-            $value = number_format($bytes / 1073741824, 1);
+        if ($bytes >= 1000000000) {
+            $value = number_format($bytes / 1000000000, 1);
             return _f("%s GB", $value);
         }
 
         if ($bytes >= 1048576) {
-            $value = number_format($bytes / 1048576, 1);
+            $value = number_format($bytes / 1000000, 1);
             return _f("%s MB", $value);
         }
 
-        $value = number_format($bytes / 1024, 1);
+        $value = number_format($bytes / 1000, 1);
         return _f("%s KB", $value);
     }
 
