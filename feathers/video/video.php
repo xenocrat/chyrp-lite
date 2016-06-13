@@ -28,7 +28,7 @@
             if (isset($_FILES['video']) and upload_tester($_FILES['video']))
                 $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
             else
-                error(__("Error"), __("You did not select a video to upload.", "video"));
+                error(__("Error"), __("You did not select a video to upload.", "video"), null, 422);
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,

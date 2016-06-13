@@ -28,7 +28,7 @@
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
                 $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"));
             else
-                error(__("Error"), __("You did not select a photo to upload.", "photo"));
+                error(__("Error"), __("You did not select a photo to upload.", "photo"), null, 422);
                 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);

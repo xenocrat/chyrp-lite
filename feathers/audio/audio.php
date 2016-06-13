@@ -28,7 +28,7 @@
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
                 $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
             else
-                error(__("Error"), __("You did not select any audio to upload.", "audio"));
+                error(__("Error"), __("You did not select any audio to upload.", "audio"), null, 422);
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
