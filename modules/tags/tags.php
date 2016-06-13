@@ -162,6 +162,7 @@
 
             $tags = array();
             $names = array();
+
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags"))->fetchAll() as $tag) {
@@ -191,9 +192,12 @@
                     $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
                                      "name" => $tag,
-                                     "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"), $count, $tag),
+                                     "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
+                                                        $count, fix($tag, true)),
                                      "clean" => $tags[$tag],
                                      "url" => url("tag/".$tags[$tag], MainController::current()));
+
+                usort($cloud, array($this, "sort_tags_name_asc"));
             }
 
             fallback($_GET['query'], "");
@@ -542,10 +546,12 @@
                     $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
                                        "name" => $tag,
-                                       "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"), $count, $tag),
+                                       "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
+                                                          $count, fix($tag, true)),
                                        "clean" => $tags[$tag],
                                        "url" => url("tag/".$tags[$tag], $main));
 
+                usort($context, array($this, "sort_tags_name_asc"));
                 $main->display("pages".DIR."tags", array("tag_cloud" => $context), __("Tags", "tags"));
             }
         }
