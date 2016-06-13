@@ -1734,14 +1734,14 @@
     }
 
     /**
-     * Function: download
+     * Function: file_attachment
      * Send a file attachment to the visitor.
      *
      * Parameters:
      *     $contents - The bitstream to be delivered to the visitor.
      *     $filename - The name to be applied to the content upon download.
      */
-    function download($contents = "", $filename = "caconym") {
+    function file_attachment($contents = "", $filename = "caconym") {
         if (!headers_sent()) {
             header("Content-Type: application/octet-stream");
             header("Content-Disposition: attachment; filename=\"".$filename."\"");

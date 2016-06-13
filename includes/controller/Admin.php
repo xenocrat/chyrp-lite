@@ -1150,11 +1150,11 @@
                     $zip->close();
                     $bitstream = file_get_contents($filepath);
                     unlink($filepath);
-                    download($bitstream, $filename.".zip");
+                    file_attachment($bitstream, $filename.".zip");
                 } else
                     error(__("Error"), _f("Failed to export files because of ZipArchive error %d.", $err));
             } else
-                download(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
+                file_attachment(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
         }
 
         /**
