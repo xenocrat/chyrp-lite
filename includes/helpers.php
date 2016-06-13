@@ -1115,7 +1115,7 @@
 
         $name = explode(".", $name);
 
-        # Handle common double extensions
+        # Handle common double extensions.
         foreach (array("tar.gz", "tar.bz", "tar.bz2") as $extension) {
             list($first, $second) = explode(".", $extension);
             $file_first =& $name[count($name) - 2];
@@ -1158,7 +1158,7 @@
 
         $original_ext = end($file_split);
 
-        # Handle common double extensions
+        # Handle common double extensions.
         foreach (array("tar.gz", "tar.bz", "tar.bz2") as $ext) {
             list($first, $second) = explode(".", $ext);
             $file_first =& $file_split[count($file_split) - 2];
@@ -1444,10 +1444,10 @@
             else
                 $keywords[] = trim($fragment);
 
-        $dates = array("year" => __("year"),
-                       "month" => __("month"),
-                       "day" => __("day"),
-                       "hour" => __("hour"),
+        $dates = array("year"   => __("year"),
+                       "month"  => __("month"),
+                       "day"    => __("day"),
+                       "hour"   => __("hour"),
                        "minute" => __("minute"),
                        "second" => __("second"));
 
