@@ -97,6 +97,14 @@
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
+            if (in_array("ob_gzhandler", ob_list_handlers())) {
+                if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"))
+                    header("Content-Encoding: deflate");
+
+                if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"))
+                    header("Content-Encoding: gzip");
+            }
+
             switch ($code) {
                 case 400:
                     header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
