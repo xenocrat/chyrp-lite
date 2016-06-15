@@ -201,7 +201,8 @@
             }
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(self::tags_safe($_GET['query']), "post_attributes.value LIKE :query");
+            list($where, $params) = keywords(self::tags_safe($_GET['query']),
+                                    "post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
 
             $visitor = Visitor::current();
 
@@ -433,6 +434,7 @@
                                          "value",
                                          array("name" => "tags",
                                                "post_id" => $post_id));
+
                     if ($tags and $value = $tags->fetchColumn())
                         $tags = self::tags_unserialize($value);
                     else
@@ -462,7 +464,7 @@
                                         __("No Tag", "tags"));
 
             $sql = SQL::current();
-            $tags = explode(" ", $_GET['name']);
+            $tags = explode(" ", $_GET['name']); # Detect multiple tags (clean tag names have no spaces).
             $likes = array();
 
             foreach ($tags as $name)
