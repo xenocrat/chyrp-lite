@@ -145,8 +145,16 @@
             !class_exists("Config") or
             !method_exists("Config", "current") or
             !property_exists(Config::current(), "url") or
-            !property_exists(Config::current(), "chyrp_url"))
-            exit("ERROR: ".strip_tags($body));
+            !property_exists(Config::current(), "chyrp_url")) {
+
+            echo("ERROR: ".strip_tags($body));
+
+            # Flush the output buffer and terminate execution.
+            if (ob_get_contents() !== false)
+                ob_end_flush();
+
+            exit;
+        }
 
         $config = Config::current();
         $url = $config->url;
