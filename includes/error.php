@@ -97,14 +97,6 @@
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
-            if (in_array("ob_gzhandler", ob_list_handlers())) {
-                if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"))
-                    header("Content-Encoding: deflate");
-
-                if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"))
-                    header("Content-Encoding: gzip");
-            }
-
             switch ($code) {
                 case 400:
                     header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
@@ -164,7 +156,7 @@
         $title = oneof($title, __("Error"));
         $body = oneof($body, __("An unspecified error has occurred."));
 
-        # Display the error.
+        # Display a pretty error message.
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -367,6 +359,9 @@
     </body>
 </html>
 <?php
-        # Terminate execution.
+        # Flush the output buffer and terminate execution.
+        if (ob_get_contents() !== false)
+            ob_end_flush();
+
         exit;
     }

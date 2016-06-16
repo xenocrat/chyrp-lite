@@ -133,35 +133,30 @@
     define('UPDATE_PAGE', "https://github.com/xenocrat/chyrp-lite/releases");
 
     # Constant: USE_OB
-    # Use output buffering.
+    # Use output buffering?
     if (!defined('USE_OB'))
         define('USE_OB', true);
 
+    # Constant: HTTP_ACCEPT_DEFLATE
+    # Does the user agent accept deflate encoding?
+    if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"))
+        define('HTTP_ACCEPT_DEFLATE', true);
+    else
+        define('HTTP_ACCEPT_DEFLATE', false);
+
+    # Constant: HTTP_ACCEPT_GZIP
+    # Does the user agent accept gzip encoding?
+    if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"))
+        define('HTTP_ACCEPT_GZIP', true);
+    else
+        define('HTTP_ACCEPT_GZIP', false);
+
     # Constant: USE_ZLIB
-    # Use zlib to provide content compression.
+    # Use zlib to provide content compression? See Also: http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
-        if (
-                # Is the zlib extension available and not already enabled?
-                extension_loaded("zlib") and
-                !ini_get("zlib.output_compression")
-
-                and
-
-                # Has the user agent sent an Accept-Encoding header?
-                isset($_SERVER['HTTP_ACCEPT_ENCODING'])
-
-                and
-
-                # Has the user agent told us it can accept gzip or deflate?
-                (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") or
-                 substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"))
-
-                and
-
-                # Is this version of PHP buggy? http://bugs.php.net/55544
-                (version_compare(PHP_VERSION, "5.4.6", ">=") or
-                 version_compare(PHP_VERSION, "5.4.0", "<"))
-            )
+        if (!AJAX and (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib") and
+            !ini_get("zlib.output_compression") and (version_compare(PHP_VERSION, "5.4.6", ">=") or
+                                                     version_compare(PHP_VERSION, "5.4.0", "<")))
             define('USE_ZLIB', true);
         else
             define('USE_ZLIB', false);
@@ -185,12 +180,19 @@
         else
             error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
-    # Start output buffering.
-    if (USE_OB)
-        if (USE_ZLIB and !AJAX)
+    # Start output buffering and set header.
+    if (USE_OB) {
+        if (USE_ZLIB)
             ob_start("ob_gzhandler");
         else
             ob_start();
+
+        if (USE_ZLIB and HTTP_ACCEPT_DEFLATE)
+            header("Content-Encoding: deflate");
+
+        if (USE_ZLIB and HTTP_ACCEPT_GZIP)
+            header("Content-Encoding: gzip");
+    }
 
     # File: Error
     # Error handling functions.
