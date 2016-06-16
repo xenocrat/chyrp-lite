@@ -275,6 +275,7 @@
                 $where["created_at like"] = $_GET['month']."-%";
 
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where["user_id"] = $visitor->id;
 

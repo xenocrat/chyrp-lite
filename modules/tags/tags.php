@@ -159,6 +159,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage tags.", "tags"));
 
             $sql = SQL::current();
+            $visitor = Visitor::current();
 
             $tags = array();
             $names = array();
@@ -202,9 +203,7 @@
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords(self::tags_safe($_GET['query']),
-                                    "post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
-
-            $visitor = Visitor::current();
+                                             "post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
 
             if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where["user_id"] = $visitor->id;
