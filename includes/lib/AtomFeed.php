@@ -13,8 +13,7 @@
          * Sets the Atom feed header.
          */
         public function __construct() {
-            if (!headers_sent())
-                header("Content-Type: application/atom+xml; charset=UTF-8");
+            header("Content-Type: application/atom+xml; charset=UTF-8");
         }
 
         /**
