@@ -202,7 +202,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 198
+	includes/ajax.php on line 197
 
 
 change_setting
@@ -216,7 +216,7 @@ Arguments:
 parse_url
 ---------
 Called from:
-	includes/class/Route.php on line 75
+	includes/class/Route.php on line 69
 Arguments:
 	$this
 
@@ -224,7 +224,7 @@ Arguments:
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 99
+	includes/class/Route.php on line 93
 Arguments:
 	$this
 
@@ -232,7 +232,7 @@ Arguments:
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 138
+	includes/class/Route.php on line 132
 Arguments:
 	$this
 
@@ -240,13 +240,13 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 364
+	includes/common.php on line 380
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1221
+	includes/controller/Admin.php on line 1226
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -254,7 +254,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1249
+	includes/controller/Admin.php on line 1254
 Arguments:
 	$user
 
@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1277
+	includes/controller/Admin.php on line 1282
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1300
+	includes/controller/Admin.php on line 1305
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1706
+	includes/controller/Admin.php on line 1710
 Arguments:
 	!empty($_POST['theme'])
 
@@ -286,7 +286,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 517
+	includes/controller/Main.php on line 518
 Arguments:
 	$user
 
@@ -294,13 +294,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 602
+	includes/controller/Main.php on line 603
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 621
+	includes/controller/Main.php on line 622
 Arguments:
 	$user
 
@@ -308,7 +308,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 808
+	includes/controller/Main.php on line 809
 Arguments:
 	$post
 
@@ -316,15 +316,15 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 116
+	includes/javascript.php on line 102
 
 
 pingback
 --------
 Called from:
-	includes/lib/XMLRPC.php on line 110
+	includes/lib/XMLRPC.php on line 123
 Arguments:
-	$post, $target, $source_url, $title, $excerpt
+	$post, $target, $source, $title, $excerpt
 
 
 add_group
@@ -338,7 +338,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 165
+	includes/model/Group.php on line 166
 Arguments:
 	$this, $old
 
@@ -362,7 +362,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 245
+	includes/model/Post.php on line 246
 Arguments:
 	$post, $options
 
@@ -370,7 +370,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 334
+	includes/model/Post.php on line 335
 Arguments:
 	$this, $old, $options
 
@@ -419,7 +419,7 @@ Arguments:
 feed_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 712
+	modules/comments/comments.php on line 717
 Arguments:
 	$comment
 
@@ -427,7 +427,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 730
+	modules/comments/comments.php on line 735
 Arguments:
 	$comment->id
 
@@ -459,7 +459,7 @@ Arguments:
 import_wordpress_post
 ---------------------
 Called from:
-	modules/importers/importers.php on line 143
+	modules/importers/importers.php on line 144
 Arguments:
 	$item, $post
 
@@ -467,7 +467,7 @@ Arguments:
 import_wordpress_page
 ---------------------
 Called from:
-	modules/importers/importers.php on line 156
+	modules/importers/importers.php on line 157
 Arguments:
 	$item, $page
 
@@ -475,7 +475,7 @@ Arguments:
 import_tumble
 -------------
 Called from:
-	modules/importers/importers.php on line 296
+	modules/importers/importers.php on line 298
 Arguments:
 	$post, $new_post
 
@@ -483,7 +483,7 @@ Arguments:
 import_textpattern_post
 -----------------------
 Called from:
-	modules/importers/importers.php on line 387
+	modules/importers/importers.php on line 389
 Arguments:
 	$post, $new_post
 
@@ -491,7 +491,7 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/importers/importers.php on line 508
+	modules/importers/importers.php on line 510
 Arguments:
 	$post, $new_post, $link
 
@@ -499,7 +499,7 @@ Arguments:
 import_movabletype_page
 -----------------------
 Called from:
-	modules/importers/importers.php on line 511
+	modules/importers/importers.php on line 513
 Arguments:
 	$post, $new_page, $link
 
@@ -584,7 +584,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 180
+	includes/class/Route.php on line 174
 
 
 related_posts
@@ -626,7 +626,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 361
+	includes/common.php on line 377
 
 
 admin_determine_action
@@ -642,7 +642,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 998
+	includes/controller/Admin.php on line 1003
 Arguments:
 	$post)
 
@@ -652,7 +652,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1017
+	includes/controller/Admin.php on line 1022
 Arguments:
 	$post
 
@@ -662,7 +662,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1061
+	includes/controller/Admin.php on line 1066
 Arguments:
 	$page)
 
@@ -672,7 +672,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1076
+	includes/controller/Admin.php on line 1081
 Arguments:
 	$page
 
@@ -682,7 +682,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1130
+	includes/controller/Admin.php on line 1135
 
 
 manage_nav
@@ -690,7 +690,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2059
+	includes/controller/Admin.php on line 2063
 
 
 settings_nav
@@ -698,7 +698,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2089
+	includes/controller/Admin.php on line 2093
 
 
 extend_nav
@@ -706,7 +706,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2099
+	includes/controller/Admin.php on line 2103
 
 
 admin_subnav
@@ -714,7 +714,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2110
+	includes/controller/Admin.php on line 2114
 
 
 nav_selected
@@ -722,7 +722,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2212
+	includes/controller/Admin.php on line 2216
 
 
 url_code
@@ -738,7 +738,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 797
+	includes/controller/Main.php on line 798
 Arguments:
 	$post
 
@@ -748,7 +748,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 801
+	includes/helpers.php on line 738
 
 
 keyword_search
@@ -756,7 +756,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 1564
+	includes/helpers.php on line 1494
 Arguments:
 	$query, $plain
 
@@ -766,7 +766,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1651
+	includes/helpers.php on line 1581
 
 
 xmlrpc_methods
@@ -862,7 +862,7 @@ before_add_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 217
+	includes/model/Post.php on line 218
 
 
 before_update_post
@@ -870,7 +870,7 @@ before_update_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 314
+	includes/model/Post.php on line 315
 
 
 url_vals
@@ -878,7 +878,7 @@ url_vals
 Target:
 	$vals
 Called from:
-	includes/model/Post.php on line 498
+	includes/model/Post.php on line 501
 Arguments:
 	$this
 
@@ -888,7 +888,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 518
+	includes/model/Post.php on line 521
 
 
 title
@@ -896,7 +896,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 543
+	includes/model/Post.php on line 546
 Arguments:
 	$post
 
@@ -906,7 +906,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 560
+	includes/model/Post.php on line 563
 Arguments:
 	$post
 
@@ -916,7 +916,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 577
+	includes/model/Post.php on line 580
 Arguments:
 	$post
 
@@ -926,7 +926,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 634
+	includes/model/Post.php on line 637
 
 
 post_url_token
@@ -934,7 +934,7 @@ post_url_token
 Target:
 	$tokens
 Called from:
-	includes/model/Post.php on line 679
+	includes/model/Post.php on line 683
 
 
 user

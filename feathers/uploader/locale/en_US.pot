@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-05-31 11:57+0000\n"
+"POT-Creation-Date: 2016-06-17 18:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -29,13 +29,13 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/uploader/uploader.php:11
+#: feathers/uploader/uploader.php:10
 msgid "Files"
 msgstr ""
 
 #: feathers/uploader/uploader.php:12
 #, php-format
-msgid "(Max. file size: %s Megabytes)"
+msgid "(Max. file size: %d Megabytes)"
 msgstr ""
 
 #: feathers/uploader/uploader.php:15

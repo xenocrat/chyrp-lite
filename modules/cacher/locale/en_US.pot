@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-05-31 11:57+0000\n"
+"POT-Creation-Date: 2016-06-17 18:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -52,6 +52,11 @@ msgstr ""
 
 #: modules/cacher/cacher.php:134
 msgid "Cache cleared."
+msgstr ""
+
+#: modules/cacher/filecacher.php:13
+#, php-format
+msgid "Cacher module cannot continue because <em>%s</em> is not writable."
 msgstr ""
 
 #: modules/cacher/info.php:3
