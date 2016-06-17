@@ -51,7 +51,7 @@
         $theme = Theme::current();
         $main = MainController::current();
 
-        if (TESTER or ADMIN or AJAX or !$theme->file_exists("pages".DIR."403"))
+        if (TESTER or XML_RPC or AJAX or ADMIN or !$theme->file_exists("pages".DIR."403"))
             error($title, $body, null, 403);
 
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
@@ -74,7 +74,7 @@
         $theme = Theme::current();
         $main = MainController::current();
 
-        if (TESTER or ADMIN or AJAX or !$theme->file_exists("pages".DIR."404"))
+        if (TESTER or XML_RPC or AJAX or ADMIN or !$theme->file_exists("pages".DIR."404"))
             error($title, $body, null, 404);
 
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
@@ -1742,16 +1742,13 @@
      *     $filename - The name to be applied to the content upon download.
      */
     function file_attachment($contents = "", $filename = "caconym") {
-        if (!headers_sent()) {
-            header("Content-Type: application/octet-stream");
-            header("Content-Disposition: attachment; filename=\"".$filename."\"");
+        header("Content-Type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=\"".$filename."\"");
 
-            if (!in_array("ob_gzhandler", ob_list_handlers()))
-                header("Content-Length: ".strlen($contents));
+        if (!in_array("ob_gzhandler", ob_list_handlers()))
+            header("Content-Length: ".strlen($contents));
 
-            echo $contents;
-        } else
-            error(__("Error"), __("Unable to deliver file attachment because HTTP headers were already sent."));
+        echo $contents;
     }
 
     /**
