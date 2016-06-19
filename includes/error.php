@@ -147,7 +147,7 @@
             !property_exists(Config::current(), "url") or
             !property_exists(Config::current(), "chyrp_url")) {
 
-            echo("ERROR: ".strip_tags($body));
+            echo "ERROR: ".strip_tags($body);
 
             # Flush the output buffer and terminate execution.
             if (ob_get_contents() !== false)
