@@ -15,12 +15,12 @@
 </select>
 </p>
 <p>
-<label for="spacing">{{ "Spacing" | translate("lightbox") }}</label>
+<label for="spacing">{{ "Edge Spacing" | translate("lightbox") }}</label>
 <input class="text digits" type="number" min="28" name="spacing" value="{{ site.module_lightbox['spacing'] | fix(true) }}" size="2" id="spacing">
 <span class="sub">{{ "(pixels)" | translate("lightbox") }}</span>
 </p>
 <p>
-<label for="protect">{{ "Protect" | translate("lightbox") }}</label>
+<label for="protect">{{ "Protect Images" | translate("lightbox") }}</label>
 <input type="checkbox" class="checkbox" name="protect"{{ site.module_lightbox['protect'] | checked }}>
 <small>{{ "Prevent visitors from saving images?" | translate("lightbox") }}</small>
 </p>
