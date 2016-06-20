@@ -1657,7 +1657,7 @@
                 show_404(__("Not Found"), __("Feather not found."));
 
             if (method_exists($class_name, "__uninstall"))
-                call_user_func(array($class_name, "__uninstall"), ($_POST['confirm'] == "1"));
+                call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
 
             foreach ($config->$enabled_array as $extension) {
                 if ($extension != $name)
