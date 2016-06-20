@@ -47,6 +47,12 @@
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
 </button>
+{% if module.confirm is not empty %}
+<p class="module_disabler_confirm">
+<label for="confirm_{{ safename }}">{{ module.confirm }}{# translation is done in the controller #}</label>
+<input class="checkbox confirm" type="checkbox" name="confirm" id="confirm_{{ safename }}">
+</p>
+{% endif %}
 </form>
 <form class="module_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="module" value="{{ safename }}" id="hash">
@@ -55,6 +61,7 @@
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
 </button>
 </form>
+<div class="clear"></div>
 </div>
 </li>
 {% endfor %}
@@ -103,6 +110,12 @@
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
 </button>
+{% if module.confirm is not empty %}
+<p class="module_disabler_confirm">
+<label for="confirm_{{ safename }}">{{ module.confirm }}{# translation is done in the controller #}</label>
+<input class="checkbox confirm" type="checkbox" name="confirm" id="confirm_{{ safename }}">
+</p>
+{% endif %}
 </form>
 <form class="module_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="module" value="{{ safename }}" id="hash">
@@ -111,6 +124,7 @@
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
 </button>
 </form>
+<div class="clear"></div>
 </div>
 {% endif %}
 </li>

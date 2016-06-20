@@ -118,6 +118,8 @@ a:active {                                      color: #1e57ba;
 small a, .small a, .sub a {                     color: #b3b5b5 }
 img.logo {                                      width: 24px;
                                                 height: 24px }
+div.clear {                                     visibility: hidden;
+                                                clear: both }
 /* @end */
 
 /* @group header */
@@ -267,9 +269,6 @@ span.pages {                                    display: block;
 #content ul#modules_enabled > li.error,
 #content ul#modules_disabled > li.error  {      background-color: #ffbd9e;
                                                 border: 1px solid #d9a086 }
-#content ul.extend li.feather,
-#content ul.extend li.module {                  position: relative;
-                                                padding-right: 12em }
 ul#feathers_enabled .feather_enabler,
 ul#feathers_disabled .feather_disabler,
 ul#modules_enabled .module_enabler,
@@ -285,9 +284,15 @@ li.module:not(.error) .module_dependencies_list,
 li.module:not(.error) .module_conflicts_message,
 li.module:not(.error) .module_conflicts_list {  display: none }
 li.module div.controls,
-li.feather div.controls {                       position: absolute;
-                                                top: 1em;
-                                                right: 1em }
+li.feather div.controls {                       margin-top: 1em;
+                                                padding-top: 1em;
+                                                border-top: 1px solid #dfdfdf }
+ul#modules_enabled div.controls,
+ul#feathers_enabled div.controls {              border-top: 1px solid #bdd6b5 }
+ul#modules_enabled > li.error div.controls,
+ul#modules_disabled > li.error div.controls {   border-top: 1px solid #d9a086 }
+li.module div.controls button,
+li.feather div.controls button {                float: right }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {                text-decoration: none }
 #content ul.extend > li p:last-child {          margin-bottom: 0em }
@@ -624,9 +629,6 @@ div.more_options p input[type="password"],
 div.more_options p select,
 div.more_options p textarea {                   width: 100%;
                                                 margin: 0em }
-div.more_options hr {                           margin: 0em;
-                                                padding: 0em;
-                                                visibility: hidden }
 /* @end */
 
 /* @group helpers & general */
@@ -801,10 +803,9 @@ img#likeImage_preview {                         max-width: 28px;
                                                 margin-right: 0em;
                                                 min-width: 220px;
                                                 float: none }
-    #content ul.extend li.module,
-    #content ul.extend li.feather {             padding-right: 1em }
-    #content ul.extend li.feather div.controls,
-    #content ul.extend li.module div.controls { position: static }
+    li.module div.controls,
+    li.feather div.controls {                   padding-top: 0em }
+    div.controls .module_disabler_confirm {     margin-top: 1em }
     #content ul.themes img.screenshot {         width: 192px }
 
     .iframe_foreground {                        width: 90%;

@@ -1391,6 +1391,7 @@
                 fallback($info["description"], __("No description."));
                 fallback($info["author"], array("name" => "", "url" => ""));
                 fallback($info["help"]);
+                fallback($info["confirm"]);
 
                 $info["description"] = __($info["description"], $folder);
 
@@ -1416,6 +1417,7 @@
                                                            "description" => $info["description"],
                                                            "author" => $info["author"],
                                                            "help" => $info["help"],
+                                                           "confirm" => $info["confirm"],
                                                            "classes" => $classes[$folder],
                                                            "conflicting_modules" => $conflicting_modules,
                                                            "dependencies_needed" => $dependencies_needed);
@@ -1655,7 +1657,7 @@
                 show_404(__("Not Found"), __("Feather not found."));
 
             if (method_exists($class_name, "__uninstall"))
-                call_user_func(array($class_name, "__uninstall"), false);
+                call_user_func(array($class_name, "__uninstall"), ($_POST['confirm'] == "1"));
 
             foreach ($config->$enabled_array as $extension) {
                 if ($extension != $name)

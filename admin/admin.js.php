@@ -381,7 +381,8 @@ var Extend = {
     failed: false,
     init: function() {
         if (Site.ajax)
-            $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(function(e) {
+            $(".module_disabler_confirm").hide();
+            $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").on("submit", function(e) {
                 if (!Extend.failed && !Extend.busy) {
                     e.preventDefault();
                     Extend.busy = true;
