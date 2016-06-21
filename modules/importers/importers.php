@@ -17,7 +17,7 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!in_array("text", $config->enabled_feathers))
+            if (!feather_enabled("text"))
                 error(__("Missing Feather", "importers"),
                       __("Importing from WordPress requires the Text feather to be installed and enabled.", "importers"), null, 501);
 
@@ -177,11 +177,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!in_array("text", $config->enabled_feathers) or
-                !in_array("video", $config->enabled_feathers) or
-                !in_array("photo", $config->enabled_feathers) or
-                !in_array("quote", $config->enabled_feathers) or
-                !in_array("link", $config->enabled_feathers))
+            if (!feather_enabled("text") or
+                !feather_enabled("video") or
+                !feather_enabled("photo") or
+                !feather_enabled("quote") or
+                !feather_enabled("link"))
                 error(__("Missing Feather", "importers"),
                       __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"), null, 501);
 
