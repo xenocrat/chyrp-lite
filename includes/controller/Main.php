@@ -872,20 +872,9 @@
             $this->context["GET"]          = $_GET;
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["captcha"]      = generate_captcha();
+            $this->context["sql_debug"]   =& SQL::current()->debug;
 
             $this->context["visitor"]->logged_in = logged_in();
-
-            $this->context["enabled_modules"] = array();
-
-            foreach ($config->enabled_modules as $module)
-                $this->context["enabled_modules"][$module] = true;
-
-            $context["enabled_feathers"] = array();
-
-            foreach ($config->enabled_feathers as $feather)
-                $this->context["enabled_feathers"][$feather] = true;
-
-            $this->context["sql_debug"] =& SQL::current()->debug;
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
