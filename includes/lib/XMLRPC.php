@@ -437,7 +437,7 @@
         private function getRecentPosts($limit) {
             global $user;
 
-            if (!in_array(XML_RPC_FEATHER, Config::current()->enabled_feathers))
+            if (!feather_enabled(XML_RPC_FEATHER))
                 throw new Exception(_f("The %s feather is not enabled.", array(XML_RPC_FEATHER)));
 
             $where = array('feather' => XML_RPC_FEATHER);
