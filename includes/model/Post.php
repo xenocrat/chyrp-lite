@@ -719,7 +719,7 @@
         }
 
         /**
-         * Function: enabled_feathers
+         * Function: feathers
          * Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
          */
         static function feathers() {
