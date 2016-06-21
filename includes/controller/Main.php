@@ -139,6 +139,7 @@
                     $action = $params[0];
 
                     array_shift($params);
+
                     foreach ($params as $param) {
                         $split = explode("=", $param);
                         $_GET[$split[0]] = oneof(@$split[1], "");
@@ -834,8 +835,10 @@
 
             $this->displayed = true;
 
+            $config = Config::current();
             $route = Route::current();
             $trigger = Trigger::current();
+            $theme = Theme::current();
 
             # Serve feeds.
             if ($this->feed) {
@@ -847,9 +850,6 @@
             }
 
             $this->context = array_merge($context, $this->context);
-
-            $config = Config::current();
-            $theme = Theme::current();
 
             $theme->title = $title;
 

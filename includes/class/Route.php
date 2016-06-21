@@ -98,6 +98,7 @@
                 array_unshift($try, $this->action);
 
             $count = 0;
+
             foreach ($try as $key => $val) {
                 if (is_numeric($key))
                     list($method, $args) = array($val, array());
@@ -107,6 +108,7 @@
                 $this->action = $method;
 
                 $name = strtolower(str_replace("Controller", "", get_class($this->controller)));
+
                 if ($trigger->exists($name."_".$method) or $trigger->exists("route_".$method))
                     $call = $trigger->call(array($name."_".$method, "route_".$method), $this->controller);
                 else
@@ -171,6 +173,7 @@
             }
 
             $urls = fallback($controller->urls, array());
+
             Trigger::current()->filter($urls, "parse_urls");
 
             foreach (array_diff_assoc($urls, $controller->urls) as $key => $value)

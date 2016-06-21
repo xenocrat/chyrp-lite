@@ -32,13 +32,13 @@
 
             $loaders = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-            foreach ($config->enabled_modules as $extension)
-                if (file_exists(MODULES_DIR.DIR.$extension.DIR."admin"))
-                    $loaders[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$extension.DIR."admin");
+            foreach ($config->enabled_modules as $module)
+                if (file_exists(MODULES_DIR.DIR.$module.DIR."admin"))
+                    $loaders[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
-            foreach ($config->enabled_feathers as $extension)
-                if (file_exists(FEATHERS_DIR.DIR.$extension.DIR."admin"))
-                    $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$extension.DIR."admin");
+            foreach ($config->enabled_feathers as $feather)
+                if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."admin"))
+                    $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
             $loader = new Twig_Loader_Chain($loaders);
             $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
@@ -2140,7 +2140,11 @@
             fallback($title, camelize($action, true));
             $this->context = array_merge($context, $this->context);
 
+            $config = Config::current();
+            $visitor = Visitor::current();
+            $route = Route::current();
             $trigger = Trigger::current();
+
             $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
 
             # Are there any extension-added pages?
@@ -2151,10 +2155,6 @@
                 $$main_nav = $val;
                 $trigger->filter($$main_nav, $main_nav."_pages");
             }
-
-            $visitor = Visitor::current();
-            $config = Config::current();
-            $route = Route::current();
 
             $this->context["ip"]         = $_SERVER["REMOTE_ADDR"];
             $this->context["DIR"]        = DIR;
