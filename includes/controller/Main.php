@@ -825,20 +825,20 @@
          *     $title - The title for the page.
          */
         public function display($template, $context = array(), $title = "") {
+            $config = Config::current();
+            $route = Route::current();
+            $trigger = Trigger::current();
+            $theme = Theme::current();
+
             if (is_array($template)) {
                 foreach ($template as $try)
-                    if (file_exists(THEME_DIR.DIR.$try.".twig"))
+                    if ($theme->file_exists($try))
                         return $this->display($try, $context, $title);
 
                 error(__("Twig Error"), __("No files exist in the supplied array of fallbacks."), debug_backtrace());
             }
 
             $this->displayed = true;
-
-            $config = Config::current();
-            $route = Route::current();
-            $trigger = Trigger::current();
-            $theme = Theme::current();
 
             # Serve feeds.
             if ($this->feed) {
