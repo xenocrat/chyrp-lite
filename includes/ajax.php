@@ -66,7 +66,9 @@
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
             $sanitized = sanitize_html($_POST['content']);
+
             Trigger::current()->filter($sanitized, $_POST['filter']);
+
             $main->display("content".DIR."preview", array("content" => $sanitized,
                                                           "filter" => $_POST['filter']), __("Preview"));
             exit;
@@ -185,13 +187,6 @@
                 unset($_SESSION['latest_feather']);
 
             exit(json_encode(array("notifications" => array())));
-
-        case "latest_feather":
-            if (empty($_POST['feather']) or !in_array($_POST['feather'], $config->enabled_feathers))
-                show_404(__("Not Found"), __("Feather not found."));
-
-            $_SESSION['latest_feather'] = $_POST['feather'];
-            exit;
     }
 
     $trigger->call("ajax");

@@ -286,9 +286,6 @@ var Write = {
     preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
     wysiwyg: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
-        if (/(write)_/.test(Route.action))
-            Write.latest_feather();
-
         // Insert buttons for ajax previews.
         if (Write.preview && !Write.wysiwyg)
             $("*[data-preview]").each(function() {
@@ -307,14 +304,6 @@ var Write = {
                     })
                 );
             });
-    },
-    latest_feather: function() {
-        // Validate and remember the latest feather.
-        var selected = $("#sub_nav").children(".selected").attr("id").replace(/feathers\[([^\]]+)\]/, "$1");
-        $.post(Site.chyrp_url + "/includes/ajax.php", {
-            action: "latest_feather",
-            feather: selected
-        });
     },
     ajax_previews: function(content, filter) {
         var uid = Math.floor(Math.random()*1000000000000).toString(16);
@@ -380,7 +369,7 @@ var Extend = {
     busy: false,
     failed: false,
     init: function() {
-        if (Site.ajax)
+        if (Site.ajax) {
             $(".module_disabler_confirm").hide();
             $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").on("submit", function(e) {
                 if (!Extend.failed && !Extend.busy) {
@@ -389,6 +378,7 @@ var Extend = {
                     Extend.ajax_toggle(e);
                 }
             });
+        }
 
         if (Route.action == "modules")
             Extend.check_errors();
