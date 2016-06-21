@@ -20,8 +20,9 @@
     # Execute the appropriate Controller responder.
     $route->init();
 
+    # If the route failed or nothing was displayed, show a 404 page.
     if (!$route->success and !$admin->displayed)
-        $admin->display($route->action); # Attempt to display it; it'll go through Modules and Feathers.
+        show_404();
 
     $trigger->call("end", $route);
 

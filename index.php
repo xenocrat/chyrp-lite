@@ -30,27 +30,12 @@
     # Execute the appropriate Controller responder.
     $route->init();
 
-    # If the route failed or nothing was displayed, check for:
-    # 1. Module-provided pages.
-    # 2. Feather-provided pages.
-    # 3. Theme-provided pages.
-    if (!$route->success and !$main->displayed) {
-        $displayed = false;
-
-        foreach ($config->enabled_modules as $module)
-            if (file_exists(MODULES_DIR.DIR.$module.DIR."pages".DIR.$route->action.".php"))
-                $displayed = require MODULES_DIR.DIR.$module.DIR."pages".DIR.$route->action.".php";
-
-        if (!$displayed)
-            foreach ($config->enabled_feathers as $feather)
-                if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."pages".DIR.$route->action.".php"))
-                    $displayed = require FEATHERS_DIR.DIR.$feather.DIR."pages".DIR.$route->action.".php";
-
-        if (!$displayed and $theme->file_exists("pages".DIR.$route->action))
+    # If the route failed or nothing was displayed, check for pages provided by the theme.
+    if (!$route->success and !$main->displayed)
+        if ($theme->file_exists("pages".DIR.$route->action))
             $main->display("pages".DIR.$route->action);
-        elseif (!$displayed)
+        else
             show_404();
-    }
 
     $trigger->call("end", $route);
 
