@@ -27,6 +27,12 @@
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
 </button>
+{% if feather.confirm is not empty %}
+<p class="feather_disabler_confirm">
+<label for="confirm_{{ safename }}">{{ feather.confirm }}{# translation is done in the controller #}</label>
+<input class="checkbox" type="checkbox" name="confirm" id="confirm_{{ safename }}">
+</p>
+{% endif %}
 </form>
 <form class="feather_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="feather" value="{{ safename }}" id="hash">
@@ -63,6 +69,12 @@
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
 </button>
+{% if feather.confirm is not empty %}
+<p class="feather_disabler_confirm">
+<label for="confirm_{{ safename }}">{{ feather.confirm }}{# translation is done in the controller #}</label>
+<input class="checkbox" type="checkbox" name="confirm" id="confirm_{{ safename }}">
+</p>
+{% endif %}
 </form>
 <form class="feather_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="feather" value="{{ safename }}" id="hash">

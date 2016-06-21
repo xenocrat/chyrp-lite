@@ -127,6 +127,11 @@
 
             fallback($_GET['feather'], @$_SESSION['latest_feather'], reset($config->enabled_feathers));
 
+            if (!feather_enabled($_GET['feather']))
+                show_404(__("Not Found"), __("Feather not found."));
+
+            $_SESSION['latest_feather'] = $_GET['feather'];
+
             Trigger::current()->filter($options, array("write_post_options", "post_options"));
 
             $this->display("write_post",
@@ -148,6 +153,9 @@
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (!feather_enabled($_POST['feather']))
+                show_404(__("Not Found"), __("Feather not found."));
 
             if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
                 $_POST['draft'] = 'true';
@@ -1466,6 +1474,7 @@
                 fallback($info["description"], __("No description."));
                 fallback($info["author"], array("name" => "", "url" => ""));
                 fallback($info["help"]);
+                fallback($info["confirm"]);
 
                 $info["description"] = __($info["description"], $folder);
 
@@ -1490,7 +1499,8 @@
                                                            "url" => $info["url"],
                                                            "description" => $info["description"],
                                                            "author" => $info["author"],
-                                                           "help" => $info["help"]);
+                                                           "help" => $info["help"],
+                                                           "confirm" => $info["confirm"]);
             }
 
             $this->display("feathers");
