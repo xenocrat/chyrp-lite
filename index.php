@@ -23,19 +23,16 @@
                 show_403(__("Access Denied"), __("You are not allowed to view this site.")); # Banned user.
 
             $_SESSION['redirect_to'] = self_url();
-            Flash::notice(__("You must be logged in to view this site."), "login");
+            Flash::notice(__("You must be logged in to view this site."), "login"); # Invitation to log in.
         }
     }
 
     # Execute the appropriate Controller responder.
     $route->init();
 
-    # If the route failed or nothing was displayed, check for pages provided by the theme.
+    # If the route failed or nothing was displayed, show a 404 page.
     if (!$route->success and !$main->displayed)
-        if ($theme->file_exists("pages".DIR.$route->action))
-            $main->display("pages".DIR.$route->action);
-        else
-            show_404();
+        show_404();
 
     $trigger->call("end", $route);
 
