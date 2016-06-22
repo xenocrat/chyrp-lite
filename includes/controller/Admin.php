@@ -68,7 +68,8 @@
 
             if (empty($route->action) or $route->action == "write") {
                 # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
-                if (($visitor->group->can("add_post") or $visitor->group->can("add_draft")) and !empty($config->enabled_feathers))
+                if (!empty($config->enabled_feathers) and ($visitor->group->can("add_post") or
+                                                           $visitor->group->can("add_draft")))
                     return $route->action = "write_post";
 
                 # "Write > Page", if they can add pages.
@@ -1417,6 +1418,7 @@
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
+                # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
                 $category = (!empty(Modules::$instances[$folder])) ? "enabled_modules" : "disabled_modules" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
@@ -1492,6 +1494,7 @@
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
+                # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
                 $category = (!empty(Feathers::$instances[$folder])) ? "enabled_feathers" : "disabled_feathers" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
@@ -1590,9 +1593,11 @@
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
+            # We don't use the module_enabled() helper function because we want to include cancelled modules.
             if ($type == "module" and !empty(Modules::$instances[$name]))
                 Flash::warning(__("Module already enabled."), "/admin/?action=modules");
 
+            # We don't use the feather_enabled() helper function because we want to include cancelled feathers.
             if ($type == "feather" and !empty(Feathers::$instances[$name]))
                 Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
 
@@ -1654,9 +1659,11 @@
             $updated_array = array();
             $class_name    = camelize($name);
 
+            # We don't use the module_enabled() helper function because we want to exclude cancelled modules.
             if ($type == "module" and empty(Modules::$instances[$name]))
                 Flash::warning(__("Module already disabled."), "/admin/?action=modules");
 
+            # We don't use the feather_enabled() helper function because we want to exclude cancelled feathers.
             if ($type == "feather" and empty(Feathers::$instances[$name]))
                 Flash::warning(__("Feather already disabled."), "/admin/?action=feathers");
 

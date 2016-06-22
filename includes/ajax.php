@@ -107,9 +107,11 @@
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
+            # We don't use the module_enabled() helper function because we want to include cancelled modules.
             if ($type == "module" and !empty(Modules::$instances[$name]))
                 exit(json_encode(array("notifications" => array(__("Module already enabled.")))));
 
+            # We don't use the feather_enabled() helper function because we want to include cancelled feathers.
             if ($type == "feather" and !empty(Feathers::$instances[$name]))
                 exit(json_encode(array("notifications" => array(__("Feather already enabled.")))));
 
@@ -161,9 +163,11 @@
             $updated_array = array();
             $class_name    = camelize($name);
 
+            # We don't use the module_enabled() helper function because we want to exclude cancelled modules.
             if ($type == "module" and empty(Modules::$instances[$name]))
                 exit(json_encode(array("notifications" => array(__("Module already disabled.")))));
 
+            # We don't use the feather_enabled() helper function because we want to exclude cancelled feathers.
             if ($type == "feather" and empty(Feathers::$instances[$name]))
                 exit(json_encode(array("notifications" => array(__("Feather already disabled.")))));
 
