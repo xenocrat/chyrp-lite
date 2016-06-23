@@ -26,14 +26,16 @@
     $new_width = (int) fallback($_GET["max_width"], 640);
     $new_height = (int) fallback($_GET["max_height"], 0);
 
+    # GD library is not available.
     if (!function_exists("gd_info"))
-        exit(header("Location: ".$url)); # GD not installed.
+        redirect($url);
 
     $gd_info = gd_info();
     preg_match("/\d[\d\.]*/", $gd_info["GD Version"], $gd_version);
 
+    # GD version too low for our script.
     if (version_compare($gd_version[0], "2.0.28", "<"))
-        exit(header("Location: ".$url)); # GD version too low.
+        redirect($url);
 
     if (substr_count($filename, DIR))
         error(__("Error"), __("Malformed URI."), null, 400);
@@ -61,10 +63,10 @@
                 $new_height = $new_width;
 
             if($original_width > $original_height) {
-                # portrait
+                # Portrait orientation.
                 $crop_x = ceil( ($original_width - $original_height) / 2 );
             } else if ($original_height > $original_width) {
-                # landscape
+                # Landscape orientation.
                 $crop_y = ceil( ($original_height - $original_width) / 2 );
             }
 
@@ -100,7 +102,7 @@
 
     # If it's already below the maximum, just redirect to it.
     if ($original_width <= $new_width and $original_height <= $new_height)
-        exit(header("Location: ".$url));
+        redirect($url);
 
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
     $cache_file = CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename;
@@ -153,7 +155,7 @@
                 break;
             }
         default:
-            exit(header("Location: ".$url)); # Switch will flow through to here if image type is unsupported.
+            redirect($url); # Switch will flow through to here if image type is unsupported.
     }
 
     if (DEBUG)
