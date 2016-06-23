@@ -51,7 +51,7 @@
         $theme = Theme::current();
         $main = MainController::current();
 
-        if (TESTER or XML_RPC or AJAX or ADMIN or !$theme->file_exists("pages".DIR."403"))
+        if (!MAIN or !$theme->file_exists("pages".DIR."403"))
             error($title, $body, null, 403);
 
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
@@ -74,7 +74,7 @@
         $theme = Theme::current();
         $main = MainController::current();
 
-        if (TESTER or XML_RPC or AJAX or ADMIN or !$theme->file_exists("pages".DIR."404"))
+        if (!MAIN or !$theme->file_exists("pages".DIR."404"))
             error($title, $body, null, 404);
 
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
