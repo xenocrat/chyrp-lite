@@ -14,6 +14,9 @@
     if (empty($_GET['file']))
         error(__("Error"), __("Missing argument."), null, 400);
 
+    if (!$visitor->group->can("view_site"))
+        error(__("Access Denied"), __("You are not allowed to view this site."), null, 403);
+
     $filename = oneof(trim($_GET['file']), DIR);
     $filepath = uploaded($filename, false);
 
