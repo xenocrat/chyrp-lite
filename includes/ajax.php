@@ -60,7 +60,7 @@
                 show_403(__("Access Denied"), __("You must be logged in to preview content."));
 
             if (!isset($_POST['content']) or !isset($_POST['filter']))
-                exit;
+                error(__("Error"), __("Missing argument."), null, 400);
 
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
