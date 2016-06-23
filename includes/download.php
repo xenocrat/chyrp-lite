@@ -15,7 +15,7 @@
         error(__("Error"), __("Missing argument."), null, 400);
 
     if (!$visitor->group->can("view_site"))
-        error(__("Access Denied"), __("You are not allowed to view this site."), null, 403);
+        show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
     $filename = oneof(trim($_GET['file']), DIR);
     $filepath = uploaded($filename, false);
@@ -24,7 +24,7 @@
         error(__("Error"), __("Malformed URI."), null, 400);
 
     if (!is_readable($filepath) or !is_file($filepath))
-        error(__("Not Found"), __("File not found."), null, 404);
+        show_404(__("Not Found"), __("File not found."));
 
     if (DEBUG)
         error_log("SERVING file download for ".$filename);
