@@ -11,7 +11,7 @@ Called from:
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 524
+	admin/admin.js.php on line 515
 
 
 can_not_view_site
@@ -24,8 +24,8 @@ Called from:
 end
 ---
 Called from:
-	admin/index.php on line 26
-	index.php on line 55
+	admin/index.php on line 27
+	index.php on line 36
 Arguments:
 	$route
 
@@ -202,7 +202,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 197
+	includes/ajax.php on line 196
 
 
 change_setting
@@ -232,7 +232,7 @@ Arguments:
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 132
+	includes/class/Route.php on line 134
 Arguments:
 	$this
 
@@ -246,7 +246,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1226
+	includes/controller/Admin.php on line 1235
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -254,7 +254,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1254
+	includes/controller/Admin.php on line 1263
 Arguments:
 	$user
 
@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1282
+	includes/controller/Admin.php on line 1291
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1305
+	includes/controller/Admin.php on line 1314
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1710
+	includes/controller/Admin.php on line 1729
 Arguments:
 	!empty($_POST['theme'])
 
@@ -286,7 +286,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 518
+	includes/controller/Main.php on line 519
 Arguments:
 	$user
 
@@ -294,13 +294,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 603
+	includes/controller/Main.php on line 604
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 622
+	includes/controller/Main.php on line 623
 Arguments:
 	$user
 
@@ -308,7 +308,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 809
+	includes/controller/Main.php on line 810
 Arguments:
 	$post
 
@@ -584,7 +584,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 174
+	includes/class/Route.php on line 177
 
 
 related_posts
@@ -634,7 +634,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 109
+	includes/controller/Admin.php on line 110
 
 
 post_export_url
@@ -642,7 +642,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1003
+	includes/controller/Admin.php on line 1012
 Arguments:
 	$post)
 
@@ -652,7 +652,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1022
+	includes/controller/Admin.php on line 1031
 Arguments:
 	$post
 
@@ -662,7 +662,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1066
+	includes/controller/Admin.php on line 1075
 Arguments:
 	$page)
 
@@ -672,7 +672,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1081
+	includes/controller/Admin.php on line 1090
 Arguments:
 	$page
 
@@ -682,7 +682,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1135
+	includes/controller/Admin.php on line 1144
 
 
 manage_nav
@@ -690,7 +690,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2063
+	includes/controller/Admin.php on line 2081
 
 
 settings_nav
@@ -698,7 +698,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2093
+	includes/controller/Admin.php on line 2111
 
 
 extend_nav
@@ -706,7 +706,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2103
+	includes/controller/Admin.php on line 2121
 
 
 admin_subnav
@@ -714,7 +714,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2114
+	includes/controller/Admin.php on line 2132
 
 
 nav_selected
@@ -722,7 +722,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2216
+	includes/controller/Admin.php on line 2234
 
 
 url_code
@@ -730,7 +730,7 @@ url_code
 Target:
 	Post::$url_attrs
 Called from:
-	includes/controller/Main.php on line 175
+	includes/controller/Main.php on line 176
 
 
 feed_url
@@ -738,7 +738,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 798
+	includes/controller/Main.php on line 799
 Arguments:
 	$post
 

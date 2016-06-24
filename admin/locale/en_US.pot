@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-06-17 18:02+0000\n"
+"POT-Creation-Date: 2016-06-24 19:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -45,22 +45,22 @@ msgstr ""
 
 #: admin/admin.js.php:273
 #: admin/admin.js.php:275
-#: admin/admin.js.php:358
-#: admin/admin.js.php:360
+#: admin/admin.js.php:347
+#: admin/admin.js.php:349
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:298
-#: admin/admin.js.php:299
+#: admin/admin.js.php:295
+#: admin/admin.js.php:296
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:354
+#: admin/admin.js.php:343
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:483
+#: admin/admin.js.php:474
 msgid "The extension cannot be toggled because your web browser did not send proper credentials."
 msgstr ""
 
@@ -394,21 +394,21 @@ msgid "Enabled"
 msgstr ""
 
 #: admin/pages/feathers.twig:28
-#: admin/pages/feathers.twig:63
+#: admin/pages/feathers.twig:70
 #: admin/pages/modules.twig:48
-#: admin/pages/modules.twig:104
+#: admin/pages/modules.twig:111
 msgid "Disable"
 msgstr ""
 
-#: admin/pages/feathers.twig:35
-#: admin/pages/feathers.twig:70
-#: admin/pages/modules.twig:55
-#: admin/pages/modules.twig:111
+#: admin/pages/feathers.twig:41
+#: admin/pages/feathers.twig:83
+#: admin/pages/modules.twig:61
+#: admin/pages/modules.twig:124
 msgid "Enable"
 msgstr ""
 
-#: admin/pages/feathers.twig:43
-#: admin/pages/modules.twig:63
+#: admin/pages/feathers.twig:50
+#: admin/pages/modules.twig:70
 msgid "Disabled"
 msgstr ""
 
@@ -675,12 +675,12 @@ msgid "Modules"
 msgstr ""
 
 #: admin/pages/modules.twig:25
-#: admin/pages/modules.twig:80
+#: admin/pages/modules.twig:87
 msgid "This module conflicts with the following installed modules:"
 msgstr ""
 
 #: admin/pages/modules.twig:35
-#: admin/pages/modules.twig:90
+#: admin/pages/modules.twig:97
 msgid "This module requires the following modules to be enabled:"
 msgstr ""
 

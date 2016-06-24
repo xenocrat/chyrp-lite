@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-06-17 18:02+0000\n"
+"POT-Creation-Date: 2016-06-24 19:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -42,7 +42,7 @@ msgid "Inherit"
 msgstr ""
 
 #: modules/lightbox/admin/pages/lightbox_settings.twig:18
-msgid "Spacing"
+msgid "Edge Spacing"
 msgstr ""
 
 #: modules/lightbox/admin/pages/lightbox_settings.twig:20
@@ -50,7 +50,7 @@ msgid "(pixels)"
 msgstr ""
 
 #: modules/lightbox/admin/pages/lightbox_settings.twig:23
-msgid "Protect"
+msgid "Protect Images"
 msgstr ""
 
 #: modules/lightbox/admin/pages/lightbox_settings.twig:25
