@@ -616,19 +616,19 @@
         }
 
         private function sort_tags_asc($a, $b) {
-            return $this->mb_strcasecmp($a, $b, "UTF-8");
+            return $this->mb_strcasecmp($a, $b);
         }
 
         private function sort_tags_desc($a, $b) {
-            return $this->mb_strcasecmp($b, $a, "UTF-8");
+            return $this->mb_strcasecmp($b, $a);
         }
 
         private function sort_tags_name_asc($a, $b) {
-            return $this->mb_strcasecmp($a["name"], $b["name"], "UTF-8");
+            return $this->mb_strcasecmp($a["name"], $b["name"]);
         }
 
         private function sort_tags_name_desc($a, $b) {
-            return $this->mb_strcasecmp($b["name"], $a["name"], "UTF-8");
+            return $this->mb_strcasecmp($b["name"], $a["name"]);
         }
 
         private function sort_tags_popularity_asc($a, $b) {
@@ -639,15 +639,12 @@
             return $a["popularity"] < $b["popularity"];
         }
 
-        private function mb_strcasecmp($str1, $str2, $encoding = null) {
+        private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8") {
             $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
             $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
 
             if (!function_exists("mb_strtoupper"))
                 return substr_compare(strtoupper($str1), strtoupper($str2), 0);
-
-            if (empty($encoding))
-                $encoding = mb_internal_encoding();
 
             return substr_compare(mb_strtoupper($str1, $encoding), mb_strtoupper($str2, $encoding), 0);
         }
