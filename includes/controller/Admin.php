@@ -1676,10 +1676,9 @@
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
 
-            foreach ($config->$enabled_array as $extension) {
+            foreach ($config->$enabled_array as $extension)
                 if ($extension != $name)
                     $updated_array[] = $extension;
-            }
 
             $config->set($enabled_array, $updated_array);
 
@@ -1961,7 +1960,7 @@
                     break;
                 case "slugs":
                     $help = "<h1>".__("Slugs")."</h1>\n".
-                            "<p>".__("The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
+                            "<p>".__("The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (&#8220;-&#8221;) and underscore (&#8220;_&#8221;).")."</p>";
                     break;
                 case "canonical_url":
                     $help = "<h1>".__("Canonical URL")."</h1>\n".

@@ -182,10 +182,9 @@
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
 
-            foreach ($config->$enabled_array as $extension) {
+            foreach ($config->$enabled_array as $extension)
                 if ($extension != $name)
                     $updated_array[] = $extension;
-            }
 
             $config->set($enabled_array, $updated_array);
 
