@@ -72,7 +72,7 @@
      *     $code - Numeric HTTP status code to set.
      */
     function error($title = "", $body = "", $backtrace = array(), $code = 500) {
-        # Sanitize strings.
+        # Sanitize strings to remove obnoxious attributes and script tags.
         $title = htmlspecialchars($title, ENT_QUOTES, "utf-8", false);
         $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
         $body = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $body);
@@ -91,7 +91,7 @@
         if (ob_get_contents() !== false)
             ob_clean();
 
-        # Attempt to set headers to sane values.
+        # Attempt to set headers to sane values and send a status code.
         if (!headers_sent()) {
             header("Content-Type: text/html; charset=UTF-8");
             header("Cache-Control: no-cache, must-revalidate");
@@ -133,8 +133,7 @@
             }
         }
 
-        # Report in plain text for the automated tester, RPC and AJAX queries
-        # or if the error was too deep in the core for a pretty error message.
+        # Report in plain text if desirable or necessary because of a deep error.
         if (TESTER or XML_RPC or AJAX or
             !function_exists("__") or
             !function_exists("_f") or
@@ -154,11 +153,10 @@
         $url = $config->url;
         $chyrp_url = $config->chyrp_url;
 
-        # Validate title and body text.
+        # Validate title and body text before we display the pretty message.
         $title = oneof($title, __("Error"));
         $body = oneof($body, __("An unspecified error has occurred."));
 
-        # Display a pretty error message.
 ?>
 <!DOCTYPE html>
 <html lang="en">
