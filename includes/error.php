@@ -147,13 +147,7 @@
             !property_exists(Config::current(), "url") or
             !property_exists(Config::current(), "chyrp_url")) {
 
-            echo "ERROR: ".strip_tags($body);
-
-            # Flush the output buffer and terminate execution.
-            if (ob_get_contents() !== false)
-                ob_end_flush();
-
-            exit;
+            exit("ERROR: ".strip_tags($body));
         }
 
         $config = Config::current();
@@ -367,9 +361,6 @@
     </body>
 </html>
 <?php
-        # Flush the output buffer and terminate execution.
-        if (ob_get_contents() !== false)
-            ob_end_flush();
-
+        # Terminate execution.
         exit;
     }
