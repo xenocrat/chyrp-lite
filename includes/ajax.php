@@ -59,8 +59,10 @@
             if (!logged_in())
                 show_403(__("Access Denied"), __("You must be logged in to preview content."));
 
-            if (!isset($_POST['content']) or !isset($_POST['filter']))
-                error(__("Error"), __("Missing argument."), null, 400);
+            if (empty($_POST['filter']))
+                error(__("No Filter Specified"), __("A filter is required to display a preview."), null, 400);
+
+            fallback($_POST['content'], "Lorem ipsum dolor sit amet.");
 
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
