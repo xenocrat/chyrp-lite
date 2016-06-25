@@ -553,8 +553,10 @@
 
             switch($_POST['action']) {
                 case "reload_comments":
+                    header("Content-Type: application/json; charset=UTF-8");
+
                     if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
-                        exit;
+                        error(__("No ID Specified"), __("An ID is required to reload comments.", "comments"), null, 400);
 
                     $post = new Post($_POST['post_id'], array("drafts" => true));
                     $last_comment = fallback($_POST['last_comment'], $post->created_at);
@@ -584,13 +586,8 @@
                         }
                     }
 
-                    $response = array("comment_ids" => $ids,
-                                      "last_comment" => $last_comment);
-
-                    header("Content-Type: application/json; charset=UTF-8");
-                    echo json_encode($response);
-                    exit;
-
+                    exit(json_encode(array("comment_ids" => $ids,
+                                           "last_comment" => $last_comment)));
                 case "show_comment":
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
@@ -602,7 +599,6 @@
 
                     $main->display("content".DIR."comment", array("comment" => $comment));
                     exit;
-
                 case "destroy_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                         show_403(__("Access Denied"), __("Invalid security key."));
@@ -620,7 +616,6 @@
 
                     Comment::delete($comment->id);
                     exit;
-
                 case "edit_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                         show_403(__("Access Denied"), __("Invalid security key."));
@@ -638,7 +633,6 @@
 
                     $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
                     exit;
-
                 case "validate_comment":
                     header("Content-Type: application/json; charset=UTF-8");
                     $notifications = array();
