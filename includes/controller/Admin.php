@@ -1966,16 +1966,20 @@
                 case "canonical_url":
                     $help = "<h1>".__("Canonical URL")."</h1>\n".
                             "<p>".__("If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:")."</p>\n".
-                            "<ol>\n<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n".
-                            "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n</code></pre>".
-                            "</li>\n<li>".__("Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                            "<ol>\n".
+                            "<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n</code></pre></li>\n".
+                            "<li>".__("Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n".
+                            "</ol>";
                     break;
                 case "unicode_emoticons":
                     $help = "<h1>".__("Unicode Emoticons")."</h1>\n".
                             "<p>".__("You can have some emoticons converted to equivalent Unicode emoji when your content is displayed. Your original content is not modified, so you can turn this feature on and off at any time. The following conversions will occur:")."</p>\n".
-                            "<table>\n<thead>\n".
-                            "<tr>\n<th>".__("Emoticon")."</th>\n".
-                            "<th>".__("Emoji")."</th>\n</tr>\n".
+                            "<table>\n".
+                            "<thead>\n".
+                            "<tr>\n".
+                            "<th>".__("Emoticon")."</th>\n".
+                            "<th>".__("Emoji")."</th>\n".
+                            "</tr>\n".
                             "</thead>\n".
                             "<tbody>\n".
                             "<tr>\n<td>o:-)</td>\n"."<td>".emote("o:-)")."</td>\n</tr>\n".
@@ -2002,14 +2006,18 @@
                             "<tr>\n<td>:-$</td>\n"."<td>".emote(":-$")."</td>\n</tr>\n".
                             "<tr>\n<td>x_x</td>\n"."<td>".emote("x_x")."</td>\n</tr>\n".
                             "<tr>\n<td>:-x</td>\n"."<td>".emote(":-x")."</td>\n</tr>\n".
-                            "</tbody>\n</table>";
+                            "</tbody>\n".
+                            "</table>";
                     break;
                 case "markdown":
                     $help = "<h1>".__("Markdown")."</h1>\n".
                             "<p>".__("Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:")."</p>\n".
-                            "<table>\n<thead>\n".
-                            "<tr>\n<th>".__("Markdown")."</th>\n".
-                            "<th>".__("Result")."</th>\n</tr>\n".
+                            "<table>\n".
+                            "<thead>\n".
+                            "<tr>\n".
+                            "<th>".__("Markdown")."</th>\n".
+                            "<th>".__("Result")."</th>\n".
+                            "</tr>\n".
                             "</thead>\n".
                             "<tbody>\n".
                             "<tr>\n<td>".__("## Heading")."</td>\n"."<td><h2>".__("Heading")."</h2></td>\n</tr>\n".
@@ -2023,9 +2031,13 @@
                             "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n".
                             "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n".
                             "<tr>\n<td>".__("1. List of items")."</td>\n"."<td><ol><li>".__("List of items")."</li></ol></em></td>\n</tr>\n".
-                            "</tbody>\n</table>";
+                            "</tbody>\n".
+                            "</table>";
                     break;
             }
+
+            if (empty($help) or !is_string($help))
+                show_404(__("Not Found"), __("Help article not found."));
 
             $this->display("help", array("content" => $help), __("Help"));
         }
