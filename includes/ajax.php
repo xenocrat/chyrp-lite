@@ -36,7 +36,6 @@
 
             Post::delete($post->id);
             exit;
-
         case "destroy_page":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -54,7 +53,6 @@
 
             Page::delete($page->id, true);
             exit;
-
         case "preview":
             if (!logged_in())
                 show_403(__("Access Denied"), __("You must be logged in to preview content."));
@@ -74,7 +72,6 @@
             $main->display("content".DIR."preview", array("content" => $sanitized,
                                                           "filter" => $_POST['filter']), __("Preview"));
             exit;
-
         case "confirm":
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
@@ -89,7 +86,6 @@
                 echo $info["confirm"];
 
             exit;
-
         case "enable":
             header("Content-Type: application/json; charset=UTF-8");
 
@@ -97,10 +93,10 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
-                exit(json_encode(array("notifications" => array(__("You do not have sufficient privileges to enable extensions.")))));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
-                exit(json_encode(array("notifications" => array(__("You did not specify an extension to enable.")))));
+                error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
 
             $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
             $name          = $_POST['extension'];
@@ -146,7 +142,6 @@
                     $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
             exit(json_encode(array("notifications" => $info["notifications"])));
-
         case "disable":
             header("Content-Type: application/json; charset=UTF-8");
 
@@ -154,10 +149,10 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
-                exit(json_encode(array("notifications" => array(__("You do not have sufficient privileges to disable extensions.")))));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
-                exit(json_encode(array("notifications" => array(__("You did not specify an extension to disable.")))));
+                error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
 
             $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
             $name          = $_POST['extension'];
