@@ -331,6 +331,11 @@ var Write = {
                 "type": "hidden",
                 "name": "content",
                 "value": content
+            }),
+            $("<input>", {
+                "type": "hidden",
+                "name": "hash",
+                "value": Site.key
             })]
         ).insertAfter("#content");
 
@@ -366,6 +371,7 @@ var Extend = {
     },
     action: null,
     confirmed: null,
+    confirmation: null,
     busy: false,
     failed: false,
     init: function() {
@@ -441,6 +447,7 @@ var Extend = {
         Extend.extension.type = null;
         Extend.action = null;
         Extend.confirmed = null;
+        Extend.confirmation = null;
     },
     ajax_toggle: function(e) {
         Extend.ajax_reset(); // Reset all values.
@@ -455,57 +462,54 @@ var Extend = {
         else if ($(e.target).parents("#feathers_enabled").length || $(e.target).parents("#feathers_disabled").length)
             Extend.extension.type = "feather";
 
-        Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
-
-        if (Extend.action == null || Extend.extension.type == null || !Extend.extension.name) {
+        if (Extend.action == null || Extend.extension.type == null) {
             Extend.panic();
             return;
         }
 
-        $.post(Site.chyrp_url + "/includes/ajax.php", {
-            action: "confirm",
-            extension: Extend.extension.name,
-            type: Extend.extension.type,
-        }, function(response) {
-            if (response.data === true && Extend.action == "disable")
-                Extend.confirmed = (confirm(response.text)) ? 1 : 0 ;
+        Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
+        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html();
 
-            if (Site.key == "") {
-                Extend.panic('<?php echo __("The extension cannot be toggled because your web browser did not send proper credentials.", "theme"); ?>');
-                return;
-            }
+        if (!!Extend.confirmation && Extend.action == "disable")
+            Extend.confirmed = (confirm(Extend.confirmation)) ? 1 : 0 ;
 
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: Site.chyrp_url + "/includes/ajax.php",
-                data: {
-                    action: Extend.action,
-                    extension: Extend.extension.name,
-                    type: Extend.extension.type,
-                    confirm: Extend.confirmed,
-                    hash: Site.key
-                },
-                success: function(response) {
-                    var extension = $("#" + Extend.extension.type + "_" + Extend.extension.name).detach();
-                    $(extension).appendTo("#" + Extend.extension.type + "s_" + Extend.action + "d");
+        if (Site.key == "") {
+            Extend.panic('<?php echo __("The extension cannot be toggled because your web browser did not send proper credentials.", "theme"); ?>');
+            return;
+        }
 
-                    if (Extend.extension.type == "module")
-                        Extend.check_errors();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: Site.chyrp_url + "/includes/ajax.php",
+            data: {
+                action: Extend.action,
+                extension: Extend.extension.name,
+                type: Extend.extension.type,
+                confirm: Extend.confirmed,
+                hash: Site.key
+            },
+            success: function(response) {
+                var item = "#" + Extend.extension.type + "_" + Extend.extension.name; // Item to be moved e.g. "#module_tags".
+                var list = "#" + Extend.extension.type + "s_" + Extend.action + "d";  // Destination list e.g. "#modules_enabled".
 
-                    // Display any notifications for the extension.
-                    if (response.data != null)
-                        Flash.message(response.data);
+                $(item).detach().appendTo(list);
 
-                    // Display the message returned by the responder.
-                    if (response.text != null)
-                        Flash.notice(response.text);
+                if (Extend.extension.type == "module")
+                    Extend.check_errors();
 
-                    Extend.busy = false;
-                },
-                error: Extend.panic
-            });
-        }, "json").fail(Extend.panic);
+                // Display any notifications for the extension.
+                if (response.data != null)
+                    Flash.message(response.data);
+
+                // Display the message returned by the responder.
+                if (response.text != null)
+                    Flash.notice(response.text);
+
+                Extend.busy = false;
+            },
+            error: Extend.panic
+        });
     },
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;

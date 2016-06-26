@@ -54,6 +54,9 @@
             Page::delete($page->id, true);
             json_response(__("Page deleted."));
         case "preview":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!$visitor->group->can("add_post", "add_draft", "add_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to create content."));
 
@@ -72,17 +75,6 @@
             $main->display("content".DIR."preview", array("content" => $sanitized,
                                                           "filter" => $_POST['filter']), __("Preview"));
             exit;
-        case "confirm":
-            if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
-
-            if (empty($_POST['extension']) or substr_count($_POST['extension'], DIR))
-                show_404(__("Not Found"), __("Extension not found."));
-
-            $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $info = include $dir.DIR.$_POST['extension'].DIR."info.php";
-            fallback($info["confirm"]);
-            json_response(oneof($info["confirm"], __("Confirmation is not necessary.")), !empty($info["confirm"]));
         case "enable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
