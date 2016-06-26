@@ -558,7 +558,7 @@
 
                     $post = new Post($_POST['post_id'], array("drafts" => true));
                     $last_comment = (empty($_POST['last_comment'])) ? $post->created_at : $_POST['last_comment'] ;
-                    $added_since = when(__("%I:%M %p on %B %d, %Y", "comments"), $last_comment, true);
+                    $added_since = when(__("Comments added since %I:%M %p on %B %d, %Y", "comments"), $last_comment, true);
 
                     if ($post->no_results)
                         show_404(__("Not Found"), __("Post not found."));
@@ -585,8 +585,7 @@
                         }
                     }
 
-                    json_response(_f("Comments added since %s", $added_since, "comments"),
-                                  array("comment_ids" => $ids, "last_comment" => $last_comment));
+                    json_response($added_since, array("comment_ids" => $ids, "last_comment" => $last_comment));
                 case "show_comment":
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
