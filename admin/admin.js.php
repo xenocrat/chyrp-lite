@@ -466,9 +466,9 @@ var Extend = {
             action: "confirm",
             extension: Extend.extension.name,
             type: Extend.extension.type,
-        }, function(data) {
-            if (data != "" && Extend.action == "disable")
-                Extend.confirmed = (confirm(data)) ? 1 : 0;
+        }, function(response) {
+            if (response.text != null && Extend.action == "disable")
+                Extend.confirmed = (confirm(response.text)) ? 1 : 0;
 
             if (Site.key == "") {
                 Extend.panic('<?php echo __("The extension cannot be toggled because your web browser did not send proper credentials.", "theme"); ?>');
@@ -486,25 +486,26 @@ var Extend = {
                     confirm: Extend.confirmed,
                     hash: Site.key
                 },
-                success: function(json) {
+                success: function(response) {
                     var extension = $("#" + Extend.extension.type + "_" + Extend.extension.name).detach();
                     $(extension).appendTo("#" + Extend.extension.type + "s_" + Extend.action + "d");
 
                     if (Extend.extension.type == "module")
                         Extend.check_errors();
 
-                    Flash.message(json.notifications);
+                    // Display any notifications for the extension.
+                    if (response.data != null)
+                        Flash.message(response.data);
 
-                    if (Extend.action == "enable")
-                        Flash.notice('<?php echo __("Extension enabled."); ?>');
-                    else
-                        Flash.notice('<?php echo __("Extension disabled."); ?>');
+                    // Display the message returned by the responder.
+                    if (response.text != null)
+                        Flash.notice(response.text);
 
                     Extend.busy = false;
                 },
                 error: Extend.panic
             });
-        }, "text").fail(Extend.panic);
+        }, "json").fail(Extend.panic);
     },
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;

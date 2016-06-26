@@ -584,8 +584,8 @@
                         }
                     }
 
-                    json_echo(array("comment_ids" => $ids,
-                                    "last_comment" => $last_comment));
+                    json_response(_f("Comments added since %s", $last_comment, "comments"),
+                                  array("comment_ids" => $ids, "last_comment" => $last_comment));
                 case "show_comment":
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
@@ -632,26 +632,24 @@
                     $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
                     exit;
                 case "validate_comment":
-                    $notifications = array();
-
                     if (empty($_POST['body']))
-                        $notifications[] = __("Message can't be blank.", "comments");
+                        json_response(__("Error"), __("Message can't be blank.", "comments"));
 
                     if (empty($_POST['author']))
-                        $notifications[] = __("Author can't be blank.", "comments");
+                        json_response(__("Error"), __("Author can't be blank.", "comments"));
 
                     if (empty($_POST['author_email']))
-                        $notifications[] = __("Email address can't be blank.", "comments");
+                        json_response(__("Error"), __("Email address can't be blank.", "comments"));
                     elseif (!is_email($_POST['author_email']))
-                        $notifications[] = __("Invalid email address.", "comments");
+                        json_response(__("Error"), __("Invalid email address.", "comments"));
 
                     if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                        $notifications[] = __("Invalid website URL.", "comments");
+                        json_response(__("Error"), __("Invalid website URL.", "comments"));
 
                     if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
-                        $notifications[] = __("Incorrect captcha code.", "comments");
+                        json_response(__("Error"), __("Incorrect captcha code.", "comments"));
 
-                    json_echo(array("notifications" => $notifications));
+                    json_response(__("Comment validated.", "comments"));
             }
         }
 

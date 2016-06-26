@@ -50,7 +50,7 @@ var Post = {
                 if (!$(".post").length)
                     window.location = Site.url;
             });
-        }, "html").fail(Post.panic);
+        }, "json").fail(Post.panic);
     },
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
@@ -90,7 +90,7 @@ var Page = {
                 $(this).remove();
                 window.location = Site.url;
             });
-        }, "html").fail(Page.panic);
+        }, "json").fail(Page.panic);
     },
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;

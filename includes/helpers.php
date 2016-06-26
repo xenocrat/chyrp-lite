@@ -1842,7 +1842,7 @@
      *     $depth - Recursion depth for encoding.
      *
      * Returns:
-     *     A JSON encoded UTF-8 string.
+     *     A JSON encoded string or false on failure.
      */
     function json_set($value, $options = 0, $depth = 512) {
         $encoded = json_encode($value, $options, $depth);
@@ -1876,15 +1876,16 @@
     }
 
     /**
-     * Function: json_echo
-     * Outputs a JSON encoded value and exits immediately.
+     * Function: json_response
+     * Sends a structured JSON response and exits immediately.
      *
      * Parameters:
-     *     $value - The value to JSON encode and echo.
+     *     $text - A string containing a response message.
+     *     $data - Arbitrary data to be sent with the response.
      */
-    function json_echo($value, $options = 0, $depth = 512) {
+    function json_response($text = null, $data = null) {
         header("Content-Type: application/json; charset=UTF-8");
-        exit(json_set($value, $options, $depth));
+        exit(json_set(array("text" => $text, "data" => $data)));
     }
 
     /**

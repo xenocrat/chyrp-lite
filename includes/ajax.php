@@ -35,7 +35,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
             Post::delete($post->id);
-            exit;
+            json_response(__("Post deleted."));
         case "destroy_page":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -52,7 +52,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
             Page::delete($page->id, true);
-            exit;
+            json_response(__("Page deleted."));
         case "preview":
             if (!$visitor->group->can("add_post", "add_draft", "add_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to create content."));
@@ -81,11 +81,8 @@
 
             $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $info = include $dir.DIR.$_POST['extension'].DIR."info.php";
-
-            if (!empty($info["confirm"]))
-                echo $info["confirm"];
-
-            exit;
+            fallback($info["confirm"]);
+            json_response($info["confirm"]);
         case "enable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -105,11 +102,11 @@
 
             # We don't use the module_enabled() helper function because we want to include cancelled modules.
             if ($type == "module" and !empty(Modules::$instances[$name]))
-                json_echo(array("notifications" => array(__("Module already enabled."))));
+                error(__("Error"), __("Module already enabled."), null, 409);
 
             # We don't use the feather_enabled() helper function because we want to include cancelled feathers.
             if ($type == "feather" and !empty(Feathers::$instances[$name]))
-                json_echo(array("notifications" => array(__("Feather already enabled."))));
+                error(__("Error"), __("Feather already enabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
                 show_404(__("Not Found"), __("Extension not found."));
@@ -139,7 +136,7 @@
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
                     $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
-            json_echo(array("notifications" => $info["notifications"]));
+            json_response(__("Extension enabled."), $info["notifications"]);
         case "disable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -158,11 +155,11 @@
 
             # We don't use the module_enabled() helper function because we want to exclude cancelled modules.
             if ($type == "module" and empty(Modules::$instances[$name]))
-                json_echo(array("notifications" => array(__("Module already disabled."))));
+                error(__("Error"), __("Module already disabled."), null, 409);
 
             # We don't use the feather_enabled() helper function because we want to exclude cancelled feathers.
             if ($type == "feather" and empty(Feathers::$instances[$name]))
-                json_echo(array("notifications" => array(__("Feather already disabled."))));
+                error(__("Error"), __("Feather already disabled."), null, 409);
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
                 show_404(__("Not Found"), __("Module not found."));
@@ -182,7 +179,7 @@
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
 
-            json_echo(array("notifications" => array()));
+            json_response(__("Extension disabled."));
     }
 
     $trigger->call("ajax");

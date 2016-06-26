@@ -25,8 +25,8 @@ var ChyrpComment = {
                         dataType: "json",
                         error: ChyrpComment.panic,
                     }).done(function(response) {
-                        if (response.notifications.length) {
-                            alert(response.notifications[0]);
+                        if (response.data != null) {
+                            alert(response.data);
                         } else {
                             // Turn off the validator and submit the form.
                             $("#add_comment").off("submit.validator").submit();
@@ -74,10 +74,10 @@ var ChyrpComment = {
                     post_id: id,
                     last_comment: ts
                 },
-                success: function(json) {
-                    if (json.comment_ids.length > 0) {
-                        $("#comments").attr("data-timestamp", json.last_comment);
-                        $.each(json.comment_ids, function(i, id) {
+                success: function(response) {
+                    if (response.data.comment_ids.length > 0) {
+                        $("#comments").attr("data-timestamp", response.data.last_comment);
+                        $.each(response.data.comment_ids, function(i, id) {
                             $.post(Site.chyrp_url + "/includes/ajax.php", {
                                 action: "show_comment",
                                 comment_id: id
