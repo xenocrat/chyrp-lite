@@ -82,7 +82,7 @@
             $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $info = include $dir.DIR.$_POST['extension'].DIR."info.php";
             fallback($info["confirm"]);
-            json_response($info["confirm"]);
+            json_response(oneof($info["confirm"], __("Confirmation is not necessary.")), !empty($info["confirm"]));
         case "enable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));

@@ -467,8 +467,8 @@ var Extend = {
             extension: Extend.extension.name,
             type: Extend.extension.type,
         }, function(response) {
-            if (response.text != null && Extend.action == "disable")
-                Extend.confirmed = (confirm(response.text)) ? 1 : 0;
+            if (response.data === true && Extend.action == "disable")
+                Extend.confirmed = (confirm(response.text)) ? 1 : 0 ;
 
             if (Site.key == "") {
                 Extend.panic('<?php echo __("The extension cannot be toggled because your web browser did not send proper credentials.", "theme"); ?>');
