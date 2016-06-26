@@ -1579,11 +1579,11 @@
 
             # We don't use the module_enabled() helper function because we want to include cancelled modules.
             if ($type == "module" and !empty(Modules::$instances[$name]))
-                Flash::warning(__("Module already enabled."), "/admin/?action=modules");
+                error(__("Error"), __("Module already enabled."), null, 409);
 
             # We don't use the feather_enabled() helper function because we want to include cancelled feathers.
             if ($type == "feather" and !empty(Feathers::$instances[$name]))
-                Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
+                error(__("Error"), __("Feather already enabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
                 show_404(__("Not Found"), __("Extension not found."));
@@ -1645,11 +1645,11 @@
 
             # We don't use the module_enabled() helper function because we want to exclude cancelled modules.
             if ($type == "module" and empty(Modules::$instances[$name]))
-                Flash::warning(__("Module already disabled."), "/admin/?action=modules");
+                error(__("Error"), __("Module already disabled."), null, 409);
 
             # We don't use the feather_enabled() helper function because we want to exclude cancelled feathers.
             if ($type == "feather" and empty(Feathers::$instances[$name]))
-                Flash::warning(__("Feather already disabled."), "/admin/?action=feathers");
+                error(__("Error"), __("Feather already disabled."), null, 409);
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
                 show_404(__("Not Found"), __("Module not found."));
