@@ -553,8 +553,6 @@
 
             switch($_POST['action']) {
                 case "reload_comments":
-                    header("Content-Type: application/json; charset=UTF-8");
-
                     if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                         error(__("No ID Specified"), __("An ID is required to reload comments.", "comments"), null, 400);
 
@@ -586,8 +584,8 @@
                         }
                     }
 
-                    exit(json_encode(array("comment_ids" => $ids,
-                                           "last_comment" => $last_comment)));
+                    json_echo(array("comment_ids" => $ids,
+                                    "last_comment" => $last_comment));
                 case "show_comment":
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
@@ -634,7 +632,6 @@
                     $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
                     exit;
                 case "validate_comment":
-                    header("Content-Type: application/json; charset=UTF-8");
                     $notifications = array();
 
                     if (empty($_POST['body']))
@@ -654,7 +651,7 @@
                     if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
                         $notifications[] = __("Incorrect captcha code.", "comments");
 
-                    exit(json_encode(array("notifications" => $notifications)));
+                    json_echo(array("notifications" => $notifications));
             }
         }
 

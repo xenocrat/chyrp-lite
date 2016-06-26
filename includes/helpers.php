@@ -13,6 +13,30 @@
     $l10n = array();
 
     /**
+     * Function: autoload
+     * Autoload PSR-0 classes on demand by scanning lib directories.
+     *
+     * Parameters:
+     *     $class - The name of the class to load.
+     */
+    function autoload($class) {
+        $filepath = str_replace(array("_", "\\", "\0"),
+                                array(DIR, DIR, ""),
+                                ltrim($class, "\\")).".php";
+
+        if (file_exists(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
+            require INCLUDES_DIR.DIR."lib".DIR.$filepath;
+            return;
+        }
+
+        foreach (Config::current()->enabled_modules as $module)
+            if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
+                require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
+                return;
+            }
+    }
+
+    /**
      * Function: session
      * Begins Chyrp's custom session storage whatnots.
      *
@@ -396,7 +420,7 @@
      */
     function fix($string, $quotes = false, $double = false) {
         $quotes = ($quotes) ? ENT_QUOTES : ENT_NOQUOTES ;
-        return htmlspecialchars($string, $quotes, "utf-8", $double);
+        return htmlspecialchars($string, $quotes, "UTF-8", $double);
     }
 
     /**
@@ -1809,6 +1833,61 @@
     }
 
     /**
+     * Function: json_set
+     * JSON encodes a value and checks for errors.
+     *
+     * Parameters:
+     *     $value - The value to be encoded.
+     *     $options - A bitmask of encoding options.
+     *     $depth - Recursion depth for encoding.
+     *
+     * Returns:
+     *     A JSON encoded UTF-8 string.
+     */
+    function json_set($value, $options = 0, $depth = 512) {
+        $encoded = json_encode($value, $options, $depth);
+
+        if (json_last_error())
+            trigger_error(_f("JSON encoding error: %s", json_last_error_msg()), E_USER_WARNING);
+
+        return $encoded;
+    }
+
+    /**
+     * Function: json_get
+     * JSON decodes a value and checks for errors.
+     *
+     * Parameters:
+     *     $value - The UTF-8 string to be decoded.
+     *     $assoc - Convert objects into associative arrays?
+     *     $depth - Recursion depth for decoding.
+     *     $options - A bitmask of decoding options.
+     *
+     * Returns:
+     *     A JSON decoded value of the appropriate PHP type.
+     */
+    function json_get($value, $assoc = false, $depth = 512, $options = 0) {
+        $decoded = json_decode($value, $assoc, $depth, $options);
+
+        if (json_last_error())
+            trigger_error(_f("JSON decoding error: %s", json_last_error_msg()), E_USER_WARNING);
+
+        return $decoded;
+    }
+
+    /**
+     * Function: json_echo
+     * Outputs a JSON encoded value and exits immediately.
+     *
+     * Parameters:
+     *     $value - The value to JSON encode and echo.
+     */
+    function json_echo($value, $options = 0, $depth = 512) {
+        header("Content-Type: application/json; charset=UTF-8");
+        exit(json_set($value, $options, $depth));
+    }
+
+    /**
      * Function: correspond
      * Send an email correspondence to a user about an action we took.
      *
@@ -1867,28 +1946,4 @@
 
         if (!email($params["to"], $params["subject"], $params["message"], $params["headers"]))
             error(__("Undeliverable"), __("Unable to send email."));
-    }
-
-    /**
-     * Function: autoload
-     * Autoload PSR-0 classes on demand by scanning lib directories.
-     *
-     * Parameters:
-     *     $class - The name of the class to load.
-     */
-    function autoload($class) {
-        $filepath = str_replace(array("_", "\\", "\0"),
-                                array(DIR, DIR, ""),
-                                ltrim($class, "\\")).".php";
-
-        if (file_exists(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
-            require INCLUDES_DIR.DIR."lib".DIR.$filepath;
-            return;
-        }
-
-        foreach (Config::current()->enabled_modules as $module)
-            if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
-                require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
-                return;
-            }
     }

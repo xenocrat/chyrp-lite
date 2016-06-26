@@ -23,23 +23,11 @@
         }
 
         private function tags_serialize($tags) {
-            $serialized = json_encode($tags);
-
-            if (json_last_error())
-                error(__("Error"),
-                      _f("Failed to serialize tags because of JSON error: <code>%s</code>", fix(json_last_error_msg()), "tags"));
-
-            return $serialized;
+            return json_set($tags);
         }
 
         private function tags_unserialize($tags) {
-            $unserialized = json_decode($tags, true);
-
-            if (json_last_error() and DEBUG)
-                error(__("Error"),
-                      _f("Failed to unserialize tags because of JSON error: <code>%s</code>", fix(json_last_error_msg()), "tags"));
-
-            return $unserialized;
+            return json_get($tags, true);
         }
 
         public function post_options($fields, $post = null) {
@@ -702,7 +690,7 @@
 
         private function tags_safe($text) {
             # Match escaping of JSON encoded data
-            $text = trim(json_encode($text), "\"");
+            $text = trim(json_set($text), "\"");
 
             # Return string escaped for SQL query
             return SQL::current()->escape($text, false);

@@ -99,10 +99,9 @@
 
             Config::$json[$setting] = $value;
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $dump = $protection.json_set(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             echo $message.test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
-
         }
 
         /**
@@ -146,7 +145,7 @@
 
             unset(Config::$json[$setting]);
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $dump = $protection.json_set(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             echo _f("Removing %s setting...", array($setting)).
                  test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
@@ -182,11 +181,8 @@
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect("install.php");
 
-    Config::$json = json_decode(preg_replace("/<\?php(.+)\?>\n?/s", "",
-                                file_get_contents(INCLUDES_DIR.DIR."config.json.php")), true);
-
-    if (json_last_error())
-        $errors[] = fix(json_last_error_msg());
+    Config::$json = json_get(preg_replace("/<\?php(.+)\?>\n?/s", "",
+                             file_get_contents(INCLUDES_DIR.DIR."config.json.php")), true);
 
     # Prepare the SQL interface and initialize the connection to SQL server.
 

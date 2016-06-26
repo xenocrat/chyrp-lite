@@ -26,23 +26,11 @@
         }
 
         private function filenames_serialize($files) {
-            $serialized = json_encode($files, JSON_UNESCAPED_SLASHES);
-
-            if (json_last_error())
-                error(__("Error"),
-                      _f("Failed to serialize files because of JSON error: <code>%s</code>", fix(json_last_error_msg()), "uploader"));
-
-            return $serialized;
+            return json_set($files, JSON_UNESCAPED_SLASHES);
         }
 
         private function filenames_unserialize($filenames) {
-            $unserialized = json_decode($filenames, true);
-
-            if (json_last_error() and DEBUG)
-                error(__("Error"),
-                      _f("Failed to unserialize files because of JSON error: <code>%s</code>", fix(json_last_error_msg()), "uploader"));
-
-            return $unserialized;
+            return json_get($filenames, true);
         }
 
         public function submit() {

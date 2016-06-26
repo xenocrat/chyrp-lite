@@ -27,7 +27,7 @@
         if (ob_get_contents() !== false)
             ob_clean();
 
-        exit(htmlspecialchars("ERROR: ".$message." (".$file." on line ".$line.")", ENT_QUOTES, "utf-8", false));
+        exit(htmlspecialchars("ERROR: ".$message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false));
     }
 
     /**
@@ -43,7 +43,7 @@
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        $errors[] = htmlspecialchars($message." (".$file." on line ".$line.")", ENT_QUOTES, "utf-8", false);
+        $errors[] = htmlspecialchars($message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false);
         return true;
     }
 
@@ -73,7 +73,7 @@
      */
     function error($title = "", $body = "", $backtrace = array(), $code = 500) {
         # Sanitize strings to remove obnoxious attributes and script tags.
-        $title = htmlspecialchars($title, ENT_QUOTES, "utf-8", false);
+        $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8", false);
         $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
         $body = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $body);
         $body = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $body);
@@ -83,8 +83,8 @@
                 if (!isset($trace["file"]) or !isset($trace["line"])) {
                     unset($backtrace[$index]);
                 } else {
-                    $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "utf-8", false);
-                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "utf-8", false);
+                    $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "UTF-8", false);
+                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "UTF-8", false);
                 }
 
         # Clean the output buffer before we begin.
@@ -161,7 +161,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <title><?php echo $title; ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">

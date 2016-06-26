@@ -48,17 +48,17 @@
             if ($page->no_results)
                 show_404(__("Not Found"), __("Page not found."));
 
-            if (!Visitor::current()->group->can("delete_page"))
+            if (!$visitor->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
             Page::delete($page->id, true);
             exit;
         case "preview":
-            if (!logged_in())
-                show_403(__("Access Denied"), __("You must be logged in to preview content."));
+            if (!$visitor->group->can("add_post", "add_draft", "add_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to create content."));
 
             if (empty($_POST['filter']))
-                error(__("No Filter Specified"), __("A filter is required to display a preview."), null, 400);
+                error(__("No Filter Specified"), __("A filter is required to preview content."), null, 400);
 
             fallback($_POST['content'], "Lorem ipsum dolor sit amet.");
 
@@ -87,8 +87,6 @@
 
             exit;
         case "enable":
-            header("Content-Type: application/json; charset=UTF-8");
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -107,11 +105,11 @@
 
             # We don't use the module_enabled() helper function because we want to include cancelled modules.
             if ($type == "module" and !empty(Modules::$instances[$name]))
-                exit(json_encode(array("notifications" => array(__("Module already enabled.")))));
+                json_echo(array("notifications" => array(__("Module already enabled."))));
 
             # We don't use the feather_enabled() helper function because we want to include cancelled feathers.
             if ($type == "feather" and !empty(Feathers::$instances[$name]))
-                exit(json_encode(array("notifications" => array(__("Feather already enabled.")))));
+                json_echo(array("notifications" => array(__("Feather already enabled."))));
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
                 show_404(__("Not Found"), __("Extension not found."));
@@ -141,10 +139,8 @@
                 elseif (!is_writable(MAIN_DIR.$config->uploads_path))
                     $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
-            exit(json_encode(array("notifications" => $info["notifications"])));
+            json_echo(array("notifications" => $info["notifications"]));
         case "disable":
-            header("Content-Type: application/json; charset=UTF-8");
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -162,11 +158,11 @@
 
             # We don't use the module_enabled() helper function because we want to exclude cancelled modules.
             if ($type == "module" and empty(Modules::$instances[$name]))
-                exit(json_encode(array("notifications" => array(__("Module already disabled.")))));
+                json_echo(array("notifications" => array(__("Module already disabled."))));
 
             # We don't use the feather_enabled() helper function because we want to exclude cancelled feathers.
             if ($type == "feather" and empty(Feathers::$instances[$name]))
-                exit(json_encode(array("notifications" => array(__("Feather already disabled.")))));
+                json_echo(array("notifications" => array(__("Feather already disabled."))));
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
                 show_404(__("Not Found"), __("Module not found."));
@@ -186,7 +182,7 @@
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
 
-            exit(json_encode(array("notifications" => array())));
+            json_echo(array("notifications" => array()));
     }
 
     $trigger->call("ajax");
