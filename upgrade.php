@@ -279,7 +279,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <title><?php echo __("Chyrp Lite Upgrader"); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">

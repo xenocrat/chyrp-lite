@@ -21,7 +21,7 @@
 {{ feather.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
-<form class="feather_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form class="feather_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="feather" value="{{ safename }}" id="hash">
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 <button type="submit">
@@ -34,7 +34,7 @@
 </p>
 {% endif %}
 </form>
-<form class="feather_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form class="feather_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="feather" value="{{ safename }}" id="hash">
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 <button type="submit">
@@ -63,7 +63,7 @@
 {{ feather.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
-<form class="feather_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form class="feather_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="feather" value="{{ safename }}" id="hash">
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 <button type="submit">
@@ -76,7 +76,7 @@
 </p>
 {% endif %}
 </form>
-<form class="feather_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form class="feather_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="feather" value="{{ safename }}" id="hash">
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 <button type="submit">

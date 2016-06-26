@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ site.locale | split('_') | first }}">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? ": " ~ site.description : "" }}{{ title ? " &raquo; " ~ title | striptags : "" }}{% endblock %}</title>
 <meta name="description" content="{{ site.description }}">
 <meta name="generator" content="Chyrp Lite">
@@ -80,7 +80,7 @@
 {% endif %}
 </ul>
 <div role="search" class="search_box">
-<form action="{{ site.url }}" method="get" accept-charset="utf-8">
+<form action="{{ site.url }}" method="get" accept-charset="UTF-8">
 <input type="hidden" name="action" value="search" id="action">
 <input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix(true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" aria-label="{{ 'Search this blog' | translate }}">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>

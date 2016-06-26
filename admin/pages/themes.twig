@@ -15,7 +15,7 @@
 {{ theme.info.name }}{# translation is done in the controller #}
 </h3>
 <div class="controls">
-<form action="{{ admin_url('change_theme') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form action="{{ admin_url('change_theme') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="theme" value="{{ theme.name }}" id="hash">
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 <button name="change" value="indubitably" type="submit"{{ theme.name == site.theme ? " disabled" : "" }}>

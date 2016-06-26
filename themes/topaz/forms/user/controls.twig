@@ -3,7 +3,7 @@
 {% block content %}
 <div class="user_controls standalone">
 <h2>{{ "Controls" | translate }}</h2>
-<form action="{{ url('controls') }}" method="post">
+<form action="{{ url('controls') }}" method="post" accept-charset="UTF-8">
 <label for="full_name">{{ "Full name" | translate }}</label>
 <input type="text" name="full_name" value="{{ visitor.full_name | fix(true) }}" id="full_name" tabindex="1">
 <label for="email">{{ "Email" | translate }}</label>

@@ -522,7 +522,7 @@
 ?>
 <hr>
 <h2>WordPress</h2>
-<form id="import_wordpress_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_wordpress"; ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form id="import_wordpress_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_wordpress"; ?>" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="xml_file"><?php echo __("eXtended .XML File", "importers"); ?></label>
@@ -544,7 +544,7 @@
 </form>
 <hr>
 <h2>Tumblr</h2>
-<form id="import_tumblr_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_tumblr"; ?>" method="post" accept-charset="utf-8">
+<form id="import_tumblr_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_tumblr"; ?>" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="tumblr_url"><?php echo __("Your Tumblr URL", "importers"); ?></label>
@@ -562,7 +562,7 @@
 </form>
 <hr>
 <h2>TextPattern</h2>
-<form id="import_textpattern_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_textpattern"; ?>" method="post" accept-charset="utf-8">
+<form id="import_textpattern_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_textpattern"; ?>" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="host"><?php echo __("Host", "importers"); ?></label>
@@ -601,7 +601,7 @@
 </form>
 <hr>
 <h2>MovableType</h2>
-<form id="import_movabletype_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_movabletype"; ?>" method="post" accept-charset="utf-8">
+<form id="import_movabletype_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_movabletype"; ?>" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="host"><?php echo __("Host", "importers"); ?></label>

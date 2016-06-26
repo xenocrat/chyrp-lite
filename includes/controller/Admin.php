@@ -984,7 +984,7 @@
                 $id = str_replace("#", "/", $id);
                 $id = preg_replace("/(".preg_quote(parse_url($config->url, PHP_URL_HOST)).")/", "\\1,".date("Y", $latest_timestamp).":", $id, 1);
 
-                $posts_atom = '<?xml version="1.0" encoding="utf-8"?>'."\r";
+                $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $posts_atom.= '    <title>'.fix($config->name).' Posts</title>'."\r";
                 $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
@@ -1050,7 +1050,7 @@
                     if (strtotime($page->created_at) > $latest_timestamp)
                         $latest_timestamp = strtotime($page->created_at);
 
-                $pages_atom = '<?xml version="1.0" encoding="utf-8"?>'."\r";
+                $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $pages_atom.= '    <title>'.fix($config->name).' Pages</title>'."\r";
                 $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";

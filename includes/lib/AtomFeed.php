@@ -32,7 +32,7 @@
         public function open($title, $subtitle = "", $id = "", $updated = 0) {
             $chyrp_id = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
 
-            echo        '<?xml version="1.0" encoding="utf-8"?>'."\n";
+            echo        '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             echo        '<feed xmlns="http://www.w3.org/2005/Atom">'."\n";
             echo        "    <title>".fix($title)."</title>\n";
 

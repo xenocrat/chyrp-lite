@@ -1,4 +1,4 @@
-<form id="add_comment" action="{{ url('add_comment') }}" method="post" accept-charset="utf-8">
+<form id="add_comment" action="{{ url('add_comment') }}" method="post" accept-charset="UTF-8">
 {% if visitor.logged_in %}
 <label for="body">{{ "%s's comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
 {% else %}

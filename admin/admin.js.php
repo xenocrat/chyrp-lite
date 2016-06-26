@@ -313,7 +313,7 @@ var Write = {
             "id": uid,
             "action": Site.chyrp_url + "/includes/ajax.php",
             "method": "post",
-            "accept-charset": "utf-8",
+            "accept-charset": "UTF-8",
             "target": uid,
             "style": "display: none;"
         }).append(

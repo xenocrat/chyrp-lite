@@ -1,7 +1,7 @@
 <?php
     require_once "common.php";
     header("Content-Type: text/xml; charset=UTF-8");
-    echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
+    echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
 ?>
 <rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd">
     <service>

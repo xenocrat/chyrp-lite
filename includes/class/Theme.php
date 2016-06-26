@@ -222,7 +222,7 @@
             $elements = "<!-- Styles -->";
             if (!empty($stylesheets))
                 foreach ($stylesheets as $stylesheet)
-                    $elements.= "\n".'<link rel="stylesheet" href="'.$stylesheet.'" type="text/css" media="all" charset="utf-8">';
+                    $elements.= "\n".'<link rel="stylesheet" href="'.$stylesheet.'" type="text/css" media="all" charset="UTF-8">';
 
             if (!file_exists(THEME_DIR.DIR."stylesheets".DIR) and !file_exists(THEME_DIR.DIR."css".DIR))
                 return $elements;
@@ -281,7 +281,7 @@
             $elements = "<!-- JavaScripts -->";
 
             foreach ($javascripts as $javascript)
-                $elements.= "\n".'<script src="'.$javascript.'" type="text/javascript" charset="utf-8"></script>';
+                $elements.= "\n".'<script src="'.$javascript.'" type="text/javascript" charset="UTF-8"></script>';
 
             if (file_exists(THEME_DIR.DIR."javascripts".DIR) or file_exists(THEME_DIR.DIR."js".DIR)) {
                 foreach(array_merge((array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
@@ -293,7 +293,7 @@
                         continue;
 
                     $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file);
-                    $elements.= "\n".'<script src="'.$config->chyrp_url.$path.'" type="text/javascript" charset="utf-8"></script>';
+                    $elements.= "\n".'<script src="'.$config->chyrp_url.$path.'" type="text/javascript" charset="UTF-8"></script>';
                 }
             }
 
