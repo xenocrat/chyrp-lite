@@ -557,7 +557,8 @@
                         error(__("No ID Specified"), __("An ID is required to reload comments.", "comments"), null, 400);
 
                     $post = new Post($_POST['post_id'], array("drafts" => true));
-                    $last_comment = fallback($_POST['last_comment'], $post->created_at);
+                    $last_comment = (empty($_POST['last_comment'])) ? $post->created_at : $_POST['last_comment'] ;
+                    $added_since = when(__("%I:%M %p on %B %d, %Y", "comments"), $last_comment, true);
 
                     if ($post->no_results)
                         show_404(__("Not Found"), __("Post not found."));
@@ -568,7 +569,7 @@
                         $new_comments = $sql->select("comments",
                                                      "id, created_at",
                                                      array("post_id" => $post->id,
-                                                           "created_at >" => $_POST['last_comment'],
+                                                           "created_at >" => $last_comment,
                                                            "status not" => "spam", "status != 'denied' OR (
                                                               (user_id != 0 AND user_id = :visitor_id) OR (
                                                                     id IN ".self::visitor_comments()."))"
@@ -584,7 +585,7 @@
                         }
                     }
 
-                    json_response(_f("Comments added since %s", $last_comment, "comments"),
+                    json_response(_f("Comments added since %s", $added_since, "comments"),
                                   array("comment_ids" => $ids, "last_comment" => $last_comment));
                 case "show_comment":
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
