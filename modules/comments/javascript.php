@@ -25,8 +25,9 @@ var ChyrpComment = {
                         dataType: "json",
                         error: ChyrpComment.panic,
                     }).done(function(response) {
-                        if (response.data != null) {
-                            alert(response.data);
+                        if (response.data === false) {
+                            // Validation failed if data value is false.
+                            alert(response.text);
                         } else {
                             // Turn off the validator and submit the form.
                             $("#add_comment").off("submit.validator").submit();

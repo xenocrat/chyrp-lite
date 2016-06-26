@@ -633,23 +633,23 @@
                     exit;
                 case "validate_comment":
                     if (empty($_POST['body']))
-                        json_response(__("Error"), __("Message can't be blank.", "comments"));
+                        json_response(__("Message can't be blank.", "comments"), false);
 
                     if (empty($_POST['author']))
-                        json_response(__("Error"), __("Author can't be blank.", "comments"));
+                        json_response(__("Author can't be blank.", "comments"), false);
 
                     if (empty($_POST['author_email']))
-                        json_response(__("Error"), __("Email address can't be blank.", "comments"));
+                        json_response(__("Email address can't be blank.", "comments"), false);
                     elseif (!is_email($_POST['author_email']))
-                        json_response(__("Error"), __("Invalid email address.", "comments"));
+                        json_response(__("Invalid email address.", "comments"), false);
 
                     if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                        json_response(__("Error"), __("Invalid website URL.", "comments"));
+                        json_response(__("Invalid website URL.", "comments"), false);
 
                     if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
-                        json_response(__("Error"), __("Incorrect captcha code.", "comments"));
+                        json_response(__("Incorrect captcha code.", "comments"), false);
 
-                    json_response(__("Comment validated.", "comments"));
+                    json_response(__("Comment validated.", "comments"), true);
             }
         }
 
