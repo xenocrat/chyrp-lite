@@ -13,30 +13,6 @@
     $l10n = array();
 
     /**
-     * Function: autoload
-     * Autoload PSR-0 classes on demand by scanning lib directories.
-     *
-     * Parameters:
-     *     $class - The name of the class to load.
-     */
-    function autoload($class) {
-        $filepath = str_replace(array("_", "\\", "\0"),
-                                array(DIR, DIR, ""),
-                                ltrim($class, "\\")).".php";
-
-        if (file_exists(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
-            require INCLUDES_DIR.DIR."lib".DIR.$filepath;
-            return;
-        }
-
-        foreach (Config::current()->enabled_modules as $module)
-            if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
-                require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
-                return;
-            }
-    }
-
-    /**
      * Function: session
      * Begins Chyrp's custom session storage whatnots.
      *
@@ -52,12 +28,49 @@
                                  array("Session", "gc"));
 
         $domain = preg_replace("~^www\.~", "",
-            oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
+                               oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
         session_name("ChyrpSession");
         register_shutdown_function("session_write_close");
         session_start();
+    }
+
+    /**
+     * Function: logged_in
+     * Returns whether or not the visitor is logged in.
+     */
+    function logged_in() {
+        return (class_exists("Visitor") and isset(Visitor::current()->id) and Visitor::current()->id != 0);
+    }
+
+    /**
+     * Function: same_origin
+     * Returns whether or not the request was referred from another resource on this site.
+     */
+    function same_origin() {
+        return (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
+    }
+
+    /**
+     * Function: redirect
+     * Redirects to the given URL and exits immediately.
+     *
+     * Parameters:
+     *     $url - The URL to redirect to. If it begins with @/@ it will be relative to the @Config.url@.
+     *     $use_chyrp_url - Use the @Config.chyrp_url@ instead of @Config.url@ for $urls beginning with @/@?
+     */
+    function redirect($url, $use_chyrp_url = false) {
+        # Handle URIs without domain.
+        if (strpos($url, "/") === 0)
+            $url = (ADMIN or $use_chyrp_url) ?
+                       Config::current()->chyrp_url.$url :
+                       Config::current()->url.$url ;
+        elseif (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
+            $url = url($url);
+
+        header("Location: ".html_entity_decode($url));
+        exit;
     }
 
     /**
@@ -107,76 +120,72 @@
     }
 
     /**
-     * Function: logged_in
-     * Returns whether or not the visitor is logged in.
+     * Function: url
+     * Mask for Route->url().
      */
-    function logged_in() {
-        return (class_exists("Visitor") and isset(Visitor::current()->id) and Visitor::current()->id != 0);
+    function url($url, $controller = null) {
+        return Route::current()->url($url, $controller);
     }
 
     /**
-     * Function: same_origin
-     * Returns whether or not the request was referred from another resource on this site.
+     * Function: self_url
+     * Returns the current URL.
      */
-    function same_origin() {
-        return (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
+    function self_url() {
+        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
+                     "https://" : "http://" ;
+
+        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
     }
 
     /**
-     * Function: emote
-     * Converts emoticons to equivalent Unicode emoji.
+     * Function: admin_url
+     * Builds an admin URL from the supplied components.
      *
      * Parameters:
-     *     $text - The body of the post/page to parse.
-     *
-     * See Also:
-     *     http://www.unicode.org/charts/PDF/U1F600.pdf
+     *     $action - The admin action.
+     *     $params - An indexed array of parameters.
      */
-    function emote($text) {
-        $emoji = array(
-            'o:-)' => '&#x1f607;',
-            '>:-)' => '&#x1f608;',
-            ':-)'  => '&#x1f600;',
-            '^_^'  => '&#x1f601;',
-            ':-D'  => '&#x1f603;',
-            ';-)'  => '&#x1f609;',
-            '<3'   => '&#x1f60d;',
-            'B-)'  => '&#x1f60e;',
-            ':->'  => '&#x1f60f;',
-            ':-||' => '&#x1f62c;',
-            ':-|'  => '&#x1f611;',
-            '-_-'  => '&#x1f612;',
-            ':-/'  => '&#x1f615;',
-            ':-s'  => '&#x1f616;',
-            ':-*'  => '&#x1f618;',
-            ':-P'  => '&#x1f61b;',
-            ':-((' => '&#x1f629;',
-            ':-('  => '&#x1f61f;',
-            ';_;'  => '&#x1f622;',
-            ':-o'  => '&#x1f62e;',
-            'O_O'  => '&#x1f632;',
-            ':-$'  => '&#x1f633;',
-            'x_x'  => '&#x1f635;',
-            ':-x'  => '&#x1f636;'
-        );
+    function admin_url($action = "", $params = array()) {
+        $config = Config::current();
+        $request = !empty($action) ? array("action=".$action) : array() ;
 
-        foreach($emoji as $key => $value) {
-            $text =  str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
+        foreach ($params as $key => $value)
+            $request[] = urlencode($key)."=".urlencode($value);
+
+        return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
+    }
+
+    /**
+     * Function: set_locale
+     * Try to set the locale with fallbacks for platform-specific quirks.
+     *
+     * Parameters:
+     *     $locale - The locale name (e.g. @en_US@, @uk_UA@, @fr_FR@)
+     *
+     * Notes:
+     *     Precedence is given to UTF-8 with a fallback to Windows 1252.
+     */
+    function set_locale($locale = "en_US") {
+        $posix = array($locale.".UTF-8",                  // E.g. "en_US.UTF-8"
+                       $locale.".UTF8",                   // E.g. "en_US.UTF8"
+                       $locale);                          // E.g. "en_US"
+        $win32 = array(str_replace("_", "-", $locale));   // E.g. "en-US"
+
+        if (class_exists("Locale")) {
+            $language = Locale::getDisplayLanguage($locale, "en_US");
+            $region = Locale::getDisplayRegion($locale, "en_US");
+            array_unshift($win32,
+                          $language."_".$region.".1252",  // E.g. "English_United States.1252"
+                          $language.".1252",              // E.g. "English.1252"
+                          $language);                     // E.g. "English"
+
+            # Set the ICU locale.
+            Locale::setDefault($locale);
         }
 
-        return $text;
-    }
-
-    /**
-     * Function: markdown
-     * Implements the Markdown parsing filter.
-     *
-     * Parameters:
-     *     $text - The body of the post/page to parse.
-     */
-    function markdown($text) {
-        $parsedown = new Parsedown();
-        return $parsedown->text($text);
+        # Set the PHP locale.
+        setlocale(LC_ALL, array_merge($posix, $win32));
     }
 
     /**
@@ -198,38 +207,6 @@
 
         $input = new gettext_CachedFileReader($mofile);
         $l10n[$domain] = new gettext_Reader($input);
-    }
-
-    /**
-     * Function: set_locale
-     * Try to set the locale with fallbacks for platform-specific quirks.
-     *
-     * Parameters:
-     *     $locale - The locale name (e.g. @en_US@, @uk_UA@, @fr_FR@)
-     *
-     * Notes:
-     *     Precedence is given to UTF-8 with a fallback to Windows 1252.
-     */
-    function set_locale($locale = "en_US") {
-        $posix = array($locale.".UTF-8",                  // E.g. "en_US.UTF-8"
-                       $locale.".UTF8",                   // E.g. "en_US.UTF8"
-                       $locale);                          // E.g. "en_US"
-        $win32 = array(str_replace("_", "-", $locale));   // E.g. "en-US"
-
-        if (class_exists("Locale")) {
-            $language = Locale::getDisplayLanguage($locale, "en_US");
-            $region = Locale::getDisplayRegion("en_US", "en_US");
-            array_unshift($win32,
-                          $language."_".$region.".1252",  // E.g. "English_United States.1252"
-                          $language.".1252",              // E.g. "English.1252"
-                          $language);                     // E.g. "English"
-
-            # Set the ICU locale.
-            Locale::setDefault($locale);
-        }
-
-        # Set the PHP locale.
-        setlocale(LC_ALL, array_merge($posix, $win32));
     }
 
     /**
@@ -285,6 +262,487 @@
         $args = (array) $args;
         array_unshift($args, __($string, $domain));
         return call_user_func_array("sprintf", $args);
+    }
+
+    /**
+     * Function: when
+     * Returns date formatting for a string that isn't a regular time() value.
+     *
+     * Parameters:
+     *     $formatting - The formatting for date().
+     *     $when - Time to base on. If it is not numeric it will be run through strtotime.
+     *     $strftime - Use @strftime@ instead of @date@?
+     */
+    function when($formatting, $when, $strftime = false) {
+        $time = (is_numeric($when)) ? $when : strtotime($when) ;
+
+        if ($strftime)
+            return strftime($formatting, $time);
+        else
+            return date($formatting, $time);
+    }
+
+    /**
+     * Function: datetime
+     * Returns a standard datetime string based on either the passed timestamp or their time offset, usually for MySQL inserts.
+     *
+     * Parameters:
+     *     $when - A timestamp (optional).
+     */
+    function datetime($when = null) {
+        fallback($when, time());
+
+        $time = (is_numeric($when)) ? $when : strtotime($when) ;
+
+        return date("Y-m-d H:i:s", $time);
+    }
+
+    /**
+     * Function: now
+     * Alias to strtotime, for prettiness like now("+1 day").
+     */
+    function now($when) {
+        return strtotime($when);
+    }
+
+    /**
+     * Function: time_in_timezone
+     * Returns the appropriate time() for representing a timezone.
+     */
+    function time_in_timezone($timezone) {
+        $orig = get_timezone();
+        set_timezone($timezone);
+        $time = date("F jS, Y, g:i A");
+        set_timezone($orig);
+        return strtotime($time);
+    }
+
+    /**
+     * Function: timezones
+     * Returns an array of timezones that have unique offsets.
+     */
+    function timezones() {
+        $zones = array();
+
+        foreach (timezone_identifiers_list(DateTimeZone::ALL) as $zone)
+            $zones[] = array("name" => $zone,
+                             "now" => time_in_timezone($zone));
+
+        function by_time($a, $b) {
+            return (int) ($a["now"] > $b["now"]);
+        }
+
+        usort($zones, "by_time");
+
+        return $zones;
+    }
+
+    /**
+     * Function: set_timezone
+     * Sets the timezone.
+     *
+     * Parameters:
+     *     $timezone - The timezone to set.
+     */
+    function set_timezone($timezone) {
+        if (function_exists("date_default_timezone_set"))
+            date_default_timezone_set($timezone);
+        else
+            ini_set("date.timezone", $timezone);
+    }
+
+    /**
+     * Function: get_timezone()
+     * Returns the current timezone.
+     */
+    function get_timezone() {
+        if (function_exists("date_default_timezone_set"))
+            return date_default_timezone_get();
+        else
+            return ini_get("date.timezone");
+    }
+
+    /**
+     * Function: fallback
+     * Sets a given variable if it is not set.
+     *
+     * The last of the arguments or the first non-empty value will be used.
+     *
+     * Parameters:
+     *     &$variable - The variable to return or set.
+     *
+     * Returns:
+     *     The value of whatever was chosen.
+     */
+    function fallback(&$variable) {
+        if (is_bool($variable))
+            return $variable;
+
+        $set = (!isset($variable) or (is_string($variable) and trim($variable) === "") or $variable === array());
+
+        $args = func_get_args();
+        array_shift($args);
+
+        if (count($args) > 1) {
+            foreach ($args as $arg) {
+                $fallback = $arg;
+
+                if (isset($arg) and (!is_string($arg) or (is_string($arg) and trim($arg) !== "")) and $arg !== array())
+                    break;
+            }
+        } else
+            $fallback = isset($args[0]) ? $args[0] : null ;
+
+        if ($set)
+            $variable = $fallback;
+
+        return $set ? $fallback : $variable ;
+    }
+
+    /**
+     * Function: oneof
+     * Returns the first argument that is set and non-empty.
+     *
+     * It will guess where to stop based on the types of the arguments, e.g. "" has priority over array() but not 1.
+     */
+    function oneof() {
+        $last = null;
+        $args = func_get_args();
+
+        foreach ($args as $index => $arg) {
+            if (!isset($arg) or
+                (is_string($arg) and trim($arg) === "") or $arg === array() or
+                (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"))
+                $last = $arg;
+            else
+                return $arg;
+
+            if ($index + 1 == count($args))
+                break;
+
+            $next = $args[$index + 1];
+
+            # This is a big check but it should cover most "incomparable" cases.
+            # Using simple type comparison wouldn't work too well, for example:
+            # in oneof("", 1) "" would take priority over 1 because of type difference.
+            $incomparable = ((is_array($arg) and !is_array($next)) or
+                             (!is_array($arg) and is_array($next)) or
+                             (is_object($arg) and !is_object($next)) or
+                             (!is_object($arg) and is_object($next)) or
+                             (is_resource($arg) and !is_resource($next)) or
+                             (!is_resource($arg) and is_resource($next)));
+
+            if (isset($arg) and isset($next) and $incomparable)
+                return $arg;
+        }
+
+        return $last;
+    }
+
+    /**
+     * Function: token
+     * Salt and hash a unique token using the supplied data.
+     *
+     * Parameters:
+     *     $items - An array of items to hash.
+     *
+     * Returns:
+     *     A unique token salted with the secure hashkey.
+     */
+    function token($items) {
+        return sha1(implode((array) $items).Config::current()->secure_hashkey);
+    }
+
+    /**
+     * Function: random
+     * Returns a random string.
+     *
+     * Parameters:
+     *     $length - How long the string should be.
+     *     $specialchars - Use special characters in the resulting string?
+     */
+    function random($length, $specialchars = false) {
+        $pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
+
+        if ($specialchars)
+            $pattern.= "!@#$%^&*()?~";
+
+        $len = strlen($pattern) - 1;
+        $key = "";
+
+        for($i = 0; $i < $length; $i++)
+            $key.= $pattern[rand(0, $len)];
+
+        return $key;
+    }
+
+    /**
+     * Function: shorthand_bytes
+     * Decode shorthand bytes notation from php.ini.
+     *
+     * Parameters:
+     *     $value - The value returned by ini_get().
+     *
+     * Returns:
+     *     A byte value or the input if decoding failed.
+     */
+    function shorthand_bytes($value) {
+        switch (substr($value, -1)) {
+            case 'K': case 'k':
+                return (int) $value * 1024;
+            case 'M': case 'm':
+                return (int) $value * 1048576;
+            case 'G': case 'g':
+                return (int) $value * 1073741824;
+            default:
+                return $value;
+        }
+    }
+
+    /**
+     * Function: timer_start
+     * Starts the internal timer.
+     */
+    function timer_start() {
+        global $time_start;
+        $mtime = explode(" ", microtime());
+        $mtime = $mtime[1] + $mtime[0];
+        $time_start = $mtime;
+    }
+
+    /**
+     * Function: timer_stop
+     * Stops the timer and returns the total time.
+     *
+     * Parameters:
+     *     $precision - Number of decimals places to round to.
+     *
+     * Returns:
+     *     A formatted number with the given $precision.
+     */
+    function timer_stop($precision = 3) {
+        global $time_start;
+        $mtime = microtime();
+        $mtime = explode(" ", $mtime);
+        $mtime = $mtime[1] + $mtime[0];
+        $time_end = $mtime;
+        $time_total = $time_end - $time_start;
+        return number_format($time_total, $precision);
+    }
+
+    /**
+     * Function: match
+     * Try to match a string against an array of regular expressions.
+     *
+     * Parameters:
+     *     $try - An array of regular expressions, or a single regular expression.
+     *     $haystack - The string to test.
+     *
+     * Returns:
+     *     Whether or not the match succeeded.
+     */
+    function match($try, $haystack) {
+        if (is_string($try))
+            return (bool) preg_match($try, $haystack);
+
+        foreach ($try as $needle)
+            if (preg_match($needle, $haystack))
+                return true;
+
+        return false;
+    }
+
+    /**
+     * Function: xml2arr
+     * Recursively converts a SimpleXML object (and children) to an array.
+     *
+     * Parameters:
+     *     $parse - The SimpleXML object to convert into an array.
+     */
+    function xml2arr($parse) {
+        if (empty($parse))
+            return "";
+
+        $parse = (array) $parse;
+
+        foreach ($parse as &$val)
+            if (get_class($val) == "SimpleXMLElement")
+                $val = xml2arr($val);
+
+        return $parse;
+    }
+
+    /**
+     * Function: arr2xml
+     * Recursively adds an array (or object I guess) to a SimpleXML object.
+     *
+     * Parameters:
+     *     &$object - The SimpleXML object to modify.
+     *     $data - The data to add to the SimpleXML object.
+     */
+    function arr2xml(&$object, $data) {
+        foreach ($data as $key => $val) {
+            if (is_int($key) and (empty($val) or (is_string($val) and trim($val) == ""))) {
+                unset($data[$key]);
+                continue;
+            }
+
+            if (is_array($val)) {
+                if (in_array(0, array_keys($val))) { # Numeric-indexed things need to be added as duplicates.
+                    foreach ($val as $dup) {
+                        $xml = $object->addChild($key);
+                        arr2xml($xml, $dup);
+                    }
+                } else {
+                    $xml = $object->addChild($key);
+                    arr2xml($xml, $val);
+                }
+            } else
+                $object->addChild($key, fix($val, false, false));
+        }
+    }
+
+    /**
+     * Function: list_notate
+     * Notates an array as a list of things.
+     *
+     * Parameters:
+     *     $array - An array of things to notate.
+     *     $quotes - Wrap quotes around strings?
+     *
+     * Returns:
+     *     A string like "foo, bar, and baz".
+     */
+    function list_notate($array, $quotes = false) {
+        $count = 0;
+        $items = array();
+        foreach ($array as $item) {
+            $string = (is_string($item) and $quotes) ? __("&#8220;").$item.__("&#8221;") : $item ;
+            if (count($array) == ++$count and $count !== 1)
+                $items[] = __("and ").$string;
+            else
+                $items[] = $string;
+        }
+
+        return (count($array) == 2) ? implode(" ", $items) : implode(", ", $items) ;
+    }
+
+    /**
+     * Function: comma_sep
+     * Convert a comma-seperated string into an array of the listed values.
+     */
+    function comma_sep($string) {
+        $commas = explode(",", $string);
+        $trimmed = array_map("trim", $commas);
+        $cleaned = array_diff(array_unique($trimmed), array(""));
+        return $cleaned;
+    }
+
+    /**
+     * Function: autoload
+     * Autoload PSR-0 classes on demand by scanning lib directories.
+     *
+     * Parameters:
+     *     $class - The name of the class to load.
+     */
+    function autoload($class) {
+        $filepath = str_replace(array("_", "\\", "\0"),
+                                array(DIR, DIR, ""),
+                                ltrim($class, "\\")).".php";
+
+        if (file_exists(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
+            require INCLUDES_DIR.DIR."lib".DIR.$filepath;
+            return;
+        }
+
+        foreach (Config::current()->enabled_modules as $module)
+            if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
+                require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
+                return;
+            }
+    }
+
+    /**
+     * Function: keywords
+     * Parse keyword searches for values in specific database columns.
+     *
+     * Parameters:
+     *     $query - The query to parse.
+     *     $plain - WHERE syntax to search for non-keyword queries.
+     *     $table - Check this table to ensure the keywords are valid.
+     *
+     * Returns:
+     *     An array containing the "WHERE" queries and the corresponding parameters.
+     */
+    function keywords($query, $plain, $table = null) {
+        $trimmed = trim($query);
+
+        if (empty($trimmed))
+            return array(array(), array());
+
+        $strings  = array(); # Non-keyword values found in the query.
+        $keywords = array(); # Keywords (attr:val;) found in the query.
+        $where    = array(); # Parameters validated and added to WHERE.
+        $filters  = array(); # Table column filters to be validated.
+        $params   = array(); # Parameters for the non-keyword filter.
+        $columns  = !empty($table) ? SQL::current()->select($table)->fetch() : array() ;
+
+        foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment)
+            if (!substr_count($fragment, ":"))
+                $strings[] = trim($fragment);
+            else
+                $keywords[] = trim($fragment);
+
+        $dates = array("year"   => __("year"),
+                       "month"  => __("month"),
+                       "day"    => __("day"),
+                       "hour"   => __("hour"),
+                       "minute" => __("minute"),
+                       "second" => __("second"));
+
+        # Contextual conversions of some keywords.
+        foreach ($keywords as $keyword) {
+            list($attr, $val) = explode(":", $keyword);
+
+            if ($attr == "password") {
+                # Prevent searches for hashed passwords.
+                $strings[] = $attr;
+            } elseif (isset($columns["user_id"]) and $attr == "author") {
+                # Filter by "author" (login).
+                $user = new User(array("login" => $val));
+                $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
+            } elseif (isset($columns["group_id"]) and $attr == "group") {
+                # Filter by group name.
+                $group = new Group(array("name" => $val));
+                $where["group_id"] = ($group->no_results) ? 0 : $group->id ;
+            } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
+                # Filter by date/time of creation.
+                $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
+            } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
+                # Filter by date/time of joining.
+                $where[strtoupper(array_search($attr, $dates))."(joined_at)"] = $val;
+            } else
+                $filters[$attr] = $val;
+        }
+
+        # Check the validity of keywords if a table name was supplied.
+        foreach ($filters as $attr => $val) {
+            if (isset($columns[$attr]))
+                $where[$attr] = $val;
+            else
+                $strings[] = $attr." ".$val; # No such column: add to non-keyword values.
+        }
+
+        if (!empty($strings)) {
+            $where[] = $plain;
+            $params[":query"] = "%".join(" ", $strings)."%";
+        }
+
+        $search = array($where, $params);
+
+        Trigger::current()->filter($search, "keyword_search", $query, $plain);
+
+        return $search;
     }
 
     /**
@@ -377,36 +835,152 @@
     }
 
     /**
-     * Function: when
-     * Returns date formatting for a string that isn't a regular time() value.
+     * Function: normalize
+     * Attempts to normalize all newlines and whitespace into single spaces.
      *
-     * Parameters:
-     *     $formatting - The formatting for date().
-     *     $when - Time to base on. If it is not numeric it will be run through strtotime.
-     *     $strftime - Use @strftime@ instead of @date@?
+     * Returns:
+     *     The normalized string.
      */
-    function when($formatting, $when, $strftime = false) {
-        $time = (is_numeric($when)) ? $when : strtotime($when) ;
-
-        if ($strftime)
-            return strftime($formatting, $time);
-        else
-            return date($formatting, $time);
+    function normalize($string) {
+        $trimmed = trim($string);
+        $newlines = str_replace("\n\n", " ", $trimmed);
+        $newlines = str_replace("\n", "", $newlines);
+        $normalized = preg_replace("/[\s\n\r\t]+/", " ", $newlines);
+        return $normalized;
     }
 
     /**
-     * Function: datetime
-     * Returns a standard datetime string based on either the passed timestamp or their time offset, usually for MySQL inserts.
+     * Function: camelize
+     * Converts a given string to camel-case.
      *
      * Parameters:
-     *     $when - A timestamp (optional).
+     *     $string - The string to camelize.
+     *     $keep_spaces - Whether or not to convert underscores to spaces or remove them.
+     *
+     * Returns:
+     *     A CamelCased string.
+     *
+     * See Also:
+     *     <decamelize>
      */
-    function datetime($when = null) {
-        fallback($when, time());
+    function camelize($string, $keep_spaces = false) {
+        $lower = strtolower($string);
+        $deunderscore = str_replace("_", " ", $lower);
+        $dehyphen = str_replace("-", " ", $deunderscore);
+        $final = ucwords($dehyphen);
 
-        $time = (is_numeric($when)) ? $when : strtotime($when) ;
+        if (!$keep_spaces)
+            $final = str_replace(" ", "", $final);
 
-        return date("Y-m-d H:i:s", $time);
+        return $final;
+    }
+
+    /**
+     * Function: decamelize
+     * Decamelizes a string.
+     *
+     * Parameters:
+     *     $string - The string to decamelize.
+     *
+     * Returns:
+     *     A de_camel_cased string.
+     *
+     * See Also:
+     *     <camelize>
+     */
+    function decamelize($string) {
+        return strtolower(preg_replace("/([a-z])([A-Z])/", "\\1_\\2", $string));
+    }
+
+    /**
+     * Function: truncate
+     * Truncates a string to the given length, optionally breaking at the nearest word.
+     *
+     * Parameters:
+     *     $text - The string to be truncated.
+     *     $length - The truncated length.
+     *     $ellipsis - A string to place at the truncation point.
+     *     $exact - Split words to return the exact length requested?
+     *     $encoding - The character encoding of the string.
+     */
+    function truncate($text, $length = 100, $ellipsis = "...", $exact = false, $encoding = "UTF-8") {
+        if (function_exists("mb_strlen") and function_exists("mb_substr")) {
+            if (mb_strlen($text, $encoding) <= $length)
+                return $text;
+
+            $breakpoint = $length - mb_strlen($ellipsis, $encoding);
+            $truncation = mb_substr($text, 0, $breakpoint, $encoding);
+            $remainder  = mb_substr($text, $breakpoint, null, $encoding);
+        } else {
+            if (strlen($text) <= $length)
+                return $text;
+
+            $breakpoint = $length - strlen($ellipsis);
+            $truncation = substr($text, 0, $breakpoint);
+            $remainder  = substr($text, $breakpoint);
+        }
+
+        if (!$exact and !preg_match("/^\s/", $remainder))
+            $truncation = preg_replace("/(.+)\s.*/s", "$1", $truncation);
+
+        return $truncation.$ellipsis;
+    }
+
+    /**
+     * Function: markdown
+     * Implements the Markdown parsing filter.
+     *
+     * Parameters:
+     *     $text - The body of the post/page to parse.
+     */
+    function markdown($text) {
+        $parsedown = new Parsedown();
+        return $parsedown->text($text);
+    }
+
+    /**
+     * Function: emote
+     * Converts emoticons to equivalent Unicode emoji.
+     *
+     * Parameters:
+     *     $text - The body of the post/page to parse.
+     *
+     * See Also:
+     *     http://www.unicode.org/charts/PDF/U1F600.pdf
+     */
+    function emote($text) {
+        $emoji = array(
+            'o:-)' => '&#x1f607;',
+            '>:-)' => '&#x1f608;',
+            ':-)'  => '&#x1f600;',
+            '^_^'  => '&#x1f601;',
+            ':-D'  => '&#x1f603;',
+            ';-)'  => '&#x1f609;',
+            '<3'   => '&#x1f60d;',
+            'B-)'  => '&#x1f60e;',
+            ':->'  => '&#x1f60f;',
+            ':-||' => '&#x1f62c;',
+            ':-|'  => '&#x1f611;',
+            '-_-'  => '&#x1f612;',
+            ':-/'  => '&#x1f615;',
+            ':-s'  => '&#x1f616;',
+            ':-*'  => '&#x1f618;',
+            ':-P'  => '&#x1f61b;',
+            ':-((' => '&#x1f629;',
+            ':-('  => '&#x1f61f;',
+            ';_;'  => '&#x1f622;',
+            ':-o'  => '&#x1f62e;',
+            'O_O'  => '&#x1f632;',
+            ':-$'  => '&#x1f633;',
+            'x_x'  => '&#x1f635;',
+            ':-x'  => '&#x1f636;'
+        );
+
+        foreach($emoji as $key => $value) {
+            $text =  str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
+        }
+
+        return $text;
     }
 
     /**
@@ -432,6 +1006,31 @@
      */
     function unfix($string) {
         return htmlspecialchars_decode($string, ENT_QUOTES);
+    }
+
+    /**
+     * Function: sanitize
+     * Returns a sanitized string, typically for URLs.
+     *
+     * Parameters:
+     *     $string - The string to sanitize.
+     *     $force_lowercase - Force the string to lowercase?
+     *     $strict - If set to *true*, will remove all non-alphanumeric characters.
+     *     $trunc - Number of characters to truncate to (default 100, 0 to disable).
+     */
+    function sanitize($string, $force_lowercase = true, $strict = false, $trunc = 100) {
+        $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+                       "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
+                       "—", "–", ",", "<", ".", ">", "/", "?");
+        $clean = trim(str_replace($strip, "", strip_tags($string)));
+        $clean = preg_replace('/\s+/', "-", $clean);
+        $clean = ($strict ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean);
+        $clean = ($trunc ? substr($clean, 0, $trunc) : $clean);
+        return ($force_lowercase) ?
+            (function_exists('mb_strtolower')) ?
+                mb_strtolower($clean, 'UTF-8') :
+                strtolower($clean) :
+            $clean;
     }
 
     /**
@@ -503,167 +1102,6 @@
                 sanitize_input($value);
             else
                 $value = get_magic_quotes_gpc() ? stripslashes($value) : $value ;
-    }
-
-    /**
-     * Function: sanitize
-     * Returns a sanitized string, typically for URLs.
-     *
-     * Parameters:
-     *     $string - The string to sanitize.
-     *     $force_lowercase - Force the string to lowercase?
-     *     $strict - If set to *true*, will remove all non-alphanumeric characters.
-     *     $trunc - Number of characters to truncate to (default 100, 0 to disable).
-     */
-    function sanitize($string, $force_lowercase = true, $strict = false, $trunc = 100) {
-        $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
-                       "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
-                       "—", "–", ",", "<", ".", ">", "/", "?");
-        $clean = trim(str_replace($strip, "", strip_tags($string)));
-        $clean = preg_replace('/\s+/', "-", $clean);
-        $clean = ($strict ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean);
-        $clean = ($trunc ? substr($clean, 0, $trunc) : $clean);
-        return ($force_lowercase) ?
-            (function_exists('mb_strtolower')) ?
-                mb_strtolower($clean, 'UTF-8') :
-                strtolower($clean) :
-            $clean;
-    }
-
-    /**
-     * Function: normalize
-     * Attempts to normalize all newlines and whitespace into single spaces.
-     *
-     * Returns:
-     *     The normalized string.
-     */
-    function normalize($string) {
-        $trimmed = trim($string);
-        $newlines = str_replace("\n\n", " ", $trimmed);
-        $newlines = str_replace("\n", "", $newlines);
-        $normalized = preg_replace("/[\s\n\r\t]+/", " ", $newlines);
-        return $normalized;
-    }
-
-    /**
-     * Function: truncate
-     * Truncates a string to the given length, optionally breaking at the nearest word.
-     *
-     * Parameters:
-     *     $text - The string to be truncated.
-     *     $length - The truncated length.
-     *     $ellipsis - A string to place at the truncation point.
-     *     $exact - Split words to return the exact length requested?
-     *     $encoding - The character encoding of the string.
-     */
-    function truncate($text, $length = 100, $ellipsis = "...", $exact = false, $encoding = "UTF-8") {
-        if (function_exists("mb_strlen") and function_exists("mb_substr")) {
-            if (mb_strlen($text, $encoding) <= $length)
-                return $text;
-
-            $breakpoint = $length - mb_strlen($ellipsis, $encoding);
-            $truncation = mb_substr($text, 0, $breakpoint, $encoding);
-            $remainder  = mb_substr($text, $breakpoint, null, $encoding);
-        } else {
-            if (strlen($text) <= $length)
-                return $text;
-
-            $breakpoint = $length - strlen($ellipsis);
-            $truncation = substr($text, 0, $breakpoint);
-            $remainder  = substr($text, $breakpoint);
-        }
-
-        if (!$exact and !preg_match("/^\s/", $remainder))
-            $truncation = preg_replace("/(.+)\s.*/s", "$1", $truncation);
-
-        return $truncation.$ellipsis;
-    }
-
-    /**
-     * Function: send_pingbacks
-     * Sends pingback requests to the URLs in a string.
-     *
-     * Parameters:
-     *     $string - The string to crawl for pingback URLs.
-     *     $post - The post we're sending from.
-     */
-    function send_pingbacks($string, $post) {
-        foreach (grab_urls($string) as $url)
-            if ($ping_url = pingback_url($url)) {
-                $client = new IXR_Client($ping_url);
-                $client->timeout = 3;
-                $client->useragent = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
-                $client->query("pingback.ping", $post->url(), $url);
-            }
-    }
-
-    /**
-     * Function: pingback_url
-     * Checks if a URL is pingback-capable.
-     *
-     * Parameters:
-     *     $url - The URL to check.
-     *
-     * Returns:
-     *     The pingback target, if the URL is pingback-capable.
-     */
-    function pingback_url($url) {
-        extract(parse_url($url), EXTR_SKIP);
-
-        $config = Config::current();
-        fallback($path, '/');
-        fallback($port, 80);
-
-        if (isset($query))
-            $path.= '?'.$query;
-
-        if (!isset($host))
-            return false;
-
-        $connect = @fsockopen($host, $port, $errno, $errstr, 2);
-
-        if (!$connect)
-            return false;
-
-        $remote_headers = "";
-        $remote_bytes = 0;
-
-        # Send the GET headers.
-        fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
-        fwrite($connect, "Host: $host\r\n");
-        fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
-
-        # Check for X-Pingback header.
-        while (!feof($connect)) {
-            $line = fgets($connect, 512);
-
-            if (trim($line) == "")
-                break;
-
-            $remote_headers.= trim($line)."\n";
-
-            if (preg_match("/X-Pingback: (.+)/i", $line, $matches))
-                return trim($matches[1]);
-        }
-
-        # X-Pingback header not found, <link> search if the content can be parsed.
-        if (!preg_match("~Content-Type:\s+(text/html|text/sgml|text/xml|text/plain)~im", $remote_headers))
-            return false;
-
-        while (!feof($connect)) {
-            $line = fgets($connect, 1024);
-
-            if (preg_match("/<link rel=[\"|']pingback[\"|'] href=[\"|']([^\"]+)[\"|'] ?\/?>/i", $line, $link))
-                return $link[1];
-
-            $remote_bytes += strlen($line);
-
-            if ($remote_bytes > 2048)
-                return false;
-        }
-
-        fclose($connect);
-        return false;
     }
 
     /**
@@ -773,104 +1211,160 @@
     }
 
     /**
-     * Function: redirect
-     * Redirects to the given URL and exits immediately.
+     * Function: send_pingbacks
+     * Sends pingback requests to the URLs in a string.
      *
      * Parameters:
-     *     $url - The URL to redirect to. If it begins with @/@ it will be relative to the @Config.url@.
-     *     $use_chyrp_url - Use the @Config.chyrp_url@ instead of @Config.url@ for $urls beginning with @/@?
+     *     $string - The string to crawl for pingback URLs.
+     *     $post - The post we're sending from.
      */
-    function redirect($url, $use_chyrp_url = false) {
-        # Handle URIs without domain.
-        if (strpos($url, "/") === 0)
-            $url = (ADMIN or $use_chyrp_url) ?
-                       Config::current()->chyrp_url.$url :
-                       Config::current()->url.$url ;
-        elseif (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
-            $url = url($url);
-
-        header("Location: ".html_entity_decode($url));
-        exit;
+    function send_pingbacks($string, $post) {
+        foreach (grab_urls($string) as $url)
+            if ($ping_url = pingback_url($url)) {
+                $client = new IXR_Client($ping_url);
+                $client->timeout = 3;
+                $client->useragent = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
+                $client->query("pingback.ping", $post->url(), $url);
+            }
     }
 
     /**
-     * Function: url
-     * Mask for Route->url().
-     */
-    function url($url, $controller = null) {
-        return Route::current()->url($url, $controller);
-    }
-
-    /**
-     * Function: admin_url
-     * Builds an admin URL from the supplied components.
+     * Function: pingback_url
+     * Checks if a URL is pingback-capable.
      *
      * Parameters:
-     *     $action - The admin action.
-     *     $params - An indexed array of parameters.
+     *     $url - The URL to check.
+     *
+     * Returns:
+     *     The pingback target, if the URL is pingback-capable.
      */
-    function admin_url($action = "", $params = array()) {
+    function pingback_url($url) {
+        extract(parse_url($url), EXTR_SKIP);
+
         $config = Config::current();
-        $request = !empty($action) ? array("action=".$action) : array() ;
+        fallback($path, '/');
+        fallback($port, 80);
 
-        foreach ($params as $key => $value)
-            $request[] = urlencode($key)."=".urlencode($value);
+        if (isset($query))
+            $path.= '?'.$query;
 
-        return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
+        if (!isset($host))
+            return false;
+
+        $connect = @fsockopen($host, $port, $errno, $errstr, 2);
+
+        if (!$connect)
+            return false;
+
+        $remote_headers = "";
+        $remote_bytes = 0;
+
+        # Send the GET headers.
+        fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
+        fwrite($connect, "Host: $host\r\n");
+        fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
+
+        # Check for X-Pingback header.
+        while (!feof($connect)) {
+            $line = fgets($connect, 512);
+
+            if (trim($line) == "")
+                break;
+
+            $remote_headers.= trim($line)."\n";
+
+            if (preg_match("/X-Pingback: (.+)/i", $line, $matches))
+                return trim($matches[1]);
+        }
+
+        # X-Pingback header not found, <link> search if the content can be parsed.
+        if (!preg_match("~Content-Type:\s+(text/html|text/sgml|text/xml|text/plain)~im", $remote_headers))
+            return false;
+
+        while (!feof($connect)) {
+            $line = fgets($connect, 1024);
+
+            if (preg_match("/<link rel=[\"|']pingback[\"|'] href=[\"|']([^\"]+)[\"|'] ?\/?>/i", $line, $link))
+                return $link[1];
+
+            $remote_bytes += strlen($line);
+
+            if ($remote_bytes > 2048)
+                return false;
+        }
+
+        fclose($connect);
+        return false;
     }
 
     /**
-     * Function: self_url
-     * Returns the current URL.
+     * Function: init_extensions
+     * Initialize all Modules and Feathers.
      */
-    function self_url() {
-        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
-                     "https://" : "http://" ;
+    function init_extensions() {
+        $config = Config::current();
 
-        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
-    }
+        # Instantiate all Modules.
+        foreach ($config->enabled_modules as $module) {
+            $class_name = camelize($module);
 
-    /**
-     * Function: camelize
-     * Converts a given string to camel-case.
-     *
-     * Parameters:
-     *     $string - The string to camelize.
-     *     $keep_spaces - Whether or not to convert underscores to spaces or remove them.
-     *
-     * Returns:
-     *     A CamelCased string.
-     *
-     * See Also:
-     *     <decamelize>
-     */
-    function camelize($string, $keep_spaces = false) {
-        $lower = strtolower($string);
-        $deunderscore = str_replace("_", " ", $lower);
-        $dehyphen = str_replace("-", " ", $deunderscore);
-        $final = ucwords($dehyphen);
+            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or
+                !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
+                cancel_module($module, _f("%s module is missing.", $class_name));
+                continue;
+            }
 
-        if (!$keep_spaces)
-            $final = str_replace(" ", "", $final);
+            load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
 
-        return $final;
-    }
+            require MODULES_DIR.DIR.$module.DIR.$module.".php";
 
-    /**
-     * Function: decamelize
-     * Decamelizes a string.
-     *
-     * Parameters:
-     *     $string - The string to decamelize.
-     *
-     * Returns:
-     *     A de_camel_cased string.
-     *
-     * See Also:
-     *     <camelize>
-     */
-    function decamelize($string) {
-        return strtolower(preg_replace("/([a-z])([A-Z])/", "\\1_\\2", $string));
+            if (!is_subclass_of($class_name, "Modules")) {
+                cancel_module($module, _f("%s module is damaged.", $class_name));
+                continue;
+            }
+
+            Modules::$instances[$module] = new $class_name;
+            Modules::$instances[$module]->safename = $module;
+
+            foreach (include MODULES_DIR.DIR.$module.DIR."info.php" as $key => $val)
+                Modules::$instances[$module]->$key = $val;
+        }
+
+        # Instantiate all Feathers.
+        foreach ($config->enabled_feathers as $feather) {
+            $class_name = camelize($feather);
+
+            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or
+                !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
+                cancel_feather($feather, _f("%s feather is missing.", $class_name));
+                continue;
+            }
+
+            load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
+
+            require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
+
+            if (!is_subclass_of($class_name, "Feathers")) {
+                cancel_feather($feather, _f("%s feather is damaged.", $class_name));
+                continue;
+            }
+
+            Feathers::$instances[$feather] = new $class_name;
+            Feathers::$instances[$feather]->safename = $feather;
+
+            foreach (include FEATHERS_DIR.DIR.$feather.DIR."info.php" as $key => $val)
+                Feathers::$instances[$feather]->$key = $val;
+        }
+
+        # Initialize all Modules.
+        foreach (Modules::$instances as $module)
+            if (method_exists($module, "__init"))
+                $module->__init();
+
+        # Initialize all Feathers.
+        foreach (Feathers::$instances as $feather)
+            if (method_exists($feather, "__init"))
+                $feather->__init();
     }
 
     /**
@@ -949,214 +1443,6 @@
 
         if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
             Flash::warning($message);
-    }
-
-    /**
-     * Function: init_extensions
-     * Initialize all Modules and Feathers.
-     */
-    function init_extensions() {
-        $config = Config::current();
-
-        # Instantiate all Modules.
-        foreach ($config->enabled_modules as $module) {
-            $class_name = camelize($module);
-
-            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or
-                !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
-                cancel_module($module, _f("%s module is missing.", $class_name));
-                continue;
-            }
-
-            load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
-
-            require MODULES_DIR.DIR.$module.DIR.$module.".php";
-
-            if (!is_subclass_of($class_name, "Modules")) {
-                cancel_module($module, _f("%s module is damaged.", $class_name));
-                continue;
-            }
-
-            Modules::$instances[$module] = new $class_name;
-            Modules::$instances[$module]->safename = $module;
-
-            foreach (include MODULES_DIR.DIR.$module.DIR."info.php" as $key => $val)
-                Modules::$instances[$module]->$key = $val;
-        }
-
-        # Instantiate all Feathers.
-        foreach ($config->enabled_feathers as $feather) {
-            $class_name = camelize($feather);
-
-            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or
-                !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
-                cancel_feather($feather, _f("%s feather is missing.", $class_name));
-                continue;
-            }
-
-            load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
-
-            require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
-
-            if (!is_subclass_of($class_name, "Feathers")) {
-                cancel_feather($feather, _f("%s feather is damaged.", $class_name));
-                continue;
-            }
-
-            Feathers::$instances[$feather] = new $class_name;
-            Feathers::$instances[$feather]->safename = $feather;
-
-            foreach (include FEATHERS_DIR.DIR.$feather.DIR."info.php" as $key => $val)
-                Feathers::$instances[$feather]->$key = $val;
-        }
-
-        # Initialize all Modules.
-        foreach (Modules::$instances as $module)
-            if (method_exists($module, "__init"))
-                $module->__init();
-
-        # Initialize all Feathers.
-        foreach (Feathers::$instances as $feather)
-            if (method_exists($feather, "__init"))
-                $feather->__init();
-    }
-
-    /**
-     * Function: fallback
-     * Sets a given variable if it is not set.
-     *
-     * The last of the arguments or the first non-empty value will be used.
-     *
-     * Parameters:
-     *     &$variable - The variable to return or set.
-     *
-     * Returns:
-     *     The value of whatever was chosen.
-     */
-    function fallback(&$variable) {
-        if (is_bool($variable))
-            return $variable;
-
-        $set = (!isset($variable) or (is_string($variable) and trim($variable) === "") or $variable === array());
-
-        $args = func_get_args();
-        array_shift($args);
-
-        if (count($args) > 1) {
-            foreach ($args as $arg) {
-                $fallback = $arg;
-
-                if (isset($arg) and (!is_string($arg) or (is_string($arg) and trim($arg) !== "")) and $arg !== array())
-                    break;
-            }
-        } else
-            $fallback = isset($args[0]) ? $args[0] : null ;
-
-        if ($set)
-            $variable = $fallback;
-
-        return $set ? $fallback : $variable ;
-    }
-
-    /**
-     * Function: oneof
-     * Returns the first argument that is set and non-empty.
-     *
-     * It will guess where to stop based on the types of the arguments, e.g. "" has priority over array() but not 1.
-     */
-    function oneof() {
-        $last = null;
-        $args = func_get_args();
-
-        foreach ($args as $index => $arg) {
-            if (!isset($arg) or
-                (is_string($arg) and trim($arg) === "") or $arg === array() or
-                (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"))
-                $last = $arg;
-            else
-                return $arg;
-
-            if ($index + 1 == count($args))
-                break;
-
-            $next = $args[$index + 1];
-
-            # This is a big check but it should cover most "incomparable" cases.
-            # Using simple type comparison wouldn't work too well, for example:
-            # in oneof("", 1) "" would take priority over 1 because of type difference.
-            $incomparable = ((is_array($arg) and !is_array($next)) or
-                             (!is_array($arg) and is_array($next)) or
-                             (is_object($arg) and !is_object($next)) or
-                             (!is_object($arg) and is_object($next)) or
-                             (is_resource($arg) and !is_resource($next)) or
-                             (!is_resource($arg) and is_resource($next)));
-
-            if (isset($arg) and isset($next) and $incomparable)
-                return $arg;
-        }
-
-        return $last;
-    }
-
-    /**
-     * Function: random
-     * Returns a random string.
-     *
-     * Parameters:
-     *     $length - How long the string should be.
-     *     $specialchars - Use special characters in the resulting string?
-     */
-    function random($length, $specialchars = false) {
-        $pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
-
-        if ($specialchars)
-            $pattern.= "!@#$%^&*()?~";
-
-        $len = strlen($pattern) - 1;
-        $key = "";
-
-        for($i = 0; $i < $length; $i++)
-            $key.= $pattern[rand(0, $len)];
-
-        return $key;
-    }
-
-    /**
-     * Function: unique_filename
-     * Makes a given filename unique for the uploads directory.
-     *
-     * Parameters:
-     *     $name - The name to check.
-     *     $path - Path to check in.
-     *     $num - Number suffix from which to start increasing if the filename exists.
-     *
-     * Returns:
-     *     A unique version of the supplied filename.
-     */
-    function unique_filename($name, $num = 2) {
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$name))
-            return $name;
-
-        $name = explode(".", $name);
-
-        # Handle common double extensions.
-        foreach (array("tar.gz", "tar.bz", "tar.bz2") as $extension) {
-            list($first, $second) = explode(".", $extension);
-            $file_first =& $name[count($name) - 2];
-
-            if ($file_first == $first and end($name) == $second) {
-                $file_first = $first.".".$second;
-                array_pop($name);
-            }
-        }
-
-        $ext = ".".array_pop($name);
-        $try = implode(".", $name)."-".$num.$ext;
-
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$try))
-            return $try;
-
-        return unique_filename(implode(".", $name).$ext, $num + 1);
     }
 
     /**
@@ -1263,43 +1549,50 @@
 
     /**
      * Function: upload_tester
-     * Returns true if files were successfully uploaded.
-     * Returns false if no file was selected for upload.
-     * Triggers an error page for all other fail states.
+     * Test uploaded file information to determine if the upload was successful.
      *
      * Parameters:
-     *     $file - The file array created by PHP.
+     *     $file - The POST method upload array e.g. $_FILES['userfile'].
+     *
+     * Returns:
+     *     True for a successful upload or false if no file was uploaded.
+     *
+     * Notes:
+     *     $_POST and $_FILES are empty if post_max_size directive is exceeded.
      */
     function upload_tester($file) {
-        if (empty($file))
-            return false; # Upload size exceeded post_max_size directive in ini.php.
+        $success = false;
+        $results = array();
+        $maximum = Config::current()->uploads_limit;
 
-        # Recurse to test multiple uploads file by file.
+        # Recurse to test multiple uploads file by file using a one-dimensional array.
         if (is_array($file['name'])) {
             for ($i=0; $i < count($file['name']); $i++)
-                if (!upload_tester(array('name' => $file['name'][$i],
-                                         'type' => $file['type'][$i],
-                                         'tmp_name' => $file['tmp_name'][$i],
-                                         'error' => $file['error'][$i],
-                                         'size' => $file['size'][$i])))
-                    return false;
+                $results[] = upload_tester(array('name' => $file['name'][$i],
+                                                 'type' => $file['type'][$i],
+                                                 'tmp_name' => $file['tmp_name'][$i],
+                                                 'error' => $file['error'][$i],
+                                                 'size' => $file['size'][$i]));
 
-            return true;
+            return (!in_array(false, $results));
         }
 
         switch ($file['error']) {
+            case UPLOAD_ERR_OK:
+                $success = true;
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                $success = false;
+                break;
             case UPLOAD_ERR_INI_SIZE:
                 error(__("Error"),
-                      __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."),
-                      null, 413);
+                      __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."), null, 413);
             case UPLOAD_ERR_FORM_SIZE:
                 error(__("Error"),
-                      __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."),
-                      null, 413);
+                      __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."), null, 413);
             case UPLOAD_ERR_PARTIAL:
                 error(__("Error"),
-                      __("The uploaded file was only partially uploaded."),
-                      null, 400);
+                      __("The uploaded file was only partially uploaded."), null, 400);
             case UPLOAD_ERR_NO_TMP_DIR:
                 error(__("Error"),
                       __("Missing a temporary folder."));
@@ -1309,321 +1602,144 @@
             case UPLOAD_ERR_EXTENSION:
                 error(__("Error"),
                       __("File upload was stopped by a PHP extension."));
-            case UPLOAD_ERR_NO_FILE:
-                # This is not necessarily an error e.g. no new file when a post was edited.
-                # The caller should handle a true/false return value and act appropriately.
-                return false;
-            case UPLOAD_ERR_OK:
-                $limit = Config::current()->uploads_limit;
-
-                if ($file['size'] > ($limit * 1000000))
-                    error(__("Error"),
-                          _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $limit),
-                          null, 413);
-
-                return true;
             default:
-                error(__("Error"), _f("File upload failed with error %d.", $file['error']));
+                error(__("Error"),
+                      _f("File upload failed with error %d.", $file['error']));
         }
+
+        if ($file['size'] > ($maximum * 1000000))
+            error(__("Error"),
+                  _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $maximum), null, 413);
+
+        return $success;
     }
 
     /**
-     * Function: timer_start
-     * Starts the timer.
-     */
-    function timer_start() {
-        global $time_start;
-        $mtime = explode(" ", microtime());
-        $mtime = $mtime[1] + $mtime[0];
-        $time_start = $mtime;
-    }
-
-    /**
-     * Function: timer_stop
-     * Stops the timer and returns the total time.
+     * Function: unique_filename
+     * Makes a given filename unique for the uploads directory.
      *
      * Parameters:
-     *     $precision - Number of decimals places to round to.
+     *     $name - The name to check.
+     *     $path - Path to check in.
+     *     $num - Number suffix from which to start increasing if the filename exists.
      *
      * Returns:
-     *     A formatted number with the given $precision.
+     *     A unique version of the supplied filename.
      */
-    function timer_stop($precision = 3) {
-        global $time_start;
-        $mtime = microtime();
-        $mtime = explode(" ", $mtime);
-        $mtime = $mtime[1] + $mtime[0];
-        $time_end = $mtime;
-        $time_total = $time_end - $time_start;
-        return number_format($time_total, $precision);
-    }
+    function unique_filename($name, $num = 2) {
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$name))
+            return $name;
 
-    /**
-     * Function: match
-     * Try to match a string against an array of regular expressions.
-     *
-     * Parameters:
-     *     $try - An array of regular expressions, or a single regular expression.
-     *     $haystack - The string to test.
-     *
-     * Returns:
-     *     Whether or not the match succeeded.
-     */
-    function match($try, $haystack) {
-        if (is_string($try))
-            return (bool) preg_match($try, $haystack);
+        $name = explode(".", $name);
 
-        foreach ($try as $needle)
-            if (preg_match($needle, $haystack))
-                return true;
+        # Handle common double extensions.
+        foreach (array("tar.gz", "tar.bz", "tar.bz2") as $extension) {
+            list($first, $second) = explode(".", $extension);
+            $file_first =& $name[count($name) - 2];
 
-        return false;
-    }
-
-    /**
-     * Function: time_in_timezone
-     * Returns the appropriate time() for representing a timezone.
-     */
-    function time_in_timezone($timezone) {
-        $orig = get_timezone();
-        set_timezone($timezone);
-        $time = date("F jS, Y, g:i A");
-        set_timezone($orig);
-        return strtotime($time);
-    }
-
-    /**
-     * Function: timezones
-     * Returns an array of timezones that have unique offsets.
-     */
-    function timezones() {
-        $zones = array();
-
-        foreach (timezone_identifiers_list(DateTimeZone::ALL) as $zone)
-            $zones[] = array("name" => $zone,
-                             "now" => time_in_timezone($zone));
-
-        function by_time($a, $b) {
-            return (int) ($a["now"] > $b["now"]);
-        }
-
-        usort($zones, "by_time");
-
-        return $zones;
-    }
-
-    /**
-     * Function: set_timezone
-     * Sets the timezone.
-     *
-     * Parameters:
-     *     $timezone - The timezone to set.
-     */
-    function set_timezone($timezone) {
-        if (function_exists("date_default_timezone_set"))
-            date_default_timezone_set($timezone);
-        else
-            ini_set("date.timezone", $timezone);
-    }
-
-    /**
-     * Function: get_timezone()
-     * Returns the current timezone.
-     */
-    function get_timezone() {
-        if (function_exists("date_default_timezone_set"))
-            return date_default_timezone_get();
-        else
-            return ini_get("date.timezone");
-    }
-
-    /**
-     * Function: keywords
-     * Parse keyword searches for values in specific database columns.
-     *
-     * Parameters:
-     *     $query - The query to parse.
-     *     $plain - WHERE syntax to search for non-keyword queries.
-     *     $table - Check this table to ensure the keywords are valid.
-     *
-     * Returns:
-     *     An array containing the "WHERE" queries and the corresponding parameters.
-     */
-    function keywords($query, $plain, $table = null) {
-        $trimmed = trim($query);
-
-        if (empty($trimmed))
-            return array(array(), array());
-
-        $strings  = array(); # Non-keyword values found in the query.
-        $keywords = array(); # Keywords (attr:val;) found in the query.
-        $where    = array(); # Parameters validated and added to WHERE.
-        $filters  = array(); # Table column filters to be validated.
-        $params   = array(); # Parameters for the non-keyword filter.
-        $columns  = !empty($table) ? SQL::current()->select($table)->fetch() : array() ;
-
-        foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment)
-            if (!substr_count($fragment, ":"))
-                $strings[] = trim($fragment);
-            else
-                $keywords[] = trim($fragment);
-
-        $dates = array("year"   => __("year"),
-                       "month"  => __("month"),
-                       "day"    => __("day"),
-                       "hour"   => __("hour"),
-                       "minute" => __("minute"),
-                       "second" => __("second"));
-
-        # Contextual conversions of some keywords.
-        foreach ($keywords as $keyword) {
-            list($attr, $val) = explode(":", $keyword);
-
-            if ($attr == "password") {
-                # Prevent searches for hashed passwords.
-                $strings[] = $attr;
-            } elseif (isset($columns["user_id"]) and $attr == "author") {
-                # Filter by "author" (login).
-                $user = new User(array("login" => $val));
-                $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
-            } elseif (isset($columns["group_id"]) and $attr == "group") {
-                # Filter by group name.
-                $group = new Group(array("name" => $val));
-                $where["group_id"] = ($group->no_results) ? 0 : $group->id ;
-            } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
-                # Filter by date/time of creation.
-                $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
-            } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
-                # Filter by date/time of joining.
-                $where[strtoupper(array_search($attr, $dates))."(joined_at)"] = $val;
-            } else
-                $filters[$attr] = $val;
-        }
-
-        # Check the validity of keywords if a table name was supplied.
-        foreach ($filters as $attr => $val) {
-            if (isset($columns[$attr]))
-                $where[$attr] = $val;
-            else
-                $strings[] = $attr." ".$val; # No such column: add to non-keyword values.
-        }
-
-        if (!empty($strings)) {
-            $where[] = $plain;
-            $params[":query"] = "%".join(" ", $strings)."%";
-        }
-
-        $search = array($where, $params);
-
-        Trigger::current()->filter($search, "keyword_search", $query, $plain);
-
-        return $search;
-    }
-
-    /**
-     * Function: xml2arr
-     * Recursively converts a SimpleXML object (and children) to an array.
-     *
-     * Parameters:
-     *     $parse - The SimpleXML object to convert into an array.
-     */
-    function xml2arr($parse) {
-        if (empty($parse))
-            return "";
-
-        $parse = (array) $parse;
-
-        foreach ($parse as &$val)
-            if (get_class($val) == "SimpleXMLElement")
-                $val = xml2arr($val);
-
-        return $parse;
-    }
-
-    /**
-     * Function: arr2xml
-     * Recursively adds an array (or object I guess) to a SimpleXML object.
-     *
-     * Parameters:
-     *     &$object - The SimpleXML object to modify.
-     *     $data - The data to add to the SimpleXML object.
-     */
-    function arr2xml(&$object, $data) {
-        foreach ($data as $key => $val) {
-            if (is_int($key) and (empty($val) or (is_string($val) and trim($val) == ""))) {
-                unset($data[$key]);
-                continue;
+            if ($file_first == $first and end($name) == $second) {
+                $file_first = $first.".".$second;
+                array_pop($name);
             }
-
-            if (is_array($val)) {
-                if (in_array(0, array_keys($val))) { # Numeric-indexed things need to be added as duplicates.
-                    foreach ($val as $dup) {
-                        $xml = $object->addChild($key);
-                        arr2xml($xml, $dup);
-                    }
-                } else {
-                    $xml = $object->addChild($key);
-                    arr2xml($xml, $val);
-                }
-            } else
-                $object->addChild($key, fix($val, false, false));
         }
+
+        $ext = ".".array_pop($name);
+        $try = implode(".", $name)."-".$num.$ext;
+
+        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$try))
+            return $try;
+
+        return unique_filename(implode(".", $name).$ext, $num + 1);
     }
 
     /**
-     * Function: list_notate
-     * Notates an array as a list of things.
+     * Function: password_strength
+     * Award a numeric score for the strength of a password.
      *
      * Parameters:
-     *     $array - An array of things to notate.
-     *     $quotes - Wrap quotes around strings?
+     *     $password - The password string to score.
      *
      * Returns:
-     *     A string like "foo, bar, and baz".
+     *     A numeric score for the strength of the password.
      */
-    function list_notate($array, $quotes = false) {
-        $count = 0;
-        $items = array();
-        foreach ($array as $item) {
-            $string = (is_string($item) and $quotes) ? __("&#8220;").$item.__("&#8221;") : $item ;
-            if (count($array) == ++$count and $count !== 1)
-                $items[] = __("and ").$string;
-            else
-                $items[] = $string;
-        }
+    function password_strength($password = "") {
+        $score = 0;
 
-        return (count($array) == 2) ? implode(" ", $items) : implode(", ", $items) ;
+        if (empty($password))
+            return $score;
+
+        # Calculate the frequency of each char in the password.
+        $frequency = array_count_values(str_split($password));
+
+        # Award each unique char and punish more than 10 occurrences.
+        foreach ($frequency as $occurrences)
+            $score += (11 - $occurrences);
+
+        # Award bonus points for different character types.
+        $variations = array("digits" => preg_match("/\d/", $password),
+                            "lower" => preg_match("/[a-z]/", $password),
+                            "upper" => preg_match("/[A-Z]/", $password),
+                            "nonWords" => preg_match("/\W/", $password));
+
+        $score += (array_sum($variations) - 1) * 10;
+
+        return intval($score);
     }
 
     /**
-     * Function: email
-     * Send an email. Function arguments are exactly the same as the PHP mail() function.
-     * This is intended so that modules can provide an email method if the server cannot use mail().
+     * Function: is_url
+     * Does the string look like a web URL?
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     *
+     * See Also:
+     *     <add_scheme>
      */
-    function email() {
-        $function = "mail";
-        Trigger::current()->filter($function, "send_mail");
-        $args = func_get_args(); # Looks redundant, but it must be so in order to meet PHP's retardation requirements.
-        return call_user_func_array($function, $args);
+    function is_url($string) {
+        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~i', $string) or # FQDN
+                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~', $string) or # IPv4
+                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                                         # IPv6
     }
 
     /**
-     * Function: now
-     * Alias to strtotime, for prettiness like now("+1 day").
+     * Function: add_scheme
+     * Prefixes a URL with a scheme if none was detected.
+     * Overwrites existing scheme if $scheme is supplied.
+     *
+     * Parameters:
+     *     $url - The URL to analyse.
+     *     $scheme - The scheme for the URL (optional).
+     *
+     * Returns:
+     *     URL prefixed with a scheme (http:// by default).
+     *
+     * See Also:
+     *     <is_url>
      */
-    function now($when) {
-        return strtotime($when);
+    function add_scheme($url, $scheme = null) {
+        preg_match('~^([a-z]+://)?(.+)~i', $url, $matches);
+        $matches[1] = (isset($scheme)) ? $scheme : oneof($matches[1], "http://") ;
+        return $url = $matches[1].$matches[2];
     }
 
     /**
-     * Function: comma_sep
-     * Convert a comma-seperated string into an array of the listed values.
+     * Function: is_email
+     * Does the string look like an email address?
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
      */
-    function comma_sep($string) {
-        $commas = explode(",", $string);
-        $trimmed = array_map("trim", $commas);
-        $cleaned = array_diff(array_unique($trimmed), array(""));
-        return $cleaned;
+    function is_email($string) {
+        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or # FQDN
+                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or # IPv4
+                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));                           # IPv6
     }
 
     /**
@@ -1688,151 +1804,6 @@
     }
 
     /**
-     * Function: token
-     * Salt and hash a unique token using the supplied data.
-     *
-     * Parameters:
-     *     $items - An array of items to hash.
-     *
-     * Returns:
-     *     A unique token salted with the secure hashkey.
-     */
-    function token($items) {
-        return sha1(implode((array) $items).Config::current()->secure_hashkey);
-    }
-
-    /**
-     * Function: is_url
-     * Does the string look like a web URL?
-     *
-     * Parameters:
-     *     $string - The string to analyse.
-     *
-     * Returns:
-     *     Whether or not the string matches the criteria.
-     *
-     * See Also:
-     *     <add_scheme>
-     */
-    function is_url($string) {
-        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~i', $string) or //FQDN
-                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~', $string) or //IPv4
-                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                                         //IPv6
-    }
-
-    /**
-     * Function: is_email
-     * Does the string look like an email address?
-     *
-     * Parameters:
-     *     $string - The string to analyse.
-     *
-     * Returns:
-     *     Whether or not the string matches the criteria.
-     */
-    function is_email($string) {
-        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or //FQDN
-                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or //IPv4
-                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));                           //IPv6
-    }
-
-    /**
-     * Function: add_scheme
-     * Prefixes a URL with a scheme if none was detected.
-     * Overwrites existing scheme if $scheme is supplied.
-     *
-     * Parameters:
-     *     $url - The URL to analyse.
-     *     $scheme - The scheme for the URL (optional).
-     *
-     * Returns:
-     *     URL prefixed with a scheme (http:// by default).
-     *
-     * See Also:
-     *     <is_url>
-     */
-    function add_scheme($url, $scheme = null) {
-        preg_match('~^([a-z]+://)?(.+)~i', $url, $matches);
-        $matches[1] = (isset($scheme)) ? $scheme : oneof($matches[1], "http://") ;
-        return $url = $matches[1].$matches[2];
-    }
-
-    /**
-     * Function: file_attachment
-     * Send a file attachment to the visitor.
-     *
-     * Parameters:
-     *     $contents - The bitstream to be delivered to the visitor.
-     *     $filename - The name to be applied to the content upon download.
-     */
-    function file_attachment($contents = "", $filename = "caconym") {
-        header("Content-Type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".$filename."\"");
-
-        if (!in_array("ob_gzhandler", ob_list_handlers()))
-            header("Content-Length: ".strlen($contents));
-
-        echo $contents;
-    }
-
-    /**
-     * Function: password_strength
-     * Award a numeric score for the strength of a password.
-     *
-     * Parameters:
-     *     $password - The password string to score.
-     *
-     * Returns:
-     *     A numeric score for the strength of the password.
-     */
-    function password_strength($password = "") {
-        $score = 0;
-
-        if (empty($password))
-            return $score;
-
-        # Calculate the frequency of each char in the password.
-        $frequency = array_count_values(str_split($password));
-
-        # Award each unique char and punish more than 10 occurrences.
-        foreach ($frequency as $occurrences)
-            $score += (11 - $occurrences);
-
-        # Award bonus points for different character types.
-        $variations = array("digits" => preg_match("/\d/", $password),
-                            "lower" => preg_match("/[a-z]/", $password),
-                            "upper" => preg_match("/[A-Z]/", $password),
-                            "nonWords" => preg_match("/\W/", $password));
-
-        $score += (array_sum($variations) - 1) * 10;
-
-        return intval($score);
-    }
-
-    /**
-     * Function: shorthand_bytes
-     * Decode shorthand bytes notation from php.ini.
-     *
-     * Parameters:
-     *     $value - The value returned by ini_get().
-     *
-     * Returns:
-     *     A byte value or the input if decoding failed.
-     */
-    function shorthand_bytes($value) {
-        switch (substr($value, -1)) {
-            case 'K': case 'k':
-                return (int) $value * 1024;
-            case 'M': case 'm':
-                return (int) $value * 1048576;
-            case 'G': case 'g':
-                return (int) $value * 1073741824;
-            default:
-                return $value;
-        }
-    }
-
-    /**
      * Function: json_set
      * JSON encodes a value and checks for errors.
      *
@@ -1886,6 +1857,36 @@
     function json_response($text = null, $data = null) {
         header("Content-Type: application/json; charset=UTF-8");
         exit(json_set(array("text" => $text, "data" => $data)));
+    }
+
+    /**
+     * Function: file_attachment
+     * Send a file attachment to the visitor.
+     *
+     * Parameters:
+     *     $contents - The bitstream to be delivered to the visitor.
+     *     $filename - The name to be applied to the content upon download.
+     */
+    function file_attachment($contents = "", $filename = "caconym") {
+        header("Content-Type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=\"".$filename."\"");
+
+        if (!in_array("ob_gzhandler", ob_list_handlers()))
+            header("Content-Length: ".strlen($contents));
+
+        echo $contents;
+    }
+
+    /**
+     * Function: email
+     * Send an email. Function arguments are exactly the same as the PHP mail() function.
+     * This is intended so that modules can provide an email method if the server cannot use mail().
+     */
+    function email() {
+        $function = "mail";
+        Trigger::current()->filter($function, "send_mail");
+        $args = func_get_args(); # Looks redundant, but it must be so in order to meet PHP's retardation requirements.
+        return call_user_func_array($function, $args);
     }
 
     /**
