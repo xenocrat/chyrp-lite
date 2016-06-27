@@ -11,7 +11,7 @@ Called from:
 admin_javascript
 ----------------
 Called from:
-	admin/admin.js.php on line 515
+	admin/admin.js.php on line 520
 
 
 can_not_view_site
@@ -177,7 +177,7 @@ delete_upload
 Called from:
 	feathers/audio/audio.php on line 73
 	feathers/photo/photo.php on line 81
-	feathers/uploader/uploader.php on line 124
+	feathers/uploader/uploader.php on line 112
 	feathers/video/video.php on line 73
 Arguments:
 	$post->filename
@@ -202,13 +202,13 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 196
+	includes/ajax.php on line 177
 
 
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 57
+	includes/class/Config.php on line 53
 Arguments:
 	$setting, $value, $overwrite
 
@@ -246,7 +246,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1235
+	includes/controller/Admin.php on line 1223
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -254,7 +254,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1263
+	includes/controller/Admin.php on line 1247
 Arguments:
 	$user
 
@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1291
+	includes/controller/Admin.php on line 1275
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1314
+	includes/controller/Admin.php on line 1298
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1729
+	includes/controller/Admin.php on line 1712
 Arguments:
 	!empty($_POST['theme'])
 
@@ -419,7 +419,7 @@ Arguments:
 feed_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 717
+	modules/comments/comments.php on line 706
 Arguments:
 	$comment
 
@@ -427,7 +427,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 735
+	modules/comments/comments.php on line 724
 Arguments:
 	$comment->id
 
@@ -682,7 +682,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1144
+	includes/controller/Admin.php on line 1136
 
 
 manage_nav
@@ -690,7 +690,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2081
+	includes/controller/Admin.php on line 2076
 
 
 settings_nav
@@ -698,7 +698,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2111
+	includes/controller/Admin.php on line 2106
 
 
 extend_nav
@@ -706,7 +706,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2121
+	includes/controller/Admin.php on line 2116
 
 
 admin_subnav
@@ -714,7 +714,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2132
+	includes/controller/Admin.php on line 2127
 
 
 nav_selected
@@ -722,7 +722,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2234
+	includes/controller/Admin.php on line 2229
 
 
 url_code
@@ -743,22 +743,22 @@ Arguments:
 	$post
 
 
-link_regexp
------------
-Target:
-	$expressions
-Called from:
-	includes/helpers.php on line 738
-
-
 keyword_search
 --------------
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 1494
+	includes/helpers.php on line 743
 Arguments:
 	$query, $plain
+
+
+link_regexp
+-----------
+Target:
+	$expressions
+Called from:
+	includes/helpers.php on line 1200
 
 
 send_mail
@@ -766,7 +766,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1581
+	includes/helpers.php on line 1887
 
 
 xmlrpc_methods
