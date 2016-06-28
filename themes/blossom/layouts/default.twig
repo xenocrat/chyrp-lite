@@ -121,7 +121,7 @@
 </div>
 {{ trigger.call("end_content") }}
 </body>
-<!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time }} -->
+<!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
 {% if debug and visitor.group.name == "Admin" %}
 <!--
 {% for debug in sql_debug %}
