@@ -32,30 +32,29 @@ var ChyrpLikes = {
         }
     },
     send: function(post_id, callback, isUnlike) {
-        if (ChyrpLikes.busy)
-            return false;
-
-        $.ajax({
-            type: "POST",
-            url: Site.chyrp_url + "/includes/ajax.php",
-            data: {
-                "action": (isUnlike) ? "unlike" : "like",
-                "post_id": post_id
-            },
-            beforeSend: function() {
-                ChyrpLikes.busy = true;	
-            },
-            success: function(response) {
-                if (response.data === true)
-                    callback(response);
-            },
-            complete: function(response) {
-                ChyrpLikes.busy = false;
-            },
-            dataType: "json",
-            cache: false,
-            error: ChyrpLikes.panic
-        });
+        if (!ChyrpLikes.busy && !ChyrpLikes.failed) {
+            $.ajax({
+                type: "POST",
+                url: Site.chyrp_url + "/includes/ajax.php",
+                data: {
+                    "action": (isUnlike) ? "unlike" : "like",
+                    "post_id": post_id
+                },
+                beforeSend: function() {
+                    ChyrpLikes.busy = true;	
+                },
+                success: function(response) {
+                    // Action was ignored if data value is false.
+                    if (response.data === true)
+                        callback(response);
+                },
+                complete: function() {
+                    ChyrpLikes.busy = false;
+                },
+                dataType: "json",
+                error: ChyrpLikes.panic
+            });
+        }
     },
     toggle: function(post_id) {
         if ($("#likes_" + post_id + " a.liked").length)
