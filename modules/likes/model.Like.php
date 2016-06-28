@@ -36,17 +36,20 @@
          * Determine if a visitor has liked a post.
          */
         public function resolve() {
+            if (empty($this->post_id))
+                return null;
+
             $people = self::fetchPeople();
 
             foreach ($people as $person) {
                 if ($person["session_hash"] == $this->session_hash and !array_key_exists($this->post_id, $_SESSION["likes"]))
-                    $_SESSION["likes"][$this->post_id] = null; // Their hash is in the database but nothing in their session.
+                    $_SESSION["likes"][$this->post_id] = null; # Their hash is in the database but nothing in their session.
 
                 if (!empty($this->user_id) and $person["user_id"] == $this->user_id)
                     $_SESSION["likes"][$this->post_id] = true;
             }
 
-            return isset($_SESSION["likes"][$this->post_id]); // Returns false for null entries.
+            return isset($_SESSION["likes"][$this->post_id]); # Returns false for null entries.
         }
 
         /**
@@ -54,20 +57,17 @@
          * Adds a like to the database.
          */
         public function like() {
-            if (!Visitor::current()->group->can("like_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts.", "likes"));
+            if (empty($this->post_id))
+                return;
 
-            if (!empty($this->post_id)) {
-                if (!array_key_exists($this->post_id, $_SESSION["likes"]))
-                    SQL::current()->insert("likes",
-                                           array("post_id" => $this->post_id,
-                                                 "user_id" => $this->user_id,
-                                                 "timestamp" => datetime(),
-                                                 "session_hash" => $this->session_hash));
+            if (!array_key_exists($this->post_id, $_SESSION["likes"]))
+                SQL::current()->insert("likes",
+                                       array("post_id" => $this->post_id,
+                                             "user_id" => $this->user_id,
+                                             "timestamp" => datetime(),
+                                             "session_hash" => $this->session_hash));
 
-                $_SESSION["likes"][$this->post_id] = !empty($this->user_id);
-            } else
-                error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
+            $_SESSION["likes"][$this->post_id] = !empty($this->user_id);
         }
 
         /**
@@ -75,19 +75,16 @@
          * Removes a like from the database.
          */
         public function unlike() {
-            if (!Visitor::current()->group->can("unlike_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts.", "likes"));
+            if (empty($this->post_id))
+                return;
 
-            if (!empty($this->post_id)) {
-                if ($_SESSION["likes"][$this->post_id])
-                    SQL::current()->delete("likes",
-                                           array("post_id" => $this->post_id,
-                                                 "user_id" => $this->user_id),
-                                           array("LIMIT" => 1));
+            if ($_SESSION["likes"][$this->post_id])
+                SQL::current()->delete("likes",
+                                       array("post_id" => $this->post_id,
+                                             "user_id" => $this->user_id),
+                                       array("LIMIT" => 1));
 
-                unset($_SESSION["likes"][$this->post_id]);
-            } else
-                error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
+            unset($_SESSION["likes"][$this->post_id]);
         }
 
         public function fetchPeople() {
