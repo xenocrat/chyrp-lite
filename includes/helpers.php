@@ -54,7 +54,7 @@
 
     /**
      * Function: redirect
-     * Redirects to the given URL and exits immediately.
+     * Redirects to the supplied URL and exits immediately.
      *
      * Parameters:
      *     $url - The URL to redirect to. If it begins with @/@ it will be relative to the @Config.url@.
@@ -364,7 +364,7 @@
 
     /**
      * Function: fallback
-     * Sets a given variable if it is not set.
+     * Sets the supplied variable if it is not already set.
      *
      * The last of the arguments or the first non-empty value will be used.
      *
@@ -518,7 +518,7 @@
      *     $precision - Round to n decimal places.
      *
      * Returns:
-     *     A formatted number with the given $precision.
+     *     A formatted number with the requested $precision.
      */
     function timer_stop($precision = 3) {
         global $time_start;
@@ -851,7 +851,7 @@
 
     /**
      * Function: camelize
-     * Converts a given string to camel-case.
+     * Converts a string to camel-case.
      *
      * Parameters:
      *     $string - The string to camelize.
@@ -894,7 +894,7 @@
 
     /**
      * Function: truncate
-     * Truncates a string to the given length, optionally breaking at the nearest word.
+     * Truncates a string to the requested length.
      *
      * Parameters:
      *     $text - The string to be truncated.
@@ -1369,13 +1369,13 @@
 
     /**
      * Function: module_enabled
-     * Returns whether the given module is enabled or not.
+     * Determines if a module is currently enabled.
      *
      * Parameters:
-     *     $name - The folder name of the module.
+     *     $name - The non-camelized name of the module.
      *
      * Returns:
-     *     Whether or not the requested module is enabled.
+     *     Whether or not the supplied module is enabled.
      */
     function module_enabled($name) {
         return (!empty(Modules::$instances[$name]) and empty(Modules::$instances[$name]->cancelled));
@@ -1383,13 +1383,13 @@
 
     /**
      * Function: feather_enabled
-     * Returns whether the given feather is enabled or not.
+     * Determines if a feather is currently enabled.
      *
      * Parameters:
-     *     $name - The folder name of the feather.
+     *     $name - The non-camelized name of the feather.
      *
      * Returns:
-     *     Whether or not the requested feather is enabled.
+     *     Whether or not the supplied feather is enabled.
      */
     function feather_enabled($name) {
         return (!empty(Feathers::$instances[$name]) and empty(Feathers::$instances[$name]->cancelled));
@@ -1507,15 +1507,15 @@
 
     /**
      * Function: upload_from_url
-     * Copy a file from a specified URL to the uploads directory.
+     * Copy a file from a remote URL to the uploads directory.
      *
      * Parameters:
      *     $url - The URL of the resource to be copied.
      *     $redirects - The maximum number of redirects to follow.
      *     $timeout - The maximum number of seconds to wait.
      *
-     * See Also:
-     *     <upload>
+     * Returns:
+     *     The filename of the upload relative to the uploads directory.
      */
     function upload_from_url($url, $redirects = 3, $timeout = 10) {
         preg_match("~\.[a-z0-9]+(?=($|\?))~i", $url, $file_ext);
@@ -1530,16 +1530,16 @@
 
     /**
      * Function: uploaded
-     * Returns a URL to an uploaded file.
+     * Generates an absolute URL or filesystem path to an uploaded file.
      *
      * Parameters:
      *     $file - Filename relative to the uploads directory.
      *     $url - Whether to return a URL or a filesystem path.
+     *
+     * Returns:
+     *     The supplied filename prepended with URL or filesystem path.
      */
     function uploaded($file, $url = true) {
-        if (empty($file))
-            return "";
-
         $config = Config::current();
 
         return ($url ?
@@ -1616,7 +1616,7 @@
 
     /**
      * Function: unique_filename
-     * Makes a given filename unique for the uploads directory.
+     * Generates a unique name for the supplied file in the uploads directory.
      *
      * Parameters:
      *     $name - The name to check.
@@ -1747,7 +1747,7 @@
      * Generates a captcha form element.
      *
      * Returns:
-     *     A string containing an form input type.
+     *     A string containing HTML elements to add to a form.
      */
     function generate_captcha() {
         global $captchaHooks;
