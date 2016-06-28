@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-06-27 22:09+0000\n"
+"POT-Creation-Date: 2016-06-28 20:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -67,7 +67,7 @@ msgstr ""
 #: includes/download.php:12
 #: includes/download.php:15
 #: includes/download.php:24
-#: includes/error.php:157
+#: includes/error.php:159
 #: includes/helpers.php:1467
 #: includes/helpers.php:1588
 #: includes/helpers.php:1591
@@ -1316,20 +1316,20 @@ msgstr ""
 msgid "File not found."
 msgstr ""
 
-#: includes/error.php:158
+#: includes/error.php:160
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:347
+#: includes/error.php:349
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:350
+#: includes/error.php:352
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:355
+#: includes/error.php:357
 msgid "Log in"
 msgstr ""
 
