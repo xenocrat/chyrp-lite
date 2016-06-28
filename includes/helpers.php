@@ -5,7 +5,7 @@
      */
 
     # Integer: $time_start
-    # Times Chyrp.
+    # Stores the internal timer value.
     $time_start = 0;
 
     # Array: $l10n
@@ -512,10 +512,10 @@
 
     /**
      * Function: timer_stop
-     * Stops the timer and returns the total time.
+     * Stops the timer and returns the total elapsed time.
      *
      * Parameters:
-     *     $precision - Number of decimals places to round to.
+     *     $precision - Round to n decimal places.
      *
      * Returns:
      *     A formatted number with the given $precision.
@@ -1549,7 +1549,7 @@
 
     /**
      * Function: upload_tester
-     * Test uploaded file information to determine if the upload was successful.
+     * Tests uploaded file information to determine if the upload was successful.
      *
      * Parameters:
      *     $file - The POST method upload array e.g. $_FILES['userfile'].
