@@ -246,7 +246,7 @@
 
             Comment::delete($comment->id);
 
-            Flash::notice(__("Comment deleted."));
+            Flash::notice(__("Comment deleted.", "comments"));
             redirect("/admin/?action=manage_".(($comment->status == "spam") ? "spam" : "comments"));
         }
 
@@ -613,7 +613,7 @@
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
                     Comment::delete($comment->id);
-                    exit;
+                    json_response(__("Comment deleted.", "comments"));
                 case "edit_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                         show_403(__("Access Denied"), __("Invalid security key."));

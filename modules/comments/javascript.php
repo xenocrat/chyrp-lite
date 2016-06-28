@@ -206,7 +206,7 @@ var ChyrpComment = {
             thisItem.fadeOut("fast", function() {
                 $(this).remove();
             });
-        }, "html").fail(ChyrpComment.panic);
+        }, "json").fail(ChyrpComment.panic);
     },
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
