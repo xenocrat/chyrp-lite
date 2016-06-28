@@ -43,6 +43,9 @@
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
+            if (!Visitor::current()->group->can("like_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts.", "likes"));
+
             $post = new Post($_GET['post_id']);
 
             if ($post->no_results)
@@ -57,6 +60,9 @@
         static function route_unlike() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
+
+            if (!Visitor::current()->group->can("unlike_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts.", "likes"));
 
             $post = new Post($_GET['post_id']);
 
@@ -82,8 +88,9 @@
             if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
+            # JavaScript can't know if this is allowed, so don't throw an error here.
             if (!Visitor::current()->group->can("like_post"))
-                exit; # JavaScript does not know if the visitor can toggle likes on/off.
+                json_response(__("You do not have sufficient privileges to like posts.", "likes"), false);
 
             $post = new Post($_POST['post_id']);
 
@@ -94,23 +101,22 @@
             $like->like();
             $like->fetchCount();
 
-            if ($like->total_count == 0)
-                $response = __("No likes yet.", "likes");
-            elseif ($like->total_count == 1)
-                $response = _f("You like this.", $like->total_count, "likes");
+            if ($like->total_count == 1)
+                $text = __("You like this.", "likes");
             else
-                $response = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
-                                    ($like->total_count - 1));
+                $text = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
+                                ($like->total_count - 1));
 
-            exit($response);
+            json_response($text, true);
         }
 
         static function ajax_unlike() {
             if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
+            # JavaScript can't know if this is allowed, so don't throw an error here.
             if (!Visitor::current()->group->can("unlike_post"))
-                exit; # JavaScript does not know if the visitor can toggle likes on/off.
+                json_response(__("You do not have sufficient privileges to unlike posts.", "likes"), false);
 
             $post = new Post($_POST['post_id']);
 
@@ -122,12 +128,12 @@
             $like->fetchCount();
 
             if ($like->total_count == 0)
-                $response = __("No likes yet.", "likes");
+                $text = __("No likes yet.", "likes");
             else
-                $response = sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"),
-                                    $like->total_count);
+                $text = sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"),
+                                $like->total_count);
 
-            exit($response);
+            json_response($text, true);
         }
 
         static function delete_post($post) {
@@ -201,7 +207,7 @@
                 if ($like->total_count == 0)
                     $html.= __("No likes yet.", "likes");
                 elseif ($like->total_count == 1)
-                    $html.= _f("You like this.", $like->total_count, "likes");
+                    $html.= __("You like this.", "likes");
                 else
                     $html.= sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
                                     ($like->total_count - 1));

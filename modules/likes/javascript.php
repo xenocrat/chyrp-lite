@@ -46,13 +46,13 @@ var ChyrpLikes = {
                 ChyrpLikes.busy = true;	
             },
             success: function(response) {
-                if (response != "")
+                if (response.data === true)
                     callback(response);
             },
             complete: function(response) {
                 ChyrpLikes.busy = false;
             },
-            dataType: "html",
+            dataType: "json",
             cache: false,
             error: ChyrpLikes.panic
         });
@@ -61,13 +61,13 @@ var ChyrpLikes = {
         if ($("#likes_" + post_id + " a.liked").length)
             ChyrpLikes.send(post_id, function(response) {
                 var div = $("#likes_" + post_id);
-                div.children("span.like_text").html(response);
+                div.children("span.like_text").html(response.text);
                 div.children("a.liked").removeClass("liked").addClass("like");
             }, true);
         else
             ChyrpLikes.send(post_id, function(response) {
                 var div = $("#likes_" + post_id);
-                div.children("span.like_text").html(response);
+                div.children("span.like_text").html(response.text);
                 div.children("a.like").removeClass("like").addClass("liked");
             }, false);
     },
