@@ -378,7 +378,7 @@ Arguments:
 add_user
 --------
 Called from:
-	includes/model/User.php on line 130
+	includes/model/User.php on line 122
 Arguments:
 	$user
 
@@ -386,7 +386,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 184
+	includes/model/User.php on line 176
 Arguments:
 	$this, $old
 
@@ -748,7 +748,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 743
+	includes/helpers.php on line 778
 Arguments:
 	$query, $plain
 
@@ -758,7 +758,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1200
+	includes/helpers.php on line 1262
 
 
 send_mail
@@ -766,7 +766,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1887
+	includes/helpers.php on line 1949
 
 
 xmlrpc_methods
@@ -950,7 +950,7 @@ before_add_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 124
+	includes/model/User.php on line 116
 
 
 before_update_user
@@ -958,7 +958,7 @@ before_update_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 178
+	includes/model/User.php on line 170
 
 
 cacher_regenerate_triggers
