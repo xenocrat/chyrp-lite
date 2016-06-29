@@ -757,6 +757,7 @@
                 return false;
 
             $names = array();
+
             foreach ($groups[1] as $group_id) {
                 $group = new Group($group_id);
                 $names[] = $group->name;

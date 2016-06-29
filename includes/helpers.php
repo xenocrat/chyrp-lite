@@ -140,11 +140,14 @@
 
     /**
      * Function: admin_url
-     * Builds an admin URL from the supplied components.
+     * Generates an admin URL from the supplied components.
      *
      * Parameters:
      *     $action - The admin action.
      *     $params - An indexed array of parameters.
+     *
+     * Returns:
+     *     A URL to a resource in the administration console.
      */
     function admin_url($action = "", $params = array()) {
         $config = Config::current();
@@ -161,24 +164,24 @@
      * Try to set the locale with fallbacks for platform-specific quirks.
      *
      * Parameters:
-     *     $locale - The locale name (e.g. @en_US@, @uk_UA@, @fr_FR@)
+     *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
      *
      * Notes:
      *     Precedence is given to UTF-8 with a fallback to Windows 1252.
      */
     function set_locale($locale = "en_US") {
-        $posix = array($locale.".UTF-8",                  // E.g. "en_US.UTF-8"
-                       $locale.".UTF8",                   // E.g. "en_US.UTF8"
-                       $locale);                          // E.g. "en_US"
-        $win32 = array(str_replace("_", "-", $locale));   // E.g. "en-US"
+        $posix = array($locale.".UTF-8",                  # E.g. "en_US.UTF-8"
+                       $locale.".UTF8",                   # E.g. "en_US.UTF8"
+                       $locale);                          # E.g. "en_US"
+        $win32 = array(str_replace("_", "-", $locale));   # E.g. "en-US"
 
         if (class_exists("Locale")) {
             $language = Locale::getDisplayLanguage($locale, "en_US");
             $region = Locale::getDisplayRegion($locale, "en_US");
             array_unshift($win32,
-                          $language."_".$region.".1252",  // E.g. "English_United States.1252"
-                          $language.".1252",              // E.g. "English.1252"
-                          $language);                     // E.g. "English"
+                          $language."_".$region.".1252",  # E.g. "English_United States.1252"
+                          $language.".1252",              # E.g. "English.1252"
+                          $language);                     # E.g. "English"
 
             # Set the ICU locale.
             Locale::setDefault($locale);
@@ -211,10 +214,13 @@
 
     /**
      * Function: lang_code
-     * Converts a language code to a display name.
+     * Converts a language code to a localised display name.
      *
      * Parameters:
      *     $code - The language code to convert.
+     *
+     * Returns:
+     *     A localised display name, e.g. "English (United States)".
      */
     function lang_code($code) {
         return (class_exists("Locale")) ? Locale::getDisplayName($code, $code) : $code ;
@@ -222,11 +228,14 @@
 
     /**
      * Function: __
-     * Returns a translated string.
+     * Translates a string using PHP-gettext.
      *
      * Parameters:
      *     $text - The string to translate.
      *     $domain - The translation domain to read from.
+     *
+     * Returns:
+     *     The translated string or the original.
      */
     function __($text, $domain = "chyrp") {
         global $l10n;
@@ -235,13 +244,16 @@
 
     /**
      * Function: _p
-     * Returns a plural (or not) form of a translated string.
+     * Translates a plural (or not) form of a string.
      *
      * Parameters:
      *     $single - Singular string.
      *     $plural - Pluralized string.
      *     $number - The number to judge by.
      *     $domain - The translation domain to read from.
+     *
+     * Returns:
+     *     The translated string or the original.
      */
     function _p($single, $plural, $number, $domain = "chyrp") {
         global $l10n;
@@ -251,12 +263,15 @@
 
     /**
      * Function: _f
-     * Returns a formatted translated string.
+     * Translates a string with sprintf() formatting.
      *
      * Parameters:
      *     $string - String to translate and format.
      *     $args - One arg or an array of arguments to format with.
      *     $domain - The translation domain to read from.
+     *
+     * Returns:
+     *     The translated string or the original.
      */
     function _f($string, $args = array(), $domain = "chyrp") {
         $args = (array) $args;
@@ -266,12 +281,15 @@
 
     /**
      * Function: when
-     * Returns date formatting for a string that isn't a regular time() value.
+     * Formats a string that isn't a regular time() value.
      *
      * Parameters:
-     *     $formatting - The formatting for date().
-     *     $when - Time to base on. If it is not numeric it will be run through strtotime.
-     *     $strftime - Use @strftime@ instead of @date@?
+     *     $formatting - The formatting for date() or strftime().
+     *     $when - A time value to be strtotime() converted.
+     *     $strftime - Format using @strftime@ instead of @date@?
+     *
+     * Returns:
+     *     A time/date string with the supplied formatting.
      */
     function when($formatting, $when, $strftime = false) {
         $time = (is_numeric($when)) ? $when : strtotime($when) ;
@@ -284,10 +302,13 @@
 
     /**
      * Function: datetime
-     * Returns a standard datetime string based on either the passed timestamp or their time offset, usually for MySQL inserts.
+     * Formates datetime for MySQL queries.
      *
      * Parameters:
      *     $when - A timestamp (optional).
+     *
+     * Returns:
+     *     A standard datetime string.
      */
     function datetime($when = null) {
         fallback($when, time());
@@ -339,7 +360,7 @@
 
     /**
      * Function: set_timezone
-     * Sets the timezone.
+     * Sets the timezone for all date/time functions.
      *
      * Parameters:
      *     $timezone - The timezone to set.
@@ -364,15 +385,16 @@
 
     /**
      * Function: fallback
-     * Sets the supplied variable if it is not already set.
-     *
-     * The last of the arguments or the first non-empty value will be used.
+     * Sets the supplied variable if it is not already set, using the supplied arguments as candidates.
      *
      * Parameters:
      *     &$variable - The variable to return or set.
      *
      * Returns:
-     *     The value of whatever was chosen.
+     *     The value that was assigned to the variable.
+     *
+     * Notes:
+     *     The first non-empty candidate will be used, or the last, or null if no candidates are supplied.
      */
     function fallback(&$variable) {
         if (is_bool($variable))
@@ -401,9 +423,13 @@
 
     /**
      * Function: oneof
-     * Returns the first argument that is set and non-empty.
+     * Crawls the supplied set of arguments in search of a candidate that has a substantial value.
      *
-     * It will guess where to stop based on the types of the arguments, e.g. "" has priority over array() but not 1.
+     * Returns:
+     *     The first candidate of substance, or the last, or null if no candidates are supplied.
+     *
+     * Notes:
+     *     It will guess where to stop based on types, e.g. "" has priority over array() but not 1.
      */
     function oneof() {
         $last = null;
@@ -447,7 +473,7 @@
      *     $items - An array of items to hash.
      *
      * Returns:
-     *     A unique token salted with the secure hashkey.
+     *     A unique token salted with the site's secure hashkey.
      */
     function token($items) {
         return sha1(implode((array) $items).Config::current()->secure_hashkey);
@@ -455,11 +481,14 @@
 
     /**
      * Function: random
-     * Returns a random string.
+     * Generates a random string of characters.
      *
      * Parameters:
      *     $length - How long the string should be.
      *     $specialchars - Use special characters in the resulting string?
+     *
+     * Returns:
+     *     A random string of the requested length.
      */
     function random($length, $specialchars = false) {
         $pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
@@ -558,6 +587,9 @@
      *
      * Parameters:
      *     $parse - The SimpleXML object to convert into an array.
+     *
+     * Returns:
+     *     An array representation of the supplied SimpleXML object.
      */
     function xml2arr($parse) {
         if (empty($parse))
@@ -629,7 +661,10 @@
 
     /**
      * Function: comma_sep
-     * Convert a comma-seperated string into an array of the listed values.
+     * Converts a comma-seperated string into an array of the listed values.
+     *
+     * Returns:
+     *     An array containing the exploded and trimmed values.
      */
     function comma_sep($string) {
         $commas = explode(",", $string);
@@ -747,11 +782,14 @@
 
     /**
      * Function: pluralize
-     * Returns a pluralized string. This is a port of Rails's pluralizer.
+     * Returns a pluralized word. This is a port of Rails's pluralizer.
      *
      * Parameters:
      *     $string - The string to pluralize.
      *     $number - If passed, and this number is 1, it will not pluralize.
+     *
+     * Returns:
+     *     The supplied word with a trailing "s" added, or a non-normative pluralization.
      */
     function pluralize($string, $number = null) {
         $uncountable = array("moose", "sheep", "fish", "series", "species", "audio",
@@ -793,11 +831,14 @@
 
     /**
      * Function: depluralize
-     * Returns a depluralized string. This is the inverse of <pluralize>.
+     * Returns a depluralized word. This is the inverse of <pluralize>.
      *
      * Parameters:
      *     $string - The string to depluralize.
      *     $number - If passed, and this number is not 1, it will not depluralize.
+     *
+     * Returns:
+     *     The supplied word with trailing "s" removed, or a non-normative singularization.
      */
     function depluralize($string, $number = null) {
         if (isset($number) and $number != 1)
@@ -894,14 +935,17 @@
 
     /**
      * Function: truncate
-     * Truncates a string to the requested length.
+     * Truncates a string to ensure it is no longer than the requested length.
      *
      * Parameters:
      *     $text - The string to be truncated.
      *     $length - The truncated length.
      *     $ellipsis - A string to place at the truncation point.
      *     $exact - Split words to return the exact length requested?
-     *     $encoding - The character encoding of the string.
+     *     $encoding - The character encoding of the string and ellipsis.
+     *
+     * Returns:
+     *     A truncated string with ellipsis appended.
      */
     function truncate($text, $length = 100, $ellipsis = "...", $exact = false, $encoding = "UTF-8") {
         if (function_exists("mb_strlen") and function_exists("mb_substr")) {
@@ -928,10 +972,13 @@
 
     /**
      * Function: markdown
-     * Implements the Markdown parsing filter.
+     * Implements the Markdown content parsing filter.
      *
      * Parameters:
      *     $text - The body of the post/page to parse.
+     *
+     * Returns:
+     *     The text with Markdown formatting applied.
      */
     function markdown($text) {
         $parsedown = new Parsedown();
@@ -940,10 +987,13 @@
 
     /**
      * Function: emote
-     * Converts emoticons to equivalent Unicode emoji.
+     * Converts emoticons to equivalent Unicode emoji HTML entities.
      *
      * Parameters:
      *     $text - The body of the post/page to parse.
+     *
+     * Returns:
+     *     The text with emoticons replaced by emoji.
      *
      * See Also:
      *     http://www.unicode.org/charts/PDF/U1F600.pdf
@@ -977,7 +1027,7 @@
         );
 
         foreach($emoji as $key => $value) {
-            $text =  str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
+            $text = str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
         }
 
         return $text;
@@ -985,12 +1035,15 @@
 
     /**
      * Function: fix
-     * Returns a HTML-sanitized version of a string.
+     * Neutralizes HTML and quotes in strings for display.
      *
      * Parameters:
      *     $string - String to fix.
      *     $quotes - Encode quotes?
      *     $double - Encode encoded?
+     *
+     * Returns:
+     *     A sanitized version of the string.
      */
     function fix($string, $quotes = false, $double = false) {
         $quotes = ($quotes) ? ENT_QUOTES : ENT_NOQUOTES ;
@@ -999,10 +1052,13 @@
 
     /**
      * Function: unfix
-     * Returns the reverse of fix().
+     * Undoes neutralization of HTML and quotes in strings.
      *
      * Parameters:
      *     $string - String to unfix.
+     *
+     * Returns:
+     *     An unsanitary version of the string.
      */
     function unfix($string) {
         return htmlspecialchars_decode($string, ENT_QUOTES);
@@ -1010,13 +1066,16 @@
 
     /**
      * Function: sanitize
-     * Returns a sanitized string, typically for URLs.
+     * Sanitizes a string of various troublesome characters, typically for URLs.
      *
      * Parameters:
      *     $string - The string to sanitize.
      *     $force_lowercase - Force the string to lowercase?
      *     $strict - If set to *true*, will remove all non-alphanumeric characters.
      *     $trunc - Number of characters to truncate to (default 100, 0 to disable).
+     *
+     * Returns:
+     *     A sanitized version of the string.
      */
     function sanitize($string, $force_lowercase = true, $strict = false, $trunc = 100) {
         $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
@@ -1039,6 +1098,9 @@
      *
      * Parameters:
      *     $string - String to sanitize.
+     *
+     * Returns:
+     *     A sanitized version of the string.
      */
     function sanitize_html($text) {
         $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( \/)?>/i", function ($element) {
@@ -1236,7 +1298,7 @@
      *     $url - The URL to check.
      *
      * Returns:
-     *     The pingback target, if the URL is pingback-capable.
+     *     The pingback target, or false if the URL is not pingback-capable.
      */
     function pingback_url($url) {
         extract(parse_url($url), EXTR_SKIP);
@@ -1552,7 +1614,7 @@
      * Tests uploaded file information to determine if the upload was successful.
      *
      * Parameters:
-     *     $file - The POST method upload array e.g. $_FILES['userfile'].
+     *     $file - The POST method upload array, e.g. $_FILES['userfile'].
      *
      * Returns:
      *     True for a successful upload or false if no file was uploaded.
