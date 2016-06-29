@@ -53,19 +53,11 @@
             else {
                 if (self::checkPassword($password, $check->password))
                     return true;
-                elseif (md5($password) == $check->password) {
-                    # Backwards-compatibility:
-                    # if their old password is stored as MD5, update
-                    # it on authentication to the new hashing scheme.
+                elseif ($password == $check->password) {
+                    # Password is stored in clear text, perhaps from an import.
+                    # Accept it and update the stored value with a secure hash.
                     $check->update(null, self::hashPassword($password));
                     return true;
-                } elseif (SQL::current()->adapter == "mysql") {
-                    # Some imports might use MySQL password hashing (such as MovableType 3).
-                    # Try those too, and update the user if they match.
-                    if ($password == $check->password) {
-                        $check->update(null, self::hashPassword($password));
-                        return true;
-                    }
                 }
             }
 
@@ -228,7 +220,7 @@
          *     @true@ or @false@
          */
         static function checkPassword($password, $storedHash) {
-            return crypt($password, $storedHash) == $storedHash;
+            return (crypt($password, $storedHash) == $storedHash);
         }
 
     }
