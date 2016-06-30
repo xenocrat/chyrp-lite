@@ -449,17 +449,13 @@
                     || $author["author_email"]    == $visitor->email) {
                     $users[$author["author_id"]] = $visitor;
                 } else {
-                    $users[$author["author_id"]] = User::add(
-                        $author["author_name"],
-                        $author["author_password"],
-                        $author["author_email"],
-                        ($author["author_nickname"] != $author["author_name"] ?
-                                                       $author["author_nickname"] : ""),
-                        $author["author_url"],
-                        ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
-                        $author["author_created_on"],
-                        false
-                    );
+                    $users[$author["author_id"]] = User::add($author["author_name"],
+                                                             $author["author_password"],
+                                                             $author["author_email"],
+                                                             ($author["author_nickname"] != $author["author_name"] ? $author["author_nickname"] : ""),
+                                                             $author["author_url"],
+                                                             ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
+                                                             $author["author_created_on"]);
                 }
             }
 
