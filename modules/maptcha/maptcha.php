@@ -8,7 +8,7 @@
         }
 
         static function __install() {
-            Config::current()->set("maptcha_hashkey", md5(random(32, true)));;
+            Config::current()->set("maptcha_hashkey", md5(random(32)));;
         }
 
         static function __uninstall() {

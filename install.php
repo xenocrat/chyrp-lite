@@ -258,7 +258,7 @@
             $config->set("enabled_modules", array());
             $config->set("enabled_feathers", array("text"));
             $config->set("routes", array());
-            $config->set("secure_hashkey", md5(random(32, true)));
+            $config->set("secure_hashkey", md5(random(32)));
 
             # Add SQL settings to the configuration.
             foreach ($settings as $field => $value)

@@ -481,28 +481,40 @@
 
     /**
      * Function: random
-     * Generates a random string of characters.
+     * Generates a string of alphanumeric random characters.
      *
      * Parameters:
-     *     $length - How long the string should be.
-     *     $specialchars - Use special characters in the resulting string?
+     *     $length - The number of characters to generate.
      *
      * Returns:
-     *     A random string of the requested length.
+     *     A string of the requested length.
+     *
+     * Notes:
+     *     Uses cryptographically secure methods if available.
      */
-    function random($length, $specialchars = false) {
-        $pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
+    function random($length) {
+        $input = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        $range = strlen($input) - 1;
+        $chars = "";
 
-        if ($specialchars)
-            $pattern.= "!@#$%^&*()?~";
+        if (function_exists("random_int"))
+            for($i = 0; $i < $length; $i++)
+                $chars.= $input[random_int(0, $range)];
+        elseif (function_exists("openssl_random_pseudo_bytes"))
+            while (strlen($chars) < $length) {
+                $chunk = openssl_random_pseudo_bytes(3); # 3 * 8 / 6 = 4
+                $chars.= ($chunk === false) ?
+                    $input[rand(0, $range)] :
+                    preg_replace("/[^a-zA-Z0-9]/", "", base64_encode($chunk)) ;
+            }
+        elseif (function_exists("mt_rand"))
+            for($i = 0; $i < $length; $i++)
+                $chars.= $input[mt_rand(0, $range)];
+        else
+            for($i = 0; $i < $length; $i++)
+                $chars.= $input[rand(0, $range)];
 
-        $len = strlen($pattern) - 1;
-        $key = "";
-
-        for($i = 0; $i < $length; $i++)
-            $key.= $pattern[rand(0, $len)];
-
-        return $key;
+        return substr($chars, 0, $length);
     }
 
     /**
@@ -583,13 +595,13 @@
 
     /**
      * Function: xml2arr
-     * Recursively converts a SimpleXML object (and children) to an array.
+     * Recursively converts a SimpleXML object to an array.
      *
      * Parameters:
-     *     $parse - The SimpleXML object to convert into an array.
+     *     $parse - The SimpleXML object to convert.
      *
      * Returns:
-     *     An array representation of the supplied SimpleXML object.
+     *     An array representation of the supplied object.
      */
     function xml2arr($parse) {
         if (empty($parse))
@@ -606,7 +618,7 @@
 
     /**
      * Function: arr2xml
-     * Recursively adds an array (or object I guess) to a SimpleXML object.
+     * Recursively adds an array to a SimpleXML object.
      *
      * Parameters:
      *     &$object - The SimpleXML object to modify.
@@ -782,7 +794,7 @@
 
     /**
      * Function: pluralize
-     * Returns a pluralized word. This is a port of Rails's pluralizer.
+     * Pluralizes a word.
      *
      * Parameters:
      *     $string - The string to pluralize.
@@ -804,7 +816,7 @@
                               "/cow/i" => "kine",
                               "/goose/i" => "geese",
                               "/datum$/i" => "data",
-                              "/(penis)$/i" => "\\1es", # Take that, Rails!
+                              "/(penis)$/i" => "\\1es",
                               "/(ax|test)is$/i" => "\\1es",
                               "/(octop|vir)us$/i" => "\\1ii",
                               "/(cact)us$/i" => "\\1i",
@@ -831,7 +843,7 @@
 
     /**
      * Function: depluralize
-     * Returns a depluralized word. This is the inverse of <pluralize>.
+     * Singularizes a word.
      *
      * Parameters:
      *     $string - The string to depluralize.
@@ -918,7 +930,7 @@
 
     /**
      * Function: decamelize
-     * Decamelizes a string.
+     * Undoes camel-case conversion.
      *
      * Parameters:
      *     $string - The string to decamelize.
@@ -987,7 +999,7 @@
 
     /**
      * Function: emote
-     * Converts emoticons to equivalent Unicode emoji HTML entities.
+     * Converts emoticons to Unicode emoji HTML entities.
      *
      * Parameters:
      *     $text - The body of the post/page to parse.
@@ -1066,7 +1078,7 @@
 
     /**
      * Function: sanitize
-     * Sanitizes a string of various troublesome characters, typically for URLs.
+     * Sanitizes a string of troublesome characters, typically for use in URLs.
      *
      * Parameters:
      *     $string - The string to sanitize.
@@ -1094,7 +1106,7 @@
 
     /**
      * Function: sanitize_html
-     * Sanitize html to disable scripts and obnoxious attributes.
+     * Sanitize HTML to disable scripts and obnoxious attributes.
      *
      * Parameters:
      *     $string - String to sanitize.
@@ -1176,7 +1188,7 @@
      *     $timeout - The maximum number of seconds to wait.
      *
      * Returns:
-     *     The response from the remote URL.
+     *     The response content from the remote site.
      */
     function get_remote($url, $redirects = 0, $timeout = 10) {
         extract(parse_url($url), EXTR_SKIP);
@@ -1512,7 +1524,7 @@
      * Validates and moves an uploaded file to the uploads directory.
      *
      * Parameters:
-     *     $file - The file array created by PHP.
+     *     $file - The POST method upload array, e.g. $_FILES['userfile'].
      *     $filter - An array of valid extensions (case-insensitive).
      *
      * Returns:
