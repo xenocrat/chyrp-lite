@@ -195,7 +195,7 @@
          */
         static function hashPassword($password) {
             $salt = random(16);
-            $prefix = '$6$'; # SHA-512
+            $prefix = '$6$'; # Prefix for SHA-512.
             return crypt($password, $prefix.$salt);
         }
 
@@ -205,16 +205,17 @@
          *
          * Parameters:
          *     $password - The unhashed password given during a login attempt.
-         *     $storedHash - The stored hash for the user.
+         *     $stored - The the user's stored hash value from the database.
          * 
          * Returns:
          *     @true@ or @false@
+         *
+         * Notes:
+         *     Uses <hash_equals> if available to mitigate timing attacks.
          */
-        static function checkPassword($password, $storedHash) {
-            if (function_exists("hash_equals"))
-                return hash_equals(crypt($password, $storedHash), $storedHash);
-            else
-                return (crypt($password, $storedHash) == $storedHash);
+        static function checkPassword($password, $stored) {
+            $try = crypt($password, $stored);
+            return (function_exists("hash_equals")) ? hash_equals($try, $stored) : ($try == $stored) ;
         }
 
     }
