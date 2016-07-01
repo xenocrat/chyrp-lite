@@ -1,0 +1,151 @@
+{{ trigger.call("before_post_fields", feather) }}
+{% for field in feather.fields %}
+<p class="main_options">
+<label for="{{ field.attr }}_field">
+{% if field.preview is defined and field.preview == "markup_text" and site.enable_markdown %}
+<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
+{% endif %}
+{{ field.label }}
+{% if field.optional is defined and field.optional %}
+<span class="sub">{{ "(optional)" | translate }}</span>
+{% endif %}
+{% if field.help is defined %}
+<span class="sub">
+<a href="{{ admin_url('help', {'id': field.help}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+</span>
+{% endif %}
+{% if field.note is defined %}
+<span class="sub">{{ field.note }}</span>
+{% endif %}
+</label>
+{% if field.type == "text" %}
+<input id="{{ field.attr }}_field" class="text" type="text" name="{{ field.attr }}"{{ field.preview is defined ? ' data-preview="' ~ field.preview ~ '"' : ''}} value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
+{% elseif field.type == "file" %}
+<input id="{{ field.attr }}_field" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
+<p>
+{% if (post.filename is defined or post.filenames is defined) and route.action == "edit_post" %}
+{% if post.filename is defined %}
+<em>{{ "Current file name:" | translate }}</em>
+<strong><a href="{{ post.filename | uploaded }}" target="_blank">{{ post.filename | fix }}</a></strong>
+{% elseif post.filenames is defined and post.filenames is not empty %}
+<em>{{ "Current file names:" | translate }}</em>
+<strong>
+<ul>
+{% for name in post.filenames %}<li><a href="{{ name | uploaded }}" target="_blank">{{ name | fix }}</a></li>{% endfor %}
+</ul>
+</strong>
+{% endif %}
+{% endif %}
+</p>
+{% elseif field.type == "text_block" %}
+<textarea id="{{ field.attr }}_field" name="{{ field.attr }}" rows="12"{{ field.preview is defined ? ' data-preview="'~field.preview~'"' : '' }}>{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
+{% elseif field.type == "checkbox" %}
+<input id="{{ field.attr }}_field" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
+{% elseif field.type == "select" %}
+<select id="{{ field.attr }}_field" name="{{ field.attr }}">
+{% for value, name in field.options %}
+<option value="{{ value | fix }}"{{ attribute(post, field.attr) is defined ? value | selected(attribute(post, field.attr)) : "" }}>{{ name | fix }}</option>
+{% endfor %}
+</select>
+{% endif %}
+{% if field.extra is defined %}
+{{ field.extra }}
+{% endif %}
+</p>
+{% endfor %}
+{{ trigger.call("after_post_fields", feather) }}
+<div id="more_options" class="more_options">
+{% if visitor.group.can("add_post") %}
+<p class="more_options_option">
+<label for="status">{{ "Status" | translate }}</label>
+<select id="status" name="status">
+<option value="draft"{{ post is defined ? post.status | selected("draft") : "" }}>{{ "Draft" | translate }}</option>
+<option value="public"{{ post is defined ? post.status | selected("public") : " selected" }}>{{ "Public" | translate }}</option>
+<option value="private"{{ post is defined ? post.status | selected("private") : "" }}>{{ "Private" | translate }}</option>
+<option value="scheduled"{{ post is defined ? post.status | selected("scheduled") : "" }}>{{ "Scheduled" | translate }}</option>
+<option value="registered_only"{{ post is defined ? post.status | selected("registered_only") : "" }}>{{ "Visible only to registered users" | translate }}</option>
+{% if groups is not empty %}
+<optgroup label="{{ "Group" | translate }}">
+{% for group in groups %}
+<option value="{{ '{' ~ group.id ~ '}' }}"{{ post is defined ? post.status | selected('{' ~ group.id ~ '}') : "" }}>{{ group.name | fix }}</option>
+{% endfor %}
+</optgroup>
+{% endif %}
+</select>
+</p>
+{% endif %}
+<p class="more_options_option">
+<label for="pinned">
+{{ "Pinned?" | translate }}
+<span class="sub">{{ "(shows this post above all others)" | translate }}</span>
+</label>
+<input id="pinned" type="checkbox" name="pinned"{{ post is defined ? post.pinned | checked : "" }}>
+</p>
+<p class="more_options_option">
+<label for="slug">
+{{ "Slug" | translate }}
+<a href="{{ admin_url('help', {'id': 'slugs'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+</label>
+<input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.slug | fix : '' }}">
+</p>
+<p class="more_options_option">
+<label for="created_at">{{ "Timestamp" | translate }}</label>
+<input id="created_at" class="text" type="text" name="created_at" value="{{ post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) | strftimeformat : now | date('r') | strftimeformat }}">
+<input type="hidden" name="original_time" value="{{ post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) | strftimeformat : now | date('r') | strftimeformat }}">
+</p>
+{% for field in options %}
+<p class="more_options_option">
+<label for="{{ field.attr | replace({'[': '_', ']': ''}) }}_field">
+{{ field.label }}
+{% if field.help is defined %}
+<span class="sub">
+<a href="{{ admin_url('help', {'id': field.help}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+</span>
+{% endif %}
+{% if field.note is defined %}
+<span class="sub">{{ field.note }}</span>
+{% endif %}
+</label>
+{% if field.type == "text" %}
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" class="text" type="text" name="{{ field.attr }}" value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
+{% elseif field.type == "file" %}
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
+{% elseif field.type == "text_block" %}
+<textarea id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" name="{{ field.attr }}" rows="12">{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
+{% elseif field.type == "checkbox" %}
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
+{% elseif field.type == "select" %}
+<select id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" name="{{ field.attr }}">
+{% for option in field.options %}
+<option value="{{ option.value | fix }}"{{ option.selected | selected(true) }}>{{ option.name | fix }}</option>
+{% endfor %}
+</select>
+{% endif %}
+{% if field.extra is defined %}
+{{ field.extra }}
+{% endif %}
+</p>
+{% endfor %}
+<div class="clear"></div>
+</div>
+<div class="buttons confirmation">
+{% if route.action == "edit_post" %}
+{% if visitor.group.can("add_post") and post.status == "draft" %}
+<button type="submit" class="yay" accesskey="s" id="publish" name="publish">
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
+</button>
+{% endif %}
+<button type="submit" accesskey="s" id="save">
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
+</button>
+{% else %}
+{% if visitor.group.can("add_post") %}
+<button type="submit" class="yay" accesskey="s" id="publish">
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
+</button>
+{% endif %}
+<button type="submit" accesskey="s" id="save" name="draft" value="true">
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
+</button>
+{% endif %}
+</div>

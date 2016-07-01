@@ -1,11 +1,11 @@
 <?php
-    require_once INCLUDES_DIR."/class/Captcha.php";
-    require_once "lib/recaptchalib.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Captcha.php";
+    require_once "lib".DIR."recaptchalib.php";
 
-    class ReCaptcha extends Modules {
+    class Recaptcha extends Modules {
         public function __init() {
             global $captchaHooks;
-            $captchaHooks[] = "ReCaptchaCaptcha";
+            $captchaHooks[] = "RecaptchaCaptcha";
         }
 
         static function __install() {
@@ -25,7 +25,7 @@
             if (empty($_POST))
                 return $admin->display("recaptcha_settings");
     
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $set = array(Config::current()->set("module_recaptcha",
@@ -44,12 +44,12 @@
 
     }
 
-    class ReCaptchaCaptcha implements Captcha {
+    class RecaptchaCaptcha implements Captcha {
         static function getCaptcha() {
             $public_key = Config::current()->module_recaptcha["public_key"];
 
             if (!empty($public_key))
-                return recaptcha_get_html();
+                return recaptcha_get_html($public_key);
         }
 
         static function verifyCaptcha() {

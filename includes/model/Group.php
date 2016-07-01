@@ -61,7 +61,7 @@
 
             $actions = func_get_args();
 
-            if (end($actions) !== true) {# OR comparison
+            if (end($actions) !== true) { # OR comparison
                 foreach ($actions as $action)
                     if (in_array($action, $this->permissions))
                         return true;
@@ -147,8 +147,9 @@
                          array("id" => $this->id),
                          array("name" => $name));
 
-            # Update their permissions
+            # Update their permissions.
             $sql->delete("permissions", array("group_id" => $this->id));
+
             foreach ($permissions as $id) {
                 $name = $sql->select("permissions",
                                      "name",

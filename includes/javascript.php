@@ -1,130 +1,102 @@
 <?php
     define('JAVASCRIPT', true);
     require_once "common.php";
-    error_reporting(0);
-    header("Content-Type: application/x-javascript");
 ?>
-<!-- --><script>
-$(function(){
-    // Scan AJAX responses for errors.
-    $(document).ajaxComplete(function(event, request){
-        var response = request ? request.responseText : null;
-        if (isError(response))
-            alert(response.replace(/(HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW|<([^>]+)>\n?)/gm, ""));
-    })<?php echo "\n\n\n\n"; # Balance out the line numbers in this script and in the output to help debugging. ?>
-
-<?php if (!isset($config->enable_ajax) or $config->enable_ajax): ?> Post.prepare_links()<?php endif; ?>
-})
-
+$(function() {
+    if (Site.ajax) {
+        Post.init();
+        Page.init();
+    }
+});
 var Route = {
-    action: "<?php echo $_GET['action']; ?>"
-};
-
-var site_url = "<?php echo $config->chyrp_url; ?>";
-
+    action: "<?php echo fix(@$_GET['action'], true); ?>"
+}
+var Site = {
+    url: '<?php echo $config->url; ?>',
+    chyrp_url: '<?php echo $config->chyrp_url; ?>',
+    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
+    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
+}
 var Post = {
-    id: 0,
-    edit: function(id) {
-        Post.id = id;
-        $("#post_"+id).loader();
-        $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "edit_post", id: id }, function(data) {
-            $("#post_"+id).fadeOut("fast", function(){
-                $(this).loader(true);
-                $(this).replaceWith(data);
-                $("#post_edit_form_"+id).css("opacity", 0).animate({ opacity: 1 }, function(){
-<?php $trigger->call("ajax_post_edit_form_javascript"); ?>
-                    $("#more_options_link_"+id).click(function(){
-                        if ($("#more_options_"+id).css("display") == "none") {
-                            $(this).empty().append("<?php echo __("&uarr; Fewer Options"); ?>");
-                            $("#more_options_"+id).slideDown("slow");
-                        } else {
-                            $(this).empty().append("<?php echo __("More Options &darr;"); ?>");
-                            $("#more_options_"+id).slideUp("slow");
-                        }
-                        return false;
-                    });
-                    $("#post_edit_form_"+id).ajaxForm({ beforeSubmit: function(){
-                        $("#post_edit_form_"+id).loader();
-                    }, success: Post.updated })
-                    $("#post_cancel_edit_"+id).click(function(){
-                        $("#post_edit_form_"+id).loader();
-                        $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
-                            action: "view_post",
-                            context: "all",
-                            id: id,
-                            reason: "cancelled"
-                        }, function(data) {
-                            $("#post_edit_form_"+id).fadeOut("fast", function(){
-                                $(this).loader(true);
-                                $(this).replaceWith(data);
-                                $(this).hide().fadeIn("fast");
-                            });
-                        }, "html");
-                        return false;
-                    });
-                });
-            });
-        }, "html");
-    },
-    updated: function(response){
-        id = Post.id;
-        if (isError(response))
-            return $("#post_edit_form_"+id).loader(true);
+    failed: false,
+    init: function() {
+        $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(e) {
+            if (!Post.failed) {
+                e.preventDefault();
 
-        if (Route.action != "drafts" && Route.action != "view" && $("#post_edit_form_"+id+" select#status").val() == "draft") {
-            $("#post_edit_form_"+id).fadeOut("fast", function(){
-                $(this).loader(true);
-                alert("<?php echo __("Post has been saved as a draft."); ?>");
-            })
-        } else if (Route.action == "drafts" && $("#post_edit_form_"+id+" select#status").val() != "draft") {
-            $("#post_edit_form_"+id).fadeOut("fast", function(){
-                $(this).loader(true);
-                alert("<?php echo __("Post has been published."); ?>");
-            })
-        } else {
-            $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", {
-                action: "view_post",
-                context: "all",
-                id: id,
-                reason: "edited"
-            }, function(data) {
-                $("#post_edit_form_"+id).fadeOut("fast", function(){
-                    $(this).loader(true);
-                    $(this).replaceWith(data);
-                    $("#post_"+id).hide().fadeIn("fast");
-                });
-            }, "html");
-        }
+                if (confirm('<?php echo __("Are you sure you want to delete this post? If you wish to hide it, save it as a draft."); ?>')) {
+                    var id = $(this).attr("id").replace(/post_delete_/, "");
+                    Post.destroy(id);
+                }
+            }
+        });
     },
     destroy: function(id) {
-        $("#post_"+id).loader()
-        $.post("<?php echo $config->chyrp_url; ?>/includes/ajax.php", { action: "delete_post", id: id }, function(response) {
-            $("#post_"+id).loader(true);
-            if (isError(response)) return;
+        var thisPost = $("#post_" + id).loader();
 
-            $("#post_"+id).fadeOut("fast", function(){
+        if (Site.key == "") {
+            Post.panic('<?php echo __("The post cannot be deleted because your web browser did not send proper credentials."); ?>');
+            return;
+        }
+
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
+            action: "destroy_post",
+            id: id,
+            hash: Site.key
+        }, function(response) {
+            thisPost.loader(true).fadeOut("fast", function() {
                 $(this).remove();
 
-                if (Route.action == "view")
-                    window.location = "<?php echo $config->url; ?>";
+                if (!$(".post").length)
+                    window.location = Site.url;
             });
-        }, "html");
+        }, "json").fail(Post.panic);
     },
-    prepare_links: function(id) {
-        $(".post").last().parent().on("click", ".post_edit_link:not(.no_ajax)", function(){
-            var id = $(this).attr("id").replace(/post_edit_/, "");
-            Post.edit(id);
-            return false;
-        });
-
-        $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(){
-            if (!confirm("<?php echo __("Are you sure you want to delete this post?\\n\\nIt cannot be restored if you do this. If you wish to hide it, save it as a draft."); ?>")) return false
-            var id = $(this).attr("id").replace(/post_delete_/, "");
-            Post.destroy(id);
-            return false;
-        });
+    panic: function(message) {
+        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+        Post.failed = true;
+        alert(message);
+        $(".ajax_loading").loader(true);
     }
 }
+var Page = {
+    failed: false,
+    init: function() {
+        $(".page_delete_link:not(.no_ajax)").on("click", function(e) {
+            if (!Page.failed) {
+                e.preventDefault();
 
-<?php echo "\n"; $trigger->call("javascript"); ?>
-<!-- --></script>
+                if (confirm('<?php echo __("Are you sure you want to delete this page? Child pages will also be deleted."); ?>')) {
+                    var id = $(this).attr("id").replace(/page_delete_/, "");
+                    Page.destroy(id);
+                }
+            }
+        });
+    },
+    destroy: function(id) {
+        var thisPage = $("#page_" + id).loader();
+
+        if (Site.key == "") {
+            Page.panic('<?php echo __("The page cannot be deleted because your web browser did not send proper credentials."); ?>');
+            return;
+        }
+
+        $.post(Site.chyrp_url + "/includes/ajax.php", {
+            action: "destroy_page",
+            id: id,
+            hash: Site.key
+        }, function(response) {
+            thisPage.loader(true).fadeOut("fast", function() {
+                $(this).remove();
+                window.location = Site.url;
+            });
+        }, "json").fail(Page.panic);
+    },
+    panic: function(message) {
+        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+        Page.failed = true;
+        alert(message);
+        $(".ajax_loading").loader(true);
+    }
+}
+<?php $trigger->call("javascript"); ?>

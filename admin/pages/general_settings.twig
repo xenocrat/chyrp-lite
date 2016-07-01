@@ -1,0 +1,71 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Site Configuration" | translate }}{% endblock %}
+
+{% block content %}
+<form id="general_settings" class="split" action="{{ admin_url('general_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<fieldset>
+<p>
+<label for="name">{{ "Site Name" | translate }}</label>
+<input class="text" type="text" name="name" value="{{ site.name | fix(true) }}" id="name">
+</p>
+<p>
+<label for="description">{{ "Description" | translate }}</label>
+<input class="text" type="text" name="description" value="{{ site.description | fix(true) }}" id="description">
+</p>
+<p>
+<label for="chyrp_url">{{ "Chyrp URL" | translate }}</label>
+<input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix(true) }}" id="chyrp_url">
+</p>
+<p>
+<label for="url">
+{{ "Canonical URL" | translate }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix(true) : '' }}" id="url">
+<a href="{{ admin_url('help', {'id': 'canonical_url'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<small>
+{{ "Have your site URLs point someplace other than your install directory." | translate }}
+</small>
+</p>
+<p>
+<label for="email">{{ "Contact Email Address" | translate }}</label>
+<input class="text" type="email" name="email" value="{{ site.email | fix(true) }}" id="email">
+</p>
+<p>
+<label for="timezone">{{ "What time is it?" | translate }}</label>
+<select name="timezone" id="timezone">
+{% for zone in timezones %}
+<option value="{{ zone.name }}"{{ zone.name | selected(site.timezone) }}>{{ zone.now | strftimeformat("%m/%d/%y %H:%M" | translate) }} &mdash; {{ zone.name }}</option>
+{% endfor %}
+</select>
+</p>
+<p>
+<label for="locale">{{ "Language" | translate }}</label>
+<select name="locale" id="locale">
+{% for locale in locales %}
+<option value="{{ locale.code }}"{{ locale.code | selected(site.locale) }}>{{ locale.name }}</option>
+{% endfor %}
+</select>
+</p>
+<p>
+<label for="cookies_notification">{{ "Notify visitors about cookies?" | translate }}</label>
+<input class="checkbox" type="checkbox" name="cookies_notification" id="cookies_notification"{{ site.cookies_notification | checked }}>
+<small>
+{{ "EU Directive 2002/58 on Privacy and Electronic Communications." | translate }}
+</small>
+</p>
+<p>
+<label for="check_updates">{{ "Check for Updates?" | translate }}</label>
+<input class="checkbox" type="checkbox" name="check_updates" id="check_updates"{{ site.check_updates | checked }}>
+<small>
+{{ "Check for the availability of new Chyrp Lite versions." | translate }}
+</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

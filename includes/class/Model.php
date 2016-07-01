@@ -34,9 +34,12 @@
             $model_name = get_class($this);
             $placeholders = (isset($this->__placeholders) and $this->__placeholders);
 
-            Trigger::current()->filter($filtered, $model_name."_".$name."_attr", $this);
-            if ($filtered !== false)
+            $trigger = Trigger::current();
+
+            if ($trigger->exists($model_name."_".$name."_attr")) {
+                $trigger->filter($filtered, $model_name."_".$name."_attr", $this);
                 $this->$name = $filtered;
+            }
 
             $this->belongs_to = (array) $this->belongs_to;
             $this->has_many   = (array) $this->has_many;
@@ -120,6 +123,35 @@
 
             if (isset($this->$name))
                 return $this->$name;
+        }
+
+        /**
+         * Function: __isset
+         * Automatically handle model relationships when testing attributes of an object.
+         */
+        public function __isset($name) {
+            if (isset($this->$name))
+                return true;
+
+            $model_name = get_class($this);
+
+            if (Trigger::current()->exists($model_name."_".$name."_attr"))
+                return true;
+
+            $this->belongs_to = (array) $this->belongs_to;
+            $this->has_many   = (array) $this->has_many;
+            $this->has_one    = (array) $this->has_one;
+
+            if (in_array($name, $this->belongs_to) or isset($this->belongs_to[$name]))
+                return true;
+
+            if (in_array($name, $this->has_many) or isset($this->has_many[$name]))
+                return true;
+
+            if (in_array($name, $this->has_one) or isset($this->has_one[$name]))
+                return true;
+
+            return false;
         }
 
         /**

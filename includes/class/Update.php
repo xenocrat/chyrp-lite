@@ -1,49 +1,43 @@
 <?php
     /**
      * Class: Update
-     * Alerts administrators to new Chyrp updates.
+     * Informs the user if a newer version of Chyrp Lite is available.
      */
     class Update {
         /**
-         * Function: xml
-         * Loads the update XML file.
+         * Function: check
+         * Checks the update channel.
          */
-        private static function xml() {
-            $xml = simplexml_load_string(get_remote(UPDATE_XML));
-            return $xml;
+        public static function check() {
+            $xml = simplexml_load_string(get_remote(UPDATE_XML, 3));
+            Config::current()->set("check_updates_last", time());
+
+            if (!self::validate($xml))
+                return Flash::warning(__("Unable to check for new Chyrp Lite versions.").
+                                         ' <a href="'.fix(UPDATE_PAGE, true).'" target="_blank">'.
+                                         __("Go to GitHub &rarr;").'</a>');
+
+            foreach ($xml->channel->item as $item)
+                if (version_compare(CHYRP_VERSION, $item->version, "<"))
+                    return Flash::message(_f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->codename)).
+                                             ' <a href="'.fix($item->updateurl, true).'" target="_blank">'.
+                                             __("Go to GitHub &rarr;").'</a>');
         }
 
         /**
-         * Function: check_update
-         * Checks if the a new version of Chyrp is available.
+         * Function: validate
+         * Validates the XML dataset.
          */
-        public static function check_update() {
-            $config = Config::current();
+        private static function validate($xml) {
+            if ($xml === false or !isset($xml->channel->item))
+                return false;
 
-            if (!$config->check_updates)
-                return;
+            foreach ($xml->channel->item as $item)
+                if (!isset($item->version) or
+                    !isset($item->codename) or
+                    !isset($item->updateurl) or !is_url($item->updateurl))
+                    return false;
 
-            if ((time() - $config->check_updates_last) < UPDATE_INTERVAL )
-                return; # Check for updates once per day
-
-            $xml = self::xml();
-            $curver = CHYRP_VERSION;
-
-            foreach ($xml->channel->item as $item) {
-                $newver = $item->version;
-
-                if (version_compare($curver, $newver, ">="))
-                    $return = false;
-                else {
-                    $updateurl = $item->updateurl;
-                    $downloadurl = $item->downloadurl;
-                    $return = _f("<p role='alert' class='message'>Chyrp Lite v%s is available. You can <a href='%s'>learn more</a> or <a href='%s'>download</a> it.</p>", array($newver, $updateurl, $downloadurl));
-                    break;
-                }
-            }
-
-            $config->set("check_updates_last", time());
-
-            return $return;
+            return true;
         }
     }

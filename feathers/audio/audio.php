@@ -4,12 +4,12 @@
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "audio"),
-                                  "optional" => true,
-                                  "preview" => "markup_title"));
+                                  "optional" => true));
             $this->setField(array("attr" => "audio",
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
-                                  "note" => _f("(Max. file size: %s)", array(ini_get('upload_max_filesize')))));
+                                  "multiple" => false,
+                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "audio")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
@@ -22,17 +22,13 @@
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_audio");
             $this->respondTo("filter_post", "filter_post");
-            $this->respondTo("post_options", "add_option");
         }
 
         public function submit() {
-            if (!isset($_POST['filename'])) {
-                if (isset($_FILES['audio']) and $_FILES['audio']['error'] == 0)
-                    $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
-                else
-                    error(__("Error"), __("Couldn't upload audio file.", "audio"));
-            } else
-                $filename = $_POST['filename'];
+            if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
+                $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
+            else
+                error(__("Error"), __("You did not select any audio to upload.", "audio"), null, 422);
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
@@ -42,16 +38,11 @@
         }
 
         public function update($post) {
-            if (!isset($_POST['filename']))
-                if (isset($_FILES['audio']) and $_FILES['audio']['error'] == 0) {
-                    $this->delete_file($post);
-                    $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
-                } else
-                    $filename = $post->filename;
-            else {
+            if (isset($_FILES['audio']) and upload_tester($_FILES['audio'])) {
                 $this->delete_file($post);
-                $filename = $_POST['filename'];
-            }
+                $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
+            } else
+                $filename = $post->filename;
 
             $post->update(array("title" => $_POST['title'],
                                 "filename" => $filename,
@@ -71,18 +62,31 @@
         }
 
         public function delete_file($post) {
-            if ($post->feather != "audio") return;
-            unlink(MAIN_DIR.Config::current()->uploads_path.$post->filename);
+            if ($post->feather != "audio")
+                return;
+
+            $trigger = Trigger::current();
+            $filepath = uploaded($post->filename, false);
+
+            if (file_exists($filepath)) {
+                if ($trigger->exists("delete_upload"))
+                    $trigger->call("delete_upload", $post->filename);
+                else
+                    unlink($filepath);
+            }
         }
 
         public function filter_post($post) {
-            if ($post->feather != "audio") return;
+            if ($post->feather != "audio")
+                return;
+
             $post->audio_player = $this->audio_player($post->filename, array(), $post);
         }
 
         public function audio_type($filename) {
             $file_split = explode(".", $filename);
             $file_ext = strtolower(end($file_split));
+
             switch($file_ext) {
                 case "mp3":
                     return "audio/mpeg";
@@ -105,18 +109,25 @@
 
         public function enclose_audio($post) {
             $config = Config::current();
+
             if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
                 return;
 
-            $length = filesize(uploaded($post->filename, false));
-
-            echo '<link rel="enclosure" href="'.uploaded($post->filename).'" type="'.$this->audio_type($post->filename).'" title="'.truncate(strip_tags($post->description)).'" length="'.$length.'" />';
+            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
+                        '" type="'.$this->audio_type($post->filename).
+                        '" title="'.truncate(strip_tags($post->title())).
+                        '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
         public function audio_player($filename, $params = array(), $post) {
+            $trigger = Trigger::current();
+
+            if ($trigger->exists("audio_player"))
+                return $trigger->call("audio_player", $filename, $params, $post);
+
             $player = "\n".'<audio controls>';
-            $player.= "\n\t".__("Your web browser does not support the <code>audio</code> element.", "audio");
-            $player.= "\n\t".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
+            $player.= "\n".__("Your web browser does not support the <code>audio</code> element.", "audio");
+            $player.= "\n".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
             $player.= "\n".'</audio>'."\n";
 
             return $player;

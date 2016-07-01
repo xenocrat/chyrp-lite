@@ -1,0 +1,45 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Comment Settings" | translate("comments") }}{% endblock %}
+
+{% block content %}
+<form id="comment_settings" class="split" action="{{ admin_url('comment_settings') }}" method="post">
+<fieldset>
+<p>
+<label for="akismet_api_key">{{ "Akismet API Key" | translate("comments") }}</label>
+<input class="text" type="text" name="akismet_api_key" value="{{ site.akismet_api_key | fix(true) }}" id="akismet_api_key">
+<small>{{ 'A very good spam blocker. Get an API key from <a href="http://akismet.com/">Akismet.com</a>.' | translate("comments") }}</small>
+</p>
+<p>
+<label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}</label>
+<input class="text code" type="text" name="allowed_comment_html" value="{{ site.allowed_comment_html | join(", ") | fix(true) }}" id="allowed_comment_html">
+<small>{{ "Format: <code>strong, blockquote, em</code>" | translate("comments") }}</small>
+</p>
+<p>
+<label for="default_comment_status">{{ "Default Comment Status" | translate("comments") }}</label>
+<select name="default_comment_status">
+<option value="approved"{{ "approved" | selected(site.default_comment_status) }}>{{ "Approved" | translate("comments") }}</option>
+<option value="denied"{{ "denied" | selected(site.default_comment_status) }}>{{ "Denied" | translate("comments") }}</option>
+<option value="spam"{{ "spam" | selected(site.default_comment_status) }}>{{ "Spam" | translate("aggregator") }}</option>
+</select>
+</p>
+<p>
+<label for="comments_per_page">{{ "Comments Per Page" | translate("comments") }}</label>
+<input class="text digits" type="number" min="0" name="comments_per_page" value="{{ site.comments_per_page | fix(true) }}" id="comments_per_page">
+</p>
+<p>
+<label for="enable_reload_comments">{{ "Reload Comments" | translate("comments") }}</label>
+<input type="checkbox" class="checkbox" name="enable_reload_comments"{{ site.enable_reload_comments | checked }}>
+</p>
+<p>
+<label for="auto_reload_comments">{{ "Reload interval" | translate("comments") }}</label>
+<input class="text digits" type="number" min="10" max="3600" name="auto_reload_comments" value="{{ site.auto_reload_comments | fix(true) }}" id="auto_reload_comments">
+<span class="sub">{{ "(seconds)" | translate("comments") }}</span>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

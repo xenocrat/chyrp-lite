@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2014 Xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-17 20:21+0000\n"
+"POT-Creation-Date: 2016-07-01 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: feathers/text/info.yaml:1
+#: feathers/text/info.php:3
 msgid "Text"
 msgstr ""
 
-#: feathers/text/info.yaml:4
+#: feathers/text/info.php:6
 msgid "A basic text feather."
 msgstr ""
 
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/text/text.php:11
+#: feathers/text/text.php:10
 msgid "Body"
 msgstr ""
 

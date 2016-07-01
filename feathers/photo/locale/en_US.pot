@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2014 Xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-17 20:21+0000\n"
+"POT-Creation-Date: 2016-07-01 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: feathers/photo/info.yaml:1
-#: feathers/photo/photo.php:11
+#: feathers/photo/info.php:3
+#: feathers/photo/photo.php:10
 msgid "Photo"
 msgstr ""
 
-#: feathers/photo/info.yaml:4
+#: feathers/photo/info.php:6
 msgid "Upload and display an image with a caption."
 msgstr ""
 
@@ -30,15 +30,24 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: feathers/photo/photo.php:12
+#, php-format
+msgid "(Max. file size: %d Megabytes)"
+msgstr ""
+
 #: feathers/photo/photo.php:15
 msgid "Caption"
 msgstr ""
 
-#: feathers/photo/photo.php:109
+#: feathers/photo/photo.php:31
+msgid "You did not select a photo to upload."
+msgstr ""
+
+#: feathers/photo/photo.php:126
 msgid "Alt-Text"
 msgstr ""
 
-#: feathers/photo/photo.php:114
+#: feathers/photo/photo.php:131
 msgid "Source"
 msgstr ""
 

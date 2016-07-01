@@ -8,6 +8,10 @@
         # Holds all Feather instantiations.
         static $instances = array();
 
+        # Boolean: $cancelled
+        # Is the feather's execution cancelled?
+        public $cancelled = false;
+
         # Array: $custom_filters
         # Manages named Trigger filters for Feather fields.
         static $filters = array();
@@ -80,11 +84,6 @@
          *     note - A minor note to display next to the label text.
          */
         protected function setField($options) {
-            fallback($options["classes"], array());
-
-            if (isset($options["class"]))
-                $options["classes"][] = $options["class"];
-
             $this->fields[$options["attr"]] = $options;
         }
     }

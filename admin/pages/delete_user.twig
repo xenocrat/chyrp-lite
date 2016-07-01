@@ -1,0 +1,57 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Delete User?" | translate }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Delete User?" | translate }}</h1>
+<p>
+{{ "Are you sure you want to delete user &#8220;%s&#8221;?" | translate | format(user.login | fix) }}
+</p>
+<form class="delete split" action="{{ admin_url('destroy_user') }}" method="post" accept-charset="UTF-8">
+<fieldset>
+{% if user.posts is not empty %}
+{% if users is not empty %}
+<p>
+<label for="move_posts">{{ "Attribute posts to:" | translate }}</label>
+<select name="move_posts" id="move_posts">
+{% for user in users %}
+<option value="{{ user.id }}">{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}</option>
+{% endfor %}
+</select>
+</p>
+{% endif %}
+<p>
+<label for="posts_delete">{{ "Delete posts:" | translate }}</label>
+<input type="checkbox" name="posts" value="delete" id="posts_delete" checked="checked">
+</p>
+{% endif %}
+{% if user.pages is not empty %}
+{% if users is not empty %}
+<p>
+<label for="move_pages">{{ "Attribute pages to:" | translate }}</label>
+<select name="move_pages" id="move_pages">
+{% for user in users %}
+<option value="{{ user.id }}">{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}</option>
+{% endfor %}
+</select>
+</p>
+{% endif %}
+<p>
+<label for="pages_delete">{{ "Delete pages:" | translate }}</label>
+<input type="checkbox" name="pages" value="delete" id="pages_delete" checked="checked">
+</p>
+{% endif %}
+{{ trigger.call("delete_user_form") }}
+<div class="confirmation">
+<button name="destroy" value="indubitably" class="boo">
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Delete!" | translate }}
+</button>
+<button name="destroy" value="undecidedly" type="submit" class="yay">
+<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="icon">{{ "Cancel" | translate }}
+</button>
+</div>
+<input type="hidden" name="id" value="{{ user.id }}" id="id">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

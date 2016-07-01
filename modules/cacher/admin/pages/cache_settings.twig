@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Cache Settings" | translate("cacher") }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Cache Settings" | translate("cacher") }}</h1>
+<form id="cache_settings" class="split" action="{{ admin_url('cache_settings') }}" method="post">
+<fieldset>
+<p>
+<label for="cache_expire">{{ "Expire Cache After&hellip;" | translate("cacher") }}</label>
+<input class="text digits" type="number" name="cache_expire" value="{{ site.cache_expire | fix(true) }}" id="cache_expire">
+<span class="sub">{{ "(seconds)" | translate("cacher") }}</span>
+</p>
+<p>
+<label>{{ "Cache Control" | translate("cacher") }}</label>
+<button name="clear_cache" value="indubitably" class="boo">
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Clear Cache" | translate("cacher") }}
+</button>
+</p>
+<p>
+<label for="cache_exclude_0">{{ "Exclude URLs" | translate("cacher") }}</label>
+<input class="text" type="url" name="cache_exclude[0]" value="" id="cache_exclude_0">
+{% for exclusion in site.cache_exclude %}
+<input class="text" type="url" name="cache_exclude[{{ loop.index }}]" value="{{ exclusion | fix('true') }}" id="cache_exclude_{{ loop.index }}">
+{% endfor %}
+<small>
+{{ "A list of URLs that will not be cached; enter one at a time." | translate("cacher") }}
+</small>
+</p>
+<p class="buttons">
+<button name="clear_cache" value="undecidedly" type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

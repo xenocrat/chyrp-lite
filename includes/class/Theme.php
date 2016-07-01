@@ -8,19 +8,22 @@
         # The title for the current page.
         public $title = "";
 
+        # Array: $caches
+        # Query caches for methods.
+        private $caches = array();
+
         /**
          * Function: __construct
-         * Loads the Twig parser into <Theme>, and sets up the theme l10n domain.
+         * Loads the theme's info and l10n domain.
          */
         private function __construct() {
             $config = Config::current();
 
-            # Load the theme translator
-            if (file_exists(THEME_DIR."/locale/".$config->locale.".mo"))
-                load_translator("theme", THEME_DIR."/locale/".$config->locale.".mo");
+            # Load the theme translator.
+            load_translator("theme", THEME_DIR.DIR."locale".DIR.$config->locale.".mo");
 
             # Load the theme's info into the Theme class.
-            foreach (YAML::load(THEME_DIR."/info.yaml") as $key => $val)
+            foreach (include THEME_DIR.DIR."info.php" as $key => $val)
                 $this->$key = $val;
 
             $this->url = THEME_URL;
@@ -35,87 +38,59 @@
          *     $exclude - Page ID to exclude from the list. Used in the admin area.
          */
         public function pages_list($start = 0, $exclude = null) {
-            if (isset($this->pages_list[$start]))
-                return $this->pages_list[$start];
+            if (isset($this->caches["pages_list"][$start]))
+                return $this->caches["pages_list"][$start];
 
-            $this->linear_children = array();
-            $this->pages_flat = array();
-            $this->children = array();
-            $this->end_tags_for = array();
+            $this->caches["pages"]["flat"] = array();
+            $this->caches["pages"]["children"] = array();
 
-            if ($start and !is_numeric($start))
-                $begin_page = new Page(array("url" => $start));
+            if (!empty($start) and !is_numeric($start)) {
+                $from = new Page(array("url" => $start));
 
-            $start = ($start and !is_numeric($start)) ? $begin_page->id : $start ;
+                if (!$from->no_results)
+                    $start = $from->id;
+                else
+                    $start = (int) $start;
+            }
 
             $where = ADMIN ? array("id not" => $exclude) : array("show_in_list" => true) ;
             $pages = Page::find(array("where" => $where, "order" => "list_order ASC"));
 
             if (empty($pages))
-                return $this->pages_list[$start] = array();
-
-            foreach ($pages as $page)
-                $this->end_tags_for[$page->id] = $this->children[$page->id] = array();
+                return $this->caches["pages_list"][$start] = array();
 
             foreach ($pages as $page)
                 if ($page->parent_id != 0)
-                    $this->children[$page->parent_id][] = $page;
+                    $this->caches["pages"]["children"][$page->parent_id][] = $page;
 
             foreach ($pages as $page)
                 if ((!$start and $page->parent_id == 0) or ($start and $page->id == $start))
                     $this->recurse_pages($page);
 
-            $array = array();
-            foreach ($this->pages_flat as $page) {
-                $array[$page->id]["has_children"] = !empty($this->children[$page->id]);
-
-                if ($array[$page->id]["has_children"])
-                    $this->end_tags_for[$this->get_last_linear_child($page->id)][] = array("</ul>", "</li>");
-
-                $array[$page->id]["end_tags"] =& $this->end_tags_for[$page->id];
-                $array[$page->id]["page"] = $page;
-            }
-
             if (!isset($exclude))
-                return $this->pages_list[$start] = $array;
+                return $this->caches["pages_list"][$start] = $this->caches["pages"]["flat"];
             else
-                return $array;
-        }
-
-        /**
-         * Function: get_last_linear_child
-         * Gets the last linear child of a page.
-         *
-         * Parameters:
-         *     $page - Page to get the last linear child of.
-         *     $origin - Where to start.
-         */
-        public function get_last_linear_child($page, $origin = null) {
-            fallback($origin, $page);
-
-            $this->linear_children[$origin] = $page;
-            foreach ($this->children[$page] as $child)
-                $this->get_last_linear_child($child->id, $origin);
-
-            return $this->linear_children[$origin];
+                return $this->caches["pages"]["flat"];
         }
 
         /**
          * Function: recurse_pages
-         * Prepares the pages into <Theme.$pages_flat>.
+         * Populates the page cache and gives each page @depth@ and @children@ attributes.
          *
          * Parameters:
          *     $page - Page to start recursion at.
          */
-        public function recurse_pages($page) {
+        private function recurse_pages($page) {
             $page->depth = oneof(@$page->depth, 1);
+            $page->children = (isset($this->caches["pages"]["children"][$page->id])) ? true : false ;
 
-            $this->pages_flat[] = $page;
+            $this->caches["pages"]["flat"][] = $page;
 
-            foreach ($this->children[$page->id] as $child) {
-                $child->depth = $page->depth + 1;
-                $this->recurse_pages($child);
-            }
+            if (isset($this->caches["pages"]["children"][$page->id]))
+                foreach ($this->caches["pages"]["children"][$page->id] as $child) {
+                    $child->depth = $page->depth + 1;
+                    $this->recurse_pages($child);
+                }
         }
 
         /**
@@ -131,8 +106,8 @@
          *     The array. Each entry as "month", "year", and "url" values, stored as an array.
          */
         public function archives_list($limit = 0, $order_by = "created_at", $order = "desc") {
-            if (isset($this->archives_list["$limit,$order_by,$order"]))
-                return $this->archives_list["$limit,$order_by,$order"];
+            if (isset($this->caches["archives_list"]["$limit,$order_by,$order"]))
+                return $this->caches["archives_list"]["$limit,$order_by,$order"];
 
             $sql = SQL::current();
             $dates = $sql->select("posts",
@@ -149,6 +124,7 @@
 
             $archives = array();
             $grouped = array();
+
             while ($date = $dates->fetchObject())
                 if (isset($grouped[$date->month." ".$date->year]))
                     $archives[$grouped[$date->month." ".$date->year]]["count"]++;
@@ -161,7 +137,7 @@
                                         "count" => $date->posts);
                 }
 
-            return $this->archives_list["$limit,$order_by,$order"] = $archives;
+            return $this->caches["archives_list"]["$limit,$order_by,$order"] = $archives;
         }
 
         /**
@@ -172,17 +148,54 @@
          *     $limit - Number of posts to list
          */
         public function recent_posts($limit = 5) {
-            if (isset($this->recent_posts["$limit"]))
-                return $this->recent_posts["$limit"];
+            if (isset($this->caches["recent_posts"]["$limit"]))
+                return $this->caches["recent_posts"]["$limit"];
 
-            $results = Post::find(array("placeholders" => true));
+            $results = Post::find(array("placeholders" => true,
+                                        "where" => array("status" => "public"),
+                                        "order" => "created_at DESC, id DESC"));
             $posts = array();
 
             for ($i = 0; $i < $limit; $i++)
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->recent_posts["$limit"] = $posts;
+            return $this->caches["recent_posts"]["$limit"] = $posts;
+        }
+
+        /**
+         * Function: related_posts
+         * Ask modules to contribute to a list of related posts.
+         *
+         * Parameters:
+         *     $post - List posts related to this post
+         *     $limit - Number of related posts to list
+         */
+        public function related_posts($post, $limit = 5) {
+            if ($post->no_results)
+                return;
+
+            if (isset($this->caches["related_posts"]["$post->id"]["$limit"]))
+                return $this->caches["related_posts"]["$post->id"]["$limit"];
+
+            $ids = array();
+
+            Trigger::current()->filter($ids, "related_posts", $post, $limit);
+
+            if (empty($ids))
+                return;
+
+            $results = Post::find(array("placeholders" => true,
+                                        "where" => array("id" => $ids),
+                                        "order" => "created_at DESC, id DESC"));
+
+            $posts = array();
+
+            for ($i = 0; $i < $limit; $i++)
+                if (isset($results[0][$i]))
+                    $posts[] = new Post(null, array("read_from" => $results[0][$i]));
+
+            return $this->caches["related_posts"]["$post->id"]["$limit"] = $posts;
         }
 
         /**
@@ -193,7 +206,7 @@
          *     $file - The file's name
          */
         public function file_exists($file) {
-            return file_exists(THEME_DIR."/".$file.".twig");
+            return file_exists(THEME_DIR.DIR.$file.".twig");
         }
 
         /**
@@ -206,46 +219,45 @@
             $stylesheets = array();
             Trigger::current()->filter($stylesheets, "stylesheets");
 
+            $elements = "<!-- Styles -->";
             if (!empty($stylesheets))
-                $stylesheets = '<link rel="stylesheet" href="'.
-                               implode('" type="text/css" media="screen" charset="utf-8" />'."\n\t".'<link rel="stylesheet" href="', $stylesheets).
-                               '" type="text/css" media="screen" charset="utf-8" />';
-            else
-                $stylesheets = "";
+                foreach ($stylesheets as $stylesheet)
+                    $elements.= "\n".'<link rel="stylesheet" href="'.$stylesheet.'" type="text/css" media="all" charset="UTF-8">';
 
-            if (file_exists(THEME_DIR."/style.css"))
-                $stylesheets = '<link rel="stylesheet" href="'.THEME_URL.'/style.css" type="text/css" media="screen" charset="utf-8" />'."\n\t";
+            if (!file_exists(THEME_DIR.DIR."stylesheets".DIR) and !file_exists(THEME_DIR.DIR."css".DIR))
+                return $elements;
 
-            if (!file_exists(THEME_DIR."/stylesheets/") and !file_exists(THEME_DIR."/css/"))
-                return $stylesheets;
+            foreach(array_merge((array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
+                                (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css.php"),
+                                (array) glob(THEME_DIR.DIR."css".DIR."*.css"),
+                                (array) glob(THEME_DIR.DIR."css".DIR."*.css.php")) as $file) {
 
-            $long  = (array) glob(THEME_DIR."/stylesheets/*");
-            $short = (array) glob(THEME_DIR."/css/*");
-
-            $total = array_merge($long, $short);
-            foreach($total as $file) {
-                $path = preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file);
+                $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file);
                 $file = basename($file);
 
-                if (substr_count($file, ".inc.css") or (substr($file, -4) != ".css" and substr($file, -4) != ".php"))
+                if (!$file or substr_count($file, ".inc.css"))
                     continue;
 
-                if ($file == "ie.css")
-                    $stylesheets.= "<!--[if IE]>";
-                if (preg_match("/^ie([0-9\.]+)\.css/", $file, $matches))
-                    $stylesheets.= "<!--[if IE ".$matches[1]."]>";
-                elseif (preg_match("/(lte?|gte?)ie([0-9\.]+)\.css/", $file, $matches))
-                    $stylesheets.= "<!--[if ".$matches[1]." IE ".$matches[2]."]>";
+                $name = substr($file, 0, strpos($file, "."));
+                switch ($name) {
+                    case "print":
+                        $media = "print";
+                        break;
+                    case "screen":
+                        $media = "screen";
+                        break;
+                    case "speech":
+                        $media = "speech";
+                        break;
+                    default:
+                        $media = "all";
+                        break;
+                }
 
-                $stylesheets.= '<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.($file == "print.css" ? "print" : "screen").'" charset="utf-8" />';
-
-                if ($file == "ie.css" or preg_match("/(lt|gt)?ie([0-9\.]+)\.css/", $file))
-                    $stylesheets.= "<![endif]-->";
-
-                $stylesheets.= "\n\t";
+                $elements.= "\n".'<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.$media.'">';
             }
 
-            return $stylesheets;
+            return $elements;
         }
 
         /**
@@ -261,31 +273,31 @@
                 if (!empty($val) and $val != $route->action)
                     $args.= "&amp;".$key."=".urlencode($val);
 
-            $javascripts = array($config->chyrp_url."/includes/lib/gz.php?file=jquery.js",
-                                 $config->chyrp_url."/includes/lib/gz.php?file=plugins.js",
+            $javascripts = array($config->chyrp_url."/includes/common.js",
                                  $config->chyrp_url.'/includes/javascript.php?action='.$route->action.$args);
+
             Trigger::current()->filter($javascripts, "scripts");
 
-            $javascripts = '<script src="'.
-                           implode('" type="text/javascript" charset="utf-8"></script>'."\n\t".'<script src="', $javascripts).
-                           '" type="text/javascript" charset="utf-8"></script>';
+            $elements = "<!-- JavaScripts -->";
 
-            if (file_exists(THEME_DIR."/javascripts/") or file_exists(THEME_DIR."/js/")) {
-                $long  = (array) glob(THEME_DIR."/javascripts/*.js");
-                $short = (array) glob(THEME_DIR."/js/*.js");
+            foreach ($javascripts as $javascript)
+                $elements.= "\n".'<script src="'.$javascript.'" type="text/javascript" charset="UTF-8"></script>';
 
-                foreach(array_merge($long, $short) as $file)
-                    if ($file and !substr_count($file, ".inc.js"))
-                        $javascripts.= "\n\t".'<script src="'.$config->chyrp_url.'/includes/lib/gz.php?file='.preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
+            if (file_exists(THEME_DIR.DIR."javascripts".DIR) or file_exists(THEME_DIR.DIR."js".DIR)) {
+                foreach(array_merge((array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
+                                    (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js.php"),
+                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js"),
+                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js.php")) as $file) {
 
-                $long  = (array) glob(THEME_DIR."/javascripts/*.php");
-                $short = (array) glob(THEME_DIR."/js/*.php");
-                foreach(array_merge($long, $short) as $file)
-                    if ($file)
-                        $javascripts.= "\n\t".'<script src="'.$config->chyrp_url.preg_replace("/(.+)\/themes\/(.+)/", "/themes/\\2", $file).'" type="text/javascript" charset="utf-8"></script>';
+                    if (substr_count($file, ".inc.js"))
+                        continue;
+
+                    $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file);
+                    $elements.= "\n".'<script src="'.$config->chyrp_url.$path.'" type="text/javascript" charset="UTF-8"></script>';
+                }
             }
 
-            return $javascripts;
+            return $elements;
         }
 
         /**
@@ -295,24 +307,21 @@
         public function feeds() {
             # Compute the URL of the per-page feed (if any):
             $config = Config::current();
-            $request = ($config->clean_urls) ? rtrim(Route::current()->request, "/") : fix(Route::current()->request) ;
+            $route = Route::current();
+            $request = ($config->clean_urls) ? rtrim($route->request, "/") : fix($route->request) ;
             $append = $config->clean_urls ?
-                          "/feed" :
-                          ((count($_GET) == 1 and Route::current()->action == "index") ?
+                          "/feed/" :
+                          ((count($_GET) == 1 and $route->action == "index") ?
                                "/?feed" :
                                "&amp;feed") ;
-            $append.= $config->clean_urls ?
-                          "/".urlencode($this->title) :
-                          "&amp;title=".urlencode($this->title) ;
 
             # Create basic list of links (site and page Atom feeds):
-            $feedurl = oneof(@$config->feed_url, url("feed"));
+            $mainfeedurl = oneof($config->feed_url, url("feed"));
             $pagefeedurl = $config->url.$request.$append;
-            $links = array(array("href" => $feedurl, "type" => "application/atom+xml", "title" => $config->name));
+            $links = array(array("href" => $mainfeedurl, "type" => "application/atom+xml", "title" => $config->name));
 
-            if ($request !== "/")
-                if ($pagefeedurl != $feedurl)
-                    $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml", "title" => "$this->title");
+            if (array_key_exists("posts", MainController::current()->context) and ($pagefeedurl != $mainfeedurl))
+                $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml");
 
             # Ask modules to pitch in by adding their own <link> tag items to $links.
             # Each item must be an array with "href" and "rel" properties (and optionally "title" and "type"):
@@ -321,10 +330,10 @@
             # Generate <link> tags:
             $tags = array();
             foreach ($links as $link) {
-                $rel = oneof(@$link["rel"], "alternate");
+                $rel = oneof(fallback($link["rel"], ""), "alternate");
                 $href = $link["href"];
-                $type = @$link["type"];
-                $title = @$link["title"];
+                $type = fallback($link["type"], false);
+                $title = fallback($link["title"], false);
                 $tag = '<link rel="'.$rel.'" href="'.$link["href"].'"';
 
                 if ($type)
@@ -333,10 +342,10 @@
                 if ($title)
                     $tag.= ' title="'.$title.'"';
 
-                $tags[] = $tag.' />';
+                $tags[] = $tag.'>';
             }
 
-            return implode("\n\t", $tags);
+            return "<!-- Feeds -->\n".implode("\n", $tags);
         }
 
         public function load_time() {
@@ -349,6 +358,7 @@
          */
         public static function & current() {
             static $instance = null;
-            return $instance = (empty($instance)) ? new self() : $instance ;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
         }
     }

@@ -1,0 +1,133 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Modules" | translate }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Modules" | translate }}</h2>
+<ul id="modules_enabled" class="extend modules">
+<h5>{{ "Enabled" | translate }}</h5>
+{% for safename, module in enabled_modules %}
+<li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(" ") : '' }}" id="module_{{ safename }}">
+<h3>
+<a class="emblem module_url" href="{{ module.url }}" target="_blank">
+<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
+</a>
+{{ module.name }}{# translation is done in the controller #}
+</h3>
+{% if module.help %}
+<a href="{{ admin_url('help', {'id': module.help}) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+{% endif %}
+<p class="module_description">
+{{ module.description }}{# translation is done in the controller #}
+</p>
+{% if module.conflicting_modules is not empty %}
+<h4 class="module_conflicts_message">
+{{ "This module conflicts with the following installed modules:" | translate }}
+</h4>
+<ol class="module_conflicts_list">
+{% for conflict in module.conflicting_modules %}
+<li class="{{ conflict }}">{{ conflict | camelize }}</li>
+{% endfor %}
+</ol>
+{% endif %}
+{% if module.dependencies_needed is not empty %}
+<h4 class="module_dependencies_message">
+{{ "This module requires the following modules to be enabled:" | translate }}
+</h4>
+<ol class="module_dependencies_list">
+{% for dependency in module.dependencies_needed %}
+<li class="{{ dependency }}">{{ dependency | camelize }}</li>
+{% endfor %}
+</ol>
+{% endif %}
+<div class="controls">
+<form class="module_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<input type="hidden" name="module" value="{{ safename }}" id="hash">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<button type="submit">
+<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
+</button>
+{% if module.confirm is not empty %}
+<p class="module_disabler_confirm">
+<label for="confirm_{{ safename }}">{{ module.confirm }}{# translation is done in the controller #}</label>
+<input class="checkbox" type="checkbox" name="confirm" id="confirm_{{ safename }}">
+</p>
+{% endif %}
+</form>
+<form class="module_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<input type="hidden" name="module" value="{{ safename }}" id="hash">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<button type="submit">
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
+</button>
+</form>
+<div class="clear"></div>
+</div>
+</li>
+{% endfor %}
+</ul>
+<ul id="modules_disabled" class="extend modules">
+<h5>{{ "Disabled" | translate }}</h5>
+{% for safename, module in disabled_modules %}
+<li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(" ") : '' }}" id="module_{{ safename }}">
+<h3>
+<a class="emblem module_url" href="{{ module.url }}" target="_blank">
+<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
+</a>
+{{ module.name }}{# translation is done in the controller #}
+</h3>
+{% if module.help %}
+<a href="{{ admin_url('help', {'id': module.help}) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+{% endif %}
+<p class="module_description">
+{{ module.description }}{# translation is done in the controller #}
+</p>
+{% if module.conflicting_modules is not empty %}
+<h4 class="module_conflicts_message">
+{{ "This module conflicts with the following installed modules:" | translate }}
+</h4>
+<ol class="module_conflicts_list">
+{% for conflict in module.conflicting_modules %}
+<li class="{{ conflict }}">{{ conflict | camelize }}</li>
+{% endfor %}
+</ol>
+{% endif %}
+{% if module.dependencies_needed is not empty %}
+<h4 class="module_dependencies_message">
+{{ "This module requires the following modules to be enabled:" | translate }}
+</h4>
+<ol class="module_dependencies_list">
+{% for dependency in module.dependencies_needed %}
+<li class="{{ dependency }}">{{ dependency | camelize }}</li>
+{% endfor %}
+</ol>
+{% endif %}
+{% if module.classes is defined and not (module.classes | contains("missing_dependency")) %}
+<div class="controls">
+<form class="module_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<input type="hidden" name="module" value="{{ safename }}" id="hash">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<button type="submit">
+<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
+</button>
+{% if module.confirm is not empty %}
+<p class="module_disabler_confirm">
+<label for="confirm_{{ safename }}">{{ module.confirm }}{# translation is done in the controller #}</label>
+<input class="checkbox" type="checkbox" name="confirm" id="confirm_{{ safename }}">
+</p>
+{% endif %}
+</form>
+<form class="module_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<input type="hidden" name="module" value="{{ safename }}" id="hash">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<button type="submit">
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
+</button>
+</form>
+<div class="clear"></div>
+</div>
+{% endif %}
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

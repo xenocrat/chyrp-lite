@@ -1,129 +1,74 @@
 <?php
     /**
      * File: Upgrader
-     * A task-based general-purpose Chyrp upgrader.
+     * A task-based gerneral purpose upgrader for Chyrp Lite, enabled modules and enabled extensions.
      *
      * Performs upgrade functions based on individual tasks, and checks whether or not they need to be done.
-     *
-     * Version-agnostic. Completely safe to be run at all times, by anyone.
      */
 
-    header("Content-type: text/html; charset=UTF-8");
+    header("Content-Type: text/html; charset=UTF-8");
 
-    define('DEBUG',        true);
-    define('CHYRP_VERSION', "2014.10.12");
-    define('CACHE_TWIG',   false);
-    define('JAVASCRIPT',   false);
-    define('ADMIN',        false);
-    define('AJAX',         false);
-    define('XML_RPC',      false);
-    define('TRACKBACK',    false);
-    define('UPGRADING',    true);
-    define('INSTALLING',   false);
-    define('TESTER',       true);
-    define('INDEX',        false);
-    define('MAIN_DIR',     dirname(__FILE__));
-    define('INCLUDES_DIR', dirname(__FILE__)."/includes");
-    define('MODULES_DIR',  MAIN_DIR."/modules");
-    define('FEATHERS_DIR', MAIN_DIR."/feathers");
-    define('THEMES_DIR',   MAIN_DIR."/themes");
-    define('USE_ZLIB',     true);
+    define('DEBUG',          true);
+    define('CHYRP_VERSION',  "2016.03");
+    define('CHYRP_CODENAME', "Chestnut");
+    define('CACHE_TWIG',     false);
+    define('JAVASCRIPT',     false);
+    define('MAIN',           false);
+    define('ADMIN',          false);
+    define('AJAX',           false);
+    define('XML_RPC',        false);
+    define('UPGRADING',      true);
+    define('INSTALLING',     false);
+    define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
+    define('DIR',            DIRECTORY_SEPARATOR);
+    define('MAIN_DIR',       dirname(__FILE__));
+    define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
+    define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
+    define('MODULES_DIR',    MAIN_DIR.DIR."modules");
+    define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
+    define('THEMES_DIR',     MAIN_DIR.DIR."themes");
+    define('USE_OB',         true);
+    define('USE_ZLIB',       false);
 
-    if (!AJAX and
-        extension_loaded("zlib") and
-        !ini_get("zlib.output_compression") and
-        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
-        USE_ZLIB) {
-        ob_start("ob_gzhandler");
-        header("Content-Encoding: gzip");
-    } else
-        ob_start();
+    # Constant: JSON_PRETTY_PRINT
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_PRETTY_PRINT'))
+        define('JSON_PRETTY_PRINT', 0);
 
-    /**
-     * Function: config_file
-     * Returns what config file their install is set up for.
-     */
-    function config_file() {
-        if (file_exists(INCLUDES_DIR."/config.yaml.php"))
-            return INCLUDES_DIR."/config.yaml.php";
+    # Constant: JSON_UNESCAPED_SLASHES
+    # Define a safe value to avoid warnings pre-5.4
+    if (!defined('JSON_UNESCAPED_SLASHES'))
+        define('JSON_UNESCAPED_SLASHES', 0);
 
-        if (file_exists(INCLUDES_DIR."/config.yml.php"))
-            return INCLUDES_DIR."/config.yml.php";
+    # Make sure E_STRICT is on so Chyrp remains errorless.
+    error_reporting(E_ALL | E_STRICT);
 
-        if (file_exists(INCLUDES_DIR."/config.php"))
-            return INCLUDES_DIR."/config.php";
+    ob_start();
 
-        exit("Config file not found.");
-    }
-
-    /**
-     * Function: database_file
-     * Returns what database config file their install is set up for.
-     */
-    function database_file() {
-        if (file_exists(INCLUDES_DIR."/database.yaml.php"))
-            return INCLUDES_DIR."/database.yaml.php";
-
-        if (file_exists(INCLUDES_DIR."/database.yml.php"))
-            return INCLUDES_DIR."/database.yml.php";
-
-        if (file_exists(INCLUDES_DIR."/database.php"))
-            return INCLUDES_DIR."/database.php";
-
-        return false;
-    }
-
-    /**
-     * Function: using_yaml
-     * Are they using YAML config storage?
-     */
-    function using_yaml() {
-        return (basename(config_file()) != "config.php" and basename(database_file()) != "database.php") or !database_file();
-    }
-
-    # Evaluate the code in their config files, but with the classes renamed, so we can safely retrieve the values.
-    if (!using_yaml()) {
-        eval(str_replace(array("<?php", "?>", "Config"),
-                         array("", "", "OldConfig"),
-                         file_get_contents(config_file())));
-
-        if (database_file())
-            eval(str_replace(array("<?php", "?>", "SQL"),
-                             array("", "", "OldSQL"),
-                             file_get_contents(database_file())));
-    }
+    # File: Error
+    # Error handling functions.
+    require_once INCLUDES_DIR.DIR."error.php";
 
     # File: Helpers
-    # Various functions used throughout Chyrp's code.
-    require_once INCLUDES_DIR."/helpers.php";
-
-    # File: Gettext
-    # Gettext library.
-    require_once INCLUDES_DIR."/lib/gettext/gettext.php";
-
-    # File: Streams
-    # Streams library.
-    require_once INCLUDES_DIR."/lib/gettext/streams.php";
-
-    # File: YAML
-    # Horde YAML parsing library.
-    require_once INCLUDES_DIR."/lib/YAML.php";
+    # Various functions used throughout the codebase.
+    require_once INCLUDES_DIR.DIR."helpers.php";
 
     # File: SQL
     # See Also:
     #     <SQL>
-    require INCLUDES_DIR."/class/SQL.php";
+    require INCLUDES_DIR.DIR."class".DIR."SQL.php";
+
+    # Register our autoloader.
+    spl_autoload_register("autoload");
 
     /**
      * Class: Config
-     * Handles writing to whichever config file they're using.
+     * Handles writing to the config file.
      */
     class Config {
-        # Array: $yaml
-        # Stores all of the YAML data.
-        static $yaml = array("config" => array(),
-                             "database" => array());
+        # Variable: $json
+        # Holds all of the JSON settings as a $key => $val array.
+        static $json = array();
 
         /**
          * Function: get
@@ -133,7 +78,7 @@
          *     $setting - The setting to return.
          */
         static function get($setting) {
-            return (isset(Config::$yaml["config"][$setting])) ? Config::$yaml["config"][$setting] : false ;
+            return (isset(Config::$json[$setting])) ? Config::$json[$setting] : false ;
         }
 
         /**
@@ -146,18 +91,17 @@
          *     $message - The message to display with test().
          */
         static function set($setting, $value, $message = null) {
-            if (self::get($setting) == $value) return;
+            if (self::get($setting) == $value)
+                return;
 
             if (!isset($message))
                 $message = _f("Setting %s to %s...", array($setting, normalize(print_r($value, true))));
 
-            Config::$yaml["config"][$setting] = $value;
-
+            Config::$json[$setting] = $value;
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+            $dump = $protection.json_set(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-            $dump = $protection.YAML::dump(Config::$yaml["config"]);
-
-            echo $message.test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+            echo $message.test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
         }
 
         /**
@@ -168,7 +112,7 @@
          *     $setting - Name of the config to check.
          */
         static function check($setting) {
-            return (isset(Config::$yaml["config"][$setting]));
+            return (isset(Config::$json[$setting]));
         }
 
         /**
@@ -196,37 +140,17 @@
          *     $setting - The setting to remove.
          */
         static function remove($setting) {
-            if (!self::check($setting)) return;
+            if (!self::check($setting))
+                return;
 
-            unset(Config::$yaml["config"][$setting]);
-
+            unset(Config::$json[$setting]);
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-
-            $dump = $protection.YAML::dump(Config::$yaml["config"]);
+            $dump = $protection.json_set(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             echo _f("Removing %s setting...", array($setting)).
-                 test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $dump));
+                 test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
         }
     }
-
-    if (using_yaml()) {
-        Config::$yaml["config"] = YAML::load(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(config_file())));
-
-        if (database_file())
-            Config::$yaml["database"] = YAML::load(preg_replace("/<\?php(.+)\?>\n?/s", "", file_get_contents(database_file())));
-        else
-            Config::$yaml["database"] = oneof(@Config::$yaml["config"]["sql"], array());
-    } else {
-        # $config and $sql here are loaded from the eval()'s above.
-
-        foreach ($config as $name => $val)
-            Config::$yaml["config"][$name] = $val;
-
-        foreach ($sql as $name => $val)
-            Config::$yaml["database"][$name] = $val;
-    }
-
-    load_translator("chyrp", INCLUDES_DIR."/locale/".Config::get("locale").".mo");
 
     /**
      * Function: test
@@ -252,926 +176,168 @@
             return " <span class=\"boo\">".__("failed!")."</span>\n".$info;
     }
 
+    # Attempt to load the config file and initialize the configuration.
+
+    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+        redirect("install.php");
+
+    Config::$json = json_get(preg_replace("/<\?php(.+)\?>\n?/s", "",
+                             file_get_contents(INCLUDES_DIR.DIR."config.json.php")), true);
+
+    # Prepare the SQL interface and initialize the connection to SQL server.
+
+    $sql = SQL::current();
+
+    foreach (Config::$json["sql"] as $name => $value)
+        $sql->$name = $value;
+
+    $sql->connect();
+
+    # Load the translator.
+
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.Config::get("locale").".mo");
+
     #---------------------------------------------
     # Upgrading Actions
     #---------------------------------------------
 
     /**
      * Function: fix_htaccess
-     * Repairs their .htaccess file.
+     * Repairs the .htaccess file.
      */
     function fix_htaccess() {
-        $url = "http://".$_SERVER['HTTP_HOST'].str_replace("/upgrade.php", "", $_SERVER['REQUEST_URI']);
+        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
+        $url = $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).str_replace("/upgrade.php", "", $_SERVER['REQUEST_URI']);
         $index = (parse_url($url, PHP_URL_PATH)) ? "/".trim(parse_url($url, PHP_URL_PATH), "/")."/" : "/" ;
+        $htaccess = preg_replace("~%\\{CHYRP_PATH\\}~", $index, file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
+        $htaccess_has_chyrp = (file_exists(MAIN_DIR.DIR.".htaccess") and
+                               preg_match("~".preg_quote($htaccess, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")));
 
-        $path = preg_quote($index, "/");
-        $htaccess_has_chyrp = (file_exists(MAIN_DIR."/.htaccess") and preg_match("/<IfModule mod_rewrite\.c>\n([\s]*)RewriteEngine On\n([\s]*)RewriteBase {$path}\n([\s]*)RewriteCond %\{REQUEST_FILENAME\} !-f\n([\s]*)RewriteCond %\{REQUEST_FILENAME\} !-d\n([\s]*)RewriteRule (\^\.\+\\$|\!\\.\(gif\|jpg\|png\|css\)) index\.php \[L\]\n([\s]*)RewriteRule \^\.\+\\\.twig\\$ index\.php \[L\]\n([\s]*)<\/IfModule>/", file_get_contents(MAIN_DIR."/.htaccess")));
         if ($htaccess_has_chyrp)
             return;
 
-        $htaccess = "<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteBase {$index}\nRewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule ^.+\$ index.php [L]\nRewriteRule ^.+\\.twig\$ index.php [L]\n</IfModule>";
-
-        if (!file_exists(MAIN_DIR."/.htaccess"))
+        if (!file_exists(MAIN_DIR.DIR.".htaccess"))
             echo __("Generating .htaccess file...").
-                 test(@file_put_contents(MAIN_DIR."/.htaccess", $htaccess), __("Try creating the file and/or CHMODding it to 777 temporarily."));
+                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess),
+                      __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
         else
             echo __("Appending to .htaccess file...").
-                 test(@file_put_contents(MAIN_DIR."/.htaccess", "\n\n".$htaccess, FILE_APPEND), __("Try creating the file and/or CHMODding it to 777 temporarily."));
+                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND),
+                      __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
     }
 
     /**
-     * Function: tweets_to_posts
-     * Enacts the "tweet" to "post" rename.
+     * Function: add_markdown
+     * Adds the enable_markdown config setting.
      *
-     * Versions: 1.0.2 => 1.0.3
+     * Versions: 2015.06 => 2015.07
      */
-    function tweets_to_posts() {
-        if (SQL::current()->query("SELECT * FROM __tweets"))
-            echo __("Renaming tweets table to posts...").
-                 test(SQL::current()->query("RENAME TABLE __tweets TO __posts"));
-
-        if (SQL::current()->query("SELECT add_tweet FROM __groups"))
-            echo __("Renaming add_tweet permission to add_post...").
-                 test(SQL::current()->query("ALTER TABLE __groups CHANGE add_tweet add_post TINYINT(1) NOT NULL DEFAULT '0'"));
-
-        if (SQL::current()->query("SELECT edit_tweet FROM __groups"))
-            echo __("Renaming edit_tweet permission to edit_post...").
-                 test(SQL::current()->query("ALTER TABLE __groups CHANGE edit_tweet edit_post TINYINT(1) NOT NULL DEFAULT '0'"));
-
-        if (SQL::current()->query("SELECT delete_tweet FROM __groups"))
-            echo __("Renaming delete_tweet permission to delete_post...").
-                 test(SQL::current()->query("ALTER TABLE __groups CHANGE delete_tweet delete_post TINYINT(1) NOT NULL DEFAULT '0'"));
-
-        if (Config::check("tweets_per_page")) {
-            Config::fallback("posts_per_page", Config::get("tweets_per_page"));
-            Config::remove("tweets_per_page");
-        }
-
-        if (Config::check("tweet_url")) {
-            Config::fallback("post_url", Config::get("tweet_url"));
-            Config::remove("tweet_url");
-        }
-
-        if (Config::check("rss_tweets")) {
-            Config::fallback("rss_posts", Config::get("rss_posts"));
-            Config::remove("rss_tweets");
-        }
+    function add_markdown() {
+        Config::fallback("enable_markdown", true);
     }
 
     /**
-     * Function: pages_parent_id_column
-     * Adds the @parent_id@ column to the "pages" table.
+     * Function: add_homepage
+     * Adds the enable_homepage config setting.
      *
-     * Versions: 1.0.3 => 1.0.4
+     * Versions: 2015.06 => 2015.07
      */
-    function pages_parent_id_column() {
-        if (SQL::current()->query("SELECT parent_id FROM __pages"))
-            return;
-
-        echo __("Adding parent_id column to pages table...").
-             test(SQL::current()->query("ALTER TABLE __pages ADD parent_id INT(11) NOT NULL DEFAULT '0' AFTER user_id"));
+    function add_homepage() {
+        Config::fallback("enable_homepage", false);
     }
 
     /**
-     * Function: pages_list_order_column
-     * Adds the @list_order@ column to the "pages" table.
+     * Function: add_uploads_limit
+     * Adds the uploads_limit config setting.
      *
-     * Versions: 1.0.4 => 1.1.0
+     * Versions: 2015.06 => 2015.07
      */
-    function pages_list_order_column() {
-        if (SQL::current()->query("SELECT list_order FROM __pages"))
-            return;
-
-        echo __("Adding list_order column to pages table...").
-             test(SQL::current()->query("ALTER TABLE __pages ADD list_order INT(11) NOT NULL DEFAULT '0' AFTER show_in_list"));
+    function add_uploads_limit() {
+        Config::fallback("uploads_limit", 10);
     }
 
     /**
-     * Function: remove_beginning_slash_from_post_url
-     * Removes the slash at the beginning of the post URL setting.
-     */
-    function remove_beginning_slash_from_post_url() {
-        if (substr(Config::get("post_url"), 0, 1) == "/")
-            Config::set("post_url", ltrim(Config::get("post_url"), "/"));
-    }
-
-    /**
-     * Function: move_yml_yaml
-     * Renames config.yml.php to config.yaml.php.
+     * Function: remove_trackbacking
+     * Removes the enable_trackbacking config setting.
      *
-     * Versions: 1.1.2 => 1.1.3
+     * Versions: 2015.06 => 2015.07
      */
-    function move_yml_yaml() {
-        if (file_exists(INCLUDES_DIR."/config.yml.php"))
-            echo __("Moving /includes/config.yml.php to /includes/config.yaml.php...").
-                 test(@rename(INCLUDES_DIR."/config.yml.php", INCLUDES_DIR."/config.yaml.php"), __("Try CHMODding the file to 777."));
+    function remove_trackbacking() {
+        Config::remove("enable_trackbacking");
     }
 
     /**
-     * Function: update_protection
-     * Updates the PHP protection code in the config file.
-     */
-    function update_protection() {
-        if (!file_exists(INCLUDES_DIR."/config.yaml.php") or
-            substr_count(file_get_contents(INCLUDES_DIR."/config.yaml.php"),
-                         "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>"))
-            return;
-
-        $contents = file_get_contents(INCLUDES_DIR."/config.yaml.php");
-        $new_error = preg_replace("/<\?php (.+) \?>/",
-                                  "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>",
-                                  $contents);
-
-        echo __("Updating protection code in config.yaml.php...").
-             test(@file_put_contents(INCLUDES_DIR."/config.yaml.php", $new_error), __("Try CHMODding the file to 777."));
-    }
-
-    /**
-     * Function: theme_default_to_blossom
-     * Changes their theme from "default" to "blossom", or leaves it alone if they're not using "default".
+     * Function: add_admin_per_page
+     * Adds the admin_per_page config setting.
      *
-     * Versions: 1.1.3.2 => 2.0
+     * Versions: 2015.07 => 2016.01
      */
-    function theme_default_to_blossom() {
-        if (Config::get("theme") != "default") return;
-        Config::set("theme", "blossom");
+    function add_admin_per_page() {
+        Config::fallback("admin_per_page", 25);
     }
-
-    /**
-     * Function: default_db_adapter_to_mysql
-     * Adds an "adapter" SQL setting if it doesn't exist, and sets it to "mysql".
-     *
-     * Versions: 1.1.3.2 => 2.0
-     */
-    function default_db_adapter_to_mysql() {
-        $sql = SQL::current();
-        if (isset($sql->adapter)) return;
-        $sql->set("adapter", "mysql");
-    }
-
-    /**
-     * Function: move_upload
-     * Renames the "upload" directory to "uploads".
-     */
-    function move_upload() {
-        if (file_exists(MAIN_DIR."/upload") and !file_exists(MAIN_DIR."/uploads"))
-            echo __("Renaming /upload directory to /uploads...").test(@rename(MAIN_DIR."/upload", MAIN_DIR."/uploads"), __("Try CHMODding the directory to 777."));
-    }
-
-    /**
-     * Function: make_posts_xml
-     * Updates all of the post XML data to well-formed non-CDATAized XML.
-     *
-     * Versions: 1.1.3.2 => 2.0
-     */
-    function make_posts_safe() {
-        if (!$posts = SQL::current()->query("SELECT * FROM __posts"))
-            return;
-
-        if (!SQL::current()->query("SELECT xml FROM __posts"))
-            return;
-
-        function clean_xml(&$input) {
-            $input = trim($input);
-        }
-
-        while ($post = $posts->fetchObject()) {
-            if (!substr_count($post->xml, "<![CDATA["))
-                continue;
-
-            $post->xml = str_replace("<![CDATA[]]>", "", $post->xml);
-
-            $xml = simplexml_load_string($post->xml, "SimpleXMLElement", LIBXML_NOCDATA);
-
-            $parse = xml2arr($xml);
-
-            array_walk_recursive($parse, "clean_xml");
-
-            $new_xml = new SimpleXMLElement("<post></post>");
-            arr2xml($new_xml, $parse);
-
-            echo _f("Sanitizing XML data of post #%d...", array($post->id)).
-                 test(SQL::current()->update("posts",
-                                             array("id" => $post->id),
-                                             array("xml" => $new_xml->asXML())));
-        }
-    }
-
-    /**
-     * Function: rss_posts_to_feed_items
-     * Rename the feed items setting.
-     *
-     * Versions: 1.1.3.2 => 2.0
-     */
-    function rss_posts_to_feed_items() {
-        if (!Config::check("rss_posts"))
-            return;
-
-        Config::fallback("feed_items", Config::get("rss_posts"));
-        Config::remove("rss_posts");
-    }
-
-    /**
-     * Function: update_groups_to_yaml
-     * Updates the groups to use YAML-based permissions instead of table columns.
-     *
-     * Versions: 1.1.3.2 => 2.0
-     */
-    function update_groups_to_yaml() {
-        if (!SQL::current()->query("SELECT view_site FROM __groups")) return;
-
-        $get_groups = SQL::current()->query("SELECT * FROM __groups");
-        echo __("Backing up current groups table...").test($get_groups);
-        if (!$get_groups) return;
-
-        $groups = array();
-        # Generate an array of groups, name => permissions.
-        while ($group = $get_groups->fetchObject()) {
-            $groups[$group->name] = array("permissions" => array());
-            foreach ($group as $key => $val)
-                if ($key != "name" and $key != "id" and $val)
-                    $groups[$group->name]["permissions"][] = $key;
-                elseif ($key == "id")
-                    $groups[$group->name]["id"] = $val;
-        }
-
-        # Convert permissions array to a YAML dump.
-        foreach ($groups as $key => &$val)
-            $val["permissions"] = YAML::dump($val["permissions"]);
-
-        $drop_groups = SQL::current()->query("DROP TABLE __groups");
-        echo __("Dropping old groups table...").test($drop_groups);
-        if (!$drop_groups) return;
-
-        $groups_table = SQL::current()->query("CREATE TABLE __groups (
-                                                   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                                   name VARCHAR(100) DEFAULT '',
-                                                   permissions LONGTEXT,
-                                                   UNIQUE (name)
-                                               ) DEFAULT CHARSET=utf8");
-        echo __("Creating new groups table...").test($groups_table);
-        if (!$groups_table) return;
-
-        foreach($groups as $name => $values)
-            echo _f("Restoring group \"%s\"...", array($name)).
-                 test(SQL::current()->insert("groups",
-                                             array("id" => $values["id"],
-                                                   "name" => $name,
-                                                   "permissions" => $values["permissions"])));
-    }
-
-    /**
-     * Function: add_permissions_table
-     * Creates the "permissions" table and fills it in with the default set.
-     *
-     * Versions: 1.1.3.2 => 2.0
-     */
-    function add_permissions_table() {
-        if (SQL::current()->query("SELECT * FROM __permissions")) return;
-
-        $permissions_table = SQL::current()->query("CREATE TABLE __permissions (
-                                                        id VARCHAR(100) DEFAULT '' PRIMARY KEY,
-                                                        name VARCHAR(100) DEFAULT ''
-                                                    ) DEFAULT CHARSET=utf8");
-        echo __("Creating new permissions table...").test($permissions_table);
-        if (!$permissions_table) return;
-
-        $permissions = array("change_settings" => "Change Settings",
-                             "toggle_extensions" => "Toggle Extensions",
-                             "view_site" => "View Site",
-                             "view_private" => "View Private Posts",
-                             "view_draft" => "View Drafts",
-                             "view_own_draft" => "View Own Drafts",
-                             "add_post" => "Add Posts",
-                             "add_draft" => "Add Drafts",
-                             "edit_post" => "Edit Posts",
-                             "edit_draft" => "Edit Drafts",
-                             "edit_own_post" => "Edit Own Posts",
-                             "edit_own_draft" => "Edit Own Drafts",
-                             "delete_post" => "Delete Posts",
-                             "delete_draft" => "Delete Drafts",
-                             "delete_own_post" => "Delete Own Posts",
-                             "delete_own_draft" => "Delete Own Drafts",
-                             "add_page" => "Add Pages",
-                             "edit_page" => "Edit Pages",
-                             "delete_page" => "Delete Pages",
-                             "add_user" => "Add Users",
-                             "edit_user" => "Edit Users",
-                             "delete_user" => "Delete Users",
-                             "add_group" => "Add Groups",
-                             "edit_group" => "Edit Groups",
-                             "delete_group" => "Delete Groups");
-
-        foreach ($permissions as $id => $name)
-            echo _f("Inserting permission \"%s\"...", array($name)).
-                 test(SQL::current()->insert("permissions",
-                                             array("id" => $id,
-                                                   "name" => $name)));
-    }
-
-    /**
-     * Function: add_sessions_table
-     * Creates the "sessions" table.
-     *
-     * Versions: 1.1.3.2 => 2.0
-     */
-    function add_sessions_table() {
-        if (SQL::current()->query("SELECT * FROM __sessions")) return;
-
-        echo __("Creating `sessions` table...").
-             test(SQL::current()->query("CREATE TABLE __sessions (
-                                             id VARCHAR(40) DEFAULT '',
-                                             data LONGTEXT,
-                                             user_id INTEGER DEFAULT '0',
-                                             created_at DATETIME DEFAULT NULL,
-                                             updated_at DATETIME DEFAULT NULL,
-                                             PRIMARY KEY (id)
-                                         ) DEFAULT CHARSET=utf8") or die(mysql_error()));
-    }
-
-    /**
-     * Function: update_permissions_table
-     * Updates the "permissions" table from ## (id) => foo_bar (name) to foo_bar (id) => Foo Bar (name).
-     *
-     * Versions: 2.0b => 2.0
-     */
-    function update_permissions_table() {
-        # If there are any non-numeric IDs in the permissions database, assume this is already done.
-        $check = SQL::current()->query("SELECT * FROM __permissions");
-        while ($row = $check->fetchObject())
-            if (!is_numeric($row->id))
-                return;
-
-        $permissions_backup = array();
-        $get_permissions = SQL::current()->query("SELECT * FROM __permissions");
-        echo __("Backing up current permissions table...").test($get_permissions);
-        if (!$get_permissions) return;
-
-        while ($permission = $get_permissions->fetchObject())
-            $permissions_backup[] = $permission->name;
-
-        $drop_permissions = SQL::current()->query("DROP TABLE __permissions");
-        echo __("Dropping old permissions table...").test($drop_permissions);
-        if (!$drop_permissions) return;
-
-        echo __("Creating new permissions table...").
-             test(SQL::current()->query("CREATE TABLE IF NOT EXISTS __permissions (
-                                             id VARCHAR(100) DEFAULT '' PRIMARY KEY,
-                                             name VARCHAR(100) DEFAULT ''
-                                         ) DEFAULT CHARSET=utf8"));
-
-        $permissions = array("change_settings" => "Change Settings",
-                             "toggle_extensions" => "Toggle Extensions",
-                             "view_site" => "View Site",
-                             "view_private" => "View Private Posts",
-                             "view_draft" => "View Drafts",
-                             "view_own_draft" => "View Own Drafts",
-                             "add_post" => "Add Posts",
-                             "add_draft" => "Add Drafts",
-                             "edit_post" => "Edit Posts",
-                             "edit_draft" => "Edit Drafts",
-                             "edit_own_post" => "Edit Own Posts",
-                             "edit_own_draft" => "Edit Own Drafts",
-                             "delete_post" => "Delete Posts",
-                             "delete_draft" => "Delete Drafts",
-                             "delete_own_post" => "Delete Own Posts",
-                             "delete_own_draft" => "Delete Own Drafts",
-                             "add_page" => "Add Pages",
-                             "edit_page" => "Edit Pages",
-                             "delete_page" => "Delete Pages",
-                             "add_user" => "Add Users",
-                             "edit_user" => "Edit Users",
-                             "delete_user" => "Delete Users",
-                             "add_group" => "Add Groups",
-                             "edit_group" => "Edit Groups",
-                             "delete_group" => "Delete Groups");
-
-        foreach ($permissions_backup as $id) {
-            $name = isset($permissions[$id]) ? $permissions[$id] : camelize($id, true);
-            echo _f("Restoring permission \"%s\"...", array($name)).
-                 test(SQL::current()->insert("permissions",
-                                             array("id" => $id,
-                                                   "name" => $name)));
-        }
-
-    }
-
-    /**
-     * Function: update_custom_routes
-     * Updates the custom routes to be path => action instead of # => path.
-     *
-     * Versions: 2.0rc1 => 2.0rc2
-     */
-    function update_custom_routes() {
-        $custom_routes = Config::get("routes");
-        if (empty($custom_routes)) return;
-
-        $new_routes = array();
-        foreach ($custom_routes as $key => $route) {
-            if (!is_int($key))
-                return;
-
-            $split = array_filter(explode("/", $route));
-
-            if (!isset($split[0]))
-                return;
-
-            echo _f("Updating custom route %s to new format...", array($route)).
-                 test(isset($split[0]) and $new_routes[$route] = $split[0]);
-        }
-
-        Config::set("routes", $new_routes, "Setting new custom routes configuration...");
-    }
-
-    /**
-     * Function: remove_database_config_file
-     * Removes the database.yaml.php file, which is merged into config.yaml.php.
-     *
-     * Versions: 2.0rc1 => 2.0rc2
-     */
-    function remove_database_config_file() {
-        if (file_exists(INCLUDES_DIR."/database.yaml.php"))
-            echo __("Removing database.yaml.php file...").
-                 test(@unlink(INCLUDES_DIR."/database.yaml.php"), __("Try deleting it manually."));
-    }
-
-    /**
-     * Function: rename_database_setting_to_sql
-     * Renames the "database" config setting to "sql".
-     */
-    function rename_database_setting_to_sql() {
-        if (Config::check("sql")) return;
-        Config::set("sql", Config::get("database"));
-        Config::remove("database");
-    }
-
-    /**
-     * Function: update_post_status_column
-     * Updates the @status@ column on the "posts" table to be a generic varchar field instead of enum.
-     *
-     * Versions: 2.0rc1 => 2.0rc2
-     */
-    function update_post_status_column() {
-        $sql = SQL::current();
-        if (!$column = $sql->query("SHOW COLUMNS FROM __posts WHERE Field = 'status'"))
-             return;
-
-        if ($column->fetchObject()->Type == "varchar(32)")
-            return;
-
-        echo __("Updating `status` column on `posts` table...")."\n";
-
-        echo " - ".__("Backing up `posts` table...").
-             test($backup = $sql->select("posts"));
-
-        if (!$backup)
-            return;
-
-        $backups = $backup->fetchAll();
-
-        echo " - ".__("Dropping `posts` table...").
-             test($drop = $sql->query("DROP TABLE __posts"));
-
-        if (!$drop)
-            return;
-
-        echo " - ".__("Creating `posts` table...").
-             test($create = $sql->query("CREATE TABLE IF NOT EXISTS __posts (
-                                             id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                             xml LONGTEXT,
-                                             feather VARCHAR(32) DEFAULT '',
-                                             clean VARCHAR(128) DEFAULT '',
-                                             url VARCHAR(128) DEFAULT '',
-                                             pinned TINYINT(1) DEFAULT 0,
-                                             status VARCHAR(32) DEFAULT 'public',
-                                             user_id INTEGER DEFAULT 0,
-                                             created_at DATETIME DEFAULT NULL,
-                                             updated_at DATETIME DEFAULT NULL
-                                         ) DEFAULT CHARSET=utf8"));
-
-        if (!$create) {
-            echo " -".test(false, _f("Backup written to %s.", array("./_posts.bak.txt")));
-            return file_put_contents("./_posts.bak.txt", var_export($backups, true));
-        }
-
-        foreach ($backups as $backup) {
-            echo " - "._f("Restoring post #%d...", array($backup["id"])).
-                 test($insert = $sql->insert("posts", $backup), _f("Backup written to %s.", array("./_posts.bak.txt")));
-
-            if (!$insert)
-                return file_put_contents("./_posts.bak.txt", var_export($backups, true));
-        }
-
-        echo " -".test(true);
-    }
-
-    /**
-     * Function: add_post_attributes_table
-     * Adds the "post_attributes" table.
-     *
-     * Versions: 2.0rc1 => 2.0rc2
-     */
-    function add_post_attributes_table() {
-        $sql = SQL::current();
-        if ($sql->select("post_attributes"))
-            return;
-
-        echo __("Creating `post_attributes` table...").
-             test($sql->query("CREATE TABLE __post_attributes (
-                                   post_id INTEGER NOT NULL ,
-                                   name VARCHAR(100) DEFAULT '',
-                                   value LONGTEXT,
-                                   PRIMARY KEY (post_id, name)
-                               ) DEFAULT CHARSET=utf8"));
-    }
-
-    /**
-     * Function: post_xml_to_db
-     * Migrates the XML post attributes to the "post_attributes" table.
-     *
-     * Versions: 2.0rc1 => 2.0rc2
-     */
-    function post_xml_to_db() {
-        $sql = SQL::current();
-        if (!$rows = $sql->query("SELECT id, xml FROM __posts"))
-            return;
-
-        function insert_attributes($sql, $row, $xml, &$inserts) {
-            foreach ($xml as $name => $value) {
-                if (is_array($value))
-                    $value = YAML::dump($value);
-
-                if (!$sql->insert("post_attributes",
-                                  array("post_id" => $row["id"],
-                                        "name" => $name,
-                                        "value" => $value))) {
-                    # Clear successful attribute insertions so the
-                    # user can try again without primary key conflicts.
-                    foreach ($inserts as $insertion)
-                        $sql->delete("post_attributes",
-                                     array("post_id" => $insertion["id"],
-                                           "name" => $insertion["name"]));
-
-                    return false;
-                } else
-                    $inserts[] = array("id" => $row["id"],
-                                       "name" => $name);
-            }
-
-            return true;
-        }
-
-        $results = array();
-        foreach ($rows->fetchAll() as $row) {
-            if (empty($row["xml"]))
-                continue;
-
-            $xml = xml2arr(new SimpleXMLElement($row["xml"]));
-            $inserts = array();
-            echo _f("Migrating attributes of post #%d...", array($row["id"])).
-                 test($results[] = insert_attributes($sql, $row, $xml, $inserts));
-        }
-
-        if (!in_array(false, $results)) {
-            echo __("Removing `xml` column from `posts` table...")."\n";
-
-            echo " - ".__("Backing up `posts` table...").
-                 test($backup = $sql->select("posts"));
-
-            if (!$backup)
-                return;
-
-            $backups = $backup->fetchAll();
-
-            echo " - ".__("Dropping `posts` table...").
-                 test($drop = $sql->query("DROP TABLE __posts"));
-
-            if (!$drop)
-                return;
-
-            echo " - ".__("Creating `posts` table...").
-                 test($create = $sql->query("CREATE TABLE IF NOT EXISTS __posts (
-                                                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                                 feather VARCHAR(32) DEFAULT '',
-                                                 clean VARCHAR(128) DEFAULT '',
-                                                 url VARCHAR(128) DEFAULT '',
-                                                 pinned TINYINT(1) DEFAULT 0,
-                                                 status VARCHAR(32) DEFAULT 'public',
-                                                 user_id INTEGER DEFAULT 0,
-                                                 created_at DATETIME DEFAULT NULL,
-                                                 updated_at DATETIME DEFAULT NULL
-                                             ) DEFAULT CHARSET=utf8"));
-
-            if (!$create)
-                return file_put_contents("./_posts.bak.txt", var_export($backups, true));
-
-            foreach ($backups as $backup) {
-                unset($backup["xml"]);
-                echo " - "._f("Restoring post #%d...", array($backup["id"])).
-                     test($insert = $sql->insert("posts", $backup));
-
-                if (!$insert)
-                    return file_put_contents("./_posts.bak.txt", var_export($backups, true));
-            }
-
-            echo " -".test(true);
-        }
-    }
-
-    /**
-     * Function: add_group_id_to_permissions
-     * Adds the @group_id@ column to the "permissions" table.
-     *
-     * Versions: 2.0rc1 => 2.0rc2
-     */
-    function add_group_id_to_permissions() {
-        $sql = SQL::current();
-        if ($sql->select("permissions", "group_id"))
-            return;
-
-        echo __("Backing up permissions...").
-             test($permissions = $sql->select("permissions"));
-
-        if (!$permissions)
-            return;
-
-        $backup = $permissions->fetchAll();
-
-        echo __("Dropping `permissions` table...").
-             test($sql->query("DROP TABLE __permissions"));
-
-        echo __("Creating `permissions` table...").
-             test($sql->query("CREATE TABLE __permissions (
-                                   id VARCHAR(100) DEFAULT '',
-                                   name VARCHAR(100) DEFAULT '',
-                                   group_id INTEGER DEFAULT 0,
-                                   PRIMARY KEY (id, group_id)
-                               ) DEFAULT CHARSET=utf8"));
-
-        foreach ($backup as $permission)
-            echo _f("Restoring permission `%s`...", array($permission["name"])).
-                 test($sql->insert("permissions",
-                                   array("id" => $permission["id"],
-                                         "name" => $permission["name"],
-                                         "group_id" => 0)));
-    }
-
-    /**
-     * Function: group_permissions_to_db
-     * Migrates the group permissions from a YAML column to the "permissions" table.
-     *
-     * Versions: 2.0rc1 => 2.0rc2
-     */
-    function group_permissions_to_db() {
-        $sql = SQL::current();
-        if (!$sql->select("groups", "permissions"))
-            return;
-
-        echo __("Backing up groups...").
-             test($groups = $sql->select("groups"));
-
-        if (!$groups)
-            return;
-
-        $backup = $groups->fetchAll();
-
-        $names = array();
-        foreach($backup as $group) {
-            $names[$group["id"]] = $group["name"];
-            $permissions[$group["id"]] = empty($group["permissions"]) ? array() : YAML::load($group["permissions"]) ;
-        }
-
-        echo __("Dropping `groups` table...").
-             test($sql->query("DROP TABLE __groups"));
-
-        echo __("Creating `groups` table...").
-             test($sql->query("CREATE TABLE __groups (
-                                   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                   name VARCHAR(100) DEFAULT '',
-                                   UNIQUE (name)
-                               ) DEFAULT CHARSET=utf8"));
-
-        foreach ($names as $id => $name)
-            echo _f("Restoring group `%s`...", array($name)).
-                 test($sql->insert("groups",
-                                   array("id" => $id,
-                                        "name" => $name)));
-
-        foreach ($permissions as $id => $permissions)
-            foreach ($permissions as $permission)
-                echo _f("Restoring permission `%s` on group `%s`...", array($permission, $names[$id])).
-                     test($sql->insert("permissions",
-                                       array("id" => $permission,
-                                             "name" => $sql->select("permissions", "name", array("id" => $permission))->fetchColumn(),
-                                             "group_id" => $id)));
-    }
-
-    /**
-     * Function: remove_old_files
-     * Removes old/unused files from previous installs.
-     */
-    function remove_old_files() {
-        if (file_exists(INCLUDES_DIR."/config.php"))
-            echo __("Removing `includes/config.php` file...").
-                 test(@unlink(INCLUDES_DIR."/config.php"));
-
-        if (file_exists(INCLUDES_DIR."/database.php"))
-            echo __("Removing `includes/database.php` file...").
-                 test(@unlink(INCLUDES_DIR."/database.php"));
-
-        if (file_exists(INCLUDES_DIR."/rss.php"))
-            echo __("Removing `includes/rss.php` file...").
-                 test(@unlink(INCLUDES_DIR."/rss.php"));
-
-        if (file_exists(INCLUDES_DIR."/bookmarklet.php"))
-            echo __("Removing `includes/bookmarklet.php` file...").
-                 test(@unlink(INCLUDES_DIR."/bookmarklet.php"));
-    }
-
-    /**
-     * Function: add_user_approved_column
-     * Adds the @is_approved@ column on the "users" table, and approves all current users.
-     *
-     * Versions: 2.1 => 2.5
-     */
-    function add_user_approved_column() {
-        if (SQL::current()->query("SELECT approved FROM __users"))
-            return;
-
-        echo __("Adding approved column to users table...").
-             test(SQL::current()->query("ALTER TABLE __users ADD approved BOOLEAN DEFAULT '1' AFTER group_id"));
-    }
-
-    /**
-     * Function: update_user_approved_column
-     * Updates the @is_approved@ column on the "users" table.
-     *
-     * Versions: 2.5b3 => 2.5rc1
-     */
-    function update_user_approved_column() {
-        $sql = SQL::current();
-        if (!$column = $sql->query("SHOW COLUMNS FROM __users WHERE Field = 'is_approved'"))
-             return;
-
-        if ($column->fetchObject()->Type == "boolean")
-            return;
-
-        echo __("Updating `approved` column on `users` table...")."\n";
-
-        echo " - ".__("Backing up `users` table...").
-             test($backup = $sql->select("users"));
-
-        if (!$backup) return;
-
-        $backups = $backup->fetchAll();
-
-        echo " - ".__("Dropping `users` table...").
-             test($drop = $sql->query("DROP TABLE __users"));
-
-        if (!$drop) return;
-
-        echo " - ".__("Creating `users` table...").
-             test($create = $sql->query("CREATE TABLE IF NOT EXISTS `__users` (
-                                            `id` int(11) NOT NULL AUTO_INCREMENT,
-                                            `login` varchar(64) DEFAULT '',
-                                            `password` varchar(60) DEFAULT NULL,
-                                            `full_name` varchar(250) DEFAULT '',
-                                            `email` varchar(128) DEFAULT '',
-                                            `website` varchar(128) DEFAULT '',
-                                            `group_id` int(11) DEFAULT '0',
-                                            `approved` tinyint(1) DEFAULT '1',
-                                            `joined_at` datetime DEFAULT NULL,
-                                            PRIMARY KEY (`id`),
-                                            UNIQUE KEY `login` (`login`)
-                                        ) DEFAULT CHARSET=utf8"));
-
-        if (!$create) {
-            echo " -".test(false, _f("Backup written to %s.", array("./_users.bak.txt")));
-            return file_put_contents("./_users.bak.txt", var_export($backups, true));
-        }
-
-        foreach ($backups as $backup) {
-            echo " - "._f("Restoring user #%d...", array($backup["id"])).
-                 test($insert = $sql->insert("users", $backup), _f("Backup written to %s.", array("./_users.bak.txt")));
-
-            if (!$insert)
-                return file_put_contents("./_users.bak.txt", var_export($backups, true));
-        }
-
-        echo " -".test(true);
-    }
-
-    /**
-     * Function: pages_public_column
-     * Adds the @public@ column to the "pages" table.
-     *
-     * Versions: 2.5 => Chyrp Lite 2014.08.09
-     */
-    function pages_public_column() {
-        if (SQL::current()->query("SELECT public FROM __pages"))
-            return;
-
-        echo __("Adding public column to pages table...").
-             test(SQL::current()->query("ALTER TABLE __pages ADD public BOOLEAN DEFAULT '1' AFTER body"));
-    }
-
-    /**
-     * Function: add_view_page_permission
-     * Adds the "View Pages" permission to the Groups table.
-     *
-     * Versions: 2.5 => Chyrp Lite 2014.08.09
-     */
-    function add_view_page_permission() {
-        if (SQL::current()->count("permissions", array("id" => "view_page", "group_id" => 0)))
-            return; # Permission already exists.
-
-        echo _f("Inserting permission \"%s\"...", "View Pages").
-            test(SQL::current()->insert("permissions",
-                                             array("id" => "view_page",
-                                                   "name" => "View Pages")));
-    }
-
-    /**
-     * Function: update_user_password_column
-     * Updates the @password@ column on the "users" table to have a length of 128.
-     *
-     * Versions: 2.0 => Chyrp Lite 2014.08.09
-     */
-    function update_user_password_column() {
-        $sql = SQL::current();
-        if (!$column = $sql->query("SHOW COLUMNS FROM __users WHERE Field = 'password'"))
-             return;
-
-        if ($column->fetchObject()->Type == "varchar(128)")
-            return;
-
-        echo __("Updating `password` column on `users` table...")."\n";
-
-        echo " - ".__("Backing up `users` table...").
-             test($backup = $sql->select("users"));
-
-        if (!$backup)
-            return;
-
-        $backups = $backup->fetchAll();
-
-        echo " - ".__("Dropping `users` table...").
-             test($drop = $sql->query("DROP TABLE __users"));
-
-        if (!$drop)
-            return;
-
-        echo " - ".__("Creating `users` table...").
-             test($create = $sql->query("CREATE TABLE IF NOT EXISTS `__users` (
-                                            `id` int(11) NOT NULL AUTO_INCREMENT,
-                                            `login` varchar(64) DEFAULT '',
-                                            `password` varchar(128) DEFAULT NULL,
-                                            `full_name` varchar(250) DEFAULT '',
-                                            `email` varchar(128) DEFAULT '',
-                                            `website` varchar(128) DEFAULT '',
-                                            `group_id` int(11) DEFAULT '0',
-                                            `approved` BOOLEAN DEFAULT '1',
-                                            `joined_at` datetime DEFAULT NULL,
-                                            PRIMARY KEY (`id`),
-                                            UNIQUE KEY `login` (`login`)
-                                        ) DEFAULT CHARSET=utf8"));
-
-        if (!$create) {
-            echo " -".test(false, _f("Backup written to %s.", array("./_users.bak.txt")));
-            return file_put_contents("./_users.bak.txt", var_export($backups, true));
-        }
-
-        foreach ($backups as $backup) {
-            echo " - "._f("Restoring user #%d...", array($backup["id"])).
-                 test($insert = $sql->insert("users", $backup), _f("Backup written to %s.", array("./_users.bak.txt")));
-
-            if (!$insert)
-                return file_put_contents("./_users.bak.txt", var_export($backups, true));
-        }
-
-        echo " -".test(true);
-    }
-
-    /**
-     * Function: recaptcha_to_captcha
-     * Migrates the ReCAPTCHA setting to the new platform agnostic captcha setting.
-     *
-     * Versions: 2014.09.01 => 2014.10.12
-     */
-    function recaptcha_to_captcha() {
-        if (Config::check("enable_recaptcha")) {
-            Config::set("enable_captcha", Config::get("enable_recaptcha"), "Migrating captcha setting...");
-            Config::remove("enable_recaptcha");
-        }
-    }
-
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title><?php echo __("Chyrp Upgrader"); ?></title>
-        <style type="text/css" media="screen">
+        <meta charset="UTF-8">
+        <title><?php echo __("Chyrp Lite Upgrader"); ?></title>
+        <meta name="viewport" content="width = 520, user-scalable = no">
+        <style type="text/css">
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Semibold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-Italic.woff') format('woff');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('./fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                font-weight: bold;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Bold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-Oblique.woff') format('woff');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('./fonts/Hack-BoldOblique.woff') format('woff');
+                font-weight: bold;
+                font-style: italic;
+            }
+            *::selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            html {
+                font-size: 14px;
+            }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
@@ -1180,10 +346,11 @@
                 border: 0em;
             }
             body {
-                font-size: 14px;
-                font-family: sans-serif;
-                color: #626262;
-                background: #e8e8e8;
+                font-size: 1rem;
+                font-family: "Open Sans webfont", sans-serif;
+                line-height: 1.5;
+                color: #4a4747;
+                background: #efefef;
                 padding: 0em 0em 5em;
             }
             .window {
@@ -1194,72 +361,98 @@
                 border-radius: 2em;
             }
             h1 {
-                color: #ccc;
-                font-size: 3em;
-                margin: 1em 0em .5em;
+                font-size: 2em;
+                margin: 0.5em 0em;
                 text-align: center;
                 line-height: 1;
             }
-            h1.first {
-                margin-top: .25em;
+            h1:first-child {
+                margin-top: 0em;
             }
-            h1.what_now {
-                margin-top: .5em;
+            h2 {
+                font-size: 1.25em;
+                text-align: center;
+                font-weight: bold;
+                margin: 0.75em 0em;
             }
             code {
-                color: #06B;
-                font-family: monospace;
+                font-family: "Hack webfont", monospace;
+                font-style: normal;
                 word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
+            }
+            strong {
+                font-weight: normal;
+                color: #f00;
+            }
+            ul, ol {
+                margin: 0em 0em 2em 2em;
+                list-style-position: outside;
+            }
+            li {
+                margin-bottom: 1em;
             }
             a:link, a:visited {
-                color: #6B0;
+                color: #4a4747;
+            }
+            a:hover, a:focus {
+                color: #1e57ba;
             }
             pre.pane {
                 height: 15em;
                 overflow-y: auto;
-                margin: -2.68em -2.68em 4em;
-                padding: 2.5em;
-                background: #333;
+                margin: 1em -2em 1em -2em;
+                padding: 2em;
+                background: #4a4747;
                 color: #fff;
-                border-top-left-radius: 2.5em;
-                border-top-right-radius: 2.5em;
             }
-            span.yay { color: #0f0; }
-            span.boo { color: #f00; }
+            pre.pane:empty {
+                display: none;
+            }
+            pre.pane:empty + h1 {
+                margin-top: 0em;
+            }
+            span.yay {
+                color: #76b362;
+            }
+            span.boo {
+                color: #d94c4c;
+            }
             a.big,
             button {
-                background: #eee;
+                box-sizing: border-box;
                 display: block;
+                font-family: inherit;
+                font-size: 1.25em;
                 text-align: center;
-                margin-top: 2em;
-                padding: .75em 1em;
-                color: #777;
-                text-shadow: #fff .1em .1em 0em;
-                font: 1em sans-serif;
+                color: #4a4747;
                 text-decoration: none;
-                border: 0em;
+                line-height: 1.25;
+                margin: 0.75em 0em;
+                padding: 0.4em 0.6em;
+                background-color: #f2fbff;
+                border: 1px solid #b8cdd9;
+                border-radius: 0.3em;
                 cursor: pointer;
-                border-radius: .5em;
+                text-decoration: none;
             }
             button {
                 width: 100%;
             }
-            a.big:hover,
-            button:hover {
-                background: #f5f5f5;
+            a.big:last-child,
+            button:last-child {
+                margin-bottom: 0em;
             }
+            a.big:hover,
+            button:hover,
+            a.big:focus,
+            button:focus,
             a.big:active,
             button:active {
-                background: #e0e0e0;
-            }
-            ul, ol {
-                margin: 0em 0em 1em 2em;
-            }
-            li {
-                margin-bottom: .5em;
-            }
-            ul {
-                margin-bottom: 1.5em;
+                border-color: #1e57ba;
+                outline: none;
             }
             p {
                 margin-bottom: 1em;
@@ -1268,156 +461,71 @@
     </head>
     <body>
         <div class="window">
-<?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or isset($_GET['task']) == "upgrade") : ?>
-            <pre class="pane"><?php
-        # Begin with file/config upgrade tasks.
-        fix_htaccess();
+<?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) : ?>
+            <pre role="status" class="pane"><?php
 
-        remove_beginning_slash_from_post_url();
+# Perform core upgrade tasks.
 
-        move_yml_yaml();
+fix_htaccess();
 
-        update_protection();
+add_markdown();
 
-        theme_default_to_blossom();
+add_homepage();
 
-        Config::fallback("routes", array());
-        Config::fallback("secure_hashkey", md5(random(32, true)));
-        Config::fallback("enable_xmlrpc", true);
-        Config::fallback("enable_ajax", true);
-        Config::fallback("uploads_path", "/uploads/");
-        Config::fallback("chyrp_url", Config::get("url"));
-        Config::fallback("sql", Config::$yaml["database"]);
-        Config::fallback("timezone", "America/New_York");
+add_uploads_limit();
 
-        // Added in 2.5
-        Config::fallback("admin_theme", "default");
-        Config::fallback("email_activation", true);
-        Config::fallback("check_updates", true);
-        Config::fallback("enable_emoji", true);
+remove_trackbacking();
 
-        Config::remove("rss_posts");
-        Config::remove("time_offset");
+add_admin_per_page();
 
-        // Chyrp Lite
-        Config::fallback("check_updates_last", 0);
-        Config::fallback("cookies_notification", true);
-        Config::fallback("enable_captcha", false);
+# Perform Module/Feather upgrades.
 
-        move_upload();
+foreach ((array) Config::get("enabled_modules") as $module)
+    if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
+        ob_start();
+        echo $begin = _f("Calling %s module's upgrader...", array($module))."\n";
+        require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
-        remove_database_config_file();
+        if (ob_get_contents() == $begin)
+            ob_end_clean();
+        else
+            ob_end_flush();
+    }
 
-        rename_database_setting_to_sql();
+foreach ((array) Config::get("enabled_feathers") as $feather)
+    if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
+        ob_start();
+        echo $begin = _f("Calling %s feather's upgrader...", array($feather))."\n";
+        require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 
-        update_custom_routes();
+        if (ob_get_contents() == $begin)
+            ob_end_clean();
+        else
+            ob_end_flush();
+    }
 
-        default_db_adapter_to_mysql();
+foreach ($errors as $error)
+    echo '<span role="alert">'.$error."</span>\n";
 
-        # Perform database upgrade tasks after all the files/config upgrade tasks are done.
-
-        # Prepare the SQL interface.
-        $sql = SQL::current();
-
-        # Set the SQL info.
-        foreach (Config::$yaml["config"]["sql"] as $name => $value)
-            $sql->$name = $value;
-
-        # Initialize connection to SQL server.
-        $sql->connect();
-
-        tweets_to_posts();
-
-        pages_parent_id_column();
-
-        pages_list_order_column();
-
-        make_posts_safe();
-
-        rss_posts_to_feed_items();
-
-        update_groups_to_yaml();
-
-        add_permissions_table();
-
-        add_sessions_table();
-
-        update_permissions_table();
-
-        update_post_status_column();
-
-        add_post_attributes_table();
-
-        post_xml_to_db();
-
-        add_group_id_to_permissions();
-
-        group_permissions_to_db();
-
-        remove_old_files();
-
-        add_user_approved_column();
-
-        pages_public_column();
-
-        add_view_page_permission();
-
-        update_user_password_column();
-
-        recaptcha_to_captcha();
-
-        # Perform Module/Feather upgrades.
-
-        foreach ((array) Config::get("enabled_modules") as $module)
-            if (file_exists(MAIN_DIR."/modules/".$module."/upgrades.php")) {
-                ob_start();
-                echo $begin = _f("Calling <span class=\"yay\">%s</span> Module's upgrader...", array($module))."\n";
-                require MAIN_DIR."/modules/".$module."/upgrades.php";
-                $buf = ob_get_contents();
-                if (ob_get_contents() == $begin)
-                    ob_end_clean();
-                else
-                    ob_end_flush();
-            }
-
-        foreach ((array) Config::get("enabled_feathers") as $feather)
-            if (file_exists(MAIN_DIR."/feathers/".$feather."/upgrades.php")) {
-                ob_start();
-                echo $begin = _f("Calling <span class=\"yay\">%s</span> Feather's upgrader...", array($feather))."\n";
-                require MAIN_DIR."/feathers/".$feather."/upgrades.php";
-                $buf = ob_get_contents();
-                if (ob_get_contents() == $begin)
-                    ob_end_clean();
-                else
-                    ob_end_flush();
-            }
-?>
-
-<?php echo __("Done!"); ?>
-
-</pre>
-            <h1 class="what_now"><?php echo __("What now?"); ?></h1>
+            ?></pre>
+            <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
+            <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("Look through the results up there for any failed tasks."); ?></li>
-                <li><?php echo __("If any of your Modules or Feathers have new versions available for this release, check if an <code>upgrades.php</code> file exists in their main directory. If that file exists, run this upgrader again after enabling the Module or Feather and it will run the upgrade tasks."); ?></li>
-                <li><?php echo __("When you are done, you can delete this file. It doesn't pose any real threat on its own, but you should delete it anyway, just to be sure."); ?></li>
+                <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
+                <li><?php echo __("Fix any problems reported."); ?></li>
+                <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
+                <li><?php echo __("You can delete <em>upgrade.php</em> once you are finished."); ?></li>
             </ol>
-            <h1 class="tips"><?php echo __("Tips"); ?></h1>
-            <ul>
-                <li><?php echo __("If the admin area looks weird, try clearing your cache."); ?></li>
-                <li><?php echo __("As of v2.0, Chyrp uses time zones to determine timestamps. Please set your installation to the correct timezone at <a href=\"admin/index.php?action=general_settings\">General Settings</a>."); ?></li>
-                <li><?php echo __("Check the group permissions &ndash; they might have changed, and certain Admin functionality would be disabled until you enabled the permissions for the particular groups. <a href=\"admin/index.php?action=manage_groups\">Manage Groups &rarr;</a>"); ?></li>
-            </ul>
-            <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("All done!"); ?></a>
+            <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php else: ?>
-            <h1 class="first"><?php echo __("Halt!"); ?></h1>
-            <p><?php echo __("That button may look tempting, but please take these preemptive measures before indulging:"); ?></p>
+            <h1><?php echo __("Halt!"); ?></h1>
+            <p><?php echo __("Please take these preemptive measures before proceeding:"); ?></p>
             <ol>
-                <li><?php echo __("<strong>Make a backup of your installation.</strong> You never know."); ?></li>
+                <li><?php echo __("<strong>Make a backup of your installation and database.</strong>"); ?></li>
                 <li><?php echo __("Disable any third-party Modules and Feathers."); ?></li>
-                <li><?php echo __("Ensure that the Chyrp installation directory is writable by the server."); ?></li>
+                <li><?php echo __("Ensure Chyrp Lite's directory is writable by the server."); ?></li>
             </ol>
-            <p><?php echo __("If any of the upgrade processes fail, you can safely keep refreshing &ndash; we will only attempt to redo tasks that are not already completed."); ?></p>
+            <p><?php echo __("If any of the upgrade tasks fail, you can safely refresh and retry."); ?></p>
             <form action="upgrade.php" method="post">
                 <button type="submit" name="upgrade" value="yes"><?php echo __("Upgrade me!"); ?></button>
             </form>

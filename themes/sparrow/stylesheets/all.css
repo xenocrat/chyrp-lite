@@ -1,0 +1,601 @@
+@font-face {
+                                                font-family: 'Open Sans webfont';
+                                                src: url('../../../fonts/OpenSans-Regular.woff') format('woff');
+                                                font-weight: normal;
+                                                font-style: normal;
+}
+
+@font-face {
+                                                font-family: 'Open Sans webfont';
+                                                src: url('../../../fonts/OpenSans-Semibold.woff') format('woff');
+                                                font-weight: bold;
+                                                font-style: normal;
+}
+
+@font-face {
+                                                font-family: 'Open Sans webfont';
+                                                src: url('../../../fonts/OpenSans-Italic.woff') format('woff');
+                                                font-weight: normal;
+                                                font-style: italic;
+}
+
+@font-face {
+                                                font-family: 'Open Sans webfont';
+                                                src: url('../../../fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                                                font-weight: bold;
+                                                font-style: italic;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../../../fonts/Hack-Regular.woff') format('woff');
+                                                font-weight: normal;
+                                                font-style: normal;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../../../fonts/Hack-Bold.woff') format('woff');
+                                                font-weight: bold;
+                                                font-style: normal;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../../../fonts/Hack-Oblique.woff') format('woff');
+                                                font-weight: normal;
+                                                font-style: italic;
+}
+
+@font-face {
+                                                font-family: 'Hack webfont';
+                                                src: url('../../../fonts/Hack-BoldOblique.woff') format('woff');
+                                                font-weight: bold;
+                                                font-style: italic;
+}
+
+html {                                          font-size: 16px }
+*::-moz-selection,
+*::selection {                                  color: #ffffff;
+                                                background-color: #99726d }
+body {                                          font-family: "Open Sans webfont", sans-serif;
+                                                font-size: 1rem;
+                                                color: #4e5a66;
+                                                line-height: 1.5;
+                                                background-color: #fcfbf7;
+                                                margin: 0em 0em 4rem 0em;
+                                                min-width: 288px }
+body.preview {                                  margin: 4rem }
+p {                                             margin: 0em 0em 1em 0em }
+p:last-child, p:empty {                         margin-bottom: 0em }
+h1 {                                            font-size: 2em;
+                                                font-weight: bold;
+                                                text-transform: none;
+                                                margin: 0.5em 0em;
+                                                padding: 0em;
+                                                line-height: 1.2 }
+h2, h1.banner {                                 font-size: 1.5em;
+                                                font-weight: bold;
+                                                text-transform: none;
+                                                margin: 0.67em 0em;
+                                                padding: 0em;
+                                                line-height: 1.2 }
+h3 {                                            font-size: 1em;
+                                                font-weight: bold;
+                                                text-transform: none;
+                                                margin: 1em 0em;
+                                                padding: 0em;
+                                                line-height: 1.2 }
+h3.flash {                                      margin: 0em }
+h3.filter {                                     padding: 4rem 0em 0rem 2rem;
+                                                margin-bottom: 0em }
+h3.archive {                                    margin-top: 1em;
+                                                clear: both }
+h4 {                                            font-size: 1em;
+                                                font-weight: bold;
+                                                text-transform: none;
+                                                margin: 1em 0em;
+                                                padding: 0em;
+                                                line-height: 1.2 }
+h4.yearly {                                     font-size: 1.33em;
+                                                margin-bottom: 0.75em }
+h5, h6 {                                        font-size: 1em;
+                                                font-weight: bold;
+                                                text-transform: none;
+                                                margin: 1em 0em;
+                                                padding: 0em;
+                                                line-height: 1.2 }
+h1:first-child, h2:first-child,
+h3:first-child, h4:first-child,
+h5:first-child, h6:first-child {                margin-top: 0em }
+sup {                                           vertical-align: super;
+                                                font-size: 0.5em }
+em {                                            font: inherit;
+                                                font-style: italic }
+blockquote em {                                 font-style: normal }
+strong {                                        font: inherit;
+                                                font-weight: bold;
+                                                font-style: normal }
+cite {                                          font: inherit;
+                                                font-style: italic;
+                                                color: #9ea8a8 }
+small {                                         font-weight: normal;
+                                                font-size: 0.8em }
+blockquote {                                    font-size: 1em;
+                                                font-style: italic;
+                                                padding: 0em 2em;
+                                                margin: 0em 0em 2em 0em }
+blockquote:last-child {                         margin-bottom: 0em }
+pre {                                           font-family: "Hack webfont", monospace;
+                                                margin: 1em 0em }
+li > pre {                                      margin: 1em 0em 0em 0em }
+code {                                          font-family: "Hack webfont", monospace;
+                                                font-size: 0.75em;
+                                                font-style: normal;
+                                                color: #39434d;
+                                                background-color: #ebe8e6;
+                                                padding: 0.2em 0.4em;
+                                                margin: 0.2em 0em;
+                                                display: inline-block }
+hr {                                            width: 100%;
+                                                border: none;
+                                                clear: both;
+                                                border-top: 1px solid #c2bcb8;
+                                                margin: 2em 0em }
+hr:last-child, div.archive > hr {               margin: 0em;
+                                                visibility: hidden }
+ul {                                            list-style: disc inside;
+                                                margin: 1em 0em;
+                                                padding: 0em }
+ul li > ul {                                    list-style-type: circle;
+                                                margin-left: 1em }
+ol {                                            list-style: decimal inside;
+                                                margin: 1em 0em;
+                                                padding: 0em }
+ol li > ol {                                    list-style-type: lower-latin;
+                                                margin-left: 1em }
+dl {                                            list-style: none }
+dl dt {                                         font-weight: bold }
+dl dd {                                         margin-left: 1em }
+ul.navigation {                                 list-style: none;
+                                                margin: 0em;
+                                                display: inline }
+ul.navigation li {                              display: inline;
+                                                padding: 0em }
+ul.yearly {                                     list-style: none }
+ul.archive:last-child {                         margin-bottom: 0em }
+ul.archive li {                                 margin: 0em 0em 0em 1em }
+ul.yearly li {                                  margin: 0em }
+ol.comments {                                   list-style: none;
+                                                padding: 0em;
+                                                margin: 0em;
+                                                border-bottom: 1px solid #c2bcb8 }
+ol.comments li {                                box-sizing: border-box;
+                                                display: block;
+                                                position: relative;
+                                                width: 100%;
+                                                margin: 0em;
+                                                padding: 2rem 2rem 2rem 96px;
+                                                background-color: #f5f4f0;
+                                                border: 1px solid #c2bcb8;
+                                                border-bottom: none }
+ol.comments li.highlighted {                    background-color: #fffecd }
+ol.comments li#comment_shim {                   display: none }
+ol.comments li.comment_form {                   padding: 1rem 2rem 2rem 2rem }
+table {                                         border-collapse: collapse;
+                                                border-spacing: 0em;
+                                                width: 100%;
+                                                margin: 0em 0em 1em 0em;
+                                                overflow-x: scroll;
+                                                -webkit-overflow-scrolling: touch }
+table:last-child {                              margin-bottom: 0em }
+table thead tr {                                background-color: #c2bcb8;
+                                                color: #fbfbf7;
+                                                border: 1px solid #c2bcb8 }
+table thead tr th {                             padding: 0.5em;
+                                                font-weight: bold }
+table tbody tr td {                             padding: 0.5em;
+                                                border: 1px solid #c2bcb8;
+                                                vertical-align: middle }
+form, fieldset {                                margin: 0em;
+                                                padding: 0em;
+                                                border: none }
+div.search_box > form {                         width: auto;
+                                                display: inline-block;
+                                                position: relative }
+form.comment_edit {                             width: 100%;
+                                                background-color: transparent;
+                                                margin-bottom: 0em;
+                                                padding: 0em;
+                                                border: none }
+input {                                         box-sizing: border-box;
+                                                display: block;
+                                                width: 320px;
+                                                max-width: 800px;
+                                                margin: 0.5em 0em;
+                                                padding: 6px 4px;
+                                                background: none;
+                                                text-align: left;
+                                                font: inherit;
+                                                font-size: inherit;
+                                                color: #4e5a66;
+                                                background-color: #fffefd;
+                                                border: 1px solid #c2bcb8;
+                                                border-radius: 0em;
+/* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
+input:focus {                                   outline: none;
+                                                background-color: #ffffff;
+                                                border: 1px solid #99726d }
+input::-webkit-input-placeholder,
+input:-moz-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder,
+input:placeholder {                             color: #c6ccc8;
+                                                opacity: 1 }
+input[type='checkbox'] {                        width: auto }
+input.error {                                   background-color: #ff8080 }
+input#search_field {                            display: inline;
+                                                margin: 0em;
+                                                padding-right: 34px }
+div.search_box input[type='text'] {             width: 10em;
+                                                display: inline-block }
+select {                                        box-sizing: border-box;
+                                                display: block;
+                                                width: 320px;
+                                                max-width: 800px;
+                                                margin: 0.5em 0em }
+textarea {                                      box-sizing: border-box;
+                                                display: block;
+                                                width: 100%;
+                                                height: 160px;
+                                                max-width: 800px;
+                                                font: inherit;
+                                                font-size: inherit;
+                                                color: #4e5a66;
+                                                margin: 0.5em 0em;
+                                                padding: 2px 4px;
+                                                background-color: #ffffff;
+                                                border: 1px solid #c6ccc8;
+                                                border-radius: 0em;
+/* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
+textarea:focus {                                outline: none;
+                                                border: 1px solid #99726d }
+article.commentary textarea {                   max-width: none }
+button {                                        font: inherit;
+                                                font-size: inherit;
+                                                cursor: pointer;
+                                                transition-property: color, border;
+                                                transition-duration: 250ms }
+label {                                         display: block;
+                                                margin-top: 1em }
+div#mast {                                      width: 100%;
+                                                background-color: #f5f4f0;
+                                                border-bottom: 1px solid #c2bcb8 }
+div#mast_box {                                  box-sizing: border-box;
+                                                width: 100%;
+                                                max-width: 1024px;
+                                                text-align: center;
+                                                margin: 0em auto;
+                                                padding: 4em }
+div#main {                                      box-sizing: border-box;
+                                                width: 100%;
+                                                max-width: 1024px;
+                                                margin: 0em auto;
+                                                padding: 0em;
+                                                clear: both;
+                                                overflow: visible }
+div.prev {                                      margin: 4rem 0em 0rem 2rem }
+div.next {                                      text-align: right;
+                                                margin: 0rem 2em 0rem 0rem }
+div.flash {                                     box-sizing: border-box;
+                                                width: 100%;
+                                                text-align: center;
+                                                color: #ffffff;
+                                                background-color: #cc5252;
+                                                padding: 0.5em }
+div.metadata {                                  font-weight: normal;
+                                                font-size: 0.75em;
+                                                font-style: italic;
+                                                color: #999491;
+                                                display: block;
+                                                width: 100%;
+                                                line-height: 2em;
+                                                padding: 0rem 0rem 4rem 0rem;
+                                                margin-top: 2rem }
+article.commentary div.metadata {               padding: 0rem }
+div.comments_pagination {                       width: 100%;
+                                                clear: both;
+                                                padding-top: 2rem;
+                                                text-align: center }
+div.tags {                                      margin: 1.33em 0em 0em 0em;
+                                                font-size: 0.75em }
+div.doaction {                                  font-family: inherit;
+                                                line-height: 2;
+                                                margin-bottom: 1em }
+div.doaction:last-child {                       margin-bottom: 0em }
+div.speak {                                     margin-bottom: 0em }
+div.admin, div.downloads {                      margin: 1em 0em 0em 0em }
+input + div.doaction, textarea + div.doaction { padding-top: 0.5em }
+div#main > article, div.standalone {            box-sizing: border-box;
+                                                display: block;
+                                                position: relative;
+                                                width: 100%;
+                                                clear: both;
+                                                margin: 0em;
+                                                padding: 4rem 4rem 0rem 4rem }
+div#main > article.commentary {                 padding: 0rem 4rem;
+                                                margin-top: 4rem;
+                                                overflow: hidden;
+                                                border-bottom: none }
+div#main > article.page {                       padding-bottom: 4rem }
+div.standalone {                                margin-bottom: 0rem;
+                                                padding-bottom: 4rem }
+div.tags.standalone {                           line-height: 2 }
+ul.archive article.post.archive {               display: block;
+                                                position: relative;
+                                                float: left;
+                                                width: 156px;
+                                                height: 156px;
+                                                overflow: hidden;
+                                                font-size: 0.75em;
+                                                margin: 0em 0em 2.66em 1.33em;
+                                                padding: 8px;
+                                                border: 1px solid #c2bcb8 }
+article > header {                              display: block;
+                                                width: 100%;
+                                                clear: both;
+                                                margin: 0em;
+                                                padding: 0em;
+                                                border: none }
+article > section {                             display: block;
+                                                width: 100%;
+                                                clear: both;
+                                                margin: 1em 0em 0em 0em;
+                                                padding: 0em }
+article > section:first-child {                 margin-top: 0em }
+article section.comment {                       margin-bottom: 1em }
+article > section.photo {                       width: 100%;
+                                                max-height: 1024px;
+                                                overflow: hidden;
+                                                clear: both }
+article > section.photo + article > section.photo,
+article > section.photo + p {                   margin-top: 1em }
+article > footer {                              display: block;
+                                                width: 100%;
+                                                text-align: left;
+                                                clear: both;
+                                                margin: 0em 0em 1em 0em;
+                                                padding: 0em;
+                                                border: none }
+article > footer:last-child {                   margin: 0em }
+
+article.video video {                           width: 100%;
+                                                max-width: 1280px }
+article.audio audio {                           width: 100%;
+                                                max-width: 800px }                  
+a {                                             border-bottom: 1px transparent solid;
+                                                transition-property: color, border;
+                                                transition-duration: 250ms }
+a:link {                                        color: #4e5a66;
+                                                text-decoration: none }
+a:visited {                                     color: #4e5a66;
+                                                text-decoration: none }
+a:hover {                                       color: #99726d;
+                                                text-decoration: none }
+a:focus {                                       outline: none;
+                                                color: #99726d;
+                                                text-decoration: none;
+                                                border-bottom: 1px #99726d solid }
+a:active {                                      color: #99726d;
+                                                text-decoration: none }
+ul.navigation li > a {                          display: inline-block;
+                                                margin: 0em 1em 1em 0em }
+
+h3.flash a {                                    color: #ffffff;
+                                                border-bottom: 1px #ffffff solid;
+                                                display: inline-block;
+                                                position: relative;
+                                                top: 0px }
+h3.flash a:hover,
+h3.flash a:focus,
+h3.flash a:active {                             top: 1px;
+                                                color: inherit }
+section a:link, p a:link {                      color: #5c6773;
+                                                border-bottom: 1px #9ea8a8 solid }
+section a:visited, p a:visited {                color: #5c6773;
+                                                border-bottom: 1px #9ea8a8 solid }
+section a:hover, p a:hover {                    color: #99726d;
+                                                border-bottom: 1px #99726d solid }
+section a:focus, p a:focus {                    outline: none;
+                                                color: #99726d;
+                                                border-bottom: 1px #99726d solid }
+section a:active, p a:active {                  color: #99726d;
+                                                border-bottom: 1px #99726d solid }
+div.tags a, span.tags_select a {                display: inline-block;
+                                                position: relative;
+                                                top: 0px;
+                                                padding: 0.2em 0.4em;
+                                                margin: 2px 0em;
+                                                border: none;
+                                                border-radius: 0.2em;
+                                                color: #807d73;
+                                                background-color: #fffecd;
+                                                border: 1px #e5d7a1 solid }
+div.tags a:hover, span.tags_select a:hover,
+div.tags a:focus, span.tags_select a:focus,
+div.tags a:active, span.tags_select a:active,
+span.tags_select a.tag_added {                  top: 1px;
+                                                color: #000000 }
+div.category a.category {                       display: inline-block;
+                                                position: relative;
+                                                top: 0px;
+                                                padding: 0.2em 0.4em;
+                                                margin: 2px 0em;
+                                                border: none;
+                                                border-radius: 0.2em;
+                                                color: #ffffff;
+                                                background-color: #4e5a66;
+                                                border: 1px #4e5a66 solid;
+                                                transition-property: border;
+                                                transition-duration: 0ms }
+div.category a.category:hover,
+div.category a.category:focus,
+div.category a.category:active {                top: 1px;
+                                                color: #ffffff;
+                                                background-color: #949799;
+                                                border: 1px #949799 solid }
+div.category a.category_1:link,
+div.category a.category_1:visited {             background-color: #71b67b;
+                                                border: 1px #71b67b solid }
+div.category a.category_1:focus,
+div.category a.category_1:hover,
+div.category a.category_1:active {              background-color: #609c69;
+                                                border: 1px #609c69 solid }
+div.category a.category_2:link,
+div.category a.category_2:visited {             background-color: #ed5fb4;
+                                                border: 1px #ed5fb4 solid }
+div.category a.category_2:focus,
+div.category a.category_2:hover,
+div.category a.category_2:active {              background-color: #d455a1;
+                                                border: 1px #d455a1 solid }
+div.category a.category_3:link,
+div.category a.category_3:visited {             background-color: #61bdf0;
+                                                border: 1px #61bdf0 solid }
+div.category a.category_3:focus,
+div.category a.category_3:hover,
+div.category a.category_3:active {              background-color: #56a9d6;
+                                                border: 1px #56a9d6 solid }
+div.category a.category_4:link,
+div.category a.category_4:visited {             background-color: #e0922f;
+                                                border: 1px #e0922f solid }
+div.category a.category_4:focus,
+div.category a.category_4:hover,
+div.category a.category_4:active {              background-color: #c7832a;
+                                                border: 1px #c7832a solid }
+div.category a.category_5:link,
+div.category a.category_5:visited {             background-color: #9764a5;
+                                                border: 1px #9764a5 solid }
+div.category a.category_5:focus,
+div.category a.category_5:hover,
+div.category a.category_5:active {              background-color: #80568c;
+                                                border: 1px #80568c solid }
+div.metadata a {                                color: #999491 }
+div.metadata a:hover {                          color: #000000 }
+div.metadata a:focus {                          color: #000000;
+                                                border-bottom: 1px #000000 solid }
+div.metadata a:active {                         color: #000000 }
+div.doaction a, button {                        display: inline-block;
+                                                line-height: normal;
+                                                white-space: nowrap;
+                                                padding: 0.4em 1.2em;
+                                                border-radius: 0.2em;
+                                                color: #fffefd;
+                                                background-color: #c2b9b4;
+                                                border: none }
+div.doaction a:hover, button:hover,
+div.doaction a:focus, button:focus,
+div.doaction a:active, button:active {          outline: none;
+                                                background-color: #99726d;
+                                                border: none }
+div.doaction a.post_delete_link,
+div.doaction a.delete_link {                    font-weight: bold }
+article > section.photo > a {                   border-bottom: none }
+div.doaction a.post_delete_link:hover,
+div.doaction a.delete_link:hover,
+div.doaction a.post_delete_link:focus,
+div.doaction a.delete_link:focus,
+div.doaction a.post_delete_link:active,
+div.doaction a.delete_link:active {             background-color: #cc5252 }
+a.more_options_link {                           display: inline-block;
+                                                margin-top: 1em }
+a.likes > img {                                 display: inline-block;
+                                                position: relative;
+                                                top: 0px }
+a.likes:hover > img,
+a.likes:focus > img,
+a.likes:active > img {                          top: 1px }
+a.archive_post_link {                           display: block;
+                                                position: absolute;
+                                                top: -1px;
+                                                left: -1px;
+                                                bottom: -1px;
+                                                right: -1px;
+                                                color: transparent;
+                                                background-color: transparent }
+a.archive_post_link:hover,
+a.archive_post_link:focus,
+a.archive_post_link:active {                    background-color: #c2b9b4;
+                                                mix-blend-mode: multiply;
+                                                opacity: 0.8 }
+img {                                           border-style: none;
+                                                margin: 0em;
+                                                padding: 0em }
+article > section.photo img {                   width: 100% }
+article img {                                   max-width: 100% }
+img.gravatar {                                  position: absolute;
+                                                top: 2rem;
+                                                left: 24px;
+                                                width: 48px;
+                                                height: 48px }
+.ajax_loading {                                 background-size: 30px 30px;
+                                                background-image: linear-gradient(-45deg, #ebeae6 25%, transparent 25%, transparent 50%, #ebeae6 50%, #ebeae6 75%, transparent 75%, transparent) !important;
+                                                animation: stripes 2s linear infinite }
+.ajax_loading .doaction {                       visibility: hidden }
+
+@keyframes stripes {
+    from {                                      background-position: 0px 0px }
+    to {                                        background-position: 60px 30px }
+}
+
+@media print {
+    html {                                      font-size: 4.2mm }
+    body {                                      background-color: #ffffff;
+                                                margin: 2em }
+    div.prev, div.next {                        display: none }
+    div.main > article,
+    div.standalone {                            background-color: #ffffff;
+                                                page-break-inside: avoid }
+}
+
+@media screen and (max-width: 639px) {
+    html {                                      font-size: 14px }
+    body {                                      margin-bottom: 3rem }
+    blockquote {                                padding: 0em 1em }
+    input, select {                             width: 100% }
+    table {                                     box-sizing: border-box;
+                                                display: block }
+    h1.banner {                                 margin-bottom: 2rem }
+    div#mast_box {                              padding: 3rem 1rem }
+    ul.navigation li > a {                      display: inline-block;
+                                                margin: 0em 0.5em 2em 0.5em }
+    div.search_box {                            margin-top: 0em }
+    button#search_submit {                      display: none }
+    div#main > article, div.standalone,
+    div#main > article.commentary {             padding: 2rem 2rem 0rem 2rem }
+    div.metadata {                              padding-bottom: 2rem }
+    ol.comments li {                            padding: 2rem }
+    img.gravatar {                              position: static;
+                                                width: 24px;
+                                                height: 24px;
+                                                vertical-align: middle;
+                                                margin-right: 4px }
+}
+
+@media screen and (max-width: 459px) {
+    ul.archive li {                             margin-left: 0em }
+    ul.archive article.post.archive {           box-sizing: border-box;
+                                                width: 100%;
+                                                margin-left: 0em }
+    ul.archive article.post.archive img {       width: 100% }
+}
+
+@media screen and (min-width: 959px) {
+    div#mast_box {                              text-align: left;
+                                                padding: 4em 8rem 4rem 8rem }
+    div.search_box {                            display: inline-block }
+    div.prev {                                  margin: 4rem 0em 0rem 4rem }
+    div.next {                                  margin: 0rem 4em 0rem 0rem }
+    div#main > article, div.standalone {        padding-left: 8rem;
+                                                padding-right: 8rem }
+    div#main > article.commentary {             padding: 0rem 8rem }
+}

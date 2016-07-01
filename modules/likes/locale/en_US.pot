@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2014 Xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-17 20:21+0000\n"
+"POT-Creation-Date: 2016-07-01 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,64 +17,113 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/likes/info.yaml:1
-msgid "Likes"
-msgstr ""
-
-#: modules/likes/info.yaml:4
-msgid "Allow users to “like” a post."
-msgstr ""
-
-#: modules/likes/info.yaml:6
-msgid "Please remember to update the permission settings for each group."
-msgstr ""
-
-#: modules/likes/info.yaml:8
-msgid "Are you sure you want to remove all Likes from the database?"
-msgstr ""
-
-#: modules/likes/model.Like.php:139
-msgid "Like Posts"
-msgstr ""
-
-#: modules/likes/model.Like.php:140
-msgid "Unlike Posts"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:3
+#: modules/likes/admin/pages/like_settings.twig:3
 msgid "Like Settings"
 msgstr ""
 
-#: modules/likes/pages/admin/like_settings.twig:9
-msgid "Show On Front Page"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:10
-#: modules/likes/pages/admin/like_settings.twig:15
-msgid "enabled"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:11
-msgid "Enables like functionality on front page posts."
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:14
-msgid "Like With Text"
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:16
-msgid "Enables like with text links (i.e. Like/Unlike)."
-msgstr ""
-
-#: modules/likes/pages/admin/like_settings.twig:19
+#: modules/likes/admin/pages/like_settings.twig:9
 msgid "Like Button Image"
 msgstr ""
 
-#: modules/likes/pages/admin/like_settings.twig:25
-msgid "Likes Image"
+#: modules/likes/admin/pages/like_settings.twig:18
+msgid "Like With Text"
 msgstr ""
 
-#: modules/likes/pages/admin/like_settings.twig:28
-msgid "Like Texts"
+#: modules/likes/admin/pages/like_settings.twig:20
+msgid "Enables text descriptions in like/unlike links."
+msgstr ""
+
+#: modules/likes/admin/pages/like_settings.twig:23
+msgid "Show On Front Page"
+msgstr ""
+
+#: modules/likes/admin/pages/like_settings.twig:25
+msgid "Enables like functionality on front page posts."
+msgstr ""
+
+#: modules/likes/info.php:3
+#: modules/likes/likes.php:37
+msgid "Likes"
+msgstr ""
+
+#: modules/likes/info.php:6
+msgid "Allow users to &#8220;like&#8221; a post."
+msgstr ""
+
+#: modules/likes/info.php:11
+msgid "Please remember to update the permission settings for each group."
+msgstr ""
+
+#: modules/likes/likes.php:44
+#: modules/likes/likes.php:89
+msgid "An ID is required to like a post."
+msgstr ""
+
+#: modules/likes/likes.php:47
+#: modules/likes/likes.php:93
+msgid "You do not have sufficient privileges to like posts."
+msgstr ""
+
+#: modules/likes/likes.php:57
+msgid "Post liked."
+msgstr ""
+
+#: modules/likes/likes.php:62
+#: modules/likes/likes.php:115
+msgid "An ID is required to unlike a post."
+msgstr ""
+
+#: modules/likes/likes.php:65
+#: modules/likes/likes.php:119
+msgid "You do not have sufficient privileges to unlike posts."
+msgstr ""
+
+#: modules/likes/likes.php:75
+msgid "Post unliked."
+msgstr ""
+
+#: modules/likes/likes.php:105
+#: modules/likes/likes.php:210
+msgid "You like this."
+msgstr ""
+
+#: modules/likes/likes.php:107
+#: modules/likes/likes.php:212
+#, php-format
+msgid "You and %d person like this."
+msgid_plural "You and %d people like this."
+msgstr[0] ""
+msgstr[1] ""
+
+#: modules/likes/likes.php:131
+#: modules/likes/likes.php:183
+#: modules/likes/likes.php:208
+msgid "No likes yet."
+msgstr ""
+
+#: modules/likes/likes.php:133
+#: modules/likes/likes.php:185
+#, php-format
+msgid "%d person likes this."
+msgid_plural "%d people like this."
+msgstr[0] ""
+msgstr[1] ""
+
+#: modules/likes/likes.php:173
+#: modules/likes/likes.php:198
+msgid "Like!"
+msgstr ""
+
+#: modules/likes/likes.php:174
+#: modules/likes/likes.php:199
+msgid "Unlike!"
+msgstr ""
+
+#: modules/likes/model.Like.php:143
+msgid "Like Posts"
+msgstr ""
+
+#: modules/likes/model.Like.php:144
+msgid "Unlike Posts"
 msgstr ""
 

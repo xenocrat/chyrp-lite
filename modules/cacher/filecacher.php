@@ -1,28 +1,28 @@
 <?php
-    class FileCacher{
+    class FileCacher {
         public function __construct($url, $config) {
-            $this->user = (logged_in()) ? Visitor::current()->login : "guest" ;
-            $this->path = INCLUDES_DIR."/caches/".sanitize($this->user);
+            $this->user   = (logged_in()) ? Visitor::current()->login : "guest" ;
+            $this->caches = CACHES_DIR.DIR."filecacher";
+            $this->path   = $this->caches.DIR.sanitize($this->user);
+            $this->url    = rawurldecode($url); # Percent decode for URL exclusion list comparison.
+            $this->file   = $this->path.DIR.md5($this->url).".html";
 
-            $this->caches = INCLUDES_DIR."/caches";
-            $this->url = $url;
-            $this->file = $this->path."/".md5($this->url).".html";
-
-            # If the cache directory is not writable, disable this module and cancel execution.
-            if (!is_writable($this->caches))
-                cancel_module("cacher");
+            # If the cache directory does not exist and cannot be created, or is not writable, cancel execution.
+            if ((!file_exists($this->caches) and !@mkdir($this->caches)) or !is_writable($this->caches))
+                cancel_module("cacher",
+                              _f("Cacher module cannot continue because <em>%s</em> is not writable.", $this->caches, "cacher"));
 
             # Remove all expired files.
             $this->remove_expired();
         }
 
-        public function url_available(){
+        public function url_available() {
             return file_exists($this->file);
         }
 
-        public function get(){
+        public function get() {
             if (DEBUG)
-                error_log("SERVING cache file for ".$this->url."...");
+                error_log("SERVING cache file for ".$this->url);
 
             $cache = array('contents' => file_get_contents($this->file), 'headers' => array());
 
@@ -32,9 +32,9 @@
             return $cache;
         }
 
-        public function set($value){
+        public function set($value) {
             if (DEBUG)
-                error_log("GENERATING cache file for ".$this->url."...");
+                error_log("GENERATING cache file for ".$this->url);
 
             # Generate the user's directory.
             if (!file_exists($this->path))
@@ -43,40 +43,40 @@
             file_put_contents($this->file, $value);
         }
 
-        public function remove_expired(){
-            foreach ((array) glob($this->caches."/*/*.html") as $file) {
+        public function remove_expired() {
+            foreach ((array) glob($this->caches.DIR."*".DIR."*.html") as $file) {
                 if (time() - filemtime($file) > Config::current()->cache_expire)
                     @unlink($file);
 
                 $dir = dirname($file);
-                if (!count((array) glob($dir."/*")))
+                if (!count((array) glob($dir.DIR."*")))
                     @rmdir($dir);
             }
         }
 
         public function regenerate() {
             if (DEBUG)
-                error_log("REGENERATING");
+                error_log("REGENERATING caches");
 
-            foreach ((array) glob($this->caches."/*/*.html") as $file)
+            foreach ((array) glob($this->caches.DIR."*".DIR."*.html") as $file)
                 @unlink($file);
         }
 
         public function regenerate_local($user = null) {
             if (DEBUG)
-                error_log("REGENERATING local user ".$this->user."...");
+                error_log("REGENERATING caches for local user ".$this->user);
 
-            $directory = (isset($user)) ? $this->caches."/".$user : $this->path ;
-            foreach ((array) glob($directory."/*.html") as $file)
+            $directory = (isset($user)) ? $this->caches.DIR.$user : $this->path ;
+
+            foreach ((array) glob($directory.DIR."*.html") as $file)
                 @unlink($file);
         }
 
         public function remove_caches_for($url) {
             if (DEBUG)
-                error_log("REMOVING caches for ".$url."...");
+                error_log("REMOVING caches for ".$url);
 
-            foreach ((array) glob($this->caches."/*/".md5($url).".html") as $file)
+            foreach ((array) glob($this->caches.DIR."*".DIR.md5($url).".html") as $file)
                 @unlink($file);
         }
     }
-

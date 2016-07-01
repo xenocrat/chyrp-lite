@@ -36,7 +36,7 @@
             $this->throw_exceptions = $throw_exceptions;
             $this->queryString = $query;
 
-            if ($count and defined('DEBUG') and DEBUG) {
+            if ($count and DEBUG) {
                 $trace = debug_backtrace();
                 $target = $trace[$index = 0];
 
@@ -48,6 +48,7 @@
                         break;
 
                 $logQuery = $query;
+
                 foreach ($params as $name => $val)
                     $logQuery = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/", str_replace("\\", "\\\\", $this->sql->escape($val))."\\1", $logQuery);
 
@@ -75,13 +76,13 @@
 
                         if (!$result)
                             throw new PDOException;
-                    } catch (PDOException $error) {
-                        if (!empty($error->errorInfo[1]) and $error->errorInfo[1] == 17)
-                            return new self($sql, $query, $params, $throw_exceptions);
 
+                    } catch (PDOException $error) {
                         return $this->handle($error);
                     }
+
                     break;
+
                 case "mysqli":
                     foreach ($params as $name => $val)
                         $query = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
@@ -95,23 +96,7 @@
                     try {
                         if (!$this->query = $this->db->query($query))
                             throw new Exception($this->db->error);
-                    } catch (Exception $error) {
-                        return $this->handle($error);
-                    }
-                    break;
-                case "mysql":
-                    foreach ($params as $name => $val)
-                        $query = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
-                                              str_replace(array("\\", "\$"),
-                                                          array("\\\\", "\\\$"),
-                                                          $this->sql->escape($val))."\\1",
-                                              $query);
 
-                    $this->queryString = $query;
-
-                    try {
-                        if (!$this->query = @mysql_query($query))
-                            throw new Exception(mysql_error());
                     } catch (Exception $error) {
                         return $this->handle($error);
                     }
@@ -131,11 +116,9 @@
             switch($this->sql->method) {
                 case "pdo":
                     return $this->query->fetchColumn($column);
+
                 case "mysqli":
                     $result = $this->query->fetch_array();
-                    return $result[$column];
-                case "mysql":
-                    $result = mysql_fetch_array($this->query);
                     return $result[$column];
             }
         }
@@ -148,10 +131,9 @@
             switch($this->sql->method) {
                 case "pdo":
                     return $this->query->fetch();
+
                 case "mysqli":
                     return $this->query->fetch_array();
-                case "mysql":
-                    return mysql_fetch_array($this->query);
             }
         }
 
@@ -163,10 +145,9 @@
             switch($this->sql->method) {
                 case "pdo":
                     return $this->query->fetchObject();
+
                 case "mysqli":
                     return $this->query->fetch_object();
-                case "mysql":
-                    return mysql_fetch_object($this->query);
             }
         }
 
@@ -178,17 +159,11 @@
             switch($this->sql->method) {
                 case "pdo":
                     return $this->query->fetchAll($style);
+
                 case "mysqli":
                     $results = array();
 
                     while ($row = $this->query->fetch_assoc())
-                        $results[] = $row;
-
-                    return $results;
-                case "mysql":
-                    $results = array();
-
-                    while ($row = mysql_fetch_assoc($this->query))
                         $results[] = $row;
 
                     return $results;
@@ -207,8 +182,8 @@
          */
          public function grab($column) {
             $all = $this->fetchAll();
-
             $result = array();
+
             foreach ($all as $row)
                 $result[] = $row[$column];
 
@@ -222,15 +197,20 @@
         public function handle($error) {
             $this->sql->error = $error;
 
-            if (UPGRADING or $this->sql->silence_errors) return false;
+            if (UPGRADING or $this->sql->silence_errors)
+                return false;
 
+            $backtrace = $error->getTrace();
             $message = $error->getMessage();
 
-            $message.= "\n\n<pre>".print_r($this->queryString, true)."\n\n<pre>".print_r($this->params, true)."</pre>\n\n<pre>".$error->getTraceAsString()."</pre>";
+            $message.= "\n\n<h2>".__("Query String")."</h2>\n".
+                       "<pre>".fix(print_r($this->queryString, true))."</pre>".
+                       "\n\n<h2>".__("Parameters")."</h2>\n".
+                       "<pre>".fix(print_r($this->params, true))."</pre>";
 
             if (XML_RPC or $this->throw_exceptions)
                 throw new Exception($message);
 
-            error(__("Database Error"), $message);
+            error(__("Database Error"), $message, $backtrace);
         }
     }

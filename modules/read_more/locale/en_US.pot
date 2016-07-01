@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2014 Xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-17 20:21+0000\n"
+"POT-Creation-Date: 2016-07-01 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,11 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/read_more/info.yaml:1
+#: modules/read_more/info.php:3
 msgid "Read More"
 msgstr ""
 
-#: modules/read_more/info.yaml:4
-msgid "Add “read more” links to your blog index by typing <code><!--more--></code> in your posts."
+#: modules/read_more/info.php:6
+msgid "Add &#8220;&hellip;more&#8221; links to your blog index by typing <code><!--more--></code> or <code><!--more custom text--></code> in your posts."
+msgstr ""
+
+#: modules/read_more/read_more.php:18
+msgid "&hellip;more"
 msgstr ""
 

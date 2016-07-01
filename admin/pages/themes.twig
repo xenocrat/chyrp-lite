@@ -1,0 +1,32 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Themes" | translate }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Blog Themes" | translate }}</h2>
+<ul id="blog_themes" class="extend themes">
+{% for theme in themes %}
+<li class="theme{{ theme.name == site.theme ? ' current' : '' }}" id="{{ theme.name }}">
+<img src="{{ theme.screenshot }}" alt="&#8220;{{ theme.info.description | fix }}&#8220; screenshot" class="screenshot" title="{{ theme.info.description | fix(true) }}">
+<h3>
+<a class="emblem module_author" href="{{ theme.info.url }}" target="_blank">
+<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ theme.info.url | fix }}">
+</a>
+{{ theme.info.name }}{# translation is done in the controller #}
+</h3>
+<div class="controls">
+<form action="{{ admin_url('change_theme') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<input type="hidden" name="theme" value="{{ theme.name }}" id="hash">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<button name="change" value="indubitably" type="submit"{{ theme.name == site.theme ? " disabled" : "" }}>
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Select" | translate }}
+</button>
+<button name="change" value="undecidedly"{{ theme.name == site.theme ? " disabled" : "" }}>
+<img src="{{ site.chyrp_url }}/admin/images/icons/magnifier.svg" alt="icon">{{ "Preview" | translate }}
+</button>
+</form>
+</div>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

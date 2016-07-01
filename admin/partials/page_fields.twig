@@ -1,0 +1,76 @@
+{{ trigger.call("before_page_fields") }}
+<p class="main_options">
+<label for="title">{{ "Title" | translate }}</label>
+<input class="text" type="text" name="title" value="{{ page is defined ? page.title | fix : '' }}" id="title" data-preview="markup_title">
+</p>
+<p class="main_options">
+<label for="body">
+{% if site.enable_markdown %}
+<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
+{% endif %}
+{{ "Body" | translate }}
+</label>
+<textarea rows="12" name="body" id="body" data-preview="markup_text">{{ page is defined ? page.body | fix : "" }}</textarea>
+</p>
+{{ trigger.call("after_page_fields") }}
+<div id="more_options" class="more_options">
+<p class="more_options_option">
+<label for="slug">
+{{ "Slug" | translate }}
+<a href="{{ admin_url('help', {'id': 'slugs'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+</label>
+<input class="text" type="text" name="slug" value="{{ page is defined ? page.slug | fix : '' }}" id="slug">
+</p>
+<p class="more_options_option">
+<label for="status">{{ "Status" | translate }}</label>
+<select name="status" id="status">
+{% if page is defined %}
+<option value="listed"{{ (page.public and page.show_in_list) | selected(true) }}>{{ "Public and visible in pages list" | translate }}</option>
+<option value="public"{{ (page.public and not page.show_in_list) | selected(true) }}>{{ "Public" | translate }}</option>
+<option value="teased"{{ (not page.public and page.show_in_list) | selected(true) }}>{{ "Private and visible in pages list" | translate }}</option>
+<option value="private"{{ (not page.public and not page.show_in_list) | selected(true) }}>{{ "Private" | translate }}</option>
+{% else %}
+<option value="listed" selected>{{ "Public and visible in pages list" | translate }}</option>
+<option value="public">{{ "Public" | translate }}</option>
+<option value="teased">{{ "Private and visible in pages list" | translate }}</option>
+<option value="private">{{ "Private" | translate }}</option>
+{% endif %}
+</select>
+</p>
+<p class="more_options_option">
+<label for="list_priority">{{ "Priority in pages list" | translate }}</label>
+<select name="list_priority" id="list_priority">
+<option value="0"{{ page is defined ? page.list_order | selected(0,1,2) : "" }}>{{ "High" | translate }}</option>
+<option value="4"{{ page is defined ? page.list_order | selected(3,4,5) : " selected" }}>{{ "Medium" | translate }}</option>
+<option value="8"{{ page is defined ? page.list_order | selected(6,7,8) : "" }}>{{ "Low" | translate }}</option>
+</select>
+</p>
+<p class="more_options_option">
+<label for="parent_id">{{ "Parent" | translate }}</label>
+<select name="parent_id" id="parent_id">
+<option value="0">{{ "[None]" | translate }}</option>
+{% if page is defined %}{% set exclude = page.id %}{% else %}{% set exclude = null %}{% endif %}
+{% for item in theme.pages_list(0, exclude) %}
+<option value="{{ item.id }}"{{ page is defined ? page.parent_id | selected(item.id) : "" }}>{{ "&nbsp;&nbsp;&nbsp;&nbsp;" | repeat(item.depth - 1) }}{{ item.title | striptags | fix }}</option>
+{% endfor %}
+</select>
+</p>
+{% if route.action == "write_page" %}
+{{ trigger.call("new_page_options") }}
+{% else %}
+{{ trigger.call("edit_page_options", page) }}
+{% endif %}
+<div class="clear"></div>
+</div>
+<div class="buttons confirmation">
+{% if route.action == "write_page" %}
+<button type="submit" class="yay" accesskey="s">
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
+</button>
+{% else %}
+<button type="submit" accesskey="s">
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Save" | translate }}
+</button>
+{% endif %}
+</div>
+</div>

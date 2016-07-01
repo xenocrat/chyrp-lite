@@ -25,9 +25,7 @@
          * A detour around belongs_to "group" to account for the default Guest group.
          */
         public function __get($name) {
-            if (isset($this->$name))
-                return $this->$name;
-            elseif ($name == "group") {
+            if ($name == "group") {
                 if (!isset($this->group_id))
                     return new Group(Config::current()->guest_group);
                 elseif (isset($this->group_name))
@@ -37,7 +35,21 @@
                     $group = new Group($this->group_id);
                     return ($group->no_results) ? new Group(Config::current()->default_group) : $group ;
                 }
-            }
+            } elseif (isset($this->$name))
+                return $this->$name;
+        }
+
+        /**
+         * Function: __isset
+         * Magic method to ensure the group attribute tests true.
+         */
+        public function __isset($name) {
+            if ($name == "group")
+                return true;
+            elseif (isset($this->$name))
+                return true;
+
+            return false;
         }
 
         /**
@@ -56,6 +68,7 @@
          */
         public static function & current() {
             static $instance = null;
-            return $instance = (empty($instance)) ? new self() : $instance ;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
         }
     }

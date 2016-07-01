@@ -7,25 +7,27 @@
                 foreach($sql->select("post_attributes",
                                      "*",
                                      array("name" => "rights_title"))->fetchAll() as $post)  {
-                    $sql->delete("post_attributes", array("name" => "rights_title", "post_id" => $post["post_id"]));
+                    $sql->delete("post_attributes", array("name" => "rights_title",
+                                                          "post_id" => $post["post_id"]));
                 }
 
                 foreach($sql->select("post_attributes",
                                      "*",
                                      array("name" => "rights_holder"))->fetchAll() as $post)  {
-                    $sql->delete("post_attributes", array("name" => "rights_holder", "post_id" => $post["post_id"]));
+                    $sql->delete("post_attributes", array("name" => "rights_holder",
+                                                          "post_id" => $post["post_id"]));
                 }
 
                 foreach($sql->select("post_attributes",
                                      "*",
                                      array("name" => "rights_licence"))->fetchAll() as $post)  {
-                    $sql->delete("post_attributes", array("name" => "rights_licence", "post_id" => $post["post_id"]));
+                    $sql->delete("post_attributes", array("name" => "rights_licence",
+                                                          "post_id" => $post["post_id"]));
                 }
             }
         }
 
         public function post_options($fields, $post = null) {
-
             $fields[] = array("attr" => "option[rights_title]",
                               "label" => __("Original Work", "rights"),
                               "type" => "text",
@@ -37,7 +39,7 @@
                               "value" => oneof(@$post->rights_holder, ""));
 
             $fields[] = array("attr" => "option[rights_licence]",
-                              "label" => __("Licence", "rights"),
+                              "label" => __("License", "rights"),
                               "type" => "select",
                               "options" => array(array("name" => __("All rights reserved", "rights"),
                                                        "value" => "All rights reserved",
@@ -77,42 +79,44 @@
         }
 
         public function post($post) {
-            $post->licence_mark = self::licence_mark($post);
+            $post->licence_link = self::licence_link($post);
         }
 
-        static function licence_mark($post) {
-            $chyrp = Config::current()->chyrp_url;
+        public function feed_item($post) {
+            if (!empty($post->rights_licence))
+               printf("        <rights>%s</rights>\n", $post->rights_licence);
+        }
 
+        static function licence_link($post) {
             switch ($post->rights_licence) {
                 case "Creative Commons BY":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by.svg" alt="Creative Commons BY" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by/4.0" class="rights_licence_link">'.__("Creative Commons BY", "rights").'</a>';
                 break;
                 case "Creative Commons BY-ND":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-nd.svg" alt="Creative Commons BY-ND" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0" class="rights_licence_link">'.__("Creative Commons BY-ND", "rights").'</a>';
                 break;
                 case "Creative Commons BY-SA":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-sa.svg" alt="Creative Commons BY-SA" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0" class="rights_licence_link">'.__("Creative Commons BY-SA", "rights").'</a>';
                 break;
                 case "Creative Commons BY-NC":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-nc.svg" alt="Creative Commons BY-NC" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0" class="rights_licence_link">'.__("Creative Commons BY-NC", "rights").'</a>';
                 break;
                 case "Creative Commons BY-NC-ND":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-nc-nd.svg" alt="Creative Commons BY-NC-ND" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0" class="rights_licence_link">'.__("Creative Commons BY-NC-ND", "rights").'</a>';
                 break;
                 case "Creative Commons BY-NC-SA":
-                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/by-nc-sa.svg" alt="Creative Commons BY-NC-SA" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="rights_licence_link">'.__("Creative Commons BY-NC-SA", "rights").'</a>';
                 break;
                 case "Creative Commons CC0":
-                $mark = '<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/cc-zero.svg" alt="Creative Commons CC0" /></a>';
+                $mark = '<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0" class="rights_licence_link">'.__("Creative Commons CC0", "rights").'</a>';
                 break;
                 case "Public Domain":
-                $mark = '<a rel="license" href="http://wiki.creativecommons.org/Public_domain" class="rights_licence_link"><img class="rights_licence_mark" src="'.$chyrp.'/modules/rights/images/publicdomain.svg" alt="Public Domain" /></a>';
+                $mark = '<a rel="license" href="http://wiki.creativecommons.org/Public_domain" class="rights_licence_link">'.__("Public Domain", "rights").'</a>';
                 break;
                 default:
-                $mark = "&copy;";
+                $mark = __("All rights reserved", "rights");
             }
 
             return $mark;
         }
-
     }

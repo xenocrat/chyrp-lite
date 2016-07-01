@@ -1,0 +1,82 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Manage Users" | translate }}{% endblock %}
+
+{% block content %}
+<form class="filters" action="index.php" method="get" accept-charset="UTF-8">
+<fieldset>
+<input type="hidden" name="action" value="manage_users">
+<div role="search" class="filter_item">
+<h3>
+{{ "Search&hellip;" | translate }}
+<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+</h3>
+<input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
+<button type="submit">{{ "Search" | translate }}</button>
+{% if visitor.group.can("add_user") %}
+<a href="{{ admin_url('new_user') }}" class="button yay">
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add">{{ "New User" | translate }}
+</a>
+{% endif %}
+</div>
+</fieldset>
+</form>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Users" | translate }}</h2>
+<table>
+<thead>
+<tr class="head">
+<th class="user_name">{{ "Login (name)" | translate }}</th>
+<th class="user_group">{{ "Group" | translate }}</th>
+<th class="user_joined">{{ "Joined" | translate }}</th>
+<th class="user_website">{{ "Website" | translate }}</th>
+{{ trigger.call("manage_users_column_header") }}
+<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+{% for user in users.paginated %}
+<tr id="user_{{ user.id }}" class="user">
+<td class="user_name main">
+<a href="mailto:{{ user.email | fix(true) }}">{{ user.login }}</a>
+{% if user.full_name is not empty %}<span class="sub">({{ user.full_name }})</span>{% endif %}
+</td>
+<td class="user_group">
+{{ user.group.name | fix }}
+</td>
+<td class="user_joined">
+{{ user.joined_at | strftimeformat }}
+</td>
+<td class="user_website">
+{% if user.website is not empty %}<a href="{{ user.website | fix(true) }}">{{ user.website }}</a>{% endif %}
+</td>
+{{ trigger.call("manage_users_column", user) }}
+{% if user.editable() or user.deletable() %}
+{% if user.editable() %}
+<td class="controls"{{ not user.deletable() ? ' colspan="2"' : '' }}>
+{{ user.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+</td>
+{% endif %}
+{% if user.deletable() %}
+<td class="controls"{{ not user.editable() ? ' colspan="2"' : '' }}>
+{{ user.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+</td>
+{% endif %}
+{% else %}
+<td class="controls" colspan="2">&nbsp;</td>
+{% endif %}
+</tr>
+{% else %}
+<tr>
+<td class="placeholder"><span class="sub">{{ "(none)" | translate }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% if users.paginated is not empty and users.pages > 1 %}
+<div class="pagination">
+<span class="pages">{{ "Page %d of %s" | translate | format(users.page, users.final_link(users.pages)) }}</span>
+{{ users.prev_link }}
+{{ users.next_link }}
+</div>
+{% endif %}
+{% endblock %}

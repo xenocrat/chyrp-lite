@@ -37,9 +37,10 @@
             $config = Config::current();
 
             if (substr_count($_SERVER['REQUEST_URI'], "..") > 0 )
-                exit("GTFO.");
-            elseif (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action']))
-                exit("Nope!");
+                error(__("Error"), __("Malformed URI."), null, 400);
+
+            if (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action']))
+                error(__("Error"), __("Invalid action."), null, 400);
 
             $this->action =& $_GET['action'];
 
@@ -60,7 +61,7 @@
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
 
             if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0]))
-                exit("No-Go!");
+                error(__("Error"), __("Invalid action."), null, 400);
 
             if (method_exists($controller, "parse"))
                 $controller->parse($this);
@@ -97,6 +98,7 @@
                 array_unshift($try, $this->action);
 
             $count = 0;
+
             foreach ($try as $key => $val) {
                 if (is_numeric($key))
                     list($method, $args) = array($val, array());
@@ -106,6 +108,7 @@
                 $this->action = $method;
 
                 $name = strtolower(str_replace("Controller", "", get_class($this->controller)));
+
                 if ($trigger->exists($name."_".$method) or $trigger->exists("route_".$method))
                     $call = $trigger->call(array($name."_".$method, "route_".$method), $this->controller);
                 else
@@ -141,7 +144,7 @@
          *
          * Parameters:
          *     $url - The clean URL.
-         *     $use_chyrp_url - Use @Config.chyrp_url@ instead of @Config.url@, when the @$url@ begins with "/"?
+         *     $controller - The controller to use. If omitted the current controller will be used.
          *
          * Returns:
          *     A clean or dirty URL, depending on @Config.clean_urls@.
@@ -170,6 +173,7 @@
             }
 
             $urls = fallback($controller->urls, array());
+
             Trigger::current()->filter($urls, "parse_urls");
 
             foreach (array_diff_assoc($urls, $controller->urls) as $key => $value)
@@ -229,7 +233,8 @@
             if (!isset($controller) and empty($instance))
                 error(__("Error"), __("Route was initiated without a Controller."), debug_backtrace());
 
-            return $instance = (empty($instance)) ? new self($controller) : $instance ;
+            $instance = (empty($instance)) ? new self($controller) : $instance ;
+            return $instance;
         }
     }
 

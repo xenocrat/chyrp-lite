@@ -1,62 +1,71 @@
-<?php
-    define('JAVASCRIPT', true);
-    require_once "../../includes/common.php";
-    error_reporting(0);
-    header("Content-Type: application/x-javascript");
-?>
-<!-- --><script>
-        var ChyrpAjaxScroll = {
-            busy: false,
-            fail: false,
-            state: null,
-            auto: <?php echo ( Config::current()->ajax_scroll_auto ? "true" : "false" ); ?>,
-            init: function() {
-                if ( ChyrpAjaxScroll.auto ) {
-                    $(window).on("scroll", window, ChyrpAjaxScroll.watch);
-                } else {
-                    $("#next_page_page").click(ChyrpAjaxScroll.fetch);
+var ChyrpAjaxScroll = {
+    busy: false,
+    failed: false,
+    auto: <?php echo(Config::current()->ajax_scroll_auto ? "true" : "false"); ?>,
+    init: function() {
+        if (ChyrpAjaxScroll.auto) {
+            $(window).on("scroll", window, ChyrpAjaxScroll.watch);
+        } else {
+            $("#pagination_next_page").click(function(e) {
+                if (!ChyrpAjaxScroll.failed) {
+                    e.preventDefault();
+                    ChyrpAjaxScroll.fetch();
                 }
-            },
-            watch: function() {
-                // Trigger fetch on scroll when 8/10 of the page has been viewed
-                var docViewTop = $(window).scrollTop();
-                var winHeight = window.innerHeight ? window.innerHeight : $(window).height();
-                var docHeight = $(document).height();
-                var docViewBottom = docViewTop + winHeight;
-                if ( docViewBottom >= ( docHeight * 0.8 ) ) ChyrpAjaxScroll.fetch();
-            },
-            fetch: function() {
-                if ( !ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.fail ) {
-                    ChyrpAjaxScroll.busy = true;
-                    var last_post = $(".post").last();
-                    var next_page_url = $("#next_page_page").attr("href");
-                    if ( next_page_url && last_post.length ) {
-                        $.get(next_page_url, function(data){
-                            if ( !!history.replaceState ) history.replaceState(ChyrpAjaxScroll.state, '', next_page_url );
-                            // Insert new posts
-                            $(".post").last().after($(data).find(".post"));
-                            // Execute inline scripts
-                            $(data).filter("script").each(function(){
-                                $.globalEval( this.text || this.textContent || this.innerHTML || "" );
-                            });
-                            // Update the page description
-                            $(".pages").last().replaceWith( $(data).find(".pages").last() );
-                            // Search for the next page link
-                            var ajax_page_link = $(data).find("#next_page_page").last();
-                            if ( ajax_page_link ) {
-                                // We found another page to load
-                                $("#next_page_page").replaceWith(ajax_page_link);
-                                if ( !ChyrpAjaxScroll.auto ) $("#next_page_page").click(ChyrpAjaxScroll.fetch);
-                                ChyrpAjaxScroll.busy = false;
-                            } else {
-                                // That's all Folks!
-                                $("#next_page_page").fadeOut("fast");
-                            }
-                        }).fail( function() { ChyrpAjaxScroll.fail = true });
-                        return false; // Suppress hyperlink if we can fetch
-                    }
-                }
-            },
+            });
         }
-        $(document).ready(ChyrpAjaxScroll.init);
-<!-- --></script>
+    },
+    watch: function() {
+        var docViewTop = $(window).scrollTop();
+        var winHeight = window.innerHeight ? window.innerHeight : $(window).height();
+        var docHeight = $(document).height();
+        var docViewBottom = docViewTop + winHeight;
+
+        // Trigger fetch on scroll when 8/10 of the page has been viewed.
+        if (docViewBottom >= (docHeight * 0.8))
+            ChyrpAjaxScroll.fetch();
+    },
+    fetch: function() {
+        if (!ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.failed) {
+            ChyrpAjaxScroll.busy = true;
+            var this_post_obj = $(".post").last();
+            var this_next_obj = $("#pagination_next_page");
+            var this_next_url = this_next_obj.attr("href");
+
+            if (this_next_url && this_post_obj.length) {
+                $.get(this_next_url, function(data) {
+                    var this_next_num = Number(this_next_url.match(/page[=\/]([0-9]+)/i)[1]);
+                    var ajax_next_obj = $(data).find("#pagination_next_page");
+                    var ajax_next_title = $(data).filter("title").text();
+
+                    // Insert new posts, update the page title and location, and execute inline scripts.
+                    this_post_obj.after($(data).find(".post"));
+                    document.title = ajax_next_title;
+
+                    if (!!history.replaceState)
+                        history.replaceState({ "page": this_next_num }, ajax_next_title, this_next_url);
+
+                    $(data).filter("script").each(function(){
+                        $.globalEval(this.text || this.textContent || this.innerHTML || "");
+                    });
+
+                    // Replace the element #pagination_next_page if the ajax data contains a replacement.
+                    if (ajax_next_obj) {
+                        this_next_obj.replaceWith(ajax_next_obj);
+                        ChyrpAjaxScroll.busy = false;
+
+                        if (!ChyrpAjaxScroll.auto)
+                            this_next_obj.click(ChyrpAjaxScroll.fetch);
+                    } else {
+                        // That's all folks!
+                        this_next_obj.remove();
+                    }
+                }).fail(ChyrpAjaxScroll.panic);
+            }
+        }
+    },
+    panic: function() {
+        ChyrpAjaxScroll.failed = true;
+        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+    }
+};
+$(document).ready(ChyrpAjaxScroll.init);

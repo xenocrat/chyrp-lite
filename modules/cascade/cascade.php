@@ -15,7 +15,7 @@
             if (empty($_POST))
                 return $admin->display("cascade_settings");
     
-            if (!isset($_POST['hash']) or $_POST['hash'] != Config::current()->secure_hashkey)
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
     
             $set = array( Config::current()->set("ajax_scroll_auto", isset($_POST['auto'])) );
@@ -30,17 +30,7 @@
             return $navs;
         }
 
-
-        static function scripts($scripts) {
-            if (in_array(Route::current()->action, array("index",
-                                                         "archive",
-                                                         "search",
-                                                         "tag",
-                                                         "category",
-                                                         "alphabetical"))
-            ) {
-                $scripts[] = Config::current()->chyrp_url."/modules/cascade/javascript.php";
-                return $scripts;
-            }
+        static function javascript() {
+            include MODULES_DIR.DIR."cascade".DIR."javascript.php";
         }
     }

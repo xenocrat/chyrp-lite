@@ -1,19 +1,20 @@
 <?php
     /**
      * Class: Main Controller
-     * The logic behind the Chyrp install.
+     * The logic controlling the blog.
      */
     class MainController {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
         public $urls = array('|/id/([0-9]+)/|'                              => '/?action=view&id=$1',
                              '|/page/(([^/]+)/)+|'                          => '/?action=page&url=$2',
-                             '|/search/|'                                   => '/?action=search',
                              '|/search/([^/]+)/|'                           => '/?action=search&query=$1',
+                             '|/search/|'                                   => '/?action=search',
                              '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&year=$1&month=$2&day=$3',
                              '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&year=$1&month=$2',
                              '|/archive/([0-9]{4})/|'                       => '/?action=archive&year=$1',
-                             '|/([^/]+)/feed/([^/]+)/|'                     => '/?action=$1&feed&title=$2',
+                             '|/random/([^/]+)/|'                           => '/?action=random&feather=$1',
+                             '|/random/|'                                   => '/?action=random',
                              '|/([^/]+)/feed/|'                             => '/?action=$1&feed');
 
         # Boolean: $displayed
@@ -30,22 +31,26 @@
 
         /**
          * Function: __construct
-         * Loads the Twig parser into <Theme>, and sets up the theme l10n domain.
+         * Loads the Twig parser. Theme class sets up the l10n domain.
          */
         private function __construct() {
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            $cache = (is_writable(INCLUDES_DIR."/caches") and
-                      !DEBUG and
-                      !PREVIEWING and
-                      !defined('CACHE_TWIG') or CACHE_TWIG);
+            $cache = (is_writable(CACHES_DIR.DIR."twig") and !PREVIEWING and (!DEBUG or CACHE_TWIG)) ?
+                CACHES_DIR.DIR."twig" : false ;
 
-            if (defined('THEME_DIR'))
-                $this->twig = new Twig_Loader(THEME_DIR,
-                                              $cache ?
-                                                  INCLUDES_DIR."/caches" :
-                                                  null) ;
+            if (defined('THEME_DIR')) {
+                $loader = new Twig_Loader_Filesystem(THEME_DIR);
+                $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                                  "strict_variables" => DEBUG,
+                                                                  "charset" => "UTF-8",
+                                                                  "cache" => $cache,
+                                                                  "autoescape" => false));
+                $this->twig->addExtension(new Leaf());
+                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+            }
         }
 
         /**
@@ -62,7 +67,7 @@
             if (in_array($route->arg[0], array("__construct", "parse", "post_from_url", "display", "current")))
                 show_404();
 
-            # Feed
+            # Discover feeds.
             if (preg_match("/\/feed\/?$/", $route->request)) {
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
@@ -71,17 +76,7 @@
                     return $route->action = "index";
             }
 
-            # Feed with a title parameter
-            if (preg_match("/\/feed\/([^\/]+)\/?$/", $route->request, $title)) {
-                $this->feed = true;
-                $this->post_limit = $config->feed_items;
-                $_GET['title'] = $title[1];
-
-                if ($route->arg[0] == "feed") # Don't set $route->action to "feed" (bottom of this function).
-                    return $route->action = "index";
-            }
-
-            # Paginator
+            # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $page_matches)) {
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
@@ -90,15 +85,15 @@
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
             }
 
-            # Viewing a post by its ID
+            # Viewing a post by its ID.
             if ($route->arg[0] == "id") {
                 $_GET['id'] = $route->arg[1];
                 return $route->action = "id";
             }
 
-            # Archive
+            # Archive.
             if ($route->arg[0] == "archive") {
-                # Make sure they're numeric; there might be a /page/ in there.
+                # Make sure they're numeric; could be a "/page/" in there.
                 if (isset($route->arg[1]) and is_numeric($route->arg[1]))
                     $_GET['year'] = $route->arg[1];
                 if (isset($route->arg[2]) and is_numeric($route->arg[2]))
@@ -109,7 +104,7 @@
                 return $route->action = "archive";
             }
 
-            # Searching
+            # Search.
             if ($route->arg[0] == "search") {
                 if (isset($route->arg[1]))
                     $_GET['query'] = $route->arg[1];
@@ -144,6 +139,7 @@
                     $action = $params[0];
 
                     array_shift($params);
+
                     foreach ($params as $param) {
                         $split = explode("=", $param);
                         $_GET[$split[0]] = oneof(@$split[1], "");
@@ -199,21 +195,6 @@
         }
 
         /**
-         * Function: key_regexp
-         * Converts the values in $config->post_url to regular expressions.
-         *
-         * Parameters:
-         *     $key - Input URL with the keys from <Post.$url_attrs>.
-         *
-         * Returns:
-         *     $key values replaced with their regular expressions from <Routes->$code>.
-         */
-        private function key_regexp($key) {
-            Trigger::current()->filter(Post::$url_attrs, "url_code");
-            return str_replace(array_keys(Post::$url_attrs), array_values(Post::$url_attrs), str_replace("/", "\\/", $key));
-        }
-
-        /**
          * Function: index
          * Grabs the posts for the main page.
          */
@@ -230,7 +211,7 @@
                                  array("id" => $post),
                                  array("status" => "public"));
 
-            $this->display("pages/index",
+            $this->display("pages".DIR."index",
                            array("posts" => new Paginator(Post::find(array("placeholders" => true)),
                                                           $this->post_limit)));
         }
@@ -243,11 +224,15 @@
             fallback($_GET['year']);
             fallback($_GET['month']);
             fallback($_GET['day']);
-            $archives_prec = array(); # The post preceeding the date range chronologically.
 
-            $archives_prec = new Post(null, array("where" => array("created_at <" => datetime(mktime(0, 0, 0, is_numeric($_GET['month']) ? $_GET['month'] : 1 , is_numeric($_GET['day']) ? $_GET['day'] : 1 , is_numeric($_GET['year']) ? $_GET['year'] : 0 )),
-                                                                   "status" => "public"),
-                                                  "order" => "created_at DESC, id DESC"));
+            $lower_bound = mktime(0, 0, 0,
+                                  is_numeric($_GET['month']) ? (int) $_GET['month'] : 1 ,
+                                  is_numeric($_GET['day']) ? (int) $_GET['day'] : 1 ,
+                                  is_numeric($_GET['year']) ? (int) $_GET['year'] : 1970 );
+
+            $preceding = new Post(null, array("where" => array("created_at <" => datetime($lower_bound),
+                                                               "status" => "public"),
+                                              "order" => "created_at DESC, id DESC"));
 
             if (isset($_GET['year']) and isset($_GET['month']) and isset($_GET['day']))
                 $posts = new Paginator(Post::find(array("placeholders" => true,
@@ -291,6 +276,7 @@
 
                 $archives = array();
                 $archive_hierarchy = array();
+
                 while ($time = $timestamps->fetchObject()) {
                     $year = mktime(0, 0, 0, 1, 0, $time->year);
                     $month = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
@@ -301,7 +287,7 @@
 
                     $archives[$month] = array("posts" => $posts,
                                               "year" => $time->year,
-                                              "month" => strftime("%B", $month),
+                                              "month" => when("%B", $month, true),
                                               "timestamp" => $month,
                                               "url" => url("archive/".when("Y/m/", $time->created_at)));
 
@@ -310,25 +296,29 @@
 
                 $this->display("pages/archive",
                                array("archives" => $archives,
-                                     "archives_prec" => $archives_prec,
+                                     "preceding" => $preceding, # The post preceding the date range chronologically.
                                      "archive_hierarchy" => $archive_hierarchy),
                                __("Archive"));
             } else {
                 if (!is_numeric($_GET['year']) or !is_numeric($_GET['month']))
-                    error(__("Error"), __("Please enter a valid year and month."));
+                    error(__("Error"), __("Please enter a valid year and month."), null, 422);
 
                 $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
-                $depth = isset($_GET['day']) ? "day" : (isset($_GET['month']) ? "month" : (isset($_GET['year']) ? "year" : ""));
 
-                $this->display("pages/archive",
+                $depth = isset($_GET['day']) ?
+                    "day" : (isset($_GET['month']) ?
+                        "month" : (isset($_GET['year']) ?
+                            "year" : ""));
+
+                $this->display("pages".DIR."archive",
                                array("posts" => $posts,
                                      "archive" => array("year" => $_GET['year'],
-                                                        "month" => strftime("%B", $timestamp),
-                                                        "day" => strftime("%d", $timestamp),
+                                                        "month" => when("%B", $timestamp, true),
+                                                        "day" => when("%d", $timestamp, true),
                                                         "timestamp" => $timestamp,
                                                         "depth" => $depth),
-                                     "archives_prec" => $archives_prec),
-                               _f("Archive of %s", array(strftime("%B %Y", $timestamp))));
+                                     "preceding" => $preceding),
+                               _f("Archive of %s", when("%B %Y", $timestamp, true)));
             }
         }
 
@@ -356,6 +346,7 @@
                                         "params" => $params));
 
             $ids = array();
+
             foreach ($results[0] as $result)
                 $ids[] = $result["id"];
 
@@ -366,10 +357,10 @@
             else
                 $posts = new Paginator(array());
 
-            $this->display(array("pages/search", "pages/index"),
+            $this->display(array("pages".DIR."search", "pages".DIR."index"),
                            array("posts" => $posts,
                                  "search" => $_GET['query']),
-                           fix(_f("Search results for \"%s\"", array($_GET['query']))));
+                           fix(_f("Search results for \"%s\"", $_GET['query'])));
         }
 
         /**
@@ -387,7 +378,7 @@
                                                                      "user_id" => $visitor->id))),
                                    $this->post_limit);
 
-            $this->display(array("pages/drafts", "pages/index"),
+            $this->display(array("pages".DIR."drafts", "pages".DIR."index"),
                            array("posts" => $posts),
                            __("Drafts"));
         }
@@ -411,19 +402,21 @@
                 $this->feed = false;
 
             if (!$post->theme_exists())
-                error(__("Error"), __("The feather theme file for this post does not exist. The post cannot be displayed."));
+                error(__("Error"),
+                      __("The post cannot be displayed because the template for this feather was not found."), null, 501);
 
             if ($post->status == "draft")
                 Flash::message(__("This post is a draft."));
 
             if ($post->status == "scheduled")
-                Flash::message(_f("This post is scheduled to be published ".relative_time($post->created_at)));
+                Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
 
             if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
-                Flash::message(_f("This post is only visible by the following groups: %s.", $post->groups()));
+                Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
 
-            $this->display(array("pages/view", "pages/index"),
-                           array("post" => $post, "posts" => array($post)),
+            $this->display(array("pages".DIR."view", "pages".DIR."index"),
+                           array("post" => $post,
+                                 "posts" => array($post)),
                            $post->title());
         }
 
@@ -452,16 +445,7 @@
             if (!$page->public and !$visitor->group->can("view_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view this page."));
 
-            $this->display(array("pages/page", "pages/".$page->url), array("page" => $page), $page->title);
-        }
-
-        /**
-         * Function: rss
-         * Redirects to /feed (backwards compatibility).
-         */
-        public function rss() {
-            header("HTTP/1.1 301 Moved Permanently");
-            redirect(oneof(@Config::current()->feed_url, url("feed")));
+            $this->display(array("pages".DIR.$page->url, "pages".DIR."page"), array("page" => $page), $page->title);
         }
 
         /**
@@ -474,32 +458,25 @@
         }
 
         /**
-         * Function: cookies_notification
-         * Deliver a notification to comply with EU Directive 2002/58 on Privacy and Electronic Communications.
-         */
-        public function cookies_notification() {
-            if (!isset($_SESSION['cookies_notified']) and Config::current()->cookies_notification) {
-                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
-                $_SESSION['cookies_notified'] = true;
-            }
-        }
-
-        /**
          * Function: register
-         * Process registration. If registration is disabled or if the user is already logged in, it will error.
+         * Register a visitor as a new user.
          */
         public function register() {
             $config = Config::current();
+
             if (!$config->can_register)
-                error(__("Registration Disabled"), __("I'm sorry, but this site is not allowing registration."));
+                Flash::notice(__("This site does not allow registration."), "/");
 
             if (logged_in())
-                error(__("Error"), __("You're already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
-                elseif (count(User::find(array("where" => array("login" => $_POST['login'])))))
+
+                $check = new User(array("login" => $_POST['login']));
+
+                if (!$check->no_results)
                     Flash::warning(__("That username is already in use."));
 
                 if (empty($_POST['password1']))
@@ -508,131 +485,176 @@
                     Flash::warning(__("Passwords do not match."));
 
                 if (empty($_POST['email']))
-                    Flash::warning(__("E-mail address cannot be blank."));
-                elseif (!preg_match("/^[_A-z0-9-]+((\.|\+)[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/", $_POST['email']))
-                    Flash::warning(__("Invalid e-mail address."));
+                    Flash::warning(__("Email address cannot be blank."));
+                elseif (!is_email($_POST['email']))
+                    Flash::warning(__("Invalid email address."));
 
                 if ($config->enable_captcha and !check_captcha())
-                    Flash::warning(__("Incorrect captcha code. Please try again."));
+                    Flash::warning(__("Incorrect captcha code."));
 
                 if (!Flash::exists("warning")) {
                     if ($config->email_activation) {
-                        $to      = $_POST['email'];
-                        $subject = _f($config->name." Registration Pending");
-                        $message = _f("Hello, ".fix($_POST['login']).".\n\nYou are receiving this message because you recently registered at ".$config->chyrp_url."\nTo complete your registration, go to ".$config->chyrp_url."/?action=validate&login=".fix($_POST['login'])."&token=".sha1($_POST['login'].$_POST['email']));
-                        $headers = "From:".$config->email."\r\n" .
-                                   "Reply-To:".$config->email. "\r\n" .
-                                   "X-Mailer: PHP/".phpversion() ;
+                        $user = User::add($_POST['login'],
+                                          $_POST['password1'],
+                                          $_POST['email'],
+                                          "",
+                                          "",
+                                          $config->default_group,
+                                          false);
 
-                        $user = User::add($_POST['login'], $_POST['password1'], $_POST['email'], "", "", 5, false);
-                        $sent = email($to, $subject, $message, $headers);
+                        correspond("activate", array("login" => $user->login,
+                                                     "to"    => $user->email,
+                                                     "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                                "&token=".token(array($user->login, $user->email))));
 
-                        if ($sent)
-                            Flash::notice(__("The email address you provided has been sent details to confirm registration."), "/");
-                        else
-                            Flash::notice(__("There was an error emailing the activation link to your email address."), "/");
+                        Flash::notice(__("We have emailed you an activation link."), "/");
                     } else {
-                        $user = User::add($_POST['login'], $_POST['password1'], $_POST['email']);
-
-                        Trigger::current()->call("user_registered", $user);
-
+                        $user = User::add($_POST['login'],
+                                          $_POST['password1'],
+                                          $_POST['email']);
                         $_SESSION['user_id'] = $user->id;
-
                         Flash::notice(__("Registration successful."), "/");
                     }
+
+                    Trigger::current()->call("user_registered", $user);
                 }
             }
 
-            $this->display("forms/user/register", array(), __("Register"));
+            $this->display("forms".DIR."user".DIR."register", array(), __("Register"));
         }
 
         /**
-         * Function: validate
-         * Approves a user registration for a given email.
+         * Function: activate
+         * Approves a user registration for a given login.
          */
-        public function validate() {
+        public function activate() {
             if (logged_in())
-                error(__("Error"), __("You're already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Error"), __("No token found."));
+                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
-            $user = new User(array("login" => strip_tags($_GET['login'])));
+            $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                Flash::warning(__("A user with that email doesn't seem to exist in our database."), "/");
+                show_404(__("Unknown User"), __("That username isn't in our database."));
 
-            if (sha1($user->login.$user->email) !== $_GET['token'])
-                error(__("Error"), __("Invalid token."));
+            if (token(array($user->login, $user->email)) != $_GET['token'])
+                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
 
-            if (!$user->approved or $user->group_id = 5) {
+            if (!$user->approved) {
                 SQL::current()->update("users",
                                  array("login" => $user->login),
-                                 array("approved" => true, "group_id" => 2));
+                                 array("approved" => true));
 
-                Flash::notice(__("Your account is now active. Welcome aboard!"), "/?action=login");
+                Flash::notice(__("Your account is now active and you may log in."), "login");
             } else
                 Flash::notice(__("Your account has already been activated."), "/");
         }
 
         /**
+         * Function: reset
+         * Reset a user password for a given login.
+         */
+        public function reset() {
+            if (logged_in())
+                Flash::notice(__("You are already logged in."), "/");
+
+            if (empty($_GET['token']))
+                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
+
+            $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
+
+            if ($user->no_results)
+                show_404(__("Unknown User"), __("That username isn't in our database."));
+
+            if (token(array($user->login, $user->email)) != $_GET['token'])
+                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
+
+            $new_password = random(8);
+
+            correspond("password", array("login" => $user->login,
+                                         "to" => $user->email,
+                                         "password" => $new_password));
+
+            $user->update($user->login,
+                          User::hashPassword($new_password),
+                          $user->email,
+                          $user->full_name,
+                          $user->website,
+                          $user->group_id);
+
+            Flash::notice(__("We have emailed you a new password."), "login");
+        }
+
+        /**
          * Function: login
-         * Process logging in. If the username and password are incorrect or if the user is already logged in, it will error.
+         * Logs in a user if they provide the username and password.
          */
         public function login() {
             if (logged_in())
-                error(__("Error"), __("You're already logged in."));
+                Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
                 fallback($_POST['login']);
                 fallback($_POST['password']);
 
-                $trigger = Trigger::current();
-
-                if ($trigger->exists("authenticate"))
-                    return $trigger->call("authenticate");
+                # Modules can implement "user_login and "user_authenticate" to offer two-factor authentication.
+                # "user_authenticate" trigger function can block the login process by creating a Flash::warning().
+                Trigger::current()->call("user_authenticate");
 
                 if (!User::authenticate($_POST['login'], $_POST['password']))
-                    Flash::warning(__("Incorrect username and/or password, please try again."));
+                    Flash::warning(__("Incorrect username and/or password."));
 
                 if (!Flash::exists("warning")) {
                     $user = new User(array("login" => $_POST['login']));
+
+                    if (!$user->approved)
+                        Flash::notice(__("You must activate your account before you log in."), "/");
+
                     $_SESSION['user_id'] = $user->id;
+                    $_SESSION['cookies_notified'] = true;
 
                     if (!isset($redirect)) {
                         $redirect = oneof(@$_SESSION['redirect_to'], "/");
                         unset($_SESSION['redirect_to']);
                     }
 
+                    Trigger::current()->call("user_logged_in", $user);
                     Flash::notice(__("Logged in."), $redirect);
                 }
             }
 
-            $this->display("forms/user/login", array(), __("Log In"));
+            $this->display("forms".DIR."user".DIR."login", array(), __("Log In"));
         }
 
         /**
          * Function: logout
-         * Logs the current user out. If they are not logged in, it will error.
+         * Logs out the current user.
          */
         public function logout() {
             if (!logged_in())
-                error(__("Error"), __("You aren't logged in."));
+                Flash::notice(__("You aren't logged in."), "/");
+
+            $cookies_notified = !empty($_SESSION['cookies_notified']);
 
             session_destroy();
-
             session();
+
+            $_SESSION['cookies_notified'] = $cookies_notified;
 
             Flash::notice(__("Logged out."), "/");
         }
 
         /**
          * Function: controls
-         * Updates the current user when the form is submitted. Shows an error if they aren't logged in.
+         * Updates the current user when the form is submitted.
          */
         public function controls() {
-            if (!logged_in())
-                error(__("Error"), __("You must be logged in to access this area."));
+            if (!logged_in()) {
+                $_SESSION['redirect_to'] = "controls";
+                Flash::notice(__("You must be logged in to access user controls."), "login");
+            }
 
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
@@ -641,14 +663,19 @@
                     Flash::warning(__("Passwords do not match."));
 
                 if (empty($_POST['email']))
-                    Flash::warning(__("E-mail address cannot be blank."));
-                elseif (!preg_match("/^[_A-z0-9-]+((\.|\+)[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/", $_POST['email']))
-                    Flash::warning(__("Invalid e-mail address."));
+                    Flash::warning(__("Email address cannot be blank."));
+                elseif (!is_email($_POST['email']))
+                    Flash::warning(__("Invalid email address."));
+
+                if (!empty($_POST['website']) and !is_url($_POST['website']))
+                    Flash::warning(__("Invalid website URL."));
+
+                if (!empty($_POST['website']))
+                    $_POST['website'] = add_scheme($_POST['website']);
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
-                                    User::hashPassword($_POST['new_password1']) :
-                                    $visitor->password ;
+                        User::hashPassword($_POST['new_password1']) : $visitor->password ;
 
                     $visitor->update($visitor->login,
                                      $password,
@@ -661,51 +688,35 @@
                 }
             }
 
-            $this->display("forms/user/controls", array(), __("Controls"));
+            $this->display("forms".DIR."user".DIR."controls", array(), __("Controls"));
         }
 
         /**
          * Function: lost_password
-         * Handles e-mailing lost passwords to a user's email address.
+         * Email a password reset link to the registered address of a user.
          */
         public function lost_password() {
+            if (logged_in())
+                Flash::notice(__("You are already logged in."), "/");
+
+            $config = Config::current();
+
+            if (!$config->email_correspondence)
+                Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
+
             if (!empty($_POST)) {
                 $user = new User(array("login" => $_POST['login']));
-                if ($user->no_results) {
-                    Flash::warning(__("Invalid user specified."));
-                    return $this->display("forms/user/lost_password", array(), __("Lost Password"));
-                }
 
-                $new_password = random(16);
+                if (!$user->no_results)
+                    correspond("reset", array("login" => $user->login,
+                                              "to"    => $user->email,
+                                              "link"  => $config->url."/?action=reset&login=".fix($user->login).
+                                                         "&token=".token(array($user->login, $user->email))));
 
-                $sent = email($user->email,
-                              __("Lost Password Request"),
-                              _f("%s,\n\nWe have received a request for a new password for your account at %s.\n\nPlease log in with the following password, and feel free to change it once you've successfully logged in:\n\t%s",
-                                 array($user->login, Config::current()->name, $new_password)));
-
-                if ($sent) {
-                    $user->update($user->login,
-                                  User::hashPassword($new_password),
-                                  $user->email,
-                                  $user->full_name,
-                                  $user->website,
-                                  $user->group_id);
-
-                    Flash::notice(_f("An e-mail has been sent to your e-mail address that contains a new password. Once you have logged in, you can change it at <a href=\"%s\">User Controls</a>.", array(url("controls"))));
-                } else {
-                    # Set their password back to what it was originally.
-                    $user->update($user->login,
-                                  $user->password,
-                                  $user->email,
-                                  $user->full_name,
-                                  $user->website,
-                                  $user->group_id);
-
-                    Flash::warning(__("E-Mail could not be sent. Password change cancelled."));
-                }
+                Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }
 
-            $this->display("forms/user/lost_password", array(), __("Lost Password"));
+            $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost Password"));
         }
 
         /**
@@ -714,6 +725,7 @@
          */
         public function random() {
             $sql = SQL::current();
+
             if (isset($_GET['feather'])) {
                 $feather = preg_replace( '|[^a-z]|i', '', $_GET['feather'] );
                 $random = $sql->select("posts",
@@ -740,6 +752,9 @@
          * Grabs posts for the feed.
          */
         public function feed($posts = null) {
+            $config = Config::current();
+            $trigger = Trigger::current();
+
             $result = SQL::current()->select("posts",
                                              "posts.id",
                                              array("posts.status" => "public"),
@@ -747,23 +762,55 @@
                                              array(),
                                              Config::current()->feed_items);
             $ids = array();
+
             foreach ($result->fetchAll() as $index => $row)
                 $ids[] = $row["id"];
 
             if (!empty($ids))
                 fallback($posts, Post::find(array("where" => array("id" => $ids))));
-
-            header("Content-Type: application/atom+xml; charset=UTF-8");
+            else
+                fallback($posts, array());
 
             if (!is_array($posts))
                 $posts = $posts->paginated;
 
             $latest_timestamp = 0;
+
             foreach ($posts as $post)
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
 
-            require INCLUDES_DIR."/feed.php";
+            $atom = new AtomFeed();
+
+            $atom->open($config->name,
+                        $config->description,
+                        null,
+                        $latest_timestamp);
+
+            foreach ($posts as $post) {
+                $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
+
+                $tagged = substr(strstr(url("id/".$post->id), "//"), 2);
+                $tagged = str_replace("#", "/", $tagged);
+                $tagged = preg_replace("/(".preg_quote(parse_url($post->url(), PHP_URL_HOST)).")/",
+                                       "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
+
+                $url = $post->url();
+                $trigger->filter($url, "feed_url", $post);
+
+                $atom->entry(oneof($post->title(), ucfirst($post->feather)),
+                             $tagged,
+                             $post->feed_content(),
+                             $url,
+                             $post->created_at,
+                             $updated,
+                             ((!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : null),
+                             ((!$post->user->no_results) ? $post->user->website : null));
+
+                $trigger->call("feed_item", $post);
+            }
+
+            $atom->close();
         }
 
         /**
@@ -773,25 +820,25 @@
          * If "posts" is in the context and the visitor requested a feed, they will be served.
          *
          * Parameters:
-         *     $file - The theme file to display.
-         *     $context - The context for the file.
+         *     $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
+         *     $context - The context to be supplied to Twig.
          *     $title - The title for the page.
          */
-        public function display($file, $context = array(), $title = "") {
-            if (is_array($file))
-                for ($i = 0; $i < count($file); $i++) {
-                    $check = ($file[$i][0] == "/" or preg_match("/[a-zA-Z]:\\\/", $file[$i])) ?
-                                 $file[$i] :
-                                 THEME_DIR."/".$file[$i] ;
-
-                    if (file_exists($check.".twig") or ($i + 1) == count($file))
-                        return $this->display($file[$i], $context, $title);
-                }
-
-            $this->displayed = true;
-
+        public function display($template, $context = array(), $title = "") {
+            $config = Config::current();
             $route = Route::current();
             $trigger = Trigger::current();
+            $theme = Theme::current();
+
+            if (is_array($template)) {
+                foreach ($template as $try)
+                    if ($theme->file_exists($try))
+                        return $this->display($try, $context, $title);
+
+                error(__("Twig Error"), __("No files exist in the supplied array of fallbacks."), debug_backtrace());
+            }
+
+            $this->displayed = true;
 
             # Serve feeds.
             if ($this->feed) {
@@ -802,16 +849,12 @@
                     return $this->feed($context["posts"]);
             }
 
-            $this->cookies_notification();
-
             $this->context = array_merge($context, $this->context);
-
-            $visitor = Visitor::current();
-            $config = Config::current();
-            $theme = Theme::current();
 
             $theme->title = $title;
 
+            $this->context["ip"]           = $_SERVER["REMOTE_ADDR"];
+            $this->context["DIR"]          = DIR;
             $this->context["theme"]        = $theme;
             $this->context["flash"]        = Flash::current();
             $this->context["trigger"]      = $trigger;
@@ -819,42 +862,32 @@
             $this->context["feathers"]     = Feathers::$instances;
             $this->context["title"]        = $title;
             $this->context["site"]         = $config;
-            $this->context["visitor"]      = $visitor;
+            $this->context["visitor"]      = Visitor::current();
             $this->context["route"]        = Route::current();
             $this->context["version"]      = CHYRP_VERSION;
+            $this->context["codename"]     = CHYRP_CODENAME;
             $this->context["now"]          = time();
             $this->context["debug"]        = DEBUG;
             $this->context["POST"]         = $_POST;
             $this->context["GET"]          = $_GET;
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["captcha"]      = generate_captcha();
+            $this->context["sql_debug"]   =& SQL::current()->debug;
 
             $this->context["visitor"]->logged_in = logged_in();
 
-            $this->context["enabled_modules"] = array();
-            foreach ($config->enabled_modules as $module)
-                $this->context["enabled_modules"][$module] = true;
+            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
-            $context["enabled_feathers"] = array();
-            foreach ($config->enabled_feathers as $feather)
-                $this->context["enabled_feathers"][$feather] = true;
-
-            $this->context["sql_debug"] =& SQL::current()->debug;
-
-            $trigger->filter($this->context, array("main_context", "main_context_".str_replace("/", "_", $file)));
-
-            $file = ($file[0] == "/" or preg_match("/[a-zA-Z]:\\\/", $file)) ? $file : THEME_DIR."/".$file ;
-            if (!file_exists($file.".twig"))
-                error(__("Template Missing"), _f("Couldn't load template: <code>%s</code>", array($file.".twig")));
+            if ($config->cookies_notification and empty($_SESSION['cookies_notified'])) {
+                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
+                $_SESSION['cookies_notified'] = true;
+            }
 
             try {
-                return $this->twig->getTemplate($file.".twig")->display($this->context);
+                return $this->twig->display($template.".twig", $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                $trace = debug_backtrace();
-                $twig = array("file" => $e->filename, "line" => $e->lineno);
-                array_unshift($trace, $twig);
-                error(__("Error"), $prettify, $trace);
+                error(__("Twig Error"), $prettify, debug_backtrace());
             }
         }
 
@@ -862,8 +895,8 @@
          * Function: resort
          * Queue a failpage in the event that none of the routes are successful.
          */
-        public function resort($file, $context, $title = null) {
-            $this->fallback = array($file, $context, $title);
+        public function resort($template, $context, $title = null) {
+            $this->fallback = array($template, $context, $title);
             return false;
         }
 
@@ -873,7 +906,7 @@
          */
         public static function & current() {
             static $instance = null;
-            return $instance = (empty($instance)) ? new self() : $instance ;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
         }
     }
-

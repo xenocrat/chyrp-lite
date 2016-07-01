@@ -7,12 +7,12 @@
     # File: Query
     # See Also:
     #     <Query>
-    require_once INCLUDES_DIR."/class/Query.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."Query.php";
 
     # File: QueryBuilder
     # See Also:
     #     <QueryBuilder>
-    require_once INCLUDES_DIR."/class/QueryBuilder.php";
+    require_once INCLUDES_DIR.DIR."class".DIR."QueryBuilder.php";
 
     class SQL {
         # Array: $debug
@@ -40,11 +40,11 @@
          * The class constructor is private so there is only one connection.
          *
          * Parameters:
-         *     $settings - Settings to load instead of the config.
+         *     $settings - An array of settings, or @true@ to silence errors.
          */
         private function __construct($settings = array()) {
             if (!UPGRADING and !INSTALLING and !isset(Config::current()->sql))
-                error(__("Error"), __("Database configuration is not set. Please run the upgrader."));
+                error(__("Error"), __("Database configuration is not set."));
 
             $database = (!UPGRADING) ? oneof(@Config::current()->sql, array()) : Config::get("sql") ;
 
@@ -59,27 +59,16 @@
 
             $this->connected = false;
 
-            # We really don't need PDO anymore, since we have the two we supported with it hardcoded (kinda).
-            # Keeping this here for when/if we decide to add support for more database engines, like Postgres and MSSQL.
-            # if (class_exists("PDO") and (in_array("mysql", PDO::getAvailableDrivers()) or in_array("sqlite", PDO::getAvailableDrivers())))
-            #     return $this->method = "pdo";
-
+            # For MySQL databases we prefer the MySQLi adapter.
             if (isset($this->adapter)) {
                 if ($this->adapter == "mysql" and class_exists("MySQLi"))
                     $this->method = "mysqli";
-                elseif ($this->adapter == "mysql" and function_exists("mysql_connect"))
-                    $this->method = "mysql";
-                elseif (class_exists("PDO") and
-                        ($this->adapter == "sqlite" and in_array("sqlite", PDO::getAvailableDrivers()) or
-                         $this->adapter == "pgsql" and in_array("pgsql", PDO::getAvailableDrivers())))
+                elseif (class_exists("PDO") and in_array($this->adapter, PDO::getAvailableDrivers()))
                     $this->method = "pdo";
+                else
+                    error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", fix($this->adapter)));
             } else
-                if (class_exists("MySQLi"))
-                    $this->method = "mysqli";
-                elseif (function_exists("mysql_connect"))
-                    $this->method = "mysql";
-                elseif (class_exists("PDO") and in_array("mysql", PDO::getAvailableDrivers()))
-                    $this->method = "pdo";
+                $this->method = "";
         }
 
         /**
@@ -130,7 +119,7 @@
                             throw new PDOException("No database specified.");
 
                         if ($this->adapter == "sqlite") {
-                            $this->db = new PDO("sqlite:".$this->database, null, null, array(PDO::ATTR_PERSISTENT => true));
+                            $this->db = new PDO("sqlite:".$this->database, null, null, array(PDO::ATTR_PERSISTENT => false));
                             $this->db->sqliteCreateFunction("YEAR", array($this, "year_from_datetime"), 1);
                             $this->db->sqliteCreateFunction("MONTH", array($this, "month_from_datetime"), 1);
                             $this->db->sqliteCreateFunction("DAY", array($this, "day_from_datetime"), 1);
@@ -146,25 +135,22 @@
                         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     } catch (PDOException $error) {
                         $this->error = $error->getMessage();
-                        return ($checking) ? false : error(__("Database Error"), $this->error) ;
+                        return ($checking) ? false : error(__("Database Error"), fix($this->error)) ;
                     }
+
                     break;
+
                 case "mysqli":
                     $this->db = @new MySQLi($this->host, $this->username, $this->password, $this->database);
                     $this->error = mysqli_connect_error();
 
                     if (mysqli_connect_errno())
-                        return ($checking) ? false : error(__("Database Error"), $this->error) ;
+                        return ($checking) ? false : error(__("Database Error"), fix($this->error)) ;
 
                     break;
-                case "mysql":
-                    $this->db = @mysql_connect($this->host, $this->username, $this->password);
-                    $this->error = mysql_error();
 
-                    if (!$this->db or !@mysql_select_db($this->database))
-                        return ($checking) ? false : error(__("Database Error"), $this->error) ;
-
-                    break;
+                default:
+                    error(__("Error"), _f("Database driver <code>%s</code> is unrecognised.", fix($this->method)));
             }
 
             if ($this->adapter == "mysql")
@@ -196,26 +182,10 @@
             $query = str_replace("__", $this->prefix, $query);
 
             if ($this->adapter == "sqlite")
-                $query = str_ireplace(" DEFAULT CHARSET=utf8", "", str_ireplace("AUTO_INCREMENT", "AUTOINCREMENT", $query));
-
-            if ($this->adapter == "pgsql")
-                $query = str_ireplace(array("CREATE TABLE IF NOT EXISTS",
-                                            "INTEGER PRIMARY KEY AUTO_INCREMENT",
-                                            ") DEFAULT CHARSET=utf8",
-                                            "TINYINT",
-                                            "DATETIME",
-                                            "DEFAULT '0000-00-00 00:00:00'",
-                                            "LONGTEXT",
-                                            "REPLACE INTO"),
-                                      array("CREATE TABLE",
-                                            "SERIAL PRIMARY KEY",
-                                            ")",
-                                            "SMALLINT",
-                                            "TIMESTAMP",
-                                            "",
-                                            "TEXT",
-                                            "INSERT INTO"),
-                                      $query);
+                $query = str_ireplace(array(" DEFAULT CHARSET=utf8",
+                                            "AUTO_INCREMENT"),
+                                      array("",
+                                            "AUTOINCREMENT"), $query);
 
             $query = new Query($this, $query, $params, $throw_exceptions);
 
@@ -327,7 +297,6 @@
         /**
          * Function: latest
          * Returns the last inserted sequential value.
-         * Both function arguments are only relevant for PostgreSQL.
          *
          * Parameters:
          *     $table - Table to get the latest value from.
@@ -341,11 +310,9 @@
                 case "pdo":
                     return $this->db->lastInsertId($this->prefix.$table."_".$seq);
                     break;
+
                 case "mysqli":
                     return $this->db->insert_id;
-                    break;
-                case "mysql":
-                    return @mysql_insert_id();
                     break;
             }
         }
@@ -366,21 +333,14 @@
 
             switch($this->method) {
                 case "pdo":
-                    $string = ltrim(rtrim($this->db->quote($string), "'"), "'");
+                    $string = trim($this->db->quote($string), "'");
                     break;
+
                 case "mysqli":
                     $string = $this->db->escape_string($string);
                     break;
-                case "mysql":
-                    $string = mysql_real_escape_string($string);
-                    break;
             }
 
-            # I don't think this ever worked how it intended.
-            # I've tested PDO, MySQLi, and MySQL and they all
-            # properly escape with this disabled, but get double
-            # escaped with this uncommented:
-            # $string = str_replace('\\', '\\\\', $string);
             $string = str_replace('$', '\$', $string);
 
             if ($quotes and !is_numeric($string))
@@ -462,10 +422,12 @@
         public static function & current($settings = false) {
             if ($settings) {
                 static $loaded_settings = null;
-                return $loaded_settings = new self($settings);
+                $loaded_settings = new self($settings);
+                return $loaded_settings;
             } else {
                 static $instance = null;
-                return $instance = (empty($instance)) ? new self() : $instance ;
+                $instance = (empty($instance)) ? new self() : $instance ;
+                return $instance;
             }
         }
     }

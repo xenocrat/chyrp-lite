@@ -1,0 +1,48 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Manage Categories" | translate("categorize") }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Manage Categories" | translate("categorize") }}</h2>
+<table>
+<thead> 
+<tr class="head">
+<th class="category_show">{{ "Listed?" | translate("categorize") }}</th>
+<th class="category_name">{{ "Name" | translate("categorize") }}</th>
+{{ trigger.call("manage_comments_column_header") }}
+<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
+</tr>   
+</thead>
+<tbody> 
+{% for category in categorize %}
+<tr id="category_{{ category.id }}">
+<td class="category_show">
+{% if category.show_on_home %}<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{% else %}&nbsp;
+{% endif %}
+</td>
+<td class="category_name main">
+{{ category.name | truncate }}
+</td>
+<td class="controls">
+<a href="{{ admin_url('edit_category', {'id': category.id}) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg"
+alt="{{ 'edit' | translate }}"></a>
+</td>
+<td class="controls">
+<a href="{{ admin_url('delete_category', {'id': category.id}) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg"
+alt="{{ 'delete' | translate }}"></a>
+</td>
+</tr>
+{% else %}
+<tr>
+<td class="placeholder"><span class="sub">{{ "(none)" | translate }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="controls">
+<a href="{{ admin_url('new_category') }}" class="button yay"> 
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Add Category" | translate("categorize") }}
+</a>
+</div>
+{% endblock %}

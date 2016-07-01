@@ -1,28 +1,227 @@
 <?php
-    if (!class_exists("MainController")) {
-        if (defined("INCLUDES_DIR")) {
-            require INCLUDES_DIR."/controller/Main.php";
-        } else {
-            header("Status: 403"); exit("Access denied."); # Undefined constants: xss protection.
+    ini_set('display_errors', false);
+    ini_set('error_log', MAIN_DIR.DIR."error_log.txt");
+
+    # Array: $errors
+    # Stores errors encountered when installing or upgrading.
+    $errors = array();
+
+    # Set the appropriate error handler.
+    if (TESTER)
+        set_error_handler("error_panicker");
+    else
+        if (INSTALLING or UPGRADING)
+            set_error_handler("error_snitcher");
+        else
+            set_error_handler("error_composer");
+
+    /**
+     * Function: error_panicker
+     * Report in plain text for the automated tester and exit.
+     */
+    function error_panicker($errno, $message, $file, $line) {
+        if (error_reporting() === 0)
+            return true; # Error reporting excludes this error.
+
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
+        if (ob_get_contents() !== false)
+            ob_clean();
+
+        exit(htmlspecialchars("ERROR: ".$message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false));
+    }
+
+    /**
+     * Function: error_snitcher
+     * Informs the user of errors when installing or upgrading.
+     */
+    function error_snitcher($errno, $message, $file, $line) {
+        global $errors;
+
+        if (error_reporting() === 0)
+            return true; # Error suppressed by @ operator.
+
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
+        $errors[] = htmlspecialchars($message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false);
+        return true;
+    }
+
+    /**
+     * Function: error_composer
+     * Composes a message for the error() function to display.
+     */
+    function error_composer($errno, $message, $file, $line) {
+        if (!(error_reporting() & $errno))
+            return true; # Error reporting excludes this error.
+
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
+        error(null, $message." (".$file." on line ".$line.")", debug_backtrace());
+    }
+
+    /**
+     * Function: error
+     * Displays an error message via direct call or error handler.
+     *
+     * Parameters:
+     *     $title - The title for the error dialog.
+     *     $body - The message for the error dialog.
+     *     $backtrace - The trace of the error.
+     *     $code - Numeric HTTP status code to set.
+     */
+    function error($title = "", $body = "", $backtrace = array(), $code = 500) {
+        # Sanitize strings to remove obnoxious attributes and script tags.
+        $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8", false);
+        $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
+        $body = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $body);
+        $body = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $body);
+
+        if (!empty($backtrace))
+            foreach ($backtrace as $index => &$trace)
+                if (!isset($trace["file"]) or !isset($trace["line"])) {
+                    unset($backtrace[$index]);
+                } else {
+                    $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "UTF-8", false);
+                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "UTF-8", false);
+                }
+
+        # Clean the output buffer before we begin.
+        if (ob_get_contents() !== false)
+            ob_clean();
+
+        # Attempt to set headers to sane values and send a status code.
+        if (!headers_sent()) {
+            header("Content-Type: text/html; charset=UTF-8");
+            header("Cache-Control: no-cache, must-revalidate");
+            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+
+            switch ($code) {
+                case 400:
+                    header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+                    break;
+                case 403:
+                    header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+                    break;
+                case 404:
+                    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+                    break;
+                case 405:
+                    header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
+                    break;
+                case 409:
+                    header($_SERVER["SERVER_PROTOCOL"]." 409 Conflict");
+                    break;
+                case 410:
+                    header($_SERVER["SERVER_PROTOCOL"]." 410 Gone");
+                    break;
+                case 413:
+                    header($_SERVER["SERVER_PROTOCOL"]." 413 Payload Too Large");
+                    break;
+                case 422:
+                    header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Entity");
+                    break;
+                case 501:
+                    header($_SERVER["SERVER_PROTOCOL"]." 501 Not Implemented");
+                    break;
+                case 503:
+                    header($_SERVER["SERVER_PROTOCOL"]." 503 Service Unavailable");
+                    break;
+                default:
+                    header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+            }
         }
-    }
 
-    if (class_exists("Route"))
-        Route::current(MainController::current());
+        # Report in plain text if desirable or necessary because of a deep error.
+        if (TESTER or XML_RPC or AJAX or
+            !function_exists("__") or
+            !function_exists("_f") or
+            !function_exists("fallback") or
+            !function_exists("oneof") or
+            !function_exists("logged_in") or
+            !function_exists("admin_url") or
+            !class_exists("Config") or
+            !method_exists("Config", "current") or
+            !property_exists(Config::current(), "url") or
+            !property_exists(Config::current(), "chyrp_url")) {
 
-    if (defined('AJAX') and AJAX or isset($_POST['ajax'])) {
-        foreach ($backtrace as $trace)
-            $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
-        exit($body."HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW");
-    }
+            exit("ERROR: ".strip_tags($body));
+        }
+
+        $config = Config::current();
+        $url = $config->url;
+        $chyrp_url = $config->chyrp_url;
+
+        # Validate title and body text before we display the pretty message.
+        $title = oneof($title, __("Error"));
+        $body = oneof($body, __("An unspecified error has occurred."));
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Chyrp: <?php echo $title; ?></title>
+        <meta charset="UTF-8">
+        <title><?php echo $title; ?></title>
+        <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Semibold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Italic.woff') format('woff');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                font-weight: bold;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Bold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-Oblique.woff') format('woff');
+                font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Hack webfont';
+                src: url('<?php echo $chyrp_url; ?>/fonts/Hack-BoldOblique.woff') format('woff');
+                font-weight: bold;
+                font-style: italic;
+            }
+            *::selection {
+                color: #ffffff;
+                background-color: #4f4f4f;
+            }
+            html {
+                font-size: 14px;
+            }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
             form, fieldset, a, p {
@@ -31,10 +230,11 @@
                 border: 0em;
             }
             body {
-                font-size: 14px;
-                font-family: sans-serif;
-                color: #626262;
-                background: #e8e8e8;
+                font-size: 1rem;
+                font-family: "Open Sans webfont", sans-serif;
+                line-height: 1.5;
+                color: #4a4747;
+                background: #efefef;
                 padding: 0em 0em 5em;
             }
             .window {
@@ -45,26 +245,41 @@
                 border-radius: 2em;
             }
             h1 {
-                color: #ccc;
-                font-size: 3em;
-                margin: .25em 0em .5em;
-                text-align: center;
+                font-size: 2em;
+                margin: 0.5em 0em;
+                text-align: left;
                 line-height: 1;
+            }
+            h1:first-child {
+                margin-top: 0em;
             }
             h2 {
                 font-size: 1.25em;
-                margin: 1em 0em 0em;
+                font-weight: bold;
+                margin: 0.75em 0em;
             }
             code {
-                color: #06B;
-                font-family: monospace;
+                font-family: "Hack webfont", monospace;
+                font-style: normal;
                 word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
+            }
+            strong {
+                font-weight: normal;
+                color: #f00;
             }
             ul, ol {
-                margin: 1em 3em;
+                margin: 0em 0em 2em 2em;
+                list-style-position: outside;
+            }
+            ul:last-child,
+            ol:last-child {
+                margin-bottom: 0em;
             }
             ol.backtrace {
-                margin-top: .5em;
+                margin-top: 0.5em;
             }
             .footer {
                 color: #777;
@@ -77,46 +292,58 @@
                 font-size: 12px;
             }
             a:link, a:visited {
-                color: #6B0;
+                color: #4a4747;
             }
-            a:hover {
-                text-decoration: underline;
+            a:hover, a:focus {
+                color: #1e57ba;
             }
-            a.big {
-                background: #eee;
-                margin-top: 2em;
+            a.big,
+            button {
+                box-sizing: border-box;
                 display: block;
-                padding: .75em 1em;
-                color: #777;
-                text-shadow: #fff 1px 1px 0px;
-                text-decoration: none;
-                border-radius: .5em;
-            }
-            a.big:hover {
-                background: #f5f5f5;
-            }
-            a.big:active {
-                background: #e0e0e0;
-            }
-<?php if (!logged_in()): ?>
-            a.big.login {
-                float: right;
-                text-align: right;
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                background: #f5f5f5;
-                width: 42%;
-            }
-<?php endif; ?>
-            .clear {
                 clear: both;
+                font-family: inherit;
+                font-size: 1.25em;
+                text-align: center;
+                color: #4a4747;
+                text-decoration: none;
+                line-height: 1.25;
+                margin: 0.75em 0em;
+                padding: 0.4em 0.6em;
+                background-color: #f2fbff;
+                border: 1px solid #b8cdd9;
+                border-radius: 0.3em;
+                cursor: pointer;
+                text-decoration: none;
+            }
+            button {
+                width: 100%;
+            }
+            a.big:last-child,
+            button:last-child {
+                margin-bottom: 0em;
+            }
+            a.big:hover,
+            button:hover,
+            a.big:focus,
+            button:focus,
+            a.big:active,
+            button:active {
+                border-color: #1e57ba;
+                outline: none;
+            }
+            p {
+                margin-bottom: 1em;
+            }
+            p:last-child, p:empty {
+                margin-bottom: 0em
             }
         </style>
     </head>
     <body>
         <div class="window">
             <h1><?php echo $title; ?></h1>
-            <div class="message">
+            <div role="alert" class="message">
                 <?php echo $body; ?>
             <?php if (!empty($backtrace)): ?>
                 <h2><?php echo __("Backtrace"); ?></h2>
@@ -126,15 +353,14 @@
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
-                <div class="clear"></div>
-            <?php if (class_exists("Route") and !logged_in() and $body != __("Route was initiated without a Controller.")): ?>
-                <a href="<?php echo url("login", MainController::current()); ?>" class="big login"><?php echo __("Log In"); ?> &rarr;</a>
+            <?php if (!logged_in() and ADMIN): ?>
+                <a href="<?php echo admin_url('login'); ?>" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
-                <div class="clear last"></div>
             </div>
         </div>
-    <?php if (defined("CHYRP_VERSION")): ?>
-        <p class="footer">Chyrp Lite <?php echo CHYRP_VERSION; ?> &copy; Chyrp Team <?php echo date("Y"); ?></p>
-    <?php endif; ?>
     </body>
 </html>
+<?php
+        # Terminate execution.
+        exit;
+    }

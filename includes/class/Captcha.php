@@ -1,12 +1,9 @@
 <?php
-
-    /*
-     * Chyrp -- CAPTCHA interface
-     *
-     * This class was created to seperate out the CAPTCHA handling code to allow for more complex systems.
-     * reCAPTCHA is still offered (as a plugin).
+    /**
+     * Interface: Captcha
+     * Defines the interface to be implemented by Captcha providers.
+     * Providers register by adding their class name to global @$captchaHooks[]@.
      */
-
     interface Captcha {
        public static function getCaptcha();
        public static function verifyCaptcha();

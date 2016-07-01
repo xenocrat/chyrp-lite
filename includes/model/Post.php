@@ -31,7 +31,8 @@
          *     <Model::grab>
          */
         public function __construct($post_id = null, $options = array()) {
-            if (!isset($post_id) and empty($options)) return;
+            if (!isset($post_id) and empty($options))
+                return;
 
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
@@ -39,6 +40,7 @@
                 $options["where"] = array();
 
             $has_status = false;
+
             foreach ($options["where"] as $key => $val)
                 if (is_int($key) and substr_count($val, "status") or $key == "status")
                     $has_status = true;
@@ -108,6 +110,7 @@
                 $options["where"] = array();
 
             $has_status = false;
+
             foreach ($options["where"] as $key => $val)
                 if ((is_int($key) and substr_count($val, "status")) or $key === "status")
                     $has_status = true;
@@ -163,7 +166,6 @@
          *     $status - Post status
          *     $created_at - New @created_at@ timestamp for the post.
          *     $updated_at - New @updated_at@ timestamp for the post, or @false@ to not updated it.
-         *     $trackbacks - URLs separated by " " to send trackbacks to.
          *     $pingbacks - Send pingbacks?
          *     $options - Options for the post.
          *
@@ -182,7 +184,6 @@
                             $status     = "",
                             $created_at = null,
                             $updated_at = null,
-                            $trackbacks = "",
                             $pingbacks  = true,
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
@@ -200,7 +201,6 @@
                                       datetime($_POST['created_at']) :
                                       datetime());
             fallback($updated_at, oneof(@$_POST['updated_at'], $created_at));
-            fallback($trackbacks, oneof(@$_POST['trackbacks'], ""));
             fallback($options,    oneof(@$_POST['option'], array()));
 
             if (isset($clean) and !isset($url))
@@ -236,17 +236,7 @@
 
             $post = new self($id, array("drafts" => true));
 
-            if ($trackbacks !== "") {
-                $trackbacks = explode(",", $trackbacks);
-                $trackbacks = array_map("trim", $trackbacks);
-                $trackbacks = array_map("strip_tags", $trackbacks);
-                $trackbacks = array_unique($trackbacks);
-                $trackbacks = array_diff($trackbacks, array(""));
-
-                foreach ($trackbacks as $url)
-                    trackback_send($post, $url);
-            }
-
+            # Send pingbacks.
             if (Config::current()->send_pingbacks and $pingbacks)
                 foreach ($values as $key => $value)
                     send_pingbacks($value, $post);
@@ -364,6 +354,7 @@
                 return false;
 
             fallback($user, Visitor::current());
+
             if ($user->group->can("delete_post"))
                 return true;
 
@@ -381,6 +372,7 @@
                 return false;
 
             fallback($user, Visitor::current());
+
             if ($user->group->can("edit_post"))
                 return true;
 
@@ -631,7 +623,7 @@
          * Checks if the current post's feather theme file exists.
          */
         public function theme_exists() {
-            return !$this->no_results and Theme::current()->file_exists("feathers/".$this->feather);
+            return !$this->no_results and Theme::current()->file_exists("feathers".DIR.$this->feather);
         }
 
         /**
@@ -666,17 +658,6 @@
         }
 
         /**
-         * Function: trackback_url
-         * Returns the posts trackback URL.
-         */
-        public function trackback_url() {
-            if ($this->no_results) return
-                false;
-
-            return Config::current()->chyrp_url."/includes/trackback.php?id=".$this->id;
-        }
-
-        /**
          * Function: from_url
          * Attempts to grab a post from its clean URL.
          */
@@ -688,6 +669,7 @@
 
             preg_match_all("/\(([^\)]+)\)/", Config::current()->post_url, $matches);
             $params = array();
+
             foreach ($matches[1] as $attr)
                 if (in_array($attr, $times))
                     $where[strtoupper($attr)."(created_at)"] = $attrs[$attr];
@@ -737,7 +719,7 @@
         }
 
         /**
-         * Function: enabled_feathers
+         * Function: feathers
          * Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
          */
         static function feathers() {
@@ -763,24 +745,6 @@
         }
 
         /**
-         * Function: featured_image
-         * Returns:
-         *     A selected post image. Usage: $post->featured_image
-         */
-        public function featured_image($width = 210, $order = 0, $html = true) {
-            $config = Config::current();
-
-            $pattern = '/<img[^>]+src=[\'"]' . preg_quote($config->chyrp_url.$config->uploads_path, '/') . '([^\'"]+)[\'"][^>]*>/i';
-            $output = preg_match_all($pattern, $this->body, $matches);
-
-            $image = $matches[1][$order];
-            if (empty($image)) return;
-
-            if (!$html) return $config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($image).'&amp;max_width='.$width;
-            else return '<img src="'.$config->chyrp_url.'/includes/thumb.php?file=..'.$config->uploads_path.urlencode($image).'&amp;max_width='.$width.'" alt="'.$this->title.'" class="featured_image" />';
-        }
-
-        /**
          * Function: groups
          * Lists the groups who can view the post if the post's status is specific to certain groups.
          */
@@ -793,6 +757,7 @@
                 return false;
 
             $names = array();
+
             foreach ($groups[1] as $group_id) {
                 $group = new Group($group_id);
                 $names[] = $group->name;

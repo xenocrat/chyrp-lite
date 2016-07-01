@@ -1,31 +1,28 @@
 <?php
     class Category extends Model {
-        static function sqlconcat($names = array()) {
-            # MySQL uses concat(a,b) but most other SQLDBS use (a || b)
-            if (SQL::current()->adapter === 'mysql' || SQL::current()->method === 'mysql') {
-                return 'concat('.implode(',', $names).')';
-            }
-            else {
-                return '('.implode(' || ', $names).')';
-            }
-        }
-
         static function getCategory($id = null) {
-            # we give all of the categories if there isn't one specified
-            if (!isset($id))
-                return SQL::current()->select("categorize",
-                    "id,name,clean,show_on_home,".Category::sqlconcat(array(':url','clean'))." AS url", NULL, "name ASC",
-                    array(":url" => url("category/")))->fetchAll();
-            # single entry
-            return SQL::current()->select("categorize",
-                "id,name,clean,show_on_home,".Category::sqlconcat(array(':url','clean'))." AS url", "id = :id", "name ASC",
-                array(':id' => $id, ":url" => url("category/")), 1)->fetchObject();
+            if (!isset($id)) {
+                # Return all of the categories none is specified.
+                $query = SQL::current()->select("categorize",
+                    "id, name, clean, show_on_home, clean AS url", null, "name ASC")->fetchAll();
+
+                foreach ($query as &$result)
+                    $result["url"] = url("category/".$result["url"]);
+            } else {
+                # Return the specified category.
+                $query = SQL::current()->select("categorize",
+                    "id, name, clean, show_on_home, clean AS url", "id = :id", "name ASC", array(':id' => $id), 1)->fetchObject();
+                $query->url = url("category/".$query->url);
+            }
+
+            return $query;
         }
 
-        # This gets used to convert the category/<foo> name back to an ID or whatever else.
         static function getCategorybyClean($name = string) {
-            return SQL::current()->select("categorize", "id,name,clean,show_on_home,".Category::sqlconcat(array(':url','clean'))." AS url", "clean = :clean", "name ASC",
-                array(":url" => url("category/"), ":clean" => $name), 1)->fetchObject();
+            $query = SQL::current()->select("categorize", "id, name, clean, show_on_home, clean AS url", "clean = :clean", "name ASC",
+                array(":clean" => $name), 1)->fetchObject();
+            $query->url = url("category/".$query->url);
+            return $query;
         }
 
         static function getCategoryIDbyName($name = string) {
@@ -33,15 +30,19 @@
                 array(":name" => $name), 1)->fetchObject();
         }
 
-        # This might be a nice way of showing the list of cats in the sidebar
         static function getCategoryList() {
-            return SQL::current()->select(array('categorize', 'post_attributes', 'posts'),
-                "__categorize.name,__categorize.clean,__categorize.show_on_home,count(__categorize.id) AS total, ".Category::sqlconcat(array(':url','__categorize.clean'))." AS url",
+            $query = SQL::current()->select(array('categorize', 'post_attributes', 'posts'),
+                "__categorize.name, __categorize.clean, __categorize.show_on_home, count(__categorize.id) AS total, __categorize.clean AS url",
                 array("post_attributes.post_id = posts.id",
                     "post_attributes.name = 'category_id'",
                     "post_attributes.value = categorize.id"),
-                "`__categorize.name` ASC", array(":url" => url("category/")),
-                NULL, NULL, "__categorize.name")->fetchAll();
+                "`__categorize.name` ASC", array(),
+                null, null, "__categorize.name")->fetchAll();
+
+            foreach ($query as &$result)
+                $result["url"] = url("category/".$result["url"]);
+
+            return $query;
         }
 
         static function addCategory($post = array()) {
@@ -63,7 +64,7 @@
                 array(":id" => $id, ":name" => $name, ":clean" => $clean, ":show_on_home" => $show_on_home));
         }
 
-        static function deleteCategory($id = int, $confirm = FALSE) {
+        static function deleteCategory($id = int, $confirm = false) {
             SQL::current()->delete("categorize", "id = :id", array(":id" => $id));
             SQL::current()->update("post_attributes", "`name` = 'category_id' AND `value` = :id",
                 array("value" => 0),

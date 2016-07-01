@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2014 Xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-17 20:21+0000\n"
+"POT-Creation-Date: 2016-07-01 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,27 +17,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: feathers/uploader/info.yaml:1
+#: feathers/uploader/info.php:3
 msgid "Uploader"
 msgstr ""
 
-#: feathers/uploader/info.yaml:4
-msgid "Upload files to your Chyrp site and make them available for visitors to download."
+#: feathers/uploader/info.php:6
+msgid "Upload files and make them available for visitors to download."
 msgstr ""
 
-#: feathers/uploader/uploader.php:7
-msgid "Files"
-msgstr ""
-
-#: feathers/uploader/uploader.php:11
+#: feathers/uploader/uploader.php:6
 msgid "Title"
 msgstr ""
 
-#: feathers/uploader/uploader.php:16
+#: feathers/uploader/uploader.php:10
+msgid "Files"
+msgstr ""
+
+#: feathers/uploader/uploader.php:12
+#, php-format
+msgid "(Max. file size: %d Megabytes)"
+msgstr ""
+
+#: feathers/uploader/uploader.php:15
 msgid "Caption"
 msgstr ""
 
-#: feathers/uploader/uploader.php:151
+#: feathers/uploader/uploader.php:50
+msgid "You did not select any files to upload."
+msgstr ""
+
+#: feathers/uploader/uploader.php:192
 msgid "Source"
 msgstr ""
 

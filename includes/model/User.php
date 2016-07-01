@@ -50,38 +50,23 @@
 
             if ($check->no_results)
                 return false;
-            else {
-                if (self::checkPassword($password, $check->password))
-                    return true;
-                elseif (md5($password) == $check->password) {
-                    # Backwards-compatibility:
-                    # if their old password is stored as MD5, update
-                    # it on authentication to the new hashing scheme.
-                    $check->update(null, self::hashPassword($password));
-                    return true;
-                } elseif (SQL::current()->adapter == "mysql") {
-                    # Some imports might use MySQL password hashing (such as MovableType 3).
-                    # Try those too, and update the user if they match.
-                    if ($password == $check->password) {
-                        $check->update(null, self::hashPassword($password));
-                        return true;
-                    }
-                }
-            }
+
+            if (self::checkPassword($password, $check->password))
+                return true;
 
             return false;
         }
 
         /**
          * Function: add
-         * Adds a user to the database with the passed username, password, and e-mail.
+         * Adds a user to the database with the passed username, password, and email.
          *
          * Calls the @add_user@ trigger with the inserted user.
          *
          * Parameters:
          *     $login - The Login for the new user.
          *     $password - The Password for the new user. Don't hash this, it's done in the function.
-         *     $email - The E-Mail for the new user.
+         *     $email - The email for the new user.
          *     $full_name - The full name of the user.
          *     $website - The user's website.
          *     $group - The user's group (defaults to the configured default group).
@@ -134,7 +119,7 @@
 
         /**
          * Function: update
-         * Updates the user with the given login, password, full name, e-mail, website, and <Group> ID.
+         * Updates the user with the given login, password, full name, email, website, and <Group> ID.
          *
          * Passes all of the arguments to the update_user trigger.
          *
@@ -142,7 +127,7 @@
          *     $login - The new Login to set.
          *     $password - The new Password to set, already encoded.
          *     $full_name - The new Full Name to set.
-         *     $email - The new E-Mail to set.
+         *     $email - The new email to set.
          *     $website - The new Website to set.
          *     $group_id - The new <Group> to set.
          *
@@ -197,36 +182,40 @@
 
         /**
          * Function: hashPassword
-         * Creates a secure hash of a user's password.
+         * Creates a hash of a user's password for the database.
          *
          * Parameters:
          *     $password - The unhashed password.
          * 
          * Returns:
-         *     The securely hashed password to be stored in the database.
+         *     The hashed password.
          *
-         * Note:
-         *     Base64 encodes 6 bits per character so we generate 16*6/8=12 bytes for the salt.
+         * Notes:
+         *     <random> tries to be cryptographically secure.
          */
         static function hashPassword($password) {
-            $salt = base64_encode(openssl_random_pseudo_bytes(12));
-            $param = '$6$'.$salt; # Selecting SHA-512 (>=PHP 5.3.2)
-            return crypt($password,$param);
+            $salt = random(16);
+            $prefix = '$6$'; # Prefix for SHA-512.
+            return crypt($password, $prefix.$salt);
         }
 
         /**
          * Function: checkPassword
-         * Checks a given password against the stored hash.
+         * Checks a given password against the user's stored hash.
          *
          * Parameters:
          *     $password - The unhashed password given during a login attempt.
-         *     $storedHash - The stored hash for the user.
+         *     $stored - The the user's stored hash value from the database.
          * 
          * Returns:
          *     @true@ or @false@
+         *
+         * Notes:
+         *     Uses <hash_equals> if available to mitigate timing attacks.
          */
-        static function checkPassword($password, $storedHash) {
-            return crypt($password, $storedHash) == $storedHash;
+        static function checkPassword($password, $stored) {
+            $try = crypt($password, $stored);
+            return (function_exists("hash_equals")) ? hash_equals($try, $stored) : ($try == $stored) ;
         }
 
     }

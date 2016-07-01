@@ -9,193 +9,173 @@
     # Parse the route.
     $route = Route::current($main);
 
+    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "POST")
+        error(__("Error"), __("This resource accepts POST requests only."), null, 405);
+
+    if (empty($_POST['action']))
+        error(__("Error"), __("Missing argument."), null, 400);
+
     if (!$visitor->group->can("view_site"))
-        if ($trigger->exists("can_not_view_site"))
-            $trigger->call("can_not_view_site");
-        else
-            show_403(__("Access Denied"), __("You are not allowed to view this site."));
+        show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
     switch($_POST['action']) {
-        case "edit_post":
-            if (!isset($_POST['id']))
-                error(__("No ID Specified"), __("Please specify an ID of the post you would like to edit."));
+        case "destroy_post":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
-            $post = new Post($_POST['id'], array("filter" => false, "drafts" => true));
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
-            if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
-                $trigger->call("not_found");
-                exit;
-            }
-
-            if (!$post->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
-
-            $title = $post->title();
-            $theme_file = THEME_DIR."/forms/feathers/".$post->feather.".php";
-            $default_file = FEATHERS_DIR."/".$post->feather."/fields.php";
-
-            $options = array();
-            Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
-
-            $main->display("forms/post/edit", array("post" => $post,
-                                                    "feather" => Feathers::$instances[$post->feather],
-                                                    "options" => $options,
-                                                    "groups" => Group::find(array("order" => "id ASC"))));
-            break;
-
-        case "delete_post":
             $post = new Post($_POST['id'], array("drafts" => true));
 
-            if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
-                $trigger->call("not_found");
-                exit;
-            }
+            if ($post->no_results)
+                show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
-            Post::delete($_POST['id']);
-            break;
+            Post::delete($post->id);
+            json_response(__("Post deleted."));
+        case "destroy_page":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
-        case "view_post":
-            fallback($_POST['offset'], 0);
-            fallback($_POST['context']);
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
 
-            $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
+            $page = new Page($_POST['id']);
 
-            if (isset($_POST['id']))
-                $post = new Post($_POST['id'], array("drafts" => true));
+            if ($page->no_results)
+                show_404(__("Not Found"), __("Page not found."));
 
-            if ($post->no_results) {
-                header("HTTP/1.1 404 Not Found");
-                $trigger->call("not_found");
-                exit;
-            }
+            if (!$visitor->group->can("delete_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
-            $main->display("feathers/".$post->feather, array("post" => $post, "ajax_reason" => $reason));
-            break;
-
+            Page::delete($page->id, true);
+            json_response(__("Page deleted."));
         case "preview":
-            if (!isset($_POST['content']) or !isset($_POST['filter']))
-                break;
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
-            echo Trigger::current()->filter($_POST['content'], $_POST['filter']);
-            break;
+            if (!$visitor->group->can("add_post", "add_draft", "add_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to create content."));
 
-        case "check_confirm":
+            if (empty($_POST['filter']))
+                error(__("No Filter Specified"), __("A filter is required to preview content."), null, 400);
+
+            fallback($_POST['content'], "Lorem ipsum dolor sit amet.");
+
+            header("Cache-Control: no-cache, must-revalidate");
+            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+
+            $sanitized = sanitize_html($_POST['content']);
+
+            Trigger::current()->filter($sanitized, $_POST['filter']);
+
+            $main->display("content".DIR."preview", array("content" => $sanitized,
+                                                          "filter" => $_POST['filter']), __("Preview"));
+            exit;
+        case "enable":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable/disable extensions."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
-            $dir = ($_POST['type'] == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $info = YAML::load($dir."/".$_POST['check']."/info.yaml");
-            fallback($info["confirm"], "");
+            if (empty($_POST['extension']) or empty($_POST['type']))
+                error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
 
-            if (!empty($info["confirm"]))
-                echo __($info["confirm"], $_POST['check']);
-
-            break;
-
-        case "organize_pages":
-            foreach ($_POST['parent'] as $id => $parent)
-                $sql->update("pages", array("id" => $id), array("parent_id" => $parent));
-
-            foreach ($_POST['page_list'] as $index => $page)
-                $sql->update("pages", array("id" => $page), array("list_order" => $index));
-
-            break;
-
-        case "enable_module": case "enable_feather":
-            $type = ($_POST['action'] == "enable_module") ? "module" : "feather" ;
-
-            if (!$visitor->group->can("change_settings"))
-                if ($type == "module")
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable modules.")."\"] }");
-                else
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable feathers.")."\"] }");
-
-            if (($type == "module" and module_enabled($_POST['extension'])) or
-                ($type == "feather" and feather_enabled($_POST['extension'])))
-                exit("{ \"notifications\": [] }");
-
+            $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
+            $name          = $_POST['extension'];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $updated_array = $config->$enabled_array;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
+            $class_name    = camelize($name);
 
-            if (file_exists($folder."/".$_POST["extension"]."/locale/".$config->locale.".mo"))
-                load_translator($_POST["extension"], $folder."/".$_POST["extension"]."/locale/".$config->locale.".mo");
+            # We don't use the module_enabled() helper function because we want to include cancelled modules.
+            if ($type == "module" and !empty(Modules::$instances[$name]))
+                error(__("Error"), __("Module already enabled."), null, 409);
 
-            $info = YAML::load($folder."/".$_POST["extension"]."/info.yaml");
-            fallback($info["uploader"], false);
-            fallback($info["notifications"], array());
+            # We don't use the feather_enabled() helper function because we want to include cancelled feathers.
+            if ($type == "feather" and !empty(Feathers::$instances[$name]))
+                error(__("Error"), __("Feather already enabled."), null, 409);
 
-            foreach ($info["notifications"] as &$notification)
-                $notification = addslashes(__($notification, $_POST["extension"]));
+            if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
+                show_404(__("Not Found"), __("Extension not found."));
 
-            require $folder."/".$_POST["extension"]."/".$_POST["extension"].".php";
+            require $folder.DIR.$name.DIR.$name.".php";
 
-            if ($info["uploader"])
-                if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the <code>%s</code> directory at your Chyrp install's root and CHMOD it to 777.", array($config->uploads_path));
-                elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please CHMOD <code>%s</code> to 777.", array($config->uploads_path));
+            if (!is_subclass_of($class_name, camelize(pluralize($type))))
+                show_404(__("Not Found"), __("Extension not found."));
 
-            $class_name = camelize($_POST["extension"]);
-
-            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                error("", __("Item is not a module."));
-
-            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                error("", __("Item is not a feather."));
+            load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
 
-            $new = $config->$enabled_array;
-            array_push($new, $_POST["extension"]);
-            $config->set($enabled_array, $new);
+            if (!in_array($name, $updated_array))
+                $updated_array[] = $name;
 
-            exit('{ "notifications": ['.
-                 (!empty($info["notifications"]) ? '"'.implode('", "', $info["notifications"]).'"' : "").
-                 '] }');
+            $config->set($enabled_array, $updated_array);
 
-            break;
+            $info = include $folder.DIR.$name.DIR."info.php";
+            fallback($info["uploader"], false);
+            fallback($info["notifications"], array());
 
-        case "disable_module": case "disable_feather":
-            $type = ($_POST['action'] == "disable_module") ? "module" : "feather" ;
+            if ($info["uploader"])
+                if (!file_exists(MAIN_DIR.$config->uploads_path))
+                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", array($config->uploads_path));
+                elseif (!is_writable(MAIN_DIR.$config->uploads_path))
+                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
 
-            if (!$visitor->group->can("change_settings"))
-                if ($type == "module")
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable modules.")."\"] }");
-                else
-                    exit("{ \"notifications\": [\"".__("You do not have sufficient privileges to enable/disable feathers.")."\"] }");
+            json_response(__("Extension enabled."), $info["notifications"]);
+        case "disable":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (($type == "module" and !module_enabled($_POST['extension'])) or
-                ($type == "feather" and !feather_enabled($_POST['extension'])))
-                exit("{ \"notifications\": [] }");
+            if (!$visitor->group->can("toggle_extensions"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
-            $class_name = camelize($_POST["extension"]);
-            if (method_exists($class_name, "__uninstall"))
-                call_user_func(array($class_name, "__uninstall"), ($_POST['confirm'] == "1"));
+            if (empty($_POST['extension']) or empty($_POST['type']))
+                error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
 
+            $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
+            $name          = $_POST['extension'];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $config->set($enabled_array,
-                         array_diff($config->$enabled_array, array($_POST['extension'])));
+            $updated_array = array();
+            $class_name    = camelize($name);
 
-            exit('{ "notifications": [] }');
+            # We don't use the module_enabled() helper function because we want to exclude cancelled modules.
+            if ($type == "module" and empty(Modules::$instances[$name]))
+                error(__("Error"), __("Module already disabled."), null, 409);
 
-            break;
+            # We don't use the feather_enabled() helper function because we want to exclude cancelled feathers.
+            if ($type == "feather" and empty(Feathers::$instances[$name]))
+                error(__("Error"), __("Feather already disabled."), null, 409);
 
-        case "reorder_feathers":
-            $reorder = oneof(@$_POST['list'], $config->enabled_feathers);
-            foreach ($reorder as &$value)
-                $value = preg_replace("/feathers\[([^\]]+)\]/", "\\1", $value);
+            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
+                show_404(__("Not Found"), __("Module not found."));
 
-            $config->set("enabled_feathers", $reorder);
-            break;
+            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
+                show_404(__("Not Found"), __("Feather not found."));
+
+            if (method_exists($class_name, "__uninstall"))
+                call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
+
+            foreach ($config->$enabled_array as $extension)
+                if ($extension != $name)
+                    $updated_array[] = $extension;
+
+            $config->set($enabled_array, $updated_array);
+
+            if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
+                unset($_SESSION['latest_feather']);
+
+            json_response(__("Extension disabled."));
     }
 
     $trigger->call("ajax");
+    $trigger->call("ajax_".$_POST['action']);
 
-    if (!empty($_POST['action']))
-        $trigger->call("ajax_".$_POST['action']);
+    # Serve an error if no responders were found.
+    error(__("Error"), __("Invalid action."), null, 400);

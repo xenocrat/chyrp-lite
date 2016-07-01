@@ -1,0 +1,33 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Lightbox Settings" | translate("lightbox") }}{% endblock %}
+
+{% block content %}
+<form id="lightbox_settings" class="split" action="{{ admin_url('lightbox_settings') }}" method="post">
+<fieldset>
+<p>
+<label for="background">{{ "Background" | translate("lightbox") }}</label>
+<select name="background">
+<option value="black"{{ "black" | selected(site.module_lightbox['background']) }}>{{ "Black" | translate("lightbox") }}</option>
+<option value="grey"{{ "grey" | selected(site.module_lightbox['background']) }}>{{ "Grey" | translate("lightbox") }}</option>
+<option value="white"{{ "white" | selected(site.module_lightbox['background']) }}>{{ "White" | translate("lightbox") }}</option>
+<option value="inherit"{{ "inherit" | selected(site.module_lightbox['background']) }}>{{ "Inherit" | translate("lightbox") }}</option>
+</select>
+</p>
+<p>
+<label for="spacing">{{ "Edge Spacing" | translate("lightbox") }}</label>
+<input class="text digits" type="number" min="28" name="spacing" value="{{ site.module_lightbox['spacing'] | fix(true) }}" size="2" id="spacing">
+<span class="sub">{{ "(pixels)" | translate("lightbox") }}</span>
+</p>
+<p>
+<label for="protect">{{ "Protect Images" | translate("lightbox") }}</label>
+<input type="checkbox" class="checkbox" name="protect"{{ site.module_lightbox['protect'] | checked }}>
+<small>{{ "Prevent visitors from saving images?" | translate("lightbox") }}</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

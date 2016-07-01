@@ -1,35 +1,35 @@
-{% extends "layouts/default.twig" %}
+{% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-  {% if not post.prev.no_results %}
-    <div role="navigation" class="prev traversal">
-        <a href="$post.prev.url">${ ( "Next post" | translate ) }</a>
-    </div>
-  {% endif %}
-{% include "feathers/" ~ post.feather ~ ".twig" %}
-  {% if not post.next.no_results %}
-    <div role="navigation" class="next traversal">
-        <a href="$post.next.url">${ ( "Previous post" | translate ) }</a>
-    </div>
-  {% endif %}
-  {% if enabled_modules.comments and (post.comment_count > 0 or post.commentable) %}
-    <article role="complementary" class="commentary" id="comments">
-      <ol class="comments" id="comments_$post.id">
-        {% paginate site.comments_per_page comments in post.comments as comment %}
-{% include "content/comment.twig" %}
-        {% else %}
-        <li class="no_comments"></li> {# Needed for AJAX commenting and XHTML Strict validation. #}
-        {% endpaginate %}
-        {% if post.commentable %}
-        <li class="new_comment">
-{% include "forms/comment/new.twig" %}
-        </li>
-        {% endif %}
-      </ol>
-    </article>
-    <div class="comments_pagination traversal">
-      ${ comments.prev_link( ( "Newer comments" | translate ), null, null, "comments" ) }
-      ${ comments.next_link( ( "Older comments" | translate ), null, null, "comments" ) }
-    </div>
-  {% endif %}
+{% if not post.prev.no_results %}
+<div role="navigation" class="prev traversal">
+<a href="{{ post.prev.url() }}">{{ "Next post" | translate }}</a>
+</div>
+{% endif %}
+{% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
+{% if not post.next.no_results %}
+<div role="navigation" class="next traversal">
+<a href="{{ post.next.url() }}">{{ "Previous post" | translate }}</a>
+</div>
+{% endif %}
+{% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
+<article role="complementary" class="commentary">
+<ol id="comments" class="comments paginated" data-post="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
+{% set comments = paginate(post.comments, site.comments_per_page, "comments") %}
+{% for comment in comments.paginated %}
+{% include "content" ~ DIR ~ "comment.twig" %}
+{% endfor %}
+<li id="comment_shim"></li>{# Needed for AJAX commenting. #}
+{% if post.commentable %}
+<li class="comment_form">
+{% include "forms" ~ DIR ~ "comment" ~ DIR ~ "new.twig" %}
+</li>
+{% endif %}
+</ol>
+</article>
+<div class="comments_pagination traversal">
+{{ comments.next_link( ("Newer comments" | translate), null, null, "comments") }}
+{{ comments.prev_link( ("Older comments" | translate), null, null, "comments") }}
+</div>
+{% endif %}
 {% endblock %}

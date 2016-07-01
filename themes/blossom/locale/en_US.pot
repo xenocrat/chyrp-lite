@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2014 Xenocrat
+# Copyright (C) 2016 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2014-10-22 06:34+0000\n"
+"POT-Creation-Date: 2016-07-01 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,184 +17,184 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: themes/blossom/content/comment.twig:4
+#: themes/blossom/content/comment.twig:3
+#, php-format
+msgid "%s:"
+msgstr ""
+
+#: themes/blossom/content/comment.twig:5
+#, php-format
+msgid "%s said:"
+msgstr ""
+
+#: themes/blossom/content/comment.twig:9
 msgid "This comment is awaiting moderation."
 msgstr ""
 
-#: themes/blossom/content/comment.twig:10
+#: themes/blossom/content/comment.twig:15
 msgid "Edit"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:11
-#: themes/blossom/content/post.twig:12
+#: themes/blossom/content/comment.twig:15
+#: themes/blossom/content/post.twig:11
 msgid "Delete"
 msgstr ""
 
-#: themes/blossom/content/comment.twig:15
+#: themes/blossom/content/comment.twig:20
 msgid "%d %B, %Y, at %I:%M %p"
-msgstr ""
-
-#: themes/blossom/content/comment.twig:15
-#, php-format
-msgid "<strong>%s</strong> on <a href=\"%s\" class=\"permalink\">%s</a>"
 msgstr ""
 
 #: themes/blossom/content/post.twig:6
 msgid "Tags"
 msgstr ""
 
-#: themes/blossom/content/post.twig:16
+#: themes/blossom/content/post.twig:15
 #: themes/blossom/feathers/audio.twig:6
 #: themes/blossom/feathers/photo.twig:6
 #: themes/blossom/feathers/quote.twig:6
 #: themes/blossom/feathers/text.twig:6
 #: themes/blossom/feathers/uploader.twig:6
 #: themes/blossom/feathers/video.twig:6
-#: themes/blossom/pages/archive.twig:23
-msgid "Permanent link to"
+#, php-format
+msgid 'Permanent link to &#8220;%s&#8221;'
 msgstr ""
 
-#: themes/blossom/content/post.twig:18
-#: themes/blossom/forms/post/edit.twig:32
+#: themes/blossom/content/post.twig:17
 msgid "Private"
 msgstr ""
 
-#: themes/blossom/content/post.twig:20
+#: themes/blossom/content/post.twig:19
 msgid "Scheduled"
 msgstr ""
 
-#: themes/blossom/content/post.twig:22
+#: themes/blossom/content/post.twig:21
 msgid "Pinned"
 msgstr ""
 
-#: themes/blossom/content/post.twig:24
-#: themes/blossom/pages/archive.twig:16
-#: themes/blossom/pages/archive.twig:30
+#: themes/blossom/content/post.twig:23
 msgid "%d %b, %Y"
 msgstr ""
 
-#: themes/blossom/content/post.twig:35
+#: themes/blossom/content/post.twig:34
 msgid "Comments closed"
 msgstr ""
 
-#: themes/blossom/content/post.twig:38
-msgid "View comments"
+#: themes/blossom/content/post.twig:37
+msgid 'View comments'
 msgstr ""
 
-#: themes/blossom/content/post.twig:39
+#: themes/blossom/content/post.twig:38
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: themes/blossom/content/sidebar.twig:8
-#: themes/blossom/layouts/default.twig:35
-msgid "Search…"
+#: themes/blossom/content/sidebar.twig:6
+#: themes/blossom/layouts/default.twig:44
+msgid 'Search&hellip;'
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:8
-#: themes/blossom/layouts/default.twig:35
-msgid "Search this blog"
+#: themes/blossom/content/sidebar.twig:6
+#: themes/blossom/layouts/default.twig:44
+msgid 'Search this blog'
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:9
-#: themes/blossom/layouts/default.twig:36
+#: themes/blossom/content/sidebar.twig:7
+#: themes/blossom/layouts/default.twig:45
 msgid "Search"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:14
-#, php-format
-msgid "Hello, %s!"
+#: themes/blossom/content/sidebar.twig:10
+msgid 'Links'
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:16
-msgid "Links"
+#: themes/blossom/content/sidebar.twig:12
+#: themes/blossom/layouts/default.twig:68
+msgid "Blog"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:17
-#: themes/blossom/layouts/default.twig:58
-msgid "Index"
-msgstr ""
-
-#: themes/blossom/content/sidebar.twig:18
+#: themes/blossom/content/sidebar.twig:15
 #: themes/blossom/forms/user/controls.twig:9
 #: themes/blossom/forms/user/register.twig:13
-#: themes/blossom/layouts/default.twig:66
+#: themes/blossom/layouts/default.twig:80
 msgid "Email"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:19
-#: themes/blossom/layouts/default.twig:67
+#: themes/blossom/content/sidebar.twig:18
+#: themes/blossom/layouts/default.twig:83
 msgid "Feed"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:21
-#: themes/blossom/layouts/default.twig:70
+#: themes/blossom/content/sidebar.twig:22
+#: themes/blossom/layouts/default.twig:92
 msgid "Admin"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:23
-#: themes/blossom/layouts/default.twig:72
+#: themes/blossom/content/sidebar.twig:26
+#: themes/blossom/layouts/default.twig:96
 msgid "Write"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:25
-#: themes/blossom/forms/post/edit.twig:30
-#: themes/blossom/layouts/default.twig:74
+#: themes/blossom/content/sidebar.twig:30
+#: themes/blossom/layouts/default.twig:100
 msgid "Draft"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:28
+#: themes/blossom/content/sidebar.twig:35
 #: themes/blossom/forms/user/controls.twig:5
-#: themes/blossom/layouts/default.twig:77
+#: themes/blossom/layouts/default.twig:105
 msgid "Controls"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:29
-#: themes/blossom/layouts/default.twig:78
+#: themes/blossom/content/sidebar.twig:38
+#: themes/blossom/layouts/default.twig:108
 msgid "Log out"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:32
+#: themes/blossom/content/sidebar.twig:43
 #: themes/blossom/forms/user/register.twig:5
 #: themes/blossom/forms/user/register.twig:18
-#: themes/blossom/layouts/default.twig:81
+#: themes/blossom/layouts/default.twig:113
 msgid "Register"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:34
+#: themes/blossom/content/sidebar.twig:47
 #: themes/blossom/forms/user/login.twig:5
-#: themes/blossom/forms/user/login.twig:12
-#: themes/blossom/layouts/default.twig:83
+#: themes/blossom/forms/user/login.twig:13
+#: themes/blossom/layouts/default.twig:117
 msgid "Log in"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:41
+#: themes/blossom/content/sidebar.twig:52
 msgid "Categories"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:52
+#: themes/blossom/content/sidebar.twig:64
 msgid "Pages"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:61
+#: themes/blossom/content/sidebar.twig:74
+msgid "Related Posts"
+msgstr ""
+
+#: themes/blossom/content/sidebar.twig:83
 msgid "Recent Posts"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:70
-#: themes/blossom/layouts/default.twig:68
+#: themes/blossom/content/sidebar.twig:94
+#: themes/blossom/layouts/default.twig:87
 msgid "Archive"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:74
-#: themes/blossom/pages/archive.twig:7
-#: themes/blossom/pages/archive.twig:55
+#: themes/blossom/content/sidebar.twig:99
+#: themes/blossom/pages/archive.twig:8
+#: themes/blossom/pages/archive.twig:54
 msgid "%B %Y"
 msgstr ""
 
-#: themes/blossom/feathers/uploader.twig:20
-msgid "Download"
+#: themes/blossom/feathers/uploader.twig:19
+msgid "File attachment:"
 msgstr ""
 
 #: themes/blossom/forms/comment/edit.twig:2
@@ -202,113 +202,93 @@ msgid "Comment"
 msgstr ""
 
 #: themes/blossom/forms/comment/edit.twig:4
-#: themes/blossom/forms/post/edit.twig:28
-msgid "Status"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:6
-msgid "Approved"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:7
-msgid "Denied"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:8
-msgid "Spam"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:10
-#: themes/blossom/forms/post/edit.twig:25
 msgid "More Options &darr;"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:12
+#: themes/blossom/forms/comment/edit.twig:6
 msgid "Author"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:14
+#: themes/blossom/forms/comment/edit.twig:8
 msgid "Author's website"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:16
+#: themes/blossom/forms/comment/edit.twig:10
 msgid "Author's email"
 msgstr ""
 
+#: themes/blossom/forms/comment/edit.twig:14
+msgid "Timestamp"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:16
+msgid "Status"
+msgstr ""
+
 #: themes/blossom/forms/comment/edit.twig:18
-msgid "Timestap"
+msgid "Approved"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:19
+msgid "Denied"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:20
+msgid "Spam"
 msgstr ""
 
 #: themes/blossom/forms/comment/edit.twig:24
-#: themes/blossom/forms/post/edit.twig:78
+msgid "Email Notifications"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:33
 msgid "Save"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:25
-#: themes/blossom/forms/post/edit.twig:79
+#: themes/blossom/forms/comment/edit.twig:34
 msgid "Cancel"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:4
+#: themes/blossom/forms/comment/new.twig:3
 #, php-format
 msgid "%s's comment"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:6
+#: themes/blossom/forms/comment/new.twig:5
 msgid "Your name"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:8
+#: themes/blossom/forms/comment/new.twig:7
 msgid "Your email"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:10
+#: themes/blossom/forms/comment/new.twig:9
 msgid "Your website"
 msgstr ""
 
 #: themes/blossom/forms/comment/new.twig:12
-#, php-format
 msgid "Your comment"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:22
+#: themes/blossom/forms/comment/new.twig:16
+msgid "Markdown is allowed."
+msgstr ""
+
+#: themes/blossom/forms/comment/new.twig:18
+#, php-format
+msgid "HTML tags allowed: &lt;%s&gt;."
+msgstr ""
+
+#: themes/blossom/forms/comment/new.twig:20
+msgid "HTML is not allowed."
+msgstr ""
+
+#: themes/blossom/forms/comment/new.twig:24
+msgid "Notify me when others comment"
+msgstr ""
+
+#: themes/blossom/forms/comment/new.twig:36
 msgid "Speak"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:8
-msgid "(optional)"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:31
-msgid "Public"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:33
-msgid "Registered Only"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:35
-msgid "Group"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:43
-msgid "Pinned?"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:45
-msgid "(shows this post above all others)"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:46
-msgid "Slug"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:48
-msgid "Timestamp"
-msgstr ""
-
-#: themes/blossom/forms/post/edit.twig:51
-msgid "Trackbacks"
 msgstr ""
 
 #: themes/blossom/forms/user/controls.twig:7
@@ -342,7 +322,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: themes/blossom/forms/user/login.twig:13
+#: themes/blossom/forms/user/login.twig:14
 msgid "Help!"
 msgstr ""
 
@@ -351,7 +331,7 @@ msgid "Lost password"
 msgstr ""
 
 #: themes/blossom/forms/user/lost_password.twig:7
-msgid "Please enter your username below and we will e-mail you a new password for your account."
+msgid "Please enter your username below and we will email you a new password for your account."
 msgstr ""
 
 #: themes/blossom/forms/user/lost_password.twig:11
@@ -366,49 +346,59 @@ msgstr ""
 msgid "(again)"
 msgstr ""
 
-#: themes/blossom/info.yaml:1
-msgid "Blossom"
-msgstr ""
-
-#: themes/blossom/info.yaml:4
-msgid "The default theme provided with Chyrp Lite."
-msgstr ""
-
-#: themes/blossom/javascripts/theme.js.php:79
-#: themes/blossom/javascripts/theme.js.php:90
+#: themes/blossom/javascripts/theme.js.php:14
+#: themes/blossom/javascripts/theme.js.php:22
 msgid "Menu"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:45
+#: themes/blossom/layouts/default.twig:54
 msgid "Newer posts"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:53
+#: themes/blossom/layouts/default.twig:62
 msgid "Older posts"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:95
+#: themes/blossom/layouts/default.twig:129
 #, php-format
-msgid "Called from %s on line %d at %ss."
+msgid "Called from %s on line %d at %s seconds."
+msgstr ""
+
+#: themes/blossom/pages/403.twig:5
+msgid "Forbidden."
 msgstr ""
 
 #: themes/blossom/pages/404.twig:5
-msgid "Not found"
+msgid "Not found."
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:42
-#: themes/blossom/pages/archive.twig:50
-#: themes/blossom/pages/archive.twig:55
+#: themes/blossom/pages/archive.twig:23
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr ""
+
+#: themes/blossom/pages/archive.twig:40
+#, php-format
+msgid "Archive of %s &rarr;"
+msgstr ""
+
+#: themes/blossom/pages/archive.twig:49
+msgid "%d %B, %Y"
+msgstr ""
+
+#: themes/blossom/pages/archive.twig:49
+#: themes/blossom/pages/archive.twig:54
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:50
-msgid "%d %B, %Y"
-msgstr ""
-
 #: themes/blossom/pages/archive.twig:65
 msgid "There aren't any posts in the timeframe you specified"
+msgstr ""
+
+#: themes/blossom/pages/category.twig:6
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/blossom/pages/drafts.twig:6
@@ -419,7 +409,7 @@ msgstr ""
 msgid "You don't have any drafts"
 msgstr ""
 
-#: themes/blossom/pages/index.twig:8
+#: themes/blossom/pages/index.twig:9
 msgid "No posts"
 msgstr ""
 
@@ -429,19 +419,12 @@ msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/blossom/pages/search.twig:13
-msgid "Your search did not return any results"
+msgid "Your search did not return any results."
 msgstr ""
 
 #: themes/blossom/pages/tag.twig:6
+#, php-format
 msgid "Posts tagged with %s"
-msgstr ""
-
-#: themes/blossom/pages/tag.twig:15
-msgid "There are no posts with the tag you specified"
-msgstr ""
-
-#: themes/blossom/pages/tag.twig:17
-msgid "No tag specified"
 msgstr ""
 
 #: themes/blossom/pages/tags.twig:6
@@ -449,7 +432,7 @@ msgid "Tag cloud"
 msgstr ""
 
 #: themes/blossom/pages/tags.twig:13
-msgid "There aren't any tags yet"
+msgid "Nothing here yet!"
 msgstr ""
 
 #: themes/blossom/pages/view.twig:6

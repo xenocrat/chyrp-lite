@@ -1,31 +1,30 @@
 <?php
-    if (!defined("INCLUDES_DIR")) define("INCLUDES_DIR", dirname(__FILE__));
-
     /**
      * Class: Config
      * Holds all of the configuration variables for the entire site, as well as Module settings.
      */
     class Config {
-        # Variable: $yaml
-        # Holds all of the YAML settings as a $key => $val array.
-        private $yaml = array();
+        # Variable: $json
+        # Holds all of the JSON settings as a $key => $val array.
+        private $json = array();
 
         /**
          * Function: __construct
-         * Loads the configuration YAML file.
+         * Loads the configuration JSON file.
          */
         private function __construct() {
-            if (!file_exists(INCLUDES_DIR."/config.yaml.php"))
+            if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
                 return false;
 
             $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
                                     "",
-                                    file_get_contents(INCLUDES_DIR."/config.yaml.php"));
+                                    file_get_contents(INCLUDES_DIR.DIR."config.json.php"));
 
-            $this->yaml = YAML::load($contents);
+            $this->json = json_get($contents, true);
 
             $arrays = array("enabled_modules", "enabled_feathers", "routes");
-            foreach ($this->yaml as $setting => $value)
+
+            foreach ($this->json as $setting => $value)
                 if (in_array($setting, $arrays) and empty($value))
                     $this->$setting = array();
                 elseif (!is_int($setting))
@@ -47,16 +46,8 @@
             if (isset($this->$setting) and $this->$setting == $value and !$overwrite)
                 return false;
 
-            if (isset($this->file) and file_exists($this->file)) {
-                $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
-                                        "",
-                                        file_get_contents($this->file));
-
-                $this->yaml = YAML::load($contents);
-            }
-
             # Add the setting
-            $this->yaml[$setting] = $this->$setting = $value;
+            $this->json[$setting] = $this->$setting = $value;
 
             if (class_exists("Trigger"))
                 Trigger::current()->call("change_setting", $setting, $value, $overwrite);
@@ -64,15 +55,15 @@
             # Add the PHP protection!
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
 
-            # Generate the new YAML settings
-            $contents.= YAML::dump($this->yaml);
+            # Generate the new JSON settings.
+            $contents.= json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-            if (!@file_put_contents(INCLUDES_DIR."/config.yaml.php", $contents)) {
-                Flash::warning(_f("Could not set \"<code>%s</code>\" configuration setting because <code>%s</code> is not writable.",
-                                  array($setting, "/includes/config.yaml.php")));
-                return false;
-            } else
-                return true;
+            # Update the configuration file.
+            if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
+                error(__("Error"),
+                      _f("Failed to set <code>%s</code> because <em>config.json.php</em> is not writable.", fix($setting)));
+
+            return true;
         }
 
         /**
@@ -83,24 +74,19 @@
          *     $setting - The name of the setting to remove.
          */
         public function remove($setting) {
-            if (isset($this->file) and file_exists($this->file)) {
-                $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
-                                        "",
-                                        file_get_contents($this->file));
-
-                $this->yaml = YAML::load($contents);
-            }
-
-            # Add the setting
-            unset($this->yaml[$setting]);
+            # Remove the setting
+            unset($this->json[$setting]);
 
             # Add the PHP protection!
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
 
-            # Generate the new YAML settings
-            $contents.= YAML::dump($this->yaml);
+            # Generate the new JSON settings.
+            $contents.= json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-            file_put_contents(INCLUDES_DIR."/config.yaml.php", $contents);
+            # Update the configuration file.
+            if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
+                error(__("Error"),
+                      _f("Failed to remove <code>%s</code> because <em>config.json.php</em> is not writable.", fix($setting)));
         }
 
         /**
@@ -109,6 +95,7 @@
          */
         public static function & current() {
             static $instance = null;
-            return $instance = (empty($instance)) ? new self() : $instance ;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
         }
     }

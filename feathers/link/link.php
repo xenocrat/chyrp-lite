@@ -4,8 +4,7 @@
             $this->setField(array("attr" => "name",
                                   "type" => "text",
                                   "label" => __("Title", "link"),
-                                  "optional" => true,
-                                  "preview" => "markup_title"));
+                                  "optional" => true));
             $this->setField(array("attr" => "source",
                                   "type" => "text",
                                   "label" => __("URL", "link")));
@@ -23,11 +22,12 @@
 
         public function submit() {
             if (empty($_POST['source']))
-                error(__("Error"), __("URL can't be empty."));
+                error(__("Error"), __("URL can't be empty.", "link"));
 
-            # Prepend scheme if a URL is detected in the source text
-            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['source']))
-                $_POST['source'] = "http://".$_POST['source'];
+            if (!is_url($_POST['source']))
+                error(__("Error"), __("Invalid URL.", "link"));
+
+            $_POST['source'] = add_scheme($_POST['source']);
 
             fallback($_POST['slug'], sanitize($_POST['name']));
 
@@ -40,11 +40,12 @@
 
         public function update($post) {
             if (empty($_POST['source']))
-                error(__("Error"), __("URL can't be empty."));
+                error(__("Error"), __("URL can't be empty.", "link"));
 
-            # Prepend scheme if a URL is detected in the source text
-            if (preg_match('~^((([a-z]|[0-9]|\-)+)\.)+([a-z]){2,6}/~', @$_POST['source']))
-                $_POST['source'] = "http://".$_POST['source'];
+            if (!is_url($_POST['source']))
+                error(__("Error"), __("Invalid URL.", "link"));
+
+            $_POST['source'] = add_scheme($_POST['source']);
 
             $post->update(array("name" => $_POST['name'],
                                 "source" => $_POST['source'],
@@ -64,7 +65,9 @@
         }
 
         public function set_feed_url($url, $post) {
-            if ($post->feather != "link") return;
+            if ($post->feather != "link")
+                return;
+
             return $url = $post->source;
         }
     }

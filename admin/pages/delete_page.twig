@@ -1,0 +1,30 @@
+{% extends "layout.twig" %}
+
+{% block title %}{{ "Delete Page?" | translate }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Delete Page?" | translate }}</h1>
+<p>
+{{ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title | striptags | oneof("[Untitled]" | translate)) }}
+</p>
+<form class="delete split" action="{{ admin_url('destroy_page') }}" method="post" accept-charset="UTF-8">
+<fieldset>
+{% if page.children is not empty %}
+<p>
+<label for="destroy_children">{{ "Delete children?" | translate }}</label>
+<input type="checkbox" name="destroy_children" value="" id="destroy_children">
+</p>
+{% endif %}
+<div class="confirmation">
+<button name="destroy" value="indubitably" class="boo">
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Delete!" | translate }}
+</button>
+<button name="destroy" value="undecidedly" type="submit" class="yay">
+<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="icon">{{ "Cancel" | translate }}
+</button>
+</div>
+<input type="hidden" name="id" value="{{ page.id }}" id="id">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}
