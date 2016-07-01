@@ -68,7 +68,7 @@
          *     $post - The <Post> they're commenting on.
          *     $parent - The <Comment> they're replying to.
          *     $notify - Notification on follow-up comments.
-         *     $type - The type of comment. Optional, used for pingbacks.
+         *     $type - The type of comment (optional).
          */
         static function create($body, $author, $url, $email, $post, $parent, $notify, $type = null) {
             if (!self::user_can($post->id) and $type != "pingback")
@@ -86,6 +86,9 @@
 
             if (!logged_in())
                 $notify = 0; # Only logged-in users can request notifications
+
+            fallback($_SERVER['HTTP_REFERER'], "");
+            fallback($_SERVER['HTTP_USER_AGENT'], "");
 
             if (!empty($config->akismet_api_key)) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
@@ -112,7 +115,7 @@
                               $parent,
                               $notify);
 
-                    Flash::notice(__("Your comment is awaiting moderation.", "comments"), $post->url());
+                    return __("Your comment is awaiting moderation.", "comments");
                 } else {
                     $comment = self::add($body,
                                          $author,
@@ -128,7 +131,7 @@
 
                     fallback($_SESSION['comments'], array());
                     $_SESSION['comments'][] = $comment->id;
-                    Flash::notice(__("Comment added."), $post->url());
+                    return __("Comment added.", "comments");
                 }
             } else {
                 $comment = self::add($body,
@@ -145,7 +148,7 @@
 
                 fallback($_SESSION['comments'], array());
                 $_SESSION['comments'][] = $comment->id;
-                Flash::notice(__("Comment added."), $post->url());
+                return __("Comment added.", "comments");
             }
         }
 

@@ -25,7 +25,7 @@
 
         public function feed_item($post) {
             if (!empty($post->category_id) OR $post->category != 0)
-               printf("\t<category term=\"%s\" />\n", Category::getCategory($post->category_id)->name);
+               printf("        <category term=\"%s\" />\n", Category::getCategory($post->category_id)->name);
         }
 
         /* XML Stuff */
@@ -87,7 +87,7 @@
             else
                 $fields_list[0]["selected"] = false;
 
-            if (!empty($categories)) # make sure we don't try to process an empty list.
+            if (!empty($categories)) # Make sure we don't try to process an empty list.
                 foreach ($categories as $category) {
                     $fields_list[$category["id"]]["value"] = $category["id"];
                     $fields_list[$category["id"]]["name"] = $category["name"];
@@ -120,7 +120,7 @@
         }
 
         public function main_category($main) {
-            # make sure we have enough information to continue.
+            # Make sure we have enough information to continue.
             if (!isset($_GET['name']))
                 $reason = __("You did not specify a category.", "categorize");
             elseif (!$category = Category::getCategorybyClean($_GET['name']))
@@ -192,7 +192,7 @@
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
             if (empty($_POST['name']))
-                error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"));
+                error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"), null, 400);
 
             Category::addCategory($_POST);
             Flash::notice(__("Category added.", "categorize"), "/admin/?action=manage_category");
@@ -203,7 +203,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a category.", "categorize"));
+                error(__("No ID Specified"), __("An ID is required to edit a category.", "categorize"), null, 400);
 
             $category = Category::getCategory($_GET['id']);
 
@@ -222,10 +222,10 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update a category.", "categorize"));
+                error(__("No ID Specified"), __("An ID is required to update a category.", "categorize"), null, 400);
 
             if (empty($_POST['name']))
-                error(__("No Name Specified", "categorize"), __("A name is required to update a category.", "categorize"));
+                error(__("No Name Specified", "categorize"), __("A name is required to update a category.", "categorize"), null, 400);
 
             $category = Category::getCategory($_POST['id']);
 
@@ -238,7 +238,7 @@
 
         public function admin_delete_category($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"));
+                error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
 
             $category = Category::getCategory($_GET['id']);
 
@@ -256,7 +256,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"));
+                error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_category");

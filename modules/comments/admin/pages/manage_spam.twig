@@ -3,7 +3,7 @@
 {% block title %}{{ "Manage Spam" | translate("comments") }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="index.php" method="get" accept-charset="utf-8">
+<form class="filters" action="index.php" method="get" accept-charset="UTF-8">
 <fieldset>
 <input type="hidden" name="action" value="manage_comments">
 <div role="search" class="filter_item">
@@ -40,7 +40,7 @@
 {{ comment.post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="comment_author">
-{{ not comment.user.no_results ? comment.user.full_name | oneof(comment.user.login, comment.author) : comment.author }}
+{{ not comment.user.no_results ? comment.user.login : comment.author }}
 </td>
 <td class="comment_date">
 {{ comment.created_at | strftimeformat }}

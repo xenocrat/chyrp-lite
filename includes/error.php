@@ -2,6 +2,8 @@
     ini_set('display_errors', false);
     ini_set('error_log', MAIN_DIR.DIR."error_log.txt");
 
+    # Array: $errors
+    # Stores errors encountered when installing or upgrading.
     $errors = array();
 
     # Set the appropriate error handler.
@@ -19,7 +21,7 @@
      */
     function error_panicker($errno, $message, $file, $line) {
         if (error_reporting() === 0)
-            return true; # Error reporting has been disabled.
+            return true; # Error reporting excludes this error.
 
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
@@ -27,7 +29,7 @@
         if (ob_get_contents() !== false)
             ob_clean();
 
-        exit(htmlspecialchars("ERROR: ".$message." (".$file." on line ".$line.")", ENT_QUOTES, "utf-8", false));
+        exit(htmlspecialchars("ERROR: ".$message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false));
     }
 
     /**
@@ -43,7 +45,7 @@
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        $errors[] = htmlspecialchars($message." (".$file." on line ".$line.")", ENT_QUOTES, "utf-8", false);
+        $errors[] = htmlspecialchars($message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false);
         return true;
     }
 
@@ -69,10 +71,11 @@
      *     $title - The title for the error dialog.
      *     $body - The message for the error dialog.
      *     $backtrace - The trace of the error.
+     *     $code - Numeric HTTP status code to set.
      */
-    function error($title = "", $body = "", $backtrace = array()) {
-        # Sanitize strings.
-        $title = htmlspecialchars($title, ENT_QUOTES, "utf-8", false);
+    function error($title = "", $body = "", $backtrace = array(), $code = 500) {
+        # Sanitize strings to remove obnoxious attributes and script tags.
+        $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8", false);
         $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
         $body = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $body);
         $body = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $body);
@@ -82,30 +85,59 @@
                 if (!isset($trace["file"]) or !isset($trace["line"])) {
                     unset($backtrace[$index]);
                 } else {
-                    $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "utf-8", false);
-                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "utf-8", false);
+                    $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "UTF-8", false);
+                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "UTF-8", false);
                 }
 
         # Clean the output buffer before we begin.
         if (ob_get_contents() !== false)
             ob_clean();
 
-        # Attempt to set headers to sane values.
+        # Attempt to set headers to sane values and send a status code.
         if (!headers_sent()) {
-            header("Content-type: text/html; charset=UTF-8");
+            header("Content-Type: text/html; charset=UTF-8");
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
-            if (!empty($backtrace))
-                header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+            switch ($code) {
+                case 400:
+                    header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+                    break;
+                case 403:
+                    header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+                    break;
+                case 404:
+                    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+                    break;
+                case 405:
+                    header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
+                    break;
+                case 409:
+                    header($_SERVER["SERVER_PROTOCOL"]." 409 Conflict");
+                    break;
+                case 410:
+                    header($_SERVER["SERVER_PROTOCOL"]." 410 Gone");
+                    break;
+                case 413:
+                    header($_SERVER["SERVER_PROTOCOL"]." 413 Payload Too Large");
+                    break;
+                case 422:
+                    header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Entity");
+                    break;
+                case 501:
+                    header($_SERVER["SERVER_PROTOCOL"]." 501 Not Implemented");
+                    break;
+                case 503:
+                    header($_SERVER["SERVER_PROTOCOL"]." 503 Service Unavailable");
+                    break;
+                default:
+                    header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+            }
         }
 
-        # Report in plain text for the automated tester.
-        if (TESTER)
-            exit("ERROR: ".strip_tags($body));
-
-        # Report and exit safely if the error is too deep in the core for a pretty error message.
-        if (!function_exists("__") or
+        # Report in plain text if desirable or necessary because of a deep error.
+        if (TESTER or XML_RPC or AJAX or
+            !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
             !function_exists("oneof") or
@@ -114,31 +146,24 @@
             !class_exists("Config") or
             !method_exists("Config", "current") or
             !property_exists(Config::current(), "url") or
-            !property_exists(Config::current(), "chyrp_url"))
-            exit("<!DOCTYPE html>\n<h1>ERROR:</h1>\n<p>".$body."</p>");
+            !property_exists(Config::current(), "chyrp_url")) {
+
+            exit("ERROR: ".strip_tags($body));
+        }
 
         $config = Config::current();
         $url = $config->url;
         $chyrp_url = $config->chyrp_url;
 
-        # Validate title and body text.
+        # Validate title and body text before we display the pretty message.
         $title = oneof($title, __("Error"));
         $body = oneof($body, __("An unspecified error has occurred."));
 
-        # Report with backtrace and magic words for JavaScript.
-        if (AJAX) {
-            foreach ($backtrace as $trace)
-                $body.= "\n"._f("%s on line %d", array($trace["file"], fallback($trace["line"], 0)));
-
-            exit($title.": ".strip_tags($body)."\n<!-- HEY_JAVASCRIPT_THIS_IS_AN_ERROR_JUST_SO_YOU_KNOW -->");
-        }
-
-        # Display the error.
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <title><?php echo $title; ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">

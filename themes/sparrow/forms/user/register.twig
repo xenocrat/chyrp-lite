@@ -3,7 +3,7 @@
 {% block content %}
 <div class="user_register standalone">
 <h2>{{ "Register" | translate }}</h2>
-<form action="{{ url('register') }}" method="post">
+<form action="{{ url('register') }}" method="post" accept-charset="UTF-8">
 <label for="login">{{ "Username" | translate }}</label>
 <input type="text" name="login" value="" id="login">
 <label for="password1">{{ "Password" | translate }}</label>

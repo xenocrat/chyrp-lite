@@ -24,6 +24,8 @@
                 new Twig_SimpleFunction("self_url",            "self_url"),
                 new Twig_SimpleFunction("module_enabled",      "module_enabled"),
                 new Twig_SimpleFunction("feather_enabled",     "feather_enabled"),
+                new Twig_SimpleFunction("is_url",              "is_url"),
+                new Twig_SimpleFunction("is_email",            "is_email"),
                 new Twig_SimpleFunction("password_strength",   "password_strength"),
 
                 # Custom functions
@@ -54,6 +56,7 @@
                 new Twig_SimpleFilter("token",                 "token"),
                 new Twig_SimpleFilter("uploaded",              "uploaded"),
                 new Twig_SimpleFilter("gravatar",              "get_gravatar"),
+                new Twig_SimpleFilter("add_scheme",            "add_scheme"),
 
                 # Custom filters
                 new Twig_SimpleFilter("translate",             "twig_filter_translate"),
@@ -99,11 +102,11 @@
      * Function: twig_function_paginate
      * Paginates an array of items using the Paginator class.
      */
-    function twig_function_paginate($array, $per_page = 10, $name = "page") {
-            $name = str_replace("_", "", $name)."_page"; # This is important for clean URL parsing.
+    function twig_function_paginate($array, $per_page = 10, $name = "twig") {
+        $name = str_replace("_", "", $name)."_page"; # This is important for clean URL parsing in MainController.
 
-        if (in_array($name, Paginator::$names))
-            $name = count(Paginator::$names).$name;
+        while (in_array($name, Paginator::$names))
+            $name = "-".$name;
 
         return new Paginator($array, $per_page, $name);
     }
@@ -163,17 +166,17 @@
         if (is_string($bytes))
             $bytes = intval($bytes);
 
-        if ($bytes >= 1073741824) {
-            $value = number_format($bytes / 1073741824, 1);
+        if ($bytes >= 1000000000) {
+            $value = number_format($bytes / 1000000000, 1);
             return _f("%s GB", $value);
         }
 
         if ($bytes >= 1048576) {
-            $value = number_format($bytes / 1048576, 1);
+            $value = number_format($bytes / 1000000, 1);
             return _f("%s MB", $value);
         }
 
-        $value = number_format($bytes / 1024, 1);
+        $value = number_format($bytes / 1000, 1);
         return _f("%s KB", $value);
     }
 

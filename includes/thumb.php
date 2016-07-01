@@ -8,16 +8,17 @@
 
     require_once "common.php";
 
-    # Clean the output buffer to guard against image corruption.
-    ob_clean();
-
-    if (ini_get("memory_limit") < 48)
+    if (shorthand_bytes(ini_get("memory_limit")) < 50331648)
         ini_set("memory_limit", "48M");
 
-    if (empty($_GET['file'])) {
-        header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
-        exit("Missing Argument.");
-    }
+    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "GET")
+        error(__("Error"), __("This resource accepts GET requests only."), null, 405);
+
+    if (empty($_GET['file']))
+        error(__("Error"), __("Missing argument."), null, 400);
+
+    if (!$visitor->group->can("view_site"))
+        show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
     $config = Config::current();
     $quality = (int) fallback($_GET["quality"], 80);
@@ -25,33 +26,25 @@
     $filepath = uploaded($filename, false);;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
     $url = uploaded($filename);
-    $new_width = (int) fallback($_GET["max_width"], 0);
+    $new_width = (int) fallback($_GET["max_width"], 640);
     $new_height = (int) fallback($_GET["max_height"], 0);
 
+    # GD library is not available.
     if (!function_exists("gd_info"))
-        exit(header("Location: ".$url)); # GD not installed.
+        redirect($url);
 
     $gd_info = gd_info();
     preg_match("/\d[\d\.]*/", $gd_info["GD Version"], $gd_version);
 
+    # GD version too low for our script.
     if (version_compare($gd_version[0], "2.0.28", "<"))
-        exit(header("Location: ".$url)); # GD version too low.
+        redirect($url);
 
     if (substr_count($filename, DIR))
-        display_error(_f("Image name %s is not allowed.", $filename));
+        error(__("Error"), __("Malformed URI."), null, 400);
 
     if (!is_readable($filepath) or !is_file($filepath))
-        display_error(_f("Image file %s was not found.", $filename));
-
-    function display_error($string) {
-        $thumbnail = imagecreatetruecolor(($_GET['max_width']) ? $_GET['max_width'] : 640,
-                                          ($_GET['max_height']) ? $_GET['max_height'] : 16);
-        imagestring($thumbnail, 1, 4, 4, $string, imagecolorallocate($thumbnail, 255, 255, 255));
-        header("Content-type: image/png");
-        header("Content-Disposition: inline; filename=error.png");
-        imagepng($thumbnail);
-        exit;
-    }
+        show_404(__("Not Found"), __("File not found."));
 
     list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
 
@@ -59,8 +52,8 @@
     $crop_y = 0;
 
     function resize(&$crop_x, &$crop_y, &$new_width, &$new_height, $original_width, $original_height) {
-        $xscale = ($new_width / $original_width);
-        $yscale = $new_height / $original_height;
+        $xscale = ($new_width > 0) ? $new_width / $original_width : 0 ;
+        $yscale = ($new_height > 0) ? $new_height / $original_height : 0 ;
 
         if ($new_width <= $original_width and $new_height <= $original_height and $xscale == $yscale)
             return;
@@ -73,32 +66,32 @@
                 $new_height = $new_width;
 
             if($original_width > $original_height) {
-                # portrait
+                # Portrait orientation.
                 $crop_x = ceil( ($original_width - $original_height) / 2 );
             } else if ($original_height > $original_width) {
-                # landscape
+                # Landscape orientation.
                 $crop_y = ceil( ($original_height - $original_width) / 2 );
             }
 
             return;
 
         } else {
-    
+
             if ($new_width and !$new_height)
                 return $new_height = ($new_width / $original_width) * $original_height;
             elseif (!$new_width and $new_height)
                 return $new_width = ($new_height / $original_height) * $original_width;
-    
+
             if ($xscale != $yscale) {
                 if ($original_width * $yscale <= $new_width)
                     $new_width = $original_width * $yscale;
-    
+
                 if ($original_height * $xscale <= $new_height)
                     $new_height = $original_height * $xscale;
             }
-    
-            $xscale = ($new_width / $original_width);
-            $yscale = $new_height / $original_height;
+
+            $xscale = ($new_width > 0) ? $new_width / $original_width : 0 ;
+            $yscale = ($new_height > 0) ? $new_height / $original_height : 0 ;
     
             if (round($xscale, 3) == round($yscale, 3))
                 return;
@@ -112,7 +105,7 @@
 
     # If it's already below the maximum, just redirect to it.
     if ($original_width <= $new_width and $original_height <= $new_height)
-        exit(header("Location: ".$url));
+        redirect($url);
 
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
     $cache_file = CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename;
@@ -165,7 +158,7 @@
                 break;
             }
         default:
-            exit(header("Location: ".$url)); # Switch will flow through to here if image type is unsupported.
+            redirect($url); # Switch will flow through to here if image type is unsupported.
     }
 
     if (DEBUG)
@@ -189,7 +182,7 @@
     imagecopyresampled($thumbnail, $image, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
 
     header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
-    header("Content-type: ".$mime);
+    header("Content-Type: ".$mime);
     header("Content-Disposition: inline; filename=".$filename.".".$extension);
 
     if ($done == "imagepng")
@@ -208,8 +201,8 @@
     else
         $done($thumbnail);
 
-    ob_flush();
-
-    # Clear memory.
+    # Clear memory and flush the output buffer.
     imagedestroy($image);
     imagedestroy($thumbnail);
+
+    ob_end_flush();

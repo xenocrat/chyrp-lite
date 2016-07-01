@@ -110,6 +110,7 @@
                 $options["where"] = array();
 
             $has_status = false;
+
             foreach ($options["where"] as $key => $val)
                 if ((is_int($key) and substr_count($val, "status")) or $key === "status")
                     $has_status = true;
@@ -353,6 +354,7 @@
                 return false;
 
             fallback($user, Visitor::current());
+
             if ($user->group->can("delete_post"))
                 return true;
 
@@ -370,6 +372,7 @@
                 return false;
 
             fallback($user, Visitor::current());
+
             if ($user->group->can("edit_post"))
                 return true;
 
@@ -666,6 +669,7 @@
 
             preg_match_all("/\(([^\)]+)\)/", Config::current()->post_url, $matches);
             $params = array();
+
             foreach ($matches[1] as $attr)
                 if (in_array($attr, $times))
                     $where[strtoupper($attr)."(created_at)"] = $attrs[$attr];
@@ -715,7 +719,7 @@
         }
 
         /**
-         * Function: enabled_feathers
+         * Function: feathers
          * Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
          */
         static function feathers() {
@@ -753,6 +757,7 @@
                 return false;
 
             $names = array();
+
             foreach ($groups[1] as $group_id) {
                 $group = new Group($group_id);
                 $names[] = $group->name;

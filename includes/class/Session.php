@@ -8,12 +8,17 @@
         # Caches session data.
         static $data = "";
 
+        # Variable: $deny
+        # Deny this session?
+        static $deny = false;
+
         /**
          * Function: open
-         * Returns: @true@
+         * Returns: @true@ unless it detects a self-identified bot.
          */
         static function open() {
-            return true;
+            return !(self::$deny = preg_match("/(bot|crawler|slurp|spider)\b/i",
+                                              oneof(@$_SERVER['HTTP_USER_AGENT'], "")));
         }
 
         /**
@@ -49,7 +54,7 @@
          *     $data - Data to write.
          */
         static function write($id, $data) {
-            if (empty($data) or $data == self::$data)
+            if (self::$deny or empty($data) or $data == self::$data)
                 return;
 
             $sql = SQL::current();

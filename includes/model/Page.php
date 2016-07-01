@@ -196,6 +196,7 @@
         static function delete($page_id, $recursive = false) {
             if ($recursive) {
                 $page = new self($page_id);
+
                 foreach ($page->children as $child)
                     self::delete($child->id);
             }
@@ -238,12 +239,14 @@
                 return false;
 
             $config = Config::current();
+
             if (!$config->clean_urls)
                 return $config->url."/?action=page&amp;url=".urlencode($this->url);
 
             $url = array("", urlencode($this->url));
 
             $page = $this;
+
             while (isset($page->parent_id) and $page->parent_id) {
                 $url[] = urlencode($page->parent->url);
                 $page = $page->parent;

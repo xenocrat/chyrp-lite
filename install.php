@@ -1,11 +1,52 @@
 <?php
-    header("Content-type: text/html; charset=UTF-8");
+    /**
+     * File: Installer
+     *
+     * Chyrp Lite: An ultra-lightweight blogging engine.
+     *
+     * Version:
+     *     v2016.03
+     *
+     * Copyright:
+     *     Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
+     *     Daniel Pimley, and other contributors.
+     *
+     * License:
+     *     Permission is hereby granted, free of charge, to any person
+     *     obtaining a copy of this software and associated documentation
+     *     files (the "Software"), to deal in the Software without
+     *     restriction, including without limitation the rights to use,
+     *     copy, modify, merge, publish, distribute, sublicense, and/or
+     *     sell copies of the Software, and to permit persons to whom the
+     *     Software is furnished to do so, subject to the following
+     *     conditions:
+     *
+     *     The above copyright notice and this permission notice shall be
+     *     included in all copies or substantial portions of the Software.
+     *
+     *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+     *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+     *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+     *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+     *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+     *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+     *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+     *     OTHER DEALINGS IN THE SOFTWARE.
+     *
+     *     Except as contained in this notice, the name(s) of the above
+     *     copyright holders shall not be used in advertising or otherwise
+     *     to promote the sale, use or other dealings in this Software
+     *     without prior written authorization.
+     */
+
+    header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.02");
-    define('CHYRP_CODENAME', "Russet");
+    define('CHYRP_VERSION',  "2016.03");
+    define('CHYRP_CODENAME', "Chestnut");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
+    define('MAIN',           false);
     define('ADMIN',          false);
     define('AJAX',           false);
     define('XML_RPC',        false);
@@ -16,6 +57,7 @@
     define('MAIN_DIR',       dirname(__FILE__));
     define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
     define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
+    define('USE_OB',         true);
     define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
@@ -36,17 +78,36 @@
 
     ob_start();
 
+    # File: Error
+    # Error handling functions.
     require_once INCLUDES_DIR.DIR."error.php";
+
+    # File: Helpers
+    # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
-
+    # File: Config
+    # See Also:
+    #     <Config>
     require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
-    require_once INCLUDES_DIR.DIR."class".DIR."SQL.php";
+
+    # File: SQL
+    # See Also:
+    #     <SQL>
+    require INCLUDES_DIR.DIR."class".DIR."SQL.php";
+
+    # File: Model
+    # See Also:
+    #     <Model>
     require_once INCLUDES_DIR.DIR."class".DIR."Model.php";
 
+    # File: User
+    # See Also:
+    #     <User>
     require_once INCLUDES_DIR.DIR."model".DIR."User.php";
+
+    # Register our autoloader.
+    spl_autoload_register("autoload");
 
     # Has Chyrp Lite been installed?
     $installed = false;
@@ -62,9 +123,7 @@
         # Ask PHP for the default locale and try to load an appropriate translator.
         $locale = Locale::getDefault();
         $language = Locale::getPrimaryLanguage($locale)."_".Locale::getRegion($locale);
-
-        if (file_exists(INCLUDES_DIR.DIR."locale".DIR.$language.".mo"))
-            load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
+        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
     }
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
@@ -94,7 +153,7 @@
         $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
     if (!empty($_POST)) {
-        # Assure an absolute path for the SQLite database
+        # Assure an absolute path for the SQLite database.
         if ($_POST['adapter'] == "sqlite") {
             $db_pwd = realpath(dirname($_POST['database']));
 
@@ -199,7 +258,7 @@
             $config->set("enabled_modules", array());
             $config->set("enabled_feathers", array("text"));
             $config->set("routes", array());
-            $config->set("secure_hashkey", md5(random(32, true)));
+            $config->set("secure_hashkey", md5(random(32)));
 
             # Add SQL settings to the configuration.
             foreach ($settings as $field => $value)
@@ -373,7 +432,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <title><?php echo __("Chyrp Lite Installer"); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
@@ -633,7 +692,7 @@
                 margin-bottom: 1em;
             }
         </style>
-        <script src="includes/lib/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="includes/common.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">
             function toggle_adapter() {
                 if ($("#adapter").val() == "sqlite") {
@@ -738,7 +797,7 @@ foreach ($errors as $error)
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
                         <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>
-                            <?php echo when("%I:%M %p on %B %d, %Y", $zone["now"], true); ?> &mdash;
+                            <?php echo when(__("%I:%M %p on %B %d, %Y"), $zone["now"], true); ?> &mdash;
                             <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone["name"]); ?>
                         </option>
                     <?php endforeach; ?>

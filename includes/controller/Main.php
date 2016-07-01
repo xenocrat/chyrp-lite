@@ -67,7 +67,7 @@
             if (in_array($route->arg[0], array("__construct", "parse", "post_from_url", "display", "current")))
                 show_404();
 
-            # Feed
+            # Discover feeds.
             if (preg_match("/\/feed\/?$/", $route->request)) {
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
@@ -76,7 +76,7 @@
                     return $route->action = "index";
             }
 
-            # Paginator
+            # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $page_matches)) {
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
@@ -85,15 +85,15 @@
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
             }
 
-            # Viewing a post by its ID
+            # Viewing a post by its ID.
             if ($route->arg[0] == "id") {
                 $_GET['id'] = $route->arg[1];
                 return $route->action = "id";
             }
 
-            # Archive
+            # Archive.
             if ($route->arg[0] == "archive") {
-                # Make sure they're numeric; there might be a /page/ in there.
+                # Make sure they're numeric; could be a "/page/" in there.
                 if (isset($route->arg[1]) and is_numeric($route->arg[1]))
                     $_GET['year'] = $route->arg[1];
                 if (isset($route->arg[2]) and is_numeric($route->arg[2]))
@@ -104,7 +104,7 @@
                 return $route->action = "archive";
             }
 
-            # Searching
+            # Search.
             if ($route->arg[0] == "search") {
                 if (isset($route->arg[1]))
                     $_GET['query'] = $route->arg[1];
@@ -139,6 +139,7 @@
                     $action = $params[0];
 
                     array_shift($params);
+
                     foreach ($params as $param) {
                         $split = explode("=", $param);
                         $_GET[$split[0]] = oneof(@$split[1], "");
@@ -300,7 +301,7 @@
                                __("Archive"));
             } else {
                 if (!is_numeric($_GET['year']) or !is_numeric($_GET['month']))
-                    error(__("Error"), __("Please enter a valid year and month."));
+                    error(__("Error"), __("Please enter a valid year and month."), null, 422);
 
                 $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
 
@@ -401,7 +402,8 @@
                 $this->feed = false;
 
             if (!$post->theme_exists())
-                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."));
+                error(__("Error"),
+                      __("The post cannot be displayed because the template for this feather was not found."), null, 501);
 
             if ($post->status == "draft")
                 Flash::message(__("This post is a draft."));
@@ -530,15 +532,15 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Missing Token"), __("You must supply an authentication token."));
+                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                error(__("Unknown User"), __("That username isn't in our database."));
+                show_404(__("Unknown User"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Invalid Token"), __("The authentication token is not valid."));
+                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
 
             if (!$user->approved) {
                 SQL::current()->update("users",
@@ -559,15 +561,15 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Missing Token"), __("You must supply an authentication token."));
+                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
             $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
 
             if ($user->no_results)
-                error(__("Unknown User"), __("That username isn't in our database."));
+                show_404(__("Unknown User"), __("That username isn't in our database."));
 
             if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Invalid Token"), __("The authentication token is not valid."));
+                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
 
             $new_password = random(8);
 
@@ -611,12 +613,14 @@
                         Flash::notice(__("You must activate your account before you log in."), "/");
 
                     $_SESSION['user_id'] = $user->id;
+                    $_SESSION['cookies_notified'] = true;
 
                     if (!isset($redirect)) {
                         $redirect = oneof(@$_SESSION['redirect_to'], "/");
                         unset($_SESSION['redirect_to']);
                     }
 
+                    Trigger::current()->call("user_logged_in", $user);
                     Flash::notice(__("Logged in."), $redirect);
                 }
             }
@@ -632,8 +636,12 @@
             if (!logged_in())
                 Flash::notice(__("You aren't logged in."), "/");
 
+            $cookies_notified = !empty($_SESSION['cookies_notified']);
+
             session_destroy();
             session();
+
+            $_SESSION['cookies_notified'] = $cookies_notified;
 
             Flash::notice(__("Logged out."), "/");
         }
@@ -744,6 +752,9 @@
          * Grabs posts for the feed.
          */
         public function feed($posts = null) {
+            $config = Config::current();
+            $trigger = Trigger::current();
+
             $result = SQL::current()->select("posts",
                                              "posts.id",
                                              array("posts.status" => "public"),
@@ -760,8 +771,6 @@
             else
                 fallback($posts, array());
 
-            header("Content-Type: application/atom+xml; charset=UTF-8");
-
             if (!is_array($posts))
                 $posts = $posts->paginated;
 
@@ -771,7 +780,37 @@
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
 
-            require INCLUDES_DIR.DIR."feed.php";
+            $atom = new AtomFeed();
+
+            $atom->open($config->name,
+                        $config->description,
+                        null,
+                        $latest_timestamp);
+
+            foreach ($posts as $post) {
+                $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
+
+                $tagged = substr(strstr(url("id/".$post->id), "//"), 2);
+                $tagged = str_replace("#", "/", $tagged);
+                $tagged = preg_replace("/(".preg_quote(parse_url($post->url(), PHP_URL_HOST)).")/",
+                                       "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
+
+                $url = $post->url();
+                $trigger->filter($url, "feed_url", $post);
+
+                $atom->entry(oneof($post->title(), ucfirst($post->feather)),
+                             $tagged,
+                             $post->feed_content(),
+                             $url,
+                             $post->created_at,
+                             $updated,
+                             ((!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : null),
+                             ((!$post->user->no_results) ? $post->user->website : null));
+
+                $trigger->call("feed_item", $post);
+            }
+
+            $atom->close();
         }
 
         /**
@@ -786,18 +825,20 @@
          *     $title - The title for the page.
          */
         public function display($template, $context = array(), $title = "") {
+            $config = Config::current();
+            $route = Route::current();
+            $trigger = Trigger::current();
+            $theme = Theme::current();
+
             if (is_array($template)) {
                 foreach ($template as $try)
-                    if (file_exists(THEME_DIR.DIR.$try.".twig"))
+                    if ($theme->file_exists($try))
                         return $this->display($try, $context, $title);
 
                 error(__("Twig Error"), __("No files exist in the supplied array of fallbacks."), debug_backtrace());
             }
 
             $this->displayed = true;
-
-            $route = Route::current();
-            $trigger = Trigger::current();
 
             # Serve feeds.
             if ($this->feed) {
@@ -809,9 +850,6 @@
             }
 
             $this->context = array_merge($context, $this->context);
-
-            $config = Config::current();
-            $theme = Theme::current();
 
             $theme->title = $title;
 
@@ -834,24 +872,13 @@
             $this->context["GET"]          = $_GET;
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["captcha"]      = generate_captcha();
+            $this->context["sql_debug"]   =& SQL::current()->debug;
 
             $this->context["visitor"]->logged_in = logged_in();
 
-            $this->context["enabled_modules"] = array();
-
-            foreach ($config->enabled_modules as $module)
-                $this->context["enabled_modules"][$module] = true;
-
-            $context["enabled_feathers"] = array();
-
-            foreach ($config->enabled_feathers as $feather)
-                $this->context["enabled_feathers"][$feather] = true;
-
-            $this->context["sql_debug"] =& SQL::current()->debug;
-
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
-            if ($config->cookies_notification and !isset($_SESSION['cookies_notified']) and !logged_in()) {
+            if ($config->cookies_notification and empty($_SESSION['cookies_notified'])) {
                 Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
                 $_SESSION['cookies_notified'] = true;
             }

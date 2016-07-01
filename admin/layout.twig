@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ site.locale | split('_') | first }}">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="initial-scale = 1.0">
 <title>{{ site.name }}: {% block title %}{{ title }}{% endblock %}</title>
@@ -10,7 +10,7 @@
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
 <link rel="stylesheet" href="{{ site.chyrp_url }}/admin/layout.css" type="text/css" media="all">
 <!-- JavaScripts -->
-<script src="{{ site.chyrp_url }}/includes/lib/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="{{ site.chyrp_url }}/includes/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="{{ site.chyrp_url }}/admin/admin.js.php?action={{ route.action }}" type="text/javascript" charset="utf-8"></script>
 {{ trigger.call("admin_head") }}
 </head>
@@ -44,13 +44,13 @@
 </ul>
 <div id="content" role="main">
 {% for notice in flash.notices %}
-<p role="alert" class="message yay">{{ notice }}</p>
+<p role="alert" class="flash notice">{{ notice }}</p>
 {% endfor %}
 {% for warning in flash.warnings %}
-<p role="alert" class="message boo">{{ warning }}</p>
+<p role="alert" class="flash warning">{{ warning }}</p>
 {% endfor %}
 {% for message in flash.messages %}
-<p role="alert" class="message">{{ message }}</p>
+<p role="alert" class="flash message">{{ message }}</p>
 {% endfor %}
 {% block content %}{% endblock %}
 </div>

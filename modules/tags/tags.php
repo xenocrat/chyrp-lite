@@ -2,8 +2,6 @@
     class Tags extends Modules {
         public function __init() {
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
-            $this->addAlias("javascript", "tagsJS");
-            $this->addAlias("admin_javascript", "tagsJS");
         }
 
         static function __install() {
@@ -25,21 +23,11 @@
         }
 
         private function tags_serialize($tags) {
-            $serialized = json_encode($tags);
-
-            if (json_last_error())
-                error(__("Error"), _f("Failed to serialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
-
-            return $serialized;
+            return json_set($tags);
         }
 
         private function tags_unserialize($tags) {
-            $unserialized = json_decode($tags, true);
-
-            if (json_last_error() and DEBUG)
-                error(__("Error"), _f("Failed to unserialize tags because of JSON error: <code>%s</code>", json_last_error_msg(), "tags"));
-
-            return $unserialized;
+            return json_get($tags, true);
         }
 
         public function post_options($fields, $post = null) {
@@ -159,14 +147,16 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage tags.", "tags"));
 
             $sql = SQL::current();
+            $visitor = Visitor::current();
 
             $tags = array();
             $names = array();
+
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags"))->fetchAll() as $tag) {
-                $post_tags = self::tags_unserialize($tag["value"]);
 
+                $post_tags = self::tags_unserialize($tag["value"]);
                 $tags = array_merge($tags, $post_tags);
 
                 foreach ($post_tags as $name => $clean)
@@ -174,13 +164,14 @@
             }
 
             $popularity = array_count_values($names);
-
             $cloud = array();
+
             if (!empty($popularity)) {
                 $max_qty = max($popularity);
                 $min_qty = min($popularity);
 
                 $spread = $max_qty - $min_qty;
+
                 if ($spread == 0)
                     $spread = 1;
 
@@ -190,15 +181,17 @@
                     $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
                                      "name" => $tag,
-                                     "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"), $count, $tag),
+                                     "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
+                                                        $count, fix($tag, true)),
                                      "clean" => $tags[$tag],
                                      "url" => url("tag/".$tags[$tag], MainController::current()));
+
+                usort($cloud, array($this, "sort_tags_name_asc"));
             }
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(self::tags_safe($_GET['query']), "post_attributes.value LIKE :query");
-
-            $visitor = Visitor::current();
+            list($where, $params) = keywords(self::tags_safe($_GET['query']),
+                                             "post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
 
             if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where["user_id"] = $visitor->id;
@@ -229,10 +222,9 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
             if (empty($_GET['clean']))
-                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
 
             $sql = SQL::current();
-
             $tags = array();
             $names = array();
 
@@ -240,8 +232,8 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
-                $post_tags = self::tags_unserialize($tag["value"]);
 
+                $post_tags = self::tags_unserialize($tag["value"]);
                 $tags = array_merge($tags, $post_tags);
 
                 foreach ($post_tags as $name => $clean)
@@ -264,7 +256,7 @@
 
         public function admin_edit_tags($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit tags.", "tags"));
+                error(__("No ID Specified"), __("An ID is required to edit tags.", "tags"), null, 400);
 
             $post = new Post($_GET['id']);
 
@@ -282,7 +274,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update tags.", "tags"));
+                error(__("No ID Specified"), __("An ID is required to update tags.", "tags"), null, 400);
 
             $post = new Post($_POST['id']);
 
@@ -305,13 +297,12 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['original']) or empty($_POST['name']))
-                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
 
             $_POST['name'] = str_replace(",", " ", $_POST['name']);
             $_POST['name'] = is_numeric($_POST['name']) ? "'".$_POST['name']."'" : $_POST['name'] ;
 
             $sql = SQL::current();
-
             $tags = array();
             $clean = array();
 
@@ -319,9 +310,9 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_name_match($_POST['original'])))->fetchAll() as $tag) {
+
                 $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['original']]);
-
                 $tags[$_POST['name']] = sanitize($_POST['name']);
 
                 $sql->update("post_attributes",
@@ -335,10 +326,9 @@
 
         public function admin_delete_tag($admin) {
             if (empty($_GET['clean']))
-                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
             $sql = SQL::current();
-
             $tags = array();
             $names = array();
 
@@ -346,8 +336,8 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
-                $post_tags = self::tags_unserialize($tag["value"]);
 
+                $post_tags = self::tags_unserialize($tag["value"]);
                 $tags = array_merge($tags, $post_tags);
 
                 foreach ($post_tags as $name => $clean)
@@ -376,7 +366,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['name']))
-                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"));
+                error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_tags");
@@ -387,6 +377,7 @@
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_name_match($_POST['name'])))->fetchAll() as $tag)  {
+
                 $tags = self::tags_unserialize($tag["value"]);
                 unset($tags[$_POST['name']]);
 
@@ -430,6 +421,7 @@
                                          "value",
                                          array("name" => "tags",
                                                "post_id" => $post_id));
+
                     if ($tags and $value = $tags->fetchColumn())
                         $tags = self::tags_unserialize($value);
                     else
@@ -459,9 +451,7 @@
                                         __("No Tag", "tags"));
 
             $sql = SQL::current();
-
-            $tags = explode(" ", $_GET['name']);
-
+            $tags = explode(" ", $_GET['name']); # Detect multiple tags (clean tag names have no spaces).
             $likes = array();
 
             foreach ($tags as $name)
@@ -508,6 +498,7 @@
             if ($sql->count("post_attributes", array("name" => "tags")) > 0) {
                 $tags = array();
                 $names = array();
+
                 foreach($sql->select("posts",
                                      "post_attributes.*",
                                      array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
@@ -516,8 +507,8 @@
                                      null, null, null,
                                      array(array("table" => "post_attributes",
                                                  "where" => "post_id = posts.id")))->fetchAll() as $tag) {
-                    $post_tags = self::tags_unserialize($tag["value"]);
 
+                    $post_tags = self::tags_unserialize($tag["value"]);
                     $tags = array_merge($tags, $post_tags);
 
                     foreach ($post_tags as $name => $clean)
@@ -531,7 +522,6 @@
 
                 $max_qty = max($popularity);
                 $min_qty = min($popularity);
-
                 $spread = $max_qty - $min_qty;
 
                 if ($spread == 0)
@@ -545,10 +535,12 @@
                     $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
                                        "name" => $tag,
-                                       "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"), $count, $tag),
+                                       "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
+                                                          $count, fix($tag, true)),
                                        "clean" => $tags[$tag],
                                        "url" => url("tag/".$tags[$tag], $main));
 
+                usort($context, array($this, "sort_tags_name_asc"));
                 $main->display("pages".DIR."tags", array("tag_cloud" => $context), __("Tags", "tags"));
             }
         }
@@ -576,6 +568,7 @@
                 return array();
 
             $linked = array();
+
             foreach ($tags as $tag => $clean)
                 $linked[] = '<a class="tag" href="'.url("tag/".urlencode($clean), MainController::current()).'" rel="tag">'.$tag.'</a>';
 
@@ -611,19 +604,19 @@
         }
 
         private function sort_tags_asc($a, $b) {
-            return $this->mb_strcasecmp($a, $b, "UTF-8");
+            return $this->mb_strcasecmp($a, $b);
         }
 
         private function sort_tags_desc($a, $b) {
-            return $this->mb_strcasecmp($b, $a, "UTF-8");
+            return $this->mb_strcasecmp($b, $a);
         }
 
         private function sort_tags_name_asc($a, $b) {
-            return $this->mb_strcasecmp($a["name"], $b["name"], "UTF-8");
+            return $this->mb_strcasecmp($a["name"], $b["name"]);
         }
 
         private function sort_tags_name_desc($a, $b) {
-            return $this->mb_strcasecmp($b["name"], $a["name"], "UTF-8");
+            return $this->mb_strcasecmp($b["name"], $a["name"]);
         }
 
         private function sort_tags_popularity_asc($a, $b) {
@@ -634,15 +627,12 @@
             return $a["popularity"] < $b["popularity"];
         }
 
-        private function mb_strcasecmp($str1, $str2, $encoding = null) {
+        private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8") {
             $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
             $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
 
             if (!function_exists("mb_strtoupper"))
                 return substr_compare(strtoupper($str1), strtoupper($str2), 0);
-
-            if (empty($encoding))
-                $encoding = mb_internal_encoding();
 
             return substr_compare(mb_strtoupper($str1, $encoding), mb_strtoupper($str2, $encoding), 0);
         }
@@ -664,7 +654,6 @@
 
             while ($attr = $attrs->fetchObject()) {
                 $post_tags = self::tags_unserialize($attr->value);
-
                 $tags = array_merge($tags, $post_tags);
 
                 foreach ($post_tags as $name => $clean)
@@ -675,7 +664,6 @@
                 return array();
 
             $popularity = array_count_values($names);
-
             $list = array();
 
             foreach ($popularity as $name => $number)
@@ -702,7 +690,7 @@
 
         private function tags_safe($text) {
             # Match escaping of JSON encoded data
-            $text = trim(json_encode($text), "\"");
+            $text = trim(json_set($text), "\"");
 
             # Return string escaped for SQL query
             return SQL::current()->escape($text, false);
@@ -715,7 +703,7 @@
                 echo "        <category scheme=\"".$config->url."/tag/\" term=\"".$clean."\" label=\"".fix($tag)."\" />\n";
         }
 
-        public function tagsJS() {
+        public function admin_javascript() {
             include MODULES_DIR.DIR."tags".DIR."javascript.php";
         }
     }

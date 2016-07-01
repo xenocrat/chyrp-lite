@@ -25,7 +25,7 @@
  * Provides a simple gettext replacement that works independently from
  * the system's gettext abilities.
  * It can read MO files and use them for translating strings.
- * The files are passed to gettext_reader as a Stream (see streams.php)
+ * The files are passed to gettext_Reader as a Stream from string or file.
  *
  * This version has the ability to cache all strings and translations to
  * speed up the string lookup.
@@ -33,11 +33,11 @@
  * second parameter in the constructor (e.g. whenusing very large MO files
  * that you don't want to keep in memory)
  */
-class gettext_reader {
+class gettext_Reader {
   //public:
-   var $error = 0; // public variable that holds error code (0 if no error)
+  var $error = 0; // public variable that holds error code (0 if no error)
 
-   //private:
+  //private:
   var $BYTEORDER = 0;        // 0: low endian, 1: big endian
   var $STREAM = NULL;
   var $short_circuit = false;
@@ -50,9 +50,45 @@ class gettext_reader {
   var $table_translations = NULL;  // table for translated strings (offsets)
   var $cache_translations = NULL;  // original -> translation mapping
 
-
   /* Methods */
 
+  /**
+   * Constructor
+   *
+   * @param object Reader the StreamReader object
+   * @param boolean enable_cache Enable or disable caching of strings (default on)
+   */
+  function __construct($Reader, $enable_cache = true) {
+    // If there isn't a StreamReader, turn on short circuit mode.
+    if (! $Reader || isset($Reader->error) ) {
+      $this->short_circuit = true;
+      return;
+    }
+
+    // Caching can be turned off
+    $this->enable_cache = $enable_cache;
+
+    $MAGIC1 = "\x95\x04\x12\xde";
+    $MAGIC2 = "\xde\x12\x04\x95";
+
+    $this->STREAM = $Reader;
+    $magic = $this->read(4);
+    if ($magic == $MAGIC1) {
+      $this->BYTEORDER = 1;
+    } elseif ($magic == $MAGIC2) {
+      $this->BYTEORDER = 0;
+    } else {
+      $this->error = 1; // not MO file
+      return false;
+    }
+
+    // FIXME: Do we care about revision? We should.
+    $revision = $this->readint();
+
+    $this->total = $this->readint();
+    $this->originals = $this->readint();
+    $this->translations = $this->readint();
+  }
 
   /**
    * Reads a 32bit Integer from the Stream
@@ -90,44 +126,6 @@ class gettext_reader {
         // big endian
         return unpack('N'.$count, $this->STREAM->read(4 * $count));
       }
-  }
-
-  /**
-   * Constructor
-   *
-   * @param object Reader the StreamReader object
-   * @param boolean enable_cache Enable or disable caching of strings (default on)
-   */
-  function gettext_reader($Reader, $enable_cache = true) {
-    // If there isn't a StreamReader, turn on short circuit mode.
-    if (! $Reader || isset($Reader->error) ) {
-      $this->short_circuit = true;
-      return;
-    }
-
-    // Caching can be turned off
-    $this->enable_cache = $enable_cache;
-
-    $MAGIC1 = "\x95\x04\x12\xde";
-    $MAGIC2 = "\xde\x12\x04\x95";
-
-    $this->STREAM = $Reader;
-    $magic = $this->read(4);
-    if ($magic == $MAGIC1) {
-      $this->BYTEORDER = 1;
-    } elseif ($magic == $MAGIC2) {
-      $this->BYTEORDER = 0;
-    } else {
-      $this->error = 1; // not MO file
-      return false;
-    }
-
-    // FIXME: Do we care about revision? We should.
-    $revision = $this->readint();
-
-    $this->total = $this->readint();
-    $this->originals = $this->readint();
-    $this->translations = $this->readint();
   }
 
   /**
@@ -432,5 +430,3 @@ class gettext_reader {
 
   }
 }
-
-?>

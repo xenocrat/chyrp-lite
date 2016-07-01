@@ -5,7 +5,7 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2016.02
+     *     v2016.03
      *
      * Copyright:
      *     Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2016.02");
+    define('CHYRP_VERSION', "2016.03");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Russet");
+    define('CHYRP_CODENAME', "Chestnut");
 
     # Constant: CACHE_TWIG
     # Override DEBUG to enable Twig template caching.
@@ -60,6 +60,11 @@
     if (!defined('JAVASCRIPT'))
         define('JAVASCRIPT', false);
 
+    # Constant: MAIN
+    # Is this being run from index.php?
+    if (!defined('MAIN'))
+        define('MAIN', false);
+
     # Constant: ADMIN
     # Is the user in the admin area?
     if (!defined('ADMIN'))
@@ -68,7 +73,7 @@
     # Constant: AJAX
     # Is this being run from an AJAX request?
     if (!defined('AJAX'))
-        define('AJAX', isset($_POST['ajax']) and $_POST['ajax'] == "true");
+        define('AJAX', !empty($_POST['ajax']));
 
     # Constant: XML_RPC
     # Is this being run from XML-RPC?
@@ -86,10 +91,6 @@
     # Constant: TESTER
     # Is the site being run by the automated tester?
     define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-
-    # Constant: INDEX
-    # Is the requested file /index.php?
-    define('INDEX', (pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_BASENAME) == "index.php") and !ADMIN);
 
     # Constant: DIR
     # Native directory separator.
@@ -131,15 +132,31 @@
     # URL to the list of releases.
     define('UPDATE_PAGE', "https://github.com/xenocrat/chyrp-lite/releases");
 
+    # Constant: USE_OB
+    # Use output buffering?
+    if (!defined('USE_OB'))
+        define('USE_OB', true);
+
+    # Constant: HTTP_ACCEPT_DEFLATE
+    # Does the user agent accept deflate encoding?
+    if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"))
+        define('HTTP_ACCEPT_DEFLATE', true);
+    else
+        define('HTTP_ACCEPT_DEFLATE', false);
+
+    # Constant: HTTP_ACCEPT_GZIP
+    # Does the user agent accept gzip encoding?
+    if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"))
+        define('HTTP_ACCEPT_GZIP', true);
+    else
+        define('HTTP_ACCEPT_GZIP', false);
+
     # Constant: USE_ZLIB
-    # Use zlib to provide GZIP compression if the feature is supported and not buggy.
-    # See Also: http://bugs.php.net/55544
+    # Use zlib to provide content compression? See Also: http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
-        if (extension_loaded("zlib") and
-            !ini_get("zlib.output_compression") and
-            isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-            substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") and
-            (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<")))
+        if (!AJAX and (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib") and
+            !ini_get("zlib.output_compression") and (version_compare(PHP_VERSION, "5.4.6", ">=") or
+                                                     version_compare(PHP_VERSION, "5.4.0", "<")))
             define('USE_ZLIB', true);
         else
             define('USE_ZLIB', false);
@@ -163,12 +180,19 @@
         else
             error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
-    # Use GZip compression if available.
-    if (USE_ZLIB and !AJAX) {
-        ob_start("ob_gzhandler");
-        header("Content-Encoding: gzip");
-    } else
-        ob_start();
+    # Start output buffering and set header.
+    if (USE_OB) {
+        if (USE_ZLIB)
+            ob_start("ob_gzhandler");
+        else
+            ob_start();
+
+        if (USE_ZLIB and HTTP_ACCEPT_DEFLATE)
+            header("Content-Encoding: deflate");
+
+        if (USE_ZLIB and HTTP_ACCEPT_GZIP)
+            header("Content-Encoding: gzip");
+    }
 
     # File: Error
     # Error handling functions.
@@ -177,14 +201,6 @@
     # File: Helpers
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
-
-    # File: Gettext
-    # Gettext library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
-
-    # File: Streams
-    # Streams library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
 
     # File: Config
     # See Also:
@@ -286,9 +302,13 @@
     #     <Feather>
     require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
 
-    # Redirect to the installer if there is no config.
-    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+    # Handle a missing config file with redirect or error.
+    if (!file_exists(INCLUDES_DIR.DIR."config.json.php")) {
+        if (!MAIN)
+            error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
+
         redirect("install.php");
+    }
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
@@ -317,7 +337,7 @@
     # Begin the session.
     session();
 
-    # Set the locale for gettext.
+    # Set the locale.
     set_locale($config->locale);
 
     # Load the translation engine.
@@ -328,11 +348,11 @@
     define('PREVIEWING', !ADMIN and !empty($_SESSION['theme']));
 
     # Constant: THEME_DIR
-    # Absolute path to /themes/(current/previewed theme)
+    # Absolute path to the theme (current or previewed).
     define('THEME_DIR', MAIN_DIR.DIR."themes".DIR.(PREVIEWING ? $_SESSION['theme'] : $config->theme));
 
     # Constant: THEME_URL
-    # URL to /themes/(current/previewed theme)
+    # Absolute URL to the theme (current or previewed).
     define('THEME_URL', $config->chyrp_url."/themes/".(PREVIEWING ? $_SESSION['theme'] : $config->theme));
 
     # Initialize the theme.
@@ -354,10 +374,9 @@
     $trigger = Trigger::current();
 
     # Filter the visitor immediately after the Modules are initialized.
-    # Example usage scenario: custom auth systems (e.g. OpenID)
     $trigger->filter($visitor, "visitor");
 
-    # First general-purpose trigger. There are many cases you may want to use @route_init@ instead of this.
+    # First general-purpose trigger.
     $trigger->call("runtime");
 
     # Set the content-type and charset.
@@ -366,7 +385,7 @@
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else
-        header("Content-type: text/html; charset=UTF-8");
+        header("Content-Type: text/html; charset=UTF-8");
 
     # Be sociable but safe if the site is using the HTTPS protocol.
     if (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443)

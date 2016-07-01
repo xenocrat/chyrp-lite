@@ -17,11 +17,12 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!in_array("text", $config->enabled_feathers))
-                error(__("Missing Feather", "importers"), __("Importing from WordPress requires the Text feather to be installed and enabled.", "importers"));
+            if (!feather_enabled("text"))
+                error(__("Missing Feather", "importers"),
+                      __("Importing from WordPress requires the Text feather to be installed and enabled.", "importers"), null, 501);
 
             if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
-                error(__("Error"), __("You must select a WordPress export file.", "importers"));
+                error(__("Error"), __("You must select a WordPress export file.", "importers"), null, 422);
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
@@ -176,20 +177,21 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!in_array("text", $config->enabled_feathers) or
-                !in_array("video", $config->enabled_feathers) or
-                !in_array("photo", $config->enabled_feathers) or
-                !in_array("quote", $config->enabled_feathers) or
-                !in_array("link", $config->enabled_feathers))
-                error(__("Missing Feather", "importers"), __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"));
+            if (!feather_enabled("text") or
+                !feather_enabled("video") or
+                !feather_enabled("photo") or
+                !feather_enabled("quote") or
+                !feather_enabled("link"))
+                error(__("Missing Feather", "importers"),
+                      __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"), null, 501);
 
             $_POST['tumblr_url'] = trim($_POST['tumblr_url']);
 
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
-                error(__("Error"), __("Invalid URL.", "importers"));
+                error(__("Error"), __("Invalid URL.", "importers"), null, 422);
 
             if (!preg_match("/^(http(s)?:\/\/)?(www\.)?[a-z0-9][a-z0-9-]+[a-z0-9]+\.tumblr\.com(\/)?$/i", $_POST['tumblr_url']))
-                error(__("Error"), __("Invalid Tumblr URL.", "importers"));
+                error(__("Error"), __("Invalid Tumblr URL.", "importers"), null, 422);
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
@@ -317,16 +319,16 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['host']))
-                error(__("Error"), __("Host cannot be empty.", "importers"));
+                error(__("Error"), __("Host cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['username']))
-                error(__("Error"), __("Username cannot be empty.", "importers"));
+                error(__("Error"), __("Username cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['password']))
-                error(__("Error"), __("Password cannot be empty.", "importers"));
+                error(__("Error"), __("Password cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['database']))
-                error(__("Error"), __("Database cannot be empty.", "importers"));
+                error(__("Error"), __("Database cannot be empty.", "importers"), null, 422);
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
@@ -344,7 +346,7 @@
             $mysqli->query("SET NAMES 'utf8'");
 
             $prefix = $mysqli->real_escape_string($_POST['prefix']);
-            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error", "importers"), $mysqli->error);
+            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
 
             $posts = array();
             while ($post = $result->fetch_assoc())
@@ -409,16 +411,16 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['host']))
-                error(__("Error"), __("Host cannot be empty.", "importers"));
+                error(__("Error"), __("Host cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['username']))
-                error(__("Error"), __("Username cannot be empty.", "importers"));
+                error(__("Error"), __("Username cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['password']))
-                error(__("Error"), __("Password cannot be empty.", "importers"));
+                error(__("Error"), __("Password cannot be empty.", "importers"), null, 422);
 
             if (empty($_POST['database']))
-                error(__("Error"), __("Database cannot be empty.", "importers"));
+                error(__("Error"), __("Database cannot be empty.", "importers"), null, 422);
 
             if (ini_get("memory_limit") < 20)
                 ini_set("memory_limit", "20M");
@@ -436,7 +438,7 @@
             $mysqli->query("SET NAMES 'utf8'");
 
             $authors = array();
-            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error", "importers"), $mysqli->error);
+            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
 
             while ($author = $result->fetch_assoc()) {
                 # Try to figure out if this author is the same as the person doing the import.
@@ -447,21 +449,17 @@
                     || $author["author_email"]    == $visitor->email) {
                     $users[$author["author_id"]] = $visitor;
                 } else {
-                    $users[$author["author_id"]] = User::add(
-                        $author["author_name"],
-                        $author["author_password"],
-                        $author["author_email"],
-                        ($author["author_nickname"] != $author["author_name"] ?
-                                                       $author["author_nickname"] : ""),
-                        $author["author_url"],
-                        ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
-                        $author["author_created_on"],
-                        false
-                    );
+                    $users[$author["author_id"]] = User::add($author["author_name"],
+                                                             $author["author_password"],
+                                                             $author["author_email"],
+                                                             ($author["author_nickname"] != $author["author_name"] ? $author["author_nickname"] : ""),
+                                                             $author["author_url"],
+                                                             ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
+                                                             $author["author_created_on"]);
                 }
             }
 
-            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error", "importers"), $mysqli->error);
+            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
 
             $posts = array();
             while ($post = $result->fetch_assoc())
@@ -520,7 +518,7 @@
 ?>
 <hr>
 <h2>WordPress</h2>
-<form id="import_wordpress_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_wordpress"; ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form id="import_wordpress_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_wordpress"; ?>" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="xml_file"><?php echo __("eXtended .XML File", "importers"); ?></label>
@@ -542,7 +540,7 @@
 </form>
 <hr>
 <h2>Tumblr</h2>
-<form id="import_tumblr_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_tumblr"; ?>" method="post" accept-charset="utf-8">
+<form id="import_tumblr_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_tumblr"; ?>" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="tumblr_url"><?php echo __("Your Tumblr URL", "importers"); ?></label>
@@ -560,7 +558,7 @@
 </form>
 <hr>
 <h2>TextPattern</h2>
-<form id="import_textpattern_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_textpattern"; ?>" method="post" accept-charset="utf-8">
+<form id="import_textpattern_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_textpattern"; ?>" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="host"><?php echo __("Host", "importers"); ?></label>
@@ -599,7 +597,7 @@
 </form>
 <hr>
 <h2>MovableType</h2>
-<form id="import_movabletype_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_movabletype"; ?>" method="post" accept-charset="utf-8">
+<form id="import_movabletype_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_movabletype"; ?>" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="host"><?php echo __("Host", "importers"); ?></label>

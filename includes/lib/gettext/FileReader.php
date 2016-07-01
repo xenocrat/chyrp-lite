@@ -20,73 +20,12 @@
 
 */
 
-
-  // Simple class to wrap file streams, string streams, etc.
-  // seek is essential, and it should be byte stream
-class StreamReader {
-  // should return a string [FIXME: perhaps return array of bytes?]
-  function read($bytes) {
-    return false;
-  }
-
-  // should return new position
-  function seekto($position) {
-    return false;
-  }
-
-  // returns current position
-  function currentpos() {
-    return false;
-  }
-
-  // returns length of entire stream (limit for seekto()s)
-  function length() {
-    return false;
-  }
-};
-
-class StringReader {
-  var $_pos;
-  var $_str;
-
-  function StringReader($str='') {
-    $this->_str = $str;
-    $this->_pos = 0;
-  }
-
-  function read($bytes) {
-    $data = substr($this->_str, $this->_pos, $bytes);
-    $this->_pos += $bytes;
-    if (strlen($this->_str)<$this->_pos)
-      $this->_pos = strlen($this->_str);
-
-    return $data;
-  }
-
-  function seekto($pos) {
-    $this->_pos = $pos;
-    if (strlen($this->_str)<$this->_pos)
-      $this->_pos = strlen($this->_str);
-    return $this->_pos;
-  }
-
-  function currentpos() {
-    return $this->_pos;
-  }
-
-  function length() {
-    return strlen($this->_str);
-  }
-
-};
-
-
-class FileReader {
+class gettext_FileReader {
   var $_pos;
   var $_fd;
   var $_length;
 
-  function FileReader($filename) {
+  function __construct($filename) {
     if (file_exists($filename)) {
 
       $this->_length=filesize($filename);
@@ -137,31 +76,4 @@ class FileReader {
   function close() {
     fclose($this->_fd);
   }
-
-};
-
-// Preloads entire file in memory first, then creates a StringReader
-// over it (it assumes knowledge of StringReader internals)
-class CachedFileReader extends StringReader {
-  function CachedFileReader($filename) {
-    if (file_exists($filename)) {
-
-      $length=filesize($filename);
-      $fd = fopen($filename,'rb');
-
-      if (!$fd) {
-        $this->error = 3; // Cannot read file, probably permissions
-        return false;
-      }
-      $this->_str = fread($fd, $length);
-      fclose($fd);
-
-    } else {
-      $this->error = 2; // File doesn't exist
-      return false;
-    }
-  }
-};
-
-
-?>
+}

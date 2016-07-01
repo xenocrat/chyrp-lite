@@ -4,13 +4,12 @@
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "photo"),
-                                  "optional" => true,
-                                  "preview" => "markup_title"));
+                                  "optional" => true));
             $this->setField(array("attr" => "photo",
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "photo")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "photo")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "photo"),
@@ -29,7 +28,7 @@
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
                 $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"));
             else
-                error(__("Error"), __("You did not select a photo to upload.", "photo"));
+                error(__("Error"), __("You did not select a photo to upload.", "photo"), null, 422);
                 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
@@ -74,10 +73,15 @@
             if ($post->feather != "photo")
                 return;
 
+            $trigger = Trigger::current();
             $filepath = uploaded($post->filename, false);
 
-            if (file_exists($filepath))
-                unlink($filepath);
+            if (file_exists($filepath)) {
+                if ($trigger->exists("delete_upload"))
+                    $trigger->call("delete_upload", $post->filename);
+                else
+                    unlink($filepath);
+            }
         }
 
         public function filter_post($post) {
@@ -89,16 +93,17 @@
 
         public function image_tag($post, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
             $config = Config::current();
+            $safename = urlencode($post->filename);
             $alt = !empty($post->alt_text) ? fix($post->alt_text, true) : $post->filename ;
 
-            # Source set for responsive images
-            $srcset = array($config->chyrp_url.'/includes/thumb.php?file='.urlencode($post->filename).'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
-                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($post->filename).'&amp;max_width=960&amp;'.$more_args.' 960w',
-                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($post->filename).'&amp;max_width=640&amp;'.$more_args.' 640w',
-                            $config->chyrp_url.'/includes/thumb.php?file='.urlencode($post->filename).'&amp;max_width=320&amp;'.$more_args.' 320w');
+            # Source set for responsive images.
+            $srcset = array($config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
+                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=960&amp;'.$more_args.' 960w',
+                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=640&amp;'.$more_args.' 640w',
+                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=320&amp;'.$more_args.' 320w');
 
             $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.'"';
-            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file='.urlencode($post->filename);
+            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file='.$safename;
             $tag.= '&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'"';
             $tag.= ' alt="'.$alt.'" class="image">';
 
@@ -113,10 +118,9 @@
         public function add_option($options, $post = null) {
             if (isset($post) and $post->feather != "photo")
                 return;
-            elseif (Route::current()->action == "write_post")
-                if (!isset($_GET['feather']) and Config::current()->enabled_feathers[0] != "photo" or
-                    isset($_GET['feather']) and $_GET['feather'] != "photo")
-                    return;
+
+            if (Route::current()->action == "write_post" and $_GET['feather'] != "photo")
+                return;
 
             $options[] = array("attr" => "option[alt_text]",
                                "label" => __("Alt-Text", "photo"),

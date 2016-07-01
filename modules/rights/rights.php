@@ -28,7 +28,6 @@
         }
 
         public function post_options($fields, $post = null) {
-
             $fields[] = array("attr" => "option[rights_title]",
                               "label" => __("Original Work", "rights"),
                               "type" => "text",
@@ -81,6 +80,11 @@
 
         public function post($post) {
             $post->licence_link = self::licence_link($post);
+        }
+
+        public function feed_item($post) {
+            if (!empty($post->rights_licence))
+               printf("        <rights>%s</rights>\n", $post->rights_licence);
         }
 
         static function licence_link($post) {

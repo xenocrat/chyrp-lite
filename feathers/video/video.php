@@ -4,13 +4,12 @@
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "video"),
-                                  "optional" => true,
-                                  "preview" => "markup_title"));
+                                  "optional" => true));
             $this->setField(array("attr" => "video",
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "video")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "video")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "video"),
@@ -29,7 +28,7 @@
             if (isset($_FILES['video']) and upload_tester($_FILES['video']))
                 $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
             else
-                error(__("Error"), __("You did not select a video to upload.", "video"));
+                error(__("Error"), __("You did not select a video to upload.", "video"), null, 422);
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
@@ -66,10 +65,15 @@
             if ($post->feather != "video")
                 return;
 
+            $trigger = Trigger::current();
             $filepath = uploaded($post->filename, false);
 
-            if (file_exists($filepath))
-                unlink($filepath);
+            if (file_exists($filepath)) {
+                if ($trigger->exists("delete_upload"))
+                    $trigger->call("delete_upload", $post->filename);
+                else
+                    unlink($filepath);
+            }
         }
 
         public function filter_post($post) {
@@ -82,6 +86,7 @@
         public function video_type($filename) {
             $file_split = explode(".", $filename);
             $file_ext = strtolower(end($file_split));
+
             switch($file_ext) {
                 case "mp4":
                     return "video/mp4";
@@ -106,9 +111,10 @@
             if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
                 return;
 
-            $length = filesize(uploaded($post->filename, false));
-
-            echo '<link rel="enclosure" href="'.uploaded($post->filename).'" type="'.$this->video_type($post->filename).'" title="'.truncate(strip_tags($post->description)).'" length="'.$length.'" />';
+            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
+                        '" type="'.$this->video_type($post->filename).
+                        '" title="'.truncate(strip_tags($post->title())).
+                        '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
         public function video_player($filename, $params = array(), $post) {

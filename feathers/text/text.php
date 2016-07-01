@@ -4,8 +4,7 @@
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "text"),
-                                  "optional" => true,
-                                  "preview" => "markup_title"));
+                                  "optional" => true));
             $this->setField(array("attr" => "body",
                                   "type" => "text_block",
                                   "label" => __("Body", "text"),

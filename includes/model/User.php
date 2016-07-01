@@ -50,24 +50,9 @@
 
             if ($check->no_results)
                 return false;
-            else {
-                if (self::checkPassword($password, $check->password))
-                    return true;
-                elseif (md5($password) == $check->password) {
-                    # Backwards-compatibility:
-                    # if their old password is stored as MD5, update
-                    # it on authentication to the new hashing scheme.
-                    $check->update(null, self::hashPassword($password));
-                    return true;
-                } elseif (SQL::current()->adapter == "mysql") {
-                    # Some imports might use MySQL password hashing (such as MovableType 3).
-                    # Try those too, and update the user if they match.
-                    if ($password == $check->password) {
-                        $check->update(null, self::hashPassword($password));
-                        return true;
-                    }
-                }
-            }
+
+            if (self::checkPassword($password, $check->password))
+                return true;
 
             return false;
         }
@@ -197,38 +182,40 @@
 
         /**
          * Function: hashPassword
-         * Creates a secure hash of a user's password.
+         * Creates a hash of a user's password for the database.
          *
          * Parameters:
          *     $password - The unhashed password.
          * 
          * Returns:
-         *     The securely hashed password to be stored in the database.
+         *     The hashed password.
          *
          * Notes:
-         *     Base64 encodes 6 bits per character so we generate 16*6/8=12 bytes for the salt.
+         *     <random> tries to be cryptographically secure.
          */
         static function hashPassword($password) {
-            $salt = (function_exists("openssl_random_pseudo_bytes")) ?
-                base64_encode(openssl_random_pseudo_bytes(12)) : random(16);
-
-            $param = '$6$'.$salt; # Selecting SHA-512 (>=PHP 5.3.2)
-            return crypt($password,$param);
+            $salt = random(16);
+            $prefix = '$6$'; # Prefix for SHA-512.
+            return crypt($password, $prefix.$salt);
         }
 
         /**
          * Function: checkPassword
-         * Checks a given password against the stored hash.
+         * Checks a given password against the user's stored hash.
          *
          * Parameters:
          *     $password - The unhashed password given during a login attempt.
-         *     $storedHash - The stored hash for the user.
+         *     $stored - The the user's stored hash value from the database.
          * 
          * Returns:
          *     @true@ or @false@
+         *
+         * Notes:
+         *     Uses <hash_equals> if available to mitigate timing attacks.
          */
-        static function checkPassword($password, $storedHash) {
-            return crypt($password, $storedHash) == $storedHash;
+        static function checkPassword($password, $stored) {
+            $try = crypt($password, $stored);
+            return (function_exists("hash_equals")) ? hash_equals($try, $stored) : ($try == $stored) ;
         }
 
     }

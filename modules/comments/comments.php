@@ -78,13 +78,17 @@
             if ($comment->no_results)
                 show_404(__("Not Found"), __("Comment not found.", "comments"));
 
-            $post = new Post($comment->post_id);
+            $post = new Post($comment->post_id, array("drafts" => true));
 
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->theme_exists())
-                error(__("Error"), __("The post cannot be displayed because the template for this feather was not found."));
+                error(__("Error"),
+                      __("The post cannot be displayed because the template for this feather was not found."), null, 501);
+
+            if ($post->status == "draft")
+                Flash::message(__("This post is a draft."));
 
             if ($post->status == "scheduled")
                 Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
@@ -106,7 +110,7 @@
 
         static function route_add_comment() {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
-                error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"), null, 400);
 
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
@@ -122,31 +126,30 @@
             if (empty($_POST['author']))
                 Flash::warning(__("Author can't be blank.", "comments"));
 
-            if (empty($_POST['email']))
+            if (empty($_POST['author_email']))
                 Flash::warning(__("Email address can't be blank.", "comments"));
-
-            if (!is_email($_POST['email']))
+            elseif (!is_email($_POST['author_email']))
                 Flash::warning(__("Invalid email address.", "comments"));
 
-            if (!empty($_POST['url']) and !is_url($_POST['url']))
+            if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
                 Flash::warning(__("Invalid website URL.", "comments"));
 
             if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
                 Flash::warning(__("Incorrect captcha code.", "comments"));
 
-            if (Flash::exists("warning"))
-                redirect($post->url());
-
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
-            Comment::create($_POST['body'],
-                            $_POST['author'],
-                            $_POST['url'],
-                            $_POST['email'],
-                            $post,
-                            $parent,
-                            $notify);
+            if (Flash::exists("warning"))
+                redirect($post->url());
+
+            Flash::notice(Comment::create($_POST['body'],
+                                          $_POST['author'],
+                                          $_POST['author_url'],
+                                          $_POST['author_email'],
+                                          $post,
+                                          $parent,
+                                          $notify), $post->url());
         }
 
         static function admin_update_comment() {
@@ -157,7 +160,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to update a comment.", "comments"), null, 400);
 
             $comment = new Comment($_POST['id']);
 
@@ -168,19 +171,19 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
             if (empty($_POST['body']))
-                error(__("Error"), __("Message can't be blank.", "comments"));
+                error(__("Error"), __("Message can't be blank.", "comments"), null, 422);
 
             if (empty($_POST['author']))
-                error(__("Error"), __("Author can't be blank.", "comments"));
+                error(__("Error"), __("Author can't be blank.", "comments"), null, 422);
 
             if (empty($_POST['author_email']))
-                error(__("Error"), __("Email address can't be blank.", "comments"));
+                error(__("Error"), __("Email address can't be blank.", "comments"), null, 422);
 
             if (!is_email($_POST['author_email']))
-                error(__("Error"), __("Invalid email address.", "comments"));
+                error(__("Error"), __("Invalid email address.", "comments"), null, 422);
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                error(__("Error"), __("Invalid website URL.", "comments"));
+                error(__("Error"), __("Invalid website URL.", "comments"), null, 422);
 
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
@@ -199,8 +202,8 @@
                              $notify,
                              $created_at);
 
-            if (isset($_POST['ajax']))
-                exit((string) $comment->id);
+            if (!empty($_POST['ajax']))
+                exit(__("Comment updated.", "comments"));
 
             if (!$visitor->group->can("edit_comment", "delete_comment"))
                 Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
@@ -210,7 +213,7 @@
 
         static function admin_delete_comment($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
             $comment = new Comment($_GET['id']);
 
@@ -228,7 +231,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_comments");
@@ -243,7 +246,7 @@
 
             Comment::delete($comment->id);
 
-            Flash::notice(__("Comment deleted."));
+            Flash::notice(__("Comment deleted.", "comments"));
             redirect("/admin/?action=manage_".(($comment->status == "spam") ? "spam" : "comments"));
         }
 
@@ -252,7 +255,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "body LIKE :query");
+            list($where, $params) = keywords($_GET['query'], "body LIKE :query", "comments");
 
             $where["status"] = "spam";
 
@@ -299,7 +302,9 @@
             $sql = SQL::current();
             $count = $sql->count("comments",
                                  array("post_id" => $post->id,
+                                       "status" => "pingback",
                                        "author_url" => $from));
+
             if ($count)
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "comments"));
 
@@ -311,6 +316,8 @@
                             0,
                             0,
                             "pingback");
+
+            return __("Pingback registered!", "comments");
         }
 
         static function delete_post($post) {
@@ -383,7 +390,7 @@
 
         public function admin_edit_comment($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a comment.", "comments"));
+                error(__("No ID Specified"), __("An ID is required to edit a comment.", "comments"), null, 400);
 
             $comment = new Comment($_GET['id'], array("filter" => false));
 
@@ -401,7 +408,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "body LIKE :query");
+            list($where, $params) = keywords($_GET['query'], "body LIKE :query", "comments");
 
             $where[] = "status != 'spam'";
 
@@ -547,22 +554,22 @@
             switch($_POST['action']) {
                 case "reload_comments":
                     if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
-                        exit;
+                        error(__("No ID Specified"), __("An ID is required to reload comments.", "comments"), null, 400);
 
-                    $post = new Post($_POST['post_id']);
-                    $last_comment = fallback($_POST['last_comment'], $post->created_at);
+                    $post = new Post($_POST['post_id'], array("drafts" => true));
+                    $last_comment = (empty($_POST['last_comment'])) ? $post->created_at : $_POST['last_comment'] ;
+                    $added_since = when(__("Comments added since %I:%M %p on %B %d, %Y", "comments"), $last_comment, true);
 
                     if ($post->no_results)
                         show_404(__("Not Found"), __("Post not found."));
 
                     $ids = array();
-                    $last_comment = "";
 
                     if ($post->latest_comment > $last_comment) {
                         $new_comments = $sql->select("comments",
                                                      "id, created_at",
                                                      array("post_id" => $post->id,
-                                                           "created_at >" => $_POST['last_comment'],
+                                                           "created_at >" => $last_comment,
                                                            "status not" => "spam", "status != 'denied' OR (
                                                               (user_id != 0 AND user_id = :visitor_id) OR (
                                                                     id IN ".self::visitor_comments()."))"
@@ -578,31 +585,24 @@
                         }
                     }
 
-                    $responseObj = array("comment_ids" => $ids, "last_comment" => $last_comment);
-                    header("Content-type: application/json; charset=utf-8");
-                    echo json_encode($responseObj);
-                    exit;
-
+                    json_response($added_since, array("comment_ids" => $ids, "last_comment" => $last_comment));
                 case "show_comment":
-                    $reason = (isset($_POST['reason'])) ? $_POST['reason'] : "" ;
-
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
-                        error(__("Error"), __("An ID is required to show a comment.", "comments"));
+                        error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
 
                     $comment = new Comment($_POST['comment_id']);
 
                     if ($comment->no_results)
                         show_404(__("Not Found"), __("Comment not found.", "comments"));
 
-                    $main->display("content/comment", array("comment" => $comment, "ajax_reason" => $reason));
+                    $main->display("content".DIR."comment", array("comment" => $comment));
                     exit;
-
                 case "destroy_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                         show_403(__("Access Denied"), __("Invalid security key."));
 
                     if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                        error(__("Error"), __("An ID is required to delete a comment.", "comments"));
+                        error(__("Error"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
                     $comment = new Comment($_POST['id']);
 
@@ -613,14 +613,13 @@
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
                     Comment::delete($comment->id);
-                    exit;
-
+                    json_response(__("Comment deleted.", "comments"));
                 case "edit_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                         show_403(__("Access Denied"), __("Invalid security key."));
 
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
-                        error(__("Error"), __("An ID is required to edit a comment.", "comments"));
+                        error(__("Error"), __("An ID is required to edit a comment.", "comments"), null, 400);
 
                     $comment = new Comment($_POST['comment_id'], array("filter" => false));
 
@@ -630,8 +629,27 @@
                     if (!$comment->editable())
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
-                    $main->display("forms/comment/edit", array("comment" => $comment));
+                    $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
                     exit;
+                case "validate_comment":
+                    if (empty($_POST['body']))
+                        json_response(__("Message can't be blank.", "comments"), false);
+
+                    if (empty($_POST['author']))
+                        json_response(__("Author can't be blank.", "comments"), false);
+
+                    if (empty($_POST['author_email']))
+                        json_response(__("Email address can't be blank.", "comments"), false);
+                    elseif (!is_email($_POST['author_email']))
+                        json_response(__("Invalid email address.", "comments"), false);
+
+                    if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
+                        json_response(__("Invalid website URL.", "comments"), false);
+
+                    if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
+                        json_response(__("Incorrect captcha code.", "comments"), false);
+
+                    json_response(__("Comment validated.", "comments"), true);
             }
         }
 
@@ -665,16 +683,48 @@
         }
 
         static function view_feed($context) {
+            $config = Config::current();
+            $trigger = Trigger::current();
+
             $post = $context["post"];
-
-            $title = $post->title();
-            fallback($title, ucfirst($post->feather)." Post #".$post->id);
-
-            $title = _f("Comments on &#8220;%s&#8221;", array(fix($title)), "comments");
-
             $comments = $post->comments;
+            $latest_timestamp = 0;
+            $title = _f("Comments on &#8220;%s&#8221;", fix(oneof($post->title(), ucfirst($post->feather))), "comments");
 
-            require "comments_feed.php";
+            foreach ($comments as $comment)
+                if (strtotime($comment->created_at) > $latest_timestamp)
+                    $latest_timestamp = strtotime($comment->created_at);
+
+            $atom = new AtomFeed();
+
+            $atom->open($title,
+                        null,
+                        null,
+                        $latest_timestamp);
+
+            foreach ($comments as $comment) {
+                $trigger->call("feed_comment", $comment);
+
+                $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
+
+                $tagged = substr(strstr(url("id/".$comment->post->id)."#comment_".$comment->id, "//"), 2);
+                $tagged = str_replace("#", "/", $tagged);
+                $tagged = preg_replace("/(".preg_quote(parse_url($comment->post->url(), PHP_URL_HOST)).")/",
+                                       "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
+
+                $atom->entry(_f("Comment #%d", $comment->id, "comments"),
+                             $tagged,
+                             $comment->body,
+                             $comment->post->url()."#comment_".$comment->id,
+                             $comment->created_at,
+                             $updated,
+                             $comment->author,
+                             $comment->author_url);
+
+                $trigger->call("comments_feed_item", $comment->id);
+            }
+
+            $atom->close();
         }
 
         static function metaWeblog_getPost($struct, $post) {
@@ -762,21 +812,21 @@
             foreach ($comments as $comment) {
                 $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
 
-                $atom.= "        <chyrp:comment>\r";
-                $atom.= '            <updated>'.when("c", $updated).'</updated>'."\r";
-                $atom.= '            <published>'.when("c", $comment->created_at).'</published>'."\r";
-                $atom.= '            <author chyrp:user_id="'.$comment->user_id.'">'."\r";
-                $atom.= "                <name>".fix($comment->author)."</name>\r";
-                if (!empty($comment->author_url))
-                $atom.= "                <uri>".fix($comment->author_url)."</uri>\r";
-                $atom.= "                <email>".fix($comment->author_email)."</email>\r";
-                $atom.= "                <chyrp:login>".fix(@$comment->user->login)."</chyrp:login>\r";
-                $atom.= "                <chyrp:ip>".long2ip($comment->author_ip)."</chyrp:ip>\r";
-                $atom.= "                <chyrp:agent>".fix($comment->author_agent)."</chyrp:agent>\r";
-                $atom.= "            </author>\r";
-                $atom.= "            <content>".fix($comment->body)."</content>\r";
-                $atom.= "                <chyrp:status>".fix($comment->status)."</chyrp:status>\r";
-                $atom.= "        </chyrp:comment>\r";
+                $atom.= "        <chyrp:comment>\r".
+                        '            <updated>'.when("c", $updated).'</updated>'."\r".
+                        '            <published>'.when("c", $comment->created_at).'</published>'."\r".
+                        '            <author chyrp:user_id="'.$comment->user_id.'">'."\r".
+                        "                <name>".fix($comment->author)."</name>\r".
+                        (!empty($comment->author_url) ? 
+                        "                <uri>".fix($comment->author_url)."</uri>\r" : "").
+                        "                <email>".fix($comment->author_email)."</email>\r".
+                        "                <chyrp:login>".fix(@$comment->user->login)."</chyrp:login>\r".
+                        "                <chyrp:ip>".long2ip($comment->author_ip)."</chyrp:ip>\r".
+                        "                <chyrp:agent>".fix($comment->author_agent)."</chyrp:agent>\r".
+                        "            </author>\r".
+                        "            <content>".fix($comment->body)."</content>\r".
+                        "                <chyrp:status>".fix($comment->status)."</chyrp:status>\r".
+                        "        </chyrp:comment>\r";
             }
 
             return $atom;
@@ -795,11 +845,6 @@
                 return "manage_comments";
         }
 
-        public function route_comments_rss() {
-            header($_SERVER["SERVER_PROTOCOL"]." 301 Moved Permanently");
-            redirect("comments_feed/");
-        }
-
         static function visitor_comments() {
             if (empty($_SESSION['comments']))
                 return "(0)";
@@ -808,7 +853,7 @@
         }
 
         public function correspond_comment($params) {
-            $post = new Post($params["post"]);
+            $post = new Post($params["post"], array("drafts" => true));
 
             $params["subject"] = _f("New Comment at %s", Config::current()->name);
             $params["message"] = _f("%s commented on a blog post:", fix($params["author"])).

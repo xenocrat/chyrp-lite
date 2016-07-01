@@ -3,7 +3,7 @@
 {% block title %}{{ "Manage Posts" | translate }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="index.php" method="get" accept-charset="utf-8">
+<form class="filters" action="index.php" method="get" accept-charset="UTF-8">
 <fieldset>
 <input type="hidden" name="action" value="manage_posts">
 <div role="search" class="filter_item">
@@ -52,7 +52,7 @@
 {{ post.status_name }}
 </td>
 <td class="post_author">
-{{ post.author.name is defined ? post.author.name : "" }}
+{{ post.author.nick is defined ? post.author.nick : "" }}
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 {% if post.editable() or post.deletable() %}

@@ -4,13 +4,12 @@
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "audio"),
-                                  "optional" => true,
-                                  "preview" => "markup_title"));
+                                  "optional" => true));
             $this->setField(array("attr" => "audio",
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %s Megabytes)", Config::current()->uploads_limit, "audio")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "audio")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
@@ -29,7 +28,7 @@
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
                 $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
             else
-                error(__("Error"), __("You did not select any audio to upload.", "audio"));
+                error(__("Error"), __("You did not select any audio to upload.", "audio"), null, 422);
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
@@ -66,10 +65,15 @@
             if ($post->feather != "audio")
                 return;
 
+            $trigger = Trigger::current();
             $filepath = uploaded($post->filename, false);
 
-            if (file_exists($filepath))
-                unlink($filepath);
+            if (file_exists($filepath)) {
+                if ($trigger->exists("delete_upload"))
+                    $trigger->call("delete_upload", $post->filename);
+                else
+                    unlink($filepath);
+            }
         }
 
         public function filter_post($post) {
@@ -82,6 +86,7 @@
         public function audio_type($filename) {
             $file_split = explode(".", $filename);
             $file_ext = strtolower(end($file_split));
+
             switch($file_ext) {
                 case "mp3":
                     return "audio/mpeg";
@@ -108,9 +113,10 @@
             if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
                 return;
 
-            $length = filesize(uploaded($post->filename, false));
-
-            echo '<link rel="enclosure" href="'.uploaded($post->filename).'" type="'.$this->audio_type($post->filename).'" title="'.truncate(strip_tags($post->description)).'" length="'.$length.'" />';
+            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
+                        '" type="'.$this->audio_type($post->filename).
+                        '" title="'.truncate(strip_tags($post->title())).
+                        '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
         public function audio_player($filename, $params = array(), $post) {

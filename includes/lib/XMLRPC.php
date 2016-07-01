@@ -1,20 +1,7 @@
 <?php
-    /**
-     * File: XML-RPC
-     * Extensible XML-RPC interface for remotely controlling your Chyrp install.
-     */
-
-    define('XML_RPC', true);
-    require_once 'common.php';
-    require_once INCLUDES_DIR.DIR.'lib'.DIR.'ixr.php';
-    if (!defined('XML_RPC_FEATHER')) define('XML_RPC_FEATHER', 'text');
-
-    # Use the Main controller for any Route calls.
-    Route::current(MainController::current());
-
     #
     # Class: XMLRPC
-    # Provides functionality for using external clients, services, etc. for accessing and adding to Chyrp.
+    # Extensible XML-RPC interface for remotely controlling your Chyrp install.
     #
     class XMLRPC extends IXR_Server {
         #
@@ -50,7 +37,7 @@
 
             Trigger::current()->filter($methods, "xmlrpc_methods");
 
-            $this->IXR_Server($methods);
+            parent::__construct($methods);
         }
 
         #
@@ -59,13 +46,17 @@
         #
         public function pingback_ping($args) {
             $config     = Config::current();
-            $source     = str_replace('&amp;', '&', $args[0]);
-            $target     = str_replace('&amp;', '&', $args[1]);
-            $source_url = add_scheme($source);
+            $trigger    = Trigger::current();
+            $source     = add_scheme($args[0]);
+            $target     = add_scheme($args[1]);
             $chyrp_host = str_replace(array("http://www.",
                                             "http://",
                                             "https://www.",
                                             "https://"), "", $config->url);
+
+            # No need to continue without a responder for the pingback trigger.
+            if (!$trigger->exists("pingback"))
+                throw new Exception(__("Pingback support is disabled for this site."));
 
             if ($target == $source)
                 return new IXR_ERROR(0, __("The from and to URLs cannot be the same."));
@@ -73,56 +64,63 @@
             if (!is_url($target) or !substr_count($target, $chyrp_host))
                 return new IXR_Error(32, __("The URL for our page is not valid."));
 
-            if (!is_url($source) or substr_count($source, $chyrp_host))
+            if (!is_url($source))
                 return new IXR_Error(16, __("The URL for your page is not valid."));
 
             if (preg_match("/url=([^&#]+)/", $target, $url))
                 $post = new Post(array("url" => $url[1]));
             else
                 $post = MainController::current()->post_from_url(null,
-                                                                 str_replace(rtrim($config->url, "/"), "/", $target),
+                                                                 str_replace(rtrim($config->url, "/"),
+                                                                             "/", $target),
                                                                  true);
 
             if (!$post)
                 return new IXR_Error(33, __("We have not published at that URL."));
 
             # Grab the page that linked here.
-            $content = get_remote($source_url);
+            $content = get_remote($source);
 
             if (empty($content))
                 return new IXR_Error(16, __("You have not published at that URL."));
 
-            # Get the title of the page.
+            # Get the title and body of the page.
             preg_match("/<title>([^<]+)<\/title>/i", $content, $title);
-            $title = $title[1];
+            preg_match("/<body[^>]*>(.+)<\/body>/is", $content, $body);
+            preg_match("/<meta charset=[\"\']?([^ \"\'\/>]+)/i", $content, $charset);
 
-            if (empty($title))
-                return new IXR_Error(0, __("The page you published has no title."));
+            if (empty($title[1]) or empty($body[1]))
+                return new IXR_Error(0, __("Your page could not be parsed."));
 
-            $content = strip_tags($content, "<a>");
+            $title = trim(fix($title[1]));
+            $body = strip_tags($body[1], "<a>");
+            $charset = oneof($charset[1], "UTF-8");
             $url = preg_quote($target, "/");
 
+            # Convert the source encoding to UTF-8 if possible to ensure we render it correctly.
+            if (function_exists("mb_convert_encoding")) {
+                $title = mb_convert_encoding($title, "UTF-8", $charset);
+                $body = mb_convert_encoding($body, "UTF-8", $charset);
+            }
+
             # Search the page for our link.
-            if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
-                $url = str_replace("&", "&amp;", preg_quote($target, "/"));
+            if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
+                $url = str_replace("&amp;", "&", preg_quote($target, "/"));
 
-                if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context)) {
-                    $url = str_replace("&", "&#038;", preg_quote($target, "/"));
+                if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
+                    $url = str_replace("&amp;", "&#038;", preg_quote($target, "/"));
 
-                    if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]*)<\/a>/", $content, $context))
-                        return new IXR_Error(17, __("The page you published does not link to our page."));
+                    if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context))
+                        return new IXR_Error(17, __("Your page does not link to our page."));
                 }
             }
 
-            # Build an excerpt of up to 300 characters surrounding the link.
-            $excerpt = strip_tags(str_replace($context[0], $context[1], $content));
-            $match   = preg_quote($context[1], "/");
-            $excerpt = preg_replace("/.*?\s(.{0,100}{$match}.{0,100})\s.*/s", "\\1", $excerpt);
-            $excerpt = "&hellip; ".truncate(trim(normalize($excerpt)), 300, "", true)."&hellip;";
+            # Build an excerpt of up to 200 characters. Tries to start with the sentence containing the link.
+            $regex = "/.*?\b([^\.>]{0,100}".preg_quote($context[0], "/")."[^<]*)\b.*/s";
+            $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 200);
 
-            Trigger::current()->call("pingback", $post, $target, $source_url, $title, $excerpt);
-
-            return __("Pingback registered!");
+            # Pingback responder must return a single string on success or IXR_Error on failure.
+            return $trigger->call("pingback", $post, $target, $source, $title, $excerpt);
         }
 
         #
@@ -212,12 +210,13 @@
             $this->auth($args[1], $args[2], 'add');
             global $user;
 
-            # Support for extended body
+            # Support for extended body.
             $body = $args[3]['description'];
+
             if (!empty($args[3]['mt_text_more']))
                 $body .= '<!--more-->'.$args[3]['mt_text_more'];
 
-            # Add excerpt to body so it isn't lost
+            # Add excerpt to body so it isn't lost.
             if (!empty($args[3]['mt_excerpt']))
                 $body = $args[3]['mt_excerpt']."\n\n".$body;
 
@@ -249,7 +248,7 @@
 
             $trigger->call('metaWeblog_newPost', $args[3], $post);
 
-            # Send any and all pingbacks to URLs in the body
+            # Send any and all pingbacks to URLs in the body.
             if (Config::current()->send_pingbacks)
                 send_pingbacks($args[3]['description'], $post);
 
@@ -438,7 +437,7 @@
         private function getRecentPosts($limit) {
             global $user;
 
-            if (!in_array(XML_RPC_FEATHER, Config::current()->enabled_feathers))
+            if (!feather_enabled(XML_RPC_FEATHER))
                 throw new Exception(_f("The %s feather is not enabled.", array(XML_RPC_FEATHER)));
 
             $where = array('feather' => XML_RPC_FEATHER);
@@ -470,13 +469,14 @@
 
         #
         # Function: auth
-        # Authenticates a given login and password, and checks for appropriate permission
+        # Authenticates a given login and password, and checks for appropriate permission.
         #
         private function auth($login, $password, $do = 'add') {
             if (!Config::current()->enable_xmlrpc)
                 throw new Exception(__("XML-RPC support is disabled for this site."));
 
             global $user;
+
             if (!User::authenticate($login, $password))
                 throw new Exception(__("Login incorrect."));
             else
@@ -491,7 +491,9 @@
         # Function: error_handler
         #
         public static function error_handler($errno, $errstr, $errfile, $errline) {
-            if (error_reporting() === 0 or $errno == E_STRICT) return;
+            if (error_reporting() === 0 or $errno == E_STRICT)
+                return;
+
             throw new Exception(sprintf("%s in %s on line %s", $errstr, $errfile, $errline));
         }
 
@@ -502,7 +504,4 @@
             $ixr_error = new IXR_Error(500, $exception->getMessage());
             echo $ixr_error->getXml();
         }
-
     }
-    $server = new XMLRPC();
-    ?>

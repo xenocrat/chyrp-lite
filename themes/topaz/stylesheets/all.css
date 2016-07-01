@@ -66,7 +66,8 @@ body {                                          font-family: "Open Sans webfont"
                                                 margin: 0rem 2rem 2rem 16rem;
                                                 min-width: 288px;
                                                 max-width: 1200px }
-body.preview {                                  margin: 4rem }
+body.preview {                                  margin: 4rem;
+                                                background-color: #fffefd }
 body.mobile_nav {                               margin-bottom: 3rem }
 p {                                             margin: 0em 0em 1em 0em }
 p:last-child, p:empty {                         margin-bottom: 0em }
@@ -228,15 +229,6 @@ form, fieldset {                                margin: 0em;
                                                 border: none }
 div.search_box > form {                         display: inline-block;
                                                 position: relative }
-form.inline_edit {                              width: 100%;
-                                                max-width: 1024px;
-                                                clear: both;
-                                                box-sizing: border-box;
-                                                background-color: #fffefd;
-                                                margin: 0rem auto 2rem auto;
-                                                padding: 1rem 2rem 2rem 2rem;
-                                                border: 1px solid #c6ccc8;
-                                                border-radius: 0.4em }
 form.comment_edit {                             width: 100%;
                                                 background-color: transparent;
                                                 margin-bottom: 0em;
@@ -264,7 +256,7 @@ input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
 input:-ms-input-placeholder,
-input:input-placeholder {                       color: #c6ccc8;
+input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
 input[type='checkbox'] {                        width: auto }
 input.error {                                   background-color: #ffb2b2 }
@@ -290,7 +282,6 @@ button#sidebar_search_submit {                  display: block;
 button#search_submit:focus,
 button#sidebar_search_submit:focus {            background-color: #c6ccc8;
                                                 outline: none }
-form.inline_edit input {                        width: 100% }
 select {                                        box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
@@ -565,16 +556,13 @@ article > section.photo img {                   width: 100% }
 article img {                                   max-width: 100% }
 .ajax_loading {                                 background-size: 30px 30px;
                                                 background-image: linear-gradient(-45deg, #f2f1f0 25%, transparent 25%, transparent 50%, #f2f1f0 50%, #f2f1f0 75%, transparent 75%, transparent) !important;
-                                                -webkit-animation: stripes 2s linear infinite;
-                                                -moz-animation: stripes 2s linear infinite;
-                                                -ms-animation: stripes 2s linear infinite;
                                                 animation: stripes 2s linear infinite }
 .ajax_loading .doaction {                       visibility: hidden }
 
-@-webkit-keyframes stripes {                    from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
-@-moz-keyframes stripes {                       from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
-@-ms-keyframes stripes {                        from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
-@keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
+@keyframes stripes {
+    from {                                      background-position: 0px 0px }
+    to {                                        background-position: 60px 30px }
+}
 
 @media print {
     html {                                      font-size: 4.2mm }
@@ -594,7 +582,6 @@ article img {                                   max-width: 100% }
                                                 margin: 0.8em 0em }
     h6.post_byline {                            padding-bottom: 1rem }
     blockquote {                                padding: 0em 1em }
-    form.inline_edit {                          padding: 0rem 1rem 1rem 1rem }
     form.comment_edit {                         padding: 0rem 0rem 1rem 0rem }
     input, select {                             width: 100% }
     ol.comments li {                            margin: 0em;

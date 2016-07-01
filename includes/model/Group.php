@@ -147,8 +147,9 @@
                          array("id" => $this->id),
                          array("name" => $name));
 
-            # Update their permissions
+            # Update their permissions.
             $sql->delete("permissions", array("group_id" => $this->id));
+
             foreach ($permissions as $id) {
                 $name = $sql->select("permissions",
                                      "name",

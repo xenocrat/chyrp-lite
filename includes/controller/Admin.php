@@ -32,13 +32,13 @@
 
             $loaders = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-            foreach ($config->enabled_modules as $extension)
-                if (file_exists(MODULES_DIR.DIR.$extension.DIR."admin"))
-                    $loaders[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$extension.DIR."admin");
+            foreach ($config->enabled_modules as $module)
+                if (file_exists(MODULES_DIR.DIR.$module.DIR."admin"))
+                    $loaders[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
-            foreach ($config->enabled_feathers as $extension)
-                if (file_exists(FEATHERS_DIR.DIR.$extension.DIR."admin"))
-                    $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$extension.DIR."admin");
+            foreach ($config->enabled_feathers as $feather)
+                if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."admin"))
+                    $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
             $loader = new Twig_Loader_Chain($loaders);
             $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
@@ -51,8 +51,7 @@
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
 
             # Load the theme translator.
-            if (file_exists(MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo"))
-                load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
+            load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
         }
 
         /**
@@ -69,7 +68,8 @@
 
             if (empty($route->action) or $route->action == "write") {
                 # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
-                if (($visitor->group->can("add_post") or $visitor->group->can("add_draft")) and !empty($config->enabled_feathers))
+                if (!empty($config->enabled_feathers) and ($visitor->group->can("add_post") or
+                                                           $visitor->group->can("add_draft")))
                     return $route->action = "write_post";
 
                 # "Write > Page", if they can add pages.
@@ -126,9 +126,14 @@
             if (empty($config->enabled_feathers))
                 Flash::notice(__("You must enable at least one feather in order to write a post."), "/admin/?action=feathers");
 
-            Trigger::current()->filter($options, array("write_post_options", "post_options"));
-
             fallback($_GET['feather'], @$_SESSION['latest_feather'], reset($config->enabled_feathers));
+
+            if (!feather_enabled($_GET['feather']))
+                show_404(__("Not Found"), __("Feather not found."));
+
+            $_SESSION['latest_feather'] = $_GET['feather'];
+
+            Trigger::current()->filter($options, array("write_post_options", "post_options"));
 
             $this->display("write_post",
                            array("groups" => Group::find(array("order" => "id ASC")),
@@ -150,6 +155,9 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            if (!feather_enabled($_POST['feather']))
+                show_404(__("Not Found"), __("Feather not found."));
+
             if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
                 $_POST['draft'] = 'true';
 
@@ -167,7 +175,7 @@
          */
         public function edit_post() {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a post."));
+                error(__("No ID Specified"), __("An ID is required to edit a post."), null, 400);
 
             $post = new Post($_GET['id'], array("drafts" => true, "filter" => false));
 
@@ -192,7 +200,7 @@
          */
         public function update_post() {
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update a post."));
+                error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
             if (isset($_POST['publish']))
                 $_POST['status'] = "public";
@@ -210,9 +218,6 @@
 
             Feathers::$instances[$post->feather]->update($post);
 
-            if (isset($_POST['ajax']))
-                exit((string) $post->id);
-
             Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
                           "/admin/?action=manage_posts");
         }
@@ -223,7 +228,7 @@
          */
         public function delete_post() {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a post."));
+                error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
             $post = new Post($_GET['id'], array("drafts" => true));
 
@@ -245,7 +250,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a post."));
+                error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_posts");
@@ -279,6 +284,7 @@
                 $where["created_at like"] = $_GET['month']."-%";
 
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where["user_id"] = $visitor->id;
 
@@ -345,7 +351,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['title']) and empty($_POST['slug']))
-                error(__("Error"), __("Title and slug cannot be blank."));
+                error(__("Error"), __("Title and slug cannot be blank."), null, 422);
 
             fallback($_POST['status'], "public");
 
@@ -374,7 +380,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this page."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a page."));
+                error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
 
             $page = new Page($_GET['id'], array("filter" => false));
 
@@ -398,10 +404,10 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['title']) and empty($_POST['slug']))
-                error(__("Error"), __("Title and slug cannot be blank."));
+                error(__("Error"), __("Title and slug cannot be blank."), null, 422);
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a page."));
+                error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
 
             $page = new Page($_POST['id']);
 
@@ -437,7 +443,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a page."));
+                error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
 
             $page = new Page($_GET['id']);
 
@@ -459,7 +465,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a page."));
+                error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_pages");
@@ -537,27 +543,27 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['login']))
-                error(__("Error"), __("Please enter a username for the account."));
+                error(__("Error"), __("Please enter a username for the account."), null, 422);
 
             $check = new User(array("login" => $_POST['login']));
 
             if (!$check->no_results)
-                error(__("Error"), __("That username is already in use."));
+                error(__("Error"), __("That username is already in use."), null, 409);
 
             if (empty($_POST['password1']))
-                error(__("Error"), __("Password cannot be blank."));
+                error(__("Error"), __("Password cannot be blank."), null, 422);
             elseif ($_POST['password1'] != $_POST['password2'])
-                error(__("Error"), __("Passwords do not match."));
+                error(__("Error"), __("Passwords do not match."), null, 422);
             elseif (password_strength($_POST['password1']) < 100)
                 Flash::message(__("Please consider setting a stronger password for this user."));
 
             if (empty($_POST['email']))
-                error(__("Error"), __("Email address cannot be blank."));
+                error(__("Error"), __("Email address cannot be blank."), null, 422);
             elseif (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid email address."));
+                error(__("Error"), __("Invalid email address."), null, 422);
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
-                error(__("Error"), __("Invalid website URL."));
+                error(__("Error"), __("Invalid website URL."), null, 422);
 
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
@@ -600,7 +606,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this user."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a user."));
+                error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
 
             $user = new User($_GET['id']);
 
@@ -619,7 +625,7 @@
          */
         public function update_user() {
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a user."));
+                error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -634,7 +640,7 @@
                                                                 "id not" => $_POST['id'])));
 
             if (!$check_name->no_results)
-                error(__("Error"), __("That username is already in use."));
+                error(__("Error"), __("That username is already in use."), null, 409);
 
             $user = new User($_POST['id']);
 
@@ -642,19 +648,19 @@
                 show_404(__("Not Found"), __("User not found."));
 
             if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
-                error(__("Error"), __("Passwords do not match."));
+                error(__("Error"), __("Passwords do not match."), null, 422);
             elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 100)
                 Flash::message(__("Please consider setting a stronger password for this user."));
 
             $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
 
             if (empty($_POST['email']))
-                error(__("Error"), __("Email address cannot be blank."));
+                error(__("Error"), __("Email address cannot be blank."), null, 422);
             elseif (!is_email($_POST['email']))
-                error(__("Error"), __("Invalid email address."));
+                error(__("Error"), __("Invalid email address."), null, 422);
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
-                error(__("Error"), __("Invalid website URL."));
+                error(__("Error"), __("Invalid website URL."), null, 422);
 
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
@@ -687,7 +693,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a user."));
+                error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
             $this->display("delete_user",
                            array("user" => new User($_GET['id']),
@@ -703,7 +709,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a user."));
+                error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_users");
@@ -787,7 +793,7 @@
             $check = new Group(null, array("where" => array("name" => $_POST['name'])));
 
             if (!$check->no_results)
-                error(__("Error"), __("That group name is already in use."));
+                error(__("Error"), __("That group name is already in use."), null, 409);
 
             Group::add($_POST['name'], array_keys($_POST['permissions']));
 
@@ -803,7 +809,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a group."));
+                error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
 
             $group = new Group($_GET['id']);
 
@@ -832,7 +838,7 @@
                                                                  "id not" => $_POST['id'])));
 
             if (!$check_name->no_results)
-                error(__("Error"), __("That group name is already in use."));
+                error(__("Error"), __("That group name is already in use."), null, 409);
 
             $group = new Group($_POST['id']);
 
@@ -853,7 +859,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a group."));
+                error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
             $this->display("delete_group",
                            array("group" => new Group($_GET['id']),
@@ -870,7 +876,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a group."));
+                error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
             if ($_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_groups");
@@ -928,8 +934,12 @@
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to export content."));
 
-            if (empty($_POST))
+            if (empty($_POST)) {
+                if (!class_exists("ZipArchive"))
+                    Flash::message(__("Multiple exports are not possible because the ZipArchive extension is not available."));
+
                 return $this->display("export");
+            }
 
             $config = Config::current();
             $trigger = Trigger::current();
@@ -974,7 +984,7 @@
                 $id = str_replace("#", "/", $id);
                 $id = preg_replace("/(".preg_quote(parse_url($config->url, PHP_URL_HOST)).")/", "\\1,".date("Y", $latest_timestamp).":", $id, 1);
 
-                $posts_atom = '<?xml version="1.0" encoding="utf-8"?>'."\r";
+                $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $posts_atom.= '    <title>'.fix($config->name).' Posts</title>'."\r";
                 $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
@@ -1040,7 +1050,7 @@
                     if (strtotime($page->created_at) > $latest_timestamp)
                         $latest_timestamp = strtotime($page->created_at);
 
-                $pages_atom = '<?xml version="1.0" encoding="utf-8"?>'."\r";
+                $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $pages_atom.= '    <title>'.fix($config->name).' Pages</title>'."\r";
                 $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
@@ -1100,10 +1110,7 @@
                 foreach ($groups as $index => $group)
                     $groups_json["groups"][$group->name] = $group->permissions;
 
-                $exports["groups.json"] = json_encode($groups_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-                if (json_last_error())
-                    error(__("Error"), _f("Failed to export groups because of JSON error: <code>%s</code>", json_last_error_msg()));
+                $exports["groups.json"] = json_set($groups_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
             }
 
             if (isset($_POST['users'])) {
@@ -1123,10 +1130,7 @@
                             $users_json[$user->login]["group"] = $user->group->name;
                 }
 
-                $exports["users.json"] = json_encode($users_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-                if (json_last_error())
-                    error(__("Error"), _f("Failed to export users because of JSON error: <code>%s</code>", json_last_error_msg()));
+                $exports["users.json"] = json_set($users_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
             }
 
             $trigger->filter($exports, "export");
@@ -1148,11 +1152,11 @@
                     $zip->close();
                     $bitstream = file_get_contents($filepath);
                     unlink($filepath);
-                    download($bitstream, $filename.".zip");
+                    file_attachment($bitstream, $filename.".zip");
                 } else
-                    error(__("Error"), _f("Failed to export files because of ZipArchive error: <code>%s</code>", zip_errors($err)));
+                    error(__("Error"), _f("Failed to export files because of ZipArchive error %d.", $err));
             } else
-                download(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
+                file_attachment(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
         }
 
         /**
@@ -1212,10 +1216,7 @@
             }
 
             if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file'])) {
-                $import = json_decode(file_get_contents($_FILES['groups_file']['tmp_name']), true);
-
-                if (json_last_error())
-                    error(__("Error"), _f("Failed to import groups because of JSON error: <code>%s</code>", json_last_error_msg()));
+                $import = json_get(file_get_contents($_FILES['groups_file']['tmp_name']), true);
 
                 foreach ($import["groups"] as $name => $permissions)
                     if (!$sql->count("groups", array("name" => $name)))
@@ -1227,10 +1228,7 @@
             }
 
             if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file'])) {
-                $users = json_decode(file_get_contents($_FILES['users_file']['tmp_name']), true);
-
-                if (json_last_error())
-                    error(__("Error"), _f("Failed to import users because of JSON error: <code>%s</code>", json_last_error_msg()));
+                $users = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true);
 
                 foreach ($users as $login => $user) {
                     $group_id = $sql->select("groups", "id", array("name" => $user["group"]), "id DESC")->fetchColumn();
@@ -1322,11 +1320,11 @@
             $classes = array();
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(MODULES_DIR.DIR.$folder.DIR."info.php"))
-                  continue;
+                if (!file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php") or
+                    !file_exists(MODULES_DIR.DIR.$folder.DIR."info.php"))
+                    continue;
 
-                if (file_exists(MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
-                    load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 if (!isset($classes[$folder]))
                     $classes[$folder] = array($folder);
@@ -1336,7 +1334,7 @@
                 $info = include MODULES_DIR.DIR.$folder.DIR."info.php";
 
                 if (gettype($info) != "array")
-                  continue;
+                    continue;
 
                 $conflicting_modules = array();
 
@@ -1386,6 +1384,7 @@
                 fallback($info["description"], __("No description."));
                 fallback($info["author"], array("name" => "", "url" => ""));
                 fallback($info["help"]);
+                fallback($info["confirm"]);
 
                 $info["description"] = __($info["description"], $folder);
 
@@ -1403,8 +1402,8 @@
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
-                $category = (module_enabled($folder) or !empty(Modules::$instances[$folder]->cancelled)) ?
-                    "enabled_modules" : "disabled_modules" ;
+                # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
+                $category = (!empty(Modules::$instances[$folder])) ? "enabled_modules" : "disabled_modules" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
@@ -1412,6 +1411,7 @@
                                                            "description" => $info["description"],
                                                            "author" => $info["author"],
                                                            "help" => $info["help"],
+                                                           "confirm" => $info["confirm"],
                                                            "classes" => $classes[$folder],
                                                            "conflicting_modules" => $conflicting_modules,
                                                            "dependencies_needed" => $dependencies_needed);
@@ -1443,16 +1443,16 @@
                 error(__("Error"), __("Could not read feathers directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
+                if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or
+                    !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
-                if (file_exists(FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
-                    load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 $info = include FEATHERS_DIR.DIR.$folder.DIR."info.php";
 
                 if (gettype($info) != "array")
-                  continue;
+                    continue;
 
                 fallback($info["name"], $folder);
                 fallback($info["version"], "0");
@@ -1460,6 +1460,7 @@
                 fallback($info["description"], __("No description."));
                 fallback($info["author"], array("name" => "", "url" => ""));
                 fallback($info["help"]);
+                fallback($info["confirm"]);
 
                 $info["description"] = __($info["description"], $folder);
 
@@ -1477,14 +1478,16 @@
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
-                $category = (feather_enabled($folder)) ? "enabled_feathers" : "disabled_feathers" ;
+                # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
+                $category = (!empty(Feathers::$instances[$folder])) ? "enabled_feathers" : "disabled_feathers" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
                                                            "url" => $info["url"],
                                                            "description" => $info["description"],
                                                            "author" => $info["author"],
-                                                           "help" => $info["help"]);
+                                                           "help" => $info["help"],
+                                                           "confirm" => $info["confirm"]);
             }
 
             $this->display("feathers");
@@ -1512,8 +1515,7 @@
                 if (!file_exists(THEMES_DIR.DIR.$folder.DIR."info.php"))
                     continue;
 
-                if (file_exists(THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo"))
-                    load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 $info = include THEMES_DIR.DIR.$folder.DIR."info.php";
 
@@ -1567,39 +1569,39 @@
             $type = (isset($_POST['module'])) ? "module" : "feather" ;
 
             if (empty($_POST[$type]))
-                error(__("No Extension Specified"), __("You did not specify an extension to enable."));
+                error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
 
             $name          = $_POST[$type];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $updated_array = $config->$enabled_array;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
+
+            # We don't use the module_enabled() helper function because we want to include cancelled modules.
+            if ($type == "module" and !empty(Modules::$instances[$name]))
+                error(__("Error"), __("Module already enabled."), null, 409);
+
+            # We don't use the feather_enabled() helper function because we want to include cancelled feathers.
+            if ($type == "feather" and !empty(Feathers::$instances[$name]))
+                error(__("Error"), __("Feather already enabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
                 show_404(__("Not Found"), __("Extension not found."));
 
             require $folder.DIR.$name.DIR.$name.".php";
 
-            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                show_404(__("Not Found"), __("Module not found."));
+            if (!is_subclass_of($class_name, camelize(pluralize($type))))
+                show_404(__("Not Found"), __("Extension not found."));
 
-            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                show_404(__("Not Found"), __("Feather not found."));
-
-            if ($type == "module" and (module_enabled($name) or !empty(Modules::$instances[$name]->cancelled)))
-                Flash::warning(__("Module already enabled."), "/admin/?action=modules");
-
-            if ($type == "feather" and feather_enabled($name))
-                Flash::warning(__("Feather already enabled."), "/admin/?action=feathers");
-
-            if (file_exists($folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
 
-            $new = $config->$enabled_array;
-            $new[] = $name;
-            $config->set($enabled_array, $new);
+            if (!in_array($name, $updated_array))
+                $updated_array[] = $name;
+
+            $config->set($enabled_array, $updated_array);
 
             $info = include $folder.DIR.$name.DIR."info.php";
             fallback($info["uploader"], false);
@@ -1634,11 +1636,20 @@
             $type = (isset($_POST['module'])) ? "module" : "feather" ;
 
             if (empty($_POST[$type]))
-                error(__("No Extension Specified"), __("You did not specify an extension to disable."));
+                error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
 
             $name          = $_POST[$type];
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $updated_array = array();
             $class_name    = camelize($name);
+
+            # We don't use the module_enabled() helper function because we want to exclude cancelled modules.
+            if ($type == "module" and empty(Modules::$instances[$name]))
+                error(__("Error"), __("Module already disabled."), null, 409);
+
+            # We don't use the feather_enabled() helper function because we want to exclude cancelled feathers.
+            if ($type == "feather" and empty(Feathers::$instances[$name]))
+                error(__("Error"), __("Feather already disabled."), null, 409);
 
             if ($type == "module" and !is_subclass_of($class_name, "Modules"))
                 show_404(__("Not Found"), __("Module not found."));
@@ -1646,23 +1657,14 @@
             if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
                 show_404(__("Not Found"), __("Feather not found."));
 
-            if ($type == "module" and !module_enabled($name) and empty(Modules::$instances[$name]->cancelled))
-                Flash::warning(__("Module already disabled."), "/admin/?action=modules");
-
-            if ($type == "feather" and !feather_enabled($name))
-                Flash::warning(__("Feather already disabled."), "/admin/?action=feathers");
-
             if (method_exists($class_name, "__uninstall"))
-                call_user_func(array($class_name, "__uninstall"), false);
+                call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
 
-            $new = array();
+            foreach ($config->$enabled_array as $extension)
+                if ($extension != $name)
+                    $updated_array[] = $extension;
 
-            foreach ($config->$enabled_array as $extension) {
-              if ($extension != $name)
-                $new[] = $extension;
-            }
-
-            $config->set($enabled_array, $new);
+            $config->set($enabled_array, $updated_array);
 
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
@@ -1682,7 +1684,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST['theme']))
-                error(__("No Theme Specified"), __("You did not specify a theme to select or preview."));
+                error(__("No Theme Specified"), __("You did not specify a theme to select or preview."), null, 400);
 
             if ($_POST['change'] != "indubitably")
                 self::preview_theme();
@@ -1691,8 +1693,7 @@
             $theme = $_POST['theme'];
             $config->set("theme", $theme);
 
-            if (file_exists(THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo"))
-                load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
 
             $info = include THEMES_DIR.DIR.$theme.DIR."info.php";
             fallback($info["notifications"], array());
@@ -1754,13 +1755,13 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!empty($_POST['email']) and !is_email($_POST['email']))
-                error(__("Error"), __("Invalid email address."));
+                error(__("Error"), __("Invalid email address."), null, 422);
 
             if (!is_url($_POST['chyrp_url']))
-                error(__("Error"), __("Invalid Chyrp URL."));
+                error(__("Error"), __("Invalid Chyrp URL."), null, 422);
 
             if (!empty($_POST['url']) and !is_url($_POST['url']))
-                error(__("Error"), __("Invalid canonical URL."));
+                error(__("Error"), __("Invalid canonical URL."), null, 422);
 
             $config = Config::current();
 
@@ -1796,7 +1797,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
-                error(__("Error"), __("Invalid feed URL."));
+                error(__("Error"), __("Invalid feed URL."), null, 422);
 
             $separator = preg_quote(DIR, "~");
             preg_match("~^(".$separator.")?(.*?)(".$separator.")?$~", $_POST['uploads_path'], $matches);
@@ -1901,8 +1902,7 @@
                 Flash::notice(__("You are already logged in."), "/admin/");
 
             $_SESSION['redirect_to'] = "/admin/";
-            $url = (Config::current()->clean_urls) ? "/login/" : "/?action=login" ;
-            redirect($url);
+            redirect((Config::current()->clean_urls) ? "/login/" : "/?action=login");
         }
 
         /**
@@ -1915,8 +1915,12 @@
             if (!logged_in())
                 Flash::notice(__("You aren't logged in."), $config->url);
 
+            $cookies_notified = !empty($_SESSION['cookies_notified']);
+
             session_destroy();
             session();
+
+            $_SESSION['cookies_notified'] = $cookies_notified;
 
             Flash::notice(__("Logged out."), $config->url); # Supply full URL for compatibility with canonical URLs.
         }
@@ -1927,7 +1931,7 @@
          */
         public function help() {
             if (empty($_GET['id']))
-                error(__("Missing Argument"), __("An ID is required to display a help page."));
+                error(__("Missing Argument"), __("An ID is required to display a help page."), null, 400);
 
             $help = Trigger::current()->call("help_".$_GET['id']);
 
@@ -1936,25 +1940,29 @@
                     $help = "<h1>".__("Filtering Results")."</h1>\n".
                             "<p>".__("Use this search field to filter for specific items by entering plain text or keywords.")."</p>\n".
                             "<h2>".__("Keywords")."</h2>\n".
-                            "<p>".__("Use the syntax <code>attr:val;</code> to quickly match specific results where <code>attr</code> is equal to <code>val</code> (case insensitive).")."</p>";
+                            "<p>".__("Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code> (case insensitive). The keyword can be the name of a database column, the name of an <code>author</code> or a <code>group</code>, or a date/time. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016.")."</p>";
                     break;
                 case "slugs":
                     $help = "<h1>".__("Slugs")."</h1>\n".
-                            "<p>".__("The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (\"-\") and underscore (\"_\").")."</p>";
+                            "<p>".__("The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (&#8220;-&#8221;) and underscore (&#8220;_&#8221;).")."</p>";
                     break;
                 case "canonical_url":
                     $help = "<h1>".__("Canonical URL")."</h1>\n".
                             "<p>".__("If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:")."</p>\n".
-                            "<ol>\n<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n".
-                            "<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n</code></pre>".
-                            "</li>\n<li>".__("Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n</ol>";
+                            "<ol>\n".
+                            "<li>".__("Create an <em>index.php</em> file in your destination directory with the following in it:")."\n<pre><code>&lt;?php\n    require \"filesystem/path/to/chyrp/index.php\";\n</code></pre></li>\n".
+                            "<li>".__("Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location.")."</li>\n".
+                            "</ol>";
                     break;
                 case "unicode_emoticons":
                     $help = "<h1>".__("Unicode Emoticons")."</h1>\n".
                             "<p>".__("You can have some emoticons converted to equivalent Unicode emoji when your content is displayed. Your original content is not modified, so you can turn this feature on and off at any time. The following conversions will occur:")."</p>\n".
-                            "<table>\n<thead>\n".
-                            "<tr>\n<th>".__("Emoticon")."</th>\n".
-                            "<th>".__("Emoji")."</th>\n</tr>\n".
+                            "<table>\n".
+                            "<thead>\n".
+                            "<tr>\n".
+                            "<th>".__("Emoticon")."</th>\n".
+                            "<th>".__("Emoji")."</th>\n".
+                            "</tr>\n".
                             "</thead>\n".
                             "<tbody>\n".
                             "<tr>\n<td>o:-)</td>\n"."<td>".emote("o:-)")."</td>\n</tr>\n".
@@ -1981,14 +1989,18 @@
                             "<tr>\n<td>:-$</td>\n"."<td>".emote(":-$")."</td>\n</tr>\n".
                             "<tr>\n<td>x_x</td>\n"."<td>".emote("x_x")."</td>\n</tr>\n".
                             "<tr>\n<td>:-x</td>\n"."<td>".emote(":-x")."</td>\n</tr>\n".
-                            "</tbody>\n</table>";
+                            "</tbody>\n".
+                            "</table>";
                     break;
                 case "markdown":
                     $help = "<h1>".__("Markdown")."</h1>\n".
                             "<p>".__("Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:")."</p>\n".
-                            "<table>\n<thead>\n".
-                            "<tr>\n<th>".__("Markdown")."</th>\n".
-                            "<th>".__("Result")."</th>\n</tr>\n".
+                            "<table>\n".
+                            "<thead>\n".
+                            "<tr>\n".
+                            "<th>".__("Markdown")."</th>\n".
+                            "<th>".__("Result")."</th>\n".
+                            "</tr>\n".
                             "</thead>\n".
                             "<tbody>\n".
                             "<tr>\n<td>".__("## Heading")."</td>\n"."<td><h2>".__("Heading")."</h2></td>\n</tr>\n".
@@ -2002,9 +2014,13 @@
                             "<tr>\n<td>".__("`Code`")."</td>\n"."<td><code>".__("Code")."</code></td>\n</tr>\n".
                             "<tr>\n<td>".__("- List of items")."</td>\n"."<td><ul><li>".__("List of items")."</li></ul></em></td>\n</tr>\n".
                             "<tr>\n<td>".__("1. List of items")."</td>\n"."<td><ol><li>".__("List of items")."</li></ol></em></td>\n</tr>\n".
-                            "</tbody>\n</table>";
+                            "</tbody>\n".
+                            "</table>";
                     break;
             }
+
+            if (empty($help) or !is_string($help))
+                show_404(__("Not Found"), __("Help article not found."));
 
             $this->display("help", array("content" => $help), __("Help"));
         }
@@ -2125,7 +2141,11 @@
             fallback($title, camelize($action, true));
             $this->context = array_merge($context, $this->context);
 
+            $config = Config::current();
+            $visitor = Visitor::current();
+            $route = Route::current();
             $trigger = Trigger::current();
+
             $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
 
             # Are there any extension-added pages?
@@ -2136,10 +2156,6 @@
                 $$main_nav = $val;
                 $trigger->filter($$main_nav, $main_nav."_pages");
             }
-
-            $visitor = Visitor::current();
-            $config = Config::current();
-            $route = Route::current();
 
             $this->context["ip"]         = $_SERVER["REMOTE_ADDR"];
             $this->context["DIR"]        = DIR;

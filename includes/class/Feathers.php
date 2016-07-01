@@ -8,6 +8,10 @@
         # Holds all Feather instantiations.
         static $instances = array();
 
+        # Boolean: $cancelled
+        # Is the feather's execution cancelled?
+        public $cancelled = false;
+
         # Array: $custom_filters
         # Manages named Trigger filters for Feather fields.
         static $filters = array();

@@ -16,7 +16,7 @@
 {% for tag in tag_cloud %}
 <tr>
 <td class="tag_name main">
-<a class="tag" href="{{ admin_url('manage_tags', {'query': tag.clean}) }}">{{ tag.name }}</a>
+<a class="tag" href="{{ admin_url('manage_tags', {'query': tag.clean}) }}" title="{{ tag.title }}">{{ tag.name }}</a>
 </td>
 <td class="tag_count">
 {{ tag.popularity }}
@@ -36,7 +36,7 @@
 </tbody>
 </table>
 <h2>{{ GET.query is not empty ? "Posts tagged with &#8220;%s&#8221;" | translate("tags") | format(GET.query | striptags) : "Posts" | translate }}</h2>
-<form action="{{ admin_url('bulk_tag') }}" method="post">
+<form action="{{ admin_url('bulk_tag') }}" method="post" accept-charset="UTF-8">
 <table class="interactive">
 <thead>
 <tr class="head">

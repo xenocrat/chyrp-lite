@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ site.locale | split('_') | first }}">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? ": " ~ site.description : "" }}{{ title ? " &raquo; " ~ title | striptags : "" }}{% endblock %}</title>
 <meta name="description" content="{{ site.description }}">
 <meta name="generator" content="Chyrp Lite">
 <meta name="viewport" content="initial-scale = 1.0">
-<link rel="pingback" href="{{ site.chyrp_url }}/includes/xmlrpc.php">
+<link rel="pingback" href="{{ site.chyrp_url }}/includes/rpc.php">
 <link rel="EditURI" type="application/rsd+xml" href="{{ site.chyrp_url }}/includes/rsd.php">
 <link rel="shortcut icon" href="{{ site.chyrp_url }}/favicon.ico">
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
@@ -19,19 +19,27 @@
 <body>
 <!-- Mast -->
 <div class="shim">
-{% for flashes in flash.all %}
-{% for text in flashes %}
-<div class="ribbon flash">
-<h3 role="alert" class="ribbon">{{ text }}</h3>
+{% for notice in flash.notices %}
+<div class="ribbon flash notice">
+<h3 role="alert" class="ribbon">{{ notice }}</h3>
 </div>
 {% endfor %}
+{% for warning in flash.warnings %}
+<div class="ribbon flash warning">
+<h3 role="alert" class="ribbon">{{ warning }}</h3>
+</div>
+{% endfor %}
+{% for message in flash.messages %}
+<div class="ribbon flash message">
+<h3 role="alert" class="ribbon">{{ message }}</h3>
+</div>
 {% endfor %}
 </div>
 {% if not ["login", "controls", "register", "lost_password"] | contains(route.action) %}
 <div id="mast" role="banner">
 <h1 class="banner"><a href="{{ site.url }}">{{ site.name }}</a></h1>
 <div role="search" class="search_box">
-<form action="{{ site.url }}" method="get" accept-charset="utf-8">
+<form action="{{ site.url }}" method="get" accept-charset="UTF-8">
 <input type="hidden" name="action" value="search" id="action">
 <input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix(true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" title="{{ 'Search this blog' | translate }}">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>
@@ -112,7 +120,7 @@
 </div>
 {{ trigger.call("end_content") }}
 </body>
-<!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time }} -->
+<!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
 {% if debug and visitor.group.name == "Admin" %}
 <!--
 {% for debug in sql_debug %}

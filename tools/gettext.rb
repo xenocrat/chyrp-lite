@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
 require "find"
 require "optparse"
 
@@ -11,13 +14,13 @@ OPTIONS = {
 }
 
 # Shamelessly taken from the Twig lexer. :P
-STRING = /(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/sm
+STRING = /(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/
 
 ARGV.options do |o|
   script_name = File.basename($0)
 
   o.banner =    "Usage: #{script_name} [directory] [OPTIONS]"
-  o.define_head "Scans [directory] recursively for various forms of Gettext translations and outputs to a .po file."
+  o.define_head "Scans [directory] recursively for various forms of gettext translations and outputs to a .pot file."
 
   o.separator ""
 
@@ -56,9 +59,9 @@ class Gettext
   def initialize(start)
     @start, @files, @translations = start, [], {}
 
-    @domain = (OPTIONS[:domain].nil?) ? "" : ', "'+OPTIONS[:domain]+'"'
+    @domain = (OPTIONS[:domain].nil?) ? "" : ',\s*"'+OPTIONS[:domain]+'"'
     @twig_domain = (OPTIONS[:domain].nil? or OPTIONS[:domain] == "theme") ? "" : '\("'+OPTIONS[:domain]+'"\)'
-    @twig_arg_domain = (OPTIONS[:domain].nil? or OPTIONS[:domain] == "theme") ? "" : ', "'+OPTIONS[:domain]+'"'
+    @twig_arg_domain = (OPTIONS[:domain].nil? or OPTIONS[:domain] == "theme") ? "" : ',\s*"'+OPTIONS[:domain]+'"'
 
     prepare_files
     do_scan
@@ -77,9 +80,9 @@ class Gettext
       else
         next unless path =~ /\.(php|twig)/
         @files << [cleaned, path] if File.read(path) =~ /__\((#{STRING})#{@domain}\)/
-        @files << [cleaned, path] if File.read(path) =~ /_f\((#{STRING}), .*?#{@domain}\)/
-        @files << [cleaned, path] if File.read(path) =~ /_p\((#{STRING}), (#{STRING}), .*?#{@domain}\)/
-        @files << [cleaned, path] if File.read(path) =~ /Group::add_permission\(([^,]+), (#{STRING})\)/
+        @files << [cleaned, path] if File.read(path) =~ /_f\((#{STRING}),.*?#{@domain}\)/
+        @files << [cleaned, path] if File.read(path) =~ /_p\((#{STRING}),\s*(#{STRING}),.*?#{@domain}\)/
+        @files << [cleaned, path] if File.read(path) =~ /Group::add_permission\(([^,]+),\s*(#{STRING})\)/
         @files << [cleaned, path] if File.read(path) =~ /(#{STRING})\s*\|\s*translate#{@twig_domain}/
         @files << [cleaned, path] if File.read(path) =~ /(#{STRING})\s*\|\s*translate_plural\((#{STRING}),\s*.*?#{@domain}\)\s*\|\s*format\(.*?\)/
       end
@@ -117,7 +120,7 @@ class Gettext
   end
 
   def scan_permissions(text, line, filename, clean_filename)
-    text.gsub(/Group::add_permission\(([^,]+), (#{STRING})\)/) do
+    text.gsub(/Group::add_permission\(([^,]+),\s*(#{STRING})\)/) do
       if @translations[$2].nil?
         @translations[$2] = { :places => [clean_filename + ":" + line.to_s],
                               :filter => false,
@@ -129,7 +132,7 @@ class Gettext
   end
 
   def scan_filter(text, line, filename, clean_filename)
-    text.gsub(/_f\((#{STRING}), .*?#{@domain}\)/) do
+    text.gsub(/_f\((#{STRING}),.*?#{@domain}\)/) do
       if @translations[$1].nil?
         @translations[$1] = { :places => [clean_filename + ":" + line.to_s],
                               :filter => true,
@@ -141,7 +144,7 @@ class Gettext
   end
 
   def scan_plural(text, line, filename, clean_filename)
-    text.gsub(/_p\((#{STRING}), (#{STRING}), .*?#{@domain}\)/) do
+    text.gsub(/_p\((#{STRING}),\s*(#{STRING}),.*?#{@domain}\)/) do
       if @translations[$1].nil?
         @translations[$1] = { :places => [clean_filename + ":" + line.to_s],
                               :filter => true,

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="user_login standalone">
 <h2>{{ "Log in" | translate }}</h2>
-<form action="{{ url('login') }}" method="post">
+<form action="{{ url('login') }}" method="post" accept-charset="UTF-8">
 <label for="login">{{ "Username" | translate }}</label>
 <input type="text" name="login" value="{{ POST.login is defined ? POST.login | fix(true) : '' }}" id="login" tabindex="1">
 <label for="password">{{ "Password" | translate }}</label>

@@ -87,7 +87,7 @@ h3 {                                            font-size: 1em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
 h3.flash {                                      margin: 0em }
-h3.filter {                                     padding: 4rem 0em 0rem 4rem;
+h3.filter {                                     padding: 4rem 0em 0rem 2rem;
                                                 margin-bottom: 0em }
 h3.archive {                                    margin-top: 1em;
                                                 clear: both }
@@ -230,7 +230,7 @@ input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
 input:-ms-input-placeholder,
-input:input-placeholder {                       color: #c6ccc8;
+input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
 input[type='checkbox'] {                        width: auto }
 input.error {                                   background-color: #ff8080 }
@@ -239,7 +239,6 @@ input#search_field {                            display: inline;
                                                 padding-right: 34px }
 div.search_box input[type='text'] {             width: 10em;
                                                 display: inline-block }
-form.inline_edit input {                        width: 100% }
 select {                                        box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
@@ -317,8 +316,7 @@ div.doaction:last-child {                       margin-bottom: 0em }
 div.speak {                                     margin-bottom: 0em }
 div.admin, div.downloads {                      margin: 1em 0em 0em 0em }
 input + div.doaction, textarea + div.doaction { padding-top: 0.5em }
-div#main > article, div.standalone,
-form.inline_edit {                              box-sizing: border-box;
+div#main > article, div.standalone {            box-sizing: border-box;
                                                 display: block;
                                                 position: relative;
                                                 width: 100%;
@@ -541,16 +539,13 @@ img.gravatar {                                  position: absolute;
                                                 height: 48px }
 .ajax_loading {                                 background-size: 30px 30px;
                                                 background-image: linear-gradient(-45deg, #ebeae6 25%, transparent 25%, transparent 50%, #ebeae6 50%, #ebeae6 75%, transparent 75%, transparent) !important;
-                                                -webkit-animation: stripes 2s linear infinite;
-                                                -moz-animation: stripes 2s linear infinite;
-                                                -ms-animation: stripes 2s linear infinite;
                                                 animation: stripes 2s linear infinite }
 .ajax_loading .doaction {                       visibility: hidden }
 
-@-webkit-keyframes stripes {                    from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
-@-moz-keyframes stripes {                       from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
-@-ms-keyframes stripes {                        from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
-@keyframes stripes {                            from { background-position: 0px 0px; } to { background-position: 60px 30px; } }
+@keyframes stripes {
+    from {                                      background-position: 0px 0px }
+    to {                                        background-position: 60px 30px }
+}
 
 @media print {
     html {                                      font-size: 4.2mm }
@@ -571,17 +566,13 @@ img.gravatar {                                  position: absolute;
                                                 display: block }
     h1.banner {                                 margin-bottom: 2rem }
     div#mast_box {                              padding: 3rem 1rem }
-    div#main {                                  padding: 0em 3rem }
     ul.navigation li > a {                      display: inline-block;
                                                 margin: 0em 0.5em 2em 0.5em }
     div.search_box {                            margin-top: 0em }
     button#search_submit {                      display: none }
     div#main > article, div.standalone,
-    form.inline_edit {                          padding: 3rem 0em 0em 0em }
-    div#main > article.commentary {             padding: 0rem }
-    div.metadata {                              padding-bottom: 1rem }
-    div.prev {                                  margin: 3rem 0em 0rem -2rem }
-    div.next {                                  margin: 2rem -2em 0rem 0rem }
+    div#main > article.commentary {             padding: 2rem 2rem 0rem 2rem }
+    div.metadata {                              padding-bottom: 2rem }
     ol.comments li {                            padding: 2rem }
     img.gravatar {                              position: static;
                                                 width: 24px;
@@ -604,8 +595,7 @@ img.gravatar {                                  position: absolute;
     div.search_box {                            display: inline-block }
     div.prev {                                  margin: 4rem 0em 0rem 4rem }
     div.next {                                  margin: 0rem 4em 0rem 0rem }
-    div#main > article, div.standalone,
-    form.inline_edit {                          padding-left: 8rem;
+    div#main > article, div.standalone {        padding-left: 8rem;
                                                 padding-right: 8rem }
     div#main > article.commentary {             padding: 0rem 8rem }
 }

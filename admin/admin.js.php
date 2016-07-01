@@ -37,15 +37,6 @@ $(function() {
     if (Route.action == "user_settings")
         toggle_correspondence();
 });
-var Route = {
-    action: "<?php echo fix(@$_GET['action']); ?>"
-}
-var Site = {
-    url: '<?php echo $config->url; ?>',
-    chyrp_url: '<?php echo $config->chyrp_url; ?>',
-    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
-    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
-}
 function toggle_all() {
     var all_checked = true;
 
@@ -107,7 +98,7 @@ function toggle_all() {
     });
 }
 function toggle_options() {
-    if ($("#more_options").size()) {
+    if ($("#more_options").length) {
         if (Cookie.get("show_more_options") == "true")
             var more_options_text = '<?php echo __("&uarr; Fewer Options", "theme"); ?>';
         else
@@ -154,7 +145,7 @@ function validate_slug() {
     });
 }
 function validate_email() {
-    $("body").on("keyup", "input[type='email']", function(e) {
+    $("input[type='email']").keyup(function(e) {
         if ($(this).val() != "" && !isEmail($(this).val()))
             $(this).addClass("error");
         else
@@ -162,7 +153,7 @@ function validate_email() {
     });
 }
 function validate_url() {
-    $("body").on("keyup", "input[type='url']", function(e) {
+    $("input[type='url']").keyup(function(e) {
         if ($(this).val() != "" && !isURL($(this).val()))
             $(this).addClass("error");
         else
@@ -185,13 +176,13 @@ function validate_passwords(selector_primary, selector_confirm) {
     $(selector_primary).parents("form").on("submit", function(e) {
         if ($(selector_primary).val() != $(selector_confirm).val()) {
             e.preventDefault();
-            alert('<?php echo __("Passwords do not match."); ?>');
+            Flash.warning('<?php echo __("Passwords do not match."); ?>');
         }
     });
 }
 function confirm_edit_group(msg) {
     $("form.confirm").submit(function(e) {
-        if (!confirm('<?php echo __("You are a member of this group. Are you sure the permissions are as you want them?", "theme"); ?>'))
+        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to update the permissions?", "theme"); ?>'))
             e.preventDefault();
     });
 }
@@ -200,6 +191,67 @@ function confirm_delete_group(msg) {
         if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>'))
             e.preventDefault();
     });
+}
+var Route = {
+    action: "<?php echo fix(@$_GET['action'], true); ?>"
+}
+var Site = {
+    url: '<?php echo $config->url; ?>',
+    chyrp_url: '<?php echo $config->chyrp_url; ?>',
+    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
+    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
+}
+var Flash = {
+    last: {
+        string: "",
+        timestamp: Date.now()
+    },
+    notice: function(strings) {
+        if (!(strings instanceof Array))
+            strings = new Array(strings);
+
+        for (var n = 0; n < strings.length; n++)
+            Flash.alert("flash notice", strings[n]);
+    },
+    warning: function(strings) {
+        if (!(strings instanceof Array))
+            strings = new Array(strings);
+
+        for (var w = 0; w < strings.length; w++)
+            Flash.alert("flash warning", strings[w]);
+    },
+    message: function(strings) {
+        if (!(strings instanceof Array))
+            strings = new Array(strings);
+
+        for (var m = 0; m < strings.length; m++)
+            Flash.alert("flash message", strings[m]);
+    },
+    alert: function(classes, string) {
+        var now = Date.now();
+
+        // Retire previous flashes after an interval of 1000ms and add the new flash.
+        if (string !== Flash.last.string) {
+            if (now > Flash.last.timestamp + 1000)
+                $("p[role='alert'].flash").stop().delay(400).fadeOut("fast", function() {
+                    $(this).remove();
+                });
+
+            $("#content").prepend(
+                [$("<p>", {"role": "alert"}).addClass(classes).html(string)]
+            );
+        }
+
+        // Scroll to the top of the content area.
+        var bodyViewTop = $("body").scrollTop();
+        var flashOffset = $("#content").offset().top;
+
+        if (bodyViewTop > flashOffset)
+            $("body").stop().animate({scrollTop: flashOffset}, "fast");
+
+        Flash.last.string = string;
+        Flash.last.timestamp = now;
+    }
 }
 var Help = {
     init: function() {
@@ -234,9 +286,6 @@ var Write = {
     preview: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
     wysiwyg: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
-        if (/(write)_/.test(Route.action))
-            Write.latest_feather();
-
         // Insert buttons for ajax previews.
         if (Write.preview && !Write.wysiwyg)
             $("*[data-preview]").each(function() {
@@ -256,14 +305,6 @@ var Write = {
                 );
             });
     },
-    latest_feather: function() {
-        // Validate and remember the latest feather.
-        var selected = $("#sub_nav").children(".selected").attr("id").replace(/feathers\[([^\]]+)\]/, "$1");
-        $.post(Site.chyrp_url + "/includes/ajax.php", {
-            action: "latest_feather",
-            feather: selected
-        });
-    },
     ajax_previews: function(content, filter) {
         var uid = Math.floor(Math.random()*1000000000000).toString(16);
 
@@ -272,7 +313,7 @@ var Write = {
             "id": uid,
             "action": Site.chyrp_url + "/includes/ajax.php",
             "method": "post",
-            "accept-charset": "utf-8",
+            "accept-charset": "UTF-8",
             "target": uid,
             "style": "display: none;"
         }).append(
@@ -290,6 +331,11 @@ var Write = {
                 "type": "hidden",
                 "name": "content",
                 "value": content
+            }),
+            $("<input>", {
+                "type": "hidden",
+                "name": "hash",
+                "value": Site.key
             })]
         ).insertAfter("#content");
 
@@ -325,20 +371,23 @@ var Extend = {
     },
     action: null,
     confirmed: null,
+    confirmation: null,
+    busy: false,
     failed: false,
     init: function() {
-        if (Site.ajax)
-            $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").click(function(e) {
-                if (!Extend.failed) {
+        if (Site.ajax) {
+            $(".module_disabler_confirm").hide();
+            $(".module_enabler, .module_disabler, .feather_enabler, .feather_disabler").on("submit", function(e) {
+                if (!Extend.failed && !Extend.busy) {
                     e.preventDefault();
+                    Extend.busy = true;
                     Extend.ajax_toggle(e);
                 }
             });
+        }
 
-        if (Route.action != "modules")
-            return;
-
-        Extend.check_errors();
+        if (Route.action == "modules")
+            Extend.check_errors();
     },
     reset_errors: function() {
         $(".modules li.error").removeClass("error");
@@ -398,6 +447,7 @@ var Extend = {
         Extend.extension.type = null;
         Extend.action = null;
         Extend.confirmed = null;
+        Extend.confirmation = null;
     },
     ajax_toggle: function(e) {
         Extend.ajax_reset(); // Reset all values.
@@ -412,61 +462,54 @@ var Extend = {
         else if ($(e.target).parents("#feathers_enabled").length || $(e.target).parents("#feathers_disabled").length)
             Extend.extension.type = "feather";
 
-        Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
-
-        if (Extend.action == null || Extend.extension.type == null || !Extend.extension.name) {
+        if (Extend.action == null || Extend.extension.type == null) {
             Extend.panic();
             return;
         }
 
-        $.post(Site.chyrp_url + "/includes/ajax.php", {
-            action: "confirm",
-            extension: Extend.extension.name,
-            type: Extend.extension.type,
-        }, function(data) {
-            if (data != "" && Extend.action == "disable")
-                Extend.confirmed = (confirm(data)) ? 1 : 0;
+        Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
+        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html();
 
-            if (Site.key == "") {
-                if (Extend.action == "enable")
-                    Extend.panic('<?php echo __("The module cannot be enabled because your web browser did not send proper credentials.", "theme"); ?>');
-                else
-                    Extend.panic('<?php echo __("The module cannot be disabled because your web browser did not send proper credentials.", "theme"); ?>');
+        if (!!Extend.confirmation && Extend.action == "disable")
+            Extend.confirmed = (confirm(Extend.confirmation)) ? 1 : 0 ;
 
-                return;
-            }
+        if (Site.key == "") {
+            Extend.panic('<?php echo __("The extension cannot be toggled because your web browser did not send proper credentials.", "theme"); ?>');
+            return;
+        }
 
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: Site.chyrp_url + "/includes/ajax.php",
-                data: {
-                    action: Extend.action,
-                    extension: Extend.extension.name,
-                    type: Extend.extension.type,
-                    confirm: Extend.confirmed,
-                    hash: Site.key
-                },
-                success: function(json) {
-                    var extension = $("#" + Extend.extension.type + "_" + Extend.extension.name).detach();
-                    $(extension).appendTo("#" + Extend.extension.type + "s_" + Extend.action + "d");
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: Site.chyrp_url + "/includes/ajax.php",
+            data: {
+                action: Extend.action,
+                extension: Extend.extension.name,
+                type: Extend.extension.type,
+                confirm: Extend.confirmed,
+                hash: Site.key
+            },
+            success: function(response) {
+                var item = "#" + Extend.extension.type + "_" + Extend.extension.name; // Item to be moved e.g. "#module_tags".
+                var list = "#" + Extend.extension.type + "s_" + Extend.action + "d";  // Destination list e.g. "#modules_enabled".
 
-                    if (Extend.extension.type == "module")
-                        Extend.check_errors();
+                $(item).detach().appendTo(list);
 
-                    $(json.notifications).each(function() {
-                        if (this != "")
-                            alert(this.replace(/<([^>]+)>\n?/gm, ""));
-                    });
-                },
-                error: function() {
-                    if (Extend.action == "enable")
-                        alert('<?php echo __("There was an error enabling the extension.", "theme"); ?>');
-                    else
-                        alert('<?php echo __("There was an error disabling the extension.", "theme"); ?>');
-                }
-            })
-        }, "text").fail(Extend.panic);
+                if (Extend.extension.type == "module")
+                    Extend.check_errors();
+
+                // Display any notifications for the extension.
+                if (response.data != null)
+                    Flash.message(response.data);
+
+                // Display the message returned by the responder.
+                if (response.text != null)
+                    Flash.notice(response.text);
+
+                Extend.busy = false;
+            },
+            error: Extend.panic
+        });
     },
     panic: function(message) {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;

@@ -1,0 +1,7 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<div class="ribbon flash">
+<h3 role="status" class="ribbon">{{ reason is defined ? reason | fix : "Forbidden." | translate }}</h3>
+</div>
+{% endblock %}

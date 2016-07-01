@@ -6,20 +6,20 @@
      * Performs upgrade functions based on individual tasks, and checks whether or not they need to be done.
      */
 
-    header("Content-type: text/html; charset=UTF-8");
+    header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.02");
-    define('CHYRP_CODENAME', "Russet");
+    define('CHYRP_VERSION',  "2016.03");
+    define('CHYRP_CODENAME', "Chestnut");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
+    define('MAIN',           false);
     define('ADMIN',          false);
     define('AJAX',           false);
     define('XML_RPC',        false);
     define('UPGRADING',      true);
     define('INSTALLING',     false);
     define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-    define('INDEX',          false);
     define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(__FILE__));
     define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
@@ -27,6 +27,7 @@
     define('MODULES_DIR',    MAIN_DIR.DIR."modules");
     define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
     define('THEMES_DIR',     MAIN_DIR.DIR."themes");
+    define('USE_OB',         true);
     define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
@@ -38,9 +39,6 @@
     # Define a safe value to avoid warnings pre-5.4
     if (!defined('JSON_UNESCAPED_SLASHES'))
         define('JSON_UNESCAPED_SLASHES', 0);
-
-    if (version_compare(PHP_VERSION, "5.3.2", "<"))
-        exit("Chyrp Lite requires PHP 5.3.2 or greater.");
 
     # Make sure E_STRICT is on so Chyrp remains errorless.
     error_reporting(E_ALL | E_STRICT);
@@ -55,18 +53,13 @@
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
-    # File: Gettext
-    # Gettext library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."gettext.php";
-
-    # File: Streams
-    # Streams library.
-    require_once INCLUDES_DIR.DIR."lib".DIR."gettext".DIR."streams.php";
-
     # File: SQL
     # See Also:
     #     <SQL>
     require INCLUDES_DIR.DIR."class".DIR."SQL.php";
+
+    # Register our autoloader.
+    spl_autoload_register("autoload");
 
     /**
      * Class: Config
@@ -106,10 +99,9 @@
 
             Config::$json[$setting] = $value;
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $dump = $protection.json_set(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             echo $message.test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
-
         }
 
         /**
@@ -153,7 +145,7 @@
 
             unset(Config::$json[$setting]);
             $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $dump = $protection.json_encode(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $dump = $protection.json_set(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             echo _f("Removing %s setting...", array($setting)).
                  test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
@@ -189,11 +181,8 @@
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect("install.php");
 
-    Config::$json = json_decode(preg_replace("/<\?php(.+)\?>\n?/s", "",
-                                file_get_contents(INCLUDES_DIR.DIR."config.json.php")), true);
-
-    if (json_last_error())
-        $errors[] = fix(json_last_error_msg());
+    Config::$json = json_get(preg_replace("/<\?php(.+)\?>\n?/s", "",
+                             file_get_contents(INCLUDES_DIR.DIR."config.json.php")), true);
 
     # Prepare the SQL interface and initialize the connection to SQL server.
 
@@ -204,7 +193,7 @@
 
     $sql->connect();
 
-    # Load the translator
+    # Load the translator.
 
     load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.Config::get("locale").".mo");
 
@@ -290,7 +279,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <title><?php echo __("Chyrp Lite Upgrader"); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
