@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-06-29 22:22+0000\n"
+"POT-Creation-Date: 2016-07-01 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -91,7 +91,7 @@ msgstr ""
 
 #: modules/importers/importers.php:349
 #: modules/importers/importers.php:441
-#: modules/importers/importers.php:466
+#: modules/importers/importers.php:462
 msgid "Database Error"
 msgstr ""
 
@@ -103,79 +103,79 @@ msgstr ""
 msgid "Could not connect to the MovableType database."
 msgstr ""
 
-#: modules/importers/importers.php:517
+#: modules/importers/importers.php:513
 msgid "MovableType content successfully imported!"
 msgstr ""
 
-#: modules/importers/importers.php:528
+#: modules/importers/importers.php:524
 msgid "eXtended .XML File"
 msgstr ""
 
-#: modules/importers/importers.php:532
-#: modules/importers/importers.php:589
-#: modules/importers/importers.php:623
+#: modules/importers/importers.php:528
+#: modules/importers/importers.php:585
+#: modules/importers/importers.php:619
 msgid "What URL is used for embedded media?"
 msgstr ""
 
-#: modules/importers/importers.php:534
-#: modules/importers/importers.php:591
-#: modules/importers/importers.php:625
+#: modules/importers/importers.php:530
+#: modules/importers/importers.php:587
+#: modules/importers/importers.php:621
 msgid "(optional)"
 msgstr ""
 
-#: modules/importers/importers.php:536
+#: modules/importers/importers.php:532
 msgid "Usually something like <code>http://example.com/wp-content/uploads/</code>."
 msgstr ""
 
-#: modules/importers/importers.php:540
-#: modules/importers/importers.php:558
-#: modules/importers/importers.php:597
-#: modules/importers/importers.php:631
+#: modules/importers/importers.php:536
+#: modules/importers/importers.php:554
+#: modules/importers/importers.php:593
+#: modules/importers/importers.php:627
 msgid "Import"
 msgstr ""
 
-#: modules/importers/importers.php:550
+#: modules/importers/importers.php:546
 msgid "Your Tumblr URL"
 msgstr ""
 
-#: modules/importers/importers.php:553
+#: modules/importers/importers.php:549
 msgid "Something like <code>http://example.tumblr.com</code>."
 msgstr ""
 
-#: modules/importers/importers.php:555
+#: modules/importers/importers.php:551
 msgid "Note: Audio tumbles cannot be imported."
+msgstr ""
+
+#: modules/importers/importers.php:564
+#: modules/importers/importers.php:603
+msgid "Host"
 msgstr ""
 
 #: modules/importers/importers.php:568
 #: modules/importers/importers.php:607
-msgid "Host"
+msgid "Username"
 msgstr ""
 
 #: modules/importers/importers.php:572
 #: modules/importers/importers.php:611
-msgid "Username"
+msgid "Password"
 msgstr ""
 
 #: modules/importers/importers.php:576
 #: modules/importers/importers.php:615
-msgid "Password"
-msgstr ""
-
-#: modules/importers/importers.php:580
-#: modules/importers/importers.php:619
 msgid "Database"
 msgstr ""
 
-#: modules/importers/importers.php:584
+#: modules/importers/importers.php:580
 msgid "Table Prefix"
 msgstr ""
 
-#: modules/importers/importers.php:586
+#: modules/importers/importers.php:582
 msgid "(if any)"
 msgstr ""
 
-#: modules/importers/importers.php:593
-#: modules/importers/importers.php:627
+#: modules/importers/importers.php:589
+#: modules/importers/importers.php:623
 msgid "Usually something like <code>http://example.com/images/</code>."
 msgstr ""
 

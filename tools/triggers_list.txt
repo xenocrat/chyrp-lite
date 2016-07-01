@@ -378,7 +378,7 @@ Arguments:
 add_user
 --------
 Called from:
-	includes/model/User.php on line 122
+	includes/model/User.php on line 115
 Arguments:
 	$user
 
@@ -386,7 +386,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 176
+	includes/model/User.php on line 169
 Arguments:
 	$this, $old
 
@@ -491,7 +491,7 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/importers/importers.php on line 510
+	modules/importers/importers.php on line 506
 Arguments:
 	$post, $new_post, $link
 
@@ -499,7 +499,7 @@ Arguments:
 import_movabletype_page
 -----------------------
 Called from:
-	modules/importers/importers.php on line 513
+	modules/importers/importers.php on line 509
 Arguments:
 	$post, $new_page, $link
 
@@ -748,7 +748,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 778
+	includes/helpers.php on line 790
 Arguments:
 	$query, $plain
 
@@ -758,7 +758,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1262
+	includes/helpers.php on line 1274
 
 
 send_mail
@@ -766,7 +766,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1949
+	includes/helpers.php on line 1961
 
 
 xmlrpc_methods
@@ -950,7 +950,7 @@ before_add_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 116
+	includes/model/User.php on line 109
 
 
 before_update_user
@@ -958,7 +958,7 @@ before_update_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 170
+	includes/model/User.php on line 163
 
 
 cacher_regenerate_triggers
