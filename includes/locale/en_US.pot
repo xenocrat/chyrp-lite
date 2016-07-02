@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-01 07:57+0000\n"
+"POT-Creation-Date: 2016-07-01 22:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -68,15 +68,15 @@ msgstr ""
 #: includes/download.php:15
 #: includes/download.php:24
 #: includes/error.php:159
-#: includes/helpers.php:1541
-#: includes/helpers.php:1662
-#: includes/helpers.php:1665
-#: includes/helpers.php:1668
-#: includes/helpers.php:1671
-#: includes/helpers.php:1674
-#: includes/helpers.php:1677
-#: includes/helpers.php:1680
-#: includes/helpers.php:1685
+#: includes/helpers.php:1543
+#: includes/helpers.php:1664
+#: includes/helpers.php:1667
+#: includes/helpers.php:1670
+#: includes/helpers.php:1673
+#: includes/helpers.php:1676
+#: includes/helpers.php:1679
+#: includes/helpers.php:1682
+#: includes/helpers.php:1687
 #: includes/thumb.php:15
 #: includes/thumb.php:18
 #: includes/thumb.php:44
@@ -171,7 +171,7 @@ msgstr ""
 #: includes/controller/Main.php:374
 #: includes/controller/Main.php:446
 #: includes/download.php:18
-#: includes/helpers.php:1538
+#: includes/helpers.php:1540
 #: includes/thumb.php:21
 #: index.php:22
 msgid "Access Denied"
@@ -1349,183 +1349,183 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr ""
 
-#: includes/helpers.php:664
+#: includes/helpers.php:665
 msgid "&#8220;"
 msgstr ""
 
-#: includes/helpers.php:664
+#: includes/helpers.php:665
 msgid "&#8221;"
 msgstr ""
 
-#: includes/helpers.php:666
+#: includes/helpers.php:667
 msgid "and "
 msgstr ""
 
-#: includes/helpers.php:743
+#: includes/helpers.php:745
 msgid "year"
 msgstr ""
 
-#: includes/helpers.php:744
+#: includes/helpers.php:746
 msgid "month"
 msgstr ""
 
-#: includes/helpers.php:745
+#: includes/helpers.php:747
 msgid "day"
 msgstr ""
 
-#: includes/helpers.php:746
+#: includes/helpers.php:748
 msgid "hour"
 msgstr ""
 
-#: includes/helpers.php:747
+#: includes/helpers.php:749
 msgid "minute"
 msgstr ""
 
-#: includes/helpers.php:748
+#: includes/helpers.php:750
 msgid "second"
 msgstr ""
 
-#: includes/helpers.php:1387
+#: includes/helpers.php:1389
 #, php-format
 msgid "%s module is missing."
 msgstr ""
 
-#: includes/helpers.php:1396
+#: includes/helpers.php:1398
 #, php-format
 msgid "%s module is damaged."
 msgstr ""
 
-#: includes/helpers.php:1413
+#: includes/helpers.php:1415
 #, php-format
 msgid "%s feather is missing."
 msgstr ""
 
-#: includes/helpers.php:1422
+#: includes/helpers.php:1424
 #, php-format
 msgid "%s feather is damaged."
 msgstr ""
 
-#: includes/helpers.php:1485
+#: includes/helpers.php:1487
 #, php-format
 msgid "Execution of %s has been cancelled because the module could not continue."
 msgstr ""
 
-#: includes/helpers.php:1510
+#: includes/helpers.php:1512
 #, php-format
 msgid "Execution of %s has been cancelled because the feather could not continue."
 msgstr ""
 
-#: includes/helpers.php:1538
+#: includes/helpers.php:1540
 #, php-format
 msgid "<em>%s</em> is not an uploaded file."
 msgstr ""
 
-#: includes/helpers.php:1541
+#: includes/helpers.php:1543
 #, php-format
 msgid "Upload destination <em>%s</em> is not writable."
 msgstr ""
 
-#: includes/helpers.php:1569
+#: includes/helpers.php:1571
 msgid "Unsupported File Type"
 msgstr ""
 
-#: includes/helpers.php:1570
+#: includes/helpers.php:1572
 #, php-format
 msgid "Only files of the following types are accepted: %s."
 msgstr ""
 
-#: includes/helpers.php:1663
+#: includes/helpers.php:1665
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:1666
+#: includes/helpers.php:1668
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:1669
+#: includes/helpers.php:1671
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:1672
+#: includes/helpers.php:1674
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:1675
+#: includes/helpers.php:1677
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1678
+#: includes/helpers.php:1680
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:1681
+#: includes/helpers.php:1683
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:1686
+#: includes/helpers.php:1688
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:1896
+#: includes/helpers.php:1898
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:1918
+#: includes/helpers.php:1920
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:1991
+#: includes/helpers.php:1993
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:1992
-#: includes/helpers.php:2002
-#: includes/helpers.php:2012
+#: includes/helpers.php:1994
+#: includes/helpers.php:2004
+#: includes/helpers.php:2014
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:1994
+#: includes/helpers.php:1996
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:1996
+#: includes/helpers.php:1998
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2001
+#: includes/helpers.php:2003
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2004
+#: includes/helpers.php:2006
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2006
+#: includes/helpers.php:2008
 msgid "Visit this link to reset your password:"
 msgstr ""
 
-#: includes/helpers.php:2011
+#: includes/helpers.php:2013
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2014
+#: includes/helpers.php:2016
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/helpers.php:2024
+#: includes/helpers.php:2026
 msgid "Undeliverable"
 msgstr ""
 
-#: includes/helpers.php:2024
+#: includes/helpers.php:2026
 msgid "Unable to send email."
 msgstr ""
 
