@@ -231,7 +231,7 @@
             static $instance = null;
 
             if (!isset($controller) and empty($instance))
-                error(__("Error"), __("Route was initiated without a Controller."), debug_backtrace());
+                trigger_error(__("Route was initiated without a Controller."), E_USER_WARNING);
 
             $instance = (empty($instance)) ? new self($controller) : $instance ;
             return $instance;
