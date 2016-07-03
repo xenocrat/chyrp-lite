@@ -133,7 +133,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_markdown() {
-        Config::current()->set("enable_markdown", true, false, true);
+        Config::current()->set("enable_markdown", true, null, true);
     }
 
     /**
@@ -143,7 +143,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_homepage() {
-        Config::current()->set("enable_homepage", false, false, true);
+        Config::current()->set("enable_homepage", false, null, true);
     }
 
     /**
@@ -153,7 +153,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_uploads_limit() {
-        Config::current()->set("uploads_limit", 10, false, true);
+        Config::current()->set("uploads_limit", 10, null, true);
     }
 
     /**
@@ -173,7 +173,7 @@
      * Versions: 2015.07 => 2016.01
      */
     function add_admin_per_page() {
-        Config::current()->set("admin_per_page", 25, false, true);
+        Config::current()->set("admin_per_page", 25, null, true);
     }
 ?>
 <!DOCTYPE html>
