@@ -748,7 +748,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 790
+	includes/helpers.php on line 792
 Arguments:
 	$query, $plain
 
@@ -758,7 +758,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1274
+	includes/helpers.php on line 1276
 
 
 send_mail
@@ -766,7 +766,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1961
+	includes/helpers.php on line 1963
 
 
 xmlrpc_methods

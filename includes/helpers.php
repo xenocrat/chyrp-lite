@@ -660,6 +660,7 @@
     function list_notate($array, $quotes = false) {
         $count = 0;
         $items = array();
+
         foreach ($array as $item) {
             $string = (is_string($item) and $quotes) ? __("&#8220;").$item.__("&#8221;") : $item ;
             if (count($array) == ++$count and $count !== 1)
@@ -702,11 +703,12 @@
             return;
         }
 
-        foreach (Config::current()->enabled_modules as $module)
-            if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
-                require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
-                return;
-            }
+        if (!INSTALLING and !UPGRADING)
+            foreach (Config::current()->enabled_modules as $module)
+                if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
+                    require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
+                    return;
+                }
     }
 
     /**
