@@ -145,15 +145,12 @@
             !function_exists("admin_url") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
-            !property_exists(Config::current(), "url") or
             !property_exists(Config::current(), "chyrp_url")) {
 
             exit("ERROR: ".strip_tags($body));
         }
 
-        $config = Config::current();
-        $url = $config->url;
-        $chyrp_url = $config->chyrp_url;
+        $chyrp_url = Config::current()->chyrp_url;
 
         # Validate title and body text before we display the pretty message.
         $title = oneof($title, __("Error"));
