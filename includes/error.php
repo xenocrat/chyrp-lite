@@ -156,6 +156,9 @@
         $title = oneof($title, __("Error"));
         $body = oneof($body, __("An unspecified error has occurred."));
 
+        #---------------------------------------------
+        # Output Starts
+        #---------------------------------------------
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -358,6 +361,10 @@
     </body>
 </html>
 <?php
+        #---------------------------------------------
+        # Output Ends
+        #---------------------------------------------
+
         # Terminate execution.
         exit;
     }
