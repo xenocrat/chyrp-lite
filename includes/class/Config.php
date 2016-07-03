@@ -40,10 +40,11 @@
          * Parameters:
          *     $setting - The setting name.
          *     $value - The value.
-         *     $overwrite - If the setting exists and is the same value, should it be overwritten?
+         *     $overwrite - Overwrite the setting if it exists and has the same value.
+         *     $fallback - Add the setting only if it doesn't already exist.
          */
-        public function set($setting, $value, $overwrite = true) {
-            if (isset($this->$setting) and $this->$setting == $value and !$overwrite)
+        public function set($setting, $value, $overwrite = true, $fallback = false) {
+            if (isset($this->$setting) and ((!$overwrite and $this->$setting == $value) or $fallback))
                 return false;
 
             # Add the setting
@@ -60,8 +61,7 @@
 
             # Update the configuration file.
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                error(__("Error"),
-                      _f("Failed to set <code>%s</code> because <em>config.json.php</em> is not writable.", fix($setting)));
+                trigger_error(__("The configuration file is not writable."), E_USER_WARNING);
 
             return true;
         }
@@ -85,8 +85,9 @@
 
             # Update the configuration file.
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                error(__("Error"),
-                      _f("Failed to remove <code>%s</code> because <em>config.json.php</em> is not writable.", fix($setting)));
+                trigger_error(__("The configuration file is not writable."), E_USER_WARNING);
+
+            return true;
         }
 
         /**
