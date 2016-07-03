@@ -83,7 +83,7 @@
          *     $overwrite - If the setting exists and is the same value, should it be overwritten?
          */
         public function set($setting, $value, $overwrite = true) {
-            if (isset($this->$setting) and $this->$setting == $value and !$overwrite and !UPGRADING)
+            if (isset($this->$setting) and $this->$setting == $value and !$overwrite)
                 return false;
 
             $config = Config::current();
