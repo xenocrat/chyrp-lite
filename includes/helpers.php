@@ -12,6 +12,10 @@
     # Stores loaded gettext domains.
     $l10n = array();
 
+    #---------------------------------------------
+    # Sessions
+    #---------------------------------------------
+
     /**
      * Function: session
      * Begins Chyrp's custom session storage whatnots.
@@ -51,6 +55,10 @@
     function same_origin() {
         return (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
     }
+
+    #---------------------------------------------
+    # Routing
+    #---------------------------------------------
 
     /**
      * Function: redirect
@@ -158,6 +166,10 @@
 
         return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
     }
+
+    #---------------------------------------------
+    # Localization
+    #---------------------------------------------
 
     /**
      * Function: set_locale
@@ -279,6 +291,10 @@
         return call_user_func_array("sprintf", $args);
     }
 
+    #---------------------------------------------
+    # Time/Date
+    #---------------------------------------------
+
     /**
      * Function: when
      * Formats a string that isn't a regular time() value.
@@ -382,6 +398,10 @@
         else
             return ini_get("date.timezone");
     }
+
+    #---------------------------------------------
+    # Variable Manipulation
+    #---------------------------------------------
 
     /**
      * Function: fallback
@@ -794,6 +814,10 @@
         return $search;
     }
 
+    #---------------------------------------------
+    # String Manipulation
+    #---------------------------------------------
+
     /**
      * Function: pluralize
      * Pluralizes a word.
@@ -1180,6 +1204,10 @@
                 $value = get_magic_quotes_gpc() ? stripslashes($value) : $value ;
     }
 
+    #---------------------------------------------
+    # Remote Fetches
+    #---------------------------------------------
+
     /**
      * Function: get_remote
      * Retrieve the contents of a URL.
@@ -1373,6 +1401,10 @@
         return false;
     }
 
+    #---------------------------------------------
+    # Modules and Feathers
+    #---------------------------------------------
+
     /**
      * Function: init_extensions
      * Initialize all Modules and Feathers.
@@ -1520,6 +1552,10 @@
         if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
             Flash::warning($message);
     }
+
+    #---------------------------------------------
+    # Upload Management
+    #---------------------------------------------
 
     /**
      * Function: upload
@@ -1728,6 +1764,10 @@
         return unique_filename(implode(".", $name).$ext, $num + 1);
     }
 
+    #---------------------------------------------
+    # Input Validation and Processing
+    #---------------------------------------------
+
     /**
      * Function: password_strength
      * Award a numeric score for the strength of a password.
@@ -1878,6 +1918,10 @@
         }
         return $url;
     }
+
+    #---------------------------------------------
+    # Responding to Requests
+    #---------------------------------------------
 
     /**
      * Function: json_set
