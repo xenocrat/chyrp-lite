@@ -53,6 +53,11 @@
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
+    # File: Config
+    # See Also:
+    #     <Config>
+    require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
+
     # File: SQL
     # See Also:
     #     <SQL>
@@ -61,141 +66,36 @@
     # Register our autoloader.
     spl_autoload_register("autoload");
 
-    /**
-     * Class: Config
-     * Handles writing to the config file.
-     */
-    class Config {
-        # Variable: $json
-        # Holds all of the JSON settings as a $key => $val array.
-        static $json = array();
+    # Handle a missing config file with redirect.
+    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+        redirect("install.php");
 
-        /**
-         * Function: get
-         * Returns a config setting.
-         *
-         * Parameters:
-         *     $setting - The setting to return.
-         */
-        static function get($setting) {
-            return (isset(Config::$json[$setting])) ? Config::$json[$setting] : false ;
-        }
+    # Load the config settings.
+    $config = Config::current();
 
-        /**
-         * Function: set
-         * Sets a config setting.
-         *
-         * Parameters:
-         *     $setting - The config setting to set.
-         *     $value - The value for the setting.
-         *     $message - The message to display with test().
-         */
-        static function set($setting, $value, $message = null) {
-            if (self::get($setting) == $value)
-                return;
+    # Prepare the SQL interface.
+    $sql = SQL::current();
 
-            if (!isset($message))
-                $message = _f("Setting %s to %s...", array($setting, normalize(print_r($value, true))));
-
-            Config::$json[$setting] = $value;
-            $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $dump = $protection.json_set(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-            echo $message.test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
-        }
-
-        /**
-         * Function: check
-         * Does a config exist?
-         *
-         * Parameters:
-         *     $setting - Name of the config to check.
-         */
-        static function check($setting) {
-            return (isset(Config::$json[$setting]));
-        }
-
-        /**
-         * Function: fallback
-         * Sets a config setting to $value if it does not exist.
-         *
-         * Parameters:
-         *     $setting - The config setting to set.
-         *     $value - The value for the setting.
-         *     $message - The message to display with test().
-         */
-        static function fallback($setting, $value, $message = null) {
-            if (!isset($message))
-                $message = _f("Adding %s setting...", array($setting));
-
-            if (!self::check($setting))
-                echo self::set($setting, $value, $message);
-        }
-
-        /**
-         * Function: remove
-         * Removes a setting if it exists.
-         *
-         * Parameters:
-         *     $setting - The setting to remove.
-         */
-        static function remove($setting) {
-            if (!self::check($setting))
-                return;
-
-            unset(Config::$json[$setting]);
-            $protection = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $dump = $protection.json_set(Config::$json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-            echo _f("Removing %s setting...", array($setting)).
-                 test(@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $dump));
-        }
-    }
+    # Load the translation engine.
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$config->locale.".mo");
 
     /**
      * Function: test
      * Attempts to perform a task, and displays a "success" or "failed" message determined by the outcome.
      *
      * Parameters:
-     *     $try - The task to attempt. Should return something that evaluates to true or false.
-     *     $message - Message to display for the test.
+     *     $try - A task that will return something evaluating to true or false.
+     *     $advice - Advice to display to the user if the test fails.
      */
-    function test($try, $message = "") {
-        $sql = SQL::current();
-
-        if (!empty($sql->error)) {
-            $message.= "\n".$sql->error."\n\n";
-            $sql->error = "";
-        }
-
-        $info = $message;
+    function test($try, $advice = "") {
+        if (!empty($advice))
+            $advice.= "\n";
 
         if ($try)
             return " <span class=\"yay\">".__("success!")."</span>\n";
         else
-            return " <span class=\"boo\">".__("failed!")."</span>\n".$info;
+            return " <span class=\"boo\">".__("failed!")."</span>\n".$advice;
     }
-
-    # Attempt to load the config file and initialize the configuration.
-
-    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        redirect("install.php");
-
-    Config::$json = json_get(preg_replace("/<\?php(.+)\?>\n?/s", "",
-                             file_get_contents(INCLUDES_DIR.DIR."config.json.php")), true);
-
-    # Prepare the SQL interface and initialize the connection to SQL server.
-
-    $sql = SQL::current();
-
-    foreach (Config::$json["sql"] as $name => $value)
-        $sql->$name = $value;
-
-    $sql->connect();
-
-    # Load the translator.
-
-    load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.Config::get("locale").".mo");
 
     #---------------------------------------------
     # Upgrading Actions
@@ -218,12 +118,12 @@
 
         if (!file_exists(MAIN_DIR.DIR.".htaccess"))
             echo __("Generating .htaccess file...").
-                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess),
-                      __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
+            test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess),
+                 __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
         else
             echo __("Appending to .htaccess file...").
-                 test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND),
-                      __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
+            test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND),
+                 __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
     }
 
     /**
@@ -233,7 +133,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_markdown() {
-        Config::fallback("enable_markdown", true);
+        Config::current()->set("enable_markdown", true, false, true);
     }
 
     /**
@@ -243,7 +143,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_homepage() {
-        Config::fallback("enable_homepage", false);
+        Config::current()->set("enable_homepage", false, false, true);
     }
 
     /**
@@ -253,7 +153,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_uploads_limit() {
-        Config::fallback("uploads_limit", 10);
+        Config::current()->set("uploads_limit", 10, false, true);
     }
 
     /**
@@ -263,7 +163,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function remove_trackbacking() {
-        Config::remove("enable_trackbacking");
+        Config::current()->remove("enable_trackbacking");
     }
 
     /**
@@ -273,7 +173,7 @@
      * Versions: 2015.07 => 2016.01
      */
     function add_admin_per_page() {
-        Config::fallback("admin_per_page", 25);
+        Config::current()->set("admin_per_page", 25, false, true);
     }
 ?>
 <!DOCTYPE html>
@@ -480,7 +380,7 @@ add_admin_per_page();
 
 # Perform Module/Feather upgrades.
 
-foreach ((array) Config::get("enabled_modules") as $module)
+foreach ((array) $config->enabled_modules as $module)
     if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
         ob_start();
         echo $begin = _f("Calling %s module's upgrader...", array($module))."\n";
@@ -492,7 +392,7 @@ foreach ((array) Config::get("enabled_modules") as $module)
             ob_end_flush();
     }
 
-foreach ((array) Config::get("enabled_feathers") as $feather)
+foreach ((array) $config->enabled_feathers as $feather)
     if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
         ob_start();
         echo $begin = _f("Calling %s feather's upgrader...", array($feather))."\n";
@@ -516,7 +416,7 @@ foreach ($errors as $error)
                 <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
                 <li><?php echo __("You can delete <em>upgrade.php</em> once you are finished."); ?></li>
             </ol>
-            <a class="big" href="<?php echo (Config::check("url") ? Config::get("url") : Config::get("chyrp_url")); ?>"><?php echo __("Take me to my site!"); ?></a>
+            <a class="big" href="<?php echo $config->url; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php else: ?>
             <h1><?php echo __("Halt!"); ?></h1>
             <p><?php echo __("Please take these preemptive measures before proceeding:"); ?></p>
