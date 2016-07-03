@@ -43,10 +43,11 @@
          *     $settings - An array of settings, or @true@ to silence errors.
          */
         private function __construct($settings = array()) {
-            if (!UPGRADING and !INSTALLING and !isset(Config::current()->sql))
-                error(__("Error"), __("Database configuration is not set."));
+            $config = Config::current();
+            $database = oneof(@$config->sql, array());
 
-            $database = (!UPGRADING) ? oneof(@Config::current()->sql, array()) : Config::get("sql") ;
+            if (!UPGRADING and !INSTALLING and !isset($config->sql))
+                error(__("Database Error"), __("Database configuration is not set."));
 
             if (is_array($settings))
                 fallback($database, $settings);
@@ -66,7 +67,8 @@
                 elseif (class_exists("PDO") and in_array($this->adapter, PDO::getAvailableDrivers()))
                     $this->method = "pdo";
                 else
-                    error(__("Error"), _f("Database adapter <code>%s</code> has no available driver.", fix($this->adapter)));
+                    error(__("Database Error"),
+                          _f("Database adapter <code>%s</code> has no available driver.", fix($this->adapter)));
             } else
                 $this->method = "";
         }
@@ -84,15 +86,13 @@
             if (isset($this->$setting) and $this->$setting == $value and !$overwrite and !UPGRADING)
                 return false;
 
-            if (!UPGRADING)
-                $config = Config::current();
-
-            $database = (!UPGRADING) ? fallback($config->sql, array()) : Config::get("sql") ;
+            $config = Config::current();
+            $database = fallback($config->sql, array());
 
             # Add the setting
             $database[$setting] = $this->$setting = $value;
 
-            return (!UPGRADING) ? $config->set("sql", $database) : Config::set("sql", $database) ;
+            return $config->set("sql", $database);
         }
 
         /**
@@ -100,7 +100,7 @@
          * Connects to the SQL database.
          *
          * Parameters:
-         *     $checking - Return a boolean of whether or not it could connect, instead of showing an error.
+         *     $checking - Return a boolean of whether or not it could connect, instead of triggering an error.
          */
         public function connect($checking = false) {
             if ($this->connected)
@@ -135,7 +135,7 @@
                         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     } catch (PDOException $error) {
                         $this->error = $error->getMessage();
-                        return ($checking) ? false : error(__("Database Error"), fix($this->error)) ;
+                        return ($checking) ? false : trigger_error(fix($this->error), E_USER_WARNING) ;
                     }
 
                     break;
@@ -145,12 +145,13 @@
                     $this->error = mysqli_connect_error();
 
                     if (mysqli_connect_errno())
-                        return ($checking) ? false : error(__("Database Error"), fix($this->error)) ;
+                        return ($checking) ? false : trigger_error(fix($this->error), E_USER_WARNING) ;
 
                     break;
 
                 default:
-                    error(__("Error"), _f("Database driver <code>%s</code> is unrecognised.", fix($this->method)));
+                    error(__("Database Error"),
+                          _f("Database driver <code>%s</code> is unrecognised.", fix($this->method)));
             }
 
             if ($this->adapter == "mysql")
@@ -172,6 +173,9 @@
         public function query($query, $params = array(), $throw_exceptions = false) {
             if (!$this->connected)
                 return false;
+
+            # Reset the error message.
+            $this->error = "";
 
             # Ensure that every param in $params exists in the query.
             # If it doesn't, remove it from $params.
@@ -223,8 +227,26 @@
          *     $left_join - An array of additional LEFT JOINs.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function select($tables, $fields = "*", $conds = null, $order = null, $params = array(), $limit = null, $offset = null, $group = null, $left_join = array(), $throw_exceptions = false) {
-            return $this->query(QueryBuilder::build_select($tables, $fields, $conds, $order, $limit, $offset, $group, $left_join, $params), $params, $throw_exceptions);
+        public function select($tables,
+                               $fields = "*",
+                               $conds = null,
+                               $order = null,
+                               $params = array(),
+                               $limit = null,
+                               $offset = null,
+                               $group = null,
+                               $left_join = array(),
+                               $throw_exceptions = false) {
+            return $this->query(QueryBuilder::build_select($tables,
+                                                           $fields,
+                                                           $conds,
+                                                           $order,
+                                                           $limit,
+                                                           $offset,
+                                                           $group,
+                                                           $left_join,
+                                                           $params),
+                                $params, $throw_exceptions);
         }
 
         /**
@@ -319,13 +341,11 @@
 
         /**
          * Function: escape
-         * Escapes a string, escaping things like $1 and C:\foo\bar so that they don't get borked by the preg_replace.
-         *
-         * This also handles calling the SQL connection method's "escape_string" functions.
+         * Escapes a string for Query construction using the SQL connection method's escaping functions.
          *
          * Parameters:
          *     $string - String to escape.
-         *     $quotes - Auto-wrap the string in quotes (@'@)?
+         *     $quotes - Auto-wrap the string in single quotes?
          */
         public function escape($string, $quotes = true) {
             if (!isset($this->db))
