@@ -210,6 +210,10 @@
         if (!class_exists("MySQLi") and !class_exists("PDO"))
             $errors[] = __("MySQLi or PDO is required for database access.");
 
+        #---------------------------------------------
+        # Installation
+        #---------------------------------------------
+
         if (empty($errors)) {
             # Add rewrites to the .htaccess file.
             if (!$htaccess_has_chyrp) {
