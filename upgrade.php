@@ -66,6 +66,10 @@
     # Register our autoloader.
     spl_autoload_register("autoload");
 
+    # Boolean: $upgraded
+    # Has Chyrp Lite been upgraded?
+    $upgraded = false;
+
     # Handle a missing config file with redirect.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect("install.php");
@@ -96,10 +100,6 @@
         else
             return " <span class=\"boo\">".__("failed!")."</span>\n".$advice;
     }
-
-    #---------------------------------------------
-    # Upgrading Actions
-    #---------------------------------------------
 
     /**
      * Function: fix_htaccess
@@ -175,6 +175,10 @@
     function add_admin_per_page() {
         Config::current()->set("admin_per_page", 25, null, true);
     }
+
+    #---------------------------------------------
+    # Output Starts
+    #---------------------------------------------
 ?>
 <!DOCTYPE html>
 <html>
@@ -361,63 +365,59 @@
     </head>
     <body>
         <div class="window">
-<?php if ((!empty($_POST) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) : ?>
             <pre role="status" class="pane"><?php
 
-# Perform core upgrade tasks.
+    #---------------------------------------------
+    # Upgrading Starts
+    #---------------------------------------------
 
-fix_htaccess();
+    if ((!empty($_POST) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) {
+        # Perform core upgrade tasks.
+        fix_htaccess();
+        add_markdown();
+        add_homepage();
+        add_uploads_limit();
+        remove_trackbacking();
+        add_admin_per_page();
 
-add_markdown();
+        # Perform module upgrades and output the results if the upgrader echoes anything.
+        foreach ((array) $config->enabled_modules as $module)
+            if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
+                ob_start();
+                echo $begin = _f("Calling %s module's upgrader...", array($module))."\n";
+                require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
-add_homepage();
+                if (ob_get_contents() == $begin)
+                    ob_end_clean();
+                else
+                    ob_end_flush();
+            }
 
-add_uploads_limit();
+        # Perform feather upgrades and output the results if the upgrader echoes anything.
+        foreach ((array) $config->enabled_feathers as $feather)
+            if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
+                ob_start();
+                echo $begin = _f("Calling %s feather's upgrader...", array($feather))."\n";
+                require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 
-remove_trackbacking();
+                if (ob_get_contents() == $begin)
+                    ob_end_clean();
+                else
+                    ob_end_flush();
+            }
 
-add_admin_per_page();
-
-# Perform Module/Feather upgrades.
-
-foreach ((array) $config->enabled_modules as $module)
-    if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
-        ob_start();
-        echo $begin = _f("Calling %s module's upgrader...", array($module))."\n";
-        require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
-
-        if (ob_get_contents() == $begin)
-            ob_end_clean();
-        else
-            ob_end_flush();
+        $upgraded = true;
     }
 
-foreach ((array) $config->enabled_feathers as $feather)
-    if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
-        ob_start();
-        echo $begin = _f("Calling %s feather's upgrader...", array($feather))."\n";
-        require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
+    #---------------------------------------------
+    # Upgrading Ends
+    #---------------------------------------------
 
-        if (ob_get_contents() == $begin)
-            ob_end_clean();
-        else
-            ob_end_flush();
-    }
-
-foreach ($errors as $error)
-    echo '<span role="alert">'.$error."</span>\n";
+    foreach ($errors as $error)
+        echo '<span role="alert">'.$error."</span>\n";
 
             ?></pre>
-            <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
-            <h2><?php echo __("What now?"); ?></h2>
-            <ol>
-                <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
-                <li><?php echo __("Fix any problems reported."); ?></li>
-                <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
-                <li><?php echo __("You can delete <em>upgrade.php</em> once you are finished."); ?></li>
-            </ol>
-            <a class="big" href="<?php echo $config->url; ?>"><?php echo __("Take me to my site!"); ?></a>
-<?php else: ?>
+<?php if (!$upgraded): ?>
             <h1><?php echo __("Halt!"); ?></h1>
             <p><?php echo __("Please take these preemptive measures before proceeding:"); ?></p>
             <ol>
@@ -429,6 +429,16 @@ foreach ($errors as $error)
             <form action="upgrade.php" method="post">
                 <button type="submit" name="upgrade" value="yes"><?php echo __("Upgrade me!"); ?></button>
             </form>
+<?php else: ?>
+            <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
+            <h2><?php echo __("What now?"); ?></h2>
+            <ol>
+                <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
+                <li><?php echo __("Fix any problems reported."); ?></li>
+                <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
+                <li><?php echo __("You can delete <em>upgrade.php</em> once you are finished."); ?></li>
+            </ol>
+            <a class="big" href="<?php echo $config->url; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
         </div>
     </body>
