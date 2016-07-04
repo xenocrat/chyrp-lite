@@ -167,6 +167,38 @@
         return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
     }
 
+    /**
+     * Function: htaccess_conf
+     * Creates the .htaccess file for Chyrp Lite or appends to an existing file.
+     *
+     * Parameters:
+     *     $url_path - The URL path to MAIN_DIR for the RewriteBase directive.
+     *
+     * Returns:
+     *     True if no action was needed, bytes written on success, false on failure.
+     */
+    function htaccess_conf($url_path = null) {
+        if (!INSTALLING)
+            $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
+
+        # The trim operation guarantees a string with leading and trailing slashes,
+        # but it also avoids doubling up slashes if $url_path consists of only "/".
+        $template = preg_replace("~%\\{CHYRP_PATH\\}~",
+                                 rtrim("/".ltrim($url_path, "/"), "/")."/",
+                                 file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
+
+        if (!file_exists(MAIN_DIR.DIR.".htaccess"))
+            return @file_put_contents(MAIN_DIR.DIR.".htaccess", $template);
+
+        if (!is_readable(MAIN_DIR.DIR.".htaccess"))
+            return false;
+
+        if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")))
+            return @file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$template, FILE_APPEND);
+
+        return true;
+    }
+
     #---------------------------------------------
     # Localization
     #---------------------------------------------
