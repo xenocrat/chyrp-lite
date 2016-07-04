@@ -85,45 +85,16 @@
 
     /**
      * Function: test
-     * Attempts to perform a task, and displays a "success" or "failed" message determined by the outcome.
+     * Displays a "success" or "failed" message determined by the value.
      *
      * Parameters:
-     *     $try - A task that will return something evaluating to true or false.
-     *     $advice - Advice to display to the user if the test fails.
+     *     $value - Something that evaluates to true or false.
      */
-    function test($try, $advice = "") {
-        if (!empty($advice))
-            $advice.= "\n";
-
-        if ($try)
+    function test($value) {
+        if ($value)
             return " <span class=\"yay\">".__("success!")."</span>\n";
         else
-            return " <span class=\"boo\">".__("failed!")."</span>\n".$advice;
-    }
-
-    /**
-     * Function: fix_htaccess
-     * Repairs the .htaccess file.
-     */
-    function fix_htaccess() {
-        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
-        $url = $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).str_replace("/upgrade.php", "", $_SERVER['REQUEST_URI']);
-        $index = (parse_url($url, PHP_URL_PATH)) ? "/".trim(parse_url($url, PHP_URL_PATH), "/")."/" : "/" ;
-        $htaccess = preg_replace("~%\\{CHYRP_PATH\\}~", $index, file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
-        $htaccess_has_chyrp = (file_exists(MAIN_DIR.DIR.".htaccess") and
-                               preg_match("~".preg_quote($htaccess, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")));
-
-        if ($htaccess_has_chyrp)
-            return;
-
-        if (!file_exists(MAIN_DIR.DIR.".htaccess"))
-            echo __("Generating .htaccess file...").
-            test(@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess),
-                 __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
-        else
-            echo __("Appending to .htaccess file...").
-            test(@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND),
-                 __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable."));
+            return " <span class=\"boo\">".__("failed!")."</span>\n";
     }
 
     /**
@@ -373,7 +344,6 @@
 
     if ((!empty($_POST) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) {
         # Perform core upgrade tasks.
-        fix_htaccess();
         add_markdown();
         add_homepage();
         add_uploads_limit();
