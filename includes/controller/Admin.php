@@ -1868,6 +1868,11 @@
             $route = Route::current();
             $config = Config::current();
 
+            if (!empty($_POST['clean_urls']) and !$config->clean_urls and !htaccess_conf()) {
+                Flash::warning(__("Clean URLs cannot be enabled because the <em>.htaccess</em> file is not configured."));
+                unset($_POST['clean_urls']);
+            }
+
             if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
                 $route->add("/", "page;url=home");
 
@@ -1882,7 +1887,9 @@
                                       "home");
                     Flash::notice(__("Page created.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>');
                 }
-            } elseif (empty($_POST['enable_homepage']) and $config->enable_homepage)
+            }
+
+            if (empty($_POST['enable_homepage']) and $config->enable_homepage)
                 $route->remove("/");
 
             $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
