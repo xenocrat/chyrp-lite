@@ -116,12 +116,12 @@
     # Prepare the Config interface.
     $config = Config::current();
 
-    # Atlantic/Reykjavik is 0 offset.
+    # Set the timezone for time calculations (Atlantic/Reykjavik is 0 offset).
     $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
     set_timezone($timezone);
 
+    # Ask PHP for the default locale and try to load an appropriate translator.
     if (class_exists("Locale")) {
-        # Ask PHP for the default locale and try to load an appropriate translator.
         $locale = Locale::getDefault();
         $language = Locale::getPrimaryLanguage($locale)."_".Locale::getRegion($locale);
         load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
@@ -133,23 +133,24 @@
     sanitize_input($_COOKIE);
     sanitize_input($_REQUEST);
 
+    # Where are we?
     $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
     $url = $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).str_replace("/install.php", "", $_SERVER['REQUEST_URI']);
-    $index = (parse_url($url, PHP_URL_PATH)) ? "/".trim(parse_url($url, PHP_URL_PATH), "/")."/" : "/" ;
-    $htaccess = preg_replace("~%\\{CHYRP_PATH\\}~", $index, file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
-    $htaccess_has_chyrp = (file_exists(MAIN_DIR.DIR.".htaccess") and
-                           preg_match("~".preg_quote($htaccess, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")));
+    $url_path = oneof(parse_url($url, PHP_URL_PATH), "/");
 
-    if (file_exists(INCLUDES_DIR.DIR."config.json.php") and file_exists(MAIN_DIR.DIR.".htaccess")) {
+    # Already installed?
+    if (file_exists(INCLUDES_DIR.DIR."config.json.php")) {
         $sql = SQL::current(true);
+
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
             error(__("Already Installed"), __("Chyrp Lite is already fully installed and configured."));
     }
 
-    if ((!is_writable(MAIN_DIR) and !file_exists(MAIN_DIR.DIR.".htaccess")) or
-        (file_exists(MAIN_DIR.DIR.".htaccess") and !is_writable(MAIN_DIR.DIR.".htaccess") and !$htaccess_has_chyrp))
-        $errors[] = __("Please CHMOD or CHOWN the <em>.htaccess</em> file to make it writable.");
+    # Test if we can write to MAIN_DIR (needed for the .htaccess file).
+    if (!is_writable(MAIN_DIR))
+        $errors[] = __("Please CHMOD or CHOWN the installation directory to make it writable.");
 
+    # Test if we can write to INCLUDES_DIR (needed for config.json.php).
     if (!is_writable(INCLUDES_DIR))
         $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
@@ -556,16 +557,9 @@
             $errors[] = __("MySQLi or PDO is required for database access.");
 
         if (empty($errors)) {
-            # Add rewrites to the .htaccess file.
-            if (!$htaccess_has_chyrp) {
-                if (!file_exists(MAIN_DIR.DIR.".htaccess")) {
-                    if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", $htaccess))
-                        $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
-                } else {
-                    if (!@file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$htaccess, FILE_APPEND))
-                        $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
-                }
-            }
+            # Configure the .htaccess file.
+            if (!htaccess_conf($url_path))
+                $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
 
             # Build the configuration file.
             $config->set("sql", array());
