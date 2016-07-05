@@ -1868,7 +1868,7 @@
             $route = Route::current();
             $config = Config::current();
 
-            if (!empty($_POST['clean_urls']) and !$config->clean_urls and !htaccess_conf()) {
+            if (!empty($_POST['clean_urls']) and !$config->clean_urls and htaccess_conf() === false) {
                 Flash::warning(__("Clean URLs cannot be enabled because the <em>.htaccess</em> file is not configured."));
                 unset($_POST['clean_urls']);
             }
@@ -1902,34 +1902,25 @@
 
         /**
          * Function: login
-         * Mask for MainController's login responder.
+         * Mask for MainController->login().
          */
         public function login() {
             if (logged_in())
                 Flash::notice(__("You are already logged in."), "/admin/");
 
             $_SESSION['redirect_to'] = "/admin/";
-            redirect((Config::current()->clean_urls) ? "/login/" : "/?action=login");
+
+            $config = Config::current();
+            redirect($config->url.(($config->clean_urls) ? "/login/" : "/?action=login"));
         }
 
         /**
          * Function: logout
-         * Logs out the current user.
+         * Mask for MainController->logout().
          */
         public function logout() {
             $config = Config::current();
-
-            if (!logged_in())
-                Flash::notice(__("You aren't logged in."), $config->url);
-
-            $cookies_notified = !empty($_SESSION['cookies_notified']);
-
-            session_destroy();
-            session();
-
-            $_SESSION['cookies_notified'] = $cookies_notified;
-
-            Flash::notice(__("Logged out."), $config->url); # Supply full URL for compatibility with canonical URLs.
+            redirect($config->url.(($config->clean_urls) ? "/logout/" : "/?action=logout"));
         }
 
         /**
