@@ -1,0 +1,26 @@
+{% extends "layouts" ~ DIR ~ "help.twig" %}
+
+{% block title %}{{ "Filtering Results" | translate("rights") }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Choosing a License" | translate("rights") }}</h1>
+<p>
+{{ "When you create a piece of content for your blog, you get to decide whether or not you want your name associated with it, and to decide whether or not it can be reproduced and reused by other people. Your rights to decide these things are known as your intellectual property rights. The license you choose to apply to your blog content determines which of those rights you retain." | translate("rights") }}
+</p>
+<h2>{{ "All rights reserved" | translate("rights") }}</h2>
+<p>
+{{ "This is the most proscriptive license you can apply to your work; it indicates that you have reserved, or withheld, all intellectual property rights. Other people are not allowed to reproduce or reuse your work without your permission." | translate("rights") }}
+</p>
+<h2>{{ "Creative Commons" | translate("rights") }}</h2>
+<p>
+{{ "This family of licenses allow you to waive some of the rights to your work, allowing other people to reproduce or reuse it with certain restrictions. Creative Commons licenses use two-letter codes to identify the restrictions placed on the work: BY means that attribution is required; ND means that derivatives (&#8220;remixed&#8221;) works are not allowed; NC means that the work cannot be reproduced or reused for commercial purposes; SA means that derivative works are allowed but must be released under the same license (&#8220;share-alike&#8221;)." | translate("rights") }}
+</p>
+<h2>{{ "Public Domain" | translate("rights") }}</h2>
+<p>
+{{ "This is the most permissive of all licenses; it identifies a work whose intellectual property rights have expired or have been forfeited by the author. If you release a work into the public domain, people can do whatever they want with it, without having to ask your permission." | translate("rights") }}
+</p>
+<h2>{{ "Crown Copyright" | translate("rights") }}</h2>
+<p>
+{{ "This license is applied to works produced by the governments of British Commonwealth countries; it indicates that the government retains the intellectual property rights to the work, i.e. the work has <em>not</em> been placed in the public domain." | translate("rights") }}
+</p>
+{% endblock %}

@@ -40,6 +40,7 @@
 
             $fields[] = array("attr" => "option[rights_licence]",
                               "label" => __("License", "rights"),
+                              "help" => "choosing_a_licence",
                               "type" => "select",
                               "options" => array(array("name" => __("All rights reserved", "rights"),
                                                        "value" => "All rights reserved",
