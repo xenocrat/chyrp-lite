@@ -1,6 +1,6 @@
 <?php
     define('JAVASCRIPT', true);
-    require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
+    require_once dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 ?>
 $(function() {
     // Open help text in an iframe.
