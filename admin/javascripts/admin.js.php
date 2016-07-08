@@ -468,7 +468,7 @@ var Extend = {
         }
 
         Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
-        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html();
+        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html().replace(/<[^>]+>/g, "");
 
         if (!!Extend.confirmation && Extend.action == "disable")
             Extend.confirmed = (confirm(Extend.confirmation)) ? 1 : 0 ;
