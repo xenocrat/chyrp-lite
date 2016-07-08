@@ -143,7 +143,7 @@
         $sql = SQL::current(true);
 
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            error(__("Already Installed"), __("Chyrp Lite is already fully installed and configured."));
+            redirect($config->url);
     }
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
