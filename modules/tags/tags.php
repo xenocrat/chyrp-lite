@@ -50,6 +50,7 @@
 
             $fields[] = array("attr" => "tags",
                               "label" => __("Tags", "tags"),
+                              "help" => "tagging_posts",
                               "note" => __("(comma separated)", "tags"),
                               "type" => "text",
                               "value" => fix(implode(", ", $tags), true),
