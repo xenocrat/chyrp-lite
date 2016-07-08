@@ -2046,7 +2046,7 @@
          * Renders the page.
          *
          * Parameters:
-         *     $action - The template file to display (sans ".twig") relative to admin/pages/ for core and extensions.
+         *     $action - The template file to display (sans ".twig") relative to /admin/ for core and extensions.
          *     $context - The context to be supplied to Twig.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          *     $path - The path to the template, usually "pages".
