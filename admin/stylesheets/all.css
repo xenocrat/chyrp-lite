@@ -445,9 +445,11 @@ table tbody tr td.group_name {                  text-align: left }
 table thead tr th.group_size,
 table thead tr th.group_default,
 table thead tr th.group_guest,
+table tbody tr th.emblem,
 table tbody tr td.group_size,
 table tbody tr td.group_default,
-table tbody tr td.group_guest {                 text-align: center }
+table tbody tr td.group_guest,
+table tbody tr td.emblem {                      text-align: center }
 table thead tr th.comment_post,
 table tbody tr td.comment_post,
 table tbody tr.comment_excerpt td {             text-align: left }
