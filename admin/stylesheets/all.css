@@ -1,4 +1,9 @@
-/* @group webfonts */
+/**
+ *---------------------------------------------
+ * Group: Fonts
+ *---------------------------------------------
+ */
+
 @font-face {
                                                 font-family: 'Open Sans webfont';
                                                 src: url('../../fonts/OpenSans-Regular.woff') format('woff');
@@ -54,9 +59,13 @@
                                                 font-weight: bold;
                                                 font-style: italic;
 }
-/* @end */
 
-/* @group reset */
+/**
+ *---------------------------------------------
+ * Group: Reset
+ *---------------------------------------------
+ */
+
 html {                                          font-size: 14px }
 body, div, dl, dt, dd, ul, ol, li,
 h1, h2, h3, h4, h5, h6,
@@ -74,9 +83,13 @@ ol {                                            list-style: decimal inside}
 input, textarea, select {                       font-family: inherit;
                                                 font-size: inherit;
                                                 font-weight: inherit }
-/* @end */
 
-/* @group core */
+/**
+ *---------------------------------------------
+ * Group: Core
+ *---------------------------------------------
+ */
+
 *::selection {                                  color: #ffffff;
                                                 background-color: #4f4f4f }
 body {                                          font-family: "Open Sans webfont", sans-serif;
@@ -120,9 +133,13 @@ img.logo {                                      width: 24px;
                                                 height: 24px }
 div.clear {                                     visibility: hidden;
                                                 clear: both }
-/* @end */
 
-/* @group header */
+/**
+ *---------------------------------------------
+ * Group: Header
+ *---------------------------------------------
+ */
+
 #header {                                       background-color: #4f4f4f;
                                                 padding: 2em 0em 3em 0em;
                                                 color: #efefef;
@@ -175,9 +192,13 @@ div.clear {                                     visibility: hidden;
 #header #navigation li a:focus {                background-color: #efefef;
                                                 color: #4a4747;
                                                 text-decoration: none }
-/* @end */
 
-/* @group footer */
+/**
+ *---------------------------------------------
+ * Group: Footer
+ *---------------------------------------------
+ */
+
 #footer {                                       box-sizing: border-box;
                                                 width: 100%;
                                                 margin: 2em auto;
@@ -188,9 +209,13 @@ div.clear {                                     visibility: hidden;
                                                 margin-top: 1em;
                                                 font-size: .8em }
 #logout {                                       margin-top: 1em }
-/* @end */
 
-/* @group sub-navigation */
+/**
+ *---------------------------------------------
+ * Group: Sub-Navigation
+ *---------------------------------------------
+ */
+
 #sub_nav {                                      margin: 4em 4em 0em 4em;
                                                 height: 3rem;
                                                 overflow: hidden }
@@ -223,9 +248,13 @@ div.clear {                                     visibility: hidden;
                                                 text-decoration: none;
                                                 border: 1px solid #dfdfdf;
                                                 border-bottom: none }
-/* @end */
 
-/* @group content */
+/**
+ *---------------------------------------------
+ * Group: Content
+ *---------------------------------------------
+ */
+
 #content {                                      clear: both;
                                                 background-color: #ffffff;
                                                 padding: 2em 1em 1em 1em;
@@ -241,9 +270,13 @@ a.prev_page,
 a.next_page {                                   min-width: 10em }
 span.pages {                                    display: block;
                                                 margin-bottom: 1em }
-/* @end */
 
-/* @group extend */
+/**
+ *---------------------------------------------
+ * Group: Extend
+ *---------------------------------------------
+ */
+
 #content ul.extend {                            box-sizing: border-box;
                                                 width: 100%;
                                                 clear: both }
@@ -306,9 +339,13 @@ li.feather div.controls button {                float: right }
                                                 width: 256px;
                                                 margin: 0em auto 0em auto; 
                                                 border: 1px solid #dfdfdf }
-/* @end */
 
-/* @group forms */
+/**
+ *---------------------------------------------
+ * Group: Forms
+ *---------------------------------------------
+ */
+
 input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
@@ -384,9 +421,13 @@ form.split input[type="number"],
 form.split input[type="password"],
 form.split textarea {                           width: 33% }
 form.detail input {                             padding: 0.3em }
-/* @end */
 
-/* @group tables */
+/**
+ *---------------------------------------------
+ * Group: Tables
+ *---------------------------------------------
+ */
+
 table {                                         width: 100%;
                                                 margin: 0em 0em 1em 0em;
                                                 overflow-x: scroll;
@@ -481,9 +522,13 @@ td.controls img {                               position: relative;
                                                 top: 2px;
                                                 width: 16px;
                                                 height: 16px }
-/* @end */
 
-/* @group flashes */
+/**
+ *---------------------------------------------
+ * Group: Flashes
+ *---------------------------------------------
+ */
+
 p.flash {                                       padding: 0.6em;
                                                 margin-bottom: 1em;
                                                 background-color: #7a9acc;
@@ -501,9 +546,13 @@ p.flash a:focus,
 p.flash a:active {                            color: #ffffff;
                                                 text-decoration: underline }
 
-/* @end */
 
-/* @group buttons */
+/**
+ *---------------------------------------------
+ * Group: Buttons
+ *---------------------------------------------
+ */
+
 .buttons {                                      clear: both }
 button,
 a.button,
@@ -586,9 +635,13 @@ a.tag {                                         position: relative;
                                                 background-color: #fffecd }
 span.tags_select a.tag_added {                  top: 2px;
                                                 border-color: #ccb68f }
-/* @end */
 
-/* @group options */
+/**
+ *---------------------------------------------
+ * Group: Options
+ *---------------------------------------------
+ */
+
 .main_options input,
 .main_options select,
 .main_options textarea {                        display: block } 
@@ -631,9 +684,13 @@ div.more_options p input[type="password"],
 div.more_options p select,
 div.more_options p textarea {                   width: 100%;
                                                 margin: 0em }
-/* @end */
 
-/* @group helpers & general */
+/**
+ *---------------------------------------------
+ * Group: Helpers & General
+ *---------------------------------------------
+ */
+
 table.interactive + div.controls {              background-color: #fffceb;
                                                 padding: 1em;
                                                 border: 1px solid #dfdfdf;
@@ -665,9 +722,13 @@ img.emblem.preview {                            cursor: pointer;
 img#likeImage_preview {                         max-width: 28px;
                                                 max-height: 28px;
                                                 vertical-align: middle }
-/* @end */
 
-/* @group iframes */
+/**
+ *---------------------------------------------
+ * Group: iFrames
+ *---------------------------------------------
+ */
+
 .iframe_background {                            display: block;
                                                 position: fixed;
                                                 width: 100%;
@@ -700,9 +761,13 @@ img#likeImage_preview {                         max-width: 28px;
                                                 padding-top: 13px;
                                                 padding-right: 13px;
                                                 cursor: pointer }
-/* @end */
 
-/* @media mobile */
+/**
+ *---------------------------------------------
+ * Group: Mobile Breakpoint
+ *---------------------------------------------
+ */
+
 @media screen and (max-width: 767px) {
     #header #navigation {                       left: 0em;
                                                 right: 0em }
@@ -822,4 +887,3 @@ img#likeImage_preview {                         max-width: 28px;
 @media screen and (max-width: 539px) {
     table tbody tr td.main {                    min-width: 240px }
 }
-/* @end */
