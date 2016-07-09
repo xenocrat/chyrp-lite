@@ -13,7 +13,7 @@
          * Loads the configuration JSON file.
          */
         private function __construct() {
-            if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+            if (!is_readable(INCLUDES_DIR.DIR."config.json.php"))
                 return false;
 
             $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
