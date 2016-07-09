@@ -46,7 +46,7 @@
             $config = Config::current();
             $database = oneof(@$config->sql, array());
 
-            if (!UPGRADING and !INSTALLING and !isset($config->sql))
+            if (!INSTALLING and !UPGRADING and !isset($config->sql))
                 error(__("Database Error"), __("Database configuration is not set."));
 
             if (is_array($settings))
@@ -163,7 +163,6 @@
         /**
          * Function: query
          * Executes a query and increases <SQL->$queries>.
-         * If the query results in an error, it will die and show the error.
          *
          * Parameters:
          *     $query - Query to execute.
