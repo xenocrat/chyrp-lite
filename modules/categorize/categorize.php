@@ -194,7 +194,10 @@
             if (empty($_POST['name']))
                 error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"), null, 400);
 
-            Category::addCategory($_POST);
+            Category::addCategory($_POST['name'],
+                                  oneof($_POST['clean'], $_POST['name']),
+                                  !empty($_POST['show_on_home']) ? 1 : 0);
+
             Flash::notice(__("Category added.", "categorize"), "/admin/?action=manage_category");
         }
 
@@ -232,7 +235,11 @@
             if (empty($category))
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
 
-            Category::updateCategory($_POST);
+            Category::updateCategory($_POST['id'],
+                                     $_POST['name'],
+                                     oneof($_POST['clean'], $_POST['name']),
+                                     !empty($_POST['show_on_home']) ? 1 : 0);
+
             Flash::notice(__("Category updated.", "categorize"), "/admin/?action=manage_category");
         }
 

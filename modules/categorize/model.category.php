@@ -71,26 +71,17 @@
             return $query;
         }
 
-        static function addCategory($post = array()) {
-            $show_on_home = (isset($post['show_on_home'])) ? 1 : 0;
-            $clean = sanitize(fallback($_POST['clean'], $_POST['name']));
-            $name = $post['name'];
-
+        static function addCategory($name = string, $clean = string, $show_on_home = int) {
             SQL::current()->insert("categorize",
                                    array("name" => ":name",
                                          "clean" => ":clean",
                                          "show_on_home" => ":show_on_home"),
                                    array(":name" => $name,
-                                         ":clean" => $clean,
+                                         ":clean" => sanitize($clean),
                                          ":show_on_home" => $show_on_home));
         }
 
-        static function updateCategory($post = array()) {
-            $show_on_home = (isset($post['show_on_home'])) ? 1 : 0;
-            $clean = sanitize(fallback($_POST['clean'], $_POST['name']));
-            $name = $post['name'];
-            $id = $post['id'];
-
+        static function updateCategory($id = int, $name = string, $clean = string, $show_on_home = int) {
             SQL::current()->update("categorize",
                                    "`id` = :id",
                                    array("name" => ":name",
@@ -98,7 +89,7 @@
                                          "show_on_home" => ":show_on_home"),
                                    array(":id" => $id,
                                          ":name" => $name,
-                                         ":clean" => $clean,
+                                         ":clean" => sanitize($clean),
                                          ":show_on_home" => $show_on_home));
         }
 
