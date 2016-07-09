@@ -96,6 +96,7 @@
 
             $fields[] = array("attr" => "option[category_id]",
                               "label" => __("Category", "categorize"),
+                              "help" => "categorizing_posts",
                               "type" => "select",
                               "options" => $fields_list
                         );
