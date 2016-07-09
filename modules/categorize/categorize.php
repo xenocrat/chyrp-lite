@@ -1,9 +1,8 @@
 <?php
-    require_once("model.category.php");
-    
+    require_once "model.category.php";
+
     class Categorize extends Modules {
         public function __init() {
-            # Overlap all the get category items
             $this->addAlias("mt_getCategoryList", "xmlrpc_getCategoryList");
             $this->addAlias("mt_getPostCategories", "xmlrpc_getCategoryList");
             $this->addAlias("metaWeblog_getCategories", "xmlrpc_getCategoryList");
@@ -25,41 +24,41 @@
 
         public function feed_item($post) {
             if (!empty($post->category_id) OR $post->category != 0)
-               printf("        <category term=\"%s\" />\n", Category::getCategory($post->category_id)->name);
+               printf("        <category term=\"%s\" />\n", fix(Category::getCategory($post->category_id)->name, true));
         }
 
-        /* XML Stuff */
         public function metaWeblog_editPost($args, $post) {
-            if (empty($args['categories'][0])) # if we don't have it, then leave.
+            if (empty($args['categories'][0]))
                 $category->id = 0;
             else
                 $category = Category::getCategoryIDbyName($args['categories'][0]);
 
             SQL::current()->replace("post_attributes",
-                              array("name" => "category_id",
-                                    "value" => $category->id,
-                                    "post_id" => $post->id));
+                                    array("name" => "category_id",
+                                          "value" => $category->id,
+                                          "post_id" => $post->id));
         }
 
         public function metaWeblog_newPost($args, $post) {
-            if (empty($args['categories'][0])) return; # if we don't have it, then leave.
+            if (empty($args['categories'][0]))
+                return;
+
             $category = Category::getCategoryIDbyName($args['categories'][0]);
 
             SQL::current()->insert("post_attributes",
-                             array("name" => "category_id",
-                                   "value" => $category->id,
-                                   "post_id" => $post->id));
+                                   array("name" => "category_id",
+                                         "value" => $category->id,
+                                         "post_id" => $post->id));
         }
 
-        # return a list of categories to the XMLRPC system.
         public function xmlrpc_getCategoryList() {
-            $categories = Category::getCategory();
-            foreach($categories as $category) {
+            $categories = Category::getCategories();
+
+            foreach($categories as $category)
                 $xml_cats[]['title'] = $category['name'];
-            }
+
             return $xml_cats;
         }
-        /* End XML Stuff */
 
         public function parse_urls($urls) {
             $urls["|/category/(.*?)/|"] = "/?action=category&name=$1";
@@ -72,12 +71,12 @@
 
         public function manage_posts_column($post) {
             echo (isset($post->category->name) && $post->category->id != false)
-                ? '<td class="post_category">'.$post->category->name.'</td>'
+                ? '<td class="post_category">'.fix($post->category->name).'</td>'
                 : '<td class="post_category">&nbsp;</td>';
         }
 
         public function post_options($fields, $post = null) {
-            $categories = Category::getCategory();
+            $categories = Category::getCategories();
 
             $fields_list[0]["value"] = "0";
             $fields_list[0]["name"] = __("[None]", "categorize");
@@ -98,8 +97,7 @@
                               "label" => __("Category", "categorize"),
                               "help" => "categorizing_posts",
                               "type" => "select",
-                              "options" => $fields_list
-                        );
+                              "options" => $fields_list);
 
             return $fields;
         }
@@ -121,16 +119,17 @@
         }
 
         public function main_category($main) {
-            # Make sure we have enough information to continue.
             if (!isset($_GET['name']))
-                $reason = __("You did not specify a category.", "categorize");
-            elseif (!$category = Category::getCategorybyClean($_GET['name']))
-                $reason = __("The category you specified was not found.", "categorize");
-
-            if (isset($reason))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
-                                     array("reason" => $reason),
-                                        __("Invalid Category", "categorize"));
+                                     array("reason" => __("You did not specify a category.", "categorize")),
+                                     __("Invalid Category", "categorize"));
+
+            $category = Category::getCategorybyClean($_GET['name']);
+
+            if (empty($category))
+                return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
+                                     array("reason" => __("The category you specified was not found.", "categorize")),
+                                     __("Invalid Category", "categorize"));
 
             $attributes = SQL::current()->select("post_attributes",
                                            array("post_id"),
@@ -145,7 +144,7 @@
             if (empty($ids))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
                                      array("reason" => __("There are no posts in the category you specified.", "categorize")),
-                                        __("Invalid Category", "categorize"));
+                                     __("Invalid Category", "categorize"));
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
                                                     "where" => array("id" => $ids))),
@@ -156,7 +155,7 @@
 
             $main->display(array("pages".DIR."category", "pages".DIR."index"),
                            array("posts" => $posts, "category" => $category->name),
-                              _f("Posts in category %s", $_GET['name'], "categorize"));
+                           _f("Posts in category %s", fix($_GET['name']), "categorize"));
         }
 
         static function manage_nav($navs) {
@@ -178,7 +177,7 @@
             if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
-            $admin->display("manage_category", array("categorize" => Category::getCategory()));
+            $admin->display("manage_category", array("categorize" => Category::getCategories()));
         }
 
         public function admin_new_category($admin) {
