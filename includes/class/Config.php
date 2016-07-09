@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Config
-     * Holds all of the configuration variables for the entire site, as well as Module settings.
+     * Holds all of the configuration variables for the entire site.
      */
     class Config {
         # Variable: $json
@@ -47,7 +47,7 @@
             if (isset($this->$setting) and ((!$overwrite and $this->$setting == $value) or $fallback))
                 return false;
 
-            # Add the setting
+            # Add the setting.
             $this->json[$setting] = $this->$setting = $value;
 
             if (class_exists("Trigger"))
@@ -74,7 +74,7 @@
          *     $setting - The name of the setting to remove.
          */
         public function remove($setting) {
-            # Remove the setting
+            # Remove the setting.
             unset($this->json[$setting]);
 
             # Add the PHP protection!
