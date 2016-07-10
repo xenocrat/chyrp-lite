@@ -13,18 +13,6 @@
             return $query;
         }
 
-        static function getCategories() {
-                $query = SQL::current()->select("categorize",
-                                                "id, name, clean, show_on_home, clean AS url",
-                                                null,
-                                                "name ASC")->fetchAll();
-
-                foreach ($query as &$result)
-                    $result["url"] = url("category/".$result["url"]);
-
-            return $query;
-        }
-
         static function getCategorybyClean($name = string) {
             $query = SQL::current()->select("categorize",
                                             "id, name, clean, show_on_home, clean AS url",
@@ -46,24 +34,30 @@
                                           array(":name" => $name), 1)->fetchObject();
         }
 
-        static function getCategoryList() {
-            $query = SQL::current()->select(array('categorize',
-                                                  'post_attributes',
-                                                  'posts'),
-                                            implode(", ",
-                                                    array("__categorize.name",
-                                                          "__categorize.clean",
-                                                          "__categorize.show_on_home",
-                                                          "count(__categorize.id) AS total",
-                                                          "__categorize.clean AS url")),
-                                            array("post_attributes.post_id = posts.id",
-                                                  "post_attributes.name = 'category_id'",
-                                                  "post_attributes.value = categorize.id"),
-                                            "`__categorize.name` ASC",
-                                            array(),
-                                            null,
-                                            null,
-                                            "__categorize.name")->fetchAll();
+        static function getCategoryList($total = false) {
+            if ($total)
+                $query = SQL::current()->select(array('categorize',
+                                                      'post_attributes',
+                                                      'posts'),
+                                                implode(", ",
+                                                        array("__categorize.name",
+                                                              "__categorize.clean",
+                                                              "__categorize.show_on_home",
+                                                              "count(__categorize.id) AS total",
+                                                              "__categorize.clean AS url")),
+                                                array("post_attributes.post_id = posts.id",
+                                                      "post_attributes.name = 'category_id'",
+                                                      "post_attributes.value = categorize.id"),
+                                                "`__categorize.name` ASC",
+                                                array(),
+                                                null,
+                                                null,
+                                                "__categorize.name")->fetchAll();
+            else
+                $query = SQL::current()->select("categorize",
+                                                "id, name, clean, show_on_home, clean AS url",
+                                                null,
+                                                "name ASC")->fetchAll();
 
             foreach ($query as &$result)
                 $result["url"] = url("category/".$result["url"]);
@@ -114,9 +108,7 @@
         }
 
         static function uninstallCategorize() {
-            if ($confirm) {
-                SQL::current()->query("DROP TABLE __categorize");
-                SQL::current()->delete("post_attributes", "name = 'category_id'");
-            }
+            SQL::current()->query("DROP TABLE __categorize");
+            SQL::current()->delete("post_attributes", "name = 'category_id'");
         }
     }

@@ -1,5 +1,5 @@
 <?php
-    require_once "model.category.php";
+    require_once "model".DIR."category.php";
 
     class Categorize extends Modules {
         public function __init() {
@@ -52,7 +52,7 @@
         }
 
         public function xmlrpc_getCategoryList() {
-            $categories = Category::getCategories();
+            $categories = Category::getCategoryList();
 
             foreach($categories as $category)
                 $xml_cats[]['title'] = $category['name'];
@@ -76,7 +76,7 @@
         }
 
         public function post_options($fields, $post = null) {
-            $categories = Category::getCategories();
+            $categories = Category::getCategoryList();
 
             $fields_list[0]["value"] = "0";
             $fields_list[0]["name"] = __("[None]", "categorize");
@@ -108,7 +108,7 @@
         }
 
         public function main_context($context) {
-            $categories = Category::getCategoryList();
+            $categories = Category::getCategoryList(true);
             $context["categorize"] = array();
 
             foreach ($categories as $category)
@@ -177,7 +177,7 @@
             if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
-            $admin->display("manage_category", array("categorize" => Category::getCategories()));
+            $admin->display("manage_category", array("categorize" => Category::getCategoryList()));
         }
 
         public function admin_new_category($admin) {
