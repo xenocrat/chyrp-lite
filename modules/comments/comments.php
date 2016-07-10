@@ -1,5 +1,5 @@
 <?php
-    require_once "model.Comment.php";
+    require_once "model".DIR."Comment.php";
 
     class Comments extends Modules {
         public function __init() {
