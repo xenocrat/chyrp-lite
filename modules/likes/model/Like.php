@@ -144,9 +144,9 @@
             Group::add_permission("unlike_post", "Unlike Posts");   # __("Unlike Posts");
 
             $set = array($config->set("module_like",
-                                array("showOnFront" => true,
-                                      "likeWithText" => false,
-                                      "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg")));
+                                      array("showOnFront" => true,
+                                            "likeWithText" => false,
+                                            "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg")));
         }
 
         static function uninstall() {
