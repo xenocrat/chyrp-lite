@@ -108,7 +108,9 @@
         }
 
         static function uninstall() {
-            SQL::current()->query("DROP TABLE __categorize");
-            SQL::current()->delete("post_attributes", "name = 'category_id'");
+            $sql = SQL::current();
+
+            $sql->query("DROP TABLE __categorize");
+            $sql->delete("post_attributes", "name = 'category_id'");
         }
     }
