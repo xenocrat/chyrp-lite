@@ -1,5 +1,5 @@
 <?php
-    require_once "model.Like.php";
+    require_once "model".DIR."Like.php";
 
     class Likes extends Modules {
         static function __install() {

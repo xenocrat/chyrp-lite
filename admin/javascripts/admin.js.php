@@ -1,6 +1,6 @@
 <?php
     define('JAVASCRIPT', true);
-    require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
+    require_once dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 ?>
 $(function() {
     // Open help text in an iframe.
@@ -468,7 +468,7 @@ var Extend = {
         }
 
         Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
-        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html();
+        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html().replace(/<[^>]+>/g, "");
 
         if (!!Extend.confirmation && Extend.action == "disable")
             Extend.confirmed = (confirm(Extend.confirmation)) ? 1 : 0 ;

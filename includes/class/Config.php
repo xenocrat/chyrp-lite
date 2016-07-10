@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Config
-     * Holds all of the configuration variables for the entire site, as well as Module settings.
+     * Holds all of the configuration variables for the entire site.
      */
     class Config {
         # Variable: $json
@@ -13,7 +13,7 @@
          * Loads the configuration JSON file.
          */
         private function __construct() {
-            if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+            if (!is_readable(INCLUDES_DIR.DIR."config.json.php"))
                 return false;
 
             $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
@@ -40,13 +40,14 @@
          * Parameters:
          *     $setting - The setting name.
          *     $value - The value.
-         *     $overwrite - If the setting exists and is the same value, should it be overwritten?
+         *     $overwrite - Overwrite the setting if it exists and has the same value.
+         *     $fallback - Add the setting only if it doesn't already exist.
          */
-        public function set($setting, $value, $overwrite = true) {
-            if (isset($this->$setting) and $this->$setting == $value and !$overwrite)
+        public function set($setting, $value, $overwrite = true, $fallback = false) {
+            if (isset($this->$setting) and ((!$overwrite and $this->$setting == $value) or $fallback))
                 return false;
 
-            # Add the setting
+            # Add the setting.
             $this->json[$setting] = $this->$setting = $value;
 
             if (class_exists("Trigger"))
@@ -60,8 +61,7 @@
 
             # Update the configuration file.
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                error(__("Error"),
-                      _f("Failed to set <code>%s</code> because <em>config.json.php</em> is not writable.", fix($setting)));
+                trigger_error(__("The configuration file is not writable."), E_USER_WARNING);
 
             return true;
         }
@@ -74,7 +74,7 @@
          *     $setting - The name of the setting to remove.
          */
         public function remove($setting) {
-            # Remove the setting
+            # Remove the setting.
             unset($this->json[$setting]);
 
             # Add the PHP protection!
@@ -85,8 +85,9 @@
 
             # Update the configuration file.
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                error(__("Error"),
-                      _f("Failed to remove <code>%s</code> because <em>config.json.php</em> is not writable.", fix($setting)));
+                trigger_error(__("The configuration file is not writable."), E_USER_WARNING);
+
+            return true;
         }
 
         /**

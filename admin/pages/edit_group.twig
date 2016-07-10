@@ -1,4 +1,4 @@
-{% extends "layout.twig" %}
+{% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block title %}{{ "Edit Group &#8220;%s&#8221;" | translate | format(group.name | fix) }}{% endblock %}
 

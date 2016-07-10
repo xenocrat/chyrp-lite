@@ -9,7 +9,7 @@
         exit;
 
     function remove_memcached_hosts() {
-        Config::remove("cache_memcached_hosts");
+        Config::current()->remove("cache_memcached_hosts");
     }
 
     remove_memcached_hosts();

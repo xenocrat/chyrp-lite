@@ -12,6 +12,10 @@
     # Stores loaded gettext domains.
     $l10n = array();
 
+    #---------------------------------------------
+    # Sessions
+    #---------------------------------------------
+
     /**
      * Function: session
      * Begins Chyrp's custom session storage whatnots.
@@ -51,6 +55,10 @@
     function same_origin() {
         return (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
     }
+
+    #---------------------------------------------
+    # Routing
+    #---------------------------------------------
 
     /**
      * Function: redirect
@@ -158,6 +166,42 @@
 
         return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
     }
+
+    /**
+     * Function: htaccess_conf
+     * Creates the .htaccess file for Chyrp Lite or appends to an existing file.
+     *
+     * Parameters:
+     *     $url_path - The URL path to MAIN_DIR for the RewriteBase directive.
+     *
+     * Returns:
+     *     True if no action was needed, bytes written on success, false on failure.
+     */
+    function htaccess_conf($url_path = null) {
+        if (!INSTALLING and !UPGRADING)
+            $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
+
+        # The trim operation guarantees a string with leading and trailing slashes,
+        # but it also avoids doubling up slashes if $url_path consists of only "/".
+        $template = preg_replace("~%\\{CHYRP_PATH\\}~",
+                                 rtrim("/".ltrim($url_path, "/"), "/")."/",
+                                 file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
+
+        if (!file_exists(MAIN_DIR.DIR.".htaccess"))
+            return @file_put_contents(MAIN_DIR.DIR.".htaccess", $template);
+
+        if (!is_readable(MAIN_DIR.DIR.".htaccess"))
+            return false;
+
+        if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")))
+            return @file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$template, FILE_APPEND);
+
+        return true;
+    }
+
+    #---------------------------------------------
+    # Localization
+    #---------------------------------------------
 
     /**
      * Function: set_locale
@@ -279,6 +323,10 @@
         return call_user_func_array("sprintf", $args);
     }
 
+    #---------------------------------------------
+    # Time/Date
+    #---------------------------------------------
+
     /**
      * Function: when
      * Formats a string that isn't a regular time() value.
@@ -382,6 +430,10 @@
         else
             return ini_get("date.timezone");
     }
+
+    #---------------------------------------------
+    # Variable Manipulation
+    #---------------------------------------------
 
     /**
      * Function: fallback
@@ -704,7 +756,7 @@
         }
 
         if (!INSTALLING and !UPGRADING)
-            foreach (Config::current()->enabled_modules as $module)
+            foreach ((array) Config::current()->enabled_modules as $module)
                 if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
                     require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
                     return;
@@ -793,6 +845,10 @@
 
         return $search;
     }
+
+    #---------------------------------------------
+    # String Manipulation
+    #---------------------------------------------
 
     /**
      * Function: pluralize
@@ -1014,30 +1070,33 @@
      */
     function emote($text) {
         $emoji = array(
-            'o:-)' => '&#x1f607;',
-            '>:-)' => '&#x1f608;',
-            ':-)'  => '&#x1f600;',
-            '^_^'  => '&#x1f601;',
-            ':-D'  => '&#x1f603;',
-            ';-)'  => '&#x1f609;',
-            '<3'   => '&#x1f60d;',
-            'B-)'  => '&#x1f60e;',
-            ':->'  => '&#x1f60f;',
-            ':-||' => '&#x1f62c;',
-            ':-|'  => '&#x1f611;',
-            '-_-'  => '&#x1f612;',
-            ':-/'  => '&#x1f615;',
-            ':-s'  => '&#x1f616;',
-            ':-*'  => '&#x1f618;',
-            ':-P'  => '&#x1f61b;',
-            ':-((' => '&#x1f629;',
-            ':-('  => '&#x1f61f;',
-            ';_;'  => '&#x1f622;',
-            ':-o'  => '&#x1f62e;',
-            'O_O'  => '&#x1f632;',
-            ':-$'  => '&#x1f633;',
-            'x_x'  => '&#x1f635;',
-            ':-x'  => '&#x1f636;'
+            'o:-)'    => '&#x1f607;',
+            '&gt;:-)' => '&#x1f608;',
+            '>:-)'    => '&#x1f608;',
+            ':-)'     => '&#x1f600;',
+            '^_^'     => '&#x1f601;',
+            ':-D'     => '&#x1f603;',
+            ';-)'     => '&#x1f609;',
+            '&lt;3'   => '&#x1f60d;',
+            '<3'      => '&#x1f60d;',
+            'B-)'     => '&#x1f60e;',
+            ':-&gt;'  => '&#x1f60f;',
+            ':->'     => '&#x1f60f;',
+            ':-||'    => '&#x1f62c;',
+            ':-|'     => '&#x1f611;',
+            '-_-'     => '&#x1f612;',
+            ':-/'     => '&#x1f615;',
+            ':-s'     => '&#x1f616;',
+            ':-*'     => '&#x1f618;',
+            ':-P'     => '&#x1f61b;',
+            ':-(('    => '&#x1f629;',
+            ':-('     => '&#x1f61f;',
+            ';_;'     => '&#x1f622;',
+            ':-o'     => '&#x1f62e;',
+            'O_O'     => '&#x1f632;',
+            ':-$'     => '&#x1f633;',
+            'x_x'     => '&#x1f635;',
+            ':-x'     => '&#x1f636;'
         );
 
         foreach($emoji as $key => $value) {
@@ -1179,6 +1238,10 @@
             else
                 $value = get_magic_quotes_gpc() ? stripslashes($value) : $value ;
     }
+
+    #---------------------------------------------
+    # Remote Fetches
+    #---------------------------------------------
 
     /**
      * Function: get_remote
@@ -1373,6 +1436,10 @@
         return false;
     }
 
+    #---------------------------------------------
+    # Modules and Feathers
+    #---------------------------------------------
+
     /**
      * Function: init_extensions
      * Initialize all Modules and Feathers.
@@ -1381,7 +1448,7 @@
         $config = Config::current();
 
         # Instantiate all Modules.
-        foreach ($config->enabled_modules as $module) {
+        foreach ((array) $config->enabled_modules as $module) {
             $class_name = camelize($module);
 
             if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or
@@ -1407,7 +1474,7 @@
         }
 
         # Instantiate all Feathers.
-        foreach ($config->enabled_feathers as $feather) {
+        foreach ((array) $config->enabled_feathers as $feather) {
             $class_name = camelize($feather);
 
             if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or
@@ -1520,6 +1587,10 @@
         if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
             Flash::warning($message);
     }
+
+    #---------------------------------------------
+    # Upload Management
+    #---------------------------------------------
 
     /**
      * Function: upload
@@ -1728,6 +1799,10 @@
         return unique_filename(implode(".", $name).$ext, $num + 1);
     }
 
+    #---------------------------------------------
+    # Input Validation and Processing
+    #---------------------------------------------
+
     /**
      * Function: password_strength
      * Award a numeric score for the strength of a password.
@@ -1878,6 +1953,10 @@
         }
         return $url;
     }
+
+    #---------------------------------------------
+    # Responding to Requests
+    #---------------------------------------------
 
     /**
      * Function: json_set

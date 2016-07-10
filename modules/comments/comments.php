@@ -1,5 +1,5 @@
 <?php
-    require_once "model.Comment.php";
+    require_once "model".DIR."Comment.php";
 
     class Comments extends Modules {
         public function __init() {
@@ -817,7 +817,7 @@
                         '            <published>'.when("c", $comment->created_at).'</published>'."\r".
                         '            <author chyrp:user_id="'.$comment->user_id.'">'."\r".
                         "                <name>".fix($comment->author)."</name>\r".
-                        (!empty($comment->author_url) ? 
+                        (!empty($comment->author_url) ?
                         "                <uri>".fix($comment->author_url)."</uri>\r" : "").
                         "                <email>".fix($comment->author_email)."</email>\r".
                         "                <chyrp:login>".fix(@$comment->user->login)."</chyrp:login>\r".

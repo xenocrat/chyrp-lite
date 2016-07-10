@@ -1,0 +1,137 @@
+{% extends "layouts" ~ DIR ~ "help.twig" %}
+
+{% block title %}{{ "Filtering Results" | translate("rights") }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Choosing a License" | translate("rights") }}</h1>
+<p>
+{{ "When you create a piece of content for your blog, you get to decide whether or not you want your name associated with it, and whether or not it can be reproduced and reused by other people. As the &#8220;rights holder&#8221;, the license you choose to apply to your work determines which of those rights you retain and which of them you waive." | translate("rights") }}
+</p>
+<p>
+{{ "Creative Commons is a family of licenses that you can use to donate your work to &#8220;the commons&#8221; — the body of work freely available for legal use, sharing, repurposing, and remixing. With a Creative Commons license, you can give other people permission to reproduce or reuse your work with certain restrictions. Here is a chart comparing the licenses:" | translate("rights") }}
+</p>
+<table>
+<thead>
+<tr>
+<th>
+{{ "License" | translate("rights") }}
+</th>
+<th title="{{ 'Others who use your work in any way must give you credit.' | translate("rights") }}">
+{{ "Attribution" | translate("rights") }}
+</th>
+<th title="{{ 'Derivative works must be licensed under the same terms.' | translate("rights") }}">
+{{ "ShareAlike" | translate("rights") }}
+</th>
+<th title="{{ 'Your work may not be reproduced or reused for commercial gain.' | translate("rights") }}">
+{{ "NonCommercial" | translate("rights") }}
+</th>
+<th title="{{ 'Your work may be reproduced but it may not be modified.' | translate("rights") }}">
+{{ "NoDerivatives" | translate("rights") }}
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0" class="rights_licence_link">
+{{ "Creative Commons BY" | translate("rights") }}</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0" class="rights_licence_link">
+{{ "Creative Commons BY-ND" | translate("rights") }}
+</a>
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+</tr>
+<tr>
+<td>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0" class="rights_licence_link">
+{{ "Creative Commons BY-SA" | translate("rights") }}
+</a>
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0" class="rights_licence_link">
+{{ "Creative Commons BY-NC" | translate("rights") }}
+</a>
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td>&nbsp;</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0" class="rights_licence_link">
+{{ "Creative Commons BY-NC-ND" | translate("rights") }}
+</a>
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td>&nbsp;</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+</tr>
+<tr>
+<td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="rights_licence_link">
+{{ "Creative Commons BY-NC-SA" | translate("rights") }}
+</a>
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td class="emblem">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0" class="rights_licence_link">
+{{ "Creative Commons CC0" | translate("rights") }}
+</a>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+{% endblock %}

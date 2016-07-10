@@ -85,7 +85,7 @@
                 $status = $type;
 
             if (!logged_in())
-                $notify = 0; # Only logged-in users can request notifications
+                $notify = 0; # Only logged-in users can request notifications.
 
             fallback($_SERVER['HTTP_REFERER'], "");
             fallback($_SERVER['HTTP_USER_AGENT'], "");
@@ -228,12 +228,14 @@
 
         public function editable($user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("edit_comment") or (logged_in() and $user->group->can("edit_own_comment") and $user->id == $this->user_id));
+            return ($user->group->can("edit_comment") or
+                    (logged_in() and $user->group->can("edit_own_comment") and $user->id == $this->user_id));
         }
 
         public function deletable($user = null) {
             fallback($user, Visitor::current());
-            return ($user->group->can("delete_comment") or (logged_in() and $user->group->can("delete_own_comment") and $user->id == $this->user_id));
+            return ($user->group->can("delete_comment") or
+                    (logged_in() and $user->group->can("delete_own_comment") and $user->id == $this->user_id));
         }
 
         /**
@@ -290,11 +292,11 @@
             if (!$visitor->group->can("add_comment"))
                 return false;
 
-            # Assume allowed comments by default
+            # Assume allowed comments by default.
             return empty($post->comment_status) or
-                   !($post->comment_status == "closed" or
-                    ($post->comment_status == "registered_only" and !logged_in()) or
-                    ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
+                       !($post->comment_status == "closed" or
+                        ($post->comment_status == "registered_only" and !logged_in()) or
+                        ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
         }
 
         static function user_count($user_id) {

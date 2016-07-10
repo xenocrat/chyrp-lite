@@ -2,18 +2,6 @@
  Trigger Calls
 ==============================================
 
-admin_write_wysiwyg
--------------------
-Called from:
-	admin/admin.js.php on line 287
-
-
-admin_javascript
-----------------
-Called from:
-	admin/admin.js.php on line 520
-
-
 can_not_view_site
 -----------------
 Called from:
@@ -30,10 +18,22 @@ Arguments:
 	$route
 
 
+admin_write_wysiwyg
+-------------------
+Called from:
+	admin/javascripts/admin.js.php on line 287
+
+
+admin_javascript
+----------------
+Called from:
+	admin/javascripts/admin.js.php on line 520
+
+
 admin_head
 ----------
 Called from:
-	admin/layout.twig on line 15
+	admin/layouts/default.twig on line 15
 
 
 delete_user_form
@@ -208,7 +208,7 @@ Called from:
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 53
+	includes/class/Config.php on line 54
 Arguments:
 	$setting, $value, $overwrite
 
@@ -435,7 +435,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model.Comment.php on line 197
+	modules/comments/model/Comment.php on line 197
 Arguments:
 	$new->post_id, $new->id
 
@@ -443,7 +443,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model.Comment.php on line 215
+	modules/comments/model/Comment.php on line 215
 Arguments:
 	$this->post_id, $this->id
 
@@ -451,7 +451,7 @@ Arguments:
 delete_comment
 --------------
 Called from:
-	modules/comments/model.Comment.php on line 223
+	modules/comments/model/Comment.php on line 223
 Arguments:
 	$new->post_id, $new->id
 
@@ -690,7 +690,7 @@ manage_nav
 Target:
 	$subnav["manage"]
 Called from:
-	includes/controller/Admin.php on line 2076
+	includes/controller/Admin.php on line 1990
 
 
 settings_nav
@@ -698,7 +698,7 @@ settings_nav
 Target:
 	$subnav["settings"]
 Called from:
-	includes/controller/Admin.php on line 2106
+	includes/controller/Admin.php on line 2020
 
 
 extend_nav
@@ -706,7 +706,7 @@ extend_nav
 Target:
 	$subnav["extend"]
 Called from:
-	includes/controller/Admin.php on line 2116
+	includes/controller/Admin.php on line 2030
 
 
 admin_subnav
@@ -714,7 +714,7 @@ admin_subnav
 Target:
 	$subnav
 Called from:
-	includes/controller/Admin.php on line 2127
+	includes/controller/Admin.php on line 2041
 
 
 nav_selected
@@ -722,7 +722,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2229
+	includes/controller/Admin.php on line 2144
 
 
 url_code
@@ -748,7 +748,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 792
+	includes/helpers.php on line 844
 Arguments:
 	$query, $plain
 
@@ -758,7 +758,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1276
+	includes/helpers.php on line 1339
 
 
 send_mail
@@ -766,7 +766,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1963
+	includes/helpers.php on line 2042
 
 
 xmlrpc_methods
@@ -982,7 +982,7 @@ comment
 Target:
 	$this
 Called from:
-	modules/comments/model.Comment.php on line 36
+	modules/comments/model/Comment.php on line 36
 
 
 filter_comment
@@ -990,4 +990,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model.Comment.php on line 46
+	modules/comments/model/Comment.php on line 46

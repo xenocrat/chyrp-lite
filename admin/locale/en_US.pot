@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-01 07:57+0000\n"
+"POT-Creation-Date: 2016-07-10 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -17,63 +17,222 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: admin/admin.js.php:43
+#: admin/help/canonical_url.twig:3
+#: admin/help/canonical_url.twig:6
+#: admin/pages/general_settings.twig:22
+msgid "Canonical URL"
+msgstr ""
+
+#: admin/help/canonical_url.twig:8
+msgid "If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
+msgstr ""
+
+#: admin/help/canonical_url.twig:12
+msgid "Create an <em>index.php</em> file in your destination directory with the following in it:"
+msgstr ""
+
+#: admin/help/canonical_url.twig:18
+msgid "Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the destination directory, and change the <code>RewriteBase</code> line to reflect the new location."
+msgstr ""
+
+#: admin/help/filtering_results.twig:3
+#: admin/help/filtering_results.twig:6
+msgid "Filtering Results"
+msgstr ""
+
+#: admin/help/filtering_results.twig:8
+msgid "Use this search field to filter for specific items by entering plain text or keywords."
+msgstr ""
+
+#: admin/help/filtering_results.twig:10
+msgid "Keywords"
+msgstr ""
+
+#: admin/help/filtering_results.twig:12
+msgid "Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code> (case insensitive). The keyword can be the name of a database column, the name of an <code>author</code> or a <code>group</code>, or a date/time. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016."
+msgstr ""
+
+#: admin/help/markdown.twig:3
+#: admin/help/markdown.twig:6
+#: admin/help/markdown.twig:13
+#: admin/pages/content_settings.twig:69
+msgid "Markdown"
+msgstr ""
+
+#: admin/help/markdown.twig:8
+msgid "Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:"
+msgstr ""
+
+#: admin/help/markdown.twig:14
+msgid "Result"
+msgstr ""
+
+#: admin/help/markdown.twig:19
+msgid "## Heading"
+msgstr ""
+
+#: admin/help/markdown.twig:20
+#: admin/help/markdown.twig:24
+msgid "Heading"
+msgstr ""
+
+#: admin/help/markdown.twig:23
+msgid "### Heading"
+msgstr ""
+
+#: admin/help/markdown.twig:27
+msgid "*Emphasis*"
+msgstr ""
+
+#: admin/help/markdown.twig:28
+msgid "Emphasis"
+msgstr ""
+
+#: admin/help/markdown.twig:31
+msgid "~~Strikethrough~~"
+msgstr ""
+
+#: admin/help/markdown.twig:32
+msgid "Strikethrough"
+msgstr ""
+
+#: admin/help/markdown.twig:35
+msgid "**Strong**"
+msgstr ""
+
+#: admin/help/markdown.twig:36
+msgid "Strong"
+msgstr ""
+
+#: admin/help/markdown.twig:39
+msgid "&crarr;"
+msgstr ""
+
+#: admin/help/markdown.twig:40
+msgid "New paragraph"
+msgstr ""
+
+#: admin/help/markdown.twig:43
+msgid "[title](URL)"
+msgstr ""
+
+#: admin/help/markdown.twig:44
+msgid "Hyperlink"
+msgstr ""
+
+#: admin/help/markdown.twig:47
+msgid "![description](URL)"
+msgstr ""
+
+#: admin/help/markdown.twig:48
+msgid "Image"
+msgstr ""
+
+#: admin/help/markdown.twig:51
+msgid "`Code`"
+msgstr ""
+
+#: admin/help/markdown.twig:52
+msgid "Code"
+msgstr ""
+
+#: admin/help/markdown.twig:55
+msgid "- List of items"
+msgstr ""
+
+#: admin/help/markdown.twig:56
+#: admin/help/markdown.twig:60
+msgid "List of items"
+msgstr ""
+
+#: admin/help/markdown.twig:59
+msgid "1. List of items"
+msgstr ""
+
+#: admin/help/slugs.twig:3
+#: admin/help/slugs.twig:6
+msgid "Slugs"
+msgstr ""
+
+#: admin/help/slugs.twig:8
+msgid "The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, hyphen (&#8220;-&#8221;) and underscore (&#8220;_&#8221;)."
+msgstr ""
+
+#: admin/help/unicode_emoticons.twig:3
+#: admin/help/unicode_emoticons.twig:6
+#: admin/pages/content_settings.twig:61
+msgid "Unicode Emoticons"
+msgstr ""
+
+#: admin/help/unicode_emoticons.twig:8
+msgid "You can have some emoticons converted to equivalent Unicode emoji when your content is displayed. Your original content is not modified, so you can turn this feature on and off at any time. The following conversions will occur:"
+msgstr ""
+
+#: admin/help/unicode_emoticons.twig:13
+msgid "Emoticon"
+msgstr ""
+
+#: admin/help/unicode_emoticons.twig:14
+msgid "Emoji"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:43
 msgid "Toggle All"
 msgstr ""
 
-#: admin/admin.js.php:103
-#: admin/admin.js.php:119
+#: admin/javascripts/admin.js.php:103
+#: admin/javascripts/admin.js.php:119
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/admin.js.php:105
-#: admin/admin.js.php:122
+#: admin/javascripts/admin.js.php:105
+#: admin/javascripts/admin.js.php:122
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/admin.js.php:185
+#: admin/javascripts/admin.js.php:185
 msgid "You are a member of this group. Are you sure you want to update the permissions?"
 msgstr ""
 
-#: admin/admin.js.php:191
+#: admin/javascripts/admin.js.php:191
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/admin.js.php:269
+#: admin/javascripts/admin.js.php:269
 msgid "Help"
 msgstr ""
 
-#: admin/admin.js.php:273
-#: admin/admin.js.php:275
-#: admin/admin.js.php:352
-#: admin/admin.js.php:354
+#: admin/javascripts/admin.js.php:273
+#: admin/javascripts/admin.js.php:275
+#: admin/javascripts/admin.js.php:352
+#: admin/javascripts/admin.js.php:354
 msgid "Close"
 msgstr ""
 
-#: admin/admin.js.php:295
-#: admin/admin.js.php:296
+#: admin/javascripts/admin.js.php:295
+#: admin/javascripts/admin.js.php:296
 msgid "Preview this field"
 msgstr ""
 
-#: admin/admin.js.php:348
+#: admin/javascripts/admin.js.php:348
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/admin.js.php:477
+#: admin/javascripts/admin.js.php:477
 msgid "The extension cannot be toggled because your web browser did not send proper credentials."
 msgstr ""
 
-#: admin/layout.twig:58
+#: admin/layouts/default.twig:58
 msgid 'Chyrp loves you.'
 msgstr ""
 
-#: admin/layout.twig:59
+#: admin/layouts/default.twig:59
 #, php-format
 msgid "Chyrp Lite &ldquo;%s&rdquo;"
 msgstr ""
 
-#: admin/layout.twig:60
+#: admin/layouts/default.twig:60
 msgid "Log out"
 msgstr ""
 
@@ -145,16 +304,8 @@ msgstr ""
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
-#: admin/pages/content_settings.twig:61
-msgid "Unicode Emoticons"
-msgstr ""
-
 #: admin/pages/content_settings.twig:65
 msgid "Display emoticons as Unicode emoji."
-msgstr ""
-
-#: admin/pages/content_settings.twig:69
-msgid "Markdown"
 msgstr ""
 
 #: admin/pages/content_settings.twig:72
@@ -426,10 +577,6 @@ msgstr ""
 
 #: admin/pages/general_settings.twig:17
 msgid "Chyrp URL"
-msgstr ""
-
-#: admin/pages/general_settings.twig:22
-msgid "Canonical URL"
 msgstr ""
 
 #: admin/pages/general_settings.twig:23

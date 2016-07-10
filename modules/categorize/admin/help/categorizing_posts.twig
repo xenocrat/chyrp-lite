@@ -1,0 +1,13 @@
+{% extends "layouts" ~ DIR ~ "help.twig" %}
+
+{% block title %}{{ "Categorizing Posts" | translate("categorize") }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Categorizing Posts" | translate("categorize") }}</h1>
+<p>
+{{ "Categorization is a way of organising your blog posts. A good use for categorization is to gather together multiple posts that have a common theme or subject matter. Each post can have only one category applied to it, and your visitors will be able to filter your blog to easily view all the posts within a particular category." | translate("categorize") }}
+</p>
+<p>
+{{ "Categories can be added, renamed, and deleted in the <strong>Manage</strong> tab of the administration console." | translate("categorize") }}
+</p>
+{% endblock %}

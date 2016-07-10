@@ -1,0 +1,114 @@
+{% extends "layouts" ~ DIR ~ "help.twig" %}
+
+{% block title %}{{ "Unicode Emoticons" | translate }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Unicode Emoticons" | translate }}</h1>
+<p>
+{{ "You can have some emoticons converted to equivalent Unicode emoji when your content is displayed. Your original content is not modified, so you can turn this feature on and off at any time. The following conversions will occur:" | translate }}
+</p>
+<table>
+<thead>
+<tr>
+<th>{{ "Emoticon" | translate }}</th>
+<th>{{ "Emoji" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>o:-)</td>
+<td>{{ "o:-)" | emote }}</td></tr>
+<tr>
+<td>&gt;:-)</td>
+<td>{{ "&gt;:-)" | emote }}</td></tr>
+<tr>
+<td>:-)</td>
+<td>{{ ":-)" | emote }}</td>
+</tr>
+<tr>
+<td>^_^</td>
+<td>{{ "^_^" | emote }}</td>
+</tr>
+<tr>
+<td>:-D</td>
+<td>{{ ":-D" | emote }}</td>
+</tr>
+<tr>
+<td>;-)</td>
+<td>{{ ";-)" | emote }}</td>
+</tr>
+<tr>
+<td>&lt;3</td>
+<td>{{ "&lt;3" | emote }}</td>
+</tr>
+<tr>
+<td>B-)</td>
+<td>{{ "B-)" | emote }}</td>
+</tr>
+<tr>
+<td>:-></td>
+<td>{{ ":->" | emote }}</td>
+</tr>
+<tr>
+<td>:-||</td>
+<td>{{ ":-||" | emote }}</td>
+</tr>
+<tr>
+<td>:-|</td>
+<td>{{ ":-|" | emote }}</td>
+</tr>
+<tr>
+<td>-_-</td>
+<td>{{ "-_-" | emote }}</td>
+</tr>
+<tr>
+<td>:-/</td>
+<td>{{ ":-/" | emote }}</td>
+</tr>
+<tr>
+<td>:-s</td>
+<td>{{ ":-s" | emote }}</td>
+</tr>
+<tr>
+<td>:-*</td>
+<td>{{ ":-*" | emote }}</td>
+</tr>
+<tr>
+<td>:-P</td>
+<td>{{ ":-P" | emote }}</td>
+</tr>
+<tr>
+<td>:-(</td>
+<td>{{ ":-(" | emote }}</td>
+</tr>
+<tr>
+<td>;_;</td>
+<td>{{ ";_;" | emote }}</td>
+</tr>
+<tr>
+<td>:-((</td>
+<td>{{ ":-((" | emote }}</td>
+</tr>
+<tr>
+<td>:-o</td>
+<td>{{ ":-o" | emote }}</td>
+</tr>
+<tr>
+<td>O_O</td>
+<td>{{ "O_O" | emote }}</td>
+</tr>
+<tr>
+<td>:-$</td>
+<td>{{ ":-$" | emote }}</td>
+</tr>
+<tr>
+<td>x_x</td>
+<td>{{ "x_x" | emote }}</td>
+</tr>
+<tr>
+<td>:-x</td>
+<td>{{ ":-x" | emote }}</td>
+</tr>
+</tbody>
+</table>
+{% endblock %}
