@@ -325,4 +325,27 @@
                                             "post" => $post,
                                             "to" => $notification["author_email"]));
         }
+
+        static function install() {
+            SQL::current()->query("CREATE TABLE IF NOT EXISTS __comments (
+                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                                       body LONGTEXT,
+                                       author VARCHAR(250) DEFAULT '',
+                                       author_url VARCHAR(128) DEFAULT '',
+                                       author_email VARCHAR(128) DEFAULT '',
+                                       author_ip INTEGER DEFAULT '0',
+                                       author_agent VARCHAR(255) DEFAULT '',
+                                       status VARCHAR(32) default 'denied',
+                                       post_id INTEGER DEFAULT 0,
+                                       user_id INTEGER DEFAULT 0,
+                                       parent_id INTEGER DEFAULT 0,
+                                       notify INTEGER DEFAULT 0,
+                                       created_at DATETIME DEFAULT NULL,
+                                       updated_at DATETIME DEFAULT NULL
+                                   ) DEFAULT CHARSET=utf8");
+        }
+
+        static function uninstall() {
+            SQL::current()->query("DROP TABLE __comments");
+        }
     }
