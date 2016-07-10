@@ -9,14 +9,15 @@
         }
 
         static function __install() {
-            Category::installCategorize();                                      # Add this string to the .pot file:
-            Group::add_permission("manage_categorize", "Manage Categories");    # __("Manage Categories");
+            Category::install();
+
+            Group::add_permission("manage_categorize", "Manage Categories");
             Route::current()->add("category/(name)/", "category");
         }
 
         static function __uninstall($confirm) {
             if ($confirm)
-                Category::uninstallCategorize();
+                Category::uninstall();
 
             Group::remove_permission('manage_categorize');
             Route::current()->remove("category/(name)/");

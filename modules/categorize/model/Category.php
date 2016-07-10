@@ -98,7 +98,7 @@
                                    array(":id" => $id));
         }
 
-        static function installCategorize() {
+        static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __categorize (
                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                       name  VARCHAR(128) NOT NULL,
@@ -107,7 +107,7 @@
                                   ) DEFAULT CHARSET=UTF8");
         }
 
-        static function uninstallCategorize() {
+        static function uninstall() {
             SQL::current()->query("DROP TABLE __categorize");
             SQL::current()->delete("post_attributes", "name = 'category_id'");
         }
