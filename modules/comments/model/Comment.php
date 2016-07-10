@@ -294,9 +294,9 @@
 
             # Assume allowed comments by default.
             return empty($post->comment_status) or
-                   !($post->comment_status == "closed" or
-                    ($post->comment_status == "registered_only" and !logged_in()) or
-                    ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
+                       !($post->comment_status == "closed" or
+                        ($post->comment_status == "registered_only" and !logged_in()) or
+                        ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
         }
 
         static function user_count($user_id) {

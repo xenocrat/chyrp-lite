@@ -20,16 +20,18 @@
 <select name="default_comment_status">
 <option value="approved"{{ "approved" | selected(site.default_comment_status) }}>{{ "Approved" | translate("comments") }}</option>
 <option value="denied"{{ "denied" | selected(site.default_comment_status) }}>{{ "Denied" | translate("comments") }}</option>
-<option value="spam"{{ "spam" | selected(site.default_comment_status) }}>{{ "Spam" | translate("aggregator") }}</option>
+<option value="spam"{{ "spam" | selected(site.default_comment_status) }}>{{ "Spam" | translate("comments") }}</option>
 </select>
 </p>
 <p>
 <label for="comments_per_page">{{ "Comments Per Page" | translate("comments") }}</label>
 <input class="text digits" type="number" min="0" name="comments_per_page" value="{{ site.comments_per_page | fix(true) }}" id="comments_per_page">
+<small>{{ "Themes decide whether or not to paginate comments." | translate("comments") }}</small>
 </p>
 <p>
 <label for="enable_reload_comments">{{ "Reload Comments" | translate("comments") }}</label>
 <input type="checkbox" class="checkbox" name="enable_reload_comments"{{ site.enable_reload_comments | checked }}>
+<small>{{ "Show newly added comments (up to the maximum number per page)." | translate("comments") }}</small>
 </p>
 <p>
 <label for="auto_reload_comments">{{ "Reload interval" | translate("comments") }}</label>
