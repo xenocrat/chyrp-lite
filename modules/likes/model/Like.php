@@ -111,50 +111,36 @@
         }
 
         static function install() {
-            $config = Config::current();
             $sql = SQL::current();
 
             if ($sql->adapter == "mysql") {
                 # SQLite does not support KEY or UNIQUE in CREATE.
                 $sql->query("CREATE TABLE IF NOT EXISTS __likes (
-                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                              post_id INTEGER NOT NULL,
-                              user_id INTEGER NOT NULL,
-                              timestamp DATETIME DEFAULT NULL,
-                              session_hash VARCHAR(32) NOT NULL,
-                              KEY key_post_id (post_id),
-                              KEY key_user_id (post_id, user_id),
-                              UNIQUE key_session_hash (post_id, session_hash)
-                            ) DEFAULT CHARSET=utf8");
+                               id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                               post_id INTEGER NOT NULL,
+                               user_id INTEGER NOT NULL,
+                               timestamp DATETIME DEFAULT NULL,
+                               session_hash VARCHAR(32) NOT NULL,
+                               KEY key_post_id (post_id),
+                               KEY key_user_id (post_id, user_id),
+                               UNIQUE key_session_hash (post_id, session_hash)
+                             ) DEFAULT CHARSET=utf8");
             } else {
                 # MySQL does not support CREATE INDEX IF NOT EXISTS.
                 $sql->query("CREATE TABLE IF NOT EXISTS __likes (
-                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                              post_id INTEGER NOT NULL,
-                              user_id INTEGER NOT NULL,
-                              timestamp DATETIME DEFAULT NULL,
-                              session_hash VARCHAR(32) NOT NULL
-                            )");
+                               id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                               post_id INTEGER NOT NULL,
+                               user_id INTEGER NOT NULL,
+                               timestamp DATETIME DEFAULT NULL,
+                               session_hash VARCHAR(32) NOT NULL
+                             )");
                 $sql->query("CREATE INDEX IF NOT EXISTS key_post_id ON __likes (post_id)");
                 $sql->query("CREATE INDEX IF NOT EXISTS key_user_id ON __likes (post_id, user_id)");
                 $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_session_hash ON __likes (post_id, session_hash)");
             }
-                                                                    # Add these strings to the .pot file:
-            Group::add_permission("like_post", "Like Posts");       # __("Like Posts");
-            Group::add_permission("unlike_post", "Unlike Posts");   # __("Unlike Posts");
-
-            $set = array($config->set("module_like",
-                                      array("showOnFront" => true,
-                                            "likeWithText" => false,
-                                            "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg")));
         }
 
         static function uninstall() {
             SQL::current()->query("DROP TABLE __likes");
-
-            Group::remove_permission("like_post");
-            Group::remove_permission("unlike_post");
-
-            Config::current()->remove("module_like");
         }
     }
