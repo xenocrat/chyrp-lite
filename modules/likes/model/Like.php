@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Like
-     * The model for the Like SQL table.
+     * The model for the Likes SQL table.
      *
      * See Also:
      *     <Model>
