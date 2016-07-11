@@ -1,4 +1,11 @@
 <?php
+    /**
+     * Class: Category
+     * The model for the Categorize SQL table.
+     *
+     * See Also:
+     *     <Model>
+     */
     class Category extends Model {
         static function getCategory($id = int) {
             $query = SQL::current()->select("categorize",
