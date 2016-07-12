@@ -567,14 +567,14 @@ img.gravatar {                                  position: absolute;
 
 @media screen and (max-width: 639px) {
     html {                                      font-size: 14px }
-    body {                                      margin-bottom: 3rem }
+    body {                                      margin-bottom: 2rem }
     blockquote {                                padding: 0em 1em }
     input, select {                             width: 100% }
     table {                                     box-sizing: border-box;
                                                 display: block }
     h1.banner {                                 margin-bottom: 2rem }
     h3.filter {                                 padding-top: 2rem }
-    div#mast_box {                              padding: 3rem 1rem }
+    div#mast_box {                              padding: 2rem 1rem }
     ul.navigation li > a {                      display: inline-block;
                                                 margin: 0em 0.5em 2em 0.5em }
     div.search_box {                            margin-top: 0em }
