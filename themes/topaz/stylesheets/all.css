@@ -151,8 +151,7 @@ hr {                                            width: 100%;
                                                 clear: both;
                                                 border-top: 1px solid #ebedec;
                                                 margin: 1em 0em }
-hr:last-child {                                 margin: 0em;
-                                                visibility: hidden }
+hr:last-child {                                 display: none }
 ul {                                            list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
@@ -311,6 +310,8 @@ button {                                        font: inherit;
                                                 transition-duration: 250ms }
 label {                                         display: block;
                                                 margin-top: 1em }
+div.clear {                                     visibility: hidden;
+                                                clear: both }
 div.shim {                                      margin-top: 2em }
 div#mast {                                      display: none;
                                                 width: 100%;
