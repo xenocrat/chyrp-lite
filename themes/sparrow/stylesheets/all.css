@@ -87,8 +87,10 @@ h3 {                                            font-size: 1em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
 h3.flash {                                      margin: 0em }
-h3.filter {                                     padding: 4rem 0em 0rem 2rem;
-                                                margin-bottom: 0em }
+h3.filter {                                     box-sizing: border-box;
+                                                max-width: 1024px;
+                                                margin: 0rem auto;
+                                                padding: 4rem 0rem 0rem 2rem }
 h3.archive {                                    margin-top: 1em;
                                                 clear: both }
 h4 {                                            font-size: 1em;
@@ -285,9 +287,13 @@ div#main {                                      box-sizing: border-box;
                                                 padding: 0em;
                                                 clear: both;
                                                 overflow: visible }
-div.prev {                                      margin: 4rem 0em 0rem 2rem }
+div.traversal {                                 box-sizing: border-box;
+                                                max-width: 1024px }
+div.prev {                                      padding-left: 2rem;
+                                                margin: 4rem auto 0rem auto }
 div.next {                                      text-align: right;
-                                                margin: 0rem 2em 0rem 0rem }
+                                                padding-right: 2rem;
+                                                margin: 0rem auto 0rem auto }
 div.flash {                                     box-sizing: border-box;
                                                 width: 100%;
                                                 text-align: center;
@@ -340,7 +346,7 @@ ul.archive article.post.archive {               display: block;
                                                 height: 156px;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
-                                                margin: 0em 0em 2.66em 1.33em;
+                                                margin: 0rem 0rem 2rem 1rem;
                                                 padding: 8px;
                                                 border: 1px solid #c2bcb8 }
 article > header {                              display: block;
@@ -567,11 +573,13 @@ img.gravatar {                                  position: absolute;
     table {                                     box-sizing: border-box;
                                                 display: block }
     h1.banner {                                 margin-bottom: 2rem }
+    h3.filter {                                 padding-top: 2rem }
     div#mast_box {                              padding: 3rem 1rem }
     ul.navigation li > a {                      display: inline-block;
                                                 margin: 0em 0.5em 2em 0.5em }
     div.search_box {                            margin-top: 0em }
     button#search_submit {                      display: none }
+    div.prev {                                  margin-top: 2rem }
     div#main > article, div.standalone,
     div#main > article.commentary {             padding: 2rem 2rem 0rem 2rem }
     div.metadata {                              padding-bottom: 2rem }
@@ -591,12 +599,10 @@ img.gravatar {                                  position: absolute;
     ul.archive article.post.archive img {       width: 100% }
 }
 
-@media screen and (min-width: 959px) {
+@media screen and (min-width: 1024px) {
     div#mast_box {                              text-align: left;
                                                 padding: 4em 8rem 4rem 8rem }
     div.search_box {                            display: inline-block }
-    div.prev {                                  margin: 4rem 0em 0rem 4rem }
-    div.next {                                  margin: 0rem 4em 0rem 0rem }
     div#main > article, div.standalone {        padding-left: 8rem;
                                                 padding-right: 8rem }
     div#main > article.commentary {             padding: 0rem 8rem }
