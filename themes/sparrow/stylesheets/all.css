@@ -142,8 +142,8 @@ hr {                                            width: 100%;
                                                 clear: both;
                                                 border-top: 1px solid #c2bcb8;
                                                 margin: 2em 0em }
-hr:last-child, div.archive > hr {               margin: 0em;
-                                                visibility: hidden }
+hr.post {                                       margin: 0em }
+hr:last-child, hr.post:last-of-type {           display: none }
 ul {                                            list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
@@ -268,6 +268,8 @@ button {                                        font: inherit;
                                                 transition-duration: 250ms }
 label {                                         display: block;
                                                 margin-top: 1em }
+div.clear {                                     visibility: hidden;
+                                                clear: both }
 div#mast {                                      width: 100%;
                                                 background-color: #f5f4f0;
                                                 border-bottom: 1px solid #c2bcb8 }
@@ -279,8 +281,7 @@ div#mast_box {                                  box-sizing: border-box;
                                                 padding: 4em }
 div#main {                                      box-sizing: border-box;
                                                 width: 100%;
-                                                max-width: 1024px;
-                                                margin: 0em auto;
+                                                margin: 0em;
                                                 padding: 0em;
                                                 clear: both;
                                                 overflow: visible }
@@ -320,8 +321,9 @@ div#main > article, div.standalone {            box-sizing: border-box;
                                                 display: block;
                                                 position: relative;
                                                 width: 100%;
+                                                max-width: 1024px;
                                                 clear: both;
-                                                margin: 0em;
+                                                margin: 0em auto;
                                                 padding: 4rem 4rem 0rem 4rem }
 div#main > article.commentary {                 padding: 0rem 4rem;
                                                 margin-top: 4rem;
