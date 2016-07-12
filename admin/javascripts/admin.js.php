@@ -468,10 +468,10 @@ var Extend = {
         }
 
         Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
-        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html().replace(/<[^>]+>/g, "");
+        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html();
 
         if (!!Extend.confirmation && Extend.action == "disable")
-            Extend.confirmed = (confirm(Extend.confirmation)) ? 1 : 0 ;
+            Extend.confirmed = (confirm(Extend.confirmation.replace(/<[^>]+>/g, ""))) ? 1 : 0 ;
 
         if (Site.key == "") {
             Extend.panic('<?php echo __("The extension cannot be toggled because your web browser did not send proper credentials.", "theme"); ?>');
