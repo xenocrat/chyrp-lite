@@ -196,13 +196,13 @@
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('./fonts/Hack-Oblique.woff') format('woff');
+                src: url('./fonts/Hack-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('./fonts/Hack-BoldOblique.woff') format('woff');
+                src: url('./fonts/Hack-BoldItalic.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
