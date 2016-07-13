@@ -335,9 +335,6 @@ div#main > article.commentary {                 padding: 0rem 4rem;
                                                 margin-top: 4rem;
                                                 overflow: hidden;
                                                 border-bottom: none }
-div#main > article.page {                       padding-bottom: 4rem }
-div.standalone {                                margin-bottom: 0rem;
-                                                padding-bottom: 4rem }
 div.tags.standalone {                           line-height: 2 }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
@@ -580,8 +577,8 @@ img.gravatar {                                  position: absolute;
     div.search_box {                            margin-top: 0em }
     button#search_submit {                      display: none }
     div.prev {                                  margin-top: 2rem }
-    div#main > article, div.standalone,
-    div#main > article.commentary {             padding: 2rem 2rem 0rem 2rem }
+    div#main > article, div.standalone {        padding: 2rem 2rem 0rem 2rem }
+    div#main > article.commentary {             padding: 0rem 2rem }
     div.metadata {                              padding-bottom: 2rem }
     ol.comments li {                            padding: 2rem }
     img.gravatar {                              position: static;
