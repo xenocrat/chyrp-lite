@@ -141,5 +141,5 @@ PHP-gettext is Copyright 2003-2009 Danilo Segan, Copyright 2005 Nico Kaiser,
 distributed under the [GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
 The Incutio XML-RPC Library is Copyright 2010 Simon Willison,
 distributed under the [new BSD License](http://www.opensource.org/licenses/bsd-license.php).
-Akismet.php is Copyright Alex Potsides,
-distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php BSD License).
+php5-akismet is Copyright Alex Potsides,
+distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php).
