@@ -163,7 +163,7 @@
      *     $fallback - The value to echo if the $_POST value is not set.
      */
     function posted($index, $fallback = "") {
-        echo (isset($_POST[$index])) ? fix($_POST[$index]) : $fallback ;
+        echo (isset($_POST[$index])) ? fix($_POST[$index], true) : $fallback ;
     }
 
     /**
