@@ -1,3 +1,5 @@
+## License
+
 Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
 Daniel Pimley, and other contributors.
 

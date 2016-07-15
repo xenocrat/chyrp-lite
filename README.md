@@ -91,37 +91,10 @@ Chyrp Lite was created by the following people:
 
 &hellip;and other contributors.
 
-## License
+## Licenses
 
-Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
-Daniel Pimley, and other contributors.
-
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or
-sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
-
-Except as contained in this notice, the name(s) of the above
-copyright holders shall not be used in advertising or otherwise
-to promote the sale, use or other dealings in this Software
-without prior written authorization.
-
+Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors,
+distributed under the [X11 license](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md).
 Twig is Copyright 2009-2016 the Twig Team,
 distributed under the [new BSD License](https://raw.githubusercontent.com/twigphp/Twig/master/LICENSE).
 jQuery is Copyright jQuery Foundation and other contributors,
@@ -140,6 +113,6 @@ distributed under the [Hack Open Font License](https://raw.githubusercontent.com
 PHP-gettext is Copyright 2003-2009 Danilo Segan, Copyright 2005 Nico Kaiser,
 distributed under the [GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
 The Incutio XML-RPC Library is Copyright 2010 Simon Willison,
-distributed under the [new BSD License](http://www.opensource.org/licenses/bsd-license.php).
+distributed under the [new BSD License](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/licenses/IXR/LICENSE.txt).
 php5-akismet is Copyright Alex Potsides,
 distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php).
