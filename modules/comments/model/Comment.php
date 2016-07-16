@@ -306,12 +306,12 @@
 
         /**
          * Function: notify
-         * Emails everyone that wants to be notified for a new comment
+         * Emails everyone that wants to be notified for a new comment.
          *
          * Parameters:
-         *     $author - The new comment author
-         *     $body - The new comment message
-         *     $post - The new comment post ID
+         *     $author - The new comment author.
+         *     $body - The new comment message.
+         *     $post - The new comment post ID.
          */
         static function notify($author, $body, $post) {
             $notifications = SQL::current()->select("comments",

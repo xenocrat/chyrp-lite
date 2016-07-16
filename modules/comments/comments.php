@@ -332,14 +332,13 @@
                          $config->set("enable_reload_comments", isset($_POST['enable_reload_comments'])));
 
             if (!empty($_POST['akismet_api_key'])) {
-                $_POST['akismet_api_key'] = trim($_POST['akismet_api_key']);
-                $akismet = new Akismet($config->url, $_POST['akismet_api_key']);
+                $akismet_api_key = trim($_POST['akismet_api_key']);
+                $akismet = new Akismet($config->url, $akismet_api_key);
 
-                if (!$akismet->isKeyValid()) {
+                if (!$akismet->isKeyValid())
                     Flash::warning(__("Invalid Akismet API key."), "/admin/?action=comment_settings");
-                    $set[] = false;
-                } else
-                    $set[] = $config->set("akismet_api_key", $_POST['akismet_api_key']);
+                else
+                    $set[] = $config->set("akismet_api_key", $akismet_api_key);
             }
 
             if (!in_array(false, $set))
@@ -399,6 +398,7 @@
             $where[] = "status != 'spam'";
 
             $visitor = Visitor::current();
+
             if (!$visitor->group->can("edit_comment", "delete_comment", true))
                 $where["user_id"] = $visitor->id;
 
@@ -420,6 +420,7 @@
             if (isset($_POST['delete'])) {
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment);
+
                     if ($comment->deletable())
                         Comment::delete($comment->id);
                 }
@@ -436,6 +437,7 @@
             if (isset($_POST['deny'])) {
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment);
+
                     if (!$comment->editable())
                         continue;
 
@@ -451,6 +453,7 @@
             if (isset($_POST['approve'])) {
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment);
+
                     if (!$comment->editable())
                         continue;
 
@@ -466,6 +469,7 @@
             if (isset($_POST['spam'])) {
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment);
+
                     if (!$comment->editable())
                         continue;
 
@@ -480,6 +484,7 @@
             if (!empty($config->akismet_api_key)) {
                 if (!empty($false_positives))
                     self::reportHam($false_positives);
+
                 if (!empty($false_negatives))
                     self::reportSpam($false_negatives);
             }
@@ -489,6 +494,7 @@
 
         static function reportHam($comments) {
             $config = Config::current();
+
             foreach($comments as $comment) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
                 $akismet->setCommentAuthor($comment->author);
@@ -504,6 +510,7 @@
 
         static function reportSpam($comments) {
             $config = Config::current();
+
             foreach($comments as $comment) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
                 $akismet->setCommentAuthor($comment->author);
