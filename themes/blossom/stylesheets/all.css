@@ -616,7 +616,7 @@ article img {                                   max-width: 100% }
 
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 651px) {
     ul.archive li {                             margin-left: 0em }
     ul.archive article.post.archive {           box-sizing: border-box;
                                                 width: 100%;
