@@ -329,7 +329,7 @@ li.feather div.controls button {                float: right }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {                text-decoration: none }
 #content ul.extend > li p:last-child {          margin-bottom: 0em }
-#content ul.themes > li {                       min-width: 288px;
+#content ul.themes > li {                       min-width: 306px;
                                                 width: 32.33%;
                                                 margin-right: 1%;
                                                 margin-top: 0em;
