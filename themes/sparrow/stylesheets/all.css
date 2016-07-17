@@ -339,8 +339,8 @@ div.tags.standalone {                           line-height: 2 }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
                                                 float: left;
-                                                width: 156px;
-                                                height: 156px;
+                                                width: 222px;
+                                                height: 222px;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
                                                 margin: 0rem 0rem 2rem 1rem;
@@ -586,9 +586,6 @@ img.gravatar {                                  position: absolute;
                                                 height: 24px;
                                                 vertical-align: middle;
                                                 margin-right: 4px }
-}
-
-@media screen and (max-width: 459px) {
     ul.archive li {                             margin-left: 0em }
     ul.archive article.post.archive {           box-sizing: border-box;
                                                 width: 100%;

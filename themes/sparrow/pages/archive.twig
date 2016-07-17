@@ -16,7 +16,7 @@
 <h4 class="yearly">{{ post.title | striptags | normalize | truncate(20) }}</h4>
 {% endif %}
 {% if post.feather == "photo" %}
-{{ feathers['photo'].image_tag(post, 156, null, "quality=60&amp;square=1", "20vw") }}
+{{ feathers['photo'].image_tag(post, 222, null, "quality=60&amp;square=1", "20vw") }}
 {% else %}
 <p>{{ post.excerpt() | striptags | normalize }}</p>
 {% endif %}
