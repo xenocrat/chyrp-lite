@@ -3,15 +3,15 @@ var ChyrpAjaxScroll = {
     failed: false,
     auto: <?php echo(Config::current()->ajax_scroll_auto ? "true" : "false"); ?>,
     init: function() {
-        if (ChyrpAjaxScroll.auto) {
+        if (ChyrpAjaxScroll.auto)
             $(window).on("scroll", window, ChyrpAjaxScroll.watch);
-        } else {
-            $("#pagination_next_page").click(function(e) {
-                if (!ChyrpAjaxScroll.failed) {
-                    e.preventDefault();
-                    ChyrpAjaxScroll.fetch();
-                }
-            });
+        else
+            $("#pagination_next_page").click(ChyrpAjaxScroll.click);
+    },
+    click: function(e) {
+        if (!ChyrpAjaxScroll.failed) {
+            e.preventDefault();
+            ChyrpAjaxScroll.fetch();
         }
     },
     watch: function() {
@@ -54,7 +54,7 @@ var ChyrpAjaxScroll = {
                         ChyrpAjaxScroll.busy = false;
 
                         if (!ChyrpAjaxScroll.auto)
-                            this_next_obj.click(ChyrpAjaxScroll.fetch);
+                            $("#pagination_next_page").click(ChyrpAjaxScroll.click);
                     } else {
                         // That's all folks!
                         this_next_obj.remove();
