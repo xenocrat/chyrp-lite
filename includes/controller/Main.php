@@ -333,7 +333,7 @@
 
             if ($config->clean_urls and
                 substr_count($_SERVER['REQUEST_URI'], "?") and
-                !substr_count($_SERVER['REQUEST_URI'], "%2F")) # Searches with / and clean URLs = server 404
+                !substr_count($_SERVER['REQUEST_URI'], "%2F")) # Searches with / and clean URLs = server 404.
                 redirect("search/".urlencode($_GET['query'])."/");
 
             if (empty($_GET['query']))
@@ -433,7 +433,7 @@
                         if ($page->url == end($urls)) # Loop until we reach the last one.
                             break;
                 } else
-                    return false; # A "link in the chain" is broken
+                    return false; # A "link in the chain" is broken.
             } else
                 $page = new Page(array("url" => $_GET['url']));
 
