@@ -55,7 +55,7 @@
 
         /**
          * Function: parse
-         * Determines the action.
+         * Route constructor calls this to interpret clean URLs and determine the action.
          */
         public function parse($route) {
             $config = Config::current();

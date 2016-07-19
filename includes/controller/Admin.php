@@ -56,7 +56,7 @@
 
         /**
          * Function: parse
-         * Determines the action.
+         * Route constructor calls this to determine the action if necessary.
          */
         public function parse($route) {
             $visitor = Visitor::current();

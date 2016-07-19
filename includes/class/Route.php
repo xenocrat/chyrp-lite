@@ -26,7 +26,7 @@
 
         /**
          * Function: __construct
-         * Parse the URL and to determine what to do.
+         * Parse the URL and ask the Controller to validate/determine/guess the action.
          *
          * Parameters:
          *     $controller - The controller to use.
@@ -74,16 +74,16 @@
                                    oneof(@$this->arg[0], "index") :
                                    "index") ;
 
-            # Guess the action initially.
+            # Ensure the action is set, using a best guess if necessary.
             # This is only required because of the view_site permission;
-            # it has to know if they're viewing /login, in which case
-            # it should allow the page to display.
+            # $this->action will be tested because some actions are still
+            # permitted if the visitor is not allowed to view the site.
             fallback($this->action, end($this->try));
         }
 
         /**
          * Function: init
-         * Attempt Controller actions until one of them doesn't return false.
+         * Attempt actions and guesses provided by the Controller until one of them doesn't return false.
          *
          * This will also call the @[controllername]_xxxxx@ and @route_xxxxx@ triggers.
          */
