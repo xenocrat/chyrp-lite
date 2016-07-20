@@ -56,7 +56,7 @@
 
         /**
          * Function: parse
-         * Route constructor calls this to determine the action if necessary.
+         * Route constructor calls this to determine the action based on user privileges.
          */
         public function parse($route) {
             $visitor = Visitor::current();
@@ -109,6 +109,8 @@
 
             Trigger::current()->filter($route->action, "admin_determine_action");
 
+            # Show a 403 if we can't route the visitor to an allowed action;
+            # otherwise the route would fail and they would be served a 404.
             if (!isset($route->action))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view this area."));
         }

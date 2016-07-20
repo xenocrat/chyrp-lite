@@ -60,7 +60,8 @@
         public function parse($route) {
             $config = Config::current();
 
-            if (empty($route->arg[0]) and !isset($config->routes["/"])) # If they're just at /, don't bother with all this.
+            # If they're just at / and that's not a custom route, don't bother with all this.
+            if (empty($route->arg[0]) and !isset($config->routes["/"]))
                 return $route->action = "index";
 
             # Protect non-responder functions.
@@ -72,7 +73,8 @@
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
 
-                if ($route->arg[0] == "feed") # Don't set $route->action to "feed" (bottom of this function).
+                # Don't set $route->action to "feed" (bottom of this function).
+                if ($route->arg[0] == "feed")
                     return $route->action = "index";
             }
 
@@ -81,7 +83,8 @@
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
 
-                if ($route->arg[0] == $page_matches[1][0]) # Don't fool ourselves into thinking we're viewing a page.
+                # Don't fool ourselves into thinking we're viewing a page.
+                if ($route->arg[0] == $page_matches[1][0])
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
             }
 
@@ -112,7 +115,7 @@
                 return $route->action = "search";
             }
 
-            # Custom pages added by Modules, Feathers, Themes, etc.
+            # Test custom routes and populate $_GET parameters if the route expression matches.
             foreach ($config->routes as $path => $action) {
                 if (is_numeric($action))
                     $action = $route->arg[0];

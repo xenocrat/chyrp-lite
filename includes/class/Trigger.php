@@ -18,7 +18,7 @@
 
         /**
          * Function: __construct
-         * Add a filter to implement Unicode emoji support
+         * Add predefined filters to implement Unicode emoji and Markdown support.
          */
         private function __construct() {
             $config = Config::current();
