@@ -42,7 +42,7 @@
             if (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action']))
                 error(__("Error"), __("Invalid action."), null, 400);
 
-            # Determining the route can be this simple if clean URLs are disabled.
+            # Determining the action can be this simple if clean URLs are disabled.
             $this->action =& $_GET['action'];
 
             if (isset($_GET['feed']))
