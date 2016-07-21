@@ -156,7 +156,7 @@
 
             $main->display(array("pages".DIR."category", "pages".DIR."index"),
                            array("posts" => $posts, "category" => $category->name),
-                           _f("Posts in category %s", fix($_GET['name']), "categorize"));
+                           _f("Posts in category %s", fix($category->name), "categorize"));
         }
 
         static function manage_nav($navs) {
