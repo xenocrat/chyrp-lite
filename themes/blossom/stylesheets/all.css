@@ -136,7 +136,7 @@ hr {                                            width: 100%;
                                                 clear: both;
                                                 border-top: 1px solid #ddd;
                                                 margin: 1em 0em }
-hr:last-child {                                 display: none }
+hr:last-child, hr + hr {                        display: none }
 ul {                                            list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }

@@ -145,7 +145,7 @@ hr {                                            width: 100%;
                                                 border-top: 1px solid #c2bcb8;
                                                 margin: 2em 0em }
 hr.post {                                       margin: 0em }
-hr:last-child, hr.post:last-of-type {           display: none }
+hr:last-child, hr.post:last-of-type, hr + hr {  display: none }
 ul {                                            list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
