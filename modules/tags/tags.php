@@ -41,7 +41,10 @@
 
             $tags = array_unique($tags); # Remove duplicates.
             $tags = array_diff($tags, array("")); # Remove empties.
-            $tags_cleaned = array_map("sanitize", $tags);
+
+            $tags_cleaned = array_map(function($tag) {
+                                          return sanitize($tag, true, true);
+                                      }, $tags);
 
             return array_combine($tags, $tags_cleaned); # name => clean.
         }
@@ -294,26 +297,21 @@
             if (empty($_POST['original']) or empty($_POST['name']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
 
-            $_POST['name'] = str_replace(",", " ", $_POST['name']);
-            $_POST['name'] = is_numeric($_POST['name']) ? "'".$_POST['name']."'" : $_POST['name'] ;
-
             $sql = SQL::current();
-            $tags = array();
-            $clean = array();
+            $new = self::prepare_tags(str_replace(",", " ", $_POST['name']));
 
             foreach($sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
                                        "value like" => self::tags_name_match($_POST['original'])))->fetchAll() as $tag) {
 
-                $tags = self::tags_unserialize($tag["value"]);
-                unset($tags[$_POST['original']]);
-                $tags[$_POST['name']] = sanitize($_POST['name']);
+                $old = self::tags_unserialize($tag["value"]);
+                unset($old[$_POST['original']]);
 
                 $sql->update("post_attributes",
                              array("name" => "tags",
                                    "post_id" => $tag["post_id"]),
-                             array("value" => self::tags_serialize($tags)));
+                             array("value" => self::tags_serialize(array_merge($old, $new))));
             }
 
             Flash::notice(__("Tag renamed.", "tags"), "/admin/?action=manage_tags");
