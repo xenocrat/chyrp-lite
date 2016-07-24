@@ -141,7 +141,7 @@ function toggle_correspondence() {
     });
 }
 function clickable_post_view_url() {
-    $("form#route_settings code").on("click", function(e) {
+    $("form#route_settings code.syntax").on("click", function(e) {
         var name = $(e.target).text();
         var post_url = $("form#route_settings input[name='post_url']");
         var regexp = new RegExp("(^|\\/)" + escapeRegExp(name) + "([\\/]|$)", "g");
@@ -165,7 +165,7 @@ function clickable_post_view_url() {
     }).css("cursor", "pointer");
 
     $("form#route_settings input[name='post_url']").on("keyup", function(e) {
-        $("form code").each(function(){
+        $("form#route_settings code.syntax").each(function(){
             regexp = new RegExp("(/?|^)" + $(this).text() + "(/?|$)", "g");
 
             if ($(e.target).val().match(regexp))
@@ -177,7 +177,7 @@ function clickable_post_view_url() {
 }
 function validate_slug() {
     $("input[name='slug']").keyup(function(e) {
-        if (/^([a-zA-Z0-9\-\._:]*)$/.test($(this).val()))
+        if (/^([a-zA-Z0-9]*)$/.test($(this).val()))
             $(this).removeClass("error");
         else
             $(this).addClass("error");
