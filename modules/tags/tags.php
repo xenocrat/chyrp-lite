@@ -30,6 +30,22 @@
             return json_get($tags, true);
         }
 
+        private function prepare_tags($tags) {
+            $tags = explode(",", $tags); # Split at the comma.
+            $tags = array_map("strip_tags", $tags); # Remove HTML.
+            $tags = array_map("trim", $tags); # Remove whitespace.
+
+            # Prevent numbers from being type-juggled to numeric keys.
+            foreach ($tags as &$name)
+                $name = is_numeric($name) ? "'".$name."'" : $name ;
+
+            $tags = array_unique($tags); # Remove duplicates.
+            $tags = array_diff($tags, array("")); # Remove empties.
+            $tags_cleaned = array_map("sanitize", $tags);
+
+            return array_combine($tags, $tags_cleaned); # name => clean.
+        }
+
         public function post_options($fields, $post = null) {
             $cloud = self::list_tags(false);
             usort($cloud, array($this, "sort_tags_name_asc"));
@@ -63,18 +79,7 @@
             if (empty($_POST['tags']))
                 return;
 
-            $tags = explode(",", $_POST['tags']); # Split at the comma.
-            $tags = array_map("trim", $tags); # Remove whitespace.
-            $tags = array_map("strip_tags", $tags); # Remove HTML.
-
-            foreach ($tags as &$name)
-                $name = is_numeric($name) ? "'".$name."'" : $name ;
-
-            $tags = array_unique($tags); # Remove duplicates.
-            $tags = array_diff($tags, array("")); # Remove empties.
-            $tags_cleaned = array_map("sanitize", $tags);
-
-            $tags = array_combine($tags, $tags_cleaned);
+            $tags = self::prepare_tags($_POST['tags']);
 
             SQL::current()->insert("post_attributes",
                                    array("name" => "tags",
@@ -90,18 +95,7 @@
                 return;
             }
 
-            $tags = explode(",", $_POST['tags']); # Split at the comma.
-            $tags = array_map("trim", $tags); # Remove whitespace.
-            $tags = array_map("strip_tags", $tags); # Remove HTML.
-
-            foreach ($tags as &$name)
-                $name = is_numeric($name) ? "'".$name."'" : $name ;
-
-            $tags = array_unique($tags); # Remove duplicates.
-            $tags = array_diff($tags, array("")); # Remove empties.
-            $tags_cleaned = array_map("sanitize", $tags);
-
-            $tags = array_combine($tags, $tags_cleaned);
+            $tags = self::prepare_tags($_POST['tags']);
 
             SQL::current()->replace("post_attributes",
                                     array("post_id", "name"),
@@ -405,37 +399,33 @@
                 Flash::warning(__("No posts selected.", "tags"), "/admin/?action=manage_tags");
 
             if (empty($_POST['name']))
-                Flash::warning(__("No tag specified.", "tags"), "/admin/?action=manage_tags");
+                Flash::warning(__("No tags specified.", "tags"), "/admin/?action=manage_tags");
 
             $sql = SQL::current();
+            $new = self::prepare_tags($_POST['name']);
 
-            foreach (array_map("trim", explode(",", $_POST['name'])) as $tag)
-                $tag = is_numeric($tag) ? "'".$tag."'" : $tag ;
+            foreach ($_POST['post'] as $post_id) {
+                $post = new Post($post_id);
 
-                foreach ($_POST['post'] as $post_id) {
-                    $post = new Post($post_id);
+                if (!$post->editable())
+                    continue;
 
-                    if (!$post->editable())
-                        continue;
+                $tags = $sql->select("post_attributes",
+                                     "value",
+                                     array("name" => "tags",
+                                           "post_id" => $post_id));
 
-                    $tags = $sql->select("post_attributes",
-                                         "value",
-                                         array("name" => "tags",
-                                               "post_id" => $post_id));
+                if ($tags and $value = $tags->fetchColumn())
+                    $old = self::tags_unserialize($value);
+                else
+                    $old = array();
 
-                    if ($tags and $value = $tags->fetchColumn())
-                        $tags = self::tags_unserialize($value);
-                    else
-                        $tags = array();
-
-                    $tags[$tag] = sanitize($tag);
-
-                    $sql->replace("post_attributes",
-                                  array("post_id", "name"),
-                                  array("name" => "tags",
-                                        "value" => self::tags_serialize($tags),
-                                        "post_id" => $post_id));
-                }
+                $sql->replace("post_attributes",
+                              array("post_id", "name"),
+                              array("name" => "tags",
+                                    "value" => self::tags_serialize(array_merge($old, $new)),
+                                    "post_id" => $post_id));
+            }
 
             Flash::notice(__("Posts tagged.", "tags"), "/admin/?action=manage_tags");
         }
