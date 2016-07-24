@@ -78,7 +78,7 @@
                                          "clean" => ":clean",
                                          "show_on_home" => ":show_on_home"),
                                    array(":name" => $name,
-                                         ":clean" => sanitize($clean),
+                                         ":clean" => sanitize($clean, true, true),
                                          ":show_on_home" => $show_on_home));
         }
 
@@ -90,7 +90,7 @@
                                          "show_on_home" => ":show_on_home"),
                                    array(":id" => $id,
                                          ":name" => $name,
-                                         ":clean" => sanitize($clean),
+                                         ":clean" => sanitize($clean, true, true),
                                          ":show_on_home" => $show_on_home));
         }
 
