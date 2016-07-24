@@ -36,6 +36,10 @@ $(function() {
     // Require email correspondence for activation emails.
     if (Route.action == "user_settings")
         toggle_correspondence();
+
+    // Make the Post View URL syntax clickable.
+    if (Route.action == "route_settings")
+        clickable_post_view_url();
 });
 function toggle_all() {
     var all_checked = true;
@@ -135,6 +139,41 @@ function toggle_correspondence() {
         if ($(this).prop("checked") == true)
             $("#email_correspondence").prop("checked", true);
     });
+}
+function clickable_post_view_url() {
+    $("form#route_settings code").on("click", function(e) {
+        var name = $(e.target).text();
+        var post_url = $("form#route_settings input[name='post_url']");
+        var regexp = new RegExp("(^|\\/)" + escapeRegExp(name) + "([\\/]|$)", "g");
+
+        if (regexp.test(post_url.val())) {
+            post_url.val(post_url.val().replace(regexp, function(match, before, after) {
+                if (before == "/" && after == "/")
+                    return "/";
+                else
+                    return "";
+            }));
+            $(e.target).removeClass("yay");
+        } else {
+            if (post_url.val() == "")
+                post_url.val(name);
+            else
+                post_url.val(post_url.val().replace(/(\/?)?$/, "\/" + name));
+
+            $(e.target).addClass("yay");
+        }
+    }).css("cursor", "pointer");
+
+    $("form#route_settings input[name='post_url']").on("keyup", function(e) {
+        $("form code").each(function(){
+            regexp = new RegExp("(/?|^)" + $(this).text() + "(/?|$)", "g");
+
+            if ($(e.target).val().match(regexp))
+                $(this).addClass("yay");
+            else
+                $(this).removeClass("yay");
+        });
+    }).trigger("keyup");
 }
 function validate_slug() {
     $("input[name='slug']").keyup(function(e) {

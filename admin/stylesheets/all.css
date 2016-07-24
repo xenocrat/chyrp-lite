@@ -635,6 +635,8 @@ a.tag {                                         position: relative;
                                                 background-color: #fffecd }
 span.tags_select a.tag_added {                  top: 2px;
                                                 border-color: #ccb68f }
+code.yay {                                      background-color: #ebfae4;
+                                                border: 1px solid #bdd6b5 }
 
 /**
  *---------------------------------------------
