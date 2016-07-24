@@ -96,6 +96,11 @@ function isEmail(text) {
 			/^[^ @]+@(\[[a-f0-9\:]{3,39}\])$/i.test(text));
 }
 
+// Escape strings for regular expressions.
+function escapeRegExp(text) {
+	return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
+
 // Obfuscated mailto.
 function mailTo(domain, recipient) {
     location.assign(('mailto:' + recipient + '@' + domain));
