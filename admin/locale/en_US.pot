@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-20 19:56+0000\n"
+"POT-Creation-Date: 2016-07-24 17:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -176,50 +176,50 @@ msgstr ""
 msgid "Emoji"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:43
+#: admin/javascripts/admin.js.php:47
 msgid "Toggle All"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:103
-#: admin/javascripts/admin.js.php:119
+#: admin/javascripts/admin.js.php:107
+#: admin/javascripts/admin.js.php:123
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:105
-#: admin/javascripts/admin.js.php:122
+#: admin/javascripts/admin.js.php:109
+#: admin/javascripts/admin.js.php:126
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:185
+#: admin/javascripts/admin.js.php:224
 msgid "You are a member of this group. Are you sure you want to update the permissions?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:191
+#: admin/javascripts/admin.js.php:230
 msgid "You are a member of this group. Are you sure you want to delete it?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:269
+#: admin/javascripts/admin.js.php:308
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:273
-#: admin/javascripts/admin.js.php:275
-#: admin/javascripts/admin.js.php:352
-#: admin/javascripts/admin.js.php:354
+#: admin/javascripts/admin.js.php:312
+#: admin/javascripts/admin.js.php:314
+#: admin/javascripts/admin.js.php:391
+#: admin/javascripts/admin.js.php:393
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:295
-#: admin/javascripts/admin.js.php:296
+#: admin/javascripts/admin.js.php:334
+#: admin/javascripts/admin.js.php:335
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:348
+#: admin/javascripts/admin.js.php:387
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:477
+#: admin/javascripts/admin.js.php:516
 msgid "The extension cannot be toggled because your web browser did not send proper credentials."
 msgstr ""
 
@@ -316,7 +316,7 @@ msgstr ""
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:66
-#: admin/pages/route_settings.twig:49
+#: admin/pages/route_settings.twig:85
 #: admin/pages/user_settings.twig:45
 msgid "Update"
 msgstr ""
@@ -892,95 +892,95 @@ msgstr ""
 msgid "Syntax:"
 msgstr ""
 
-#: admin/pages/route_settings.twig:33
+#: admin/pages/route_settings.twig:35
 msgid "Year submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:33
+#: admin/pages/route_settings.twig:35
 msgid "(e.g. 2007)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:34
+#: admin/pages/route_settings.twig:39
 msgid "Month submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:34
+#: admin/pages/route_settings.twig:39
 msgid "(e.g. 12)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:43
 msgid "Day submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:43
 msgid "(e.g. 25)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:47
 msgid "Hour submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:47
 msgid "(e.g. 03)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:37
+#: admin/pages/route_settings.twig:51
 msgid "Minute submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:37
+#: admin/pages/route_settings.twig:51
 msgid "(e.g. 59)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:38
+#: admin/pages/route_settings.twig:55
 msgid "Second submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:38
+#: admin/pages/route_settings.twig:55
 msgid "(e.g. 30)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:39
+#: admin/pages/route_settings.twig:59
 msgid "Post ID"
 msgstr ""
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:63
 msgid "Post author (username)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:63
 msgid "(e.g. Alex)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:41
+#: admin/pages/route_settings.twig:67
 msgid "The non-unique sanitized name"
 msgstr ""
 
-#: admin/pages/route_settings.twig:41
+#: admin/pages/route_settings.twig:67
 msgid "(e.g. this_is_clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:42
+#: admin/pages/route_settings.twig:71
 msgid "The unique form of (clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:42
+#: admin/pages/route_settings.twig:71
 msgid "(e.g. this_one_is_taken_2)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:43
+#: admin/pages/route_settings.twig:75
 msgid "The post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:43
+#: admin/pages/route_settings.twig:75
 msgid "(e.g. text)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:79
 msgid "The plural form of the post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:79
 msgid "(e.g. links)"
 msgstr ""
 

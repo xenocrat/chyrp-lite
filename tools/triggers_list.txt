@@ -21,13 +21,13 @@ Arguments:
 admin_write_wysiwyg
 -------------------
 Called from:
-	admin/javascripts/admin.js.php on line 287
+	admin/javascripts/admin.js.php on line 326
 
 
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 520
+	admin/javascripts/admin.js.php on line 559
 
 
 admin_head
@@ -127,7 +127,7 @@ Called from:
 post_view_url_settings
 ----------------------
 Called from:
-	admin/pages/route_settings.twig on line 45
+	admin/pages/route_settings.twig on line 81
 
 
 before_page_fields
