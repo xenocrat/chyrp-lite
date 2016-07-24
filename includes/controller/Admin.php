@@ -1895,7 +1895,7 @@
                 $route->remove("/");
 
             $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
-                         $config->set("post_url", $_POST['post_url']),
+                         $config->set("post_url", trim($_POST['post_url'], "/ ")."/"),
                          $config->set("enable_homepage", !empty($_POST['enable_homepage'])));
 
             if (!in_array(false, $set))
