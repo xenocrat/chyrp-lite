@@ -1,5 +1,5 @@
 <?php
-    require_once "model".DIR."category.php";
+    require_once "model".DIR."Category.php";
 
     class Categorize extends Modules {
         public function __init() {
