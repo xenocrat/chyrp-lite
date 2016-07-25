@@ -31,22 +31,22 @@
         }
 
         private function prepare_tags($tags) {
-            $tags = explode(",", $tags); # Split at the comma.
-            $tags = array_map("strip_tags", $tags); # Remove HTML.
-            $tags = array_map("trim", $tags); # Remove whitespace.
+            $names = explode(",", $tags); # Split at the comma.
+            $names = array_map("strip_tags", $names); # Remove HTML.
+            $names = array_map("trim", $names); # Remove whitespace.
 
             # Prevent numbers from being type-juggled to numeric keys.
-            foreach ($tags as &$name)
+            foreach ($names as &$name)
                 $name = is_numeric($name) ? "'".$name."'" : $name ;
 
-            $tags = array_unique($tags); # Remove duplicates.
-            $tags = array_diff($tags, array("")); # Remove empties.
+            $names = array_unique($names); # Remove duplicates.
+            $names = array_diff($names, array("")); # Remove empties.
+            $clean = array_map(function($value) { return sanitize($value, true, true); }, $names);
+            $assoc = array_combine($names, $clean); # name => clean.
 
-            $tags_cleaned = array_map(function($tag) {
-                                          return sanitize($tag, true, true);
-                                      }, $tags);
-
-            return array_combine($tags, $tags_cleaned); # name => clean.
+            # Remove values sanitized into nothingness.
+            $assoc = array_filter($assoc, function($value) { return preg_match('/[^\-]+/', $value); });
+            return $assoc;
         }
 
         public function post_options($fields, $post = null) {
