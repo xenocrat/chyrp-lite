@@ -1645,7 +1645,7 @@
 
         array_pop($file_split);
         $file_clean = implode(".", $file_split);
-        $file_clean = sanitize($file_clean, false).".".$file_ext;
+        $file_clean = sanitize($file_clean, true, true, 80).".".$file_ext;
         $filename = unique_filename($file_clean);
 
         move_uploaded_file($file['tmp_name'], $uploads_path.$filename);
