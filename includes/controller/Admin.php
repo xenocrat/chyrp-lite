@@ -356,6 +356,7 @@
                 error(__("Error"), __("Title and slug cannot be blank."), null, 422);
 
             fallback($_POST['status'], "public");
+            fallback($_POST['slug'], $_POST['title']);
 
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
@@ -367,8 +368,7 @@
                               $_POST['parent_id'],
                               $public,
                               $listed,
-                              $list_order,
-                              (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
+                              $list_order);
 
             Flash::notice(__("Page created!"), $page->url());
         }
@@ -417,6 +417,7 @@
                 show_404(__("Not Found"), __("Page not found."));
 
             fallback($_POST['status'], "public");
+            fallback($_POST['slug'], $_POST['title']);
 
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
@@ -428,9 +429,7 @@
                           $_POST['parent_id'],
                           $public,
                           $listed,
-                          $list_order,
-                          null,
-                          (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
+                          $list_order);
 
             Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
                           "/admin/?action=manage_pages");
