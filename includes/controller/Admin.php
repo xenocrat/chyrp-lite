@@ -417,7 +417,6 @@
                 show_404(__("Not Found"), __("Page not found."));
 
             fallback($_POST['status'], "public");
-            fallback($_POST['slug'], $_POST['title']);
 
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
