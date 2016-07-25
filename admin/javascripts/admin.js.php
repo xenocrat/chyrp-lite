@@ -177,7 +177,7 @@ function clickable_post_view_url() {
 }
 function validate_slug() {
     $("input[name='slug']").keyup(function(e) {
-        if (/^([a-zA-Z0-9]*)$/.test($(this).val()))
+        if (/^([a-z0-9\-]*)$/.test($(this).val()))
             $(this).removeClass("error");
         else
             $(this).addClass("error");
