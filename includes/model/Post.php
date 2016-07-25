@@ -154,12 +154,10 @@
          *
          * Calls the @add_post@ trigger with the inserted post and extra options.
          *
-         * Note: The default parameter values are empty here so that the fallbacks work properly.
-         *
          * Parameters:
          *     $values - The data to insert.
-         *     $clean - The sanitized URL (or empty to default to "(feather).(new post's id)").
-         *     $url - The unique URL (or empty to default to "(feather).(new post's id)").
+         *     $clean - The slug for this post.
+         *     $url - The unique sanitised URL (created from $clean by default).
          *     $feather - The feather to post as.
          *     $user - <User> to set as the post's author.
          *     $pinned - Pin the post?
@@ -171,6 +169,9 @@
          *
          * Returns:
          *     The newly created <Post>.
+         *
+         * Notes:
+         *     If $clean and $url are supplied, you are responsible for sanitization and validation.
          *
          * See Also:
          *     <update>
@@ -188,23 +189,24 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
+            fallback($clean,        oneof(sanitize(@$_POST['slug'], true, true, 40), strtolower(random(8))));
+            fallback($url,          self::check_url($clean));
+            fallback($feather,      oneof(@$_POST['feather'], ""));
+            fallback($user_id,      oneof(@$_POST['user_id'], Visitor::current()->id));
+            fallback($pinned,       (int) !empty($_POST['pinned']));
+            fallback($status,       (isset($_POST['draft'])) ?
+                                        "draft" :
+                                        oneof(@$_POST['status'], "public"));
+            fallback($created_at,   (!empty($_POST['created_at']) and
+                                    (!isset($_POST['original_time']) or
+                                    $_POST['created_at'] != $_POST['original_time'])) ?
+                                        datetime($_POST['created_at']) :
+                                        datetime());
+            fallback($updated_at,   oneof(@$_POST['updated_at'], $created_at));
+            fallback($options,      oneof(@$_POST['option'], array()));
+
             $sql = SQL::current();
-            $visitor = Visitor::current();
             $trigger = Trigger::current();
-
-            fallback($feather,    oneof(@$_POST['feather'], ""));
-            fallback($user_id,    oneof(@$_POST['user_id'], Visitor::current()->id));
-            fallback($pinned,     (int) !empty($_POST['pinned']));
-            fallback($status,     (isset($_POST['draft'])) ? "draft" : oneof(@$_POST['status'], "public"));
-            fallback($created_at, (!empty($_POST['created_at']) and
-                                  (!isset($_POST['original_time']) or $_POST['created_at'] != $_POST['original_time'])) ?
-                                      datetime($_POST['created_at']) :
-                                      datetime());
-            fallback($updated_at, oneof(@$_POST['updated_at'], $created_at));
-            fallback($options,    oneof(@$_POST['option'], array()));
-
-            if (isset($clean) and !isset($url))
-                $url = self::check_url($clean);
 
             $new_values = array("feather"    => $feather,
                                 "user_id"    => $user_id,
@@ -220,12 +222,6 @@
             $sql->insert("posts", $new_values);
 
             $id = $sql->latest("posts");
-
-            if (empty($clean) or empty($url))
-                $sql->update("posts",
-                             array("id"    => $id),
-                             array("clean" => $feather.".".$id,
-                                   "url"   => $feather.".".$id));
 
             # Insert the post attributes.
             foreach (array_merge($values, $options) as $name => $value)
@@ -259,11 +255,14 @@
          *     $user - <User> to set as the post's author.
          *     $pinned - Pin the post?
          *     $status - Post status
-         *     $clean - A new clean URL for the post.
-         *     $url - A new URL for the post.
+         *     $clean - A new slug for the post.
+         *     $url - A new unique URL for the post (created from $clean by default).
          *     $created_at - New @created_at@ timestamp for the post.
          *     $updated_at - New @updated_at@ timestamp for the post, or @false@ to not updated it.
          *     $options - Options for the post.
+         *
+         * Notes:
+         *     If $clean and $url are supplied, you are responsible for sanitization and validation.
          *
          * See Also:
          *     <add>
@@ -280,29 +279,34 @@
             if ($this->no_results)
                 return false;
 
-            $trigger = Trigger::current();
-
+            $old = clone $this;
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($values,     array_combine($this->attribute_names, $this->attribute_values));
-            fallback($user_id,    oneof(@$_POST['user_id'], $this->user_id));
-            fallback($pinned,     (int) !empty($_POST['pinned']));
-            fallback($status,     (isset($_POST['draft'])) ? "draft" : oneof(@$_POST['status'], $this->status));
-            fallback($clean,      $this->clean);
-            fallback($url,        oneof(@$_POST['slug'], $this->feather.".".$this->id));
-            fallback($created_at, (!empty($_POST['created_at'])) ? datetime($_POST['created_at']) : $this->created_at);
-            fallback($updated_at, ($updated_at === false ?
-                                      $this->updated_at :
-                                      oneof($updated_at, @$_POST['updated_at'], datetime())));
-            fallback($options,    oneof(@$_POST['option'], array()));
+            fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
+            fallback($user_id,      oneof(@$_POST['user_id'], $this->user_id));
+            fallback($pinned,       (int) !empty($_POST['pinned']));
+            fallback($status,       (isset($_POST['draft'])) ?
+                                        "draft" :
+                                        oneof(@$_POST['status'], $this->status));
+            fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
+                                        oneof(sanitize($_POST['slug'], true, true, 40), $this->clean) :
+                                        $this->clean);
+            fallback($url,          ($clean != $this->clean) ?
+                                        self::check_url($clean) :
+                                        $this->url);
+            fallback($created_at,   (!empty($_POST['created_at'])) ?
+                                        datetime($_POST['created_at']) :
+                                        $this->created_at);
+            fallback($updated_at,   ($updated_at === false ?
+                                        $this->updated_at :
+                                        oneof($updated_at, @$_POST['updated_at'], datetime())));
+            fallback($options,      oneof(@$_POST['option'], array()));
 
-            if ($url != $this->url) # If they edited the slug, the clean URL should change too.
-                $clean = $url;
-
-            $old = clone $this;
+            $sql = SQL::current();
+            $trigger = Trigger::current();
 
             # Update all values of this post.
-            foreach (array("user_id", "pinned", "status", "url", "created_at", "updated_at") as $attr)
+            foreach (array("user_id", "pinned", "status", "clean", "url", "created_at", "updated_at") as $attr)
                 $this->$attr = $$attr;
 
             $new_values = array("pinned"     => $pinned,
@@ -314,7 +318,6 @@
 
             $trigger->filter($new_values, "before_update_post");
 
-            $sql = SQL::current();
             $sql->update("posts",
                          array("id" => $this->id),
                          $new_values);

@@ -65,13 +65,16 @@
          *     $public - Whether the page can be viewed without permission.
          *     $show_in_list - Whether or not to show it in the pages list.
          *     $list_order - The order of the page in the list.
-         *     $clean - The clean URL.
-         *     $url - The unique URL.
+         *     $clean - The slug for this page.
+         *     $url - The unique URL (created from $clean by default).
          *     $created_at - The new page's "created" timestamp.
          *     $updated_at - The new page's "last updated" timestamp.
          *
          * Returns:
          *     The newly created <Page>.
+         *
+         * Notes:
+         *     If $clean and $url are supplied, you are responsible for sanitization and validation.
          *
          * See Also:
          *     <update>
@@ -89,21 +92,30 @@
                             $updated_at   = null) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
+            fallback($user_id,      Visitor::current()->id);
+            fallback($parent_id,    0);
+            fallback($public,       true);
+            fallback($show_in_list, true);
+            fallback($list_order,   0);
+            fallback($clean,        sanitize(@$_POST['slug'], true, true, 40), strtolower(random(8)));
+            fallback($url,          self::check_url($clean));
+            fallback($created_at,   datetime());
+            fallback($updated_at,   datetime());
+
             $sql = SQL::current();
-            $visitor = Visitor::current();
             $trigger = Trigger::current();
 
             $new_values = array("title" =>        $title,
                                 "body" =>         $body,
-                                "user_id" =>      oneof($user_id,      $visitor->id),
-                                "parent_id" =>    oneof($parent_id,    0),
-                                "public" =>       oneof($public,       true),
-                                "show_in_list" => oneof($show_in_list, true),
-                                "list_order" =>   oneof($list_order,   0),
-                                "clean" =>        oneof($clean,        sanitize($title)),
-                                "url" =>          oneof($url,          self::check_url($clean)),
-                                "created_at" =>   oneof($created_at,   datetime()),
-                                "updated_at" =>   oneof($updated_at,   datetime()));
+                                "user_id" =>      $user_id,
+                                "parent_id" =>    $parent_id,
+                                "public" =>       $public,
+                                "show_in_list" => $show_in_list,
+                                "list_order" =>   $list_order,
+                                "clean" =>        $clean,
+                                "url" =>          $url,
+                                "created_at" =>   $created_at,
+                                "updated_at" =>   $updated_at);
 
             $trigger->filter($new_values, "before_add_page");
 
@@ -129,10 +141,13 @@
          *     $parent_id - The new parent ID.
          *     $public - Whether the page can be viewed without permission.
          *     $show_in_list - Whether or not to show it in the pages list.
-         *     $clean - The page's clean URL.
-         *     $url - The page's unique URL.
+         *     $clean - A new slug for the page.
+         *     $url - A new unique URL for the page (created from $clean by default).
          *     $created_at - The page's "created" timestamp.
          *     $updated_at - The page's "last updated" timestamp.
+         *
+         * Notes:
+         *     If $clean and $url are supplied, you are responsible for sanitization and validation.
          */
         public function update($title        = null,
                                $body         = null,
@@ -148,13 +163,20 @@
             if ($this->no_results)
                 return false;
 
+            $old = clone $this;
             $user_id = ($user instanceof User) ? $user->id : $user ;
+
+            fallback($clean,    (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
+                                    oneof(sanitize($_POST['slug'], true, true, 40), $this->clean) :
+                                    $this->clean);
+            fallback($url,      ($clean != $this->clean) ?
+                                    self::check_url($clean) :
+                                    $this->url);
 
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $old = clone $this;
-
+            # Update all values of this page.
             foreach (array("title", "body", "user_id", "parent_id", "public", "show_in_list",
                            "list_order", "clean", "url", "created_at", "updated_at") as $attr)
                 if ($attr == "updated_at" and $$attr === null)
