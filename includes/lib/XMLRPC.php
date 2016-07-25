@@ -223,7 +223,7 @@
             if (trim($body) === '')
                 return new IXR_Error(500, __("Body can't be blank."));
 
-            $clean = sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 40);
+            $clean = sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 80);
             $url = Post::check_url($clean);
 
             $_POST['user_id'] = $user->id;
@@ -300,7 +300,7 @@
                           null,
                           $status,
                           null,
-                          sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 40),
+                          sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 80),
                           oneof($this->convertFromDateCreated($args[3]), $post->created_at));
 
             $trigger->call('metaWeblog_editPost', $args[3], $post);

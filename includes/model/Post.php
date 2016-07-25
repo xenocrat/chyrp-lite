@@ -189,7 +189,7 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($clean,        oneof(sanitize(@$_POST['slug'], true, true, 40), strtolower(random(8))));
+            fallback($clean,        oneof(sanitize(@$_POST['slug'], true, true, 80), strtolower(random(8))));
             fallback($url,          self::check_url($clean));
             fallback($feather,      oneof(@$_POST['feather'], ""));
             fallback($user_id,      oneof(@$_POST['user_id'], Visitor::current()->id));
@@ -289,7 +289,7 @@
                                         "draft" :
                                         oneof(@$_POST['status'], $this->status));
             fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
-                                        oneof(sanitize($_POST['slug'], true, true, 40), $this->clean) :
+                                        oneof(sanitize($_POST['slug'], true, true, 80), $this->clean) :
                                         $this->clean);
             fallback($url,          ($clean != $this->clean) ?
                                         self::check_url($clean) :

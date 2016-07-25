@@ -97,7 +97,7 @@
             fallback($public,       true);
             fallback($show_in_list, true);
             fallback($list_order,   0);
-            fallback($clean,        sanitize(@$_POST['slug'], true, true, 40), strtolower(random(8)));
+            fallback($clean,        sanitize(@$_POST['slug'], true, true, 80), strtolower(random(8)));
             fallback($url,          self::check_url($clean));
             fallback($created_at,   datetime());
             fallback($updated_at,   datetime());
@@ -167,7 +167,7 @@
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($clean,    (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
-                                    oneof(sanitize($_POST['slug'], true, true, 40), $this->clean) :
+                                    oneof(sanitize($_POST['slug'], true, true, 80), $this->clean) :
                                     $this->clean);
             fallback($url,      ($clean != $this->clean) ?
                                     self::check_url($clean) :
