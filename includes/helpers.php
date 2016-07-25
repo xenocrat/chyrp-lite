@@ -1142,7 +1142,7 @@
      * Sanitizes a string of troublesome characters, typically for use in URLs.
      *
      * Parameters:
-     *     $string - The string to sanitize.
+     *     $string - The string to sanitize (must be ASCII or UTF-8).
      *     $force_lowercase - Force the string to lowercase?
      *     $strict - Remove all characters except "-" and alphanumerics?
      *     $trunc - Number of characters to truncate to (default 100, 0 to disable).
@@ -1158,11 +1158,11 @@
         $clean = preg_replace('/\s+/', "-", $clean);
         $clean = ($strict ? preg_replace("/[^a-zA-Z0-9\\-]/", "", $clean) : $clean);
         $clean = ($trunc ? substr($clean, 0, $trunc) : $clean);
-        return ($force_lowercase) ?
-            (function_exists('mb_strtolower')) ?
-                mb_strtolower($clean, 'UTF-8') :
-                strtolower($clean) :
-            $clean;
+
+        if ($force_lowercase)
+            $clean = (function_exists('mb_strtolower')) ? mb_strtolower($clean, 'UTF-8') : strtolower($clean) ;
+
+        return $clean;
     }
 
     /**
