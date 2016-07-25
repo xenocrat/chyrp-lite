@@ -1613,7 +1613,7 @@
         if (!is_writable($uploads_path))
             error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
 
-        $original_ext = end($file_split);
+        $original_ext = strtolower(end($file_split));
 
         # Handle common double extensions.
         foreach (array("tar.gz", "tar.bz", "tar.bz2") as $ext) {
@@ -1626,9 +1626,10 @@
             }
         }
 
-        $file_ext = end($file_split);
+        $file_ext = strtolower(end($file_split));
 
-        if (in_array(strtolower($file_ext), array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
+        # Rename these extensions for safety.
+        if (in_array($file_ext, array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
             $file_ext = "txt";
 
         if (!empty($filter)) {
@@ -1637,8 +1638,7 @@
             foreach ((array) $filter as $string)
                 $extensions[] = strtolower($string);
 
-            if (!in_array(strtolower($file_ext), $extensions) and
-                !in_array(strtolower($original_ext), $extensions))
+            if (!in_array($file_ext, $extensions) and !in_array($original_ext, $extensions))
                 error(__("Unsupported File Type"),
                       _f("Only files of the following types are accepted: %s.", implode(", ", $extensions)));
         }
