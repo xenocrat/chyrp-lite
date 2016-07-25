@@ -1144,7 +1144,7 @@
      * Parameters:
      *     $string - The string to sanitize.
      *     $force_lowercase - Force the string to lowercase?
-     *     $strict - If set to *true*, will remove all non-alphanumeric characters.
+     *     $strict - Remove all characters except "-" and alphanumerics?
      *     $trunc - Number of characters to truncate to (default 100, 0 to disable).
      *
      * Returns:
@@ -1156,7 +1156,7 @@
                        "—", "–", ",", "<", ".", ">", "/", "?");
         $clean = trim(str_replace($strip, "", strip_tags($string)));
         $clean = preg_replace('/\s+/', "-", $clean);
-        $clean = ($strict ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean);
+        $clean = ($strict ? preg_replace("/[^a-zA-Z0-9\\-]/", "", $clean) : $clean);
         $clean = ($trunc ? substr($clean, 0, $trunc) : $clean);
         return ($force_lowercase) ?
             (function_exists('mb_strtolower')) ?
