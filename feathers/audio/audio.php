@@ -30,11 +30,11 @@
             else
                 error(__("Error"), __("You did not select any audio to upload.", "audio"), null, 422);
 
+            fallback($_POST['slug'], $_POST['title']);
+
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
-                                   "description" => $_POST['description']),
-                             $_POST['slug'],
-                             Post::check_url($_POST['slug']));
+                                   "description" => $_POST['description']));
         }
 
         public function update($post) {

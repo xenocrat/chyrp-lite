@@ -33,13 +33,11 @@
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
-            fallback($_POST['slug'], sanitize($_POST['title']));
+            fallback($_POST['slug'], $_POST['title']);
 
             return Post::add(array("title" => $_POST['title'],
                                    "filename" => $filename,
-                                   "caption" => $_POST['caption']),
-                             $_POST['slug'],
-                             Post::check_url($_POST['slug']));
+                                   "caption" => $_POST['caption']));
         }
 
         public function update($post) {

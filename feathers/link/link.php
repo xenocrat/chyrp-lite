@@ -28,14 +28,11 @@
                 error(__("Error"), __("Invalid URL.", "link"));
 
             $_POST['source'] = add_scheme($_POST['source']);
-
-            fallback($_POST['slug'], sanitize($_POST['name']));
+            fallback($_POST['slug'], $_POST['name']);
 
             return Post::add(array("name" => $_POST['name'],
                                    "source" => $_POST['source'],
-                                   "description" => $_POST['description']),
-                             $_POST['slug'],
-                             Post::check_url($_POST['slug']));
+                                   "description" => $_POST['description']));
         }
 
         public function update($post) {

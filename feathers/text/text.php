@@ -18,12 +18,10 @@
             if (empty($_POST['body']))
                 error(__("Error"), __("Body can't be blank."));
 
-            fallback($_POST['slug'], sanitize($_POST['title']));
+            fallback($_POST['slug'], $_POST['title']);
 
             return Post::add(array("title" => $_POST['title'],
-                                   "body" => $_POST['body']),
-                             $_POST['slug'],
-                             Post::check_url($_POST['slug']));
+                                   "body" => $_POST['body']));
         }
 
         public function update($post) {
