@@ -635,19 +635,24 @@
 
             $trigger->filter($this, "filter_post");
 
-            if (isset(Feathers::$custom_filters[$class])) # Run through feather-specified filters, first.
+            # Feather-specified filters.
+            if (isset(Feathers::$custom_filters[$class]))
                 foreach (Feathers::$custom_filters[$class] as $custom_filter) {
                     $varname = $custom_filter["field"]."_unfiltered";
+
                     if (!isset($this->$varname))
                         $this->$varname = @$this->$custom_filter["field"];
 
-                    $this->$custom_filter["field"] = call_user_func_array(array(Feathers::$instances[$this->feather], $custom_filter["name"]),
+                    $this->$custom_filter["field"] = call_user_func_array(array(Feathers::$instances[$this->feather],
+                                                                                $custom_filter["name"]),
                                                                           array($this->$custom_filter["field"], $this));
                 }
 
-            if (isset(Feathers::$filters[$class])) # Now actually filter it.
+            # Trigger filters.
+            if (isset(Feathers::$filters[$class]))
                 foreach (Feathers::$filters[$class] as $filter) {
                     $varname = $filter["field"]."_unfiltered";
+
                     if (!isset($this->$varname))
                         $this->$varname = @$this->$filter["field"];
 
@@ -698,7 +703,8 @@
          * Returns a SQL query "chunk" for the "status" column permissions of the current user.
          *
          * Parameters:
-         *     $start - An array of additional statuses to allow; "registered_only", "private" and "scheduled" are added deterministically.
+         *     $start - An array of additional statuses to allow;
+         *              "registered_only", "private" and "scheduled" are added deterministically.
          */
         static function statuses($start = array()) {
             $visitor = Visitor::current();
