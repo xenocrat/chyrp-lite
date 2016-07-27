@@ -34,6 +34,9 @@
         }
 
         public function submit() {
+            if (empty($_POST['caption']))
+                error(__("Error"), __("Caption can't be blank."), null, 422);
+
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
 

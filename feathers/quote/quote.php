@@ -18,7 +18,7 @@
 
         public function submit() {
             if (empty($_POST['quote']))
-                error(__("Error"), __("Quote can't be empty.", "quote"));
+                error(__("Error"), __("Quote can't be empty.", "quote"), null, 422);
 
             fallback($_POST['slug'], $_POST['quote']);
 

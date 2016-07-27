@@ -16,7 +16,7 @@
 
         public function submit() {
             if (empty($_POST['body']))
-                error(__("Error"), __("Body can't be blank."));
+                error(__("Error"), __("Body can't be blank."), null, 422);
 
             fallback($_POST['slug'], $_POST['title']);
 

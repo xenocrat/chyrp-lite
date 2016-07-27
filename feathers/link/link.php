@@ -22,7 +22,7 @@
 
         public function submit() {
             if (empty($_POST['source']))
-                error(__("Error"), __("URL can't be empty.", "link"));
+                error(__("Error"), __("URL can't be empty.", "link"), null, 422);
 
             if (!is_url($_POST['source']))
                 error(__("Error"), __("Invalid URL.", "link"));
