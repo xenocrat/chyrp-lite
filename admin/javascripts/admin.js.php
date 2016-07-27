@@ -39,7 +39,7 @@ $(function() {
 
     // Make the Post View URL syntax clickable.
     if (Route.action == "route_settings")
-        clickable_post_view_url();
+        toggle_syntax();
 });
 function toggle_all() {
     var all_checked = true;
@@ -140,7 +140,7 @@ function toggle_correspondence() {
             $("#email_correspondence").prop("checked", true);
     });
 }
-function clickable_post_view_url() {
+function toggle_syntax() {
     $("form#route_settings code.syntax").on("click", function(e) {
         var name = $(e.target).text();
         var post_url = $("form#route_settings input[name='post_url']");
