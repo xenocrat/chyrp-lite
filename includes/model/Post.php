@@ -150,9 +150,7 @@
          * Function: add
          * Adds a post to the database.
          *
-         * Most of the function arguments will fall back to various POST values.
-         *
-         * Calls the @add_post@ trigger with the inserted post and extra options.
+         * Calls the @add_post@ trigger with the new <Post> and extra options.
          *
          * Parameters:
          *     $values - The data to insert.
@@ -171,7 +169,7 @@
          *     The newly created <Post>.
          *
          * Notes:
-         *     If $clean and $url are supplied, you are responsible for sanitization and validation.
+         *     The caller is responsible for validating all supplied values.
          *
          * See Also:
          *     <update>
@@ -189,20 +187,18 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($clean,        oneof(sanitize(@$_POST['slug'], true, true, 80), strtolower(random(8))));
+            fallback($clean,        oneof(sanitize(@$_POST['slug'], true, true, 80), slug(8)));
             fallback($url,          self::check_url($clean));
-            fallback($feather,      oneof(@$_POST['feather'], ""));
-            fallback($user_id,      oneof(@$_POST['user_id'], Visitor::current()->id));
+            fallback($feather,      oneof(@$_POST['feather'], "text"));
+            fallback($user_id,      Visitor::current()->id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
             fallback($status,       (isset($_POST['draft'])) ?
                                         "draft" :
                                         oneof(@$_POST['status'], "public"));
-            fallback($created_at,   (!empty($_POST['created_at']) and
-                                    (!isset($_POST['original_time']) or
-                                    $_POST['created_at'] != $_POST['original_time'])) ?
+            fallback($created_at,   (!empty($_POST['created_at'])) ?
                                         datetime($_POST['created_at']) :
-                                        datetime());
-            fallback($updated_at,   oneof(@$_POST['updated_at'], $created_at));
+                                        $this->created_at);
+            fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
             fallback($options,      oneof(@$_POST['option'], array()));
 
             $sql = SQL::current();
@@ -248,7 +244,7 @@
          * Function: update
          * Updates a post with the given attributes.
          *
-         * Most of the function arguments will fall back to various POST values.
+         * Calls the @update_post@ trigger with the updated <Post>, original <Post>, and extra options.
          *
          * Parameters:
          *     $values - An array of data to set for the post.
@@ -262,7 +258,7 @@
          *     $options - Options for the post.
          *
          * Notes:
-         *     If $clean and $url are supplied, you are responsible for sanitization and validation.
+         *     The caller is responsible for validating all supplied values.
          *
          * See Also:
          *     <add>
@@ -283,13 +279,13 @@
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
-            fallback($user_id,      oneof(@$_POST['user_id'], $this->user_id));
+            fallback($user_id,      $this->user_id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
             fallback($status,       (isset($_POST['draft'])) ?
                                         "draft" :
                                         oneof(@$_POST['status'], $this->status));
             fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
-                                        oneof(sanitize($_POST['slug'], true, true, 80), $this->clean) :
+                                        oneof(sanitize($_POST['slug'], true, true, 80), slug(8)) :
                                         $this->clean);
             fallback($url,          ($clean != $this->clean) ?
                                         self::check_url($clean) :
@@ -297,9 +293,7 @@
             fallback($created_at,   (!empty($_POST['created_at'])) ?
                                         datetime($_POST['created_at']) :
                                         $this->created_at);
-            fallback($updated_at,   ($updated_at === false ?
-                                        $this->updated_at :
-                                        oneof($updated_at, @$_POST['updated_at'], datetime())));
+            fallback($updated_at,   datetime());
             fallback($options,      oneof(@$_POST['option'], array()));
 
             $sql = SQL::current();
@@ -466,7 +460,8 @@
          *     $clean - The clean URL to check.
          *
          * Returns:
-         *     The unique version of the passed clean URL. If it's not used, it's the same as $clean. If it is, a number is appended.
+         *     The unique version of the passed clean URL.
+         *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
         static function check_url($clean) {
             $count = SQL::current()->count("posts", array("clean" => $clean));
@@ -507,10 +502,11 @@
 
         /**
          * Function: title_from_excerpt
-         * Generates an acceptable Title from the post's excerpt.
+         * Generates an acceptable title from the post's excerpt.
          *
          * Returns:
-         *     The post's excerpt. filtered -> first line -> ftags stripped -> truncated to 75 characters -> normalized.
+         *     The post's excerpt:
+         *     filtered -> first line -> ftags stripped -> truncated to 75 characters -> normalized.
          */
         public function title_from_excerpt() {
             if ($this->no_results)

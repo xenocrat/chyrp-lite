@@ -74,7 +74,7 @@
          *     The newly created <Page>.
          *
          * Notes:
-         *     If $clean and $url are supplied, you are responsible for sanitization and validation.
+         *     The caller is responsible for validating all supplied values.
          *
          * See Also:
          *     <update>
@@ -97,10 +97,10 @@
             fallback($public,       true);
             fallback($show_in_list, true);
             fallback($list_order,   0);
-            fallback($clean,        sanitize(@$_POST['slug'], true, true, 80), strtolower(random(8)));
+            fallback($clean,        sanitize(@$_POST['slug'], true, true, 80), slug(8));
             fallback($url,          self::check_url($clean));
             fallback($created_at,   datetime());
-            fallback($updated_at,   datetime());
+            fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
 
             $sql = SQL::current();
             $trigger = Trigger::current();
@@ -147,7 +147,7 @@
          *     $updated_at - The page's "last updated" timestamp.
          *
          * Notes:
-         *     If $clean and $url are supplied, you are responsible for sanitization and validation.
+         *     The caller is responsible for validating all supplied values.
          */
         public function update($title        = null,
                                $body         = null,
@@ -166,12 +166,21 @@
             $old = clone $this;
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($clean,    (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
-                                    oneof(sanitize($_POST['slug'], true, true, 80), $this->clean) :
-                                    $this->clean);
-            fallback($url,      ($clean != $this->clean) ?
-                                    self::check_url($clean) :
-                                    $this->url);
+            fallback($title,        $this->title);
+            fallback($body,         $this->body);
+            fallback($user_id,      $this->user_id);
+            fallback($parent_id,    $this->parent_id);
+            fallback($public,       $this->public);
+            fallback($show_in_list, $this->show_in_list);
+            fallback($list_order,   $this->list_order);
+            fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
+                                        oneof(sanitize($_POST['slug'], true, true, 80), slug(8)) :
+                                        $this->clean);
+            fallback($url,          ($clean != $this->clean) ?
+                                        self::check_url($clean) :
+                                        $this->url);
+            fallback($created_at,   $this->created_at);
+            fallback($updated_at,   datetime());
 
             $sql = SQL::current();
             $trigger = Trigger::current();
@@ -179,10 +188,7 @@
             # Update all values of this page.
             foreach (array("title", "body", "user_id", "parent_id", "public", "show_in_list",
                            "list_order", "clean", "url", "created_at", "updated_at") as $attr)
-                if ($attr == "updated_at" and $$attr === null)
-                    $this->$attr = $$attr = datetime();
-                else
-                    $this->$attr = $$attr = ($$attr !== null ? $$attr : $this->$attr);
+                $this->$attr = $$attr;
 
             $new_values = array("title" =>        $title,
                                 "body" =>         $body,
@@ -245,7 +251,8 @@
          *     $clean - The clean URL to check.
          *
          * Returns:
-         *     The unique version of the passed clean URL. If it's not used, it's the same as $clean. If it is, a number is appended.
+         *     The unique version of the passed clean URL.
+         *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
         static function check_url($clean) {
             $count = SQL::current()->count("pages", array("clean" => $clean));
