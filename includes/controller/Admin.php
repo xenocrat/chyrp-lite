@@ -352,8 +352,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (empty($_POST['title']) and empty($_POST['slug']))
-                error(__("Error"), __("Title and slug cannot be blank."), null, 422);
+            if (empty($_POST['title']))
+                error(__("Error"), __("Title cannot be blank."), null, 422);
+
+            if (empty($_POST['body']))
+                error(__("Error"), __("Body cannot be blank."), null, 422);
 
             fallback($_POST['status'], "public");
             fallback($_POST['slug'], $_POST['title']);
@@ -405,8 +408,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (empty($_POST['title']) and empty($_POST['slug']))
-                error(__("Error"), __("Title and slug cannot be blank."), null, 422);
+            if (empty($_POST['title']))
+                error(__("Error"), __("Title cannot be blank."), null, 422);
+
+            if (empty($_POST['body']))
+                error(__("Error"), __("Body cannot be blank."), null, 422);
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
