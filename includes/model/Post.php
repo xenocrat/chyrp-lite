@@ -161,7 +161,7 @@
          *     $pinned - Pin the post?
          *     $status - Post status
          *     $created_at - New @created_at@ timestamp for the post.
-         *     $updated_at - New @updated_at@ timestamp for the post, or @false@ to not updated it.
+         *     $updated_at - New @updated_at@ timestamp for the post.
          *     $pingbacks - Send pingbacks?
          *     $options - Options for the post.
          *
@@ -197,7 +197,7 @@
                                         oneof(@$_POST['status'], "public"));
             fallback($created_at,   (!empty($_POST['created_at'])) ?
                                         datetime($_POST['created_at']) :
-                                        $this->created_at);
+                                        datetime());
             fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
             fallback($options,      oneof(@$_POST['option'], array()));
 
@@ -254,7 +254,7 @@
          *     $clean - A new slug for the post.
          *     $url - A new unique URL for the post (created from $clean by default).
          *     $created_at - New @created_at@ timestamp for the post.
-         *     $updated_at - New @updated_at@ timestamp for the post, or @false@ to not updated it.
+         *     $updated_at - New @updated_at@ timestamp for the post.
          *     $options - Options for the post.
          *
          * Notes:
