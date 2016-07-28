@@ -1168,8 +1168,9 @@
         $strip = array("&amp;", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;", "&",
                        "~", "`", "!", "@", "#", "$", "%", "^", "*", "(", ")", "_", "=", "+", "[", "{",
                        "]", "}", "\\", "|", ";", ":", "\"", "'", "—", "–", ",", "<", ".", ">", "/", "?");
-        $clean = trim(str_replace($strip, "", strip_tags($string)));
-        $clean = preg_replace('/\s+/', "-", $clean);
+
+        # Strip tags, remove punctuation and HTML entities, replace spaces with hyphen-minus.
+        $clean = preg_replace('/\s+/', "-", trim(str_replace($strip, "", strip_tags($string))));
 
         if ($strict) {
             # Discover UTF-8 multi-byte encodings and attempt substitutions.
@@ -1225,7 +1226,7 @@
                     chr(197).chr(180) => 'W', chr(197).chr(181) => 'w', chr(197).chr(182) => 'Y', chr(197).chr(183) => 'y',
                     chr(197).chr(184) => 'Y', chr(197).chr(185) => 'Z', chr(197).chr(186) => 'z', chr(197).chr(187) => 'Z',
                     chr(197).chr(188) => 'z', chr(197).chr(189) => 'Z', chr(197).chr(190) => 'z', chr(197).chr(191) => 's'
-                    # Additional substitution keys can be generated using: unpack("C*", $char);
+                    # Additional substitution keys can be generated using: e.g. unpack("C*", "€");
                 ));
 
             # Remove any characters that remain after substitution.
