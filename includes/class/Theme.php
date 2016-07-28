@@ -269,6 +269,7 @@
             $route = Route::current();
 
             $args = "";
+
             foreach ($_GET as $key => $val)
                 if (!empty($val) and $val != $route->action)
                     $args.= "&amp;".$key."=".urlencode($val);
@@ -329,6 +330,7 @@
             
             # Generate <link> tags:
             $tags = array();
+
             foreach ($links as $link) {
                 $rel = oneof(fallback($link["rel"], ""), "alternate");
                 $href = $link["href"];

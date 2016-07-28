@@ -47,6 +47,7 @@
 
             if (in_array($name, $this->belongs_to) or isset($this->belongs_to[$name])) {
                 $class = (isset($this->belongs_to[$name])) ? $this->belongs_to[$name] : $name ;
+
                 if (isset($this->belongs_to[$name])) {
                     $opts =& $this->belongs_to[$name];
                     $model = oneof(@$opts["model"], $name);
@@ -55,10 +56,9 @@
                         $model = $this->$match[1];
 
                     $match = oneof(@$opts["by"], strtolower($name));
-
                     fallback($opts["where"], array("id" => $this->{$match."_id"}));
-
                     $opts["where"] = (array) $opts["where"];
+
                     foreach ($opts["where"] as &$val)
                         if (preg_match("/^\(([a-z0-9_]+)\)$/", $val, $match))
                             $val = $this->$match[1];
@@ -79,10 +79,9 @@
                         $model = $this->$match[1];
 
                     $match = oneof(@$opts["by"], strtolower($name));
-
                     fallback($opts["where"], array($match."_id" => $this->id));
-
                     $opts["where"] = (array) $opts["where"];
+
                     foreach ($opts["where"] as &$val)
                         if (preg_match("/^\(([a-z0-9_]+)\)$/", $val, $match))
                             $val = $this->$match[1];
@@ -105,10 +104,9 @@
                         $model = $this->$match[1];
 
                     $match = oneof(@$opts["by"], strtolower($name));
-
                     fallback($opts["where"], array($match."_id" => $this->id));
-
                     $opts["where"] = (array) $opts["where"];
+
                     foreach ($opts["where"] as &$val)
                         if (preg_match("/^\(([a-z0-9_]+)\)$/", $val, $match))
                             $val = $this->$match[1];
@@ -239,10 +237,10 @@
             elseif (is_array($id))
                 $options["where"] = array_merge($options["where"], $id);
 
+            $sql = SQL::current();
             $trigger = Trigger::current();
             $trigger->filter($options, $model_name."_grab");
 
-            $sql = SQL::current();
             if (!empty($options["read_from"]))
                 $read = $options["read_from"];
             else {
@@ -272,6 +270,7 @@
                     if (count($all)) {
                         $keys = array_keys($all);
                         $read = $all[$keys[0]];
+
                         foreach ($read as $name => &$column) {
                             $column = (!in_array($name, $options["ignore_dupes"]) ?
                                           array_unique($column) :
@@ -416,6 +415,7 @@
          */
         protected static function destroy($model, $id) {
             $model = strtolower($model);
+
             if (Trigger::current()->exists("delete_".$model))
                 Trigger::current()->call("delete_".$model, new $model($id));
 
