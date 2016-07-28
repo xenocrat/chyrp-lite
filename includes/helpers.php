@@ -1172,9 +1172,10 @@
         $clean = preg_replace('/\s+/', "-", $clean);
 
         if ($strict) {
-            if (preg_match('/[\x80-\xff]/', $clean)) # Discover UTF-8 multi-byte encodings and attempt substitutions.
-                $clean = strtr($clean, array(        # Substitution keys can be generated using: unpack("C*", $char);
-                    // Latin-1 Supplement.
+            # Discover UTF-8 multi-byte encodings and attempt substitutions.
+            if (preg_match('/[\x80-\xff]/', $clean))
+                $clean = strtr($clean, array(
+                    # Latin-1 Supplement.
                     chr(194).chr(170) => 'a', chr(194).chr(186) => 'o', chr(195).chr(128) => 'A', chr(195).chr(129) => 'A',
                     chr(195).chr(130) => 'A', chr(195).chr(131) => 'A', chr(195).chr(132) => 'A', chr(195).chr(133) => 'A',
                     chr(195).chr(134) => 'AE',chr(195).chr(135) => 'C', chr(195).chr(136) => 'E', chr(195).chr(137) => 'E',
@@ -1191,7 +1192,7 @@
                     chr(195).chr(180) => 'o', chr(195).chr(181) => 'o', chr(195).chr(182) => 'o', chr(195).chr(184) => 'o',
                     chr(195).chr(185) => 'u', chr(195).chr(186) => 'u', chr(195).chr(187) => 'u', chr(195).chr(188) => 'u',
                     chr(195).chr(189) => 'y', chr(195).chr(190) => 'th',chr(195).chr(191) => 'y', chr(195).chr(152) => 'O',
-                    // Latin Extended-A.
+                    # Latin Extended-A.
                     chr(196).chr(128) => 'A', chr(196).chr(129) => 'a', chr(196).chr(130) => 'A', chr(196).chr(131) => 'a',
                     chr(196).chr(132) => 'A', chr(196).chr(133) => 'a', chr(196).chr(134) => 'C', chr(196).chr(135) => 'c',
                     chr(196).chr(136) => 'C', chr(196).chr(137) => 'c', chr(196).chr(138) => 'C', chr(196).chr(139) => 'c',
@@ -1224,9 +1225,11 @@
                     chr(197).chr(180) => 'W', chr(197).chr(181) => 'w', chr(197).chr(182) => 'Y', chr(197).chr(183) => 'y',
                     chr(197).chr(184) => 'Y', chr(197).chr(185) => 'Z', chr(197).chr(186) => 'z', chr(197).chr(187) => 'Z',
                     chr(197).chr(188) => 'z', chr(197).chr(189) => 'Z', chr(197).chr(190) => 'z', chr(197).chr(191) => 's'
+                    # Additional substitution keys can be generated using: unpack("C*", $char);
                 ));
 
-            $clean = preg_replace("/[^a-zA-Z0-9\\-]/", "", $clean); # Remove any characters that remain after substitution.
+            # Remove any characters that remain after substitution.
+            $clean = preg_replace("/[^a-zA-Z0-9\\-]/", "", $clean);
         }
 
         $clean = ($trunc ? substr($clean, 0, $trunc) : $clean);
@@ -2037,12 +2040,11 @@
      * Parameters:
      *     $value - The value to be encoded.
      *     $options - A bitmask of encoding options.
-     *     $depth - Recursion depth for encoding (PHP 5.5+).
      *
      * Returns:
      *     A JSON encoded string or false on failure.
      */
-    function json_set($value, $options = 0, $depth = 512) {
+    function json_set($value, $options = 0) {
         $encoded = json_encode($value, $options);
 
         if (json_last_error())
@@ -2059,12 +2061,11 @@
      *     $value - The UTF-8 string to be decoded.
      *     $assoc - Convert objects into associative arrays?
      *     $depth - Recursion depth for decoding.
-     *     $options - A bitmask of decoding options (PHP 5.4+).
      *
      * Returns:
      *     A JSON decoded value of the appropriate PHP type.
      */
-    function json_get($value, $assoc = false, $depth = 512, $options = 0) {
+    function json_get($value, $assoc = false, $depth = 512) {
         $decoded = json_decode($value, $assoc, $depth);
 
         if (json_last_error())
