@@ -2058,16 +2058,12 @@
          *     $path - The path to the template, usually "pages".
          */
         public function display($action, $context = array(), $title = "", $path = "pages") {
-            $this->displayed = true;
-            fallback($title, camelize($action, true));
-            $this->context = array_merge($context, $this->context);
-
             $config = Config::current();
             $visitor = Visitor::current();
             $route = Route::current();
             $trigger = Trigger::current();
 
-            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
+            $this->displayed = true;
 
             # Are there any extension-added pages?
             foreach (array("write" => array(),
@@ -2078,12 +2074,13 @@
                 $trigger->filter($$main_nav, $main_nav."_pages");
             }
 
+            $this->context               = array_merge($context, $this->context);
             $this->context["ip"]         = $_SERVER["REMOTE_ADDR"];
             $this->context["DIR"]        = DIR;
             $this->context["theme"]      = Theme::current();
             $this->context["flash"]      = Flash::current();
             $this->context["trigger"]    = $trigger;
-            $this->context["title"]      = $title;
+            $this->context["title"]      = fallback($title, camelize($action, true));
             $this->context["site"]       = $config;
             $this->context["visitor"]    = $visitor;
             $this->context["logged_in"]  = logged_in();
@@ -2096,8 +2093,10 @@
             $this->context["modules"]    = Modules::$instances;
             $this->context["POST"]       = $_POST;
             $this->context["GET"]        = $_GET;
-
             $this->context["navigation"] = array();
+
+            $trigger->filter($this->context, array("admin_context",
+                                                   "admin_context_".str_replace(DIR, "_", $action)));
 
             $show = array("write" => array($visitor->group->can("add_draft", "add_post", "add_page")),
                           "manage" => array($visitor->group->can("view_own_draft",
