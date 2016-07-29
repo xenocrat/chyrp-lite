@@ -618,13 +618,8 @@
                     $_SESSION['user_id'] = $user->id;
                     $_SESSION['cookies_notified'] = true;
 
-                    if (!isset($redirect)) {
-                        $redirect = oneof(@$_SESSION['redirect_to'], "/");
-                        unset($_SESSION['redirect_to']);
-                    }
-
                     Trigger::current()->call("user_logged_in", $user);
-                    Flash::notice(__("Logged in."), $redirect);
+                    Flash::notice(__("Logged in."), oneof(@$_SESSION['redirect_to'], "/"));
                 }
             }
 
@@ -639,12 +634,10 @@
             if (!logged_in())
                 Flash::notice(__("You aren't logged in."), "/");
 
-            $cookies_notified = !empty($_SESSION['cookies_notified']);
-
             session_destroy();
             session();
 
-            $_SESSION['cookies_notified'] = $cookies_notified;
+            $_SESSION['cookies_notified'] = true;
 
             Flash::notice(__("Logged out."), "/");
         }
@@ -870,18 +863,16 @@
             $this->context["debug"]              = DEBUG;
             $this->context["POST"]               = $_POST;
             $this->context["GET"]                = $_GET;
-            $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["captcha"]            = generate_captcha();
+            $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
             $this->context["visitor"]->logged_in = logged_in();
 
             $trigger->filter($this->context, array("main_context",
                                                    "main_context_".str_replace(DIR, "_", $template)));
 
-            if ($config->cookies_notification and empty($_SESSION['cookies_notified'])) {
-                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
-                $_SESSION['cookies_notified'] = true;
-            }
+            if ($config->cookies_notification and empty($_SESSION['cookies_notified']))
+                $theme->cookies_notification();
 
             try {
                 return $this->twig->display($template.".twig", $this->context);
