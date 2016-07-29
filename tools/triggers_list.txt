@@ -300,7 +300,7 @@ Called from:
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 626
+	includes/controller/Main.php on line 621
 Arguments:
 	$user
 
@@ -308,7 +308,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 813
+	includes/controller/Main.php on line 806
 Arguments:
 	$post
 
@@ -722,7 +722,7 @@ nav_selected
 Target:
 	$this->context["selected"]
 Called from:
-	includes/controller/Admin.php on line 2150
+	includes/controller/Admin.php on line 2151
 
 
 url_code
@@ -738,7 +738,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 802
+	includes/controller/Main.php on line 795
 Arguments:
 	$post
 
@@ -758,7 +758,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1415
+	includes/helpers.php on line 1419
 
 
 send_mail
@@ -766,7 +766,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2116
+	includes/helpers.php on line 2120
 
 
 xmlrpc_methods

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-28 19:11+0000\n"
+"POT-Creation-Date: 2016-07-29 19:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -234,6 +234,11 @@ msgstr ""
 
 #: admin/layouts/default.twig:60
 msgid "Log out"
+msgstr ""
+
+#: admin/layouts/default.twig:68
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
 msgstr ""
 
 #: admin/pages/content_settings.twig:3
