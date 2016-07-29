@@ -2074,26 +2074,28 @@
                 $trigger->filter($$main_nav, $main_nav."_pages");
             }
 
-            $this->context               = array_merge($context, $this->context);
-            $this->context["ip"]         = $_SERVER["REMOTE_ADDR"];
-            $this->context["DIR"]        = DIR;
-            $this->context["theme"]      = Theme::current();
-            $this->context["flash"]      = Flash::current();
-            $this->context["trigger"]    = $trigger;
-            $this->context["title"]      = fallback($title, camelize($action, true));
-            $this->context["site"]       = $config;
-            $this->context["visitor"]    = $visitor;
-            $this->context["logged_in"]  = logged_in();
-            $this->context["route"]      = $route;
-            $this->context["now"]        = time();
-            $this->context["version"]    = CHYRP_VERSION;
-            $this->context["codename"]   = CHYRP_CODENAME;
-            $this->context["debug"]      = DEBUG;
-            $this->context["feathers"]   = Feathers::$instances;
-            $this->context["modules"]    = Modules::$instances;
-            $this->context["POST"]       = $_POST;
-            $this->context["GET"]        = $_GET;
-            $this->context["navigation"] = array();
+            $this->context                = array_merge($context, $this->context);
+            $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
+            $this->context["DIR"]         = DIR;
+            $this->context["theme"]       = Theme::current();
+            $this->context["flash"]       = Flash::current();
+            $this->context["trigger"]     = $trigger;
+            $this->context["title"]       = fallback($title, camelize($action, true));
+            $this->context["site"]        = $config;
+            $this->context["visitor"]     = $visitor;
+            $this->context["logged_in"]   = logged_in();
+            $this->context["route"]       = $route;
+            $this->context["now"]         = time();
+            $this->context["version"]     = CHYRP_VERSION;
+            $this->context["codename"]    = CHYRP_CODENAME;
+            $this->context["debug"]       = DEBUG;
+            $this->context["feathers"]    = Feathers::$instances;
+            $this->context["modules"]     = Modules::$instances;
+            $this->context["POST"]        = $_POST;
+            $this->context["GET"]         = $_GET;
+            $this->context["navigation"]  = array();
+            $this->context["sql_queries"] =& SQL::current()->queries;
+            $this->context["sql_debug"]   =& SQL::current()->debug;
 
             $trigger->filter($this->context, array("admin_context",
                                                    "admin_context_".str_replace(DIR, "_", $action)));
@@ -2147,14 +2149,12 @@
 
             $this->subnav_context($route->action);
             $trigger->filter($this->context["selected"], "nav_selected");
-            $this->context["sql_debug"] = SQL::current()->debug;
-            $template = $path.DIR.$action.".twig";
 
             if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
                 Update::check();
 
             try {
-                $this->twig->display($template, $this->context);
+                $this->twig->display($path.DIR.$action.".twig", $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 error(__("Twig Error"), $prettify, debug_backtrace());
