@@ -350,8 +350,21 @@
             return "<!-- Feeds -->\n".implode("\n", $tags);
         }
 
+        /**
+         * Function: load_time
+         * Returns the total elapsed time for this page load.
+         */
         public function load_time() {
             return timer_stop();
+        }
+
+        /**
+         * Function: cookies_notification
+         * Flashes a notification about cookies.
+         */
+        public function cookies_notification() {
+            Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
+            $_SESSION['cookies_notified'] = true;
         }
 
         /**
