@@ -1233,10 +1233,11 @@
             $clean = preg_replace("/[^a-zA-Z0-9\\-]/", "", $clean);
         }
 
-        $clean = ($trunc ? substr($clean, 0, $trunc) : $clean);
-
         if ($force_lowercase)
             $clean = (function_exists('mb_strtolower')) ? mb_strtolower($clean, 'UTF-8') : strtolower($clean) ;
+
+        if ($trunc)
+            $clean = (function_exists('mb_substr')) ? mb_substr($clean, 0, $trunc, 'UTF-8') : substr($clean, 0, $trunc) ;
 
         return $clean;
     }
@@ -1252,6 +1253,7 @@
      *     A sanitized version of the string.
      */
     function sanitize_html($text) {
+        # Strip attributes from each tag, but allow attributes essential to a tag's function.
         $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( \/)?>/i", function ($element) {
             $name = strtolower($element[1]);
             fallback($element[2], "");
@@ -1295,8 +1297,10 @@
                  ">";
         }, $text);
 
+        # Neutralize script tags.
         $text = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $text);
         $text = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $text);
+
         return $text;
     }
 
