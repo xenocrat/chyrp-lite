@@ -124,9 +124,9 @@
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
 {% if debug and visitor.group.name == "Admin" %}
 <!--
-{% for debug in sql_debug %}
-{{ debug.query | replace("\t", "    ") | fix }}
-{{ "Called from %s on line %d at %s seconds." | translate | format(debug.file, debug.line, debug.time) }}
+{% for caller in sql_debug %}
+{{ caller.query | replace("\t", "    ") | fix }}
+{{ "Called from %s on line %d at %s seconds." | translate | format(caller.file, caller.line, caller.time) }}
 {% endfor %}
 -->
 {% endif %}
