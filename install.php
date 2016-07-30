@@ -508,7 +508,7 @@
             $errors[] = __("Please enter a username for your account.");
 
         if (empty($_POST['password_1']))
-            $errors[] = __("Password cannot be blank.");
+            $errors[] = __("Passwords cannot be blank.");
 
         if ($_POST['password_1'] != $_POST['password_2'])
             $errors[] = __("Passwords do not match.");
