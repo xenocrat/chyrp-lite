@@ -537,7 +537,7 @@
          */
         public function activate() {
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/");
+                Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
             if (empty($_GET['token']))
                 error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
@@ -566,7 +566,7 @@
          */
         public function reset() {
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/");
+                Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
             if (empty($_GET['token']))
                 error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
@@ -651,10 +651,10 @@
          * Updates the current user when the form is submitted.
          */
         public function controls() {
-            if (!logged_in()) {
-                $_SESSION['redirect_to'] = "controls";
+            $_SESSION['redirect_to'] = "controls"; # They'll come here after login if necessary.
+
+            if (!logged_in())
                 Flash::notice(__("You must be logged in to access user controls."), "login");
-            }
 
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
@@ -697,7 +697,7 @@
          */
         public function lost_password() {
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/");
+                Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
             $config = Config::current();
 
