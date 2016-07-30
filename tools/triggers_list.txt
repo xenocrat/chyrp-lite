@@ -286,7 +286,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 522
+	includes/controller/Main.php on line 532
 Arguments:
 	$user
 
@@ -294,13 +294,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 607
+	includes/controller/Main.php on line 617
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 621
+	includes/controller/Main.php on line 631
 Arguments:
 	$user
 
@@ -308,7 +308,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 806
+	includes/controller/Main.php on line 816
 Arguments:
 	$post
 
@@ -730,7 +730,7 @@ url_code
 Target:
 	Post::$url_attrs
 Called from:
-	includes/controller/Main.php on line 179
+	includes/controller/Main.php on line 183
 
 
 feed_url
@@ -738,7 +738,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 795
+	includes/controller/Main.php on line 805
 Arguments:
 	$post
 
