@@ -166,27 +166,32 @@
          * This can also be used for grabbing a Post from a given URL.
          *
          * Parameters:
-         *     $route - The route to respond to.
-         *     $url - If this argument is passed, it will attempt to grab a post from a given URL.
-         *            If a post is found by that URL, it will be returned.
-         *     $return_post - Return a Post?
+         *     $route - The route object to respond to.
+         *     $request - The request URI to parse.
+         *     $return_post - Return a post instead of responding to the route?
          */
         public function post_from_url($route, $request, $return_post = false) {
             $config = Config::current();
-            $post_url_parts = preg_split("!(\([^)]+\))!", $config->post_url, null, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-            $url_regex = "";
+
+            $post_url_regex = "";
             $url_parameters = array();
+            $post_url_parts = preg_split("!(\([^)]+\))!",
+                                         $config->post_url,
+                                         null,
+                                         PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+
             Trigger::current()->filter(Post::$url_attrs, "url_code");
 
             foreach ($post_url_parts as $part)
                 if (isset(Post::$url_attrs[$part])) {
-                    $url_regex .= Post::$url_attrs[$part];
+                    $post_url_regex .= Post::$url_attrs[$part];
                     $url_parameters[] = trim($part, "()");
                 } else
-                    $url_regex .= preg_quote($part, "/");
+                    $post_url_regex .= preg_quote($part, "/");
 
-            if (preg_match("/^$url_regex/", ltrim($request, "/"), $matches)) {
+            if (preg_match("/^$post_url_regex/", ltrim($request, "/"), $matches)) {
                 $post_url_attrs = array();
+
                 for ($i = 0; $i < count($url_parameters); $i++)
                     $post_url_attrs[$url_parameters[$i]] = urldecode($matches[$i + 1]);
 
@@ -836,7 +841,9 @@
                     if ($theme->file_exists($try))
                         return $this->display($try, $context, $title);
 
-                error(__("Twig Error"), __("No files exist in the supplied array of fallbacks."), debug_backtrace());
+                error(__("Twig Error"),
+                      __("No template files exist in the supplied array of fallbacks."),
+                      debug_backtrace());
             }
 
             $this->displayed = true;
