@@ -556,8 +556,8 @@
             if (!$check->no_results)
                 error(__("Error"), __("That username is already in use."), null, 409);
 
-            if (empty($_POST['password1']))
-                error(__("Error"), __("Password cannot be blank."), null, 422);
+            if (empty($_POST['password1']) or empty($_POST['password2']))
+                error(__("Error"), __("Passwords cannot be blank."), null, 422);
             elseif ($_POST['password1'] != $_POST['password2'])
                 error(__("Error"), __("Passwords do not match."), null, 422);
             elseif (password_strength($_POST['password1']) < 100)
@@ -587,7 +587,8 @@
 
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
-                                             "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                             "link"  => $config->url.
+                                                        "/?action=activate&login=".urlencode($user->login).
                                                         "&token=".token(array($user->login, $user->email))));
 
                 Flash::notice(_f("User &#8220;%s&#8221; added and activation email sent.", $user->login), "/admin/?action=manage_users");
@@ -653,10 +654,11 @@
             if ($user->no_results)
                 show_404(__("Not Found"), __("User not found."));
 
-            if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
-                error(__("Error"), __("Passwords do not match."), null, 422);
-            elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 100)
-                Flash::message(__("Please consider setting a stronger password for this user."));
+            if (!empty($_POST['new_password1']))
+                if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
+                    error(__("Error"), __("Passwords do not match."), null, 422);
+                elseif (password_strength($_POST['new_password1']) < 100)
+                    Flash::message(__("Please consider setting a stronger password for this user."));
 
             $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
 
@@ -678,13 +680,11 @@
                           $_POST['website'],
                           $_POST['group']);
 
-            if ($_POST['id'] == $visitor->id)
-                $_SESSION['password'] = $password;
-
             if (!$user->approved and $config->email_activation)
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
-                                             "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                             "link"  => $config->url.
+                                                        "/?action=activate&login=".urlencode($user->login).
                                                         "&token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User updated."), "/admin/?action=manage_users");

@@ -456,7 +456,11 @@
          * Views a post by its static ID.
          */
         public function id() {
-            $post = new Post($_GET['id']);
+            $post = new Post(fallback($_GET['id']));
+
+            if ($post->no_results)
+                return false;
+
             redirect($post->url());
         }
 
@@ -482,8 +486,8 @@
                 if (!$check->no_results)
                     Flash::warning(__("That username is already in use."));
 
-                if (empty($_POST['password1']))
-                    Flash::warning(__("Password cannot be blank."));
+                if (empty($_POST['password1']) or empty($_POST['password2']))
+                    Flash::warning(__("Passwords cannot be blank."));
                 elseif ($_POST['password1'] != $_POST['password2'])
                     Flash::warning(__("Passwords do not match."));
 
@@ -507,7 +511,8 @@
 
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
-                                                     "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                     "link"  => $config->url.
+                                                                "/?action=activate&login=".urlencode($user->login).
                                                                 "&token=".token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
@@ -537,7 +542,7 @@
             if (empty($_GET['token']))
                 error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
-            $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
+            $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
             if ($user->no_results)
                 show_404(__("Unknown User"), __("That username isn't in our database."));
@@ -566,7 +571,7 @@
             if (empty($_GET['token']))
                 error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
-            $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
+            $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
             if ($user->no_results)
                 show_404(__("Unknown User"), __("That username isn't in our database."));
@@ -638,7 +643,6 @@
             session();
 
             $_SESSION['cookies_notified'] = true;
-
             Flash::notice(__("Logged out."), "/");
         }
 
@@ -655,8 +659,9 @@
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
 
-                if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
-                    Flash::warning(__("Passwords do not match."));
+                if (!empty($_POST['new_password1']))
+                    if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
+                        Flash::warning(__("Passwords do not match."));
 
                 if (empty($_POST['email']))
                     Flash::warning(__("Email address cannot be blank."));
@@ -670,8 +675,7 @@
                     $_POST['website'] = add_scheme($_POST['website']);
 
                 if (!Flash::exists("warning")) {
-                    $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
-                        User::hashPassword($_POST['new_password1']) : $visitor->password ;
+                    $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $visitor->password ;
 
                     $visitor->update($visitor->login,
                                      $password,
@@ -701,12 +705,13 @@
                 Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
 
             if (!empty($_POST)) {
-                $user = new User(array("login" => $_POST['login']));
+                $user = new User(array("login" => fallback($_POST['login'])));
 
                 if (!$user->no_results)
                     correspond("reset", array("login" => $user->login,
                                               "to"    => $user->email,
-                                              "link"  => $config->url."/?action=reset&login=".fix($user->login).
+                                              "link"  => $config->url.
+                                                         "/?action=reset&login=".urlencode($user->login).
                                                          "&token=".token(array($user->login, $user->email))));
 
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
