@@ -1,4 +1,5 @@
 ## What can Chyrp Lite do for me?
+
 With Chyrp Lite you can run your own blog on your own web server with minimal fuss.
 Chyrp Lite provides three beautiful blog themes and a friendly administration environment,
 all fully navigable on desktop computers and mobile devices, thanks to the power of
@@ -58,6 +59,7 @@ Pages allow you to publish articles on your site that are independent of your bl
   - PDO
 
 ## Installation
+
 You can install Chyrp Lite in four steps:
 
 1. If using MySQL, create a MySQL database with a username and password.
@@ -68,6 +70,7 @@ You can install Chyrp Lite in four steps:
 That's it! Chyrp Lite will be up and running and ready for you to use.
 
 ## Upgrading
+
 Chyrp Lite will tell you when a new version is available. You can update in six steps:
 
 1. __Backup your database before proceeding!__
@@ -78,6 +81,7 @@ Chyrp Lite will tell you when a new version is available. You can update in six 
 6. Run the upgrade process by visiting [upgrade.php](upgrade.php) in your web browser.
 
 ## Documentation
+
 The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation
 for users and developers.
 
