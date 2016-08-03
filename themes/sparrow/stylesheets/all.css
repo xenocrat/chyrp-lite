@@ -300,6 +300,7 @@ div.flash {                                     box-sizing: border-box;
                                                 color: #ffffff;
                                                 background-color: #cc5252;
                                                 padding: 0.5em }
+div.flash + div.flash {                         border-top: 1px solid #ffffff }
 div.metadata {                                  font-weight: normal;
                                                 font-size: 0.75em;
                                                 font-style: italic;
