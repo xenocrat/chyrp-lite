@@ -14,6 +14,7 @@ var ChyrpComment = {
             $("#add_comment:not(.no_ajax)").on("submit.validator", function(e) {
                 if (!ChyrpComment.failed && !!window.FormData) {
                     e.preventDefault();
+                    $("#comments .comment_form").loader();
 
                     // Validate the form.
                     $.ajax({
@@ -25,6 +26,8 @@ var ChyrpComment = {
                         dataType: "json",
                         error: ChyrpComment.panic,
                     }).done(function(response) {
+                        $("#comments .comment_form").loader(true);
+
                         if (response.data === false) {
                             // Validation failed if data value is false.
                             alert(response.text);
