@@ -953,7 +953,7 @@
             $exports = array();
 
             if (isset($_POST['posts'])) {
-                list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "post_attributes");
+                list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
                 if (!empty($_GET['month']))
                     $where["created_at like"] = $_GET['month']."-%";
