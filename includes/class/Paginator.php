@@ -86,6 +86,7 @@
                 $this->result = array_slice($this->array, $offset, $this->per_page);
 
             $shown_dates = array();
+
             if ($model)
                 foreach ($this->result as &$result)
                     if (isset($result->created_at)) {

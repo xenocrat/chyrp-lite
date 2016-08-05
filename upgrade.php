@@ -2,8 +2,6 @@
     /**
      * File: Upgrader
      * A task-based gerneral purpose upgrader for Chyrp Lite, enabled modules and enabled extensions.
-     *
-     * Performs upgrade functions based on individual tasks, and checks whether or not they need to be done.
      */
 
     header("Content-Type: text/html; charset=UTF-8");
@@ -31,12 +29,12 @@
     define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
-    # Define a safe value to avoid warnings pre-5.4
+    # Define a safe value to avoid warnings pre-5.4.
     if (!defined('JSON_PRETTY_PRINT'))
         define('JSON_PRETTY_PRINT', 0);
 
     # Constant: JSON_UNESCAPED_SLASHES
-    # Define a safe value to avoid warnings pre-5.4
+    # Define a safe value to avoid warnings pre-5.4.
     if (!defined('JSON_UNESCAPED_SLASHES'))
         define('JSON_UNESCAPED_SLASHES', 0);
 
@@ -196,13 +194,13 @@
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('./fonts/Hack-Oblique.woff') format('woff');
+                src: url('./fonts/Hack-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('./fonts/Hack-BoldOblique.woff') format('woff');
+                src: url('./fonts/Hack-BoldItalic.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }

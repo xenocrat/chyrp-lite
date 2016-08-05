@@ -26,7 +26,7 @@
 
         /**
          * Function: __construct
-         * Parse the URL and to determine what to do.
+         * Parse the URL and give the controller an opportunity to determine the action.
          *
          * Parameters:
          *     $controller - The controller to use.
@@ -42,6 +42,7 @@
             if (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action']))
                 error(__("Error"), __("Invalid action."), null, 400);
 
+            # Determining the action can be this simple if clean URLs are disabled.
             $this->action =& $_GET['action'];
 
             if (isset($_GET['feed']))
@@ -58,11 +59,14 @@
             $this->request = $parse["path"] == "/" ?
                                  $_SERVER['REQUEST_URI'] :
                                  preg_replace("/{$this->safe_path}?/", "", $_SERVER['REQUEST_URI'], 1) ;
+
+            # Decompose clean URLs.
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
 
             if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0]))
                 error(__("Error"), __("Invalid action."), null, 400);
 
+            # Give the controller an opportunity to parse this route and determine the action.
             if (method_exists($controller, "parse"))
                 $controller->parse($this);
 
@@ -74,16 +78,14 @@
                                    oneof(@$this->arg[0], "index") :
                                    "index") ;
 
-            # Guess the action initially.
-            # This is only required because of the view_site permission;
-            # it has to know if they're viewing /login, in which case
-            # it should allow the page to display.
+            # Set the action, using a guess if necessary, to satisfy the view_site permission test.
+            # A subset of actions is permitted even if the visitor is not allowed to view the site.
             fallback($this->action, end($this->try));
         }
 
         /**
          * Function: init
-         * Attempt Controller actions until one of them doesn't return false.
+         * Attempt to call a responder for the action(s) until one of them doesn't return false.
          *
          * This will also call the @[controllername]_xxxxx@ and @route_xxxxx@ triggers.
          */
@@ -109,11 +111,13 @@
 
                 $name = strtolower(str_replace("Controller", "", get_class($this->controller)));
 
+                # This discovers responders provided by extensions.
                 if ($trigger->exists($name."_".$method) or $trigger->exists("route_".$method))
                     $call = $trigger->call(array($name."_".$method, "route_".$method), $this->controller);
                 else
                     $call = false;
 
+                # This discovers responders native to the controller.
                 if ($call !== true and method_exists($this->controller, $method))
                     $response = call_user_func_array(array($this->controller, $method), $args);
                 else
@@ -124,11 +128,12 @@
                     break;
                 }
 
+                # No responders were found; display a fallback template if one is set.
                 if (++$count == count($try) and isset($this->controller->fallback) and method_exists($this->controller, "display"))
                     call_user_func_array(array($this->controller, "display"), $this->controller->fallback);
             }
 
-            if ($this->action != "login" and $this->success)
+            if ($this->success and !in_array($this->action, array("login", "register")))
                 $_SESSION['redirect_to'] = self_url();
 
             $trigger->call("route_done", $this);

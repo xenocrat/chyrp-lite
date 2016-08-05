@@ -1,42 +1,7 @@
 <?php
     /**
      * File: Installer
-     *
-     * Chyrp Lite: An ultra-lightweight blogging engine.
-     *
-     * Version:
-     *     v2016.03
-     *
-     * Copyright:
-     *     Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
-     *     Daniel Pimley, and other contributors.
-     *
-     * License:
-     *     Permission is hereby granted, free of charge, to any person
-     *     obtaining a copy of this software and associated documentation
-     *     files (the "Software"), to deal in the Software without
-     *     restriction, including without limitation the rights to use,
-     *     copy, modify, merge, publish, distribute, sublicense, and/or
-     *     sell copies of the Software, and to permit persons to whom the
-     *     Software is furnished to do so, subject to the following
-     *     conditions:
-     *
-     *     The above copyright notice and this permission notice shall be
-     *     included in all copies or substantial portions of the Software.
-     *
-     *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-     *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-     *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-     *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-     *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-     *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-     *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-     *     OTHER DEALINGS IN THE SOFTWARE.
-     *
-     *     Except as contained in this notice, the name(s) of the above
-     *     copyright holders shall not be used in advertising or otherwise
-     *     to promote the sale, use or other dealings in this Software
-     *     without prior written authorization.
+     * Builds the site configuration, creates the SQL tables, and configures the .htaccess file.
      */
 
     header("Content-Type: text/html; charset=UTF-8");
@@ -61,12 +26,12 @@
     define('USE_ZLIB',       false);
 
     # Constant: JSON_PRETTY_PRINT
-    # Define a safe value to avoid warnings pre-5.4
+    # Define a safe value to avoid warnings pre-5.4.
     if (!defined('JSON_PRETTY_PRINT'))
         define('JSON_PRETTY_PRINT', 0);
 
     # Constant: JSON_UNESCAPED_SLASHES
-    # Define a safe value to avoid warnings pre-5.4
+    # Define a safe value to avoid warnings pre-5.4.
     if (!defined('JSON_UNESCAPED_SLASHES'))
         define('JSON_UNESCAPED_SLASHES', 0);
 
@@ -163,7 +128,7 @@
      *     $fallback - The value to echo if the $_POST value is not set.
      */
     function posted($index, $fallback = "") {
-        echo (isset($_POST[$index])) ? fix($_POST[$index]) : $fallback ;
+        echo (isset($_POST[$index])) ? fix($_POST[$index], true) : $fallback ;
     }
 
     /**
@@ -228,13 +193,13 @@
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('./fonts/Hack-Oblique.woff') format('woff');
+                src: url('./fonts/Hack-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
                 font-family: 'Hack webfont';
-                src: url('./fonts/Hack-BoldOblique.woff') format('woff');
+                src: url('./fonts/Hack-BoldItalic.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -543,7 +508,7 @@
             $errors[] = __("Please enter a username for your account.");
 
         if (empty($_POST['password_1']))
-            $errors[] = __("Password cannot be blank.");
+            $errors[] = __("Passwords cannot be blank.");
 
         if ($_POST['password_1'] != $_POST['password_2'])
             $errors[] = __("Passwords do not match.");
@@ -597,7 +562,7 @@
             $config->set("enabled_modules", array());
             $config->set("enabled_feathers", array("text"));
             $config->set("routes", array());
-            $config->set("secure_hashkey", md5(random(32)));
+            $config->set("secure_hashkey", random(32));
 
             # Add SQL settings to the configuration.
             foreach ($settings as $field => $value)

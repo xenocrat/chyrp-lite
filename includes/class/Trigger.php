@@ -18,7 +18,7 @@
 
         /**
          * Function: __construct
-         * Add a filter to implement Unicode emoji support
+         * Add predefined filters to implement Unicode emoji and Markdown support.
          */
         private function __construct() {
             $config = Config::current();
@@ -35,7 +35,9 @@
          * Sorts actions by priority when used with usort.
          */
         private function cmp($a, $b) {
-            if (empty($a) or empty($b)) return 0;
+            if (empty($a) or empty($b))
+                return 0;
+
             return ($a["priority"] < $b["priority"]) ? -1 : 1 ;
         }
 
@@ -65,10 +67,9 @@
 
             $arguments = func_get_args();
             array_shift($arguments);
-
             $return = null;
-
             $this->called[$name] = array();
+
             if (isset($this->priorities[$name])) { # Predefined priorities?
                 usort($this->priorities[$name], array($this, "cmp"));
 
@@ -105,6 +106,7 @@
                     $args = func_get_args();
                     $args[0] =& $target;
                     $args[1] = $filter;
+
                     if ($index + 1 == count($name))
                         return $target = call_user_func_array(array($this, "filter"), $args);
                     else
@@ -152,6 +154,7 @@
                     return;
                 }
             }
+
             $this->actions[$trigger]["disabled"][] = $action;
         }
 

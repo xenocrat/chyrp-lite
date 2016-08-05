@@ -55,12 +55,13 @@
 
         /**
          * Function: parse
-         * Determines the action.
+         * Route constructor calls this to interpret clean URLs and determine the action.
          */
         public function parse($route) {
             $config = Config::current();
 
-            if (empty($route->arg[0]) and !isset($config->routes["/"])) # If they're just at /, don't bother with all this.
+            # If they're just at / and that's not a custom route, don't bother with all this.
+            if (empty($route->arg[0]) and !isset($config->routes["/"]))
                 return $route->action = "index";
 
             # Protect non-responder functions.
@@ -72,7 +73,8 @@
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
 
-                if ($route->arg[0] == "feed") # Don't set $route->action to "feed" (bottom of this function).
+                # Don't set $route->action to "feed" (bottom of this function).
+                if ($route->arg[0] == "feed")
                     return $route->action = "index";
             }
 
@@ -81,7 +83,8 @@
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
 
-                if ($route->arg[0] == $page_matches[1][0]) # Don't fool ourselves into thinking we're viewing a page.
+                # Don't fool ourselves into thinking we're viewing a page.
+                if ($route->arg[0] == $page_matches[1][0])
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
             }
 
@@ -112,7 +115,7 @@
                 return $route->action = "search";
             }
 
-            # Custom pages added by Modules, Feathers, Themes, etc.
+            # Test custom routes and populate $_GET parameters if the route expression matches.
             foreach ($config->routes as $path => $action) {
                 if (is_numeric($action))
                     $action = $route->arg[0];
@@ -163,27 +166,32 @@
          * This can also be used for grabbing a Post from a given URL.
          *
          * Parameters:
-         *     $route - The route to respond to.
-         *     $url - If this argument is passed, it will attempt to grab a post from a given URL.
-         *            If a post is found by that URL, it will be returned.
-         *     $return_post - Return a Post?
+         *     $route - The route object to respond to.
+         *     $request - The request URI to parse.
+         *     $return_post - Return a post instead of responding to the route?
          */
         public function post_from_url($route, $request, $return_post = false) {
             $config = Config::current();
-            $post_url_parts = preg_split("!(\([^)]+\))!", $config->post_url, null, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-            $url_regex = "";
+
+            $post_url_regex = "";
             $url_parameters = array();
+            $post_url_parts = preg_split("!(\([^)]+\))!",
+                                         $config->post_url,
+                                         null,
+                                         PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+
             Trigger::current()->filter(Post::$url_attrs, "url_code");
 
             foreach ($post_url_parts as $part)
                 if (isset(Post::$url_attrs[$part])) {
-                    $url_regex .= Post::$url_attrs[$part];
+                    $post_url_regex .= Post::$url_attrs[$part];
                     $url_parameters[] = trim($part, "()");
                 } else
-                    $url_regex .= preg_quote($part, "/");
+                    $post_url_regex .= preg_quote($part, "/");
 
-            if (preg_match("/^$url_regex/", ltrim($request, "/"), $matches)) {
+            if (preg_match("/^$post_url_regex/", ltrim($request, "/"), $matches)) {
                 $post_url_attrs = array();
+
                 for ($i = 0; $i < count($url_parameters); $i++)
                     $post_url_attrs[$url_parameters[$i]] = urldecode($matches[$i + 1]);
 
@@ -333,7 +341,7 @@
 
             if ($config->clean_urls and
                 substr_count($_SERVER['REQUEST_URI'], "?") and
-                !substr_count($_SERVER['REQUEST_URI'], "%2F")) # Searches with / and clean URLs = server 404
+                !substr_count($_SERVER['REQUEST_URI'], "%2F")) # Searches with / and clean URLs = server 404.
                 redirect("search/".urlencode($_GET['query'])."/");
 
             if (empty($_GET['query']))
@@ -433,7 +441,7 @@
                         if ($page->url == end($urls)) # Loop until we reach the last one.
                             break;
                 } else
-                    return false; # A "link in the chain" is broken
+                    return false; # A "link in the chain" is broken.
             } else
                 $page = new Page(array("url" => $_GET['url']));
 
@@ -453,7 +461,11 @@
          * Views a post by its static ID.
          */
         public function id() {
-            $post = new Post($_GET['id']);
+            $post = new Post(fallback($_GET['id']));
+
+            if ($post->no_results)
+                return false;
+
             redirect($post->url());
         }
 
@@ -479,8 +491,8 @@
                 if (!$check->no_results)
                     Flash::warning(__("That username is already in use."));
 
-                if (empty($_POST['password1']))
-                    Flash::warning(__("Password cannot be blank."));
+                if (empty($_POST['password1']) or empty($_POST['password2']))
+                    Flash::warning(__("Passwords cannot be blank."));
                 elseif ($_POST['password1'] != $_POST['password2'])
                     Flash::warning(__("Passwords do not match."));
 
@@ -504,7 +516,8 @@
 
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
-                                                     "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                                     "link"  => $config->url.
+                                                                "/?action=activate&login=".urlencode($user->login).
                                                                 "&token=".token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
@@ -529,12 +542,12 @@
          */
         public function activate() {
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/");
+                Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
             if (empty($_GET['token']))
                 error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
-            $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
+            $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
             if ($user->no_results)
                 show_404(__("Unknown User"), __("That username isn't in our database."));
@@ -558,12 +571,12 @@
          */
         public function reset() {
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/");
+                Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
             if (empty($_GET['token']))
                 error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
 
-            $user = new User(array("login" => strip_tags(unfix($_GET['login']))));
+            $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
             if ($user->no_results)
                 show_404(__("Unknown User"), __("That username isn't in our database."));
@@ -615,13 +628,8 @@
                     $_SESSION['user_id'] = $user->id;
                     $_SESSION['cookies_notified'] = true;
 
-                    if (!isset($redirect)) {
-                        $redirect = oneof(@$_SESSION['redirect_to'], "/");
-                        unset($_SESSION['redirect_to']);
-                    }
-
                     Trigger::current()->call("user_logged_in", $user);
-                    Flash::notice(__("Logged in."), $redirect);
+                    Flash::notice(__("Logged in."), oneof(@$_SESSION['redirect_to'], "/"));
                 }
             }
 
@@ -636,13 +644,10 @@
             if (!logged_in())
                 Flash::notice(__("You aren't logged in."), "/");
 
-            $cookies_notified = !empty($_SESSION['cookies_notified']);
-
             session_destroy();
             session();
 
-            $_SESSION['cookies_notified'] = $cookies_notified;
-
+            $_SESSION['cookies_notified'] = true;
             Flash::notice(__("Logged out."), "/");
         }
 
@@ -651,16 +656,17 @@
          * Updates the current user when the form is submitted.
          */
         public function controls() {
-            if (!logged_in()) {
-                $_SESSION['redirect_to'] = "controls";
+            $_SESSION['redirect_to'] = "controls"; # They'll come here after login if necessary.
+
+            if (!logged_in())
                 Flash::notice(__("You must be logged in to access user controls."), "login");
-            }
 
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
 
-                if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
-                    Flash::warning(__("Passwords do not match."));
+                if (!empty($_POST['new_password1']))
+                    if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
+                        Flash::warning(__("Passwords do not match."));
 
                 if (empty($_POST['email']))
                     Flash::warning(__("Email address cannot be blank."));
@@ -674,8 +680,7 @@
                     $_POST['website'] = add_scheme($_POST['website']);
 
                 if (!Flash::exists("warning")) {
-                    $password = (!empty($_POST['new_password1']) and $_POST['new_password1'] == $_POST['new_password2']) ?
-                        User::hashPassword($_POST['new_password1']) : $visitor->password ;
+                    $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $visitor->password ;
 
                     $visitor->update($visitor->login,
                                      $password,
@@ -697,7 +702,7 @@
          */
         public function lost_password() {
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/");
+                Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
             $config = Config::current();
 
@@ -705,12 +710,13 @@
                 Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
 
             if (!empty($_POST)) {
-                $user = new User(array("login" => $_POST['login']));
+                $user = new User(array("login" => fallback($_POST['login'])));
 
                 if (!$user->no_results)
                     correspond("reset", array("login" => $user->login,
                                               "to"    => $user->email,
-                                              "link"  => $config->url."/?action=reset&login=".fix($user->login).
+                                              "link"  => $config->url.
+                                                         "/?action=reset&login=".urlencode($user->login).
                                                          "&token=".token(array($user->login, $user->email))));
 
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
@@ -835,7 +841,9 @@
                     if ($theme->file_exists($try))
                         return $this->display($try, $context, $title);
 
-                error(__("Twig Error"), __("No files exist in the supplied array of fallbacks."), debug_backtrace());
+                error(__("Twig Error"),
+                      __("No template files exist in the supplied array of fallbacks."),
+                      debug_backtrace());
             }
 
             $this->displayed = true;
@@ -849,39 +857,34 @@
                     return $this->feed($context["posts"]);
             }
 
-            $this->context = array_merge($context, $this->context);
-
-            $theme->title = $title;
-
-            $this->context["ip"]           = $_SERVER["REMOTE_ADDR"];
-            $this->context["DIR"]          = DIR;
-            $this->context["theme"]        = $theme;
-            $this->context["flash"]        = Flash::current();
-            $this->context["trigger"]      = $trigger;
-            $this->context["modules"]      = Modules::$instances;
-            $this->context["feathers"]     = Feathers::$instances;
-            $this->context["title"]        = $title;
-            $this->context["site"]         = $config;
-            $this->context["visitor"]      = Visitor::current();
-            $this->context["route"]        = Route::current();
-            $this->context["version"]      = CHYRP_VERSION;
-            $this->context["codename"]     = CHYRP_CODENAME;
-            $this->context["now"]          = time();
-            $this->context["debug"]        = DEBUG;
-            $this->context["POST"]         = $_POST;
-            $this->context["GET"]          = $_GET;
-            $this->context["sql_queries"] =& SQL::current()->queries;
-            $this->context["captcha"]      = generate_captcha();
-            $this->context["sql_debug"]   =& SQL::current()->debug;
-
+            $this->context                       = array_merge($context, $this->context);
+            $this->context["ip"]                 = $_SERVER["REMOTE_ADDR"];
+            $this->context["DIR"]                = DIR;
+            $this->context["theme"]              = $theme;
+            $this->context["flash"]              = Flash::current();
+            $this->context["trigger"]            = $trigger;
+            $this->context["modules"]            = Modules::$instances;
+            $this->context["feathers"]           = Feathers::$instances;
+            $this->context["title"]              = $theme->title = $title;
+            $this->context["site"]               = $config;
+            $this->context["visitor"]            = Visitor::current();
+            $this->context["route"]              = Route::current();
+            $this->context["version"]            = CHYRP_VERSION;
+            $this->context["codename"]           = CHYRP_CODENAME;
+            $this->context["now"]                = time();
+            $this->context["debug"]              = DEBUG;
+            $this->context["POST"]               = $_POST;
+            $this->context["GET"]                = $_GET;
+            $this->context["captcha"]            = generate_captcha();
+            $this->context["sql_queries"]        =& SQL::current()->queries;
+            $this->context["sql_debug"]          =& SQL::current()->debug;
             $this->context["visitor"]->logged_in = logged_in();
 
-            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
+            $trigger->filter($this->context, array("main_context",
+                                                   "main_context_".str_replace(DIR, "_", $template)));
 
-            if ($config->cookies_notification and empty($_SESSION['cookies_notified'])) {
-                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
-                $_SESSION['cookies_notified'] = true;
-            }
+            if ($config->cookies_notification and empty($_SESSION['cookies_notified']))
+                $theme->cookies_notification();
 
             try {
                 return $this->twig->display($template.".twig", $this->context);

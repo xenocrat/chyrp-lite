@@ -47,8 +47,8 @@
         public function pingback_ping($args) {
             $config     = Config::current();
             $trigger    = Trigger::current();
-            $source     = add_scheme($args[0]);
-            $target     = add_scheme($args[1]);
+            $source     = add_scheme(str_replace("&amp;", "&", $args[0]));
+            $target     = add_scheme(str_replace("&amp;", "&", $args[1]));
             $chyrp_host = str_replace(array("http://www.",
                                             "http://",
                                             "https://www.",
@@ -75,7 +75,7 @@
                                                                              "/", $target),
                                                                  true);
 
-            if (!$post)
+            if ($post->no_results)
                 return new IXR_Error(33, __("We have not published at that URL."));
 
             # Grab the page that linked here.
@@ -105,10 +105,10 @@
 
             # Search the page for our link.
             if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
-                $url = str_replace("&amp;", "&", preg_quote($target, "/"));
+                $url = preg_quote(str_replace("&", "&amp;", $target), "/");
 
                 if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
-                    $url = str_replace("&amp;", "&#038;", preg_quote($target, "/"));
+                    $url = preg_quote(str_replace("&", "&#038;", $target), "/");
 
                     if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context))
                         return new IXR_Error(17, __("Your page does not link to our page."));
@@ -223,7 +223,7 @@
             if (trim($body) === '')
                 return new IXR_Error(500, __("Body can't be blank."));
 
-            $clean = sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']));
+            $clean = sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 80);
             $url = Post::check_url($clean);
 
             $_POST['user_id'] = $user->id;
@@ -300,7 +300,7 @@
                           null,
                           $status,
                           null,
-                          sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title'])),
+                          sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 80),
                           oneof($this->convertFromDateCreated($args[3]), $post->created_at));
 
             $trigger->call('metaWeblog_editPost', $args[3], $post);

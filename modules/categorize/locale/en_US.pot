@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-10 11:42+0000\n"
+"POT-Creation-Date: 2016-07-30 18:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -83,7 +83,7 @@ msgstr ""
 
 #: modules/categorize/admin/pages/manage_category.twig:3
 #: modules/categorize/admin/pages/manage_category.twig:6
-#: modules/categorize/categorize.php:13
+#: modules/categorize/categorize.php:14
 msgid "Manage Categories"
 msgstr ""
 
@@ -100,90 +100,90 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: modules/categorize/categorize.php:69
-#: modules/categorize/categorize.php:97
+#: modules/categorize/categorize.php:70
+#: modules/categorize/categorize.php:98
 msgid "Category"
 msgstr ""
 
-#: modules/categorize/categorize.php:82
+#: modules/categorize/categorize.php:83
 msgid "[None]"
 msgstr ""
 
-#: modules/categorize/categorize.php:124
+#: modules/categorize/categorize.php:125
 msgid "You did not specify a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:125
-#: modules/categorize/categorize.php:132
-#: modules/categorize/categorize.php:147
+#: modules/categorize/categorize.php:126
+#: modules/categorize/categorize.php:133
+#: modules/categorize/categorize.php:148
 msgid "Invalid Category"
 msgstr ""
 
-#: modules/categorize/categorize.php:131
+#: modules/categorize/categorize.php:132
 msgid "The category you specified was not found."
 msgstr ""
 
-#: modules/categorize/categorize.php:146
+#: modules/categorize/categorize.php:147
 msgid "There are no posts in the category you specified."
 msgstr ""
 
-#: modules/categorize/categorize.php:158
+#: modules/categorize/categorize.php:159
 #, php-format
 msgid "Posts in category %s"
 msgstr ""
 
-#: modules/categorize/categorize.php:165
+#: modules/categorize/categorize.php:166
 msgid "Categories"
 msgstr ""
 
-#: modules/categorize/categorize.php:195
-#: modules/categorize/categorize.php:231
+#: modules/categorize/categorize.php:196
+#: modules/categorize/categorize.php:232
 msgid "No Name Specified"
 msgstr ""
 
-#: modules/categorize/categorize.php:195
+#: modules/categorize/categorize.php:196
 msgid "A name is required to add a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:201
+#: modules/categorize/categorize.php:202
 msgid "Category added."
 msgstr ""
 
-#: modules/categorize/categorize.php:206
-#: modules/categorize/categorize.php:222
-#: modules/categorize/categorize.php:260
+#: modules/categorize/categorize.php:207
+#: modules/categorize/categorize.php:223
+#: modules/categorize/categorize.php:261
 msgid "You do not have sufficient privileges to manage categories."
 msgstr ""
 
-#: modules/categorize/categorize.php:209
+#: modules/categorize/categorize.php:210
 msgid "An ID is required to edit a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:214
-#: modules/categorize/categorize.php:236
-#: modules/categorize/categorize.php:253
-#: modules/categorize/categorize.php:274
+#: modules/categorize/categorize.php:215
+#: modules/categorize/categorize.php:237
+#: modules/categorize/categorize.php:254
+#: modules/categorize/categorize.php:275
 msgid "Category not found."
 msgstr ""
 
-#: modules/categorize/categorize.php:228
+#: modules/categorize/categorize.php:229
 msgid "An ID is required to update a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:231
+#: modules/categorize/categorize.php:232
 msgid "A name is required to update a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:243
+#: modules/categorize/categorize.php:244
 msgid "Category updated."
 msgstr ""
 
-#: modules/categorize/categorize.php:248
-#: modules/categorize/categorize.php:266
+#: modules/categorize/categorize.php:249
+#: modules/categorize/categorize.php:267
 msgid "An ID is required to delete a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:277
+#: modules/categorize/categorize.php:278
 msgid "Category deleted."
 msgstr ""
 

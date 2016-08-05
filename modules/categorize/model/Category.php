@@ -1,4 +1,11 @@
 <?php
+    /**
+     * Class: Category
+     * The model for the Categorize SQL table.
+     *
+     * See Also:
+     *     <Model>
+     */
     class Category extends Model {
         static function getCategory($id = int) {
             $query = SQL::current()->select("categorize",
@@ -71,7 +78,7 @@
                                          "clean" => ":clean",
                                          "show_on_home" => ":show_on_home"),
                                    array(":name" => $name,
-                                         ":clean" => sanitize($clean),
+                                         ":clean" => sanitize($clean, true, true),
                                          ":show_on_home" => $show_on_home));
         }
 
@@ -83,7 +90,7 @@
                                          "show_on_home" => ":show_on_home"),
                                    array(":id" => $id,
                                          ":name" => $name,
-                                         ":clean" => sanitize($clean),
+                                         ":clean" => sanitize($clean, true, true),
                                          ":show_on_home" => $show_on_home));
         }
 
@@ -98,7 +105,7 @@
                                    array(":id" => $id));
         }
 
-        static function installCategorize() {
+        static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __categorize (
                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                       name  VARCHAR(128) NOT NULL,
@@ -107,8 +114,10 @@
                                   ) DEFAULT CHARSET=UTF8");
         }
 
-        static function uninstallCategorize() {
-            SQL::current()->query("DROP TABLE __categorize");
-            SQL::current()->delete("post_attributes", "name = 'category_id'");
+        static function uninstall() {
+            $sql = SQL::current();
+
+            $sql->query("DROP TABLE __categorize");
+            $sql->delete("post_attributes", "name = 'category_id'");
         }
     }

@@ -18,12 +18,12 @@
 
         public function submit() {
             if (empty($_POST['quote']))
-                error(__("Error"), __("Quote can't be empty.", "quote"));
+                error(__("Error"), __("Quote can't be empty.", "quote"), null, 422);
+
+            fallback($_POST['slug'], $_POST['quote']);
 
             return Post::add(array("quote" => $_POST['quote'],
-                                   "source" => $_POST['source']),
-                             $_POST['slug'],
-                             Post::check_url($_POST['slug']));
+                                   "source" => $_POST['source']));
         }
 
         public function update($post) {

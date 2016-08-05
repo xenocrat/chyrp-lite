@@ -5,7 +5,7 @@ var ChyrpTags = {
     },
     scan: function(e) {
         $(e.target).siblings("span.tags_select").children("a.tag").each(function(){
-            regexp = new RegExp("(, ?|^)" + $(this).text() + "(, ?|$)", "g");
+            var regexp = new RegExp("(, ?|^)" + $(this).text() + "(, ?|$)", "g");
 
             if ($(e.target).val().match(regexp))
                 $(this).addClass("tag_added");
@@ -15,11 +15,12 @@ var ChyrpTags = {
     },
     add: function(e) {
         e.preventDefault();
-        var name = $(e.target).text(), tags = $(e.target).parent().siblings("input[name='tags']");
+        var name = $(e.target).text();
+        var tags = $(e.target).parent().siblings("input[name='tags']");
+        var regexp = new RegExp("(, |^)" + escapeRegExp(name) + "(, |$)", "g");
 
-        if ($(tags).val().match("(, |^)" + name + "(, |$)")) {
-            regexp = new RegExp("(, |^)" + name + "(, |$)", "g");
-            $(tags).val($(tags).val().replace(regexp, function(match, before, after) {
+        if (regexp.test(tags.val())) {
+            tags.val(tags.val().replace(regexp, function(match, before, after) {
                 if (before == ", " && after == ", ")
                     return ", ";
                 else
@@ -27,10 +28,10 @@ var ChyrpTags = {
             }));
             $(e.target).removeClass("tag_added");
         } else {
-            if ($(tags).val() == "")
-                $(tags).val(name);
+            if (tags.val() == "")
+                tags.val(name);
             else
-                $(tags).val($(tags).val().replace(/(, ?)?$/, ", " + name));
+                tags.val(tags.val().replace(/(, ?)?$/, ", " + name));
 
             $(e.target).addClass("tag_added");
         }

@@ -48,14 +48,14 @@
 
 @font-face {
                                                 font-family: 'Hack webfont';
-                                                src: url('../../fonts/Hack-Oblique.woff') format('woff');
+                                                src: url('../../fonts/Hack-Italic.woff') format('woff');
                                                 font-weight: normal;
                                                 font-style: italic;
 }
 
 @font-face {
                                                 font-family: 'Hack webfont';
-                                                src: url('../../fonts/Hack-BoldOblique.woff') format('woff');
+                                                src: url('../../fonts/Hack-BoldItalic.woff') format('woff');
                                                 font-weight: bold;
                                                 font-style: italic;
 }
@@ -329,7 +329,7 @@ li.feather div.controls button {                float: right }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {                text-decoration: none }
 #content ul.extend > li p:last-child {          margin-bottom: 0em }
-#content ul.themes > li {                       min-width: 288px;
+#content ul.themes > li {                       min-width: 306px;
                                                 width: 32.33%;
                                                 margin-right: 1%;
                                                 margin-top: 0em;
@@ -635,6 +635,8 @@ a.tag {                                         position: relative;
                                                 background-color: #fffecd }
 span.tags_select a.tag_added {                  top: 2px;
                                                 border-color: #ccb68f }
+code.yay {                                      background-color: #ebfae4;
+                                                border: 1px solid #bdd6b5 }
 
 /**
  *---------------------------------------------

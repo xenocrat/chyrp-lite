@@ -150,27 +150,26 @@
          * Function: add
          * Adds a post to the database.
          *
-         * Most of the function arguments will fall back to various POST values.
-         *
-         * Calls the @add_post@ trigger with the inserted post and extra options.
-         *
-         * Note: The default parameter values are empty here so that the fallbacks work properly.
+         * Calls the @add_post@ trigger with the new <Post> and extra options.
          *
          * Parameters:
          *     $values - The data to insert.
-         *     $clean - The sanitized URL (or empty to default to "(feather).(new post's id)").
-         *     $url - The unique URL (or empty to default to "(feather).(new post's id)").
+         *     $clean - The slug for this post.
+         *     $url - The unique sanitised URL (created from $clean by default).
          *     $feather - The feather to post as.
          *     $user - <User> to set as the post's author.
          *     $pinned - Pin the post?
          *     $status - Post status
          *     $created_at - New @created_at@ timestamp for the post.
-         *     $updated_at - New @updated_at@ timestamp for the post, or @false@ to not updated it.
+         *     $updated_at - New @updated_at@ timestamp for the post.
          *     $pingbacks - Send pingbacks?
          *     $options - Options for the post.
          *
          * Returns:
          *     The newly created <Post>.
+         *
+         * Notes:
+         *     The caller is responsible for validating all supplied values.
          *
          * See Also:
          *     <update>
@@ -188,23 +187,22 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
+            fallback($clean,        oneof(sanitize(@$_POST['slug'], true, true, 80), slug(8)));
+            fallback($url,          self::check_url($clean));
+            fallback($feather,      oneof(@$_POST['feather'], "text"));
+            fallback($user_id,      Visitor::current()->id);
+            fallback($pinned,       (int) !empty($_POST['pinned']));
+            fallback($status,       (isset($_POST['draft'])) ?
+                                        "draft" :
+                                        oneof(@$_POST['status'], "public"));
+            fallback($created_at,   (!empty($_POST['created_at'])) ?
+                                        datetime($_POST['created_at']) :
+                                        datetime());
+            fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
+            fallback($options,      oneof(@$_POST['option'], array()));
+
             $sql = SQL::current();
-            $visitor = Visitor::current();
             $trigger = Trigger::current();
-
-            fallback($feather,    oneof(@$_POST['feather'], ""));
-            fallback($user_id,    oneof(@$_POST['user_id'], Visitor::current()->id));
-            fallback($pinned,     (int) !empty($_POST['pinned']));
-            fallback($status,     (isset($_POST['draft'])) ? "draft" : oneof(@$_POST['status'], "public"));
-            fallback($created_at, (!empty($_POST['created_at']) and
-                                  (!isset($_POST['original_time']) or $_POST['created_at'] != $_POST['original_time'])) ?
-                                      datetime($_POST['created_at']) :
-                                      datetime());
-            fallback($updated_at, oneof(@$_POST['updated_at'], $created_at));
-            fallback($options,    oneof(@$_POST['option'], array()));
-
-            if (isset($clean) and !isset($url))
-                $url = self::check_url($clean);
 
             $new_values = array("feather"    => $feather,
                                 "user_id"    => $user_id,
@@ -220,12 +218,6 @@
             $sql->insert("posts", $new_values);
 
             $id = $sql->latest("posts");
-
-            if (empty($clean) or empty($url))
-                $sql->update("posts",
-                             array("id"    => $id),
-                             array("clean" => $feather.".".$id,
-                                   "url"   => $feather.".".$id));
 
             # Insert the post attributes.
             foreach (array_merge($values, $options) as $name => $value)
@@ -252,18 +244,21 @@
          * Function: update
          * Updates a post with the given attributes.
          *
-         * Most of the function arguments will fall back to various POST values.
+         * Calls the @update_post@ trigger with the updated <Post>, original <Post>, and extra options.
          *
          * Parameters:
          *     $values - An array of data to set for the post.
          *     $user - <User> to set as the post's author.
          *     $pinned - Pin the post?
          *     $status - Post status
-         *     $clean - A new clean URL for the post.
-         *     $url - A new URL for the post.
+         *     $clean - A new slug for the post.
+         *     $url - A new unique URL for the post (created from $clean by default).
          *     $created_at - New @created_at@ timestamp for the post.
-         *     $updated_at - New @updated_at@ timestamp for the post, or @false@ to not updated it.
+         *     $updated_at - New @updated_at@ timestamp for the post.
          *     $options - Options for the post.
+         *
+         * Notes:
+         *     The caller is responsible for validating all supplied values.
          *
          * See Also:
          *     <add>
@@ -280,29 +275,32 @@
             if ($this->no_results)
                 return false;
 
-            $trigger = Trigger::current();
-
+            $old = clone $this;
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($values,     array_combine($this->attribute_names, $this->attribute_values));
-            fallback($user_id,    oneof(@$_POST['user_id'], $this->user_id));
-            fallback($pinned,     (int) !empty($_POST['pinned']));
-            fallback($status,     (isset($_POST['draft'])) ? "draft" : oneof(@$_POST['status'], $this->status));
-            fallback($clean,      $this->clean);
-            fallback($url,        oneof(@$_POST['slug'], $this->feather.".".$this->id));
-            fallback($created_at, (!empty($_POST['created_at'])) ? datetime($_POST['created_at']) : $this->created_at);
-            fallback($updated_at, ($updated_at === false ?
-                                      $this->updated_at :
-                                      oneof($updated_at, @$_POST['updated_at'], datetime())));
-            fallback($options,    oneof(@$_POST['option'], array()));
+            fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
+            fallback($user_id,      $this->user_id);
+            fallback($pinned,       (int) !empty($_POST['pinned']));
+            fallback($status,       (isset($_POST['draft'])) ?
+                                        "draft" :
+                                        oneof(@$_POST['status'], $this->status));
+            fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
+                                        oneof(sanitize($_POST['slug'], true, true, 80), slug(8)) :
+                                        $this->clean);
+            fallback($url,          ($clean != $this->clean) ?
+                                        self::check_url($clean) :
+                                        $this->url);
+            fallback($created_at,   (!empty($_POST['created_at'])) ?
+                                        datetime($_POST['created_at']) :
+                                        $this->created_at);
+            fallback($updated_at,   datetime());
+            fallback($options,      oneof(@$_POST['option'], array()));
 
-            if ($url != $this->url) # If they edited the slug, the clean URL should change too.
-                $clean = $url;
-
-            $old = clone $this;
+            $sql = SQL::current();
+            $trigger = Trigger::current();
 
             # Update all values of this post.
-            foreach (array("user_id", "pinned", "status", "url", "created_at", "updated_at") as $attr)
+            foreach (array("user_id", "pinned", "status", "clean", "url", "created_at", "updated_at") as $attr)
                 $this->$attr = $$attr;
 
             $new_values = array("pinned"     => $pinned,
@@ -314,7 +312,6 @@
 
             $trigger->filter($new_values, "before_update_post");
 
-            $sql = SQL::current();
             $sql->update("posts",
                          array("id" => $this->id),
                          $new_values);
@@ -463,7 +460,8 @@
          *     $clean - The clean URL to check.
          *
          * Returns:
-         *     The unique version of the passed clean URL. If it's not used, it's the same as $clean. If it is, a number is appended.
+         *     The unique version of the passed clean URL.
+         *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
         static function check_url($clean) {
             $count = SQL::current()->count("posts", array("clean" => $clean));
@@ -504,10 +502,11 @@
 
         /**
          * Function: title_from_excerpt
-         * Generates an acceptable Title from the post's excerpt.
+         * Generates an acceptable title from the post's excerpt.
          *
          * Returns:
-         *     The post's excerpt. filtered -> first line -> ftags stripped -> truncated to 75 characters -> normalized.
+         *     The post's excerpt:
+         *     filtered -> first line -> ftags stripped -> truncated to 75 characters -> normalized.
          */
         public function title_from_excerpt() {
             if ($this->no_results)
@@ -636,19 +635,24 @@
 
             $trigger->filter($this, "filter_post");
 
-            if (isset(Feathers::$custom_filters[$class])) # Run through feather-specified filters, first.
+            # Feather-specified filters.
+            if (isset(Feathers::$custom_filters[$class]))
                 foreach (Feathers::$custom_filters[$class] as $custom_filter) {
                     $varname = $custom_filter["field"]."_unfiltered";
+
                     if (!isset($this->$varname))
                         $this->$varname = @$this->$custom_filter["field"];
 
-                    $this->$custom_filter["field"] = call_user_func_array(array(Feathers::$instances[$this->feather], $custom_filter["name"]),
+                    $this->$custom_filter["field"] = call_user_func_array(array(Feathers::$instances[$this->feather],
+                                                                                $custom_filter["name"]),
                                                                           array($this->$custom_filter["field"], $this));
                 }
 
-            if (isset(Feathers::$filters[$class])) # Now actually filter it.
+            # Trigger filters.
+            if (isset(Feathers::$filters[$class]))
                 foreach (Feathers::$filters[$class] as $filter) {
                     $varname = $filter["field"]."_unfiltered";
+
                     if (!isset($this->$varname))
                         $this->$varname = @$this->$filter["field"];
 
@@ -699,7 +703,8 @@
          * Returns a SQL query "chunk" for the "status" column permissions of the current user.
          *
          * Parameters:
-         *     $start - An array of additional statuses to allow; "registered_only", "private" and "scheduled" are added deterministically.
+         *     $start - An array of additional statuses to allow;
+         *              "registered_only", "private" and "scheduled" are added deterministically.
          */
         static function statuses($start = array()) {
             $visitor = Visitor::current();

@@ -1,5 +1,5 @@
 <?php
-    require_once "model".DIR."category.php";
+    require_once "model".DIR."Category.php";
 
     class Categorize extends Modules {
         public function __init() {
@@ -9,14 +9,15 @@
         }
 
         static function __install() {
-            Category::installCategorize();                                      # Add this string to the .pot file:
-            Group::add_permission("manage_categorize", "Manage Categories");    # __("Manage Categories");
+            Category::install();
+
+            Group::add_permission("manage_categorize", "Manage Categories");
             Route::current()->add("category/(name)/", "category");
         }
 
         static function __uninstall($confirm) {
             if ($confirm)
-                Category::uninstallCategorize();
+                Category::uninstall();
 
             Group::remove_permission('manage_categorize');
             Route::current()->remove("category/(name)/");
@@ -155,7 +156,7 @@
 
             $main->display(array("pages".DIR."category", "pages".DIR."index"),
                            array("posts" => $posts, "category" => $category->name),
-                           _f("Posts in category %s", fix($_GET['name']), "categorize"));
+                           _f("Posts in category %s", fix($category->name), "categorize"));
         }
 
         static function manage_nav($navs) {

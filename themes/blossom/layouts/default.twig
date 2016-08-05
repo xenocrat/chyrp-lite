@@ -2,7 +2,7 @@
 <html lang="{{ site.locale | split('_') | first }}">
 <head>
 <meta charset="UTF-8">
-<title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? ": " ~ site.description : "" }}{{ title ? " &raquo; " ~ title | striptags : "" }}{% endblock %}</title>
+<title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? ": " ~ site.description : "" }}{{ title ? " | " ~ title | striptags : "" }}{% endblock %}</title>
 <meta name="description" content="{{ site.description }}">
 <meta name="generator" content="Chyrp Lite">
 <meta name="viewport" content="initial-scale = 1.0">
@@ -124,9 +124,9 @@
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
 {% if debug and visitor.group.name == "Admin" %}
 <!--
-{% for debug in sql_debug %}
-{{ debug.query | replace("\t", "    ") | fix }}
-{{ "Called from %s on line %d at %s seconds." | translate | format(debug.file, debug.line, debug.time) }}
+{% for caller in sql_debug %}
+{{ caller.query | replace("\t", "    ") | fix }}
+{{ "Called from %s on line %d at %s seconds." | translate | format(caller.file, caller.line, caller.time) }}
 {% endfor %}
 -->
 {% endif %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-10 11:42+0000\n"
+"POT-Creation-Date: 2016-07-30 18:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -42,11 +42,11 @@ msgstr ""
 msgid "Caption"
 msgstr ""
 
-#: feathers/uploader/uploader.php:50
+#: feathers/uploader/uploader.php:53
 msgid "You did not select any files to upload."
 msgstr ""
 
-#: feathers/uploader/uploader.php:192
+#: feathers/uploader/uploader.php:193
 msgid "Source"
 msgstr ""
 

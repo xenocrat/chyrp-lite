@@ -36,6 +36,10 @@ $(function() {
     // Require email correspondence for activation emails.
     if (Route.action == "user_settings")
         toggle_correspondence();
+
+    // Make the Post View URL syntax clickable.
+    if (Route.action == "route_settings")
+        toggle_syntax();
 });
 function toggle_all() {
     var all_checked = true;
@@ -136,9 +140,44 @@ function toggle_correspondence() {
             $("#email_correspondence").prop("checked", true);
     });
 }
+function toggle_syntax() {
+    $("form#route_settings code.syntax").on("click", function(e) {
+        var name = $(e.target).text();
+        var post_url = $("form#route_settings input[name='post_url']");
+        var regexp = new RegExp("(^|\\/)" + escapeRegExp(name) + "([\\/]|$)", "g");
+
+        if (regexp.test(post_url.val())) {
+            post_url.val(post_url.val().replace(regexp, function(match, before, after) {
+                if (before == "/" && after == "/")
+                    return "/";
+                else
+                    return "";
+            }));
+            $(e.target).removeClass("yay");
+        } else {
+            if (post_url.val() == "")
+                post_url.val(name);
+            else
+                post_url.val(post_url.val().replace(/(\/?)?$/, "\/" + name));
+
+            $(e.target).addClass("yay");
+        }
+    }).css("cursor", "pointer");
+
+    $("form#route_settings input[name='post_url']").on("keyup", function(e) {
+        $("form#route_settings code.syntax").each(function(){
+            regexp = new RegExp("(/?|^)" + $(this).text() + "(/?|$)", "g");
+
+            if ($(e.target).val().match(regexp))
+                $(this).addClass("yay");
+            else
+                $(this).removeClass("yay");
+        });
+    }).trigger("keyup");
+}
 function validate_slug() {
     $("input[name='slug']").keyup(function(e) {
-        if (/^([a-zA-Z0-9\-\._:]*)$/.test($(this).val()))
+        if (/^([a-z0-9\-]*)$/.test($(this).val()))
             $(this).removeClass("error");
         else
             $(this).addClass("error");
@@ -468,10 +507,10 @@ var Extend = {
         }
 
         Extend.extension.name = $(e.target).parents("li").attr("id").replace(Extend.extension.type + "_", "");
-        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html().replace(/<[^>]+>/g, "");
+        Extend.confirmation = $('label[for="confirm_' + Extend.extension.name + '"]').html();
 
         if (!!Extend.confirmation && Extend.action == "disable")
-            Extend.confirmed = (confirm(Extend.confirmation)) ? 1 : 0 ;
+            Extend.confirmed = (confirm(Extend.confirmation.replace(/<[^>]+>/g, ""))) ? 1 : 0 ;
 
         if (Site.key == "") {
             Extend.panic('<?php echo __("The extension cannot be toggled because your web browser did not send proper credentials.", "theme"); ?>');

@@ -42,14 +42,14 @@
 
 @font-face {
                                                 font-family: 'Hack webfont';
-                                                src: url('../../../fonts/Hack-Oblique.woff') format('woff');
+                                                src: url('../../../fonts/Hack-Italic.woff') format('woff');
                                                 font-weight: normal;
                                                 font-style: italic;
 }
 
 @font-face {
                                                 font-family: 'Hack webfont';
-                                                src: url('../../../fonts/Hack-BoldOblique.woff') format('woff');
+                                                src: url('../../../fonts/Hack-BoldItalic.woff') format('woff');
                                                 font-weight: bold;
                                                 font-style: italic;
 }
@@ -87,8 +87,10 @@ h3 {                                            font-size: 1em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
 h3.flash {                                      margin: 0em }
-h3.filter {                                     padding: 4rem 0em 0rem 2rem;
-                                                margin-bottom: 0em }
+h3.filter {                                     box-sizing: border-box;
+                                                max-width: 1024px;
+                                                margin: 0rem auto;
+                                                padding: 4rem 0rem 0rem 2rem }
 h3.archive {                                    margin-top: 1em;
                                                 clear: both }
 h4 {                                            font-size: 1em;
@@ -142,8 +144,8 @@ hr {                                            width: 100%;
                                                 clear: both;
                                                 border-top: 1px solid #c2bcb8;
                                                 margin: 2em 0em }
-hr:last-child, div.archive > hr {               margin: 0em;
-                                                visibility: hidden }
+hr.post {                                       margin: 0em }
+hr:last-child, hr.post:last-of-type, hr + hr {  display: none }
 ul {                                            list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
@@ -268,6 +270,8 @@ button {                                        font: inherit;
                                                 transition-duration: 250ms }
 label {                                         display: block;
                                                 margin-top: 1em }
+div.clear {                                     visibility: hidden;
+                                                clear: both }
 div#mast {                                      width: 100%;
                                                 background-color: #f5f4f0;
                                                 border-bottom: 1px solid #c2bcb8 }
@@ -279,20 +283,24 @@ div#mast_box {                                  box-sizing: border-box;
                                                 padding: 4em }
 div#main {                                      box-sizing: border-box;
                                                 width: 100%;
-                                                max-width: 1024px;
-                                                margin: 0em auto;
+                                                margin: 0em;
                                                 padding: 0em;
                                                 clear: both;
                                                 overflow: visible }
-div.prev {                                      margin: 4rem 0em 0rem 2rem }
+div.traversal {                                 box-sizing: border-box;
+                                                max-width: 1024px }
+div.prev {                                      padding-left: 2rem;
+                                                margin: 4rem auto 0rem auto }
 div.next {                                      text-align: right;
-                                                margin: 0rem 2em 0rem 0rem }
+                                                padding-right: 2rem;
+                                                margin: 0rem auto 0rem auto }
 div.flash {                                     box-sizing: border-box;
                                                 width: 100%;
                                                 text-align: center;
                                                 color: #ffffff;
                                                 background-color: #cc5252;
                                                 padding: 0.5em }
+div.flash + div.flash {                         border-top: 1px solid #ffffff }
 div.metadata {                                  font-weight: normal;
                                                 font-size: 0.75em;
                                                 font-style: italic;
@@ -307,7 +315,7 @@ div.comments_pagination {                       width: 100%;
                                                 clear: both;
                                                 padding-top: 2rem;
                                                 text-align: center }
-div.tags {                                      margin: 1.33em 0em 0em 0em;
+div.tags {                                      margin: 1rem 0rem 0rem 0rem;
                                                 font-size: 0.75em }
 div.doaction {                                  font-family: inherit;
                                                 line-height: 2;
@@ -320,25 +328,23 @@ div#main > article, div.standalone {            box-sizing: border-box;
                                                 display: block;
                                                 position: relative;
                                                 width: 100%;
+                                                max-width: 1024px;
                                                 clear: both;
-                                                margin: 0em;
+                                                margin: 0em auto;
                                                 padding: 4rem 4rem 0rem 4rem }
 div#main > article.commentary {                 padding: 0rem 4rem;
                                                 margin-top: 4rem;
                                                 overflow: hidden;
                                                 border-bottom: none }
-div#main > article.page {                       padding-bottom: 4rem }
-div.standalone {                                margin-bottom: 0rem;
-                                                padding-bottom: 4rem }
 div.tags.standalone {                           line-height: 2 }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
                                                 float: left;
-                                                width: 156px;
-                                                height: 156px;
+                                                width: 222px;
+                                                height: 222px;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
-                                                margin: 0em 0em 2.66em 1.33em;
+                                                margin: 0rem 0rem 2rem 1rem;
                                                 padding: 8px;
                                                 border: 1px solid #c2bcb8 }
 article > header {                              display: block;
@@ -559,19 +565,21 @@ img.gravatar {                                  position: absolute;
 
 @media screen and (max-width: 639px) {
     html {                                      font-size: 14px }
-    body {                                      margin-bottom: 3rem }
+    body {                                      margin-bottom: 2rem }
     blockquote {                                padding: 0em 1em }
     input, select {                             width: 100% }
     table {                                     box-sizing: border-box;
                                                 display: block }
     h1.banner {                                 margin-bottom: 2rem }
-    div#mast_box {                              padding: 3rem 1rem }
+    h3.filter {                                 padding-top: 2rem }
+    div#mast_box {                              padding: 2rem 1rem }
     ul.navigation li > a {                      display: inline-block;
                                                 margin: 0em 0.5em 2em 0.5em }
     div.search_box {                            margin-top: 0em }
     button#search_submit {                      display: none }
-    div#main > article, div.standalone,
-    div#main > article.commentary {             padding: 2rem 2rem 0rem 2rem }
+    div.prev {                                  margin-top: 2rem }
+    div#main > article, div.standalone {        padding: 2rem 2rem 0rem 2rem }
+    div#main > article.commentary {             padding: 0rem 2rem }
     div.metadata {                              padding-bottom: 2rem }
     ol.comments li {                            padding: 2rem }
     img.gravatar {                              position: static;
@@ -579,9 +587,6 @@ img.gravatar {                                  position: absolute;
                                                 height: 24px;
                                                 vertical-align: middle;
                                                 margin-right: 4px }
-}
-
-@media screen and (max-width: 459px) {
     ul.archive li {                             margin-left: 0em }
     ul.archive article.post.archive {           box-sizing: border-box;
                                                 width: 100%;
@@ -589,12 +594,10 @@ img.gravatar {                                  position: absolute;
     ul.archive article.post.archive img {       width: 100% }
 }
 
-@media screen and (min-width: 959px) {
+@media screen and (min-width: 1024px) {
     div#mast_box {                              text-align: left;
                                                 padding: 4em 8rem 4rem 8rem }
     div.search_box {                            display: inline-block }
-    div.prev {                                  margin: 4rem 0em 0rem 4rem }
-    div.next {                                  margin: 0rem 4em 0rem 0rem }
     div#main > article, div.standalone {        padding-left: 8rem;
                                                 padding-right: 8rem }
     div#main > article.commentary {             padding: 0rem 8rem }

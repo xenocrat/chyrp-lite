@@ -34,6 +34,9 @@
         }
 
         public function submit() {
+            if (empty($_POST['caption']))
+                error(__("Error"), __("Caption can't be blank."), null, 422);
+
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
 
@@ -52,13 +55,11 @@
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
-            fallback($_POST['slug'], sanitize($_POST['title']));
+            fallback($_POST['slug'], $_POST['title']);
 
             return Post::add(array("filenames" => self::filenames_serialize($filenames),
                                    "caption" => $_POST['caption'],
-                                   "title" => $_POST['title']),
-                             $_POST['slug'],
-                             Post::check_url($_POST['slug']));
+                                   "title" => $_POST['title']));
         }
 
         public function update($post) {

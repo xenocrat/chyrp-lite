@@ -56,7 +56,7 @@
 
         /**
          * Function: parse
-         * Determines the action.
+         * Route constructor calls this to determine the action based on user privileges.
          */
         public function parse($route) {
             $visitor = Visitor::current();
@@ -109,6 +109,8 @@
 
             Trigger::current()->filter($route->action, "admin_determine_action");
 
+            # Show a 403 if we can't determine an allowed action for the visitor;
+            # otherwise the action would fallback to "index" and fail with a 404.
             if (!isset($route->action))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view this area."));
         }
@@ -350,10 +352,14 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (empty($_POST['title']) and empty($_POST['slug']))
-                error(__("Error"), __("Title and slug cannot be blank."), null, 422);
+            if (empty($_POST['title']))
+                error(__("Error"), __("Title cannot be blank."), null, 422);
+
+            if (empty($_POST['body']))
+                error(__("Error"), __("Body cannot be blank."), null, 422);
 
             fallback($_POST['status'], "public");
+            fallback($_POST['slug'], $_POST['title']);
 
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
@@ -365,8 +371,7 @@
                               $_POST['parent_id'],
                               $public,
                               $listed,
-                              $list_order,
-                              (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
+                              $list_order);
 
             Flash::notice(__("Page created!"), $page->url());
         }
@@ -403,8 +408,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (empty($_POST['title']) and empty($_POST['slug']))
-                error(__("Error"), __("Title and slug cannot be blank."), null, 422);
+            if (empty($_POST['title']))
+                error(__("Error"), __("Title cannot be blank."), null, 422);
+
+            if (empty($_POST['body']))
+                error(__("Error"), __("Body cannot be blank."), null, 422);
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
@@ -426,9 +434,7 @@
                           $_POST['parent_id'],
                           $public,
                           $listed,
-                          $list_order,
-                          null,
-                          (!empty($_POST['slug']) ? $_POST['slug'] : sanitize($_POST['title'])));
+                          $list_order);
 
             Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
                           "/admin/?action=manage_pages");
@@ -550,8 +556,8 @@
             if (!$check->no_results)
                 error(__("Error"), __("That username is already in use."), null, 409);
 
-            if (empty($_POST['password1']))
-                error(__("Error"), __("Password cannot be blank."), null, 422);
+            if (empty($_POST['password1']) or empty($_POST['password2']))
+                error(__("Error"), __("Passwords cannot be blank."), null, 422);
             elseif ($_POST['password1'] != $_POST['password2'])
                 error(__("Error"), __("Passwords do not match."), null, 422);
             elseif (password_strength($_POST['password1']) < 100)
@@ -581,7 +587,8 @@
 
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
-                                             "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                             "link"  => $config->url.
+                                                        "/?action=activate&login=".urlencode($user->login).
                                                         "&token=".token(array($user->login, $user->email))));
 
                 Flash::notice(_f("User &#8220;%s&#8221; added and activation email sent.", $user->login), "/admin/?action=manage_users");
@@ -647,10 +654,11 @@
             if ($user->no_results)
                 show_404(__("Not Found"), __("User not found."));
 
-            if (!empty($_POST['new_password1']) and $_POST['new_password1'] != $_POST['new_password2'])
-                error(__("Error"), __("Passwords do not match."), null, 422);
-            elseif (!empty($_POST['new_password1']) and password_strength($_POST['new_password1']) < 100)
-                Flash::message(__("Please consider setting a stronger password for this user."));
+            if (!empty($_POST['new_password1']))
+                if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
+                    error(__("Error"), __("Passwords do not match."), null, 422);
+                elseif (password_strength($_POST['new_password1']) < 100)
+                    Flash::message(__("Please consider setting a stronger password for this user."));
 
             $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
 
@@ -672,13 +680,11 @@
                           $_POST['website'],
                           $_POST['group']);
 
-            if ($_POST['id'] == $visitor->id)
-                $_SESSION['password'] = $password;
-
             if (!$user->approved and $config->email_activation)
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
-                                             "link"  => $config->url."/?action=activate&login=".fix($user->login).
+                                             "link"  => $config->url.
+                                                        "/?action=activate&login=".urlencode($user->login).
                                                         "&token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User updated."), "/admin/?action=manage_users");
@@ -947,7 +953,7 @@
             $exports = array();
 
             if (isset($_POST['posts'])) {
-                list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "post_attributes");
+                list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
                 if (!empty($_GET['month']))
                     $where["created_at like"] = $_GET['month']."-%";
@@ -1344,7 +1350,7 @@
                     foreach ((array) $info["conflicts"] as $conflict)
                         if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
-                            $conflicting_modules[] = $conflict; # Shortlist of conflicting installed modules
+                            $conflicting_modules[] = $conflict; # List of conflicting installed modules.
 
                             if (in_array($conflict, $config->enabled_modules))
                                 if (!in_array("error", $classes[$folder]))
@@ -1360,7 +1366,7 @@
                     foreach ((array) $info["dependencies"] as $dependency) {
                         if (!file_exists(MODULES_DIR.DIR.$dependency.DIR.$dependency.".php")) {
                             if (!in_array("missing_dependency", $classes[$folder]))
-                                $classes[$folder][] = "missing_dependency"; # Dependency is not installed
+                                $classes[$folder][] = "missing_dependency"; # Dependency is not installed.
 
                             if (!in_array("error", $classes[$folder]))
                                 $classes[$folder][] = "error";
@@ -1893,7 +1899,7 @@
                 $route->remove("/");
 
             $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
-                         $config->set("post_url", $_POST['post_url']),
+                         $config->set("post_url", trim($_POST['post_url'], "/ ")."/"),
                          $config->set("enable_homepage", !empty($_POST['enable_homepage'])));
 
             if (!in_array(false, $set))
@@ -2052,16 +2058,12 @@
          *     $path - The path to the template, usually "pages".
          */
         public function display($action, $context = array(), $title = "", $path = "pages") {
-            $this->displayed = true;
-            fallback($title, camelize($action, true));
-            $this->context = array_merge($context, $this->context);
-
             $config = Config::current();
             $visitor = Visitor::current();
             $route = Route::current();
             $trigger = Trigger::current();
 
-            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
+            $this->displayed = true;
 
             # Are there any extension-added pages?
             foreach (array("write" => array(),
@@ -2072,26 +2074,31 @@
                 $trigger->filter($$main_nav, $main_nav."_pages");
             }
 
-            $this->context["ip"]         = $_SERVER["REMOTE_ADDR"];
-            $this->context["DIR"]        = DIR;
-            $this->context["theme"]      = Theme::current();
-            $this->context["flash"]      = Flash::current();
-            $this->context["trigger"]    = $trigger;
-            $this->context["title"]      = $title;
-            $this->context["site"]       = $config;
-            $this->context["visitor"]    = $visitor;
-            $this->context["logged_in"]  = logged_in();
-            $this->context["route"]      = $route;
-            $this->context["now"]        = time();
-            $this->context["version"]    = CHYRP_VERSION;
-            $this->context["codename"]   = CHYRP_CODENAME;
-            $this->context["debug"]      = DEBUG;
-            $this->context["feathers"]   = Feathers::$instances;
-            $this->context["modules"]    = Modules::$instances;
-            $this->context["POST"]       = $_POST;
-            $this->context["GET"]        = $_GET;
+            $this->context                = array_merge($context, $this->context);
+            $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
+            $this->context["DIR"]         = DIR;
+            $this->context["theme"]       = Theme::current();
+            $this->context["flash"]       = Flash::current();
+            $this->context["trigger"]     = $trigger;
+            $this->context["title"]       = fallback($title, camelize($action, true));
+            $this->context["site"]        = $config;
+            $this->context["visitor"]     = $visitor;
+            $this->context["logged_in"]   = logged_in();
+            $this->context["route"]       = $route;
+            $this->context["now"]         = time();
+            $this->context["version"]     = CHYRP_VERSION;
+            $this->context["codename"]    = CHYRP_CODENAME;
+            $this->context["debug"]       = DEBUG;
+            $this->context["feathers"]    = Feathers::$instances;
+            $this->context["modules"]     = Modules::$instances;
+            $this->context["POST"]        = $_POST;
+            $this->context["GET"]         = $_GET;
+            $this->context["navigation"]  = array();
+            $this->context["sql_queries"] =& SQL::current()->queries;
+            $this->context["sql_debug"]   =& SQL::current()->debug;
 
-            $this->context["navigation"] = array();
+            $trigger->filter($this->context, array("admin_context",
+                                                   "admin_context_".str_replace(DIR, "_", $action)));
 
             $show = array("write" => array($visitor->group->can("add_draft", "add_post", "add_page")),
                           "manage" => array($visitor->group->can("view_own_draft",
@@ -2142,14 +2149,12 @@
 
             $this->subnav_context($route->action);
             $trigger->filter($this->context["selected"], "nav_selected");
-            $this->context["sql_debug"] = SQL::current()->debug;
-            $template = $path.DIR.$action.".twig";
 
             if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
                 Update::check();
 
             try {
-                $this->twig->display($template, $this->context);
+                $this->twig->display($path.DIR.$action.".twig", $this->context);
             } catch (Exception $e) {
                 $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
                 error(__("Twig Error"), $prettify, debug_backtrace());

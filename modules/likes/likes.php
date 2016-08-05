@@ -3,12 +3,26 @@
 
     class Likes extends Modules {
         static function __install() {
+            $config = Config::current();
+
             Like::install();
+
+            Group::add_permission("like_post", "Like Posts");
+            Group::add_permission("unlike_post", "Unlike Posts");
+
+            $config->set("module_like",
+                         array("showOnFront" => true,
+                               "likeWithText" => false,
+                               "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg"));
         }
 
         static function __uninstall($confirm) {
             if ($confirm)
                 Like::uninstall();
+
+            Group::remove_permission("like_post");
+            Group::remove_permission("unlike_post");
+            Config::current()->remove("module_like");
         }
 
         static function admin_like_settings($admin) {

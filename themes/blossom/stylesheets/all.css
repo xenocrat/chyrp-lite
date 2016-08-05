@@ -42,14 +42,14 @@
 
 @font-face {
                                                 font-family: 'Hack webfont';
-                                                src: url('../../../fonts/Hack-Oblique.woff') format('woff');
+                                                src: url('../../../fonts/Hack-Italic.woff') format('woff');
                                                 font-weight: normal;
                                                 font-style: italic;
 }
 
 @font-face {
                                                 font-family: 'Hack webfont';
-                                                src: url('../../../fonts/Hack-BoldOblique.woff') format('woff');
+                                                src: url('../../../fonts/Hack-BoldItalic.woff') format('woff');
                                                 font-weight: bold;
                                                 font-style: italic;
 }
@@ -136,8 +136,7 @@ hr {                                            width: 100%;
                                                 clear: both;
                                                 border-top: 1px solid #ddd;
                                                 margin: 1em 0em }
-hr:last-child {                                 margin: 0em;
-                                                visibility: hidden }
+hr:last-child, hr + hr {                        display: none }
 ul {                                            list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
@@ -297,6 +296,8 @@ button {                                        font: inherit;
 label {                                         display: block;
                                                 margin-top: 1em }
 div.shim {                                      margin-top: 2em }
+div.clear {                                     visibility: hidden;
+                                                clear: both }
 div#mast {                                      display: none;
                                                 width: 100%;
                                                 text-align: center;
@@ -349,7 +350,7 @@ div.metadata {                                  font-weight: normal;
 div.comments_pagination {                       width: 100%;
                                                 clear: both;
                                                 text-align: center }
-div.tags {                                      margin: 1.33em 0em 0em 0em;
+div.tags {                                      margin: 1rem 0rem 0rem 0rem;
                                                 font-size: 0.75em }
 div.doaction {                                  font-family: inherit;
                                                 line-height: 2;
@@ -400,7 +401,7 @@ ul.archive article.post.archive {               display: block;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
                                                 background-color: #fbfbf7;
-                                                margin: 0em 0em 1.33em 1.33em;
+                                                margin: 0rem 0rem 1rem 1rem;
                                                 padding: 8px;
                                                 border: 1px solid #c6ccc8;
                                                 border-radius: 6px;
@@ -615,7 +616,7 @@ article img {                                   max-width: 100% }
 
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 651px) {
     ul.archive li {                             margin-left: 0em }
     ul.archive article.post.archive {           box-sizing: border-box;
                                                 width: 100%;
