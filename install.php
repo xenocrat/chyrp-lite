@@ -99,8 +99,7 @@
     sanitize_input($_REQUEST);
 
     # Where are we?
-    $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
-    $url = $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).str_replace("/install.php", "", $_SERVER['REQUEST_URI']);
+    $url = str_ireplace("/install.php", "", self_url());
     $url_path = oneof(parse_url($url, PHP_URL_PATH), "/");
 
     # Already installed?
