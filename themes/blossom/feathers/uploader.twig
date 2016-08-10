@@ -6,9 +6,11 @@
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
 </h2>
 {% endif %}
+{% if post.caption is not empty %}
 <section class="caption{{ post.caption | length > 1000 ? ' longform' : '' }}">
 {{ post.caption }}
 </section>
+{% endif %}
 {% for file in post.files %}
 {% if ["jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"] | contains(file.type) %}
 <section class="photo">
