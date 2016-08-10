@@ -335,9 +335,8 @@
          * Grabs the posts for a search query.
          */
         public function search() {
-            fallback($_GET['query'], "");
             $config = Config::current();
-            $_GET['query'] = strip_tags($_GET['query']);
+            $_GET['query'] = strip_tags(fallback($_GET['query'], ""));
 
             if ($config->clean_urls and
                 substr_count($_SERVER['REQUEST_URI'], "?") and
@@ -678,6 +677,9 @@
 
                 if (!empty($_POST['website']))
                     $_POST['website'] = add_scheme($_POST['website']);
+
+                fallback($_POST['full_name'], "");
+                fallback($_POST['website'], "");
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $visitor->password ;

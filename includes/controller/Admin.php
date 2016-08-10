@@ -254,7 +254,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_posts");
 
             $post = new Post($_POST['id'], array("drafts" => true));
@@ -358,7 +358,9 @@
             if (empty($_POST['body']))
                 error(__("Error"), __("Body cannot be blank."), null, 422);
 
+            fallback($_POST['parent_id'], 0);
             fallback($_POST['status'], "public");
+            fallback($_POST['list_priority'], 0);
             fallback($_POST['slug'], $_POST['title']);
 
             $public = in_array($_POST['status'], array("listed", "public"));
@@ -394,7 +396,7 @@
 
             $this->display("edit_page",
                            array("page" => $page,
-                                 "pages" => Page::find(array("where" => array("id not" => $_GET['id'])))));
+                                 "pages" => Page::find(array("where" => array("id not" => $page->id)))));
         }
 
         /**
@@ -422,7 +424,9 @@
             if ($page->no_results)
                 show_404(__("Not Found"), __("Page not found."));
 
+            fallback($_POST['parent_id'], 0);
             fallback($_POST['status'], "public");
+            fallback($_POST['list_priority'], 0);
 
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
@@ -473,7 +477,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_pages");
 
             $page = new Page($_POST['id']);
@@ -558,14 +562,17 @@
 
             if (empty($_POST['password1']) or empty($_POST['password2']))
                 error(__("Error"), __("Passwords cannot be blank."), null, 422);
-            elseif ($_POST['password1'] != $_POST['password2'])
+
+            if ($_POST['password1'] != $_POST['password2'])
                 error(__("Error"), __("Passwords do not match."), null, 422);
-            elseif (password_strength($_POST['password1']) < 100)
+
+            if (password_strength($_POST['password1']) < 100)
                 Flash::message(__("Please consider setting a stronger password for this user."));
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."), null, 422);
-            elseif (!is_email($_POST['email']))
+
+            if (!is_email($_POST['email']))
                 error(__("Error"), __("Invalid email address."), null, 422);
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
@@ -575,6 +582,10 @@
                 $_POST['website'] = add_scheme($_POST['website']);
 
             $config = Config::current();
+
+            fallback($_POST['full_name'], "");
+            fallback($_POST['website'], "");
+            fallback($_POST['group'], $config->default_group);
 
             if ($config->email_activation) {
                 $user = User::add($_POST['login'],
@@ -664,7 +675,8 @@
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."), null, 422);
-            elseif (!is_email($_POST['email']))
+
+            if (!is_email($_POST['email']))
                 error(__("Error"), __("Invalid email address."), null, 422);
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
@@ -672,6 +684,10 @@
 
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
+
+            fallback($_POST['full_name'], "");
+            fallback($_POST['website'], "");
+            fallback($_POST['group'], $config->default_group);
 
             $user->update($_POST['login'],
                           $password,
@@ -701,9 +717,14 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
+            $user = new User($_GET['id']);
+
+            if ($user->no_results)
+                Flash::warning(__("User not found."), "/admin/?action=manage_users");
+
             $this->display("delete_user",
-                           array("user" => new User($_GET['id']),
-                                 "users" => User::find(array("where" => array("id not" => $_GET['id'])))));
+                           array("user" => $user,
+                                 "users" => User::find(array("where" => array("id not" => $user->id)))));
         }
 
         /**
@@ -717,7 +738,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_users");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -735,18 +756,14 @@
 
             if (!empty($user->posts))
                 if (!empty($_POST['move_posts'])) {
-                    $posts_user = new User(fallback($_POST['move_posts']));
+                    $posts_user = new User($_POST['move_posts']);
 
                     if ($posts_user->no_results)
                         show_404(__("Not Found"), __("New user for posts not found."));
 
-                    $posts = $sql->select("posts",
-                                          "id",
-                                          array("user_id" => $user->id))->fetchAll();
-
-                    foreach ($posts as $post)
+                    foreach ($user->posts as $post)
                         $sql->update("posts",
-                                     array("id" => $post["id"]),
+                                     array("id" => $post->id),
                                      array("user_id" => $posts_user->id));
                 } else
                     foreach ($user->posts as $post)
@@ -759,13 +776,9 @@
                     if ($pages_user->no_results)
                         show_404(__("Not Found"), __("New user for pages not found."));
 
-                    $pages = $sql->select("pages",
-                                          "id",
-                                          array("user_id" => $user->id))->fetchAll();
-
-                    foreach ($pages as $page)
+                    foreach ($user->pages as $page)
                         $sql->update("pages",
-                                     array("id" => $page["id"]),
+                                     array("id" => $page->id),
                                      array("user_id" => $pages_user->id));
                 } else
                     foreach ($user->pages as $page)
@@ -787,7 +800,9 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage users."));
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
+            list($where, $params) = keywords($_GET['query'],
+                                             "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
+                                             "users");
 
             $this->display("manage_users",
                            array("users" => new Paginator(User::find(array("placeholders" => true,
@@ -805,7 +820,9 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to create groups."));
 
             $this->display("new_group",
-                           array("permissions" => SQL::current()->select("permissions", "*", array("group_id" => 0))->fetchAll()));
+                           array("permissions" => SQL::current()->select("permissions",
+                                                                         "*",
+                                                                         array("group_id" => 0))->fetchAll()));
         }
 
         /**
@@ -818,6 +835,9 @@
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['name']))
+                error(__("Error"), __("Please enter a name for the group."), null, 422);
 
             fallback($_POST['permissions'], array());
 
@@ -849,7 +869,9 @@
 
             $this->display("edit_group",
                            array("group" => $group,
-                                 "permissions" => SQL::current()->select("permissions", "*", array("group_id" => 0))->fetchAll()));
+                                 "permissions" => SQL::current()->select("permissions",
+                                                                         "*",
+                                                                         array("group_id" => 0))->fetchAll()));
         }
 
         /**
@@ -892,9 +914,14 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
+            $group = new Group($_GET['id']);
+
+            if ($group->no_results)
+                show_404(__("Not Found"), __("Group not found."));
+
             $this->display("delete_group",
-                           array("group" => new Group($_GET['id']),
-                                 "groups" => Group::find(array("where" => array("id not" => $_GET['id']),
+                           array("group" => $group,
+                                 "groups" => Group::find(array("where" => array("id not" => $group->id),
                                                                "order" => "id ASC"))));
         }
 
@@ -909,7 +936,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_groups");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -941,7 +968,7 @@
             $config = Config::current();
 
             if (!empty($_POST['default_group'])) {
-                $default_group = new Group(fallback($_POST['default_group']));
+                $default_group = new Group($_POST['default_group']);
 
                 if ($default_group->no_results)
                     show_404(__("Not Found"), __("New default group not found."));
@@ -950,7 +977,7 @@
             }
 
             if (!empty($_POST['guest_group'])) {
-                $guest_group = new Group(fallback($_POST['guest_group']));
+                $guest_group = new Group($_POST['guest_group']);
 
                 if ($guest_group->no_results)
                     show_404(__("Not Found"), __("New guest group not found."));
@@ -1009,6 +1036,7 @@
             $exports = array();
 
             if (isset($_POST['posts'])) {
+                fallback($_POST['filter_posts'], "");
                 list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
                 if (!empty($_GET['month']))
@@ -1101,6 +1129,7 @@
             }
 
             if (isset($_POST['pages'])) {
+                fallback($_POST['filter_pages'], "");
                 list($where, $params) = keywords($_POST['filter_pages'], "title LIKE :query OR body LIKE :query", "pages");
 
                 $pages = Page::find(array("where" => $where, "params" => $params, "order" => "id ASC"),
@@ -1159,6 +1188,7 @@
             }
 
             if (isset($_POST['groups'])) {
+                fallback($_POST['filter_groups'], "");
                 list($where, $params) = keywords($_POST['filter_groups'], "name LIKE :query", "groups");
 
                 $groups = Group::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
@@ -1176,6 +1206,7 @@
             }
 
             if (isset($_POST['users'])) {
+                fallback($_POST['filter_users'], "");
                 list($where, $params) = keywords($_POST['filter_users'], "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
@@ -1748,7 +1779,7 @@
             if (empty($_POST['theme']))
                 error(__("No Theme Specified"), __("You did not specify a theme to select or preview."), null, 400);
 
-            if ($_POST['change'] != "indubitably")
+            if (!isset($_POST['change']) or $_POST['change'] != "indubitably")
                 self::preview_theme();
 
             $config = Config::current();
@@ -1816,8 +1847,14 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!empty($_POST['email']) and !is_email($_POST['email']))
+            if (empty($_POST['email']))
+                error(__("Error"), __("Email address cannot be blank."), null, 422);
+
+            if (!is_email($_POST['email']))
                 error(__("Error"), __("Invalid email address."), null, 422);
+
+            if (empty($_POST['chyrp_url']))
+                error(__("Error"), __("Chyrp URL cannot be blank."), null, 422);
 
             if (!is_url($_POST['chyrp_url']))
                 error(__("Error"), __("Invalid Chyrp URL."), null, 422);
@@ -1826,6 +1863,12 @@
                 error(__("Error"), __("Invalid canonical URL."), null, 422);
 
             $config = Config::current();
+
+            fallback($_POST['name'], "");
+            fallback($_POST['description'], "");
+            fallback($_POST['url'], "");
+            fallback($_POST['timezone'], "Atlantic/Reykjavik");
+            fallback($_POST['locale'], "en_US");
 
             $check_updates_last = (empty($_POST['check_updates'])) ? 0 : $config->check_updates_last ;
 
@@ -1861,6 +1904,13 @@
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
                 error(__("Error"), __("Invalid feed URL."), null, 422);
 
+            fallback($_POST['posts_per_page'], 5);
+            fallback($_POST['admin_per_page'], 25);
+            fallback($_POST['feed_items'], 20);
+            fallback($_POST['feed_url'], "");
+            fallback($_POST['uploads_path'], "");
+            fallback($_POST['uploads_limit'], 10);
+
             $separator = preg_quote(DIR, "~");
             preg_match("~^(".$separator.")?(.*?)(".$separator.")?$~", $_POST['uploads_path'], $matches);
 
@@ -1870,8 +1920,8 @@
 
             $config = Config::current();
             $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
-                         $config->set("feed_items", (int) $_POST['feed_items']),
                          $config->set("admin_per_page", (int) $_POST['admin_per_page']),
+                         $config->set("feed_items", (int) $_POST['feed_items']),
                          $config->set("feed_url", $_POST['feed_url']),
                          $config->set("uploads_path", $matches[1].$matches[2].$matches[3]),
                          $config->set("uploads_limit", (int) $_POST['uploads_limit']),
@@ -1898,6 +1948,9 @@
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            fallback($_POST['default_group'], 0);
+            fallback($_POST['guest_group'], 0);
 
             $correspond = (!empty($_POST['email_activation']) or !empty($_POST['email_correspondence'])) ? true : false ;
 
@@ -1953,6 +2006,8 @@
 
             if (empty($_POST['enable_homepage']) and $config->enable_homepage)
                 $route->remove("/");
+
+            fallback($_POST['post_url'], "(year)/(month)/(day)/(url)/");
 
             $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
                          $config->set("post_url", trim($_POST['post_url'], "/ ")."/"),
