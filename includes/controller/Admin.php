@@ -723,30 +723,55 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $sql = SQL::current();
             $user = new User($_POST['id']);
 
-            if (isset($_POST['posts'])) {
-                if ($_POST['posts'] == "delete")
-                    foreach ($user->post as $post)
+            if ($user->no_results)
+                show_404(__("Not Found"), __("User not found."));
+
+            if ($user->id == Visitor::current()->id)
+                Flash::warning(__("You cannot delete your own account."), "/admin/?action=manage_users");
+
+            $sql = SQL::current();
+
+            if (!empty($user->posts))
+                if (!empty($_POST['move_posts'])) {
+                    $posts_user = new User(fallback($_POST['move_posts']));
+
+                    if ($posts_user->no_results)
+                        show_404(__("Not Found"), __("New user for posts not found."));
+
+                    $posts = $sql->select("posts",
+                                          "id",
+                                          array("user_id" => $user->id))->fetchAll();
+
+                    foreach ($posts as $post)
+                        $sql->update("posts",
+                                     array("id" => $post["id"]),
+                                     array("user_id" => $posts_user->id));
+                } else
+                    foreach ($user->posts as $post)
                         Post::delete($post->id);
-                elseif ($_POST['posts'] == "move")
-                    $sql->update("posts",
-                                 array("user_id" => $user->id),
-                                 array("user_id" => $_POST['move_posts']));
-            }
 
-            if (isset($_POST['pages'])) {
-                if ($_POST['pages'] == "delete")
-                    foreach ($user->page as $page)
+            if (!empty($user->pages))
+                if (!empty($_POST['move_pages'])) {
+                    $pages_user = new User(fallback($_POST['move_pages']));
+
+                    if ($pages_user->no_results)
+                        show_404(__("Not Found"), __("New user for pages not found."));
+
+                    $pages = $sql->select("pages",
+                                          "id",
+                                          array("user_id" => $user->id))->fetchAll();
+
+                    foreach ($pages as $page)
+                        $sql->update("pages",
+                                     array("id" => $page["id"]),
+                                     array("user_id" => $pages_user->id));
+                } else
+                    foreach ($user->pages as $page)
                         Page::delete($page->id);
-                elseif ($_POST['pages'] == "move")
-                    $sql->update("pages",
-                                 array("user_id" => $user->id),
-                                 array("user_id" => $_POST['move_pages']));
-            }
 
-            User::delete($_POST['id']);
+            User::delete($user->id);
 
             Flash::notice(__("User deleted."), "/admin/?action=manage_users");
         }
@@ -892,17 +917,48 @@
 
             $group = new Group($_POST['id']);
 
-            foreach ($group->users as $user)
-                $user->update($user->login, $user->password, $user->email, $user->full_name, $user->website, $_POST['move_group']);
+            if ($group->no_results)
+                show_404(__("Not Found"), __("Group not found."));
+
+            if (!empty($group->users))
+                if (!empty($_POST['move_group'])) {
+                    $member_group = new Group(fallback($_POST['move_group']));
+
+                    if ($member_group->no_results)
+                        show_404(__("Not Found"), __("New member group not found."));
+
+                    foreach ($group->users as $user)
+                        $user->update($user->login,
+                                      $user->password,
+                                      $user->email,
+                                      $user->full_name,
+                                      $user->website,
+                                      $member_group->id);
+                } else
+                    foreach ($group->users as $user)
+                        User::delete($user->id);
 
             $config = Config::current();
 
-            if (!empty($_POST['default_group']))
-                $config->set("default_group", $_POST['default_group']);
-            if (!empty($_POST['guest_group']))
-                $config->set("guest_group", $_POST['guest_group']);
+            if (!empty($_POST['default_group'])) {
+                $default_group = new Group(fallback($_POST['default_group']));
 
-            Group::delete($_POST['id']);
+                if ($default_group->no_results)
+                    show_404(__("Not Found"), __("New default group not found."));
+
+                $config->set("default_group", $default_group->id);
+            }
+
+            if (!empty($_POST['guest_group'])) {
+                $guest_group = new Group(fallback($_POST['guest_group']));
+
+                if ($guest_group->no_results)
+                    show_404(__("Not Found"), __("New guest group not found."));
+
+                $config->set("guest_group", $guest_group->id);
+            }
+
+            Group::delete($group->id);
 
             Flash::notice(__("Group deleted."), "/admin/?action=manage_groups");
         }

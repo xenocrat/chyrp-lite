@@ -9,13 +9,16 @@
 </p>
 <form class="delete split{{ group.id == visitor.group.id ? ' confirm' : '' }}" action="{{ admin_url('destroy_group') }}" method="post" accept-charset="UTF-8">
 <fieldset>
-{% if group.users and groups %}
+{% if group.users is not empty %}
 <p>
 <label for="move_group">{{ "Move members to:" | translate }}</label>
 <select name="move_group" id="move_group">
+<option value="0">{{ "[Delete Members]" | translate }}</option>
+{% if groups is not empty %}
 {% for group in groups %}
 <option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>{{ group.name }}</option>
 {% endfor %}
+{% endif %}
 </select>
 </p>
 {% endif %}
