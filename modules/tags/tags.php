@@ -294,8 +294,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (empty($_POST['original']) or empty($_POST['name']))
+            if (empty($_POST['original']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
+
+            if (empty($_POST['name']))
+                error(__("Error"), __("Name cannot be blank.", "tags"), null, 422);
 
             $sql = SQL::current();
             $new = self::prepare_tags(str_replace(",", " ", $_POST['name']));
@@ -361,7 +364,7 @@
             if (empty($_POST['name']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_tags");
 
             $sql = SQL::current();

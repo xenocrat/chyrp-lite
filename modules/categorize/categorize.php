@@ -196,7 +196,7 @@
                 error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"), null, 400);
 
             Category::addCategory($_POST['name'],
-                                  oneof($_POST['clean'], $_POST['name']),
+                                  oneof(@$_POST['clean'], $_POST['name']),
                                   !empty($_POST['show_on_home']) ? 1 : 0);
 
             Flash::notice(__("Category added.", "categorize"), "/admin/?action=manage_category");
@@ -238,7 +238,7 @@
 
             Category::updateCategory($_POST['id'],
                                      $_POST['name'],
-                                     oneof($_POST['clean'], $_POST['name']),
+                                     oneof(@$_POST['clean'], $_POST['name']),
                                      !empty($_POST['show_on_home']) ? 1 : 0);
 
             Flash::notice(__("Category updated.", "categorize"), "/admin/?action=manage_category");
@@ -266,7 +266,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_category");
 
             $category = Category::getCategory($_POST['id']);

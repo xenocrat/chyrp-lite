@@ -120,9 +120,13 @@
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
                 Flash::warning(__("Invalid website URL.", "comments"));
 
+            if (!empty($_POST['author_url']))
+                $_POST['author_url'] = add_scheme($_POST['author_url']);
+
             if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
                 Flash::warning(__("Incorrect captcha code.", "comments"));
 
+            fallback($_POST['author_url'], "");
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
@@ -174,6 +178,7 @@
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
+            fallback($_POST['author_url'], "");
             fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
             $visitor = Visitor::current();
@@ -219,7 +224,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_comments");
 
             $comment = new Comment($_POST['id']);
@@ -323,6 +328,11 @@
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            fallback($_POST['allowed_comment_html'], "strong, em, blockquote, code, pre, a");
+            fallback($_POST['default_comment_status'], "denied");
+            fallback($_POST['comments_per_page'], 25);
+            fallback($_POST['auto_reload_comments'], 30);
 
             $config = Config::current();
             $set = array($config->set("allowed_comment_html", explode(", ", $_POST['allowed_comment_html'])),

@@ -45,6 +45,10 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            fallback($_POST['blog_changefreq'], "daily");
+            fallback($_POST['pages_changefreq'], "yearly");
+            fallback($_POST['posts_changefreq'], "monthly");
+
             $set = array($config->set("module_sitemap",
                                 array("blog_changefreq" => $_POST['blog_changefreq'],
                                       "pages_changefreq" => $_POST['pages_changefreq'],

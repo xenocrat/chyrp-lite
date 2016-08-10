@@ -21,6 +21,9 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            fallback($_POST['background'], "grey");
+            fallback($_POST['spacing'], 24);
+
             $set = array(Config::current()->set("module_lightbox",
                                             array("background" => $_POST['background'],
                                                   "spacing" => ((int) $_POST['spacing'] < 0) ? 0 : (int) $_POST['spacing'],
