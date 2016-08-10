@@ -18,6 +18,7 @@
             if (empty($_POST['body']))
                 error(__("Error"), __("Body can't be blank."), null, 422);
 
+            fallback($_POST['title'], "");
             fallback($_POST['slug'], $_POST['title']);
 
             return Post::add(array("title" => $_POST['title'],
@@ -26,7 +27,9 @@
 
         public function update($post) {
             if (empty($_POST['body']))
-                error(__("Error"), __("Body can't be blank."));
+                error(__("Error"), __("Body can't be blank."), null, 422);
+
+            fallback($_POST['title'], "");
 
             $post->update(array("title" => $_POST['title'],
                                 "body" => $_POST['body']));

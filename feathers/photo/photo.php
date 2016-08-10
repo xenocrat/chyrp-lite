@@ -33,6 +33,8 @@
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
+            fallback($_POST['title'], "");
+            fallback($_POST['caption'], "");
             fallback($_POST['slug'], $_POST['title']);
 
             return Post::add(array("title" => $_POST['title'],
@@ -46,10 +48,13 @@
                 $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"));
             } else
                 $filename = $post->filename;
-            
+
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
-            
+
+            fallback($_POST['title'], "");
+            fallback($_POST['caption'], "");
+
             $post->update(array("title" => $_POST['title'],
                                 "filename" => $filename,
                                 "caption" => $_POST['caption']));
