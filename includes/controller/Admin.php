@@ -759,7 +759,7 @@
                     $posts_user = new User($_POST['move_posts']);
 
                     if ($posts_user->no_results)
-                        show_404(__("Not Found"), __("New user for posts not found."));
+                        error(__("Gone"), __("New owner for posts does not exist."), null, 410);
 
                     foreach ($user->posts as $post)
                         $sql->update("posts",
@@ -774,7 +774,7 @@
                     $pages_user = new User(fallback($_POST['move_pages']));
 
                     if ($pages_user->no_results)
-                        show_404(__("Not Found"), __("New user for pages not found."));
+                        error(__("Gone"), __("New owner for pages does not exist."), null, 410);
 
                     foreach ($user->pages as $page)
                         $sql->update("pages",
@@ -956,7 +956,7 @@
                     $member_group = new Group($_POST['move_group']);
 
                     if ($member_group->no_results)
-                        show_404(__("Not Found"), __("New member group not found."));
+                        error(__("Gone"), __("New member group does not exist."), null, 410);
 
                     foreach ($group->users as $user)
                         $user->update($user->login,
@@ -966,7 +966,7 @@
                                       $user->website,
                                       $member_group->id);
                 } else
-                    Flash::warning(__("You must add a group for the members to be moved into."), "/admin/?action=manage_groups");
+                    error(__("Error"), __("New member group must be specified."), null, 422);
 
             $config = Config::current();
 
@@ -975,22 +975,22 @@
                     $default_group = new Group($_POST['default_group']);
 
                     if ($default_group->no_results)
-                        show_404(__("Not Found"), __("New default group not found."));
+                        error(__("Gone"), __("New default group does not exist."), null, 410);
 
                     $config->set("default_group", $default_group->id);
                 } else
-                    Flash::warning(__("You must add a group before deleting the default group."), "/admin/?action=manage_groups");
+                    error(__("Error"), __("New default group must be specified."), null, 422);
 
             if ($config->guest_group == $group->id)
                 if (!empty($_POST['guest_group'])) {
                     $guest_group = new Group($_POST['guest_group']);
 
                     if ($guest_group->no_results)
-                        show_404(__("Not Found"), __("New guest group not found."));
+                        error(__("Gone"), __("New guest group does not exist."), null, 410);
 
                     $config->set("guest_group", $guest_group->id);
                 } else
-                    Flash::warning(__("You must add a group before deleting the guest group."), "/admin/?action=manage_groups");
+                    error(__("Error"), __("New guest group must be specified."), null, 422);
 
             Group::delete($group->id);
 
