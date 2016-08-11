@@ -67,13 +67,13 @@
         }
 
         public function manage_posts_column_header() {
-            echo '<th class="post_category">'.__("Category", "categorize").'</th>';
+            echo '<th class="post_category value">'.__("Category", "categorize").'</th>';
         }
 
         public function manage_posts_column($post) {
             echo (isset($post->category->name) && $post->category->id != false)
-                ? '<td class="post_category">'.fix($post->category->name).'</td>'
-                : '<td class="post_category">&nbsp;</td>';
+                ? '<td class="post_category value">'.fix($post->category->name).'</td>'
+                : '<td class="post_category value">&nbsp;</td>';
         }
 
         public function post_options($fields, $post = null) {

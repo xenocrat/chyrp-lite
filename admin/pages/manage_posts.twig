@@ -31,10 +31,10 @@
 <table>
 <thead>
 <tr class="head">
-<th class="post_title">{{ "Title" | translate }}</th>
-<th class="post_date">{{ "Posted" | translate }}</th>
-<th class="post_status">{{ "Status" | translate }}</th>
-<th class="post_author">{{ "Author" | translate }}</th>
+<th class="post_title title">{{ "Title" | translate }}</th>
+<th class="post_date date">{{ "Posted" | translate }}</th>
+<th class="post_status status">{{ "Status" | translate }}</th>
+<th class="post_author value">{{ "Author" | translate }}</th>
 {{ trigger.call("manage_posts_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>
@@ -42,16 +42,16 @@
 <tbody>
 {% for post in posts.paginated %}
 <tr id="post_{{ post.id }}" class="post {{ post.status_class }}">
-<td class="post_title main">
+<td class="post_title title main">
 <a href="{{ post.url() }}">{{ post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
-<td class="post_date">
+<td class="post_date date">
 {{ post.created_at | strftimeformat }}
 </td>
-<td class="post_status">
+<td class="post_status status">
 {{ post.status_name }}
 </td>
-<td class="post_author">
+<td class="post_author value">
 {{ post.author.nick is defined ? post.author.nick : "" }}
 </td>
 {{ trigger.call("manage_posts_column", post) }}

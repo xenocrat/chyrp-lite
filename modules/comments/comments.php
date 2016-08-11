@@ -329,7 +329,7 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            fallback($_POST['allowed_comment_html'], "strong, em, blockquote, code, pre, a");
+            fallback($_POST['allowed_comment_html'], "");
             fallback($_POST['default_comment_status'], "denied");
             fallback($_POST['comments_per_page'], 25);
             fallback($_POST['auto_reload_comments'], 30);
@@ -535,11 +535,11 @@
         }
 
         static function manage_posts_column_header() {
-            echo '<th class="post_comments">'.__("Comments", "comments").'</th>';
+            echo '<th class="post_comments value">'.__("Comments", "comments").'</th>';
         }
 
         static function manage_posts_column($post) {
-            echo '<td class="post_comments"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
+            echo '<td class="post_comments value"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
         }
 
         static function javascript() {

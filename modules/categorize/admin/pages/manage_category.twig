@@ -7,8 +7,8 @@
 <table>
 <thead> 
 <tr class="head">
-<th class="category_show">{{ "Listed?" | translate("categorize") }}</th>
-<th class="category_name">{{ "Name" | translate("categorize") }}</th>
+<th class="category_show emblem">{{ "Listed?" | translate("categorize") }}</th>
+<th class="category_name name">{{ "Name" | translate("categorize") }}</th>
 {{ trigger.call("manage_comments_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>   
@@ -16,12 +16,12 @@
 <tbody> 
 {% for category in categorize %}
 <tr id="category_{{ category.id }}">
-<td class="category_show">
+<td class="category_show emblem">
 {% if category.show_on_home %}<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}&nbsp;
 {% endif %}
 </td>
-<td class="category_name main">
+<td class="category_name name main">
 {{ category.name | truncate }}
 </td>
 <td class="controls">

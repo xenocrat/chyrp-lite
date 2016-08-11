@@ -113,11 +113,11 @@
         }
 
         public function manage_posts_column_header() {
-            echo '<th class="post_tags">'.__("Tags", "tags").'</th>';
+            echo '<th class="post_tags list">'.__("Tags", "tags").'</th>';
         }
 
         public function manage_posts_column($post) {
-            echo '<td class="post_tags">'.implode(" ", $post->linked_tags).'</td>';
+            echo '<td class="post_tags list">'.implode(" ", $post->linked_tags).'</td>';
         }
 
         static function manage_nav($navs) {

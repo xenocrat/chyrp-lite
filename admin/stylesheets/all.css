@@ -444,80 +444,34 @@ table tbody tr td {                             padding: 0.5em;
 table tbody tr:nth-child(even) td {             background-color: #fbfbfb }
 table tbody tr td.main {                        min-width: 10em }
 table thead tr th.checkbox,
-table thead tr th.controls,
 table tbody tr td.checkbox,
+table thead tr th.controls,
 table tbody tr td.controls {                    text-align: center;
                                                 vertical-align: middle }
 table tbody tr td.controls {                    width: 4em }
-table thead tr th.post_title,
-table tbody tr td.post_title,
-table thead tr th.post_tags,
-table tbody tr td.post_tags {                   text-align: left }
-table thead tr th.post_date,
-table thead tr th.post_status,
-table thead tr th.post_author,
-table thead tr th.post_comments,
-table thead tr th.post_category,
-table tbody tr th.post_likes,
-table tbody tr td.post_date,
-table tbody tr td.post_status,
-table tbody tr td.post_author,
-table tbody tr td.post_comments,
-table tbody tr td.post_category,
-table tbody tr td.post_likes {                  text-align: center }
-table thead tr th.user_name,
-table tbody tr td.user_name {                   text-align: left }
-table thead tr th.user_group,
-table thead tr th.user_joined,
-table tbody tr td.user_group,
-table tbody tr td.user_joined {                 text-align: center }
-table thead tr th.page_title,
-table tbody tr td.page_title {                  text-align: left }
-table thead tr th.page_created,
-table thead tr th.page_updated,
-table thead tr th.page_author,
-table tbody tr td.page_created,
-table tbody tr td.page_updated,
-table tbody tr td.page_public,
-table tbody tr td.page_show,
-table tbody tr td.page_author {                 text-align: center }
-table thead tr th.group_name,
-table tbody tr td.group_name {                  text-align: left }
-table thead tr th.group_size,
-table thead tr th.group_default,
-table thead tr th.group_guest,
-table tbody tr th.emblem,
-table tbody tr td.group_size,
-table tbody tr td.group_default,
-table tbody tr td.group_guest,
-table tbody tr td.emblem {                      text-align: center }
-table thead tr th.comment_post,
-table tbody tr td.comment_post,
-table tbody tr.comment_excerpt td {             text-align: left }
-table tbody tr.comment_excerpt td p {           margin: 0em }
-table thead tr th.comment_author,
-table thead tr th.comment_date,
-table thead tr th.comment_status,
-table tbody tr td.comment_author,
-table tbody tr td.comment_date,
-table tbody tr td.comment_status {              text-align: center }
-table thead tr th.category_name,
-table tbody tr td.category_name {               text-align: left }
-table thead tr th.category_show,
-table tbody tr td.category_show {               text-align: center }
-table thead tr th.tag_name,
-table tbody tr td.tag_name {                    text-align: left }
-table tbody tr td.tag_count {                   text-align: center }
+table thead tr th.title,
+table tbody tr td.title,
+table thead tr th.name,
+table tbody tr td.name,
+table thead tr th.list,
+table tbody tr td.list {                        text-align: left }
+table thead tr th.date,
+table tbody tr td.date,
+table thead tr th.emblem,
+table tbody tr td.emblem,
+table thead tr th.value,
+table tbody tr td.value,
+table thead tr th.status,
+table tbody tr td.status {                      text-align: center }
 table tbody tr td.placeholder {                 display: block;
                                                 border: none }
-table tbody tr td.post_status {                 background-color: #f2fbff }
-table tbody tr.private td.post_status,
-table tbody tr.registered_only td.post_status { background-color: #faebe4 }
-table tbody tr.public td.post_status {          background-color: #ebfae4 }
-table tbody tr.denied td.comment_status {       background-color: #faebe4 }
-table tbody tr.approved td.comment_status {     background-color: #ebfae4 }
-table tbody tr td.post_tags a,
-table tbody tr td.tag_name a,
+table tbody tr td.status {                      background-color: #f2fbff }
+table tbody tr.private td.status,
+table tbody tr.registered_only td.status {      background-color: #faebe4 }
+table tbody tr.public td.status {               background-color: #ebfae4 }
+table tbody tr.denied td.status {               background-color: #faebe4 }
+table tbody tr.approved td.status {             background-color: #ebfae4 }
+table tbody tr.comment_excerpt td p {           margin: 0em }
 td.controls img {                               position: relative;
                                                 top: 2px;
                                                 width: 16px;

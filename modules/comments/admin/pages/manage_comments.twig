@@ -22,10 +22,10 @@
 <thead>
 <tr class="head">
 <th class="toggler"></th>
-<th class="comment_post">{{ "Post" | translate("comments") }}</th>
-<th class="comment_author">{{ "Author" | translate("comments") }}</th>
-<th class="comment_date">{{ "Added" | translate("comments") }}</th>
-<th class="comment_status">{{ "Status" | translate("comments") }}</th>
+<th class="comment_post title">{{ "Post" | translate("comments") }}</th>
+<th class="comment_author vale">{{ "Author" | translate("comments") }}</th>
+<th class="comment_date date">{{ "Added" | translate("comments") }}</th>
+<th class="comment_status status">{{ "Status" | translate("comments") }}</th>
 {{ trigger.call("manage_comments_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>
@@ -36,19 +36,19 @@
 <td rowspan="2" class="checkbox">
 <input type="checkbox" name="comment[{{ comment.id }}]" value="" id="comment_checkbox_{{ comment.id }}">
 </td>
-<td class="comment_post main">
+<td class="comment_post title main">
 {% if not comment.post.no_results %}
 <a href="{{ comment.post.url() }}#comment_{{ comment.id }}">
 {{ comment.post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 {% endif %}
 </td>
-<td class="comment_author">
+<td class="comment_author value">
 {{ not comment.user.no_results ? comment.user.login : comment.author }}
 </td>
-<td class="comment_date">
+<td class="comment_date date">
 {{ comment.created_at | strftimeformat }}
 </td>
-<td class="comment_status">
+<td class="comment_status status">
 {{ comment.status | capitalize | translate("comments") }}
 </td>
 {{ trigger.call("manage_comments_column", comment) }}

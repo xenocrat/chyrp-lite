@@ -251,12 +251,12 @@
         }
 
         public function manage_posts_column_header() {
-            echo '<th class="post_likes">'.__("Likes", "tags").'</th>';
+            echo '<th class="post_likes value">'.__("Likes", "tags").'</th>';
         }
 
         public function manage_posts_column($post) {
             $like = new Like(array("post_id" => $post->id));
-            echo '<td class="post_likes">'.$like->fetchCount().'</td>';
+            echo '<td class="post_likes value">'.$like->fetchCount().'</td>';
         }
 
         public function import_chyrp_post($entry, $post) {

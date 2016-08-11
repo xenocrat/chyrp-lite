@@ -7,18 +7,18 @@
 <table>
 <thead> 
 <tr class="head">
-<th class="tag_name">{{ "Name" | translate("tags") }}</th>
-<th class="tag_count">{{ "Posts Tagged" | translate("tags") }}</th>
+<th class="tag_name name">{{ "Name" | translate("tags") }}</th>
+<th class="tag_count value">{{ "Posts Tagged" | translate("tags") }}</th>
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>   
 </thead>
 <tbody> 
 {% for tag in tag_cloud %}
 <tr>
-<td class="tag_name main">
+<td class="tag_name name main">
 <a class="tag" href="{{ admin_url('manage_tags', {'query': tag.clean}) }}" title="{{ tag.title }}">{{ tag.name }}</a>
 </td>
-<td class="tag_count">
+<td class="tag_count value">
 {{ tag.popularity }}
 </td>
 <td class="controls">
@@ -41,8 +41,8 @@
 <thead>
 <tr class="head">
 <th class="toggler"></th>
-<th class="post_title">{{ "Post" | translate }}</th>
-<th class="post_tags">{{ "Tags" | translate("tags") }}</th>
+<th class="post_title title">{{ "Post" | translate }}</th>
+<th class="post_tags list">{{ "Tags" | translate("tags") }}</th>
 <th class="controls">{{ "Controls" | translate }}</th>
 </tr>
 </thead>
@@ -52,10 +52,10 @@
 <td class="checkbox">
 <input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}">
 </td>
-<td class="post_title">
+<td class="post_title title">
 <a class="edit_tag" href="{{ post.url() }}">{{ post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
-<td class="post_tags main">
+<td class="post_tags list main">
 {% for name, clean in post.tags %}
 <a class="tag" href="{{ admin_url('manage_tags', {'query': clean}) }}">{{ name }}</a>
 {% endfor %}
