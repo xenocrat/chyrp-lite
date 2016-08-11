@@ -722,6 +722,9 @@
             if ($user->no_results)
                 Flash::warning(__("User not found."), "/admin/?action=manage_users");
 
+            if ($user->id == Visitor::current()->id)
+                Flash::warning(__("You cannot delete your own account."), "/admin/?action=manage_users");
+
             $this->display("delete_user",
                            array("user" => $user,
                                  "users" => User::find(array("where" => array("id not" => $user->id)))));
@@ -748,9 +751,6 @@
 
             if ($user->no_results)
                 show_404(__("Not Found"), __("User not found."));
-
-            if ($user->id == Visitor::current()->id)
-                Flash::warning(__("You cannot delete your own account."), "/admin/?action=manage_users");
 
             $sql = SQL::current();
 
@@ -966,7 +966,8 @@
                                       $user->website,
                                       $member_group->id);
                 } else
-                    Flash::warning(__("You must add a group before deleting a group with members."), "/admin/?action=manage_groups");
+                    Flash::warning(__("You must add a group before deleting a group with members."),
+                                   "/admin/?action=manage_groups");
 
             $config = Config::current();
 
@@ -979,7 +980,8 @@
 
                     $config->set("default_group", $default_group->id);
                 } else
-                    Flash::warning(__("You must add a group before deleting the default group."), "/admin/?action=manage_groups");
+                    Flash::warning(__("You must add a group before deleting the default group."),
+                                   "/admin/?action=manage_groups");
 
             if ($config->guest_group == $group->id)
                 if (!empty($_POST['guest_group'])) {
@@ -990,7 +992,8 @@
 
                     $config->set("guest_group", $guest_group->id);
                 } else
-                    Flash::warning(__("You must add a group before deleting the guest group."), "/admin/?action=manage_groups");
+                    Flash::warning(__("You must add a group before deleting the guest group."),
+                                   "/admin/?action=manage_groups");
 
             Group::delete($group->id);
 
