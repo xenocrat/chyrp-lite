@@ -296,7 +296,7 @@
                                        "status" => "pingback",
                                        "author_url" => $from));
 
-            if ($count)
+            if (!empty($count))
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "comments"));
 
             Comment::create($excerpt,
