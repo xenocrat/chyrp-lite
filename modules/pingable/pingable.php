@@ -114,7 +114,7 @@
             $post->has_many[] = "pingbacks";
         }
 
-        public function post_pinback_count_attr($attr, $post) {
+        public function post_pingback_count_attr($attr, $post) {
             if (isset($this->pinback_counts))
                 return oneof(@$this->pinback_counts[$post->id], 0);
 
