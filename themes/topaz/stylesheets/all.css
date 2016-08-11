@@ -389,6 +389,8 @@ div#main > article, div.standalone {            display: block;
                                                 border: 1px solid #c6ccc8;
                                                 border-radius: 0.4em }
 div#main > article:last-child {                 margin-bottom: 0rem }
+div#main > article.discourse {                  padding: 2rem 2rem 1rem 2rem;
+                                                margin-top: 2rem }
 div#main > article.commentary {                 padding: 0rem;
                                                 margin-top: 2rem;
                                                 overflow: hidden }
