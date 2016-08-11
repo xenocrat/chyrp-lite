@@ -18,6 +18,7 @@ ruby ./tools/gettext.rb ./modules/importers/    --domain=importers    > ./module
 ruby ./tools/gettext.rb ./modules/lightbox/     --domain=lightbox     > ./modules/lightbox/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/likes/        --domain=likes        > ./modules/likes/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/maptcha/      --domain=maptcha      > ./modules/maptcha/locale/en_US.pot
+ruby ./tools/gettext.rb ./modules/pingable/     --domain=pingable     > ./modules/pingable/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/read_more/    --domain=read_more    > ./modules/read_more/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/recaptcha/    --domain=recaptcha    > ./modules/recaptcha/locale/en_US.pot
 ruby ./tools/gettext.rb ./modules/rights/       --domain=rights       > ./modules/rights/locale/en_US.pot
