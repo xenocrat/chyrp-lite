@@ -221,13 +221,13 @@ function validate_passwords(selector_primary, selector_confirm) {
 }
 function confirm_edit_group(msg) {
     $("form.confirm").submit(function(e) {
-        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to update the permissions?", "theme"); ?>'))
+        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to proceed?", "theme"); ?>'))
             e.preventDefault();
     });
 }
 function confirm_delete_group(msg) {
     $("form.confirm").submit(function(e) {
-        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to delete it?", "theme"); ?>'))
+        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to proceed?", "theme"); ?>'))
             e.preventDefault();
     });
 }
