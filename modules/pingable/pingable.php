@@ -115,17 +115,16 @@
         }
 
         public function post_pingback_count_attr($attr, $post) {
-            if (isset($this->pinback_counts))
-                return oneof(@$this->pinback_counts[$post->id], 0);
+            if (isset($this->pingback_counts))
+                return oneof(@$this->pingback_counts[$post->id], 0);
 
             $counts = SQL::current()->select("pingbacks",
-                                             array("COUNT(post_id) AS total", "post_id as post_id"),
-                                             array("post_id" => $post->id));
+                                             array("COUNT(post_id) AS total", "post_id as post_id"));
 
             foreach ($counts->fetchAll() as $count)
-                $this->pinback_counts[$count["post_id"]] = (int) $count["total"];
+                $this->pingback_counts[$count["post_id"]] = (int) $count["total"];
 
-            return oneof(@$this->pinback_counts[$post->id], 0);
+            return oneof(@$this->pingback_counts[$post->id], 0);
         }
 
         public function manage_nav_show($possibilities) {

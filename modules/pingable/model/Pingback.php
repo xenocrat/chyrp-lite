@@ -61,29 +61,13 @@
         }
 
         static function install() {
-            $sql = SQL::current();
-
-            if ($sql->adapter == "mysql") {
-                # SQLite does not support KEY or UNIQUE in CREATE.
-                $sql->query("CREATE TABLE IF NOT EXISTS __pingbacks (
-                               id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                               post_id INTEGER NOT NULL,
-                               source VARCHAR(128) DEFAULT '',
-                               title LONGTEXT,
-                               created_at DATETIME DEFAULT NULL,
-                               KEY key_post_id (post_id)
-                             ) DEFAULT CHARSET=utf8");
-            } else {
-                # MySQL does not support CREATE INDEX IF NOT EXISTS.
-                $sql->query("CREATE TABLE IF NOT EXISTS __pingbacks (
-                               id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                               post_id INTEGER NOT NULL,
-                               source VARCHAR(128) DEFAULT '',
-                               title LONGTEXT,
-                               created_at DATETIME DEFAULT NULL
-                             )");
-                $sql->query("CREATE INDEX IF NOT EXISTS key_post_id ON __pingbacks (post_id)");
-            }
+            SQL::current()->query("CREATE TABLE IF NOT EXISTS __pingbacks (
+                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                                       post_id INTEGER NOT NULL,
+                                       source VARCHAR(128) DEFAULT '',
+                                       title LONGTEXT,
+                                       created_at DATETIME DEFAULT NULL
+                                   ) DEFAULT CHARSET=utf8");
         }
 
         static function uninstall() {
