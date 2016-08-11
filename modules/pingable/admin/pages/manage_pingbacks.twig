@@ -1,0 +1,65 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Manage Pingbacks" | translate("pingable") }}{% endblock %}
+
+{% block content %}
+<form class="filters" action="index.php" method="get" accept-charset="UTF-8">
+<fieldset>
+<input type="hidden" name="action" value="manage_pingbacks">
+<div role="search" class="filter_item">
+<h3>
+{{ "Search&hellip;" | translate }}
+<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+</h3>
+<input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
+<button type="submit" class="inline">{{ "Search" | translate }}</button>
+</div>
+</fieldset>
+</form>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Pingbacks" | translate("pingable") }}</h2>
+<table class="interactive">
+<thead>
+<tr class="head">
+<th class="pingback_source title">{{ "Source" | translate("pingable") }}</th>
+<th class="pingback_post title">{{ "Post" | translate("pingable") }}</th>
+<th class="pingback_date date">{{ "Added" | translate("pingable") }}</th>
+{{ trigger.call("manage_pingbacks_column_header") }}
+<th class="controls">{{ "Controls" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+{% for pingback in pingbacks.paginated %}
+<tr id="pingback_{{ pingback.id }}" class="pingback">
+<td class="pingback_source title main">
+<a href="{{ pingback.source | fix(true) }}">
+{{ pingback.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+</td>
+<td class="pingback_post title">
+{% if not pingback.post.no_results %}
+<a href="{{ pingback.post.url() }}#pingback_{{ pingback.id }}">
+{{ pingback.post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+{% endif %}
+</td>
+<td class="pingback_date date">
+{{ pingback.created_at | strftimeformat }}
+</td>
+{{ trigger.call("manage_pingbacks_column", pingback) }}
+<td class="controls">
+{{ pingback.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+</td>
+</tr>
+{% else %}
+<tr>
+<td class="placeholder"><span class="sub">{{ "(none)" | translate }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% if pingbacks.paginated is not empty and pingbacks.pages > 1 %}
+<div class="pagination">
+<span class="pages">{{ "Page %d of %s" | translate | format(pingbacks.page, pingbacks.final_link(pingbacks.pages)) }}</span>
+{{ pingbacks.prev_link }}
+{{ pingbacks.next_link }}
+</div>
+{% endif %}
+{% endblock %}
