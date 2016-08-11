@@ -885,6 +885,7 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            fallback($_POST['name'], "");
             fallback($_POST['permissions'], array());
 
             $check_name = new Group(null, array("where" => array("name" => $_POST['name'],
@@ -919,6 +920,9 @@
             if ($group->no_results)
                 show_404(__("Not Found"), __("Group not found."));
 
+            if ($group->id == Visitor::current()->group->id)
+                Flash::warning(__("You cannot delete your own group."), "/admin/?action=manage_groups");
+
             $this->display("delete_group",
                            array("group" => $group,
                                  "groups" => Group::find(array("where" => array("id not" => $group->id),
@@ -949,7 +953,7 @@
 
             if (!empty($group->users))
                 if (!empty($_POST['move_group'])) {
-                    $member_group = new Group(fallback($_POST['move_group']));
+                    $member_group = new Group($_POST['move_group']);
 
                     if ($member_group->no_results)
                         show_404(__("Not Found"), __("New member group not found."));
@@ -962,28 +966,31 @@
                                       $user->website,
                                       $member_group->id);
                 } else
-                    foreach ($group->users as $user)
-                        User::delete($user->id);
+                    Flash::warning(__("You must add a group before deleting a group with members."), "/admin/?action=manage_groups");
 
             $config = Config::current();
 
-            if (!empty($_POST['default_group'])) {
-                $default_group = new Group($_POST['default_group']);
+            if ($config->default_group == $group->id)
+                if (!empty($_POST['default_group'])) {
+                    $default_group = new Group($_POST['default_group']);
 
-                if ($default_group->no_results)
-                    show_404(__("Not Found"), __("New default group not found."));
+                    if ($default_group->no_results)
+                        show_404(__("Not Found"), __("New default group not found."));
 
-                $config->set("default_group", $default_group->id);
-            }
+                    $config->set("default_group", $default_group->id);
+                } else
+                    Flash::warning(__("You must add a group before deleting the default group."), "/admin/?action=manage_groups");
 
-            if (!empty($_POST['guest_group'])) {
-                $guest_group = new Group($_POST['guest_group']);
+            if ($config->guest_group == $group->id)
+                if (!empty($_POST['guest_group'])) {
+                    $guest_group = new Group($_POST['guest_group']);
 
-                if ($guest_group->no_results)
-                    show_404(__("Not Found"), __("New guest group not found."));
+                    if ($guest_group->no_results)
+                        show_404(__("Not Found"), __("New guest group not found."));
 
-                $config->set("guest_group", $guest_group->id);
-            }
+                    $config->set("guest_group", $guest_group->id);
+                } else
+                    Flash::warning(__("You must add a group before deleting the guest group."), "/admin/?action=manage_groups");
 
             Group::delete($group->id);
 
