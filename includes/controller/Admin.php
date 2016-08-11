@@ -966,8 +966,7 @@
                                       $user->website,
                                       $member_group->id);
                 } else
-                    Flash::warning(__("You must add a group before deleting a group with members."),
-                                   "/admin/?action=manage_groups");
+                    Flash::warning(__("You must add a group for the members to be moved into."), "/admin/?action=manage_groups");
 
             $config = Config::current();
 
@@ -980,8 +979,7 @@
 
                     $config->set("default_group", $default_group->id);
                 } else
-                    Flash::warning(__("You must add a group before deleting the default group."),
-                                   "/admin/?action=manage_groups");
+                    Flash::warning(__("You must add a group before deleting the default group."), "/admin/?action=manage_groups");
 
             if ($config->guest_group == $group->id)
                 if (!empty($_POST['guest_group'])) {
@@ -992,8 +990,7 @@
 
                     $config->set("guest_group", $guest_group->id);
                 } else
-                    Flash::warning(__("You must add a group before deleting the guest group."),
-                                   "/admin/?action=manage_groups");
+                    Flash::warning(__("You must add a group before deleting the guest group."), "/admin/?action=manage_groups");
 
             Group::delete($group->id);
 
