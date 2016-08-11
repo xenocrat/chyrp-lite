@@ -771,7 +771,7 @@
 
             if (!empty($user->pages))
                 if (!empty($_POST['move_pages'])) {
-                    $pages_user = new User(fallback($_POST['move_pages']));
+                    $pages_user = new User($_POST['move_pages']);
 
                     if ($pages_user->no_results)
                         error(__("Gone"), __("New owner for pages does not exist."), null, 410);
