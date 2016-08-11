@@ -54,12 +54,11 @@
         }
 
         public function pingback($post, $to, $from, $title, $excerpt) {
-            $sql = SQL::current();
-            $count = $sql->count("pingbacks",
-                                 array("post_id" => $post->id,
-                                       "source" => $from));
+            $count = SQL::current()->count("pingbacks",
+                                           array("post_id" => $post->id,
+                                                 "source" => $from));
 
-            if ($count)
+            if (!empty($count))
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "pingable"));
 
             Pingback::add($post->id,
@@ -103,11 +102,11 @@
         }
 
         static function manage_posts_column_header() {
-            echo '<th class="post_pingbacks">'.__("Pingbacks", "pingable").'</th>';
+            echo '<th class="post_pingbacks value">'.__("Pingbacks", "pingable").'</th>';
         }
 
         static function manage_posts_column($post) {
-            echo '<td class="post_pingbacks"><a href="'.$post->url().'#pingbacks">'.$post->pingback_count.'</a></td>';
+            echo '<td class="post_pingbacks value"><a href="'.$post->url().'#pingbacks">'.$post->pingback_count.'</a></td>';
         }
 
         public function post($post) {
