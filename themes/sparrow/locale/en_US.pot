@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-30 18:42+0000\n"
+"POT-Creation-Date: 2016-08-12 12:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -76,21 +76,32 @@ msgid "%d %b, %Y"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:36
+msgid 'View pingbacks'
+msgstr ""
+
+#: themes/sparrow/content/post.twig:37
+#, php-format
+msgid "%s pingback"
+msgid_plural "%s pingbacks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: themes/sparrow/content/post.twig:42
 msgid "Comments closed"
 msgstr ""
 
-#: themes/sparrow/content/post.twig:39
+#: themes/sparrow/content/post.twig:45
 msgid 'View comments'
 msgstr ""
 
-#: themes/sparrow/content/post.twig:40
+#: themes/sparrow/content/post.twig:46
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: themes/sparrow/feathers/uploader.twig:19
+#: themes/sparrow/feathers/uploader.twig:21
 msgid "File attachment:"
 msgstr ""
 
@@ -397,5 +408,9 @@ msgstr ""
 
 #: themes/sparrow/pages/view.twig:12
 msgid "Previous post &rarr;"
+msgstr ""
+
+#: themes/sparrow/pages/view.twig:18
+msgid "Pingbacks"
 msgstr ""
 
