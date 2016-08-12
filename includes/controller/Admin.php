@@ -2088,13 +2088,15 @@
                                                                          "selected" => $selected);
             }
 
-            # Write navs
+            # Write navs.
             $subnav["write"]["write_page"] = array("title" => __("Page"),
                                                    "show" => $visitor->group->can("add_page"));
+
+            # Allow extensions to add tab instructions to the "write" sub nav.
             $trigger->filter($subnav["write"], array("admin_write_nav", "write_nav"));
             $pages["write"] = array_merge(array("write_post"), array_keys($subnav["write"]));;
 
-            # Manage navs
+            # Manage navs.
             $subnav["manage"] = array("manage_posts"  => array("title" => __("Posts"),
                                                                "show" => (Post::any_editable() or Post::any_deletable()),
                                                                "selected" => array("edit_post", "delete_post")),
@@ -2111,6 +2113,8 @@
                                                                                                "edit_group",
                                                                                                "delete_group")),
                                                                "selected" => array("edit_group", "delete_group", "new_group")));
+
+            # Allow extensions to add tab instructions to the "manage" sub nav.
             $trigger->filter($subnav["manage"], "manage_nav");
 
             $subnav["manage"]["import"] = array("title" => __("Import"),
@@ -2132,7 +2136,7 @@
                                                                                 return "delete_".depluralize($m[1]);
                                                                             }, $manage)));
 
-            # Settings navs
+            # Settings navs.
             $subnav["settings"] = array("general_settings" => array("title" => __("General"),
                                                                     "show" => $visitor->group->can("change_settings")),
                                         "content_settings" => array("title" => __("Content"),
@@ -2141,19 +2145,24 @@
                                                                     "show" => $visitor->group->can("change_settings")),
                                         "route_settings"   => array("title" => __("Routes"),
                                                                     "show" => $visitor->group->can("change_settings")));
+
+            # Allow extensions to add tab instructions to the "settings" sub nav.
             $trigger->filter($subnav["settings"], "settings_nav");
             $pages["settings"] = array_keys($subnav["settings"]);
 
-            # Extend navs
+            # Extend navs.
             $subnav["extend"] = array("modules"  => array("title" => __("Modules"),
                                                           "show" => $visitor->group->can("toggle_extensions")),
                                       "feathers" => array("title" => __("Feathers"),
                                                           "show" => $visitor->group->can("toggle_extensions")),
                                       "themes"   => array("title" => __("Themes"),
                                                           "show" => $visitor->group->can("toggle_extensions")));
+
+            # Allow extensions to add tab instructions to the "extend" sub nav.
             $trigger->filter($subnav["extend"], "extend_nav");
             $pages["extend"] = array_keys($subnav["extend"]);
 
+            # Allow extensions to specify which (if any) sub nav is visible when their pages are displayed.
             foreach (array_keys($subnav) as $main_nav)
                 foreach ($trigger->filter($pages[$main_nav], $main_nav."_nav_pages") as $extend)
                     $subnav[$extend] =& $subnav[$main_nav];
@@ -2183,7 +2192,7 @@
 
             $this->displayed = true;
 
-            # Are there any extension-added pages?
+            # Allow extensions with non-conforming page names to specify where they belong in main nav.
             foreach (array("write" => array(),
                            "manage" => array("import", "export"),
                            "settings" => array(),
@@ -2239,6 +2248,7 @@
                           "settings" => array($visitor->group->can("change_settings")),
                           "extend" => array($visitor->group->can("toggle_extensions")));
 
+            # Allow extensions to force visibility of a main nav section if the user can do stuff there.
             foreach ($show as $name => &$arr)
                 $trigger->filter($arr, $name."_nav_show");
 
@@ -2265,8 +2275,8 @@
                                                            "selected" => (in_array($action, $extend) or
                                                                          match("/_extend$/", $action)));
 
+            # Generate the sub nav structures.
             $this->subnav_context($route->action);
-            $trigger->filter($this->context["selected"], "nav_selected");
 
             if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
                 Update::check();
