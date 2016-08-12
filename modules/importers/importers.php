@@ -79,15 +79,18 @@
 
                 $media = array();
 
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $contentencoded,
-                                   $media)) {
-                    $media_uris = array_unique($media[0]);
-                    foreach ($media_uris as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
+                if (!empty($_POST['media_url'])) {
+                    $regexp_url = preg_quote($_POST['media_url'], "/");
+
+                    if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                                       $contentencoded,
+                                       $media)) {
+                        $media_uris = array_unique($media[0]);
+
+                        foreach ($media_uris as $matched_url) {
+                            $filename = upload_from_url($matched_url);
+                            $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
+                        }
                     }
                 }
 
@@ -184,8 +187,6 @@
                 !feather_enabled("link"))
                 error(__("Missing Feather", "importers"),
                       __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"), null, 501);
-
-            $_POST['tumblr_url'] = trim($_POST['tumblr_url']);
 
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
                 error(__("Error"), __("Invalid URL.", "importers"), null, 422);
@@ -345,7 +346,7 @@
 
             $mysqli->query("SET NAMES 'utf8'");
 
-            $prefix = $mysqli->real_escape_string($_POST['prefix']);
+            $prefix = $mysqli->real_escape_string(fallback($_POST['prefix'], ""));
             $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
 
             $posts = array();
@@ -355,15 +356,17 @@
             $mysqli->close();
 
             foreach ($posts as $post) {
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $post["Body"],
-                                   $media))
-                    foreach ($media[0] as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $post["Body"] = str_replace($matched_url, uploaded($filename), $post["Body"]);
-                    }
+                if (!empty($_POST['media_url'])) {
+                    $regexp_url = preg_quote($_POST['media_url'], "/");
+
+                    if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                                       $post["Body"],
+                                       $media))
+                        foreach ($media[0] as $matched_url) {
+                            $filename = upload_from_url($matched_url);
+                            $post["Body"] = str_replace($matched_url, uploaded($filename), $post["Body"]);
+                        }
+                }
 
                 $status_translate = array(1 => "draft",
                                           2 => "private",
@@ -473,15 +476,17 @@
                 if (!empty($post["entry_text_more"]))
                     $body.= "\n\n<!--more-->\n\n".$post["entry_text_more"];
 
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $body,
-                                   $media))
-                    foreach ($media[0] as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $body = str_replace($matched_url, uploaded($filename), $body);
-                    }
+                if (!empty($_POST['media_url'])) {
+                    $regexp_url = preg_quote($_POST['media_url'], "/");
+
+                    if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                                       $body,
+                                       $media))
+                        foreach ($media[0] as $matched_url) {
+                            $filename = upload_from_url($matched_url);
+                            $body = str_replace($matched_url, uploaded($filename), $body);
+                        }
+                }
 
                 $status_translate = array(1 => "draft",
                                           2 => "public",
