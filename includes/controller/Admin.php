@@ -1087,7 +1087,7 @@
                 $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
                 $posts_atom.= '    <id>tag:'.parse_url($config->url, PHP_URL_HOST).','.date("Y", $latest_timestamp).':Chyrp</id>'."\r";
                 $posts_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
-                $posts_atom.= '    <link href="'.$config->url.'" rel="self" type="application/atom+xml" />'."\r";
+                $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
                 $posts_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
 
                 foreach ($posts as $post) {
@@ -1101,12 +1101,12 @@
                     $tagged = preg_replace("/(".preg_quote(parse_url($post->url(), PHP_URL_HOST)).")/", "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
 
                     $url = $post->url();
-                    $posts_atom.= '    <entry xml:base="'.fix($url).'">'."\r";
+                    $posts_atom.= '    <entry xml:base="'.fix($url, true).'">'."\r";
                     $posts_atom.= '        <title type="html">'.$title.'</title>'."\r";
                     $posts_atom.= '        <id>tag:'.$tagged.'</id>'."\r";
                     $posts_atom.= '        <updated>'.when("c", $updated).'</updated>'."\r";
                     $posts_atom.= '        <published>'.when("c", $post->created_at).'</published>'."\r";
-                    $posts_atom.= '        <link href="'.fix($trigger->filter($url, "post_export_url", $post)).'" />'."\r";
+                    $posts_atom.= '        <link href="'.fix($trigger->filter($url, "post_export_url", $post), true).'" />'."\r";
                     $posts_atom.= '        <author chyrp:user_id="'.$post->user_id.'">'."\r";
                     $posts_atom.= '            <name>'.fix(oneof($post->user->full_name, $post->user->login)).'</name>'."\r";
 
@@ -1154,7 +1154,7 @@
                 $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
                 $pages_atom.= '    <id>tag:'.parse_url($config->url, PHP_URL_HOST).','.date("Y", $latest_timestamp).':Chyrp</id>'."\r";
                 $pages_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
-                $pages_atom.= '    <link href="'.$config->url.'" rel="self" type="application/atom+xml" />'."\r";
+                $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
                 $pages_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
 
                 foreach ($pages as $page) {
@@ -1165,12 +1165,12 @@
                     $tagged = preg_replace("/(".preg_quote(parse_url($page->url(), PHP_URL_HOST)).")/", "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
 
                     $url = $page->url();
-                    $pages_atom.= '    <entry xml:base="'.fix($url).'" chyrp:parent_id="'.$page->parent_id.'">'."\r";
+                    $pages_atom.= '    <entry xml:base="'.fix($url, true).'" chyrp:parent_id="'.$page->parent_id.'">'."\r";
                     $pages_atom.= '        <title type="html">'.fix($page->title).'</title>'."\r";
                     $pages_atom.= '        <id>tag:'.$tagged.'</id>'."\r";
                     $pages_atom.= '        <updated>'.when("c", $updated).'</updated>'."\r";
                     $pages_atom.= '        <published>'.when("c", $page->created_at).'</published>'."\r";
-                    $pages_atom.= '        <link href="'.fix($trigger->filter($url, "page_export_url", $page)).'" />'."\r";
+                    $pages_atom.= '        <link href="'.fix($trigger->filter($url, "page_export_url", $page), true).'" />'."\r";
                     $pages_atom.= '        <author chyrp:user_id="'.fix($page->user_id).'">'."\r";
                     $pages_atom.= '            <name>'.fix(oneof($page->user->full_name, $page->user->login)).'</name>'."\r";
 
