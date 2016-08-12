@@ -15,7 +15,22 @@
             Group::remove_permission("delete_pingbacks");
         }
 
-        static function admin_delete_pingback($admin) {
+        public function pingback($post, $to, $from, $title, $excerpt) {
+            $count = SQL::current()->count("pingbacks",
+                                           array("post_id" => $post->id,
+                                                 "source" => $from));
+
+            if (!empty($count))
+                return new IXR_Error(48, __("A ping from your URL is already registered.", "pingable"));
+
+            Pingback::add($post->id,
+                          $from,
+                          $title);
+
+            return __("Pingback registered!", "pingable");
+        }
+
+        public function admin_delete_pingback($admin) {
             if (!Visitor::current()->group->can("delete_pingbacks"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
 
@@ -30,7 +45,7 @@
             $admin->display("delete_pingback", array("pingback" => $pingback));
         }
 
-        static function admin_destroy_pingback() {
+        public function admin_destroy_pingback() {
             if (!Visitor::current()->group->can("delete_pingbacks"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
 
@@ -53,41 +68,7 @@
             Flash::notice(__("Pingback deleted.", "pingable"), "/admin/?action=manage_pingbacks");
         }
 
-        public function pingback($post, $to, $from, $title, $excerpt) {
-            $count = SQL::current()->count("pingbacks",
-                                           array("post_id" => $post->id,
-                                                 "source" => $from));
-
-            if (!empty($count))
-                return new IXR_Error(48, __("A ping from your URL is already registered.", "pingable"));
-
-            Pingback::add($post->id,
-                          $from,
-                          $title);
-
-            return __("Pingback registered!", "pingable");
-        }
-
-        static function delete_post($post) {
-            SQL::current()->delete("pingbacks", array("post_id" => $post->id));
-        }
-
-        static function manage_nav($navs) {
-            if (!Visitor::current()->group->can("delete_pingbacks"))
-                return $navs;
-
-            $navs["manage_pingbacks"] = array("title" => __("Pingbacks", "pingable"),
-                                              "selected" => array("delete_pingback"));
-
-            return $navs;
-        }
-
-        static function manage_nav_pages($pages) {
-            array_push($pages, "manage_pingbacks", "delete_pingback");
-            return $pages;
-        }
-
-        static function admin_manage_pingbacks($admin) {
+        public function admin_manage_pingbacks($admin) {
             if (!Visitor::current()->group->can("delete_pingbacks"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pingbacks.", "pingable"));
 
@@ -101,29 +82,19 @@
                                                                Config::current()->admin_per_page)));
         }
 
-        static function manage_posts_column_header() {
-            echo '<th class="post_pingbacks value">'.__("Pingbacks", "pingable").'</th>';
+        public function manage_nav($navs) {
+            if (!Visitor::current()->group->can("delete_pingbacks"))
+                return $navs;
+
+            $navs["manage_pingbacks"] = array("title" => __("Pingbacks", "pingable"),
+                                              "selected" => array("delete_pingback"));
+
+            return $navs;
         }
 
-        static function manage_posts_column($post) {
-            echo '<td class="post_pingbacks value"><a href="'.$post->url().'#pingbacks">'.$post->pingback_count.'</a></td>';
-        }
-
-        public function post($post) {
-            $post->has_many[] = "pingbacks";
-        }
-
-        public function post_pingback_count_attr($attr, $post) {
-            if (isset($this->pingback_counts))
-                return oneof(@$this->pingback_counts[$post->id], 0);
-
-            $counts = SQL::current()->select("pingbacks",
-                                             array("COUNT(post_id) AS total", "post_id as post_id"));
-
-            foreach ($counts->fetchAll() as $count)
-                $this->pingback_counts[$count["post_id"]] = (int) $count["total"];
-
-            return oneof(@$this->pingback_counts[$post->id], 0);
+        public function manage_nav_pages($pages) {
+            array_push($pages, "manage_pingbacks", "delete_pingback");
+            return $pages;
         }
 
         public function manage_nav_show($possibilities) {
@@ -139,7 +110,71 @@
                 return "manage_pingbacks";
         }
 
-        static function cacher_regenerate_posts_triggers($regenerate_posts) {
+        public function manage_posts_column_header() {
+            echo '<th class="post_pingbacks value">'.__("Pingbacks", "pingable").'</th>';
+        }
+
+        public function manage_posts_column($post) {
+            echo '<td class="post_pingbacks value"><a href="'.$post->url().'#pingbacks">'.$post->pingback_count.'</a></td>';
+        }
+
+        public function post($post) {
+            $post->has_many[] = "pingbacks";
+        }
+
+        static function delete_post($post) {
+            SQL::current()->delete("pingbacks", array("post_id" => $post->id));
+        }
+
+        public function post_pingback_count_attr($attr, $post) {
+            if (isset($this->pingback_counts))
+                return oneof(@$this->pingback_counts[$post->id], 0);
+
+            $counts = SQL::current()->select("pingbacks",
+                                             array("COUNT(post_id) AS total", "post_id as post_id"));
+
+            foreach ($counts->fetchAll() as $count)
+                $this->pingback_counts[$count["post_id"]] = (int) $count["total"];
+
+            return oneof(@$this->pingback_counts[$post->id], 0);
+        }
+
+        public function import_chyrp_post($entry, $post) {
+            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
+
+            if (!isset($chyrp->pingback))
+                return;
+
+            foreach ($chyrp->pingback as $pingback) {
+                $title = $pingback->children("http://www.w3.org/2005/Atom")->title;
+                $source = $pingback->children("http://www.w3.org/2005/Atom")->link["href"];
+                $created_at = $pingback->children("http://www.w3.org/2005/Atom")->published;
+
+                SQL::current()->insert("pingbacks",
+                                 array("post_id"    => $post->id,
+                                       "source"     => $source,
+                                       "title"      => $title,
+                                       "created_at" => $created_at));
+            }
+        }
+
+        public function posts_export($atom, $post) {
+            $pingbacks = SQL::current()->select("pingbacks",
+                                                "*",
+                                                array("post_id" => $post->id))->fetchAll();
+
+            foreach ($pingbacks as $pingback) {
+                $atom.= "        <chyrp:pingback>\r";
+                $atom.= '            <title type="html">'.$pingback["title"].'</title>'."\r";
+                $atom.= '            <link href="'.fix($pingback["source"], true).'" />'."\r";
+                $atom.= '            <published>'.$pingback["created_at"].'</published>'."\r";
+                $atom.= "        </chyrp:pingback>\r";
+            }
+
+            return $atom;
+        }
+
+        public function cacher_regenerate_posts_triggers($regenerate_posts) {
             $triggers = array("pingback", "delete_pingback");
             return array_merge($regenerate_posts, $triggers);
         }
