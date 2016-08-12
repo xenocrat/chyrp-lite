@@ -4,7 +4,7 @@
             $this->addAlias("markup_post_text", "more", 4); # Replace "<!--more-->" before markup modules filter it.
         }
 
-        static function more($text, $post = null) {
+        public function more($text, $post = null) {
             if (!is_string($text) or preg_match("/<!--more(.+?)?-->/i", $text, $matches) === 0)
                 return $text;
 
@@ -22,7 +22,7 @@
             return $split[0].'<a class="read_more" href="'.$url.'">'.$more.'</a>';
         }
 
-        static function title_from_excerpt($text) {
+        public function title_from_excerpt($text) {
             $split = preg_split('/<a class="read_more"/', $text);
             return $split[0];
         }

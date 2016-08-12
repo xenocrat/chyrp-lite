@@ -11,7 +11,7 @@
             Config::current()->remove("module_lightbox");
         }
 
-        static function admin_lightbox_settings($admin) {
+        public function admin_lightbox_settings($admin) {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
     
@@ -33,13 +33,13 @@
                 Flash::notice(__("Settings updated."), "/admin/?action=lightbox_settings");
         }
 
-        static function settings_nav($navs) {
+        public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["lightbox_settings"] = array("title" => __("Lightbox", "lightbox"));
             return $navs;
         }
 
-        static function javascript() {
+        public function javascript() {
             include MODULES_DIR.DIR."lightbox".DIR."javascript.php";
         }
     }

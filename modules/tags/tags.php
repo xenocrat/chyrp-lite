@@ -120,7 +120,7 @@
             echo '<td class="post_tags list">'.implode(" ", $post->linked_tags).'</td>';
         }
 
-        static function manage_nav($navs) {
+        public function manage_nav($navs) {
             if (!Post::any_editable())
                 return $navs;
 
@@ -130,12 +130,12 @@
             return $navs;
         }
 
-        static function manage_pages($pages) {
+        public function manage_pages($pages) {
             array_push($pages, "rename_tag");
             return $pages;
         }
 
-        static function manage_nav_pages($pages) {
+        public function manage_nav_pages($pages) {
             array_push($pages, "manage_tags", "rename_tag", "delete_tag", "edit_tags");
             return $pages;
         }
@@ -555,7 +555,7 @@
                 $_POST['tags'] = '';
         }
 
-        static function linked_tags($tags) {
+        public function linked_tags($tags) {
             if (empty($tags))
                 return array();
 
@@ -688,7 +688,7 @@
             return SQL::current()->escape($text, false);
         }
 
-        function feed_item($post) {
+        public function feed_item($post) {
             $config = Config::current();
 
             foreach ($post->tags as $tag => $clean)

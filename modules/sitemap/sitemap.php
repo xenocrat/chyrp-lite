@@ -26,14 +26,14 @@
             Config::current()->remove("module_sitemap");
         }
 
-        static function settings_nav($navs) {
+        public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["sitemap_settings"] = array("title" => __("Sitemap", "sitemap"));
 
             return $navs;
         }
 
-        static function admin_sitemap_settings($admin) {
+        public function admin_sitemap_settings($admin) {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
@@ -60,10 +60,9 @@
 
         /**
          * Function: make_sitemap
-         * Displays a sitemap of the blog.
+         * Generates a sitemap of the blog and writes it to the document root.
          */
-        public static function make_sitemap()
-        {
+        public function make_sitemap() {
             $result = SQL::current()->select("posts",
                                              "posts.id",
                                              array("posts.status" => "public"),

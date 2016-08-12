@@ -18,7 +18,7 @@
             Config::current()->remove("module_recaptcha");
         }
 
-        static function admin_recaptcha_settings($admin) {
+        public function admin_recaptcha_settings($admin) {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
     
@@ -39,7 +39,7 @@
                 Flash::notice(__("Settings updated."), "/admin/?action=recaptcha_settings");
         }
 
-        static function settings_nav($navs) {
+        public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["recaptcha_settings"] = array("title" => __("ReCAPTCHA", "recaptcha"));
             return $navs;

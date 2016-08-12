@@ -159,7 +159,7 @@
                            _f("Posts in category %s", fix($category->name), "categorize"));
         }
 
-        static function manage_nav($navs) {
+        public function manage_nav($navs) {
             if (!Visitor::current()->group->can('manage_categorize'))
                 return $navs;
 
@@ -169,7 +169,7 @@
             return $navs;
         }
 
-        static function manage_nav_pages($pages) {
+        public function manage_nav_pages($pages) {
             array_push($pages, "manage_category", "new_category", "delete_category", "edit_category");
             return $pages;
         }

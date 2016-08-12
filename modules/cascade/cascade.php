@@ -8,7 +8,7 @@
             Config::current()->remove("ajax_scroll_auto");
         }
 
-        static function admin_cascade_settings($admin) {
+        public function admin_cascade_settings($admin) {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
     
@@ -24,13 +24,13 @@
                 Flash::notice(__("Settings updated."), "/admin/?action=cascade_settings");
         }
 
-        static function settings_nav($navs) {
+        public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["cascade_settings"] = array("title" => __("Cascade", "cascade"));
             return $navs;
         }
 
-        static function javascript() {
+        public function javascript() {
             include MODULES_DIR.DIR."cascade".DIR."javascript.php";
         }
     }

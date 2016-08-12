@@ -25,7 +25,7 @@
             Config::current()->remove("module_like");
         }
 
-        static function admin_like_settings($admin) {
+        public function admin_like_settings($admin) {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
@@ -48,14 +48,14 @@
                 Flash::notice(__("Settings updated."), "/admin/?action=like_settings");
         }
 
-        static function settings_nav($navs) {
+        public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["like_settings"] = array("title" => __("Likes", "likes"));
 
             return $navs;
         }
 
-        static function route_like() {
+        public function route_like() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
@@ -73,7 +73,7 @@
             Flash::notice(__("Post liked.", "likes"), $post->url()."#likes_".$post->id);
         }
 
-        static function route_unlike() {
+        public function route_unlike() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
@@ -91,16 +91,16 @@
             Flash::notice(__("Post unliked.", "likes"), $post->url()."#likes_".$post->id);
         }
 
-        static function stylesheets($styles) {
+        public function stylesheets($styles) {
             $styles[] = Config::current()->chyrp_url."/modules/likes/style.css";
             return $styles;
         }
 
-        static function javascript() {
+        public function javascript() {
             include MODULES_DIR.DIR."likes".DIR."javascript.php";
         }
 
-        static function ajax_like() {
+        public function ajax_like() {
             if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
@@ -126,7 +126,7 @@
             json_response($text, true);
         }
 
-        static function ajax_unlike() {
+        public function ajax_unlike() {
             if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
@@ -152,11 +152,11 @@
             json_response($text, true);
         }
 
-        static function delete_post($post) {
+        public function delete_post($post) {
             SQL::current()->delete("likes", array("post_id" => $post->id));
         }
 
-        static function delete_user($user) {
+        public function delete_user($user) {
             SQL::current()->update("likes", array("user_id" => $user->id), array("user_id" => 0));
         }
 
@@ -165,7 +165,7 @@
             $post->get_likes = self::get_likes($post);
         }
 
-        static function get_likes($post) {
+        public function get_likes($post) {
             $config = Config::current();
             $route = Route::current();
             $visitor = Visitor::current();
@@ -299,7 +299,7 @@
             return $atom;
         }
 
-        static function cacher_regenerate_triggers($regenerate) {
+        public function cacher_regenerate_triggers($regenerate) {
             $triggers = array("route_like", "route_unlike", "ajax_like", "ajax_unlike");
             return array_merge($regenerate, $triggers);
         }

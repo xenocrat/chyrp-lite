@@ -94,7 +94,7 @@
             return $urls;
         }
 
-        static function route_add_comment() {
+        public function route_add_comment() {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"), null, 400);
 
@@ -142,7 +142,7 @@
                                           $notify), $post->url());
         }
 
-        static function admin_update_comment() {
+        public function admin_update_comment() {
             if (empty($_POST))
                 redirect("/admin/?action=manage_comments");
 
@@ -202,7 +202,7 @@
             Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_comments");
         }
 
-        static function admin_delete_comment($admin) {
+        public function admin_delete_comment($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
@@ -217,7 +217,7 @@
             $admin->display("delete_comment", array("comment" => $comment));
         }
 
-        static function admin_destroy_comment() {
+        public function admin_destroy_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -241,7 +241,7 @@
             redirect("/admin/?action=manage_".(($comment->status == "spam") ? "spam" : "comments"));
         }
 
-        static function admin_manage_spam($admin) {
+        public function admin_manage_spam($admin) {
             if (!Visitor::current()->group->can("edit_comment", "delete_comment", true))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
 
@@ -257,7 +257,7 @@
                                                               Config::current()->admin_per_page)));
         }
 
-        static function admin_purge_spam() {
+        public function admin_purge_spam() {
             if (!Visitor::current()->group->can("delete_comment"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete comments.", "comments"));
 
@@ -311,15 +311,15 @@
             return __("Pingback registered!", "comments");
         }
 
-        static function delete_post($post) {
+        public function delete_post($post) {
             SQL::current()->delete("comments", array("post_id" => $post->id));
         }
 
-        static function delete_user($user) {
+        public function delete_user($user) {
             SQL::current()->update("comments", array("user_id" => $user->id), array("user_id" => 0));
         }
 
-        static function admin_comment_settings($admin) {
+        public function admin_comment_settings($admin) {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
@@ -355,14 +355,14 @@
                 Flash::notice(__("Settings updated."), "/admin/?action=comment_settings");
         }
 
-        static function settings_nav($navs) {
+        public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["comment_settings"] = array("title" => __("Comments", "comments"));
 
             return $navs;
         }
 
-        static function manage_nav($navs) {
+        public function manage_nav($navs) {
             if (!Comment::any_editable() and !Comment::any_deletable())
                 return $navs;
 
@@ -378,7 +378,7 @@
             return $navs;
         }
 
-        static function manage_nav_pages($pages) {
+        public function manage_nav_pages($pages) {
             array_push($pages, "manage_comments", "manage_spam", "edit_comment", "delete_comment");
             return $pages;
         }
@@ -398,7 +398,7 @@
             $admin->display("edit_comment", array("comment" => $comment));
         }
 
-        static function admin_manage_comments($admin) {
+        public function admin_manage_comments($admin) {
             if (!Comment::any_editable() and !Comment::any_deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
 
@@ -419,7 +419,7 @@
                                                               Config::current()->admin_per_page)));
         }
 
-        static function admin_bulk_comments() {
+        public function admin_bulk_comments() {
             $from = (!isset($_GET['from'])) ? "manage_comments" : "manage_spam" ;
 
             if (!isset($_POST['comment']))
@@ -502,7 +502,7 @@
             redirect("/admin/?action=".$from);
         }
 
-        static function reportHam($comments) {
+        public function reportHam($comments) {
             $config = Config::current();
 
             foreach($comments as $comment) {
@@ -518,7 +518,7 @@
             }
         }
 
-        static function reportSpam($comments) {
+        public function reportSpam($comments) {
             $config = Config::current();
 
             foreach($comments as $comment) {
@@ -534,19 +534,19 @@
             }
         }
 
-        static function manage_posts_column_header() {
+        public function manage_posts_column_header() {
             echo '<th class="post_comments value">'.__("Comments", "comments").'</th>';
         }
 
-        static function manage_posts_column($post) {
+        public function manage_posts_column($post) {
             echo '<td class="post_comments value"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
         }
 
-        static function javascript() {
+        public function javascript() {
             include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
 
-        static function ajax() {
+        public function ajax() {
             $config  = Config::current();
             $sql     = SQL::current();
             $trigger = Trigger::current();
@@ -685,7 +685,7 @@
             }
         }
 
-        static function view_feed($context) {
+        public function view_feed($context) {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -730,7 +730,7 @@
             $atom->close();
         }
 
-        static function metaWeblog_getPost($struct, $post) {
+        public function metaWeblog_getPost($struct, $post) {
             if (isset($post->comment_status))
                 $struct['mt_allow_comments'] = intval($post->comment_status == 'open');
             else
@@ -739,7 +739,7 @@
             return $struct;
         }
 
-        static function metaWeblog_editPost_preQuery($struct, $post = null) {
+        public function metaWeblog_editPost_preQuery($struct, $post = null) {
             if (isset($struct['mt_allow_comments']))
                 $_POST['option']['comment_status'] = ($struct['mt_allow_comments'] == 1) ? 'open' : 'closed';
         }
@@ -848,7 +848,7 @@
                 return "manage_comments";
         }
 
-        static function visitor_comments() {
+        public function visitor_comments() {
             if (empty($_SESSION['comments']))
                 return "(0)";
             else
@@ -867,7 +867,7 @@
             return $params;
         }
 
-        static function cacher_regenerate_posts_triggers($regenerate_posts) {
+        public function cacher_regenerate_posts_triggers($regenerate_posts) {
             $triggers = array("add_comment", "update_comment", "delete_comment");
             return array_merge($regenerate_posts, $triggers);
         }
