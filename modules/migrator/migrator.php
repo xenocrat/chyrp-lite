@@ -1,5 +1,26 @@
 <?php
-    class Importers extends Modules {
+    class Migrator extends Modules {
+        public function admin_manage_migration($admin) {
+            if (!Visitor::current()->group->can("add_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
+
+            $admin->display("manage_migration");
+        }
+
+        public function manage_nav($navs) {
+            if (!Visitor::current()->group->can("add_post"))
+                return $navs;
+
+            $navs["manage_migration"] = array("title" => __("Migration", "migrator"));
+
+            return $navs;
+        }
+
+        public function manage_nav_pages($pages) {
+            array_push($pages, "manage_migration");
+            return $pages;
+        }
+
         /**
          * Function: route_import_wordpress
          * WordPress importing.
@@ -31,6 +52,7 @@
                 set_time_limit(300);
 
             $stupid_xml = file_get_contents($_FILES['xml_file']['tmp_name']);
+
             $sane_xml = preg_replace(array("/<wp:comment_content>/", "/<\/wp:comment_content>/"),
                                      array("<wp:comment_content><![CDATA[", "]]></wp:comment_content>"),
                                      $stupid_xml);
@@ -517,124 +539,4 @@
 
             Flash::notice(__("MovableType content successfully imported!", "importers"), "/admin/?action=import");
         }
-
-        public function import_choose() {
-            $config = Config::current();
-?>
-<hr>
-<h2>WordPress</h2>
-<form id="import_wordpress_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_wordpress"; ?>" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<fieldset>
-<p>
-<label for="xml_file"><?php echo __("eXtended .XML File", "importers"); ?></label>
-<input type="file" name="xml_file" value="" id="xml_file">
-</p>
-<p>
-<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="wordpress_media_url">
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-<small>
-<?php echo __("Usually something like <code>http://example.com/wp-content/uploads/</code>.", "importers"); ?>
-</small>
-</p>
-<p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
-</p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="wordpress_hash">
-</fieldset>
-</form>
-<hr>
-<h2>Tumblr</h2>
-<form id="import_tumblr_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_tumblr"; ?>" method="post" accept-charset="UTF-8">
-<fieldset>
-<p>
-<label for="tumblr_url"><?php echo __("Your Tumblr URL", "importers"); ?></label>
-<input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
-<small>
-<?php echo __("Something like <code>http://example.tumblr.com</code>.", "importers"); ?>
-</small>
-<small><?php echo __("Note: Audio tumbles cannot be imported.", "importers"); ?></small>
-</p>
-<p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
-</p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="tumblr_hash">
-</fieldset>
-</form>
-<hr>
-<h2>TextPattern</h2>
-<form id="import_textpattern_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_textpattern"; ?>" method="post" accept-charset="UTF-8">
-<fieldset>
-<p>
-<label for="host"><?php echo __("Host", "importers"); ?></label>
-<input class="text" type="text" name="host" value="localhost" id="host">
-</p>
-<p>
-<label for="username"><?php echo __("Username", "importers"); ?></label>
-<input class="text" type="text" name="username" value="" id="username">
-</p>
-<p>
-<label for="password"><?php echo __("Password", "importers"); ?></label>
-<input class="text" type="password" name="password" value="" id="password">
-</p>
-<p>
-<label for="database"><?php echo __("Database", "importers"); ?></label>
-<input class="text" type="text" name="database" value="" id="database">
-</p>
-<p>
-<label for="prefix"><?php echo __("Table Prefix", "importers"); ?></label>
-<input class="text" type="text" name="prefix" value="" id="prefix">
-<span class="sub"><?php echo __("(if any)", "importers"); ?></span>
-</p>
-<p>
-<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="textpattern_media_url">
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-<small>
-<?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
-</small>
-</p>
-<p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
-</p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="textpattern_hash">
-</fieldset>
-</form>
-<hr>
-<h2>MovableType</h2>
-<form id="import_movabletype_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_movabletype"; ?>" method="post" accept-charset="UTF-8">
-<fieldset>
-<p>
-<label for="host"><?php echo __("Host", "importers"); ?></label>
-<input class="text" type="text" name="host" value="localhost" id="host">
-</p>
-<p>
-<label for="username"><?php echo __("Username", "importers"); ?></label>
-<input class="text" type="text" name="username" value="" id="username">
-</p>
-<p>
-<label for="password"><?php echo __("Password", "importers"); ?></label>
-<input class="text" type="password" name="password" value="" id="password">
-</p>
-<p>
-<label for="database"><?php echo __("Database", "importers"); ?></label>
-<input class="text" type="text" name="database" value="" id="database">
-</p>
-<p>
-<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="movabletype_media_url">
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-<small>
-<?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
-</small>
-</p>
-<p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
-</p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="movabletype_hash">
-</fieldset>
-</form>
-<?php
-        }
-
     }

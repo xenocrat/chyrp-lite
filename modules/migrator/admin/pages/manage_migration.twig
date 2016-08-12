@@ -1,0 +1,122 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Import" | translate }}{% endblock %}
+
+{% block content %}
+<h2>WordPress</h2>
+<form id="import_wordpress_form" class="split" action="{{ admin_url('import_wordpress') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<fieldset>
+<p>
+<label for="xml_file">{{ "eXtended .XML File" | translate("migrator") }}</label>
+<input type="file" name="xml_file" value="" id="xml_file">
+</p>
+<p>
+<label for="media_url">{{ "What URL is used for embedded media?" | translate("migrator") }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="url" name="media_url" value="" id="wordpress_media_url">
+<small>
+{{ "Usually something like <code>http://example.com/wp-content/uploads/</code>." | translate("migrator") }}
+</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="wordpress_hash">
+</fieldset>
+</form>
+<hr>
+<h2>Tumblr</h2>
+<form id="import_tumblr_form" class="split" action="{{ admin_url('import_tumblr') }}" method="post" accept-charset="UTF-8">
+<fieldset>
+<p>
+<label for="tumblr_url">{{ "Your Tumblr URL" | translate("migrator") }}</label>
+<input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
+<small>
+{{ "Something like <code>http://example.tumblr.com</code>." | translate("migrator") }}
+</small>
+<small>{{ "Note: Audio tumbles cannot be imported." | translate("migrator") }}</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="tumblr_hash">
+</fieldset>
+</form>
+<hr>
+<h2>TextPattern</h2>
+<form id="import_textpattern_form" class="split" action="{{ admin_url('import_textpattern') }}" method="post" accept-charset="UTF-8">
+<fieldset>
+<p>
+<label for="host">{{ "Host" | translate("migrator") }}</label>
+<input class="text" type="text" name="host" value="localhost" id="host">
+</p>
+<p>
+<label for="username">{{ "Username" | translate("migrator") }}</label>
+<input class="text" type="text" name="username" value="" id="username">
+</p>
+<p>
+<label for="password">{{ "Password" | translate("migrator") }}</label>
+<input class="text" type="password" name="password" value="" id="password">
+</p>
+<p>
+<label for="database">{{ "Database" | translate("migrator") }}</label>
+<input class="text" type="text" name="database" value="" id="database">
+</p>
+<p>
+<label for="prefix">{{ "Table Prefix" | translate("migrator") }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="text" name="prefix" value="" id="prefix">
+</p>
+<p>
+<label for="media_url">{{ "What URL is used for embedded media?" | translate("migrator") }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="url" name="media_url" value="" id="textpattern_media_url">
+<small>
+{{ "Usually something like <code>http://example.com/images/</code>." | translate("migrator") }}
+</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="textpattern_hash">
+</fieldset>
+</form>
+<hr>
+<h2>MovableType</h2>
+<form id="import_movabletype_form" class="split" action="{{ admin_url('import_movabletype') }}" method="post" accept-charset="UTF-8">
+<fieldset>
+<p>
+<label for="host">{{ "Host" | translate("migrator") }}</label>
+<input class="text" type="text" name="host" value="localhost" id="host">
+</p>
+<p>
+<label for="username">{{ "Username" | translate("migrator") }}</label>
+<input class="text" type="text" name="username" value="" id="username">
+</p>
+<p>
+<label for="password">{{ "Password" | translate("migrator") }}</label>
+<input class="text" type="password" name="password" value="" id="password">
+</p>
+<p>
+<label for="database">{{ "Database" | translate("migrator") }}</label>
+<input class="text" type="text" name="database" value="" id="database">
+</p>
+<p>
+<label for="media_url">{{ "What URL is used for embedded media?" | translate("migrator") }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="url" name="media_url" value="" id="movabletype_media_url">
+<small>
+{{ "Usually something like <code>http://example.com/images/</code>." | translate("migrator") }}
+</small>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="movabletype_hash">
+</fieldset>
+</form>
+{% endblock %}

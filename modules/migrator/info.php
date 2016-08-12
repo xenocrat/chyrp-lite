@@ -1,9 +1,9 @@
 <?php
 return array(
-    "name"          => __("Importers", "importers"),
+    "name"          => __("Migration Assistant", "migrator"),
     "url"           => "http://chyrplite.net/",
     "version"       => 1.0,
-    "description"   => __("Adds additional import options for Wordpress, MovableType, TextPattern, and Tumblr.", "importers"),
+    "description"   => __("Allows import from Wordpress, MovableType, TextPattern, and Tumblr.", "migrator"),
     "author"        => array(
         "name"      => "Daniel Pimley",
         "url"       => "http://www.pimley.net/")
