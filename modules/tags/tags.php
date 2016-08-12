@@ -130,6 +130,11 @@
             return $navs;
         }
 
+        public function manage_pages($pages) {
+            array_push($pages, "rename_tag");
+            return $pages;
+        }
+
         public function manage_nav_pages($pages) {
             array_push($pages, "manage_tags", "rename_tag", "delete_tag", "edit_tags");
             return $pages;
