@@ -174,6 +174,11 @@
             return $pages;
         }
 
+        public function manage_nav_show($possibilities) {
+            $possibilities[] = (Visitor::current()->group->can("manage_categorize"));
+            return $possibilities;
+        }
+
         public function admin_manage_category($admin) {
             if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
