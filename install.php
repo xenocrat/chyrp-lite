@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.03");
-    define('CHYRP_CODENAME', "Chestnut");
+    define('CHYRP_VERSION',  "2016.04");
+    define('CHYRP_CODENAME', "Iago");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -585,7 +585,7 @@
 
             # Post attributes table.
             $sql->query("CREATE TABLE IF NOT EXISTS __post_attributes (
-                             post_id INTEGER NOT NULL ,
+                             post_id INTEGER NOT NULL,
                              name VARCHAR(100) DEFAULT '',
                              value LONGTEXT,
                              PRIMARY KEY (post_id, name)

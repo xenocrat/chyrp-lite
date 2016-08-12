@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2016.03");
+    define('CHYRP_VERSION', "2016.04");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Chestnut");
+    define('CHYRP_CODENAME', "Iago");
 
     # Constant: CACHE_TWIG
     # Override DEBUG to enable Twig template caching.
