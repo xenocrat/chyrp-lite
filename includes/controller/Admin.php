@@ -1060,6 +1060,7 @@
                                             "params" => $params));
 
                 $ids = array();
+
                 foreach ($results[0] as $result)
                     $ids[] = $result["id"];
 
@@ -1130,8 +1131,8 @@
                     $posts_atom.= '    </entry>'."\r";
 
                 }
-                $posts_atom.= '</feed>'."\r";
 
+                $posts_atom.= '</feed>'."\r";
                 $exports["posts.atom"] = $posts_atom;
             }
 
@@ -1189,8 +1190,8 @@
 
                     $pages_atom.= '    </entry>'."\r";
                 }
-                $pages_atom.= '</feed>'."\r";
 
+                $pages_atom.= '</feed>'."\r";
                 $exports["pages.atom"] = $pages_atom;
             }
 
@@ -1297,15 +1298,13 @@
                 if (!$pages = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $pages->generator != "Chyrp")
                     Flash::warning(__("Chyrp Pages export file is invalid."), "/admin/?action=import");
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(300);
 
             function media_url_scan(&$value) {
-                $config = Config::current();
-
                 $regexp_url = preg_quote($_POST['media_url'], "/");
 
                 if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/", $value, $media))
