@@ -8,17 +8,10 @@
         }
 
         public function manage_nav($navs) {
-            if (!Visitor::current()->group->can("add_post"))
-                return $navs;
-
-            $navs["manage_migration"] = array("title" => __("Migration", "migrator"));
+            if (Visitor::current()->group->can("add_post"))
+              $navs["manage_migration"] = array("title" => __("Migration", "migrator"));
 
             return $navs;
-        }
-
-        public function manage_nav_pages($pages) {
-            array_push($pages, "manage_migration");
-            return $pages;
         }
 
         /**

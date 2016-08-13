@@ -378,11 +378,6 @@
             return $navs;
         }
 
-        public function manage_nav_pages($pages) {
-            array_push($pages, "manage_comments", "manage_spam", "edit_comment", "delete_comment");
-            return $pages;
-        }
-
         public function admin_edit_comment($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a comment.", "comments"), null, 400);
@@ -841,10 +836,7 @@
         }
 
         public function determine_action($action) {
-            if ($action != "manage")
-                return;
-
-            if (Comment::any_editable() or Comment::any_deletable())
+            if ($action == "manage" and (Comment::any_editable() or Comment::any_deletable()))
                 return "manage_comments";
         }
 

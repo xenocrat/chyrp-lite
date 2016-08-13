@@ -27,6 +27,7 @@
         public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["cascade_settings"] = array("title" => __("Cascade", "cascade"));
+
             return $navs;
         }
 

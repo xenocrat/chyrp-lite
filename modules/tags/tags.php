@@ -121,23 +121,11 @@
         }
 
         public function manage_nav($navs) {
-            if (!Post::any_editable())
-                return $navs;
-
-            $navs["manage_tags"] = array("title" => __("Tags", "tags"),
-                                         "selected" => array("rename_tag", "delete_tag", "edit_tags"));
+            if (Post::any_editable())
+                $navs["manage_tags"] = array("title" => __("Tags", "tags"),
+                                             "selected" => array("rename_tag", "delete_tag", "edit_tags"));
 
             return $navs;
-        }
-
-        public function manage_pages($pages) {
-            array_push($pages, "rename_tag");
-            return $pages;
-        }
-
-        public function manage_nav_pages($pages) {
-            array_push($pages, "manage_tags", "rename_tag", "delete_tag", "edit_tags");
-            return $pages;
         }
 
         public function admin_manage_tags($admin) {

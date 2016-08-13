@@ -83,30 +83,15 @@
         }
 
         public function manage_nav($navs) {
-            if (!Visitor::current()->group->can("delete_pingbacks"))
-                return $navs;
-
-            $navs["manage_pingbacks"] = array("title" => __("Pingbacks", "pingable"),
-                                              "selected" => array("delete_pingback"));
+            if (Visitor::current()->group->can("delete_pingbacks"))
+                $navs["manage_pingbacks"] = array("title" => __("Pingbacks", "pingable"),
+                                                  "selected" => array("delete_pingback"));
 
             return $navs;
         }
 
-        public function manage_nav_pages($pages) {
-            array_push($pages, "manage_pingbacks", "delete_pingback");
-            return $pages;
-        }
-
-        public function manage_nav_show($possibilities) {
-            $possibilities[] = (Visitor::current()->group->can("delete_pingbacks"));
-            return $possibilities;
-        }
-
         public function determine_action($action) {
-            if ($action != "manage")
-                return;
-
-            if (Visitor::current()->group->can("delete_pingbacks"))
+            if ($action == "manage" and Visitor::current()->group->can("delete_pingbacks"))
                 return "manage_pingbacks";
         }
 

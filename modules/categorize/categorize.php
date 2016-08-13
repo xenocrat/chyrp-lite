@@ -160,23 +160,11 @@
         }
 
         public function manage_nav($navs) {
-            if (!Visitor::current()->group->can('manage_categorize'))
-                return $navs;
-
-            $navs["manage_category"] = array("title" => __("Categories", "categorize"),
-                                             "selected" => array("new_category", "delete_category", "edit_category"));
+            if (Visitor::current()->group->can('manage_categorize'))
+                $navs["manage_category"] = array("title" => __("Categories", "categorize"),
+                                                 "selected" => array("new_category", "delete_category", "edit_category"));
 
             return $navs;
-        }
-
-        public function manage_nav_pages($pages) {
-            array_push($pages, "manage_category", "new_category", "delete_category", "edit_category");
-            return $pages;
-        }
-
-        public function manage_nav_show($possibilities) {
-            $possibilities[] = (Visitor::current()->group->can("manage_categorize"));
-            return $possibilities;
         }
 
         public function admin_manage_category($admin) {

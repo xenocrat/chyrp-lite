@@ -36,6 +36,7 @@
         public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["lightbox_settings"] = array("title" => __("Lightbox", "lightbox"));
+
             return $navs;
         }
 

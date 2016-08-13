@@ -42,6 +42,7 @@
         public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["recaptcha_settings"] = array("title" => __("ReCAPTCHA", "recaptcha"));
+
             return $navs;
         }
 
