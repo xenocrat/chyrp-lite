@@ -479,7 +479,7 @@
                 Flash::notice(__("This site does not allow registration."), "/");
 
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/");
+                Flash::notice(__("You cannot register an account because you are already logged in."), "/");
 
             if (!empty($_POST)) {
                 if (empty($_POST['login']))
@@ -525,7 +525,7 @@
                                           $_POST['password1'],
                                           $_POST['email']);
                         $_SESSION['user_id'] = $user->id;
-                        Flash::notice(__("Registration successful."), "/");
+                        Flash::notice(__("Your account is now active and you may log in."), "login");
                     }
 
                     Trigger::current()->call("user_registered", $user);
