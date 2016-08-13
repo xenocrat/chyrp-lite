@@ -68,12 +68,12 @@
             if (in_array($route->arg[0], array("__construct", "parse", "post_from_url", "display", "current")))
                 show_404();
 
-            # Discover feeds.
+            # Discover feed requests.
             if (preg_match("/\/feed\/?$/", $route->request)) {
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
 
-                # Don't set $route->action to "feed" (bottom of this function).
+                # Don't set $route->action to "feed" - the display() method handles feeds transparently.
                 if ($route->arg[0] == "feed")
                     return $route->action = "index";
             }
@@ -823,7 +823,7 @@
 
         /**
          * Function: display
-         * Display the page.
+         * Displays the page.
          *
          * If "posts" is in the context and the visitor requested a feed, they will be served.
          *
@@ -845,7 +845,7 @@
 
             $this->displayed = true;
 
-            # Serve feeds.
+            # Serve feeds if a feed request was detected for this action.
             if ($this->feed) {
                 if ($trigger->exists($route->action."_feed"))
                     return $trigger->call($route->action."_feed", $context);

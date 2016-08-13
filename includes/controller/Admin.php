@@ -2180,7 +2180,7 @@
 
         /**
          * Function: display
-         * Renders the page.
+         * Displays the page.
          *
          * Parameters:
          *     $action - The template file to display (sans ".twig") relative to /admin/ for core and extensions.
