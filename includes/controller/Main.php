@@ -838,15 +838,10 @@
             $trigger = Trigger::current();
             $theme = Theme::current();
 
-            if (is_array($template)) {
-                foreach ($template as $try)
-                    if ($theme->file_exists($try))
+            if (is_array($template))
+                foreach (array_values($template) as $index => $try)
+                    if ($theme->file_exists($try) or ($index + 1) == count($template))
                         return $this->display($try, $context, $title);
-
-                error(__("Twig Error"),
-                      __("No template files exist in the supplied array of fallbacks."),
-                      debug_backtrace());
-            }
 
             $this->displayed = true;
 
@@ -891,8 +886,7 @@
             try {
                 return $this->twig->display($template.".twig", $this->context);
             } catch (Exception $e) {
-                $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                error(__("Twig Error"), $prettify, debug_backtrace());
+                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
             }
         }
 

@@ -2228,8 +2228,7 @@
             try {
                 $this->twig->display($path.DIR.$action.".twig", $this->context);
             } catch (Exception $e) {
-                $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                error(__("Twig Error"), $prettify, debug_backtrace());
+                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
             }
         }
 
