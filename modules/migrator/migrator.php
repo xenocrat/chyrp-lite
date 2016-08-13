@@ -45,7 +45,7 @@
             if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
                 error(__("Error"), __("You must select a WordPress export file.", "importers"), null, 422);
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -218,7 +218,7 @@
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -353,7 +353,7 @@
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "importers"), null, 422);
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -447,7 +447,7 @@
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "importers"), null, 422);
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
