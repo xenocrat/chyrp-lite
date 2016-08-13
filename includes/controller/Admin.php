@@ -63,7 +63,7 @@
             $config = Config::current();
 
             # Protect non-responder functions.
-            if (in_array($route->action, array("__construct", "parse", "subnav_context", "display", "current")))
+            if (in_array($route->action, array("__construct", "parse", "navigation_context", "display", "current")))
                 show_404();
 
             if (empty($route->action) or $route->action == "write") {
@@ -2063,114 +2063,119 @@
         }
 
         /**
-         * Function: subnav_context
-         * Generates the context variables for the subnav.
+         * Function: navigation_context
+         * Returns the navigation context for Twig.
          */
-        public function subnav_context($action) {
+        public function navigation_context($action) {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
-            $this->context["subnav"] = array();
-            $subnav =& $this->context["subnav"];
+            $navigation = array();
 
-            $subnav["write"] = array();
-            $pages = array("manage" => array());
+            $navigation["write"]    = array("children" => array(), "selected" => false, "title" => __("Write"));
+            $navigation["manage"]   = array("children" => array(), "selected" => false, "title" => __("Manage"));
+            $navigation["settings"] = array("children" => array(), "selected" => false, "title" => __("Settings"));
+            $navigation["extend"]   = array("children" => array(), "selected" => false, "title" => __("Extend"));
 
-            foreach (Config::current()->enabled_feathers as $index => $feather) {
-                $selected = ((isset($_GET['feather']) and $_GET['feather'] == $feather) or
-                            (!isset($_GET['feather']) and $action == "write_post" and !$index)) ? "write_post" : false ;
+            $write    =& $navigation["write"]["children"];
+            $manage   =& $navigation["manage"]["children"];
+            $settings =& $navigation["settings"]["children"];
+            $extend   =& $navigation["extend"]["children"];
 
-                $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
-                $subnav["write"]["write_post&feather=".$feather] = array("title" => $info["name"],
-                                                                         "show" => $visitor->group->can("add_draft", "add_post"),
-                                                                         "attributes" => ' id="feathers['.$feather.']"',
-                                                                         "selected" => $selected);
+            # Write:
+
+            if ($visitor->group->can("add_page"))
+                $write["write_page"] = array("title" => __("Page"));
+
+            if ($visitor->group->can("add_draft", "add_post"))
+                foreach (Config::current()->enabled_feathers as $feather) {
+                    $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
+                    $write["write_post&feather=".$feather] = array("title" => $info["name"],
+                                                                   "feather" => $feather);
+                }
+
+            $trigger->filter($write, "write_nav");
+
+            foreach ($write as $child => &$attributes) {
+                $attributes["selected"] = ($action == $child or
+                    (isset($attributes["selected"]) and in_array($action, (array) $attributes["selected"])) or
+                    (isset($_GET['feather']) and isset($attributes["feather"]) and $_GET['feather'] == $attributes["feather"]));
+
+                if ($attributes["selected"] == true)
+                    $navigation["write"]["selected"] = true;
             }
 
-            # Write navs.
-            $subnav["write"]["write_page"] = array("title" => __("Page"),
-                                                   "show" => $visitor->group->can("add_page"));
+            # Manage:
 
-            # Allow extensions to add tab instructions to the "write" sub nav.
-            $trigger->filter($subnav["write"], array("admin_write_nav", "write_nav"));
-            $pages["write"] = array_merge(array("write_post"), array_keys($subnav["write"]));;
+            if (Post::any_editable() or Post::any_deletable())
+                $manage["manage_posts"] = array("title" => __("Posts"),
+                                                "selected" => array("edit_post", "delete_post"));
 
-            # Manage navs.
-            $subnav["manage"] = array("manage_posts"  => array("title" => __("Posts"),
-                                                               "show" => (Post::any_editable() or Post::any_deletable()),
-                                                               "selected" => array("edit_post", "delete_post")),
-                                      "manage_pages"  => array("title" => __("Pages"),
-                                                               "show" => ($visitor->group->can("edit_page", "delete_page")),
-                                                               "selected" => array("edit_page", "delete_page")),
-                                      "manage_users"  => array("title" => __("Users"),
-                                                               "show" => ($visitor->group->can("add_user",
-                                                                                               "edit_user",
-                                                                                               "delete_user")),
-                                                               "selected" => array("edit_user", "delete_user", "new_user")),
-                                      "manage_groups" => array("title" => __("Groups"),
-                                                               "show" => ($visitor->group->can("add_group",
-                                                                                               "edit_group",
-                                                                                               "delete_group")),
-                                                               "selected" => array("edit_group", "delete_group", "new_group")));
+            if ($visitor->group->can("edit_page", "delete_page"))
+                $manage["manage_pages"] = array("title" => __("Pages"),
+                                                "selected" => array("edit_page", "delete_page"));
 
-            # Allow extensions to add tab instructions to the "manage" sub nav.
-            $trigger->filter($subnav["manage"], "manage_nav");
+            if ($visitor->group->can("add_user", "edit_user", "delete_user"))
+                $manage["manage_users"] = array("title" => __("Users"),
+                                                "selected" => array("edit_user", "delete_user", "new_user"));
 
-            $subnav["manage"]["import"] = array("title" => __("Import"),
-                                                "show" => ($visitor->group->can("add_post")));
-            $subnav["manage"]["export"] = array("title" => __("Export"),
-                                                "show" => ($visitor->group->can("add_post")));
+            if ($visitor->group->can("add_group", "edit_group", "delete_group"))
+                $manage["manage_groups"] = array("title" => __("Groups"),
+                                                 "selected" => array("edit_group", "delete_group", "new_group"));
 
-            $pages["manage"][] = "new_user";
-            $pages["manage"][] = "new_group";
+            $trigger->filter($manage, "manage_nav");
 
-            foreach (array_keys($subnav["manage"]) as $manage)
-                $pages["manage"] = array_merge($pages["manage"], array($manage,
-                                                                       preg_replace_callback("/manage_(.+)/",
-                                                                            function($m) {
-                                                                                return "edit_".depluralize($m[1]);
-                                                                            }, $manage),
-                                                                       preg_replace_callback("/manage_(.+)/",
-                                                                            function($m) {
-                                                                                return "delete_".depluralize($m[1]);
-                                                                            }, $manage)));
+            if ($visitor->group->can("add_post")) {
+                $manage["import"] = array("title" => __("Import"));
+                $manage["export"] = array("title" => __("Export"));
+            }
 
-            # Settings navs.
-            $subnav["settings"] = array("general_settings" => array("title" => __("General"),
-                                                                    "show" => $visitor->group->can("change_settings")),
-                                        "content_settings" => array("title" => __("Content"),
-                                                                    "show" => $visitor->group->can("change_settings")),
-                                        "user_settings"    => array("title" => __("Users"),
-                                                                    "show" => $visitor->group->can("change_settings")),
-                                        "route_settings"   => array("title" => __("Routes"),
-                                                                    "show" => $visitor->group->can("change_settings")));
+            foreach ($manage as $child => &$attributes) {
+                $attributes["selected"] = ($action == $child or
+                    (isset($attributes["selected"]) and in_array($action, (array) $attributes["selected"])));
 
-            # Allow extensions to add tab instructions to the "settings" sub nav.
-            $trigger->filter($subnav["settings"], "settings_nav");
-            $pages["settings"] = array_keys($subnav["settings"]);
+                if ($attributes["selected"] == true)
+                    $navigation["manage"]["selected"] = true;
+            }
 
-            # Extend navs.
-            $subnav["extend"] = array("modules"  => array("title" => __("Modules"),
-                                                          "show" => $visitor->group->can("toggle_extensions")),
-                                      "feathers" => array("title" => __("Feathers"),
-                                                          "show" => $visitor->group->can("toggle_extensions")),
-                                      "themes"   => array("title" => __("Themes"),
-                                                          "show" => $visitor->group->can("toggle_extensions")));
+            # Settings:
 
-            # Allow extensions to add tab instructions to the "extend" sub nav.
+            if ($visitor->group->can("change_settings")) {
+                $settings["general_settings"] = array("title" => __("General"));
+                $settings["content_settings"] = array("title" => __("Content"));
+                $settings["user_settings"] = array("title" => __("Users"));
+                $settings["route_settings"] = array("title" => __("Routes"));
+            }
+
+            $trigger->filter($settings, "settings_nav");
+
+            foreach ($settings as $child => &$attributes) {
+                $attributes["selected"] = ($action == $child or
+                    (isset($attributes["selected"]) and in_array($action, (array) $attributes["selected"])));
+
+                if ($attributes["selected"] == true)
+                    $navigation["settings"]["selected"] = true;
+            }
+
+            # Extend:
+
+            if ($visitor->group->can("toggle_extensions")) {
+                $extend["modules"] = array("title" => __("Modules"));
+                $extend["feathers"] = array("title" => __("Feathers"));
+                $extend["themes"] = array("title" => __("Themes"));
+            }
+
             $trigger->filter($subnav["extend"], "extend_nav");
-            $pages["extend"] = array_keys($subnav["extend"]);
 
-            # Allow extensions to specify which (if any) sub nav is visible when their pages are displayed.
-            foreach (array_keys($subnav) as $main_nav)
-                foreach ($trigger->filter($pages[$main_nav], $main_nav."_nav_pages") as $extend)
-                    $subnav[$extend] =& $subnav[$main_nav];
+            foreach ($extend as $child => &$attributes) {
+                $attributes["selected"] = ($action == $child or
+                    (isset($attributes["selected"]) and in_array($action, (array) $attributes["selected"])));
 
-            foreach ($subnav as $main_nav => &$sub_nav)
-                foreach ($sub_nav as &$nav)
-                    $nav["show"] = (!isset($nav["show"]) or $nav["show"]);
+                if ($attributes["selected"] == true)
+                    $navigation["extend"]["selected"] = true;
+            }
 
-            $trigger->filter($subnav, "admin_subnav");
+            return $navigation;
         }
 
         /**
@@ -2191,15 +2196,6 @@
 
             $this->displayed = true;
 
-            # Allow extensions with non-conforming page names to specify where they belong in main nav.
-            foreach (array("write" => array(),
-                           "manage" => array("import", "export"),
-                           "settings" => array(),
-                           "extend" => array("modules", "feathers", "themes")) as $main_nav => $val) {
-                $$main_nav = $val;
-                $trigger->filter($$main_nav, $main_nav."_pages");
-            }
-
             $this->context                = array_merge($context, $this->context);
             $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
             $this->context["DIR"]         = DIR;
@@ -2219,63 +2215,12 @@
             $this->context["modules"]     = Modules::$instances;
             $this->context["POST"]        = $_POST;
             $this->context["GET"]         = $_GET;
-            $this->context["navigation"]  = array();
+            $this->context["navigation"]  = $this->navigation_context($route->action);
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["sql_debug"]   =& SQL::current()->debug;
 
             $trigger->filter($this->context, array("admin_context",
                                                    "admin_context_".str_replace(DIR, "_", $action)));
-
-            $show = array("write" => array($visitor->group->can("add_draft", "add_post", "add_page")),
-                          "manage" => array($visitor->group->can("view_own_draft",
-                                                                 "view_draft",
-                                                                 "edit_own_draft",
-                                                                 "edit_own_post",
-                                                                 "edit_post",
-                                                                 "delete_own_draft",
-                                                                 "delete_own_post",
-                                                                 "delete_post",
-                                                                 "add_page",
-                                                                 "edit_page",
-                                                                 "delete_page",
-                                                                 "add_user",
-                                                                 "edit_user",
-                                                                 "delete_user",
-                                                                 "add_group",
-                                                                 "edit_group",
-                                                                 "delete_group")),
-                          "settings" => array($visitor->group->can("change_settings")),
-                          "extend" => array($visitor->group->can("toggle_extensions")));
-
-            # Allow extensions to force visibility of a main nav section if the user can do stuff there.
-            foreach ($show as $name => &$arr)
-                $trigger->filter($arr, $name."_nav_show");
-
-            $this->context["navigation"]["write"] = array("title" => __("Write"),
-                                                          "show" => in_array(true, $show["write"]),
-                                                          "selected" => (in_array($action, $write) or
-                                                                        match("/^write_/", $action)));
-
-            $this->context["navigation"]["manage"] = array("title" => __("Manage"),
-                                                           "show" => in_array(true, $show["manage"]),
-                                                           "selected" => (in_array($action, $manage) or
-                                                                         match(array("/^manage_/",
-                                                                                     "/^edit_/",
-                                                                                     "/^delete_/",
-                                                                                     "/^new_/"), $action)));
-
-            $this->context["navigation"]["settings"] = array("title" => __("Settings"),
-                                                             "show" => in_array(true, $show["settings"]),
-                                                             "selected" => (in_array($action, $settings) or
-                                                                           match("/_settings$/", $action)));
-
-            $this->context["navigation"]["extend"] = array("title" => __("Extend"),
-                                                           "show" => in_array(true, $show["extend"]),
-                                                           "selected" => (in_array($action, $extend) or
-                                                                         match("/_extend$/", $action)));
-
-            # Generate the sub nav structures.
-            $this->subnav_context($route->action);
 
             if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
                 Update::check();
