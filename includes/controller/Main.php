@@ -877,8 +877,7 @@
             $this->context["sql_debug"]          =& SQL::current()->debug;
             $this->context["visitor"]->logged_in = logged_in();
 
-            $trigger->filter($this->context, array("main_context",
-                                                   "main_context_".str_replace(DIR, "_", $template)));
+            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
             if ($config->cookies_notification and empty($_SESSION['cookies_notified']))
                 $theme->cookies_notification();

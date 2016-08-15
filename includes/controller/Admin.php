@@ -2219,8 +2219,7 @@
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["sql_debug"]   =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("admin_context",
-                                                   "admin_context_".str_replace(DIR, "_", $action)));
+            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
 
             if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
                 Update::check();
