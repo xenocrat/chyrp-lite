@@ -118,9 +118,7 @@
 
             $config->set($enabled_array, $updated_array);
 
-            $info = include $folder.DIR.$name.DIR."info.php";
-            fallback($info["uploader"], false);
-            fallback($info["notifications"], array());
+            $info = load_info($folder.DIR.$name.DIR."info.php");
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
