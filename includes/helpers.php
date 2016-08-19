@@ -1517,7 +1517,7 @@
     }
 
     #---------------------------------------------
-    # Modules and Feathers
+    # Extensions
     #---------------------------------------------
 
     /**
@@ -1525,7 +1525,6 @@
      * Loads an extension's info.php file and returns an array of attributes.
      */
     function load_info($filepath) {
-
         if (is_file($filepath) and is_readable($filepath))
             $info = include $filepath;
 
