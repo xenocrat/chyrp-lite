@@ -1424,12 +1424,12 @@
 
                 load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = load_info(MODULES_DIR.DIR.$folder.DIR."info.php");
-
                 if (!isset($classes[$folder]))
                     $classes[$folder] = array($folder);
                 else
                     array_unshift($classes[$folder], $folder);
+
+                $info = load_info(MODULES_DIR.DIR.$folder.DIR."info.php");
 
                 $conflicting_modules = array();
 
