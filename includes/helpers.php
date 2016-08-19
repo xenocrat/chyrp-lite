@@ -1521,6 +1521,31 @@
     #---------------------------------------------
 
     /**
+     * Function: load_info
+     * Loads an extension's info.php file and returns an array of attributes.
+     */
+    function load_info($filepath) {
+
+        if (is_file($filepath) and is_readable($filepath))
+            $info = include $filepath;
+
+        if (!isset($info) or gettype($info) != "array")
+            $info = array();
+
+        fallback($info["name"], fix(dirname($filepath)));
+        fallback($info["version"], 0);
+        fallback($info["url"]);
+        fallback($info["description"], __("No description."));
+        fallback($info["author"], array("name" => "", "url" => ""));
+        fallback($info["help"]);
+        fallback($info["confirm"]);
+        fallback($info["uploader"], false);
+        fallback($info["notifications"], array());
+
+        return $info;
+    }
+
+    /**
      * Function: init_extensions
      * Initialize all Modules and Feathers.
      */
@@ -1531,8 +1556,7 @@
         foreach ((array) $config->enabled_modules as $module) {
             $class_name = camelize($module);
 
-            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or
-                !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
+            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php")) {
                 cancel_module($module, _f("%s module is missing.", $class_name));
                 continue;
             }
@@ -1557,8 +1581,7 @@
         foreach ((array) $config->enabled_feathers as $feather) {
             $class_name = camelize($feather);
 
-            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or
-                !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
+            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php")) {
                 cancel_feather($feather, _f("%s feather is missing.", $class_name));
                 continue;
             }
