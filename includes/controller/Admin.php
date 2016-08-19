@@ -1419,21 +1419,17 @@
             $classes = array();
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php") or
-                    !file_exists(MODULES_DIR.DIR.$folder.DIR."info.php"))
+                if (strpos($folder, ".") === 0 or !file_exists(MODULES_DIR.DIR.$folder.DIR.$folder.".php"))
                     continue;
 
                 load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+
+                $info = load_info(MODULES_DIR.DIR.$folder.DIR."info.php");
 
                 if (!isset($classes[$folder]))
                     $classes[$folder] = array($folder);
                 else
                     array_unshift($classes[$folder], $folder);
-
-                $info = include MODULES_DIR.DIR.$folder.DIR."info.php";
-
-                if (gettype($info) != "array")
-                    continue;
 
                 $conflicting_modules = array();
 
@@ -1477,21 +1473,12 @@
                     }
                 }
 
-                fallback($info["name"], $folder);
-                fallback($info["version"], "0");
-                fallback($info["url"]);
-                fallback($info["description"], __("No description."));
-                fallback($info["author"], array("name" => "", "url" => ""));
-                fallback($info["help"]);
-                fallback($info["confirm"]);
-
-                $info["description"] = __($info["description"], $folder);
-
                 $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
+
                 $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
@@ -1522,6 +1509,7 @@
             foreach ($this->context["disabled_modules"] as $module => &$attrs)
                 $attrs["classes"] = $classes[$module];
 
+            closedir($open);
             $this->display("modules");
         }
 
@@ -1542,32 +1530,19 @@
                 error(__("Error"), __("Could not read feathers directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php") or
-                    !file_exists(FEATHERS_DIR.DIR.$folder.DIR."info.php"))
+                if (strpos($folder, ".") === 0 or !file_exists(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php"))
                     continue;
 
                 load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = include FEATHERS_DIR.DIR.$folder.DIR."info.php";
-
-                if (gettype($info) != "array")
-                    continue;
-
-                fallback($info["name"], $folder);
-                fallback($info["version"], "0");
-                fallback($info["url"]);
-                fallback($info["description"], __("No description."));
-                fallback($info["author"], array("name" => "", "url" => ""));
-                fallback($info["help"]);
-                fallback($info["confirm"]);
-
-                $info["description"] = __($info["description"], $folder);
+                $info = load_info(FEATHERS_DIR.DIR.$folder.DIR."info.php");
 
                 $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
+
                 $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
@@ -1589,6 +1564,7 @@
                                                            "confirm" => $info["confirm"]);
             }
 
+            closedir($open);
             $this->display("feathers");
         }
 
@@ -1611,21 +1587,12 @@
                 error(__("Error"), __("Could not read themes directory."));
 
             while (($folder = readdir($open)) !== false) {
-                if (!file_exists(THEMES_DIR.DIR.$folder.DIR."info.php"))
+                if (strpos($folder, ".") === 0 or !is_dir(THEMES_DIR.DIR.$folder))
                     continue;
 
                 load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = include THEMES_DIR.DIR.$folder.DIR."info.php";
-
-                if (gettype($info) != "array")
-                  continue;
-
-                fallback($info["name"], $folder);
-                fallback($info["version"], "0");
-                fallback($info["url"]);
-                fallback($info["description"]);
-                fallback($info["author"], array("name" => "", "url" => ""));
+                $info = load_info(THEMES_DIR.DIR.$folder.DIR."info.php");
 
                 $info["author"]["link"] = !empty($info["author"]["url"]) ?
                     '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' : $info["author"]["name"] ;
@@ -1635,6 +1602,7 @@
                                                                  return "<code>".fix($matches[1])."</code>";
                                                              },
                                                              $info["description"]);
+
                 $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
                                                              function ($matches) {
                                                                  return "<pre>".fix($matches[1])."</pre>";
@@ -1702,9 +1670,7 @@
 
             $config->set($enabled_array, $updated_array);
 
-            $info = include $folder.DIR.$name.DIR."info.php";
-            fallback($info["uploader"], false);
-            fallback($info["notifications"], array());
+            $info = load_info($folder.DIR.$name.DIR."info.php");
 
             if ($info["uploader"])
                 if (!file_exists(MAIN_DIR.$config->uploads_path))
@@ -1794,8 +1760,7 @@
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
 
-            $info = include THEMES_DIR.DIR.$theme.DIR."info.php";
-            fallback($info["notifications"], array());
+            $info = load_info($folder.DIR.$name.DIR."info.php");
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
