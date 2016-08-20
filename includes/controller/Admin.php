@@ -1473,34 +1473,13 @@
                     }
                 }
 
-                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
-                                                             function ($matches) {
-                                                                 return "<code>".fix($matches[1])."</code>";
-                                                             },
-                                                             $info["description"]);
-
-                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
-                                                             function ($matches) {
-                                                                 return "<pre>".fix($matches[1])."</pre>";
-                                                             },
-                                                             $info["description"]);
-
-                $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                    '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
-
                 # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
                 $category = (class_exists(camelize($folder))) ? "enabled_modules" : "disabled_modules" ;
 
-                $this->context[$category][$folder] = array("name" => $info["name"],
-                                                           "version" => $info["version"],
-                                                           "url" => $info["url"],
-                                                           "description" => $info["description"],
-                                                           "author" => $info["author"],
-                                                           "help" => $info["help"],
-                                                           "confirm" => $info["confirm"],
-                                                           "classes" => $classes[$folder],
-                                                           "conflicting_modules" => $conflicting_modules,
-                                                           "dependencies_needed" => $dependencies_needed);
+                $this->context[$category][$folder] = array_merge($info,
+                                                                 array("classes" => $classes[$folder],
+                                                                       "conflicting_modules" => $conflicting_modules,
+                                                                       "dependencies_needed" => $dependencies_needed));
             }
 
             foreach ($this->context["enabled_modules"] as $module => &$attrs)
@@ -1535,33 +1514,10 @@
 
                 load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = load_info(FEATHERS_DIR.DIR.$folder.DIR."info.php");
-
-                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
-                                                             function ($matches) {
-                                                                 return "<code>".fix($matches[1])."</code>";
-                                                             },
-                                                             $info["description"]);
-
-                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
-                                                             function ($matches) {
-                                                                 return "<pre>".fix($matches[1])."</pre>";
-                                                             },
-                                                             $info["description"]);
-
-                $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                    '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
-
                 # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
                 $category = (class_exists(camelize($folder))) ? "enabled_feathers" : "disabled_feathers" ;
 
-                $this->context[$category][$folder] = array("name" => $info["name"],
-                                                           "version" => $info["version"],
-                                                           "url" => $info["url"],
-                                                           "description" => $info["description"],
-                                                           "author" => $info["author"],
-                                                           "help" => $info["help"],
-                                                           "confirm" => $info["confirm"]);
+                $this->context[$category][$folder] = load_info(FEATHERS_DIR.DIR.$folder.DIR."info.php");
             }
 
             closedir($open);
@@ -1592,26 +1548,9 @@
 
                 load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $info = load_info(THEMES_DIR.DIR.$folder.DIR."info.php");
-
-                $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
-                                                             function ($matches) {
-                                                                 return "<code>".fix($matches[1])."</code>";
-                                                             },
-                                                             $info["description"]);
-
-                $info["description"] = preg_replace_callback("/<pre>(.+?)<\/pre>/s",
-                                                             function ($matches) {
-                                                                 return "<pre>".fix($matches[1])."</pre>";
-                                                             },
-                                                             $info["description"]);
-
-                $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                    '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' : $info["author"]["name"] ;
-
                 $this->context["themes"][] = array("name" => $folder,
                                                    "screenshot" => $config->chyrp_url."/themes/".$folder."/screenshot.png",
-                                                   "info" => $info);
+                                                   "info" => load_info(THEMES_DIR.DIR.$folder.DIR."info.php"));
             }
 
             closedir($open);
