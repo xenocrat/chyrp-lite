@@ -8,7 +8,7 @@
             $this->file   = $this->path.DIR.md5($this->url).".html";
 
             # If the cache directory does not exist and cannot be created, or is not writable, cancel execution.
-            if ((!file_exists($this->caches) and !@mkdir($this->caches)) or !is_writable($this->caches))
+            if ((!is_dir($this->caches) and !@mkdir($this->caches)) or !is_writable($this->caches))
                 cancel_module("cacher",
                               _f("Cacher module cannot continue because <em>%s</em> is not writable.", $this->caches, "cacher"));
 
