@@ -1548,9 +1548,7 @@
 
                 load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
-                $this->context["themes"][] = array("name" => $folder,
-                                                   "screenshot" => $config->chyrp_url."/themes/".$folder."/screenshot.png",
-                                                   "info" => load_info(THEMES_DIR.DIR.$folder.DIR."info.php"));
+                $this->context["themes"][$folder] = load_info(THEMES_DIR.DIR.$folder.DIR."info.php");
             }
 
             closedir($open);
@@ -1600,7 +1598,7 @@
 
             $config->set($enabled_array, $updated_array);
 
-            foreach ((array) load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
+            foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
 
             Flash::notice(__("Extension enabled."), "/admin/?action=".pluralize($type));
@@ -1674,7 +1672,7 @@
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
 
-            $info = load_info($folder.DIR.$name.DIR."info.php");
+            $info = load_info(THEMES_DIR.DIR.$theme.DIR."info.php");
 
             foreach ($info["notifications"] as $message)
                 Flash::message($message);
