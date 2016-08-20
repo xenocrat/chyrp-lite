@@ -1541,6 +1541,14 @@
         fallback($info["uploader"], false);
         fallback($info["notifications"], array());
 
+        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+
+        if ($info["uploader"])
+            if (!is_dir($uploads_path))
+                $info["notifications"][] = _f("Please create the directory <em>%s</em>.", $uploads_path);
+            elseif (!is_writable($uploads_path))
+                $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", $uploads_path);
+
         return $info;
     }
 
