@@ -1541,9 +1541,11 @@
         fallback($info["uploader"], false);
         fallback($info["notifications"], array());
 
+        $info["notifications"] = (array) $info["notifications"];
+
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
 
-        if ($info["uploader"] == true and gettype($info["notifications"]) == "array")
+        if ($info["uploader"])
             if (!is_dir($uploads_path))
                 $info["notifications"][] = _f("Please create the directory <em>%s</em>.", $uploads_path);
             elseif (!is_writable($uploads_path))
