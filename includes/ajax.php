@@ -110,7 +110,7 @@
 
             $config->set($enabled_array, $updated_array);
 
-            json_response(__("Extension enabled."), load_info($folder.DIR.$name.DIR."info.php")["notifications"]);
+            json_response(__("Extension enabled."), (array) load_info($folder.DIR.$name.DIR."info.php")["notifications"]);
         case "disable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));

@@ -1600,7 +1600,7 @@
 
             $config->set($enabled_array, $updated_array);
 
-            foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
+            foreach ((array) load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
 
             Flash::notice(__("Extension enabled."), "/admin/?action=".pluralize($type));
