@@ -92,23 +92,15 @@
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
-            # We don't use the module_enabled() helper function because we want to include cancelled modules.
-            if ($type == "module" and !empty(Modules::$instances[$name]))
-                error(__("Error"), __("Module already enabled."), null, 409);
-
-            # We don't use the feather_enabled() helper function because we want to include cancelled feathers.
-            if ($type == "feather" and !empty(Feathers::$instances[$name]))
-                error(__("Error"), __("Feather already enabled."), null, 409);
+            if (class_exists($class_name))
+                error(__("Error"), __("Extension already enabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
                 show_404(__("Not Found"), __("Extension not found."));
 
-            require $folder.DIR.$name.DIR.$name.".php";
-
-            if (!is_subclass_of($class_name, camelize(pluralize($type))))
-                show_404(__("Not Found"), __("Extension not found."));
-
             load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
+
+            require $folder.DIR.$name.DIR.$name.".php";
 
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
@@ -143,19 +135,11 @@
             $updated_array = array();
             $class_name    = camelize($name);
 
-            # We don't use the module_enabled() helper function because we want to exclude cancelled modules.
-            if ($type == "module" and empty(Modules::$instances[$name]))
-                error(__("Error"), __("Module already disabled."), null, 409);
+            if (!class_exists($class_name))
+                error(__("Error"), __("Extension already disabled."), null, 409);
 
-            # We don't use the feather_enabled() helper function because we want to exclude cancelled feathers.
-            if ($type == "feather" and empty(Feathers::$instances[$name]))
-                error(__("Error"), __("Feather already disabled."), null, 409);
-
-            if ($type == "module" and !is_subclass_of($class_name, "Modules"))
-                show_404(__("Not Found"), __("Module not found."));
-
-            if ($type == "feather" and !is_subclass_of($class_name, "Feathers"))
-                show_404(__("Not Found"), __("Feather not found."));
+            if (!is_subclass_of($class_name, camelize(pluralize($type))))
+                show_404(__("Not Found"), __("Extension not found."));
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
