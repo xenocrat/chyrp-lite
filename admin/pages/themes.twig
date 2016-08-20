@@ -7,7 +7,7 @@
 <ul id="blog_themes" class="extend themes">
 {% for theme in themes %}
 <li class="theme{{ theme.name == site.theme ? ' current' : '' }}" id="{{ theme.name }}">
-<img src="{{ theme.screenshot }}" alt="&#8220;{{ theme.info.description | fix }}&#8220; screenshot" class="screenshot" title="{{ theme.info.description | fix(true) }}">
+<img src="{{ theme.screenshot }}" alt="&#8220;{{ theme.info.description | fix }}&#8220;" class="screenshot" title="{{ theme.info.description | fix(true) }}">
 <h3>
 <a class="emblem module_author" href="{{ theme.info.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ theme.info.url | fix }}">
