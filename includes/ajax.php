@@ -110,15 +110,7 @@
 
             $config->set($enabled_array, $updated_array);
 
-            $info = load_info($folder.DIR.$name.DIR."info.php");
-
-            if ($info["uploader"])
-                if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", array($config->uploads_path));
-                elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", array($config->uploads_path));
-
-            json_response(__("Extension enabled."), $info["notifications"]);
+            json_response(__("Extension enabled."), load_info($folder.DIR.$name.DIR."info.php")["notifications"]);
         case "disable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));

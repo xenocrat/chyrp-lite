@@ -1489,7 +1489,7 @@
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
                 # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
-                $category = (!empty(Modules::$instances[$folder])) ? "enabled_modules" : "disabled_modules" ;
+                $category = (class_exists(camelize($folder))) ? "enabled_modules" : "disabled_modules" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
@@ -1553,7 +1553,7 @@
                     '<a href="'.fix($info["author"]["url"]).'">'.fix($info["author"]["name"]).'</a>' : $info["author"]["name"] ;
 
                 # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
-                $category = (!empty(Feathers::$instances[$folder])) ? "enabled_feathers" : "disabled_feathers" ;
+                $category = (class_exists(camelize($folder))) ? "enabled_feathers" : "disabled_feathers" ;
 
                 $this->context[$category][$folder] = array("name" => $info["name"],
                                                            "version" => $info["version"],
@@ -1594,9 +1594,6 @@
 
                 $info = load_info(THEMES_DIR.DIR.$folder.DIR."info.php");
 
-                $info["author"]["link"] = !empty($info["author"]["url"]) ?
-                    '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' : $info["author"]["name"] ;
-
                 $info["description"] = preg_replace_callback("/<code>(.+?)<\/code>/s",
                                                              function ($matches) {
                                                                  return "<code>".fix($matches[1])."</code>";
@@ -1608,6 +1605,9 @@
                                                                  return "<pre>".fix($matches[1])."</pre>";
                                                              },
                                                              $info["description"]);
+
+                $info["author"]["link"] = !empty($info["author"]["url"]) ?
+                    '<a href="'.$info["author"]["url"].'">'.$info["author"]["name"].'</a>' : $info["author"]["name"] ;
 
                 $this->context["themes"][] = array("name" => $folder,
                                                    "screenshot" => $config->chyrp_url."/themes/".$folder."/screenshot.png",
@@ -1661,15 +1661,7 @@
 
             $config->set($enabled_array, $updated_array);
 
-            $info = load_info($folder.DIR.$name.DIR."info.php");
-
-            if ($info["uploader"])
-                if (!file_exists(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please create the directory <em>%s</em> in your install directory.", $config->uploads_path);
-                elseif (!is_writable(MAIN_DIR.$config->uploads_path))
-                    $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", $config->uploads_path);
-
-            foreach ($info["notifications"] as $message)
+            foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
 
             Flash::notice(__("Extension enabled."), "/admin/?action=".pluralize($type));
