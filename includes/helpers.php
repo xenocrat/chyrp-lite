@@ -1543,7 +1543,7 @@
 
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
 
-        if ($info["uploader"])
+        if ($info["uploader"] == true and gettype($info["notifications"]) == "array")
             if (!is_dir($uploads_path))
                 $info["notifications"][] = _f("Please create the directory <em>%s</em>.", $uploads_path);
             elseif (!is_writable($uploads_path))
