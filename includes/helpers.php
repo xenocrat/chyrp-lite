@@ -1531,10 +1531,10 @@
         if (!isset($info) or gettype($info) != "array")
             $info = array();
 
-        fallback($info["name"], fix(dirname($filepath)));
+        fallback($info["name"], fix(basename(dirname($filepath))));
         fallback($info["version"], 0);
         fallback($info["url"]);
-        fallback($info["description"], __("No description."));
+        fallback($info["description"], "");
         fallback($info["author"], array("name" => "", "url" => ""));
         fallback($info["help"]);
         fallback($info["confirm"]);
@@ -1572,7 +1572,7 @@
             Modules::$instances[$module] = new $class_name;
             Modules::$instances[$module]->safename = $module;
 
-            foreach (include MODULES_DIR.DIR.$module.DIR."info.php" as $key => $val)
+            foreach (load_info(MODULES_DIR.DIR.$module.DIR."info.php") as $key => $val)
                 Modules::$instances[$module]->$key = $val;
         }
 
@@ -1597,7 +1597,7 @@
             Feathers::$instances[$feather] = new $class_name;
             Feathers::$instances[$feather]->safename = $feather;
 
-            foreach (include FEATHERS_DIR.DIR.$feather.DIR."info.php" as $key => $val)
+            foreach (load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php") as $key => $val)
                 Feathers::$instances[$feather]->$key = $val;
         }
 
