@@ -1431,6 +1431,8 @@
 
                 $info = load_info(MODULES_DIR.DIR.$folder.DIR."info.php");
 
+                # List of installed modules conflicting with this one.
+
                 $conflicting_modules = array();
 
                 if (!empty($info["conflicts"])) {
@@ -1439,13 +1441,15 @@
                     foreach ((array) $info["conflicts"] as $conflict)
                         if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
-                            $conflicting_modules[] = $conflict; # List of conflicting installed modules.
+                            $conflicting_modules[] = $conflict;
 
                             if (in_array($conflict, $config->enabled_modules))
                                 if (!in_array("error", $classes[$folder]))
                                     $classes[$folder][] = "error";
                         }
                 }
+
+                # List of modules depended on by this one (installed or not).
 
                 $dependencies_needed = array();
 
@@ -1455,7 +1459,7 @@
                     foreach ((array) $info["dependencies"] as $dependency) {
                         if (!file_exists(MODULES_DIR.DIR.$dependency.DIR.$dependency.".php")) {
                             if (!in_array("missing_dependency", $classes[$folder]))
-                                $classes[$folder][] = "missing_dependency"; # Dependency is not installed.
+                                $classes[$folder][] = "missing_dependency";
 
                             if (!in_array("error", $classes[$folder]))
                                 $classes[$folder][] = "error";
