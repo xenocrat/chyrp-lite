@@ -32,11 +32,11 @@
 
             $loaders = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-            foreach ($config->enabled_modules as $module)
+            foreach ((array) $config->enabled_modules as $module)
                 if (file_exists(MODULES_DIR.DIR.$module.DIR."admin"))
                     $loaders[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
-            foreach ($config->enabled_feathers as $feather)
+            foreach ((array) $config->enabled_feathers as $feather)
                 if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."admin"))
                     $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
@@ -1954,7 +1954,7 @@
                 $write["write_page"] = array("title" => __("Page"));
 
             if ($visitor->group->can("add_draft", "add_post"))
-                foreach (Config::current()->enabled_feathers as $feather) {
+                foreach ((array) Config::current()->enabled_feathers as $feather) {
                     $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
                     $write["write_post&feather=".$feather] = array("title" => $info["name"],
                                                                    "feather" => $feather);
