@@ -16,8 +16,8 @@
 </h3>
 <div class="controls">
 <form action="{{ admin_url('change_theme') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<input type="hidden" name="theme" value="{{ safename }}" id="hash">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="theme" value="{{ safename }}">
+<input type="hidden" name="hash" value="{{ ip | token }}">
 <button name="change" value="indubitably" type="submit"{{ safename == site.theme ? " disabled" : "" }}>
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Select" | translate }}
 </button>
