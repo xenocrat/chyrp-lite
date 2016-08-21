@@ -1431,9 +1431,7 @@
 
                 $info = load_info(MODULES_DIR.DIR.$folder.DIR."info.php");
 
-                # List of installed modules conflicting with this one.
-
-                $conflicting_modules = array();
+                # List of modules conflicting with this one (installed or not).
 
                 if (!empty($info["conflicts"])) {
                     $classes[$folder][] = "conflicts";
@@ -1441,17 +1439,14 @@
                     foreach ((array) $info["conflicts"] as $conflict)
                         if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
-                            $conflicting_modules[] = $conflict;
 
-                            if (in_array($conflict, $config->enabled_modules))
+                            if (module_enabled($conflict))
                                 if (!in_array("error", $classes[$folder]))
                                     $classes[$folder][] = "error";
                         }
                 }
 
                 # List of modules depended on by this one (installed or not).
-
-                $dependencies_needed = array();
 
                 if (!empty($info["dependencies"])) {
                     $classes[$folder][] = "dependencies";
@@ -1464,7 +1459,7 @@
                             if (!in_array("error", $classes[$folder]))
                                 $classes[$folder][] = "error";
                         } else {
-                            if (!in_array($dependency, $config->enabled_modules))
+                            if (!module_enabled($dependency))
                                 if (!in_array("error", $classes[$folder]))
                                     $classes[$folder][] = "error";
 
@@ -1473,17 +1468,13 @@
                         }
 
                         $classes[$folder][] = "needs_".$dependency;
-                        $dependencies_needed[] = $dependency;
                     }
                 }
 
                 # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
                 $category = (class_exists(camelize($folder))) ? "enabled_modules" : "disabled_modules" ;
 
-                $this->context[$category][$folder] = array_merge($info,
-                                                                 array("classes" => $classes[$folder],
-                                                                       "conflicting_modules" => $conflicting_modules,
-                                                                       "dependencies_needed" => $dependencies_needed));
+                $this->context[$category][$folder] = array_merge($info, array("classes" => $classes[$folder]));
             }
 
             closedir($open);

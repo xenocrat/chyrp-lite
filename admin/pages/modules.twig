@@ -20,22 +20,22 @@
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
 </p>
-{% if module.conflicting_modules is not empty %}
+{% if module.conflicts is not empty %}
 <h4 class="module_conflicts_message">
 {{ "This module conflicts with the following installed modules:" | translate }}
 </h4>
 <ol class="module_conflicts_list">
-{% for conflict in module.conflicting_modules %}
+{% for conflict in module.conflicts %}
 <li class="{{ conflict }}">{{ conflict | camelize }}</li>
 {% endfor %}
 </ol>
 {% endif %}
-{% if module.dependencies_needed is not empty %}
+{% if module.dependencies is not empty %}
 <h4 class="module_dependencies_message">
 {{ "This module requires the following modules to be enabled:" | translate }}
 </h4>
 <ol class="module_dependencies_list">
-{% for dependency in module.dependencies_needed %}
+{% for dependency in module.dependencies %}
 <li class="{{ dependency }}">{{ dependency | camelize }}</li>
 {% endfor %}
 </ol>
@@ -82,22 +82,22 @@
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
 </p>
-{% if module.conflicting_modules is not empty %}
+{% if module.conflicts is not empty %}
 <h4 class="module_conflicts_message">
 {{ "This module conflicts with the following installed modules:" | translate }}
 </h4>
 <ol class="module_conflicts_list">
-{% for conflict in module.conflicting_modules %}
+{% for conflict in module.conflicts %}
 <li class="{{ conflict }}">{{ conflict | camelize }}</li>
 {% endfor %}
 </ol>
 {% endif %}
-{% if module.dependencies_needed is not empty %}
+{% if module.dependencies is not empty %}
 <h4 class="module_dependencies_message">
 {{ "This module requires the following modules to be enabled:" | translate }}
 </h4>
 <ol class="module_dependencies_list">
-{% for dependency in module.dependencies_needed %}
+{% for dependency in module.dependencies %}
 <li class="{{ dependency }}">{{ dependency | camelize }}</li>
 {% endfor %}
 </ol>
