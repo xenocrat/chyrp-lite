@@ -1486,12 +1486,6 @@
                                                                        "dependencies_needed" => $dependencies_needed));
             }
 
-            foreach ($this->context["enabled_modules"] as $module => &$attrs)
-                $attrs["classes"] = $classes[$module];
-
-            foreach ($this->context["disabled_modules"] as $module => &$attrs)
-                $attrs["classes"] = $classes[$module];
-
             closedir($open);
             $this->display("modules");
         }
