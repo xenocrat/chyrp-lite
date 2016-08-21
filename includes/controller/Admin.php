@@ -1653,12 +1653,10 @@
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
 
-            $info = load_info(THEMES_DIR.DIR.$theme.DIR."info.php");
-
-            foreach ($info["notifications"] as $message)
+            foreach (load_info(THEMES_DIR.DIR.$theme.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
 
-            Flash::notice(_f("Theme changed to &#8220;%s&#8221;.", fix($info["name"])), "/admin/?action=themes");
+            Flash::notice(__("Theme changed."), "/admin/?action=themes");
         }
 
         /**
