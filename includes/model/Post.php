@@ -728,7 +728,13 @@
          * Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
          */
         static function feathers() {
-            return "posts.feather IN ('".implode("', '", Config::current()->enabled_feathers)."')";
+            $feathers = array();
+
+            foreach ((array) Config::current()->enabled_feathers as $feather)
+                if (feather_enabled($feather))
+                    $feathers[] = $feather;
+
+            return "posts.feather IN ('".implode("', '", $feathers)."')";
         }
 
         /**
