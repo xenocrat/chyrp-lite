@@ -1560,12 +1560,11 @@
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
 
-            $type = (isset($_POST['module'])) ? "module" : "feather" ;
-
-            if (empty($_POST[$type]))
+            if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
 
-            $name          = str_replace(array(".", DIR), "", $_POST[$type]);
+            $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
+            $name          = str_replace(array(".", DIR), "", $_POST['extension']);
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
@@ -1605,12 +1604,11 @@
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
 
-            $type = (isset($_POST['module'])) ? "module" : "feather" ;
-
-            if (empty($_POST[$type]))
+            if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
 
-            $name          = str_replace(array(".", DIR), "", $_POST[$type]);
+            $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
+            $name          = str_replace(array(".", DIR), "", $_POST['extension']);
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
