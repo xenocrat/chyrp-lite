@@ -1539,6 +1539,8 @@
         fallback($info["help"]);
         fallback($info["confirm"]);
         fallback($info["uploader"], false);
+        fallback($info["conflicts"], array());
+        fallback($info["dependencies"], array());
         fallback($info["notifications"], array());
 
         $info["notifications"] = (array) $info["notifications"];
