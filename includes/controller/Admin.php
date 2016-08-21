@@ -1472,7 +1472,8 @@
                 }
 
                 # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
-                $category = (class_exists(camelize($folder))) ? "enabled_modules" : "disabled_modules" ;
+                $category = (in_array($folder, (array) $config->enabled_modules)) ?
+                    "enabled_modules" : "disabled_modules" ;
 
                 $this->context[$category][$folder] = array_merge($info, array("classes" => $classes[$folder]));
             }
@@ -1504,7 +1505,8 @@
                 load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
 
                 # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
-                $category = (class_exists(camelize($folder))) ? "enabled_feathers" : "disabled_feathers" ;
+                $category = (in_array($folder, (array) $config->enabled_feathers)) ?
+                    "enabled_feathers" : "disabled_feathers" ;
 
                 $this->context[$category][$folder] = load_info(FEATHERS_DIR.DIR.$folder.DIR."info.php");
             }
@@ -1563,13 +1565,12 @@
             if (empty($_POST[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
 
-            $name          = $_POST[$type];
+            $name          = str_replace(array(".", DIR), "", $_POST[$type]);
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $updated_array = $config->$enabled_array;
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
-            if (class_exists($class_name))
+            if (in_array($name, (array) $config->$enabled_array))
                 error(__("Error"), __("Extension already enabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
@@ -1582,10 +1583,7 @@
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
 
-            if (!in_array($name, $updated_array))
-                $updated_array[] = $name;
-
-            $config->set($enabled_array, $updated_array);
+            $config->set($enabled_array, array_merge((array) $config->$enabled_array, array($name)));
 
             foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
@@ -1612,25 +1610,21 @@
             if (empty($_POST[$type]))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
 
-            $name          = $_POST[$type];
+            $name          = str_replace(array(".", DIR), "", $_POST[$type]);
             $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $updated_array = array();
+            $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
-            if (!class_exists($class_name))
+            if (!in_array($name, (array) $config->$enabled_array))
                 error(__("Error"), __("Extension already disabled."), null, 409);
 
-            if (!is_subclass_of($class_name, camelize(pluralize($type))))
+            if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
                 show_404(__("Not Found"), __("Extension not found."));
 
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
 
-            foreach ($config->$enabled_array as $extension)
-                if ($extension != $name)
-                    $updated_array[] = $extension;
-
-            $config->set($enabled_array, $updated_array);
+            $config->set($enabled_array, array_diff((array) $config->$enabled_array, array($name)));
 
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
@@ -1955,6 +1949,9 @@
 
             if ($visitor->group->can("add_draft", "add_post"))
                 foreach ((array) Config::current()->enabled_feathers as $feather) {
+                    if (!feather_enabled($feather))
+                        continue;
+
                     $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
                     $write["write_post&feather=".$feather] = array("title" => $info["name"],
                                                                    "feather" => $feather);
