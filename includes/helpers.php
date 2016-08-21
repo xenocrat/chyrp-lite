@@ -1626,7 +1626,7 @@
 
     /**
      * Function: module_enabled
-     * Determines if a module is currently enabled.
+     * Determines if a module is currently enabled and not cancelled.
      *
      * Parameters:
      *     $name - The non-camelized name of the module.
@@ -1640,7 +1640,7 @@
 
     /**
      * Function: feather_enabled
-     * Determines if a feather is currently enabled.
+     * Determines if a feather is currently enabled and not cancelled.
      *
      * Parameters:
      *     $name - The non-camelized name of the feather.
