@@ -484,7 +484,9 @@
                                      array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
                                      null,
                                      array(),
-                                     null, null, null,
+                                     null,
+                                     null,
+                                     null,
                                      array(array("table" => "post_attributes",
                                                  "where" => "post_id = posts.id")))->fetchAll() as $tag) {
 
@@ -557,20 +559,17 @@
 
         public function related_posts($ids, $post, $limit) {
             foreach ($post->tags as $key => $tag) {
-                $like = self::tags_name_match($key);
-                $results = SQL::current()->query("SELECT DISTINCT __posts.id
-                                                  FROM __posts
-                                                  LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
-                                                    AND __post_attributes.name = 'tags'
-                                                    AND __posts.id != $post->id
-                                                  WHERE __post_attributes.value LIKE '$like'
-                                                  GROUP BY __posts.id
-                                                  ORDER BY __posts.created_at DESC
-                                                  LIMIT $limit")->fetchAll();
+                $results = SQL::current()->select("post_attributes",
+                                                  array("post_id"),
+                                                  array("name" => "tags",
+                                                        "value like" => self::tags_name_match($key),
+                                                        "post_id !=" => $post->id),
+                                                  array("ORDER BY" => "post_id DESC"),
+                                                  array("LIMIT" => $limit))->fetchAll();
 
                 foreach ($results as $result)
-                    if (isset($result["id"]))
-                        $ids[] = $result["id"];
+                    if (isset($result["post_id"]))
+                        $ids[] = $result["post_id"];
             }
 
             return $ids;
@@ -625,7 +624,9 @@
                                   array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
                                   null,
                                   array(),
-                                  null, null, null,
+                                  null,
+                                  null,
+                                  null,
                                   array(array("table" => "post_attributes",
                                               "where" => "post_id = posts.id")));
 
