@@ -61,6 +61,22 @@
             return $xml_cats;
         }
 
+        public function related_posts($ids, $post, $limit) {
+            $results = SQL::current()->select("post_attributes",
+                                              array("post_id"),
+                                              array("name" => "category_id",
+                                                    "value" => $post->category_id,
+                                                    "post_id !=" => $post->id),
+                                              array("ORDER BY" => "post_id DESC"),
+                                              array("LIMIT" => $limit))->fetchAll();
+
+            foreach ($results as $result)
+                if (isset($result["post_id"]))
+                    $ids[] = $result["post_id"];
+
+            return $ids;
+        }
+
         public function parse_urls($urls) {
             $urls["|/category/(.*?)/|"] = "/?action=category&name=$1";
             return $urls;
@@ -133,9 +149,9 @@
                                      __("Invalid Category", "categorize"));
 
             $attributes = SQL::current()->select("post_attributes",
-                                           array("post_id"),
-                                           array("name" => "category_id",
-                                                 "value" => $category->id));
+                                                 array("post_id"),
+                                                 array("name" => "category_id",
+                                                       "value" => $category->id));
 
             $ids = array();
 
