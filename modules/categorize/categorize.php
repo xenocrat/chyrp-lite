@@ -68,7 +68,8 @@
                                                     "value" => $post->category_id,
                                                     "post_id !=" => $post->id),
                                               array("ORDER BY" => "post_id DESC"),
-                                              array("LIMIT" => $limit))->fetchAll();
+                                              array(),
+                                              $limit)->fetchAll();
 
             foreach ($results as $result)
                 if (isset($result["post_id"]))
