@@ -189,9 +189,7 @@
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'],
-                                             "name LIKE :query",
-                                             "categorize");
+            list($where, $params) = keywords($_GET['query'], "name LIKE :query", "categorize");
 
             $admin->display("manage_category", array("categorize" => Category::getCategoryList($where, $params)));
         }
