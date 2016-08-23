@@ -1531,27 +1531,29 @@
         if (!isset($info) or gettype($info) != "array")
             $info = array();
 
-        fallback($info["name"], fix(basename(dirname($filepath))));
-        fallback($info["version"], 0);
-        fallback($info["url"]);
-        fallback($info["description"], "");
-        fallback($info["author"], array("name" => "", "url" => ""));
+        fallback($info["name"],          fix(basename(dirname($filepath))));
+        fallback($info["version"],       0);
+        fallback($info["url"],           "");
+        fallback($info["description"],   "");
+        fallback($info["author"],        array("name" => "", "url" => ""));
         fallback($info["help"]);
         fallback($info["confirm"]);
-        fallback($info["uploader"], false);
-        fallback($info["conflicts"], array());
-        fallback($info["dependencies"], array());
+        fallback($info["uploader"],      false);
+        fallback($info["conflicts"],     array());
+        fallback($info["dependencies"],  array());
         fallback($info["notifications"], array());
 
-        $info["notifications"] = (array) $info["notifications"];
+        $info["conflicts"]             = (array) $info["conflicts"];
+        $info["dependencies"]          = (array) $info["dependencies"];
+        $info["notifications"]         = (array) $info["notifications"];
 
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
 
         if ($info["uploader"])
             if (!is_dir($uploads_path))
-                $info["notifications"][] = _f("Please create the directory <em>%s</em>.", $uploads_path);
+                $info["notifications"][] = _f("Please create the directory <em>%s</em>.", fix($uploads_path));
             elseif (!is_writable($uploads_path))
-                $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", $uploads_path);
+                $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", fix($uploads_path));
 
         return $info;
     }
