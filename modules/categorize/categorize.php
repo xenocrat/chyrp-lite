@@ -126,7 +126,7 @@
         }
 
         public function main_context($context) {
-            $categories = Category::getCategoryList(true);
+            $categories = Category::getCategoryList();
             $context["categorize"] = array();
 
             foreach ($categories as $category)
@@ -188,7 +188,12 @@
             if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
-            $admin->display("manage_category", array("categorize" => Category::getCategoryList()));
+            fallback($_GET['query'], "");
+            list($where, $params) = keywords($_GET['query'],
+                                             "name LIKE :query",
+                                             "categorize");
+
+            $admin->display("manage_category", array("categorize" => Category::getCategoryList($where, $params)));
         }
 
         public function admin_new_category($admin) {
