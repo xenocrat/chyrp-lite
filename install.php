@@ -409,15 +409,22 @@
             p {
                 margin-bottom: 1em;
             }
+            aside {
+                margin-bottom: 1em;
+                padding: 0.5em 1em;
+                border: 1px solid #e5d7a1;
+                border-radius: 0.25em;
+                background-color: #fffecd
+            }
         </style>
         <script src="includes/common.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">
             function toggle_adapter() {
                 if ($("#adapter").val() == "sqlite") {
-                    $("#database_field label .sub").fadeIn("fast");
+                    $(".sqlite_only").fadeIn("fast");
                     $("#host_field, #username_field, #password_field, #prefix_field").fadeOut("fast");
                 } else {
-                    $("#database_field label .sub").fadeOut("fast");
+                    $(".sqlite_only").fadeOut("fast");
                     $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                 }
             }
@@ -759,12 +766,15 @@
                 </p>
                 <p id="database_field">
                     <label for="database"><?php echo __("Database"); ?>
-                        <span class="sub">
+                        <span class="sub sqlite_only">
                             <?php echo __("(absolute or relative path)"); ?>
                         </span>
                     </label>
                     <input type="text" name="database" value="<?php posted("database"); ?>" id="database">
                 </p>
+                <aside class="sqlite_only">
+                    <?php echo __("Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."); ?>
+                </aside>
                 <p id="prefix_field">
                     <label for="prefix"><?php echo __("Table Prefix"); ?> <span class="sub"><?php echo __("(optional)"); ?></span></label>
                     <input type="text" name="prefix" value="<?php posted("prefix"); ?>" id="prefix">
@@ -808,7 +818,7 @@
                     <label for="email"><?php echo __("Email Address"); ?></label>
                     <input type="email" name="email" value="<?php posted("email"); ?>" id="email">
                 </p>
-                <button type="submit"><?php echo __("Install!"); ?></button>
+                <button type="submit"><?php echo __("Install me!"); ?></button>
             </form>
 <?php else: ?>
             <h1><?php echo __("Chyrp Lite has been installed"); ?></h1>
