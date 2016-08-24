@@ -139,7 +139,7 @@
                                  array("post_id"    => $post->id,
                                        "source"     => $source,
                                        "title"      => $title,
-                                       "created_at" => $created_at));
+                                       "created_at" => datetime($created_at)));
             }
         }
 
