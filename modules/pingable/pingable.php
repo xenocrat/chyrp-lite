@@ -23,9 +23,7 @@
             if (!empty($count))
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "pingable"));
 
-            Pingback::add($post->id,
-                          $from,
-                          $title);
+            Pingback::add($post->id, $from, $title);
 
             return __("Pingback registered!", "pingable");
         }
