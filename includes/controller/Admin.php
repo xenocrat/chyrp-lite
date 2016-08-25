@@ -1948,8 +1948,7 @@
                     if (!feather_enabled($feather))
                         continue;
 
-                    $info = include FEATHERS_DIR.DIR.$feather.DIR."info.php";
-                    $write["write_post&feather=".$feather] = array("title" => $info["name"],
+                    $write["write_post&feather=".$feather] = array("title" => load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"],
                                                                    "feather" => $feather);
                 }
 
