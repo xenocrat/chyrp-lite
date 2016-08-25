@@ -421,10 +421,10 @@
         <script type="text/javascript">
             function toggle_adapter() {
                 if ($("#adapter").val() == "sqlite") {
-                    $(".sqlite_only").fadeIn("fast");
+                    $("#database_sub, #database_aside").fadeIn("fast");
                     $("#host_field, #username_field, #password_field, #prefix_field").fadeOut("fast");
                 } else {
-                    $(".sqlite_only").fadeOut("fast");
+                    $("#database_sub, #database_aside").fadeOut("fast");
                     $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                 }
             }
@@ -766,13 +766,13 @@
                 </p>
                 <p id="database_field">
                     <label for="database"><?php echo __("Database"); ?>
-                        <span class="sub sqlite_only">
+                        <span id="database_sub" class="sub">
                             <?php echo __("(absolute or relative path)"); ?>
                         </span>
                     </label>
                     <input type="text" name="database" value="<?php posted("database"); ?>" id="database">
                 </p>
-                <aside class="sqlite_only">
+                <aside id="database_aside">
                     <?php echo __("Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."); ?>
                 </aside>
                 <p id="prefix_field">
