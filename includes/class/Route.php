@@ -67,8 +67,7 @@
                 error(__("Error"), __("Invalid action."), null, 400);
 
             # Give the controller an opportunity to parse this route and determine the action.
-            if (method_exists($controller, "parse"))
-                $controller->parse($this);
+            $controller->parse($this);
 
             Trigger::current()->call("parse_url", $this);
 
@@ -129,7 +128,7 @@
                 }
 
                 # No responders were found; display a fallback template if one is set.
-                if (++$count == count($try) and isset($this->controller->fallback) and method_exists($this->controller, "display"))
+                if (++$count == count($try) and isset($this->controller->fallback))
                     call_user_func_array(array($this->controller, "display"), $this->controller->fallback);
             }
 
