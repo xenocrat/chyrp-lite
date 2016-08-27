@@ -3,7 +3,7 @@
      * Class: Admin Controller
      * The logic controlling the administration console.
      */
-    class AdminController {
+    class AdminController implements Controller {
         # Boolean: $displayed
         # Has anything been displayed?
         public $displayed = false;
