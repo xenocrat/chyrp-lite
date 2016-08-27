@@ -266,13 +266,20 @@
                 return;
 
             foreach ($chyrp->like as $like) {
+                $sql = SQL::current();
+
                 $timestamp = $like->children("http://www.w3.org/2005/Atom")->published;
                 $session_hash = $like->children("http://chyrp.net/export/1.0/")->hash;
                 $login = $like->children("http://chyrp.net/export/1.0/")->login;
 
                 $user = new User(array("login" => (string) $login));
 
-                SQL::current()->insert("likes",
+                $count = $sql->count("likes",
+                                     array("post_id" => $post->id,
+                                           "session_hash" => $session_hash));
+
+                if (!$count)
+                    $sql->insert("likes",
                                  array("post_id" => $post->id,
                                        "user_id" => (!$user->no_results) ? $user->id : 0,
                                        "timestamp" => $timestamp,
