@@ -32,6 +32,9 @@
          *     $controller - The controller to use.
          */
         private function __construct($controller) {
+            if (!in_array("Controller", class_implements($controller)))
+                trigger_error(__("Route was initiated with an invalid Controller."), E_USER_WARNING);
+
             $this->controller = $controller;
 
             $config = Config::current();
