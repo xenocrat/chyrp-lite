@@ -1,12 +1,5 @@
 <?php
-    require_once INCLUDES_DIR.DIR."class".DIR."Captcha.php";
-
     class Maptcha extends Modules {
-        public function __init() {
-            global $captchaHooks;
-            $captchaHooks[] = "MaptchaCaptcha";
-        }
-
         static function __install() {
             Config::current()->set("maptcha_hashkey", md5(random(32)));;
         }
