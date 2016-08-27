@@ -29,6 +29,12 @@
 
             # Remember likes in the visitor's session for attribution.
             fallback($_SESSION["likes"], array());
+
+            # Possible values for $_SESSION["likes"][$this->post_id]:
+            #     true - database contains an entry attributed to the current logged-in user.
+            #     false - session contains an entry for the current anonymous visitor.
+            #     null - database contains an entry attributed to this hash but session does not
+            #            (could be this visitor during a previous session, or another visitor from this IP).
         }
 
         /**
@@ -43,7 +49,7 @@
 
             foreach ($people as $person) {
                 if ($person["session_hash"] == $this->session_hash and !array_key_exists($this->post_id, $_SESSION["likes"]))
-                    $_SESSION["likes"][$this->post_id] = null; # Their hash is in the database but nothing in their session.
+                    $_SESSION["likes"][$this->post_id] = null;
 
                 if (!empty($this->user_id) and $person["user_id"] == $this->user_id)
                     $_SESSION["likes"][$this->post_id] = true;
