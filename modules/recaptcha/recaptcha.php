@@ -1,13 +1,7 @@
 <?php
-    require_once INCLUDES_DIR.DIR."class".DIR."Captcha.php";
     require_once "lib".DIR."recaptchalib.php";
 
     class Recaptcha extends Modules {
-        public function __init() {
-            global $captchaHooks;
-            $captchaHooks[] = "RecaptchaCaptcha";
-        }
-
         static function __install() {
             $set = array(Config::current()->set("module_recaptcha",
                                             array("public_key" => null,
