@@ -12,12 +12,12 @@
 </p>
 <p>
 <label for="clean">
-{{ "URL" | translate("categorize") }}
+{{ "Slug" | translate("categorize") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
 <input class="text" type="text" name="clean" value="{{ categorize.clean | fix(true) }}" id="clean">
 <small>
-{{ "Enter a &#8220;clean&#8221; name here if you want the category name to appear differently in the URL." | translate("categorize") }}
+{{ "The slug is the URL-friendly identifying name for this category." | translate("categorize") }}
 </small>
 </p>
 <p>
