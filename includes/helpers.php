@@ -2017,12 +2017,11 @@
      *     A string containing HTML elements to add to a form.
      */
     function generate_captcha() {
-        global $captchaHooks;
+        foreach (get_declared_classes() as $class)
+            if (in_array("Captcha", class_implements($class)))
+                return call_user_func($class."::getCaptcha");
 
-        if (!$captchaHooks)
-           return false;
-
-        return call_user_func($captchaHooks[0] . "::getCaptcha");
+        return false;
     }
 
     /**
@@ -2033,12 +2032,11 @@
      *     Whether or not the captcha was defeated.
      */
     function check_captcha() {
-        global $captchaHooks;
+        foreach (get_declared_classes() as $class)
+            if (in_array("Captcha", class_implements($class)))
+                return call_user_func($class."::verifyCaptcha");
 
-        if (!$captchaHooks)
-           return true;
-
-        return call_user_func($captchaHooks[0] . "::verifyCaptcha");
+        return false;
     }
 
     /**
