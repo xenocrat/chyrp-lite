@@ -2041,12 +2041,12 @@
          * Displays the page.
          *
          * Parameters:
-         *     $action - The template file to display (sans ".twig") relative to /admin/ for core and extensions.
+         *     $template - The template file to display (sans ".twig") relative to /admin/ for core and extensions.
          *     $context - The context to be supplied to Twig.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
          *     $path - The path to the template, usually "pages".
          */
-        public function display($action, $context = array(), $title = "", $path = "pages") {
+        public function display($template, $context = array(), $title = "", $path = "pages") {
             $config = Config::current();
             $route = Route::current();
             $trigger = Trigger::current();
@@ -2067,7 +2067,7 @@
             $this->context["route"]       = $route;
             $this->context["visitor"]     = Visitor::current();
             $this->context["logged_in"]   = logged_in();
-            $this->context["title"]       = fallback($title, camelize($action, true));
+            $this->context["title"]       = fallback($title, camelize($template, true));
             $this->context["navigation"]  = $this->navigation_context($route->action);
             $this->context["feathers"]    = Feathers::$instances;
             $this->context["modules"]     = Modules::$instances;
@@ -2076,13 +2076,13 @@
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["sql_debug"]   =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $action)));
+            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $template)));
 
             if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
                 Update::check();
 
             try {
-                $this->twig->display($path.DIR.$action.".twig", $this->context);
+                $this->twig->display($path.DIR.$template.".twig", $this->context);
             } catch (Exception $e) {
                 error(__("Twig Error"), $e->getMessage(), debug_backtrace());
             }
