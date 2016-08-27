@@ -202,6 +202,14 @@
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
+    # File: Controller
+    # Defines the Controller interface.
+    require_once INCLUDES_DIR.DIR."class".DIR."Controller.php";
+
+    # File: Captcha
+    # Defines the Captcha interface.
+    require_once INCLUDES_DIR.DIR."class".DIR."Captcha.php";
+
     # File: Config
     # See Also:
     #     <Config>
@@ -289,12 +297,12 @@
 
     # File: Main
     # See Also:
-    #     <Main Controller>
+    #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Main.php";
 
     # File: Admin
     # See Also:
-    #     <Admin Controller>
+    #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
     # File: Feather
@@ -360,9 +368,6 @@
 
     # Load the Visitor.
     $visitor = Visitor::current();
-
-    # Prepare hooks for captcha providers.
-    $captchaHooks = array();
 
     # Prepare the notifier.
     $flash = Flash::current();
