@@ -857,25 +857,25 @@
             $this->context                       = array_merge($context, $this->context);
             $this->context["ip"]                 = $_SERVER["REMOTE_ADDR"];
             $this->context["DIR"]                = DIR;
-            $this->context["theme"]              = $theme;
-            $this->context["flash"]              = Flash::current();
-            $this->context["trigger"]            = $trigger;
-            $this->context["modules"]            = Modules::$instances;
-            $this->context["feathers"]           = Feathers::$instances;
-            $this->context["title"]              = $theme->title = $title;
-            $this->context["site"]               = $config;
-            $this->context["visitor"]            = Visitor::current();
-            $this->context["route"]              = Route::current();
             $this->context["version"]            = CHYRP_VERSION;
             $this->context["codename"]           = CHYRP_CODENAME;
-            $this->context["now"]                = time();
             $this->context["debug"]              = DEBUG;
+            $this->context["now"]                = time();
+            $this->context["site"]               = $config;
+            $this->context["flash"]              = Flash::current();
+            $this->context["theme"]              = $theme;
+            $this->context["trigger"]            = $trigger;
+            $this->context["route"]              = $route;
+            $this->context["visitor"]            = Visitor::current();
+            $this->context["visitor"]->logged_in = logged_in();
+            $this->context["title"]              = $theme->title = $title;
+            $this->context["captcha"]            = generate_captcha();
+            $this->context["modules"]            = Modules::$instances;
+            $this->context["feathers"]           = Feathers::$instances;
             $this->context["POST"]               = $_POST;
             $this->context["GET"]                = $_GET;
-            $this->context["captcha"]            = generate_captcha();
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
-            $this->context["visitor"]->logged_in = logged_in();
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 

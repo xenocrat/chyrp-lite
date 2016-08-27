@@ -2048,7 +2048,6 @@
          */
         public function display($action, $context = array(), $title = "", $path = "pages") {
             $config = Config::current();
-            $visitor = Visitor::current();
             $route = Route::current();
             $trigger = Trigger::current();
 
@@ -2057,23 +2056,23 @@
             $this->context                = array_merge($context, $this->context);
             $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
             $this->context["DIR"]         = DIR;
-            $this->context["theme"]       = Theme::current();
-            $this->context["flash"]       = Flash::current();
-            $this->context["trigger"]     = $trigger;
-            $this->context["title"]       = fallback($title, camelize($action, true));
-            $this->context["site"]        = $config;
-            $this->context["visitor"]     = $visitor;
-            $this->context["logged_in"]   = logged_in();
-            $this->context["route"]       = $route;
-            $this->context["now"]         = time();
             $this->context["version"]     = CHYRP_VERSION;
             $this->context["codename"]    = CHYRP_CODENAME;
             $this->context["debug"]       = DEBUG;
+            $this->context["now"]         = time();
+            $this->context["site"]        = $config;
+            $this->context["flash"]       = Flash::current();
+            $this->context["theme"]       = Theme::current();
+            $this->context["trigger"]     = $trigger;
+            $this->context["route"]       = $route;
+            $this->context["visitor"]     = Visitor::current();
+            $this->context["logged_in"]   = logged_in();
+            $this->context["title"]       = fallback($title, camelize($action, true));
+            $this->context["navigation"]  = $this->navigation_context($route->action);
             $this->context["feathers"]    = Feathers::$instances;
             $this->context["modules"]     = Modules::$instances;
             $this->context["POST"]        = $_POST;
             $this->context["GET"]         = $_GET;
-            $this->context["navigation"]  = $this->navigation_context($route->action);
             $this->context["sql_queries"] =& SQL::current()->queries;
             $this->context["sql_debug"]   =& SQL::current()->debug;
 
