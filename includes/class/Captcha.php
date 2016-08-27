@@ -1,10 +1,12 @@
 <?php
     /**
      * Interface: Captcha
-     * Defines the interface to be implemented by Captcha providers.
-     * Providers register by adding their class name to global @$captchaHooks[]@.
+     * Defines the Captcha interface.
      */
     interface Captcha {
-       public static function getCaptcha();
-       public static function verifyCaptcha();
+    	# Returns the form elements for the captcha challenge.
+		public static function getCaptcha();
+
+		# Verifies the response and returns true (success) or false (failure).
+		public static function verifyCaptcha();
     }
