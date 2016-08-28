@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-08-12 12:39+0000\n"
+"POT-Creation-Date: 2016-08-28 08:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -546,22 +546,22 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: admin/pages/feathers.twig:28
-#: admin/pages/feathers.twig:70
-#: admin/pages/modules.twig:48
-#: admin/pages/modules.twig:111
+#: admin/pages/feathers.twig:29
+#: admin/pages/feathers.twig:73
+#: admin/pages/modules.twig:49
+#: admin/pages/modules.twig:114
 msgid "Disable"
 msgstr ""
 
-#: admin/pages/feathers.twig:41
-#: admin/pages/feathers.twig:83
-#: admin/pages/modules.twig:61
-#: admin/pages/modules.twig:124
+#: admin/pages/feathers.twig:43
+#: admin/pages/feathers.twig:87
+#: admin/pages/modules.twig:63
+#: admin/pages/modules.twig:128
 msgid "Enable"
 msgstr ""
 
-#: admin/pages/feathers.twig:50
-#: admin/pages/modules.twig:70
+#: admin/pages/feathers.twig:52
+#: admin/pages/modules.twig:72
 msgid "Disabled"
 msgstr ""
 
@@ -824,12 +824,12 @@ msgid "Modules"
 msgstr ""
 
 #: admin/pages/modules.twig:25
-#: admin/pages/modules.twig:87
-msgid "This module conflicts with the following installed modules:"
+#: admin/pages/modules.twig:89
+msgid "This module conflicts with the following modules:"
 msgstr ""
 
 #: admin/pages/modules.twig:35
-#: admin/pages/modules.twig:97
+#: admin/pages/modules.twig:99
 msgid "This module requires the following modules to be enabled:"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-08-12 12:39+0000\n"
+"POT-Creation-Date: 2016-08-28 08:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -23,7 +23,8 @@ msgid "Delete Pingback?"
 msgstr ""
 
 #: modules/pingable/admin/pages/delete_pingback.twig:8
-msgid "[Untitled]"
+#, php-format
+msgid "Are you sure you want to delete the pingback from &#8220;%s&#8221;?"
 msgstr ""
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:3
@@ -31,8 +32,8 @@ msgid "Manage Pingbacks"
 msgstr ""
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:19
-#: modules/pingable/pingable.php:89
-#: modules/pingable/pingable.php:114
+#: modules/pingable/pingable.php:85
+#: modules/pingable/pingable.php:97
 msgid "Pingbacks"
 msgstr ""
 
@@ -72,30 +73,30 @@ msgstr ""
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/pingable/pingable.php:30
+#: modules/pingable/pingable.php:28
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/pingable/pingable.php:35
-#: modules/pingable/pingable.php:50
+#: modules/pingable/pingable.php:33
+#: modules/pingable/pingable.php:48
 msgid "You do not have sufficient privileges to delete pingbacks."
 msgstr ""
 
-#: modules/pingable/pingable.php:38
-#: modules/pingable/pingable.php:56
+#: modules/pingable/pingable.php:36
+#: modules/pingable/pingable.php:54
 msgid "An ID is required to delete a pingback."
 msgstr ""
 
-#: modules/pingable/pingable.php:43
-#: modules/pingable/pingable.php:64
+#: modules/pingable/pingable.php:41
+#: modules/pingable/pingable.php:62
 msgid "Pingback not found."
 msgstr ""
 
-#: modules/pingable/pingable.php:68
+#: modules/pingable/pingable.php:66
 msgid "Pingback deleted."
 msgstr ""
 
-#: modules/pingable/pingable.php:73
+#: modules/pingable/pingable.php:71
 msgid "You do not have sufficient privileges to manage pingbacks."
 msgstr ""
 
