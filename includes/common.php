@@ -204,11 +204,15 @@
 
     # File: Controller
     # Defines the Controller interface.
-    require_once INCLUDES_DIR.DIR."class".DIR."Controller.php";
+    require_once INCLUDES_DIR.DIR."interface".DIR."Controller.php";
+
+    # File: Feather
+    # See Also:
+    require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
 
     # File: Captcha
     # Defines the Captcha interface.
-    require_once INCLUDES_DIR.DIR."class".DIR."Captcha.php";
+    require_once INCLUDES_DIR.DIR."interface".DIR."Captcha.php";
 
     # File: Config
     # See Also:
@@ -304,11 +308,6 @@
     # See Also:
     #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
-
-    # File: Feather
-    # See Also:
-    #     <Feather>
-    require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
 
     # Handle a missing config file with redirect or error.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php")) {
