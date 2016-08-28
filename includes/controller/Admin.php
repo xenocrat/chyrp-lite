@@ -2023,7 +2023,7 @@
                 $extend["themes"] = array("title" => __("Themes"));
             }
 
-            $trigger->filter($subnav["extend"], "extend_nav");
+            $trigger->filter($extend, "extend_nav");
 
             foreach ($extend as $child => &$attributes) {
                 $attributes["selected"] = ($action == $child or
