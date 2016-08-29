@@ -676,7 +676,7 @@
         $parse = (array) $parse;
 
         foreach ($parse as &$val)
-            if (get_class($val) == "SimpleXMLElement")
+            if (is_object($val) and get_class($val) == "SimpleXMLElement")
                 $val = xml2arr($val);
 
         return $parse;
