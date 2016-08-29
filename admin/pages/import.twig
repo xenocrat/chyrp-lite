@@ -28,7 +28,7 @@
 </label>
 <input class="text" type="url" name="media_url" value="" id="media_url">
 <small>
-{{ "Usually something like <code>http://example.com/uploads/</code>." | translate }}
+{{ "Usually something like <code>%s/uploads/</code>." | translate | format(site.url) }}
 </small>
 </p>
 <p class="buttons">
