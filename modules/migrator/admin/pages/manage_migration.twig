@@ -16,7 +16,7 @@
 </label>
 <input class="text" type="url" name="media_url" value="" id="wordpress_media_url">
 <small>
-{{ "Usually something like <code>http://example.com/wp-content/uploads/</code>." | translate("migrator") }}
+{{ "Usually something like <code>%s/wp-content/uploads/</code>." | translate("migrator") | format(site.url) }}
 </small>
 </p>
 <p class="buttons">
@@ -33,7 +33,7 @@
 <label for="tumblr_url">{{ "Your Tumblr URL" | translate("migrator") }}</label>
 <input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
 <small>
-{{ "Something like <code>http://example.tumblr.com</code>." | translate("migrator") }}
+{{ "Something like <code>http://example.tumblr.com/</code>." | translate("migrator") }}
 </small>
 <small>{{ "Note: Audio tumbles cannot be imported." | translate("migrator") }}</small>
 </p>
@@ -75,7 +75,7 @@
 </label>
 <input class="text" type="url" name="media_url" value="" id="textpattern_media_url">
 <small>
-{{ "Usually something like <code>http://example.com/images/</code>." | translate("migrator") }}
+{{ "Usually something like <code>%s/images/</code>." | translate("migrator") | format(site.url) }}
 </small>
 </p>
 <p class="buttons">
@@ -110,7 +110,7 @@
 </label>
 <input class="text" type="url" name="media_url" value="" id="movabletype_media_url">
 <small>
-{{ "Usually something like <code>http://example.com/images/</code>." | translate("migrator") }}
+{{ "Usually something like <code>%s/images/</code>." | translate("migrator") | format(site.url) }}
 </small>
 </p>
 <p class="buttons">
