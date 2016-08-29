@@ -145,6 +145,17 @@
         Config::current()->set("admin_per_page", 25, null, true);
     }
 
+    /**
+     * Function: disable_importers
+     * Disables the importers module.
+     *
+     * Versions: 2016.03 => 2016.04
+     */
+    function disable_importers() {
+        $config = Config::current();
+        $config->set("enabled_modules", array_diff((array) $config->enabled_modules, array("importers")));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -354,6 +365,7 @@
         add_uploads_limit();
         remove_trackbacking();
         add_admin_per_page();
+        disable_importers();
 
         # Perform module upgrades and output the results if the upgrader echoes anything.
         foreach ((array) $config->enabled_modules as $module)
