@@ -116,7 +116,7 @@
             }
 
             # Build an excerpt of up to 200 characters. Tries to start with the sentence containing the link.
-            $regex = "/.*?\b([^\.>]{0,100}".preg_quote($context[0], "/")."[^<]*)\b.*/s";
+            $regex = "/.*?([^\.>]{0,100}".preg_quote($context[0], "/")."[^<]*).*/s";
             $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 200);
 
             # Pingback responder must return a single string on success or IXR_Error on failure.
