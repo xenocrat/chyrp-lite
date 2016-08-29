@@ -93,6 +93,9 @@
                 # "Manage > Groups", if they can manage groups.
                 if ($visitor->group->can("edit_group") or $visitor->group->can("delete_group"))
                     return $route->action = "manage_groups";
+
+                if ($visitor->group->can("add_post"))
+                    return $route->action = "import";
             }
 
             if (empty($route->action) or $route->action == "settings") {
