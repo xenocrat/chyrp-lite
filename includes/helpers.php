@@ -1226,7 +1226,7 @@
                     chr(197).chr(180) => 'W', chr(197).chr(181) => 'w', chr(197).chr(182) => 'Y', chr(197).chr(183) => 'y',
                     chr(197).chr(184) => 'Y', chr(197).chr(185) => 'Z', chr(197).chr(186) => 'z', chr(197).chr(187) => 'Z',
                     chr(197).chr(188) => 'z', chr(197).chr(189) => 'Z', chr(197).chr(190) => 'z', chr(197).chr(191) => 's'
-                    # Additional substitution keys can be generated using: e.g. unpack("C*", "€");
+                    # Additional substitution keys can be generated using: e.g. echo implode(",", unpack("C*", "€"));
                 ));
 
             # Remove any characters that remain after substitution.
