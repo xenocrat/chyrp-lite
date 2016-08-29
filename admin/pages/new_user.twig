@@ -6,7 +6,6 @@
 <h1>{{ "New User" | translate }}</h1>
 <form id="new_user" class="split" action="{{ admin_url('add_user') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
-<h2>{{ "Settings" | translate }}</h2>
 <p>
 <label for="login">{{ "Login" | translate }}</label>
 <input class="text" type="text" name="login" value="" id="full_name">
@@ -28,7 +27,6 @@
 <label for="password2">{{ "Confirm" | translate }}</label>
 <input class="text" type="password" name="password2" value="" id="password2">
 </p>
-<h2>{{ "Information" | translate }}</h2>
 <p>
 <label for="full_name">{{ "Full Name" | translate }}</label>
 <input class="text" type="text" name="full_name" value="" id="full_name">
