@@ -114,9 +114,15 @@
                 return oneof(@$this->pingback_counts[$post->id], 0);
 
             $counts = SQL::current()->select("pingbacks",
-                                             array("COUNT(post_id) AS total", "post_id as post_id"));
+                                             "COUNT(post_id) AS total, post_id as post_id",
+                                             null,
+                                             null,
+                                             array(),
+                                             null,
+                                             null,
+                                             "post_id")->fetchAll();
 
-            foreach ($counts->fetchAll() as $count)
+            foreach ($counts as $count)
                 $this->pingback_counts[$count["post_id"]] = (int) $count["total"];
 
             return oneof(@$this->pingback_counts[$post->id], 0);
