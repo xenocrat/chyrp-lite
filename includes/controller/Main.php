@@ -587,12 +587,7 @@
                                          "to" => $user->email,
                                          "password" => $new_password));
 
-            $user->update($user->login,
-                          User::hashPassword($new_password),
-                          $user->email,
-                          $user->full_name,
-                          $user->website,
-                          $user->group_id);
+            $user->update(null, User::hashPassword($new_password));
 
             Flash::notice(__("We have emailed you a new password."), "login");
         }
