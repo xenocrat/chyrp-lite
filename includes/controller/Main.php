@@ -3,7 +3,7 @@
      * Class: Main Controller
      * The logic controlling the blog.
      */
-    class MainController {
+    class MainController implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
         public $urls = array('|/id/([0-9]+)/|'                              => '/?action=view&id=$1',
@@ -504,15 +504,17 @@
                     Flash::warning(__("Incorrect captcha code."));
 
                 if (!Flash::exists("warning")) {
-                    if ($config->email_activation) {
-                        $user = User::add($_POST['login'],
-                                          $_POST['password1'],
-                                          $_POST['email'],
-                                          "",
-                                          "",
-                                          $config->default_group,
-                                          false);
+                    $user = User::add($_POST['login'],
+                                      $_POST['password1'],
+                                      $_POST['email'],
+                                      "",
+                                      "",
+                                      $config->default_group,
+                                      ($config->email_activation) ? false : true);
 
+                    Trigger::current()->call("user_registered", $user);
+
+                    if (!$user->approved) {
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
                                                      "link"  => $config->url.
@@ -520,15 +522,11 @@
                                                                 "&token=".token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
-                    } else {
-                        $user = User::add($_POST['login'],
-                                          $_POST['password1'],
-                                          $_POST['email']);
-                        $_SESSION['user_id'] = $user->id;
-                        Flash::notice(__("Your account is now active and you may log in."), "login");
                     }
 
-                    Trigger::current()->call("user_registered", $user);
+                    $_SESSION['user_id'] = $user->id;
+
+                    Flash::notice(__("Your account is now active."), "/");
                 }
             }
 
@@ -554,14 +552,14 @@
             if (token(array($user->login, $user->email)) != $_GET['token'])
                 error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
 
-            if (!$user->approved) {
-                SQL::current()->update("users",
-                                 array("login" => $user->login),
-                                 array("approved" => true));
-
-                Flash::notice(__("Your account is now active and you may log in."), "login");
-            } else
+            if ($user->approved)
                 Flash::notice(__("Your account has already been activated."), "/");
+
+            $user->update(null, null, null, null, null, null, true);
+
+            $_SESSION['user_id'] = $user->id;
+
+            Flash::notice(__("Your account is now active."), "/");
         }
 
         /**
