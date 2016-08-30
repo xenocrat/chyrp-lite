@@ -590,32 +590,22 @@
             fallback($_POST['website'], "");
             fallback($_POST['group'], $config->default_group);
 
-            if ($config->email_activation) {
-                $user = User::add($_POST['login'],
-                                  $_POST['password1'],
-                                  $_POST['email'],
-                                  $_POST['full_name'],
-                                  $_POST['website'],
-                                  $_POST['group'],
-                                  false);
+            $user = User::add($_POST['login'],
+                              $_POST['password1'],
+                              $_POST['email'],
+                              $_POST['full_name'],
+                              $_POST['website'],
+                              $_POST['group'],
+                              ($config->email_activation) ? false : true);
 
+            if (!$user->approved)
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
                                              "link"  => $config->url.
                                                         "/?action=activate&login=".urlencode($user->login).
                                                         "&token=".token(array($user->login, $user->email))));
 
-                Flash::notice(_f("User &#8220;%s&#8221; added and activation email sent.", $user->login), "/admin/?action=manage_users");
-            } else {
-                $user = User::add($_POST['login'],
-                                  $_POST['password1'],
-                                  $_POST['email'],
-                                  $_POST['full_name'],
-                                  $_POST['website'],
-                                  $_POST['group']);
-
-              Flash::notice(_f("User &#8220;%s&#8221; added.", $user->login), "/admin/?action=manage_users");
-            }
+            Flash::notice(__("User added."), "/admin/?action=manage_users");
         }
 
         /**
@@ -697,9 +687,10 @@
                           $_POST['email'],
                           $_POST['full_name'],
                           $_POST['website'],
-                          $_POST['group']);
+                          $_POST['group'],
+                          (!$user->approved and $config->email_activation) ? false : true);
 
-            if (!$user->approved and $config->email_activation)
+            if (!$user->approved)
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
                                              "link"  => $config->url.
