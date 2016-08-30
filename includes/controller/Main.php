@@ -544,18 +544,15 @@
 
         /**
          * Function: activate
-         * Approves a user registration for a given login.
+         * Activates (approves) a given login.
          */
         public function activate() {
             if (logged_in())
                 Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
-            if (empty($_GET['token']))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results or token(array($user->login, $user->email)) != $_GET['token'])
+            if ($user->no_results or empty($_GET['token']) or token(array($user->login, $user->email)) != $_GET['token'])
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if ($user->approved)
@@ -570,18 +567,15 @@
 
         /**
          * Function: reset
-         * Reset a user password for a given login.
+         * Resets the password for a given login.
          */
         public function reset() {
             if (logged_in())
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
-            if (empty($_GET['token']))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results or token(array($user->login, $user->email)) != $_GET['token'])
+            if ($user->no_results or empty($_GET['token']) or token(array($user->login, $user->email)) != $_GET['token'])
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             $new_password = random(8);
@@ -696,7 +690,7 @@
 
         /**
          * Function: lost_password
-         * Email a password reset link to the registered address of a user.
+         * Emails a password reset link to the registered address of a user.
          */
         public function lost_password() {
             if (logged_in())
