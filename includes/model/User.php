@@ -140,6 +140,7 @@
                                $full_name = null,
                                $website   = null,
                                $group_id  = null,
+                               $approved  = null,
                                $joined_at = null) {
             if ($this->no_results)
                 return false;
@@ -149,7 +150,7 @@
 
             $old = clone $this;
 
-            foreach (array("login", "password", "email", "full_name", "website", "group_id", "joined_at") as $attr)
+            foreach (array("login", "password", "email", "full_name", "website", "group_id", "approved", "joined_at") as $attr)
                 $this->$attr = $$attr = ($$attr !== null ? $$attr : $this->$attr);
 
             $new_values = array("login"     => strip_tags($login),
@@ -158,6 +159,7 @@
                                 "full_name" => strip_tags($full_name),
                                 "website"   => strip_tags($website),
                                 "group_id"  => $group_id,
+                                "approved"  => $approved,
                                 "joined_at" => $joined_at);
 
             $trigger->filter($new_values, "before_update_user");
