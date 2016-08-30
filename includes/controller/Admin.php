@@ -1882,9 +1882,7 @@
                 Flash::notice(__("You are already logged in."), "/admin/");
 
             $_SESSION['redirect_to'] = "/admin/";
-
-            $config = Config::current();
-            redirect($config->url.(($config->clean_urls) ? "/login/" : "/?action=login"));
+            redirect(url("login", MainController::current()));
         }
 
         /**
@@ -1892,8 +1890,7 @@
          * Mask for MainController->logout().
          */
         public function logout() {
-            $config = Config::current();
-            redirect($config->url.(($config->clean_urls) ? "/logout/" : "/?action=logout"));
+            redirect(url("logout", MainController::current()));
         }
 
         /**
