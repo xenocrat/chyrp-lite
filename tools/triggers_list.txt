@@ -107,13 +107,13 @@ Arguments:
 manage_users_column_header
 --------------------------
 Called from:
-	admin/pages/manage_users.twig on line 32
+	admin/pages/manage_users.twig on line 33
 
 
 manage_users_column
 -------------------
 Called from:
-	admin/pages/manage_users.twig on line 52
+	admin/pages/manage_users.twig on line 60
 Arguments:
 	user
 
@@ -121,7 +121,7 @@ Arguments:
 new_user_fields
 ---------------
 Called from:
-	admin/pages/new_user.twig on line 44
+	admin/pages/new_user.twig on line 42
 
 
 post_view_url_settings
@@ -246,7 +246,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1322
+	includes/controller/Admin.php on line 1316
 Arguments:
 	Group::add($name, (array) $permissions)
 
@@ -254,7 +254,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1346
+	includes/controller/Admin.php on line 1340
 Arguments:
 	$user
 
@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1374
+	includes/controller/Admin.php on line 1368
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1397
+	includes/controller/Admin.php on line 1391
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1667
+	includes/controller/Admin.php on line 1661
 Arguments:
 	!empty($_POST['theme'])
 
@@ -286,7 +286,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 531
+	includes/controller/Main.php on line 515
 Arguments:
 	$user
 
@@ -294,13 +294,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 616
+	includes/controller/Main.php on line 609
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 630
+	includes/controller/Main.php on line 623
 Arguments:
 	$user
 
@@ -308,7 +308,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 818
+	includes/controller/Main.php on line 811
 Arguments:
 	$post
 
@@ -386,7 +386,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 169
+	includes/model/User.php on line 171
 Arguments:
 	$this, $old
 
@@ -459,7 +459,7 @@ Arguments:
 import_wordpress_post
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 162
+	modules/migrator/migrator.php on line 160
 Arguments:
 	$item, $post
 
@@ -467,7 +467,7 @@ Arguments:
 import_wordpress_page
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 175
+	modules/migrator/migrator.php on line 173
 Arguments:
 	$item, $page
 
@@ -475,7 +475,7 @@ Arguments:
 import_tumble
 -------------
 Called from:
-	modules/migrator/migrator.php on line 314
+	modules/migrator/migrator.php on line 312
 Arguments:
 	$post, $new_post
 
@@ -483,7 +483,7 @@ Arguments:
 import_textpattern_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 407
+	modules/migrator/migrator.php on line 404
 Arguments:
 	$post, $new_post
 
@@ -491,7 +491,7 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 526
+	modules/migrator/migrator.php on line 522
 Arguments:
 	$post, $new_post, $link
 
@@ -499,7 +499,7 @@ Arguments:
 import_movabletype_page
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 529
+	modules/migrator/migrator.php on line 525
 Arguments:
 	$post, $new_page, $link
 
@@ -648,7 +648,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 110
+	includes/controller/Admin.php on line 113
 
 
 post_export_url
@@ -656,7 +656,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1110
+	includes/controller/Admin.php on line 1104
 Arguments:
 	$post), true
 
@@ -666,7 +666,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1129
+	includes/controller/Admin.php on line 1123
 Arguments:
 	$post
 
@@ -676,7 +676,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1174
+	includes/controller/Admin.php on line 1168
 Arguments:
 	$page), true
 
@@ -686,7 +686,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1189
+	includes/controller/Admin.php on line 1183
 Arguments:
 	$page
 
@@ -696,7 +696,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1237
+	includes/controller/Admin.php on line 1231
 
 
 write_nav
@@ -704,7 +704,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1955
+	includes/controller/Admin.php on line 1946
 
 
 manage_nav
@@ -712,7 +712,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 1984
+	includes/controller/Admin.php on line 1975
 
 
 settings_nav
@@ -720,7 +720,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2008
+	includes/controller/Admin.php on line 1999
 
 
 extend_nav
@@ -728,7 +728,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2026
+	includes/controller/Admin.php on line 2017
 
 
 url_code
@@ -744,7 +744,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 807
+	includes/controller/Main.php on line 800
 Arguments:
 	$post
 
@@ -964,7 +964,7 @@ before_update_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 163
+	includes/model/User.php on line 165
 
 
 cacher_regenerate_triggers

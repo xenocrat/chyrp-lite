@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-08-28 08:50+0000\n"
+"POT-Creation-Date: 2016-08-30 16:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -459,30 +459,30 @@ msgid "Editing User &#8220;%s&#8221;"
 msgstr ""
 
 #: admin/pages/edit_user.twig:10
-#: admin/pages/new_user.twig:33
+#: admin/pages/new_user.twig:31
 msgid "Full Name"
 msgstr ""
 
 #: admin/pages/edit_user.twig:14
-#: admin/pages/new_user.twig:37
+#: admin/pages/new_user.twig:35
 msgid "Email"
 msgstr ""
 
 #: admin/pages/edit_user.twig:18
 #: admin/pages/manage_users.twig:31
-#: admin/pages/new_user.twig:41
+#: admin/pages/new_user.twig:39
 msgid "Website"
 msgstr ""
 
 #: admin/pages/edit_user.twig:22
-#: admin/pages/new_user.twig:11
+#: admin/pages/new_user.twig:10
 msgid "Login"
 msgstr ""
 
 #: admin/pages/edit_user.twig:26
 #: admin/pages/manage_groups.twig:25
 #: admin/pages/manage_users.twig:29
-#: admin/pages/new_user.twig:15
+#: admin/pages/new_user.twig:14
 #: admin/partials/post_fields.twig:68
 msgid "Group"
 msgstr ""
@@ -492,7 +492,7 @@ msgid "New Password?"
 msgstr ""
 
 #: admin/pages/edit_user.twig:38
-#: admin/pages/new_user.twig:28
+#: admin/pages/new_user.twig:27
 msgid "Confirm"
 msgstr ""
 
@@ -653,7 +653,8 @@ msgid "What URL is used for embedded media?"
 msgstr ""
 
 #: admin/pages/import.twig:31
-msgid "Usually something like <code>http://example.com/uploads/</code>."
+#, php-format
+msgid "Usually something like <code>%s/uploads/</code>."
 msgstr ""
 
 #: admin/pages/manage_groups.twig:3
@@ -699,7 +700,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:30
 #: admin/pages/manage_pages.twig:30
 #: admin/pages/manage_posts.twig:39
-#: admin/pages/manage_users.twig:33
+#: admin/pages/manage_users.twig:34
 msgid "Controls"
 msgstr ""
 
@@ -707,27 +708,28 @@ msgstr ""
 #: admin/pages/manage_groups.twig:51
 #: admin/pages/manage_pages.twig:46
 #: admin/pages/manage_pages.twig:52
+#: admin/pages/manage_users.twig:55
 msgid 'yes'
 msgstr ""
 
 #: admin/pages/manage_groups.twig:60
 #: admin/pages/manage_pages.twig:64
 #: admin/pages/manage_posts.twig:61
-#: admin/pages/manage_users.twig:56
+#: admin/pages/manage_users.twig:64
 msgid 'edit'
 msgstr ""
 
 #: admin/pages/manage_groups.twig:65
 #: admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:66
-#: admin/pages/manage_users.twig:61
+#: admin/pages/manage_users.twig:69
 msgid 'delete'
 msgstr ""
 
 #: admin/pages/manage_groups.twig:77
 #: admin/pages/manage_pages.twig:85
 #: admin/pages/manage_posts.twig:82
-#: admin/pages/manage_users.twig:77
+#: admin/pages/manage_users.twig:85
 #, php-format
 msgid "Page %d of %s"
 msgstr ""
@@ -775,7 +777,7 @@ msgstr ""
 
 #: admin/pages/manage_pages.twig:78
 #: admin/pages/manage_posts.twig:75
-#: admin/pages/manage_users.twig:70
+#: admin/pages/manage_users.twig:78
 msgid "(none)"
 msgstr ""
 
@@ -818,6 +820,10 @@ msgstr ""
 msgid "Joined"
 msgstr ""
 
+#: admin/pages/manage_users.twig:32
+msgid "Activated?"
+msgstr ""
+
 #: admin/pages/modules.twig:3
 #: admin/pages/modules.twig:6
 msgid "Modules"
@@ -838,20 +844,12 @@ msgid "Add Group"
 msgstr ""
 
 #: admin/pages/new_user.twig:3
-#: admin/pages/new_user.twig:46
+#: admin/pages/new_user.twig:44
 msgid "Add User"
 msgstr ""
 
-#: admin/pages/new_user.twig:9
-msgid "Settings"
-msgstr ""
-
-#: admin/pages/new_user.twig:24
+#: admin/pages/new_user.twig:23
 msgid "Password"
-msgstr ""
-
-#: admin/pages/new_user.twig:31
-msgid "Information"
 msgstr ""
 
 #: admin/pages/route_settings.twig:3
