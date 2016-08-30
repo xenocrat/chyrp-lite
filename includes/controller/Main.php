@@ -503,12 +503,21 @@
                 if ($config->enable_captcha and !check_captcha())
                     Flash::warning(__("Incorrect captcha code."));
 
+                if (!empty($_POST['website']) and !is_url($_POST['website']))
+                    Flash::warning(__("Invalid website URL."));
+
+                if (!empty($_POST['website']))
+                    $_POST['website'] = add_scheme($_POST['website']);
+
+                fallback($_POST['full_name'], "");
+                fallback($_POST['website'], "");
+
                 if (!Flash::exists("warning")) {
                     $user = User::add($_POST['login'],
                                       $_POST['password1'],
                                       $_POST['email'],
-                                      "",
-                                      "",
+                                      $_POST['full_name'],
+                                      $_POST['website'],
                                       $config->default_group,
                                       ($config->email_activation) ? false : true);
 
@@ -542,15 +551,12 @@
                 Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results)
-                show_404(__("Unknown User"), __("That username isn't in our database."));
-
-            if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
+            if ($user->no_results or token(array($user->login, $user->email)) != $_GET['token'])
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if ($user->approved)
                 Flash::notice(__("Your account has already been activated."), "/");
@@ -571,15 +577,12 @@
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
             if (empty($_GET['token']))
-                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results)
-                show_404(__("Unknown User"), __("That username isn't in our database."));
-
-            if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
+            if ($user->no_results or token(array($user->login, $user->email)) != $_GET['token'])
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             $new_password = random(8);
 
@@ -702,7 +705,7 @@
             $config = Config::current();
 
             if (!$config->email_correspondence)
-                Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if (!empty($_POST)) {
                 $user = new User(array("login" => fallback($_POST['login'])));
