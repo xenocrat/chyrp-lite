@@ -239,6 +239,7 @@
 
             $sql = SQL::current();
             $trigger = Trigger::current();
+
             $trigger->filter($options, $model_name."_grab");
 
             if (!empty($options["read_from"]))
@@ -363,7 +364,6 @@
 
             $shown_dates = array();
             $results = array();
-
             $rows = array();
 
             foreach ($grab as $row)
