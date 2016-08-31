@@ -15,10 +15,10 @@
         }
 
         /**
-         * Function: route_import_wordpress
+         * Function: admin_import_wordpress
          * WordPress importing.
          */
-        public function route_import_wordpress() {
+        public function admin_import_wordpress() {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -178,10 +178,10 @@
         }
 
         /**
-         * Function: route_import_tumblr
+         * Function: admin_import_tumblr
          * Tumblr importing.
          */
-        public function route_import_tumblr() {
+        public function admin_import_tumblr() {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("add_post"))
@@ -316,10 +316,10 @@
         }
 
         /**
-         * Function: route_import_textpattern
+         * Function: admin_import_textpattern
          * TextPattern importing.
          */
-        public function route_import_textpattern() {
+        public function admin_import_textpattern() {
             $config  = Config::current();
             $trigger = Trigger::current();
 
@@ -408,10 +408,10 @@
         }
 
         /**
-         * Function: route_import_movabletype
+         * Function: admin_import_movabletype
          * MovableType importing.
          */
-        public function route_import_movabletype() {
+        public function admin_import_movabletype() {
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
