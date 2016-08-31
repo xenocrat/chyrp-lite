@@ -514,7 +514,7 @@
 
                 if (!Flash::exists("warning")) {
                     $user = User::add($_POST['login'],
-                                      $_POST['password1'],
+                                      User::hashPassword($_POST['password1']),
                                       $_POST['email'],
                                       $_POST['full_name'],
                                       $_POST['website'],
