@@ -591,7 +591,7 @@
             fallback($_POST['group'], $config->default_group);
 
             $user = User::add($_POST['login'],
-                              $_POST['password1'],
+                              User::hashPassword($_POST['password1']),
                               $_POST['email'],
                               $_POST['full_name'],
                               $_POST['website'],
@@ -1286,11 +1286,19 @@
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
                 if (!$posts = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $posts->generator != "Chyrp")
-                    Flash::warning(__("Chyrp Posts export file is invalid."), "/admin/?action=import");
+                    Flash::warning(__("Posts export file is invalid."), "/admin/?action=import");
 
             if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
                 if (!$pages = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $pages->generator != "Chyrp")
-                    Flash::warning(__("Chyrp Pages export file is invalid."), "/admin/?action=import");
+                    Flash::warning(__("Pages export file is invalid."), "/admin/?action=import");
+
+            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']))
+                if (!is_array($groups = json_get(file_get_contents($_FILES['groups_file']['tmp_name']), true)))
+                    Flash::warning(__("Groups export file is invalid."), "/admin/?action=import");
+
+            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file']))
+                if (!is_array($users = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true)))
+                    Flash::warning(__("Users export file is invalid."), "/admin/?action=import");
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
@@ -1308,45 +1316,47 @@
                     }
             }
 
-            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file'])) {
-                $import = json_get(file_get_contents($_FILES['groups_file']['tmp_name']), true);
+            if (isset($groups)) {
+                if (!array_key_exists("groups", $groups) or !array_key_exists("permissions", $groups))
+                    continue;
 
-                foreach ($import["groups"] as $name => $permissions)
+                foreach ($groups["groups"] as $name => $permissions)
                     if (!$sql->count("groups", array("name" => $name)))
                         $trigger->call("import_chyrp_group", Group::add($name, (array) $permissions));
 
-                foreach ($import["permissions"] as $id => $name)
+                foreach ($groups["permissions"] as $id => $name)
                     if (!$sql->count("permissions", array("id" => $id)))
                         $sql->insert("permissions", array("id" => $id, "name" => $name));
             }
 
-            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file'])) {
-                $users = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true);
-
+            if (isset($users))
                 foreach ($users as $login => $user) {
-                    $group_id = $sql->select("groups", "id", array("name" => $user["group"]), "id DESC")->fetchColumn();
+                    $group_id = $sql->select("groups",
+                                             "id",
+                                             array("name" => fallback($user["group"])), "id DESC")->fetchColumn();
 
                     $group = ($group_id) ? $group_id : $config->default_group ;
 
                     if (!$sql->count("users", array("login" => $login)))
                         $user = User::add($login,
-                                          $user["password"],
-                                          $user["email"],
-                                          $user["full_name"],
-                                          $user["website"],
+                                          fallback($user["password"], User::hashPassword(random(8))),
+                                          fallback($user["email"], ""),
+                                          fallback($user["full_name"], ""),
+                                          fallback($user["website"], ""),
                                           $group,
-                                          $user["joined_at"]);
+                                          fallback($user["approved"], false),
+                                          fallback($user["joined_at"]), datetime());
 
                     $trigger->call("import_chyrp_user", $user);
                 }
-            }
 
-            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
+            if (isset($posts))
                 foreach ($posts->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
-
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
-                    $user_id = $sql->select("users", "id", array("login" => $login), "id DESC")->fetchColumn();
+                    $user_id = $sql->select("users",
+                                            "id",
+                                            array("login" => $login), "id DESC")->fetchColumn();
 
                     $data = xml2arr($entry->content);
                     $data["imported_from"] = "chyrp";
@@ -1368,13 +1378,14 @@
                     $trigger->call("import_chyrp_post", $entry, $post);
                 }
 
-            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
+            if (isset($pages))
                 foreach ($pages->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
-
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
-                    $user_id = $sql->select("users", "id", array("login" => $login), "id DESC")->fetchColumn();
+                    $user_id = $sql->select("users",
+                                            "id",
+                                            array("login" => $login), "id DESC")->fetchColumn();
 
                     $page = Page::add($entry->title,
                                       $entry->content,
@@ -1391,7 +1402,7 @@
                     $trigger->call("import_chyrp_page", $entry, $page);
                 }
 
-            Flash::notice(__("Chyrp content successfully imported!"), "/admin/?action=import");
+            Flash::notice(__("Chyrp Lite content successfully imported!"), "/admin/?action=import");
         }
 
         /**
