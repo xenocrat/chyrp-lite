@@ -1344,7 +1344,7 @@
                                           fallback($user["full_name"], ""),
                                           fallback($user["website"], ""),
                                           $group,
-                                          fallback($user["approved"], false),
+                                          !empty(fallback($user["approved"], false)),
                                           fallback($user["joined_at"]), datetime());
 
                     $trigger->call("import_chyrp_user", $user);
