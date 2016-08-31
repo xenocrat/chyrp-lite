@@ -83,7 +83,7 @@
                             $email,
                             $full_name = "",
                             $website = "",
-                            $group_ = null,
+                            $group = null,
                             $approved = true,
                             $joined_at = null) {
             $config = Config::current();
