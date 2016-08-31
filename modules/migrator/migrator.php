@@ -468,6 +468,7 @@
                                                              ($author["author_nickname"] != $author["author_name"] ? $author["author_nickname"] : ""),
                                                              $author["author_url"],
                                                              ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
+                                                             ($config->email_activation) ? false : true,
                                                              $author["author_created_on"]);
                 }
             }
