@@ -662,9 +662,9 @@
             foreach ($chyrp->comment as $comment) {
                 $chyrp = $comment->children("http://chyrp.net/export/1.0/");
                 $comment = $comment->children("http://www.w3.org/2005/Atom");
-
                 $login = $comment->author->children("http://chyrp.net/export/1.0/")->login;
-                $user_id = $sql->select("users", "id", array("login" => $login), "id DESC")->fetchColumn();
+
+                $user = new User(array("login" => (string) $login));
 
                 Comment::add(unfix($comment->content),
                              unfix($comment->author->name),
@@ -676,7 +676,7 @@
                              datetime($comment->published),
                              ($comment->published == $comment->updated) ? null : datetime($comment->updated),
                              $post,
-                             ($user_id ? $user_id : 0));
+                             (!$user->no_results) ? $user->id : 0);
             }
         }
 
