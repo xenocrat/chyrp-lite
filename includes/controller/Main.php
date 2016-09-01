@@ -494,6 +494,8 @@
                     Flash::warning(__("Passwords cannot be blank."));
                 elseif ($_POST['password1'] != $_POST['password2'])
                     Flash::warning(__("Passwords do not match."));
+                elseif (password_strength($_POST['password1']) < 100)
+                    Flash::message(__("Please consider setting a stronger password for your account."));
 
                 if (empty($_POST['email']))
                     Flash::warning(__("Email address cannot be blank."));
@@ -656,6 +658,8 @@
                 if (!empty($_POST['new_password1']))
                     if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
                         Flash::warning(__("Passwords do not match."));
+                    elseif (password_strength($_POST['new_password1']) < 100)
+                        Flash::message(__("Please consider setting a stronger password for your account."));
 
                 if (empty($_POST['email']))
                     Flash::warning(__("Email address cannot be blank."));
