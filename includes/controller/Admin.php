@@ -1195,14 +1195,10 @@
 
                 $groups = Group::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
-                $groups_json = array("groups" => array(),
-                                     "permissions" => array());
-
-                foreach (SQL::current()->select("permissions", "*", array("group_id" => 0))->fetchAll() as $permission)
-                    $groups_json["permissions"][$permission["id"]] = $permission["name"];
+                $groups_json = array();
 
                 foreach ($groups as $index => $group)
-                    $groups_json["groups"][$group->name] = $group->permissions;
+                    $groups_json[$group->name] = $group->permissions;
 
                 $exports["groups.json"] = json_set($groups_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
             }
@@ -1300,6 +1296,10 @@
                 if (!is_array($users = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true)))
                     Flash::warning(__("Users export file is invalid."), "/admin/?action=import");
 
+            # Backward-compatibility for the old Groups plus Permissions export format.
+            if (isset($groups) and array_key_exists("groups", $groups) and array_key_exists("permissions", $groups))
+                $groups = $groups["groups"];
+
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
@@ -1316,24 +1316,17 @@
                     }
             }
 
-            if (isset($groups)) {
-                if (!array_key_exists("groups", $groups) or !array_key_exists("permissions", $groups))
-                    continue;
-
-                foreach ($groups["groups"] as $name => $permissions)
+            if (isset($groups))
+                foreach ($groups as $name => $permissions)
                     if (!$sql->count("groups", array("name" => $name)))
-                        $trigger->call("import_chyrp_group", Group::add($name, (array) $permissions));
-
-                foreach ($groups["permissions"] as $id => $name)
-                    if (!$sql->count("permissions", array("id" => $id)))
-                        $sql->insert("permissions", array("id" => $id, "name" => $name));
-            }
+                        $trigger->call("import_chyrp_group", Group::add($name, $permissions));
 
             if (isset($users))
                 foreach ($users as $login => $user) {
                     $group_id = $sql->select("groups",
                                              "id",
-                                             array("name" => fallback($user["group"])), "id DESC")->fetchColumn();
+                                             array("name" => fallback($user["group"])),
+                                             "id DESC")->fetchColumn();
 
                     $group = ($group_id) ? $group_id : $config->default_group ;
 
@@ -1356,7 +1349,8 @@
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
                     $user_id = $sql->select("users",
                                             "id",
-                                            array("login" => $login), "id DESC")->fetchColumn();
+                                            array("login" => $login),
+                                            "id DESC")->fetchColumn();
 
                     $data = xml2arr($entry->content);
                     $data["imported_from"] = "chyrp";
