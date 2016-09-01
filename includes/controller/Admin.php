@@ -1328,15 +1328,13 @@
                                              array("name" => fallback($user["group"])),
                                              "id DESC")->fetchColumn();
 
-                    $group = ($group_id) ? $group_id : $config->default_group ;
-
                     if (!$sql->count("users", array("login" => $login)))
                         $user = User::add($login,
                                           fallback($user["password"], User::hashPassword(random(8))),
                                           fallback($user["email"], ""),
                                           fallback($user["full_name"], ""),
                                           fallback($user["website"], ""),
-                                          $group,
+                                          !empty($group_id) ? $group_id : $config->default_group,
                                           !empty(fallback($user["approved"], false)),
                                           fallback($user["joined_at"]), datetime());
 
@@ -1362,7 +1360,7 @@
                                       $chyrp->clean,
                                       Post::check_url($chyrp->url),
                                       $chyrp->feather,
-                                      ($user_id ? $user_id : $visitor->id),
+                                      !empty($user_id) ? $user_id : $visitor->id,
                                       (bool) (int) $chyrp->pinned,
                                       $chyrp->status,
                                       datetime($entry->published),
@@ -1383,7 +1381,7 @@
 
                     $page = Page::add($entry->title,
                                       $entry->content,
-                                      ($user_id ? $user_id : $visitor->id),
+                                      !empty($user_id) ? $user_id : $visitor->id,
                                       $attr->parent_id,
                                       (bool) (int) $chyrp->public,
                                       (bool) (int) $chyrp->show_in_list,
