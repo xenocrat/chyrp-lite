@@ -1317,16 +1317,16 @@
             }
 
             if (isset($groups))
-                foreach ($groups as $name => $permissions)
-                    if (!$sql->count("groups", array("name" => $name)))
+                foreach ($groups as $name => $permissions) {
+                    $group = new Group(array("name" => (string) $name));
+
+                    if ($group->no_results)
                         $trigger->call("import_chyrp_group", Group::add($name, $permissions));
+                }
 
             if (isset($users))
                 foreach ($users as $login => $user) {
-                    $group_id = $sql->select("groups",
-                                             "id",
-                                             array("name" => fallback($user["group"])),
-                                             "id DESC")->fetchColumn();
+                    $group = new Group(array("name" => (string) fallback($user["group"])));
 
                     if (!$sql->count("users", array("login" => $login)))
                         $user = User::add($login,
@@ -1334,7 +1334,7 @@
                                           fallback($user["email"], ""),
                                           fallback($user["full_name"], ""),
                                           fallback($user["website"], ""),
-                                          !empty($group_id) ? $group_id : $config->default_group,
+                                          (!$group->no_results) ? $group->id : $config->default_group,
                                           !empty(fallback($user["approved"], false)),
                                           fallback($user["joined_at"]), datetime());
 
@@ -1345,10 +1345,8 @@
                 foreach ($posts->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
-                    $user_id = $sql->select("users",
-                                            "id",
-                                            array("login" => $login),
-                                            "id DESC")->fetchColumn();
+
+                    $user = new User(array("login" => (string) $login));
 
                     $data = xml2arr($entry->content);
                     $data["imported_from"] = "chyrp";
@@ -1360,7 +1358,7 @@
                                       $chyrp->clean,
                                       Post::check_url($chyrp->url),
                                       $chyrp->feather,
-                                      !empty($user_id) ? $user_id : $visitor->id,
+                                      (!$user->no_results) ? $user->id : $visitor->id,
                                       (bool) (int) $chyrp->pinned,
                                       $chyrp->status,
                                       datetime($entry->published),
@@ -1375,13 +1373,12 @@
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
-                    $user_id = $sql->select("users",
-                                            "id",
-                                            array("login" => $login), "id DESC")->fetchColumn();
+
+                    $user = new User(array("login" => (string) $login));
 
                     $page = Page::add($entry->title,
                                       $entry->content,
-                                      !empty($user_id) ? $user_id : $visitor->id,
+                                      (!$user->no_results) ? $user->id : $visitor->id,
                                       $attr->parent_id,
                                       (bool) (int) $chyrp->public,
                                       (bool) (int) $chyrp->show_in_list,
