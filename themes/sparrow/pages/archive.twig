@@ -4,10 +4,17 @@
 
 {# List? (For all/yearly archives) #}
 {% if months is not empty %}
+{% if archive.prev is not empty %}
+<div role="navigation" class="prev traversal">
+<a href="{{ url('archive/%s/' | format(archive.prev | strftimeformat('%Y'))) }}">
+{{ "&larr; Archive of %s" | translate | format(archive.prev | strftimeformat("%Y")) }}
+</a>
+</div>
+{% endif %}
 <div class="archive standalone">
 {% for timestamp, month in months %}
 <h3 id="label_{{ timestamp }}_archive" class="archive">
-<a href="{{ url('archive/%s/') | format(timestamp | strftimeformat('%Y/%m')) }}">
+<a href="{{ url('archive/%s/' | format(timestamp | strftimeformat('%Y/%m'))) }}">
 {{ timestamp | strftimeformat("%B %Y" | translate) }}
 </a>
 </h3>
@@ -39,11 +46,10 @@
 <div class="clear"></div>
 {% endfor %}
 </div>
-{% if archive.preceding is not empty %}
-{# Link to a previous year if we found a post preceding this archive #}
+{% if archive.next is not empty %}
 <div role="navigation" class="next traversal">
-<a href="{{ url('archive/%s/') | format(archive.preceding | strftimeformat('%Y')) }}">
-{{ "Archive of %s &rarr;" | translate | format(archive.preceding | strftimeformat("%Y")) }}
+<a href="{{ url('archive/%s/' | format(archive.next | strftimeformat('%Y'))) }}">
+{{ "Archive of %s &rarr;" | translate | format(archive.next | strftimeformat("%Y")) }}
 </a>
 </div>
 {% endif %}

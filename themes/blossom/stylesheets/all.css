@@ -68,7 +68,6 @@ body {                                          font-family: "Open Sans webfont"
                                                 max-width: 1200px }
 body.preview {                                  margin: 4rem;
                                                 background-color: #fbfbf7 }
-body.mobile_nav {                               margin-bottom: 3rem }
 p {                                             margin: 0em 0em 1em 0em }
 p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                            font-size: 2em;
@@ -574,6 +573,7 @@ article img {                                   max-width: 100% }
 
 @media screen and (max-width: 959px) {
     body {                                      margin: 0rem 16px 1rem 16px }
+    body.mobile_nav {                           margin-bottom: 3rem }
     h2 {                                        font-size: 1.25em;
                                                 margin: 0.8em 0em }
     blockquote {                                padding: 0em 1em }

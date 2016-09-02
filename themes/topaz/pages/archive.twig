@@ -7,7 +7,7 @@
 <div class="archive standalone">
 {% for timestamp, month in months %}
 <h3 id="label_{{ timestamp }}_archive" class="archive">
-<a href="{{ url('archive/%s/') | format(timestamp | strftimeformat('%Y/%m')) }}">
+<a href="{{ url('archive/%s/' | format(timestamp | strftimeformat('%Y/%m'))) }}">
 {{ timestamp | strftimeformat("%B %Y" | translate) }}
 </a>
 </h3>
@@ -39,14 +39,19 @@
 <div class="clear"></div>
 {% endfor %}
 </div>
-{% if archive.preceding is not empty %}
-{# Link to a previous year if we found a post preceding this archive #}
-<div role="navigation" class="next traversal">
-<a href="{{ url('archive/%s/') | format(archive.preceding | strftimeformat('%Y')) }}">
-{{ "Archive of %s &rarr;" | translate | format(archive.preceding | strftimeformat("%Y")) }}
+<div role="navigation" class="prev_next traversal">
+{% if archive.prev is not empty %}
+<a href="{{ url('archive/%s/' | format(archive.prev | strftimeformat('%Y'))) }}">
+{{ "Archive of %s" | translate | format(archive.prev | strftimeformat("%Y")) }}
 </a>
-</div>
 {% endif %}
+{% if archive.next is not empty %}
+<a href="{{ url('archive/%s/' | format(archive.next | strftimeformat('%Y'))) }}">
+{{ "Archive of %s" | translate | format(archive.next | strftimeformat("%Y")) }}
+</a>
+{% endif %}
+
+</div>
 {% endif %}
 
 {# Posts? (For daily/monthly archives) #}
@@ -63,4 +68,5 @@
 <h3 role="status" class="ribbon">{{ "There aren't any posts in the timeframe you specified." | translate }}</h3>
 </div>
 {% endif %}
+
 {% endblock %}
