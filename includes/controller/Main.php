@@ -227,7 +227,9 @@
             $posts = new Paginator(array());
             $title = __("Archive");
             $conds = array("status" => "public");
-            $timestamp = mktime(0, 0, 0, oneof($_GET['month'], 1), oneof($_GET['day'], 1), oneof($_GET['year'], 1970));
+            $timestamp = mktime(0, 0, 0, (is_numeric($_GET['month']) ? $_GET['month'] : 1),
+                                         (is_numeric($_GET['day']) ? $_GET['day'] : 1),
+                                         (is_numeric($_GET['year']) ? $_GET['year'] : 1970));
 
             if (is_numeric($_GET['year']) and is_numeric($_GET['month']) and is_numeric($_GET['day']))
                 $depth = "day";
@@ -238,13 +240,21 @@
             else
                 $depth = "all";
 
-            $preceding = $sql->select("posts",
-                                      "*",
-                                      array("status" => "public",
-                                            "posts.created_at <" => datetime($timestamp)),
-                                      array("posts.id DESC"),
-                                      array(),
-                                      1)->grab("created_at");
+            $next = ($depth == "all") ? array() : $sql->select("posts",
+                                                               "*",
+                                                               array("status" => "public",
+                                                                     "posts.created_at <" => datetime($timestamp)),
+                                                               array("posts.id DESC"),
+                                                               array(),
+                                                               1)->grab("created_at");
+
+            $prev = ($depth == "all") ? array() : $sql->select("posts",
+                                                               "*",
+                                                               array("status" => "public",
+                                                                     "posts.created_at >=" => datetime("@$timestamp +1 $depth")),
+                                                               array("posts.id ASC"),
+                                                               array(),
+                                                               1)->grab("created_at");
 
             switch ($depth) {
                 case 'day':
@@ -281,10 +291,12 @@
 
                     while ($time = $times->fetchObject()) {
                         $key = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
+                        $val = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
+                                                                 "MONTH(created_at)" => when("m", $time->created_at),
+                                                                 "status" => "public")));
 
-                        $months[$key] = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
-                                                                          "MONTH(created_at)" => when("m", $time->created_at),
-                                                                          "status" => "public")));
+                        if (!empty($val))
+                            $months[$key] = $val;
                     }
             }
 
@@ -292,8 +304,9 @@
                            array("posts" => $posts,
                                  "months" => $months,
                                  "archive" => array("timestamp" => $timestamp,
-                                                    "preceding" => strtotime(reset($preceding)),
-                                                    "depth" => $depth)),
+                                                    "depth" => $depth,
+                                                    "next" => strtotime(reset($next)),
+                                                    "prev" => strtotime(reset($prev)))),
                            $title);
         }
 
