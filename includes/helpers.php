@@ -71,9 +71,7 @@
     function redirect($url, $use_chyrp_url = false) {
         # Handle URIs without domain.
         if (strpos($url, "/") === 0)
-            $url = (ADMIN or $use_chyrp_url) ?
-                       Config::current()->chyrp_url.$url :
-                       Config::current()->url.$url ;
+            $url = (ADMIN or $use_chyrp_url) ? Config::current()->chyrp_url.$url : Config::current()->url.$url ;
         elseif (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
