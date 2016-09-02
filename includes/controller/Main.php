@@ -223,7 +223,7 @@
             fallback($_GET['month']);
             fallback($_GET['day']);
 
-            $years = array();
+            $months = array();
             $posts = array();
             $title = __("Archive");
             $conds = array("status" => "public");
@@ -268,33 +268,32 @@
                     $title = _f("Archive of %s", when("%Y", $timestamp, true));
                     $conds["YEAR(created_at)"] = $_GET['year'];
                 default:
-                    $timestamps = $sql->select("posts",
-                                               array("DISTINCT YEAR(created_at) AS year",
-                                                     "MONTH(created_at) AS month",
-                                                     "created_at AS created_at"),
-                                               $conds,
-                                               array("created_at DESC"),
-                                               array(),
-                                               null,
-                                               null,
-                                               array("YEAR(created_at)", "MONTH(created_at)"));
+                    $times = $sql->select("posts",
+                                          array("DISTINCT YEAR(created_at) AS year",
+                                                "MONTH(created_at) AS month",
+                                                "created_at AS created_at"),
+                                          $conds,
+                                          array("created_at DESC"),
+                                          array(),
+                                          null,
+                                          null,
+                                          array("YEAR(created_at)", "MONTH(created_at)"));
 
-                    while ($time = $timestamps->fetchObject()) {
-                        $month = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
+                    while ($time = $times->fetchObject()) {
+                        $key = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
 
                         $posts = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
                                                                    "MONTH(created_at)" => when("m", $time->created_at),
                                                                    "status" => "public")));
 
-                        $years[$month] = array("posts" => $posts,
-                                               "timestamp" => $month,
-                                               "url" => url("archive/".when("Y/m/", $time->created_at)));
+                        $months[$key] = array("posts" => $posts,
+                                              "url" => url("archive/".when("Y/m/", $time->created_at)));
                     }
             }
 
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,
-                                 "years" => $years,
+                                 "months" => $months,
                                  "archive" => array("timestamp" => $timestamp,
                                                     "preceding" => strtotime(reset($preceding)),
                                                     "depth" => $depth)),
