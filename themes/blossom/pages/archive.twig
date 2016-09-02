@@ -1,8 +1,9 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-{% if months is not empty %}
+
 {# List? (For all/yearly archives) #}
+{% if months is not empty %}
 <div class="archive standalone">
 {% for timestamp, month in months %}
 <h3 id="label_{{ timestamp }}_archive" class="archive">
@@ -12,7 +13,6 @@
 {% for post in month.posts %}
 <li>
 {% if archive.depth == "year" %}
-{# Yearly archive: display thumbnails #}
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
 {% if post.title is not empty and post.feather != "photo" %}
 <h4 class="yearly">{{ post.title | striptags | normalize | truncate(20) }}</h4>
@@ -27,7 +27,6 @@
 </a>
 </article>
 {% else %}
-{# Complete archive: display titles to minimise content payload #}
 <a href="{{ post.url() }}">
 <h4 class="archive">{{ post.title() | oneof(post.slug) | striptags | normalize | truncate(80) }}</h4>
 </a>
@@ -48,18 +47,19 @@
 {% endif %}
 {% endif %}
 
-{% if posts.paginated is defined and posts.paginated is not empty %}
 {# Posts? (For daily/monthly archives) #}
+{% if posts.paginated is defined and posts.paginated is not empty %}
 <div class="ribbon"><h3 role="status" class="ribbon">{{ title }}</h3></div>
 {% for post in posts.paginated %}
 {% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% endfor %}
 {% endif %}
 
-{% if months is empty and (posts.paginated is not defined or posts.paginated is empty) %}
 {# No results #}
+{% if months is empty and (posts.paginated is not defined or posts.paginated is empty) %}
 <div class="ribbon">
 <h3 role="status" class="ribbon">{{ "There aren't any posts in the timeframe you specified." | translate }}</h3>
 </div>
 {% endif %}
+
 {% endblock %}
