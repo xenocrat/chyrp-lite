@@ -204,21 +204,9 @@
 
         /**
          * Function: index
-         * Grabs the posts for the main page.
+         * Grabs the posts for the main index.
          */
         public function index() {
-            $sql = SQL::current();
-            $posts = $sql->select("posts",
-                                  "posts.id",
-                                  array("posts.created_at <=" => datetime(),
-                                        "posts.status" => "scheduled"))->fetchAll();
-
-            if (!empty($posts))
-                foreach ($posts as $post)
-                    $sql->update("posts",
-                                 array("id" => $post),
-                                 array("status" => "public"));
-
             $this->display("pages".DIR."index",
                            array("posts" => new Paginator(Post::find(array("placeholders" => true)),
                                                           $this->post_limit)));
@@ -226,108 +214,91 @@
 
         /**
          * Function: archive
-         * Grabs the posts for the Archive page when viewing a year or a month.
+         * Grabs the posts for the archive page.
          */
         public function archive() {
+            $sql = SQL::current();
+
             fallback($_GET['year']);
             fallback($_GET['month']);
             fallback($_GET['day']);
 
-            $lower_bound = mktime(0, 0, 0,
-                                  is_numeric($_GET['month']) ? (int) $_GET['month'] : 1 ,
-                                  is_numeric($_GET['day']) ? (int) $_GET['day'] : 1 ,
-                                  is_numeric($_GET['year']) ? (int) $_GET['year'] : 1970 );
+            $years = array();
+            $posts = array();
+            $title = __("Archive");
+            $conds = array("status" => "public");
+            $timestamp = mktime(0, 0, 0, oneof($_GET['month'], 1), oneof($_GET['day'], 1), oneof($_GET['year'], 1970));
 
-            $preceding = new Post(null, array("where" => array("created_at <" => datetime($lower_bound),
-                                                               "status" => "public"),
-                                              "order" => "created_at DESC, id DESC"));
+            if (is_numeric($_GET['year']) and is_numeric($_GET['month']) and is_numeric($_GET['day']))
+                $depth = "day";
+            elseif (is_numeric($_GET['year']) and is_numeric($_GET['month']))
+                $depth = "month";
+            elseif (is_numeric($_GET['year']))
+                $depth = "year";
+            else
+                $depth = "all";
 
-            if (isset($_GET['year']) and isset($_GET['month']) and isset($_GET['day']))
-                $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                        "where" => array("YEAR(created_at)" => $_GET['year'],
-                                                                         "MONTH(created_at)" => $_GET['month'],
-                                                                         "DAY(created_at)" => $_GET['day'],
-                                                                         "status" => "public"))),
-                                       $this->post_limit);
-            elseif (isset($_GET['year']) and isset($_GET['month']))
-                $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                        "where" => array("YEAR(created_at)" => $_GET['year'],
-                                                                         "MONTH(created_at)" => $_GET['month'],
-                                                                         "status" => "public"))),
-                                       $this->post_limit);
+            $preceding = $sql->select("posts",
+                                      "*",
+                                      array("status" => "public",
+                                            "posts.created_at <" => datetime($timestamp)),
+                                      array("posts.id DESC"),
+                                      array(),
+                                      1)->grab("created_at");
 
-            $sql = SQL::current();
-
-            if (empty($_GET['year']) or empty($_GET['month'])) {
-                if (!empty($_GET['year']))
+            switch ($depth) {
+                case 'day':
+                    $title = _f("Archive of %s", when("%d %B %Y", $timestamp, true));
+                    $posts = new Paginator(Post::find(array("placeholders" => true,
+                                                            "where" => array("YEAR(created_at)" => $_GET['year'],
+                                                                             "MONTH(created_at)" => $_GET['month'],
+                                                                             "DAY(created_at)" => $_GET['day'],
+                                                                             "status" => "public"))),
+                                           $this->post_limit);
+                    break;
+                case 'month':
+                    $title = _f("Archive of %s", when("%B %Y", $timestamp, true));
+                    $posts = new Paginator(Post::find(array("placeholders" => true,
+                                                            "where" => array("YEAR(created_at)" => $_GET['year'],
+                                                                             "MONTH(created_at)" => $_GET['month'],
+                                                                             "status" => "public"))),
+                                           $this->post_limit);
+                    break;
+                case 'year':
+                    $title = _f("Archive of %s", when("%Y", $timestamp, true));
+                    $conds["YEAR(created_at)"] = $_GET['year'];
+                default:
                     $timestamps = $sql->select("posts",
                                                array("DISTINCT YEAR(created_at) AS year",
                                                      "MONTH(created_at) AS month",
                                                      "created_at AS created_at"),
-                                               array("YEAR(created_at)" => $_GET['year'], "status" => "public"),
+                                               $conds,
                                                array("created_at DESC"),
                                                array(),
                                                null,
                                                null,
                                                array("YEAR(created_at)", "MONTH(created_at)"));
-                else
-                    $timestamps = $sql->select("posts",
-                                               array("DISTINCT YEAR(created_at) AS year",
-                                                     "MONTH(created_at) AS month",
-                                                     "created_at AS created_at"),
-                                               array("status" => "public"),
-                                               array("created_at DESC"),
-                                               array(),
-                                               null,
-                                               null,
-                                               array("YEAR(created_at)", "MONTH(created_at)"));
 
-                $archives = array();
-                $archive_hierarchy = array();
+                    while ($time = $timestamps->fetchObject()) {
+                        $month = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
 
-                while ($time = $timestamps->fetchObject()) {
-                    $year = mktime(0, 0, 0, 1, 0, $time->year);
-                    $month = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
+                        $posts = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
+                                                                   "MONTH(created_at)" => when("m", $time->created_at),
+                                                                   "status" => "public")));
 
-                    $posts = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
-                                                               "MONTH(created_at)" => when("m", $time->created_at),
-                                                               "status" => "public")));
-
-                    $archives[$month] = array("posts" => $posts,
-                                              "year" => $time->year,
-                                              "month" => when("%B", $month, true),
-                                              "timestamp" => $month,
-                                              "url" => url("archive/".when("Y/m/", $time->created_at)));
-
-                    $archive_hierarchy[$year][$month] = $posts;
-                }
-
-                $this->display("pages/archive",
-                               array("archives" => $archives,
-                                     "preceding" => $preceding, # The post preceding the date range chronologically.
-                                     "archive_hierarchy" => $archive_hierarchy),
-                               __("Archive"));
-            } else {
-                if (!is_numeric($_GET['year']) or !is_numeric($_GET['month']))
-                    error(__("Error"), __("Please enter a valid year and month."), null, 422);
-
-                $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
-
-                $depth = isset($_GET['day']) ?
-                    "day" : (isset($_GET['month']) ?
-                        "month" : (isset($_GET['year']) ?
-                            "year" : ""));
-
-                $this->display("pages".DIR."archive",
-                               array("posts" => $posts,
-                                     "archive" => array("year" => $_GET['year'],
-                                                        "month" => when("%B", $timestamp, true),
-                                                        "day" => when("%d", $timestamp, true),
-                                                        "timestamp" => $timestamp,
-                                                        "depth" => $depth),
-                                     "preceding" => $preceding),
-                               _f("Archive of %s", when("%B %Y", $timestamp, true)));
+                        $years[$month] = array("posts" => $posts,
+                                               "timestamp" => $month,
+                                               "url" => url("archive/".when("Y/m/", $time->created_at)));
+                    }
             }
+
+            $this->display("pages".DIR."archive",
+                           array("posts" => $posts,
+                                 "years" => $years,
+                                 "archive" => array("timestamp" => $timestamp,
+                                                    "preceding" => strtotime(reset($preceding)),
+                                                    "depth" => $depth)),
+                           $title);
         }
 
         /**
@@ -338,10 +309,9 @@
             $config = Config::current();
             $_GET['query'] = strip_tags(fallback($_GET['query'], ""));
 
-            if ($config->clean_urls and
-                substr_count($_SERVER['REQUEST_URI'], "?") and
-                !substr_count($_SERVER['REQUEST_URI'], "%2F")) # Searches with / and clean URLs = server 404.
-                redirect("search/".urlencode($_GET['query'])."/");
+            # Redirect search form submissions to a clean URL, removing "%2F" to avoid a server 404.
+            if ($config->clean_urls and substr_count($_SERVER['REQUEST_URI'], "?"))
+                redirect("search/".str_ireplace("%2F", "", urlencode($_GET['query']))."/");
 
             if (empty($_GET['query']))
                 Flash::warning(__("Please enter a search term."));
@@ -367,7 +337,7 @@
             $this->display(array("pages".DIR."search", "pages".DIR."index"),
                            array("posts" => $posts,
                                  "search" => $_GET['query']),
-                           fix(_f("Search results for \"%s\"", $_GET['query'])));
+                           _f("Search results for \"%s\"", fix($_GET['query'])));
         }
 
         /**
