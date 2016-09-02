@@ -7,10 +7,12 @@
 <div class="archive standalone">
 {% for timestamp, month in months %}
 <h3 id="label_{{ timestamp }}_archive" class="archive">
-<a href="{{ month.url }}">{{ timestamp | strftimeformat("%B %Y" | translate) }}</a>
+<a href="{{ url('archive/%s/') | format(timestamp | strftimeformat('%Y/%m')) }}">
+{{ timestamp | strftimeformat("%B %Y" | translate) }}
+</a>
 </h3>
 <ul aria-labelledby="label_{{ timestamp }}_archive" class="archive{{ archive.depth == 'year' ? ' yearly' : '' }}">
-{% for post in month.posts %}
+{% for post in month %}
 <li>
 {% if archive.depth == "year" %}
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
@@ -48,7 +50,7 @@
 {% endif %}
 
 {# Posts? (For daily/monthly archives) #}
-{% if posts.paginated is defined and posts.paginated is not empty %}
+{% if posts.paginated is not empty %}
 <h3 role="status" class="filter">{{ title }}</h3>
 {% for post in posts.paginated %}
 {% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
@@ -56,7 +58,7 @@
 {% endif %}
 
 {# No results #}
-{% if months is empty and (posts.paginated is not defined or posts.paginated is empty) %}
+{% if months is empty and posts.paginated is empty %}
 <h3 role="status" class="filter">{{ "There aren't any posts in the timeframe you specified." | translate }}</h3>
 {% endif %}
 
