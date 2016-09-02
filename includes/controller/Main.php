@@ -224,7 +224,7 @@
             fallback($_GET['day']);
 
             $months = array();
-            $posts = array();
+            $posts = new Paginator(array());
             $title = __("Archive");
             $conds = array("status" => "public");
             $timestamp = mktime(0, 0, 0, oneof($_GET['month'], 1), oneof($_GET['day'], 1), oneof($_GET['year'], 1970));
@@ -282,12 +282,9 @@
                     while ($time = $times->fetchObject()) {
                         $key = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
 
-                        $posts = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
-                                                                   "MONTH(created_at)" => when("m", $time->created_at),
-                                                                   "status" => "public")));
-
-                        $months[$key] = array("posts" => $posts,
-                                              "url" => url("archive/".when("Y/m/", $time->created_at)));
+                        $months[$key] = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
+                                                                          "MONTH(created_at)" => when("m", $time->created_at),
+                                                                          "status" => "public")));
                     }
             }
 
