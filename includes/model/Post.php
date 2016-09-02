@@ -776,4 +776,23 @@
 
             return list_notate($names);
         }
+
+        /**
+         * Function: publish_scheduled
+         * Searches for and publishes scheduled posts.
+         */
+        static function publish_scheduled() {
+            $sql = SQL::current();
+
+            $posts = $sql->select("posts",
+                                  "posts.id",
+                                  array("posts.created_at <=" => datetime(),
+                                        "posts.status" => "scheduled"))->fetchAll();
+
+            if (!empty($posts))
+                foreach ($posts as $post)
+                    $sql->update("posts",
+                                 array("id" => $post),
+                                 array("status" => "public"));
+        }
     }
