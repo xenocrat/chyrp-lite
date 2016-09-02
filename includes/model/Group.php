@@ -153,7 +153,7 @@
                                 array("group_id" => 0))->grab("id");
 
             $this->name        = $name;
-            $this->permissions = array_intersect($ids, $permissions);
+            $this->permissions = array_values(array_intersect($ids, $permissions));
 
             $sql->update("groups",
                          array("id" => $this->id),
@@ -185,7 +185,9 @@
          *     $id - The group to delete.
          */
         static function delete($id) {
-            SQL::current()->delete("permissions", array("group_id" => $id));
+            if (!empty($id))
+                SQL::current()->delete("permissions", array("group_id" => $id));
+
             parent::destroy(get_class(), $id);
         }
 
