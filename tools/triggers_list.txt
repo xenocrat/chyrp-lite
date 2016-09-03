@@ -246,15 +246,15 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1316
+	includes/controller/Admin.php on line 1324
 Arguments:
-	Group::add($name, (array) $permissions)
+	Group::add($name, $permissions)
 
 
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1340
+	includes/controller/Admin.php on line 1341
 Arguments:
 	$user
 
@@ -286,7 +286,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 515
+	includes/controller/Main.php on line 505
 Arguments:
 	$user
 
@@ -294,13 +294,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 609
+	includes/controller/Main.php on line 587
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 623
+	includes/controller/Main.php on line 601
 Arguments:
 	$user
 
@@ -308,7 +308,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 811
+	includes/controller/Main.php on line 791
 Arguments:
 	$post
 
@@ -330,7 +330,7 @@ Arguments:
 add_group
 ---------
 Called from:
-	includes/model/Group.php on line 116
+	includes/model/Group.php on line 123
 Arguments:
 	$group
 
@@ -338,7 +338,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 166
+	includes/model/Group.php on line 177
 Arguments:
 	$this, $old
 
@@ -378,7 +378,7 @@ Arguments:
 add_user
 --------
 Called from:
-	includes/model/User.php on line 115
+	includes/model/User.php on line 113
 Arguments:
 	$user
 
@@ -386,7 +386,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 171
+	includes/model/User.php on line 169
 Arguments:
 	$this, $old
 
@@ -491,7 +491,7 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 522
+	modules/migrator/migrator.php on line 523
 Arguments:
 	$post, $new_post, $link
 
@@ -499,7 +499,7 @@ Arguments:
 import_movabletype_page
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 525
+	modules/migrator/migrator.php on line 526
 Arguments:
 	$post, $new_page, $link
 
@@ -696,7 +696,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1231
+	includes/controller/Admin.php on line 1227
 
 
 write_nav
@@ -744,7 +744,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 800
+	includes/controller/Main.php on line 780
 Arguments:
 	$post
 
@@ -754,7 +754,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 858
+	includes/helpers.php on line 856
 Arguments:
 	$query, $plain
 
@@ -764,7 +764,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1419
+	includes/helpers.php on line 1417
 
 
 send_mail
@@ -772,7 +772,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2154
+	includes/helpers.php on line 2152
 
 
 xmlrpc_methods
@@ -812,7 +812,7 @@ before_group_update_name
 Target:
 	$name
 Called from:
-	includes/model/Group.php on line 138
+	includes/model/Group.php on line 145
 
 
 before_group_update_permissions
@@ -820,7 +820,7 @@ before_group_update_permissions
 Target:
 	$permissions
 Called from:
-	includes/model/Group.php on line 139
+	includes/model/Group.php on line 146
 
 
 page
@@ -956,7 +956,7 @@ before_add_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 109
+	includes/model/User.php on line 107
 
 
 before_update_user
@@ -964,7 +964,7 @@ before_update_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 165
+	includes/model/User.php on line 163
 
 
 cacher_regenerate_triggers

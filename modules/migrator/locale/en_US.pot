@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-08-30 16:32+0000\n"
+"POT-Creation-Date: 2016-09-03 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -160,7 +160,7 @@ msgstr ""
 
 #: modules/migrator/migrator.php:361
 #: modules/migrator/migrator.php:454
-#: modules/migrator/migrator.php:475
+#: modules/migrator/migrator.php:476
 msgid "Database Error"
 msgstr ""
 
@@ -172,7 +172,7 @@ msgstr ""
 msgid "Could not connect to the MovableType database."
 msgstr ""
 
-#: modules/migrator/migrator.php:529
+#: modules/migrator/migrator.php:530
 msgid "MovableType content successfully imported!"
 msgstr ""
 

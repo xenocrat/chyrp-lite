@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-08-30 16:32+0000\n"
+"POT-Creation-Date: 2016-09-03 09:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -334,33 +334,27 @@ msgstr ""
 msgid "Not found."
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:8
-#: themes/sparrow/pages/archive.twig:51
+#: themes/sparrow/pages/archive.twig:10
+#, php-format
+msgid "&larr; Archive of %s"
+msgstr ""
+
+#: themes/sparrow/pages/archive.twig:18
 msgid "%B %Y"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:23
+#: themes/sparrow/pages/archive.twig:35
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:40
+#: themes/sparrow/pages/archive.twig:52
 #, php-format
 msgid "Archive of %s &rarr;"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:48
-msgid "%d %B, %Y"
-msgstr ""
-
-#: themes/sparrow/pages/archive.twig:48
-#: themes/sparrow/pages/archive.twig:51
-#, php-format
-msgid "Archive of %s"
-msgstr ""
-
-#: themes/sparrow/pages/archive.twig:60
-msgid "There aren't any posts in the timeframe you specified"
+#: themes/sparrow/pages/archive.twig:68
+msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
 #: themes/sparrow/pages/category.twig:5

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-08-30 16:32+0000\n"
+"POT-Creation-Date: 2016-09-03 09:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -199,8 +199,7 @@ msgid "Archive"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:99
-#: themes/blossom/pages/archive.twig:8
-#: themes/blossom/pages/archive.twig:54
+#: themes/blossom/pages/archive.twig:18
 msgid "%B %Y"
 msgstr ""
 
@@ -383,28 +382,19 @@ msgstr ""
 msgid "Not found."
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:23
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
-msgstr ""
-
-#: themes/blossom/pages/archive.twig:40
-#, php-format
-msgid "Archive of %s &rarr;"
-msgstr ""
-
-#: themes/blossom/pages/archive.twig:49
-msgid "%d %B, %Y"
-msgstr ""
-
-#: themes/blossom/pages/archive.twig:49
-#: themes/blossom/pages/archive.twig:54
+#: themes/blossom/pages/archive.twig:10
+#: themes/blossom/pages/archive.twig:52
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:65
-msgid "There aren't any posts in the timeframe you specified"
+#: themes/blossom/pages/archive.twig:35
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr ""
+
+#: themes/blossom/pages/archive.twig:69
+msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
 #: themes/blossom/pages/category.twig:6
