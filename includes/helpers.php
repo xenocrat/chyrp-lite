@@ -188,7 +188,7 @@
         if (!file_exists(MAIN_DIR.DIR.".htaccess"))
             return @file_put_contents(MAIN_DIR.DIR.".htaccess", $template);
 
-        if (!is_readable(MAIN_DIR.DIR.".htaccess"))
+        if (!is_file(MAIN_DIR.DIR.".htaccess") or !is_readable(MAIN_DIR.DIR.".htaccess"))
             return false;
 
         if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")))
@@ -247,7 +247,7 @@
         if (isset($l10n[$domain]))
             return;
 
-        if (!is_readable($mofile))
+        if (!is_file($mofile) or !is_readable($mofile))
             return;
 
         $input = new gettext_CachedFileReader($mofile);
@@ -762,14 +762,14 @@
                                 array(DIR, DIR, ""),
                                 ltrim($class, "\\")).".php";
 
-        if (file_exists(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
+        if (is_file(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
             require INCLUDES_DIR.DIR."lib".DIR.$filepath;
             return;
         }
 
         if (!INSTALLING and !UPGRADING)
             foreach ((array) Config::current()->enabled_modules as $module)
-                if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
+                if (is_file(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
                     require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
                     return;
                 }
@@ -1566,8 +1566,9 @@
         # Instantiate all Modules.
         foreach ((array) $config->enabled_modules as $module) {
             $class_name = camelize($module);
+            $filepath = MODULES_DIR.DIR.$module.DIR.$module.".php";
 
-            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php")) {
+            if (!is_file($filepath) or !is_readable($filepath)) {
                 cancel_module($module, _f("%s module is missing.", $class_name));
                 continue;
             }
@@ -1591,8 +1592,9 @@
         # Instantiate all Feathers.
         foreach ((array) $config->enabled_feathers as $feather) {
             $class_name = camelize($feather);
+            $filepath = FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
-            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php")) {
+            if (!is_file($filepath) or !is_readable($filepath)) {
                 cancel_feather($feather, _f("%s feather is missing.", $class_name));
                 continue;
             }
