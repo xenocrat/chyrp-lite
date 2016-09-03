@@ -1,7 +1,7 @@
 <?php
     class FileCacher {
         public function __construct($url, $config) {
-            $this->user   = (logged_in()) ? Visitor::current()->login : "guest" ;
+            $this->user   = logged_in() ? Visitor::current()->login : "guest" ;
             $this->caches = CACHES_DIR.DIR."filecacher";
             $this->path   = $this->caches.DIR.sanitize($this->user);
             $this->url    = rawurldecode($url); # Percent decode for URL exclusion list comparison.
