@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>{{ "What would you like to import?" | translate }}</h2>
-<form id="import_chyrp_form" class="split" action="{{ admin_url('import_chyrp') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="import_chyrp_form" class="split" action="{{ admin_url('import') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="posts_file">{{ "Posts .atom File" | translate }}</label>

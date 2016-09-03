@@ -68,8 +68,7 @@
 
             if (empty($route->action) or $route->action == "write") {
                 # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
-                if (!empty($config->enabled_feathers) and ($visitor->group->can("add_post") or
-                                                           $visitor->group->can("add_draft")))
+                if (!empty($config->enabled_feathers) and $visitor->group->can("add_post", "add_draft"))
                     return $route->action = "write_post";
 
                 # "Write > Page", if they can add pages.
@@ -83,19 +82,24 @@
                     return $route->action = "manage_posts";
 
                 # "Manage > Pages", if they can manage pages.
-                if ($visitor->group->can("edit_page") or $visitor->group->can("delete_page"))
+                if ($visitor->group->can("edit_page", "delete_page"))
                     return $route->action = "manage_pages";
 
                 # "Manage > Users", if they can manage users.
-                if ($visitor->group->can("edit_user") or $visitor->group->can("delete_user"))
+                if ($visitor->group->can("add_user", "edit_user", "delete_user"))
                     return $route->action = "manage_users";
 
                 # "Manage > Groups", if they can manage groups.
-                if ($visitor->group->can("edit_group") or $visitor->group->can("delete_group"))
+                if ($visitor->group->can("add_group", "edit_group", "delete_group"))
                     return $route->action = "manage_groups";
 
-                if ($visitor->group->can("add_post"))
+                # "Manage > Import", if they can import content.
+                if ($visitor->group->can("add_post", "add_page", "add_group", "add_user"))
                     return $route->action = "import";
+
+                # "Manage > Export", if they can export content.
+                if ($visitor->group->can("edit_post", "edit_page", "edit_group", "edit_user"))
+                    return $route->action = "export";
             }
 
             if (empty($route->action) or $route->action == "settings") {
@@ -514,7 +518,7 @@
         public function manage_pages() {
             $visitor = Visitor::current();
 
-            if (!$visitor->group->can("edit_page") and !$visitor->group->can("delete_page"))
+            if (!$visitor->group->can("edit_page", "delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pages."));
 
             fallback($_GET['query'], "");
@@ -533,7 +537,7 @@
          */
         public function new_user() {
             if (!Visitor::current()->group->can("add_user"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to create users."));
 
             $config = Config::current();
 
@@ -550,7 +554,7 @@
          */
         public function add_user() {
             if (!Visitor::current()->group->can("add_user"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to create users."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -614,7 +618,7 @@
          */
         public function edit_user() {
             if (!Visitor::current()->group->can("edit_user"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this user."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
@@ -790,7 +794,7 @@
         public function manage_users() {
             $visitor = Visitor::current();
 
-            if (!$visitor->group->can("edit_user") and !$visitor->group->can("delete_user") and !$visitor->group->can("add_user"))
+            if (!$visitor->group->can("add_user", "edit_user", "delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage users."));
 
             fallback($_GET['query'], "");
@@ -998,7 +1002,7 @@
         public function manage_groups() {
             $visitor = Visitor::current();
 
-            if (!$visitor->group->can("edit_group") and !$visitor->group->can("delete_group") and !$visitor->group->can("add_group"))
+            if (!$visitor->group->can("add_group", "edit_group", "delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage groups."));
 
             if (!empty($_GET['search'])) {
@@ -1018,10 +1022,15 @@
 
         /**
          * Function: export
-         * Export posts, pages, etc.
+         * Export content from this installation.
          */
         public function export() {
-            if (!Visitor::current()->group->can("add_post"))
+            $config  = Config::current();
+            $trigger = Trigger::current();
+            $visitor = Visitor::current();
+            $exports = array();
+
+            if (!$visitor->group->can("edit_post", "edit_page", "edit_group", "edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to export content."));
 
             if (empty($_POST)) {
@@ -1031,12 +1040,10 @@
                 return $this->display("export");
             }
 
-            $config = Config::current();
-            $trigger = Trigger::current();
-            $route = Route::current();
-            $exports = array();
-
             if (isset($_POST['posts'])) {
+                if (!$visitor->group->can("edit_post"))
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
+
                 fallback($_POST['filter_posts'], "");
                 list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
@@ -1131,6 +1138,9 @@
             }
 
             if (isset($_POST['pages'])) {
+                if (!$visitor->group->can("edit_page"))
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to edit pages."));
+
                 fallback($_POST['filter_pages'], "");
                 list($where, $params) = keywords($_POST['filter_pages'], "title LIKE :query OR body LIKE :query", "pages");
 
@@ -1190,6 +1200,9 @@
             }
 
             if (isset($_POST['groups'])) {
+                if (!$visitor->group->can("edit_group"))
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
+
                 fallback($_POST['filter_groups'], "");
                 list($where, $params) = keywords($_POST['filter_groups'], "name LIKE :query", "groups");
 
@@ -1204,6 +1217,9 @@
             }
 
             if (isset($_POST['users'])) {
+                if (!$visitor->group->can("edit_user"))
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
+
                 fallback($_POST['filter_users'], "");
                 list($where, $params) = keywords($_POST['filter_users'], "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
@@ -1252,30 +1268,19 @@
 
         /**
          * Function: import
-         * Importing content from other systems.
+         * Import content to this installation.
          */
         public function import() {
-            if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
-
-            $this->display("import");
-        }
-
-        /**
-         * Function: import_chyrp
-         * Chyrp importing.
-         */
-        public function import_chyrp() {
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
             $sql = SQL::current();
 
-            if (!$visitor->group->can("add_post"))
+            if (!$visitor->group->can("add_post", "add_page", "add_group", "add_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
 
             if (empty($_POST))
-                redirect("/admin/?action=import");
+                return $this->display("import");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1296,9 +1301,8 @@
                 if (!is_array($users = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true)))
                     Flash::warning(__("Users export file is invalid."), "/admin/?action=import");
 
-            # Backward-compatibility for the old Groups plus Permissions export format.
-            if (isset($groups) and array_key_exists("groups", $groups) and array_key_exists("permissions", $groups))
-                $groups = $groups["groups"];
+            if (!isset($groups) and !isset($users) and !isset($posts) and !isset($pages))
+                Flash::warning(__("You did not select anything to import."), "/admin/?action=import");
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
@@ -1316,15 +1320,22 @@
                     }
             }
 
-            if (isset($groups))
+            if (isset($groups)) {
+                if (!$visitor->group->can("add_group"))
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to create groups."));
+
                 foreach ($groups as $name => $permissions) {
                     $group = new Group(array("name" => (string) $name));
 
                     if ($group->no_results)
                         $trigger->call("import_chyrp_group", Group::add($name, $permissions));
                 }
+            }
 
-            if (isset($users))
+            if (isset($users)) {
+                if (!$visitor->group->can("add_user"))
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to create users."));
+
                 foreach ($users as $login => $user) {
                     $group = new Group(array("name" => (string) fallback($user["group"])));
 
@@ -1340,8 +1351,12 @@
 
                     $trigger->call("import_chyrp_user", $user);
                 }
+            }
 
-            if (isset($posts))
+            if (isset($posts)) {
+                if (!$visitor->group->can("add_post"))
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to create posts."));
+
                 foreach ($posts->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
@@ -1367,8 +1382,12 @@
 
                     $trigger->call("import_chyrp_post", $entry, $post);
                 }
+            }
 
-            if (isset($pages))
+            if (isset($pages)) {
+                if (!$visitor->group->can("add_page"))
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to create pages."));
+
                 foreach ($pages->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
@@ -1390,6 +1409,7 @@
 
                     $trigger->call("import_chyrp_page", $entry, $page);
                 }
+            }
 
             Flash::notice(__("Chyrp Lite content successfully imported!"), "/admin/?action=import");
         }
@@ -1974,10 +1994,11 @@
 
             $trigger->filter($manage, "manage_nav");
 
-            if ($visitor->group->can("add_post")) {
+            if ($visitor->group->can("add_post", "add_page", "add_group", "add_user"))
                 $manage["import"] = array("title" => __("Import"));
+
+            if ($visitor->group->can("edit_post", "edit_page", "edit_group", "edit_user"))
                 $manage["export"] = array("title" => __("Export"));
-            }
 
             foreach ($manage as $child => &$attributes) {
                 $attributes["selected"] = ($action == $child or
