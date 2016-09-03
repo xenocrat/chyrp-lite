@@ -1033,12 +1033,11 @@
             if (!$visitor->group->can("edit_post", "edit_page", "edit_group", "edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to export content."));
 
-            if (empty($_POST)) {
-                if (!class_exists("ZipArchive"))
-                    Flash::message(__("Multiple exports are not possible because the ZipArchive extension is not available."));
-
+            if (empty($_POST))
                 return $this->display("export");
-            }
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (isset($_POST['posts'])) {
                 if (!$visitor->group->can("edit_post"))
@@ -1252,16 +1251,16 @@
                 $zip = new ZipArchive;
                 $err = $zip->open($filepath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-                if ($err === true) {
-                    foreach ($exports as $name => $contents)
-                        $zip->addFromString($name, $contents);
-
-                    $zip->close();
-                    $bitstream = file_get_contents($filepath);
-                    unlink($filepath);
-                    file_attachment($bitstream, $filename.".zip");
-                } else
+                if ($err !== true)
                     error(__("Error"), _f("Failed to export files because of ZipArchive error %d.", $err));
+
+                foreach ($exports as $name => $contents)
+                    $zip->addFromString($name, $contents);
+
+                $zip->close();
+                $bitstream = file_get_contents($filepath);
+                unlink($filepath);
+                file_attachment($bitstream, $filename.".zip");
             } else
                 file_attachment(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
         }
