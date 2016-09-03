@@ -227,9 +227,9 @@
             $posts = new Paginator(array());
             $title = __("Archive");
             $conds = array("status" => "public");
-            $timestamp = mktime(0, 0, 0, (is_numeric($_GET['month']) ? $_GET['month'] : 1),
-                                         (is_numeric($_GET['day']) ? $_GET['day'] : 1),
-                                         (is_numeric($_GET['year']) ? $_GET['year'] : 1970));
+            $timestamp = mktime(0, 0, 0, (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
+                                         (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
+                                         (is_numeric($_GET['year']) ? (int) $_GET['year'] : 1970));
 
             if (is_numeric($_GET['year']) and is_numeric($_GET['month']) and is_numeric($_GET['day']))
                 $depth = "day";
