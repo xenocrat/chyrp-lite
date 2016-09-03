@@ -384,7 +384,8 @@
     $trigger->call("runtime");
 
     # Publish scheduled posts.
-    Post::publish_scheduled();
+    if (MAIN or ADMIN)
+        Post::publish_scheduled();
 
     # Set the content-type and charset.
     if (JAVASCRIPT) {
