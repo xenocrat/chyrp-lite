@@ -33,11 +33,11 @@
             $loaders = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
             foreach ((array) $config->enabled_modules as $module)
-                if (file_exists(MODULES_DIR.DIR.$module.DIR."admin"))
+                if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
                     $loaders[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
             foreach ((array) $config->enabled_feathers as $feather)
-                if (file_exists(FEATHERS_DIR.DIR.$feather.DIR."admin"))
+                if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
                     $loaders[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
             $loader = new Twig_Loader_Chain($loaders);
