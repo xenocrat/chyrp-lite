@@ -265,7 +265,7 @@
      *     A localised display name, e.g. "English (United States)".
      */
     function lang_code($code) {
-        return (class_exists("Locale")) ? Locale::getDisplayName($code, $code) : $code ;
+        return class_exists("Locale") ? Locale::getDisplayName($code, $code) : $code ;
     }
 
     /**
@@ -281,7 +281,7 @@
      */
     function __($text, $domain = "chyrp") {
         global $l10n;
-        return (isset($l10n[$domain])) ? $l10n[$domain]->translate($text) : $text ;
+        return isset($l10n[$domain]) ? $l10n[$domain]->translate($text) : $text ;
     }
 
     /**
@@ -299,7 +299,7 @@
      */
     function _p($single, $plural, $number, $domain = "chyrp") {
         global $l10n;
-        return (isset($l10n[$domain])) ?
+        return isset($l10n[$domain]) ?
                      $l10n[$domain]->ngettext($single, $plural, $number) : (($number != 1) ? $plural : $single) ;
     }
 
@@ -338,7 +338,7 @@
      *     A time/date string with the supplied formatting.
      */
     function when($formatting, $when, $strftime = false) {
-        $time = (is_numeric($when)) ? $when : strtotime($when) ;
+        $time = is_numeric($when) ? $when : strtotime($when) ;
 
         if ($strftime)
             return strftime($formatting, $time);
@@ -359,7 +359,7 @@
     function datetime($when = null) {
         fallback($when, time());
 
-        $time = (is_numeric($when)) ? $when : strtotime($when) ;
+        $time = is_numeric($when) ? $when : strtotime($when) ;
 
         return date("Y-m-d H:i:s", $time);
     }
@@ -1232,10 +1232,10 @@
         }
 
         if ($force_lowercase)
-            $clean = (function_exists('mb_strtolower')) ? mb_strtolower($clean, 'UTF-8') : strtolower($clean) ;
+            $clean = function_exists('mb_strtolower') ? mb_strtolower($clean, 'UTF-8') : strtolower($clean) ;
 
         if ($trunc)
-            $clean = (function_exists('mb_substr')) ? mb_substr($clean, 0, $trunc, 'UTF-8') : substr($clean, 0, $trunc) ;
+            $clean = function_exists('mb_substr') ? mb_substr($clean, 0, $trunc, 'UTF-8') : substr($clean, 0, $trunc) ;
 
         return $clean;
     }
@@ -1987,7 +1987,7 @@
      */
     function add_scheme($url, $scheme = null) {
         preg_match('~^([a-z]+://)?(.+)~i', $url, $matches);
-        $matches[1] = (isset($scheme)) ? $scheme : oneof($matches[1], "http://") ;
+        $matches[1] = isset($scheme) ? $scheme : oneof($matches[1], "http://") ;
         return $url = $matches[1].$matches[2];
     }
 
