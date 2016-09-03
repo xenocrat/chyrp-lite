@@ -305,8 +305,8 @@
                                  "months" => $months,
                                  "archive" => array("timestamp" => $timestamp,
                                                     "depth" => $depth,
-                                                    "next" => strtotime(reset($next)),
-                                                    "prev" => strtotime(reset($prev)))),
+                                                    "next" => !empty($next) ? strtotime(reset($next)) : false,
+                                                    "prev" => !empty($prev) ? strtotime(reset($prev)) : false)),
                            $title);
         }
 
