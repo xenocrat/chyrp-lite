@@ -37,8 +37,8 @@
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            $cache = (is_writable(CACHES_DIR.DIR."twig") and !PREVIEWING and (!DEBUG or CACHE_TWIG)) ?
-                CACHES_DIR.DIR."twig" : false ;
+            $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+                      !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
             if (defined('THEME_DIR')) {
                 $loader = new Twig_Loader_Filesystem(THEME_DIR);
