@@ -1726,6 +1726,9 @@
         if (!is_uploaded_file($file['tmp_name']))
             show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", fix($file['name'])));
 
+        if (!is_dir($uploads_path))
+            error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
+
         if (!is_writable($uploads_path))
             error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
 
@@ -1783,9 +1786,16 @@
     function upload_from_url($url, $redirects = 3, $timeout = 10) {
         preg_match("~\.[a-z0-9]+(?=($|\?))~i", $url, $file_ext);
         fallback($file_ext[0], "bin"); # Assume unknown binary file.
+        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+
+        if (!is_dir($uploads_path))
+            error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
+
+        if (!is_writable($uploads_path))
+            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
 
         $filename = unique_filename(md5($url).".".$file_ext[0]);
-        $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
+        $filepath = $uploads_path.$filename;
 
         file_put_contents($filepath, get_remote($url, $redirects, $timeout));
         return $filename;
