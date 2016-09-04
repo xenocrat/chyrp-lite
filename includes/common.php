@@ -310,12 +310,11 @@
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
     # Handle a missing config file with redirect or error.
-    if (!file_exists(INCLUDES_DIR.DIR."config.json.php")) {
-        if (!MAIN)
+    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+        if (MAIN)
+            redirect("install.php");
+        else
             error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
-
-        redirect("install.php");
-    }
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
