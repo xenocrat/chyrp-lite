@@ -128,7 +128,7 @@
          */
         public function write_post() {
             if (!Visitor::current()->group->can("add_post", "add_draft"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create posts."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
             $config = Config::current();
 
@@ -159,7 +159,7 @@
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_post", "add_draft"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create posts."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -343,7 +343,7 @@
          */
         public function write_page() {
             if (!Visitor::current()->group->can("add_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create pages."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
             $this->display("write_page", array("pages" => Page::find()));
         }
@@ -354,7 +354,7 @@
          */
         public function add_page() {
             if (!Visitor::current()->group->can("add_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create pages."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -537,7 +537,7 @@
          */
         public function new_user() {
             if (!Visitor::current()->group->can("add_user"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create users."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
             $config = Config::current();
 
@@ -554,7 +554,7 @@
          */
         public function add_user() {
             if (!Visitor::current()->group->can("add_user"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create users."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -815,7 +815,7 @@
          */
         public function new_group() {
             if (!Visitor::current()->group->can("add_group"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create groups."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
             $this->display("new_group",
                            array("permissions" => SQL::current()->select("permissions",
@@ -829,7 +829,7 @@
          */
         public function add_group() {
             if (!Visitor::current()->group->can("add_group"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create groups."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1321,7 +1321,7 @@
 
             if (isset($groups)) {
                 if (!$visitor->group->can("add_group"))
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to create groups."));
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
                 foreach ($groups as $name => $permissions) {
                     $group = new Group(array("name" => (string) $name));
@@ -1333,7 +1333,7 @@
 
             if (isset($users)) {
                 if (!$visitor->group->can("add_user"))
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to create users."));
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
                 foreach ($users as $login => $user) {
                     $group = new Group(array("name" => (string) fallback($user["group"])));
@@ -1354,7 +1354,7 @@
 
             if (isset($posts)) {
                 if (!$visitor->group->can("add_post"))
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to create posts."));
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
                 foreach ($posts->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
@@ -1385,7 +1385,7 @@
 
             if (isset($pages)) {
                 if (!$visitor->group->can("add_page"))
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to create pages."));
+                    show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
                 foreach ($pages->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
@@ -1571,7 +1571,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
@@ -1615,7 +1615,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
@@ -1655,7 +1655,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST['theme']))
-                error(__("No Theme Specified"), __("You did not specify a theme to select or preview."), null, 400);
+                error(__("No Theme Specified"), __("You did not specify which theme to select."), null, 400);
 
             if (!isset($_POST['change']) or $_POST['change'] != "indubitably")
                 self::preview_theme();
@@ -1688,7 +1688,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to preview themes."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             $_SESSION['theme'] = $_POST['theme'];
             Flash::notice(__("Preview started."), "/");

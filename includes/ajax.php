@@ -58,7 +58,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("add_post", "add_draft", "add_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to create content."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add content."));
 
             if (empty($_POST['filter']))
                 error(__("No Filter Specified"), __("A filter is required to preview content."), null, 400);
@@ -80,7 +80,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to enable extensions."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
@@ -112,7 +112,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to disable extensions."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
