@@ -1575,7 +1575,7 @@
 
             load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
 
-            require MODULES_DIR.DIR.$module.DIR.$module.".php";
+            require $filepath;
 
             if (!is_subclass_of($class_name, "Modules")) {
                 cancel_module($module, _f("%s module is damaged.", $class_name));
@@ -1601,7 +1601,7 @@
 
             load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
 
-            require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
+            require $filepath;
 
             if (!is_subclass_of($class_name, "Feathers")) {
                 cancel_feather($feather, _f("%s feather is damaged.", $class_name));
