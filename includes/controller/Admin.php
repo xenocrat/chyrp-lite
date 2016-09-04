@@ -2064,28 +2064,28 @@
 
             $this->displayed = true;
 
-            $this->context                = array_merge($context, $this->context);
-            $this->context["ip"]          = $_SERVER["REMOTE_ADDR"];
-            $this->context["DIR"]         = DIR;
-            $this->context["version"]     = CHYRP_VERSION;
-            $this->context["codename"]    = CHYRP_CODENAME;
-            $this->context["debug"]       = DEBUG;
-            $this->context["now"]         = time();
-            $this->context["site"]        = $config;
-            $this->context["flash"]       = Flash::current();
-            $this->context["theme"]       = Theme::current();
-            $this->context["trigger"]     = $trigger;
-            $this->context["route"]       = $route;
-            $this->context["visitor"]     = Visitor::current();
-            $this->context["logged_in"]   = logged_in();
-            $this->context["title"]       = fallback($title, camelize($template, true));
-            $this->context["navigation"]  = $this->navigation_context($route->action);
-            $this->context["feathers"]    = Feathers::$instances;
-            $this->context["modules"]     = Modules::$instances;
-            $this->context["POST"]        = $_POST;
-            $this->context["GET"]         = $_GET;
-            $this->context["sql_queries"] =& SQL::current()->queries;
-            $this->context["sql_debug"]   =& SQL::current()->debug;
+            $this->context                       = array_merge($context, $this->context);
+            $this->context["ip"]                 = $_SERVER["REMOTE_ADDR"];
+            $this->context["DIR"]                = DIR;
+            $this->context["version"]            = CHYRP_VERSION;
+            $this->context["codename"]           = CHYRP_CODENAME;
+            $this->context["debug"]              = DEBUG;
+            $this->context["now"]                = time();
+            $this->context["site"]               = $config;
+            $this->context["flash"]              = Flash::current();
+            $this->context["theme"]              = Theme::current();
+            $this->context["trigger"]            = $trigger;
+            $this->context["route"]              = $route;
+            $this->context["visitor"]            = Visitor::current();
+            $this->context["visitor"]->logged_in = logged_in();
+            $this->context["title"]              = fallback($title, camelize($template, true));
+            $this->context["navigation"]         = $this->navigation_context($route->action);
+            $this->context["feathers"]           = Feathers::$instances;
+            $this->context["modules"]            = Modules::$instances;
+            $this->context["POST"]               = $_POST;
+            $this->context["GET"]                = $_GET;
+            $this->context["sql_queries"]        =& SQL::current()->queries;
+            $this->context["sql_debug"]          =& SQL::current()->debug;
 
             $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $template)));
 
