@@ -21,13 +21,13 @@ Arguments:
 admin_write_wysiwyg
 -------------------
 Called from:
-	admin/javascripts/admin.js.php on line 326
+	admin/javascripts/admin.js.php on line 323
 
 
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 559
+	admin/javascripts/admin.js.php on line 557
 
 
 admin_head
@@ -53,13 +53,13 @@ Arguments:
 export_choose
 -------------
 Called from:
-	admin/pages/export.twig on line 36
+	admin/pages/export.twig on line 44
 
 
 import_choose
 -------------
 Called from:
-	admin/pages/import.twig on line 40
+	admin/pages/import.twig on line 48
 
 
 manage_groups_column_header
@@ -240,13 +240,13 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 384
+	includes/common.php on line 383
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1324
+	includes/controller/Admin.php on line 1330
 Arguments:
 	Group::add($name, $permissions)
 
@@ -254,7 +254,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1341
+	includes/controller/Admin.php on line 1351
 Arguments:
 	$user
 
@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1368
+	includes/controller/Admin.php on line 1382
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1391
+	includes/controller/Admin.php on line 1409
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1661
+	includes/controller/Admin.php on line 1680
 Arguments:
 	!empty($_POST['theme'])
 
@@ -640,7 +640,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 381
+	includes/common.php on line 380
 
 
 admin_determine_action
@@ -648,7 +648,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 113
+	includes/controller/Admin.php on line 117
 
 
 post_export_url
@@ -656,7 +656,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1104
+	includes/controller/Admin.php on line 1110
 Arguments:
 	$post), true
 
@@ -666,7 +666,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1123
+	includes/controller/Admin.php on line 1129
 Arguments:
 	$post
 
@@ -676,7 +676,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1168
+	includes/controller/Admin.php on line 1177
 Arguments:
 	$page), true
 
@@ -686,7 +686,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1183
+	includes/controller/Admin.php on line 1192
 Arguments:
 	$page
 
@@ -696,7 +696,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1227
+	includes/controller/Admin.php on line 1242
 
 
 write_nav
@@ -704,7 +704,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1946
+	includes/controller/Admin.php on line 1965
 
 
 manage_nav
@@ -712,7 +712,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 1975
+	includes/controller/Admin.php on line 1994
 
 
 settings_nav
@@ -720,7 +720,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 1999
+	includes/controller/Admin.php on line 2019
 
 
 extend_nav
@@ -728,7 +728,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2017
+	includes/controller/Admin.php on line 2037
 
 
 url_code
@@ -772,7 +772,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2152
+	includes/helpers.php on line 2164
 
 
 xmlrpc_methods

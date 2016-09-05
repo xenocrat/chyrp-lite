@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-09-03 09:16+0000\n"
+"POT-Creation-Date: 2016-09-05 19:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -176,47 +176,51 @@ msgstr ""
 msgid "Emoji"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:47
+#: admin/javascripts/admin.js.php:31
+#: admin/javascripts/admin.js.php:35
+msgid "These changes will affect your user account. Are you sure you want to proceed?"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:48
 msgid "Toggle All"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:107
-#: admin/javascripts/admin.js.php:123
+#: admin/javascripts/admin.js.php:108
+#: admin/javascripts/admin.js.php:124
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:109
-#: admin/javascripts/admin.js.php:126
+#: admin/javascripts/admin.js.php:110
+#: admin/javascripts/admin.js.php:127
 msgid "More Options &darr;"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:224
-#: admin/javascripts/admin.js.php:230
-msgid "You are a member of this group. Are you sure you want to proceed?"
+msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:308
+#: admin/javascripts/admin.js.php:305
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:312
-#: admin/javascripts/admin.js.php:314
-#: admin/javascripts/admin.js.php:391
-#: admin/javascripts/admin.js.php:393
+#: admin/javascripts/admin.js.php:309
+#: admin/javascripts/admin.js.php:311
+#: admin/javascripts/admin.js.php:388
+#: admin/javascripts/admin.js.php:390
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:334
-#: admin/javascripts/admin.js.php:335
+#: admin/javascripts/admin.js.php:331
+#: admin/javascripts/admin.js.php:332
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:387
+#: admin/javascripts/admin.js.php:384
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:516
+#: admin/javascripts/admin.js.php:513
 msgid "The extension cannot be toggled because your web browser did not send proper credentials."
 msgstr ""
 
@@ -497,7 +501,7 @@ msgid "Confirm"
 msgstr ""
 
 #: admin/pages/export.twig:3
-#: admin/pages/export.twig:38
+#: admin/pages/export.twig:46
 msgid "Export"
 msgstr ""
 
@@ -505,34 +509,34 @@ msgstr ""
 msgid "What would you like to export?"
 msgstr ""
 
-#: admin/pages/export.twig:10
+#: admin/pages/export.twig:11
 #: admin/pages/manage_posts.twig:30
 msgid "Posts"
 msgstr ""
 
-#: admin/pages/export.twig:12
-#: admin/pages/export.twig:18
-#: admin/pages/export.twig:24
-#: admin/pages/export.twig:30
+#: admin/pages/export.twig:13
+#: admin/pages/export.twig:21
+#: admin/pages/export.twig:29
+#: admin/pages/export.twig:37
 msgid 'filter (optional)'
 msgstr ""
 
-#: admin/pages/export.twig:16
+#: admin/pages/export.twig:19
 #: admin/pages/manage_pages.twig:19
 msgid "Pages"
 msgstr ""
 
-#: admin/pages/export.twig:22
+#: admin/pages/export.twig:27
 #: admin/pages/manage_groups.twig:21
 msgid "Groups"
 msgstr ""
 
-#: admin/pages/export.twig:28
+#: admin/pages/export.twig:35
 #: admin/pages/manage_users.twig:24
 msgid "Users"
 msgstr ""
 
-#: admin/pages/export.twig:33
+#: admin/pages/export.twig:40
 msgid "Warning: this file will contain the hashed password for each user – keep it safe!"
 msgstr ""
 
@@ -582,7 +586,7 @@ msgid "Chyrp URL"
 msgstr ""
 
 #: admin/pages/general_settings.twig:23
-#: admin/pages/import.twig:27
+#: admin/pages/import.twig:35
 #: admin/partials/post_fields.twig:10
 msgid "(optional)"
 msgstr ""
@@ -624,7 +628,7 @@ msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 
 #: admin/pages/import.twig:3
-#: admin/pages/import.twig:35
+#: admin/pages/import.twig:43
 msgid "Import"
 msgstr ""
 
@@ -632,27 +636,27 @@ msgstr ""
 msgid "What would you like to import?"
 msgstr ""
 
-#: admin/pages/import.twig:10
+#: admin/pages/import.twig:11
 msgid "Posts .atom File"
 msgstr ""
 
-#: admin/pages/import.twig:14
+#: admin/pages/import.twig:17
 msgid "Pages .atom File"
 msgstr ""
 
-#: admin/pages/import.twig:18
+#: admin/pages/import.twig:23
 msgid "Groups .json File"
 msgstr ""
 
-#: admin/pages/import.twig:22
+#: admin/pages/import.twig:29
 msgid "Users .json File"
 msgstr ""
 
-#: admin/pages/import.twig:26
+#: admin/pages/import.twig:34
 msgid "What URL is used for embedded media?"
 msgstr ""
 
-#: admin/pages/import.twig:31
+#: admin/pages/import.twig:39
 #, php-format
 msgid "Usually something like <code>%s/uploads/</code>."
 msgstr ""
