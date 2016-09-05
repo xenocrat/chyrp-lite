@@ -221,7 +221,7 @@ function validate_passwords(selector_primary, selector_confirm) {
     });
 }
 function confirm_submit(message) {
-    message = (typeof message === "string") ? message : '<?php echo __("Are you sure you want to proceed?"); ?>' ;
+    message = (typeof message === "string") ? message : '<?php echo __("Are you sure you want to proceed?", "theme"); ?>' ;
 
     $("form.confirm").submit(function(e) {
         if (!confirm(message))
