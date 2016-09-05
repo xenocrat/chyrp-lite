@@ -123,7 +123,7 @@
         }
 
         /**
-         * Function: write
+         * Function: write_post
          * Post writing.
          */
         public function write_post() {
