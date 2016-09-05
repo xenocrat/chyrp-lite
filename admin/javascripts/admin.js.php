@@ -26,12 +26,13 @@ $(function() {
     if (Route.action == "edit_user")
         validate_passwords("input[type='password']#new_password1", "input[type='password']#new_password2");
 
-    // Confirmations for group actions.
+    // Confirmation for edits affecting the user's group.
     if (Route.action == "edit_group")
-        confirm_edit_group();
+        confirm_submit('<?php echo __("These changes will affect your user account. Are you sure you want to proceed?", "theme"); ?>');
 
-    if (Route.action == "delete_group")
-        confirm_delete_group();
+    // Confirmation for edits affecting the user's account.
+    if (Route.action == "edit_user")
+        confirm_submit('<?php echo __("These changes will affect your user account. Are you sure you want to proceed?", "theme"); ?>');
 
     // Require email correspondence for activation emails.
     if (Route.action == "user_settings")
@@ -219,15 +220,11 @@ function validate_passwords(selector_primary, selector_confirm) {
         }
     });
 }
-function confirm_edit_group(msg) {
+function confirm_submit(message) {
+    message = (typeof message === "string") ? message : '<?php echo __("Are you sure you want to proceed?"); ?>' ;
+
     $("form.confirm").submit(function(e) {
-        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to proceed?", "theme"); ?>'))
-            e.preventDefault();
-    });
-}
-function confirm_delete_group(msg) {
-    $("form.confirm").submit(function(e) {
-        if (!confirm('<?php echo __("You are a member of this group. Are you sure you want to proceed?", "theme"); ?>'))
+        if (!confirm(message))
             e.preventDefault();
     });
 }
@@ -554,6 +551,7 @@ var Extend = {
         message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
         Extend.failed = true;
         alert(message);
+        $(".module_disabler_confirm").show();
     }
 }
 <?php $trigger->call("admin_javascript"); ?>
