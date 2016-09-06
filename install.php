@@ -725,7 +725,7 @@
                                    "joined_at" => datetime()));
 
             if (password_strength($_POST['password_1']) < 100)
-                $errors[] = __("Please consider setting a stronger password for your admin account.");
+                $errors[] = __("Please consider setting a stronger password for your account.");
 
             $installed = true;
         }
