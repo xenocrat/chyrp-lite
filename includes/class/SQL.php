@@ -189,7 +189,7 @@
 
             $query = new Query($this, $query, $params, $throw_exceptions);
 
-            return $query ;
+            return $query;
         }
 
         /**
