@@ -78,6 +78,9 @@
     # Prepare the SQL interface.
     $sql = SQL::current();
 
+    # Initialize connection to SQL server.
+    $sql->connect();
+
     # Load the translation engine.
     load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$config->locale.".mo");
 
@@ -154,6 +157,19 @@
     function disable_importers() {
         $config = Config::current();
         $config->set("enabled_modules", array_diff((array) $config->enabled_modules, array("importers")));
+    }
+
+    /**
+     * Function: add_export_content
+     * Adds the export_content permission.
+     *
+     * Versions: 2016.03 => 2016.04
+     */
+    function add_export_content() {
+        $sql = SQL::current();
+
+        if (!$sql->count("permissions", array("id" => "export_content", "group_id" => 0)))
+            $sql->insert("permissions", array("id" => "export_content", "name" => "Export Content", "group_id" => 0));
     }
 
     #---------------------------------------------
@@ -366,6 +382,7 @@
         remove_trackbacking();
         add_admin_per_page();
         disable_importers();
+        add_export_content();
 
         # Perform module upgrades and output the results if the upgrader echoes anything.
         foreach ((array) $config->enabled_modules as $module)

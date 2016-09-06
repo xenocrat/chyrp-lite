@@ -679,7 +679,8 @@
                            "delete_user" => "Delete Users",             # __("Delete Users");
                            "add_group" => "Add Groups",                 # __("Add Groups");
                            "edit_group" => "Edit Groups",               # __("Edit Groups");
-                           "delete_group" => "Delete Groups");          # __("Delete Groups");
+                           "delete_group" => "Delete Groups",           # __("Delete Groups");
+                           "export_content" => "Export Content");       # __("Export Content");
 
             foreach ($names as $id => $name)
                 $sql->replace("permissions",
