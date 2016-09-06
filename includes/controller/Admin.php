@@ -98,7 +98,7 @@
                     return $route->action = "import";
 
                 # "Manage > Export", if they can export content.
-                if ($visitor->group->can("edit_post", "edit_page", "edit_group", "edit_user"))
+                if ($visitor->group->can("export_content"))
                     return $route->action = "export";
             }
 
@@ -1030,7 +1030,7 @@
             $visitor = Visitor::current();
             $exports = array();
 
-            if (!$visitor->group->can("edit_post", "edit_page", "edit_group", "edit_user"))
+            if (!$visitor->group->can("export_content"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to export content."));
 
             if (empty($_POST))
@@ -1040,9 +1040,6 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (isset($_POST['posts'])) {
-                if (!$visitor->group->can("edit_post"))
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to edit posts."));
-
                 fallback($_POST['filter_posts'], "");
                 list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
@@ -1137,9 +1134,6 @@
             }
 
             if (isset($_POST['pages'])) {
-                if (!$visitor->group->can("edit_page"))
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to edit pages."));
-
                 fallback($_POST['filter_pages'], "");
                 list($where, $params) = keywords($_POST['filter_pages'], "title LIKE :query OR body LIKE :query", "pages");
 
@@ -1199,9 +1193,6 @@
             }
 
             if (isset($_POST['groups'])) {
-                if (!$visitor->group->can("edit_group"))
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
-
                 fallback($_POST['filter_groups'], "");
                 list($where, $params) = keywords($_POST['filter_groups'], "name LIKE :query", "groups");
 
@@ -1216,9 +1207,6 @@
             }
 
             if (isset($_POST['users'])) {
-                if (!$visitor->group->can("edit_user"))
-                    show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
-
                 fallback($_POST['filter_users'], "");
                 list($where, $params) = keywords($_POST['filter_users'], "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
@@ -1996,7 +1984,7 @@
             if ($visitor->group->can("add_post", "add_page", "add_group", "add_user"))
                 $manage["import"] = array("title" => __("Import"));
 
-            if ($visitor->group->can("edit_post", "edit_page", "edit_group", "edit_user"))
+            if ($visitor->group->can("export_content"))
                 $manage["export"] = array("title" => __("Export"));
 
             foreach ($manage as $child => &$attributes) {
