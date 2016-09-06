@@ -53,7 +53,7 @@ Arguments:
 export_choose
 -------------
 Called from:
-	admin/pages/export.twig on line 44
+	admin/pages/export.twig on line 36
 
 
 import_choose
@@ -246,7 +246,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1330
+	includes/controller/Admin.php on line 1318
 Arguments:
 	Group::add($name, $permissions)
 
@@ -254,7 +254,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1351
+	includes/controller/Admin.php on line 1339
 Arguments:
 	$user
 
@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1382
+	includes/controller/Admin.php on line 1370
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1409
+	includes/controller/Admin.php on line 1397
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1680
+	includes/controller/Admin.php on line 1668
 Arguments:
 	!empty($_POST['theme'])
 
@@ -656,7 +656,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1110
+	includes/controller/Admin.php on line 1107
 Arguments:
 	$post), true
 
@@ -666,7 +666,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1129
+	includes/controller/Admin.php on line 1126
 Arguments:
 	$post
 
@@ -676,7 +676,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1177
+	includes/controller/Admin.php on line 1171
 Arguments:
 	$page), true
 
@@ -686,7 +686,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1192
+	includes/controller/Admin.php on line 1186
 Arguments:
 	$page
 
@@ -696,7 +696,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1242
+	includes/controller/Admin.php on line 1230
 
 
 write_nav
@@ -704,7 +704,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1965
+	includes/controller/Admin.php on line 1953
 
 
 manage_nav
@@ -712,7 +712,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 1994
+	includes/controller/Admin.php on line 1982
 
 
 settings_nav
@@ -720,7 +720,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2019
+	includes/controller/Admin.php on line 2007
 
 
 extend_nav
@@ -728,7 +728,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2037
+	includes/controller/Admin.php on line 2025
 
 
 url_code

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-09-05 19:52+0000\n"
+"POT-Creation-Date: 2016-09-06 19:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -501,7 +501,7 @@ msgid "Confirm"
 msgstr ""
 
 #: admin/pages/export.twig:3
-#: admin/pages/export.twig:46
+#: admin/pages/export.twig:38
 msgid "Export"
 msgstr ""
 
@@ -509,34 +509,34 @@ msgstr ""
 msgid "What would you like to export?"
 msgstr ""
 
-#: admin/pages/export.twig:11
+#: admin/pages/export.twig:10
 #: admin/pages/manage_posts.twig:30
 msgid "Posts"
 msgstr ""
 
-#: admin/pages/export.twig:13
-#: admin/pages/export.twig:21
-#: admin/pages/export.twig:29
-#: admin/pages/export.twig:37
+#: admin/pages/export.twig:12
+#: admin/pages/export.twig:18
+#: admin/pages/export.twig:24
+#: admin/pages/export.twig:30
 msgid 'filter (optional)'
 msgstr ""
 
-#: admin/pages/export.twig:19
+#: admin/pages/export.twig:16
 #: admin/pages/manage_pages.twig:19
 msgid "Pages"
 msgstr ""
 
-#: admin/pages/export.twig:27
+#: admin/pages/export.twig:22
 #: admin/pages/manage_groups.twig:21
 msgid "Groups"
 msgstr ""
 
-#: admin/pages/export.twig:35
+#: admin/pages/export.twig:28
 #: admin/pages/manage_users.twig:24
 msgid "Users"
 msgstr ""
 
-#: admin/pages/export.twig:40
+#: admin/pages/export.twig:33
 msgid "Warning: this file will contain the hashed password for each user – keep it safe!"
 msgstr ""
 
