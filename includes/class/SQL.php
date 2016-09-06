@@ -109,9 +109,6 @@
             if (!isset($this->database))
                 self::__construct();
 
-            if (UPGRADING)
-                $checking = true;
-
             switch($this->method) {
                 case "pdo":
                     try {
@@ -192,7 +189,7 @@
 
             $query = new Query($this, $query, $params, $throw_exceptions);
 
-            return (!$query->query and UPGRADING) ? false : $query ;
+            return $query ;
         }
 
         /**
@@ -207,7 +204,7 @@
          */
         public function count($tables, $conds = null, $params = array(), $throw_exceptions = false) {
             $query = $this->query(QueryBuilder::build_count($tables, $conds, $params), $params, $throw_exceptions);
-            return ($query->query) ? $query->fetchColumn() : false ;
+            return isset($query->query) ? $query->fetchColumn() : false ;
         }
 
         /**
@@ -277,6 +274,7 @@
          */
         public function replace($table, $keys, $data, $params = array(), $throw_exceptions = false) {
             $match = array();
+
             foreach ((array) $keys as $key)
                 $match[$key] = $data[$key];
 
