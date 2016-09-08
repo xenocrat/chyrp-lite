@@ -740,7 +740,7 @@
 
           ?></pre>
 <?php if (!$installed): ?>
-            <form action="install.php" method="post" accept-charset="utf-8" id="installer">
+            <form action="install.php" method="post" accept-charset="UTF-8" id="installer">
                 <h1><?php echo __("Database Setup"); ?></h1>
                 <p id="adapter_field">
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
