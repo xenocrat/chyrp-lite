@@ -65,8 +65,8 @@
                         $this->query = $this->db->prepare($query);
                         $result = $this->query->execute($params);
                         $this->query->setFetchMode(PDO::FETCH_ASSOC);
-
                         $this->queryString = $query;
+
                         foreach ($params as $name => $val)
                             $this->queryString = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
                                                               str_replace(array("\\", "\$"),

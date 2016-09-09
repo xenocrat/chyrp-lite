@@ -330,8 +330,8 @@
                             }
                         } elseif (substr($key, -5) == " like" and is_array($val)) { # multiple LIKE
                             $key = self::safecol(substr($key, 0, -5));
-
                             $likes = array();
+
                             foreach ($val as $index => $match) {
                                 $param = str_replace(array("(", ")", "."), "_", $key)."_".$index;
                                 $likes[] = $key." LIKE :".$param;
@@ -341,8 +341,8 @@
                             $cond = "(".implode(" OR ", $likes).")";
                         } elseif (substr($key, -9) == " like all" and is_array($val)) { # multiple LIKE
                             $key = self::safecol(substr($key, 0, -9));
-
                             $likes = array();
+
                             foreach ($val as $index => $match) {
                                 $param = str_replace(array("(", ")", "."), "_", $key)."_".$index;
                                 $likes[] = $key." LIKE :".$param;
@@ -352,8 +352,8 @@
                             $cond = "(".implode(" AND ", $likes).")";
                         } elseif (substr($key, -9) == " not like" and is_array($val)) { # multiple NOT LIKE
                             $key = self::safecol(substr($key, 0, -9));
-
                             $likes = array();
+
                             foreach ($val as $index => $match) {
                                 $param = str_replace(array("(", ")", "."), "_", $key)."_".$index;
                                 $likes[] = $key." NOT LIKE :".$param;
