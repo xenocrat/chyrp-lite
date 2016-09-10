@@ -16,7 +16,7 @@
          *     $sql - <SQL> instance.
          *     $query - Query to execute.
          *     $params - An associative array of parameters used in the query.
-         *     $throw_exceptions - Throw exceptions on error?
+         *     $throw_exceptions - Throw exceptions instead of calling error()?
          */
         public function __construct($sql, $query, $params = array(), $throw_exceptions = false) {
             if (DEBUG)
@@ -33,7 +33,7 @@
             $this->db =& $this->sql->db;
 
             $this->params = $params;
-            $this->throw_exceptions = $throw_exceptions;
+            $this->throw_exceptions = (INSTALLING or UPGRADING or XML_RPC) ? true : $throw_exceptions ;
             $this->queryString = $query;
 
             if ($count and DEBUG) {
@@ -76,7 +76,6 @@
 
                         if (!$result)
                             throw new PDOException;
-
                     } catch (PDOException $error) {
                         return $this->handle($error);
                     }
@@ -194,22 +193,18 @@
          * Handles exceptions thrown by failed queries.
          */
         public function handle($error) {
-            $this->sql->error = $error;
-
-            if (UPGRADING or $this->sql->silence_errors)
-                return false;
-
             $backtrace = $error->getTrace();
-            $message = $error->getMessage();
+            $message = $this->sql->error = $error->getMessage();
 
-            $message.= "\n\n<h2>".__("Query String")."</h2>\n".
-                       "<pre>".fix(print_r($this->queryString, true))."</pre>".
-                       "\n\n<h2>".__("Parameters")."</h2>\n".
-                       "<pre>".fix(print_r($this->params, true))."</pre>";
+            if (!$this->throw_exceptions) {
+                $message.= "\n\n<h2>".__("Query String")."</h2>\n".
+                           "<pre>".fix(print_r($this->queryString, true))."</pre>".
+                           "\n\n<h2>".__("Parameters")."</h2>\n".
+                           "<pre>".fix(print_r($this->params, true))."</pre>";
 
-            if (XML_RPC or $this->throw_exceptions)
-                throw new Exception($message);
+                error(__("Database Error"), $message, $backtrace);
+            }
 
-            error(__("Database Error"), $message, $backtrace);
+            throw new Exception($message);
         }
     }
