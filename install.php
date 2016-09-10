@@ -470,38 +470,19 @@
     #---------------------------------------------
 
     if (!empty($_POST)) {
-        # Assure an absolute path for the SQLite database.
-        if ($_POST['adapter'] == "sqlite") {
-            $db_pwd = realpath(dirname($_POST['database']));
+        if (empty($_POST['database']))
+            $errors[] = __("Database cannot be blank.");
 
-            if (!$db_pwd)
-                $errors[] = __("Please make sure your server has executable permissions on all directories in the hierarchy to the SQLite database.");
-            else
-                $_POST['database'] = $db_pwd.DIR.basename($_POST['database']);
-        }
+        if (!empty($_POST['database']) and $_POST['adapter'] == "sqlite") {
+            # Assure an absolute path for the SQLite database.
+            if ($realpath = realpath(dirname($_POST['database']))) {
+                $_POST['database'] = $realpath.DIR.basename($_POST['database']);
 
-        # Build the SQL settings based on user input.
-        $settings = ($_POST['adapter'] == "sqlite") ?
-            array("host"     => "",
-                  "username" => "",
-                  "password" => "",
-                  "database" => $_POST['database'],
-                  "prefix"   => "",
-                  "adapter"  => $_POST['adapter']) :
-            array("host"     => $_POST['host'],
-                  "username" => $_POST['username'],
-                  "password" => $_POST['password'],
-                  "database" => $_POST['database'],
-                  "prefix"   => $_POST['prefix'],
-                  "adapter"  => $_POST['adapter']) ;
-
-        if ($_POST['adapter'] == "sqlite" and !@is_writable(dirname($_POST['database'])))
-            $errors[] = __("Please make sure your server has write permissions to the SQLite database.");
-        else {
-            $sql = SQL::current($settings);
-
-            if (!$sql->connect(true))
-                $errors[] = __("Could not connect to the database:")."\n".fix($sql->error);
+                # Make sure the SQLite database is writable.
+                if (!@is_writable(dirname($_POST['database'])))
+                    $errors[] = __("Please make the SQLite database writable by the server.");
+            } else
+                $errors[] = __("Please enter the full path to the SQLite database.");
         }
 
         if (empty($_POST['name']))
@@ -526,6 +507,30 @@
 
         if (!class_exists("MySQLi") and !class_exists("PDO"))
             $errors[] = __("MySQLi or PDO is required for database access.");
+
+        if (empty($errors)) {
+            # Build the SQL settings based on user input.
+            $settings = ($_POST['adapter'] == "sqlite") ?
+                array("host"     => "",
+                      "username" => "",
+                      "password" => "",
+                      "database" => $_POST['database'],
+                      "prefix"   => "",
+                      "adapter"  => $_POST['adapter']) :
+                array("host"     => $_POST['host'],
+                      "username" => $_POST['username'],
+                      "password" => $_POST['password'],
+                      "database" => $_POST['database'],
+                      "prefix"   => $_POST['prefix'],
+                      "adapter"  => $_POST['adapter']) ;
+
+            # Configure the SQL interface.
+            $sql = SQL::current($settings);
+
+            # Test the database connection.
+            if (!$sql->connect(true))
+                $errors[] = __("Could not connect to the database:")."\n".fix($sql->error);
+        }
 
         if (empty($errors)) {
             # Configure the .htaccess file.
