@@ -63,9 +63,6 @@
             if ($this->connected)
                 return true;
 
-            if (empty($this->database))
-                return false;
-
             # For MySQL databases we prefer the MySQLi driver.
             $this->method = ($this->adapter == "mysql" and class_exists("MySQLi")) ? "mysqli" : "pdo" ;
 
