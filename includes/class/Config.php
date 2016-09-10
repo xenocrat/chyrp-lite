@@ -14,7 +14,9 @@
          */
         private function __construct() {
             if (!is_readable(INCLUDES_DIR.DIR."config.json.php"))
-                return false;
+                return (INSTALLING) ?
+                    false :
+                    trigger_error(__("The configuration file is not readable."), E_USER_WARNING) ;
 
             $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
                                     "",
