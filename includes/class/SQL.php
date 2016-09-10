@@ -69,8 +69,6 @@
                 else
                     error(__("Database Error"),
                           _f("Database adapter <code>%s</code> has no available driver.", fix($this->adapter)));
-            } else
-                $this->method = "";
         }
 
         /**
@@ -109,6 +107,9 @@
             if (!isset($this->database))
                 self::__construct();
 
+            if (!isset($this->method))
+                error(__("Database Error"), __("Database driver is not set."));
+
             switch($this->method) {
                 case "pdo":
                     try {
@@ -136,7 +137,6 @@
                     }
 
                     break;
-
                 case "mysqli":
                     $this->db = @new MySQLi($this->host, $this->username, $this->password, $this->database);
                     $this->error = mysqli_connect_error();
@@ -145,7 +145,6 @@
                         return ($checking) ? false : trigger_error(fix($this->error), E_USER_WARNING) ;
 
                     break;
-
                 default:
                     error(__("Database Error"),
                           _f("Database driver <code>%s</code> is unrecognised.", fix($this->method)));

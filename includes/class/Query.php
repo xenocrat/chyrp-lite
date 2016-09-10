@@ -96,7 +96,6 @@
                     try {
                         if (!$this->query = $this->db->query($query))
                             throw new Exception($this->db->error);
-
                     } catch (Exception $error) {
                         return $this->handle($error);
                     }
