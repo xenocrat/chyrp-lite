@@ -81,6 +81,9 @@
     # Prepare the Config interface.
     $config = Config::current();
 
+    # Prepare the SQL interface.
+    $sql = SQL::current();
+
     # Set the timezone for time calculations (Atlantic/Reykjavik is 0 offset).
     $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
     set_timezone($timezone);
@@ -103,12 +106,9 @@
     $url_path = oneof(parse_url($url, PHP_URL_PATH), "/");
 
     # Already installed?
-    if (file_exists(INCLUDES_DIR.DIR."config.json.php")) {
-        $sql = SQL::current(true);
-
+    if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
             redirect($config->url);
-    }
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))
@@ -533,7 +533,7 @@
                 $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
 
             # Build the configuration file.
-            $config->set("sql", array());
+            $config->set("sql", $settings);
             $config->set("name", $_POST['name']);
             $config->set("description", $_POST['description']);
             $config->set("url", rtrim($url, "/"));
@@ -569,10 +569,6 @@
             $config->set("enabled_feathers", array("text"));
             $config->set("routes", array());
             $config->set("secure_hashkey", random(32));
-
-            # Add SQL settings to the configuration.
-            foreach ($settings as $field => $value)
-                $sql->set($field, $value, true);
 
             # Reconnect to the database.
             $sql->connect();
