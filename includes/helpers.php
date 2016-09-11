@@ -185,14 +185,16 @@
                                  rtrim("/".ltrim($url_path, "/"), "/")."/",
                                  file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
 
-        if (!file_exists(MAIN_DIR.DIR.".htaccess"))
-            return @file_put_contents(MAIN_DIR.DIR.".htaccess", $template);
+        $filepath = MAIN_DIR.DIR.".htaccess";
 
-        if (!is_file(MAIN_DIR.DIR.".htaccess") or !is_readable(MAIN_DIR.DIR.".htaccess"))
+        if (!file_exists($filepath))
+            return @file_put_contents($filepath, $template);
+
+        if (!is_file($filepath) or !is_readable($filepath))
             return false;
 
-        if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")))
-            return @file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$template, FILE_APPEND);
+        if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents($filepath)))
+            return @file_put_contents($filepath, "\n\n".$template, FILE_APPEND);
 
         return true;
     }
@@ -2097,7 +2099,7 @@
         $encoded = json_encode($value, $options);
 
         if (json_last_error())
-            trigger_error(_f("JSON encoding error: %s", json_last_error_msg()), E_USER_WARNING);
+            trigger_error(_f("JSON encoding error: %s", fix(json_last_error_msg())), E_USER_WARNING);
 
         return $encoded;
     }
@@ -2118,7 +2120,7 @@
         $decoded = json_decode($value, $assoc, $depth);
 
         if (json_last_error())
-            trigger_error(_f("JSON decoding error: %s", json_last_error_msg()), E_USER_WARNING);
+            trigger_error(_f("JSON decoding error: %s", fix(json_last_error_msg())), E_USER_WARNING);
 
         return $decoded;
     }
