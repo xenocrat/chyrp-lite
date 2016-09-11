@@ -193,18 +193,17 @@
          * Handles exceptions thrown by failed queries.
          */
         public function handle($error) {
-            $backtrace = $error->getTrace();
-            $message = $this->sql->error = $error->getMessage();
+            $this->sql->error = $error->getMessage();
 
-            if (!$this->throw_exceptions) {
-                $message.= "\n\n<h2>".__("Query String")."</h2>\n".
-                           "<pre>".fix(print_r($this->queryString, true))."</pre>".
-                           "\n\n<h2>".__("Parameters")."</h2>\n".
-                           "<pre>".fix(print_r($this->params, true))."</pre>";
+            if (!$this->throw_exceptions)
+                error(__("Database Error"),
+                      $this->sql->error.
+                      "\n\n<h2>".__("Query String")."</h2>\n".
+                      "<pre>".fix(print_r($this->queryString, true))."</pre>".
+                      "\n\n<h2>".__("Parameters")."</h2>\n".
+                      "<pre>".fix(print_r($this->params, true))."</pre>",
+                      $error->getTrace());
 
-                error(__("Database Error"), $message, $backtrace);
-            }
-
-            throw new Exception($message);
+            throw new Exception(fix($this->sql->error));
         }
     }
