@@ -69,9 +69,6 @@
             switch($this->method) {
                 case "pdo":
                     try {
-                        if (!class_exists("PDO"))
-                            return trigger_error(__("MySQLi or PDO is required for database access."), E_USER_WARNING);
-
                         if (!in_array($this->adapter, PDO::getAvailableDrivers()))
                             throw new PDOException(__("PDO driver is unavailable for this database."));
 
