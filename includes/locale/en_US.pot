@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-09-06 19:20+0000\n"
+"POT-Creation-Date: 2016-09-11 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -393,8 +393,12 @@ msgstr ""
 msgid "Invalid action."
 msgstr ""
 
-#: includes/class/Config.php:64
-#: includes/class/Config.php:88
+#: includes/class/Config.php:19
+msgid "The configuration file is not readable."
+msgstr ""
+
+#: includes/class/Config.php:66
+#: includes/class/Config.php:90
 msgid "The configuration file is not writable."
 msgstr ""
 
@@ -422,18 +426,15 @@ msgstr ""
 msgid "&larr; First"
 msgstr ""
 
-#: includes/class/Query.php:206
+#: includes/class/Query.php:200
 msgid "Query String"
 msgstr ""
 
-#: includes/class/Query.php:208
+#: includes/class/Query.php:202
 msgid "Parameters"
 msgstr ""
 
-#: includes/class/Query.php:214
-#: includes/class/SQL.php:50
-#: includes/class/SQL.php:70
-#: includes/class/SQL.php:150
+#: includes/class/Query.php:205
 msgid "Database Error"
 msgstr ""
 
@@ -452,18 +453,8 @@ msgstr ""
 msgid "Route was initiated without a Controller."
 msgstr ""
 
-#: includes/class/SQL.php:50
-msgid "Database configuration is not set."
-msgstr ""
-
-#: includes/class/SQL.php:71
-#, php-format
-msgid "Database adapter <code>%s</code> has no available driver."
-msgstr ""
-
-#: includes/class/SQL.php:151
-#, php-format
-msgid "Database driver <code>%s</code> is unrecognised."
+#: includes/class/SQL.php:73
+msgid "PDO driver is unavailable for this database."
 msgstr ""
 
 #: includes/class/Theme.php:366
@@ -596,7 +587,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:571
 #: includes/controller/Main.php:473
-#: install.php:517
+#: install.php:486
 msgid "Passwords cannot be blank."
 msgstr ""
 
@@ -605,7 +596,7 @@ msgstr ""
 #: includes/controller/Main.php:475
 #: includes/controller/Main.php:639
 #: install.php:451
-#: install.php:520
+#: install.php:489
 msgid "Passwords do not match."
 msgstr ""
 
@@ -619,7 +610,7 @@ msgstr ""
 #: includes/controller/Admin.php:1714
 #: includes/controller/Main.php:480
 #: includes/controller/Main.php:644
-#: install.php:523
+#: install.php:492
 msgid "Email address cannot be blank."
 msgstr ""
 
@@ -628,7 +619,7 @@ msgstr ""
 #: includes/controller/Admin.php:1717
 #: includes/controller/Main.php:482
 #: includes/controller/Main.php:646
-#: install.php:525
+#: install.php:494
 msgid "Invalid email address."
 msgstr ""
 
@@ -1059,13 +1050,13 @@ msgid "You cannot register an account because you are already logged in."
 msgstr ""
 
 #: includes/controller/Main.php:465
-#: install.php:514
+#: install.php:483
 msgid "Please enter a username for your account."
 msgstr ""
 
 #: includes/controller/Main.php:477
 #: includes/controller/Main.php:641
-#: install.php:728
+#: install.php:731
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
@@ -1240,7 +1231,7 @@ msgid "Please create the directory <em>%s</em>."
 msgstr ""
 
 #: includes/helpers.php:1554
-#: install.php:830
+#: install.php:833
 #, php-format
 msgid "Please make <em>%s</em> writable by the server."
 msgstr ""
@@ -1514,251 +1505,259 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:478
-msgid "Please make sure your server has executable permissions on all directories in the hierarchy to the SQLite database."
+#: install.php:474
+msgid "Database cannot be blank."
 msgstr ""
 
-#: install.php:499
-msgid "Please make sure your server has write permissions to the SQLite database."
-msgstr ""
-
-#: install.php:504
-msgid "Could not connect to the database:"
-msgstr ""
-
-#: install.php:508
+#: install.php:477
 msgid "Please enter a name for your website."
 msgstr ""
 
-#: install.php:511
+#: install.php:480
 msgid "Time zone cannot be blank."
 msgstr ""
 
-#: install.php:528
+#: install.php:497
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
-#: install.php:533
+#: install.php:503
+msgid "Could not determine the absolute path to the SQLite database."
+msgstr ""
+
+#: install.php:507
+msgid "Please make the SQLite database writable by the server."
+msgstr ""
+
+#: install.php:511
+msgid "Please enter a username and password for the MySQL database."
+msgstr ""
+
+#: install.php:534
+msgid "Could not connect to the database:"
+msgstr ""
+
+#: install.php:540
 msgid "Clean URLs will not be available because the <em>.htaccess</em> file is not writable."
 msgstr ""
 
-#: install.php:656
+#: install.php:659
 msgid "Change Settings"
 msgstr ""
 
-#: install.php:657
+#: install.php:660
 msgid "Toggle Extensions"
 msgstr ""
 
-#: install.php:658
+#: install.php:661
 msgid "View Site"
 msgstr ""
 
-#: install.php:659
+#: install.php:662
 msgid "View Private Posts"
 msgstr ""
 
-#: install.php:660
+#: install.php:663
 msgid "View Scheduled Posts"
 msgstr ""
 
-#: install.php:661
+#: install.php:664
 msgid "View Drafts"
 msgstr ""
 
-#: install.php:662
+#: install.php:665
 msgid "View Own Drafts"
 msgstr ""
 
-#: install.php:663
+#: install.php:666
 msgid "Add Posts"
 msgstr ""
 
-#: install.php:664
+#: install.php:667
 msgid "Add Drafts"
 msgstr ""
 
-#: install.php:665
+#: install.php:668
 msgid "Edit Posts"
 msgstr ""
 
-#: install.php:666
+#: install.php:669
 msgid "Edit Drafts"
 msgstr ""
 
-#: install.php:667
+#: install.php:670
 msgid "Edit Own Posts"
 msgstr ""
 
-#: install.php:668
+#: install.php:671
 msgid "Edit Own Drafts"
 msgstr ""
 
-#: install.php:669
+#: install.php:672
 msgid "Delete Posts"
 msgstr ""
 
-#: install.php:670
+#: install.php:673
 msgid "Delete Drafts"
 msgstr ""
 
-#: install.php:671
+#: install.php:674
 msgid "Delete Own Posts"
 msgstr ""
 
-#: install.php:672
+#: install.php:675
 msgid "Delete Own Drafts"
 msgstr ""
 
-#: install.php:673
+#: install.php:676
 msgid "View Pages"
 msgstr ""
 
-#: install.php:674
+#: install.php:677
 msgid "Add Pages"
 msgstr ""
 
-#: install.php:675
+#: install.php:678
 msgid "Edit Pages"
 msgstr ""
 
-#: install.php:676
+#: install.php:679
 msgid "Delete Pages"
 msgstr ""
 
-#: install.php:677
+#: install.php:680
 msgid "Add Users"
 msgstr ""
 
-#: install.php:678
+#: install.php:681
 msgid "Edit Users"
 msgstr ""
 
-#: install.php:679
+#: install.php:682
 msgid "Delete Users"
 msgstr ""
 
-#: install.php:680
+#: install.php:683
 msgid "Add Groups"
 msgstr ""
 
-#: install.php:681
+#: install.php:684
 msgid "Edit Groups"
 msgstr ""
 
-#: install.php:682
+#: install.php:685
 msgid "Delete Groups"
 msgstr ""
 
-#: install.php:683
+#: install.php:686
 msgid "Export Content"
 msgstr ""
 
-#: install.php:744
+#: install.php:747
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:746
+#: install.php:749
 msgid "Adapter"
 msgstr ""
 
-#: install.php:757
+#: install.php:760
 msgid "Host"
 msgstr ""
 
-#: install.php:757
+#: install.php:760
 msgid "(usually ok as \"localhost\")"
 msgstr ""
 
-#: install.php:761
-#: install.php:807
+#: install.php:764
+#: install.php:810
 msgid "Username"
 msgstr ""
 
-#: install.php:765
-#: install.php:811
-#: install.php:815
+#: install.php:768
+#: install.php:814
+#: install.php:818
 msgid "Password"
 msgstr ""
 
-#: install.php:769
+#: install.php:772
 msgid "Database"
 msgstr ""
 
-#: install.php:771
+#: install.php:774
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:777
+#: install.php:780
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:780
+#: install.php:783
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:780
+#: install.php:783
 msgid "(optional)"
 msgstr ""
 
-#: install.php:784
+#: install.php:787
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:786
+#: install.php:789
 msgid "Site Name"
 msgstr ""
 
-#: install.php:787
+#: install.php:790
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:790
+#: install.php:793
 msgid "Description"
 msgstr ""
 
-#: install.php:794
+#: install.php:797
 msgid "What time is it?"
 msgstr ""
 
-#: install.php:798
+#: install.php:801
 msgid "%I:%M %p on %B %d, %Y"
 msgstr ""
 
-#: install.php:805
+#: install.php:808
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:815
+#: install.php:818
 msgid "(again)"
 msgstr ""
 
-#: install.php:819
+#: install.php:822
 msgid "Email Address"
 msgstr ""
 
-#: install.php:822
+#: install.php:825
 msgid "Install me!"
 msgstr ""
 
-#: install.php:825
+#: install.php:828
 msgid "Chyrp Lite has been installed"
 msgstr ""
 
-#: install.php:826
+#: install.php:829
 #: upgrade.php:438
 msgid "What now?"
 msgstr ""
 
-#: install.php:828
+#: install.php:831
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:832
+#: install.php:835
 msgid "Learn more about Chyrp Lite."
 msgstr ""
 
-#: install.php:834
+#: install.php:837
 #: upgrade.php:445
 msgid "Take me to my site!"
 msgstr ""

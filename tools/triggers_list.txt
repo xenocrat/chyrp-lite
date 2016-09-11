@@ -208,7 +208,7 @@ Called from:
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 54
+	includes/class/Config.php on line 56
 Arguments:
 	$setting, $value, $overwrite
 
