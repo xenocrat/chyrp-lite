@@ -417,7 +417,7 @@
                 background-color: #fffecd
             }
         </style>
-        <script src="includes/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="includes/common.js" type="text/javascript" charset="UTF-8"></script>
         <script type="text/javascript">
             function toggle_adapter() {
                 if ($("#adapter").val() == "sqlite") {
@@ -473,18 +473,6 @@
         if (empty($_POST['database']))
             $errors[] = __("Database cannot be blank.");
 
-        if (!empty($_POST['database']) and $_POST['adapter'] == "sqlite") {
-            # Assure an absolute path for the SQLite database.
-            if ($realpath = realpath(dirname($_POST['database']))) {
-                $_POST['database'] = $realpath.DIR.basename($_POST['database']);
-
-                # Make sure the SQLite database is writable.
-                if (!@is_writable(dirname($_POST['database'])))
-                    $errors[] = __("Please make the SQLite database writable by the server.");
-            } else
-                $errors[] = __("Please enter the full path to the SQLite database.");
-        }
-
         if (empty($_POST['name']))
             $errors[] = __("Please enter a name for your website.");
 
@@ -507,6 +495,16 @@
 
         if (!class_exists("MySQLi") and !class_exists("PDO"))
             $errors[] = __("MySQLi or PDO is required for database access.");
+
+        if (empty($errors) and $_POST['adapter'] == "sqlite")
+            if ($realpath = realpath(dirname($_POST['database'])))
+                $_POST['database'] = $realpath.DIR.basename($_POST['database']);
+            else
+                $errors[] = __("Could not determine the absolute path to the SQLite database.");
+
+        if (empty($errors) and $_POST['adapter'] == "sqlite")
+            if (!is_writable(dirname($_POST['database'])))
+                $errors[] = __("Please make the SQLite database writable by the server.");
 
         if (empty($errors)) {
             # Build the SQL settings based on user input.
