@@ -506,6 +506,10 @@
             if (!is_writable(dirname($_POST['database'])))
                 $errors[] = __("Please make the SQLite database writable by the server.");
 
+        if (empty($errors) and $_POST['adapter'] == "mysql")
+            if (empty($_POST['username']) or empty($_POST['password']))
+                $errors[] = __("Please enter a username and password for the MySQL database.");
+
         if (empty($errors)) {
             # Build the SQL settings based on user input.
             $settings = ($_POST['adapter'] == "sqlite") ?
