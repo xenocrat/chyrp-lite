@@ -13,14 +13,16 @@
          * Loads the configuration JSON file.
          */
         private function __construct() {
-            if (!is_readable(INCLUDES_DIR.DIR."config.json.php"))
+            $filepath = INCLUDES_DIR.DIR."config.json.php";
+
+            if (!is_file($filepath) or !is_readable($filepath))
                 return (INSTALLING) ?
                     false :
-                    trigger_error(__("The configuration file is not readable."), E_USER_WARNING) ;
+                    trigger_error(__("Could not read the configuration file."), E_USER_WARNING) ;
 
             $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
                                     "",
-                                    file_get_contents(INCLUDES_DIR.DIR."config.json.php"));
+                                    file_get_contents($filepath));
 
             $this->json = json_get($contents, true);
 
@@ -63,7 +65,7 @@
 
             # Update the configuration file.
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                trigger_error(__("The configuration file is not writable."), E_USER_WARNING);
+                trigger_error(__("Could not write the configuration file."), E_USER_WARNING);
 
             return true;
         }
@@ -87,7 +89,7 @@
 
             # Update the configuration file.
             if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                trigger_error(__("The configuration file is not writable."), E_USER_WARNING);
+                trigger_error(__("Could not write the configuration file."), E_USER_WARNING);
 
             return true;
         }
