@@ -63,9 +63,6 @@
             if ($this->connected)
                 return true;
 
-            if (empty($this->database))
-                return ($checking) ? false : trigger_error(__("Database is not set."), E_USER_WARNING) ;
-
             # For MySQL databases we prefer the MySQLi driver.
             $this->method = ($this->adapter == "mysql" and class_exists("MySQLi")) ? "mysqli" : "pdo" ;
 
