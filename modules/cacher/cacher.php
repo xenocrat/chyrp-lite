@@ -116,11 +116,10 @@
             fallback($_POST['cache_exclude'], array());
 
             $config = Config::current();
-            $set = array($config->set("cache_expire", (int) $_POST['cache_expire']),
-                         $config->set("cache_exclude", array_filter($_POST['cache_exclude'])));
+            $config->set("cache_expire", (int) $_POST['cache_expire']);
+            $config->set("cache_exclude", array_filter($_POST['cache_exclude']));
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");
         }
 
         public function admin_clear_cache() {
