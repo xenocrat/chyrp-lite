@@ -208,9 +208,9 @@ Called from:
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 56
+	includes/class/Config.php on line 72
 Arguments:
-	$setting, $value, $overwrite
+	$setting, $value
 
 
 parse_url
@@ -419,7 +419,7 @@ Arguments:
 feed_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 704
+	modules/comments/comments.php on line 703
 Arguments:
 	$comment
 
@@ -427,7 +427,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 722
+	modules/comments/comments.php on line 721
 Arguments:
 	$comment->id
 
@@ -704,7 +704,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1953
+	includes/controller/Admin.php on line 1949
 
 
 manage_nav
@@ -712,7 +712,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 1982
+	includes/controller/Admin.php on line 1978
 
 
 settings_nav
@@ -720,7 +720,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2007
+	includes/controller/Admin.php on line 2003
 
 
 extend_nav
@@ -728,7 +728,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2025
+	includes/controller/Admin.php on line 2021
 
 
 url_code
@@ -754,7 +754,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 856
+	includes/helpers.php on line 858
 Arguments:
 	$query, $plain
 
@@ -764,7 +764,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1417
+	includes/helpers.php on line 1419
 
 
 send_mail
@@ -772,7 +772,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2164
+	includes/helpers.php on line 2166
 
 
 xmlrpc_methods

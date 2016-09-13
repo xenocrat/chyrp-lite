@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-09-11 09:11+0000\n"
+"POT-Creation-Date: 2016-09-13 18:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -42,7 +42,7 @@ msgid "Enables like functionality on front page posts."
 msgstr ""
 
 #: modules/likes/info.php:3
-#: modules/likes/likes.php:53
+#: modules/likes/likes.php:52
 msgid "Likes"
 msgstr ""
 
@@ -62,68 +62,68 @@ msgstr ""
 msgid "Unlike Posts"
 msgstr ""
 
-#: modules/likes/likes.php:60
-#: modules/likes/likes.php:105
+#: modules/likes/likes.php:59
+#: modules/likes/likes.php:104
 msgid "An ID is required to like a post."
 msgstr ""
 
-#: modules/likes/likes.php:63
-#: modules/likes/likes.php:109
+#: modules/likes/likes.php:62
+#: modules/likes/likes.php:108
 msgid "You do not have sufficient privileges to like posts."
 msgstr ""
 
-#: modules/likes/likes.php:73
+#: modules/likes/likes.php:72
 msgid "Post liked."
 msgstr ""
 
-#: modules/likes/likes.php:78
-#: modules/likes/likes.php:131
+#: modules/likes/likes.php:77
+#: modules/likes/likes.php:130
 msgid "An ID is required to unlike a post."
 msgstr ""
 
-#: modules/likes/likes.php:81
-#: modules/likes/likes.php:135
+#: modules/likes/likes.php:80
+#: modules/likes/likes.php:134
 msgid "You do not have sufficient privileges to unlike posts."
 msgstr ""
 
-#: modules/likes/likes.php:91
+#: modules/likes/likes.php:90
 msgid "Post unliked."
 msgstr ""
 
-#: modules/likes/likes.php:121
-#: modules/likes/likes.php:226
+#: modules/likes/likes.php:120
+#: modules/likes/likes.php:225
 msgid "You like this."
 msgstr ""
 
-#: modules/likes/likes.php:123
-#: modules/likes/likes.php:228
+#: modules/likes/likes.php:122
+#: modules/likes/likes.php:227
 #, php-format
 msgid "You and %d person like this."
 msgid_plural "You and %d people like this."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/likes/likes.php:147
-#: modules/likes/likes.php:199
-#: modules/likes/likes.php:224
+#: modules/likes/likes.php:146
+#: modules/likes/likes.php:198
+#: modules/likes/likes.php:223
 msgid "No likes yet."
 msgstr ""
 
-#: modules/likes/likes.php:149
-#: modules/likes/likes.php:201
+#: modules/likes/likes.php:148
+#: modules/likes/likes.php:200
 #, php-format
 msgid "%d person likes this."
 msgid_plural "%d people like this."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/likes/likes.php:189
-#: modules/likes/likes.php:214
+#: modules/likes/likes.php:188
+#: modules/likes/likes.php:213
 msgid "Like!"
 msgstr ""
 
-#: modules/likes/likes.php:190
-#: modules/likes/likes.php:215
+#: modules/likes/likes.php:189
+#: modules/likes/likes.php:214
 msgid "Unlike!"
 msgstr ""
 
