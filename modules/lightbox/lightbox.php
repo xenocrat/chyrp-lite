@@ -1,10 +1,10 @@
 <?php
     class Lightbox extends Modules {
         static function __install() {
-            $set = array(Config::current()->set("module_lightbox",
-                                            array("background" => "grey",
-                                                  "spacing" => 24,
-                                                  "protect" => true )));
+            Config::current()->set("module_lightbox",
+                                   array("background" => "grey",
+                                         "spacing" => 24,
+                                         "protect" => true));
         }
 
         static function __uninstall() {
@@ -24,13 +24,12 @@
             fallback($_POST['background'], "grey");
             fallback($_POST['spacing'], 24);
 
-            $set = array(Config::current()->set("module_lightbox",
-                                            array("background" => $_POST['background'],
-                                                  "spacing" => ((int) $_POST['spacing'] < 0) ? 0 : (int) $_POST['spacing'],
-                                                  "protect" => isset($_POST['protect']))));
+            Config::current()->set("module_lightbox",
+                                   array("background" => $_POST['background'],
+                                         "spacing" => ((int) $_POST['spacing'] < 0) ? 0 : (int) $_POST['spacing'],
+                                         "protect" => isset($_POST['protect'])));
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=lightbox_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=lightbox_settings");
         }
 
         public function settings_nav($navs) {
