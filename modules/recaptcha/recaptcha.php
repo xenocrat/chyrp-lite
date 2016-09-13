@@ -3,9 +3,9 @@
 
     class Recaptcha extends Modules {
         static function __install() {
-            $set = array(Config::current()->set("module_recaptcha",
-                                            array("public_key" => null,
-                                                  "private_key" => null)));
+            Config::current()->set("module_recaptcha",
+                                   array("public_key" => null,
+                                         "private_key" => null));
         }
 
         static function __uninstall() {
@@ -25,12 +25,11 @@
             fallback($_POST['public_key'], "");
             fallback($_POST['private_key'], "");
 
-            $set = array(Config::current()->set("module_recaptcha",
-                                            array("public_key" => $_POST['public_key'],
-                                                  "private_key" => $_POST['private_key'])));
+            Config::current()->set("module_recaptcha",
+                                   array("public_key" => $_POST['public_key'],
+                                         "private_key" => $_POST['private_key']));
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=recaptcha_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=recaptcha_settings");
         }
 
         public function settings_nav($navs) {
