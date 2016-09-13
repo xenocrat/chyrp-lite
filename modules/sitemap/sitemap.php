@@ -16,10 +16,10 @@
         }
 
         static function __install() {
-            $set = array(Config::current()->set("module_sitemap",
-                                                array("blog_changefreq" => "daily",
-                                                      "pages_changefreq" => "yearly",
-                                                      "posts_changefreq" => "monthly")));
+            Config::current()->set("module_sitemap",
+                                   array("blog_changefreq" => "daily",
+                                         "pages_changefreq" => "yearly",
+                                         "posts_changefreq" => "monthly"));
         }
 
         static function __uninstall() {
@@ -49,13 +49,12 @@
             fallback($_POST['pages_changefreq'], "yearly");
             fallback($_POST['posts_changefreq'], "monthly");
 
-            $set = array($config->set("module_sitemap",
-                                array("blog_changefreq" => $_POST['blog_changefreq'],
-                                      "pages_changefreq" => $_POST['pages_changefreq'],
-                                      "posts_changefreq" => $_POST['posts_changefreq'])));
+            $config->set("module_sitemap",
+                         array("blog_changefreq" => $_POST['blog_changefreq'],
+                               "pages_changefreq" => $_POST['pages_changefreq'],
+                               "posts_changefreq" => $_POST['posts_changefreq']));
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=sitemap_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=sitemap_settings");
         }
 
         /**
