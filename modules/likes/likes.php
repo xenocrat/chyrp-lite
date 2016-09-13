@@ -39,13 +39,12 @@
 
             fallback($_POST['likeImage'], $config->chyrp_url."/modules/likes/images/pink.svg");
 
-            $set = array($config->set("module_like",
-                                array("showOnFront" => isset($_POST['showOnFront']),
-                                      "likeWithText" => isset($_POST['likeWithText']),
-                                      "likeImage" => $_POST['likeImage'])));
+            $config->set("module_like",
+                         array("showOnFront" => isset($_POST['showOnFront']),
+                               "likeWithText" => isset($_POST['likeWithText']),
+                               "likeImage" => $_POST['likeImage']));
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=like_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=like_settings");
         }
 
         public function settings_nav($navs) {
