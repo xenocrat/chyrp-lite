@@ -335,11 +335,11 @@
             fallback($_POST['auto_reload_comments'], 30);
 
             $config = Config::current();
-            $set = array($config->set("allowed_comment_html", explode(", ", $_POST['allowed_comment_html'])),
-                         $config->set("default_comment_status", $_POST['default_comment_status']),
-                         $config->set("comments_per_page", (int) $_POST['comments_per_page']),
-                         $config->set("auto_reload_comments", (int) $_POST['auto_reload_comments']),
-                         $config->set("enable_reload_comments", isset($_POST['enable_reload_comments'])));
+            $config->set("allowed_comment_html", explode(", ", $_POST['allowed_comment_html']));
+            $config->set("default_comment_status", $_POST['default_comment_status']);
+            $config->set("comments_per_page", (int) $_POST['comments_per_page']);
+            $config->set("auto_reload_comments", (int) $_POST['auto_reload_comments']);
+            $config->set("enable_reload_comments", isset($_POST['enable_reload_comments']));
 
             if (!empty($_POST['akismet_api_key'])) {
                 $akismet_api_key = trim($_POST['akismet_api_key']);
@@ -348,11 +348,10 @@
                 if (!$akismet->isKeyValid())
                     Flash::warning(__("Invalid Akismet API key."), "/admin/?action=comment_settings");
                 else
-                    $set[] = $config->set("akismet_api_key", $akismet_api_key);
+                    $config->set("akismet_api_key", $akismet_api_key);
             }
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=comment_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=comment_settings");
         }
 
         public function settings_nav($navs) {
