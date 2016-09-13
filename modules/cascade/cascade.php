@@ -18,10 +18,8 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
     
-            $set = array( Config::current()->set("ajax_scroll_auto", isset($_POST['auto'])) );
-
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=cascade_settings");
+            Config::current()->set("ajax_scroll_auto", isset($_POST['auto']));
+            Flash::notice(__("Settings updated."), "/admin/?action=cascade_settings");
         }
 
         public function settings_nav($navs) {
