@@ -1735,19 +1735,18 @@
 
             $check_updates_last = (empty($_POST['check_updates'])) ? 0 : $config->check_updates_last ;
 
-            $set = array($config->set("name", $_POST['name']),
-                         $config->set("description", $_POST['description']),
-                         $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/")),
-                         $config->set("url", rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/")),
-                         $config->set("email", $_POST['email']),
-                         $config->set("timezone", $_POST['timezone']),
-                         $config->set("locale", $_POST['locale']),
-                         $config->set("cookies_notification", !empty($_POST['cookies_notification'])),
-                         $config->set("check_updates", !empty($_POST['check_updates'])),
-                         $config->set("check_updates_last", $check_updates_last));
+            $config->set("name", $_POST['name']);
+            $config->set("description", $_POST['description']);
+            $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/"));
+            $config->set("url", rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/"));
+            $config->set("email", $_POST['email']);
+            $config->set("timezone", $_POST['timezone']);
+            $config->set("locale", $_POST['locale']);
+            $config->set("cookies_notification", !empty($_POST['cookies_notification']));
+            $config->set("check_updates", !empty($_POST['check_updates']));
+            $config->set("check_updates_last", $check_updates_last);
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=general_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=general_settings");
         }
 
         /**
@@ -1782,20 +1781,19 @@
             fallback($matches[3], DIR);
 
             $config = Config::current();
-            $set = array($config->set("posts_per_page", (int) $_POST['posts_per_page']),
-                         $config->set("admin_per_page", (int) $_POST['admin_per_page']),
-                         $config->set("feed_items", (int) $_POST['feed_items']),
-                         $config->set("feed_url", $_POST['feed_url']),
-                         $config->set("uploads_path", $matches[1].$matches[2].$matches[3]),
-                         $config->set("uploads_limit", (int) $_POST['uploads_limit']),
-                         $config->set("send_pingbacks", !empty($_POST['send_pingbacks'])),
-                         $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc'])),
-                         $config->set("enable_ajax", !empty($_POST['enable_ajax'])),
-                         $config->set("enable_emoji", !empty($_POST['enable_emoji'])),
-                         $config->set("enable_markdown", !empty($_POST['enable_markdown'])));
+            $config->set("posts_per_page", (int) $_POST['posts_per_page']);
+            $config->set("admin_per_page", (int) $_POST['admin_per_page']);
+            $config->set("feed_items", (int) $_POST['feed_items']);
+            $config->set("feed_url", $_POST['feed_url']);
+            $config->set("uploads_path", $matches[1].$matches[2].$matches[3]);
+            $config->set("uploads_limit", (int) $_POST['uploads_limit']);
+            $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
+            $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc']));
+            $config->set("enable_ajax", !empty($_POST['enable_ajax']));
+            $config->set("enable_emoji", !empty($_POST['enable_emoji']));
+            $config->set("enable_markdown", !empty($_POST['enable_markdown']));
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=content_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=content_settings");
         }
 
         /**
@@ -1818,15 +1816,14 @@
             $correspond = (!empty($_POST['email_activation']) or !empty($_POST['email_correspondence'])) ? true : false ;
 
             $config = Config::current();
-            $set = array($config->set("can_register", !empty($_POST['can_register'])),
-                         $config->set("email_activation", !empty($_POST['email_activation'])),
-                         $config->set("email_correspondence", $correspond),
-                         $config->set("enable_captcha", !empty($_POST['enable_captcha'])),
-                         $config->set("default_group", (int) $_POST['default_group']),
-                         $config->set("guest_group", (int) $_POST['guest_group']));
+            $config->set("can_register", !empty($_POST['can_register']));
+            $config->set("email_activation", !empty($_POST['email_activation']));
+            $config->set("email_correspondence", $correspond);
+            $config->set("enable_captcha", !empty($_POST['enable_captcha']));
+            $config->set("default_group", (int) $_POST['default_group']);
+            $config->set("guest_group", (int) $_POST['guest_group']);
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=user_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=user_settings");
         }
 
         /**
@@ -1872,12 +1869,11 @@
 
             fallback($_POST['post_url'], "(year)/(month)/(day)/(url)/");
 
-            $set = array($config->set("clean_urls", !empty($_POST['clean_urls'])),
-                         $config->set("post_url", trim($_POST['post_url'], "/ ")."/"),
-                         $config->set("enable_homepage", !empty($_POST['enable_homepage'])));
+            $config->set("clean_urls", !empty($_POST['clean_urls']));
+            $config->set("post_url", trim($_POST['post_url'], "/ ")."/");
+            $config->set("enable_homepage", !empty($_POST['enable_homepage']));
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=route_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=route_settings");
         }
 
         /**
