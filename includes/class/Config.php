@@ -20,21 +20,37 @@
                     false :
                     trigger_error(__("Could not read the configuration file."), E_USER_WARNING) ;
 
-            $contents = str_replace("<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n",
-                                    "",
-                                    file_get_contents($filepath));
-
-            $this->json = json_get($contents, true);
-
-            $arrays = array("enabled_modules", "enabled_feathers", "routes");
+            self::read();
 
             foreach ($this->json as $setting => $value)
-                if (in_array($setting, $arrays) and empty($value))
-                    $this->$setting = array();
-                elseif (!is_int($setting))
-                    $this->$setting = (is_string($value)) ? stripslashes($value) : $value ;
+                if (!is_int($setting))
+                    $this->$setting = $value;
 
-            fallback($this->url, $this->chyrp_url);
+            fallback($this->enabled_modules,  array());
+            fallback($this->enabled_feathers, array());
+            fallback($this->routes,           array());
+        }
+
+        /**
+         * Function: read
+         * Reads the configuration file and decodes the settings.
+         */
+        private function read() {
+            $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+            $contents = file_get_contents(INCLUDES_DIR.DIR."config.json.php");
+
+            return $this->json = json_get(str_replace($security, "", $contents), true);
+        }
+
+        /**
+         * Function: write
+         * Encodes the settings and writes the configuration file.
+         */
+        private function write() {
+            $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+            $contents.= json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+            return @file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents);
         }
 
         /**
@@ -43,31 +59,19 @@
          *
          * Parameters:
          *     $setting - The setting name.
-         *     $value - The value.
-         *     $overwrite - Overwrite the setting if it exists and has the same value.
-         *     $fallback - Add the setting only if it doesn't already exist.
+         *     $value - The value to set.
+         *     $fallback - Add the setting only if it doesn't exist.
          */
-        public function set($setting, $value, $overwrite = true, $fallback = false) {
-            if (isset($this->$setting) and ((!$overwrite and $this->$setting == $value) or $fallback))
-                return false;
+        public function set($setting, $value, $fallback = false) {
+            if (isset($this->$setting) and $fallback)
+                return true;
 
-            # Add the setting.
             $this->json[$setting] = $this->$setting = $value;
 
             if (class_exists("Trigger"))
-                Trigger::current()->call("change_setting", $setting, $value, $overwrite);
+                Trigger::current()->call("change_setting", $setting, $value);
 
-            # Add the PHP protection!
-            $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-
-            # Generate the new JSON settings.
-            $contents.= json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-            # Update the configuration file.
-            if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                trigger_error(__("Could not write the configuration file."), E_USER_WARNING);
-
-            return true;
+            return self::write();
         }
 
         /**
@@ -78,20 +82,8 @@
          *     $setting - The name of the setting to remove.
          */
         public function remove($setting) {
-            # Remove the setting.
             unset($this->json[$setting]);
-
-            # Add the PHP protection!
-            $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-
-            # Generate the new JSON settings.
-            $contents.= json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-            # Update the configuration file.
-            if (!@file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents))
-                trigger_error(__("Could not write the configuration file."), E_USER_WARNING);
-
-            return true;
+            return self::write();
         }
 
         /**
