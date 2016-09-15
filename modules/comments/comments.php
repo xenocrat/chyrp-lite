@@ -54,6 +54,17 @@
             Route::current()->remove("comment/(id)/");
         }
 
+        public function list_permissions($names = array()) {
+            $names["add_comment"]         = __("Add Comments", "comments");
+            $names["add_comment_private"] = __("Add Comments to Private Posts", "comments");
+            $names["edit_comment"]        = __("Edit Comments", "comments");
+            $names["edit_own_comment"]    = __("Edit Own Comments", "comments");
+            $names["delete_comment"]      = __("Delete Comments", "comments");
+            $names["delete_own_comment"]  = __("Delete Own Comments", "comments");
+            $names["code_in_comments"]    = __("Can Use HTML in Comments", "comments");
+            return $names;
+        }
+
         public function main_comment($main) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 Flash::warning(__("Please enter an ID to search for a comment.", "comments"), "/");
