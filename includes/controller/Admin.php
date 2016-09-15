@@ -818,9 +818,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
             $this->display("new_group",
-                           array("permissions" => SQL::current()->select("permissions",
-                                                                         "*",
-                                                                         array("group_id" => 0))->fetchAll()));
+                           array("permissions" => Group::list_permissions()));
         }
 
         /**
@@ -867,9 +865,7 @@
 
             $this->display("edit_group",
                            array("group" => $group,
-                                 "permissions" => SQL::current()->select("permissions",
-                                                                         "*",
-                                                                         array("group_id" => 0))->fetchAll()));
+                                 "permissions" => Group::list_permissions()));
         }
 
         /**
