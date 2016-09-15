@@ -25,6 +25,12 @@
             Config::current()->remove("module_like");
         }
 
+        public function list_permissions($names = array()) {
+            $names["like_post"]   = __("Like Posts", "likes");
+            $names["unlike_post"] = __("Unlike Posts", "likes");
+            return $names;
+        }
+
         public function admin_like_settings($admin) {
             $config = Config::current();
 
