@@ -197,7 +197,7 @@
          *
          * Parameters:
          *     $id - The ID for the permission, like "can_do_something".
-         *     $name - The name for the permission, like "Can Do Something". Defaults to the camelized ID while keeping spaces.
+         *     $name - The name for the permission, like "Can Do Something". Defaults to the camelized ID.
          */
         static function add_permission($id, $name = null) {
             $sql = SQL::current();
@@ -218,6 +218,56 @@
          */
         static function remove_permission($id) {
             SQL::current()->delete("permissions", array("id" => $id));
+        }
+
+        /**
+         * Function: list_permissions
+         * Returns an array of all permissions in the Groups table.
+         *
+         * Parameters:
+         *     $group_id - List enabled permissions for this group ID.
+         */
+        static function list_permissions($group_id = 0) {
+            $permissions = SQL::current()->select("permissions",
+                                                  "*",
+                                                  array("group_id" => $group_id))->fetchAll();
+
+            $names = array("change_settings"   => __("Change Settings"),
+                           "toggle_extensions" => __("Toggle Extensions"),
+                           "view_site"         => __("View Site"),
+                           "view_private"      => __("View Private Posts"),
+                           "view_scheduled"    => __("View Scheduled Posts"),
+                           "view_draft"        => __("View Drafts"),
+                           "view_own_draft"    => __("View Own Drafts"),
+                           "add_post"          => __("Add Posts"),
+                           "add_draft"         => __("Add Drafts"),
+                           "edit_post"         => __("Edit Posts"),
+                           "edit_draft"        => __("Edit Drafts"),
+                           "edit_own_post"     => __("Edit Own Posts"),
+                           "edit_own_draft"    => __("Edit Own Drafts"),
+                           "delete_post"       => __("Delete Posts"),
+                           "delete_draft"      => __("Delete Drafts"),
+                           "delete_own_post"   => __("Delete Own Posts"),
+                           "delete_own_draft"  => __("Delete Own Drafts"),
+                           "view_page"         => __("View Pages"),
+                           "add_page"          => __("Add Pages"),
+                           "edit_page"         => __("Edit Pages"),
+                           "delete_page"       => __("Delete Pages"),
+                           "add_user"          => __("Add Users"),
+                           "edit_user"         => __("Edit Users"),
+                           "delete_user"       => __("Delete Users"),
+                           "add_group"         => __("Add Groups"),
+                           "edit_group"        => __("Edit Groups"),
+                           "delete_group"      => __("Delete Groups"),
+                           "export_content"    => __("Export Content"));
+
+            Trigger::current()->filter($names, "list_permissions");
+
+            foreach ($permissions as &$permission)
+                if (array_key_exists($permission["id"], $names))
+                    $permission["name"] = $names[$permission["id"]];
+
+            return $permissions;
         }
 
         /**
