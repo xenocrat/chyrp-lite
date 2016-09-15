@@ -63,7 +63,6 @@
                 # Custom filters
                 new Twig_SimpleFilter("translate",             "twig_filter_translate"),
                 new Twig_SimpleFilter("translate_plural",      "twig_filter_translate_plural"),
-                new Twig_SimpleFilter("translate_search",      "twig_filter_translate_search"),
                 new Twig_SimpleFilter("strftimeformat",        "twig_filter_strftime_format"),
                 new Twig_SimpleFilter("filesizeformat",        "twig_filter_filesize_format"),
                 new Twig_SimpleFilter("match",                 "twig_filter_match"),
@@ -129,24 +128,6 @@
     function twig_filter_translate_plural($single, $plural, $number, $domain = "theme") {
         $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
         return _p($single, $plural, $number, $domain);
-    }
-
-    /**
-     * Function: twig_filter_translate_search
-     * Searches registered l10n domains for a translation of the string.
-     */
-    function twig_filter_translate_search($string, $exclude = array("theme")) {
-        global $l10n;
-
-        foreach (array_keys($l10n) as $domain)
-            if (!in_array($domain, $exclude)) {
-                $translation = $l10n[$domain]->translate($string);
-
-                if (!empty($translation))
-                    return $translation;
-            }
-
-        return $string;
     }
 
     /**
