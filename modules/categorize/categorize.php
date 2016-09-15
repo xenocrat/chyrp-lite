@@ -23,6 +23,11 @@
             Route::current()->remove("category/(name)/");
         }
 
+        public function list_permissions($names = array()) {
+            $names["manage_categorize"] = __("Manage Categories", "categorize");
+            return $names;
+        }
+
         public function feed_item($post) {
             if (!empty($post->category_id) OR $post->category != 0)
                printf("        <category term=\"%s\" />\n", fix(Category::getCategory($post->category_id)->name, true));
