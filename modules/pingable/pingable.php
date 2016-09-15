@@ -15,6 +15,11 @@
             Group::remove_permission("delete_pingbacks");
         }
 
+        public function list_permissions($names = array()) {
+            $names["delete_pingbacks"] = __("Delete Pingbacks", "pingable");
+            return $names;
+        }
+
         public function pingback($post, $to, $from, $title, $excerpt) {
             $count = SQL::current()->count("pingbacks",
                                            array("post_id" => $post->id,
