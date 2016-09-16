@@ -428,7 +428,7 @@
             if (!isset($_GET['name']))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
                                      array("reason" => __("You did not specify a tag.", "tags")),
-                                        __("No Tag", "tags"));
+                                     __("No Tag", "tags"));
 
             $sql = SQL::current();
             $tags = explode(" ", $_GET['name']); # Detect multiple tags (clean tag names have no spaces).
@@ -458,7 +458,7 @@
             if (empty($ids))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
                                      array("reason" => __("There are no posts with the tag you specified.", "tags")),
-                                        __("Invalid Tag", "tags"));
+                                     __("Invalid Tag", "tags"));
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
                                                     "where" => array("id" => $ids))),
@@ -500,7 +500,9 @@
                 $popularity = array_count_values($names);
 
                 if (empty($popularity))
-                    return $main->resort("pages".DIR."tags", array("tag_cloud" => array()), __("No Tags", "tags"));
+                    return $main->resort("pages".DIR."tags",
+                                         array("tag_cloud" => array()),
+                                         __("No Tags", "tags"));
 
                 $max_qty = max($popularity);
                 $min_qty = min($popularity);
