@@ -115,6 +115,14 @@
                 return $route->action = "search";
             }
 
+            # Random.
+            if ($route->arg[0] == "random") {
+                if (isset($route->arg[1]))
+                    $_GET['feather'] = $route->arg[1];
+
+                return $route->action = "random";
+            }
+
             # Test custom routes and populate $_GET parameters if the route expression matches.
             foreach ($config->routes as $path => $action) {
                 if (is_numeric($action))
@@ -705,25 +713,18 @@
          * Grabs a random post and redirects to it.
          */
         public function random() {
-            $sql = SQL::current();
+            $conds = array("posts.status" => "public");
 
-            if (isset($_GET['feather'])) {
-                $feather = preg_replace( '|[^a-z]|i', '', $_GET['feather'] );
-                $random = $sql->select("posts",
-                                       "posts.url",
-                                       array("posts.feather" => $feather,
-                                             "posts.status" => "public"),
-                                       array("ORDER BY" => "RAND()"),
-                                       array("LIMIT" => 1))->fetchObject();
-                $post = new Post(array("url" => $random->url));
-            } else {
-                $random = $sql->select("posts",
-                                       "posts.url",
-                                       array("posts.status" => "public"),
-                                       array("ORDER BY" => "RAND()"),
-                                       array("LIMIT" => 1))->fetchObject();
-                $post = new Post(array("url" => $random->url));
-            }
+            if (isset($_GET['feather']))
+                $conds["posts.feather"] = preg_replace('|[^a-z]|i', '', $_GET['feather']);
+
+            $random = SQL::current()->select("posts",
+                                             "posts.url",
+                                             $conds,
+                                             array("ORDER BY" => "RAND()"),
+                                             array("LIMIT" => 1))->fetchObject();
+
+            $post = new Post(array("url" => $random->url));
 
             redirect($post->url());
         }
