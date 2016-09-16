@@ -278,8 +278,9 @@
             if ($this->no_results)
                 return false;
 
-            return (isset($this->size)) ? $this->size :
-                   $this->size = SQL::current()->count("users",
-                                                       array("group_id" => $this->id)) ;
+            return (isset($this->size)) ?
+                $this->size :
+                $this->size = SQL::current()->count("users",
+                                                    array("group_id" => $this->id)) ;
         }
     }

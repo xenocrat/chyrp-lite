@@ -716,14 +716,14 @@
                                        array("ORDER BY" => "RAND()"),
                                        array("LIMIT" => 1))->fetchObject();
                 $post = new Post(array("url" => $random->url));
-        	} else {
+            } else {
                 $random = $sql->select("posts",
                                        "posts.url",
                                        array("posts.status" => "public"),
                                        array("ORDER BY" => "RAND()"),
                                        array("LIMIT" => 1))->fetchObject();
                 $post = new Post(array("url" => $random->url));
-        	}
+            }
 
             redirect($post->url());
         }
