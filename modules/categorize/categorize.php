@@ -67,6 +67,9 @@
         }
 
         public function related_posts($ids, $post, $limit) {
+            if (!isset($post->category_id) or $post->category_id == 0)
+                return $ids;
+
             $results = SQL::current()->select("post_attributes",
                                               array("post_id"),
                                               array("name" => "category_id",
