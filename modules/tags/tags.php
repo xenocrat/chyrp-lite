@@ -560,6 +560,9 @@
         }
 
         public function related_posts($ids, $post, $limit) {
+            if (empty($post->tags))
+                return $ids;
+
             foreach ($post->tags as $key => $tag) {
                 $results = SQL::current()->select("post_attributes",
                                                   array("post_id"),
