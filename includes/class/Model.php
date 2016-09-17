@@ -374,7 +374,7 @@
                 foreach ($row as $name => &$column) {
                     $column = (!in_array($name, $options["ignore_dupes"]) ?
                                   array_unique($column) :
-                                  $column);
+                                  $column) ;
                     $column = (count($column) == 1) ?
                                   $column[0] :
                                   $column ;
