@@ -63,6 +63,9 @@
          *     $fallback - Add the setting only if it doesn't exist.
          */
         public function set($setting, $value, $fallback = false) {
+            if ($setting == "json")
+                return false;
+
             if (isset($this->$setting) and $fallback)
                 return true;
 
