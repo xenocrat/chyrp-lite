@@ -67,7 +67,7 @@
         }
 
         public function related_posts($ids, $post, $limit) {
-            if (!isset($post->category_id) or $post->category_id == 0)
+            if (empty($post->category_id))
                 return $ids;
 
             $results = SQL::current()->select("post_attributes",
@@ -96,7 +96,7 @@
         }
 
         public function manage_posts_column($post) {
-            echo (isset($post->category->name) && $post->category->id != false)
+            echo (!empty($post->category_id) and isset($post->category->name))
                 ? '<td class="post_category value">'.fix($post->category->name).'</td>'
                 : '<td class="post_category value">&nbsp;</td>';
         }
@@ -107,7 +107,7 @@
             $fields_list[0]["value"] = "0";
             $fields_list[0]["name"] = __("[None]", "categorize");
 
-            if (!isset($post->category_id) or $post->category_id == 0)
+            if (empty($post->category_id))
                 $fields_list[0]["selected"] = true;
             else
                 $fields_list[0]["selected"] = false;
