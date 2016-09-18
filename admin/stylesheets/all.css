@@ -724,6 +724,10 @@ img#likeImage_preview {                         max-width: 28px;
  *---------------------------------------------
  */
 
+@media screen and (max-width: 1095px) {
+        #content ul.themes > li {               width: 49% }
+}
+
 @media screen and (max-width: 767px) {
     #header #navigation {                       left: 0em;
                                                 right: 0em }
