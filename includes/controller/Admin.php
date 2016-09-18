@@ -1025,7 +1025,7 @@
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
-            $exports = array();
+            $exports = array(); # Use this to store export data. It will be tested to determine if anything was exported.
 
             if (!$visitor->group->can("export_content"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to export content."));
@@ -1259,6 +1259,7 @@
             $trigger = Trigger::current();
             $visitor = Visitor::current();
             $sql = SQL::current();
+            $imports = array(); # Use this to store import data. It will be tested to determine if anything was imported.
 
             if (!$visitor->group->can("add_post", "add_page", "add_group", "add_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
@@ -1270,22 +1271,24 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
-                if (!$posts = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $posts->generator != "Chyrp")
+                if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $imports["posts"]->generator != "Chyrp")
                     Flash::warning(__("Posts export file is invalid."), "/admin/?action=import");
 
             if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
-                if (!$pages = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $pages->generator != "Chyrp")
+                if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $imports["posts"]->generator != "Chyrp")
                     Flash::warning(__("Pages export file is invalid."), "/admin/?action=import");
 
             if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']))
-                if (!is_array($groups = json_get(file_get_contents($_FILES['groups_file']['tmp_name']), true)))
+                if (!is_array($imports["groups"] = json_get(file_get_contents($_FILES['groups_file']['tmp_name']), true)))
                     Flash::warning(__("Groups export file is invalid."), "/admin/?action=import");
 
             if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file']))
-                if (!is_array($users = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true)))
+                if (!is_array($imports["users"] = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true)))
                     Flash::warning(__("Users export file is invalid."), "/admin/?action=import");
 
-            if (!isset($groups) and !isset($users) and !isset($posts) and !isset($pages))
+            $trigger->filter($imports, "import");
+
+            if (empty($imports))
                 Flash::warning(__("You did not select anything to import."), "/admin/?action=import");
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
@@ -1304,11 +1307,11 @@
                     }
             }
 
-            if (isset($groups)) {
+            if (isset($imports["groups"])) {
                 if (!$visitor->group->can("add_group"))
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
-                foreach ($groups as $name => $permissions) {
+                foreach ($imports["groups"] as $name => $permissions) {
                     $group = new Group(array("name" => (string) $name));
 
                     if ($group->no_results)
@@ -1316,11 +1319,11 @@
                 }
             }
 
-            if (isset($users)) {
+            if (isset($imports["users"])) {
                 if (!$visitor->group->can("add_user"))
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
-                foreach ($users as $login => $user) {
+                foreach ($imports["users"] as $login => $user) {
                     $group = new Group(array("name" => (string) fallback($user["group"])));
 
                     if (!$sql->count("users", array("login" => $login)))
@@ -1337,11 +1340,11 @@
                 }
             }
 
-            if (isset($posts)) {
+            if (isset($imports["posts"])) {
                 if (!$visitor->group->can("add_post"))
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
-                foreach ($posts->entry as $entry) {
+                foreach ($imports["posts"]->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
 
@@ -1368,11 +1371,11 @@
                 }
             }
 
-            if (isset($pages)) {
+            if (isset($imports["posts"])) {
                 if (!$visitor->group->can("add_page"))
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
-                foreach ($pages->entry as $entry) {
+                foreach ($imports["posts"]->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
