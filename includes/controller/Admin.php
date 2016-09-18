@@ -1025,7 +1025,7 @@
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
-            $exports = array(); # Use this to store export data. It will be tested to determine if anything was exported.
+            $exports = array(); # Use this to store export data. It will be tested to determine if anything was selected.
 
             if (!$visitor->group->can("export_content"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to export content."));
@@ -1035,6 +1035,8 @@
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            $trigger->call("before_export");
 
             if (isset($_POST['posts'])) {
                 fallback($_POST['filter_posts'], "");
@@ -1259,7 +1261,7 @@
             $trigger = Trigger::current();
             $visitor = Visitor::current();
             $sql = SQL::current();
-            $imports = array(); # Use this to store import data. It will be tested to determine if anything was imported.
+            $imports = array(); # Use this to store import data. It will be tested to determine if anything was selected.
 
             if (!$visitor->group->can("add_post", "add_page", "add_group", "add_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
@@ -1286,7 +1288,7 @@
                 if (!is_array($imports["users"] = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true)))
                     Flash::warning(__("Users export file is invalid."), "/admin/?action=import");
 
-            $trigger->filter($imports, "import");
+            $trigger->filter($imports, "before_import");
 
             if (empty($imports))
                 Flash::warning(__("You did not select anything to import."), "/admin/?action=import");
@@ -1397,6 +1399,8 @@
                     $trigger->call("import_chyrp_page", $entry, $page);
                 }
             }
+
+            $trigger->call("import", $imports);
 
             Flash::notice(__("Chyrp Lite content successfully imported!"), "/admin/?action=import");
         }
