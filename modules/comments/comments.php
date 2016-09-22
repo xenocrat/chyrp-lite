@@ -845,7 +845,7 @@
             return $possibilities;
         }
 
-        public function determine_action($action) {
+        public function admin_determine_action($action) {
             if ($action == "manage" and (Comment::any_editable() or Comment::any_deletable()))
                 return "manage_comments";
         }
