@@ -93,7 +93,7 @@
             return $navs;
         }
 
-        public function determine_action($action) {
+        public function admin_determine_action($action) {
             if ($action == "manage" and Visitor::current()->group->can("delete_pingbacks"))
                 return "manage_pingbacks";
         }
