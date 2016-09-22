@@ -37,6 +37,7 @@ Pages allow you to publish articles on your site that are independent of your bl
 * Cacher: cache your blog pages for reduced server load.
 * Categorize: give each of your blog entries a category.
 * Tags: apply multiple searchable tags to your blog entries.
+* Pingable: register pingbacks from blogs that link to yours.
 * Comments: a comprehensive comments system for your blog.
 * Likes: allow your visitors to show their appreciation.
 * Read More: excerpt long blog entries on the blog index.
