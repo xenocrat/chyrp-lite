@@ -192,6 +192,11 @@
             return $navs;
         }
 
+        public function admin_determine_action($action) {
+            if ($action == "manage" and Visitor::current()->group->can("manage_categorize"))
+                return "manage_category";
+        }
+
         public function admin_manage_category($admin) {
             if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
