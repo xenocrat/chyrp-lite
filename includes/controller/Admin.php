@@ -323,8 +323,11 @@
 
                     foreach ($matches[1] as $id) {
                         $group = new Group($id);
-                        $groups[] = "<span class=\"group_prefix\">Group:</span> ".$group->name;
-                        $groupClasses[] = "group-".$id;
+
+                        if (!$group->no_results) {
+                            $groups[] = "<span class=\"group_prefix\">Group:</span> ".$group->name;
+                            $groupClasses[] = "group-".$group->id;
+                        }
                     }
 
                     $post->status_name = join(", ", $groups);
