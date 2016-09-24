@@ -81,7 +81,7 @@
 </ul>
 <div role="search" class="search_box">
 <form action="{{ site.url }}" method="get" accept-charset="UTF-8">
-<input type="hidden" name="action" value="search" id="action">
+<input type="hidden" name="action" value="search">
 <input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix(true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" aria-label="{{ 'Search this blog' | translate }}">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>
 </form>

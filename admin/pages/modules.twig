@@ -20,30 +20,31 @@
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
 </p>
-{% if module.conflicting_modules is not empty %}
+{% if module.conflicts is not empty %}
 <h4 class="module_conflicts_message">
-{{ "This module conflicts with the following installed modules:" | translate }}
+{{ "This module conflicts with the following modules:" | translate }}
 </h4>
 <ol class="module_conflicts_list">
-{% for conflict in module.conflicting_modules %}
+{% for conflict in module.conflicts %}
 <li class="{{ conflict }}">{{ conflict | camelize }}</li>
 {% endfor %}
 </ol>
 {% endif %}
-{% if module.dependencies_needed is not empty %}
+{% if module.dependencies is not empty %}
 <h4 class="module_dependencies_message">
 {{ "This module requires the following modules to be enabled:" | translate }}
 </h4>
 <ol class="module_dependencies_list">
-{% for dependency in module.dependencies_needed %}
+{% for dependency in module.dependencies %}
 <li class="{{ dependency }}">{{ dependency | camelize }}</li>
 {% endfor %}
 </ol>
 {% endif %}
 <div class="controls">
 <form class="module_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<input type="hidden" name="module" value="{{ safename }}" id="hash">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="extension" value="{{ safename }}">
+<input type="hidden" name="type" value="module">
+<input type="hidden" name="hash" value="{{ ip | token }}">
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
 </button>
@@ -55,8 +56,9 @@
 {% endif %}
 </form>
 <form class="module_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<input type="hidden" name="module" value="{{ safename }}" id="hash">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="extension" value="{{ safename }}">
+<input type="hidden" name="type" value="module">
+<input type="hidden" name="hash" value="{{ ip | token }}">
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
 </button>
@@ -82,22 +84,22 @@
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
 </p>
-{% if module.conflicting_modules is not empty %}
+{% if module.conflicts is not empty %}
 <h4 class="module_conflicts_message">
-{{ "This module conflicts with the following installed modules:" | translate }}
+{{ "This module conflicts with the following modules:" | translate }}
 </h4>
 <ol class="module_conflicts_list">
-{% for conflict in module.conflicting_modules %}
+{% for conflict in module.conflicts %}
 <li class="{{ conflict }}">{{ conflict | camelize }}</li>
 {% endfor %}
 </ol>
 {% endif %}
-{% if module.dependencies_needed is not empty %}
+{% if module.dependencies is not empty %}
 <h4 class="module_dependencies_message">
 {{ "This module requires the following modules to be enabled:" | translate }}
 </h4>
 <ol class="module_dependencies_list">
-{% for dependency in module.dependencies_needed %}
+{% for dependency in module.dependencies %}
 <li class="{{ dependency }}">{{ dependency | camelize }}</li>
 {% endfor %}
 </ol>
@@ -105,8 +107,9 @@
 {% if module.classes is defined and not (module.classes | contains("missing_dependency")) %}
 <div class="controls">
 <form class="module_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<input type="hidden" name="module" value="{{ safename }}" id="hash">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="extension" value="{{ safename }}">
+<input type="hidden" name="type" value="module">
+<input type="hidden" name="hash" value="{{ ip | token }}">
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
 </button>
@@ -118,8 +121,9 @@
 {% endif %}
 </form>
 <form class="module_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<input type="hidden" name="module" value="{{ safename }}" id="hash">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="extension" value="{{ safename }}">
+<input type="hidden" name="type" value="module">
+<input type="hidden" name="hash" value="{{ ip | token }}">
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
 </button>

@@ -1,10 +1,10 @@
 <?php
     class Simplemde extends Modules {
-        static function admin_write_wysiwyg() {
+        public function admin_write_wysiwyg() {
           return true;
         }
 
-        static function admin_head() {
+        public function admin_head() {
             $config = Config::current();
 
             if (!$config->enable_markdown)

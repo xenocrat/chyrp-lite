@@ -65,13 +65,12 @@
          *
          * Parameters:
          *     $login - The Login for the new user.
-         *     $password - The Password for the new user. Don't hash this, it's done in the function.
+         *     $password - The hashed password for the new user.
          *     $email - The email for the new user.
          *     $full_name - The full name of the user.
          *     $website - The user's website.
          *     $group - The user's group (defaults to the configured default group).
          *     $joined_at - Join date (defaults to now).
-         *     $hash_password - Hash the password automatically? (defaults to true)
          *
          * Returns:
          *     The newly created <User>.
@@ -84,10 +83,9 @@
                             $email,
                             $full_name = "",
                             $website = "",
-                            $group_ = null,
+                            $group = null,
                             $approved = true,
-                            $joined_at = null,
-                            $hash_password = true) {
+                            $joined_at = null) {
             $config = Config::current();
             $sql = SQL::current();
             $trigger = Trigger::current();
@@ -98,7 +96,7 @@
                 $group_id = ($group instanceof Group) ? $group->id : $group ;
             
             $new_values = array("login"     => strip_tags($login),
-                                "password"  => ($hash_password ? self::hashPassword($password) : $password),
+                                "password"  => $password,
                                 "email"     => strip_tags($email),
                                 "full_name" => strip_tags($full_name),
                                 "website"   => strip_tags($website),
@@ -125,7 +123,7 @@
          *
          * Parameters:
          *     $login - The new Login to set.
-         *     $password - The new Password to set, already encoded.
+         *     $password - The new hashed password to set.
          *     $full_name - The new Full Name to set.
          *     $email - The new email to set.
          *     $website - The new Website to set.
@@ -140,6 +138,7 @@
                                $full_name = null,
                                $website   = null,
                                $group_id  = null,
+                               $approved  = null,
                                $joined_at = null) {
             if ($this->no_results)
                 return false;
@@ -149,7 +148,7 @@
 
             $old = clone $this;
 
-            foreach (array("login", "password", "email", "full_name", "website", "group_id", "joined_at") as $attr)
+            foreach (array("login", "password", "email", "full_name", "website", "group_id", "approved", "joined_at") as $attr)
                 $this->$attr = $$attr = ($$attr !== null ? $$attr : $this->$attr);
 
             $new_values = array("login"     => strip_tags($login),
@@ -158,6 +157,7 @@
                                 "full_name" => strip_tags($full_name),
                                 "website"   => strip_tags($website),
                                 "group_id"  => $group_id,
+                                "approved"  => $approved,
                                 "joined_at" => $joined_at);
 
             $trigger->filter($new_values, "before_update_user");

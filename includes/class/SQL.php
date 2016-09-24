@@ -31,10 +31,6 @@
         # Holds an error message from the last attempted query.
         public $error = "";
 
-        # Boolean: $silence_errors
-        # Ignore errors?
-        public $silence_errors = false;
-
         /**
          * Function: __construct
          * The class constructor is private so there is only one connection.
@@ -43,56 +39,17 @@
          *     $settings - An array of settings, or @true@ to silence errors.
          */
         private function __construct($settings = array()) {
-            $config = Config::current();
-            $database = oneof(@$config->sql, array());
+            foreach (oneof(@Config::current()->sql, $settings) as $setting => $value)
+                $this->$setting = $value;
 
-            if (!INSTALLING and !UPGRADING and !isset($config->sql))
-                error(__("Database Error"), __("Database configuration is not set."));
-
-            if (is_array($settings))
-                fallback($database, $settings);
-            elseif ($settings === true)
-                $this->silence_errors = true;
-
-            if (!empty($database))
-                foreach ($database as $setting => $value)
-                    $this->$setting = $value;
+            fallback($this->host);
+            fallback($this->username);
+            fallback($this->password);
+            fallback($this->database);
+            fallback($this->prefix);
+            fallback($this->adapter);
 
             $this->connected = false;
-
-            # For MySQL databases we prefer the MySQLi adapter.
-            if (isset($this->adapter)) {
-                if ($this->adapter == "mysql" and class_exists("MySQLi"))
-                    $this->method = "mysqli";
-                elseif (class_exists("PDO") and in_array($this->adapter, PDO::getAvailableDrivers()))
-                    $this->method = "pdo";
-                else
-                    error(__("Database Error"),
-                          _f("Database adapter <code>%s</code> has no available driver.", fix($this->adapter)));
-            } else
-                $this->method = "";
-        }
-
-        /**
-         * Function: set
-         * Sets a variable's value.
-         *
-         * Parameters:
-         *     $setting - The setting name.
-         *     $value - The new value. Can be boolean, numeric, an array, a string, etc.
-         *     $overwrite - If the setting exists and is the same value, should it be overwritten?
-         */
-        public function set($setting, $value, $overwrite = true) {
-            if (isset($this->$setting) and $this->$setting == $value and !$overwrite)
-                return false;
-
-            $config = Config::current();
-            $database = fallback($config->sql, array());
-
-            # Add the setting
-            $database[$setting] = $this->$setting = $value;
-
-            return $config->set("sql", $database);
         }
 
         /**
@@ -106,17 +63,14 @@
             if ($this->connected)
                 return true;
 
-            if (!isset($this->database))
-                self::__construct();
-
-            if (UPGRADING)
-                $checking = true;
+            # For MySQL databases we prefer the MySQLi driver.
+            $this->method = ($this->adapter == "mysql" and class_exists("MySQLi")) ? "mysqli" : "pdo" ;
 
             switch($this->method) {
                 case "pdo":
                     try {
-                        if (empty($this->database))
-                            throw new PDOException("No database specified.");
+                        if (!in_array($this->adapter, PDO::getAvailableDrivers()))
+                            throw new PDOException(__("PDO driver is unavailable for this database."));
 
                         if ($this->adapter == "sqlite") {
                             $this->db = new PDO("sqlite:".$this->database, null, null, array(PDO::ATTR_PERSISTENT => false));
@@ -127,7 +81,9 @@
                             $this->db->sqliteCreateFunction("MINUTE", array($this, "minute_from_datetime"), 1);
                             $this->db->sqliteCreateFunction("SECOND", array($this, "second_from_datetime"), 1);
                         } else
-                            $this->db = new PDO($this->adapter.":host=".$this->host.";".((isset($this->port)) ? "port=".$this->port.";" : "")."dbname=".$this->database,
+                            $this->db = new PDO($this->adapter.":host=".$this->host.";".
+                                                ((isset($this->port)) ? "port=".$this->port.";" : "").
+                                                "dbname=".$this->database,
                                                 $this->username,
                                                 $this->password,
                                                 array(PDO::ATTR_PERSISTENT => true));
@@ -139,7 +95,6 @@
                     }
 
                     break;
-
                 case "mysqli":
                     $this->db = @new MySQLi($this->host, $this->username, $this->password, $this->database);
                     $this->error = mysqli_connect_error();
@@ -148,10 +103,6 @@
                         return ($checking) ? false : trigger_error(fix($this->error), E_USER_WARNING) ;
 
                     break;
-
-                default:
-                    error(__("Database Error"),
-                          _f("Database driver <code>%s</code> is unrecognised.", fix($this->method)));
             }
 
             if ($this->adapter == "mysql")
@@ -192,7 +143,7 @@
 
             $query = new Query($this, $query, $params, $throw_exceptions);
 
-            return (!$query->query and UPGRADING) ? false : $query ;
+            return $query;
         }
 
         /**
@@ -207,7 +158,7 @@
          */
         public function count($tables, $conds = null, $params = array(), $throw_exceptions = false) {
             $query = $this->query(QueryBuilder::build_count($tables, $conds, $params), $params, $throw_exceptions);
-            return ($query->query) ? $query->fetchColumn() : false ;
+            return isset($query->query) ? $query->fetchColumn() : false ;
         }
 
         /**
@@ -277,6 +228,7 @@
          */
         public function replace($table, $keys, $data, $params = array(), $throw_exceptions = false) {
             $match = array();
+
             foreach ((array) $keys as $key)
                 $match[$key] = $data[$key];
 

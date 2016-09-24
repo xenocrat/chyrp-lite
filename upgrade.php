@@ -1,14 +1,14 @@
 <?php
     /**
      * File: Upgrader
-     * A task-based gerneral purpose upgrader for Chyrp Lite, enabled modules and enabled extensions.
+     * A task-based gerneral purpose upgrader for Chyrp Lite, enabled modules and enabled feathers.
      */
 
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.03");
-    define('CHYRP_CODENAME', "Chestnut");
+    define('CHYRP_VERSION',  "2016.04");
+    define('CHYRP_CODENAME', "Iago");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -78,6 +78,9 @@
     # Prepare the SQL interface.
     $sql = SQL::current();
 
+    # Initialize connection to SQL server.
+    $sql->connect();
+
     # Load the translation engine.
     load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$config->locale.".mo");
 
@@ -102,7 +105,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_markdown() {
-        Config::current()->set("enable_markdown", true, null, true);
+        Config::current()->set("enable_markdown", true, true);
     }
 
     /**
@@ -112,7 +115,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_homepage() {
-        Config::current()->set("enable_homepage", false, null, true);
+        Config::current()->set("enable_homepage", false, true);
     }
 
     /**
@@ -122,7 +125,7 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_uploads_limit() {
-        Config::current()->set("uploads_limit", 10, null, true);
+        Config::current()->set("uploads_limit", 10, true);
     }
 
     /**
@@ -142,7 +145,31 @@
      * Versions: 2015.07 => 2016.01
      */
     function add_admin_per_page() {
-        Config::current()->set("admin_per_page", 25, null, true);
+        Config::current()->set("admin_per_page", 25, true);
+    }
+
+    /**
+     * Function: disable_importers
+     * Disables the importers module.
+     *
+     * Versions: 2016.03 => 2016.04
+     */
+    function disable_importers() {
+        $config = Config::current();
+        $config->set("enabled_modules", array_diff((array) $config->enabled_modules, array("importers")));
+    }
+
+    /**
+     * Function: add_export_content
+     * Adds the export_content permission.
+     *
+     * Versions: 2016.03 => 2016.04
+     */
+    function add_export_content() {
+        $sql = SQL::current();
+
+        if (!$sql->count("permissions", array("id" => "export_content", "group_id" => 0)))
+            $sql->insert("permissions", array("id" => "export_content", "name" => "Export Content", "group_id" => 0));
     }
 
     #---------------------------------------------
@@ -330,6 +357,13 @@
             p {
                 margin-bottom: 1em;
             }
+            aside {
+                margin-bottom: 1em;
+                padding: 0.5em 1em;
+                border: 1px solid #e5d7a1;
+                border-radius: 0.25em;
+                background-color: #fffecd
+            }
         </style>
     </head>
     <body>
@@ -347,6 +381,8 @@
         add_uploads_limit();
         remove_trackbacking();
         add_admin_per_page();
+        disable_importers();
+        add_export_content();
 
         # Perform module upgrades and output the results if the upgrader echoes anything.
         foreach ((array) $config->enabled_modules as $module)

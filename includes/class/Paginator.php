@@ -233,9 +233,7 @@
          */
         public function next_page_url($page = null) {
             $config = Config::current();
-
-            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-            $request = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+            $request = self_url();
 
             # Only used for adding to the end of the URL and clean URLs is off.
             $mark = (substr_count($request, "?")) ? "&amp;" : "?" ;
@@ -262,9 +260,7 @@
          */
         public function prev_page_url($page = null) {
             $config = Config::current();
-
-            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-            $request = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+            $request = self_url();
 
             # Only used for adding to the end of the URL and clean URLs is off.
             $mark = (substr_count($request, "?")) ? "&amp;" : "?" ;

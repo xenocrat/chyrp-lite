@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-30 18:42+0000\n"
+"POT-Creation-Date: 2016-09-24 17:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -22,7 +22,7 @@ msgid "Read More"
 msgstr ""
 
 #: modules/read_more/info.php:6
-msgid "Add &#8220;&hellip;more&#8221; links to your blog index by typing <code><!--more--></code> or <code><!--more custom text--></code> in your posts."
+msgid "Add &#8220;&hellip;more&#8221; links to your blog index by typing <code>&lt;!--more--&gt;</code> or <code>&lt;!--more custom text--&gt;</code> in your posts."
 msgstr ""
 
 #: modules/read_more/read_more.php:18

@@ -10,35 +10,29 @@
 <form class="delete split" action="{{ admin_url('destroy_user') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 {% if user.posts is not empty %}
-{% if users is not empty %}
 <p>
 <label for="move_posts">{{ "Attribute posts to:" | translate }}</label>
 <select name="move_posts" id="move_posts">
+<option value="0">{{ "[Delete Posts]" | translate }}</option>
+{% if users is not empty %}
 {% for user in users %}
 <option value="{{ user.id }}">{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}</option>
 {% endfor %}
-</select>
-</p>
 {% endif %}
-<p>
-<label for="posts_delete">{{ "Delete posts:" | translate }}</label>
-<input type="checkbox" name="posts" value="delete" id="posts_delete" checked="checked">
+</select>
 </p>
 {% endif %}
 {% if user.pages is not empty %}
-{% if users is not empty %}
 <p>
 <label for="move_pages">{{ "Attribute pages to:" | translate }}</label>
 <select name="move_pages" id="move_pages">
+<option value="0">{{ "[Delete Pages]" | translate }}</option>
+{% if users is not empty %}
 {% for user in users %}
 <option value="{{ user.id }}">{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}</option>
 {% endfor %}
-</select>
-</p>
 {% endif %}
-<p>
-<label for="pages_delete">{{ "Delete pages:" | translate }}</label>
-<input type="checkbox" name="pages" value="delete" id="pages_delete" checked="checked">
+</select>
 </p>
 {% endif %}
 {{ trigger.call("delete_user_form") }}

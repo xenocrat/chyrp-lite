@@ -57,7 +57,7 @@
 html {                                          font-size: 16px }
 *::-moz-selection,
 *::selection {                                  color: #ffffff;
-                                                background-color: #4e5a66 }
+                                                background-color: #0084c8 }
 body {                                          font-family: "Open Sans webfont", sans-serif;
                                                 font-size: 1rem;
                                                 color: #4e5a66;
@@ -68,7 +68,6 @@ body {                                          font-family: "Open Sans webfont"
                                                 max-width: 1200px }
 body.preview {                                  margin: 4rem;
                                                 background-color: #fffefd }
-body.mobile_nav {                               margin-bottom: 3rem }
 p {                                             margin: 0em 0em 1em 0em }
 p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                            font-size: 2em;
@@ -340,11 +339,11 @@ div.ribbon {                                    box-sizing: border-box;
                                                 width: 100%;
                                                 text-align: center;
                                                 color: #ffffff;
-                                                background-color: #9ea8a8;
+                                                background-color: #43b3ed;
                                                 padding: 0.5em;
                                                 margin-bottom: 1em;
                                                 border-radius: 0.2em }
-div.flash {                                     background-color: #4e5a66 }
+div.flash {                                     background-color: #0084c8 }
 div.metadata {                                  font-weight: normal;
                                                 font-size: 0.75em;
                                                 font-style: italic;
@@ -389,6 +388,8 @@ div#main > article, div.standalone {            display: block;
                                                 border: 1px solid #c6ccc8;
                                                 border-radius: 0.4em }
 div#main > article:last-child {                 margin-bottom: 0rem }
+div#main > article.discourse {                  padding: 2rem 2rem 1rem 2rem;
+                                                margin-top: 2rem }
 div#main > article.commentary {                 padding: 0rem;
                                                 margin-top: 2rem;
                                                 overflow: hidden }
@@ -474,13 +475,13 @@ div.traversal a {                               display: inline-block;
                                                 margin: 0em 0.5rem;
                                                 min-width: 8em;
                                                 color: #fffefd;
-                                                background-color: #9ea8a8;
+                                                background-color: #43b3ed;
                                                 border: none;
-                                                border-radius: 1em }
+                                                border-radius: 0.4em }
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {                        color: #fffefd;
-                                                background-color: #4e5a66 }
+                                                background-color: #0084c8 }
 div.traversal a:first-child {                   border-top-left-radius: 2em;
                                                 border-bottom-left-radius: 2em }
 div.traversal a:last-child {                    border-top-right-radius: 2em;
@@ -547,7 +548,7 @@ a.archive_post_link {                           display: block;
                                                 background-color: transparent }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
-a.archive_post_link:active {                    background-color: #9ea8a8;
+a.archive_post_link:active {                    background-color: #43b3ed;
                                                 mix-blend-mode: multiply;
                                                 opacity: 0.8 }
 img {                                           border-style: none;
@@ -579,6 +580,7 @@ article img {                                   max-width: 100% }
 
 @media screen and (max-width: 959px) {
     body {                                      margin: 0rem 16px 1rem 16px }
+    body.mobile_nav {                           margin-bottom: 3rem }
     h2 {                                        font-size: 1.25em;
                                                 margin: 0.8em 0em }
     h6.post_byline {                            padding-bottom: 1rem }

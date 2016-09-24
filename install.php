@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.03");
-    define('CHYRP_CODENAME', "Chestnut");
+    define('CHYRP_VERSION',  "2016.04");
+    define('CHYRP_CODENAME', "Iago");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -81,6 +81,9 @@
     # Prepare the Config interface.
     $config = Config::current();
 
+    # Prepare the SQL interface.
+    $sql = SQL::current();
+
     # Set the timezone for time calculations (Atlantic/Reykjavik is 0 offset).
     $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
     set_timezone($timezone);
@@ -99,17 +102,13 @@
     sanitize_input($_REQUEST);
 
     # Where are we?
-    $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" ;
-    $url = $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).str_replace("/install.php", "", $_SERVER['REQUEST_URI']);
+    $url = str_ireplace("/install.php", "", self_url());
     $url_path = oneof(parse_url($url, PHP_URL_PATH), "/");
 
     # Already installed?
-    if (file_exists(INCLUDES_DIR.DIR."config.json.php")) {
-        $sql = SQL::current(true);
-
+    if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
         if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
             redirect($config->url);
-    }
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))
@@ -128,7 +127,7 @@
      *     $fallback - The value to echo if the $_POST value is not set.
      */
     function posted($index, $fallback = "") {
-        echo (isset($_POST[$index])) ? fix($_POST[$index], true) : $fallback ;
+        echo isset($_POST[$index]) ? fix($_POST[$index], true) : $fallback ;
     }
 
     /**
@@ -410,15 +409,22 @@
             p {
                 margin-bottom: 1em;
             }
+            aside {
+                margin-bottom: 1em;
+                padding: 0.5em 1em;
+                border: 1px solid #e5d7a1;
+                border-radius: 0.25em;
+                background-color: #fffecd
+            }
         </style>
-        <script src="includes/common.js" type="text/javascript" charset="utf-8"></script>
+        <script src="includes/common.js" type="text/javascript" charset="UTF-8"></script>
         <script type="text/javascript">
             function toggle_adapter() {
                 if ($("#adapter").val() == "sqlite") {
-                    $("#database_field label .sub").fadeIn("fast");
+                    $("#database_sub, #database_aside").fadeIn("fast");
                     $("#host_field, #username_field, #password_field, #prefix_field").fadeOut("fast");
                 } else {
-                    $("#database_field label .sub").fadeOut("fast");
+                    $("#database_sub, #database_aside").fadeOut("fast");
                     $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
                 }
             }
@@ -464,39 +470,8 @@
     #---------------------------------------------
 
     if (!empty($_POST)) {
-        # Assure an absolute path for the SQLite database.
-        if ($_POST['adapter'] == "sqlite") {
-            $db_pwd = realpath(dirname($_POST['database']));
-
-            if (!$db_pwd)
-                $errors[] = __("Please make sure your server has executable permissions on all directories in the hierarchy to the SQLite database.");
-            else
-                $_POST['database'] = $db_pwd.DIR.basename($_POST['database']);
-        }
-
-        # Build the SQL settings based on user input.
-        $settings = ($_POST['adapter'] == "sqlite") ?
-            array("host"     => "",
-                  "username" => "",
-                  "password" => "",
-                  "database" => $_POST['database'],
-                  "prefix"   => "",
-                  "adapter"  => $_POST['adapter']) :
-            array("host"     => $_POST['host'],
-                  "username" => $_POST['username'],
-                  "password" => $_POST['password'],
-                  "database" => $_POST['database'],
-                  "prefix"   => $_POST['prefix'],
-                  "adapter"  => $_POST['adapter']) ;
-
-        if ($_POST['adapter'] == "sqlite" and !@is_writable(dirname($_POST['database'])))
-            $errors[] = __("Please make sure your server has write permissions to the SQLite database.");
-        else {
-            $sql = SQL::current($settings);
-
-            if (!$sql->connect(true))
-                $errors[] = __("Could not connect to the database:")."\n".fix($sql->error);
-        }
+        if (empty($_POST['database']))
+            $errors[] = __("Database cannot be blank.");
 
         if (empty($_POST['name']))
             $errors[] = __("Please enter a name for your website.");
@@ -521,52 +496,89 @@
         if (!class_exists("MySQLi") and !class_exists("PDO"))
             $errors[] = __("MySQLi or PDO is required for database access.");
 
+        if (empty($errors) and $_POST['adapter'] == "sqlite")
+            if ($realpath = realpath(dirname($_POST['database'])))
+                $_POST['database'] = $realpath.DIR.basename($_POST['database']);
+            else
+                $errors[] = __("Could not determine the absolute path to the SQLite database.");
+
+        if (empty($errors) and $_POST['adapter'] == "sqlite")
+            if (!is_writable(dirname($_POST['database'])))
+                $errors[] = __("Please make the SQLite database writable by the server.");
+
+        if (empty($errors) and $_POST['adapter'] == "mysql")
+            if (empty($_POST['username']) or empty($_POST['password']))
+                $errors[] = __("Please enter a username and password for the MySQL database.");
+
+        if (empty($errors)) {
+            # Build the SQL settings based on user input.
+            $settings = ($_POST['adapter'] == "sqlite") ?
+                array("host"     => "",
+                      "username" => "",
+                      "password" => "",
+                      "database" => $_POST['database'],
+                      "prefix"   => "",
+                      "adapter"  => $_POST['adapter']) :
+                array("host"     => $_POST['host'],
+                      "username" => $_POST['username'],
+                      "password" => $_POST['password'],
+                      "database" => $_POST['database'],
+                      "prefix"   => $_POST['prefix'],
+                      "adapter"  => $_POST['adapter']) ;
+
+            # Configure the SQL interface.
+            $sql = SQL::current($settings);
+
+            # Test the database connection.
+            if (!$sql->connect(true))
+                $errors[] = __("Could not connect to the database:")."\n".fix($sql->error);
+        }
+
         if (empty($errors)) {
             # Configure the .htaccess file.
             if (htaccess_conf($url_path) === false)
                 $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
 
             # Build the configuration file.
-            $config->set("sql", array());
-            $config->set("name", $_POST['name']);
-            $config->set("description", $_POST['description']);
-            $config->set("url", rtrim($url, "/"));
-            $config->set("chyrp_url", rtrim($url, "/"));
-            $config->set("email", $_POST['email']);
-            $config->set("timezone", $_POST['timezone']);
-            $config->set("locale", "en_US");
-            $config->set("cookies_notification", true);
-            $config->set("check_updates", true);
-            $config->set("check_updates_last", 0);
-            $config->set("theme", "blossom");
-            $config->set("posts_per_page", 5);
-            $config->set("admin_per_page", 25);
-            $config->set("feed_items", 20);
-            $config->set("feed_url", "");
-            $config->set("uploads_path", DIR."uploads".DIR);
-            $config->set("uploads_limit", 10);
-            $config->set("send_pingbacks", false);
-            $config->set("enable_xmlrpc", true);
-            $config->set("enable_ajax", true);
-            $config->set("enable_emoji", true);
-            $config->set("enable_markdown", true);
-            $config->set("can_register", false);
-            $config->set("email_activation", false);
-            $config->set("email_correspondence", true);
-            $config->set("enable_captcha", false);
-            $config->set("default_group", 0);
-            $config->set("guest_group", 0);
-            $config->set("clean_urls", false);
-            $config->set("enable_homepage", false);
-            $config->set("post_url", "(year)/(month)/(day)/(url)/");
-            $config->set("enabled_modules", array());
-            $config->set("enabled_feathers", array("text"));
-            $config->set("routes", array());
-            $config->set("secure_hashkey", random(32));
+            $set = array($config->set("sql", $settings);
+                         $config->set("name", $_POST['name']);
+                         $config->set("description", $_POST['description']);
+                         $config->set("url", rtrim($url, "/"));
+                         $config->set("chyrp_url", rtrim($url, "/"));
+                         $config->set("email", $_POST['email']);
+                         $config->set("timezone", $_POST['timezone']);
+                         $config->set("locale", "en_US");
+                         $config->set("cookies_notification", true);
+                         $config->set("check_updates", true);
+                         $config->set("check_updates_last", 0);
+                         $config->set("theme", "blossom");
+                         $config->set("posts_per_page", 5);
+                         $config->set("admin_per_page", 25);
+                         $config->set("feed_items", 20);
+                         $config->set("feed_url", "");
+                         $config->set("uploads_path", DIR."uploads".DIR);
+                         $config->set("uploads_limit", 10);
+                         $config->set("send_pingbacks", false);
+                         $config->set("enable_xmlrpc", true);
+                         $config->set("enable_ajax", true);
+                         $config->set("enable_emoji", true);
+                         $config->set("enable_markdown", true);
+                         $config->set("can_register", false);
+                         $config->set("email_activation", false);
+                         $config->set("email_correspondence", true);
+                         $config->set("enable_captcha", false);
+                         $config->set("default_group", 0);
+                         $config->set("guest_group", 0);
+                         $config->set("clean_urls", false);
+                         $config->set("enable_homepage", false);
+                         $config->set("post_url", "(year)/(month)/(day)/(url)/");
+                         $config->set("enabled_modules", array());
+                         $config->set("enabled_feathers", array("text"));
+                         $config->set("routes", array());
+                         $config->set("secure_hashkey", random(32)));
 
-            # Add SQL settings to the configuration.
-            foreach ($settings as $field => $value)
-                $sql->set($field, $value, true);
+            if (in_array(false, $set))
+                $errors[] = __("Could not write the configuration file.");
 
             # Reconnect to the database.
             $sql->connect();
@@ -586,7 +598,7 @@
 
             # Post attributes table.
             $sql->query("CREATE TABLE IF NOT EXISTS __post_attributes (
-                             post_id INTEGER NOT NULL ,
+                             post_id INTEGER NOT NULL,
                              name VARCHAR(100) DEFAULT '',
                              value LONGTEXT,
                              PRIMARY KEY (post_id, name)
@@ -646,34 +658,35 @@
                              updated_at DATETIME DEFAULT NULL,
                              PRIMARY KEY (id)
                          ) DEFAULT CHARSET=utf8");
-                                                                        # Add these strings to the .pot file.
-            $names = array("change_settings" => "Change Settings",      # __("Change Settings");
-                           "toggle_extensions" => "Toggle Extensions",  # __("Toggle Extensions");
-                           "view_site" => "View Site",                  # __("View Site");
-                           "view_private" => "View Private Posts",      # __("View Private Posts");
-                           "view_scheduled" => "View Scheduled Posts",  # __("View Scheduled Posts");
-                           "view_draft" => "View Drafts",               # __("View Drafts");
-                           "view_own_draft" => "View Own Drafts",       # __("View Own Drafts");
-                           "add_post" => "Add Posts",                   # __("Add Posts");
-                           "add_draft" => "Add Drafts",                 # __("Add Drafts");
-                           "edit_post" => "Edit Posts",                 # __("Edit Posts");
-                           "edit_draft" => "Edit Drafts",               # __("Edit Drafts");
-                           "edit_own_post" => "Edit Own Posts",         # __("Edit Own Posts");
-                           "edit_own_draft" => "Edit Own Drafts",       # __("Edit Own Drafts");
-                           "delete_post" => "Delete Posts",             # __("Delete Posts");
-                           "delete_draft" => "Delete Drafts",           # __("Delete Drafts");
-                           "delete_own_post" => "Delete Own Posts",     # __("Delete Own Posts");
-                           "delete_own_draft" => "Delete Own Drafts",   # __("Delete Own Drafts");
-                           "view_page" => "View Pages",                 # __("View Pages");
-                           "add_page" => "Add Pages",                   # __("Add Pages");
-                           "edit_page" => "Edit Pages",                 # __("Edit Pages");
-                           "delete_page" => "Delete Pages",             # __("Delete Pages");
-                           "add_user" => "Add Users",                   # __("Add Users");
-                           "edit_user" => "Edit Users",                 # __("Edit Users");
-                           "delete_user" => "Delete Users",             # __("Delete Users");
-                           "add_group" => "Add Groups",                 # __("Add Groups");
-                           "edit_group" => "Edit Groups",               # __("Edit Groups");
-                           "delete_group" => "Delete Groups");          # __("Delete Groups");
+
+            $names = array("change_settings" => "Change Settings",
+                           "toggle_extensions" => "Toggle Extensions",
+                           "view_site" => "View Site",
+                           "view_private" => "View Private Posts",
+                           "view_scheduled" => "View Scheduled Posts",
+                           "view_draft" => "View Drafts",
+                           "view_own_draft" => "View Own Drafts",
+                           "add_post" => "Add Posts",
+                           "add_draft" => "Add Drafts",
+                           "edit_post" => "Edit Posts",
+                           "edit_draft" => "Edit Drafts",
+                           "edit_own_post" => "Edit Own Posts",
+                           "edit_own_draft" => "Edit Own Drafts",
+                           "delete_post" => "Delete Posts",
+                           "delete_draft" => "Delete Drafts",
+                           "delete_own_post" => "Delete Own Posts",
+                           "delete_own_draft" => "Delete Own Drafts",
+                           "view_page" => "View Pages",
+                           "add_page" => "Add Pages",
+                           "edit_page" => "Edit Pages",
+                           "delete_page" => "Delete Pages",
+                           "add_user" => "Add Users",
+                           "edit_user" => "Edit Users",
+                           "delete_user" => "Delete Users",
+                           "add_group" => "Add Groups",
+                           "edit_group" => "Edit Groups",
+                           "delete_group" => "Delete Groups",
+                           "export_content" => "Export Content");
 
             foreach ($names as $id => $name)
                 $sql->replace("permissions",
@@ -718,7 +731,7 @@
                                    "joined_at" => datetime()));
 
             if (password_strength($_POST['password_1']) < 100)
-                $errors[] = __("Please consider setting a stronger password for your admin account.");
+                $errors[] = __("Please consider setting a stronger password for your account.");
 
             $installed = true;
         }
@@ -733,7 +746,7 @@
 
           ?></pre>
 <?php if (!$installed): ?>
-            <form action="install.php" method="post" accept-charset="utf-8" id="installer">
+            <form action="install.php" method="post" accept-charset="UTF-8" id="installer">
                 <h1><?php echo __("Database Setup"); ?></h1>
                 <p id="adapter_field">
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
@@ -748,7 +761,7 @@
                 </p>
                 <p id="host_field">
                     <label for="host"><?php echo __("Host"); ?> <span class="sub"><?php echo __("(usually ok as \"localhost\")"); ?></span></label>
-                    <input type="text" name="host" value="<?php posted("host", ((isset($_ENV['DATABASE_SERVER'])) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
+                    <input type="text" name="host" value="<?php posted("host", (isset($_ENV['DATABASE_SERVER']) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
                 </p>
                 <p id="username_field">
                     <label for="username"><?php echo __("Username"); ?></label>
@@ -760,12 +773,15 @@
                 </p>
                 <p id="database_field">
                     <label for="database"><?php echo __("Database"); ?>
-                        <span class="sub">
+                        <span id="database_sub" class="sub">
                             <?php echo __("(absolute or relative path)"); ?>
                         </span>
                     </label>
                     <input type="text" name="database" value="<?php posted("database"); ?>" id="database">
                 </p>
+                <aside id="database_aside">
+                    <?php echo __("Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."); ?>
+                </aside>
                 <p id="prefix_field">
                     <label for="prefix"><?php echo __("Table Prefix"); ?> <span class="sub"><?php echo __("(optional)"); ?></span></label>
                     <input type="text" name="prefix" value="<?php posted("prefix"); ?>" id="prefix">
@@ -809,7 +825,7 @@
                     <label for="email"><?php echo __("Email Address"); ?></label>
                     <input type="email" name="email" value="<?php posted("email"); ?>" id="email">
                 </p>
-                <button type="submit"><?php echo __("Install!"); ?></button>
+                <button type="submit"><?php echo __("Install me!"); ?></button>
             </form>
 <?php else: ?>
             <h1><?php echo __("Chyrp Lite has been installed"); ?></h1>

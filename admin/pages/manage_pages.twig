@@ -20,12 +20,12 @@
 <table>
 <thead>
 <tr class="head">
-<th class="page_title">{{ "Title" | translate }}</th>
-<th class="page_created">{{ "Created" | translate }}</th>
-<th class="page_updated">{{ "Last Updated" | translate }}</th>
-<th class="page_public">{{ "Public?" | translate }}</th>
-<th class="page_show">{{ "Listed?" | translate }}</th>
-<th class="page_author">{{ "Author" | translate }}</th>
+<th class="page_title title">{{ "Title" | translate }}</th>
+<th class="page_created date">{{ "Created" | translate }}</th>
+<th class="page_updated date">{{ "Last Updated" | translate }}</th>
+<th class="page_public emblem">{{ "Public?" | translate }}</th>
+<th class="page_show emblem">{{ "Listed?" | translate }}</th>
+<th class="page_author value">{{ "Author" | translate }}</th>
 {{ trigger.call("manage_pages_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>
@@ -33,28 +33,28 @@
 <tbody>
 {% for page in pages.paginated %}
 <tr id="page_{{ page.id }}" class="page">
-<td class="page_title main">
+<td class="page_title title main">
 <a href="{{ page.url() }}">{{ page.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
-<td class="page_created">
+<td class="page_created date">
 {{ page.created_at | strftimeformat }}
 </td>
-<td class="page_updated">
+<td class="page_updated date">
 {% if page.updated %}{{ page.updated_at | strftimeformat }}{% else %}<span class="sub">{{ "never" | translate }}</span>{% endif %}
 </td>
-<td class="page_public">
+<td class="page_public emblem">
 {% if page.public %}<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}
 &nbsp;
 {% endif %}
 </td>
-<td class="page_show">
+<td class="page_show emblem">
 {% if page.show_in_list %}<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}
 &nbsp;
 {% endif %}
 </td>
-<td class="page_author">
+<td class="page_author value">
 {{ page.author.nick is defined ? page.author.nick : "" }}
 </td>
 {{ trigger.call("manage_pages_column", page) }}

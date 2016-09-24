@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-30 18:42+0000\n"
+"POT-Creation-Date: 2016-09-24 17:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -76,14 +76,25 @@ msgid "%d %b, %Y"
 msgstr ""
 
 #: themes/blossom/content/post.twig:34
+msgid 'View pingbacks'
+msgstr ""
+
+#: themes/blossom/content/post.twig:35
+#, php-format
+msgid "%s pingback"
+msgid_plural "%s pingbacks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: themes/blossom/content/post.twig:40
 msgid "Comments closed"
 msgstr ""
 
-#: themes/blossom/content/post.twig:37
+#: themes/blossom/content/post.twig:43
 msgid 'View comments'
 msgstr ""
 
-#: themes/blossom/content/post.twig:38
+#: themes/blossom/content/post.twig:44
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
@@ -188,12 +199,11 @@ msgid "Archive"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:99
-#: themes/blossom/pages/archive.twig:8
-#: themes/blossom/pages/archive.twig:54
+#: themes/blossom/pages/archive.twig:18
 msgid "%B %Y"
 msgstr ""
 
-#: themes/blossom/feathers/uploader.twig:19
+#: themes/blossom/feathers/uploader.twig:21
 msgid "File attachment:"
 msgstr ""
 
@@ -372,28 +382,19 @@ msgstr ""
 msgid "Not found."
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:23
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
-msgstr ""
-
-#: themes/blossom/pages/archive.twig:40
-#, php-format
-msgid "Archive of %s &rarr;"
-msgstr ""
-
-#: themes/blossom/pages/archive.twig:49
-msgid "%d %B, %Y"
-msgstr ""
-
-#: themes/blossom/pages/archive.twig:49
-#: themes/blossom/pages/archive.twig:54
+#: themes/blossom/pages/archive.twig:10
+#: themes/blossom/pages/archive.twig:52
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:65
-msgid "There aren't any posts in the timeframe you specified"
+#: themes/blossom/pages/archive.twig:35
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr ""
+
+#: themes/blossom/pages/archive.twig:69
+msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
 #: themes/blossom/pages/category.twig:6
@@ -443,11 +444,15 @@ msgstr ""
 msgid "Previous post"
 msgstr ""
 
-#: themes/blossom/pages/view.twig:31
+#: themes/blossom/pages/view.twig:17
+msgid "Pingbacks"
+msgstr ""
+
+#: themes/blossom/pages/view.twig:41
 msgid "Newer comments"
 msgstr ""
 
-#: themes/blossom/pages/view.twig:32
+#: themes/blossom/pages/view.twig:42
 msgid "Older comments"
 msgstr ""
 

@@ -3,7 +3,7 @@
      * Class: Main Controller
      * The logic controlling the blog.
      */
-    class MainController {
+    class MainController implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
         public $urls = array('|/id/([0-9]+)/|'                              => '/?action=view&id=$1',
@@ -37,11 +37,12 @@
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            $cache = (is_writable(CACHES_DIR.DIR."twig") and !PREVIEWING and (!DEBUG or CACHE_TWIG)) ?
-                CACHES_DIR.DIR."twig" : false ;
-
             if (defined('THEME_DIR')) {
+                $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+                          !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
+
                 $loader = new Twig_Loader_Filesystem(THEME_DIR);
+
                 $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
                                                                   "strict_variables" => DEBUG,
                                                                   "charset" => "UTF-8",
@@ -68,12 +69,12 @@
             if (in_array($route->arg[0], array("__construct", "parse", "post_from_url", "display", "current")))
                 show_404();
 
-            # Discover feeds.
+            # Discover feed requests.
             if (preg_match("/\/feed\/?$/", $route->request)) {
                 $this->feed = true;
                 $this->post_limit = $config->feed_items;
 
-                # Don't set $route->action to "feed" (bottom of this function).
+                # Don't set $route->action to "feed" - the display() method handles feeds transparently.
                 if ($route->arg[0] == "feed")
                     return $route->action = "index";
             }
@@ -113,6 +114,14 @@
                     $_GET['query'] = $route->arg[1];
 
                 return $route->action = "search";
+            }
+
+            # Random.
+            if ($route->arg[0] == "random") {
+                if (isset($route->arg[1]))
+                    $_GET['feather'] = $route->arg[1];
+
+                return $route->action = "random";
             }
 
             # Test custom routes and populate $_GET parameters if the route expression matches.
@@ -204,21 +213,9 @@
 
         /**
          * Function: index
-         * Grabs the posts for the main page.
+         * Grabs the posts for the main index.
          */
         public function index() {
-            $sql = SQL::current();
-            $posts = $sql->select("posts",
-                                  "posts.id",
-                                  array("posts.created_at <=" => datetime(),
-                                        "posts.status" => "scheduled"))->fetchAll();
-
-            if (!empty($posts))
-                foreach ($posts as $post)
-                    $sql->update("posts",
-                                 array("id" => $post),
-                                 array("status" => "public"));
-
             $this->display("pages".DIR."index",
                            array("posts" => new Paginator(Post::find(array("placeholders" => true)),
                                                           $this->post_limit)));
@@ -226,108 +223,100 @@
 
         /**
          * Function: archive
-         * Grabs the posts for the Archive page when viewing a year or a month.
+         * Grabs the posts for the archive page.
          */
         public function archive() {
+            $sql = SQL::current();
+
             fallback($_GET['year']);
             fallback($_GET['month']);
             fallback($_GET['day']);
 
-            $lower_bound = mktime(0, 0, 0,
-                                  is_numeric($_GET['month']) ? (int) $_GET['month'] : 1 ,
-                                  is_numeric($_GET['day']) ? (int) $_GET['day'] : 1 ,
-                                  is_numeric($_GET['year']) ? (int) $_GET['year'] : 1970 );
+            $months = array();
+            $posts = new Paginator(array());
+            $title = __("Archive");
+            $conds = array("status" => "public");
+            $timestamp = mktime(0, 0, 0, (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
+                                         (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
+                                         (is_numeric($_GET['year']) ? (int) $_GET['year'] : 1970));
 
-            $preceding = new Post(null, array("where" => array("created_at <" => datetime($lower_bound),
-                                                               "status" => "public"),
-                                              "order" => "created_at DESC, id DESC"));
+            if (is_numeric($_GET['year']) and is_numeric($_GET['month']) and is_numeric($_GET['day']))
+                $depth = "day";
+            elseif (is_numeric($_GET['year']) and is_numeric($_GET['month']))
+                $depth = "month";
+            elseif (is_numeric($_GET['year']))
+                $depth = "year";
+            else
+                $depth = "all";
 
-            if (isset($_GET['year']) and isset($_GET['month']) and isset($_GET['day']))
-                $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                        "where" => array("YEAR(created_at)" => $_GET['year'],
-                                                                         "MONTH(created_at)" => $_GET['month'],
-                                                                         "DAY(created_at)" => $_GET['day'],
-                                                                         "status" => "public"))),
-                                       $this->post_limit);
-            elseif (isset($_GET['year']) and isset($_GET['month']))
-                $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                        "where" => array("YEAR(created_at)" => $_GET['year'],
-                                                                         "MONTH(created_at)" => $_GET['month'],
-                                                                         "status" => "public"))),
-                                       $this->post_limit);
+            $next = ($depth == "all") ? array() : $sql->select("posts",
+                                                               "*",
+                                                               array("status" => "public",
+                                                                     "posts.created_at <" => datetime($timestamp)),
+                                                               array("posts.id DESC"),
+                                                               array(),
+                                                               1)->grab("created_at");
 
-            $sql = SQL::current();
+            $prev = ($depth == "all") ? array() : $sql->select("posts",
+                                                               "*",
+                                                               array("status" => "public",
+                                                                     "posts.created_at >=" => datetime("@$timestamp +1 $depth")),
+                                                               array("posts.id ASC"),
+                                                               array(),
+                                                               1)->grab("created_at");
 
-            if (empty($_GET['year']) or empty($_GET['month'])) {
-                if (!empty($_GET['year']))
-                    $timestamps = $sql->select("posts",
-                                               array("DISTINCT YEAR(created_at) AS year",
-                                                     "MONTH(created_at) AS month",
-                                                     "created_at AS created_at"),
-                                               array("YEAR(created_at)" => $_GET['year'], "status" => "public"),
-                                               array("created_at DESC"),
-                                               array(),
-                                               null,
-                                               null,
-                                               array("YEAR(created_at)", "MONTH(created_at)"));
-                else
-                    $timestamps = $sql->select("posts",
-                                               array("DISTINCT YEAR(created_at) AS year",
-                                                     "MONTH(created_at) AS month",
-                                                     "created_at AS created_at"),
-                                               array("status" => "public"),
-                                               array("created_at DESC"),
-                                               array(),
-                                               null,
-                                               null,
-                                               array("YEAR(created_at)", "MONTH(created_at)"));
+            switch ($depth) {
+                case 'day':
+                    $title = _f("Archive of %s", when("%d %B %Y", $timestamp, true));
+                    $posts = new Paginator(Post::find(array("placeholders" => true,
+                                                            "where" => array("YEAR(created_at)" => $_GET['year'],
+                                                                             "MONTH(created_at)" => $_GET['month'],
+                                                                             "DAY(created_at)" => $_GET['day'],
+                                                                             "status" => "public"))),
+                                           $this->post_limit);
+                    break;
+                case 'month':
+                    $title = _f("Archive of %s", when("%B %Y", $timestamp, true));
+                    $posts = new Paginator(Post::find(array("placeholders" => true,
+                                                            "where" => array("YEAR(created_at)" => $_GET['year'],
+                                                                             "MONTH(created_at)" => $_GET['month'],
+                                                                             "status" => "public"))),
+                                           $this->post_limit);
+                    break;
+                case 'year':
+                    $title = _f("Archive of %s", when("%Y", $timestamp, true));
+                    $conds["YEAR(created_at)"] = $_GET['year'];
+                default:
+                    $times = $sql->select("posts",
+                                          array("DISTINCT YEAR(created_at) AS year",
+                                                "MONTH(created_at) AS month",
+                                                "created_at AS created_at"),
+                                          $conds,
+                                          array("created_at DESC"),
+                                          array(),
+                                          null,
+                                          null,
+                                          array("YEAR(created_at)", "MONTH(created_at)"));
 
-                $archives = array();
-                $archive_hierarchy = array();
+                    while ($time = $times->fetchObject()) {
+                        $key = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
+                        $val = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
+                                                                 "MONTH(created_at)" => when("m", $time->created_at),
+                                                                 "status" => "public")));
 
-                while ($time = $timestamps->fetchObject()) {
-                    $year = mktime(0, 0, 0, 1, 0, $time->year);
-                    $month = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
-
-                    $posts = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
-                                                               "MONTH(created_at)" => when("m", $time->created_at),
-                                                               "status" => "public")));
-
-                    $archives[$month] = array("posts" => $posts,
-                                              "year" => $time->year,
-                                              "month" => when("%B", $month, true),
-                                              "timestamp" => $month,
-                                              "url" => url("archive/".when("Y/m/", $time->created_at)));
-
-                    $archive_hierarchy[$year][$month] = $posts;
-                }
-
-                $this->display("pages/archive",
-                               array("archives" => $archives,
-                                     "preceding" => $preceding, # The post preceding the date range chronologically.
-                                     "archive_hierarchy" => $archive_hierarchy),
-                               __("Archive"));
-            } else {
-                if (!is_numeric($_GET['year']) or !is_numeric($_GET['month']))
-                    error(__("Error"), __("Please enter a valid year and month."), null, 422);
-
-                $timestamp = mktime(0, 0, 0, $_GET['month'], oneof(@$_GET['day'], 1), $_GET['year']);
-
-                $depth = isset($_GET['day']) ?
-                    "day" : (isset($_GET['month']) ?
-                        "month" : (isset($_GET['year']) ?
-                            "year" : ""));
-
-                $this->display("pages".DIR."archive",
-                               array("posts" => $posts,
-                                     "archive" => array("year" => $_GET['year'],
-                                                        "month" => when("%B", $timestamp, true),
-                                                        "day" => when("%d", $timestamp, true),
-                                                        "timestamp" => $timestamp,
-                                                        "depth" => $depth),
-                                     "preceding" => $preceding),
-                               _f("Archive of %s", when("%B %Y", $timestamp, true)));
+                        if (!empty($val))
+                            $months[$key] = $val;
+                    }
             }
+
+            $this->display("pages".DIR."archive",
+                           array("posts" => $posts,
+                                 "months" => $months,
+                                 "archive" => array("timestamp" => $timestamp,
+                                                    "depth" => $depth,
+                                                    "next" => !empty($next) ? strtotime(reset($next)) : false,
+                                                    "prev" => !empty($prev) ? strtotime(reset($prev)) : false)),
+                           $title);
         }
 
         /**
@@ -335,14 +324,12 @@
          * Grabs the posts for a search query.
          */
         public function search() {
-            fallback($_GET['query'], "");
             $config = Config::current();
-            $_GET['query'] = strip_tags($_GET['query']);
+            $_GET['query'] = strip_tags(fallback($_GET['query'], ""));
 
-            if ($config->clean_urls and
-                substr_count($_SERVER['REQUEST_URI'], "?") and
-                !substr_count($_SERVER['REQUEST_URI'], "%2F")) # Searches with / and clean URLs = server 404.
-                redirect("search/".urlencode($_GET['query'])."/");
+            # Redirect search form submissions to a clean URL, removing "%2F" to avoid a server 404.
+            if ($config->clean_urls and substr_count($_SERVER['REQUEST_URI'], "?"))
+                redirect("search/".str_ireplace("%2F", "", urlencode($_GET['query']))."/");
 
             if (empty($_GET['query']))
                 Flash::warning(__("Please enter a search term."));
@@ -368,7 +355,7 @@
             $this->display(array("pages".DIR."search", "pages".DIR."index"),
                            array("posts" => $posts,
                                  "search" => $_GET['query']),
-                           fix(_f("Search results for \"%s\"", $_GET['query'])));
+                           _f("Search results for \"%s\"", fix($_GET['query'])));
         }
 
         /**
@@ -480,7 +467,7 @@
                 Flash::notice(__("This site does not allow registration."), "/");
 
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/");
+                Flash::notice(__("You cannot register an account because you are already logged in."), "/");
 
             if (!empty($_POST)) {
                 if (empty($_POST['login']))
@@ -495,6 +482,8 @@
                     Flash::warning(__("Passwords cannot be blank."));
                 elseif ($_POST['password1'] != $_POST['password2'])
                     Flash::warning(__("Passwords do not match."));
+                elseif (password_strength($_POST['password1']) < 100)
+                    Flash::message(__("Please consider setting a stronger password for your account."));
 
                 if (empty($_POST['email']))
                     Flash::warning(__("Email address cannot be blank."));
@@ -504,16 +493,27 @@
                 if ($config->enable_captcha and !check_captcha())
                     Flash::warning(__("Incorrect captcha code."));
 
-                if (!Flash::exists("warning")) {
-                    if ($config->email_activation) {
-                        $user = User::add($_POST['login'],
-                                          $_POST['password1'],
-                                          $_POST['email'],
-                                          "",
-                                          "",
-                                          $config->default_group,
-                                          false);
+                if (!empty($_POST['website']) and !is_url($_POST['website']))
+                    Flash::warning(__("Invalid website URL."));
 
+                if (!empty($_POST['website']))
+                    $_POST['website'] = add_scheme($_POST['website']);
+
+                fallback($_POST['full_name'], "");
+                fallback($_POST['website'], "");
+
+                if (!Flash::exists("warning")) {
+                    $user = User::add($_POST['login'],
+                                      User::hashPassword($_POST['password1']),
+                                      $_POST['email'],
+                                      $_POST['full_name'],
+                                      $_POST['website'],
+                                      $config->default_group,
+                                      ($config->email_activation) ? false : true);
+
+                    Trigger::current()->call("user_registered", $user);
+
+                    if (!$user->approved) {
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
                                                      "link"  => $config->url.
@@ -521,15 +521,11 @@
                                                                 "&token=".token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
-                    } else {
-                        $user = User::add($_POST['login'],
-                                          $_POST['password1'],
-                                          $_POST['email']);
-                        $_SESSION['user_id'] = $user->id;
-                        Flash::notice(__("Registration successful."), "/");
                     }
 
-                    Trigger::current()->call("user_registered", $user);
+                    $_SESSION['user_id'] = $user->id;
+
+                    Flash::notice(__("Your account is now active."), "/");
                 }
             }
 
@@ -538,51 +534,39 @@
 
         /**
          * Function: activate
-         * Approves a user registration for a given login.
+         * Activates (approves) a given login.
          */
         public function activate() {
             if (logged_in())
                 Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
-            if (empty($_GET['token']))
-                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
-
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results)
-                show_404(__("Unknown User"), __("That username isn't in our database."));
+            if ($user->no_results or empty($_GET['token']) or token(array($user->login, $user->email)) != $_GET['token'])
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
-            if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
-
-            if (!$user->approved) {
-                SQL::current()->update("users",
-                                 array("login" => $user->login),
-                                 array("approved" => true));
-
-                Flash::notice(__("Your account is now active and you may log in."), "login");
-            } else
+            if ($user->approved)
                 Flash::notice(__("Your account has already been activated."), "/");
+
+            $user->update(null, null, null, null, null, null, true);
+
+            $_SESSION['user_id'] = $user->id;
+
+            Flash::notice(__("Your account is now active."), "/");
         }
 
         /**
          * Function: reset
-         * Reset a user password for a given login.
+         * Resets the password for a given login.
          */
         public function reset() {
             if (logged_in())
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
-            if (empty($_GET['token']))
-                error(__("Missing Token"), __("You must supply an authentication token."), null, 400);
-
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results)
-                show_404(__("Unknown User"), __("That username isn't in our database."));
-
-            if (token(array($user->login, $user->email)) != $_GET['token'])
-                error(__("Invalid Token"), __("The authentication token is not valid."), null, 422);
+            if ($user->no_results or empty($_GET['token']) or token(array($user->login, $user->email)) != $_GET['token'])
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             $new_password = random(8);
 
@@ -590,12 +574,7 @@
                                          "to" => $user->email,
                                          "password" => $new_password));
 
-            $user->update($user->login,
-                          User::hashPassword($new_password),
-                          $user->email,
-                          $user->full_name,
-                          $user->website,
-                          $user->group_id);
+            $user->update(null, User::hashPassword($new_password));
 
             Flash::notice(__("We have emailed you a new password."), "login");
         }
@@ -667,6 +646,8 @@
                 if (!empty($_POST['new_password1']))
                     if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
                         Flash::warning(__("Passwords do not match."));
+                    elseif (password_strength($_POST['new_password1']) < 100)
+                        Flash::message(__("Please consider setting a stronger password for your account."));
 
                 if (empty($_POST['email']))
                     Flash::warning(__("Email address cannot be blank."));
@@ -678,6 +659,9 @@
 
                 if (!empty($_POST['website']))
                     $_POST['website'] = add_scheme($_POST['website']);
+
+                fallback($_POST['full_name'], "");
+                fallback($_POST['website'], "");
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $visitor->password ;
@@ -698,7 +682,7 @@
 
         /**
          * Function: lost_password
-         * Email a password reset link to the registered address of a user.
+         * Emails a password reset link to the registered address of a user.
          */
         public function lost_password() {
             if (logged_in())
@@ -707,7 +691,7 @@
             $config = Config::current();
 
             if (!$config->email_correspondence)
-                Flash::notice(__("Please contact the blog administrator to request a new password."), "/");
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if (!empty($_POST)) {
                 $user = new User(array("login" => fallback($_POST['login'])));
@@ -730,25 +714,18 @@
          * Grabs a random post and redirects to it.
          */
         public function random() {
-            $sql = SQL::current();
+            $conds = array("posts.status" => "public");
 
-            if (isset($_GET['feather'])) {
-                $feather = preg_replace( '|[^a-z]|i', '', $_GET['feather'] );
-                $random = $sql->select("posts",
-                                       "posts.url",
-                                       array("posts.feather" => $feather,
-                                             "posts.status" => "public"),
-                                       array("ORDER BY" => "RAND()"),
-                                       array("LIMIT" => 1))->fetchObject();
-                $post = new Post(array("url" => $random->url));
-        	} else {
-                $random = $sql->select("posts",
-                                       "posts.url",
-                                       array("posts.status" => "public"),
-                                       array("ORDER BY" => "RAND()"),
-                                       array("LIMIT" => 1))->fetchObject();
-                $post = new Post(array("url" => $random->url));
-        	}
+            if (isset($_GET['feather']))
+                $conds["posts.feather"] = preg_replace('|[^a-z]|i', '', $_GET['feather']);
+
+            $random = SQL::current()->select("posts",
+                                             "posts.url",
+                                             $conds,
+                                             array("ORDER BY" => "RAND()"),
+                                             array("LIMIT" => 1))->fetchObject();
+
+            $post = new Post(array("url" => $random->url));
 
             redirect($post->url());
         }
@@ -821,7 +798,7 @@
 
         /**
          * Function: display
-         * Display the page.
+         * Displays the page.
          *
          * If "posts" is in the context and the visitor requested a feed, they will be served.
          *
@@ -836,19 +813,14 @@
             $trigger = Trigger::current();
             $theme = Theme::current();
 
-            if (is_array($template)) {
-                foreach ($template as $try)
-                    if ($theme->file_exists($try))
+            if (is_array($template))
+                foreach (array_values($template) as $index => $try)
+                    if ($theme->file_exists($try) or ($index + 1) == count($template))
                         return $this->display($try, $context, $title);
-
-                error(__("Twig Error"),
-                      __("No template files exist in the supplied array of fallbacks."),
-                      debug_backtrace());
-            }
 
             $this->displayed = true;
 
-            # Serve feeds.
+            # Serve feeds if a feed request was detected for this action.
             if ($this->feed) {
                 if ($trigger->exists($route->action."_feed"))
                     return $trigger->call($route->action."_feed", $context);
@@ -860,28 +832,27 @@
             $this->context                       = array_merge($context, $this->context);
             $this->context["ip"]                 = $_SERVER["REMOTE_ADDR"];
             $this->context["DIR"]                = DIR;
-            $this->context["theme"]              = $theme;
-            $this->context["flash"]              = Flash::current();
-            $this->context["trigger"]            = $trigger;
-            $this->context["modules"]            = Modules::$instances;
-            $this->context["feathers"]           = Feathers::$instances;
-            $this->context["title"]              = $theme->title = $title;
-            $this->context["site"]               = $config;
-            $this->context["visitor"]            = Visitor::current();
-            $this->context["route"]              = Route::current();
             $this->context["version"]            = CHYRP_VERSION;
             $this->context["codename"]           = CHYRP_CODENAME;
-            $this->context["now"]                = time();
             $this->context["debug"]              = DEBUG;
+            $this->context["now"]                = time();
+            $this->context["site"]               = $config;
+            $this->context["flash"]              = Flash::current();
+            $this->context["theme"]              = $theme;
+            $this->context["trigger"]            = $trigger;
+            $this->context["route"]              = $route;
+            $this->context["visitor"]            = Visitor::current();
+            $this->context["visitor"]->logged_in = logged_in();
+            $this->context["title"]              = $theme->title = $title;
+            $this->context["captcha"]            = generate_captcha();
+            $this->context["modules"]            = Modules::$instances;
+            $this->context["feathers"]           = Feathers::$instances;
             $this->context["POST"]               = $_POST;
             $this->context["GET"]                = $_GET;
-            $this->context["captcha"]            = generate_captcha();
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
-            $this->context["visitor"]->logged_in = logged_in();
 
-            $trigger->filter($this->context, array("main_context",
-                                                   "main_context_".str_replace(DIR, "_", $template)));
+            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
             if ($config->cookies_notification and empty($_SESSION['cookies_notified']))
                 $theme->cookies_notification();
@@ -889,8 +860,7 @@
             try {
                 return $this->twig->display($template.".twig", $this->context);
             } catch (Exception $e) {
-                $prettify = preg_replace("/([^:]+): (.+)/", "\\1: <code>\\2</code>", $e->getMessage());
-                error(__("Twig Error"), $prettify, debug_backtrace());
+                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
             }
         }
 

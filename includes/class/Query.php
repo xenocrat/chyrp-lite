@@ -16,7 +16,7 @@
          *     $sql - <SQL> instance.
          *     $query - Query to execute.
          *     $params - An associative array of parameters used in the query.
-         *     $throw_exceptions - Throw exceptions on error?
+         *     $throw_exceptions - Throw exceptions instead of calling error()?
          */
         public function __construct($sql, $query, $params = array(), $throw_exceptions = false) {
             if (DEBUG)
@@ -33,7 +33,7 @@
             $this->db =& $this->sql->db;
 
             $this->params = $params;
-            $this->throw_exceptions = $throw_exceptions;
+            $this->throw_exceptions = (INSTALLING or UPGRADING or XML_RPC) ? true : $throw_exceptions ;
             $this->queryString = $query;
 
             if ($count and DEBUG) {
@@ -65,8 +65,8 @@
                         $this->query = $this->db->prepare($query);
                         $result = $this->query->execute($params);
                         $this->query->setFetchMode(PDO::FETCH_ASSOC);
-
                         $this->queryString = $query;
+
                         foreach ($params as $name => $val)
                             $this->queryString = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
                                                               str_replace(array("\\", "\$"),
@@ -76,7 +76,6 @@
 
                         if (!$result)
                             throw new PDOException;
-
                     } catch (PDOException $error) {
                         return $this->handle($error);
                     }
@@ -96,7 +95,6 @@
                     try {
                         if (!$this->query = $this->db->query($query))
                             throw new Exception($this->db->error);
-
                     } catch (Exception $error) {
                         return $this->handle($error);
                     }
@@ -195,22 +193,17 @@
          * Handles exceptions thrown by failed queries.
          */
         public function handle($error) {
-            $this->sql->error = $error;
+            $this->sql->error = $error->getMessage();
 
-            if (UPGRADING or $this->sql->silence_errors)
-                return false;
+            if (!$this->throw_exceptions)
+                error(__("Database Error"),
+                      $this->sql->error.
+                      "\n\n<h2>".__("Query String")."</h2>\n".
+                      "<pre>".fix(print_r($this->queryString, true))."</pre>".
+                      "\n\n<h2>".__("Parameters")."</h2>\n".
+                      "<pre>".fix(print_r($this->params, true))."</pre>",
+                      $error->getTrace());
 
-            $backtrace = $error->getTrace();
-            $message = $error->getMessage();
-
-            $message.= "\n\n<h2>".__("Query String")."</h2>\n".
-                       "<pre>".fix(print_r($this->queryString, true))."</pre>".
-                       "\n\n<h2>".__("Parameters")."</h2>\n".
-                       "<pre>".fix(print_r($this->params, true))."</pre>";
-
-            if (XML_RPC or $this->throw_exceptions)
-                throw new Exception($message);
-
-            error(__("Database Error"), $message, $backtrace);
+            throw new Exception(fix($this->sql->error));
         }
     }

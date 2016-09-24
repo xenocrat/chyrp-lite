@@ -5,7 +5,7 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2016.03
+     *     v2016.04
      *
      * Copyright:
      *     Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2016.03");
+    define('CHYRP_VERSION', "2016.04");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Chestnut");
+    define('CHYRP_CODENAME', "Iago");
 
     # Constant: CACHE_TWIG
     # Override DEBUG to enable Twig template caching.
@@ -202,6 +202,18 @@
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
+    # File: Controller
+    # Defines the Controller interface.
+    require_once INCLUDES_DIR.DIR."interface".DIR."Controller.php";
+
+    # File: Feather
+    # See Also:
+    require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
+
+    # File: Captcha
+    # Defines the Captcha interface.
+    require_once INCLUDES_DIR.DIR."interface".DIR."Captcha.php";
+
     # File: Config
     # See Also:
     #     <Config>
@@ -289,26 +301,20 @@
 
     # File: Main
     # See Also:
-    #     <Main Controller>
+    #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Main.php";
 
     # File: Admin
     # See Also:
-    #     <Admin Controller>
+    #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
-    # File: Feather
-    # See Also:
-    #     <Feather>
-    require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
-
     # Handle a missing config file with redirect or error.
-    if (!file_exists(INCLUDES_DIR.DIR."config.json.php")) {
-        if (!MAIN)
+    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+        if (MAIN and file_exists(MAIN_DIR.DIR."install.php"))
+            redirect("install.php");
+        else
             error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
-
-        redirect("install.php");
-    }
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
@@ -361,9 +367,6 @@
     # Load the Visitor.
     $visitor = Visitor::current();
 
-    # Prepare hooks for captcha providers.
-    $captchaHooks = array();
-
     # Prepare the notifier.
     $flash = Flash::current();
 
@@ -378,6 +381,10 @@
 
     # First general-purpose trigger.
     $trigger->call("runtime");
+
+    # Publish scheduled posts.
+    if (MAIN or ADMIN)
+        Post::publish_scheduled();
 
     # Set the content-type and charset.
     if (JAVASCRIPT) {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-07-30 18:42+0000\n"
+"POT-Creation-Date: 2016-09-24 17:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -176,50 +176,51 @@ msgstr ""
 msgid "Emoji"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:47
+#: admin/javascripts/admin.js.php:31
+#: admin/javascripts/admin.js.php:35
+msgid "These changes will affect your user account. Are you sure you want to proceed?"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:48
 msgid "Toggle All"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:107
-#: admin/javascripts/admin.js.php:123
+#: admin/javascripts/admin.js.php:108
+#: admin/javascripts/admin.js.php:124
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:109
-#: admin/javascripts/admin.js.php:126
+#: admin/javascripts/admin.js.php:110
+#: admin/javascripts/admin.js.php:127
 msgid "More Options &darr;"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:224
-msgid "You are a member of this group. Are you sure you want to update the permissions?"
+msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:230
-msgid "You are a member of this group. Are you sure you want to delete it?"
-msgstr ""
-
-#: admin/javascripts/admin.js.php:308
+#: admin/javascripts/admin.js.php:305
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:312
-#: admin/javascripts/admin.js.php:314
-#: admin/javascripts/admin.js.php:391
-#: admin/javascripts/admin.js.php:393
+#: admin/javascripts/admin.js.php:309
+#: admin/javascripts/admin.js.php:311
+#: admin/javascripts/admin.js.php:388
+#: admin/javascripts/admin.js.php:390
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:334
-#: admin/javascripts/admin.js.php:335
+#: admin/javascripts/admin.js.php:331
+#: admin/javascripts/admin.js.php:332
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:387
+#: admin/javascripts/admin.js.php:384
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:516
+#: admin/javascripts/admin.js.php:513
 msgid "The extension cannot be toggled because your web browser did not send proper credentials."
 msgstr ""
 
@@ -351,14 +352,14 @@ msgstr ""
 #: admin/pages/delete_group.twig:44
 #: admin/pages/delete_page.twig:20
 #: admin/pages/delete_post.twig:14
-#: admin/pages/delete_user.twig:47
+#: admin/pages/delete_user.twig:41
 msgid "Delete!"
 msgstr ""
 
 #: admin/pages/delete_group.twig:47
 #: admin/pages/delete_page.twig:23
 #: admin/pages/delete_post.twig:17
-#: admin/pages/delete_user.twig:50
+#: admin/pages/delete_user.twig:44
 msgid "Cancel"
 msgstr ""
 
@@ -403,20 +404,20 @@ msgstr ""
 msgid "Are you sure you want to delete user &#8220;%s&#8221;?"
 msgstr ""
 
-#: admin/pages/delete_user.twig:15
+#: admin/pages/delete_user.twig:14
 msgid "Attribute posts to:"
 msgstr ""
 
-#: admin/pages/delete_user.twig:24
-msgid "Delete posts:"
+#: admin/pages/delete_user.twig:16
+msgid "[Delete Posts]"
 msgstr ""
 
-#: admin/pages/delete_user.twig:31
+#: admin/pages/delete_user.twig:27
 msgid "Attribute pages to:"
 msgstr ""
 
-#: admin/pages/delete_user.twig:40
-msgid "Delete pages:"
+#: admin/pages/delete_user.twig:29
+msgid "[Delete Pages]"
 msgstr ""
 
 #: admin/pages/edit_group.twig:3
@@ -462,30 +463,30 @@ msgid "Editing User &#8220;%s&#8221;"
 msgstr ""
 
 #: admin/pages/edit_user.twig:10
-#: admin/pages/new_user.twig:33
+#: admin/pages/new_user.twig:31
 msgid "Full Name"
 msgstr ""
 
 #: admin/pages/edit_user.twig:14
-#: admin/pages/new_user.twig:37
+#: admin/pages/new_user.twig:35
 msgid "Email"
 msgstr ""
 
 #: admin/pages/edit_user.twig:18
 #: admin/pages/manage_users.twig:31
-#: admin/pages/new_user.twig:41
+#: admin/pages/new_user.twig:39
 msgid "Website"
 msgstr ""
 
 #: admin/pages/edit_user.twig:22
-#: admin/pages/new_user.twig:11
+#: admin/pages/new_user.twig:10
 msgid "Login"
 msgstr ""
 
 #: admin/pages/edit_user.twig:26
 #: admin/pages/manage_groups.twig:25
 #: admin/pages/manage_users.twig:29
-#: admin/pages/new_user.twig:15
+#: admin/pages/new_user.twig:14
 #: admin/partials/post_fields.twig:68
 msgid "Group"
 msgstr ""
@@ -495,7 +496,7 @@ msgid "New Password?"
 msgstr ""
 
 #: admin/pages/edit_user.twig:38
-#: admin/pages/new_user.twig:28
+#: admin/pages/new_user.twig:27
 msgid "Confirm"
 msgstr ""
 
@@ -549,22 +550,22 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: admin/pages/feathers.twig:28
-#: admin/pages/feathers.twig:70
-#: admin/pages/modules.twig:48
-#: admin/pages/modules.twig:111
+#: admin/pages/feathers.twig:29
+#: admin/pages/feathers.twig:73
+#: admin/pages/modules.twig:49
+#: admin/pages/modules.twig:114
 msgid "Disable"
 msgstr ""
 
-#: admin/pages/feathers.twig:41
-#: admin/pages/feathers.twig:83
-#: admin/pages/modules.twig:61
-#: admin/pages/modules.twig:124
+#: admin/pages/feathers.twig:43
+#: admin/pages/feathers.twig:87
+#: admin/pages/modules.twig:63
+#: admin/pages/modules.twig:128
 msgid "Enable"
 msgstr ""
 
-#: admin/pages/feathers.twig:50
-#: admin/pages/modules.twig:70
+#: admin/pages/feathers.twig:52
+#: admin/pages/modules.twig:72
 msgid "Disabled"
 msgstr ""
 
@@ -585,7 +586,7 @@ msgid "Chyrp URL"
 msgstr ""
 
 #: admin/pages/general_settings.twig:23
-#: admin/pages/import.twig:28
+#: admin/pages/import.twig:35
 #: admin/partials/post_fields.twig:10
 msgid "(optional)"
 msgstr ""
@@ -627,7 +628,7 @@ msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 
 #: admin/pages/import.twig:3
-#: admin/pages/import.twig:34
+#: admin/pages/import.twig:44
 msgid "Import"
 msgstr ""
 
@@ -635,28 +636,29 @@ msgstr ""
 msgid "What would you like to import?"
 msgstr ""
 
-#: admin/pages/import.twig:10
+#: admin/pages/import.twig:11
 msgid "Posts .atom File"
 msgstr ""
 
-#: admin/pages/import.twig:14
+#: admin/pages/import.twig:17
 msgid "Pages .atom File"
 msgstr ""
 
-#: admin/pages/import.twig:18
+#: admin/pages/import.twig:23
 msgid "Groups .json File"
 msgstr ""
 
-#: admin/pages/import.twig:22
+#: admin/pages/import.twig:29
 msgid "Users .json File"
 msgstr ""
 
-#: admin/pages/import.twig:26
+#: admin/pages/import.twig:34
 msgid "What URL is used for embedded media?"
 msgstr ""
 
-#: admin/pages/import.twig:30
-msgid "Usually something like <code>http://example.com/uploads/</code>."
+#: admin/pages/import.twig:39
+#, php-format
+msgid "Usually something like <code>%s/uploads/</code>."
 msgstr ""
 
 #: admin/pages/manage_groups.twig:3
@@ -702,7 +704,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:30
 #: admin/pages/manage_pages.twig:30
 #: admin/pages/manage_posts.twig:39
-#: admin/pages/manage_users.twig:33
+#: admin/pages/manage_users.twig:34
 msgid "Controls"
 msgstr ""
 
@@ -710,27 +712,28 @@ msgstr ""
 #: admin/pages/manage_groups.twig:51
 #: admin/pages/manage_pages.twig:46
 #: admin/pages/manage_pages.twig:52
+#: admin/pages/manage_users.twig:55
 msgid 'yes'
 msgstr ""
 
 #: admin/pages/manage_groups.twig:60
 #: admin/pages/manage_pages.twig:64
 #: admin/pages/manage_posts.twig:61
-#: admin/pages/manage_users.twig:56
+#: admin/pages/manage_users.twig:64
 msgid 'edit'
 msgstr ""
 
 #: admin/pages/manage_groups.twig:65
 #: admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:66
-#: admin/pages/manage_users.twig:61
+#: admin/pages/manage_users.twig:69
 msgid 'delete'
 msgstr ""
 
 #: admin/pages/manage_groups.twig:77
 #: admin/pages/manage_pages.twig:85
 #: admin/pages/manage_posts.twig:82
-#: admin/pages/manage_users.twig:77
+#: admin/pages/manage_users.twig:85
 #, php-format
 msgid "Page %d of %s"
 msgstr ""
@@ -778,7 +781,7 @@ msgstr ""
 
 #: admin/pages/manage_pages.twig:78
 #: admin/pages/manage_posts.twig:75
-#: admin/pages/manage_users.twig:70
+#: admin/pages/manage_users.twig:78
 msgid "(none)"
 msgstr ""
 
@@ -821,18 +824,22 @@ msgstr ""
 msgid "Joined"
 msgstr ""
 
+#: admin/pages/manage_users.twig:32
+msgid "Activated?"
+msgstr ""
+
 #: admin/pages/modules.twig:3
 #: admin/pages/modules.twig:6
 msgid "Modules"
 msgstr ""
 
 #: admin/pages/modules.twig:25
-#: admin/pages/modules.twig:87
-msgid "This module conflicts with the following installed modules:"
+#: admin/pages/modules.twig:89
+msgid "This module conflicts with the following modules:"
 msgstr ""
 
 #: admin/pages/modules.twig:35
-#: admin/pages/modules.twig:97
+#: admin/pages/modules.twig:99
 msgid "This module requires the following modules to be enabled:"
 msgstr ""
 
@@ -841,20 +848,12 @@ msgid "Add Group"
 msgstr ""
 
 #: admin/pages/new_user.twig:3
-#: admin/pages/new_user.twig:46
+#: admin/pages/new_user.twig:44
 msgid "Add User"
 msgstr ""
 
-#: admin/pages/new_user.twig:9
-msgid "Settings"
-msgstr ""
-
-#: admin/pages/new_user.twig:24
+#: admin/pages/new_user.twig:23
 msgid "Password"
-msgstr ""
-
-#: admin/pages/new_user.twig:31
-msgid "Information"
 msgstr ""
 
 #: admin/pages/route_settings.twig:3

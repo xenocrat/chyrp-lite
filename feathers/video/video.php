@@ -30,6 +30,8 @@
             else
                 error(__("Error"), __("You did not select a video to upload.", "video"), null, 422);
 
+            fallback($_POST['title'], "");
+            fallback($_POST['description'], "");
             fallback($_POST['slug'], $_POST['title']);
 
             return Post::add(array("title" => $_POST['title'],
@@ -43,6 +45,9 @@
                 $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
             } else
                 $filename = $post->filename;
+
+            fallback($_POST['title'], "");
+            fallback($_POST['description'], "");
 
             $post->update(array("title" => $_POST['title'],
                                 "filename" => $filename,

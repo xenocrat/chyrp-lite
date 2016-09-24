@@ -113,31 +113,19 @@
         }
 
         public function manage_posts_column_header() {
-            echo '<th class="post_tags">'.__("Tags", "tags").'</th>';
+            echo '<th class="post_tags list">'.__("Tags", "tags").'</th>';
         }
 
         public function manage_posts_column($post) {
-            echo '<td class="post_tags">'.implode(" ", $post->linked_tags).'</td>';
+            echo '<td class="post_tags list">'.implode(" ", $post->linked_tags).'</td>';
         }
 
-        static function manage_nav($navs) {
-            if (!Post::any_editable())
-                return $navs;
-
-            $navs["manage_tags"] = array("title" => __("Tags", "tags"),
-                                         "selected" => array("rename_tag", "delete_tag", "edit_tags"));
+        public function manage_nav($navs) {
+            if (Post::any_editable())
+                $navs["manage_tags"] = array("title" => __("Tags", "tags"),
+                                             "selected" => array("rename_tag", "delete_tag", "edit_tags"));
 
             return $navs;
-        }
-
-        static function manage_pages($pages) {
-            array_push($pages, "rename_tag");
-            return $pages;
-        }
-
-        static function manage_nav_pages($pages) {
-            array_push($pages, "manage_tags", "rename_tag", "delete_tag", "edit_tags");
-            return $pages;
         }
 
         public function admin_manage_tags($admin) {
@@ -294,8 +282,11 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (empty($_POST['original']) or empty($_POST['name']))
+            if (empty($_POST['original']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
+
+            if (empty($_POST['name']))
+                error(__("Error"), __("Name cannot be blank.", "tags"), null, 422);
 
             $sql = SQL::current();
             $new = self::prepare_tags(str_replace(",", " ", $_POST['name']));
@@ -361,7 +352,7 @@
             if (empty($_POST['name']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_tags");
 
             $sql = SQL::current();
@@ -437,7 +428,7 @@
             if (!isset($_GET['name']))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
                                      array("reason" => __("You did not specify a tag.", "tags")),
-                                        __("No Tag", "tags"));
+                                     __("No Tag", "tags"));
 
             $sql = SQL::current();
             $tags = explode(" ", $_GET['name']); # Detect multiple tags (clean tag names have no spaces).
@@ -467,7 +458,7 @@
             if (empty($ids))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
                                      array("reason" => __("There are no posts with the tag you specified.", "tags")),
-                                        __("Invalid Tag", "tags"));
+                                     __("Invalid Tag", "tags"));
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
                                                     "where" => array("id" => $ids))),
@@ -493,7 +484,9 @@
                                      array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
                                      null,
                                      array(),
-                                     null, null, null,
+                                     null,
+                                     null,
+                                     null,
                                      array(array("table" => "post_attributes",
                                                  "where" => "post_id = posts.id")))->fetchAll() as $tag) {
 
@@ -507,7 +500,9 @@
                 $popularity = array_count_values($names);
 
                 if (empty($popularity))
-                    return $main->resort("pages".DIR."tags", array("tag_cloud" => array()), __("No Tags", "tags"));
+                    return $main->resort("pages".DIR."tags",
+                                         array("tag_cloud" => array()),
+                                         __("No Tags", "tags"));
 
                 $max_qty = max($popularity);
                 $min_qty = min($popularity);
@@ -552,7 +547,7 @@
                 $_POST['tags'] = '';
         }
 
-        static function linked_tags($tags) {
+        public function linked_tags($tags) {
             if (empty($tags))
                 return array();
 
@@ -565,21 +560,22 @@
         }
 
         public function related_posts($ids, $post, $limit) {
+            if (empty($post->tags))
+                return $ids;
+
             foreach ($post->tags as $key => $tag) {
-                $like = self::tags_name_match($key);
-                $results = SQL::current()->query("SELECT DISTINCT __posts.id
-                                                  FROM __posts
-                                                  LEFT JOIN __post_attributes ON __posts.id = __post_attributes.post_id
-                                                    AND __post_attributes.name = 'tags'
-                                                    AND __posts.id != $post->id
-                                                  WHERE __post_attributes.value LIKE '$like'
-                                                  GROUP BY __posts.id
-                                                  ORDER BY __posts.created_at DESC
-                                                  LIMIT $limit")->fetchAll();
+                $results = SQL::current()->select("post_attributes",
+                                                  array("post_id"),
+                                                  array("name" => "tags",
+                                                        "value like" => self::tags_name_match($key),
+                                                        "post_id !=" => $post->id),
+                                                  array("ORDER BY" => "post_id DESC"),
+                                                  array(),
+                                                  $limit)->fetchAll();
 
                 foreach ($results as $result)
-                    if (isset($result["id"]))
-                        $ids[] = $result["id"];
+                    if (isset($result["post_id"]))
+                        $ids[] = $result["post_id"];
             }
 
             return $ids;
@@ -634,7 +630,9 @@
                                   array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
                                   null,
                                   array(),
-                                  null, null, null,
+                                  null,
+                                  null,
+                                  null,
                                   array(array("table" => "post_attributes",
                                               "where" => "post_id = posts.id")));
 
@@ -685,7 +683,7 @@
             return SQL::current()->escape($text, false);
         }
 
-        function feed_item($post) {
+        public function feed_item($post) {
             $config = Config::current();
 
             foreach ($post->tags as $tag => $clean)

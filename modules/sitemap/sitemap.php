@@ -16,24 +16,24 @@
         }
 
         static function __install() {
-            $set = array(Config::current()->set("module_sitemap",
-                                                array("blog_changefreq" => "daily",
-                                                      "pages_changefreq" => "yearly",
-                                                      "posts_changefreq" => "monthly")));
+            Config::current()->set("module_sitemap",
+                                   array("blog_changefreq" => "daily",
+                                         "pages_changefreq" => "yearly",
+                                         "posts_changefreq" => "monthly"));
         }
 
         static function __uninstall() {
             Config::current()->remove("module_sitemap");
         }
 
-        static function settings_nav($navs) {
+        public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["sitemap_settings"] = array("title" => __("Sitemap", "sitemap"));
 
             return $navs;
         }
 
-        static function admin_sitemap_settings($admin) {
+        public function admin_sitemap_settings($admin) {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
@@ -45,21 +45,23 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $set = array($config->set("module_sitemap",
-                                array("blog_changefreq" => $_POST['blog_changefreq'],
-                                      "pages_changefreq" => $_POST['pages_changefreq'],
-                                      "posts_changefreq" => $_POST['posts_changefreq'])));
+            fallback($_POST['blog_changefreq'], "daily");
+            fallback($_POST['pages_changefreq'], "yearly");
+            fallback($_POST['posts_changefreq'], "monthly");
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=sitemap_settings");
+            $config->set("module_sitemap",
+                         array("blog_changefreq" => $_POST['blog_changefreq'],
+                               "pages_changefreq" => $_POST['pages_changefreq'],
+                               "posts_changefreq" => $_POST['posts_changefreq']));
+
+            Flash::notice(__("Settings updated."), "/admin/?action=sitemap_settings");
         }
 
         /**
          * Function: make_sitemap
-         * Displays a sitemap of the blog.
+         * Generates a sitemap of the blog and writes it to the document root.
          */
-        public static function make_sitemap()
-        {
+        public function make_sitemap() {
             $result = SQL::current()->select("posts",
                                              "posts.id",
                                              array("posts.status" => "public"),

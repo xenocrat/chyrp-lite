@@ -2,7 +2,7 @@
 {% block content %}{% endblock %}
 <footer>
 {% if (module_enabled("tags") and post.linked_tags | length > 0) %}
-<div role="note" class="tags postinfo">
+<div role="note" class="tags">
 <a href="{{ url('tags') }}">{{ "Tags" | translate }}:</a> {{ post.linked_tags | join(" ") }}
 </div>
 {% endif %}
@@ -28,6 +28,12 @@
 {% endif %}
 {% if module_enabled("likes") %}
 {{ post.get_likes ? "&bull; " ~ post.get_likes : "" }}
+{% endif %}
+{% if module_enabled("pingable") and post.pingback_count is defined %}
+&bull;
+<a href="{{ post.url() }}#pingbacks" rel="bookmark" title="{{ 'View pingbacks' | translate }}">
+{{ "%s pingback" | translate_plural("%s pingbacks", post.pingback_count) | format(post.pingback_count) }}
+</a>
 {% endif %}
 {% if module_enabled("comments") and post.comment_status is defined and post.comment_count is defined %}
 {% if post.comment_status == "closed" %}

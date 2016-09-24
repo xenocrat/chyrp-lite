@@ -27,8 +27,10 @@
             if (!is_url($_POST['source']))
                 error(__("Error"), __("Invalid URL.", "link"));
 
-            $_POST['source'] = add_scheme($_POST['source']);
+            fallback($_POST['name'], "");
+            fallback($_POST['description'], "");
             fallback($_POST['slug'], $_POST['name']);
+            $_POST['source'] = add_scheme($_POST['source']);
 
             return Post::add(array("name" => $_POST['name'],
                                    "source" => $_POST['source'],
@@ -37,11 +39,13 @@
 
         public function update($post) {
             if (empty($_POST['source']))
-                error(__("Error"), __("URL can't be empty.", "link"));
+                error(__("Error"), __("URL can't be empty.", "link"), null, 422);
 
             if (!is_url($_POST['source']))
                 error(__("Error"), __("Invalid URL.", "link"));
 
+            fallback($_POST['name'], "");
+            fallback($_POST['description'], "");
             $_POST['source'] = add_scheme($_POST['source']);
 
             $post->update(array("name" => $_POST['name'],

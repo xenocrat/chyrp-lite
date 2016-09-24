@@ -109,17 +109,17 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if ($_POST['clear_cache'] == "indubitably")
+            if (isset($_POST['destroy']) and $_POST['clear_cache'] == "indubitably")
                 self::admin_clear_cache();
 
+            fallback($_POST['cache_expire'], 3600);
             fallback($_POST['cache_exclude'], array());
 
             $config = Config::current();
-            $set = array($config->set("cache_expire", (int) $_POST['cache_expire']),
-                         $config->set("cache_exclude", array_filter($_POST['cache_exclude'])));
+            $config->set("cache_expire", (int) $_POST['cache_expire']);
+            $config->set("cache_exclude", array_filter($_POST['cache_exclude']));
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");
+            Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");
         }
 
         public function admin_clear_cache() {

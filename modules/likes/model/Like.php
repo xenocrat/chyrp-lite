@@ -29,6 +29,12 @@
 
             # Remember likes in the visitor's session for attribution.
             fallback($_SESSION["likes"], array());
+
+            # Possible values for $_SESSION["likes"][$this->post_id]:
+            #     true - database contains an entry attributed to the current logged-in user.
+            #     false - session contains an entry for the current anonymous visitor.
+            #     null - database contains an entry attributed to this hash but session does not
+            #            (could be this visitor during a previous session, or another visitor from this IP).
         }
 
         /**
@@ -43,7 +49,7 @@
 
             foreach ($people as $person) {
                 if ($person["session_hash"] == $this->session_hash and !array_key_exists($this->post_id, $_SESSION["likes"]))
-                    $_SESSION["likes"][$this->post_id] = null; # Their hash is in the database but nothing in their session.
+                    $_SESSION["likes"][$this->post_id] = null;
 
                 if (!empty($this->user_id) and $person["user_id"] == $this->user_id)
                     $_SESSION["likes"][$this->post_id] = true;
@@ -116,23 +122,23 @@
             if ($sql->adapter == "mysql") {
                 # SQLite does not support KEY or UNIQUE in CREATE.
                 $sql->query("CREATE TABLE IF NOT EXISTS __likes (
-                               id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                               post_id INTEGER NOT NULL,
-                               user_id INTEGER NOT NULL,
-                               timestamp DATETIME DEFAULT NULL,
-                               session_hash VARCHAR(32) NOT NULL,
-                               KEY key_post_id (post_id),
-                               KEY key_user_id (post_id, user_id),
-                               UNIQUE key_session_hash (post_id, session_hash)
+                                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                                 post_id INTEGER NOT NULL,
+                                 user_id INTEGER NOT NULL,
+                                 timestamp DATETIME DEFAULT NULL,
+                                 session_hash VARCHAR(32) NOT NULL,
+                                 KEY key_post_id (post_id),
+                                 KEY key_user_id (post_id, user_id),
+                                 UNIQUE key_session_hash (post_id, session_hash)
                              ) DEFAULT CHARSET=utf8");
             } else {
                 # MySQL does not support CREATE INDEX IF NOT EXISTS.
                 $sql->query("CREATE TABLE IF NOT EXISTS __likes (
-                               id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                               post_id INTEGER NOT NULL,
-                               user_id INTEGER NOT NULL,
-                               timestamp DATETIME DEFAULT NULL,
-                               session_hash VARCHAR(32) NOT NULL
+                                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                                 post_id INTEGER NOT NULL,
+                                 user_id INTEGER NOT NULL,
+                                 timestamp DATETIME DEFAULT NULL,
+                                 session_hash VARCHAR(32) NOT NULL
                              )");
                 $sql->query("CREATE INDEX IF NOT EXISTS key_post_id ON __likes (post_id)");
                 $sql->query("CREATE INDEX IF NOT EXISTS key_user_id ON __likes (post_id, user_id)");

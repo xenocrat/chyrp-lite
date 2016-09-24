@@ -23,6 +23,11 @@
             Route::current()->remove("category/(name)/");
         }
 
+        public function list_permissions($names = array()) {
+            $names["manage_categorize"] = __("Manage Categories", "categorize");
+            return $names;
+        }
+
         public function feed_item($post) {
             if (!empty($post->category_id) OR $post->category != 0)
                printf("        <category term=\"%s\" />\n", fix(Category::getCategory($post->category_id)->name, true));
@@ -61,19 +66,39 @@
             return $xml_cats;
         }
 
+        public function related_posts($ids, $post, $limit) {
+            if (empty($post->category_id))
+                return $ids;
+
+            $results = SQL::current()->select("post_attributes",
+                                              array("post_id"),
+                                              array("name" => "category_id",
+                                                    "value" => $post->category_id,
+                                                    "post_id !=" => $post->id),
+                                              array("ORDER BY" => "post_id DESC"),
+                                              array(),
+                                              $limit)->fetchAll();
+
+            foreach ($results as $result)
+                if (isset($result["post_id"]))
+                    $ids[] = $result["post_id"];
+
+            return $ids;
+        }
+
         public function parse_urls($urls) {
             $urls["|/category/(.*?)/|"] = "/?action=category&name=$1";
             return $urls;
         }
 
         public function manage_posts_column_header() {
-            echo '<th class="post_category">'.__("Category", "categorize").'</th>';
+            echo '<th class="post_category value">'.__("Category", "categorize").'</th>';
         }
 
         public function manage_posts_column($post) {
-            echo (isset($post->category->name) && $post->category->id != false)
-                ? '<td class="post_category">'.fix($post->category->name).'</td>'
-                : '<td class="post_category">&nbsp;</td>';
+            echo (!empty($post->category_id) and isset($post->category->name))
+                ? '<td class="post_category value">'.fix($post->category->name).'</td>'
+                : '<td class="post_category value">&nbsp;</td>';
         }
 
         public function post_options($fields, $post = null) {
@@ -82,7 +107,7 @@
             $fields_list[0]["value"] = "0";
             $fields_list[0]["name"] = __("[None]", "categorize");
 
-            if (!isset($post->category_id) or $post->category_id == 0)
+            if (empty($post->category_id))
                 $fields_list[0]["selected"] = true;
             else
                 $fields_list[0]["selected"] = false;
@@ -109,7 +134,7 @@
         }
 
         public function main_context($context) {
-            $categories = Category::getCategoryList(true);
+            $categories = Category::getCategoryList();
             $context["categorize"] = array();
 
             foreach ($categories as $category)
@@ -133,9 +158,9 @@
                                      __("Invalid Category", "categorize"));
 
             $attributes = SQL::current()->select("post_attributes",
-                                           array("post_id"),
-                                           array("name" => "category_id",
-                                                 "value" => $category->id));
+                                                 array("post_id"),
+                                                 array("name" => "category_id",
+                                                       "value" => $category->id));
 
             $ids = array();
 
@@ -159,26 +184,27 @@
                            _f("Posts in category %s", fix($category->name), "categorize"));
         }
 
-        static function manage_nav($navs) {
-            if (!Visitor::current()->group->can('manage_categorize'))
-                return $navs;
-
-            $navs["manage_category"] = array("title" => __("Categories", "categorize"),
-                                             "selected" => array("new_category", "delete_category", "edit_category"));
+        public function manage_nav($navs) {
+            if (Visitor::current()->group->can('manage_categorize'))
+                $navs["manage_category"] = array("title" => __("Categories", "categorize"),
+                                                 "selected" => array("new_category", "delete_category", "edit_category"));
 
             return $navs;
         }
 
-        static function manage_nav_pages($pages) {
-            array_push($pages, "manage_category", "new_category", "delete_category", "edit_category");
-            return $pages;
+        public function admin_determine_action($action) {
+            if ($action == "manage" and Visitor::current()->group->can("manage_categorize"))
+                return "manage_category";
         }
 
         public function admin_manage_category($admin) {
             if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
-            $admin->display("manage_category", array("categorize" => Category::getCategoryList()));
+            fallback($_GET['query'], "");
+            list($where, $params) = keywords($_GET['query'], "name LIKE :query", "categorize");
+
+            $admin->display("manage_category", array("categorize" => Category::getCategoryList($where, $params)));
         }
 
         public function admin_new_category($admin) {
@@ -196,7 +222,7 @@
                 error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"), null, 400);
 
             Category::addCategory($_POST['name'],
-                                  oneof($_POST['clean'], $_POST['name']),
+                                  oneof(@$_POST['clean'], $_POST['name']),
                                   !empty($_POST['show_on_home']) ? 1 : 0);
 
             Flash::notice(__("Category added.", "categorize"), "/admin/?action=manage_category");
@@ -238,7 +264,7 @@
 
             Category::updateCategory($_POST['id'],
                                      $_POST['name'],
-                                     oneof($_POST['clean'], $_POST['name']),
+                                     oneof(@$_POST['clean'], $_POST['name']),
                                      !empty($_POST['show_on_home']) ? 1 : 0);
 
             Flash::notice(__("Category updated.", "categorize"), "/admin/?action=manage_category");
@@ -266,7 +292,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
 
-            if ($_POST['destroy'] != "indubitably")
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("/admin/?action=manage_category");
 
             $category = Category::getCategory($_POST['id']);

@@ -7,9 +7,9 @@
 <p>
 {{ "Are you sure you want to delete the &#8220;%s&#8221; group?" | translate | format(group.name | fix) }}
 </p>
-<form class="delete split{{ group.id == visitor.group.id ? ' confirm' : '' }}" action="{{ admin_url('destroy_group') }}" method="post" accept-charset="UTF-8">
+<form class="delete split" action="{{ admin_url('destroy_group') }}" method="post" accept-charset="UTF-8">
 <fieldset>
-{% if group.users and groups %}
+{% if group.users is not empty and groups is not empty %}
 <p>
 <label for="move_group">{{ "Move members to:" | translate }}</label>
 <select name="move_group" id="move_group">
@@ -24,7 +24,7 @@
 <label for="default_group">{{ "New default group:" | translate }}</label>
 <select name="default_group" id="default_group">
 {% for group in groups %}
-<option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>{{ group.name }}</option>
+<option value="{{ group.id }}"{{ group.id | selected(site.guest_group) }}>{{ group.name }}</option>
 {% endfor %}
 </select>
 </p>

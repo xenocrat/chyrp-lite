@@ -1,5 +1,6 @@
 <?php
     require_once "common.php";
+
     header("Content-Type: text/xml; charset=UTF-8");
     echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
 ?>

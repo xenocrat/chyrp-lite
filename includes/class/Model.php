@@ -239,6 +239,7 @@
 
             $sql = SQL::current();
             $trigger = Trigger::current();
+
             $trigger->filter($options, $model_name."_grab");
 
             if (!empty($options["read_from"]))
@@ -363,7 +364,6 @@
 
             $shown_dates = array();
             $results = array();
-
             $rows = array();
 
             foreach ($grab as $row)
@@ -374,7 +374,7 @@
                 foreach ($row as $name => &$column) {
                     $column = (!in_array($name, $options["ignore_dupes"]) ?
                                   array_unique($column) :
-                                  $column);
+                                  $column) ;
                     $column = (count($column) == 1) ?
                                   $column[0] :
                                   $column ;

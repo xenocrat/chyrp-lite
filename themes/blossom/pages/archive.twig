@@ -1,16 +1,27 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-{% if archives is defined and archives is not empty %}
+
 {# List? (For all/yearly archives) #}
+{% if months is not empty %}
+{% if archive.prev is not empty %}
+<div role="navigation" class="prev traversal">
+<a href="{{ url('archive/%s/' | format(archive.prev | strftimeformat('%Y'))) }}">
+{{ "Archive of %s" | translate | format(archive.prev | strftimeformat("%Y")) }}
+</a>
+</div>
+{% endif %}
 <div class="archive standalone">
-{% for archive in archives %}
-<h3 id="label_{{ archive.timestamp }}_archive" class="archive"><a href="{{ archive.url }}">{{ archive.timestamp | strftimeformat("%B %Y" | translate) }}</a></h3>
-<ul aria-labelledby="label_{{ archive.timestamp }}_archive" class="archive{{ GET.year != null ? ' yearly' : '' }}">
-{% for post in archive.posts %}
+{% for timestamp, month in months %}
+<h3 id="label_{{ timestamp }}_archive" class="archive">
+<a href="{{ url('archive/%s/' | format(timestamp | strftimeformat('%Y/%m'))) }}">
+{{ timestamp | strftimeformat("%B %Y" | translate) }}
+</a>
+</h3>
+<ul aria-labelledby="label_{{ timestamp }}_archive" class="archive{{ archive.depth == 'year' ? ' yearly' : '' }}">
+{% for post in month %}
 <li>
-{% if GET.year != null %}
-{# Yearly archive: display thumbnails #}
+{% if archive.depth == "year" %}
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
 {% if post.title is not empty and post.feather != "photo" %}
 <h4 class="yearly">{{ post.title | striptags | normalize | truncate(20) }}</h4>
@@ -20,10 +31,11 @@
 {% else %}
 <p>{{ post.excerpt() | striptags | normalize }}</p>
 {% endif %}
-<a href="{{ post.url() }}" class="archive_post_link">{{ "Permanent link to &#8220;%s&#8221;" | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}</a>
+<a href="{{ post.url() }}" class="archive_post_link">
+{{ "Permanent link to &#8220;%s&#8221;" | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}
+</a>
 </article>
 {% else %}
-{# Complete archive: display titles to minimise content payload #}
 <a href="{{ post.url() }}">
 <h4 class="archive">{{ post.title() | oneof(post.slug) | striptags | normalize | truncate(80) }}</h4>
 </a>
@@ -34,35 +46,28 @@
 <div class="clear"></div>
 {% endfor %}
 </div>
-{% if preceding.no_results == false %}
-{# Link to a previous year if we found a post preceding this archive #}
+{% if archive.next is not empty %}
 <div role="navigation" class="next traversal">
-<a href="{{ url('archive/%s/') | format(preceding.created_at | strftimeformat('%Y')) }}">{{ "Archive of %s &rarr;" | translate | format(preceding.created_at | strftimeformat("%Y")) }}</a>
+<a href="{{ url('archive/%s/' | format(archive.next | strftimeformat('%Y'))) }}">
+{{ "Archive of %s" | translate | format(archive.next | strftimeformat("%Y")) }}
+</a>
 </div>
 {% endif %}
 {% endif %}
 
-{% if posts is defined and posts.paginated is not empty %}
 {# Posts? (For daily/monthly archives) #}
-{% if archive.depth == "day" %}
-<div class="ribbon">
-<h3 role="status" class="ribbon">{{ "Archive of %s" | translate | format(archive.timestamp | strftimeformat("%d %B, %Y" | translate)) }}</h3>
-</div>
-{% endif %}
-{% if archive.depth == "month" %}
-<div class="ribbon">
-<h3 role="status" class="ribbon">{{ "Archive of %s" | translate | format(archive.timestamp | strftimeformat("%B %Y" | translate)) }}</h3>
-</div>
-{% endif %}
+{% if posts.paginated is not empty %}
+<div class="ribbon"><h3 role="status" class="ribbon">{{ title }}</h3></div>
 {% for post in posts.paginated %}
 {% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% endfor %}
 {% endif %}
 
-{% if (archives is not defined or archives is empty) and (posts is not defined or posts.paginated is empty ) %}
 {# No results #}
+{% if months is empty and posts.paginated is empty %}
 <div class="ribbon">
-<h3 role="status" class="ribbon">{{ "There aren't any posts in the timeframe you specified" | translate }}</h3>
+<h3 role="status" class="ribbon">{{ "There aren't any posts in the timeframe you specified." | translate }}</h3>
 </div>
 {% endif %}
+
 {% endblock %}

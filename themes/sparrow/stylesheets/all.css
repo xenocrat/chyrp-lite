@@ -332,10 +332,19 @@ div#main > article, div.standalone {            box-sizing: border-box;
                                                 clear: both;
                                                 margin: 0em auto;
                                                 padding: 4rem 4rem 0rem 4rem }
+div#main > article.discourse,
 div#main > article.commentary {                 padding: 0rem 4rem;
                                                 margin-top: 4rem;
                                                 overflow: hidden;
                                                 border-bottom: none }
+div#main > article.discourse > div {            box-sizing: border-box;
+                                                display: block;
+                                                position: relative;
+                                                width: 100%;
+                                                margin: 0em;
+                                                padding: 2rem 2rem 1rem 2rem;
+                                                background-color: #f5f4f0;
+                                                border: 1px solid #c2bcb8 }
 div.tags.standalone {                           line-height: 2 }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
@@ -579,6 +588,7 @@ img.gravatar {                                  position: absolute;
     button#search_submit {                      display: none }
     div.prev {                                  margin-top: 2rem }
     div#main > article, div.standalone {        padding: 2rem 2rem 0rem 2rem }
+    div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 2rem }
     div.metadata {                              padding-bottom: 2rem }
     ol.comments li {                            padding: 2rem }
@@ -600,5 +610,6 @@ img.gravatar {                                  position: absolute;
     div.search_box {                            display: inline-block }
     div#main > article, div.standalone {        padding-left: 8rem;
                                                 padding-right: 8rem }
+    div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 8rem }
 }

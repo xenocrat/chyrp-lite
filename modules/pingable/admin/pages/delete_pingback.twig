@@ -1,0 +1,24 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Delete Pingback?" | translate("pingable") }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Delete Pingback?" | translate("pingable") }}</h1>
+<p>
+{{ "Are you sure you want to delete the pingback from &#8220;%s&#8221;?" | translate("pingable") | format(pingback.title | fix) }}
+</p>
+<form class="delete" action="{{ admin_url('destroy_pingback') }}" method="post" accept-charset="UTF-8">
+<fieldset>
+<div class="confirmation">
+<button name="destroy" value="indubitably" class="boo">
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Delete!" | translate }}
+</button>
+<button name="destroy" value="undecidedly" type="submit" class="yay">
+<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="icon">{{ "Cancel" | translate }}
+</button>
+</div>
+<input type="hidden" name="id" value="{{ pingback.id }}" id="id">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

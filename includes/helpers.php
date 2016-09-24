@@ -71,9 +71,7 @@
     function redirect($url, $use_chyrp_url = false) {
         # Handle URIs without domain.
         if (strpos($url, "/") === 0)
-            $url = (ADMIN or $use_chyrp_url) ?
-                       Config::current()->chyrp_url.$url :
-                       Config::current()->url.$url ;
+            $url = (ADMIN or $use_chyrp_url) ? Config::current()->chyrp_url.$url : Config::current()->url.$url ;
         elseif (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
@@ -187,14 +185,16 @@
                                  rtrim("/".ltrim($url_path, "/"), "/")."/",
                                  file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
 
-        if (!file_exists(MAIN_DIR.DIR.".htaccess"))
-            return @file_put_contents(MAIN_DIR.DIR.".htaccess", $template);
+        $filepath = MAIN_DIR.DIR.".htaccess";
 
-        if (!is_readable(MAIN_DIR.DIR.".htaccess"))
+        if (!file_exists($filepath))
+            return @file_put_contents($filepath, $template);
+
+        if (!is_file($filepath) or !is_readable($filepath))
             return false;
 
-        if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents(MAIN_DIR.DIR.".htaccess")))
-            return @file_put_contents(MAIN_DIR.DIR.".htaccess", "\n\n".$template, FILE_APPEND);
+        if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents($filepath)))
+            return @file_put_contents($filepath, "\n\n".$template, FILE_APPEND);
 
         return true;
     }
@@ -249,7 +249,7 @@
         if (isset($l10n[$domain]))
             return;
 
-        if (!is_readable($mofile))
+        if (!is_file($mofile) or !is_readable($mofile))
             return;
 
         $input = new gettext_CachedFileReader($mofile);
@@ -267,7 +267,7 @@
      *     A localised display name, e.g. "English (United States)".
      */
     function lang_code($code) {
-        return (class_exists("Locale")) ? Locale::getDisplayName($code, $code) : $code ;
+        return class_exists("Locale") ? Locale::getDisplayName($code, $code) : $code ;
     }
 
     /**
@@ -283,7 +283,7 @@
      */
     function __($text, $domain = "chyrp") {
         global $l10n;
-        return (isset($l10n[$domain])) ? $l10n[$domain]->translate($text) : $text ;
+        return isset($l10n[$domain]) ? $l10n[$domain]->translate($text) : $text ;
     }
 
     /**
@@ -301,7 +301,7 @@
      */
     function _p($single, $plural, $number, $domain = "chyrp") {
         global $l10n;
-        return (isset($l10n[$domain])) ?
+        return isset($l10n[$domain]) ?
                      $l10n[$domain]->ngettext($single, $plural, $number) : (($number != 1) ? $plural : $single) ;
     }
 
@@ -340,7 +340,7 @@
      *     A time/date string with the supplied formatting.
      */
     function when($formatting, $when, $strftime = false) {
-        $time = (is_numeric($when)) ? $when : strtotime($when) ;
+        $time = is_numeric($when) ? $when : strtotime($when) ;
 
         if ($strftime)
             return strftime($formatting, $time);
@@ -361,7 +361,7 @@
     function datetime($when = null) {
         fallback($when, time());
 
-        $time = (is_numeric($when)) ? $when : strtotime($when) ;
+        $time = is_numeric($when) ? $when : strtotime($when) ;
 
         return date("Y-m-d H:i:s", $time);
     }
@@ -676,7 +676,7 @@
         $parse = (array) $parse;
 
         foreach ($parse as &$val)
-            if (get_class($val) == "SimpleXMLElement")
+            if (is_object($val) and get_class($val) == "SimpleXMLElement")
                 $val = xml2arr($val);
 
         return $parse;
@@ -764,14 +764,14 @@
                                 array(DIR, DIR, ""),
                                 ltrim($class, "\\")).".php";
 
-        if (file_exists(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
+        if (is_file(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
             require INCLUDES_DIR.DIR."lib".DIR.$filepath;
             return;
         }
 
         if (!INSTALLING and !UPGRADING)
             foreach ((array) Config::current()->enabled_modules as $module)
-                if (file_exists(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
+                if (is_file(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
                     require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
                     return;
                 }
@@ -1226,7 +1226,7 @@
                     chr(197).chr(180) => 'W', chr(197).chr(181) => 'w', chr(197).chr(182) => 'Y', chr(197).chr(183) => 'y',
                     chr(197).chr(184) => 'Y', chr(197).chr(185) => 'Z', chr(197).chr(186) => 'z', chr(197).chr(187) => 'Z',
                     chr(197).chr(188) => 'z', chr(197).chr(189) => 'Z', chr(197).chr(190) => 'z', chr(197).chr(191) => 's'
-                    # Additional substitution keys can be generated using: e.g. unpack("C*", "€");
+                    # Additional substitution keys can be generated using: e.g. echo implode(",", unpack("C*", "€"));
                 ));
 
             # Remove any characters that remain after substitution.
@@ -1234,10 +1234,10 @@
         }
 
         if ($force_lowercase)
-            $clean = (function_exists('mb_strtolower')) ? mb_strtolower($clean, 'UTF-8') : strtolower($clean) ;
+            $clean = function_exists('mb_strtolower') ? mb_strtolower($clean, 'UTF-8') : strtolower($clean) ;
 
         if ($trunc)
-            $clean = (function_exists('mb_substr')) ? mb_substr($clean, 0, $trunc, 'UTF-8') : substr($clean, 0, $trunc) ;
+            $clean = function_exists('mb_substr') ? mb_substr($clean, 0, $trunc, 'UTF-8') : substr($clean, 0, $trunc) ;
 
         return $clean;
     }
@@ -1517,8 +1517,46 @@
     }
 
     #---------------------------------------------
-    # Modules and Feathers
+    # Extensions
     #---------------------------------------------
+
+    /**
+     * Function: load_info
+     * Loads an extension's info.php file and returns an array of attributes.
+     */
+    function load_info($filepath) {
+        if (is_file($filepath) and is_readable($filepath))
+            $info = include $filepath;
+
+        if (!isset($info) or gettype($info) != "array")
+            $info = array();
+
+        fallback($info["name"],          fix(basename(dirname($filepath))));
+        fallback($info["version"],       0);
+        fallback($info["url"],           "");
+        fallback($info["description"],   "");
+        fallback($info["author"],        array("name" => "", "url" => ""));
+        fallback($info["help"]);
+        fallback($info["confirm"]);
+        fallback($info["uploader"],      false);
+        fallback($info["conflicts"],     array());
+        fallback($info["dependencies"],  array());
+        fallback($info["notifications"], array());
+
+        $info["conflicts"]             = (array) $info["conflicts"];
+        $info["dependencies"]          = (array) $info["dependencies"];
+        $info["notifications"]         = (array) $info["notifications"];
+
+        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+
+        if ($info["uploader"])
+            if (!is_dir($uploads_path))
+                $info["notifications"][] = _f("Please create the directory <em>%s</em>.", fix($uploads_path));
+            elseif (!is_writable($uploads_path))
+                $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", fix($uploads_path));
+
+        return $info;
+    }
 
     /**
      * Function: init_extensions
@@ -1530,16 +1568,16 @@
         # Instantiate all Modules.
         foreach ((array) $config->enabled_modules as $module) {
             $class_name = camelize($module);
+            $filepath = MODULES_DIR.DIR.$module.DIR.$module.".php";
 
-            if (!file_exists(MODULES_DIR.DIR.$module.DIR.$module.".php") or
-                !file_exists(MODULES_DIR.DIR.$module.DIR."info.php")) {
+            if (!is_file($filepath) or !is_readable($filepath)) {
                 cancel_module($module, _f("%s module is missing.", $class_name));
                 continue;
             }
 
             load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
 
-            require MODULES_DIR.DIR.$module.DIR.$module.".php";
+            require $filepath;
 
             if (!is_subclass_of($class_name, "Modules")) {
                 cancel_module($module, _f("%s module is damaged.", $class_name));
@@ -1549,23 +1587,23 @@
             Modules::$instances[$module] = new $class_name;
             Modules::$instances[$module]->safename = $module;
 
-            foreach (include MODULES_DIR.DIR.$module.DIR."info.php" as $key => $val)
+            foreach (load_info(MODULES_DIR.DIR.$module.DIR."info.php") as $key => $val)
                 Modules::$instances[$module]->$key = $val;
         }
 
         # Instantiate all Feathers.
         foreach ((array) $config->enabled_feathers as $feather) {
             $class_name = camelize($feather);
+            $filepath = FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
-            if (!file_exists(FEATHERS_DIR.DIR.$feather.DIR.$feather.".php") or
-                !file_exists(FEATHERS_DIR.DIR.$feather.DIR."info.php")) {
+            if (!is_file($filepath) or !is_readable($filepath)) {
                 cancel_feather($feather, _f("%s feather is missing.", $class_name));
                 continue;
             }
 
             load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
 
-            require FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
+            require $filepath;
 
             if (!is_subclass_of($class_name, "Feathers")) {
                 cancel_feather($feather, _f("%s feather is damaged.", $class_name));
@@ -1575,7 +1613,7 @@
             Feathers::$instances[$feather] = new $class_name;
             Feathers::$instances[$feather]->safename = $feather;
 
-            foreach (include FEATHERS_DIR.DIR.$feather.DIR."info.php" as $key => $val)
+            foreach (load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php") as $key => $val)
                 Feathers::$instances[$feather]->$key = $val;
         }
 
@@ -1592,7 +1630,7 @@
 
     /**
      * Function: module_enabled
-     * Determines if a module is currently enabled.
+     * Determines if a module is currently enabled and not cancelled.
      *
      * Parameters:
      *     $name - The non-camelized name of the module.
@@ -1606,7 +1644,7 @@
 
     /**
      * Function: feather_enabled
-     * Determines if a feather is currently enabled.
+     * Determines if a feather is currently enabled and not cancelled.
      *
      * Parameters:
      *     $name - The non-camelized name of the feather.
@@ -1690,6 +1728,9 @@
         if (!is_uploaded_file($file['tmp_name']))
             show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", fix($file['name'])));
 
+        if (!is_dir($uploads_path))
+            error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
+
         if (!is_writable($uploads_path))
             error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
 
@@ -1747,9 +1788,16 @@
     function upload_from_url($url, $redirects = 3, $timeout = 10) {
         preg_match("~\.[a-z0-9]+(?=($|\?))~i", $url, $file_ext);
         fallback($file_ext[0], "bin"); # Assume unknown binary file.
+        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+
+        if (!is_dir($uploads_path))
+            error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
+
+        if (!is_writable($uploads_path))
+            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
 
         $filename = unique_filename(md5($url).".".$file_ext[0]);
-        $filepath = MAIN_DIR.Config::current()->uploads_path.$filename;
+        $filepath = $uploads_path.$filename;
 
         file_put_contents($filepath, get_remote($url, $redirects, $timeout));
         return $filename;
@@ -1953,7 +2001,7 @@
      */
     function add_scheme($url, $scheme = null) {
         preg_match('~^([a-z]+://)?(.+)~i', $url, $matches);
-        $matches[1] = (isset($scheme)) ? $scheme : oneof($matches[1], "http://") ;
+        $matches[1] = isset($scheme) ? $scheme : oneof($matches[1], "http://") ;
         return $url = $matches[1].$matches[2];
     }
 
@@ -1981,12 +2029,11 @@
      *     A string containing HTML elements to add to a form.
      */
     function generate_captcha() {
-        global $captchaHooks;
+        foreach (get_declared_classes() as $class)
+            if (in_array("Captcha", class_implements($class)))
+                return call_user_func($class."::getCaptcha");
 
-        if (!$captchaHooks)
-           return false;
-
-        return call_user_func($captchaHooks[0] . "::getCaptcha");
+        return false;
     }
 
     /**
@@ -1997,12 +2044,11 @@
      *     Whether or not the captcha was defeated.
      */
     function check_captcha() {
-        global $captchaHooks;
+        foreach (get_declared_classes() as $class)
+            if (in_array("Captcha", class_implements($class)))
+                return call_user_func($class."::verifyCaptcha");
 
-        if (!$captchaHooks)
-           return true;
-
-        return call_user_func($captchaHooks[0] . "::verifyCaptcha");
+        return false;
     }
 
     /**
@@ -2053,7 +2099,7 @@
         $encoded = json_encode($value, $options);
 
         if (json_last_error())
-            trigger_error(_f("JSON encoding error: %s", json_last_error_msg()), E_USER_WARNING);
+            trigger_error(_f("JSON encoding error: %s", fix(json_last_error_msg())), E_USER_WARNING);
 
         return $encoded;
     }
@@ -2074,7 +2120,7 @@
         $decoded = json_decode($value, $assoc, $depth);
 
         if (json_last_error())
-            trigger_error(_f("JSON decoding error: %s", json_last_error_msg()), E_USER_WARNING);
+            trigger_error(_f("JSON decoding error: %s", fix(json_last_error_msg())), E_USER_WARNING);
 
         return $decoded;
     }

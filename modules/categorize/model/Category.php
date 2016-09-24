@@ -15,7 +15,7 @@
                                             array(':id' => $id), 1)->fetchObject();
 
             if (!empty($query))
-                $query->url = url("category/".$query->url);
+                $query->url = url("category/".$query->url, MainController::current());
 
             return $query;
         }
@@ -28,7 +28,7 @@
                                             array(":clean" => $name), 1)->fetchObject();
 
             if (!empty($query))
-                $query->url = url("category/".$query->url);
+                $query->url = url("category/".$query->url, MainController::current());
 
             return $query;
         }
@@ -41,33 +41,21 @@
                                           array(":name" => $name), 1)->fetchObject();
         }
 
-        static function getCategoryList($total = false) {
-            if ($total)
-                $query = SQL::current()->select(array('categorize',
-                                                      'post_attributes',
-                                                      'posts'),
-                                                implode(", ",
-                                                        array("__categorize.name",
-                                                              "__categorize.clean",
-                                                              "__categorize.show_on_home",
-                                                              "count(__categorize.id) AS total",
-                                                              "__categorize.clean AS url")),
-                                                array("post_attributes.post_id = posts.id",
-                                                      "post_attributes.name = 'category_id'",
-                                                      "post_attributes.value = categorize.id"),
-                                                "`__categorize.name` ASC",
-                                                array(),
-                                                null,
-                                                null,
-                                                "__categorize.name")->fetchAll();
-            else
-                $query = SQL::current()->select("categorize",
-                                                "id, name, clean, show_on_home, clean AS url",
-                                                null,
-                                                "name ASC")->fetchAll();
+        static function getCategoryList($conds = null, $params = array()) {
+            $sql = SQL::current();
 
-            foreach ($query as &$result)
-                $result["url"] = url("category/".$result["url"]);
+            $query = $sql->select("categorize",
+                                  "id, name, clean, show_on_home, clean AS url",
+                                  $conds,
+                                  "name ASC",
+                                  $params)->fetchAll();
+
+            foreach ($query as &$result) {
+                $result["url"]   = url("category/".$result["url"], MainController::current());
+                $result["total"] = $sql->count("post_attributes",
+                                               array("name" => "category_id",
+                                                     "value" => $result["id"]));
+            }
 
             return $query;
         }
@@ -95,14 +83,16 @@
         }
 
         static function deleteCategory($id = int) {
-            SQL::current()->delete("categorize",
-                                   "id = :id",
-                                   array(":id" => $id));
+            $sql = SQL::current();
 
-            SQL::current()->update("post_attributes",
-                                   "`name` = 'category_id' AND `value` = :id",
-                                   array("value" => 0),
-                                   array(":id" => $id));
+            $sql->delete("categorize",
+                         "id = :id",
+                         array(":id" => $id));
+
+            $sql->update("post_attributes",
+                         "`name` = 'category_id' AND `value` = :id",
+                         array("value" => 0),
+                         array(":id" => $id));
         }
 
         static function install() {

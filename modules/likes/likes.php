@@ -25,7 +25,13 @@
             Config::current()->remove("module_like");
         }
 
-        static function admin_like_settings($admin) {
+        public function list_permissions($names = array()) {
+            $names["like_post"]   = __("Like Posts", "likes");
+            $names["unlike_post"] = __("Unlike Posts", "likes");
+            return $names;
+        }
+
+        public function admin_like_settings($admin) {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
@@ -37,23 +43,24 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            $set = array($config->set("module_like",
-                                array("showOnFront" => isset($_POST['showOnFront']),
-                                      "likeWithText" => isset($_POST['likeWithText']),
-                                      "likeImage" => $_POST['likeImage'])));
+            fallback($_POST['likeImage'], $config->chyrp_url."/modules/likes/images/pink.svg");
 
-            if (!in_array(false, $set))
-                Flash::notice(__("Settings updated."), "/admin/?action=like_settings");
+            $config->set("module_like",
+                         array("showOnFront" => isset($_POST['showOnFront']),
+                               "likeWithText" => isset($_POST['likeWithText']),
+                               "likeImage" => $_POST['likeImage']));
+
+            Flash::notice(__("Settings updated."), "/admin/?action=like_settings");
         }
 
-        static function settings_nav($navs) {
+        public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["like_settings"] = array("title" => __("Likes", "likes"));
 
             return $navs;
         }
 
-        static function route_like() {
+        public function route_like() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
@@ -71,7 +78,7 @@
             Flash::notice(__("Post liked.", "likes"), $post->url()."#likes_".$post->id);
         }
 
-        static function route_unlike() {
+        public function route_unlike() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
@@ -89,16 +96,16 @@
             Flash::notice(__("Post unliked.", "likes"), $post->url()."#likes_".$post->id);
         }
 
-        static function stylesheets($styles) {
+        public function stylesheets($styles) {
             $styles[] = Config::current()->chyrp_url."/modules/likes/style.css";
             return $styles;
         }
 
-        static function javascript() {
+        public function javascript() {
             include MODULES_DIR.DIR."likes".DIR."javascript.php";
         }
 
-        static function ajax_like() {
+        public function ajax_like() {
             if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
@@ -124,7 +131,7 @@
             json_response($text, true);
         }
 
-        static function ajax_unlike() {
+        public function ajax_unlike() {
             if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
@@ -150,11 +157,11 @@
             json_response($text, true);
         }
 
-        static function delete_post($post) {
+        public function delete_post($post) {
             SQL::current()->delete("likes", array("post_id" => $post->id));
         }
 
-        static function delete_user($user) {
+        public function delete_user($user) {
             SQL::current()->update("likes", array("user_id" => $user->id), array("user_id" => 0));
         }
 
@@ -163,7 +170,7 @@
             $post->get_likes = self::get_likes($post);
         }
 
-        static function get_likes($post) {
+        public function get_likes($post) {
             $config = Config::current();
             $route = Route::current();
             $visitor = Visitor::current();
@@ -249,12 +256,12 @@
         }
 
         public function manage_posts_column_header() {
-            echo '<th class="post_likes">'.__("Likes", "tags").'</th>';
+            echo '<th class="post_likes value">'.__("Likes", "tags").'</th>';
         }
 
         public function manage_posts_column($post) {
             $like = new Like(array("post_id" => $post->id));
-            echo '<td class="post_likes">'.$like->fetchCount().'</td>';
+            echo '<td class="post_likes value">'.$like->fetchCount().'</td>';
         }
 
         public function import_chyrp_post($entry, $post) {
@@ -264,13 +271,20 @@
                 return;
 
             foreach ($chyrp->like as $like) {
+                $sql = SQL::current();
+
                 $timestamp = $like->children("http://www.w3.org/2005/Atom")->published;
                 $session_hash = $like->children("http://chyrp.net/export/1.0/")->hash;
                 $login = $like->children("http://chyrp.net/export/1.0/")->login;
 
                 $user = new User(array("login" => (string) $login));
 
-                SQL::current()->insert("likes",
+                $count = $sql->count("likes",
+                                     array("post_id" => $post->id,
+                                           "session_hash" => $session_hash));
+
+                if (!$count)
+                    $sql->insert("likes",
                                  array("post_id" => $post->id,
                                        "user_id" => (!$user->no_results) ? $user->id : 0,
                                        "timestamp" => $timestamp,
@@ -297,7 +311,7 @@
             return $atom;
         }
 
-        static function cacher_regenerate_triggers($regenerate) {
+        public function cacher_regenerate_triggers($regenerate) {
             $triggers = array("route_like", "route_unlike", "ajax_like", "ajax_unlike");
             return array_merge($regenerate, $triggers);
         }

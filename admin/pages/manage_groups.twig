@@ -22,10 +22,10 @@
 <table>
 <thead>
 <tr class="head">
-<th class="group_name">{{ "Group" | translate }}</th>
-<th class="group_size">{{ "Members" | translate }}</th>
-<th class="group_default">{{ "Default?" | translate }}</th>
-<th class="group_guest">{{ "Guests?" | translate }}</th>
+<th class="group_name name">{{ "Group" | translate }}</th>
+<th class="group_size value">{{ "Members" | translate }}</th>
+<th class="group_default emblem">{{ "Default?" | translate }}</th>
+<th class="group_guest emblem">{{ "Guests?" | translate }}</th>
 {{ trigger.call("manage_groups_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>
@@ -33,20 +33,20 @@
 <tbody>
 {% for group in groups.paginated %}
 <tr id="group_{{ group.id }}" class="group">
-<td class="group_name main">
+<td class="group_name name main">
 {{ group.name | fix }}
 </td>
-<td class="group_size">
+<td class="group_size value">
 <a href="{{ admin_url('manage_users', {'query': 'group:' ~ group.name}) }}">{{ group.size | fix }}</a>
 </td>
-<td class="group_default">
+<td class="group_default emblem">
 {% if group.id == site.default_group %}
 <img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}
 &nbsp;
 {% endif %}
 </td>
-<td class="group_guest">
+<td class="group_guest emblem">
 {% if group.id == site.guest_group %}
 <img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% else %}

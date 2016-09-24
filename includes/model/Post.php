@@ -728,7 +728,13 @@
          * Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
          */
         static function feathers() {
-            return "posts.feather IN ('".implode("', '", Config::current()->enabled_feathers)."')";
+            $feathers = array();
+
+            foreach ((array) Config::current()->enabled_feathers as $feather)
+                if (feather_enabled($feather))
+                    $feathers[] = $feather;
+
+            return "posts.feather IN ('".implode("', '", $feathers)."')";
         }
 
         /**
@@ -769,5 +775,24 @@
             }
 
             return list_notate($names);
+        }
+
+        /**
+         * Function: publish_scheduled
+         * Searches for and publishes scheduled posts.
+         */
+        static function publish_scheduled() {
+            $sql = SQL::current();
+
+            $posts = $sql->select("posts",
+                                  "posts.id",
+                                  array("posts.created_at <=" => datetime(),
+                                        "posts.status" => "scheduled"))->fetchAll();
+
+            if (!empty($posts))
+                foreach ($posts as $post)
+                    $sql->update("posts",
+                                 array("id" => $post),
+                                 array("status" => "public"));
         }
     }

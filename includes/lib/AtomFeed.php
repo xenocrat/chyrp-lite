@@ -6,7 +6,7 @@
     class AtomFeed {
         # Variable: $count
         # The number of entries outputted.
-        public $count = 0;
+        private $count = 0;
 
         /**
          * Function: __construct

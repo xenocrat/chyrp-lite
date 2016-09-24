@@ -12,6 +12,16 @@
 <a href="{{ post.next.url() }}">{{ "Previous post" | translate }}</a>
 </div>
 {% endif %}
+{% if module_enabled("pingable") and post.pingback_count > 0 %}
+<article role="complementary" class="discourse">
+<h3>{{ "Pingbacks" | translate }}:</h3>
+<ol id="pingbacks">
+{% for pingback in post.pingbacks %}
+<li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true) }}">{{ pingback.title | fix }}</a></li>
+{% endfor %}
+</ol>
+</article>
+{% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
 <article role="complementary" class="commentary">
 <ol id="comments" class="comments paginated" data-post="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">

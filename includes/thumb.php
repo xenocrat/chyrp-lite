@@ -189,7 +189,8 @@
         imagesavealpha($thumbnail, true);
 
     # Generate the cache image.
-    if ((!isset($_GET['no_cache']) or $_GET['no_cache'] == "false") and is_writable(CACHES_DIR.DIR."thumbs"))
+    if ((!isset($_GET['no_cache']) or $_GET['no_cache'] == "false") and
+        is_dir(CACHES_DIR.DIR."thumbs") and is_writable(CACHES_DIR.DIR."thumbs"))
         if ($done == "imagejpeg")
             $done($thumbnail, $cache_file, $quality);
         else

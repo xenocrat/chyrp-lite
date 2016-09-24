@@ -1,15 +1,29 @@
 <?php
-    class Importers extends Modules {
+    class Migrator extends Modules {
+        public function admin_manage_migration($admin) {
+            if (!Visitor::current()->group->can("add_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
+
+            $admin->display("manage_migration");
+        }
+
+        public function manage_nav($navs) {
+            if (Visitor::current()->group->can("add_post"))
+              $navs["manage_migration"] = array("title" => __("Migration", "migrator"));
+
+            return $navs;
+        }
+
         /**
-         * Function: route_import_wordpress
+         * Function: admin_import_wordpress
          * WordPress importing.
          */
-        public function route_import_wordpress() {
+        public function admin_import_wordpress() {
             $config = Config::current();
             $trigger = Trigger::current();
 
             if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "importers"));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
                 redirect("/admin/?action=import");
@@ -18,19 +32,20 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!feather_enabled("text"))
-                error(__("Missing Feather", "importers"),
-                      __("Importing from WordPress requires the Text feather to be installed and enabled.", "importers"), null, 501);
+                error(__("Missing Feather", "migrator"),
+                      __("Importing from WordPress requires the Text feather to be installed and enabled.", "migrator"), null, 501);
 
             if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
-                error(__("Error"), __("You must select a WordPress export file.", "importers"), null, 422);
+                error(__("Error"), __("You must select a WordPress export file.", "migrator"), null, 422);
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(300);
 
             $stupid_xml = file_get_contents($_FILES['xml_file']['tmp_name']);
+
             $sane_xml = preg_replace(array("/<wp:comment_content>/", "/<\/wp:comment_content>/"),
                                      array("<wp:comment_content><![CDATA[", "]]></wp:comment_content>"),
                                      $stupid_xml);
@@ -65,10 +80,8 @@
             $xml = simplexml_load_string($sane_xml, "SimpleXMLElement", LIBXML_NOCDATA);
 
             if (!$xml or !(substr_count($xml->channel->generator, "wordpress.org") or
-                           substr_count($xml->channel->generator, "wordpress.com"))) {
-                Flash::warning(__("The file does not seem to be a valid WordPress export file.", "importers"), "/admin/?action=import");
-                return;
-            }
+                           substr_count($xml->channel->generator, "wordpress.com")))
+                Flash::warning(__("The file does not seem to be a valid WordPress export file.", "migrator"), "/admin/?action=import");
 
             foreach ($xml->channel->item as $item) {
                 $wordpress = $item->children("http://wordpress.org/export/1.2/");
@@ -79,15 +92,18 @@
 
                 $media = array();
 
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $contentencoded,
-                                   $media)) {
-                    $media_uris = array_unique($media[0]);
-                    foreach ($media_uris as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
+                if (!empty($_POST['media_url'])) {
+                    $regexp_url = preg_quote($_POST['media_url'], "/");
+
+                    if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                                       $contentencoded,
+                                       $media)) {
+                        $media_uris = array_unique($media[0]);
+
+                        foreach ($media_uris as $matched_url) {
+                            $filename = upload_from_url($matched_url);
+                            $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
+                        }
                     }
                 }
 
@@ -158,18 +174,18 @@
                 }
             }
 
-            Flash::notice(__("WordPress content successfully imported!", "importers"), "/admin/?action=import");
+            Flash::notice(__("WordPress content successfully imported!", "migrator"), "/admin/?action=import");
         }
 
         /**
-         * Function: route_import_tumblr
+         * Function: admin_import_tumblr
          * Tumblr importing.
          */
-        public function route_import_tumblr() {
+        public function admin_import_tumblr() {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "importers"));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
                 redirect("/admin/?action=import");
@@ -182,20 +198,18 @@
                 !feather_enabled("photo") or
                 !feather_enabled("quote") or
                 !feather_enabled("link"))
-                error(__("Missing Feather", "importers"),
-                      __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "importers"), null, 501);
-
-            $_POST['tumblr_url'] = trim($_POST['tumblr_url']);
+                error(__("Missing Feather", "migrator"),
+                      __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "migrator"), null, 501);
 
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
-                error(__("Error"), __("Invalid URL.", "importers"), null, 422);
+                error(__("Error"), __("Invalid URL.", "migrator"), null, 422);
 
             if (!preg_match("/^(http(s)?:\/\/)?(www\.)?[a-z0-9][a-z0-9-]+[a-z0-9]+\.tumblr\.com(\/)?$/i", $_POST['tumblr_url']))
-                error(__("Error"), __("Invalid Tumblr URL.", "importers"), null, 422);
+                error(__("Error"), __("Invalid Tumblr URL.", "migrator"), null, 422);
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -206,12 +220,11 @@
             $api = preg_replace("/ ([a-z]+)\-([a-z]+)=/", " \\1_\\2=", $api);
             $xml = simplexml_load_string($api);
 
-            if (!isset($xml->tumblelog)) {
-                Flash::warning(__("Could not retrieve content from the Tumblr URL. ", "importers"), "/admin/?action=import");
-                return;
-            }
+            if (!isset($xml->tumblelog))
+                Flash::warning(__("Could not retrieve content from the Tumblr URL. ", "migrator"), "/admin/?action=import");
 
             $already_in = $posts = array();
+
             foreach ($xml->posts->post as $post) {
                 $posts[] = $post;
                 $already_in[] = $post->attributes()->id;
@@ -221,6 +234,7 @@
                 $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url."&start=".count($posts)));
                 $api = preg_replace("/ ([a-z]+)\-([a-z]+)=/", " \\1_\\2=", $api);
                 $xml = simplexml_load_string($api, "SimpleXMLElement", LIBXML_NOCDATA);
+
                 foreach ($xml->posts->post as $post)
                     if (!in_array($post->attributes()->id, $already_in)) {
                         $posts[] = $post;
@@ -240,8 +254,8 @@
                     break; # Can't import Audio posts since Tumblr has the files locked in to Amazon.
 
                 $translate_types = array("regular" => "text", "conversation" => "text");
-
                 $clean = "";
+
                 switch($post->attributes()->type) {
                     case "regular":
                         $title = fallback($post->regular_title);
@@ -298,19 +312,19 @@
                 Trigger::current()->call("import_tumble", $post, $new_post);
             }
 
-            Flash::notice(__("Tumblr content successfully imported!", "importers"), "/admin/?action=import");
+            Flash::notice(__("Tumblr content successfully imported!", "migrator"), "/admin/?action=import");
         }
 
         /**
-         * Function: route_import_textpattern
+         * Function: admin_import_textpattern
          * TextPattern importing.
          */
-        public function route_import_textpattern() {
+        public function admin_import_textpattern() {
             $config  = Config::current();
             $trigger = Trigger::current();
 
             if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "importers"));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
                 redirect("/admin/?action=import");
@@ -319,18 +333,18 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['host']))
-                error(__("Error"), __("Host cannot be empty.", "importers"), null, 422);
+                error(__("Error"), __("Host cannot be empty.", "migrator"), null, 422);
 
             if (empty($_POST['username']))
-                error(__("Error"), __("Username cannot be empty.", "importers"), null, 422);
+                error(__("Error"), __("Username cannot be empty.", "migrator"), null, 422);
 
             if (empty($_POST['password']))
-                error(__("Error"), __("Password cannot be empty.", "importers"), null, 422);
+                error(__("Error"), __("Password cannot be empty.", "migrator"), null, 422);
 
             if (empty($_POST['database']))
-                error(__("Error"), __("Database cannot be empty.", "importers"), null, 422);
+                error(__("Error"), __("Database cannot be empty.", "migrator"), null, 422);
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -338,32 +352,33 @@
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
-            if ($mysqli->connect_errno) {
-                Flash::warning(__("Could not connect to the TextPattern database.", "importers"), "/admin/?action=import");
-                return;
-            }
+            if ($mysqli->connect_errno)
+                Flash::warning(__("Could not connect to the TextPattern database.", "migrator"), "/admin/?action=import");
 
             $mysqli->query("SET NAMES 'utf8'");
 
-            $prefix = $mysqli->real_escape_string($_POST['prefix']);
-            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
+            $prefix = $mysqli->real_escape_string(fallback($_POST['prefix'], ""));
+            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error", "migrator"), fix($mysqli->error));
 
             $posts = array();
+
             while ($post = $result->fetch_assoc())
                 $posts[$post["ID"]] = $post;
 
             $mysqli->close();
 
             foreach ($posts as $post) {
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $post["Body"],
-                                   $media))
-                    foreach ($media[0] as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $post["Body"] = str_replace($matched_url, uploaded($filename), $post["Body"]);
-                    }
+                if (!empty($_POST['media_url'])) {
+                    $regexp_url = preg_quote($_POST['media_url'], "/");
+
+                    if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                                       $post["Body"],
+                                       $media))
+                        foreach ($media[0] as $matched_url) {
+                            $filename = upload_from_url($matched_url);
+                            $post["Body"] = str_replace($matched_url, uploaded($filename), $post["Body"]);
+                        }
+                }
 
                 $status_translate = array(1 => "draft",
                                           2 => "private",
@@ -389,20 +404,20 @@
                 $trigger->call("import_textpattern_post", $post, $new_post);
             }
 
-            Flash::notice(__("TextPattern content successfully imported!", "importers"), "/admin/?action=import");
+            Flash::notice(__("TextPattern content successfully imported!", "migrator"), "/admin/?action=import");
         }
 
         /**
-         * Function: route_import_movabletype
+         * Function: admin_import_movabletype
          * MovableType importing.
          */
-        public function route_import_movabletype() {
+        public function admin_import_movabletype() {
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "importers"));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
                 redirect("/admin/?action=import");
@@ -411,18 +426,18 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['host']))
-                error(__("Error"), __("Host cannot be empty.", "importers"), null, 422);
+                error(__("Error"), __("Host cannot be empty.", "migrator"), null, 422);
 
             if (empty($_POST['username']))
-                error(__("Error"), __("Username cannot be empty.", "importers"), null, 422);
+                error(__("Error"), __("Username cannot be empty.", "migrator"), null, 422);
 
             if (empty($_POST['password']))
-                error(__("Error"), __("Password cannot be empty.", "importers"), null, 422);
+                error(__("Error"), __("Password cannot be empty.", "migrator"), null, 422);
 
             if (empty($_POST['database']))
-                error(__("Error"), __("Database cannot be empty.", "importers"), null, 422);
+                error(__("Error"), __("Database cannot be empty.", "migrator"), null, 422);
 
-            if (ini_get("memory_limit") < 20)
+            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -430,15 +445,13 @@
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
-            if ($mysqli->connect_errno) {
-                Flash::warning(__("Could not connect to the MovableType database.", "importers"), "/admin/?action=import");
-                return;
-            }
+            if ($mysqli->connect_errno)
+                Flash::warning(__("Could not connect to the MovableType database.", "migrator"), "/admin/?action=import");
 
             $mysqli->query("SET NAMES 'utf8'");
 
             $authors = array();
-            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
+            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error", "migrator"), fix($mysqli->error));
 
             while ($author = $result->fetch_assoc()) {
                 # Try to figure out if this author is the same as the person doing the import.
@@ -455,13 +468,15 @@
                                                              ($author["author_nickname"] != $author["author_name"] ? $author["author_nickname"] : ""),
                                                              $author["author_url"],
                                                              ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
+                                                             ($config->email_activation) ? false : true,
                                                              $author["author_created_on"]);
                 }
             }
 
-            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error", "importers"), fix($mysqli->error));
+            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error", "migrator"), fix($mysqli->error));
 
             $posts = array();
+
             while ($post = $result->fetch_assoc())
                 $posts[$post["entry_id"]] = $post;
 
@@ -473,15 +488,17 @@
                 if (!empty($post["entry_text_more"]))
                     $body.= "\n\n<!--more-->\n\n".$post["entry_text_more"];
 
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                if (!empty($_POST['media_url']) and
-                    preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                   $body,
-                                   $media))
-                    foreach ($media[0] as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $body = str_replace($matched_url, uploaded($filename), $body);
-                    }
+                if (!empty($_POST['media_url'])) {
+                    $regexp_url = preg_quote($_POST['media_url'], "/");
+
+                    if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                                       $body,
+                                       $media))
+                        foreach ($media[0] as $matched_url) {
+                            $filename = upload_from_url($matched_url);
+                            $body = str_replace($matched_url, uploaded($filename), $body);
+                        }
+                }
 
                 $status_translate = array(1 => "draft",
                                           2 => "public",
@@ -510,126 +527,6 @@
                 }
             }
 
-            Flash::notice(__("MovableType content successfully imported!", "importers"), "/admin/?action=import");
+            Flash::notice(__("MovableType content successfully imported!", "migrator"), "/admin/?action=import");
         }
-
-        public function import_choose() {
-            $config = Config::current();
-?>
-<hr>
-<h2>WordPress</h2>
-<form id="import_wordpress_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_wordpress"; ?>" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<fieldset>
-<p>
-<label for="xml_file"><?php echo __("eXtended .XML File", "importers"); ?></label>
-<input type="file" name="xml_file" value="" id="xml_file">
-</p>
-<p>
-<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="wordpress_media_url">
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-<small>
-<?php echo __("Usually something like <code>http://example.com/wp-content/uploads/</code>.", "importers"); ?>
-</small>
-</p>
-<p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
-</p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="wordpress_hash">
-</fieldset>
-</form>
-<hr>
-<h2>Tumblr</h2>
-<form id="import_tumblr_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_tumblr"; ?>" method="post" accept-charset="UTF-8">
-<fieldset>
-<p>
-<label for="tumblr_url"><?php echo __("Your Tumblr URL", "importers"); ?></label>
-<input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
-<small>
-<?php echo __("Something like <code>http://example.tumblr.com</code>.", "importers"); ?>
-</small>
-<small><?php echo __("Note: Audio tumbles cannot be imported.", "importers"); ?></small>
-</p>
-<p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
-</p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="tumblr_hash">
-</fieldset>
-</form>
-<hr>
-<h2>TextPattern</h2>
-<form id="import_textpattern_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_textpattern"; ?>" method="post" accept-charset="UTF-8">
-<fieldset>
-<p>
-<label for="host"><?php echo __("Host", "importers"); ?></label>
-<input class="text" type="text" name="host" value="localhost" id="host">
-</p>
-<p>
-<label for="username"><?php echo __("Username", "importers"); ?></label>
-<input class="text" type="text" name="username" value="" id="username">
-</p>
-<p>
-<label for="password"><?php echo __("Password", "importers"); ?></label>
-<input class="text" type="password" name="password" value="" id="password">
-</p>
-<p>
-<label for="database"><?php echo __("Database", "importers"); ?></label>
-<input class="text" type="text" name="database" value="" id="database">
-</p>
-<p>
-<label for="prefix"><?php echo __("Table Prefix", "importers"); ?></label>
-<input class="text" type="text" name="prefix" value="" id="prefix">
-<span class="sub"><?php echo __("(if any)", "importers"); ?></span>
-</p>
-<p>
-<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="textpattern_media_url">
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-<small>
-<?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
-</small>
-</p>
-<p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
-</p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="textpattern_hash">
-</fieldset>
-</form>
-<hr>
-<h2>MovableType</h2>
-<form id="import_movabletype_form" class="split" action="<?php echo $config->chyrp_url."/?action=import_movabletype"; ?>" method="post" accept-charset="UTF-8">
-<fieldset>
-<p>
-<label for="host"><?php echo __("Host", "importers"); ?></label>
-<input class="text" type="text" name="host" value="localhost" id="host">
-</p>
-<p>
-<label for="username"><?php echo __("Username", "importers"); ?></label>
-<input class="text" type="text" name="username" value="" id="username">
-</p>
-<p>
-<label for="password"><?php echo __("Password", "importers"); ?></label>
-<input class="text" type="password" name="password" value="" id="password">
-</p>
-<p>
-<label for="database"><?php echo __("Database", "importers"); ?></label>
-<input class="text" type="text" name="database" value="" id="database">
-</p>
-<p>
-<label for="media_url"><?php echo __("What URL is used for embedded media?", "importers"); ?></label>
-<input class="text" type="url" name="media_url" value="" id="movabletype_media_url">
-<span class="sub"><?php echo __("(optional)", "importers"); ?></span>
-<small>
-<?php echo __("Usually something like <code>http://example.com/images/</code>.", "importers"); ?>
-</small>
-</p>
-<p class="buttons">
-<button type="submit" class="yay"><img src="<?php echo $config->chyrp_url."/admin/images/icons/success.svg"; ?>" alt="icon"><?php echo __("Import", "importers"); ?></button>
-</p>
-<input type="hidden" name="hash" value="<?php echo token($_SERVER["REMOTE_ADDR"]); ?>" id="movabletype_hash">
-</fieldset>
-</form>
-<?php
-        }
-
     }

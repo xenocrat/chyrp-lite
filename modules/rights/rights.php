@@ -88,7 +88,7 @@
                printf("        <rights>%s</rights>\n", $post->rights_licence);
         }
 
-        static function licence_link($post) {
+        public function licence_link($post) {
             switch ($post->rights_licence) {
                 case "Creative Commons BY":
                 $mark = '<a rel="license" href="http://creativecommons.org/licenses/by/4.0" class="rights_licence_link">'.
