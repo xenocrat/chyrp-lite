@@ -949,6 +949,7 @@
             if ($group->no_results)
                 show_404(__("Not Found"), __("Group not found."));
 
+            # Assign users to new member group.
             if (!empty($group->users))
                 if (!empty($_POST['move_group'])) {
                     $member_group = new Group($_POST['move_group']);
@@ -968,6 +969,7 @@
 
             $config = Config::current();
 
+            # Set new default group.
             if ($config->default_group == $group->id)
                 if (!empty($_POST['default_group'])) {
                     $default_group = new Group($_POST['default_group']);
@@ -979,6 +981,7 @@
                 } else
                     error(__("Error"), __("New default group must be specified."), null, 422);
 
+            # Set new guest group.
             if ($config->guest_group == $group->id)
                 if (!empty($_POST['guest_group'])) {
                     $guest_group = new Group($_POST['guest_group']);
@@ -989,6 +992,18 @@
                     $config->set("guest_group", $guest_group->id);
                 } else
                     error(__("Error"), __("New guest group must be specified."), null, 422);
+
+            $sql = SQL::current();
+
+            # Set group-specific posts to private status.
+            foreach ($sql->select("posts",
+                                  "id",
+                                  array("status LIKE" => "%{".$group->id."}%"))->fetchAll() as $post) {
+
+                $sql->update("posts",
+                             array("id" => $post["id"]),
+                             array("status" => "private"));
+            }
 
             Group::delete($group->id);
 
