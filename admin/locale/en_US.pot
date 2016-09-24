@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-09-17 17:04+0000\n"
+"POT-Creation-Date: 2016-09-24 17:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -628,7 +628,7 @@ msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 
 #: admin/pages/import.twig:3
-#: admin/pages/import.twig:43
+#: admin/pages/import.twig:44
 msgid "Import"
 msgstr ""
 
