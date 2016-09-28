@@ -87,7 +87,9 @@
 
         public function remove_post_cache($id) {
             $post = new Post($id);
-            $this->remove_caches_for(htmlspecialchars_decode($post->url()));
+
+            if (!$post->no_results)
+                $this->remove_caches_for(htmlspecialchars_decode($post->url()));
         }
 
         public function update_user($user) {
