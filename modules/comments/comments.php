@@ -858,7 +858,7 @@
         }
 
         public function correspond_comment($params) {
-            $post = new Post($params["post"], array("drafts" => true));
+            $post = new Post($params["post_id"], array("drafts" => true));
 
             $params["subject"] = _f("New Comment at %s", Config::current()->name);
             $params["message"] = _f("%s commented on a blog post:", fix($params["author"])).

@@ -164,14 +164,26 @@
          *     $ip - The commenter's IP address.
          *     $agent - The commenter's user agent.
          *     $status - The new comment's status.
-         *     $post - The <Post> they're commenting on.
-         *     $user_id - The ID of this <User> this comment was made by.
+         *     $post_id - The ID of the <Post> they're commenting on.
+         *     $user_id - The ID of the <User> this comment was made by.
          *     $parent - The <Comment> they're replying to.
          *     $notify - Notification on follow-up comments.
          *     $created_at - The new comment's "created" timestamp.
          *     $updated_at - The new comment's "last updated" timestamp.
          */
-        static function add($body, $author, $url, $email, $ip, $agent, $status, $post, $user_id, $parent, $notify, $created_at = null, $updated_at = null) {
+        static function add($body,
+                            $author,
+                            $url,
+                            $email,
+                            $ip,
+                            $agent,
+                            $status,
+                            $post_id,
+                            $user_id,
+                            $parent,
+                            $notify,
+                            $created_at = null,
+                            $updated_at = null) {
             $ip = ip2long($ip);
 
             if ($ip === false)
@@ -186,7 +198,7 @@
                                "author_ip" => $ip,
                                "author_agent" => $agent,
                                "status" => $status,
-                               "post_id" => $post,
+                               "post_id" => $post_id,
                                "user_id"=> $user_id,
                                "parent_id" => $parent,
                                "notify" => $notify,
@@ -195,7 +207,19 @@
 
             $new = new self($sql->latest("comments"));
             Trigger::current()->call("add_comment", $new->post_id, $new->id);
-            self::notify(strip_tags($author), $body, $post);
+
+            if ($new->status == "approved")
+                foreach (SQL::current()->select("comments",
+                                                "author_email",
+                                                array("notify" => 1,
+                                                      "post_id" => $new->post_id))->fetchAll() as $notification) {
+
+                    correspond("comment", array("author" => $new->author,
+                                                "body" => $new->body,
+                                                "post_id" => $new->post_id,
+                                                "to" => $notification["author_email"]));
+                }
+
             return $new;
         }
 
@@ -302,28 +326,6 @@
         static function user_count($user_id) {
             $count = SQL::current()->count("comments", array("user_id" => $user_id));
             return $count;
-        }
-
-        /**
-         * Function: notify
-         * Emails everyone that wants to be notified for a new comment.
-         *
-         * Parameters:
-         *     $author - The new comment author.
-         *     $body - The new comment message.
-         *     $post - The new comment post ID.
-         */
-        static function notify($author, $body, $post) {
-            $notifications = SQL::current()->select("comments",
-                                                    "author_email",
-                                                    array("notify" => 1,
-                                                          "post_id" => $post))->fetchAll();
-
-            foreach ($notifications as $notification)
-                correspond("comment", array("author" => $author,
-                                            "body" => $body,
-                                            "post" => $post,
-                                            "to" => $notification["author_email"]));
         }
 
         static function install() {
