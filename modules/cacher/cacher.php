@@ -49,6 +49,8 @@
         }
 
         public function prepare_cache_updaters() {
+            $trigger = Trigger::current();
+
             $regenerate = array("add_post",
                                 "add_page",
                                 "update_post",
@@ -58,14 +60,14 @@
                                 "change_setting",
                                 "preview_theme");
 
-            Trigger::current()->filter($regenerate, "cacher_regenerate_triggers");
+            $trigger->filter($regenerate, "cacher_regenerate_triggers");
 
             foreach ($regenerate as $action)
                 $this->addAlias($action, "regenerate");
 
             $regenerate_posts = array();
 
-            Trigger::current()->filter($regenerate_posts, "cacher_regenerate_posts_triggers");
+            $trigger->filter($regenerate_posts, "cacher_regenerate_posts_triggers");
 
             foreach ($regenerate_posts as $action)
                 $this->addAlias($action, "remove_post_cache");
