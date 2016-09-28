@@ -169,7 +169,7 @@
         }
 
         public function cacher_regenerate_posts_triggers($regenerate_posts) {
-            $triggers = array("pingback", "delete_pingback");
+            $triggers = array("add_pingback", "delete_pingback");
             return array_merge($regenerate_posts, $triggers);
         }
     }
