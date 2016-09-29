@@ -312,7 +312,7 @@
         }
 
         public function cacher_regenerate_triggers($regenerate) {
-            $triggers = array("route_like", "route_unlike", "ajax_like", "ajax_unlike");
+            $triggers = array("like_post", "unlike_post");
             return array_merge($regenerate, $triggers);
         }
 
