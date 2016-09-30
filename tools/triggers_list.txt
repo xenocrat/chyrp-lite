@@ -449,7 +449,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 197
+	modules/comments/model/Comment.php on line 209
 Arguments:
 	$new->post_id, $new->id
 
@@ -457,7 +457,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 215
+	modules/comments/model/Comment.php on line 239
 Arguments:
 	$this->post_id, $this->id
 
@@ -465,9 +465,25 @@ Arguments:
 delete_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 223
+	modules/comments/model/Comment.php on line 247
 Arguments:
 	$new->post_id, $new->id
+
+
+like_post
+---------
+Called from:
+	modules/likes/model/Like.php on line 78
+Arguments:
+	$this->post_id, $this->user_id
+
+
+unlike_post
+-----------
+Called from:
+	modules/likes/model/Like.php on line 97
+Arguments:
+	$this->post_id, $this->user_id
 
 
 import_wordpress_post
@@ -530,6 +546,22 @@ Called from:
 	modules/pingable/admin/pages/manage_pingbacks.twig on line 46
 Arguments:
 	pingback
+
+
+add_pingback
+------------
+Called from:
+	modules/pingable/model/Pingback.php on line 52
+Arguments:
+	$new->post_id, $new->id
+
+
+delete_pingback
+---------------
+Called from:
+	modules/pingable/model/Pingback.php on line 61
+Arguments:
+	$new->post_id, $new->id
 
 
 user_controls
@@ -1002,7 +1034,7 @@ cacher_regenerate_triggers
 Target:
 	$regenerate
 Called from:
-	modules/cacher/cacher.php on line 61
+	modules/cacher/cacher.php on line 63
 
 
 cacher_regenerate_posts_triggers
@@ -1010,7 +1042,7 @@ cacher_regenerate_posts_triggers
 Target:
 	$regenerate_posts
 Called from:
-	modules/cacher/cacher.php on line 68
+	modules/cacher/cacher.php on line 70
 
 
 comment
