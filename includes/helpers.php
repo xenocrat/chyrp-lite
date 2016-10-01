@@ -1253,11 +1253,20 @@
      *     A sanitized version of the string.
      */
     function sanitize_html($text) {
+        # Strip invalid elements.
+        $text = preg_replace("/<[^a-z\/][^>]*>/i", "", $text);
+
+        # Neutralize script tags.
+        $text = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $text);
+        $text = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $text);
+
         # Strip attributes from each tag, but allow attributes essential to a tag's function.
-        $text = preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( \/)?>/i", function ($element) {
-            $name = strtolower($element[1]);
+        return preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( \/)?>/i", function ($element) {
             fallback($element[2], "");
+
+            $name = strtolower($element[1]);
             $whitelist = "";
+
             preg_match_all("/ ([a-z]+)=(\"[^\"]+\"|\'[^\']+\')/i", $element[0], $attributes, PREG_SET_ORDER);
 
             foreach ($attributes as $attribute) {
@@ -1290,18 +1299,9 @@
                 }
             }
 
-            return "<".
-                 $element[1].
-                 $whitelist.
-                 $element[2].
-                 ">";
+            return "<".$element[1].$whitelist.$element[2].">";
+
         }, $text);
-
-        # Neutralize script tags.
-        $text = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $text);
-        $text = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $text);
-
-        return $text;
     }
 
     /**
