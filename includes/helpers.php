@@ -1253,11 +1253,11 @@
      *     A sanitized version of the string.
      */
     function sanitize_html($text) {
-        # Strip invalid elements.
+        # Strip invalid tags.
         $text = preg_replace("/<[^a-z\/][^>]*>/i", "", $text);
 
-        # Neutralize script tags.
-        $text = preg_replace("/<[\/]?script[^>]*>/i", "&lt;script&gt;", $text);
+        # Strip script tags.
+        $text = preg_replace("/<\/?script[^>]*>/i", "", $text);
 
         # Strip attributes from each tag, but allow attributes essential to a tag's function.
         return preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( \/)?>/i", function ($element) {
