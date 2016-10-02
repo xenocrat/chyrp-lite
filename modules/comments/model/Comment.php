@@ -211,12 +211,13 @@
             if ($new->status == "approved")
                 foreach (SQL::current()->select("comments",
                                                 "author_email",
-                                                array("notify" => 1,
-                                                      "post_id" => $new->post_id))->fetchAll() as $notification) {
+                                                array("post_id" => $new->post_id,
+                                                      "user_id !=" => $new->user_id,
+                                                      "notify" => 1))->fetchAll() as $notification) {
 
-                    correspond("comment", array("author" => $new->author,
+                    correspond("comment", array("post_id" => $new->post_id,
+                                                "author" => $new->author,
                                                 "body" => $new->body,
-                                                "post_id" => $new->post_id,
                                                 "to" => $notification["author_email"]));
                 }
 
