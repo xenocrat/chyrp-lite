@@ -457,7 +457,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 239
+	modules/comments/model/Comment.php on line 240
 Arguments:
 	$this->post_id, $this->id
 
@@ -465,7 +465,7 @@ Arguments:
 delete_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 247
+	modules/comments/model/Comment.php on line 248
 Arguments:
 	$new->post_id, $new->id
 
@@ -818,7 +818,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1419
+	includes/helpers.php on line 1418
 
 
 send_mail
@@ -826,7 +826,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2166
+	includes/helpers.php on line 2165
 
 
 xmlrpc_methods
