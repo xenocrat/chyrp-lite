@@ -394,7 +394,7 @@
             if ($post->no_results)
                 return false;
 
-            # Don't fool ourselves into thinking a feed was reqested.
+            # Don't fool ourselves into thinking a feed was requested because of a "feed" attribute.
             if (!isset($_GET['feed']) and !(count($args) > count($attrs) and end($args) == "feed"))
                 $this->feed = false;
 
