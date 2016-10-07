@@ -374,7 +374,7 @@
     # Upgrading Starts
     #---------------------------------------------
 
-    if ((!empty($_POST) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) {
+    if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) {
         # Perform core upgrade tasks.
         add_markdown();
         add_homepage();
