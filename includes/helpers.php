@@ -88,7 +88,7 @@
      *     $body - The message for the error dialog (optional).
      */
     function show_403($title = "", $body = "") {
-        $title = oneof($title, __("403 Forbidden"));
+        $title = oneof($title, __("Forbidden"));
         $body = oneof($body, __("You do not have permission to access this resource."));
 
         $theme = Theme::current();
@@ -111,7 +111,7 @@
      *     $body - The message for the error dialog (optional).
      */
      function show_404($title = "", $body = "") {
-        $title = oneof($title, __("404 Not Found"));
+        $title = oneof($title, __("Not Found"));
         $body = oneof($body, __("The requested resource was not found."));
 
         $theme = Theme::current();
