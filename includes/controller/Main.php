@@ -6,7 +6,7 @@
     class MainController implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
-        public $urls = array('|/id/([0-9]+)/|'                              => '/?action=view&id=$1',
+        public $urls = array('|/id/([0-9]+)/|'                              => '/?action=id&id=$1',
                              '|/page/(([^/]+)/)+|'                          => '/?action=page&url=$2',
                              '|/search/([^/]+)/|'                           => '/?action=search&query=$1',
                              '|/search/|'                                   => '/?action=search',
@@ -91,7 +91,9 @@
 
             # Viewing a post by its ID.
             if ($route->arg[0] == "id") {
-                $_GET['id'] = $route->arg[1];
+                if (isset($route->arg[1]))
+                    $_GET['id'] = $route->arg[1];
+
                 return $route->action = "id";
             }
 
@@ -380,20 +382,20 @@
 
         /**
          * Function: view
-         * Views a post.
+         * Views a post via dirty URL or clean URL e.g. /year/month/day/url/.
          */
-        public function view($attrs = null, $args = array()) {
-            if (isset($attrs))
-                $post = Post::from_url($attrs, array("drafts" => true));
-            else
-                $post = new Post(array("url" => @$_GET['url']), array("drafts" => true));
+        public function view($attrs = null) {
+            $args = Route::current()->arg;
+
+            $post = (isset($attrs)) ?
+                Post::from_url($attrs, array("drafts" => true)) :
+                new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
 
             if ($post->no_results)
                 return false;
 
-            if ((oneof(@$attrs["url"], @$attrs["clean"]) == "feed") and # do some checking to see if they're trying
-                (count(explode("/", trim($post_url, "/"))) > count($args) or # to view the post or the post's feed.
-                 end($args) != "feed"))
+            # Don't fool ourselves into thinking a feed was reqested.
+            if (!isset($_GET['feed']) and !(count($args) > count($attrs) and end($args) == "feed"))
                 $this->feed = false;
 
             if (!$post->theme_exists())
@@ -417,10 +419,10 @@
 
         /**
          * Function: page
-         * Handles page viewing.
+         * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
         public function page($urls = null) {
-            if (isset($urls)) { # Viewing with clean URLs, e.g. /parent/child/child-of-child/
+            if (isset($urls)) {
                 $valids = Page::find(array("where" => array("url" => $urls)));
 
                 if (count($valids) == count($urls)) { # Make sure all page slugs are valid.
@@ -430,7 +432,7 @@
                 } else
                     return false; # A "link in the chain" is broken.
             } else
-                $page = new Page(array("url" => $_GET['url']));
+                $page = new Page(array("url" => fallback($_GET['url'])));
 
             if ($page->no_results)
                 return false; # Page not found; the 404 handling is handled externally.
