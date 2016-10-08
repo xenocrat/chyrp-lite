@@ -425,17 +425,19 @@
             if (isset($urls)) {
                 $valids = Page::find(array("where" => array("url" => $urls)));
 
-                if (count($valids) == count($urls)) { # Make sure all page slugs are valid.
-                    foreach ($valids as $page)
-                        if ($page->url == end($urls)) # Loop until we reach the last one.
-                            break;
-                } else
-                    return false; # A "link in the chain" is broken.
+                # One of the URLs in the page hierarchy is invalid.
+                if (!(count($valids) == count($urls)))
+                    return false;
+
+                # Loop over the pages until we find the one we want.
+                foreach ($valids as $page)
+                    if ($page->url == end($urls))
+                        break;
             } else
                 $page = new Page(array("url" => fallback($_GET['url'])));
 
             if ($page->no_results)
-                return false; # Page not found; the 404 handling is handled externally.
+                return false;
 
             $visitor = Visitor::current();
 
