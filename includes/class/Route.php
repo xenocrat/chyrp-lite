@@ -185,8 +185,8 @@
 
             # Generate a feed variant of all dirty translations not native to the controller.
             foreach (array_diff_assoc($urls, $controller->urls) as $key => $value) {
-                $quoted = substr($key, 0, 1);
-                $urls[substr($key, 0, -1).preg_quote("feed/", $quoted).$quoted] = $value."&amp;feed";
+                $delimiter = substr($key, 0, 1);
+                $urls[substr($key, 0, -1).preg_quote("feed/", $delimiter).$delimiter] = $value."&amp;feed";
             }
 
             $urls["|/([^/]+)/$|"] = "/?action=$1";
