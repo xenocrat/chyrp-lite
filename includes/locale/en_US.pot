@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-10-07 23:20+0000\n"
+"POT-Creation-Date: 2016-10-08 15:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -176,7 +176,7 @@ msgstr ""
 #: includes/controller/Admin.php:1857
 #: includes/controller/Admin.php:1863
 #: includes/controller/Main.php:371
-#: includes/controller/Main.php:443
+#: includes/controller/Main.php:445
 #: includes/download.php:18
 #: includes/helpers.php:1728
 #: includes/thumb.php:21
@@ -445,7 +445,7 @@ msgstr ""
 msgid "Malformed URI."
 msgstr ""
 
-#: includes/class/Route.php:241
+#: includes/class/Route.php:244
 msgid "Route was initiated without a Controller."
 msgstr ""
 
@@ -577,20 +577,20 @@ msgstr ""
 
 #: includes/controller/Admin.php:572
 #: includes/controller/Admin.php:662
-#: includes/controller/Main.php:481
+#: includes/controller/Main.php:483
 msgid "That username is already in use."
 msgstr ""
 
 #: includes/controller/Admin.php:575
-#: includes/controller/Main.php:484
+#: includes/controller/Main.php:486
 #: install.php:486
 msgid "Passwords cannot be blank."
 msgstr ""
 
 #: includes/controller/Admin.php:578
 #: includes/controller/Admin.php:671
-#: includes/controller/Main.php:486
-#: includes/controller/Main.php:650
+#: includes/controller/Main.php:488
+#: includes/controller/Main.php:652
 #: install.php:451
 #: install.php:489
 msgid "Passwords do not match."
@@ -604,8 +604,8 @@ msgstr ""
 #: includes/controller/Admin.php:584
 #: includes/controller/Admin.php:678
 #: includes/controller/Admin.php:1736
-#: includes/controller/Main.php:491
-#: includes/controller/Main.php:655
+#: includes/controller/Main.php:493
+#: includes/controller/Main.php:657
 #: install.php:492
 msgid "Email address cannot be blank."
 msgstr ""
@@ -613,16 +613,16 @@ msgstr ""
 #: includes/controller/Admin.php:587
 #: includes/controller/Admin.php:681
 #: includes/controller/Admin.php:1739
-#: includes/controller/Main.php:493
-#: includes/controller/Main.php:657
+#: includes/controller/Main.php:495
+#: includes/controller/Main.php:659
 #: install.php:494
 msgid "Invalid email address."
 msgstr ""
 
 #: includes/controller/Admin.php:590
 #: includes/controller/Admin.php:684
-#: includes/controller/Main.php:499
-#: includes/controller/Main.php:660
+#: includes/controller/Main.php:501
+#: includes/controller/Main.php:662
 msgid "Invalid website URL."
 msgstr ""
 
@@ -905,7 +905,7 @@ msgid "Page created."
 msgstr ""
 
 #: includes/controller/Admin.php:1907
-#: includes/controller/Main.php:590
+#: includes/controller/Main.php:592
 msgid "You are already logged in."
 msgstr ""
 
@@ -983,7 +983,7 @@ msgid "Themes"
 msgstr ""
 
 #: includes/controller/Admin.php:2104
-#: includes/controller/Main.php:865
+#: includes/controller/Main.php:867
 msgid "Twig Error"
 msgstr ""
 
@@ -1033,110 +1033,110 @@ msgstr ""
 msgid "This post is only visible to the following groups: %s."
 msgstr ""
 
-#: includes/controller/Main.php:443
+#: includes/controller/Main.php:445
 msgid "You do not have sufficient privileges to view this page."
 msgstr ""
 
-#: includes/controller/Main.php:469
+#: includes/controller/Main.php:471
 msgid "This site does not allow registration."
 msgstr ""
 
-#: includes/controller/Main.php:472
+#: includes/controller/Main.php:474
 msgid "You cannot register an account because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:476
+#: includes/controller/Main.php:478
 #: install.php:483
 msgid "Please enter a username for your account."
 msgstr ""
 
-#: includes/controller/Main.php:488
-#: includes/controller/Main.php:652
+#: includes/controller/Main.php:490
+#: includes/controller/Main.php:654
 #: install.php:734
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
-#: includes/controller/Main.php:496
+#: includes/controller/Main.php:498
 msgid "Incorrect captcha code."
 msgstr ""
 
-#: includes/controller/Main.php:525
+#: includes/controller/Main.php:527
 msgid "We have emailed you an activation link."
 msgstr ""
 
-#: includes/controller/Main.php:530
-#: includes/controller/Main.php:557
+#: includes/controller/Main.php:532
+#: includes/controller/Main.php:559
 msgid "Your account is now active."
 msgstr ""
 
-#: includes/controller/Main.php:534
+#: includes/controller/Main.php:536
 msgid "Register"
 msgstr ""
 
-#: includes/controller/Main.php:543
+#: includes/controller/Main.php:545
 msgid "You cannot activate an account because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:548
-#: includes/controller/Main.php:571
-#: includes/controller/Main.php:696
+#: includes/controller/Main.php:550
+#: includes/controller/Main.php:573
+#: includes/controller/Main.php:698
 msgid "Please contact the blog administrator for help with your account."
 msgstr ""
 
-#: includes/controller/Main.php:551
+#: includes/controller/Main.php:553
 msgid "Your account has already been activated."
 msgstr ""
 
-#: includes/controller/Main.php:566
-#: includes/controller/Main.php:691
+#: includes/controller/Main.php:568
+#: includes/controller/Main.php:693
 msgid "You cannot reset your password because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:581
+#: includes/controller/Main.php:583
 msgid "We have emailed you a new password."
 msgstr ""
 
-#: includes/controller/Main.php:601
+#: includes/controller/Main.php:603
 msgid "Incorrect username and/or password."
 msgstr ""
 
-#: includes/controller/Main.php:607
+#: includes/controller/Main.php:609
 msgid "You must activate your account before you log in."
 msgstr ""
 
-#: includes/controller/Main.php:613
+#: includes/controller/Main.php:615
 msgid "Logged in."
 msgstr ""
 
-#: includes/controller/Main.php:617
+#: includes/controller/Main.php:619
 msgid "Log In"
 msgstr ""
 
-#: includes/controller/Main.php:626
+#: includes/controller/Main.php:628
 msgid "You aren't logged in."
 msgstr ""
 
-#: includes/controller/Main.php:632
+#: includes/controller/Main.php:634
 msgid "Logged out."
 msgstr ""
 
-#: includes/controller/Main.php:643
+#: includes/controller/Main.php:645
 msgid "You must be logged in to access user controls."
 msgstr ""
 
-#: includes/controller/Main.php:678
+#: includes/controller/Main.php:680
 msgid "Your profile has been updated."
 msgstr ""
 
-#: includes/controller/Main.php:682
+#: includes/controller/Main.php:684
 msgid "Controls"
 msgstr ""
 
-#: includes/controller/Main.php:708
+#: includes/controller/Main.php:710
 msgid "If that username is in our database, we will email you a password reset link."
 msgstr ""
 
-#: includes/controller/Main.php:711
+#: includes/controller/Main.php:713
 msgid "Lost Password"
 msgstr ""
 
