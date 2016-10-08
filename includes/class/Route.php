@@ -159,7 +159,7 @@
         public function url($url, $controller = null) {
             $config = Config::current();
 
-            if ($url[0] == "/")
+            if (strpos($url, "/") === 0)
                 return (ADMIN ?
                            $config->chyrp_url.$url :
                            $config->url.$url);
@@ -183,8 +183,11 @@
 
             Trigger::current()->filter($urls, "parse_urls");
 
-            foreach (array_diff_assoc($urls, $controller->urls) as $key => $value)
-                $urls[substr($key, 0, -1).preg_quote("feed/", $key[0]).$key[0]] = "/".$value."&amp;feed";
+            # Generate a feed variant of all dirty translations not native to the controller.
+            foreach (array_diff_assoc($urls, $controller->urls) as $key => $value) {
+                $quoted = substr($key, 0, 1);
+                $urls[substr($key, 0, -1).preg_quote("feed/", $quoted).$quoted] = $value."&amp;feed";
+            }
 
             $urls["|/([^/]+)/$|"] = "/?action=$1";
 
