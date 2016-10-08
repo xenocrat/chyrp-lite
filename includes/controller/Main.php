@@ -362,7 +362,7 @@
 
         /**
          * Function: drafts
-         * Grabs the posts for viewing the Drafts lists.
+         * Grabs the posts with draft status created by this user.
          */
         public function drafts() {
             $visitor = Visitor::current();
@@ -382,7 +382,7 @@
 
         /**
          * Function: view
-         * Views a post via dirty URL or clean URL e.g. /year/month/day/url/.
+         * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
         public function view($attrs = null) {
             $args = Route::current()->arg;
