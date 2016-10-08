@@ -170,13 +170,13 @@
 
             $base = !empty($controller->base) ? $config->url."/".$controller->base : $config->url ;
 
-            if ($config->clean_urls) { # If their post URL doesn't have a trailing slash, remove it from these as well.
-                if (substr($url, 0, 5) == "page/") # Different URL for viewing a page
+            if ($config->clean_urls) {
+                # Pages don't need this prefix if clean URLs are enabled.
+                if (substr($url, 0, 5) == "page/")
                     $url = substr($url, 5);
 
-                return (substr($config->post_url, -1) == "/" or $url == "search/") ?
-                           $base."/".$url :
-                           $base."/".rtrim($url, "/") ;
+                # Make sure there's always a trailing slash on clean URLs.
+                return $base."/".rtrim($url, "/")."/";
             }
 
             $urls = fallback($controller->urls, array());
