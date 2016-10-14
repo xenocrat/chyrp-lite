@@ -717,6 +717,20 @@ img#likeImage_preview {                         max-width: 28px;
                                                 padding-top: 13px;
                                                 padding-right: 13px;
                                                 cursor: pointer }
+.ajax_loading {                                 background-size: 30px 30px;
+                                                background-image: linear-gradient(-45deg, #fbfbfb 25%, transparent 25%, transparent 50%, #fbfbfb 50%, #fbfbfb 75%, transparent 75%, transparent) !important;
+                                                animation: ajax_loading 2s linear infinite }
+
+/**
+ *---------------------------------------------
+ * Group: Keyframes
+ *---------------------------------------------
+ */
+
+@keyframes ajax_loading {
+    from {                                      background-position: 0px 0px }
+    to {                                        background-position: 60px 30px }
+}
 
 /**
  *---------------------------------------------
