@@ -1548,7 +1548,7 @@
 
             if (!empty($_SESSION['theme']))
                 Flash::message(__("You are currently previewing a theme.").
-                                 ' <a href="'.admin_url("preview_theme").'">'.__("Stop &rarr;").'</a>');
+                                 ' <a href="'.url("/?action=preview_theme").'">'.__("Stop &rarr;").'</a>');
 
             $config = Config::current();
             $this->context["themes"] = array();
