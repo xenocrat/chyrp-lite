@@ -10,8 +10,8 @@
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
 <link rel="stylesheet" href="{{ site.chyrp_url }}/admin/stylesheets/all.css" type="text/css" media="all">
 <!-- JavaScripts -->
-<script src="{{ site.chyrp_url }}/includes/common.js" type="text/javascript" charset="utf-8"></script>
-<script src="{{ site.chyrp_url }}/admin/javascripts/admin.js.php?action={{ route.action }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ site.chyrp_url }}/includes/common.js" type="text/javascript" charset="UTF-8"></script>
+<script src="{{ site.chyrp_url }}/admin/javascripts/admin.js.php?action={{ route.action }}" type="text/javascript" charset="UTF-8"></script>
 {{ trigger.call("admin_head") }}
 </head>
 <body>
@@ -22,7 +22,7 @@
 {% for action, attributes in navigation %}
 {% if attributes.children is not empty %}
 <li role="presentation" class="{{ action }}{{ attributes.selected | selected(true) }}">
-<a role="menuitem" href="{{ url('/?action=' ~ (action | url_encode)) }}">{{ attributes.title }}</a>
+<a role="menuitem" href="{{ url('/?action=' ~ action) }}">{{ attributes.title }}</a>
 </li>
 {% endif %}
 {% endfor %}
@@ -35,7 +35,7 @@
 {% if parent.selected and parent.children is not empty %}
 {% for child, attributes in parent.children %}
 <li role="presentation" class="{{ child }}{{ attributes.selected | selected(true) }}">
-<a role="menuitem" href="{{ url('/?action=' ~ (child | url_encode)) }}">{{ attributes.title }}</a>
+<a role="menuitem" href="{{ url('/?action=' ~ child) }}">{{ attributes.title }}</a>
 </li>
 {% endfor %}
 {% endif %}
