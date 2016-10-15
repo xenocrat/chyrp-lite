@@ -7,7 +7,7 @@
 <p>
 {{ "Are you sure you want to delete the comment from &#8220;%s&#8221;?" | translate("comments") | format(comment.author | fix) }}
 </p>
-<form class="delete" action="{{ admin_url('destroy_comment') }}" method="post" accept-charset="UTF-8">
+<form class="delete" action="{{ url('/?action=destroy_comment') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">
