@@ -29,7 +29,7 @@
                                    array("public_key" => $_POST['public_key'],
                                          "private_key" => $_POST['private_key']));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=recaptcha_settings");
+            Flash::notice(__("Settings updated."), "/?action=recaptcha_settings");
         }
 
         public function settings_nav($navs) {

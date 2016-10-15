@@ -29,7 +29,7 @@
                                          "spacing" => ((int) $_POST['spacing'] < 0) ? 0 : (int) $_POST['spacing'],
                                          "protect" => isset($_POST['protect'])));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=lightbox_settings");
+            Flash::notice(__("Settings updated."), "/?action=lightbox_settings");
         }
 
         public function settings_nav($navs) {

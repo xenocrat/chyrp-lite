@@ -43,7 +43,7 @@
             $pingback = new Pingback($_GET['id']);
 
             if ($pingback->no_results)
-                Flash::warning(__("Pingback not found.", "pingable"), "/admin/?action=manage_pingbacks");
+                Flash::warning(__("Pingback not found.", "pingable"), "/?action=manage_pingbacks");
 
             $admin->display("delete_pingback", array("pingback" => $pingback));
         }
@@ -59,7 +59,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a pingback.", "pingable"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_pingbacks");
+                redirect("/?action=manage_pingbacks");
 
             $pingback = new Pingback($_POST['id']);
 
@@ -68,7 +68,7 @@
 
             Pingback::delete($pingback->id);
 
-            Flash::notice(__("Pingback deleted.", "pingable"), "/admin/?action=manage_pingbacks");
+            Flash::notice(__("Pingback deleted.", "pingable"), "/?action=manage_pingbacks");
         }
 
         public function admin_manage_pingbacks($admin) {

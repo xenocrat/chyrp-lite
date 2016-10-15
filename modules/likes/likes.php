@@ -50,7 +50,7 @@
                                "likeWithText" => isset($_POST['likeWithText']),
                                "likeImage" => $_POST['likeImage']));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=like_settings");
+            Flash::notice(__("Settings updated."), "/?action=like_settings");
         }
 
         public function settings_nav($navs) {

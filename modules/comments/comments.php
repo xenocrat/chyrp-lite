@@ -155,7 +155,7 @@
 
         public function admin_update_comment() {
             if (empty($_POST))
-                redirect("/admin/?action=manage_comments");
+                redirect("/?action=manage_comments");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -210,7 +210,7 @@
             if (!$visitor->group->can("edit_comment", "delete_comment"))
                 Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
 
-            Flash::notice(__("Comment updated.", "comments"), "/admin/?action=manage_comments");
+            Flash::notice(__("Comment updated.", "comments"), "/?action=manage_comments");
         }
 
         public function admin_delete_comment($admin) {
@@ -220,7 +220,7 @@
             $comment = new Comment($_GET['id']);
 
             if ($comment->no_results)
-                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
+                Flash::warning(__("Comment not found.", "comments"), "/?action=manage_comments");
 
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
@@ -236,7 +236,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_comments");
+                redirect("/?action=manage_comments");
 
             $comment = new Comment($_POST['id']);
 
@@ -249,7 +249,7 @@
             Comment::delete($comment->id);
 
             Flash::notice(__("Comment deleted.", "comments"));
-            redirect("/admin/?action=manage_".(($comment->status == "spam") ? "spam" : "comments"));
+            redirect("/?action=manage_".(($comment->status == "spam") ? "spam" : "comments"));
         }
 
         public function admin_manage_spam($admin) {
@@ -274,7 +274,7 @@
 
             SQL::current()->delete("comments", "status = 'spam'");
 
-            Flash::notice(__("All spam deleted.", "comments"), "/admin/?action=manage_spam");
+            Flash::notice(__("All spam deleted.", "comments"), "/?action=manage_spam");
         }
 
         public function post_options($fields, $post = null) {
@@ -357,12 +357,12 @@
                 $akismet = new Akismet($config->url, $akismet_api_key);
 
                 if (!$akismet->isKeyValid())
-                    Flash::warning(__("Invalid Akismet API key."), "/admin/?action=comment_settings");
+                    Flash::warning(__("Invalid Akismet API key."), "/?action=comment_settings");
                 else
                     $config->set("akismet_api_key", $akismet_api_key);
             }
 
-            Flash::notice(__("Settings updated."), "/admin/?action=comment_settings");
+            Flash::notice(__("Settings updated."), "/?action=comment_settings");
         }
 
         public function settings_nav($navs) {
@@ -395,7 +395,7 @@
             $comment = new Comment($_GET['id'], array("filter" => false));
 
             if ($comment->no_results)
-                Flash::warning(__("Comment not found.", "comments"), "/admin/?action=manage_comments");
+                Flash::warning(__("Comment not found.", "comments"), "/?action=manage_comments");
 
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
@@ -428,7 +428,7 @@
             $from = (!isset($_GET['from'])) ? "manage_comments" : "manage_spam" ;
 
             if (!isset($_POST['comment']))
-                Flash::warning(__("No comments selected."), "/admin/?action=".$from);
+                Flash::warning(__("No comments selected."), "/?action=".$from);
 
             $comments = array_keys($_POST['comment']);
 
@@ -504,7 +504,7 @@
                     self::reportSpam($false_negatives);
             }
 
-            redirect("/admin/?action=".$from);
+            redirect("/?action=".$from);
         }
 
         public function reportHam($comments) {

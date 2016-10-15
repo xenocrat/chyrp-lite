@@ -19,7 +19,7 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
     
             Config::current()->set("ajax_scroll_auto", isset($_POST['auto']));
-            Flash::notice(__("Settings updated."), "/admin/?action=cascade_settings");
+            Flash::notice(__("Settings updated."), "/?action=cascade_settings");
         }
 
         public function settings_nav($navs) {

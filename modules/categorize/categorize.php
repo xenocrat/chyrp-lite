@@ -225,7 +225,7 @@
                                   oneof(@$_POST['clean'], $_POST['name']),
                                   !empty($_POST['show_on_home']) ? 1 : 0);
 
-            Flash::notice(__("Category added.", "categorize"), "/admin/?action=manage_category");
+            Flash::notice(__("Category added.", "categorize"), "/?action=manage_category");
         }
 
         public function admin_edit_category($admin) {
@@ -238,7 +238,7 @@
             $category = Category::getCategory($_GET['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+                Flash::warning(__("Category not found.", "categorize"), "/?action=manage_category");
 
             $fields["categorize"] = $category;
             $admin->display("edit_category", $fields, "Edit category");
@@ -267,7 +267,7 @@
                                      oneof(@$_POST['clean'], $_POST['name']),
                                      !empty($_POST['show_on_home']) ? 1 : 0);
 
-            Flash::notice(__("Category updated.", "categorize"), "/admin/?action=manage_category");
+            Flash::notice(__("Category updated.", "categorize"), "/?action=manage_category");
         }
 
         public function admin_delete_category($admin) {
@@ -277,7 +277,7 @@
             $category = Category::getCategory($_GET['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+                Flash::warning(__("Category not found.", "categorize"), "/?action=manage_category");
 
             $admin->display("delete_category", array("category" => $category));
         }
@@ -293,7 +293,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_category");
+                redirect("/?action=manage_category");
 
             $category = Category::getCategory($_POST['id']);
 
@@ -301,6 +301,6 @@
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
 
             Category::deleteCategory($category->id);
-            Flash::notice(__("Category deleted.", "categorize"), "/admin/?action=manage_category");
+            Flash::notice(__("Category deleted.", "categorize"), "/?action=manage_category");
         }
     }
