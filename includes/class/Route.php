@@ -145,39 +145,33 @@
 
         /**
          * Function: url
-         * Attempts to change the specified clean URL to a dirty URL if clean URLs is disabled.
-         * Use this for linking to things. The applicable URL conversions are passed through the
-         * parse_urls trigger.
+         * Constructs an absolute URL and translates clean to dirty URLs if necessary.
+         *
+         * The applicable URL translations are filtered through the @parse_urls@ trigger.
          *
          * Parameters:
-         *     $url - The clean URL.
+         *     $url - The clean URL. Assumed to be dirty if it begins with "/".
          *     $controller - The controller to use. If omitted the current controller will be used.
          *
          * Returns:
-         *     A clean or dirty URL, depending on @Config.clean_urls@.
+         *     An absolute clean or dirty URL, depending on @Config->clean_urls@.
          */
         public function url($url, $controller = null) {
             $config = Config::current();
 
-            if (strpos($url, "/") === 0)
-                return (ADMIN ?
-                           $config->chyrp_url.$url :
-                           $config->url.$url);
-            else
-                $url = substr($url, -1) == "/" ? $url : $url."/" ;
-
             fallback($controller, $this->controller);
-
             $base = !empty($controller->base) ? $config->url."/".$controller->base : $config->url ;
 
-            if ($config->clean_urls) {
-                # Pages don't need this prefix if clean URLs are enabled.
-                if (substr($url, 0, 5) == "page/")
-                    $url = substr($url, 5);
+            # Assume this is a dirty URL and return it without conversion.
+            if (strpos($url, "/") === 0)
+                return $base.$url;
 
-                # Make sure there's always a trailing slash on clean URLs.
-                return $base."/".rtrim($url, "/")."/";
-            }
+            # Assume this is a clean URL and ensure it ends with a slash.
+            $url = rtrim($url, "/")."/";
+
+            # Conversion is unnecessary if clean URLs are enabled (but pages need to be de-prefixed).
+            if ($config->clean_urls)
+                return $base."/".preg_replace("|^page/|", "", $url);
 
             $urls = fallback($controller->urls, array());
 
@@ -189,6 +183,7 @@
                 $urls[substr($key, 0, -1).preg_quote("feed/", $delimiter).$delimiter] = $value."&amp;feed";
             }
 
+            # Add a fallback for single parameter translations.
             $urls["|/([^/]+)/$|"] = "/?action=$1";
 
             return $base.fix(preg_replace(array_keys($urls), array_values($urls), "/".$url, 1));
