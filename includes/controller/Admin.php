@@ -134,7 +134,7 @@
             $config = Config::current();
 
             if (empty($config->enabled_feathers))
-                Flash::notice(__("You must enable at least one feather in order to write a post."), "/admin/?action=feathers");
+                Flash::notice(__("You must enable at least one feather in order to write a post."), "/?action=feathers");
 
             fallback($_GET['feather'], @$_SESSION['latest_feather'], reset($config->enabled_feathers));
 
@@ -174,7 +174,7 @@
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
             if (!$post->redirect)
-                $post->redirect = "/admin/?action=write_post";
+                $post->redirect = "/?action=write_post";
 
             redirect($post->redirect);
         }
@@ -190,7 +190,7 @@
             $post = new Post($_GET['id'], array("drafts" => true, "filter" => false));
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+                Flash::warning(__("Post not found."), "/?action=manage_posts");
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
@@ -229,7 +229,7 @@
             Feathers::$instances[$post->feather]->update($post);
 
             Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
-                          "/admin/?action=manage_posts");
+                          "/?action=manage_posts");
         }
 
         /**
@@ -243,7 +243,7 @@
             $post = new Post($_GET['id'], array("drafts" => true));
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_posts");
+                Flash::warning(__("Post not found."), "/?action=manage_posts");
 
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
@@ -263,7 +263,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_posts");
+                redirect("/?action=manage_posts");
 
             $post = new Post($_POST['id'], array("drafts" => true));
 
@@ -275,7 +275,7 @@
 
             Post::delete($post->id);
 
-            Flash::notice(__("Post deleted."), "/admin/?action=manage_posts");
+            Flash::notice(__("Post deleted."), "/?action=manage_posts");
         }
 
         /**
@@ -403,7 +403,7 @@
             $page = new Page($_GET['id'], array("filter" => false));
 
             if ($page->no_results)
-                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+                Flash::warning(__("Page not found."), "/?action=manage_pages");
 
             $this->display("edit_page",
                            array("page" => $page,
@@ -452,7 +452,7 @@
                           $list_order);
 
             Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
-                          "/admin/?action=manage_pages");
+                          "/?action=manage_pages");
         }
 
         /**
@@ -469,7 +469,7 @@
             $page = new Page($_GET['id']);
 
             if ($page->no_results)
-                Flash::warning(__("Page not found."), "/admin/?action=manage_pages");
+                Flash::warning(__("Page not found."), "/?action=manage_pages");
 
             $this->display("delete_page", array("page" => $page));
         }
@@ -489,7 +489,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_pages");
+                redirect("/?action=manage_pages");
 
             $page = new Page($_POST['id']);
 
@@ -512,7 +512,7 @@
 
             Page::delete($page->id);
 
-            Flash::notice(__("Page deleted."), "/admin/?action=manage_pages");
+            Flash::notice(__("Page deleted."), "/?action=manage_pages");
         }
 
         /**
@@ -613,7 +613,7 @@
                                                         "/?action=activate&login=".urlencode($user->login).
                                                         "&token=".token(array($user->login, $user->email))));
 
-            Flash::notice(__("User added."), "/admin/?action=manage_users");
+            Flash::notice(__("User added."), "/?action=manage_users");
         }
 
         /**
@@ -630,7 +630,7 @@
             $user = new User($_GET['id']);
 
             if ($user->no_results)
-                Flash::warning(__("User not found."), "/admin/?action=manage_users");
+                Flash::warning(__("User not found."), "/?action=manage_users");
 
             $this->display("edit_user",
                            array("user" => $user,
@@ -705,7 +705,7 @@
                                                         "/?action=activate&login=".urlencode($user->login).
                                                         "&token=".token(array($user->login, $user->email))));
 
-            Flash::notice(__("User updated."), "/admin/?action=manage_users");
+            Flash::notice(__("User updated."), "/?action=manage_users");
         }
 
         /**
@@ -722,10 +722,10 @@
             $user = new User($_GET['id']);
 
             if ($user->no_results)
-                Flash::warning(__("User not found."), "/admin/?action=manage_users");
+                Flash::warning(__("User not found."), "/?action=manage_users");
 
             if ($user->id == Visitor::current()->id)
-                Flash::warning(__("You cannot delete your own account."), "/admin/?action=manage_users");
+                Flash::warning(__("You cannot delete your own account."), "/?action=manage_users");
 
             $this->display("delete_user",
                            array("user" => $user,
@@ -744,7 +744,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_users");
+                redirect("/?action=manage_users");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -788,7 +788,7 @@
 
             User::delete($user->id);
 
-            Flash::notice(__("User deleted."), "/admin/?action=manage_users");
+            Flash::notice(__("User deleted."), "/?action=manage_users");
         }
 
         /**
@@ -848,7 +848,7 @@
 
             Group::add($_POST['name'], array_keys($_POST['permissions']));
 
-            Flash::notice(__("Group added."), "/admin/?action=manage_groups");
+            Flash::notice(__("Group added."), "/?action=manage_groups");
         }
 
         /**
@@ -865,7 +865,7 @@
             $group = new Group($_GET['id']);
 
             if ($group->no_results)
-                Flash::warning(__("Group not found."), "/admin/?action=manage_groups");
+                Flash::warning(__("Group not found."), "/?action=manage_groups");
 
             $this->display("edit_group",
                            array("group" => $group,
@@ -899,7 +899,7 @@
 
             $group->update($_POST['name'], array_keys($_POST['permissions']));
 
-            Flash::notice(__("Group updated."), "/admin/?action=manage_groups");
+            Flash::notice(__("Group updated."), "/?action=manage_groups");
         }
 
         /**
@@ -919,7 +919,7 @@
                 show_404(__("Not Found"), __("Group not found."));
 
             if ($group->id == Visitor::current()->group->id)
-                Flash::warning(__("You cannot delete your own group."), "/admin/?action=manage_groups");
+                Flash::warning(__("You cannot delete your own group."), "/?action=manage_groups");
 
             $this->display("delete_group",
                            array("group" => $group,
@@ -939,7 +939,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_groups");
+                redirect("/?action=manage_groups");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1007,7 +1007,7 @@
 
             Group::delete($group->id);
 
-            Flash::notice(__("Group deleted."), "/admin/?action=manage_groups");
+            Flash::notice(__("Group deleted."), "/?action=manage_groups");
         }
 
         /**
@@ -1247,7 +1247,7 @@
             $trigger->filter($exports, "export");
 
             if (empty($exports))
-                Flash::warning(__("You did not select anything to export."), "/admin/?action=export");
+                Flash::warning(__("You did not select anything to export."), "/?action=export");
 
             $filename = sanitize(camelize($config->name), false, true)."_Export_".date("Y-m-d");
             $filepath = tempnam(sys_get_temp_dir(), "zip");
@@ -1292,24 +1292,24 @@
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
                 if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $imports["posts"]->generator != "Chyrp")
-                    Flash::warning(__("Posts export file is invalid."), "/admin/?action=import");
+                    Flash::warning(__("Posts export file is invalid."), "/?action=import");
 
             if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
                 if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $imports["pages"]->generator != "Chyrp")
-                    Flash::warning(__("Pages export file is invalid."), "/admin/?action=import");
+                    Flash::warning(__("Pages export file is invalid."), "/?action=import");
 
             if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']))
                 if (!is_array($imports["groups"] = json_get(file_get_contents($_FILES['groups_file']['tmp_name']), true)))
-                    Flash::warning(__("Groups export file is invalid."), "/admin/?action=import");
+                    Flash::warning(__("Groups export file is invalid."), "/?action=import");
 
             if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file']))
                 if (!is_array($imports["users"] = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true)))
-                    Flash::warning(__("Users export file is invalid."), "/admin/?action=import");
+                    Flash::warning(__("Users export file is invalid."), "/?action=import");
 
             $trigger->filter($imports, "before_import");
 
             if (empty($imports))
-                Flash::warning(__("You did not select anything to import."), "/admin/?action=import");
+                Flash::warning(__("You did not select anything to import."), "/?action=import");
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
                 ini_set("memory_limit", "20M");
@@ -1420,7 +1420,7 @@
 
             $trigger->call("import", $imports);
 
-            Flash::notice(__("Chyrp Lite content successfully imported!"), "/admin/?action=import");
+            Flash::notice(__("Chyrp Lite content successfully imported!"), "/?action=import");
         }
 
         /**
@@ -1610,7 +1610,7 @@
             foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
 
-            Flash::notice(__("Extension enabled."), "/admin/?action=".pluralize($type));
+            Flash::notice(__("Extension enabled."), "/?action=".pluralize($type));
         }
 
         /**
@@ -1650,7 +1650,7 @@
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
 
-            Flash::notice(__("Extension disabled."), "/admin/?action=".pluralize($type));
+            Flash::notice(__("Extension disabled."), "/?action=".pluralize($type));
         }
 
         /**
@@ -1679,7 +1679,7 @@
             foreach (load_info(THEMES_DIR.DIR.$theme.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
 
-            Flash::notice(__("Theme changed."), "/admin/?action=themes");
+            Flash::notice(__("Theme changed."), "/?action=themes");
         }
 
         /**
@@ -1691,7 +1691,7 @@
 
             if (empty($_POST['theme'])) {
                 unset($_SESSION['theme']);
-                Flash::notice(__("Preview stopped."), "/admin/?action=themes");
+                Flash::notice(__("Preview stopped."), "/?action=themes");
             }
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -1768,7 +1768,7 @@
             $config->set("check_updates", !empty($_POST['check_updates']));
             $config->set("check_updates_last", $check_updates_last);
 
-            Flash::notice(__("Settings updated."), "/admin/?action=general_settings");
+            Flash::notice(__("Settings updated."), "/?action=general_settings");
         }
 
         /**
@@ -1815,7 +1815,7 @@
             $config->set("enable_emoji", !empty($_POST['enable_emoji']));
             $config->set("enable_markdown", !empty($_POST['enable_markdown']));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=content_settings");
+            Flash::notice(__("Settings updated."), "/?action=content_settings");
         }
 
         /**
@@ -1845,7 +1845,7 @@
             $config->set("default_group", (int) $_POST['default_group']);
             $config->set("guest_group", (int) $_POST['guest_group']);
 
-            Flash::notice(__("Settings updated."), "/admin/?action=user_settings");
+            Flash::notice(__("Settings updated."), "/?action=user_settings");
         }
 
         /**
@@ -1895,7 +1895,7 @@
             $config->set("post_url", trim($_POST['post_url'], "/ ")."/");
             $config->set("enable_homepage", !empty($_POST['enable_homepage']));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=route_settings");
+            Flash::notice(__("Settings updated."), "/?action=route_settings");
         }
 
         /**
@@ -1904,9 +1904,9 @@
          */
         public function login() {
             if (logged_in())
-                Flash::notice(__("You are already logged in."), "/admin/");
+                Flash::notice(__("You are already logged in."), "/");
 
-            $_SESSION['redirect_to'] = "/admin/";
+            $_SESSION['redirect_to'] = url("/");
             redirect(url("login", MainController::current()));
         }
 
