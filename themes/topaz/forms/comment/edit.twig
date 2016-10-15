@@ -1,4 +1,4 @@
-<form id="comment_edit_{{ comment.id }}" class="comment_edit" action="{{ admin_url('update_comment') }}" method="post" accept-charset="UTF-8">
+<form id="comment_edit_{{ comment.id }}" class="comment_edit" action="{{ url('/admin/?action=update_comment') }}" method="post" accept-charset="UTF-8">
 <label for="comment_body_{{ comment.id }}">{{ "Comment" | translate }}</label>
 <textarea name="body" id="comment_body_{{ comment.id }}">{{ comment.body }}</textarea>
 <a id="more_options_link_{{ comment.id }}" href="#" class="more_options_link">{{ "More Options &darr;" | translate("chyrp") }}</a>

@@ -19,15 +19,15 @@
 </li>
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
 <li role="presentation">
-<a role="menuitem" href="{{ admin_url() }}">{{ "Admin" | translate }}</a>
+<a role="menuitem" href="{{ url('/admin/') }}">{{ "Admin" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_post") %}
 <li role="presentation">
-<a role="menuitem" href="{{ admin_url('write_post') }}">{{ "Write" | translate }}</a>
+<a role="menuitem" href="{{ url('/admin/?action=write') }}">{{ "Write" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_draft") %}
 <li role="presentation">
-<a role="menuitem" href="{{ admin_url('write_post') }}">{{ "Draft" | translate }}</a>
+<a role="menuitem" href="{{ url('/admin/?action=write') }}">{{ "Draft" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.logged_in %}
