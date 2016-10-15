@@ -68,7 +68,7 @@
      *     $url - The absolute or relative URL to redirect to.
      */
     function redirect($url) {
-        # Handle URIs without domain.
+        # Ask the current controller to translate relative URLs.
         if (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
