@@ -74,6 +74,8 @@
                                              "session_hash" => $this->session_hash));
 
             $_SESSION["likes"][$this->post_id] = !empty($this->user_id);
+
+            Trigger::current()->call("like_post", $this->post_id, $this->user_id);
         }
 
         /**
@@ -91,6 +93,8 @@
                                        array("LIMIT" => 1));
 
             unset($_SESSION["likes"][$this->post_id]);
+
+            Trigger::current()->call("unlike_post", $this->post_id, $this->user_id);
         }
 
         public function fetchPeople() {

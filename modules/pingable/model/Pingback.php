@@ -48,10 +48,19 @@
                                "title"      => strip_tags($title),
                                "created_at" => oneof($created_at, datetime())));
 
-            return new self($sql->latest("pingbacks"));
+            $new = new self($sql->latest("pingbacks"));
+            Trigger::current()->call("add_pingback", $new->post_id, $new->id);
+            return $new;
         }
 
         static function delete($pingback_id) {
+            $trigger = Trigger::current();
+
+            if ($trigger->exists("delete_pingback")) {
+                $new = new self($pingback_id);
+                $trigger->call("delete_pingback", $new->post_id, $new->id);
+            }
+
             SQL::current()->delete("pingbacks", array("id" => $pingback_id));
         }
 

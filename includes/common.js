@@ -13,9 +13,9 @@ $.fn.loader = function(remove) {
   return this;
 }
 
-// Cookie management
+// Cookie management.
 var Cookie = {
-  	set: function (name, value, days) {
+  	set: function(name, value, days) {
 		if (days) {
   			var d = new Date();
   			d.setTime(d.getTime() + (days * 1000 * 60 * 60 * 24));
@@ -25,23 +25,23 @@ var Cookie = {
 
     	document.cookie = name + "=" + value + expiry + "; path=/";
   	},
-  	get: function(name){
+  	get: function(name) {
     	var nameEQ = name + "=";
     	var ca = document.cookie.split(';');
 
     	for (var i = 0; i < ca.length; i++) {
       		var c = ca[i];
 
-      		while(c.charAt(0) == " ")
+      		while (c.charAt(0) == " ")
         		c = c.substring(1,c.length);
 
-      		if(c.indexOf(nameEQ) == 0)
+      		if (c.indexOf(nameEQ) == 0)
         		return c.substring(nameEQ.length,c.length);
     	}
 
     	return null;
   	},
-  	destroy: function(name){
+  	destroy: function(name) {
     	Cookie.set(name, "", -1);
   	}
 }

@@ -159,7 +159,7 @@
         public function url($url, $controller = null) {
             $config = Config::current();
 
-            if ($url[0] == "/")
+            if (strpos($url, "/") === 0)
                 return (ADMIN ?
                            $config->chyrp_url.$url :
                            $config->url.$url);
@@ -170,21 +170,24 @@
 
             $base = !empty($controller->base) ? $config->url."/".$controller->base : $config->url ;
 
-            if ($config->clean_urls) { # If their post URL doesn't have a trailing slash, remove it from these as well.
-                if (substr($url, 0, 5) == "page/") # Different URL for viewing a page
+            if ($config->clean_urls) {
+                # Pages don't need this prefix if clean URLs are enabled.
+                if (substr($url, 0, 5) == "page/")
                     $url = substr($url, 5);
 
-                return (substr($config->post_url, -1) == "/" or $url == "search/") ?
-                           $base."/".$url :
-                           $base."/".rtrim($url, "/") ;
+                # Make sure there's always a trailing slash on clean URLs.
+                return $base."/".rtrim($url, "/")."/";
             }
 
             $urls = fallback($controller->urls, array());
 
             Trigger::current()->filter($urls, "parse_urls");
 
-            foreach (array_diff_assoc($urls, $controller->urls) as $key => $value)
-                $urls[substr($key, 0, -1).preg_quote("feed/", $key[0]).$key[0]] = "/".$value."&amp;feed";
+            # Generate a feed variant of all dirty translations not native to the controller.
+            foreach (array_diff_assoc($urls, $controller->urls) as $key => $value) {
+                $delimiter = substr($key, 0, 1);
+                $urls[substr($key, 0, -1).preg_quote("feed/", $delimiter).$delimiter] = $value."&amp;feed";
+            }
 
             $urls["|/([^/]+)/$|"] = "/?action=$1";
 

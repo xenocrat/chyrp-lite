@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-09-24 17:48+0000\n"
+"POT-Creation-Date: 2016-10-08 15:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -407,12 +407,12 @@ msgstr ""
 msgid "Comment validated."
 msgstr ""
 
-#: modules/comments/comments.php:700
+#: modules/comments/comments.php:703
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:723
+#: modules/comments/comments.php:726
 #, php-format
 msgid "Comment #%d"
 msgstr ""
@@ -450,7 +450,7 @@ msgstr ""
 msgid "Comment added."
 msgstr ""
 
-#: modules/comments/model/Comment.php:281
+#: modules/comments/model/Comment.php:306
 msgid "Anon"
 msgstr ""
 

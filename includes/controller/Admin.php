@@ -1098,7 +1098,7 @@
 
                 $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
-                $posts_atom.= '    <title>'.fix($config->name).' Posts</title>'."\r";
+                $posts_atom.= '    <title>'.fix($config->name).' | Posts</title>'."\r";
                 $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
                 $posts_atom.= '    <id>tag:'.parse_url($config->url, PHP_URL_HOST).','.date("Y", $latest_timestamp).':Chyrp</id>'."\r";
                 $posts_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
@@ -1165,7 +1165,7 @@
 
                 $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
-                $pages_atom.= '    <title>'.fix($config->name).' Pages</title>'."\r";
+                $pages_atom.= '    <title>'.fix($config->name).' | Pages</title>'."\r";
                 $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
                 $pages_atom.= '    <id>tag:'.parse_url($config->url, PHP_URL_HOST).','.date("Y", $latest_timestamp).':Chyrp</id>'."\r";
                 $pages_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
@@ -1295,7 +1295,7 @@
                     Flash::warning(__("Posts export file is invalid."), "/admin/?action=import");
 
             if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
-                if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $imports["posts"]->generator != "Chyrp")
+                if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $imports["pages"]->generator != "Chyrp")
                     Flash::warning(__("Pages export file is invalid."), "/admin/?action=import");
 
             if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']))
@@ -1391,11 +1391,11 @@
                 }
             }
 
-            if (isset($imports["posts"])) {
+            if (isset($imports["pages"])) {
                 if (!$visitor->group->can("add_page"))
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
-                foreach ($imports["posts"]->entry as $entry) {
+                foreach ($imports["pages"]->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;

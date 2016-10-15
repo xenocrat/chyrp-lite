@@ -329,7 +329,7 @@ li.feather div.controls button {                float: right }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {                text-decoration: none }
 #content ul.extend > li p:last-child {          margin-bottom: 0em }
-#content ul.themes > li {                       min-width: 306px;
+#content ul.themes > li {                       min-width: 300px;
                                                 width: 32.33%;
                                                 margin-right: 1%;
                                                 margin-top: 0em;
@@ -717,6 +717,20 @@ img#likeImage_preview {                         max-width: 28px;
                                                 padding-top: 13px;
                                                 padding-right: 13px;
                                                 cursor: pointer }
+.ajax_loading {                                 background-size: 30px 30px;
+                                                background-image: linear-gradient(-45deg, #fbfbfb 25%, transparent 25%, transparent 50%, #fbfbfb 50%, #fbfbfb 75%, transparent 75%, transparent) !important;
+                                                animation: ajax_loading 2s linear infinite }
+
+/**
+ *---------------------------------------------
+ * Group: Keyframes
+ *---------------------------------------------
+ */
+
+@keyframes ajax_loading {
+    from {                                      background-position: 0px 0px }
+    to {                                        background-position: 60px 30px }
+}
 
 /**
  *---------------------------------------------
@@ -724,11 +738,11 @@ img#likeImage_preview {                         max-width: 28px;
  *---------------------------------------------
  */
 
-@media screen and (max-width: 1095px) {
+@media screen and (max-width: 1080px) {
         #content ul.themes > li {               width: 49% }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     #header #navigation {                       left: 0em;
                                                 right: 0em }
     #header #navigation li a {                  display: block;
@@ -793,7 +807,7 @@ img#likeImage_preview {                         max-width: 28px;
     #content table tbody tr td.controls,
     #content table tbody tr td.checkbox,
     #content table tbody tr td.show_on_home {   min-width: 64px }
-    #content table tbody tr td.main {           min-width: 480px }
+    #content table tbody tr td.main {           min-width: 240px }
     #content table tbody tr:last-child td,
     #content table tbody tr td[rowspan="2"] {   border-bottom: none }
     #content table tbody tr td:first-child {    border-left: none }
@@ -842,8 +856,4 @@ img#likeImage_preview {                         max-width: 28px;
                                                 left: 5% }
     .iframe_close_gadget {                      top: 5%;
                                                 right: 5% }
-}
-
-@media screen and (max-width: 539px) {
-    table tbody tr td.main {                    min-width: 240px }
 }

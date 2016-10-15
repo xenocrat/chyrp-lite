@@ -694,6 +694,9 @@
             $config = Config::current();
             $trigger = Trigger::current();
 
+            if (!isset($context["post"]))
+                error(__("Not Found"), __("Post not found."), null, 404); # Don't use show_404(), we'll go in circles.
+
             $post = $context["post"];
             $comments = $post->comments;
             $latest_timestamp = 0;
@@ -858,7 +861,7 @@
         }
 
         public function correspond_comment($params) {
-            $post = new Post($params["post"], array("drafts" => true));
+            $post = new Post($params["post_id"], array("drafts" => true));
 
             $params["subject"] = _f("New Comment at %s", Config::current()->name);
             $params["message"] = _f("%s commented on a blog post:", fix($params["author"])).
