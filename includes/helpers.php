@@ -145,27 +145,6 @@
     }
 
     /**
-     * Function: admin_url
-     * Generates an admin URL from the supplied components.
-     *
-     * Parameters:
-     *     $action - The admin action.
-     *     $params - An indexed array of parameters.
-     *
-     * Returns:
-     *     A URL to a resource in the administration console.
-     */
-    function admin_url($action = "", $params = array()) {
-        $config = Config::current();
-        $request = !empty($action) ? array("action=".$action) : array() ;
-
-        foreach ($params as $key => $value)
-            $request[] = urlencode($key)."=".urlencode($value);
-
-        return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
-    }
-
-    /**
      * Function: htaccess_conf
      * Creates the .htaccess file for Chyrp Lite or appends to an existing file.
      *
