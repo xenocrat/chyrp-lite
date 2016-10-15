@@ -160,7 +160,7 @@
             $config = Config::current();
 
             fallback($controller, $this->controller);
-            $base = !empty($controller->base) ? $config->url."/".$controller->base : $config->url ;
+            $base = !empty($controller->base) ? $config->chyrp_url."/".$controller->base : $config->url ;
 
             # Assume this is a dirty URL and return it without conversion.
             if (strpos($url, "/") === 0)
