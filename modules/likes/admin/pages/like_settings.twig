@@ -3,7 +3,7 @@
 {% block title %}{{ "Like Settings" | translate("likes") }}{% endblock %}
 
 {% block content %}
-<form id="like_settings" class="split" action="{{ admin_url('like_settings') }}" method="post">
+<form id="like_settings" class="split" action="{{ url('/?action=like_settings') }}" method="post">
 <fieldset>
 <p>
 <label for="likeImage">{{ "Like Button Image" | translate("likes") }}</label>
