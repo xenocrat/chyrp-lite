@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>{{ "Rename Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name | striptags) }}</h2>
-<form class="split" action="{{ admin_url('update_tag') }}" method="post" accept-charset="UTF-8">
+<form class="split" action="{{ url('/?action=update_tag') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="name">{{ "Name" | translate("tags") }}</label>
