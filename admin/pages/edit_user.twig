@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>{{ "Editing User &#8220;%s&#8221;" | translate | format(user.login | fix) }}</h1>
-<form id="user_edit" class="split{{ user.id == visitor.id ? ' confirm' : '' }}" action="{{ admin_url('update_user') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="user_edit" class="split{{ user.id == visitor.id ? ' confirm' : '' }}" action="{{ url('/?action=update_user') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="full_name">{{ "Full Name" | translate }}</label>

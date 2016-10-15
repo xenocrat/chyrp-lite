@@ -3,7 +3,7 @@
 {% block title %}{{ "Site Configuration" | translate }}{% endblock %}
 
 {% block content %}
-<form id="general_settings" class="split" action="{{ admin_url('general_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="general_settings" class="split" action="{{ url('/?action=general_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="name">{{ "Site Name" | translate }}</label>
@@ -23,7 +23,7 @@
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
 <input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix(true) : '' }}" id="url">
-<a href="{{ admin_url('help', {'id': 'canonical_url'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('/?action=help&amp;id=canonical_url') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Have your site URLs point someplace other than your install directory." | translate }}
 </small>

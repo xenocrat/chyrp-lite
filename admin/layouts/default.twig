@@ -22,7 +22,7 @@
 {% for action, attributes in navigation %}
 {% if attributes.children is not empty %}
 <li role="presentation" class="{{ action }}{{ attributes.selected | selected(true) }}">
-<a role="menuitem" href="{{ admin_url(action) }}">{{ attributes.title }}</a>
+<a role="menuitem" href="{{ url('/?action=' ~ (action | url_encode)) }}">{{ attributes.title }}</a>
 </li>
 {% endif %}
 {% endfor %}
@@ -35,7 +35,7 @@
 {% if parent.selected and parent.children is not empty %}
 {% for child, attributes in parent.children %}
 <li role="presentation" class="{{ child }}{{ attributes.selected | selected(true) }}">
-<a role="menuitem" href="{{ admin_url(child) }}">{{ attributes.title }}</a>
+<a role="menuitem" href="{{ url('/?action=' ~ (child | url_encode)) }}">{{ attributes.title }}</a>
 </li>
 {% endfor %}
 {% endif %}
@@ -57,7 +57,7 @@
 <div id="footer" role="contentinfo">
 <img class="logo" src="{{ site.chyrp_url }}/favicon.svg" alt="{{ 'Chyrp loves you.' | translate }}">
 <small class="metadata">{{ "Chyrp Lite &ldquo;%s&rdquo;" | translate | format(codename) }}</small>
-<a id="logout" class="button" href="{{ admin_url('logout') }}">{{ "Log out" | translate }}</a>
+<a id="logout" class="button" href="{{ url('/?action=logout') }}">{{ "Log out" | translate }}</a>
 </div>
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->

@@ -3,7 +3,7 @@
 {% block title %}{{ "Manage Groups" | translate }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="index.php" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
 <fieldset>
 <input type="hidden" name="action" value="manage_groups">
 <div role="search" class="filter_item">
@@ -11,7 +11,7 @@
 <input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_group") %}
-<a href="{{ admin_url('new_group') }}" class="button yay">
+<a href="{{ url('/?action=new_group') }}" class="button yay">
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add">{{ "New Group" | translate }}
 </a>
 {% endif %}
@@ -37,7 +37,7 @@
 {{ group.name | fix }}
 </td>
 <td class="group_size value">
-<a href="{{ admin_url('manage_users', {'query': 'group:' ~ group.name}) }}">{{ group.size | fix }}</a>
+<a href="{{ url('/?action=manage_users&amp;query=group:' ~ (group.name | url_encode)) }}">{{ group.size | fix }}</a>
 </td>
 <td class="group_default emblem">
 {% if group.id == site.default_group %}

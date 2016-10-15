@@ -3,18 +3,18 @@
 {% block title %}{{ "Manage Users" | translate }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="index.php" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
 <fieldset>
 <input type="hidden" name="action" value="manage_users">
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('/?action=help&amp;id=filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_user") %}
-<a href="{{ admin_url('new_user') }}" class="button yay">
+<a href="{{ url('/?action=new_user') }}" class="button yay">
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add">{{ "New User" | translate }}
 </a>
 {% endif %}

@@ -15,13 +15,13 @@
 {{ feather.name }}{# translation is done in the controller #}
 </h3>
 {% if feather.help %}
-<a href="{{ admin_url('help', {'id': feather.help}) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('/?action=help&amp;id=' ~ (feather.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="feather_description">
 {{ feather.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
-<form class="feather_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="feather_disabler" action="{{ url('/?action=disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ ip | token }}">
@@ -35,7 +35,7 @@
 </p>
 {% endif %}
 </form>
-<form class="feather_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="feather_enabler" action="{{ url('/?action=enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ ip | token }}">
@@ -59,13 +59,13 @@
 {{ feather.name }}{# translation is done in the controller #}
 </h3>
 {% if feather.help %}
-<a href="{{ admin_url('help', {'id': feather.help}) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('/?action=help&amp;id=' ~ (feather.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="feather_description">
 {{ feather.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
-<form class="feather_disabler" action="{{ admin_url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="feather_disabler" action="{{ url('/?action=disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ ip | token }}">
@@ -79,7 +79,7 @@
 </p>
 {% endif %}
 </form>
-<form class="feather_enabler" action="{{ admin_url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="feather_enabler" action="{{ url('/?action=enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ ip | token }}">
