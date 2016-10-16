@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>WordPress</h2>
-<form id="import_wordpress_form" class="split" action="{{ url('/?action=import_wordpress') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="import_wordpress_form" class="split" action="{{ url('import_wordpress') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="xml_file">{{ "eXtended .XML File" | translate("migrator") }}</label>
@@ -27,7 +27,7 @@
 </form>
 <hr>
 <h2>Tumblr</h2>
-<form id="import_tumblr_form" class="split" action="{{ url('/?action=import_tumblr') }}" method="post" accept-charset="UTF-8">
+<form id="import_tumblr_form" class="split" action="{{ url('import_tumblr') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="tumblr_url">{{ "Your Tumblr URL" | translate("migrator") }}</label>
@@ -45,7 +45,7 @@
 </form>
 <hr>
 <h2>TextPattern</h2>
-<form id="import_textpattern_form" class="split" action="{{ url('/?action=import_textpattern') }}" method="post" accept-charset="UTF-8">
+<form id="import_textpattern_form" class="split" action="{{ url('import_textpattern') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="host">{{ "Host" | translate("migrator") }}</label>
@@ -86,7 +86,7 @@
 </form>
 <hr>
 <h2>MovableType</h2>
-<form id="import_movabletype_form" class="split" action="{{ url('/?action=import_movabletype') }}" method="post" accept-charset="UTF-8">
+<form id="import_movabletype_form" class="split" action="{{ url('import_movabletype') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
 <label for="host">{{ "Host" | translate("migrator") }}</label>

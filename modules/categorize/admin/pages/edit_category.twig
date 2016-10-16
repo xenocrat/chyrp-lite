@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>{{ "Editing Category &#8220;%s&#8221;" | translate("categorize") | format(category.name | striptags) }}</h2>
-<form id="edit_category" class="split" action="{{ url('/?action=update_category') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="edit_category" class="split" action="{{ url('update_category') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="name">{{ "Name" | translate("categorize") }}</label>

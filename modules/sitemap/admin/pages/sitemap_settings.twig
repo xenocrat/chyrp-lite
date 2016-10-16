@@ -3,7 +3,7 @@
 {% block title %}{{ "Sitemap Settings" | translate("sitemap") }}{% endblock %}
 
 {% block content %}
-<form id="sitemap_settings" class="split" action="{{ url('/?action=sitemap_settings') }}" method="post">
+<form id="sitemap_settings" class="split" action="{{ url('sitemap_settings') }}" method="post">
 <fieldset>
 <p>
 <label for="blog_changefreq">{{ "Blog is Updated" | translate("sitemap") }}</label>

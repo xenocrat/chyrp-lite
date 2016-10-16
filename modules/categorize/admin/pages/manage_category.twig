@@ -9,11 +9,11 @@
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('/?action=help&amp;id=filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
-<a href="{{ url('/?action=new_category') }}" class="button yay"> 
+<a href="{{ url('new_category') }}" class="button yay"> 
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Add Category" | translate("categorize") }}
 </a>
 </div>
@@ -46,11 +46,11 @@
 {{ category.total }}
 </td>
 <td class="controls">
-<a href="{{ url('/?action=edit_category&amp;id=' ~ category.id) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg"
+<a href="{{ url('edit_category/id/' ~ category.id) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg"
 alt="{{ 'edit' | translate }}"></a>
 </td>
 <td class="controls">
-<a href="{{ url('/?action=delete_category&amp;id=' ~ category.id) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg"
+<a href="{{ url('delete_category/id/' ~ category.id) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg"
 alt="{{ 'delete' | translate }}"></a>
 </td>
 </tr>

@@ -7,7 +7,7 @@
 <p>
 {{ "Are you sure you want to delete the category &#8220;%s&#8221;?" | translate("categorize") | format(category.name | fix) }}
 </p>
-<form class="delete" action="{{ url('/?action=destroy_category') }}" method="post" accept-charset="UTF-8">
+<form class="delete" action="{{ url('destroy_category') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">

@@ -9,16 +9,16 @@
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('/?action=help&amp;id=filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
-<a class="button boo" href="{{ url('/?action=purge_spam') }}"><img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Delete All (%d)" | translate("comments") | format(comments.total) }}</a>
+<a class="button boo" href="{{ url('purge_spam') }}"><img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Delete All (%d)" | translate("comments") | format(comments.total) }}</a>
 </div>
 </fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Spam" | translate("comments") }}</h2>
-<form action="{{ url('/?action=bulk_comments&amp;from=spam') }}" method="post">
+<form action="{{ url('bulk_comments/from/spam') }}" method="post">
 <table class="interactive">
 <thead>
 <tr class="head">

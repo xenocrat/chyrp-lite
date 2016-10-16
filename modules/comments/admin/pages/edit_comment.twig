@@ -4,12 +4,12 @@
 
 {% block content %}
 <h1>{{ "Editing Comment" | translate("comments") }}</h1>
-<form id="edit_form" action="{{ url('/?action=update_comment') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="edit_form" action="{{ url('update_comment') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p class="main_options">
 <label for="body_field">
 {% if site.enable_markdown %}
-<a href="{{ url('/?action=help&amp;id=markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ "Body" | translate("comments") }}
 </label>

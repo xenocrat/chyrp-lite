@@ -16,16 +16,16 @@
 {% for tag in tag_cloud %}
 <tr>
 <td class="tag_name name main">
-<a class="tag" href="{{ url('/?action=manage_tags&amp;query=' ~ (tag.clean | url_encode)) }}" title="{{ tag.title }}">{{ tag.name }}</a>
+<a class="tag" href="{{ url('manage_tags/query/' ~ (tag.clean | url_encode)) }}" title="{{ tag.title }}">{{ tag.name }}</a>
 </td>
 <td class="tag_count value">
 {{ tag.popularity }}
 </td>
 <td class="controls">
-<a class="edit_tag" href="{{ url('/?action=rename_tag&amp;clean=' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg" alt="{{ 'edit' | translate }}"></a>
+<a class="edit_tag" href="{{ url('rename_tag/clean/' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg" alt="{{ 'edit' | translate }}"></a>
 </td>
 <td class="controls">
-<a class="delete_tag" href="{{ url('/?action=delete_tag&amp;clean=' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
+<a class="delete_tag" href="{{ url('delete_tag/clean/' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
 </td>
 </tr>
 {% else %}
@@ -36,7 +36,7 @@
 </tbody>
 </table>
 <h2>{{ GET.query is not empty ? "Posts tagged with &#8220;%s&#8221;" | translate("tags") | format(GET.query | striptags) : "Posts" | translate }}</h2>
-<form action="{{ url('/?action=bulk_tag') }}" method="post" accept-charset="UTF-8">
+<form action="{{ url('bulk_tag') }}" method="post" accept-charset="UTF-8">
 <table class="interactive">
 <thead>
 <tr class="head">
@@ -57,11 +57,11 @@
 </td>
 <td class="post_tags list main">
 {% for name, clean in post.tags %}
-<a class="tag" href="{{ url('/?action=manage_tags&amp;query=' ~ (clean | url_encode)) }}">{{ name }}</a>
+<a class="tag" href="{{ url('manage_tags/query/' ~ (clean | url_encode)) }}">{{ name }}</a>
 {% endfor %}
 </td>
 <td class="controls">
-<a class="edit_tag edit_link" href="{{ url('/?action=edit_tags&amp;id=' ~ post.id) }}">{{ '<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">' }}</a>
+<a class="edit_tag edit_link" href="{{ url('edit_tags/id/' ~ post.id) }}">{{ '<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">' }}</a>
 </td>
 </tr>
 {% else %}
