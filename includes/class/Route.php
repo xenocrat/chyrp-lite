@@ -173,9 +173,9 @@
             # Assume this is a clean URL and ensure it ends with a slash.
             $url = rtrim($url, "/")."/";
 
-            # Translation is unnecessary if clean URLs are enabled (but pages need to be de-prefixed).
+            # Translation is unnecessary if clean URLs are enabled.
             if ($config->clean_urls and !empty($controller->clean))
-                return $base."/".preg_replace("|^page/|", "", $url);
+                return $base."/".$url;
 
             $urls = fallback($controller->urls, array());
 
