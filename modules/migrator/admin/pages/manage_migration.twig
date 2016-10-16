@@ -33,7 +33,7 @@
 <label for="tumblr_url">{{ "Your Tumblr URL" | translate("migrator") }}</label>
 <input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
 <small>
-{{ "Something like <code>http://example.tumblr.com/</code>." | translate("migrator") }}
+{{ "Something like <code>http://%s.tumblr.com/</code>." | translate("migrator") | format(visitor.login) }}
 </small>
 <small>{{ "Note: Audio tumbles cannot be imported." | translate("migrator") }}</small>
 </p>
