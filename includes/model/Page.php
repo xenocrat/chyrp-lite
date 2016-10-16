@@ -261,7 +261,7 @@
 
         /**
          * Function: url
-         * Returns a page's URL.
+         * Returns a page's URL. We can cheat because we know the inner workings of MainController.
          */
         public function url() {
             if ($this->no_results)
