@@ -182,13 +182,13 @@
          *     $options - An array of options, mostly SQL things.
          *
          * Options:
-         *     select - What to grab from the table. @(modelname)s@ by default.
-         *     from - Which table(s) to grab from? @(modelname)s.*@ by default.
-         *     left_join - A @LEFT JOIN@ associative array. Example: @array("table" => "foo", "where" => "foo = :bar")@
-         *     where - A string or array of conditions. @array("__(modelname)s.id = :id")@ by default.
-         *     params - An array of parameters to pass to PDO. @array(":id" => $id)@ by default.
+         *     select - What to grab from the table.
+         *     from - Which table(s) to grab from?
+         *     left_join - A @LEFT JOIN@ associative array.
+         *     where - A string or array of conditions.
+         *     params - An array of parameters to pass to the SQL driver.
          *     group - A string or array of "GROUP BY" conditions.
-         *     order - What to order the SQL result by. @__(modelname)s.id DESC@ by default.
+         *     order - What to order the SQL result by.
          *     offset - Offset for SQL query.
          *     read_from - An array to read from instead of performing another query.
          */
@@ -317,13 +317,13 @@
          *     $options_for_object - An array of options for the instantiation of the model.
          *
          * Options:
-         *     select - What to grab from the table. @(modelname)s@ by default.
-         *     from - Which table(s) to grab from? @(modelname)s.*@ by default.
-         *     left_join - A @LEFT JOIN@ associative array. Example: @array("table" => "foo", "where" => "foo = :bar")@
-         *     where - A string or array of conditions. @array("__(modelname)s.id = :id")@ by default.
-         *     params - An array of parameters to pass to PDO. @array(":id" => $id)@ by default.
+         *     select - What to grab from the table.
+         *     from - Which table(s) to grab from?
+         *     left_join - A @LEFT JOIN@ associative array.
+         *     where - A string or array of conditions.
+         *     params - An array of parameters to pass to the SQL driver.
          *     group - A string or array of "GROUP BY" conditions.
-         *     order - What to order the SQL result by. @__(modelname)s.id DESC@ by default.
+         *     order - What to order the SQL result by.
          *     offset - Offset for SQL query.
          *     limit - Limit for SQL query.
          *
@@ -407,7 +407,7 @@
 
         /**
          * Function: delete
-         * Deletes a given object. Calls the @delete_(model)@ trigger with the objects ID.
+         * Deletes a given object. Calls the @delete_[model]@ trigger with the objects ID.
          *
          * Parameters:
          *     $model - The model name.
@@ -424,7 +424,7 @@
 
         /**
          * Function: deletable
-         * Checks if the <User> can delete the post.
+         * Checks if the <User> can delete the object.
          */
         public function deletable($user = null) {
             if ($this->no_results)
@@ -438,7 +438,7 @@
 
         /**
          * Function: editable
-         * Checks if the <User> can edit the post.
+         * Checks if the <User> can edit the object.
          */
         public function editable($user = null) {
             if ($this->no_results)
@@ -468,10 +468,11 @@
 
             $name = strtolower(get_class($this));
 
-            if (@Feathers::$instances[$this->feather]->disable_ajax_edit)
-                $classes = empty($classes) ? "no_ajax" : $classes." no_ajax" ;
+            # url() is safer but we can cheat because we know the inner workings of AdminController.
+            $url = Config::current()->chyrp_url.'/admin/?action=edit_'.$name.'&amp;id='.$this->id;
+            $classes = $classes.' '.$name.'_edit_link edit_link" id="'.$name.'_edit_'.$this->id;
 
-            echo $before.'<a href="'.Config::current()->chyrp_url.'/admin/?action=edit_'.$name.'&amp;id='.$this->id.'" title="Edit" class="'.($classes ? $classes." " : '').$name.'_edit_link edit_link" id="'.$name.'_edit_'.$this->id.'">'.$text.'</a>'.$after;
+            echo $before.'<a href="'.$url.'" class="'.trim($classes).'">'.$text.'</a>'.$after;
         }
 
         /**
@@ -492,6 +493,10 @@
 
             $name = strtolower(get_class($this));
 
-            echo $before.'<a href="'.Config::current()->chyrp_url.'/admin/?action=delete_'.$name.'&amp;id='.$this->id.'" title="Delete" class="'.($classes ? $classes." " : '').$name.'_delete_link delete_link" id="'.$name.'_delete_'.$this->id.'">'.$text.'</a>'.$after;
+            # url() is safer but we can cheat because we know the inner workings of AdminController.
+            $url = Config::current()->chyrp_url.'/admin/?action=delete_'.$name.'&amp;id='.$this->id;
+            $classes = $classes.' '.$name.'_delete_link delete_link" id="'.$name.'_delete_'.$this->id;
+
+            echo $before.'<a href="'.$url.'" class="'.trim($classes).'">'.$text.'</a>'.$after;
         }
     }
