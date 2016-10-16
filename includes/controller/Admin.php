@@ -145,7 +145,7 @@
 
             Trigger::current()->filter($options, array("write_post_options", "post_options"));
 
-            $this->display("write_post",
+            $this->display("pages".DIR."write_post",
                            array("groups" => Group::find(array("order" => "id ASC")),
                                  "options" => $options,
                                  "feathers" => Feathers::$instances,
@@ -197,7 +197,7 @@
 
             Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
 
-            $this->display("edit_post",
+            $this->display("pages".DIR."edit_post",
                            array("post" => $post,
                                  "groups" => Group::find(array("order" => "id ASC")),
                                  "options" => $options,
@@ -248,7 +248,7 @@
             if (!$post->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
-            $this->display("delete_post", array("post" => $post));
+            $this->display("pages".DIR."delete_post", array("post" => $post));
         }
 
         /**
@@ -338,7 +338,7 @@
                 }
             }
 
-            $this->display("manage_posts", array("posts" => $posts));
+            $this->display("pages".DIR."manage_posts", array("posts" => $posts));
         }
 
         /**
@@ -349,7 +349,7 @@
             if (!Visitor::current()->group->can("add_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
-            $this->display("write_page", array("pages" => Page::find()));
+            $this->display("pages".DIR."write_page", array("pages" => Page::find()));
         }
 
         /**
@@ -405,7 +405,7 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/?action=manage_pages");
 
-            $this->display("edit_page",
+            $this->display("pages".DIR."edit_page",
                            array("page" => $page,
                                  "pages" => Page::find(array("where" => array("id not" => $page->id)))));
         }
@@ -471,7 +471,7 @@
             if ($page->no_results)
                 Flash::warning(__("Page not found."), "/?action=manage_pages");
 
-            $this->display("delete_page", array("page" => $page));
+            $this->display("pages".DIR."delete_page", array("page" => $page));
         }
 
         /**
@@ -528,7 +528,7 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "title LIKE :query OR body LIKE :query", "pages");
 
-            $this->display("manage_pages",
+            $this->display("pages".DIR."manage_pages",
                            array("pages" => new Paginator(Page::find(array("placeholders" => true,
                                                                            "where" => $where,
                                                                            "params" => $params)),
@@ -545,7 +545,7 @@
 
             $config = Config::current();
 
-            $this->display("new_user",
+            $this->display("pages".DIR."new_user",
                            array("default_group" => new Group($config->default_group),
                                  "groups" => Group::find(array("where" => array("id not" => array($config->guest_group,
                                                                                                   $config->default_group)),
@@ -632,7 +632,7 @@
             if ($user->no_results)
                 Flash::warning(__("User not found."), "/?action=manage_users");
 
-            $this->display("edit_user",
+            $this->display("pages".DIR."edit_user",
                            array("user" => $user,
                                  "groups" => Group::find(array("order" => "id ASC",
                                                                "where" => array("id not" => Config::current()->guest_group)))));
@@ -727,7 +727,7 @@
             if ($user->id == Visitor::current()->id)
                 Flash::warning(__("You cannot delete your own account."), "/?action=manage_users");
 
-            $this->display("delete_user",
+            $this->display("pages".DIR."delete_user",
                            array("user" => $user,
                                  "users" => User::find(array("where" => array("id not" => $user->id)))));
         }
@@ -806,7 +806,7 @@
                                              "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
                                              "users");
 
-            $this->display("manage_users",
+            $this->display("pages".DIR."manage_users",
                            array("users" => new Paginator(User::find(array("placeholders" => true,
                                                                            "where" => $where,
                                                                            "params" => $params)),
@@ -821,7 +821,7 @@
             if (!Visitor::current()->group->can("add_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
-            $this->display("new_group",
+            $this->display("pages".DIR."new_group",
                            array("permissions" => Group::list_permissions()));
         }
 
@@ -867,7 +867,7 @@
             if ($group->no_results)
                 Flash::warning(__("Group not found."), "/?action=manage_groups");
 
-            $this->display("edit_group",
+            $this->display("pages".DIR."edit_group",
                            array("group" => $group,
                                  "permissions" => Group::list_permissions()));
         }
@@ -921,7 +921,7 @@
             if ($group->id == Visitor::current()->group->id)
                 Flash::warning(__("You cannot delete your own group."), "/?action=manage_groups");
 
-            $this->display("delete_group",
+            $this->display("pages".DIR."delete_group",
                            array("group" => $group,
                                  "groups" => Group::find(array("where" => array("id not" => $group->id),
                                                                "order" => "id ASC"))));
@@ -1031,7 +1031,7 @@
                 $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
                                         Config::current()->admin_per_page);
 
-            $this->display("manage_groups",
+            $this->display("pages".DIR."manage_groups",
                            array("groups" => $groups));
         }
 
@@ -1049,7 +1049,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to export content."));
 
             if (empty($_POST))
-                return $this->display("export");
+                return $this->display("pages".DIR."export");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1285,7 +1285,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
 
             if (empty($_POST))
-                return $this->display("import");
+                return $this->display("pages".DIR."import");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1502,7 +1502,7 @@
             }
 
             closedir($open);
-            $this->display("modules");
+            $this->display("pages".DIR."modules");
         }
 
         /**
@@ -1535,7 +1535,7 @@
             }
 
             closedir($open);
-            $this->display("feathers");
+            $this->display("pages".DIR."feathers");
         }
 
         /**
@@ -1566,7 +1566,7 @@
             }
 
             closedir($open);
-            $this->display("themes");
+            $this->display("pages".DIR."themes");
         }
 
         /**
@@ -1726,8 +1726,9 @@
             }
 
             if (empty($_POST))
-                return $this->display("general_settings", array("locales" => $locales,
-                                                                "timezones" => timezones()));
+                return $this->display("pages".DIR."general_settings",
+                                      array("locales" => $locales,
+                                            "timezones" => timezones()));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1780,7 +1781,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $this->display("content_settings");
+                return $this->display("pages".DIR."content_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1827,7 +1828,8 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $this->display("user_settings", array("groups" => Group::find(array("order" => "id DESC"))));
+                return $this->display("pages".DIR."user_settings",
+                                      array("groups" => Group::find(array("order" => "id DESC"))));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1857,7 +1859,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $this->display("route_settings");
+                return $this->display("pages".DIR."route_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -1931,7 +1933,7 @@
             if (substr_count($template, DIR))
                 error(__("Error"), __("Malformed URI."), null, 400);
 
-            return $this->display($template, array(), __("Help"), "help");
+            return $this->display("help".DIR.$template, array(), __("Help"));
         }
 
         /**
@@ -2061,9 +2063,8 @@
          *     $template - The template file to display (sans ".twig") relative to /admin/ for core and extensions.
          *     $context - The context to be supplied to Twig.
          *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
-         *     $path - The path to the template, usually "pages".
          */
-        public function display($template, $context = array(), $title = "", $path = "pages") {
+        public function display($template, $context = array(), $title = "") {
             $config = Config::current();
             $route = Route::current();
             $trigger = Trigger::current();
@@ -2099,7 +2100,7 @@
                 Update::check();
 
             try {
-                $this->twig->display($path.DIR.$template.".twig", $this->context);
+                $this->twig->display($template.".twig", $this->context);
             } catch (Exception $e) {
                 error(__("Twig Error"), $e->getMessage(), debug_backtrace());
             }
