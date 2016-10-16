@@ -7,7 +7,7 @@
 <p>
 {{ "Are you sure you want to delete the &#8220;%s&#8221; group?" | translate | format(group.name | fix) }}
 </p>
-<form class="delete split" action="{{ url('/?action=destroy_group') }}" method="post" accept-charset="UTF-8">
+<form class="delete split" action="{{ url('destroy_group') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 {% if group.users is not empty and groups is not empty %}
 <p>

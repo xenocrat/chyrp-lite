@@ -3,7 +3,7 @@
 {% block title %}{{ "Route Settings" | translate }}{% endblock %}
 
 {% block content %}
-<form id="route_settings" class="split" action="{{ url('/?action=route_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="route_settings" class="split" action="{{ url('route_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="clean_urls">{{ "Clean URLs" | translate }}</label>

@@ -6,7 +6,7 @@
 <p class="main_options">
 <label for="body">
 {% if site.enable_markdown %}
-<a href="{{ url('/?action=help&amp;id=markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ "Body" | translate }}
 </label>
@@ -17,7 +17,7 @@
 <p class="more_options_option">
 <label for="slug">
 {{ "Slug" | translate }}
-<a href="{{ url('/?action=help&amp;id=slugs') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/slugs') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </label>
 <input class="text" type="text" name="slug" value="{{ page is defined ? page.slug | fix : '' }}" id="slug">
 </p>

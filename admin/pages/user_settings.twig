@@ -3,7 +3,7 @@
 {% block title %}{{ "User Settings" | translate }}{% endblock %}
 
 {% block content %}
-<form id="user_settings" class="split" action="{{ url('/?action=user_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="user_settings" class="split" action="{{ url('user_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="can_register">{{ "Registration" | translate }}</label>

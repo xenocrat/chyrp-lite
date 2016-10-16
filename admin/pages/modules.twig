@@ -15,7 +15,7 @@
 {{ module.name }}{# translation is done in the controller #}
 </h3>
 {% if module.help %}
-<a href="{{ url('/?action=help&amp;id=' ~ (module.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
@@ -41,7 +41,7 @@
 </ol>
 {% endif %}
 <div class="controls">
-<form class="module_disabler" action="{{ url('/?action=disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="module_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">
 <input type="hidden" name="hash" value="{{ ip | token }}">
@@ -55,7 +55,7 @@
 </p>
 {% endif %}
 </form>
-<form class="module_enabler" action="{{ url('/?action=enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="module_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">
 <input type="hidden" name="hash" value="{{ ip | token }}">
@@ -79,7 +79,7 @@
 {{ module.name }}{# translation is done in the controller #}
 </h3>
 {% if module.help %}
-<a href="{{ url('/?action=help&amp;id=' ~ (module.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
@@ -106,7 +106,7 @@
 {% endif %}
 {% if module.classes is defined and not (module.classes | contains("missing_dependency")) %}
 <div class="controls">
-<form class="module_disabler" action="{{ url('/?action=disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="module_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">
 <input type="hidden" name="hash" value="{{ ip | token }}">
@@ -120,7 +120,7 @@
 </p>
 {% endif %}
 </form>
-<form class="module_enabler" action="{{ url('/?action=enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="module_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">
 <input type="hidden" name="hash" value="{{ ip | token }}">

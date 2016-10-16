@@ -22,7 +22,7 @@
 {% for action, attributes in navigation %}
 {% if attributes.children is not empty %}
 <li role="presentation" class="{{ action }}{{ attributes.selected | selected(true) }}">
-<a role="menuitem" href="{{ url('/?action=' ~ action) }}">{{ attributes.title }}</a>
+<a role="menuitem" href="{{ url(action) }}">{{ attributes.title }}</a>
 </li>
 {% endif %}
 {% endfor %}
@@ -35,7 +35,7 @@
 {% if parent.selected and parent.children is not empty %}
 {% for child, attributes in parent.children %}
 <li role="presentation" class="{{ child }}{{ attributes.selected | selected(true) }}">
-<a role="menuitem" href="{{ url('/?action=' ~ child) }}">{{ attributes.title }}</a>
+<a role="menuitem" href="{{ url(child) }}">{{ attributes.title }}</a>
 </li>
 {% endfor %}
 {% endif %}

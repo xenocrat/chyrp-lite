@@ -3,7 +3,7 @@
 {% block title %}{{ "Content Settings" | translate }}{% endblock %}
 
 {% block content %}
-<form id="content_settings" class="split" action="{{ url('/?action=content_settings') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form id="content_settings" class="split" action="{{ url('content_settings') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="posts_per_page">{{ "Posts Per Blog Page" | translate }}</label>
@@ -60,7 +60,7 @@
 <p>
 <label for="enable_emoji">{{ "Unicode Emoticons" | translate }}</label>
 <input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"{{ site.enable_emoji | checked }}>
-<a href="{{ url('/?action=help&amp;id=unicode_emoticons') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/unicode_emoticons') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Display emoticons as Unicode emoji." | translate }}
 </small>

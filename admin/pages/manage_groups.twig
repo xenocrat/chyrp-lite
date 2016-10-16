@@ -11,7 +11,7 @@
 <input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_group") %}
-<a href="{{ url('/?action=new_group') }}" class="button yay">
+<a href="{{ url('new_group') }}" class="button yay">
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="add">{{ "New Group" | translate }}
 </a>
 {% endif %}
@@ -37,7 +37,7 @@
 {{ group.name | fix }}
 </td>
 <td class="group_size value">
-<a href="{{ url('/?action=manage_users&amp;query=group:' ~ (group.name | url_encode)) }}">{{ group.size | fix }}</a>
+<a href="{{ url('manage_users/query/group:' ~ (group.name | url_encode)) }}">{{ group.size | fix }}</a>
 </td>
 <td class="group_default emblem">
 {% if group.id == site.default_group %}
