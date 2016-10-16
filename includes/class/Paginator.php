@@ -243,7 +243,7 @@
             # No page is set, add it to the end.
             if (!isset($_GET[$this->name]))
                 return ($config->clean_urls and !ADMIN) ?
-                       rtrim($request, "/")."/".$this->name."/".$page :
+                       rtrim($request, "/")."/".$this->name."/".$page."/" :
                        $request.$mark.$this->name."=".$page ;
 
             return ($config->clean_urls and !ADMIN) ?
