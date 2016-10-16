@@ -226,7 +226,7 @@
                                   oneof(@$_POST['clean'], $_POST['name']),
                                   !empty($_POST['show_on_home']) ? 1 : 0);
 
-            Flash::notice(__("Category added.", "categorize"), "/?action=manage_category");
+            Flash::notice(__("Category added.", "categorize"), "manage_category");
         }
 
         public function admin_edit_category($admin) {
@@ -239,7 +239,7 @@
             $category = Category::getCategory($_GET['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/?action=manage_category");
+                Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
             $admin->display("pages".DIR."edit_category", array("category" => $category));
         }
@@ -267,7 +267,7 @@
                                      oneof(@$_POST['clean'], $_POST['name']),
                                      !empty($_POST['show_on_home']) ? 1 : 0);
 
-            Flash::notice(__("Category updated.", "categorize"), "/?action=manage_category");
+            Flash::notice(__("Category updated.", "categorize"), "manage_category");
         }
 
         public function admin_delete_category($admin) {
@@ -277,7 +277,7 @@
             $category = Category::getCategory($_GET['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/?action=manage_category");
+                Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
             $admin->display("pages".DIR."delete_category", array("category" => $category));
         }
@@ -293,7 +293,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/?action=manage_category");
+                redirect("manage_category");
 
             $category = Category::getCategory($_POST['id']);
 
@@ -301,6 +301,6 @@
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
 
             Category::deleteCategory($category->id);
-            Flash::notice(__("Category deleted.", "categorize"), "/?action=manage_category");
+            Flash::notice(__("Category deleted.", "categorize"), "manage_category");
         }
     }

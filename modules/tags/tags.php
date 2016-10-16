@@ -234,7 +234,7 @@
                 }
 
             if (!isset($tag))
-                Flash::warning(__("Tag not found.", "tags"), "/?action=manage_tags");
+                Flash::warning(__("Tag not found.", "tags"), "manage_tags");
 
             $admin->display("pages".DIR."rename_tag", array("tag" => $tag));
         }
@@ -246,7 +246,7 @@
             $post = new Post($_GET['id']);
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/?action=manage_tags");
+                Flash::warning(__("Post not found."), "manage_tags");
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
@@ -271,7 +271,7 @@
 
             $this->update_post($post);
 
-            Flash::notice(__("Tags updated.", "tags"), "/?action=manage_tags");
+            Flash::notice(__("Tags updated.", "tags"), "manage_tags");
         }
 
         public function admin_update_tag($admin) {
@@ -304,7 +304,7 @@
                              array("value" => self::tags_serialize(array_merge($old, $new))));
             }
 
-            Flash::notice(__("Tag renamed.", "tags"), "/?action=manage_tags");
+            Flash::notice(__("Tag renamed.", "tags"), "manage_tags");
         }
 
         public function admin_delete_tag($admin) {
@@ -336,7 +336,7 @@
                 }
 
             if (!isset($tag))
-                Flash::warning(__("Tag not found.", "tags"), "/?action=manage_tags");
+                Flash::warning(__("Tag not found.", "tags"), "manage_tags");
 
             $admin->display("pages".DIR."delete_tag", array("tag" => $tag));
         }
@@ -352,7 +352,7 @@
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/?action=manage_tags");
+                redirect("manage_tags");
 
             $sql = SQL::current();
 
@@ -373,7 +373,7 @@
                                  array("value" => self::tags_serialize($tags)));
             }
 
-            Flash::notice(__("Tag deleted.", "tags"), "/?action=manage_tags");
+            Flash::notice(__("Tag deleted.", "tags"), "manage_tags");
         }
 
         public function admin_bulk_tag($admin) {
@@ -384,10 +384,10 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['post']))
-                Flash::warning(__("No posts selected.", "tags"), "/?action=manage_tags");
+                Flash::warning(__("No posts selected.", "tags"), "manage_tags");
 
             if (empty($_POST['name']))
-                Flash::warning(__("No tags specified.", "tags"), "/?action=manage_tags");
+                Flash::warning(__("No tags specified.", "tags"), "manage_tags");
 
             $sql = SQL::current();
             $new = self::prepare_tags($_POST['name']);
@@ -415,7 +415,7 @@
                                     "post_id" => $post_id));
             }
 
-            Flash::notice(__("Posts tagged.", "tags"), "/?action=manage_tags");
+            Flash::notice(__("Posts tagged.", "tags"), "manage_tags");
         }
 
         public function main_context($context) {

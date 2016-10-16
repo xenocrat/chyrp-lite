@@ -123,7 +123,7 @@
             $config->set("cache_expire", (int) $_POST['cache_expire']);
             $config->set("cache_exclude", array_filter($_POST['cache_exclude']));
 
-            Flash::notice(__("Settings updated."), "/?action=cache_settings");
+            Flash::notice(__("Settings updated."), "cache_settings");
         }
 
         public function admin_clear_cache() {
@@ -135,6 +135,6 @@
 
             $this->regenerate();
 
-            Flash::notice(__("Cache cleared.", "cacher"), "/?action=cache_settings");
+            Flash::notice(__("Cache cleared.", "cacher"), "cache_settings");
         }
     }

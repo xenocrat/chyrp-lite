@@ -54,7 +54,7 @@
                                "pages_changefreq" => $_POST['pages_changefreq'],
                                "posts_changefreq" => $_POST['posts_changefreq']));
 
-            Flash::notice(__("Settings updated."), "/?action=sitemap_settings");
+            Flash::notice(__("Settings updated."), "sitemap_settings");
         }
 
         /**
