@@ -6,8 +6,8 @@
     class MainController implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
-        public $urls = array('|/id/([0-9]+)/|'                              => '/?action=id&id=$1',
-                             '|/page/(([^/]+)/)+|'                          => '/?action=page&url=$2',
+        public $urls = array('|/id/post/([0-9]+)/|'                         => '/?action=id&post=$1',
+                             '|/id/page/([0-9]+)/|'                         => '/?action=id&page=$1',
                              '|/search/([^/]+)/|'                           => '/?action=search&query=$1',
                              '|/search/|'                                   => '/?action=search',
                              '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&year=$1&month=$2&day=$3',
@@ -83,22 +83,22 @@
                     return $route->action = "index";
             }
 
+            # Static ID of a post or page.
+            if ($route->arg[0] == "id") {
+                if (isset($route->arg[1]) and isset($route->arg[2]))
+                    $_GET[$route->arg[1]] = $route->arg[2];
+
+                return $route->action = "id";
+            }
+
             # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $page_matches)) {
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
 
-                # Don't fool ourselves into thinking we're viewing a page.
+                # Don't fool ourselves into thinking we're viewing a page if this is pagination of the "/" route.
                 if ($route->arg[0] == $page_matches[1][0])
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
-            }
-
-            # Viewing a post by its ID.
-            if ($route->arg[0] == "id") {
-                if (isset($route->arg[1]))
-                    $_GET['id'] = $route->arg[1];
-
-                return $route->action = "id";
             }
 
             # Archive.
@@ -389,14 +389,14 @@
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
         public function view($attrs = null) {
-            $args = Route::current()->arg;
-
             $post = (isset($attrs)) ?
                 Post::from_url($attrs, array("drafts" => true)) :
                 new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
 
             if ($post->no_results)
                 return false;
+
+            $args = Route::current()->arg;
 
             # Don't fool ourselves into thinking a feed was requested because of a "feed" attribute.
             if (!isset($_GET['feed']) and !(count($args) > count($attrs) and end($args) == "feed"))
@@ -426,19 +426,9 @@
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
         public function page($urls = null) {
-            if (isset($urls)) {
-                $valids = Page::find(array("where" => array("url" => $urls)));
-
-                # One of the URLs in the page hierarchy is invalid.
-                if (!(count($valids) == count($urls)))
-                    return false;
-
-                # Loop over the pages until we find the one we want.
-                foreach ($valids as $page)
-                    if ($page->url == end($urls))
-                        break;
-            } else
-                $page = new Page(array("url" => fallback($_GET['url'])));
+            $page = (isset($urls)) ?
+                new Page(array("url" => end($urls))) :
+                new Page(array("url" => fallback($_GET['url']))) ;
 
             if ($page->no_results)
                 return false;
@@ -453,15 +443,28 @@
 
         /**
          * Function: id
-         * Views a post by its static ID.
+         * Views a post or page by its static ID.
          */
         public function id() {
-            $post = new Post(fallback($_GET['id']));
+            if (!empty($_GET['post']) and is_numeric($_GET['post'])) {
+                $post = new Post($_GET['post']);
 
-            if ($post->no_results)
-                return false;
+                if ($post->no_results)
+                    return false;
 
-            redirect($post->url());
+                redirect($post->url());
+            }
+
+            if (!empty($_GET['page']) and is_numeric($_GET['page'])) {
+                $page = new Page($_GET['page']);
+
+                if ($page->no_results)
+                    return false;
+
+                redirect($page->url());
+            }
+
+            return false;
         }
 
         /**
