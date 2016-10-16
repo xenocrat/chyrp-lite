@@ -281,7 +281,7 @@
                 $page = $page->parent;
             }
 
-            return url("page/".implode("/", array_reverse($url)), MainController::current());
+            return $config->url."/".implode("/", array_reverse($url));
         }
 
         /**
