@@ -174,7 +174,7 @@
             $url = rtrim($url, "/")."/";
 
             # Conversion is unnecessary if clean URLs are enabled (but pages need to be de-prefixed).
-            if ($config->clean_urls)
+            if ($config->clean_urls and !empty($controller->clean))
                 return $base."/".preg_replace("|^page/|", "", $url);
 
             $urls = fallback($controller->urls, array());

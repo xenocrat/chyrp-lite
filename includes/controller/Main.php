@@ -25,6 +25,10 @@
         # Context for displaying pages.
         public $context = array();
 
+        # Boolean: $clean
+        # Does this controller support clean URLs?
+        public $clean = true;
+
         # Boolean: $feed
         # Is the visitor requesting a feed?
         public $feed = false;
