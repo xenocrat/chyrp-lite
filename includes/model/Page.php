@@ -276,7 +276,7 @@
 
             $page = $this;
 
-            while (isset($page->parent_id) and $page->parent_id) {
+            while (isset($page->parent_id) and $page->parent_id > 0) {
                 $url[] = urlencode($page->parent->url);
                 $page = $page->parent;
             }
