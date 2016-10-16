@@ -4,6 +4,11 @@
      * The logic controlling the administration console.
      */
     class AdminController implements Controller {
+        # Array: $urls
+        # An array of clean URL => dirty URL translations.
+        public $urls = array('|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|' => '/?action=$1&amp;$2=$3&amp;$4=$5',
+                             '|/([^/]+)/([^/]+)/([^/]+)/$|'                 => '/?action=$1&amp;$2=$3');
+
         # Boolean: $displayed
         # Has anything been displayed?
         public $displayed = false;
@@ -1968,8 +1973,8 @@
                     if (!feather_enabled($feather))
                         continue;
 
-                    $write["write_post&amp;feather=".$feather] = array("title" => load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"],
-                                                                       "feather" => $feather);
+                    $write["write_post/feather/".$feather] = array("title" => load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"],
+                                                                   "feather" => $feather);
                 }
 
             $trigger->filter($write, "write_nav");
