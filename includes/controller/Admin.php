@@ -177,10 +177,7 @@
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
-            if (!$post->redirect)
-                $post->redirect = "write_post";
-
-            redirect($post->redirect);
+            redirect(oneof($post->redirect, "write_post"));
         }
 
         /**
