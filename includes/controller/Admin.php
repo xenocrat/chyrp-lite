@@ -1225,17 +1225,20 @@
 
             if (isset($_POST['users'])) {
                 fallback($_POST['filter_users'], "");
-                list($where, $params) = keywords($_POST['filter_users'], "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
+                list($where, $params) = keywords($_POST['filter_users'],
+                                                 "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
+                                                 "users");
 
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
                 $users_json = array();
+                $exclude = array("no_results", "group_id", "group", "id", "login", "belongs_to", "has_many", "has_one", "queryString");
 
                 foreach ($users as $user) {
                     $users_json[$user->login] = array();
 
                     foreach ($user as $name => $attr)
-                        if (!in_array($name, array("no_results", "group_id", "group", "id", "login", "belongs_to", "has_many", "has_one", "queryString")))
+                        if (!in_array($name, $exclude))
                             $users_json[$user->login][$name] = $attr;
                         elseif ($name == "group_id")
                             $users_json[$user->login]["group"] = $user->group->name;
@@ -1966,8 +1969,8 @@
                     if (!feather_enabled($feather))
                         continue;
 
-                    $write["write_post&feather=".$feather] = array("title" => load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"],
-                                                                   "feather" => $feather);
+                    $write["write_post&amp;feather=".$feather] = array("title" => load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"],
+                                                                       "feather" => $feather);
                 }
 
             $trigger->filter($write, "write_nav");
