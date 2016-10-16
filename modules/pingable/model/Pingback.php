@@ -64,11 +64,6 @@
             SQL::current()->delete("pingbacks", array("id" => $pingback_id));
         }
 
-        public function deletable($user = null) {
-            fallback($user, Visitor::current());
-            return ($user->group->can("delete_pingbacks"));
-        }
-
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __pingbacks (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
