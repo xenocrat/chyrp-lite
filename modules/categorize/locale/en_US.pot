@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-10-08 15:18+0000\n"
+"POT-Creation-Date: 2016-10-16 11:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -141,30 +141,30 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: modules/categorize/categorize.php:222
+#: modules/categorize/categorize.php:223
 #: modules/categorize/categorize.php:258
 msgid "No Name Specified"
 msgstr ""
 
-#: modules/categorize/categorize.php:222
+#: modules/categorize/categorize.php:223
 msgid "A name is required to add a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:228
+#: modules/categorize/categorize.php:229
 msgid "Category added."
 msgstr ""
 
-#: modules/categorize/categorize.php:233
+#: modules/categorize/categorize.php:234
 #: modules/categorize/categorize.php:249
 #: modules/categorize/categorize.php:287
 msgid "You do not have sufficient privileges to manage categories."
 msgstr ""
 
-#: modules/categorize/categorize.php:236
+#: modules/categorize/categorize.php:237
 msgid "An ID is required to edit a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:241
+#: modules/categorize/categorize.php:242
 #: modules/categorize/categorize.php:263
 #: modules/categorize/categorize.php:280
 #: modules/categorize/categorize.php:301
