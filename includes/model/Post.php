@@ -470,7 +470,7 @@
 
         /**
          * Function: url
-         * Returns a post's URL.
+         * Returns a post's URL. We can cheat because we know the inner workings of MainController.
          */
         public function url() {
             if ($this->no_results)
@@ -789,10 +789,9 @@
                                   array("posts.created_at <=" => datetime(),
                                         "posts.status" => "scheduled"))->fetchAll();
 
-            if (!empty($posts))
-                foreach ($posts as $post)
-                    $sql->update("posts",
-                                 array("id" => $post),
-                                 array("status" => "public"));
+            foreach ($posts as $post)
+                $sql->update("posts",
+                             array("id" => $post),
+                             array("status" => "public"));
         }
     }
