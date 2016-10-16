@@ -246,13 +246,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1056
+	includes/controller/Admin.php on line 1061
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1340
+	includes/controller/Admin.php on line 1345
 Arguments:
 	Group::add($name, $permissions)
 
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1361
+	includes/controller/Admin.php on line 1366
 Arguments:
 	$user
 
@@ -268,7 +268,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1392
+	includes/controller/Admin.php on line 1397
 Arguments:
 	$entry, $post
 
@@ -276,7 +276,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1419
+	includes/controller/Admin.php on line 1424
 Arguments:
 	$entry, $page
 
@@ -284,7 +284,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1423
+	includes/controller/Admin.php on line 1428
 Arguments:
 	$imports
 
@@ -292,7 +292,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1692
+	includes/controller/Admin.php on line 1697
 Arguments:
 	!empty($_POST['theme'])
 
@@ -694,7 +694,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 122
+	includes/controller/Admin.php on line 127
 
 
 post_export_url
@@ -702,7 +702,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1123
+	includes/controller/Admin.php on line 1128
 Arguments:
 	$post), true
 
@@ -712,7 +712,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1142
+	includes/controller/Admin.php on line 1147
 Arguments:
 	$post
 
@@ -722,7 +722,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1187
+	includes/controller/Admin.php on line 1192
 Arguments:
 	$page), true
 
@@ -732,7 +732,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1202
+	includes/controller/Admin.php on line 1207
 Arguments:
 	$page
 
@@ -742,7 +742,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1249
+	includes/controller/Admin.php on line 1254
 
 
 before_import
@@ -750,7 +750,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1311
+	includes/controller/Admin.php on line 1316
 
 
 write_nav
@@ -758,7 +758,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1975
+	includes/controller/Admin.php on line 1980
 
 
 manage_nav
@@ -766,7 +766,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2004
+	includes/controller/Admin.php on line 2009
 
 
 settings_nav
@@ -774,7 +774,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2029
+	includes/controller/Admin.php on line 2034
 
 
 extend_nav
@@ -782,7 +782,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2047
+	includes/controller/Admin.php on line 2052
 
 
 url_code

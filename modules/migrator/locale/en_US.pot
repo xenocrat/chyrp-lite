@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-10-16 11:29+0000\n"
+"POT-Creation-Date: 2016-10-16 13:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -37,7 +37,8 @@ msgid "Your Tumblr URL"
 msgstr ""
 
 #: modules/migrator/admin/pages/manage_migration.twig:36
-msgid "Something like <code>http://example.tumblr.com/</code>."
+#, php-format
+msgid "Something like <code>http://%s.tumblr.com/</code>."
 msgstr ""
 
 #: modules/migrator/admin/pages/manage_migration.twig:38
