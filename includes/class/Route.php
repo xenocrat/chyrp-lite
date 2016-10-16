@@ -145,7 +145,7 @@
 
         /**
          * Function: url
-         * Constructs an absolute URL and translates clean to dirty URLs if necessary.
+         * Constructs a canonical URL, translating clean to dirty URLs as necessary.
          *
          * The applicable URL translations are filtered through the @parse_urls@ trigger.
          *
@@ -166,14 +166,14 @@
 
             $base = !empty($controller->base) ? $config->chyrp_url."/".$controller->base : $config->url ;
 
-            # Assume this is a dirty URL and return it without conversion.
+            # Assume this is a dirty URL and return it without translation.
             if (strpos($url, "/") === 0)
                 return $base.$url;
 
             # Assume this is a clean URL and ensure it ends with a slash.
             $url = rtrim($url, "/")."/";
 
-            # Conversion is unnecessary if clean URLs are enabled (but pages need to be de-prefixed).
+            # Translation is unnecessary if clean URLs are enabled (but pages need to be de-prefixed).
             if ($config->clean_urls and !empty($controller->clean))
                 return $base."/".preg_replace("|^page/|", "", $url);
 
