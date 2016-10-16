@@ -199,8 +199,7 @@
             else
                 $posts = new Paginator(array());
 
-            $admin->display("manage_tags", array("tag_cloud" => $cloud,
-                                                 "posts" => $posts));
+            $admin->display("pages".DIR."manage_tags", array("tag_cloud" => $cloud, "posts" => $posts));
         }
 
         public function admin_rename_tag($admin) {
@@ -237,7 +236,7 @@
             if (!isset($tag))
                 Flash::warning(__("Tag not found.", "tags"), "/?action=manage_tags");
 
-            $admin->display("rename_tag", array("tag" => $tag));
+            $admin->display("pages".DIR."rename_tag", array("tag" => $tag));
         }
 
         public function admin_edit_tags($admin) {
@@ -252,7 +251,7 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            $admin->display("edit_tags", array("post" => $post));
+            $admin->display("pages".DIR."edit_tags", array("post" => $post));
         }
 
         public function admin_update_tags($admin) {
@@ -339,7 +338,7 @@
             if (!isset($tag))
                 Flash::warning(__("Tag not found.", "tags"), "/?action=manage_tags");
 
-            $admin->display("delete_tag", array("tag" => $tag));
+            $admin->display("pages".DIR."delete_tag", array("tag" => $tag));
         }
 
         public function admin_destroy_tag() {

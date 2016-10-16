@@ -45,7 +45,7 @@
             if ($pingback->no_results)
                 Flash::warning(__("Pingback not found.", "pingable"), "/?action=manage_pingbacks");
 
-            $admin->display("delete_pingback", array("pingback" => $pingback));
+            $admin->display("pages".DIR."delete_pingback", array("pingback" => $pingback));
         }
 
         public function admin_destroy_pingback() {
@@ -78,7 +78,7 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "title LIKE :query", "pingbacks");
 
-            $admin->display("manage_pingbacks",
+            $admin->display("pages".DIR."manage_pingbacks",
                             array("pingbacks" => new Paginator(Pingback::find(array("placeholders" => true,
                                                                                     "where" => $where,
                                                                                     "params" => $params)),

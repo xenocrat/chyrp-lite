@@ -4,7 +4,7 @@
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
 
-            $admin->display("manage_migration");
+            $admin->display("pages".DIR."manage_migration");
         }
 
         public function manage_nav($navs) {

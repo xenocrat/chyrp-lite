@@ -225,7 +225,7 @@
             if (!$comment->deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
-            $admin->display("delete_comment", array("comment" => $comment));
+            $admin->display("pages".DIR."delete_comment", array("comment" => $comment));
         }
 
         public function admin_destroy_comment() {
@@ -261,7 +261,7 @@
 
             $where["status"] = "spam";
 
-            $admin->display("manage_spam",
+            $admin->display("pages".DIR."manage_spam",
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
                                                                                   "params" => $params)),
@@ -335,7 +335,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $admin->display("comment_settings");
+                return $admin->display("pages".DIR."comment_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -400,7 +400,7 @@
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
-            $admin->display("edit_comment", array("comment" => $comment));
+            $admin->display("pages".DIR."edit_comment", array("comment" => $comment));
         }
 
         public function admin_manage_comments($admin) {
@@ -417,7 +417,7 @@
             if (!$visitor->group->can("edit_comment", "delete_comment", true))
                 $where["user_id"] = $visitor->id;
 
-            $admin->display("manage_comments",
+            $admin->display("pages".DIR."manage_comments",
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
                                                                                   "params" => $params)),
