@@ -664,38 +664,64 @@
         /**
          * Function: from_url
          * Attempts to grab a post from its clean URL.
+         *
+         * Parameters:
+         *     $route - The route object to respond to, or null to return a Post object.
+         *     $request - The request URI to parse.
+         *     $options - Additional options for the Post object.
          */
-        static function from_url($attrs = null, $options = array()) {
-            fallback($attrs, $_GET);
+        static function from_url($route, $request, $options = array()) {
+            $config = Config::current();
+
+            $regex = "";      # Request validity is tested with this.
+            $attrs = array(); # Post attributes present in post_url.
+            $found = array(); # Post attributes found in the request.
+            $parts = preg_split("|(\([^)]+\))|",
+                                $config->post_url,
+                                null,
+                                PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+
+            Trigger::current()->filter(self::$url_attrs, "url_code");
+
+            # Differentiate between genuine attributes and filler in post_url.
+            foreach ($parts as $part)
+                if (isset(self::$url_attrs[$part])) {
+                    $regex .= self::$url_attrs[$part];
+                    $attrs[] = trim($part, "()");
+                } else
+                    $regex .= preg_quote($part, "|");
+
+            # Test the request and return false if it isn't valid.
+            if (!preg_match("|^$regex|", ltrim($request, "/"), $matches))
+                return false;
+
+            # Populate $found using the array of sub-pattern matches.
+            for ($i = 0; $i < count($attrs); $i++)
+                $found[$attrs[$i]] = urldecode($matches[$i + 1]);
+
+            # If a route was provided, respond to it and return.
+            if (isset($route))
+                return $route->try["view"] = array($request, $found, $route->arg);
 
             $where = array();
-            $times = array("year", "month", "day", "hour", "minute", "second");
+            $dates = array("year", "month", "day", "hour", "minute", "second");
 
-            preg_match_all("/\(([^\)]+)\)/", Config::current()->post_url, $matches);
-            $params = array();
+            # Conversions of some attributes.
+            foreach ($attrs as $attr)
+                if (in_array($attr, $dates)) {
+                    # Filter by date/time of creation.
+                    $where[strtoupper($attr)."(created_at)"] = $found[$attr];
+                } elseif ($attr == "author") {
+                    # Filter by "author" (login).
+                    $user = new User(array("login" => $found['author']));
+                    $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
+                } elseif ($attr == "feathers") {
+                    # Filter by feather.
+                    $where["feather"] = depluralize($found['feathers']);
+                } else 
+                    $where[$attr] = $found[$attr];
 
-            foreach ($matches[1] as $attr)
-                if (in_array($attr, $times))
-                    $where[strtoupper($attr)."(created_at)"] = $attrs[$attr];
-                elseif ($attr == "author") {
-                    $user = new User(array("login" => $attrs['author']));
-                    $where["user_id"] = $user->id;
-                } elseif ($attr == "feathers")
-                    $where["feather"] = depluralize($attrs['feathers']);
-                else {
-                    $tokens = array($where, $params, $attr);
-                    Trigger::current()->filter($tokens, "post_url_token");
-                    list($where, $params, $attr) = $tokens;
-
-                    if ($attr !== null) {
-                        if (!isset($attrs[$attr]))
-                            continue;
-
-                        $where[$attr] = $attrs[$attr];
-                    }
-                }
-
-            return new self(null, array_merge($options, array("where" => $where, "params" => $params)));
+            return new self(null, array_merge($options, array("where" => $where)));
         }
 
         /**
