@@ -35,7 +35,7 @@
 
         # Array: $protected
         # Methods that cannot respond to actions.
-        public $protected = array("__construct", "parse", "post_from_url", "display", "current");
+        public $protected = array("__construct", "parse", "feed", "display", "current");
 
         /**
          * Function: __construct
