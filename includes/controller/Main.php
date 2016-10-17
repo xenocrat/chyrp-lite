@@ -33,6 +33,10 @@
         # Is the visitor requesting a feed?
         public $feed = false;
 
+        # Array: $protected
+        # Methods that cannot respond to actions.
+        public $protected = array("__construct", "parse", "post_from_url", "display", "current");
+
         /**
          * Function: __construct
          * Loads the Twig parser. Theme class sets up the l10n domain.
@@ -68,10 +72,6 @@
             # If they're just at / and that's not a custom route, don't bother with all this.
             if (empty($route->arg[0]) and !isset($config->routes["/"]))
                 return $route->action = "index";
-
-            # Protect non-responder functions.
-            if (in_array($route->arg[0], array("__construct", "parse", "post_from_url", "display", "current")))
-                show_404();
 
             # Discover feed requests.
             if (preg_match("/\/feed\/?$/", $route->request)) {
@@ -168,53 +168,10 @@
             }
 
             # Are we viewing a post?
-            $this->post_from_url($route, $route->request);
+            Post::from_url($route, $route->request);
 
-            # Try viewing a page.
-            $route->try["page"] = array($route->arg);
-        }
-
-        /**
-         * Function: post_from_url
-         * Check to see if we're viewing a post, and if it is, handle it.
-         *
-         * This can also be used for grabbing a Post from a given URL.
-         *
-         * Parameters:
-         *     $route - The route object to respond to.
-         *     $request - The request URI to parse.
-         *     $return_post - Return a post instead of responding to the route?
-         */
-        public function post_from_url($route, $request, $return_post = false) {
-            $config = Config::current();
-
-            $post_url_regex = "";
-            $url_parameters = array();
-            $post_url_parts = preg_split("!(\([^)]+\))!",
-                                         $config->post_url,
-                                         null,
-                                         PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-
-            Trigger::current()->filter(Post::$url_attrs, "url_code");
-
-            foreach ($post_url_parts as $part)
-                if (isset(Post::$url_attrs[$part])) {
-                    $post_url_regex .= Post::$url_attrs[$part];
-                    $url_parameters[] = trim($part, "()");
-                } else
-                    $post_url_regex .= preg_quote($part, "/");
-
-            if (preg_match("/^$post_url_regex/", ltrim($request, "/"), $matches)) {
-                $post_url_attrs = array();
-
-                for ($i = 0; $i < count($url_parameters); $i++)
-                    $post_url_attrs[$url_parameters[$i]] = urldecode($matches[$i + 1]);
-
-                if ($return_post)
-                    return Post::from_url($post_url_attrs);
-                else
-                    $route->try["view"] = array($post_url_attrs);
-            }
+            # Are we viewing a page?
+            Page::from_url($route, $route->request);
         }
 
         /**
@@ -388,18 +345,16 @@
          * Function: view
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
-        public function view($attrs = null) {
-            $post = (isset($attrs)) ?
-                Post::from_url($attrs, array("drafts" => true)) :
+        public function view($request = null, $attrs = array(), $arg = array()) {
+            $post = (isset($request)) ?
+                Post::from_url(null, $request, array("drafts" => true)) :
                 new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
 
             if ($post->no_results)
                 return false;
 
-            $args = Route::current()->arg;
-
             # Don't fool ourselves into thinking a feed was requested because of a "feed" attribute.
-            if (!isset($_GET['feed']) and !(count($args) > count($attrs) and end($args) == "feed"))
+            if (!isset($_GET['feed']) and !(count($arg) > count($attrs) and end($arg) == "feed"))
                 $this->feed = false;
 
             if (!$post->theme_exists())
@@ -425,10 +380,8 @@
          * Function: page
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
-        public function page($urls = null) {
-            $page = (isset($urls)) ?
-                new Page(array("url" => end($urls))) :
-                new Page(array("url" => fallback($_GET['url']))) ;
+        public function page($id = null) {
+            $page = (isset($id)) ? new Page($id) : new Page(array("url" => fallback($_GET['url']))) ;
 
             if ($page->no_results)
                 return false;
