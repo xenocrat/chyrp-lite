@@ -35,6 +35,8 @@
             if (!in_array("Controller", class_implements($controller)))
                 trigger_error(__("Route was initiated with an invalid Controller."), E_USER_WARNING);
 
+            fallback($controller->protected, array("__construct", "parse", "display", "current"));
+
             $this->controller = $controller;
 
             $config = Config::current();
@@ -68,13 +70,6 @@
 
             if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0]))
                 error(__("Error"), __("Invalid action."), null, 400);
-
-            fallback($controller->protected, array("__construct", "parse", "display", "current"));
-
-            # Protect the controller's non-responder methods.
-            foreach ($controller->protected as $protected)
-                if (strcasecmp($protected, $this->action) == 0 or strcasecmp($protected, $this->arg[0]) == 0)
-                    error(__("Error"), __("Invalid action."), null, 400);
 
             # Give the controller an opportunity to parse this route and determine the action.
             $controller->parse($this);
@@ -123,6 +118,11 @@
                     $call = $trigger->call(array($name."_".$method, "route_".$method), $this->controller);
                 else
                     $call = false;
+
+                # Protect the controller's non-responder methods. PHP functions are not case-sensitive!
+                foreach ($this->controller->protected as $protected)
+                    if (strcasecmp($protected, $method) == 0)
+                        continue 2;
 
                 # This discovers responders native to the controller.
                 if ($call !== true and method_exists($this->controller, $method))
