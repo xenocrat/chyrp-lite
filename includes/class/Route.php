@@ -69,16 +69,21 @@
             if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0]))
                 error(__("Error"), __("Invalid action."), null, 400);
 
+            fallback($controller->protected, array("__construct", "parse", "display", "current"));
+
+            # Protect the controller's non-responder methods.
+            foreach ($controller->protected as $protected)
+                if (strcasecmp($protected, $this->action) == 0 or strcasecmp($protected, $this->arg[0]) == 0)
+                    error(__("Error"), __("Invalid action."), null, 400);
+
             # Give the controller an opportunity to parse this route and determine the action.
             $controller->parse($this);
 
             Trigger::current()->call("parse_url", $this);
 
             $this->try[] = isset($this->action) ?
-                               oneof($this->action, "index") :
-                               (!substr_count($this->arg[0], "?") ?
-                                   oneof(@$this->arg[0], "index") :
-                                   "index") ;
+                               oneof($this->action, "index") : (!substr_count($this->arg[0], "?") ?
+                                   oneof($this->arg[0], "index") : "index") ;
 
             # Set the action, using a guess if necessary, to satisfy the view_site permission test.
             # A subset of actions is permitted even if the visitor is not allowed to view the site.
