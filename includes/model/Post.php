@@ -666,58 +666,61 @@
          * Attempts to grab a post from its clean URL.
          *
          * Parameters:
+         *     $request - The request URI to parse, or an array of matches already found.
          *     $route - The route object to respond to, or null to return a Post object.
-         *     $request - The request URI to parse.
-         *     $options - Additional options for the Post object.
+         *     $options - Additional options for the Post object (optional).
          */
-        static function from_url($route, $request, $options = array()) {
+        static function from_url($request, $route = null, $options = array()) {
             $config = Config::current();
 
-            $regex = "";      # Request validity is tested with this.
-            $attrs = array(); # Post attributes present in post_url.
-            $found = array(); # Post attributes found in the request.
-            $parts = preg_split("|(\([^)]+\))|",
-                                $config->post_url,
-                                null,
-                                PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+            $found = is_array($request) ? $request : array() ;
 
-            # Differentiate between genuine attributes and filler in post_url.
-            foreach ($parts as $part)
-                if (isset(self::$url_attrs[$part])) {
-                    $regex .= self::$url_attrs[$part];
-                    $attrs[] = trim($part, "()");
-                } else
-                    $regex .= preg_quote($part, "|");
+            if (empty($found)) {
+                $regex = "";      # Request validity is tested with this.
+                $attrs = array(); # Post attributes present in post_url.
+                $parts = preg_split("|(\([^)]+\))|",
+                                    $config->post_url,
+                                    null,
+                                    PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
-            # Test the request and return false if it isn't valid.
-            if (!preg_match("|^$regex|", ltrim($request, "/"), $matches))
-                return false;
+                # Differentiate between post attributes and junk in post_url.
+                foreach ($parts as $part)
+                    if (isset(self::$url_attrs[$part])) {
+                        $regex .= self::$url_attrs[$part];
+                        $attrs[] = trim($part, "()");
+                    } else
+                        $regex .= preg_quote($part, "|");
 
-            # Populate $found using the array of sub-pattern matches.
-            for ($i = 0; $i < count($attrs); $i++)
-                $found[$attrs[$i]] = urldecode($matches[$i + 1]);
+                # Test the request and return false if it isn't valid.
+                if (!preg_match("|^$regex|", ltrim(str_replace($config->url, "/", $request), "/"), $matches))
+                    return false;
 
-            # If a route was provided, respond to it and return.
-            if (isset($route))
-                return $route->try["view"] = array($request, $found, $route->arg);
+                # Populate $found using the array of sub-pattern matches.
+                for ($i = 0; $i < count($attrs); $i++)
+                    $found[$attrs[$i]] = urldecode($matches[$i + 1]);
+
+                # If a route was provided, respond to it and return.
+                if (isset($route))
+                    return $route->try["view"] = array($found, $route->arg);
+            }
 
             $where = array();
             $dates = array("year", "month", "day", "hour", "minute", "second");
 
             # Conversions of some attributes.
-            foreach ($attrs as $attr)
-                if (in_array($attr, $dates)) {
+            foreach ($found as $part => $value)
+                if (in_array($part, $dates)) {
                     # Filter by date/time of creation.
-                    $where[strtoupper($attr)."(created_at)"] = $found[$attr];
-                } elseif ($attr == "author") {
+                    $where[strtoupper($part)."(created_at)"] = $value;
+                } elseif ($part == "author") {
                     # Filter by "author" (login).
-                    $user = new User(array("login" => $found['author']));
+                    $user = new User(array("login" => $value));
                     $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
-                } elseif ($attr == "feathers") {
+                } elseif ($part == "feathers") {
                     # Filter by feather.
-                    $where["feather"] = depluralize($found['feathers']);
-                } else 
-                    $where[$attr] = $found[$attr];
+                    $where["feather"] = depluralize($value);
+                } else
+                    $where[$part] = $value;
 
             return new self(null, array_merge($options, array("where" => $where)));
         }
