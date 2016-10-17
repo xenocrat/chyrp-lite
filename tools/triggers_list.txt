@@ -216,7 +216,7 @@ Arguments:
 parse_url
 ---------
 Called from:
-	includes/class/Route.php on line 75
+	includes/class/Route.php on line 77
 Arguments:
 	$this
 
@@ -232,7 +232,7 @@ Arguments:
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 141
+	includes/class/Route.php on line 146
 Arguments:
 	$this
 
@@ -300,7 +300,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 522
+	includes/controller/Main.php on line 478
 Arguments:
 	$user
 
@@ -308,13 +308,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 604
+	includes/controller/Main.php on line 560
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 618
+	includes/controller/Main.php on line 574
 Arguments:
 	$user
 
@@ -322,7 +322,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 801
+	includes/controller/Main.php on line 757
 Arguments:
 	$post
 
@@ -336,7 +336,7 @@ Called from:
 pingback
 --------
 Called from:
-	includes/lib/XMLRPC.php on line 123
+	includes/lib/XMLRPC.php on line 120
 Arguments:
 	$post, $target, $source, $title, $excerpt
 
@@ -644,7 +644,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 182
+	includes/class/Route.php on line 187
 
 
 related_posts
@@ -785,20 +785,12 @@ Called from:
 	includes/controller/Admin.php on line 2052
 
 
-url_code
---------
-Target:
-	Post::$url_attrs
-Called from:
-	includes/controller/Main.php on line 198
-
-
 feed_url
 --------
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 790
+	includes/controller/Main.php on line 746
 Arguments:
 	$post
 
@@ -995,14 +987,6 @@ Target:
 	$this
 Called from:
 	includes/model/Post.php on line 636
-
-
-post_url_token
---------------
-Target:
-	$tokens
-Called from:
-	includes/model/Post.php on line 687
 
 
 user
