@@ -614,8 +614,8 @@
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
                                              "link"  => $config->url.
-                                                        "/?action=activate&login=".urlencode($user->login).
-                                                        "&token=".token(array($user->login, $user->email))));
+                                                        "/?action=activate&amp;login=".urlencode($user->login).
+                                                        "&amp;token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User added."), "manage_users");
         }
@@ -706,8 +706,8 @@
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
                                              "link"  => $config->url.
-                                                        "/?action=activate&login=".urlencode($user->login).
-                                                        "&token=".token(array($user->login, $user->email))));
+                                                        "/?action=activate&amp;login=".urlencode($user->login).
+                                                        "&amp;token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User updated."), "manage_users");
         }

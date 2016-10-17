@@ -6,16 +6,16 @@
     class MainController implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
-        public $urls = array('|/id/post/([0-9]+)/|'                         => '/?action=id&post=$1',
-                             '|/id/page/([0-9]+)/|'                         => '/?action=id&page=$1',
-                             '|/search/([^/]+)/|'                           => '/?action=search&query=$1',
+        public $urls = array('|/id/post/([0-9]+)/|'                         => '/?action=id&amp;post=$1',
+                             '|/id/page/([0-9]+)/|'                         => '/?action=id&amp;page=$1',
+                             '|/search/([^/]+)/|'                           => '/?action=search&amp;query=$1',
                              '|/search/|'                                   => '/?action=search',
-                             '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&year=$1&month=$2&day=$3',
-                             '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&year=$1&month=$2',
-                             '|/archive/([0-9]{4})/|'                       => '/?action=archive&year=$1',
-                             '|/random/([^/]+)/|'                           => '/?action=random&feather=$1',
+                             '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&amp;year=$1&amp;month=$2&amp;day=$3',
+                             '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&amp;year=$1&amp;month=$2',
+                             '|/archive/([0-9]{4})/|'                       => '/?action=archive&amp;year=$1',
+                             '|/random/([^/]+)/|'                           => '/?action=random&amp;feather=$1',
                              '|/random/|'                                   => '/?action=random',
-                             '|/([^/]+)/feed/|'                             => '/?action=$1&feed');
+                             '|/([^/]+)/feed/|'                             => '/?action=$1&amp;feed');
 
         # Boolean: $displayed
         # Has anything been displayed?
@@ -481,8 +481,8 @@
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
                                                      "link"  => $config->url.
-                                                                "/?action=activate&login=".urlencode($user->login).
-                                                                "&token=".token(array($user->login, $user->email))));
+                                                                "/?action=activate&amp;login=".urlencode($user->login).
+                                                                "&amp;token=".token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     }
@@ -664,8 +664,8 @@
                     correspond("reset", array("login" => $user->login,
                                               "to"    => $user->email,
                                               "link"  => $config->url.
-                                                         "/?action=reset&login=".urlencode($user->login).
-                                                         "&token=".token(array($user->login, $user->email))));
+                                                         "/?action=reset&amp;login=".urlencode($user->login).
+                                                         "&amp;token=".token(array($user->login, $user->email))));
 
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }
