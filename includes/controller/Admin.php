@@ -29,6 +29,10 @@
         # Is the current page a feed?
         public $feed = false;
 
+        # Array: $protected
+        # Methods that cannot respond to actions.
+        public $protected = array("__construct", "parse", "navigation_context", "display", "current");
+
         /**
          * Function: __construct
          * Loads the Twig parser and sets up the l10n domain.
@@ -71,10 +75,6 @@
         public function parse($route) {
             $visitor = Visitor::current();
             $config = Config::current();
-
-            # Protect non-responder functions.
-            if (in_array($route->action, array("__construct", "parse", "navigation_context", "display", "current")))
-                show_404();
 
             if (empty($route->action) or $route->action == "write") {
                 # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
@@ -1947,7 +1947,7 @@
          * Function: navigation_context
          * Returns the navigation context for Twig.
          */
-        public function navigation_context($action) {
+        private function navigation_context($action) {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
