@@ -168,10 +168,10 @@
             }
 
             # Are we viewing a post?
-            Post::from_url($route, $route->request);
+            Post::from_url($route->request, $route);
 
             # Are we viewing a page?
-            Page::from_url($route, $route->request);
+            Page::from_url($route->request, $route);
         }
 
         /**
@@ -345,9 +345,9 @@
          * Function: view
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
-        public function view($request = null, $attrs = array(), $arg = array()) {
-            $post = (isset($request)) ?
-                Post::from_url(null, $request, array("drafts" => true)) :
+        public function view($attrs = null, $arg = array()) {
+            $post = (isset($attrs)) ?
+                Post::from_url($attrs, null, array("drafts" => true)) :
                 new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
 
             if ($post->no_results)
@@ -380,8 +380,8 @@
          * Function: page
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
-        public function page($id = null) {
-            $page = (isset($id)) ? new Page($id) : new Page(array("url" => fallback($_GET['url']))) ;
+        public function page($url = null, $hierarchy = array()) {
+            $page = (isset($url)) ? new Page(array("url" => $url)) : new Page(array("url" => fallback($_GET['url']))) ;
 
             if ($page->no_results)
                 return false;
