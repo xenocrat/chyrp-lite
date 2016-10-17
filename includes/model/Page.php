@@ -264,11 +264,11 @@
          * Attempts to grab a page from its clean URL.
          *
          * Parameters:
+         *     $request - The request URI to parse.
          *     $route - The route object to respond to, or null to return a Page object.
-         *     $hierarchy - The hierarchy to validate.
          */
-        static function from_url($route, $request) {
-            $hierarchy = explode("/", trim($request, "/"));
+        static function from_url($request, $route = null) {
+            $hierarchy = explode("/", trim(str_replace(Config::current()->url, "/", $request), "/"));
             $pages = self::find(array("where" => array("url" => $hierarchy)));
 
             # One of the URLs in the page hierarchy is invalid.
@@ -278,7 +278,7 @@
             # Loop over the pages until we find the one we want.
             foreach ($pages as $page)
                 if ($page->url == end($hierarchy))
-                    return isset($route) ? $route->try["page"] = array($page->id) : $page ;
+                    return isset($route) ? $route->try["page"] = array($page->url, $hierarchy) : $page ;
         }
 
         /**
