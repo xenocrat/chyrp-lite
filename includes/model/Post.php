@@ -681,8 +681,6 @@
                                 null,
                                 PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
-            Trigger::current()->filter(self::$url_attrs, "url_code");
-
             # Differentiate between genuine attributes and filler in post_url.
             foreach ($parts as $part)
                 if (isset(self::$url_attrs[$part])) {
