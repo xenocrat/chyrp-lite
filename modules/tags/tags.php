@@ -108,7 +108,7 @@
         }
 
         public function parse_urls($urls) {
-            $urls["|/tag/([^/]+)/|"] = "/?action=tag&name=$1";
+            $urls["|/tag/([^/]+)/|"] = "/?action=tag&amp;name=$1";
             return $urls;
         }
 

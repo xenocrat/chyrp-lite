@@ -87,7 +87,7 @@
         }
 
         public function parse_urls($urls) {
-            $urls["|/category/([^/]+)/|"] = "/?action=category&name=$1";
+            $urls["|/category/([^/]+)/|"] = "/?action=category&amp;name=$1";
             return $urls;
         }
 
