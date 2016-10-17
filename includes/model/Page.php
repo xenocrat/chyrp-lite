@@ -260,6 +260,28 @@
         }
 
         /**
+         * Function: from_url
+         * Attempts to grab a page from its clean URL.
+         *
+         * Parameters:
+         *     $route - The route object to respond to, or null to return a Page object.
+         *     $hierarchy - The hierarchy to validate.
+         */
+        static function from_url($route, $request) {
+            $hierarchy = explode("/", trim($request, "/"));
+            $pages = self::find(array("where" => array("url" => $hierarchy)));
+
+            # One of the URLs in the page hierarchy is invalid.
+            if (!(count($pages) == count($hierarchy)))
+                return false;
+
+            # Loop over the pages until we find the one we want.
+            foreach ($pages as $page)
+                if ($page->url == end($hierarchy))
+                    return isset($route) ? $route->try["page"] = array($page->id) : $page ;
+        }
+
+        /**
          * Function: url
          * Returns a page's URL. We can cheat because we know the inner workings of MainController.
          */
