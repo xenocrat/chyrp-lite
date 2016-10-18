@@ -142,9 +142,9 @@ var ChyrpComment = {
                                 dataType: "json",
                                 error: ChyrpComment.panic,
                             }).done(function(response) {
-                                if (response.notifications.length) {
+                                if (!response.data) {
                                     $(thisItem).loader(true);
-                                    alert(response.notifications[0]);
+                                    alert(response.text);
                                     return;
                                 }
 

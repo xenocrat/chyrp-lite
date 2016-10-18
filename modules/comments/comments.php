@@ -153,7 +153,7 @@
                                           $notify), $post->url());
         }
 
-        public function admin_update_comment() {
+        public function route_update_comment() {
             if (empty($_POST))
                 redirect("manage_comments");
 
