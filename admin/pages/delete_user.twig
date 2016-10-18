@@ -7,7 +7,7 @@
 <p>
 {{ "Are you sure you want to delete user &#8220;%s&#8221;?" | translate | format(user.login | fix) }}
 </p>
-<form class="delete split" action="{{ admin_url('destroy_user') }}" method="post" accept-charset="UTF-8">
+<form class="delete split" action="{{ url('destroy_user') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 {% if user.posts is not empty %}
 <p>

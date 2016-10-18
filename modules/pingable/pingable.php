@@ -5,18 +5,18 @@
         static function __install() {
             Pingback::install();
 
-            Group::add_permission("delete_pingbacks", "Delete Pingbacks");
+            Group::add_permission("delete_pingback", "Delete Pingbacks");
         }
 
         static function __uninstall($confirm) {
             if ($confirm)
                 Pingback::uninstall();
 
-            Group::remove_permission("delete_pingbacks");
+            Group::remove_permission("delete_pingback");
         }
 
         public function list_permissions($names = array()) {
-            $names["delete_pingbacks"] = __("Delete Pingbacks", "pingable");
+            $names["delete_pingback"] = __("Delete Pingbacks", "pingable");
             return $names;
         }
 
@@ -34,7 +34,7 @@
         }
 
         public function admin_delete_pingback($admin) {
-            if (!Visitor::current()->group->can("delete_pingbacks"))
+            if (!Visitor::current()->group->can("delete_pingback"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
@@ -43,13 +43,13 @@
             $pingback = new Pingback($_GET['id']);
 
             if ($pingback->no_results)
-                Flash::warning(__("Pingback not found.", "pingable"), "/admin/?action=manage_pingbacks");
+                Flash::warning(__("Pingback not found.", "pingable"), "manage_pingbacks");
 
-            $admin->display("delete_pingback", array("pingback" => $pingback));
+            $admin->display("pages".DIR."delete_pingback", array("pingback" => $pingback));
         }
 
         public function admin_destroy_pingback() {
-            if (!Visitor::current()->group->can("delete_pingbacks"))
+            if (!Visitor::current()->group->can("delete_pingback"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
@@ -59,7 +59,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a pingback.", "pingable"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_pingbacks");
+                redirect("manage_pingbacks");
 
             $pingback = new Pingback($_POST['id']);
 
@@ -68,17 +68,17 @@
 
             Pingback::delete($pingback->id);
 
-            Flash::notice(__("Pingback deleted.", "pingable"), "/admin/?action=manage_pingbacks");
+            Flash::notice(__("Pingback deleted.", "pingable"), "manage_pingbacks");
         }
 
         public function admin_manage_pingbacks($admin) {
-            if (!Visitor::current()->group->can("delete_pingbacks"))
+            if (!Visitor::current()->group->can("delete_pingback"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pingbacks.", "pingable"));
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "title LIKE :query", "pingbacks");
 
-            $admin->display("manage_pingbacks",
+            $admin->display("pages".DIR."manage_pingbacks",
                             array("pingbacks" => new Paginator(Pingback::find(array("placeholders" => true,
                                                                                     "where" => $where,
                                                                                     "params" => $params)),
@@ -86,7 +86,7 @@
         }
 
         public function manage_nav($navs) {
-            if (Visitor::current()->group->can("delete_pingbacks"))
+            if (Visitor::current()->group->can("delete_pingback"))
                 $navs["manage_pingbacks"] = array("title" => __("Pingbacks", "pingable"),
                                                   "selected" => array("delete_pingback"));
 
@@ -94,7 +94,7 @@
         }
 
         public function admin_determine_action($action) {
-            if ($action == "manage" and Visitor::current()->group->can("delete_pingbacks"))
+            if ($action == "manage" and Visitor::current()->group->can("delete_pingback"))
                 return "manage_pingbacks";
         }
 

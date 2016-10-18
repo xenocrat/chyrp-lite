@@ -7,7 +7,7 @@
 <p>
 {{ "Are you sure you want to delete the pingback from &#8220;%s&#8221;?" | translate("pingable") | format(pingback.title | fix) }}
 </p>
-<form class="delete" action="{{ admin_url('destroy_pingback') }}" method="post" accept-charset="UTF-8">
+<form class="delete" action="{{ url('destroy_pingback') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">

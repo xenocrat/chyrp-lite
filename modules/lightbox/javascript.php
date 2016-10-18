@@ -1,7 +1,7 @@
 var ChyrpLightbox = {
-    background: "<?php echo Config::current()->module_lightbox["background"]; ?>",
-    spacing: Math.abs("<?php echo Config::current()->module_lightbox["spacing"]; ?>"),
-    protect: <?php echo(Config::current()->module_lightbox["protect"] ? "true" : "false"); ?>,
+    background: "<?php echo $config->module_lightbox["background"]; ?>",
+    spacing: Math.abs("<?php echo $config->module_lightbox["spacing"]; ?>"),
+    protect: <?php echo($config->module_lightbox["protect"] ? "true" : "false"); ?>,
     active: false,
     styles: {
         fg: {
@@ -47,15 +47,16 @@ var ChyrpLightbox = {
         $.extend(ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background]);
         $("section img").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
         if (ChyrpLightbox.protect)
-            $("section img").not(".suppress_lightbox").on({
-                contextmenu: function(e) { e.preventDefault(); }
-            });
+            $("section img").not(".suppress_lightbox").on("contextmenu", ChyrpLightbox.prevent);
         $(window).on({
             resize: ChyrpLightbox.hide,
             scroll: ChyrpLightbox.hide,
             orientationchange: ChyrpLightbox.hide,
             popstate: ChyrpLightbox.hide });
         ChyrpLightbox.watch();
+    },
+    prevent: function(e) {
+        e.preventDefault();
     },
     watch: function() {
         // Watch for DOM additions on blog pages.
@@ -67,9 +68,7 @@ var ChyrpLightbox = {
                         var item = mutation.addedNodes[i];
                         $(item).find("section img").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
                         if (ChyrpLightbox.protect)
-                            $(item).find("section img").not(".suppress_lightbox").on({
-                                contextmenu: function(e) { e.preventDefault(); }
-                            });
+                            $(item).find("section img").not(".suppress_lightbox").on("contextmenu", ChyrpLightbox.prevent);
                     }
                 });
             });
@@ -77,8 +76,10 @@ var ChyrpLightbox = {
             observer.observe(target, config);
         }
     },
-    load: function() {
+    load: function(e) {
         if (ChyrpLightbox.active == false) {
+            e.preventDefault();
+
             var src = $(this).attr("src");
             var alt = $(this).attr("alt");
             var ref = $(this).parent("a.image_link").attr("href");
@@ -99,10 +100,9 @@ var ChyrpLightbox = {
                         window.location.assign(ref);
                     else
                         ChyrpLightbox.hide();
-            }).load(ChyrpLightbox.show)).appendTo("body");
+            }).on("load", ChyrpLightbox.show)).appendTo("body");
 
             ChyrpLightbox.active = true;
-            return false;
         }
     },
     show: function() {

@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="initial-scale = 1.0">
-<title>{{ site.name }}: {% block title %}{{ title }}{% endblock %}</title>
+<title>{{ site.name }} | {% block title %}{{ title }}{% endblock %}</title>
 <!-- Styles -->
 <link rel="shortcut icon" href="{{ site.chyrp_url }}/favicon.ico">
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
 <link rel="stylesheet" href="{{ site.chyrp_url }}/admin/stylesheets/all.css" type="text/css" media="all">
 <!-- JavaScripts -->
-<script src="{{ site.chyrp_url }}/includes/common.js" type="text/javascript" charset="utf-8"></script>
-<script src="{{ site.chyrp_url }}/admin/javascripts/admin.js.php?action={{ route.action }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ site.chyrp_url }}/includes/common.js" type="text/javascript" charset="UTF-8"></script>
+<script src="{{ site.chyrp_url }}/admin/javascripts/admin.js.php?action={{ route.action }}" type="text/javascript" charset="UTF-8"></script>
 {{ trigger.call("admin_head") }}
 </head>
 <body>
@@ -22,7 +22,7 @@
 {% for action, attributes in navigation %}
 {% if attributes.children is not empty %}
 <li role="presentation" class="{{ action }}{{ attributes.selected | selected(true) }}">
-<a role="menuitem" href="{{ admin_url(action) }}">{{ attributes.title }}</a>
+<a role="menuitem" href="{{ url(action) }}">{{ attributes.title }}</a>
 </li>
 {% endif %}
 {% endfor %}
@@ -35,7 +35,7 @@
 {% if parent.selected and parent.children is not empty %}
 {% for child, attributes in parent.children %}
 <li role="presentation" class="{{ child }}{{ attributes.selected | selected(true) }}">
-<a role="menuitem" href="{{ admin_url(child) }}">{{ attributes.title }}</a>
+<a role="menuitem" href="{{ url(child) }}">{{ attributes.title }}</a>
 </li>
 {% endfor %}
 {% endif %}
@@ -57,11 +57,11 @@
 <div id="footer" role="contentinfo">
 <img class="logo" src="{{ site.chyrp_url }}/favicon.svg" alt="{{ 'Chyrp loves you.' | translate }}">
 <small class="metadata">{{ "Chyrp Lite &ldquo;%s&rdquo;" | translate | format(codename) }}</small>
-<a id="logout" class="button" href="{{ admin_url('logout') }}">{{ "Log out" | translate }}</a>
+<a id="logout" class="button" href="{{ url('/?action=logout') }}">{{ "Log out" | translate }}</a>
 </div>
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
-{% if debug and visitor.group.name == "Admin" %}
+{% if debug and visitor.group.can("change_settings", "toggle_extensions") %}
 <!--
 {% for caller in sql_debug %}
 {{ caller.query | replace("\t", "    ") | fix }}

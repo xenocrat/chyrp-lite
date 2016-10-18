@@ -108,7 +108,7 @@
         }
 
         public function parse_urls($urls) {
-            $urls["|/tag/([^/]+)/|"] = "/?action=tag&name=$1";
+            $urls["|/tag/([^/]+)/|"] = "/?action=tag&amp;name=$1";
             return $urls;
         }
 
@@ -199,8 +199,7 @@
             else
                 $posts = new Paginator(array());
 
-            $admin->display("manage_tags", array("tag_cloud" => $cloud,
-                                                 "posts" => $posts));
+            $admin->display("pages".DIR."manage_tags", array("tag_cloud" => $cloud, "posts" => $posts));
         }
 
         public function admin_rename_tag($admin) {
@@ -235,9 +234,9 @@
                 }
 
             if (!isset($tag))
-                Flash::warning(__("Tag not found.", "tags"), "/admin/?action=manage_tags");
+                Flash::warning(__("Tag not found.", "tags"), "manage_tags");
 
-            $admin->display("rename_tag", array("tag" => $tag));
+            $admin->display("pages".DIR."rename_tag", array("tag" => $tag));
         }
 
         public function admin_edit_tags($admin) {
@@ -247,12 +246,12 @@
             $post = new Post($_GET['id']);
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "/admin/?action=manage_tags");
+                Flash::warning(__("Post not found."), "manage_tags");
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            $admin->display("edit_tags", array("post" => $post));
+            $admin->display("pages".DIR."edit_tags", array("post" => $post));
         }
 
         public function admin_update_tags($admin) {
@@ -272,7 +271,7 @@
 
             $this->update_post($post);
 
-            Flash::notice(__("Tags updated.", "tags"), "/admin/?action=manage_tags");
+            Flash::notice(__("Tags updated.", "tags"), "manage_tags");
         }
 
         public function admin_update_tag($admin) {
@@ -305,7 +304,7 @@
                              array("value" => self::tags_serialize(array_merge($old, $new))));
             }
 
-            Flash::notice(__("Tag renamed.", "tags"), "/admin/?action=manage_tags");
+            Flash::notice(__("Tag renamed.", "tags"), "manage_tags");
         }
 
         public function admin_delete_tag($admin) {
@@ -337,9 +336,9 @@
                 }
 
             if (!isset($tag))
-                Flash::warning(__("Tag not found.", "tags"), "/admin/?action=manage_tags");
+                Flash::warning(__("Tag not found.", "tags"), "manage_tags");
 
-            $admin->display("delete_tag", array("tag" => $tag));
+            $admin->display("pages".DIR."delete_tag", array("tag" => $tag));
         }
 
         public function admin_destroy_tag() {
@@ -353,7 +352,7 @@
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_tags");
+                redirect("manage_tags");
 
             $sql = SQL::current();
 
@@ -374,7 +373,7 @@
                                  array("value" => self::tags_serialize($tags)));
             }
 
-            Flash::notice(__("Tag deleted.", "tags"), "/admin/?action=manage_tags");
+            Flash::notice(__("Tag deleted.", "tags"), "manage_tags");
         }
 
         public function admin_bulk_tag($admin) {
@@ -385,10 +384,10 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['post']))
-                Flash::warning(__("No posts selected.", "tags"), "/admin/?action=manage_tags");
+                Flash::warning(__("No posts selected.", "tags"), "manage_tags");
 
             if (empty($_POST['name']))
-                Flash::warning(__("No tags specified.", "tags"), "/admin/?action=manage_tags");
+                Flash::warning(__("No tags specified.", "tags"), "manage_tags");
 
             $sql = SQL::current();
             $new = self::prepare_tags($_POST['name']);
@@ -416,7 +415,7 @@
                                     "post_id" => $post_id));
             }
 
-            Flash::notice(__("Posts tagged.", "tags"), "/admin/?action=manage_tags");
+            Flash::notice(__("Posts tagged.", "tags"), "manage_tags");
         }
 
         public function main_context($context) {

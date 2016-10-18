@@ -16,7 +16,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
     
             if (empty($_POST))
-                return $admin->display("lightbox_settings");
+                return $admin->display("pages".DIR."lightbox_settings");
     
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -29,7 +29,7 @@
                                          "spacing" => ((int) $_POST['spacing'] < 0) ? 0 : (int) $_POST['spacing'],
                                          "protect" => isset($_POST['protect'])));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=lightbox_settings");
+            Flash::notice(__("Settings updated."), "lightbox_settings");
         }
 
         public function settings_nav($navs) {
@@ -40,6 +40,7 @@
         }
 
         public function javascript() {
+            $config = Config::current();
             include MODULES_DIR.DIR."lightbox".DIR."javascript.php";
         }
     }

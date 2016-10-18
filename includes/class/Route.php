@@ -35,6 +35,8 @@
             if (!in_array("Controller", class_implements($controller)))
                 trigger_error(__("Route was initiated with an invalid Controller."), E_USER_WARNING);
 
+            fallback($controller->protected, array("__construct", "__destruct", "parse", "display", "current"));
+
             $this->controller = $controller;
 
             $config = Config::current();
@@ -75,10 +77,8 @@
             Trigger::current()->call("parse_url", $this);
 
             $this->try[] = isset($this->action) ?
-                               oneof($this->action, "index") :
-                               (!substr_count($this->arg[0], "?") ?
-                                   oneof(@$this->arg[0], "index") :
-                                   "index") ;
+                               oneof($this->action, "index") : (!substr_count($this->arg[0], "?") ?
+                                   oneof($this->arg[0], "index") : "index") ;
 
             # Set the action, using a guess if necessary, to satisfy the view_site permission test.
             # A subset of actions is permitted even if the visitor is not allowed to view the site.
@@ -119,6 +119,11 @@
                 else
                     $call = false;
 
+                # Protect the controller's non-responder methods. PHP functions are not case-sensitive!
+                foreach ($this->controller->protected as $protected)
+                    if (strcasecmp($protected, $method) == 0)
+                        continue 2;
+
                 # This discovers responders native to the controller.
                 if ($call !== true and method_exists($this->controller, $method))
                     $response = call_user_func_array(array($this->controller, $method), $args);
@@ -145,39 +150,37 @@
 
         /**
          * Function: url
-         * Attempts to change the specified clean URL to a dirty URL if clean URLs is disabled.
-         * Use this for linking to things. The applicable URL conversions are passed through the
-         * parse_urls trigger.
+         * Constructs a canonical URL, translating clean to dirty URLs as necessary.
+         *
+         * The applicable URL translations are filtered through the @parse_urls@ trigger.
          *
          * Parameters:
-         *     $url - The clean URL.
+         *     $url - The clean URL. Assumed to be dirty if it begins with "/".
          *     $controller - The controller to use. If omitted the current controller will be used.
          *
          * Returns:
-         *     A clean or dirty URL, depending on @Config.clean_urls@.
+         *     An absolute clean or dirty URL, depending on @Config->clean_urls@.
          */
         public function url($url, $controller = null) {
             $config = Config::current();
 
-            if (strpos($url, "/") === 0)
-                return (ADMIN ?
-                           $config->chyrp_url.$url :
-                           $config->url.$url);
-            else
-                $url = substr($url, -1) == "/" ? $url : $url."/" ;
-
             fallback($controller, $this->controller);
 
-            $base = !empty($controller->base) ? $config->url."/".$controller->base : $config->url ;
+            if (is_string($controller))
+                $controller = $controller::current();
 
-            if ($config->clean_urls) {
-                # Pages don't need this prefix if clean URLs are enabled.
-                if (substr($url, 0, 5) == "page/")
-                    $url = substr($url, 5);
+            $base = !empty($controller->base) ? $config->chyrp_url."/".$controller->base : $config->url ;
 
-                # Make sure there's always a trailing slash on clean URLs.
-                return $base."/".rtrim($url, "/")."/";
-            }
+            # Assume this is a dirty URL and return it without translation.
+            if (strpos($url, "/") === 0)
+                return $base.$url;
+
+            # Assume this is a clean URL and ensure it ends with a slash.
+            $url = rtrim($url, "/")."/";
+
+            # Translation is unnecessary if clean URLs are enabled.
+            if ($config->clean_urls and !empty($controller->clean))
+                return $base."/".$url;
 
             $urls = fallback($controller->urls, array());
 
@@ -189,7 +192,8 @@
                 $urls[substr($key, 0, -1).preg_quote("feed/", $delimiter).$delimiter] = $value."&amp;feed";
             }
 
-            $urls["|/([^/]+)/$|"] = "/?action=$1";
+            # Add a fallback for single parameter translations.
+            $urls['|/([^/]+)/$|'] = '/?action=$1';
 
             return $base.fix(preg_replace(array_keys($urls), array_values($urls), "/".$url, 1));
         }

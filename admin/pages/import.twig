@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>{{ "What would you like to import?" | translate }}</h2>
-<form id="import_chyrp_form" class="split" action="{{ admin_url('import') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="import_chyrp_form" class="split" action="{{ url('import') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 {% if visitor.group.can("add_post") %}
 <p>

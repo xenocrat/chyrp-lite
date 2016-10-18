@@ -65,14 +65,11 @@
      * Redirects to the supplied URL and exits immediately.
      *
      * Parameters:
-     *     $url - The URL to redirect to. If it begins with @/@ it will be relative to the @Config.url@.
-     *     $use_chyrp_url - Use the @Config.chyrp_url@ instead of @Config.url@ for $urls beginning with @/@?
+     *     $url - The absolute or relative URL to redirect to.
      */
-    function redirect($url, $use_chyrp_url = false) {
-        # Handle URIs without domain.
-        if (strpos($url, "/") === 0)
-            $url = (ADMIN or $use_chyrp_url) ? Config::current()->chyrp_url.$url : Config::current()->url.$url ;
-        elseif (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
+    function redirect($url) {
+        # Ask the current controller to translate relative URLs.
+        if (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
         header("Location: ".html_entity_decode($url));
@@ -142,27 +139,6 @@
                      "https://" : "http://" ;
 
         return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
-    }
-
-    /**
-     * Function: admin_url
-     * Generates an admin URL from the supplied components.
-     *
-     * Parameters:
-     *     $action - The admin action.
-     *     $params - An indexed array of parameters.
-     *
-     * Returns:
-     *     A URL to a resource in the administration console.
-     */
-    function admin_url($action = "", $params = array()) {
-        $config = Config::current();
-        $request = !empty($action) ? array("action=".$action) : array() ;
-
-        foreach ($params as $key => $value)
-            $request[] = urlencode($key)."=".urlencode($value);
-
-        return $config->chyrp_url."/admin/".(!empty($request) ? "?".implode("&amp;", $request) : "");
     }
 
     /**

@@ -3,13 +3,13 @@
 {% block title %}{{ "Manage Comments" | translate("comments") }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="index.php" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
 <fieldset>
 <input type="hidden" name="action" value="manage_comments">
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ admin_url('help', {'id': 'filtering_results'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
@@ -17,7 +17,7 @@
 </fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Comments" | translate("comments") }}</h2>
-<form action="{{ admin_url('bulk_comments') }}" method="post">
+<form action="{{ url('bulk_comments') }}" method="post">
 <table class="interactive">
 <thead>
 <tr class="head">

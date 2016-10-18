@@ -87,7 +87,7 @@
         }
 
         public function parse_urls($urls) {
-            $urls["|/category/(.*?)/|"] = "/?action=category&name=$1";
+            $urls["|/category/([^/]+)/|"] = "/?action=category&amp;name=$1";
             return $urls;
         }
 
@@ -204,14 +204,15 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "name LIKE :query", "categorize");
 
-            $admin->display("manage_category", array("categorize" => Category::getCategoryList($where, $params)));
+            $admin->display("pages".DIR."manage_category",
+                            array("categorize" => Category::getCategoryList($where, $params)));
         }
 
         public function admin_new_category($admin) {
             if (!Visitor::current()->group->can('manage_categorize'))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
-            $admin->display("new_category");
+            $admin->display("pages".DIR."new_category");
         }
 
         public function admin_add_category($admin) {
@@ -225,7 +226,7 @@
                                   oneof(@$_POST['clean'], $_POST['name']),
                                   !empty($_POST['show_on_home']) ? 1 : 0);
 
-            Flash::notice(__("Category added.", "categorize"), "/admin/?action=manage_category");
+            Flash::notice(__("Category added.", "categorize"), "manage_category");
         }
 
         public function admin_edit_category($admin) {
@@ -238,10 +239,9 @@
             $category = Category::getCategory($_GET['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+                Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
-            $fields["categorize"] = $category;
-            $admin->display("edit_category", $fields, "Edit category");
+            $admin->display("pages".DIR."edit_category", array("category" => $category));
         }
 
         public function admin_update_category($admin) {
@@ -267,7 +267,7 @@
                                      oneof(@$_POST['clean'], $_POST['name']),
                                      !empty($_POST['show_on_home']) ? 1 : 0);
 
-            Flash::notice(__("Category updated.", "categorize"), "/admin/?action=manage_category");
+            Flash::notice(__("Category updated.", "categorize"), "manage_category");
         }
 
         public function admin_delete_category($admin) {
@@ -277,9 +277,9 @@
             $category = Category::getCategory($_GET['id']);
 
             if (empty($category))
-                Flash::warning(__("Category not found.", "categorize"), "/admin/?action=manage_category");
+                Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
-            $admin->display("delete_category", array("category" => $category));
+            $admin->display("pages".DIR."delete_category", array("category" => $category));
         }
 
         public function admin_destroy_category() {
@@ -293,7 +293,7 @@
                 error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("/admin/?action=manage_category");
+                redirect("manage_category");
 
             $category = Category::getCategory($_POST['id']);
 
@@ -301,6 +301,6 @@
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
 
             Category::deleteCategory($category->id);
-            Flash::notice(__("Category deleted.", "categorize"), "/admin/?action=manage_category");
+            Flash::notice(__("Category deleted.", "categorize"), "manage_category");
         }
     }

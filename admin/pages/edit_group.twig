@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>{{ "Editing Group &#8220;%s&#8221;" | translate | format(group.name | fix) }}</h1>
-<form id="group_edit" class="split{{ group.id == visitor.group.id ? ' confirm' : '' }}" action="{{ admin_url('update_group') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="group_edit" class="split{{ group.id == visitor.group.id ? ' confirm' : '' }}" action="{{ url('update_group') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="name">{{ "Name" | translate }}</label>

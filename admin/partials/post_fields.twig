@@ -3,7 +3,7 @@
 <p class="main_options">
 <label for="{{ field.attr }}_field">
 {% if field.preview is defined and field.preview == "markup_text" and site.enable_markdown %}
-<a href="{{ admin_url('help', {'id': 'markdown'}) }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ field.label }}
 {% if field.optional is defined and field.optional %}
@@ -11,7 +11,7 @@
 {% endif %}
 {% if field.help is defined %}
 <span class="sub">
-<a href="{{ admin_url('help', {'id': field.help}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </span>
 {% endif %}
 {% if field.note is defined %}
@@ -84,7 +84,7 @@
 <p class="more_options_option">
 <label for="slug">
 {{ "Slug" | translate }}
-<a href="{{ admin_url('help', {'id': 'slugs'}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/slugs') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </label>
 <input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.slug | fix : '' }}">
 </p>
@@ -98,7 +98,7 @@
 {{ field.label }}
 {% if field.help is defined %}
 <span class="sub">
-<a href="{{ admin_url('help', {'id': field.help}) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </span>
 {% endif %}
 {% if field.note is defined %}

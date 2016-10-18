@@ -38,7 +38,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $admin->display("like_settings");
+                return $admin->display("pages".DIR."like_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -50,7 +50,7 @@
                                "likeWithText" => isset($_POST['likeWithText']),
                                "likeImage" => $_POST['likeImage']));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=like_settings");
+            Flash::notice(__("Settings updated."), "like_settings");
         }
 
         public function settings_nav($navs) {
@@ -185,7 +185,7 @@
             if (!$like->resolve()) {
                 if ($visitor->group->can("like_post")) {
                     $html.= "<a class=\"likes like\" href=\"".
-                                $config->chyrp_url."/?action=like&post_id=".
+                                $config->url."/?action=like&post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
                                 "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
@@ -210,7 +210,7 @@
             } else {
                 if ($visitor->group->can("unlike_post")) {
                     $html.= "<a class=\"likes liked\" href=\"".
-                                $config->chyrp_url."/?action=unlike&post_id=".
+                                $config->url."/?action=unlike&post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
                                 "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";

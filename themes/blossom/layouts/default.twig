@@ -89,15 +89,15 @@
 {% endif %}
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
 <li role="presentation">
-<a role="menuitem" href="{{ admin_url() }}">{{ "Admin" | translate }}</a>
+<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Admin" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_post") %}
 <li role="presentation">
-<a role="menuitem" href="{{ admin_url('write_post') }}">{{ "Write" | translate }}</a>
+<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Write" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_draft") %}
 <li role="presentation">
-<a role="menuitem" href="{{ admin_url('write_post') }}">{{ "Draft" | translate }}</a>
+<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Draft" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.logged_in %}
@@ -122,7 +122,7 @@
 {{ trigger.call("end_content") }}
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
-{% if debug and visitor.group.name == "Admin" %}
+{% if debug and visitor.group.can("change_settings", "toggle_extensions") %}
 <!--
 {% for caller in sql_debug %}
 {{ caller.query | replace("\t", "    ") | fix }}

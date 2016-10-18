@@ -40,7 +40,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $admin->display("sitemap_settings");
+                return $admin->display("pages".DIR."sitemap_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -54,7 +54,7 @@
                                "pages_changefreq" => $_POST['pages_changefreq'],
                                "posts_changefreq" => $_POST['posts_changefreq']));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=sitemap_settings");
+            Flash::notice(__("Settings updated."), "sitemap_settings");
         }
 
         /**

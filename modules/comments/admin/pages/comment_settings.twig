@@ -3,7 +3,7 @@
 {% block title %}{{ "Comment Settings" | translate("comments") }}{% endblock %}
 
 {% block content %}
-<form id="comment_settings" class="split" action="{{ admin_url('comment_settings') }}" method="post">
+<form id="comment_settings" class="split" action="{{ url('comment_settings') }}" method="post">
 <fieldset>
 <p>
 <label for="akismet_api_key">{{ "Akismet API Key" | translate("comments") }}</label>

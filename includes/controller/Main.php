@@ -6,16 +6,16 @@
     class MainController implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
-        public $urls = array('|/id/([0-9]+)/|'                              => '/?action=id&id=$1',
-                             '|/page/(([^/]+)/)+|'                          => '/?action=page&url=$2',
-                             '|/search/([^/]+)/|'                           => '/?action=search&query=$1',
+        public $urls = array('|/id/post/([0-9]+)/|'                         => '/?action=id&amp;post=$1',
+                             '|/id/page/([0-9]+)/|'                         => '/?action=id&amp;page=$1',
+                             '|/search/([^/]+)/|'                           => '/?action=search&amp;query=$1',
                              '|/search/|'                                   => '/?action=search',
-                             '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&year=$1&month=$2&day=$3',
-                             '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&year=$1&month=$2',
-                             '|/archive/([0-9]{4})/|'                       => '/?action=archive&year=$1',
-                             '|/random/([^/]+)/|'                           => '/?action=random&feather=$1',
+                             '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&amp;year=$1&amp;month=$2&amp;day=$3',
+                             '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&amp;year=$1&amp;month=$2',
+                             '|/archive/([0-9]{4})/|'                       => '/?action=archive&amp;year=$1',
+                             '|/random/([^/]+)/|'                           => '/?action=random&amp;feather=$1',
                              '|/random/|'                                   => '/?action=random',
-                             '|/([^/]+)/feed/|'                             => '/?action=$1&feed');
+                             '|/([^/]+)/feed/|'                             => '/?action=$1&amp;feed');
 
         # Boolean: $displayed
         # Has anything been displayed?
@@ -25,9 +25,17 @@
         # Context for displaying pages.
         public $context = array();
 
+        # Boolean: $clean
+        # Does this controller support clean URLs?
+        public $clean = true;
+
         # Boolean: $feed
         # Is the visitor requesting a feed?
         public $feed = false;
+
+        # Array: $protected
+        # Methods that cannot respond to actions.
+        public $protected = array("__construct", "parse", "feed", "display", "current");
 
         /**
          * Function: __construct
@@ -65,10 +73,6 @@
             if (empty($route->arg[0]) and !isset($config->routes["/"]))
                 return $route->action = "index";
 
-            # Protect non-responder functions.
-            if (in_array($route->arg[0], array("__construct", "parse", "post_from_url", "display", "current")))
-                show_404();
-
             # Discover feed requests.
             if (preg_match("/\/feed\/?$/", $route->request)) {
                 $this->feed = true;
@@ -79,22 +83,22 @@
                     return $route->action = "index";
             }
 
+            # Static ID of a post or page.
+            if ($route->arg[0] == "id") {
+                if (isset($route->arg[1]) and isset($route->arg[2]))
+                    $_GET[$route->arg[1]] = $route->arg[2];
+
+                return $route->action = "id";
+            }
+
             # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $page_matches)) {
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
 
-                # Don't fool ourselves into thinking we're viewing a page.
+                # Don't fool ourselves into thinking we're viewing a page if this is pagination of the "/" route.
                 if ($route->arg[0] == $page_matches[1][0])
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
-            }
-
-            # Viewing a post by its ID.
-            if ($route->arg[0] == "id") {
-                if (isset($route->arg[1]))
-                    $_GET['id'] = $route->arg[1];
-
-                return $route->action = "id";
             }
 
             # Archive.
@@ -164,53 +168,10 @@
             }
 
             # Are we viewing a post?
-            $this->post_from_url($route, $route->request);
+            Post::from_url($route->request, $route);
 
-            # Try viewing a page.
-            $route->try["page"] = array($route->arg);
-        }
-
-        /**
-         * Function: post_from_url
-         * Check to see if we're viewing a post, and if it is, handle it.
-         *
-         * This can also be used for grabbing a Post from a given URL.
-         *
-         * Parameters:
-         *     $route - The route object to respond to.
-         *     $request - The request URI to parse.
-         *     $return_post - Return a post instead of responding to the route?
-         */
-        public function post_from_url($route, $request, $return_post = false) {
-            $config = Config::current();
-
-            $post_url_regex = "";
-            $url_parameters = array();
-            $post_url_parts = preg_split("!(\([^)]+\))!",
-                                         $config->post_url,
-                                         null,
-                                         PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-
-            Trigger::current()->filter(Post::$url_attrs, "url_code");
-
-            foreach ($post_url_parts as $part)
-                if (isset(Post::$url_attrs[$part])) {
-                    $post_url_regex .= Post::$url_attrs[$part];
-                    $url_parameters[] = trim($part, "()");
-                } else
-                    $post_url_regex .= preg_quote($part, "/");
-
-            if (preg_match("/^$post_url_regex/", ltrim($request, "/"), $matches)) {
-                $post_url_attrs = array();
-
-                for ($i = 0; $i < count($url_parameters); $i++)
-                    $post_url_attrs[$url_parameters[$i]] = urldecode($matches[$i + 1]);
-
-                if ($return_post)
-                    return Post::from_url($post_url_attrs);
-                else
-                    $route->try["view"] = array($post_url_attrs);
-            }
+            # Are we viewing a page?
+            Page::from_url($route->request, $route);
         }
 
         /**
@@ -384,18 +345,16 @@
          * Function: view
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
-        public function view($attrs = null) {
-            $args = Route::current()->arg;
-
+        public function view($attrs = null, $arg = array()) {
             $post = (isset($attrs)) ?
-                Post::from_url($attrs, array("drafts" => true)) :
+                Post::from_url($attrs, null, array("drafts" => true)) :
                 new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
 
             if ($post->no_results)
                 return false;
 
             # Don't fool ourselves into thinking a feed was requested because of a "feed" attribute.
-            if (!isset($_GET['feed']) and !(count($args) > count($attrs) and end($args) == "feed"))
+            if (!isset($_GET['feed']) and !(count($arg) > count($attrs) and end($arg) == "feed"))
                 $this->feed = false;
 
             if (!$post->theme_exists())
@@ -421,20 +380,8 @@
          * Function: page
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
-        public function page($urls = null) {
-            if (isset($urls)) {
-                $valids = Page::find(array("where" => array("url" => $urls)));
-
-                # One of the URLs in the page hierarchy is invalid.
-                if (!(count($valids) == count($urls)))
-                    return false;
-
-                # Loop over the pages until we find the one we want.
-                foreach ($valids as $page)
-                    if ($page->url == end($urls))
-                        break;
-            } else
-                $page = new Page(array("url" => fallback($_GET['url'])));
+        public function page($url = null, $hierarchy = array()) {
+            $page = (isset($url)) ? new Page(array("url" => $url)) : new Page(array("url" => fallback($_GET['url']))) ;
 
             if ($page->no_results)
                 return false;
@@ -449,15 +396,28 @@
 
         /**
          * Function: id
-         * Views a post by its static ID.
+         * Views a post or page by its static ID.
          */
         public function id() {
-            $post = new Post(fallback($_GET['id']));
+            if (!empty($_GET['post']) and is_numeric($_GET['post'])) {
+                $post = new Post($_GET['post']);
 
-            if ($post->no_results)
-                return false;
+                if ($post->no_results)
+                    return false;
 
-            redirect($post->url());
+                redirect($post->url());
+            }
+
+            if (!empty($_GET['page']) and is_numeric($_GET['page'])) {
+                $page = new Page($_GET['page']);
+
+                if ($page->no_results)
+                    return false;
+
+                redirect($page->url());
+            }
+
+            return false;
         }
 
         /**
@@ -521,8 +481,8 @@
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
                                                      "link"  => $config->url.
-                                                                "/?action=activate&login=".urlencode($user->login).
-                                                                "&token=".token(array($user->login, $user->email))));
+                                                                "/?action=activate&amp;login=".urlencode($user->login).
+                                                                "&amp;token=".token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     }
@@ -704,8 +664,8 @@
                     correspond("reset", array("login" => $user->login,
                                               "to"    => $user->email,
                                               "link"  => $config->url.
-                                                         "/?action=reset&login=".urlencode($user->login).
-                                                         "&token=".token(array($user->login, $user->email))));
+                                                         "/?action=reset&amp;login=".urlencode($user->login).
+                                                         "&amp;token=".token(array($user->login, $user->email))));
 
                 Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
             }
@@ -738,7 +698,7 @@
          * Function: feed
          * Grabs posts for the feed.
          */
-        public function feed($posts = null) {
+        private function feed($posts = null) {
             $config = Config::current();
             $trigger = Trigger::current();
 

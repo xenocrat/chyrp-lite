@@ -17,7 +17,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
     
             if (empty($_POST))
-                return $admin->display("recaptcha_settings");
+                return $admin->display("pages".DIR."recaptcha_settings");
     
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -29,7 +29,7 @@
                                    array("public_key" => $_POST['public_key'],
                                          "private_key" => $_POST['private_key']));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=recaptcha_settings");
+            Flash::notice(__("Settings updated."), "recaptcha_settings");
         }
 
         public function settings_nav($navs) {

@@ -470,7 +470,7 @@
 
         /**
          * Function: url
-         * Returns a post's URL.
+         * Returns a post's URL. We can cheat because we know the inner workings of MainController.
          */
         public function url() {
             if ($this->no_results)
@@ -664,38 +664,65 @@
         /**
          * Function: from_url
          * Attempts to grab a post from its clean URL.
+         *
+         * Parameters:
+         *     $request - The request URI to parse, or an array of matches already found.
+         *     $route - The route object to respond to, or null to return a Post object.
+         *     $options - Additional options for the Post object (optional).
          */
-        static function from_url($attrs = null, $options = array()) {
-            fallback($attrs, $_GET);
+        static function from_url($request, $route = null, $options = array()) {
+            $config = Config::current();
+
+            $found = is_array($request) ? $request : array() ;
+
+            if (empty($found)) {
+                $regex = "";      # Request validity is tested with this.
+                $attrs = array(); # Post attributes present in post_url.
+                $parts = preg_split("|(\([^)]+\))|",
+                                    $config->post_url,
+                                    null,
+                                    PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+
+                # Differentiate between post attributes and junk in post_url.
+                foreach ($parts as $part)
+                    if (isset(self::$url_attrs[$part])) {
+                        $regex .= self::$url_attrs[$part];
+                        $attrs[] = trim($part, "()");
+                    } else
+                        $regex .= preg_quote($part, "|");
+
+                # Test the request and return false if it isn't valid.
+                if (!preg_match("|^$regex|", ltrim(str_replace($config->url, "/", $request), "/"), $matches))
+                    return false;
+
+                # Populate $found using the array of sub-pattern matches.
+                for ($i = 0; $i < count($attrs); $i++)
+                    $found[$attrs[$i]] = urldecode($matches[$i + 1]);
+
+                # If a route was provided, respond to it and return.
+                if (isset($route))
+                    return $route->try["view"] = array($found, $route->arg);
+            }
 
             $where = array();
-            $times = array("year", "month", "day", "hour", "minute", "second");
+            $dates = array("year", "month", "day", "hour", "minute", "second");
 
-            preg_match_all("/\(([^\)]+)\)/", Config::current()->post_url, $matches);
-            $params = array();
+            # Conversions of some attributes.
+            foreach ($found as $part => $value)
+                if (in_array($part, $dates)) {
+                    # Filter by date/time of creation.
+                    $where[strtoupper($part)."(created_at)"] = $value;
+                } elseif ($part == "author") {
+                    # Filter by "author" (login).
+                    $user = new User(array("login" => $value));
+                    $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
+                } elseif ($part == "feathers") {
+                    # Filter by feather.
+                    $where["feather"] = depluralize($value);
+                } else
+                    $where[$part] = $value;
 
-            foreach ($matches[1] as $attr)
-                if (in_array($attr, $times))
-                    $where[strtoupper($attr)."(created_at)"] = $attrs[$attr];
-                elseif ($attr == "author") {
-                    $user = new User(array("login" => $attrs['author']));
-                    $where["user_id"] = $user->id;
-                } elseif ($attr == "feathers")
-                    $where["feather"] = depluralize($attrs['feathers']);
-                else {
-                    $tokens = array($where, $params, $attr);
-                    Trigger::current()->filter($tokens, "post_url_token");
-                    list($where, $params, $attr) = $tokens;
-
-                    if ($attr !== null) {
-                        if (!isset($attrs[$attr]))
-                            continue;
-
-                        $where[$attr] = $attrs[$attr];
-                    }
-                }
-
-            return new self(null, array_merge($options, array("where" => $where, "params" => $params)));
+            return new self(null, array_merge($options, array("where" => $where)));
         }
 
         /**
@@ -789,10 +816,9 @@
                                   array("posts.created_at <=" => datetime(),
                                         "posts.status" => "scheduled"))->fetchAll();
 
-            if (!empty($posts))
-                foreach ($posts as $post)
-                    $sql->update("posts",
-                                 array("id" => $post),
-                                 array("status" => "public"));
+            foreach ($posts as $post)
+                $sql->update("posts",
+                             array("id" => $post),
+                             array("status" => "public"));
         }
     }

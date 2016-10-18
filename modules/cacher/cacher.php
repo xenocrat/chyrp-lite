@@ -108,7 +108,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $admin->display("cache_settings");
+                return $admin->display("pages".DIR."cache_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -123,7 +123,7 @@
             $config->set("cache_expire", (int) $_POST['cache_expire']);
             $config->set("cache_exclude", array_filter($_POST['cache_exclude']));
 
-            Flash::notice(__("Settings updated."), "/admin/?action=cache_settings");
+            Flash::notice(__("Settings updated."), "cache_settings");
         }
 
         public function admin_clear_cache() {
@@ -135,6 +135,6 @@
 
             $this->regenerate();
 
-            Flash::notice(__("Cache cleared.", "cacher"), "/admin/?action=cache_settings");
+            Flash::notice(__("Cache cleared.", "cacher"), "cache_settings");
         }
     }

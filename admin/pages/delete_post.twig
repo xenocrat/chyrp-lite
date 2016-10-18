@@ -7,7 +7,7 @@
 <p>
 {{ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(post.title | striptags | oneof("[Untitled]" | translate)) }}
 </p>
-<form class="delete" action="{{ admin_url('destroy_post') }}" method="post" accept-charset="UTF-8">
+<form class="delete" action="{{ url('destroy_post') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">

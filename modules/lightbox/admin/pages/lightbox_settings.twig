@@ -3,7 +3,7 @@
 {% block title %}{{ "Lightbox Settings" | translate("lightbox") }}{% endblock %}
 
 {% block content %}
-<form id="lightbox_settings" class="split" action="{{ admin_url('lightbox_settings') }}" method="post">
+<form id="lightbox_settings" class="split" action="{{ url('lightbox_settings') }}" method="post">
 <fieldset>
 <p>
 <label for="background">{{ "Background" | translate("lightbox") }}</label>

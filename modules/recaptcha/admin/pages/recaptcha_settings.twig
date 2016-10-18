@@ -3,7 +3,7 @@
 {% block title %}{{ "Recaptcha Settings" | translate("recaptcha") }}{% endblock %}
 
 {% block content %}
-<form id="recaptcha_settings" class="split" action="{{ admin_url('recaptcha_settings') }}" method="post">
+<form id="recaptcha_settings" class="split" action="{{ url('recaptcha_settings') }}" method="post">
 <fieldset>
 <p>
 <label for="public_key">{{ "Public Key" | translate("recaptcha") }}</label>

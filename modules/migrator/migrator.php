@@ -4,7 +4,7 @@
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
 
-            $admin->display("manage_migration");
+            $admin->display("pages".DIR."manage_migration");
         }
 
         public function manage_nav($navs) {
@@ -26,7 +26,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
-                redirect("/admin/?action=import");
+                redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -81,7 +81,7 @@
 
             if (!$xml or !(substr_count($xml->channel->generator, "wordpress.org") or
                            substr_count($xml->channel->generator, "wordpress.com")))
-                Flash::warning(__("The file does not seem to be a valid WordPress export file.", "migrator"), "/admin/?action=import");
+                Flash::warning(__("The file does not seem to be a valid WordPress export file.", "migrator"), "manage_migration");
 
             foreach ($xml->channel->item as $item) {
                 $wordpress = $item->children("http://wordpress.org/export/1.2/");
@@ -174,7 +174,7 @@
                 }
             }
 
-            Flash::notice(__("WordPress content successfully imported!", "migrator"), "/admin/?action=import");
+            Flash::notice(__("WordPress content successfully imported!", "migrator"), "manage_migration");
         }
 
         /**
@@ -188,7 +188,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
-                redirect("/admin/?action=import");
+                redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -221,7 +221,7 @@
             $xml = simplexml_load_string($api);
 
             if (!isset($xml->tumblelog))
-                Flash::warning(__("Could not retrieve content from the Tumblr URL. ", "migrator"), "/admin/?action=import");
+                Flash::warning(__("Could not retrieve content from the Tumblr URL. ", "migrator"), "manage_migration");
 
             $already_in = $posts = array();
 
@@ -312,7 +312,7 @@
                 Trigger::current()->call("import_tumble", $post, $new_post);
             }
 
-            Flash::notice(__("Tumblr content successfully imported!", "migrator"), "/admin/?action=import");
+            Flash::notice(__("Tumblr content successfully imported!", "migrator"), "manage_migration");
         }
 
         /**
@@ -327,7 +327,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
-                redirect("/admin/?action=import");
+                redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -353,7 +353,7 @@
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
             if ($mysqli->connect_errno)
-                Flash::warning(__("Could not connect to the TextPattern database.", "migrator"), "/admin/?action=import");
+                Flash::warning(__("Could not connect to the TextPattern database.", "migrator"), "manage_migration");
 
             $mysqli->query("SET NAMES 'utf8'");
 
@@ -404,7 +404,7 @@
                 $trigger->call("import_textpattern_post", $post, $new_post);
             }
 
-            Flash::notice(__("TextPattern content successfully imported!", "migrator"), "/admin/?action=import");
+            Flash::notice(__("TextPattern content successfully imported!", "migrator"), "manage_migration");
         }
 
         /**
@@ -420,7 +420,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
-                redirect("/admin/?action=import");
+                redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -446,7 +446,7 @@
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
             if ($mysqli->connect_errno)
-                Flash::warning(__("Could not connect to the MovableType database.", "migrator"), "/admin/?action=import");
+                Flash::warning(__("Could not connect to the MovableType database.", "migrator"), "manage_migration");
 
             $mysqli->query("SET NAMES 'utf8'");
 
@@ -527,6 +527,6 @@
                 }
             }
 
-            Flash::notice(__("MovableType content successfully imported!", "migrator"), "/admin/?action=import");
+            Flash::notice(__("MovableType content successfully imported!", "migrator"), "manage_migration");
         }
     }
