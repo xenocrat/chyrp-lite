@@ -40,6 +40,7 @@
         }
 
         public function javascript() {
+            $config = Config::current();
             include MODULES_DIR.DIR."lightbox".DIR."javascript.php";
         }
     }
