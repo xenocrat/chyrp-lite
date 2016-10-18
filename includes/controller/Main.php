@@ -698,7 +698,7 @@
          * Function: feed
          * Grabs posts for the feed.
          */
-        public function feed($posts = null) {
+        private function feed($posts = null) {
             $config = Config::current();
             $trigger = Trigger::current();
 
