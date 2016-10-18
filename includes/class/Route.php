@@ -35,7 +35,7 @@
             if (!in_array("Controller", class_implements($controller)))
                 trigger_error(__("Route was initiated with an invalid Controller."), E_USER_WARNING);
 
-            fallback($controller->protected, array("__construct", "parse", "display", "current"));
+            fallback($controller->protected, array("__construct", "__destruct", "parse", "display", "current"));
 
             $this->controller = $controller;
 
