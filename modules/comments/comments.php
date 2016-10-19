@@ -153,10 +153,7 @@
                                           $notify), $post->url());
         }
 
-        public function admin_update_comment() {
-            if (empty($_POST))
-                redirect("manage_comments");
-
+        public function route_update_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -205,12 +202,12 @@
                              $created_at);
 
             if (!empty($_POST['ajax']))
-                exit(__("Comment updated.", "comments"));
+                json_response(__("Comment updated.", "comments"));
 
-            if (!$visitor->group->can("edit_comment", "delete_comment"))
+            if (!$visitor->group->can("edit_comment", "delete_comment") or MAIN)
                 Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
-
-            Flash::notice(__("Comment updated.", "comments"), "manage_comments");
+            else
+                Flash::notice(__("Comment updated.", "comments"), "manage_comments");
         }
 
         public function admin_delete_comment($admin) {
