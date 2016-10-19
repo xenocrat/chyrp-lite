@@ -105,7 +105,7 @@
             return $urls;
         }
 
-        public function route_add_comment() {
+        private function add_comment() {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"), null, 400);
 
@@ -117,43 +117,45 @@
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
 
+            $url = $post->url();
+
             if (empty($_POST['body']))
-                Flash::warning(__("Message can't be blank.", "comments"));
+                return array(__("Message can't be blank.", "comments"), false, $url);
 
             if (empty($_POST['author']))
-                Flash::warning(__("Author can't be blank.", "comments"));
+                return array(__("Author can't be blank.", "comments"), false, $url);
 
             if (empty($_POST['author_email']))
-                Flash::warning(__("Email address can't be blank.", "comments"));
-            elseif (!is_email($_POST['author_email']))
-                Flash::warning(__("Invalid email address.", "comments"));
+                return array(__("Email address can't be blank.", "comments"), false, $url);
+
+            if (!is_email($_POST['author_email']))
+                return array(__("Invalid email address.", "comments"), false, $url);
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                Flash::warning(__("Invalid website URL.", "comments"));
+                return array(__("Invalid website URL.", "comments"), false, $url);
 
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
             if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
-                Flash::warning(__("Incorrect captcha code.", "comments"));
+                return array(__("Incorrect captcha code.", "comments"), false, $url);
 
             fallback($_POST['author_url'], "");
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
-            if (Flash::exists("warning"))
-                redirect($post->url());
+            Comment::create($_POST['body'],
+                            $_POST['author'],
+                            $_POST['author_url'],
+                            $_POST['author_email'],
+                            $post,
+                            $parent,
+                            $notify);
 
-            Flash::notice(Comment::create($_POST['body'],
-                                          $_POST['author'],
-                                          $_POST['author_url'],
-                                          $_POST['author_email'],
-                                          $post,
-                                          $parent,
-                                          $notify), $post->url());
+            return array(__("Comment added.", "comments"), true, $url);
         }
 
-        public function route_update_comment() {
+        private function update_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -168,20 +170,22 @@
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
+            $url = $comment->post->url();
+
             if (empty($_POST['body']))
-                error(__("Error"), __("Message can't be blank.", "comments"), null, 422);
+                return array(__("Message can't be blank.", "comments"), false, $url);
 
             if (empty($_POST['author']))
-                error(__("Error"), __("Author can't be blank.", "comments"), null, 422);
+                return array(__("Author can't be blank.", "comments"), false, $url);
 
             if (empty($_POST['author_email']))
-                error(__("Error"), __("Email address can't be blank.", "comments"), null, 422);
+                return array(__("Email address can't be blank.", "comments"), false, $url);
 
             if (!is_email($_POST['author_email']))
-                error(__("Error"), __("Invalid email address.", "comments"), null, 422);
+                return array(__("Invalid email address.", "comments"), false, $url);
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                error(__("Error"), __("Invalid website URL.", "comments"), null, 422);
+                return array(__("Invalid website URL.", "comments"), false, $url);
 
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
@@ -190,8 +194,8 @@
             fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
             $visitor = Visitor::current();
-            $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
-            $created_at = ($visitor->group->can("edit_comment")) ? datetime($_POST['created_at']) : $comment->created_at ;
+            $status = ($visitor->group->can("edit_comment")) ? fallback($_POST['status'], $comment->status) : $comment->status ;
+            $created_at = ($visitor->group->can("edit_comment")) ? datetime(fallback($_POST['created_at'])) : $comment->created_at ;
 
             $comment->update($_POST['body'],
                              $_POST['author'],
@@ -201,13 +205,42 @@
                              $notify,
                              $created_at);
 
-            if (!empty($_POST['ajax']))
-                json_response(__("Comment updated.", "comments"));
+            return array(__("Comment updated.", "comments"), true, $url);
+        }
 
-            if (!$visitor->group->can("edit_comment", "delete_comment") or MAIN)
-                Flash::notice(__("Comment updated.", "comments"), $comment->post->url());
-            else
-                Flash::notice(__("Comment updated.", "comments"), "manage_comments");
+        public function main_add_comment() {
+            list($message, $success, $url) = self::add_comment();
+            $type = ($success) ? "notice" : "warning" ;
+            Flash::$type($message, $url);
+        }
+
+        public function main_update_comment() {
+            list($message, $success, $url) = self::update_comment();
+            $type = ($success) ? "notice" : "warning" ;
+            Flash::$type($message, $url);
+        }
+
+        public function admin_update_comment() {
+            list($message, $success, $url) = self::update_comment();
+
+            if (!$success)
+                error(__("Error"), $message, null, 422);
+
+            Flash::notice($message, "manage_comments");
+        }
+
+        public function ajax_add_comment() {
+            list($message, $success, $url) = self::add_comment();
+
+            if ($success)
+                Flash::notice($message);
+
+            json_response($message, array("success" => $success, "url" => $url));
+        }
+
+        public function ajax_update_comment() {
+            list($message, $success, $url) = self::update_comment();
+            json_response($message, array("success" => $success, "url" => $url));
         }
 
         public function admin_delete_comment($admin) {
@@ -545,6 +578,7 @@
         }
 
         public function javascript() {
+            $config  = Config::current();
             include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
 
@@ -636,25 +670,6 @@
 
                     $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
                     exit;
-                case "validate_comment":
-                    if (empty($_POST['body']))
-                        json_response(__("Message can't be blank.", "comments"), false);
-
-                    if (empty($_POST['author']))
-                        json_response(__("Author can't be blank.", "comments"), false);
-
-                    if (empty($_POST['author_email']))
-                        json_response(__("Email address can't be blank.", "comments"), false);
-                    elseif (!is_email($_POST['author_email']))
-                        json_response(__("Invalid email address.", "comments"), false);
-
-                    if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                        json_response(__("Invalid website URL.", "comments"), false);
-
-                    if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
-                        json_response(__("Incorrect captcha code.", "comments"), false);
-
-                    json_response(__("Comment validated.", "comments"), true);
             }
         }
 

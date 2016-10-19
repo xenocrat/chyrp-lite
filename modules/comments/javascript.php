@@ -3,9 +3,9 @@ var ChyrpComment = {
     notice: 0,
     interval: null,
     failed: false,
-    reload: <?php echo(Config::current()->enable_reload_comments ? "true" : "false" ); ?>,
-    delay: Math.abs(<?php echo(Config::current()->auto_reload_comments * 1000); ?>),
-    per_page: <?php echo Config::current()->comments_per_page; ?>,
+    reload: <?php echo($config->enable_reload_comments ? "true" : "false" ); ?>,
+    delay: Math.abs(<?php echo($config->auto_reload_comments * 1000); ?>),
+    per_page: <?php echo $config->comments_per_page; ?>,
     init: function() {
         if (Site.ajax && $("#comments").length) {
             if (ChyrpComment.reload && ChyrpComment.delay > 0)
@@ -16,7 +16,7 @@ var ChyrpComment = {
                     e.preventDefault();
                     $("#comments .comment_form").loader();
 
-                    // Validate the form.
+                    // Submit the form.
                     $.ajax({
                         type: "POST",
                         url: Site.chyrp_url + "/includes/ajax.php",
@@ -26,15 +26,15 @@ var ChyrpComment = {
                         dataType: "json",
                         error: ChyrpComment.panic,
                     }).done(function(response) {
-                        $("#comments .comment_form").loader(true);
-
-                        if (response.data === false) {
-                            // Validation failed if data value is false.
+                        // Validation failed if data value is false.
+                        if (response.data.success === false) {
+                            $("#comments .comment_form").loader(true);
                             alert(response.text);
-                        } else {
-                            // Turn off the validator and submit the form.
-                            $("#add_comment").off("submit.validator").submit();
+                            return;
                         }
+
+                        // Reload the page to view the newly created post.
+                        window.location.href = response.data.url;
                     });
                 }
             });
@@ -132,7 +132,7 @@ var ChyrpComment = {
                             e.preventDefault();
                             thisItem.loader();
 
-                            // Validate the form.
+                            // Submit the form.
                             $.ajax({
                                 type: "POST",
                                 url: Site.chyrp_url + "/includes/ajax.php",
@@ -142,34 +142,24 @@ var ChyrpComment = {
                                 dataType: "json",
                                 error: ChyrpComment.panic,
                             }).done(function(response) {
-                                if (!response.data) {
+                                // Validation failed if data value is false.
+                                if (response.data.success === false) {
                                     $(thisItem).loader(true);
                                     alert(response.text);
                                     return;
                                 }
 
-                                // Submit the form.
-                                $.ajax({
-                                    type: "POST",
-                                    url: thisForm.attr("action"),
-                                    data: new FormData(thisForm[0]),
-                                    processData: false,
-                                    contentType: false,
-                                    dataType: "text",
-                                    error: ChyrpComment.panic,
-                                }).done(function(response) {
-                                    ChyrpComment.editing--;
+                                ChyrpComment.editing--;
 
-                                    // Load the updated post.
-                                    $.post(Site.chyrp_url + "/includes/ajax.php", {
-                                        action: "show_comment",
-                                        comment_id: id
-                                    }, function(data) {
-                                        thisItem.fadeOut("fast", function() {
-                                            $(this).replaceWith(data).fadeIn("fast");
-                                        });
-                                    }, "html").fail(ChyrpComment.panic);
-                                });
+                                // Load the updated post in place of the edit form.
+                                $.post(Site.chyrp_url + "/includes/ajax.php", {
+                                    action: "show_comment",
+                                    comment_id: id
+                                }, function(data) {
+                                    thisItem.fadeOut("fast", function() {
+                                        $(this).replaceWith(data).fadeIn("fast");
+                                    });
+                                }, "html").fail(ChyrpComment.panic);
                             });
                         }
                     });
