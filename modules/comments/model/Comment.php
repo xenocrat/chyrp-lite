@@ -114,8 +114,6 @@
                               $visitor->id,
                               $parent,
                               $notify);
-
-                    return __("Your comment is awaiting moderation.", "comments");
                 } else {
                     $comment = self::add($body,
                                          $author,
@@ -131,7 +129,6 @@
 
                     fallback($_SESSION['comments'], array());
                     $_SESSION['comments'][] = $comment->id;
-                    return __("Comment added.", "comments");
                 }
             } else {
                 $comment = self::add($body,
@@ -148,7 +145,6 @@
 
                 fallback($_SESSION['comments'], array());
                 $_SESSION['comments'][] = $comment->id;
-                return __("Comment added.", "comments");
             }
         }
 
@@ -209,11 +205,12 @@
             Trigger::current()->call("add_comment", $new->post_id, $new->id);
 
             if ($new->status == "approved")
-                foreach (SQL::current()->select("comments",
-                                                "author_email",
-                                                array("post_id" => $new->post_id,
-                                                      "user_id !=" => $new->user_id,
-                                                      "notify" => 1))->fetchAll() as $notification) {
+                foreach ($sql->select("comments",
+                                      "author_email",
+                                      array("post_id" => $new->post_id,
+                                            "user_id !=" => $new->user_id,
+                                            "status" => "approved",
+                                            "notify" => 1))->fetchAll() as $notification) {
 
                     correspond("comment", array("post_id" => $new->post_id,
                                                 "author" => $new->author,
