@@ -142,15 +142,17 @@
             fallback($parent, (int) $_POST['parent_id'], 0);
             fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
 
-            Comment::create($_POST['body'],
-                            $_POST['author'],
-                            $_POST['author_url'],
-                            $_POST['author_email'],
-                            $post,
-                            $parent,
-                            $notify);
+            $comment = Comment::create($_POST['body'],
+                                       $_POST['author'],
+                                       $_POST['author_url'],
+                                       $_POST['author_email'],
+                                       $post,
+                                       $parent,
+                                       $notify);
 
-            return array($post, true, __("Comment added.", "comments"));
+            return array($post, true, (($comment->status == "approved") ?
+                                            __("Comment added.", "comments") :
+                                            __("Your comment is awaiting moderation.", "comments")));
         }
 
         private function update_comment() {
