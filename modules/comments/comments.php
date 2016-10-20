@@ -117,28 +117,26 @@
             if (!Comment::user_can($post))
                 show_403(__("Access Denied"), __("You cannot comment on this post.", "comments"));
 
-            $url = $post->url();
-
             if (empty($_POST['body']))
-                return array(__("Message can't be blank.", "comments"), false, $url);
+                return array($post, false, __("Message can't be blank.", "comments"));
 
             if (empty($_POST['author']))
-                return array(__("Author can't be blank.", "comments"), false, $url);
+                return array($post, false, __("Author can't be blank.", "comments"));
 
             if (empty($_POST['author_email']))
-                return array(__("Email address can't be blank.", "comments"), false, $url);
+                return array($post, false, __("Email address can't be blank.", "comments"));
 
             if (!is_email($_POST['author_email']))
-                return array(__("Invalid email address.", "comments"), false, $url);
+                return array($post, false, __("Invalid email address.", "comments"));
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                return array(__("Invalid website URL.", "comments"), false, $url);
+                return array($post, false, __("Invalid website URL.", "comments"));
 
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
             if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
-                return array(__("Incorrect captcha code.", "comments"), false, $url);
+                return array($post, false, __("Incorrect captcha code.", "comments"));
 
             fallback($_POST['author_url'], "");
             fallback($parent, (int) $_POST['parent_id'], 0);
@@ -152,7 +150,7 @@
                             $parent,
                             $notify);
 
-            return array(__("Comment added.", "comments"), true, $url);
+            return array($post, true, __("Comment added.", "comments"));
         }
 
         private function update_comment() {
@@ -170,22 +168,20 @@
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
-            $url = $comment->post->url();
-
             if (empty($_POST['body']))
-                return array(__("Message can't be blank.", "comments"), false, $url);
+                return array($comment, false, __("Message can't be blank.", "comments"));
 
             if (empty($_POST['author']))
-                return array(__("Author can't be blank.", "comments"), false, $url);
+                return array($comment, false, __("Author can't be blank.", "comments"));
 
             if (empty($_POST['author_email']))
-                return array(__("Email address can't be blank.", "comments"), false, $url);
+                return array($comment, false, __("Email address can't be blank.", "comments"));
 
             if (!is_email($_POST['author_email']))
-                return array(__("Invalid email address.", "comments"), false, $url);
+                return array($comment, false, __("Invalid email address.", "comments"));
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
-                return array(__("Invalid website URL.", "comments"), false, $url);
+                return array($comment, false, __("Invalid website URL.", "comments"));
 
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
@@ -205,23 +201,23 @@
                              $notify,
                              $created_at);
 
-            return array(__("Comment updated.", "comments"), true, $url);
+            return array($comment, true, __("Comment updated.", "comments"));
         }
 
         public function main_add_comment() {
-            list($message, $success, $url) = self::add_comment();
+            list($post, $success, $message) = self::add_comment();
             $type = ($success) ? "notice" : "warning" ;
-            Flash::$type($message, $url);
+            Flash::$type($message, $post->url());
         }
 
         public function main_update_comment() {
-            list($message, $success, $url) = self::update_comment();
+            list($comment, $success, $message) = self::update_comment();
             $type = ($success) ? "notice" : "warning" ;
-            Flash::$type($message, $url);
+            Flash::$type($message, $comment->post->url());
         }
 
         public function admin_update_comment() {
-            list($message, $success, $url) = self::update_comment();
+            list($comment, $success, $message) = self::update_comment();
 
             if (!$success)
                 error(__("Error"), $message, null, 422);
@@ -230,17 +226,13 @@
         }
 
         public function ajax_add_comment() {
-            list($message, $success, $url) = self::add_comment();
-
-            if ($success)
-                Flash::notice($message);
-
-            json_response($message, array("success" => $success, "url" => $url));
+            list($post, $success, $message) = self::add_comment();
+            json_response($message, $success);
         }
 
         public function ajax_update_comment() {
-            list($message, $success, $url) = self::update_comment();
-            json_response($message, array("success" => $success, "url" => $url));
+            list($comment, $success, $message) = self::update_comment();
+            json_response($message, $success);
         }
 
         public function admin_delete_comment($admin) {

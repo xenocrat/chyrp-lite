@@ -26,15 +26,12 @@ var ChyrpComment = {
                         dataType: "json",
                         error: ChyrpComment.panic,
                     }).done(function(response) {
-                        // Validation failed if data value is false.
-                        if (response.data.success === false) {
-                            $("#comments .comment_form").loader(true);
-                            alert(response.text);
-                            return;
-                        }
+                        $("#comments .comment_form").loader(true);
+                        alert(response.text);
 
-                        // Reload the page to view the newly created post.
-                        window.location.href = response.data.url;
+                        // Reload the page to view the newly created comment.
+                        if (response.data !== false)
+                            window.location.reload(true);
                     });
                 }
             });
@@ -143,7 +140,7 @@ var ChyrpComment = {
                                 error: ChyrpComment.panic,
                             }).done(function(response) {
                                 // Validation failed if data value is false.
-                                if (response.data.success === false) {
+                                if (response.data === false) {
                                     $(thisItem).loader(true);
                                     alert(response.text);
                                     return;
