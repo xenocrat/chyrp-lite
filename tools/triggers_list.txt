@@ -433,7 +433,7 @@ Arguments:
 feed_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 717
+	modules/comments/comments.php on line 723
 Arguments:
 	$comment
 
@@ -441,7 +441,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 735
+	modules/comments/comments.php on line 741
 Arguments:
 	$comment->id
 
@@ -449,7 +449,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 209
+	modules/comments/model/Comment.php on line 208
 Arguments:
 	$new->post_id, $new->id
 
@@ -457,7 +457,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 240
+	modules/comments/model/Comment.php on line 247
 Arguments:
 	$this->post_id, $this->id
 
@@ -465,7 +465,7 @@ Arguments:
 delete_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 248
+	modules/comments/model/Comment.php on line 255
 Arguments:
 	$new->post_id, $new->id
 
