@@ -415,9 +415,10 @@
          */
         protected static function destroy($model, $id) {
             $model = strtolower($model);
+            $trigger = Trigger::current();
 
-            if (Trigger::current()->exists("delete_".$model))
-                Trigger::current()->call("delete_".$model, new $model($id));
+            if ($trigger->exists("delete_".$model))
+                $trigger->call("delete_".$model, new $model($id));
 
             SQL::current()->delete(pluralize($model), array("id" => $id));
         }

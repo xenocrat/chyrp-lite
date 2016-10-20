@@ -48,7 +48,7 @@ var Post = {
                 $(this).remove();
 
                 if (!$(".post").length)
-                    window.location = Site.url;
+                    window.location.href = Site.url;
             });
         }, "json").fail(Post.panic);
     },
@@ -88,7 +88,7 @@ var Page = {
         }, function(response) {
             thisPage.loader(true).fadeOut("fast", function() {
                 $(this).remove();
-                window.location = Site.url;
+                window.location.href = Site.url;
             });
         }, "json").fail(Page.panic);
     },

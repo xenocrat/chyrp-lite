@@ -27,8 +27,7 @@
 </div>
 <input type="hidden" name="id" value="{{ comment.id }}">
 <input type="hidden" name="hash" value="{{ ip | token }}">
-<input type="hidden" name="ajax" value="true">
-<input type="hidden" name="action" value="validate_comment">
+<input type="hidden" name="action" value="update_comment">
 <div class="doaction speak">
 <button type="submit" accesskey="s">{{ "Save" | translate }}</button>
 <a href="#" id="comment_cancel_edit_{{ comment.id }}" class="cancel">{{ "Cancel" | translate }}</a>

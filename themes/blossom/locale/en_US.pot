@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-10-17 20:13+0000\n"
+"POT-Creation-Date: 2016-10-20 19:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -251,11 +251,11 @@ msgstr ""
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:33
+#: themes/blossom/forms/comment/edit.twig:32
 msgid "Save"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:34
+#: themes/blossom/forms/comment/edit.twig:33
 msgid "Cancel"
 msgstr ""
 
