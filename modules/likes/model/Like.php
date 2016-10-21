@@ -97,6 +97,10 @@
             Trigger::current()->call("unlike_post", $this->post_id, $this->user_id);
         }
 
+        /**
+         * Function: fetchPeople
+         * Returns an array of user IDs and hashes attributed to the current post.
+         */
         public function fetchPeople() {
             if (empty($this->post_id))
                 return array();
@@ -109,6 +113,10 @@
             return $people;
         }
 
+        /**
+         * Function: fetchPeople
+         * Returns the count of database entries attributed to the current post.
+         */
         public function fetchCount(){
             if (empty($this->post_id))
                 return 0;

@@ -72,8 +72,8 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $like = new Like($post->id);
-            $like->like();
+            $new = new Like($post->id);
+            $new->like();
 
             Flash::notice(__("Post liked.", "likes"), $post->url()."#likes_".$post->id);
         }
@@ -90,8 +90,8 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $like = new Like($post->id);
-            $like->unlike();
+            $new = new Like($post->id);
+            $new->unlike();
 
             Flash::notice(__("Post unliked.", "likes"), $post->url()."#likes_".$post->id);
         }
@@ -118,15 +118,15 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $like = new Like($post->id);
-            $like->like();
-            $like->fetchCount();
+            $new = new Like($post->id);
+            $new->like();
+            $new->fetchCount();
 
-            if ($like->total_count == 1)
+            if ($new->total_count == 1)
                 $text = __("You like this.", "likes");
             else
-                $text = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
-                                ($like->total_count - 1));
+                $text = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($new->total_count - 1), "likes"),
+                                ($new->total_count - 1));
 
             json_response($text, true);
         }
@@ -144,15 +144,15 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $like = new Like($post->id);
-            $like->unlike();
-            $like->fetchCount();
+            $new = new Like($post->id);
+            $new->unlike();
+            $new->fetchCount();
 
-            if ($like->total_count == 0)
+            if ($new->total_count == 0)
                 $text = __("No likes yet.", "likes");
             else
-                $text = sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"),
-                                $like->total_count);
+                $text = sprintf(_p("%d person likes this.", "%d people like this.", $new->total_count, "likes"),
+                                $new->total_count);
 
             json_response($text, true);
         }
@@ -283,6 +283,7 @@
                                      array("post_id" => $post->id,
                                            "session_hash" => $session_hash));
 
+                # Likes table has a unique key on (post_id, session_hash) to avoid duplicates.
                 if (!$count)
                     $sql->insert("likes",
                                  array("post_id" => $post->id,
