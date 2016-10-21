@@ -178,7 +178,7 @@
             # Assume this is a clean URL and ensure it ends with a slash.
             $url = rtrim($url, "/")."/";
 
-            # Translation is unnecessary if clean URLs are enabled.
+            # Translation is unnecessary if clean URLs are enabled and the controller supports them.
             if ($config->clean_urls and !empty($controller->clean))
                 return $base."/".$url;
 
