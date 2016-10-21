@@ -644,37 +644,6 @@
             }
         }
 
-        public function import_chyrp_post($entry, $post) {
-            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
-
-            if (!isset($chyrp->comment))
-                return;
-
-            $sql = SQL::current();
-
-            foreach ($chyrp->comment as $comment) {
-                $chyrp = $comment->children("http://chyrp.net/export/1.0/");
-                $comment = $comment->children("http://www.w3.org/2005/Atom");
-                $login = $comment->author->children("http://chyrp.net/export/1.0/")->login;
-
-                $user = new User(array("login" => (string) $login));
-
-                Comment::add(unfix($comment->content),
-                             unfix($comment->author->name),
-                             unfix($comment->author->uri),
-                             unfix($comment->author->email),
-                             $chyrp->author->ip,
-                             unfix($chyrp->author->agent),
-                             $chyrp->status,
-                             $post->id,
-                             (!$user->no_results) ? $user->id : 0,
-                             0,
-                             0,
-                             datetime($comment->published),
-                             ($comment->published == $comment->updated) ? null : datetime($comment->updated));
-            }
-        }
-
         public function view_feed($context) {
             $config = Config::current();
             $trigger = Trigger::current();
@@ -801,6 +770,54 @@
             return Comment::user_can($post);
         }
 
+        public function manage_nav_show($possibilities) {
+            $possibilities[] = (Comment::any_editable() or Comment::any_deletable());
+            return $possibilities;
+        }
+
+        public function admin_determine_action($action) {
+            if ($action == "manage" and (Comment::any_editable() or Comment::any_deletable()))
+                return "manage_comments";
+        }
+
+        public function visitor_comments() {
+            if (empty($_SESSION['comments']))
+                return "(0)";
+            else
+                return QueryBuilder::build_list($_SESSION['comments']);
+        }
+
+        public function import_chyrp_post($entry, $post) {
+            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
+
+            if (!isset($chyrp->comment))
+                return;
+
+            $sql = SQL::current();
+
+            foreach ($chyrp->comment as $comment) {
+                $chyrp = $comment->children("http://chyrp.net/export/1.0/");
+                $comment = $comment->children("http://www.w3.org/2005/Atom");
+                $login = $comment->author->children("http://chyrp.net/export/1.0/")->login;
+
+                $user = new User(array("login" => (string) $login));
+
+                Comment::add(unfix($comment->content),
+                             unfix($comment->author->name),
+                             unfix($comment->author->uri),
+                             unfix($comment->author->email),
+                             $chyrp->author->ip,
+                             unfix($chyrp->author->agent),
+                             $chyrp->status,
+                             $post->id,
+                             (!$user->no_results) ? $user->id : 0,
+                             0,
+                             0,
+                             datetime($comment->published),
+                             ($comment->published == $comment->updated) ? null : datetime($comment->updated));
+            }
+        }
+
         public function posts_export($atom, $post) {
             $comments = Comment::find(array("where" => array("post_id" => $post->id)),
                                       array("filter" => false));
@@ -826,23 +843,6 @@
             }
 
             return $atom;
-        }
-
-        public function manage_nav_show($possibilities) {
-            $possibilities[] = (Comment::any_editable() or Comment::any_deletable());
-            return $possibilities;
-        }
-
-        public function admin_determine_action($action) {
-            if ($action == "manage" and (Comment::any_editable() or Comment::any_deletable()))
-                return "manage_comments";
-        }
-
-        public function visitor_comments() {
-            if (empty($_SESSION['comments']))
-                return "(0)";
-            else
-                return QueryBuilder::build_list($_SESSION['comments']);
         }
 
         public function correspond_comment($params) {
