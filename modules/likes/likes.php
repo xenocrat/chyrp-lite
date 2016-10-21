@@ -288,7 +288,7 @@
                     $sql->insert("likes",
                                  array("post_id" => $post->id,
                                        "user_id" => (!$user->no_results) ? $user->id : 0,
-                                       "timestamp" => $timestamp,
+                                       "timestamp" => oneof($timestamp, datetime()),
                                        "session_hash" => $session_hash));
             }
         }
