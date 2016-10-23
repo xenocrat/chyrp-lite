@@ -2108,7 +2108,7 @@
 
             try {
                 $this->twig->display($template.".twig", $this->context);
-            } catch (Exception $e) {
+            } catch (Twig_Error $e) {
                 error(__("Twig Error"), $e->getMessage(), debug_backtrace());
             }
         }
