@@ -335,7 +335,7 @@
                 margin-bottom: 1em;
             }
             p:last-child, p:empty {
-                margin-bottom: 0em
+                margin-bottom: 0em;
             }
         </style>
     </head>
