@@ -74,7 +74,8 @@
 
             $main->display("content".DIR."preview",
                            array("content" => $sanitized,
-                                 "filter" => $_POST['filter']), __("Preview"));
+                                 "filter" => $_POST['filter']),
+                           __("Preview"));
             exit;
         case "enable":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
