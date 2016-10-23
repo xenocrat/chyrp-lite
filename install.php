@@ -414,7 +414,7 @@
                 padding: 0.5em 1em;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
-                background-color: #fffecd
+                background-color: #fffecd;
             }
         </style>
         <script src="includes/common.js" type="text/javascript" charset="UTF-8"></script>
@@ -482,10 +482,9 @@
         if (empty($_POST['login']))
             $errors[] = __("Please enter a username for your account.");
 
-        if (empty($_POST['password_1']))
+        if (empty($_POST['password_1']) or empty($_POST['password_2']))
             $errors[] = __("Passwords cannot be blank.");
-
-        if ($_POST['password_1'] != $_POST['password_2'])
+        elseif ($_POST['password_1'] != $_POST['password_2'])
             $errors[] = __("Passwords do not match.");
 
         if (empty($_POST['email']))
