@@ -81,7 +81,7 @@
     function twig_callback_missing_function($name) {
         foreach (Modules::$instances as $module)
             if (is_callable(array($module, "twig_".$name)))
-                return new Twig_SimpleFunction($name, get_class($module)."::twig_".$name);
+                return new Twig_SimpleFunction($name, array($module, "twig_".$name));
 
         return false;
     }
@@ -93,7 +93,7 @@
     function twig_callback_missing_filter($name) {
         foreach (Modules::$instances as $module)
             if (is_callable(array($module, "twig_".$name)))
-                return new Twig_SimpleFilter($name, get_class($module)."::twig_".$name);
+                return new Twig_SimpleFilter($name, array($module, "twig_".$name));
 
         return false;
     }
