@@ -183,7 +183,7 @@
             if (!$like->resolve()) {
                 if ($visitor->group->can("like_post")) {
                     $html.= "<a class=\"likes like\" href=\"".
-                                $config->url."/?action=like&post_id=".
+                                $config->url."/?action=like&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
                                 "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
@@ -209,7 +209,7 @@
             } else {
                 if ($visitor->group->can("unlike_post")) {
                     $html.= "<a class=\"likes liked\" href=\"".
-                                $config->url."/?action=unlike&post_id=".
+                                $config->url."/?action=unlike&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
                                 "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
