@@ -120,13 +120,12 @@
 
             $new = new Like($post->id);
             $new->like();
-            $new->fetchCount();
+            $count = $new->fetchCount() - 1;
 
-            if ($new->total_count == 1)
+            if ($count <= 0)
                 $text = __("You like this.", "likes");
             else
-                $text = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($new->total_count - 1), "likes"),
-                                ($new->total_count - 1));
+                $text = sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count);
 
             json_response($text, true);
         }
@@ -146,13 +145,12 @@
 
             $new = new Like($post->id);
             $new->unlike();
-            $new->fetchCount();
+            $count = $new->fetchCount();
 
-            if ($new->total_count == 0)
+            if ($count <= 0)
                 $text = __("No likes yet.", "likes");
             else
-                $text = sprintf(_p("%d person likes this.", "%d people like this.", $new->total_count, "likes"),
-                                $new->total_count);
+                $text = sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count);
 
             json_response($text, true);
         }
@@ -200,11 +198,12 @@
 
                 $html.= " <span class='like_text'>";
 
-                if ($like->total_count == 0)
+                $count = $like->fetchCount();
+
+                if ($count <= 0)
                     $html.= __("No likes yet.", "likes");
                 else
-                    $html.= sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"),
-                                    $like->total_count);
+                    $html.= sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count);
 
                 $html.= "</span>";
             } else {
@@ -225,13 +224,12 @@
 
                 $html.= " <span class='like_text'>";
 
-                if ($like->total_count == 0)
-                    $html.= __("No likes yet.", "likes");
-                elseif ($like->total_count == 1)
+                $count = $like->fetchCount() - 1;
+
+                if ($count <= 0)
                     $html.= __("You like this.", "likes");
                 else
-                    $html.= sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
-                                    ($like->total_count - 1));
+                    $html.= sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count);
 
                 $html.= "</span>";
             }

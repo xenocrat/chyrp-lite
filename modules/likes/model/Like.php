@@ -11,7 +11,6 @@
         public $post_id;
         public $user_id;
         public $session_hash;
-        public $total_count;
 
         /**
          * Function: __construct
@@ -19,12 +18,8 @@
          *     <Model::grab>
          */
         public function __construct($post_id = null, $user_id = null) {
-            # User attributes.
             $this->user_id = isset($user_id) ? $user_id : Visitor::current()->id ;
             $this->session_hash = md5($this->user_id.$_SERVER['REMOTE_ADDR']);
-
-            # Post attributes.
-            $this->total_count = 0;
             $this->post_id = !empty($post_id) ? $post_id : null ;
 
             # Remember likes in the visitor's session for attribution.
@@ -34,17 +29,14 @@
         /**
          * Function: resolve
          * Determine if a visitor has liked a post.
-         *
          */
         public function resolve() {
             if (empty($this->post_id))
                 return null;
 
-            $people = self::fetchPeople();
-
-            # Set a fallback for the session value if we find this person in the database.
+            # Set a fallback session value if we find this person in the database.
             if (!array_key_exists($this->post_id, $_SESSION["likes"]))
-                foreach ($people as $person) {
+                foreach (self::fetchPeople() as $person) {
                     if ($person["session_hash"] == $this->session_hash)
                         $_SESSION["likes"][$this->post_id] = null;
 
@@ -107,12 +99,9 @@
             if (empty($this->post_id))
                 return array();
 
-            $people = SQL::current()->select("likes",
-                                             "session_hash, user_id",
-                                             array("post_id" => $this->post_id))->fetchAll();
-
-            $this->total_count = count($people);
-            return $people;
+            return SQL::current()->select("likes",
+                                          "session_hash, user_id",
+                                          array("post_id" => $this->post_id))->fetchAll();
         }
 
         /**
@@ -123,11 +112,8 @@
             if (empty($this->post_id))
                 return 0;
 
-            $count = SQL::current()->count("likes",
-                                     array("post_id" => $this->post_id));
-
-            $this->total_count = $count;
-            return $count;
+            return SQL::current()->count("likes",
+                                         array("post_id" => $this->post_id));
         }
 
         /**
