@@ -279,17 +279,7 @@
 
                 $user = new User(array("login" => (string) $login));
 
-                $count = $sql->count("likes",
-                                     array("post_id" => $post->id,
-                                           "session_hash" => $session_hash));
-
-                # Likes table has a unique key on (post_id, session_hash) to avoid duplicates.
-                if (!$count)
-                    $sql->insert("likes",
-                                 array("post_id" => $post->id,
-                                       "user_id" => (!$user->no_results) ? $user->id : 0,
-                                       "timestamp" => oneof($timestamp, datetime()),
-                                       "session_hash" => $session_hash));
+                Like::import($post->id, ((!$user->no_results) ? $user->id : 0), oneof($timestamp, datetime()), $session_hash);
             }
         }
 
