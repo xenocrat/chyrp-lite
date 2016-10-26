@@ -35,7 +35,7 @@
          *
          * Parameters:
          *     $start - Page ID or slug to start at.
-         *     $exclude - Page ID to exclude from the list. Used in the admin area.
+         *     $exclude - Page ID to exclude from the list.
          */
         public function pages_list($start = 0, $exclude = null) {
             if (isset($this->caches["pages_list"][$start]))
