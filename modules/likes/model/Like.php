@@ -28,7 +28,7 @@
 
         /**
          * Function: resolve
-         * Determine if a visitor has liked a post.
+         * Determines if a visitor has liked a post.
          */
         public function resolve() {
             if (empty($this->post_id))

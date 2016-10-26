@@ -306,6 +306,7 @@
         }
 
         public function user_logged_in($user) {
+            # Remember likes in the visitor's session for attribution.
             $_SESSION["likes"] = array();
         }
     }
