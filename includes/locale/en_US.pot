@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-10-21 21:09+0000\n"
+"POT-Creation-Date: 2016-10-26 19:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -19,9 +19,9 @@ msgstr ""
 
 #: includes/ajax.php:13
 #: includes/ajax.php:16
-#: includes/ajax.php:96
-#: includes/ajax.php:128
-#: includes/ajax.php:148
+#: includes/ajax.php:97
+#: includes/ajax.php:129
+#: includes/ajax.php:149
 #: includes/class/Route.php:45
 #: includes/class/Route.php:48
 #: includes/class/Route.php:72
@@ -103,10 +103,10 @@ msgstr ""
 #: includes/ajax.php:52
 #: includes/ajax.php:58
 #: includes/ajax.php:61
-#: includes/ajax.php:81
-#: includes/ajax.php:84
-#: includes/ajax.php:113
-#: includes/ajax.php:116
+#: includes/ajax.php:82
+#: includes/ajax.php:85
+#: includes/ajax.php:114
+#: includes/ajax.php:117
 #: includes/controller/Admin.php:132
 #: includes/controller/Admin.php:141
 #: includes/controller/Admin.php:172
@@ -194,8 +194,8 @@ msgstr ""
 #: includes/ajax.php:24
 #: includes/ajax.php:41
 #: includes/ajax.php:58
-#: includes/ajax.php:81
-#: includes/ajax.php:113
+#: includes/ajax.php:82
+#: includes/ajax.php:114
 #: includes/controller/Admin.php:175
 #: includes/controller/Admin.php:233
 #: includes/controller/Admin.php:265
@@ -249,8 +249,8 @@ msgstr ""
 
 #: includes/ajax.php:32
 #: includes/ajax.php:49
-#: includes/ajax.php:99
-#: includes/ajax.php:131
+#: includes/ajax.php:100
+#: includes/ajax.php:132
 #: includes/controller/Admin.php:151
 #: includes/controller/Admin.php:178
 #: includes/controller/Admin.php:227
@@ -331,12 +331,12 @@ msgstr ""
 msgid "A filter is required to preview content."
 msgstr ""
 
-#: includes/ajax.php:77
+#: includes/ajax.php:78
 msgid "Preview"
 msgstr ""
 
-#: includes/ajax.php:84
-#: includes/ajax.php:116
+#: includes/ajax.php:85
+#: includes/ajax.php:117
 #: includes/controller/Admin.php:1439
 #: includes/controller/Admin.php:1521
 #: includes/controller/Admin.php:1591
@@ -344,51 +344,51 @@ msgstr ""
 msgid "You do not have sufficient privileges to toggle extensions."
 msgstr ""
 
-#: includes/ajax.php:87
-#: includes/ajax.php:119
+#: includes/ajax.php:88
+#: includes/ajax.php:120
 #: includes/controller/Admin.php:1594
 #: includes/controller/Admin.php:1638
 msgid "No Extension Specified"
 msgstr ""
 
-#: includes/ajax.php:87
+#: includes/ajax.php:88
 #: includes/controller/Admin.php:1594
 msgid "You did not specify an extension to enable."
 msgstr ""
 
-#: includes/ajax.php:96
+#: includes/ajax.php:97
 #: includes/controller/Admin.php:1603
 msgid "Extension already enabled."
 msgstr ""
 
-#: includes/ajax.php:99
-#: includes/ajax.php:131
+#: includes/ajax.php:100
+#: includes/ajax.php:132
 #: includes/controller/Admin.php:1606
 #: includes/controller/Admin.php:1650
 msgid "Extension not found."
 msgstr ""
 
-#: includes/ajax.php:110
+#: includes/ajax.php:111
 #: includes/controller/Admin.php:1620
 msgid "Extension enabled."
 msgstr ""
 
-#: includes/ajax.php:119
+#: includes/ajax.php:120
 #: includes/controller/Admin.php:1638
 msgid "You did not specify an extension to disable."
 msgstr ""
 
-#: includes/ajax.php:128
+#: includes/ajax.php:129
 #: includes/controller/Admin.php:1647
 msgid "Extension already disabled."
 msgstr ""
 
-#: includes/ajax.php:141
+#: includes/ajax.php:142
 #: includes/controller/Admin.php:1660
 msgid "Extension disabled."
 msgstr ""
 
-#: includes/ajax.php:148
+#: includes/ajax.php:149
 #: includes/class/Route.php:48
 #: includes/class/Route.php:72
 msgid "Invalid action."
@@ -592,7 +592,7 @@ msgstr ""
 #: includes/controller/Main.php:448
 #: includes/controller/Main.php:612
 #: install.php:451
-#: install.php:489
+#: install.php:488
 msgid "Passwords do not match."
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr ""
 #: includes/controller/Admin.php:1744
 #: includes/controller/Main.php:453
 #: includes/controller/Main.php:617
-#: install.php:492
+#: install.php:491
 msgid "Email address cannot be blank."
 msgstr ""
 
@@ -615,7 +615,7 @@ msgstr ""
 #: includes/controller/Admin.php:1747
 #: includes/controller/Main.php:455
 #: includes/controller/Main.php:619
-#: install.php:494
+#: install.php:493
 msgid "Invalid email address."
 msgstr ""
 
@@ -1052,7 +1052,7 @@ msgstr ""
 
 #: includes/controller/Main.php:450
 #: includes/controller/Main.php:614
-#: install.php:734
+#: install.php:733
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
@@ -1223,7 +1223,7 @@ msgid "Please create the directory <em>%s</em>."
 msgstr ""
 
 #: includes/helpers.php:1531
-#: install.php:836
+#: install.php:835
 #, php-format
 msgid "Please make <em>%s</em> writable by the server."
 msgstr ""
@@ -1621,139 +1621,139 @@ msgstr ""
 msgid "Time zone cannot be blank."
 msgstr ""
 
-#: install.php:497
+#: install.php:496
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
-#: install.php:503
+#: install.php:502
 msgid "Could not determine the absolute path to the SQLite database."
 msgstr ""
 
-#: install.php:507
+#: install.php:506
 msgid "Please make the SQLite database writable by the server."
 msgstr ""
 
-#: install.php:511
+#: install.php:510
 msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 
-#: install.php:534
+#: install.php:533
 msgid "Could not connect to the database:"
 msgstr ""
 
-#: install.php:540
+#: install.php:539
 msgid "Clean URLs will not be available because the <em>.htaccess</em> file is not writable."
 msgstr ""
 
-#: install.php:581
+#: install.php:580
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:750
+#: install.php:749
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:752
+#: install.php:751
 msgid "Adapter"
 msgstr ""
 
-#: install.php:763
+#: install.php:762
 msgid "Host"
 msgstr ""
 
-#: install.php:763
+#: install.php:762
 msgid "(usually ok as \"localhost\")"
 msgstr ""
 
-#: install.php:767
-#: install.php:813
+#: install.php:766
+#: install.php:812
 msgid "Username"
 msgstr ""
 
-#: install.php:771
-#: install.php:817
-#: install.php:821
+#: install.php:770
+#: install.php:816
+#: install.php:820
 msgid "Password"
 msgstr ""
 
-#: install.php:775
+#: install.php:774
 msgid "Database"
 msgstr ""
 
-#: install.php:777
+#: install.php:776
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:783
+#: install.php:782
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:786
+#: install.php:785
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:786
+#: install.php:785
 msgid "(optional)"
 msgstr ""
 
-#: install.php:790
+#: install.php:789
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:792
+#: install.php:791
 msgid "Site Name"
 msgstr ""
 
-#: install.php:793
+#: install.php:792
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:796
+#: install.php:795
 msgid "Description"
 msgstr ""
 
-#: install.php:800
+#: install.php:799
 msgid "What time is it?"
 msgstr ""
 
-#: install.php:804
+#: install.php:803
 msgid "%I:%M %p on %B %d, %Y"
 msgstr ""
 
-#: install.php:811
+#: install.php:810
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:821
+#: install.php:820
 msgid "(again)"
 msgstr ""
 
-#: install.php:825
+#: install.php:824
 msgid "Email Address"
 msgstr ""
 
-#: install.php:828
+#: install.php:827
 msgid "Install me!"
 msgstr ""
 
-#: install.php:831
+#: install.php:830
 msgid "Chyrp Lite has been installed"
 msgstr ""
 
-#: install.php:832
+#: install.php:831
 #: upgrade.php:438
 msgid "What now?"
 msgstr ""
 
-#: install.php:834
+#: install.php:833
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:838
+#: install.php:837
 msgid "Learn more about Chyrp Lite."
 msgstr ""
 
-#: install.php:840
+#: install.php:839
 #: upgrade.php:445
 msgid "Take me to my site!"
 msgstr ""

@@ -196,7 +196,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 144
+	includes/ajax.php on line 145
 
 
 change_setting
@@ -207,8 +207,8 @@ Arguments:
 	$setting, $value
 
 
-parse_url
----------
+parse_route
+-----------
 Called from:
 	includes/class/Route.php on line 77
 Arguments:
@@ -467,7 +467,8 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 78
+	modules/likes/model/Like.php on line 70
+	modules/likes/model/Like.php on line 138
 Arguments:
 	$this->post_id, $this->user_id
 
@@ -475,7 +476,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 97
+	modules/likes/model/Like.php on line 91
 Arguments:
 	$this->post_id, $this->user_id
 
