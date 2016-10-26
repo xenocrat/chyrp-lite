@@ -74,7 +74,7 @@
             # Give the controller an opportunity to parse this route and determine the action.
             $controller->parse($this);
 
-            Trigger::current()->call("parse_url", $this);
+            Trigger::current()->call("parse_route", $this);
 
             $this->try[] = isset($this->action) ?
                                oneof($this->action, "index") : (!substr_count($this->arg[0], "?") ?
