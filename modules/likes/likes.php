@@ -239,18 +239,15 @@
         }
 
         public function get_like_images() {
-            $imagesDir = MODULES_DIR.DIR."likes".DIR."images".DIR;
-            $images = glob($imagesDir . "*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
+            $images = array();
+            $filepaths = glob(MODULES_DIR.DIR."likes".DIR."images".DIR."*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
 
-            foreach ($images as $image) {
-                $pattern = "/".preg_quote(DIR, "/")."(\w.*)".preg_quote(DIR, "/")."images".preg_quote(DIR, "/")."/";
-                $image = preg_replace($pattern, "", $images);
-
-                while (list($key, $val) = each($image))
-                    $arr[] = Config::current()->chyrp_url."/modules/likes/images/$val";
-
-                return array_combine($image, $arr);
+            foreach ($filepaths as $filepath) {
+                $filename = basename($filepath);
+                $images[$filename] = Config::current()->chyrp_url."/modules/likes/images/".urlencode($filename);
             }
+
+            return $images;
         }
 
         public function manage_posts_column_header() {
@@ -277,7 +274,10 @@
 
                 $user = new User(array("login" => (string) $login));
 
-                Like::import($post->id, ((!$user->no_results) ? $user->id : 0), oneof($timestamp, datetime()), $session_hash);
+                Like::import($post->id,
+                             ((!$user->no_results) ? $user->id : 0),
+                             oneof($timestamp, datetime()),
+                             $session_hash);
             }
         }
 
