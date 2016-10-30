@@ -20,8 +20,8 @@ $(function() {
 function toggle_all() {
     var all_checked = true;
 
-    $(document.createElement("label")).attr("for", "toggle").text('<?php echo __("Toggle All", "theme"); ?>').appendTo("#toggler");
-    $(document.createElement("input")).attr({
+    $("<label>").attr("for", "toggle").text('<?php echo __("Toggle All", "theme"); ?>').appendTo("#toggler");
+    $("<input>", {
         "type": "checkbox",
         "name": "toggle",
         "id": "toggle",
