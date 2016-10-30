@@ -166,7 +166,7 @@ var Help = {
             [$("<iframe>", {
                 "src": href,
                 "aria-label": '<?php echo __("Help", "theme"); ?>'
-            }).addClass("iframe_foreground ajax_loading"),
+            }).addClass("iframe_foreground").loader(),
             $("<img>", {
                 "src": Site.chyrp_url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "theme"); ?>',
@@ -248,7 +248,7 @@ var Write = {
             [$("<iframe>", {
                 "name": uid,
                 "aria-label": '<?php echo __("Preview", "theme"); ?>'
-            }).addClass("iframe_foreground ajax_loading"),
+            }).addClass("iframe_foreground").loader(),
             $("<img>", {
                 "src": Site.chyrp_url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "theme"); ?>',
