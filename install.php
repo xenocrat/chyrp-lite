@@ -431,22 +431,22 @@
             $(function() {
                 $("#adapter").change(toggle_adapter).trigger("change");
 
-                $("#password_1").keyup(function(e) {
+                $("#password1").keyup(function(e) {
                     if (passwordStrength($(this).val()) > 99)
                         $(this).addClass("strong");
                     else
                         $(this).removeClass("strong");
                 });
 
-                $("#password_1, #password_2").keyup(function(e) {
-                    if ($("#password_1").val() != "" && $("#password_1").val() != $("#password_2").val())
-                        $("#password_2").addClass("error");
+                $("#password1, #password2").keyup(function(e) {
+                    if ($("#password1").val() != "" && $("#password1").val() != $("#password2").val())
+                        $("#password2").addClass("error");
                     else
-                        $("#password_2").removeClass("error");
+                        $("#password2").removeClass("error");
                 });
 
                 $("#installer").on("submit", function(e) {
-                    if ($("#password_1").val() != $("#password_2").val()) {
+                    if ($("#password1").val() != $("#password2").val()) {
                         e.preventDefault();
                         alert('<?php echo __("Passwords do not match."); ?>');
                     }
@@ -482,9 +482,9 @@
         if (empty($_POST['login']))
             $errors[] = __("Please enter a username for your account.");
 
-        if (empty($_POST['password_1']) or empty($_POST['password_2']))
+        if (empty($_POST['password1']) or empty($_POST['password2']))
             $errors[] = __("Passwords cannot be blank.");
-        elseif ($_POST['password_1'] != $_POST['password_2'])
+        elseif ($_POST['password1'] != $_POST['password2'])
             $errors[] = __("Passwords do not match.");
 
         if (empty($_POST['email']))
@@ -722,14 +722,14 @@
             if (!$sql->select("users", "id", array("login" => $_POST['login']))->fetchColumn())
                 $sql->insert("users",
                              array("login" => $_POST['login'],
-                                   "password" => User::hashPassword($_POST['password_1']),
+                                   "password" => User::hashPassword($_POST['password1']),
                                    "email" => $_POST['email'],
                                    "website" => $config->url,
                                    "group_id" => $group_id["admin"],
                                    "approved" => true,
                                    "joined_at" => datetime()));
 
-            if (password_strength($_POST['password_1']) < 100)
+            if (password_strength($_POST['password1']) < 100)
                 $errors[] = __("Please consider setting a stronger password for your account.");
 
             $installed = true;
@@ -812,13 +812,13 @@
                     <label for="login"><?php echo __("Username"); ?></label>
                     <input type="text" name="login" value="<?php posted("login", "Admin"); ?>" id="login">
                 </p>
-                <p id="password_1_field">
-                    <label for="password_1"><?php echo __("Password"); ?></label>
-                    <input type="password" name="password_1" value="<?php posted("password_1"); ?>" id="password_1">
+                <p id="password1_field">
+                    <label for="password1"><?php echo __("Password"); ?></label>
+                    <input type="password" name="password1" value="<?php posted("password1"); ?>" id="password1">
                 </p>
-                <p id="password_2_field">
-                    <label for="password_2"><?php echo __("Password"); ?> <span class="sub"><?php echo __("(again)"); ?></span></label>
-                    <input type="password" name="password_2" value="<?php posted("password_2"); ?>" id="password_2">
+                <p id="password2_field">
+                    <label for="password2"><?php echo __("Password"); ?> <span class="sub"><?php echo __("(again)"); ?></span></label>
+                    <input type="password" name="password2" value="<?php posted("password2"); ?>" id="password2">
                 </p>
                 <p id="email_field">
                     <label for="email"><?php echo __("Email Address"); ?></label>
