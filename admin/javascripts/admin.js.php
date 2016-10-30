@@ -6,8 +6,6 @@ $(function() {
     // Interactive behaviour.
     toggle_all();
     toggle_options();
-    toggle_correspondence();
-    toggle_syntax();
     validate_slug();
     validate_email();
     validate_url();
@@ -15,66 +13,40 @@ $(function() {
     confirm_submit();
     Help.init();
     Write.init();
+    Settings.init();
     Extend.init();
 });
 function toggle_all() {
-    var all_checked = true;
+    $("form[data-toggler]").each(function() {
+        var all_on = true;
+        var target = $(this);
+        var parent = $("#" + $(this).attr("data-toggler"));
+        var slaves = target.find(":checkbox");
+        var master = Date.now().toString(16);
 
-    $("<label>").attr("for", "toggle").text('<?php echo __("Toggle All", "theme"); ?>').appendTo("#toggler");
-    $("<input>", {
-        "type": "checkbox",
-        "name": "toggle",
-        "id": "toggle",
-        "class": "checkbox"
-    }).appendTo("#toggler, .toggler");
+        slaves.each(function() {
+            all_on = $(this).prop("checked");
 
-    $("#toggle").click(function() {
-        $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function() {
-            $(this).prop("checked", $("#toggle").prop("checked"));
+            $(this).click(function(e) {
+                slaves.each(function() {
+                    return all_on = $(this).prop("checked");
+                });
+
+                $("#" + master).prop("checked", all_on);
+            })
         });
 
-        $(this).parent().parent().find(":checkbox").not("#toggle").each(function() {
-            $(this).prop("checked", $("#toggle").prop("checked"));
-        });
-    });
-
-    // Some checkboxes are already checked when the page is loaded.
-    $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function() {
-        if (!all_checked)
-            return;
-
-        all_checked = $(this).prop("checked");
-    });
-
-    $(":checkbox:not(#toggle)").click(function() {
-        var action_all_checked = true;
-
-        $("form#new_group, form#group_edit, table").find(":checkbox").not("#toggle").each(function() {
-            if (!action_all_checked)
-                return;
-
-            action_all_checked = $(this).prop("checked");
-        });
-
-        $("#toggle").parent().parent().find(":checkbox").not("#toggle").each(function() {
-            if (!action_all_checked)
-                return;
-
-            action_all_checked = $(this).prop("checked");
-        });
-
-        if ($("#toggler").length);
-            $("#toggle").prop("checked", action_all_checked);
-    });
-
-    if ($("#toggler").length);
-        $("#toggle").prop("checked", all_checked);
-
-    $("td:has(:checkbox)").click(function(e) {
-        $(this).find(":checkbox").each(function() {
-            if (e.target != this)
-                $(this).prop("checked", !($(this).prop("checked")));
-        });
+        parent.append(
+            [$("<label>").attr("for", "toggle").text('<?php echo __("Toggle All", "theme"); ?>'),
+            $("<input>", {
+                "type": "checkbox",
+                "name": "toggle",
+                "id": master,
+                "class": "checkbox"
+            }).prop("checked", all_on).click(function(e) {
+                slaves.prop("checked", $(this).prop("checked"));
+            })]
+        );
     });
 }
 function toggle_options() {
@@ -84,7 +56,7 @@ function toggle_options() {
         else
             var more_options_text = '<?php echo __("More Options &darr;", "theme"); ?>';
 
-        $(document.createElement("a")).attr({
+        $("<a>", {
             "id": "more_options_link",
             "href": "#"
         }).addClass("more_options_link").append(more_options_text).insertBefore("#more_options");
@@ -105,51 +77,6 @@ function toggle_options() {
             $("#more_options").slideToggle();
         });
     }
-}
-function toggle_correspondence() {
-    $("#email_correspondence").click(function() {
-        if ($(this).prop("checked") == false)
-            $("#email_activation").prop("checked", false);
-    });
-    $("#email_activation").click(function() {
-        if ($(this).prop("checked") == true)
-            $("#email_correspondence").prop("checked", true);
-    });
-}
-function toggle_syntax() {
-    $("form#route_settings code.syntax").on("click", function(e) {
-        var name = $(e.target).text();
-        var post_url = $("form#route_settings input[name='post_url']");
-        var regexp = new RegExp("(^|\\/)" + escapeRegExp(name) + "([\\/]|$)", "g");
-
-        if (regexp.test(post_url.val())) {
-            post_url.val(post_url.val().replace(regexp, function(match, before, after) {
-                if (before == "/" && after == "/")
-                    return "/";
-                else
-                    return "";
-            }));
-            $(e.target).removeClass("yay");
-        } else {
-            if (post_url.val() == "")
-                post_url.val(name);
-            else
-                post_url.val(post_url.val().replace(/(\/?)?$/, "\/" + name));
-
-            $(e.target).addClass("yay");
-        }
-    }).css("cursor", "pointer");
-
-    $("form#route_settings input[name='post_url']").on("keyup", function(e) {
-        $("form#route_settings code.syntax").each(function(){
-            regexp = new RegExp("(/?|^)" + $(this).text() + "(/?|$)", "g");
-
-            if ($(e.target).val().match(regexp))
-                $(this).addClass("yay");
-            else
-                $(this).removeClass("yay");
-        });
-    }).trigger("keyup");
 }
 function validate_slug() {
     $("input[name='slug']").keyup(function(e) {
@@ -187,12 +114,14 @@ function validate_passwords() {
         else
             $(this).removeClass("strong");
     });
+
     passwords.keyup(function(e) {
         if (passwords.first().val() != "" && passwords.first().val() != passwords.last().val())
             passwords.last().addClass("error");
         else
             passwords.last().removeClass("error");
     });
+
     passwords.parents("form").on("submit", function(e) {
         if (passwords.first().val() != passwords.last().val()) {
             e.preventDefault();
@@ -326,6 +255,53 @@ var Write = {
 
         // Submit the form and destroy it immediately.
         $("#" + uid).submit().remove();
+    }
+}
+var Settings = {
+    init: function() {
+        $("#email_correspondence").click(function() {
+            if ($(this).prop("checked") == false)
+                $("#email_activation").prop("checked", false);
+        });
+
+        $("#email_activation").click(function() {
+            if ($(this).prop("checked") == true)
+                $("#email_correspondence").prop("checked", true);
+        });
+
+        $("form#route_settings code.syntax").on("click", function(e) {
+            var name = $(e.target).text();
+            var post_url = $("form#route_settings input[name='post_url']");
+            var regexp = new RegExp("(^|\\/)" + escapeRegExp(name) + "([\\/]|$)", "g");
+
+            if (regexp.test(post_url.val())) {
+                post_url.val(post_url.val().replace(regexp, function(match, before, after) {
+                    if (before == "/" && after == "/")
+                        return "/";
+                    else
+                        return "";
+                }));
+                $(e.target).removeClass("yay");
+            } else {
+                if (post_url.val() == "")
+                    post_url.val(name);
+                else
+                    post_url.val(post_url.val().replace(/(\/?)?$/, "\/" + name));
+
+                $(e.target).addClass("yay");
+            }
+        }).css("cursor", "pointer");
+
+        $("form#route_settings input[name='post_url']").on("keyup", function(e) {
+            $("form#route_settings code.syntax").each(function(){
+                regexp = new RegExp("(/?|^)" + $(this).text() + "(/?|$)", "g");
+
+                if ($(e.target).val().match(regexp))
+                    $(this).addClass("yay");
+                else
+                    $(this).removeClass("yay");
+            });
+        }).trigger("keyup");
     }
 }
 var Extend = {
