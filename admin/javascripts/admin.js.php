@@ -3,7 +3,6 @@
     require_once dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 ?>
 $(function() {
-    // Interactive behaviour.
     toggle_all();
     toggle_options();
     validate_slug();
@@ -16,6 +15,7 @@ $(function() {
     Settings.init();
     Extend.init();
 });
+// Adds a master toggle to forms that have multiple checkboxes.
 function toggle_all() {
     $("form[data-toggler]").each(function() {
         var all_on = true;
@@ -25,19 +25,19 @@ function toggle_all() {
         var master = Date.now().toString(16);
 
         slaves.each(function() {
-            all_on = $(this).prop("checked");
+            return all_on = $(this).prop("checked");
+        });
 
-            $(this).click(function(e) {
-                slaves.each(function() {
-                    return all_on = $(this).prop("checked");
-                });
+        slaves.click(function(e) {
+            slaves.each(function() {
+                return all_on = $(this).prop("checked");
+            });
 
-                $("#" + master).prop("checked", all_on);
-            })
+            $("#" + master).prop("checked", all_on);
         });
 
         parent.append(
-            [$("<label>").attr("for", "toggle").text('<?php echo __("Toggle All", "theme"); ?>'),
+            [$("<label>").attr("for", master).text('<?php echo __("Toggle All", "theme"); ?>'),
             $("<input>", {
                 "type": "checkbox",
                 "name": "toggle",
@@ -49,6 +49,7 @@ function toggle_all() {
         );
     });
 }
+// Toggles the visibility of #more_options based on cookie value.
 function toggle_options() {
     if ($("#more_options").length) {
         if (Cookie.get("show_more_options") == "true")
@@ -78,6 +79,7 @@ function toggle_options() {
         });
     }
 }
+// Validates slug fields.
 function validate_slug() {
     $("input[name='slug']").keyup(function(e) {
         if (/^([a-z0-9\-]*)$/.test($(this).val()))
@@ -86,6 +88,7 @@ function validate_slug() {
             $(this).addClass("error");
     });
 }
+// Validates email fields.
 function validate_email() {
     $("input[type='email']").keyup(function(e) {
         if ($(this).val() != "" && !isEmail($(this).val()))
@@ -94,6 +97,7 @@ function validate_email() {
             $(this).removeClass("error");
     });
 }
+// Validates URL fields.
 function validate_url() {
     $("input[type='url']").keyup(function(e) {
         if ($(this).val() != "" && !isURL($(this).val()))
@@ -102,6 +106,7 @@ function validate_url() {
             $(this).removeClass("error");
     });
 }
+// Tests the strength of #password1 and compares #password1 to #password2.
 function validate_passwords() {
     passwords = $("input[type='password']").filter(function(index) {
         var id = $(this).attr("id");
@@ -129,6 +134,7 @@ function validate_passwords() {
         }
     });
 }
+// Asks the user to confirm form submission.
 function confirm_submit() {
     $("form[data-confirm]").submit(function(e) {
         var text = $(this).attr("data-confirm") || '<?php echo __("Are you sure you want to proceed?", "theme"); ?>' ;
@@ -182,14 +188,17 @@ var Write = {
         // Insert buttons for ajax previews.
         if (Write.support && !Write.wysiwyg)
             $("*[data-preview]").each(function() {
-                $("label[for='" + $(this).attr("id") + "']").attr("data-target", $(this).attr("id")).append(
+                var target = $(this);
+
+                $("label[for='" + target.attr("id") + "']").append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
                         "alt": '(<?php echo __("Preview this field", "theme"); ?>)',
                         "title": '<?php echo __("Preview this field", "theme"); ?>',
                     }).addClass("emblem preview").click(function(e) {
-                        var content = $("#" + $(this).parent().attr("data-target")).val();
-                        var filter = $("#" + $(this).parent().attr("data-target")).attr("data-preview");
+                        var content = target.val();
+                        var filter = target.attr("data-preview");
+
                         if (content != "") {
                             e.preventDefault();
                             Write.preview(content, filter);
