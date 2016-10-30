@@ -468,6 +468,7 @@ table tbody tr.public td.status {               background-color: #ebfae4 }
 table tbody tr.denied td.status {               background-color: #faebe4 }
 table tbody tr.approved td.status {             background-color: #ebfae4 }
 table tbody tr.comment_excerpt td p {           margin: 0em }
+th.toggler > label {                            display: none }
 td.controls img {                               position: relative;
                                                 top: 2px;
                                                 width: 16px;
