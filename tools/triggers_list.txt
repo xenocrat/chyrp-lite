@@ -21,13 +21,13 @@ Arguments:
 admin_write_wysiwyg
 -------------------
 Called from:
-	admin/javascripts/admin.js.php on line 251
+	admin/javascripts/admin.js.php on line 186
 
 
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 352
+	admin/javascripts/admin.js.php on line 337
 
 
 admin_head

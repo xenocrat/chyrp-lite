@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-10-30 10:22+0000\n"
+"POT-Creation-Date: 2016-10-30 14:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -176,41 +176,41 @@ msgstr ""
 msgid "Emoji"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:23
+#: admin/javascripts/admin.js.php:40
 msgid "Toggle All"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:83
-#: admin/javascripts/admin.js.php:99
+#: admin/javascripts/admin.js.php:56
+#: admin/javascripts/admin.js.php:72
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:85
-#: admin/javascripts/admin.js.php:102
+#: admin/javascripts/admin.js.php:58
+#: admin/javascripts/admin.js.php:75
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:205
+#: admin/javascripts/admin.js.php:140
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:233
+#: admin/javascripts/admin.js.php:168
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:237
-#: admin/javascripts/admin.js.php:239
-#: admin/javascripts/admin.js.php:316
-#: admin/javascripts/admin.js.php:318
+#: admin/javascripts/admin.js.php:172
+#: admin/javascripts/admin.js.php:174
+#: admin/javascripts/admin.js.php:254
+#: admin/javascripts/admin.js.php:256
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:259
-#: admin/javascripts/admin.js.php:260
+#: admin/javascripts/admin.js.php:196
+#: admin/javascripts/admin.js.php:197
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:312
+#: admin/javascripts/admin.js.php:250
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
