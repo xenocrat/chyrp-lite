@@ -53,7 +53,7 @@
 
             Page::delete($page->id, true);
             json_response(__("Page deleted."));
-        case "preview":
+        case "show_preview":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
