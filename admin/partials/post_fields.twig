@@ -38,7 +38,7 @@
 {% endif %}
 </p>
 {% elseif field.type == "text_block" %}
-<textarea id="{{ field.attr }}_field" name="{{ field.attr }}" rows="12"{{ field.preview is defined ? ' data-preview="'~field.preview~'"' : '' }}>{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
+<textarea id="{{ field.attr }}_field" name="{{ field.attr }}" rows="12"{{ field.preview is defined ? ' data-preview="' ~ field.preview ~ '"' : '' }}>{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field.attr }}_field" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
