@@ -302,10 +302,6 @@ span.pages {                                    display: block;
 #content ul#modules_enabled > li.error,
 #content ul#modules_disabled > li.error  {      background-color: #ffbd9e;
                                                 border: 1px solid #d9a086 }
-ul#modules_enabled .module_enabler,
-ul#modules_disabled .module_disabler,
-ul#feathers_enabled .feather_enabler,
-ul#feathers_disabled .feather_disabler {        display: none !important }
 li.module p:last-of-type,
 li.feather p:last-of-type,
 li.module p.module_conflicts_message,
