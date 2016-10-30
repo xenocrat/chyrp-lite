@@ -330,10 +330,9 @@ var Write = {
 }
 var Extend = {
     init: function() {
-        if (Site.ajax) {
-            $(".module_disabler_confirm").hide();
-            $(".module_disabler").on("submit.confirm", Extend.confirm);
-        }
+        // Hide the confirmation checkbox and use a modal instead.
+        $(".module_disabler_confirm").hide();
+        $(".module_disabler").on("submit.confirm", Extend.confirm);
     },
     confirm: function(e) {
         e.preventDefault();
@@ -342,11 +341,11 @@ var Extend = {
         var name = (!!id) ? id.replace(/^module_/, "") : "" ;
         var text = $('label[for="confirm_' + name + '"]').html();
 
-        // Display the confirmation message if found, and set the checkbox to the response.
+        // Display the modal if the text was found, and set the checkbox to the response.
         if (!!text)
             $('#confirm_' + name).prop("checked", confirm(text.replace(/<[^>]+>/g, "")));
 
-        // Disable the handler and resubmit the form with the user's confirmation response.
+        // Disable this handler and resubmit the form with the checkbox set accordingly.
         $(e.target).off("submit.confirm").submit();
     }
 }

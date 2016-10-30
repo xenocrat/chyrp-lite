@@ -21,13 +21,13 @@ Arguments:
 admin_write_wysiwyg
 -------------------
 Called from:
-	admin/javascripts/admin.js.php on line 323
+	admin/javascripts/admin.js.php on line 251
 
 
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 557
+	admin/javascripts/admin.js.php on line 353
 
 
 admin_head
@@ -196,7 +196,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 145
+	includes/ajax.php on line 82
 
 
 change_setting
@@ -324,7 +324,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 102
+	includes/javascript.php on line 104
 
 
 pingback
