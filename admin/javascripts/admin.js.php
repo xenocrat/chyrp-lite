@@ -182,11 +182,11 @@ var Help = {
     }
 }
 var Write = {
-    support: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
-    wysiwyg: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
+    preview_support: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
+    wysiwyg_editing: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
         // Insert buttons for ajax previews.
-        if (Write.support && !Write.wysiwyg)
+        if (Write.preview_support && !Write.wysiwyg_editing)
             $("*[data-preview]").each(function() {
                 var target = $(this);
 
@@ -201,13 +201,13 @@ var Write = {
 
                         if (content != "") {
                             e.preventDefault();
-                            Write.preview(content, filter);
+                            Write.show(content, filter);
                         }
                     })
                 );
             });
     },
-    preview: function(content, filter) {
+    show: function(content, filter) {
         var uid = Date.now().toString(16);
 
         // Build a form targeting a named iframe.
@@ -222,7 +222,7 @@ var Write = {
             [$("<input>", {
                 "type": "hidden",
                 "name": "action",
-                "value": "preview"
+                "value": "show_preview"
             }),
             $("<input>", {
                 "type": "hidden",
