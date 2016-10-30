@@ -27,7 +27,7 @@ Called from:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 353
+	admin/javascripts/admin.js.php on line 352
 
 
 admin_head
