@@ -1720,15 +1720,17 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             $locales = array();
-            $locales[] = array("code" => "en_US", "name" => lang_code("en_US")); # Default locale.
+
+            # Make sure the default locale is always present in the list.
+            $locales[] = array("code" => "en_US",
+                               "name" => lang_code("en_US"));
 
             if ($open = opendir(INCLUDES_DIR.DIR."locale".DIR)) {
-                 while (($folder = readdir($open)) !== false) {
-                    $split = explode(".", $folder);
+                 while (($folder = readdir($open)) !== false)
+                    if ($folder != "en_US" and preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $folder))
+                        $locales[] = array("code" => $folder,
+                                           "name" => lang_code($folder));
 
-                    if (end($split) == "mo" and $split[0] != "en_US")
-                        $locales[] = array("code" => $split[0], "name" => lang_code($split[0]));
-                }
                 closedir($open);
             }
 
