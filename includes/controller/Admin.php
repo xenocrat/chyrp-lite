@@ -65,7 +65,7 @@
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
 
             # Load the theme translator.
-            load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale".DIR.$config->locale.".mo");
+            load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale");
         }
 
         /**
@@ -1452,7 +1452,7 @@
                 if (strpos($folder, ".") === 0 or !is_file(MODULES_DIR.DIR.$folder.DIR.$folder.".php"))
                     continue;
 
-                load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale");
 
                 if (!isset($classes[$folder]))
                     $classes[$folder] = array($folder);
@@ -1532,7 +1532,7 @@
                 if (strpos($folder, ".") === 0 or !is_file(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php"))
                     continue;
 
-                load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale");
 
                 # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
                 $category = (in_array($folder, (array) $config->enabled_feathers)) ?
@@ -1567,7 +1567,7 @@
                 if (strpos($folder, ".") === 0 or !is_dir(THEMES_DIR.DIR.$folder))
                     continue;
 
-                load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale".DIR.$config->locale.".mo");
+                load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale");
 
                 $this->context["themes"][$folder] = load_info(THEMES_DIR.DIR.$folder.DIR."info.php");
             }
@@ -1605,7 +1605,7 @@
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
                 show_404(__("Not Found"), __("Extension not found."));
 
-            load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($name, $folder.DIR.$name.DIR."locale");
 
             require $folder.DIR.$name.DIR.$name.".php";
 
@@ -1681,7 +1681,7 @@
             $theme = $_POST['theme'];
             $config->set("theme", $theme);
 
-            load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale");
 
             foreach (load_info(THEMES_DIR.DIR.$theme.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);

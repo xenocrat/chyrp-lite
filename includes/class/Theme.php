@@ -20,7 +20,7 @@
             $config = Config::current();
 
             # Load the theme translator.
-            load_translator("theme", THEME_DIR.DIR."locale".DIR.$config->locale.".mo");
+            load_translator("theme", THEME_DIR.DIR."locale");
 
             # Load the theme's info into the Theme class.
             foreach (load_info(THEME_DIR.DIR."info.php") as $key => $val)

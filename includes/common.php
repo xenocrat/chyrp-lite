@@ -347,7 +347,7 @@
     set_locale($config->locale);
 
     # Load the translation engine.
-    load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$config->locale.".mo");
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
     # Constant: PREVIEWING
     # Is the user previewing a theme?
