@@ -1721,7 +1721,7 @@
 
             $locales = array();
 
-            # Make sure the default locale is always present in the list.
+            # Ensure the default locale is always present in the list.
             $locales[] = array("code" => "en_US",
                                "name" => lang_code("en_US"));
 
