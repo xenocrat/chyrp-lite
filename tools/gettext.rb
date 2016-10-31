@@ -207,7 +207,7 @@ class Gettext
     puts '"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"'
     puts '"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"'
     puts '"MIME-Version: 1.0\n"'
-    puts '"Content-Type: text/plain; charset=CHARSET\n"'
+    puts '"Content-Type: text/plain; charset=UTF-8\n"'
     puts '"Content-Transfer-Encoding: 8bit\n"'
     puts '"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"'
     puts ''
