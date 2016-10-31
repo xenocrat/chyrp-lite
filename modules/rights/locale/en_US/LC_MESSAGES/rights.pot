@@ -1,0 +1,152 @@
+# Chyrp Lite Translation File.
+# Copyright (C) 2016 xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2016-10-31 20:41+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:3
+msgid "Filtering Results"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:6
+msgid "Choosing a License"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:8
+msgid "When you create a piece of content for your blog, you get to decide whether or not you want your name associated with it, and whether or not it can be reproduced and reused by other people. As the &#8220;rights holder&#8221;, the license you choose to apply to your work determines which of those rights you retain and which of them you waive."
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:11
+msgid "Creative Commons is a family of licenses that you can use to donate your work to &#8220;the commons&#8221; — the body of work freely available for legal use, sharing, repurposing, and remixing. With a Creative Commons license, you can give other people permission to reproduce or reuse your work with certain restrictions. Here is a chart comparing the licenses:"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:17
+#: modules/rights/rights.php:42
+msgid "License"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:19
+msgid 'Others who use your work in any way must give you credit.'
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:20
+msgid "Attribution"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:22
+msgid 'Derivative works must be licensed under the same terms.'
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:23
+msgid "ShareAlike"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:25
+msgid 'Your work may not be reproduced or reused for commercial gain.'
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:26
+msgid "NonCommercial"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:28
+msgid 'Your work may be reproduced but it may not be modified.'
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:29
+msgid "NoDerivatives"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:37
+#: modules/rights/rights.php:48
+#: modules/rights/rights.php:95
+msgid "Creative Commons BY"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:48
+#: modules/rights/rights.php:51
+#: modules/rights/rights.php:100
+msgid "Creative Commons BY-ND"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:63
+#: modules/rights/rights.php:54
+#: modules/rights/rights.php:105
+msgid "Creative Commons BY-SA"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:78
+#: modules/rights/rights.php:57
+#: modules/rights/rights.php:110
+msgid "Creative Commons BY-NC"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:93
+#: modules/rights/rights.php:60
+#: modules/rights/rights.php:115
+msgid "Creative Commons BY-NC-ND"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:110
+#: modules/rights/rights.php:63
+#: modules/rights/rights.php:120
+msgid "Creative Commons BY-NC-SA"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:127
+#: modules/rights/rights.php:66
+#: modules/rights/rights.php:125
+msgid "Creative Commons CC0"
+msgstr ""
+
+#: modules/rights/info.php:3
+msgid "Rights"
+msgstr ""
+
+#: modules/rights/info.php:6
+msgid "Adds post options for attribution and assigning intellectual property rights."
+msgstr ""
+
+#: modules/rights/info.php:10
+msgid "Do you want to remove rights data from the database?"
+msgstr ""
+
+#: modules/rights/rights.php:32
+msgid "Original Work"
+msgstr ""
+
+#: modules/rights/rights.php:37
+msgid "Rights Holder"
+msgstr ""
+
+#: modules/rights/rights.php:45
+#: modules/rights/rights.php:134
+msgid "All rights reserved"
+msgstr ""
+
+#: modules/rights/rights.php:69
+msgid "Orphan Work"
+msgstr ""
+
+#: modules/rights/rights.php:72
+#: modules/rights/rights.php:130
+msgid "Public Domain"
+msgstr ""
+
+#: modules/rights/rights.php:75
+msgid "Crown Copyright"
+msgstr ""
+

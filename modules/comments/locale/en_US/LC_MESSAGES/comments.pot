@@ -1,0 +1,442 @@
+# Chyrp Lite Translation File.
+# Copyright (C) 2016 xenocrat
+# This file is distributed under the same license as the Chyrp Lite package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Chyrp Lite\n"
+"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
+"POT-Creation-Date: 2016-10-31 20:41+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: modules/comments/admin/pages/comment_settings.twig:3
+msgid "Comment Settings"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:9
+msgid "Akismet API Key"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:11
+msgid 'A very good spam blocker. Get an API key from <a href="http://akismet.com/">Akismet.com</a>.'
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:14
+msgid "Allowed HTML Tags"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:16
+msgid "Format: <code>strong, blockquote, em</code>"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:19
+msgid "Default Comment Status"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:21
+#: modules/comments/admin/pages/edit_comment.twig:40
+msgid "Approved"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:22
+#: modules/comments/admin/pages/edit_comment.twig:41
+msgid "Denied"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:23
+#: modules/comments/admin/pages/edit_comment.twig:42
+#: modules/comments/admin/pages/manage_spam.twig:20
+msgid "Spam"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:27
+msgid "Comments Per Page"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:29
+msgid "Themes decide whether or not to paginate comments."
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:32
+msgid "Reload Comments"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:34
+msgid "Show newly added comments (up to the maximum number per page)."
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:37
+msgid "Reload interval"
+msgstr ""
+
+#: modules/comments/admin/pages/comment_settings.twig:39
+msgid "(seconds)"
+msgstr ""
+
+#: modules/comments/admin/pages/delete_comment.twig:3
+#: modules/comments/admin/pages/delete_comment.twig:6
+msgid "Delete Comment?"
+msgstr ""
+
+#: modules/comments/admin/pages/delete_comment.twig:8
+#, php-format
+msgid "Are you sure you want to delete the comment from &#8220;%s&#8221;?"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:3
+msgid "Edit Comment"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:6
+msgid "Editing Comment"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:14
+msgid "Body"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:20
+#: modules/comments/admin/pages/manage_comments.twig:26
+#: modules/comments/admin/pages/manage_spam.twig:27
+msgid "Author"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:24
+msgid "Author Email"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:28
+msgid "Author Website"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:34
+msgid "Timestamp"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:38
+#: modules/comments/admin/pages/manage_comments.twig:28
+msgid "Status"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:43
+msgid "Pingback"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:49
+msgid "Email Notifications"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:60
+msgid "Save"
+msgstr ""
+
+#: modules/comments/admin/pages/edit_comment.twig:62
+#: modules/comments/admin/pages/manage_comments.twig:93
+#: modules/comments/admin/pages/manage_spam.twig:79
+msgid "Delete"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:3
+msgid "Manage Comments"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:19
+#: modules/comments/comments.php:371
+#: modules/comments/comments.php:544
+#: modules/comments/info.php:3
+msgid "Comments"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:25
+#: modules/comments/admin/pages/manage_spam.twig:26
+msgid "Post"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:27
+#: modules/comments/admin/pages/manage_spam.twig:28
+msgid "Added"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:82
+#: modules/comments/admin/pages/manage_spam.twig:71
+msgid "With selected:"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:84
+#: modules/comments/admin/pages/manage_spam.twig:73
+msgid "Deny"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:87
+#: modules/comments/admin/pages/manage_spam.twig:76
+msgid "Approve"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:90
+msgid "Mark as Spam"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_spam.twig:3
+msgid "Manage Spam"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_spam.twig:16
+#, php-format
+msgid "Delete All (%d)"
+msgstr ""
+
+#: modules/comments/comments.php:22
+#: modules/comments/comments.php:58
+msgid "Add Comments"
+msgstr ""
+
+#: modules/comments/comments.php:23
+#: modules/comments/comments.php:59
+msgid "Add Comments to Private Posts"
+msgstr ""
+
+#: modules/comments/comments.php:24
+#: modules/comments/comments.php:60
+msgid "Edit Comments"
+msgstr ""
+
+#: modules/comments/comments.php:25
+#: modules/comments/comments.php:61
+msgid "Edit Own Comments"
+msgstr ""
+
+#: modules/comments/comments.php:26
+#: modules/comments/comments.php:62
+msgid "Delete Comments"
+msgstr ""
+
+#: modules/comments/comments.php:27
+#: modules/comments/comments.php:63
+msgid "Delete Own Comments"
+msgstr ""
+
+#: modules/comments/comments.php:28
+#: modules/comments/comments.php:64
+msgid "Can Use HTML in Comments"
+msgstr ""
+
+#: modules/comments/comments.php:70
+msgid "Please enter an ID to find a comment."
+msgstr ""
+
+#: modules/comments/comments.php:87
+msgid "An ID is required to add a comment."
+msgstr ""
+
+#: modules/comments/comments.php:95
+msgid "You cannot comment on this post."
+msgstr ""
+
+#: modules/comments/comments.php:98
+#: modules/comments/comments.php:151
+msgid "Message can't be blank."
+msgstr ""
+
+#: modules/comments/comments.php:101
+#: modules/comments/comments.php:154
+msgid "Author can't be blank."
+msgstr ""
+
+#: modules/comments/comments.php:104
+#: modules/comments/comments.php:157
+msgid "Email address can't be blank."
+msgstr ""
+
+#: modules/comments/comments.php:107
+#: modules/comments/comments.php:160
+msgid "Invalid email address."
+msgstr ""
+
+#: modules/comments/comments.php:110
+#: modules/comments/comments.php:163
+msgid "Invalid website URL."
+msgstr ""
+
+#: modules/comments/comments.php:116
+msgid "Incorrect captcha code."
+msgstr ""
+
+#: modules/comments/comments.php:131
+msgid "Comment added."
+msgstr ""
+
+#: modules/comments/comments.php:132
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: modules/comments/comments.php:140
+msgid "An ID is required to update a comment."
+msgstr ""
+
+#: modules/comments/comments.php:145
+#: modules/comments/comments.php:224
+#: modules/comments/comments.php:245
+#: modules/comments/comments.php:399
+#: modules/comments/comments.php:606
+#: modules/comments/comments.php:620
+#: modules/comments/comments.php:637
+msgid "Comment not found."
+msgstr ""
+
+#: modules/comments/comments.php:148
+#: modules/comments/comments.php:402
+#: modules/comments/comments.php:640
+msgid "You do not have sufficient privileges to edit this comment."
+msgstr ""
+
+#: modules/comments/comments.php:183
+msgid "Comment updated."
+msgstr ""
+
+#: modules/comments/comments.php:219
+#: modules/comments/comments.php:237
+#: modules/comments/comments.php:615
+msgid "An ID is required to delete a comment."
+msgstr ""
+
+#: modules/comments/comments.php:227
+#: modules/comments/comments.php:248
+#: modules/comments/comments.php:623
+msgid "You do not have sufficient privileges to delete this comment."
+msgstr ""
+
+#: modules/comments/comments.php:252
+#: modules/comments/comments.php:626
+msgid "Comment deleted."
+msgstr ""
+
+#: modules/comments/comments.php:258
+#: modules/comments/comments.php:409
+msgid "You do not have sufficient privileges to manage any comments."
+msgstr ""
+
+#: modules/comments/comments.php:274
+msgid "You do not have sufficient privileges to delete comments."
+msgstr ""
+
+#: modules/comments/comments.php:278
+msgid "All spam deleted."
+msgstr ""
+
+#: modules/comments/comments.php:286
+msgid "Comment Status"
+msgstr ""
+
+#: modules/comments/comments.php:288
+msgid "Open"
+msgstr ""
+
+#: modules/comments/comments.php:291
+msgid "Closed"
+msgstr ""
+
+#: modules/comments/comments.php:294
+msgid "Private"
+msgstr ""
+
+#: modules/comments/comments.php:297
+msgid "Registered Only"
+msgstr ""
+
+#: modules/comments/comments.php:312
+msgid "A ping from your URL is already registered."
+msgstr ""
+
+#: modules/comments/comments.php:323
+msgid "Pingback registered!"
+msgstr ""
+
+#: modules/comments/comments.php:383
+#, php-format
+msgid "Comments (%d)"
+msgstr ""
+
+#: modules/comments/comments.php:387
+#, php-format
+msgid "Spam (%d)"
+msgstr ""
+
+#: modules/comments/comments.php:394
+#: modules/comments/comments.php:632
+msgid "An ID is required to edit a comment."
+msgstr ""
+
+#: modules/comments/comments.php:444
+msgid "Selected comments deleted."
+msgstr ""
+
+#: modules/comments/comments.php:466
+msgid "Selected comments denied."
+msgstr ""
+
+#: modules/comments/comments.php:482
+msgid "Selected comments approved."
+msgstr ""
+
+#: modules/comments/comments.php:497
+msgid "Selected comments marked as spam."
+msgstr ""
+
+#: modules/comments/comments.php:567
+msgid "An ID is required to reload comments."
+msgstr ""
+
+#: modules/comments/comments.php:571
+msgid "Comments added since %I:%M %p on %B %d, %Y"
+msgstr ""
+
+#: modules/comments/comments.php:601
+msgid "An ID is required to show a comment."
+msgstr ""
+
+#: modules/comments/comments.php:657
+#, php-format
+msgid "Comments on &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/comments/comments.php:680
+#, php-format
+msgid "Comment #%d"
+msgstr ""
+
+#: modules/comments/info.php:6
+msgid "Adds commenting functionality to your posts, with pingback support."
+msgstr ""
+
+#: modules/comments/info.php:11
+msgid "Please remember to update the permission settings for each group."
+msgstr ""
+
+#: modules/comments/info.php:12
+msgid "Do you want to remove comments from the database?"
+msgstr ""
+
+#: modules/comments/javascript.php:50
+msgid "Are you sure you want to permanently delete this comment?"
+msgstr ""
+
+#: modules/comments/javascript.php:101
+msgid "The comment cannot be edited because your web browser did not send proper credentials."
+msgstr ""
+
+#: modules/comments/javascript.php:187
+msgid "The comment cannot be deleted because your web browser did not send proper credentials."
+msgstr ""
+
+#: modules/comments/model/Comment.php:313
+msgid "Anon"
+msgstr ""
+
