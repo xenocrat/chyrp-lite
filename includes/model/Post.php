@@ -496,7 +496,6 @@
                           urlencode($this->feather),
                           urlencode(pluralize($this->feather)));
 
-            Trigger::current()->filter($vals, "url_vals", $this);
             return $config->url."/".str_replace(array_keys(self::$url_attrs), $vals, $config->post_url);
         }
 

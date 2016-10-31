@@ -67,37 +67,14 @@
 
         public function main_comment($main) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                Flash::warning(__("Please enter an ID to search for a comment.", "comments"), "/");
+                Flash::warning(__("Please enter an ID to find a comment.", "comments"), "/");
 
-            $parent_id = (int) $_GET['id'];
-            $comment = new Comment($parent_id);
+            $comment = new Comment($_GET['id']);
 
             if ($comment->no_results)
-                show_404(__("Not Found"), __("Comment not found.", "comments"));
+                return false;
 
-            $post = new Post($comment->post_id, array("drafts" => true));
-
-            if ($post->no_results)
-                show_404(__("Not Found"), __("Post not found."));
-
-            if (!$post->theme_exists())
-                error(__("Error"),
-                      __("The post cannot be displayed because the template for this feather was not found."), null, 501);
-
-            if ($post->status == "draft")
-                Flash::message(__("This post is a draft."));
-
-            if ($post->status == "scheduled")
-                Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
-
-            if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
-                Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
-
-            $main->display(array("pages".DIR."view", "pages".DIR."index"),
-                           array("post" => $post,
-                                 "posts" => array($post),
-                                 "parent_id" => $parent_id),
-                           $post->title());
+            redirect($comment->post->url()."#comment_".$comment->id);
         }
 
         public function parse_urls($urls) {
@@ -667,35 +644,6 @@
             }
         }
 
-        public function import_chyrp_post($entry, $post) {
-            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
-
-            if (!isset($chyrp->comment))
-                return;
-
-            $sql = SQL::current();
-
-            foreach ($chyrp->comment as $comment) {
-                $chyrp = $comment->children("http://chyrp.net/export/1.0/");
-                $comment = $comment->children("http://www.w3.org/2005/Atom");
-                $login = $comment->author->children("http://chyrp.net/export/1.0/")->login;
-
-                $user = new User(array("login" => (string) $login));
-
-                Comment::add(unfix($comment->content),
-                             unfix($comment->author->name),
-                             unfix($comment->author->uri),
-                             unfix($comment->author->email),
-                             $chyrp->author->ip,
-                             unfix($chyrp->author->agent),
-                             $chyrp->status,
-                             datetime($comment->published),
-                             ($comment->published == $comment->updated) ? null : datetime($comment->updated),
-                             $post,
-                             (!$user->no_results) ? $user->id : 0);
-            }
-        }
-
         public function view_feed($context) {
             $config = Config::current();
             $trigger = Trigger::current();
@@ -822,33 +770,6 @@
             return Comment::user_can($post);
         }
 
-        public function posts_export($atom, $post) {
-            $comments = Comment::find(array("where" => array("post_id" => $post->id)),
-                                      array("filter" => false));
-
-            foreach ($comments as $comment) {
-                $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
-
-                $atom.= "        <chyrp:comment>\r".
-                        '            <updated>'.when("c", $updated).'</updated>'."\r".
-                        '            <published>'.when("c", $comment->created_at).'</published>'."\r".
-                        '            <author chyrp:user_id="'.$comment->user_id.'">'."\r".
-                        "                <name>".fix($comment->author)."</name>\r".
-                        (!empty($comment->author_url) ?
-                        "                <uri>".fix($comment->author_url)."</uri>\r" : "").
-                        "                <email>".fix($comment->author_email)."</email>\r".
-                        "                <chyrp:login>".fix(@$comment->user->login)."</chyrp:login>\r".
-                        "                <chyrp:ip>".long2ip($comment->author_ip)."</chyrp:ip>\r".
-                        "                <chyrp:agent>".fix($comment->author_agent)."</chyrp:agent>\r".
-                        "            </author>\r".
-                        "            <content>".fix($comment->body)."</content>\r".
-                        "                <chyrp:status>".fix($comment->status)."</chyrp:status>\r".
-                        "        </chyrp:comment>\r";
-            }
-
-            return $atom;
-        }
-
         public function manage_nav_show($possibilities) {
             $possibilities[] = (Comment::any_editable() or Comment::any_deletable());
             return $possibilities;
@@ -864,6 +785,64 @@
                 return "(0)";
             else
                 return QueryBuilder::build_list($_SESSION['comments']);
+        }
+
+        public function import_chyrp_post($entry, $post) {
+            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
+
+            if (!isset($chyrp->comment))
+                return;
+
+            $sql = SQL::current();
+
+            foreach ($chyrp->comment as $comment) {
+                $chyrp = $comment->children("http://chyrp.net/export/1.0/");
+                $comment = $comment->children("http://www.w3.org/2005/Atom");
+                $login = $comment->author->children("http://chyrp.net/export/1.0/")->login;
+
+                $user = new User(array("login" => (string) $login));
+
+                Comment::add(unfix($comment->content),
+                             unfix($comment->author->name),
+                             unfix($comment->author->uri),
+                             unfix($comment->author->email),
+                             $chyrp->author->ip,
+                             unfix($chyrp->author->agent),
+                             $chyrp->status,
+                             $post->id,
+                             (!$user->no_results) ? $user->id : 0,
+                             0,
+                             0,
+                             datetime($comment->published),
+                             ($comment->published == $comment->updated) ? null : datetime($comment->updated));
+            }
+        }
+
+        public function posts_export($atom, $post) {
+            $comments = Comment::find(array("where" => array("post_id" => $post->id)),
+                                      array("filter" => false));
+
+            foreach ($comments as $comment) {
+                $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
+
+                $atom.= "        <chyrp:comment>\r".
+                        '            <updated>'.when("c", $updated).'</updated>'."\r".
+                        '            <published>'.when("c", $comment->created_at).'</published>'."\r".
+                        '            <author chyrp:user_id="'.$comment->user_id.'">'."\r".
+                        "                <name>".fix($comment->author)."</name>\r".
+                        "                <uri>".fix($comment->author_url)."</uri>\r".
+                        "                <email>".fix($comment->author_email)."</email>\r".
+                        "                <chyrp:login>".($comment->user->no_results ?
+                                                "" : fix($comment->user->login))."</chyrp:login>\r".
+                        "                <chyrp:ip>".long2ip($comment->author_ip)."</chyrp:ip>\r".
+                        "                <chyrp:agent>".fix($comment->author_agent)."</chyrp:agent>\r".
+                        "            </author>\r".
+                        "            <content>".fix($comment->body)."</content>\r".
+                        "            <chyrp:status>".fix($comment->status)."</chyrp:status>\r".
+                        "        </chyrp:comment>\r";
+            }
+
+            return $atom;
         }
 
         public function correspond_comment($params) {

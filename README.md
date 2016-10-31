@@ -61,14 +61,11 @@ Pages allow you to publish articles on your site that are independent of your bl
 
 ## Installation
 
-You can install Chyrp Lite in four steps:
+You can install Chyrp Lite in three steps:
 
 1. If using MySQL, create a MySQL database with a username and password.
 2. Download the [latest release](https://github.com/xenocrat/chyrp-lite/releases), unzip, and upload to your web server.
-3. Open your web browser and navigate to where you uploaded Chyrp Lite.
-4. Run the installation process by visiting [install.php](install.php) in your web browser.
-
-That's it! Chyrp Lite will be up and running and ready for you to use.
+3. Run the installation process by visiting [install.php](install.php) in your web browser.
 
 ## Upgrading
 
@@ -93,31 +90,10 @@ Chyrp Lite was created by the following people:
 * Lite Developer: Daniel Pimley
 * Chyrp Developer: Arian Xhezairi
 * Project Founder: Alex Suraci
-
-&hellip;and other contributors.
+* Module authors and other contributors.
 
 ## Licenses
 
 Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors,
 distributed under the [X11 license](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md).
-Twig is Copyright 2009-2016 the Twig Team,
-distributed under the [new BSD License](https://raw.githubusercontent.com/twigphp/Twig/master/LICENSE).
-jQuery is Copyright jQuery Foundation and other contributors,
-distributed under the [MIT License](https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt).
-Parsedown is Copyright 2013 Emanuil Rusev,
-distributed under the [MIT License](https://raw.githubusercontent.com/erusev/parsedown/master/LICENSE.txt).
-Highlight.js is Copyright 2006 Ivan Sagalaev,
-distributed under the [new BSD License](https://raw.githubusercontent.com/isagalaev/highlight.js/master/LICENSE).
-SimpleMDE is Copyright 2015 Next Step Webs, Inc.,
-distributed under the [MIT License](https://raw.githubusercontent.com/NextStepWebs/simplemde-markdown-editor/master/LICENSE).
-Open Sans is Copyright 2010-2011 Google Corporation,
-distributed under the [Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0.txt).
-Open Sans is a trademark of Google and may be registered in certain jurisdictions.
-Hack is Copyright 2015 Christopher Simpkins,
-distributed under the [Hack Open Font License](https://raw.githubusercontent.com/chrissimpkins/Hack/master/LICENSE.md).
-PHP-gettext is Copyright 2003-2009 Danilo Segan, Copyright 2005 Nico Kaiser,
-distributed under the [GNU General Public License v2.0](https://gnu.org/licenses/old-licenses/gpl-2.0.txt).
-The Incutio XML-RPC Library is Copyright 2010 Simon Willison,
-distributed under the [new BSD License](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/licenses/IXR/LICENSE.txt).
-php5-akismet is Copyright Alex Potsides,
-distributed under the [BSD License](http://www.opensource.org/licenses/bsd-license.php).
+Please see the [licenses](licenses) directory for the full license text of all software packages distributed with Chyrp Lite.

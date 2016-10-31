@@ -55,14 +55,6 @@
 </p>
 {% endif %}
 </form>
-<form class="module_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<input type="hidden" name="extension" value="{{ safename }}">
-<input type="hidden" name="type" value="module">
-<input type="hidden" name="hash" value="{{ ip | token }}">
-<button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
-</button>
-</form>
 <div class="clear"></div>
 </div>
 </li>
@@ -106,20 +98,6 @@
 {% endif %}
 {% if module.classes is defined and not (module.classes | contains("missing_dependency")) %}
 <div class="controls">
-<form class="module_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<input type="hidden" name="extension" value="{{ safename }}">
-<input type="hidden" name="type" value="module">
-<input type="hidden" name="hash" value="{{ ip | token }}">
-<button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
-</button>
-{% if module.confirm is not empty %}
-<p class="module_disabler_confirm">
-<label for="confirm_{{ safename }}">{{ module.confirm }}{# translation is done in the controller #}</label>
-<input class="checkbox" type="checkbox" name="confirm" id="confirm_{{ safename }}">
-</p>
-{% endif %}
-</form>
 <form class="module_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">

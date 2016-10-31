@@ -15,10 +15,4 @@
          * Displays the page.
          */
        	public function display($template);
-
-        /**
-         * Function: current
-         * Returns a singleton reference to the current class.
-         */
-        public static function & current();
     }

@@ -4,7 +4,8 @@
             $this->setField(array("attr" => "quote",
                                   "type" => "text_block",
                                   "rows" => 5,
-                                  "label" => __("Quote", "quote")));
+                                  "label" => __("Quote", "quote"),
+                                  "preview" => "markup_text"));
             $this->setField(array("attr" => "source",
                                   "type" => "text_block",
                                   "rows" => 5,

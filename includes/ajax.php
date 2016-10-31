@@ -53,7 +53,7 @@
 
             Page::delete($page->id, true);
             json_response(__("Page deleted."));
-        case "preview":
+        case "show_preview":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -74,71 +74,9 @@
 
             $main->display("content".DIR."preview",
                            array("content" => $sanitized,
-                                 "filter" => $_POST['filter']), __("Preview"));
+                                 "filter" => $_POST['filter']),
+                           __("Preview"));
             exit;
-        case "enable":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
-            if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
-
-            if (empty($_POST['extension']) or empty($_POST['type']))
-                error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
-
-            $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
-            $name          = str_replace(array(".", DIR), "", $_POST['extension']);
-            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $class_name    = camelize($name);
-
-            if (in_array($name, (array) $config->$enabled_array))
-                error(__("Error"), __("Extension already enabled."), null, 409);
-
-            if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
-                show_404(__("Not Found"), __("Extension not found."));
-
-            load_translator($name, $folder.DIR.$name.DIR."locale".DIR.$config->locale.".mo");
-
-            require $folder.DIR.$name.DIR.$name.".php";
-
-            if (method_exists($class_name, "__install"))
-                call_user_func(array($class_name, "__install"));
-
-            $config->set($enabled_array, array_merge((array) $config->$enabled_array, array($name)));
-
-            json_response(__("Extension enabled."), load_info($folder.DIR.$name.DIR."info.php")["notifications"]);
-        case "disable":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
-            if (!$visitor->group->can("toggle_extensions"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
-
-            if (empty($_POST['extension']) or empty($_POST['type']))
-                error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
-
-            $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
-            $name          = str_replace(array(".", DIR), "", $_POST['extension']);
-            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $class_name    = camelize($name);
-
-            if (!in_array($name, (array) $config->$enabled_array))
-                error(__("Error"), __("Extension already disabled."), null, 409);
-
-            if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
-                show_404(__("Not Found"), __("Extension not found."));
-
-            if (method_exists($class_name, "__uninstall"))
-                call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
-
-            $config->set($enabled_array, array_diff((array) $config->$enabled_array, array($name)));
-
-            if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
-                unset($_SESSION['latest_feather']);
-
-            json_response(__("Extension disabled."));
     }
 
     $trigger->call("ajax");

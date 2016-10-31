@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-10-20 19:57+0000\n"
+"POT-Creation-Date: 2016-10-30 14:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -176,52 +176,43 @@ msgstr ""
 msgid "Emoji"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:31
-#: admin/javascripts/admin.js.php:35
-msgid "These changes will affect your user account. Are you sure you want to proceed?"
-msgstr ""
-
-#: admin/javascripts/admin.js.php:48
+#: admin/javascripts/admin.js.php:40
 msgid "Toggle All"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:108
-#: admin/javascripts/admin.js.php:124
+#: admin/javascripts/admin.js.php:56
+#: admin/javascripts/admin.js.php:72
 msgid "&uarr; Fewer Options"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:110
-#: admin/javascripts/admin.js.php:127
+#: admin/javascripts/admin.js.php:58
+#: admin/javascripts/admin.js.php:75
 msgid "More Options &darr;"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:224
+#: admin/javascripts/admin.js.php:140
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:305
+#: admin/javascripts/admin.js.php:168
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:309
-#: admin/javascripts/admin.js.php:311
-#: admin/javascripts/admin.js.php:388
-#: admin/javascripts/admin.js.php:390
+#: admin/javascripts/admin.js.php:172
+#: admin/javascripts/admin.js.php:174
+#: admin/javascripts/admin.js.php:254
+#: admin/javascripts/admin.js.php:256
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:331
-#: admin/javascripts/admin.js.php:332
+#: admin/javascripts/admin.js.php:196
+#: admin/javascripts/admin.js.php:197
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:384
+#: admin/javascripts/admin.js.php:250
 #: admin/pages/themes.twig:25
 msgid "Preview"
-msgstr ""
-
-#: admin/javascripts/admin.js.php:513
-msgid "The extension cannot be toggled because your web browser did not send proper credentials."
 msgstr ""
 
 #: admin/layouts/default.twig:58
@@ -322,7 +313,7 @@ msgstr ""
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:66
-#: admin/pages/route_settings.twig:85
+#: admin/pages/route_settings.twig:84
 #: admin/pages/user_settings.twig:45
 msgid "Update"
 msgstr ""
@@ -430,6 +421,10 @@ msgstr ""
 msgid "Editing Group &#8220;%s&#8221;"
 msgstr ""
 
+#: admin/pages/edit_group.twig:7
+msgid "Are you sure you want to make these changes to your group?"
+msgstr ""
+
 #: admin/pages/edit_group.twig:10
 #: admin/pages/new_group.twig:10
 msgid "Name"
@@ -460,6 +455,10 @@ msgstr ""
 #: admin/pages/edit_user.twig:6
 #, php-format
 msgid "Editing User &#8220;%s&#8221;"
+msgstr ""
+
+#: admin/pages/edit_user.twig:7
+msgid "Are you sure you want to make these changes to your account?"
 msgstr ""
 
 #: admin/pages/edit_user.twig:10
@@ -551,22 +550,18 @@ msgid "Enabled"
 msgstr ""
 
 #: admin/pages/feathers.twig:29
-#: admin/pages/feathers.twig:73
 #: admin/pages/modules.twig:49
-#: admin/pages/modules.twig:114
 msgid "Disable"
 msgstr ""
 
-#: admin/pages/feathers.twig:43
-#: admin/pages/feathers.twig:87
-#: admin/pages/modules.twig:63
-#: admin/pages/modules.twig:128
-msgid "Enable"
+#: admin/pages/feathers.twig:44
+#: admin/pages/modules.twig:64
+msgid "Disabled"
 msgstr ""
 
-#: admin/pages/feathers.twig:52
-#: admin/pages/modules.twig:72
-msgid "Disabled"
+#: admin/pages/feathers.twig:65
+#: admin/pages/modules.twig:106
+msgid "Enable"
 msgstr ""
 
 #: admin/pages/general_settings.twig:3
@@ -834,12 +829,12 @@ msgid "Modules"
 msgstr ""
 
 #: admin/pages/modules.twig:25
-#: admin/pages/modules.twig:89
+#: admin/pages/modules.twig:81
 msgid "This module conflicts with the following modules:"
 msgstr ""
 
 #: admin/pages/modules.twig:35
-#: admin/pages/modules.twig:99
+#: admin/pages/modules.twig:91
 msgid "This module requires the following modules to be enabled:"
 msgstr ""
 

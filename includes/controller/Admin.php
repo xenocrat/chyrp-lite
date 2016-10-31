@@ -1360,7 +1360,7 @@
                                           fallback($user["full_name"], ""),
                                           fallback($user["website"], ""),
                                           (!$group->no_results) ? $group->id : $config->default_group,
-                                          !empty(fallback($user["approved"], false)),
+                                          fallback($user["approved"], false),
                                           fallback($user["joined_at"]), datetime());
 
                     $trigger->call("import_chyrp_user", $user);
@@ -2108,7 +2108,7 @@
 
             try {
                 $this->twig->display($template.".twig", $this->context);
-            } catch (Exception $e) {
+            } catch (Twig_Error $e) {
                 error(__("Twig Error"), $e->getMessage(), debug_backtrace());
             }
         }

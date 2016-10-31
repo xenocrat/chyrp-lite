@@ -21,13 +21,13 @@ Arguments:
 admin_write_wysiwyg
 -------------------
 Called from:
-	admin/javascripts/admin.js.php on line 323
+	admin/javascripts/admin.js.php on line 186
 
 
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 557
+	admin/javascripts/admin.js.php on line 337
 
 
 admin_head
@@ -124,12 +124,6 @@ Called from:
 	admin/pages/new_user.twig on line 42
 
 
-post_view_url_settings
-----------------------
-Called from:
-	admin/pages/route_settings.twig on line 81
-
-
 before_page_fields
 ------------------
 Called from:
@@ -202,7 +196,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 144
+	includes/ajax.php on line 82
 
 
 change_setting
@@ -213,8 +207,8 @@ Arguments:
 	$setting, $value
 
 
-parse_url
----------
+parse_route
+-----------
 Called from:
 	includes/class/Route.php on line 77
 Arguments:
@@ -330,7 +324,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 102
+	includes/javascript.php on line 104
 
 
 pingback
@@ -433,7 +427,7 @@ Arguments:
 feed_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 723
+	modules/comments/comments.php on line 671
 Arguments:
 	$comment
 
@@ -441,7 +435,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 741
+	modules/comments/comments.php on line 689
 Arguments:
 	$comment->id
 
@@ -473,7 +467,8 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 78
+	modules/likes/model/Like.php on line 70
+	modules/likes/model/Like.php on line 138
 Arguments:
 	$this->post_id, $this->user_id
 
@@ -481,7 +476,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 97
+	modules/likes/model/Like.php on line 91
 Arguments:
 	$this->post_id, $this->user_id
 
@@ -933,22 +928,12 @@ Called from:
 	includes/model/Post.php on line 313
 
 
-url_vals
---------
-Target:
-	$vals
-Called from:
-	includes/model/Post.php on line 499
-Arguments:
-	$this
-
-
 title_from_excerpt
 ------------------
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 520
+	includes/model/Post.php on line 519
 
 
 title
@@ -956,7 +941,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 545
+	includes/model/Post.php on line 544
 Arguments:
 	$post
 
@@ -966,7 +951,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 562
+	includes/model/Post.php on line 561
 Arguments:
 	$post
 
@@ -976,7 +961,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 579
+	includes/model/Post.php on line 578
 Arguments:
 	$post
 
@@ -986,7 +971,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 636
+	includes/model/Post.php on line 635
 
 
 user

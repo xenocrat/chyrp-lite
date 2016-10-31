@@ -3,7 +3,7 @@ return array(
     "name"          => __("Pingable", "pingable"),
     "url"           => "http://chyrplite.net/",
     "version"       => 1.0,
-    "description"   => __("Allows your site to register pingbacks from blogs that link to it.", "pingable"),
+    "description"   => __("Register pingbacks from blogs that link to yours.", "pingable"),
     "author"        => array(
         "name"      => "Daniel Pimley",
         "url"       => "http://chyrplite.net/"),

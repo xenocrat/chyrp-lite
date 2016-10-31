@@ -144,11 +144,7 @@
                 $source = $pingback->children("http://www.w3.org/2005/Atom")->link["href"];
                 $created_at = $pingback->children("http://www.w3.org/2005/Atom")->published;
 
-                SQL::current()->insert("pingbacks",
-                                 array("post_id"    => $post->id,
-                                       "source"     => $source,
-                                       "title"      => $title,
-                                       "created_at" => datetime($created_at)));
+                Pingback::add($post->id, $source, $title, datetime($created_at));
             }
         }
 

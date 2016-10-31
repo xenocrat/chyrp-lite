@@ -72,8 +72,8 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $like = new Like($post->id);
-            $like->like();
+            $new = new Like($post->id);
+            $new->like();
 
             Flash::notice(__("Post liked.", "likes"), $post->url()."#likes_".$post->id);
         }
@@ -90,8 +90,8 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $like = new Like($post->id);
-            $like->unlike();
+            $new = new Like($post->id);
+            $new->unlike();
 
             Flash::notice(__("Post unliked.", "likes"), $post->url()."#likes_".$post->id);
         }
@@ -118,15 +118,14 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $like = new Like($post->id);
-            $like->like();
-            $like->fetchCount();
+            $new = new Like($post->id);
+            $new->like();
+            $count = $new->fetchCount() - 1;
 
-            if ($like->total_count == 1)
+            if ($count <= 0)
                 $text = __("You like this.", "likes");
             else
-                $text = sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
-                                ($like->total_count - 1));
+                $text = sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count);
 
             json_response($text, true);
         }
@@ -144,15 +143,14 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $like = new Like($post->id);
-            $like->unlike();
-            $like->fetchCount();
+            $new = new Like($post->id);
+            $new->unlike();
+            $count = $new->fetchCount();
 
-            if ($like->total_count == 0)
+            if ($count <= 0)
                 $text = __("No likes yet.", "likes");
             else
-                $text = sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"),
-                                $like->total_count);
+                $text = sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count);
 
             json_response($text, true);
         }
@@ -185,7 +183,7 @@
             if (!$like->resolve()) {
                 if ($visitor->group->can("like_post")) {
                     $html.= "<a class=\"likes like\" href=\"".
-                                $config->url."/?action=like&post_id=".
+                                $config->url."/?action=like&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
                                 "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
@@ -200,17 +198,18 @@
 
                 $html.= " <span class='like_text'>";
 
-                if ($like->total_count == 0)
+                $count = $like->fetchCount();
+
+                if ($count <= 0)
                     $html.= __("No likes yet.", "likes");
                 else
-                    $html.= sprintf(_p("%d person likes this.", "%d people like this.", $like->total_count, "likes"),
-                                    $like->total_count);
+                    $html.= sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count);
 
                 $html.= "</span>";
             } else {
                 if ($visitor->group->can("unlike_post")) {
                     $html.= "<a class=\"likes liked\" href=\"".
-                                $config->url."/?action=unlike&post_id=".
+                                $config->url."/?action=unlike&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
                                 "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
@@ -225,13 +224,12 @@
 
                 $html.= " <span class='like_text'>";
 
-                if ($like->total_count == 0)
-                    $html.= __("No likes yet.", "likes");
-                elseif ($like->total_count == 1)
+                $count = $like->fetchCount() - 1;
+
+                if ($count <= 0)
                     $html.= __("You like this.", "likes");
                 else
-                    $html.= sprintf(_p("You and %d person like this.", "You and %d people like this.", ($like->total_count - 1), "likes"),
-                                    ($like->total_count - 1));
+                    $html.= sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count);
 
                 $html.= "</span>";
             }
@@ -241,18 +239,15 @@
         }
 
         public function get_like_images() {
-            $imagesDir = MODULES_DIR.DIR."likes".DIR."images".DIR;
-            $images = glob($imagesDir . "*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
+            $images = array();
+            $filepaths = glob(MODULES_DIR.DIR."likes".DIR."images".DIR."*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
 
-            foreach ($images as $image) {
-                $pattern = "/".preg_quote(DIR, "/")."(\w.*)".preg_quote(DIR, "/")."images".preg_quote(DIR, "/")."/";
-                $image = preg_replace($pattern, "", $images);
-
-                while (list($key, $val) = each($image))
-                    $arr[] = Config::current()->chyrp_url."/modules/likes/images/$val";
-
-                return array_combine($image, $arr);
+            foreach ($filepaths as $filepath) {
+                $filename = basename($filepath);
+                $images[$filename] = Config::current()->chyrp_url."/modules/likes/images/".urlencode($filename);
             }
+
+            return $images;
         }
 
         public function manage_posts_column_header() {
@@ -279,16 +274,10 @@
 
                 $user = new User(array("login" => (string) $login));
 
-                $count = $sql->count("likes",
-                                     array("post_id" => $post->id,
-                                           "session_hash" => $session_hash));
-
-                if (!$count)
-                    $sql->insert("likes",
-                                 array("post_id" => $post->id,
-                                       "user_id" => (!$user->no_results) ? $user->id : 0,
-                                       "timestamp" => $timestamp,
-                                       "session_hash" => $session_hash));
+                Like::import($post->id,
+                             ((!$user->no_results) ? $user->id : 0),
+                             oneof($timestamp, datetime()),
+                             $session_hash);
             }
         }
 
@@ -317,6 +306,7 @@
         }
 
         public function user_logged_in($user) {
+            # Remember likes in the visitor's session for attribution.
             $_SESSION["likes"] = array();
         }
     }

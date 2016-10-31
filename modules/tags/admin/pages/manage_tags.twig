@@ -36,11 +36,11 @@
 </tbody>
 </table>
 <h2>{{ GET.query is not empty ? "Posts tagged with &#8220;%s&#8221;" | translate("tags") | format(GET.query | striptags) : "Posts" | translate }}</h2>
-<form action="{{ url('bulk_tag') }}" method="post" accept-charset="UTF-8">
+<form action="{{ url('bulk_tag') }}" method="post" accept-charset="UTF-8" data-toggler="tag_toggler">
 <table class="interactive">
 <thead>
 <tr class="head">
-<th class="toggler"></th>
+<th class="toggler" id="tag_toggler"></th>
 <th class="post_title title">{{ "Post" | translate }}</th>
 <th class="post_tags list">{{ "Tags" | translate("tags") }}</th>
 <th class="controls">{{ "Controls" | translate }}</th>

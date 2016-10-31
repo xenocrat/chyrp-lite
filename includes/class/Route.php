@@ -35,7 +35,7 @@
             if (!in_array("Controller", class_implements($controller)))
                 trigger_error(__("Route was initiated with an invalid Controller."), E_USER_WARNING);
 
-            fallback($controller->protected, array("__construct", "__destruct", "parse", "display", "current"));
+            fallback($controller->protected, array("__construct", "__destruct", "parse", "display"));
 
             $this->controller = $controller;
 
@@ -74,7 +74,7 @@
             # Give the controller an opportunity to parse this route and determine the action.
             $controller->parse($this);
 
-            Trigger::current()->call("parse_url", $this);
+            Trigger::current()->call("parse_route", $this);
 
             $this->try[] = isset($this->action) ?
                                oneof($this->action, "index") : (!substr_count($this->arg[0], "?") ?
@@ -178,7 +178,7 @@
             # Assume this is a clean URL and ensure it ends with a slash.
             $url = rtrim($url, "/")."/";
 
-            # Translation is unnecessary if clean URLs are enabled.
+            # Translation is unnecessary if clean URLs are enabled and the controller supports them.
             if ($config->clean_urls and !empty($controller->clean))
                 return $base."/".$url;
 
