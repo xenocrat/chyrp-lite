@@ -8,10 +8,6 @@
     # Stores the internal timer value.
     $time_start = 0;
 
-    # Array: $l10n
-    # Stores loaded gettext domains.
-    $l10n = array();
-
     #---------------------------------------------
     # Sessions
     #---------------------------------------------
@@ -191,7 +187,9 @@
      */
     function set_locale($locale = "en_US") {
         $posix = array($locale.".UTF-8",                  # E.g. "en_US.UTF-8"
+                       $locale.".utf-8",                  # E.g. "en_US.utf-8"
                        $locale.".UTF8",                   # E.g. "en_US.UTF8"
+                       $locale.".utf8",                   # E.g. "en_US.utf8"
                        $locale);                          # E.g. "en_US"
         $win32 = array(str_replace("_", "-", $locale));   # E.g. "en-US"
 
@@ -213,23 +211,18 @@
 
     /**
      * Function: load_translator
-     * Loads a .mo file for gettext translation.
+     * Loads a translation file for a gettext domain.
      *
      * Parameters:
      *     $domain - The name for this translation domain.
-     *     $mofile - The .mo file to read from.
+     *     $locale - The path to the locale directory containing the translation.
      */
-    function load_translator($domain, $mofile) {
-        global $l10n;
+    function load_translator($domain, $locale) {
+        if (function_exists("bindtextdomain"))
+            bindtextdomain($domain, $locale);
 
-        if (isset($l10n[$domain]))
-            return;
-
-        if (!is_file($mofile) or !is_readable($mofile))
-            return;
-
-        $input = new gettext_CachedFileReader($mofile);
-        $l10n[$domain] = new gettext_Reader($input);
+        if (function_exists("bind_textdomain_codeset"))
+            bind_textdomain_codeset($domain, "UTF-8");
     }
 
     /**
@@ -258,8 +251,7 @@
      *     The translated string or the original.
      */
     function __($text, $domain = "chyrp") {
-        global $l10n;
-        return isset($l10n[$domain]) ? $l10n[$domain]->translate($text) : $text ;
+        return function_exists("dgettext") ? dgettext($domain, $text) : $text ;
     }
 
     /**
@@ -276,9 +268,8 @@
      *     The translated string or the original.
      */
     function _p($single, $plural, $number, $domain = "chyrp") {
-        global $l10n;
-        return isset($l10n[$domain]) ?
-                     $l10n[$domain]->ngettext($single, $plural, $number) : (($number != 1) ? $plural : $single) ;
+        return function_exists("dngettext") ?
+            dngettext($domain, $single, $plural, (int) $number) : (($number != 1) ? $plural : $single) ;
     }
 
     /**
@@ -1550,7 +1541,7 @@
                 continue;
             }
 
-            load_translator($module, MODULES_DIR.DIR.$module.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($module, MODULES_DIR.DIR.$module.DIR."locale");
 
             require $filepath;
 
@@ -1576,7 +1567,7 @@
                 continue;
             }
 
-            load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale".DIR.$config->locale.".mo");
+            load_translator($feather, FEATHERS_DIR.DIR.$feather.DIR."locale");
 
             require $filepath;
 

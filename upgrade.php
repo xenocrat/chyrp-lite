@@ -81,8 +81,11 @@
     # Initialize connection to SQL server.
     $sql->connect();
 
+    # Set the locale.
+    set_locale($config->locale);
+
     # Load the translation engine.
-    load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$config->locale.".mo");
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
     /**
      * Function: test

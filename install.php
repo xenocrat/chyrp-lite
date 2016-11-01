@@ -88,12 +88,8 @@
     $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
     set_timezone($timezone);
 
-    # Ask PHP for the default locale and try to load an appropriate translator.
-    if (class_exists("Locale")) {
-        $locale = Locale::getDefault();
-        $language = Locale::getPrimaryLanguage($locale)."_".Locale::getRegion($locale);
-        load_translator("chyrp", INCLUDES_DIR.DIR."locale".DIR.$language.".mo");
-    }
+    # Try to load an appropriate translation for the default locale.
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
     # Sanitize all input depending on magic_quotes_gpc's enabled status.
     sanitize_input($_GET);

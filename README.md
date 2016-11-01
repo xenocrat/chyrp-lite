@@ -19,7 +19,6 @@ Pages allow you to publish articles on your site that are independent of your bl
 #### Core:
 * Responsive and accessible, W3C validated HTML5 for all themes.
 * Universal support for plain text, Markdown, or raw HTML.
-* Average blog page is fewer than 10 requests and under 500 KB.
 * Personalise your blog using powerful extensions.
 * Theme development is easy with the Twig template engine.
 * Comprehensive rights model for managing your users and visitors.

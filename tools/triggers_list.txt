@@ -753,7 +753,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1980
+	includes/controller/Admin.php on line 1982
 
 
 manage_nav
@@ -761,7 +761,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2009
+	includes/controller/Admin.php on line 2011
 
 
 settings_nav
@@ -769,7 +769,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2034
+	includes/controller/Admin.php on line 2036
 
 
 extend_nav
@@ -777,7 +777,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2052
+	includes/controller/Admin.php on line 2054
 
 
 feed_url
@@ -795,7 +795,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 834
+	includes/helpers.php on line 825
 Arguments:
 	$query, $plain
 
@@ -805,7 +805,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1394
+	includes/helpers.php on line 1385
 
 
 send_mail
@@ -813,7 +813,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2141
+	includes/helpers.php on line 2132
 
 
 xmlrpc_methods
