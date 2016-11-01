@@ -17,11 +17,12 @@ Pages allow you to publish articles on your site that are independent of your bl
 ## What are the key features?
 
 #### Core:
-* Responsive and accessible, W3C validated HTML5 for all themes.
-* Universal support for plain text, Markdown, or raw HTML.
+* Easy to install, simple to maintain, extensible by design.
+* Built with responsive and accessible W3C-validated HTML5.
+* Universal support for plain text, Markdown, or raw markup.
 * Personalise your blog using powerful extensions.
 * Theme development is easy with the Twig template engine.
-* Comprehensive rights model for managing your users and visitors.
+* Manage users and visitors with a comprehensive rights model.
 
 #### Feathers:
 * Text: write textual blog entries.
