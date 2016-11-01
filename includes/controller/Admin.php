@@ -1725,7 +1725,7 @@
             $locales[] = array("code" => "en_US",
                                "name" => lang_code("en_US"));
 
-            if ($open = opendir(INCLUDES_DIR.DIR."locale".DIR)) {
+            if ($open = opendir(INCLUDES_DIR.DIR."locale")) {
                  while (($folder = readdir($open)) !== false)
                     if ($folder != "en_US" and preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $folder))
                         $locales[] = array("code" => $folder,
