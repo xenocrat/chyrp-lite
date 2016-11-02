@@ -322,21 +322,21 @@
                 $posts = new Paginator(array());
 
             foreach ($posts->paginated as &$post) {
-                if (preg_match_all("/\{([0-9]+)\}/", $post->status, $matches)) {
-                    $groups = array();
-                    $groupClasses = array();
+                if ($ids = $post->groups()) {
+                    $group_names = array();
+                    $group_classes = array();
 
-                    foreach ($matches[1] as $id) {
+                    foreach ($ids as $id) {
                         $group = new Group($id);
 
                         if (!$group->no_results) {
-                            $groups[] = "<span class=\"group_prefix\">Group:</span> ".$group->name;
-                            $groupClasses[] = "group-".$group->id;
+                            $group_names[] = "<span class=\"group_prefix\">Group:</span> ".$group->name;
+                            $group_classes[] = "group-".$group->id;
                         }
                     }
 
-                    $post->status_name = join(", ", $groups);
-                    $post->status_class = join(" ", $groupClasses);
+                    $post->status_name = join(", ", $group_names);
+                    $post->status_class = join(" ", $group_classes);
                 } else {
                     $post->status_name = camelize($post->status, true);
                     $post->status_class = $post->status;
