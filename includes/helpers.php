@@ -211,11 +211,11 @@
 
     /**
      * Function: load_translator
-     * Loads a translation file for a gettext domain.
+     * Sets the path for a gettext translation domain.
      *
      * Parameters:
-     *     $domain - The name for this translation domain.
-     *     $locale - The path to the locale directory containing the translation.
+     *     $domain - The name of this translation domain.
+     *     $locale - The path to the locale directory.
      */
     function load_translator($domain, $locale) {
         if (function_exists("bindtextdomain"))
@@ -241,7 +241,7 @@
 
     /**
      * Function: __
-     * Translates a string using PHP-gettext.
+     * Translates a string using gettext.
      *
      * Parameters:
      *     $text - The string to translate.
@@ -695,11 +695,11 @@
         $items = array();
 
         foreach ($array as $item) {
-            $string = (is_string($item) and $quotes) ? __("&#8220;").$item.__("&#8221;") : $item ;
-            if (count($array) == ++$count and $count !== 1)
-                $items[] = __("and ").$string;
-            else
-                $items[] = $string;
+            $string = (is_string($item) and $quotes) ?
+                _f("&#8220;%s&#8221;", $item) : (string) $item ;
+
+            $items[] = (count($array) == ++$count and $count !== 1) ?
+                _f("and %s", $string) : $string ;
         }
 
         return (count($array) == 2) ? implode(" ", $items) : implode(", ", $items) ;
