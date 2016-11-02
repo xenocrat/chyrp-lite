@@ -69,7 +69,7 @@ You can install Chyrp Lite in three steps:
 
 ## Upgrading
 
-Chyrp Lite will tell you when a new version is available. You can update in six steps:
+You can upgrade Chyrp Lite in six steps:
 
 1. __Backup your database before proceeding!__
 2. Download the latest version of Chyrp Lite.
