@@ -330,7 +330,7 @@
                         $group = new Group($id);
 
                         if (!$group->no_results) {
-                            $group_names[] = "<span class=\"group_prefix\">Group:</span> ".$group->name;
+                            $group_names[] = $group->name;
                             $group_classes[] = "group-".$group->id;
                         }
                     }
