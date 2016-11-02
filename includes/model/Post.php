@@ -783,24 +783,14 @@
 
         /**
          * Function: groups
-         * Lists the groups who can view the post if the post's status is specific to certain groups.
+         * Returns the IDs of any groups given viewing permission in the post's status.
          */
         public function groups() {
             if ($this->no_results)
                 return false;
 
             preg_match_all("/\{([0-9]+)\}/", $this->status, $groups, PREG_PATTERN_ORDER);
-            if (empty($groups[1]))
-                return false;
-
-            $names = array();
-
-            foreach ($groups[1] as $group_id) {
-                $group = new Group($group_id);
-                $names[] = $group->name;
-            }
-
-            return list_notate($names);
+            return fallback($groups[1], array());
         }
 
         /**
