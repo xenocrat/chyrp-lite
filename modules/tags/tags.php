@@ -467,7 +467,8 @@
                 return false;
 
             $main->display(array("pages".DIR."tag", "pages".DIR."index"),
-                           array("posts" => $posts, "tag" => $tag, "tags" => $tags),
+                           array("posts" => $posts,
+                                 "tag" => $tag, "tags" => $tags),
                            _f("Posts tagged with %s", array($tag), "tags"));
         }
 
