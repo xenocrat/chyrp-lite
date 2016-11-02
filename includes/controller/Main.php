@@ -362,13 +362,10 @@
                       __("The post cannot be displayed because the template for this feather was not found."), null, 501);
 
             if ($post->status == "draft")
-                Flash::message(__("This post is a draft."));
+                Flash::message(__("This post is not published."));
 
             if ($post->status == "scheduled")
                 Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
-
-            if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
-                Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
 
             $this->display(array("pages".DIR."view", "pages".DIR."index"),
                            array("post" => $post,
