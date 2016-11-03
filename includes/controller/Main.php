@@ -378,7 +378,9 @@
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
         public function page($url = null, $hierarchy = array()) {
-            $page = (isset($url)) ? new Page(array("url" => $url)) : new Page(array("url" => fallback($_GET['url']))) ;
+            $page = (isset($url)) ?
+                new Page(array("url" => $url)) :
+                new Page(array("url" => fallback($_GET['url']))) ;
 
             if ($page->no_results)
                 return false;
@@ -625,7 +627,8 @@
                 fallback($_POST['website'], "");
 
                 if (!Flash::exists("warning")) {
-                    $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $visitor->password ;
+                    $password = (!empty($_POST['new_password1'])) ?
+                        User::hashPassword($_POST['new_password1']) : $visitor->password ;
 
                     $visitor->update($visitor->login,
                                      $password,
