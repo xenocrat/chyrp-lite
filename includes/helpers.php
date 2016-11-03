@@ -181,32 +181,18 @@
      *
      * Parameters:
      *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
-     *
-     * Notes:
-     *     Precedence is given to UTF-8 with a fallback to Windows 1252.
      */
     function set_locale($locale = "en_US") {
-        $posix = array($locale.".UTF-8",                  # E.g. "en_US.UTF-8"
-                       $locale.".utf-8",                  # E.g. "en_US.utf-8"
-                       $locale.".UTF8",                   # E.g. "en_US.UTF8"
-                       $locale.".utf8",                   # E.g. "en_US.utf8"
-                       $locale);                          # E.g. "en_US"
-        $win32 = array(str_replace("_", "-", $locale));   # E.g. "en-US"
-
-        if (class_exists("Locale")) {
-            $language = Locale::getDisplayLanguage($locale, "en_US");
-            $region = Locale::getDisplayRegion($locale, "en_US");
-            array_unshift($win32,
-                          $language."_".$region.".1252",  # E.g. "English_United States.1252"
-                          $language.".1252",              # E.g. "English.1252"
-                          $language);                     # E.g. "English"
-
-            # Set the ICU locale.
+        # Set the ICU locale.
+        if (class_exists("Locale"))
             Locale::setDefault($locale);
-        }
 
         # Set the PHP locale.
-        setlocale(LC_ALL, array_merge($posix, $win32));
+        setlocale(LC_ALL, array($locale.".UTF-8",
+                                $locale.".utf-8",
+                                $locale.".UTF8",
+                                $locale.".utf8",
+                                $locale));
     }
 
     /**
