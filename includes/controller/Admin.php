@@ -676,7 +676,8 @@
                 elseif (password_strength($_POST['new_password1']) < 100)
                     Flash::message(__("Please consider setting a stronger password for this user."));
 
-            $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
+            $password = (!empty($_POST['new_password1'])) ?
+                User::hashPassword($_POST['new_password1']) : $user->password ;
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."), null, 422);
