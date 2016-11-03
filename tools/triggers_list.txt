@@ -240,13 +240,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1061
+	includes/controller/Admin.php on line 1062
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1345
+	includes/controller/Admin.php on line 1346
 Arguments:
 	Group::add($name, $permissions)
 
@@ -254,7 +254,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1366
+	includes/controller/Admin.php on line 1367
 Arguments:
 	$user
 
@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1397
+	includes/controller/Admin.php on line 1398
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1424
+	includes/controller/Admin.php on line 1425
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1428
+	includes/controller/Admin.php on line 1429
 Arguments:
 	$imports
 
@@ -286,7 +286,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1697
+	includes/controller/Admin.php on line 1698
 Arguments:
 	!empty($_POST['theme'])
 
@@ -294,7 +294,7 @@ Arguments:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 475
+	includes/controller/Main.php on line 477
 Arguments:
 	$user
 
@@ -302,13 +302,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 557
+	includes/controller/Main.php on line 559
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 571
+	includes/controller/Main.php on line 573
 Arguments:
 	$user
 
@@ -316,7 +316,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 754
+	includes/controller/Main.php on line 757
 Arguments:
 	$post
 
@@ -697,7 +697,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1128
+	includes/controller/Admin.php on line 1129
 Arguments:
 	$post), true
 
@@ -707,7 +707,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1147
+	includes/controller/Admin.php on line 1148
 Arguments:
 	$post
 
@@ -717,7 +717,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1192
+	includes/controller/Admin.php on line 1193
 Arguments:
 	$page), true
 
@@ -727,7 +727,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1207
+	includes/controller/Admin.php on line 1208
 Arguments:
 	$page
 
@@ -737,7 +737,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1254
+	includes/controller/Admin.php on line 1255
 
 
 before_import
@@ -745,7 +745,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1316
+	includes/controller/Admin.php on line 1317
 
 
 write_nav
@@ -753,7 +753,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1982
+	includes/controller/Admin.php on line 1983
 
 
 manage_nav
@@ -761,7 +761,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2011
+	includes/controller/Admin.php on line 2012
 
 
 settings_nav
@@ -769,7 +769,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2036
+	includes/controller/Admin.php on line 2037
 
 
 extend_nav
@@ -777,7 +777,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2054
+	includes/controller/Admin.php on line 2055
 
 
 feed_url
@@ -785,7 +785,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 743
+	includes/controller/Main.php on line 746
 Arguments:
 	$post
 
@@ -795,7 +795,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 825
+	includes/helpers.php on line 811
 Arguments:
 	$query, $plain
 
@@ -805,7 +805,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1385
+	includes/helpers.php on line 1371
 
 
 send_mail
@@ -813,7 +813,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2132
+	includes/helpers.php on line 2118
 
 
 xmlrpc_methods

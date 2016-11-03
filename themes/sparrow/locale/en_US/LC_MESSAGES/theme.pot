@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-02 20:13+0000\n"
+"POT-Creation-Date: 2016-11-03 22:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -60,7 +60,8 @@ msgid 'Permanent link to &#8220;%s&#8221;'
 msgstr ""
 
 #: themes/sparrow/content/post.twig:22
-msgid "Private"
+#: themes/sparrow/layouts/default.twig:61
+msgid "Draft"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:24
@@ -290,10 +291,6 @@ msgstr ""
 
 #: themes/sparrow/layouts/default.twig:57
 msgid "Write"
-msgstr ""
-
-#: themes/sparrow/layouts/default.twig:61
-msgid "Draft"
 msgstr ""
 
 #: themes/sparrow/layouts/default.twig:69
