@@ -790,6 +790,7 @@
                 return false;
 
             preg_match_all("/\{([0-9]+)\}/", $this->status, $groups, PREG_PATTERN_ORDER);
+
             return empty($groups[1]) ? false : $groups[1] ;
         }
 
