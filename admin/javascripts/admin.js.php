@@ -37,7 +37,7 @@ function toggle_all() {
         });
 
         parent.append(
-            [$("<label>").attr("for", master).text('<?php echo __("Toggle All", "theme"); ?>'),
+            [$("<label>").attr("for", master).text('<?php echo __("Toggle All", "admin"); ?>'),
             $("<input>", {
                 "type": "checkbox",
                 "name": "toggle",
@@ -53,9 +53,9 @@ function toggle_all() {
 function toggle_options() {
     if ($("#more_options").length) {
         if (Cookie.get("show_more_options") == "true")
-            var more_options_text = '<?php echo __("&uarr; Fewer Options", "theme"); ?>';
+            var more_options_text = '<?php echo __("&uarr; Fewer Options", "admin"); ?>';
         else
-            var more_options_text = '<?php echo __("More Options &darr;", "theme"); ?>';
+            var more_options_text = '<?php echo __("More Options &darr;", "admin"); ?>';
 
         $("<a>", {
             "id": "more_options_link",
@@ -69,10 +69,10 @@ function toggle_options() {
             e.preventDefault();
 
             if ($("#more_options").css("display") == "none") {
-                $(this).empty().append('<?php echo __("&uarr; Fewer Options", "theme"); ?>');
+                $(this).empty().append('<?php echo __("&uarr; Fewer Options", "admin"); ?>');
                 Cookie.set("show_more_options", "true", 30);
             } else {
-                $(this).empty().append('<?php echo __("More Options &darr;", "theme"); ?>');
+                $(this).empty().append('<?php echo __("More Options &darr;", "admin"); ?>');
                 Cookie.destroy("show_more_options");
             }
             $("#more_options").slideToggle();
@@ -137,7 +137,7 @@ function validate_passwords() {
 // Asks the user to confirm form submission.
 function confirm_submit() {
     $("form[data-confirm]").submit(function(e) {
-        var text = $(this).attr("data-confirm") || '<?php echo __("Are you sure you want to proceed?", "theme"); ?>' ;
+        var text = $(this).attr("data-confirm") || '<?php echo __("Are you sure you want to proceed?", "admin"); ?>' ;
 
         if (!confirm(text.replace(/<[^>]+>/g, "")))
             e.preventDefault();
@@ -165,13 +165,13 @@ var Help = {
         }).addClass("iframe_background").append(
             [$("<iframe>", {
                 "src": href,
-                "aria-label": '<?php echo __("Help", "theme"); ?>'
+                "aria-label": '<?php echo __("Help", "admin"); ?>'
             }).addClass("iframe_foreground").loader(),
             $("<img>", {
                 "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                "alt": '<?php echo __("Close", "theme"); ?>',
+                "alt": '<?php echo __("Close", "admin"); ?>',
                 "role": 'button',
-                "aria-label": '<?php echo __("Close", "theme"); ?>'
+                "aria-label": '<?php echo __("Close", "admin"); ?>'
             }).addClass("iframe_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
@@ -193,8 +193,8 @@ var Write = {
                 $("label[for='" + target.attr("id") + "']").append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
-                        "alt": '(<?php echo __("Preview this field", "theme"); ?>)',
-                        "title": '<?php echo __("Preview this field", "theme"); ?>',
+                        "alt": '(<?php echo __("Preview this field", "admin"); ?>)',
+                        "title": '<?php echo __("Preview this field", "admin"); ?>',
                     }).addClass("emblem preview").click(function(e) {
                         var content = target.val();
                         var filter = target.attr("data-preview");
@@ -247,13 +247,13 @@ var Write = {
         }).addClass("iframe_background").append(
             [$("<iframe>", {
                 "name": uid,
-                "aria-label": '<?php echo __("Preview", "theme"); ?>'
+                "aria-label": '<?php echo __("Preview", "admin"); ?>'
             }).addClass("iframe_foreground").loader(),
             $("<img>", {
                 "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                "alt": '<?php echo __("Close", "theme"); ?>',
+                "alt": '<?php echo __("Close", "admin"); ?>',
                 "role": 'button',
-                "aria-label": '<?php echo __("Close", "theme"); ?>'
+                "aria-label": '<?php echo __("Close", "admin"); ?>'
             }).addClass("iframe_close_gadget").click(function() {
                 $(this).parent().remove();
             })]
