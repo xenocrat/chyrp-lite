@@ -1679,7 +1679,7 @@
                 self::preview_theme();
 
             $config = Config::current();
-            $theme = $_POST['theme'];
+            $theme = str_replace(array(".", DIR), "", $_POST['theme']);
             $config->set("theme", $theme);
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale");
@@ -1708,7 +1708,7 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            $_SESSION['theme'] = $_POST['theme'];
+            $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
             Flash::notice(__("Preview started."), "/");
         }
 
