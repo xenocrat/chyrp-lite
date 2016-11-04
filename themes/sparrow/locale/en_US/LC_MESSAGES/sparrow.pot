@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-03 22:00+0000\n"
+"POT-Creation-Date: 2016-11-04 23:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -275,6 +275,14 @@ msgstr ""
 
 #: themes/sparrow/forms/user/register.twig:11
 msgid "(again)"
+msgstr ""
+
+#: themes/sparrow/info.php:3
+msgid "Sparrow"
+msgstr ""
+
+#: themes/sparrow/info.php:6
+msgid "An unobtrusive tumbleblog theme for Chyrp Lite."
 msgstr ""
 
 #: themes/sparrow/layouts/default.twig:44

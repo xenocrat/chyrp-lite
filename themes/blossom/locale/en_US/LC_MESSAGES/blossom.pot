@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-03 22:00+0000\n"
+"POT-Creation-Date: 2016-11-04 23:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -350,6 +350,14 @@ msgstr ""
 
 #: themes/blossom/forms/user/register.twig:11
 msgid "(again)"
+msgstr ""
+
+#: themes/blossom/info.php:3
+msgid "Blossom"
+msgstr ""
+
+#: themes/blossom/info.php:6
+msgid "The default theme provided with Chyrp Lite."
 msgstr ""
 
 #: themes/blossom/javascripts/theme.js.php:14
