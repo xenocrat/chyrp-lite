@@ -17,11 +17,8 @@
     if (!$visitor->group->can("view_site"))
         show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
-    $filename = oneof(trim($_GET['file']), DIR);
+    $filename = str_replace(DIR, "", $_GET['file']);
     $filepath = uploaded($filename, false);
-
-    if (substr_count($filename, DIR))
-        error(__("Error"), __("Malformed URI."), null, 400);
 
     if (!is_readable($filepath) or !is_file($filepath))
         show_404(__("Not Found"), __("File not found."));
