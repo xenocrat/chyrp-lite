@@ -188,6 +188,7 @@
             Locale::setDefault($locale);
 
         # Set the PHP locale.
+        @putenv("LC_ALL=".$locale);
         setlocale(LC_ALL, array($locale.".UTF-8",
                                 $locale.".utf-8",
                                 $locale.".UTF8",
