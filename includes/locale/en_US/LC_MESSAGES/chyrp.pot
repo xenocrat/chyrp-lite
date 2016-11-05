@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-04 23:38+0000\n"
+"POT-Creation-Date: 2016-11-05 21:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -59,27 +59,24 @@ msgstr ""
 #: includes/controller/Admin.php:1759
 #: includes/controller/Admin.php:1800
 #: includes/controller/Admin.php:1939
-#: includes/controller/Admin.php:1944
 #: includes/controller/Main.php:361
 #: includes/download.php:12
 #: includes/download.php:15
-#: includes/download.php:24
 #: includes/error.php:155
-#: includes/helpers.php:1684
-#: includes/helpers.php:1687
-#: includes/helpers.php:1746
-#: includes/helpers.php:1749
-#: includes/helpers.php:1815
-#: includes/helpers.php:1818
-#: includes/helpers.php:1821
-#: includes/helpers.php:1824
-#: includes/helpers.php:1827
-#: includes/helpers.php:1830
-#: includes/helpers.php:1833
-#: includes/helpers.php:1838
+#: includes/helpers.php:1685
+#: includes/helpers.php:1688
+#: includes/helpers.php:1747
+#: includes/helpers.php:1750
+#: includes/helpers.php:1816
+#: includes/helpers.php:1819
+#: includes/helpers.php:1822
+#: includes/helpers.php:1825
+#: includes/helpers.php:1828
+#: includes/helpers.php:1831
+#: includes/helpers.php:1834
+#: includes/helpers.php:1839
 #: includes/thumb.php:15
 #: includes/thumb.php:18
-#: includes/thumb.php:44
 msgid "Error"
 msgstr ""
 
@@ -172,7 +169,7 @@ msgstr ""
 #: includes/controller/Main.php:332
 #: includes/controller/Main.php:391
 #: includes/download.php:18
-#: includes/helpers.php:1681
+#: includes/helpers.php:1682
 #: includes/thumb.php:21
 #: index.php:22
 msgid "Access Denied"
@@ -254,9 +251,9 @@ msgstr ""
 #: includes/controller/Admin.php:955
 #: includes/controller/Admin.php:1607
 #: includes/controller/Admin.php:1651
-#: includes/download.php:27
+#: includes/download.php:24
 #: includes/helpers.php:107
-#: includes/thumb.php:47
+#: includes/thumb.php:44
 msgid "Not Found"
 msgstr ""
 
@@ -376,9 +373,6 @@ msgid "Route was initiated with an invalid Controller."
 msgstr ""
 
 #: includes/class/Route.php:45
-#: includes/controller/Admin.php:1944
-#: includes/download.php:24
-#: includes/thumb.php:44
 msgid "Malformed URI."
 msgstr ""
 
@@ -887,80 +881,80 @@ msgstr ""
 msgid "You are already logged in."
 msgstr ""
 
-#: includes/controller/Admin.php:1946
+#: includes/controller/Admin.php:1943
 msgid "Help"
 msgstr ""
 
-#: includes/controller/Admin.php:1959
+#: includes/controller/Admin.php:1956
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:1960
+#: includes/controller/Admin.php:1957
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:1961
+#: includes/controller/Admin.php:1958
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:1962
+#: includes/controller/Admin.php:1959
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:1972
+#: includes/controller/Admin.php:1969
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:1997
+#: includes/controller/Admin.php:1994
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:2001
+#: includes/controller/Admin.php:1998
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:2005
-#: includes/controller/Admin.php:2033
+#: includes/controller/Admin.php:2002
+#: includes/controller/Admin.php:2030
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:2009
+#: includes/controller/Admin.php:2006
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:2015
+#: includes/controller/Admin.php:2012
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:2018
+#: includes/controller/Admin.php:2015
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:2031
+#: includes/controller/Admin.php:2028
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:2032
+#: includes/controller/Admin.php:2029
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:2034
+#: includes/controller/Admin.php:2031
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:2050
+#: includes/controller/Admin.php:2047
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:2051
+#: includes/controller/Admin.php:2048
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:2052
+#: includes/controller/Admin.php:2049
 msgid "Themes"
 msgstr ""
 
-#: includes/controller/Admin.php:2115
+#: includes/controller/Admin.php:2112
 #: includes/controller/Main.php:827
 msgid "Twig Error"
 msgstr ""
@@ -1118,8 +1112,8 @@ msgstr ""
 msgid "This resource accepts GET requests only."
 msgstr ""
 
-#: includes/download.php:27
-#: includes/thumb.php:47
+#: includes/download.php:24
+#: includes/thumb.php:44
 msgid "File not found."
 msgstr ""
 
@@ -1152,195 +1146,195 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr ""
 
-#: includes/helpers.php:685
+#: includes/helpers.php:686
 #, php-format
 msgid "&#8220;%s&#8221;"
 msgstr ""
 
-#: includes/helpers.php:688
+#: includes/helpers.php:689
 #, php-format
 msgid "and %s"
 msgstr ""
 
-#: includes/helpers.php:764
+#: includes/helpers.php:765
 msgid "year"
 msgstr ""
 
-#: includes/helpers.php:765
+#: includes/helpers.php:766
 msgid "month"
 msgstr ""
 
-#: includes/helpers.php:766
+#: includes/helpers.php:767
 msgid "day"
 msgstr ""
 
-#: includes/helpers.php:767
+#: includes/helpers.php:768
 msgid "hour"
 msgstr ""
 
-#: includes/helpers.php:768
+#: includes/helpers.php:769
 msgid "minute"
 msgstr ""
 
-#: includes/helpers.php:769
+#: includes/helpers.php:770
 msgid "second"
 msgstr ""
 
-#: includes/helpers.php:1506
-#: includes/helpers.php:1684
-#: includes/helpers.php:1746
+#: includes/helpers.php:1507
+#: includes/helpers.php:1685
+#: includes/helpers.php:1747
 #, php-format
 msgid "Please create the directory <em>%s</em>."
 msgstr ""
 
-#: includes/helpers.php:1508
+#: includes/helpers.php:1509
 #: install.php:831
 #, php-format
 msgid "Please make <em>%s</em> writable by the server."
 msgstr ""
 
-#: includes/helpers.php:1526
+#: includes/helpers.php:1527
 #, php-format
 msgid "%s module is missing."
 msgstr ""
 
-#: includes/helpers.php:1535
+#: includes/helpers.php:1536
 #, php-format
 msgid "%s module is damaged."
 msgstr ""
 
-#: includes/helpers.php:1552
+#: includes/helpers.php:1553
 #, php-format
 msgid "%s feather is missing."
 msgstr ""
 
-#: includes/helpers.php:1561
+#: includes/helpers.php:1562
 #, php-format
 msgid "%s feather is damaged."
 msgstr ""
 
-#: includes/helpers.php:1624
+#: includes/helpers.php:1625
 #, php-format
 msgid "Execution of %s has been cancelled because the module could not continue."
 msgstr ""
 
-#: includes/helpers.php:1649
+#: includes/helpers.php:1650
 #, php-format
 msgid "Execution of %s has been cancelled because the feather could not continue."
 msgstr ""
 
-#: includes/helpers.php:1681
+#: includes/helpers.php:1682
 #, php-format
 msgid "<em>%s</em> is not an uploaded file."
 msgstr ""
 
-#: includes/helpers.php:1687
-#: includes/helpers.php:1749
+#: includes/helpers.php:1688
+#: includes/helpers.php:1750
 #, php-format
 msgid "Upload destination <em>%s</em> is not writable."
 msgstr ""
 
-#: includes/helpers.php:1715
+#: includes/helpers.php:1716
 msgid "Unsupported File Type"
 msgstr ""
 
-#: includes/helpers.php:1716
+#: includes/helpers.php:1717
 #, php-format
 msgid "Only files of the following types are accepted: %s."
 msgstr ""
 
-#: includes/helpers.php:1816
+#: includes/helpers.php:1817
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:1819
+#: includes/helpers.php:1820
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:1822
+#: includes/helpers.php:1823
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:1825
+#: includes/helpers.php:1826
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:1828
+#: includes/helpers.php:1829
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1831
+#: includes/helpers.php:1832
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:1834
+#: includes/helpers.php:1835
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:1839
+#: includes/helpers.php:1840
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:2054
+#: includes/helpers.php:2055
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2075
+#: includes/helpers.php:2076
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2148
+#: includes/helpers.php:2149
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:2149
-#: includes/helpers.php:2159
-#: includes/helpers.php:2169
+#: includes/helpers.php:2150
+#: includes/helpers.php:2160
+#: includes/helpers.php:2170
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:2151
+#: includes/helpers.php:2152
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:2153
+#: includes/helpers.php:2154
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2158
+#: includes/helpers.php:2159
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2161
+#: includes/helpers.php:2162
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2163
+#: includes/helpers.php:2164
 msgid "Visit this link to reset your password:"
 msgstr ""
 
-#: includes/helpers.php:2168
+#: includes/helpers.php:2169
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2171
+#: includes/helpers.php:2172
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/helpers.php:2181
+#: includes/helpers.php:2182
 msgid "Undeliverable"
 msgstr ""
 
-#: includes/helpers.php:2181
+#: includes/helpers.php:2182
 msgid "Unable to send email."
 msgstr ""
 
