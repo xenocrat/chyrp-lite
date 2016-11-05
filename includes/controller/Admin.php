@@ -1938,10 +1938,7 @@
             if (empty($_GET['id']))
                 error(__("Error"), __("Missing argument."), null, 400);
 
-            $template = oneof(trim($_GET['id']), DIR);
-
-            if (substr_count($template, DIR))
-                error(__("Error"), __("Malformed URI."), null, 400);
+            $template = str_replace(DIR, "", $_GET['file']);
 
             return $this->display("help".DIR.$template, array(), __("Help"));
         }
