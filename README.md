@@ -1,19 +1,19 @@
 ## What can Chyrp Lite do for me?
 
-Chyrp Lite makes it possible to host your blog on your own web server with minimal fuss.
+Chyrp Lite makes it possible to host a blog on your own web server with minimal fuss.
 You can make your website whatever you want it to be: you can have a traditional blog,
 a tumbleblog, or you can add oodles of customisation and build a web publishing platform
 with blogging features on the side.
 
-Chyrp Lite uses a system of Feathers and Pages. Feathers enable different types of content
-in your blog posts – you can restrict yourself to absolute textual purity, or you can turn on
-everything and blog a multimedia rainbow. Pages allow you to publish articles on your website
-alongside your blog content – from a simple colophon to a multi-page extravaganza.
+Chyrp Lite uses a system of Feathers and Pages. Feathers enable different types of blog
+content – you can restrict yourself to absolute textual purity, or you can turn on everything
+and blog a multimedia rainbow. Pages let you publish articles separate from your blog content –
+from a simple colophon to a multi-page extravaganza.
 
-Chyrp Lite provides three beautiful blog themes and a friendly administration environment,
-all fully navigable on desktop computers and mobile devices, thanks to the power of
-responsive HTML5. Semantic markup and comprehensive ARIA labelling ensure your blog will
-be accessible to visitors who use assistive technologies.
+Chyrp Lite provides three beautiful blog themes and a friendly administration console,
+all fully navigable on a broad range of devices, thanks to the power of responsive HTML5.
+Semantic markup and comprehensive ARIA labelling ensure your blog will be accessible to
+visitors who use assistive technologies.
 
 ## What are the key features?
 
