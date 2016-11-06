@@ -1,19 +1,18 @@
 ## What can Chyrp Lite do for me?
 
-Chyrp Lite makes it possible to host a blog on your own web server with minimal fuss.
-You can make your website whatever you want it to be: you can have a traditional blog,
-a tumbleblog, or you can add oodles of customisation and build a web publishing platform
-with blogging features on the side.
+Chyrp Lite makes it possible to host a blog on your own web server with minimal fuss. You can have
+a traditional blog, a tumbleblog, or you can add oodles of customisation and build a web publishing
+platform with blogging features on the side.
 
-Chyrp Lite uses a system of Feathers and Pages. Feathers enable different types of blog
-content – you can restrict yourself to absolute textual purity, or you can turn on everything
-and blog a multimedia rainbow. Pages let you publish articles separate from your blog content –
-from a simple colophon to a multi-page extravaganza.
+With a flexible system of Feathers and Pages, you can make your website whatever you want it to be.
+Feathers enable different types of blog content – you can restrict yourself to absolute textual purity,
+or you can create a multimedia rainbow. Pages let you publish articles separate from your blog content
+– be it a simple colophon or a hierarchy of multiple pages, optionally including a homepage that your
+visitors will see when they first arrive at your website.
 
-Chyrp Lite provides three beautiful blog themes and a friendly administration console,
-all fully navigable on a broad range of devices, thanks to the power of responsive HTML5.
-Semantic markup and comprehensive ARIA labelling ensure your blog will be accessible to
-visitors who use assistive technologies.
+You get three beautiful blog themes and a friendly administration console, all fully navigable on
+a broad range of devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive
+ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
 
 ## What are the key features?
 
