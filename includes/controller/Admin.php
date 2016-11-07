@@ -1395,7 +1395,8 @@
                                       ($entry->updated == $entry->published) ? null : datetime($entry->updated),
                                       false);
 
-                    $trigger->call("import_chyrp_post", $entry, $post);
+                    if (!$post->no_results)
+                        $trigger->call("import_chyrp_post", $entry, $post);
                 }
             }
 
