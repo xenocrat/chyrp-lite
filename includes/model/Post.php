@@ -228,19 +228,16 @@
 
             $post = new self($id, array("drafts" => true));
 
-            # Lack of user privileges or disabled Feathers can cause the new post to be unfound.
             if (!$post->no_results) {
-                # Attempt to send pingbacks - will discover URLs in post attribute values.
+                # Attempt to send pingbacks to URLs discovered in post attribute values.
                 if (Config::current()->send_pingbacks and $pingbacks)
                     foreach ($values as $key => $value)
                         send_pingbacks($value, $post);
 
-                # Set the redirect attribute so AdminController will redirect to the new post.
-                $post->redirect = $post->url();
-
                 $trigger->call("add_post", $post, $options);
             }
 
+            # Warning: the new post can be unfound due to insufficient privileges or disabled Feathers.
             return $post;
         }
 
