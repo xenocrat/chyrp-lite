@@ -228,14 +228,18 @@
 
             $post = new self($id, array("drafts" => true));
 
-            # Send pingbacks.
-            if (Config::current()->send_pingbacks and $pingbacks)
-                foreach ($values as $key => $value)
-                    send_pingbacks($value, $post);
+            # Lack of user privileges or disabled Feathers can cause the new post to be unfound.
+            if (!$post->no_results) {
+                # Attempt to send pingbacks - will discover URLs in post attribute values.
+                if (Config::current()->send_pingbacks and $pingbacks)
+                    foreach ($values as $key => $value)
+                        send_pingbacks($value, $post);
 
-            $post->redirect = $post->url();
+                # Set the redirect attribute so AdminController will redirect to the new post.
+                $post->redirect = $post->url();
 
-            $trigger->call("add_post", $post, $options);
+                $trigger->call("add_post", $post, $options);
+            }
 
             return $post;
         }
