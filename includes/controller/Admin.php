@@ -182,7 +182,7 @@
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
-            Flash::notice(__("Post created!"), oneof($post->redirect, "write_post"));
+            Flash::notice(__("Post created!"), oneof($post->url(), "write_post"));
         }
 
         /**
