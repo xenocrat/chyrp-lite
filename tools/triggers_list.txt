@@ -262,7 +262,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1398
+	includes/controller/Admin.php on line 1399
 Arguments:
 	$entry, $post
 
@@ -270,7 +270,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1425
+	includes/controller/Admin.php on line 1426
 Arguments:
 	$entry, $page
 
@@ -278,7 +278,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1429
+	includes/controller/Admin.php on line 1430
 Arguments:
 	$imports
 
@@ -286,7 +286,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1698
+	includes/controller/Admin.php on line 1699
 Arguments:
 	!empty($_POST['theme'])
 
@@ -370,7 +370,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 238
+	includes/model/Post.php on line 237
 Arguments:
 	$post, $options
 
@@ -378,7 +378,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 332
+	includes/model/Post.php on line 333
 Arguments:
 	$this, $old, $options
 
@@ -753,7 +753,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1980
+	includes/controller/Admin.php on line 1981
 
 
 manage_nav
@@ -761,7 +761,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2009
+	includes/controller/Admin.php on line 2010
 
 
 settings_nav
@@ -769,7 +769,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2034
+	includes/controller/Admin.php on line 2035
 
 
 extend_nav
@@ -777,7 +777,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2052
+	includes/controller/Admin.php on line 2053
 
 
 feed_url
@@ -925,7 +925,7 @@ before_update_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 313
+	includes/model/Post.php on line 314
 
 
 title_from_excerpt
@@ -933,7 +933,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 519
+	includes/model/Post.php on line 520
 
 
 title
@@ -941,7 +941,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 544
+	includes/model/Post.php on line 545
 Arguments:
 	$post
 
@@ -951,7 +951,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 561
+	includes/model/Post.php on line 562
 Arguments:
 	$post
 
@@ -961,7 +961,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 578
+	includes/model/Post.php on line 579
 Arguments:
 	$post
 
@@ -971,7 +971,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 635
+	includes/model/Post.php on line 636
 
 
 user
