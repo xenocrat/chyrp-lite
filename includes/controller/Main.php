@@ -387,7 +387,7 @@
 
             $visitor = Visitor::current();
 
-            if (!$page->public and !$visitor->group->can("view_page"))
+            if (!$page->public and !$visitor->group->can("view_page") and $page->user_id != $visitor->id)
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view this page."));
 
             $this->display(array("pages".DIR.$page->url, "pages".DIR."page"), array("page" => $page), $page->title);
