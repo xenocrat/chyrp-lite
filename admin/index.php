@@ -9,14 +9,6 @@
     # Parse the route.
     $route = Route::current($admin);
 
-    # Can the visitor view the site? Are they attempting an action that is exempt from permissions?
-    if (!$visitor->group->can("view_site") and !in_array($route->action, array("login", "logout"))) {
-        if ($trigger->exists("can_not_view_site"))
-            $trigger->call("can_not_view_site");
-        else
-            show_403(__("Access Denied"), __("You are not allowed to view this site."));
-    }
-
     # Execute the appropriate Controller responder.
     $route->init();
 
