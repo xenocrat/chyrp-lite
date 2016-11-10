@@ -2,18 +2,11 @@
  Trigger Calls
 ==============================================
 
-can_not_view_site
------------------
-Called from:
-	admin/index.php on line 15
-	index.php on line 20
-
-
 end
 ---
 Called from:
-	admin/index.php on line 27
-	index.php on line 36
+	admin/index.php on line 19
+	index.php on line 19
 Arguments:
 	$route
 
@@ -210,15 +203,21 @@ Arguments:
 parse_route
 -----------
 Called from:
-	includes/class/Route.php on line 77
+	includes/class/Route.php on line 78
 Arguments:
 	$this
+
+
+can_not_view_site
+-----------------
+Called from:
+	includes/class/Route.php on line 101
 
 
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 97
+	includes/class/Route.php on line 105
 Arguments:
 	$this
 
@@ -226,7 +225,7 @@ Arguments:
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 146
+	includes/class/Route.php on line 154
 Arguments:
 	$this
 
@@ -291,10 +290,16 @@ Arguments:
 	!empty($_POST['theme'])
 
 
+can_not_view_page
+-----------------
+Called from:
+	includes/controller/Main.php on line 396
+
+
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 477
+	includes/controller/Main.php on line 484
 Arguments:
 	$user
 
@@ -302,13 +307,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 559
+	includes/controller/Main.php on line 566
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 573
+	includes/controller/Main.php on line 580
 Arguments:
 	$user
 
@@ -316,7 +321,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 757
+	includes/controller/Main.php on line 764
 Arguments:
 	$post
 
@@ -639,7 +644,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 187
+	includes/class/Route.php on line 195
 
 
 related_posts
@@ -785,7 +790,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 746
+	includes/controller/Main.php on line 753
 Arguments:
 	$post
 
