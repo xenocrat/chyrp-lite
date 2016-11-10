@@ -37,6 +37,10 @@
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "feed", "display", "current");
 
+        # Array: $permitted
+        # Methods that are exempt from the "view_site" permission.
+        public $permitted = array("login", "logout", "register", "activate", "lost_password", "reset");
+
         /**
          * Function: __construct
          * Loads the Twig parser. Theme class sets up the l10n domain.
@@ -385,10 +389,13 @@
             if ($page->no_results)
                 return false;
 
+            $trigger = Trigger::current();
             $visitor = Visitor::current();
 
-            if (!$page->public and !$visitor->group->can("view_page") and $page->user_id != $visitor->id)
+            if (!$page->public and !$visitor->group->can("view_page") and $page->user_id != $visitor->id) {
+                $trigger->call("can_not_view_page");
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view this page."));
+            }
 
             $this->display(array("pages".DIR.$page->url, "pages".DIR."page"), array("page" => $page), $page->title);
         }
