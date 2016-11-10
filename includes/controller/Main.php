@@ -394,7 +394,7 @@
 
             if (!$page->public and !$visitor->group->can("view_page") and $page->user_id != $visitor->id) {
                 $trigger->call("can_not_view_page");
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to view this page."));
+                show_403(__("Access Denied"), __("You are not allowed to view this page."));
             }
 
             $this->display(array("pages".DIR.$page->url, "pages".DIR."page"), array("page" => $page), $page->title);
