@@ -8,11 +8,11 @@
          * Function: parse
          * Route constructor calls this to determine the action.
          */
-		public function parse($route);
+        public function parse($route);
 
         /**
          * Function: display
          * Displays the page.
          */
-       	public function display($template);
+        public function display($template);
     }
