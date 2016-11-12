@@ -171,15 +171,6 @@
     if (!defined('JSON_UNESCAPED_SLASHES'))
         define('JSON_UNESCAPED_SLASHES', 0);
 
-    # Set error reporting levels.
-    if (JAVASCRIPT)
-        error_reporting(0);
-    else
-        if (DEBUG)
-            error_reporting(E_ALL | E_STRICT);
-        else
-            error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
-
     # Start output buffering and set header.
     if (USE_OB) {
         if (USE_ZLIB)

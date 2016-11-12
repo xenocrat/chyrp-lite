@@ -6,6 +6,15 @@
     # Stores errors encountered when installing or upgrading.
     $errors = array();
 
+    # Set the appropriate error reporting level.
+    if (JAVASCRIPT)
+        error_reporting(0);
+    else
+        if (INSTALLING or UPGRADING or DEBUG)
+            error_reporting(E_ALL | E_STRICT);
+        else
+            error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+
     # Set the appropriate error handler.
     if (TESTER)
         set_error_handler("error_panicker");

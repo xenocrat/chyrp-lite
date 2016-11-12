@@ -38,9 +38,6 @@
     if (!defined('JSON_UNESCAPED_SLASHES'))
         define('JSON_UNESCAPED_SLASHES', 0);
 
-    # Make sure E_STRICT is on so Chyrp remains errorless.
-    error_reporting(E_ALL | E_STRICT);
-
     ob_start();
 
     # File: Error
