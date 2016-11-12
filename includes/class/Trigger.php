@@ -55,6 +55,7 @@
                 foreach ($name as $index => $call) {
                     $args = func_get_args();
                     $args[0] = $call;
+
                     if ($index + 1 == count($name))
                         return $this->exists($call) ? call_user_func_array(array($this, "call"), $args) : $return ;
                     else
