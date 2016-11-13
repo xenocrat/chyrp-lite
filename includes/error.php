@@ -83,12 +83,12 @@
      *     $code - Numeric HTTP status code to set.
      */
     function error($title = "", $body = "", $backtrace = array(), $code = 500) {
-        # Sanitize strings to remove obnoxious attributes and script tags.
+        # Sanitize strings.
         $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8", false);
         $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
-        $body = preg_replace("/<script[^>]*?>/i", "&lt;script&gt;", $body);
-        $body = preg_replace("/<\/script[^>]*?>/i", "&lt;/script&gt;", $body);
+        $body = preg_replace("/<\/?script[^>]*>/i", "", $body);
 
+        # Sanitize backtrace.
         if (!empty($backtrace))
             foreach ($backtrace as $index => &$trace)
                 if (!isset($trace["file"]) or !isset($trace["line"])) {
