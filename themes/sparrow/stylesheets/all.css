@@ -552,7 +552,14 @@ img.gravatar {                                  position: absolute;
                                                 width: 48px;
                                                 height: 48px }
 .ajax_loading {                                 background-size: 30px 30px;
-                                                background-image: linear-gradient(-45deg, #ebeae6 25%, transparent 25%, transparent 50%, #ebeae6 50%, #ebeae6 75%, transparent 75%, transparent) !important;
+                                                background-image: linear-gradient(-45deg,
+                                                                                  #ebeae6 25%,
+                                                                                  transparent 25%,
+                                                                                  transparent 50%,
+                                                                                  #ebeae6 50%,
+                                                                                  #ebeae6 75%,
+                                                                                  transparent 75%,
+                                                                                  transparent) !important;
                                                 animation: ajax_loading 2s linear infinite }
 .ajax_loading .doaction {                       visibility: hidden }
 
