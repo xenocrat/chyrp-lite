@@ -715,8 +715,16 @@ img#likeImage_preview {                         max-width: 28px;
                                                 padding-right: 13px;
                                                 cursor: pointer }
 .ajax_loading {                                 background-size: 30px 30px;
-                                                background-image: linear-gradient(-45deg, #fbfbfb 25%, transparent 25%, transparent 50%, #fbfbfb 50%, #fbfbfb 75%, transparent 75%, transparent) !important;
+                                                background-image: linear-gradient(-45deg,
+                                                                                  #fbfbfb 25%,
+                                                                                  transparent 25%,
+                                                                                  transparent 50%,
+                                                                                  #fbfbfb 50%,
+                                                                                  #fbfbfb 75%,
+                                                                                  transparent 75%,
+                                                                                  transparent) !important;
                                                 animation: ajax_loading 2s linear infinite }
+.ajax_loading .controls {                       visibility: hidden }
 
 /**
  *---------------------------------------------
