@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{# List? (For all/yearly archives) #}
+{# Months? (For all/yearly archives) #}
 {% if months is not empty %}
 {% if archive.prev is not empty %}
 <div role="navigation" class="prev traversal">
@@ -57,7 +57,9 @@
 
 {# Posts? (For daily/monthly archives) #}
 {% if posts.paginated is not empty %}
-<h3 role="status" class="filter">{{ title }}</h3>
+<h3 role="status" class="filter">
+{{ "Archive of %s" | translate | format(archive.timestamp | strftimeformat(archive.depth == "day" ? "%d %B %Y" : "%B %Y")) }}
+</h3>
 {% for post in posts.paginated %}
 {% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% endfor %}
