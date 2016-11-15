@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-12 20:57+0000\n"
+"POT-Creation-Date: 2016-11-15 19:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -404,11 +404,12 @@ msgstr ""
 
 #: themes/topaz/pages/archive.twig:45
 #: themes/topaz/pages/archive.twig:50
+#: themes/topaz/pages/archive.twig:61
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:68
+#: themes/topaz/pages/archive.twig:72
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
