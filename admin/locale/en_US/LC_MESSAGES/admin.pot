@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-15 19:45+0000\n"
+"POT-Creation-Date: 2016-11-16 20:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -1101,13 +1101,13 @@ msgstr ""
 msgid "[None]"
 msgstr ""
 
-#: admin/partials/page_fields.twig:68
+#: admin/partials/page_fields.twig:67
 #: admin/partials/post_fields.twig:134
 #: admin/partials/post_fields.twig:143
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:72
+#: admin/partials/page_fields.twig:71
 #: admin/partials/post_fields.twig:138
 #: admin/partials/post_fields.twig:147
 msgid "Save"

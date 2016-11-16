@@ -132,13 +132,13 @@ Called from:
 new_page_options
 ----------------
 Called from:
-	admin/partials/page_fields.twig on line 59
+	admin/partials/page_fields.twig on line 58
 
 
 edit_page_options
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 61
+	admin/partials/page_fields.twig on line 60
 Arguments:
 	page
 
@@ -652,7 +652,7 @@ related_posts
 Target:
 	$ids
 Called from:
-	includes/class/Theme.php on line 183
+	includes/class/Theme.php on line 182
 Arguments:
 	$post, $limit
 
@@ -662,7 +662,7 @@ stylesheets
 Target:
 	$stylesheets
 Called from:
-	includes/class/Theme.php on line 220
+	includes/class/Theme.php on line 219
 
 
 scripts
@@ -670,7 +670,7 @@ scripts
 Target:
 	$javascripts
 Called from:
-	includes/class/Theme.php on line 280
+	includes/class/Theme.php on line 279
 
 
 links
@@ -678,7 +678,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 329
+	includes/class/Theme.php on line 328
 
 
 visitor
