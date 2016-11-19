@@ -304,7 +304,7 @@
 
     /**
      * Function: datetime
-     * Formats datetime for MySQL queries.
+     * Formats datetime for SQL queries.
      *
      * Parameters:
      *     $when - A timestamp (optional).
