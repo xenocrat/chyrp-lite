@@ -320,6 +320,7 @@
                         if (substr($key, -4) == " not") { # Negation
                             $key = self::safecol(substr($key, 0, -4));
                             $param = str_replace(array("(", ")", "."), "_", $key);
+
                             if (is_array($val))
                                 $cond = $key." NOT IN ".self::build_list($val, $params);
                             elseif ($val === null)
