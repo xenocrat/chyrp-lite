@@ -148,7 +148,7 @@
                     call_user_func_array(array($this->controller, "display"), $this->controller->fallback);
             }
 
-            if ($this->success and !in_array($this->action, array("login", "register")))
+            if ($this->success and !in_array($this->action, $this->controller->permitted))
                 $_SESSION['redirect_to'] = self_url();
 
             $trigger->call("route_done", $this);
