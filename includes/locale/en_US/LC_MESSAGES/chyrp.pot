@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-16 20:35+0000\n"
+"POT-Creation-Date: 2016-11-20 16:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -356,15 +356,15 @@ msgstr ""
 msgid "&larr; First"
 msgstr ""
 
-#: includes/class/Query.php:201
+#: includes/class/Query.php:202
 msgid "Query String"
 msgstr ""
 
-#: includes/class/Query.php:203
+#: includes/class/Query.php:204
 msgid "Parameters"
 msgstr ""
 
-#: includes/class/Query.php:207
+#: includes/class/Query.php:208
 msgid "Database Error"
 msgstr ""
 
