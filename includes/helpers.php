@@ -804,7 +804,7 @@
 
         if (!empty($strings)) {
             $where[] = $plain;
-            $params[":query"] = "%".join(" ", $strings)."%";
+            $params[":query"] = "%".implode(" ", $strings)."%";
         }
 
         $search = array($where, $params);
