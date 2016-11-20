@@ -30,22 +30,84 @@
             return json_get($tags, true);
         }
 
+        private function sort_tags_asc($a, $b) {
+            return $this->mb_strcasecmp($a, $b);
+        }
+
+        private function sort_tags_desc($a, $b) {
+            return $this->mb_strcasecmp($b, $a);
+        }
+
+        private function sort_tags_name_asc($a, $b) {
+            return $this->mb_strcasecmp($a["name"], $b["name"]);
+        }
+
+        private function sort_tags_name_desc($a, $b) {
+            return $this->mb_strcasecmp($b["name"], $a["name"]);
+        }
+
+        private function sort_tags_popularity_asc($a, $b) {
+            return $a["popularity"] > $b["popularity"];
+        }
+
+        private function sort_tags_popularity_desc($a, $b) {
+            return $a["popularity"] < $b["popularity"];
+        }
+
+        private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8") {
+            $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
+            $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
+
+            if (!function_exists("mb_strtoupper"))
+                return substr_compare(strtoupper($str1), strtoupper($str2), 0);
+
+            return substr_compare(mb_strtoupper($str1, $encoding), mb_strtoupper($str2, $encoding), 0);
+        }
+
+        private function tags_name_match($name) {
+            # Serialized notation of key for SQL queries.
+            return "%\"".self::tags_encoded($name)."\":%";
+        }
+
+        private function tags_clean_match($clean) {
+            # Serialized notation of value for SQL queries.
+            return "%:\"".self::tags_encoded($clean)."\"%";
+        }
+
+        private function tags_encoded($text) {
+            # Recreate JSON encoding and do SQL double-escaping of backslashes for multibyte characters.
+            return SQL::current()->escape(trim(json_set((string) $text), "\""), false);
+        }
+
         private function prepare_tags($tags) {
-            $names = explode(",", $tags); # Split at the comma.
-            $names = array_map("strip_tags", $names); # Remove HTML.
-            $names = array_map("trim", $names); # Remove whitespace.
+            # Split at the comma.
+            $names = explode(",", $tags);
+
+            # Remove HTML.
+            $names = array_map("strip_tags", $names);
+
+            # Remove whitespace.
+            $names = array_map("trim", $names);
 
             # Prevent numbers from being type-juggled to numeric keys.
             foreach ($names as &$name)
                 $name = is_numeric($name) ? "'".$name."'" : $name ;
 
-            $names = array_unique($names); # Remove duplicates.
-            $names = array_diff($names, array("")); # Remove empties.
-            $clean = array_map(function($value) { return sanitize($value, true, true); }, $names);
-            $assoc = array_combine($names, $clean); # name => clean.
+            # Remove duplicates.
+            $names = array_unique($names);
 
-            # Remove values sanitized into nothingness.
+            # Remove empties.
+            $names = array_diff($names, array(""));
+
+            # Build an array containing a sanitized slug for each tag.
+            $clean = array_map(function($value) { return sanitize($value, true, true); }, $names);
+
+            # Build an associative array with tags as the keys and slugs as the values.
+            $assoc = array_combine($names, $clean);
+
+            # Remove any entries with slugs that have been sanitized into nothingness.
             $assoc = array_filter($assoc, function($value) { return preg_match('/[^\-]+/', $value); });
+
             return $assoc;
         }
 
@@ -176,7 +238,7 @@
             }
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(self::tags_safe($_GET['query']),
+            list($where, $params) = keywords(self::tags_encoded($_GET['query']),
                                              "post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
 
             if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
@@ -588,40 +650,6 @@
             $post->linked_tags = self::linked_tags($post->tags);
         }
 
-        private function sort_tags_asc($a, $b) {
-            return $this->mb_strcasecmp($a, $b);
-        }
-
-        private function sort_tags_desc($a, $b) {
-            return $this->mb_strcasecmp($b, $a);
-        }
-
-        private function sort_tags_name_asc($a, $b) {
-            return $this->mb_strcasecmp($a["name"], $b["name"]);
-        }
-
-        private function sort_tags_name_desc($a, $b) {
-            return $this->mb_strcasecmp($b["name"], $a["name"]);
-        }
-
-        private function sort_tags_popularity_asc($a, $b) {
-            return $a["popularity"] > $b["popularity"];
-        }
-
-        private function sort_tags_popularity_desc($a, $b) {
-            return $a["popularity"] < $b["popularity"];
-        }
-
-        private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8") {
-            $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
-            $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
-
-            if (!function_exists("mb_strtoupper"))
-                return substr_compare(strtoupper($str1), strtoupper($str2), 0);
-
-            return substr_compare(mb_strtoupper($str1, $encoding), mb_strtoupper($str2, $encoding), 0);
-        }
-
         public function list_tags($limit = 10, $order_by = "popularity", $order = "desc") {
             $sql = SQL::current();
 
@@ -663,24 +691,6 @@
             usort($list, array($this, "sort_tags_".$order_by."_".$order));
 
             return ($limit) ? array_slice($list, 0, $limit) : $list ;
-        }
-
-        private function tags_name_match($name) {
-            # Serialized notation of key
-            return "%\"".self::tags_safe($name)."\":%";
-        }
-
-        private function tags_clean_match($clean) {
-            # Serialized notation of value
-            return "%:\"".self::tags_safe($clean)."\"%";
-        }
-
-        private function tags_safe($text) {
-            # Match escaping of JSON encoded data
-            $text = trim(json_set($text), "\"");
-
-            # Return string escaped for SQL query
-            return SQL::current()->escape($text, false);
         }
 
         public function feed_item($post) {
