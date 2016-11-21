@@ -1,7 +1,7 @@
 <?php
     /**
      * File: Download
-     * Send an uploaded file to the visitor.
+     * Send an uploaded file to the visitor as a file attachment.
      */
 
     define('USE_OB', false);
