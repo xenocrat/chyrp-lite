@@ -75,7 +75,7 @@
         }
 
         private function tags_encoded($text) {
-            # Recreate JSON encoding and do SQL double-escaping of backslashes for multibyte characters.
+            # Recreate JSON encoding and do SQL double-escaping for the search term.
             return SQL::current()->escape(trim(json_set((string) $text), "\""), false);
         }
 
