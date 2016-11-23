@@ -40,29 +40,33 @@
         private function __construct() {
             $config = Config::current();
 
-            $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
-                            (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
+            try {
+                $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+                                (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
-            $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
+                $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-            foreach ((array) $config->enabled_modules as $module)
-                if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
-                    $chain[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
+                foreach ((array) $config->enabled_modules as $module)
+                    if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
+                        $chain[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
-            foreach ((array) $config->enabled_feathers as $feather)
-                if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
-                    $chain[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
+                foreach ((array) $config->enabled_feathers as $feather)
+                    if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
+                        $chain[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
-            $loader = new Twig_Loader_Chain($chain);
+                $loader = new Twig_Loader_Chain($chain);
 
-            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                              "strict_variables" => DEBUG,
-                                                              "charset" => "UTF-8",
-                                                              "cache" => $cache,
-                                                              "autoescape" => false));
-            $this->twig->addExtension(new Leaf());
-            $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
-            $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+                $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                                  "strict_variables" => DEBUG,
+                                                                  "charset" => "UTF-8",
+                                                                  "cache" => $cache,
+                                                                  "autoescape" => false));
+                $this->twig->addExtension(new Leaf());
+                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+            } catch (Twig_Error $e) {
+                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
+            }
 
             # Load the theme translator.
             load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale");
