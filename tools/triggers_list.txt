@@ -239,13 +239,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1062
+	includes/controller/Admin.php on line 1066
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1346
+	includes/controller/Admin.php on line 1350
 Arguments:
 	Group::add($name, $permissions)
 
@@ -253,7 +253,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1367
+	includes/controller/Admin.php on line 1371
 Arguments:
 	$user
 
@@ -261,7 +261,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1399
+	includes/controller/Admin.php on line 1403
 Arguments:
 	$entry, $post
 
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1426
+	includes/controller/Admin.php on line 1430
 Arguments:
 	$entry, $page
 
@@ -277,7 +277,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1430
+	includes/controller/Admin.php on line 1434
 Arguments:
 	$imports
 
@@ -285,7 +285,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1699
+	includes/controller/Admin.php on line 1703
 Arguments:
 	!empty($_POST['theme'])
 
@@ -293,13 +293,13 @@ Arguments:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 396
+	includes/controller/Main.php on line 400
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 484
+	includes/controller/Main.php on line 488
 Arguments:
 	$user
 
@@ -307,13 +307,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 566
+	includes/controller/Main.php on line 570
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 580
+	includes/controller/Main.php on line 584
 Arguments:
 	$user
 
@@ -321,7 +321,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 764
+	includes/controller/Main.php on line 768
 Arguments:
 	$post
 
@@ -694,7 +694,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 127
+	includes/controller/Admin.php on line 131
 
 
 post_export_url
@@ -702,7 +702,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1129
+	includes/controller/Admin.php on line 1133
 Arguments:
 	$post), true
 
@@ -712,7 +712,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1148
+	includes/controller/Admin.php on line 1152
 Arguments:
 	$post
 
@@ -722,7 +722,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1193
+	includes/controller/Admin.php on line 1197
 Arguments:
 	$page), true
 
@@ -732,7 +732,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1208
+	includes/controller/Admin.php on line 1212
 Arguments:
 	$page
 
@@ -742,7 +742,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1255
+	includes/controller/Admin.php on line 1259
 
 
 before_import
@@ -750,7 +750,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1317
+	includes/controller/Admin.php on line 1321
 
 
 write_nav
@@ -758,7 +758,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1981
+	includes/controller/Admin.php on line 1985
 
 
 manage_nav
@@ -766,7 +766,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2010
+	includes/controller/Admin.php on line 2014
 
 
 settings_nav
@@ -774,7 +774,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2035
+	includes/controller/Admin.php on line 2039
 
 
 extend_nav
@@ -782,7 +782,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2053
+	includes/controller/Admin.php on line 2057
 
 
 feed_url
@@ -790,7 +790,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 753
+	includes/controller/Main.php on line 757
 Arguments:
 	$post
 
