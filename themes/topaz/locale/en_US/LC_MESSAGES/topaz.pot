@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-01 20:13+0000\n"
+"POT-Creation-Date: 2016-11-20 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -60,7 +60,9 @@ msgid 'Permanent link to &#8220;%s&#8221;'
 msgstr ""
 
 #: themes/topaz/content/post.twig:17
-msgid "Private"
+#: themes/topaz/content/sidebar.twig:30
+#: themes/topaz/layouts/default.twig:99
+msgid "Draft"
 msgstr ""
 
 #: themes/topaz/content/post.twig:19
@@ -145,11 +147,6 @@ msgstr ""
 #: themes/topaz/content/sidebar.twig:26
 #: themes/topaz/layouts/default.twig:95
 msgid "Write"
-msgstr ""
-
-#: themes/topaz/content/sidebar.twig:30
-#: themes/topaz/layouts/default.twig:99
-msgid "Draft"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:35
@@ -366,6 +363,14 @@ msgstr ""
 msgid "(again)"
 msgstr ""
 
+#: themes/topaz/info.php:3
+msgid "Topaz"
+msgstr ""
+
+#: themes/topaz/info.php:6
+msgid "A minimalist responsive theme for Chyrp Lite."
+msgstr ""
+
 #: themes/topaz/javascripts/theme.js.php:14
 #: themes/topaz/javascripts/theme.js.php:22
 msgid "Menu"
@@ -399,11 +404,12 @@ msgstr ""
 
 #: themes/topaz/pages/archive.twig:45
 #: themes/topaz/pages/archive.twig:50
+#: themes/topaz/pages/archive.twig:61
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:68
+#: themes/topaz/pages/archive.twig:72
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

@@ -13,8 +13,8 @@
 {% endif %}
 <div role="note" class="metadata">
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title() | striptags | fix(true)) }}">
-{% if post.status == "private" %}
-{{ "Private" | translate }}
+{% if post.status == "draft" %}
+{{ "Draft" | translate }}
 {% elseif post.status == "scheduled" %}
 {{ "Scheduled" | translate }}
 {% elseif post.pinned %}

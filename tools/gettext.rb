@@ -8,6 +8,7 @@ OPTIONS = {
   :project => "Chyrp Lite",
   :maintainer => "xenocrat <hello@xenocrat.net>",
   :domain => nil,
+  :theme => false,
   :msgstr => "",
   :msgstr_filter => "",
   :exclude => [".git", "modules", "lib", "feathers", "themes", "admin"]
@@ -36,6 +37,10 @@ ARGV.options do |o|
        "Domain to scan for translations.") do |domain|
     OPTIONS[:domain] = domain
   end
+  o.on("--theme",
+       "Specifies whether the domain is a Twig theme.") do |theme|
+    OPTIONS[:theme] = true
+  end
   o.on("--msgstr=[val]", String,
        "Message string to translate all found translations to. Useful for debugging.") do |msgstr|
     OPTIONS[:mststr] = msgstr
@@ -60,8 +65,8 @@ class Gettext
     @start, @files, @translations = start, [], {}
 
     @domain = (OPTIONS[:domain].nil?) ? "" : ',\s*"'+OPTIONS[:domain]+'"'
-    @twig_domain = (OPTIONS[:domain].nil? or OPTIONS[:domain] == "theme") ? "" : '\("'+OPTIONS[:domain]+'"\)'
-    @twig_arg_domain = (OPTIONS[:domain].nil? or OPTIONS[:domain] == "theme") ? "" : ',\s*"'+OPTIONS[:domain]+'"'
+    @twig_domain = (OPTIONS[:domain].nil? or OPTIONS[:theme]) ? "" : '\("'+OPTIONS[:domain]+'"\)'
+    @twig_arg_domain = (OPTIONS[:domain].nil? or OPTIONS[:theme]) ? "" : ',\s*"'+OPTIONS[:domain]+'"'
 
     prepare_files
     do_scan

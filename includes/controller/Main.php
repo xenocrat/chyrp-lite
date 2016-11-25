@@ -37,6 +37,10 @@
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "feed", "display", "current");
 
+        # Array: $permitted
+        # Methods that are exempt from the "view_site" permission.
+        public $permitted = array("login", "logout", "register", "activate", "lost_password", "reset");
+
         /**
          * Function: __construct
          * Loads the Twig parser. Theme class sets up the l10n domain.
@@ -46,19 +50,23 @@
             $this->post_limit = Config::current()->posts_per_page;
 
             if (defined('THEME_DIR')) {
-                $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
-                          !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
+                try {
+                    $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+                                    !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
-                $loader = new Twig_Loader_Filesystem(THEME_DIR);
+                    $loader = new Twig_Loader_Filesystem(THEME_DIR);
 
-                $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                                  "strict_variables" => DEBUG,
-                                                                  "charset" => "UTF-8",
-                                                                  "cache" => $cache,
-                                                                  "autoescape" => false));
-                $this->twig->addExtension(new Leaf());
-                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
-                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+                    $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                                      "strict_variables" => DEBUG,
+                                                                      "charset" => "UTF-8",
+                                                                      "cache" => $cache,
+                                                                      "autoescape" => false));
+                    $this->twig->addExtension(new Leaf());
+                    $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+                    $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+                } catch (Twig_Error $e) {
+                    error(__("Twig Error"), $e->getMessage(), debug_backtrace());
+                }
             }
         }
 
@@ -362,13 +370,10 @@
                       __("The post cannot be displayed because the template for this feather was not found."), null, 501);
 
             if ($post->status == "draft")
-                Flash::message(__("This post is a draft."));
+                Flash::message(__("This post is not published."));
 
             if ($post->status == "scheduled")
                 Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
-
-            if ($post->groups() and !substr_count($post->status, "{".Visitor::current()->group->id."}"))
-                Flash::message(_f("This post is only visible to the following groups: %s.", $post->groups()));
 
             $this->display(array("pages".DIR."view", "pages".DIR."index"),
                            array("post" => $post,
@@ -381,15 +386,20 @@
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
         public function page($url = null, $hierarchy = array()) {
-            $page = (isset($url)) ? new Page(array("url" => $url)) : new Page(array("url" => fallback($_GET['url']))) ;
+            $page = (isset($url)) ?
+                new Page(array("url" => $url)) :
+                new Page(array("url" => fallback($_GET['url']))) ;
 
             if ($page->no_results)
                 return false;
 
+            $trigger = Trigger::current();
             $visitor = Visitor::current();
 
-            if (!$page->public and !$visitor->group->can("view_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to view this page."));
+            if (!$page->public and !$visitor->group->can("view_page") and $page->user_id != $visitor->id) {
+                $trigger->call("can_not_view_page");
+                show_403(__("Access Denied"), __("You are not allowed to view this page."));
+            }
 
             $this->display(array("pages".DIR.$page->url, "pages".DIR."page"), array("page" => $page), $page->title);
         }
@@ -628,7 +638,8 @@
                 fallback($_POST['website'], "");
 
                 if (!Flash::exists("warning")) {
-                    $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $visitor->password ;
+                    $password = (!empty($_POST['new_password1'])) ?
+                        User::hashPassword($_POST['new_password1']) : $visitor->password ;
 
                     $visitor->update($visitor->login,
                                      $password,
@@ -776,6 +787,9 @@
             $route = Route::current();
             $trigger = Trigger::current();
             $theme = Theme::current();
+
+            if (!isset($this->twig))
+                error(__("Twig Error"), __("Twig Environment is unavailable."), debug_backtrace());
 
             if (is_array($template))
                 foreach (array_values($template) as $index => $try)

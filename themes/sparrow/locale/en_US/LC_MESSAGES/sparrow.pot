@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-01 20:13+0000\n"
+"POT-Creation-Date: 2016-11-20 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -60,7 +60,8 @@ msgid 'Permanent link to &#8220;%s&#8221;'
 msgstr ""
 
 #: themes/sparrow/content/post.twig:22
-msgid "Private"
+#: themes/sparrow/layouts/default.twig:61
+msgid "Draft"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:24
@@ -276,6 +277,14 @@ msgstr ""
 msgid "(again)"
 msgstr ""
 
+#: themes/sparrow/info.php:3
+msgid "Sparrow"
+msgstr ""
+
+#: themes/sparrow/info.php:6
+msgid "An unobtrusive tumbleblog theme for Chyrp Lite."
+msgstr ""
+
 #: themes/sparrow/layouts/default.twig:44
 msgid "Feed"
 msgstr ""
@@ -290,10 +299,6 @@ msgstr ""
 
 #: themes/sparrow/layouts/default.twig:57
 msgid "Write"
-msgstr ""
-
-#: themes/sparrow/layouts/default.twig:61
-msgid "Draft"
 msgstr ""
 
 #: themes/sparrow/layouts/default.twig:69
@@ -352,7 +357,12 @@ msgstr ""
 msgid "Archive of %s &rarr;"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:68
+#: themes/sparrow/pages/archive.twig:61
+#, php-format
+msgid "Archive of %s"
+msgstr ""
+
+#: themes/sparrow/pages/archive.twig:70
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

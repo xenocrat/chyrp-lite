@@ -22,7 +22,7 @@
 
     $config = Config::current();
     $quality = (int) fallback($_GET["quality"], 80);
-    $filename = oneof(trim($_GET['file']), DIR);
+    $filename = str_replace(DIR, "", $_GET['file']);
     $filepath = uploaded($filename, false);;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
     $url = uploaded($filename);
@@ -39,9 +39,6 @@
     # GD version too low for our script.
     if (version_compare($gd_version[0], "2.0.28", "<"))
         redirect($url);
-
-    if (substr_count($filename, DIR))
-        error(__("Error"), __("Malformed URI."), null, 400);
 
     if (!is_readable($filepath) or !is_file($filepath))
         show_404(__("Not Found"), __("File not found."));

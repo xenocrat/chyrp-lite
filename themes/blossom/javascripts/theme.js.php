@@ -11,7 +11,7 @@ $(document).ready(function() {
             "id": "mobile_toggle_link",
             "href": "#",
             "role": "menuitem",
-            "aria-label": "<?php echo __("Menu", "theme"); ?>"
+            "aria-label": "<?php echo __("Menu", "blossom"); ?>"
         }).on("click", function(e) {
             e.preventDefault();
             if ( $(".mobile_nav").hasClass("on") ) {
@@ -19,7 +19,7 @@ $(document).ready(function() {
             } else {
                 $(".mobile_nav").addClass("on");
             }
-        }).text("<?php echo __("Menu", "theme"); ?>")).appendTo("ul.tail_nav").parent().addClass("mobile_nav");
+        }).text("<?php echo __("Menu", "blossom"); ?>")).appendTo("ul.tail_nav").parent().addClass("mobile_nav");
         $("body").addClass("mobile_nav");
 
         // Make the menu items keyboard accessible.

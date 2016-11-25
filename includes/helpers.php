@@ -132,7 +132,7 @@
      */
     function self_url() {
         $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
-                     "https://" : "http://" ;
+            "https://" : "http://" ;
 
         return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
     }
@@ -181,41 +181,28 @@
      *
      * Parameters:
      *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
-     *
-     * Notes:
-     *     Precedence is given to UTF-8 with a fallback to Windows 1252.
      */
     function set_locale($locale = "en_US") {
-        $posix = array($locale.".UTF-8",                  # E.g. "en_US.UTF-8"
-                       $locale.".utf-8",                  # E.g. "en_US.utf-8"
-                       $locale.".UTF8",                   # E.g. "en_US.UTF8"
-                       $locale.".utf8",                   # E.g. "en_US.utf8"
-                       $locale);                          # E.g. "en_US"
-        $win32 = array(str_replace("_", "-", $locale));   # E.g. "en-US"
-
-        if (class_exists("Locale")) {
-            $language = Locale::getDisplayLanguage($locale, "en_US");
-            $region = Locale::getDisplayRegion($locale, "en_US");
-            array_unshift($win32,
-                          $language."_".$region.".1252",  # E.g. "English_United States.1252"
-                          $language.".1252",              # E.g. "English.1252"
-                          $language);                     # E.g. "English"
-
-            # Set the ICU locale.
+        # Set the ICU locale.
+        if (class_exists("Locale"))
             Locale::setDefault($locale);
-        }
 
         # Set the PHP locale.
-        setlocale(LC_ALL, array_merge($posix, $win32));
+        @putenv("LC_ALL=".$locale);
+        setlocale(LC_ALL, array($locale.".UTF-8",
+                                $locale.".utf-8",
+                                $locale.".UTF8",
+                                $locale.".utf8",
+                                $locale));
     }
 
     /**
      * Function: load_translator
-     * Loads a translation file for a gettext domain.
+     * Sets the path for a gettext translation domain.
      *
      * Parameters:
-     *     $domain - The name for this translation domain.
-     *     $locale - The path to the locale directory containing the translation.
+     *     $domain - The name of this translation domain.
+     *     $locale - The path to the locale directory.
      */
     function load_translator($domain, $locale) {
         if (function_exists("bindtextdomain"))
@@ -241,7 +228,7 @@
 
     /**
      * Function: __
-     * Translates a string using PHP-gettext.
+     * Translates a string using gettext.
      *
      * Parameters:
      *     $text - The string to translate.
@@ -317,7 +304,7 @@
 
     /**
      * Function: datetime
-     * Formats datetime for MySQL queries.
+     * Formats datetime for SQL queries.
      *
      * Parameters:
      *     $when - A timestamp (optional).
@@ -695,11 +682,11 @@
         $items = array();
 
         foreach ($array as $item) {
-            $string = (is_string($item) and $quotes) ? __("&#8220;").$item.__("&#8221;") : $item ;
-            if (count($array) == ++$count and $count !== 1)
-                $items[] = __("and ").$string;
-            else
-                $items[] = $string;
+            $string = (is_string($item) and $quotes) ?
+                _f("&#8220;%s&#8221;", $item) : (string) $item ;
+
+            $items[] = (count($array) == ++$count and $count !== 1) ?
+                _f("and %s", $string) : $string ;
         }
 
         return (count($array) == 2) ? implode(" ", $items) : implode(", ", $items) ;
@@ -817,7 +804,7 @@
 
         if (!empty($strings)) {
             $where[] = $plain;
-            $params[":query"] = "%".join(" ", $strings)."%";
+            $params[":query"] = "%".implode(" ", $strings)."%";
         }
 
         $search = array($where, $params);

@@ -40,29 +40,33 @@
         private function __construct() {
             $config = Config::current();
 
-            $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
-                            (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
+            try {
+                $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+                                (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
-            $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
+                $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-            foreach ((array) $config->enabled_modules as $module)
-                if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
-                    $chain[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
+                foreach ((array) $config->enabled_modules as $module)
+                    if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
+                        $chain[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
-            foreach ((array) $config->enabled_feathers as $feather)
-                if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
-                    $chain[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
+                foreach ((array) $config->enabled_feathers as $feather)
+                    if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
+                        $chain[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
-            $loader = new Twig_Loader_Chain($chain);
+                $loader = new Twig_Loader_Chain($chain);
 
-            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                              "strict_variables" => DEBUG,
-                                                              "charset" => "UTF-8",
-                                                              "cache" => $cache,
-                                                              "autoescape" => false));
-            $this->twig->addExtension(new Leaf());
-            $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
-            $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+                $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                                  "strict_variables" => DEBUG,
+                                                                  "charset" => "UTF-8",
+                                                                  "cache" => $cache,
+                                                                  "autoescape" => false));
+                $this->twig->addExtension(new Leaf());
+                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+            } catch (Twig_Error $e) {
+                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
+            }
 
             # Load the theme translator.
             load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale");
@@ -182,7 +186,7 @@
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
-            redirect(oneof($post->redirect, "write_post"));
+            Flash::notice(__("Post created!"), oneof($post->url(), "write_post"));
         }
 
         /**
@@ -322,21 +326,21 @@
                 $posts = new Paginator(array());
 
             foreach ($posts->paginated as &$post) {
-                if (preg_match_all("/\{([0-9]+)\}/", $post->status, $matches)) {
-                    $groups = array();
-                    $groupClasses = array();
+                if ($ids = $post->groups()) {
+                    $group_names = array();
+                    $group_classes = array();
 
-                    foreach ($matches[1] as $id) {
+                    foreach ($ids as $id) {
                         $group = new Group($id);
 
                         if (!$group->no_results) {
-                            $groups[] = "<span class=\"group_prefix\">Group:</span> ".$group->name;
-                            $groupClasses[] = "group-".$group->id;
+                            $group_names[] = $group->name;
+                            $group_classes[] = "group-".$group->id;
                         }
                     }
 
-                    $post->status_name = join(", ", $groups);
-                    $post->status_class = join(" ", $groupClasses);
+                    $post->status_name = join(", ", $group_names);
+                    $post->status_class = join(" ", $group_classes);
                 } else {
                     $post->status_name = camelize($post->status, true);
                     $post->status_class = $post->status;
@@ -676,7 +680,8 @@
                 elseif (password_strength($_POST['new_password1']) < 100)
                     Flash::message(__("Please consider setting a stronger password for this user."));
 
-            $password = (!empty($_POST['new_password1'])) ? User::hashPassword($_POST['new_password1']) : $user->password ;
+            $password = (!empty($_POST['new_password1'])) ?
+                User::hashPassword($_POST['new_password1']) : $user->password ;
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."), null, 422);
@@ -1394,7 +1399,8 @@
                                       ($entry->updated == $entry->published) ? null : datetime($entry->updated),
                                       false);
 
-                    $trigger->call("import_chyrp_post", $entry, $post);
+                    if (!$post->no_results)
+                        $trigger->call("import_chyrp_post", $entry, $post);
                 }
             }
 
@@ -1678,7 +1684,7 @@
                 self::preview_theme();
 
             $config = Config::current();
-            $theme = $_POST['theme'];
+            $theme = str_replace(array(".", DIR), "", $_POST['theme']);
             $config->set("theme", $theme);
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale");
@@ -1707,7 +1713,7 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            $_SESSION['theme'] = $_POST['theme'];
+            $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
             Flash::notice(__("Preview started."), "/");
         }
 
@@ -1937,10 +1943,7 @@
             if (empty($_GET['id']))
                 error(__("Error"), __("Missing argument."), null, 400);
 
-            $template = oneof(trim($_GET['id']), DIR);
-
-            if (substr_count($template, DIR))
-                error(__("Error"), __("Malformed URI."), null, 400);
+            $template = str_replace(DIR, "", $_GET['id']);
 
             return $this->display("help".DIR.$template, array(), __("Help"));
         }

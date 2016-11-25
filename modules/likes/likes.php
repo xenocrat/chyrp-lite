@@ -266,8 +266,6 @@
                 return;
 
             foreach ($chyrp->like as $like) {
-                $sql = SQL::current();
-
                 $timestamp = $like->children("http://www.w3.org/2005/Atom")->published;
                 $session_hash = $like->children("http://chyrp.net/export/1.0/")->hash;
                 $login = $like->children("http://chyrp.net/export/1.0/")->login;
@@ -277,7 +275,7 @@
                 Like::import($post->id,
                              ((!$user->no_results) ? $user->id : 0),
                              oneof($timestamp, datetime()),
-                             $session_hash);
+                             oneof($session_hash, md5("missing hash")));
             }
         }
 

@@ -38,9 +38,6 @@
     if (version_compare(PHP_VERSION, "5.3.2", "<"))
         exit("Chyrp Lite requires PHP 5.3.2 or greater. Installation cannot continue.");
 
-    # Make sure E_STRICT is on so Chyrp remains errorless.
-    error_reporting(E_ALL | E_STRICT);
-
     ob_start();
 
     # File: Error

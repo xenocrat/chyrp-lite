@@ -115,8 +115,10 @@
      * Function: twig_filter_translate
      * Returns a translated string.
      */
-    function twig_filter_translate($string, $domain = "theme") {
-        $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
+    function twig_filter_translate($string, $domain = null) {
+        if (!isset($domain))
+            $domain = (ADMIN) ? "admin" : Config::current()->theme ;
+
         return __($string, $domain);
     }
 
@@ -124,8 +126,10 @@
      * Function: twig_filter_translate_plural
      * Returns a plural (or not) form of a translated string.
      */
-    function twig_filter_translate_plural($single, $plural, $number, $domain = "theme") {
-        $domain = ($domain == "theme" and ADMIN) ? "admin" : $domain ;
+    function twig_filter_translate_plural($single, $plural, $number, $domain = null) {
+        if (!isset($domain))
+            $domain = (ADMIN) ? "admin" : Config::current()->theme ;
+
         return _p($single, $plural, $number, $domain);
     }
 

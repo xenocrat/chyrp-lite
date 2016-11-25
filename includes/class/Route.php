@@ -36,6 +36,7 @@
                 trigger_error(__("Route was initiated with an invalid Controller."), E_USER_WARNING);
 
             fallback($controller->protected, array("__construct", "__destruct", "parse", "display"));
+            fallback($controller->permitted, array("login", "logout"));
 
             $this->controller = $controller;
 
@@ -93,6 +94,13 @@
          */
         public function init() {
             $trigger = Trigger::current();
+            $visitor = Visitor::current();
+
+            # Can the visitor view the site, or is this action exempt from the "view_site" permission?
+            if (!$visitor->group->can("view_site") and !in_array($this->action, $this->controller->permitted)) {
+                $trigger->call("can_not_view_site");
+                show_403(__("Access Denied"), __("You are not allowed to view this site."));
+            }
 
             $trigger->call("route_init", $this);
 
@@ -140,7 +148,7 @@
                     call_user_func_array(array($this->controller, "display"), $this->controller->fallback);
             }
 
-            if ($this->success and !in_array($this->action, array("login", "register")))
+            if ($this->success and !in_array($this->action, $this->controller->permitted))
                 $_SESSION['redirect_to'] = self_url();
 
             $trigger->call("route_done", $this);

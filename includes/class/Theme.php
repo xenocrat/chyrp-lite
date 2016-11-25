@@ -20,7 +20,7 @@
             $config = Config::current();
 
             # Load the theme translator.
-            load_translator("theme", THEME_DIR.DIR."locale");
+            load_translator($config->theme, THEME_DIR.DIR."locale");
 
             # Load the theme's info into the Theme class.
             foreach (load_info(THEME_DIR.DIR."info.php") as $key => $val)
@@ -31,7 +31,7 @@
 
         /**
          * Function: pages_list
-         * Returns a simple array of list items to be used by the theme to generate a recursive array of pages.
+         * Returns a simple array of pages with @depth@ and @children@ attributes.
          *
          * Parameters:
          *     $start - Page ID or slug to start at.
@@ -81,7 +81,7 @@
          *     $page - Page to start recursion at.
          */
         private function recurse_pages($page) {
-            $page->depth = oneof(@$page->depth, 1);
+            $page->depth    = (isset($page->depth)) ? $page->depth : 1 ;
             $page->children = (isset($this->caches["pages"]["children"][$page->id])) ? true : false ;
 
             $this->caches["pages"]["flat"][] = $page;
@@ -109,18 +109,17 @@
             if (isset($this->caches["archives_list"]["$limit,$order_by,$order"]))
                 return $this->caches["archives_list"]["$limit,$order_by,$order"];
 
-            $sql = SQL::current();
-            $dates = $sql->select("posts",
-                                  array("DISTINCT YEAR(created_at) AS year",
-                                        "MONTH(created_at) AS month",
-                                        "created_at AS created_at",
-                                        "COUNT(id) AS posts"),
-                                  array("status" => "public", Post::feathers()),
-                                  $order_by." ".strtoupper($order),
-                                  array(),
-                                  ($limit == 0) ? null : $limit,
-                                  null,
-                                  array("created_at"));
+            $dates = SQL::current()->select("posts",
+                                            array("DISTINCT YEAR(created_at) AS year",
+                                                  "MONTH(created_at) AS month",
+                                                  "created_at AS created_at",
+                                                  "COUNT(id) AS posts"),
+                                            array("status" => "public", Post::feathers()),
+                                            $order_by." ".strtoupper($order),
+                                            array(),
+                                            ($limit == 0) ? null : $limit,
+                                            null,
+                                            array("created_at"));
 
             $archives = array();
             $grouped = array();

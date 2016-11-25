@@ -1,27 +1,28 @@
 ## What can Chyrp Lite do for me?
 
-With Chyrp Lite you can run your own blog on your own web server with minimal fuss.
-Chyrp Lite provides three beautiful blog themes and a friendly administration environment,
-all fully navigable on desktop computers and mobile devices, thanks to the power of
-responsive HTML5. Semantic markup and comprehensive ARIA labelling ensure your blog will
-be accessible to visitors who use assistive technologies.
+Chyrp Lite makes it possible to host a blog on your own web server with minimal fuss. You can have
+a traditional blog, a tumbleblog, or you can add oodles of customisation and build a web publishing
+platform with blogging features on the side.
 
-With Chyrp Lite's system of Feathers and Pages you can make your blog whatever you want
-it to be: you can have a traditional blog, a tumbleblog, or add oodles of customisation
-and build a web publishing platform with blogging features on the side.
+With a flexible system of Feathers and Pages, you can make your website whatever you want it to be.
+Feathers enable different types of blog content – you can restrict yourself to absolute textual purity,
+or you can create a multimedia rainbow. Pages let you publish articles separate from your blog content
+– be it a simple colophon or a hierarchy of multiple pages, optionally including a homepage that your
+visitors will see when they first arrive at your website.
 
-Feathers support different types of content in your blog posts: you can restrict yourself
-to absolute textual purity, or you can turn on everything and blog a multimedia rainbow.
-Pages allow you to publish articles on your site that are independent of your blog content.
+You get three beautiful blog themes and a friendly administration console, all fully navigable on
+a broad range of devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive
+ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
 
 ## What are the key features?
 
 #### Core:
-* Responsive and accessible, W3C validated HTML5 for all themes.
-* Universal support for plain text, Markdown, or raw HTML.
+* Easy to install, simple to maintain, extensible by design.
+* Built with responsive and accessible W3C-validated HTML5.
+* Universal support for plain text, Markdown, or raw markup.
 * Personalise your blog using powerful extensions.
 * Theme development is easy with the Twig template engine.
-* Comprehensive rights model for managing your users and visitors.
+* Manage users and visitors with a comprehensive rights model.
 
 #### Feathers:
 * Text: write textual blog entries.
@@ -68,7 +69,7 @@ You can install Chyrp Lite in three steps:
 
 ## Upgrading
 
-Chyrp Lite will tell you when a new version is available. You can update in six steps:
+You can upgrade Chyrp Lite in six steps:
 
 1. __Backup your database before proceeding!__
 2. Download the latest version of Chyrp Lite.

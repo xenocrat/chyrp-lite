@@ -1,7 +1,7 @@
 <form id="comment_edit_{{ comment.id }}" class="comment_edit" action="{{ url('update_comment') }}" method="post" accept-charset="UTF-8">
 <label for="comment_body_{{ comment.id }}">{{ "Comment" | translate }}</label>
 <textarea name="body" id="comment_body_{{ comment.id }}">{{ comment.body }}</textarea>
-<a id="more_options_link_{{ comment.id }}" href="#" class="more_options_link">{{ "More Options &darr;" | translate("chyrp") }}</a>
+<a id="more_options_link_{{ comment.id }}" href="#" class="more_options_link">{{ "More Options &darr;" | translate("comments") }}</a>
 <div id="more_options_{{ comment.id }}" class="more_options" style="display: none">
 <label for="comment_author_{{ comment.id }}">{{ "Author" | translate }}</label>
 <input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="comment_author_{{ comment.id }}">

@@ -11,7 +11,6 @@
 
         # Array: $url_attrs
         # The translation array of the post URL setting to regular expressions.
-        # Passed through the route_code filter.
         static $url_attrs = array('(year)'     => '([0-9]{4})',
                                   '(month)'    => '([0-9]{1,2})',
                                   '(day)'      => '([0-9]{1,2})',
@@ -45,6 +44,7 @@
                 if (is_int($key) and substr_count($val, "status") or $key == "status")
                     $has_status = true;
 
+            # Construct SQL query "chunks" for enabled feathers and user privileges.
             if (!XML_RPC) {
                 $options["where"][] = self::feathers();
 
@@ -228,15 +228,16 @@
 
             $post = new self($id, array("drafts" => true));
 
-            # Send pingbacks.
-            if (Config::current()->send_pingbacks and $pingbacks)
-                foreach ($values as $key => $value)
-                    send_pingbacks($value, $post);
+            if (!$post->no_results) {
+                # Attempt to send pingbacks to URLs discovered in post attribute values.
+                if (Config::current()->send_pingbacks and $pingbacks)
+                    foreach ($values as $key => $value)
+                        send_pingbacks($value, $post);
 
-            $post->redirect = $post->url();
+                $trigger->call("add_post", $post, $options);
+            }
 
-            $trigger->call("add_post", $post, $options);
-
+            # Warning: the new post can be unfound due to insufficient privileges or disabled Feathers.
             return $post;
         }
 
@@ -783,24 +784,15 @@
 
         /**
          * Function: groups
-         * Lists the groups who can view the post if the post's status is specific to certain groups.
+         * Returns the IDs of any groups given viewing permission in the post's status.
          */
         public function groups() {
             if ($this->no_results)
                 return false;
 
             preg_match_all("/\{([0-9]+)\}/", $this->status, $groups, PREG_PATTERN_ORDER);
-            if (empty($groups[1]))
-                return false;
 
-            $names = array();
-
-            foreach ($groups[1] as $group_id) {
-                $group = new Group($group_id);
-                $names[] = $group->name;
-            }
-
-            return list_notate($names);
+            return empty($groups[1]) ? false : $groups[1] ;
         }
 
         /**
