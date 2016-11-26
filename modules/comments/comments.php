@@ -802,19 +802,19 @@
 
                 $user = new User(array("login" => (string) $login));
 
-                Comment::add(unfix($comment->content),
-                             unfix($comment->author->name),
-                             unfix($comment->author->uri),
-                             unfix($comment->author->email),
-                             $chyrp->author->ip,
-                             unfix($chyrp->author->agent),
-                             $chyrp->status,
+                Comment::add(unfix((string) $comment->content),
+                             unfix((string) $comment->author->name),
+                             unfix((string) $comment->author->uri),
+                             unfix((string) $comment->author->email),
+                             (string) $chyrp->author->ip,
+                             unfix((string) $chyrp->author->agent),
+                             (string) $chyrp->status,
                              $post->id,
                              (!$user->no_results) ? $user->id : 0,
                              0,
                              0,
-                             datetime($comment->published),
-                             ($comment->published == $comment->updated) ? null : datetime($comment->updated));
+                             datetime((string) $comment->published),
+                             ($comment->published == $comment->updated) ? null : datetime((string) $comment->updated));
             }
         }
 
