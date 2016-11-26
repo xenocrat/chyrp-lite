@@ -274,8 +274,8 @@
 
                 Like::import($post->id,
                              ((!$user->no_results) ? $user->id : 0),
-                             oneof($timestamp, datetime()),
-                             oneof($session_hash, md5("missing hash")));
+                             (string) oneof($timestamp, datetime()),
+                             (string) oneof($session_hash, md5("missing hash")));
             }
         }
 
