@@ -1389,14 +1389,14 @@
                         array_walk_recursive($data, "media_url_scan");
 
                     $post = Post::add($data,
-                                      $chyrp->clean,
-                                      Post::check_url($chyrp->url),
-                                      $chyrp->feather,
+                                      (string) $chyrp->clean,
+                                      Post::check_url((string) $chyrp->url),
+                                      (string) $chyrp->feather,
                                       (!$user->no_results) ? $user->id : $visitor->id,
                                       (bool) (int) $chyrp->pinned,
-                                      $chyrp->status,
-                                      datetime($entry->published),
-                                      ($entry->updated == $entry->published) ? null : datetime($entry->updated),
+                                      (string) $chyrp->status,
+                                      datetime((string) $entry->published),
+                                      ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated),
                                       false);
 
                     if (!$post->no_results)
@@ -1415,17 +1415,17 @@
 
                     $user = new User(array("login" => (string) $login));
 
-                    $page = Page::add($entry->title,
-                                      $entry->content,
+                    $page = Page::add((string) $entry->title,
+                                      (string) $entry->content,
                                       (!$user->no_results) ? $user->id : $visitor->id,
-                                      $attr->parent_id,
+                                      (int) $attr->parent_id,
                                       (bool) (int) $chyrp->public,
                                       (bool) (int) $chyrp->show_in_list,
-                                      $chyrp->list_order,
-                                      $chyrp->clean,
-                                      Page::check_url($chyrp->url),
-                                      datetime($entry->published),
-                                      ($entry->updated == $entry->published) ? null : datetime($entry->updated));
+                                      (int) $chyrp->list_order,
+                                      (string) $chyrp->clean,
+                                      Page::check_url((string) $chyrp->url),
+                                      datetime((string) $entry->published),
+                                      ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated));
 
                     $trigger->call("import_chyrp_page", $entry, $page);
                 }
