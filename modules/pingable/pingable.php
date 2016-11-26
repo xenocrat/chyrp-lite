@@ -144,7 +144,10 @@
                 $source = $pingback->children("http://www.w3.org/2005/Atom")->link["href"];
                 $created_at = $pingback->children("http://www.w3.org/2005/Atom")->published;
 
-                Pingback::add($post->id, $source, $title, datetime($created_at));
+                Pingback::add($post->id,
+                              (string) $source,
+                              (string) $title,
+                              datetime((string) $created_at));
             }
         }
 
