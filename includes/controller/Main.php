@@ -168,7 +168,8 @@
 
                     foreach ($params as $param) {
                         $split = explode("=", $param);
-                        $_GET[$split[0]] = oneof(@$split[1], "");
+                        fallback($split[1], "");
+                        $_GET[$split[0]] = urldecode($split[1]);
                     }
 
                     $route->action = $action;
