@@ -152,9 +152,9 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Next &rarr;"));
-            return '<a  rel="next" class="'.$class.'" id="pagination_next_'.$this->name.'" href="'.$this->next_page_url($page).$anchor.'">'.
-                     $text.
-                 '</a>';
+            return '<a rel="next" class="'.$class.'" id="pagination_next_'.$this->name.'" href="'.$this->next_page_url($page).$anchor.'">'.
+                    $text.
+                    '</a>';
         }
 
         /**
@@ -176,8 +176,8 @@
 
             fallback($text, __("&larr; Previous"));
             return '<a rel="prev" class="'.$class.'" id="pagination_prev_'.$this->name.'" href="'.$this->prev_page_url($page).$anchor.'">'.
-                     $text.
-                 '</a>';
+                    $text.
+                    '</a>';
         }
 
         /**
@@ -197,9 +197,9 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Final &rarr;"));
-            return '<a  rel="next" class="'.$class.'" id="pagination_final_'.$this->name.'" href="'.$this->next_page_url($this->pages).$anchor.'">'.
-                     $text.
-                 '</a>';
+            return '<a rel="next" class="'.$class.'" id="pagination_final_'.$this->name.'" href="'.$this->next_page_url($this->pages).$anchor.'">'.
+                    $text.
+                    '</a>';
         }
 
         /**
@@ -220,8 +220,8 @@
 
             fallback($text, __("&larr; First"));
             return '<a rel="prev" class="'.$class.'" id="pagination_first_'.$this->name.'" href="'.$this->prev_page_url(1).$anchor.'">'.
-                     $text.
-                 '</a>';
+                    $text.
+                    '</a>';
         }
 
         /**
@@ -235,7 +235,7 @@
             $config = Config::current();
             $request = self_url();
 
-            # Only used for adding to the end of the URL and clean URLs is off.
+            # Determine how we should append the page to dirty URLs.
             $mark = (substr_count($request, "?")) ? "&amp;" : "?" ;
 
             fallback($page, $this->page + 1);
@@ -262,7 +262,7 @@
             $config = Config::current();
             $request = self_url();
 
-            # Only used for adding to the end of the URL and clean URLs is off.
+            # Determine how we should append the page to dirty URLs.
             $mark = (substr_count($request, "?")) ? "&amp;" : "?" ;
 
             fallback($page, $this->page - 1);

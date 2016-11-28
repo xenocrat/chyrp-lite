@@ -115,6 +115,7 @@
                 if ((is_int($key) and substr_count($val, "status")) or $key === "status")
                     $has_status = true;
 
+            # Construct SQL query "chunks" for enabled feathers and user privileges.
             if (!XML_RPC) {
                 $options["where"][] = self::feathers();
 
