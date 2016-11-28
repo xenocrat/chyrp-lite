@@ -49,24 +49,22 @@
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            if (defined('THEME_DIR')) {
-                try {
-                    $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
-                                    !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
+            try {
+                $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+                                !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
-                    $loader = new Twig_Loader_Filesystem(THEME_DIR);
+                $loader = new Twig_Loader_Filesystem(THEME_DIR);
 
-                    $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                                      "strict_variables" => DEBUG,
-                                                                      "charset" => "UTF-8",
-                                                                      "cache" => $cache,
-                                                                      "autoescape" => false));
-                    $this->twig->addExtension(new Leaf());
-                    $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
-                    $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
-                } catch (Twig_Error $e) {
-                    error(__("Twig Error"), $e->getMessage(), debug_backtrace());
-                }
+                $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                                  "strict_variables" => DEBUG,
+                                                                  "charset" => "UTF-8",
+                                                                  "cache" => $cache,
+                                                                  "autoescape" => false));
+                $this->twig->addExtension(new Leaf());
+                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+            } catch (Twig_Error $e) {
+                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
             }
         }
 
@@ -788,9 +786,6 @@
             $route = Route::current();
             $trigger = Trigger::current();
             $theme = Theme::current();
-
-            if (!isset($this->twig))
-                error(__("Twig Error"), __("Twig Environment is unavailable."), debug_backtrace());
 
             if (is_array($template))
                 foreach (array_values($template) as $index => $try)
