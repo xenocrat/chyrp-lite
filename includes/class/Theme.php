@@ -308,20 +308,25 @@
             # Compute the URL of the per-page feed (if any):
             $config = Config::current();
             $route = Route::current();
-            $request = ($config->clean_urls) ? rtrim($route->request, "/") : fix($route->request) ;
-            $append = $config->clean_urls ?
-                          "/feed/" :
-                          ((count($_GET) == 1 and $route->action == "index") ?
-                               "/?feed" :
-                               "&amp;feed") ;
 
-            # Create basic list of links (site and page Atom feeds):
+            $request = ($config->clean_urls) ? rtrim($route->request, "/") : fix($route->request) ;
+
+            $append = $config->clean_urls ?
+                "/feed/" : ((count($_GET) == 1 and $route->action == "index") ? "/?feed" : "&amp;feed") ;
+
+            # Generate site and page Atom feeds.
             $mainfeedurl = oneof($config->feed_url, url("feed"));
             $pagefeedurl = $config->url.$request.$append;
-            $links = array(array("href" => $mainfeedurl, "type" => "application/atom+xml", "title" => $config->name));
 
-            if (array_key_exists("posts", MainController::current()->context) and ($pagefeedurl != $mainfeedurl))
-                $links[] = array("href" => $pagefeedurl, "type" => "application/atom+xml");
+            # Add the site feed.
+            $links = array(array("href" => $mainfeedurl,
+                                 "type" => "application/atom+xml",
+                                 "title" => $config->name));
+
+            # Add the page feed if it's different from the site feed and there are posts in MainController's context.
+            if (($pagefeedurl != $mainfeedurl) and array_key_exists("posts", MainController::current()->context))
+                $links[] = array("href" => $pagefeedurl,
+                                 "type" => "application/atom+xml");
 
             # Ask modules to pitch in by adding their own <link> tag items to $links.
             # Each item must be an array with "href" and "rel" properties (and optionally "title" and "type"):
@@ -335,13 +340,13 @@
                 $href = $link["href"];
                 $type = fallback($link["type"], false);
                 $title = fallback($link["title"], false);
-                $tag = '<link rel="'.$rel.'" href="'.$link["href"].'"';
+                $tag = '<link rel="'.fix($rel, true).'" href="'.fix($link["href"], true).'"';
 
                 if ($type)
-                    $tag.= ' type="'.$type.'"';
+                    $tag.= ' type="'.fix($type, true).'"';
 
                 if ($title)
-                    $tag.= ' title="'.$title.'"';
+                    $tag.= ' title="'.fix($title, true).'"';
 
                 $tags[] = $tag.'>';
             }
