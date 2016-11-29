@@ -392,6 +392,10 @@
             if ($page->no_results)
                 return false;
 
+            # Don't fool ourselves into thinking a feed was requested because of a "feed" page URL.
+            if (!isset($_GET['feed']) and end($hierarchy) == "feed")
+                $this->feed = false;
+
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
@@ -706,12 +710,13 @@
 
         /**
          * Function: feed
-         * Grabs posts for the feed.
+         * Grabs posts and serves a feed.
          */
-        private function feed($posts = null) {
+        private function feed($posts = null, $subtitle = "") {
             $config = Config::current();
             $trigger = Trigger::current();
 
+            # Fetch posts for fallback or if we are being called as a responder.
             $result = SQL::current()->select("posts",
                                              "posts.id",
                                              array("posts.status" => "public"),
@@ -740,7 +745,7 @@
             $atom = new AtomFeed();
 
             $atom->open($config->name,
-                        $config->description,
+                        oneof($subtitle, $config->description),
                         null,
                         $latest_timestamp);
 
@@ -797,10 +802,10 @@
             # Serve feeds if a feed request was detected for this action.
             if ($this->feed) {
                 if ($trigger->exists($route->action."_feed"))
-                    return $trigger->call($route->action."_feed", $context);
+                    return $trigger->call($route->action."_feed", $context, $title);
 
                 if (isset($context["posts"]))
-                    return $this->feed($context["posts"]);
+                    return $this->feed($context["posts"], $title);
             }
 
             $this->context                       = array_merge($context, $this->context);
