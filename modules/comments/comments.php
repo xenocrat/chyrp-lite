@@ -654,7 +654,7 @@
             $post = $context["post"];
             $comments = $post->comments;
             $latest_timestamp = 0;
-            $title = _f("Comments on &#8220;%s&#8221;", fix(oneof($post->title(), ucfirst($post->feather))), "comments");
+            $subtitle = _f("Comments on &#8220;%s&#8221;", fix(oneof($post->title(), (string) $post->id)), "comments");
 
             foreach ($comments as $comment)
                 if (strtotime($comment->created_at) > $latest_timestamp)
@@ -662,8 +662,8 @@
 
             $atom = new AtomFeed();
 
-            $atom->open($title,
-                        null,
+            $atom->open($config->name,
+                        $subtitle,
                         null,
                         $latest_timestamp);
 
