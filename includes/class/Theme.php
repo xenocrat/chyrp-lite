@@ -294,14 +294,11 @@
             $config = Config::current();
             $route = Route::current();
 
-            $request = ($config->clean_urls) ? rtrim($route->request, "/") : $route->request ;
-
-            $feed = $config->clean_urls ?
-                "/feed/" : (substr_count($request, "?")) ? "&feed" : "?feed" ;
-
             # Generate site and page Atom feeds.
             $mainfeedurl = oneof($config->feed_url, url("feed"));
-            $pagefeedurl = $config->url.$request.$feed;
+            $pagefeedurl = ($config->clean_urls) ?
+                $config->url.rtrim($route->request, "/")."/feed/" :
+                $config->url.$route->request.(substr_count($route->request, "?") ? "&feed" : "?feed") ;
 
             # Add the site feed.
             $links = array(array("href" => $mainfeedurl,
