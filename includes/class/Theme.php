@@ -210,113 +210,98 @@
 
         /**
          * Function: stylesheets
-         * Outputs the default stylesheet links.
+         * Outputs the stylesheet tags.
          */
         public function stylesheets() {
             $config = Config::current();
 
             $stylesheets = array();
+
+            # Ask extensions to provide additional stylesheets.
             Trigger::current()->filter($stylesheets, "stylesheets");
 
-            $elements = "<!-- Styles -->";
-            if (!empty($stylesheets))
-                foreach ($stylesheets as $stylesheet)
-                    $elements.= "\n".'<link rel="stylesheet" href="'.$stylesheet.'" type="text/css" media="all" charset="UTF-8">';
+            # Generate <link> tags:
+            $tags = array();
 
-            if (!file_exists(THEME_DIR.DIR."stylesheets".DIR) and !file_exists(THEME_DIR.DIR."css".DIR))
-                return $elements;
+            foreach ($stylesheets as $stylesheet)
+                $tags[] = '<link rel="stylesheet" href="'.fix($stylesheet, true).'" type="text/css" media="all" charset="UTF-8">';
 
-            foreach(array_merge((array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
-                                (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css.php"),
-                                (array) glob(THEME_DIR.DIR."css".DIR."*.css"),
-                                (array) glob(THEME_DIR.DIR."css".DIR."*.css.php")) as $file) {
+            if (is_dir(THEME_DIR.DIR."stylesheets") or is_dir(THEME_DIR.DIR."css")) {
+                foreach(array_merge((array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
+                                    (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css.php"),
+                                    (array) glob(THEME_DIR.DIR."css".DIR."*.css"),
+                                    (array) glob(THEME_DIR.DIR."css".DIR."*.css.php")) as $filepath) {
 
-                $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file);
-                $file = basename($file);
+                    $filename = basename($filepath);
 
-                if (!$file or substr_count($file, ".inc.css"))
-                    continue;
+                    if (empty($filename) or substr_count($filename, ".inc.css"))
+                        continue;
 
-                $name = substr($file, 0, strpos($file, "."));
-                switch ($name) {
-                    case "print":
-                        $media = "print";
-                        break;
-                    case "screen":
-                        $media = "screen";
-                        break;
-                    case "speech":
-                        $media = "speech";
-                        break;
-                    default:
-                        $media = "all";
-                        break;
+                    $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "$2", $filepath);
+                    $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
+                    $tags[] = '<link rel="stylesheet" href="'.fix($href, true).'" type="text/css" media="all">';
                 }
-
-                $elements.= "\n".'<link rel="stylesheet" href="'.$config->chyrp_url.$path.'" type="text/css" media="'.$media.'">';
             }
 
-            return $elements;
+            return !empty($tags) ? "<!-- StyleSheets -->\n".implode("\n", $tags) : "" ;
         }
 
         /**
          * Function: javascripts
-         * Outputs the default JavaScript script references.
+         * Outputs the JavaScript tags.
          */
         public function javascripts() {
             $config = Config::current();
             $route = Route::current();
 
-            $args = "";
+            $scripts = array($config->chyrp_url."/includes/common.js",
+                             $config->chyrp_url.'/includes/javascript.php?action='.$route->action);
 
-            foreach ($_GET as $key => $val)
-                if (!empty($val) and $val != $route->action)
-                    $args.= "&amp;".$key."=".urlencode($val);
+            # Ask extensions to provide additional scripts.
+            Trigger::current()->filter($scripts, "scripts");
 
-            $javascripts = array($config->chyrp_url."/includes/common.js",
-                                 $config->chyrp_url.'/includes/javascript.php?action='.$route->action.$args);
+            # Generate <script> tags:
+            $tags = array();
 
-            Trigger::current()->filter($javascripts, "scripts");
+            foreach ($scripts as $script)
+                $tags[] = '<script src="'.fix($script, true).'" type="text/javascript" charset="UTF-8"></script>';
 
-            $elements = "<!-- JavaScripts -->";
-
-            foreach ($javascripts as $javascript)
-                $elements.= "\n".'<script src="'.$javascript.'" type="text/javascript" charset="UTF-8"></script>';
-
-            if (file_exists(THEME_DIR.DIR."javascripts".DIR) or file_exists(THEME_DIR.DIR."js".DIR)) {
+            if (is_dir(THEME_DIR.DIR."javascripts") or is_dir(THEME_DIR.DIR."js")) {
                 foreach(array_merge((array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
                                     (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js.php"),
                                     (array) glob(THEME_DIR.DIR."js".DIR."*.js"),
-                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js.php")) as $file) {
+                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js.php")) as $filepath) {
 
-                    if (substr_count($file, ".inc.js"))
+                    $filename = basename($filepath);
+
+                    if (empty($filename) or substr_count($filename, ".inc.js"))
                         continue;
 
-                    $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "/themes/\\2", $file);
-                    $elements.= "\n".'<script src="'.$config->chyrp_url.$path.'" type="text/javascript" charset="UTF-8"></script>';
+                    $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "$2", $filepath);
+                    $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
+                    $tags[] = '<script src="'.fix($href, true).'" type="text/javascript" charset="UTF-8"></script>';
                 }
             }
 
-            return $elements;
+            return !empty($tags) ? "<!-- JavaScripts -->\n".implode("\n", $tags) : "" ;
         }
 
         /**
          * Function: feeds
-         * Outputs the Feed references.
+         * Outputs the feeds and other general purpose <link> tags.
          */
         public function feeds() {
-            # Compute the URL of the per-page feed (if any):
             $config = Config::current();
             $route = Route::current();
 
-            $request = ($config->clean_urls) ? rtrim($route->request, "/") : fix($route->request) ;
+            $request = ($config->clean_urls) ? rtrim($route->request, "/") : $route->request ;
 
-            $append = $config->clean_urls ?
-                "/feed/" : ((count($_GET) == 1 and $route->action == "index") ? "/?feed" : "&amp;feed") ;
+            $feed = $config->clean_urls ?
+                "/feed/" : (substr_count($request, "?")) ? "&feed" : "?feed" ;
 
             # Generate site and page Atom feeds.
             $mainfeedurl = oneof($config->feed_url, url("feed"));
-            $pagefeedurl = $config->url.$request.$append;
+            $pagefeedurl = $config->url.$request.$feed;
 
             # Add the site feed.
             $links = array(array("href" => $mainfeedurl,
@@ -328,30 +313,26 @@
                 $links[] = array("href" => $pagefeedurl,
                                  "type" => "application/atom+xml");
 
-            # Ask modules to pitch in by adding their own <link> tag items to $links.
-            # Each item must be an array with "href" and "rel" properties (and optionally "title" and "type"):
+            # Ask extensions to provide additional links.
             Trigger::current()->filter($links, "links");
             
             # Generate <link> tags:
             $tags = array();
 
             foreach ($links as $link) {
-                $rel = oneof(fallback($link["rel"], ""), "alternate");
-                $href = $link["href"];
-                $type = fallback($link["type"], false);
-                $title = fallback($link["title"], false);
-                $tag = '<link rel="'.fix($rel, true).'" href="'.fix($link["href"], true).'"';
+                if (!isset($link["href"]))
+                    continue;
 
-                if ($type)
-                    $tag.= ' type="'.fix($type, true).'"';
+                fallback($link["rel"], "alternate");
+                fallback($link["type"], false);
+                fallback($link["title"], false);
 
-                if ($title)
-                    $tag.= ' title="'.fix($title, true).'"';
-
-                $tags[] = $tag.'>';
+                $tags[] = '<link rel="'.fix($link["rel"], true).'" href="'.fix($link["href"], true).'"'.
+                            (!empty($link["type"]) ? ' type="'.fix($link["type"], true).'"' : "").
+                            (!empty($link["title"]) ? ' title="'.fix($link["title"], true).'"' : "").'>';
             }
 
-            return "<!-- Feeds -->\n".implode("\n", $tags);
+            return !empty($tags) ? "<!-- Feeds -->\n".implode("\n", $tags) : "" ;
         }
 
         /**
