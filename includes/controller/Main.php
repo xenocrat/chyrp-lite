@@ -833,8 +833,7 @@
 
             $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
 
-            if ($config->cookies_notification and empty($_SESSION['cookies_notified']))
-                $theme->cookies_notification();
+            $theme->cookies_notification();
 
             try {
                 return $this->twig->display($template.".twig", $this->context);
