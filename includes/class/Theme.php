@@ -17,10 +17,8 @@
          * Loads the theme's info and l10n domain.
          */
         private function __construct() {
-            $config = Config::current();
-
             # Load the theme translator.
-            load_translator($config->theme, THEME_DIR.DIR."locale");
+            load_translator(Config::current()->theme, THEME_DIR.DIR."locale");
 
             # Load the theme's info into the Theme class.
             foreach (load_info(THEME_DIR.DIR."info.php") as $key => $val)
@@ -342,10 +340,12 @@
 
         /**
          * Function: cookies_notification
-         * Flashes a notification about cookies.
+         * Flashes a notification about cookies to new visitors.
          */
         public function cookies_notification() {
-            Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
+            if (Config::current()->cookies_notification and empty($_SESSION['cookies_notified']))
+                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
+
             $_SESSION['cookies_notified'] = true;
         }
 
