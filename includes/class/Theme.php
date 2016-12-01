@@ -298,7 +298,7 @@
             $mainfeedurl = oneof($config->feed_url, url("feed"));
             $pagefeedurl = ($config->clean_urls) ?
                 $config->url.rtrim($route->request, "/")."/feed/" :
-                $config->url.$route->request.(substr_count($route->request, "?") ? "&feed" : "?feed") ;
+                $config->url.$route->request.(substr_count($route->request, "?") ? "&amp;feed" : "?feed") ;
 
             # Add the site feed.
             $links = array(array("href" => $mainfeedurl,
