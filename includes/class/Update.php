@@ -9,6 +9,9 @@
          * Checks the update channel.
          */
         public static function check() {
+            if (!Visitor::current()->group->can("change_settings"))
+                return;
+
             $xml = simplexml_load_string(get_remote(UPDATE_XML, 3));
             Config::current()->set("check_updates_last", time());
 
