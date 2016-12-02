@@ -306,7 +306,8 @@
             # Add the page feed if it's different from the site feed and there are posts in MainController's context.
             if (($pagefeedurl != $mainfeedurl) and array_key_exists("posts", MainController::current()->context))
                 $links[] = array("href" => $pagefeedurl,
-                                 "type" => "application/atom+xml");
+                                 "type" => "application/atom+xml",
+                                 "title" => $config->name);
 
             # Ask extensions to provide additional links.
             Trigger::current()->filter($links, "links");
