@@ -712,9 +712,10 @@
          * Function: feed
          * Grabs posts and serves a feed.
          */
-        private function feed($posts = null, $subtitle = "") {
+        private function feed($posts = null) {
             $config = Config::current();
             $trigger = Trigger::current();
+            $theme = Theme::current();
 
             # Fetch posts for fallback or if we are being called as a responder.
             $result = SQL::current()->select("posts",
@@ -745,7 +746,7 @@
             $atom = new AtomFeed();
 
             $atom->open($config->name,
-                        oneof($subtitle, $config->description),
+                        oneof($theme->title, $config->description),
                         null,
                         $latest_timestamp);
 
@@ -799,13 +800,16 @@
 
             $this->displayed = true;
 
+            # Populate the theme title attribute for feeds.
+            $theme->title = $title;
+
             # Serve feeds if a feed request was detected for this action.
             if ($this->feed) {
                 if ($trigger->exists($route->action."_feed"))
-                    return $trigger->call($route->action."_feed", $context, $title);
+                    return $trigger->call($route->action."_feed", $context);
 
                 if (isset($context["posts"]))
-                    return $this->feed($context["posts"], $title);
+                    return $this->feed($context["posts"]);
             }
 
             $this->context                       = array_merge($context, $this->context);
@@ -822,7 +826,7 @@
             $this->context["route"]              = $route;
             $this->context["visitor"]            = Visitor::current();
             $this->context["visitor"]->logged_in = logged_in();
-            $this->context["title"]              = $theme->title = $title;
+            $this->context["title"]              = $theme->title;
             $this->context["captcha"]            = generate_captcha();
             $this->context["modules"]            = Modules::$instances;
             $this->context["feathers"]           = Feathers::$instances;
