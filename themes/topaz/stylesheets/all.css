@@ -338,7 +338,7 @@ div.ribbon {                                    box-sizing: border-box;
                                                 width: 100%;
                                                 text-align: center;
                                                 color: #ffffff;
-                                                background-color: #43b3ed;
+                                                background-color: #2ea8e5;
                                                 padding: 0.5em;
                                                 margin-bottom: 1em;
                                                 border-radius: 0.2em }
@@ -474,7 +474,7 @@ div.traversal a {                               display: inline-block;
                                                 margin: 0em 0.5rem;
                                                 min-width: 8em;
                                                 color: #fffefd;
-                                                background-color: #43b3ed;
+                                                background-color: #2ea8e5;
                                                 border: none;
                                                 border-radius: 0.4em }
 div.traversal a:hover,
@@ -547,7 +547,7 @@ a.archive_post_link {                           display: block;
                                                 background-color: transparent }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
-a.archive_post_link:active {                    background-color: #43b3ed;
+a.archive_post_link:active {                    background-color: #2ea8e5;
                                                 mix-blend-mode: multiply;
                                                 opacity: 0.8 }
 img {                                           border-style: none;
