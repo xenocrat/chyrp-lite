@@ -643,8 +643,3 @@ article img {                                   max-width: 100% }
     ul.archive article.post.archive img {       width: 100% }
     div.metadata, div.doaction {                text-align: center }
 }
-
-@media print and (min-width: 297mm) {
-    .longform {                                 column-count: 2;
-                                                column-gap: 2em }
-}
