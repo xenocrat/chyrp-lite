@@ -80,10 +80,15 @@
      * Forwards uncaught exceptions to the error() function.
      */
     function exception_handler(Throwable $e) {
-        if (DEBUG)
-            error_log("ERROR: ".$e->getCode()." ".$e->getMessage()." (".$e->getFile()." on line ".$e->getLine().")");
+        $errno = $e->getCode();
+        $message = $e->getMessage();
+        $file = $e->getFile();
+        $line = $e->getLine();
 
-        error(null, $e->getMessage()." (".$e->getFile()." on line ".$e->getLine().")", $e->getTrace());
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
+        error(null, $message." (".$file." on line ".$line.")", $e->getTrace());
     }
 
     /**
