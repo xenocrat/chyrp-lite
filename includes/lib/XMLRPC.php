@@ -221,7 +221,6 @@
                 return new IXR_Error(500, __("Body can't be blank."));
 
             $clean = sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 80);
-            $url = Post::check_url($clean);
 
             $_POST['user_id'] = $user->id;
             $_POST['feather'] = XML_RPC_FEATHER;
@@ -237,8 +236,7 @@
 
             $post = Post::add(array('title' => $args[3]['title'],
                                     'body'  => $body),
-                              $clean,
-                              $url);
+                              $clean);
 
             if ($post->no_results)
                 return new IXR_Error(500, __("Post not found."));
@@ -294,9 +292,9 @@
 
             $post->update(array('title' => $args[3]['title'], 'body' => $body ),
                           null,
-                          null,
+                          $post->pinned,
                           $status,
-                          null,
+                          $post->clean,
                           sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 80),
                           oneof($this->convertFromDateCreated($args[3]), $post->created_at));
 
