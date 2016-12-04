@@ -65,7 +65,7 @@
                 $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
                 $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
             } catch (Twig_Error $e) {
-                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
+                error(__("Twig Error"), $e->getMessage(), $e->getTrace());
             }
 
             # Load the theme translator.
@@ -2114,7 +2114,7 @@
             try {
                 $this->twig->display($template.".twig", $this->context);
             } catch (Twig_Error $e) {
-                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
+                error(__("Twig Error"), $e->getMessage(), $e->getTrace());
             }
         }
 
