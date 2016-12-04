@@ -425,74 +425,57 @@ section a:focus, p a:focus {                    outline: none;
                                                 border-bottom: 1px #99726d solid }
 section a:active, p a:active {                  color: #99726d;
                                                 border-bottom: 1px #99726d solid }
-div.tags a, span.tags_select a {                display: inline-block;
+div.tags a.tag {                                display: inline-block;
                                                 position: relative;
                                                 top: 0px;
                                                 padding: 0.2em 0.4em;
                                                 margin: 2px 0em;
-                                                border: none;
+                                                border: 1px #e5d7a1 solid;
                                                 border-radius: 0.2em;
                                                 color: #807d73;
-                                                background-color: #fffecd;
-                                                border: 1px #e5d7a1 solid }
-div.tags a:hover, span.tags_select a:hover,
-div.tags a:focus, span.tags_select a:focus,
-div.tags a:active, span.tags_select a:active,
-span.tags_select a.tag_added {                  top: 1px;
-                                                color: #000000 }
+                                                background-color: #fffecd }
+div.tags a.tag:hover,
+div.tags a.tag:focus,
+div.tags a.tag:active {                         top: 1px }
 div.category a.category {                       display: inline-block;
                                                 position: relative;
                                                 top: 0px;
                                                 padding: 0.2em 0.4em;
                                                 margin: 2px 0em;
-                                                border: none;
+                                                border: 1px #4e5a66 solid;
                                                 border-radius: 0.2em;
                                                 color: #ffffff;
-                                                background-color: #4e5a66;
-                                                border: 1px #4e5a66 solid;
-                                                transition-property: border;
-                                                transition-duration: 0ms }
+                                                background-color: #4e5a66 }
 div.category a.category:hover,
 div.category a.category:focus,
-div.category a.category:active {                top: 1px;
-                                                color: #ffffff;
-                                                background-color: #949799;
-                                                border: 1px #949799 solid }
+div.category a.category:active {                top: 1px }
 div.category a.category_1:link,
-div.category a.category_1:visited {             background-color: #71b67b;
-                                                border: 1px #71b67b solid }
-div.category a.category_1:focus,
-div.category a.category_1:hover,
-div.category a.category_1:active {              background-color: #609c69;
-                                                border: 1px #609c69 solid }
+div.category a.category_1:visited {             background-color: #ba31a0;
+                                                border: 1px #ba31a0 solid }
 div.category a.category_2:link,
-div.category a.category_2:visited {             background-color: #ed5fb4;
-                                                border: 1px #ed5fb4 solid }
-div.category a.category_2:focus,
-div.category a.category_2:hover,
-div.category a.category_2:active {              background-color: #d455a1;
-                                                border: 1px #d455a1 solid }
+div.category a.category_2:visited {             background-color: #8c69d3;
+                                                border: 1px #8c69d3 solid }
 div.category a.category_3:link,
-div.category a.category_3:visited {             background-color: #61bdf0;
-                                                border: 1px #61bdf0 solid }
-div.category a.category_3:focus,
-div.category a.category_3:hover,
-div.category a.category_3:active {              background-color: #56a9d6;
-                                                border: 1px #56a9d6 solid }
+div.category a.category_3:visited {             background-color: #76aae5;
+                                                border: 1px #76aae5 solid }
 div.category a.category_4:link,
-div.category a.category_4:visited {             background-color: #e0922f;
-                                                border: 1px #e0922f solid }
-div.category a.category_4:focus,
-div.category a.category_4:hover,
-div.category a.category_4:active {              background-color: #c7832a;
-                                                border: 1px #c7832a solid }
+div.category a.category_4:visited {             background-color: #47a78f;
+                                                border: 1px #47a78f solid }
 div.category a.category_5:link,
-div.category a.category_5:visited {             background-color: #9764a5;
-                                                border: 1px #9764a5 solid }
-div.category a.category_5:focus,
-div.category a.category_5:hover,
-div.category a.category_5:active {              background-color: #80568c;
-                                                border: 1px #80568c solid }
+div.category a.category_5:visited {             background-color: #5cb639;
+                                                border: 1px #5cb639 solid }
+div.category a.category_6:link,
+div.category a.category_6:visited {             background-color: #98b71a;
+                                                border: 1px #98b71a solid }
+div.category a.category_7:link,
+div.category a.category_7:visited {             background-color: #b7a31a;
+                                                border: 1px #b7a31a solid }
+div.category a.category_8:link,
+div.category a.category_8:visited {             background-color: #c9912f;
+                                                border: 1px #c9912f solid }
+div.category a.category_9:link,
+div.category a.category_9:visited {             background-color: #b73f1a;
+                                                border: 1px #b73f1a solid }
 div.metadata a {                                color: #999491 }
 div.metadata a:hover {                          color: #000000 }
 div.metadata a:focus {                          color: #000000;

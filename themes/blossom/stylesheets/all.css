@@ -483,17 +483,16 @@ section a:focus, p a:focus {                    outline: none;
                                                 border-bottom: 1px #d94c7b solid }
 section a:active, p a:active {                  color: #d94c7b;
                                                 border-bottom: 1px #d94c7b solid }
-div.tags a, span.tags_select a {                display: inline-block;
+div.tags a {                                    display: inline-block;
                                                 padding: 0.2em 0.4em;
                                                 margin-bottom: 4px;
                                                 border: none;
                                                 border-radius: 0.2em;
                                                 color: #fbfbf7;
                                                 background-color: #42a66a }
-div.tags a:hover, span.tags_select a:hover,
-div.tags a:focus, span.tags_select a:focus,
-div.tags a:active, span.tags_select a:active,
-span.tags_select a.tag_added {                  color: #ffffff;
+div.tags a:hover,
+div.tags a:focus,
+div.tags a:active {                             color: #ffffff;
                                                 background-color: #1d914b }
 div.metadata a {                                color: #9ea8a8 }
 div.metadata a:hover,
