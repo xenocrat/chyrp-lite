@@ -24,6 +24,9 @@
         else
             set_error_handler("error_composer");
 
+    # Set the default exception handler.
+    set_exception_handler("exception_handler");
+
     /**
      * Function: error_panicker
      * Report in plain text for the automated tester and exit.
@@ -70,6 +73,17 @@
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
         error(null, $message." (".$file." on line ".$line.")", debug_backtrace());
+    }
+
+    /**
+     * Function: exception_handler
+     * Forwards uncaught exceptions to the error() function.
+     */
+    function exception_handler(Throwable $e) {
+        if (DEBUG)
+            error_log("ERROR: ".$e->getCode()." ".$e->getMessage()." (".$e->getFile()." on line ".$e->getLine().")");
+
+        error(null, $e->getMessage()." (".$e->getFile()." on line ".$e->getLine().")", $e->getTrace());
     }
 
     /**
