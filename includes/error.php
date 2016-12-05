@@ -7,41 +7,18 @@
     $errors = array();
 
     # Set the appropriate error reporting level.
-    if (JAVASCRIPT)
-        error_reporting(0);
+    if (INSTALLING or UPGRADING or DEBUG)
+        error_reporting(E_ALL | E_STRICT);
     else
-        if (INSTALLING or UPGRADING or DEBUG)
-            error_reporting(E_ALL | E_STRICT);
-        else
-            error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+        error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
-    # Set the appropriate error handler.
-    if (TESTER)
-        set_error_handler("error_panicker");
-    else
-        if (INSTALLING or UPGRADING)
-            set_error_handler("error_snitcher");
-        else
-            set_error_handler("error_composer");
-
-    # Set the default exception handler.
-    set_exception_handler("exception_handler");
-
-    /**
-     * Function: error_panicker
-     * Report in plain text for the automated tester and exit.
-     */
-    function error_panicker($errno, $message, $file, $line) {
-        if (error_reporting() === 0)
-            return true; # Error reporting excludes this error.
-
-        if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
-
-        if (ob_get_contents() !== false)
-            ob_clean();
-
-        exit(htmlspecialchars("ERROR: ".$message, ENT_QUOTES, "UTF-8", false));
+    # Set the appropriate error and exception handlers.
+    if (INSTALLING or UPGRADING) {
+        set_error_handler("error_snitcher");
+        set_exception_handler("exception_snitcher");
+    } else {
+        set_error_handler("error_composer");
+        set_exception_handler("exception_composer");
     }
 
     /**
@@ -76,10 +53,28 @@
     }
 
     /**
-     * Function: exception_handler
-     * Forwards uncaught exceptions to the error() function.
+     * Function: exception_snitcher
+     * Informs the user of exceptions when installing or upgrading.
      */
-    function exception_handler(Throwable $e) {
+    function exception_snitcher(Throwable $e) {
+        global $errors;
+
+        $errno = $e->getCode();
+        $message = $e->getMessage();
+        $file = $e->getFile();
+        $line = $e->getLine();
+
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
+        $errors[] = htmlspecialchars($message, ENT_QUOTES, "UTF-8", false);
+    }
+
+    /**
+     * Function: exception_composer
+     * Composes a message for the error() function to display.
+     */
+    function exception_composer(Throwable $e) {
         $errno = $e->getCode();
         $message = $e->getMessage();
         $file = $e->getFile();
@@ -164,7 +159,7 @@
         }
 
         # Report in plain text if desirable or necessary because of a deep error.
-        if (TESTER or XML_RPC or AJAX or
+        if (TESTER or XML_RPC or AJAX or JAVASCRIPT or
             !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
