@@ -41,7 +41,7 @@
         if (ob_get_contents() !== false)
             ob_clean();
 
-        exit(htmlspecialchars("ERROR: ".$message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false));
+        exit(htmlspecialchars("ERROR: ".$message, ENT_QUOTES, "UTF-8", false));
     }
 
     /**
@@ -57,7 +57,7 @@
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        $errors[] = htmlspecialchars($message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false);
+        $errors[] = htmlspecialchars($message, ENT_QUOTES, "UTF-8", false);
         return true;
     }
 
@@ -72,7 +72,7 @@
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        error(null, $message." (".$file." on line ".$line.")", debug_backtrace());
+        error(null, $message, debug_backtrace());
     }
 
     /**
@@ -88,7 +88,7 @@
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        error(null, $message." (".$file." on line ".$line.")", $e->getTrace());
+        error(null, $message, $e->getTrace());
     }
 
     /**
@@ -372,7 +372,7 @@
             <h1><?php echo $title; ?></h1>
             <div role="alert" class="message">
                 <?php echo $body; ?>
-            <?php if (!empty($backtrace)): ?>
+            <?php if (!empty($backtrace) and DEBUG): ?>
                 <h2><?php echo __("Backtrace"); ?></h2>
                 <ol class="backtrace">
                 <?php foreach ($backtrace as $trace): ?>
