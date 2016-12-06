@@ -102,15 +102,13 @@
         $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
         $body = preg_replace("/<\/?script[^>]*>/i", "", $body);
 
-        # Sanitize backtrace.
+        # Redact backtrace.
         if (!empty($backtrace))
             foreach ($backtrace as $index => &$trace)
-                if (!isset($trace["file"]) or !isset($trace["line"])) {
+                if (!isset($trace["file"]) or !isset($trace["line"]))
                     unset($backtrace[$index]);
-                } else {
-                    $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "UTF-8", false);
-                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "UTF-8", false);
-                }
+                else
+                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "UTF-8");
 
         # Clean the output buffer before we begin.
         if (ob_get_contents() !== false)
@@ -371,7 +369,7 @@
                 <h2><?php echo __("Backtrace"); ?></h2>
                 <ol class="backtrace">
                 <?php foreach ($backtrace as $trace): ?>
-                    <li><code><?php echo _f("%s on line %d", array($trace["file"], fallback($trace["line"], 0))); ?></code></li>
+                    <li><code><?php echo _f("%s on line %d", array($trace["file"], (int) $trace["line"])); ?></code></li>
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
