@@ -19,9 +19,6 @@
          *     $throw_exceptions - Throw exceptions instead of calling error()?
          */
         public function __construct($sql, $query, $params = array(), $throw_exceptions = false) {
-            if (DEBUG)
-                global $time_start;
-            
             $this->sql = $sql;
 
             # Don't count config setting queries.
