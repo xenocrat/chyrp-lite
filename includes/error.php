@@ -34,7 +34,7 @@
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        $errors[] = htmlspecialchars($message, ENT_QUOTES, "UTF-8", false);
+        $errors[] = strip_tags($message);
         return true;
     }
 
@@ -67,7 +67,7 @@
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        $errors[] = htmlspecialchars($message, ENT_QUOTES, "UTF-8", false);
+        $errors[] = strip_tags($message);
     }
 
     /**
