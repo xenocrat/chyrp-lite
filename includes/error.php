@@ -97,19 +97,6 @@
      *     $code - Numeric HTTP status code to set.
      */
     function error($title = "", $body = "", $backtrace = array(), $code = 500) {
-        # Sanitize strings.
-        $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8", false);
-        $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
-        $body = preg_replace("/<\/?script[^>]*>/i", "", $body);
-
-        # Redact backtrace.
-        if (!empty($backtrace))
-            foreach ($backtrace as $index => &$trace)
-                if (!isset($trace["file"]) or !isset($trace["line"]))
-                    unset($backtrace[$index]);
-                else
-                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "UTF-8");
-
         # Clean the output buffer before we begin.
         if (ob_get_contents() !== false)
             ob_clean();
@@ -161,7 +148,8 @@
             !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
-            !function_exists("oneof") or
+            !function_exists("fix") or
+            !function_exists("sanitize_html") or
             !function_exists("logged_in") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
@@ -170,11 +158,20 @@
             exit("ERROR: ".strip_tags($body));
         }
 
+        # We need this for the pretty error page.
         $chyrp_url = Config::current()->chyrp_url;
 
-        # Validate title and body text before we display the pretty message.
-        $title = oneof($title, __("Error"));
-        $body = oneof($body, __("An unspecified error has occurred."));
+        # Set fallbacks.
+        fallback($title, __("Error"));
+        fallback($body, __("An unspecified error has occurred."));
+        fallback($backtrace, array());
+
+        # Redact and escape the backtrace for display.
+        foreach ($backtrace as $index => &$trace)
+            if (!isset($trace["file"]) or !isset($trace["line"]))
+                unset($backtrace[$index]);
+            else
+                $trace["file"] = fix(str_replace(MAIN_DIR.DIR, "", $trace["file"]), false, true);
 
         #---------------------------------------------
         # Output Starts
@@ -184,7 +181,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title><?php echo $title; ?></title>
+        <title><?php echo fix($title); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
             @font-face {
@@ -362,9 +359,9 @@
     </head>
     <body>
         <div class="window">
-            <h1><?php echo $title; ?></h1>
+            <h1><?php echo sanitize_html($title); ?></h1>
             <div role="alert" class="message">
-                <?php echo $body; ?>
+                <?php echo sanitize_html($body); ?>
             <?php if (!empty($backtrace) and DEBUG): ?>
                 <h2><?php echo __("Backtrace"); ?></h2>
                 <ol class="backtrace">
