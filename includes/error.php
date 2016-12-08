@@ -10,7 +10,7 @@
     if (INSTALLING or UPGRADING or DEBUG)
         error_reporting(E_ALL | E_STRICT);
     else
-        error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+        error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
 
     # Set the appropriate error and exception handlers.
     if (INSTALLING or UPGRADING) {
@@ -35,8 +35,8 @@
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        # Terminate execution for warnings or worse.
-        if (E_USER_WARNING & $errno)
+        # Terminate execution for severe errors.
+        if ($errno & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE)
             error(null, $message, debug_backtrace());
         else
             $errors[] = strip_tags($message);
@@ -151,7 +151,7 @@
         }
 
         # Report in plain text if desirable or necessary because of a deep error.
-        if (TESTER or XML_RPC or AJAX or JAVASCRIPT or ob_get_level() > 1 or
+        if (TESTER or XML_RPC or AJAX or JAVASCRIPT or
             !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
@@ -188,7 +188,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title><?php echo fix($title); ?></title>
+        <title><?php echo strip_tags($title); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
             @font-face {
