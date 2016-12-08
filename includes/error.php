@@ -28,13 +28,19 @@
     function error_snitcher($errno, $message, $file, $line) {
         global $errors;
 
-        if (error_reporting() === 0)
-            return true; # Error suppressed by @ operator.
+        # Test if reporting excludes this error level.
+        if (!(error_reporting() & $errno))
+            return true;
 
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-        $errors[] = strip_tags($message);
+        # Terminate execution for warnings or worse.
+        if (E_USER_WARNING & $errno)
+            error(null, $message, debug_backtrace());
+        else
+            $errors[] = strip_tags($message);
+
         return true;
     }
 
@@ -43,8 +49,9 @@
      * Composes a message for the error() function to display.
      */
     function error_composer($errno, $message, $file, $line) {
+        # Test if reporting excludes this error level.
         if (!(error_reporting() & $errno))
-            return true; # Error reporting excludes this error.
+            return true;
 
         if (DEBUG)
             error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
