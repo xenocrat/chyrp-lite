@@ -384,31 +384,15 @@
         disable_importers();
         add_export_content();
 
-        # Perform module upgrades and output the results if the upgrader echoes anything.
+        # Perform module upgrades.
         foreach ((array) $config->enabled_modules as $module)
-            if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
-                ob_start();
-                echo $begin = _f("Calling %s module's upgrader...", array($module))."\n";
+            if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
-                if (ob_get_contents() == $begin)
-                    ob_end_clean();
-                else
-                    ob_end_flush();
-            }
-
-        # Perform feather upgrades and output the results if the upgrader echoes anything.
+        # Perform feather upgrades.
         foreach ((array) $config->enabled_feathers as $feather)
-            if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
-                ob_start();
-                echo $begin = _f("Calling %s feather's upgrader...", array($feather))."\n";
+            if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
-
-                if (ob_get_contents() == $begin)
-                    ob_end_clean();
-                else
-                    ob_end_flush();
-            }
 
         $upgraded = true;
     }
