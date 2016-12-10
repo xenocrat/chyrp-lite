@@ -59,7 +59,7 @@
                 throw new Exception(__("Pingback support is disabled for this site."));
 
             if ($target == $source)
-                return new IXR_ERROR(0, __("The from and to URLs cannot be the same."));
+                return new IXR_Error(0, __("The from and to URLs cannot be the same."));
 
             if (!is_url($target) or !substr_count($target, $chyrp_host))
                 return new IXR_Error(32, __("The URL for our page is not valid."));
