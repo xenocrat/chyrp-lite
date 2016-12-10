@@ -311,6 +311,9 @@
             if (!empty($count))
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "comments"));
 
+            if (strlen($from) > 2048)
+                return new IXR_Error(0, __("Your URL is too long to be stored in our database.", "comments"));
+
             Comment::create($excerpt,
                             $title,
                             $from,
