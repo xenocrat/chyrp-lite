@@ -803,19 +803,19 @@
                 <h1><?php echo __("Admin Account"); ?></h1>
                 <p id="login_field">
                     <label for="login"><?php echo __("Username"); ?></label>
-                    <input type="text" name="login" value="<?php posted("login", "Admin"); ?>" id="login">
+                    <input type="text" name="login" value="<?php posted("login", "Admin"); ?>" id="login" maxlength="64">
                 </p>
                 <p id="password1_field">
                     <label for="password1"><?php echo __("Password"); ?></label>
-                    <input type="password" name="password1" value="<?php posted("password1"); ?>" id="password1">
+                    <input type="password" name="password1" value="<?php posted("password1"); ?>" id="password1" maxlength="128">
                 </p>
                 <p id="password2_field">
                     <label for="password2"><?php echo __("Password"); ?> <span class="sub"><?php echo __("(again)"); ?></span></label>
-                    <input type="password" name="password2" value="<?php posted("password2"); ?>" id="password2">
+                    <input type="password" name="password2" value="<?php posted("password2"); ?>" id="password2" maxlength="128">
                 </p>
                 <p id="email_field">
                     <label for="email"><?php echo __("Email Address"); ?></label>
-                    <input type="email" name="email" value="<?php posted("email"); ?>" id="email">
+                    <input type="email" name="email" value="<?php posted("email"); ?>" id="email" maxlength="128">
                 </p>
                 <button type="submit"><?php echo __("Install me!"); ?></button>
             </form>
