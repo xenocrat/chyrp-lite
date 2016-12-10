@@ -18,15 +18,15 @@
 <div id="more_options" class="more_options">
 <p class="more_options_option">
 <label for="author_field">{{ "Author" | translate("comments") }}</label>
-<input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author_field">
+<input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author_field" maxlength="250">
 </p>
 <p class="more_options_option">
 <label for="author_email_field">{{ "Author Email" | translate("comments") }}</label>
-<input class="text" type="text" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email_field">
+<input class="text" type="text" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email_field" maxlength="128">
 </p>
 <p class="more_options_option">
 <label for="author_url_field">{{ "Author Website" | translate("comments") }}</label>
-<input class="text" type="text" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field">
+<input class="text" type="text" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field" maxlength="128">
 </p>
 {% if visitor.group.can("edit_comment") %}
 {# If they can edit all comments, not just this one. #}
@@ -56,7 +56,7 @@
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash_field">
 <input type="hidden" name="id" value="{{ comment.id }}" id="id_field">
 <div class="buttons confirmation">
-<button type="submit" class="yay" accesskey="s">
+<button type="submit" class="yay">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Save" | translate("comments") }}
 </button>
 {{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="icon">' ~ ("Delete" | translate("comments")), null, null, "button boo") }}
