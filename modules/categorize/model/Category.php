@@ -60,7 +60,7 @@
             return $query;
         }
 
-        static function addCategory($name = string, $clean = string, $show_on_home = int) {
+        static function addCategory($name = string, $clean = string, $show_on_home = bool) {
             SQL::current()->insert("categorize",
                                    array("name" => ":name",
                                          "clean" => ":clean",
@@ -70,7 +70,7 @@
                                          ":show_on_home" => $show_on_home));
         }
 
-        static function updateCategory($id = int, $name = string, $clean = string, $show_on_home = int) {
+        static function updateCategory($id = int, $name = string, $clean = string, $show_on_home = bool) {
             SQL::current()->update("categorize",
                                    "`id` = :id",
                                    array("name" => ":name",
@@ -100,7 +100,7 @@
                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                       name  VARCHAR(128) NOT NULL,
                                       clean VARCHAR(128) NOT NULL UNIQUE,
-                                      show_on_home INT(1) DEFAULT 1
+                                      show_on_home BOOLEAN DEFAULT '1'
                                   ) DEFAULT CHARSET=UTF8");
         }
 

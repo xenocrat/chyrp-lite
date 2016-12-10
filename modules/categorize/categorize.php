@@ -224,7 +224,7 @@
 
             Category::addCategory($_POST['name'],
                                   oneof(@$_POST['clean'], $_POST['name']),
-                                  !empty($_POST['show_on_home']) ? 1 : 0);
+                                  !empty($_POST['show_on_home']));
 
             Flash::notice(__("Category added.", "categorize"), "manage_category");
         }
@@ -265,7 +265,7 @@
             Category::updateCategory($_POST['id'],
                                      $_POST['name'],
                                      oneof(@$_POST['clean'], $_POST['name']),
-                                     !empty($_POST['show_on_home']) ? 1 : 0);
+                                     !empty($_POST['show_on_home']));
 
             Flash::notice(__("Category updated.", "categorize"), "manage_category");
         }
