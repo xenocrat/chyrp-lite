@@ -19,7 +19,7 @@
 {{ "Slug" | translate }}
 <a href="{{ url('help/id/slugs') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </label>
-<input class="text" type="text" name="slug" value="{{ page is defined ? page.slug | fix : '' }}" id="slug">
+<input class="text" type="text" name="slug" value="{{ page is defined ? page.slug | fix : '' }}" id="slug" maxlength="80">
 </p>
 <p class="more_options_option">
 <label for="status">{{ "Status" | translate }}</label>
@@ -63,11 +63,11 @@
 </div>
 <div class="buttons confirmation">
 {% if route.action == "write_page" %}
-<button type="submit" class="yay" accesskey="s">
+<button type="submit" class="yay">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% else %}
-<button type="submit" accesskey="s">
+<button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% endif %}

@@ -8,19 +8,19 @@
 <fieldset>
 <p>
 <label for="full_name">{{ "Full Name" | translate }}</label>
-<input class="text" type="text" name="full_name" value="{{ user.full_name | fix(true) }}" id="full_name">
+<input class="text" type="text" name="full_name" value="{{ user.full_name | fix(true) }}" id="full_name" maxlength="250">
 </p>
 <p>
 <label for="email">{{ "Email" | translate }}</label>
-<input class="text" type="email" name="email" value="{{ user.email | fix(true) }}" id="email">
+<input class="text" type="email" name="email" value="{{ user.email | fix(true) }}" id="email" maxlength="128">
 </p>
 <p>
 <label for="website">{{ "Website" | translate }}</label>
-<input class="text" type="url" name="website" value="{{ user.website | fix(true) }}" id="website">
+<input class="text" type="url" name="website" value="{{ user.website | fix(true) }}" id="website" maxlength="128">
 </p>
 <p>
 <label for="login">{{ "Login" | translate }}</label>
-<input class="text" type="text" name="login" value="{{ user.login | fix(true) }}" id="full_name">
+<input class="text" type="text" name="login" value="{{ user.login | fix(true) }}" id="full_name" maxlength="64">
 </p>
 <p>
 <label for="group">{{ "Group" | translate }}</label>
@@ -32,11 +32,11 @@
 </p>
 <p>
 <label for="new_password1">{{ "New Password?" | translate }}</label>
-<input class="text" type="password" name="new_password1" value="" id="new_password1">
+<input class="text" type="password" name="new_password1" value="" id="new_password1" maxlength="128">
 </p>
 <p>
 <label for="new_password2">{{ "Confirm" | translate }}</label>
-<input class="text" type="password" name="new_password2" value="" id="new_password2">
+<input class="text" type="password" name="new_password2" value="" id="new_password2" maxlength="128">
 </p>
 {{ trigger.call("edit_user_fields", user) }}
 <p class="buttons">

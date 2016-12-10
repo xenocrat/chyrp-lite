@@ -86,7 +86,7 @@
 {{ "Slug" | translate }}
 <a href="{{ url('help/id/slugs') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </label>
-<input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.slug | fix : '' }}">
+<input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.slug | fix : '' }}" maxlength="80">
 </p>
 <p class="more_options_option">
 <label for="created_at">{{ "Timestamp" | translate }}</label>
@@ -130,20 +130,20 @@
 <div class="buttons confirmation">
 {% if route.action == "edit_post" %}
 {% if visitor.group.can("add_post") and post.status == "draft" %}
-<button type="submit" class="yay" accesskey="s" id="publish" name="publish">
+<button type="submit" class="yay" id="publish" name="publish">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% endif %}
-<button type="submit" accesskey="s" id="save">
+<button type="submit" id="save">
 <img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% else %}
 {% if visitor.group.can("add_post") %}
-<button type="submit" class="yay" accesskey="s" id="publish">
+<button type="submit" class="yay" id="publish">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% endif %}
-<button type="submit" accesskey="s" id="save" name="draft" value="true">
+<button type="submit" id="save" name="draft" value="true">
 <img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% endif %}
