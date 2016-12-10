@@ -25,6 +25,7 @@ ruby ./tools/gettext.rb ./modules/rights/       --domain=rights              > .
 ruby ./tools/gettext.rb ./modules/simplemde/    --domain=simplemde           > ./modules/simplemde/locale/en_US/LC_MESSAGES/simplemde.pot
 ruby ./tools/gettext.rb ./modules/sitemap/      --domain=sitemap             > ./modules/sitemap/locale/en_US/LC_MESSAGES/sitemap.pot
 ruby ./tools/gettext.rb ./modules/tags/         --domain=tags                > ./modules/tags/locale/en_US/LC_MESSAGES/tags.pot
+ruby ./tools/gettext.rb ./modules/post_views/   --domain=post_views          > ./modules/post_views/locale/en_US/LC_MESSAGES/post_views.pot
 
 ruby ./tools/gettext.rb ./themes/blossom/       --domain=blossom     --theme > ./themes/blossom/locale/en_US/LC_MESSAGES/blossom.pot
 ruby ./tools/gettext.rb ./themes/sparrow/       --domain=sparrow     --theme > ./themes/sparrow/locale/en_US/LC_MESSAGES/sparrow.pot
