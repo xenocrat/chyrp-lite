@@ -42,6 +42,7 @@
          */
         static function add($post_id, $source, $title, $created_at = null) {
             $sql = SQL::current();
+
             $sql->insert("pingbacks",
                          array("post_id"    => (int) $post_id,
                                "source"     => $source,
@@ -68,7 +69,7 @@
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __pingbacks (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                        post_id INTEGER NOT NULL,
-                                       source VARCHAR(128) DEFAULT '',
+                                       source VARCHAR(2048) DEFAULT '',
                                        title LONGTEXT,
                                        created_at DATETIME DEFAULT NULL
                                    ) DEFAULT CHARSET=utf8");
