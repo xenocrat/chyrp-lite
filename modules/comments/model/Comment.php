@@ -189,6 +189,7 @@
                 $ip = 0;
 
             $sql = SQL::current();
+
             $sql->insert("comments",
                          array("body" => sanitize_html($body),
                                "author" => strip_tags($author),
@@ -233,6 +234,7 @@
                 $this->$attr = $$attr;
 
             $sql = SQL::current();
+
             $sql->update("comments",
                          array("id" => $this->id),
                          array("body" => sanitize_html($body),
@@ -341,7 +343,7 @@
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                        body LONGTEXT,
                                        author VARCHAR(250) DEFAULT '',
-                                       author_url VARCHAR(128) DEFAULT '',
+                                       author_url VARCHAR(2048) DEFAULT '',
                                        author_email VARCHAR(128) DEFAULT '',
                                        author_ip INTEGER DEFAULT '0',
                                        author_agent VARCHAR(255) DEFAULT '',
