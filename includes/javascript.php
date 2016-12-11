@@ -48,7 +48,7 @@ var Post = {
             thisPost.loader(true).fadeOut("fast", function() {
                 $(this).remove();
 
-                if (!$(".post").length)
+                if (!$("article.post").length)
                     window.location.href = Site.url;
             });
         }, "json").fail(Post.panic);
