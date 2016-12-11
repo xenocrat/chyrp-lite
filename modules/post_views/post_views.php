@@ -34,7 +34,7 @@
 
         public function post_view_count_attr($attr, $post) {
             if (isset($this->view_counts))
-                return oneof(@$this->view_counts[$post->id], 0);
+                return fallback($this->view_counts[$post->id], 0);
 
             $counts = SQL::current()->select("views",
                                              "COUNT(post_id) AS total, post_id as post_id",
@@ -48,6 +48,6 @@
             foreach ($counts as $count)
                 $this->view_counts[$count["post_id"]] = (int) $count["total"];
 
-            return oneof(@$this->view_counts[$post->id], 0);
+            return fallback($this->view_counts[$post->id], 0);
         }
     }
