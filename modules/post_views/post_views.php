@@ -13,7 +13,7 @@
 
         public function main_context($context) {
             if (isset($context["post"]) and ($context["post"] instanceof Post) and !$context["post"]->no_results)
-                View::add($context["post"]->id);
+                View::add($context["post"]->id, Visitor::current()->id);
         }
 
         public function manage_posts_column_header() {

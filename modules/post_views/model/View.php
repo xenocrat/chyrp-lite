@@ -36,12 +36,15 @@
          *
          * Parameters:
          *     $post_id - The ID of the blog post that was viewed.
+         *     $user_id - The ID of the user who viewed the post.
          */
-        static function add($post_id) {
+        static function add($post_id, $user_id, $created_at = null) {
             $sql = SQL::current();
 
             $sql->insert("views",
-                         array("post_id" => (int) $post_id));
+                         array("post_id"    => (int) $post_id,
+                               "user_id"    => (int) $user_id,
+                               "created_at" => oneof($created_at, datetime())));
 
             return new self($sql->latest("views"));
         }
@@ -53,7 +56,9 @@
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __views (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                       post_id INTEGER NOT NULL
+                                       post_id INTEGER NOT NULL,
+                                       user_id INTEGER DEFAULT 0,
+                                       created_at DATETIME DEFAULT NULL
                                    ) DEFAULT CHARSET=utf8");
         }
 
