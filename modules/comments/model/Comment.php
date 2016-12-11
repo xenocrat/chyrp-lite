@@ -167,8 +167,8 @@
          *     $user_id - The ID of the <User> this comment was made by.
          *     $parent - The <Comment> they're replying to.
          *     $notify - Notification on follow-up comments.
-         *     $created_at - The new comment's "created" timestamp.
-         *     $updated_at - The new comment's "last updated" timestamp.
+         *     $created_at - The new comment's @created_at@ timestamp.
+         *     $updated_at - The new comment's @updated_at@ timestamp.
          */
         static function add($body,
                             $author,

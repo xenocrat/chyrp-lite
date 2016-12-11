@@ -37,6 +37,7 @@
          * Parameters:
          *     $post_id - The ID of the blog post that was viewed.
          *     $user_id - The ID of the user who viewed the post.
+         *     $created_at - The new view's @created_at@ timestamp.
          */
         static function add($post_id, $user_id, $created_at = null) {
             $sql = SQL::current();
