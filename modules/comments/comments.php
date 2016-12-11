@@ -715,7 +715,7 @@
 
         public function post_comment_count_attr($attr, $post) {
             if (isset($this->comment_counts))
-                return oneof(@$this->comment_counts[$post->id], 0);
+                return fallback($this->comment_counts[$post->id], 0);
 
             $counts = SQL::current()->select("comments",
                                              array("COUNT(post_id) AS total", "post_id as post_id"),
@@ -732,7 +732,7 @@
             foreach ($counts->fetchAll() as $count)
                 $this->comment_counts[$count["post_id"]] = (int) $count["total"];
 
-            return oneof(@$this->comment_counts[$post->id], 0);
+            return fallback($this->comment_counts[$post->id], 0);
         }
 
         public function post_latest_comment_attr($attr, $post) {
