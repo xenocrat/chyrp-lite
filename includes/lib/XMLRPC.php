@@ -56,7 +56,7 @@
 
             # No need to continue without a responder for the pingback trigger.
             if (!$trigger->exists("pingback"))
-                throw new Exception(__("Pingback support is disabled for this site."));
+                return new IXR_Error(49, __("Pingback support is disabled for this site."));
 
             if ($target == $source)
                 return new IXR_Error(0, __("The from and to URLs cannot be the same."));
