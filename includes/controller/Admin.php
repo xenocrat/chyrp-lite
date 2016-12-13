@@ -1069,8 +1069,8 @@
                 fallback($_POST['filter_posts'], "");
                 list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
-                if (!empty($_GET['month']))
-                    $where["created_at like"] = $_GET['month']."-%";
+                if (!empty($_POST['month']))
+                    $where["created_at like"] = $_POST['month']."-%";
 
                 $visitor = Visitor::current();
 
