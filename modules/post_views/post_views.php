@@ -22,8 +22,9 @@
 
         public function manage_posts_column($post) {
             if ($post->view_count > 0)
-                echo '<td class="post_views value">'.
-                        '<a href="'.url("download_views/id/".$post->id).'">'.$post->view_count.'</a></td>';
+                echo '<td class="post_views value">'.'<a href="'.url("download_views/id/".$post->id).'" title="'.
+                        fix(_f("Download view count for &#8220;%s&#8221;", $post->title(), "post_views"), true).'">'.
+                        $post->view_count.'</a></td>';
             else
                 echo '<td class="post_views value">'.$post->view_count.'</td>';
         }
