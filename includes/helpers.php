@@ -1618,7 +1618,7 @@
      *     $reason - Why was execution cancelled?
      *
      * Notes:
-     *     A module can cancel itself in its __construct method.
+     *     A module can cancel itself in its __construct or __init methods.
      */
      function cancel_module($target, $reason = "") {
         $message = empty($reason) ?
@@ -1643,7 +1643,7 @@
      *     $reason - Why was execution cancelled?
      *
      * Notes:
-     *     A feather can cancel itself in its __construct method.
+     *     A feather can cancel itself in its __construct or __init methods.
      */
      function cancel_feather($target, $reason = "") {
         $message = empty($reason) ?
