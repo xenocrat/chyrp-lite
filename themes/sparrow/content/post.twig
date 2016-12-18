@@ -48,7 +48,11 @@
 {% endif %}
 {% endif %}
 {% if module_enabled("rights") and post.rights_holder is defined %}
-&bull;{% if post.rights_holder is not empty %} &copy; {{ post.rights_holder }},{% endif %} {{ post.licence_link }}
+&bull;
+{% if post.rights_holder is not empty %}
+{{ "&copy; %s, %s." | translate | format(post.rights_holder, post.licence_link) }}
+{% else %}
+{{ "&copy; %s." | translate | format(post.licence_link) }}
 {% endif %}
 </div>
 </footer>

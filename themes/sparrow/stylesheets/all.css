@@ -55,7 +55,6 @@
 }
 
 html {                                          font-size: 16px }
-*::-moz-selection,
 *::selection {                                  color: #ffffff;
                                                 background-color: #99726d }
 body {                                          font-family: "Open Sans webfont", sans-serif;
@@ -265,7 +264,7 @@ article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
                                                 cursor: pointer;
-                                                transition-property: color, border;
+                                                transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
 label {                                         display: block;
                                                 margin-top: 1em }
@@ -388,7 +387,7 @@ article.video video {                           width: 100%;
 article.audio audio {                           width: 100%;
                                                 max-width: 800px }                  
 a {                                             border-bottom: 1px transparent solid;
-                                                transition-property: color, border;
+                                                transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
 a:link {                                        color: #4e5a66;
                                                 text-decoration: none }
@@ -438,17 +437,20 @@ div.tags a.tag:hover,
 div.tags a.tag:focus,
 div.tags a.tag:active {                         top: 1px }
 div.category a.category {                       display: inline-block;
-                                                position: relative;
-                                                top: 0px;
-                                                padding: 0.2em 0.4em;
-                                                margin: 2px 0em;
+                                                position: absolute;
+                                                top: 4.12rem;
+                                                top: calc(4rem + 2px);
+                                                right: 4rem;
+                                                padding: 0.2em 0.6em;
+                                                margin: 0em;
                                                 border: 1px #4e5a66 solid;
                                                 border-radius: 0.2em;
                                                 color: #ffffff;
                                                 background-color: #4e5a66 }
 div.category a.category:hover,
 div.category a.category:focus,
-div.category a.category:active {                top: 1px }
+div.category a.category:active {                top: 4.2rem;
+                                                top: calc(4rem + 3px) }
 div.category a.category_1:link,
 div.category a.category_1:visited {             background-color: #ba31a0;
                                                 border: 1px #ba31a0 solid }
@@ -518,11 +520,12 @@ a.archive_post_link {                           display: block;
                                                 bottom: -1px;
                                                 right: -1px;
                                                 color: transparent;
-                                                background-color: transparent }
+                                                background-color: transparent;
+                                                mix-blend-mode: multiply;
+                                                transition: all 0s }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {                    background-color: #c2b9b4;
-                                                mix-blend-mode: multiply;
                                                 opacity: 0.8 }
 img {                                           border-style: none;
                                                 margin: 0em;
@@ -579,6 +582,13 @@ img.gravatar {                                  position: absolute;
     div#main > article, div.standalone {        padding: 2rem 2rem 0rem 2rem }
     div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 2rem }
+    div.category a.category {                   top: 2.12rem;
+                                                top: calc(2rem + 2px);
+                                                right: 2rem }
+    div.category a.category:hover,
+    div.category a.category:focus,
+    div.category a.category:active {            top: 2.2rem;
+                                                top: calc(2rem + 3px) }
     div.metadata {                              padding-bottom: 2rem }
     ol.comments li {                            padding: 2rem }
     img.gravatar {                              position: static;
@@ -601,4 +611,5 @@ img.gravatar {                                  position: absolute;
                                                 padding-right: 8rem }
     div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 8rem }
+    div.category a.category {                   right: 8rem }
 }

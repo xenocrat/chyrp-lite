@@ -55,7 +55,6 @@
 }
 
 html {                                          font-size: 16px }
-*::-moz-selection,
 *::selection {                                  color: #ffffff;
                                                 background-color: #42a66a }
 body {                                          font-family: "Open Sans webfont", sans-serif;
@@ -290,7 +289,9 @@ textarea:focus {                                outline: none;
 article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
-                                                cursor: pointer }
+                                                cursor: pointer;
+                                                transition-property: color, background-color, border;
+                                                transition-duration: 250ms }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.shim {                                      margin-top: 2em }
@@ -439,7 +440,7 @@ article.video video {                           width: 100%;
 article.audio audio {                           width: 100%;
                                                 max-width: 960px }                  
 a {                                             border-bottom: 1px transparent solid;
-                                                transition-property: color, border;
+                                                transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
 a:link {                                        color: #5c6773;
                                                 text-decoration: none }
@@ -535,11 +536,12 @@ a.archive_post_link {                           display: block;
                                                 bottom: -1px;
                                                 right: -1px;
                                                 color: transparent;
-                                                background-color: transparent }
+                                                background-color: transparent;
+                                                mix-blend-mode: multiply;
+                                                transition: all 0s }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {                    background-color: #d94c7b;
-                                                mix-blend-mode: multiply;
                                                 opacity: 0.8 }
 img {                                           border-style: none;
                                                 margin: 0em;
