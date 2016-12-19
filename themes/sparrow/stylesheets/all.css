@@ -557,11 +557,10 @@ img.gravatar {                                  position: absolute;
 @media print {
     html {                                      font-size: 4.2mm }
     body {                                      background-color: #ffffff;
-                                                margin: 2em }
+                                                margin: 2rem }
     div.prev, div.next {                        display: none }
     div.main > article,
-    div.standalone {                            background-color: #ffffff;
-                                                page-break-inside: avoid }
+    div.standalone {                            page-break-inside: avoid }
 }
 
 @media screen and (max-width: 639px) {

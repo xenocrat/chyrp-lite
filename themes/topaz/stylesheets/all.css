@@ -574,7 +574,7 @@ article img {                                   max-width: 100% }
 @media print {
     html {                                      font-size: 4.2mm }
     body {                                      background-color: #ffffff;
-                                                margin: 2em }
+                                                margin: 2rem }
     div#sidebar, div#tail,
     div.prev, div.next {                        display: none }
     div.main > article,
