@@ -30,4 +30,5 @@ ruby ./tools/gettext.rb ./modules/post_views/   --domain=post_views          > .
 ruby ./tools/gettext.rb ./themes/blossom/       --domain=blossom     --theme > ./themes/blossom/locale/en_US/LC_MESSAGES/blossom.pot
 ruby ./tools/gettext.rb ./themes/sparrow/       --domain=sparrow     --theme > ./themes/sparrow/locale/en_US/LC_MESSAGES/sparrow.pot
 ruby ./tools/gettext.rb ./themes/topaz/         --domain=topaz       --theme > ./themes/topaz/locale/en_US/LC_MESSAGES/topaz.pot
+ruby ./tools/gettext.rb ./themes/umbra/         --domain=umbra       --theme > ./themes/umbra/locale/en_US/LC_MESSAGES/umbra.pot
 ruby ./tools/gettext.rb ./admin/                --domain=admin       --theme > ./admin/locale/en_US/LC_MESSAGES/admin.pot
