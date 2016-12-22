@@ -1208,7 +1208,7 @@
      */
     function sanitize_html($text) {
         # Strip invalid tags.
-        $text = preg_replace("/<([^a-z\/]|\/(?![a-z]))[^>]*>/i", "", $text);
+        $text = preg_replace("/<([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*>/i", "", $text);
 
         # Strip script tags.
         $text = preg_replace("/<\/?script[^>]*>/i", "", $text);
