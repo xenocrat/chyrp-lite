@@ -70,7 +70,7 @@
 
             $sanitized = sanitize_html($_POST['content']);
 
-            Trigger::current()->filter($sanitized, $_POST['filter']);
+            Trigger::current()->filter($sanitized, array_map("trim", explode(",", $_POST['filter'])));
 
             $main->display("content".DIR."preview",
                            array("content" => $sanitized,
