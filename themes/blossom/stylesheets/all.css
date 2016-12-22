@@ -543,6 +543,11 @@ a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {                    background-color: #d94c7b;
                                                 opacity: 0.8 }
+iframe {                                        width: 100%;
+                                                height: 10em;
+                                                border: none }
+iframe.video_embed {                            max-height: 538px;
+                                                height: calc((100vw - 22rem) * 0.5625) }
 img {                                           border-style: none;
                                                 margin: 0em;
                                                 padding: 0em }
@@ -579,7 +584,7 @@ article img {                                   max-width: 100% }
 }
 
 @media screen and (max-width: 959px) {
-    body {                                      margin: 0rem 16px 1rem 16px }
+    body {                                      margin: 0rem 1rem 1rem 1rem }
     body.mobile_nav {                           margin-bottom: 3rem }
     h2 {                                        font-size: 1.25em;
                                                 margin: 0.8em 0em }
@@ -622,6 +627,7 @@ article img {                                   max-width: 100% }
     div.metadata {                              left: -1rem;
                                                 margin-top: 1rem;
                                                 padding: 0rem 1rem }
+    iframe.video_embed {                        height: calc((100vw - 4rem) * 0.5625) }
 
 }
 

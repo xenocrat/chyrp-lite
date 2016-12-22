@@ -509,6 +509,10 @@ a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {                    background-color: #47b347;
                                                 opacity: 0.8 }
+iframe {                                        width: 100%;
+                                                height: 10em;
+                                                border: none }
+iframe.video_embed {                            height: calc((100vw - 8rem) * 0.5625) }
 img {                                           border-style: none;
                                                 margin: 0em;
                                                 padding: 0em }
@@ -566,6 +570,7 @@ img.gravatar {                                  position: absolute;
     div.category a.category {                   right: 2rem }
     div.metadata {                              padding-bottom: 2rem }
     ol.comments li {                            padding: 2rem }
+    iframe.video_embed {                        height: calc((100vw - 4rem) * 0.5625) }
     img.gravatar {                              position: static;
                                                 width: 24px;
                                                 height: 24px;
@@ -587,4 +592,5 @@ img.gravatar {                                  position: absolute;
     div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 8rem }
     div.category a.category {                   right: 8rem }
+    iframe.video_embed {                        max-height: 432px }
 }

@@ -532,6 +532,10 @@ img {                                           border-style: none;
                                                 padding: 0em }
 article > section.photo img {                   width: 100% }
 article img {                                   max-width: 100% }
+iframe {                                        width: 100%;
+                                                height: 10em;
+                                                border: none }
+iframe.video_embed {                            height: calc((100vw - 8rem) * 0.5625) }
 img.gravatar {                                  position: absolute;
                                                 top: 2rem;
                                                 left: 24px;
@@ -590,6 +594,7 @@ img.gravatar {                                  position: absolute;
                                                 top: calc(2rem + 3px) }
     div.metadata {                              padding-bottom: 2rem }
     ol.comments li {                            padding: 2rem }
+    iframe.video_embed {                        height: calc((100vw - 4rem) * 0.5625) }
     img.gravatar {                              position: static;
                                                 width: 24px;
                                                 height: 24px;
@@ -611,4 +616,5 @@ img.gravatar {                                  position: absolute;
     div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 8rem }
     div.category a.category {                   right: 8rem }
+    iframe.video_embed {                        max-height: 432px }
 }
