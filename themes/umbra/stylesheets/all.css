@@ -594,4 +594,5 @@ img.gravatar {                                  position: absolute;
     div#main > article.commentary {             padding: 0rem 8rem }
     div.category a.category {                   right: 8rem }
     iframe.video_embed {                        max-height: 432px }
+    body.preview iframe.video_embed {           max-height: none }
 }
