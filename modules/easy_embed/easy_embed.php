@@ -14,7 +14,9 @@
                           '|<!--[^>]*vimeo.com/([0-9]{9})[^>]*-->|i'                        => 'https://player.vimeo.com/video/$1',
                           '|<!--[^>]*twitch.tv/[^/]+/v/([0-9]{9})[^>]*-->|i'                => 'https://player.twitch.tv/?video=v$1',
                           '|<!--[^>]*giantbomb.com/videos/[^/]+/[0-9]+-([0-9]+)/[^>]*-->|i' => 'http://www.giantbomb.com/videos/embed/$1/',
-                          '|<!--[^>]*beam.pro/([a-z0-9_\-]+)[^>]*-->|i'                     => 'https://beam.pro/embed/player/$1');
+                          '|<!--[^>]*beam.pro/([a-z0-9_\-]+)[^>]*-->|i'                     => 'https://beam.pro/embed/player/$1',
+                          '|<!--[^>]*gfycat.com/([a-z]+)[^>]*-->|i'                         => 'https://gfycat.com/ifr/$1',
+                          '|<!--[^>]*archive.org/details/([a-z0-9_\-])[^>]*-->|i'           => 'https://archive.org/embed/$1');
 
             foreach ($urls as $view => &$embed)
                 $embed = '<iframe class="video_embed" src="'.fix($embed, true).'" allowfullscreen></iframe>';
