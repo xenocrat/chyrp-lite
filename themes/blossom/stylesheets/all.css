@@ -545,7 +545,8 @@ a.archive_post_link:active {                    background-color: #d94c7b;
                                                 opacity: 0.8 }
 iframe {                                        width: 100%;
                                                 height: 10em;
-                                                border: none }
+                                                border: none;
+                                                margin: 1rem 0rem }
 iframe.video_embed {                            max-height: 538px;
                                                 height: calc((100vw - 22rem) * 0.5625) }
 img {                                           border-style: none;
