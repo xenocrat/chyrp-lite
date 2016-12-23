@@ -182,12 +182,10 @@ var Help = {
     }
 }
 var Write = {
-    preview_support: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
-    wysiwyg_editing: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
         // Insert buttons for ajax previews.
-        if (Write.preview_support && !Write.wysiwyg_editing)
-            $("*[data-preview]").each(function() {
+        if (<?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>)
+            $("#write_form *[data-preview], #edit_form *[data-preview]").each(function() {
                 var target = $(this);
 
                 $("label[for='" + target.attr("id") + "']").append(
@@ -196,18 +194,20 @@ var Write = {
                         "alt": '(<?php echo __("Preview this field", "admin"); ?>)',
                         "title": '<?php echo __("Preview this field", "admin"); ?>',
                     }).addClass("emblem preview").click(function(e) {
-                        var content = target.val();
-                        var filter = target.attr("data-preview");
+                        var content  = target.val();
+                        var field    = target.attr("name");
+                        var safename = target.parents("#write_form").attr("class");
+                        var action   = (safename == "page") ? "preview_page" : "preview_post" ;
 
                         if (content != "") {
                             e.preventDefault();
-                            Write.show(content, filter);
+                            Write.show(action, safename, field, content);
                         }
                     })
                 );
             });
     },
-    show: function(content, filter) {
+    show: function(action, safename, field, content) {
         var uid = Date.now().toString(16);
 
         // Build a form targeting a named iframe.
@@ -222,12 +222,17 @@ var Write = {
             [$("<input>", {
                 "type": "hidden",
                 "name": "action",
-                "value": "show_preview"
+                "value": action
             }),
             $("<input>", {
                 "type": "hidden",
-                "name": "filter",
-                "value": filter
+                "name": "safename",
+                "value": safename
+            }),
+            $("<input>", {
+                "type": "hidden",
+                "name": "field",
+                "value": field
             }),
             $("<input>", {
                 "type": "hidden",

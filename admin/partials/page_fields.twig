@@ -1,7 +1,7 @@
 {{ trigger.call("before_page_fields") }}
 <p class="main_options">
 <label for="title">{{ "Title" | translate }}</label>
-<input class="text" type="text" name="title" value="{{ page is defined ? page.title | fix : '' }}" id="title" data-preview="markup_title">
+<input class="text" type="text" name="title" value="{{ page is defined ? page.title | fix : '' }}" id="title">
 </p>
 <p class="main_options">
 <label for="body">
@@ -10,7 +10,7 @@
 {% endif %}
 {{ "Body" | translate }}
 </label>
-<textarea rows="12" name="body" id="body" data-preview="markup_text">{{ page is defined ? page.body | fix : "" }}</textarea>
+<textarea rows="12" name="body" id="body" data-preview>{{ page is defined ? page.body | fix : "" }}</textarea>
 </p>
 {{ trigger.call("after_page_fields") }}
 <div id="more_options" class="more_options">
