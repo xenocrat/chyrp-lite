@@ -636,7 +636,7 @@
 
             $trigger->filter($this, "filter_post");
 
-            # Feather-specified filters.
+            # Custom filters.
             if (isset(Feathers::$custom_filters[$class]))
                 foreach (Feathers::$custom_filters[$class] as $custom_filter) {
                     $varname = $custom_filter["field"]."_unfiltered";
