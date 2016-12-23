@@ -8,7 +8,7 @@
             $this->setField(array("attr" => "body",
                                   "type" => "text_block",
                                   "label" => __("Body", "text"),
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
 
             $this->setFilter("title", array("markup_title", "markup_post_title"));
             $this->setFilter("body", array("markup_text", "markup_post_text"));

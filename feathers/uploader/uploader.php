@@ -14,7 +14,7 @@
                                   "type" => "text_block",
                                   "label" => __("Caption", "uploader"),
                                   "optional" => true,
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
 
             $this->setFilter("title", array("markup_title", "markup_post_title"));
             $this->setFilter("caption", array("markup_text", "markup_post_text"));

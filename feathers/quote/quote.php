@@ -5,13 +5,13 @@
                                   "type" => "text_block",
                                   "rows" => 5,
                                   "label" => __("Quote", "quote"),
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
             $this->setField(array("attr" => "source",
                                   "type" => "text_block",
                                   "rows" => 5,
                                   "label" => __("Source", "quote"),
                                   "optional" => true,
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
 
             $this->setFilter("quote", array("markup_text", "markup_post_text"));
             $this->setFilter("source", array("markup_text", "markup_post_text"));
