@@ -592,21 +592,15 @@
         }
 
         public function metaWeblog_getPost($struct, $post) {
-            if (!isset($post->tags))
-                $struct['mt_tags'] = "";
-            else
-                $struct['mt_tags'] = implode(", ", array_keys($post->tags));
-
+            $struct['mt_tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
             return $struct;
         }
 
         public function metaWeblog_editPost_preQuery($struct, $post = null) {
             if (isset($struct['mt_tags']))
                 $_POST['tags'] = $struct['mt_tags'];
-            else if (isset($post->tags))
-                $_POST['tags'] = $post->unlinked_tags;
             else
-                $_POST['tags'] = '';
+                $_POST['tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
         }
 
         public function linked_tags($tags) {
