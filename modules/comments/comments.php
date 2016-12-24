@@ -696,17 +696,13 @@
         }
 
         public function metaWeblog_getPost($struct, $post) {
-            if (isset($post->comment_status))
-                $struct['mt_allow_comments'] = intval($post->comment_status == 'open');
-            else
-                $struct['mt_allow_comments'] = 1;
-
+            $struct['mt_allow_comments'] = isset($post->comment_status) ? intval($post->comment_status == "open") : 1 ;
             return $struct;
         }
 
         public function metaWeblog_editPost_preQuery($struct, $post = null) {
             if (isset($struct['mt_allow_comments']))
-                $_POST['option']['comment_status'] = ($struct['mt_allow_comments'] == 1) ? 'open' : 'closed';
+                $_POST['option']['comment_status'] = ($struct['mt_allow_comments'] == 1) ? "open" : "closed" ;
         }
 
         public function post($post) {
