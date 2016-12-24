@@ -118,6 +118,9 @@
                 case 400:
                     header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
                     break;
+                case 401:
+                    header($_SERVER["SERVER_PROTOCOL"]." 401 Unauthorized");
+                    break;
                 case 403:
                     header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
                     break;
