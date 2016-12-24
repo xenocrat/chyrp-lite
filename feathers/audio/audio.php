@@ -88,11 +88,10 @@
             $post->audio_player = $this->audio_player($post->filename, array(), $post);
         }
 
-        public function audio_type($filename) {
-            $file_split = explode(".", $filename);
-            $file_ext = strtolower(end($file_split));
+        private function audio_type($filename) {
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-            switch($file_ext) {
+            switch($extension) {
                 case "mp3":
                     return "audio/mpeg";
                 case "m4a":
