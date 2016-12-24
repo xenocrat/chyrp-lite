@@ -4,8 +4,8 @@
     class Categorize extends Modules {
         public function __init() {
             $this->addAlias("mt_getCategoryList", "xmlrpc_getCategoryList");
-            $this->addAlias("mt_getPostCategories", "xmlrpc_getCategoryList");
             $this->addAlias("metaWeblog_getCategories", "xmlrpc_getCategoryList");
+            $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
         }
 
         static function __install() {
@@ -29,41 +29,33 @@
         }
 
         public function feed_item($post) {
-            if (!empty($post->category_id) OR $post->category != 0)
-               printf("        <category term=\"%s\" />\n", fix(Category::getCategory($post->category_id)->name, true));
+            if (!empty($post->category))
+               printf("        <category term=\"%s\" />\n", fix($post->category->name, true));
         }
 
-        public function metaWeblog_editPost($args, $post) {
-            if (empty($args['categories'][0]))
-                $category->id = 0;
-            else
-                $category = Category::getCategoryIDbyName($args['categories'][0]);
+        public function metaWeblog_getPost($struct, $post) {
+            if (!empty($post->category))
+                    $struct['categories'][0] = $post->category->name;
 
-            SQL::current()->replace("post_attributes",
-                                    array("name" => "category_id",
-                                          "value" => $category->id,
-                                          "post_id" => $post->id));
+            return $struct;
         }
 
-        public function metaWeblog_newPost($args, $post) {
-            if (empty($args['categories'][0]))
-                return;
-
-            $category = Category::getCategoryIDbyName($args['categories'][0]);
-
-            SQL::current()->insert("post_attributes",
-                                   array("name" => "category_id",
-                                         "value" => $category->id,
-                                         "post_id" => $post->id));
+        public function metaWeblog_editPost_preQuery($struct, $post = null) {
+            if (isset($struct['categories'][0]))
+                foreach (Category::getCategoryList() as $category)
+                    if ($category['name'] == $struct['categories'][0])
+                        $_POST['option']['category_id'] = $category["id"];
         }
 
         public function xmlrpc_getCategoryList() {
-            $categories = Category::getCategoryList();
+            $struct = array();
 
-            foreach($categories as $category)
-                $xml_cats[]['title'] = $category['name'];
+            foreach (Category::getCategoryList() as $category)
+                $struct[] = array("categoryId"   => $category["id"],
+                                  "categoryName" => $category["name"],
+                                  "htmlUrl"      => $category["url"]);
 
-            return $xml_cats;
+            return $struct;
         }
 
         public function related_posts($ids, $post, $limit) {

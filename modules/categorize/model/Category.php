@@ -33,14 +33,6 @@
             return $query;
         }
 
-        static function getCategoryIDbyName($name = string) {
-            return SQL::current()->select("categorize",
-                                          "id",
-                                          "name = :name",
-                                          "name ASC",
-                                          array(":name" => $name), 1)->fetchObject();
-        }
-
         static function getCategoryList($conds = null, $params = array()) {
             $sql = SQL::current();
 
