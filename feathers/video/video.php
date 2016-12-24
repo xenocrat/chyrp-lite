@@ -88,11 +88,10 @@
             $post->video_player = $this->video_player($post->filename, array(), $post);
         }
 
-        public function video_type($filename) {
-            $file_split = explode(".", $filename);
-            $file_ext = strtolower(end($file_split));
+        private function video_type($filename) {
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-            switch($file_ext) {
+            switch($extension) {
                 case "mp4":
                     return "video/mp4";
                 case "ogv":
