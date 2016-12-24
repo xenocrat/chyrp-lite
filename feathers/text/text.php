@@ -27,7 +27,7 @@
 
         public function update($post) {
             if (empty($_POST['body']))
-                error(__("Error"), __("Body can't be blank."), null, 422);
+                error(__("Error"), __("Body can't be blank.", "text"), null, 422);
 
             fallback($_POST['title'], "");
 
