@@ -1822,9 +1822,9 @@
      */
     function upload_filename($filename, $filter = array()) {
         $patterns = !empty($filter) ?
-            implode("|", array_map("preg_quote", $filter)) : "tar\.gz|tar\.bz|tar\.bz2|[a-z0-9]+" ;
+            implode("|", array_map("preg_quote", $filter)) : "tar\.[a-z0-9]+|[a-z0-9]+" ;
 
-        $disallow = "htaccess|php|phtml|shtml|shtm|stm|cgi|asp|aspx";
+        $disallow = "htaccess|php|php3|php4|php5|php7|phps|phtml|shtml|shtm|stm|cgi|asp|aspx";
 
         # Extract the file's basename and extension, disallow harmful extensions.
         preg_match("/(.+?)(\.($patterns)(?<!$disallow))?$/i", $filename, $matches);
