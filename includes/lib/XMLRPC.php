@@ -31,9 +31,6 @@
                              # MovableType
                              'mt.getRecentPostTitles'    => 'this:mt_getRecentPostTitles',
                              'mt.getCategoryList'        => 'this:mt_getCategoryList',
-                             'mt.getPostCategories'      => 'this:mt_getPostCategories',
-                             'mt.setPostCategories'      => 'this:mt_setPostCategories',
-                             'mt.supportedTextFilters'   => 'this:mt_supportedTextFilters',
                              'mt.supportedMethods'       => 'this:listMethods');
 
             Trigger::current()->filter($methods, "xmlrpc_methods");
@@ -389,49 +386,6 @@
 
             $categories = array();
             return Trigger::current()->filter($categories, 'mt_getCategoryList');
-        }
-
-       /**
-        * Function: mt_getPostCategories
-        * Returns a list of all categories to which the post is assigned.
-        */
-        public function mt_getPostCategories($args) {
-            $this->auth($args[1], $args[2]);
-
-            $post = new Post($args[0], array('filter' => false));
-
-            if ($post->no_results)
-                return new IXR_Error(404, __("Post not found."));
-
-            $categories = array();
-            return Trigger::current()->filter($categories, 'mt_getPostCategories', $post);
-        }
-
-       /**
-        * Function: mt_setPostCategories
-        * Sets the categories for a post.
-        */
-        public function mt_setPostCategories($args) {
-            $this->auth($args[1], $args[2], 'edit');
-            global $user;
-
-            $post = new Post($args[0], array('filter' => false));
-
-            if ($post->no_results)
-                return new IXR_Error(404, __("Post not found."));
-            elseif (!$post->deletable($user))
-                return new IXR_Error(401, __("You do not have sufficient privileges to edit this post."));
-
-            Trigger::current()->call('mt_setPostCategories', $args[3], $post);
-            return true;
-        }
-
-       /**
-        * Function: mt_supportedTextFilters
-        * Returns an empty array, as this is not applicable for Chyrp.
-        */
-        public function mt_supportedTextFilters() {
-            return array();
         }
 
        /**
