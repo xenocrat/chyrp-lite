@@ -9,29 +9,29 @@
         * Registers the various XMLRPC methods.
         */
         public function __construct() {
-            set_error_handler('XMLRPC::error_handler');
-            set_exception_handler('XMLRPC::exception_handler');
+            set_error_handler("XMLRPC::error_handler");
+            set_exception_handler("XMLRPC::exception_handler");
 
-            $methods = array('pingback.ping'             => 'this:pingback_ping',
+            $methods = array("pingback.ping"             => "this:pingback_ping",
 
                              # MetaWeblog
-                             'metaWeblog.getRecentPosts' => 'this:metaWeblog_getRecentPosts',
-                             'metaWeblog.getCategories'  => 'this:metaWeblog_getCategories',
-                             'metaWeblog.newMediaObject' => 'this:metaWeblog_newMediaObject',
-                             'metaWeblog.getPost'        => 'this:metaWeblog_getPost',
-                             'metaWeblog.newPost'        => 'this:metaWeblog_newPost',
-                             'metaWeblog.editPost'       => 'this:metaWeblog_editPost',
-                             'metaWeblog.deletePost'     => 'this:metaWeblog_deletePost',
-                             'metaWeblog.getUsersBlogs'  => 'this:metaWeblog_getUsersBlogs',
+                             "metaWeblog.getRecentPosts" => "this:metaWeblog_getRecentPosts",
+                             "metaWeblog.getCategories"  => "this:metaWeblog_getCategories",
+                             "metaWeblog.newMediaObject" => "this:metaWeblog_newMediaObject",
+                             "metaWeblog.getPost"        => "this:metaWeblog_getPost",
+                             "metaWeblog.newPost"        => "this:metaWeblog_newPost",
+                             "metaWeblog.editPost"       => "this:metaWeblog_editPost",
+                             "metaWeblog.deletePost"     => "this:metaWeblog_deletePost",
+                             "metaWeblog.getUsersBlogs"  => "this:metaWeblog_getUsersBlogs",
 
                              # Blogger
-                             'blogger.getUsersBlogs'     => 'this:blogger_getUsersBlogs',
-                             'blogger.getUserInfo'       => 'this:blogger_getUserInfo',
+                             "blogger.getUsersBlogs"     => "this:blogger_getUsersBlogs",
+                             "blogger.getUserInfo"       => "this:blogger_getUserInfo",
 
                              # MovableType
-                             'mt.getRecentPostTitles'    => 'this:mt_getRecentPostTitles',
-                             'mt.getCategoryList'        => 'this:mt_getCategoryList',
-                             'mt.supportedMethods'       => 'this:listMethods');
+                             "mt.getRecentPostTitles"    => "this:mt_getRecentPostTitles",
+                             "mt.getCategoryList"        => "this:mt_getCategoryList",
+                             "mt.supportedMethods"       => "this:listMethods");
 
             Trigger::current()->filter($methods, "xmlrpc_methods");
 
@@ -111,7 +111,7 @@
             }
 
             # Build an excerpt of up to 200 characters. Tries to start with the sentence containing the link.
-            $regex = "/.*?([^\.>]{0,100}".preg_quote($context[0], "/")."[^<]*).*/s";
+            $regex = "/.*?([^\.>]{0,100}".preg_quote($context[0], "/")."[^<]*)/s";
             $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 200);
 
             # Pingback responder must return a single string on success or IXR_Error on failure.
