@@ -1675,8 +1675,8 @@
      *     The filename of the upload relative to the uploads directory.
      */
     function upload($file, $filter = null) {
-        $file_split = explode(".", $file['name']);
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+        $filename = upload_filename($file['name'], $filter);
 
         if (!is_uploaded_file($file['tmp_name']))
             show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", fix($file['name'])));
@@ -1686,41 +1686,6 @@
 
         if (!is_writable($uploads_path))
             error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
-
-        $original_ext = strtolower(end($file_split));
-
-        # Handle common double extensions.
-        foreach (array("tar.gz", "tar.bz", "tar.bz2") as $ext) {
-            list($first, $second) = explode(".", $ext);
-            $file_first =& $file_split[count($file_split) - 2];
-
-            if (strcasecmp($file_first, $first) == 0 and strcasecmp(end($file_split), $second) == 0) {
-                $file_first = $first.".".$second;
-                array_pop($file_split);
-            }
-        }
-
-        $file_ext = strtolower(end($file_split));
-
-        # Rename these extensions for safety.
-        if (in_array($file_ext, array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
-            $file_ext = "txt";
-
-        if (!empty($filter)) {
-            $extensions = array();
-
-            foreach ((array) $filter as $string)
-                $extensions[] = strtolower($string);
-
-            if (!in_array($file_ext, $extensions) and !in_array($original_ext, $extensions))
-                error(__("Unsupported File Type"),
-                      _f("Only files of the following types are accepted: %s.", implode(", ", $extensions)));
-        }
-
-        array_pop($file_split);
-        $file_clean = implode(".", $file_split);
-        $file_clean = sanitize($file_clean, true, true, 80).".".$file_ext;
-        $filename = unique_filename($file_clean);
 
         move_uploaded_file($file['tmp_name'], $uploads_path.$filename);
         return $filename;
@@ -1739,9 +1704,11 @@
      *     The filename of the upload relative to the uploads directory.
      */
     function upload_from_url($url, $redirects = 3, $timeout = 10) {
-        preg_match("~\.[a-z0-9]+(?=($|\?))~i", $url, $file_ext);
-        fallback($file_ext[0], "bin"); # Assume unknown binary file.
+        preg_match("~[^/\?]+(?=($|\?))~i", $url, $matches);
+        fallback($matches[0], md5($url).".bin");
+
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+        $filename = upload_filename($matches[0]);
 
         if (!is_dir($uploads_path))
             error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
@@ -1749,10 +1716,7 @@
         if (!is_writable($uploads_path))
             error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
 
-        $filename = unique_filename(md5($url).".".$file_ext[0]);
-        $filepath = $uploads_path.$filename;
-
-        file_put_contents($filepath, get_remote($url, $redirects, $timeout));
+        file_put_contents($uploads_path.$filename, get_remote($url, $redirects, $timeout));
         return $filename;
     }
 
@@ -1843,41 +1807,36 @@
     }
 
     /**
-     * Function: unique_filename
-     * Generates a unique name for the supplied file in the uploads directory.
+     * Function: upload_filename
+     * Generates a sanitized unique name for an uploaded file.
      *
      * Parameters:
-     *     $name - The name to check.
-     *     $path - Path to check in.
-     *     $num - Number suffix from which to start increasing if the filename exists.
+     *     $filename - The filename to make unique.
+     *     $filter - An array of valid extensions (case insensitive).
      *
      * Returns:
-     *     A unique version of the supplied filename.
+     *     A sanitized unique version of the supplied filename.
      */
-    function unique_filename($name, $num = 2) {
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$name))
-            return $name;
+    function upload_filename($filename, $filter = array()) {
+        $patterns = !empty($filter) ?
+            implode("|", array_map("preg_quote", $filter)) : "tar\.gz|tar\.bz|tar\.bz2|[a-z0-9]+" ;
 
-        $name = explode(".", $name);
+        $disallow = "php|htaccess|shtml|shtm|stm|cgi|asp";
 
-        # Handle common double extensions.
-        foreach (array("tar.gz", "tar.bz", "tar.bz2") as $extension) {
-            list($first, $second) = explode(".", $extension);
-            $file_first =& $name[count($name) - 2];
+        # Extract the file's basename and extension, disallow harmful extensions.
+        preg_match("/(.+?)(\.($patterns)(?<!$disallow))?$/i", $filename, $matches);
 
-            if ($file_first == $first and end($name) == $second) {
-                $file_first = $first.".".$second;
-                array_pop($name);
-            }
-        }
+        # Display an error message if a valid extension was not extracted.
+        if (!empty($filter) and empty($matches[3]))
+            error(__("Error"), _f("Only %s files are accepted.", list_notate($filter)));
 
-        $ext = ".".array_pop($name);
-        $try = implode(".", $name)."-".$num.$ext;
+        $extension = fallback($matches[3], "bin");
+        $sanitized = oneof(sanitize(fallback($matches[1], ""), true, true, 80), md5($filename));
 
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$try))
-            return $try;
+        while (file_exists(uploaded($sanitized.".".$extension, false)))
+            $sanitized = "-".$sanitized;
 
-        return unique_filename(implode(".", $name).$ext, $num + 1);
+        return $sanitized.".".$extension;
     }
 
     #---------------------------------------------
