@@ -1676,16 +1676,18 @@
      */
     function upload($file, $filter = null) {
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+        $fixed_path = fix($uploads_path, false, true);
+        $fixed_name = fix($file['name'], false, true);
         $filename = upload_filename($file['name'], $filter);
 
         if (!is_uploaded_file($file['tmp_name']))
-            show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", fix($file['name'])));
+            show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", $fixed_name));
 
         if (!is_dir($uploads_path))
-            error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
+            error(__("Error"), _f("Please create the directory <em>%s</em>.", $fixed_path));
 
         if (!is_writable($uploads_path))
-            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
+            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", $fixed_path));
 
         move_uploaded_file($file['tmp_name'], $uploads_path.$filename);
         return $filename;
@@ -1708,13 +1710,14 @@
         fallback($matches[0], md5($url).".bin");
 
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+        $fixed_path = fix($uploads_path, false, true);
         $filename = upload_filename($matches[0]);
 
         if (!is_dir($uploads_path))
-            error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
+            error(__("Error"), _f("Please create the directory <em>%s</em>.", $fixed_path));
 
         if (!is_writable($uploads_path))
-            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
+            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", $fixed_path));
 
         file_put_contents($uploads_path.$filename, get_remote($url, $redirects, $timeout));
         return $filename;
@@ -1821,7 +1824,7 @@
         $patterns = !empty($filter) ?
             implode("|", array_map("preg_quote", $filter)) : "tar\.gz|tar\.bz|tar\.bz2|[a-z0-9]+" ;
 
-        $disallow = "php|htaccess|shtml|shtm|stm|cgi|asp";
+        $disallow = "htaccess|php|phtml|shtml|shtm|stm|cgi|asp|aspx";
 
         # Extract the file's basename and extension, disallow harmful extensions.
         preg_match("/(.+?)(\.($patterns)(?<!$disallow))?$/i", $filename, $matches);
