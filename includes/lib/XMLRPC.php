@@ -45,8 +45,8 @@
         public function pingback_ping($args) {
             $config     = Config::current();
             $trigger    = Trigger::current();
-            $source     = add_scheme(str_replace("&amp;", "&", $args[0]));
-            $target     = add_scheme(str_replace("&amp;", "&", $args[1]));
+            $source     = add_scheme(str_replace("&amp;", "&", fallback($args[0], "")));
+            $target     = add_scheme(str_replace("&amp;", "&", fallback($args[1], "")));
             $chyrp_host = str_replace(array("http://www.",
                                             "http://",
                                             "https://www.",
@@ -123,23 +123,23 @@
         * Returns a list of the most recent posts.
         */
         public function metaWeblog_getRecentPosts($args) {
-            $this->auth($args[1], $args[2]);
+            $this->auth(fallback($args[1]), fallback($args[2]));
 
             $config  = Config::current();
             $trigger = Trigger::current();
             $result  = array();
 
-            foreach ($this->getRecentPosts($args[3]) as $post) {
-                $struct = array('postid'            => $post->id,
-                                'userid'            => $post->user_id,
-                                'title'             => $post->title,
-                                'dateCreated'       => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)),
-                                'description'       => $post->body,
-                                'link'              => $post->url(),
-                                'permaLink'         => $post->url(),
-                                'mt_basename'       => $post->url);
+            foreach ($this->getRecentPosts(fallback($args[3])) as $post) {
+                $struct = array("postid"            => $post->id,
+                                "userid"            => $post->user_id,
+                                "title"             => $post->title,
+                                "dateCreated"       => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)),
+                                "description"       => $post->body,
+                                "link"              => $post->url(),
+                                "permaLink"         => $post->url(),
+                                "mt_basename"       => $post->url);
 
-                $result[] = $trigger->filter($struct, 'metaWeblog_getPost', $post);
+                $result[] = $trigger->filter($struct, "metaWeblog_getPost", $post);
             }
 
             return $result;
@@ -150,10 +150,10 @@
         * Returns a list of available categories.
         */
         public function metaWeblog_getCategories($args) {
-            $this->auth($args[1], $args[2]);
+            $this->auth(fallback($args[1]), fallback($args[2]));
 
             $categories = array();
-            return Trigger::current()->filter($categories, 'metaWeblog_getCategories');
+            return Trigger::current()->filter($categories, "metaWeblog_getCategories");
         }
 
        /**
@@ -161,19 +161,24 @@
         * Uploads a file to the server.
         */
         public function metaWeblog_newMediaObject($args) {
-            $this->auth($args[1], $args[2]);
+            $this->auth(fallback($args[1]), fallback($args[2]));
+
+            fallback($args[3], array());
+            fallback($args[3]['name']);
+            fallback($args[3]['bits']);
 
             $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+            $fixed_path = fix($uploads_path, false, true);
             $filename = upload_filename($args[3]['name']);
 
             if (!is_dir($uploads_path))
-                throw new Exception(_f("Please create the directory <em>%s</em>.", fix($uploads_path)), 501);
+                throw new Exception(_f("Please create the directory <em>%s</em>.", $fixed_path), 501);
 
             if (!is_writable($uploads_path))
-                throw new Exception(_f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)), 501);
+                throw new Exception(_f("Upload destination <em>%s</em> is not writable.", $fixed_path), 501);
 
             file_put_contents($uploads_path.$filename, $args[3]['bits']);
-            return array('file' => $filename, 'url' => uploaded($filename));
+            return array("file" => $filename, "url" => uploaded($filename));
         }
 
        /**
@@ -181,9 +186,17 @@
         * Retrieves a specified post.
         */
         public function metaWeblog_getPost($args) {
-            $this->auth($args[1], $args[2]);
+            $this->auth(fallback($args[1]), fallback($args[2]));
+            global $user;
 
-            $post = new Post($args[0], array('filter' => false));
+            $post = new Post(fallback($args[0]), array("filter" => false));
+
+            if ($post->no_results)
+                return new IXR_Error(404, __("Post not found."));
+
+            if (!$post->editable($user))
+                return new IXR_Error(401, __("You do not have sufficient privileges to edit this post."));
+
             $struct = array('postid'            => $post->id,
                             'userid'            => $post->user_id,
                             'title'             => $post->title,
@@ -193,7 +206,7 @@
                             'permaLink'         => $post->url(),
                             'mt_basename'       => $post->url);
 
-            Trigger::current()->filter($struct, 'metaWeblog_getPost', $post);
+            Trigger::current()->filter($struct, "metaWeblog_getPost", $post);
             return array($struct);
         }
 
@@ -202,12 +215,19 @@
         * Creates a new post.
         */
         public function metaWeblog_newPost($args) {
-            $this->auth($args[1], $args[2], 'add');
+            $this->auth(fallback($args[1]), fallback($args[2]), "add");
             global $user;
 
-            # Support for extended body.
+            fallback($args[3], array());
+            fallback($args[3]['description'], "");
+            fallback($args[3]['mt_basename'], "");
+            fallback($args[3]['title'], "");
+            fallback($args[3]['post_status']);
+
+            # XML_RPC_FEATHER must support a body attribute.
             $body = $args[3]['description'];
 
+            # Support for extended body.
             if (!empty($args[3]['mt_text_more']))
                 $body .= '<!--more-->'.$args[3]['mt_text_more'];
 
@@ -215,35 +235,29 @@
             if (!empty($args[3]['mt_excerpt']))
                 $body = $args[3]['mt_excerpt']."\n\n".$body;
 
-            if (trim($body) === '')
+            if (trim($body) === "")
                 return new IXR_Error(400, __("Body can't be blank.", "text"));
 
-            $clean = sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 80);
+            $clean = sanitize(oneof($args[3]['mt_basename'], $args[3]['title']), true, true, 80);
 
-            $_POST['user_id'] = $user->id;
             $_POST['feather'] = XML_RPC_FEATHER;
+            $_POST['user_id'] = $user->id;
             $_POST['created_at'] = oneof($this->convertFromDateCreated($args[3]), datetime());
 
-            if ($user->group->can('add_post'))
-                $_POST['status'] = ($args[4]) ? 'public' : 'draft';
+            if ($user->group->can("add_post"))
+                $_POST['status'] = ($args[3]['post_status'] == "draft") ? "draft" : "public" ;
             else
-                $_POST['status'] = 'draft';
+                $_POST['status'] = "draft";
 
             $trigger = Trigger::current();
-            $trigger->call('metaWeblog_newPost_preQuery', $args[3]);
+            $trigger->call("metaWeblog_newPost_preQuery", $args[3]);
 
-            $post = Post::add(array('title' => $args[3]['title'],
-                                    'body'  => $body),
-                              $clean);
+            $post = Post::add(array("title" => $args[3]['title'], "body"  => $body), $clean);
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
 
-            $trigger->call('metaWeblog_newPost', $args[3], $post);
-
-            # Send any and all pingbacks to URLs in the body.
-            if (Config::current()->send_pingbacks)
-                send_pingbacks($args[3]['description'], $post);
+            $trigger->call("metaWeblog_newPost", $args[3], $post);
 
             return $post->id;
         }
@@ -253,15 +267,22 @@
         * Updates a specified post.
         */
         public function metaWeblog_editPost($args) {
-            $this->auth($args[1], $args[2], 'edit');
+            $this->auth(fallback($args[1]), fallback($args[2]), "edit");
             global $user;
 
-            if (!Post::exists($args[0]))
-                return new IXR_Error(404, __("Post not found."));
+            $trigger = Trigger::current();
 
-            # Support for extended body
+            fallback($args[0]);
+            fallback($args[3], array());
+            fallback($args[3]['description'], "");
+            fallback($args[3]['mt_basename'], "");
+            fallback($args[3]['title'], "");
+            fallback($args[3]['post_status']);
+
+            # XML_RPC_FEATHER must support a body attribute.
             $body = $args[3]['description'];
 
+            # Support for extended body.
             if (!empty($args[3]['mt_text_more']))
                 $body .= '<!--more-->'.$args[3]['mt_text_more'];
 
@@ -272,32 +293,30 @@
             if (trim($body) === '')
                 return new IXR_Error(400, __("Body can't be blank."));
 
-            $post = new Post($args[0], array('filter' => false));
+            $post = new Post($args[0], array("filter" => false));
 
-            # More specific permission check
+            if ($post->no_results)
+                return new IXR_Error(404, __("Post not found."));
+
             if (!$post->editable($user))
                 return new IXR_Error(401, __("You do not have sufficient privileges to edit this post."));
 
-            # Enforce post status when necessary
-            if (!$user->group->can('edit_own_post', 'edit_post'))
-                $status = 'draft';
-            elseif ($post->status !== 'public' and $post->status !== 'draft')
-                $status = $post->status;
+            if ($user->group->can("edit_own_post", "edit_post"))
+                $_POST['status'] = ($args[3]['post_status'] == "draft") ? "draft" : $post->status ;
             else
-                $status = ($args[4]) ? 'public' : 'draft';
+                $_POST['status'] = $post->status;
 
-            $trigger = Trigger::current();
-            $trigger->call('metaWeblog_editPost_preQuery', $args[3], $post);
+            $trigger->call("metaWeblog_editPost_preQuery", $args[3], $post);
 
-            $post->update(array('title' => $args[3]['title'], 'body' => $body ),
+            $post->update(array("title" => $args[3]['title'], "body" => $body),
                           null,
                           $post->pinned,
                           $status,
                           $post->clean,
-                          sanitize(oneof(@$args[3]['mt_basename'], $args[3]['title']), true, true, 80),
+                          oneof(sanitize($args[3]['mt_basename'], true, true, 80), $post->url),
                           oneof($this->convertFromDateCreated($args[3]), $post->created_at));
 
-            $trigger->call('metaWeblog_editPost', $args[3], $post);
+            $trigger->call("metaWeblog_editPost", $args[3], $post);
 
             return true;
         }
@@ -307,14 +326,15 @@
         * Deletes a specified post.
         */
         public function metaWeblog_deletePost($args) {
-            $this->auth($args[2], $args[3], 'delete');
+            $this->auth(fallback($args[1]), fallback($args[2]), "delete");
             global $user;
 
-            $post = new Post($args[1], array('filter' => false));
+            $post = new Post(fallback($args[1]), array("filter" => false));
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
-            elseif (!$post->deletable($user))
+
+            if (!$post->deletable($user))
                 return new IXR_Error(401, __("You do not have sufficient privileges to delete this post."));
 
             Post::delete($post->id);
@@ -326,12 +346,12 @@
         * Returns information about the blog.
         */
         public function metaWeblog_getUsersBlogs($args) {
-            $this->auth($args[1], $args[2]);
+            $this->auth(fallback($args[1]), fallback($args[2]));
             $config = Config::current();
 
-            return array(array('url'      => $config->url,
-                               'blogName' => $config->name,
-                               'blogid'   => 1));
+            return array(array("url"      => $config->url,
+                               "blogName" => $config->name,
+                               "blogid"   => 1));
         }
 
        /**
@@ -347,15 +367,15 @@
         * Retrieves a specified user.
         */
         public function blogger_getUserInfo($args) {
-            $this->auth($args[1], $args[2]);
+            $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
-            return array(array('userid'    => $user->id,
-                               'nickname'  => $user->full_name,
-                               'firstname' => '',
-                               'lastname'  => '',
-                               'email'     => $user->email,
-                               'url'       => $user->website));
+            return array(array("userid"    => $user->id,
+                               "nickname"  => $user->full_name,
+                               "firstname" => "",
+                               "lastname"  => "",
+                               "email"     => $user->email,
+                               "url"       => $user->website));
         }
 
        /**
@@ -363,15 +383,15 @@
         * Returns a bandwidth-friendly list of the most recent posts.
         */
         public function mt_getRecentPostTitles($args) {
-            $this->auth($args[1], $args[2]);
+            $this->auth(fallback($args[1]), fallback($args[2]));
 
             $result = array();
 
-            foreach ($this->getRecentPosts($args[3]) as $post) {
-                $result[] = array('postid'      => $post->id,
-                                  'userid'      => $post->user_id,
-                                  'title'       => $post->title,
-                                  'dateCreated' => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)));
+            foreach ($this->getRecentPosts(fallback($args[3])) as $post) {
+                $result[] = array("postid"      => $post->id,
+                                  "userid"      => $post->user_id,
+                                  "title"       => $post->title,
+                                  "dateCreated" => new IXR_Date(when('Ymd\TH:i:s', $post->created_at)));
             }
 
             return $result;
@@ -382,10 +402,10 @@
         * Returns a list of available categories.
         */
         public function mt_getCategoryList($args) {
-            $this->auth($args[1], $args[2]);
+            $this->auth(fallback($args[1]), fallback($args[2]));
 
             $categories = array();
-            return Trigger::current()->filter($categories, 'mt_getCategoryList');
+            return Trigger::current()->filter($categories, "mt_getCategoryList");
         }
 
        /**
@@ -400,18 +420,18 @@
 
             $where = array('feather' => XML_RPC_FEATHER);
 
-            if ($user->group->can('view_own_draft', 'view_draft'))
-                $where['status'] = array('public', 'draft');
+            if ($user->group->can("view_own_draft", "view_draft"))
+                $where['status'] = array("public", "draft");
             else
-                $where['status'] = 'public';
+                $where['status'] = "public";
 
-            if (!$user->group->can('view_draft', 'edit_draft', 'edit_post', 'delete_draft', 'delete_post'))
+            if (!$user->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where['user_id'] = $user->id;
 
-            return Post::find(array('where'  => $where,
-                                    'order'  => 'created_at DESC, id DESC',
-                                    'limit'  => $limit),
-                              array('filter' => false));
+            return Post::find(array("where"  => $where,
+                                    "order"  => "created_at DESC, id DESC",
+                                    "limit"  => (int) $limit),
+                              array("filter" => false));
         }
 
        /**
@@ -429,7 +449,7 @@
         * Function: auth
         * Authenticates a given login and password, and checks for appropriate permission.
         */
-        private function auth($login, $password, $do = 'add') {
+        private function auth($login, $password, $do = "add") {
             if (!Config::current()->enable_xmlrpc)
                 throw new Exception(__("XML-RPC support is disabled for this site."), 501);
 
@@ -438,7 +458,7 @@
 
             global $user;
 
-            $user = new User(null, array('where' => array('login' => $login)));
+            $user = new User(null, array("where" => array("login" => $login)));
 
             if (!$user->group->can("{$do}_own_post", "{$do}_post", "{$do}_draft", "{$do}_own_draft"))
                 throw new Exception(__("You do not have sufficient privileges to do that."), 401);
