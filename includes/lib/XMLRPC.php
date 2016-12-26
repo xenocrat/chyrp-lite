@@ -224,7 +224,7 @@
             fallback($args[3]['title'], "");
             fallback($args[3]['post_status']);
 
-            # XML_RPC_FEATHER must support a body attribute.
+            # XML_RPC_FEATHER must support XML_RPC_TITLE and XML_RPC_DESCRIPTION post attributes.
             $body = $args[3]['description'];
 
             # Support for extended body.
@@ -236,7 +236,7 @@
                 $body = $args[3]['mt_excerpt']."\n\n".$body;
 
             if (trim($body) === "")
-                return new IXR_Error(400, __("Body can't be blank.", "text"));
+                return new IXR_Error(400, __("Post can't be empty."));
 
             $clean = sanitize(oneof($args[3]['mt_basename'], $args[3]['title']), true, true, 80);
 
@@ -252,7 +252,9 @@
             $trigger = Trigger::current();
             $trigger->call("metaWeblog_newPost_preQuery", $args[3]);
 
-            $post = Post::add(array("title" => $args[3]['title'], "body"  => $body), $clean);
+            $post = Post::add(array(XML_RPC_TITLE => $args[3]['title'],
+                                    XML_RPC_DESCRIPTION  => $body),
+                              $clean);
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
@@ -279,7 +281,7 @@
             fallback($args[3]['title'], "");
             fallback($args[3]['post_status']);
 
-            # XML_RPC_FEATHER must support a body attribute.
+            # XML_RPC_FEATHER must support XML_RPC_TITLE and XML_RPC_DESCRIPTION post attributes.
             $body = $args[3]['description'];
 
             # Support for extended body.
@@ -291,7 +293,7 @@
                 $body = $args[3]['mt_excerpt']."\n\n".$body;
 
             if (trim($body) === '')
-                return new IXR_Error(400, __("Body can't be blank."));
+                return new IXR_Error(400, __("Post can't be empty."));
 
             $post = new Post($args[0], array("filter" => false));
 
@@ -308,7 +310,8 @@
 
             $trigger->call("metaWeblog_editPost_preQuery", $args[3], $post);
 
-            $post->update(array("title" => $args[3]['title'], "body" => $body),
+            $post->update(array(XML_RPC_TITLE => $args[3]['title'],
+                                XML_RPC_DESCRIPTION => $body),
                           null,
                           $post->pinned,
                           $status,
