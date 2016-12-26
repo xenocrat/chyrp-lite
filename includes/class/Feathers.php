@@ -33,6 +33,10 @@
          */
         protected function setFilter($field, $name) {
             self::$filters[get_class($this)][] = array("field" => $field, "name" => $name);
+
+            if (isset($this->fields[$field]))
+                foreach ((array) $name as $filter)
+                    $this->fields[$field]["filters"][] = $filter;
         }
 
         /**
@@ -49,6 +53,10 @@
          */
         protected function customFilter($field, $name, $priority = 10) {
             self::$custom_filters[get_class($this)][] = array("field" => $field, "name" => $name);
+
+            if (isset($this->fields[$field]))
+                foreach ((array) $name as $filter)
+                    $this->fields[$field]["custom_filters"][] = $filter;
         }
 
         /**
