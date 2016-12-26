@@ -173,7 +173,7 @@
 
             $main->display(array("pages".DIR."category", "pages".DIR."index"),
                            array("posts" => $posts, "category" => $category->name),
-                           _f("Posts in category %s", fix($category->name), "categorize"));
+                           _f("Posts in category &#8220;%s&#8221;", fix($category->name), "categorize"));
         }
 
         public function manage_nav($navs) {
