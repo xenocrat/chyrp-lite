@@ -58,11 +58,11 @@ var ChyrpComment = {
         }
     },
     fetch: function() {
-        if (ChyrpComment.failed || $("#comments").attr("data-post") == undefined)
+        if (ChyrpComment.failed || $("#comments").attr("data-post_id") == undefined)
             return;
 
         var comments = $("#comments");
-        var id = comments.attr("data-post");
+        var id = comments.attr("data-post_id");
         var ts = comments.attr("data-timestamp");
 
         if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && !ChyrpComment.failed && $("#comments .comment").length < ChyrpComment.per_page) {
