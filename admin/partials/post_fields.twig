@@ -2,7 +2,7 @@
 {% for field in feather.fields %}
 <p class="main_options">
 <label for="{{ field.attr }}_field">
-{% if field.type == "text_block" and field.preview is defined and field.preview and site.enable_markdown %}
+{% if site.enable_markdown and field.filters is defined and (field.filters | contains("markup_text")) %}
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ field.label }}
