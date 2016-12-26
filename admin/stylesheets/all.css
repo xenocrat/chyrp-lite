@@ -346,6 +346,7 @@ input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
 input:-ms-input-placeholder,
+input::-ms-input-placeholder,
 input:input-placeholder {                       color: #ddd;
                                                 opacity: 1 }
 label {                                         line-height: 2 }
