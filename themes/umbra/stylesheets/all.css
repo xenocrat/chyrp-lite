@@ -64,7 +64,7 @@ body {                                          font-family: "Open Sans webfont"
                                                 background-color: #202021;
                                                 margin: 0em 0em 4rem 0em;
                                                 min-width: 288px }
-body.preview {                                  margin: 4rem }
+body.preview {                                  margin: 0rem }
 p {                                             margin: 0em 0em 1em 0em }
 p:last-child, p:empty {                         margin-bottom: 0em }
 h1 {                                            font-size: 2em;
@@ -230,6 +230,7 @@ input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
 input:-ms-input-placeholder,
+input::-ms-input-placeholder,
 input:placeholder {                             color: #999491;
                                                 opacity: 1 }
 input[type='checkbox'] {                        width: auto }
@@ -594,5 +595,4 @@ img.gravatar {                                  position: absolute;
     div#main > article.commentary {             padding: 0rem 8rem }
     div.category a.category {                   right: 8rem }
     iframe.video_embed {                        max-height: 432px }
-    body.preview iframe.video_embed {           max-height: none }
 }
