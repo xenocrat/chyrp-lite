@@ -58,7 +58,7 @@ var ChyrpComment = {
         }
     },
     fetch: function() {
-        if (ChyrpComment.failed || $("#comments").attr("data-post_id") == undefined)
+        if (ChyrpComment.failed || $("#comments").attr("data-post_id") == undefined || $("#comments").attr("data-timestamp") == undefined)
             return;
 
         var comments = $("#comments");
