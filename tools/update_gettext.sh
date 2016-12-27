@@ -13,6 +13,7 @@ ruby ./tools/gettext.rb ./modules/cacher/       --domain=cacher              > .
 ruby ./tools/gettext.rb ./modules/cascade/      --domain=cascade             > ./modules/cascade/locale/en_US/LC_MESSAGES/cascade.pot
 ruby ./tools/gettext.rb ./modules/categorize/   --domain=categorize          > ./modules/categorize/locale/en_US/LC_MESSAGES/categorize.pot
 ruby ./tools/gettext.rb ./modules/comments/     --domain=comments            > ./modules/comments/locale/en_US/LC_MESSAGES/comments.pot
+ruby ./tools/gettext.rb ./modules/easy_embed/   --domain=easy_embed          > ./modules/easy_embed/locale/en_US/LC_MESSAGES/easy_embed.pot
 ruby ./tools/gettext.rb ./modules/highlighter/  --domain=highlighter         > ./modules/highlighter/locale/en_US/LC_MESSAGES/highlighter.pot
 ruby ./tools/gettext.rb ./modules/lightbox/     --domain=lightbox            > ./modules/lightbox/locale/en_US/LC_MESSAGES/lightbox.pot
 ruby ./tools/gettext.rb ./modules/likes/        --domain=likes               > ./modules/likes/locale/en_US/LC_MESSAGES/likes.pot

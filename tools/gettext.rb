@@ -11,7 +11,7 @@ OPTIONS = {
   :theme => false,
   :msgstr => "",
   :msgstr_filter => "",
-  :exclude => [".git", "modules", "lib", "feathers", "themes", "admin"]
+  :exclude => [".git", "modules", "feathers", "themes", "admin", "tools", "includes/lib/Twig", "includes/lib/IXR"]
 }
 
 # Shamelessly taken from the Twig lexer. :P
