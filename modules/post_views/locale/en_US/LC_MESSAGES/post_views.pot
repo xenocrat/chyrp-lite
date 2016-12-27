@@ -17,20 +17,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: feathers/quote/info.php:3
-#: feathers/quote/quote.php:7
-msgid "Quote"
+#: modules/post_views/info.php:3
+msgid "Post Views"
 msgstr ""
 
-#: feathers/quote/info.php:6
-msgid "Post quotes and cite sources."
+#: modules/post_views/info.php:6
+msgid "Counts the number of times your posts have been viewed."
 msgstr ""
 
-#: feathers/quote/quote.php:12
-msgid "Source"
+#: modules/post_views/info.php:10
+msgid "Do you want to remove view counts from the database?"
 msgstr ""
 
-#: feathers/quote/quote.php:22
-msgid "Quote can't be empty."
+#: modules/post_views/post_views.php:20
+msgid "View Count"
+msgstr ""
+
+#: modules/post_views/post_views.php:26
+#, php-format
+msgid "Download view count for &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/post_views/post_views.php:42
+msgid "An ID is required to download a view count."
 msgstr ""
 

@@ -17,20 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: feathers/quote/info.php:3
-#: feathers/quote/quote.php:7
-msgid "Quote"
+#: modules/easy_embed/info.php:3
+msgid "Easy Embed"
 msgstr ""
 
-#: feathers/quote/info.php:6
-msgid "Post quotes and cite sources."
-msgstr ""
-
-#: feathers/quote/quote.php:12
-msgid "Source"
-msgstr ""
-
-#: feathers/quote/quote.php:22
-msgid "Quote can't be empty."
+#: modules/easy_embed/info.php:6
+msgid "Embed a video in your blog content by pasting its URL surrounded by <code>&lt;!--</code> and <code>--&gt;</code>."
 msgstr ""
 

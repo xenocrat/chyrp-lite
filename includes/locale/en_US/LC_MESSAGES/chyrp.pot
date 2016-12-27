@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-23 16:32+0000\n"
+"POT-Creation-Date: 2016-12-27 14:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: includes/ajax.php:13
 #: includes/ajax.php:16
-#: includes/ajax.php:86
+#: includes/ajax.php:119
 #: includes/class/Route.php:46
 #: includes/class/Route.php:49
 #: includes/class/Route.php:73
@@ -59,22 +59,23 @@ msgstr ""
 #: includes/controller/Admin.php:1764
 #: includes/controller/Admin.php:1805
 #: includes/controller/Admin.php:1944
-#: includes/controller/Main.php:369
+#: includes/controller/Main.php:368
 #: includes/download.php:12
 #: includes/download.php:15
-#: includes/error.php:164
-#: includes/helpers.php:1685
-#: includes/helpers.php:1688
-#: includes/helpers.php:1747
-#: includes/helpers.php:1750
-#: includes/helpers.php:1816
-#: includes/helpers.php:1819
-#: includes/helpers.php:1822
-#: includes/helpers.php:1825
-#: includes/helpers.php:1828
-#: includes/helpers.php:1831
+#: includes/error.php:175
+#: includes/helpers.php:1687
+#: includes/helpers.php:1690
+#: includes/helpers.php:1717
+#: includes/helpers.php:1720
+#: includes/helpers.php:1783
+#: includes/helpers.php:1786
+#: includes/helpers.php:1789
+#: includes/helpers.php:1792
+#: includes/helpers.php:1795
+#: includes/helpers.php:1798
+#: includes/helpers.php:1801
+#: includes/helpers.php:1806
 #: includes/helpers.php:1834
-#: includes/helpers.php:1839
 #: includes/thumb.php:15
 #: includes/thumb.php:18
 msgid "Error"
@@ -98,6 +99,8 @@ msgstr ""
 #: includes/ajax.php:52
 #: includes/ajax.php:58
 #: includes/ajax.php:61
+#: includes/ajax.php:90
+#: includes/ajax.php:93
 #: includes/class/Route.php:102
 #: includes/controller/Admin.php:136
 #: includes/controller/Admin.php:145
@@ -167,10 +170,10 @@ msgstr ""
 #: includes/controller/Admin.php:1850
 #: includes/controller/Admin.php:1874
 #: includes/controller/Admin.php:1880
-#: includes/controller/Main.php:340
-#: includes/controller/Main.php:401
+#: includes/controller/Main.php:339
+#: includes/controller/Main.php:404
 #: includes/download.php:18
-#: includes/helpers.php:1682
+#: includes/helpers.php:1684
 #: includes/thumb.php:21
 msgid "Access Denied"
 msgstr ""
@@ -185,6 +188,7 @@ msgstr ""
 #: includes/ajax.php:24
 #: includes/ajax.php:41
 #: includes/ajax.php:58
+#: includes/ajax.php:90
 #: includes/controller/Admin.php:179
 #: includes/controller/Admin.php:237
 #: includes/controller/Admin.php:269
@@ -262,17 +266,17 @@ msgstr ""
 #: includes/controller/Admin.php:231
 #: includes/controller/Admin.php:255
 #: includes/controller/Admin.php:280
-#: includes/lib/XMLRPC.php:244
-#: includes/lib/XMLRPC.php:264
-#: includes/lib/XMLRPC.php:319
-#: includes/lib/XMLRPC.php:395
-#: includes/lib/XMLRPC.php:414
+#: includes/lib/XMLRPC.php:195
+#: includes/lib/XMLRPC.php:260
+#: includes/lib/XMLRPC.php:301
+#: includes/lib/XMLRPC.php:338
 msgid "Post not found."
 msgstr ""
 
 #: includes/ajax.php:35
 #: includes/controller/Admin.php:258
 #: includes/controller/Admin.php:283
+#: includes/lib/XMLRPC.php:341
 msgid "You do not have sufficient privileges to delete this post."
 msgstr ""
 
@@ -307,22 +311,25 @@ msgid "Page deleted."
 msgstr ""
 
 #: includes/ajax.php:61
-msgid "You do not have sufficient privileges to add content."
-msgstr ""
-
-#: includes/ajax.php:64
-msgid "No Filter Specified"
-msgstr ""
-
-#: includes/ajax.php:64
-msgid "A filter is required to preview content."
-msgstr ""
-
-#: includes/ajax.php:78
-msgid "Preview"
+#: includes/controller/Admin.php:145
+#: includes/controller/Admin.php:176
+#: includes/controller/Admin.php:1377
+msgid "You do not have sufficient privileges to add posts."
 msgstr ""
 
 #: includes/ajax.php:86
+#: includes/ajax.php:111
+msgid "Preview"
+msgstr ""
+
+#: includes/ajax.php:93
+#: includes/controller/Admin.php:359
+#: includes/controller/Admin.php:370
+#: includes/controller/Admin.php:1409
+msgid "You do not have sufficient privileges to add pages."
+msgstr ""
+
+#: includes/ajax.php:119
 #: includes/class/Route.php:49
 #: includes/class/Route.php:73
 msgid "Invalid action."
@@ -356,15 +363,15 @@ msgstr ""
 msgid "&larr; First"
 msgstr ""
 
-#: includes/class/Query.php:202
+#: includes/class/Query.php:199
 msgid "Query String"
 msgstr ""
 
-#: includes/class/Query.php:204
+#: includes/class/Query.php:201
 msgid "Parameters"
 msgstr ""
 
-#: includes/class/Query.php:208
+#: includes/class/Query.php:205
 msgid "Database Error"
 msgstr ""
 
@@ -384,20 +391,20 @@ msgstr ""
 msgid "PDO driver is unavailable for this database."
 msgstr ""
 
-#: includes/class/Theme.php:365
+#: includes/class/Theme.php:348
 msgid "By browsing this website you are agreeing to our use of cookies."
 msgstr ""
 
-#: includes/class/Update.php:16
+#: includes/class/Update.php:19
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr ""
 
-#: includes/class/Update.php:18
-#: includes/class/Update.php:24
+#: includes/class/Update.php:21
+#: includes/class/Update.php:27
 msgid "Go to GitHub &rarr;"
 msgstr ""
 
-#: includes/class/Update.php:22
+#: includes/class/Update.php:25
 #, php-format
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr ""
@@ -408,20 +415,13 @@ msgstr ""
 
 #: includes/controller/Admin.php:68
 #: includes/controller/Admin.php:2117
-#: includes/controller/Main.php:68
-#: includes/controller/Main.php:792
-#: includes/controller/Main.php:841
+#: includes/controller/Main.php:67
+#: includes/controller/Main.php:845
 msgid "Twig Error"
 msgstr ""
 
 #: includes/controller/Admin.php:136
 msgid "You do not have sufficient privileges to view this area."
-msgstr ""
-
-#: includes/controller/Admin.php:145
-#: includes/controller/Admin.php:176
-#: includes/controller/Admin.php:1377
-msgid "You do not have sufficient privileges to add posts."
 msgstr ""
 
 #: includes/controller/Admin.php:150
@@ -443,6 +443,8 @@ msgstr ""
 
 #: includes/controller/Admin.php:206
 #: includes/controller/Admin.php:234
+#: includes/lib/XMLRPC.php:198
+#: includes/lib/XMLRPC.php:304
 msgid "You do not have sufficient privileges to edit this post."
 msgstr ""
 
@@ -460,12 +462,6 @@ msgstr ""
 
 #: includes/controller/Admin.php:296
 msgid "You do not have sufficient privileges to manage any posts."
-msgstr ""
-
-#: includes/controller/Admin.php:359
-#: includes/controller/Admin.php:370
-#: includes/controller/Admin.php:1409
-msgid "You do not have sufficient privileges to add pages."
 msgstr ""
 
 #: includes/controller/Admin.php:376
@@ -520,20 +516,20 @@ msgstr ""
 
 #: includes/controller/Admin.php:580
 #: includes/controller/Admin.php:670
-#: includes/controller/Main.php:453
+#: includes/controller/Main.php:456
 msgid "That username is already in use."
 msgstr ""
 
 #: includes/controller/Admin.php:583
-#: includes/controller/Main.php:456
+#: includes/controller/Main.php:459
 #: install.php:479
 msgid "Passwords cannot be blank."
 msgstr ""
 
 #: includes/controller/Admin.php:586
 #: includes/controller/Admin.php:679
-#: includes/controller/Main.php:458
-#: includes/controller/Main.php:622
+#: includes/controller/Main.php:461
+#: includes/controller/Main.php:625
 #: install.php:444
 #: install.php:481
 msgid "Passwords do not match."
@@ -547,8 +543,8 @@ msgstr ""
 #: includes/controller/Admin.php:592
 #: includes/controller/Admin.php:687
 #: includes/controller/Admin.php:1752
-#: includes/controller/Main.php:463
-#: includes/controller/Main.php:627
+#: includes/controller/Main.php:466
+#: includes/controller/Main.php:630
 #: install.php:484
 msgid "Email address cannot be blank."
 msgstr ""
@@ -556,16 +552,16 @@ msgstr ""
 #: includes/controller/Admin.php:595
 #: includes/controller/Admin.php:690
 #: includes/controller/Admin.php:1755
-#: includes/controller/Main.php:465
-#: includes/controller/Main.php:629
+#: includes/controller/Main.php:468
+#: includes/controller/Main.php:632
 #: install.php:486
 msgid "Invalid email address."
 msgstr ""
 
 #: includes/controller/Admin.php:598
 #: includes/controller/Admin.php:693
-#: includes/controller/Main.php:471
-#: includes/controller/Main.php:632
+#: includes/controller/Main.php:474
+#: includes/controller/Main.php:635
 msgid "Invalid website URL."
 msgstr ""
 
@@ -889,7 +885,7 @@ msgid "Page created."
 msgstr ""
 
 #: includes/controller/Admin.php:1924
-#: includes/controller/Main.php:562
+#: includes/controller/Main.php:565
 msgid "You are already logged in."
 msgstr ""
 
@@ -966,156 +962,153 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#: includes/controller/Main.php:208
+#: includes/controller/Main.php:207
 msgid "Archive"
 msgstr ""
 
-#: includes/controller/Main.php:241
-#: includes/controller/Main.php:250
-#: includes/controller/Main.php:258
+#: includes/controller/Main.php:240
+#: includes/controller/Main.php:249
+#: includes/controller/Main.php:257
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: includes/controller/Main.php:306
+#: includes/controller/Main.php:305
 msgid "Please enter a search term."
 msgstr ""
 
-#: includes/controller/Main.php:329
+#: includes/controller/Main.php:328
 #, php-format
 msgid "Search results for \"%s\""
 msgstr ""
 
-#: includes/controller/Main.php:340
+#: includes/controller/Main.php:339
 msgid "You do not have sufficient privileges to view drafts."
 msgstr ""
 
-#: includes/controller/Main.php:349
+#: includes/controller/Main.php:348
 msgid "Drafts"
 msgstr ""
 
-#: includes/controller/Main.php:370
+#: includes/controller/Main.php:369
 msgid "The post cannot be displayed because the template for this feather was not found."
 msgstr ""
 
-#: includes/controller/Main.php:373
+#: includes/controller/Main.php:372
 msgid "This post is not published."
 msgstr ""
 
-#: includes/controller/Main.php:376
+#: includes/controller/Main.php:375
 #, php-format
 msgid "This post is scheduled to be published %s."
 msgstr ""
 
-#: includes/controller/Main.php:401
+#: includes/controller/Main.php:404
 msgid "You are not allowed to view this page."
 msgstr ""
 
-#: includes/controller/Main.php:441
+#: includes/controller/Main.php:444
 msgid "This site does not allow registration."
 msgstr ""
 
-#: includes/controller/Main.php:444
+#: includes/controller/Main.php:447
 msgid "You cannot register an account because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:448
+#: includes/controller/Main.php:451
 #: install.php:476
 msgid "Please enter a username for your account."
 msgstr ""
 
-#: includes/controller/Main.php:460
-#: includes/controller/Main.php:624
+#: includes/controller/Main.php:463
+#: includes/controller/Main.php:627
 #: install.php:726
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
-#: includes/controller/Main.php:468
+#: includes/controller/Main.php:471
 msgid "Incorrect captcha code."
 msgstr ""
 
-#: includes/controller/Main.php:497
+#: includes/controller/Main.php:500
 msgid "We have emailed you an activation link."
 msgstr ""
 
-#: includes/controller/Main.php:502
-#: includes/controller/Main.php:529
+#: includes/controller/Main.php:505
+#: includes/controller/Main.php:532
 msgid "Your account is now active."
 msgstr ""
 
-#: includes/controller/Main.php:506
+#: includes/controller/Main.php:509
 msgid "Register"
 msgstr ""
 
-#: includes/controller/Main.php:515
+#: includes/controller/Main.php:518
 msgid "You cannot activate an account because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:520
-#: includes/controller/Main.php:543
-#: includes/controller/Main.php:669
+#: includes/controller/Main.php:523
+#: includes/controller/Main.php:546
+#: includes/controller/Main.php:672
 msgid "Please contact the blog administrator for help with your account."
 msgstr ""
 
-#: includes/controller/Main.php:523
+#: includes/controller/Main.php:526
 msgid "Your account has already been activated."
 msgstr ""
 
-#: includes/controller/Main.php:538
-#: includes/controller/Main.php:664
+#: includes/controller/Main.php:541
+#: includes/controller/Main.php:667
 msgid "You cannot reset your password because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:553
+#: includes/controller/Main.php:556
 msgid "We have emailed you a new password."
 msgstr ""
 
-#: includes/controller/Main.php:573
+#: includes/controller/Main.php:576
+#: includes/lib/XMLRPC.php:460
 msgid "Incorrect username and/or password."
 msgstr ""
 
-#: includes/controller/Main.php:579
+#: includes/controller/Main.php:582
 msgid "You must activate your account before you log in."
 msgstr ""
 
-#: includes/controller/Main.php:585
+#: includes/controller/Main.php:588
 msgid "Logged in."
 msgstr ""
 
-#: includes/controller/Main.php:589
+#: includes/controller/Main.php:592
 msgid "Log In"
 msgstr ""
 
-#: includes/controller/Main.php:598
+#: includes/controller/Main.php:601
 msgid "You aren't logged in."
 msgstr ""
 
-#: includes/controller/Main.php:604
+#: includes/controller/Main.php:607
 msgid "Logged out."
 msgstr ""
 
-#: includes/controller/Main.php:615
+#: includes/controller/Main.php:618
 msgid "You must be logged in to access user controls."
 msgstr ""
 
-#: includes/controller/Main.php:651
+#: includes/controller/Main.php:654
 msgid "Your profile has been updated."
 msgstr ""
 
-#: includes/controller/Main.php:655
+#: includes/controller/Main.php:658
 msgid "Controls"
 msgstr ""
 
-#: includes/controller/Main.php:681
+#: includes/controller/Main.php:684
 msgid "If that username is in our database, we will email you a password reset link."
 msgstr ""
 
-#: includes/controller/Main.php:684
+#: includes/controller/Main.php:687
 msgid "Lost Password"
-msgstr ""
-
-#: includes/controller/Main.php:792
-msgid "Twig Environment is unavailable."
 msgstr ""
 
 #: includes/download.php:12
@@ -1128,20 +1121,20 @@ msgstr ""
 msgid "File not found."
 msgstr ""
 
-#: includes/error.php:165
+#: includes/error.php:176
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:357
+#: includes/error.php:376
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:360
+#: includes/error.php:379
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:365
+#: includes/error.php:384
 msgid "Log in"
 msgstr ""
 
@@ -1192,8 +1185,9 @@ msgid "second"
 msgstr ""
 
 #: includes/helpers.php:1507
-#: includes/helpers.php:1685
-#: includes/helpers.php:1747
+#: includes/helpers.php:1687
+#: includes/helpers.php:1717
+#: includes/lib/XMLRPC.php:175
 #, php-format
 msgid "Please create the directory <em>%s</em>."
 msgstr ""
@@ -1234,118 +1228,115 @@ msgstr ""
 msgid "Execution of %s has been cancelled because the feather could not continue."
 msgstr ""
 
-#: includes/helpers.php:1682
+#: includes/helpers.php:1684
 #, php-format
 msgid "<em>%s</em> is not an uploaded file."
 msgstr ""
 
-#: includes/helpers.php:1688
-#: includes/helpers.php:1750
+#: includes/helpers.php:1690
+#: includes/helpers.php:1720
+#: includes/lib/XMLRPC.php:178
 #, php-format
 msgid "Upload destination <em>%s</em> is not writable."
 msgstr ""
 
-#: includes/helpers.php:1716
-msgid "Unsupported File Type"
-msgstr ""
-
-#: includes/helpers.php:1717
-#, php-format
-msgid "Only files of the following types are accepted: %s."
-msgstr ""
-
-#: includes/helpers.php:1817
+#: includes/helpers.php:1784
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:1820
+#: includes/helpers.php:1787
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:1823
+#: includes/helpers.php:1790
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:1826
+#: includes/helpers.php:1793
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:1829
+#: includes/helpers.php:1796
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1832
+#: includes/helpers.php:1799
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:1835
+#: includes/helpers.php:1802
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:1840
+#: includes/helpers.php:1807
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:2055
+#: includes/helpers.php:1834
+#, php-format
+msgid "Only %s files are accepted."
+msgstr ""
+
+#: includes/helpers.php:2017
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2076
+#: includes/helpers.php:2038
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2149
+#: includes/helpers.php:2111
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:2150
-#: includes/helpers.php:2160
-#: includes/helpers.php:2170
+#: includes/helpers.php:2112
+#: includes/helpers.php:2122
+#: includes/helpers.php:2132
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:2152
+#: includes/helpers.php:2114
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:2154
+#: includes/helpers.php:2116
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2159
+#: includes/helpers.php:2121
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2162
+#: includes/helpers.php:2124
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2164
+#: includes/helpers.php:2126
 msgid "Visit this link to reset your password:"
 msgstr ""
 
-#: includes/helpers.php:2169
+#: includes/helpers.php:2131
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2172
+#: includes/helpers.php:2134
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/helpers.php:2182
+#: includes/helpers.php:2144
 msgid "Undeliverable"
 msgstr ""
 
-#: includes/helpers.php:2182
+#: includes/helpers.php:2144
 msgid "Unable to send email."
 msgstr ""
 
@@ -1389,72 +1380,54 @@ msgstr ""
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/XMLRPC.php:59
+#: includes/lib/XMLRPC.php:57
 msgid "Pingback support is disabled for this site."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:62
+#: includes/lib/XMLRPC.php:60
 msgid "The from and to URLs cannot be the same."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:65
+#: includes/lib/XMLRPC.php:63
 msgid "The URL for our page is not valid."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:68
+#: includes/lib/XMLRPC.php:66
 msgid "The URL for your page is not valid."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:76
+#: includes/lib/XMLRPC.php:74
 msgid "We have not published at that URL."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:82
+#: includes/lib/XMLRPC.php:80
 msgid "You have not published at that URL."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:90
+#: includes/lib/XMLRPC.php:88
 msgid "Your page could not be parsed."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:111
+#: includes/lib/XMLRPC.php:109
 msgid "Your page does not link to our page."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:173
-msgid "Failed to write file."
+#: includes/lib/XMLRPC.php:239
+#: includes/lib/XMLRPC.php:296
+msgid "Post can't be empty."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:221
-#: includes/lib/XMLRPC.php:276
-msgid "Body can't be blank."
-msgstr ""
-
-#: includes/lib/XMLRPC.php:282
-#: includes/lib/XMLRPC.php:416
-msgid "You don't have permission to edit this post."
-msgstr ""
-
-#: includes/lib/XMLRPC.php:321
-msgid "You don't have permission to delete this post."
-msgstr ""
-
-#: includes/lib/XMLRPC.php:438
+#: includes/lib/XMLRPC.php:422
 #, php-format
 msgid "The %s feather is not enabled."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:473
+#: includes/lib/XMLRPC.php:457
 msgid "XML-RPC support is disabled for this site."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:478
-msgid "Login incorrect."
-msgstr ""
-
-#: includes/lib/XMLRPC.php:484
-#, php-format
-msgid "You don't have permission to do that."
+#: includes/lib/XMLRPC.php:467
+msgid "You do not have sufficient privileges to do that."
 msgstr ""
 
 #: includes/model/Group.php:235
@@ -1713,7 +1686,7 @@ msgid "Chyrp Lite has been installed"
 msgstr ""
 
 #: install.php:824
-#: upgrade.php:438
+#: upgrade.php:422
 msgid "What now?"
 msgstr ""
 
@@ -1726,7 +1699,7 @@ msgid "Learn more about Chyrp Lite."
 msgstr ""
 
 #: install.php:832
-#: upgrade.php:445
+#: upgrade.php:429
 msgid "Take me to my site!"
 msgstr ""
 
@@ -1742,61 +1715,51 @@ msgstr ""
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:391
-#, php-format
-msgid "Calling %s module's upgrader..."
-msgstr ""
-
-#: upgrade.php:404
-#, php-format
-msgid "Calling %s feather's upgrader..."
-msgstr ""
-
-#: upgrade.php:425
+#: upgrade.php:409
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:426
+#: upgrade.php:410
 msgid "Please take these preemptive measures before proceeding:"
 msgstr ""
 
-#: upgrade.php:428
+#: upgrade.php:412
 msgid "<strong>Make a backup of your installation and database.</strong>"
 msgstr ""
 
-#: upgrade.php:429
+#: upgrade.php:413
 msgid "Disable any third-party Modules and Feathers."
 msgstr ""
 
-#: upgrade.php:430
+#: upgrade.php:414
 msgid "Ensure Chyrp Lite's directory is writable by the server."
 msgstr ""
 
-#: upgrade.php:432
+#: upgrade.php:416
 msgid "If any of the upgrade tasks fail, you can safely refresh and retry."
 msgstr ""
 
-#: upgrade.php:434
+#: upgrade.php:418
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:437
+#: upgrade.php:421
 msgid "Chyrp Lite has been upgraded"
 msgstr ""
 
-#: upgrade.php:440
+#: upgrade.php:424
 msgid "Look above for any reports of failed tasks or errors."
 msgstr ""
 
-#: upgrade.php:441
+#: upgrade.php:425
 msgid "Fix any problems reported."
 msgstr ""
 
-#: upgrade.php:442
+#: upgrade.php:426
 msgid "Execute this upgrader again until all tasks succeed."
 msgstr ""
 
-#: upgrade.php:443
+#: upgrade.php:427
 msgid "You can delete <em>upgrade.php</em> once you are finished."
 msgstr ""
 

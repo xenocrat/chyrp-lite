@@ -11,16 +11,10 @@ Arguments:
 	$route
 
 
-admin_write_wysiwyg
--------------------
-Called from:
-	admin/javascripts/admin.js.php on line 186
-
-
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 337
+	admin/javascripts/admin.js.php on line 342
 
 
 admin_head
@@ -173,7 +167,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 131
+	feathers/audio/audio.php on line 130
 Arguments:
 	$filename, $params, $post
 
@@ -181,7 +175,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 129
+	feathers/video/video.php on line 128
 Arguments:
 	$filename, $params, $post
 
@@ -189,7 +183,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 82
+	includes/ajax.php on line 115
 
 
 change_setting
@@ -293,13 +287,13 @@ Arguments:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 400
+	includes/controller/Main.php on line 403
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 488
+	includes/controller/Main.php on line 491
 Arguments:
 	$user
 
@@ -307,13 +301,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 570
+	includes/controller/Main.php on line 573
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 584
+	includes/controller/Main.php on line 587
 Arguments:
 	$user
 
@@ -321,7 +315,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 768
+	includes/controller/Main.php on line 773
 Arguments:
 	$post
 
@@ -335,9 +329,41 @@ Called from:
 pingback
 --------
 Called from:
-	includes/lib/XMLRPC.php on line 120
+	includes/lib/XMLRPC.php on line 118
 Arguments:
 	$post, $target, $source, $title, $excerpt
+
+
+metaWeblog_newPost_preQuery
+---------------------------
+Called from:
+	includes/lib/XMLRPC.php on line 253
+Arguments:
+	$args[3]
+
+
+metaWeblog_newPost
+------------------
+Called from:
+	includes/lib/XMLRPC.php on line 262
+Arguments:
+	$args[3], $post
+
+
+metaWeblog_editPost_preQuery
+----------------------------
+Called from:
+	includes/lib/XMLRPC.php on line 311
+Arguments:
+	$args[3], $post
+
+
+metaWeblog_editPost
+-------------------
+Called from:
+	includes/lib/XMLRPC.php on line 322
+Arguments:
+	$args[3], $post
 
 
 add_group
@@ -375,7 +401,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 237
+	includes/model/Post.php on line 238
 Arguments:
 	$post, $options
 
@@ -383,7 +409,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 333
+	includes/model/Post.php on line 334
 Arguments:
 	$this, $old, $options
 
@@ -432,7 +458,7 @@ Arguments:
 feed_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 671
+	modules/comments/comments.php on line 674
 Arguments:
 	$comment
 
@@ -440,7 +466,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 689
+	modules/comments/comments.php on line 692
 Arguments:
 	$comment->id
 
@@ -448,7 +474,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 208
+	modules/comments/model/Comment.php on line 209
 Arguments:
 	$new->post_id, $new->id
 
@@ -456,7 +482,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 247
+	modules/comments/model/Comment.php on line 249
 Arguments:
 	$this->post_id, $this->id
 
@@ -464,7 +490,7 @@ Arguments:
 delete_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 255
+	modules/comments/model/Comment.php on line 257
 Arguments:
 	$new->post_id, $new->id
 
@@ -551,7 +577,7 @@ Arguments:
 add_pingback
 ------------
 Called from:
-	modules/pingable/model/Pingback.php on line 52
+	modules/pingable/model/Pingback.php on line 53
 Arguments:
 	$new->post_id, $new->id
 
@@ -559,7 +585,7 @@ Arguments:
 delete_pingback
 ---------------
 Called from:
-	modules/pingable/model/Pingback.php on line 61
+	modules/pingable/model/Pingback.php on line 62
 Arguments:
 	$new->post_id, $new->id
 
@@ -570,6 +596,7 @@ Called from:
 	themes/blossom/forms/user/controls.twig on line 17
 	themes/sparrow/forms/user/controls.twig on line 17
 	themes/topaz/forms/user/controls.twig on line 17
+	themes/umbra/forms/user/controls.twig on line 17
 
 
 user_login
@@ -578,6 +605,7 @@ Called from:
 	themes/blossom/forms/user/login.twig on line 11
 	themes/sparrow/forms/user/login.twig on line 11
 	themes/topaz/forms/user/login.twig on line 11
+	themes/umbra/forms/user/login.twig on line 11
 
 
 user_register
@@ -586,22 +614,25 @@ Called from:
 	themes/blossom/forms/user/register.twig on line 16
 	themes/sparrow/forms/user/register.twig on line 16
 	themes/topaz/forms/user/register.twig on line 16
+	themes/umbra/forms/user/register.twig on line 16
 
 
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 17
-	themes/sparrow/layouts/default.twig on line 17
-	themes/topaz/layouts/default.twig on line 17
+	themes/blossom/layouts/default.twig on line 16
+	themes/sparrow/layouts/default.twig on line 16
+	themes/topaz/layouts/default.twig on line 16
+	themes/umbra/layouts/default.twig on line 16
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 122
-	themes/sparrow/layouts/default.twig on line 108
-	themes/topaz/layouts/default.twig on line 121
+	themes/blossom/layouts/default.twig on line 121
+	themes/sparrow/layouts/default.twig on line 107
+	themes/topaz/layouts/default.twig on line 120
+	themes/umbra/layouts/default.twig on line 107
 
 
 
@@ -652,7 +683,7 @@ related_posts
 Target:
 	$ids
 Called from:
-	includes/class/Theme.php on line 182
+	includes/class/Theme.php on line 180
 Arguments:
 	$post, $limit
 
@@ -668,9 +699,9 @@ Called from:
 scripts
 -------
 Target:
-	$javascripts
+	$scripts
 Called from:
-	includes/class/Theme.php on line 279
+	includes/class/Theme.php on line 259
 
 
 links
@@ -678,7 +709,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 328
+	includes/class/Theme.php on line 313
 
 
 visitor
@@ -790,7 +821,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 757
+	includes/controller/Main.php on line 762
 Arguments:
 	$post
 
@@ -818,7 +849,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2119
+	includes/helpers.php on line 2081
 
 
 xmlrpc_methods
@@ -826,7 +857,34 @@ xmlrpc_methods
 Target:
 	$methods
 Called from:
-	includes/lib/XMLRPC.php on line 38
+	includes/lib/XMLRPC.php on line 36
+
+
+metaWeblog_getPost
+------------------
+Target:
+	$struct
+Called from:
+	includes/lib/XMLRPC.php on line 142
+	includes/lib/XMLRPC.php on line 209
+Arguments:
+	$post
+
+
+metaWeblog_getCategories
+------------------------
+Target:
+	$categories
+Called from:
+	includes/lib/XMLRPC.php on line 156
+
+
+mt_getCategoryList
+------------------
+Target:
+	$categories
+Called from:
+	includes/lib/XMLRPC.php on line 411
 
 
 group
@@ -922,7 +980,7 @@ before_add_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 216
+	includes/model/Post.php on line 217
 
 
 before_update_post
@@ -930,7 +988,7 @@ before_update_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 314
+	includes/model/Post.php on line 315
 
 
 title_from_excerpt
@@ -938,7 +996,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 520
+	includes/model/Post.php on line 521
 
 
 title
@@ -946,7 +1004,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 545
+	includes/model/Post.php on line 546
 Arguments:
 	$post
 
@@ -956,7 +1014,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 562
+	includes/model/Post.php on line 563
 Arguments:
 	$post
 
@@ -966,7 +1024,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 579
+	includes/model/Post.php on line 580
 Arguments:
 	$post
 
@@ -976,7 +1034,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 636
+	includes/model/Post.php on line 637
 
 
 user

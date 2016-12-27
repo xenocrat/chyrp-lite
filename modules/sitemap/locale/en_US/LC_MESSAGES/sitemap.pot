@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-20 16:23+0000\n"
+"POT-Creation-Date: 2016-12-27 14:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -49,31 +49,35 @@ msgstr ""
 msgid "Please remember to give write permissions to sitemap.xml on the root directory of the site."
 msgstr ""
 
-#: modules/sitemap/sitemap.php:7
-msgid "hourly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:8
-msgid "daily"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:9
-msgid "weekly"
-msgstr ""
-
 #: modules/sitemap/sitemap.php:10
-msgid "monthly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:11
-msgid "yearly"
+msgid "Sitemap module cannot continue because the server's document root is not set."
 msgstr ""
 
 #: modules/sitemap/sitemap.php:12
+msgid "hourly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:13
+msgid "daily"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:14
+msgid "weekly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:15
+msgid "monthly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:16
+msgid "yearly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:17
 msgid "never"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:31
+#: modules/sitemap/sitemap.php:36
 msgid "Sitemap"
 msgstr ""
 
