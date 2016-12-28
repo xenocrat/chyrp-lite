@@ -25,7 +25,7 @@
 
             $this->slug = $this->url;
 
-            $this->filtered = !isset($options["filter"]) or $options["filter"];
+            $this->filtered = (!isset($options["filter"]) or $options["filter"]);
 
             $trigger = Trigger::current();
 
