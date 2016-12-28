@@ -167,7 +167,7 @@
             global $user;
 
             if (!$user->group->can("add_post", "add_draft"))
-                throw new Exception(__("You do not have sufficient privileges to add posts."), 401);
+                return new IXR_Error(401, __("You do not have sufficient privileges to add posts."));
 
             fallback($args[3], array());
             fallback($args[3]["name"]);
@@ -229,7 +229,7 @@
             global $user;
 
             if (!$user->group->can("add_post", "add_draft"))
-                throw new Exception(__("You do not have sufficient privileges to add posts."), 401);
+                return new IXR_Error(401, __("You do not have sufficient privileges to add posts."));
 
             $trigger = Trigger::current();
 
@@ -468,11 +468,11 @@
        /**
         * Function: error_handler
         */
-        public static function error_handler($errno, $errstr, $errfile, $errline) {
+        public static function error_handler($errno, $message, $file, $line) {
             if (error_reporting() === 0 or $errno == E_STRICT)
-                return;
+                return true;
 
-            throw new Exception(sprintf("%s in %s on line %s", $errstr, $errfile, $errline), 500);
+            throw new Exception($message." (".$file." on line ".$line.")", 500);
         }
 
        /**
