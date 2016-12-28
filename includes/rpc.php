@@ -8,6 +8,7 @@
 
     require_once "common.php";
 
+    # XML_RPC_FEATHER must support XML_RPC_TITLE and XML_RPC_DESCRIPTION post attributes.
     if (!defined('XML_RPC_FEATHER'))
         define('XML_RPC_FEATHER', "text");
 
