@@ -83,7 +83,7 @@
                                     array_combine($this->attribute_names, $this->attribute_values) :
                                     array() ;
 
-            $this->filtered = (!isset($options["filter"]) or $options["filter"]) and !XML_RPC;
+            $this->filtered = (!isset($options["filter"]) or $options["filter"]);
             $this->slug = $this->url;
 
             fallback($this->clean, $this->url);
