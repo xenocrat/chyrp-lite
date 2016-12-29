@@ -592,7 +592,9 @@
         }
 
         public function metaWeblog_getPost($struct, $post) {
-            $struct['mt_keywords'] = isset($post->tags) ? array_keys($post->tags) : array() ;
+            if (!empty($post->tags))
+                $struct['mt_keywords'] = array_keys($post->tags);
+
             return $struct;
         }
 
