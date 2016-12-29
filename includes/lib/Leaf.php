@@ -18,7 +18,7 @@
          */
         public function getFunctions() {
             return array(   
-                # Helpers
+                # Helpers:
                 new Twig_SimpleFunction("url",                 "url"),
                 new Twig_SimpleFunction("self_url",            "self_url"),
                 new Twig_SimpleFunction("module_enabled",      "module_enabled"),
@@ -27,7 +27,7 @@
                 new Twig_SimpleFunction("is_email",            "is_email"),
                 new Twig_SimpleFunction("password_strength",   "password_strength"),
 
-                # Custom functions
+                # Custom functions:
                 new Twig_SimpleFunction("paginate",             "twig_function_paginate")
             );
         }
@@ -38,10 +38,10 @@
          */
         public function getFilters() {
             return array(
-                # PHP
+                # Internal:
                 new Twig_SimpleFilter("repeat",                "str_repeat"),
 
-                # Helpers
+                # Helpers:
                 new Twig_SimpleFilter("camelize",              "camelize"),
                 new Twig_SimpleFilter("decamelize",            "decamelize"),
                 new Twig_SimpleFilter("normalize",             "normalize"),
@@ -59,7 +59,7 @@
                 new Twig_SimpleFilter("gravatar",              "get_gravatar"),
                 new Twig_SimpleFilter("add_scheme",            "add_scheme"),
 
-                # Custom filters
+                # Custom filters:
                 new Twig_SimpleFilter("translate",             "twig_filter_translate"),
                 new Twig_SimpleFilter("translate_plural",      "twig_filter_translate_plural"),
                 new Twig_SimpleFilter("strftimeformat",        "twig_filter_strftime_format"),
