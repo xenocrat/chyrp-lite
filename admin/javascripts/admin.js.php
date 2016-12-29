@@ -196,7 +196,7 @@ var Write = {
                     }).addClass("emblem preview").click(function(e) {
                         var content  = target.val();
                         var field    = target.attr("name");
-                        var safename = target.parents("#write_form, #edit_form").attr("data-safename");
+                        var safename = $("input#feather").val() || "page";
                         var action   = (safename == "page") ? "preview_page" : "preview_post" ;
 
                         if (content != "") {
