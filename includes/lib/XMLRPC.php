@@ -326,8 +326,8 @@
                           null,
                           $post->pinned,
                           $status,
-                          $post->clean,
-                          oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->url),
+                          oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->clean),
+                          null,
                           oneof($this->convertFromDateCreated($args[3]), $post->created_at));
 
             $trigger->call("metaWeblog_editPost", $args[3], $post);
