@@ -592,13 +592,13 @@
         }
 
         public function metaWeblog_getPost($struct, $post) {
-            $struct['mt_tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
+            $struct['mt_keywords'] = isset($post->tags) ? array_keys($post->tags) : array() ;
             return $struct;
         }
 
         public function metaWeblog_editPost_preQuery($struct, $post = null) {
-            if (isset($struct['mt_tags']))
-                $_POST['tags'] = $struct['mt_tags'];
+            if (isset($struct['mt_keywords']))
+                $_POST['tags'] = implode(", ", (array) $struct['mt_keywords']);
             else
                 $_POST['tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
         }
