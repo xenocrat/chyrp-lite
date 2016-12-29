@@ -117,18 +117,33 @@
         */
         public function metaWeblog_getRecentPosts($args) {
             $this->auth(fallback($args[1]), fallback($args[2]));
+            global $user;
 
             $config  = Config::current();
             $trigger = Trigger::current();
+            $where = array("feather" => XML_RPC_FEATHER);
             $result  = array();
             $title = XML_RPC_TITLE;
             $description = XML_RPC_DESCRIPTION;
 
-            foreach ($this->getRecentPosts(fallback($args[3], $config->posts_per_page)) as $post) {
+            if ($user->group->can("view_own_draft", "edit_own_draft"))
+                $where["status"] = array("public", "draft");
+            else
+                $where["status"] = "public";
+
+            if (!$user->group->can("edit_draft", "edit_post", "delete_draft", "delete_post"))
+                $where["user_id"] = $user->id;
+
+            $posts = Post::find(array("where"  => $where,
+                                      "order"  => "created_at DESC, id DESC",
+                                      "limit"  => (int) fallback($args[3], $config->posts_per_page)),
+                                array("filter" => false));
+
+            foreach ($posts as $post) {
                 $struct = array("postid"            => $post->id,
                                 "userid"            => $post->user_id,
                                 "title"             => $post->$title,
-                                "dateCreated"       => new IXR_Date(when("Ymd\TH:i:s", $post->created_at)),
+                                "dateCreated"       => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
                                 "description"       => $post->$description,
                                 "link"              => $post->url(),
                                 "permaLink"         => $post->url(),
@@ -171,10 +186,10 @@
             $filename = upload_filename($args[3]["name"]);
 
             if (!is_dir($uploads_path))
-                throw new Exception(_f("Please create the directory <em>%s</em>.", $fixed_path), 501);
+                throw new Exception(_f("Please create the directory <em>%s</em>.", $fixed_path), 500);
 
             if (!is_writable($uploads_path))
-                throw new Exception(_f("Upload destination <em>%s</em> is not writable.", $fixed_path), 501);
+                throw new Exception(_f("Upload destination <em>%s</em> is not writable.", $fixed_path), 500);
 
             file_put_contents($uploads_path.$filename, base64_decode($args[3]["bits"]));
             return array("file" => $filename, "url" => uploaded($filename));
@@ -203,14 +218,14 @@
             $struct = array("postid"            => $post->id,
                             "userid"            => $post->user_id,
                             "title"             => $post->$title,
-                            "dateCreated"       => new IXR_Date(when("Ymd\TH:i:s", $post->created_at)),
+                            "dateCreated"       => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
                             "description"       => $post->$description,
                             "link"              => $post->url(),
                             "permaLink"         => $post->url(),
                             "mt_basename"       => $post->url);
 
             Trigger::current()->filter($struct, "metaWeblog_getPost", $post);
-            return array($struct);
+            return $struct;
         }
 
        /**
@@ -224,8 +239,6 @@
             if (!$user->group->can("add_post", "add_draft"))
                 return new IXR_Error(401, __("You do not have sufficient privileges to add posts."));
 
-            $trigger = Trigger::current();
-
             fallback($args[3], array());
             fallback($args[3]["description"], "");
             fallback($args[3]["mt_basename"], "");
@@ -233,6 +246,7 @@
             fallback($args[3]["post_status"]);
             fallback($args[3]["mt_allow_pings"], "open");
 
+            $trigger = Trigger::current();
             $content = $args[3]["description"];
 
             # Support for extended content.
@@ -280,8 +294,6 @@
             $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
-            $trigger = Trigger::current();
-
             fallback($args[0]);
             fallback($args[3], array());
             fallback($args[3]["description"], "");
@@ -289,6 +301,7 @@
             fallback($args[3]["title"], "");
             fallback($args[3]["post_status"]);
 
+            $trigger = Trigger::current();
             $content = $args[3]["description"];
 
             # Support for extended content.
@@ -364,28 +377,6 @@
         }
 
        /**
-        * Function: getRecentPosts
-        * Returns an array of recent posts, dictated by the user's privileges.
-        */
-        private function getRecentPosts($limit) {
-            $where = array("feather" => XML_RPC_FEATHER);
-            global $user;
-
-            if ($user->group->can("view_own_draft", "edit_own_draft"))
-                $where["status"] = array("public", "draft");
-            else
-                $where["status"] = "public";
-
-            if (!$user->group->can("edit_draft", "edit_post", "delete_draft", "delete_post"))
-                $where["user_id"] = $user->id;
-
-            return Post::find(array("where"  => $where,
-                                    "order"  => "created_at DESC, id DESC",
-                                    "limit"  => (int) $limit),
-                              array("filter" => false));
-        }
-
-       /**
         * Function: convertFromDateCreated
         * Converts an IXR_Date (in $args["dateCreated"]) to SQL date format.
         */
@@ -425,7 +416,7 @@
         * Function: exception_handler
         */
         public static function exception_handler($e) {
-            $ixr_error = new IXR_Error($e->getCode(), $e->getMessage());
-            echo $ixr_error->getXml();
+            $err = new IXR_Error($e->getCode(), $e->getMessage());
+            echo $err->getXml();
         }
     }
