@@ -33,7 +33,7 @@
 
         public function metaWeblog_getPost($struct, $post) {
             if (!empty($post->category))
-                    $struct['categories'] = array($post->category->name);
+                $struct['categories'] = array($post->category->name);
 
             return $struct;
         }
