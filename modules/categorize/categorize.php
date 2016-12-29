@@ -3,8 +3,6 @@
 
     class Categorize extends Modules {
         public function __init() {
-            $this->addAlias("mt_getCategoryList", "xmlrpc_getCategoryList");
-            $this->addAlias("metaWeblog_getCategories", "xmlrpc_getCategoryList");
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
         }
 
@@ -47,9 +45,7 @@
                         $_POST['option']['category_id'] = $category["id"];
         }
 
-        public function xmlrpc_getCategoryList() {
-            $struct = array();
-
+        public function metaWeblog_getCategories($struct) {
             foreach (Category::getCategoryList() as $category)
                 $struct[] = array("categoryId"   => $category["id"],
                                   "categoryName" => $category["name"],
