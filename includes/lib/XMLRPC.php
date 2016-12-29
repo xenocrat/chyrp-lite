@@ -6,7 +6,7 @@
     class XMLRPC extends IXR_Server {
        /**
         * Function: __construct
-        * Registers the various XMLRPC methods.
+        * Sets appropriate error and exception handlers and registers the XMLRPC methods.
         */
         public function __construct() {
             set_error_handler("XMLRPC::error_handler");
@@ -34,7 +34,6 @@
                              "mt.supportedMethods"       => "this:listMethods");
 
             Trigger::current()->filter($methods, "xmlrpc_methods");
-
             parent::__construct($methods);
         }
 
@@ -238,6 +237,7 @@
             fallback($args[3]["mt_basename"], "");
             fallback($args[3]["title"], "");
             fallback($args[3]["post_status"]);
+            fallback($args[3]["mt_allow_pings"], "open");
 
             $content = $args[3]["description"];
 
@@ -249,20 +249,27 @@
             if (!empty($args[3]["mt_excerpt"]))
                 $content = $args[3]["mt_excerpt"]."\n\n".$content;
 
-            $_POST["feather"] = XML_RPC_FEATHER;
-            $_POST["user_id"] = $user->id;
-            $_POST["created_at"] = oneof($this->convertFromDateCreated($args[3]), datetime());
+            $_POST['feather'] = XML_RPC_FEATHER;
+            $_POST['created_at'] = oneof($this->convertFromDateCreated($args[3]), datetime());
 
             if ($user->group->can("add_post"))
-                $_POST["status"] = ($args[3]["post_status"] == "draft") ? "draft" : "public" ;
+                $_POST['status'] = ($args[3]["post_status"] == "draft") ? "draft" : "public" ;
             else
-                $_POST["status"] = "draft";
+                $_POST['status'] = "draft";
 
             $trigger->call("metaWeblog_newPost_preQuery", $args[3]);
 
             $post = Post::add(array(XML_RPC_TITLE => $args[3]["title"],
                                     XML_RPC_DESCRIPTION => $content),
-                              sanitize(oneof($args[3]["mt_basename"], $args[3]["title"]), true, true, 80));
+                              sanitize(oneof($args[3]["mt_basename"], $args[3]["title"]), true, true, 80),
+                              "",
+                              null,
+                              $user->id,
+                              null,
+                              "",
+                              null,
+                              null,
+                              ($args[3]["mt_allow_pings"] == "open"));
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
@@ -308,9 +315,9 @@
                 return new IXR_Error(401, __("You do not have sufficient privileges to edit this post."));
 
             if ($user->group->can("edit_own_post", "edit_post"))
-                $_POST["status"] = ($args[3]["post_status"] == "draft") ? "draft" : $post->status ;
+                $_POST['status'] = ($args[3]["post_status"] == "draft") ? "draft" : $post->status ;
             else
-                $_POST["status"] = $post->status;
+                $_POST['status'] = $post->status;
 
             $trigger->call("metaWeblog_editPost_preQuery", $args[3], $post);
 
