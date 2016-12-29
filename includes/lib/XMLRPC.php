@@ -138,7 +138,7 @@
                                 "description"       => $post->$description,
                                 "link"              => $post->url(),
                                 "permaLink"         => $post->url(),
-                                "mt_basename"       => $post->url);
+                                "mt_basename"       => $post->clean);
 
                 $result[] = $trigger->filter($struct, "metaWeblog_getPost", $post);
             }
