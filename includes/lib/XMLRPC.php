@@ -12,26 +12,20 @@
             set_error_handler("XMLRPC::error_handler");
             set_exception_handler("XMLRPC::exception_handler");
 
-            $methods = array("pingback.ping"             => "this:pingback_ping",
+            $methods = array(
+                # Pingbacks:
+                "pingback.ping"             => "this:pingback_ping",
 
-                             # MetaWeblog
-                             "metaWeblog.getRecentPosts" => "this:metaWeblog_getRecentPosts",
-                             "metaWeblog.getCategories"  => "this:metaWeblog_getCategories",
-                             "metaWeblog.newMediaObject" => "this:metaWeblog_newMediaObject",
-                             "metaWeblog.getPost"        => "this:metaWeblog_getPost",
-                             "metaWeblog.newPost"        => "this:metaWeblog_newPost",
-                             "metaWeblog.editPost"       => "this:metaWeblog_editPost",
-                             "metaWeblog.deletePost"     => "this:metaWeblog_deletePost",
-                             "metaWeblog.getUsersBlogs"  => "this:metaWeblog_getUsersBlogs",
-
-                             # Blogger
-                             "blogger.getUsersBlogs"     => "this:blogger_getUsersBlogs",
-                             "blogger.getUserInfo"       => "this:blogger_getUserInfo",
-
-                             # MovableType
-                             "mt.getRecentPostTitles"    => "this:mt_getRecentPostTitles",
-                             "mt.getCategoryList"        => "this:mt_getCategoryList",
-                             "mt.supportedMethods"       => "this:listMethods");
+                # MetaWeblog:
+                "metaWeblog.getRecentPosts" => "this:metaWeblog_getRecentPosts",
+                "metaWeblog.getCategories"  => "this:metaWeblog_getCategories",
+                "metaWeblog.newMediaObject" => "this:metaWeblog_newMediaObject",
+                "metaWeblog.getPost"        => "this:metaWeblog_getPost",
+                "metaWeblog.newPost"        => "this:metaWeblog_newPost",
+                "metaWeblog.editPost"       => "this:metaWeblog_editPost",
+                "metaWeblog.deletePost"     => "this:metaWeblog_deletePost",
+                "metaWeblog.getUsersBlogs"  => "this:metaWeblog_getUsersBlogs"
+            );
 
             Trigger::current()->filter($methods, "xmlrpc_methods");
             parent::__construct($methods);
@@ -367,61 +361,6 @@
             return array(array("url"      => $config->url,
                                "blogName" => $config->name,
                                "blogid"   => 1));
-        }
-
-       /**
-        * Function: blogger_getUsersBlogs
-        * Returns information about the blog.
-        */
-        public function blogger_getUsersBlogs($args) {
-            return $this->metaWeblog_getUsersBlogs($args);
-        }
-
-       /**
-        * Function: blogger_getUserInfo
-        * Retrieves information about the current user.
-        */
-        public function blogger_getUserInfo($args) {
-            $this->auth(fallback($args[1]), fallback($args[2]));
-            global $user;
-
-            return array(array("userid"    => $user->id,
-                               "nickname"  => $user->full_name,
-                               "firstname" => "",
-                               "lastname"  => "",
-                               "email"     => $user->email,
-                               "url"       => $user->website));
-        }
-
-       /**
-        * Function: mt_getRecentPostTitles
-        * Returns a list of recent posts that the user can edit/delete.
-        */
-        public function mt_getRecentPostTitles($args) {
-            $this->auth(fallback($args[1]), fallback($args[2]));
-
-            $config = Config::current();
-            $result = array();
-            $title = XML_RPC_TITLE;
-
-            foreach ($this->getRecentPosts(fallback($args[3], $config->posts_per_page)) as $post)
-                $result[] = array("postid"      => $post->id,
-                                  "userid"      => $post->user_id,
-                                  "title"       => $post->$title,
-                                  "dateCreated" => new IXR_Date(when("Ymd\TH:i:s", $post->created_at)));
-
-            return $result;
-        }
-
-       /**
-        * Function: mt_getCategoryList
-        * Returns a list of available categories.
-        */
-        public function mt_getCategoryList($args) {
-            $this->auth(fallback($args[1]), fallback($args[2]));
-
-            $categories = array();
-            return Trigger::current()->filter($categories, "mt_getCategoryList");
         }
 
        /**
