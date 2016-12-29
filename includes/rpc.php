@@ -8,13 +8,15 @@
 
     require_once "common.php";
 
-    # XML_RPC_FEATHER must support XML_RPC_TITLE and XML_RPC_DESCRIPTION post attributes.
+    # The feather to use for XML-RPC method calls.
     if (!defined('XML_RPC_FEATHER'))
         define('XML_RPC_FEATHER', "text");
 
+    # Interpret "title" as this post attribute.
     if (!defined('XML_RPC_TITLE'))
         define('XML_RPC_TITLE', "title");
 
+    # Interpret "description" as this post attribute.
     if (!defined('XML_RPC_DESCRIPTION'))
         define('XML_RPC_DESCRIPTION', "body");
 
