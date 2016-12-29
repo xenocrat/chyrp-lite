@@ -696,7 +696,7 @@
         }
 
         public function metaWeblog_getPost($struct, $post) {
-            $struct['mt_allow_comments'] = isset($post->comment_status and $post->comment_status == "open") ? "open" : "closed" ;
+            $struct['mt_allow_comments'] = (isset($post->comment_status) and $post->comment_status == "open") ? "open" : "closed" ;
             return $struct;
         }
 
