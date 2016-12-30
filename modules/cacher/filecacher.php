@@ -7,10 +7,12 @@
             $this->url    = rawurldecode($url); # Percent decode for URL exclusion list comparison.
             $this->file   = $this->path.DIR.md5($this->url).".html";
 
+            $caches_fixed = fix($this->caches, false, true);
+
             # If the cache directory does not exist and cannot be created, or is not writable, cancel execution.
             if ((!is_dir($this->caches) and !@mkdir($this->caches)) or !is_writable($this->caches))
                 cancel_module("cacher",
-                    _f("Cacher module cannot continue because <em>%s</em> is not writable.", fix($this->caches, false, true), "cacher"));
+                    _f("Cacher module cannot continue because <em>%s</em> is not writable.", $caches_fixed, "cacher"));
 
             # Remove all expired files.
             $this->remove_expired();
