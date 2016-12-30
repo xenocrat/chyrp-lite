@@ -652,7 +652,8 @@
             }
 
             if (is_array($val)) {
-                if (in_array(0, array_keys($val))) { # Numeric-indexed things need to be added as duplicates.
+                # Numeric-indexed things need to be added as duplicates.
+                if (in_array(0, array_keys($val))) {
                     foreach ($val as $dup) {
                         $xml = $object->addChild($key);
                         arr2xml($xml, $dup);
@@ -1895,26 +1896,28 @@
      * Returns:
      *     Whether or not the string matches the criteria.
      *
+     * Notes:
+     *     Recognises FQDN, IPv4 and IPv6 hosts.
+     *
      * See Also:
      *     <add_scheme>
      */
     function is_url($string) {
-        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~i', $string) or # FQDN
-                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~', $string) or # IPv4
-                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                                         # IPv6
+        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i', $string) or
+                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~', $string) or
+                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i', $string));
     }
 
     /**
      * Function: add_scheme
      * Prefixes a URL with a scheme if none was detected.
-     * Overwrites existing scheme if $scheme is supplied.
      *
      * Parameters:
      *     $url - The URL to analyse.
-     *     $scheme - The scheme for the URL (optional).
+     *     $scheme - Force this scheme (optional).
      *
      * Returns:
-     *     URL prefixed with a scheme (http:// by default).
+     *     URL prefixed with a default or supplied scheme.
      *
      * See Also:
      *     <is_url>
@@ -1932,13 +1935,16 @@
      * Parameters:
      *     $string - The string to analyse.
      *
+     * Notes:
+     *     Recognises FQDN, IPv4 and IPv6 hosts.
+     *
      * Returns:
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or # FQDN
-                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or # IPv4
-                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));                           # IPv6
+        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
+                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
+                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));
     }
 
     /**
@@ -1976,12 +1982,11 @@
      * Get either a Gravatar URL or complete image tag for a specified email address.
      *
      * Parameters:
-     *     $email - The email address
-     *     $s - Size in pixels, defaults to 80px [ 1 - 512 ]
-     *     $d - Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
-     *     $r - Maximum rating (inclusive) [ g | pg | r | x ]
-     *     $img - True to return a complete IMG tag False for just the URL
-     *     $atts - Additional key/value attributes to add to the IMG tag (optional).
+     *     $email - The email address.
+     *     $s - Return an image of this size in pixels (512 maximum).
+     *     $d - Default image set: 404/mm/identicon/monsterid/wavatar.
+     *     $r - Maximum acceptable guidance rating for images: g/pg/r/x.
+     *     $img - Return a complete <img> tag?
      *
      * Returns:
      *     String containing either just a URL or a complete image tag.
@@ -1989,19 +1994,9 @@
      * Source:
      *     http://gravatar.com/site/implement/images/php/
      */
-    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g", $atts = array()) {
+    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g") {
         $url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
-
-        if ($img) {
-            $url = '<img class="gravatar" src="'.$url.'"';
-
-            foreach ($atts as $key => $val)
-                $url.= ' '.$key.'="'.$val.'"';
-
-            $url.= ">";
-        }
-
-        return $url;
+        return ($img) ? '<img class="gravatar" src="'.fix($url, true, true).'">' : $url ;
     }
 
     #---------------------------------------------
