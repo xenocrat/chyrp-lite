@@ -599,8 +599,8 @@
         }
 
         public function metaWeblog_editPost_preQuery($struct, $post = null) {
-            if (isset($struct['mt_keywords']))
-                $_POST['tags'] = implode(", ", (array) $struct['mt_keywords']);
+            if (isset($struct["mt_keywords"]))
+                $_POST['tags'] = implode(", ", (array) $struct["mt_keywords"]);
             else
                 $_POST['tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
         }
