@@ -6,7 +6,7 @@
     class XMLRPC extends IXR_Server {
        /**
         * Function: __construct
-        * Sets appropriate error and exception handlers and registers the XMLRPC methods.
+        * Sets appropriate error and exception handlers and registers the methods.
         */
         public function __construct() {
             set_error_handler("XMLRPC::error_handler");
@@ -182,16 +182,18 @@
             fallback($args[3]["bits"]);
 
             $uploads_path = MAIN_DIR.Config::current()->uploads_path;
-            $fixed_path = fix($uploads_path, false, true);
             $filename = upload_filename($args[3]["name"]);
+            $contents = base64_decode($args[3]["bits"]);
 
             if (!is_dir($uploads_path))
-                throw new Exception(_f("Please create the directory <em>%s</em>.", $fixed_path), 500);
+                throw new Exception(__("Upload path does not exist."), 500);
 
             if (!is_writable($uploads_path))
-                throw new Exception(_f("Upload destination <em>%s</em> is not writable.", $fixed_path), 500);
+                throw new Exception(__("Upload path is not writable."), 500);
 
-            file_put_contents($uploads_path.$filename, base64_decode($args[3]["bits"]));
+            if (!@file_put_contents($uploads_path.$filename, $contents))
+                throw new Exception(__("Failed to write file to disk."), 500);
+
             return array("file" => $filename, "url" => uploaded($filename));
         }
 
