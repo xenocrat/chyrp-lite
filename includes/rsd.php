@@ -6,7 +6,7 @@
 ?>
 <rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd">
     <service>
-        <engineName><?php echo "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")"; ?></engineName>
+        <engineName><?php echo CHYRP_IDENTITY; ?></engineName>
         <engineLink>http://chyrplite.net/</engineLink>
         <homePageLink><?php echo $config->url; ?></homePageLink>
         <apis>
