@@ -114,7 +114,7 @@
             $unique = $name."-".$count;
         }
 
-        return new Paginator($array, $per_page, $name);
+        return new Paginator($array, $per_page, $unique);
     }
 
     /**
