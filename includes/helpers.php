@@ -1624,8 +1624,7 @@
      */
      function cancel_module($target, $reason = "") {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) :
-            $reason ;
+            _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
@@ -1650,8 +1649,7 @@
      */
      function cancel_feather($target, $reason = "") {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled because the feather could not continue.", camelize($target)) :
-            $reason ;
+            _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
         if (isset(Feathers::$instances[$target]))
             Feathers::$instances[$target]->cancelled = true;
@@ -1841,11 +1839,15 @@
 
         $extension = fallback($matches[3], "bin");
         $sanitized = oneof(sanitize(fallback($matches[1], ""), true, true, 80), md5($filename));
+        $count = 1;
+        $unique = $sanitized.".".$extension;
 
-        while (file_exists(uploaded($sanitized.".".$extension, false)))
-            $sanitized = "-".$sanitized;
+        while (file_exists(uploaded($unique, false))) {
+            $count++;
+            $unique = $sanitized."-".$count.".".$extension;
+        }
 
-        return $sanitized.".".$extension;
+        return $unique;
     }
 
     #---------------------------------------------
