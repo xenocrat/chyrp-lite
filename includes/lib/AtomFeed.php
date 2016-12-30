@@ -30,8 +30,6 @@
          *     https://tools.ietf.org/html/rfc4287
          */
         public function open($title, $subtitle = "", $id = "", $updated = 0) {
-            $chyrp_id = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
-
             echo        '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             echo        '<feed xmlns="http://www.w3.org/2005/Atom">'."\n";
             echo        "    <title>".fix($title)."</title>\n";
@@ -42,7 +40,7 @@
             echo        "    <id>".fix(oneof($id, self_url()))."</id>\n";
             echo        "    <updated>".when("c", oneof($updated, time()))."</updated>\n";
             echo        '    <link href="'.fix(self_url(), true).'" rel="self" type="application/atom+xml" />'."\n";
-            echo        '    <generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.$chyrp_id."</generator>\n";
+            echo        '    <generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.CHYRP_IDENTITY."</generator>\n";
         }
 
         /**
