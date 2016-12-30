@@ -103,10 +103,16 @@
      * Paginates an array of items using the Paginator class.
      */
     function twig_function_paginate($array, $per_page = 10, $name = "twig") {
-        $name = str_replace("_", "", $name)."_page"; # This is important for clean URL parsing in MainController.
+        # This is important for clean URL parsing in MainController.
+        $name = str_replace("_", "", $name)."_page";
 
-        while (in_array($name, Paginator::$names))
-            $name = "-".$name;
+        $count = 1;
+        $unique = $name;
+
+        while (in_array($unique, Paginator::$names)) {
+            $count++;
+            $unique = $name."-".$count;
+        }
 
         return new Paginator($array, $per_page, $name);
     }
