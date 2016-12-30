@@ -51,6 +51,10 @@
     # The codename for this version.
     define('CHYRP_CODENAME', "Iago");
 
+    # Constant: CHYRP_IDENTITY
+    # The string identifying this version.
+    define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
+
     # Constant: CACHE_TWIG
     # Override DEBUG to enable Twig template caching.
     define('CACHE_TWIG', true);

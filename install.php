@@ -9,6 +9,7 @@
     define('DEBUG',          true);
     define('CHYRP_VERSION',  "2016.04");
     define('CHYRP_CODENAME', "Iago");
+    define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
