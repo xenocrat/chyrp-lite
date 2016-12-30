@@ -33,15 +33,15 @@
 
         public function metaWeblog_getPost($struct, $post) {
             if (!empty($post->category))
-                $struct['categories'] = array($post->category->name);
+                $struct["categories"] = array($post->category->name);
 
             return $struct;
         }
 
         public function metaWeblog_editPost_preQuery($struct, $post = null) {
-            if (isset($struct['categories'][0]))
+            if (isset($struct["categories"][0]))
                 foreach (Category::getCategoryList() as $category)
-                    if ($category['name'] == $struct['categories'][0])
+                    if ($category["name"] == $struct["categories"][0])
                         $_POST['option']['category_id'] = $category["id"];
         }
 
