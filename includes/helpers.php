@@ -1615,7 +1615,7 @@
      * Temporarily declares a module cancelled (disabled).
      *
      * Parameters:
-     *     $target - Module name to disable.
+     *     $target - The non-camelized name of the module.
      *     $reason - Why was execution cancelled?
      *
      * Notes:
@@ -1641,7 +1641,7 @@
      * Temporarily declares a feather cancelled (disabled).
      *
      * Parameters:
-     *     $target - Feather name to disable.
+     *     $target - The non-camelized name of the feather.
      *     $reason - Why was execution cancelled?
      *
      * Notes:
