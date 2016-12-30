@@ -1297,7 +1297,7 @@
                                                                    "max_redirects" => $redirects,
                                                                    "timeout" => $timeout,
                                                                    "protocol_version" => 1.1,
-                                                                   "user_agent" => "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")")));
+                                                                   "user_agent" => CHYRP_IDENTITY)));
             $content = @file_get_contents($url, false, $context);
         } elseif (function_exists("curl_init")) {
             $handle = curl_init();
@@ -1309,7 +1309,7 @@
             curl_setopt($handle, CURLOPT_MAXREDIRS, $redirects);
             curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, $timeout);
             curl_setopt($handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-            curl_setopt($handle, CURLOPT_USERAGENT, "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
+            curl_setopt($handle, CURLOPT_USERAGENT, CHYRP_IDENTITY);
             $content = curl_exec($handle);
             curl_close($handle);
         } else {
@@ -1327,7 +1327,7 @@
                 # Send the GET headers.
                 fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
                 fwrite($connect, "Host: ".$host."\r\n");
-                fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
+                fwrite($connect, "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
 
                 while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false)
                     $remote_headers.= fgets($connect);
@@ -1395,7 +1395,7 @@
             if ($ping_url = pingback_url($url)) {
                 $client = new IXR_Client($ping_url);
                 $client->timeout = 3;
-                $client->useragent = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
+                $client->useragent = CHYRP_IDENTITY;
                 $client->query("pingback.ping", $post->url(), $url);
             }
     }
@@ -1434,7 +1434,7 @@
         # Send the GET headers.
         fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
         fwrite($connect, "Host: $host\r\n");
-        fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
+        fwrite($connect, "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
 
         # Check for X-Pingback header.
         while (!feof($connect)) {
@@ -1501,12 +1501,13 @@
         $info["notifications"]         = (array) $info["notifications"];
 
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+        $uploads_path_fixed = fix($uploads_path, false, true);
 
         if ($info["uploader"])
             if (!is_dir($uploads_path))
-                $info["notifications"][] = _f("Please create the directory <em>%s</em>.", fix($uploads_path));
+                $info["notifications"][] = _f("Please create the directory <em>%s</em>.", $uploads_path_fixed);
             elseif (!is_writable($uploads_path))
-                $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", fix($uploads_path));
+                $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", $uploads_path_fixed);
 
         return $info;
     }
@@ -1622,7 +1623,8 @@
      */
      function cancel_module($target, $reason = "") {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) : $reason ;
+            _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) :
+            $reason ;
 
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
@@ -1647,7 +1649,8 @@
      */
      function cancel_feather($target, $reason = "") {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled because the feather could not continue.", camelize($target)) : $reason ;
+            _f("Execution of %s has been cancelled because the feather could not continue.", camelize($target)) :
+            $reason ;
 
         if (isset(Feathers::$instances[$target]))
             Feathers::$instances[$target]->cancelled = true;
@@ -1676,20 +1679,20 @@
      */
     function upload($file, $filter = null) {
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
-        $fixed_path = fix($uploads_path, false, true);
-        $fixed_name = fix($file['name'], false, true);
         $filename = upload_filename($file['name'], $filter);
 
         if (!is_uploaded_file($file['tmp_name']))
-            show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", $fixed_name));
+            show_403(__("Access Denied"), __("Only uploaded files are accepted."));
 
         if (!is_dir($uploads_path))
-            error(__("Error"), _f("Please create the directory <em>%s</em>.", $fixed_path));
+            error(__("Error"), __("Upload path does not exist."));
 
         if (!is_writable($uploads_path))
-            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", $fixed_path));
+            error(__("Error"), __("Upload path is not writable."));
 
-        move_uploaded_file($file['tmp_name'], $uploads_path.$filename);
+        if (!move_uploaded_file($file['tmp_name'], $uploads_path.$filename))
+            error(__("Error"), __("Failed to write file to disk."));
+
         return $filename;
     }
 
@@ -1710,16 +1713,18 @@
         fallback($matches[0], md5($url).".bin");
 
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
-        $fixed_path = fix($uploads_path, false, true);
         $filename = upload_filename($matches[0]);
+        $contents = get_remote($url, $redirects, $timeout);
 
         if (!is_dir($uploads_path))
-            error(__("Error"), _f("Please create the directory <em>%s</em>.", $fixed_path));
+            error(__("Error"), __("Upload path does not exist."));
 
         if (!is_writable($uploads_path))
-            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", $fixed_path));
+            error(__("Error"), __("Upload path is not writable."));
 
-        file_put_contents($uploads_path.$filename, get_remote($url, $redirects, $timeout));
+        if (!@file_put_contents($uploads_path.$filename, $contents))
+            error(__("Error"), __("Failed to write file to disk."));
+
         return $filename;
     }
 
@@ -1986,12 +1991,16 @@
      */
     function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g", $atts = array()) {
         $url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
+
         if ($img) {
-            $url = '<img class="gravatar" src="' . $url . '"';
+            $url = '<img class="gravatar" src="'.$url.'"';
+
             foreach ($atts as $key => $val)
-                $url .= ' ' . $key . '="' . $val . '"';
-            $url .= ">";
+                $url.= ' '.$key.'="'.$val.'"';
+
+            $url.= ">";
         }
+
         return $url;
     }
 
