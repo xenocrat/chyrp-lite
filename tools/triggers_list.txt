@@ -227,7 +227,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 374
+	includes/common.php on line 378
 
 
 before_export
@@ -329,7 +329,7 @@ Called from:
 pingback
 --------
 Called from:
-	includes/lib/XMLRPC.php on line 118
+	includes/lib/XMLRPC.php on line 111
 Arguments:
 	$post, $target, $source, $title, $excerpt
 
@@ -337,7 +337,7 @@ Arguments:
 metaWeblog_newPost_preQuery
 ---------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 253
+	includes/lib/XMLRPC.php on line 270
 Arguments:
 	$args[3]
 
@@ -345,7 +345,7 @@ Arguments:
 metaWeblog_newPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 262
+	includes/lib/XMLRPC.php on line 287
 Arguments:
 	$args[3], $post
 
@@ -353,7 +353,7 @@ Arguments:
 metaWeblog_editPost_preQuery
 ----------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 311
+	includes/lib/XMLRPC.php on line 331
 Arguments:
 	$args[3], $post
 
@@ -361,7 +361,7 @@ Arguments:
 metaWeblog_editPost
 -------------------
 Called from:
-	includes/lib/XMLRPC.php on line 322
+	includes/lib/XMLRPC.php on line 342
 Arguments:
 	$args[3], $post
 
@@ -717,7 +717,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 371
+	includes/common.php on line 375
 
 
 admin_determine_action
@@ -831,7 +831,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 812
+	includes/helpers.php on line 813
 Arguments:
 	$query, $plain
 
@@ -841,7 +841,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1372
+	includes/helpers.php on line 1373
 
 
 send_mail
@@ -849,7 +849,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2081
+	includes/helpers.php on line 2087
 
 
 xmlrpc_methods
@@ -857,7 +857,7 @@ xmlrpc_methods
 Target:
 	$methods
 Called from:
-	includes/lib/XMLRPC.php on line 36
+	includes/lib/XMLRPC.php on line 30
 
 
 metaWeblog_getPost
@@ -865,8 +865,8 @@ metaWeblog_getPost
 Target:
 	$struct
 Called from:
-	includes/lib/XMLRPC.php on line 142
-	includes/lib/XMLRPC.php on line 209
+	includes/lib/XMLRPC.php on line 152
+	includes/lib/XMLRPC.php on line 229
 Arguments:
 	$post
 
@@ -876,15 +876,7 @@ metaWeblog_getCategories
 Target:
 	$categories
 Called from:
-	includes/lib/XMLRPC.php on line 156
-
-
-mt_getCategoryList
-------------------
-Target:
-	$categories
-Called from:
-	includes/lib/XMLRPC.php on line 411
+	includes/lib/XMLRPC.php on line 166
 
 
 group

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-12-27 14:38+0000\n"
+"POT-Creation-Date: 2016-12-30 17:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: includes/class/Route.php:46
 #: includes/class/Route.php:49
 #: includes/class/Route.php:73
-#: includes/common.php:308
+#: includes/common.php:312
 #: includes/controller/Admin.php:376
 #: includes/controller/Admin.php:379
 #: includes/controller/Admin.php:434
@@ -65,17 +65,19 @@ msgstr ""
 #: includes/error.php:175
 #: includes/helpers.php:1687
 #: includes/helpers.php:1690
-#: includes/helpers.php:1717
-#: includes/helpers.php:1720
-#: includes/helpers.php:1783
-#: includes/helpers.php:1786
-#: includes/helpers.php:1789
-#: includes/helpers.php:1792
-#: includes/helpers.php:1795
-#: includes/helpers.php:1798
-#: includes/helpers.php:1801
-#: includes/helpers.php:1806
-#: includes/helpers.php:1834
+#: includes/helpers.php:1693
+#: includes/helpers.php:1719
+#: includes/helpers.php:1722
+#: includes/helpers.php:1725
+#: includes/helpers.php:1787
+#: includes/helpers.php:1790
+#: includes/helpers.php:1793
+#: includes/helpers.php:1796
+#: includes/helpers.php:1799
+#: includes/helpers.php:1802
+#: includes/helpers.php:1805
+#: includes/helpers.php:1810
+#: includes/helpers.php:1838
 #: includes/thumb.php:15
 #: includes/thumb.php:18
 msgid "Error"
@@ -266,17 +268,17 @@ msgstr ""
 #: includes/controller/Admin.php:231
 #: includes/controller/Admin.php:255
 #: includes/controller/Admin.php:280
-#: includes/lib/XMLRPC.php:195
-#: includes/lib/XMLRPC.php:260
-#: includes/lib/XMLRPC.php:301
-#: includes/lib/XMLRPC.php:338
+#: includes/lib/XMLRPC.php:212
+#: includes/lib/XMLRPC.php:285
+#: includes/lib/XMLRPC.php:321
+#: includes/lib/XMLRPC.php:358
 msgid "Post not found."
 msgstr ""
 
 #: includes/ajax.php:35
 #: includes/controller/Admin.php:258
 #: includes/controller/Admin.php:283
-#: includes/lib/XMLRPC.php:341
+#: includes/lib/XMLRPC.php:361
 msgid "You do not have sufficient privileges to delete this post."
 msgstr ""
 
@@ -314,6 +316,8 @@ msgstr ""
 #: includes/controller/Admin.php:145
 #: includes/controller/Admin.php:176
 #: includes/controller/Admin.php:1377
+#: includes/lib/XMLRPC.php:178
+#: includes/lib/XMLRPC.php:242
 msgid "You do not have sufficient privileges to add posts."
 msgstr ""
 
@@ -409,7 +413,7 @@ msgstr ""
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr ""
 
-#: includes/common.php:308
+#: includes/common.php:312
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
@@ -443,8 +447,8 @@ msgstr ""
 
 #: includes/controller/Admin.php:206
 #: includes/controller/Admin.php:234
-#: includes/lib/XMLRPC.php:198
-#: includes/lib/XMLRPC.php:304
+#: includes/lib/XMLRPC.php:215
+#: includes/lib/XMLRPC.php:324
 msgid "You do not have sufficient privileges to edit this post."
 msgstr ""
 
@@ -522,7 +526,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:583
 #: includes/controller/Main.php:459
-#: install.php:479
+#: install.php:480
 msgid "Passwords cannot be blank."
 msgstr ""
 
@@ -530,8 +534,8 @@ msgstr ""
 #: includes/controller/Admin.php:679
 #: includes/controller/Main.php:461
 #: includes/controller/Main.php:625
-#: install.php:444
-#: install.php:481
+#: install.php:445
+#: install.php:482
 msgid "Passwords do not match."
 msgstr ""
 
@@ -545,7 +549,7 @@ msgstr ""
 #: includes/controller/Admin.php:1752
 #: includes/controller/Main.php:466
 #: includes/controller/Main.php:630
-#: install.php:484
+#: install.php:485
 msgid "Email address cannot be blank."
 msgstr ""
 
@@ -554,7 +558,7 @@ msgstr ""
 #: includes/controller/Admin.php:1755
 #: includes/controller/Main.php:468
 #: includes/controller/Main.php:632
-#: install.php:486
+#: install.php:487
 msgid "Invalid email address."
 msgstr ""
 
@@ -1016,13 +1020,13 @@ msgid "You cannot register an account because you are already logged in."
 msgstr ""
 
 #: includes/controller/Main.php:451
-#: install.php:476
+#: install.php:477
 msgid "Please enter a username for your account."
 msgstr ""
 
 #: includes/controller/Main.php:463
 #: includes/controller/Main.php:627
-#: install.php:726
+#: install.php:727
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
@@ -1067,7 +1071,7 @@ msgid "We have emailed you a new password."
 msgstr ""
 
 #: includes/controller/Main.php:576
-#: includes/lib/XMLRPC.php:460
+#: includes/lib/XMLRPC.php:401
 msgid "Incorrect username and/or password."
 msgstr ""
 
@@ -1150,193 +1154,193 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr ""
 
-#: includes/helpers.php:686
+#: includes/helpers.php:687
 #, php-format
 msgid "&#8220;%s&#8221;"
 msgstr ""
 
-#: includes/helpers.php:689
+#: includes/helpers.php:690
 #, php-format
 msgid "and %s"
 msgstr ""
 
-#: includes/helpers.php:765
+#: includes/helpers.php:766
 msgid "year"
 msgstr ""
 
-#: includes/helpers.php:766
+#: includes/helpers.php:767
 msgid "month"
 msgstr ""
 
-#: includes/helpers.php:767
+#: includes/helpers.php:768
 msgid "day"
 msgstr ""
 
-#: includes/helpers.php:768
+#: includes/helpers.php:769
 msgid "hour"
 msgstr ""
 
-#: includes/helpers.php:769
+#: includes/helpers.php:770
 msgid "minute"
 msgstr ""
 
-#: includes/helpers.php:770
+#: includes/helpers.php:771
 msgid "second"
 msgstr ""
 
-#: includes/helpers.php:1507
-#: includes/helpers.php:1687
-#: includes/helpers.php:1717
-#: includes/lib/XMLRPC.php:175
+#: includes/helpers.php:1509
 #, php-format
 msgid "Please create the directory <em>%s</em>."
 msgstr ""
 
-#: includes/helpers.php:1509
-#: install.php:828
+#: includes/helpers.php:1511
+#: install.php:829
 #, php-format
 msgid "Please make <em>%s</em> writable by the server."
 msgstr ""
 
-#: includes/helpers.php:1527
+#: includes/helpers.php:1529
 #, php-format
 msgid "%s module is missing."
 msgstr ""
 
-#: includes/helpers.php:1536
+#: includes/helpers.php:1538
 #, php-format
 msgid "%s module is damaged."
 msgstr ""
 
-#: includes/helpers.php:1553
+#: includes/helpers.php:1555
 #, php-format
 msgid "%s feather is missing."
 msgstr ""
 
-#: includes/helpers.php:1562
+#: includes/helpers.php:1564
 #, php-format
 msgid "%s feather is damaged."
 msgstr ""
 
-#: includes/helpers.php:1625
+#: includes/helpers.php:1627
+#: includes/helpers.php:1652
 #, php-format
-msgid "Execution of %s has been cancelled because the module could not continue."
-msgstr ""
-
-#: includes/helpers.php:1650
-#, php-format
-msgid "Execution of %s has been cancelled because the feather could not continue."
+msgid "Execution of %s has been cancelled."
 msgstr ""
 
 #: includes/helpers.php:1684
-#, php-format
-msgid "<em>%s</em> is not an uploaded file."
+msgid "Only uploaded files are accepted."
+msgstr ""
+
+#: includes/helpers.php:1687
+#: includes/helpers.php:1719
+#: includes/lib/XMLRPC.php:189
+msgid "Upload path does not exist."
 msgstr ""
 
 #: includes/helpers.php:1690
-#: includes/helpers.php:1720
-#: includes/lib/XMLRPC.php:178
-#, php-format
-msgid "Upload destination <em>%s</em> is not writable."
+#: includes/helpers.php:1722
+#: includes/lib/XMLRPC.php:192
+msgid "Upload path is not writable."
 msgstr ""
 
-#: includes/helpers.php:1784
-msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
-msgstr ""
-
-#: includes/helpers.php:1787
-msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
-msgstr ""
-
-#: includes/helpers.php:1790
-msgid "The uploaded file was only partially uploaded."
-msgstr ""
-
-#: includes/helpers.php:1793
-msgid "Missing a temporary folder."
-msgstr ""
-
-#: includes/helpers.php:1796
+#: includes/helpers.php:1693
+#: includes/helpers.php:1725
+#: includes/helpers.php:1800
+#: includes/lib/XMLRPC.php:195
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1799
+#: includes/helpers.php:1788
+msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
+msgstr ""
+
+#: includes/helpers.php:1791
+msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
+msgstr ""
+
+#: includes/helpers.php:1794
+msgid "The uploaded file was only partially uploaded."
+msgstr ""
+
+#: includes/helpers.php:1797
+msgid "Missing a temporary folder."
+msgstr ""
+
+#: includes/helpers.php:1803
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:1802
+#: includes/helpers.php:1806
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:1807
+#: includes/helpers.php:1811
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:1834
+#: includes/helpers.php:1838
 #, php-format
 msgid "Only %s files are accepted."
 msgstr ""
 
-#: includes/helpers.php:2017
+#: includes/helpers.php:2023
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2038
+#: includes/helpers.php:2044
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2111
+#: includes/helpers.php:2117
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:2112
-#: includes/helpers.php:2122
-#: includes/helpers.php:2132
+#: includes/helpers.php:2118
+#: includes/helpers.php:2128
+#: includes/helpers.php:2138
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:2114
+#: includes/helpers.php:2120
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:2116
+#: includes/helpers.php:2122
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2121
+#: includes/helpers.php:2127
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2124
+#: includes/helpers.php:2130
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2126
+#: includes/helpers.php:2132
 msgid "Visit this link to reset your password:"
 msgstr ""
 
-#: includes/helpers.php:2131
+#: includes/helpers.php:2137
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2134
+#: includes/helpers.php:2140
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/helpers.php:2144
+#: includes/helpers.php:2150
 msgid "Undeliverable"
 msgstr ""
 
-#: includes/helpers.php:2144
+#: includes/helpers.php:2150
 msgid "Unable to send email."
 msgstr ""
 
@@ -1361,73 +1365,59 @@ msgstr ""
 msgid "The page cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
-#: includes/lib/AtomFeed.php:78
+#: includes/lib/AtomFeed.php:76
 msgid "Guest"
 msgstr ""
 
-#: includes/lib/Leaf.php:157
+#: includes/lib/Leaf.php:163
 #, php-format
 msgid "%s GB"
 msgstr ""
 
-#: includes/lib/Leaf.php:162
+#: includes/lib/Leaf.php:168
 #, php-format
 msgid "%s MB"
 msgstr ""
 
-#: includes/lib/Leaf.php:166
+#: includes/lib/Leaf.php:172
 #, php-format
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/XMLRPC.php:57
+#: includes/lib/XMLRPC.php:50
 msgid "Pingback support is disabled for this site."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:60
+#: includes/lib/XMLRPC.php:53
 msgid "The from and to URLs cannot be the same."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:63
+#: includes/lib/XMLRPC.php:56
 msgid "The URL for our page is not valid."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:66
+#: includes/lib/XMLRPC.php:59
 msgid "The URL for your page is not valid."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:74
+#: includes/lib/XMLRPC.php:67
 msgid "We have not published at that URL."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:80
+#: includes/lib/XMLRPC.php:73
 msgid "You have not published at that URL."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:88
+#: includes/lib/XMLRPC.php:81
 msgid "Your page could not be parsed."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:109
+#: includes/lib/XMLRPC.php:102
 msgid "Your page does not link to our page."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:239
-#: includes/lib/XMLRPC.php:296
-msgid "Post can't be empty."
-msgstr ""
-
-#: includes/lib/XMLRPC.php:422
-#, php-format
-msgid "The %s feather is not enabled."
-msgstr ""
-
-#: includes/lib/XMLRPC.php:457
+#: includes/lib/XMLRPC.php:398
 msgid "XML-RPC support is disabled for this site."
-msgstr ""
-
-#: includes/lib/XMLRPC.php:467
-msgid "You do not have sufficient privileges to do that."
 msgstr ""
 
 #: includes/model/Group.php:235
@@ -1542,224 +1532,224 @@ msgstr ""
 msgid "Export Content"
 msgstr ""
 
-#: install.php:108
+#: install.php:109
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
 msgstr ""
 
-#: install.php:112
+#: install.php:113
 msgid "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
 msgstr ""
 
-#: install.php:147
+#: install.php:148
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:467
+#: install.php:468
 msgid "Database cannot be blank."
 msgstr ""
 
-#: install.php:470
+#: install.php:471
 msgid "Please enter a name for your website."
 msgstr ""
 
-#: install.php:473
+#: install.php:474
 msgid "Time zone cannot be blank."
 msgstr ""
 
-#: install.php:489
+#: install.php:490
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
-#: install.php:495
+#: install.php:496
 msgid "Could not determine the absolute path to the SQLite database."
 msgstr ""
 
-#: install.php:499
+#: install.php:500
 msgid "Please make the SQLite database writable by the server."
 msgstr ""
 
-#: install.php:503
+#: install.php:504
 msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 
-#: install.php:526
+#: install.php:527
 msgid "Could not connect to the database:"
 msgstr ""
 
-#: install.php:532
+#: install.php:533
 msgid "Clean URLs will not be available because the <em>.htaccess</em> file is not writable."
 msgstr ""
 
-#: install.php:573
+#: install.php:574
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:742
+#: install.php:743
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:744
+#: install.php:745
 msgid "Adapter"
 msgstr ""
 
-#: install.php:755
+#: install.php:756
 msgid "Host"
 msgstr ""
 
-#: install.php:755
+#: install.php:756
 msgid "(usually ok as \"localhost\")"
 msgstr ""
 
-#: install.php:759
-#: install.php:805
+#: install.php:760
+#: install.php:806
 msgid "Username"
 msgstr ""
 
-#: install.php:763
-#: install.php:809
-#: install.php:813
+#: install.php:764
+#: install.php:810
+#: install.php:814
 msgid "Password"
 msgstr ""
 
-#: install.php:767
+#: install.php:768
 msgid "Database"
 msgstr ""
 
-#: install.php:769
+#: install.php:770
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:775
+#: install.php:776
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:778
+#: install.php:779
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:778
+#: install.php:779
 msgid "(optional)"
 msgstr ""
 
-#: install.php:782
+#: install.php:783
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:784
+#: install.php:785
 msgid "Site Name"
 msgstr ""
 
-#: install.php:785
+#: install.php:786
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:788
+#: install.php:789
 msgid "Description"
 msgstr ""
 
-#: install.php:792
+#: install.php:793
 msgid "What time is it?"
 msgstr ""
 
-#: install.php:796
+#: install.php:797
 msgid "%I:%M %p on %B %d, %Y"
 msgstr ""
 
-#: install.php:803
+#: install.php:804
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:813
+#: install.php:814
 msgid "(again)"
 msgstr ""
 
-#: install.php:817
+#: install.php:818
 msgid "Email Address"
 msgstr ""
 
-#: install.php:820
+#: install.php:821
 msgid "Install me!"
 msgstr ""
 
-#: install.php:823
+#: install.php:824
 msgid "Chyrp Lite has been installed"
 msgstr ""
 
-#: install.php:824
-#: upgrade.php:422
+#: install.php:825
+#: upgrade.php:423
 msgid "What now?"
 msgstr ""
 
-#: install.php:826
+#: install.php:827
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:830
+#: install.php:831
 msgid "Learn more about Chyrp Lite."
 msgstr ""
 
-#: install.php:832
-#: upgrade.php:429
+#: install.php:833
+#: upgrade.php:430
 msgid "Take me to my site!"
 msgstr ""
 
-#: upgrade.php:96
+#: upgrade.php:97
 msgid "success!"
 msgstr ""
 
-#: upgrade.php:98
+#: upgrade.php:99
 msgid "failed!"
 msgstr ""
 
-#: upgrade.php:183
+#: upgrade.php:184
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:409
+#: upgrade.php:410
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:410
+#: upgrade.php:411
 msgid "Please take these preemptive measures before proceeding:"
 msgstr ""
 
-#: upgrade.php:412
+#: upgrade.php:413
 msgid "<strong>Make a backup of your installation and database.</strong>"
 msgstr ""
 
-#: upgrade.php:413
+#: upgrade.php:414
 msgid "Disable any third-party Modules and Feathers."
 msgstr ""
 
-#: upgrade.php:414
+#: upgrade.php:415
 msgid "Ensure Chyrp Lite's directory is writable by the server."
 msgstr ""
 
-#: upgrade.php:416
+#: upgrade.php:417
 msgid "If any of the upgrade tasks fail, you can safely refresh and retry."
 msgstr ""
 
-#: upgrade.php:418
+#: upgrade.php:419
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:421
+#: upgrade.php:422
 msgid "Chyrp Lite has been upgraded"
 msgstr ""
 
-#: upgrade.php:424
+#: upgrade.php:425
 msgid "Look above for any reports of failed tasks or errors."
 msgstr ""
 
-#: upgrade.php:425
+#: upgrade.php:426
 msgid "Fix any problems reported."
 msgstr ""
 
-#: upgrade.php:426
+#: upgrade.php:427
 msgid "Execute this upgrader again until all tasks succeed."
 msgstr ""
 
-#: upgrade.php:427
+#: upgrade.php:428
 msgid "You can delete <em>upgrade.php</em> once you are finished."
 msgstr ""
 
