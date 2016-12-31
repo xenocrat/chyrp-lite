@@ -1502,13 +1502,12 @@
         $info["notifications"]         = (array) $info["notifications"];
 
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
-        $uploads_path_fixed = fix($uploads_path, false, true);
 
         if ($info["uploader"])
             if (!is_dir($uploads_path))
-                $info["notifications"][] = _f("Please create the directory <em>%s</em>.", $uploads_path_fixed);
+                $info["notifications"][] = __("Please create the uploads directory.");
             elseif (!is_writable($uploads_path))
-                $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", $uploads_path_fixed);
+                $info["notifications"][] = __("Please make the uploads directory writable.");
 
         return $info;
     }
