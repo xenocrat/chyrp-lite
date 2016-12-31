@@ -6,8 +6,7 @@
 
         public function __init() {
             if (!isset($_SERVER["DOCUMENT_ROOT"]))
-                cancel_module("sitemap",
-                    __("Sitemap module cannot continue because the server's document root is not set.", "sitemap"));
+                cancel_module("sitemap", __("Sitemap module cannot determine the server's document root.", "sitemap"));
 
             $this->change_frequency = array("hourly"  => __("hourly", "sitemap"),
                                             "daily"   => __("daily", "sitemap"),
