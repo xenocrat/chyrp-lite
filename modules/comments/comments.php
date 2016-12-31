@@ -302,11 +302,10 @@
         }
 
         public function pingback($post, $to, $from, $title, $excerpt) {
-            $sql = SQL::current();
-            $count = $sql->count("comments",
-                                 array("post_id" => $post->id,
-                                       "status" => "pingback",
-                                       "author_url" => $from));
+            $count = SQL::current()->count("comments",
+                                           array("post_id" => $post->id,
+                                                 "status" => "pingback",
+                                                 "author_url" => $from));
 
             if (!empty($count))
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "comments"));
