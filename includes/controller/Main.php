@@ -325,7 +325,7 @@
             $this->display(array("pages".DIR."search", "pages".DIR."index"),
                            array("posts" => $posts,
                                  "search" => $_GET['query']),
-                           _f("Search results for \"%s\"", fix($_GET['query'])));
+                           _f("Search results for &#8220;%s&#8221;", fix($_GET['query'])));
         }
 
         /**
