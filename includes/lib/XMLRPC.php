@@ -411,6 +411,9 @@
             if (error_reporting() === 0 or $errno == E_STRICT)
                 return true;
 
+            if (DEBUG)
+                error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+
             throw new Exception($message." (".$file." on line ".$line.")", 500);
         }
 
