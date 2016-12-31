@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.04");
-    define('CHYRP_CODENAME', "Iago");
+    define('CHYRP_VERSION',  "2017.01");
+    define('CHYRP_CODENAME', "Swainson");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
@@ -826,7 +826,7 @@
             <ol>
                 <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>
             <?php if (!is_writable(CACHES_DIR)): ?>
-                <li><?php echo _f("Please make <em>%s</em> writable by the server.", CACHES_DIR) ?></li>
+                <li><?php echo __("Please make the <em>caches</em> directory writable by the server.") ?></li>
             <?php endif; ?>
                 <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
             </ol>

@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2016.04");
+    define('CHYRP_VERSION', "2017.01");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Iago");
+    define('CHYRP_CODENAME', "Swainson");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
