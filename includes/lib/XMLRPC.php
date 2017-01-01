@@ -408,7 +408,8 @@
         * Function: error_handler
         */
         public static function error_handler($errno, $message, $file, $line) {
-            if (error_reporting() === 0 or $errno == E_STRICT)
+            # Test for suppressed errors and excluded error levels.
+            if (!(error_reporting() & $errno))
                 return true;
 
             if (DEBUG)
