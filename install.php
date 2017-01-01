@@ -726,6 +726,9 @@
             if (password_strength($_POST['password1']) < 100)
                 $errors[] = __("Please consider setting a stronger password for your account.");
 
+            if (!is_writable(CACHES_DIR))
+                $errors[] = __("Please make the <em>caches</em> directory writable by the server.");
+
             $installed = true;
         }
     }
@@ -821,14 +824,11 @@
                 <button type="submit"><?php echo __("Install me!"); ?></button>
             </form>
 <?php else: ?>
-            <h1><?php echo __("Chyrp Lite has been installed"); ?></h1>
+            <h1><?php echo __("Installation Complete"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
                 <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>
-            <?php if (!is_writable(CACHES_DIR)): ?>
-                <li><?php echo __("Please make the <em>caches</em> directory writable by the server.") ?></li>
-            <?php endif; ?>
-                <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
+                <li><?php echo __("Log in to your site and configure things to your liking."); ?></a></li>
             </ol>
             <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>

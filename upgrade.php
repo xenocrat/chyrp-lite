@@ -397,21 +397,18 @@
             <p><?php echo __("Please take these preemptive measures before proceeding:"); ?></p>
             <ol>
                 <li><?php echo __("<strong>Make a backup of your installation and database.</strong>"); ?></li>
-                <li><?php echo __("Disable any third-party Modules and Feathers."); ?></li>
-                <li><?php echo __("Ensure Chyrp Lite's directory is writable by the server."); ?></li>
+                <li><?php echo __("Tell your users that your site is offline for maintenance."); ?></li>
             </ol>
-            <p><?php echo __("If any of the upgrade tasks fail, you can safely refresh and retry."); ?></p>
             <form action="upgrade.php" method="post">
                 <button type="submit" name="upgrade" value="yes"><?php echo __("Upgrade me!"); ?></button>
             </form>
 <?php else: ?>
-            <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
+            <h1><?php echo __("Upgrade Complete"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
-                <li><?php echo __("Fix any problems reported."); ?></li>
-                <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
-                <li><?php echo __("You can delete <em>upgrade.php</em> once you are finished."); ?></li>
+                <li><?php echo __("Take action to reolve any errors reported on this page."); ?></li>
+                <li><?php echo __("Run this upgrader again if you need to."); ?></li>
+                <li><?php echo __("Delete <em>upgrade.php</em> once everything has succeeded."); ?></li>
             </ol>
             <a class="big" href="<?php echo $config->url; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
