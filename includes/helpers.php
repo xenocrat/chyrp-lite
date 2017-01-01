@@ -1619,7 +1619,7 @@
      *     $reason - Why was execution cancelled?
      *
      * Notes:
-     *     A module can cancel itself in its __construct or __init methods.
+     *     A module can cancel itself in its __construct() or __init() methods.
      */
      function cancel_module($target, $reason = "") {
         $message = empty($reason) ?
@@ -1631,7 +1631,7 @@
         if (DEBUG)
             error_log("WARNING: ".strip_tags($message));
 
-        if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
+        if (Visitor::current()->group->can("toggle_extensions"))
             Flash::warning($message);
     }
 
@@ -1644,7 +1644,7 @@
      *     $reason - Why was execution cancelled?
      *
      * Notes:
-     *     A feather can cancel itself in its __construct or __init methods.
+     *     A feather can cancel itself in its __construct() or __init() methods.
      */
      function cancel_feather($target, $reason = "") {
         $message = empty($reason) ?
@@ -1656,7 +1656,7 @@
         if (DEBUG)
             error_log("WARNING: ".strip_tags($message));
 
-        if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
+        if (Visitor::current()->group->can("toggle_extensions"))
             Flash::warning($message);
     }
 
