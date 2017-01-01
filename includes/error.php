@@ -7,88 +7,42 @@
     $errors = array();
 
     # Set the appropriate error reporting level.
-    if (INSTALLING or UPGRADING or DEBUG)
+    if (DEBUG)
         error_reporting(E_ALL | E_STRICT);
     else
         error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
 
-    # Set the appropriate error and exception handlers.
-    if (INSTALLING or UPGRADING) {
-        set_error_handler("error_snitcher");
-        set_exception_handler("exception_snitcher");
-    } else {
-        set_error_handler("error_composer");
-        set_exception_handler("exception_composer");
-    }
-
-    /**
-     * Function: error_snitcher
-     * Informs the user of errors when installing or upgrading.
-     */
-    function error_snitcher($errno, $message, $file, $line) {
-        global $errors;
-
-        # Test if reporting excludes this error level.
-        if (!(error_reporting() & $errno))
-            return true;
-
-        if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
-
-        # Terminate execution for severe errors.
-        if ($errno & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE)
-            error(null, $message, debug_backtrace());
-        else
-            $errors[] = strip_tags($message);
-
-        return true;
-    }
+    # Set the error and exception handlers.
+    set_error_handler("error_composer");
+    set_exception_handler("exception_composer");
 
     /**
      * Function: error_composer
      * Composes a message for the error() function to display.
      */
     function error_composer($errno, $message, $file, $line) {
-        # Test if reporting excludes this error level.
+        # Test for suppressed errors and excluded error levels.
         if (!(error_reporting() & $errno))
             return true;
 
         if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+            error_log("ERROR: ".$errno." ".strip_tags($message)." (".$file." on line ".$line.")");
 
         error(null, $message, debug_backtrace());
-    }
-
-    /**
-     * Function: exception_snitcher
-     * Informs the user of exceptions when installing or upgrading.
-     */
-    function exception_snitcher(Throwable $e) {
-        global $errors;
-
-        $errno = $e->getCode();
-        $message = $e->getMessage();
-        $file = $e->getFile();
-        $line = $e->getLine();
-
-        if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
-
-        $errors[] = strip_tags($message);
     }
 
     /**
      * Function: exception_composer
      * Composes a message for the error() function to display.
      */
-    function exception_composer(Throwable $e) {
+    function exception_composer($e) {
         $errno = $e->getCode();
         $message = $e->getMessage();
         $file = $e->getFile();
         $line = $e->getLine();
 
         if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+            error_log("ERROR: ".$errno." ".strip_tags($message)." (".$file." on line ".$line.")");
 
         error(null, $message, $e->getTrace());
     }
