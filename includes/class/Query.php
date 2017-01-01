@@ -30,7 +30,7 @@
             $this->db =& $this->sql->db;
 
             $this->params = $params;
-            $this->throw_exceptions = (INSTALLING or UPGRADING or XML_RPC) ? true : $throw_exceptions ;
+            $this->throw_exceptions = (XML_RPC) ? true : $throw_exceptions ;
             $this->queryString = $query;
 
             if ($count and DEBUG) {
@@ -74,8 +74,8 @@
 
                         if (!$result)
                             throw new PDOException;
-                    } catch (PDOException $error) {
-                        return $this->handle($error);
+                    } catch (PDOException $e) {
+                        return $this->exception_handler($e);
                     }
 
                     break;
@@ -93,8 +93,8 @@
                     try {
                         if (!$this->query = $this->db->query($query))
                             throw new Exception($this->db->error);
-                    } catch (Exception $error) {
-                        return $this->handle($error);
+                    } catch (Exception $e) {
+                        return $this->exception_handler($e);
                     }
 
                     break;
@@ -187,12 +187,13 @@
          }
 
         /**
-         * Function: handle
+         * Function: exception_handler
          * Handles exceptions thrown by failed queries.
          */
-        public function handle($error) {
-            $this->sql->error = $error->getMessage();
+        public function exception_handler($e) {
+            $this->sql->error = $e->getMessage();
 
+            # Call error() if throws were not requested.
             if (!$this->throw_exceptions) {
                 $message = (DEBUG) ?
                     fix($this->sql->error).
@@ -202,9 +203,10 @@
                     "<pre>".fix(print_r($this->params, true))."</pre>" :
                     fix($this->sql->error) ;
 
-                error(__("Database Error"), $message, $error->getTrace());
+                error(__("Database Error"), $message, $e->getTrace());
             }
 
-            throw new Exception(fix($this->sql->error));
+            # Otherwise we chain the exception.
+            throw new Exception($this->sql->error, $e->getCode(), $e);
         }
     }
