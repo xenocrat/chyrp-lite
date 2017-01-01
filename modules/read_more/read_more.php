@@ -12,7 +12,7 @@
             $route = Route::current();
             $controller = $route->controller;
 
-            if (!isset($post) or $route->action == "view" or ($controller instanceof MainController and $controller->feed))
+            if (!isset($post) or $route->action == "view" or $controller->feed)
                 return preg_replace("/<!-- *more(.+?)?-->/i", "", $text);
 
             $more = oneof(trim(fallback($matches[1])), __("&hellip;more", "read_more"));
