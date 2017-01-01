@@ -415,7 +415,7 @@
             if (DEBUG)
                 error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
 
-            throw new Exception($message." (".$file." on line ".$line.")", 500);
+            throw new Exception($message, 500);
         }
 
        /**
