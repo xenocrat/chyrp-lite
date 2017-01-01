@@ -735,7 +735,7 @@
     #---------------------------------------------
 
     foreach ($errors as $error)
-        echo '<span role="alert">'.$error."</span>\n";
+        echo '<span role="alert">'.sanitize_html($error)."</span>\n";
 
           ?></pre>
 <?php if (!$installed): ?>
