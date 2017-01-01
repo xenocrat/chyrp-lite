@@ -86,20 +86,6 @@
     load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
     /**
-     * Function: test
-     * Displays a "success" or "failed" message determined by the value.
-     *
-     * Parameters:
-     *     $value - Something that evaluates to true or false.
-     */
-    function test($value) {
-        if ($value)
-            return " <span class=\"yay\">".__("success!")."</span>\n";
-        else
-            return " <span class=\"boo\">".__("failed!")."</span>\n";
-    }
-
-    /**
      * Function: add_markdown
      * Adds the enable_markdown config setting.
      *
@@ -403,7 +389,7 @@
     #---------------------------------------------
 
     foreach ($errors as $error)
-        echo '<span role="alert">'.$error."</span>\n";
+        echo '<span role="alert">'.sanitize_html($error)."</span>\n";
 
             ?></pre>
 <?php if (!$upgraded): ?>
