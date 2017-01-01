@@ -394,9 +394,9 @@
             ?></pre>
 <?php if (!$upgraded): ?>
             <h1><?php echo __("Halt!"); ?></h1>
-            <p><?php echo __("Please take these preemptive measures before proceeding:"); ?></p>
+            <p><?php echo __("Please take these preemptive measures before you upgrade:"); ?></p>
             <ol>
-                <li><?php echo __("<strong>Make a backup of your installation and database.</strong>"); ?></li>
+                <li><?php echo __("<strong>Backup your database before proceeding!</strong>"); ?></li>
                 <li><?php echo __("Tell your users that your site is offline for maintenance."); ?></li>
             </ol>
             <form action="upgrade.php" method="post">
