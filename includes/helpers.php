@@ -1625,14 +1625,10 @@
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
-        if (isset(Modules::$instances[$target]))
+        if (isset(Modules::$instances[$target])) {
             Modules::$instances[$target]->cancelled = true;
-
-        if (DEBUG)
-            error_log("WARNING: ".strip_tags($message));
-
-        if (Visitor::current()->group->can("toggle_extensions"))
-            Flash::warning($message);
+            trigger_error($message, E_USER_NOTICE);
+        }
     }
 
     /**
@@ -1650,14 +1646,10 @@
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
-        if (isset(Feathers::$instances[$target]))
+        if (isset(Feathers::$instances[$target])) {
             Feathers::$instances[$target]->cancelled = true;
-
-        if (DEBUG)
-            error_log("WARNING: ".strip_tags($message));
-
-        if (Visitor::current()->group->can("toggle_extensions"))
-            Flash::warning($message);
+            trigger_error($message, E_USER_NOTICE);
+        }
     }
 
     #---------------------------------------------
