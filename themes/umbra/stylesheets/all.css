@@ -305,9 +305,8 @@ div.metadata {                                  font-weight: normal;
                                                 display: block;
                                                 width: 100%;
                                                 line-height: 2em;
-                                                padding: 0rem 0rem 4rem 0rem;
+                                                padding: 0rem;
                                                 margin-top: 2rem }
-article.commentary div.metadata {               padding: 0rem }
 div.comments_pagination {                       width: 100%;
                                                 clear: both;
                                                 padding-top: 2rem;
@@ -327,11 +326,10 @@ div#main > article, div.standalone {            box-sizing: border-box;
                                                 width: 100%;
                                                 max-width: 1024px;
                                                 clear: both;
-                                                margin: 0em auto;
+                                                margin: 0em auto 4rem auto;
                                                 padding: 4rem 4rem 0rem 4rem }
 div#main > article.discourse,
 div#main > article.commentary {                 padding: 0rem 4rem;
-                                                margin-top: 4rem;
                                                 overflow: hidden;
                                                 border-bottom: none }
 div#main > article.discourse > div {            box-sizing: border-box;
@@ -349,7 +347,7 @@ ul.archive article.post.archive {               display: block;
                                                 height: 222px;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
-                                                margin: 0rem 0rem 2rem 1rem;
+                                                margin: 1rem 0rem 1rem 1rem;
                                                 padding: 8px;
                                                 border: 1px solid #c2bcb8 }
 article > header {                              display: block;
@@ -369,8 +367,6 @@ article > section.photo {                       width: 100%;
                                                 max-height: 1024px;
                                                 overflow: hidden;
                                                 clear: both }
-article > section.photo + article > section.photo,
-article > section.photo + p {                   margin-top: 1em }
 article > footer {                              display: block;
                                                 width: 100%;
                                                 text-align: left;
@@ -379,7 +375,6 @@ article > footer {                              display: block;
                                                 padding: 0em;
                                                 border: none }
 article > footer:last-child {                   margin: 0em }
-
 article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
@@ -566,11 +561,11 @@ img.gravatar {                                  position: absolute;
     div.search_box {                            margin-top: 0em }
     button#search_submit {                      display: none }
     div.prev {                                  margin-top: 2rem }
-    div#main > article, div.standalone {        padding: 2rem 2rem 0rem 2rem }
+    div#main > article, div.standalone {        margin: 0em auto 2rem auto;
+                                                padding: 2rem 2rem 0rem 2rem }
     div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 2rem }
     div.category a.category {                   right: 2rem }
-    div.metadata {                              padding-bottom: 2rem }
     ol.comments li {                            padding: 2rem }
     iframe.video_embed {                        height: calc((100vw - 4rem) * 0.5625) }
     img.gravatar {                              position: static;
