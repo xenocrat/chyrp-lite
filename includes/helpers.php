@@ -1619,16 +1619,16 @@
      *     $reason - Why was execution cancelled?
      *
      * Notes:
-     *     A module can cancel itself in its __construct() or __init() methods.
+     *     A module can cancel itself in its __init() method.
      */
      function cancel_module($target, $reason = "") {
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
-        if (isset(Modules::$instances[$target])) {
+        if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
-            trigger_error($message, E_USER_NOTICE);
-        }
+
+        trigger_error($message, E_USER_NOTICE);
     }
 
     /**
@@ -1640,16 +1640,16 @@
      *     $reason - Why was execution cancelled?
      *
      * Notes:
-     *     A feather can cancel itself in its __construct() or __init() methods.
+     *     A feather can cancel itself in its __init() method.
      */
      function cancel_feather($target, $reason = "") {
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
-        if (isset(Feathers::$instances[$target])) {
+        if (isset(Feathers::$instances[$target]))
             Feathers::$instances[$target]->cancelled = true;
-            trigger_error($message, E_USER_NOTICE);
-        }
+
+        trigger_error($message, E_USER_NOTICE);
     }
 
     #---------------------------------------------
