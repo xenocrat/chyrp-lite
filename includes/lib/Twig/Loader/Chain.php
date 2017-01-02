@@ -12,6 +12,8 @@
 /**
  * Loads templates from other loaders.
  *
+ * @final
+ *
  * @author Fabien Potencier <fabien@symfony.com>
  */
 class Twig_Loader_Chain implements Twig_LoaderInterface, Twig_ExistsLoaderInterface, Twig_SourceContextLoaderInterface
@@ -35,9 +37,6 @@ class Twig_Loader_Chain implements Twig_LoaderInterface, Twig_ExistsLoaderInterf
         $this->hasSourceCache = array();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSource($name)
     {
         @trigger_error(sprintf('Calling "getSource" on "%s" is deprecated since 1.27. Use getSourceContext() instead.', get_class($this)), E_USER_DEPRECATED);
@@ -58,9 +57,6 @@ class Twig_Loader_Chain implements Twig_LoaderInterface, Twig_ExistsLoaderInterf
         throw new Twig_Error_Loader(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' ('.implode(', ', $exceptions).')' : ''));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSourceContext($name)
     {
         $exceptions = array();
@@ -83,9 +79,6 @@ class Twig_Loader_Chain implements Twig_LoaderInterface, Twig_ExistsLoaderInterf
         throw new Twig_Error_Loader(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' ('.implode(', ', $exceptions).')' : ''));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function exists($name)
     {
         $name = (string) $name;
@@ -118,9 +111,6 @@ class Twig_Loader_Chain implements Twig_LoaderInterface, Twig_ExistsLoaderInterf
         return $this->hasSourceCache[$name] = false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheKey($name)
     {
         $exceptions = array();
@@ -139,9 +129,6 @@ class Twig_Loader_Chain implements Twig_LoaderInterface, Twig_ExistsLoaderInterf
         throw new Twig_Error_Loader(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' ('.implode(', ', $exceptions).')' : ''));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isFresh($name, $time)
     {
         $exceptions = array();
