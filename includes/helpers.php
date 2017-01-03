@@ -1671,6 +1671,9 @@
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
         $filename = upload_filename($file['name'], $filter);
 
+        if ($filename === false)
+            error(__("Error"), _f("Only %s files are accepted.", list_notate($filter)));
+
         if (!is_uploaded_file($file['tmp_name']))
             show_403(__("Access Denied"), __("Only uploaded files are accepted."));
 
@@ -1824,9 +1827,9 @@
         # Extract the file's basename and extension, disallow harmful extensions.
         preg_match("/(.+?)(\.($patterns)(?<!$disallow))?$/i", $filename, $matches);
 
-        # Display an error message if a valid extension was not extracted.
+        # Return false if a valid extension was not extracted.
         if (!empty($filter) and empty($matches[3]))
-            error(__("Error"), _f("Only %s files are accepted.", list_notate($filter)));
+            return false;
 
         $extension = fallback($matches[3], "bin");
         $sanitized = oneof(sanitize(fallback($matches[1], ""), true, true, 80), md5($filename));
