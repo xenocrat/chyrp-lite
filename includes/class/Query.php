@@ -193,7 +193,7 @@
         public function exception_handler($e) {
             $this->sql->error = $e->getMessage();
 
-            # Call error() if throws were not requested.
+            # Trigger an error if throws were not requested.
             if (!$this->throw_exceptions) {
                 $message = (DEBUG) ?
                     fix($this->sql->error).
@@ -203,7 +203,7 @@
                     "<pre>".fix(print_r($this->params, true))."</pre>" :
                     fix($this->sql->error) ;
 
-                error(__("Database Error"), $message, $e->getTrace());
+                trigger_error(_f("Database error: %s", $message), E_USER_WARNING);
             }
 
             # Otherwise we chain the exception.
