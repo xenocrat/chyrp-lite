@@ -196,12 +196,12 @@
             # Trigger an error if throws were not requested.
             if (!$this->throw_exceptions) {
                 $message = (DEBUG) ?
-                    fix($this->sql->error).
+                    fix($this->sql->error, false, true).
                     "\n\n<h2>".__("Query String")."</h2>\n".
-                    "<pre>".fix(print_r($this->queryString, true))."</pre>".
+                    "<pre>".fix(print_r($this->queryString, true), false, true)."</pre>".
                     "\n\n<h2>".__("Parameters")."</h2>\n".
-                    "<pre>".fix(print_r($this->params, true))."</pre>" :
-                    fix($this->sql->error) ;
+                    "<pre>".fix(print_r($this->params, true), false, true)."</pre>" :
+                    fix($this->sql->error, false, true) ;
 
                 trigger_error(_f("Database error: %s", $message), E_USER_WARNING);
             }

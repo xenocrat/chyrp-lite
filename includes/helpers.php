@@ -2014,7 +2014,7 @@
         $encoded = json_encode($value, $options);
 
         if (json_last_error())
-            trigger_error(_f("JSON encoding error: %s", fix(json_last_error_msg())), E_USER_WARNING);
+            trigger_error(_f("JSON encoding error: %s", fix(json_last_error_msg(), false, true)), E_USER_WARNING);
 
         return $encoded;
     }
@@ -2035,7 +2035,7 @@
         $decoded = json_decode($value, $assoc, $depth);
 
         if (json_last_error())
-            trigger_error(_f("JSON decoding error: %s", fix(json_last_error_msg())), E_USER_WARNING);
+            trigger_error(_f("JSON decoding error: %s", fix(json_last_error_msg(), false, true)), E_USER_WARNING);
 
         return $decoded;
     }
