@@ -2,7 +2,6 @@
 <html lang="{{ site.locale | split('_') | first | split('-') | first }}">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex">
 <meta name="viewport" content="initial-scale = 1.0">
 <title>{{ site.name }} | {% block title %}{{ title }}{% endblock %}</title>
 <!-- Styles -->
@@ -54,9 +53,7 @@
 {% endfor %}
 {% block content %}{% endblock %}
 </div>
-<div id="footer" role="contentinfo">
-<img class="logo" src="{{ site.chyrp_url }}/favicon.svg" alt="{{ 'Chyrp loves you.' | translate }}">
-<small class="metadata">{{ "Chyrp Lite &ldquo;%s&rdquo;" | translate | format(codename) }}</small>
+<div id="footer" role="navigation">
 <a id="logout" class="button" href="{{ url('logout') }}">{{ "Log out" | translate }}</a>
 </div>
 </body>
