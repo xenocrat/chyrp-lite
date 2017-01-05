@@ -26,7 +26,7 @@
             return true;
 
         if (DEBUG)
-            error_log("ERROR: ".$errno." ".strip_tags($message)." (".$file." on line ".$line.")");
+            error_log("ERROR: ".$errno." ".str_replace("\n", " ", strip_tags($message))." (".$file." on line ".$line.")");
 
         error(null, $message, debug_backtrace());
     }
@@ -42,7 +42,7 @@
         $line = $e->getLine();
 
         if (DEBUG)
-            error_log("ERROR: ".$errno." ".strip_tags($message)." (".$file." on line ".$line.")");
+            error_log("ERROR: ".$errno." ".str_replace("\n", " ", strip_tags($message))." (".$file." on line ".$line.")");
 
         error(null, $message, $e->getTrace());
     }
