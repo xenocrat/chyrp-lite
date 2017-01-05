@@ -91,7 +91,7 @@
                         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     } catch (PDOException $error) {
                         $this->error = $error->getMessage();
-                        return ($checking) ? false : trigger_error(fix($this->error), E_USER_ERROR) ;
+                        return ($checking) ? false : trigger_error(_f("Database error: %s", fix($this->error)), E_USER_ERROR) ;
                     }
 
                     break;
@@ -100,7 +100,7 @@
                     $this->error = mysqli_connect_error();
 
                     if (mysqli_connect_errno())
-                        return ($checking) ? false : trigger_error(fix($this->error), E_USER_ERROR) ;
+                        return ($checking) ? false : trigger_error(_f("Database error: %s", fix($this->error)), E_USER_ERROR) ;
 
                     break;
             }
