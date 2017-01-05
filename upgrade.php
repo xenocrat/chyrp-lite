@@ -394,7 +394,7 @@
             ?></pre>
 <?php if (!$upgraded): ?>
             <h1><?php echo __("Halt!"); ?></h1>
-            <p><?php echo __("Please take these preemptive measures before you upgrade:"); ?></p>
+            <p><?php echo __("Please take these precautionary measures before you upgrade:"); ?></p>
             <ol>
                 <li><?php echo __("<strong>Backup your database before proceeding!</strong>"); ?></li>
                 <li><?php echo __("Tell your users that your site is offline for maintenance."); ?></li>
@@ -406,9 +406,9 @@
             <h1><?php echo __("Upgrade Complete"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("Take action to reolve any errors reported on this page."); ?></li>
+                <li><?php echo __("Take action to resolve any errors reported on this page."); ?></li>
                 <li><?php echo __("Run this upgrader again if you need to."); ?></li>
-                <li><?php echo __("Delete <em>upgrade.php</em> once everything has succeeded."); ?></li>
+                <li><?php echo __("Delete <em>upgrade.php</em> once you are finished upgrading."); ?></li>
             </ol>
             <a class="big" href="<?php echo $config->url; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
