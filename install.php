@@ -524,7 +524,7 @@
 
             # Test the database connection.
             if (!$sql->connect(true))
-                $errors[] = __("Could not connect to the database:")."\n".fix($sql->error);
+                $errors[] = _f("Database error: %s", fix($sql->error));
         }
 
         if (empty($errors)) {
