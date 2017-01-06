@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2016 xenocrat
+# Copyright (C) 2017 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-12-30 17:57+0000\n"
+"POT-Creation-Date: 2017-01-06 23:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -149,8 +149,8 @@ msgid "Manage Comments"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:19
-#: modules/comments/comments.php:374
-#: modules/comments/comments.php:547
+#: modules/comments/comments.php:373
+#: modules/comments/comments.php:546
 #: modules/comments/info.php:3
 msgid "Comments"
 msgstr ""
@@ -284,16 +284,16 @@ msgstr ""
 #: modules/comments/comments.php:145
 #: modules/comments/comments.php:224
 #: modules/comments/comments.php:245
-#: modules/comments/comments.php:402
-#: modules/comments/comments.php:609
-#: modules/comments/comments.php:623
-#: modules/comments/comments.php:640
+#: modules/comments/comments.php:401
+#: modules/comments/comments.php:608
+#: modules/comments/comments.php:622
+#: modules/comments/comments.php:639
 msgid "Comment not found."
 msgstr ""
 
 #: modules/comments/comments.php:148
-#: modules/comments/comments.php:405
-#: modules/comments/comments.php:643
+#: modules/comments/comments.php:404
+#: modules/comments/comments.php:642
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr ""
 
@@ -303,23 +303,23 @@ msgstr ""
 
 #: modules/comments/comments.php:219
 #: modules/comments/comments.php:237
-#: modules/comments/comments.php:618
+#: modules/comments/comments.php:617
 msgid "An ID is required to delete a comment."
 msgstr ""
 
 #: modules/comments/comments.php:227
 #: modules/comments/comments.php:248
-#: modules/comments/comments.php:626
+#: modules/comments/comments.php:625
 msgid "You do not have sufficient privileges to delete this comment."
 msgstr ""
 
 #: modules/comments/comments.php:252
-#: modules/comments/comments.php:629
+#: modules/comments/comments.php:628
 msgid "Comment deleted."
 msgstr ""
 
 #: modules/comments/comments.php:258
-#: modules/comments/comments.php:412
+#: modules/comments/comments.php:411
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr ""
 
@@ -351,67 +351,67 @@ msgstr ""
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:312
+#: modules/comments/comments.php:311
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:315
+#: modules/comments/comments.php:314
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:326
+#: modules/comments/comments.php:325
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/comments/comments.php:386
+#: modules/comments/comments.php:385
 #, php-format
 msgid "Comments (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:390
+#: modules/comments/comments.php:389
 #, php-format
 msgid "Spam (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:397
-#: modules/comments/comments.php:635
+#: modules/comments/comments.php:396
+#: modules/comments/comments.php:634
 msgid "An ID is required to edit a comment."
 msgstr ""
 
-#: modules/comments/comments.php:447
+#: modules/comments/comments.php:446
 msgid "Selected comments deleted."
 msgstr ""
 
-#: modules/comments/comments.php:469
+#: modules/comments/comments.php:468
 msgid "Selected comments denied."
 msgstr ""
 
-#: modules/comments/comments.php:485
+#: modules/comments/comments.php:484
 msgid "Selected comments approved."
 msgstr ""
 
-#: modules/comments/comments.php:500
+#: modules/comments/comments.php:499
 msgid "Selected comments marked as spam."
 msgstr ""
 
-#: modules/comments/comments.php:570
+#: modules/comments/comments.php:569
 msgid "An ID is required to reload comments."
 msgstr ""
 
-#: modules/comments/comments.php:574
+#: modules/comments/comments.php:573
 msgid "Comments added since %I:%M %p on %B %d, %Y"
 msgstr ""
 
-#: modules/comments/comments.php:604
+#: modules/comments/comments.php:603
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:660
+#: modules/comments/comments.php:659
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:683
+#: modules/comments/comments.php:682
 #, php-format
 msgid "Comment #%d"
 msgstr ""

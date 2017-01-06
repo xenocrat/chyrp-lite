@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2016 xenocrat
+# Copyright (C) 2017 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-12-30 17:57+0000\n"
+"POT-Creation-Date: 2017-01-06 23:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -215,20 +215,11 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: admin/layouts/default.twig:58
-msgid 'Chyrp loves you.'
-msgstr ""
-
-#: admin/layouts/default.twig:59
-#, php-format
-msgid "Chyrp Lite &ldquo;%s&rdquo;"
-msgstr ""
-
-#: admin/layouts/default.twig:60
+#: admin/layouts/default.twig:57
 msgid "Log out"
 msgstr ""
 
-#: admin/layouts/default.twig:68
+#: admin/layouts/default.twig:65
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""
@@ -305,11 +296,11 @@ msgstr ""
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:72
+#: admin/pages/content_settings.twig:73
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:77
+#: admin/pages/content_settings.twig:78
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:66
