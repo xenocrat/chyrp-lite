@@ -49,23 +49,19 @@
             $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
             $this->post_limit = Config::current()->posts_per_page;
 
-            try {
-                $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
-                                !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
+            $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+                            !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
-                $loader = new Twig_Loader_Filesystem(THEME_DIR);
+            $loader = new Twig_Loader_Filesystem(THEME_DIR);
 
-                $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                                  "strict_variables" => DEBUG,
-                                                                  "charset" => "UTF-8",
-                                                                  "cache" => $cache,
-                                                                  "autoescape" => false));
-                $this->twig->addExtension(new Leaf());
-                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
-                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
-            } catch (Twig_Error $e) {
-                error(__("Twig Error"), $e->getMessage(), $e->getTrace());
-            }
+            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                              "strict_variables" => DEBUG,
+                                                              "charset" => "UTF-8",
+                                                              "cache" => $cache,
+                                                              "autoescape" => false));
+            $this->twig->addExtension(new Leaf());
+            $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+            $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
         }
 
         /**
@@ -385,6 +381,9 @@
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
         public function page($url = null, $hierarchy = array()) {
+            $trigger = Trigger::current();
+            $visitor = Visitor::current();
+
             $page = (isset($url)) ?
                 new Page(array("url" => $url)) :
                 new Page(array("url" => fallback($_GET['url']))) ;
@@ -395,9 +394,6 @@
             # Don't fool ourselves into thinking a feed was requested because of a "feed" page URL.
             if (!isset($_GET['feed']) and end($hierarchy) == "feed")
                 $this->feed = false;
-
-            $trigger = Trigger::current();
-            $visitor = Visitor::current();
 
             if (!$page->public and !$visitor->group->can("view_page") and $page->user_id != $visitor->id) {
                 $trigger->call("can_not_view_page");
@@ -561,6 +557,8 @@
          * Logs in a user if they provide the username and password.
          */
         public function login() {
+            $trigger = Trigger::current();
+
             if (logged_in())
                 Flash::notice(__("You are already logged in."), "/");
 
@@ -570,7 +568,7 @@
 
                 # Modules can implement "user_login and "user_authenticate" to offer two-factor authentication.
                 # "user_authenticate" trigger function can block the login process by creating a Flash::warning().
-                Trigger::current()->call("user_authenticate");
+                $trigger->call("user_authenticate");
 
                 if (!User::authenticate($_POST['login'], $_POST['password']))
                     Flash::warning(__("Incorrect username and/or password."));
@@ -584,7 +582,7 @@
                     $_SESSION['user_id'] = $user->id;
                     $_SESSION['cookies_notified'] = true;
 
-                    Trigger::current()->call("user_logged_in", $user);
+                    $trigger->call("user_logged_in", $user);
                     Flash::notice(__("Logged in."), oneof(@$_SESSION['redirect_to'], "/"));
                 }
             }
@@ -612,14 +610,13 @@
          * Updates the current user when the form is submitted.
          */
         public function controls() {
+            $visitor = Visitor::current();
             $_SESSION['redirect_to'] = "controls"; # They'll come here after login if necessary.
 
             if (!logged_in())
                 Flash::notice(__("You must be logged in to access user controls."), "login");
 
             if (!empty($_POST)) {
-                $visitor = Visitor::current();
-
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
                     Flash::warning(__("Invalid security key."));
 
@@ -666,10 +663,10 @@
          * Emails a password reset link to the registered address of a user.
          */
         public function lost_password() {
+            $config = Config::current();
+
             if (logged_in())
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
-
-            $config = Config::current();
 
             if (!$config->email_correspondence)
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
@@ -726,7 +723,7 @@
                                              array("posts.status" => "public"),
                                              array("posts.id DESC"),
                                              array(),
-                                             Config::current()->feed_items);
+                                             $config->feed_items);
             $ids = array();
 
             foreach ($result->fetchAll() as $index => $row)
@@ -842,11 +839,7 @@
 
             $theme->cookies_notification();
 
-            try {
-                return $this->twig->display($template.".twig", $this->context);
-            } catch (Twig_Error $e) {
-                error(__("Twig Error"), $e->getMessage(), $e->getTrace());
-            }
+            $this->twig->display($template.".twig", $this->context);
         }
 
         /**
