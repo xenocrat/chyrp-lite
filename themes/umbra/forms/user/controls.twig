@@ -18,6 +18,7 @@
 <div class="doaction">
 <button name="submit" type="submit" id="submit" tabindex="4">{{ "Update" | translate }}</button>
 </div>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 </form>
 </div>
 {% endblock %}

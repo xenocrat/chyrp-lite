@@ -620,6 +620,9 @@
             if (!empty($_POST)) {
                 $visitor = Visitor::current();
 
+                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                    Flash::warning(__("Invalid security key."));
+
                 if (!empty($_POST['new_password1']))
                     if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
                         Flash::warning(__("Passwords do not match."));
