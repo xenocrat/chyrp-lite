@@ -73,7 +73,8 @@
                                                               $this->queryString);
 
                         if (!$result)
-                            throw new PDOException;
+                            throw new PDOException(__("PDO failed to execute the prepared statement."));
+
                     } catch (PDOException $e) {
                         return $this->exception_handler($e);
                     }
@@ -90,12 +91,8 @@
 
                     $this->queryString = $query;
 
-                    try {
-                        if (!$this->query = $this->db->query($query))
-                            throw new Exception($this->db->error);
-                    } catch (Exception $e) {
-                        return $this->exception_handler($e);
-                    }
+                    if (!$this->query = $this->db->query($query))
+                        return $this->exception_handler(new Exception($this->db->error, $this->db->errno));
 
                     break;
             }
@@ -203,7 +200,7 @@
                     "<pre>".fix(print_r($this->params, true), false, true)."</pre>" :
                     fix($this->sql->error, false, true) ;
 
-                trigger_error(_f("Database error: %s", $message), E_USER_WARNING);
+                return trigger_error(_f("Database error: %s", $message), E_USER_WARNING);
             }
 
             # Otherwise we chain the exception.
