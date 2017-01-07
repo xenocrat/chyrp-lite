@@ -681,16 +681,21 @@
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                     Flash::warning(__("Invalid security key."));
 
-                $user = new User(array("login" => fallback($_POST['login'])));
+                if (empty($_POST['login']))
+                    Flash::warning(__("Please enter your username."));
 
-                if (!$user->no_results)
-                    correspond("reset", array("login" => $user->login,
-                                              "to"    => $user->email,
-                                              "link"  => $config->url.
-                                                         "/?action=reset&amp;login=".urlencode($user->login).
-                                                         "&amp;token=".token(array($user->login, $user->email))));
+                if (!Flash::exists("warning")) {
+                    $user = new User(array("login" => $_POST['login']));
 
-                Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
+                    if (!$user->no_results)
+                        correspond("reset", array("login" => $user->login,
+                                                  "to"    => $user->email,
+                                                  "link"  => $config->url.
+                                                             "/?action=reset&amp;login=".urlencode($user->login).
+                                                             "&amp;token=".token(array($user->login, $user->email))));
+
+                    Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
+                }
             }
 
             $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost Password"));
