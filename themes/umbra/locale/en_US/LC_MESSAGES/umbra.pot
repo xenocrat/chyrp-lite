@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-01-06 23:02+0000\n"
+"POT-Creation-Date: 2017-01-07 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -179,7 +179,7 @@ msgstr ""
 msgid "Notify me when others comment"
 msgstr ""
 
-#: themes/umbra/forms/comment/new.twig:36
+#: themes/umbra/forms/comment/new.twig:37
 msgid "Speak"
 msgstr ""
 
@@ -210,12 +210,12 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: themes/umbra/forms/user/controls.twig:19
+#: themes/umbra/forms/user/controls.twig:20
 msgid "Update"
 msgstr ""
 
 #: themes/umbra/forms/user/login.twig:5
-#: themes/umbra/forms/user/login.twig:13
+#: themes/umbra/forms/user/login.twig:14
 #: themes/umbra/layouts/default.twig:77
 msgid "Log in"
 msgstr ""
@@ -231,7 +231,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: themes/umbra/forms/user/login.twig:14
+#: themes/umbra/forms/user/login.twig:15
 msgid "Help!"
 msgstr ""
 
@@ -243,12 +243,12 @@ msgstr ""
 msgid "Please enter your username below and we will email you a new password for your account."
 msgstr ""
 
-#: themes/umbra/forms/user/lost_password.twig:11
+#: themes/umbra/forms/user/lost_password.twig:12
 msgid "Submit"
 msgstr ""
 
 #: themes/umbra/forms/user/register.twig:5
-#: themes/umbra/forms/user/register.twig:18
+#: themes/umbra/forms/user/register.twig:19
 #: themes/umbra/layouts/default.twig:73
 msgid "Register"
 msgstr ""

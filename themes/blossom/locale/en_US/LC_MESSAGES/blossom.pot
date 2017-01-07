@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-01-06 23:02+0000\n"
+"POT-Creation-Date: 2017-01-07 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -172,14 +172,14 @@ msgstr ""
 
 #: themes/blossom/content/sidebar.twig:43
 #: themes/blossom/forms/user/register.twig:5
-#: themes/blossom/forms/user/register.twig:18
+#: themes/blossom/forms/user/register.twig:19
 #: themes/blossom/layouts/default.twig:112
 msgid "Register"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:47
 #: themes/blossom/forms/user/login.twig:5
-#: themes/blossom/forms/user/login.twig:13
+#: themes/blossom/forms/user/login.twig:14
 #: themes/blossom/layouts/default.twig:116
 msgid "Log in"
 msgstr ""
@@ -303,7 +303,7 @@ msgstr ""
 msgid "Notify me when others comment"
 msgstr ""
 
-#: themes/blossom/forms/comment/new.twig:36
+#: themes/blossom/forms/comment/new.twig:37
 msgid "Speak"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: themes/blossom/forms/user/controls.twig:19
+#: themes/blossom/forms/user/controls.twig:20
 msgid "Update"
 msgstr ""
 
@@ -338,7 +338,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: themes/blossom/forms/user/login.twig:14
+#: themes/blossom/forms/user/login.twig:15
 msgid "Help!"
 msgstr ""
 
@@ -350,7 +350,7 @@ msgstr ""
 msgid "Please enter your username below and we will email you a new password for your account."
 msgstr ""
 
-#: themes/blossom/forms/user/lost_password.twig:11
+#: themes/blossom/forms/user/lost_password.twig:12
 msgid "Submit"
 msgstr ""
 

@@ -233,13 +233,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1062
+	includes/controller/Admin.php on line 1065
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1346
+	includes/controller/Admin.php on line 1349
 Arguments:
 	Group::add($name, $permissions)
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1367
+	includes/controller/Admin.php on line 1370
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1399
+	includes/controller/Admin.php on line 1402
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1426
+	includes/controller/Admin.php on line 1429
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1430
+	includes/controller/Admin.php on line 1433
 Arguments:
 	$imports
 
@@ -279,7 +279,7 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1699
+	includes/controller/Admin.php on line 1702
 Arguments:
 	!empty($_POST['theme'])
 
@@ -293,7 +293,7 @@ Called from:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 487
+	includes/controller/Main.php on line 490
 Arguments:
 	$user
 
@@ -301,13 +301,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 571
+	includes/controller/Main.php on line 577
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 585
+	includes/controller/Main.php on line 591
 Arguments:
 	$user
 
@@ -315,7 +315,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 773
+	includes/controller/Main.php on line 782
 Arguments:
 	$post
 
@@ -458,7 +458,7 @@ Arguments:
 feed_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 673
+	modules/comments/comments.php on line 676
 Arguments:
 	$comment
 
@@ -466,7 +466,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 691
+	modules/comments/comments.php on line 694
 Arguments:
 	$comment->id
 
@@ -593,28 +593,28 @@ Arguments:
 user_controls
 -------------
 Called from:
-	themes/blossom/forms/user/controls.twig on line 17
-	themes/sparrow/forms/user/controls.twig on line 17
-	themes/topaz/forms/user/controls.twig on line 17
-	themes/umbra/forms/user/controls.twig on line 17
+	themes/blossom/forms/user/controls.twig on line 18
+	themes/sparrow/forms/user/controls.twig on line 18
+	themes/topaz/forms/user/controls.twig on line 18
+	themes/umbra/forms/user/controls.twig on line 18
 
 
 user_login
 ----------
 Called from:
-	themes/blossom/forms/user/login.twig on line 11
-	themes/sparrow/forms/user/login.twig on line 11
-	themes/topaz/forms/user/login.twig on line 11
-	themes/umbra/forms/user/login.twig on line 11
+	themes/blossom/forms/user/login.twig on line 12
+	themes/sparrow/forms/user/login.twig on line 12
+	themes/topaz/forms/user/login.twig on line 12
+	themes/umbra/forms/user/login.twig on line 12
 
 
 user_register
 -------------
 Called from:
-	themes/blossom/forms/user/register.twig on line 16
-	themes/sparrow/forms/user/register.twig on line 16
-	themes/topaz/forms/user/register.twig on line 16
-	themes/umbra/forms/user/register.twig on line 16
+	themes/blossom/forms/user/register.twig on line 17
+	themes/sparrow/forms/user/register.twig on line 17
+	themes/topaz/forms/user/register.twig on line 17
+	themes/umbra/forms/user/register.twig on line 17
 
 
 end_head
@@ -733,7 +733,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1129
+	includes/controller/Admin.php on line 1132
 Arguments:
 	$post), true
 
@@ -743,7 +743,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1148
+	includes/controller/Admin.php on line 1151
 Arguments:
 	$post
 
@@ -753,7 +753,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1193
+	includes/controller/Admin.php on line 1196
 Arguments:
 	$page), true
 
@@ -763,7 +763,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1208
+	includes/controller/Admin.php on line 1211
 Arguments:
 	$page
 
@@ -773,7 +773,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1255
+	includes/controller/Admin.php on line 1258
 
 
 before_import
@@ -781,7 +781,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1317
+	includes/controller/Admin.php on line 1320
 
 
 write_nav
@@ -789,7 +789,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1981
+	includes/controller/Admin.php on line 1984
 
 
 manage_nav
@@ -797,7 +797,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2010
+	includes/controller/Admin.php on line 2013
 
 
 settings_nav
@@ -805,7 +805,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2035
+	includes/controller/Admin.php on line 2038
 
 
 extend_nav
@@ -813,7 +813,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2053
+	includes/controller/Admin.php on line 2056
 
 
 feed_url
@@ -821,7 +821,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 762
+	includes/controller/Main.php on line 771
 Arguments:
 	$post
 

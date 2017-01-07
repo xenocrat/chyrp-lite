@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-01-06 23:02+0000\n"
+"POT-Creation-Date: 2017-01-07 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -172,14 +172,14 @@ msgstr ""
 
 #: themes/topaz/content/sidebar.twig:43
 #: themes/topaz/forms/user/register.twig:5
-#: themes/topaz/forms/user/register.twig:18
+#: themes/topaz/forms/user/register.twig:19
 #: themes/topaz/layouts/default.twig:111
 msgid "Register"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:47
 #: themes/topaz/forms/user/login.twig:5
-#: themes/topaz/forms/user/login.twig:13
+#: themes/topaz/forms/user/login.twig:14
 #: themes/topaz/layouts/default.twig:115
 msgid "Log in"
 msgstr ""
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Notify me when others comment"
 msgstr ""
 
-#: themes/topaz/forms/comment/new.twig:36
+#: themes/topaz/forms/comment/new.twig:37
 msgid "Speak"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: themes/topaz/forms/user/controls.twig:19
+#: themes/topaz/forms/user/controls.twig:20
 msgid "Update"
 msgstr ""
 
@@ -349,7 +349,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: themes/topaz/forms/user/login.twig:14
+#: themes/topaz/forms/user/login.twig:15
 msgid "Help!"
 msgstr ""
 
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Please enter your username below and we will email you a new password for your account."
 msgstr ""
 
-#: themes/topaz/forms/user/lost_password.twig:11
+#: themes/topaz/forms/user/lost_password.twig:12
 msgid "Submit"
 msgstr ""
 
