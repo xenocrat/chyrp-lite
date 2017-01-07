@@ -412,8 +412,10 @@
             if (!(error_reporting() & $errno))
                 return true;
 
+            $normalized = str_replace(array("\t", "\n", "\r", "\0", "\x0B"), " ", $message);
+
             if (DEBUG)
-                error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+                error_log("ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")");
 
             throw new Exception($message, 500);
         }
