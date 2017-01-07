@@ -215,6 +215,9 @@
          * Updates a post when the form is submitted.
          */
         public function update_post() {
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
@@ -228,9 +231,6 @@
 
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
 
             Feathers::$instances[$post->feather]->update($post);
 
@@ -426,14 +426,14 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
+
             if (empty($_POST['title']))
                 error(__("Error"), __("Title cannot be blank."), null, 422);
 
             if (empty($_POST['body']))
                 error(__("Error"), __("Body cannot be blank."), null, 422);
-
-            if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
 
             $page = new Page($_POST['id']);
 
@@ -647,11 +647,11 @@
          * Updates a user when the form is submitted.
          */
         public function update_user() {
-            if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
 
             $visitor = Visitor::current();
             $config = Config::current();
@@ -745,14 +745,14 @@
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_users");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
 
             $user = new User($_POST['id']);
 
@@ -885,11 +885,11 @@
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
-            if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
 
             fallback($_POST['name'], "");
             fallback($_POST['permissions'], array());
@@ -943,14 +943,14 @@
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_groups");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
 
             $group = new Group($_POST['id']);
 
@@ -1589,11 +1589,11 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
@@ -1633,11 +1633,11 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
@@ -1670,11 +1670,11 @@
          * Changes the theme.
          */
         public function change_theme() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['theme']))
                 error(__("No Theme Specified"), __("You did not specify which theme to select."), null, 400);
@@ -1706,11 +1706,11 @@
                 Flash::notice(__("Preview stopped."), "themes");
             }
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
             Flash::notice(__("Preview started."), "/");
