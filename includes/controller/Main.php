@@ -566,6 +566,9 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
+                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                    Flash::warning(__("Invalid security key."));
+
                 fallback($_POST['login']);
                 fallback($_POST['password']);
 
@@ -675,6 +678,9 @@
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if (!empty($_POST)) {
+                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                    Flash::warning(__("Invalid security key."));
+
                 $user = new User(array("login" => fallback($_POST['login'])));
 
                 if (!$user->no_results)
