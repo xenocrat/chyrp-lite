@@ -40,7 +40,7 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."like_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             fallback($_POST['likeImage'], $config->chyrp_url."/modules/likes/images/pink.svg");

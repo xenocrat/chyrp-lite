@@ -617,7 +617,7 @@
                 Flash::notice(__("You must be logged in to access user controls."), "login");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                     Flash::warning(__("Invalid security key."));
 
                 if (!empty($_POST['new_password1']))
@@ -813,7 +813,7 @@
             }
 
             $this->context                       = array_merge($context, $this->context);
-            $this->context["ip"]                 = $_SERVER["REMOTE_ADDR"];
+            $this->context["ip"]                 = $_SERVER['REMOTE_ADDR'];
             $this->context["DIR"]                = DIR;
             $this->context["version"]            = CHYRP_VERSION;
             $this->context["codename"]           = CHYRP_CODENAME;

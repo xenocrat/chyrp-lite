@@ -55,7 +55,7 @@
             if (!Visitor::current()->group->can("delete_pingback"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))

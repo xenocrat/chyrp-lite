@@ -9,7 +9,7 @@
     # Parse the route.
     $route = Route::current($main);
 
-    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "POST")
+    if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] !== "POST")
         error(__("Error"), __("This resource accepts POST requests only."), null, 405);
 
     if (empty($_POST['action']))
@@ -20,7 +20,7 @@
 
     switch($_POST['action']) {
         case "destroy_post":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -37,7 +37,7 @@
             Post::delete($post->id);
             json_response(__("Post deleted."));
         case "destroy_page":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -54,7 +54,7 @@
             Page::delete($page->id, true);
             json_response(__("Page deleted."));
         case "preview_post":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("add_post", "add_draft"))
@@ -86,7 +86,7 @@
             $main->display("content".DIR."preview", array("content" => $content), __("Preview"));
             exit;
         case "preview_page":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!$visitor->group->can("add_page"))

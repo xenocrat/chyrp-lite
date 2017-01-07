@@ -49,7 +49,7 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        return (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
+        return (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], Config::current()->url) === 0);
     }
 
     #---------------------------------------------
@@ -90,7 +90,7 @@
         if (!MAIN or !$theme->file_exists("pages".DIR."403"))
             error($title, $body, null, 403);
 
-        header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+        header($_SERVER['SERVER_PROTOCOL']." 403 Forbidden");
         $main->display("pages".DIR."403", array("reason" => $body), $title);
         exit;
     }
@@ -113,7 +113,7 @@
         if (!MAIN or !$theme->file_exists("pages".DIR."404"))
             error($title, $body, null, 404);
 
-        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+        header($_SERVER['SERVER_PROTOCOL']." 404 Not Found");
         $main->display("pages".DIR."404", array("reason" => $body), $title);
         exit;
     }
