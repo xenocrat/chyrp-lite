@@ -5,10 +5,10 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2016.04
+     *     v2017.01
      *
      * Copyright:
-     *     Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
+     *     Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi,
      *     Daniel Pimley, and other contributors.
      *
      * License:
