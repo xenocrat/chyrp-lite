@@ -32,6 +32,7 @@
 {% endif %}
 <input type="hidden" name="parent_id" value="0">
 <input type="hidden" name="post_id" value="{{ post.id }}">
+<input type="hidden" name="hash" value="{{ ip | token }}">
 <input type="hidden" name="action" value="add_comment">
 <button type="submit">{{ "Speak" | translate }}</button>
 </div>

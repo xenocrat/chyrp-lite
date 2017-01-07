@@ -14,11 +14,11 @@
 <input type="password" name="new_password1" value="" id="new_password1" maxlength="128">
 <label for="new_password2">{{ "Confirm" | translate }}</label>
 <input type="password" name="new_password2" value="" id="new_password2" maxlength="128">
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 {{ trigger.call("user_controls") }}
 <div class="doaction">
 <button name="submit" type="submit" id="submit" tabindex="4">{{ "Update" | translate }}</button>
 </div>
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 </form>
 </div>
 {% endblock %}
