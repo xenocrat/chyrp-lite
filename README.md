@@ -48,6 +48,8 @@ ARIA labelling ensure your blog will be accessible to visitors who use assistive
 * reCAPTCHA/MAPTCHA: prevent spam.
 * Highlighter: syntax highlighting for your code snippets.
 * SimpleMDE: WYSIWYG-esque editor for Markdown content.
+* Easy Embed: the easiest way to embed videos in your blog.
+* Post Views: maintain a view count for your blog entries.
 
 ## Requirements
 
