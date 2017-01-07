@@ -443,6 +443,9 @@
                 Flash::notice(__("You cannot register an account because you are already logged in."), "/");
 
             if (!empty($_POST)) {
+                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                    Flash::warning(__("Invalid security key."));
+
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
 

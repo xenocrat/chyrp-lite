@@ -17,6 +17,7 @@
 <div class="doaction">
 <button type="submit">{{ "Register" | translate }}</button>
 </div>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 </form>
 </div>
 {% endblock %}
