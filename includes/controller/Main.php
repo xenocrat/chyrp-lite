@@ -361,8 +361,7 @@
                 $this->feed = false;
 
             if (!$post->theme_exists())
-                error(__("Error"),
-                      __("The post cannot be displayed because the template for this feather was not found."), null, 501);
+                Flash::warning(__("The post cannot be displayed because the theme does not support it.") "/");
 
             if ($post->status == "draft")
                 Flash::message(__("This post is not published."));
