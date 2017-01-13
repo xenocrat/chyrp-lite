@@ -852,9 +852,9 @@
             $post = new Post($params["post_id"], array("drafts" => true));
 
             $params["subject"] = _f("New Comment at %s", Config::current()->name);
-            $params["message"] = _f("%s commented on a blog post:", fix($params["author"])).
+            $params["message"] = _f("%s commented on a blog post:", $params["author"]).
                                  PHP_EOL.
-                                 $post->url().
+                                 unfix($post->url()).
                                  PHP_EOL.PHP_EOL.
                                  '"'.truncate(strip_tags($params["body"])).'"';
             return $params;
