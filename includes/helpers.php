@@ -2097,7 +2097,7 @@
         $trigger = Trigger::current();
 
         if (!$config->email_correspondence or !isset($params["to"]))
-            return;
+            return false;
 
         $params["headers"] = "From:".$config->email."\r\n".
                              "Reply-To:".$config->email. "\r\n".
@@ -2109,27 +2109,27 @@
         switch ($action) {
             case "activate":
                 $params["subject"] = _f("Activate your account at %s", $config->name);
-                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                $params["message"] = _f("Hello, %s.", $params["login"]).
                                      PHP_EOL.PHP_EOL.
                                      __("You are receiving this message because you registered a new account.").
                                      PHP_EOL.PHP_EOL.
                                      __("Visit this link to activate your account:").
                                      PHP_EOL.
-                                     $params["link"];
+                                     unfix($params["link"]);
                 break;
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
-                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                $params["message"] = _f("Hello, %s.", $params["login"]).
                                      PHP_EOL.PHP_EOL.
                                      __("You are receiving this message because you requested a new password.").
                                      PHP_EOL.PHP_EOL.
                                      __("Visit this link to reset your password:").
                                      PHP_EOL.
-                                     $params["link"];
+                                     unfix($params["link"]);
                 break;
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
-                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                $params["message"] = _f("Hello, %s.", $params["login"]).
                                      PHP_EOL.PHP_EOL.
                                      _f("Your new password is: %s", $params["password"]);
                 break;
@@ -2137,9 +2137,8 @@
                 if ($trigger->exists("correspond_".$action))
                     $trigger->filter($params, "correspond_".$action);
                 else
-                    return;
+                    return false;
         }
 
-        if (!email($params["to"], $params["subject"], $params["message"], $params["headers"]))
-            error(__("Undeliverable"), __("Unable to send email."));
+        return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
     }
