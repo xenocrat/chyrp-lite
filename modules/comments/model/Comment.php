@@ -87,8 +87,8 @@
             if (!logged_in())
                 $notify = 0; # Only logged-in users can request notifications.
 
-            fallback($_SERVER['HTTP_REFERER'], "");
-            fallback($_SERVER['HTTP_USER_AGENT'], "");
+            $HTTP_REFERER = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "" ;
+            $HTTP_USER_AGENT = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "" ;
 
             if (!empty($config->akismet_api_key)) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
@@ -99,7 +99,7 @@
                 $akismet->setCommentAuthorEmail($author_email);
                 $akismet->setPermalink($post->url());
                 $akismet->setCommentType($type);
-                $akismet->setReferrer($_SERVER['HTTP_REFERER']);
+                $akismet->setReferrer($HTTP_REFERER);
                 $akismet->setUserIP($_SERVER['REMOTE_ADDR']);
 
                 if ($akismet->isCommentSpam()) {
@@ -108,7 +108,7 @@
                                          $author_url,
                                          $author_email,
                                          $_SERVER['REMOTE_ADDR'],
-                                         $_SERVER['HTTP_USER_AGENT'],
+                                         $HTTP_USER_AGENT,
                                          "spam",
                                          $post->id,
                                          $visitor->id,
@@ -121,7 +121,7 @@
                                          $author_url,
                                          $author_email,
                                          $_SERVER['REMOTE_ADDR'],
-                                         $_SERVER['HTTP_USER_AGENT'],
+                                         $HTTP_USER_AGENT,
                                          $status,
                                          $post->id,
                                          $visitor->id,
@@ -138,7 +138,7 @@
                                      $author_url,
                                      $author_email,
                                      $_SERVER['REMOTE_ADDR'],
-                                     $_SERVER['HTTP_USER_AGENT'],
+                                     $HTTP_USER_AGENT,
                                      $status,
                                      $post->id,
                                      $visitor->id,
