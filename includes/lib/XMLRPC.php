@@ -334,7 +334,7 @@
                                 XML_RPC_DESCRIPTION => $content),
                           null,
                           $post->pinned,
-                          $status,
+                          null,
                           oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->clean),
                           null,
                           oneof($this->convertFromDateCreated($args[3]), $post->created_at));
