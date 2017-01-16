@@ -206,7 +206,7 @@
             global $user;
 
             $post = new Post(fallback($args[0]), array("filter" => false,
-                                                       "feather" => XML_RPC_FEATHER));
+                                                       "where" => array("feather" => XML_RPC_FEATHER)));
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
@@ -315,7 +315,7 @@
                 $content = $args[3]["mt_excerpt"]."\n\n".$content;
 
             $post = new Post($args[0], array("filter" => false,
-                                             "feather" => XML_RPC_FEATHER));
+                                             "where" => array("feather" => XML_RPC_FEATHER)));
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
@@ -352,7 +352,7 @@
             global $user;
 
             $post = new Post(fallback($args[1]), array("filter" => false,
-                                                       "feather" => XML_RPC_FEATHER));
+                                                       "where" => array("feather" => XML_RPC_FEATHER)));
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
