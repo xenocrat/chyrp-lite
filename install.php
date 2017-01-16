@@ -112,6 +112,10 @@
     if (!is_writable(INCLUDES_DIR))
         $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
 
+    # Test if we can write to CACHES_DIR (needed by some extensions).
+    if (!is_writable(CACHES_DIR))
+        $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
+
     /**
      * Function: posted
      * Echoes a $_POST value if set, otherwise echoes the fallback value.
@@ -528,51 +532,6 @@
         }
 
         if (empty($errors)) {
-            # Configure the .htaccess file.
-            if (htaccess_conf($url_path) === false)
-                $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
-
-            # Build the configuration file.
-            $set = array($config->set("sql", $settings),
-                         $config->set("name", $_POST['name']),
-                         $config->set("description", $_POST['description']),
-                         $config->set("url", rtrim($url, "/")),
-                         $config->set("chyrp_url", rtrim($url, "/")),
-                         $config->set("email", $_POST['email']),
-                         $config->set("timezone", $_POST['timezone']),
-                         $config->set("locale", "en_US"),
-                         $config->set("cookies_notification", true),
-                         $config->set("check_updates", true),
-                         $config->set("check_updates_last", 0),
-                         $config->set("theme", "blossom"),
-                         $config->set("posts_per_page", 5),
-                         $config->set("admin_per_page", 25),
-                         $config->set("feed_items", 20),
-                         $config->set("feed_url", ""),
-                         $config->set("uploads_path", DIR."uploads".DIR),
-                         $config->set("uploads_limit", 10),
-                         $config->set("send_pingbacks", false),
-                         $config->set("enable_xmlrpc", true),
-                         $config->set("enable_ajax", true),
-                         $config->set("enable_emoji", true),
-                         $config->set("enable_markdown", true),
-                         $config->set("can_register", false),
-                         $config->set("email_activation", false),
-                         $config->set("email_correspondence", true),
-                         $config->set("enable_captcha", false),
-                         $config->set("default_group", 0),
-                         $config->set("guest_group", 0),
-                         $config->set("clean_urls", false),
-                         $config->set("enable_homepage", false),
-                         $config->set("post_url", "(year)/(month)/(day)/(url)/"),
-                         $config->set("enabled_modules", array()),
-                         $config->set("enabled_feathers", array("text")),
-                         $config->set("routes", array()),
-                         $config->set("secure_hashkey", random(32)));
-
-            if (in_array(false, $set))
-                $errors[] = __("Could not write the configuration file.");
-
             # Reconnect to the database.
             $sql->connect();
 
@@ -652,6 +611,7 @@
                              PRIMARY KEY (id)
                          ) DEFAULT CHARSET=utf8");
 
+            # Add the default permissions.
             $names = array("change_settings" => "Change Settings",
                            "toggle_extensions" => "Toggle Extensions",
                            "view_site" => "View Site",
@@ -694,7 +654,7 @@
                             "banned" => array(),
                             "guest"  => array("view_site"));
 
-            # Insert the default groups (see above).
+            # Add the default groups.
             $group_id = array();
 
             foreach ($groups as $name => $permissions) {
@@ -710,9 +670,7 @@
                                         "group_id" => $group_id[$name]));
             }
 
-            $config->set("default_group", $group_id["member"]);
-            $config->set("guest_group", $group_id["guest"]);
-
+            # Add the admin user account.
             if (!$sql->select("users", "id", array("login" => $_POST['login']))->fetchColumn())
                 $sql->insert("users",
                              array("login" => $_POST['login'],
@@ -726,8 +684,50 @@
             if (password_strength($_POST['password1']) < 100)
                 $errors[] = __("Please consider setting a stronger password for your account.");
 
-            if (!is_writable(CACHES_DIR))
-                $errors[] = __("Please make the <em>caches</em> directory writable by the server.");
+            # Build the configuration file.
+            $set = array($config->set("sql", $settings),
+                         $config->set("name", $_POST['name']),
+                         $config->set("description", $_POST['description']),
+                         $config->set("url", rtrim($url, "/")),
+                         $config->set("chyrp_url", rtrim($url, "/")),
+                         $config->set("email", $_POST['email']),
+                         $config->set("timezone", $_POST['timezone']),
+                         $config->set("locale", "en_US"),
+                         $config->set("cookies_notification", true),
+                         $config->set("check_updates", true),
+                         $config->set("check_updates_last", 0),
+                         $config->set("theme", "blossom"),
+                         $config->set("posts_per_page", 5),
+                         $config->set("admin_per_page", 25),
+                         $config->set("feed_items", 20),
+                         $config->set("feed_url", ""),
+                         $config->set("uploads_path", DIR."uploads".DIR),
+                         $config->set("uploads_limit", 10),
+                         $config->set("send_pingbacks", false),
+                         $config->set("enable_xmlrpc", true),
+                         $config->set("enable_ajax", true),
+                         $config->set("enable_emoji", true),
+                         $config->set("enable_markdown", true),
+                         $config->set("can_register", false),
+                         $config->set("email_activation", false),
+                         $config->set("email_correspondence", true),
+                         $config->set("enable_captcha", false),
+                         $config->set("default_group", $group_id["member"]),
+                         $config->set("guest_group", $group_id["guest"]),
+                         $config->set("clean_urls", false),
+                         $config->set("enable_homepage", false),
+                         $config->set("post_url", "(year)/(month)/(day)/(url)/"),
+                         $config->set("enabled_modules", array()),
+                         $config->set("enabled_feathers", array("text")),
+                         $config->set("routes", array()),
+                         $config->set("secure_hashkey", random(32)));
+
+            if (in_array(false, $set))
+                $errors[] = __("Could not write the configuration file.");
+
+            # Configure the .htaccess file.
+            if (htaccess_conf($url_path) === false)
+                $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
 
             $installed = true;
         }
