@@ -287,13 +287,13 @@ Arguments:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 399
+	includes/controller/Main.php on line 398
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 490
+	includes/controller/Main.php on line 489
 Arguments:
 	$user
 
@@ -301,13 +301,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 577
+	includes/controller/Main.php on line 576
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 591
+	includes/controller/Main.php on line 590
 Arguments:
 	$user
 
@@ -315,7 +315,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 782
+	includes/controller/Main.php on line 786
 Arguments:
 	$post
 
@@ -821,7 +821,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 771
+	includes/controller/Main.php on line 775
 Arguments:
 	$post
 
