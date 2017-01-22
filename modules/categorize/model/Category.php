@@ -10,9 +10,10 @@
         static function getCategory($id) {
             $query = SQL::current()->select("categorize",
                                             "id, name, clean, show_on_home, clean AS url",
-                                            "id = :id",
+                                            array("id" => $id),
                                             "name ASC",
-                                            array(':id' => $id), 1)->fetchObject();
+                                            array(),
+                                            1)->fetchObject();
 
             if (!empty($query))
                 $query->url = url("category/".$query->url, MainController::current());
@@ -23,9 +24,10 @@
         static function getCategorybyClean($name) {
             $query = SQL::current()->select("categorize",
                                             "id, name, clean, show_on_home, clean AS url",
-                                            "clean = :clean",
+                                            array("clean" => $name),
                                             "name ASC",
-                                            array(":clean" => $name), 1)->fetchObject();
+                                            array(),
+                                            1)->fetchObject();
 
             if (!empty($query))
                 $query->url = url("category/".$query->url, MainController::current());
