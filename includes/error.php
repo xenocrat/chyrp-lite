@@ -52,7 +52,7 @@
 
     /**
      * Function: error
-     * Displays an error message via direct call or error handler.
+     * Displays an error message via direct call or handler.
      *
      * Parameters:
      *     $title - The title for the error dialog.
@@ -102,8 +102,14 @@
                 case 501:
                     header($_SERVER['SERVER_PROTOCOL']." 501 Not Implemented");
                     break;
+                case 502:
+                    header($_SERVER['SERVER_PROTOCOL']." 502 Bad Gateway");
+                    break;
                 case 503:
                     header($_SERVER['SERVER_PROTOCOL']." 503 Service Unavailable");
+                    break;
+                case 504:
+                    header($_SERVER['SERVER_PROTOCOL']." 504 Gateway Timeout");
                     break;
                 default:
                     header($_SERVER['SERVER_PROTOCOL']." 500 Internal Server Error");
