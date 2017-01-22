@@ -358,6 +358,9 @@
         }
 
         static function uninstall() {
-            SQL::current()->query("DROP TABLE __comments");
+            $sql = SQL::current();
+
+            $sql->query("DROP TABLE __comments");
+            $sql->delete("post_attributes", array("name" => "comment_status"));
         }
     }
