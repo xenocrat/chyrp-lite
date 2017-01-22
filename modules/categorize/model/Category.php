@@ -7,7 +7,7 @@
      *     <Model>
      */
     class Category extends Model {
-        static function getCategory($id = int) {
+        static function getCategory($id) {
             $query = SQL::current()->select("categorize",
                                             "id, name, clean, show_on_home, clean AS url",
                                             "id = :id",
@@ -20,7 +20,7 @@
             return $query;
         }
 
-        static function getCategorybyClean($name = string) {
+        static function getCategorybyClean($name) {
             $query = SQL::current()->select("categorize",
                                             "id, name, clean, show_on_home, clean AS url",
                                             "clean = :clean",
@@ -52,7 +52,7 @@
             return $query;
         }
 
-        static function addCategory($name = string, $clean = string, $show_on_home = bool) {
+        static function addCategory($name, $clean, $show_on_home) {
             SQL::current()->insert("categorize",
                                    array("name" => ":name",
                                          "clean" => ":clean",
@@ -62,7 +62,7 @@
                                          ":show_on_home" => $show_on_home));
         }
 
-        static function updateCategory($id = int, $name = string, $clean = string, $show_on_home = bool) {
+        static function updateCategory($id, $name, $clean, $show_on_home) {
             SQL::current()->update("categorize",
                                    "`id` = :id",
                                    array("name" => ":name",
@@ -74,7 +74,7 @@
                                          ":show_on_home" => $show_on_home));
         }
 
-        static function deleteCategory($id = int) {
+        static function deleteCategory($id) {
             $sql = SQL::current();
 
             $sql->delete("categorize",
