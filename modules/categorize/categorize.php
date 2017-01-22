@@ -100,12 +100,11 @@
             else
                 $fields_list[0]["selected"] = false;
 
-            if (!empty($categories)) # Make sure we don't try to process an empty list.
-                foreach ($categories as $category) {
-                    $fields_list[$category["id"]]["value"] = $category["id"];
-                    $fields_list[$category["id"]]["name"] = $category["name"];
-                    $fields_list[$category["id"]]["selected"] = ($post ? $post->category_id == $category["id"] : false);
-                }
+            foreach ($categories as $category) {
+                $fields_list[$category["id"]]["value"] = $category["id"];
+                $fields_list[$category["id"]]["name"] = $category["name"];
+                $fields_list[$category["id"]]["selected"] = ($post ? $post->category_id == $category["id"] : false);
+            }
 
             $fields[] = array("attr" => "option[category_id]",
                               "label" => __("Category", "categorize"),
