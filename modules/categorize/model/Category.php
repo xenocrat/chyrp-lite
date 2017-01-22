@@ -54,37 +54,27 @@
 
         static function addCategory($name, $clean, $show_on_home) {
             SQL::current()->insert("categorize",
-                                   array("name" => ":name",
-                                         "clean" => ":clean",
-                                         "show_on_home" => ":show_on_home"),
-                                   array(":name" => $name,
-                                         ":clean" => sanitize($clean, true, true),
-                                         ":show_on_home" => $show_on_home));
+                                   array("name" => $name,
+                                         "clean" => sanitize($clean, true, true),
+                                         "show_on_home" => $show_on_home));
         }
 
         static function updateCategory($id, $name, $clean, $show_on_home) {
             SQL::current()->update("categorize",
-                                   "`id` = :id",
-                                   array("name" => ":name",
-                                         "clean" => ":clean",
-                                         "show_on_home" => ":show_on_home"),
-                                   array(":id" => $id,
-                                         ":name" => $name,
-                                         ":clean" => sanitize($clean, true, true),
-                                         ":show_on_home" => $show_on_home));
+                                   array("id" => $id),
+                                   array("name" => $name,
+                                         "clean" => sanitize($clean, true, true),
+                                         "show_on_home" => $show_on_home));
         }
 
         static function deleteCategory($id) {
             $sql = SQL::current();
 
             $sql->delete("categorize",
-                         "id = :id",
-                         array(":id" => $id));
+                         array("id" => $id));
 
-            $sql->update("post_attributes",
-                         "`name` = 'category_id' AND `value` = :id",
-                         array("value" => 0),
-                         array(":id" => $id));
+            $sql->delete("post_attributes",
+                         array("name" => "category_id", "value" => $id));
         }
 
         static function install() {
@@ -100,6 +90,6 @@
             $sql = SQL::current();
 
             $sql->query("DROP TABLE __categorize");
-            $sql->delete("post_attributes", "name = 'category_id'");
+            $sql->delete("post_attributes", array("name" => "category_id"));
         }
     }
