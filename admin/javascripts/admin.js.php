@@ -166,7 +166,9 @@ var Help = {
             [$("<iframe>", {
                 "src": href,
                 "aria-label": '<?php echo __("Help", "admin"); ?>'
-            }).addClass("iframe_foreground").loader(),
+            }).addClass("iframe_foreground").loader().on("load", function() {
+                $(this).loader(true);
+            }),
             $("<img>", {
                 "src": Site.chyrp_url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "admin"); ?>',
@@ -253,7 +255,10 @@ var Write = {
             [$("<iframe>", {
                 "name": uid,
                 "aria-label": '<?php echo __("Preview", "admin"); ?>'
-            }).addClass("iframe_foreground").loader(),
+            }).addClass("iframe_foreground").loader().on("load", function() {
+                if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
+                    $(this).loader(true);
+            }),
             $("<img>", {
                 "src": Site.chyrp_url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "admin"); ?>',
