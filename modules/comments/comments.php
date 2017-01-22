@@ -285,21 +285,23 @@
             if ($post)
                 $post->comment_status = oneof(@$post->comment_status, "open");
 
+            $statuses = array(array("name" => __("Open", "comments"),
+                                    "value" => "open",
+                                    "selected" => ($post ? $post->comment_status == "open" : true)),
+                              array("name" => __("Closed", "comments"),
+                                    "value" => "closed",
+                                    "selected" => ($post ? $post->comment_status == "closed" : false)),
+                              array("name" => __("Private", "comments"),
+                                    "value" => "private",
+                                    "selected" => ($post ? $post->comment_status == "private" : false)),
+                              array("name" => __("Registered Only", "comments"),
+                                    "value" => "registered_only",
+                                    "selected" => ($post ? $post->comment_status == "registered_only" : false)));
+
             $fields[] = array("attr" => "option[comment_status]",
                               "label" => __("Comment Status", "comments"),
                               "type" => "select",
-                              "options" => array(array("name" => __("Open", "comments"),
-                                                       "value" => "open",
-                                                       "selected" => ($post ? $post->comment_status == "open" : true)),
-                                                 array("name" => __("Closed", "comments"),
-                                                       "value" => "closed",
-                                                       "selected" => ($post ? $post->comment_status == "closed" : false)),
-                                                 array("name" => __("Private", "comments"),
-                                                       "value" => "private",
-                                                       "selected" => ($post ? $post->comment_status == "private" : false)),
-                                                 array("name" => __("Registered Only", "comments"),
-                                                       "value" => "registered_only",
-                                                       "selected" => ($post ? $post->comment_status == "registered_only" : false))));
+                              "options" => $statuses);
 
             return $fields;
         }
