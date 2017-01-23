@@ -349,8 +349,7 @@
             $options["from"]   = (array) $options["from"];
             $options["select"] = (array) $options["select"];
 
-            $trigger = Trigger::current();
-            $trigger->filter($options, pluralize(strtolower($model_name))."_get");
+            Trigger::current()->filter($options, pluralize(strtolower($model_name))."_get");
 
             $grab = SQL::current()->select($options["from"],
                                            $options["select"],
