@@ -85,20 +85,6 @@
             } else
                 $this->result = array_slice($this->array, $offset, $this->per_page);
 
-            $shown_dates = array();
-
-            if ($model)
-                foreach ($this->result as &$result)
-                    if (isset($result->created_at)) {
-                        $pinned = (isset($result->pinned) and $result->pinned);
-                        $shown = in_array(when("m-d-Y", $result->created_at), $shown_dates);
-
-                        $result->first_of_day = (!$pinned and !$shown and !AJAX);
-
-                        if (!$pinned and !$shown)
-                            $shown_dates[] = when("m-d-Y", $result->created_at);
-                    }
-
             $this->paginated = $this->paginate = $this->list =& $this->result;
         }
 

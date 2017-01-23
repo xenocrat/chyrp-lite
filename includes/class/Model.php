@@ -362,7 +362,6 @@
                                            $options["group"],
                                            $options["left_join"])->fetchAll();
 
-            $shown_dates = array();
             $results = array();
             $rows = array();
 
@@ -388,17 +387,6 @@
 
                 $options_for_object["read_from"] = $result;
                 $result = new $model(null, $options_for_object);
-
-                if (isset($result->created_at)) {
-                    $pinned = (isset($result->pinned) and $result->pinned);
-                    $shown = in_array(when("m-d-Y", $result->created_at), $shown_dates);
-
-                    $result->first_of_day = (!$pinned and !$shown and !AJAX);
-
-                    if (!$pinned and !$shown)
-                        $shown_dates[] = when("m-d-Y", $result->created_at);
-                }
-
                 $results[] = $result;
             }
 
