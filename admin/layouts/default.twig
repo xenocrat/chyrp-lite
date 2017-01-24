@@ -58,7 +58,7 @@
 </div>
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
-{% if debug and visitor.group.can("change_settings", "toggle_extensions") %}
+{% if debug %}
 <!--
 {% for caller in sql_debug %}
 {{ caller.query | replace("\t", "    ") | fix }}
