@@ -44,12 +44,8 @@
                                   "name ASC",
                                   $params)->fetchAll();
 
-            foreach ($query as &$result) {
-                $result["url"]   = url("category/".$result["url"], MainController::current());
-                $result["total"] = $sql->count("post_attributes",
-                                               array("name" => "category_id",
-                                                     "value" => $result["id"]));
-            }
+            foreach ($query as &$result)
+                $result["url"] = url("category/".$result["url"], MainController::current());
 
             return $query;
         }

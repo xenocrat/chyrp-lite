@@ -191,8 +191,15 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "name LIKE :query", "categorize");
 
+            $categories = Category::getCategoryList($where, $params);
+
+            foreach ($categories as &$category)
+                $category["total"] = SQL::current()->count("post_attributes",
+                                                           array("name" => "category_id",
+                                                                 "value" => $category["id"]));
+
             $admin->display("pages".DIR."manage_category",
-                            array("categorize" => Category::getCategoryList($where, $params)));
+                            array("categorize" => $categories));
         }
 
         public function admin_new_category($admin) {
