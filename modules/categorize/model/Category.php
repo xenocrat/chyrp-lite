@@ -44,11 +44,11 @@
         }
 
         public function update($name, $clean, $show_on_home) {
-            # Update all values of this category.
-            foreach (array("name", "clean", "show_on_home") as $attr)
-                $this->$attr = $$attr;
+            $url = url("category/".$clean, MainController::current());
 
-            $this->url = url("category/".$this->clean, MainController::current());
+            # Update all values of this category.
+            foreach (array("name", "clean", "show_on_home", "url") as $attr)
+                $this->$attr = $$attr;
 
             SQL::current()->update("categorize",
                                    array("id" => $this->id),
