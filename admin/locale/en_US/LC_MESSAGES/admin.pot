@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-01-20 20:26+0000\n"
+"POT-Creation-Date: 2017-01-27 22:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -198,19 +198,19 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:172
 #: admin/javascripts/admin.js.php:174
-#: admin/javascripts/admin.js.php:259
-#: admin/javascripts/admin.js.php:261
+#: admin/javascripts/admin.js.php:176
+#: admin/javascripts/admin.js.php:264
+#: admin/javascripts/admin.js.php:266
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:194
-#: admin/javascripts/admin.js.php:195
+#: admin/javascripts/admin.js.php:196
+#: admin/javascripts/admin.js.php:197
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:255
+#: admin/javascripts/admin.js.php:257
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""

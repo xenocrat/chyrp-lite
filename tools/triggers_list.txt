@@ -14,7 +14,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 342
+	admin/javascripts/admin.js.php on line 347
 
 
 admin_head
@@ -458,7 +458,7 @@ Arguments:
 feed_comment
 ------------
 Called from:
-	modules/comments/comments.php on line 676
+	modules/comments/comments.php on line 678
 Arguments:
 	$comment
 
@@ -466,7 +466,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 694
+	modules/comments/comments.php on line 696
 Arguments:
 	$comment->id
 
@@ -482,7 +482,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 249
+	modules/comments/model/Comment.php on line 251
 Arguments:
 	$this->post_id, $this->id
 
@@ -490,7 +490,23 @@ Arguments:
 delete_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 257
+	modules/comments/model/Comment.php on line 259
+Arguments:
+	$new->post_id, $new->id
+
+
+add_like
+--------
+Called from:
+	modules/likes/model/Like.php on line 60
+Arguments:
+	$new->post_id, $new->id
+
+
+delete_like
+-----------
+Called from:
+	modules/likes/model/Like.php on line 73
 Arguments:
 	$new->post_id, $new->id
 
@@ -498,18 +514,17 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 70
-	modules/likes/model/Like.php on line 138
+	modules/likes/model/Like.php on line 98
 Arguments:
-	$this->post_id, $this->user_id
+	$post_id
 
 
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 91
+	modules/likes/model/Like.php on line 117
 Arguments:
-	$this->post_id, $this->user_id
+	$post_id
 
 
 import_wordpress_post

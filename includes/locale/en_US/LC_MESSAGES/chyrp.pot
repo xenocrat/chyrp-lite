@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-01-20 20:26+0000\n"
+"POT-Creation-Date: 2017-01-27 22:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -61,7 +61,7 @@ msgstr ""
 #: includes/controller/Admin.php:1943
 #: includes/download.php:12
 #: includes/download.php:15
-#: includes/error.php:132
+#: includes/error.php:138
 #: includes/helpers.php:1675
 #: includes/helpers.php:1681
 #: includes/helpers.php:1684
@@ -347,27 +347,27 @@ msgstr ""
 msgid "Could not read the configuration file."
 msgstr ""
 
-#: includes/class/Model.php:468
+#: includes/class/Model.php:455
 msgid "Edit"
 msgstr ""
 
-#: includes/class/Model.php:493
+#: includes/class/Model.php:480
 msgid "Delete"
 msgstr ""
 
-#: includes/class/Paginator.php:154
+#: includes/class/Paginator.php:140
 msgid "Next &rarr;"
 msgstr ""
 
-#: includes/class/Paginator.php:177
+#: includes/class/Paginator.php:163
 msgid "&larr; Previous"
 msgstr ""
 
-#: includes/class/Paginator.php:199
+#: includes/class/Paginator.php:185
 msgid "Final &rarr;"
 msgstr ""
 
-#: includes/class/Paginator.php:221
+#: includes/class/Paginator.php:207
 msgid "&larr; First"
 msgstr ""
 
@@ -1135,20 +1135,20 @@ msgstr ""
 msgid "File not found."
 msgstr ""
 
-#: includes/error.php:133
+#: includes/error.php:139
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:333
+#: includes/error.php:339
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:336
+#: includes/error.php:342
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:341
+#: includes/error.php:347
 msgid "Log in"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-01-20 20:26+0000\n"
+"POT-Creation-Date: 2017-01-27 22:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -34,7 +34,7 @@ msgid "Creative Commons is a family of licenses that you can use to donate your 
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:17
-#: modules/rights/rights.php:42
+#: modules/rights/rights.php:59
 msgid "License"
 msgstr ""
 
@@ -71,44 +71,44 @@ msgid "NoDerivatives"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:37
-#: modules/rights/rights.php:48
-#: modules/rights/rights.php:95
+#: modules/rights/rights.php:17
+#: modules/rights/rights.php:80
 msgid "Creative Commons BY"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:48
-#: modules/rights/rights.php:51
-#: modules/rights/rights.php:100
+#: modules/rights/rights.php:20
+#: modules/rights/rights.php:85
 msgid "Creative Commons BY-ND"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:63
-#: modules/rights/rights.php:54
-#: modules/rights/rights.php:105
+#: modules/rights/rights.php:23
+#: modules/rights/rights.php:90
 msgid "Creative Commons BY-SA"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:78
-#: modules/rights/rights.php:57
-#: modules/rights/rights.php:110
+#: modules/rights/rights.php:26
+#: modules/rights/rights.php:95
 msgid "Creative Commons BY-NC"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:93
-#: modules/rights/rights.php:60
-#: modules/rights/rights.php:115
+#: modules/rights/rights.php:29
+#: modules/rights/rights.php:100
 msgid "Creative Commons BY-NC-ND"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:110
-#: modules/rights/rights.php:63
-#: modules/rights/rights.php:120
+#: modules/rights/rights.php:32
+#: modules/rights/rights.php:105
 msgid "Creative Commons BY-NC-SA"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:127
-#: modules/rights/rights.php:66
-#: modules/rights/rights.php:125
+#: modules/rights/rights.php:35
+#: modules/rights/rights.php:110
 msgid "Creative Commons CC0"
 msgstr ""
 
@@ -124,29 +124,29 @@ msgstr ""
 msgid "Do you want to remove rights data from the database?"
 msgstr ""
 
-#: modules/rights/rights.php:32
-msgid "Original Work"
-msgstr ""
-
-#: modules/rights/rights.php:37
-msgid "Rights Holder"
-msgstr ""
-
-#: modules/rights/rights.php:45
-#: modules/rights/rights.php:134
+#: modules/rights/rights.php:14
+#: modules/rights/rights.php:119
 msgid "All rights reserved"
 msgstr ""
 
-#: modules/rights/rights.php:69
+#: modules/rights/rights.php:38
 msgid "Orphan Work"
 msgstr ""
 
-#: modules/rights/rights.php:72
-#: modules/rights/rights.php:130
+#: modules/rights/rights.php:41
+#: modules/rights/rights.php:115
 msgid "Public Domain"
 msgstr ""
 
-#: modules/rights/rights.php:75
+#: modules/rights/rights.php:44
 msgid "Crown Copyright"
+msgstr ""
+
+#: modules/rights/rights.php:49
+msgid "Original Work"
+msgstr ""
+
+#: modules/rights/rights.php:54
+msgid "Rights Holder"
 msgstr ""
 
