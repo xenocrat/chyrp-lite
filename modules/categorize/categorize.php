@@ -4,6 +4,7 @@
     class Categorize extends Modules {
         public function __init() {
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
+            $this->addAlias("category_grab", "categories_get");
         }
 
         static function __install() {
@@ -40,16 +41,16 @@
 
         public function metaWeblog_editPost_preQuery($struct, $post = null) {
             if (isset($struct["categories"][0]))
-                foreach (Category::getCategoryList() as $category)
-                    if ($category["name"] == $struct["categories"][0])
-                        $_POST['option']['category_id'] = $category["id"];
+                foreach (Category::find() as $category)
+                    if ($category->name == $struct["categories"][0])
+                        $_POST['option']['category_id'] = $category->id;
         }
 
         public function metaWeblog_getCategories($struct) {
-            foreach (Category::getCategoryList() as $category)
-                $struct[] = array("categoryId"   => $category["id"],
-                                  "categoryName" => $category["name"],
-                                  "htmlUrl"      => $category["url"]);
+            foreach (Category::find() as $category)
+                $struct[] = array("categoryId"   => $category->id,
+                                  "categoryName" => $category->name,
+                                  "htmlUrl"      => $category->url);
 
             return $struct;
         }
@@ -90,42 +91,58 @@
         }
 
         public function post_options($fields, $post = null) {
-            $categories = Category::getCategoryList();
+            $options[0]["value"] = "0";
+            $options[0]["name"] = __("[None]", "categorize");
+            $options[0]["selected"] = empty($post->category_id);
 
-            $fields_list[0]["value"] = "0";
-            $fields_list[0]["name"] = __("[None]", "categorize");
-
-            if (empty($post->category_id))
-                $fields_list[0]["selected"] = true;
-            else
-                $fields_list[0]["selected"] = false;
-
-            foreach ($categories as $category) {
-                $fields_list[$category["id"]]["value"] = $category["id"];
-                $fields_list[$category["id"]]["name"] = $category["name"];
-                $fields_list[$category["id"]]["selected"] = ($post ? $post->category_id == $category["id"] : false);
+            foreach (Category::find() as $category) {
+                $options[$category->id]["value"] = $category->id;
+                $options[$category->id]["name"] = $category->name;
+                $options[$category->id]["selected"] = ($post ? $post->category_id == $category->id : false);
             }
 
             $fields[] = array("attr" => "option[category_id]",
                               "label" => __("Category", "categorize"),
                               "help" => "categorizing_posts",
                               "type" => "select",
-                              "options" => $fields_list);
+                              "options" => $options);
 
             return $fields;
         }
 
         public function post($post) {
             if (!empty($post->category_id))
-                $post->category = Category::getCategory($post->category_id);
+                $post->category = new Category($post->category_id);
+        }
+
+        public function category_post_count_attr($attr, $category) {
+            if (isset($this->post_counts))
+                return fallback($this->post_counts[$category->id], 0);
+
+            $counts = SQL::current()->select("post_attributes",
+                                             "COUNT(value) AS total, value as category_id",
+                                             array("name" => "category_id"),
+                                             null,
+                                             array(),
+                                             null,
+                                             null,
+                                             "value")->fetchAll();
+
+            foreach ($counts as $count)
+                $this->post_counts[$count["category_id"]] = (int) $count["total"];
+
+            return fallback($this->post_counts[$category->id], 0);
+        }
+
+        public function categories_get(&$options) {
+            $options["from"] = array("categorize");
         }
 
         public function main_context($context) {
-            $categories = Category::getCategoryList();
             $context["categorize"] = array();
 
-            foreach ($categories as $category)
-                if ($category["show_on_home"])
+            foreach (Category::find() as $category)
+                if ($category->show_on_home)
                     $context["categorize"][] = $category;
 
             return $context;
@@ -137,9 +154,9 @@
                                      array("reason" => __("You did not specify a category.", "categorize")),
                                      __("Invalid Category", "categorize"));
 
-            $category = Category::getCategorybyClean($_GET['name']);
+            $category = new Category(array("clean" => $_GET['name']));
 
-            if (empty($category))
+            if ($category->no_results)
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
                                      array("reason" => __("The category you specified was not found.", "categorize")),
                                      __("Invalid Category", "categorize"));
@@ -191,15 +208,9 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "name LIKE :query", "categorize");
 
-            $categories = Category::getCategoryList($where, $params);
-
-            foreach ($categories as &$category)
-                $category["total"] = SQL::current()->count("post_attributes",
-                                                           array("name" => "category_id",
-                                                                 "value" => $category["id"]));
-
             $admin->display("pages".DIR."manage_category",
-                            array("categorize" => $categories));
+                            array("categorize" => Category::find(array("where" => $where,
+                                                                       "params" => $params))));
         }
 
         public function admin_new_category($admin) {
@@ -219,9 +230,11 @@
             if (empty($_POST['name']))
                 error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"), null, 400);
 
-            Category::addCategory($_POST['name'],
-                                  oneof(@$_POST['clean'], $_POST['name']),
-                                  !empty($_POST['show_on_home']));
+            $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
+
+            Category::add($_POST['name'],
+                          Category::check_clean(sanitize($clean, true, true)),
+                          !empty($_POST['show_on_home']));
 
             Flash::notice(__("Category added.", "categorize"), "manage_category");
         }
@@ -233,9 +246,9 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a category.", "categorize"), null, 400);
 
-            $category = Category::getCategory($_GET['id']);
+            $category = new Category($_GET['id']);
 
-            if (empty($category))
+            if ($category->no_results)
                 Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
             $admin->display("pages".DIR."edit_category", array("category" => $category));
@@ -254,15 +267,17 @@
             if (empty($_POST['name']))
                 error(__("No Name Specified", "categorize"), __("A name is required to update a category.", "categorize"), null, 400);
 
-            $category = Category::getCategory($_POST['id']);
+            $category = new Category($_POST['id']);
 
-            if (empty($category))
+            if ($category->no_results)
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
 
-            Category::updateCategory($_POST['id'],
-                                     $_POST['name'],
-                                     oneof(@$_POST['clean'], $_POST['name']),
-                                     !empty($_POST['show_on_home']));
+            $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
+
+            Category::update($_POST['id'],
+                             $_POST['name'],
+                             Category::check_clean(sanitize($clean, true, true)),
+                             !empty($_POST['show_on_home']));
 
             Flash::notice(__("Category updated.", "categorize"), "manage_category");
         }
@@ -271,9 +286,9 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
 
-            $category = Category::getCategory($_GET['id']);
+            $category = new Category($_GET['id']);
 
-            if (empty($category))
+            if ($category->no_results)
                 Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
             $admin->display("pages".DIR."delete_category", array("category" => $category));
@@ -292,12 +307,12 @@
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_category");
 
-            $category = Category::getCategory($_POST['id']);
+            $category = new Category($_POST['id']);
 
-            if (empty($category))
+            if ($category->no_results)
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
 
-            Category::deleteCategory($category->id);
+            Category::delete($category->id);
             Flash::notice(__("Category deleted.", "categorize"), "manage_category");
         }
     }

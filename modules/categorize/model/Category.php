@@ -7,72 +7,79 @@
      *     <Model>
      */
     class Category extends Model {
-        static function getCategory($id) {
-            $query = SQL::current()->select("categorize",
-                                            "id, name, clean, show_on_home, clean AS url",
-                                            array("id" => $id),
-                                            "name ASC",
-                                            array(),
-                                            1)->fetchObject();
+        /**
+         * Function: __construct
+         * See Also:
+         *     <Model::grab>
+         */
+        public function __construct($category_id, $options = array()) {
+            parent::grab($this, $category_id, $options);
 
-            if (!empty($query))
-                $query->url = url("category/".$query->url, MainController::current());
+            if ($this->no_results)
+                return false;
 
-            return $query;
+            $this->url = url("category/".$this->clean, MainController::current());
         }
 
-        static function getCategorybyClean($name) {
-            $query = SQL::current()->select("categorize",
-                                            "id, name, clean, show_on_home, clean AS url",
-                                            array("clean" => $name),
-                                            "name ASC",
-                                            array(),
-                                            1)->fetchObject();
-
-            if (!empty($query))
-                $query->url = url("category/".$query->url, MainController::current());
-
-            return $query;
+        /**
+         * Function: find
+         * See Also:
+         *     <Model::search>
+         */
+        static function find($options = array(), $options_for_object = array()) {
+            return parent::search(get_class(), $options, $options_for_object);
         }
 
-        static function getCategoryList($conds = null, $params = array()) {
+        static function add($name, $clean, $show_on_home) {
             $sql = SQL::current();
 
-            $query = $sql->select("categorize",
-                                  "id, name, clean, show_on_home, clean AS url",
-                                  $conds,
-                                  "name ASC",
-                                  $params)->fetchAll();
+            $sql->insert("categorize",
+                         array("name" => $name,
+                               "clean" => $clean,
+                               "show_on_home" => $show_on_home));
 
-            foreach ($query as &$result)
-                $result["url"] = url("category/".$result["url"], MainController::current());
-
-            return $query;
+            return new self($sql->latest("categorize"));
         }
 
-        static function addCategory($name, $clean, $show_on_home) {
-            SQL::current()->insert("categorize",
-                                   array("name" => $name,
-                                         "clean" => sanitize($clean, true, true),
-                                         "show_on_home" => $show_on_home));
-        }
+        public function update($name, $clean, $show_on_home) {
+            # Update all values of this category.
+            foreach (array("name", "clean", "show_on_home") as $attr)
+                $this->$attr = $$attr;
 
-        static function updateCategory($id, $name, $clean, $show_on_home) {
+            $this->url = url("category/".$this->clean, MainController::current());
+
             SQL::current()->update("categorize",
-                                   array("id" => $id),
+                                   array("id" => $this->id),
                                    array("name" => $name,
-                                         "clean" => sanitize($clean, true, true),
+                                         "clean" => $clean,
                                          "show_on_home" => $show_on_home));
         }
 
-        static function deleteCategory($id) {
+        static function delete($category_id) {
             $sql = SQL::current();
 
             $sql->delete("categorize",
-                         array("id" => $id));
+                         array("id" => $category_id));
 
             $sql->delete("post_attributes",
-                         array("name" => "category_id", "value" => $id));
+                         array("name" => "category_id",
+                               "value" => $category_id));
+        }
+
+        /**
+         * Function: check_clean
+         * Checks if a given clean URL is already being used as another category's URL.
+         *
+         * Parameters:
+         *     $clean - The clean URL to check.
+         *
+         * Returns:
+         *     The unique version of the passed clean URL.
+         *     If it's not used, it's the same as $clean. If it is, a number is appended.
+         */
+        static function check_clean($clean) {
+            $count = SQL::current()->count("categorize", array("clean" => $clean));
+            return (!$count or empty($clean)) ? $clean : $clean."-".($count + 1) ;
         }
 
         static function install() {
