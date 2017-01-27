@@ -29,7 +29,7 @@
 {% endif %}
 </a>
 {% if module_enabled("likes") %}
-{{ post.get_likes ? "&bull; " ~ post.get_likes : "" }}
+{{ post.like_link ? "&bull; " ~ post.like_link : "" }}
 {% endif %}
 {% if module_enabled("pingable") and post.pingback_count is defined %}
 &bull;
