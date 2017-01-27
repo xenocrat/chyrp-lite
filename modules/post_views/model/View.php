@@ -43,8 +43,8 @@
             $sql = SQL::current();
 
             $sql->insert("views",
-                         array("post_id"    => (int) $post_id,
-                               "user_id"    => (int) $user_id,
+                         array("post_id"    => $post_id,
+                               "user_id"    => $user_id,
                                "created_at" => oneof($created_at, datetime())));
 
             return new self($sql->latest("views"));
