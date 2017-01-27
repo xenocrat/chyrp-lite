@@ -13,6 +13,7 @@
          *     <Model::grab>
          */
         public function __construct($category_id, $options = array()) {
+            $options["from"] = "categorize";
             parent::grab($this, $category_id, $options);
 
             if ($this->no_results)
@@ -27,6 +28,7 @@
          *     <Model::search>
          */
         static function find($options = array(), $options_for_object = array()) {
+            $options["from"] = "categorize";
             return parent::search(get_class(), $options, $options_for_object);
         }
 

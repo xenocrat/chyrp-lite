@@ -4,7 +4,6 @@
     class Categorize extends Modules {
         public function __init() {
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
-            $this->addAlias("category_grab", "categories_get");
         }
 
         static function __install() {
@@ -132,10 +131,6 @@
                 $this->post_counts[$count["category_id"]] = (int) $count["total"];
 
             return fallback($this->post_counts[$category->id], 0);
-        }
-
-        public function categories_get(&$options) {
-            $options["from"] = array("categorize");
         }
 
         public function main_context($context) {
