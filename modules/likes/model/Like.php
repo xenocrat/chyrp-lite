@@ -123,20 +123,21 @@
          */
         static function discover($post_id) {
             fallback($_SESSION["likes"], array());
-            $user_id = Visitor::current()->id;
-            $session_hash = self::session_hash();
-            $logged_in = logged_in();
 
             if (!array_key_exists($post_id, $_SESSION["likes"]))
-                foreach (SQL::current()->select("likes",
-                                                "id, user_id, session_hash",
-                                                array("post_id" => $post_id))->fetchAll() as $like) {
+                if (logged_in()) {
+                    $check = new self(array("post_id" => $post_id,
+                                            "user_id" => Visitor::current()->id));
 
-                    if ($like["session_hash"] == $session_hash)
+                    if (!$check->no_results)
+                        $_SESSION["likes"][$post_id] = $check->id;
+                } else {
+                    $check = new self(array("post_id" => $post_id,
+                                            "user_id" => Visitor::current()->id,
+                                            "session_hash" => self::session_hash()));
+
+                    if (!$check->no_results)
                         $_SESSION["likes"][$post_id] = null;
-
-                    if ($logged_in and $like["user_id"] == $user_id)
-                        $_SESSION["likes"][$post_id] = $like["id"];
                 }
 
             # A numeric or boolean value will attribute a like to this visitor.
