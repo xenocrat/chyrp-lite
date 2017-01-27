@@ -8,135 +8,143 @@
      */
     class Like extends Model {
         public $belongs_to = array("post", "user");
-        public $post_id;
-        public $user_id;
-        public $session_hash;
 
         /**
          * Function: __construct
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($post_id = null, $user_id = null) {
-            $this->user_id = isset($user_id) ? $user_id : Visitor::current()->id ;
-            $this->session_hash = md5($this->user_id.$_SERVER['REMOTE_ADDR']);
-            $this->post_id = !empty($post_id) ? $post_id : null ;
+        public function __construct($like_id, $options = array()) {
+            parent::grab($this, $like_id, $options);
 
-            # Remember likes in the visitor's session for attribution.
-            fallback($_SESSION["likes"], array());
+            if ($this->no_results)
+                return false;
         }
 
         /**
-         * Function: resolve
-         * Determines if a visitor has liked a post.
+         * Function: find
+         * See Also:
+         *     <Model::search>
          */
-        public function resolve() {
-            if (empty($this->post_id))
-                return null;
-
-            # Set a fallback session value if we find this person in the database.
-            if (!array_key_exists($this->post_id, $_SESSION["likes"]))
-                foreach (self::fetchPeople() as $person) {
-                    if ($person["session_hash"] == $this->session_hash)
-                        $_SESSION["likes"][$this->post_id] = null;
-
-                    if (!empty($this->user_id) and $person["user_id"] == $this->user_id)
-                        $_SESSION["likes"][$this->post_id] = true;
-                }
-
-            # Session value of true or false will attribute a like to this person.
-            return isset($_SESSION["likes"][$this->post_id]);
+        static function find($options = array(), $options_for_object = array()) {
+            return parent::search(get_class(), $options, $options_for_object);
         }
 
         /**
-         * Function: like
+         * Function: add
          * Adds a like to the database.
+         *
+         * Parameters:
+         *     $post_id - The ID of the blog post that was liked.
+         *     $user_id - The ID of the user who liked the post.
+         *     $timestamp - The datetime when the like was added.
+         *     $session_hash - The session hash of the visitor.
          */
-        public function like() {
-            if (empty($this->post_id))
-                return;
-
-            # Add the like only if it will be unique (no session entry of any value).
-            if (!array_key_exists($this->post_id, $_SESSION["likes"]))
-                SQL::current()->insert("likes",
-                                       array("post_id" => $this->post_id,
-                                             "user_id" => $this->user_id,
-                                             "timestamp" => datetime(),
-                                             "session_hash" => $this->session_hash));
-
-            # Set the session value so that we remember this like.
-            $_SESSION["likes"][$this->post_id] = !empty($this->user_id);
-
-            Trigger::current()->call("like_post", $this->post_id, $this->user_id);
-        }
-
-        /**
-         * Function: unlike
-         * Removes a like from the database.
-         */
-        public function unlike() {
-            if (empty($this->post_id))
-                return;
-
-            # Delete the like only if the person is registered (session value is true).
-            if ($_SESSION["likes"][$this->post_id])
-                SQL::current()->delete("likes",
-                                       array("post_id" => $this->post_id,
-                                             "user_id" => $this->user_id),
-                                       array("LIMIT" => 1));
-
-            # Unset the session value so that we forget this like.
-            unset($_SESSION["likes"][$this->post_id]);
-
-            Trigger::current()->call("unlike_post", $this->post_id, $this->user_id);
-        }
-
-        /**
-         * Function: fetchPeople
-         * Returns an array of user IDs and hashes attributed to the current post.
-         */
-        public function fetchPeople() {
-            if (empty($this->post_id))
-                return array();
-
-            return SQL::current()->select("likes",
-                                          "session_hash, user_id",
-                                          array("post_id" => $this->post_id))->fetchAll();
-        }
-
-        /**
-         * Function: fetchPeople
-         * Returns the count of database entries attributed to the current post.
-         */
-        public function fetchCount(){
-            if (empty($this->post_id))
-                return 0;
-
-            return SQL::current()->count("likes",
-                                         array("post_id" => $this->post_id));
-        }
-
-        /**
-         * Function: import
-         * Adds a like to the database without affecting the session values.
-         */
-        static function import($post_id, $user_id, $timestamp, $session_hash) {
+        static function add($post_id, $user_id, $timestamp, $session_hash) {
             $sql = SQL::current();
 
-            $count = $sql->count("likes",
-                                 array("post_id" => $post_id,
-                                       "session_hash" => $session_hash));
+            # Test for an existing key_session_hash pair.
+            $old = new self(array("post_id" => $post_id,
+                                  "session_hash" => $session_hash));
 
-            # Add the like only if it will not cause a key_session_hash conflict.
-            if (!$count) {
-                $sql->insert("likes",
-                             array("post_id" => $post_id,
-                                   "user_id" => $user_id,
-                                   "timestamp" => $timestamp,
-                                   "session_hash" => $session_hash));
+            if (!$old->no_results)
+                return $old;
 
-                Trigger::current()->call("like_post", $post_id, $user_id);
+            $sql->insert("likes",
+                         array("post_id" => $post_id,
+                               "user_id" => $user_id,
+                               "timestamp" => $timestamp,
+                               "session_hash" => $session_hash));
+
+            $new = new self($sql->latest("likes"));
+            Trigger::current()->call("add_like", $new->post_id, $new->id);
+            return $new;
+        }
+
+        /**
+         * Function: delete
+         * Deletes a like from the database.
+         */
+        static function delete($like_id) {
+            $trigger = Trigger::current();
+
+            if ($trigger->exists("delete_like")) {
+                $new = new self($like_id);
+                $trigger->call("delete_like", $new->post_id, $new->id);
             }
+
+            SQL::current()->delete("likes", array("id" => $like_id));
+        }
+
+        /**
+         * Function: create
+         * Creates a like in the visitor's session values.
+         *
+         * Parameters:
+         *     $post_id - The ID of the blog post that was liked.
+         */
+        static function create($post_id) {
+            self::discover($post_id);
+
+            if (!array_key_exists($post_id, $_SESSION["likes"]))
+                $new = self::add($post_id,
+                                 Visitor::current()->id,
+                                 datetime(),
+                                 self::session_hash());
+
+            # Set the session value so that we remember this like.
+            $_SESSION["likes"][$post_id] = isset($new) ? $new->id : true ;
+
+            Trigger::current()->call("like_post", $post_id);
+        }
+
+        /**
+         * Function: remove
+         * Removes a like from the visitor's session values.
+         *
+         * Parameters:
+         *     $post_id - The ID of the blog post that was unliked.
+         */
+        static function remove($post_id) {
+            self::discover($post_id);
+
+            if (isset($_SESSION["likes"][$post_id]) and !is_bool($_SESSION["likes"][$post_id]))
+                self::delete($_SESSION["likes"][$post_id]);
+
+            # Unset the session value so that we forget this like.
+            unset($_SESSION["likes"][$post_id]);
+
+            Trigger::current()->call("unlike_post", $post_id);
+        }
+
+        /**
+         * Function: discover
+         * Determines if a visitor has liked a post and sets the session value.
+         */
+        static function discover($post_id) {
+            fallback($_SESSION["likes"], array());
+            $user_id = Visitor::current()->id;
+            $session_hash = self::session_hash();
+            $logged_in = logged_in();
+
+            if (!array_key_exists($post_id, $_SESSION["likes"]))
+                foreach (SQL::current()->select("likes",
+                                                "id, user_id, session_hash",
+                                                array("post_id" => $post_id))->fetchAll() as $like) {
+
+                    if ($like["session_hash"] == $session_hash)
+                        $_SESSION["likes"][$post_id] = null;
+
+                    if ($logged_in and $like["user_id"] == $user_id)
+                        $_SESSION["likes"][$post_id] = $like["id"];
+                }
+
+            # A numeric or boolean value will attribute a like to this visitor.
+            return isset($_SESSION["likes"][$post_id]);
+        }
+
+        private static function session_hash() {
+            return md5(Visitor::current()->id.$_SERVER['REMOTE_ADDR']);
         }
 
         static function install() {

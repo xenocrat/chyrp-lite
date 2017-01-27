@@ -72,9 +72,7 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $new = new Like($post->id);
-            $new->like();
-
+            Like::create($post->id);
             Flash::notice(__("Post liked.", "likes"), $post->url()."#likes_".$post->id);
         }
 
@@ -90,19 +88,8 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $new = new Like($post->id);
-            $new->unlike();
-
+            Like::remove($post->id);
             Flash::notice(__("Post unliked.", "likes"), $post->url()."#likes_".$post->id);
-        }
-
-        public function stylesheets($styles) {
-            $styles[] = Config::current()->chyrp_url."/modules/likes/style.css";
-            return $styles;
-        }
-
-        public function javascript() {
-            include MODULES_DIR.DIR."likes".DIR."javascript.php";
         }
 
         public function ajax_like() {
@@ -118,9 +105,8 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $new = new Like($post->id);
-            $new->like();
-            $count = $new->fetchCount() - 1;
+            Like::create($post->id);
+            $count = SQL::current()->count("likes", array("post_id" => $post->id)) - 1;
 
             if ($count <= 0)
                 $text = __("You like this.", "likes");
@@ -143,9 +129,8 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            $new = new Like($post->id);
-            $new->unlike();
-            $count = $new->fetchCount();
+            Like::remove($post->id);
+            $count = SQL::current()->count("likes", array("post_id" => $post->id));
 
             if ($count <= 0)
                 $text = __("No likes yet.", "likes");
@@ -153,6 +138,11 @@
                 $text = sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count);
 
             json_response($text, true);
+        }
+
+        public function post($post) {
+            $post->has_many[] = "likes";
+            $post->like_link = self::like_link($post);
         }
 
         public function delete_post($post) {
@@ -163,12 +153,26 @@
             SQL::current()->update("likes", array("user_id" => $user->id), array("user_id" => 0));
         }
 
-        public function post($post) {
-            $post->has_many[] = "likes";
-            $post->get_likes = self::get_likes($post);
+        public function post_like_count_attr($attr, $post) {
+            if (isset($this->like_counts))
+                return fallback($this->like_counts[$post->id], 0);
+
+            $counts = SQL::current()->select("likes",
+                                             "COUNT(post_id) AS total, post_id as post_id",
+                                             null,
+                                             null,
+                                             array(),
+                                             null,
+                                             null,
+                                             "post_id")->fetchAll();
+
+            foreach ($counts as $count)
+                $this->like_counts[$count["post_id"]] = (int) $count["total"];
+
+            return fallback($this->like_counts[$post->id], 0);
         }
 
-        public function get_likes($post) {
+        public function like_link($post) {
             $config = Config::current();
             $route = Route::current();
             $visitor = Visitor::current();
@@ -177,10 +181,9 @@
             if ($module_like["showOnFront"] == false and $route->action == "index")
                 return;
 
-            $like = new Like($post->id, $visitor->id);
             $html = '<div class="likes" id="likes_'.$post->id.'">';
 
-            if (!$like->resolve()) {
+            if (!Like::discover($post->id)) {
                 if ($visitor->group->can("like_post")) {
                     $html.= "<a class=\"likes like\" href=\"".
                                 $config->url."/?action=like&amp;post_id=".
@@ -198,7 +201,7 @@
 
                 $html.= " <span class='like_text'>";
 
-                $count = $like->fetchCount();
+                $count = $post->like_count;
 
                 if ($count <= 0)
                     $html.= __("No likes yet.", "likes");
@@ -224,7 +227,7 @@
 
                 $html.= " <span class='like_text'>";
 
-                $count = $like->fetchCount() - 1;
+                $count = $post->like_count - 1;
 
                 if ($count <= 0)
                     $html.= __("You like this.", "likes");
@@ -235,10 +238,10 @@
             }
 
             $html.= "</div>";
-            return $post->get_likes = $html;
+            return $html;
         }
 
-        public function get_like_images() {
+        public function like_images() {
             $images = array();
             $filepaths = glob(MODULES_DIR.DIR."likes".DIR."images".DIR."*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
 
@@ -255,8 +258,7 @@
         }
 
         public function manage_posts_column($post) {
-            $like = new Like(array("post_id" => $post->id));
-            echo '<td class="post_likes value">'.$like->fetchCount().'</td>';
+            echo '<td class="post_likes value">'.$post->like_count.'</td>';
         }
 
         public function import_chyrp_post($entry, $post) {
@@ -272,10 +274,10 @@
 
                 $user = new User(array("login" => (string) $login));
 
-                Like::import($post->id,
-                             ((!$user->no_results) ? $user->id : 0),
-                             (string) oneof($timestamp, datetime()),
-                             (string) oneof($session_hash, md5("missing hash")));
+                Like::add($post->id,
+                          ((!$user->no_results) ? $user->id : 0),
+                          (string) oneof($timestamp, datetime()),
+                          (string) oneof($session_hash, md5("import_chyrp_post")));
             }
         }
 
@@ -303,8 +305,12 @@
             return array_merge($regenerate, $triggers);
         }
 
-        public function user_logged_in($user) {
-            # Remember likes in the visitor's session for attribution.
-            $_SESSION["likes"] = array();
+        public function stylesheets($styles) {
+            $styles[] = Config::current()->chyrp_url."/modules/likes/style.css";
+            return $styles;
+        }
+
+        public function javascript() {
+            include MODULES_DIR.DIR."likes".DIR."javascript.php";
         }
     }

@@ -8,7 +8,7 @@
 <p>
 <label for="likeImage">{{ "Like Button Image" | translate("likes") }}</label>
 <select name="likeImage" onchange="$('#likeImage_preview').attr('src', $(this).val());">
-{% for key, val in modules['likes'].get_like_images() %}
+{% for key, val in modules['likes'].like_images() %}
 <option value="{{ val | fix(true) }}"{{ val | selected(site.module_like.likeImage) }}>{{ key | split(".") | first | camelize(true) }}</option>
 {% endfor %}
 </select>
