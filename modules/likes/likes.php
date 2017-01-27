@@ -178,7 +178,7 @@
             $visitor = Visitor::current();
             $module_like = $config->module_like;
 
-            if ($module_like["showOnFront"] == false and $route->action == "index")
+            if (($module_like["showOnFront"] == false and $route->action == "index") or $post->no_results)
                 return;
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
