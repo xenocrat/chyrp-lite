@@ -84,7 +84,7 @@
         }
 
         public function manage_posts_column($post) {
-            echo (!empty($post->category_id) and isset($post->category->name))
+            echo (isset($post->category->name))
                 ? '<td class="post_category value">'.fix($post->category->name).'</td>'
                 : '<td class="post_category value">&nbsp;</td>';
         }
