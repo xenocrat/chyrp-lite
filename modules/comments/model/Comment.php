@@ -228,23 +228,25 @@
         public function update($body, $author, $author_url, $author_email, $status, $notify, $created_at = null, $updated_at = null) {
             fallback($created_at, $this->created_at);
             fallback($updated_at, datetime());
+            $body = sanitize_html($body);
+            $author = strip_tags($author);
+            $author_url = strip_tags($author_url);
+            $author_email = strip_tags($author_email);
 
             # Update all values of this comment.
             foreach (array("body", "author", "author_url", "author_email", "status", "notify", "created_at", "updated_at") as $attr)
                 $this->$attr = $$attr;
 
-            $sql = SQL::current();
-
-            $sql->update("comments",
-                         array("id" => $this->id),
-                         array("body" => sanitize_html($body),
-                               "author" => strip_tags($author),
-                               "author_url" => strip_tags($author_url),
-                               "author_email" => strip_tags($author_email),
-                               "status" => $status,
-                               "notify" => $notify,
-                               "created_at" => $created_at,
-                               "updated_at" => $updated_at));
+            SQL::current()->update("comments",
+                                   array("id" => $this->id),
+                                   array("body" => $body,
+                                         "author" => $author,
+                                         "author_url" => $author_url,
+                                         "author_email" => $author_email,
+                                         "status" => $status,
+                                         "notify" => $notify,
+                                         "created_at" => $created_at,
+                                         "updated_at" => $updated_at));
 
             Trigger::current()->call("update_comment", $this->post_id, $this->id);
         }
