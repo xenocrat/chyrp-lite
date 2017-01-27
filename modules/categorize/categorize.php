@@ -110,8 +110,12 @@
         }
 
         public function post($post) {
-            if (!empty($post->category_id))
-                $post->category = new Category($post->category_id);
+            if (!empty($post->category_id)) {
+                $category = new Category($post->category_id);
+
+                if (!$category->no_results)
+                    $post->category = $category;
+            }
         }
 
         public function category_post_count_attr($attr, $category) {
