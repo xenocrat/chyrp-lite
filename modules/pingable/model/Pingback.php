@@ -44,7 +44,7 @@
             $sql = SQL::current();
 
             $sql->insert("pingbacks",
-                         array("post_id"    => (int) $post_id,
+                         array("post_id"    => $post_id,
                                "source"     => $source,
                                "title"      => strip_tags($title),
                                "created_at" => oneof($created_at, datetime())));
