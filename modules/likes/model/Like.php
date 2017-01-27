@@ -93,7 +93,7 @@
                                  self::session_hash());
 
             # Set the session value so that we remember this like.
-            $_SESSION["likes"][$post_id] = isset($new) ? $new->id : true ;
+            $_SESSION["likes"][$post_id] = isset($new) ? $new->id : 0 ;
 
             Trigger::current()->call("like_post", $post_id);
         }
@@ -108,7 +108,7 @@
         static function remove($post_id) {
             self::discover($post_id);
 
-            if (isset($_SESSION["likes"][$post_id]) and !is_bool($_SESSION["likes"][$post_id]))
+            if (!empty($_SESSION["likes"][$post_id]))
                 self::delete($_SESSION["likes"][$post_id]);
 
             # Unset the session value so that we forget this like.
@@ -140,7 +140,7 @@
                         $_SESSION["likes"][$post_id] = null;
                 }
 
-            # A numeric or boolean value will attribute a like to this visitor.
+            # A non-null value will attribute a like to this visitor.
             return isset($_SESSION["likes"][$post_id]);
         }
 
