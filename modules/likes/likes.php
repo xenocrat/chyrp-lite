@@ -305,6 +305,11 @@
             return array_merge($regenerate, $triggers);
         }
 
+        public function user_logged_in($user) {
+            # Erase the visitor's session values to avoid misattribution.
+            $_SESSION["likes"] = array();
+        }
+
         public function stylesheets($styles) {
             $styles[] = Config::current()->chyrp_url."/modules/likes/style.css";
             return $styles;
