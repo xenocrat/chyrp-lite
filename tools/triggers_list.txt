@@ -80,13 +80,13 @@ Arguments:
 manage_posts_column_header
 --------------------------
 Called from:
-	admin/pages/manage_posts.twig on line 38
+	admin/pages/manage_posts.twig on line 40
 
 
 manage_posts_column
 -------------------
 Called from:
-	admin/pages/manage_posts.twig on line 57
+	admin/pages/manage_posts.twig on line 59
 Arguments:
 	post
 
@@ -120,19 +120,19 @@ Called from:
 after_page_fields
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 15
+	admin/partials/page_fields.twig on line 16
 
 
 new_page_options
 ----------------
 Called from:
-	admin/partials/page_fields.twig on line 58
+	admin/partials/page_fields.twig on line 61
 
 
 edit_page_options
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 60
+	admin/partials/page_fields.twig on line 63
 Arguments:
 	page
 
@@ -148,7 +148,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 56
+	admin/partials/post_fields.twig on line 63
 Arguments:
 	feather
 
@@ -436,6 +436,30 @@ Called from:
 	modules/categorize/admin/pages/manage_category.twig on line 30
 	modules/comments/admin/pages/manage_comments.twig on line 29
 	modules/comments/admin/pages/manage_spam.twig on line 29
+
+
+add_category
+------------
+Called from:
+	modules/categorize/model/Category.php on line 44
+Arguments:
+	$new->id
+
+
+update_category
+---------------
+Called from:
+	modules/categorize/model/Category.php on line 61
+Arguments:
+	$this->id
+
+
+delete_category
+---------------
+Called from:
+	modules/categorize/model/Category.php on line 70
+Arguments:
+	$new->id
 
 
 edit_comment_options
