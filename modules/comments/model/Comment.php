@@ -71,7 +71,7 @@
          *     $type - The type of comment (optional).
          */
         static function create($body, $author, $author_url, $author_email, $post, $parent, $notify, $type = null) {
-            if (!self::user_can($post->id) and $type != "pingback")
+            if (!self::user_can($post) and $type != "pingback")
                 return;
 
             $config = Config::current();
@@ -225,6 +225,20 @@
             return $new;
         }
 
+        /**
+         * Function: update
+         * Updates a comment with the given attributes.
+         *
+         * Parameters:
+         *     $body - The comment.
+         *     $author - The name of the commenter.
+         *     $author_url - The commenter's website.
+         *     $author_email - The commenter's email.
+         *     $status - The comment's status.
+         *     $notify - Notification on follow-up comments.
+         *     $created_at - New @created_at@ timestamp for the comment.
+         *     $updated_at - New @updated_at@ timestamp for the comment.
+         */
         public function update($body, $author, $author_url, $author_email, $status, $notify, $created_at = null, $updated_at = null) {
             fallback($created_at, $this->created_at);
             fallback($updated_at, datetime());
@@ -251,6 +265,10 @@
             Trigger::current()->call("update_comment", $this->post_id, $this->id);
         }
 
+        /**
+         * Function: delete
+         * Deletes a comment from the database.
+         */
         static function delete($comment_id) {
             $trigger = Trigger::current();
 
@@ -262,12 +280,20 @@
             SQL::current()->delete("comments", array("id" => $comment_id));
         }
 
+        /**
+         * Function: editable
+         * Checks if the <User> can edit the comment.
+         */
         public function editable($user = null) {
             fallback($user, Visitor::current());
             return ($user->group->can("edit_comment") or
                     (logged_in() and $user->group->can("edit_own_comment") and $user->id == $this->user_id));
         }
 
+        /**
+         * Function: deletable
+         * Checks if the <User> can delete the comment.
+         */
         public function deletable($user = null) {
             fallback($user, Visitor::current());
             return ($user->group->can("delete_comment") or
@@ -312,6 +338,10 @@
             return false;
         }
 
+        /**
+         * Function: author_link
+         * Returns the commenter's name enclosed in a hyperlink to their website.
+         */
         public function author_link() {
             if (!isset($this->id))
                 return __("Anon", "comments");
@@ -322,6 +352,10 @@
                 return $this->author;
         }
 
+        /**
+         * Function: user_can
+         * Checks if the <Visitor> can comment on a post.
+         */
         static function user_can($post) {
             $visitor = Visitor::current();
             
@@ -335,11 +369,19 @@
                         ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
         }
 
+        /**
+         * Function: user_count
+         * Counts a user's comments.
+         */
         static function user_count($user_id) {
             $count = SQL::current()->count("comments", array("user_id" => $user_id));
             return $count;
         }
 
+        /**
+         * Function: install
+         * Creates the database table.
+         */
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __comments (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -359,6 +401,10 @@
                                    ) DEFAULT CHARSET=utf8");
         }
 
+        /**
+         * Function: uninstall
+         * Drops the database table.
+         */
         static function uninstall() {
             $sql = SQL::current();
 
