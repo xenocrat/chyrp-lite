@@ -10,7 +10,7 @@ or you can create a multimedia rainbow. Pages let you publish articles separate 
 – be it a simple colophon or a hierarchy of multiple pages, optionally including a homepage that your
 visitors will see when they first arrive at your website.
 
-You get three beautiful blog themes and a friendly administration console, all fully navigable on
+You get four beautiful blog themes and a friendly administration console, all fully navigable on
 a broad range of devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive
 ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
 
