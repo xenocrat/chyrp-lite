@@ -1,6 +1,6 @@
 {{ trigger.call("before_post_fields", feather) }}
 {% for field in feather.fields %}
-{% set field_value = field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" %}
+{% set field_value = attribute(post, field.attr) is defined ? attribute(post, field.attr) : field.value is defined ? field.value : "" %}
 {% set field_preview = field.preview is defined and field.preview %}
 {% set field_multiple = field.multiple is defined and field.multiple %}
 {% set field_markdown = site.enable_markdown and field.filters is defined and (field.filters | contains("markup_text")) %}
@@ -98,7 +98,7 @@
 <input id="created_at" class="text" type="text" name="created_at" value="{{ post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) | strftimeformat : now | date('r') | strftimeformat }}">
 </p>
 {% for field in options %}
-{% set field_value = field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" %}
+{% set field_value = attribute(post, field.attr) is defined ? attribute(post, field.attr) : field.value is defined ? field.value : "" %}
 {% set field_multiple = field.multiple is defined and field.multiple %}
 <p class="more_options_option">
 <label for="{{ field.attr | replace({'[': '_', ']': ''}) }}_field">
