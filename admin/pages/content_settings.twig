@@ -21,7 +21,7 @@
 <label for="feed_url">{{ "Feed URL" | translate }}</label>
 <input class="text" type="url" name="feed_url" value="{{ site.feed_url | fix(true) }}" id="feed_url">
 <small>
-{{ site.clean_urls ? "Allows you to set an alternative URL for <code>/feed/</code>." | translate : "Allows you to set an alternative URL for <code>/?feed</code>." | translate }}
+{{ "Allows you to set an alternative URL for <code>%s</code>." | translate | format(site.clean_urls ? "/feed/" : "/?feed") }}
 </small>
 </p>
 <p>
