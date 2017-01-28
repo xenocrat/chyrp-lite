@@ -652,6 +652,7 @@ hr {                                            border: none;
                                                 clear: both;
                                                 border-top: 1px solid #ddd;
                                                 margin: 2em 0em }
+a.emblem {                                      text-decoration: none }
 a.emblem > img,
 img.emblem {                                    display: inline;
                                                 position: relative;
