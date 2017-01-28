@@ -1,8 +1,12 @@
 {{ trigger.call("before_post_fields", feather) }}
 {% for field in feather.fields %}
+{% set field_value = field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" %}
+{% set field_preview = field.preview is defined and field.preview %}
+{% set field_multiple = field.multiple is defined and field.multiple %}
+{% set field_markdown = site.enable_markdown and field.filters is defined and (field.filters | contains("markup_text")) %}
 <p class="main_options">
 <label for="{{ field.attr }}_field">
-{% if site.enable_markdown and field.filters is defined and (field.filters | contains("markup_text")) %}
+{% if field_markdown %}
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ field.label }}
@@ -19,9 +23,9 @@
 {% endif %}
 </label>
 {% if field.type == "text" %}
-<input id="{{ field.attr }}_field" class="text" type="text" name="{{ field.attr }}"{{ field.preview is defined and field.preview ? ' data-preview' : ''}} value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
+<input id="{{ field.attr }}_field" class="text" type="text" name="{{ field.attr }}"{{ field_preview ? ' data-preview' : '' }}{{ field_markdown ? ' data-markdown' : '' }} value="{{ field_value }}">
 {% elseif field.type == "file" %}
-<input id="{{ field.attr }}_field" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
+<input id="{{ field.attr }}_field" type="file"{{ field_multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"' }} value="">
 <p>
 {% if (post.filename is defined or post.filenames is defined) and route.action == "edit_post" %}
 {% if post.filename is defined %}
@@ -38,13 +42,14 @@
 {% endif %}
 </p>
 {% elseif field.type == "text_block" %}
-<textarea id="{{ field.attr }}_field" name="{{ field.attr }}" rows="12"{{ field.preview is defined and field.preview ? ' data-preview' : '' }}>{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
+<textarea id="{{ field.attr }}_field" name="{{ field.attr }}" rows="12"{{ field_preview ? ' data-preview' : '' }}{{ field_markdown ? ' data-markdown' : '' }}>{{ field_value }}</textarea>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field.attr }}_field" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
 <select id="{{ field.attr }}_field" name="{{ field.attr }}">
 {% for value, name in field.options %}
-<option value="{{ value | fix }}"{{ attribute(post, field.attr) is defined ? value | selected(attribute(post, field.attr)) : "" }}>{{ name | fix }}</option>
+{% set option_selected = attribute(post, field.attr) is defined ? value | selected(attribute(post, field.attr)) : "" %}
+<option value="{{ value | fix }}"{{ option_selected }}>{{ name | fix }}</option>
 {% endfor %}
 </select>
 {% endif %}
@@ -93,6 +98,8 @@
 <input id="created_at" class="text" type="text" name="created_at" value="{{ post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) | strftimeformat : now | date('r') | strftimeformat }}">
 </p>
 {% for field in options %}
+{% set field_value = field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" %}
+{% set field_multiple = field.multiple is defined and field.multiple %}
 <p class="more_options_option">
 <label for="{{ field.attr | replace({'[': '_', ']': ''}) }}_field">
 {{ field.label }}
@@ -106,11 +113,11 @@
 {% endif %}
 </label>
 {% if field.type == "text" %}
-<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" class="text" type="text" name="{{ field.attr }}" value="{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : '' }}">
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" class="text" type="text" name="{{ field.attr }}" value="{{ field_value }}">
 {% elseif field.type == "file" %}
-<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" type="file"{{ field.multiple is defined and field.multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"'}} value="">
+<input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" type="file"{{ field_multiple ? ' name="' ~ field.attr ~ '[]" multiple' : ' name="' ~ field.attr ~ '"' }} value="">
 {% elseif field.type == "text_block" %}
-<textarea id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" name="{{ field.attr }}" rows="12">{{ field.value is defined ? field.value : attribute(post, field.attr) is defined ? attribute(post, field.attr) : "" }}</textarea>
+<textarea id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" name="{{ field.attr }}" rows="12">{{ field_value }}</textarea>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field.attr | replace({'[': '_', ']': ''}) }}_field" type="checkbox" name="{{ field.attr }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}

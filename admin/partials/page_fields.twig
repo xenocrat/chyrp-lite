@@ -1,16 +1,17 @@
 {{ trigger.call("before_page_fields") }}
+{% set field_markdown = site.enable_markdown %}
 <p class="main_options">
 <label for="title">{{ "Title" | translate }}</label>
 <input class="text" type="text" name="title" value="{{ page is defined ? page.title | fix : '' }}" id="title">
 </p>
 <p class="main_options">
 <label for="body">
-{% if site.enable_markdown %}
+{% if field_markdown %}
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
 {% endif %}
 {{ "Body" | translate }}
 </label>
-<textarea rows="12" name="body" id="body" data-preview>{{ page is defined ? page.body | fix : "" }}</textarea>
+<textarea rows="12" name="body" id="body" data-preview{{ field_markdown ? ' data-markdown' : '' }}>{{ page is defined ? page.body | fix : "" }}</textarea>
 </p>
 {{ trigger.call("after_page_fields") }}
 <div id="more_options" class="more_options">
