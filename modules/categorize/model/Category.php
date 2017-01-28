@@ -32,6 +32,15 @@
             return parent::search(get_class(), $options, $options_for_object);
         }
 
+        /**
+         * Function: add
+         * Adds a category to the database.
+         *
+         * Parameters:
+         *     $name - The display name for this category.
+         *     $clean - The unique slug for this category.
+         *     $show_on_home - Show in the categories list?
+         */
         static function add($name, $clean, $show_on_home) {
             $sql = SQL::current();
 
@@ -45,6 +54,15 @@
             return $new;
         }
 
+        /**
+         * Function: update
+         * Updates a category with the given attributes.
+         *
+         * Parameters:
+         *     $name - The display name for this category.
+         *     $clean - The unique slug for this category.
+         *     $show_on_home - Show in the categories list?
+         */
         public function update($name, $clean, $show_on_home) {
             $url = url("category/".$clean, MainController::current());
 
@@ -61,6 +79,10 @@
             Trigger::current()->call("update_category", $this->id);
         }
 
+        /**
+         * Function: delete
+         * Deletes a category from the database.
+         */
         static function delete($category_id) {
             $trigger = Trigger::current();
             $sql = SQL::current();
@@ -94,6 +116,10 @@
             return (!$count or empty($clean)) ? $clean : $clean."-".($count + 1) ;
         }
 
+        /**
+         * Function: install
+         * Creates the database table.
+         */
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __categorize (
                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -103,6 +129,10 @@
                                   ) DEFAULT CHARSET=UTF8");
         }
 
+        /**
+         * Function: uninstall
+         * Drops the database table.
+         */
         static function uninstall() {
             $sql = SQL::current();
 

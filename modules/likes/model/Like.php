@@ -144,10 +144,18 @@
             return isset($_SESSION["likes"][$post_id]);
         }
 
+        /**
+         * Function: session_hash
+         * Returns a hash generated from the visitor's ID and IP address.
+         */
         private static function session_hash() {
             return md5(Visitor::current()->id.$_SERVER['REMOTE_ADDR']);
         }
 
+        /**
+         * Function: install
+         * Creates the database table.
+         */
         static function install() {
             $sql = SQL::current();
 
@@ -178,6 +186,10 @@
             }
         }
 
+        /**
+         * Function: uninstall
+         * Drops the database table.
+         */
         static function uninstall() {
             SQL::current()->query("DROP TABLE __likes");
         }

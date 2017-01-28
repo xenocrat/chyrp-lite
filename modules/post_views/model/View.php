@@ -50,10 +50,18 @@
             return new self($sql->latest("views"));
         }
 
+        /**
+         * Function: delete
+         * Deletes a view from the database.
+         */
         static function delete($view_id) {
             SQL::current()->delete("views", array("id" => $view_id));
         }
 
+        /**
+         * Function: install
+         * Creates the database table.
+         */
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __views (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -63,6 +71,10 @@
                                    ) DEFAULT CHARSET=utf8");
         }
 
+        /**
+         * Function: uninstall
+         * Drops the database table.
+         */
         static function uninstall() {
             SQL::current()->query("DROP TABLE __views");
         }

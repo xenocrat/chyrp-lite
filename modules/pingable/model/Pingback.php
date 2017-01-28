@@ -54,6 +54,10 @@
             return $new;
         }
 
+        /**
+         * Function: delete
+         * Deletes a pingback from the database.
+         */
         static function delete($pingback_id) {
             $trigger = Trigger::current();
 
@@ -65,6 +69,10 @@
             SQL::current()->delete("pingbacks", array("id" => $pingback_id));
         }
 
+        /**
+         * Function: install
+         * Creates the database table.
+         */
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __pingbacks (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -75,6 +83,10 @@
                                    ) DEFAULT CHARSET=utf8");
         }
 
+        /**
+         * Function: uninstall
+         * Drops the database table.
+         */
         static function uninstall() {
             SQL::current()->query("DROP TABLE __pingbacks");
         }
