@@ -50,7 +50,7 @@
                                "created_at" => oneof($created_at, datetime())));
 
             $new = new self($sql->latest("pingbacks"));
-            Trigger::current()->call("add_pingback", $new->post_id, $new->id);
+            Trigger::current()->call("add_pingback", $new);
             return $new;
         }
 
@@ -59,14 +59,7 @@
          * Deletes a pingback from the database.
          */
         static function delete($pingback_id) {
-            $trigger = Trigger::current();
-
-            if ($trigger->exists("delete_pingback")) {
-                $new = new self($pingback_id);
-                $trigger->call("delete_pingback", $new->post_id, $new->id);
-            }
-
-            SQL::current()->delete("pingbacks", array("id" => $pingback_id));
+            parent::destroy(get_class(), $pingback_id);
         }
 
         /**
