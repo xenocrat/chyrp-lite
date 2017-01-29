@@ -13,7 +13,6 @@
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
-<a class="button boo" href="{{ url('purge_spam') }}"><img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Delete All (%d)" | translate("comments") | format(comments.total) }}</a>
 </div>
 </fieldset>
 </form>

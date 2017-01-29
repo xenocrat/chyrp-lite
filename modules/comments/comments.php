@@ -272,15 +272,6 @@
                                                               Config::current()->admin_per_page)));
         }
 
-        public function admin_purge_spam() {
-            if (!Visitor::current()->group->can("delete_comment"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete comments.", "comments"));
-
-            SQL::current()->delete("comments", "status = 'spam'");
-
-            Flash::notice(__("All spam deleted.", "comments"), "manage_spam");
-        }
-
         public function post_options($fields, $post = null) {
             if ($post)
                 $post->comment_status = oneof(@$post->comment_status, "open");
@@ -387,11 +378,12 @@
             $sql = SQL::current();
             $comment_count = $sql->count("comments", array("status not" => "spam"));
             $spam_count = $sql->count("comments", array("status" => "spam"));
+
             $navs["manage_comments"] = array("title" => _f("Comments (%d)", $comment_count, "comments"),
                                              "selected" => array("edit_comment", "delete_comment"));
 
             if (Visitor::current()->group->can("edit_comment", "delete_comment"))
-                $navs["manage_spam"]     = array("title" => _f("Spam (%d)", $spam_count, "comments"));
+                $navs["manage_spam"] = array("title" => _f("Spam (%d)", $spam_count, "comments"));
 
             return $navs;
         }
