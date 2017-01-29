@@ -50,7 +50,7 @@
                                "show_on_home" => $show_on_home));
 
             $new = new self($sql->latest("categorize"));
-            Trigger::current()->call("add_category", $new->id);
+            Trigger::current()->call("add_category", $new);
             return $new;
         }
 
@@ -76,7 +76,7 @@
                                          "clean" => $clean,
                                          "show_on_home" => $show_on_home));
 
-            Trigger::current()->call("update_category", $this->id);
+            Trigger::current()->call("update_category", $this);
         }
 
         /**
@@ -87,10 +87,8 @@
             $trigger = Trigger::current();
             $sql = SQL::current();
 
-            if ($trigger->exists("delete_category")) {
-                $new = new self($category_id);
-                $trigger->call("delete_category", $new->id);
-            }
+            if ($trigger->exists("delete_category"))
+                $trigger->call("delete_category", new self($category_id));
 
             $sql->delete("categorize",
                          array("id" => $category_id));
