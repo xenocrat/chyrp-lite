@@ -57,7 +57,7 @@
                                "session_hash" => $session_hash));
 
             $new = new self($sql->latest("likes"));
-            Trigger::current()->call("add_like", $new->post_id, $new->id);
+            Trigger::current()->call("add_like", $new);
             return $new;
         }
 
@@ -66,14 +66,7 @@
          * Deletes a like from the database.
          */
         static function delete($like_id) {
-            $trigger = Trigger::current();
-
-            if ($trigger->exists("delete_like")) {
-                $new = new self($like_id);
-                $trigger->call("delete_like", $new->post_id, $new->id);
-            }
-
-            SQL::current()->delete("likes", array("id" => $like_id));
+            parent::destroy(get_class(), $like_id);
         }
 
         /**
