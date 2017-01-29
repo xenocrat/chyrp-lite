@@ -18,7 +18,7 @@
 </fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Spam" | translate("comments") }}</h2>
-<form action="{{ url('bulk_comments/from/spam') }}" method="post">
+<form action="{{ url('bulk_comments') }}" method="post">
 <table class="interactive">
 <thead>
 <tr class="head">
@@ -78,6 +78,8 @@
 <button class="boo" name="delete">
 <img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Delete" | translate("comments") }}
 </button>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="from" value="manage_spam" id="from">
 </div>
 </form>
 {% if comments.paginated is not empty and comments.pages > 1 %}

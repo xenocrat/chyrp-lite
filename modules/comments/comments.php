@@ -433,7 +433,10 @@
         }
 
         public function admin_bulk_comments() {
-            $from = (!isset($_GET['from'])) ? "manage_comments" : "manage_spam" ;
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            $from = (isset($_POST['from'])) ? $_POST['from'] : "manage_comments" ;
 
             if (!isset($_POST['comment']))
                 Flash::warning(__("No comments selected."), $from);

@@ -92,6 +92,7 @@
 <button class="boo" name="delete">
 <img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Delete" | translate("comments") }}
 </button>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 </div>
 {% endif %}
 </form>
