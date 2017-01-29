@@ -797,7 +797,7 @@
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
                         <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>
-                            <?php echo when(__("%I:%M %p on %B %d, %Y"), $zone["now"], true); ?> &mdash;
+                            <?php echo when("%Y-%m-%d %H:%M", $zone["now"], true); ?> &mdash;
                             <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone["name"]); ?>
                         </option>
                     <?php endforeach; ?>
