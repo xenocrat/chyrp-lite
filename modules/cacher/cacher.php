@@ -113,7 +113,7 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (isset($_POST['destroy']) and $_POST['clear_cache'] == "indubitably")
+            if (isset($_POST['clear_cache']) and $_POST['clear_cache'] == "indubitably")
                 self::admin_clear_cache();
 
             fallback($_POST['cache_expire'], 3600);
