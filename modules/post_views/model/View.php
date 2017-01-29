@@ -55,7 +55,7 @@
          * Deletes a view from the database.
          */
         static function delete($view_id) {
-            SQL::current()->delete("views", array("id" => $view_id));
+            parent::destroy(get_class(), $view_id);
         }
 
         /**
