@@ -206,7 +206,7 @@
                                "updated_at" => oneof($updated_at, "0000-00-00 00:00:00")));
 
             $new = new self($sql->latest("comments"));
-            Trigger::current()->call("add_comment", $new->post_id, $new->id);
+            Trigger::current()->call("add_comment", $new);
 
             if ($new->status == "approved")
                 foreach ($sql->select("comments",
@@ -262,7 +262,7 @@
                                          "created_at" => $created_at,
                                          "updated_at" => $updated_at));
 
-            Trigger::current()->call("update_comment", $this->post_id, $this->id);
+            Trigger::current()->call("update_comment", $this);
         }
 
         /**
@@ -270,14 +270,7 @@
          * Deletes a comment from the database.
          */
         static function delete($comment_id) {
-            $trigger = Trigger::current();
-
-            if ($trigger->exists("delete_comment")) {
-                $new = new self($comment_id);
-                $trigger->call("delete_comment", $new->post_id, $new->id);
-            }
-
-            SQL::current()->delete("comments", array("id" => $comment_id));
+            parent::destroy(get_class(), $comment_id);
         }
 
         /**
