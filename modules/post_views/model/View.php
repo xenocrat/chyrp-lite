@@ -53,6 +53,9 @@
         /**
          * Function: delete
          * Deletes a view from the database.
+         *
+         * See Also:
+         *     <Model::destroy>
          */
         static function delete($view_id) {
             parent::destroy(get_class(), $view_id);

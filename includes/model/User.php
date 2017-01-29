@@ -173,11 +173,11 @@
          * Function: delete
          * Deletes a given user. Calls the @delete_user@ trigger and passes the <User> as an argument.
          *
-         * Parameters:
-         *     $id - The user to delete.
+         * See Also:
+         *     <Model::destroy>
          */
-        static function delete($id) {
-            parent::destroy(get_class(), $id);
+        static function delete($user_id) {
+            parent::destroy(get_class(), $user_id);
         }
 
         /**

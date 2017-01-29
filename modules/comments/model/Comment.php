@@ -268,6 +268,9 @@
         /**
          * Function: delete
          * Deletes a comment from the database.
+         *
+         * See Also:
+         *     <Model::destroy>
          */
         static function delete($comment_id) {
             parent::destroy(get_class(), $comment_id);

@@ -218,8 +218,11 @@
          * Calls the @delete_page@ trigger with the <Page> to delete.
          *
          * Parameters:
-         *     $page_id - The page to delete.
+         *     $page_id - The ID of the page to delete.
          *     $recursive - Should the page's children be deleted? (default: false)
+         *
+         * See Also:
+         *     <Model::destroy>
          */
         static function delete($page_id, $recursive = false) {
             if ($recursive) {

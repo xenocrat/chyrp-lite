@@ -181,14 +181,14 @@
          * Function: delete
          * Deletes a given group and its permissions. Calls the @delete_group@ trigger and passes the <Group> as an argument.
          *
-         * Parameters:
-         *     $id - The group to delete.
+         * See Also:
+         *     <Model::destroy>
          */
-        static function delete($id) {
-            if (!empty($id))
-                SQL::current()->delete("permissions", array("group_id" => $id));
+        static function delete($group_id) {
+            if (!empty($group_id))
+                SQL::current()->delete("permissions", array("group_id" => $group_id));
 
-            parent::destroy(get_class(), $id);
+            parent::destroy(get_class(), $group_id);
         }
 
         /**

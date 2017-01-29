@@ -336,6 +336,8 @@
 
         /**
          * Function: delete
+         * Deletes a post from the database.
+         *
          * See Also:
          *     <Model::destroy>
          */

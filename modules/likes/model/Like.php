@@ -64,6 +64,9 @@
         /**
          * Function: delete
          * Deletes a like from the database.
+         *
+         * See Also:
+         *     <Model::destroy>
          */
         static function delete($like_id) {
             parent::destroy(get_class(), $like_id);

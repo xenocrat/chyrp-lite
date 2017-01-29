@@ -57,6 +57,9 @@
         /**
          * Function: delete
          * Deletes a pingback from the database.
+         *
+         * See Also:
+         *     <Model::destroy>
          */
         static function delete($pingback_id) {
             parent::destroy(get_class(), $pingback_id);
