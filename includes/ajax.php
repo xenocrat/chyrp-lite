@@ -99,11 +99,11 @@
 
             # Page title filters.
             if ($field == "title")
-                $trigger->filter($content, array("markup_title", "markup_page_title"));
+                $trigger->filter($content, array("markup_page_title", "markup_title"));
 
             # Page body filters.
             if ($field == "body")
-                $trigger->filter($content, array("markup_text", "markup_page_text"));
+                $trigger->filter($content, array("markup_page_text", "markup_text"));
 
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
