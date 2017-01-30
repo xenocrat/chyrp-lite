@@ -31,15 +31,8 @@
 
             $trigger->filter($this, "page");
 
-            if ($this->filtered) {
-                $this->title_unfiltered = $this->title;
-                $this->body_unfiltered = $this->body = (Config::current()->enable_emoji) ? emote($this->body) : $this->body ;
-
-                $trigger->filter($this->title, array("markup_title", "markup_page_title"), $this);
-                $trigger->filter($this->body, array("markup_text", "markup_page_text"), $this);
-
-                $trigger->filter($this, "filter_page");
-            }
+            if ($this->filtered)
+                $this->filter();
         }
 
         /**
@@ -208,6 +201,9 @@
                          array("id" => $this->id),
                          $new_values);
 
+            if ($this->filtered)
+                $this->filter();
+
             $trigger->call("update_page", $this, $old);
         }
 
@@ -260,6 +256,21 @@
         static function check_url($clean) {
             $count = SQL::current()->count("pages", array("clean" => $clean));
             return (!$count or empty($clean)) ? $clean : $clean."-".($count + 1) ;
+        }
+
+        /**
+         * Function: filter
+         * Filters the page attributes through filter_page and markup filters.
+         */
+        private function filter() {
+            $trigger = Trigger::current();
+            $trigger->filter($this, "filter_page");
+
+            $this->title_unfiltered = $this->title;
+            $this->body_unfiltered = $this->body;
+
+            $trigger->filter($this->title, array("markup_page_title", "markup_title"), $this);
+            $trigger->filter($this->body, array("markup_page_text", "markup_text"), $this);
         }
 
         /**
