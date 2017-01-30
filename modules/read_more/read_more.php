@@ -6,18 +6,18 @@
         }
 
         public function markup_post_text($text, $post = null) {
-            if (!is_string($text) or !preg_match("/<!-- *more(.+?)?-->/i", $text, $matches))
+            if (!is_string($text) or !preg_match("/<!-- *more([^>]*)?-->/i", $text, $matches))
                 return $text;
 
             $route = Route::current();
             $controller = $route->controller;
 
             if (!isset($post) or $route->action == "view" or $controller->feed)
-                return preg_replace("/<!-- *more(.+?)?-->/i", "", $text);
+                return preg_replace("/<!-- *more([^>]*)?-->/i", "", $text);
 
             $more = oneof(trim(fallback($matches[1])), __("&hellip;more", "read_more"));
             $url = (!$post->no_results) ? $post->url() : "#" ;
-            $split = preg_split("/<!-- *more(.+?)?-->/i", $text, -1, PREG_SPLIT_NO_EMPTY);
+            $split = preg_split("/<!-- *more([^>]*)?-->/i", $text, -1, PREG_SPLIT_NO_EMPTY);
 
             return $split[0].'<a class="read_more" href="'.$url.'">'.$more.'</a>';
         }
