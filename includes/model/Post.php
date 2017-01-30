@@ -331,6 +331,9 @@
                                        "name" => $name,
                                        "value" => $this->$name = $value));
 
+            if ($this->filtered)
+                $this->filter();
+
             $trigger->call("update_post", $this, $old, $options);
         }
 
@@ -633,9 +636,9 @@
          * Filters the post attributes through filter_post and any Feather filters.
          */
         private function filter() {
-            $trigger = Trigger::current();
             $class = camelize($this->feather);
 
+            $trigger = Trigger::current();
             $trigger->filter($this, "filter_post");
 
             # Custom filters.
