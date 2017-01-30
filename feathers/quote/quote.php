@@ -13,8 +13,8 @@
                                   "optional" => true,
                                   "preview" => true));
 
-            $this->setFilter("quote", array("markup_text", "markup_post_text"));
-            $this->setFilter("source", array("markup_text", "markup_post_text"));
+            $this->setFilter("quote", array("markup_post_text", "markup_text"));
+            $this->setFilter("source", array("markup_post_text", "markup_text"));
         }
 
         public function submit() {

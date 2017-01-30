@@ -16,8 +16,8 @@
                                   "optional" => true,
                                   "preview" => true));
 
-            $this->setFilter("title", array("markup_title", "markup_post_title"));
-            $this->setFilter("description", array("markup_text", "markup_post_text"));
+            $this->setFilter("title", array("markup_post_title", "markup_title"));
+            $this->setFilter("description", array("markup_post_text", "markup_text"));
 
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_video");

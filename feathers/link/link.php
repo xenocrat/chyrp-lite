@@ -14,8 +14,8 @@
                                   "optional" => true,
                                   "preview" => true));
 
-            $this->setFilter("name", array("markup_title", "markup_post_title"));
-            $this->setFilter("description", array("markup_text", "markup_post_text"));
+            $this->setFilter("name", array("markup_post_title", "markup_title"));
+            $this->setFilter("description", array("markup_post_text", "markup_text"));
 
             $this->respondTo("feed_url", "set_feed_url");
         }

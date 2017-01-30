@@ -10,8 +10,8 @@
                                   "label" => __("Body", "text"),
                                   "preview" => true));
 
-            $this->setFilter("title", array("markup_title", "markup_post_title"));
-            $this->setFilter("body", array("markup_text", "markup_post_text"));
+            $this->setFilter("title", array("markup_post_title", "markup_title"));
+            $this->setFilter("body", array("markup_post_text", "markup_text"));
         }
 
         public function submit() {
