@@ -637,6 +637,7 @@
          */
         private function filter() {
             $class = camelize($this->feather);
+            $touched = array();
 
             $trigger = Trigger::current();
             $trigger->filter($this, "filter_post");
@@ -644,26 +645,32 @@
             # Custom filters.
             if (isset(Feathers::$custom_filters[$class]))
                 foreach (Feathers::$custom_filters[$class] as $custom_filter) {
-                    $varname = $custom_filter["field"]."_unfiltered";
+                    $field = $custom_filter["field"];
+                    $varname = $field."_unfiltered";
 
-                    if (!isset($this->$varname))
-                        $this->$varname = @$this->$custom_filter["field"];
+                    if (!in_array($this->$varname, $touched)) {
+                        $this->$varname = isset($this->$field) ? $this->$field : null ;
+                        $touched[] = $this->$varname;
+                    }
 
-                    $this->$custom_filter["field"] = call_user_func_array(array(Feathers::$instances[$this->feather],
-                                                                                $custom_filter["name"]),
-                                                                          array($this->$custom_filter["field"], $this));
+                    $this->$field = call_user_func_array(array(Feathers::$instances[$this->feather],
+                                                               $custom_filter["name"]),
+                                                         array($this->$field, $this));
                 }
 
             # Trigger filters.
             if (isset(Feathers::$filters[$class]))
                 foreach (Feathers::$filters[$class] as $filter) {
-                    $varname = $filter["field"]."_unfiltered";
+                    $field = $filter["field"];
+                    $varname = $field."_unfiltered";
 
-                    if (!isset($this->$varname))
-                        $this->$varname = @$this->$filter["field"];
+                    if (!in_array($this->$varname, $touched)) {
+                        $this->$varname = isset($this->$field) ? $this->$field : null ;
+                        $touched[] = $this->$varname;
+                    }
 
-                    if (isset($this->$filter["field"]) and !empty($this->$filter["field"]))
-                        $trigger->filter($this->$filter["field"], $filter["name"], $this);
+                    if (isset($this->$field) and !empty($this->$field))
+                        $trigger->filter($this->$field, $filter["name"], $this);
                 }
         }
 
