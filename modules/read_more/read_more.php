@@ -1,8 +1,8 @@
 <?php
     class ReadMore extends Modules {
         public function __init() {
-            # Replace comment codes before markup modules filters them.
-            $this->setPriority("markup_post_text", 4);
+            # Truncate in "markup_post_text" before Markdown filtering in "markup_text".
+            $this->setPriority("markup_post_text", 1);
         }
 
         public function markup_post_text($text, $post = null) {
