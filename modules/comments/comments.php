@@ -345,7 +345,7 @@
             fallback($_POST['auto_reload_comments'], 30);
 
             $config = Config::current();
-            $config->set("allowed_comment_html", explode(", ", $_POST['allowed_comment_html']));
+            $config->set("allowed_comment_html", array_map("trim", explode(",", $_POST['allowed_comment_html'])));
             $config->set("default_comment_status", $_POST['default_comment_status']);
             $config->set("comments_per_page", (int) $_POST['comments_per_page']);
             $config->set("auto_reload_comments", (int) $_POST['auto_reload_comments']);
