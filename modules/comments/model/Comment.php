@@ -24,27 +24,12 @@
             if ($this->no_results)
                 return false;
 
-            $this->body_unfiltered = $this->body;
-            $group = ($this->user_id and !$this->user->no_results) ?
-                         $this->user->group :
-                         new Group(Config::current()->guest_group);
-
             $this->filtered = !isset($options["filter"]) or $options["filter"];
 
-            $trigger = Trigger::current();
+            Trigger::current()->filter($this, "comment");
 
-            $trigger->filter($this, "comment");
-
-            if ($this->filtered) {
-                if ($this->status != "pingback" and !$group->can("code_in_comments"))
-                    $this->body = strip_tags($this->body, "<".join("><", Config::current()->allowed_comment_html).">");
-
-                $this->body_unfiltered = $this->body;
-
-                $trigger->filter($this->body, array("markup_text", "markup_comment_text"));
-
-                $trigger->filter($this, "filter_comment");
-            }
+            if ($this->filtered)
+                $this->filter();
         }
 
         /**
@@ -262,6 +247,9 @@
                                          "created_at" => $created_at,
                                          "updated_at" => $updated_at));
 
+            if ($this->filtered)
+                $this->filter();
+
             Trigger::current()->call("update_comment", $this);
         }
 
@@ -372,6 +360,26 @@
         static function user_count($user_id) {
             $count = SQL::current()->count("comments", array("user_id" => $user_id));
             return $count;
+        }
+
+        /**
+         * Function: filter
+         * Filters the comment through filter_comment and markup filters.
+         */
+        private function filter() {
+            $config = Config::current();
+            $trigger = Trigger::current();
+            $trigger->filter($this, "filter_comment");
+
+            $this->body_unfiltered = $this->body;
+
+            $group = (!empty($this->user_id) and !$this->user->no_results) ?
+                $this->user->group : new Group($config->guest_group) ;
+
+            if ($this->status != "pingback" and !$group->can("code_in_comments"))
+                $this->body = strip_tags($this->body, "<".join("><", $config->allowed_comment_html).">");
+
+            $trigger->filter($this->body, array("markup_comment_text", "markup_text"));
         }
 
         /**
