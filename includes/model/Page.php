@@ -27,9 +27,7 @@
 
             $this->filtered = (!isset($options["filter"]) or $options["filter"]);
 
-            $trigger = Trigger::current();
-
-            $trigger->filter($this, "page");
+            Trigger::current()->filter($this, "page");
 
             if ($this->filtered)
                 $this->filter();
@@ -178,9 +176,11 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
+            $slug = $url;
+
             # Update all values of this page.
             foreach (array("title", "body", "user_id", "parent_id", "public", "show_in_list",
-                           "list_order", "clean", "url", "created_at", "updated_at") as $attr)
+                           "list_order", "clean", "url", "slug", "created_at", "updated_at") as $attr)
                 $this->$attr = $$attr;
 
             $new_values = array("title" =>        $title,

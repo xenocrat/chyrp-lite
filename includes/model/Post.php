@@ -76,17 +76,15 @@
             if ($this->no_results)
                 return false;
 
+            $this->slug = $this->url;
+
+            $this->filtered = (!isset($options["filter"]) or $options["filter"]);
+
             $this->attribute_values = (array) $this->attribute_values;
             $this->attribute_names  = (array) $this->attribute_names;
 
             $this->attributes = ($this->attribute_names) ?
-                                    array_combine($this->attribute_names, $this->attribute_values) :
-                                    array() ;
-
-            $this->filtered = (!isset($options["filter"]) or $options["filter"]);
-            $this->slug = $this->url;
-
-            fallback($this->clean, $this->url);
+                array_combine($this->attribute_names, $this->attribute_values) : array() ;
 
             foreach($this->attributes as $key => $val)
                 if (!empty($key))
@@ -301,8 +299,10 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
+            $slug = $url;
+
             # Update all values of this post.
-            foreach (array("user_id", "pinned", "status", "clean", "url", "created_at", "updated_at") as $attr)
+            foreach (array("user_id", "pinned", "status", "clean", "url", "slug", "created_at", "updated_at") as $attr)
                 $this->$attr = $$attr;
 
             $new_values = array("pinned"     => $pinned,
