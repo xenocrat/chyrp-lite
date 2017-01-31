@@ -344,8 +344,20 @@
             fallback($_POST['comments_per_page'], 25);
             fallback($_POST['auto_reload_comments'], 30);
 
+            # Split at the comma.
+            $allowed_comment_html = explode(",", $_POST['allowed_comment_html']);
+
+            # Remove whitespace.
+            $allowed_comment_html = array_map("trim", $allowed_comment_html);
+
+            # Remove duplicates.
+            $allowed_comment_html = array_unique($allowed_comment_html);
+
+            # Remove empties.
+            $allowed_comment_html = array_diff($allowed_comment_html, array(""));
+
             $config = Config::current();
-            $config->set("allowed_comment_html", array_map("trim", explode(",", $_POST['allowed_comment_html'])));
+            $config->set("allowed_comment_html", $allowed_comment_html);
             $config->set("default_comment_status", $_POST['default_comment_status']);
             $config->set("comments_per_page", (int) $_POST['comments_per_page']);
             $config->set("auto_reload_comments", (int) $_POST['auto_reload_comments']);
@@ -550,6 +562,14 @@
             echo '<td class="post_comments value"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
         }
 
+        public function manage_users_column_header() {
+            echo '<th class="user_comments value">'.__("Comments", "comments").'</th>';
+        }
+
+        public function manage_users_column($user) {
+            echo '<td class="user_comments value">'.$user->comment_count.'</td>';
+        }
+
         public function javascript() {
             $config  = Config::current();
             include MODULES_DIR.DIR."comments".DIR."javascript.php";
@@ -711,15 +731,14 @@
         }
 
         public function post_comment_count_attr($attr, $post) {
-            if (isset($this->comment_counts))
-                return fallback($this->comment_counts[$post->id], 0);
+            if (isset($this->post_comment_counts))
+                return fallback($this->post_comment_counts[$post->id], 0);
 
             $counts = SQL::current()->select("comments",
                                              array("COUNT(post_id) AS total", "post_id as post_id"),
-                                             array("status not" => "spam", "status != 'denied' OR (
-                                                      (user_id != 0 AND user_id = :visitor_id) OR (
-                                                            id IN ".self::visitor_comments()."))"
-                                                  ),
+                                             array("status not" => "spam",
+                                                   "status != 'denied' OR
+                                                   ((user_id != 0 AND user_id = :visitor_id) OR (id IN ".self::visitor_comments()."))"),
                                              null,
                                              array(":visitor_id" => Visitor::current()->id),
                                              null,
@@ -727,9 +746,30 @@
                                              "post_id");
 
             foreach ($counts->fetchAll() as $count)
-                $this->comment_counts[$count["post_id"]] = (int) $count["total"];
+                $this->post_comment_counts[$count["post_id"]] = (int) $count["total"];
 
-            return fallback($this->comment_counts[$post->id], 0);
+            return fallback($this->post_comment_counts[$post->id], 0);
+        }
+
+        public function user_comment_count_attr($attr, $user) {
+            if (isset($this->user_comment_counts))
+                return fallback($this->user_comment_counts[$user->id], 0);
+
+            $counts = SQL::current()->select("comments",
+                                             array("COUNT(user_id) AS total", "user_id as user_id"),
+                                             array("status not" => "spam",
+                                                   "status != 'denied' OR
+                                                   ((user_id != 0 AND user_id = :visitor_id) OR (id IN ".self::visitor_comments()."))"),
+                                             null,
+                                             array(":visitor_id" => Visitor::current()->id),
+                                             null,
+                                             null,
+                                             "user_id");
+
+            foreach ($counts->fetchAll() as $count)
+                $this->user_comment_counts[$count["user_id"]] = (int) $count["total"];
+
+            return fallback($this->user_comment_counts[$user->id], 0);
         }
 
         public function post_latest_comment_attr($attr, $post) {

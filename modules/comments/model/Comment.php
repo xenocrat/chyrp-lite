@@ -354,32 +354,24 @@
         }
 
         /**
-         * Function: user_count
-         * Counts a user's comments.
-         */
-        static function user_count($user_id) {
-            $count = SQL::current()->count("comments", array("user_id" => $user_id));
-            return $count;
-        }
-
-        /**
          * Function: filter
          * Filters the comment through filter_comment and markup filters.
          */
         private function filter() {
-            $config = Config::current();
             $trigger = Trigger::current();
             $trigger->filter($this, "filter_comment");
 
             $this->body_unfiltered = $this->body;
+            $trigger->filter($this->body, array("markup_comment_text", "markup_text"));
+
+            $config = Config::current();
 
             $group = (!empty($this->user_id) and !$this->user->no_results) ?
-                $this->user->group : new Group($config->guest_group) ;
+                $this->user->group :
+                new Group($config->guest_group) ;
 
             if ($this->status != "pingback" and !$group->can("code_in_comments"))
-                $this->body = strip_tags($this->body, "<".join("><", $config->allowed_comment_html).">");
-
-            $trigger->filter($this->body, array("markup_comment_text", "markup_text"));
+                $this->body = strip_tags($this->body, "<".implode("><", $config->allowed_comment_html).">");
         }
 
         /**
