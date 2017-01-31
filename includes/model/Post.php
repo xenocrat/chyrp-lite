@@ -646,11 +646,11 @@
             if (isset(Feathers::$custom_filters[$class]))
                 foreach (Feathers::$custom_filters[$class] as $custom_filter) {
                     $field = $custom_filter["field"];
-                    $varname = $field."_unfiltered";
+                    $field_unfiltered = $field."_unfiltered";
 
-                    if (!in_array($this->$varname, $touched)) {
-                        $this->$varname = isset($this->$field) ? $this->$field : null ;
-                        $touched[] = $this->$varname;
+                    if (!in_array($field_unfiltered, $touched)) {
+                        $this->$field_unfiltered = isset($this->$field) ? $this->$field : null ;
+                        $touched[] = $field_unfiltered;
                     }
 
                     $this->$field = call_user_func_array(array(Feathers::$instances[$this->feather],
@@ -662,11 +662,11 @@
             if (isset(Feathers::$filters[$class]))
                 foreach (Feathers::$filters[$class] as $filter) {
                     $field = $filter["field"];
-                    $varname = $field."_unfiltered";
+                    $field_unfiltered = $field."_unfiltered";
 
-                    if (!in_array($this->$varname, $touched)) {
-                        $this->$varname = isset($this->$field) ? $this->$field : null ;
-                        $touched[] = $this->$varname;
+                    if (!in_array($field_unfiltered, $touched)) {
+                        $this->$field_unfiltered = isset($this->$field) ? $this->$field : null ;
+                        $touched[] = $field_unfiltered;
                     }
 
                     if (isset($this->$field) and !empty($this->$field))
