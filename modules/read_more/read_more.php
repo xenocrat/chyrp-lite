@@ -19,7 +19,7 @@
             $url = (!$post->no_results) ? $post->url() : "#" ;
             $split = preg_split("/<!-- *more([^>]*)?-->/i", $text, -1, PREG_SPLIT_NO_EMPTY);
 
-            return $split[0].'<a class="read_more" href="'.$url.'">'.$more.'</a>';
+            return $split[0].'<a class="read_more" href="'.$url.'">'.fix($more).'</a>';
         }
 
         public function title_from_excerpt($text) {
