@@ -1345,8 +1345,10 @@
                 foreach ($imports["groups"] as $name => $permissions) {
                     $group = new Group(array("name" => (string) $name));
 
-                    if ($group->no_results)
-                        $trigger->call("import_chyrp_group", Group::add($name, $permissions));
+                    if ($group->no_results) {
+                        $group = Group::add($name, $permissions);
+                        $trigger->call("import_chyrp_group", $group);
+                    }
                 }
             }
 
@@ -1355,9 +1357,11 @@
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
                 foreach ($imports["users"] as $login => $user) {
-                    $group = new Group(array("name" => (string) fallback($user["group"])));
+                    $user = new User(array("login" => (string) $login));
 
-                    if (!$sql->count("users", array("login" => $login)))
+                    if ($user->no_results) {
+                        $group = new Group(array("name" => (string) fallback($user["group"])));
+
                         $user = User::add($login,
                                           fallback($user["password"], User::hashPassword(random(8))),
                                           fallback($user["email"], ""),
@@ -1367,7 +1371,8 @@
                                           fallback($user["approved"], false),
                                           fallback($user["joined_at"]), datetime());
 
-                    $trigger->call("import_chyrp_user", $user);
+                        $trigger->call("import_chyrp_user", $user);
+                    }
                 }
             }
 
