@@ -690,8 +690,6 @@
                         $latest_timestamp);
 
             foreach ($comments as $comment) {
-                $trigger->call("feed_comment", $comment);
-
                 $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
 
                 $tagged = substr(strstr(url("id/".$comment->post->id)."#comment_".$comment->id, "//"), 2);
@@ -708,7 +706,7 @@
                              $comment->author,
                              $comment->author_url);
 
-                $trigger->call("comments_feed_item", $comment->id);
+                $trigger->call("comments_feed_item", $comment);
             }
 
             $atom->close();
