@@ -1704,9 +1704,11 @@
          * Previews the theme.
          */
         public function preview_theme() {
-            Trigger::current()->call("preview_theme", !empty($_POST['theme']));
+            $started = !empty($_POST['theme']);
 
-            if (empty($_POST['theme'])) {
+            Trigger::current()->call("preview_theme", $started);
+
+            if (!$started) {
                 unset($_SESSION['theme']);
                 Flash::notice(__("Preview stopped."), "themes");
             }
