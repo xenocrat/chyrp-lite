@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-01-28 19:14+0000\n"
+"POT-Creation-Date: 2017-02-01 21:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -53,7 +53,7 @@ msgstr ""
 
 #: modules/comments/admin/pages/comment_settings.twig:23
 #: modules/comments/admin/pages/edit_comment.twig:42
-#: modules/comments/admin/pages/manage_spam.twig:20
+#: modules/comments/admin/pages/manage_spam.twig:19
 msgid "Spam"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:20
 #: modules/comments/admin/pages/manage_comments.twig:26
-#: modules/comments/admin/pages/manage_spam.twig:27
+#: modules/comments/admin/pages/manage_spam.twig:26
 msgid "Author"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:62
 #: modules/comments/admin/pages/manage_comments.twig:93
-#: modules/comments/admin/pages/manage_spam.twig:79
+#: modules/comments/admin/pages/manage_spam.twig:78
 msgid "Delete"
 msgstr ""
 
@@ -149,34 +149,35 @@ msgid "Manage Comments"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:19
-#: modules/comments/comments.php:378
-#: modules/comments/comments.php:551
+#: modules/comments/comments.php:381
+#: modules/comments/comments.php:558
+#: modules/comments/comments.php:566
 #: modules/comments/info.php:3
 msgid "Comments"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:25
-#: modules/comments/admin/pages/manage_spam.twig:26
+#: modules/comments/admin/pages/manage_spam.twig:25
 msgid "Post"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:27
-#: modules/comments/admin/pages/manage_spam.twig:28
+#: modules/comments/admin/pages/manage_spam.twig:27
 msgid "Added"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:82
-#: modules/comments/admin/pages/manage_spam.twig:71
+#: modules/comments/admin/pages/manage_spam.twig:70
 msgid "With selected:"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:84
-#: modules/comments/admin/pages/manage_spam.twig:73
+#: modules/comments/admin/pages/manage_spam.twig:72
 msgid "Deny"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:87
-#: modules/comments/admin/pages/manage_spam.twig:76
+#: modules/comments/admin/pages/manage_spam.twig:75
 msgid "Approve"
 msgstr ""
 
@@ -186,11 +187,6 @@ msgstr ""
 
 #: modules/comments/admin/pages/manage_spam.twig:3
 msgid "Manage Spam"
-msgstr ""
-
-#: modules/comments/admin/pages/manage_spam.twig:16
-#, php-format
-msgid "Delete All (%d)"
 msgstr ""
 
 #: modules/comments/comments.php:22
@@ -284,16 +280,16 @@ msgstr ""
 #: modules/comments/comments.php:148
 #: modules/comments/comments.php:227
 #: modules/comments/comments.php:248
-#: modules/comments/comments.php:406
-#: modules/comments/comments.php:613
-#: modules/comments/comments.php:627
-#: modules/comments/comments.php:644
+#: modules/comments/comments.php:410
+#: modules/comments/comments.php:628
+#: modules/comments/comments.php:642
+#: modules/comments/comments.php:659
 msgid "Comment not found."
 msgstr ""
 
 #: modules/comments/comments.php:151
-#: modules/comments/comments.php:409
-#: modules/comments/comments.php:647
+#: modules/comments/comments.php:413
+#: modules/comments/comments.php:662
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr ""
 
@@ -303,115 +299,107 @@ msgstr ""
 
 #: modules/comments/comments.php:222
 #: modules/comments/comments.php:240
-#: modules/comments/comments.php:622
+#: modules/comments/comments.php:637
 msgid "An ID is required to delete a comment."
 msgstr ""
 
 #: modules/comments/comments.php:230
 #: modules/comments/comments.php:251
-#: modules/comments/comments.php:630
+#: modules/comments/comments.php:645
 msgid "You do not have sufficient privileges to delete this comment."
 msgstr ""
 
 #: modules/comments/comments.php:255
-#: modules/comments/comments.php:633
+#: modules/comments/comments.php:648
 msgid "Comment deleted."
 msgstr ""
 
 #: modules/comments/comments.php:261
-#: modules/comments/comments.php:416
+#: modules/comments/comments.php:420
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr ""
 
-#: modules/comments/comments.php:277
-msgid "You do not have sufficient privileges to delete comments."
-msgstr ""
-
-#: modules/comments/comments.php:281
-msgid "All spam deleted."
-msgstr ""
-
-#: modules/comments/comments.php:288
+#: modules/comments/comments.php:279
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:291
+#: modules/comments/comments.php:282
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:294
+#: modules/comments/comments.php:285
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:297
+#: modules/comments/comments.php:288
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:302
+#: modules/comments/comments.php:293
 msgid "Comment Status"
 msgstr ""
 
-#: modules/comments/comments.php:316
+#: modules/comments/comments.php:307
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:319
+#: modules/comments/comments.php:310
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:330
+#: modules/comments/comments.php:321
 msgid "Pingback registered!"
-msgstr ""
-
-#: modules/comments/comments.php:390
-#, php-format
-msgid "Comments (%d)"
 msgstr ""
 
 #: modules/comments/comments.php:394
 #, php-format
+msgid "Comments (%d)"
+msgstr ""
+
+#: modules/comments/comments.php:398
+#, php-format
 msgid "Spam (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:401
-#: modules/comments/comments.php:639
+#: modules/comments/comments.php:405
+#: modules/comments/comments.php:654
 msgid "An ID is required to edit a comment."
 msgstr ""
 
-#: modules/comments/comments.php:451
+#: modules/comments/comments.php:458
 msgid "Selected comments deleted."
 msgstr ""
 
-#: modules/comments/comments.php:473
+#: modules/comments/comments.php:480
 msgid "Selected comments denied."
 msgstr ""
 
-#: modules/comments/comments.php:489
+#: modules/comments/comments.php:496
 msgid "Selected comments approved."
 msgstr ""
 
-#: modules/comments/comments.php:504
+#: modules/comments/comments.php:511
 msgid "Selected comments marked as spam."
 msgstr ""
 
-#: modules/comments/comments.php:574
+#: modules/comments/comments.php:589
 msgid "An ID is required to reload comments."
 msgstr ""
 
-#: modules/comments/comments.php:578
+#: modules/comments/comments.php:593
 msgid "Comments added since %I:%M %p on %B %d, %Y"
 msgstr ""
 
-#: modules/comments/comments.php:608
+#: modules/comments/comments.php:623
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:664
+#: modules/comments/comments.php:679
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:687
+#: modules/comments/comments.php:700
 #, php-format
 msgid "Comment #%d"
 msgstr ""
@@ -448,7 +436,7 @@ msgstr ""
 msgid "The comment cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
-#: modules/comments/model/Comment.php:317
+#: modules/comments/model/Comment.php:331
 msgid "Anon"
 msgstr ""
 

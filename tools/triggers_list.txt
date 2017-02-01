@@ -239,15 +239,15 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1349
+	includes/controller/Admin.php on line 1350
 Arguments:
-	Group::add($name, $permissions)
+	$group
 
 
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1370
+	includes/controller/Admin.php on line 1374
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1402
+	includes/controller/Admin.php on line 1407
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1429
+	includes/controller/Admin.php on line 1434
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1433
+	includes/controller/Admin.php on line 1438
 Arguments:
 	$imports
 
@@ -279,9 +279,9 @@ Arguments:
 preview_theme
 -------------
 Called from:
-	includes/controller/Admin.php on line 1702
+	includes/controller/Admin.php on line 1709
 Arguments:
-	!empty($_POST['theme'])
+	$started
 
 
 can_not_view_page
@@ -385,7 +385,7 @@ Arguments:
 add_page
 --------
 Called from:
-	includes/model/Page.php on line 126
+	includes/model/Page.php on line 117
 Arguments:
 	$page
 
@@ -393,7 +393,7 @@ Arguments:
 update_page
 -----------
 Called from:
-	includes/model/Page.php on line 211
+	includes/model/Page.php on line 207
 Arguments:
 	$this, $old
 
@@ -401,7 +401,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 238
+	includes/model/Post.php on line 236
 Arguments:
 	$post, $options
 
@@ -409,7 +409,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 334
+	includes/model/Post.php on line 337
 Arguments:
 	$this, $old, $options
 
@@ -435,31 +435,31 @@ manage_comments_column_header
 Called from:
 	modules/categorize/admin/pages/manage_category.twig on line 30
 	modules/comments/admin/pages/manage_comments.twig on line 29
-	modules/comments/admin/pages/manage_spam.twig on line 29
+	modules/comments/admin/pages/manage_spam.twig on line 28
 
 
 add_category
 ------------
 Called from:
-	modules/categorize/model/Category.php on line 44
+	modules/categorize/model/Category.php on line 53
 Arguments:
-	$new->id
+	$new
 
 
 update_category
 ---------------
 Called from:
-	modules/categorize/model/Category.php on line 61
+	modules/categorize/model/Category.php on line 79
 Arguments:
-	$this->id
+	$this
 
 
 delete_category
 ---------------
 Called from:
-	modules/categorize/model/Category.php on line 70
+	modules/categorize/model/Category.php on line 92
 Arguments:
-	$new->id
+	$category
 
 
 edit_comment_options
@@ -474,49 +474,33 @@ manage_comments_column
 ----------------------
 Called from:
 	modules/comments/admin/pages/manage_comments.twig on line 54
-	modules/comments/admin/pages/manage_spam.twig on line 48
+	modules/comments/admin/pages/manage_spam.twig on line 47
 Arguments:
 	comment
-
-
-feed_comment
-------------
-Called from:
-	modules/comments/comments.php on line 678
-Arguments:
-	$comment
 
 
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 696
+	modules/comments/comments.php on line 709
 Arguments:
-	$comment->id
+	$comment
 
 
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 209
+	modules/comments/model/Comment.php on line 194
 Arguments:
-	$new->post_id, $new->id
+	$new
 
 
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 251
+	modules/comments/model/Comment.php on line 253
 Arguments:
-	$this->post_id, $this->id
-
-
-delete_comment
---------------
-Called from:
-	modules/comments/model/Comment.php on line 259
-Arguments:
-	$new->post_id, $new->id
+	$this
 
 
 add_like
@@ -524,21 +508,13 @@ add_like
 Called from:
 	modules/likes/model/Like.php on line 60
 Arguments:
-	$new->post_id, $new->id
-
-
-delete_like
------------
-Called from:
-	modules/likes/model/Like.php on line 73
-Arguments:
-	$new->post_id, $new->id
+	$new
 
 
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 98
+	modules/likes/model/Like.php on line 94
 Arguments:
 	$post_id
 
@@ -546,7 +522,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 117
+	modules/likes/model/Like.php on line 113
 Arguments:
 	$post_id
 
@@ -618,15 +594,7 @@ add_pingback
 Called from:
 	modules/pingable/model/Pingback.php on line 53
 Arguments:
-	$new->post_id, $new->id
-
-
-delete_pingback
----------------
-Called from:
-	modules/pingable/model/Pingback.php on line 62
-Arguments:
-	$new->post_id, $new->id
+	$new
 
 
 user_controls
@@ -828,7 +796,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1984
+	includes/controller/Admin.php on line 1991
 
 
 manage_nav
@@ -836,7 +804,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2013
+	includes/controller/Admin.php on line 2020
 
 
 settings_nav
@@ -844,7 +812,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2038
+	includes/controller/Admin.php on line 2045
 
 
 extend_nav
@@ -852,7 +820,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2056
+	includes/controller/Admin.php on line 2063
 
 
 feed_url
@@ -971,15 +939,7 @@ page
 Target:
 	$this
 Called from:
-	includes/model/Page.php on line 32
-
-
-filter_page
------------
-Target:
-	$this
-Called from:
-	includes/model/Page.php on line 41
+	includes/model/Page.php on line 30
 
 
 before_add_page
@@ -987,7 +947,7 @@ before_add_page
 Target:
 	$new_values
 Called from:
-	includes/model/Page.php on line 120
+	includes/model/Page.php on line 111
 
 
 before_update_page
@@ -995,7 +955,15 @@ before_update_page
 Target:
 	$new_values
 Called from:
-	includes/model/Page.php on line 205
+	includes/model/Page.php on line 198
+
+
+filter_page
+-----------
+Target:
+	$this
+Called from:
+	includes/model/Page.php on line 267
 
 
 post
@@ -1003,7 +971,7 @@ post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 95
+	includes/model/Post.php on line 93
 
 
 before_add_post
@@ -1011,7 +979,7 @@ before_add_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 217
+	includes/model/Post.php on line 215
 
 
 before_update_post
@@ -1027,7 +995,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 521
+	includes/model/Post.php on line 526
 
 
 title
@@ -1035,7 +1003,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 546
+	includes/model/Post.php on line 551
 Arguments:
 	$post
 
@@ -1045,7 +1013,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 563
+	includes/model/Post.php on line 568
 Arguments:
 	$post
 
@@ -1055,7 +1023,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 580
+	includes/model/Post.php on line 585
 Arguments:
 	$post
 
@@ -1065,7 +1033,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 637
+	includes/model/Post.php on line 643
 
 
 user
@@ -1113,7 +1081,7 @@ comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 36
+	modules/comments/model/Comment.php on line 29
 
 
 filter_comment
@@ -1121,4 +1089,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 46
+	modules/comments/model/Comment.php on line 362
