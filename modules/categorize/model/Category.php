@@ -87,8 +87,10 @@
             $trigger = Trigger::current();
             $sql = SQL::current();
 
-            if ($trigger->exists("delete_category"))
-                $trigger->call("delete_category", new self($category_id));
+            if ($trigger->exists("delete_category")) {
+                $category = new self($category_id);
+                $trigger->call("delete_category", $category);
+            }
 
             $sql->delete("categorize",
                          array("id" => $category_id));
