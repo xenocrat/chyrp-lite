@@ -149,20 +149,20 @@
 <div class="buttons confirmation">
 {% if route.action == "edit_post" %}
 {% if visitor.group.can("add_post") and post.status == "draft" %}
-<button type="submit" class="yay" id="publish" name="publish">
+<button type="submit" class="yay" name="publish" value="true">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% endif %}
-<button type="submit" id="save">
+<button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% else %}
 {% if visitor.group.can("add_post") %}
-<button type="submit" class="yay" id="publish">
+<button type="submit" class="yay">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
 </button>
 {% endif %}
-<button type="submit" id="save" name="draft" value="true">
+<button type="submit" name="draft" value="true">
 <img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
 </button>
 {% endif %}
