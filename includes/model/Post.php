@@ -231,7 +231,7 @@
                                         "privileged" => true));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if (Config::current()->send_pingbacks and $pingbacks and !isset($_POST['draft']))
+            if (Config::current()->send_pingbacks and $pingbacks and $post->status == "public")
                 foreach ($values as $key => $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
@@ -338,7 +338,7 @@
                 $this->filter();
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if (Config::current()->send_pingbacks and $pingbacks and isset($_POST['publish']) and !isset($_POST['draft']))
+            if (Config::current()->send_pingbacks and $pingbacks and $this->status == "public")
                 foreach ($values as $key => $value)
                     if (is_string($value))
                         send_pingbacks($value, $this);
