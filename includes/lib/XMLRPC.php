@@ -281,9 +281,6 @@
                               null,
                               ($args[3]["mt_allow_pings"] == "open"));
 
-            if ($post->no_results)
-                return new IXR_Error(404, __("Post not found."));
-
             $trigger->call("metaWeblog_newPost", $args[3], $post);
             return $post->id;
         }
