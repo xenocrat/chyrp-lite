@@ -253,10 +253,11 @@
          *     $pinned - Pin the post?
          *     $status - Post status
          *     $clean - A new slug for the post.
-         *     $url - A new unique URL for the post (created from $clean by default).
+         *     $url - A new unique URL for the post.
          *     $created_at - New @created_at@ timestamp for the post.
          *     $updated_at - New @updated_at@ timestamp for the post.
          *     $options - Options for the post.
+         *     $pingbacks - Send pingbacks?
          *
          * Notes:
          *     The caller is responsible for validating all supplied values.
@@ -272,7 +273,8 @@
                                $url        = null,
                                $created_at = null,
                                $updated_at = null,
-                               $options    = null) {
+                               $options    = null,
+                               $pingbacks  = true) {
             if ($this->no_results)
                 return false;
 
@@ -336,10 +338,10 @@
                 $this->filter();
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if (Config::current()->send_pingbacks and isset($_POST['publish']) and !isset($_POST['draft']))
+            if (Config::current()->send_pingbacks and $pingbacks and isset($_POST['publish']) and !isset($_POST['draft']))
                 foreach ($values as $key => $value)
                     if (is_string($value))
-                        send_pingbacks($value, $post);
+                        send_pingbacks($value, $this);
 
             $trigger->call("update_post", $this, $old, $options);
         }
