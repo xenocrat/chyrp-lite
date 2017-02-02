@@ -182,7 +182,7 @@
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
-            Flash::notice(__("Post created!"), oneof($post->url(), "write_post"));
+            Flash::notice(__("Post created!"), (($post->status == "public") ? $post->url() : "write_post"));
         }
 
         /**
@@ -215,13 +215,18 @@
          * Updates a post when the form is submitted.
          */
         public function update_post() {
+            $visitor = Visitor::current();
+
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
-            if (isset($_POST['publish']))
+            if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
+                $_POST['draft'] = 'true';
+
+            if (isset($_POST['publish']) and $visitor->group->can("add_post"))
                 $_POST['status'] = "public";
 
             $post = new Post($_POST['id'], array("drafts" => true));
@@ -1403,8 +1408,7 @@
                                       ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated),
                                       false);
 
-                    if (!$post->no_results)
-                        $trigger->call("import_chyrp_post", $entry, $post);
+                    $trigger->call("import_chyrp_post", $entry, $post);
                 }
             }
 
