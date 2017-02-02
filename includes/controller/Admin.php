@@ -1704,17 +1704,13 @@
          * Previews the theme.
          */
         public function preview_theme() {
-            $started = !empty($_POST['theme']);
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            Trigger::current()->call("preview_theme", $started);
-
-            if (!$started) {
+            if (empty($_POST['theme'])) {
                 unset($_SESSION['theme']);
                 Flash::notice(__("Preview stopped."), "themes");
             }
-
-            if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
