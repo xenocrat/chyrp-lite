@@ -178,7 +178,7 @@
                 show_404(__("Not Found"), __("Feather not found."));
 
             if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
-                $_POST['draft'] = 'true';
+                $_POST['draft'] = "true";
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
@@ -224,7 +224,7 @@
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
             if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
-                $_POST['draft'] = 'true';
+                $_POST['draft'] = "true";
 
             if (isset($_POST['publish']) and $visitor->group->can("add_post"))
                 $_POST['status'] = "public";
