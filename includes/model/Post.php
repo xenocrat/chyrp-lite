@@ -39,13 +39,14 @@
                 $options["where"] = array();
 
             $has_status = false;
+            $privileged = (isset($options["privileged"]) and $options["privileged"]);
 
             foreach ($options["where"] as $key => $val)
                 if (is_int($key) and substr_count($val, "status") or $key == "status")
                     $has_status = true;
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
-            if (!XML_RPC) {
+            if (!XML_RPC and !$privileged) {
                 $options["where"][] = self::feathers();
 
                 if (!$has_status) {
@@ -101,20 +102,21 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array(), $debug = false) {
+        static function find($options = array(), $options_for_object = array()) {
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
             elseif (!isset($options["where"]))
                 $options["where"] = array();
 
             $has_status = false;
+            $privileged = (isset($options["privileged"]) and $options["privileged"]);
 
             foreach ($options["where"] as $key => $val)
                 if ((is_int($key) and substr_count($val, "status")) or $key === "status")
                     $has_status = true;
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
-            if (!XML_RPC) {
+            if (!XML_RPC and !$privileged) {
                 $options["where"][] = self::feathers();
 
                 if (!$has_status) {
@@ -225,18 +227,17 @@
                                    "name"    => $name,
                                    "value"   => $value));
 
-            $post = new self($id, array("drafts" => true));
+            $post = new self($id, array("drafts" => true,
+                                        "privileged" => true));
 
-            if (!$post->no_results) {
-                # Attempt to send pingbacks to URLs discovered in post attribute values.
-                if (Config::current()->send_pingbacks and $pingbacks)
-                    foreach ($values as $key => $value)
+            # Attempt to send pingbacks to URLs discovered in post attribute values.
+            if (Config::current()->send_pingbacks and $pingbacks and !isset($_POST['draft']))
+                foreach ($values as $key => $value)
+                    if (is_string($value))
                         send_pingbacks($value, $post);
 
-                $trigger->call("add_post", $post, $options);
-            }
+            $trigger->call("add_post", $post, $options);
 
-            # Warning: the new post can be unfound due to insufficient privileges or disabled Feathers.
             return $post;
         }
 
@@ -333,6 +334,12 @@
 
             if ($this->filtered)
                 $this->filter();
+
+            # Attempt to send pingbacks to URLs discovered in post attribute values.
+            if (Config::current()->send_pingbacks and isset($_POST['publish']) and !isset($_POST['draft']))
+                foreach ($values as $key => $value)
+                    if (is_string($value))
+                        send_pingbacks($value, $post);
 
             $trigger->call("update_post", $this, $old, $options);
         }
