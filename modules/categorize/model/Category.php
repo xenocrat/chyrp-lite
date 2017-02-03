@@ -40,6 +40,12 @@
          *     $name - The display name for this category.
          *     $clean - The unique slug for this category.
          *     $show_on_home - Show in the categories list?
+         *
+         * Returns:
+         *     The newly created <Category>.
+         *
+         * See Also:
+         *     <update>
          */
         static function add($name, $clean, $show_on_home) {
             $sql = SQL::current();
@@ -62,13 +68,13 @@
          *     $name - The display name for this category.
          *     $clean - The unique slug for this category.
          *     $show_on_home - Show in the categories list?
+         *
+         * Returns:
+         *     The updated <Category>.
          */
         public function update($name, $clean, $show_on_home) {
-            $url = url("category/".$clean, MainController::current());
-
-            # Update all values of this category.
-            foreach (array("name", "clean", "show_on_home", "url") as $attr)
-                $this->$attr = $$attr;
+            if ($this->no_results)
+                return false;
 
             SQL::current()->update("categorize",
                                    array("id" => $this->id),
@@ -76,7 +82,14 @@
                                          "clean" => $clean,
                                          "show_on_home" => $show_on_home));
 
-            Trigger::current()->call("update_category", $this);
+            $category = new self(null, array("read_from" => array("id" => $this->id,
+                                                                  "name" => $name,
+                                                                  "clean" => $clean,
+                                                                  "show_on_home" => $show_on_home)));
+
+            Trigger::current()->call("update_category", $category, $this);
+
+            return $category;
         }
 
         /**

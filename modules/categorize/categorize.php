@@ -273,9 +273,9 @@
 
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
 
-            $category->update($_POST['name'],
-                              Category::check_clean(sanitize($clean, true, true)),
-                              !empty($_POST['show_on_home']));
+            $category = $category->update($_POST['name'],
+                                          Category::check_clean(sanitize($clean, true, true)),
+                                          !empty($_POST['show_on_home']));
 
             Flash::notice(__("Category updated.", "categorize"), "manage_category");
         }
