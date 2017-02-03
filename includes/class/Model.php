@@ -202,12 +202,10 @@
                 $id = $options["where"]["id"];
 
             $cache = (is_numeric($id) and isset(self::$caches[$model_name][$id])) ?
-                         self::$caches[$model_name][$id] :
-                         ((isset($options["read_from"]["id"]) and isset(self::$caches[$model_name][$options["read_from"]["id"]])) ?
-                             self::$caches[$model_name][$options["read_from"]["id"]] :
-                             (isset(self::$caches[$model_name][serialize($id)]) ?
-                                 self::$caches[$model_name][serialize($id)] :
-                                 array())) ;
+                        self::$caches[$model_name][$id] :
+                        (isset(self::$caches[$model_name][serialize($id)]) ?
+                            self::$caches[$model_name][serialize($id)] :
+                            array()) ;
 
             # Is this model already in the cache?
             if (!empty($cache)) {
@@ -400,12 +398,12 @@
          *     $model - The model name.
          *     $id - The ID of the object to delete.
          */
-        protected static function destroy($model, $id) {
+        protected static function destroy($model, $id, $options_for_object = array()) {
             $model = strtolower($model);
             $trigger = Trigger::current();
 
             if ($trigger->exists("delete_".$model))
-                $trigger->call("delete_".$model, new $model($id));
+                $trigger->call("delete_".$model, new $model($id, $options_for_object));
 
             SQL::current()->delete(pluralize($model), array("id" => $id));
         }
