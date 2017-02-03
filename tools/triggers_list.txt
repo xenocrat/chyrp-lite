@@ -233,13 +233,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1065
+	includes/controller/Admin.php on line 1070
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1350
+	includes/controller/Admin.php on line 1355
 Arguments:
 	$group
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1374
+	includes/controller/Admin.php on line 1379
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1407
+	includes/controller/Admin.php on line 1411
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1434
+	includes/controller/Admin.php on line 1438
 Arguments:
 	$entry, $page
 
@@ -271,17 +271,9 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1438
+	includes/controller/Admin.php on line 1442
 Arguments:
 	$imports
-
-
-preview_theme
--------------
-Called from:
-	includes/controller/Admin.php on line 1709
-Arguments:
-	$started
 
 
 can_not_view_page
@@ -345,7 +337,7 @@ Arguments:
 metaWeblog_newPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 287
+	includes/lib/XMLRPC.php on line 284
 Arguments:
 	$args[3], $post
 
@@ -353,7 +345,7 @@ Arguments:
 metaWeblog_editPost_preQuery
 ----------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 331
+	includes/lib/XMLRPC.php on line 328
 Arguments:
 	$args[3], $post
 
@@ -361,7 +353,7 @@ Arguments:
 metaWeblog_editPost
 -------------------
 Called from:
-	includes/lib/XMLRPC.php on line 342
+	includes/lib/XMLRPC.php on line 339
 Arguments:
 	$args[3], $post
 
@@ -377,9 +369,9 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 177
+	includes/model/Group.php on line 181
 Arguments:
-	$this, $old
+	$group, $this
 
 
 add_page
@@ -393,15 +385,15 @@ Arguments:
 update_page
 -----------
 Called from:
-	includes/model/Page.php on line 207
+	includes/model/Page.php on line 202
 Arguments:
-	$this, $old
+	$page, $this
 
 
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 236
+	includes/model/Post.php on line 242
 Arguments:
 	$post, $options
 
@@ -409,9 +401,9 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 337
+	includes/model/Post.php on line 348
 Arguments:
-	$this, $old, $options
+	$post, $this, $options
 
 
 add_user
@@ -425,9 +417,9 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 169
+	includes/model/User.php on line 170
 Arguments:
-	$this, $old
+	$user, $this
 
 
 manage_comments_column_header
@@ -441,7 +433,7 @@ Called from:
 add_category
 ------------
 Called from:
-	modules/categorize/model/Category.php on line 53
+	modules/categorize/model/Category.php on line 59
 Arguments:
 	$new
 
@@ -449,15 +441,15 @@ Arguments:
 update_category
 ---------------
 Called from:
-	modules/categorize/model/Category.php on line 79
+	modules/categorize/model/Category.php on line 90
 Arguments:
-	$this
+	$category, $this
 
 
 delete_category
 ---------------
 Called from:
-	modules/categorize/model/Category.php on line 92
+	modules/categorize/model/Category.php on line 105
 Arguments:
 	$category
 
@@ -490,7 +482,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 194
+	modules/comments/model/Comment.php on line 200
 Arguments:
 	$new
 
@@ -498,15 +490,15 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 253
+	modules/comments/model/Comment.php on line 268
 Arguments:
-	$this
+	$comment, $this
 
 
 add_like
 --------
 Called from:
-	modules/likes/model/Like.php on line 60
+	modules/likes/model/Like.php on line 63
 Arguments:
 	$new
 
@@ -514,7 +506,7 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 94
+	modules/likes/model/Like.php on line 97
 Arguments:
 	$post_id
 
@@ -522,7 +514,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 113
+	modules/likes/model/Like.php on line 116
 Arguments:
 	$post_id
 
@@ -592,7 +584,7 @@ Arguments:
 add_pingback
 ------------
 Called from:
-	modules/pingable/model/Pingback.php on line 53
+	modules/pingable/model/Pingback.php on line 56
 Arguments:
 	$new
 
@@ -740,7 +732,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1132
+	includes/controller/Admin.php on line 1137
 Arguments:
 	$post), true
 
@@ -750,7 +742,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1151
+	includes/controller/Admin.php on line 1156
 Arguments:
 	$post
 
@@ -760,7 +752,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1196
+	includes/controller/Admin.php on line 1201
 Arguments:
 	$page), true
 
@@ -770,7 +762,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1211
+	includes/controller/Admin.php on line 1216
 Arguments:
 	$page
 
@@ -780,7 +772,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1258
+	includes/controller/Admin.php on line 1263
 
 
 before_import
@@ -788,7 +780,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1320
+	includes/controller/Admin.php on line 1325
 
 
 write_nav
@@ -915,7 +907,7 @@ before_group_update_name
 Target:
 	$name
 Called from:
-	includes/model/Group.php on line 145
+	includes/model/Group.php on line 148
 
 
 before_group_update_permissions
@@ -923,7 +915,7 @@ before_group_update_permissions
 Target:
 	$permissions
 Called from:
-	includes/model/Group.php on line 146
+	includes/model/Group.php on line 149
 
 
 list_permissions
@@ -931,7 +923,7 @@ list_permissions
 Target:
 	$names
 Called from:
-	includes/model/Group.php on line 264
+	includes/model/Group.php on line 270
 
 
 page
@@ -955,7 +947,7 @@ before_update_page
 Target:
 	$new_values
 Called from:
-	includes/model/Page.php on line 198
+	includes/model/Page.php on line 193
 
 
 filter_page
@@ -963,7 +955,7 @@ filter_page
 Target:
 	$this
 Called from:
-	includes/model/Page.php on line 267
+	includes/model/Page.php on line 264
 
 
 post
@@ -971,7 +963,7 @@ post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 93
+	includes/model/Post.php on line 94
 
 
 before_add_post
@@ -979,7 +971,7 @@ before_add_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 215
+	includes/model/Post.php on line 217
 
 
 before_update_post
@@ -987,7 +979,7 @@ before_update_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 315
+	includes/model/Post.php on line 318
 
 
 title_from_excerpt
@@ -995,7 +987,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 526
+	includes/model/Post.php on line 539
 
 
 title
@@ -1003,7 +995,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 551
+	includes/model/Post.php on line 564
 Arguments:
 	$post
 
@@ -1013,7 +1005,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 568
+	includes/model/Post.php on line 581
 Arguments:
 	$post
 
@@ -1023,7 +1015,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 585
+	includes/model/Post.php on line 598
 Arguments:
 	$post
 
@@ -1033,7 +1025,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 643
+	includes/model/Post.php on line 656
 
 
 user
@@ -1057,7 +1049,7 @@ before_update_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 163
+	includes/model/User.php on line 161
 
 
 cacher_regenerate_triggers
@@ -1089,4 +1081,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 362
+	modules/comments/model/Comment.php on line 379
