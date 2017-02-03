@@ -327,14 +327,14 @@
 
             $trigger->call("metaWeblog_editPost_preQuery", $args[3], $post);
 
-            $post->update(array(XML_RPC_TITLE => $args[3]["title"],
-                                XML_RPC_DESCRIPTION => $content),
-                          null,
-                          $post->pinned,
-                          null,
-                          oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->clean),
-                          null,
-                          oneof($this->convertFromDateCreated($args[3]), $post->created_at));
+            $post = $post->update(array(XML_RPC_TITLE => $args[3]["title"],
+                                        XML_RPC_DESCRIPTION => $content),
+                                  null,
+                                  $post->pinned,
+                                  null,
+                                  oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->clean),
+                                  null,
+                                  oneof($this->convertFromDateCreated($args[3]), $post->created_at));
 
             $trigger->call("metaWeblog_editPost", $args[3], $post);
             return true;
