@@ -154,6 +154,12 @@
          *     $notify - Notification on follow-up comments.
          *     $created_at - The new comment's @created_at@ timestamp.
          *     $updated_at - The new comment's @updated_at@ timestamp.
+         *
+         * Returns:
+         *     The newly created <Comment>.
+         *
+         * See Also:
+         *     <update>
          */
         static function add($body,
                             $author,
@@ -223,34 +229,45 @@
          *     $notify - Notification on follow-up comments.
          *     $created_at - New @created_at@ timestamp for the comment.
          *     $updated_at - New @updated_at@ timestamp for the comment.
+         *
+         * Returns:
+         *     The updated <Comment>.
          */
-        public function update($body, $author, $author_url, $author_email, $status, $notify, $created_at = null, $updated_at = null) {
-            fallback($created_at, $this->created_at);
-            fallback($updated_at, datetime());
-            $body = sanitize_html($body);
-            $author = strip_tags($author);
-            $author_url = strip_tags($author_url);
-            $author_email = strip_tags($author_email);
+        public function update($body,
+                               $author,
+                               $author_url,
+                               $author_email,
+                               $status,
+                               $notify,
+                               $created_at = null,
+                               $updated_at = null) {
+            if ($this->no_results)
+                return false;
 
-            # Update all values of this comment.
-            foreach (array("body", "author", "author_url", "author_email", "status", "notify", "created_at", "updated_at") as $attr)
-                $this->$attr = $$attr;
+            $new_values = array("body" => sanitize_html($body),
+                                "author" => strip_tags($author),
+                                "author_url" => strip_tags($author_url),
+                                "author_email" => strip_tags($author_email),
+                                "status" => $status,
+                                "notify" => $notify,
+                                "created_at" => fallback($created_at, $this->created_at),
+                                "updated_at" => fallback($updated_at, datetime()));
 
             SQL::current()->update("comments",
                                    array("id" => $this->id),
-                                   array("body" => $body,
-                                         "author" => $author,
-                                         "author_url" => $author_url,
-                                         "author_email" => $author_email,
-                                         "status" => $status,
-                                         "notify" => $notify,
-                                         "created_at" => $created_at,
-                                         "updated_at" => $updated_at));
+                                   $new_values);
 
-            if ($this->filtered)
-                $this->filter();
+            $comment = new self(null, array("read_from" => array_merge($new_values,
+                                                                       array("id" => $this->id,
+                                                                             "author_ip" => $this->author_ip,
+                                                                             "author_agent" => $this->author_agent,
+                                                                             "post_id" => $this->post_id,
+                                                                             "user_id"=> $this->user_id,
+                                                                             "parent_id" => $this->parent_id))));
 
-            Trigger::current()->call("update_comment", $this);
+            Trigger::current()->call("update_comment", $comment, $this);
+
+            return $comment;
         }
 
         /**

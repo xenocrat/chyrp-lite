@@ -175,13 +175,13 @@
             $status = ($visitor->group->can("edit_comment")) ? fallback($_POST['status'], $comment->status) : $comment->status ;
             $created_at = ($visitor->group->can("edit_comment")) ? datetime(fallback($_POST['created_at'])) : $comment->created_at ;
 
-            $comment->update($_POST['body'],
-                             $_POST['author'],
-                             $_POST['author_url'],
-                             $_POST['author_email'],
-                             $status,
-                             $notify,
-                             $created_at);
+            $comment = $comment->update($_POST['body'],
+                                        $_POST['author'],
+                                        $_POST['author_url'],
+                                        $_POST['author_email'],
+                                        $status,
+                                        $notify,
+                                        $created_at);
 
             return array($comment, true, __("Comment updated.", "comments"));
         }
