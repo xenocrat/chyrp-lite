@@ -13,7 +13,7 @@
 {% endif %}
 {{ "Body" | translate("comments") }}
 </label>
-<textarea rows="12" name="body" id="body_field" data-preview="markup_text">{{ comment.body | fix }}</textarea>
+<textarea rows="12" name="body" id="body_field"{{ site.enable_markdown ? ' data-markdown' : '' }}>{{ comment.body | fix }}</textarea>
 </p>
 <div id="more_options" class="more_options">
 <p class="more_options_option">
