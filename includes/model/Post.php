@@ -39,14 +39,14 @@
                 $options["where"] = array();
 
             $has_status = false;
-            $privileged = (isset($options["privileged"]) and $options["privileged"]);
+            $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
 
             foreach ($options["where"] as $key => $val)
                 if (is_int($key) and substr_count($val, "status") or $key == "status")
                     $has_status = true;
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
-            if (!XML_RPC and !$privileged) {
+            if (!XML_RPC and !$skip_where) {
                 $options["where"][] = self::feathers();
 
                 if (!$has_status) {
@@ -109,14 +109,14 @@
                 $options["where"] = array();
 
             $has_status = false;
-            $privileged = (isset($options["privileged"]) and $options["privileged"]);
+            $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
 
             foreach ($options["where"] as $key => $val)
                 if ((is_int($key) and substr_count($val, "status")) or $key === "status")
                     $has_status = true;
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
-            if (!XML_RPC and !$privileged) {
+            if (!XML_RPC and !$skip_where) {
                 $options["where"][] = self::feathers();
 
                 if (!$has_status) {
@@ -220,19 +220,23 @@
 
             $id = $sql->latest("posts");
 
+            $attributes       = array_merge($values, $options);
+            $attribute_values = array_keys($attributes);
+            $attribute_names  = array_values($attributes);
+
             # Insert the post attributes.
-            foreach (array_merge($values, $options) as $name => $value)
+            foreach ($attributes as $name => $value)
                 $sql->insert("post_attributes",
                              array("post_id" => $id,
                                    "name"    => $name,
                                    "value"   => $value));
 
             $post = new self($id, array("drafts" => true,
-                                        "privileged" => true));
+                                        "skip_where" => true));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if (Config::current()->send_pingbacks and $pingbacks and $post->status == "public")
-                foreach ($values as $key => $value)
+                foreach ($attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
 
@@ -259,6 +263,9 @@
          *     $options - Options for the post.
          *     $pingbacks - Send pingbacks?
          *
+         * Returns:
+         *     The updated <Post>.
+         *
          * Notes:
          *     The caller is responsible for validating all supplied values.
          *
@@ -278,7 +285,6 @@
             if ($this->no_results)
                 return false;
 
-            $old = clone $this;
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
@@ -302,13 +308,8 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $slug = $url;
-
-            # Update all values of this post.
-            foreach (array("user_id", "pinned", "status", "clean", "url", "slug", "created_at", "updated_at") as $attr)
-                $this->$attr = $$attr;
-
-            $new_values = array("pinned"     => $pinned,
+            $new_values = array("user_id"    => $user_id,
+                                "pinned"     => $pinned,
                                 "status"     => $status,
                                 "clean"      => $clean,
                                 "url"        => $url,
@@ -321,29 +322,33 @@
                          array("id" => $this->id),
                          $new_values);
 
-            # Insert the post attributes.
-            foreach (array_merge($values, $options) as $name => $value)
-                if ($sql->count("post_attributes", array("post_id" => $this->id, "name" => $name)))
-                    $sql->update("post_attributes",
-                                 array("post_id" => $this->id,
-                                       "name" => $name),
-                                 array("value" => $this->$name = $value));
-                else
-                    $sql->insert("post_attributes",
-                                 array("post_id" => $this->id,
-                                       "name" => $name,
-                                       "value" => $this->$name = $value));
+            $attributes       = array_merge($values, $options);
+            $attribute_values = array_keys($attributes);
+            $attribute_names  = array_values($attributes);
 
-            if ($this->filtered)
-                $this->filter();
+            # Replace the post attributes.
+            foreach ($attributes as $name => $value)
+                $sql->replace("post_attributes",
+                              array("post_id", "name"),
+                              array("post_id" => $this->id,
+                                    "name" => $name,
+                                    "value" => $value));
+
+            $post = new self(null, array("read_from" => array_merge($new_values,
+                                                                    array("id"               => $this->id,
+                                                                          "feather"          => $this->feather,
+                                                                          "attribute_names"  => $attribute_names,
+                                                                          "attribute_values" => $attribute_values))));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if (Config::current()->send_pingbacks and $pingbacks and $this->status == "public")
-                foreach ($values as $key => $value)
+                foreach ($attribute_values as $value)
                     if (is_string($value))
-                        send_pingbacks($value, $this);
+                        send_pingbacks($value, $post);
 
-            $trigger->call("update_post", $this, $old, $options);
+            $trigger->call("update_post", $post, $this, $options);
+
+            return $post;
         }
 
         /**
@@ -354,7 +359,7 @@
          *     <Model::destroy>
          */
         static function delete($id) {
-            parent::destroy(get_class(), $id);
+            parent::destroy(get_class(), $id, array("skip_where" => true));
             SQL::current()->delete("post_attributes", array("post_id" => $id));
         }
 
