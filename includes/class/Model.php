@@ -191,6 +191,7 @@
          *     order - What to order the SQL result by.
          *     offset - Offset for SQL query.
          *     read_from - An array to read from instead of performing another query.
+         *     ignore_dupes - An array of columns in which duplicate values will be retained.
          */
         protected static function grab($model, $id, $options = array()) {
             $model_name = strtolower(get_class($model));
@@ -203,7 +204,7 @@
 
             $cache = (is_numeric($id) and isset(self::$caches[$model_name][$id])) ?
                         self::$caches[$model_name][$id] :
-                        (isset(self::$caches[$model_name][serialize($id)]) ?
+                        (($id !== null and isset(self::$caches[$model_name][serialize($id)])) ?
                             self::$caches[$model_name][serialize($id)] :
                             array()) ;
 
