@@ -237,7 +237,7 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            Feathers::$instances[$post->feather]->update($post);
+            $post = Feathers::$instances[$post->feather]->update($post);
 
             Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>', "manage_posts");
         }
@@ -453,13 +453,13 @@
             $listed = in_array($_POST['status'], array("listed", "teased"));
             $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
-            $page->update($_POST['title'],
-                          $_POST['body'],
-                          null,
-                          $_POST['parent_id'],
-                          $public,
-                          $listed,
-                          $list_order);
+            $page = $page->update($_POST['title'],
+                                  $_POST['body'],
+                                  null,
+                                  $_POST['parent_id'],
+                                  $public,
+                                  $listed,
+                                  $list_order);
 
             Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>', "manage_pages");
         }
@@ -700,13 +700,13 @@
             fallback($_POST['website'], "");
             fallback($_POST['group'], $config->default_group);
 
-            $user->update($_POST['login'],
-                          $password,
-                          $_POST['email'],
-                          $_POST['full_name'],
-                          $_POST['website'],
-                          $_POST['group'],
-                          (!$user->approved and $config->email_activation) ? false : true);
+            $user = $user->update($_POST['login'],
+                                  $password,
+                                  $_POST['email'],
+                                  $_POST['full_name'],
+                                  $_POST['website'],
+                                  $_POST['group'],
+                                  (!$user->approved and $config->email_activation) ? false : true);
 
             if (!$user->approved)
                 correspond("activate", array("login" => $user->login,
@@ -910,7 +910,7 @@
             if ($group->no_results)
                 show_404(__("Not Found"), __("Group not found."));
 
-            $group->update($_POST['name'], array_keys($_POST['permissions']));
+            $group = $group->update($_POST['name'], array_keys($_POST['permissions']));
 
             Flash::notice(__("Group updated."), "manage_groups");
         }

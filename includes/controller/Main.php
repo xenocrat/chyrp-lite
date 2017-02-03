@@ -523,7 +523,7 @@
             if ($user->approved)
                 Flash::notice(__("Your account has already been activated."), "/");
 
-            $user->update(null, null, null, null, null, null, true);
+            $user = $user->update(null, null, null, null, null, null, true);
 
             $_SESSION['user_id'] = $user->id;
 
@@ -549,7 +549,7 @@
                                          "to" => $user->email,
                                          "password" => $new_password));
 
-            $user->update(null, User::hashPassword($new_password));
+            $user = $user->update(null, User::hashPassword($new_password));
 
             Flash::notice(__("We have emailed you a new password."), "login");
         }
@@ -649,12 +649,12 @@
                     $password = (!empty($_POST['new_password1'])) ?
                         User::hashPassword($_POST['new_password1']) : $visitor->password ;
 
-                    $visitor->update($visitor->login,
-                                     $password,
-                                     $_POST['email'],
-                                     $_POST['full_name'],
-                                     $_POST['website'],
-                                     $visitor->group->id);
+                    $visitor = $visitor->update($visitor->login,
+                                                $password,
+                                                $_POST['email'],
+                                                $_POST['full_name'],
+                                                $_POST['website'],
+                                                $visitor->group->id);
 
                     Flash::notice(__("Your profile has been updated."), "/");
                 }
