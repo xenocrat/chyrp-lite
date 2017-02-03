@@ -22,7 +22,7 @@
 
             parent::grab($this, $group_id, $options);
 
-            $this->permissions = (array) oneof(@$this->permissions, array());
+            $this->permissions = (array) oneof($this->permissions, array());
 
             if ($this->no_results)
                 return false;
@@ -134,6 +134,9 @@
          * Parameters:
          *     $name - The new Name to set.
          *     $permissions - An array of the new permissions to set (IDs).
+         *
+         * Returns:
+         *     The updated <Group>.
          */
         public function update($name, $permissions) {
             if ($this->no_results)
@@ -145,15 +148,12 @@
             $trigger->filter($name, "before_group_update_name");
             $trigger->filter($permissions, "before_group_update_permissions");
 
-            $old = clone $this;
-
             # Grab valid permissions.
             $ids = $sql->select("permissions",
                                 "*",
                                 array("group_id" => 0))->grab("id");
 
-            $this->name        = $name;
-            $this->permissions = array_values(array_intersect($ids, $permissions));
+            $permissions = array_values(array_intersect($ids, $permissions));
 
             $sql->update("groups",
                          array("id" => $this->id),
@@ -163,7 +163,7 @@
             $sql->delete("permissions", array("group_id" => $this->id));
 
             # Insert the new permissions.
-            foreach ($this->permissions as $id)
+            foreach ($permissions as $id)
                 $sql->insert("permissions",
                              array("id" => $id,
                                    "name" => $sql->select("permissions",
@@ -174,7 +174,13 @@
                                                           1)->fetchColumn(),
                                    "group_id" => $this->id));
  
-            $trigger->call("update_group", $this, $old);
+            $group = new self(null, array("read_from" => array("id" => $this->id,
+                                                               "name" => $name,
+                                                               "permissions" => $permissions)));
+
+            $trigger->call("update_group", $group, $this);
+
+            return $group;
         }
 
         /**

@@ -129,6 +129,9 @@
          *     $website - The new Website to set.
          *     $group_id - The new <Group> to set.
          *
+         * Returns:
+         *     The updated <User>.
+         *
          * See Also:
          *     <add>
          */
@@ -146,11 +149,6 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $old = clone $this;
-
-            foreach (array("login", "password", "email", "full_name", "website", "group_id", "approved", "joined_at") as $attr)
-                $this->$attr = $$attr = ($$attr !== null ? $$attr : $this->$attr);
-
             $new_values = array("login"     => strip_tags($login),
                                 "password"  => $password,
                                 "email"     => strip_tags($email),
@@ -166,7 +164,12 @@
                          array("id" => $this->id),
                          $new_values);
 
-            $trigger->call("update_user", $this, $old);
+            $user = new self(null, array("read_from" => array_merge($new_values,
+                                                                    array("id" => $this->id))));
+
+            $trigger->call("update_user", $user, $this);
+
+            return $user;
         }
 
         /**

@@ -137,6 +137,9 @@
          *     $created_at - The page's "created" timestamp.
          *     $updated_at - The page's "last updated" timestamp.
          *
+         * Returns:
+         *     The updated <Page>.
+         *
          * Notes:
          *     The caller is responsible for validating all supplied values.
          */
@@ -154,7 +157,6 @@
             if ($this->no_results)
                 return false;
 
-            $old = clone $this;
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($title,        $this->title);
@@ -176,24 +178,17 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $slug = $url;
-
-            # Update all values of this page.
-            foreach (array("title", "body", "user_id", "parent_id", "public", "show_in_list",
-                           "list_order", "clean", "url", "slug", "created_at", "updated_at") as $attr)
-                $this->$attr = $$attr;
-
-            $new_values = array("title" =>        $title,
-                                "body" =>         $body,
-                                "user_id" =>      $user_id,
-                                "parent_id" =>    $parent_id,
-                                "public" =>       $public,
+            $new_values = array("title"        => $title,
+                                "body"         => $body,
+                                "user_id"      => $user_id,
+                                "parent_id"    => $parent_id,
+                                "public"       => $public,
                                 "show_in_list" => $show_in_list,
-                                "list_order" =>   $list_order,
-                                "clean" =>        $clean,
-                                "url" =>          $url,
-                                "created_at" =>   $created_at,
-                                "updated_at" =>   $updated_at);
+                                "list_order"   => $list_order,
+                                "clean"        => $clean,
+                                "url"          => $url,
+                                "created_at"   => $created_at,
+                                "updated_at"   => $updated_at);
 
             $trigger->filter($new_values, "before_update_page");
 
@@ -201,10 +196,12 @@
                          array("id" => $this->id),
                          $new_values);
 
-            if ($this->filtered)
-                $this->filter();
+            $page = new self(null, array("read_from" => array_merge($new_values,
+                                                                    array("id" => $this->id))));
 
-            $trigger->call("update_page", $this, $old);
+            $trigger->call("update_page", $page, $this);
+
+            return $page;
         }
 
         /**
