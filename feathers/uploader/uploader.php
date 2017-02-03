@@ -85,9 +85,9 @@
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
 
-            $post->update(array("filenames" => self::filenames_serialize($filenames),
-                                "caption" => $_POST['caption'],
-                                "title" => $_POST['title']));
+            return $post->update(array("filenames" => self::filenames_serialize($filenames),
+                                       "caption" => $_POST['caption'],
+                                       "title" => $_POST['title']));
         }
 
         public function title($post) {

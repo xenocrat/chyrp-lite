@@ -31,8 +31,8 @@
 
             fallback($_POST['title'], "");
 
-            $post->update(array("title" => $_POST['title'],
-                                "body" => $_POST['body']));
+            return $post->update(array("title" => $_POST['title'],
+                                       "body" => $_POST['body']));
         }
 
         public function title($post) {

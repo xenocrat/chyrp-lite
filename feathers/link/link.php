@@ -48,9 +48,9 @@
             fallback($_POST['description'], "");
             $_POST['source'] = add_scheme($_POST['source']);
 
-            $post->update(array("name" => $_POST['name'],
-                                "source" => $_POST['source'],
-                                "description" => $_POST['description']));
+            return $post->update(array("name" => $_POST['name'],
+                                       "source" => $_POST['source'],
+                                       "description" => $_POST['description']));
         }
 
         public function title($post) {

@@ -55,9 +55,9 @@
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
 
-            $post->update(array("title" => $_POST['title'],
-                                "filename" => $filename,
-                                "caption" => $_POST['caption']));
+            return $post->update(array("title" => $_POST['title'],
+                                       "filename" => $filename,
+                                       "caption" => $_POST['caption']));
         }
 
         public function title($post) {

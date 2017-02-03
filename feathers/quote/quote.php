@@ -34,8 +34,8 @@
 
             fallback($_POST['source'], "");
 
-            $post->update(array("quote" => $_POST['quote'],
-                                "source" => $_POST['source']));
+            return $post->update(array("quote" => $_POST['quote'],
+                                       "source" => $_POST['source']));
         }
 
         public function title($post) {
