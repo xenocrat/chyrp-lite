@@ -231,8 +231,7 @@
                                    "name"    => $name,
                                    "value"   => $value));
 
-            $post = new self($id, array("drafts" => true,
-                                        "skip_where" => true));
+            $post = new self($id, array("skip_where" => true));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if (Config::current()->send_pingbacks and $pingbacks and $post->status == "public")
