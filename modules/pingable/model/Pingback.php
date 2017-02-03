@@ -39,6 +39,9 @@
          *     $source - The URL of the blog post that pinged us.
          *     $title - The title of the blog post that pinged us.
          *     $created_at - The pingback creation date (optional).
+         *
+         * Returns:
+         *     The newly created <Pingback>.
          */
         static function add($post_id, $source, $title, $created_at = null) {
             $sql = SQL::current();

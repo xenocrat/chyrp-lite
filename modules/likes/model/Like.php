@@ -39,6 +39,9 @@
          *     $user_id - The ID of the user who liked the post.
          *     $timestamp - The datetime when the like was added.
          *     $session_hash - The session hash of the visitor.
+         *
+         * Returns:
+         *     The newly created <Like>.
          */
         static function add($post_id, $user_id, $timestamp, $session_hash) {
             $sql = SQL::current();
