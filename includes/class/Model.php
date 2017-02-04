@@ -398,6 +398,7 @@
          * Parameters:
          *     $model - The model name.
          *     $id - The ID of the object to delete.
+         *     $options_for_object - An array of options for the instantiation of the model.
          */
         protected static function destroy($model, $id, $options_for_object = array()) {
             $model = strtolower($model);
