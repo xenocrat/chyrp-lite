@@ -106,16 +106,22 @@
             $group_id = $sql->latest("groups");
 
             # Grab valid permissions.
-            $ids = $sql->select("permissions",
-                                "*",
-                                array("group_id" => 0))->grab("id");
+            $results = $sql->select("permissions",
+                                    "id, name",
+                                    array("group_id" => 0))->fetchAll();
 
-            foreach (array_intersect($ids, $permissions) as $id)
+            $valid_permissions = array();
+
+            foreach ($results as $permission)
+                $valid_permissions[$permission["id"]] = $permission["name"];
+
+            $permissions = array_intersect(array_keys($valid_permissions), $permissions);
+
+            # Insert the permissions for the new group.
+            foreach ($permissions as $id)
                 $sql->insert("permissions",
                              array("id" => $id,
-                                   "name" => $sql->select("permissions",
-                                                          "name",
-                                                          array("id" => $id))->fetchColumn(),
+                                   "name" => $valid_permissions[$id],
                                    "group_id" => $group_id));
 
             $group = new self($group_id);
@@ -149,29 +155,29 @@
             $trigger->filter($permissions, "before_group_update_permissions");
 
             # Grab valid permissions.
-            $ids = $sql->select("permissions",
-                                "*",
-                                array("group_id" => 0))->grab("id");
+            $results = $sql->select("permissions",
+                                    "id, name",
+                                    array("group_id" => 0))->fetchAll();
 
-            $permissions = array_values(array_intersect($ids, $permissions));
+            $valid_permissions = array();
+
+            foreach ($results as $permission)
+                $valid_permissions[$permission["id"]] = $permission["name"];
+
+            $permissions = array_intersect(array_keys($valid_permissions), $permissions);
 
             $sql->update("groups",
                          array("id" => $this->id),
                          array("name" => $name));
 
-            # Delete the old permissions.
+            # Delete the old permissions for this group.
             $sql->delete("permissions", array("group_id" => $this->id));
 
-            # Insert the new permissions.
+            # Insert the new permissions for this group.
             foreach ($permissions as $id)
                 $sql->insert("permissions",
                              array("id" => $id,
-                                   "name" => $sql->select("permissions",
-                                                          "name",
-                                                          array("id" => $id, "group_id" => 0),
-                                                          null,
-                                                          array(),
-                                                          1)->fetchColumn(),
+                                   "name" => $valid_permissions[$id],
                                    "group_id" => $this->id));
  
             $group = new self(null, array("read_from" => array("id" => $this->id,
