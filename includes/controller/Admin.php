@@ -1071,7 +1071,9 @@
 
             if (isset($_POST['posts'])) {
                 fallback($_POST['filter_posts'], "");
-                list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
+                list($where, $params) = keywords($_POST['filter_posts'],
+                                                 "post_attributes.value LIKE :query OR url LIKE :query",
+                                                 "posts");
 
                 if (!empty($_POST['month']))
                     $where["created_at like"] = $_POST['month']."-%";
@@ -1105,33 +1107,22 @@
                     if (strtotime($post->created_at) > $latest_timestamp)
                         $latest_timestamp = strtotime($post->created_at);
 
-                $id = substr(strstr($config->url, "//"), 2);
-                $id = str_replace("#", "/", $id);
-                $id = preg_replace("/(".preg_quote(parse_url($config->url, PHP_URL_HOST)).")/", "\\1,".date("Y", $latest_timestamp).":", $id, 1);
-
                 $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $posts_atom.= '    <title>'.fix($config->name).' | Posts</title>'."\r";
                 $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
-                $posts_atom.= '    <id>tag:'.parse_url($config->url, PHP_URL_HOST).','.date("Y", $latest_timestamp).':Chyrp</id>'."\r";
+                $posts_atom.= '    <id>'.fix($config->url).'</id>'."\r";
                 $posts_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
                 $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
                 $posts_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
 
                 foreach ($posts as $post) {
-                    $title = fix($post->title(), false);
-                    fallback($title, ucfirst($post->feather)." Post #".$post->id);
-
                     $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
-
-                    $tagged = substr(strstr(url("id/".$post->id), "//"), 2);
-                    $tagged = str_replace("#", "/", $tagged);
-                    $tagged = preg_replace("/(".preg_quote(parse_url($post->url(), PHP_URL_HOST)).")/", "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
-
                     $url = $post->url();
+
                     $posts_atom.= '    <entry xml:base="'.fix($url, true).'">'."\r";
-                    $posts_atom.= '        <title type="html">'.$title.'</title>'."\r";
-                    $posts_atom.= '        <id>tag:'.$tagged.'</id>'."\r";
+                    $posts_atom.= '        <title type="html">'.oneof(fix($post->title()), "Post #".$post->id).'</title>'."\r";
+                    $posts_atom.= '        <id>'.fix($url).'</id>'."\r";
                     $posts_atom.= '        <updated>'.when("c", $updated).'</updated>'."\r";
                     $posts_atom.= '        <published>'.when("c", $post->created_at).'</published>'."\r";
                     $posts_atom.= '        <link href="'.fix($trigger->filter($url, "post_export_url", $post), true).'" />'."\r";
@@ -1165,7 +1156,9 @@
 
             if (isset($_POST['pages'])) {
                 fallback($_POST['filter_pages'], "");
-                list($where, $params) = keywords($_POST['filter_pages'], "title LIKE :query OR body LIKE :query", "pages");
+                list($where, $params) = keywords($_POST['filter_pages'],
+                                                 "title LIKE :query OR body LIKE :query",
+                                                 "pages");
 
                 $pages = Page::find(array("where" => $where, "params" => $params, "order" => "id ASC"),
                                     array("filter" => false));
@@ -1180,22 +1173,18 @@
                 $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $pages_atom.= '    <title>'.fix($config->name).' | Pages</title>'."\r";
                 $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
-                $pages_atom.= '    <id>tag:'.parse_url($config->url, PHP_URL_HOST).','.date("Y", $latest_timestamp).':Chyrp</id>'."\r";
+                $pages_atom.= '    <id>'.fix($config->url).'</id>'."\r";
                 $pages_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
                 $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
                 $pages_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
 
                 foreach ($pages as $page) {
                     $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
-
-                    $tagged = substr(strstr($page->url(), "//"), 2);
-                    $tagged = str_replace("#", "/", $tagged);
-                    $tagged = preg_replace("/(".preg_quote(parse_url($page->url(), PHP_URL_HOST)).")/", "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
-
                     $url = $page->url();
+
                     $pages_atom.= '    <entry xml:base="'.fix($url, true).'" chyrp:parent_id="'.$page->parent_id.'">'."\r";
                     $pages_atom.= '        <title type="html">'.fix($page->title).'</title>'."\r";
-                    $pages_atom.= '        <id>tag:'.$tagged.'</id>'."\r";
+                    $pages_atom.= '        <id>'.fix($url).'</id>'."\r";
                     $pages_atom.= '        <updated>'.when("c", $updated).'</updated>'."\r";
                     $pages_atom.= '        <published>'.when("c", $page->created_at).'</published>'."\r";
                     $pages_atom.= '        <link href="'.fix($trigger->filter($url, "page_export_url", $page), true).'" />'."\r";
