@@ -114,6 +114,30 @@
         }
 
         /**
+         * Function: deletable
+         * Checks if the <User> can delete the object.
+         */
+        public function deletable($user = null) {
+            if ($this->no_results)
+                return false;
+
+            fallback($user, Visitor::current());
+            return $user->group->can("manage_categorize");
+        }
+
+        /**
+         * Function: editable
+         * Checks if the <User> can edit the object.
+         */
+        public function editable($user = null) {
+            if ($this->no_results)
+                return false;
+
+            fallback($user, Visitor::current());
+            return $user->group->can("manage_categorize");
+        }
+
+        /**
          * Function: check_clean
          * Checks if a given clean URL is already being used as another category's URL.
          *

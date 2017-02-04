@@ -17,7 +17,7 @@
             if ($confirm)
                 Category::uninstall();
 
-            Group::remove_permission('manage_categorize');
+            Group::remove_permission("manage_categorize");
             Route::current()->remove("category/(name)/");
         }
 
@@ -188,7 +188,7 @@
         }
 
         public function manage_nav($navs) {
-            if (Visitor::current()->group->can('manage_categorize'))
+            if (Visitor::current()->group->can("manage_categorize"))
                 $navs["manage_category"] = array("title" => __("Categories", "categorize"),
                                                  "selected" => array("new_category", "delete_category", "edit_category"));
 
@@ -201,7 +201,7 @@
         }
 
         public function admin_manage_category($admin) {
-            if (!Visitor::current()->group->can('manage_categorize'))
+            if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
             fallback($_GET['query'], "");
@@ -213,14 +213,14 @@
         }
 
         public function admin_new_category($admin) {
-            if (!Visitor::current()->group->can('manage_categorize'))
+            if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
             $admin->display("pages".DIR."new_category");
         }
 
         public function admin_add_category($admin) {
-            if (!Visitor::current()->group->can('manage_categorize'))
+            if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
