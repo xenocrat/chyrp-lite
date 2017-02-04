@@ -286,6 +286,9 @@
          * Checks if the <User> can edit the comment.
          */
         public function editable($user = null) {
+            if ($this->no_results)
+                return false;
+
             fallback($user, Visitor::current());
             return ($user->group->can("edit_comment") or
                     (logged_in() and $user->group->can("edit_own_comment") and $user->id == $this->user_id));
@@ -296,6 +299,9 @@
          * Checks if the <User> can delete the comment.
          */
         public function deletable($user = null) {
+            if ($this->no_results)
+                return false;
+
             fallback($user, Visitor::current());
             return ($user->group->can("delete_comment") or
                     (logged_in() and $user->group->can("delete_own_comment") and $user->id == $this->user_id));
