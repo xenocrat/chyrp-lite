@@ -813,8 +813,7 @@
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'],
-                                             "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
-                                             "users");
+                "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
             $this->display("pages".DIR."manage_users",
                            array("users" => new Paginator(User::find(array("placeholders" => true,
@@ -1072,8 +1071,7 @@
             if (isset($_POST['posts'])) {
                 fallback($_POST['filter_posts'], "");
                 list($where, $params) = keywords($_POST['filter_posts'],
-                                                 "post_attributes.value LIKE :query OR url LIKE :query",
-                                                 "posts");
+                    "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
                 if (!empty($_POST['month']))
                     $where["created_at like"] = $_POST['month']."-%";
@@ -1156,9 +1154,7 @@
 
             if (isset($_POST['pages'])) {
                 fallback($_POST['filter_pages'], "");
-                list($where, $params) = keywords($_POST['filter_pages'],
-                                                 "title LIKE :query OR body LIKE :query",
-                                                 "pages");
+                list($where, $params) = keywords($_POST['filter_pages'], "title LIKE :query OR body LIKE :query", "pages");
 
                 $pages = Page::find(array("where" => $where, "params" => $params, "order" => "id ASC"),
                                     array("filter" => false));
@@ -1228,13 +1224,20 @@
             if (isset($_POST['users'])) {
                 fallback($_POST['filter_users'], "");
                 list($where, $params) = keywords($_POST['filter_users'],
-                                                 "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
-                                                 "users");
+                    "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
                 $users_json = array();
-                $exclude = array("no_results", "group_id", "group", "id", "login", "belongs_to", "has_many", "has_one", "queryString");
+                $exclude = array("no_results",
+                                 "group_id",
+                                 "group",
+                                 "id",
+                                 "login",
+                                 "belongs_to",
+                                 "has_many",
+                                 "has_one",
+                                 "queryString");
 
                 foreach ($users as $user) {
                     $users_json[$user->login] = array();
@@ -1296,11 +1299,13 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
-                if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $imports["posts"]->generator != "Chyrp")
+                if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or
+                     $imports["posts"]->generator != "Chyrp")
                     Flash::warning(__("Posts export file is invalid."), "import");
 
             if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
-                if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $imports["pages"]->generator != "Chyrp")
+                if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or
+                     $imports["pages"]->generator != "Chyrp")
                     Flash::warning(__("Pages export file is invalid."), "import");
 
             if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']))
@@ -1973,7 +1978,9 @@
                     if (!feather_enabled($feather))
                         continue;
 
-                    $write["write_post/feather/".$feather] = array("title" => load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"],
+                    $name = load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"];
+
+                    $write["write_post/feather/".$feather] = array("title" => $name,
                                                                    "feather" => $feather);
                 }
 
