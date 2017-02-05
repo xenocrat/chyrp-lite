@@ -218,16 +218,16 @@
             $next = ($depth == "all") ? array() : $sql->select("posts",
                                                                "*",
                                                                array("status" => "public",
-                                                                     "posts.created_at <" => datetime($timestamp)),
-                                                               array("posts.id DESC"),
+                                                                     "created_at <" => datetime($timestamp)),
+                                                               array("id DESC"),
                                                                array(),
                                                                1)->grab("created_at");
 
             $prev = ($depth == "all") ? array() : $sql->select("posts",
                                                                "*",
                                                                array("status" => "public",
-                                                                     "posts.created_at >=" => datetime("@$timestamp +1 $depth")),
-                                                               array("posts.id ASC"),
+                                                                     "created_at >=" => datetime("@$timestamp +1 $depth")),
+                                                               array("id ASC"),
                                                                array(),
                                                                1)->grab("created_at");
 
