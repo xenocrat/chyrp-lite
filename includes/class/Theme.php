@@ -237,7 +237,7 @@
 
                     $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "$2", $filepath);
                     $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
-                    $tags[] = '<link rel="stylesheet" href="'.fix($href, true).'" type="text/css" media="all">';
+                    $tags[] = '<link rel="stylesheet" href="'.fix($href, true).'" type="text/css" media="all" charset="UTF-8">';
                 }
             }
 
