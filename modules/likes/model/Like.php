@@ -76,6 +76,18 @@
         }
 
         /**
+         * Function: deletable
+         * Checks if the <User> can delete the like.
+         */
+        public function deletable($user = null) {
+            if ($this->no_results)
+                return false;
+
+            fallback($user, Visitor::current());
+            return ($user->group->can("unlike_post") and (logged_in() and $user->id == $this->user_id));
+        }
+
+        /**
          * Function: create
          * Creates a like in the visitor's session values.
          *
