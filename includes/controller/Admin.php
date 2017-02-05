@@ -6,8 +6,10 @@
     class AdminController implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
-        public $urls = array('|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|' => '/?action=$1&amp;$2=$3&amp;$4=$5',
-                             '|/([^/]+)/([^/]+)/([^/]+)/$|'                 => '/?action=$1&amp;$2=$3');
+        public $urls = array(
+            '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|' => '/?action=$1&amp;$2=$3&amp;$4=$5',
+            '|/([^/]+)/([^/]+)/([^/]+)/$|'                 => '/?action=$1&amp;$2=$3'
+        );
 
         # Boolean: $displayed
         # Has anything been displayed?
