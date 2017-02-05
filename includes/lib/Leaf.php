@@ -104,7 +104,7 @@
      */
     function twig_function_paginate($array, $per_page = 10, $name = "twig") {
         # This is important for clean URL parsing in MainController.
-        $name = str_replace("_", "", $name)."_page";
+        $name = str_replace("_", "-", $name)."_page";
 
         $count = 1;
         $unique = $name;
