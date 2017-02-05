@@ -1101,18 +1101,12 @@
                 else
                     $posts = new Paginator(array());
 
-                $latest_timestamp = 0;
-
-                foreach ($posts as $post)
-                    if (strtotime($post->created_at) > $latest_timestamp)
-                        $latest_timestamp = strtotime($post->created_at);
-
                 $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $posts_atom.= '    <title>'.fix($config->name).' | Posts</title>'."\r";
                 $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
                 $posts_atom.= '    <id>'.fix($config->url).'</id>'."\r";
-                $posts_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
+                $posts_atom.= '    <updated>'.date("c").'</updated>'."\r";
                 $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
                 $posts_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
 
@@ -1161,18 +1155,12 @@
                 $pages = Page::find(array("where" => $where, "params" => $params, "order" => "id ASC"),
                                     array("filter" => false));
 
-                $latest_timestamp = 0;
-
-                foreach ($pages as $page)
-                    if (strtotime($page->created_at) > $latest_timestamp)
-                        $latest_timestamp = strtotime($page->created_at);
-
                 $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $pages_atom.= '    <title>'.fix($config->name).' | Pages</title>'."\r";
                 $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
                 $pages_atom.= '    <id>'.fix($config->url).'</id>'."\r";
-                $pages_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
+                $pages_atom.= '    <updated>'.date("c").'</updated>'."\r";
                 $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
                 $pages_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
 
