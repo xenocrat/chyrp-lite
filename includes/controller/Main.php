@@ -705,13 +705,13 @@
          * Grabs a random post and redirects to it.
          */
         public function random() {
-            $conds = array("posts.status" => "public");
+            $conds = array("status" => "public");
 
             if (isset($_GET['feather']))
-                $conds["posts.feather"] = preg_replace('|[^a-z]|i', '', $_GET['feather']);
+                $conds["feather"] = preg_replace('|[^a-z_\-]|i', '', $_GET['feather']);
 
             $random = SQL::current()->select("posts",
-                                             "posts.url",
+                                             "url",
                                              $conds,
                                              array("ORDER BY" => "RAND()"),
                                              array("LIMIT" => 1))->fetchObject();
@@ -732,9 +732,9 @@
 
             # Fetch posts for fallback or if we are being called as a responder.
             $result = SQL::current()->select("posts",
-                                             "posts.id",
-                                             array("posts.status" => "public"),
-                                             array("posts.id DESC"),
+                                             "id",
+                                             array("status" => "public"),
+                                             array("id DESC"),
                                              array(),
                                              $config->feed_items);
             $ids = array();
