@@ -115,7 +115,7 @@
 
         /**
          * Function: deletable
-         * Checks if the <User> can delete the object.
+         * Checks if the <User> can delete the category.
          */
         public function deletable($user = null) {
             if ($this->no_results)
@@ -127,7 +127,7 @@
 
         /**
          * Function: editable
-         * Checks if the <User> can edit the object.
+         * Checks if the <User> can edit the category.
          */
         public function editable($user = null) {
             if ($this->no_results)
