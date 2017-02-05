@@ -773,7 +773,9 @@
             if ($visitor->group->can("view_scheduled"))
                 $statuses[] = "scheduled";
 
-            return "(posts.status IN ('".implode("', '", $statuses)."') OR posts.status LIKE '%{".$visitor->group->id."}%') OR (posts.status LIKE '%{%' AND posts.user_id = ".$visitor->id.")";
+            return "(posts.status IN ('".implode("', '", $statuses)."')".
+                   " OR posts.status LIKE '%{".$visitor->group->id."}%')".
+                   " OR (posts.status LIKE '%{%' AND posts.user_id = ".$visitor->id.")";
         }
 
         /**
@@ -829,9 +831,9 @@
             $sql = SQL::current();
 
             $posts = $sql->select("posts",
-                                  "posts.id",
-                                  array("posts.created_at <=" => datetime(),
-                                        "posts.status" => "scheduled"))->fetchAll();
+                                  "id",
+                                  array("created_at <=" => datetime(),
+                                        "status" => "scheduled"))->fetchAll();
 
             foreach ($posts as $post)
                 $sql->update("posts",
