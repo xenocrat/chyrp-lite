@@ -118,8 +118,8 @@
         }
 
         public function post_pingback_count_attr($attr, $post) {
-            if (isset($this->pingback_counts))
-                return fallback($this->pingback_counts[$post->id], 0);
+            if (isset($this->post_pingback_counts))
+                return fallback($this->post_pingback_counts[$post->id], 0);
 
             $counts = SQL::current()->select("pingbacks",
                                              "COUNT(post_id) AS total, post_id as post_id",
@@ -131,9 +131,9 @@
                                              "post_id")->fetchAll();
 
             foreach ($counts as $count)
-                $this->pingback_counts[$count["post_id"]] = (int) $count["total"];
+                $this->post_pingback_counts[$count["post_id"]] = (int) $count["total"];
 
-            return fallback($this->pingback_counts[$post->id], 0);
+            return fallback($this->post_pingback_counts[$post->id], 0);
         }
 
         public function import_chyrp_post($entry, $post) {
