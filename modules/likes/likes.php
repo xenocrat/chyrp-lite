@@ -2,6 +2,10 @@
     require_once "model".DIR."Like.php";
 
     class Likes extends Modules {
+        public function __init() {
+            fallback($_SESSION["likes"], array());
+        }
+
         static function __install() {
             $config = Config::current();
 
@@ -152,8 +156,8 @@
         }
 
         public function post_like_count_attr($attr, $post) {
-            if (isset($this->like_counts))
-                return fallback($this->like_counts[$post->id], 0);
+            if (isset($this->post_like_counts))
+                return fallback($this->post_like_counts[$post->id], 0);
 
             $counts = SQL::current()->select("likes",
                                              "COUNT(post_id) AS total, post_id as post_id",
@@ -165,9 +169,33 @@
                                              "post_id")->fetchAll();
 
             foreach ($counts as $count)
-                $this->like_counts[$count["post_id"]] = (int) $count["total"];
+                $this->post_like_counts[$count["post_id"]] = (int) $count["total"];
 
-            return fallback($this->like_counts[$post->id], 0);
+            return fallback($this->post_like_counts[$post->id], 0);
+        }
+
+        public function user_like_count_attr($attr, $user) {
+            if (isset($this->user_like_counts))
+                return fallback($this->user_like_counts[$user->id], 0);
+
+            $counts = SQL::current()->select("likes",
+                                             "COUNT(user_id) AS total, user_id as user_id",
+                                             null,
+                                             null,
+                                             array(),
+                                             null,
+                                             null,
+                                             "user_id")->fetchAll();
+
+            foreach ($counts as $count)
+                $this->user_like_counts[$count["user_id"]] = (int) $count["total"];
+
+            return fallback($this->user_like_counts[$user->id], 0);
+        }
+
+        public function visitor_like_count_attr($attr, $visitor) {
+            return ($visitor->id == 0) ? 
+                count(array_diff($_SESSION["likes"], array(null))) : self::user_like_count_attr($attr, $visitor) ;
         }
 
         public function like_link($post) {

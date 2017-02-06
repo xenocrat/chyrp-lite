@@ -133,8 +133,6 @@
          * Determines if a visitor has liked a post and sets the session value.
          */
         static function discover($post_id) {
-            fallback($_SESSION["likes"], array());
-
             if (!array_key_exists($post_id, $_SESSION["likes"]))
                 if (logged_in()) {
                     $check = new self(array("post_id" => $post_id,
