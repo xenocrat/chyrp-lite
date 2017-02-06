@@ -46,6 +46,9 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
+            if (!$post->editable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to download a view count for this post."));
+
             $data = View::find(array("where" => array("post_id" => $post->id)));
 
             $filename = sanitize(camelize($post->title()), false, true)."_View_Count_".date("Y-m-d");
