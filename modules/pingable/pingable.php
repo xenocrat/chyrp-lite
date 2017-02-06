@@ -37,9 +37,6 @@
         }
 
         public function admin_delete_pingback($admin) {
-            if (!Visitor::current()->group->can("delete_pingback"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
-
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a pingback.", "pingable"), null, 400);
 
@@ -48,13 +45,13 @@
             if ($pingback->no_results)
                 Flash::warning(__("Pingback not found.", "pingable"), "manage_pingbacks");
 
+            if (!$pingback->deletable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback."));
+
             $admin->display("pages".DIR."delete_pingback", array("pingback" => $pingback));
         }
 
         public function admin_destroy_pingback() {
-            if (!Visitor::current()->group->can("delete_pingback"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -68,6 +65,9 @@
 
             if ($pingback->no_results)
                 show_404(__("Not Found"), __("Pingback not found.", "pingable"));
+
+            if (!$pingback->deletable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback."));
 
             Pingback::delete($pingback->id);
 
