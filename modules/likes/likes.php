@@ -108,10 +108,9 @@
             Like::create($post->id);
             $count = SQL::current()->count("likes", array("post_id" => $post->id)) - 1;
 
-            if ($count <= 0)
-                $text = __("You like this.", "likes");
-            else
-                $text = sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count);
+            $text = ($count <= 0) ?
+                __("You like this.", "likes") :
+                sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count) ;
 
             json_response($text, true);
         }
@@ -132,10 +131,9 @@
             Like::remove($post->id);
             $count = SQL::current()->count("likes", array("post_id" => $post->id));
 
-            if ($count <= 0)
-                $text = __("No likes yet.", "likes");
-            else
-                $text = sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count);
+            $text = ($count <= 0) ?
+                __("No likes yet.", "likes") :
+                sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count) ;
 
             json_response($text, true);
         }
@@ -203,10 +201,9 @@
 
                 $count = $post->like_count;
 
-                if ($count <= 0)
-                    $html.= __("No likes yet.", "likes");
-                else
-                    $html.= sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count);
+                $html.= ($count <= 0) ?
+                    __("No likes yet.", "likes") :
+                    sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count) ;
 
                 $html.= "</span>";
             } else {
@@ -229,10 +226,9 @@
 
                 $count = $post->like_count - 1;
 
-                if ($count <= 0)
-                    $html.= __("You like this.", "likes");
-                else
-                    $html.= sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count);
+                $html.= ($count <= 0) ?
+                    __("You like this.", "likes") :
+                    sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count) ;
 
                 $html.= "</span>";
             }
