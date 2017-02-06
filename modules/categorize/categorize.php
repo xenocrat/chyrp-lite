@@ -119,8 +119,8 @@
         }
 
         public function category_post_count_attr($attr, $category) {
-            if (isset($this->post_counts))
-                return fallback($this->post_counts[$category->id], 0);
+            if (isset($this->category_post_counts))
+                return fallback($this->category_post_counts[$category->id], 0);
 
             $counts = SQL::current()->select("post_attributes",
                                              "COUNT(value) AS total, value as category_id",
@@ -132,9 +132,9 @@
                                              "value")->fetchAll();
 
             foreach ($counts as $count)
-                $this->post_counts[$count["category_id"]] = (int) $count["total"];
+                $this->category_post_counts[$count["category_id"]] = (int) $count["total"];
 
-            return fallback($this->post_counts[$category->id], 0);
+            return fallback($this->category_post_counts[$category->id], 0);
         }
 
         public function main_context($context) {
