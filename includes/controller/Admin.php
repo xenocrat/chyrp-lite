@@ -1219,6 +1219,7 @@
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
                 $users_json = array();
+
                 $exclude = array("no_results",
                                  "group_id",
                                  "group",
