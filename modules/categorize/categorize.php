@@ -214,14 +214,14 @@
 
         public function admin_new_category($admin) {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
+                show_403(__("Access Denied"), __('You do not have sufficient privileges to add categories.', 'categorize'));
 
             $admin->display("pages".DIR."new_category");
         }
 
         public function admin_add_category($admin) {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
+                show_403(__("Access Denied"), __('You do not have sufficient privileges to add categories.', 'categorize'));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -239,9 +239,6 @@
         }
 
         public function admin_edit_category($admin) {
-            if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
-
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a category.", "categorize"), null, 400);
 
@@ -250,13 +247,13 @@
             if ($category->no_results)
                 Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
+            if (!$category->editable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this category.", "categorize"));
+
             $admin->display("pages".DIR."edit_category", array("category" => $category));
         }
 
         public function admin_update_category($admin) {
-            if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -270,6 +267,9 @@
 
             if ($category->no_results)
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
+
+            if (!$category->editable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this category.", "categorize"));
 
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
 
@@ -289,13 +289,13 @@
             if ($category->no_results)
                 Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
+            if (!$category->deletable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this category.", "categorize"));
+
             $admin->display("pages".DIR."delete_category", array("category" => $category));
         }
 
         public function admin_destroy_category() {
-            if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
-
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
@@ -309,6 +309,9 @@
 
             if ($category->no_results)
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
+
+            if (!$category->deletable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this category.", "categorize"));
 
             Category::delete($category->id);
             Flash::notice(__("Category deleted.", "categorize"), "manage_category");
