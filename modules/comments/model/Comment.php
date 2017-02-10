@@ -77,7 +77,6 @@
 
             if (!empty($config->akismet_api_key)) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
-
                 $akismet->setCommentContent($body);
                 $akismet->setCommentAuthor($author);
                 $akismet->setCommentAuthorURL($author_url);
@@ -99,6 +98,7 @@
                                          $visitor->id,
                                          $parent,
                                          $notify);
+
                     return $comment;
                 } else {
                     $comment = self::add($body,
@@ -113,7 +113,6 @@
                                          $parent,
                                          $notify);
 
-                    fallback($_SESSION['comments'], array());
                     $_SESSION['comments'][] = $comment->id;
                     return $comment;
                 }
@@ -130,7 +129,6 @@
                                      $parent,
                                      $notify);
 
-                fallback($_SESSION['comments'], array());
                 $_SESSION['comments'][] = $comment->id;
                 return $comment;
             }

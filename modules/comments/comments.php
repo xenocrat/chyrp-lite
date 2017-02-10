@@ -3,6 +3,8 @@
 
     class Comments extends Modules {
         public function __init() {
+            fallback($_SESSION['comments'], array());
+
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
             $this->addAlias("comment_grab", "comments_get");
         }
@@ -376,6 +378,11 @@
             Flash::notice(__("Settings updated."), "comment_settings");
         }
 
+        public function admin_determine_action($action) {
+            if ($action == "manage" and (Comment::any_editable() or Comment::any_deletable()))
+                return "manage_comments";
+        }
+
         public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["comment_settings"] = array("title" => __("Comments", "comments"));
@@ -398,6 +405,27 @@
                 $navs["manage_spam"] = array("title" => _f("Spam (%d)", $spam_count, "comments"));
 
             return $navs;
+        }
+
+        public function manage_posts_column_header() {
+            echo '<th class="post_comments value">'.__("Comments", "comments").'</th>';
+        }
+
+        public function manage_posts_column($post) {
+            echo '<td class="post_comments value"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
+        }
+
+        public function manage_users_column_header() {
+            echo '<th class="user_comments value">'.__("Comments", "comments").'</th>';
+        }
+
+        public function manage_users_column($user) {
+            echo '<td class="user_comments value">'.$user->comment_count.'</td>';
+        }
+
+        public function javascript() {
+            $config  = Config::current();
+            include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
 
         public function admin_edit_comment($admin) {
@@ -520,59 +548,6 @@
             }
 
             redirect($from);
-        }
-
-        public function reportHam($comments) {
-            $config = Config::current();
-
-            foreach($comments as $comment) {
-                $akismet = new Akismet($config->url, $config->akismet_api_key);
-                $akismet->setCommentAuthor($comment->author);
-                $akismet->setCommentAuthorEmail($comment->author_email);
-                $akismet->setCommentAuthorURL($comment->author_url);
-                $akismet->setCommentContent($comment->body);
-                $akismet->setPermalink($comment->post_id);
-                $akismet->setReferrer($comment->author_agent);
-                $akismet->setUserIP($comment->author_ip);
-                $akismet->submitHam();
-            }
-        }
-
-        public function reportSpam($comments) {
-            $config = Config::current();
-
-            foreach($comments as $comment) {
-                $akismet = new Akismet($config->url, $config->akismet_api_key);
-                $akismet->setCommentAuthor($comment->author);
-                $akismet->setCommentAuthorEmail($comment->author_email);
-                $akismet->setCommentAuthorURL($comment->author_url);
-                $akismet->setCommentContent($comment->body);
-                $akismet->setPermalink($comment->post_id);
-                $akismet->setReferrer($comment->author_agent);
-                $akismet->setUserIP($comment->author_ip);
-                $akismet->submitSpam();
-            }
-        }
-
-        public function manage_posts_column_header() {
-            echo '<th class="post_comments value">'.__("Comments", "comments").'</th>';
-        }
-
-        public function manage_posts_column($post) {
-            echo '<td class="post_comments value"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
-        }
-
-        public function manage_users_column_header() {
-            echo '<th class="user_comments value">'.__("Comments", "comments").'</th>';
-        }
-
-        public function manage_users_column($user) {
-            echo '<td class="user_comments value">'.$user->comment_count.'</td>';
-        }
-
-        public function javascript() {
-            $config  = Config::current();
-            include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
 
         public function ajax() {
@@ -749,25 +724,8 @@
             return fallback($this->post_comment_counts[$post->id], 0);
         }
 
-        public function user_comment_count_attr($attr, $user) {
-            if (isset($this->user_comment_counts))
-                return fallback($this->user_comment_counts[$user->id], 0);
-
-            $counts = SQL::current()->select("comments",
-                                             array("COUNT(user_id) AS total", "user_id as user_id"),
-                                             array("status not" => "spam",
-                                                   "status != 'denied' OR
-                                                   ((user_id != 0 AND user_id = :visitor_id) OR (id IN ".self::visitor_comments()."))"),
-                                             null,
-                                             array(":visitor_id" => Visitor::current()->id),
-                                             null,
-                                             null,
-                                             "user_id");
-
-            foreach ($counts->fetchAll() as $count)
-                $this->user_comment_counts[$count["user_id"]] = (int) $count["total"];
-
-            return fallback($this->user_comment_counts[$user->id], 0);
+        public function post_commentable_attr($attr, $post) {
+            return Comment::user_can($post);
         }
 
         public function post_latest_comment_attr($attr, $post) {
@@ -792,6 +750,31 @@
             return fallback($this->latest_comments[$post->id], null);
         }
 
+        public function user_comment_count_attr($attr, $user) {
+            if (isset($this->user_comment_counts))
+                return fallback($this->user_comment_counts[$user->id], 0);
+
+            $counts = SQL::current()->select("comments",
+                                             array("COUNT(user_id) AS total", "user_id as user_id"),
+                                             array("status not" => "spam",
+                                                   "status != 'denied' OR
+                                                   ((user_id != 0 AND user_id = :visitor_id) OR (id IN ".self::visitor_comments()."))"),
+                                             null,
+                                             array(":visitor_id" => Visitor::current()->id),
+                                             null,
+                                             null,
+                                             "user_id");
+
+            foreach ($counts->fetchAll() as $count)
+                $this->user_comment_counts[$count["user_id"]] = (int) $count["total"];
+
+            return fallback($this->user_comment_counts[$user->id], 0);
+        }
+
+        public function visitor_comment_count_attr($attr, $visitor) {
+            return ($visitor->id == 0) ? count($_SESSION['comments']) : self::user_comment_count_attr($attr, $visitor) ;
+        }
+
         public function comments_get(&$options) {
             if (ADMIN)
                 return;
@@ -804,25 +787,40 @@
             $options["params"][":visitor_id"] = Visitor::current()->id;
         }
 
-        public function post_commentable_attr($attr, $post) {
-            return Comment::user_can($post);
+        private function visitor_comments() {
+            return empty($_SESSION['comments']) ? "(0)" : QueryBuilder::build_list($_SESSION['comments']);
         }
 
-        public function manage_nav_show($possibilities) {
-            $possibilities[] = (Comment::any_editable() or Comment::any_deletable());
-            return $possibilities;
+        private function reportHam($comments) {
+            $config = Config::current();
+
+            foreach($comments as $comment) {
+                $akismet = new Akismet($config->url, $config->akismet_api_key);
+                $akismet->setCommentAuthor($comment->author);
+                $akismet->setCommentAuthorEmail($comment->author_email);
+                $akismet->setCommentAuthorURL($comment->author_url);
+                $akismet->setCommentContent($comment->body);
+                $akismet->setPermalink($comment->post_id);
+                $akismet->setReferrer($comment->author_agent);
+                $akismet->setUserIP($comment->author_ip);
+                $akismet->submitHam();
+            }
         }
 
-        public function admin_determine_action($action) {
-            if ($action == "manage" and (Comment::any_editable() or Comment::any_deletable()))
-                return "manage_comments";
-        }
+        private function reportSpam($comments) {
+            $config = Config::current();
 
-        public function visitor_comments() {
-            if (empty($_SESSION['comments']))
-                return "(0)";
-            else
-                return QueryBuilder::build_list($_SESSION['comments']);
+            foreach($comments as $comment) {
+                $akismet = new Akismet($config->url, $config->akismet_api_key);
+                $akismet->setCommentAuthor($comment->author);
+                $akismet->setCommentAuthorEmail($comment->author_email);
+                $akismet->setCommentAuthorURL($comment->author_url);
+                $akismet->setCommentContent($comment->body);
+                $akismet->setPermalink($comment->post_id);
+                $akismet->setReferrer($comment->author_agent);
+                $akismet->setUserIP($comment->author_ip);
+                $akismet->submitSpam();
+            }
         }
 
         public function import_chyrp_post($entry, $post) {
