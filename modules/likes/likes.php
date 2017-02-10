@@ -110,7 +110,8 @@
                 show_404(__("Not Found"), __("Post not found."));
 
             Like::create($post->id);
-            $count = SQL::current()->count("likes", array("post_id" => $post->id)) - 1;
+
+            $count = $post->like_count - 1;
 
             $text = ($count <= 0) ?
                 __("You like this.", "likes") :
@@ -133,7 +134,8 @@
                 show_404(__("Not Found"), __("Post not found."));
 
             Like::remove($post->id);
-            $count = SQL::current()->count("likes", array("post_id" => $post->id));
+
+            $count = $post->like_count;
 
             $text = ($count <= 0) ?
                 __("No likes yet.", "likes") :
@@ -144,7 +146,6 @@
 
         public function post($post) {
             $post->has_many[] = "likes";
-            $post->like_link = self::like_link($post);
         }
 
         public function delete_post($post) {
@@ -198,7 +199,7 @@
                 count(array_diff($_SESSION["likes"], array(null))) : self::user_like_count_attr($attr, $visitor) ;
         }
 
-        public function like_link($post) {
+        public function post_like_link_attr($attr, $post) {
             $config = Config::current();
             $route = Route::current();
             $visitor = Visitor::current();
