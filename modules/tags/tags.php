@@ -172,7 +172,8 @@
         }
 
         public function manage_posts_column($post) {
-            echo '<td class="post_tags list">'.implode(" ", $post->tags_link).'</td>';
+                $tags = !empty($post->tags_link) ? implode(" ", $post->tags_link) : "" ;
+                echo '<td class="post_tags list">'.$tags.'</td>';
         }
 
         public function manage_nav($navs) {
@@ -601,13 +602,12 @@
         }
 
         public function post_tags_link_attr($attr, $post) {
-            if (empty($post->tags))
-                return array();
-
             $linked = array();
 
-            foreach ($post->tags as $tag => $clean)
-                $linked[] = '<a class="tag" href="'.url("tag/".urlencode($clean), MainController::current()).'" rel="tag">'.$tag.'</a>';
+            foreach ($post->tags as $tag => $clean) {
+                $url = url("tag/".urlencode($clean), MainController::current());
+                $linked[] = '<a class="tag" href="'.$url.'" rel="tag">'.$tag.'</a>';
+            }
 
             return $linked;
         }
