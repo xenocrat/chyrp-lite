@@ -105,7 +105,7 @@
         }
 
         public function post_options($fields, $post = null) {
-            $cloud = self::list_tags(false);
+            $cloud = self::list_tags(0);
             usort($cloud, array($this, "sort_tags_name_asc"));
 
             if (isset($post->tags))
@@ -172,7 +172,7 @@
         }
 
         public function manage_posts_column($post) {
-            echo '<td class="post_tags list">'.implode(" ", $post->linked_tags).'</td>';
+            echo '<td class="post_tags list">'.implode(" ", $post->tags_link).'</td>';
         }
 
         public function manage_nav($navs) {
@@ -222,7 +222,8 @@
                     $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
                                      "name" => $tag,
-                                     "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
+                                     "title" => sprintf(_p("%s post tagged with &quot;%s&quot;",
+                                                           "%s posts tagged with &quot;%s&quot;", $count, "tags"),
                                                         $count, fix($tag, true)),
                                      "clean" => $tags[$tag],
                                      "url" => url("tag/".$tags[$tag], MainController::current()));
@@ -574,7 +575,8 @@
                     $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
                                        "name" => $tag,
-                                       "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
+                                       "title" => sprintf(_p("%s post tagged with &quot;%s&quot;",
+                                                             "%s posts tagged with &quot;%s&quot;", $count, "tags"),
                                                           $count, fix($tag, true)),
                                        "clean" => $tags[$tag],
                                        "url" => url("tag/".$tags[$tag], $main));
@@ -598,13 +600,13 @@
                 $_POST['tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
         }
 
-        public function linked_tags($tags) {
-            if (empty($tags))
+        public function post_tags_link_attr($attr, $post) {
+            if (empty($post->tags))
                 return array();
 
             $linked = array();
 
-            foreach ($tags as $tag => $clean)
+            foreach ($post->tags as $tag => $clean)
                 $linked[] = '<a class="tag" href="'.url("tag/".urlencode($clean), MainController::current()).'" rel="tag">'.$tag.'</a>';
 
             return $linked;
@@ -636,7 +638,6 @@
             $tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
             uksort($tags, array($this, "sort_tags_asc"));
             $post->tags = $tags;
-            $post->linked_tags = self::linked_tags($post->tags);
         }
 
         public function list_tags($limit = 10, $order_by = "popularity", $order = "desc") {
