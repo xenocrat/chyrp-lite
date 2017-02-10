@@ -172,8 +172,8 @@
         }
 
         public function manage_posts_column($post) {
-                $tags = !empty($post->tags_link) ? implode(" ", $post->tags_link) : "" ;
-                echo '<td class="post_tags list">'.$tags.'</td>';
+            $tags = !empty($post->tags_link) ? implode(" ", $post->tags_link) : "" ;
+            echo '<td class="post_tags list">'.$tags.'</td>';
         }
 
         public function manage_nav($navs) {
@@ -684,10 +684,10 @@
         }
 
         public function feed_item($post) {
-            $config = Config::current();
+            $scheme = url("tags", MainController::current());
 
             foreach ($post->tags as $tag => $clean)
-                echo "        <category scheme=\"".$config->url."/tag/\" term=\"".$clean."\" label=\"".fix($tag)."\" />\n";
+                echo '        <category scheme="'.$scheme.'" term="'.$clean.'" label="'.fix($tag, true).'" />'."\n";
         }
 
         public function admin_javascript() {
