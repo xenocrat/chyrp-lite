@@ -1,7 +1,7 @@
 <article class="post {{ post.feather }}{{ post.pinned ? ' pinned' : '' }}" id="post_{{ post.id }}">
 {% block content %}{% endblock %}
 <footer>
-{% if (module_enabled("tags") and post.tags_link | length > 0) %}
+{% if (module_enabled("tags") and post.tags_link is not empty) %}
 <div role="note" class="tags">
 <a href="{{ url('tags') }}">{{ "Tags" | translate }}:</a> {{ post.tags_link | join(" ") }}
 </div>
