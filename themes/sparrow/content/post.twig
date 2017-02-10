@@ -1,13 +1,13 @@
 <article class="post {{ post.feather }}{{ post.pinned ? ' pinned' : '' }}" id="post_{{ post.id }}">
 {% block content %}{% endblock %}
 <footer>
-{% if (module_enabled("tags") and post.linked_tags | length > 0) or (module_enabled("categorize") and post.category is defined) %}
+{% if (module_enabled("tags") and post.tags_link | length > 0) or (module_enabled("categorize") and post.category is defined) %}
 <div role="note" class="category tags">
 {% if module_enabled("categorize") and post.category is defined %}
 <a class="category category_{{ post.category.id }}" href="{{ post.category.url }}" rel="tag">{{ post.category.name }}</a>
 {% endif %}
-{% if (module_enabled("tags") and post.linked_tags | length > 0) %}
-<a href="{{ url('tags') }}">{{ "Tags" | translate }}:</a> {{ post.linked_tags | join(" ") }}
+{% if (module_enabled("tags") and post.tags_link | length > 0) %}
+<a href="{{ url('tags') }}">{{ "Tags" | translate }}:</a> {{ post.tags_link | join(" ") }}
 {% endif %}
 </div>
 {% endif %}
