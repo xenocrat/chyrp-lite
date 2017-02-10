@@ -28,7 +28,7 @@
 
         public function feed_item($post) {
             if (!empty($post->category))
-               printf("        <category term=\"%s\" />\n", fix($post->category->name, true));
+                echo '        <category term="'.$post->category->clean.'" label="'.fix($post->category->name, true).'" />'."\n";
         }
 
         public function metaWeblog_getPost($struct, $post) {
