@@ -64,16 +64,12 @@
             return $fields;
         }
 
-        public function post($post) {
-            $post->licence_link = self::licence_link($post);
-        }
-
         public function feed_item($post) {
             if (!empty($post->rights_licence))
                printf("        <rights>%s</rights>\n", $post->rights_licence);
         }
 
-        public function licence_link($post) {
+        public function post_licence_link_attr($attr, $post) {
             switch ($post->rights_licence) {
                 case "Creative Commons BY":
                 $mark = '<a rel="license" href="http://creativecommons.org/licenses/by/4.0" class="rights_licence_link">'.
