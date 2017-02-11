@@ -14,7 +14,7 @@
 {% for file in post.files %}
 {% if ["jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"] | contains(file.type) %}
 <section class="photo">
-{{ feathers['uploader'].image_link(file.name, 1024, 2048, "quality=80", "80vw") }}
+{{ file.name | thumbnail(file.name, true, ["max_width=1024", "max_height=2048", "quality=80"], "80vw") }}
 </section>
 {% else %}
 <section class="attachment">
