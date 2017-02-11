@@ -104,35 +104,6 @@
             return $assoc;
         }
 
-        public function post_options($fields, $post = null) {
-            $cloud = self::list_tags(0);
-            usort($cloud, array($this, "sort_tags_name_asc"));
-
-            if (isset($post->tags))
-                $tags = array_keys($post->tags);
-            else
-                $tags = array();
-
-            $selector = "\n".'<span class="tags_select">'."\n";
-
-            foreach ($cloud as $tag) {
-                $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
-                $selector.= '<a class="tag'.$selected.'" href="#tags">'.$tag["name"].'</a>'."\n";
-            }
-
-            $selector.= "</span>"."\n";
-
-            $fields[] = array("attr" => "tags",
-                              "label" => __("Tags", "tags"),
-                              "help" => "tagging_posts",
-                              "note" => __("(comma separated)", "tags"),
-                              "type" => "text",
-                              "value" => fix(implode(", ", $tags), true),
-                              "extra" => $selector);
-
-            return $fields;
-        }
-
         public function add_post($post) {
             if (empty($_POST['tags']))
                 return;
@@ -162,9 +133,62 @@
                                           "post_id" => $post->id));
         }
 
+        public function post_options($fields, $post = null) {
+            $cloud = self::list_tags(0);
+            usort($cloud, array($this, "sort_tags_name_asc"));
+
+            if (isset($post->tags))
+                $tags = array_keys($post->tags);
+            else
+                $tags = array();
+
+            $selector = "\n".'<span class="tags_select">'."\n";
+
+            foreach ($cloud as $tag) {
+                $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
+                $selector.= '<a class="tag'.$selected.'" href="#tags">'.$tag["name"].'</a>'."\n";
+            }
+
+            $selector.= "</span>"."\n";
+
+            $fields[] = array("attr" => "tags",
+                              "label" => __("Tags", "tags"),
+                              "help" => "tagging_posts",
+                              "note" => __("(comma separated)", "tags"),
+                              "type" => "text",
+                              "value" => fix(implode(", ", $tags), true),
+                              "extra" => $selector);
+
+            return $fields;
+        }
+
+        public function post($post) {
+            $post->tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
+            uksort($post->tags, array($this, "sort_tags_asc"));
+        }
+
+        public function post_tags_link_attr($attr, $post) {
+            $linked = array();
+
+            foreach ($post->tags as $tag => $clean) {
+                $url = url("tag/".urlencode($clean), MainController::current());
+                $linked[] = '<a class="tag" href="'.$url.'" rel="tag">'.$tag.'</a>';
+            }
+
+            return $linked;
+        }
+
         public function parse_urls($urls) {
             $urls["|/tag/([^/]+)/|"] = "/?action=tag&amp;name=$1";
             return $urls;
+        }
+
+        public function manage_nav($navs) {
+            if (Post::any_editable())
+                $navs["manage_tags"] = array("title" => __("Tags", "tags"),
+                                             "selected" => array("rename_tag", "delete_tag", "edit_tags"));
+
+            return $navs;
         }
 
         public function manage_posts_column_header() {
@@ -174,14 +198,6 @@
         public function manage_posts_column($post) {
             $tags = !empty($post->tags_link) ? implode(" ", $post->tags_link) : "" ;
             echo '<td class="post_tags list">'.$tags.'</td>';
-        }
-
-        public function manage_nav($navs) {
-            if (Post::any_editable())
-                $navs["manage_tags"] = array("title" => __("Tags", "tags"),
-                                             "selected" => array("rename_tag", "delete_tag", "edit_tags"));
-
-            return $navs;
         }
 
         public function admin_manage_tags($admin) {
@@ -601,17 +617,6 @@
                 $_POST['tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
         }
 
-        public function post_tags_link_attr($attr, $post) {
-            $linked = array();
-
-            foreach ($post->tags as $tag => $clean) {
-                $url = url("tag/".urlencode($clean), MainController::current());
-                $linked[] = '<a class="tag" href="'.$url.'" rel="tag">'.$tag.'</a>';
-            }
-
-            return $linked;
-        }
-
         public function related_posts($ids, $post, $limit) {
             if (empty($post->tags))
                 return $ids;
@@ -632,12 +637,6 @@
             }
 
             return $ids;
-        }
-
-        public function post($post) {
-            $tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
-            uksort($tags, array($this, "sort_tags_asc"));
-            $post->tags = $tags;
         }
 
         public function list_tags($limit = 10, $order_by = "popularity", $order = "desc") {
