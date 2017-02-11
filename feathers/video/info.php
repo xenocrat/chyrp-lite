@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Video", "video"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.0,
+    "version"       => 1.1,
     "description"   => __("A feather for video.", "video"),
     "author"        => array(
         "name"      => "Daniel Pimley",

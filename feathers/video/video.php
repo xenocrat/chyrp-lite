@@ -85,7 +85,7 @@
             if ($post->feather != "video")
                 return;
 
-            $post->video_player = $this->video_player($post->filename, array(), $post);
+            $post->video_player = $this->video_player($post);
         }
 
         private function video_type($filename) {
@@ -116,20 +116,20 @@
                 return;
 
             echo '        <link rel="enclosure" href="'.uploaded($post->filename).
-                        '" type="'.$this->video_type($post->filename).
+                        '" type="'.self::video_type($post->filename).
                         '" title="'.truncate(strip_tags($post->title())).
                         '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
-        public function video_player($filename, $params = array(), $post) {
+        public function video_player($post) {
             $trigger = Trigger::current();
 
             if ($trigger->exists("video_player"))
-                return $trigger->call("video_player", $filename, $params, $post);
+                return $trigger->call("video_player", $post);
 
             $player = "\n".'<video controls>';
             $player.= "\n".__("Your web browser does not support the <code>video</code> element.", "video");
-            $player.= "\n".'<source src="'.uploaded($filename).'" type="'.$this->video_type($filename).'">';
+            $player.= "\n".'<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).'">';
             $player.= "\n".'</video>'."\n";
 
             return $player;
