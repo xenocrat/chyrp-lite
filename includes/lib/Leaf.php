@@ -69,7 +69,8 @@
                 new Twig_SimpleFilter("inspect",               "twig_filter_inspect"),
                 new Twig_SimpleFilter("selected",              "twig_filter_selected"),
                 new Twig_SimpleFilter("checked",               "twig_filter_checked"),
-                new Twig_SimpleFilter("download",              "twig_filter_download")
+                new Twig_SimpleFilter("download",              "twig_filter_download"),
+                new Twig_SimpleFilter("thumbnail",             "twig_filter_thumbnail")
             );
         }
     }
@@ -233,4 +234,33 @@
      */
     function twig_filter_download($filename) {
         return Config::current()->chyrp_url."/includes/download.php?file=".urlencode($filename);
+    }
+
+    /**
+     * Function: twig_filter_thumbnail
+     * Returns a thumbnail <img> tag for an uploaded image, optionally with enclosing <a> tag.
+     */
+    function twig_filter_thumbnail($filename, $alt_text = "", $url = null, $args = array(), $sizes = "100vw") {
+        fallback($alt_text, $filename);
+        $safename = urlencode($filename);
+        $filepath = Config::current()->chyrp_url."/includes/thumb.php?file=".$safename;
+        $src_args = implode("&amp;", $args);
+        $set_args = preg_replace("/max_width=[^&](&amp;)?/i", "", $src_args);
+
+        # Source set for responsive images.
+        $srcset = array($filepath.'&amp;'.$src_args.' 1x',
+                        $filepath.'&amp;max_width=960&amp;'.$set_args.' 960w',
+                        $filepath.'&amp;max_width=640&amp;'.$set_args.' 640w',
+                        $filepath.'&amp;max_width=320&amp;'.$set_args.' 320w');
+
+        $img = '<img src="'.$filepath.'&amp;'.$src_args.
+               '" srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.
+               '" alt="'.fix($alt_text, true).'" class="image">';
+
+        # Enclose in <a> tag? Provide anything that evaluates true or a valid URL.
+        if (isset($url) and $url !== false)
+            $href = (is_string($url) and is_url($url)) ? $url : uploaded($filename) ;
+
+        return isset($href) ?
+            '<a href="'.fix($href, true).'" class="image_link">'.$img.'</a>' : $img ;
     }
