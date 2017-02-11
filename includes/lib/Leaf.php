@@ -245,7 +245,7 @@
         $safename = urlencode($filename);
         $filepath = Config::current()->chyrp_url."/includes/thumb.php?file=".$safename;
         $src_args = implode("&amp;", $args);
-        $set_args = preg_replace("/max_width=[^&](&amp;)?/i", "", $src_args);
+        $set_args = preg_replace("/max_width=[^&]*(&amp;)?/i", "", $src_args);
 
         # Source set for responsive images.
         $srcset = array($filepath.'&amp;'.$src_args.' 1x',
