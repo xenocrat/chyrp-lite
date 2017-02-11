@@ -20,7 +20,6 @@
             $this->setFilter("caption", array("markup_post_text", "markup_text"));
 
             $this->respondTo("delete_post", "delete_file");
-            $this->respondTo("filter_post", "filter_post");
             $this->respondTo("post_options", "add_option");
         }
 
@@ -85,13 +84,6 @@
                 else
                     unlink($filepath);
             }
-        }
-
-        public function filter_post($post) {
-            if ($post->feather != "photo")
-                return;
-
-            $post->image = $this->image_tag($post);
         }
 
         public function image_tag($post, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
