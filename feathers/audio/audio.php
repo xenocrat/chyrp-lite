@@ -85,7 +85,7 @@
             if ($post->feather != "audio")
                 return;
 
-            $post->audio_player = $this->audio_player($post->filename, array(), $post);
+            $post->audio_player = $this->audio_player($post);
         }
 
         private function audio_type($filename) {
@@ -118,20 +118,20 @@
                 return;
 
             echo '        <link rel="enclosure" href="'.uploaded($post->filename).
-                        '" type="'.$this->audio_type($post->filename).
+                        '" type="'.self::audio_type($post->filename).
                         '" title="'.truncate(strip_tags($post->title())).
                         '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
-        public function audio_player($filename, $params = array(), $post) {
+        public function audio_player($post) {
             $trigger = Trigger::current();
 
             if ($trigger->exists("audio_player"))
-                return $trigger->call("audio_player", $filename, $params, $post);
+                return $trigger->call("audio_player", $post);
 
             $player = "\n".'<audio controls>';
             $player.= "\n".__("Your web browser does not support the <code>audio</code> element.", "audio");
-            $player.= "\n".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
+            $player.= "\n".'<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).'">';
             $player.= "\n".'</audio>'."\n";
 
             return $player;
