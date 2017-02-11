@@ -163,28 +163,6 @@
             return $list;
         }
 
-        public function image_tag($filename, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
-            $config = Config::current();
-            $safename = urlencode($filename);
-
-            # Source set for responsive images.
-            $srcset = array($config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
-                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=960&amp;'.$more_args.' 960w',
-                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=640&amp;'.$more_args.' 640w',
-                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=320&amp;'.$more_args.' 320w');
-
-            $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.'"';
-            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file='.$safename;
-            $tag.= '&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'"';
-            $tag.= ' alt="'.$filename.'" class="image">';
-
-            return $tag;
-        }
-
-        public function image_link($filename, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
-            return '<a href="'.uploaded($filename).'" class="image_link">'.$this->image_tag($filename, $max_width, $max_height, $more_args, $sizes).'</a>';
-        }
-
         public function add_option($options, $post = null) {
             if (isset($post) and $post->feather != "uploader")
                 return;
@@ -195,7 +173,7 @@
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "uploader"),
                                "type" => "text",
-                               "value" => oneof(@$post->source, ""));
+                               "value" => (isset($post) ? $post->source : ""));
 
             return $options;
         }
