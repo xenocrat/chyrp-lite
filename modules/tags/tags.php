@@ -236,13 +236,12 @@
                 $step = 60 / $spread;
 
                 foreach ($popularity as $tag => $count) {
-                    $title = sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
-                                     $count, fix($tag, true));
+                    $str = _p("%d post tagged with &quot;%s&quot;", "%d posts tagged with &quot;%s&quot;", $count, "tags");
 
                     $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
                                      "name" => $tag,
-                                     "title" => $title,
+                                     "title" => sprintf($str, $count, fix($tag, true)),
                                      "clean" => $tags[$tag],
                                      "url" => url("tag/".$tags[$tag], MainController::current()));
                 }
@@ -591,13 +590,12 @@
                 $context = array();
 
                 foreach ($popularity as $tag => $count) {
-                    $title = sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
-                                     $count, fix($tag, true));
+                    $str = _p("%d post tagged with &quot;%s&quot;", "%d posts tagged with &quot;%s&quot;", $count, "tags");
 
                     $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
                                        "name" => $tag,
-                                       "title" => $title,
+                                       "title" => sprintf($str, $count, fix($tag, true)),
                                        "clean" => $tags[$tag],
                                        "url" => url("tag/".$tags[$tag], $main));
                 }
