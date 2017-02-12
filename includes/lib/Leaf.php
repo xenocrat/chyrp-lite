@@ -244,17 +244,22 @@
         fallback($alt_text, $filename);
         $filepath = Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($filename);
         $src_args = implode("&amp;", $args);
-        $set_args = preg_replace("/max_width=[^&]*(&amp;)?/i", "", $src_args);
+        $set_args = preg_replace(array("/max_width=[^&]*(&amp;)?/i",
+                                       "/max_height=[^&]*(&amp;)?/i"),
+                                 "",
+                                 $src_args);
+
+        $src_args = !empty($src_args) ? "&amp;".$src_args : $src_args ;
+        $set_args = !empty($set_args) ? "&amp;".$set_args : $set_args ;
 
         # Source set for responsive images.
-        $srcset = array($filepath.'&amp;'.$src_args.' 1x',
-                        $filepath.'&amp;max_width=960&amp;'.$set_args.' 960w',
-                        $filepath.'&amp;max_width=640&amp;'.$set_args.' 640w',
-                        $filepath.'&amp;max_width=320&amp;'.$set_args.' 320w');
+        $srcset = array($filepath.$src_args.' 1x',
+                        $filepath.'&amp;max_width=960'.$set_args.' 960w',
+                        $filepath.'&amp;max_width=640'.$set_args.' 640w',
+                        $filepath.'&amp;max_width=320'.$set_args.' 320w');
 
-        $img = '<img src="'.$filepath.'&amp;'.$src_args.
-               '" srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.
-               '" alt="'.fix($alt_text, true).'" class="image">';
+        $img = '<img src="'.$filepath.$src_args.'" srcset="'.implode(", ", $srcset).
+               '" sizes="'.$sizes.'" alt="'.fix($alt_text, true).'" class="image">';
 
         # Enclose in <a> tag? Provide @true@ or a candidate URL.
         if (isset($url) and $url !== false)
