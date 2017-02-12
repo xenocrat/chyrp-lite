@@ -46,7 +46,7 @@
                 Flash::warning(__("Pingback not found.", "pingable"), "manage_pingbacks");
 
             if (!$pingback->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback.", "pingable"));
 
             $admin->display("pages".DIR."delete_pingback", array("pingback" => $pingback));
         }
@@ -67,7 +67,7 @@
                 show_404(__("Not Found"), __("Pingback not found.", "pingable"));
 
             if (!$pingback->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback."));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback.", "pingable"));
 
             Pingback::delete($pingback->id);
 
