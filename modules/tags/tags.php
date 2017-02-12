@@ -235,15 +235,17 @@
 
                 $step = 60 / $spread;
 
-                foreach ($popularity as $tag => $count)
+                foreach ($popularity as $tag => $count) {
+                    $title = sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
+                                     $count, fix($tag, true));
+
                     $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
                                      "name" => $tag,
-                                     "title" => sprintf(_p("%s post tagged with &quot;%s&quot;",
-                                                           "%s posts tagged with &quot;%s&quot;", $count, "tags"),
-                                                        $count, fix($tag, true)),
+                                     "title" => $title,
                                      "clean" => $tags[$tag],
                                      "url" => url("tag/".$tags[$tag], MainController::current()));
+                }
 
                 usort($cloud, array($this, "sort_tags_name_asc"));
             }
@@ -588,15 +590,17 @@
 
                 $context = array();
 
-                foreach ($popularity as $tag => $count)
+                foreach ($popularity as $tag => $count) {
+                    $title = sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
+                                     $count, fix($tag, true));
+
                     $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
                                        "name" => $tag,
-                                       "title" => sprintf(_p("%s post tagged with &quot;%s&quot;",
-                                                             "%s posts tagged with &quot;%s&quot;", $count, "tags"),
-                                                          $count, fix($tag, true)),
+                                       "title" => $title,
                                        "clean" => $tags[$tag],
                                        "url" => url("tag/".$tags[$tag], $main));
+                }
 
                 usort($context, array($this, "sort_tags_name_asc"));
                 $main->display("pages".DIR."tags", array("tag_cloud" => $context), __("Tags", "tags"));
