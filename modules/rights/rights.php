@@ -66,7 +66,7 @@
 
         public function feed_item($post) {
             if (!empty($post->rights_licence))
-               printf("        <rights>%s</rights>\n", $post->rights_licence);
+               printf("<rights>%s</rights>\n", $post->rights_licence);
         }
 
         public function post_licence_link_attr($attr, $post) {

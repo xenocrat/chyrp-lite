@@ -686,7 +686,7 @@
             $scheme = url("tags", MainController::current());
 
             foreach ($post->tags as $tag => $clean)
-                echo '        <category scheme="'.$scheme.'" term="'.$clean.'" label="'.fix($tag, true).'" />'."\n";
+                echo '<category scheme="'.$scheme.'" term="'.$clean.'" label="'.fix($tag, true).'" />'."\n";
         }
 
         public function admin_javascript() {

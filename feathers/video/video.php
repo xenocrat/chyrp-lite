@@ -66,6 +66,18 @@
             return $post->description;
         }
 
+        public function enclose_video($post) {
+            $config = Config::current();
+
+            if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
+                return;
+
+            echo '<link rel="enclosure" href="'.uploaded($post->filename).
+                 '" type="'.self::video_type($post->filename).
+                 '" title="'.truncate(strip_tags($post->title())).
+                 '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
+        }
+
         public function delete_file($post) {
             if ($post->feather != "video")
                 return;
@@ -88,30 +100,17 @@
             $post->video_player = self::video_player($post);
         }
 
-        public function enclose_video($post) {
-            $config = Config::current();
-
-            if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
-                return;
-
-            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
-                        '" type="'.self::video_type($post->filename).
-                        '" title="'.truncate(strip_tags($post->title())).
-                        '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
-        }
-
         private function video_player($post) {
             $trigger = Trigger::current();
 
             if ($trigger->exists("video_player"))
                 return $trigger->call("video_player", $post);
 
-            $player = "\n".'<video controls>';
-            $player.= "\n".__("Your web browser does not support the <code>video</code> element.", "video");
-            $player.= "\n".'<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).'">';
-            $player.= "\n".'</video>'."\n";
-
-            return $player;
+            return "\n".'<video controls>'.
+                   "\n".__("Your web browser does not support the <code>video</code> element.", "video").
+                   "\n".'<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).'">'.
+                   "\n".'</video>'.
+                   "\n";
         }
 
         private function video_type($filename) {

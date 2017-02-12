@@ -102,6 +102,22 @@
             return $post->caption;
         }
 
+        public function enclose_uploaded($post) {
+            $config = Config::current();
+
+            if ($post->feather != "uploader")
+                return;
+
+            foreach ($post->filenames as $filename) {
+                if (!file_exists(uploaded($filename, false)))
+                    continue;
+
+                echo '<link rel="enclosure" href="'.uploaded($filename).
+                     '" title="'.truncate(strip_tags($post->title())).
+                     '" length="'.filesize(uploaded($filename, false)).'" />'."\n";
+            }
+        }
+
         public function delete_files($post) {
             if ($post->feather != "uploader")
                 return;
@@ -132,22 +148,6 @@
                 return;
 
             $post->files = self::list_files($post->filenames);
-        }
-
-        public function enclose_uploaded($post) {
-            $config = Config::current();
-
-            if ($post->feather != "uploader")
-                return;
-
-            foreach ($post->filenames as $filename) {
-                if (!file_exists(uploaded($filename, false)))
-                    continue;
-
-                echo '        <link rel="enclosure" href="'.uploaded($filename).
-                            '" title="'.truncate(strip_tags($post->title())).
-                            '" length="'.filesize(uploaded($filename, false)).'" />'."\n";
-            }
         }
 
         private function list_files($filenames) {

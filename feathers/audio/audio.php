@@ -66,6 +66,18 @@
             return $post->description;
         }
 
+        public function enclose_audio($post) {
+            $config = Config::current();
+
+            if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
+                return;
+
+            echo '<link rel="enclosure" href="'.uploaded($post->filename).
+                 '" type="'.self::audio_type($post->filename).
+                 '" title="'.truncate(strip_tags($post->title())).
+                 '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
+        }
+
         public function delete_file($post) {
             if ($post->feather != "audio")
                 return;
@@ -88,30 +100,17 @@
             $post->audio_player = self::audio_player($post);
         }
 
-        public function enclose_audio($post) {
-            $config = Config::current();
-
-            if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
-                return;
-
-            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
-                        '" type="'.self::audio_type($post->filename).
-                        '" title="'.truncate(strip_tags($post->title())).
-                        '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
-        }
-
         private function audio_player($post) {
             $trigger = Trigger::current();
 
             if ($trigger->exists("audio_player"))
                 return $trigger->call("audio_player", $post);
 
-            $player = "\n".'<audio controls>';
-            $player.= "\n".__("Your web browser does not support the <code>audio</code> element.", "audio");
-            $player.= "\n".'<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).'">';
-            $player.= "\n".'</audio>'."\n";
-
-            return $player;
+            return "\n".'<audio controls>'.
+                   "\n".__("Your web browser does not support the <code>audio</code> element.", "audio").
+                   "\n".'<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).'">'.
+                   "\n".'</audio>'.
+                   "\n";
         }
 
         private function audio_type($filename) {
