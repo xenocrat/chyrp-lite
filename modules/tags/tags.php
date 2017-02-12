@@ -236,7 +236,7 @@
                 $step = 60 / $spread;
 
                 foreach ($popularity as $tag => $count) {
-                    $str = _p("%d post tagged with &quot;%s&quot;", "%d posts tagged with &quot;%s&quot;", $count, "tags");
+                    $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
 
                     $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
@@ -590,7 +590,7 @@
                 $context = array();
 
                 foreach ($popularity as $tag => $count) {
-                    $str = _p("%d post tagged with &quot;%s&quot;", "%d posts tagged with &quot;%s&quot;", $count, "tags");
+                    $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
 
                     $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
