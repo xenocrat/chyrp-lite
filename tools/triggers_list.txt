@@ -156,10 +156,10 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	feathers/audio/audio.php on line 78
+	feathers/audio/audio.php on line 90
 	feathers/photo/photo.php on line 84
-	feathers/uploader/uploader.php on line 116
-	feathers/video/video.php on line 78
+	feathers/uploader/uploader.php on line 132
+	feathers/video/video.php on line 90
 Arguments:
 	$post->filename
 
@@ -167,17 +167,17 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 130
+	feathers/audio/audio.php on line 107
 Arguments:
-	$filename, $params, $post
+	$post
 
 
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 128
+	feathers/video/video.php on line 107
 Arguments:
-	$filename, $params, $post
+	$post
 
 
 ajax
@@ -233,13 +233,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1070
+	includes/controller/Admin.php on line 1071
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1355
+	includes/controller/Admin.php on line 1340
 Arguments:
 	$group
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1379
+	includes/controller/Admin.php on line 1364
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1411
+	includes/controller/Admin.php on line 1396
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1438
+	includes/controller/Admin.php on line 1423
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1442
+	includes/controller/Admin.php on line 1427
 Arguments:
 	$imports
 
@@ -279,13 +279,13 @@ Arguments:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 398
+	includes/controller/Main.php on line 400
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 489
+	includes/controller/Main.php on line 491
 Arguments:
 	$user
 
@@ -293,13 +293,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 576
+	includes/controller/Main.php on line 578
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 590
+	includes/controller/Main.php on line 592
 Arguments:
 	$user
 
@@ -307,7 +307,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 786
+	includes/controller/Main.php on line 788
 Arguments:
 	$post
 
@@ -361,7 +361,7 @@ Arguments:
 add_group
 ---------
 Called from:
-	includes/model/Group.php on line 123
+	includes/model/Group.php on line 129
 Arguments:
 	$group
 
@@ -369,7 +369,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 181
+	includes/model/Group.php on line 187
 Arguments:
 	$group, $this
 
@@ -474,7 +474,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 709
+	modules/comments/comments.php on line 684
 Arguments:
 	$comment
 
@@ -482,7 +482,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 200
+	modules/comments/model/Comment.php on line 198
 Arguments:
 	$new
 
@@ -490,7 +490,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 268
+	modules/comments/model/Comment.php on line 266
 Arguments:
 	$comment, $this
 
@@ -506,7 +506,7 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 97
+	modules/likes/model/Like.php on line 109
 Arguments:
 	$post_id
 
@@ -514,7 +514,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 116
+	modules/likes/model/Like.php on line 128
 Arguments:
 	$post_id
 
@@ -724,7 +724,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 127
+	includes/controller/Admin.php on line 129
 
 
 post_export_url
@@ -732,7 +732,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1137
+	includes/controller/Admin.php on line 1122
 Arguments:
 	$post), true
 
@@ -742,7 +742,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1156
+	includes/controller/Admin.php on line 1141
 Arguments:
 	$post
 
@@ -752,7 +752,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1201
+	includes/controller/Admin.php on line 1176
 Arguments:
 	$page), true
 
@@ -762,7 +762,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1216
+	includes/controller/Admin.php on line 1191
 Arguments:
 	$page
 
@@ -772,7 +772,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1263
+	includes/controller/Admin.php on line 1246
 
 
 before_import
@@ -780,7 +780,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1325
+	includes/controller/Admin.php on line 1310
 
 
 write_nav
@@ -788,7 +788,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1991
+	includes/controller/Admin.php on line 1978
 
 
 manage_nav
@@ -796,7 +796,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2020
+	includes/controller/Admin.php on line 2007
 
 
 settings_nav
@@ -804,7 +804,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2045
+	includes/controller/Admin.php on line 2032
 
 
 extend_nav
@@ -812,7 +812,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2063
+	includes/controller/Admin.php on line 2050
 
 
 feed_url
@@ -820,7 +820,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 775
+	includes/controller/Main.php on line 777
 Arguments:
 	$post
 
@@ -907,7 +907,7 @@ before_group_update_name
 Target:
 	$name
 Called from:
-	includes/model/Group.php on line 148
+	includes/model/Group.php on line 154
 
 
 before_group_update_permissions
@@ -915,7 +915,7 @@ before_group_update_permissions
 Target:
 	$permissions
 Called from:
-	includes/model/Group.php on line 149
+	includes/model/Group.php on line 155
 
 
 list_permissions
@@ -923,7 +923,7 @@ list_permissions
 Target:
 	$names
 Called from:
-	includes/model/Group.php on line 270
+	includes/model/Group.php on line 276
 
 
 page
@@ -1081,4 +1081,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 379
+	modules/comments/model/Comment.php on line 383

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-03 22:05+0000\n"
+"POT-Creation-Date: 2017-02-12 19:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -39,15 +39,15 @@ msgstr ""
 msgid "Caption"
 msgstr ""
 
-#: feathers/photo/photo.php:31
+#: feathers/photo/photo.php:30
 msgid "You did not select a photo to upload."
 msgstr ""
 
-#: feathers/photo/photo.php:129
+#: feathers/photo/photo.php:98
 msgid "Alt-Text"
 msgstr ""
 
-#: feathers/photo/photo.php:134
+#: feathers/photo/photo.php:103
 msgid "Source"
 msgstr ""
 

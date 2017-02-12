@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-03 22:05+0000\n"
+"POT-Creation-Date: 2017-02-12 19:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -40,5 +40,9 @@ msgstr ""
 
 #: modules/post_views/post_views.php:42
 msgid "An ID is required to download a view count."
+msgstr ""
+
+#: modules/post_views/post_views.php:50
+msgid "You do not have sufficient privileges to download this view count."
 msgstr ""
 
