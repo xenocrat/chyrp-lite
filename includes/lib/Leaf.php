@@ -253,10 +253,10 @@
         $set_args = !empty($set_args) ? "&amp;".$set_args : $set_args ;
 
         # Source set for responsive images.
-        $srcset = array($filepath.$src_args.' 1x',
-                        $filepath.'&amp;max_width=960'.$set_args.' 960w',
-                        $filepath.'&amp;max_width=640'.$set_args.' 640w',
-                        $filepath.'&amp;max_width=320'.$set_args.' 320w');
+        $srcset = array($filepath.$src_args." 1x",
+                        $filepath."&amp;max_width=960".$set_args." 960w",
+                        $filepath."&amp;max_width=640".$set_args." 640w",
+                        $filepath."&amp;max_width=320".$set_args." 320w");
 
         $img = '<img src="'.$filepath.$src_args.'" srcset="'.implode(", ", $srcset).
                '" sizes="'.$sizes.'" alt="'.fix($alt_text, true).'" class="image">';
