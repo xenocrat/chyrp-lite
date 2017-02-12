@@ -202,7 +202,7 @@
 
         public function admin_manage_category($admin) {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __('You do not have sufficient privileges to manage categories.', 'categorize'));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "name LIKE :query", "categorize");
@@ -214,14 +214,14 @@
 
         public function admin_new_category($admin) {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __('You do not have sufficient privileges to add categories.', 'categorize'));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add categories.", "categorize"));
 
             $admin->display("pages".DIR."new_category");
         }
 
         public function admin_add_category($admin) {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __('You do not have sufficient privileges to add categories.', 'categorize'));
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add categories.", "categorize"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
