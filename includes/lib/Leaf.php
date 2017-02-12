@@ -256,7 +256,7 @@
                '" srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.
                '" alt="'.fix($alt_text, true).'" class="image">';
 
-        # Enclose in <a> tag? Provide anything that evaluates true or a valid URL.
+        # Enclose in <a> tag? Provide @true@ or a candidate URL.
         if (isset($url) and $url !== false)
             $href = (is_string($url) and is_url($url)) ? $url : uploaded($filename) ;
 
