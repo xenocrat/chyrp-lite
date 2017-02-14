@@ -51,7 +51,7 @@
                                   "session_hash" => $session_hash));
 
             if (!$old->no_results)
-                return $old;
+                return false;
 
             $sql->insert("likes",
                          array("post_id" => $post_id,
@@ -95,8 +95,6 @@
          *     $post_id - The ID of the blog post that was liked.
          */
         static function create($post_id) {
-            self::discover($post_id);
-
             if (!array_key_exists($post_id, $_SESSION["likes"]))
                 $new = self::add($post_id,
                                  Visitor::current()->id,
@@ -104,7 +102,7 @@
                                  self::session_hash());
 
             # Set the session value so that we remember this like.
-            $_SESSION["likes"][$post_id] = isset($new) ? $new->id : 0 ;
+            $_SESSION["likes"][$post_id] = !empty($new) ? $new->id : 0 ;
 
             Trigger::current()->call("like_post", $post_id);
         }
@@ -117,8 +115,6 @@
          *     $post_id - The ID of the blog post that was unliked.
          */
         static function remove($post_id) {
-            self::discover($post_id);
-
             if (!empty($_SESSION["likes"][$post_id]))
                 self::delete($_SESSION["likes"][$post_id]);
 
