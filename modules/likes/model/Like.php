@@ -83,8 +83,20 @@
             if ($this->no_results)
                 return false;
 
-            fallback($user, Visitor::current());
-            return ($user->group->can("unlike_post") and (logged_in() and $user->id == $this->user_id));
+            $post = new Post($this->post_id);
+            return $post->deletable($user);
+        }
+
+        /**
+         * Function: editable
+         * Checks if the <User> can edit the like.
+         */
+        public function editable($user = null) {
+            if ($this->no_results)
+                return false;
+
+            $post = new Post($this->post_id);
+            return $post->editable($user);
         }
 
         /**
