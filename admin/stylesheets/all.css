@@ -601,17 +601,6 @@ code.yay {                                      background-color: #ebfae4;
 .main_options input[type="password"],
 .main_options textarea {                        width: 100%;
                                                 margin: 0em }
-
-a.more_options_link {                           font-weight: bold;
-                                                color: #4a4747;
-                                                border-bottom: 1px solid #dfdfdf;
-                                                display: block;
-                                                text-decoration: none;
-                                                margin-top: 2em;
-                                                padding-bottom: 1em }
-div.more_options {                              box-sizing: border-box;
-                                                margin: 0em;
-                                                padding: 1em }
 .more_options_option {                          box-sizing: border-box;
                                                 display: block;
                                                 width: 50%;

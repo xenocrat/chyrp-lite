@@ -4,7 +4,6 @@
 ?>
 $(function() {
     toggle_all();
-    toggle_options();
     validate_slug();
     validate_email();
     validate_url();
@@ -48,36 +47,6 @@ function toggle_all() {
             })]
         );
     });
-}
-// Toggles the visibility of #more_options based on cookie value.
-function toggle_options() {
-    if ($("#more_options").length) {
-        if (Cookie.get("show_more_options") == "true")
-            var more_options_text = '<?php echo __("&uarr; Fewer Options", "admin"); ?>';
-        else
-            var more_options_text = '<?php echo __("More Options &darr;", "admin"); ?>';
-
-        $("<a>", {
-            "id": "more_options_link",
-            "href": "#"
-        }).addClass("more_options_link").append(more_options_text).insertBefore("#more_options");
-
-        if (Cookie.get("show_more_options") == null)
-            $("#more_options").css("display", "none");
-
-        $("#more_options_link").click(function(e) {
-            e.preventDefault();
-
-            if ($("#more_options").css("display") == "none") {
-                $(this).empty().append('<?php echo __("&uarr; Fewer Options", "admin"); ?>');
-                Cookie.set("show_more_options", "true", 30);
-            } else {
-                $(this).empty().append('<?php echo __("More Options &darr;", "admin"); ?>');
-                Cookie.destroy("show_more_options");
-            }
-            $("#more_options").slideToggle();
-        });
-    }
 }
 // Validates slug fields.
 function validate_slug() {
