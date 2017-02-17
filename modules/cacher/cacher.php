@@ -57,6 +57,7 @@
                                 "update_page",
                                 "delete_post",
                                 "delete_page",
+                                "publish_post",
                                 "change_setting",
                                 "preview_theme");
 
