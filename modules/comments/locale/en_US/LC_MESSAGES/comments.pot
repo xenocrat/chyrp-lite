@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-13 10:32+0000\n"
+"POT-Creation-Date: 2017-02-17 20:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -424,15 +424,7 @@ msgstr ""
 msgid "The comment cannot be edited because your web browser did not send proper credentials."
 msgstr ""
 
-#: modules/comments/javascript.php:117
-msgid "&uarr; Fewer Options"
-msgstr ""
-
-#: modules/comments/javascript.php:120
-msgid "More Options &darr;"
-msgstr ""
-
-#: modules/comments/javascript.php:187
+#: modules/comments/javascript.php:175
 msgid "The comment cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 

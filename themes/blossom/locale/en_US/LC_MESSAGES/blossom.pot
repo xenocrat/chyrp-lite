@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-13 10:32+0000\n"
+"POT-Creation-Date: 2017-02-17 20:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -218,51 +218,47 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:4
-msgid "More Options &darr;"
-msgstr ""
-
-#: themes/blossom/forms/comment/edit.twig:6
+#: themes/blossom/forms/comment/edit.twig:5
 msgid "Author"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:8
+#: themes/blossom/forms/comment/edit.twig:7
 msgid "Author's website"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:10
+#: themes/blossom/forms/comment/edit.twig:9
 msgid "Author's email"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:14
+#: themes/blossom/forms/comment/edit.twig:13
 msgid "Timestamp"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:16
+#: themes/blossom/forms/comment/edit.twig:15
 msgid "Status"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:18
+#: themes/blossom/forms/comment/edit.twig:17
 msgid "Approved"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:19
+#: themes/blossom/forms/comment/edit.twig:18
 msgid "Denied"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:20
+#: themes/blossom/forms/comment/edit.twig:19
 msgid "Spam"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:24
+#: themes/blossom/forms/comment/edit.twig:23
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:32
+#: themes/blossom/forms/comment/edit.twig:31
 msgid "Save"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:33
+#: themes/blossom/forms/comment/edit.twig:32
 msgid "Cancel"
 msgstr ""
 

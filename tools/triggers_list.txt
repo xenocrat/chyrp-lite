@@ -14,7 +14,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 347
+	admin/javascripts/admin.js.php on line 316
 
 
 admin_head
@@ -406,6 +406,14 @@ Arguments:
 	$post, $this, $options
 
 
+publish_post
+------------
+Called from:
+	includes/model/Post.php on line 847
+Arguments:
+	$post
+
+
 add_user
 --------
 Called from:
@@ -506,7 +514,7 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 109
+	modules/likes/model/Like.php on line 119
 Arguments:
 	$post_id
 
@@ -514,7 +522,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 128
+	modules/likes/model/Like.php on line 136
 Arguments:
 	$post_id
 
@@ -1057,7 +1065,7 @@ cacher_regenerate_triggers
 Target:
 	$regenerate
 Called from:
-	modules/cacher/cacher.php on line 63
+	modules/cacher/cacher.php on line 64
 
 
 cacher_regenerate_posts_triggers
@@ -1065,7 +1073,7 @@ cacher_regenerate_posts_triggers
 Target:
 	$regenerate_posts
 Called from:
-	modules/cacher/cacher.php on line 70
+	modules/cacher/cacher.php on line 71
 
 
 comment
