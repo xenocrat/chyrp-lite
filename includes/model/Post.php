@@ -826,18 +826,25 @@
         /**
          * Function: publish_scheduled
          * Searches for and publishes scheduled posts.
+         *
+         * Calls the @publish_post@ trigger with the updated <Post>.
          */
         static function publish_scheduled() {
             $sql = SQL::current();
+            $trigger = Trigger::current();
 
-            $posts = $sql->select("posts",
-                                  "id",
-                                  array("created_at <=" => datetime(),
-                                        "status" => "scheduled"))->fetchAll();
+            $ids = $sql->select("posts",
+                                "id",
+                                array("created_at <=" => datetime(),
+                                      "status" => "scheduled"))->fetchAll();
 
-            foreach ($posts as $post)
+            foreach ($ids as $id) {
                 $sql->update("posts",
-                             array("id" => $post),
+                             array("id" => $id),
                              array("status" => "public"));
+
+                $post = new self($id, array("skip_where" => true));
+                $trigger->call("publish_post", $post);
+            }
         }
     }
