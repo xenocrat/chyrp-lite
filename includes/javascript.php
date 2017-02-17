@@ -24,7 +24,7 @@ var Post = {
             if (!Post.failed) {
                 e.preventDefault();
 
-                if (confirm('<?php echo __("Are you sure you want to delete this post? If you wish to hide it, save it as a draft."); ?>')) {
+                if (confirm('<?php echo __("Are you sure you want to delete this post?"); ?>')) {
                     var id = $(this).attr("id");
                     var post_id = (!!id) ? id.replace(/^post_delete_/, "") : "0" ;
                     Post.destroy(post_id);
@@ -67,7 +67,7 @@ var Page = {
             if (!Page.failed) {
                 e.preventDefault();
 
-                if (confirm('<?php echo __("Are you sure you want to delete this page? Child pages will also be deleted."); ?>')) {
+                if (confirm('<?php echo __("Are you sure you want to delete this page and its child pages?"); ?>')) {
                     var id = $(this).attr("id");
                     var page_id = (!!id) ? id.replace(/^page_delete_/, "") : "0" ;
                     Page.destroy(page_id);
