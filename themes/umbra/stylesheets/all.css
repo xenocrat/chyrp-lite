@@ -482,9 +482,6 @@ div.doaction a.delete_link:focus,
 div.doaction a.post_delete_link:active,
 div.doaction a.delete_link:active {             background-color: #cc5252;
                                                 border: 1px solid #cc5252 }
-
-a.more_options_link {                           display: inline-block;
-                                                margin-top: 1em }
 a.likes > img {                                 display: inline-block;
                                                 position: relative;
                                                 top: 0px }

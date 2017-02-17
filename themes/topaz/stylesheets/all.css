@@ -525,8 +525,6 @@ div.doaction a:active, button:active {          outline: none;
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    font-weight: bold }
 article > section.photo > a {                   border-bottom: none }
-a.more_options_link {                           display: inline-block;
-                                                margin-top: 1em }
 a.likes > img {                                 display: inline-block;
                                                 position: relative;
                                                 top: 0px }
