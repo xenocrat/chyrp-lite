@@ -51,8 +51,8 @@
             $sql = SQL::current();
 
             $sql->insert("categorize",
-                         array("name" => $name,
-                               "clean" => $clean,
+                         array("name"         => $name,
+                               "clean"        => $clean,
                                "show_on_home" => $show_on_home));
 
             $new = new self($sql->latest("categorize"));
@@ -77,14 +77,14 @@
                 return false;
 
             SQL::current()->update("categorize",
-                                   array("id" => $this->id),
-                                   array("name" => $name,
-                                         "clean" => $clean,
+                                   array("id"           => $this->id),
+                                   array("name"         => $name,
+                                         "clean"        => $clean,
                                          "show_on_home" => $show_on_home));
 
-            $category = new self(null, array("read_from" => array("id" => $this->id,
-                                                                  "name" => $name,
-                                                                  "clean" => $clean,
+            $category = new self(null, array("read_from" => array("id"           => $this->id,
+                                                                  "name"         => $name,
+                                                                  "clean"        => $clean,
                                                                   "show_on_home" => $show_on_home)));
 
             Trigger::current()->call("update_category", $category, $this);
