@@ -58,6 +58,35 @@
         }
 
         /**
+         * Function: update
+         * Updates a pingback title.
+         *
+         * Parameters:
+         *     $title - The title of the blog post that pinged us.
+         *
+         * Returns:
+         *     The updated <Pingback>.
+         */
+        public function update($title) {
+            if ($this->no_results)
+                return false;
+
+            SQL::current()->update("pingbacks",
+                                   array("id"    => $this->id),
+                                   array("title" => strip_tags($title)));
+
+            $pingback = new self(null, array("read_from" => array("id"         => $this->id,
+                                                                  "post_id"    => $this->post_id,
+                                                                  "source"     => $this->source,
+                                                                  "title"      => strip_tags($title),
+                                                                  "created_at" => $this->created_at)));
+
+            Trigger::current()->call("update_pingback", $pingback, $this);
+
+            return $pingback;
+        }
+
+        /**
          * Function: delete
          * Deletes a pingback from the database.
          *

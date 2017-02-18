@@ -5,6 +5,7 @@
         static function __install() {
             Pingback::install();
 
+            Group::add_permission("edit_pingback", "Edit Pingbacks");
             Group::add_permission("delete_pingback", "Delete Pingbacks");
         }
 
@@ -16,6 +17,7 @@
         }
 
         public function list_permissions($names = array()) {
+            $names["edit_pingback"] = __("Edit Pingbacks", "pingable");
             $names["delete_pingback"] = __("Delete Pingbacks", "pingable");
             return $names;
         }
@@ -34,6 +36,44 @@
             Pingback::add($post->id, $from, $title);
 
             return __("Pingback registered!", "pingable");
+        }
+
+        public function admin_edit_pingback($admin) {
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a pingback.", "pingable"), null, 400);
+
+            $pingback = new Pingback($_GET['id']);
+
+            if ($pingback->no_results)
+                Flash::warning(__("Pingback not found.", "pingable"), "manage_pingbacks");
+
+            if (!$pingback->editable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this pingback.", "pingable"));
+
+            $admin->display("pages".DIR."edit_pingback", array("pingback" => $pingback));
+        }
+
+        public function admin_update_pingback($admin) {
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to update a pingback.", "pingable"), null, 400);
+
+            if (empty($_POST['title']))
+                error(__("No Title Specified", "pingable"), __("A title is required to update a pingback.", "pingable"), null, 400);
+
+            $pingback = new Pingback($_POST['id']);
+
+            if ($pingback->no_results)
+                show_404(__("Not Found"), __("Pingback not found.", "pingable"));
+
+            if (!$pingback->editable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this pingback.", "pingable"));
+
+            $pingback = $pingback->update($_POST['title']);
+
+            Flash::notice(__("Pingback updated.", "pingable"), "manage_pingbacks");
         }
 
         public function admin_delete_pingback($admin) {
