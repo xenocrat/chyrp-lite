@@ -47,16 +47,16 @@
             $sql = SQL::current();
 
             # Test for an existing key_session_hash pair.
-            $old = new self(array("post_id" => $post_id,
+            $old = new self(array("post_id"      => $post_id,
                                   "session_hash" => $session_hash));
 
             if (!$old->no_results)
                 return false;
 
             $sql->insert("likes",
-                         array("post_id" => $post_id,
-                               "user_id" => $user_id,
-                               "timestamp" => $timestamp,
+                         array("post_id"      => $post_id,
+                               "user_id"      => $user_id,
+                               "timestamp"    => $timestamp,
                                "session_hash" => $session_hash));
 
             $new = new self($sql->latest("likes"));
@@ -149,8 +149,8 @@
                     if (!$check->no_results)
                         $_SESSION["likes"][$post_id] = $check->id;
                 } else {
-                    $check = new self(array("post_id" => $post_id,
-                                            "user_id" => Visitor::current()->id,
+                    $check = new self(array("post_id"      => $post_id,
+                                            "user_id"      => Visitor::current()->id,
                                             "session_hash" => self::session_hash()));
 
                     if (!$check->no_results)
