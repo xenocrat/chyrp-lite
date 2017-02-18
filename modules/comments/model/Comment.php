@@ -180,19 +180,19 @@
             $sql = SQL::current();
 
             $sql->insert("comments",
-                         array("body" => sanitize_html($body),
-                               "author" => strip_tags($author),
-                               "author_url" => strip_tags($author_url),
+                         array("body"         => sanitize_html($body),
+                               "author"       => strip_tags($author),
+                               "author_url"   => strip_tags($author_url),
                                "author_email" => strip_tags($author_email),
-                               "author_ip" => $ip,
+                               "author_ip"    => $ip,
                                "author_agent" => $agent,
-                               "status" => $status,
-                               "post_id" => $post_id,
-                               "user_id"=> $user_id,
-                               "parent_id" => $parent,
-                               "notify" => $notify,
-                               "created_at" => oneof($created_at, datetime()),
-                               "updated_at" => oneof($updated_at, "0000-00-00 00:00:00")));
+                               "status"       => $status,
+                               "post_id"      => $post_id,
+                               "user_id"      => $user_id,
+                               "parent_id"    => $parent,
+                               "notify"       => $notify,
+                               "created_at"   => oneof($created_at, datetime()),
+                               "updated_at"   => oneof($updated_at, "0000-00-00 00:00:00")));
 
             $new = new self($sql->latest("comments"));
             Trigger::current()->call("add_comment", $new);
@@ -200,15 +200,15 @@
             if ($new->status == "approved")
                 foreach ($sql->select("comments",
                                       "author_email",
-                                      array("post_id" => $new->post_id,
+                                      array("post_id"    => $new->post_id,
                                             "user_id !=" => $new->user_id,
-                                            "status" => "approved",
-                                            "notify" => 1))->fetchAll() as $notification) {
+                                            "status"     => "approved",
+                                            "notify"     => 1))->fetchAll() as $notification) {
 
                     correspond("comment", array("post_id" => $new->post_id,
-                                                "author" => $new->author,
-                                                "body" => $new->body,
-                                                "to" => $notification["author_email"]));
+                                                "author"  => $new->author,
+                                                "body"    => $new->body,
+                                                "to"      => $notification["author_email"]));
                 }
 
             return $new;
@@ -242,26 +242,26 @@
             if ($this->no_results)
                 return false;
 
-            $new_values = array("body" => sanitize_html($body),
-                                "author" => strip_tags($author),
-                                "author_url" => strip_tags($author_url),
+            $new_values = array("body"         => sanitize_html($body),
+                                "author"       => strip_tags($author),
+                                "author_url"   => strip_tags($author_url),
                                 "author_email" => strip_tags($author_email),
-                                "status" => $status,
-                                "notify" => $notify,
-                                "created_at" => fallback($created_at, $this->created_at),
-                                "updated_at" => fallback($updated_at, datetime()));
+                                "status"       => $status,
+                                "notify"       => $notify,
+                                "created_at"   => fallback($created_at, $this->created_at),
+                                "updated_at"   => fallback($updated_at, datetime()));
 
             SQL::current()->update("comments",
                                    array("id" => $this->id),
                                    $new_values);
 
             $comment = new self(null, array("read_from" => array_merge($new_values,
-                                                                       array("id" => $this->id,
-                                                                             "author_ip" => $this->author_ip,
+                                                                       array("id"           => $this->id,
+                                                                             "author_ip"    => $this->author_ip,
                                                                              "author_agent" => $this->author_agent,
-                                                                             "post_id" => $this->post_id,
-                                                                             "user_id"=> $this->user_id,
-                                                                             "parent_id" => $this->parent_id))));
+                                                                             "post_id"      => $this->post_id,
+                                                                             "user_id"      => $this->user_id,
+                                                                             "parent_id"    => $this->parent_id))));
 
             Trigger::current()->call("update_comment", $comment, $this);
 
