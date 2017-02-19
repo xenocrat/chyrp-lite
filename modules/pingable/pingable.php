@@ -115,7 +115,7 @@
         }
 
         public function admin_manage_pingbacks($admin) {
-            if (!Visitor::current()->group->can("delete_pingback"))
+            if (!Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pingbacks.", "pingable"));
 
             fallback($_GET['query'], "");
@@ -129,7 +129,7 @@
         }
 
         public function manage_nav($navs) {
-            if (Visitor::current()->group->can("delete_pingback"))
+            if (Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 $navs["manage_pingbacks"] = array("title" => __("Pingbacks", "pingable"),
                                                   "selected" => array("edit_pingback",
                                                                       "delete_pingback"));
@@ -138,7 +138,7 @@
         }
 
         public function admin_determine_action($action) {
-            if ($action == "manage" and Visitor::current()->group->can("delete_pingback"))
+            if ($action == "manage" and Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 return "manage_pingbacks";
         }
 
