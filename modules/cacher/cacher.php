@@ -87,7 +87,7 @@
         }
 
         public function remove_post_cache($id) {
-            $post = is_object($id) ? new Post($id->post_id) : new Post($id) ;
+            $post = ($id instanceof Model) ? new Post($id->post_id) : new Post($id) ;
 
             if (!$post->no_results)
                 $this->remove_caches_for(htmlspecialchars_decode($post->url()));
