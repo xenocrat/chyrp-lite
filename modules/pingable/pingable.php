@@ -131,7 +131,8 @@
         public function manage_nav($navs) {
             if (Visitor::current()->group->can("delete_pingback"))
                 $navs["manage_pingbacks"] = array("title" => __("Pingbacks", "pingable"),
-                                                  "selected" => array("delete_pingback"));
+                                                  "selected" => array("edit_pingback",
+                                                                      "delete_pingback"));
 
             return $navs;
         }
