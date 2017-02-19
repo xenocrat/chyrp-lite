@@ -292,7 +292,8 @@ div.prev {                                      padding-left: 2rem;
                                                 margin: 4rem auto 0rem auto }
 div.next {                                      text-align: right;
                                                 padding-right: 2rem;
-                                                margin: 0rem auto 0rem auto }
+                                                margin: 0rem auto 4rem auto }
+div.next:last-child {                           margin-bottom: 0rem }
 div.flash {                                     box-sizing: border-box;
                                                 width: 100%;
                                                 text-align: center;
