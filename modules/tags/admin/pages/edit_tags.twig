@@ -1,9 +1,9 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Edit Tags for &#8220;%s&#8221;" | translate("tags") | format(post.title | striptags | oneof("[Untitled]" | translate)) }}{% endblock %}
+{% block title %}{{ "Edit Tags" | translate("tags") }}{% endblock %}
 
 {% block content %}
-<h2>{{ "Edit Tags for &#8220;%s&#8221;" | translate("tags") | format(post.title | striptags | oneof("[Untitled]" | translate)) }}</h2>
+<h2>{{ "Editing Tags for &#8220;%s&#8221;" | translate("tags") | format(post.title() | striptags | oneof("[Untitled]" | translate)) }}</h2>
 <form class="split" action="{{ url('update_tags') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>

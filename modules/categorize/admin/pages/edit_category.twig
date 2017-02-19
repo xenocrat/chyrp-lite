@@ -1,6 +1,6 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Edit Category &#8220;%s&#8221;" | translate("categorize") | format(category.name | striptags) }}{% endblock %}
+{% block title %}{{ "Edit Category" | translate("categorize") }}{% endblock %}
 
 {% block content %}
 <h2>{{ "Editing Category &#8220;%s&#8221;" | translate("categorize") | format(category.name | striptags) }}</h2>

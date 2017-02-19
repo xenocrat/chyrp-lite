@@ -1,6 +1,6 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Edit User &#8220;%s&#8221;" | translate | format(user.login | fix) }}{% endblock %}
+{% block title %}{{ "Edit User" | translate }}{% endblock %}
 
 {% block content %}
 <h1>{{ "Editing User &#8220;%s&#8221;" | translate | format(user.login | fix) }}</h1>

@@ -1,6 +1,6 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Edit &#8220;%s&#8221;" | translate | format(page.title | striptags | oneof("[Untitled]" | translate)) }}{% endblock %}
+{% block title %}{{ "Edit Page" | translate }}{% endblock %}
 
 {% block content %}
 <h1>{{ "Editing &#8220;%s&#8221;" | translate | format(page.title | striptags | oneof("[Untitled]" | translate)) }}</h1>

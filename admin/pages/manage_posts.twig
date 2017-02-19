@@ -45,7 +45,7 @@
 {% for post in posts.paginated %}
 <tr id="post_{{ post.id }}" class="post {{ post.status_class }}">
 <td class="post_title title main">
-<a href="{{ post.url() }}">{{ post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+<a href="{{ post.url() }}">{{ post.title() | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="post_date date">
 {{ post.created_at | strftimeformat }}

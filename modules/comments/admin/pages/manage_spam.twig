@@ -36,7 +36,7 @@
 <input type="checkbox" name="comment[{{ comment.id }}]" value="" id="comment_checkbox_{{ comment.id }}">
 </td>
 <td class="comment_post title main"><a href="{{ comment.post.url() }}#comment_{{ comment.id }}">
-{{ comment.post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+{{ comment.post.title() | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="comment_author value">
 {{ not comment.user.no_results ? comment.user.login : comment.author }}

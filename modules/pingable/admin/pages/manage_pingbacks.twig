@@ -37,7 +37,7 @@
 <td class="pingback_post title">
 {% if not pingback.post.no_results %}
 <a href="{{ pingback.post.url() }}#pingback_{{ pingback.id }}">
-{{ pingback.post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+{{ pingback.post.title() | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 {% endif %}
 </td>
 <td class="pingback_date date">
