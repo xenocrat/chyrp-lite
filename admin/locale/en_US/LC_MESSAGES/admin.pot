@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-17 20:52+0000\n"
+"POT-Creation-Date: 2017-02-19 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -339,9 +339,7 @@ msgstr ""
 
 #: admin/pages/delete_page.twig:8
 #: admin/pages/delete_post.twig:8
-#: admin/pages/edit_page.twig:3
 #: admin/pages/edit_page.twig:6
-#: admin/pages/edit_post.twig:3
 #: admin/pages/edit_post.twig:6
 #: admin/pages/manage_pages.twig:37
 #: admin/pages/manage_posts.twig:48
@@ -390,8 +388,7 @@ msgid "[Delete Pages]"
 msgstr ""
 
 #: admin/pages/edit_group.twig:3
-#, php-format
-msgid "Edit Group &#8220;%s&#8221;"
+msgid "Edit Group"
 msgstr ""
 
 #: admin/pages/edit_group.twig:6
@@ -414,9 +411,7 @@ msgid "Permissions"
 msgstr ""
 
 #: admin/pages/edit_page.twig:3
-#: admin/pages/edit_post.twig:3
-#, php-format
-msgid "Edit &#8220;%s&#8221;"
+msgid "Edit Page"
 msgstr ""
 
 #: admin/pages/edit_page.twig:6
@@ -425,9 +420,12 @@ msgstr ""
 msgid "Editing &#8220;%s&#8221;"
 msgstr ""
 
+#: admin/pages/edit_post.twig:3
+msgid "Edit Post"
+msgstr ""
+
 #: admin/pages/edit_user.twig:3
-#, php-format
-msgid "Edit User &#8220;%s&#8221;"
+msgid "Edit User"
 msgstr ""
 
 #: admin/pages/edit_user.twig:6

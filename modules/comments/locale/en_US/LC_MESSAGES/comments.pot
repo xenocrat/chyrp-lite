@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-17 20:52+0000\n"
+"POT-Creation-Date: 2017-02-19 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -96,7 +96,8 @@ msgid "Edit Comment"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:6
-msgid "Editing Comment"
+#, php-format
+msgid "Editing Comment on &#8220;%s&#8221;"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:14

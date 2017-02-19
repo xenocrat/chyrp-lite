@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-17 20:51+0000\n"
+"POT-Creation-Date: 2017-02-19 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -41,8 +41,7 @@ msgid "Are you sure you want to delete the category &#8220;%s&#8221;?"
 msgstr ""
 
 #: modules/categorize/admin/pages/edit_category.twig:3
-#, php-format
-msgid "Edit Category &#8220;%s&#8221;"
+msgid "Edit Category"
 msgstr ""
 
 #: modules/categorize/admin/pages/edit_category.twig:6

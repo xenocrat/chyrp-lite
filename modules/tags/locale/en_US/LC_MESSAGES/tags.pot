@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-17 20:52+0000\n"
+"POT-Creation-Date: 2017-02-19 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -37,9 +37,12 @@ msgid "Are you sure you want to delete the tag &#8220;%s&#8221;?"
 msgstr ""
 
 #: modules/tags/admin/pages/edit_tags.twig:3
+msgid "Edit Tags"
+msgstr ""
+
 #: modules/tags/admin/pages/edit_tags.twig:6
 #, php-format
-msgid "Edit Tags for &#8220;%s&#8221;"
+msgid "Editing Tags for &#8220;%s&#8221;"
 msgstr ""
 
 #: modules/tags/admin/pages/edit_tags.twig:10
@@ -79,9 +82,12 @@ msgid "Tag"
 msgstr ""
 
 #: modules/tags/admin/pages/rename_tag.twig:3
+msgid "Rename Tag"
+msgstr ""
+
 #: modules/tags/admin/pages/rename_tag.twig:6
 #, php-format
-msgid "Rename Tag &#8220;%s&#8221;"
+msgid "Renaming Tag &#8220;%s&#8221;"
 msgstr ""
 
 #: modules/tags/admin/pages/rename_tag.twig:15

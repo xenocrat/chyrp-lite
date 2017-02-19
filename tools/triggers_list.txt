@@ -279,13 +279,13 @@ Arguments:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 400
+	includes/controller/Main.php on line 398
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 491
+	includes/controller/Main.php on line 489
 Arguments:
 	$user
 
@@ -293,13 +293,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 578
+	includes/controller/Main.php on line 576
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 592
+	includes/controller/Main.php on line 590
 Arguments:
 	$user
 
@@ -307,7 +307,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 788
+	includes/controller/Main.php on line 786
 Arguments:
 	$post
 
@@ -597,6 +597,14 @@ Arguments:
 	$new
 
 
+update_pingback
+---------------
+Called from:
+	modules/pingable/model/Pingback.php on line 84
+Arguments:
+	$pingback, $this
+
+
 user_controls
 -------------
 Called from:
@@ -828,7 +836,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 777
+	includes/controller/Main.php on line 775
 Arguments:
 	$post
 
