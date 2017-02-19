@@ -7,107 +7,173 @@
      *     <Model>
      */
     class Category extends Model {
-        static function getCategory($id = int) {
-            $query = SQL::current()->select("categorize",
-                                            "id, name, clean, show_on_home, clean AS url",
-                                            "id = :id",
-                                            "name ASC",
-                                            array(':id' => $id), 1)->fetchObject();
+        /**
+         * Function: __construct
+         * See Also:
+         *     <Model::grab>
+         */
+        public function __construct($category_id, $options = array()) {
+            $options["from"] = "categorize";
+            parent::grab($this, $category_id, $options);
 
-            if (!empty($query))
-                $query->url = url("category/".$query->url, MainController::current());
+            if ($this->no_results)
+                return false;
 
-            return $query;
+            $this->url = url("category/".$this->clean, MainController::current());
         }
 
-        static function getCategorybyClean($name = string) {
-            $query = SQL::current()->select("categorize",
-                                            "id, name, clean, show_on_home, clean AS url",
-                                            "clean = :clean",
-                                            "name ASC",
-                                            array(":clean" => $name), 1)->fetchObject();
-
-            if (!empty($query))
-                $query->url = url("category/".$query->url, MainController::current());
-
-            return $query;
+        /**
+         * Function: find
+         * See Also:
+         *     <Model::search>
+         */
+        static function find($options = array(), $options_for_object = array()) {
+            $options["from"] = "categorize";
+            return parent::search(get_class(), $options, $options_for_object);
         }
 
-        static function getCategoryIDbyName($name = string) {
-            return SQL::current()->select("categorize",
-                                          "id",
-                                          "name = :name",
-                                          "name ASC",
-                                          array(":name" => $name), 1)->fetchObject();
-        }
-
-        static function getCategoryList($conds = null, $params = array()) {
+        /**
+         * Function: add
+         * Adds a category to the database.
+         *
+         * Parameters:
+         *     $name - The display name for this category.
+         *     $clean - The unique slug for this category.
+         *     $show_on_home - Show in the categories list?
+         *
+         * Returns:
+         *     The newly created <Category>.
+         *
+         * See Also:
+         *     <update>
+         */
+        static function add($name, $clean, $show_on_home) {
             $sql = SQL::current();
 
-            $query = $sql->select("categorize",
-                                  "id, name, clean, show_on_home, clean AS url",
-                                  $conds,
-                                  "name ASC",
-                                  $params)->fetchAll();
+            $sql->insert("categorize",
+                         array("name"         => $name,
+                               "clean"        => $clean,
+                               "show_on_home" => $show_on_home));
 
-            foreach ($query as &$result) {
-                $result["url"]   = url("category/".$result["url"], MainController::current());
-                $result["total"] = $sql->count("post_attributes",
-                                               array("name" => "category_id",
-                                                     "value" => $result["id"]));
+            $new = new self($sql->latest("categorize"));
+            Trigger::current()->call("add_category", $new);
+            return $new;
+        }
+
+        /**
+         * Function: update
+         * Updates a category with the given attributes.
+         *
+         * Parameters:
+         *     $name - The display name for this category.
+         *     $clean - The unique slug for this category.
+         *     $show_on_home - Show in the categories list?
+         *
+         * Returns:
+         *     The updated <Category>.
+         */
+        public function update($name, $clean, $show_on_home) {
+            if ($this->no_results)
+                return false;
+
+            SQL::current()->update("categorize",
+                                   array("id"           => $this->id),
+                                   array("name"         => $name,
+                                         "clean"        => $clean,
+                                         "show_on_home" => $show_on_home));
+
+            $category = new self(null, array("read_from" => array("id"           => $this->id,
+                                                                  "name"         => $name,
+                                                                  "clean"        => $clean,
+                                                                  "show_on_home" => $show_on_home)));
+
+            Trigger::current()->call("update_category", $category, $this);
+
+            return $category;
+        }
+
+        /**
+         * Function: delete
+         * Deletes a category from the database.
+         */
+        static function delete($category_id) {
+            $trigger = Trigger::current();
+            $sql = SQL::current();
+
+            if ($trigger->exists("delete_category")) {
+                $category = new self($category_id);
+                $trigger->call("delete_category", $category);
             }
 
-            return $query;
-        }
-
-        static function addCategory($name = string, $clean = string, $show_on_home = int) {
-            SQL::current()->insert("categorize",
-                                   array("name" => ":name",
-                                         "clean" => ":clean",
-                                         "show_on_home" => ":show_on_home"),
-                                   array(":name" => $name,
-                                         ":clean" => sanitize($clean, true, true),
-                                         ":show_on_home" => $show_on_home));
-        }
-
-        static function updateCategory($id = int, $name = string, $clean = string, $show_on_home = int) {
-            SQL::current()->update("categorize",
-                                   "`id` = :id",
-                                   array("name" => ":name",
-                                         "clean" => ":clean",
-                                         "show_on_home" => ":show_on_home"),
-                                   array(":id" => $id,
-                                         ":name" => $name,
-                                         ":clean" => sanitize($clean, true, true),
-                                         ":show_on_home" => $show_on_home));
-        }
-
-        static function deleteCategory($id = int) {
-            $sql = SQL::current();
-
             $sql->delete("categorize",
-                         "id = :id",
-                         array(":id" => $id));
+                         array("id" => $category_id));
 
-            $sql->update("post_attributes",
-                         "`name` = 'category_id' AND `value` = :id",
-                         array("value" => 0),
-                         array(":id" => $id));
+            $sql->delete("post_attributes",
+                         array("name" => "category_id",
+                               "value" => $category_id));
         }
 
+        /**
+         * Function: deletable
+         * Checks if the <User> can delete the category.
+         */
+        public function deletable($user = null) {
+            if ($this->no_results)
+                return false;
+
+            fallback($user, Visitor::current());
+            return $user->group->can("manage_categorize");
+        }
+
+        /**
+         * Function: editable
+         * Checks if the <User> can edit the category.
+         */
+        public function editable($user = null) {
+            if ($this->no_results)
+                return false;
+
+            fallback($user, Visitor::current());
+            return $user->group->can("manage_categorize");
+        }
+
+        /**
+         * Function: check_clean
+         * Checks if a given clean URL is already being used as another category's URL.
+         *
+         * Parameters:
+         *     $clean - The clean URL to check.
+         *
+         * Returns:
+         *     The unique version of the passed clean URL.
+         *     If it's not used, it's the same as $clean. If it is, a number is appended.
+         */
+        static function check_clean($clean) {
+            $count = SQL::current()->count("categorize", array("clean" => $clean));
+            return (!$count or empty($clean)) ? $clean : $clean."-".($count + 1) ;
+        }
+
+        /**
+         * Function: install
+         * Creates the database table.
+         */
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __categorize (
                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                       name  VARCHAR(128) NOT NULL,
                                       clean VARCHAR(128) NOT NULL UNIQUE,
-                                      show_on_home INT(1) DEFAULT 1
+                                      show_on_home BOOLEAN DEFAULT '1'
                                   ) DEFAULT CHARSET=UTF8");
         }
 
+        /**
+         * Function: uninstall
+         * Drops the database table.
+         */
         static function uninstall() {
             $sql = SQL::current();
 
             $sql->query("DROP TABLE __categorize");
-            $sql->delete("post_attributes", "name = 'category_id'");
+            $sql->delete("post_attributes", array("name" => "category_id"));
         }
     }

@@ -3,7 +3,7 @@
 {% block title %}{{ "Write" | translate }}{% endblock %}
 
 {% block content %}
-<form id="write_form" class="{{ feather.safename | fix(true) }}" action="{{ url('add_post') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="write_form" action="{{ url('add_post') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 {% include "partials" ~ DIR ~ "post_fields.twig" %}
 <input type="hidden" name="feather" value="{{ feather.safename | fix(true) }}" id="feather">

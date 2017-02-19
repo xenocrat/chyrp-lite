@@ -6,8 +6,10 @@
     class AdminController implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
-        public $urls = array('|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|' => '/?action=$1&amp;$2=$3&amp;$4=$5',
-                             '|/([^/]+)/([^/]+)/([^/]+)/$|'                 => '/?action=$1&amp;$2=$3');
+        public $urls = array(
+            '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|' => '/?action=$1&amp;$2=$3&amp;$4=$5',
+            '|/([^/]+)/([^/]+)/([^/]+)/$|'                 => '/?action=$1&amp;$2=$3'
+        );
 
         # Boolean: $displayed
         # Has anything been displayed?
@@ -40,33 +42,29 @@
         private function __construct() {
             $config = Config::current();
 
-            try {
-                $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
-                                (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
+            $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+                            (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
-                $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
+            $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-                foreach ((array) $config->enabled_modules as $module)
-                    if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
-                        $chain[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
+            foreach ((array) $config->enabled_modules as $module)
+                if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
+                    $chain[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
-                foreach ((array) $config->enabled_feathers as $feather)
-                    if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
-                        $chain[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
+            foreach ((array) $config->enabled_feathers as $feather)
+                if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
+                    $chain[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
-                $loader = new Twig_Loader_Chain($chain);
+            $loader = new Twig_Loader_Chain($chain);
 
-                $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                                  "strict_variables" => DEBUG,
-                                                                  "charset" => "UTF-8",
-                                                                  "cache" => $cache,
-                                                                  "autoescape" => false));
-                $this->twig->addExtension(new Leaf());
-                $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
-                $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
-            } catch (Twig_Error $e) {
-                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
-            }
+            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
+                                                              "strict_variables" => DEBUG,
+                                                              "charset" => "UTF-8",
+                                                              "cache" => $cache,
+                                                              "autoescape" => false));
+            $this->twig->addExtension(new Leaf());
+            $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
+            $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
 
             # Load the theme translator.
             load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale");
@@ -175,18 +173,18 @@
             if (!$visitor->group->can("add_post", "add_draft"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!feather_enabled($_POST['feather']))
                 show_404(__("Not Found"), __("Feather not found."));
 
             if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
-                $_POST['draft'] = 'true';
+                $_POST['draft'] = "true";
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
-            Flash::notice(__("Post created!"), oneof($post->url(), "write_post"));
+            Flash::notice(__("Post created!"), (($post->status == "public") ? $post->url() : "write_post"));
         }
 
         /**
@@ -219,10 +217,18 @@
          * Updates a post when the form is submitted.
          */
         public function update_post() {
+            $visitor = Visitor::current();
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
-            if (isset($_POST['publish']))
+            if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
+                $_POST['draft'] = "true";
+
+            if (isset($_POST['publish']) and $visitor->group->can("add_post"))
                 $_POST['status'] = "public";
 
             $post = new Post($_POST['id'], array("drafts" => true));
@@ -233,10 +239,7 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
-            Feathers::$instances[$post->feather]->update($post);
+            $post = Feathers::$instances[$post->feather]->update($post);
 
             Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>', "manage_posts");
         }
@@ -265,7 +268,7 @@
          * Destroys a post (the real deal).
          */
         public function destroy_post() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -369,7 +372,7 @@
             if (!Visitor::current()->group->can("add_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['title']))
@@ -427,17 +430,17 @@
             if (!Visitor::current()->group->can("edit_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit pages."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
 
             if (empty($_POST['title']))
                 error(__("Error"), __("Title cannot be blank."), null, 422);
 
             if (empty($_POST['body']))
                 error(__("Error"), __("Body cannot be blank."), null, 422);
-
-            if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
 
             $page = new Page($_POST['id']);
 
@@ -452,13 +455,13 @@
             $listed = in_array($_POST['status'], array("listed", "teased"));
             $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
-            $page->update($_POST['title'],
-                          $_POST['body'],
-                          null,
-                          $_POST['parent_id'],
-                          $public,
-                          $listed,
-                          $list_order);
+            $page = $page->update($_POST['title'],
+                                  $_POST['body'],
+                                  null,
+                                  $_POST['parent_id'],
+                                  $public,
+                                  $listed,
+                                  $list_order);
 
             Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>', "manage_pages");
         }
@@ -490,7 +493,7 @@
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -568,7 +571,7 @@
             if (!Visitor::current()->group->can("add_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['login']))
@@ -651,11 +654,11 @@
          * Updates a user when the form is submitted.
          */
         public function update_user() {
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
 
             $visitor = Visitor::current();
             $config = Config::current();
@@ -699,13 +702,13 @@
             fallback($_POST['website'], "");
             fallback($_POST['group'], $config->default_group);
 
-            $user->update($_POST['login'],
-                          $password,
-                          $_POST['email'],
-                          $_POST['full_name'],
-                          $_POST['website'],
-                          $_POST['group'],
-                          (!$user->approved and $config->email_activation) ? false : true);
+            $user = $user->update($_POST['login'],
+                                  $password,
+                                  $_POST['email'],
+                                  $_POST['full_name'],
+                                  $_POST['website'],
+                                  $_POST['group'],
+                                  (!$user->approved and $config->email_activation) ? false : true);
 
             if (!$user->approved)
                 correspond("activate", array("login" => $user->login,
@@ -749,14 +752,14 @@
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_users");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
 
             $user = new User($_POST['id']);
 
@@ -812,8 +815,7 @@
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'],
-                                             "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
-                                             "users");
+                "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
             $this->display("pages".DIR."manage_users",
                            array("users" => new Paginator(User::find(array("placeholders" => true,
@@ -842,7 +844,7 @@
             if (!Visitor::current()->group->can("add_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['name']))
@@ -889,8 +891,11 @@
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
 
             fallback($_POST['name'], "");
             fallback($_POST['permissions'], array());
@@ -906,7 +911,7 @@
             if ($group->no_results)
                 show_404(__("Not Found"), __("Group not found."));
 
-            $group->update($_POST['name'], array_keys($_POST['permissions']));
+            $group = $group->update($_POST['name'], array_keys($_POST['permissions']));
 
             Flash::notice(__("Group updated."), "manage_groups");
         }
@@ -944,14 +949,14 @@
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_groups");
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
 
             $group = new Group($_POST['id']);
 
@@ -1060,17 +1065,18 @@
             if (empty($_POST))
                 return $this->display("pages".DIR."export");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $trigger->call("before_export");
 
             if (isset($_POST['posts'])) {
                 fallback($_POST['filter_posts'], "");
-                list($where, $params) = keywords($_POST['filter_posts'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
+                list($where, $params) = keywords($_POST['filter_posts'],
+                    "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
-                if (!empty($_GET['month']))
-                    $where["created_at like"] = $_GET['month']."-%";
+                if (!empty($_POST['month']))
+                    $where["created_at like"] = $_POST['month']."-%";
 
                 $visitor = Visitor::current();
 
@@ -1095,39 +1101,22 @@
                 else
                     $posts = new Paginator(array());
 
-                $latest_timestamp = 0;
-
-                foreach ($posts as $post)
-                    if (strtotime($post->created_at) > $latest_timestamp)
-                        $latest_timestamp = strtotime($post->created_at);
-
-                $id = substr(strstr($config->url, "//"), 2);
-                $id = str_replace("#", "/", $id);
-                $id = preg_replace("/(".preg_quote(parse_url($config->url, PHP_URL_HOST)).")/", "\\1,".date("Y", $latest_timestamp).":", $id, 1);
-
                 $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $posts_atom.= '    <title>'.fix($config->name).' | Posts</title>'."\r";
                 $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
-                $posts_atom.= '    <id>tag:'.parse_url($config->url, PHP_URL_HOST).','.date("Y", $latest_timestamp).':Chyrp</id>'."\r";
-                $posts_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
+                $posts_atom.= '    <id>'.fix($config->url).'</id>'."\r";
+                $posts_atom.= '    <updated>'.date("c").'</updated>'."\r";
                 $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
                 $posts_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
 
                 foreach ($posts as $post) {
-                    $title = fix($post->title(), false);
-                    fallback($title, ucfirst($post->feather)." Post #".$post->id);
-
                     $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
-
-                    $tagged = substr(strstr(url("id/".$post->id), "//"), 2);
-                    $tagged = str_replace("#", "/", $tagged);
-                    $tagged = preg_replace("/(".preg_quote(parse_url($post->url(), PHP_URL_HOST)).")/", "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
-
                     $url = $post->url();
+
                     $posts_atom.= '    <entry xml:base="'.fix($url, true).'">'."\r";
-                    $posts_atom.= '        <title type="html">'.$title.'</title>'."\r";
-                    $posts_atom.= '        <id>tag:'.$tagged.'</id>'."\r";
+                    $posts_atom.= '        <title type="html">'.oneof(fix($post->title()), "Post #".$post->id).'</title>'."\r";
+                    $posts_atom.= '        <id>'.fix($url).'</id>'."\r";
                     $posts_atom.= '        <updated>'.when("c", $updated).'</updated>'."\r";
                     $posts_atom.= '        <published>'.when("c", $post->created_at).'</published>'."\r";
                     $posts_atom.= '        <link href="'.fix($trigger->filter($url, "post_export_url", $post), true).'" />'."\r";
@@ -1166,32 +1155,22 @@
                 $pages = Page::find(array("where" => $where, "params" => $params, "order" => "id ASC"),
                                     array("filter" => false));
 
-                $latest_timestamp = 0;
-
-                foreach ($pages as $page)
-                    if (strtotime($page->created_at) > $latest_timestamp)
-                        $latest_timestamp = strtotime($page->created_at);
-
                 $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
                 $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
                 $pages_atom.= '    <title>'.fix($config->name).' | Pages</title>'."\r";
                 $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
-                $pages_atom.= '    <id>tag:'.parse_url($config->url, PHP_URL_HOST).','.date("Y", $latest_timestamp).':Chyrp</id>'."\r";
-                $pages_atom.= '    <updated>'.date("c", $latest_timestamp).'</updated>'."\r";
+                $pages_atom.= '    <id>'.fix($config->url).'</id>'."\r";
+                $pages_atom.= '    <updated>'.date("c").'</updated>'."\r";
                 $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
                 $pages_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
 
                 foreach ($pages as $page) {
                     $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
-
-                    $tagged = substr(strstr($page->url(), "//"), 2);
-                    $tagged = str_replace("#", "/", $tagged);
-                    $tagged = preg_replace("/(".preg_quote(parse_url($page->url(), PHP_URL_HOST)).")/", "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
-
                     $url = $page->url();
+
                     $pages_atom.= '    <entry xml:base="'.fix($url, true).'" chyrp:parent_id="'.$page->parent_id.'">'."\r";
                     $pages_atom.= '        <title type="html">'.fix($page->title).'</title>'."\r";
-                    $pages_atom.= '        <id>tag:'.$tagged.'</id>'."\r";
+                    $pages_atom.= '        <id>'.fix($url).'</id>'."\r";
                     $pages_atom.= '        <updated>'.when("c", $updated).'</updated>'."\r";
                     $pages_atom.= '        <published>'.when("c", $page->created_at).'</published>'."\r";
                     $pages_atom.= '        <link href="'.fix($trigger->filter($url, "page_export_url", $page), true).'" />'."\r";
@@ -1235,13 +1214,21 @@
             if (isset($_POST['users'])) {
                 fallback($_POST['filter_users'], "");
                 list($where, $params) = keywords($_POST['filter_users'],
-                                                 "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
-                                                 "users");
+                    "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
                 $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
 
                 $users_json = array();
-                $exclude = array("no_results", "group_id", "group", "id", "login", "belongs_to", "has_many", "has_one", "queryString");
+
+                $exclude = array("no_results",
+                                 "group_id",
+                                 "group",
+                                 "id",
+                                 "login",
+                                 "belongs_to",
+                                 "has_many",
+                                 "has_one",
+                                 "queryString");
 
                 foreach ($users as $user) {
                     $users_json[$user->login] = array();
@@ -1299,15 +1286,17 @@
             if (empty($_POST))
                 return $this->display("pages".DIR."import");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
-                if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or $imports["posts"]->generator != "Chyrp")
+                if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or
+                     $imports["posts"]->generator != "Chyrp")
                     Flash::warning(__("Posts export file is invalid."), "import");
 
             if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
-                if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or $imports["pages"]->generator != "Chyrp")
+                if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or
+                     $imports["pages"]->generator != "Chyrp")
                     Flash::warning(__("Pages export file is invalid."), "import");
 
             if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']))
@@ -1346,8 +1335,10 @@
                 foreach ($imports["groups"] as $name => $permissions) {
                     $group = new Group(array("name" => (string) $name));
 
-                    if ($group->no_results)
-                        $trigger->call("import_chyrp_group", Group::add($name, $permissions));
+                    if ($group->no_results) {
+                        $group = Group::add($name, $permissions);
+                        $trigger->call("import_chyrp_group", $group);
+                    }
                 }
             }
 
@@ -1356,9 +1347,11 @@
                     show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
                 foreach ($imports["users"] as $login => $user) {
-                    $group = new Group(array("name" => (string) fallback($user["group"])));
+                    $user = new User(array("login" => (string) $login));
 
-                    if (!$sql->count("users", array("login" => $login)))
+                    if ($user->no_results) {
+                        $group = new Group(array("name" => (string) fallback($user["group"])));
+
                         $user = User::add($login,
                                           fallback($user["password"], User::hashPassword(random(8))),
                                           fallback($user["email"], ""),
@@ -1368,7 +1361,8 @@
                                           fallback($user["approved"], false),
                                           fallback($user["joined_at"]), datetime());
 
-                    $trigger->call("import_chyrp_user", $user);
+                        $trigger->call("import_chyrp_user", $user);
+                    }
                 }
             }
 
@@ -1389,18 +1383,17 @@
                         array_walk_recursive($data, "media_url_scan");
 
                     $post = Post::add($data,
-                                      $chyrp->clean,
-                                      Post::check_url($chyrp->url),
-                                      $chyrp->feather,
+                                      (string) $chyrp->clean,
+                                      Post::check_url((string) $chyrp->url),
+                                      (string) $chyrp->feather,
                                       (!$user->no_results) ? $user->id : $visitor->id,
                                       (bool) (int) $chyrp->pinned,
-                                      $chyrp->status,
-                                      datetime($entry->published),
-                                      ($entry->updated == $entry->published) ? null : datetime($entry->updated),
+                                      (string) $chyrp->status,
+                                      datetime((string) $entry->published),
+                                      ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated),
                                       false);
 
-                    if (!$post->no_results)
-                        $trigger->call("import_chyrp_post", $entry, $post);
+                    $trigger->call("import_chyrp_post", $entry, $post);
                 }
             }
 
@@ -1415,17 +1408,17 @@
 
                     $user = new User(array("login" => (string) $login));
 
-                    $page = Page::add($entry->title,
-                                      $entry->content,
+                    $page = Page::add((string) $entry->title,
+                                      (string) $entry->content,
                                       (!$user->no_results) ? $user->id : $visitor->id,
-                                      $attr->parent_id,
+                                      (int) $attr->parent_id,
                                       (bool) (int) $chyrp->public,
                                       (bool) (int) $chyrp->show_in_list,
-                                      $chyrp->list_order,
-                                      $chyrp->clean,
-                                      Page::check_url($chyrp->url),
-                                      datetime($entry->published),
-                                      ($entry->updated == $entry->published) ? null : datetime($entry->updated));
+                                      (int) $chyrp->list_order,
+                                      (string) $chyrp->clean,
+                                      Page::check_url((string) $chyrp->url),
+                                      datetime((string) $entry->published),
+                                      ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated));
 
                     $trigger->call("import_chyrp_page", $entry, $page);
                 }
@@ -1590,11 +1583,11 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
@@ -1634,11 +1627,11 @@
             $config  = Config::current();
             $visitor = Visitor::current();
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
@@ -1671,11 +1664,11 @@
          * Changes the theme.
          */
         public function change_theme() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
-                show_403(__("Access Denied"), __("Invalid security key."));
-
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
+
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['theme']))
                 error(__("No Theme Specified"), __("You did not specify which theme to select."), null, 400);
@@ -1700,18 +1693,16 @@
          * Previews the theme.
          */
         public function preview_theme() {
-            Trigger::current()->call("preview_theme", !empty($_POST['theme']));
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST['theme'])) {
                 unset($_SESSION['theme']);
                 Flash::notice(__("Preview stopped."), "themes");
             }
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
-
-            if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
             Flash::notice(__("Preview started."), "/");
@@ -1745,7 +1736,7 @@
                                       array("locales" => $locales,
                                             "timezones" => timezones()));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['email']))
@@ -1798,7 +1789,7 @@
             if (empty($_POST))
                 return $this->display("pages".DIR."content_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
@@ -1846,7 +1837,7 @@
                 return $this->display("pages".DIR."user_settings",
                                       array("groups" => Group::find(array("order" => "id DESC"))));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             fallback($_POST['default_group'], 0);
@@ -1876,7 +1867,7 @@
             if (empty($_POST))
                 return $this->display("pages".DIR."route_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $route = Route::current();
@@ -1978,7 +1969,9 @@
                     if (!feather_enabled($feather))
                         continue;
 
-                    $write["write_post/feather/".$feather] = array("title" => load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"],
+                    $name = load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"];
+
+                    $write["write_post/feather/".$feather] = array("title" => $name,
                                                                    "feather" => $feather);
                 }
 
@@ -2074,7 +2067,7 @@
          * Parameters:
          *     $template - The template file to display (sans ".twig") relative to /admin/ for core and extensions.
          *     $context - The context to be supplied to Twig.
-         *     $title - The title for the page. Defaults to a camlelization of the action, e.g. foo_bar -> Foo Bar.
+         *     $title - The title for the page. Defaults to a camelization of the action, e.g. foo_bar -> Foo Bar.
          */
         public function display($template, $context = array(), $title = "") {
             $config = Config::current();
@@ -2084,7 +2077,7 @@
             $this->displayed = true;
 
             $this->context                       = array_merge($context, $this->context);
-            $this->context["ip"]                 = $_SERVER["REMOTE_ADDR"];
+            $this->context["ip"]                 = $_SERVER['REMOTE_ADDR'];
             $this->context["DIR"]                = DIR;
             $this->context["version"]            = CHYRP_VERSION;
             $this->context["codename"]           = CHYRP_CODENAME;
@@ -2111,11 +2104,7 @@
             if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
                 Update::check();
 
-            try {
-                $this->twig->display($template.".twig", $this->context);
-            } catch (Twig_Error $e) {
-                error(__("Twig Error"), $e->getMessage(), debug_backtrace());
-            }
+            $this->twig->display($template.".twig", $this->context);
         }
 
         /**

@@ -39,41 +39,82 @@
          *     $source - The URL of the blog post that pinged us.
          *     $title - The title of the blog post that pinged us.
          *     $created_at - The pingback creation date (optional).
+         *
+         * Returns:
+         *     The newly created <Pingback>.
          */
         static function add($post_id, $source, $title, $created_at = null) {
             $sql = SQL::current();
+
             $sql->insert("pingbacks",
-                         array("post_id"    => (int) $post_id,
+                         array("post_id"    => $post_id,
                                "source"     => $source,
                                "title"      => strip_tags($title),
                                "created_at" => oneof($created_at, datetime())));
 
             $new = new self($sql->latest("pingbacks"));
-            Trigger::current()->call("add_pingback", $new->post_id, $new->id);
+            Trigger::current()->call("add_pingback", $new);
             return $new;
         }
 
-        static function delete($pingback_id) {
-            $trigger = Trigger::current();
+        /**
+         * Function: update
+         * Updates a pingback title.
+         *
+         * Parameters:
+         *     $title - The title of the blog post that pinged us.
+         *
+         * Returns:
+         *     The updated <Pingback>.
+         */
+        public function update($title) {
+            if ($this->no_results)
+                return false;
 
-            if ($trigger->exists("delete_pingback")) {
-                $new = new self($pingback_id);
-                $trigger->call("delete_pingback", $new->post_id, $new->id);
-            }
+            SQL::current()->update("pingbacks",
+                                   array("id"    => $this->id),
+                                   array("title" => strip_tags($title)));
 
-            SQL::current()->delete("pingbacks", array("id" => $pingback_id));
+            $pingback = new self(null, array("read_from" => array("id"         => $this->id,
+                                                                  "post_id"    => $this->post_id,
+                                                                  "source"     => $this->source,
+                                                                  "title"      => strip_tags($title),
+                                                                  "created_at" => $this->created_at)));
+
+            Trigger::current()->call("update_pingback", $pingback, $this);
+
+            return $pingback;
         }
 
+        /**
+         * Function: delete
+         * Deletes a pingback from the database.
+         *
+         * See Also:
+         *     <Model::destroy>
+         */
+        static function delete($pingback_id) {
+            parent::destroy(get_class(), $pingback_id);
+        }
+
+        /**
+         * Function: install
+         * Creates the database table.
+         */
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __pingbacks (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                        post_id INTEGER NOT NULL,
-                                       source VARCHAR(128) DEFAULT '',
+                                       source VARCHAR(2048) DEFAULT '',
                                        title LONGTEXT,
                                        created_at DATETIME DEFAULT NULL
                                    ) DEFAULT CHARSET=utf8");
         }
 
+        /**
+         * Function: uninstall
+         * Drops the database table.
+         */
         static function uninstall() {
             SQL::current()->query("DROP TABLE __pingbacks");
         }

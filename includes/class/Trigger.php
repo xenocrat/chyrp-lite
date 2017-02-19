@@ -89,8 +89,8 @@
 
         /**
          * Function: filter
-         * Filters a variable through a trigger's actions. Similar to <call>, except this is stackable and is intended to
-         * modify something instead of inject code.
+         * Filters a variable through a trigger's actions.
+         * Similar to <call>, except this is stackable and is intended to modify something instead of inject code.
          *
          * Any additional arguments passed to this function are passed to the function being called.
          *

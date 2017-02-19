@@ -8,7 +8,7 @@
 <fieldset>
 <p>
 <label for="login">{{ "Login" | translate }}</label>
-<input class="text" type="text" name="login" value="" id="full_name">
+<input class="text" type="text" name="login" value="" id="full_name" maxlength="64">
 </p>
 <p>
 <label for="group">{{ "Group" | translate }}</label>
@@ -21,23 +21,23 @@
 </p>
 <p>
 <label for="password1">{{ "Password" | translate }}</label>
-<input class="text" type="password" name="password1" value="" id="password1">
+<input class="text" type="password" name="password1" value="" id="password1" maxlength="128">
 </p>
 <p>
 <label for="password2">{{ "Confirm" | translate }}</label>
-<input class="text" type="password" name="password2" value="" id="password2">
+<input class="text" type="password" name="password2" value="" id="password2" maxlength="128">
 </p>
 <p>
 <label for="full_name">{{ "Full Name" | translate }}</label>
-<input class="text" type="text" name="full_name" value="" id="full_name">
+<input class="text" type="text" name="full_name" value="" id="full_name" maxlength="250">
 </p>
 <p>
 <label for="email">{{ "Email" | translate }}</label>
-<input class="text" type="email" name="email" value="" id="email">
+<input class="text" type="email" name="email" value="" id="email" maxlength="128">
 </p>
 <p>
 <label for="website">{{ "Website" | translate }}</label>
-<input class="text" type="url" name="website" value="" id="website">
+<input class="text" type="url" name="website" value="" id="website" maxlength="128">
 </p>
 {{ trigger.call("new_user_fields") }}
 <p class="buttons">

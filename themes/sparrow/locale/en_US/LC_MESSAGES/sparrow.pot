@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2016 xenocrat
+# Copyright (C) 2017 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-20 16:24+0000\n"
+"POT-Creation-Date: 2017-02-19 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -60,7 +60,7 @@ msgid 'Permanent link to &#8220;%s&#8221;'
 msgstr ""
 
 #: themes/sparrow/content/post.twig:22
-#: themes/sparrow/layouts/default.twig:61
+#: themes/sparrow/layouts/default.twig:60
 msgid "Draft"
 msgstr ""
 
@@ -102,6 +102,16 @@ msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
+#: themes/sparrow/content/post.twig:53
+#, php-format
+msgid "&copy; %s, %s."
+msgstr ""
+
+#: themes/sparrow/content/post.twig:55
+#, php-format
+msgid "&copy; %s."
+msgstr ""
+
 #: themes/sparrow/feathers/uploader.twig:21
 msgid "File attachment:"
 msgstr ""
@@ -110,51 +120,47 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:4
-msgid "More Options &darr;"
-msgstr ""
-
-#: themes/sparrow/forms/comment/edit.twig:6
+#: themes/sparrow/forms/comment/edit.twig:5
 msgid "Author"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:8
+#: themes/sparrow/forms/comment/edit.twig:7
 msgid "Author's website"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:10
+#: themes/sparrow/forms/comment/edit.twig:9
 msgid "Author's email"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:14
+#: themes/sparrow/forms/comment/edit.twig:13
 msgid "Timestamp"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:16
+#: themes/sparrow/forms/comment/edit.twig:15
 msgid "Status"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:18
+#: themes/sparrow/forms/comment/edit.twig:17
 msgid "Approved"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:19
+#: themes/sparrow/forms/comment/edit.twig:18
 msgid "Denied"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:20
+#: themes/sparrow/forms/comment/edit.twig:19
 msgid "Spam"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:24
+#: themes/sparrow/forms/comment/edit.twig:23
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:32
+#: themes/sparrow/forms/comment/edit.twig:31
 msgid "Save"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:33
+#: themes/sparrow/forms/comment/edit.twig:32
 msgid "Cancel"
 msgstr ""
 
@@ -195,12 +201,12 @@ msgstr ""
 msgid "Notify me when others comment"
 msgstr ""
 
-#: themes/sparrow/forms/comment/new.twig:36
+#: themes/sparrow/forms/comment/new.twig:37
 msgid "Speak"
 msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:5
-#: themes/sparrow/layouts/default.twig:66
+#: themes/sparrow/layouts/default.twig:65
 msgid "Controls"
 msgstr ""
 
@@ -210,7 +216,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:9
 #: themes/sparrow/forms/user/register.twig:13
-#: themes/sparrow/layouts/default.twig:41
+#: themes/sparrow/layouts/default.twig:40
 msgid "Email"
 msgstr ""
 
@@ -226,13 +232,13 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: themes/sparrow/forms/user/controls.twig:19
+#: themes/sparrow/forms/user/controls.twig:20
 msgid "Update"
 msgstr ""
 
 #: themes/sparrow/forms/user/login.twig:5
-#: themes/sparrow/forms/user/login.twig:13
-#: themes/sparrow/layouts/default.twig:78
+#: themes/sparrow/forms/user/login.twig:14
+#: themes/sparrow/layouts/default.twig:77
 msgid "Log in"
 msgstr ""
 
@@ -247,7 +253,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: themes/sparrow/forms/user/login.twig:14
+#: themes/sparrow/forms/user/login.twig:15
 msgid "Help!"
 msgstr ""
 
@@ -259,13 +265,13 @@ msgstr ""
 msgid "Please enter your username below and we will email you a new password for your account."
 msgstr ""
 
-#: themes/sparrow/forms/user/lost_password.twig:11
+#: themes/sparrow/forms/user/lost_password.twig:12
 msgid "Submit"
 msgstr ""
 
 #: themes/sparrow/forms/user/register.twig:5
-#: themes/sparrow/forms/user/register.twig:18
-#: themes/sparrow/layouts/default.twig:74
+#: themes/sparrow/forms/user/register.twig:19
+#: themes/sparrow/layouts/default.twig:73
 msgid "Register"
 msgstr ""
 
@@ -285,47 +291,47 @@ msgstr ""
 msgid "An unobtrusive tumbleblog theme for Chyrp Lite."
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:44
+#: themes/sparrow/layouts/default.twig:43
 msgid "Feed"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:48
+#: themes/sparrow/layouts/default.twig:47
 msgid "Archive"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:53
+#: themes/sparrow/layouts/default.twig:52
 msgid "Admin"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:57
+#: themes/sparrow/layouts/default.twig:56
 msgid "Write"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:69
+#: themes/sparrow/layouts/default.twig:68
 msgid "Log out"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:85
+#: themes/sparrow/layouts/default.twig:84
 msgid 'Search&hellip;'
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:85
+#: themes/sparrow/layouts/default.twig:84
 msgid 'Search this blog'
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:86
+#: themes/sparrow/layouts/default.twig:85
 msgid "Search"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:94
+#: themes/sparrow/layouts/default.twig:93
 msgid "&larr; Newer posts"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:104
+#: themes/sparrow/layouts/default.twig:103
 msgid "Older posts &rarr;"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:115
+#: themes/sparrow/layouts/default.twig:114
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

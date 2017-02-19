@@ -24,27 +24,12 @@
             if ($this->no_results)
                 return false;
 
-            $this->body_unfiltered = $this->body;
-            $group = ($this->user_id and !$this->user->no_results) ?
-                         $this->user->group :
-                         new Group(Config::current()->guest_group);
-
             $this->filtered = !isset($options["filter"]) or $options["filter"];
 
-            $trigger = Trigger::current();
+            Trigger::current()->filter($this, "comment");
 
-            $trigger->filter($this, "comment");
-
-            if ($this->filtered) {
-                if ($this->status != "pingback" and !$group->can("code_in_comments"))
-                    $this->body = strip_tags($this->body, "<".join("><", Config::current()->allowed_comment_html).">");
-
-                $this->body_unfiltered = $this->body;
-
-                $trigger->filter($this->body, array("markup_text", "markup_comment_text"));
-
-                $trigger->filter($this, "filter_comment");
-            }
+            if ($this->filtered)
+                $this->filter();
         }
 
         /**
@@ -71,7 +56,7 @@
          *     $type - The type of comment (optional).
          */
         static function create($body, $author, $author_url, $author_email, $post, $parent, $notify, $type = null) {
-            if (!self::user_can($post->id) and $type != "pingback")
+            if (!self::user_can($post) and $type != "pingback")
                 return;
 
             $config = Config::current();
@@ -87,19 +72,18 @@
             if (!logged_in())
                 $notify = 0; # Only logged-in users can request notifications.
 
-            fallback($_SERVER['HTTP_REFERER'], "");
-            fallback($_SERVER['HTTP_USER_AGENT'], "");
+            $HTTP_REFERER = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "" ;
+            $HTTP_USER_AGENT = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "" ;
 
             if (!empty($config->akismet_api_key)) {
                 $akismet = new Akismet($config->url, $config->akismet_api_key);
-
                 $akismet->setCommentContent($body);
                 $akismet->setCommentAuthor($author);
                 $akismet->setCommentAuthorURL($author_url);
                 $akismet->setCommentAuthorEmail($author_email);
                 $akismet->setPermalink($post->url());
                 $akismet->setCommentType($type);
-                $akismet->setReferrer($_SERVER['HTTP_REFERER']);
+                $akismet->setReferrer($HTTP_REFERER);
                 $akismet->setUserIP($_SERVER['REMOTE_ADDR']);
 
                 if ($akismet->isCommentSpam()) {
@@ -108,12 +92,13 @@
                                          $author_url,
                                          $author_email,
                                          $_SERVER['REMOTE_ADDR'],
-                                         $_SERVER['HTTP_USER_AGENT'],
+                                         $HTTP_USER_AGENT,
                                          "spam",
                                          $post->id,
                                          $visitor->id,
                                          $parent,
                                          $notify);
+
                     return $comment;
                 } else {
                     $comment = self::add($body,
@@ -121,14 +106,13 @@
                                          $author_url,
                                          $author_email,
                                          $_SERVER['REMOTE_ADDR'],
-                                         $_SERVER['HTTP_USER_AGENT'],
+                                         $HTTP_USER_AGENT,
                                          $status,
                                          $post->id,
                                          $visitor->id,
                                          $parent,
                                          $notify);
 
-                    fallback($_SESSION['comments'], array());
                     $_SESSION['comments'][] = $comment->id;
                     return $comment;
                 }
@@ -138,14 +122,13 @@
                                      $author_url,
                                      $author_email,
                                      $_SERVER['REMOTE_ADDR'],
-                                     $_SERVER['HTTP_USER_AGENT'],
+                                     $HTTP_USER_AGENT,
                                      $status,
                                      $post->id,
                                      $visitor->id,
                                      $parent,
                                      $notify);
 
-                fallback($_SESSION['comments'], array());
                 $_SESSION['comments'][] = $comment->id;
                 return $comment;
             }
@@ -167,8 +150,14 @@
          *     $user_id - The ID of the <User> this comment was made by.
          *     $parent - The <Comment> they're replying to.
          *     $notify - Notification on follow-up comments.
-         *     $created_at - The new comment's "created" timestamp.
-         *     $updated_at - The new comment's "last updated" timestamp.
+         *     $created_at - The new comment's @created_at@ timestamp.
+         *     $updated_at - The new comment's @updated_at@ timestamp.
+         *
+         * Returns:
+         *     The newly created <Comment>.
+         *
+         * See Also:
+         *     <update>
          */
         static function add($body,
                             $author,
@@ -189,82 +178,128 @@
                 $ip = 0;
 
             $sql = SQL::current();
+
             $sql->insert("comments",
-                         array("body" => sanitize_html($body),
-                               "author" => strip_tags($author),
-                               "author_url" => strip_tags($author_url),
+                         array("body"         => sanitize_html($body),
+                               "author"       => strip_tags($author),
+                               "author_url"   => strip_tags($author_url),
                                "author_email" => strip_tags($author_email),
-                               "author_ip" => $ip,
+                               "author_ip"    => $ip,
                                "author_agent" => $agent,
-                               "status" => $status,
-                               "post_id" => $post_id,
-                               "user_id"=> $user_id,
-                               "parent_id" => $parent,
-                               "notify" => $notify,
-                               "created_at" => oneof($created_at, datetime()),
-                               "updated_at" => oneof($updated_at, "0000-00-00 00:00:00")));
+                               "status"       => $status,
+                               "post_id"      => $post_id,
+                               "user_id"      => $user_id,
+                               "parent_id"    => $parent,
+                               "notify"       => $notify,
+                               "created_at"   => oneof($created_at, datetime()),
+                               "updated_at"   => oneof($updated_at, "0000-00-00 00:00:00")));
 
             $new = new self($sql->latest("comments"));
-            Trigger::current()->call("add_comment", $new->post_id, $new->id);
+            Trigger::current()->call("add_comment", $new);
 
             if ($new->status == "approved")
                 foreach ($sql->select("comments",
                                       "author_email",
-                                      array("post_id" => $new->post_id,
+                                      array("post_id"    => $new->post_id,
                                             "user_id !=" => $new->user_id,
-                                            "status" => "approved",
-                                            "notify" => 1))->fetchAll() as $notification) {
+                                            "status"     => "approved",
+                                            "notify"     => 1))->fetchAll() as $notification) {
 
                     correspond("comment", array("post_id" => $new->post_id,
-                                                "author" => $new->author,
-                                                "body" => $new->body,
-                                                "to" => $notification["author_email"]));
+                                                "author"  => $new->author,
+                                                "body"    => $new->body,
+                                                "to"      => $notification["author_email"]));
                 }
 
             return $new;
         }
 
-        public function update($body, $author, $author_url, $author_email, $status, $notify, $created_at = null, $updated_at = null) {
-            fallback($created_at, $this->created_at);
-            fallback($updated_at, datetime());
+        /**
+         * Function: update
+         * Updates a comment with the given attributes.
+         *
+         * Parameters:
+         *     $body - The comment.
+         *     $author - The name of the commenter.
+         *     $author_url - The commenter's website.
+         *     $author_email - The commenter's email.
+         *     $status - The comment's status.
+         *     $notify - Notification on follow-up comments.
+         *     $created_at - New @created_at@ timestamp for the comment.
+         *     $updated_at - New @updated_at@ timestamp for the comment.
+         *
+         * Returns:
+         *     The updated <Comment>.
+         */
+        public function update($body,
+                               $author,
+                               $author_url,
+                               $author_email,
+                               $status,
+                               $notify,
+                               $created_at = null,
+                               $updated_at = null) {
+            if ($this->no_results)
+                return false;
 
-            # Update all values of this comment.
-            foreach (array("body", "author", "author_url", "author_email", "status", "notify", "created_at", "updated_at") as $attr)
-                $this->$attr = $$attr;
+            $new_values = array("body"         => sanitize_html($body),
+                                "author"       => strip_tags($author),
+                                "author_url"   => strip_tags($author_url),
+                                "author_email" => strip_tags($author_email),
+                                "status"       => $status,
+                                "notify"       => $notify,
+                                "created_at"   => fallback($created_at, $this->created_at),
+                                "updated_at"   => fallback($updated_at, datetime()));
 
-            $sql = SQL::current();
-            $sql->update("comments",
-                         array("id" => $this->id),
-                         array("body" => sanitize_html($body),
-                               "author" => strip_tags($author),
-                               "author_url" => strip_tags($author_url),
-                               "author_email" => strip_tags($author_email),
-                               "status" => $status,
-                               "notify" => $notify,
-                               "created_at" => $created_at,
-                               "updated_at" => $updated_at));
+            SQL::current()->update("comments",
+                                   array("id" => $this->id),
+                                   $new_values);
 
-            Trigger::current()->call("update_comment", $this->post_id, $this->id);
+            $comment = new self(null, array("read_from" => array_merge($new_values,
+                                                                       array("id"           => $this->id,
+                                                                             "author_ip"    => $this->author_ip,
+                                                                             "author_agent" => $this->author_agent,
+                                                                             "post_id"      => $this->post_id,
+                                                                             "user_id"      => $this->user_id,
+                                                                             "parent_id"    => $this->parent_id))));
+
+            Trigger::current()->call("update_comment", $comment, $this);
+
+            return $comment;
         }
 
+        /**
+         * Function: delete
+         * Deletes a comment from the database.
+         *
+         * See Also:
+         *     <Model::destroy>
+         */
         static function delete($comment_id) {
-            $trigger = Trigger::current();
-
-            if ($trigger->exists("delete_comment")) {
-                $new = new self($comment_id);
-                $trigger->call("delete_comment", $new->post_id, $new->id);
-            }
-
-            SQL::current()->delete("comments", array("id" => $comment_id));
+            parent::destroy(get_class(), $comment_id);
         }
 
+        /**
+         * Function: editable
+         * Checks if the <User> can edit the comment.
+         */
         public function editable($user = null) {
+            if ($this->no_results)
+                return false;
+
             fallback($user, Visitor::current());
             return ($user->group->can("edit_comment") or
                     (logged_in() and $user->group->can("edit_own_comment") and $user->id == $this->user_id));
         }
 
+        /**
+         * Function: deletable
+         * Checks if the <User> can delete the comment.
+         */
         public function deletable($user = null) {
+            if ($this->no_results)
+                return false;
+
             fallback($user, Visitor::current());
             return ($user->group->can("delete_comment") or
                     (logged_in() and $user->group->can("delete_own_comment") and $user->id == $this->user_id));
@@ -308,6 +343,10 @@
             return false;
         }
 
+        /**
+         * Function: author_link
+         * Returns the commenter's name enclosed in a hyperlink to their website.
+         */
         public function author_link() {
             if (!isset($this->id))
                 return __("Anon", "comments");
@@ -318,6 +357,10 @@
                 return $this->author;
         }
 
+        /**
+         * Function: user_can
+         * Checks if the <Visitor> can comment on a post.
+         */
         static function user_can($post) {
             $visitor = Visitor::current();
             
@@ -331,17 +374,37 @@
                         ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
         }
 
-        static function user_count($user_id) {
-            $count = SQL::current()->count("comments", array("user_id" => $user_id));
-            return $count;
+        /**
+         * Function: filter
+         * Filters the comment through filter_comment and markup filters.
+         */
+        private function filter() {
+            $trigger = Trigger::current();
+            $trigger->filter($this, "filter_comment");
+
+            $this->body_unfiltered = $this->body;
+            $trigger->filter($this->body, array("markup_comment_text", "markup_text"));
+
+            $config = Config::current();
+
+            $group = (!empty($this->user_id) and !$this->user->no_results) ?
+                $this->user->group :
+                new Group($config->guest_group) ;
+
+            if ($this->status != "pingback" and !$group->can("code_in_comments"))
+                $this->body = strip_tags($this->body, "<".implode("><", $config->allowed_comment_html).">");
         }
 
+        /**
+         * Function: install
+         * Creates the database table.
+         */
         static function install() {
             SQL::current()->query("CREATE TABLE IF NOT EXISTS __comments (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                        body LONGTEXT,
                                        author VARCHAR(250) DEFAULT '',
-                                       author_url VARCHAR(128) DEFAULT '',
+                                       author_url VARCHAR(2048) DEFAULT '',
                                        author_email VARCHAR(128) DEFAULT '',
                                        author_ip INTEGER DEFAULT '0',
                                        author_agent VARCHAR(255) DEFAULT '',
@@ -355,7 +418,14 @@
                                    ) DEFAULT CHARSET=utf8");
         }
 
+        /**
+         * Function: uninstall
+         * Drops the database table.
+         */
         static function uninstall() {
-            SQL::current()->query("DROP TABLE __comments");
+            $sql = SQL::current();
+
+            $sql->query("DROP TABLE __comments");
+            $sql->delete("post_attributes", array("name" => "comment_status"));
         }
     }

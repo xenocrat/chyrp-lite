@@ -25,7 +25,7 @@ class Twig_Node_SandboxedPrint extends Twig_Node_Print
     {
         $compiler
             ->addDebugInfo($this)
-            ->write('echo $this->env->getExtension(\'sandbox\')->ensureToStringAllowed(')
+            ->write('echo $this->env->getExtension(\'Twig_Extension_Sandbox\')->ensureToStringAllowed(')
             ->subcompile($this->getNode('expr'))
             ->raw(");\n")
         ;
@@ -36,11 +36,9 @@ class Twig_Node_SandboxedPrint extends Twig_Node_Print
      *
      * This is mostly needed when another visitor adds filters (like the escaper one).
      *
-     * @param Twig_Node $node A Node
-     *
      * @return Twig_Node
      */
-    protected function removeNodeFilter($node)
+    protected function removeNodeFilter(Twig_Node $node)
     {
         if ($node instanceof Twig_Node_Expression_Filter) {
             return $this->removeNodeFilter($node->getNode('node'));

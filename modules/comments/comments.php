@@ -3,6 +3,8 @@
 
     class Comments extends Modules {
         public function __init() {
+            fallback($_SESSION['comments'], array());
+
             $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
             $this->addAlias("comment_grab", "comments_get");
         }
@@ -83,6 +85,9 @@
         }
 
         private function add_comment() {
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"), null, 400);
 
@@ -133,7 +138,7 @@
         }
 
         private function update_comment() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -172,13 +177,13 @@
             $status = ($visitor->group->can("edit_comment")) ? fallback($_POST['status'], $comment->status) : $comment->status ;
             $created_at = ($visitor->group->can("edit_comment")) ? datetime(fallback($_POST['created_at'])) : $comment->created_at ;
 
-            $comment->update($_POST['body'],
-                             $_POST['author'],
-                             $_POST['author_url'],
-                             $_POST['author_email'],
-                             $status,
-                             $notify,
-                             $created_at);
+            $comment = $comment->update($_POST['body'],
+                                        $_POST['author'],
+                                        $_POST['author_url'],
+                                        $_POST['author_email'],
+                                        $status,
+                                        $notify,
+                                        $created_at);
 
             return array($comment, true, __("Comment updated.", "comments"));
         }
@@ -230,7 +235,7 @@
         }
 
         public function admin_destroy_comment() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -269,47 +274,42 @@
                                                               Config::current()->admin_per_page)));
         }
 
-        public function admin_purge_spam() {
-            if (!Visitor::current()->group->can("delete_comment"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete comments.", "comments"));
-
-            SQL::current()->delete("comments", "status = 'spam'");
-
-            Flash::notice(__("All spam deleted.", "comments"), "manage_spam");
-        }
-
         public function post_options($fields, $post = null) {
             if ($post)
                 $post->comment_status = oneof(@$post->comment_status, "open");
 
+            $statuses = array(array("name" => __("Open", "comments"),
+                                    "value" => "open",
+                                    "selected" => ($post ? $post->comment_status == "open" : true)),
+                              array("name" => __("Closed", "comments"),
+                                    "value" => "closed",
+                                    "selected" => ($post ? $post->comment_status == "closed" : false)),
+                              array("name" => __("Private", "comments"),
+                                    "value" => "private",
+                                    "selected" => ($post ? $post->comment_status == "private" : false)),
+                              array("name" => __("Registered Only", "comments"),
+                                    "value" => "registered_only",
+                                    "selected" => ($post ? $post->comment_status == "registered_only" : false)));
+
             $fields[] = array("attr" => "option[comment_status]",
                               "label" => __("Comment Status", "comments"),
                               "type" => "select",
-                              "options" => array(array("name" => __("Open", "comments"),
-                                                       "value" => "open",
-                                                       "selected" => ($post ? $post->comment_status == "open" : true)),
-                                                 array("name" => __("Closed", "comments"),
-                                                       "value" => "closed",
-                                                       "selected" => ($post ? $post->comment_status == "closed" : false)),
-                                                 array("name" => __("Private", "comments"),
-                                                       "value" => "private",
-                                                       "selected" => ($post ? $post->comment_status == "private" : false)),
-                                                 array("name" => __("Registered Only", "comments"),
-                                                       "value" => "registered_only",
-                                                       "selected" => ($post ? $post->comment_status == "registered_only" : false))));
+                              "options" => $statuses);
 
             return $fields;
         }
 
         public function pingback($post, $to, $from, $title, $excerpt) {
-            $sql = SQL::current();
-            $count = $sql->count("comments",
-                                 array("post_id" => $post->id,
-                                       "status" => "pingback",
-                                       "author_url" => $from));
+            $count = SQL::current()->count("comments",
+                                           array("post_id" => $post->id,
+                                                 "status" => "pingback",
+                                                 "author_url" => $from));
 
             if (!empty($count))
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "comments"));
+
+            if (strlen($from) > 2048)
+                return new IXR_Error(0, __("Your URL is too long to be stored in our database.", "comments"));
 
             Comment::create($excerpt,
                             $title,
@@ -338,7 +338,7 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."comment_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             fallback($_POST['allowed_comment_html'], "");
@@ -346,8 +346,20 @@
             fallback($_POST['comments_per_page'], 25);
             fallback($_POST['auto_reload_comments'], 30);
 
+            # Split at the comma.
+            $allowed_comment_html = explode(",", $_POST['allowed_comment_html']);
+
+            # Remove whitespace.
+            $allowed_comment_html = array_map("trim", $allowed_comment_html);
+
+            # Remove duplicates.
+            $allowed_comment_html = array_unique($allowed_comment_html);
+
+            # Remove empties.
+            $allowed_comment_html = array_diff($allowed_comment_html, array(""));
+
             $config = Config::current();
-            $config->set("allowed_comment_html", explode(", ", $_POST['allowed_comment_html']));
+            $config->set("allowed_comment_html", $allowed_comment_html);
             $config->set("default_comment_status", $_POST['default_comment_status']);
             $config->set("comments_per_page", (int) $_POST['comments_per_page']);
             $config->set("auto_reload_comments", (int) $_POST['auto_reload_comments']);
@@ -366,6 +378,11 @@
             Flash::notice(__("Settings updated."), "comment_settings");
         }
 
+        public function admin_determine_action($action) {
+            if ($action == "manage" and (Comment::any_editable() or Comment::any_deletable()))
+                return "manage_comments";
+        }
+
         public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["comment_settings"] = array("title" => __("Comments", "comments"));
@@ -380,13 +397,35 @@
             $sql = SQL::current();
             $comment_count = $sql->count("comments", array("status not" => "spam"));
             $spam_count = $sql->count("comments", array("status" => "spam"));
+
             $navs["manage_comments"] = array("title" => _f("Comments (%d)", $comment_count, "comments"),
                                              "selected" => array("edit_comment", "delete_comment"));
 
             if (Visitor::current()->group->can("edit_comment", "delete_comment"))
-                $navs["manage_spam"]     = array("title" => _f("Spam (%d)", $spam_count, "comments"));
+                $navs["manage_spam"] = array("title" => _f("Spam (%d)", $spam_count, "comments"));
 
             return $navs;
+        }
+
+        public function manage_posts_column_header() {
+            echo '<th class="post_comments value">'.__("Comments", "comments").'</th>';
+        }
+
+        public function manage_posts_column($post) {
+            echo '<td class="post_comments value"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
+        }
+
+        public function manage_users_column_header() {
+            echo '<th class="user_comments value">'.__("Comments", "comments").'</th>';
+        }
+
+        public function manage_users_column($user) {
+            echo '<td class="user_comments value">'.$user->comment_count.'</td>';
+        }
+
+        public function javascript() {
+            $config  = Config::current();
+            include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
 
         public function admin_edit_comment($admin) {
@@ -426,7 +465,10 @@
         }
 
         public function admin_bulk_comments() {
-            $from = (!isset($_GET['from'])) ? "manage_comments" : "manage_spam" ;
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            $from = (isset($_POST['from'])) ? $_POST['from'] : "manage_comments" ;
 
             if (!isset($_POST['comment']))
                 Flash::warning(__("No comments selected."), $from);
@@ -508,51 +550,6 @@
             redirect($from);
         }
 
-        public function reportHam($comments) {
-            $config = Config::current();
-
-            foreach($comments as $comment) {
-                $akismet = new Akismet($config->url, $config->akismet_api_key);
-                $akismet->setCommentAuthor($comment->author);
-                $akismet->setCommentAuthorEmail($comment->author_email);
-                $akismet->setCommentAuthorURL($comment->author_url);
-                $akismet->setCommentContent($comment->body);
-                $akismet->setPermalink($comment->post_id);
-                $akismet->setReferrer($comment->author_agent);
-                $akismet->setUserIP($comment->author_ip);
-                $akismet->submitHam();
-            }
-        }
-
-        public function reportSpam($comments) {
-            $config = Config::current();
-
-            foreach($comments as $comment) {
-                $akismet = new Akismet($config->url, $config->akismet_api_key);
-                $akismet->setCommentAuthor($comment->author);
-                $akismet->setCommentAuthorEmail($comment->author_email);
-                $akismet->setCommentAuthorURL($comment->author_url);
-                $akismet->setCommentContent($comment->body);
-                $akismet->setPermalink($comment->post_id);
-                $akismet->setReferrer($comment->author_agent);
-                $akismet->setUserIP($comment->author_ip);
-                $akismet->submitSpam();
-            }
-        }
-
-        public function manage_posts_column_header() {
-            echo '<th class="post_comments value">'.__("Comments", "comments").'</th>';
-        }
-
-        public function manage_posts_column($post) {
-            echo '<td class="post_comments value"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
-        }
-
-        public function javascript() {
-            $config  = Config::current();
-            include MODULES_DIR.DIR."comments".DIR."javascript.php";
-        }
-
         public function ajax() {
             $config  = Config::current();
             $sql     = SQL::current();
@@ -608,7 +605,7 @@
                     $main->display("content".DIR."comment", array("comment" => $comment));
                     exit;
                 case "destroy_comment":
-                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                         show_403(__("Access Denied"), __("Invalid security key."));
 
                     if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -625,7 +622,7 @@
                     Comment::delete($comment->id);
                     json_response(__("Comment deleted.", "comments"));
                 case "edit_comment":
-                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                         show_403(__("Access Denied"), __("Invalid security key."));
 
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
@@ -654,7 +651,7 @@
             $post = $context["post"];
             $comments = $post->comments;
             $latest_timestamp = 0;
-            $title = _f("Comments on &#8220;%s&#8221;", fix(oneof($post->title(), ucfirst($post->feather))), "comments");
+            $subtitle = _f("Comments on &#8220;%s&#8221;", fix(oneof($post->title(), (string) $post->id)), "comments");
 
             foreach ($comments as $comment)
                 if (strtotime($comment->created_at) > $latest_timestamp)
@@ -662,14 +659,12 @@
 
             $atom = new AtomFeed();
 
-            $atom->open($title,
-                        null,
+            $atom->open($config->name,
+                        $subtitle,
                         null,
                         $latest_timestamp);
 
             foreach ($comments as $comment) {
-                $trigger->call("feed_comment", $comment);
-
                 $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
 
                 $tagged = substr(strstr(url("id/".$comment->post->id)."#comment_".$comment->id, "//"), 2);
@@ -686,24 +681,22 @@
                              $comment->author,
                              $comment->author_url);
 
-                $trigger->call("comments_feed_item", $comment->id);
+                $trigger->call("comments_feed_item", $comment);
             }
 
             $atom->close();
         }
 
         public function metaWeblog_getPost($struct, $post) {
-            if (isset($post->comment_status))
-                $struct['mt_allow_comments'] = intval($post->comment_status == 'open');
-            else
-                $struct['mt_allow_comments'] = 1;
-
+            $struct["mt_allow_comments"] = isset($post->comment_status) ? intval($post->comment_status == "open") : 1 ;
             return $struct;
         }
 
         public function metaWeblog_editPost_preQuery($struct, $post = null) {
-            if (isset($struct['mt_allow_comments']))
-                $_POST['option']['comment_status'] = ($struct['mt_allow_comments'] == 1) ? 'open' : 'closed';
+            if (isset($struct["mt_allow_comments"]))
+                $_POST['option']['comment_status'] = ($struct["mt_allow_comments"] == "open") ? "open" : "closed" ;
+            else
+                $_POST['option']['comment_status'] = "closed";
         }
 
         public function post($post) {
@@ -711,15 +704,14 @@
         }
 
         public function post_comment_count_attr($attr, $post) {
-            if (isset($this->comment_counts))
-                return oneof(@$this->comment_counts[$post->id], 0);
+            if (isset($this->post_comment_counts))
+                return fallback($this->post_comment_counts[$post->id], 0);
 
             $counts = SQL::current()->select("comments",
                                              array("COUNT(post_id) AS total", "post_id as post_id"),
-                                             array("status not" => "spam", "status != 'denied' OR (
-                                                      (user_id != 0 AND user_id = :visitor_id) OR (
-                                                            id IN ".self::visitor_comments()."))"
-                                                  ),
+                                             array("status not" => "spam",
+                                                   "status != 'denied' OR
+                                                   ((user_id != 0 AND user_id = :visitor_id) OR (id IN ".self::visitor_comments()."))"),
                                              null,
                                              array(":visitor_id" => Visitor::current()->id),
                                              null,
@@ -727,9 +719,13 @@
                                              "post_id");
 
             foreach ($counts->fetchAll() as $count)
-                $this->comment_counts[$count["post_id"]] = (int) $count["total"];
+                $this->post_comment_counts[$count["post_id"]] = (int) $count["total"];
 
-            return oneof(@$this->comment_counts[$post->id], 0);
+            return fallback($this->post_comment_counts[$post->id], 0);
+        }
+
+        public function post_commentable_attr($attr, $post) {
+            return Comment::user_can($post);
         }
 
         public function post_latest_comment_attr($attr, $post) {
@@ -754,6 +750,31 @@
             return fallback($this->latest_comments[$post->id], null);
         }
 
+        public function user_comment_count_attr($attr, $user) {
+            if (isset($this->user_comment_counts))
+                return fallback($this->user_comment_counts[$user->id], 0);
+
+            $counts = SQL::current()->select("comments",
+                                             array("COUNT(user_id) AS total", "user_id as user_id"),
+                                             array("status not" => "spam",
+                                                   "status != 'denied' OR
+                                                   ((user_id != 0 AND user_id = :visitor_id) OR (id IN ".self::visitor_comments()."))"),
+                                             null,
+                                             array(":visitor_id" => Visitor::current()->id),
+                                             null,
+                                             null,
+                                             "user_id");
+
+            foreach ($counts->fetchAll() as $count)
+                $this->user_comment_counts[$count["user_id"]] = (int) $count["total"];
+
+            return fallback($this->user_comment_counts[$user->id], 0);
+        }
+
+        public function visitor_comment_count_attr($attr, $visitor) {
+            return ($visitor->id == 0) ? count($_SESSION['comments']) : self::user_comment_count_attr($attr, $visitor) ;
+        }
+
         public function comments_get(&$options) {
             if (ADMIN)
                 return;
@@ -766,25 +787,40 @@
             $options["params"][":visitor_id"] = Visitor::current()->id;
         }
 
-        public function post_commentable_attr($attr, $post) {
-            return Comment::user_can($post);
+        private function visitor_comments() {
+            return empty($_SESSION['comments']) ? "(0)" : QueryBuilder::build_list($_SESSION['comments']);
         }
 
-        public function manage_nav_show($possibilities) {
-            $possibilities[] = (Comment::any_editable() or Comment::any_deletable());
-            return $possibilities;
+        private function reportHam($comments) {
+            $config = Config::current();
+
+            foreach($comments as $comment) {
+                $akismet = new Akismet($config->url, $config->akismet_api_key);
+                $akismet->setCommentAuthor($comment->author);
+                $akismet->setCommentAuthorEmail($comment->author_email);
+                $akismet->setCommentAuthorURL($comment->author_url);
+                $akismet->setCommentContent($comment->body);
+                $akismet->setPermalink($comment->post_id);
+                $akismet->setReferrer($comment->author_agent);
+                $akismet->setUserIP($comment->author_ip);
+                $akismet->submitHam();
+            }
         }
 
-        public function admin_determine_action($action) {
-            if ($action == "manage" and (Comment::any_editable() or Comment::any_deletable()))
-                return "manage_comments";
-        }
+        private function reportSpam($comments) {
+            $config = Config::current();
 
-        public function visitor_comments() {
-            if (empty($_SESSION['comments']))
-                return "(0)";
-            else
-                return QueryBuilder::build_list($_SESSION['comments']);
+            foreach($comments as $comment) {
+                $akismet = new Akismet($config->url, $config->akismet_api_key);
+                $akismet->setCommentAuthor($comment->author);
+                $akismet->setCommentAuthorEmail($comment->author_email);
+                $akismet->setCommentAuthorURL($comment->author_url);
+                $akismet->setCommentContent($comment->body);
+                $akismet->setPermalink($comment->post_id);
+                $akismet->setReferrer($comment->author_agent);
+                $akismet->setUserIP($comment->author_ip);
+                $akismet->submitSpam();
+            }
         }
 
         public function import_chyrp_post($entry, $post) {
@@ -802,19 +838,19 @@
 
                 $user = new User(array("login" => (string) $login));
 
-                Comment::add(unfix($comment->content),
-                             unfix($comment->author->name),
-                             unfix($comment->author->uri),
-                             unfix($comment->author->email),
-                             $chyrp->author->ip,
-                             unfix($chyrp->author->agent),
-                             $chyrp->status,
+                Comment::add(unfix((string) $comment->content),
+                             unfix((string) $comment->author->name),
+                             unfix((string) $comment->author->uri),
+                             unfix((string) $comment->author->email),
+                             (string) $chyrp->author->ip,
+                             unfix((string) $chyrp->author->agent),
+                             (string) $chyrp->status,
                              $post->id,
                              (!$user->no_results) ? $user->id : 0,
                              0,
                              0,
-                             datetime($comment->published),
-                             ($comment->published == $comment->updated) ? null : datetime($comment->updated));
+                             datetime((string) $comment->published),
+                             ($comment->published == $comment->updated) ? null : datetime((string) $comment->updated));
             }
         }
 
@@ -849,9 +885,9 @@
             $post = new Post($params["post_id"], array("drafts" => true));
 
             $params["subject"] = _f("New Comment at %s", Config::current()->name);
-            $params["message"] = _f("%s commented on a blog post:", fix($params["author"])).
+            $params["message"] = _f("%s commented on a blog post:", $params["author"]).
                                  PHP_EOL.
-                                 $post->url().
+                                 unfix($post->url()).
                                  PHP_EOL.PHP_EOL.
                                  '"'.truncate(strip_tags($params["body"])).'"';
             return $params;

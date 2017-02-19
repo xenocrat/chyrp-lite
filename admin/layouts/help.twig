@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.locale | split('_') | first }}">
+<html lang="{{ site.locale | split('_') | first | split('-') | first }}">
 <head>
 <meta charset="UTF-8">
 <title>{{ site.name }}: {% block title %}{{ title }}{% endblock %}</title>

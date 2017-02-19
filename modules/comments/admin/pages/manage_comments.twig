@@ -39,7 +39,7 @@
 <td class="comment_post title main">
 {% if not comment.post.no_results %}
 <a href="{{ comment.post.url() }}#comment_{{ comment.id }}">
-{{ comment.post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+{{ comment.post.title() | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 {% endif %}
 </td>
 <td class="comment_author value">
@@ -92,6 +92,7 @@
 <button class="boo" name="delete">
 <img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Delete" | translate("comments") }}
 </button>
+<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
 </div>
 {% endif %}
 </form>

@@ -58,11 +58,11 @@ var ChyrpComment = {
         }
     },
     fetch: function() {
-        if (ChyrpComment.failed || $("#comments").attr("data-post") == undefined)
+        if (ChyrpComment.failed || $("#comments").attr("data-post_id") == undefined || $("#comments").attr("data-timestamp") == undefined)
             return;
 
         var comments = $("#comments");
-        var id = comments.attr("data-post");
+        var id = comments.attr("data-post_id");
         var ts = comments.attr("data-timestamp");
 
         if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && !ChyrpComment.failed && $("#comments .comment").length < ChyrpComment.per_page) {
@@ -110,18 +110,6 @@ var ChyrpComment = {
             thisItem.fadeOut("fast", function() {
                 $(this).loader(true);
                 $(this).empty().append(data).fadeIn("fast", function() {
-                    $("#more_options_link_" + id).click(function(e) {
-                        e.preventDefault();
-
-                        if ($("#more_options_" + id).css("display") == "none") {
-                            $(this).empty().append('<?php echo __("&uarr; Fewer Options", "comments"); ?>');
-                            $("#more_options_" + id).slideDown("slow");
-                        } else {
-                            $(this).empty().append('<?php echo __("More Options &darr;", "comments"); ?>');
-                            $("#more_options_" + id).slideUp("slow");
-                        }
-                    });
-
                     var thisForm = $("#comment_edit_" + id);
 
                     thisForm.on("submit", function(e) {

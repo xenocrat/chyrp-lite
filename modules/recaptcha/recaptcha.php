@@ -19,7 +19,7 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."recaptcha_settings");
     
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             fallback($_POST['public_key'], "");
@@ -52,16 +52,17 @@
         static function verifyCaptcha() {
             $private_key = Config::current()->module_recaptcha["private_key"];
 
-            if (empty($private_key) or !isset($_POST['recaptcha_challenge_field']) or !isset($_POST['recaptcha_response_field']))
+            if (empty($private_key))
                 return false;
 
-            $resp = recaptcha_check_answer($private_key,
-                                           $_SERVER['REMOTE_ADDR'],
-                                           $_POST['recaptcha_challenge_field'],
-                                           $_POST['recaptcha_response_field']);
-            if (!$resp->is_valid)
+            if (!isset($_POST['recaptcha_challenge_field']) or !isset($_POST['recaptcha_response_field']))
                 return false;
-            else
-                return true;
+
+            $check = recaptcha_check_answer($private_key,
+                                            $_SERVER['REMOTE_ADDR'],
+                                            $_POST['recaptcha_challenge_field'],
+                                            $_POST['recaptcha_response_field']);
+
+            return (!$check->is_valid) ? false : true ;
         }
     }

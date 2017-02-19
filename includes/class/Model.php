@@ -191,6 +191,7 @@
          *     order - What to order the SQL result by.
          *     offset - Offset for SQL query.
          *     read_from - An array to read from instead of performing another query.
+         *     ignore_dupes - An array of columns in which duplicate values will be retained.
          */
         protected static function grab($model, $id, $options = array()) {
             $model_name = strtolower(get_class($model));
@@ -202,12 +203,10 @@
                 $id = $options["where"]["id"];
 
             $cache = (is_numeric($id) and isset(self::$caches[$model_name][$id])) ?
-                         self::$caches[$model_name][$id] :
-                         ((isset($options["read_from"]["id"]) and isset(self::$caches[$model_name][$options["read_from"]["id"]])) ?
-                             self::$caches[$model_name][$options["read_from"]["id"]] :
-                             (isset(self::$caches[$model_name][serialize($id)]) ?
-                                 self::$caches[$model_name][serialize($id)] :
-                                 array())) ;
+                        self::$caches[$model_name][$id] :
+                        (($id !== null and isset(self::$caches[$model_name][serialize($id)])) ?
+                            self::$caches[$model_name][serialize($id)] :
+                            array()) ;
 
             # Is this model already in the cache?
             if (!empty($cache)) {
@@ -349,8 +348,7 @@
             $options["from"]   = (array) $options["from"];
             $options["select"] = (array) $options["select"];
 
-            $trigger = Trigger::current();
-            $trigger->filter($options, pluralize(strtolower($model_name))."_get");
+            Trigger::current()->filter($options, pluralize(strtolower($model_name))."_get");
 
             $grab = SQL::current()->select($options["from"],
                                            $options["select"],
@@ -362,7 +360,6 @@
                                            $options["group"],
                                            $options["left_join"])->fetchAll();
 
-            $shown_dates = array();
             $results = array();
             $rows = array();
 
@@ -388,17 +385,6 @@
 
                 $options_for_object["read_from"] = $result;
                 $result = new $model(null, $options_for_object);
-
-                if (isset($result->created_at)) {
-                    $pinned = (isset($result->pinned) and $result->pinned);
-                    $shown = in_array(when("m-d-Y", $result->created_at), $shown_dates);
-
-                    $result->first_of_day = (!$pinned and !$shown and !AJAX);
-
-                    if (!$pinned and !$shown)
-                        $shown_dates[] = when("m-d-Y", $result->created_at);
-                }
-
                 $results[] = $result;
             }
 
@@ -407,18 +393,19 @@
 
         /**
          * Function: delete
-         * Deletes a given object. Calls the @delete_[model]@ trigger with the objects ID.
+         * Deletes a given object. Calls the @delete_[model]@ trigger with the object.
          *
          * Parameters:
          *     $model - The model name.
          *     $id - The ID of the object to delete.
+         *     $options_for_object - An array of options for the instantiation of the model.
          */
-        protected static function destroy($model, $id) {
+        protected static function destroy($model, $id, $options_for_object = array()) {
             $model = strtolower($model);
             $trigger = Trigger::current();
 
             if ($trigger->exists("delete_".$model))
-                $trigger->call("delete_".$model, new $model($id));
+                $trigger->call("delete_".$model, new $model($id, $options_for_object));
 
             SQL::current()->delete(pluralize($model), array("id" => $id));
         }

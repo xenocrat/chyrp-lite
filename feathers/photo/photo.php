@@ -14,13 +14,12 @@
                                   "type" => "text_block",
                                   "label" => __("Caption", "photo"),
                                   "optional" => true,
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
 
-            $this->setFilter("title", array("markup_title", "markup_post_title"));
-            $this->setFilter("caption", array("markup_text", "markup_post_text"));
+            $this->setFilter("title", array("markup_post_title", "markup_title"));
+            $this->setFilter("caption", array("markup_post_text", "markup_text"));
 
             $this->respondTo("delete_post", "delete_file");
-            $this->respondTo("filter_post", "filter_post");
             $this->respondTo("post_options", "add_option");
         }
 
@@ -55,9 +54,9 @@
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
 
-            $post->update(array("title" => $_POST['title'],
-                                "filename" => $filename,
-                                "caption" => $_POST['caption']));
+            return $post->update(array("title" => $_POST['title'],
+                                       "filename" => $filename,
+                                       "caption" => $_POST['caption']));
         }
 
         public function title($post) {
@@ -69,7 +68,8 @@
         }
 
         public function feed_content($post) {
-            return self::image_tag($post, 500, 500)."<p>".$post->caption."</p>";
+            return '<img src="'.Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($post->filename).
+                   '" alt="'.fix(oneof($post->alt_text, $post->filename), true).'"><p>'.$post->caption.'</p>';
         }
 
         public function delete_file($post) {
@@ -87,37 +87,6 @@
             }
         }
 
-        public function filter_post($post) {
-            if ($post->feather != "photo")
-                return;
-
-            $post->image = $this->image_tag($post);
-        }
-
-        public function image_tag($post, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
-            $config = Config::current();
-            $safename = urlencode($post->filename);
-            $alt = !empty($post->alt_text) ? fix($post->alt_text, true) : $post->filename ;
-
-            # Source set for responsive images.
-            $srcset = array($config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.' 1x',
-                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=960&amp;'.$more_args.' 960w',
-                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=640&amp;'.$more_args.' 640w',
-                            $config->chyrp_url.'/includes/thumb.php?file='.$safename.'&amp;max_width=320&amp;'.$more_args.' 320w');
-
-            $tag = '<img srcset="'.implode(", ", $srcset).'" sizes="'.$sizes.'"';
-            $tag.= ' src="'.$config->chyrp_url.'/includes/thumb.php?file='.$safename;
-            $tag.= '&amp;max_width='.$max_width.'&amp;max_height='.$max_height.'&amp;'.$more_args.'"';
-            $tag.= ' alt="'.$alt.'" class="image">';
-
-            return $tag;
-        }
-
-        public function image_link($post, $max_width = 640, $max_height = null, $more_args = "quality=100", $sizes = "100vw") {
-            $source = !empty($post->source) ? $post->source : uploaded($post->filename) ;
-            return '<a href="'.fix($source, true).'" class="image_link">'.$this->image_tag($post, $max_width, $max_height, $more_args, $sizes).'</a>';
-        }
-
         public function add_option($options, $post = null) {
             if (isset($post) and $post->feather != "photo")
                 return;
@@ -128,12 +97,12 @@
             $options[] = array("attr" => "option[alt_text]",
                                "label" => __("Alt-Text", "photo"),
                                "type" => "text",
-                               "value" => oneof(@$post->alt_text, ""));
+                               "value" => (isset($post) ? $post->alt_text : ""));
 
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "photo"),
                                "type" => "text",
-                               "value" => oneof(@$post->source, ""));
+                               "value" => (isset($post) ? $post->source : ""));
 
             return $options;
         }

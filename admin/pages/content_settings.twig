@@ -21,7 +21,7 @@
 <label for="feed_url">{{ "Feed URL" | translate }}</label>
 <input class="text" type="url" name="feed_url" value="{{ site.feed_url | fix(true) }}" id="feed_url">
 <small>
-{{ site.clean_urls ? "Allows you to set an alternative URL for <code>/feed/</code>." | translate : "Allows you to set an alternative URL for <code>/?feed</code>." | translate }}
+{{ "Allows you to set an alternative URL for <code>%s</code>." | translate | format(site.clean_urls ? "/feed/" : "/?feed") }}
 </small>
 </p>
 <p>
@@ -68,6 +68,7 @@
 <p>
 <label for="enable_markdown">{{ "Markdown" | translate }}</label>
 <input class="checkbox" type="checkbox" name="enable_markdown" id="enable_markdown"{{ site.enable_markdown | checked }}>
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Compose blog content using Markdown text formatting." | translate }}
 </small>

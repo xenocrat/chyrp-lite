@@ -14,10 +14,10 @@
                                   "type" => "text_block",
                                   "label" => __("Description", "video"),
                                   "optional" => true,
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
 
-            $this->setFilter("title", array("markup_title", "markup_post_title"));
-            $this->setFilter("description", array("markup_text", "markup_post_text"));
+            $this->setFilter("title", array("markup_post_title", "markup_title"));
+            $this->setFilter("description", array("markup_post_text", "markup_text"));
 
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_video");
@@ -49,9 +49,9 @@
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
 
-            $post->update(array("title" => $_POST['title'],
-                                "filename" => $filename,
-                                "description" => $_POST['description']));
+            return $post->update(array("title" => $_POST['title'],
+                                       "filename" => $filename,
+                                       "description" => $_POST['description']));
         }
 
         public function title($post) {
@@ -64,6 +64,18 @@
 
         public function feed_content($post) {
             return $post->description;
+        }
+
+        public function enclose_video($post) {
+            $config = Config::current();
+
+            if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
+                return;
+
+            echo '<link rel="enclosure" href="'.uploaded($post->filename).
+                 '" type="'.self::video_type($post->filename).
+                 '" title="'.truncate(strip_tags($post->title())).
+                 '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
         public function delete_file($post) {
@@ -85,14 +97,26 @@
             if ($post->feather != "video")
                 return;
 
-            $post->video_player = $this->video_player($post->filename, array(), $post);
+            $post->video_player = self::video_player($post);
         }
 
-        public function video_type($filename) {
-            $file_split = explode(".", $filename);
-            $file_ext = strtolower(end($file_split));
+        private function video_player($post) {
+            $trigger = Trigger::current();
 
-            switch($file_ext) {
+            if ($trigger->exists("video_player"))
+                return $trigger->call("video_player", $post);
+
+            return "\n".'<video controls>'.
+                   "\n".__("Your web browser does not support the <code>video</code> element.", "video").
+                   "\n".'<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).'">'.
+                   "\n".'</video>'.
+                   "\n";
+        }
+
+        private function video_type($filename) {
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+            switch($extension) {
                 case "mp4":
                     return "video/mp4";
                 case "ogv":
@@ -108,31 +132,5 @@
                 default:
                     return "application/octet-stream";
             }
-        }
-
-        public function enclose_video($post) {
-            $config = Config::current();
-
-            if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
-                return;
-
-            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
-                        '" type="'.$this->video_type($post->filename).
-                        '" title="'.truncate(strip_tags($post->title())).
-                        '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
-        }
-
-        public function video_player($filename, $params = array(), $post) {
-            $trigger = Trigger::current();
-
-            if ($trigger->exists("video_player"))
-                return $trigger->call("video_player", $filename, $params, $post);
-
-            $player = "\n".'<video controls>';
-            $player.= "\n".__("Your web browser does not support the <code>video</code> element.", "video");
-            $player.= "\n".'<source src="'.uploaded($filename).'" type="'.$this->video_type($filename).'">';
-            $player.= "\n".'</video>'."\n";
-
-            return $player;
         }
     }

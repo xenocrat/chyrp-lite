@@ -25,21 +25,12 @@
 
             $this->slug = $this->url;
 
-            $this->filtered = !isset($options["filter"]) or $options["filter"];
+            $this->filtered = (!isset($options["filter"]) or $options["filter"]);
 
-            $trigger = Trigger::current();
+            Trigger::current()->filter($this, "page");
 
-            $trigger->filter($this, "page");
-
-            if ($this->filtered) {
-                $this->title_unfiltered = $this->title;
-                $this->body_unfiltered = $this->body = (Config::current()->enable_emoji) ? emote($this->body) : $this->body ;
-
-                $trigger->filter($this->title, array("markup_title", "markup_page_title"), $this);
-                $trigger->filter($this->body, array("markup_text", "markup_page_text"), $this);
-
-                $trigger->filter($this, "filter_page");
-            }
+            if ($this->filtered)
+                $this->filter();
         }
 
         /**
@@ -146,6 +137,9 @@
          *     $created_at - The page's "created" timestamp.
          *     $updated_at - The page's "last updated" timestamp.
          *
+         * Returns:
+         *     The updated <Page>.
+         *
          * Notes:
          *     The caller is responsible for validating all supplied values.
          */
@@ -163,7 +157,6 @@
             if ($this->no_results)
                 return false;
 
-            $old = clone $this;
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($title,        $this->title);
@@ -185,22 +178,17 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            # Update all values of this page.
-            foreach (array("title", "body", "user_id", "parent_id", "public", "show_in_list",
-                           "list_order", "clean", "url", "created_at", "updated_at") as $attr)
-                $this->$attr = $$attr;
-
-            $new_values = array("title" =>        $title,
-                                "body" =>         $body,
-                                "user_id" =>      $user_id,
-                                "parent_id" =>    $parent_id,
-                                "public" =>       $public,
+            $new_values = array("title"        => $title,
+                                "body"         => $body,
+                                "user_id"      => $user_id,
+                                "parent_id"    => $parent_id,
+                                "public"       => $public,
                                 "show_in_list" => $show_in_list,
-                                "list_order" =>   $list_order,
-                                "clean" =>        $clean,
-                                "url" =>          $url,
-                                "created_at" =>   $created_at,
-                                "updated_at" =>   $updated_at);
+                                "list_order"   => $list_order,
+                                "clean"        => $clean,
+                                "url"          => $url,
+                                "created_at"   => $created_at,
+                                "updated_at"   => $updated_at);
 
             $trigger->filter($new_values, "before_update_page");
 
@@ -208,7 +196,12 @@
                          array("id" => $this->id),
                          $new_values);
 
-            $trigger->call("update_page", $this, $old);
+            $page = new self(null, array("read_from" => array_merge($new_values,
+                                                                    array("id" => $this->id))));
+
+            $trigger->call("update_page", $page, $this);
+
+            return $page;
         }
 
         /**
@@ -218,8 +211,11 @@
          * Calls the @delete_page@ trigger with the <Page> to delete.
          *
          * Parameters:
-         *     $page_id - The page to delete.
+         *     $page_id - The ID of the page to delete.
          *     $recursive - Should the page's children be deleted? (default: false)
+         *
+         * See Also:
+         *     <Model::destroy>
          */
         static function delete($page_id, $recursive = false) {
             if ($recursive) {
@@ -257,6 +253,21 @@
         static function check_url($clean) {
             $count = SQL::current()->count("pages", array("clean" => $clean));
             return (!$count or empty($clean)) ? $clean : $clean."-".($count + 1) ;
+        }
+
+        /**
+         * Function: filter
+         * Filters the page attributes through filter_page and markup filters.
+         */
+        private function filter() {
+            $trigger = Trigger::current();
+            $trigger->filter($this, "filter_page");
+
+            $this->title_unfiltered = $this->title;
+            $this->body_unfiltered = $this->body;
+
+            $trigger->filter($this->title, array("markup_page_title", "markup_title"), $this);
+            $trigger->filter($this->body, array("markup_page_text", "markup_text"), $this);
         }
 
         /**

@@ -5,16 +5,16 @@
                                   "type" => "text_block",
                                   "rows" => 5,
                                   "label" => __("Quote", "quote"),
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
             $this->setField(array("attr" => "source",
                                   "type" => "text_block",
                                   "rows" => 5,
                                   "label" => __("Source", "quote"),
                                   "optional" => true,
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
 
-            $this->setFilter("quote", array("markup_text", "markup_post_text"));
-            $this->setFilter("source", array("markup_text", "markup_post_text"));
+            $this->setFilter("quote", array("markup_post_text", "markup_text"));
+            $this->setFilter("source", array("markup_post_text", "markup_text"));
         }
 
         public function submit() {
@@ -34,8 +34,8 @@
 
             fallback($_POST['source'], "");
 
-            $post->update(array("quote" => $_POST['quote'],
-                                "source" => $_POST['source']));
+            return $post->update(array("quote" => $_POST['quote'],
+                                       "source" => $_POST['source']));
         }
 
         public function title($post) {

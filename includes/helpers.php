@@ -49,7 +49,7 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        return (isset($_SERVER["HTTP_REFERER"]) and strpos($_SERVER["HTTP_REFERER"], Config::current()->url) === 0);
+        return (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], Config::current()->url) === 0);
     }
 
     #---------------------------------------------
@@ -90,7 +90,7 @@
         if (!MAIN or !$theme->file_exists("pages".DIR."403"))
             error($title, $body, null, 403);
 
-        header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+        header($_SERVER['SERVER_PROTOCOL']." 403 Forbidden");
         $main->display("pages".DIR."403", array("reason" => $body), $title);
         exit;
     }
@@ -113,7 +113,7 @@
         if (!MAIN or !$theme->file_exists("pages".DIR."404"))
             error($title, $body, null, 404);
 
-        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+        header($_SERVER['SERVER_PROTOCOL']." 404 Not Found");
         $main->display("pages".DIR."404", array("reason" => $body), $title);
         exit;
     }
@@ -652,7 +652,8 @@
             }
 
             if (is_array($val)) {
-                if (in_array(0, array_keys($val))) { # Numeric-indexed things need to be added as duplicates.
+                # Numeric-indexed things need to be added as duplicates.
+                if (in_array(0, array_keys($val))) {
                     foreach ($val as $dup) {
                         $xml = $object->addChild($key);
                         arr2xml($xml, $dup);
@@ -1208,7 +1209,7 @@
      */
     function sanitize_html($text) {
         # Strip invalid tags.
-        $text = preg_replace("/<([^a-z\/]|\/(?![a-z]))[^>]*>/i", "", $text);
+        $text = preg_replace("/<([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*>/i", "", $text);
 
         # Strip script tags.
         $text = preg_replace("/<\/?script[^>]*>/i", "", $text);
@@ -1297,7 +1298,7 @@
                                                                    "max_redirects" => $redirects,
                                                                    "timeout" => $timeout,
                                                                    "protocol_version" => 1.1,
-                                                                   "user_agent" => "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")")));
+                                                                   "user_agent" => CHYRP_IDENTITY)));
             $content = @file_get_contents($url, false, $context);
         } elseif (function_exists("curl_init")) {
             $handle = curl_init();
@@ -1309,7 +1310,7 @@
             curl_setopt($handle, CURLOPT_MAXREDIRS, $redirects);
             curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, $timeout);
             curl_setopt($handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-            curl_setopt($handle, CURLOPT_USERAGENT, "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
+            curl_setopt($handle, CURLOPT_USERAGENT, CHYRP_IDENTITY);
             $content = curl_exec($handle);
             curl_close($handle);
         } else {
@@ -1327,7 +1328,7 @@
                 # Send the GET headers.
                 fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
                 fwrite($connect, "Host: ".$host."\r\n");
-                fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
+                fwrite($connect, "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
 
                 while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false)
                     $remote_headers.= fgets($connect);
@@ -1395,7 +1396,7 @@
             if ($ping_url = pingback_url($url)) {
                 $client = new IXR_Client($ping_url);
                 $client->timeout = 3;
-                $client->useragent = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
+                $client->useragent = CHYRP_IDENTITY;
                 $client->query("pingback.ping", $post->url(), $url);
             }
     }
@@ -1434,7 +1435,7 @@
         # Send the GET headers.
         fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
         fwrite($connect, "Host: $host\r\n");
-        fwrite($connect, "User-Agent: Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")\r\n\r\n");
+        fwrite($connect, "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
 
         # Check for X-Pingback header.
         while (!feof($connect)) {
@@ -1504,9 +1505,9 @@
 
         if ($info["uploader"])
             if (!is_dir($uploads_path))
-                $info["notifications"][] = _f("Please create the directory <em>%s</em>.", fix($uploads_path));
+                $info["notifications"][] = __("Please create the uploads directory.");
             elseif (!is_writable($uploads_path))
-                $info["notifications"][] = _f("Please make <em>%s</em> writable by the server.", fix($uploads_path));
+                $info["notifications"][] = __("Please make the uploads directory writable.");
 
         return $info;
     }
@@ -1614,24 +1615,20 @@
      * Temporarily declares a module cancelled (disabled).
      *
      * Parameters:
-     *     $target - Module name to disable.
+     *     $target - The non-camelized name of the module.
      *     $reason - Why was execution cancelled?
      *
      * Notes:
-     *     A module can cancel itself in its __construct method.
+     *     A module can cancel itself in its __init() method.
      */
      function cancel_module($target, $reason = "") {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled because the module could not continue.", camelize($target)) : $reason ;
+            _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
 
-        if (DEBUG)
-            error_log("WARNING: ".strip_tags($message));
-
-        if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
-            Flash::warning($message);
+        trigger_error($message, E_USER_NOTICE);
     }
 
     /**
@@ -1639,24 +1636,20 @@
      * Temporarily declares a feather cancelled (disabled).
      *
      * Parameters:
-     *     $target - Feather name to disable.
+     *     $target - The non-camelized name of the feather.
      *     $reason - Why was execution cancelled?
      *
      * Notes:
-     *     A feather can cancel itself in its __construct method.
+     *     A feather can cancel itself in its __init() method.
      */
      function cancel_feather($target, $reason = "") {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled because the feather could not continue.", camelize($target)) : $reason ;
+            _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
         if (isset(Feathers::$instances[$target]))
             Feathers::$instances[$target]->cancelled = true;
 
-        if (DEBUG)
-            error_log("WARNING: ".strip_tags($message));
-
-        if (ADMIN and Visitor::current()->group->can("toggle_extensions"))
-            Flash::warning($message);
+        trigger_error($message, E_USER_NOTICE);
     }
 
     #---------------------------------------------
@@ -1675,54 +1668,24 @@
      *     The filename of the upload relative to the uploads directory.
      */
     function upload($file, $filter = null) {
-        $file_split = explode(".", $file['name']);
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+        $filename = upload_filename($file['name'], $filter);
+
+        if ($filename === false)
+            error(__("Error"), _f("Only %s files are accepted.", list_notate($filter)));
 
         if (!is_uploaded_file($file['tmp_name']))
-            show_403(__("Access Denied"), _f("<em>%s</em> is not an uploaded file.", fix($file['name'])));
+            show_403(__("Access Denied"), __("Only uploaded files are accepted."));
 
         if (!is_dir($uploads_path))
-            error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
+            error(__("Error"), __("Upload path does not exist."));
 
         if (!is_writable($uploads_path))
-            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
+            error(__("Error"), __("Upload path is not writable."));
 
-        $original_ext = strtolower(end($file_split));
+        if (!move_uploaded_file($file['tmp_name'], $uploads_path.$filename))
+            error(__("Error"), __("Failed to write file to disk."));
 
-        # Handle common double extensions.
-        foreach (array("tar.gz", "tar.bz", "tar.bz2") as $ext) {
-            list($first, $second) = explode(".", $ext);
-            $file_first =& $file_split[count($file_split) - 2];
-
-            if (strcasecmp($file_first, $first) == 0 and strcasecmp(end($file_split), $second) == 0) {
-                $file_first = $first.".".$second;
-                array_pop($file_split);
-            }
-        }
-
-        $file_ext = strtolower(end($file_split));
-
-        # Rename these extensions for safety.
-        if (in_array($file_ext, array("php", "htaccess", "shtml", "shtm", "stm", "cgi")))
-            $file_ext = "txt";
-
-        if (!empty($filter)) {
-            $extensions = array();
-
-            foreach ((array) $filter as $string)
-                $extensions[] = strtolower($string);
-
-            if (!in_array($file_ext, $extensions) and !in_array($original_ext, $extensions))
-                error(__("Unsupported File Type"),
-                      _f("Only files of the following types are accepted: %s.", implode(", ", $extensions)));
-        }
-
-        array_pop($file_split);
-        $file_clean = implode(".", $file_split);
-        $file_clean = sanitize($file_clean, true, true, 80).".".$file_ext;
-        $filename = unique_filename($file_clean);
-
-        move_uploaded_file($file['tmp_name'], $uploads_path.$filename);
         return $filename;
     }
 
@@ -1739,20 +1702,22 @@
      *     The filename of the upload relative to the uploads directory.
      */
     function upload_from_url($url, $redirects = 3, $timeout = 10) {
-        preg_match("~\.[a-z0-9]+(?=($|\?))~i", $url, $file_ext);
-        fallback($file_ext[0], "bin"); # Assume unknown binary file.
+        preg_match("~[^/\?]+(?=($|\?))~i", $url, $matches);
+        fallback($matches[0], md5($url).".bin");
+
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+        $filename = upload_filename($matches[0]);
+        $contents = get_remote($url, $redirects, $timeout);
 
         if (!is_dir($uploads_path))
-            error(__("Error"), _f("Please create the directory <em>%s</em>.", fix($uploads_path)));
+            error(__("Error"), __("Upload path does not exist."));
 
         if (!is_writable($uploads_path))
-            error(__("Error"), _f("Upload destination <em>%s</em> is not writable.", fix($uploads_path)));
+            error(__("Error"), __("Upload path is not writable."));
 
-        $filename = unique_filename(md5($url).".".$file_ext[0]);
-        $filepath = $uploads_path.$filename;
+        if (!@file_put_contents($uploads_path.$filename, $contents))
+            error(__("Error"), __("Failed to write file to disk."));
 
-        file_put_contents($filepath, get_remote($url, $redirects, $timeout));
         return $filename;
     }
 
@@ -1843,41 +1808,40 @@
     }
 
     /**
-     * Function: unique_filename
-     * Generates a unique name for the supplied file in the uploads directory.
+     * Function: upload_filename
+     * Generates a sanitized unique name for an uploaded file.
      *
      * Parameters:
-     *     $name - The name to check.
-     *     $path - Path to check in.
-     *     $num - Number suffix from which to start increasing if the filename exists.
+     *     $filename - The filename to make unique.
+     *     $filter - An array of valid extensions (case insensitive).
      *
      * Returns:
-     *     A unique version of the supplied filename.
+     *     A sanitized unique version of the supplied filename.
      */
-    function unique_filename($name, $num = 2) {
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$name))
-            return $name;
+    function upload_filename($filename, $filter = array()) {
+        $patterns = !empty($filter) ?
+            implode("|", array_map("preg_quote", $filter)) : "tar\.[a-z0-9]+|[a-z0-9]+" ;
 
-        $name = explode(".", $name);
+        $disallow = "htaccess|php|php3|php4|php5|php7|phps|phtml|shtml|shtm|stm|cgi|asp|aspx";
 
-        # Handle common double extensions.
-        foreach (array("tar.gz", "tar.bz", "tar.bz2") as $extension) {
-            list($first, $second) = explode(".", $extension);
-            $file_first =& $name[count($name) - 2];
+        # Extract the file's basename and extension, disallow harmful extensions.
+        preg_match("/(.+?)(\.($patterns)(?<!$disallow))?$/i", $filename, $matches);
 
-            if ($file_first == $first and end($name) == $second) {
-                $file_first = $first.".".$second;
-                array_pop($name);
-            }
+        # Return false if a valid extension was not extracted.
+        if (!empty($filter) and empty($matches[3]))
+            return false;
+
+        $extension = fallback($matches[3], "bin");
+        $sanitized = oneof(sanitize(fallback($matches[1], ""), true, true, 80), md5($filename));
+        $count = 1;
+        $unique = $sanitized.".".$extension;
+
+        while (file_exists(uploaded($unique, false))) {
+            $count++;
+            $unique = $sanitized."-".$count.".".$extension;
         }
 
-        $ext = ".".array_pop($name);
-        $try = implode(".", $name)."-".$num.$ext;
-
-        if (!file_exists(MAIN_DIR.Config::current()->uploads_path.$try))
-            return $try;
-
-        return unique_filename(implode(".", $name).$ext, $num + 1);
+        return $unique;
     }
 
     #---------------------------------------------
@@ -1928,26 +1892,28 @@
      * Returns:
      *     Whether or not the string matches the criteria.
      *
+     * Notes:
+     *     Recognises FQDN, IPv4 and IPv6 hosts.
+     *
      * See Also:
      *     <add_scheme>
      */
     function is_url($string) {
-        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~i', $string) or # FQDN
-                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|/|:[0-9]{1,5}$|:[0-9]{1,5}/)~', $string) or # IPv4
-                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])($|/|:[0-9]{1,5})~i', $string));                                         # IPv6
+        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i', $string) or
+                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~', $string) or
+                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i', $string));
     }
 
     /**
      * Function: add_scheme
      * Prefixes a URL with a scheme if none was detected.
-     * Overwrites existing scheme if $scheme is supplied.
      *
      * Parameters:
      *     $url - The URL to analyse.
-     *     $scheme - The scheme for the URL (optional).
+     *     $scheme - Force this scheme (optional).
      *
      * Returns:
-     *     URL prefixed with a scheme (http:// by default).
+     *     URL prefixed with a default or supplied scheme.
      *
      * See Also:
      *     <is_url>
@@ -1965,13 +1931,16 @@
      * Parameters:
      *     $string - The string to analyse.
      *
+     * Notes:
+     *     Recognises FQDN, IPv4 and IPv6 hosts.
+     *
      * Returns:
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or # FQDN
-                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or # IPv4
-                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));                           # IPv6
+        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
+                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
+                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));
     }
 
     /**
@@ -2009,12 +1978,11 @@
      * Get either a Gravatar URL or complete image tag for a specified email address.
      *
      * Parameters:
-     *     $email - The email address
-     *     $s - Size in pixels, defaults to 80px [ 1 - 512 ]
-     *     $d - Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
-     *     $r - Maximum rating (inclusive) [ g | pg | r | x ]
-     *     $img - True to return a complete IMG tag False for just the URL
-     *     $atts - Additional key/value attributes to add to the IMG tag (optional).
+     *     $email - The email address.
+     *     $s - Return an image of this size in pixels (512 maximum).
+     *     $d - Default image set: 404/mm/identicon/monsterid/wavatar.
+     *     $r - Maximum acceptable guidance rating for images: g/pg/r/x.
+     *     $img - Return a complete <img> tag?
      *
      * Returns:
      *     String containing either just a URL or a complete image tag.
@@ -2022,15 +1990,9 @@
      * Source:
      *     http://gravatar.com/site/implement/images/php/
      */
-    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g", $atts = array()) {
+    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g") {
         $url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
-        if ($img) {
-            $url = '<img class="gravatar" src="' . $url . '"';
-            foreach ($atts as $key => $val)
-                $url .= ' ' . $key . '="' . $val . '"';
-            $url .= ">";
-        }
-        return $url;
+        return ($img) ? '<img class="gravatar" src="'.fix($url, true, true).'">' : $url ;
     }
 
     #---------------------------------------------
@@ -2052,7 +2014,7 @@
         $encoded = json_encode($value, $options);
 
         if (json_last_error())
-            trigger_error(_f("JSON encoding error: %s", fix(json_last_error_msg())), E_USER_WARNING);
+            trigger_error(_f("JSON encoding error: %s", fix(json_last_error_msg(), false, true)), E_USER_WARNING);
 
         return $encoded;
     }
@@ -2073,7 +2035,7 @@
         $decoded = json_decode($value, $assoc, $depth);
 
         if (json_last_error())
-            trigger_error(_f("JSON decoding error: %s", fix(json_last_error_msg())), E_USER_WARNING);
+            trigger_error(_f("JSON decoding error: %s", fix(json_last_error_msg(), false, true)), E_USER_WARNING);
 
         return $decoded;
     }
@@ -2135,7 +2097,7 @@
         $trigger = Trigger::current();
 
         if (!$config->email_correspondence or !isset($params["to"]))
-            return;
+            return false;
 
         $params["headers"] = "From:".$config->email."\r\n".
                              "Reply-To:".$config->email. "\r\n".
@@ -2147,27 +2109,27 @@
         switch ($action) {
             case "activate":
                 $params["subject"] = _f("Activate your account at %s", $config->name);
-                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                $params["message"] = _f("Hello, %s.", $params["login"]).
                                      PHP_EOL.PHP_EOL.
                                      __("You are receiving this message because you registered a new account.").
                                      PHP_EOL.PHP_EOL.
                                      __("Visit this link to activate your account:").
                                      PHP_EOL.
-                                     $params["link"];
+                                     unfix($params["link"]);
                 break;
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
-                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                $params["message"] = _f("Hello, %s.", $params["login"]).
                                      PHP_EOL.PHP_EOL.
                                      __("You are receiving this message because you requested a new password.").
                                      PHP_EOL.PHP_EOL.
                                      __("Visit this link to reset your password:").
                                      PHP_EOL.
-                                     $params["link"];
+                                     unfix($params["link"]);
                 break;
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
-                $params["message"] = _f("Hello, %s.", fix($params["login"])).
+                $params["message"] = _f("Hello, %s.", $params["login"]).
                                      PHP_EOL.PHP_EOL.
                                      _f("Your new password is: %s", $params["password"]);
                 break;
@@ -2175,9 +2137,8 @@
                 if ($trigger->exists("correspond_".$action))
                     $trigger->filter($params, "correspond_".$action);
                 else
-                    return;
+                    return false;
         }
 
-        if (!email($params["to"], $params["subject"], $params["message"], $params["headers"]))
-            error(__("Undeliverable"), __("Unable to send email."));
+        return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
     }

@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Categorize", "categorize"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.1,
+    "version"       => 1.2,
     "description"   => __("Categorize your posts.", "categorize"),
     "author"        => array(
         "name"      => "Kevin L. Papendick",

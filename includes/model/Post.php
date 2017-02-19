@@ -39,13 +39,14 @@
                 $options["where"] = array();
 
             $has_status = false;
+            $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
 
             foreach ($options["where"] as $key => $val)
                 if (is_int($key) and substr_count($val, "status") or $key == "status")
                     $has_status = true;
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
-            if (!XML_RPC) {
+            if (!XML_RPC and !$skip_where) {
                 $options["where"][] = self::feathers();
 
                 if (!$has_status) {
@@ -76,17 +77,15 @@
             if ($this->no_results)
                 return false;
 
+            $this->slug = $this->url;
+
+            $this->filtered = (!isset($options["filter"]) or $options["filter"]);
+
             $this->attribute_values = (array) $this->attribute_values;
             $this->attribute_names  = (array) $this->attribute_names;
 
             $this->attributes = ($this->attribute_names) ?
-                                    array_combine($this->attribute_names, $this->attribute_values) :
-                                    array() ;
-
-            $this->filtered = (!isset($options["filter"]) or $options["filter"]) and !XML_RPC;
-            $this->slug = $this->url;
-
-            fallback($this->clean, $this->url);
+                array_combine($this->attribute_names, $this->attribute_values) : array() ;
 
             foreach($this->attributes as $key => $val)
                 if (!empty($key))
@@ -103,19 +102,21 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array(), $debug = false) {
+        static function find($options = array(), $options_for_object = array()) {
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
             elseif (!isset($options["where"]))
                 $options["where"] = array();
 
             $has_status = false;
+            $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
 
             foreach ($options["where"] as $key => $val)
                 if ((is_int($key) and substr_count($val, "status")) or $key === "status")
                     $has_status = true;
 
-            if (!XML_RPC) {
+            # Construct SQL query "chunks" for enabled feathers and user privileges.
+            if (!XML_RPC and !$skip_where) {
                 $options["where"][] = self::feathers();
 
                 if (!$has_status) {
@@ -219,25 +220,27 @@
 
             $id = $sql->latest("posts");
 
+            $attributes       = array_merge($values, $options);
+            $attribute_values = array_keys($attributes);
+            $attribute_names  = array_values($attributes);
+
             # Insert the post attributes.
-            foreach (array_merge($values, $options) as $name => $value)
+            foreach ($attributes as $name => $value)
                 $sql->insert("post_attributes",
                              array("post_id" => $id,
                                    "name"    => $name,
                                    "value"   => $value));
 
-            $post = new self($id, array("drafts" => true));
+            $post = new self($id, array("skip_where" => true));
 
-            if (!$post->no_results) {
-                # Attempt to send pingbacks to URLs discovered in post attribute values.
-                if (Config::current()->send_pingbacks and $pingbacks)
-                    foreach ($values as $key => $value)
+            # Attempt to send pingbacks to URLs discovered in post attribute values.
+            if (Config::current()->send_pingbacks and $pingbacks and $post->status == "public")
+                foreach ($attribute_values as $value)
+                    if (is_string($value))
                         send_pingbacks($value, $post);
 
-                $trigger->call("add_post", $post, $options);
-            }
+            $trigger->call("add_post", $post, $options);
 
-            # Warning: the new post can be unfound due to insufficient privileges or disabled Feathers.
             return $post;
         }
 
@@ -253,10 +256,14 @@
          *     $pinned - Pin the post?
          *     $status - Post status
          *     $clean - A new slug for the post.
-         *     $url - A new unique URL for the post (created from $clean by default).
+         *     $url - A new unique URL for the post.
          *     $created_at - New @created_at@ timestamp for the post.
          *     $updated_at - New @updated_at@ timestamp for the post.
          *     $options - Options for the post.
+         *     $pingbacks - Send pingbacks?
+         *
+         * Returns:
+         *     The updated <Post>.
          *
          * Notes:
          *     The caller is responsible for validating all supplied values.
@@ -272,11 +279,11 @@
                                $url        = null,
                                $created_at = null,
                                $updated_at = null,
-                               $options    = null) {
+                               $options    = null,
+                               $pingbacks  = true) {
             if ($this->no_results)
                 return false;
 
-            $old = clone $this;
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
@@ -300,11 +307,8 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            # Update all values of this post.
-            foreach (array("user_id", "pinned", "status", "clean", "url", "created_at", "updated_at") as $attr)
-                $this->$attr = $$attr;
-
-            $new_values = array("pinned"     => $pinned,
+            $new_values = array("user_id"    => $user_id,
+                                "pinned"     => $pinned,
                                 "status"     => $status,
                                 "clean"      => $clean,
                                 "url"        => $url,
@@ -317,29 +321,44 @@
                          array("id" => $this->id),
                          $new_values);
 
-            # Insert the post attributes.
-            foreach (array_merge($values, $options) as $name => $value)
-                if ($sql->count("post_attributes", array("post_id" => $this->id, "name" => $name)))
-                    $sql->update("post_attributes",
-                                 array("post_id" => $this->id,
-                                       "name" => $name),
-                                 array("value" => $this->$name = $value));
-                else
-                    $sql->insert("post_attributes",
-                                 array("post_id" => $this->id,
-                                       "name" => $name,
-                                       "value" => $this->$name = $value));
+            $attributes       = array_merge($values, $options);
+            $attribute_values = array_keys($attributes);
+            $attribute_names  = array_values($attributes);
 
-            $trigger->call("update_post", $this, $old, $options);
+            # Replace the post attributes.
+            foreach ($attributes as $name => $value)
+                $sql->replace("post_attributes",
+                              array("post_id", "name"),
+                              array("post_id" => $this->id,
+                                    "name" => $name,
+                                    "value" => $value));
+
+            $post = new self(null, array("read_from" => array_merge($new_values,
+                                                                    array("id"               => $this->id,
+                                                                          "feather"          => $this->feather,
+                                                                          "attribute_names"  => $attribute_names,
+                                                                          "attribute_values" => $attribute_values))));
+
+            # Attempt to send pingbacks to URLs discovered in post attribute values.
+            if (Config::current()->send_pingbacks and $pingbacks and $this->status == "public")
+                foreach ($attribute_values as $value)
+                    if (is_string($value))
+                        send_pingbacks($value, $post);
+
+            $trigger->call("update_post", $post, $this, $options);
+
+            return $post;
         }
 
         /**
          * Function: delete
+         * Deletes a post from the database.
+         *
          * See Also:
          *     <Model::destroy>
          */
         static function delete($id) {
-            parent::destroy(get_class(), $id);
+            parent::destroy(get_class(), $id, array("skip_where" => true));
             SQL::current()->delete("post_attributes", array("post_id" => $id));
         }
 
@@ -630,34 +649,41 @@
          * Filters the post attributes through filter_post and any Feather filters.
          */
         private function filter() {
-            $trigger = Trigger::current();
             $class = camelize($this->feather);
+            $touched = array();
 
+            $trigger = Trigger::current();
             $trigger->filter($this, "filter_post");
 
-            # Feather-specified filters.
+            # Custom filters.
             if (isset(Feathers::$custom_filters[$class]))
                 foreach (Feathers::$custom_filters[$class] as $custom_filter) {
-                    $varname = $custom_filter["field"]."_unfiltered";
+                    $field = $custom_filter["field"];
+                    $field_unfiltered = $field."_unfiltered";
 
-                    if (!isset($this->$varname))
-                        $this->$varname = @$this->$custom_filter["field"];
+                    if (!in_array($field_unfiltered, $touched)) {
+                        $this->$field_unfiltered = isset($this->$field) ? $this->$field : null ;
+                        $touched[] = $field_unfiltered;
+                    }
 
-                    $this->$custom_filter["field"] = call_user_func_array(array(Feathers::$instances[$this->feather],
-                                                                                $custom_filter["name"]),
-                                                                          array($this->$custom_filter["field"], $this));
+                    $this->$field = call_user_func_array(array(Feathers::$instances[$this->feather],
+                                                               $custom_filter["name"]),
+                                                         array($this->$field, $this));
                 }
 
             # Trigger filters.
             if (isset(Feathers::$filters[$class]))
                 foreach (Feathers::$filters[$class] as $filter) {
-                    $varname = $filter["field"]."_unfiltered";
+                    $field = $filter["field"];
+                    $field_unfiltered = $field."_unfiltered";
 
-                    if (!isset($this->$varname))
-                        $this->$varname = @$this->$filter["field"];
+                    if (!in_array($field_unfiltered, $touched)) {
+                        $this->$field_unfiltered = isset($this->$field) ? $this->$field : null ;
+                        $touched[] = $field_unfiltered;
+                    }
 
-                    if (isset($this->$filter["field"]) and !empty($this->$filter["field"]))
-                        $trigger->filter($this->$filter["field"], $filter["name"], $this);
+                    if (isset($this->$field) and !empty($this->$field))
+                        $trigger->filter($this->$field, $filter["name"], $this);
                 }
         }
 
@@ -747,7 +773,9 @@
             if ($visitor->group->can("view_scheduled"))
                 $statuses[] = "scheduled";
 
-            return "(posts.status IN ('".implode("', '", $statuses)."') OR posts.status LIKE '%{".$visitor->group->id."}%') OR (posts.status LIKE '%{%' AND posts.user_id = ".$visitor->id.")";
+            return "(posts.status IN ('".implode("', '", $statuses)."')".
+                   " OR posts.status LIKE '%{".$visitor->group->id."}%')".
+                   " OR (posts.status LIKE '%{%' AND posts.user_id = ".$visitor->id.")";
         }
 
         /**
@@ -798,18 +826,25 @@
         /**
          * Function: publish_scheduled
          * Searches for and publishes scheduled posts.
+         *
+         * Calls the @publish_post@ trigger with the updated <Post>.
          */
         static function publish_scheduled() {
             $sql = SQL::current();
+            $trigger = Trigger::current();
 
-            $posts = $sql->select("posts",
-                                  "posts.id",
-                                  array("posts.created_at <=" => datetime(),
-                                        "posts.status" => "scheduled"))->fetchAll();
+            $ids = $sql->select("posts",
+                                "id",
+                                array("created_at <=" => datetime(),
+                                      "status" => "scheduled"))->fetchAll();
 
-            foreach ($posts as $post)
+            foreach ($ids as $id) {
                 $sql->update("posts",
-                             array("id" => $post),
+                             array("id" => $id),
                              array("status" => "public"));
+
+                $post = new self($id, array("skip_where" => true));
+                $trigger->call("publish_post", $post);
+            }
         }
     }

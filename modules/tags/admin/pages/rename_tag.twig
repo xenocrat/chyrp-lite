@@ -1,9 +1,9 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Rename Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name | striptags) }}{% endblock %}
+{% block title %}{{ "Rename Tag" | translate("tags") }}{% endblock %}
 
 {% block content %}
-<h2>{{ "Rename Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name | striptags) }}</h2>
+<h2>{{ "Renaming Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name | striptags) }}</h2>
 <form class="split" action="{{ url('update_tag') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>

@@ -30,19 +30,17 @@
          *     https://tools.ietf.org/html/rfc4287
          */
         public function open($title, $subtitle = "", $id = "", $updated = 0) {
-            $chyrp_id = "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")";
-
-            echo        '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-            echo        '<feed xmlns="http://www.w3.org/2005/Atom">'."\n";
-            echo        "    <title>".fix($title)."</title>\n";
+            echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+            echo '<feed xmlns="http://www.w3.org/2005/Atom">'."\n";
+            echo "<title>".fix($title)."</title>\n";
 
             if (!empty($subtitle))
-                echo    "    <subtitle>".fix($subtitle)."</subtitle>\n";
+                echo "<subtitle>".fix($subtitle)."</subtitle>\n";
 
-            echo        "    <id>".fix(oneof($id, self_url()))."</id>\n";
-            echo        "    <updated>".when("c", oneof($updated, time()))."</updated>\n";
-            echo        '    <link href="'.fix(self_url(), true).'" rel="self" type="application/atom+xml" />'."\n";
-            echo        '    <generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.$chyrp_id."</generator>\n";
+            echo "<id>".fix(oneof($id, self_url()))."</id>\n";
+            echo "<updated>".when("c", oneof($updated, time()))."</updated>\n";
+            echo '<link href="'.fix(self_url(), true).'" rel="self" type="application/atom+xml" />'."\n";
+            echo '<generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.CHYRP_IDENTITY."</generator>\n";
         }
 
         /**
@@ -68,23 +66,23 @@
         public function entry($title, $id, $content, $link, $published, $updated = 0, $name = "", $uri = "", $email = "") {
             self::split();
 
-            echo        "    <entry>\n";
-            echo        '        <title type="html">'.fix($title)."</title>\n";
-            echo        "        <id>tag:".fix($id)."</id>\n";
-            echo        "        <updated>".when("c", oneof($updated, $published))."</updated>\n";
-            echo        "        <published>".when("c", $published)."</published>\n";
-            echo        '        <link rel="alternate" type="text/html" href="'.fix($link, true).'" />'."\n";
-            echo        "        <author>\n";
-            echo        "            <name>".fix(oneof($name, __("Guest")))."</name>\n";
+            echo "<entry>\n";
+            echo '<title type="html">'.fix($title)."</title>\n";
+            echo "<id>tag:".fix($id)."</id>\n";
+            echo "<updated>".when("c", oneof($updated, $published))."</updated>\n";
+            echo "<published>".when("c", $published)."</published>\n";
+            echo '<link rel="alternate" type="text/html" href="'.fix($link, true).'" />'."\n";
+            echo "<author>\n";
+            echo "<name>".fix(oneof($name, __("Guest")))."</name>\n";
 
             if (!empty($uri) and is_url($uri))
-                echo    "            <uri>".fix($uri)."</uri>\n";
+                echo "<uri>".fix($uri)."</uri>\n";
 
             if (!empty($email) and is_email($email))
-                echo    "            <email>".fix($email)."</email>\n";
+                echo "<email>".fix($email)."</email>\n";
 
-            echo        "        </author>\n";
-            echo        '        <content type="html">'.fix($content)."</content>\n";
+            echo "</author>\n";
+            echo '<content type="html">'.fix($content)."</content>\n";
 
             $this->count++;
         }
@@ -95,7 +93,7 @@
          */
         private function split() {
             if ($this->count > 0)
-                echo    "    </entry>\n";
+                echo "</entry>\n";
         }
 
         /**
@@ -104,6 +102,6 @@
          */
         public function close() {
             self::split();
-            echo        "</feed>\n";
+            echo "</feed>\n";
         }
     }

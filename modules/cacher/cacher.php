@@ -57,6 +57,7 @@
                                 "update_page",
                                 "delete_post",
                                 "delete_page",
+                                "publish_post",
                                 "change_setting",
                                 "preview_theme");
 
@@ -86,7 +87,7 @@
         }
 
         public function remove_post_cache($id) {
-            $post = new Post($id);
+            $post = is_object($id) ? new Post($id->post_id) : new Post($id) ;
 
             if (!$post->no_results)
                 $this->remove_caches_for(htmlspecialchars_decode($post->url()));
@@ -110,10 +111,10 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."cache_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (isset($_POST['destroy']) and $_POST['clear_cache'] == "indubitably")
+            if (isset($_POST['clear_cache']) and $_POST['clear_cache'] == "indubitably")
                 self::admin_clear_cache();
 
             fallback($_POST['cache_expire'], 3600);
@@ -130,7 +131,7 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $this->regenerate();

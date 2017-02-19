@@ -24,7 +24,7 @@
 <th class="pingback_post title">{{ "Post" | translate("pingable") }}</th>
 <th class="pingback_date date">{{ "Added" | translate("pingable") }}</th>
 {{ trigger.call("manage_pingbacks_column_header") }}
-<th class="controls">{{ "Controls" | translate }}</th>
+<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>
 </thead>
 <tbody>
@@ -37,13 +37,16 @@
 <td class="pingback_post title">
 {% if not pingback.post.no_results %}
 <a href="{{ pingback.post.url() }}#pingback_{{ pingback.id }}">
-{{ pingback.post.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+{{ pingback.post.title() | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 {% endif %}
 </td>
 <td class="pingback_date date">
 {{ pingback.created_at | strftimeformat }}
 </td>
 {{ trigger.call("manage_pingbacks_column", pingback) }}
+<td class="controls">
+{{ pingback.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+</td>
 <td class="controls">
 {{ pingback.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>

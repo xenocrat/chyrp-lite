@@ -1,0 +1,32 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+{% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
+{% if module_enabled("pingable") and post.pingback_count > 0 %}
+<article role="complementary" class="discourse">
+<div>
+<h3>{{ "Pingbacks" | translate }}:</h3>
+<ol id="pingbacks">
+{% for pingback in post.pingbacks %}
+<li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true) }}">{{ pingback.title | fix }}</a></li>
+{% endfor %}
+</ol>
+</div>
+</article>
+{% endif %}
+{% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
+<article role="complementary" class="commentary">
+<ol id="comments" class="comments" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
+{% for comment in post.comments %}
+{% include "content" ~ DIR ~ "comment.twig" %}
+{% endfor %}
+<li id="comment_shim"></li>{# Needed for AJAX commenting. #}
+{% if post.commentable %}
+<li class="comment_form">
+{% include "forms" ~ DIR ~ "comment" ~ DIR ~ "new.twig" %}
+</li>
+{% endif %}
+</ol>
+</article>
+{% endif %}
+{% endblock %}

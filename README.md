@@ -10,7 +10,7 @@ or you can create a multimedia rainbow. Pages let you publish articles separate 
 – be it a simple colophon or a hierarchy of multiple pages, optionally including a homepage that your
 visitors will see when they first arrive at your website.
 
-You get three beautiful blog themes and a friendly administration console, all fully navigable on
+You get four beautiful blog themes and a friendly administration console, all fully navigable on
 a broad range of devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive
 ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
 
@@ -48,6 +48,8 @@ ARIA labelling ensure your blog will be accessible to visitors who use assistive
 * reCAPTCHA/MAPTCHA: prevent spam.
 * Highlighter: syntax highlighting for your code snippets.
 * SimpleMDE: WYSIWYG-esque editor for Markdown content.
+* Easy Embed: the easiest way to embed videos in your blog.
+* Post Views: maintain a view count for your blog entries.
 
 ## Requirements
 
@@ -94,6 +96,6 @@ Chyrp Lite was created by the following people:
 
 ## Licenses
 
-Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors,
+Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors,
 distributed under the [X11 license](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md).
 Please see the [licenses](licenses) directory for the full license text of all software packages distributed with Chyrp Lite.

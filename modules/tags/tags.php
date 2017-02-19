@@ -11,15 +11,8 @@
         static function __uninstall($confirm) {
             Route::current()->remove("tag/(name)/");
 
-            if ($confirm) {
-                $sql = SQL::current();
-
-                foreach($sql->select("post_attributes",
-                                     "*",
-                                     array("name" => "tags"))->fetchAll() as $post)  {
-                    $sql->delete("post_attributes", array("name" => "tags", "post_id" => $post["post_id"]));
-                }
-            }
+            if ($confirm)
+                SQL::current()->delete("post_attributes", array("name" => "tags"));
         }
 
         private function tags_serialize($tags) {
@@ -111,35 +104,6 @@
             return $assoc;
         }
 
-        public function post_options($fields, $post = null) {
-            $cloud = self::list_tags(false);
-            usort($cloud, array($this, "sort_tags_name_asc"));
-
-            if (isset($post->tags))
-                $tags = array_keys($post->tags);
-            else
-                $tags = array();
-
-            $selector = "\n".'<span class="tags_select">'."\n";
-
-            foreach ($cloud as $tag) {
-                $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
-                $selector.= '<a class="tag'.$selected.'" href="#tags">'.$tag["name"].'</a>'."\n";
-            }
-
-            $selector.= "</span>"."\n";
-
-            $fields[] = array("attr" => "tags",
-                              "label" => __("Tags", "tags"),
-                              "help" => "tagging_posts",
-                              "note" => __("(comma separated)", "tags"),
-                              "type" => "text",
-                              "value" => fix(implode(", ", $tags), true),
-                              "extra" => $selector);
-
-            return $fields;
-        }
-
         public function add_post($post) {
             if (empty($_POST['tags']))
                 return;
@@ -169,17 +133,54 @@
                                           "post_id" => $post->id));
         }
 
+        public function post_options($fields, $post = null) {
+            $cloud = self::list_tags(0);
+            usort($cloud, array($this, "sort_tags_name_asc"));
+
+            if (isset($post->tags))
+                $tags = array_keys($post->tags);
+            else
+                $tags = array();
+
+            $selector = "\n".'<span class="tags_select">'."\n";
+
+            foreach ($cloud as $tag) {
+                $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
+                $selector.= '<a class="tag'.$selected.'" href="#tags">'.$tag["name"].'</a>'."\n";
+            }
+
+            $selector.= "</span>"."\n";
+
+            $fields[] = array("attr" => "tags",
+                              "label" => __("Tags", "tags"),
+                              "help" => "tagging_posts",
+                              "note" => __("(comma separated)", "tags"),
+                              "type" => "text",
+                              "value" => fix(implode(", ", $tags), true),
+                              "extra" => $selector);
+
+            return $fields;
+        }
+
+        public function post($post) {
+            $post->tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
+            uksort($post->tags, array($this, "sort_tags_asc"));
+        }
+
+        public function post_tags_link_attr($attr, $post) {
+            $linked = array();
+
+            foreach ($post->tags as $tag => $clean) {
+                $url = url("tag/".urlencode($clean), MainController::current());
+                $linked[] = '<a class="tag" href="'.$url.'" rel="tag">'.$tag.'</a>';
+            }
+
+            return $linked;
+        }
+
         public function parse_urls($urls) {
             $urls["|/tag/([^/]+)/|"] = "/?action=tag&amp;name=$1";
             return $urls;
-        }
-
-        public function manage_posts_column_header() {
-            echo '<th class="post_tags list">'.__("Tags", "tags").'</th>';
-        }
-
-        public function manage_posts_column($post) {
-            echo '<td class="post_tags list">'.implode(" ", $post->linked_tags).'</td>';
         }
 
         public function manage_nav($navs) {
@@ -188,6 +189,15 @@
                                              "selected" => array("rename_tag", "delete_tag", "edit_tags"));
 
             return $navs;
+        }
+
+        public function manage_posts_column_header() {
+            echo '<th class="post_tags list">'.__("Tags", "tags").'</th>';
+        }
+
+        public function manage_posts_column($post) {
+            $tags = !empty($post->tags_link) ? implode(" ", $post->tags_link) : "" ;
+            echo '<td class="post_tags list">'.$tags.'</td>';
         }
 
         public function admin_manage_tags($admin) {
@@ -225,14 +235,16 @@
 
                 $step = 60 / $spread;
 
-                foreach ($popularity as $tag => $count)
+                foreach ($popularity as $tag => $count) {
+                    $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
+
                     $cloud[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                      "popularity" => $count,
                                      "name" => $tag,
-                                     "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
-                                                        $count, fix($tag, true)),
+                                     "title" => sprintf($str, $count, fix($tag, true)),
                                      "clean" => $tags[$tag],
                                      "url" => url("tag/".$tags[$tag], MainController::current()));
+                }
 
                 usort($cloud, array($this, "sort_tags_name_asc"));
             }
@@ -317,7 +329,7 @@
         }
 
         public function admin_update_tags($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -340,7 +352,7 @@
             if (!Visitor::current()->group->can("edit_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['original']))
@@ -407,7 +419,7 @@
             if (!Visitor::current()->group->can("edit_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['name']))
@@ -442,7 +454,7 @@
             if (!Visitor::current()->group->can("edit_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['post']))
@@ -577,14 +589,16 @@
 
                 $context = array();
 
-                foreach ($popularity as $tag => $count)
+                foreach ($popularity as $tag => $count) {
+                    $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
+
                     $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
                                        "popularity" => $count,
                                        "name" => $tag,
-                                       "title" => sprintf(_p("%s post tagged with &quot;%s&quot;", "%s posts tagged with &quot;%s&quot;", $count, "tags"),
-                                                          $count, fix($tag, true)),
+                                       "title" => sprintf($str, $count, fix($tag, true)),
                                        "clean" => $tags[$tag],
                                        "url" => url("tag/".$tags[$tag], $main));
+                }
 
                 usort($context, array($this, "sort_tags_name_asc"));
                 $main->display("pages".DIR."tags", array("tag_cloud" => $context), __("Tags", "tags"));
@@ -592,33 +606,17 @@
         }
 
         public function metaWeblog_getPost($struct, $post) {
-            if (!isset($post->tags))
-                $struct['mt_tags'] = "";
-            else
-                $struct['mt_tags'] = implode(", ", array_keys($post->tags));
+            if (!empty($post->tags))
+                $struct['mt_keywords'] = array_keys($post->tags);
 
             return $struct;
         }
 
         public function metaWeblog_editPost_preQuery($struct, $post = null) {
-            if (isset($struct['mt_tags']))
-                $_POST['tags'] = $struct['mt_tags'];
-            else if (isset($post->tags))
-                $_POST['tags'] = $post->unlinked_tags;
+            if (isset($struct["mt_keywords"]))
+                $_POST['tags'] = implode(", ", (array) $struct["mt_keywords"]);
             else
-                $_POST['tags'] = '';
-        }
-
-        public function linked_tags($tags) {
-            if (empty($tags))
-                return array();
-
-            $linked = array();
-
-            foreach ($tags as $tag => $clean)
-                $linked[] = '<a class="tag" href="'.url("tag/".urlencode($clean), MainController::current()).'" rel="tag">'.$tag.'</a>';
-
-            return $linked;
+                $_POST['tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
         }
 
         public function related_posts($ids, $post, $limit) {
@@ -641,13 +639,6 @@
             }
 
             return $ids;
-        }
-
-        public function post($post) {
-            $tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
-            uksort($tags, array($this, "sort_tags_asc"));
-            $post->tags = $tags;
-            $post->linked_tags = self::linked_tags($post->tags);
         }
 
         public function list_tags($limit = 10, $order_by = "popularity", $order = "desc") {
@@ -694,10 +685,10 @@
         }
 
         public function feed_item($post) {
-            $config = Config::current();
+            $scheme = url("tags", MainController::current());
 
             foreach ($post->tags as $tag => $clean)
-                echo "        <category scheme=\"".$config->url."/tag/\" term=\"".$clean."\" label=\"".fix($tag)."\" />\n";
+                echo '<category scheme="'.$scheme.'" term="'.$clean.'" label="'.fix($tag, true).'" />'."\n";
         }
 
         public function admin_javascript() {

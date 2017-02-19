@@ -8,10 +8,10 @@
             $this->setField(array("attr" => "body",
                                   "type" => "text_block",
                                   "label" => __("Body", "text"),
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
 
-            $this->setFilter("title", array("markup_title", "markup_post_title"));
-            $this->setFilter("body", array("markup_text", "markup_post_text"));
+            $this->setFilter("title", array("markup_post_title", "markup_title"));
+            $this->setFilter("body", array("markup_post_text", "markup_text"));
         }
 
         public function submit() {
@@ -27,12 +27,12 @@
 
         public function update($post) {
             if (empty($_POST['body']))
-                error(__("Error"), __("Body can't be blank."), null, 422);
+                error(__("Error"), __("Body can't be blank.", "text"), null, 422);
 
             fallback($_POST['title'], "");
 
-            $post->update(array("title" => $_POST['title'],
-                                "body" => $_POST['body']));
+            return $post->update(array("title" => $_POST['title'],
+                                       "body" => $_POST['body']));
         }
 
         public function title($post) {

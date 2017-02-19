@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.locale | split('_') | first }}">
+<html lang="{{ site.locale | split('_') | first | split('-') | first }}">
 <head>
 <meta charset="UTF-8">
 <title>{% block title %}{{ site.name }}{{ route.action == "index" and site.description is not empty ? ": " ~ site.description : "" }}{{ title ? " | " ~ title | striptags : "" }}{% endblock %}</title>
@@ -10,7 +10,6 @@
 <link rel="EditURI" type="application/rsd+xml" href="{{ site.chyrp_url }}/includes/rsd.php">
 <link rel="shortcut icon" href="{{ site.chyrp_url }}/favicon.ico">
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
-{% if route.action == "index" %}<link rel="canonical" href="{{ site.url }}">{% endif %}
 {{ theme.feeds }}
 {{ theme.stylesheets }}
 {{ theme.javascripts }}
@@ -121,7 +120,7 @@
 {{ trigger.call("end_content") }}
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
-{% if debug and visitor.group.can("change_settings", "toggle_extensions") %}
+{% if debug %}
 <!--
 {% for caller in sql_debug %}
 {{ caller.query | replace("\t", "    ") | fix }}

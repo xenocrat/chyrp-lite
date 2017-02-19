@@ -5,6 +5,7 @@
         static function __install() {
             Pingback::install();
 
+            Group::add_permission("edit_pingback", "Edit Pingbacks");
             Group::add_permission("delete_pingback", "Delete Pingbacks");
         }
 
@@ -16,6 +17,7 @@
         }
 
         public function list_permissions($names = array()) {
+            $names["edit_pingback"] = __("Edit Pingbacks", "pingable");
             $names["delete_pingback"] = __("Delete Pingbacks", "pingable");
             return $names;
         }
@@ -28,15 +30,53 @@
             if (!empty($count))
                 return new IXR_Error(48, __("A ping from your URL is already registered.", "pingable"));
 
+            if (strlen($from) > 2048)
+                return new IXR_Error(0, __("Your URL is too long to be stored in our database.", "pingable"));
+
             Pingback::add($post->id, $from, $title);
 
             return __("Pingback registered!", "pingable");
         }
 
-        public function admin_delete_pingback($admin) {
-            if (!Visitor::current()->group->can("delete_pingback"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
+        public function admin_edit_pingback($admin) {
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                error(__("No ID Specified"), __("An ID is required to edit a pingback.", "pingable"), null, 400);
 
+            $pingback = new Pingback($_GET['id']);
+
+            if ($pingback->no_results)
+                Flash::warning(__("Pingback not found.", "pingable"), "manage_pingbacks");
+
+            if (!$pingback->editable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this pingback.", "pingable"));
+
+            $admin->display("pages".DIR."edit_pingback", array("pingback" => $pingback));
+        }
+
+        public function admin_update_pingback($admin) {
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("No ID Specified"), __("An ID is required to update a pingback.", "pingable"), null, 400);
+
+            if (empty($_POST['title']))
+                error(__("No Title Specified", "pingable"), __("A title is required to update a pingback.", "pingable"), null, 400);
+
+            $pingback = new Pingback($_POST['id']);
+
+            if ($pingback->no_results)
+                show_404(__("Not Found"), __("Pingback not found.", "pingable"));
+
+            if (!$pingback->editable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this pingback.", "pingable"));
+
+            $pingback = $pingback->update($_POST['title']);
+
+            Flash::notice(__("Pingback updated.", "pingable"), "manage_pingbacks");
+        }
+
+        public function admin_delete_pingback($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a pingback.", "pingable"), null, 400);
 
@@ -45,14 +85,14 @@
             if ($pingback->no_results)
                 Flash::warning(__("Pingback not found.", "pingable"), "manage_pingbacks");
 
+            if (!$pingback->deletable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback.", "pingable"));
+
             $admin->display("pages".DIR."delete_pingback", array("pingback" => $pingback));
         }
 
         public function admin_destroy_pingback() {
-            if (!Visitor::current()->group->can("delete_pingback"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pingbacks.", "pingable"));
-
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -66,13 +106,16 @@
             if ($pingback->no_results)
                 show_404(__("Not Found"), __("Pingback not found.", "pingable"));
 
+            if (!$pingback->deletable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback.", "pingable"));
+
             Pingback::delete($pingback->id);
 
             Flash::notice(__("Pingback deleted.", "pingable"), "manage_pingbacks");
         }
 
         public function admin_manage_pingbacks($admin) {
-            if (!Visitor::current()->group->can("delete_pingback"))
+            if (!Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pingbacks.", "pingable"));
 
             fallback($_GET['query'], "");
@@ -86,15 +129,16 @@
         }
 
         public function manage_nav($navs) {
-            if (Visitor::current()->group->can("delete_pingback"))
+            if (Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 $navs["manage_pingbacks"] = array("title" => __("Pingbacks", "pingable"),
-                                                  "selected" => array("delete_pingback"));
+                                                  "selected" => array("edit_pingback",
+                                                                      "delete_pingback"));
 
             return $navs;
         }
 
         public function admin_determine_action($action) {
-            if ($action == "manage" and Visitor::current()->group->can("delete_pingback"))
+            if ($action == "manage" and Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 return "manage_pingbacks";
         }
 
@@ -115,8 +159,8 @@
         }
 
         public function post_pingback_count_attr($attr, $post) {
-            if (isset($this->pingback_counts))
-                return oneof(@$this->pingback_counts[$post->id], 0);
+            if (isset($this->post_pingback_counts))
+                return fallback($this->post_pingback_counts[$post->id], 0);
 
             $counts = SQL::current()->select("pingbacks",
                                              "COUNT(post_id) AS total, post_id as post_id",
@@ -128,9 +172,9 @@
                                              "post_id")->fetchAll();
 
             foreach ($counts as $count)
-                $this->pingback_counts[$count["post_id"]] = (int) $count["total"];
+                $this->post_pingback_counts[$count["post_id"]] = (int) $count["total"];
 
-            return oneof(@$this->pingback_counts[$post->id], 0);
+            return fallback($this->post_pingback_counts[$post->id], 0);
         }
 
         public function import_chyrp_post($entry, $post) {
@@ -144,7 +188,10 @@
                 $source = $pingback->children("http://www.w3.org/2005/Atom")->link["href"];
                 $created_at = $pingback->children("http://www.w3.org/2005/Atom")->published;
 
-                Pingback::add($post->id, $source, $title, datetime($created_at));
+                Pingback::add($post->id,
+                              (string) $source,
+                              (string) $title,
+                              datetime((string) $created_at));
             }
         }
 

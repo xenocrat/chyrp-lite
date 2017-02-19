@@ -7,8 +7,9 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.04");
-    define('CHYRP_CODENAME', "Iago");
+    define('CHYRP_VERSION',  "2017.01");
+    define('CHYRP_CODENAME', "Swainson");
+    define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -110,6 +111,10 @@
     # Test if we can write to INCLUDES_DIR (needed for config.json.php).
     if (!is_writable(INCLUDES_DIR))
         $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
+
+    # Test if we can write to CACHES_DIR (needed by some extensions).
+    if (!is_writable(CACHES_DIR))
+        $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
 
     /**
      * Function: posted
@@ -523,55 +528,10 @@
 
             # Test the database connection.
             if (!$sql->connect(true))
-                $errors[] = __("Could not connect to the database:")."\n".fix($sql->error);
+                $errors[] = _f("Database error: %s", fix($sql->error, false, true));
         }
 
         if (empty($errors)) {
-            # Configure the .htaccess file.
-            if (htaccess_conf($url_path) === false)
-                $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
-
-            # Build the configuration file.
-            $set = array($config->set("sql", $settings),
-                         $config->set("name", $_POST['name']),
-                         $config->set("description", $_POST['description']),
-                         $config->set("url", rtrim($url, "/")),
-                         $config->set("chyrp_url", rtrim($url, "/")),
-                         $config->set("email", $_POST['email']),
-                         $config->set("timezone", $_POST['timezone']),
-                         $config->set("locale", "en_US"),
-                         $config->set("cookies_notification", true),
-                         $config->set("check_updates", true),
-                         $config->set("check_updates_last", 0),
-                         $config->set("theme", "blossom"),
-                         $config->set("posts_per_page", 5),
-                         $config->set("admin_per_page", 25),
-                         $config->set("feed_items", 20),
-                         $config->set("feed_url", ""),
-                         $config->set("uploads_path", DIR."uploads".DIR),
-                         $config->set("uploads_limit", 10),
-                         $config->set("send_pingbacks", false),
-                         $config->set("enable_xmlrpc", true),
-                         $config->set("enable_ajax", true),
-                         $config->set("enable_emoji", true),
-                         $config->set("enable_markdown", true),
-                         $config->set("can_register", false),
-                         $config->set("email_activation", false),
-                         $config->set("email_correspondence", true),
-                         $config->set("enable_captcha", false),
-                         $config->set("default_group", 0),
-                         $config->set("guest_group", 0),
-                         $config->set("clean_urls", false),
-                         $config->set("enable_homepage", false),
-                         $config->set("post_url", "(year)/(month)/(day)/(url)/"),
-                         $config->set("enabled_modules", array()),
-                         $config->set("enabled_feathers", array("text")),
-                         $config->set("routes", array()),
-                         $config->set("secure_hashkey", random(32)));
-
-            if (in_array(false, $set))
-                $errors[] = __("Could not write the configuration file.");
-
             # Reconnect to the database.
             $sql->connect();
 
@@ -651,6 +611,7 @@
                              PRIMARY KEY (id)
                          ) DEFAULT CHARSET=utf8");
 
+            # Add the default permissions.
             $names = array("change_settings" => "Change Settings",
                            "toggle_extensions" => "Toggle Extensions",
                            "view_site" => "View Site",
@@ -693,7 +654,7 @@
                             "banned" => array(),
                             "guest"  => array("view_site"));
 
-            # Insert the default groups (see above).
+            # Add the default groups.
             $group_id = array();
 
             foreach ($groups as $name => $permissions) {
@@ -709,9 +670,7 @@
                                         "group_id" => $group_id[$name]));
             }
 
-            $config->set("default_group", $group_id["member"]);
-            $config->set("guest_group", $group_id["guest"]);
-
+            # Add the admin user account.
             if (!$sql->select("users", "id", array("login" => $_POST['login']))->fetchColumn())
                 $sql->insert("users",
                              array("login" => $_POST['login'],
@@ -725,6 +684,51 @@
             if (password_strength($_POST['password1']) < 100)
                 $errors[] = __("Please consider setting a stronger password for your account.");
 
+            # Build the configuration file.
+            $set = array($config->set("sql", $settings),
+                         $config->set("name", $_POST['name']),
+                         $config->set("description", $_POST['description']),
+                         $config->set("url", rtrim($url, "/")),
+                         $config->set("chyrp_url", rtrim($url, "/")),
+                         $config->set("email", $_POST['email']),
+                         $config->set("timezone", $_POST['timezone']),
+                         $config->set("locale", "en_US"),
+                         $config->set("cookies_notification", true),
+                         $config->set("check_updates", true),
+                         $config->set("check_updates_last", 0),
+                         $config->set("theme", "blossom"),
+                         $config->set("posts_per_page", 5),
+                         $config->set("admin_per_page", 25),
+                         $config->set("feed_items", 20),
+                         $config->set("feed_url", ""),
+                         $config->set("uploads_path", DIR."uploads".DIR),
+                         $config->set("uploads_limit", 10),
+                         $config->set("send_pingbacks", false),
+                         $config->set("enable_xmlrpc", true),
+                         $config->set("enable_ajax", true),
+                         $config->set("enable_emoji", true),
+                         $config->set("enable_markdown", true),
+                         $config->set("can_register", false),
+                         $config->set("email_activation", false),
+                         $config->set("email_correspondence", true),
+                         $config->set("enable_captcha", false),
+                         $config->set("default_group", $group_id["member"]),
+                         $config->set("guest_group", $group_id["guest"]),
+                         $config->set("clean_urls", false),
+                         $config->set("enable_homepage", false),
+                         $config->set("post_url", "(year)/(month)/(day)/(url)/"),
+                         $config->set("enabled_modules", array()),
+                         $config->set("enabled_feathers", array("text")),
+                         $config->set("routes", array()),
+                         $config->set("secure_hashkey", random(32)));
+
+            if (in_array(false, $set))
+                $errors[] = __("Could not write the configuration file.");
+
+            # Configure the .htaccess file.
+            if (htaccess_conf($url_path) === false)
+                $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
+
             $installed = true;
         }
     }
@@ -734,7 +738,7 @@
     #---------------------------------------------
 
     foreach ($errors as $error)
-        echo '<span role="alert">'.$error."</span>\n";
+        echo '<span role="alert">'.sanitize_html($error)."</span>\n";
 
           ?></pre>
 <?php if (!$installed): ?>
@@ -793,7 +797,7 @@
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
                         <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>
-                            <?php echo when(__("%I:%M %p on %B %d, %Y"), $zone["now"], true); ?> &mdash;
+                            <?php echo when("%Y-%m-%d %H:%M", $zone["now"], true); ?> &mdash;
                             <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone["name"]); ?>
                         </option>
                     <?php endforeach; ?>
@@ -803,31 +807,28 @@
                 <h1><?php echo __("Admin Account"); ?></h1>
                 <p id="login_field">
                     <label for="login"><?php echo __("Username"); ?></label>
-                    <input type="text" name="login" value="<?php posted("login", "Admin"); ?>" id="login">
+                    <input type="text" name="login" value="<?php posted("login", "Admin"); ?>" id="login" maxlength="64">
                 </p>
                 <p id="password1_field">
                     <label for="password1"><?php echo __("Password"); ?></label>
-                    <input type="password" name="password1" value="<?php posted("password1"); ?>" id="password1">
+                    <input type="password" name="password1" value="<?php posted("password1"); ?>" id="password1" maxlength="128">
                 </p>
                 <p id="password2_field">
                     <label for="password2"><?php echo __("Password"); ?> <span class="sub"><?php echo __("(again)"); ?></span></label>
-                    <input type="password" name="password2" value="<?php posted("password2"); ?>" id="password2">
+                    <input type="password" name="password2" value="<?php posted("password2"); ?>" id="password2" maxlength="128">
                 </p>
                 <p id="email_field">
                     <label for="email"><?php echo __("Email Address"); ?></label>
-                    <input type="email" name="email" value="<?php posted("email"); ?>" id="email">
+                    <input type="email" name="email" value="<?php posted("email"); ?>" id="email" maxlength="128">
                 </p>
                 <button type="submit"><?php echo __("Install me!"); ?></button>
             </form>
 <?php else: ?>
-            <h1><?php echo __("Chyrp Lite has been installed"); ?></h1>
+            <h1><?php echo __("Installation Complete"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
                 <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>
-            <?php if (!is_writable(CACHES_DIR)): ?>
-                <li><?php echo _f("Please make <em>%s</em> writable by the server.", CACHES_DIR) ?></li>
-            <?php endif; ?>
-                <li><a href="https://github.com/xenocrat/chyrp-lite/wiki"><?php echo __("Learn more about Chyrp Lite."); ?></a></li>
+                <li><?php echo __("Log in to your site and configure things to your liking."); ?></a></li>
             </ol>
             <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>

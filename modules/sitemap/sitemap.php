@@ -1,15 +1,19 @@
 <?php 
     class Sitemap extends Modules {
-
+        # Array: $change_frequency
+        # An array of change frequencies used in the settings template.
         public $change_frequency = array();
 
-        public function __init() {                      # Add these strings to the .pot file.
-            $this->change_frequency = array("hourly",   # __("hourly", "sitemap");
-                                            "daily",    # __("daily", "sitemap");
-                                            "weekly",   # __("weekly", "sitemap");
-                                            "monthly",  # __("monthly", "sitemap");
-                                            "yearly",   # __("yearly", "sitemap");
-                                            "never");   # __("never", "sitemap");
+        public function __init() {
+            if (!isset($_SERVER["DOCUMENT_ROOT"]))
+                cancel_module("sitemap", __("Sitemap module cannot determine the server's document root.", "sitemap"));
+
+            $this->change_frequency = array("hourly"  => __("hourly", "sitemap"),
+                                            "daily"   => __("daily", "sitemap"),
+                                            "weekly"  => __("weekly", "sitemap"),
+                                            "monthly" => __("monthly", "sitemap"),
+                                            "yearly"  => __("yearly", "sitemap"),
+                                            "never"   => __("never", "sitemap"));
 
             $this->addAlias("add_post", "make_sitemap", 8);
             $this->addAlias("update_post", "make_sitemap", 8);
@@ -42,7 +46,7 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."sitemap_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             fallback($_POST['blog_changefreq'], "daily");
@@ -62,6 +66,9 @@
          * Generates a sitemap of the blog and writes it to the document root.
          */
         public function make_sitemap() {
+            if ($this->cancelled)
+                return;
+
             $result = SQL::current()->select("posts",
                                              "posts.id",
                                              array("posts.status" => "public"),
@@ -69,6 +76,7 @@
                                              array())->fetchAll();
 
             $ids = array();
+
             foreach ($result as $index => $row)
                 $ids[] = $row["id"];
 
@@ -84,7 +92,7 @@
                                       "order" => "list_order ASC"));
 
             $config = Config::current();
-            $sitemap_settings = Config::current()->module_sitemap;
+            $settings = $config->module_sitemap;
 
             $output = "<?xml version='1.0' encoding='UTF-8'?>".PHP_EOL;
             $output.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
@@ -92,11 +100,11 @@
             $output.= "  <url>\n".
                       "    <loc>".$config->url."/</loc>\n".
                       "    <lastmod>".$posts[0]->updated_at."</lastmod>\n".
-                      "    <changefreq>".$sitemap_settings["blog_changefreq"]."</changefreq>\n".
+                      "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
                       "  </url>\n".
                       "  <url>\n".
                       "    <loc>".url("archive/", MainController::current())."</loc>\n".
-                      "    <changefreq>".$sitemap_settings["blog_changefreq"]."</changefreq>\n".
+                      "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
                       "  </url>\n";
 
             foreach ($posts as $post) {
@@ -106,7 +114,7 @@
                 $output.= "  <url>\n".
                           "    <loc>".$post->url()."</loc>\n".
                           "    <lastmod>".$updated."</lastmod>\n".
-                          "    <changefreq>".$sitemap_settings["posts_changefreq"]."</changefreq>\n".$priority.
+                          "    <changefreq>".$settings["posts_changefreq"]."</changefreq>\n".$priority.
                           "  </url>\n";
             }
 
@@ -116,11 +124,11 @@
                 $output.= "  <url>\n".
                           "    <loc>".$page->url()."</loc>\n".
                           "    <lastmod>".$updated."</lastmod>\n".
-                          "    <changefreq>".$sitemap_settings["pages_changefreq"]."</changefreq>\n".
+                          "    <changefreq>".$settings["pages_changefreq"]."</changefreq>\n".
                           "  </url>\n";
             }
 
             $output.= "</urlset>";
-            file_put_contents($_SERVER["DOCUMENT_ROOT"].DIR."sitemap.xml", $output);
+            @file_put_contents($_SERVER["DOCUMENT_ROOT"].DIR."sitemap.xml", $output);
         }
     }

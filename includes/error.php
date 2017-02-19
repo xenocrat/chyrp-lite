@@ -7,74 +7,52 @@
     $errors = array();
 
     # Set the appropriate error reporting level.
-    if (JAVASCRIPT)
-        error_reporting(0);
+    if (DEBUG)
+        error_reporting(E_ALL | E_STRICT);
     else
-        if (INSTALLING or UPGRADING or DEBUG)
-            error_reporting(E_ALL | E_STRICT);
-        else
-            error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+        error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
 
-    # Set the appropriate error handler.
-    if (TESTER)
-        set_error_handler("error_panicker");
-    else
-        if (INSTALLING or UPGRADING)
-            set_error_handler("error_snitcher");
-        else
-            set_error_handler("error_composer");
-
-    /**
-     * Function: error_panicker
-     * Report in plain text for the automated tester and exit.
-     */
-    function error_panicker($errno, $message, $file, $line) {
-        if (error_reporting() === 0)
-            return true; # Error reporting excludes this error.
-
-        if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
-
-        if (ob_get_contents() !== false)
-            ob_clean();
-
-        exit(htmlspecialchars("ERROR: ".$message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false));
-    }
-
-    /**
-     * Function: error_snitcher
-     * Informs the user of errors when installing or upgrading.
-     */
-    function error_snitcher($errno, $message, $file, $line) {
-        global $errors;
-
-        if (error_reporting() === 0)
-            return true; # Error suppressed by @ operator.
-
-        if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
-
-        $errors[] = htmlspecialchars($message." (".$file." on line ".$line.")", ENT_QUOTES, "UTF-8", false);
-        return true;
-    }
+    # Set the error and exception handlers.
+    set_error_handler("error_composer");
+    set_exception_handler("exception_composer");
 
     /**
      * Function: error_composer
      * Composes a message for the error() function to display.
      */
     function error_composer($errno, $message, $file, $line) {
+        # Test for suppressed errors and excluded error levels.
         if (!(error_reporting() & $errno))
-            return true; # Error reporting excludes this error.
+            return true;
+
+        $normalized = str_replace(array("\t", "\n", "\r", "\0", "\x0B"), " ", $message);
 
         if (DEBUG)
-            error_log("ERROR: ".$errno." ".$message." (".$file." on line ".$line.")");
+            error_log("ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")");
 
-        error(null, $message." (".$file." on line ".$line.")", debug_backtrace());
+        error(null, $message, debug_backtrace());
+    }
+
+    /**
+     * Function: exception_composer
+     * Composes a message for the error() function to display.
+     */
+    function exception_composer($e) {
+        $errno = $e->getCode();
+        $message = $e->getMessage();
+        $file = $e->getFile();
+        $line = $e->getLine();
+        $normalized = str_replace(array("\t", "\n", "\r", "\0", "\x0B"), " ", $message);
+
+        if (DEBUG)
+            error_log("ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")");
+
+        error(null, $message, $e->getTrace());
     }
 
     /**
      * Function: error
-     * Displays an error message via direct call or error handler.
+     * Displays an error message via direct call or handler.
      *
      * Parameters:
      *     $title - The title for the error dialog.
@@ -83,21 +61,6 @@
      *     $code - Numeric HTTP status code to set.
      */
     function error($title = "", $body = "", $backtrace = array(), $code = 500) {
-        # Sanitize strings.
-        $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8", false);
-        $body = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", "<$1$2>", $body);
-        $body = preg_replace("/<\/?script[^>]*>/i", "", $body);
-
-        # Sanitize backtrace.
-        if (!empty($backtrace))
-            foreach ($backtrace as $index => &$trace)
-                if (!isset($trace["file"]) or !isset($trace["line"])) {
-                    unset($backtrace[$index]);
-                } else {
-                    $trace["line"] = htmlspecialchars($trace["line"], ENT_QUOTES, "UTF-8", false);
-                    $trace["file"] = htmlspecialchars(str_replace(MAIN_DIR.DIR, "", $trace["file"]), ENT_QUOTES, "UTF-8", false);
-                }
-
         # Clean the output buffer before we begin.
         if (ob_get_contents() !== false)
             ob_clean();
@@ -110,46 +73,56 @@
 
             switch ($code) {
                 case 400:
-                    header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request");
+                    header($_SERVER['SERVER_PROTOCOL']." 400 Bad Request");
+                    break;
+                case 401:
+                    header($_SERVER['SERVER_PROTOCOL']." 401 Unauthorized");
                     break;
                 case 403:
-                    header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
+                    header($_SERVER['SERVER_PROTOCOL']." 403 Forbidden");
                     break;
                 case 404:
-                    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+                    header($_SERVER['SERVER_PROTOCOL']." 404 Not Found");
                     break;
                 case 405:
-                    header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed");
+                    header($_SERVER['SERVER_PROTOCOL']." 405 Method Not Allowed");
                     break;
                 case 409:
-                    header($_SERVER["SERVER_PROTOCOL"]." 409 Conflict");
+                    header($_SERVER['SERVER_PROTOCOL']." 409 Conflict");
                     break;
                 case 410:
-                    header($_SERVER["SERVER_PROTOCOL"]." 410 Gone");
+                    header($_SERVER['SERVER_PROTOCOL']." 410 Gone");
                     break;
                 case 413:
-                    header($_SERVER["SERVER_PROTOCOL"]." 413 Payload Too Large");
+                    header($_SERVER['SERVER_PROTOCOL']." 413 Payload Too Large");
                     break;
                 case 422:
-                    header($_SERVER["SERVER_PROTOCOL"]." 422 Unprocessable Entity");
+                    header($_SERVER['SERVER_PROTOCOL']." 422 Unprocessable Entity");
                     break;
                 case 501:
-                    header($_SERVER["SERVER_PROTOCOL"]." 501 Not Implemented");
+                    header($_SERVER['SERVER_PROTOCOL']." 501 Not Implemented");
+                    break;
+                case 502:
+                    header($_SERVER['SERVER_PROTOCOL']." 502 Bad Gateway");
                     break;
                 case 503:
-                    header($_SERVER["SERVER_PROTOCOL"]." 503 Service Unavailable");
+                    header($_SERVER['SERVER_PROTOCOL']." 503 Service Unavailable");
+                    break;
+                case 504:
+                    header($_SERVER['SERVER_PROTOCOL']." 504 Gateway Timeout");
                     break;
                 default:
-                    header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+                    header($_SERVER['SERVER_PROTOCOL']." 500 Internal Server Error");
             }
         }
 
         # Report in plain text if desirable or necessary because of a deep error.
-        if (TESTER or XML_RPC or AJAX or
+        if (TESTER or XML_RPC or AJAX or JAVASCRIPT or
             !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
-            !function_exists("oneof") or
+            !function_exists("fix") or
+            !function_exists("sanitize_html") or
             !function_exists("logged_in") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
@@ -158,11 +131,20 @@
             exit("ERROR: ".strip_tags($body));
         }
 
+        # We need this for the pretty error page.
         $chyrp_url = Config::current()->chyrp_url;
 
-        # Validate title and body text before we display the pretty message.
-        $title = oneof($title, __("Error"));
-        $body = oneof($body, __("An unspecified error has occurred."));
+        # Set fallbacks.
+        fallback($title, __("Error"));
+        fallback($body, __("An unspecified error has occurred."));
+        fallback($backtrace, array());
+
+        # Redact and escape the backtrace for display.
+        foreach ($backtrace as $index => &$trace)
+            if (!isset($trace["file"]) or !isset($trace["line"]))
+                unset($backtrace[$index]);
+            else
+                $trace["file"] = fix(str_replace(MAIN_DIR.DIR, "", $trace["file"]), false, true);
 
         #---------------------------------------------
         # Output Starts
@@ -172,7 +154,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title><?php echo $title; ?></title>
+        <title><?php echo strip_tags($title); ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
             @font-face {
@@ -350,14 +332,14 @@
     </head>
     <body>
         <div class="window">
-            <h1><?php echo $title; ?></h1>
+            <h1><?php echo sanitize_html($title); ?></h1>
             <div role="alert" class="message">
-                <?php echo $body; ?>
-            <?php if (!empty($backtrace)): ?>
+                <?php echo sanitize_html($body); ?>
+            <?php if (!empty($backtrace) and DEBUG): ?>
                 <h2><?php echo __("Backtrace"); ?></h2>
                 <ol class="backtrace">
                 <?php foreach ($backtrace as $trace): ?>
-                    <li><code><?php echo _f("%s on line %d", array($trace["file"], fallback($trace["line"], 0))); ?></code></li>
+                    <li><code><?php echo _f("%s on line %d", array($trace["file"], (int) $trace["line"])); ?></code></li>
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>

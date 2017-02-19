@@ -1,0 +1,45 @@
+<article class="post {{ post.feather }}{{ post.pinned ? ' pinned' : '' }}" id="post_{{ post.id }}">
+{% block content %}{% endblock %}
+<footer>
+{% if (module_enabled("tags") and post.tags_link is not empty) or (module_enabled("categorize") and post.category is defined) %}
+<div role="note" class="category tags">
+{% if module_enabled("categorize") and post.category is defined %}
+<a class="category category_{{ post.category.id }}" href="{{ post.category.url }}" rel="tag">{{ post.category.name }}</a>
+{% endif %}
+{% if (module_enabled("tags") and post.tags_link is not empty) %}
+<a href="{{ url('tags') }}">{{ "Tags" | translate }}:</a> {{ post.tags_link | join(" ") }}
+{% endif %}
+</div>
+{% endif %}
+{% if post.editable or post.deletable %}
+<div class="doaction admin">
+{{ post.edit_link() }} {{ post.delete_link("Delete" | translate) }}
+</div>
+{% endif %}
+<div role="note" class="metadata">
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}">
+{% if post.status == "draft" %}
+{{ "Draft" | translate }}
+{% elseif post.status == "scheduled" %}
+{{ "Scheduled" | translate }}
+{% elseif post.pinned %}
+{{ "Pinned" | translate }}
+{% else %}
+{{ post.created_at | strftimeformat("%d %b, %Y" | translate) }}
+{% endif %}
+</a>
+{% if module_enabled("likes") %}
+{{ post.like_link ? "&bull; " ~ post.like_link : "" }}
+{% endif %}
+{% if module_enabled("rights") and post.rights_holder is defined %}
+&bull;
+{% if post.rights_holder is not empty %}
+{{ "&copy; %s. %s." | translate | format(post.rights_holder, post.licence_link) }}
+{% else %}
+{{ "&copy; %s." | translate | format(post.licence_link) }}
+{% endif %}
+{% endif %}
+</div>
+</footer>
+</article>
+<hr class="post">

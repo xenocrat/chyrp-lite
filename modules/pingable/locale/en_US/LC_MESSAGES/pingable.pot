@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2016 xenocrat
+# Copyright (C) 2017 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-20 16:23+0000\n"
+"POT-Creation-Date: 2017-02-19 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -27,13 +27,30 @@ msgstr ""
 msgid "Are you sure you want to delete the pingback from &#8220;%s&#8221;?"
 msgstr ""
 
+#: modules/pingable/admin/pages/edit_pingback.twig:3
+msgid "Edit Pingback"
+msgstr ""
+
+#: modules/pingable/admin/pages/edit_pingback.twig:6
+#, php-format
+msgid "Editing Pingback to &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/pingable/admin/pages/edit_pingback.twig:10
+msgid "Title"
+msgstr ""
+
+#: modules/pingable/admin/pages/edit_pingback.twig:14
+msgid "Update"
+msgstr ""
+
 #: modules/pingable/admin/pages/manage_pingbacks.twig:3
 msgid "Manage Pingbacks"
 msgstr ""
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:19
-#: modules/pingable/pingable.php:90
-#: modules/pingable/pingable.php:102
+#: modules/pingable/pingable.php:133
+#: modules/pingable/pingable.php:146
 msgid "Pingbacks"
 msgstr ""
 
@@ -66,38 +83,74 @@ msgid "Do you want to remove pingbacks from the database?"
 msgstr ""
 
 #: modules/pingable/pingable.php:8
-#: modules/pingable/pingable.php:19
+#: modules/pingable/pingable.php:20
+msgid "Edit Pingbacks"
+msgstr ""
+
+#: modules/pingable/pingable.php:9
+#: modules/pingable/pingable.php:21
 msgid "Delete Pingbacks"
 msgstr ""
 
-#: modules/pingable/pingable.php:29
+#: modules/pingable/pingable.php:31
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/pingable/pingable.php:33
-msgid "Pingback registered!"
+#: modules/pingable/pingable.php:34
+msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
 #: modules/pingable/pingable.php:38
-#: modules/pingable/pingable.php:53
-msgid "You do not have sufficient privileges to delete pingbacks."
+msgid "Pingback registered!"
 msgstr ""
 
-#: modules/pingable/pingable.php:41
-#: modules/pingable/pingable.php:59
-msgid "An ID is required to delete a pingback."
+#: modules/pingable/pingable.php:43
+msgid "An ID is required to edit a pingback."
 msgstr ""
 
-#: modules/pingable/pingable.php:46
-#: modules/pingable/pingable.php:67
+#: modules/pingable/pingable.php:48
+#: modules/pingable/pingable.php:69
+#: modules/pingable/pingable.php:86
+#: modules/pingable/pingable.php:107
 msgid "Pingback not found."
 msgstr ""
 
-#: modules/pingable/pingable.php:71
-msgid "Pingback deleted."
+#: modules/pingable/pingable.php:51
+#: modules/pingable/pingable.php:72
+msgid "You do not have sufficient privileges to edit this pingback."
+msgstr ""
+
+#: modules/pingable/pingable.php:61
+msgid "An ID is required to update a pingback."
+msgstr ""
+
+#: modules/pingable/pingable.php:64
+msgid "No Title Specified"
+msgstr ""
+
+#: modules/pingable/pingable.php:64
+msgid "A title is required to update a pingback."
 msgstr ""
 
 #: modules/pingable/pingable.php:76
+msgid "Pingback updated."
+msgstr ""
+
+#: modules/pingable/pingable.php:81
+#: modules/pingable/pingable.php:99
+msgid "An ID is required to delete a pingback."
+msgstr ""
+
+#: modules/pingable/pingable.php:89
+#: modules/pingable/pingable.php:110
+msgid "You do not have sufficient privileges to delete this pingback."
+msgstr ""
+
+#: modules/pingable/pingable.php:114
+msgid "Pingback deleted."
+msgstr ""
+
+#: modules/pingable/pingable.php:119
 msgid "You do not have sufficient privileges to manage pingbacks."
 msgstr ""
 

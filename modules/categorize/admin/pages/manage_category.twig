@@ -43,15 +43,13 @@
 <a href="{{ category.url }}">{{ category.name | truncate }}</a>
 </td>
 <td class="category_count value">
-{{ category.total }}
+{{ category.post_count }}
 </td>
 <td class="controls">
-<a href="{{ url('edit_category/id/' ~ category.id) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg"
-alt="{{ 'edit' | translate }}"></a>
+{{ category.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
 <td class="controls">
-<a href="{{ url('delete_category/id/' ~ category.id) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg"
-alt="{{ 'delete' | translate }}"></a>
+{{ category.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
 </tr>
 {% else %}

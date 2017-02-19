@@ -24,7 +24,7 @@
 {% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
 <article role="complementary" class="commentary">
-<ol id="comments" class="comments paginated" data-post="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
+<ol id="comments" class="comments paginated" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
 {% set comments = paginate(post.comments, site.comments_per_page, "comments") %}
 {% for comment in comments.paginated %}
 {% include "content" ~ DIR ~ "comment.twig" %}

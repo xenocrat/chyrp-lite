@@ -4,7 +4,6 @@
 ?>
 $(function() {
     toggle_all();
-    toggle_options();
     validate_slug();
     validate_email();
     validate_url();
@@ -48,36 +47,6 @@ function toggle_all() {
             })]
         );
     });
-}
-// Toggles the visibility of #more_options based on cookie value.
-function toggle_options() {
-    if ($("#more_options").length) {
-        if (Cookie.get("show_more_options") == "true")
-            var more_options_text = '<?php echo __("&uarr; Fewer Options", "admin"); ?>';
-        else
-            var more_options_text = '<?php echo __("More Options &darr;", "admin"); ?>';
-
-        $("<a>", {
-            "id": "more_options_link",
-            "href": "#"
-        }).addClass("more_options_link").append(more_options_text).insertBefore("#more_options");
-
-        if (Cookie.get("show_more_options") == null)
-            $("#more_options").css("display", "none");
-
-        $("#more_options_link").click(function(e) {
-            e.preventDefault();
-
-            if ($("#more_options").css("display") == "none") {
-                $(this).empty().append('<?php echo __("&uarr; Fewer Options", "admin"); ?>');
-                Cookie.set("show_more_options", "true", 30);
-            } else {
-                $(this).empty().append('<?php echo __("More Options &darr;", "admin"); ?>');
-                Cookie.destroy("show_more_options");
-            }
-            $("#more_options").slideToggle();
-        });
-    }
 }
 // Validates slug fields.
 function validate_slug() {
@@ -166,7 +135,9 @@ var Help = {
             [$("<iframe>", {
                 "src": href,
                 "aria-label": '<?php echo __("Help", "admin"); ?>'
-            }).addClass("iframe_foreground").loader(),
+            }).addClass("iframe_foreground").loader().on("load", function() {
+                $(this).loader(true);
+            }),
             $("<img>", {
                 "src": Site.chyrp_url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "admin"); ?>',
@@ -182,12 +153,10 @@ var Help = {
     }
 }
 var Write = {
-    preview_support: <?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>,
-    wysiwyg_editing: <?php echo($trigger->call("admin_write_wysiwyg") ? "true" : "false"); ?>,
     init: function() {
         // Insert buttons for ajax previews.
-        if (Write.preview_support && !Write.wysiwyg_editing)
-            $("*[data-preview]").each(function() {
+        if (<?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>)
+            $("#write_form *[data-preview], #edit_form *[data-preview]").each(function() {
                 var target = $(this);
 
                 $("label[for='" + target.attr("id") + "']").append(
@@ -196,18 +165,20 @@ var Write = {
                         "alt": '(<?php echo __("Preview this field", "admin"); ?>)',
                         "title": '<?php echo __("Preview this field", "admin"); ?>',
                     }).addClass("emblem preview").click(function(e) {
-                        var content = target.val();
-                        var filter = target.attr("data-preview");
+                        var content  = target.val();
+                        var field    = target.attr("name");
+                        var safename = $("input#feather").val() || "page";
+                        var action   = (safename == "page") ? "preview_page" : "preview_post" ;
 
                         if (content != "") {
                             e.preventDefault();
-                            Write.show(content, filter);
+                            Write.show(action, safename, field, content);
                         }
                     })
                 );
             });
     },
-    show: function(content, filter) {
+    show: function(action, safename, field, content) {
         var uid = Date.now().toString(16);
 
         // Build a form targeting a named iframe.
@@ -222,12 +193,17 @@ var Write = {
             [$("<input>", {
                 "type": "hidden",
                 "name": "action",
-                "value": "show_preview"
+                "value": action
             }),
             $("<input>", {
                 "type": "hidden",
-                "name": "filter",
-                "value": filter
+                "name": "safename",
+                "value": safename
+            }),
+            $("<input>", {
+                "type": "hidden",
+                "name": "field",
+                "value": field
             }),
             $("<input>", {
                 "type": "hidden",
@@ -248,7 +224,10 @@ var Write = {
             [$("<iframe>", {
                 "name": uid,
                 "aria-label": '<?php echo __("Preview", "admin"); ?>'
-            }).addClass("iframe_foreground").loader(),
+            }).addClass("iframe_foreground").loader().on("load", function() {
+                if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
+                    $(this).loader(true);
+            }),
             $("<img>", {
                 "src": Site.chyrp_url + '/admin/images/icons/close.svg',
                 "alt": '<?php echo __("Close", "admin"); ?>',

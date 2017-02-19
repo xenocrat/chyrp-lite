@@ -9,7 +9,7 @@
     # Parse the route.
     $route = Route::current($main);
 
-    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "POST")
+    if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] !== "POST")
         error(__("Error"), __("This resource accepts POST requests only."), null, 405);
 
     if (empty($_POST['action']))
@@ -20,7 +20,7 @@
 
     switch($_POST['action']) {
         case "destroy_post":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -37,7 +37,7 @@
             Post::delete($post->id);
             json_response(__("Post deleted."));
         case "destroy_page":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -53,29 +53,62 @@
 
             Page::delete($page->id, true);
             json_response(__("Page deleted."));
-        case "show_preview":
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER["REMOTE_ADDR"]))
+        case "preview_post":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            if (!$visitor->group->can("add_post", "add_draft", "add_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to add content."));
+            if (!$visitor->group->can("add_post", "add_draft"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
-            if (empty($_POST['filter']))
-                error(__("No Filter Specified"), __("A filter is required to preview content."), null, 400);
+            $trigger = Trigger::current();
 
-            fallback($_POST['content'], "Lorem ipsum dolor sit amet.");
+            $class = camelize(fallback($_POST['safename'], "text"));
+            $field = fallback($_POST['field'], "body");
+            $content = sanitize_html(fallback($_POST['content'], ""));
+
+            # Custom filters.
+            if (isset(Feathers::$custom_filters[$class]))
+                foreach (Feathers::$custom_filters[$class] as $custom_filter)
+                    if ($custom_filter["field"] == $field)
+                        $content = call_user_func_array(array(Feathers::$instances[$_POST['safename']],
+                                                              $custom_filter["name"]),
+                                                        array($content));
+
+            # Trigger filters.
+            if (isset(Feathers::$filters[$class]))
+                foreach (Feathers::$filters[$class] as $filter)
+                    if ($filter["field"] == $field and !empty($content))
+                        $trigger->filter($content, $filter["name"]);
 
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
-            $sanitized = sanitize_html($_POST['content']);
+            $main->display("content".DIR."preview", array("content" => $content), __("Preview"));
+            exit;
+        case "preview_page":
+            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                show_403(__("Access Denied"), __("Invalid security key."));
 
-            Trigger::current()->filter($sanitized, $_POST['filter']);
+            if (!$visitor->group->can("add_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
-            $main->display("content".DIR."preview",
-                           array("content" => $sanitized,
-                                 "filter" => $_POST['filter']),
-                           __("Preview"));
+            $trigger = Trigger::current();
+
+            $field = fallback($_POST['field'], "body");
+            $content = sanitize_html(fallback($_POST['content'], ""));
+
+            # Page title filters.
+            if ($field == "title")
+                $trigger->filter($content, array("markup_page_title", "markup_title"));
+
+            # Page body filters.
+            if ($field == "body")
+                $trigger->filter($content, array("markup_page_text", "markup_text"));
+
+            header("Cache-Control: no-cache, must-revalidate");
+            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+
+            $main->display("content".DIR."preview", array("content" => $content), __("Preview"));
             exit;
     }
 

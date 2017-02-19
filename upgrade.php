@@ -7,8 +7,9 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2016.04");
-    define('CHYRP_CODENAME', "Iago");
+    define('CHYRP_VERSION',  "2017.01");
+    define('CHYRP_CODENAME', "Swainson");
+    define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -83,20 +84,6 @@
 
     # Load the translation engine.
     load_translator("chyrp", INCLUDES_DIR.DIR."locale");
-
-    /**
-     * Function: test
-     * Displays a "success" or "failed" message determined by the value.
-     *
-     * Parameters:
-     *     $value - Something that evaluates to true or false.
-     */
-    function test($value) {
-        if ($value)
-            return " <span class=\"yay\">".__("success!")."</span>\n";
-        else
-            return " <span class=\"boo\">".__("failed!")."</span>\n";
-    }
 
     /**
      * Function: add_markdown
@@ -384,31 +371,15 @@
         disable_importers();
         add_export_content();
 
-        # Perform module upgrades and output the results if the upgrader echoes anything.
+        # Perform module upgrades.
         foreach ((array) $config->enabled_modules as $module)
-            if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php")) {
-                ob_start();
-                echo $begin = _f("Calling %s module's upgrader...", array($module))."\n";
+            if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
-                if (ob_get_contents() == $begin)
-                    ob_end_clean();
-                else
-                    ob_end_flush();
-            }
-
-        # Perform feather upgrades and output the results if the upgrader echoes anything.
+        # Perform feather upgrades.
         foreach ((array) $config->enabled_feathers as $feather)
-            if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php")) {
-                ob_start();
-                echo $begin = _f("Calling %s feather's upgrader...", array($feather))."\n";
+            if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
-
-                if (ob_get_contents() == $begin)
-                    ob_end_clean();
-                else
-                    ob_end_flush();
-            }
 
         $upgraded = true;
     }
@@ -418,29 +389,26 @@
     #---------------------------------------------
 
     foreach ($errors as $error)
-        echo '<span role="alert">'.$error."</span>\n";
+        echo '<span role="alert">'.sanitize_html($error)."</span>\n";
 
             ?></pre>
 <?php if (!$upgraded): ?>
             <h1><?php echo __("Halt!"); ?></h1>
-            <p><?php echo __("Please take these preemptive measures before proceeding:"); ?></p>
+            <p><?php echo __("Please take these precautionary measures before you upgrade:"); ?></p>
             <ol>
-                <li><?php echo __("<strong>Make a backup of your installation and database.</strong>"); ?></li>
-                <li><?php echo __("Disable any third-party Modules and Feathers."); ?></li>
-                <li><?php echo __("Ensure Chyrp Lite's directory is writable by the server."); ?></li>
+                <li><?php echo __("<strong>Backup your database before proceeding!</strong>"); ?></li>
+                <li><?php echo __("Tell your users that your site is offline for maintenance."); ?></li>
             </ol>
-            <p><?php echo __("If any of the upgrade tasks fail, you can safely refresh and retry."); ?></p>
             <form action="upgrade.php" method="post">
                 <button type="submit" name="upgrade" value="yes"><?php echo __("Upgrade me!"); ?></button>
             </form>
 <?php else: ?>
-            <h1><?php echo __("Chyrp Lite has been upgraded"); ?></h1>
+            <h1><?php echo __("Upgrade Complete"); ?></h1>
             <h2><?php echo __("What now?"); ?></h2>
             <ol>
-                <li><?php echo __("Look above for any reports of failed tasks or errors."); ?></li>
-                <li><?php echo __("Fix any problems reported."); ?></li>
-                <li><?php echo __("Execute this upgrader again until all tasks succeed."); ?></li>
-                <li><?php echo __("You can delete <em>upgrade.php</em> once you are finished."); ?></li>
+                <li><?php echo __("Take action to resolve any errors reported on this page."); ?></li>
+                <li><?php echo __("Run this upgrader again if you need to."); ?></li>
+                <li><?php echo __("Delete <em>upgrade.php</em> once you are finished upgrading."); ?></li>
             </ol>
             <a class="big" href="<?php echo $config->url; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>

@@ -19,9 +19,6 @@
          *     $throw_exceptions - Throw exceptions instead of calling error()?
          */
         public function __construct($sql, $query, $params = array(), $throw_exceptions = false) {
-            if (DEBUG)
-                global $time_start;
-            
             $this->sql = $sql;
 
             # Don't count config setting queries.
@@ -33,7 +30,7 @@
             $this->db =& $this->sql->db;
 
             $this->params = $params;
-            $this->throw_exceptions = (INSTALLING or UPGRADING or XML_RPC) ? true : $throw_exceptions ;
+            $this->throw_exceptions = (XML_RPC) ? true : $throw_exceptions ;
             $this->queryString = $query;
 
             if ($count and DEBUG) {
@@ -76,9 +73,10 @@
                                                               $this->queryString);
 
                         if (!$result)
-                            throw new PDOException;
-                    } catch (PDOException $error) {
-                        return $this->handle($error);
+                            throw new PDOException(__("PDO failed to execute the prepared statement."));
+
+                    } catch (PDOException $e) {
+                        return $this->exception_handler($e);
                     }
 
                     break;
@@ -93,12 +91,8 @@
 
                     $this->queryString = $query;
 
-                    try {
-                        if (!$this->query = $this->db->query($query))
-                            throw new Exception($this->db->error);
-                    } catch (Exception $error) {
-                        return $this->handle($error);
-                    }
+                    if (!$this->query = $this->db->query($query))
+                        return $this->exception_handler(new Exception($this->db->error, $this->db->errno));
 
                     break;
             }
@@ -190,24 +184,26 @@
          }
 
         /**
-         * Function: handle
+         * Function: exception_handler
          * Handles exceptions thrown by failed queries.
          */
-        public function handle($error) {
-            $this->sql->error = $error->getMessage();
+        public function exception_handler($e) {
+            $this->sql->error = $e->getMessage();
 
+            # Trigger an error if throws were not requested.
             if (!$this->throw_exceptions) {
                 $message = (DEBUG) ?
-                    fix($this->sql->error).
+                    fix($this->sql->error, false, true).
                     "\n\n<h2>".__("Query String")."</h2>\n".
-                    "<pre>".fix(print_r($this->queryString, true))."</pre>".
+                    "<pre>".fix(print_r($this->queryString, true), false, true)."</pre>".
                     "\n\n<h2>".__("Parameters")."</h2>\n".
-                    "<pre>".fix(print_r($this->params, true))."</pre>" :
-                    fix($this->sql->error) ;
+                    "<pre>".fix(print_r($this->params, true), false, true)."</pre>" :
+                    fix($this->sql->error, false, true) ;
 
-                error(__("Database Error"), $message, $error->getTrace());
+                return trigger_error(_f("Database error: %s", $message), E_USER_WARNING);
             }
 
-            throw new Exception(fix($this->sql->error));
+            # Otherwise we chain the exception.
+            throw new Exception($this->sql->error, $e->getCode(), $e);
         }
     }

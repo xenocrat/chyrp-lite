@@ -14,10 +14,10 @@
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
                                   "optional" => true,
-                                  "preview" => "markup_text"));
+                                  "preview" => true));
 
-            $this->setFilter("title", array("markup_title", "markup_post_title"));
-            $this->setFilter("description", array("markup_text", "markup_post_text"));
+            $this->setFilter("title", array("markup_post_title", "markup_title"));
+            $this->setFilter("description", array("markup_post_text", "markup_text"));
 
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_audio");
@@ -49,9 +49,9 @@
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
 
-            $post->update(array("title" => $_POST['title'],
-                                "filename" => $filename,
-                                "description" => $_POST['description']));
+            return $post->update(array("title" => $_POST['title'],
+                                       "filename" => $filename,
+                                       "description" => $_POST['description']));
         }
 
         public function title($post) {
@@ -64,6 +64,18 @@
 
         public function feed_content($post) {
             return $post->description;
+        }
+
+        public function enclose_audio($post) {
+            $config = Config::current();
+
+            if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
+                return;
+
+            echo '<link rel="enclosure" href="'.uploaded($post->filename).
+                 '" type="'.self::audio_type($post->filename).
+                 '" title="'.truncate(strip_tags($post->title())).
+                 '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
         public function delete_file($post) {
@@ -85,14 +97,26 @@
             if ($post->feather != "audio")
                 return;
 
-            $post->audio_player = $this->audio_player($post->filename, array(), $post);
+            $post->audio_player = self::audio_player($post);
         }
 
-        public function audio_type($filename) {
-            $file_split = explode(".", $filename);
-            $file_ext = strtolower(end($file_split));
+        private function audio_player($post) {
+            $trigger = Trigger::current();
 
-            switch($file_ext) {
+            if ($trigger->exists("audio_player"))
+                return $trigger->call("audio_player", $post);
+
+            return "\n".'<audio controls>'.
+                   "\n".__("Your web browser does not support the <code>audio</code> element.", "audio").
+                   "\n".'<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).'">'.
+                   "\n".'</audio>'.
+                   "\n";
+        }
+
+        private function audio_type($filename) {
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+            switch($extension) {
                 case "mp3":
                     return "audio/mpeg";
                 case "m4a":
@@ -110,31 +134,5 @@
                 default:
                     return "application/octet-stream";
             }
-        }
-
-        public function enclose_audio($post) {
-            $config = Config::current();
-
-            if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
-                return;
-
-            echo '        <link rel="enclosure" href="'.uploaded($post->filename).
-                        '" type="'.$this->audio_type($post->filename).
-                        '" title="'.truncate(strip_tags($post->title())).
-                        '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
-        }
-
-        public function audio_player($filename, $params = array(), $post) {
-            $trigger = Trigger::current();
-
-            if ($trigger->exists("audio_player"))
-                return $trigger->call("audio_player", $filename, $params, $post);
-
-            $player = "\n".'<audio controls>';
-            $player.= "\n".__("Your web browser does not support the <code>audio</code> element.", "audio");
-            $player.= "\n".'<source src="'.uploaded($filename).'" type="'.$this->audio_type($filename).'">';
-            $player.= "\n".'</audio>'."\n";
-
-            return $player;
         }
     }

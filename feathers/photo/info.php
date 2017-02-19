@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Photo", "photo"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 2.0,
+    "version"       => 2.1,
     "description"   => __("Upload and display an image with a caption.", "photo"),
     "author"        => array(
         "name"      => "Alex Suraci",

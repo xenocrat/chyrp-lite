@@ -31,9 +31,6 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
         $this->options = $options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generateKey($name, $className)
     {
         $hash = hash('sha256', $className);
@@ -41,17 +38,13 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
         return $this->directory.$hash[0].$hash[1].'/'.$hash.'.php';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load($key)
     {
-        @include_once $key;
+        if (file_exists($key)) {
+            @include_once $key;
+        }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function write($key, $content)
     {
         $dir = dirname($key);
@@ -82,9 +75,6 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
         throw new RuntimeException(sprintf('Failed to write cache file "%s".', $key));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTimestamp($key)
     {
         if (!file_exists($key)) {

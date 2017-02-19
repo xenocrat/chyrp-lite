@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2016 xenocrat
+# Copyright (C) 2017 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-20 16:23+0000\n"
+"POT-Creation-Date: 2017-02-19 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -49,31 +49,35 @@ msgstr ""
 msgid "Please remember to give write permissions to sitemap.xml on the root directory of the site."
 msgstr ""
 
-#: modules/sitemap/sitemap.php:7
-msgid "hourly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:8
-msgid "daily"
-msgstr ""
-
 #: modules/sitemap/sitemap.php:9
-msgid "weekly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:10
-msgid "monthly"
+msgid "Sitemap module cannot determine the server's document root."
 msgstr ""
 
 #: modules/sitemap/sitemap.php:11
-msgid "yearly"
+msgid "hourly"
 msgstr ""
 
 #: modules/sitemap/sitemap.php:12
+msgid "daily"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:13
+msgid "weekly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:14
+msgid "monthly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:15
+msgid "yearly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:16
 msgid "never"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:31
+#: modules/sitemap/sitemap.php:35
 msgid "Sitemap"
 msgstr ""
 

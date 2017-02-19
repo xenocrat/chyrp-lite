@@ -8,14 +8,14 @@
 <fieldset>
 <p>
 <label for="name">{{ "Name" | translate("categorize") }}</label>
-<input class="text" type="text" name="name" value="" id="name">
+<input class="text" type="text" name="name" value="" id="name" maxlength="128">
 </p>
 <p>
 <label for="clean">
 {{ "Slug" | translate("categorize") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
-<input class="text" type="text" name="clean" value="" id="clean">
+<input class="text" type="text" name="clean" value="" id="clean" maxlength="128">
 <small>
 {{ "The slug is the URL-friendly identifying name for this category." | translate("categorize") }}
 </small>

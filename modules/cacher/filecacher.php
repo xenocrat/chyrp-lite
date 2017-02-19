@@ -9,8 +9,7 @@
 
             # If the cache directory does not exist and cannot be created, or is not writable, cancel execution.
             if ((!is_dir($this->caches) and !@mkdir($this->caches)) or !is_writable($this->caches))
-                cancel_module("cacher",
-                              _f("Cacher module cannot continue because <em>%s</em> is not writable.", $this->caches, "cacher"));
+                cancel_module("cacher", __("Cacher module cannot write cache files to disk.", "cacher"));
 
             # Remove all expired files.
             $this->remove_expired();

@@ -22,7 +22,7 @@
 
             parent::grab($this, $group_id, $options);
 
-            $this->permissions = (array) oneof(@$this->permissions, array());
+            $this->permissions = (array) oneof($this->permissions, array());
 
             if ($this->no_results)
                 return false;
@@ -106,16 +106,22 @@
             $group_id = $sql->latest("groups");
 
             # Grab valid permissions.
-            $ids = $sql->select("permissions",
-                                "*",
-                                array("group_id" => 0))->grab("id");
+            $results = $sql->select("permissions",
+                                    "id, name",
+                                    array("group_id" => 0))->fetchAll();
 
-            foreach (array_intersect($ids, $permissions) as $id)
+            $valid_permissions = array();
+
+            foreach ($results as $permission)
+                $valid_permissions[$permission["id"]] = $permission["name"];
+
+            $permissions = array_intersect(array_keys($valid_permissions), $permissions);
+
+            # Insert the permissions for the new group.
+            foreach ($permissions as $id)
                 $sql->insert("permissions",
                              array("id" => $id,
-                                   "name" => $sql->select("permissions",
-                                                          "name",
-                                                          array("id" => $id))->fetchColumn(),
+                                   "name" => $valid_permissions[$id],
                                    "group_id" => $group_id));
 
             $group = new self($group_id);
@@ -134,6 +140,9 @@
          * Parameters:
          *     $name - The new Name to set.
          *     $permissions - An array of the new permissions to set (IDs).
+         *
+         * Returns:
+         *     The updated <Group>.
          */
         public function update($name, $permissions) {
             if ($this->no_results)
@@ -145,50 +154,53 @@
             $trigger->filter($name, "before_group_update_name");
             $trigger->filter($permissions, "before_group_update_permissions");
 
-            $old = clone $this;
-
             # Grab valid permissions.
-            $ids = $sql->select("permissions",
-                                "*",
-                                array("group_id" => 0))->grab("id");
+            $results = $sql->select("permissions",
+                                    "id, name",
+                                    array("group_id" => 0))->fetchAll();
 
-            $this->name        = $name;
-            $this->permissions = array_values(array_intersect($ids, $permissions));
+            $valid_permissions = array();
+
+            foreach ($results as $permission)
+                $valid_permissions[$permission["id"]] = $permission["name"];
+
+            $permissions = array_intersect(array_keys($valid_permissions), $permissions);
 
             $sql->update("groups",
                          array("id" => $this->id),
                          array("name" => $name));
 
-            # Delete the old permissions.
+            # Delete the old permissions for this group.
             $sql->delete("permissions", array("group_id" => $this->id));
 
-            # Insert the new permissions.
-            foreach ($this->permissions as $id)
+            # Insert the new permissions for this group.
+            foreach ($permissions as $id)
                 $sql->insert("permissions",
                              array("id" => $id,
-                                   "name" => $sql->select("permissions",
-                                                          "name",
-                                                          array("id" => $id, "group_id" => 0),
-                                                          null,
-                                                          array(),
-                                                          1)->fetchColumn(),
+                                   "name" => $valid_permissions[$id],
                                    "group_id" => $this->id));
  
-            $trigger->call("update_group", $this, $old);
+            $group = new self(null, array("read_from" => array("id" => $this->id,
+                                                               "name" => $name,
+                                                               "permissions" => $permissions)));
+
+            $trigger->call("update_group", $group, $this);
+
+            return $group;
         }
 
         /**
          * Function: delete
          * Deletes a given group and its permissions. Calls the @delete_group@ trigger and passes the <Group> as an argument.
          *
-         * Parameters:
-         *     $id - The group to delete.
+         * See Also:
+         *     <Model::destroy>
          */
-        static function delete($id) {
-            if (!empty($id))
-                SQL::current()->delete("permissions", array("group_id" => $id));
+        static function delete($group_id) {
+            if (!empty($group_id))
+                SQL::current()->delete("permissions", array("group_id" => $group_id));
 
-            parent::destroy(get_class(), $id);
+            parent::destroy(get_class(), $group_id);
         }
 
         /**

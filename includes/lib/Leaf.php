@@ -18,7 +18,7 @@
          */
         public function getFunctions() {
             return array(   
-                # Helpers
+                # Helpers:
                 new Twig_SimpleFunction("url",                 "url"),
                 new Twig_SimpleFunction("self_url",            "self_url"),
                 new Twig_SimpleFunction("module_enabled",      "module_enabled"),
@@ -27,7 +27,7 @@
                 new Twig_SimpleFunction("is_email",            "is_email"),
                 new Twig_SimpleFunction("password_strength",   "password_strength"),
 
-                # Custom functions
+                # Custom functions:
                 new Twig_SimpleFunction("paginate",             "twig_function_paginate")
             );
         }
@@ -38,10 +38,10 @@
          */
         public function getFilters() {
             return array(
-                # PHP
+                # Internal:
                 new Twig_SimpleFilter("repeat",                "str_repeat"),
 
-                # Helpers
+                # Helpers:
                 new Twig_SimpleFilter("camelize",              "camelize"),
                 new Twig_SimpleFilter("decamelize",            "decamelize"),
                 new Twig_SimpleFilter("normalize",             "normalize"),
@@ -59,7 +59,7 @@
                 new Twig_SimpleFilter("gravatar",              "get_gravatar"),
                 new Twig_SimpleFilter("add_scheme",            "add_scheme"),
 
-                # Custom filters
+                # Custom filters:
                 new Twig_SimpleFilter("translate",             "twig_filter_translate"),
                 new Twig_SimpleFilter("translate_plural",      "twig_filter_translate_plural"),
                 new Twig_SimpleFilter("strftimeformat",        "twig_filter_strftime_format"),
@@ -69,7 +69,8 @@
                 new Twig_SimpleFilter("inspect",               "twig_filter_inspect"),
                 new Twig_SimpleFilter("selected",              "twig_filter_selected"),
                 new Twig_SimpleFilter("checked",               "twig_filter_checked"),
-                new Twig_SimpleFilter("download",              "twig_filter_download")
+                new Twig_SimpleFilter("download",              "twig_filter_download"),
+                new Twig_SimpleFilter("thumbnail",             "twig_filter_thumbnail")
             );
         }
     }
@@ -103,12 +104,18 @@
      * Paginates an array of items using the Paginator class.
      */
     function twig_function_paginate($array, $per_page = 10, $name = "twig") {
-        $name = str_replace("_", "", $name)."_page"; # This is important for clean URL parsing in MainController.
+        # This is important for clean URL parsing in MainController.
+        $name = str_replace("_", "-", $name)."_page";
 
-        while (in_array($name, Paginator::$names))
-            $name = "-".$name;
+        $count = 1;
+        $unique = $name;
 
-        return new Paginator($array, $per_page, $name);
+        while (in_array($unique, Paginator::$names)) {
+            $count++;
+            $unique = $name."-".$count;
+        }
+
+        return new Paginator($array, $per_page, $unique);
     }
 
     /**
@@ -227,4 +234,37 @@
      */
     function twig_filter_download($filename) {
         return Config::current()->chyrp_url."/includes/download.php?file=".urlencode($filename);
+    }
+
+    /**
+     * Function: twig_filter_thumbnail
+     * Returns a thumbnail <img> tag for an uploaded image, optionally with enclosing <a> tag.
+     */
+    function twig_filter_thumbnail($filename, $alt_text = "", $url = null, $args = array(), $sizes = "100vw") {
+        fallback($alt_text, $filename);
+        $filepath = Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($filename);
+        $src_args = implode("&amp;", $args);
+        $set_args = preg_replace(array("/max_width=[^&]*(&amp;)?/i",
+                                       "/max_height=[^&]*(&amp;)?/i"),
+                                 "",
+                                 $src_args);
+
+        $src_args = !empty($src_args) ? "&amp;".$src_args : $src_args ;
+        $set_args = !empty($set_args) ? "&amp;".$set_args : $set_args ;
+
+        # Source set for responsive images.
+        $srcset = array($filepath.$src_args." 1x",
+                        $filepath."&amp;max_width=960".$set_args." 960w",
+                        $filepath."&amp;max_width=640".$set_args." 640w",
+                        $filepath."&amp;max_width=320".$set_args." 320w");
+
+        $img = '<img src="'.$filepath.$src_args.'" srcset="'.implode(", ", $srcset).
+               '" sizes="'.$sizes.'" alt="'.fix($alt_text, true).'" class="image">';
+
+        # Enclose in <a> tag? Provide @true@ or a candidate URL.
+        if (isset($url) and $url !== false)
+            $href = (is_string($url) and is_url($url)) ? $url : uploaded($filename) ;
+
+        return isset($href) ?
+            '<a href="'.fix($href, true).'" class="image_link">'.$img.'</a>' : $img ;
     }

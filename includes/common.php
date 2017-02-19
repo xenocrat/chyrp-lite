@@ -5,10 +5,10 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2016.04
+     *     v2017.01
      *
      * Copyright:
-     *     Chyrp Lite is Copyright 2008-2016 Alex Suraci, Arian Xhezairi,
+     *     Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi,
      *     Daniel Pimley, and other contributors.
      *
      * License:
@@ -45,11 +45,15 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2016.04");
+    define('CHYRP_VERSION', "2017.01");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Iago");
+    define('CHYRP_CODENAME', "Swainson");
+
+    # Constant: CHYRP_IDENTITY
+    # The string identifying this version.
+    define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
 
     # Constant: CACHE_TWIG
     # Override DEBUG to enable Twig template caching.
@@ -382,9 +386,8 @@
         header("Content-Type: application/javascript");
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
-    } else
+    } else {
         header("Content-Type: text/html; charset=UTF-8");
-
-    # Be sociable but safe if the site is using the HTTPS protocol.
-    if (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443)
-        header("Referrer-Policy: origin-when-cross-origin");
+        header("Referrer-Policy: strict-origin-when-cross-origin");
+        header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
+    }

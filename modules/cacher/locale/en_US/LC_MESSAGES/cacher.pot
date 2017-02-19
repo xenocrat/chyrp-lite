@@ -1,5 +1,5 @@
 # Chyrp Lite Translation File.
-# Copyright (C) 2016 xenocrat
+# Copyright (C) 2017 xenocrat
 # This file is distributed under the same license as the Chyrp Lite package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2016-11-20 16:23+0000\n"
+"POT-Creation-Date: 2017-02-19 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -46,17 +46,16 @@ msgstr ""
 msgid "A list of URLs that will not be cached; enter one at a time."
 msgstr ""
 
-#: modules/cacher/cacher.php:101
+#: modules/cacher/cacher.php:102
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:138
+#: modules/cacher/cacher.php:139
 msgid "Cache cleared."
 msgstr ""
 
-#: modules/cacher/filecacher.php:13
-#, php-format
-msgid "Cacher module cannot continue because <em>%s</em> is not writable."
+#: modules/cacher/filecacher.php:12
+msgid "Cacher module cannot write cache files to disk."
 msgstr ""
 
 #: modules/cacher/info.php:3

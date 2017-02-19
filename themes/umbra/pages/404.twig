@@ -1,0 +1,5 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<h3 role="status" class="filter">{{ reason is defined ? reason | fix : "Not found." | translate }}</h3>
+{% endblock %}

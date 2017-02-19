@@ -18,7 +18,7 @@
             if (!is_file($filepath) or !is_readable($filepath))
                 return (INSTALLING) ?
                     false :
-                    trigger_error(__("Could not read the configuration file."), E_USER_WARNING) ;
+                    trigger_error(__("Could not read the configuration file."), E_USER_ERROR) ;
 
             self::read();
 

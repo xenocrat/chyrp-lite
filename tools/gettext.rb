@@ -11,7 +11,7 @@ OPTIONS = {
   :theme => false,
   :msgstr => "",
   :msgstr_filter => "",
-  :exclude => [".git", "modules", "lib", "feathers", "themes", "admin"]
+  :exclude => [".git", "modules", "feathers", "themes", "admin", "tools", "includes/lib/Twig", "includes/lib/IXR"]
 }
 
 # Shamelessly taken from the Twig lexer. :P
@@ -30,19 +30,19 @@ ARGV.options do |o|
     OPTIONS[:project] = project
   end
   o.on("--maintainer=[val]", String,
-       "The maintainer of the .pot file. (Firstname Lastname <foo@bar.com>)") do |maintainer|
+       "The maintainer of the .pot file.") do |maintainer|
     OPTIONS[:maintainer] = maintainer
   end
   o.on("--domain=[val]", String,
-       "Domain to scan for translations.") do |domain|
+       "The scan will search for translations targeting this domain.") do |domain|
     OPTIONS[:domain] = domain
   end
   o.on("--theme",
-       "Specifies whether the domain is a Twig theme.") do |theme|
+       "Causes translations without a target domain to be attributed to this domain.") do |theme|
     OPTIONS[:theme] = true
   end
   o.on("--msgstr=[val]", String,
-       "Message string to translate all found translations to. Useful for debugging.") do |msgstr|
+       "A default translation for all message strings (useful for debugging).") do |msgstr|
     OPTIONS[:mststr] = msgstr
   end
   o.on("--exclude=[val1,val2]", Array,

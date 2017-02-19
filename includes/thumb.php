@@ -11,7 +11,7 @@
     if (shorthand_bytes(ini_get("memory_limit")) < 50331648)
         ini_set("memory_limit", "48M");
 
-    if (isset($_SERVER["REQUEST_METHOD"]) and $_SERVER["REQUEST_METHOD"] !== "GET")
+    if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] !== "GET")
         error(__("Error"), __("This resource accepts GET requests only."), null, 405);
 
     if (empty($_GET['file']))

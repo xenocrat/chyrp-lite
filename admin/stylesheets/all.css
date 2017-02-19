@@ -204,11 +204,6 @@ div.clear {                                     visibility: hidden;
                                                 margin: 2em auto;
                                                 padding: 0em 2em;
                                                 text-align: center }
-#footer small {                                 color: #4f4f4f }
-#footer small.metadata {                        display: block;
-                                                margin-top: 1em;
-                                                font-size: .8em }
-#logout {                                       margin-top: 1em }
 
 /**
  *---------------------------------------------
@@ -346,6 +341,7 @@ input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
 input:-ms-input-placeholder,
+input::-ms-input-placeholder,
 input:input-placeholder {                       color: #ddd;
                                                 opacity: 1 }
 label {                                         line-height: 2 }
@@ -605,17 +601,6 @@ code.yay {                                      background-color: #ebfae4;
 .main_options input[type="password"],
 .main_options textarea {                        width: 100%;
                                                 margin: 0em }
-
-a.more_options_link {                           font-weight: bold;
-                                                color: #4a4747;
-                                                border-bottom: 1px solid #dfdfdf;
-                                                display: block;
-                                                text-decoration: none;
-                                                margin-top: 2em;
-                                                padding-bottom: 1em }
-div.more_options {                              box-sizing: border-box;
-                                                margin: 0em;
-                                                padding: 1em }
 .more_options_option {                          box-sizing: border-box;
                                                 display: block;
                                                 width: 50%;
@@ -656,6 +641,7 @@ hr {                                            border: none;
                                                 clear: both;
                                                 border-top: 1px solid #ddd;
                                                 margin: 2em 0em }
+a.emblem {                                      text-decoration: none }
 a.emblem > img,
 img.emblem {                                    display: inline;
                                                 position: relative;
