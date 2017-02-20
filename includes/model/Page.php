@@ -96,17 +96,17 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $new_values = array("title" =>        $title,
-                                "body" =>         $body,
-                                "user_id" =>      $user_id,
-                                "parent_id" =>    $parent_id,
-                                "public" =>       $public,
+            $new_values = array("title"        => $title,
+                                "body"         => $body,
+                                "user_id"      => $user_id,
+                                "parent_id"    => $parent_id,
+                                "public"       => $public,
                                 "show_in_list" => $show_in_list,
-                                "list_order" =>   $list_order,
-                                "clean" =>        $clean,
-                                "url" =>          $url,
-                                "created_at" =>   $created_at,
-                                "updated_at" =>   $updated_at);
+                                "list_order"   => $list_order,
+                                "clean"        => $clean,
+                                "url"          => $url,
+                                "created_at"   => $created_at,
+                                "updated_at"   => $updated_at);
 
             $trigger->filter($new_values, "before_add_page");
 
