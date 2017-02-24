@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-19 09:06+0000\n"
+"POT-Creation-Date: 2017-02-24 22:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -23,7 +23,7 @@ msgid "Tagging Posts"
 msgstr ""
 
 #: modules/tags/admin/help/tagging_posts.twig:8
-msgid "A tag is a word or phrase that you want to associate with your blog post. A good use for tags is to reference people, things, or topics you mention. Multiple comma separated tags can be added to a post, and if you add the same tag to more than one post, your visitors will be able to filter your blog to easily view all the posts with that tag applied."
+msgid "A tag is a word or phrase that you want to associate with your blog post. A good use for tags is to reference people, things, or topics you mention in a post. Multiple comma separated tags can be added to a post, and if you add the same tag to more than one post, your visitors will be able to filter your blog to easily view all the posts with that tag applied."
 msgstr ""
 
 #: modules/tags/admin/pages/delete_tag.twig:3
