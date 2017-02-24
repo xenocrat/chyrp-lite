@@ -35,7 +35,7 @@
 
         # Array: $protected
         # Methods that cannot respond to actions.
-        public $protected = array("__construct", "parse", "feed", "display", "current");
+        public $protected = array("__construct", "parse", "display", "current");
 
         # Array: $permitted
         # Methods that are exempt from the "view_site" permission.
@@ -725,7 +725,7 @@
          * Function: feed
          * Grabs posts and serves a feed.
          */
-        private function feed($posts = null) {
+        public function feed($posts = null) {
             $config = Config::current();
             $trigger = Trigger::current();
             $theme = Theme::current();
