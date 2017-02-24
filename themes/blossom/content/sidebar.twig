@@ -75,7 +75,7 @@
 <ul role="menu" class="navigation sidebar_nav related_posts" aria-labelledby="label_related_posts">
 {% for post in theme.related_posts(post) %}
 <li role="presentation">
-<a role="menuitem" href="{{ post.url() }}">{{ post.title() | striptags | normalize | oneof(post.url) | truncate(30) }}</a>
+<a role="menuitem" href="{{ post.url() }}">{{ post.title() | striptags | normalize | oneof(post.slug) | truncate(30) }}</a>
 </li>
 {% endfor %}
 </ul>
@@ -84,7 +84,7 @@
 <ul role="menu" class="navigation sidebar_nav recent_posts" aria-labelledby="label_recent_posts">
 {% for post in theme.recent_posts() %}
 <li role="presentation">
-<a role="menuitem" href="{{ post.url() }}">{{ post.title() | striptags | normalize | oneof(post.url) | truncate(30) }}</a>
+<a role="menuitem" href="{{ post.url() }}">{{ post.title() | striptags | normalize | oneof(post.slug) | truncate(30) }}</a>
 </li>
 {% endfor %}
 </ul>

@@ -29,7 +29,7 @@
 {% if post.feather == "photo" %}
 {{ post.filename | thumbnail(post.alt_text, false, ["max_width=222", "quality=60", "square=1"], "20vw") }}
 {% else %}
-<p>{{ post.excerpt() | striptags | normalize | oneof(post.url) }}</p>
+<p>{{ post.excerpt() | striptags | normalize | oneof(post.slug) }}</p>
 {% endif %}
 <a href="{{ post.url() }}" class="archive_post_link">
 {{ "Permanent link to &#8220;%s&#8221;" | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}
