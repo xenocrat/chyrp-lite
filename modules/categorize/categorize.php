@@ -230,9 +230,10 @@
                 error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"), null, 400);
 
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
+            $clean = Category::check_clean(sanitize($clean, true, true));
 
             Category::add($_POST['name'],
-                          Category::check_clean(sanitize($clean, true, true)),
+                          $clean,
                           !empty($_POST['show_on_home']));
 
             Flash::notice(__("Category added.", "categorize"), "manage_category");
@@ -272,9 +273,10 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this category.", "categorize"));
 
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
+            $clean = ($clean != $category->clean) ? Category::check_clean(sanitize($clean, true, true)) : $category->clean ;
 
             $category = $category->update($_POST['name'],
-                                          Category::check_clean(sanitize($clean, true, true)),
+                                          $clean,
                                           !empty($_POST['show_on_home']));
 
             Flash::notice(__("Category updated.", "categorize"), "manage_category");
