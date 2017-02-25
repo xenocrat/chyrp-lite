@@ -484,8 +484,18 @@
          *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
         static function check_url($clean) {
-            $count = SQL::current()->count("posts", array("clean" => $clean));
-            return (!$count or empty($clean)) ? $clean : $clean."-".($count + 1) ;
+            if (empty($clean))
+                return $clean;
+
+            $count = 1;
+            $unique = $clean;
+
+            while (SQL::current()->count("posts", array("clean" => $unique))) {
+                $count++;
+                $unique = $clean."-".$count;
+            }
+
+            return $unique;
         }
 
         /**
