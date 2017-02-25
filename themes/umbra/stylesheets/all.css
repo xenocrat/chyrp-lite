@@ -418,7 +418,8 @@ div.traversal a {                               display: inline-block;
                                                 border: 1px #464647 solid }
 div.traversal a:hover,
 div.traversal a:focus,
-div.traversal a:active {                        background-color: #464647 }
+div.traversal a:active {                        background-color: #47b347;
+                                                border: 1px solid #47b347 }
 
 
 section a:link, p a:link {                      color: #999491;
@@ -454,7 +455,8 @@ div.category a.category {                       display: inline-block;
                                                 border: 1px solid #464647 }
 div.category a.category:hover,
 div.category a.category:focus,
-div.category a.category:active {                background-color: #464647 }
+div.category a.category:active {                background-color: #47b347;
+                                                border: 1px solid #47b347 }
 div.metadata a {                                color: #999491 }
 div.metadata a:hover {                          color: #ffffff }
 div.metadata a:focus {                          color: #ffffff;
@@ -471,7 +473,8 @@ div.doaction a, button {                        display: inline-block;
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
 div.doaction a:active, button:active {          outline: none;
-                                                background-color: #464647 }
+                                                background-color: #47b347;
+                                                border: 1px solid #47b347 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    font-weight: bold }
 article > section.photo > a {                   border-bottom: none }
