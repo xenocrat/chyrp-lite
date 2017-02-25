@@ -437,7 +437,6 @@ article > footer {                              display: block;
                                                 padding: 0em;
                                                 border: none }
 article > footer:last-child {                   margin: 0em }
-
 article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
