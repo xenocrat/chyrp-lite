@@ -123,7 +123,7 @@
                 return fallback($this->category_post_counts[$category->id], 0);
 
             $counts = SQL::current()->select("post_attributes",
-                                             "COUNT(value) AS total, value as category_id",
+                                             "COUNT(value) AS total, value AS category_id",
                                              array("name" => "category_id"),
                                              null,
                                              array(),
