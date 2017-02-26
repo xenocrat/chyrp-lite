@@ -183,7 +183,8 @@
          */
         public function index() {
             $this->display("pages".DIR."index",
-                           array("posts" => new Paginator(Post::find(array("placeholders" => true)),
+                           array("posts" => new Paginator(Post::find(array("placeholders" => true,
+                                                                           "order" => "created_at DESC, id DESC")),
                                                           $this->post_limit)));
         }
 
@@ -194,6 +195,13 @@
         public function archive() {
             $sql = SQL::current();
 
+            $earliest = SQL::current()->select("posts",
+                                               "created_at",
+                                               array(),
+                                               array("created_at ASC"))->fetchObject();
+
+            $year = when("Y", !empty($earliest->created_at) ? $earliest->created_at : time());
+
             fallback($_GET['year']);
             fallback($_GET['month']);
             fallback($_GET['day']);
@@ -201,10 +209,9 @@
             $months = array();
             $posts = new Paginator(array());
             $title = __("Archive");
-            $conds = array("status" => "public");
             $timestamp = mktime(0, 0, 0, (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
                                          (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
-                                         (is_numeric($_GET['year']) ? (int) $_GET['year'] : 1970));
+                                         (is_numeric($_GET['year']) ? (int) $_GET['year'] : $year));
 
             if (is_numeric($_GET['year']) and is_numeric($_GET['month']) and is_numeric($_GET['day']))
                 $depth = "day";
@@ -235,49 +242,47 @@
                 case 'day':
                     $title = _f("Archive of %s", when("%d %B %Y", $timestamp, true));
                     $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("YEAR(created_at)" => $_GET['year'],
-                                                                             "MONTH(created_at)" => $_GET['month'],
-                                                                             "DAY(created_at)" => $_GET['day'],
-                                                                             "status" => "public"))),
+                                                            "where" => array("created_at >= :from AND created_at < :upto",
+                                                                             "status" => "public"),
+                                                            "params" => array(":from" => datetime("@$timestamp"),
+                                                                              ":upto" => datetime("@$timestamp +1 $depth")),
+                                                            "order" => "created_at DESC, id DESC")),
                                            $this->post_limit);
                     break;
                 case 'month':
                     $title = _f("Archive of %s", when("%B %Y", $timestamp, true));
                     $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("YEAR(created_at)" => $_GET['year'],
-                                                                             "MONTH(created_at)" => $_GET['month'],
-                                                                             "status" => "public"))),
+                                                            "where" => array("created_at >= :from AND created_at < :upto",
+                                                                             "status" => "public"),
+                                                            "params" => array(":from" => datetime("@$timestamp"),
+                                                                              ":upto" => datetime("@$timestamp +1 $depth")),
+                                                            "order" => "created_at DESC, id DESC")),
                                            $this->post_limit);
                     break;
                 case 'year':
                     $title = _f("Archive of %s", when("%Y", $timestamp, true));
-                    $conds["YEAR(created_at)"] = $_GET['year'];
+                    $limit = strtotime("@$timestamp +1 year");
                 default:
-                    $times = $sql->select("posts",
-                                          array("DISTINCT YEAR(created_at) AS year",
-                                                "MONTH(created_at) AS month",
-                                                "created_at AS created_at"),
-                                          $conds,
-                                          array("created_at DESC"),
-                                          array(),
-                                          null,
-                                          null,
-                                          array("YEAR(created_at)", "MONTH(created_at)"));
+                    $month = $timestamp;
+                    fallback($limit, time());
 
-                    while ($time = $times->fetchObject()) {
-                        $key = mktime(0, 0, 0, $time->month + 1, 0, $time->year);
-                        $val = Post::find(array("where" => array("YEAR(created_at)" => when("Y", $time->created_at),
-                                                                 "MONTH(created_at)" => when("m", $time->created_at),
-                                                                 "status" => "public")));
+                    while ($month < $limit) {
+                        $val = Post::find(array("where" => array("created_at >= :from AND created_at < :upto",
+                                                                 "status" => "public"),
+                                                "params" => array(":from" => datetime("@$month"),
+                                                                  ":upto" => datetime("@$month +1 month")),
+                                                "order" => "created_at DESC, id DESC"));
 
                         if (!empty($val))
-                            $months[$key] = $val;
+                            $months[$month] = $val;
+
+                        $month = strtotime("@$month +1 month");
                     }
             }
 
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,
-                                 "months" => $months,
+                                 "months" => array_reverse($months, true),
                                  "archive" => array("timestamp" => $timestamp,
                                                     "depth" => $depth,
                                                     "next" => !empty($next) ? strtotime(reset($next)) : false,
@@ -709,14 +714,27 @@
 
             if (isset($_GET['feather']))
                 $conds["feather"] = preg_replace('|[^a-z_\-]|i', '', $_GET['feather']);
+            else
+                $conds[] = Post::feathers();
 
-            $random = SQL::current()->select("posts",
-                                             "url",
-                                             $conds,
-                                             array("ORDER BY" => "RAND()"),
-                                             array("LIMIT" => 1))->fetchObject();
+            $results = SQL::current()->select("posts",
+                                              "id",
+                                              $conds)->fetchAll();
 
-            $post = new Post(array("url" => $random->url));
+            if (empty($results))
+                return false;
+
+            $ids = array();
+
+            foreach ($results as $result)
+                $ids[] = $result["id"];
+
+            shuffle($ids);
+
+            $post = new Post(reset($ids));
+
+            if ($post->no_results)
+                return false;
 
             redirect($post->url());
         }
@@ -743,7 +761,8 @@
                 $ids[] = $row["id"];
 
             if (!empty($ids))
-                fallback($posts, Post::find(array("where" => array("id" => $ids))));
+                fallback($posts, Post::find(array("where" => array("id" => $ids),
+                                                  "order" => "created_at DESC, id DESC")));
             else
                 fallback($posts, array());
 
