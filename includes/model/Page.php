@@ -257,7 +257,7 @@
             $count = 1;
             $unique = $clean;
 
-            while (SQL::current()->count("pages", array("clean" => $unique))) {
+            while (SQL::current()->count("pages", array("url" => $unique))) {
                 $count++;
                 $unique = $clean."-".$count;
             }
