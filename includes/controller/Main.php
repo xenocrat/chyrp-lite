@@ -211,7 +211,7 @@
             $title = __("Archive");
             $timestamp = mktime(0, 0, 0, (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
                                          (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
-                                         (is_numeric($_GET['year']) ? (int) $_GET['year'] : $year));
+                                         (is_numeric($_GET['year']) ? (int) $_GET['year'] : (int) $year));
 
             if (is_numeric($_GET['year']) and is_numeric($_GET['month']) and is_numeric($_GET['day']))
                 $depth = "day";
@@ -226,7 +226,7 @@
                                                                "*",
                                                                array("status" => "public",
                                                                      "created_at <" => datetime($timestamp)),
-                                                               array("id DESC"),
+                                                               array("created_at DESC"),
                                                                array(),
                                                                1)->grab("created_at");
 
@@ -234,7 +234,7 @@
                                                                "*",
                                                                array("status" => "public",
                                                                      "created_at >=" => datetime("@$timestamp +1 $depth")),
-                                                               array("id ASC"),
+                                                               array("created_at ASC"),
                                                                array(),
                                                                1)->grab("created_at");
 
