@@ -113,9 +113,7 @@
                                                             ":upto" => datetime("@$month +1 month"))));
 
                 if (!empty($posts[0]))
-                    $array[] = array("month" => when("m", $month),
-                                     "year"  => when("Y", $month),
-                                     "when"  => datetime($month),
+                    $array[] = array("when"  => datetime($month),
                                      "url"   => url("archive/".when("Y/m/", $month)),
                                      "count" => count($posts[0]));
 
