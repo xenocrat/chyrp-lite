@@ -279,13 +279,13 @@ Arguments:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 398
+	includes/controller/Main.php on line 403
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 489
+	includes/controller/Main.php on line 494
 Arguments:
 	$user
 
@@ -293,13 +293,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 576
+	includes/controller/Main.php on line 581
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 590
+	includes/controller/Main.php on line 595
 Arguments:
 	$user
 
@@ -307,7 +307,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 786
+	includes/controller/Main.php on line 805
 Arguments:
 	$post
 
@@ -530,7 +530,7 @@ Arguments:
 import_wordpress_post
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 160
+	modules/migrator/migrator.php on line 164
 Arguments:
 	$item, $post
 
@@ -538,7 +538,7 @@ Arguments:
 import_wordpress_page
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 173
+	modules/migrator/migrator.php on line 177
 Arguments:
 	$item, $page
 
@@ -546,7 +546,7 @@ Arguments:
 import_tumble
 -------------
 Called from:
-	modules/migrator/migrator.php on line 312
+	modules/migrator/migrator.php on line 318
 Arguments:
 	$post, $new_post
 
@@ -554,7 +554,7 @@ Arguments:
 import_textpattern_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 404
+	modules/migrator/migrator.php on line 410
 Arguments:
 	$post, $new_post
 
@@ -562,7 +562,7 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 523
+	modules/migrator/migrator.php on line 529
 Arguments:
 	$post, $new_post, $link
 
@@ -570,7 +570,7 @@ Arguments:
 import_movabletype_page
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 526
+	modules/migrator/migrator.php on line 532
 Arguments:
 	$post, $new_page, $link
 
@@ -698,7 +698,7 @@ related_posts
 Target:
 	$ids
 Called from:
-	includes/class/Theme.php on line 180
+	includes/class/Theme.php on line 167
 Arguments:
 	$post, $limit
 
@@ -708,7 +708,7 @@ stylesheets
 Target:
 	$stylesheets
 Called from:
-	includes/class/Theme.php on line 219
+	includes/class/Theme.php on line 206
 
 
 scripts
@@ -716,7 +716,7 @@ scripts
 Target:
 	$scripts
 Called from:
-	includes/class/Theme.php on line 259
+	includes/class/Theme.php on line 246
 
 
 links
@@ -724,7 +724,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 313
+	includes/class/Theme.php on line 300
 
 
 visitor
@@ -836,7 +836,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 775
+	includes/controller/Main.php on line 794
 Arguments:
 	$post
 

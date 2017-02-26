@@ -93,48 +93,34 @@
 
         /**
          * Function: archive_list
-         * Generates an array of all of the archives, by month.
+         * Generates an array listing each month with entries in the archives.
          *
          * Parameters:
-         *     $limit - Amount of months to list
-         *     $order_by - What to sort it by
-         *     $order - "asc" or "desc"
-         *
-         * Returns:
-         *     The array. Each entry as "month", "year", and "url" values, stored as an array.
+         *     $limit - Number of months to list.
          */
-        public function archives_list($limit = 0, $order_by = "created_at", $order = "desc") {
-            if (isset($this->caches["archives_list"]["$limit,$order_by,$order"]))
-                return $this->caches["archives_list"]["$limit,$order_by,$order"];
+        public function archives_list($limit = 12) {
+            if (isset($this->caches["archives_list"]["$limit"]))
+                return $this->caches["archives_list"]["$limit"];
 
-            $dates = SQL::current()->select("posts",
-                                            array("DISTINCT YEAR(created_at) AS year",
-                                                  "MONTH(created_at) AS month",
-                                                  "created_at AS created_at",
-                                                  "COUNT(id) AS posts"),
-                                            array("status" => "public", Post::feathers()),
-                                            $order_by." ".strtoupper($order),
-                                            array(),
-                                            ($limit == 0) ? null : $limit,
-                                            null,
-                                            array("created_at"));
+            $array = array();
+            $month = strtotime("first day of this month");
 
-            $archives = array();
-            $grouped = array();
+            for ($i = 0; $i < $limit; $i++) {
+                $posts = Post::find(array("placeholders" => true,
+                                          "where" => array("created_at >= :from AND created_at < :upto",
+                                                           "status" => "public"),
+                                          "params" => array(":from" => datetime("@$month"),
+                                                            ":upto" => datetime("@$month +1 month"))));
 
-            while ($date = $dates->fetchObject())
-                if (isset($grouped[$date->month." ".$date->year]))
-                    $archives[$grouped[$date->month." ".$date->year]]["count"]++;
-                else {
-                    $grouped[$date->month." ".$date->year] = count($archives);
-                    $archives[] = array("month" => $date->month,
-                                        "year"  => $date->year,
-                                        "when"  => $date->created_at,
-                                        "url"   => url("archive/".when("Y/m/", $date->created_at)),
-                                        "count" => $date->posts);
-                }
+                if (!empty($posts[0]))
+                    $array[] = array("when"  => datetime($month),
+                                     "url"   => url("archive/".when("Y/m/", $month)),
+                                     "count" => count($posts[0]));
 
-            return $this->caches["archives_list"]["$limit,$order_by,$order"] = $archives;
+                $month = strtotime("@$month -1 month");
+            }
+
+            return $this->caches["archives_list"]["$limit"] = $array;
         }
 
         /**
@@ -142,7 +128,7 @@
          * Generates an array of recent posts.
          *
          * Parameters:
-         *     $limit - Number of posts to list
+         *     $limit - Number of posts to list.
          */
         public function recent_posts($limit = 5) {
             if (isset($this->caches["recent_posts"]["$limit"]))
@@ -151,6 +137,7 @@
             $results = Post::find(array("placeholders" => true,
                                         "where" => array("status" => "public"),
                                         "order" => "created_at DESC, id DESC"));
+
             $posts = array();
 
             for ($i = 0; $i < $limit; $i++)
@@ -165,8 +152,8 @@
          * Ask modules to contribute to a list of related posts.
          *
          * Parameters:
-         *     $post - List posts related to this post
-         *     $limit - Number of related posts to list
+         *     $post - List posts related to this post.
+         *     $limit - Number of related posts to list.
          */
         public function related_posts($post, $limit = 5) {
             if ($post->no_results)
@@ -197,13 +184,13 @@
 
         /**
          * Function: file_exists
-         * Returns whether the specified Twig file exists or not.
+         * Returns whether the specified Twig template file exists or not.
          *
          * Parameters:
-         *     $file - The file's name
+         *     $name - The filename.
          */
-        public function file_exists($file) {
-            return file_exists(THEME_DIR.DIR.$file.".twig");
+        public function file_exists($name) {
+            return file_exists(THEME_DIR.DIR.$name.".twig");
         }
 
         /**

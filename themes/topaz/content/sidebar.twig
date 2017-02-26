@@ -91,7 +91,7 @@
 {% endif %}
 {% if theme.archives_list() is not empty %}
 <h4 id="label_archive_list">
-<a href="{{ url('archive/%s' | format((theme.archives_list() | first).year)) }}" rel="archives">{{ "Archive" | translate }}</a>
+<a href="{{ url('archive/%s' | format((theme.archives_list() | first).when | strftimeformat('%Y'))) }}" rel="archives">{{ "Archive" | translate }}</a>
 </h4>
 <ul role="menu" class="navigation sidebar_nav archive_list" aria-labelledby="label_archive_list">
 {% for archive in theme.archives_list() %}

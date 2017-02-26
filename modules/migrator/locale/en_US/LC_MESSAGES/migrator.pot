@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-02-26 10:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -88,14 +88,14 @@ msgid "Migration"
 msgstr ""
 
 #: modules/migrator/migrator.php:26
-#: modules/migrator/migrator.php:188
-#: modules/migrator/migrator.php:327
-#: modules/migrator/migrator.php:420
+#: modules/migrator/migrator.php:192
+#: modules/migrator/migrator.php:333
+#: modules/migrator/migrator.php:426
 msgid "You do not have sufficient privileges to import content."
 msgstr ""
 
 #: modules/migrator/migrator.php:35
-#: modules/migrator/migrator.php:201
+#: modules/migrator/migrator.php:205
 msgid "Missing Feather"
 msgstr ""
 
@@ -107,73 +107,73 @@ msgstr ""
 msgid "You must select a WordPress export file."
 msgstr ""
 
-#: modules/migrator/migrator.php:84
+#: modules/migrator/migrator.php:86
 msgid "The file does not seem to be a valid WordPress export file."
 msgstr ""
 
-#: modules/migrator/migrator.php:177
+#: modules/migrator/migrator.php:181
 msgid "WordPress content successfully imported!"
 msgstr ""
 
-#: modules/migrator/migrator.php:202
+#: modules/migrator/migrator.php:206
 msgid "Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled."
 msgstr ""
 
-#: modules/migrator/migrator.php:205
+#: modules/migrator/migrator.php:209
 msgid "Invalid URL."
 msgstr ""
 
-#: modules/migrator/migrator.php:208
+#: modules/migrator/migrator.php:212
 msgid "Invalid Tumblr URL."
 msgstr ""
 
-#: modules/migrator/migrator.php:224
+#: modules/migrator/migrator.php:228
 msgid "Could not retrieve content from the Tumblr URL. "
 msgstr ""
 
-#: modules/migrator/migrator.php:315
+#: modules/migrator/migrator.php:321
 msgid "Tumblr content successfully imported!"
-msgstr ""
-
-#: modules/migrator/migrator.php:336
-#: modules/migrator/migrator.php:429
-msgid "Host cannot be empty."
-msgstr ""
-
-#: modules/migrator/migrator.php:339
-#: modules/migrator/migrator.php:432
-msgid "Username cannot be empty."
 msgstr ""
 
 #: modules/migrator/migrator.php:342
 #: modules/migrator/migrator.php:435
-msgid "Password cannot be empty."
+msgid "Host cannot be empty."
 msgstr ""
 
 #: modules/migrator/migrator.php:345
 #: modules/migrator/migrator.php:438
+msgid "Username cannot be empty."
+msgstr ""
+
+#: modules/migrator/migrator.php:348
+#: modules/migrator/migrator.php:441
+msgid "Password cannot be empty."
+msgstr ""
+
+#: modules/migrator/migrator.php:351
+#: modules/migrator/migrator.php:444
 msgid "Database cannot be empty."
 msgstr ""
 
-#: modules/migrator/migrator.php:356
+#: modules/migrator/migrator.php:362
 msgid "Could not connect to the TextPattern database."
 msgstr ""
 
-#: modules/migrator/migrator.php:361
-#: modules/migrator/migrator.php:454
-#: modules/migrator/migrator.php:476
+#: modules/migrator/migrator.php:367
+#: modules/migrator/migrator.php:460
+#: modules/migrator/migrator.php:482
 msgid "Database Error"
 msgstr ""
 
-#: modules/migrator/migrator.php:407
+#: modules/migrator/migrator.php:413
 msgid "TextPattern content successfully imported!"
 msgstr ""
 
-#: modules/migrator/migrator.php:449
+#: modules/migrator/migrator.php:455
 msgid "Could not connect to the MovableType database."
 msgstr ""
 
-#: modules/migrator/migrator.php:530
+#: modules/migrator/migrator.php:536
 msgid "MovableType content successfully imported!"
 msgstr ""
 

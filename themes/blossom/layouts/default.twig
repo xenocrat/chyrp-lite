@@ -83,7 +83,7 @@
 </li>
 {% if theme.archives_list is not empty %}
 <li role="presentation">
-<a role="menuitem" href="{{ url('archive/%s' | format((theme.archives_list() | first).year)) }}" rel="archives">{{ "Archive" | translate }}</a>
+<a role="menuitem" href="{{ url('archive/%s' | format((theme.archives_list() | first).when | strftimeformat('%Y'))) }}" rel="archives">{{ "Archive" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.group.can("change_settings", "toggle_extensions") %}

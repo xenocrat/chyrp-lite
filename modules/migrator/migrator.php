@@ -9,7 +9,7 @@
 
         public function manage_nav($navs) {
             if (Visitor::current()->group->can("add_post"))
-              $navs["manage_migration"] = array("title" => __("Migration", "migrator"));
+                $navs["manage_migration"] = array("title" => __("Migration", "migrator"));
 
             return $navs;
         }
@@ -58,6 +58,7 @@
                                           "xmlns:excerpt=\"http://wordpress.org/export/1.1/excerpt/\""),
                                     "xmlns:excerpt=\"http://wordpress.org/export/1.2/excerpt/\"",
                                     $sane_xml);
+
             $sane_xml = str_replace(array("xmlns:wp=\"http://wordpress.org/export/1.0/\"",
                                           "xmlns:wp=\"http://wordpress.org/export/1.1/\""),
                                     "xmlns:wp=\"http://wordpress.org/export/1.2/\"",
@@ -69,6 +70,7 @@
                                          $sane_xml);
 
             $fix_amps_count = 1;
+
             while ($fix_amps_count)
                 $sane_xml = preg_replace("/<wp:meta_value>(.+)&(?!amp;)(.+)<\/wp:meta_value>/m",
                                          "<wp:meta_value>\\1&amp;\\2</wp:meta_value>",
@@ -87,6 +89,7 @@
                 $wordpress = $item->children("http://wordpress.org/export/1.2/");
                 $content   = $item->children("http://purl.org/rss/1.0/modules/content/");
                 $contentencoded = $content->encoded;
+
                 if ($wordpress->post_type == "attachment" or $wordpress->status == "attachment" or $item->title == "zz_placeholder")
                     continue;
 
@@ -127,6 +130,7 @@
                                   "feather" => "text");
 
                     $wp_post_format = null;
+
                     if (isset($item->category)) {
                         foreach ($item->category as $category) {
                             if (!empty($category) and
@@ -243,7 +247,9 @@
             }
 
             function reverse($a, $b) {
-                if (empty($a) or empty($b)) return 0;
+                if (empty($a) or empty($b))
+                    return 0;
+
                 return (strtotime($a->attributes()->date) < strtotime($b->attributes()->date)) ? -1 : 1 ;
             }
 
