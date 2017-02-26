@@ -283,10 +283,10 @@
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,
                                  "months" => array_reverse($months, true),
-                                 "archive" => array("timestamp" => $timestamp,
+                                 "archive" => array("when"  => $timestamp,
                                                     "depth" => $depth,
-                                                    "next" => !empty($next) ? strtotime(reset($next)) : false,
-                                                    "prev" => !empty($prev) ? strtotime(reset($prev)) : false)),
+                                                    "next"  => !empty($next) ? strtotime(reset($next)) : false,
+                                                    "prev"  => !empty($prev) ? strtotime(reset($prev)) : false)),
                            $title);
         }
 
