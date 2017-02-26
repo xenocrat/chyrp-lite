@@ -474,25 +474,25 @@
 
         /**
          * Function: check_url
-         * Checks if a given clean URL is already being used as another post's URL.
+         * Checks if a given URL value is already being used as another post's URL.
          *
          * Parameters:
-         *     $clean - The clean URL to check.
+         *     $url - The URL to check.
          *
          * Returns:
-         *     The unique version of the passed clean URL.
-         *     If it's not used, it's the same as $clean. If it is, a number is appended.
+         *     The unique version of the URL value.
+         *     If it's not used, it's the same as $url. If it is, a number is appended.
          */
-        static function check_url($clean) {
-            if (empty($clean))
-                return $clean;
+        static function check_url($url) {
+            if (empty($url))
+                return $url;
 
             $count = 1;
-            $unique = $clean;
+            $unique = $url;
 
             while (SQL::current()->count("posts", array("url" => $unique))) {
                 $count++;
-                $unique = $clean."-".$count;
+                $unique = $url."-".$count;
             }
 
             return $unique;
