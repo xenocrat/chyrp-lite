@@ -72,15 +72,12 @@
                         if (!in_array($this->adapter, PDO::getAvailableDrivers()))
                             throw new PDOException(__("PDO driver is unavailable for this database."));
 
-                        if ($this->adapter == "sqlite") {
-                            $this->db = new PDO("sqlite:".$this->database, null, null, array(PDO::ATTR_PERSISTENT => false));
-                            $this->db->sqliteCreateFunction("YEAR", array($this, "year_from_datetime"), 1);
-                            $this->db->sqliteCreateFunction("MONTH", array($this, "month_from_datetime"), 1);
-                            $this->db->sqliteCreateFunction("DAY", array($this, "day_from_datetime"), 1);
-                            $this->db->sqliteCreateFunction("HOUR", array($this, "hour_from_datetime"), 1);
-                            $this->db->sqliteCreateFunction("MINUTE", array($this, "minute_from_datetime"), 1);
-                            $this->db->sqliteCreateFunction("SECOND", array($this, "second_from_datetime"), 1);
-                        } else
+                        if ($this->adapter == "sqlite")
+                            $this->db = new PDO("sqlite:".$this->database,
+                                                null,
+                                                null,
+                                                array(PDO::ATTR_PERSISTENT => false));
+                        else
                             $this->db = new PDO($this->adapter.":host=".$this->host.";".
                                                 ((isset($this->port)) ? "port=".$this->port.";" : "").
                                                 "dbname=".$this->database,
@@ -322,72 +319,6 @@
                 $string = "'".$string."'";
 
             return $string;
-        }
-
-        /**
-         * Function: year_from_datetime
-         * Returns the year of a datetime.
-         *
-         * Parameters:
-         *     $datetime - DATETIME value.
-         */
-        public function year_from_datetime($datetime) {
-            return when("Y", $datetime);
-        }
-
-        /**
-         * Function: month_from_datetime
-         * Returns the month of a datetime.
-         *
-         * Parameters:
-         *     $datetime - DATETIME value.
-         */
-        public function month_from_datetime($datetime) {
-            return when("m", $datetime);
-        }
-
-        /**
-         * Function: day_from_datetime
-         * Returns the day of a datetime.
-         *
-         * Parameters:
-         *     $datetime - DATETIME value.
-         */
-        public function day_from_datetime($datetime) {
-            return when("d", $datetime);
-        }
-
-        /**
-         * Function: hour_from_datetime
-         * Returns the hour of a datetime.
-         *
-         * Parameters:
-         *     $datetime - DATETIME value.
-         */
-        public function hour_from_datetime($datetime) {
-            return when("g", $datetime);
-        }
-
-        /**
-         * Function: minute_from_datetime
-         * Returns the minute of a datetime.
-         *
-         * Parameters:
-         *     $datetime - DATETIME value.
-         */
-        public function minute_from_datetime($datetime) {
-            return when("i", $datetime);
-        }
-
-        /**
-         * Function: second_from_datetime
-         * Returns the second of a datetime.
-         *
-         * Parameters:
-         *     $datetime - DATETIME value.
-         */
-        public function second_from_datetime($datetime) {
-            return when("s", $datetime);
         }
 
         /**
