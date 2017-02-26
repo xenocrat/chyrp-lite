@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-02-19 09:06+0000\n"
+"POT-Creation-Date: 2017-02-25 09:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -150,7 +150,7 @@ msgid "You do not have sufficient privileges to add categories."
 msgstr ""
 
 #: modules/categorize/categorize.php:230
-#: modules/categorize/categorize.php:264
+#: modules/categorize/categorize.php:265
 msgid "No Name Specified"
 msgstr ""
 
@@ -158,49 +158,49 @@ msgstr ""
 msgid "A name is required to add a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:238
+#: modules/categorize/categorize.php:239
 msgid "Category added."
 msgstr ""
 
-#: modules/categorize/categorize.php:243
+#: modules/categorize/categorize.php:244
 msgid "An ID is required to edit a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:248
-#: modules/categorize/categorize.php:269
-#: modules/categorize/categorize.php:290
-#: modules/categorize/categorize.php:311
+#: modules/categorize/categorize.php:249
+#: modules/categorize/categorize.php:270
+#: modules/categorize/categorize.php:292
+#: modules/categorize/categorize.php:313
 msgid "Category not found."
 msgstr ""
 
-#: modules/categorize/categorize.php:251
-#: modules/categorize/categorize.php:272
+#: modules/categorize/categorize.php:252
+#: modules/categorize/categorize.php:273
 msgid "You do not have sufficient privileges to edit this category."
 msgstr ""
 
-#: modules/categorize/categorize.php:261
+#: modules/categorize/categorize.php:262
 msgid "An ID is required to update a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:264
+#: modules/categorize/categorize.php:265
 msgid "A name is required to update a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:280
+#: modules/categorize/categorize.php:282
 msgid "Category updated."
 msgstr ""
 
-#: modules/categorize/categorize.php:285
-#: modules/categorize/categorize.php:303
+#: modules/categorize/categorize.php:287
+#: modules/categorize/categorize.php:305
 msgid "An ID is required to delete a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:293
-#: modules/categorize/categorize.php:314
+#: modules/categorize/categorize.php:295
+#: modules/categorize/categorize.php:316
 msgid "You do not have sufficient privileges to delete this category."
 msgstr ""
 
-#: modules/categorize/categorize.php:317
+#: modules/categorize/categorize.php:319
 msgid "Category deleted."
 msgstr ""
 

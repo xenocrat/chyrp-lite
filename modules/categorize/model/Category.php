@@ -149,8 +149,18 @@
          *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
         static function check_clean($clean) {
-            $count = SQL::current()->count("categorize", array("clean" => $clean));
-            return (!$count or empty($clean)) ? $clean : $clean."-".($count + 1) ;
+            if (empty($clean))
+                return $clean;
+
+            $count = 1;
+            $unique = $clean;
+
+            while (SQL::current()->count("categorize", array("clean" => $unique))) {
+                $count++;
+                $unique = $clean."-".$count;
+            }
+
+            return $unique;
         }
 
         /**

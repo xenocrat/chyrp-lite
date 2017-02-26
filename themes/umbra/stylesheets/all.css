@@ -396,7 +396,6 @@ a:active {                                      color: #ffffff;
                                                 text-decoration: none }
 ul.navigation li > a {                          display: inline-block;
                                                 margin: 0em 1em 1em 0em }
-
 h3.flash a {                                    color: #ffffff;
                                                 border-bottom: 1px #ffffff solid;
                                                 display: inline-block;
@@ -406,8 +405,6 @@ h3.flash a:hover,
 h3.flash a:focus,
 h3.flash a:active {                             top: 1px;
                                                 color: inherit }
-
-
 div.traversal a {                               display: inline-block;
                                                 padding: 2.5em 0em;
                                                 width: 6em;
@@ -418,9 +415,8 @@ div.traversal a {                               display: inline-block;
                                                 border: 1px #464647 solid }
 div.traversal a:hover,
 div.traversal a:focus,
-div.traversal a:active {                        background-color: #464647 }
-
-
+div.traversal a:active {                        background-color: #47b347;
+                                                border: 1px solid #47b347 }
 section a:link, p a:link {                      color: #999491;
                                                 border-bottom: 1px #999491 solid }
 section a:visited, p a:visited {                color: #999491;
@@ -454,7 +450,8 @@ div.category a.category {                       display: inline-block;
                                                 border: 1px solid #464647 }
 div.category a.category:hover,
 div.category a.category:focus,
-div.category a.category:active {                background-color: #464647 }
+div.category a.category:active {                background-color: #47b347;
+                                                border: 1px solid #47b347 }
 div.metadata a {                                color: #999491 }
 div.metadata a:hover {                          color: #ffffff }
 div.metadata a:focus {                          color: #ffffff;
@@ -471,7 +468,8 @@ div.doaction a, button {                        display: inline-block;
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
 div.doaction a:active, button:active {          outline: none;
-                                                background-color: #464647 }
+                                                background-color: #47b347;
+                                                border: 1px solid #47b347 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    font-weight: bold }
 article > section.photo > a {                   border-bottom: none }

@@ -84,9 +84,9 @@ function passwordStrength(password) {
 
 // Does the string look like a web URL?
 function isURL(text) {
-	return (/^(http:\/\/|https:\/\/)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)($|\/|:[0-9]{1,5}$|:[0-9]{1,5}\/)/i.test(text) ||
-			/^(http:\/\/|https:\/\/)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})($|\/|:[0-9]{1,5}$|:[0-9]{1,5}\/)/.test(text) ||
-			/^(http:\/\/|https:\/\/)?(\[[a-f0-9\:]{3,39}\])($|\/|:[0-9]{1,5})/i.test(text));
+	return (/^(http:\/\/|https:\/\/)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|\/)/i.test(text) ||
+			/^(http:\/\/|https:\/\/)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|\/)/.test(text) ||
+			/^(http:\/\/|https:\/\/)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|\/)/i.test(text));
 }
 
 // Does the string look like an email address?

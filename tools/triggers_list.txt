@@ -409,7 +409,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 847
+	includes/model/Post.php on line 857
 Arguments:
 	$post
 
@@ -971,7 +971,7 @@ filter_page
 Target:
 	$this
 Called from:
-	includes/model/Page.php on line 264
+	includes/model/Page.php on line 274
 
 
 post
@@ -1003,7 +1003,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 539
+	includes/model/Post.php on line 549
 
 
 title
@@ -1011,7 +1011,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 564
+	includes/model/Post.php on line 574
 Arguments:
 	$post
 
@@ -1021,7 +1021,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 581
+	includes/model/Post.php on line 591
 Arguments:
 	$post
 
@@ -1031,7 +1031,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 598
+	includes/model/Post.php on line 608
 Arguments:
 	$post
 
@@ -1041,7 +1041,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 656
+	includes/model/Post.php on line 666
 
 
 user

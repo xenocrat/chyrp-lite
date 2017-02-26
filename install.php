@@ -676,7 +676,7 @@
                              array("login" => $_POST['login'],
                                    "password" => User::hashPassword($_POST['password1']),
                                    "email" => $_POST['email'],
-                                   "website" => $config->url,
+                                   "website" => rtrim($url, "/"),
                                    "group_id" => $group_id["admin"],
                                    "approved" => true,
                                    "joined_at" => datetime()));
