@@ -96,7 +96,7 @@
          * Generates an array listing each month with entries in the archives.
          *
          * Parameters:
-         *     $limit - Amount of months to list.
+         *     $limit - Number of months to list.
          */
         public function archives_list($limit = 12) {
             if (isset($this->caches["archives_list"]["$limit"]))
