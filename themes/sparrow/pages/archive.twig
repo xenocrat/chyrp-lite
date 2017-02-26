@@ -12,13 +12,13 @@
 </div>
 {% endif %}
 <div class="archive standalone">
-{% for timestamp, month in months %}
-<h3 id="label_{{ timestamp }}_archive" class="archive">
-<a href="{{ url('archive/%s/' | format(timestamp | strftimeformat('%Y/%m'))) }}">
-{{ timestamp | strftimeformat("%B %Y" | translate) }}
+{% for when, month in months %}
+<h3 id="label_{{ when }}_archive" class="archive">
+<a href="{{ url('archive/%s/' | format(when | strftimeformat('%Y/%m'))) }}">
+{{ when | strftimeformat("%B %Y" | translate) }}
 </a>
 </h3>
-<ul aria-labelledby="label_{{ timestamp }}_archive" class="archive{{ archive.depth == 'year' ? ' yearly' : '' }}">
+<ul aria-labelledby="label_{{ when }}_archive" class="archive{{ archive.depth == 'year' ? ' yearly' : '' }}">
 {% for post in month %}
 <li>
 {% if archive.depth == "year" %}
@@ -58,7 +58,7 @@
 {# Posts? (For daily/monthly archives) #}
 {% if posts.paginated is not empty %}
 <h3 role="status" class="filter">
-{{ "Archive of %s" | translate | format(archive.timestamp | strftimeformat(archive.depth == "day" ? "%d %B %Y" : "%B %Y")) }}
+{{ "Archive of %s" | translate | format(archive.when | strftimeformat(archive.depth == "day" ? "%d %B %Y" : "%B %Y")) }}
 </h3>
 {% for post in posts.paginated %}
 {% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
