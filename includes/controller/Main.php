@@ -245,7 +245,7 @@
                                                             "where" => array("created_at >= :from AND created_at < :upto",
                                                                              "status" => "public"),
                                                             "params" => array(":from" => datetime("@$timestamp"),
-                                                                              ":upto" => datetime("@$timestamp +1 $depth")),
+                                                                              ":upto" => datetime("@$timestamp +1 day")),
                                                             "order" => "created_at DESC, id DESC")),
                                            $this->post_limit);
                     break;
@@ -255,7 +255,7 @@
                                                             "where" => array("created_at >= :from AND created_at < :upto",
                                                                              "status" => "public"),
                                                             "params" => array(":from" => datetime("@$timestamp"),
-                                                                              ":upto" => datetime("@$timestamp +1 $depth")),
+                                                                              ":upto" => datetime("@$timestamp +1 month")),
                                                             "order" => "created_at DESC, id DESC")),
                                            $this->post_limit);
                     break;
