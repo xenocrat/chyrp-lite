@@ -195,12 +195,12 @@
         public function archive() {
             $sql = SQL::current();
 
-            $earliest = SQL::current()->select("posts",
-                                               "created_at",
-                                               array(),
-                                               array("created_at ASC"))->fetchObject();
+            $first = $sql->select("posts",
+                                  "created_at",
+                                  array(),
+                                  array("created_at ASC"))->fetch();
 
-            $year = when("Y", !empty($earliest->created_at) ? $earliest->created_at : time());
+            $year = when("Y", !empty($first) ? $first["created_at"] : time());
 
             fallback($_GET['year']);
             fallback($_GET['month']);
@@ -270,11 +270,8 @@
                     break;
                 default:
                     while ($month < $limit) {
-                        $upto = strtotime("midnight first day of next month", $month);
-                        $vals = Post::find(array("where" => array("created_at >= :from AND created_at < :upto",
+                        $vals = Post::find(array("where" => array("created_at LIKE" => when("Y-m-%", $month),
                                                                   "status" => "public"),
-                                                 "params" => array(":from" => datetime($month),
-                                                                   ":upto" => datetime($upto)),
                                                  "order" => "created_at DESC, id DESC"));
 
                         if (!empty($vals))
