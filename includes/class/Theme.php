@@ -102,21 +102,21 @@
             if (isset($this->caches["archives_list"]["$limit"]))
                 return $this->caches["archives_list"]["$limit"];
 
+            $sql = SQL::current();
             $array = array();
             $month = strtotime("midnight first day of this month");
 
             for ($i = 0; $i < $limit; $i++) {
-                $posts = Post::find(array("placeholders" => true,
-                                          "where" => array("created_at >= :from AND created_at < :upto",
-                                                           "status" => "public"),
-                                          "params" => array(":from" => datetime("@$month"),
-                                                            ":upto" => datetime(
-                                                            strtotime("midnight first day of next month", $month)))));
+                $count = $sql->count("posts",
+                                     array("created_at >= :from AND created_at < :upto",
+                                           "status" => "public"),
+                                     array(":from" => datetime($month),
+                                           ":upto" => datetime(strtotime("midnight first day of next month", $month))));
 
-                if (!empty($posts[0]))
+                if (!empty($count))
                     $array[] = array("when"  => $month,
-                                     "url"   => url("archive/".when("Y/m/", $month)),
-                                     "count" => count($posts[0]));
+                                     "url"   => url("archive/".when("Y/m/", $month), MainController::current()),
+                                     "count" => $count);
 
                 $month = strtotime("midnight first day of last month", $month);
             }
