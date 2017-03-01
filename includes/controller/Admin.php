@@ -303,7 +303,7 @@
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
             if (!empty($_GET['month']))
-                $where["created_at LIKE"] = $_GET['month']."-%";
+                $where["created_at LIKE"] = when("Y-m-%", $_GET['month']);
 
             $visitor = Visitor::current();
 
