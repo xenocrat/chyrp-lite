@@ -108,10 +108,8 @@
 
             for ($i = 0; $i < $limit; $i++) {
                 $count = $sql->count("posts",
-                                     array("created_at >= :from AND created_at < :upto",
-                                           "status" => "public"),
-                                     array(":from" => datetime($month),
-                                           ":upto" => datetime(strtotime("midnight first day of next month", $month))));
+                                     array("created_at LIKE" => when("Y-m-%", $month),
+                                           "status" => "public"));
 
                 if (!empty($count))
                     $array[] = array("when"  => $month,
