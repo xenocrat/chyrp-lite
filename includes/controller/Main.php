@@ -233,7 +233,8 @@
             $prev = ($depth == "all") ? array() : $sql->select("posts",
                                                                "*",
                                                                array("status" => "public",
-                                                                     "created_at >=" => datetime("@$timestamp +1 $depth")),
+                                                                     "created_at >=" => datetime(
+                                                                      strtotime("next $depth",$timestamp))),
                                                                array("created_at ASC"),
                                                                array(),
                                                                1)->grab("created_at");
@@ -255,7 +256,8 @@
                                                             "where" => array("created_at >= :from AND created_at < :upto",
                                                                              "status" => "public"),
                                                             "params" => array(":from" => datetime("@$timestamp"),
-                                                                              ":upto" => datetime("@$timestamp +1 month")),
+                                                                              ":upto" => datetime(
+                                                                              strtotime("midnight first day of next month", $timestamp))),
                                                             "order" => "created_at DESC, id DESC")),
                                            $this->post_limit);
                     break;
@@ -270,13 +272,14 @@
                         $val = Post::find(array("where" => array("created_at >= :from AND created_at < :upto",
                                                                  "status" => "public"),
                                                 "params" => array(":from" => datetime("@$month"),
-                                                                  ":upto" => datetime("@$month +1 month")),
+                                                                  ":upto" => datetime(
+                                                                  strtotime("midnight first day of next month", $month))),
                                                 "order" => "created_at DESC, id DESC"));
 
                         if (!empty($val))
                             $months[$month] = $val;
 
-                        $month = strtotime("@$month +1 month");
+                        $month = strtotime("midnight first day of next month", $month);
                     }
             }
 
