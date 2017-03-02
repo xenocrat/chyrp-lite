@@ -698,7 +698,7 @@ related_posts
 Target:
 	$ids
 Called from:
-	includes/class/Theme.php on line 170
+	includes/class/Theme.php on line 171
 Arguments:
 	$post, $limit
 
@@ -708,7 +708,7 @@ stylesheets
 Target:
 	$stylesheets
 Called from:
-	includes/class/Theme.php on line 209
+	includes/class/Theme.php on line 210
 
 
 scripts
@@ -716,7 +716,7 @@ scripts
 Target:
 	$scripts
 Called from:
-	includes/class/Theme.php on line 249
+	includes/class/Theme.php on line 250
 
 
 links
@@ -724,7 +724,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 303
+	includes/class/Theme.php on line 304
 
 
 visitor
