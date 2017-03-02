@@ -183,8 +183,7 @@
          */
         public function index() {
             $this->display("pages".DIR."index",
-                           array("posts" => new Paginator(Post::find(array("placeholders" => true,
-                                                                           "order" => "created_at DESC, id DESC")),
+                           array("posts" => new Paginator(Post::find(array("placeholders" => true)),
                                                           $this->post_limit)));
         }
 
@@ -194,10 +193,13 @@
          */
         public function archive() {
             $sql = SQL::current();
+            $statuses = Post::statuses();
+            $feathers = Post::feathers();
 
             $first = $sql->select("posts",
                                   "created_at",
-                                  array(),
+                                  array($feathers,
+                                        $statuses),
                                   array("created_at ASC"))->fetch();
 
             $year = when("Y", !empty($first) ? $first["created_at"] : time());
@@ -238,7 +240,8 @@
                 $sql->select("posts",
                              "created_at",
                              array("created_at <" => datetime($timestamp),
-                                   "status" => "public"),
+                                   $statuses,
+                                   $feathers),
                              array("created_at DESC"))->fetch();
 
             $prev = ($depth == "all") ?
@@ -246,14 +249,14 @@
                 $sql->select("posts",
                              "created_at",
                              array("created_at >=" => datetime($limit),
-                                   "status" => "public"),
+                                   $statuses,
+                                   $feathers),
                              array("created_at ASC"))->fetch();
 
             switch ($depth) {
                 case "day":
                     $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("created_at >= :from AND created_at < :upto",
-                                                                             "status" => "public"),
+                                                            "where" => array("created_at >= :from AND created_at < :upto"),
                                                             "params" => array(":from" => datetime($timestamp),
                                                                               ":upto" => datetime($limit)),
                                                             "order" => "created_at DESC, id DESC")),
@@ -261,8 +264,7 @@
                     break;
                 case "month":
                     $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("created_at >= :from AND created_at < :upto",
-                                                                             "status" => "public"),
+                                                            "where" => array("created_at >= :from AND created_at < :upto"),
                                                             "params" => array(":from" => datetime($timestamp),
                                                                               ":upto" => datetime($limit)),
                                                             "order" => "created_at DESC, id DESC")),
@@ -270,8 +272,7 @@
                     break;
                 default:
                     while ($month < $limit) {
-                        $vals = Post::find(array("where" => array("created_at LIKE" => when("Y-m-%", $month),
-                                                                  "status" => "public"),
+                        $vals = Post::find(array("where" => array("created_at LIKE" => when("Y-m-%", $month)),
                                                  "order" => "created_at DESC, id DESC"));
 
                         if (!empty($vals))
@@ -711,10 +712,10 @@
          * Grabs a random post and redirects to it.
          */
         public function random() {
-            $conds = array("status" => "public");
+            $conds = array(Post::statuses());
 
             if (isset($_GET['feather']))
-                $conds["feather"] = preg_replace('|[^a-z_\-]|i', '', $_GET['feather']);
+                $conds["feather"] = preg_replace("|[^a-z_\-]|i", "", $_GET['feather']);
             else
                 $conds[] = Post::feathers();
 
