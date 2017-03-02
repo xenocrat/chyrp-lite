@@ -279,13 +279,13 @@ Arguments:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 404
+	includes/controller/Main.php on line 401
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 495
+	includes/controller/Main.php on line 492
 Arguments:
 	$user
 
@@ -293,13 +293,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 582
+	includes/controller/Main.php on line 579
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 596
+	includes/controller/Main.php on line 593
 Arguments:
 	$user
 
@@ -307,7 +307,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 806
+	includes/controller/Main.php on line 803
 Arguments:
 	$post
 
@@ -698,7 +698,7 @@ related_posts
 Target:
 	$ids
 Called from:
-	includes/class/Theme.php on line 166
+	includes/class/Theme.php on line 170
 Arguments:
 	$post, $limit
 
@@ -708,7 +708,7 @@ stylesheets
 Target:
 	$stylesheets
 Called from:
-	includes/class/Theme.php on line 205
+	includes/class/Theme.php on line 209
 
 
 scripts
@@ -716,7 +716,7 @@ scripts
 Target:
 	$scripts
 Called from:
-	includes/class/Theme.php on line 245
+	includes/class/Theme.php on line 249
 
 
 links
@@ -724,7 +724,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 299
+	includes/class/Theme.php on line 303
 
 
 visitor
@@ -836,7 +836,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 795
+	includes/controller/Main.php on line 792
 Arguments:
 	$post
 
