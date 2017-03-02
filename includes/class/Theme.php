@@ -103,13 +103,17 @@
                 return $this->caches["archives_list"]["$limit"];
 
             $sql = SQL::current();
+            $feathers = Post::feathers();
+            $statuses = Post::statuses();
+
             $array = array();
             $month = strtotime("midnight first day of this month");
 
             for ($i = 0; $i < $limit; $i++) {
                 $count = $sql->count("posts",
                                      array("created_at LIKE" => when("Y-m-%", $month),
-                                           "status" => "public"));
+                                           $feathers,
+                                           $statuses));
 
                 if (!empty($count))
                     $array[] = array("when"  => $month,
