@@ -21,7 +21,7 @@
 <option value="">{{ "[All]" | translate }}</option>
 {% for archive in theme.archives_list() %}
 {% set option_selected = GET.month is defined ? GET.month | selected(archive.when | strftimeformat("%Y-%m")) : "" %}
-{% set option_contents = (archive.when | strftimeformat("%B %Y")) ~ " (" ~ archive.count ~ ")" %}
+{% set option_contents = (archive.when | strftimeformat("%B %Y")) %}
 <option value="{{ archive.when }}"{{ option_selected }}>{{ option_contents }}</option>
 {% endfor %}
 </select>
