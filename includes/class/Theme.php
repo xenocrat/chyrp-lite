@@ -102,6 +102,7 @@
             if (isset($this->caches["archives_list"]["$limit"]))
                 return $this->caches["archives_list"]["$limit"];
 
+            $main = MainController::current();
             $sql = SQL::current();
             $feathers = Post::feathers();
             $statuses = Post::statuses();
@@ -117,7 +118,7 @@
 
                 if (!empty($count))
                     $array[] = array("when"  => $month,
-                                     "url"   => url("archive/".when("Y/m/", $month), MainController::current()),
+                                     "url"   => url("archive/".when("Y/m/", $month), $main),
                                      "count" => $count);
 
                 $month = strtotime("midnight first day of last month", $month);
