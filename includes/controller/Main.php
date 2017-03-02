@@ -256,17 +256,13 @@
             switch ($depth) {
                 case "day":
                     $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("created_at >= :from AND created_at < :upto"),
-                                                            "params" => array(":from" => datetime($timestamp),
-                                                                              ":upto" => datetime($limit)),
+                                                            "where" => array("created_at LIKE" => when("Y-m-d%", $timestamp)),
                                                             "order" => "created_at DESC, id DESC")),
                                            $this->post_limit);
                     break;
                 case "month":
                     $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("created_at >= :from AND created_at < :upto"),
-                                                            "params" => array(":from" => datetime($timestamp),
-                                                                              ":upto" => datetime($limit)),
+                                                            "where" => array("created_at LIKE" => when("Y-m-%", $timestamp)),
                                                             "order" => "created_at DESC, id DESC")),
                                            $this->post_limit);
                     break;
