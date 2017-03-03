@@ -3,13 +3,14 @@
 {% block title %}{{ "Sitemap Settings" | translate("sitemap") }}{% endblock %}
 
 {% block content %}
+<h2>{{ "Sitemap Settings" | translate("sitemap") }}</h2>
 <form id="sitemap_settings" class="split" action="{{ url('sitemap_settings') }}" method="post">
 <fieldset>
 <p>
 <label for="blog_changefreq">{{ "Blog is Updated" | translate("sitemap") }}</label>
 <select name="blog_changefreq">
 {% for key, val in modules['sitemap'].change_frequency %}
-<option value="{{ val }}"{{ val | selected(site.module_sitemap['blog_changefreq']) }}>{{ val | translate("sitemap") }}</option>
+<option value="{{ key }}"{{ key | selected(site.module_sitemap['blog_changefreq']) }}>{{ val }}</option>
 {% endfor %}
 </select>
 </p>
@@ -17,7 +18,7 @@
 <label for="pages_changefreq">{{ "Pages are Edited" | translate("sitemap") }}</label>
 <select name="pages_changefreq">
 {% for key, val in modules['sitemap'].change_frequency %}
-<option value="{{ val }}"{{ val | selected(site.module_sitemap['pages_changefreq']) }}>{{ val | translate("sitemap") }}</option>
+<option value="{{ key }}"{{ key | selected(site.module_sitemap['pages_changefreq']) }}>{{ val }}</option>
 {% endfor %}
 </select>
 </p>
@@ -25,7 +26,7 @@
 <label for="posts_changefreq">{{ "Posts are Edited" | translate("sitemap") }}</label>
 <select name="posts_changefreq">
 {% for key, val in modules['sitemap'].change_frequency %}
-<option value="{{ val }}"{{ val | selected(site.module_sitemap['posts_changefreq']) }}>{{ val | translate("sitemap") }}</option>
+<option value="{{ key }}"{{ key | selected(site.module_sitemap['posts_changefreq']) }}>{{ val }}</option>
 {% endfor %}
 </select>
 </p>
