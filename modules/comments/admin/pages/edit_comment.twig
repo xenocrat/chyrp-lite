@@ -32,7 +32,7 @@
 {# If they can edit all comments, not just this one. #}
 <p class="more_options_option">
 <label for="created_at_field">{{ "Timestamp" | translate("comments") }}</label>
-<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat }}" id="created_at_field">
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat('%Y-%m-%d %H:%M:%S') | fix(true) }}" id="created_at_field">
 </p>
 <p class="more_options_option">
 <label for="status_field">{{ "Status" | translate("comments") }}</label>
