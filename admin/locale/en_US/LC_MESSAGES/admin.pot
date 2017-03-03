@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite\n"
 "Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-03-02 23:36+0000\n"
+"POT-Creation-Date: 2017-03-03 19:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
@@ -769,7 +769,7 @@ msgstr ""
 
 #: admin/pages/manage_posts.twig:38
 #: admin/partials/page_fields.twig:26
-#: admin/partials/post_fields.twig:67
+#: admin/partials/post_fields.twig:52
 msgid "Status"
 msgstr ""
 
@@ -1023,7 +1023,7 @@ msgid "Body"
 msgstr ""
 
 #: admin/partials/page_fields.twig:20
-#: admin/partials/post_fields.twig:99
+#: admin/partials/post_fields.twig:84
 msgid "Slug"
 msgstr ""
 
@@ -1032,7 +1032,7 @@ msgid "Public and visible in pages list"
 msgstr ""
 
 #: admin/partials/page_fields.twig:31
-#: admin/partials/post_fields.twig:72
+#: admin/partials/post_fields.twig:57
 msgid "Public"
 msgstr ""
 
@@ -1041,7 +1041,7 @@ msgid "Private and visible in pages list"
 msgstr ""
 
 #: admin/partials/page_fields.twig:35
-#: admin/partials/post_fields.twig:74
+#: admin/partials/post_fields.twig:59
 msgid "Private"
 msgstr ""
 
@@ -1070,50 +1070,42 @@ msgid "[None]"
 msgstr ""
 
 #: admin/partials/page_fields.twig:70
-#: admin/partials/post_fields.twig:153
-#: admin/partials/post_fields.twig:162
+#: admin/partials/post_fields.twig:138
+#: admin/partials/post_fields.twig:147
 msgid "Publish"
 msgstr ""
 
 #: admin/partials/page_fields.twig:74
-#: admin/partials/post_fields.twig:157
-#: admin/partials/post_fields.twig:166
+#: admin/partials/post_fields.twig:142
+#: admin/partials/post_fields.twig:151
 msgid "Save"
 msgstr ""
 
-#: admin/partials/post_fields.twig:34
-msgid "Current file name:"
-msgstr ""
-
-#: admin/partials/post_fields.twig:37
-msgid "Current file names:"
-msgstr ""
-
-#: admin/partials/post_fields.twig:70
+#: admin/partials/post_fields.twig:55
 msgid "Draft"
 msgstr ""
 
-#: admin/partials/post_fields.twig:76
+#: admin/partials/post_fields.twig:61
 msgid "Scheduled"
 msgstr ""
 
-#: admin/partials/post_fields.twig:77
+#: admin/partials/post_fields.twig:62
 msgid "Visible only to a group of users:"
 msgstr ""
 
-#: admin/partials/post_fields.twig:79
+#: admin/partials/post_fields.twig:64
 msgid "All registered users"
 msgstr ""
 
-#: admin/partials/post_fields.twig:92
+#: admin/partials/post_fields.twig:77
 msgid "Pinned?"
 msgstr ""
 
-#: admin/partials/post_fields.twig:93
+#: admin/partials/post_fields.twig:78
 msgid "(shows this post above all others)"
 msgstr ""
 
-#: admin/partials/post_fields.twig:105
+#: admin/partials/post_fields.twig:90
 msgid "Timestamp"
 msgstr ""
 
