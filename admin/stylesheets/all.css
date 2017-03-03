@@ -252,7 +252,7 @@ div.clear {                                     visibility: hidden;
 
 #content {                                      clear: both;
                                                 background-color: #ffffff;
-                                                padding: 2em 1em 1em 1em;
+                                                padding: 1em;
                                                 margin: 0em 4em 1em 4em;
                                                 border: 1px solid #dfdfdf;
                                                 border-top: none;
@@ -399,7 +399,7 @@ form.split > fieldset > div.confirmation {      margin-top: 2em }
 form.split small,
 form.split .small,
 form.split .buttons {                           display: block;
-                                                margin: 0em 0em 1rem 45% }
+                                                margin: 0em 0em 0rem 45% }
 form.split input,
 form.split textarea,
 form.split select,
@@ -645,7 +645,7 @@ a.emblem {                                      text-decoration: none }
 a.emblem > img,
 img.emblem {                                    display: inline;
                                                 position: relative;
-                                                top: 4px;
+                                                top: 3px;
                                                 width: 16px;
                                                 height: 16px }
 a.emblem.markdown > img {                       width: 26px }

@@ -28,21 +28,6 @@
 <input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_preview ~ field_markdown }} value="{{ field_value | fix(true) }}">
 {% elseif field.type == "file" %}
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_multiple }} value="">
-<p>
-{% if route.action == "edit_post" %}
-{% if post.filename is defined %}
-<em>{{ "Current file name:" | translate }}</em>
-<strong><a href="{{ post.filename | uploaded }}" target="_blank">{{ post.filename | fix }}</a></strong>
-{% elseif post.filenames is defined and post.filenames is not empty %}
-<em>{{ "Current file names:" | translate }}</em>
-<strong>
-<ul>
-{% for name in post.filenames %}<li><a href="{{ name | uploaded }}" target="_blank">{{ name | fix }}</a></li>{% endfor %}
-</ul>
-</strong>
-{% endif %}
-{% endif %}
-</p>
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown }}>{{ field_value | fix }}</textarea>
 {% elseif field.type == "checkbox" %}
