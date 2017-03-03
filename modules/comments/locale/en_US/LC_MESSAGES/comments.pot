@@ -6,78 +6,79 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Chyrp Lite\n"
-"Report-Msgid-Bugs-To: hello@xenocrat.net\n"
-"POT-Creation-Date: 2017-03-03 19:19+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>\n"
-"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Chyrp Lite"
+"Report-Msgid-Bugs-To: hello@xenocrat.net"
+"POT-Creation-Date: 2017-03-03 19:38+0000"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"
+"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"
+"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"
+"MIME-Version: 1.0"
+"Content-Type: text/plain; charset=UTF-8"
+"Content-Transfer-Encoding: 8bit"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
 
 #: modules/comments/admin/pages/comment_settings.twig:3
+#: modules/comments/admin/pages/comment_settings.twig:6
 msgid "Comment Settings"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:9
+#: modules/comments/admin/pages/comment_settings.twig:10
 msgid "Akismet API Key"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:11
+#: modules/comments/admin/pages/comment_settings.twig:12
 msgid 'A very good spam blocker. Get an API key from <a href="http://akismet.com/">Akismet.com</a>.'
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:14
+#: modules/comments/admin/pages/comment_settings.twig:15
 msgid "Allowed HTML Tags"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:16
+#: modules/comments/admin/pages/comment_settings.twig:17
 msgid "Format: <code>strong, blockquote, em</code>"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:19
+#: modules/comments/admin/pages/comment_settings.twig:20
 msgid "Default Comment Status"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:21
+#: modules/comments/admin/pages/comment_settings.twig:22
 #: modules/comments/admin/pages/edit_comment.twig:40
 msgid "Approved"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:22
+#: modules/comments/admin/pages/comment_settings.twig:23
 #: modules/comments/admin/pages/edit_comment.twig:41
 msgid "Denied"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:23
+#: modules/comments/admin/pages/comment_settings.twig:24
 #: modules/comments/admin/pages/edit_comment.twig:42
 #: modules/comments/admin/pages/manage_spam.twig:19
 msgid "Spam"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:27
+#: modules/comments/admin/pages/comment_settings.twig:28
 msgid "Comments Per Page"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:29
+#: modules/comments/admin/pages/comment_settings.twig:30
 msgid "Themes decide whether or not to paginate comments."
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:32
+#: modules/comments/admin/pages/comment_settings.twig:33
 msgid "Reload Comments"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:34
+#: modules/comments/admin/pages/comment_settings.twig:35
 msgid "Show newly added comments (up to the maximum number per page)."
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:37
+#: modules/comments/admin/pages/comment_settings.twig:38
 msgid "Reload interval"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:39
+#: modules/comments/admin/pages/comment_settings.twig:40
 msgid "(seconds)"
 msgstr ""
 
