@@ -400,6 +400,7 @@ form.split small,
 form.split .small,
 form.split .buttons {                           display: block;
                                                 margin: 0em 0em 0rem 45% }
+form.split ul, form.split ol {                  margin-bottom: 1em }
 form.split input,
 form.split textarea,
 form.split select,
