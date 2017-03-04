@@ -51,7 +51,7 @@
 </p>
 {% endif %}
 {{ trigger.call("edit_comment_options", comment) }}
-<hr>
+<div class="clear"></div>
 </div>
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash_field">
 <input type="hidden" name="id" value="{{ comment.id }}" id="id_field">
