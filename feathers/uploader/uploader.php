@@ -148,6 +148,12 @@
                 return;
 
             $post->files = self::list_files($post->filenames);
+
+            foreach ($post->files as $file)
+                if (in_array($file["type"], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"))) {
+                    $post->thumb = $file["name"];
+                    break;
+                }
         }
 
         private function list_files($filenames) {
@@ -155,8 +161,10 @@
 
             foreach ($filenames as $filename) {
                 $filepath = uploaded($filename, false);
+                $filetype = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
                 $list[] = array("name" => $filename,
-                                "type" => strtolower(pathinfo($filename, PATHINFO_EXTENSION)),
+                                "type" => $filetype,
                                 "size" => (file_exists($filepath) ? filesize($filepath) : 0 ));
             }
 
