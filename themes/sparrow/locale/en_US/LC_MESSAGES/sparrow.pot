@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite"
 "Report-Msgid-Bugs-To: hello@xenocrat.net"
-"POT-Creation-Date: 2017-03-03 19:38+0000"
+"POT-Creation-Date: 2017-03-04 09:41+0000"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"
@@ -353,22 +353,22 @@ msgstr ""
 msgid "%B %Y"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:35
+#: themes/sparrow/pages/archive.twig:37
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:52
+#: themes/sparrow/pages/archive.twig:54
 #, php-format
 msgid "Archive of %s &rarr;"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:61
+#: themes/sparrow/pages/archive.twig:63
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:70
+#: themes/sparrow/pages/archive.twig:72
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

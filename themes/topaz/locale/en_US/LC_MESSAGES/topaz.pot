@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chyrp Lite"
 "Report-Msgid-Bugs-To: hello@xenocrat.net"
-"POT-Creation-Date: 2017-03-03 19:38+0000"
+"POT-Creation-Date: 2017-03-04 09:41+0000"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"
 "Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"
 "Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"
@@ -403,19 +403,19 @@ msgstr ""
 msgid "Not found."
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:28
+#: themes/topaz/pages/archive.twig:30
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:45
-#: themes/topaz/pages/archive.twig:50
-#: themes/topaz/pages/archive.twig:61
+#: themes/topaz/pages/archive.twig:47
+#: themes/topaz/pages/archive.twig:52
+#: themes/topaz/pages/archive.twig:63
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:72
+#: themes/topaz/pages/archive.twig:74
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
