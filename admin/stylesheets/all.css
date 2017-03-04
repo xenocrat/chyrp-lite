@@ -606,6 +606,7 @@ code.yay {                                      background-color: #ebfae4;
                                                 display: block;
                                                 width: 50%;
                                                 margin: 0em;
+                                                padding-bottom: 1em;
                                                 min-height: 5em;
                                                 float: left }
 .more_options_option:nth-of-type(odd) {         clear: both;
