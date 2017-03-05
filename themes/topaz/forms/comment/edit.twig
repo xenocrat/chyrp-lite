@@ -11,7 +11,7 @@
 {% if visitor.group.can("edit_comment") %}
 {# If they can edit all comments, not just this one. #}
 <label for="comment_created_at_{{ comment.id }}">{{ "Timestamp" | translate }}</label>
-<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat('%B %d, %Y %H:%M:%S') }}" id="comment_created_at_{{ comment.id }}">
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat('%Y-%m-%d %H:%M:%S') | fix(true) }}" id="comment_created_at_{{ comment.id }}">
 <label for="comment_status_{{ comment.id }}">{{ "Status" | translate }}</label>
 <select name="status" id="comment_status_{{ comment.id }}">
 <option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate }}</option>

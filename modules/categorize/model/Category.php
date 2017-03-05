@@ -139,13 +139,13 @@
 
         /**
          * Function: check_clean
-         * Checks if a given clean URL is already being used as another category's URL.
+         * Checks if a given slug is already being used as another category's slug.
          *
          * Parameters:
-         *     $clean - The clean URL to check.
+         *     $clean - The slug to check.
          *
          * Returns:
-         *     The unique version of the passed clean URL.
+         *     The unique version of the slug.
          *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
         static function check_clean($clean) {

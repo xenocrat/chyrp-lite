@@ -188,9 +188,9 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($clean,        oneof(sanitize(@$_POST['slug'], true, true, 80), slug(8)));
+            fallback($clean,        sanitize(@$_POST['slug'], true, true, 80), slug(8));
             fallback($url,          self::check_url($clean));
-            fallback($feather,      oneof(@$_POST['feather'], "text"));
+            fallback($feather,      @$_POST['feather'], "text");
             fallback($user_id,      Visitor::current()->id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
             fallback($status,       (isset($_POST['draft'])) ?
@@ -200,9 +200,10 @@
                                         datetime($_POST['created_at']) :
                                         datetime());
             fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
-            fallback($options,      oneof(@$_POST['option'], array()));
+            fallback($options,      @$_POST['option'], array());
 
             $sql = SQL::current();
+            $config = Config::current();
             $trigger = Trigger::current();
 
             $new_values = array("feather"    => $feather,
@@ -221,8 +222,8 @@
             $id = $sql->latest("posts");
 
             $attributes       = array_merge($values, $options);
-            $attribute_values = array_keys($attributes);
-            $attribute_names  = array_values($attributes);
+            $attribute_values = array_values($attributes);
+            $attribute_names  = array_keys($attributes);
 
             # Insert the post attributes.
             foreach ($attributes as $name => $value)
@@ -234,7 +235,7 @@
             $post = new self($id, array("skip_where" => true));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if (Config::current()->send_pingbacks and $pingbacks and $post->status == "public")
+            if ($config->send_pingbacks and $pingbacks and $post->status == "public")
                 foreach ($attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
@@ -302,9 +303,10 @@
                                         datetime($_POST['created_at']) :
                                         $this->created_at);
             fallback($updated_at,   datetime());
-            fallback($options,      oneof(@$_POST['option'], array()));
+            fallback($options,      @$_POST['option'], array());
 
             $sql = SQL::current();
+            $config = Config::current();
             $trigger = Trigger::current();
 
             $new_values = array("user_id"    => $user_id,
@@ -322,8 +324,8 @@
                          $new_values);
 
             $attributes       = array_merge($values, $options);
-            $attribute_values = array_keys($attributes);
-            $attribute_names  = array_values($attributes);
+            $attribute_values = array_values($attributes);
+            $attribute_names  = array_keys($attributes);
 
             # Replace the post attributes.
             foreach ($attributes as $name => $value)
@@ -340,7 +342,7 @@
                                                                           "attribute_values" => $attribute_values))));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if (Config::current()->send_pingbacks and $pingbacks and $this->status == "public")
+            if ($config->send_pingbacks and $pingbacks and $this->status == "public")
                 foreach ($attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
@@ -474,25 +476,25 @@
 
         /**
          * Function: check_url
-         * Checks if a given clean URL is already being used as another post's URL.
+         * Checks if a given URL value is already being used as another post's URL.
          *
          * Parameters:
-         *     $clean - The clean URL to check.
+         *     $url - The URL to check.
          *
          * Returns:
-         *     The unique version of the passed clean URL.
-         *     If it's not used, it's the same as $clean. If it is, a number is appended.
+         *     The unique version of the URL value.
+         *     If it's not used, it's the same as $url. If it is, a number is appended.
          */
-        static function check_url($clean) {
-            if (empty($clean))
-                return $clean;
+        static function check_url($url) {
+            if (empty($url))
+                return $url;
 
             $count = 1;
-            $unique = $clean;
+            $unique = $url;
 
-            while (SQL::current()->count("posts", array("clean" => $unique))) {
+            while (SQL::current()->count("posts", array("url" => $unique))) {
                 $count++;
-                $unique = $clean."-".$count;
+                $unique = $url."-".$count;
             }
 
             return $unique;
@@ -839,8 +841,9 @@
          *
          * Calls the @publish_post@ trigger with the updated <Post>.
          */
-        static function publish_scheduled() {
+        static function publish_scheduled($pingbacks = true) {
             $sql = SQL::current();
+            $config = Config::current();
             $trigger = Trigger::current();
 
             $ids = $sql->select("posts",
@@ -854,6 +857,12 @@
                              array("status" => "public"));
 
                 $post = new self($id, array("skip_where" => true));
+
+                if ($config->send_pingbacks and $pingbacks)
+                    foreach ($post->attribute_values as $value)
+                        if (is_string($value))
+                            send_pingbacks($value, $post);
+
                 $trigger->call("publish_post", $post);
             }
         }

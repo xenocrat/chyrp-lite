@@ -1,8 +1,9 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Site Configuration" | translate }}{% endblock %}
+{% block title %}{{ "General Settings" | translate }}{% endblock %}
 
 {% block content %}
+<h2>{{ "General Settings" | translate }}</h2>
 <form id="general_settings" class="split" action="{{ url('general_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
@@ -36,7 +37,7 @@
 <label for="timezone">{{ "What time is it?" | translate }}</label>
 <select name="timezone" id="timezone">
 {% for zone in timezones %}
-{% set option_contents = (zone.now | strftimeformat("%Y-%m-%d %H:%M")) ~ " &mdash; " ~ (zone.name | replace({"_": " ", "St ": "St. "})) %}
+{% set option_contents = (zone.now | strftimeformat("%H:%M")) ~ " &mdash; " ~ (zone.name | replace({"_": " ", "St ": "St. "})) %}
 <option value="{{ zone.name }}"{{ zone.name | selected(site.timezone) }}>{{ option_contents }}</option>
 {% endfor %}
 </select>

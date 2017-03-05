@@ -32,7 +32,7 @@
 {# If they can edit all comments, not just this one. #}
 <p class="more_options_option">
 <label for="created_at_field">{{ "Timestamp" | translate("comments") }}</label>
-<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat }}" id="created_at_field">
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat('%Y-%m-%d %H:%M:%S') | fix(true) }}" id="created_at_field">
 </p>
 <p class="more_options_option">
 <label for="status_field">{{ "Status" | translate("comments") }}</label>
@@ -51,7 +51,7 @@
 </p>
 {% endif %}
 {{ trigger.call("edit_comment_options", comment) }}
-<hr>
+<div class="clear"></div>
 </div>
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash_field">
 <input type="hidden" name="id" value="{{ comment.id }}" id="id_field">

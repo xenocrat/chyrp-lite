@@ -28,21 +28,6 @@
 <input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_preview ~ field_markdown }} value="{{ field_value | fix(true) }}">
 {% elseif field.type == "file" %}
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_multiple }} value="">
-<p>
-{% if route.action == "edit_post" %}
-{% if post.filename is defined %}
-<em>{{ "Current file name:" | translate }}</em>
-<strong><a href="{{ post.filename | uploaded }}" target="_blank">{{ post.filename | fix }}</a></strong>
-{% elseif post.filenames is defined and post.filenames is not empty %}
-<em>{{ "Current file names:" | translate }}</em>
-<strong>
-<ul>
-{% for name in post.filenames %}<li><a href="{{ name | uploaded }}" target="_blank">{{ name | fix }}</a></li>{% endfor %}
-</ul>
-</strong>
-{% endif %}
-{% endif %}
-</p>
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown }}>{{ field_value | fix }}</textarea>
 {% elseif field.type == "checkbox" %}
@@ -99,12 +84,12 @@
 {{ "Slug" | translate }}
 <a href="{{ url('help/id/slugs') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </label>
-<input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.slug | fix(true) : '' }}" maxlength="80">
+<input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.clean | fix(true) : '' }}" maxlength="80">
 </p>
 <p class="more_options_option">
 <label for="created_at">{{ "Timestamp" | translate }}</label>
-{% set post_created = post is defined and post.created_at is not empty ? post.created_at | oneof(now | date('r')) : now | date('r') %}
-<input id="created_at" class="text" type="text" name="created_at" value="{{ post_created | strftimeformat }}">
+{% set post_created = post is defined and post.created_at is not empty ? post.created_at : now %}
+<input id="created_at" class="text" type="text" name="created_at" value="{{ post_created | strftimeformat('%Y-%m-%d %H:%M:%S') | fix(true) }}">
 </p>
 {% for field in options %}
 {% set field_value = field.value is defined ? field.value : "" %}

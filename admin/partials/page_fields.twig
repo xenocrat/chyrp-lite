@@ -20,7 +20,7 @@
 {{ "Slug" | translate }}
 <a href="{{ url('help/id/slugs') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </label>
-<input class="text" type="text" name="slug" value="{{ page is defined ? page.slug | fix(true) : '' }}" id="slug" maxlength="80">
+<input class="text" type="text" name="slug" value="{{ page is defined ? page.clean | fix(true) : '' }}" id="slug" maxlength="80">
 </p>
 <p class="more_options_option">
 <label for="status">{{ "Status" | translate }}</label>
