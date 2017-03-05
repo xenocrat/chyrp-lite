@@ -203,6 +203,7 @@
             fallback($options,      @$_POST['option'], array());
 
             $sql = SQL::current();
+            $config = Config::current();
             $trigger = Trigger::current();
 
             $new_values = array("feather"    => $feather,
@@ -234,7 +235,7 @@
             $post = new self($id, array("skip_where" => true));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if (Config::current()->send_pingbacks and $pingbacks and $post->status == "public")
+            if ($config->send_pingbacks and $pingbacks and $post->status == "public")
                 foreach ($attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
@@ -305,6 +306,7 @@
             fallback($options,      @$_POST['option'], array());
 
             $sql = SQL::current();
+            $config = Config::current();
             $trigger = Trigger::current();
 
             $new_values = array("user_id"    => $user_id,
@@ -340,7 +342,7 @@
                                                                           "attribute_values" => $attribute_values))));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if (Config::current()->send_pingbacks and $pingbacks and $this->status == "public")
+            if ($config->send_pingbacks and $pingbacks and $this->status == "public")
                 foreach ($attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
@@ -839,8 +841,9 @@
          *
          * Calls the @publish_post@ trigger with the updated <Post>.
          */
-        static function publish_scheduled() {
+        static function publish_scheduled($pingbacks = true) {
             $sql = SQL::current();
+            $config = Config::current();
             $trigger = Trigger::current();
 
             $ids = $sql->select("posts",
@@ -854,6 +857,12 @@
                              array("status" => "public"));
 
                 $post = new self($id, array("skip_where" => true));
+
+                if ($config->send_pingbacks and $pingbacks)
+                    foreach ($post->attribute_values as $value)
+                        if (is_string($value))
+                            send_pingbacks($value, $post);
+
                 $trigger->call("publish_post", $post);
             }
         }
