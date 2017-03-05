@@ -188,9 +188,9 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($clean,        oneof(sanitize(@$_POST['slug'], true, true, 80), slug(8)));
+            fallback($clean,        sanitize(@$_POST['slug'], true, true, 80), slug(8));
             fallback($url,          self::check_url($clean));
-            fallback($feather,      oneof(@$_POST['feather'], "text"));
+            fallback($feather,      @$_POST['feather'], "text");
             fallback($user_id,      Visitor::current()->id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
             fallback($status,       (isset($_POST['draft'])) ?
@@ -200,7 +200,7 @@
                                         datetime($_POST['created_at']) :
                                         datetime());
             fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
-            fallback($options,      oneof(@$_POST['option'], array()));
+            fallback($options,      @$_POST['option'], array());
 
             $sql = SQL::current();
             $trigger = Trigger::current();
@@ -302,7 +302,7 @@
                                         datetime($_POST['created_at']) :
                                         $this->created_at);
             fallback($updated_at,   datetime());
-            fallback($options,      oneof(@$_POST['option'], array()));
+            fallback($options,      @$_POST['option'], array());
 
             $sql = SQL::current();
             $trigger = Trigger::current();
