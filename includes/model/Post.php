@@ -221,8 +221,8 @@
             $id = $sql->latest("posts");
 
             $attributes       = array_merge($values, $options);
-            $attribute_values = array_keys($attributes);
-            $attribute_names  = array_values($attributes);
+            $attribute_values = array_values($attributes);
+            $attribute_names  = array_keys($attributes);
 
             # Insert the post attributes.
             foreach ($attributes as $name => $value)
@@ -322,8 +322,8 @@
                          $new_values);
 
             $attributes       = array_merge($values, $options);
-            $attribute_values = array_keys($attributes);
-            $attribute_names  = array_values($attributes);
+            $attribute_values = array_values($attributes);
+            $attribute_names  = array_keys($attributes);
 
             # Replace the post attributes.
             foreach ($attributes as $name => $value)
