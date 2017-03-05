@@ -393,7 +393,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 242
+	includes/model/Post.php on line 243
 Arguments:
 	$post, $options
 
@@ -401,7 +401,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 348
+	includes/model/Post.php on line 350
 Arguments:
 	$post, $this, $options
 
@@ -409,7 +409,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 857
+	includes/model/Post.php on line 866
 Arguments:
 	$post
 
@@ -987,7 +987,7 @@ before_add_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 217
+	includes/model/Post.php on line 218
 
 
 before_update_post
@@ -995,7 +995,7 @@ before_update_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 318
+	includes/model/Post.php on line 320
 
 
 title_from_excerpt
@@ -1003,7 +1003,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 549
+	includes/model/Post.php on line 551
 
 
 title
@@ -1011,7 +1011,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 574
+	includes/model/Post.php on line 576
 Arguments:
 	$post
 
@@ -1021,7 +1021,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 591
+	includes/model/Post.php on line 593
 Arguments:
 	$post
 
@@ -1031,7 +1031,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 608
+	includes/model/Post.php on line 610
 Arguments:
 	$post
 
@@ -1041,7 +1041,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 666
+	includes/model/Post.php on line 668
 
 
 user
