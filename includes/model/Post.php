@@ -236,7 +236,7 @@
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if ($config->send_pingbacks and $pingbacks and $post->status == "public")
-                foreach ($attribute_values as $value)
+                foreach ($post->attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
 
@@ -343,7 +343,7 @@
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if ($config->send_pingbacks and $pingbacks and $this->status == "public")
-                foreach ($attribute_values as $value)
+                foreach ($post->attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
 
