@@ -155,7 +155,7 @@ var Help = {
 var Write = {
     init: function() {
         // Insert buttons for ajax previews.
-        if (<?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>)
+        if (<?php echo($theme->file_exists("content".DIR."preview") ? "true" : "false"); ?>)
             $("#write_form *[data-preview], #edit_form *[data-preview]").each(function() {
                 var target = $(this);
 
