@@ -1364,13 +1364,14 @@
      *     An array of all URLs found in the string.
      */
     function grab_urls($string) {
-        $expressions = array("/<a[^>]+href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/");
+        # These expressions capture hyperlinks in HTML and unfiltered Markdown.
+        $expressions = array("/<a[^>]+href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
+                             "/\[[^\]]+\]\(([^\)]+)\)/");
+
+        # Modules can support other syntaxes.
+        Trigger::current()->filter($expressions, "link_regexp");
+
         $urls = array();
-
-        if (Config::current()->enable_markdown)
-            $expressions[] = "/\[[^\]]+\]\(([^\)]+)\)/";
-
-        Trigger::current()->filter($expressions, "link_regexp"); # Modules can support other syntaxes.
 
         foreach ($expressions as $expression) {
             preg_match_all($expression, stripslashes($string), $matches);
