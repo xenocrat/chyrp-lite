@@ -283,13 +283,11 @@
          *
          * Doesn't check every keyword, just the common/sensible ones.
          *
-         * ...Okay, it only does two. "order" and "group".
-         *
          * Parameters:
          *     $name - Name of the column.
          */
         public static function safecol($name) {
-            return preg_replace("/(([^a-zA-Z0-9_]|^)(order|group)([^a-zA-Z0-9_]|$))/i",
+            return preg_replace("/(([^a-zA-Z0-9_]|^)(order|group|having|limit)([^a-zA-Z0-9_]|$))/i",
                                 (SQL::current()->adapter == "mysql") ? "\\2`\\3`\\4" : '\\2"\\3"\\4',
                                 $name);
         }
