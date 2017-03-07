@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{# Months? (For all/yearly archives) #}
+{# Months? (For yearly archives) #}
 {% if months is not empty %}
 <div class="archive standalone">
 {% for when, month in months %}
@@ -11,13 +11,12 @@
 {{ when | strftimeformat("%B %Y" | translate) }}
 </a>
 </h3>
-<ul aria-labelledby="label_{{ when }}_archive" class="archive{{ archive.depth == 'year' ? ' yearly' : '' }}">
+<ul aria-labelledby="label_{{ when }}_archive" class="archive">
 {% for post in month %}
 <li>
-{% if archive.depth == "year" %}
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
 {% if post.title is not empty and post.feather != "photo" and not (post.feather == "uploader" and post.thumb is defined) %}
-<h4 class="yearly">{{ post.title | striptags | normalize | truncate(20) }}</h4>
+<h4 class="archive">{{ post.title | striptags | normalize | truncate(20) }}</h4>
 {% endif %}
 {% if post.feather == "photo" %}
 {{ post.filename | thumbnail(post.alt_text, false, ["max_width=156", "quality=60", "square=1"], "20vw") }}
@@ -30,11 +29,6 @@
 {{ "Permanent link to &#8220;%s&#8221;" | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}
 </a>
 </article>
-{% else %}
-<a href="{{ post.url() }}">
-<h4 class="archive">{{ post.title() | oneof(post.slug) | striptags | normalize | truncate(80) }}</h4>
-</a>
-{% endif %}
 </li>
 {% endfor %}
 </ul>

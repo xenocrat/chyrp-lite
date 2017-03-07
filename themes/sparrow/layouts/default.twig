@@ -42,11 +42,9 @@
 <li role="presentation">
 <a role="menuitem" href="{{ url('feed') }}">{{ "Feed" | translate }}</a>
 </li>
-{% if theme.archives_list() is not empty %}
 <li role="presentation">
-<a role="menuitem" href="{{ url('archive/%s' | format((theme.archives_list() | first).when | strftimeformat('%Y'))) }}" rel="archives">{{ "Archive" | translate }}</a>
+<a role="menuitem" href="{{ url('archive') }}" rel="archives">{{ "Archive" | translate }}</a>
 </li>
-{% endif %}
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
 <li role="presentation">
 <a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Admin" | translate }}</a>
