@@ -196,13 +196,13 @@
             $statuses = Post::statuses();
             $feathers = Post::feathers();
 
-            $first = $sql->select("posts",
-                                  "created_at",
-                                  array($feathers,
-                                        $statuses),
-                                  array("created_at ASC"))->fetch();
+            $latest = $sql->select("posts",
+                                   "created_at",
+                                   array($feathers,
+                                         $statuses),
+                                   array("created_at DESC"))->fetch();
 
-            $year = when("Y", !empty($first) ? $first["created_at"] : time());
+            $year = when("Y", !empty($latest) ? $latest["created_at"] : time());
 
             fallback($_GET['year']);
             fallback($_GET['month']);
@@ -223,35 +223,26 @@
                 $depth = "month";
                 $limit = strtotime("midnight first day of next month", $timestamp);
                 $title = _f("Archive of %s", when("%B %Y", $timestamp, true));
-            } elseif (is_numeric($_GET['year'])) {
+            } else {
                 $depth = "year";
                 $limit = strtotime("midnight first day of next year", $timestamp);
                 $title = _f("Archive of %s", when("%Y", $timestamp, true));
                 $month = $timestamp;
-            } else {
-                $depth = "all";
-                $limit = time();
-                $title = __("Archive");
-                $month = $timestamp;
             }
 
-            $next = ($depth == "all") ?
-                array() :
-                $sql->select("posts",
-                             "created_at",
-                             array("created_at <" => datetime($timestamp),
-                                   $statuses,
-                                   $feathers),
-                             array("created_at DESC"))->fetch();
+            $next = $sql->select("posts",
+                                 "created_at",
+                                 array("created_at <" => datetime($timestamp),
+                                       $statuses,
+                                       $feathers),
+                                 array("created_at DESC"))->fetch();
 
-            $prev = ($depth == "all") ?
-                array() :
-                $sql->select("posts",
-                             "created_at",
-                             array("created_at >=" => datetime($limit),
-                                   $statuses,
-                                   $feathers),
-                             array("created_at ASC"))->fetch();
+            $prev = $sql->select("posts",
+                                 "created_at",
+                                 array("created_at >=" => datetime($limit),
+                                       $statuses,
+                                       $feathers),
+                                 array("created_at ASC"))->fetch();
 
             switch ($depth) {
                 case "day":
