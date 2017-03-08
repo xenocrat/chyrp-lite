@@ -196,40 +196,63 @@
             $statuses = Post::statuses();
             $feathers = Post::feathers();
 
-            $latest = $sql->select("posts",
-                                   "created_at",
-                                   array($feathers,
-                                         $statuses),
-                                   array("created_at DESC"))->fetch();
-
-            $year = when("Y", !empty($latest) ? $latest["created_at"] : time());
+            $months = array();
+            $posts = new Paginator(array());
 
             fallback($_GET['year']);
             fallback($_GET['month']);
             fallback($_GET['day']);
 
-            $months = array();
-            $posts = new Paginator(array());
+            # Fallback to either the year of the latest post or the current year.
+            if (empty($_GET['year']) or !is_numeric($_GET['year'])) {
+                $latest = $sql->select("posts",
+                                       "created_at",
+                                       array($feathers,
+                                             $statuses),
+                                       array("created_at DESC"))->fetch();
 
-            $timestamp = mktime(0, 0, 0, (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
-                                         (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
-                                         (is_numeric($_GET['year']) ? (int) $_GET['year'] : (int) $year));
+                $_GET['year'] = when("Y", fallback($latest["created_at"], time()));
+            }
 
-            if (is_numeric($_GET['year']) and is_numeric($_GET['month']) and is_numeric($_GET['day'])) {
+            $timestamp = mktime(0, 0, 0,
+                                (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
+                                (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
+                                (is_numeric($_GET['year']) ? (int) $_GET['year'] : 1991));
+
+            if (is_numeric($_GET['day'])) {
                 $depth = "day";
                 $limit = strtotime("tomorrow", $timestamp);
                 $title = _f("Archive of %s", when("%d %B %Y", $timestamp, true));
-            } elseif (is_numeric($_GET['year']) and is_numeric($_GET['month'])) {
+                $posts = new Paginator(Post::find(array("placeholders" => true,
+                                                        "where" => array("created_at LIKE" => when("Y-m-d%", $timestamp)),
+                                                        "order" => "created_at DESC, id DESC")),
+                                       $this->post_limit);
+            } elseif (is_numeric($_GET['month'])) {
                 $depth = "month";
                 $limit = strtotime("midnight first day of next month", $timestamp);
                 $title = _f("Archive of %s", when("%B %Y", $timestamp, true));
+                $posts = new Paginator(Post::find(array("placeholders" => true,
+                                                        "where" => array("created_at LIKE" => when("Y-m-%", $timestamp)),
+                                                        "order" => "created_at DESC, id DESC")),
+                                       $this->post_limit);
             } else {
                 $depth = "year";
                 $limit = strtotime("midnight first day of next year", $timestamp);
                 $title = _f("Archive of %s", when("%Y", $timestamp, true));
                 $month = $timestamp;
+
+                while ($month < $limit) {
+                    $vals = Post::find(array("where" => array("created_at LIKE" => when("Y-m-%", $month)),
+                                             "order" => "created_at DESC, id DESC"));
+
+                    if (!empty($vals))
+                        $months[$month] = $vals;
+
+                    $month = strtotime("midnight first day of next month", $month);
+                }
             }
 
+            # Are there posts older than those displayed?
             $next = $sql->select("posts",
                                  "created_at",
                                  array("created_at <" => datetime($timestamp),
@@ -237,37 +260,13 @@
                                        $feathers),
                                  array("created_at DESC"))->fetch();
 
+            # Are there posts newer than those displayed?
             $prev = $sql->select("posts",
                                  "created_at",
                                  array("created_at >=" => datetime($limit),
                                        $statuses,
                                        $feathers),
                                  array("created_at ASC"))->fetch();
-
-            switch ($depth) {
-                case "day":
-                    $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("created_at LIKE" => when("Y-m-d%", $timestamp)),
-                                                            "order" => "created_at DESC, id DESC")),
-                                           $this->post_limit);
-                    break;
-                case "month":
-                    $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("created_at LIKE" => when("Y-m-%", $timestamp)),
-                                                            "order" => "created_at DESC, id DESC")),
-                                           $this->post_limit);
-                    break;
-                default:
-                    while ($month < $limit) {
-                        $vals = Post::find(array("where" => array("created_at LIKE" => when("Y-m-%", $month)),
-                                                 "order" => "created_at DESC, id DESC"));
-
-                        if (!empty($vals))
-                            $months[$month] = $vals;
-
-                        $month = strtotime("midnight first day of next month", $month);
-                    }
-            }
 
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,
