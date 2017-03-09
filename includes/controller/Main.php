@@ -203,8 +203,8 @@
             fallback($_GET['month']);
             fallback($_GET['day']);
 
-            # Fallback to either the year of the latest post or the current year.
-            if (empty($_GET['year']) or !is_numeric($_GET['year'])) {
+            # Default to either the year of the latest post or the current year.
+            if (!isset($_GET['year'])) {
                 $latest = $sql->select("posts",
                                        "created_at",
                                        array($feathers,
@@ -273,8 +273,8 @@
                                  "months" => array_reverse($months, true),
                                  "archive" => array("when"  => $timestamp,
                                                     "depth" => $depth,
-                                                    "next"  => !empty($next) ? strtotime($next["created_at"]) : false,
-                                                    "prev"  => !empty($prev) ? strtotime($prev["created_at"]) : false)),
+                                                    "next"  => strtotime(fallback($next["created_at"])),
+                                                    "prev"  => strtotime(fallback($prev["created_at"])))),
                            $title);
         }
 
