@@ -709,22 +709,23 @@
                                               "id",
                                               $conds)->fetchAll();
 
-            if (empty($results))
-                return false;
+            if (!empty($results)) {
+                $ids = array();
 
-            $ids = array();
+                foreach ($results as $result)
+                    $ids[] = $result["id"];
 
-            foreach ($results as $result)
-                $ids[] = $result["id"];
+                shuffle($ids);
 
-            shuffle($ids);
+                $post = new Post(reset($ids));
 
-            $post = new Post(reset($ids));
+                if ($post->no_results)
+                    return false;
 
-            if ($post->no_results)
-                return false;
+                redirect($post->url());
+            }
 
-            redirect($post->url());
+            Flash::warning(__("There aren't enough posts for random selection."), "/");
         }
 
         /**
