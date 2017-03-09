@@ -27,8 +27,7 @@
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
 
-        $domain = preg_replace("~^www\.~", "",
-                               oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
+        $domain = preg_replace("~^www\.~", "", oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
         session_name("ChyrpSession");
