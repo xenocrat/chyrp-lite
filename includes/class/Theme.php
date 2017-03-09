@@ -99,8 +99,8 @@
          *     $limit - Number of months to list.
          */
         public function archives_list($limit = 12) {
-            if (isset($this->caches["archives_list"]["$limit"]))
-                return $this->caches["archives_list"]["$limit"];
+            if (isset($this->caches["archives_list"][$limit]))
+                return $this->caches["archives_list"][$limit];
 
             $main = MainController::current();
             $sql = SQL::current();
@@ -124,7 +124,7 @@
                 $month = strtotime("midnight first day of last month", $month);
             }
 
-            return $this->caches["archives_list"]["$limit"] = $array;
+            return $this->caches["archives_list"][$limit] = $array;
         }
 
         /**
@@ -135,8 +135,8 @@
          *     $limit - Number of posts to list.
          */
         public function recent_posts($limit = 5) {
-            if (isset($this->caches["recent_posts"]["$limit"]))
-                return $this->caches["recent_posts"]["$limit"];
+            if (isset($this->caches["recent_posts"][$limit]))
+                return $this->caches["recent_posts"][$limit];
 
             $results = Post::find(array("placeholders" => true,
                                         "where" => array("status" => "public"),
@@ -148,7 +148,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->caches["recent_posts"]["$limit"] = $posts;
+            return $this->caches["recent_posts"][$limit] = $posts;
         }
 
         /**
@@ -163,8 +163,8 @@
             if ($post->no_results)
                 return;
 
-            if (isset($this->caches["related_posts"]["$post->id"]["$limit"]))
-                return $this->caches["related_posts"]["$post->id"]["$limit"];
+            if (isset($this->caches["related_posts"]["$post->id"][$limit]))
+                return $this->caches["related_posts"]["$post->id"][$limit];
 
             $ids = array();
 
@@ -183,7 +183,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->caches["related_posts"]["$post->id"]["$limit"] = $posts;
+            return $this->caches["related_posts"]["$post->id"][$limit] = $posts;
         }
 
         /**
