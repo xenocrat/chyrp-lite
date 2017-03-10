@@ -42,7 +42,8 @@
         private function __construct() {
             $config = Config::current();
 
-            $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
+            $cache = (is_dir(CACHES_DIR.DIR."twig") and
+                        is_writable(CACHES_DIR.DIR."twig") and
                             (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
             $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
