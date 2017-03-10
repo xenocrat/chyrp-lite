@@ -18,9 +18,9 @@
 <div class="filter_item">
 <h3>{{ "Browse by month:" | translate }}</h3>
 <select name="month" onchange="$(this).parents('form.filters').submit()">
-<option value="">{{ "[All]" | translate }}</option>
+<option value="0">{{ "[All]" | translate }}</option>
 {% for archive in theme.archives_list() %}
-{% set option_selected = GET.month is defined ? GET.month | selected(archive.when | strftimeformat("%Y-%m")) : "" %}
+{% set option_selected = GET.month is defined ? GET.month | selected(archive.when) : "" %}
 {% set option_contents = (archive.when | strftimeformat("%B %Y")) %}
 <option value="{{ archive.when }}"{{ option_selected }}>{{ option_contents }}</option>
 {% endfor %}
