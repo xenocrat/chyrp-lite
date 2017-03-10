@@ -106,8 +106,11 @@
                     break;
             }
 
-            if ($this->adapter == "mysql")
-                new Query($this, "SET NAMES 'utf8'"); # Note: This doesn't increase the query debug/count.
+            if ($this->adapter == "mysql") {
+                # These don't get added to the query debug/count.
+                new Query($this, "SET SESSION sql_mode = 'ANSI'");
+                new Query($this, "SET NAMES 'utf8'");
+            }
 
             return $this->connected = true;
         }
