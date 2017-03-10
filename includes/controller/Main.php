@@ -9,11 +9,11 @@
         public $urls = array(
             '|/id/post/([0-9]+)/|'                         => '/?action=id&amp;post=$1',
             '|/id/page/([0-9]+)/|'                         => '/?action=id&amp;page=$1',
+            '|/random/([^/]+)/|'                           => '/?action=random&amp;feather=$1',
             '|/search/([^/]+)/|'                           => '/?action=search&amp;query=$1',
             '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&amp;year=$1&amp;month=$2&amp;day=$3',
             '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&amp;year=$1&amp;month=$2',
             '|/archive/([0-9]{4})/|'                       => '/?action=archive&amp;year=$1',
-            '|/random/([^/]+)/|'                           => '/?action=random&amp;feather=$1',
             '|/([^/]+)/feed/|'                             => '/?action=$1&amp;feed'
         );
 
@@ -422,6 +422,41 @@
         }
 
         /**
+         * Function: random
+         * Grabs a random post and redirects to it.
+         */
+        public function random() {
+            $conds = array(Post::statuses());
+
+            if (isset($_GET['feather']))
+                $conds["feather"] = preg_replace("|[^a-z_\-]|i", "", $_GET['feather']);
+            else
+                $conds[] = Post::feathers();
+
+            $results = SQL::current()->select("posts",
+                                              "id",
+                                              $conds)->fetchAll();
+
+            if (!empty($results)) {
+                $ids = array();
+
+                foreach ($results as $result)
+                    $ids[] = $result["id"];
+
+                shuffle($ids);
+
+                $post = new Post(reset($ids));
+
+                if ($post->no_results)
+                    return false;
+
+                redirect($post->url());
+            }
+
+            Flash::warning(__("There aren't enough posts for random selection."), "/");
+        }
+
+        /**
          * Function: register
          * Register a visitor as a new user.
          */
@@ -691,41 +726,6 @@
             }
 
             $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost Password"));
-        }
-
-        /**
-         * Function: random
-         * Grabs a random post and redirects to it.
-         */
-        public function random() {
-            $conds = array(Post::statuses());
-
-            if (isset($_GET['feather']))
-                $conds["feather"] = preg_replace("|[^a-z_\-]|i", "", $_GET['feather']);
-            else
-                $conds[] = Post::feathers();
-
-            $results = SQL::current()->select("posts",
-                                              "id",
-                                              $conds)->fetchAll();
-
-            if (!empty($results)) {
-                $ids = array();
-
-                foreach ($results as $result)
-                    $ids[] = $result["id"];
-
-                shuffle($ids);
-
-                $post = new Post(reset($ids));
-
-                if ($post->no_results)
-                    return false;
-
-                redirect($post->url());
-            }
-
-            Flash::warning(__("There aren't enough posts for random selection."), "/");
         }
 
         /**
