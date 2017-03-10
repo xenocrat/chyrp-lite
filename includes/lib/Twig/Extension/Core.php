@@ -8,7 +8,7 @@ if (!defined('ENT_SUBSTITUTE')) {
 /*
  * This file is part of Twig.
  *
- * (c) 2009 Fabien Potencier
+ * (c) Fabien Potencier
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -163,7 +163,7 @@ class Twig_Extension_Core extends Twig_Extension
             new Twig_SimpleFilter('upper', 'strtoupper'),
             new Twig_SimpleFilter('lower', 'strtolower'),
             new Twig_SimpleFilter('striptags', 'strip_tags'),
-            new Twig_SimpleFilter('trim', 'trim'),
+            new Twig_SimpleFilter('trim', 'twig_trim_filter'),
             new Twig_SimpleFilter('nl2br', 'nl2br', array('pre_escape' => 'html', 'is_safe' => array('html'))),
 
             // array helpers
@@ -656,7 +656,7 @@ function twig_array_merge($arr1, $arr2)
 function twig_slice(Twig_Environment $env, $item, $start, $length = null, $preserveKeys = false)
 {
     if ($item instanceof Traversable) {
-        if ($item instanceof IteratorAggregate) {
+        while ($item instanceof IteratorAggregate) {
             $item = $item->getIterator();
         }
 
@@ -825,7 +825,27 @@ function _twig_default_filter($value, $default = '')
 function twig_get_array_keys_filter($array)
 {
     if ($array instanceof Traversable) {
-        return array_keys(iterator_to_array($array));
+        while ($array instanceof IteratorAggregate) {
+            $array = $array->getIterator();
+        }
+
+        if ($array instanceof Iterator) {
+            $keys = array();
+            $array->rewind();
+            while ($array->valid()) {
+                $keys[] = $array->key();
+                $array->next();
+            }
+
+            return $keys;
+        }
+
+        $keys = array();
+        foreach ($array as $key => $item) {
+            $keys[] = $key;
+        }
+
+        return $keys;
     }
 
     if (!is_array($array)) {
@@ -905,10 +925,49 @@ function twig_in_filter($value, $compare)
     } elseif (is_string($compare) && (is_string($value) || is_int($value) || is_float($value))) {
         return '' === $value || false !== strpos($compare, (string) $value);
     } elseif ($compare instanceof Traversable) {
-        return in_array($value, iterator_to_array($compare, false), is_object($value) || is_resource($value));
+        if (is_object($value) || is_resource($value)) {
+            foreach ($compare as $item) {
+                if ($item === $value) {
+                    return true;
+                }
+            }
+        } else {
+            foreach ($compare as $item) {
+                if ($item == $value) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     return false;
+}
+
+/**
+ * Returns a trimmed string.
+ *
+ * @return string
+ *
+ * @throws Twig_Error_Runtime When an invalid trimming side is used (not a string or not 'left', 'right', or 'both')
+ */
+function twig_trim_filter($string, $characterMask = null, $side = 'both')
+{
+    if (null === $characterMask) {
+        $characterMask = " \t\n\r\0\x0B";
+    }
+
+    switch ($side) {
+        case 'both':
+            return trim($string, $characterMask);
+        case 'left':
+            return ltrim($string, $characterMask);
+        case 'right':
+            return rtrim($string, $characterMask);
+        default:
+            throw new Twig_Error_Runtime('Trimming side must be "left", "right" or "both".');
+    }
 }
 
 /**
