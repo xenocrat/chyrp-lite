@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2017.01");
-    define('CHYRP_CODENAME', "Swainson");
+    define('CHYRP_VERSION',  "2017.02");
+    define('CHYRP_CODENAME', "Swahili");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);

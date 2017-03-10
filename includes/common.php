@@ -5,7 +5,7 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2017.01
+     *     v2017.02
      *
      * Copyright:
      *     Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi,
@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2017.01");
+    define('CHYRP_VERSION', "2017.02");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Swainson");
+    define('CHYRP_CODENAME', "Swahili");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
