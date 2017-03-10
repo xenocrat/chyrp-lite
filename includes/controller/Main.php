@@ -599,12 +599,12 @@
                 fallback($_POST['login']);
                 fallback($_POST['password']);
 
+                if (!User::authenticate($_POST['login'], $_POST['password']))
+                    Flash::warning(__("Incorrect username and/or password."));
+
                 # Modules can implement "user_login and "user_authenticate" to offer two-factor authentication.
                 # "user_authenticate" trigger function can block the login process by creating a Flash::warning().
                 $trigger->call("user_authenticate");
-
-                if (!User::authenticate($_POST['login'], $_POST['password']))
-                    Flash::warning(__("Incorrect username and/or password."));
 
                 if (!Flash::exists("warning")) {
                     $user = new User(array("login" => $_POST['login']));
