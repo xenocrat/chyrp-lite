@@ -17,7 +17,7 @@
 {% if theme.archives_list() is not empty %}
 <div class="filter_item">
 <h3>{{ "Browse by month:" | translate }}</h3>
-<select name="month" onchange="$(this).parents('form.filters').submit()">
+<select name="month" data-submit>
 <option value="0">{{ "[All]" | translate }}</option>
 {% for archive in theme.archives_list() %}
 {% set option_selected = GET.month is defined ? GET.month | selected(archive.when) : "" %}

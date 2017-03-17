@@ -9,6 +9,7 @@ $(function() {
     validate_url();
     validate_passwords();
     confirm_submit();
+    auto_submit();
     Help.init();
     Write.init();
     Settings.init();
@@ -110,6 +111,12 @@ function confirm_submit() {
 
         if (!confirm(text.replace(/<[^>]+>/g, "")))
             e.preventDefault();
+    });
+}
+// Submit a form when an element changes.
+function auto_submit() {
+    $("select[data-submit], input[data-submit][type='checkbox']").on("change", function(e) {
+        $(this).parents("form").submit();
     });
 }
 var Route = {
