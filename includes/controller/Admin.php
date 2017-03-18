@@ -27,10 +27,6 @@
         # The base path for this controller.
         public $base = "admin";
 
-        # Boolean: $feed
-        # Is the current page a feed?
-        public $feed = false;
-
         # Array: $protected
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "navigation_context", "display", "current");

@@ -29,10 +29,6 @@
         # Does this controller support clean URLs?
         public $clean = true;
 
-        # Boolean: $feed
-        # Is the visitor requesting a feed?
-        public $feed = false;
-
         # Array: $protected
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "display", "current");
@@ -46,9 +42,6 @@
          * Loads the Twig parser. Theme class sets up the l10n domain.
          */
         private function __construct() {
-            $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
-            $this->post_limit = Config::current()->posts_per_page;
-
             $cache = (is_dir(CACHES_DIR.DIR."twig") and
                         is_writable(CACHES_DIR.DIR."twig") and
                             !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
@@ -63,6 +56,9 @@
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+
+            # Set the limit for pagination.
+            $this->post_limit = Config::current()->posts_per_page;
         }
 
         /**
