@@ -33,14 +33,13 @@
          */
         private function __construct($controller) {
             if (!in_array("Controller", class_implements($controller)))
-                trigger_error(__("Route was initiated with an invalid Controller."), E_USER_WARNING);
+                trigger_error(__("Route was initiated with an invalid Controller."), E_USER_ERROR);
 
             fallback($controller->protected, array("__construct", "__destruct", "parse", "display"));
             fallback($controller->permitted, array("login", "logout"));
+            fallback($controller->feed, (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed")));
 
             $this->controller = $controller;
-
-            $config = Config::current();
 
             if (substr_count($_SERVER['REQUEST_URI'], "..") > 0 )
                 error(__("Error"), __("Malformed URI."), null, 400);
@@ -51,11 +50,8 @@
             # Determining the action can be this simple if clean URLs are disabled.
             $this->action =& $_GET['action'];
 
-            if (isset($_GET['feed']))
-                $this->feed = true;
-
             # Parse the current URL and extract information.
-            $parse = parse_url($config->url);
+            $parse = parse_url(Config::current()->url);
             fallback($parse["path"], "/");
 
             if (isset($controller->base))
@@ -253,7 +249,7 @@
             static $instance = null;
 
             if (!isset($controller) and empty($instance))
-                trigger_error(__("Route was initiated without a Controller."), E_USER_WARNING);
+                trigger_error(__("Route was initiated without a Controller."), E_USER_ERROR);
 
             $instance = (empty($instance)) ? new self($controller) : $instance ;
             return $instance;
