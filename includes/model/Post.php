@@ -797,7 +797,7 @@
         static function feathers() {
             $feathers = array();
 
-            foreach ((array) Config::current()->enabled_feathers as $feather)
+            foreach (Config::current()->enabled_feathers as $feather)
                 if (feather_enabled($feather))
                     $feathers[] = $feather;
 
