@@ -124,7 +124,7 @@
      */
     function twig_filter_translate($string, $domain = null) {
         if (!isset($domain))
-            $domain = (ADMIN) ? "admin" : Config::current()->theme ;
+            $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
         return __($string, $domain);
     }
@@ -135,7 +135,7 @@
      */
     function twig_filter_translate_plural($single, $plural, $number, $domain = null) {
         if (!isset($domain))
-            $domain = (ADMIN) ? "admin" : Config::current()->theme ;
+            $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
         return _p($single, $plural, $number, $domain);
     }
