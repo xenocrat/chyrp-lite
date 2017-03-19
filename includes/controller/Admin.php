@@ -23,6 +23,10 @@
         # Does this controller support clean URLs?
         public $clean = false;
 
+        # Boolean: $feed
+        # Is the current page a feed?
+        public $feed = false;
+
         # String: $base
         # The base path for this controller.
         public $base = "admin";
@@ -36,19 +40,19 @@
          * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
-            $config = Config::current();
-
             $cache = (is_dir(CACHES_DIR.DIR."twig") and
                         is_writable(CACHES_DIR.DIR."twig") and
                             (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
 
             $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-            foreach ((array) $config->enabled_modules as $module)
+            $config = Config::current();
+
+            foreach ($config->enabled_modules as $module)
                 if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
                     $chain[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
-            foreach ((array) $config->enabled_feathers as $feather)
+            foreach ($config->enabled_feathers as $feather)
                 if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
                     $chain[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
@@ -1592,7 +1596,7 @@
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
-            if (in_array($name, (array) $config->$enabled_array))
+            if (in_array($name, $config->$enabled_array))
                 error(__("Error"), __("Extension already enabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
@@ -1605,7 +1609,7 @@
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
 
-            $config->set($enabled_array, array_merge((array) $config->$enabled_array, array($name)));
+            $config->set($enabled_array, array_merge($config->$enabled_array, array($name)));
 
             foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
@@ -1636,7 +1640,7 @@
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
-            if (!in_array($name, (array) $config->$enabled_array))
+            if (!in_array($name, $config->$enabled_array))
                 error(__("Error"), __("Extension already disabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
@@ -1645,7 +1649,7 @@
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
 
-            $config->set($enabled_array, array_diff((array) $config->$enabled_array, array($name)));
+            $config->set($enabled_array, array_diff($config->$enabled_array, array($name)));
 
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
@@ -1959,7 +1963,7 @@
                 $write["write_page"] = array("title" => __("Page"));
 
             if ($visitor->group->can("add_draft", "add_post"))
-                foreach ((array) Config::current()->enabled_feathers as $feather) {
+                foreach (Config::current()->enabled_feathers as $feather) {
                     if (!feather_enabled($feather))
                         continue;
 
