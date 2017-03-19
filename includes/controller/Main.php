@@ -43,7 +43,7 @@
 
         /**
          * Function: __construct
-         * Loads the Twig parser. Theme class sets up the l10n domain.
+         * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
             $cache = (is_dir(CACHES_DIR.DIR."twig") and
@@ -61,8 +61,13 @@
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
 
+            $config = Config::current();
+
+            # Load the theme translator.
+            load_translator($config->theme, THEME_DIR.DIR."locale");
+
             # Set the limit for pagination.
-            $this->post_limit = Config::current()->posts_per_page;
+            $this->post_limit = $config->posts_per_page;
         }
 
         /**

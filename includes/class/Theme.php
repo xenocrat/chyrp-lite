@@ -14,13 +14,9 @@
 
         /**
          * Function: __construct
-         * Loads the theme's info and l10n domain.
+         * Loads the theme's info.php file and populates its attributes.
          */
         private function __construct() {
-            # Load the theme translator.
-            load_translator(Config::current()->theme, THEME_DIR.DIR."locale");
-
-            # Load the theme's info into the Theme class.
             foreach (load_info(THEME_DIR.DIR."info.php") as $key => $val)
                 $this->$key = $val;
 
