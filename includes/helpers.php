@@ -1540,9 +1540,6 @@
 
             Modules::$instances[$module] = new $class_name;
             Modules::$instances[$module]->safename = $module;
-
-            foreach (load_info(MODULES_DIR.DIR.$module.DIR."info.php") as $key => $val)
-                Modules::$instances[$module]->$key = $val;
         }
 
         # Instantiate all Feathers.
@@ -1566,9 +1563,6 @@
 
             Feathers::$instances[$feather] = new $class_name;
             Feathers::$instances[$feather]->safename = $feather;
-
-            foreach (load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php") as $key => $val)
-                Feathers::$instances[$feather]->$key = $val;
         }
 
         # Initialize all Modules.
