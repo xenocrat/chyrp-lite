@@ -29,6 +29,10 @@
         # Does this controller support clean URLs?
         public $clean = true;
 
+        # Boolean: $feed
+        # Is the current page a feed?
+        public $feed = null;
+
         # Array: $protected
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "display", "current");
