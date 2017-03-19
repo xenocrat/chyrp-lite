@@ -14,13 +14,11 @@
 
         /**
          * Function: __construct
-         * Loads the theme's info.php file and populates its attributes.
+         * Populates useful attributes.
          */
         private function __construct() {
-            foreach (load_info(THEME_DIR.DIR."info.php") as $key => $val)
-                $this->$key = $val;
-
             $this->url = THEME_URL;
+            $this->safename = PREVIEWING ? $_SESSION['theme'] : Config::current()->theme ;
         }
 
         /**
