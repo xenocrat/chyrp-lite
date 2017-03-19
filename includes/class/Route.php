@@ -86,7 +86,7 @@
          * Function: init
          * Attempt to call a responder for the action(s) until one of them doesn't return false.
          *
-         * This will also call the @[controllername]_xxxxx@ and @route_xxxxx@ triggers.
+         * This will also call the @[controllername]_[action]@ and @route_[action]@ triggers.
          */
         public function init() {
             $trigger = Trigger::current();
