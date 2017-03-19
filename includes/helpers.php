@@ -724,7 +724,7 @@
         }
 
         if (!INSTALLING and !UPGRADING)
-            foreach ((array) Config::current()->enabled_modules as $module)
+            foreach (Config::current()->enabled_modules as $module)
                 if (is_file(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
                     require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
                     return;
@@ -1520,7 +1520,7 @@
         $config = Config::current();
 
         # Instantiate all Modules.
-        foreach ((array) $config->enabled_modules as $module) {
+        foreach ($config->enabled_modules as $module) {
             $class_name = camelize($module);
             $filepath = MODULES_DIR.DIR.$module.DIR.$module.".php";
 
@@ -1546,7 +1546,7 @@
         }
 
         # Instantiate all Feathers.
-        foreach ((array) $config->enabled_feathers as $feather) {
+        foreach ($config->enabled_feathers as $feather) {
             $class_name = camelize($feather);
             $filepath = FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
