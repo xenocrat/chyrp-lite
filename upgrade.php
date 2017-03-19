@@ -143,7 +143,7 @@
      */
     function disable_importers() {
         $config = Config::current();
-        $config->set("enabled_modules", array_diff((array) $config->enabled_modules, array("importers")));
+        $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
     }
 
     /**
@@ -372,12 +372,12 @@
         add_export_content();
 
         # Perform module upgrades.
-        foreach ((array) $config->enabled_modules as $module)
+        foreach ($config->enabled_modules as $module)
             if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
         # Perform feather upgrades.
-        foreach ((array) $config->enabled_feathers as $feather)
+        foreach ($config->enabled_feathers as $feather)
             if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 
