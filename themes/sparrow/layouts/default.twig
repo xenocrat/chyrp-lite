@@ -10,9 +10,9 @@
 <link rel="EditURI" type="application/rsd+xml" href="{{ site.chyrp_url }}/includes/rsd.php">
 <link rel="shortcut icon" href="{{ site.chyrp_url }}/favicon.ico">
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
-{{ theme.feeds }}
-{{ theme.stylesheets }}
-{{ theme.javascripts }}
+{{ theme.feeds() }}
+{{ theme.stylesheets() }}
+{{ theme.javascripts() }}
 {{ trigger.call("end_head") }}
 </head>
 <body>
