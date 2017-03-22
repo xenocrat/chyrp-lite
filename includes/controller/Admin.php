@@ -1463,7 +1463,7 @@
                 if (!empty($info["conflicts"])) {
                     $classes[$folder][] = "conflicts";
 
-                    foreach ((array) $info["conflicts"] as $conflict)
+                    foreach ($info["conflicts"] as $conflict)
                         if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
 
@@ -1478,7 +1478,7 @@
                 if (!empty($info["dependencies"])) {
                     $classes[$folder][] = "dependencies";
 
-                    foreach ((array) $info["dependencies"] as $dependency) {
+                    foreach ($info["dependencies"] as $dependency) {
                         if (!file_exists(MODULES_DIR.DIR.$dependency.DIR.$dependency.".php")) {
                             if (!in_array("missing_dependency", $classes[$folder]))
                                 $classes[$folder][] = "missing_dependency";
@@ -1499,7 +1499,7 @@
                 }
 
                 # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
-                $category = (in_array($folder, (array) $config->enabled_modules)) ?
+                $category = (in_array($folder, $config->enabled_modules)) ?
                     "enabled_modules" : "disabled_modules" ;
 
                 $this->context[$category][$folder] = array_merge($info, array("classes" => $classes[$folder]));
@@ -1532,7 +1532,7 @@
                 load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale");
 
                 # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
-                $category = (in_array($folder, (array) $config->enabled_feathers)) ?
+                $category = (in_array($folder, $config->enabled_feathers)) ?
                     "enabled_feathers" : "disabled_feathers" ;
 
                 $this->context[$category][$folder] = load_info(FEATHERS_DIR.DIR.$folder.DIR."info.php");
