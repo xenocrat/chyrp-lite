@@ -12,6 +12,10 @@
         # Is the module's execution cancelled?
         public $cancelled = false;
 
+        # String: $safename
+        # The module's non-camelized name.
+        public $safename = "";
+
         /**
          * Function: setPriority
          * Sets the priority of an action for the module this function is called from.

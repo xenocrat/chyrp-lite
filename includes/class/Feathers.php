@@ -12,6 +12,10 @@
         # Is the feather's execution cancelled?
         public $cancelled = false;
 
+        # String: $safename
+        # The feather's non-camelized name.
+        public $safename = "";
+
         # Array: $custom_filters
         # Manages named Trigger filters for Feather fields.
         static $filters = array();
