@@ -4,7 +4,7 @@
      * Holds all of the configuration variables for the entire site.
      */
     class Config {
-        # Variable: $json
+        # Array: $json
         # Holds all of the JSON settings as a $key => $val array.
         private $json = array();
 
