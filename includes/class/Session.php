@@ -8,7 +8,7 @@
         # Caches session data.
         static $data = "";
 
-        # Variable: $deny
+        # Boolean: $deny
         # Deny this session?
         static $deny = false;
 
@@ -47,7 +47,7 @@
 
         /**
          * Function: write
-         * Writes their session to the database, or updates it if it already exists.
+         * Writes their session to the database.
          *
          * Parameters:
          *     $id - Session ID.
@@ -57,20 +57,12 @@
             if (self::$deny or empty($data) or $data == self::$data)
                 return;
 
-            $sql = SQL::current();
-
-            if ($sql->count("sessions", array("id" => $id)))
-                $sql->update("sessions",
-                             array("id" => $id),
-                             array("data" => $data,
-                                   "user_id" => Visitor::current()->id,
-                                   "updated_at" => datetime()));
-            else
-                $sql->insert("sessions",
-                             array("id" => $id,
-                                   "data" => $data,
-                                   "user_id" => Visitor::current()->id,
-                                   "created_at" => datetime()));
+            SQL::current()->replace("sessions",
+                                    array("id"),
+                                    array("id" => $id,
+                                          "data" => $data,
+                                          "user_id" => Visitor::current()->id,
+                                          "updated_at" => datetime()));
         }
 
         /**
