@@ -741,23 +741,26 @@
             $trigger = Trigger::current();
             $theme = Theme::current();
 
-            # Fetch posts for fallback or if we are being called as a responder.
-            $result = SQL::current()->select("posts",
-                                             "id",
-                                             array("status" => "public"),
-                                             array("id DESC"),
-                                             array(),
-                                             $config->feed_items);
-            $ids = array();
+            # Fetch posts if we are being called as a responder.
+            if (!isset($posts)) {
+                $results = SQL::current()->select("posts",
+                                                  "id",
+                                                  array("status" => "public"),
+                                                  array("id DESC"),
+                                                  array(),
+                                                  $config->feed_items)->fetchAll();
 
-            foreach ($result->fetchAll() as $index => $row)
-                $ids[] = $row["id"];
+                $ids = array();
 
-            if (!empty($ids))
-                fallback($posts, Post::find(array("where" => array("id" => $ids),
-                                                  "order" => "created_at DESC, id DESC")));
-            else
-                fallback($posts, array());
+                foreach ($results as $result)
+                    $ids[] = $result["id"];
+
+                if (!empty($ids))
+                    $posts = Post::find(array("where" => array("id" => $ids),
+                                              "order" => "created_at DESC, id DESC"));
+                else
+                    $posts = array();
+            }
 
             if (!is_array($posts))
                 $posts = $posts->paginated;
