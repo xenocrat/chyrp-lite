@@ -317,7 +317,7 @@
                         if (is_bool($val))
                             $val = (int) $val;
 
-                        if (substr($key, -4) == " not" or substr($key, -4) == " NOT") {
+                        if (strtoupper(substr($key, -4)) == " NOT") {
                             # Negation
                             $key = self::safecol(substr($key, 0, -4));
                             $param = str_replace(array("(", ")", "."), "_", $key);
@@ -330,7 +330,7 @@
                                 $cond = $key." != :".$param;
                                 $params[":".$param] = $val;
                             }
-                        } elseif ((substr($key, -5) == " like" or substr($key, -5) == " LIKE") and is_array($val)) {
+                        } elseif (strtoupper(substr($key, -5)) == " LIKE" and is_array($val)) {
                             # multiple LIKE
                             $key = self::safecol(substr($key, 0, -5));
                             $likes = array();
@@ -342,7 +342,7 @@
                             }
 
                             $cond = "(".implode(" OR ", $likes).")";
-                        } elseif ((substr($key, -9) == " like all" or substr($key, -9) == " LIKE ALL") and is_array($val)) {
+                        } elseif (strtoupper(substr($key, -9)) == " LIKE ALL" and is_array($val)) {
                             # multiple LIKE
                             $key = self::safecol(substr($key, 0, -9));
                             $likes = array();
@@ -354,7 +354,7 @@
                             }
 
                             $cond = "(".implode(" AND ", $likes).")";
-                        } elseif ((substr($key, -9) == " not like" or substr($key, -9) == " NOT LIKE") and is_array($val)) {
+                        } elseif (strtoupper(substr($key, -9)) == " NOT LIKE" and is_array($val)) {
                             # multiple NOT LIKE
                             $key = self::safecol(substr($key, 0, -9));
                             $likes = array();
@@ -366,13 +366,13 @@
                             }
 
                             $cond = "(".implode(" AND ", $likes).")";
-                        } elseif (substr($key, -5) == " like" or substr($key, -5) == " LIKE") {
+                        } elseif (strtoupper(substr($key, -5)) == " LIKE") {
                             # LIKE
                             $key = self::safecol(substr($key, 0, -5));
                             $param = str_replace(array("(", ")", "."), "_", $key);
                             $cond = $key." LIKE :".$param;
                             $params[":".$param] = $val;
-                        } elseif (substr($key, -9) == " not like" or substr($key, -9) == " NOT LIKE") {
+                        } elseif (strtoupper(substr($key, -9)) == " NOT LIKE") {
                             # NOT LIKE
                             $key = self::safecol(substr($key, 0, -9));
                             $param = str_replace(array("(", ")", "."), "_", $key);
