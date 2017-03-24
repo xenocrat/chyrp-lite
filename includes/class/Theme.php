@@ -4,6 +4,14 @@
      * Various helper functions for the theming engine.
      */
     class Theme {
+        # String: $safename
+        # The theme's non-camelized name.
+        public $safename = "";
+
+        # String: $url
+        # The theme's absolute URL.
+        public $url = "";
+
         # String: $title
         # The title for the current page.
         public $title = "";
