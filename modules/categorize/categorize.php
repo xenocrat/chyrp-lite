@@ -176,7 +176,7 @@
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
                                                     "where" => array("id" => $ids))),
-                                   Config::current()->posts_per_page);
+                                   $main->post_limit);
 
             if (empty($posts))
                 return false;
