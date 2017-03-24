@@ -629,13 +629,12 @@
                                                   array("name" => "tags",
                                                         "value like" => self::tags_name_match($key),
                                                         "post_id !=" => $post->id),
-                                                  array("ORDER BY" => "post_id DESC"),
+                                                  array("post_id DESC"),
                                                   array(),
                                                   $limit)->fetchAll();
 
                 foreach ($results as $result)
-                    if (isset($result["post_id"]))
-                        $ids[] = $result["post_id"];
+                    $ids[] = $result["post_id"];
             }
 
             return $ids;
