@@ -203,9 +203,16 @@
             if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage tags.", "tags"));
 
-            $results = SQL::current()->select("post_attributes",
-                                              "*",
-                                              array("name" => "tags"))->fetchAll();
+            $results = SQL::current()->select("posts",
+                                              "post_attributes.value",
+                                              array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
+                                              null,
+                                              array(),
+                                              null,
+                                              null,
+                                              null,
+                                              array(array("table" => "post_attributes",
+                                                          "where" => "post_id = posts.id")))->fetchAll();
 
             $tags = array();
             $names = array();
@@ -537,12 +544,12 @@
             if (empty($posts))
                 return false;
 
-            $list = list_notate($names, true);
+            $notated = list_notate($names, true);
 
             $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                            array("posts" => $posts,
-                                 "tag" => $list, "tags" => $names),
-                           _f("Posts tagged with %s", array($list), "tags"));
+                                 "tag" => $notated, "tags" => $names),
+                           _f("Posts tagged with %s", array($notated), "tags"));
         }
 
         public function main_tags($main) {
@@ -671,7 +678,6 @@
                                 "clean" => $tags[$name]);
 
             usort($list, array($this, "sort_tags_".$order_by."_".$order));
-
             return ($limit) ? array_slice($list, 0, $limit) : $list ;
         }
 
