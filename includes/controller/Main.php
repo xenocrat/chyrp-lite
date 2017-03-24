@@ -33,6 +33,10 @@
         # Is the current page a feed?
         public $feed = null;
 
+        # Integer: $post_limit
+        # Item limit for pagination.
+        public $post_limit = 10;
+
         # Array: $protected
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "display", "current");
