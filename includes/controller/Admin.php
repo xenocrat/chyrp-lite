@@ -27,6 +27,10 @@
         # Is the current page a feed?
         public $feed = false;
 
+        # Integer: $post_limit
+        # Item limit for pagination.
+        public $post_limit = 10;
+
         # String: $base
         # The base path for this controller.
         public $base = "admin";
@@ -69,6 +73,9 @@
 
             # Load the theme translator.
             load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale");
+
+            # Set the limit for pagination.
+            $this->post_limit = $config->admin_per_page;
         }
 
         /**
@@ -325,7 +332,7 @@
                 $posts = new Paginator(Post::find(array("placeholders" => true,
                                                         "drafts" => true,
                                                         "where" => array("id" => $ids))),
-                                       Config::current()->admin_per_page);
+                                       $this->post_limit);
             else
                 $posts = new Paginator(array());
 
@@ -544,7 +551,7 @@
                            array("pages" => new Paginator(Page::find(array("placeholders" => true,
                                                                            "where" => $where,
                                                                            "params" => $params)),
-                                                          Config::current()->admin_per_page)));
+                                                          $this->post_limit)));
         }
 
         /**
@@ -822,7 +829,7 @@
                            array("users" => new Paginator(User::find(array("placeholders" => true,
                                                                            "where" => $where,
                                                                            "params" => $params)),
-                                                          Config::current()->admin_per_page)));
+                                                          $this->post_limit)));
         }
 
         /**
@@ -1044,7 +1051,7 @@
                     $groups = new Paginator(array());
             } else
                 $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
-                                        Config::current()->admin_per_page);
+                                        $this->post_limit);
 
             $this->display("pages".DIR."manage_groups",
                            array("groups" => $groups));
