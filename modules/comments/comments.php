@@ -271,7 +271,7 @@
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
                                                                                   "params" => $params)),
-                                                              Config::current()->admin_per_page)));
+                                                              $admin->post_limit)));
         }
 
         public function post_options($fields, $post = null) {
