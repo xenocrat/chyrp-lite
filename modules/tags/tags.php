@@ -134,8 +134,7 @@
         }
 
         public function post_options($fields, $post = null) {
-            $cloud = self::list_tags(0);
-            usort($cloud, array($this, "sort_tags_name_asc"));
+            $list = self::list_tags(false);
 
             if (isset($post->tags))
                 $tags = array_keys($post->tags);
@@ -144,7 +143,7 @@
 
             $selector = "\n".'<span class="tags_select">'."\n";
 
-            foreach ($cloud as $tag) {
+            foreach ($list as $tag) {
                 $selected = (in_array($tag["name"], $tags)) ? " tag_added" : "" ;
                 $selector.= '<a class="tag'.$selected.'" href="#tags">'.$tag["name"].'</a>'."\n";
             }
@@ -168,14 +167,14 @@
         }
 
         public function post_tags_link_attr($attr, $post) {
-            $linked = array();
+            $links = array();
 
             foreach ($post->tags as $tag => $clean) {
                 $url = url("tag/".urlencode($clean), MainController::current());
-                $linked[] = '<a class="tag" href="'.$url.'" rel="tag">'.$tag.'</a>';
+                $links[] = '<a class="tag" href="'.$url.'" rel="tag">'.$tag.'</a>';
             }
 
-            return $linked;
+            return $links;
         }
 
         public function parse_urls($urls) {
@@ -204,20 +203,18 @@
             if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage tags.", "tags"));
 
-            $sql = SQL::current();
-            $visitor = Visitor::current();
+            $results = SQL::current()->select("post_attributes",
+                                              "*",
+                                              array("name" => "tags"))->fetchAll();
 
             $tags = array();
             $names = array();
 
-            foreach($sql->select("post_attributes",
-                                 "*",
-                                 array("name" => "tags"))->fetchAll() as $tag) {
+            foreach($results as $result) {
+                $also = self::tags_unserialize($result["value"]);
+                $tags = array_merge($tags, $also);
 
-                $post_tags = self::tags_unserialize($tag["value"]);
-                $tags = array_merge($tags, $post_tags);
-
-                foreach ($post_tags as $name => $clean)
+                foreach ($also as $name => $clean)
                     $names[] = $name;
             }
 
@@ -253,6 +250,8 @@
             list($where, $params) = keywords(self::tags_encoded($_GET['query']),
                                              "post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
 
+            $visitor = Visitor::current();
+
             if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where["user_id"] = $visitor->id;
 
@@ -269,7 +268,7 @@
                 $posts = new Paginator(Post::find(array("placeholders" => true,
                                                         "drafts" => true,
                                                         "where" => array("id" => $ids))),
-                                       Config::current()->admin_per_page);
+                                       $admin->post_limit);
             else
                 $posts = new Paginator(array());
 
@@ -283,19 +282,19 @@
             if (empty($_GET['clean']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
 
-            $sql = SQL::current();
+            $results = SQL::current()->select("post_attributes",
+                                              "*",
+                                              array("name" => "tags",
+                                                    "value LIKE" => self::tags_clean_match($_GET['clean'])))->fetchAll();
+
             $tags = array();
             $names = array();
 
-            foreach($sql->select("post_attributes",
-                                 "*",
-                                 array("name" => "tags",
-                                       "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
+            foreach($results as $result) {
+                $also = self::tags_unserialize($result["value"]);
+                $tags = array_merge($tags, $also);
 
-                $post_tags = self::tags_unserialize($tag["value"]);
-                $tags = array_merge($tags, $post_tags);
-
-                foreach ($post_tags as $name => $clean)
+                foreach ($also as $name => $clean)
                     $names[] = $name;
             }
 
@@ -364,17 +363,18 @@
             $sql = SQL::current();
             $new = self::prepare_tags(str_replace(",", " ", $_POST['name']));
 
-            foreach($sql->select("post_attributes",
+            $results = $sql->select("post_attributes",
                                  "*",
                                  array("name" => "tags",
-                                       "value like" => self::tags_name_match($_POST['original'])))->fetchAll() as $tag) {
+                                       "value LIKE" => self::tags_name_match($_POST['original'])))->fetchAll();
 
-                $old = self::tags_unserialize($tag["value"]);
+            foreach($results as $result) {
+                $old = self::tags_unserialize($result["value"]);
                 unset($old[$_POST['original']]);
 
                 $sql->update("post_attributes",
                              array("name" => "tags",
-                                   "post_id" => $tag["post_id"]),
+                                   "post_id" => $result["post_id"]),
                              array("value" => self::tags_serialize(array_merge($old, $new))));
             }
 
@@ -385,19 +385,19 @@
             if (empty($_GET['clean']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
-            $sql = SQL::current();
+            $results = SQL::current()->select("post_attributes",
+                                              "*",
+                                              array("name" => "tags",
+                                                    "value LIKE" => self::tags_clean_match($_GET['clean'])))->fetchAll();
+
             $tags = array();
             $names = array();
 
-            foreach($sql->select("post_attributes",
-                                 "*",
-                                 array("name" => "tags",
-                                       "value like" => self::tags_clean_match($_GET['clean'])))->fetchAll() as $tag) {
+            foreach($results as $result) {
+                $also = self::tags_unserialize($result["value"]);
+                $tags = array_merge($tags, $also);
 
-                $post_tags = self::tags_unserialize($tag["value"]);
-                $tags = array_merge($tags, $post_tags);
-
-                foreach ($post_tags as $name => $clean)
+                foreach ($also as $name => $clean)
                     $names[] = $name;
             }
 
@@ -430,20 +430,21 @@
 
             $sql = SQL::current();
 
-            foreach($sql->select("post_attributes",
-                                 "*",
-                                 array("name" => "tags",
-                                       "value like" => self::tags_name_match($_POST['name'])))->fetchAll() as $tag)  {
+            $results = $sql->select("post_attributes",
+                                    "*",
+                                    array("name" => "tags",
+                                          "value LIKE" => self::tags_name_match($_POST['name'])))->fetchAll();
 
-                $tags = self::tags_unserialize($tag["value"]);
+            foreach($results as $result)  {
+                $tags = self::tags_unserialize($result["value"]);
                 unset($tags[$_POST['name']]);
 
                 if (empty($tags))
-                    $sql->delete("post_attributes", array("name" => "tags", "post_id" => $tag["post_id"]));
+                    $sql->delete("post_attributes", array("name" => "tags", "post_id" => $result["post_id"]));
                 else
                     $sql->update("post_attributes",
                                  array("name" => "tags",
-                                       "post_id" => $tag["post_id"]),
+                                       "post_id" => $result["post_id"]),
                                  array("value" => self::tags_serialize($tags)));
             }
 
@@ -492,41 +493,37 @@
             Flash::notice(__("Posts tagged.", "tags"), "manage_tags");
         }
 
-        public function main_context($context) {
-            $context["tags"] = self::list_tags();
-            return $context;
-        }
-
         public function main_tag($main) {
             if (!isset($_GET['name']))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
                                      array("reason" => __("You did not specify a tag.", "tags")),
                                      __("No Tag", "tags"));
 
-            $sql = SQL::current();
-            $tags = explode(" ", $_GET['name']); # Detect multiple tags (clean tag names have no spaces).
-            $likes = array();
+            $cleans = explode(" ", $_GET['name']); # Detect multiple tags (clean tag names have no spaces).
+            $names = array();
+            $search = array();
 
-            foreach ($tags as $name)
-                $likes[] = self::tags_clean_match($name);
+            foreach ($cleans as $clean)
+                $search[] = self::tags_clean_match($clean);
 
-            $attributes = $sql->select("post_attributes",
-                                       array("value", "post_id"),
-                                       array("name" => "tags",
-                                             "value like all" => $likes));
+            $results = SQL::current()->select("post_attributes",
+                                              array("value", "post_id"),
+                                              array("name" => "tags",
+                                                    "value LIKE ALL" => $search))->fetchAll();
 
             $ids = array();
 
-            foreach ($attributes->fetchAll() as $index => $row) {
-                foreach ($tags as &$tag) {
-                    $search = array_search($tag, self::tags_unserialize($row["value"]));
-                    $tag = ($search) ? $search : $tag;
-                }
+            foreach ($results as $result) {
+                foreach ($cleans as $clean)
+                    if (!isset($names[$clean])) {
+                        $name = array_search($clean, self::tags_unserialize($result["value"]));
 
-                $ids[] = $row["post_id"];
+                        if ($name !== false)
+                            $names[$clean] = $name;
+                    }
+
+                $ids[] = $result["post_id"];
             }
-
-            $tag = list_notate($tags, true);
 
             if (empty($ids))
                 return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
@@ -535,74 +532,73 @@
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
                                                     "where" => array("id" => $ids))),
-                                   Config::current()->posts_per_page);
+                                   $main->post_limit);
 
             if (empty($posts))
                 return false;
 
+            $list = list_notate($names, true);
+
             $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                            array("posts" => $posts,
-                                 "tag" => $tag, "tags" => $tags),
-                           _f("Posts tagged with %s", array($tag), "tags"));
+                                 "tag" => $list, "tags" => $names),
+                           _f("Posts tagged with %s", array($list), "tags"));
         }
 
         public function main_tags($main) {
-            $sql = SQL::current();
+            $results = SQL::current()->select("posts",
+                                              "post_attributes.*",
+                                              array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
+                                              null,
+                                              array(),
+                                              null,
+                                              null,
+                                              null,
+                                              array(array("table" => "post_attributes",
+                                                          "where" => "post_id = posts.id")))->fetchAll();
 
-            if ($sql->count("post_attributes", array("name" => "tags")) > 0) {
-                $tags = array();
-                $names = array();
+            $tags = array();
+            $names = array();
 
-                foreach($sql->select("posts",
-                                     "post_attributes.*",
-                                     array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
-                                     null,
-                                     array(),
-                                     null,
-                                     null,
-                                     null,
-                                     array(array("table" => "post_attributes",
-                                                 "where" => "post_id = posts.id")))->fetchAll() as $tag) {
+            foreach($results as $result) {
+                $also = self::tags_unserialize($result["value"]);
+                $tags = array_merge($tags, $also);
 
-                    $post_tags = self::tags_unserialize($tag["value"]);
-                    $tags = array_merge($tags, $post_tags);
-
-                    foreach ($post_tags as $name => $clean)
-                        $names[] = $name;
-                }
-
-                $popularity = array_count_values($names);
-
-                if (empty($popularity))
-                    return $main->resort("pages".DIR."tags",
-                                         array("tag_cloud" => array()),
-                                         __("No Tags", "tags"));
-
-                $max_qty = max($popularity);
-                $min_qty = min($popularity);
-                $spread = $max_qty - $min_qty;
-
-                if ($spread == 0)
-                    $spread = 1;
-
-                $step = 250 / $spread; # Increase for bigger difference.
-
-                $context = array();
-
-                foreach ($popularity as $tag => $count) {
-                    $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
-
-                    $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
-                                       "popularity" => $count,
-                                       "name" => $tag,
-                                       "title" => sprintf($str, $count, fix($tag, true)),
-                                       "clean" => $tags[$tag],
-                                       "url" => url("tag/".$tags[$tag], $main));
-                }
-
-                usort($context, array($this, "sort_tags_name_asc"));
-                $main->display("pages".DIR."tags", array("tag_cloud" => $context), __("Tags", "tags"));
+                foreach ($also as $name => $clean)
+                    $names[] = $name;
             }
+
+            $popularity = array_count_values($names);
+
+            if (empty($popularity))
+                return $main->resort("pages".DIR."tags",
+                                     array("tag_cloud" => array()),
+                                     __("No Tags", "tags"));
+
+            $max_qty = max($popularity);
+            $min_qty = min($popularity);
+            $spread = $max_qty - $min_qty;
+
+            if ($spread == 0)
+                $spread = 1;
+
+            $step = 250 / $spread; # Increase for bigger difference.
+
+            $context = array();
+
+            foreach ($popularity as $tag => $count) {
+                $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
+
+                $context[] = array("size" => ceil(100 + (($count - $min_qty) * $step)),
+                                   "popularity" => $count,
+                                   "name" => $tag,
+                                   "title" => sprintf($str, $count, fix($tag, true)),
+                                   "clean" => $tags[$tag],
+                                   "url" => url("tag/".$tags[$tag], $main));
+            }
+
+            usort($context, array($this, "sort_tags_name_asc"));
+            $main->display("pages".DIR."tags", array("tag_cloud" => $context), __("Tags", "tags"));
         }
 
         public function metaWeblog_getPost($struct, $post) {
@@ -623,11 +619,11 @@
             if (empty($post->tags))
                 return $ids;
 
-            foreach ($post->tags as $key => $tag) {
+            foreach ($post->tags as $name => $clean) {
                 $results = SQL::current()->select("post_attributes",
                                                   array("post_id"),
                                                   array("name" => "tags",
-                                                        "value like" => self::tags_name_match($key),
+                                                        "value LIKE" => self::tags_name_match($name),
                                                         "post_id !=" => $post->id),
                                                   array("post_id DESC"),
                                                   array(),
@@ -641,27 +637,25 @@
         }
 
         public function list_tags($limit = 10, $order_by = "popularity", $order = "desc") {
-            $sql = SQL::current();
-
-            $attrs = $sql->select("posts",
-                                  "post_attributes.value",
-                                  array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
-                                  null,
-                                  array(),
-                                  null,
-                                  null,
-                                  null,
-                                  array(array("table" => "post_attributes",
-                                              "where" => "post_id = posts.id")));
+            $results = SQL::current()->select("posts",
+                                              "post_attributes.value",
+                                              array("post_attributes.name" => "tags", Post::statuses(), Post::feathers()),
+                                              null,
+                                              array(),
+                                              null,
+                                              null,
+                                              null,
+                                              array(array("table" => "post_attributes",
+                                                          "where" => "post_id = posts.id")))->fetchAll();
 
             $tags = array();
             $names = array();
 
-            while ($attr = $attrs->fetchObject()) {
-                $post_tags = self::tags_unserialize($attr->value);
-                $tags = array_merge($tags, $post_tags);
+            foreach($results as $result) {
+                $also = self::tags_unserialize($result["value"]);
+                $tags = array_merge($tags, $also);
 
-                foreach ($post_tags as $name => $clean)
+                foreach ($also as $name => $clean)
                     $names[] = $name;
             }
 
@@ -672,11 +666,9 @@
             $list = array();
 
             foreach ($popularity as $name => $number)
-                $list[$name] = array("name" => $name,
-                                     "popularity" => $number,
-                                     "percentage" => $number / array_sum($popularity),
-                                     "url" => urlencode($tags[$name]),
-                                     "clean" => $tags[$name]);
+                $list[] = array("name" => $name,
+                                "popularity" => $number,
+                                "clean" => $tags[$name]);
 
             usort($list, array($this, "sort_tags_".$order_by."_".$order));
 
