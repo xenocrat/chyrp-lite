@@ -125,7 +125,7 @@
                             array("pingbacks" => new Paginator(Pingback::find(array("placeholders" => true,
                                                                                     "where" => $where,
                                                                                     "params" => $params)),
-                                                               Config::current()->admin_per_page)));
+                                                               $admin->post_limit)));
         }
 
         public function manage_nav($navs) {
