@@ -63,13 +63,12 @@
                                               array("name" => "category_id",
                                                     "value" => $post->category_id,
                                                     "post_id !=" => $post->id),
-                                              array("ORDER BY" => "post_id DESC"),
+                                              array("post_id DESC"),
                                               array(),
                                               $limit)->fetchAll();
 
             foreach ($results as $result)
-                if (isset($result["post_id"]))
-                    $ids[] = $result["post_id"];
+                $ids[] = $result["post_id"];
 
             return $ids;
         }
