@@ -307,7 +307,6 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any posts."));
 
             fallback($_GET['query'], "");
-
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
             if (!empty($_GET['month']))
