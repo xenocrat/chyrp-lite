@@ -5,7 +5,7 @@
 <div class="tags standalone">
 <h2>{{ "Tag cloud" | translate }}</h2>
 {% for tag in tag_cloud %}
-<a class="tag" href="{{ tag.url }}" style="font-size: {{ tag.size }}%" title="{{ tag.title }}">{{ tag.name }}</a>
+<a class="tag" href="{{ tag.url }}" style="font-size: {{ tag.size + 100 }}%" title="{{ tag.title }}">{{ tag.name }}</a>
 {% endfor %}
 </div>
 {% else %}
