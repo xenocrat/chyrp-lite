@@ -159,15 +159,15 @@
                                      array("reason" => __("The category you specified was not found.", "categorize")),
                                      __("Invalid Category", "categorize"));
 
-            $attributes = SQL::current()->select("post_attributes",
-                                                 array("post_id"),
-                                                 array("name" => "category_id",
-                                                       "value" => $category->id));
+            $results = SQL::current()->select("post_attributes",
+                                              array("post_id"),
+                                              array("name" => "category_id",
+                                                    "value" => $category->id))->fetchAll();
 
             $ids = array();
 
-            foreach ($attributes->fetchAll() as $index => $row)
-                $ids[] = $row["post_id"];
+            foreach ($results as $result)
+                $ids[] = $result["post_id"];
 
             if (empty($ids))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
