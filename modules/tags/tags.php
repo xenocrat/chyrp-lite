@@ -310,6 +310,9 @@
         }
 
         public function admin_delete_tag($admin) {
+            if (!Visitor::current()->group->can("edit_post"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
+
             if (empty($_GET['clean']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
 
