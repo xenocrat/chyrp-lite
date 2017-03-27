@@ -45,16 +45,12 @@
 {{ comment.created_at | strftimeformat }}
 </td>
 {{ trigger.call("manage_comments_column", comment) }}
-{% if comment.editable() or comment.deletable() %}
-<td class="controls"{{ not comment.deletable() ? ' colspan="2"' : '' }}>
+<td class="controls">
 {{ comment.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
-<td class="controls"{{ not comment.editable() ? ' colspan="2"' : '' }}>
+<td class="controls">
 {{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
-{% else %}
-<td class="controls" colspan="2">&nbsp;</td>
-{% endif %}
 </tr>
 <tr class="comment_excerpt">
 <td colspan="5">{{ comment.body | truncate(100, "&hellip;") }}</td>
