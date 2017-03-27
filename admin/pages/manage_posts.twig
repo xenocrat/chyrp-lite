@@ -57,20 +57,12 @@
 {{ post.author.nick is defined ? post.author.nick : "" }}
 </td>
 {{ trigger.call("manage_posts_column", post) }}
-{% if post.editable() or post.deletable() %}
-{% if post.editable() %}
-<td class="controls"{{ not post.deletable() ? ' colspan="2"' : '' }}>
+<td class="controls">
 {{ post.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
-{% endif %}
-{% if post.deletable() %}
-<td class="controls"{{ not post.editable() ? ' colspan="2"' : '' }}>
+<td class="controls">
 {{ post.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
-{% endif %}
-{% else %}
-<td class="controls" colspan="2">&nbsp;</td>
-{% endif %}
 </tr>
 {% else %}
 <tr>
