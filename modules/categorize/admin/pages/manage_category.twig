@@ -35,8 +35,8 @@
 {% for category in categorize %}
 <tr id="category_{{ category.id }}">
 <td class="category_show emblem">
-{% if category.show_on_home %}<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
-{% else %}&nbsp;
+{% if category.show_on_home %}
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% endif %}
 </td>
 <td class="category_name name main">
