@@ -83,9 +83,9 @@
         }
 
         public function manage_posts_column($post) {
-            echo (isset($post->category->name))
-                ? '<td class="post_category value">'.fix($post->category->name).'</td>'
-                : '<td class="post_category value"></td>';
+            echo (isset($post->category->name)) ?
+                '<td class="post_category value">'.fix($post->category->name).'</td>' :
+                '<td class="post_category value"></td>' ;
         }
 
         public function post_options($fields, $post = null) {
