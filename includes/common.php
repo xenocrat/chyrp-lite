@@ -55,10 +55,6 @@
     # The string identifying this version.
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
 
-    # Constant: CACHE_TWIG
-    # Override DEBUG to enable Twig template caching.
-    define('CACHE_TWIG', true);
-
     # Constant: JAVASCRIPT
     # Are we serving a JavaScript file?
     if (!defined('JAVASCRIPT'))
@@ -123,6 +119,10 @@
     # Constant: THEMES_DIR
     # Absolute path to /themes.
     define('THEMES_DIR', MAIN_DIR.DIR."themes");
+
+    # Constant: CACHE_TWIG
+    # Enable Twig template caching.
+    define('CACHE_TWIG', is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig"));
 
     # Constant: UPDATE_XML
     # URL to the update feed.

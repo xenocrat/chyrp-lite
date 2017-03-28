@@ -44,10 +44,6 @@
          * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
-            $cache = (is_dir(CACHES_DIR.DIR."twig") and
-                        is_writable(CACHES_DIR.DIR."twig") and
-                            (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
-
             $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
             $config = Config::current();
@@ -62,11 +58,13 @@
 
             $loader = new Twig_Loader_Chain($chain);
 
-            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                              "strict_variables" => DEBUG,
-                                                              "charset" => "UTF-8",
-                                                              "cache" => $cache,
-                                                              "autoescape" => false));
+            $this->twig = new Twig_Environment($loader,
+                                               array("debug" => DEBUG,
+                                                     "strict_variables" => DEBUG,
+                                                     "charset" => "UTF-8",
+                                                     "cache" => (CACHE_TWIG ? CACHES_DIR.DIR."twig" : false),
+                                                     "autoescape" => false));
+
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
