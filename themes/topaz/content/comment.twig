@@ -11,9 +11,11 @@
 {{ comment.body }}
 {% endif %}
 </section>
+{% if comment.editable() or comment.deletable() %}
 <div class="doaction">
-{{ comment.edit_link("Edit" | translate) }} {{ comment.delete_link("Delete" | translate) }}
+{{ comment.edit_link() }} {{ comment.delete_link() }}
 </div>
+{% endif %}
 <div class="metadata">
 <cite>
 <a href="{{ url('comment/%d') | format(comment.id) }}" class="permalink">
