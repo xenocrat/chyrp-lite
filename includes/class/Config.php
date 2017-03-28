@@ -26,6 +26,7 @@
                 if (!is_int($setting))
                     $this->$setting = $value;
 
+            fallback($this->sql,              array());
             fallback($this->enabled_modules,  array());
             fallback($this->enabled_feathers, array());
             fallback($this->routes,           array());
