@@ -10,7 +10,6 @@
     define('CHYRP_VERSION',  "2017.02");
     define('CHYRP_CODENAME', "Swahili");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-    define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
     define('ADMIN',          false);
@@ -23,6 +22,7 @@
     define('MAIN_DIR',       dirname(__FILE__));
     define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
     define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
+    define('CACHE_TWIG',     false);
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
 

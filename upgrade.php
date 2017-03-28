@@ -10,7 +10,6 @@
     define('CHYRP_VERSION',  "2017.02");
     define('CHYRP_CODENAME', "Swahili");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-    define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
     define('ADMIN',          false);
@@ -26,6 +25,7 @@
     define('MODULES_DIR',    MAIN_DIR.DIR."modules");
     define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
     define('THEMES_DIR',     MAIN_DIR.DIR."themes");
+    define('CACHE_TWIG',     false);
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
 
