@@ -36,10 +36,13 @@
          * The class constructor is private so there is only one connection.
          *
          * Parameters:
-         *     $settings - An array of settings, or @true@ to silence errors.
+         *     $settings - An array of settings.
          */
         private function __construct($settings = array()) {
-            foreach (oneof(@Config::current()->sql, $settings) as $setting => $value)
+            if (class_exists("Config"))
+                fallback($settings, Config::current()->sql);
+
+            foreach ($settings as $setting => $value)
                 $this->$setting = $value;
 
             fallback($this->host);
