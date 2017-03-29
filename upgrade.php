@@ -26,6 +26,7 @@
     define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
     define('THEMES_DIR',     MAIN_DIR.DIR."themes");
     define('CACHE_TWIG',     false);
+    define('CACHE_THUMBS',   false);
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
 

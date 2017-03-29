@@ -23,6 +23,7 @@
     define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
     define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
     define('CACHE_TWIG',     false);
+    define('CACHE_THUMBS',   false);
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
 

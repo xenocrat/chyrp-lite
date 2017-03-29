@@ -124,6 +124,10 @@
     # Enable Twig template caching.
     define('CACHE_TWIG', is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig"));
 
+    # Constant: CACHE_THUMBS
+    # Enable image thumbnail caching.
+    define('CACHE_THUMBS', is_dir(CACHES_DIR.DIR."thumbs") and is_writable(CACHES_DIR.DIR."thumbs"));
+
     # Constant: UPDATE_XML
     # URL to the update feed.
     define('UPDATE_XML', "http://chyrplite.net/update.xml");
