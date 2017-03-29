@@ -107,11 +107,11 @@
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
     $cache_file = CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename;
 
-    if (isset($_GET['no_cache']) and $_GET['no_cache'] == "true" and file_exists($cache_file))
-        unlink($cache_file);
-
     # Serve a cache if it exists and the original image has not changed.
-    if (file_exists($cache_file) and filemtime($cache_file) > filemtime($filepath)) {
+    if (CACHE_THUMBS and (!isset($_GET['no_cache']) or $_GET['no_cache'] == "false") and
+        file_exists($cache_file) and
+        filemtime($cache_file) > filemtime($filepath)) {
+
         if (DEBUG)
             error_log("SERVING image thumbnail for ".$filename);
 
@@ -186,8 +186,7 @@
         imagesavealpha($thumbnail, true);
 
     # Generate the cache image.
-    if ((!isset($_GET['no_cache']) or $_GET['no_cache'] == "false") and
-        is_dir(CACHES_DIR.DIR."thumbs") and is_writable(CACHES_DIR.DIR."thumbs"))
+    if (CACHE_THUMBS and (!isset($_GET['no_cache']) or $_GET['no_cache'] == "false"))
         if ($done == "imagejpeg")
             $done($thumbnail, $cache_file, $quality);
         else
