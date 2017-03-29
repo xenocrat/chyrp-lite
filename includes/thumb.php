@@ -43,11 +43,6 @@
     if (!is_readable($filepath) or !is_file($filepath))
         show_404(__("Not Found"), __("File not found."));
 
-    list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
-
-    $crop_x = 0;
-    $crop_y = 0;
-
     function resize(&$crop_x, &$crop_y, &$new_width, &$new_height, $original_width, $original_height) {
         $xscale = ($new_width > 0) ? $new_width / $original_width : 0 ;
         $yscale = ($new_height > 0) ? $new_height / $original_height : 0 ;
@@ -97,17 +92,23 @@
         }
     }
 
-    # Determine the final scale of the thumbnail.
+    # Fetch source image metadata.
+    list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
+
+    $crop_x = 0;
+    $crop_y = 0;
+
+    # Call our function to determine the final scale of the thumbnail.
     resize($crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
 
-    # If it's already below the maximum, just redirect to it.
+    # Redirect to the original if the size is already less than requested.
     if ($original_width <= $new_width and $original_height <= $new_height)
         redirect($url);
 
     $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
     $cache_file = CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename;
 
-    # Serve a cache if it exists and the original image has not changed.
+    # Try to serve a cache file.
     if (CACHE_THUMBS and (!isset($_GET['no_cache']) or $_GET['no_cache'] == "false") and
         file_exists($cache_file) and
         filemtime($cache_file) > filemtime($filepath)) {
@@ -124,7 +125,7 @@
         exit;
     }
 
-    # Verify that the image is able to be thumbnailed, and prepare variables used later in the script.
+    # Verify image type is supported and prepare the source image resource.
     switch ($type) {
         case IMAGETYPE_GIF:
             if (imagetypes() & IMG_GIF) {
@@ -155,19 +156,19 @@
                 break;
             }
         default:
-            redirect($url); # Switch will flow through to here if image type is unsupported.
+            redirect($url); # Redirect if type is unsupported.
     }
 
     if (DEBUG)
         error_log("GENERATING image thumbnail for ".$filename);
 
-    # Create the final resized image.
+    # Create the destination image resource.
     $thumbnail = imagecreatetruecolor($new_width, $new_height);
 
     if ($done == "imagepng")
         imagealphablending($thumbnail, false);
 
-    # if square crop is desired, original dimensions need to be set to square ratio.
+    # Alter source dimensions for a square crop ratio.
     if ( isset($_GET['square']) ) {
         if ($original_width > $original_height) {
             $original_width = $original_height;
@@ -176,6 +177,7 @@
         }
     }
 
+    # Generate the resized image.
     imagecopyresampled($thumbnail, $image, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
 
     header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
@@ -185,14 +187,14 @@
     if ($done == "imagepng")
         imagesavealpha($thumbnail, true);
 
-    # Generate the cache image.
+    # Write the cache file.
     if (CACHE_THUMBS and (!isset($_GET['no_cache']) or $_GET['no_cache'] == "false"))
         if ($done == "imagejpeg")
             $done($thumbnail, $cache_file, $quality);
         else
             $done($thumbnail, $cache_file);
 
-    # Serve the image.
+    # Serve the image resource.
     if ($done == "imagejpeg")
         $done($thumbnail, null, $quality);
     else
