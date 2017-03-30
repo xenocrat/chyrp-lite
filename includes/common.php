@@ -73,7 +73,7 @@
     # Constant: AJAX
     # Is this being run from an AJAX request?
     if (!defined('AJAX'))
-        define('AJAX', !empty($_POST['ajax']));
+        define('AJAX', false);
 
     # Constant: XML_RPC
     # Is this being run from XML-RPC?
