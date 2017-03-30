@@ -147,27 +147,23 @@
 
     # Constant: HTTP_ACCEPT_DEFLATE
     # Does the user agent accept deflate encoding?
-    if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"))
-        define('HTTP_ACCEPT_DEFLATE', true);
-    else
-        define('HTTP_ACCEPT_DEFLATE', false);
+    define('HTTP_ACCEPT_DEFLATE',
+        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
+        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"));
 
     # Constant: HTTP_ACCEPT_GZIP
     # Does the user agent accept gzip encoding?
-    if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"))
-        define('HTTP_ACCEPT_GZIP', true);
-    else
-        define('HTTP_ACCEPT_GZIP', false);
+    define('HTTP_ACCEPT_GZIP',
+        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
+        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"));
 
     # Constant: USE_ZLIB
     # Use zlib to provide content compression? See Also: http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
-        if (!AJAX and (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib") and
-            !ini_get("zlib.output_compression") and (version_compare(PHP_VERSION, "5.4.6", ">=") or
-                                                     version_compare(PHP_VERSION, "5.4.0", "<")))
-            define('USE_ZLIB', true);
-        else
-            define('USE_ZLIB', false);
+        define('USE_ZLIB',
+            (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and
+            extension_loaded("zlib") and !ini_get("zlib.output_compression") and
+            (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<")));
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4.
@@ -180,18 +176,13 @@
         define('JSON_UNESCAPED_SLASHES', 0);
 
     # Start output buffering and set header.
-    if (USE_OB) {
-        if (USE_ZLIB)
+    if (USE_OB)
+        if (USE_ZLIB) {
             ob_start("ob_gzhandler");
-        else
+            header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+        } else {
             ob_start();
-
-        if (USE_ZLIB and HTTP_ACCEPT_DEFLATE)
-            header("Content-Encoding: deflate");
-
-        if (USE_ZLIB and HTTP_ACCEPT_GZIP)
-            header("Content-Encoding: gzip");
-    }
+        }
 
     # File: Error
     # Error handling functions.
