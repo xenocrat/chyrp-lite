@@ -1,10 +1,14 @@
 <?php
-    require_once "filecacher.php";
+    require_once "class".DIR."page_cacher.php";
+    require_once "class".DIR."feed_cacher.php";
 
     class Cacher extends Modules {
         public function __init() {
-            $config = Config::current();
-            $this->cacher = new FileCacher(self_url(), $config);
+            $this->exclude = Config::current()->cache_exclude;
+            $this->url     = rawurldecode(self_url());
+            $this->cachers = array(new PageCacher($this->url),
+                                   new FeedCacher($this->url));
+
             $this->prepare_cache_updaters();
         }
 
@@ -21,36 +25,21 @@
         }
 
         public function route_init($route) {
-            if (!empty($_POST) or
-                !($route->controller instanceof MainController) or
-                in_array($this->cacher->url, Config::current()->cache_exclude) or
-                $this->cancelled or
-                !$this->cacher->url_available() or
-                Flash::exists())
-                return;
-
-            $cache = $this->cacher->get($route);
-        
-            foreach($cache['headers'] as $header)
-                header($header);
-        
-            exit($cache['contents']);
+            if (!$this->cancelled and !in_array($this->url, $this->exclude))
+                foreach ($this->cachers as $cacher)
+                    $cacher->get($route);
         }
 
         public function end($route) {
-            if (!($route->controller instanceof MainController) or
-                in_array($this->cacher->url, Config::current()->cache_exclude) or
-                $this->cancelled or
-                $this->cacher->url_available() or
-                Flash::exists())
-                return;
-
-              $this->cacher->set(ob_get_contents());
+            if (!$this->cancelled and !in_array($this->url, $this->exclude))
+                foreach ($this->cachers as $cacher)
+                    $cacher->set($route);
         }
 
         public function prepare_cache_updaters() {
             $trigger = Trigger::current();
 
+            $regenerate_posts = array();
             $regenerate = array("add_post",
                                 "add_page",
                                 "update_post",
@@ -66,35 +55,32 @@
             foreach ($regenerate as $action)
                 $this->addAlias($action, "regenerate");
 
-            $regenerate_posts = array();
-
             $trigger->filter($regenerate_posts, "cacher_regenerate_posts_triggers");
 
             foreach ($regenerate_posts as $action)
-                $this->addAlias($action, "remove_post_cache");
+                $this->addAlias($action, "regenerate_posts");
         }
 
         public function regenerate() {
-            $this->cacher->regenerate();
+            foreach ($this->cachers as $cacher)
+                $cacher->regenerate();
         }
 
-        public function regenerate_local($user = null) {
-            $this->cacher->regenerate_local($user);
-        }
-
-        public function remove_caches_for($url) {
-            $this->cacher->remove_caches_for($url);
-        }
-
-        public function remove_post_cache($id) {
+        public function regenerate_posts($id) {
             $post = ($id instanceof Model) ? new Post($id->post_id) : new Post($id) ;
 
-            if (!$post->no_results)
-                $this->remove_caches_for(htmlspecialchars_decode($post->url()));
+            if (!$post->no_results) {
+                $url = rawurldecode($post->url());
+
+                foreach ($this->cachers as $cacher)
+                    $cacher->regenerate_url($url);
+            }
         }
 
         public function update_user($user) {
-            $this->regenerate_local(sanitize($user->login));
+            if (!$user->no_results)
+                foreach ($this->cachers as $cacher)
+                    $cacher->regenerate_user($user->id);
         }
 
         public function settings_nav($navs) {
