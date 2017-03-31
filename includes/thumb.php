@@ -116,7 +116,7 @@
         if (DEBUG)
             error_log("SERVING image thumbnail for ".$filename);
 
-        header("Last-Modified: ".gmdate('D, d M Y H:i:s', filemtime($cache_file)).' GMT');
+        header("Last-Modified: ".date("r", filemtime($cache_file)));
         header("Content-type: image/".($extension == "jpg" ? "jpeg" : $extension));
         header("Cache-Control: public");
         header("Expires: ".date("r", strtotime("+30 days")));
@@ -180,7 +180,7 @@
     # Generate the resized image.
     imagecopyresampled($thumbnail, $image, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
 
-    header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
+    header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Content-Type: ".$mime);
     header("Content-Disposition: inline; filename=".$filename.".".$extension);
 
