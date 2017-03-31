@@ -24,7 +24,7 @@
         }
 
         private function cacheable($route) {
-            return (MAIN and USE_OB and
+            return (MAIN and
                 ($route->controller instanceof MainController) and
                 empty($_POST) and
                 $route->controller->feed and
@@ -37,8 +37,13 @@
                 if (DEBUG)
                     error_log("SERVING feed cache for ".$this->url);
 
-                header("Content-Type: application/atom+xml; charset=UTF-8");
-                exit(file_get_contents($this->file));
+                $contents = @file_get_contents($this->file);
+
+                if ($contents !== false and $contents !== "") {
+                    header("Content-Type: application/atom+xml; charset=UTF-8");
+                    header("Last-Modified: ".date("r", filemtime($this->file)));
+                    exit($contents);
+                }
             }
         }
 
@@ -47,7 +52,10 @@
                 if (DEBUG)
                     error_log("GENERATING feed cache for ".$this->url);
 
-                file_put_contents($this->file, ob_get_contents());
+                $contents = ob_get_contents();
+
+                if ($contents !== false and $contents !== "")
+                    @file_put_contents($this->file, $contents);
             }
         }
 

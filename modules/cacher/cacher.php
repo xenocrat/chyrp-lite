@@ -9,7 +9,7 @@
             $this->cachers = array(new PageCacher($this->url),
                                    new FeedCacher($this->url));
 
-            $this->prepare_cache_updaters();
+            $this->prepare_cache_regenerators();
         }
 
         static function __install() {
@@ -36,16 +36,8 @@
                     $cacher->set($route);
         }
 
-        public function prepare_cache_updaters() {
+        public function prepare_cache_regenerators() {
             $trigger = Trigger::current();
-
-            $regenerate_posts = array();
-
-            $regenerate_users = array(
-                "update_user",
-                "preview_theme_started",
-                "preview_theme_stopped"
-            );
 
             $regenerate = array(
                 "add_post",
@@ -63,10 +55,18 @@
             foreach ($regenerate as $action)
                 $this->addAlias($action, "regenerate");
 
+            $regenerate_users = array(
+                "update_user",
+                "preview_theme_started",
+                "preview_theme_stopped"
+            );
+
             $trigger->filter($regenerate_users, "cacher_regenerate_users_triggers");
 
             foreach ($regenerate_users as $action)
                 $this->addAlias($action, "regenerate_users");
+
+            $regenerate_posts = array();
 
             $trigger->filter($regenerate_posts, "cacher_regenerate_posts_triggers");
 
