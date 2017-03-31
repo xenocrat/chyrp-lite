@@ -16,6 +16,7 @@
 
         private function available($route) {
             return (MAIN and
+                ($route->controller instanceof MainController) and
                 empty($_POST) and
                 $route->controller->feed and
                 !Flash::exists() and
@@ -24,6 +25,7 @@
 
         private function cacheable($route) {
             return (MAIN and USE_OB and
+                ($route->controller instanceof MainController) and
                 empty($_POST) and
                 $route->controller->feed and
                 !Flash::exists() and

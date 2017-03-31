@@ -40,20 +40,33 @@
             $trigger = Trigger::current();
 
             $regenerate_posts = array();
-            $regenerate = array("add_post",
-                                "add_page",
-                                "update_post",
-                                "update_page",
-                                "delete_post",
-                                "delete_page",
-                                "publish_post",
-                                "change_setting",
-                                "preview_theme");
+
+            $regenerate_users = array(
+                "update_user",
+                "preview_theme_started",
+                "preview_theme_stopped"
+            );
+
+            $regenerate = array(
+                "add_post",
+                "add_page",
+                "update_post",
+                "update_page",
+                "delete_post",
+                "delete_page",
+                "publish_post",
+                "change_setting"
+            );
 
             $trigger->filter($regenerate, "cacher_regenerate_triggers");
 
             foreach ($regenerate as $action)
                 $this->addAlias($action, "regenerate");
+
+            $trigger->filter($regenerate_users, "cacher_regenerate_users_triggers");
+
+            foreach ($regenerate_users as $action)
+                $this->addAlias($action, "regenerate_users");
 
             $trigger->filter($regenerate_posts, "cacher_regenerate_posts_triggers");
 
@@ -66,21 +79,23 @@
                 $cacher->regenerate();
         }
 
-        public function regenerate_posts($id) {
-            $post = ($id instanceof Model) ? new Post($id->post_id) : new Post($id) ;
+        public function regenerate_posts($model) {
+            $post = ($model instanceof Post) ? $model : new Post($model->post_id) ;
 
-            if (!$post->no_results) {
-                $url = rawurldecode($post->url());
+            if ($post->no_results)
+                return;
 
-                foreach ($this->cachers as $cacher)
-                    $cacher->regenerate_url($url);
-            }
+            $url = rawurldecode($post->url());
+
+            foreach ($this->cachers as $cacher)
+                $cacher->regenerate_url($url);
         }
 
-        public function update_user($user) {
-            if (!$user->no_results)
-                foreach ($this->cachers as $cacher)
-                    $cacher->regenerate_user($user->id);
+        public function regenerate_users($user = null) {
+            $id = (isset($user->id)) ? $user->id : Visitor::current()->id ;
+
+            foreach ($this->cachers as $cacher)
+                $cacher->regenerate_user($id);
         }
 
         public function settings_nav($navs) {
