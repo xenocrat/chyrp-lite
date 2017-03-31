@@ -1698,8 +1698,11 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
+            $trigger = Trigger::current();
+
             if (empty($_POST['theme'])) {
                 unset($_SESSION['theme']);
+                $trigger->call("preview_theme_stopped");
                 Flash::notice(__("Preview stopped."), "themes");
             }
 
@@ -1707,7 +1710,8 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
-            Flash::notice(__("Preview started."), "/");
+            $trigger->call("preview_theme_started");
+            Flash::notice(__("Preview started."), Config::current()->url);
         }
 
         /**
