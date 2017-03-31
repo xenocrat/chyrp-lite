@@ -6,7 +6,7 @@
             $this->url  = $url;
             $this->user = Visitor::current()->id;
             $this->path = $this->base.DIR.$this->user;
-            $this->file = $this->path.DIR.md5($this->url).".html";
+            $this->file = $this->path.DIR.token($this->url).".html";
 
             # If the directories do not exist and cannot be created, or are not writable, cancel execution.
             if (((!is_dir($this->base) and !@mkdir($this->base)) or !is_writable($this->base)) or
@@ -75,7 +75,7 @@
             if (DEBUG)
                 error_log("REGENERATING page caches for URL ".$url);
 
-            foreach ((array) glob($this->base.DIR."*".DIR.md5($url).".html") as $file)
+            foreach ((array) glob($this->base.DIR."*".DIR.token($url).".html") as $file)
                 @unlink($file);
         }
     }
