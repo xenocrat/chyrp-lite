@@ -77,7 +77,7 @@
         }
 
         public function regenerate_posts($model) {
-            $post = ($model instanceof Post) ? $model : new Post($model->post_id) ;
+            $post = ($model instanceof Post) ? $model : new Post($model->post_id, array("skip_where" => true)) ;
 
             if ($post->no_results)
                 return;
