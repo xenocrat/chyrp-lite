@@ -1,7 +1,4 @@
 <?php
-    require_once "class".DIR."page_cacher.php";
-    require_once "class".DIR."feed_cacher.php";
-
     class Cacher extends Modules {
         public function __init() {
             $this->exclude = Config::current()->cache_exclude;
