@@ -89,7 +89,7 @@
         }
 
         public function regenerate_users($user = null) {
-            $id = (isset($user->id)) ? $user->id : Visitor::current()->id ;
+            $id = (($user instanceof User) and !$user->no_results) ? $user->id : Visitor::current()->id ;
 
             foreach ($this->cachers as $cacher)
                 $cacher->regenerate_user($id);
