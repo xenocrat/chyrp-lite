@@ -227,7 +227,7 @@
         }
 
         public function admin_rename_tag($admin) {
-            if (!Visitor::current()->group->can("edit_post"))
+            if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
             if (empty($_GET['clean']))
@@ -277,7 +277,7 @@
         }
 
         public function admin_update_tag($admin) {
-            if (!Visitor::current()->group->can("edit_post"))
+            if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
@@ -310,7 +310,7 @@
         }
 
         public function admin_delete_tag($admin) {
-            if (!Visitor::current()->group->can("edit_post"))
+            if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
             if (empty($_GET['clean']))
@@ -325,7 +325,7 @@
         }
 
         public function admin_destroy_tag() {
-            if (!Visitor::current()->group->can("edit_post"))
+            if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
@@ -358,7 +358,7 @@
         }
 
         public function admin_bulk_tag($admin) {
-            if (!Visitor::current()->group->can("edit_post"))
+            if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add tags.", "tags"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
