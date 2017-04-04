@@ -276,6 +276,18 @@ Arguments:
 	$imports
 
 
+preview_theme_stopped
+---------------------
+Called from:
+	includes/controller/Admin.php on line 1705
+
+
+preview_theme_started
+---------------------
+Called from:
+	includes/controller/Admin.php on line 1713
+
+
 can_not_view_page
 -----------------
 Called from:
@@ -804,7 +816,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1980
+	includes/controller/Admin.php on line 1984
 
 
 manage_nav
@@ -812,7 +824,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2009
+	includes/controller/Admin.php on line 2013
 
 
 settings_nav
@@ -820,7 +832,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2034
+	includes/controller/Admin.php on line 2038
 
 
 extend_nav
@@ -828,7 +840,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2052
+	includes/controller/Admin.php on line 2056
 
 
 feed_url
@@ -1073,7 +1085,15 @@ cacher_regenerate_triggers
 Target:
 	$regenerate
 Called from:
-	modules/cacher/cacher.php on line 64
+	modules/cacher/cacher.php on line 50
+
+
+cacher_regenerate_users_triggers
+--------------------------------
+Target:
+	$regenerate_users
+Called from:
+	modules/cacher/cacher.php on line 61
 
 
 cacher_regenerate_posts_triggers
@@ -1081,7 +1101,7 @@ cacher_regenerate_posts_triggers
 Target:
 	$regenerate_posts
 Called from:
-	modules/cacher/cacher.php on line 71
+	modules/cacher/cacher.php on line 68
 
 
 comment
