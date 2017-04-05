@@ -1,19 +1,8 @@
 <?php 
     class Sitemap extends Modules {
-        # Array: $change_frequency
-        # An array of change frequencies used in the settings template.
-        public $change_frequency = array();
-
         public function __init() {
             if (!isset($_SERVER["DOCUMENT_ROOT"]))
                 cancel_module("sitemap", __("Sitemap module cannot determine the server's document root.", "sitemap"));
-
-            $this->change_frequency = array("hourly"  => __("hourly", "sitemap"),
-                                            "daily"   => __("daily", "sitemap"),
-                                            "weekly"  => __("weekly", "sitemap"),
-                                            "monthly" => __("monthly", "sitemap"),
-                                            "yearly"  => __("yearly", "sitemap"),
-                                            "never"   => __("never", "sitemap"));
 
             $this->addAlias("add_post", "make_sitemap", 8);
             $this->addAlias("update_post", "make_sitemap", 8);
@@ -44,7 +33,13 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $admin->display("pages".DIR."sitemap_settings");
+                return $admin->display("pages".DIR."sitemap_settings",
+                                       array("changefreq" => array("hourly"  => __("Hourly", "sitemap"),
+                                                                   "daily"   => __("Daily", "sitemap"),
+                                                                   "weekly"  => __("Weekly", "sitemap"),
+                                                                   "monthly" => __("Monthly", "sitemap"),
+                                                                   "yearly"  => __("Yearly", "sitemap"),
+                                                                   "never"   => __("Never", "sitemap"))));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -69,7 +64,7 @@
             if ($this->cancelled)
                 return;
 
-            $result = SQL::current()->select("posts",
+            $results = SQL::current()->select("posts",
                                              "posts.id",
                                              array("posts.status" => "public"),
                                              array("posts.id DESC"),
@@ -77,14 +72,14 @@
 
             $ids = array();
 
-            foreach ($result as $index => $row)
-                $ids[] = $row["id"];
+            foreach ($results as $result)
+                $ids[] = $result["id"];
 
             if (!empty($ids))
                 fallback($posts, Post::find(array("where" => array("id" => $ids))));
             else
                 $posts = array();
-          
+
             if (!is_array($posts))
                 $posts = $posts->paginated;
 
@@ -94,41 +89,42 @@
             $config = Config::current();
             $settings = $config->module_sitemap;
 
-            $output = "<?xml version='1.0' encoding='UTF-8'?>".PHP_EOL;
-            $output.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
+            $xml = "<?xml version='1.0' encoding='UTF-8'?>".PHP_EOL;
+            $xml.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
 
-            $output.= "  <url>\n".
-                      "    <loc>".$config->url."/</loc>\n".
-                      "    <lastmod>".$posts[0]->updated_at."</lastmod>\n".
-                      "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
-                      "  </url>\n".
-                      "  <url>\n".
-                      "    <loc>".url("archive/", MainController::current())."</loc>\n".
-                      "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
-                      "  </url>\n";
+            $xml.= "  <url>\n".
+                   "    <loc>".$config->url."/</loc>\n".
+                   "    <lastmod>".$posts[0]->updated_at."</lastmod>\n".
+                   "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
+                   "  </url>\n".
+                   "  <url>\n".
+                   "    <loc>".url("archive/", MainController::current())."</loc>\n".
+                   "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
+                   "  </url>\n";
 
             foreach ($posts as $post) {
                 $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
                 $priority = ($post->pinned) ? "    <priority>1.0</priority>\n" : "" ;
 
-                $output.= "  <url>\n".
-                          "    <loc>".$post->url()."</loc>\n".
-                          "    <lastmod>".$updated."</lastmod>\n".
-                          "    <changefreq>".$settings["posts_changefreq"]."</changefreq>\n".$priority.
-                          "  </url>\n";
+                $xml.= "  <url>\n".
+                       "    <loc>".$post->url()."</loc>\n".
+                       "    <lastmod>".$updated."</lastmod>\n".
+                       "    <changefreq>".$settings["posts_changefreq"]."</changefreq>\n".$priority.
+                       "  </url>\n";
             }
 
             foreach ($pages as $page) {
                 $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
 
-                $output.= "  <url>\n".
-                          "    <loc>".$page->url()."</loc>\n".
-                          "    <lastmod>".$updated."</lastmod>\n".
-                          "    <changefreq>".$settings["pages_changefreq"]."</changefreq>\n".
-                          "  </url>\n";
+                $xml.= "  <url>\n".
+                       "    <loc>".$page->url()."</loc>\n".
+                       "    <lastmod>".$updated."</lastmod>\n".
+                       "    <changefreq>".$settings["pages_changefreq"]."</changefreq>\n".
+                       "  </url>\n";
             }
 
-            $output.= "</urlset>";
-            @file_put_contents($_SERVER["DOCUMENT_ROOT"].DIR."sitemap.xml", $output);
+            $xml.= "</urlset>";
+
+            @file_put_contents($_SERVER["DOCUMENT_ROOT"].DIR."sitemap.xml", $xml);
         }
     }
