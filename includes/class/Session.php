@@ -17,8 +17,8 @@
          * Returns: @true@ unless it detects a self-identified bot.
          */
         static function open() {
-            return !(self::$deny = preg_match("/(bot|crawler|slurp|spider)\b/i",
-                                              oneof(@$_SERVER['HTTP_USER_AGENT'], "")));
+            self::$deny = preg_match("/(bot|crawler|slurp|spider)\b/i", oneof(@$_SERVER['HTTP_USER_AGENT'], ""));
+            return true;
         }
 
         /**
@@ -54,15 +54,14 @@
          *     $data - Data to write.
          */
         static function write($id, $data) {
-            if (self::$deny or empty($data) or $data == self::$data)
-                return;
-
-            SQL::current()->replace("sessions",
-                                    array("id"),
-                                    array("id" => $id,
-                                          "data" => $data,
-                                          "user_id" => Visitor::current()->id,
-                                          "updated_at" => datetime()));
+            if (!self::$deny and !empty($data) and $data != self::$data)
+                SQL::current()->replace("sessions",
+                                        array("id"),
+                                        array("id" => $id,
+                                              "data" => $data,
+                                              "user_id" => Visitor::current()->id,
+                                              "updated_at" => datetime()));
+            return true;
         }
 
         /**
@@ -73,10 +72,8 @@
          *     $id - Session ID.
          */
         static function destroy($id) {
-            if (SQL::current()->delete("sessions", array("id" => $id)))
-                return true;
-
-            return false;
+            SQL::current()->delete("sessions", array("id" => $id));
+            return true;
         }
 
         /**
