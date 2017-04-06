@@ -4,8 +4,15 @@
             if (!isset($_SERVER["DOCUMENT_ROOT"]))
                 cancel_module("sitemap", __("Sitemap module cannot determine the server's document root.", "sitemap"));
 
-            $this->addAlias("add_post", "make_sitemap", 8);
-            $this->addAlias("update_post", "make_sitemap", 8);
+            $actions = array("add_post",
+                             "add_page",
+                             "update_post",
+                             "update_page",
+                             "delete_post",
+                             "delete_page");
+
+            foreach ($actions as $action)
+                $this->addAlias($action, "make_sitemap", 8);
         }
 
         static function __install() {
@@ -65,10 +72,10 @@
                 return;
 
             $results = SQL::current()->select("posts",
-                                             "posts.id",
-                                             array("posts.status" => "public"),
-                                             array("posts.id DESC"),
-                                             array())->fetchAll();
+                                              "id",
+                                              array("status" => "public"),
+                                              array("id DESC"),
+                                              array())->fetchAll();
 
             $ids = array();
 
@@ -76,12 +83,9 @@
                 $ids[] = $result["id"];
 
             if (!empty($ids))
-                fallback($posts, Post::find(array("where" => array("id" => $ids))));
+                $posts = Post::find(array("where" => array("id" => $ids)));
             else
                 $posts = array();
-
-            if (!is_array($posts))
-                $posts = $posts->paginated;
 
             $pages = Page::find(array("where" => array("show_in_list" => true),
                                       "order" => "list_order ASC"));
@@ -89,36 +93,32 @@
             $config = Config::current();
             $settings = $config->module_sitemap;
 
-            $xml = "<?xml version='1.0' encoding='UTF-8'?>".PHP_EOL;
+            $xml = "<?xml version='1.0' encoding='UTF-8'?>"."\n";
             $xml.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
 
             $xml.= "  <url>\n".
                    "    <loc>".$config->url."/</loc>\n".
-                   "    <lastmod>".$posts[0]->updated_at."</lastmod>\n".
-                   "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
-                   "  </url>\n".
-                   "  <url>\n".
-                   "    <loc>".url("archive/", MainController::current())."</loc>\n".
+                   "    <lastmod>".when("c", time())."</lastmod>\n".
                    "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
                    "  </url>\n";
 
             foreach ($posts as $post) {
-                $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
-                $priority = ($post->pinned) ? "    <priority>1.0</priority>\n" : "" ;
+                $lastmod = ($post->updated) ? $post->updated_at : $post->created_at ;
 
                 $xml.= "  <url>\n".
                        "    <loc>".$post->url()."</loc>\n".
-                       "    <lastmod>".$updated."</lastmod>\n".
-                       "    <changefreq>".$settings["posts_changefreq"]."</changefreq>\n".$priority.
+                       "    <lastmod>".when("c", $lastmod)."</lastmod>\n".
+                       "    <changefreq>".$settings["posts_changefreq"]."</changefreq>\n".
+                       "    <priority>".(($post->pinned) ? "1.0" : "0.5")."</priority>\n".
                        "  </url>\n";
             }
 
             foreach ($pages as $page) {
-                $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
+                $lastmod = ($page->updated) ? $page->updated_at : $page->created_at ;
 
                 $xml.= "  <url>\n".
                        "    <loc>".$page->url()."</loc>\n".
-                       "    <lastmod>".$updated."</lastmod>\n".
+                       "    <lastmod>".when("c", $lastmod)."</lastmod>\n".
                        "    <changefreq>".$settings["pages_changefreq"]."</changefreq>\n".
                        "  </url>\n";
             }
