@@ -74,8 +74,7 @@
             $results = SQL::current()->select("posts",
                                               "id",
                                               array("status" => "public"),
-                                              array("id DESC"),
-                                              array())->fetchAll();
+                                              array("id DESC"))->fetchAll();
 
             $ids = array();
 
