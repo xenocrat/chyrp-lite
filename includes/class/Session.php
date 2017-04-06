@@ -14,10 +14,12 @@
 
         /**
          * Function: open
-         * Returns: @true@ unless it detects a self-identified bot.
+         * Decides if the session should be denied.
          */
         static function open() {
-            self::$deny = preg_match("/(bot|crawler|slurp|spider)\b/i", oneof(@$_SERVER['HTTP_USER_AGENT'], ""));
+            self::$deny = (isset($_SERVER['HTTP_USER_AGENT']) and
+                           preg_match("/(bot|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
+
             return true;
         }
 
@@ -61,6 +63,7 @@
                                               "data" => $data,
                                               "user_id" => Visitor::current()->id,
                                               "updated_at" => datetime()));
+
             return true;
         }
 
@@ -84,6 +87,7 @@
             SQL::current()->delete("sessions",
                                    "created_at <= :thirty_days OR data = '' OR data IS NULL",
                                    array(":thirty_days" => datetime(strtotime("-30 days"))));
+
             return true;
         }
     }
