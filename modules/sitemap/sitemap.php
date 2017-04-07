@@ -34,8 +34,6 @@
         }
 
         public function admin_sitemap_settings($admin) {
-            $config = Config::current();
-
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
@@ -55,10 +53,10 @@
             fallback($_POST['pages_changefreq'], "yearly");
             fallback($_POST['posts_changefreq'], "monthly");
 
-            $config->set("module_sitemap",
-                         array("blog_changefreq" => $_POST['blog_changefreq'],
-                               "pages_changefreq" => $_POST['pages_changefreq'],
-                               "posts_changefreq" => $_POST['posts_changefreq']));
+            Config::current()->set("module_sitemap",
+                                   array("blog_changefreq" => $_POST['blog_changefreq'],
+                                         "pages_changefreq" => $_POST['pages_changefreq'],
+                                         "posts_changefreq" => $_POST['posts_changefreq']));
 
             Flash::notice(__("Settings updated."), "sitemap_settings");
         }
@@ -92,7 +90,7 @@
             $config = Config::current();
             $settings = $config->module_sitemap;
 
-            $xml = "<?xml version='1.0' encoding='UTF-8'?>"."\n";
+            $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             $xml.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
 
             $xml.= "  <url>\n".
