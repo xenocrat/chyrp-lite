@@ -1,17 +1,17 @@
 <?php
     class Maptcha extends Modules {
         static function __install() {
-            Config::current()->set("maptcha_hashkey", random(32));
+            Config::current()->set("module_maptcha", array("maptcha_hashkey" => random(32)));
         }
 
         static function __uninstall() {
-            Config::current()->remove("maptcha_hashkey");
+            Config::current()->remove("module_maptcha");
         }
     }
 
     class MaptchaCaptcha implements Captcha {
         static function getCaptcha() {
-            $maptcha_hashkey = Config::current()->maptcha_hashkey;
+            $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
             $x = rand(1,9);
             $y = rand(1,9);
@@ -23,7 +23,7 @@
         }
 
         static function verifyCaptcha() {
-            $maptcha_hashkey = Config::current()->maptcha_hashkey;
+            $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
             if (!isset($_POST['maptcha_response']) or !isset($_POST['maptcha_challenge']))
                 return false;
