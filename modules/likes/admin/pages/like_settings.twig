@@ -10,19 +10,19 @@
 <label for="likeImage">{{ "Like Button Image" | translate("likes") }}</label>
 <select name="likeImage" onchange="$('#likeImage_preview').attr('src', $(this).val());">
 {% for key, val in modules['likes'].like_images() %}
-<option value="{{ val | fix(true) }}"{{ val | selected(site.module_like.likeImage) }}>{{ key | split(".") | first | camelize(true) }}</option>
+<option value="{{ val | fix(true) }}"{{ val | selected(site.module_likes.likeImage) }}>{{ key | split(".") | first | camelize(true) }}</option>
 {% endfor %}
 </select>
-<img id="likeImage_preview" src="{{ site.module_like.likeImage }}" alt="{{ 'Likes Image' | translate('likes') }}">
+<img id="likeImage_preview" src="{{ site.module_likes.likeImage }}" alt="{{ 'Likes Image' | translate('likes') }}">
 </p>
 <p>
 <label for="likeWithText">{{ "Like With Text" | translate("likes") }}</label>
-<input type="checkbox" class="checkbox" name="likeWithText"{{ site.module_like.likeWithText | checked }}>
+<input type="checkbox" class="checkbox" name="likeWithText"{{ site.module_likes.likeWithText | checked }}>
 <small>{{ "Enables text descriptions in like/unlike links." | translate("likes") }}</small>
 </p>
 <p>
 <label for="showOnFront">{{ "Show On Front Page" | translate("likes") }}</label>
-<input type="checkbox" class="checkbox" name="showOnFront"{{ site.module_like.showOnFront | checked }}>
+<input type="checkbox" class="checkbox" name="showOnFront"{{ site.module_likes.showOnFront | checked }}>
 <small>{{ "Enables like functionality on front page posts." | translate("likes") }}</small>
 </p>
 <p class="buttons">

@@ -14,7 +14,7 @@
             Group::add_permission("like_post", "Like Posts");
             Group::add_permission("unlike_post", "Unlike Posts");
 
-            $config->set("module_like",
+            $config->set("module_likes",
                          array("showOnFront" => true,
                                "likeWithText" => false,
                                "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg"));
@@ -26,7 +26,7 @@
 
             Group::remove_permission("like_post");
             Group::remove_permission("unlike_post");
-            Config::current()->remove("module_like");
+            Config::current()->remove("module_likes");
         }
 
         public function list_permissions($names = array()) {
@@ -49,7 +49,7 @@
 
             fallback($_POST['likeImage'], $config->chyrp_url."/modules/likes/images/pink.svg");
 
-            $config->set("module_like",
+            $config->set("module_likes",
                          array("showOnFront" => isset($_POST['showOnFront']),
                                "likeWithText" => isset($_POST['likeWithText']),
                                "likeImage" => $_POST['likeImage']));
@@ -203,9 +203,9 @@
             $config = Config::current();
             $route = Route::current();
             $visitor = Visitor::current();
-            $module_like = $config->module_like;
+            $settings = $config->module_likes;
 
-            if (($module_like["showOnFront"] == false and $route->action == "index") or $post->no_results)
+            if (($settings["showOnFront"] == false and $route->action == "index") or $post->no_results)
                 return;
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
@@ -216,9 +216,9 @@
                                 $config->url."/?action=like&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
-                                "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
+                                "<img src=\"".$settings["likeImage"]."\" alt='Likes icon'>";
 
-                    if ($module_like["likeWithText"]) {
+                    if ($settings["likeWithText"]) {
                         $html.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $html.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
                     }
@@ -241,9 +241,9 @@
                                 $config->url."/?action=unlike&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
-                                "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
+                                "<img src=\"".$settings["likeImage"]."\" alt='Likes icon'>";
 
-                    if ($module_like["likeWithText"]) {
+                    if ($settings["likeWithText"]) {
                         $html.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $html.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
                     }
