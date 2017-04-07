@@ -494,7 +494,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 684
+	modules/comments/comments.php on line 669
 Arguments:
 	$comment
 
@@ -502,7 +502,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 198
+	modules/comments/model/Comment.php on line 201
 Arguments:
 	$new
 
@@ -510,7 +510,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 266
+	modules/comments/model/Comment.php on line 269
 Arguments:
 	$comment, $this
 
@@ -1085,7 +1085,7 @@ cacher_regenerate_triggers
 Target:
 	$regenerate
 Called from:
-	modules/cacher/cacher.php on line 50
+	modules/cacher/cacher.php on line 48
 
 
 cacher_regenerate_users_triggers
@@ -1093,7 +1093,7 @@ cacher_regenerate_users_triggers
 Target:
 	$regenerate_users
 Called from:
-	modules/cacher/cacher.php on line 61
+	modules/cacher/cacher.php on line 59
 
 
 cacher_regenerate_posts_triggers
@@ -1101,7 +1101,7 @@ cacher_regenerate_posts_triggers
 Target:
 	$regenerate_posts
 Called from:
-	modules/cacher/cacher.php on line 68
+	modules/cacher/cacher.php on line 66
 
 
 comment
@@ -1117,4 +1117,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 383
+	modules/comments/model/Comment.php on line 386
