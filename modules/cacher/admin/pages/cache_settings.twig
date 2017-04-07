@@ -8,7 +8,7 @@
 <fieldset>
 <p>
 <label for="cache_expire">{{ "Expire Cache After&hellip;" | translate("cacher") }}</label>
-<input class="text digits" type="number" name="cache_expire" value="{{ site.cache_expire | fix(true) }}" id="cache_expire">
+<input class="text digits" type="number" name="cache_expire" value="{{ site.module_cacher.cache_expire | fix(true) }}" id="cache_expire">
 <span class="sub">{{ "(seconds)" | translate("cacher") }}</span>
 </p>
 <p>
@@ -20,7 +20,7 @@
 <p>
 <label for="cache_exclude_0">{{ "Exclude URLs" | translate("cacher") }}</label>
 <input class="text" type="url" name="cache_exclude[0]" value="" id="cache_exclude_0">
-{% for exclusion in site.cache_exclude %}
+{% for exclusion in site.module_cacher.cache_exclude %}
 <input class="text" type="url" name="cache_exclude[{{ loop.index }}]" value="{{ exclusion | fix('true') }}" id="cache_exclude_{{ loop.index }}">
 {% endfor %}
 <small>

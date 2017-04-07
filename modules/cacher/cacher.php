@@ -1,7 +1,7 @@
 <?php
     class Cacher extends Modules {
         public function __init() {
-            $this->exclude = Config::current()->cache_exclude;
+            $this->exclude = Config::current()->module_cacher["cache_exclude"];
             $this->url     = rawurldecode(self_url());
             $this->cachers = array(new PageCacher($this->url),
                                    new FeedCacher($this->url));
@@ -10,15 +10,13 @@
         }
 
         static function __install() {
-            $config = Config::current();
-            $config->set("cache_expire", 3600);
-            $config->set("cache_exclude", array());
+            Config::current()->set("module_cacher",
+                                   array("cache_expire" => 3600,
+                                         "cache_exclude" => array()));
         }
 
         static function __uninstall() {
-            $config = Config::current();
-            $config->remove("cache_expire");
-            $config->remove("cache_exclude");
+            Config::current()->remove("module_cacher");
         }
 
         public function route_init($route) {
@@ -118,9 +116,9 @@
             fallback($_POST['cache_expire'], 3600);
             fallback($_POST['cache_exclude'], array());
 
-            $config = Config::current();
-            $config->set("cache_expire", (int) $_POST['cache_expire']);
-            $config->set("cache_exclude", array_filter($_POST['cache_exclude']));
+            Config::current()->set("module_cacher",
+                                   array("cache_expire" => (int) $_POST['cache_expire'],
+                                         "cache_exclude" => array_filter($_POST['cache_exclude'])));
 
             Flash::notice(__("Settings updated."), "cache_settings");
         }

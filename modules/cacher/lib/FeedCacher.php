@@ -2,7 +2,7 @@
     class FeedCacher {
         public function __construct($url) {
             $this->base = CACHES_DIR.DIR."feeds";
-            $this->life = Config::current()->cache_expire;
+            $this->life = Config::current()->module_cacher["cache_expire"];
             $this->url  = $url;
             $this->user = Visitor::current()->id;
             $this->path = $this->base.DIR.$this->user;
