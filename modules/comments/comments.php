@@ -10,16 +10,15 @@
         }
 
         static function __install() {
-            $config = Config::current();
-
             Comment::install();
 
-            $config->set("default_comment_status", "denied");
-            $config->set("allowed_comment_html", array("strong", "em", "blockquote", "code", "pre", "a"));
-            $config->set("comments_per_page", 25);
-            $config->set("akismet_api_key", null);
-            $config->set("auto_reload_comments", 30);
-            $config->set("enable_reload_comments", false);
+            Config::current()->set("module_comments",
+                                   array("default_comment_status" => "denied",
+                                         "allowed_comment_html" => array("strong", "em", "blockquote", "code", "pre", "a"),
+                                         "comments_per_page" => 25,
+                                         "akismet_api_key" => null,
+                                         "auto_reload_comments" => 30,
+                                         "enable_reload_comments" => false));
 
             Group::add_permission("add_comment", "Add Comments");
             Group::add_permission("add_comment_private", "Add Comments to Private Posts");
@@ -33,17 +32,10 @@
         }
 
         static function __uninstall($confirm) {
-            $config = Config::current();
-
             if ($confirm)
                 Comment::uninstall();
 
-            $config->remove("default_comment_status");
-            $config->remove("allowed_comment_html");
-            $config->remove("comments_per_page");
-            $config->remove("akismet_api_key");
-            $config->remove("auto_reload_comments");
-            $config->remove("enable_reload_comments");
+            Config::current()->remove("module_comments");
 
             Group::remove_permission("add_comment");
             Group::remove_permission("add_comment_private");
@@ -341,8 +333,8 @@
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            fallback($_POST['allowed_comment_html'], "");
             fallback($_POST['default_comment_status'], "denied");
+            fallback($_POST['allowed_comment_html'], "");
             fallback($_POST['comments_per_page'], 25);
             fallback($_POST['auto_reload_comments'], 30);
 
@@ -359,21 +351,24 @@
             $allowed_comment_html = array_diff($allowed_comment_html, array(""));
 
             $config = Config::current();
-            $config->set("allowed_comment_html", $allowed_comment_html);
-            $config->set("default_comment_status", $_POST['default_comment_status']);
-            $config->set("comments_per_page", (int) $_POST['comments_per_page']);
-            $config->set("auto_reload_comments", (int) $_POST['auto_reload_comments']);
-            $config->set("enable_reload_comments", isset($_POST['enable_reload_comments']));
 
             if (!empty($_POST['akismet_api_key'])) {
                 $akismet_api_key = trim($_POST['akismet_api_key']);
                 $akismet = new Akismet($config->url, $akismet_api_key);
 
-                if (!$akismet->isKeyValid())
-                    Flash::warning(__("Invalid Akismet API key."), "comment_settings");
-                else
-                    $config->set("akismet_api_key", $akismet_api_key);
+                if (!$akismet->isKeyValid()) {
+                    Flash::warning(__("Invalid Akismet API key."));
+                    unset($akismet_api_key);
+                }
             }
+
+            $config->set("module_comments",
+                         array("default_comment_status" => $_POST['default_comment_status'],
+                               "allowed_comment_html" => $allowed_comment_html,
+                               "comments_per_page" => (int) $_POST['comments_per_page'],
+                               "akismet_api_key" => (isset($akismet_api_key) ? $akismet_api_key : null),
+                               "auto_reload_comments" => (int) $_POST['auto_reload_comments'],
+                               "enable_reload_comments" => isset($_POST['enable_reload_comments'])));
 
             Flash::notice(__("Settings updated."), "comment_settings");
         }
@@ -461,7 +456,7 @@
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
                                                                                   "params" => $params)),
-                                                              Config::current()->admin_per_page)));
+                                                              $admin->post_limit)));
         }
 
         public function admin_bulk_comments() {
@@ -490,7 +485,6 @@
             $false_negatives = array();
 
             $sql = SQL::current();
-            $config = Config::current();
 
             if (isset($_POST['deny'])) {
                 foreach ($comments as $comment) {
@@ -539,7 +533,7 @@
                 Flash::notice(__("Selected comments marked as spam.", "comments"));
             }
 
-            if (!empty($config->akismet_api_key)) {
+            if (!empty(Config::current()->module_comments["akismet_api_key"])) {
                 if (!empty($false_positives))
                     self::reportHam($false_positives);
 
@@ -551,12 +545,7 @@
         }
 
         public function ajax() {
-            $config  = Config::current();
-            $sql     = SQL::current();
-            $trigger = Trigger::current();
-            $visitor = Visitor::current();
-            $theme   = Theme::current();
-            $main    = MainController::current();
+            $main = MainController::current();
 
             switch($_POST['action']) {
                 case "reload_comments":
@@ -573,16 +562,13 @@
                     $ids = array();
 
                     if ($post->latest_comment > $last_comment) {
-                        $new_comments = $sql->select("comments",
-                                                     "id, created_at",
-                                                     array("post_id" => $post->id,
-                                                           "created_at >" => $last_comment,
-                                                           "status not" => "spam", "status != 'denied' OR (
-                                                              (user_id != 0 AND user_id = :visitor_id) OR (
-                                                                    id IN ".self::visitor_comments()."))"
-                                                           ),
-                                                     "created_at ASC",
-                                                     array(":visitor_id" => $visitor->id));
+                        $new_comments = SQL::current()->select("comments",
+                                                               "id, created_at",
+                                                               array("post_id" => $post->id,
+                                                                     "created_at >" => $last_comment,
+                                                                     "status not" => "spam",
+                                                                     self::visitor_comments()),
+                                                               array("created_at ASC"));
 
                         while ($the_comment = $new_comments->fetchObject()) {
                             $ids[] = $the_comment->id;
@@ -642,7 +628,6 @@
         }
 
         public function view_feed($context) {
-            $config = Config::current();
             $trigger = Trigger::current();
 
             if (!isset($context["post"]))
@@ -659,7 +644,7 @@
 
             $atom = new AtomFeed();
 
-            $atom->open($config->name,
+            $atom->open(Config::current()->name,
                         $subtitle,
                         null,
                         $latest_timestamp);
@@ -710,10 +695,9 @@
             $counts = SQL::current()->select("comments",
                                              array("COUNT(post_id) AS total", "post_id as post_id"),
                                              array("status not" => "spam",
-                                                   "status != 'denied' OR
-                                                   ((user_id != 0 AND user_id = :visitor_id) OR (id IN ".self::visitor_comments()."))"),
+                                                   self::visitor_comments()),
                                              null,
-                                             array(":visitor_id" => Visitor::current()->id),
+                                             array(),
                                              null,
                                              null,
                                              "post_id");
@@ -734,12 +718,10 @@
 
             $times = SQL::current()->select("comments",
                                             array("MAX(created_at) AS latest", "post_id"),
-                                            array("status not" => "spam", "status != 'denied' OR (
-                                                     (user_id != 0 AND user_id = :visitor_id) OR (
-                                                           id IN ".self::visitor_comments()."))"
-                                                 ),
+                                            array("status not" => "spam",
+                                                  self::visitor_comments()),
                                             null,
-                                            array(":visitor_id" => Visitor::current()->id),
+                                            array(),
                                             null,
                                             null,
                                             "post_id");
@@ -757,10 +739,9 @@
             $counts = SQL::current()->select("comments",
                                              array("COUNT(user_id) AS total", "user_id as user_id"),
                                              array("status not" => "spam",
-                                                   "status != 'denied' OR
-                                                   ((user_id != 0 AND user_id = :visitor_id) OR (id IN ".self::visitor_comments()."))"),
+                                                   self::visitor_comments()),
                                              null,
-                                             array(":visitor_id" => Visitor::current()->id),
+                                             array(),
                                              null,
                                              null,
                                              "user_id");
@@ -780,22 +761,20 @@
                 return;
 
             $options["where"]["status not"] = "spam";
-            $options["where"][] = "status != 'denied' OR (
-                                 (user_id != 0 AND user_id = :visitor_id) OR (
-                                       id IN ".self::visitor_comments()."))";
+            $options["where"][] = self::visitor_comments();
             $options["order"] = "created_at ASC";
-            $options["params"][":visitor_id"] = Visitor::current()->id;
         }
 
         private function visitor_comments() {
-            return empty($_SESSION['comments']) ? "(0)" : QueryBuilder::build_list($_SESSION['comments']);
+            $list = empty($_SESSION['comments']) ? "(0)" : QueryBuilder::build_list($_SESSION['comments']) ;
+            return "status != 'denied' OR ((user_id != 0 AND user_id = ".((int) Visitor::current()->id).") OR (id IN ".$list."))";
         }
 
         private function reportHam($comments) {
             $config = Config::current();
 
             foreach($comments as $comment) {
-                $akismet = new Akismet($config->url, $config->akismet_api_key);
+                $akismet = new Akismet($config->url, $config->module_comments["akismet_api_key"]);
                 $akismet->setCommentAuthor($comment->author);
                 $akismet->setCommentAuthorEmail($comment->author_email);
                 $akismet->setCommentAuthorURL($comment->author_url);
@@ -811,7 +790,7 @@
             $config = Config::current();
 
             foreach($comments as $comment) {
-                $akismet = new Akismet($config->url, $config->akismet_api_key);
+                $akismet = new Akismet($config->url, $config->module_comments["akismet_api_key"]);
                 $akismet->setCommentAuthor($comment->author);
                 $akismet->setCommentAuthorEmail($comment->author_email);
                 $akismet->setCommentAuthorURL($comment->author_url);
@@ -828,8 +807,6 @@
 
             if (!isset($chyrp->comment))
                 return;
-
-            $sql = SQL::current();
 
             foreach ($chyrp->comment as $comment) {
                 $chyrp = $comment->children("http://chyrp.net/export/1.0/");
