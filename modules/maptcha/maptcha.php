@@ -17,7 +17,7 @@
             $y = rand(1,9);
 
             return "\n".
-                   '<label for="maptcha">'._f("How much is %d + %d ?", array($x, $y), "maptcha").'</label>'."\n".
+                   '<label for="maptcha_response">'._f("How much is %d + %d ?", array($x, $y), "maptcha").'</label>'."\n".
                    '<input type="number" name="maptcha_response" value="" placeholder="'.__("Yay mathemetics!", "maptcha").'">'."\n".
                    '<input type="hidden" name="maptcha_challenge" value="'.sha1(strval($x + $y).$maptcha_hashkey).'">'."\n";
         }
@@ -28,9 +28,6 @@
             if (!isset($_POST['maptcha_response']) or !isset($_POST['maptcha_challenge']))
                 return false;
 
-            if (sha1(preg_replace("/[^0-9]/", "", $_POST['maptcha_response']).$maptcha_hashkey) != $_POST['maptcha_challenge'])
-                return false;
-            else
-                return true;
+            return (sha1(preg_replace("/[^0-9]/", "", $_POST['maptcha_response']).$maptcha_hashkey) == $_POST['maptcha_challenge']);
         }
     }
