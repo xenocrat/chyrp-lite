@@ -405,17 +405,22 @@ h3.flash a:focus,
 h3.flash a:active {                             top: 1px;
                                                 color: inherit }
 div.traversal a {                               display: inline-block;
+                                                position: relative;
                                                 padding: 2.5em 0em;
                                                 width: 6em;
                                                 height: 1em;
+                                                top: 0px;
                                                 color: #ffffff;
                                                 line-height: 1;
                                                 border-radius: 50%;
-                                                border: 1px #464647 solid }
+                                                border: 1px #464647 solid;
+                                                transition: top 250ms cubic-bezier(0.5, -8, 0.2, 8) }
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {                        background-color: #47b347;
                                                 border: 1px solid #47b347 }
+div.prev a:hover, div.prev a:active {           top: -1px }
+div.next a:hover, div.next a:active {           top: 1px }
 section a:link, p a:link {                      color: #999491;
                                                 border-bottom: 1px #999491 solid }
 section a:visited, p a:visited {                color: #999491;
