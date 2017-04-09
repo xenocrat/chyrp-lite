@@ -307,10 +307,10 @@
 
             foreach ($conds as $key => $val) {
                 if (is_int($key)) {
-                    # Full expression
+                    # Full expression.
                     $cond = $val;
                 } else {
-                    # Key => Val expression
+                    # Key => Val expression.
                     if (is_string($val) and strlen($val) and $val[0] == ":")
                         $cond = self::safecol($key)." = ".$val;
                     else {
@@ -318,7 +318,7 @@
                             $val = (int) $val;
 
                         if (strtoupper(substr($key, -4)) == " NOT") {
-                            # Negation
+                            # Negation.
                             $key = self::safecol(substr($key, 0, -4));
                             $param = str_replace(array("(", ")", "."), "_", $key);
 
@@ -331,7 +331,7 @@
                                 $params[":".$param] = $val;
                             }
                         } elseif (strtoupper(substr($key, -5)) == " LIKE" and is_array($val)) {
-                            # multiple LIKE
+                            # multiple LIKE.
                             $key = self::safecol(substr($key, 0, -5));
                             $likes = array();
 
@@ -343,7 +343,7 @@
 
                             $cond = "(".implode(" OR ", $likes).")";
                         } elseif (strtoupper(substr($key, -9)) == " LIKE ALL" and is_array($val)) {
-                            # multiple LIKE
+                            # multiple LIKE.
                             $key = self::safecol(substr($key, 0, -9));
                             $likes = array();
 
@@ -355,7 +355,7 @@
 
                             $cond = "(".implode(" AND ", $likes).")";
                         } elseif (strtoupper(substr($key, -9)) == " NOT LIKE" and is_array($val)) {
-                            # multiple NOT LIKE
+                            # multiple NOT LIKE.
                             $key = self::safecol(substr($key, 0, -9));
                             $likes = array();
 
@@ -367,25 +367,25 @@
 
                             $cond = "(".implode(" AND ", $likes).")";
                         } elseif (strtoupper(substr($key, -5)) == " LIKE") {
-                            # LIKE
+                            # LIKE.
                             $key = self::safecol(substr($key, 0, -5));
                             $param = str_replace(array("(", ")", "."), "_", $key);
                             $cond = $key." LIKE :".$param;
                             $params[":".$param] = $val;
                         } elseif (strtoupper(substr($key, -9)) == " NOT LIKE") {
-                            # NOT LIKE
+                            # NOT LIKE.
                             $key = self::safecol(substr($key, 0, -9));
                             $param = str_replace(array("(", ")", "."), "_", $key);
                             $cond = $key." NOT LIKE :".$param;
                             $params[":".$param] = $val;
                         } elseif (substr_count($key, " ")) {
-                            # Custom operation, e.g. array("foo >" => $bar)
+                            # Custom operation, e.g. array("foo >" => $bar).
                             list($param,) = explode(" ", $key);
                             $param = str_replace(array("(", ")", "."), "_", $param);
                             $cond = self::safecol($key)." :".$param;
                             $params[":".$param] = $val;
                         } else {
-                            # Equation
+                            # Equation.
                             if (is_array($val))
                                 $cond = self::safecol($key)." IN ".self::build_list($val, $params);
                             elseif ($val === null and $insert)
@@ -432,7 +432,7 @@
 
                 # Does it not already have a table specified?
                 if (!substr_count($full, ".")) {
-                                           # Don't replace things that are already either prefixed or paramized.
+                    # Don't replace things that are already either prefixed or paramized.
                     $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
                                           "\\1".$before."__".$tables[0].".".$name.$after,
                                           $field,
@@ -440,7 +440,7 @@
                 } else {
                     # Okay, it does, but is the table prefixed?
                     if (substr($full, 0, 2) != "__") {
-                                               # Don't replace things that are already either prefixed or paramized.
+                        # Don't replace things that are already either prefixed or paramized.
                         $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
                                               "\\1".$before."__".$name.$after,
                                               $field,
@@ -452,5 +452,3 @@
             $field = preg_replace("/AS ([^ ]+)\./i", "AS ", $field);
         }
     }
-
-
