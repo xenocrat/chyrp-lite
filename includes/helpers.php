@@ -762,12 +762,23 @@
             else
                 $keywords[] = trim($fragment);
 
-        $dates = array("year"   => __("year"),
-                       "month"  => __("month"),
-                       "day"    => __("day"),
-                       "hour"   => __("hour"),
-                       "minute" => __("minute"),
-                       "second" => __("second"));
+        $dates = array("year", "month", "day", "hour", "minute", "second");
+
+        $created_at = array(
+            "year"   => "____",
+            "month"  => "__",
+            "day"    => "__",
+            "hour"   => "__",
+            "minute" => "__",
+            "second" => "__");
+
+        $joined_at = array(
+            "year"   => "____",
+            "month"  => "__",
+            "day"    => "__",
+            "hour"   => "__",
+            "minute" => "__",
+            "second" => "__");
 
         # Contextual conversions of some keywords.
         foreach ($keywords as $keyword) {
@@ -786,12 +797,26 @@
                 $where["group_id"] = ($group->no_results) ? 0 : $group->id ;
             } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
                 # Filter by date/time of creation.
-                $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
+                $created_at[$attr] = $val;
+                $where["created_at LIKE"] = $created_at["year"]."-".
+                                            $created_at["month"]."-".
+                                            $created_at["day"]." ".
+                                            $created_at["hour"].":".
+                                            $created_at["minute"].":".
+                                            $created_at["second"]."%";
             } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
                 # Filter by date/time of joining.
-                $where[strtoupper(array_search($attr, $dates))."(joined_at)"] = $val;
-            } else
+                $joined_at[$attr] = $val;
+                $where["joined_at LIKE"] = $joined_at["year"]."-".
+                                           $joined_at["month"]."-".
+                                           $joined_at["day"]." ".
+                                           $joined_at["hour"].":".
+                                           $joined_at["minute"].":".
+                                           $joined_at["second"]."%";
+            } else {
+                # Key => Val expression.
                 $filters[$attr] = $val;
+            }
         }
 
         # Check the validity of keywords if a table name was supplied.

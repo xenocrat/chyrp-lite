@@ -745,11 +745,24 @@
             $where = array();
             $dates = array("year", "month", "day", "hour", "minute", "second");
 
+            $created_at = array("year"   => "____",
+                                "month"  => "__",
+                                "day"    => "__",
+                                "hour"   => "__",
+                                "minute" => "__",
+                                "second" => "__");
+
             # Conversions of some attributes.
             foreach ($found as $part => $value)
                 if (in_array($part, $dates)) {
                     # Filter by date/time of creation.
-                    $where[strtoupper($part)."(created_at)"] = $value;
+                    $created_at[$part] = $value;
+                    $where["created_at LIKE"] = $created_at["year"]."-".
+                                                $created_at["month"]."-".
+                                                $created_at["day"]." ".
+                                                $created_at["hour"].":".
+                                                $created_at["minute"].":".
+                                                $created_at["second"]."%";
                 } elseif ($part == "author") {
                     # Filter by "author" (login).
                     $user = new User(array("login" => $value));
@@ -757,8 +770,10 @@
                 } elseif ($part == "feathers") {
                     # Filter by feather.
                     $where["feather"] = depluralize($value);
-                } else
+                } else {
+                    # Key => Val expression.
                     $where[$part] = $value;
+                }
 
             return new self(null, array_merge($options, array("where" => $where)));
         }
