@@ -198,7 +198,7 @@ class Gettext
 
   def print_pofile
     puts '#. Content-Type: text/plain; charset=UTF-8'
-    puts '#. Copyright (C) '+Time.now.utc.strftime("%Y")+' '+OPTIONS[:maintainer]+'.'
+    puts '#. Copyright '+Time.now.utc.strftime("%Y")+' '+OPTIONS[:maintainer]+' and other contributors.'
     puts '#. This file is distributed under the same license as the '+OPTIONS[:project]+' package.'
     puts ''
 
