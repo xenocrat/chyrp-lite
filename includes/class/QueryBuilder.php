@@ -294,7 +294,7 @@
 
         /**
          * Function: build_conditions
-         * Builds an associative array of SQL values into PDO-esque paramized query strings.
+         * Builds an associative array of SQL values into PDO-esque parameterized query strings.
          *
          * Parameters:
          *     $conds - Conditions.
@@ -432,7 +432,7 @@
 
                 # Does it not already have a table specified?
                 if (!substr_count($full, ".")) {
-                    # Don't replace things that are already either prefixed or paramized.
+                    # Don't replace things that are already either prefixed or parameterized.
                     $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
                                           "\\1".$before."__".$tables[0].".".$name.$after,
                                           $field,
@@ -440,7 +440,7 @@
                 } else {
                     # Okay, it does, but is the table prefixed?
                     if (substr($full, 0, 2) != "__") {
-                        # Don't replace things that are already either prefixed or paramized.
+                        # Don't replace things that are already either prefixed or parameterized.
                         $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
                                               "\\1".$before."__".$name.$after,
                                               $field,
