@@ -330,20 +330,8 @@
                                 $cond = $key." != :".$param;
                                 $params[":".$param] = $val;
                             }
-                        } elseif (strtoupper(substr($key, -5)) == " LIKE" and is_array($val)) {
-                            # multiple LIKE.
-                            $key = self::safecol(substr($key, 0, -5));
-                            $likes = array();
-
-                            foreach ($val as $index => $match) {
-                                $param = str_replace(array("(", ")", "."), "_", $key)."_".$index;
-                                $likes[] = $key." LIKE :".$param;
-                                $params[":".$param] = $match;
-                            }
-
-                            $cond = "(".implode(" OR ", $likes).")";
                         } elseif (strtoupper(substr($key, -9)) == " LIKE ALL" and is_array($val)) {
-                            # multiple LIKE.
+                            # multiple LIKE (AND).
                             $key = self::safecol(substr($key, 0, -9));
                             $likes = array();
 
@@ -366,17 +354,29 @@
                             }
 
                             $cond = "(".implode(" AND ", $likes).")";
-                        } elseif (strtoupper(substr($key, -5)) == " LIKE") {
-                            # LIKE.
+                        } elseif (strtoupper(substr($key, -5)) == " LIKE" and is_array($val)) {
+                            # multiple LIKE (OR).
                             $key = self::safecol(substr($key, 0, -5));
-                            $param = str_replace(array("(", ")", "."), "_", $key);
-                            $cond = $key." LIKE :".$param;
-                            $params[":".$param] = $val;
+                            $likes = array();
+
+                            foreach ($val as $index => $match) {
+                                $param = str_replace(array("(", ")", "."), "_", $key)."_".$index;
+                                $likes[] = $key." LIKE :".$param;
+                                $params[":".$param] = $match;
+                            }
+
+                            $cond = "(".implode(" OR ", $likes).")";
                         } elseif (strtoupper(substr($key, -9)) == " NOT LIKE") {
                             # NOT LIKE.
                             $key = self::safecol(substr($key, 0, -9));
                             $param = str_replace(array("(", ")", "."), "_", $key);
                             $cond = $key." NOT LIKE :".$param;
+                            $params[":".$param] = $val;
+                        } elseif (strtoupper(substr($key, -5)) == " LIKE") {
+                            # LIKE.
+                            $key = self::safecol(substr($key, 0, -5));
+                            $param = str_replace(array("(", ")", "."), "_", $key);
+                            $cond = $key." LIKE :".$param;
                             $params[":".$param] = $val;
                         } elseif (substr_count($key, " ")) {
                             # Custom operation, e.g. array("foo >" => $bar).
