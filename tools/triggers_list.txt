@@ -421,7 +421,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 866
+	includes/model/Post.php on line 881
 Arguments:
 	$post
 
@@ -858,7 +858,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 812
+	includes/helpers.php on line 837
 Arguments:
 	$query, $plain
 
@@ -868,7 +868,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1371
+	includes/helpers.php on line 1396
 
 
 send_mail
@@ -876,7 +876,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2075
+	includes/helpers.php on line 2100
 
 
 xmlrpc_methods

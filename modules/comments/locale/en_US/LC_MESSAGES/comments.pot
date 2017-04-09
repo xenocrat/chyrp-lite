@@ -1,5 +1,5 @@
 #. Content-Type: text/plain; charset=UTF-8
-#. Copyright (C) 2017 Daniel Pimley.
+#. Copyright 2017 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
 #: modules/comments/admin/pages/comment_settings.twig:3
