@@ -148,7 +148,6 @@ hr {                                            width: 100%;
                                                 margin: 2em 0em }
 hr.post {                                       margin: 0em }
 hr:last-child, hr.post:last-of-type, hr + hr {  display: none }
-h3.filter + hr.post {                           visibility: hidden }
 ul {                                            list-style: disc inside;
                                                 margin: 1em 0em;
                                                 padding: 0em }
@@ -416,8 +415,7 @@ div.traversal a {                               display: inline-block;
                                                 transition: top 250ms cubic-bezier(0.5, -8, 0.2, 8) }
 div.traversal a:hover,
 div.traversal a:focus,
-div.traversal a:active {                        background-color: #464647;
-                                                border: 1px solid #464647 }
+div.traversal a:active {                        background-color: #464647 }
 div.prev a:hover, div.prev a:active {           top: -1px }
 div.next a:hover, div.next a:active {           top: 1px }
 section a:link, p a:link {                      color: #999491;
@@ -441,20 +439,19 @@ div.tags a.tag {                                display: inline-block;
                                                 border: 1px solid #464647 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
-div.tags a.tag:active {                         background-color: #464647;
-                                                border: 1px solid #464647 }
+div.tags a.tag:active {                         background-color: #464647 }
 div.category a.category {                       display: inline-block;
                                                 position: absolute;
-                                                top: -1px;
+                                                top: 0px;
                                                 right: 4rem;
                                                 padding: 0.2em 0.6em;
                                                 margin: 0em;
                                                 color: #fffefd;
-                                                border: 1px solid #464647 }
+                                                border: 1px solid #464647;
+                                                border-top: none }
 div.category a.category:hover,
 div.category a.category:focus,
-div.category a.category:active {                background-color: #464647;
-                                                border: 1px solid #464647 }
+div.category a.category:active {                background-color: #464647 }
 div.metadata a {                                color: #999491 }
 div.metadata a:hover {                          color: #ffffff }
 div.metadata a:focus {                          color: #ffffff;

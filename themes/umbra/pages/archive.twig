@@ -56,7 +56,6 @@
 <h3 role="status" class="filter">
 {{ "Archive of %s" | translate | format(archive.when | strftimeformat(archive.depth == "day" ? "%d %B %Y" : "%B %Y")) }}
 </h3>
-<hr class="post">
 {% for post in posts.paginated %}
 {% include "feathers" ~ DIR ~ post.feather ~ ".twig" %}
 {% endfor %}
