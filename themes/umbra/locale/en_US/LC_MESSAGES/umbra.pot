@@ -306,7 +306,7 @@ msgstr ""
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/umbra/pages/archive.twig:67
+#: themes/umbra/pages/archive.twig:66
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Drafts"
 msgstr ""
 
-#: themes/umbra/pages/drafts.twig:11
+#: themes/umbra/pages/drafts.twig:10
 msgid "You don't have any drafts"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgstr ""
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/umbra/pages/search.twig:11
+#: themes/umbra/pages/search.twig:10
 msgid "Your search did not return any results."
 msgstr ""
 
