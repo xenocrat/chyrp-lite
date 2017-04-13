@@ -23,7 +23,7 @@
             self::read();
 
             foreach ($this->json as $setting => $value)
-                if (!is_int($setting))
+                if (!is_numeric($setting) and $setting != "json")
                     $this->$setting = $value;
 
             fallback($this->sql,              array());
@@ -64,7 +64,7 @@
          *     $fallback - Add the setting only if it doesn't exist.
          */
         public function set($setting, $value, $fallback = false) {
-            if ($setting == "json")
+            if (is_numeric($setting) or $setting == "json")
                 return false;
 
             if (isset($this->$setting) and $fallback)
@@ -83,7 +83,7 @@
          * Removes a configuration setting.
          *
          * Parameters:
-         *     $setting - The name of the setting to remove.
+         *     $setting - The setting name.
          */
         public function remove($setting) {
             unset($this->json[$setting]);
