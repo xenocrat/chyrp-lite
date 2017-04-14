@@ -3,8 +3,8 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="16" height="16" viewBox="0, 0, 16, 16">
   <defs>
     <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="8" y1="13" x2="8" y2="0">
-      <stop offset="0.099" stop-color="#BF742D"/>
-      <stop offset="0.951" stop-color="#CE862C"/>
+      <stop offset="0.099" stop-color="#AB713A"/>
+      <stop offset="0.951" stop-color="#BF742D"/>
     </linearGradient>
     <linearGradient id="Gradient_2" gradientUnits="userSpaceOnUse" x1="8" y1="12.136" x2="8" y2="0.821">
       <stop offset="0.201" stop-color="#E5910E"/>
