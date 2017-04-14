@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Config
-     * Holds all of the configuration variables for the entire site.
+     * Holds all of the configuration settings for the entire site.
      */
     class Config {
         # Array: $json
