@@ -15,9 +15,9 @@
             Group::add_permission("unlike_post", "Unlike Posts");
 
             $config->set("module_likes",
-                         array("showOnFront" => true,
-                               "likeWithText" => false,
-                               "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg"));
+                         array("show_on_index" => true,
+                               "like_with_text" => false,
+                               "like_image" => $config->chyrp_url."/modules/likes/images/pink.svg"));
         }
 
         static function __uninstall($confirm) {
@@ -42,17 +42,18 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $admin->display("pages".DIR."like_settings");
+                return $admin->display("pages".DIR."like_settings",
+                                       array("like_images" => $this->like_images()));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            fallback($_POST['likeImage'], $config->chyrp_url."/modules/likes/images/pink.svg");
+            fallback($_POST['like_image'], $config->chyrp_url."/modules/likes/images/pink.svg");
 
             $config->set("module_likes",
-                         array("showOnFront" => isset($_POST['showOnFront']),
-                               "likeWithText" => isset($_POST['likeWithText']),
-                               "likeImage" => $_POST['likeImage']));
+                         array("show_on_index" => isset($_POST['show_on_index']),
+                               "like_with_text" => isset($_POST['like_with_text']),
+                               "like_image" => $_POST['like_image']));
 
             Flash::notice(__("Settings updated."), "like_settings");
         }
@@ -205,7 +206,7 @@
             $visitor = Visitor::current();
             $settings = $config->module_likes;
 
-            if (($settings["showOnFront"] == false and $route->action == "index") or $post->no_results)
+            if (($settings["show_on_index"] == false and $route->action == "index") or $post->no_results)
                 return;
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
@@ -216,9 +217,9 @@
                                 $config->url."/?action=like&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
-                                "<img src=\"".$settings["likeImage"]."\" alt='Likes icon'>";
+                                "<img src=\"".$settings["like_image"]."\" alt='Likes icon'>";
 
-                    if ($settings["likeWithText"]) {
+                    if ($settings["like_with_text"]) {
                         $html.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $html.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
                     }
@@ -241,9 +242,9 @@
                                 $config->url."/?action=unlike&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
-                                "<img src=\"".$settings["likeImage"]."\" alt='Likes icon'>";
+                                "<img src=\"".$settings["like_image"]."\" alt='Likes icon'>";
 
-                    if ($settings["likeWithText"]) {
+                    if ($settings["like_with_text"]) {
                         $html.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $html.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
                     }
@@ -266,7 +267,7 @@
             return $html;
         }
 
-        public function like_images() {
+        private function like_images() {
             $images = array();
             $filepaths = glob(MODULES_DIR.DIR."likes".DIR."images".DIR."*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
 
