@@ -1213,10 +1213,10 @@
         }
 
         if ($force_lowercase)
-            $clean = function_exists('mb_strtolower') ? mb_strtolower($clean, 'UTF-8') : strtolower($clean) ;
+            $clean = function_exists("mb_strtolower") ? mb_strtolower($clean, "UTF-8") : strtolower($clean) ;
 
         if ($trunc)
-            $clean = function_exists('mb_substr') ? mb_substr($clean, 0, $trunc, 'UTF-8') : substr($clean, 0, $trunc) ;
+            $clean = function_exists("mb_substr") ? mb_substr($clean, 0, $trunc, "UTF-8") : substr($clean, 0, $trunc) ;
 
         return $clean;
     }
