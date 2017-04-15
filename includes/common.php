@@ -61,22 +61,22 @@
         define('JAVASCRIPT', false);
 
     # Constant: MAIN
-    # Is this being run from index.php?
+    # Did the request come via chyrp/index.php?
     if (!defined('MAIN'))
         define('MAIN', false);
 
     # Constant: ADMIN
-    # Is the user in the admin area?
+    # Did the request come via admin/index.php?
     if (!defined('ADMIN'))
         define('ADMIN', false);
 
     # Constant: AJAX
-    # Is this being run from an AJAX request?
+    # Is this request AJAX?
     if (!defined('AJAX'))
         define('AJAX', false);
 
     # Constant: XML_RPC
-    # Is this being run from XML-RPC?
+    # Is this request XML-RPC?
     if (!defined('XML_RPC'))
         define('XML_RPC', false);
 
