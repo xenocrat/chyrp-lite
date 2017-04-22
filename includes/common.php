@@ -130,7 +130,7 @@
 
     # Constant: UPDATE_XML
     # URL to the update feed.
-    define('UPDATE_XML', "http://chyrplite.net/update.xml");
+    define('UPDATE_XML', "http://chyrplite.net/rss/update.xml");
 
     # Constant: UPDATE_INTERVAL
     # Interval in seconds between update checks.

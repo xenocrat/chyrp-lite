@@ -21,9 +21,9 @@
                                          __("Go to GitHub &rarr;").'</a>');
 
             foreach ($xml->channel->item as $item)
-                if (version_compare(CHYRP_VERSION, $item->version, "<"))
-                    return Flash::message(_f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->codename)).
-                                             ' <a href="'.fix($item->updateurl, true).'" target="_blank">'.
+                if (version_compare(CHYRP_VERSION, $item->guid, "<"))
+                    return Flash::message(_f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->title)).
+                                             ' <a href="'.fix($item->link, true).'" target="_blank">'.
                                              __("Go to GitHub &rarr;").'</a>');
         }
 
@@ -36,9 +36,9 @@
                 return false;
 
             foreach ($xml->channel->item as $item)
-                if (!isset($item->version) or
-                    !isset($item->codename) or
-                    !isset($item->updateurl) or !is_url($item->updateurl))
+                if (!isset($item->guid) or
+                    !isset($item->title) or
+                    !isset($item->link) or !is_url($item->link))
                     return false;
 
             return true;
