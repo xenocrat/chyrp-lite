@@ -1115,9 +1115,10 @@
                 foreach ($posts as $post) {
                     $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
                     $url = $post->url();
+                    $title = oneof($post->title(), ucfirst($post->feather));
 
                     $posts_atom.= '    <entry xml:base="'.fix($url, true).'">'."\n";
-                    $posts_atom.= '        <title type="html">'.oneof(fix($post->title()), "Post #".$post->id).'</title>'."\n";
+                    $posts_atom.= '        <title type="html">'.fix($title, false, true).'</title>'."\n";
                     $posts_atom.= '        <id>'.fix($url).'</id>'."\n";
                     $posts_atom.= '        <updated>'.when("c", $updated).'</updated>'."\n";
                     $posts_atom.= '        <published>'.when("c", $post->created_at).'</published>'."\n";
@@ -1130,10 +1131,10 @@
 
                     $posts_atom.= '            <chyrp:login>'.fix($post->user->login).'</chyrp:login>'."\n";
                     $posts_atom.= '        </author>'."\n";
-                    $posts_atom.= '        <content>'."\n";
+                    $posts_atom.= '        <content type="application/xml">'."\n";
 
                     foreach ($post->attributes as $key => $val)
-                        $posts_atom.= '            <'.$key.'>'.fix($val).'</'.$key.'>'."\n";
+                        $posts_atom.= '            <'.$key.'>'.fix($val, false, true).'</'.$key.'>'."\n";
 
                     $posts_atom.= '        </content>'."\n";
 
@@ -1171,7 +1172,7 @@
                     $url = $page->url();
 
                     $pages_atom.= '    <entry xml:base="'.fix($url, true).'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
-                    $pages_atom.= '        <title type="html">'.fix($page->title).'</title>'."\n";
+                    $pages_atom.= '        <title type="html">'.fix($page->title, false, true).'</title>'."\n";
                     $pages_atom.= '        <id>'.fix($url).'</id>'."\n";
                     $pages_atom.= '        <updated>'.when("c", $updated).'</updated>'."\n";
                     $pages_atom.= '        <published>'.when("c", $page->created_at).'</published>'."\n";
@@ -1184,7 +1185,7 @@
 
                     $pages_atom.= '            <chyrp:login>'.fix($page->user->login).'</chyrp:login>'."\n";
                     $pages_atom.= '        </author>'."\n";
-                    $pages_atom.= '        <content type="html">'.fix($page->body).'</content>'."\n";
+                    $pages_atom.= '        <content type="html">'.fix($page->body, false, true).'</content>'."\n";
 
                     foreach (array("public", "show_in_list", "list_order", "clean", "url") as $attr)
                         $pages_atom.= '        <chyrp:'.$attr.'>'.fix($page->$attr).'</chyrp:'.$attr.'>'."\n";
@@ -1378,13 +1379,17 @@
 
                     $user = new User(array("login" => (string) $login));
 
-                    $data = xml2arr($entry->content);
-                    $data["imported_from"] = "chyrp";
+                    $values = array();
+
+                    foreach ($entry->content->children() as $value)
+                        $values[$value->getName()] = unfix((string) $value);
 
                     if (!empty($_POST['media_url']))
-                        array_walk_recursive($data, "media_url_scan");
+                        array_walk_recursive($values, "media_url_scan");
 
-                    $post = Post::add($data,
+                    $values["imported_from"] = "chyrp";
+
+                    $post = Post::add($values,
                                       (string) $chyrp->clean,
                                       Post::check_url((string) $chyrp->url),
                                       (string) $chyrp->feather,
@@ -1410,8 +1415,8 @@
 
                     $user = new User(array("login" => (string) $login));
 
-                    $page = Page::add((string) $entry->title,
-                                      (string) $entry->content,
+                    $page = Page::add(unfix((string) $entry->title),
+                                      unfix((string) $entry->content),
                                       (!$user->no_results) ? $user->id : $visitor->id,
                                       (int) $attr->parent_id,
                                       (bool) (int) $chyrp->public,
