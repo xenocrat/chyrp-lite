@@ -412,7 +412,7 @@ div.traversal a {                               display: inline-block;
                                                 line-height: 1;
                                                 border-radius: 50%;
                                                 border: 1px #464647 solid;
-                                                transition: top 250ms cubic-bezier(0.5, -8, 0.2, 8) }
+                                                transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4) }
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {                        background-color: #464647 }
