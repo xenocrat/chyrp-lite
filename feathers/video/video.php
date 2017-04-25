@@ -74,7 +74,7 @@
 
             echo '<link rel="enclosure" href="'.uploaded($post->filename).
                  '" type="'.self::video_type($post->filename).
-                 '" title="'.truncate(strip_tags($post->title())).
+                 '" title="'.fix(strip_tags($post->title()), true).
                  '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
