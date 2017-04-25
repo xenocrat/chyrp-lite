@@ -113,7 +113,7 @@
                     continue;
 
                 echo '<link rel="enclosure" href="'.uploaded($filename).
-                     '" title="'.truncate(strip_tags($post->title())).
+                     '" title="'.fix($post->title_from_excerpt(), true).
                      '" length="'.filesize(uploaded($filename, false)).'" />'."\n";
             }
         }

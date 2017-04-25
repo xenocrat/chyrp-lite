@@ -74,7 +74,7 @@
 
             echo '<link rel="enclosure" href="'.uploaded($post->filename).
                  '" type="'.self::audio_type($post->filename).
-                 '" title="'.fix(strip_tags($post->title()), true).
+                 '" title="'.fix($post->title_from_excerpt(), true).
                  '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
         }
 
