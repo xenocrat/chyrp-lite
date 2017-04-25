@@ -239,7 +239,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1342
+	includes/controller/Admin.php on line 1343
 Arguments:
 	$group
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1366
+	includes/controller/Admin.php on line 1367
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1398
+	includes/controller/Admin.php on line 1403
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1425
+	includes/controller/Admin.php on line 1430
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1429
+	includes/controller/Admin.php on line 1434
 Arguments:
 	$imports
 
@@ -279,13 +279,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1705
+	includes/controller/Admin.php on line 1710
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1713
+	includes/controller/Admin.php on line 1718
 
 
 can_not_view_page
@@ -760,7 +760,7 @@ post_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1124
+	includes/controller/Admin.php on line 1125
 Arguments:
 	$post), true
 
@@ -770,7 +770,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1143
+	includes/controller/Admin.php on line 1144
 Arguments:
 	$post
 
@@ -780,7 +780,7 @@ page_export_url
 Target:
 	$url
 Called from:
-	includes/controller/Admin.php on line 1178
+	includes/controller/Admin.php on line 1179
 Arguments:
 	$page), true
 
@@ -790,7 +790,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1193
+	includes/controller/Admin.php on line 1194
 Arguments:
 	$page
 
@@ -800,7 +800,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1248
+	includes/controller/Admin.php on line 1249
 
 
 before_import
@@ -808,7 +808,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1312
+	includes/controller/Admin.php on line 1313
 
 
 write_nav
@@ -816,7 +816,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1984
+	includes/controller/Admin.php on line 1989
 
 
 manage_nav
@@ -824,7 +824,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2013
+	includes/controller/Admin.php on line 2018
 
 
 settings_nav
@@ -832,7 +832,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2038
+	includes/controller/Admin.php on line 2043
 
 
 extend_nav
@@ -840,7 +840,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2056
+	includes/controller/Admin.php on line 2061
 
 
 feed_url
@@ -858,7 +858,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 837
+	includes/helpers.php on line 783
 Arguments:
 	$query, $plain
 
@@ -868,7 +868,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1396
+	includes/helpers.php on line 1342
 
 
 send_mail
@@ -876,7 +876,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2100
+	includes/helpers.php on line 2046
 
 
 xmlrpc_methods
