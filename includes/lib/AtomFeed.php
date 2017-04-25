@@ -67,7 +67,7 @@
             self::split();
 
             echo "<entry>\n";
-            echo '<title type="html">'.fix($title)."</title>\n";
+            echo '<title type="html">'.fix($title, false, true)."</title>\n";
             echo "<id>tag:".fix($id)."</id>\n";
             echo "<updated>".when("c", oneof($updated, $published))."</updated>\n";
             echo "<published>".when("c", $published)."</published>\n";
@@ -82,7 +82,7 @@
                 echo "<email>".fix($email)."</email>\n";
 
             echo "</author>\n";
-            echo '<content type="html">'.fix($content)."</content>\n";
+            echo '<content type="html">'.fix($content, false, true)."</content>\n";
 
             $this->count++;
         }
