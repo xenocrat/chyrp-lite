@@ -613,60 +613,6 @@
     }
 
     /**
-     * Function: xml2arr
-     * Recursively converts a SimpleXML object to an array.
-     *
-     * Parameters:
-     *     $parse - The SimpleXML object to convert.
-     *
-     * Returns:
-     *     An array representation of the supplied object.
-     */
-    function xml2arr($parse) {
-        if (empty($parse))
-            return "";
-
-        $parse = (array) $parse;
-
-        foreach ($parse as &$val)
-            if (is_object($val) and get_class($val) == "SimpleXMLElement")
-                $val = xml2arr($val);
-
-        return $parse;
-    }
-
-    /**
-     * Function: arr2xml
-     * Recursively adds an array to a SimpleXML object.
-     *
-     * Parameters:
-     *     &$object - The SimpleXML object to modify.
-     *     $data - The data to add to the SimpleXML object.
-     */
-    function arr2xml(&$object, $data) {
-        foreach ($data as $key => $val) {
-            if (is_int($key) and (empty($val) or (is_string($val) and trim($val) == ""))) {
-                unset($data[$key]);
-                continue;
-            }
-
-            if (is_array($val)) {
-                # Numeric-indexed things need to be added as duplicates.
-                if (in_array(0, array_keys($val))) {
-                    foreach ($val as $dup) {
-                        $xml = $object->addChild($key);
-                        arr2xml($xml, $dup);
-                    }
-                } else {
-                    $xml = $object->addChild($key);
-                    arr2xml($xml, $val);
-                }
-            } else
-                $object->addChild($key, fix($val, false, false));
-        }
-    }
-
-    /**
      * Function: list_notate
      * Notates an array as a list of things.
      *
