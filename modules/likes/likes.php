@@ -298,12 +298,12 @@
                 $session_hash = $like->children("http://chyrp.net/export/1.0/")->hash;
                 $login = $like->children("http://chyrp.net/export/1.0/")->login;
 
-                $user = new User(array("login" => (string) $login));
+                $user = new User(array("login" => unfix((string) $login)));
 
                 Like::add($post->id,
                           ((!$user->no_results) ? $user->id : 0),
-                          (string) oneof($timestamp, datetime()),
-                          (string) oneof($session_hash, md5("import_chyrp_post")));
+                          datetime((string) $timestamp),
+                          oneof(unfix((string) $session_hash), md5("import_chyrp_post")));
             }
         }
 
@@ -317,9 +317,9 @@
                 $login = (!$user->no_results) ? $user->login : "" ;
 
                 $atom.= "        <chyrp:like>\r";
-                $atom.= '            <chyrp:login>'.$login.'</chyrp:login>'."\r";
-                $atom.= '            <published>'.$like["timestamp"].'</published>'."\r";
-                $atom.= '            <chyrp:hash>'.$like["session_hash"].'</chyrp:hash>'."\r";
+                $atom.= '            <chyrp:login>'.fix($login, false, true).'</chyrp:login>'."\r";
+                $atom.= '            <published>'.when("c", $like["timestamp"]).'</published>'."\r";
+                $atom.= '            <chyrp:hash>'.fix($like["session_hash"], false, true).'</chyrp:hash>'."\r";
                 $atom.= "        </chyrp:like>\r";
             }
 
