@@ -1129,7 +1129,7 @@
                     if (!empty($post->user->website))
                         $posts_atom.= '            <uri>'.fix($post->user->website).'</uri>'."\n";
 
-                    $posts_atom.= '            <chyrp:login>'.fix($post->user->login).'</chyrp:login>'."\n";
+                    $posts_atom.= '            <chyrp:login>'.fix($post->user->login, false, true).'</chyrp:login>'."\n";
                     $posts_atom.= '        </author>'."\n";
                     $posts_atom.= '        <content type="application/xml">'."\n";
 
@@ -1139,7 +1139,7 @@
                     $posts_atom.= '        </content>'."\n";
 
                     foreach (array("feather", "clean", "url", "pinned", "status") as $attr)
-                        $posts_atom.= '        <chyrp:'.$attr.'>'.fix($post->$attr).'</chyrp:'.$attr.'>'."\n";
+                        $posts_atom.= '        <chyrp:'.$attr.'>'.fix($post->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
 
                     $trigger->filter($posts_atom, "posts_export", $post);
 
@@ -1183,12 +1183,12 @@
                     if (!empty($page->user->website))
                         $pages_atom.= '            <uri>'.fix($page->user->website).'</uri>'."\n";
 
-                    $pages_atom.= '            <chyrp:login>'.fix($page->user->login).'</chyrp:login>'."\n";
+                    $pages_atom.= '            <chyrp:login>'.fix($page->user->login, false, true).'</chyrp:login>'."\n";
                     $pages_atom.= '        </author>'."\n";
                     $pages_atom.= '        <content type="html">'.fix($page->body, false, true).'</content>'."\n";
 
                     foreach (array("public", "show_in_list", "list_order", "clean", "url") as $attr)
-                        $pages_atom.= '        <chyrp:'.$attr.'>'.fix($page->$attr).'</chyrp:'.$attr.'>'."\n";
+                        $pages_atom.= '        <chyrp:'.$attr.'>'.fix($page->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
 
 
                     $trigger->filter($pages_atom, "pages_export", $page);
@@ -1377,7 +1377,7 @@
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
 
-                    $user = new User(array("login" => (string) $login));
+                    $user = new User(array("login" => unfix((string) $login)));
 
                     $values = array();
 
@@ -1390,12 +1390,12 @@
                     $values["imported_from"] = "chyrp";
 
                     $post = Post::add($values,
-                                      (string) $chyrp->clean,
-                                      Post::check_url((string) $chyrp->url),
-                                      (string) $chyrp->feather,
+                                      unfix((string) $chyrp->clean),
+                                      Post::check_url(unfix((string) $chyrp->url)),
+                                      unfix((string) $chyrp->feather),
                                       (!$user->no_results) ? $user->id : $visitor->id,
-                                      (bool) (int) $chyrp->pinned,
-                                      (string) $chyrp->status,
+                                      (bool) (int) unfix((string) $chyrp->pinned),
+                                      unfix((string) $chyrp->status),
                                       datetime((string) $entry->published),
                                       ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated),
                                       false);
@@ -1413,17 +1413,17 @@
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
 
-                    $user = new User(array("login" => (string) $login));
+                    $user = new User(array("login" => unfix((string) $login)));
 
                     $page = Page::add(unfix((string) $entry->title),
                                       unfix((string) $entry->content),
                                       (!$user->no_results) ? $user->id : $visitor->id,
-                                      (int) $attr->parent_id,
-                                      (bool) (int) $chyrp->public,
-                                      (bool) (int) $chyrp->show_in_list,
-                                      (int) $chyrp->list_order,
-                                      (string) $chyrp->clean,
-                                      Page::check_url((string) $chyrp->url),
+                                      (int) unfix((string) $attr->parent_id),
+                                      (bool) (int) unfix((string) $chyrp->public),
+                                      (bool) (int) unfix((string) $chyrp->show_in_list),
+                                      (int) unfix((string) $chyrp->list_order),
+                                      unfix((string) $chyrp->clean),
+                                      Page::check_url(unfix((string) $chyrp->url)),
                                       datetime((string) $entry->published),
                                       ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated));
 
