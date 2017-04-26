@@ -189,8 +189,8 @@
                 $created_at = $pingback->children("http://www.w3.org/2005/Atom")->published;
 
                 Pingback::add($post->id,
-                              (string) $source,
-                              (string) $title,
+                              unfix((string) $source),
+                              unfix((string) $title),
                               datetime((string) $created_at));
             }
         }
@@ -202,9 +202,9 @@
 
             foreach ($pingbacks as $pingback) {
                 $atom.= "        <chyrp:pingback>\r";
-                $atom.= '            <title type="html">'.$pingback["title"].'</title>'."\r";
+                $atom.= '            <title type="html">'.fix($pingback["title"], false, true).'</title>'."\r";
                 $atom.= '            <link href="'.fix($pingback["source"], true).'" />'."\r";
-                $atom.= '            <published>'.$pingback["created_at"].'</published>'."\r";
+                $atom.= '            <published>'.when("c", $pingback["created_at"]).'</published>'."\r";
                 $atom.= "        </chyrp:pingback>\r";
             }
 
