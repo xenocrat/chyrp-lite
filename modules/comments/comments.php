@@ -813,15 +813,15 @@
                 $comment = $comment->children("http://www.w3.org/2005/Atom");
                 $login = $comment->author->children("http://chyrp.net/export/1.0/")->login;
 
-                $user = new User(array("login" => (string) $login));
+                $user = new User(array("login" => unfix((string) $login)));
 
                 Comment::add(unfix((string) $comment->content),
                              unfix((string) $comment->author->name),
                              unfix((string) $comment->author->uri),
                              unfix((string) $comment->author->email),
-                             (string) $chyrp->author->ip,
+                             unfix((string) $chyrp->author->ip),
                              unfix((string) $chyrp->author->agent),
-                             (string) $chyrp->status,
+                             unfix((string) $chyrp->status),
                              $post->id,
                              (!$user->no_results) ? $user->id : 0,
                              0,
@@ -842,16 +842,16 @@
                         '            <updated>'.when("c", $updated).'</updated>'."\r".
                         '            <published>'.when("c", $comment->created_at).'</published>'."\r".
                         '            <author chyrp:user_id="'.$comment->user_id.'">'."\r".
-                        "                <name>".fix($comment->author)."</name>\r".
-                        "                <uri>".fix($comment->author_url)."</uri>\r".
-                        "                <email>".fix($comment->author_email)."</email>\r".
+                        "                <name>".fix($comment->author, false, true)."</name>\r".
+                        "                <uri>".fix($comment->author_url, false, true)."</uri>\r".
+                        "                <email>".fix($comment->author_email, false, true)."</email>\r".
                         "                <chyrp:login>".($comment->user->no_results ?
-                                                "" : fix($comment->user->login))."</chyrp:login>\r".
-                        "                <chyrp:ip>".long2ip($comment->author_ip)."</chyrp:ip>\r".
-                        "                <chyrp:agent>".fix($comment->author_agent)."</chyrp:agent>\r".
+                                                "" : fix($comment->user->login, false, true))."</chyrp:login>\r".
+                        "                <chyrp:ip>".fix(long2ip($comment->author_ip), false, true)."</chyrp:ip>\r".
+                        "                <chyrp:agent>".fix($comment->author_agent, false, true)."</chyrp:agent>\r".
                         "            </author>\r".
-                        "            <content>".fix($comment->body)."</content>\r".
-                        "            <chyrp:status>".fix($comment->status)."</chyrp:status>\r".
+                        "            <content>".fix($comment->body, false, true)."</content>\r".
+                        "            <chyrp:status>".fix($comment->status, false, true)."</chyrp:status>\r".
                         "        </chyrp:comment>\r";
             }
 
