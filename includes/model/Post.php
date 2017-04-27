@@ -188,19 +188,19 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($clean,        sanitize(@$_POST['slug'], true, true, 80), slug(8));
+            fallback($clean,        sanitize(fallback($_POST['slug']), true, true, 80), slug(8));
             fallback($url,          self::check_url($clean));
-            fallback($feather,      @$_POST['feather'], "text");
+            fallback($feather,      fallback($_POST['feather'], "undefined"));
             fallback($user_id,      Visitor::current()->id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
             fallback($status,       (isset($_POST['draft'])) ?
                                         "draft" :
-                                        oneof(@$_POST['status'], "public"));
+                                        fallback($_POST['status'], "public"));
             fallback($created_at,   (!empty($_POST['created_at'])) ?
                                         datetime($_POST['created_at']) :
                                         datetime());
             fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
-            fallback($options,      @$_POST['option'], array());
+            fallback($options,      fallback($_POST['option'], array()));
 
             $sql = SQL::current();
             $config = Config::current();
@@ -303,7 +303,7 @@
                                         datetime($_POST['created_at']) :
                                         $this->created_at);
             fallback($updated_at,   datetime());
-            fallback($options,      @$_POST['option'], array());
+            fallback($options,      fallback($_POST['option'], array()));
 
             $sql = SQL::current();
             $config = Config::current();
