@@ -548,11 +548,11 @@
      */
     function shorthand_bytes($value) {
         switch (substr($value, -1)) {
-            case 'K': case 'k':
+            case "K": case "k":
                 return (int) $value * 1024;
-            case 'M': case 'm':
+            case "M": case "m":
                 return (int) $value * 1048576;
-            case 'G': case 'g':
+            case "G": case "g":
                 return (int) $value * 1073741824;
             default:
                 return $value;
