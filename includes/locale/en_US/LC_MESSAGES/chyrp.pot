@@ -257,16 +257,16 @@ msgstr ""
 #: includes/controller/Admin.php:243
 #: includes/controller/Admin.php:264
 #: includes/controller/Admin.php:289
-#: includes/lib/XMLRPC.php:212
-#: includes/lib/XMLRPC.php:318
-#: includes/lib/XMLRPC.php:355
+#: includes/lib/XMLRPC.php:218
+#: includes/lib/XMLRPC.php:331
+#: includes/lib/XMLRPC.php:381
 msgid "Post not found."
 msgstr ""
 
 #: includes/ajax.php:35
 #: includes/controller/Admin.php:267
 #: includes/controller/Admin.php:292
-#: includes/lib/XMLRPC.php:358
+#: includes/lib/XMLRPC.php:384
 msgid "You do not have sufficient privileges to delete this post."
 msgstr ""
 
@@ -304,8 +304,8 @@ msgstr ""
 #: includes/controller/Admin.php:149
 #: includes/controller/Admin.php:180
 #: includes/controller/Admin.php:1374
-#: includes/lib/XMLRPC.php:178
-#: includes/lib/XMLRPC.php:242
+#: includes/lib/XMLRPC.php:184
+#: includes/lib/XMLRPC.php:248
 msgid "You do not have sufficient privileges to add posts."
 msgstr ""
 
@@ -436,8 +436,8 @@ msgstr ""
 
 #: includes/controller/Admin.php:210
 #: includes/controller/Admin.php:246
-#: includes/lib/XMLRPC.php:215
-#: includes/lib/XMLRPC.php:321
+#: includes/lib/XMLRPC.php:221
+#: includes/lib/XMLRPC.php:334
 msgid "You do not have sufficient privileges to edit this post."
 msgstr ""
 
@@ -1061,7 +1061,7 @@ msgid "We have emailed you a new password."
 msgstr ""
 
 #: includes/controller/Main.php:609
-#: includes/lib/XMLRPC.php:398
+#: includes/lib/XMLRPC.php:424
 msgid "Incorrect username and/or password."
 msgstr ""
 
@@ -1203,20 +1203,20 @@ msgstr ""
 
 #: includes/helpers.php:1646
 #: includes/helpers.php:1678
-#: includes/lib/XMLRPC.php:189
+#: includes/lib/XMLRPC.php:195
 msgid "Upload path does not exist."
 msgstr ""
 
 #: includes/helpers.php:1649
 #: includes/helpers.php:1681
-#: includes/lib/XMLRPC.php:192
+#: includes/lib/XMLRPC.php:198
 msgid "Upload path is not writable."
 msgstr ""
 
 #: includes/helpers.php:1652
 #: includes/helpers.php:1684
 #: includes/helpers.php:1759
-#: includes/lib/XMLRPC.php:195
+#: includes/lib/XMLRPC.php:201
 msgid "Failed to write file to disk."
 msgstr ""
 
@@ -1343,39 +1343,39 @@ msgstr ""
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/XMLRPC.php:50
+#: includes/lib/XMLRPC.php:49
 msgid "Pingback support is disabled for this site."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:53
+#: includes/lib/XMLRPC.php:52
 msgid "The from and to URLs cannot be the same."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:56
+#: includes/lib/XMLRPC.php:55
 msgid "The URL for our page is not valid."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:59
+#: includes/lib/XMLRPC.php:58
 msgid "The URL for your page is not valid."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:67
+#: includes/lib/XMLRPC.php:66
 msgid "We have not published at that URL."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:73
+#: includes/lib/XMLRPC.php:72
 msgid "You have not published at that URL."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:81
+#: includes/lib/XMLRPC.php:80
 msgid "Your page could not be parsed."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:102
+#: includes/lib/XMLRPC.php:101
 msgid "Your page does not link to our page."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:395
+#: includes/lib/XMLRPC.php:421
 msgid "XML-RPC support is disabled for this site."
 msgstr ""
 

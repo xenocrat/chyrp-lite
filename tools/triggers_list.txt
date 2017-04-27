@@ -333,7 +333,7 @@ Called from:
 pingback
 --------
 Called from:
-	includes/lib/XMLRPC.php on line 111
+	includes/lib/XMLRPC.php on line 110
 Arguments:
 	$post, $target, $source, $title, $excerpt
 
@@ -341,7 +341,7 @@ Arguments:
 metaWeblog_newPost_preQuery
 ---------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 270
+	includes/lib/XMLRPC.php on line 283
 Arguments:
 	$args[3]
 
@@ -349,7 +349,7 @@ Arguments:
 metaWeblog_newPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 284
+	includes/lib/XMLRPC.php on line 297
 Arguments:
 	$args[3], $post
 
@@ -357,7 +357,7 @@ Arguments:
 metaWeblog_editPost_preQuery
 ----------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 328
+	includes/lib/XMLRPC.php on line 354
 Arguments:
 	$args[3], $post
 
@@ -365,7 +365,7 @@ Arguments:
 metaWeblog_editPost
 -------------------
 Called from:
-	includes/lib/XMLRPC.php on line 339
+	includes/lib/XMLRPC.php on line 365
 Arguments:
 	$args[3], $post
 
@@ -892,8 +892,8 @@ metaWeblog_getPost
 Target:
 	$struct
 Called from:
-	includes/lib/XMLRPC.php on line 152
-	includes/lib/XMLRPC.php on line 229
+	includes/lib/XMLRPC.php on line 158
+	includes/lib/XMLRPC.php on line 235
 Arguments:
 	$post
 
@@ -903,7 +903,7 @@ metaWeblog_getCategories
 Target:
 	$categories
 Called from:
-	includes/lib/XMLRPC.php on line 166
+	includes/lib/XMLRPC.php on line 172
 
 
 group
