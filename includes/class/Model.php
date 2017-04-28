@@ -325,6 +325,8 @@
          *     order - What to order the SQL result by.
          *     offset - Offset for SQL query.
          *     limit - Limit for SQL query.
+         *     placeholders - Return an array of arrays instead of an array of objects?
+         *     ignore_dupes - An array of columns in which duplicate values will be retained.
          *
          * See Also:
          *     <Model.grab>
