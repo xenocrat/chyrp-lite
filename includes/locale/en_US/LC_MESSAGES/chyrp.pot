@@ -331,11 +331,11 @@ msgstr ""
 msgid "Could not read the configuration file."
 msgstr ""
 
-#: includes/class/Model.php:455
+#: includes/class/Model.php:457
 msgid "Edit"
 msgstr ""
 
-#: includes/class/Model.php:480
+#: includes/class/Model.php:482
 msgid "Delete"
 msgstr ""
 

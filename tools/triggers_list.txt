@@ -389,7 +389,7 @@ Arguments:
 add_page
 --------
 Called from:
-	includes/model/Page.php on line 117
+	includes/model/Page.php on line 119
 Arguments:
 	$page
 
@@ -397,7 +397,7 @@ Arguments:
 update_page
 -----------
 Called from:
-	includes/model/Page.php on line 202
+	includes/model/Page.php on line 204
 Arguments:
 	$page, $this
 
@@ -405,7 +405,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 243
+	includes/model/Post.php on line 246
 Arguments:
 	$post, $options
 
@@ -413,7 +413,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 350
+	includes/model/Post.php on line 353
 Arguments:
 	$post, $this, $options
 
@@ -421,7 +421,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 881
+	includes/model/Post.php on line 884
 Arguments:
 	$post
 
@@ -959,7 +959,7 @@ page
 Target:
 	$this
 Called from:
-	includes/model/Page.php on line 30
+	includes/model/Page.php on line 32
 
 
 before_add_page
@@ -967,7 +967,7 @@ before_add_page
 Target:
 	$new_values
 Called from:
-	includes/model/Page.php on line 111
+	includes/model/Page.php on line 113
 
 
 before_update_page
@@ -975,7 +975,7 @@ before_update_page
 Target:
 	$new_values
 Called from:
-	includes/model/Page.php on line 193
+	includes/model/Page.php on line 195
 
 
 filter_page
@@ -983,7 +983,7 @@ filter_page
 Target:
 	$this
 Called from:
-	includes/model/Page.php on line 274
+	includes/model/Page.php on line 276
 
 
 post
@@ -999,7 +999,7 @@ before_add_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 218
+	includes/model/Post.php on line 221
 
 
 before_update_post
@@ -1007,7 +1007,7 @@ before_update_post
 Target:
 	$new_values
 Called from:
-	includes/model/Post.php on line 320
+	includes/model/Post.php on line 323
 
 
 title_from_excerpt
@@ -1015,7 +1015,7 @@ title_from_excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 551
+	includes/model/Post.php on line 554
 
 
 title
@@ -1023,7 +1023,7 @@ title
 Target:
 	$title
 Called from:
-	includes/model/Post.php on line 576
+	includes/model/Post.php on line 579
 Arguments:
 	$post
 
@@ -1033,7 +1033,7 @@ excerpt
 Target:
 	$excerpt
 Called from:
-	includes/model/Post.php on line 593
+	includes/model/Post.php on line 596
 Arguments:
 	$post
 
@@ -1043,7 +1043,7 @@ feed_content
 Target:
 	$feed_content
 Called from:
-	includes/model/Post.php on line 610
+	includes/model/Post.php on line 613
 Arguments:
 	$post
 
@@ -1053,7 +1053,7 @@ filter_post
 Target:
 	$this
 Called from:
-	includes/model/Post.php on line 668
+	includes/model/Post.php on line 671
 
 
 user
