@@ -376,9 +376,10 @@
     if (MAIN or ADMIN)
         Post::publish_scheduled();
 
-    # Set the content-type and charset.
+    # Set appropriate headers.
     if (JAVASCRIPT) {
         header("Content-Type: application/javascript");
+        header("Referrer-Policy: strict-origin-when-cross-origin");
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else {
