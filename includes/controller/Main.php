@@ -579,8 +579,8 @@
 
             $new_password = random(8);
 
-            correspond("password", array("login" => $user->login,
-                                         "to" => $user->email,
+            correspond("password", array("login"    => $user->login,
+                                         "to"       => $user->email,
                                          "password" => $new_password));
 
             $user = $user->update(null, User::hashPassword($new_password));
