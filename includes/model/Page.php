@@ -17,7 +17,9 @@
          *     <Model::grab>
          */
         public function __construct($page_id, $options = array()) {
-            if (!isset($page_id) and empty($options)) return;
+            if (!isset($page_id) and empty($options))
+                return false;
+
             parent::grab($this, $page_id, $options);
 
             if ($this->no_results)
