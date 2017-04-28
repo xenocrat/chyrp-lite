@@ -196,7 +196,7 @@
             fallback($feather,      fallback($_POST['feather'], "undefined"));
             fallback($user_id,      Visitor::current()->id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
-            fallback($status,       (isset($_POST['draft'])) ?
+            fallback($status,       (!empty($_POST['draft'])) ?
                                         "draft" :
                                         fallback($_POST['status'], "public"));
             fallback($created_at,   (!empty($_POST['created_at'])) ?
@@ -293,7 +293,7 @@
             fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
             fallback($user_id,      $this->user_id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
-            fallback($status,       (isset($_POST['draft'])) ?
+            fallback($status,       (!empty($_POST['draft'])) ?
                                         "draft" :
                                         fallback($_POST['status'], $this->status));
             fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
