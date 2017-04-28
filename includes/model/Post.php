@@ -31,7 +31,7 @@
          */
         public function __construct($post_id = null, $options = array()) {
             if (!isset($post_id) and empty($options))
-                return;
+                return false;
 
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
@@ -69,7 +69,7 @@
             $options["select"] = array_merge(array("posts.*",
                                                    "post_attributes.name AS attribute_names",
                                                    "post_attributes.value AS attribute_values"),
-                                             oneof(@$options["select"], array()));
+                                             fallback($options["select"], array()));
             $options["ignore_dupes"] = array("attribute_names", "attribute_values");
 
             parent::grab($this, $post_id, $options);
@@ -103,6 +103,9 @@
          *     <Model::search>
          */
         static function find($options = array(), $options_for_object = array()) {
+            # LIMIT cannot be used because of LEFT JOIN attributes.
+            unset($options["limit"]);
+
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
             elseif (!isset($options["where"]))
@@ -139,7 +142,7 @@
             $options["select"] = array_merge(array("posts.*",
                                                    "post_attributes.name AS attribute_names",
                                                    "post_attributes.value AS attribute_values"),
-                                             oneof(@$options["select"], array()));
+                                             fallback($options["select"], array()));
             $options["ignore_dupes"] = array("attribute_names", "attribute_values");
 
             fallback($options["order"], "pinned DESC, created_at DESC, id DESC");
@@ -292,7 +295,7 @@
             fallback($pinned,       (int) !empty($_POST['pinned']));
             fallback($status,       (isset($_POST['draft'])) ?
                                         "draft" :
-                                        oneof(@$_POST['status'], $this->status));
+                                        fallback($_POST['status'], $this->status));
             fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
                                         oneof(sanitize($_POST['slug'], true, true, 80), slug(8)) :
                                         $this->clean);
