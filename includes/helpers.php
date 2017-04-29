@@ -2028,7 +2028,7 @@
      */
     function file_attachment($contents = "", $filename = "caconym") {
         header("Content-Type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".$filename."\"");
+        header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
 
         if (!in_array("ob_gzhandler", ob_list_handlers()))
             header("Content-Length: ".strlen($contents));

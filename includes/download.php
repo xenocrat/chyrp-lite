@@ -26,9 +26,9 @@
     if (DEBUG)
         error_log("SERVING file download for ".$filename);
 
-    header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
+    header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Content-Type: application/octet-stream");
-    header("Content-Disposition: attachment; filename=\"".$filename."\"");
+    header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
     header("Content-Length: ".filesize($filepath));
     readfile($filepath);
     flush();

@@ -182,7 +182,7 @@
 
     header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Content-Type: ".$mime);
-    header("Content-Disposition: inline; filename=".$filename.".".$extension);
+    header("Content-Disposition: attachment; filename=\"".addslashes($filename.".".$extension)."\"");
 
     if ($done == "imagepng")
         imagesavealpha($thumbnail, true);
