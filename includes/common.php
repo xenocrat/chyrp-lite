@@ -301,10 +301,7 @@
 
     # Handle a missing config file with redirect or error.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        if (!TESTER and MAIN and file_exists(MAIN_DIR.DIR."install.php"))
-            redirect("install.php");
-        else
-            error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
+        error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
