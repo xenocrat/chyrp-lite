@@ -299,7 +299,7 @@
     #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
-    # Handle a missing config file with redirect or error.
+    # Handle a missing config file.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
         error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
 
