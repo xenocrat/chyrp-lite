@@ -123,8 +123,8 @@ var Route = {
     action: "<?php echo fix(@$_GET['action'], true); ?>"
 }
 var Site = {
-    url: '<?php echo $config->url; ?>',
-    chyrp_url: '<?php echo $config->chyrp_url; ?>',
+    url: '<?php echo addslashes($config->url); ?>',
+    chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>',
     key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
