@@ -227,7 +227,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 373
+	includes/common.php on line 370
 
 
 before_export
@@ -744,7 +744,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 370
+	includes/common.php on line 367
 
 
 admin_determine_action

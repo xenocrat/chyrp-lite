@@ -8,7 +8,7 @@
 #: includes/class/Route.php:45
 #: includes/class/Route.php:48
 #: includes/class/Route.php:69
-#: includes/common.php:307
+#: includes/common.php:304
 #: includes/controller/Admin.php:384
 #: includes/controller/Admin.php:387
 #: includes/controller/Admin.php:445
@@ -409,7 +409,7 @@ msgstr ""
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr ""
 
-#: includes/common.php:307
+#: includes/common.php:304
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
