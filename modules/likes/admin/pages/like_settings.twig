@@ -8,13 +8,12 @@
 <fieldset>
 <p>
 <label for="like_image">{{ "Like Button Image" | translate("likes") }}</label>
-<select name="like_image" onchange="$('#like_image_preview').attr('src', $(this).val());">
+<select name="like_image">
 {% for filename, filepath in like_images %}
 {% set option_selected = filepath | selected(site.module_likes.like_image) %}
 <option value="{{ filepath | fix(true) }}"{{ option_selected }}>{{ filename | split(".") | first | camelize(true) }}</option>
 {% endfor %}
 </select>
-<img id="like_image_preview" src="{{ site.module_likes.like_image }}" alt="{{ 'Likes Image' | translate('likes') }}">
 </p>
 <p>
 <label for="like_with_text">{{ "Like With Text" | translate("likes") }}</label>
