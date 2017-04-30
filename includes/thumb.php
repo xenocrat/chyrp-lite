@@ -95,7 +95,7 @@
         }
     }
 
-    # Fetch source image metadata.
+    # Fetch original image metadata.
     list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
 
     $crop_x = 0;
@@ -139,7 +139,7 @@
     if (!isset($cache_filepath) or
         !file_exists($cache_filepath) or
         !(filemtime($cache_filepath) > filemtime($filepath))) {
-        # Verify the media type is supported and prepare the source.
+        # Verify the media type is supported and prepare the original.
         switch ($type) {
             case IMAGETYPE_GIF:
                 if (imagetypes() & IMG_GIF) {
@@ -172,7 +172,7 @@
         if (DEBUG)
             error_log("GENERATING image thumbnail for ".$filename);
 
-        # Create the destination.
+        # Create the thumbnail.
         $thumbnail = imagecreatetruecolor($thumbnail_width, $thumbnail_height);
 
         if ($function == "imagepng") {
@@ -193,7 +193,7 @@
                            $original_width,
                            $original_height);
 
-        # Output the destination.
+        # Output the thumbnail.
         if ($function == "imagejpeg" or $function == "imagepng")
             $function($thumbnail, $cache_filepath, $quality);
         else
