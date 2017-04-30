@@ -14,10 +14,10 @@
             Group::add_permission("like_post", "Like Posts");
             Group::add_permission("unlike_post", "Unlike Posts");
 
-            $config->set("module_like",
-                         array("showOnFront" => true,
-                               "likeWithText" => false,
-                               "likeImage" => $config->chyrp_url."/modules/likes/images/pink.svg"));
+            $config->set("module_likes",
+                         array("show_on_index" => true,
+                               "like_with_text" => false,
+                               "like_image" => $config->chyrp_url."/modules/likes/images/pink.svg"));
         }
 
         static function __uninstall($confirm) {
@@ -26,7 +26,7 @@
 
             Group::remove_permission("like_post");
             Group::remove_permission("unlike_post");
-            Config::current()->remove("module_like");
+            Config::current()->remove("module_likes");
         }
 
         public function list_permissions($names = array()) {
@@ -42,17 +42,18 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
-                return $admin->display("pages".DIR."like_settings");
+                return $admin->display("pages".DIR."like_settings",
+                                       array("like_images" => $this->like_images()));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
 
-            fallback($_POST['likeImage'], $config->chyrp_url."/modules/likes/images/pink.svg");
+            fallback($_POST['like_image'], $config->chyrp_url."/modules/likes/images/pink.svg");
 
-            $config->set("module_like",
-                         array("showOnFront" => isset($_POST['showOnFront']),
-                               "likeWithText" => isset($_POST['likeWithText']),
-                               "likeImage" => $_POST['likeImage']));
+            $config->set("module_likes",
+                         array("show_on_index" => isset($_POST['show_on_index']),
+                               "like_with_text" => isset($_POST['like_with_text']),
+                               "like_image" => $_POST['like_image']));
 
             Flash::notice(__("Settings updated."), "like_settings");
         }
@@ -203,9 +204,9 @@
             $config = Config::current();
             $route = Route::current();
             $visitor = Visitor::current();
-            $module_like = $config->module_like;
+            $settings = $config->module_likes;
 
-            if (($module_like["showOnFront"] == false and $route->action == "index") or $post->no_results)
+            if (($settings["show_on_index"] == false and $route->action == "index") or $post->no_results)
                 return;
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
@@ -216,9 +217,9 @@
                                 $config->url."/?action=like&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
-                                "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
+                                "<img src=\"".$settings["like_image"]."\" alt='Likes icon'>";
 
-                    if ($module_like["likeWithText"]) {
+                    if ($settings["like_with_text"]) {
                         $html.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $html.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
                     }
@@ -241,9 +242,9 @@
                                 $config->url."/?action=unlike&amp;post_id=".
                                 $post->id."\" data-post_id=\"".
                                 $post->id."\">".
-                                "<img src=\"".$module_like["likeImage"]."\" alt='Likes icon'>";
+                                "<img src=\"".$settings["like_image"]."\" alt='Likes icon'>";
 
-                    if ($module_like["likeWithText"]) {
+                    if ($settings["like_with_text"]) {
                         $html.= " <span class='like'>".__("Like!", "likes")."</span>";
                         $html.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
                     }
@@ -266,7 +267,7 @@
             return $html;
         }
 
-        public function like_images() {
+        private function like_images() {
             $images = array();
             $filepaths = glob(MODULES_DIR.DIR."likes".DIR."images".DIR."*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
 
@@ -297,12 +298,12 @@
                 $session_hash = $like->children("http://chyrp.net/export/1.0/")->hash;
                 $login = $like->children("http://chyrp.net/export/1.0/")->login;
 
-                $user = new User(array("login" => (string) $login));
+                $user = new User(array("login" => unfix((string) $login)));
 
                 Like::add($post->id,
                           ((!$user->no_results) ? $user->id : 0),
-                          (string) oneof($timestamp, datetime()),
-                          (string) oneof($session_hash, md5("import_chyrp_post")));
+                          datetime((string) $timestamp),
+                          oneof(unfix((string) $session_hash), md5("import_chyrp_post")));
             }
         }
 
@@ -316,9 +317,9 @@
                 $login = (!$user->no_results) ? $user->login : "" ;
 
                 $atom.= "        <chyrp:like>\r";
-                $atom.= '            <chyrp:login>'.$login.'</chyrp:login>'."\r";
-                $atom.= '            <published>'.$like["timestamp"].'</published>'."\r";
-                $atom.= '            <chyrp:hash>'.$like["session_hash"].'</chyrp:hash>'."\r";
+                $atom.= '            <chyrp:login>'.fix($login, false, true).'</chyrp:login>'."\r";
+                $atom.= '            <published>'.when("c", $like["timestamp"]).'</published>'."\r";
+                $atom.= '            <chyrp:hash>'.fix($like["session_hash"], false, true).'</chyrp:hash>'."\r";
                 $atom.= "        </chyrp:like>\r";
             }
 

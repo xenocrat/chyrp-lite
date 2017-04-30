@@ -63,13 +63,12 @@
                                               array("name" => "category_id",
                                                     "value" => $post->category_id,
                                                     "post_id !=" => $post->id),
-                                              array("ORDER BY" => "post_id DESC"),
+                                              array("post_id DESC"),
                                               array(),
                                               $limit)->fetchAll();
 
             foreach ($results as $result)
-                if (isset($result["post_id"]))
-                    $ids[] = $result["post_id"];
+                $ids[] = $result["post_id"];
 
             return $ids;
         }
@@ -84,9 +83,9 @@
         }
 
         public function manage_posts_column($post) {
-            echo (isset($post->category->name))
-                ? '<td class="post_category value">'.fix($post->category->name).'</td>'
-                : '<td class="post_category value">&nbsp;</td>';
+            echo (isset($post->category->name)) ?
+                '<td class="post_category value">'.fix($post->category->name).'</td>' :
+                '<td class="post_category value"></td>' ;
         }
 
         public function post_options($fields, $post = null) {
@@ -160,15 +159,15 @@
                                      array("reason" => __("The category you specified was not found.", "categorize")),
                                      __("Invalid Category", "categorize"));
 
-            $attributes = SQL::current()->select("post_attributes",
-                                                 array("post_id"),
-                                                 array("name" => "category_id",
-                                                       "value" => $category->id));
+            $results = SQL::current()->select("post_attributes",
+                                              array("post_id"),
+                                              array("name" => "category_id",
+                                                    "value" => $category->id))->fetchAll();
 
             $ids = array();
 
-            foreach ($attributes->fetchAll() as $index => $row)
-                $ids[] = $row["post_id"];
+            foreach ($results as $result)
+                $ids[] = $result["post_id"];
 
             if (empty($ids))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
@@ -177,7 +176,7 @@
 
             $posts = new Paginator(Post::find(array("placeholders" => true,
                                                     "where" => array("id" => $ids))),
-                                   Config::current()->posts_per_page);
+                                   $main->post_limit);
 
             if (empty($posts))
                 return false;

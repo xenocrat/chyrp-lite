@@ -5,7 +5,7 @@
      * Chyrp Lite: An ultra-lightweight blogging engine.
      *
      * Version:
-     *     v2017.01
+     *     v2017.02
      *
      * Copyright:
      *     Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi,
@@ -45,19 +45,15 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2017.01");
+    define('CHYRP_VERSION', "2017.02");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Swainson");
+    define('CHYRP_CODENAME', "Swahili");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-
-    # Constant: CACHE_TWIG
-    # Override DEBUG to enable Twig template caching.
-    define('CACHE_TWIG', true);
 
     # Constant: JAVASCRIPT
     # Are we serving a JavaScript file?
@@ -65,22 +61,22 @@
         define('JAVASCRIPT', false);
 
     # Constant: MAIN
-    # Is this being run from index.php?
+    # Did the request come via chyrp/index.php?
     if (!defined('MAIN'))
         define('MAIN', false);
 
     # Constant: ADMIN
-    # Is the user in the admin area?
+    # Did the request come via admin/index.php?
     if (!defined('ADMIN'))
         define('ADMIN', false);
 
     # Constant: AJAX
-    # Is this being run from an AJAX request?
+    # Is this request AJAX?
     if (!defined('AJAX'))
-        define('AJAX', !empty($_POST['ajax']));
+        define('AJAX', false);
 
     # Constant: XML_RPC
-    # Is this being run from XML-RPC?
+    # Is this request XML-RPC?
     if (!defined('XML_RPC'))
         define('XML_RPC', false);
 
@@ -124,9 +120,17 @@
     # Absolute path to /themes.
     define('THEMES_DIR', MAIN_DIR.DIR."themes");
 
+    # Constant: CACHE_TWIG
+    # Enable Twig template caching.
+    define('CACHE_TWIG', is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig"));
+
+    # Constant: CACHE_THUMBS
+    # Enable image thumbnail caching.
+    define('CACHE_THUMBS', is_dir(CACHES_DIR.DIR."thumbs") and is_writable(CACHES_DIR.DIR."thumbs"));
+
     # Constant: UPDATE_XML
     # URL to the update feed.
-    define('UPDATE_XML', "http://chyrplite.net/update.xml");
+    define('UPDATE_XML', "http://chyrplite.net/rss/update.xml");
 
     # Constant: UPDATE_INTERVAL
     # Interval in seconds between update checks.
@@ -143,27 +147,23 @@
 
     # Constant: HTTP_ACCEPT_DEFLATE
     # Does the user agent accept deflate encoding?
-    if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"))
-        define('HTTP_ACCEPT_DEFLATE', true);
-    else
-        define('HTTP_ACCEPT_DEFLATE', false);
+    define('HTTP_ACCEPT_DEFLATE',
+        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
+        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"));
 
     # Constant: HTTP_ACCEPT_GZIP
     # Does the user agent accept gzip encoding?
-    if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) and substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"))
-        define('HTTP_ACCEPT_GZIP', true);
-    else
-        define('HTTP_ACCEPT_GZIP', false);
+    define('HTTP_ACCEPT_GZIP',
+        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
+        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"));
 
     # Constant: USE_ZLIB
     # Use zlib to provide content compression? See Also: http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
-        if (!AJAX and (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib") and
-            !ini_get("zlib.output_compression") and (version_compare(PHP_VERSION, "5.4.6", ">=") or
-                                                     version_compare(PHP_VERSION, "5.4.0", "<")))
-            define('USE_ZLIB', true);
-        else
-            define('USE_ZLIB', false);
+        define('USE_ZLIB',
+            (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and
+            extension_loaded("zlib") and !ini_get("zlib.output_compression") and
+            (version_compare(PHP_VERSION, "5.4.6", ">=") or version_compare(PHP_VERSION, "5.4.0", "<")));
 
     # Constant: JSON_PRETTY_PRINT
     # Define a safe value to avoid warnings pre-5.4.
@@ -176,18 +176,13 @@
         define('JSON_UNESCAPED_SLASHES', 0);
 
     # Start output buffering and set header.
-    if (USE_OB) {
-        if (USE_ZLIB)
+    if (USE_OB)
+        if (USE_ZLIB) {
             ob_start("ob_gzhandler");
-        else
+            header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+        } else {
             ob_start();
-
-        if (USE_ZLIB and HTTP_ACCEPT_DEFLATE)
-            header("Content-Encoding: deflate");
-
-        if (USE_ZLIB and HTTP_ACCEPT_GZIP)
-            header("Content-Encoding: gzip");
-    }
+        }
 
     # File: Error
     # Error handling functions.
@@ -304,12 +299,9 @@
     #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
-    # Handle a missing config file with redirect or error.
+    # Handle a missing config file.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        if (!TESTER and MAIN and file_exists(MAIN_DIR.DIR."install.php"))
-            redirect("install.php");
-        else
-            error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
+        error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
@@ -381,9 +373,10 @@
     if (MAIN or ADMIN)
         Post::publish_scheduled();
 
-    # Set the content-type and charset.
+    # Set appropriate headers.
     if (JAVASCRIPT) {
         header("Content-Type: application/javascript");
+        header("Referrer-Policy: strict-origin-when-cross-origin");
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else {

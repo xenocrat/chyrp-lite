@@ -8,17 +8,19 @@
         # Caches session data.
         static $data = "";
 
-        # Variable: $deny
+        # Boolean: $deny
         # Deny this session?
         static $deny = false;
 
         /**
          * Function: open
-         * Returns: @true@ unless it detects a self-identified bot.
+         * Decides if the session should be denied.
          */
         static function open() {
-            return !(self::$deny = preg_match("/(bot|crawler|slurp|spider)\b/i",
-                                              oneof(@$_SERVER['HTTP_USER_AGENT'], "")));
+            self::$deny = (isset($_SERVER['HTTP_USER_AGENT']) and
+                           preg_match("/(bot|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
+
+            return true;
         }
 
         /**
@@ -47,30 +49,22 @@
 
         /**
          * Function: write
-         * Writes their session to the database, or updates it if it already exists.
+         * Writes their session to the database.
          *
          * Parameters:
          *     $id - Session ID.
          *     $data - Data to write.
          */
         static function write($id, $data) {
-            if (self::$deny or empty($data) or $data == self::$data)
-                return;
+            if (!self::$deny and !empty($data) and $data != self::$data)
+                SQL::current()->replace("sessions",
+                                        array("id"),
+                                        array("id" => $id,
+                                              "data" => $data,
+                                              "user_id" => Visitor::current()->id,
+                                              "updated_at" => datetime()));
 
-            $sql = SQL::current();
-
-            if ($sql->count("sessions", array("id" => $id)))
-                $sql->update("sessions",
-                             array("id" => $id),
-                             array("data" => $data,
-                                   "user_id" => Visitor::current()->id,
-                                   "updated_at" => datetime()));
-            else
-                $sql->insert("sessions",
-                             array("id" => $id,
-                                   "data" => $data,
-                                   "user_id" => Visitor::current()->id,
-                                   "created_at" => datetime()));
+            return true;
         }
 
         /**
@@ -81,10 +75,8 @@
          *     $id - Session ID.
          */
         static function destroy($id) {
-            if (SQL::current()->delete("sessions", array("id" => $id)))
-                return true;
-
-            return false;
+            SQL::current()->delete("sessions", array("id" => $id));
+            return true;
         }
 
         /**
@@ -95,6 +87,7 @@
             SQL::current()->delete("sessions",
                                    "created_at <= :thirty_days OR data = '' OR data IS NULL",
                                    array(":thirty_days" => datetime(strtotime("-30 days"))));
+
             return true;
         }
     }

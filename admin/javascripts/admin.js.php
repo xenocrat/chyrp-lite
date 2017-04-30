@@ -9,6 +9,7 @@ $(function() {
     validate_url();
     validate_passwords();
     confirm_submit();
+    auto_submit();
     Help.init();
     Write.init();
     Settings.init();
@@ -112,12 +113,18 @@ function confirm_submit() {
             e.preventDefault();
     });
 }
+// Submit a form when an element changes.
+function auto_submit() {
+    $("select[data-submit], input[data-submit][type='checkbox']").on("change", function(e) {
+        $(this).parents("form").submit();
+    });
+}
 var Route = {
     action: "<?php echo fix(@$_GET['action'], true); ?>"
 }
 var Site = {
-    url: '<?php echo $config->url; ?>',
-    chyrp_url: '<?php echo $config->chyrp_url; ?>',
+    url: '<?php echo addslashes($config->url); ?>',
+    chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>',
     key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
@@ -155,7 +162,7 @@ var Help = {
 var Write = {
     init: function() {
         // Insert buttons for ajax previews.
-        if (<?php echo(file_exists(THEME_DIR.DIR."content".DIR."preview.twig") ? "true" : "false"); ?>)
+        if (<?php echo($theme->file_exists("content".DIR."preview") ? "true" : "false"); ?>)
             $("#write_form *[data-preview], #edit_form *[data-preview]").each(function() {
                 var target = $(this);
 

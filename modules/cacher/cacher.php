@@ -1,100 +1,96 @@
 <?php
-    require_once "filecacher.php";
-
     class Cacher extends Modules {
         public function __init() {
-            $config = Config::current();
-            $this->cacher = new FileCacher(self_url(), $config);
-            $this->prepare_cache_updaters();
+            $this->exclude = Config::current()->module_cacher["cache_exclude"];
+            $this->url     = rawurldecode(self_url());
+            $this->cachers = array(new PageCacher($this->url),
+                                   new FeedCacher($this->url));
+
+            $this->prepare_cache_regenerators();
         }
 
         static function __install() {
-            $config = Config::current();
-            $config->set("cache_expire", 3600);
-            $config->set("cache_exclude", array());
+            Config::current()->set("module_cacher",
+                                   array("cache_expire" => 3600,
+                                         "cache_exclude" => array()));
         }
 
         static function __uninstall() {
-            $config = Config::current();
-            $config->remove("cache_expire");
-            $config->remove("cache_exclude");
+            Config::current()->remove("module_cacher");
         }
 
         public function route_init($route) {
-            if (!empty($_POST) or
-                !($route->controller instanceof MainController) or
-                in_array($this->cacher->url, Config::current()->cache_exclude) or
-                $this->cancelled or
-                !$this->cacher->url_available() or
-                Flash::exists())
-                return;
-
-            $cache = $this->cacher->get($route);
-        
-            foreach($cache['headers'] as $header)
-                header($header);
-        
-            exit($cache['contents']);
+            if (!$this->cancelled and !in_array($this->url, $this->exclude))
+                foreach ($this->cachers as $cacher)
+                    $cacher->get($route);
         }
 
         public function end($route) {
-            if (!($route->controller instanceof MainController) or
-                in_array($this->cacher->url, Config::current()->cache_exclude) or
-                $this->cancelled or
-                $this->cacher->url_available() or
-                Flash::exists())
-                return;
-
-              $this->cacher->set(ob_get_contents());
+            if (!$this->cancelled and !in_array($this->url, $this->exclude))
+                foreach ($this->cachers as $cacher)
+                    $cacher->set($route);
         }
 
-        public function prepare_cache_updaters() {
+        public function prepare_cache_regenerators() {
             $trigger = Trigger::current();
 
-            $regenerate = array("add_post",
-                                "add_page",
-                                "update_post",
-                                "update_page",
-                                "delete_post",
-                                "delete_page",
-                                "publish_post",
-                                "change_setting",
-                                "preview_theme");
+            $regenerate = array(
+                "add_post",
+                "add_page",
+                "update_post",
+                "update_page",
+                "delete_post",
+                "delete_page",
+                "publish_post",
+                "change_setting"
+            );
 
             $trigger->filter($regenerate, "cacher_regenerate_triggers");
 
             foreach ($regenerate as $action)
                 $this->addAlias($action, "regenerate");
 
+            $regenerate_users = array(
+                "update_user",
+                "preview_theme_started",
+                "preview_theme_stopped"
+            );
+
+            $trigger->filter($regenerate_users, "cacher_regenerate_users_triggers");
+
+            foreach ($regenerate_users as $action)
+                $this->addAlias($action, "regenerate_users");
+
             $regenerate_posts = array();
 
             $trigger->filter($regenerate_posts, "cacher_regenerate_posts_triggers");
 
             foreach ($regenerate_posts as $action)
-                $this->addAlias($action, "remove_post_cache");
+                $this->addAlias($action, "regenerate_posts");
         }
 
         public function regenerate() {
-            $this->cacher->regenerate();
+            foreach ($this->cachers as $cacher)
+                $cacher->regenerate();
         }
 
-        public function regenerate_local($user = null) {
-            $this->cacher->regenerate_local($user);
+        public function regenerate_posts($model) {
+            $post = ($model instanceof Post) ? $model : new Post($model->post_id, array("skip_where" => true)) ;
+
+            if ($post->no_results)
+                return;
+
+            $url = rawurldecode($post->url());
+
+            foreach ($this->cachers as $cacher)
+                $cacher->regenerate_url($url);
         }
 
-        public function remove_caches_for($url) {
-            $this->cacher->remove_caches_for($url);
-        }
+        public function regenerate_users($user = null) {
+            $id = (($user instanceof User) and !$user->no_results) ? $user->id : Visitor::current()->id ;
 
-        public function remove_post_cache($id) {
-            $post = ($id instanceof Model) ? new Post($id->post_id) : new Post($id) ;
-
-            if (!$post->no_results)
-                $this->remove_caches_for(htmlspecialchars_decode($post->url()));
-        }
-
-        public function update_user($user) {
-            $this->regenerate_local(sanitize($user->login));
+            foreach ($this->cachers as $cacher)
+                $cacher->regenerate_user($id);
         }
 
         public function settings_nav($navs) {
@@ -120,9 +116,9 @@
             fallback($_POST['cache_expire'], 3600);
             fallback($_POST['cache_exclude'], array());
 
-            $config = Config::current();
-            $config->set("cache_expire", (int) $_POST['cache_expire']);
-            $config->set("cache_exclude", array_filter($_POST['cache_exclude']));
+            Config::current()->set("module_cacher",
+                                   array("cache_expire" => (int) $_POST['cache_expire'],
+                                         "cache_exclude" => array_filter($_POST['cache_exclude'])));
 
             Flash::notice(__("Settings updated."), "cache_settings");
         }

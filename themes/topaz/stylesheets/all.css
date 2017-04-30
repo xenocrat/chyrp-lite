@@ -97,12 +97,10 @@ h4, h5, h6 {                                    font-size: 1em;
                                                 margin: 1em 0em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
-h4.yearly {                                     font-size: 1.33em;
+h4.archive {                                    font-size: 1.33em;
                                                 text-align: center;
                                                 padding-bottom: 0.5em;
                                                 border-bottom: 1px solid #ebedec }
-h4.archive {                                    font-size: 1em;
-                                                font-weight: normal }
 h6.post_byline {                                font-weight: normal;
                                                 font-style: italic;
                                                 font-size: 0.75em;
@@ -187,10 +185,9 @@ ul.tail_nav li {                                text-align: center;
                                                 padding-top: 0em;
                                                 padding-bottom: 0em;
                                                 line-height: 3em }
-ul.yearly {                                     list-style: none }
+ul.archive {                                    list-style: none }
 ul.archive:last-child {                         margin-bottom: 0em }
-ul.archive li {                                 margin: 0em 0em 0em 1em }
-ul.yearly li {                                  margin: 0em }
+ul.archive li {                                 margin: 0em }
 ol.comments {                                   list-style: none;
                                                 padding: 0em;
                                                 margin: 0em }

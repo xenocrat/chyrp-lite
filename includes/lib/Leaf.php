@@ -81,8 +81,8 @@
      */
     function twig_callback_missing_function($name) {
         foreach (Modules::$instances as $module)
-            if (is_callable(array($module, "twig_".$name)))
-                return new Twig_SimpleFunction($name, array($module, "twig_".$name));
+            if (is_callable(array($module, "twig_function_".$name)))
+                return new Twig_SimpleFunction($name, array($module, "twig_function_".$name));
 
         return false;
     }
@@ -93,8 +93,8 @@
      */
     function twig_callback_missing_filter($name) {
         foreach (Modules::$instances as $module)
-            if (is_callable(array($module, "twig_".$name)))
-                return new Twig_SimpleFilter($name, array($module, "twig_".$name));
+            if (is_callable(array($module, "twig_filter_".$name)))
+                return new Twig_SimpleFilter($name, array($module, "twig_filter_".$name));
 
         return false;
     }
@@ -124,7 +124,7 @@
      */
     function twig_filter_translate($string, $domain = null) {
         if (!isset($domain))
-            $domain = (ADMIN) ? "admin" : Config::current()->theme ;
+            $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
         return __($string, $domain);
     }
@@ -135,7 +135,7 @@
      */
     function twig_filter_translate_plural($single, $plural, $number, $domain = null) {
         if (!isset($domain))
-            $domain = (ADMIN) ? "admin" : Config::current()->theme ;
+            $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
         return _p($single, $plural, $number, $domain);
     }

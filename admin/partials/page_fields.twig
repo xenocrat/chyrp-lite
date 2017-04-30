@@ -53,7 +53,7 @@
 {% for item in theme.pages_list(0, page is defined ? page.id : null) %}
 {% set option_selected = page is defined ? page.parent_id | selected(item.id) : "" %}
 {% set option_contents = ("&nbsp;" | repeat((item.depth - 1) * 4)) ~ (item.title | striptags | fix) %}
-<option value="{{ item.id }}"{{ option_selected }}>option_contents</option>
+<option value="{{ item.id }}"{{ option_selected }}>{{ option_contents }}</option>
 {% endfor %}
 </select>
 </p>

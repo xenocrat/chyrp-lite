@@ -53,25 +53,15 @@
 <td class="user_activated emblem">
 {% if user.approved == true %}
 <img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
-{% else %}
-&nbsp;
 {% endif %}
 </td>
 {{ trigger.call("manage_users_column", user) }}
-{% if user.editable() or user.deletable() %}
-{% if user.editable() %}
-<td class="controls"{{ not user.deletable() ? ' colspan="2"' : '' }}>
+<td class="controls">
 {{ user.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
-{% endif %}
-{% if user.deletable() %}
-<td class="controls"{{ not user.editable() ? ' colspan="2"' : '' }}>
+<td class="controls">
 {{ user.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
-{% endif %}
-{% else %}
-<td class="controls" colspan="2">&nbsp;</td>
-{% endif %}
 </tr>
 {% else %}
 <tr>

@@ -1,21 +1,6 @@
-# Chyrp Lite Translation File.
-# Copyright (C) 2017 xenocrat
-# This file is distributed under the same license as the Chyrp Lite package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Chyrp Lite"
-"Report-Msgid-Bugs-To: hello@xenocrat.net"
-"POT-Creation-Date: 2017-03-05 15:12+0000"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"
-"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"
-"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"
-"MIME-Version: 1.0"
-"Content-Type: text/plain; charset=UTF-8"
-"Content-Transfer-Encoding: 8bit"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2017 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
 
 #: themes/topaz/content/comment.twig:3
 #, php-format
@@ -31,16 +16,7 @@ msgstr ""
 msgid "This comment is awaiting moderation."
 msgstr ""
 
-#: themes/topaz/content/comment.twig:15
-msgid "Edit"
-msgstr ""
-
-#: themes/topaz/content/comment.twig:15
-#: themes/topaz/content/post.twig:11
-msgid "Delete"
-msgstr ""
-
-#: themes/topaz/content/comment.twig:20
+#: themes/topaz/content/comment.twig:22
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr ""
 
@@ -61,7 +37,7 @@ msgstr ""
 
 #: themes/topaz/content/post.twig:17
 #: themes/topaz/content/sidebar.twig:30
-#: themes/topaz/layouts/default.twig:98
+#: themes/topaz/layouts/default.twig:96
 msgid "Draft"
 msgstr ""
 
@@ -150,37 +126,37 @@ msgid "Feed"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:22
-#: themes/topaz/layouts/default.twig:90
+#: themes/topaz/layouts/default.twig:88
 msgid "Admin"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:26
-#: themes/topaz/layouts/default.twig:94
+#: themes/topaz/layouts/default.twig:92
 msgid "Write"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:35
 #: themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:103
+#: themes/topaz/layouts/default.twig:101
 msgid "Controls"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:38
-#: themes/topaz/layouts/default.twig:106
+#: themes/topaz/layouts/default.twig:104
 msgid "Log out"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:43
 #: themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
-#: themes/topaz/layouts/default.twig:111
+#: themes/topaz/layouts/default.twig:109
 msgid "Register"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:47
 #: themes/topaz/forms/user/login.twig:5
 #: themes/topaz/forms/user/login.twig:14
-#: themes/topaz/layouts/default.twig:115
+#: themes/topaz/layouts/default.twig:113
 msgid "Log in"
 msgstr ""
 
@@ -201,7 +177,7 @@ msgid "Recent Posts"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:94
-#: themes/topaz/layouts/default.twig:85
+#: themes/topaz/layouts/default.twig:84
 msgid "Archive"
 msgstr ""
 
@@ -390,7 +366,7 @@ msgstr ""
 msgid "Older posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:127
+#: themes/topaz/layouts/default.twig:125
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""
@@ -403,19 +379,19 @@ msgstr ""
 msgid "Not found."
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:30
+#: themes/topaz/pages/archive.twig:29
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:47
-#: themes/topaz/pages/archive.twig:52
-#: themes/topaz/pages/archive.twig:63
+#: themes/topaz/pages/archive.twig:41
+#: themes/topaz/pages/archive.twig:46
+#: themes/topaz/pages/archive.twig:57
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:74
+#: themes/topaz/pages/archive.twig:68
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
@@ -447,7 +423,7 @@ msgstr ""
 
 #: themes/topaz/pages/tag.twig:6
 #, php-format
-msgid "Posts tagged with %s"
+msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/topaz/pages/tags.twig:6

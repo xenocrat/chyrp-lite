@@ -283,20 +283,18 @@
          *
          * Doesn't check every keyword, just the common/sensible ones.
          *
-         * ...Okay, it only does two. "order" and "group".
-         *
          * Parameters:
          *     $name - Name of the column.
          */
         public static function safecol($name) {
-            return preg_replace("/(([^a-zA-Z0-9_]|^)(order|group)([^a-zA-Z0-9_]|$))/i",
+            return preg_replace("/(([^a-zA-Z0-9_]|^)(order|group|having|limit)([^a-zA-Z0-9_]|$))/i",
                                 (SQL::current()->adapter == "mysql") ? "\\2`\\3`\\4" : '\\2"\\3"\\4',
                                 $name);
         }
 
         /**
          * Function: build_conditions
-         * Builds an associative array of SQL values into PDO-esque paramized query strings.
+         * Builds an associative array of SQL values into PDO-esque parameterized query strings.
          *
          * Parameters:
          *     $conds - Conditions.
@@ -308,16 +306,19 @@
             $conditions = array();
 
             foreach ($conds as $key => $val) {
-                if (is_int($key)) # Full expression
+                if (is_int($key)) {
+                    # Full expression.
                     $cond = $val;
-                else { # Key => Val expression
+                } else {
+                    # Key => Val expression.
                     if (is_string($val) and strlen($val) and $val[0] == ":")
                         $cond = self::safecol($key)." = ".$val;
                     else {
                         if (is_bool($val))
                             $val = (int) $val;
 
-                        if (substr($key, -4) == " not") { # Negation
+                        if (strtoupper(substr($key, -4)) == " NOT") {
+                            # Negation.
                             $key = self::safecol(substr($key, 0, -4));
                             $param = str_replace(array("(", ")", "."), "_", $key);
 
@@ -329,18 +330,8 @@
                                 $cond = $key." != :".$param;
                                 $params[":".$param] = $val;
                             }
-                        } elseif (substr($key, -5) == " like" and is_array($val)) { # multiple LIKE
-                            $key = self::safecol(substr($key, 0, -5));
-                            $likes = array();
-
-                            foreach ($val as $index => $match) {
-                                $param = str_replace(array("(", ")", "."), "_", $key)."_".$index;
-                                $likes[] = $key." LIKE :".$param;
-                                $params[":".$param] = $match;
-                            }
-
-                            $cond = "(".implode(" OR ", $likes).")";
-                        } elseif (substr($key, -9) == " like all" and is_array($val)) { # multiple LIKE
+                        } elseif (strtoupper(substr($key, -9)) == " LIKE ALL" and is_array($val)) {
+                            # multiple LIKE (AND).
                             $key = self::safecol(substr($key, 0, -9));
                             $likes = array();
 
@@ -351,7 +342,8 @@
                             }
 
                             $cond = "(".implode(" AND ", $likes).")";
-                        } elseif (substr($key, -9) == " not like" and is_array($val)) { # multiple NOT LIKE
+                        } elseif (strtoupper(substr($key, -9)) == " NOT LIKE" and is_array($val)) {
+                            # multiple NOT LIKE.
                             $key = self::safecol(substr($key, 0, -9));
                             $likes = array();
 
@@ -362,22 +354,38 @@
                             }
 
                             $cond = "(".implode(" AND ", $likes).")";
-                        } elseif (substr($key, -5) == " like") { # LIKE
+                        } elseif (strtoupper(substr($key, -5)) == " LIKE" and is_array($val)) {
+                            # multiple LIKE (OR).
                             $key = self::safecol(substr($key, 0, -5));
-                            $param = str_replace(array("(", ")", "."), "_", $key);
-                            $cond = $key." LIKE :".$param;
-                            $params[":".$param] = $val;
-                        } elseif (substr($key, -9) == " not like") { # NOT LIKE
+                            $likes = array();
+
+                            foreach ($val as $index => $match) {
+                                $param = str_replace(array("(", ")", "."), "_", $key)."_".$index;
+                                $likes[] = $key." LIKE :".$param;
+                                $params[":".$param] = $match;
+                            }
+
+                            $cond = "(".implode(" OR ", $likes).")";
+                        } elseif (strtoupper(substr($key, -9)) == " NOT LIKE") {
+                            # NOT LIKE.
                             $key = self::safecol(substr($key, 0, -9));
                             $param = str_replace(array("(", ")", "."), "_", $key);
                             $cond = $key." NOT LIKE :".$param;
                             $params[":".$param] = $val;
-                        } elseif (substr_count($key, " ")) { # Custom operation, e.g. array("foo >" => $bar)
+                        } elseif (strtoupper(substr($key, -5)) == " LIKE") {
+                            # LIKE.
+                            $key = self::safecol(substr($key, 0, -5));
+                            $param = str_replace(array("(", ")", "."), "_", $key);
+                            $cond = $key." LIKE :".$param;
+                            $params[":".$param] = $val;
+                        } elseif (substr_count($key, " ")) {
+                            # Custom operation, e.g. array("foo >" => $bar).
                             list($param,) = explode(" ", $key);
                             $param = str_replace(array("(", ")", "."), "_", $param);
                             $cond = self::safecol($key)." :".$param;
                             $params[":".$param] = $val;
-                        } else { # Equation
+                        } else {
+                            # Equation.
                             if (is_array($val))
                                 $cond = self::safecol($key)." IN ".self::build_list($val, $params);
                             elseif ($val === null and $insert)
@@ -424,7 +432,7 @@
 
                 # Does it not already have a table specified?
                 if (!substr_count($full, ".")) {
-                                           # Don't replace things that are already either prefixed or paramized.
+                    # Don't replace things that are already either prefixed or parameterized.
                     $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
                                           "\\1".$before."__".$tables[0].".".$name.$after,
                                           $field,
@@ -432,7 +440,7 @@
                 } else {
                     # Okay, it does, but is the table prefixed?
                     if (substr($full, 0, 2) != "__") {
-                                               # Don't replace things that are already either prefixed or paramized.
+                        # Don't replace things that are already either prefixed or parameterized.
                         $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
                                               "\\1".$before."__".$name.$after,
                                               $field,
@@ -444,5 +452,3 @@
             $field = preg_replace("/AS ([^ ]+)\./i", "AS ", $field);
         }
     }
-
-

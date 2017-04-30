@@ -1,21 +1,6 @@
-# Chyrp Lite Translation File.
-# Copyright (C) 2017 xenocrat
-# This file is distributed under the same license as the Chyrp Lite package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Chyrp Lite"
-"Report-Msgid-Bugs-To: hello@xenocrat.net"
-"POT-Creation-Date: 2017-03-05 15:12+0000"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"
-"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"
-"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"
-"MIME-Version: 1.0"
-"Content-Type: text/plain; charset=UTF-8"
-"Content-Transfer-Encoding: 8bit"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2017 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
 
 #: modules/sitemap/admin/pages/sitemap_settings.twig:3
 #: modules/sitemap/admin/pages/sitemap_settings.twig:6
@@ -50,35 +35,35 @@ msgstr ""
 msgid "Please remember to give write permissions to sitemap.xml on the root directory of the site."
 msgstr ""
 
-#: modules/sitemap/sitemap.php:9
+#: modules/sitemap/sitemap.php:5
 msgid "Sitemap module cannot determine the server's document root."
 msgstr ""
 
-#: modules/sitemap/sitemap.php:11
-msgid "hourly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:12
-msgid "daily"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:13
-msgid "weekly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:14
-msgid "monthly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:15
-msgid "yearly"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:16
-msgid "never"
-msgstr ""
-
-#: modules/sitemap/sitemap.php:35
+#: modules/sitemap/sitemap.php:31
 msgid "Sitemap"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:42
+msgid "Hourly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:43
+msgid "Daily"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:44
+msgid "Weekly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:45
+msgid "Monthly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:46
+msgid "Yearly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:47
+msgid "Never"
 msgstr ""
 

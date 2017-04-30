@@ -7,10 +7,9 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2017.01");
-    define('CHYRP_CODENAME', "Swainson");
+    define('CHYRP_VERSION',  "2017.02");
+    define('CHYRP_CODENAME', "Swahili");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-    define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
     define('ADMIN',          false);
@@ -23,6 +22,8 @@
     define('MAIN_DIR',       dirname(__FILE__));
     define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
     define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
+    define('CACHE_TWIG',     false);
+    define('CACHE_THUMBS',   false);
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
 
@@ -686,8 +687,8 @@
 
             # Build the configuration file.
             $set = array($config->set("sql", $settings),
-                         $config->set("name", $_POST['name']),
-                         $config->set("description", $_POST['description']),
+                         $config->set("name", strip_tags($_POST['name'])),
+                         $config->set("description", strip_tags($_POST['description'])),
                          $config->set("url", rtrim($url, "/")),
                          $config->set("chyrp_url", rtrim($url, "/")),
                          $config->set("email", $_POST['email']),

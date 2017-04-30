@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Comments", "comments"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.7,
+    "version"       => 1.8,
     "description"   => __("Adds commenting functionality to your posts, with pingback support.", "comments"),
     "author"        => array(
         "name"      => "Chyrp Team",

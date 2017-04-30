@@ -56,7 +56,7 @@
 
 html {                                          font-size: 16px }
 *::selection {                                  color: #fffefd;
-                                                background-color: #cc5252 }
+                                                background-color: #47b347 }
 body {                                          font-family: "Open Sans webfont", sans-serif;
                                                 font-size: 1rem;
                                                 color: #999491;
@@ -87,10 +87,12 @@ h3 {                                            font-size: 1em;
                                                 line-height: 1.2 }
 h3.flash {                                      margin: 0em }
 h3.filter {                                     box-sizing: border-box;
-                                                max-width: 1024px;
-                                                margin: 0rem auto;
-                                                padding: 4rem;
-                                                text-align: center }
+                                                width: 100%;
+                                                text-align: center;
+                                                color: #ffffff;
+                                                background-color: #47b347;
+                                                margin: 0rem;
+                                                padding: 0.5em }
 h3.archive {                                    margin-top: 1em;
                                                 clear: both }
 h4 {                                            font-size: 1em;
@@ -99,7 +101,7 @@ h4 {                                            font-size: 1em;
                                                 margin: 1em 0em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
-h4.yearly {                                     font-size: 1.33em;
+h4.archive {                                    font-size: 1.33em;
                                                 margin-bottom: 0.75em }
 h5, h6 {                                        font-size: 1em;
                                                 font-weight: bold;
@@ -164,10 +166,9 @@ ul.navigation {                                 list-style: none;
                                                 display: inline }
 ul.navigation li {                              display: inline;
                                                 padding: 0em }
-ul.yearly {                                     list-style: none }
+ul.archive {                                    list-style: none }
 ul.archive:last-child {                         margin-bottom: 0em }
-ul.archive li {                                 margin: 0em 0em 0em 1em }
-ul.yearly li {                                  margin: 0em }
+ul.archive li {                                 margin: 0em }
 ol.comments {                                   list-style: none;
                                                 padding: 0em;
                                                 margin: 0em;
@@ -265,9 +266,7 @@ textarea:focus {                                outline: none;
 article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
-                                                cursor: pointer;
-                                                transition-property: color, background-color, border;
-                                                transition-duration: 250ms }
+                                                cursor: pointer }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.clear {                                     visibility: hidden;
@@ -298,7 +297,7 @@ div.flash {                                     box-sizing: border-box;
                                                 color: #ffffff;
                                                 background-color: #cc5252;
                                                 padding: 0.5em }
-div.flash + div.flash {                         border-top: 1px solid #ffffff }
+div.flash + div.flash {                         border-top: 1px solid #464647 }
 div.metadata {                                  font-weight: normal;
                                                 font-size: 0.75em;
                                                 color: #999491;
@@ -379,9 +378,7 @@ article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
                                                 max-width: 800px }                  
-a {                                             border-bottom: 1px transparent solid;
-                                                transition-property: color, background-color, border;
-                                                transition-duration: 250ms }
+a {                                             border-bottom: 1px transparent solid }
 a:link {                                        color: #999491;
                                                 text-decoration: none }
 a:visited {                                     color: #999491;
@@ -406,17 +403,21 @@ h3.flash a:focus,
 h3.flash a:active {                             top: 1px;
                                                 color: inherit }
 div.traversal a {                               display: inline-block;
+                                                position: relative;
                                                 padding: 2.5em 0em;
                                                 width: 6em;
                                                 height: 1em;
+                                                top: 0px;
                                                 color: #ffffff;
                                                 line-height: 1;
                                                 border-radius: 50%;
-                                                border: 1px #464647 solid }
+                                                border: 1px #464647 solid;
+                                                transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4) }
 div.traversal a:hover,
 div.traversal a:focus,
-div.traversal a:active {                        background-color: #47b347;
-                                                border: 1px solid #47b347 }
+div.traversal a:active {                        background-color: #464647 }
+div.prev a:hover, div.prev a:active {           top: -1px }
+div.next a:hover, div.next a:active {           top: 1px }
 section a:link, p a:link {                      color: #999491;
                                                 border-bottom: 1px #999491 solid }
 section a:visited, p a:visited {                color: #999491;
@@ -438,20 +439,19 @@ div.tags a.tag {                                display: inline-block;
                                                 border: 1px solid #464647 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
-div.tags a.tag:active {                         background-color: #47b347;
-                                                border: 1px solid #47b347 }
+div.tags a.tag:active {                         background-color: #464647 }
 div.category a.category {                       display: inline-block;
                                                 position: absolute;
-                                                top: -1px;
+                                                top: 0px;
                                                 right: 4rem;
                                                 padding: 0.2em 0.6em;
                                                 margin: 0em;
                                                 color: #fffefd;
-                                                border: 1px solid #464647 }
+                                                border: 1px solid #464647;
+                                                border-top: none }
 div.category a.category:hover,
 div.category a.category:focus,
-div.category a.category:active {                background-color: #47b347;
-                                                border: 1px solid #47b347 }
+div.category a.category:active {                background-color: #464647 }
 div.metadata a {                                color: #999491 }
 div.metadata a:hover {                          color: #ffffff }
 div.metadata a:focus {                          color: #ffffff;
@@ -468,8 +468,8 @@ div.doaction a, button {                        display: inline-block;
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
 div.doaction a:active, button:active {          outline: none;
-                                                background-color: #47b347;
-                                                border: 1px solid #47b347 }
+                                                background-color: #464647;
+                                                border: 1px solid #464647 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    font-weight: bold }
 article > section.photo > a {                   border-bottom: none }
@@ -494,8 +494,7 @@ a.archive_post_link {                           display: block;
                                                 right: -1px;
                                                 color: transparent;
                                                 background-color: transparent;
-                                                mix-blend-mode: lighten;
-                                                transition: all 0s }
+                                                mix-blend-mode: lighten }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {                    background-color: #47b347;
@@ -549,7 +548,6 @@ img.gravatar {                                  position: absolute;
     table {                                     box-sizing: border-box;
                                                 display: block }
     h1.banner {                                 margin-bottom: 2rem }
-    h3.filter {                                 padding: 2rem }
     div#mast_box {                              padding: 2rem 1rem }
     ul.navigation li > a {                      display: inline-block;
                                                 margin: 0em 0.5em 2em 0.5em }

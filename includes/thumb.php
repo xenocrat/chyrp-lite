@@ -21,13 +21,13 @@
         show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
     $config = Config::current();
-    $quality = (int) fallback($_GET["quality"], 80);
+    $quality = abs((int) fallback($_GET["quality"], 80));
     $filename = str_replace(DIR, "", $_GET['file']);
     $filepath = uploaded($filename, false);;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
     $url = uploaded($filename);
-    $new_width = (int) fallback($_GET["max_width"], 640);
-    $new_height = (int) fallback($_GET["max_height"], 0);
+    $thumbnail_width = abs((int) fallback($_GET["max_width"], 640));
+    $thumbnail_height = abs((int) fallback($_GET["max_height"], 0));
 
     # GD library is not available.
     if (!function_exists("gd_info"))
@@ -43,164 +43,172 @@
     if (!is_readable($filepath) or !is_file($filepath))
         show_404(__("Not Found"), __("File not found."));
 
+    function resize_thumb(&$crop_x, &$crop_y, &$thumbnail_width, &$thumbnail_height, &$original_width, &$original_height) {
+        $scale_x = ($thumbnail_width > 0) ? $thumbnail_width / $original_width : 0 ;
+        $scale_y = ($thumbnail_height > 0) ? $thumbnail_height / $original_height : 0 ;
+
+        if ($thumbnail_width == 0 and $thumbnail_height == 0)
+            $thumbnail_width = $thumbnail_height = 1;
+
+        if ($thumbnail_width <= $original_width and $thumbnail_height <= $original_height and $scale_x == $scale_y)
+            return;
+
+        if (!empty($_GET['square'])) {
+            if ($thumbnail_width == 0)
+                $thumbnail_width = $thumbnail_height;
+
+            if ($thumbnail_height == 0)
+                $thumbnail_height = $thumbnail_width;
+
+            # Portrait orientation.
+            if ($original_width > $original_height) {
+                $crop_x = ceil(($original_width - $original_height) / 2);
+                $original_width = $original_height;
+            }
+
+            # Landscape orientation.
+            if ($original_height > $original_width) {
+                $crop_y = ceil(($original_height - $original_width) / 2);
+                $original_height = $original_width;
+            }
+
+            return;
+        }
+
+        if ($thumbnail_width != 0 and $thumbnail_height == 0) {
+            $thumbnail_height = ceil(($thumbnail_width / $original_width) * $original_height);
+            return;
+        }
+
+        if ($thumbnail_width == 0 and $thumbnail_height != 0) {
+            $thumbnail_width = ceil(($thumbnail_height / $original_height) * $original_width);
+            return;
+        }
+
+        # Recompute to retain aspect ratio and stay within bounds.
+        if ($scale_x != $scale_y) {
+            if ($original_width * $scale_y <= $thumbnail_width)
+                $thumbnail_width = ceil($original_width * $scale_y);
+
+            if ($original_height * $scale_x <= $thumbnail_height)
+                $thumbnail_height = ceil($original_height * $scale_x);
+        }
+    }
+
+    # Fetch original image metadata.
     list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
 
     $crop_x = 0;
     $crop_y = 0;
+    $quality = ($quality > 100) ? 100 : $quality ;
 
-    function resize(&$crop_x, &$crop_y, &$new_width, &$new_height, $original_width, $original_height) {
-        $xscale = ($new_width > 0) ? $new_width / $original_width : 0 ;
-        $yscale = ($new_height > 0) ? $new_height / $original_height : 0 ;
+    # Call our function to determine the final scale of the thumbnail.
+    resize_thumb($crop_x, $crop_y, $thumbnail_width, $thumbnail_height, $original_width, $original_height);
 
-        if ($new_width <= $original_width and $new_height <= $original_height and $xscale == $yscale)
-            return;
-
-        if (isset($_GET['square'])) {
-            if ( $new_width === 0 )
-                $new_width = $new_height;
-
-            if ( $new_height === 0 )
-                $new_height = $new_width;
-
-            if($original_width > $original_height) {
-                # Portrait orientation.
-                $crop_x = ceil( ($original_width - $original_height) / 2 );
-            } else if ($original_height > $original_width) {
-                # Landscape orientation.
-                $crop_y = ceil( ($original_height - $original_width) / 2 );
-            }
-
-            return;
-
-        } else {
-
-            if ($new_width and !$new_height)
-                return $new_height = ($new_width / $original_width) * $original_height;
-            elseif (!$new_width and $new_height)
-                return $new_width = ($new_height / $original_height) * $original_width;
-
-            if ($xscale != $yscale) {
-                if ($original_width * $yscale <= $new_width)
-                    $new_width = $original_width * $yscale;
-
-                if ($original_height * $xscale <= $new_height)
-                    $new_height = $original_height * $xscale;
-            }
-
-            $xscale = ($new_width > 0) ? $new_width / $original_width : 0 ;
-            $yscale = ($new_height > 0) ? $new_height / $original_height : 0 ;
-    
-            if (round($xscale, 3) == round($yscale, 3))
-                return;
-    
-            resize($crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
-        }
-    }
-
-    # Determine the final scale of the thumbnail.
-    resize($crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
-
-    # If it's already below the maximum, just redirect to it.
-    if ($original_width <= $new_width and $original_height <= $new_height)
+    # Redirect to the original if the size is already less than requested.
+    if ($original_width <= $thumbnail_width and $original_height <= $thumbnail_height)
         redirect($url);
 
-    $cache_filename = md5($filename.$new_width.$new_height.$quality).".".$extension;
-    $cache_file = CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename;
+    # Determine the media type.
+    switch ($type) {
+        case IMAGETYPE_GIF:
+            $media_type = "image/gif";
+            break;
+        case IMAGETYPE_JPEG:
+            $media_type = "image/jpeg";
+            break;
+        case IMAGETYPE_PNG:
+            $media_type = "image/png";
+            break;
+        case IMAGETYPE_BMP:
+            $media_type = "image/bmp";
+            break;
+        default:
+            $media_type = "application/octet-stream";
+    }
 
-    if (isset($_GET['no_cache']) and $_GET['no_cache'] == "true" and file_exists($cache_file))
-        unlink($cache_file);
+    $cache_filename = md5($filename.$thumbnail_width.$thumbnail_height.$quality).".".$extension;
+    $cache_filepath = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename : null ;
 
-    # Serve a cache if it exists and the original image has not changed.
-    if (file_exists($cache_file) and filemtime($cache_file) > filemtime($filepath)) {
+    header("Last-Modified: ".date("r", filemtime($filepath)));
+    header("Content-Type: ".$media_type);
+    header("Cache-Control: public");
+    header("Expires: ".date("r", strtotime("+30 days")));
+    header("Content-Disposition: inline; filename=\"".addslashes($cache_filename)."\"");
+
+    if (!isset($cache_filepath) or
+        !file_exists($cache_filepath) or
+        !(filemtime($cache_filepath) > filemtime($filepath))) {
+        # Verify the media type is supported and prepare the original.
+        switch ($type) {
+            case IMAGETYPE_GIF:
+                if (imagetypes() & IMG_GIF) {
+                    $original = imagecreatefromgif($filepath);
+                    $function = "imagegif";
+                    break;
+                }
+            case IMAGETYPE_JPEG:
+                if (imagetypes() & IMG_JPG) {
+                    $original = imagecreatefromjpeg($filepath);
+                    $function = "imagejpeg";
+                    break;
+                }
+            case IMAGETYPE_PNG:
+                if (imagetypes() & IMG_PNG) {
+                    $original = imagecreatefrompng($filepath);
+                    $function = "imagepng";
+                    break;
+                }
+            case IMAGETYPE_BMP:
+                if (imagetypes() & IMG_WBMP) {
+                    $original = imagecreatefromwbmp($filepath);
+                    $function = "imagewbmp";
+                    break;
+                }
+            default:
+                redirect($url); # Redirect if type is unsupported.
+        }
+
+        if (DEBUG)
+            error_log("GENERATING image thumbnail for ".$filename);
+
+        # Create the thumbnail.
+        $thumbnail = imagecreatetruecolor($thumbnail_width, $thumbnail_height);
+
+        if ($function == "imagepng") {
+            imagealphablending($thumbnail, false);
+            imagesavealpha($thumbnail, true);
+            $quality = 10 - (($quality > 0) ? ceil($quality / 10) : 1);
+        }
+
+        # Do the crop and resize.
+        imagecopyresampled($thumbnail,
+                           $original,
+                           0,
+                           0,
+                           $crop_x,
+                           $crop_y,
+                           $thumbnail_width,
+                           $thumbnail_height,
+                           $original_width,
+                           $original_height);
+
+        # Output the thumbnail.
+        if ($function == "imagejpeg" or $function == "imagepng")
+            $function($thumbnail, $cache_filepath, $quality);
+        else
+            $function($thumbnail, $cache_filepath);
+
+        # Destroy resources.
+        imagedestroy($original);
+        imagedestroy($thumbnail);
+    }
+
+    if (isset($cache_filepath)) {
         if (DEBUG)
             error_log("SERVING image thumbnail for ".$filename);
 
-        header("Last-Modified: ".gmdate('D, d M Y H:i:s', filemtime($cache_file)).' GMT');
-        header("Content-type: image/".($extension == "jpg" ? "jpeg" : $extension));
-        header("Cache-Control: public");
-        header("Expires: ".date("r", strtotime("+30 days")));
-        header("Content-Disposition: inline; filename=".$cache_filename);
-        readfile($cache_file);
-        exit;
+        readfile($cache_filepath);
     }
-
-    # Verify that the image is able to be thumbnailed, and prepare variables used later in the script.
-    switch ($type) {
-        case IMAGETYPE_GIF:
-            if (imagetypes() & IMG_GIF) {
-                $image = imagecreatefromgif($filepath);
-                $done = "imagegif";
-                $mime = "image/gif";
-                break;
-            }
-        case IMAGETYPE_JPEG:
-            if (imagetypes() & IMG_JPG) {
-                $image = imagecreatefromjpeg($filepath);
-                $done = "imagejpeg";
-                $mime = "image/jpeg";
-                break;
-            }
-        case IMAGETYPE_PNG:
-            if (imagetypes() & IMG_PNG) {
-                $image = imagecreatefrompng($filepath);
-                $done = "imagepng";
-                $mime = "image/png";
-                break;
-            }
-        case IMAGETYPE_BMP:
-            if (imagetypes() & IMG_WBMP) {
-                $image = imagecreatefromwbmp($filepath);
-                $done = "imagewbmp";
-                $mime = "image/bmp";
-                break;
-            }
-        default:
-            redirect($url); # Switch will flow through to here if image type is unsupported.
-    }
-
-    if (DEBUG)
-        error_log("GENERATING image thumbnail for ".$filename);
-
-    # Create the final resized image.
-    $thumbnail = imagecreatetruecolor($new_width, $new_height);
-
-    if ($done == "imagepng")
-        imagealphablending($thumbnail, false);
-
-    # if square crop is desired, original dimensions need to be set to square ratio.
-    if ( isset($_GET['square']) ) {
-        if ($original_width > $original_height) {
-            $original_width = $original_height;
-        } else if ($original_height > $original_width) {
-            $original_height = $original_width;
-        }
-    }
-
-    imagecopyresampled($thumbnail, $image, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $original_width, $original_height);
-
-    header("Last-Modified: ".gmdate("D, d M Y H:i:s", filemtime($filepath))." GMT");
-    header("Content-Type: ".$mime);
-    header("Content-Disposition: inline; filename=".$filename.".".$extension);
-
-    if ($done == "imagepng")
-        imagesavealpha($thumbnail, true);
-
-    # Generate the cache image.
-    if ((!isset($_GET['no_cache']) or $_GET['no_cache'] == "false") and
-        is_dir(CACHES_DIR.DIR."thumbs") and is_writable(CACHES_DIR.DIR."thumbs"))
-        if ($done == "imagejpeg")
-            $done($thumbnail, $cache_file, $quality);
-        else
-            $done($thumbnail, $cache_file);
-
-    # Serve the image.
-    if ($done == "imagejpeg")
-        $done($thumbnail, null, $quality);
-    else
-        $done($thumbnail);
-
-    # Clear memory and flush the output buffer.
-    imagedestroy($image);
-    imagedestroy($thumbnail);
 
     ob_end_flush();

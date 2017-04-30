@@ -63,8 +63,11 @@
             $route = Route::current();
             $visitor = Visitor::current();
 
-            if (!$type) {
-                $status = ($post->user_id == $visitor->id) ? "approved" : $config->default_comment_status ;
+            if (empty($type)) {
+                $status = ($post->user_id == $visitor->id) ?
+                    "approved" :
+                    $config->module_comments["default_comment_status"] ;
+
                 $type = "comment";
             } else
                 $status = $type;
@@ -75,8 +78,8 @@
             $HTTP_REFERER = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "" ;
             $HTTP_USER_AGENT = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "" ;
 
-            if (!empty($config->akismet_api_key)) {
-                $akismet = new Akismet($config->url, $config->akismet_api_key);
+            if (!empty($config->module_comments["akismet_api_key"])) {
+                $akismet = new Akismet($config->url, $config->module_comments["akismet_api_key"]);
                 $akismet->setCommentContent($body);
                 $akismet->setCommentAuthor($author);
                 $akismet->setCommentAuthorURL($author_url);
@@ -392,7 +395,7 @@
                 new Group($config->guest_group) ;
 
             if ($this->status != "pingback" and !$group->can("code_in_comments"))
-                $this->body = strip_tags($this->body, "<".implode("><", $config->allowed_comment_html).">");
+                $this->body = strip_tags($this->body, "<".implode("><", $config->module_comments["allowed_comment_html"]).">");
         }
 
         /**

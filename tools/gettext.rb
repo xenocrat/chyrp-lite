@@ -6,7 +6,7 @@ require "optparse"
 
 OPTIONS = {
   :project => "Chyrp Lite",
-  :maintainer => "xenocrat <hello@xenocrat.net>",
+  :maintainer => "Daniel Pimley",
   :domain => nil,
   :theme => false,
   :msgstr => "",
@@ -197,24 +197,9 @@ class Gettext
   end
 
   def print_pofile
-    puts '# '+OPTIONS[:project]+' Translation File.'
-    puts '# Copyright (C) '+Time.now.utc.strftime("%Y")+' '+OPTIONS[:maintainer].gsub(/ <([^>]+)>/, "")
-    puts '# This file is distributed under the same license as the '+OPTIONS[:project]+' package.'
-    puts '# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.'
-    puts '#'
-    puts '#, fuzzy'
-    puts 'msgid ""'
-    puts 'msgstr ""'
-    puts '"Project-Id-Version: '+OPTIONS[:project]+'"'
-    puts '"Report-Msgid-Bugs-To: '+OPTIONS[:maintainer].gsub(/[^<]+ <([^>]+)>/, "\\1")+'"'
-    puts '"POT-Creation-Date: '+Time.now.utc.strftime("%Y-%m-%d %H:%M")+'+0000"'
-    puts '"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"'
-    puts '"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"'
-    puts '"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"'
-    puts '"MIME-Version: 1.0"'
-    puts '"Content-Type: text/plain; charset=UTF-8"'
-    puts '"Content-Transfer-Encoding: 8bit"'
-    puts '"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"'
+    puts '#. Content-Type: text/plain; charset=UTF-8'
+    puts '#. Copyright '+Time.now.utc.strftime("%Y")+' '+OPTIONS[:maintainer]+' and other contributors.'
+    puts '#. This file is distributed under the same license as the '+OPTIONS[:project]+' package.'
     puts ''
 
     output = ""

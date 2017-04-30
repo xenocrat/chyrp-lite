@@ -141,12 +141,12 @@ div.clear {                                     visibility: hidden;
  */
 
 #header {                                       background-color: #4f4f4f;
-                                                padding: 2em 0em 3em 0em;
+                                                padding: 2rem 0rem 3rem 0rem;
                                                 color: #efefef;
                                                 text-align: center;
                                                 position: relative }
 #header h1 {                                    font-weight: normal;
-                                                margin: 0em 1em 1em 1em }
+                                                margin: 0rem 2rem 2rem 2rem }
 #header h1 a {                                  color: #ffffff;
                                                 text-decoration: none }
 
@@ -157,8 +157,8 @@ div.clear {                                     visibility: hidden;
 
 #header #navigation {                           position: absolute;
                                                 bottom: 0em;
-                                                left: 4em;
-                                                right: 4em }
+                                                left: 4rem;
+                                                right: 4rem }
 #header #navigation li {                        display: block }
 #header #navigation li a {                      box-sizing: border-box;
                                                 display: block;
@@ -166,7 +166,7 @@ div.clear {                                     visibility: hidden;
                                                 width: 24%;
                                                 margin-left: 0em;
                                                 margin-right: 1%;
-                                                padding: 0em 1em;
+                                                padding: 0rem 1rem;
                                                 height: 3rem;
                                                 line-height: 3rem;
                                                 text-align: center;
@@ -201,8 +201,8 @@ div.clear {                                     visibility: hidden;
 
 #footer {                                       box-sizing: border-box;
                                                 width: 100%;
-                                                margin: 2em auto;
-                                                padding: 0em 2em;
+                                                margin: 2rem auto;
+                                                padding: 0rem 2rem;
                                                 text-align: center }
 
 /**
@@ -227,7 +227,7 @@ div.clear {                                     visibility: hidden;
                                                 overflow: hidden;
                                                 text-overflow: ellipsis;
                                                 margin: 0em 0.5em 0em 0em;
-                                                padding: 0em 1.25em;
+                                                padding: 0em 1rem;
                                                 border: 1px solid #cfcfcf;
                                                 border-bottom: none;
                                                 border-top-left-radius: 0.8em;
@@ -253,7 +253,7 @@ div.clear {                                     visibility: hidden;
 #content {                                      clear: both;
                                                 background-color: #ffffff;
                                                 padding: 1em;
-                                                margin: 0em 4em 1em 4em;
+                                                margin: 0rem 4rem 1rem 4rem;
                                                 border: 1px solid #dfdfdf;
                                                 border-top: none;
                                                 position: relative;
@@ -264,7 +264,7 @@ div.pagination {                                clear: both;
 a.prev_page,
 a.next_page {                                   min-width: 10em }
 span.pages {                                    display: block;
-                                                margin-bottom: 1em }
+                                                margin-bottom: 1rem }
 
 /**
  *---------------------------------------------
@@ -284,8 +284,8 @@ span.pages {                                    display: block;
                                                 width: 100%;
                                                 min-height: 4em;
                                                 list-style: none;
-                                                padding: 1em;
-                                                margin: 1em 0em;
+                                                padding: 1rem;
+                                                margin: 1rem 0rem;
                                                 border-radius: 0.4em }
 #content ul.extend > li:first-of-type {         margin-top: 0em }
 #content ul.extend > li {                       background-color: #efefef;
@@ -302,7 +302,7 @@ li.feather p:last-of-type,
 li.module p.module_conflicts_message,
 li.module p.module_dependencies_message {       margin-bottom: 0em }
 li.module ol.module_conflicts_list,
-li.module ol.module_dependencies_list {         margin: 0em 0em 1em 1em }
+li.module ol.module_dependencies_list {         margin: 0rem 0rem 1rem 1rem }
 li.module:not(.error) .module_dependencies_message,
 li.module:not(.error) .module_dependencies_list,
 li.module:not(.error) .module_conflicts_message,
@@ -353,7 +353,7 @@ input[type="password"],
 textarea {                                      box-sizing: border-box;
                                                 width: 10em;
                                                 font-size: 1.25rem;
-                                                padding: 0.25em;
+                                                padding: 0.25rem;
                                                 border: 1px solid #dfdfdf;
                                                 background-color: #ffffff;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
@@ -394,17 +394,17 @@ form.split > fieldset > * > label {             box-sizing: border-box;
                                                 float: left;
                                                 color: #7f7f7f;
                                                 text-align: right;
-                                                padding: 0.25em 1em 0em 0em }
-form.split > fieldset > div.confirmation {      margin-top: 2em }
+                                                padding: 0.25rem 1rem 0rem 0rem }
+form.split > fieldset > div.confirmation {      margin-top: 2rem }
 form.split small,
 form.split .small,
 form.split .buttons {                           display: block;
                                                 margin: 0em 0em 0rem 45% }
-form.split ul, form.split ol {                  margin-bottom: 1em }
+form.split ul, form.split ol {                  margin-bottom: 1rem }
 form.split input,
 form.split textarea,
 form.split select,
-form.split label + button {                     margin-bottom: 0.5em }
+form.split label + button {                     margin-bottom: 0.5rem }
 form.split input + input:not(.filter_text) {    display: block;
                                                 margin-left: 45% }
 form.split input[type="text"],
@@ -422,20 +422,20 @@ form.detail input {                             padding: 0.3em }
  */
 
 table {                                         width: 100%;
-                                                margin: 0em 0em 1em 0em;
+                                                margin: 0rem 0rem 1rem 0rem;
                                                 overflow-x: scroll;
                                                 -webkit-overflow-scrolling: touch }
 table:last-child, table.interactive {           margin-bottom: 0em }
 table thead tr {                                background-color: #4f4f4f;
                                                 color: #ffffff;
                                                 border: 1px solid #4f4f4f }
-table thead tr th {                             padding: 0.5em;
+table thead tr th {                             padding: 0.5rem;
                                                 font-weight: bold }
-table tbody tr td {                             padding: 0.5em;
+table tbody tr td {                             padding: 0.5rem;
                                                 border: 1px solid #dfdfdf;
                                                 vertical-align: middle }
 table tbody tr:nth-child(even) td {             background-color: #fbfbfb }
-table tbody tr td.main {                        min-width: 10em }
+table tbody tr td.main {                        min-width: 10rem }
 table thead tr th.checkbox,
 table tbody tr td.checkbox,
 table thead tr th.controls,
@@ -477,8 +477,8 @@ td.controls img {                               position: relative;
  *---------------------------------------------
  */
 
-p.flash {                                       padding: 0.6em;
-                                                margin-bottom: 1em;
+p.flash {                                       padding: 0.6rem;
+                                                margin-bottom: 1rem;
                                                 background-color: #7a9acc;
                                                 color: #ffffff;
                                                 border: none;
@@ -530,7 +530,7 @@ a.button:active,
 a.next_page:active,
 a.prev_page:active {                            border-color: #1e57ba;
                                                 outline: none }
-div.pagination a.prev_page + a.next_page {      margin-left: 1em }
+div.pagination a.prev_page + a.next_page {      margin-left: 1rem }
 button.boo,
 a.button.boo {                                  color: #3e3634;
                                                 background-color: #faebe4;
@@ -571,7 +571,7 @@ div.confirmation a.button {                     min-width: 10em }
 div.confirmation a.button + a.button,
 div.confirmation button + a.button,
 div.confirmation a.button + button,
-div.confirmation button + button {              margin-left: 1em }
+div.confirmation button + button {              margin-left: 1rem }
 a.tag {                                         position: relative;
                                                 margin: 2px 0px;
                                                 text-decoration: none;
@@ -606,12 +606,12 @@ code.yay {                                      background-color: #ebfae4;
                                                 display: block;
                                                 width: 50%;
                                                 margin: 0em;
-                                                padding-bottom: 1em;
-                                                min-height: 5em;
+                                                padding-bottom: 1rem;
+                                                min-height: 5rem;
                                                 float: left }
 .more_options_option:nth-of-type(odd) {         clear: both;
-                                                padding-right: 1em }
-.more_options_option:nth-of-type(even) {        padding-left: 1em }
+                                                padding-right: 1rem }
+.more_options_option:nth-of-type(even) {        padding-left: 1rem }
 div.more_options p input,
 div.more_options p select,
 div.more_options p textarea {                   display: block }
@@ -632,17 +632,17 @@ div.more_options p textarea {                   width: 100%;
  */
 
 table.interactive + div.controls {              background-color: #fffceb;
-                                                padding: 1em;
+                                                padding: 1rem;
                                                 border: 1px solid #dfdfdf;
                                                 border-top: none }
 div.controls h4 {                               display: inline }
 div.controls input {                            padding: 0.4em }
 div.confirmation {                              text-align: center;
-                                                margin-top: 1em }
+                                                margin-top: 1rem }
 hr {                                            border: none;
                                                 clear: both;
                                                 border-top: 1px solid #ddd;
-                                                margin: 2em 0em }
+                                                margin: 2rem 0rem }
 a.emblem {                                      text-decoration: none }
 a.emblem > img,
 img.emblem {                                    display: inline;
@@ -656,8 +656,8 @@ img.emblem.preview {                            cursor: pointer;
 .filters .filter_item {                         box-sizing: border-box;
                                                 float: left;
                                                 max-width: 50%;
-                                                padding-right: 2em }
-.filters .filter_item:last-of-type {            padding-right: 0em }
+                                                padding-right: 2rem }
+.filters .filter_item:last-of-type {            padding-right: 0rem }
 .filters .filter_item:only-of-type {            float: none;
                                                 max-width: 100% }
 img#likeImage_preview {                         max-width: 28px;
@@ -744,13 +744,13 @@ img#likeImage_preview {                         max-width: 28px;
                                                 margin-right: 1% }
     #header #navigation li:last-child a {       width: 25%;
                                                 margin-right: 0% }
-    #sub_nav {                                  margin-top: 1em;
+    #sub_nav {                                  margin-top: 1rem;
                                                 height: auto }
-    #sub_nav, #content {                        margin-left: 1em;
-                                                margin-right: 1em }
+    #sub_nav, #content {                        margin-left: 1rem;
+                                                margin-right: 1rem }
     #sub_nav li {                               box-sizing: border-box;
                                                 width: 50%;
-                                                height: 3em;
+                                                height: 3rem;
                                                 text-align: center;
                                                 overflow: visible }
     #sub_nav li:nth-child(odd) {                clear: both }
@@ -760,8 +760,8 @@ img#likeImage_preview {                         max-width: 28px;
                                                 float: left;
                                                 width: 100%;
                                                 margin: 0em;
-                                                padding: 0em 1em 2em 1em;
-                                                font-size: 1em }
+                                                padding: 0rem 1rem 2rem 1rem;
+                                                font-size: 1rem }
     #sub_nav li:nth-child(odd) a {              border-right: none !important }
     #sub_nav li:nth-child(odd):last-child a {   border-right: 1px solid #cfcfcf !important }
     label {                                     display: block }
@@ -784,8 +784,8 @@ img#likeImage_preview {                         max-width: 28px;
                                                 margin-right: 0em !important;
                                                 width: 100% !important;
                                                 font-size: 16px !important;
-                                                padding-top: 0.5em;
-                                                padding-bottom: 0.5em }
+                                                padding-top: 0.5rem;
+                                                padding-bottom: 0.5rem }
     textarea {                                  -webkit-overflow-scrolling: touch }
     select {                                    width: 100% }
     #content table {                            display: block;
@@ -795,8 +795,8 @@ img#likeImage_preview {                         max-width: 28px;
                                                 border: 1px solid #ddd;
                                                 -webkit-overflow-scrolling: touch }
     #content table tbody tr td {                min-width: 10em;
-                                                padding-top: 1em;
-                                                padding-bottom: 1em }
+                                                padding-top: 1rem;
+                                                padding-bottom: 1rem }
     #content table tbody tr td.controls,
     #content table tbody tr td.checkbox,
     #content table tbody tr td.show_on_home {   min-width: 64px }
@@ -805,7 +805,7 @@ img#likeImage_preview {                         max-width: 28px;
     #content table tbody tr td[rowspan="2"] {   border-bottom: none }
     #content table tbody tr td:first-child {    border-left: none }
     #content table tbody tr td:last-child {     border-right: none }
-    table.interactive + div.controls {          padding: 4em }
+    table.interactive + div.controls {          padding: 4rem }
     button, a.button,
     a.prev_page, a.next_page {                  float: none !important;
                                                 clear: both !important;
@@ -816,18 +816,18 @@ img#likeImage_preview {                         max-width: 28px;
                                                 text-align: center !important;
                                                 box-sizing: border-box !important }
     form.split label + button {                 margin-top: 0em !important }
-    p.flash {                                   margin: 0em 0em 1em 0em !important }
-    span.pages {                                margin-top: 1em }
+    p.flash {                                   margin: 0rem 0rem 1rem 0rem !important }
+    span.pages {                                margin-top: 1rem }
     div.controls h4 {                           display: block }
     .filters .filter_item {                     width: 100%;
                                                 max-width: 100%;
                                                 float: none;
                                                 clear: both;
-                                                margin-bottom: 1em;
+                                                margin-bottom: 1rem;
                                                 padding-right: 0em }
     div.more_options p.more_options_option {    width: 100%;
                                                 min-height: 0em;
-                                                margin: 0em 0em 1em 0em;
+                                                margin: 0rem 0rem 1rem 0rem;
                                                 padding: 0em }
     div.more_options > .more_options_option {   padding-left: 0em !important;
                                                 padding-right: 0em !important }
@@ -840,7 +840,7 @@ img#likeImage_preview {                         max-width: 28px;
     li.module div.controls,
     li.feather div.controls {                   padding-top: 0em }
     div.controls .module_disabler_confirm,
-    div.controls .feather_disabler_confirm {    margin-top: 1em }
+    div.controls .feather_disabler_confirm {    margin-top: 1rem }
     #content ul.themes img.screenshot {         width: 192px }
 
     .iframe_foreground {                        width: 90%;

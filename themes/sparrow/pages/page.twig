@@ -7,7 +7,7 @@
 {{ page.body }}
 </section>
 <footer>
-{% if page.editable or page.deletable %}
+{% if page.editable() or page.deletable() %}
 <div class="doaction admin">
 {{ page.edit_link() }} {{ page.delete_link() }}
 </div>

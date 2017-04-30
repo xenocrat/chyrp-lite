@@ -9,11 +9,11 @@
         public $urls = array(
             '|/id/post/([0-9]+)/|'                         => '/?action=id&amp;post=$1',
             '|/id/page/([0-9]+)/|'                         => '/?action=id&amp;page=$1',
+            '|/random/([^/]+)/|'                           => '/?action=random&amp;feather=$1',
             '|/search/([^/]+)/|'                           => '/?action=search&amp;query=$1',
             '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&amp;year=$1&amp;month=$2&amp;day=$3',
             '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&amp;year=$1&amp;month=$2',
             '|/archive/([0-9]{4})/|'                       => '/?action=archive&amp;year=$1',
-            '|/random/([^/]+)/|'                           => '/?action=random&amp;feather=$1',
             '|/([^/]+)/feed/|'                             => '/?action=$1&amp;feed'
         );
 
@@ -30,8 +30,12 @@
         public $clean = true;
 
         # Boolean: $feed
-        # Is the visitor requesting a feed?
-        public $feed = false;
+        # Is the current page a feed?
+        public $feed = null;
+
+        # Integer: $post_limit
+        # Item limit for pagination.
+        public $post_limit = 10;
 
         # Array: $protected
         # Methods that cannot respond to actions.
@@ -43,25 +47,27 @@
 
         /**
          * Function: __construct
-         * Loads the Twig parser. Theme class sets up the l10n domain.
+         * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
-            $this->feed = (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed"));
-            $this->post_limit = Config::current()->posts_per_page;
-
-            $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
-                            !PREVIEWING and (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
-
             $loader = new Twig_Loader_Filesystem(THEME_DIR);
 
-            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                              "strict_variables" => DEBUG,
-                                                              "charset" => "UTF-8",
-                                                              "cache" => $cache,
-                                                              "autoescape" => false));
+            $this->twig = new Twig_Environment($loader,
+                                               array("debug" => DEBUG,
+                                                     "strict_variables" => DEBUG,
+                                                     "charset" => "UTF-8",
+                                                     "cache" => (CACHE_TWIG ? CACHES_DIR.DIR."twig" : false),
+                                                     "autoescape" => false));
+
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+
+            # Load the theme translator.
+            load_translator(Theme::current()->safename, THEME_DIR.DIR."locale");
+
+            # Set the limit for pagination.
+            $this->post_limit = Config::current()->posts_per_page;
         }
 
         /**
@@ -196,95 +202,85 @@
             $statuses = Post::statuses();
             $feathers = Post::feathers();
 
-            $first = $sql->select("posts",
-                                  "created_at",
-                                  array($feathers,
-                                        $statuses),
-                                  array("created_at ASC"))->fetch();
-
-            $year = when("Y", !empty($first) ? $first["created_at"] : time());
+            $months = array();
+            $posts = new Paginator(array());
 
             fallback($_GET['year']);
             fallback($_GET['month']);
             fallback($_GET['day']);
 
-            $months = array();
-            $posts = new Paginator(array());
+            # Default to either the year of the latest post or the current year.
+            if (!isset($_GET['year'])) {
+                $latest = $sql->select("posts",
+                                       "created_at",
+                                       array($feathers,
+                                             $statuses),
+                                       array("created_at DESC"))->fetch();
 
-            $timestamp = mktime(0, 0, 0, (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
-                                         (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
-                                         (is_numeric($_GET['year']) ? (int) $_GET['year'] : (int) $year));
+                $_GET['year'] = when("Y", fallback($latest["created_at"], time()));
+            }
 
-            if (is_numeric($_GET['year']) and is_numeric($_GET['month']) and is_numeric($_GET['day'])) {
+            $timestamp = mktime(0, 0, 0,
+                                (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
+                                (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
+                                (is_numeric($_GET['year']) ? (int) $_GET['year'] : 1991));
+
+            if (is_numeric($_GET['day'])) {
                 $depth = "day";
                 $limit = strtotime("tomorrow", $timestamp);
                 $title = _f("Archive of %s", when("%d %B %Y", $timestamp, true));
-            } elseif (is_numeric($_GET['year']) and is_numeric($_GET['month'])) {
+                $posts = new Paginator(Post::find(array("placeholders" => true,
+                                                        "where" => array("created_at LIKE" => when("Y-m-d%", $timestamp)),
+                                                        "order" => "created_at DESC, id DESC")),
+                                       $this->post_limit);
+            } elseif (is_numeric($_GET['month'])) {
                 $depth = "month";
                 $limit = strtotime("midnight first day of next month", $timestamp);
                 $title = _f("Archive of %s", when("%B %Y", $timestamp, true));
-            } elseif (is_numeric($_GET['year'])) {
+                $posts = new Paginator(Post::find(array("placeholders" => true,
+                                                        "where" => array("created_at LIKE" => when("Y-m-%", $timestamp)),
+                                                        "order" => "created_at DESC, id DESC")),
+                                       $this->post_limit);
+            } else {
                 $depth = "year";
                 $limit = strtotime("midnight first day of next year", $timestamp);
                 $title = _f("Archive of %s", when("%Y", $timestamp, true));
                 $month = $timestamp;
-            } else {
-                $depth = "all";
-                $limit = time();
-                $title = __("Archive");
-                $month = $timestamp;
+
+                while ($month < $limit) {
+                    $vals = Post::find(array("where" => array("created_at LIKE" => when("Y-m-%", $month)),
+                                             "order" => "created_at DESC, id DESC"));
+
+                    if (!empty($vals))
+                        $months[$month] = $vals;
+
+                    $month = strtotime("midnight first day of next month", $month);
+                }
             }
 
-            $next = ($depth == "all") ?
-                array() :
-                $sql->select("posts",
-                             "created_at",
-                             array("created_at <" => datetime($timestamp),
-                                   $statuses,
-                                   $feathers),
-                             array("created_at DESC"))->fetch();
+            # Are there posts older than those displayed?
+            $next = $sql->select("posts",
+                                 "created_at",
+                                 array("created_at <" => datetime($timestamp),
+                                       $statuses,
+                                       $feathers),
+                                 array("created_at DESC"))->fetch();
 
-            $prev = ($depth == "all") ?
-                array() :
-                $sql->select("posts",
-                             "created_at",
-                             array("created_at >=" => datetime($limit),
-                                   $statuses,
-                                   $feathers),
-                             array("created_at ASC"))->fetch();
-
-            switch ($depth) {
-                case "day":
-                    $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("created_at LIKE" => when("Y-m-d%", $timestamp)),
-                                                            "order" => "created_at DESC, id DESC")),
-                                           $this->post_limit);
-                    break;
-                case "month":
-                    $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                            "where" => array("created_at LIKE" => when("Y-m-%", $timestamp)),
-                                                            "order" => "created_at DESC, id DESC")),
-                                           $this->post_limit);
-                    break;
-                default:
-                    while ($month < $limit) {
-                        $vals = Post::find(array("where" => array("created_at LIKE" => when("Y-m-%", $month)),
-                                                 "order" => "created_at DESC, id DESC"));
-
-                        if (!empty($vals))
-                            $months[$month] = $vals;
-
-                        $month = strtotime("midnight first day of next month", $month);
-                    }
-            }
+            # Are there posts newer than those displayed?
+            $prev = $sql->select("posts",
+                                 "created_at",
+                                 array("created_at >=" => datetime($limit),
+                                       $statuses,
+                                       $feathers),
+                                 array("created_at ASC"))->fetch();
 
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,
                                  "months" => array_reverse($months, true),
                                  "archive" => array("when"  => $timestamp,
                                                     "depth" => $depth,
-                                                    "next"  => !empty($next) ? strtotime($next["created_at"]) : false,
-                                                    "prev"  => !empty($prev) ? strtotime($prev["created_at"]) : false)),
+                                                    "next"  => strtotime(fallback($next["created_at"])),
+                                                    "prev"  => strtotime(fallback($prev["created_at"])))),
                            $title);
         }
 
@@ -432,6 +428,41 @@
         }
 
         /**
+         * Function: random
+         * Grabs a random post and redirects to it.
+         */
+        public function random() {
+            $conds = array(Post::statuses());
+
+            if (isset($_GET['feather']))
+                $conds["feather"] = preg_replace("|[^a-z_\-]|i", "", $_GET['feather']);
+            else
+                $conds[] = Post::feathers();
+
+            $results = SQL::current()->select("posts",
+                                              "id",
+                                              $conds)->fetchAll();
+
+            if (!empty($results)) {
+                $ids = array();
+
+                foreach ($results as $result)
+                    $ids[] = $result["id"];
+
+                shuffle($ids);
+
+                $post = new Post(reset($ids));
+
+                if ($post->no_results)
+                    return false;
+
+                redirect($post->url());
+            }
+
+            Flash::warning(__("There aren't enough posts for random selection."), "/");
+        }
+
+        /**
          * Function: register
          * Register a visitor as a new user.
          */
@@ -548,8 +579,8 @@
 
             $new_password = random(8);
 
-            correspond("password", array("login" => $user->login,
-                                         "to" => $user->email,
+            correspond("password", array("login"    => $user->login,
+                                         "to"       => $user->email,
                                          "password" => $new_password));
 
             $user = $user->update(null, User::hashPassword($new_password));
@@ -574,12 +605,12 @@
                 fallback($_POST['login']);
                 fallback($_POST['password']);
 
+                if (!User::authenticate($_POST['login'], $_POST['password']))
+                    Flash::warning(__("Incorrect username and/or password."));
+
                 # Modules can implement "user_login and "user_authenticate" to offer two-factor authentication.
                 # "user_authenticate" trigger function can block the login process by creating a Flash::warning().
                 $trigger->call("user_authenticate");
-
-                if (!User::authenticate($_POST['login'], $_POST['password']))
-                    Flash::warning(__("Incorrect username and/or password."));
 
                 if (!Flash::exists("warning")) {
                     $user = new User(array("login" => $_POST['login']));
@@ -704,40 +735,6 @@
         }
 
         /**
-         * Function: random
-         * Grabs a random post and redirects to it.
-         */
-        public function random() {
-            $conds = array(Post::statuses());
-
-            if (isset($_GET['feather']))
-                $conds["feather"] = preg_replace("|[^a-z_\-]|i", "", $_GET['feather']);
-            else
-                $conds[] = Post::feathers();
-
-            $results = SQL::current()->select("posts",
-                                              "id",
-                                              $conds)->fetchAll();
-
-            if (empty($results))
-                return false;
-
-            $ids = array();
-
-            foreach ($results as $result)
-                $ids[] = $result["id"];
-
-            shuffle($ids);
-
-            $post = new Post(reset($ids));
-
-            if ($post->no_results)
-                return false;
-
-            redirect($post->url());
-        }
-
-        /**
          * Function: feed
          * Grabs posts and serves a feed.
          */
@@ -746,23 +743,26 @@
             $trigger = Trigger::current();
             $theme = Theme::current();
 
-            # Fetch posts for fallback or if we are being called as a responder.
-            $result = SQL::current()->select("posts",
-                                             "id",
-                                             array("status" => "public"),
-                                             array("id DESC"),
-                                             array(),
-                                             $config->feed_items);
-            $ids = array();
+            # Fetch posts if we are being called as a responder.
+            if (!isset($posts)) {
+                $results = SQL::current()->select("posts",
+                                                  "id",
+                                                  array("status" => "public"),
+                                                  array("id DESC"),
+                                                  array(),
+                                                  $config->feed_items)->fetchAll();
 
-            foreach ($result->fetchAll() as $index => $row)
-                $ids[] = $row["id"];
+                $ids = array();
 
-            if (!empty($ids))
-                fallback($posts, Post::find(array("where" => array("id" => $ids),
-                                                  "order" => "created_at DESC, id DESC")));
-            else
-                fallback($posts, array());
+                foreach ($results as $result)
+                    $ids[] = $result["id"];
+
+                if (!empty($ids))
+                    $posts = Post::find(array("where" => array("id" => $ids),
+                                              "order" => "created_at DESC, id DESC"));
+                else
+                    $posts = array();
+            }
 
             if (!is_array($posts))
                 $posts = $posts->paginated;

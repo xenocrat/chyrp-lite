@@ -1,21 +1,6 @@
-# Chyrp Lite Translation File.
-# Copyright (C) 2017 xenocrat
-# This file is distributed under the same license as the Chyrp Lite package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Chyrp Lite"
-"Report-Msgid-Bugs-To: hello@xenocrat.net"
-"POT-Creation-Date: 2017-03-05 15:12+0000"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"
-"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"
-"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"
-"MIME-Version: 1.0"
-"Content-Type: text/plain; charset=UTF-8"
-"Content-Transfer-Encoding: 8bit"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2017 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
 
 #: admin/help/canonical_url.twig:3
 #: admin/help/canonical_url.twig:6
@@ -176,31 +161,31 @@ msgstr ""
 msgid "Emoji"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:39
+#: admin/javascripts/admin.js.php:40
 msgid "Toggle All"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:109
+#: admin/javascripts/admin.js.php:110
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:137
+#: admin/javascripts/admin.js.php:144
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:143
-#: admin/javascripts/admin.js.php:145
-#: admin/javascripts/admin.js.php:233
-#: admin/javascripts/admin.js.php:235
+#: admin/javascripts/admin.js.php:150
+#: admin/javascripts/admin.js.php:152
+#: admin/javascripts/admin.js.php:240
+#: admin/javascripts/admin.js.php:242
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:165
-#: admin/javascripts/admin.js.php:166
+#: admin/javascripts/admin.js.php:172
+#: admin/javascripts/admin.js.php:173
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:226
+#: admin/javascripts/admin.js.php:233
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
@@ -677,31 +662,31 @@ msgid "Controls"
 msgstr ""
 
 #: admin/pages/manage_groups.twig:44
-#: admin/pages/manage_groups.twig:51
-#: admin/pages/manage_pages.twig:46
+#: admin/pages/manage_groups.twig:49
+#: admin/pages/manage_pages.twig:47
 #: admin/pages/manage_pages.twig:52
 #: admin/pages/manage_users.twig:55
 msgid 'yes'
 msgstr ""
 
-#: admin/pages/manage_groups.twig:60
-#: admin/pages/manage_pages.twig:64
-#: admin/pages/manage_posts.twig:63
-#: admin/pages/manage_users.twig:64
+#: admin/pages/manage_groups.twig:54
+#: admin/pages/manage_pages.twig:60
+#: admin/pages/manage_posts.twig:61
+#: admin/pages/manage_users.twig:60
 msgid 'edit'
 msgstr ""
 
-#: admin/pages/manage_groups.twig:65
-#: admin/pages/manage_pages.twig:69
-#: admin/pages/manage_posts.twig:68
-#: admin/pages/manage_users.twig:69
+#: admin/pages/manage_groups.twig:57
+#: admin/pages/manage_pages.twig:63
+#: admin/pages/manage_posts.twig:64
+#: admin/pages/manage_users.twig:63
 msgid 'delete'
 msgstr ""
 
-#: admin/pages/manage_groups.twig:77
-#: admin/pages/manage_pages.twig:85
-#: admin/pages/manage_posts.twig:84
-#: admin/pages/manage_users.twig:85
+#: admin/pages/manage_groups.twig:65
+#: admin/pages/manage_pages.twig:75
+#: admin/pages/manage_posts.twig:76
+#: admin/pages/manage_users.twig:75
 #, php-format
 msgid "Page %d of %s"
 msgstr ""
@@ -747,9 +732,9 @@ msgstr ""
 msgid "never"
 msgstr ""
 
-#: admin/pages/manage_pages.twig:78
-#: admin/pages/manage_posts.twig:77
-#: admin/pages/manage_users.twig:78
+#: admin/pages/manage_pages.twig:68
+#: admin/pages/manage_posts.twig:69
+#: admin/pages/manage_users.twig:68
 msgid "(none)"
 msgstr ""
 

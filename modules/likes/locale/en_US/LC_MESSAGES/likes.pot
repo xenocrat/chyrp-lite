@@ -1,21 +1,6 @@
-# Chyrp Lite Translation File.
-# Copyright (C) 2017 xenocrat
-# This file is distributed under the same license as the Chyrp Lite package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Chyrp Lite"
-"Report-Msgid-Bugs-To: hello@xenocrat.net"
-"POT-Creation-Date: 2017-03-05 15:11+0000"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"
-"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"
-"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"
-"MIME-Version: 1.0"
-"Content-Type: text/plain; charset=UTF-8"
-"Content-Transfer-Encoding: 8bit"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2017 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
 
 #: modules/likes/admin/pages/like_settings.twig:3
 #: modules/likes/admin/pages/like_settings.twig:6
@@ -35,15 +20,15 @@ msgid "Enables text descriptions in like/unlike links."
 msgstr ""
 
 #: modules/likes/admin/pages/like_settings.twig:24
-msgid "Show On Front Page"
+msgid "Show On Index Pages"
 msgstr ""
 
 #: modules/likes/admin/pages/like_settings.twig:26
-msgid "Enables like functionality on front page posts."
+msgid "Enables like functionality on blog index pages."
 msgstr ""
 
 #: modules/likes/info.php:3
-#: modules/likes/likes.php:62
+#: modules/likes/likes.php:63
 msgid "Likes"
 msgstr ""
 
@@ -65,67 +50,67 @@ msgstr ""
 msgid "Unlike Posts"
 msgstr ""
 
-#: modules/likes/likes.php:69
-#: modules/likes/likes.php:101
+#: modules/likes/likes.php:70
+#: modules/likes/likes.php:102
 msgid "An ID is required to like a post."
 msgstr ""
 
-#: modules/likes/likes.php:72
-#: modules/likes/likes.php:105
+#: modules/likes/likes.php:73
+#: modules/likes/likes.php:106
 msgid "You do not have sufficient privileges to like posts."
 msgstr ""
 
-#: modules/likes/likes.php:80
+#: modules/likes/likes.php:81
 msgid "Post liked."
 msgstr ""
 
-#: modules/likes/likes.php:85
-#: modules/likes/likes.php:125
+#: modules/likes/likes.php:86
+#: modules/likes/likes.php:126
 msgid "An ID is required to unlike a post."
 msgstr ""
 
-#: modules/likes/likes.php:88
-#: modules/likes/likes.php:129
+#: modules/likes/likes.php:89
+#: modules/likes/likes.php:130
 msgid "You do not have sufficient privileges to unlike posts."
 msgstr ""
 
-#: modules/likes/likes.php:96
+#: modules/likes/likes.php:97
 msgid "Post unliked."
-msgstr ""
-
-#: modules/likes/likes.php:117
-#: modules/likes/likes.php:259
-msgid "You like this."
 msgstr ""
 
 #: modules/likes/likes.php:118
 #: modules/likes/likes.php:260
+msgid "You like this."
+msgstr ""
+
+#: modules/likes/likes.php:119
+#: modules/likes/likes.php:261
 #, php-format
 msgid "You and %d person like this."
 msgid_plural "You and %d people like this."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/likes/likes.php:141
-#: modules/likes/likes.php:234
+#: modules/likes/likes.php:142
+#: modules/likes/likes.php:235
 msgid "No likes yet."
 msgstr ""
 
-#: modules/likes/likes.php:142
-#: modules/likes/likes.php:235
+#: modules/likes/likes.php:143
+#: modules/likes/likes.php:236
 #, php-format
 msgid "%d person likes this."
 msgid_plural "%d people like this."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/likes/likes.php:222
-#: modules/likes/likes.php:247
+#: modules/likes/likes.php:223
+#: modules/likes/likes.php:248
 msgid "Like!"
 msgstr ""
 
-#: modules/likes/likes.php:223
-#: modules/likes/likes.php:248
+#: modules/likes/likes.php:224
+#: modules/likes/likes.php:249
 msgid "Unlike!"
 msgstr ""
 

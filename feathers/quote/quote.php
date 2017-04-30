@@ -51,10 +51,6 @@
         }
 
         public function feed_content($post) {
-            $body = "<blockquote>";
-            $body.= $post->quote;
-            $body.= "</blockquote>";
-            $body.= $post->source;
-            return $body;
+            return "<blockquote>".$post->quote."</blockquote>".$post->source;
         }
     }

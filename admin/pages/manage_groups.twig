@@ -42,32 +42,20 @@
 <td class="group_default emblem">
 {% if group.id == site.default_group %}
 <img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
-{% else %}
-&nbsp;
 {% endif %}
 </td>
 <td class="group_guest emblem">
 {% if group.id == site.guest_group %}
 <img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
-{% else %}
-&nbsp;
 {% endif %}
 </td>
 {{ trigger.call("manage_groups_column", groups) }}
-{% if group.editable() or group.deletable() %}
-{% if group.editable() %}
-<td class="controls"{{ not group.deletable() ? ' colspan="2"' : '' }}>
+<td class="controls">
 {{ group.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
 </td>
-{% endif %}
-{% if group.deletable() %}
-<td class="controls"{{ not group.editable() ? ' colspan="2"' : '' }}>
+<td class="controls">
 {{ group.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
-{% endif %}
-{% else %}
-<td class="controls" colspan="2">&nbsp;</td>
-{% endif %}
 </tr>
 {% endfor %}
 </tbody>

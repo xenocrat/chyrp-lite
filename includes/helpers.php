@@ -27,8 +27,7 @@
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
 
-        $domain = preg_replace("~^www\.~", "",
-                               oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
+        $domain = preg_replace("~^www\.~", "", oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
         session_name("ChyrpSession");
@@ -549,11 +548,11 @@
      */
     function shorthand_bytes($value) {
         switch (substr($value, -1)) {
-            case 'K': case 'k':
+            case "K": case "k":
                 return (int) $value * 1024;
-            case 'M': case 'm':
+            case "M": case "m":
                 return (int) $value * 1048576;
-            case 'G': case 'g':
+            case "G": case "g":
                 return (int) $value * 1073741824;
             default:
                 return $value;
@@ -614,60 +613,6 @@
     }
 
     /**
-     * Function: xml2arr
-     * Recursively converts a SimpleXML object to an array.
-     *
-     * Parameters:
-     *     $parse - The SimpleXML object to convert.
-     *
-     * Returns:
-     *     An array representation of the supplied object.
-     */
-    function xml2arr($parse) {
-        if (empty($parse))
-            return "";
-
-        $parse = (array) $parse;
-
-        foreach ($parse as &$val)
-            if (is_object($val) and get_class($val) == "SimpleXMLElement")
-                $val = xml2arr($val);
-
-        return $parse;
-    }
-
-    /**
-     * Function: arr2xml
-     * Recursively adds an array to a SimpleXML object.
-     *
-     * Parameters:
-     *     &$object - The SimpleXML object to modify.
-     *     $data - The data to add to the SimpleXML object.
-     */
-    function arr2xml(&$object, $data) {
-        foreach ($data as $key => $val) {
-            if (is_int($key) and (empty($val) or (is_string($val) and trim($val) == ""))) {
-                unset($data[$key]);
-                continue;
-            }
-
-            if (is_array($val)) {
-                # Numeric-indexed things need to be added as duplicates.
-                if (in_array(0, array_keys($val))) {
-                    foreach ($val as $dup) {
-                        $xml = $object->addChild($key);
-                        arr2xml($xml, $dup);
-                    }
-                } else {
-                    $xml = $object->addChild($key);
-                    arr2xml($xml, $val);
-                }
-            } else
-                $object->addChild($key, fix($val, false, false));
-        }
-    }
-
-    /**
      * Function: list_notate
      * Notates an array as a list of things.
      *
@@ -725,7 +670,7 @@
         }
 
         if (!INSTALLING and !UPGRADING)
-            foreach ((array) Config::current()->enabled_modules as $module)
+            foreach (Config::current()->enabled_modules as $module)
                 if (is_file(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
                     require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
                     return;
@@ -763,12 +708,23 @@
             else
                 $keywords[] = trim($fragment);
 
-        $dates = array("year"   => __("year"),
-                       "month"  => __("month"),
-                       "day"    => __("day"),
-                       "hour"   => __("hour"),
-                       "minute" => __("minute"),
-                       "second" => __("second"));
+        $dates = array("year", "month", "day", "hour", "minute", "second");
+
+        $created_at = array(
+            "year"   => "____",
+            "month"  => "__",
+            "day"    => "__",
+            "hour"   => "__",
+            "minute" => "__",
+            "second" => "__");
+
+        $joined_at = array(
+            "year"   => "____",
+            "month"  => "__",
+            "day"    => "__",
+            "hour"   => "__",
+            "minute" => "__",
+            "second" => "__");
 
         # Contextual conversions of some keywords.
         foreach ($keywords as $keyword) {
@@ -787,12 +743,26 @@
                 $where["group_id"] = ($group->no_results) ? 0 : $group->id ;
             } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
                 # Filter by date/time of creation.
-                $where[strtoupper(array_search($attr, $dates))."(created_at)"] = $val;
+                $created_at[$attr] = $val;
+                $where["created_at LIKE"] = $created_at["year"]."-".
+                                            $created_at["month"]."-".
+                                            $created_at["day"]." ".
+                                            $created_at["hour"].":".
+                                            $created_at["minute"].":".
+                                            $created_at["second"]."%";
             } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
                 # Filter by date/time of joining.
-                $where[strtoupper(array_search($attr, $dates))."(joined_at)"] = $val;
-            } else
+                $joined_at[$attr] = $val;
+                $where["joined_at LIKE"] = $joined_at["year"]."-".
+                                           $joined_at["month"]."-".
+                                           $joined_at["day"]." ".
+                                           $joined_at["hour"].":".
+                                           $joined_at["minute"].":".
+                                           $joined_at["second"]."%";
+            } else {
+                # Key => Val expression.
                 $filters[$attr] = $val;
+            }
         }
 
         # Check the validity of keywords if a table name was supplied.
@@ -1189,10 +1159,10 @@
         }
 
         if ($force_lowercase)
-            $clean = function_exists('mb_strtolower') ? mb_strtolower($clean, 'UTF-8') : strtolower($clean) ;
+            $clean = function_exists("mb_strtolower") ? mb_strtolower($clean, "UTF-8") : strtolower($clean) ;
 
         if ($trunc)
-            $clean = function_exists('mb_substr') ? mb_substr($clean, 0, $trunc, 'UTF-8') : substr($clean, 0, $trunc) ;
+            $clean = function_exists("mb_substr") ? mb_substr($clean, 0, $trunc, "UTF-8") : substr($clean, 0, $trunc) ;
 
         return $clean;
     }
@@ -1364,13 +1334,14 @@
      *     An array of all URLs found in the string.
      */
     function grab_urls($string) {
-        $expressions = array("/<a[^>]+href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/");
+        # These expressions capture hyperlinks in HTML and unfiltered Markdown.
+        $expressions = array("/<a[^>]+href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
+                             "/\[[^\]]+\]\(([^\)]+)\)/");
+
+        # Modules can support other syntaxes.
+        Trigger::current()->filter($expressions, "link_regexp");
+
         $urls = array();
-
-        if (Config::current()->enable_markdown)
-            $expressions[] = "/\[[^\]]+\]\(([^\)]+)\)/";
-
-        Trigger::current()->filter($expressions, "link_regexp"); # Modules can support other syntaxes.
 
         foreach ($expressions as $expression) {
             preg_match_all($expression, stripslashes($string), $matches);
@@ -1520,7 +1491,7 @@
         $config = Config::current();
 
         # Instantiate all Modules.
-        foreach ((array) $config->enabled_modules as $module) {
+        foreach ($config->enabled_modules as $module) {
             $class_name = camelize($module);
             $filepath = MODULES_DIR.DIR.$module.DIR.$module.".php";
 
@@ -1540,13 +1511,10 @@
 
             Modules::$instances[$module] = new $class_name;
             Modules::$instances[$module]->safename = $module;
-
-            foreach (load_info(MODULES_DIR.DIR.$module.DIR."info.php") as $key => $val)
-                Modules::$instances[$module]->$key = $val;
         }
 
         # Instantiate all Feathers.
-        foreach ((array) $config->enabled_feathers as $feather) {
+        foreach ($config->enabled_feathers as $feather) {
             $class_name = camelize($feather);
             $filepath = FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
@@ -1566,9 +1534,6 @@
 
             Feathers::$instances[$feather] = new $class_name;
             Feathers::$instances[$feather]->safename = $feather;
-
-            foreach (load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php") as $key => $val)
-                Feathers::$instances[$feather]->$key = $val;
         }
 
         # Initialize all Modules.
@@ -2063,7 +2028,7 @@
      */
     function file_attachment($contents = "", $filename = "caconym") {
         header("Content-Type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".$filename."\"");
+        header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
 
         if (!in_array("ob_gzhandler", ob_list_handlers()))
             header("Content-Length: ".strlen($contents));

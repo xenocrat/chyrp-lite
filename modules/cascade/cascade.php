@@ -1,11 +1,11 @@
 <?php
     class Cascade extends Modules {
         static function __install() {
-            Config::current()->set("ajax_scroll_auto", true);
+            Config::current()->set("module_cascade", array("ajax_scroll_auto" => true));
         }
 
         static function __uninstall() {
-            Config::current()->remove("ajax_scroll_auto");
+            Config::current()->remove("module_cascade");
         }
 
         public function admin_cascade_settings($admin) {

@@ -23,13 +23,17 @@
         # Does this controller support clean URLs?
         public $clean = false;
 
-        # String: $base
-        # The base path for this controller.
-        public $base = "admin";
-
         # Boolean: $feed
         # Is the current page a feed?
         public $feed = false;
+
+        # Integer: $post_limit
+        # Item limit for pagination.
+        public $post_limit = 10;
+
+        # String: $base
+        # The base path for this controller.
+        public $base = "admin";
 
         # Array: $protected
         # Methods that cannot respond to actions.
@@ -40,34 +44,36 @@
          * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
-            $config = Config::current();
-
-            $cache = (is_dir(CACHES_DIR.DIR."twig") and is_writable(CACHES_DIR.DIR."twig") and
-                            (!DEBUG or CACHE_TWIG)) ? CACHES_DIR.DIR."twig" : false ;
-
             $chain = array(new Twig_Loader_Filesystem(MAIN_DIR.DIR."admin"));
 
-            foreach ((array) $config->enabled_modules as $module)
+            $config = Config::current();
+
+            foreach ($config->enabled_modules as $module)
                 if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
                     $chain[] = new Twig_Loader_Filesystem(MODULES_DIR.DIR.$module.DIR."admin");
 
-            foreach ((array) $config->enabled_feathers as $feather)
+            foreach ($config->enabled_feathers as $feather)
                 if (is_dir(FEATHERS_DIR.DIR.$feather.DIR."admin"))
                     $chain[] = new Twig_Loader_Filesystem(FEATHERS_DIR.DIR.$feather.DIR."admin");
 
             $loader = new Twig_Loader_Chain($chain);
 
-            $this->twig = new Twig_Environment($loader, array("debug" => DEBUG,
-                                                              "strict_variables" => DEBUG,
-                                                              "charset" => "UTF-8",
-                                                              "cache" => $cache,
-                                                              "autoescape" => false));
+            $this->twig = new Twig_Environment($loader,
+                                               array("debug" => DEBUG,
+                                                     "strict_variables" => DEBUG,
+                                                     "charset" => "UTF-8",
+                                                     "cache" => (CACHE_TWIG ? CACHES_DIR.DIR."twig" : false),
+                                                     "autoescape" => false));
+
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
             $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
 
             # Load the theme translator.
             load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale");
+
+            # Set the limit for pagination.
+            $this->post_limit = $config->admin_per_page;
         }
 
         /**
@@ -299,7 +305,6 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any posts."));
 
             fallback($_GET['query'], "");
-
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
             if (!empty($_GET['month']))
@@ -324,7 +329,7 @@
                 $posts = new Paginator(Post::find(array("placeholders" => true,
                                                         "drafts" => true,
                                                         "where" => array("id" => $ids))),
-                                       Config::current()->admin_per_page);
+                                       $this->post_limit);
             else
                 $posts = new Paginator(array());
 
@@ -543,7 +548,7 @@
                            array("pages" => new Paginator(Page::find(array("placeholders" => true,
                                                                            "where" => $where,
                                                                            "params" => $params)),
-                                                          Config::current()->admin_per_page)));
+                                                          $this->post_limit)));
         }
 
         /**
@@ -821,7 +826,7 @@
                            array("users" => new Paginator(User::find(array("placeholders" => true,
                                                                            "where" => $where,
                                                                            "params" => $params)),
-                                                          Config::current()->admin_per_page)));
+                                                          $this->post_limit)));
         }
 
         /**
@@ -1043,7 +1048,7 @@
                     $groups = new Paginator(array());
             } else
                 $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
-                                        Config::current()->admin_per_page);
+                                        $this->post_limit);
 
             $this->display("pages".DIR."manage_groups",
                            array("groups" => $groups));
@@ -1098,50 +1103,51 @@
                 else
                     $posts = new Paginator(array());
 
-                $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
-                $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
-                $posts_atom.= '    <title>'.fix($config->name).' | Posts</title>'."\r";
-                $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
-                $posts_atom.= '    <id>'.fix($config->url).'</id>'."\r";
-                $posts_atom.= '    <updated>'.date("c").'</updated>'."\r";
-                $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
-                $posts_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
+                $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+                $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n";
+                $posts_atom.= '    <title>'.fix($config->name).' | Posts</title>'."\n";
+                $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\n";
+                $posts_atom.= '    <id>'.fix($config->url).'</id>'."\n";
+                $posts_atom.= '    <updated>'.date("c").'</updated>'."\n";
+                $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\n";
+                $posts_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
 
                 foreach ($posts as $post) {
                     $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
                     $url = $post->url();
+                    $title = oneof($post->title(), ucfirst($post->feather));
 
-                    $posts_atom.= '    <entry xml:base="'.fix($url, true).'">'."\r";
-                    $posts_atom.= '        <title type="html">'.oneof(fix($post->title()), "Post #".$post->id).'</title>'."\r";
-                    $posts_atom.= '        <id>'.fix($url).'</id>'."\r";
-                    $posts_atom.= '        <updated>'.when("c", $updated).'</updated>'."\r";
-                    $posts_atom.= '        <published>'.when("c", $post->created_at).'</published>'."\r";
-                    $posts_atom.= '        <link href="'.fix($trigger->filter($url, "post_export_url", $post), true).'" />'."\r";
-                    $posts_atom.= '        <author chyrp:user_id="'.$post->user_id.'">'."\r";
-                    $posts_atom.= '            <name>'.fix(oneof($post->user->full_name, $post->user->login)).'</name>'."\r";
+                    $posts_atom.= '    <entry xml:base="'.fix($url, true).'">'."\n";
+                    $posts_atom.= '        <title type="html">'.fix($title, false, true).'</title>'."\n";
+                    $posts_atom.= '        <id>'.fix($url).'</id>'."\n";
+                    $posts_atom.= '        <updated>'.when("c", $updated).'</updated>'."\n";
+                    $posts_atom.= '        <published>'.when("c", $post->created_at).'</published>'."\n";
+                    $posts_atom.= '        <link href="'.fix($trigger->filter($url, "post_export_url", $post), true).'" />'."\n";
+                    $posts_atom.= '        <author chyrp:user_id="'.$post->user_id.'">'."\n";
+                    $posts_atom.= '            <name>'.fix(oneof($post->user->full_name, $post->user->login)).'</name>'."\n";
 
                     if (!empty($post->user->website))
-                        $posts_atom.= '            <uri>'.fix($post->user->website).'</uri>'."\r";
+                        $posts_atom.= '            <uri>'.fix($post->user->website).'</uri>'."\n";
 
-                    $posts_atom.= '            <chyrp:login>'.fix($post->user->login).'</chyrp:login>'."\r";
-                    $posts_atom.= '        </author>'."\r";
-                    $posts_atom.= '        <content>'."\r";
+                    $posts_atom.= '            <chyrp:login>'.fix($post->user->login, false, true).'</chyrp:login>'."\n";
+                    $posts_atom.= '        </author>'."\n";
+                    $posts_atom.= '        <content type="application/xml">'."\n";
 
                     foreach ($post->attributes as $key => $val)
-                        $posts_atom.= '            <'.$key.'>'.fix($val).'</'.$key.'>'."\r";
+                        $posts_atom.= '            <'.$key.'>'.fix($val, false, true).'</'.$key.'>'."\n";
 
-                    $posts_atom.= '        </content>'."\r";
+                    $posts_atom.= '        </content>'."\n";
 
                     foreach (array("feather", "clean", "url", "pinned", "status") as $attr)
-                        $posts_atom.= '        <chyrp:'.$attr.'>'.fix($post->$attr).'</chyrp:'.$attr.'>'."\r";
+                        $posts_atom.= '        <chyrp:'.$attr.'>'.fix($post->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
 
                     $trigger->filter($posts_atom, "posts_export", $post);
 
-                    $posts_atom.= '    </entry>'."\r";
+                    $posts_atom.= '    </entry>'."\n";
 
                 }
 
-                $posts_atom.= '</feed>'."\r";
+                $posts_atom.= '</feed>'."\n";
                 $exports["posts.atom"] = $posts_atom;
             }
 
@@ -1152,45 +1158,45 @@
                 $pages = Page::find(array("where" => $where, "params" => $params, "order" => "id ASC"),
                                     array("filter" => false));
 
-                $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\r";
-                $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\r";
-                $pages_atom.= '    <title>'.fix($config->name).' | Pages</title>'."\r";
-                $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\r";
-                $pages_atom.= '    <id>'.fix($config->url).'</id>'."\r";
-                $pages_atom.= '    <updated>'.date("c").'</updated>'."\r";
-                $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\r";
-                $pages_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\r";
+                $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+                $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n";
+                $pages_atom.= '    <title>'.fix($config->name).' | Pages</title>'."\n";
+                $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\n";
+                $pages_atom.= '    <id>'.fix($config->url).'</id>'."\n";
+                $pages_atom.= '    <updated>'.date("c").'</updated>'."\n";
+                $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\n";
+                $pages_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
 
                 foreach ($pages as $page) {
                     $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
                     $url = $page->url();
 
-                    $pages_atom.= '    <entry xml:base="'.fix($url, true).'" chyrp:parent_id="'.$page->parent_id.'">'."\r";
-                    $pages_atom.= '        <title type="html">'.fix($page->title).'</title>'."\r";
-                    $pages_atom.= '        <id>'.fix($url).'</id>'."\r";
-                    $pages_atom.= '        <updated>'.when("c", $updated).'</updated>'."\r";
-                    $pages_atom.= '        <published>'.when("c", $page->created_at).'</published>'."\r";
-                    $pages_atom.= '        <link href="'.fix($trigger->filter($url, "page_export_url", $page), true).'" />'."\r";
-                    $pages_atom.= '        <author chyrp:user_id="'.fix($page->user_id).'">'."\r";
-                    $pages_atom.= '            <name>'.fix(oneof($page->user->full_name, $page->user->login)).'</name>'."\r";
+                    $pages_atom.= '    <entry xml:base="'.fix($url, true).'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
+                    $pages_atom.= '        <title type="html">'.fix($page->title, false, true).'</title>'."\n";
+                    $pages_atom.= '        <id>'.fix($url).'</id>'."\n";
+                    $pages_atom.= '        <updated>'.when("c", $updated).'</updated>'."\n";
+                    $pages_atom.= '        <published>'.when("c", $page->created_at).'</published>'."\n";
+                    $pages_atom.= '        <link href="'.fix($trigger->filter($url, "page_export_url", $page), true).'" />'."\n";
+                    $pages_atom.= '        <author chyrp:user_id="'.fix($page->user_id).'">'."\n";
+                    $pages_atom.= '            <name>'.fix(oneof($page->user->full_name, $page->user->login)).'</name>'."\n";
 
                     if (!empty($page->user->website))
-                        $pages_atom.= '            <uri>'.fix($page->user->website).'</uri>'."\r";
+                        $pages_atom.= '            <uri>'.fix($page->user->website).'</uri>'."\n";
 
-                    $pages_atom.= '            <chyrp:login>'.fix($page->user->login).'</chyrp:login>'."\r";
-                    $pages_atom.= '        </author>'."\r";
-                    $pages_atom.= '        <content type="html">'.fix($page->body).'</content>'."\r";
+                    $pages_atom.= '            <chyrp:login>'.fix($page->user->login, false, true).'</chyrp:login>'."\n";
+                    $pages_atom.= '        </author>'."\n";
+                    $pages_atom.= '        <content type="html">'.fix($page->body, false, true).'</content>'."\n";
 
                     foreach (array("public", "show_in_list", "list_order", "clean", "url") as $attr)
-                        $pages_atom.= '        <chyrp:'.$attr.'>'.fix($page->$attr).'</chyrp:'.$attr.'>'."\r";
+                        $pages_atom.= '        <chyrp:'.$attr.'>'.fix($page->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
 
 
                     $trigger->filter($pages_atom, "pages_export", $page);
 
-                    $pages_atom.= '    </entry>'."\r";
+                    $pages_atom.= '    </entry>'."\n";
                 }
 
-                $pages_atom.= '</feed>'."\r";
+                $pages_atom.= '</feed>'."\n";
                 $exports["pages.atom"] = $pages_atom;
             }
 
@@ -1371,21 +1377,25 @@
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
 
-                    $user = new User(array("login" => (string) $login));
+                    $user = new User(array("login" => unfix((string) $login)));
 
-                    $data = xml2arr($entry->content);
-                    $data["imported_from"] = "chyrp";
+                    $values = array();
+
+                    foreach ($entry->content->children() as $value)
+                        $values[$value->getName()] = unfix((string) $value);
 
                     if (!empty($_POST['media_url']))
-                        array_walk_recursive($data, "media_url_scan");
+                        array_walk_recursive($values, "media_url_scan");
 
-                    $post = Post::add($data,
-                                      (string) $chyrp->clean,
-                                      Post::check_url((string) $chyrp->url),
-                                      (string) $chyrp->feather,
+                    $values["imported_from"] = "chyrp";
+
+                    $post = Post::add($values,
+                                      unfix((string) $chyrp->clean),
+                                      Post::check_url(unfix((string) $chyrp->url)),
+                                      unfix((string) $chyrp->feather),
                                       (!$user->no_results) ? $user->id : $visitor->id,
-                                      (bool) (int) $chyrp->pinned,
-                                      (string) $chyrp->status,
+                                      (bool) (int) unfix((string) $chyrp->pinned),
+                                      unfix((string) $chyrp->status),
                                       datetime((string) $entry->published),
                                       ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated),
                                       false);
@@ -1403,17 +1413,17 @@
                     $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
 
-                    $user = new User(array("login" => (string) $login));
+                    $user = new User(array("login" => unfix((string) $login)));
 
-                    $page = Page::add((string) $entry->title,
-                                      (string) $entry->content,
+                    $page = Page::add(unfix((string) $entry->title),
+                                      unfix((string) $entry->content),
                                       (!$user->no_results) ? $user->id : $visitor->id,
-                                      (int) $attr->parent_id,
-                                      (bool) (int) $chyrp->public,
-                                      (bool) (int) $chyrp->show_in_list,
-                                      (int) $chyrp->list_order,
-                                      (string) $chyrp->clean,
-                                      Page::check_url((string) $chyrp->url),
+                                      (int) unfix((string) $attr->parent_id),
+                                      (bool) (int) unfix((string) $chyrp->public),
+                                      (bool) (int) unfix((string) $chyrp->show_in_list),
+                                      (int) unfix((string) $chyrp->list_order),
+                                      unfix((string) $chyrp->clean),
+                                      Page::check_url(unfix((string) $chyrp->url)),
                                       datetime((string) $entry->published),
                                       ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated));
 
@@ -1462,7 +1472,7 @@
                 if (!empty($info["conflicts"])) {
                     $classes[$folder][] = "conflicts";
 
-                    foreach ((array) $info["conflicts"] as $conflict)
+                    foreach ($info["conflicts"] as $conflict)
                         if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
                             $classes[$folder][] = "conflict_".$conflict;
 
@@ -1477,7 +1487,7 @@
                 if (!empty($info["dependencies"])) {
                     $classes[$folder][] = "dependencies";
 
-                    foreach ((array) $info["dependencies"] as $dependency) {
+                    foreach ($info["dependencies"] as $dependency) {
                         if (!file_exists(MODULES_DIR.DIR.$dependency.DIR.$dependency.".php")) {
                             if (!in_array("missing_dependency", $classes[$folder]))
                                 $classes[$folder][] = "missing_dependency";
@@ -1498,7 +1508,7 @@
                 }
 
                 # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
-                $category = (in_array($folder, (array) $config->enabled_modules)) ?
+                $category = (in_array($folder, $config->enabled_modules)) ?
                     "enabled_modules" : "disabled_modules" ;
 
                 $this->context[$category][$folder] = array_merge($info, array("classes" => $classes[$folder]));
@@ -1531,7 +1541,7 @@
                 load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale");
 
                 # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
-                $category = (in_array($folder, (array) $config->enabled_feathers)) ?
+                $category = (in_array($folder, $config->enabled_feathers)) ?
                     "enabled_feathers" : "disabled_feathers" ;
 
                 $this->context[$category][$folder] = load_info(FEATHERS_DIR.DIR.$folder.DIR."info.php");
@@ -1595,7 +1605,7 @@
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
-            if (in_array($name, (array) $config->$enabled_array))
+            if (in_array($name, $config->$enabled_array))
                 error(__("Error"), __("Extension already enabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
@@ -1608,7 +1618,7 @@
             if (method_exists($class_name, "__install"))
                 call_user_func(array($class_name, "__install"));
 
-            $config->set($enabled_array, array_merge((array) $config->$enabled_array, array($name)));
+            $config->set($enabled_array, array_merge($config->$enabled_array, array($name)));
 
             foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
                 Flash::message($message);
@@ -1639,7 +1649,7 @@
             $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
             $class_name    = camelize($name);
 
-            if (!in_array($name, (array) $config->$enabled_array))
+            if (!in_array($name, $config->$enabled_array))
                 error(__("Error"), __("Extension already disabled."), null, 409);
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
@@ -1648,7 +1658,7 @@
             if (method_exists($class_name, "__uninstall"))
                 call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
 
-            $config->set($enabled_array, array_diff((array) $config->$enabled_array, array($name)));
+            $config->set($enabled_array, array_diff($config->$enabled_array, array($name)));
 
             if ($type == "feather" and isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
                 unset($_SESSION['latest_feather']);
@@ -1693,8 +1703,11 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
+            $trigger = Trigger::current();
+
             if (empty($_POST['theme'])) {
                 unset($_SESSION['theme']);
+                $trigger->call("preview_theme_stopped");
                 Flash::notice(__("Preview stopped."), "themes");
             }
 
@@ -1702,7 +1715,8 @@
                 show_403(__("Access Denied"), __("Invalid security key."));
 
             $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
-            Flash::notice(__("Preview started."), "/");
+            $trigger->call("preview_theme_started");
+            Flash::notice(__("Preview started."), Config::current()->url);
         }
 
         /**
@@ -1761,8 +1775,8 @@
 
             $check_updates_last = (empty($_POST['check_updates'])) ? 0 : $config->check_updates_last ;
 
-            $config->set("name", $_POST['name']);
-            $config->set("description", $_POST['description']);
+            $config->set("name", strip_tags($_POST['name']));
+            $config->set("description", strip_tags($_POST['description']));
             $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/"));
             $config->set("url", rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/"));
             $config->set("email", $_POST['email']);
@@ -1962,7 +1976,7 @@
                 $write["write_page"] = array("title" => __("Page"));
 
             if ($visitor->group->can("add_draft", "add_post"))
-                foreach ((array) Config::current()->enabled_feathers as $feather) {
+                foreach (Config::current()->enabled_feathers as $feather) {
                     if (!feather_enabled($feather))
                         continue;
 

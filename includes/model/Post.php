@@ -31,7 +31,7 @@
          */
         public function __construct($post_id = null, $options = array()) {
             if (!isset($post_id) and empty($options))
-                return;
+                return false;
 
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
@@ -69,7 +69,7 @@
             $options["select"] = array_merge(array("posts.*",
                                                    "post_attributes.name AS attribute_names",
                                                    "post_attributes.value AS attribute_values"),
-                                             oneof(@$options["select"], array()));
+                                             fallback($options["select"], array()));
             $options["ignore_dupes"] = array("attribute_names", "attribute_values");
 
             parent::grab($this, $post_id, $options);
@@ -103,6 +103,9 @@
          *     <Model::search>
          */
         static function find($options = array(), $options_for_object = array()) {
+            # LIMIT cannot be used because of LEFT JOIN attributes.
+            unset($options["limit"]);
+
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
             elseif (!isset($options["where"]))
@@ -139,7 +142,7 @@
             $options["select"] = array_merge(array("posts.*",
                                                    "post_attributes.name AS attribute_names",
                                                    "post_attributes.value AS attribute_values"),
-                                             oneof(@$options["select"], array()));
+                                             fallback($options["select"], array()));
             $options["ignore_dupes"] = array("attribute_names", "attribute_values");
 
             fallback($options["order"], "pinned DESC, created_at DESC, id DESC");
@@ -188,19 +191,19 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($clean,        sanitize(@$_POST['slug'], true, true, 80), slug(8));
+            fallback($clean,        sanitize(fallback($_POST['slug']), true, true, 80), slug(8));
             fallback($url,          self::check_url($clean));
-            fallback($feather,      @$_POST['feather'], "text");
+            fallback($feather,      fallback($_POST['feather'], "undefined"));
             fallback($user_id,      Visitor::current()->id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
-            fallback($status,       (isset($_POST['draft'])) ?
+            fallback($status,       (!empty($_POST['draft'])) ?
                                         "draft" :
-                                        oneof(@$_POST['status'], "public"));
+                                        fallback($_POST['status'], "public"));
             fallback($created_at,   (!empty($_POST['created_at'])) ?
                                         datetime($_POST['created_at']) :
                                         datetime());
             fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
-            fallback($options,      @$_POST['option'], array());
+            fallback($options,      fallback($_POST['option'], array()));
 
             $sql = SQL::current();
             $config = Config::current();
@@ -236,7 +239,7 @@
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if ($config->send_pingbacks and $pingbacks and $post->status == "public")
-                foreach ($attribute_values as $value)
+                foreach ($post->attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
 
@@ -290,9 +293,9 @@
             fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
             fallback($user_id,      $this->user_id);
             fallback($pinned,       (int) !empty($_POST['pinned']));
-            fallback($status,       (isset($_POST['draft'])) ?
+            fallback($status,       (!empty($_POST['draft'])) ?
                                         "draft" :
-                                        oneof(@$_POST['status'], $this->status));
+                                        fallback($_POST['status'], $this->status));
             fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
                                         oneof(sanitize($_POST['slug'], true, true, 80), slug(8)) :
                                         $this->clean);
@@ -303,7 +306,7 @@
                                         datetime($_POST['created_at']) :
                                         $this->created_at);
             fallback($updated_at,   datetime());
-            fallback($options,      @$_POST['option'], array());
+            fallback($options,      fallback($_POST['option'], array()));
 
             $sql = SQL::current();
             $config = Config::current();
@@ -343,7 +346,7 @@
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if ($config->send_pingbacks and $pingbacks and $this->status == "public")
-                foreach ($attribute_values as $value)
+                foreach ($post->attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
 
@@ -745,11 +748,24 @@
             $where = array();
             $dates = array("year", "month", "day", "hour", "minute", "second");
 
+            $created_at = array("year"   => "____",
+                                "month"  => "__",
+                                "day"    => "__",
+                                "hour"   => "__",
+                                "minute" => "__",
+                                "second" => "__");
+
             # Conversions of some attributes.
             foreach ($found as $part => $value)
                 if (in_array($part, $dates)) {
                     # Filter by date/time of creation.
-                    $where[strtoupper($part)."(created_at)"] = $value;
+                    $created_at[$part] = $value;
+                    $where["created_at LIKE"] = $created_at["year"]."-".
+                                                $created_at["month"]."-".
+                                                $created_at["day"]." ".
+                                                $created_at["hour"].":".
+                                                $created_at["minute"].":".
+                                                $created_at["second"]."%";
                 } elseif ($part == "author") {
                     # Filter by "author" (login).
                     $user = new User(array("login" => $value));
@@ -757,8 +773,10 @@
                 } elseif ($part == "feathers") {
                     # Filter by feather.
                     $where["feather"] = depluralize($value);
-                } else
+                } else {
+                    # Key => Val expression.
                     $where[$part] = $value;
+                }
 
             return new self(null, array_merge($options, array("where" => $where)));
         }
@@ -797,7 +815,7 @@
         static function feathers() {
             $feathers = array();
 
-            foreach ((array) Config::current()->enabled_feathers as $feather)
+            foreach (Config::current()->enabled_feathers as $feather)
                 if (feather_enabled($feather))
                     $feathers[] = $feather;
 

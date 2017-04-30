@@ -5,7 +5,6 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 */
 
 .hljs {
-  font-family: "Hack webfont";
   display: block;
   overflow-x: auto;
   padding: 0.5em;

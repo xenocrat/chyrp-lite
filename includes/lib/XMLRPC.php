@@ -36,14 +36,13 @@
         * Receive and register pingbacks. Calls the @pingback@ trigger.
         */
         public function pingback_ping($args) {
-            $config     = Config::current();
             $trigger    = Trigger::current();
             $source     = add_scheme(str_replace("&amp;", "&", fallback($args[0], "")));
             $target     = add_scheme(str_replace("&amp;", "&", fallback($args[1], "")));
             $chyrp_host = str_replace(array("http://www.",
                                             "http://",
                                             "https://www.",
-                                            "https://"), "", $config->url);
+                                            "https://"), "", Config::current()->url);
 
             # No need to continue without a responder for the pingback trigger.
             if (!$trigger->exists("pingback"))
@@ -119,12 +118,9 @@
             $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
-            $config  = Config::current();
             $trigger = Trigger::current();
             $where = array("feather" => XML_RPC_FEATHER);
-            $result  = array();
-            $title = XML_RPC_TITLE;
-            $description = XML_RPC_DESCRIPTION;
+            $limit = (int) fallback($args[3], Config::current()->posts_per_page);
 
             if ($user->group->can("view_own_draft", "edit_own_draft"))
                 $where["status"] = array("public", "draft");
@@ -134,25 +130,35 @@
             if (!$user->group->can("edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where["user_id"] = $user->id;
 
-            $posts = Post::find(array("where"  => $where,
-                                      "order"  => "created_at DESC, id DESC",
-                                      "limit"  => (int) fallback($args[3], $config->posts_per_page)),
-                                array("filter" => false));
+            $results = Post::find(array("placeholders" => true,
+                                        "where" => $where,
+                                        "order" => "created_at DESC, id DESC"));
+
+            $posts = array();
+
+            for ($i = 0; $i < $limit; $i++)
+                if (isset($results[0][$i]))
+                    $posts[] = new Post(null, array("read_from" => $results[0][$i], "filter" => false));
+
+            $array = array();
+
+            $title = XML_RPC_TITLE;
+            $description = XML_RPC_DESCRIPTION;
 
             foreach ($posts as $post) {
-                $struct = array("postid"            => $post->id,
-                                "userid"            => $post->user_id,
-                                "title"             => $post->$title,
-                                "dateCreated"       => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
-                                "description"       => $post->$description,
-                                "link"              => $post->url(),
-                                "permaLink"         => $post->url(),
-                                "mt_basename"       => $post->clean);
+                $struct = array("postid"      => $post->id,
+                                "userid"      => $post->user_id,
+                                "title"       => $post->$title,
+                                "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
+                                "description" => $post->$description,
+                                "link"        => $post->url(),
+                                "permaLink"   => $post->url(),
+                                "mt_basename" => $post->clean);
 
-                $result[] = $trigger->filter($struct, "metaWeblog_getPost", $post);
+                $array[] = $trigger->filter($struct, "metaWeblog_getPost", $post);
             }
 
-            return $result;
+            return $array;
         }
 
        /**
@@ -217,14 +223,14 @@
             $title = XML_RPC_TITLE;
             $description = XML_RPC_DESCRIPTION;
 
-            $struct = array("postid"            => $post->id,
-                            "userid"            => $post->user_id,
-                            "title"             => $post->$title,
-                            "dateCreated"       => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
-                            "description"       => $post->$description,
-                            "link"              => $post->url(),
-                            "permaLink"         => $post->url(),
-                            "mt_basename"       => $post->clean);
+            $struct = array("postid"      => $post->id,
+                            "userid"      => $post->user_id,
+                            "title"       => $post->$title,
+                            "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
+                            "description" => $post->$description,
+                            "link"        => $post->url(),
+                            "permaLink"   => $post->url(),
+                            "mt_basename" => $post->clean);
 
             Trigger::current()->filter($struct, "metaWeblog_getPost", $post);
             return $struct;
@@ -259,13 +265,20 @@
             if (!empty($args[3]["mt_excerpt"]))
                 $content = $args[3]["mt_excerpt"]."\n\n".$content;
 
-            $_POST['feather'] = XML_RPC_FEATHER;
-            $_POST['created_at'] = oneof($this->convertFromDateCreated($args[3]), datetime());
-
-            if ($user->group->can("add_post"))
-                $_POST['status'] = ($args[3]["post_status"] == "draft") ? "draft" : "public" ;
-            else
-                $_POST['status'] = "draft";
+            # Convert statuses from WordPress to Chyrp equivalents.
+            switch ($args[3]["post_status"]) {
+                case "draft":
+                    $status = "draft";
+                    break;
+                case "future":
+                    $status = "scheduled";
+                    break;
+                case "private":
+                    $status = "registered_only";
+                    break;
+                default:
+                    $status = "public";
+            }
 
             $trigger->call("metaWeblog_newPost_preQuery", $args[3]);
 
@@ -273,11 +286,11 @@
                                     XML_RPC_DESCRIPTION => $content),
                               sanitize(oneof($args[3]["mt_basename"], $args[3]["title"]), true, true, 80),
                               "",
-                              null,
+                              XML_RPC_FEATHER,
                               $user->id,
                               null,
-                              "",
-                              null,
+                              ($user->group->can("add_post")) ? $status : "draft",
+                              oneof($this->convertFromDateCreated($args[3]), datetime()),
                               null,
                               ($args[3]["mt_allow_pings"] == "open"));
 
@@ -320,10 +333,23 @@
             if (!$post->editable($user))
                 return new IXR_Error(401, __("You do not have sufficient privileges to edit this post."));
 
-            if ($user->group->can("edit_own_post", "edit_post"))
-                $_POST['status'] = ($args[3]["post_status"] == "draft") ? "draft" : $post->status ;
-            else
-                $_POST['status'] = $post->status;
+            # Convert statuses from WordPress to Chyrp equivalents.
+            switch ($args[3]["post_status"]) {
+                case "publish":
+                    $status = "public";
+                    break;
+                case "draft":
+                    $status = "draft";
+                    break;
+                case "future":
+                    $status = "scheduled";
+                    break;
+                case "private":
+                    $status = "registered_only";
+                    break;
+                default:
+                    $status = $post->status;
+            }
 
             $trigger->call("metaWeblog_editPost_preQuery", $args[3], $post);
 
@@ -331,7 +357,7 @@
                                         XML_RPC_DESCRIPTION => $content),
                                   null,
                                   $post->pinned,
-                                  null,
+                                  ($user->group->can("edit_own_post", "edit_post")) ? $status : $post->status,
                                   oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->clean),
                                   null,
                                   oneof($this->convertFromDateCreated($args[3]), $post->created_at));

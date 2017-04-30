@@ -7,5 +7,7 @@
 {% else %}
 <h3 role="status" class="filter">{{ "No posts" | translate }}</h3>
 {% endfor %}
+{% else %}
+<h3 role="status" class="filter">{{ reason }}</h3>
 {% endif %}
 {% endblock %}

@@ -1,21 +1,6 @@
-# Chyrp Lite Translation File.
-# Copyright (C) 2017 xenocrat
-# This file is distributed under the same license as the Chyrp Lite package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Chyrp Lite"
-"Report-Msgid-Bugs-To: hello@xenocrat.net"
-"POT-Creation-Date: 2017-03-05 15:11+0000"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"
-"Last-Translator: FIRST LAST <EMAIL@EXAMPLE.COM>"
-"Language-Team: LANGUAGE <EMAIL@EXAMPLE.COM>"
-"MIME-Version: 1.0"
-"Content-Type: text/plain; charset=UTF-8"
-"Content-Transfer-Encoding: 8bit"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2017 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
 
 #: modules/cacher/admin/pages/cache_settings.twig:3
 #: modules/cacher/admin/pages/cache_settings.twig:6
@@ -46,16 +31,12 @@ msgstr ""
 msgid "A list of URLs that will not be cached; enter one at a time."
 msgstr ""
 
-#: modules/cacher/cacher.php:102
+#: modules/cacher/cacher.php:98
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:139
+#: modules/cacher/cacher.php:135
 msgid "Cache cleared."
-msgstr ""
-
-#: modules/cacher/filecacher.php:12
-msgid "Cacher module cannot write cache files to disk."
 msgstr ""
 
 #: modules/cacher/info.php:3
@@ -64,5 +45,10 @@ msgstr ""
 
 #: modules/cacher/info.php:6
 msgid "Caches pages, drastically reducing server load."
+msgstr ""
+
+#: modules/cacher/lib/FeedCacher.php:14
+#: modules/cacher/lib/PageCacher.php:14
+msgid "Cacher module cannot write caches to disk."
 msgstr ""
 

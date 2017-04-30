@@ -7,10 +7,9 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2017.01");
-    define('CHYRP_CODENAME', "Swainson");
+    define('CHYRP_VERSION',  "2017.02");
+    define('CHYRP_CODENAME', "Swahili");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-    define('CACHE_TWIG',     false);
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
     define('ADMIN',          false);
@@ -26,6 +25,8 @@
     define('MODULES_DIR',    MAIN_DIR.DIR."modules");
     define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
     define('THEMES_DIR',     MAIN_DIR.DIR."themes");
+    define('CACHE_TWIG',     false);
+    define('CACHE_THUMBS',   false);
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
 
@@ -143,7 +144,7 @@
      */
     function disable_importers() {
         $config = Config::current();
-        $config->set("enabled_modules", array_diff((array) $config->enabled_modules, array("importers")));
+        $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
     }
 
     /**
@@ -372,12 +373,12 @@
         add_export_content();
 
         # Perform module upgrades.
-        foreach ((array) $config->enabled_modules as $module)
+        foreach ($config->enabled_modules as $module)
             if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
 
         # Perform feather upgrades.
-        foreach ((array) $config->enabled_feathers as $feather)
+        foreach ($config->enabled_feathers as $feather)
             if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 

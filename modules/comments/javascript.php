@@ -3,9 +3,9 @@ var ChyrpComment = {
     notice: 0,
     interval: null,
     failed: false,
-    reload: <?php echo($config->enable_reload_comments ? "true" : "false" ); ?>,
-    delay: Math.abs(<?php echo($config->auto_reload_comments * 1000); ?>),
-    per_page: <?php echo $config->comments_per_page; ?>,
+    reload: <?php echo($config->module_comments["enable_reload_comments"] ? "true" : "false" ); ?>,
+    delay: Math.abs(<?php echo($config->module_comments["auto_reload_comments"] * 1000); ?>),
+    per_page: <?php echo $config->module_comments["comments_per_page"]; ?>,
     init: function() {
         if (Site.ajax && $("#comments").length) {
             if (ChyrpComment.reload && ChyrpComment.delay > 0)
