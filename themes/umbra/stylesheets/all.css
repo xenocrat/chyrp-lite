@@ -296,8 +296,8 @@ div.flash {                                     box-sizing: border-box;
                                                 text-align: center;
                                                 color: #ffffff;
                                                 background-color: #cc5252;
-                                                padding: 0.5em }
-div.flash + div.flash {                         border-top: 1px solid #464647 }
+                                                padding: 0.5em;
+                                                border-bottom: 1px solid #464647 }
 div.metadata {                                  font-weight: normal;
                                                 font-size: 0.75em;
                                                 color: #999491;
