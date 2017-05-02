@@ -59,13 +59,13 @@
 
             # Portrait orientation.
             if ($original_width > $original_height) {
-                $crop_x = ceil(($original_width - $original_height) / 2);
+                $crop_x = round(($original_width - $original_height) / 2);
                 $original_width = $original_height;
             }
 
             # Landscape orientation.
             if ($original_height > $original_width) {
-                $crop_y = ceil(($original_height - $original_width) / 2);
+                $crop_y = round(($original_height - $original_width) / 2);
                 $original_height = $original_width;
             }
 
@@ -73,12 +73,12 @@
         }
 
         if ($thumbnail_height == 0) {
-            $thumbnail_height = ceil(($thumbnail_width / $original_width) * $original_height);
+            $thumbnail_height = round(($thumbnail_width / $original_width) * $original_height);
             return;
         }
 
         if ($thumbnail_width == 0) {
-            $thumbnail_width = ceil(($thumbnail_height / $original_height) * $original_width);
+            $thumbnail_width = round(($thumbnail_height / $original_height) * $original_width);
             return;
         }
 
