@@ -43,15 +43,12 @@
     if (!is_readable($filepath) or !is_file($filepath))
         show_404(__("Not Found"), __("File not found."));
 
+    if ($thumbnail_width == 0 and $thumbnail_height == 0)
+        error(__("Error"), __("Maximum size cannot be zero."), null, 422);
+
     function resize_thumb(&$crop_x, &$crop_y, &$thumbnail_width, &$thumbnail_height, &$original_width, &$original_height) {
         $scale_x = ($thumbnail_width > 0) ? $thumbnail_width / $original_width : 0 ;
         $scale_y = ($thumbnail_height > 0) ? $thumbnail_height / $original_height : 0 ;
-
-        if ($thumbnail_width == 0 and $thumbnail_height == 0)
-            $thumbnail_width = $thumbnail_height = 1;
-
-        if ($thumbnail_width <= $original_width and $thumbnail_height <= $original_height and $scale_x == $scale_y)
-            return;
 
         if (!empty($_GET['square'])) {
             if ($thumbnail_width == 0)
@@ -75,23 +72,27 @@
             return;
         }
 
-        if ($thumbnail_width != 0 and $thumbnail_height == 0) {
+        if ($thumbnail_height == 0) {
             $thumbnail_height = ceil(($thumbnail_width / $original_width) * $original_height);
             return;
         }
 
-        if ($thumbnail_width == 0 and $thumbnail_height != 0) {
+        if ($thumbnail_width == 0) {
             $thumbnail_width = ceil(($thumbnail_height / $original_height) * $original_width);
             return;
         }
 
         # Recompute to retain aspect ratio and stay within bounds.
         if ($scale_x != $scale_y) {
-            if ($original_width * $scale_y <= $thumbnail_width)
-                $thumbnail_width = ceil($original_width * $scale_y);
+            if ($original_width * $scale_y <= $thumbnail_width) {
+                $thumbnail_width = round($original_width * $scale_y);
+                return;
+            }
 
-            if ($original_height * $scale_x <= $thumbnail_height)
-                $thumbnail_height = ceil($original_height * $scale_x);
+            if ($original_height * $scale_x <= $thumbnail_height) {
+                $thumbnail_height = round($original_height * $scale_x);
+                return;
+            }
         }
     }
 
@@ -193,11 +194,12 @@
                            $original_width,
                            $original_height);
 
-        # Output the thumbnail.
-        if ($function == "imagejpeg" or $function == "imagepng")
-            $function($thumbnail, $cache_filepath, $quality);
-        else
-            $function($thumbnail, $cache_filepath);
+        # Create the thumbnail.
+        $result = ($function == "imagejpeg" or $function == "imagepng") ?
+            $function($thumbnail, $cache_filepath, $quality) : $function($thumbnail, $cache_filepath) ;
+
+        if ($result === false)
+            error(__("Error"), __("Failed to create image thumbnail."));
 
         # Destroy resources.
         imagedestroy($original);
