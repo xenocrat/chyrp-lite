@@ -64,6 +64,8 @@
 #: includes/helpers.php:1769
 #: includes/thumb.php:15
 #: includes/thumb.php:18
+#: includes/thumb.php:47
+#: includes/thumb.php:202
 msgid "Error"
 msgstr ""
 
@@ -1489,6 +1491,14 @@ msgstr ""
 
 #: includes/model/Group.php:274
 msgid "Export Content"
+msgstr ""
+
+#: includes/thumb.php:47
+msgid "Maximum size cannot be zero."
+msgstr ""
+
+#: includes/thumb.php:202
+msgid "Failed to create image thumbnail."
 msgstr ""
 
 #: install.php:110
