@@ -51,10 +51,10 @@
         $scale_y = ($thumbnail_height > 0) ? $thumbnail_height / $original_height : 0 ;
 
         if (!empty($_GET['square'])) {
-            if ($thumbnail_width == 0)
+            if ($thumbnail_width > $thumbnail_height)
                 $thumbnail_width = $thumbnail_height;
 
-            if ($thumbnail_height == 0)
+            if ($thumbnail_height > $thumbnail_width)
                 $thumbnail_height = $thumbnail_width;
 
             # Portrait orientation.
