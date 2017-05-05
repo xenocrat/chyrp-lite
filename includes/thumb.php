@@ -52,10 +52,10 @@
 
         if (!empty($_GET['square'])) {
             if ($thumbnail_width > $thumbnail_height)
-                $thumbnail_width = $thumbnail_height;
+                $thumbnail_height = $thumbnail_width;
 
             if ($thumbnail_height > $thumbnail_width)
-                $thumbnail_height = $thumbnail_width;
+                $thumbnail_width = $thumbnail_height;
 
             # Portrait orientation.
             if ($original_width > $original_height) {
@@ -107,7 +107,7 @@
     resize_thumb($crop_x, $crop_y, $thumbnail_width, $thumbnail_height, $original_width, $original_height);
 
     # Redirect to the original if the size is already less than requested.
-    if ($original_width <= $thumbnail_width and $original_height <= $thumbnail_height)
+    if ($original_width <= $thumbnail_width and $original_height <= $thumbnail_height and empty($_GET['square']))
         redirect($url);
 
     # Determine the media type.
