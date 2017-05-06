@@ -102,8 +102,7 @@
 
     # Already installed?
     if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            redirect($config->url);
+        redirect($config->url);
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))
