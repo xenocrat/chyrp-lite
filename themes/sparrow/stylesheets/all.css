@@ -420,7 +420,6 @@ section a:focus, p a:focus {                    outline: none;
                                                 border-bottom: 1px #99726d solid }
 section a:active, p a:active {                  color: #99726d;
                                                 border-bottom: 1px #99726d solid }
-
 div.category a.category {                       display: inline-block;
                                                 position: relative;
                                                 top: 0px;
@@ -433,8 +432,6 @@ div.category a.category {                       display: inline-block;
 div.category a.category:hover,
 div.category a.category:focus,
 div.category a.category:active {                top: 1px }
-
-
 div.tags a.tag {                                display: inline-block;
                                                 position: relative;
                                                 top: 0px;
