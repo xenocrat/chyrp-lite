@@ -625,7 +625,7 @@
             if (!$user->approved)
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
-                                             "link"  => $config->url.
+                                             "link"  => fix($config->url, true).
                                                         "/?action=activate&amp;login=".urlencode($user->login).
                                                         "&amp;token=".token(array($user->login, $user->email))));
 
@@ -718,7 +718,7 @@
             if (!$user->approved)
                 correspond("activate", array("login" => $user->login,
                                              "to"    => $user->email,
-                                             "link"  => $config->url.
+                                             "link"  => fix($config->url, true).
                                                         "/?action=activate&amp;login=".urlencode($user->login).
                                                         "&amp;token=".token(array($user->login, $user->email))));
 
