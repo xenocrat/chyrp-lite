@@ -2064,9 +2064,9 @@
         if (!$config->email_correspondence or !isset($params["to"]))
             return false;
 
-        $params["headers"] = "From:".$config->email."\r\n".
-                             "Reply-To:".$config->email. "\r\n".
-                             "X-Mailer: PHP/".phpversion();
+        $params["headers"] = "From: ".$config->email."\r\n".
+                             "Reply-To: ".$config->email. "\r\n".
+                             "X-Mailer: ".CHYRP_IDENTITY;
 
         fallback($params["subject"], "");
         fallback($params["message"], "");
@@ -2075,27 +2075,27 @@
             case "activate":
                 $params["subject"] = _f("Activate your account at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     PHP_EOL.PHP_EOL.
+                                     "\r\n"."\r\n".
                                      __("You are receiving this message because you registered a new account.").
-                                     PHP_EOL.PHP_EOL.
+                                     "\r\n"."\r\n".
                                      __("Visit this link to activate your account:").
-                                     PHP_EOL.
+                                     "\r\n".
                                      unfix($params["link"]);
                 break;
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     PHP_EOL.PHP_EOL.
+                                     "\r\n"."\r\n".
                                      __("You are receiving this message because you requested a new password.").
-                                     PHP_EOL.PHP_EOL.
+                                     "\r\n"."\r\n".
                                      __("Visit this link to reset your password:").
-                                     PHP_EOL.
+                                     "\r\n".
                                      unfix($params["link"]);
                 break;
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
                 $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     PHP_EOL.PHP_EOL.
+                                     "\r\n"."\r\n".
                                      _f("Your new password is: %s", $params["password"]);
                 break;
             default:
