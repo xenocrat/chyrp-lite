@@ -184,7 +184,7 @@
 
             # Translation is unnecessary if clean URLs are enabled and the controller supports them.
             if ($config->clean_urls and !empty($controller->clean))
-                return $base."/".$url;
+                return fix($base."/".$url, true);
 
             $urls = fallback($controller->urls, array());
 
