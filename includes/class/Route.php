@@ -177,7 +177,7 @@
 
             # Assume this is a dirty URL and return it without translation.
             if (strpos($url, "/") === 0)
-                return $base.$url;
+                return fix($base.$url, true);
 
             # Assume this is a clean URL and ensure it ends with a slash.
             $url = rtrim($url, "/")."/";
