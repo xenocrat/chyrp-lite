@@ -440,8 +440,7 @@ div.category a.category {                       display: inline-block;
                                                 padding: 0.4em 0.8em;
                                                 margin: 0em;
                                                 border-radius: 0.2em;
-                                                color: #ffffff;
-                                                background-color: #4e5a66 }
+                                                border: 1px #c2bcb8 solid }
 div.category a.category:hover,
 div.category a.category:focus,
 div.category a.category:active {                top: 1.2rem;
