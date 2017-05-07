@@ -199,7 +199,7 @@
             # Add a fallback for single parameter translations.
             $urls['|/([^/]+)/$|'] = '/?action=$1';
 
-            return $base.fix(preg_replace(array_keys($urls), array_values($urls), "/".$url, 1));
+            return fix($base.preg_replace(array_keys($urls), array_values($urls), "/".$url, 1), true);
         }
 
         /**
