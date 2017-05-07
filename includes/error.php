@@ -133,7 +133,7 @@
         }
 
         # We need this for the pretty error page.
-        $chyrp_url = Config::current()->chyrp_url;
+        $chyrp_url = fix(Config::current()->chyrp_url, true);
 
         # Set fallbacks.
         fallback($title, __("Error"));
