@@ -517,7 +517,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:591
 #: includes/controller/Main.php:491
-#: install.php:484
+#: install.php:481
 msgid "Passwords cannot be blank."
 msgstr ""
 
@@ -525,8 +525,8 @@ msgstr ""
 #: includes/controller/Admin.php:687
 #: includes/controller/Main.php:493
 #: includes/controller/Main.php:664
-#: install.php:449
-#: install.php:486
+#: install.php:446
+#: install.php:483
 msgid "Passwords do not match."
 msgstr ""
 
@@ -540,7 +540,7 @@ msgstr ""
 #: includes/controller/Admin.php:1754
 #: includes/controller/Main.php:498
 #: includes/controller/Main.php:669
-#: install.php:489
+#: install.php:486
 msgid "Email address cannot be blank."
 msgstr ""
 
@@ -549,7 +549,7 @@ msgstr ""
 #: includes/controller/Admin.php:1757
 #: includes/controller/Main.php:500
 #: includes/controller/Main.php:671
-#: install.php:491
+#: install.php:488
 msgid "Invalid email address."
 msgstr ""
 
@@ -1012,7 +1012,7 @@ msgid "You cannot register an account because you are already logged in."
 msgstr ""
 
 #: includes/controller/Main.php:483
-#: install.php:481
+#: install.php:478
 msgid "Please enter a username for your account."
 msgstr ""
 
@@ -1501,39 +1501,39 @@ msgstr ""
 msgid "Failed to create image thumbnail."
 msgstr ""
 
-#: install.php:109
+#: install.php:106
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
 msgstr ""
 
-#: install.php:113
+#: install.php:110
 msgid "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
 msgstr ""
 
-#: install.php:117
+#: install.php:114
 msgid "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
 msgstr ""
 
-#: install.php:152
+#: install.php:149
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:472
+#: install.php:469
 msgid "Database cannot be blank."
 msgstr ""
 
-#: install.php:475
+#: install.php:472
 msgid "Please enter a name for your website."
 msgstr ""
 
-#: install.php:478
+#: install.php:475
 msgid "Time zone cannot be blank."
 msgstr ""
 
-#: install.php:494
+#: install.php:491
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
-#: install.php:500
+#: install.php:497
 msgid "Could not determine the absolute path to the SQLite database."
 msgstr ""
 
