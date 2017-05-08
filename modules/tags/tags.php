@@ -143,7 +143,7 @@
                               "help" => "tagging_posts",
                               "note" => __("(comma separated)", "tags"),
                               "type" => "text",
-                              "value" => fix(implode(", ", $names), true),
+                              "value" => implode(", ", $names),
                               "extra" => $selector);
 
             return $fields;
