@@ -348,22 +348,22 @@
     # Absolute URL to the theme (current or previewed).
     define('THEME_URL', $config->chyrp_url."/themes/".(PREVIEWING ? $_SESSION['theme'] : $config->theme));
 
-    # Initialize the theme.
+    # Instantiate the theme.
     $theme = Theme::current();
 
-    # Load the Visitor.
+    # Instantiate the visitor.
     $visitor = Visitor::current();
 
-    # Prepare the notifier.
+    # Instantiate notifications.
     $flash = Flash::current();
 
-    # Initiate the extensions.
+    # Initialize extensions.
     init_extensions();
 
-    # Prepare the trigger class.
+    # Instantiate triggers.
     $trigger = Trigger::current();
 
-    # Filter the visitor immediately after the Modules are initialized.
+    # Filter the visitor immediately after extensions are initialized.
     $trigger->filter($visitor, "visitor");
 
     # First general-purpose trigger.

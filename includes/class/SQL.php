@@ -39,7 +39,7 @@
          *     $settings - An array of settings.
          */
         private function __construct($settings = array()) {
-            if (class_exists("Config"))
+            if (class_exists("Config") and !INSTALLING)
                 fallback($settings, Config::current()->sql);
 
             foreach ($settings as $setting => $value)

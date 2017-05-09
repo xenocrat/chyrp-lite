@@ -25,11 +25,11 @@
 {% endif %}
 </label>
 {% if field.type == "text" %}
-<input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_preview ~ field_markdown }} value="{{ field_value | fix(true) }}">
+<input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_preview ~ field_markdown }} value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_multiple }} value="">
 {% elseif field.type == "text_block" %}
-<textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown }}>{{ field_value | fix }}</textarea>
+<textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown }}>{{ field_value | fix(false, true) }}</textarea>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
@@ -109,11 +109,11 @@
 {% endif %}
 </label>
 {% if field.type == "text" %}
-<input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}" value="{{ field_value | fix(true) }}">
+<input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}" value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_multiple }} value="">
 {% elseif field.type == "text_block" %}
-<textarea id="{{ field_id }}" name="{{ field_name }}" rows="12">{{ field_value | fix }}</textarea>
+<textarea id="{{ field_id }}" name="{{ field_name }}" rows="12">{{ field_value | fix(false, true) }}</textarea>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}

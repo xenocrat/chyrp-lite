@@ -177,14 +177,14 @@
 
             # Assume this is a dirty URL and return it without translation.
             if (strpos($url, "/") === 0)
-                return $base.$url;
+                return fix($base.$url, true);
 
             # Assume this is a clean URL and ensure it ends with a slash.
             $url = rtrim($url, "/")."/";
 
             # Translation is unnecessary if clean URLs are enabled and the controller supports them.
             if ($config->clean_urls and !empty($controller->clean))
-                return $base."/".$url;
+                return fix($base."/".$url, true);
 
             $urls = fallback($controller->urls, array());
 
@@ -199,7 +199,7 @@
             # Add a fallback for single parameter translations.
             $urls['|/([^/]+)/$|'] = '/?action=$1';
 
-            return $base.fix(preg_replace(array_keys($urls), array_values($urls), "/".$url, 1));
+            return fix($base.preg_replace(array_keys($urls), array_values($urls), "/".$url, 1), true);
         }
 
         /**

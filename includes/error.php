@@ -124,6 +124,7 @@
             !function_exists("fix") or
             !function_exists("sanitize_html") or
             !function_exists("logged_in") or
+            !file_exists(INCLUDES_DIR.DIR."config.json.php") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
             !property_exists(Config::current(), "chyrp_url")) {
@@ -132,7 +133,7 @@
         }
 
         # We need this for the pretty error page.
-        $chyrp_url = Config::current()->chyrp_url;
+        $chyrp_url = fix(Config::current()->chyrp_url, true);
 
         # Set fallbacks.
         fallback($title, __("Error"));

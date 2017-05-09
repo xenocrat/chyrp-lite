@@ -80,9 +80,6 @@
     # Prepare the Config interface.
     $config = Config::current();
 
-    # Prepare the SQL interface.
-    $sql = SQL::current();
-
     # Set the timezone for time calculations (Atlantic/Reykjavik is 0 offset).
     $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
     set_timezone($timezone);
@@ -102,8 +99,7 @@
 
     # Already installed?
     if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        if ($sql->connect(true) and !empty($config->url) and $sql->count("users"))
-            redirect($config->url);
+        redirect($config->url);
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))
@@ -494,11 +490,14 @@
         if (!class_exists("MySQLi") and !class_exists("PDO"))
             $errors[] = __("MySQLi or PDO is required for database access.");
 
-        if (empty($errors) and $_POST['adapter'] == "sqlite")
-            if ($realpath = realpath(dirname($_POST['database'])))
-                $_POST['database'] = $realpath.DIR.basename($_POST['database']);
-            else
+        if (empty($errors) and $_POST['adapter'] == "sqlite") {
+            $realpath = realpath(dirname($_POST['database']));
+
+            if ($realpath === false)
                 $errors[] = __("Could not determine the absolute path to the SQLite database.");
+            else
+                $_POST['database'] = $realpath.DIR.basename($_POST['database']);
+        }
 
         if (empty($errors) and $_POST['adapter'] == "sqlite")
             if (!is_writable(dirname($_POST['database'])))
