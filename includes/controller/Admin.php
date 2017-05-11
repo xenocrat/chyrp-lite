@@ -1775,8 +1775,8 @@
 
             $check_updates_last = (empty($_POST['check_updates'])) ? 0 : $config->check_updates_last ;
 
-            $config->set("name", strip_tags($_POST['name']));
-            $config->set("description", strip_tags($_POST['description']));
+            $config->set("name", oneof(strip_tags($_POST['name']), fix($_POST['name'])));
+            $config->set("description", oneof(strip_tags($_POST['description']), fix($_POST['description'])));
             $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/"));
             $config->set("url", rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/"));
             $config->set("email", $_POST['email']);
