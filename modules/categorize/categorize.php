@@ -231,7 +231,7 @@
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
             $clean = Category::check_clean(sanitize($clean, true, true));
 
-            Category::add(oneof(strip_tags($_POST['name']), fix($_POST['name'])),
+            Category::add(strip_tags($_POST['name']),
                           $clean,
                           !empty($_POST['show_on_home']));
 
@@ -274,7 +274,7 @@
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
             $clean = ($clean != $category->clean) ? Category::check_clean(sanitize($clean, true, true)) : $category->clean ;
 
-            $category = $category->update(oneof(strip_tags($_POST['name']), fix($_POST['name'])),
+            $category = $category->update(strip_tags($_POST['name']),
                                           $clean,
                                           !empty($_POST['show_on_home']));
 
