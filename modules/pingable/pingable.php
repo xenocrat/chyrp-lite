@@ -33,7 +33,7 @@
             if (strlen($from) > 2048)
                 return new IXR_Error(0, __("Your URL is too long to be stored in our database.", "pingable"));
 
-            Pingback::add($post->id, $from, oneof(strip_tags($title), fix($title)));
+            Pingback::add($post->id, $from, strip_tags($title));
 
             return __("Pingback registered!", "pingable");
         }
@@ -71,7 +71,7 @@
             if (!$pingback->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this pingback.", "pingable"));
 
-            $pingback = $pingback->update(oneof(strip_tags($_POST['title']), fix($_POST['title'])));
+            $pingback = $pingback->update(strip_tags($_POST['title']));
 
             Flash::notice(__("Pingback updated.", "pingable"), "manage_pingbacks");
         }
