@@ -351,7 +351,10 @@
          * Returns the commenter's name enclosed in a hyperlink to their website.
          */
         public function author_link() {
-            if (!isset($this->id))
+            if ($this->no_results)
+                return false;
+
+            if (empty($this->author))
                 return __("Anon", "comments");
 
             if (is_url($this->author_url))
