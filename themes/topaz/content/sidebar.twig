@@ -54,7 +54,7 @@
 {% for category in categorize %}
 {% if category.show_on_home %}
 <li role="presentation">
-<a role="menuitem" href="{{ category.url }}">{{ category.name }}</a>
+<a role="menuitem" href="{{ category.url }}">{{ category.name | oneof("[Untitled]" | translate) }}</a>
 </li>
 {% endif %}
 {% endfor %}

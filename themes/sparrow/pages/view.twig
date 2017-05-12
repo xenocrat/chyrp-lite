@@ -18,7 +18,7 @@
 <h3>{{ "Pingbacks" | translate }}:</h3>
 <ol id="pingbacks">
 {% for pingback in post.pingbacks %}
-<li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true) }}">{{ pingback.title | fix }}</a></li>
+<li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true) }}">{{ pingback.title | oneof("[Untitled]" | translate) }}</a></li>
 {% endfor %}
 </ol>
 </div>
