@@ -686,8 +686,8 @@
 
             # Build the configuration file.
             $set = array($config->set("sql", $settings),
-                         $config->set("name", oneof(strip_tags($_POST['name']), fix($_POST['name']))),
-                         $config->set("description", oneof(strip_tags($_POST['description']), fix($_POST['description']))),
+                         $config->set("name", strip_tags($_POST['name'])),
+                         $config->set("description", strip_tags($_POST['description'])),
                          $config->set("url", rtrim($url, "/")),
                          $config->set("chyrp_url", rtrim($url, "/")),
                          $config->set("email", $_POST['email']),
