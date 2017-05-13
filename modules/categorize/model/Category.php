@@ -51,7 +51,7 @@
             $sql = SQL::current();
 
             $sql->insert("categorize",
-                         array("name"         => $name,
+                         array("name"         => strip_tags($name),
                                "clean"        => $clean,
                                "show_on_home" => $show_on_home));
 
@@ -76,16 +76,16 @@
             if ($this->no_results)
                 return false;
 
-            SQL::current()->update("categorize",
-                                   array("id"           => $this->id),
-                                   array("name"         => $name,
-                                         "clean"        => $clean,
-                                         "show_on_home" => $show_on_home));
+            $new_values = array("name"         => strip_tags($name),
+                                "clean"        => $clean,
+                                "show_on_home" => $show_on_home);
 
-            $category = new self(null, array("read_from" => array("id"           => $this->id,
-                                                                  "name"         => $name,
-                                                                  "clean"        => $clean,
-                                                                  "show_on_home" => $show_on_home)));
+            SQL::current()->update("categorize",
+                                   array("id" => $this->id),
+                                   $new_values);
+
+            $category = new self(null, array("read_from" => array_merge($new_values,
+                                                                        array("id" => $this->id))));
 
             Trigger::current()->call("update_category", $category, $this);
 
