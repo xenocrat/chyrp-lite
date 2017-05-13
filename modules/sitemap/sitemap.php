@@ -1,7 +1,7 @@
 <?php 
     class Sitemap extends Modules {
         public function __init() {
-            if (!isset($_SERVER["DOCUMENT_ROOT"]))
+            if (!isset($_SERVER['DOCUMENT_ROOT']))
                 cancel_module("sitemap", __("Sitemap module cannot determine the server's document root.", "sitemap"));
 
             $actions = array("add_post",
@@ -122,6 +122,6 @@
 
             $xml.= "</urlset>";
 
-            @file_put_contents($_SERVER["DOCUMENT_ROOT"].DIR."sitemap.xml", $xml);
+            @file_put_contents($_SERVER['DOCUMENT_ROOT'].DIR."sitemap.xml", $xml);
         }
     }
