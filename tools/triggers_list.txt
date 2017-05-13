@@ -612,7 +612,7 @@ Arguments:
 update_pingback
 ---------------
 Called from:
-	modules/pingable/model/Pingback.php on line 84
+	modules/pingable/model/Pingback.php on line 86
 Arguments:
 	$pingback, $this
 
@@ -1117,4 +1117,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 386
+	modules/comments/model/Comment.php on line 389
