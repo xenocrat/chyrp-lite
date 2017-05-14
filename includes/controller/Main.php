@@ -783,16 +783,11 @@
             foreach ($posts as $post) {
                 $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
 
-                $tagged = substr(strstr(url("id/".$post->id), "//"), 2);
-                $tagged = str_replace("#", "/", $tagged);
-                $tagged = preg_replace("/(".preg_quote(parse_url($post->url(), PHP_URL_HOST)).")/",
-                                       "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
-
                 $url = $post->url();
                 $trigger->filter($url, "feed_url", $post);
 
                 $atom->entry(oneof($post->title(), ucfirst($post->feather)),
-                             $tagged,
+                             url("id/post/".$post->id),
                              $post->feed_content(),
                              $url,
                              $post->created_at,
