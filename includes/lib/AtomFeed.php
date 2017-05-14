@@ -68,7 +68,7 @@
 
             echo "<entry>\n";
             echo '<title type="html">'.fix($title, false, true)."</title>\n";
-            echo "<id>tag:".fix($id)."</id>\n";
+            echo "<id>".fix($id)."</id>\n";
             echo "<updated>".when("c", oneof($updated, $published))."</updated>\n";
             echo "<published>".when("c", $published)."</published>\n";
             echo '<link rel="alternate" type="text/html" href="'.fix($link, true).'" />'."\n";
