@@ -2,10 +2,10 @@
     /**
      * File: Common
      *
-     * Chyrp Lite: An ultra-lightweight blogging engine.
+     * Chyrp Lite: An ultra-lightweight blogging engine, written in PHP.
      *
      * Version:
-     *     v2017.02
+     *     v2017.03
      *
      * Copyright:
      *     Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi,
@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2017.02");
+    define('CHYRP_VERSION', "2017.03");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Swahili");
+    define('CHYRP_CODENAME', "Cape");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
