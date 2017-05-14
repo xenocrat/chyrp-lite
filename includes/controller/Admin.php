@@ -1119,7 +1119,7 @@
 
                     $posts_atom.= '    <entry xml:base="'.fix($url, true).'">'."\n";
                     $posts_atom.= '        <title type="html">'.fix($title, false, true).'</title>'."\n";
-                    $posts_atom.= '        <id>'.fix($url).'</id>'."\n";
+                    $posts_atom.= '        <id>'.fix(url("id/post/".$post->id, MainController::current())).'</id>'."\n";
                     $posts_atom.= '        <updated>'.when("c", $updated).'</updated>'."\n";
                     $posts_atom.= '        <published>'.when("c", $post->created_at).'</published>'."\n";
                     $posts_atom.= '        <link href="'.fix($trigger->filter($url, "post_export_url", $post), true).'" />'."\n";
@@ -1173,7 +1173,7 @@
 
                     $pages_atom.= '    <entry xml:base="'.fix($url, true).'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
                     $pages_atom.= '        <title type="html">'.fix($page->title, false, true).'</title>'."\n";
-                    $pages_atom.= '        <id>'.fix($url).'</id>'."\n";
+                    $pages_atom.= '        <id>'.fix(url("id/page/".$page->id, MainController::current())).'</id>'."\n";
                     $pages_atom.= '        <updated>'.when("c", $updated).'</updated>'."\n";
                     $pages_atom.= '        <published>'.when("c", $page->created_at).'</published>'."\n";
                     $pages_atom.= '        <link href="'.fix($trigger->filter($url, "page_export_url", $page), true).'" />'."\n";
