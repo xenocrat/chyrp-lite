@@ -104,7 +104,7 @@ function escapeRegExp(text) {
 // Obfuscated mailto.
 function mailTo(domain, recipient) {
     location.assign(('mailto:' + recipient + '@' + domain));
-    return true;
+    return false;
 }
 
 Array.prototype.indicesOf = function(value) {
