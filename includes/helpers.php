@@ -29,7 +29,7 @@
 
         $domain = preg_replace("~^www\.~", "", oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
 
-        session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
+        session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain, false, true);
         session_name("ChyrpSession");
         register_shutdown_function("session_write_close");
         session_start();
