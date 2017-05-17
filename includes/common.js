@@ -103,8 +103,14 @@ function escapeRegExp(text) {
 
 // Obfuscated mailto.
 function mailTo(domain, recipient) {
-    location.assign(('mailto:' + recipient + '@' + domain));
-    return false;
+	var address = recipient + '@' + domain;
+
+	if (isEmail(address)) {
+    	location.assign(('mailto:' + address));
+    	return false;
+    }
+
+    return true;
 }
 
 Array.prototype.indicesOf = function(value) {
