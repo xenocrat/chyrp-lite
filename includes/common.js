@@ -13,39 +13,6 @@ $.fn.loader = function(remove) {
   return this;
 }
 
-// Cookie management.
-var Cookie = {
-  	set: function(name, value, days) {
-		if (days) {
-  			var d = new Date();
-  			d.setTime(d.getTime() + (days * 1000 * 60 * 60 * 24));
-  			var expiry = "; expires=" + d.toGMTString();
-		} else
-  			var expiry = "";
-
-    	document.cookie = name + "=" + value + expiry + "; path=/";
-  	},
-  	get: function(name) {
-    	var nameEQ = name + "=";
-    	var ca = document.cookie.split(';');
-
-    	for (var i = 0; i < ca.length; i++) {
-      		var c = ca[i];
-
-      		while (c.charAt(0) == " ")
-        		c = c.substring(1,c.length);
-
-      		if (c.indexOf(nameEQ) == 0)
-        		return c.substring(nameEQ.length,c.length);
-    	}
-
-    	return null;
-  	},
-  	destroy: function(name) {
-    	Cookie.set(name, "", -1);
-  	}
-}
-
 // Award a numeric score for the strength of a password.
 function passwordStrength(password) {
     var score = 0;
@@ -55,10 +22,8 @@ function passwordStrength(password) {
         return score;
 
     // Calculate the frequency of each char in the password.
-    for (var i = 0; i < password.length; i++) {
+    for (var i = 0; i < password.length; i++)
         frequency[password[i]] = (frequency[password[i]] || 0) + 1;
-
-    }
 
 	// Award each unique char and punish more than 10 occurrences.
     for (var item in frequency)
@@ -74,9 +39,9 @@ function passwordStrength(password) {
 
     variationCount = 0;
 
-    for (var check in variations) {
+    for (var check in variations)
         variationCount += (variations[check] == true) ? 1 : 0;
-    }
+
     score += (variationCount - 1) * 10;
 
     return parseInt(score);
@@ -111,47 +76,4 @@ function mailTo(domain, recipient) {
     }
 
     return true;
-}
-
-Array.prototype.indicesOf = function(value) {
-  var results = [];
-
-  	for (var j = 0; j < this.length; j++) {
-	    if (typeof value != "string") {
-	     	if (value.test(this[j]))
-	        	results.push(j);
-	    } else if (this[j] == value)
-	      	results.push(j);
-    }
-
-  return results;
-}
-
-Array.prototype.find = function(match) {
-  	var matches = [];
-
-  	for (var f = 0; f < this.length; f++)
-    	if (match.test(this[f]))
-     	 	matches.push(this[f]);
-
-  return matches;
-}
-
-Array.prototype.remove = function(value) {
-  	if (value instanceof Array) {
-    	for (var r = 0; r < value.length; r++)
-      		this.remove(value[r]);
-
-    	return;
-  	}
-
-  	var indices = this.indicesOf(value);
-
-  	if (indices.length == 0)
-    	return;
-
-  	for (var h = 0; h < indices.length; h++)
-    	this.splice(indices[h] - h, 1);
-
-  	return this;
 }
