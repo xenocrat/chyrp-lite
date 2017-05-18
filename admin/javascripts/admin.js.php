@@ -302,14 +302,14 @@ var Settings = {
 var Extend = {
     init: function() {
         // Hide the confirmation checkbox and use a modal instead.
-        $(".module_disabler_confirm").hide();
-        $(".module_disabler").on("submit.confirm", Extend.confirm);
+        $(".module_disabler_confirm, .feather_disabler_confirm").hide();
+        $(".module_disabler, .feather_disabler").on("submit.confirm", Extend.confirm);
     },
     confirm: function(e) {
         e.preventDefault();
 
-        var id = $(e.target).parents("li.module").attr("id");
-        var name = (!!id) ? id.replace(/^module_/, "") : "" ;
+        var id = $(e.target).parents("li.module, li.feather").attr("id");
+        var name = (!!id) ? id.replace(/^(module|feather)_/, "") : "" ;
         var text = $('label[for="confirm_' + name + '"]').html();
 
         // Display the modal if the text was found, and set the checkbox to the response.
