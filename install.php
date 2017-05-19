@@ -217,13 +217,13 @@
                 line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
-                padding: 0em 0em 5em;
+                padding: 0rem 0rem 5rem;
             }
             h1 {
                 font-size: 2em;
                 text-align: center;
                 font-weight: bold;
-                margin: 0.5em 0em;
+                margin: 1rem 0em;
                 line-height: 1;
             }
             h1:first-child {
@@ -233,7 +233,38 @@
                 font-size: 1.25em;
                 text-align: center;
                 font-weight: bold;
-                margin: 0.75em 0em;
+                margin: 1rem 0em;
+            }
+            p {
+                margin-bottom: 1rem;
+            }
+            p:last-child,
+            p:empty {
+                margin-bottom: 0em;
+            }
+            code {
+                font-family: "Hack webfont", monospace;
+                font-style: normal;
+                word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
+            }
+            strong {
+                font-weight: normal;
+                color: #d94c4c;
+            }
+            ul, ol {
+                margin: 0rem 0rem 2rem 2rem;
+                list-style-position: outside;
+            }
+            li {
+                margin-bottom: 1rem;
+            }
+            label {
+                display: block;
+                font-weight: bold;
+                line-height: 1.5;
             }
             input, textarea, select {
                 font-family: inherit;
@@ -289,70 +320,18 @@
                 border: none;
                 clear: both;
                 border-top: 1px solid #ddd;
-                margin: 2em 0em;
+                margin: 2rem 0rem;
             }
             form p {
-                padding-bottom: 1em;
-            }
-            .sub {
-                font-size: .8em;
-                color: #777;
-                font-weight: normal;
-            }
-            .sub.inline {
-                float: left;
-                margin-top: -1.5em !important;
-            }
-            .window {
-                width: 30em;
-                background: #fff;
-                padding: 2em;
-                margin: 2em auto 0em auto;
-                border-radius: 2em;
-            }
-            .window:first-child {
-                margin-top: 5em;
-            }
-            code {
-                font-family: "Hack webfont", monospace;
-                font-style: normal;
-                word-wrap: break-word;
-                background-color: #efefef;
-                padding: 2px;
-                color: #4f4f4f;
-            }
-            strong {
-                font-weight: normal;
-                color: #f00;
-            }
-            ul, ol {
-                margin: 0em 0em 2em 2em;
-                list-style-position: outside;
-            }
-            label {
-                display: block;
-                font-weight: bold;
-                line-height: 1.5;
-            }
-            .footer {
-                color: #777;
-                margin-top: 1em;
-                font-size: .9em;
-                text-align: center;
-            }
-            a:link, a:visited {
-                color: #4a4747;
-            }
-            a:hover, a:focus {
-                color: #1e57ba;
+                padding-bottom: 1rem;
             }
             pre.pane {
-                height: 15em;
+                height: 15rem;
                 overflow-y: auto;
-                margin: 1em -2em 1em -2em;
-                padding: 2em;
+                margin: 1rem -2rem 1rem -2rem;
+                padding: 2rem;
                 background: #4a4747;
-                color: #fff;
+                color: #ffffff;
             }
             pre.pane:empty {
                 display: none;
@@ -360,11 +339,13 @@
             pre.pane:empty + h1 {
                 margin-top: 0em;
             }
-            span.yay {
-                color: #76b362;
+            a:link,
+            a:visited {
+                color: #4a4747;
             }
-            span.boo {
-                color: #d94c4c;
+            a:hover,
+            a:focus {
+                color: #1e57ba;
             }
             a.big,
             button {
@@ -377,7 +358,7 @@
                 color: #4a4747;
                 text-decoration: none;
                 line-height: 1.25;
-                margin: 0.75em 0em;
+                margin: 1rem 0rem;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;
                 border: 1px solid #b8cdd9;
@@ -401,15 +382,24 @@
                 border-color: #1e57ba;
                 outline: none;
             }
-            p {
-                margin-bottom: 1em;
-            }
             aside {
-                margin-bottom: 1em;
+                margin-bottom: 1rem;
                 padding: 0.5em 1em;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
                 background-color: #fffecd;
+            }
+            .window {
+                width: 30rem;
+                background: #ffffff;
+                padding: 2rem;
+                margin: 5rem auto 0rem auto;
+                border-radius: 2rem;
+            }
+            .sub {
+                font-size: 0.8em;
+                color: #b3b5b5;
+                font-weight: normal;
             }
         </style>
         <script src="includes/common.js" type="text/javascript" charset="UTF-8"></script>
