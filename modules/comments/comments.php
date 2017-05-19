@@ -636,7 +636,7 @@
             $post = $context["post"];
             $comments = $post->comments;
             $latest_timestamp = 0;
-            $subtitle = _f("Comments on &#8220;%s&#8221;", fix(oneof($post->title(), $post->url)), "comments");
+            $subtitle = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
 
             foreach ($comments as $comment)
                 if (strtotime($comment->created_at) > $latest_timestamp)
