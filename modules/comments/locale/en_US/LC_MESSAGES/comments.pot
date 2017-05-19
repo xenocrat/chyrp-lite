@@ -382,7 +382,7 @@ msgstr ""
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:660
+#: modules/comments/comments.php:655
 #, php-format
 msgid "Comment #%d"
 msgstr ""

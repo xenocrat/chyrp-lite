@@ -319,7 +319,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 803
+	includes/controller/Main.php on line 798
 Arguments:
 	$post
 
@@ -494,7 +494,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 669
+	modules/comments/comments.php on line 664
 Arguments:
 	$comment
 
@@ -848,7 +848,7 @@ feed_url
 Target:
 	$url
 Called from:
-	includes/controller/Main.php on line 792
+	includes/controller/Main.php on line 787
 Arguments:
 	$post
 
