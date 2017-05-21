@@ -117,7 +117,6 @@ blockquote {                                    font-size: 1em;
 blockquote:last-child {                         margin-bottom: 0em }
 pre {                                           font-family: "Hack webfont", monospace;
                                                 margin: 1em 0em }
-li > pre {                                      margin: 1em 0em 0em 0em }
 code {                                          font-family: "Hack webfont", monospace;
                                                 font-size: 0.75em;
                                                 font-style: normal;
@@ -132,16 +131,14 @@ hr {                                            width: 100%;
                                                 border-top: 1px solid #ddd;
                                                 margin: 1em 0em }
 hr:last-child, hr + hr {                        display: none }
-ul {                                            list-style: disc inside;
-                                                margin: 1em 0em;
+ul {                                            list-style: disc outside;
+                                                margin: 1em 0em 1em 2em;
                                                 padding: 0em }
-ul li > ul {                                    list-style-type: circle;
-                                                margin-left: 1em }
-ol {                                            list-style: decimal inside;
-                                                margin: 1em 0em;
+ul li > ul {                                    list-style-type: circle }
+ol {                                            list-style: decimal outside;
+                                                margin: 1em 0em 1em 2em;
                                                 padding: 0em }
-ol li > ol {                                    list-style-type: lower-latin;
-                                                margin-left: 1em }
+ol li > ol {                                    list-style-type: lower-latin }
 dl {                                            list-style: none }
 dl dt {                                         font-weight: bold }
 dl dd {                                         margin-left: 1em }
