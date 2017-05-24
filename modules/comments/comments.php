@@ -661,7 +661,7 @@
                              $comment->author,
                              $comment->author_url);
 
-                $trigger->call("comments_feed_item", $comment);
+                $trigger->call("comments_feed_item", $comment, $atom);
             }
 
             $atom->close();
