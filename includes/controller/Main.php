@@ -795,7 +795,7 @@
                              ((!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : null),
                              ((!$post->user->no_results) ? $post->user->website : null));
 
-                $trigger->call("feed_item", $post);
+                $trigger->call("feed_item", $post, $atom);
             }
 
             $atom->close();
