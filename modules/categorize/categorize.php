@@ -28,7 +28,7 @@
 
         public function feed_item($post, $feed) {
             if (!empty($post->category))
-                $feed->category($post->category->clean, "", $post->category->name);
+                $feed->category($post->category->clean, url("category"), $post->category->name);
         }
 
         public function metaWeblog_getPost($struct, $post) {
