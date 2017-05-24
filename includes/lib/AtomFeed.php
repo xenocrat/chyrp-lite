@@ -2,6 +2,9 @@
     /**
      * Class: AtomFeed
      * Generate an Atom feed and output it piece by piece.
+     *
+     * See Also:
+     *     https://tools.ietf.org/html/rfc4287
      */
     class AtomFeed {
         # Variable: $count
@@ -18,16 +21,13 @@
 
         /**
          * Function: open
-         * Output the opening feed tag and top-level elements.
+         * Outputs the opening feed element and top-level elements.
          *
          * Parameters:
          *     $title - Title for this feed.
          *     $subtitle - Subtitle (optional).
          *     $id - Feed ID (optional).
          *     $updated - Time of update (optional).
-         *
-         * See Also:
-         *     https://tools.ietf.org/html/rfc4287
          */
         public function open($title, $subtitle = "", $id = "", $updated = 0) {
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
@@ -45,20 +45,18 @@
 
         /**
          * Function: entry
-         * Output an individual feed entry for the supplied item.
+         * Outputs an individual feed entry for the supplied item.
          *
          * Parameters:
          *     $title - Title for this entry.
          *     $id - The unique ID.
          *     $content - Content for this entry.
+         *     $link - The URL to the resource.
          *     $published - Time of creation.
          *     $updated - Time of update (optional).
          *     $name - Name of the author (optional).
          *     $uri - URI of the author (optional).
          *     $email - Email address of the author (optional).
-         *
-         * See Also:
-         *     https://tools.ietf.org/html/rfc4287
          *
          * Notes:
          *     The entry remains open to allow triggered insertions.
@@ -88,8 +86,65 @@
         }
 
         /**
+         * Function: category
+         * Outputs a category element for an entry or feed.
+         *
+         * Parameters:
+         *     $term - String that identifies the category.
+         *     $scheme - URI for the categorization scheme (optional).
+         *     $label - Human-readable label for the category (optional).
+         */
+        public function category($term, $scheme = "", $label = "") {
+            $category = '<category term="'.fix($term, true).'"';
+
+            if (!empty($scheme))
+                $category.= ' scheme="'.fix($scheme, true).'"';
+
+            if (!empty($label))
+                $category.= ' label="'.fix($label, true).'"';
+
+            echo $category.' />'."\n";
+        }
+
+        /**
+         * Function: rights
+         * Outputs a rights element for an entry or feed.
+         *
+         * Parameters:
+         *     $text - Human-readable licensing information.
+         */
+        public function rights($text) {
+            echo "<rights>".fix($text, false, true)."</rights>\n";
+        }
+
+        /**
+         * Function: enclosure
+         * Outputs an enclosure element for a resource that is potentially large in size.
+         *
+         * Parameters:
+         *     $link - The URL to the resource.
+         *     $length - Size in bytes of the resource (optional).
+         *     $type - The media type of the resource (optional).
+         *     $title - Title for the resource (optional).
+         */
+        public function enclosure($link, $length = null, $type = "", $title = "") {
+            $enclosure = '<link rel="enclosure" href="'.fix($link, true).'"';
+
+            if (!empty($length))
+                $enclosure.= ' length="'.fix($length, true).'"';
+
+            if (!empty($type))
+                $enclosure.= ' type="'.fix($type, true).'"';
+
+            if (!empty($title))
+                $enclosure.= ' title="'.fix($title, true).'"';
+
+            echo $enclosure.' />'."\n";
+        }
+
+        /**
          * Function: split
-         * Output a closing entry tag if appropriate.
+         * Output a closing entry element if appropriate.
          */
         private function split() {
             if ($this->count > 0)
@@ -98,7 +153,7 @@
 
         /**
          * Function: close
-         * Output the closing feed tag.
+         * Output the closing feed element.
          */
         public function close() {
             self::split();
