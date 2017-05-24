@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: AtomFeed
-     * Generate an Atom feed and output it piece by piece.
+     * Generates an Atom feed and outputs it piece by piece.
      *
      * See Also:
      *     https://tools.ietf.org/html/rfc4287
@@ -144,7 +144,7 @@
 
         /**
          * Function: split
-         * Output a closing entry element if appropriate.
+         * Outputs a closing entry element.
          */
         private function split() {
             if ($this->count > 0)
@@ -153,7 +153,7 @@
 
         /**
          * Function: close
-         * Output the closing feed element.
+         * Outputs the closing feed element.
          */
         public function close() {
             self::split();
