@@ -66,16 +66,15 @@
             return $post->description;
         }
 
-        public function enclose_audio($post) {
+        public function enclose_audio($post, $feed) {
             $config = Config::current();
 
             if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
                 return;
 
-            echo '<link rel="enclosure" href="'.uploaded($post->filename).
-                 '" type="'.self::audio_type($post->filename).
-                 '" title="'.fix($post->title_from_excerpt(), true).
-                 '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
+            $feed->enclosure(uploaded($post->filename),
+                             filesize(uploaded($post->filename, false)),
+                             self::audio_type($post->filename));
         }
 
         public function delete_file($post) {

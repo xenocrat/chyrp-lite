@@ -102,7 +102,7 @@
             return $post->caption;
         }
 
-        public function enclose_uploaded($post) {
+        public function enclose_uploaded($post, $feed) {
             $config = Config::current();
 
             if ($post->feather != "uploader")
@@ -112,9 +112,7 @@
                 if (!file_exists(uploaded($filename, false)))
                     continue;
 
-                echo '<link rel="enclosure" href="'.uploaded($filename).
-                     '" title="'.fix($post->title_from_excerpt(), true).
-                     '" length="'.filesize(uploaded($filename, false)).'" />'."\n";
+                $feed->enclosure(uploaded($filename), filesize(uploaded($filename, false)));
             }
         }
 

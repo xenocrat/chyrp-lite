@@ -66,16 +66,15 @@
             return $post->description;
         }
 
-        public function enclose_video($post) {
+        public function enclose_video($post, $feed) {
             $config = Config::current();
 
             if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
                 return;
 
-            echo '<link rel="enclosure" href="'.uploaded($post->filename).
-                 '" type="'.self::video_type($post->filename).
-                 '" title="'.fix($post->title_from_excerpt(), true).
-                 '" length="'.filesize(uploaded($post->filename, false)).'" />'."\n";
+            $feed->enclosure(uploaded($post->filename),
+                             filesize(uploaded($post->filename, false)),
+                             self::video_type($post->filename));
         }
 
         public function delete_file($post) {
