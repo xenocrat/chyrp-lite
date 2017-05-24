@@ -530,11 +530,11 @@
             return false;
         }
 
-        public function feed_item($post) {
+        public function feed_item($post, $feed) {
             $scheme = url("tags", MainController::current());
 
             foreach ($post->tags as $tag => $clean)
-                echo '<category scheme="'.$scheme.'" term="'.$clean.'" label="'.fix($tag, true).'" />'."\n";
+                $feed->category($clean, $scheme, $tag);
         }
 
         public function admin_javascript() {
