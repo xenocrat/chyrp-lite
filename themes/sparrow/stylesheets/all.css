@@ -115,8 +115,7 @@ em {                                            font: inherit;
                                                 font-style: italic }
 blockquote em {                                 font-style: normal }
 strong {                                        font: inherit;
-                                                font-weight: bold;
-                                                font-style: normal }
+                                                font-weight: bold }
 cite {                                          font: inherit;
                                                 font-style: italic;
                                                 color: #9ea8a8 }
