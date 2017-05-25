@@ -68,8 +68,13 @@
         }
 
         public function feed_content($post) {
-            return '<img src="'.Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($post->filename).
-                   '" alt="'.fix(oneof($post->alt_text, $post->filename), true).'"><p>'.$post->caption.'</p>';
+            $content = '<img src="'.Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($post->filename).
+                       '" alt="'.fix(oneof($post->alt_text, $post->filename), true).'">';
+
+            if (!empty($post->caption))
+                $content.= "<p>".$post->caption."</p>";
+
+            return $content;
         }
 
         public function delete_file($post) {
