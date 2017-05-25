@@ -11,6 +11,8 @@
 <blockquote>
 {{ post.quote }}
 </blockquote>
-<p>{{ "&mdash; " ~ post.source | striptags | fix }}</p>
+<cite>
+{{ post.source }}
+</cite>
 </section>
 {% endblock %}

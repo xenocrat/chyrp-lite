@@ -124,7 +124,7 @@ small {                                         font-weight: normal;
 blockquote {                                    font-size: 1em;
                                                 font-style: italic;
                                                 padding: 0em 2em;
-                                                margin: 0em 0em 2em 0em }
+                                                margin: 0em 0em 1em 0em }
 blockquote:last-child {                         margin-bottom: 0em }
 pre {                                           font-family: "Hack webfont", monospace;
                                                 margin: 1em 0em }
