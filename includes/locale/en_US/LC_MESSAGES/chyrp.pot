@@ -1326,7 +1326,7 @@ msgstr ""
 msgid "The page cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
-#: includes/lib/AtomFeed.php:76
+#: includes/lib/AtomFeed.php:74
 msgid "Guest"
 msgstr ""
 

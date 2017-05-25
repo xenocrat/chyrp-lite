@@ -28,11 +28,11 @@ msgstr ""
 msgid "You did not select a photo to upload."
 msgstr ""
 
-#: feathers/photo/photo.php:98
+#: feathers/photo/photo.php:103
 msgid "Alt-Text"
 msgstr ""
 
-#: feathers/photo/photo.php:103
+#: feathers/photo/photo.php:108
 msgid "Source"
 msgstr ""
 

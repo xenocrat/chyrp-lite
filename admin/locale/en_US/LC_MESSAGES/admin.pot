@@ -9,7 +9,7 @@ msgid "Canonical URL"
 msgstr ""
 
 #: admin/help/canonical_url.twig:8
-msgid "If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
+msgid "If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to have Chyrp Lite in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
 msgstr ""
 
 #: admin/help/canonical_url.twig:12
