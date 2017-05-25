@@ -103,7 +103,7 @@
             if (!empty($label))
                 $category.= ' label="'.fix($label, true).'"';
 
-            echo $category.' />'."\n";
+            echo $category." />\n";
         }
 
         /**
@@ -139,7 +139,7 @@
             if (!empty($title))
                 $enclosure.= ' title="'.fix($title, true).'"';
 
-            echo $enclosure.' />'."\n";
+            echo $enclosure." />\n";
         }
 
         /**
