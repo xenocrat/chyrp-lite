@@ -119,8 +119,7 @@ em {                                            font: inherit;
 blockquote em {                                 font-style: normal }
 strong {                                        font: inherit;
                                                 font-weight: bold }
-cite {                                          font: inherit;
-                                                color: #9ea8a8 }
+cite {                                          font: inherit }
 small {                                         font-weight: normal;
                                                 font-size: 0.8em }
 blockquote {                                    font-size: 1em;
