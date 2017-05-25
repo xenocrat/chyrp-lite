@@ -119,7 +119,7 @@
 
         /**
          * Function: enclosure
-         * Outputs an enclosure element for a resource that is potentially large in size.
+         * Outputs a link element for a resource that is potentially large in size.
          *
          * Parameters:
          *     $link - The URL to the resource.
