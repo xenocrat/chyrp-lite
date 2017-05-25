@@ -72,9 +72,9 @@
                        '" alt="'.fix(oneof($post->alt_text, $post->filename), true).'">';
 
             if (!empty($post->caption))
-                $content.= "<p>".$post->caption."</p>";
+                $content.= "<figcaption>".$post->caption."</figcaption>";
 
-            return $content;
+            return "<figure>".$content."</figure>";
         }
 
         public function delete_file($post) {
