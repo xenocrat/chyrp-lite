@@ -606,7 +606,7 @@
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
                     Comment::delete($comment->id);
-                    json_response(__("Comment deleted.", "comments"));
+                    json_response(__("Comment deleted.", "comments"), true);
                 case "edit_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                         show_403(__("Access Denied"), __("Invalid security key."));
