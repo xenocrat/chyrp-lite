@@ -1,12 +1,8 @@
 <?php
     /**
-     * File: Helpers
+     * File: helpers
      * Various functions used throughout the codebase.
      */
-
-    # Integer: $time_start
-    # Stores the internal timer value.
-    $time_start = 0;
 
     #---------------------------------------------
     # Sessions
@@ -564,10 +560,12 @@
      * Starts the internal timer.
      */
     function timer_start() {
-        global $time_start;
-        $mtime = explode(" ", microtime());
-        $mtime = $mtime[1] + $mtime[0];
-        $time_start = $mtime;
+        static $timer;
+
+        if (!isset($timer))
+            $timer = microtime(true);
+
+        return $timer;
     }
 
     /**
@@ -581,13 +579,7 @@
      *     A formatted number with the requested $precision.
      */
     function timer_stop($precision = 3) {
-        global $time_start;
-        $mtime = microtime();
-        $mtime = explode(" ", $mtime);
-        $mtime = $mtime[1] + $mtime[0];
-        $time_end = $mtime;
-        $time_total = $time_end - $time_start;
-        return number_format($time_total, $precision);
+        return number_format((microtime(true) - timer_start()), $precision);
     }
 
     /**
