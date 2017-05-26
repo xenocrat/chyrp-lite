@@ -346,12 +346,7 @@
             $zones[] = array("name" => $zone,
                              "now" => time_in_timezone($zone));
 
-        function by_time($a, $b) {
-            return (int) ($a["now"] > $b["now"]);
-        }
-
-        usort($zones, "by_time");
-
+        usort($zones, function($a, $b) { return (int) ($a["now"] > $b["now"]); });
         return $zones;
     }
 
