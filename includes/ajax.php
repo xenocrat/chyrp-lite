@@ -40,7 +40,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
 
             Post::delete($post->id);
-            json_response(__("Post deleted."));
+            json_response(__("Post deleted."), true);
         case "destroy_page":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
@@ -57,7 +57,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
             Page::delete($page->id, true);
-            json_response(__("Page deleted."));
+            json_response(__("Page deleted."), true);
         case "preview_post":
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid security key."));
