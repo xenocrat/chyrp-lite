@@ -1,4 +1,9 @@
 <?php
+    /**
+     * File: ajax
+     * Handles AJAX requests.
+     */
+
     define('AJAX', true);
 
     require_once "common.php";

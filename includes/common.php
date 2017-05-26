@@ -1,6 +1,6 @@
 <?php
     /**
-     * File: Common
+     * File: common
      *
      * Chyrp Lite: An ultra-lightweight blogging engine, written in PHP.
      *

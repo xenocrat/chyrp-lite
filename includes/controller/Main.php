@@ -1,6 +1,6 @@
 <?php
     /**
-     * Class: Main Controller
+     * Class: MainController
      * The logic controlling the blog.
      */
     class MainController implements Controller {

@@ -1,4 +1,9 @@
 <?php
+    /**
+     * File: error
+     * Functions for handling and reporting errors.
+     */
+
     ini_set('display_errors', false);
     ini_set('error_log', MAIN_DIR.DIR."error_log.txt");
 

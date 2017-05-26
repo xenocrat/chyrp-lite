@@ -1,6 +1,6 @@
 <?php
     /**
-     * File: Thumb
+     * File: thumb
      * Generates compressed image thumbnails for uploaded files.
      */
 

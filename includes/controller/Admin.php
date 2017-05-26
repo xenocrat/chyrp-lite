@@ -1,6 +1,6 @@
 <?php
     /**
-     * Class: Admin Controller
+     * Class: AdminController
      * The logic controlling the administration console.
      */
     class AdminController implements Controller {

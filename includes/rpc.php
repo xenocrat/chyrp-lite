@@ -1,6 +1,6 @@
 <?php
     /**
-     * File: RPC
+     * File: rpc
      * Handles XML-RPC requests.
      */
 

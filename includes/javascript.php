@@ -1,4 +1,9 @@
 <?php
+    /**
+     * File: javascript
+     * JavaScript for core functionality and extensions.
+     */
+
     define('JAVASCRIPT', true);
     require_once "common.php";
 ?>
