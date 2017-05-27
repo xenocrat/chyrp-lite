@@ -17,7 +17,7 @@
             $this->setFilter("name", array("markup_post_title", "markup_title"));
             $this->setFilter("description", array("markup_post_text", "markup_text"));
 
-            $this->respondTo("feed_url", "set_feed_url");
+            $this->respondTo("feed_url", "feed_url");
         }
 
         public function submit() {
@@ -65,7 +65,7 @@
             return $post->description;
         }
 
-        public function set_feed_url($url, $post) {
+        public function feed_url($url, $post) {
             if ($post->feather != "link")
                 return;
 
