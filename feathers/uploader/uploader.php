@@ -178,6 +178,7 @@
 
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "uploader"),
+                               "help" => "uploader_source",
                                "type" => "text",
                                "value" => (isset($post) ? $post->source : ""));
 
