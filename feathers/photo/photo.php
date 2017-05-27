@@ -101,11 +101,13 @@
 
             $options[] = array("attr" => "option[alt_text]",
                                "label" => __("Alt-Text", "photo"),
+                               "help" => "photo_alt_text",
                                "type" => "text",
                                "value" => (isset($post) ? $post->alt_text : ""));
 
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "photo"),
+                               "help" => "photo_source",
                                "type" => "text",
                                "value" => (isset($post) ? $post->source : ""));
 
