@@ -94,7 +94,7 @@
     sanitize_input($_REQUEST);
 
     # Where are we?
-    $url = str_ireplace("/install.php", "", self_url());
+    $url = str_ireplace("/install.php", "", guess_url());
     $url_path = oneof(parse_url($url, PHP_URL_PATH), "/");
 
     # Already installed?
@@ -112,6 +112,17 @@
     # Test if we can write to CACHES_DIR (needed by some extensions).
     if (!is_writable(CACHES_DIR))
         $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
+
+    /**
+     * Function: guess_url
+     * Returns a best guess of the current URL.
+     */
+    function guess_url() {
+        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
+            "https://" : "http://" ;
+
+        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
+    }
 
     /**
      * Function: posted
