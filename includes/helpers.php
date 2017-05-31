@@ -23,7 +23,8 @@
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
 
-        $domain = preg_replace("~^www\.~", "", oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
+        $parsed = parse_url(Config::current()->url, PHP_URL_HOST);
+        $domain = preg_replace("~^www\.~", "", oneof($domain, $parsed, $_SERVER['SERVER_NAME']));
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain, false, true);
         session_name("ChyrpSession");
@@ -139,6 +140,17 @@
      * Returns the current URL.
      */
     function self_url() {
+        if (!INSTALLING) {
+            $url = Config::current()->url;
+            $parsed = parse_url($url);
+            $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], "");
+
+            if (isset($parsed["port"]))
+                $origin.= ":".$parsed["port"];
+
+            return $origin.$_SERVER['REQUEST_URI'];
+        }
+
         $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
             "https://" : "http://" ;
 
@@ -156,7 +168,7 @@
      *     True if no action was needed, bytes written on success, false on failure.
      */
     function htaccess_conf($url_path = null) {
-        if (!INSTALLING and !UPGRADING)
+        if (!INSTALLING)
             $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
 
         # The trim operation guarantees a string with leading and trailing slashes,
