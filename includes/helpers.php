@@ -44,7 +44,20 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        return (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], Config::current()->url) === 0);
+        $url = Config::current()->url;
+        $parsed = parse_url($url);
+        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], "");
+
+        if (isset($parsed["port"]))
+            $origin.= ":".$parsed["port"];
+
+        if (isset($_SERVER['HTTP_ORIGIN']) and $_SERVER['HTTP_ORIGIN'] == $origin)
+            return true;
+
+        if (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], $url) === 0)
+            return true;
+
+        return false;
     }
 
     #---------------------------------------------
