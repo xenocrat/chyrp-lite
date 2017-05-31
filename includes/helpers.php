@@ -47,7 +47,7 @@
     function same_origin() {
         $url = Config::current()->url;
         $parsed = parse_url($url);
-        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], "");
+        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
         if (isset($parsed["port"]))
             $origin.= ":".$parsed["port"];
@@ -142,7 +142,7 @@
     function self_url() {
         $url = Config::current()->url;
         $parsed = parse_url($url);
-        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], "");
+        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
         if (isset($parsed["port"]))
             $origin.= ":".$parsed["port"];
