@@ -137,24 +137,17 @@
 
     /**
      * Function: self_url
-     * Returns the current URL.
+     * Returns an absolute URL for the current request.
      */
     function self_url() {
-        if (!INSTALLING) {
-            $url = Config::current()->url;
-            $parsed = parse_url($url);
-            $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], "");
+        $url = Config::current()->url;
+        $parsed = parse_url($url);
+        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], "");
 
-            if (isset($parsed["port"]))
-                $origin.= ":".$parsed["port"];
+        if (isset($parsed["port"]))
+            $origin.= ":".$parsed["port"];
 
-            return $origin.$_SERVER['REQUEST_URI'];
-        }
-
-        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
-            "https://" : "http://" ;
-
-        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
+        return $origin.$_SERVER['REQUEST_URI'];
     }
 
     /**
