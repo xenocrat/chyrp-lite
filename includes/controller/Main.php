@@ -871,7 +871,7 @@
          * Function: resort
          * Queue a failpage in the event that none of the routes are successful.
          */
-        public function resort($template, $context, $title = null) {
+        public function resort($template, $context = array(), $title = "") {
             $this->fallback = array($template, $context, $title);
             return false;
         }
