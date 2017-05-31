@@ -120,7 +120,7 @@ function auto_submit() {
     });
 }
 var Route = {
-    action: "<?php echo fix(@$_GET['action'], true); ?>"
+    action: '<?php echo addslashes(@$_GET['action']); ?>'
 }
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',
