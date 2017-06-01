@@ -45,17 +45,16 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        $url = Config::current()->url;
-        $parsed = parse_url($url);
+        $parsed = parse_url(Config::current()->url);
         $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
         if (isset($parsed["port"]))
             $origin.= ":".$parsed["port"];
 
-        if (isset($_SERVER['HTTP_ORIGIN']) and $_SERVER['HTTP_ORIGIN'] == $origin)
+        if (isset($_SERVER['HTTP_ORIGIN']) and strpos($_SERVER['HTTP_ORIGIN'], $origin) === 0)
             return true;
 
-        if (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], $url) === 0)
+        if (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], $origin) === 0)
             return true;
 
         return false;
@@ -140,8 +139,7 @@
      * Returns an absolute URL for the current request.
      */
     function self_url() {
-        $url = Config::current()->url;
-        $parsed = parse_url($url);
+        $parsed = parse_url(Config::current()->url);
         $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
         if (isset($parsed["port"]))
@@ -607,10 +605,7 @@
      *     Whether or not the match succeeded.
      */
     function match($try, $haystack) {
-        if (is_string($try))
-            return (bool) preg_match($try, $haystack);
-
-        foreach ($try as $needle)
+        foreach ((array) $try as $needle)
             if (preg_match($needle, $haystack))
                 return true;
 
