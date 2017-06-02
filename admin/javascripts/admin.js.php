@@ -122,10 +122,12 @@ function auto_submit() {
 var Route = {
     action: '<?php echo addslashes(@$_GET['action']); ?>'
 }
+var Visitor = {
+    token: '<?php if (same_origin()) echo token($_SERVER["REMOTE_ADDR"]); ?>'
+}
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',
     chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>',
-    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
 var Help = {
@@ -220,7 +222,7 @@ var Write = {
             $("<input>", {
                 "type": "hidden",
                 "name": "hash",
-                "value": Site.key
+                "value": Visitor.token
             })]
         ).insertAfter("#content");
 

@@ -97,7 +97,7 @@ var ChyrpComment = {
 
         var thisItem = $("#comment_" + id).loader();
 
-        if (Site.key == "") {
+        if (Visitor.token == "") {
             ChyrpComment.panic('<?php echo __("The comment cannot be edited because your web browser did not send proper credentials.", "comments"); ?>');
             return;
         }
@@ -105,7 +105,7 @@ var ChyrpComment = {
         $.post(Site.chyrp_url + "/includes/ajax.php", {
             action: "edit_comment",
             comment_id: id,
-            hash: Site.key
+            hash: Visitor.token
         }, function(data) {
             thisItem.fadeOut("fast", function() {
                 $(this).loader(true);
@@ -171,7 +171,7 @@ var ChyrpComment = {
     destroy: function(id) {
         var thisItem = $("#comment_" + id).loader();
 
-        if (Site.key == "") {
+        if (Visitor.token == "") {
             ChyrpComment.panic('<?php echo __("The comment cannot be deleted because your web browser did not send proper credentials.", "comments"); ?>');
             return;
         }
@@ -179,7 +179,7 @@ var ChyrpComment = {
         $.post(Site.chyrp_url + "/includes/ajax.php", {
             action: "destroy_comment",
             id: id,
-            hash: Site.key
+            hash: Visitor.token
         }, function(response){
             thisItem.fadeOut("fast", function() {
                 $(this).remove();
