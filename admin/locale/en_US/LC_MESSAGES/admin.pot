@@ -169,23 +169,23 @@ msgstr ""
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:144
+#: admin/javascripts/admin.js.php:146
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:150
 #: admin/javascripts/admin.js.php:152
-#: admin/javascripts/admin.js.php:240
+#: admin/javascripts/admin.js.php:154
 #: admin/javascripts/admin.js.php:242
+#: admin/javascripts/admin.js.php:244
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:172
-#: admin/javascripts/admin.js.php:173
+#: admin/javascripts/admin.js.php:174
+#: admin/javascripts/admin.js.php:175
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:233
+#: admin/javascripts/admin.js.php:235
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""

@@ -2,6 +2,25 @@
 #. Copyright 2017 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
+#: feathers/photo/admin/help/photo_alt_text.twig:3
+#: feathers/photo/admin/help/photo_alt_text.twig:6
+#: feathers/photo/photo.php:103
+msgid "Alt-Text"
+msgstr ""
+
+#: feathers/photo/admin/help/photo_alt_text.twig:8
+msgid "This text provides a brief description of the photo; it is useful for visually impaired visitors, and it will be displayed if the image format is not supported by the visitor's web browser or if the image has not yet downloaded."
+msgstr ""
+
+#: feathers/photo/admin/help/photo_source.twig:3
+#: feathers/photo/admin/help/photo_source.twig:6
+msgid "Photo Source"
+msgstr ""
+
+#: feathers/photo/admin/help/photo_source.twig:8
+msgid "This can be a URL that will take visitors to the original resource or it can be a human-readable description of the photo's origin."
+msgstr ""
+
 #: feathers/photo/info.php:3
 #: feathers/photo/photo.php:10
 msgid "Photo"
@@ -28,11 +47,7 @@ msgstr ""
 msgid "You did not select a photo to upload."
 msgstr ""
 
-#: feathers/photo/photo.php:103
-msgid "Alt-Text"
-msgstr ""
-
-#: feathers/photo/photo.php:108
+#: feathers/photo/photo.php:109
 msgid "Source"
 msgstr ""
 

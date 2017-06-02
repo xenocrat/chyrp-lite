@@ -2,9 +2,9 @@
 #. Copyright 2017 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
-#: includes/ajax.php:13
-#: includes/ajax.php:16
-#: includes/ajax.php:119
+#: includes/ajax.php:18
+#: includes/ajax.php:21
+#: includes/ajax.php:124
 #: includes/class/Route.php:45
 #: includes/class/Route.php:48
 #: includes/class/Route.php:69
@@ -46,7 +46,7 @@
 #: includes/controller/Admin.php:1946
 #: includes/download.php:12
 #: includes/download.php:15
-#: includes/error.php:139
+#: includes/error.php:144
 #: includes/helpers.php:1640
 #: includes/helpers.php:1646
 #: includes/helpers.php:1649
@@ -69,26 +69,26 @@
 msgid "Error"
 msgstr ""
 
-#: includes/ajax.php:13
+#: includes/ajax.php:18
 msgid "This resource accepts POST requests only."
 msgstr ""
 
-#: includes/ajax.php:16
+#: includes/ajax.php:21
 #: includes/controller/Admin.php:1946
 #: includes/download.php:15
 #: includes/thumb.php:18
 msgid "Missing argument."
 msgstr ""
 
-#: includes/ajax.php:19
 #: includes/ajax.php:24
-#: includes/ajax.php:35
-#: includes/ajax.php:41
-#: includes/ajax.php:52
-#: includes/ajax.php:58
-#: includes/ajax.php:61
-#: includes/ajax.php:90
-#: includes/ajax.php:93
+#: includes/ajax.php:29
+#: includes/ajax.php:40
+#: includes/ajax.php:46
+#: includes/ajax.php:57
+#: includes/ajax.php:63
+#: includes/ajax.php:66
+#: includes/ajax.php:95
+#: includes/ajax.php:98
 #: includes/class/Route.php:98
 #: includes/controller/Admin.php:140
 #: includes/controller/Admin.php:149
@@ -166,17 +166,17 @@ msgstr ""
 msgid "Access Denied"
 msgstr ""
 
-#: includes/ajax.php:19
+#: includes/ajax.php:24
 #: includes/class/Route.php:98
 #: includes/download.php:18
 #: includes/thumb.php:21
 msgid "You are not allowed to view this site."
 msgstr ""
 
-#: includes/ajax.php:24
-#: includes/ajax.php:41
-#: includes/ajax.php:58
-#: includes/ajax.php:90
+#: includes/ajax.php:29
+#: includes/ajax.php:46
+#: includes/ajax.php:63
+#: includes/ajax.php:95
 #: includes/controller/Admin.php:183
 #: includes/controller/Admin.php:229
 #: includes/controller/Admin.php:278
@@ -203,11 +203,11 @@ msgstr ""
 #: includes/controller/Main.php:603
 #: includes/controller/Main.php:660
 #: includes/controller/Main.php:715
-msgid "Invalid security key."
+msgid "Invalid authentication token."
 msgstr ""
 
-#: includes/ajax.php:27
-#: includes/ajax.php:44
+#: includes/ajax.php:32
+#: includes/ajax.php:49
 #: includes/controller/Admin.php:202
 #: includes/controller/Admin.php:232
 #: includes/controller/Admin.php:259
@@ -227,14 +227,14 @@ msgstr ""
 msgid "No ID Specified"
 msgstr ""
 
-#: includes/ajax.php:27
+#: includes/ajax.php:32
 #: includes/controller/Admin.php:259
 #: includes/controller/Admin.php:281
 msgid "An ID is required to delete a post."
 msgstr ""
 
-#: includes/ajax.php:32
-#: includes/ajax.php:49
+#: includes/ajax.php:37
+#: includes/ajax.php:54
 #: includes/controller/Admin.php:159
 #: includes/controller/Admin.php:186
 #: includes/controller/Admin.php:243
@@ -249,12 +249,12 @@ msgstr ""
 #: includes/controller/Admin.php:1612
 #: includes/controller/Admin.php:1656
 #: includes/download.php:24
-#: includes/helpers.php:106
+#: includes/helpers.php:115
 #: includes/thumb.php:44
 msgid "Not Found"
 msgstr ""
 
-#: includes/ajax.php:32
+#: includes/ajax.php:37
 #: includes/controller/Admin.php:207
 #: includes/controller/Admin.php:243
 #: includes/controller/Admin.php:264
@@ -265,25 +265,25 @@ msgstr ""
 msgid "Post not found."
 msgstr ""
 
-#: includes/ajax.php:35
+#: includes/ajax.php:40
 #: includes/controller/Admin.php:267
 #: includes/controller/Admin.php:292
 #: includes/lib/XMLRPC.php:384
 msgid "You do not have sufficient privileges to delete this post."
 msgstr ""
 
-#: includes/ajax.php:38
+#: includes/ajax.php:43
 #: includes/controller/Admin.php:296
 msgid "Post deleted."
 msgstr ""
 
-#: includes/ajax.php:44
+#: includes/ajax.php:49
 #: includes/controller/Admin.php:483
 #: includes/controller/Admin.php:505
 msgid "An ID is required to delete a page."
 msgstr ""
 
-#: includes/ajax.php:49
+#: includes/ajax.php:54
 #: includes/controller/Admin.php:423
 #: includes/controller/Admin.php:453
 #: includes/controller/Admin.php:488
@@ -291,18 +291,18 @@ msgstr ""
 msgid "Page not found."
 msgstr ""
 
-#: includes/ajax.php:52
+#: includes/ajax.php:57
 #: includes/controller/Admin.php:480
 #: includes/controller/Admin.php:499
 msgid "You do not have sufficient privileges to delete pages."
 msgstr ""
 
-#: includes/ajax.php:55
+#: includes/ajax.php:60
 #: includes/controller/Admin.php:531
 msgid "Page deleted."
 msgstr ""
 
-#: includes/ajax.php:61
+#: includes/ajax.php:66
 #: includes/controller/Admin.php:149
 #: includes/controller/Admin.php:180
 #: includes/controller/Admin.php:1374
@@ -311,19 +311,19 @@ msgstr ""
 msgid "You do not have sufficient privileges to add posts."
 msgstr ""
 
-#: includes/ajax.php:86
-#: includes/ajax.php:111
+#: includes/ajax.php:91
+#: includes/ajax.php:116
 msgid "Preview"
 msgstr ""
 
-#: includes/ajax.php:93
+#: includes/ajax.php:98
 #: includes/controller/Admin.php:367
 #: includes/controller/Admin.php:378
 #: includes/controller/Admin.php:1409
 msgid "You do not have sufficient privileges to add pages."
 msgstr ""
 
-#: includes/ajax.php:119
+#: includes/ajax.php:124
 #: includes/class/Route.php:48
 #: includes/class/Route.php:69
 msgid "Invalid action."
@@ -372,7 +372,7 @@ msgstr ""
 #: includes/class/Query.php:203
 #: includes/class/SQL.php:96
 #: includes/class/SQL.php:107
-#: install.php:521
+#: install.php:532
 #, php-format
 msgid "Database error: %s"
 msgstr ""
@@ -517,7 +517,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:591
 #: includes/controller/Main.php:491
-#: install.php:471
+#: install.php:482
 msgid "Passwords cannot be blank."
 msgstr ""
 
@@ -525,8 +525,8 @@ msgstr ""
 #: includes/controller/Admin.php:687
 #: includes/controller/Main.php:493
 #: includes/controller/Main.php:664
-#: install.php:436
-#: install.php:473
+#: install.php:447
+#: install.php:484
 msgid "Passwords do not match."
 msgstr ""
 
@@ -540,7 +540,7 @@ msgstr ""
 #: includes/controller/Admin.php:1754
 #: includes/controller/Main.php:498
 #: includes/controller/Main.php:669
-#: install.php:476
+#: install.php:487
 msgid "Email address cannot be blank."
 msgstr ""
 
@@ -549,7 +549,7 @@ msgstr ""
 #: includes/controller/Admin.php:1757
 #: includes/controller/Main.php:500
 #: includes/controller/Main.php:671
-#: install.php:478
+#: install.php:489
 msgid "Invalid email address."
 msgstr ""
 
@@ -1012,13 +1012,13 @@ msgid "You cannot register an account because you are already logged in."
 msgstr ""
 
 #: includes/controller/Main.php:483
-#: install.php:468
+#: install.php:479
 msgid "Please enter a username for your account."
 msgstr ""
 
 #: includes/controller/Main.php:495
 #: includes/controller/Main.php:666
-#: install.php:675
+#: install.php:686
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
@@ -1121,32 +1121,32 @@ msgstr ""
 msgid "File not found."
 msgstr ""
 
-#: includes/error.php:140
+#: includes/error.php:145
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:333
+#: includes/error.php:338
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:336
+#: includes/error.php:341
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:341
+#: includes/error.php:346
 msgid "Log in"
 msgstr ""
 
-#: includes/helpers.php:83
+#: includes/helpers.php:92
 msgid "Forbidden"
 msgstr ""
 
-#: includes/helpers.php:84
+#: includes/helpers.php:93
 msgid "You do not have permission to access this resource."
 msgstr ""
 
-#: includes/helpers.php:107
+#: includes/helpers.php:116
 msgid "The requested resource was not found."
 msgstr ""
 
@@ -1305,24 +1305,24 @@ msgstr ""
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/javascript.php:27
+#: includes/javascript.php:34
 msgid "Are you sure you want to delete this post?"
 msgstr ""
 
-#: includes/javascript.php:39
+#: includes/javascript.php:46
 msgid "The post cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
-#: includes/javascript.php:57
-#: includes/javascript.php:98
+#: includes/javascript.php:64
+#: includes/javascript.php:105
 msgid "Oops! Something went wrong on this web page."
 msgstr ""
 
-#: includes/javascript.php:70
+#: includes/javascript.php:77
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 
-#: includes/javascript.php:82
+#: includes/javascript.php:89
 msgid "The page cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
@@ -1513,147 +1513,147 @@ msgstr ""
 msgid "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
 msgstr ""
 
-#: install.php:149
+#: install.php:160
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:459
+#: install.php:470
 msgid "Database cannot be blank."
 msgstr ""
 
-#: install.php:462
+#: install.php:473
 msgid "Please enter a name for your website."
 msgstr ""
 
-#: install.php:465
+#: install.php:476
 msgid "Time zone cannot be blank."
 msgstr ""
 
-#: install.php:481
+#: install.php:492
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
-#: install.php:487
+#: install.php:498
 msgid "Could not determine the absolute path to the SQLite database."
 msgstr ""
 
-#: install.php:494
+#: install.php:505
 msgid "Please make the SQLite database writable by the server."
 msgstr ""
 
-#: install.php:498
+#: install.php:509
 msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 
-#: install.php:716
+#: install.php:727
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:720
+#: install.php:731
 msgid "Clean URLs will not be available because the <em>.htaccess</em> file is not writable."
 msgstr ""
 
-#: install.php:736
+#: install.php:747
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:738
+#: install.php:749
 msgid "Adapter"
 msgstr ""
 
-#: install.php:749
+#: install.php:760
 msgid "Host"
 msgstr ""
 
-#: install.php:749
+#: install.php:760
 msgid "(usually ok as \"localhost\")"
 msgstr ""
 
-#: install.php:753
-#: install.php:799
+#: install.php:764
+#: install.php:810
 msgid "Username"
 msgstr ""
 
-#: install.php:757
-#: install.php:803
-#: install.php:807
+#: install.php:768
+#: install.php:814
+#: install.php:818
 msgid "Password"
 msgstr ""
 
-#: install.php:761
+#: install.php:772
 msgid "Database"
 msgstr ""
 
-#: install.php:763
+#: install.php:774
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:769
+#: install.php:780
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:772
+#: install.php:783
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:772
+#: install.php:783
 msgid "(optional)"
 msgstr ""
 
-#: install.php:776
+#: install.php:787
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:778
+#: install.php:789
 msgid "Site Name"
 msgstr ""
 
-#: install.php:779
+#: install.php:790
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:782
+#: install.php:793
 msgid "Description"
 msgstr ""
 
-#: install.php:786
+#: install.php:797
 msgid "What time is it?"
 msgstr ""
 
-#: install.php:797
+#: install.php:808
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:807
+#: install.php:818
 msgid "(again)"
 msgstr ""
 
-#: install.php:811
+#: install.php:822
 msgid "Email Address"
 msgstr ""
 
-#: install.php:814
+#: install.php:825
 msgid "Install me!"
 msgstr ""
 
-#: install.php:817
+#: install.php:828
 msgid "Installation Complete"
 msgstr ""
 
-#: install.php:818
+#: install.php:829
 #: upgrade.php:408
 msgid "What now?"
 msgstr ""
 
-#: install.php:820
+#: install.php:831
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:821
+#: install.php:832
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
-#: install.php:823
+#: install.php:834
 #: upgrade.php:414
 msgid "Take me to my site!"
 msgstr ""

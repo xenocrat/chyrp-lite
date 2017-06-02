@@ -14,7 +14,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 323
+	admin/javascripts/admin.js.php on line 325
 
 
 admin_head
@@ -183,7 +183,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 115
+	includes/ajax.php on line 120
 
 
 change_setting
@@ -327,7 +327,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 104
+	includes/javascript.php on line 111
 
 
 pingback
