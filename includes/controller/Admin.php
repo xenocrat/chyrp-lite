@@ -180,7 +180,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled($_POST['feather']))
                 show_404(__("Not Found"), __("Feather not found."));
@@ -226,7 +226,7 @@
             $visitor = Visitor::current();
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
@@ -275,7 +275,7 @@
          */
         public function destroy_post() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
@@ -378,7 +378,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['title']))
                 error(__("Error"), __("Title cannot be blank."), null, 422);
@@ -436,7 +436,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit pages."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
@@ -499,7 +499,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
@@ -577,7 +577,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['login']))
                 error(__("Error"), __("Please enter a username for the account."), null, 422);
@@ -660,7 +660,7 @@
          */
         public function update_user() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
@@ -758,7 +758,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
@@ -850,7 +850,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['name']))
                 error(__("Error"), __("Please enter a name for the group."), null, 422);
@@ -897,7 +897,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
@@ -955,7 +955,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
@@ -1071,7 +1071,7 @@
                 return $this->display("pages".DIR."export");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $trigger->call("before_export");
 
@@ -1290,7 +1290,7 @@
                 return $this->display("pages".DIR."import");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
                 if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or
@@ -1594,7 +1594,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
@@ -1638,7 +1638,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
@@ -1675,7 +1675,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['theme']))
                 error(__("No Theme Specified"), __("You did not specify which theme to select."), null, 400);
@@ -1712,7 +1712,7 @@
             }
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
             $trigger->call("preview_theme_started");
@@ -1748,7 +1748,7 @@
                                             "timezones" => timezones()));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."), null, 422);
@@ -1801,7 +1801,7 @@
                 return $this->display("pages".DIR."content_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
                 error(__("Error"), __("Invalid feed URL."), null, 422);
@@ -1849,7 +1849,7 @@
                                       array("groups" => Group::find(array("order" => "id DESC"))));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['default_group'], 0);
             fallback($_POST['guest_group'], 0);
@@ -1879,7 +1879,7 @@
                 return $this->display("pages".DIR."route_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $route = Route::current();
             $config = Config::current();

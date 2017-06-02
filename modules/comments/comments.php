@@ -78,7 +78,7 @@
 
         private function add_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"), null, 400);
@@ -131,7 +131,7 @@
 
         private function update_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a comment.", "comments"), null, 400);
@@ -228,7 +228,7 @@
 
         public function admin_destroy_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
@@ -331,7 +331,7 @@
                 return $admin->display("pages".DIR."comment_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['default_comment_status'], "denied");
             fallback($_POST['allowed_comment_html'], "");
@@ -461,7 +461,7 @@
 
         public function admin_bulk_comments() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $from = (isset($_POST['from'])) ? $_POST['from'] : "manage_comments" ;
 
@@ -592,7 +592,7 @@
                     exit;
                 case "destroy_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                        show_403(__("Access Denied"), __("Invalid security key."));
+                        show_403(__("Access Denied"), __("Invalid authentication token."));
 
                     if (empty($_POST['id']) or !is_numeric($_POST['id']))
                         error(__("Error"), __("An ID is required to delete a comment.", "comments"), null, 400);
@@ -609,7 +609,7 @@
                     json_response(__("Comment deleted.", "comments"), true);
                 case "edit_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                        show_403(__("Access Denied"), __("Invalid security key."));
+                        show_403(__("Access Denied"), __("Invalid authentication token."));
 
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to edit a comment.", "comments"), null, 400);

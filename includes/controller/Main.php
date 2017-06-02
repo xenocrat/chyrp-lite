@@ -477,7 +477,7 @@
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                    Flash::warning(__("Invalid security key."));
+                    Flash::warning(__("Invalid authentication token."));
 
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
@@ -600,7 +600,7 @@
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                    Flash::warning(__("Invalid security key."));
+                    Flash::warning(__("Invalid authentication token."));
 
                 fallback($_POST['login']);
                 fallback($_POST['password']);
@@ -657,7 +657,7 @@
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                    Flash::warning(__("Invalid security key."));
+                    Flash::warning(__("Invalid authentication token."));
 
                 if (!empty($_POST['new_password1']))
                     if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
@@ -712,7 +712,7 @@
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                    Flash::warning(__("Invalid security key."));
+                    Flash::warning(__("Invalid authentication token."));
 
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter your username."));

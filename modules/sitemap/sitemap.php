@@ -47,7 +47,7 @@
                                                                    "never"   => __("Never", "sitemap"))));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['blog_changefreq'], "daily");
             fallback($_POST['pages_changefreq'], "yearly");

@@ -29,7 +29,7 @@
                 redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled("text"))
                 error(__("Missing Feather", "migrator"),
@@ -195,7 +195,7 @@
                 redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled("text") or
                 !feather_enabled("video") or
@@ -336,7 +336,7 @@
                 redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['host']))
                 error(__("Error"), __("Host cannot be empty.", "migrator"), null, 422);
@@ -429,7 +429,7 @@
                 redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['host']))
                 error(__("Error"), __("Host cannot be empty.", "migrator"), null, 422);

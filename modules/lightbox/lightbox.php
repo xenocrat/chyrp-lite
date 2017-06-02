@@ -19,7 +19,7 @@
                 return $admin->display("pages".DIR."lightbox_settings");
     
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['background'], "grey");
             fallback($_POST['spacing'], 24);

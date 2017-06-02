@@ -258,7 +258,7 @@
 
         public function admin_update_tags($admin) {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update tags.", "tags"), null, 400);
@@ -281,7 +281,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['original']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to rename.", "tags"), null, 400);
@@ -329,7 +329,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['name']))
                 error(__("No Tag Specified", "tags"), __("Please specify the tag you want to delete.", "tags"), null, 400);
@@ -362,7 +362,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add tags.", "tags"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['post']))
                 Flash::warning(__("No posts selected.", "tags"), "manage_tags");
