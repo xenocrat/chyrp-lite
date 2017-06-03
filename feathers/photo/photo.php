@@ -100,7 +100,7 @@
                 return;
 
             $options[] = array("attr" => "option[alt_text]",
-                               "label" => __("Alt-Text", "photo"),
+                               "label" => __("Alternative Text", "photo"),
                                "help" => "photo_alt_text",
                                "type" => "text",
                                "value" => (isset($post) ? $post->alt_text : ""));
