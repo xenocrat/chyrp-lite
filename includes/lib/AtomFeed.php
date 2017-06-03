@@ -30,8 +30,10 @@
          *     $updated - Time of update (optional).
          */
         public function open($title, $subtitle = "", $id = "", $updated = 0) {
+            $language = preg_replace("/[\-_].*$/", "", Config::current()->locale);
+
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-            echo '<feed xmlns="http://www.w3.org/2005/Atom">'."\n";
+            echo '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.$language.'">'."\n";
             echo "<title>".fix($title)."</title>\n";
 
             if (!empty($subtitle))
