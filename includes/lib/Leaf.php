@@ -65,6 +65,7 @@
                 new Twig_SimpleFilter("strftimeformat",        "twig_filter_strftime_format"),
                 new Twig_SimpleFilter("filesizeformat",        "twig_filter_filesize_format"),
                 new Twig_SimpleFilter("match",                 "twig_filter_match"),
+                new Twig_SimpleFilter("preg_replace",          "twig_filter_preg_replace"),
                 new Twig_SimpleFilter("contains",              "twig_filter_contains"),
                 new Twig_SimpleFilter("inspect",               "twig_filter_inspect"),
                 new Twig_SimpleFilter("selected",              "twig_filter_selected"),
@@ -179,6 +180,14 @@
      */
     function twig_filter_match($haystack, $try) {
         return match($try, $haystack);
+    }
+
+    /**
+     * Function: twig_filter_preg_replace
+     * Performs a <preg_replace> on the supplied string or array.
+     */
+    function twig_filter_preg_replace($subject, $pattern, $replacement, $limit = -1) {
+        return preg_replace($pattern, $replacement, $subject, $limit);
     }
 
     /**
