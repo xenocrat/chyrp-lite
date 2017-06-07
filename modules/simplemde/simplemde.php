@@ -15,6 +15,6 @@
                  '            new SimpleMDE({ element: $(this)[0], forceSync: true });'."\n".
                  '        });'."\n".
                  '    });'."\n".
-                 '</script>';
+                 '</script>'."\n";
         }
     }
