@@ -39,10 +39,10 @@
                 error(__("Error"), __("You must select a WordPress export file.", "migrator"), null, 422);
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+                ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
+                set_time_limit(600);
 
             $stupid_xml = file_get_contents($_FILES['xml_file']['tmp_name']);
 
@@ -211,10 +211,10 @@
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+                ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
+                set_time_limit(600);
 
             $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
             $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url));
@@ -348,10 +348,10 @@
                 error(__("Error"), __("Database cannot be empty.", "migrator"), null, 422);
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+                ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
+                set_time_limit(600);
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
@@ -441,10 +441,10 @@
                 error(__("Error"), __("Database cannot be empty.", "migrator"), null, 422);
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+                ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
+                set_time_limit(600);
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
