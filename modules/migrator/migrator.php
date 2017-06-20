@@ -208,9 +208,6 @@
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
                 error(__("Error"), __("Invalid URL.", "migrator"), null, 422);
 
-            if (!preg_match("/^(http(s)?:\/\/)?(www\.)?[a-z0-9][a-z0-9-]+[a-z0-9]+\.tumblr\.com(\/)?$/i", $_POST['tumblr_url']))
-                error(__("Error"), __("Invalid Tumblr URL.", "migrator"), null, 422);
-
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
             if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
