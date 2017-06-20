@@ -254,7 +254,7 @@
 
             foreach ($posts as $key => $post) {
                 if ($post->attributes()->type == "audio")
-                    break; # Can't import Audio posts since Tumblr has the files locked in to Amazon.
+                    continue; # Can't import Audio posts since Tumblr has the files locked in to Amazon.
 
                 $translate_types = array("regular" => "text", "conversation" => "text");
                 $clean = "";
