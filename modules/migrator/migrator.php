@@ -38,7 +38,7 @@
             if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
                 error(__("Error"), __("You must select a WordPress export file.", "migrator"), null, 422);
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
+            if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
                 ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -210,7 +210,7 @@
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
+            if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
                 ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -347,7 +347,7 @@
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "migrator"), null, 422);
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
+            if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
                 ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
@@ -440,7 +440,7 @@
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "migrator"), null, 422);
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
+            if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
                 ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
