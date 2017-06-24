@@ -250,12 +250,13 @@
                         $feather = "photo";
                         $values = array("filename" => upload_from_url($post->photo_url[0]),
                                         "caption" => fallback($post->photo_caption));
+                        $clean = sanitize($post->photo_caption, true, true, 80);
                         break;
                     case "quote":
                         $feather = "quote";
                         $values = array("quote" => $post->quote_text,
                                         "source" => preg_replace("/^&mdash; /", "", fallback($post->quote_source)));
-                        $clean = sanitize($post->quote_text, true, true, 80);
+                        $clean = sanitize($post->quote_source, true, true, 80);
                         break;
                     case "link":
                         $feather = "link";
