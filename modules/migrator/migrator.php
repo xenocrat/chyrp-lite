@@ -21,8 +21,9 @@
         public function admin_import_wordpress() {
             $config = Config::current();
             $trigger = Trigger::current();
+            $visitor = Visitor::current();
 
-            if (!Visitor::current()->group->can("add_post"))
+            if (!$visitor->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
@@ -138,7 +139,7 @@
 
                     $trigger->call("import_wordpress_post", $item, $post);
 
-                } elseif ($wordpress->post_type == "page") {
+                } elseif ($wordpress->post_type == "page" and $visitor->group->can("add_page")) {
                     $page = Page::add(trim($item->title),
                                       trim($content->encoded),
                                       null,
@@ -492,7 +493,7 @@
 
                     $trigger->call("import_movabletype_post", $post, $new_post, $link);
 
-                } elseif ($post["entry_class"] == "page") {
+                } elseif ($post["entry_class"] == "page" and $visitor->group->can("add_page")) {
                     $new_page = Page::add($post["entry_title"],
                                           $body,
                                           null,
