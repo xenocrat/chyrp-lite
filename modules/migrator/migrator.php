@@ -86,33 +86,30 @@
                            substr_count($xml->channel->generator, "wordpress.com")))
                 Flash::warning(__("The file does not seem to be a valid WordPress export file.", "migrator"), "manage_migration");
 
-            foreach ($xml->channel->item as $item) {
-                $wordpress = $item->children("http://wordpress.org/export/1.2/");
-                $content   = $item->children("http://purl.org/rss/1.0/modules/content/");
-                $contentencoded = $content->encoded;
+            foreach ($xml->channel->item as $post) {
+                $wordpress = $post->children("http://wordpress.org/export/1.2/");
+                $content   = $post->children("http://purl.org/rss/1.0/modules/content/");
+                $encoded   = $content->encoded;
 
-                if ($wordpress->post_type == "attachment" or $wordpress->status == "attachment" or $item->title == "zz_placeholder")
+                if ($wordpress->post_type == "attachment" or $wordpress->status == "attachment" or $post->title == "zz_placeholder")
                     continue;
 
                 if (!empty($_POST['media_url'])) {
                     $regexp_url = preg_quote($_POST['media_url'], "/");
 
                     if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                       $contentencoded,
+                                       $encoded,
                                        $media)) {
                         $media_uris = array_unique($media[0]);
 
                         foreach ($media_uris as $matched_url) {
                             $filename = upload_from_url($matched_url);
-                            $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
+                            $encoded = str_replace($matched_url, uploaded($filename), $encoded);
                         }
                     }
                 }
 
-                $clean = (isset($wordpress->post_name) and $wordpress->post_name != "") ?
-                    sanitize($wordpress->post_name, true, true, 80) : sanitize($item->title, true, true, 80) ;
-
-                $pinned = (isset($wordpress->is_sticky)) ? $wordpress->is_sticky : 0 ;
+                $clean = sanitize(oneof($wordpress->post_name, $post->title), true, true, 80);
 
                 if (empty($wordpress->post_type) or $wordpress->post_type == "post") {
                     $status_translate = array("publish" => "public",
@@ -124,33 +121,33 @@
                                               "future"  => "draft",
                                               "pending" => "draft");
 
-                    $post = Post::add(array("title" => trim($item->title),
-                                            "body" => trim($contentencoded),
-                                            "imported_from" => "wordpress"),
-                                      $clean,
-                                      Post::check_url($clean),
-                                      "text",
-                                      null,
-                                      $pinned,
-                                      $status_translate[(string) $wordpress->status],
-                                      (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
-                                      null,
-                                      false);
+                    $new_post = Post::add(array("title" => trim($post->title),
+                                                "body" => trim($encoded),
+                                                "imported_from" => "wordpress"),
+                                          $clean,
+                                          Post::check_url($clean),
+                                          "text",
+                                          null,
+                                          (isset($wordpress->is_sticky)) ? (bool) (int) $wordpress->is_sticky : false,
+                                          $status_translate[(string) $wordpress->status],
+                                          (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
+                                          null,
+                                          false);
 
-                    $trigger->call("import_wordpress_post", $item, $post);
+                    $trigger->call("import_wordpress_post", $post, $new_post);
 
                 } elseif ($wordpress->post_type == "page" and $visitor->group->can("add_page")) {
-                    $page = Page::add(trim($item->title),
-                                      trim($content->encoded),
-                                      null,
-                                      0,
-                                      true,
-                                      0,
-                                      $clean,
-                                      Page::check_url($clean),
-                                      (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date));
+                    $new_page = Page::add(trim($post->title),
+                                          trim($encoded),
+                                          null,
+                                          0,
+                                          true,
+                                          0,
+                                          $clean,
+                                          Page::check_url($clean),
+                                          (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date));
 
-                    $trigger->call("import_wordpress_page", $item, $page);
+                    $trigger->call("import_wordpress_page", $post, $new_page);
                 }
             }
 
@@ -452,6 +449,7 @@
             foreach ($posts as $post) {
                 fallback($post["entry_authored_on"]);
                 fallback($post["entry_created_on"]);
+                fallback($post["entry_modified_on"]);
                 fallback($post["entry_class"]);
 
                 $body = $post["entry_text"];
@@ -476,7 +474,7 @@
                                           3 => "draft",
                                           4 => "draft");
 
-                $clean = sanitize(oneof($post["entry_basename"], $post["entry_title"]), true, true, 80);
+                $clean = sanitize(fallback($post["entry_basename"], $post["entry_title"]), true, true, 80);
 
                 if (empty($post["entry_class"]) or $post["entry_class"] == "entry") {
                     $new_post = Post::add(array("title" => $post["entry_title"],
@@ -492,7 +490,7 @@
                                           $post["entry_modified_on"],
                                           false);
 
-                    $trigger->call("import_movabletype_post", $post, $new_post, $link);
+                    $trigger->call("import_movabletype_post", $post, $new_post);
 
                 } elseif ($post["entry_class"] == "page" and $visitor->group->can("add_page")) {
                     $new_page = Page::add($post["entry_title"],
@@ -503,9 +501,10 @@
                                           0,
                                           $clean,
                                           Page::check_url($clean),
-                                          oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()));
+                                          oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
+                                          $post["entry_modified_on"]);
 
-                    $trigger->call("import_movabletype_page", $post, $new_page, $link);
+                    $trigger->call("import_movabletype_page", $post, $new_page);
                 }
             }
 
