@@ -225,23 +225,16 @@
             usort($posts, "reverse");
 
             foreach ($posts as $key => $post) {
-                if ($post->attributes()->type == "audio")
-                    continue; # Cannot import Audio posts because Tumblr has the files locked in to Amazon.
-
-                if ($post->attributes()->type == "video")
-                    continue; # Cannot import Video posts because Tumblr does not reliably expose a source URL.
-
-                $translate_types = array("regular" => "text", "conversation" => "text");
-                $clean = "";
-
                 switch($post->attributes()->type) {
                     case "regular":
+                        $feather = "text";
                         $title = fallback($post->regular_title);
                         $values = array("title" => $title,
                                         "body" => $post->regular_body);
                         $clean = sanitize($title, true, true, 80);
                         break;
                     case "conversation":
+                        $feather = "text";
                         $title = fallback($post->conversation_title);
                         $lines = array();
 
@@ -253,20 +246,28 @@
                         $clean = sanitize($title, true, true, 80);
                         break;
                     case "photo":
+                        $feather = "photo";
                         $values = array("filename" => upload_from_url($post->photo_url[0]),
                                         "caption" => fallback($post->photo_caption));
                         break;
                     case "quote":
+                        $feather = "quote";
                         $values = array("quote" => $post->quote_text,
                                         "source" => preg_replace("/^&mdash; /", "", fallback($post->quote_source)));
+                        $clean = sanitize($post->quote_text, true, true, 80);
                         break;
                     case "link":
+                        $feather = "link";
                         $name = fallback($post->link_text);
                         $values = array("name" => $name,
                                         "source" => $post->link_url,
                                         "description" => fallback($post->link_description));
                         $clean = sanitize($name, true, true, 80);
                         break;
+                    default:
+                        # Cannot import Audio posts because Tumblr has the files locked in to Amazon.
+                        # Cannot import Video posts because Tumblr does not reliably expose a source URL.
+                        continue 2;
                 }
 
                 $values["imported_from"] = "tumblr";
@@ -274,7 +275,7 @@
                 $new_post = Post::add($values,
                                       $clean,
                                       Post::check_url($clean),
-                                      fallback($translate_types[(string) $post->attributes()->type], (string) $post->attributes()->type),
+                                      $feather,
                                       null,
                                       null,
                                       "public",
