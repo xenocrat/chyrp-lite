@@ -160,6 +160,16 @@
             $sql->insert("permissions", array("id" => "export_content", "name" => "Export Content", "group_id" => 0));
     }
 
+    /**
+     * Function: add_feed_format
+     * Adds the feed_format config setting.
+     *
+     * Versions: 2017.02 => 2017.03
+     */
+    function add_feed_format() {
+        Config::current()->set("feed_format", "AtomFeed", true);
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -371,6 +381,7 @@
         add_admin_per_page();
         disable_importers();
         add_export_content();
+        add_feed_format();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)

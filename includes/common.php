@@ -204,6 +204,10 @@
     # Defines the Captcha interface.
     require_once INCLUDES_DIR.DIR."interface".DIR."Captcha.php";
 
+    # File: FeedGenerator
+    # Defines the FeedGenerator interface.
+    require_once INCLUDES_DIR.DIR."interface".DIR."FeedGenerator.php";
+
     # File: Config
     # See Also:
     #     <Config>
@@ -306,14 +310,17 @@
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
 
-    # Register our autoloader.
-    spl_autoload_register("autoload");
-
     # Load the config settings.
     $config = Config::current();
 
     # Prepare the SQL interface.
     $sql = SQL::current();
+
+    # Register our autoloader.
+    spl_autoload_register("autoload");
+
+    # Register our feed alias.
+    class_alias($config->feed_format, "BlogFeed");
 
     # Set the timezone for date(), etc.
     set_timezone($config->timezone);

@@ -293,13 +293,13 @@
 
             # Add the site feed.
             $links = array(array("href" => $mainfeedurl,
-                                 "type" => "application/atom+xml",
+                                 "type" => BlogFeed::type(),
                                  "title" => $config->name));
 
             # Add the page feed if it's different from the site feed and there are posts in MainController's context.
             if (($pagefeedurl != $mainfeedurl) and array_key_exists("posts", MainController::current()->context))
                 $links[] = array("href" => $pagefeedurl,
-                                 "type" => "application/atom+xml",
+                                 "type" => BlogFeed::type(),
                                  "title" => $config->name);
 
             # Ask extensions to provide additional links.

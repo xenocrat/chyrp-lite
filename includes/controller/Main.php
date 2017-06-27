@@ -773,9 +773,9 @@
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
 
-            $atom = new AtomFeed();
+            $feed = new BlogFeed();
 
-            $atom->open($config->name,
+            $feed->open($config->name,
                         oneof($theme->title, $config->description),
                         null,
                         $latest_timestamp);
@@ -786,7 +786,7 @@
                 $url = $post->url();
                 $trigger->filter($url, "feed_url", $post);
 
-                $atom->entry(oneof($post->title(), ucfirst($post->feather)),
+                $feed->entry(oneof($post->title(), ucfirst($post->feather)),
                              url("id/post/".$post->id),
                              $post->feed_content(),
                              $url,
@@ -795,10 +795,10 @@
                              ((!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : null),
                              ((!$post->user->no_results) ? $post->user->website : null));
 
-                $trigger->call("feed_item", $post, $atom);
+                $trigger->call("feed_item", $post, $feed);
             }
 
-            $atom->close();
+            $feed->close();
         }
 
         /**

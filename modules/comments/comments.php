@@ -642,9 +642,9 @@
                 if (strtotime($comment->created_at) > $latest_timestamp)
                     $latest_timestamp = strtotime($comment->created_at);
 
-            $atom = new AtomFeed();
+            $feed = new BlogFeed();
 
-            $atom->open(Config::current()->name,
+            $feed->open(Config::current()->name,
                         $subtitle,
                         null,
                         $latest_timestamp);
@@ -652,7 +652,7 @@
             foreach ($comments as $comment) {
                 $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
 
-                $atom->entry(_f("Comment #%d", $comment->id, "comments"),
+                $feed->entry(_f("Comment #%d", $comment->id, "comments"),
                              url("comment/".$comment->id),
                              $comment->body,
                              $comment->post->url()."#comment_".$comment->id,
@@ -661,10 +661,10 @@
                              $comment->author,
                              $comment->author_url);
 
-                $trigger->call("comments_feed_item", $comment, $atom);
+                $trigger->call("comments_feed_item", $comment, $feed);
             }
 
-            $atom->close();
+            $feed->close();
         }
 
         public function metaWeblog_getPost($struct, $post) {

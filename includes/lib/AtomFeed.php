@@ -6,7 +6,7 @@
      * See Also:
      *     https://tools.ietf.org/html/rfc4287
      */
-    class AtomFeed {
+    class AtomFeed implements FeedGenerator {
         # Variable: $count
         # The number of entries outputted.
         private $count = 0;
@@ -17,6 +17,14 @@
          */
         public function __construct() {
             header("Content-Type: application/atom+xml; charset=UTF-8");
+        }
+
+        /**
+         * Function: type
+         * Returns the content type of the feed.
+         */
+        static function type() {
+            return "application/atom+xml";
         }
 
         /**
