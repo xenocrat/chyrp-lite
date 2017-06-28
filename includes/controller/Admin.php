@@ -1050,8 +1050,7 @@
                 $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
                                         $this->post_limit);
 
-            $this->display("pages".DIR."manage_groups",
-                           array("groups" => $groups));
+            $this->display("pages".DIR."manage_groups", array("groups" => $groups));
         }
 
         /**
@@ -1109,7 +1108,7 @@
                 $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\n";
                 $posts_atom.= '    <id>'.fix($config->url).'</id>'."\n";
                 $posts_atom.= '    <updated>'.date("c").'</updated>'."\n";
-                $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\n";
+                $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="alternate" type="text/html" />'."\n";
                 $posts_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
 
                 foreach ($posts as $post) {
@@ -1164,7 +1163,7 @@
                 $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\n";
                 $pages_atom.= '    <id>'.fix($config->url).'</id>'."\n";
                 $pages_atom.= '    <updated>'.date("c").'</updated>'."\n";
-                $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\n";
+                $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="alternate" type="text/html" />'."\n";
                 $pages_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
 
                 foreach ($pages as $page) {
@@ -1797,8 +1796,15 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
+            $feed_formats = array(array("name" => "Atom",
+                                        "class" => "AtomFeed"),
+                                  array("name" => "JSON",
+                                        "class" => "JSONFeed"));
+
+            Trigger::current()->filter($feed_formats, "feed_formats");
+
             if (empty($_POST))
-                return $this->display("pages".DIR."content_settings");
+                return $this->display("pages".DIR."content_settings", array("feed_formats" => $feed_formats));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -1810,6 +1816,7 @@
             fallback($_POST['admin_per_page'], 25);
             fallback($_POST['feed_items'], 20);
             fallback($_POST['feed_url'], "");
+            fallback($_POST['feed_format'], "AtomFeed");
             fallback($_POST['uploads_path'], "");
             fallback($_POST['uploads_limit'], 10);
 
@@ -1825,6 +1832,7 @@
             $config->set("admin_per_page", (int) $_POST['admin_per_page']);
             $config->set("feed_items", (int) $_POST['feed_items']);
             $config->set("feed_url", $_POST['feed_url']);
+            $config->set("feed_format", $_POST['feed_format']);
             $config->set("uploads_path", $matches[1].$matches[2].$matches[3]);
             $config->set("uploads_limit", (int) $_POST['uploads_limit']);
             $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
