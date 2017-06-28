@@ -44,13 +44,13 @@
         public function open($title, $subtitle = "", $id = "", $updated = 0) {
             $this->json = array(
                 "version"       => "https://jsonfeed.org/version/1",
-                "title"         => $title,
+                "title"         => strip_tags($title),
                 "home_page_url" => Config::current()->url,
                 "feed_url"      => self_url()
             );
 
             if (!empty($subtitle))
-                $this->json["description"] = $subtitle;
+                $this->json["description"] = strip_tags($subtitle);
 
             $this->json["items"] = array();
         }
@@ -60,9 +60,9 @@
          * Generates an individual feed item.
          *
          * Parameters:
-         *     $title - Title for this entry.
+         *     $title - Title for this item.
          *     $id - The unique ID.
-         *     $content - Content for this entry.
+         *     $content - Content for this item.
          *     $link - The URL to the resource.
          *     $published - Time of creation.
          *     $updated - Time of update (optional).
@@ -109,13 +109,9 @@
 
         /**
          * Function: rights
-         * Generates a rights object for an item.
-         *
-         * Parameters:
-         *     $text - Human-readable licensing information.
+         * Not implemented in JSON Feed version 1.
          */
         public function rights($text) {
-            # Not implemented in JSON Feed version 1.
             return;
         }
 
