@@ -20,7 +20,7 @@
          * Sets the JSON feed header.
          */
         public function __construct() {
-            header("Content-Type: application/json; charset=UTF-8");
+            header("Content-Type: ".self::type()."; charset=UTF-8");
         }
 
         /**
