@@ -104,7 +104,7 @@
 
             fallback($this->json["items"][($this->count - 1)]["tags"], array());
 
-            $this->json["items"][($this->count - 1)]["tags"][] = oneof($label, $term);
+            $this->json["items"][($this->count - 1)]["tags"][] = $term;
         }
 
         /**
