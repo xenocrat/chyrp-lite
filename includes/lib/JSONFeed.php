@@ -73,10 +73,10 @@
         public function entry($title, $id, $content, $link, $published, $updated = 0, $name = "", $uri = "", $email = "") {
             $this->count++;
 
-            $this->json["items"][($this->count - 1)] = array(
+            $item = array(
                 "id"             => $id,
                 "url"            => $link,
-                "title"          => $title,
+                "title"          => strip_tags($title),
                 "content_html"   => $content,
                 "date_published" => $published,
                 "date_modified"  => when("c", oneof($updated, $published)),
@@ -84,7 +84,9 @@
             );
 
             if (!empty($uri) and is_url($uri))
-                $this->json["items"][($this->count - 1)]["author"]["url"] = $uri;
+                $item["author"]["url"] = $uri;
+
+            $this->json["items"][($this->count - 1)] = $item;
         }
 
         /**

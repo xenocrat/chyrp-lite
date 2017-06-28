@@ -18,13 +18,13 @@
 
         /**
          * Function: entry
-         * Adds an entry to the feed.
+         * Adds an individual entry to the feed.
          */
         public function entry($title, $id, $content, $link, $published, $updated, $name, $uri, $email);
 
         /**
          * Function: category
-         * Adds a category to the entry or feed.
+         * Adds a category to an entry or feed.
          */
         public function category($term, $scheme, $label);
 

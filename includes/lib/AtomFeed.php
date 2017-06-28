@@ -55,7 +55,7 @@
 
         /**
          * Function: entry
-         * Outputs an individual feed entry for the supplied item.
+         * Outputs an individual feed entry.
          *
          * Parameters:
          *     $title - Title for this entry.
