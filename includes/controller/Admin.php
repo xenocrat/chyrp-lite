@@ -1798,6 +1798,8 @@
 
             $feed_formats = array(array("name" => "Atom",
                                         "class" => "AtomFeed"),
+                                  array("name" => "RSS",
+                                        "class" => "RSSFeed"),
                                   array("name" => "JSON",
                                         "class" => "JSONFeed"));
 
