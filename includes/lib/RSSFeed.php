@@ -84,6 +84,9 @@
             echo "<link>".fix($link)."</link>\n";
             echo '<description>'.fix($content, false, true)."</description>\n";
 
+            if (!empty($email) and is_email($email))
+                echo "<author>".fix($email)."</author>\n";
+
             $this->count++;
         }
 
