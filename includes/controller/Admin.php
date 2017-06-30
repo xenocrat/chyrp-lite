@@ -1562,7 +1562,6 @@
                 Flash::message(__("You are currently previewing a theme.").
                                  ' <a href="'.url("preview_theme").'">'.__("Stop &rarr;").'</a>');
 
-            $config = Config::current();
             $this->context["themes"] = array();
 
             if (!$open = @opendir(THEMES_DIR))
@@ -1682,9 +1681,8 @@
             if (!isset($_POST['change']) or $_POST['change'] != "indubitably")
                 self::preview_theme();
 
-            $config = Config::current();
             $theme = str_replace(array(".", DIR), "", $_POST['theme']);
-            $config->set("theme", $theme);
+            Config::current()->set("theme", $theme);
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale");
 
@@ -1726,11 +1724,9 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            $locales = array();
-
             # Ensure the default locale is always present in the list.
-            $locales[] = array("code" => "en_US",
-                               "name" => lang_code("en_US"));
+            $locales = array(array("code" => "en_US",
+                                   "name" => lang_code("en_US")));
 
             if ($open = opendir(INCLUDES_DIR.DIR."locale")) {
                  while (($folder = readdir($open)) !== false)
@@ -1802,8 +1798,6 @@
                                         "class" => "RSSFeed"),
                                   array("name" => "JSON",
                                         "class" => "JSONFeed"));
-
-            Trigger::current()->filter($feed_formats, "feed_formats");
 
             if (empty($_POST))
                 return $this->display("pages".DIR."content_settings", array("feed_formats" => $feed_formats));
