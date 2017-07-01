@@ -764,7 +764,7 @@
                     $posts = array();
             }
 
-            if (!is_array($posts))
+            if ($posts instanceof Paginator)
                 $posts = $posts->paginated;
 
             $latest_timestamp = 0;
