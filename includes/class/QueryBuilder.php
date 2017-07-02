@@ -249,8 +249,10 @@
         public static function build_order($order, $tables = null) {
             $tables = (array) $tables;
 
-            if (!is_array($order))
-                $order = comma_sep($order);
+            if (!is_array($order)) {
+                $parts = array_map("trim", explode(",", $order));
+                $order = array_diff(array_unique($parts), array(""));
+            }
 
             foreach ($order as &$by) {
                 self::tablefy($by, $tables);
