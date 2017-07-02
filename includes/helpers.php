@@ -613,32 +613,6 @@
     }
 
     /**
-     * Function: list_notate
-     * Notates an array as a list of things.
-     *
-     * Parameters:
-     *     $array - An array of things to notate.
-     *     $quotes - Wrap quotes around strings?
-     *
-     * Returns:
-     *     A string like "foo, bar, and baz".
-     */
-    function list_notate($array, $quotes = false) {
-        $count = 0;
-        $items = array();
-
-        foreach ($array as $item) {
-            $string = (is_string($item) and $quotes) ?
-                _f("&#8220;%s&#8221;", $item) : (string) $item ;
-
-            $items[] = (count($array) == ++$count and $count !== 1) ?
-                _f("and %s", $string) : $string ;
-        }
-
-        return (count($array) == 2) ? implode(" ", $items) : implode(", ", $items) ;
-    }
-
-    /**
      * Function: comma_sep
      * Converts a comma-seperated string into an array of the listed values.
      *
@@ -1637,7 +1611,7 @@
         $filename = upload_filename($file['name'], $filter);
 
         if ($filename === false)
-            error(__("Error"), _f("Only %s files are accepted.", list_notate($filter)));
+            error(__("Error"), __("Uploaded file is of an unsupported type."));
 
         if (!is_uploaded_file($file['tmp_name']))
             show_403(__("Access Denied"), __("Only uploaded files are accepted."));
