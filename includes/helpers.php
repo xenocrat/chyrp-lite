@@ -568,7 +568,7 @@
 
     /**
      * Function: timer_start
-     * Starts the internal timer.
+     * Starts the internal timer and returns the microtime.
      */
     function timer_start() {
         static $timer;
@@ -581,7 +581,7 @@
 
     /**
      * Function: timer_stop
-     * Stops the timer and returns the total elapsed time.
+     * Returns the elapsed time since the timer started.
      *
      * Parameters:
      *     $precision - Round to n decimal places.
