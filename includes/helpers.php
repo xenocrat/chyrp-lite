@@ -613,20 +613,6 @@
     }
 
     /**
-     * Function: comma_sep
-     * Converts a comma-seperated string into an array of the listed values.
-     *
-     * Returns:
-     *     An array containing the exploded and trimmed values.
-     */
-    function comma_sep($string) {
-        $commas = explode(",", $string);
-        $trimmed = array_map("trim", $commas);
-        $cleaned = array_diff(array_unique($trimmed), array(""));
-        return $cleaned;
-    }
-
-    /**
      * Function: autoload
      * Autoload PSR-0 classes on demand by scanning lib directories.
      *
