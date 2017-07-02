@@ -731,6 +731,7 @@
             if (htaccess_conf($url_path) === false)
                 $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
 
+            @unlink(INCLUDES_DIR.DIR."upgrading.lock");
             $installed = true;
         }
     }
