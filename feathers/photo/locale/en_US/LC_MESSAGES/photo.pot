@@ -5,7 +5,7 @@
 #: feathers/photo/admin/help/photo_alt_text.twig:3
 #: feathers/photo/admin/help/photo_alt_text.twig:6
 #: feathers/photo/photo.php:103
-msgid "Alt-Text"
+msgid "Alternative Text"
 msgstr ""
 
 #: feathers/photo/admin/help/photo_alt_text.twig:8
