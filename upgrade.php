@@ -67,10 +67,6 @@
     # Has Chyrp Lite been upgraded?
     $upgraded = false;
 
-    # Handle a missing config file with redirect.
-    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        redirect("install.php");
-
     # Load the config settings.
     $config = Config::current();
 
@@ -393,6 +389,7 @@
             if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 
+        @unlink(INCLUDES_DIR.DIR."upgrading.lock");
         $upgraded = true;
     }
 
