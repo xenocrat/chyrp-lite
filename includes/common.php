@@ -306,12 +306,12 @@
     # Exit if an upgrade is in progress.
     if (file_exists(INCLUDES_DIR.DIR."upgrading.lock"))
         error(__("Service Unavailable"),
-              __("This resource is temporarily offline for maintenance."), null, 503);
+              __("This resource is temporarily unable to serve your request."), null, 503);
 
     # Exit if the config file is missing.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
         error(__("Service Unavailable"),
-              __("This resource cannot respond because it is not configured."), null, 501);
+              __("This resource cannot respond because it is not configured."), null, 503);
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
