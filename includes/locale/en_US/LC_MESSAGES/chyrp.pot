@@ -416,7 +416,7 @@ msgid "Service Unavailable"
 msgstr ""
 
 #: includes/common.php:309
-msgid "This resource is temporarily offline for maintenance."
+msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 
 #: includes/common.php:314
