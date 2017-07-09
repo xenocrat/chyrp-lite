@@ -86,7 +86,7 @@
                                                 "dbname=".$this->database,
                                                 $this->username,
                                                 $this->password,
-                                                array(PDO::ATTR_PERSISTENT => true));
+                                                array(PDO::ATTR_PERSISTENT => false));
 
                         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     } catch (PDOException $error) {
