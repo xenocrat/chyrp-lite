@@ -846,7 +846,7 @@
                         "<chyrp:ip>".fix(long2ip($comment->author_ip), false, true)."</chyrp:ip>\n".
                         "<chyrp:agent>".fix($comment->author_agent, false, true)."</chyrp:agent>\n".
                         "</author>\n".
-                        "<content>".fix($comment->body, false, true)."</content>\n".
+                        '<content type="html">'.fix($comment->body, false, true)."</content>\n".
                         "<chyrp:status>".fix($comment->status, false, true)."</chyrp:status>\n".
                         "</chyrp:comment>\n";
             }
