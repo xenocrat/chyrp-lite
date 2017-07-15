@@ -153,6 +153,15 @@
         }
 
         /**
+         * Function: related
+         * Outputs a link element for a related resource to an entry or feed.
+         */
+        public function related($link) {
+            if (!empty($link) and is_url($link))
+                echo '<link rel="related" href="'.fix($link, true).'"'." />\n";
+        }
+
+        /**
          * Function: split
          * Outputs a closing entry element.
          */

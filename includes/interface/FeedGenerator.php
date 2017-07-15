@@ -36,9 +36,15 @@
 
         /**
          * Function: enclosure
-         * Adds a link to a resource that is potentially large in size.
+         * Adds a link for a resource that is potentially large in size.
          */
         public function enclosure($link, $length, $type, $title);
+
+        /**
+         * Function: related
+         * Adds a link for a related resource to an entry or feed.
+         */
+        public function related($link);
 
         /**
          * Function: close

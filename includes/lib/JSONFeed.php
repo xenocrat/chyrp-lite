@@ -146,6 +146,18 @@
         }
 
         /**
+         * Function: related
+         * Generates an external_url attribute for an item.
+         */
+        public function related($link) {
+            if ($this->count == 0)
+                return;
+
+            if (!empty($link) and is_url($link))
+                $this->json["items"][($this->count - 1)]["external_url"] = $link;
+        }
+
+        /**
          * Function: close
          * Encodes and outputs the feed.
          */

@@ -136,6 +136,14 @@
         }
 
         /**
+         * Function: related
+         * Not implemented in RSS 2.0.11.
+         */
+        public function related($link) {
+            return;
+        }
+
+        /**
          * Function: split
          * Outputs a closing item element.
          */
