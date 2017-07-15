@@ -42,7 +42,7 @@
 
         /**
          * Function: related
-         * Adds a link for a related resource to an entry or feed.
+         * Adds a link for a resource related to an entry or feed.
          */
         public function related($link);
 

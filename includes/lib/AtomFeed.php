@@ -154,7 +154,7 @@
 
         /**
          * Function: related
-         * Outputs a link element for a related resource to an entry or feed.
+         * Outputs a link element for a resource related to an entry or feed.
          *
          * Parameters:
          *     $link - The URL to the resource.
