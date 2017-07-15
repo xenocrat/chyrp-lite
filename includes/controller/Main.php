@@ -783,13 +783,10 @@
             foreach ($posts as $post) {
                 $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
 
-                $url = $post->url();
-                $trigger->filter($url, "feed_url", $post);
-
                 $feed->entry(oneof($post->title(), ucfirst($post->feather)),
                              url("id/post/".$post->id),
                              $post->feed_content(),
-                             $url,
+                             $post->url(),
                              $post->created_at,
                              $updated,
                              ((!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : null),
