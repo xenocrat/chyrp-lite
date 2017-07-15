@@ -148,6 +148,9 @@
         /**
          * Function: related
          * Generates an external_url attribute for an item.
+         *
+         * Parameters:
+         *     $link - The external URL.
          */
         public function related($link) {
             if ($this->count == 0)
