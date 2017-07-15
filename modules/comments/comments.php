@@ -833,22 +833,22 @@
             foreach ($comments as $comment) {
                 $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
 
-                $atom.= "<chyrp:comment>\n".
+                $atom.= '<chyrp:comment>'."\n".
                         '<updated>'.when("c", $updated).'</updated>'."\n".
                         '<published>'.when("c", $comment->created_at).'</published>'."\n".
                         '<author chyrp:user_id="'.$comment->user_id.'">'."\n".
-                        "<name>".fix($comment->author, false, true)."</name>\n".
-                        "<uri>".fix($comment->author_url, false, true)."</uri>\n".
-                        "<email>".fix($comment->author_email, false, true)."</email>\n".
-                        "<chyrp:login>".($comment->user->no_results ?
+                        '<name>'.fix($comment->author, false, true).'</name>'."\n".
+                        '<uri>'.fix($comment->author_url, false, true).'</uri>'."\n".
+                        '<email>'.fix($comment->author_email, false, true).'</email>'."\n".
+                        '<chyrp:login>'.($comment->user->no_results ?
                             "" :
-                            fix($comment->user->login, false, true))."</chyrp:login>\n".
-                        "<chyrp:ip>".fix(long2ip($comment->author_ip), false, true)."</chyrp:ip>\n".
-                        "<chyrp:agent>".fix($comment->author_agent, false, true)."</chyrp:agent>\n".
-                        "</author>\n".
-                        '<content type="html">'.fix($comment->body, false, true)."</content>\n".
-                        "<chyrp:status>".fix($comment->status, false, true)."</chyrp:status>\n".
-                        "</chyrp:comment>\n";
+                            fix($comment->user->login, false, true)).'</chyrp:login>'."\n".
+                        '<chyrp:ip>'.fix(long2ip($comment->author_ip), false, true).'</chyrp:ip>'."\n".
+                        '<chyrp:agent>'.fix($comment->author_agent, false, true).'</chyrp:agent>'."\n".
+                        '</author>'."\n".
+                        '<content type="html">'.fix($comment->body, false, true).'</content>'."\n".
+                        '<chyrp:status>'.fix($comment->status, false, true).'</chyrp:status>'."\n".
+                        '</chyrp:comment>'."\n";
             }
 
             return $atom;

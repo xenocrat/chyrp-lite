@@ -201,11 +201,11 @@
                                                 array("post_id" => $post->id))->fetchAll();
 
             foreach ($pingbacks as $pingback) {
-                $atom.= "<chyrp:pingback>\n";
+                $atom.= '<chyrp:pingback>'."\n";
                 $atom.= '<title type="html">'.fix($pingback["title"], false, true).'</title>'."\n";
                 $atom.= '<link rel="via" href="'.fix($pingback["source"], true).'" />'."\n";
                 $atom.= '<published>'.when("c", $pingback["created_at"]).'</published>'."\n";
-                $atom.= "</chyrp:pingback>\n";
+                $atom.= '</chyrp:pingback>'."\n";
             }
 
             return $atom;
