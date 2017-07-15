@@ -316,11 +316,11 @@
                 $user = new User($like["user_id"]);
                 $login = (!$user->no_results) ? $user->login : "" ;
 
-                $atom.= "        <chyrp:like>\r";
-                $atom.= '            <chyrp:login>'.fix($login, false, true).'</chyrp:login>'."\r";
-                $atom.= '            <published>'.when("c", $like["timestamp"]).'</published>'."\r";
-                $atom.= '            <chyrp:hash>'.fix($like["session_hash"], false, true).'</chyrp:hash>'."\r";
-                $atom.= "        </chyrp:like>\r";
+                $atom.= "<chyrp:like>\n";
+                $atom.= '<chyrp:login>'.fix($login, false, true).'</chyrp:login>'."\n";
+                $atom.= '<published>'.when("c", $like["timestamp"]).'</published>'."\n";
+                $atom.= '<chyrp:hash>'.fix($like["session_hash"], false, true).'</chyrp:hash>'."\n";
+                $atom.= "</chyrp:like>\n";
             }
 
             return $atom;
