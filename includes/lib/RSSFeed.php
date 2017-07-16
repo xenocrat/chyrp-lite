@@ -44,16 +44,16 @@
 
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             echo '<rss version="2.0">'."\n";
-            echo "<channel>\n";
-            echo "<language>".$language."</language>\n";
-            echo "<title>".strip_tags($title)."</title>\n";
+            echo '<channel>'."\n";
+            echo '<language>'.$language.'</language>'."\n";
+            echo '<title>'.strip_tags($title).'</title>'."\n";
 
             if (!empty($subtitle))
-                echo "<description>".strip_tags($subtitle)."</description>\n";
+                echo '<description>'.strip_tags($subtitle).'</description>'."\n";
 
-            echo "<lastBuildDate>".when("r", oneof($updated, time()))."</lastBuildDate>\n";
-            echo "<link>".fix($config->url)."</link>\n";
-            echo "<generator>".CHYRP_IDENTITY."</generator>\n";
+            echo '<lastBuildDate>'.when("r", oneof($updated, time())).'</lastBuildDate>'."\n";
+            echo '<link>'.fix($config->url).'</link>'."\n";
+            echo '<generator>'.CHYRP_IDENTITY.'</generator>'."\n";
         }
 
         /**
@@ -77,15 +77,15 @@
         public function entry($title, $id, $content, $link, $published, $updated = 0, $name = "", $uri = "", $email = "") {
             self::split();
 
-            echo "<item>\n";
-            echo "<title>".strip_tags($title)."</title>\n";
-            echo "<guid>".fix($id)."</guid>\n";
-            echo "<pubDate>".when("r", $published)."</pubDate>\n";
-            echo "<link>".fix($link)."</link>\n";
-            echo '<description>'.fix($content, false, true)."</description>\n";
+            echo '<item>'."\n";
+            echo '<title>'.strip_tags($title).'</title>'."\n";
+            echo '<guid>'.fix($id).'</guid>'."\n";
+            echo '<pubDate>'.when("r", $published).'</pubDate>'."\n";
+            echo '<link>'.fix($link).'</link>'."\n";
+            echo '<description>'.fix($content, false, true).'</description>'."\n";
 
             if (!empty($email) and is_email($email))
-                echo "<author>".fix($email)."</author>\n";
+                echo '<author>'.fix($email).'</author>'."\n";
 
             $this->count++;
         }
@@ -103,12 +103,12 @@
             if ($this->count == 0)
                 return;
 
-            $category = "<category";
+            $category = '<category';
 
             if (!empty($scheme))
                 $category.= ' domain="'.fix($scheme, true).'"';
 
-            echo $category.">".fix($term, true)."</category>\n";
+            echo $category.'>'.fix($term, true).'</category>'."\n";
         }
 
         /**
@@ -149,7 +149,7 @@
          */
         private function split() {
             if ($this->count > 0)
-                echo "</item>\n";
+                echo '</item>'."\n";
         }
 
         /**
@@ -158,7 +158,7 @@
          */
         public function close() {
             self::split();
-            echo "</channel>\n";
-            echo "</rss>\n";
+            echo '</channel>'."\n";
+            echo '</rss>'."\n";
         }
     }
