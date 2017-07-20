@@ -47,10 +47,10 @@
         }
 
         public function feed_content($post) {
-            $content = "<blockquote>".$post->quote."</blockquote>";
+            $content = '<blockquote>'.$post->quote.'</blockquote>';
 
             if (!empty($post->source))
-                $content.= "<cite>".$post->source."</cite>";
+                $content.= '<cite>'.$post->source.'</cite>';
 
             return $content;
         }

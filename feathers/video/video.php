@@ -105,11 +105,10 @@
             if ($trigger->exists("video_player"))
                 return $trigger->call("video_player", $post);
 
-            return "\n".'<video controls>'.
-                   "\n".__("Your web browser does not support the <code>video</code> element.", "video").
-                   "\n".'<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).'">'.
-                   "\n".'</video>'.
-                   "\n";
+            return '<video controls>'."\n".
+                   __("Your web browser does not support the <code>video</code> element.", "video")."\n".
+                   '<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).'">'."\n".
+                   '</video>'."\n";
         }
 
         private function video_type($filename) {

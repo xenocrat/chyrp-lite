@@ -105,11 +105,10 @@
             if ($trigger->exists("audio_player"))
                 return $trigger->call("audio_player", $post);
 
-            return "\n".'<audio controls>'.
-                   "\n".__("Your web browser does not support the <code>audio</code> element.", "audio").
-                   "\n".'<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).'">'.
-                   "\n".'</audio>'.
-                   "\n";
+            return '<audio controls>'."\n".
+                   __("Your web browser does not support the <code>audio</code> element.", "audio")."\n".
+                   '<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).'">'."\n".
+                   '</audio>'."\n";
         }
 
         private function audio_type($filename) {
