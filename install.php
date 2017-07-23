@@ -759,7 +759,7 @@
                     </select>
                 </p>
                 <p id="host_field">
-                    <label for="host"><?php echo __("Host"); ?> <span class="sub"><?php echo __("(usually ok as \"localhost\")"); ?></span></label>
+                    <label for="host"><?php echo __("Host"); ?></label>
                     <input type="text" name="host" value="<?php posted("host", (isset($_ENV['DATABASE_SERVER']) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
                 </p>
                 <p id="username_field">
