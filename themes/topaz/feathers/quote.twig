@@ -11,8 +11,10 @@
 <blockquote>
 {{ post.quote }}
 </blockquote>
+{% if post.source is not empty %}
 <cite>
 {{ post.source }}
 </cite>
+{% endif %}
 </section>
 {% endblock %}
