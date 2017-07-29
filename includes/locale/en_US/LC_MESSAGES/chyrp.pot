@@ -65,6 +65,7 @@
 #: includes/thumb.php:18
 #: includes/thumb.php:47
 #: includes/thumb.php:202
+#: install.php:725
 msgid "Error"
 msgstr ""
 
@@ -873,7 +874,7 @@ msgid "Invalid feed URL."
 msgstr ""
 
 #: includes/controller/Admin.php:1885
-msgid "Clean URLs cannot be enabled because the <em>.htaccess</em> file is not configured."
+msgid "Clean URLs are disabled because the <em>.htaccess</em> file cannot be configured."
 msgstr ""
 
 #: includes/controller/Admin.php:1893
@@ -1026,7 +1027,6 @@ msgstr ""
 
 #: includes/controller/Main.php:495
 #: includes/controller/Main.php:666
-#: install.php:686
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
@@ -1543,152 +1543,155 @@ msgstr ""
 msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 
-#: install.php:728
+#: install.php:725
+#: upgrade.php:95
+#: upgrade.php:108
+#: upgrade.php:121
+#: upgrade.php:134
+#: upgrade.php:147
+#: upgrade.php:161
+#: upgrade.php:187
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:732
-msgid "Clean URLs will not be available because the <em>.htaccess</em> file is not writable."
-msgstr ""
-
-#: install.php:749
+#: install.php:742
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:751
+#: install.php:744
 msgid "Adapter"
 msgstr ""
 
-#: install.php:762
+#: install.php:755
 msgid "Host"
 msgstr ""
 
-#: install.php:766
-#: install.php:812
+#: install.php:759
+#: install.php:805
 msgid "Username"
 msgstr ""
 
-#: install.php:770
-#: install.php:816
-#: install.php:820
+#: install.php:763
+#: install.php:809
+#: install.php:813
 msgid "Password"
 msgstr ""
 
-#: install.php:774
+#: install.php:767
 msgid "Database"
 msgstr ""
 
-#: install.php:776
+#: install.php:769
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:782
+#: install.php:775
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:785
+#: install.php:778
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:785
+#: install.php:778
 msgid "(optional)"
 msgstr ""
 
-#: install.php:789
+#: install.php:782
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:791
+#: install.php:784
 msgid "Site Name"
 msgstr ""
 
-#: install.php:792
+#: install.php:785
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:795
+#: install.php:788
 msgid "Description"
 msgstr ""
 
-#: install.php:799
+#: install.php:792
 msgid "What time is it?"
 msgstr ""
 
-#: install.php:810
+#: install.php:803
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:820
+#: install.php:813
 msgid "(again)"
 msgstr ""
 
-#: install.php:824
+#: install.php:817
 msgid "Email Address"
 msgstr ""
 
-#: install.php:827
+#: install.php:820
 msgid "Install me!"
 msgstr ""
 
-#: install.php:830
+#: install.php:823
 msgid "Installation Complete"
 msgstr ""
 
-#: install.php:831
-#: upgrade.php:416
+#: install.php:824
+#: upgrade.php:437
 msgid "What now?"
 msgstr ""
 
-#: install.php:833
+#: install.php:826
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:834
+#: install.php:827
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
-#: install.php:836
-#: upgrade.php:422
+#: install.php:829
+#: upgrade.php:443
 msgid "Take me to my site!"
 msgstr ""
 
-#: upgrade.php:177
+#: upgrade.php:198
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:405
+#: upgrade.php:426
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:406
+#: upgrade.php:427
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 
-#: upgrade.php:408
+#: upgrade.php:429
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 
-#: upgrade.php:409
+#: upgrade.php:430
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 
-#: upgrade.php:412
+#: upgrade.php:433
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:415
+#: upgrade.php:436
 msgid "Upgrade Complete"
 msgstr ""
 
-#: upgrade.php:418
+#: upgrade.php:439
 msgid "Take action to resolve any errors reported on this page."
 msgstr ""
 
-#: upgrade.php:419
+#: upgrade.php:440
 msgid "Run this upgrader again if you need to."
 msgstr ""
 
-#: upgrade.php:420
+#: upgrade.php:441
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr ""
 
