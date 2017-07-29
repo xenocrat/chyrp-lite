@@ -682,9 +682,6 @@
                                    "approved" => true,
                                    "joined_at" => datetime()));
 
-            if (password_strength($_POST['password1']) < 100)
-                $errors[] = __("Please consider setting a stronger password for your account.");
-
             # Build the configuration file.
             $set = array($config->set("sql", $settings),
                          $config->set("name", strip_tags($_POST['name'])),
@@ -725,11 +722,7 @@
                          $config->set("secure_hashkey", random(32)));
 
             if (in_array(false, $set))
-                $errors[] = __("Could not write the configuration file.");
-
-            # Configure the .htaccess file.
-            if (htaccess_conf($url_path) === false)
-                $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
+                error(__("Error"), __("Could not write the configuration file."));
 
             @unlink(INCLUDES_DIR.DIR."upgrading.lock");
             $installed = true;
