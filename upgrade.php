@@ -89,7 +89,10 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_markdown() {
-        Config::current()->set("enable_markdown", true, true);
+        $set = Config::current()->set("enable_markdown", true, true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -99,7 +102,10 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_homepage() {
-        Config::current()->set("enable_homepage", false, true);
+        $set = Config::current()->set("enable_homepage", false, true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -109,7 +115,10 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_uploads_limit() {
-        Config::current()->set("uploads_limit", 10, true);
+        $set = Config::current()->set("uploads_limit", 10, true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -119,7 +128,10 @@
      * Versions: 2015.06 => 2015.07
      */
     function remove_trackbacking() {
-        Config::current()->remove("enable_trackbacking");
+        $set = Config::current()->remove("enable_trackbacking");
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -129,7 +141,10 @@
      * Versions: 2015.07 => 2016.01
      */
     function add_admin_per_page() {
-        Config::current()->set("admin_per_page", 25, true);
+        $set = Config::current()->set("admin_per_page", 25, true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -140,7 +155,10 @@
      */
     function disable_importers() {
         $config = Config::current();
-        $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
+        $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -163,7 +181,10 @@
      * Versions: 2017.02 => 2017.03
      */
     function add_feed_format() {
-        Config::current()->set("feed_format", "AtomFeed", true);
+        $set = Config::current()->set("feed_format", "AtomFeed", true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     #---------------------------------------------
@@ -368,7 +389,7 @@
     # Upgrading Starts
     #---------------------------------------------
 
-    if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) {
+    if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes")) {
         # Perform core upgrade tasks.
         add_markdown();
         add_homepage();

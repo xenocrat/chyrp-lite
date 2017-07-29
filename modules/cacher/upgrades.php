@@ -9,6 +9,8 @@
      * Versions: 2017.01 => 2017.02
      */
     function cacher_migrate_config() {
+        global $errors;
+
         $config = Config::current();
 
         if (isset($config->cache_expire) and isset($config->cache_exclude)) {
@@ -17,10 +19,13 @@
                                       "cache_exclude" => $config->cache_exclude));
 
             if ($set !== false) {
-                $config->remove("cache_expire");
-                $config->remove("cache_exclude");
-                $config->remove("cache_memcached_hosts");
+                $set = array($config->remove("cache_expire"),
+                             $config->remove("cache_exclude"),
+                             $config->remove("cache_memcached_hosts"));
             }
+
+            if (in_array(false, (array) $set))
+                $errors[] = __("Could not write the configuration file.");
         }
     }
 
