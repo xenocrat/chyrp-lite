@@ -24,7 +24,7 @@
                              $config->remove("cache_memcached_hosts"));
             }
 
-            if (in_array(false, (array) $set))
+            if (in_array(false, (array) $set, true))
                 $errors[] = __("Could not write the configuration file.");
         }
     }
