@@ -1,0 +1,10 @@
+{% extends "layouts" ~ DIR ~ "help.twig" %}
+
+{% block title %}{{ "Upload Source" | translate("uploader") }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Upload Source" | translate("uploader") }}</h1>
+<p>
+{{ "This can be a URL that will take visitors to the original resource or it can be a human-readable description of the upload's origin." | translate("uploader") }}
+</p>
+{% endblock %}

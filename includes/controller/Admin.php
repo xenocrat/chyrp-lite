@@ -1,6 +1,6 @@
 <?php
     /**
-     * Class: Admin Controller
+     * Class: AdminController
      * The logic controlling the administration console.
      */
     class AdminController implements Controller {
@@ -180,7 +180,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled($_POST['feather']))
                 show_404(__("Not Found"), __("Feather not found."));
@@ -226,7 +226,7 @@
             $visitor = Visitor::current();
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
@@ -275,7 +275,7 @@
          */
         public function destroy_post() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
@@ -378,7 +378,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['title']))
                 error(__("Error"), __("Title cannot be blank."), null, 422);
@@ -436,7 +436,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit pages."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
@@ -499,7 +499,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
@@ -577,7 +577,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['login']))
                 error(__("Error"), __("Please enter a username for the account."), null, 422);
@@ -660,7 +660,7 @@
          */
         public function update_user() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a user."), null, 400);
@@ -758,7 +758,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a user."), null, 400);
@@ -850,7 +850,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['name']))
                 error(__("Error"), __("Please enter a name for the group."), null, 422);
@@ -897,7 +897,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
@@ -955,7 +955,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a group."), null, 400);
@@ -1050,8 +1050,7 @@
                 $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
                                         $this->post_limit);
 
-            $this->display("pages".DIR."manage_groups",
-                           array("groups" => $groups));
+            $this->display("pages".DIR."manage_groups", array("groups" => $groups));
         }
 
         /**
@@ -1071,7 +1070,7 @@
                 return $this->display("pages".DIR."export");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $trigger->call("before_export");
 
@@ -1096,55 +1095,50 @@
                     $ids[] = $result["id"];
 
                 if (!empty($ids))
-                    $posts = Post::find(array("drafts" => true,
-                                              "where" => array("id" => $ids),
-                                              "order" => "id ASC"),
+                    $posts = Post::find(array("drafts" => true, "where" => array("id" => $ids), "order" => "id ASC"),
                                         array("filter" => false));
                 else
-                    $posts = new Paginator(array());
+                    $posts = array();
 
                 $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
                 $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n";
-                $posts_atom.= '    <title>'.fix($config->name).' | Posts</title>'."\n";
-                $posts_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\n";
-                $posts_atom.= '    <id>'.fix($config->url).'</id>'."\n";
-                $posts_atom.= '    <updated>'.date("c").'</updated>'."\n";
-                $posts_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\n";
-                $posts_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
+                $posts_atom.= '<title>'.fix($config->name).' | Posts</title>'."\n";
+                $posts_atom.= '<subtitle>'.fix($config->description).'</subtitle>'."\n";
+                $posts_atom.= '<id>'.fix($config->url).'</id>'."\n";
+                $posts_atom.= '<updated>'.date("c").'</updated>'."\n";
+                $posts_atom.= '<link href="'.fix($config->url, true).'" rel="alternate" type="text/html" />'."\n";
+                $posts_atom.= '<generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
 
                 foreach ($posts as $post) {
                     $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
-                    $url = $post->url();
                     $title = oneof($post->title(), ucfirst($post->feather));
 
-                    $posts_atom.= '    <entry xml:base="'.fix($url, true).'">'."\n";
-                    $posts_atom.= '        <title type="html">'.fix($title, false, true).'</title>'."\n";
-                    $posts_atom.= '        <id>'.fix($url).'</id>'."\n";
-                    $posts_atom.= '        <updated>'.when("c", $updated).'</updated>'."\n";
-                    $posts_atom.= '        <published>'.when("c", $post->created_at).'</published>'."\n";
-                    $posts_atom.= '        <link href="'.fix($trigger->filter($url, "post_export_url", $post), true).'" />'."\n";
-                    $posts_atom.= '        <author chyrp:user_id="'.$post->user_id.'">'."\n";
-                    $posts_atom.= '            <name>'.fix(oneof($post->user->full_name, $post->user->login)).'</name>'."\n";
+                    $posts_atom.= '<entry xml:base="'.fix($post->url(), true).'">'."\n";
+                    $posts_atom.= '<title type="html">'.fix($title, false, true).'</title>'."\n";
+                    $posts_atom.= '<id>'.fix(url("id/post/".$post->id, MainController::current())).'</id>'."\n";
+                    $posts_atom.= '<updated>'.when("c", $updated).'</updated>'."\n";
+                    $posts_atom.= '<published>'.when("c", $post->created_at).'</published>'."\n";
+                    $posts_atom.= '<author chyrp:user_id="'.$post->user_id.'">'."\n";
+                    $posts_atom.= '<name>'.fix(oneof($post->user->full_name, $post->user->login)).'</name>'."\n";
 
                     if (!empty($post->user->website))
-                        $posts_atom.= '            <uri>'.fix($post->user->website).'</uri>'."\n";
+                        $posts_atom.= '<uri>'.fix($post->user->website).'</uri>'."\n";
 
-                    $posts_atom.= '            <chyrp:login>'.fix($post->user->login, false, true).'</chyrp:login>'."\n";
-                    $posts_atom.= '        </author>'."\n";
-                    $posts_atom.= '        <content type="application/xml">'."\n";
+                    $posts_atom.= '<chyrp:login>'.fix($post->user->login, false, true).'</chyrp:login>'."\n";
+                    $posts_atom.= '</author>'."\n";
+                    $posts_atom.= '<content type="application/xml">'."\n";
 
                     foreach ($post->attributes as $key => $val)
-                        $posts_atom.= '            <'.$key.'>'.fix($val, false, true).'</'.$key.'>'."\n";
+                        $posts_atom.= '<'.$key.'>'.fix($val, false, true).'</'.$key.'>'."\n";
 
-                    $posts_atom.= '        </content>'."\n";
+                    $posts_atom.= '</content>'."\n";
 
                     foreach (array("feather", "clean", "url", "pinned", "status") as $attr)
-                        $posts_atom.= '        <chyrp:'.$attr.'>'.fix($post->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
+                        $posts_atom.= '<chyrp:'.$attr.'>'.fix($post->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
 
                     $trigger->filter($posts_atom, "posts_export", $post);
 
-                    $posts_atom.= '    </entry>'."\n";
-
+                    $posts_atom.= '</entry>'."\n";
                 }
 
                 $posts_atom.= '</feed>'."\n";
@@ -1160,40 +1154,38 @@
 
                 $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
                 $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n";
-                $pages_atom.= '    <title>'.fix($config->name).' | Pages</title>'."\n";
-                $pages_atom.= '    <subtitle>'.fix($config->description).'</subtitle>'."\n";
-                $pages_atom.= '    <id>'.fix($config->url).'</id>'."\n";
-                $pages_atom.= '    <updated>'.date("c").'</updated>'."\n";
-                $pages_atom.= '    <link href="'.fix($config->url, true).'" rel="self" type="application/atom+xml" />'."\n";
-                $pages_atom.= '    <generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
+                $pages_atom.= '<title>'.fix($config->name).' | Pages</title>'."\n";
+                $pages_atom.= '<subtitle>'.fix($config->description).'</subtitle>'."\n";
+                $pages_atom.= '<id>'.fix($config->url).'</id>'."\n";
+                $pages_atom.= '<updated>'.date("c").'</updated>'."\n";
+                $pages_atom.= '<link href="'.fix($config->url, true).'" rel="alternate" type="text/html" />'."\n";
+                $pages_atom.= '<generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
 
                 foreach ($pages as $page) {
                     $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
-                    $url = $page->url();
 
-                    $pages_atom.= '    <entry xml:base="'.fix($url, true).'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
-                    $pages_atom.= '        <title type="html">'.fix($page->title, false, true).'</title>'."\n";
-                    $pages_atom.= '        <id>'.fix($url).'</id>'."\n";
-                    $pages_atom.= '        <updated>'.when("c", $updated).'</updated>'."\n";
-                    $pages_atom.= '        <published>'.when("c", $page->created_at).'</published>'."\n";
-                    $pages_atom.= '        <link href="'.fix($trigger->filter($url, "page_export_url", $page), true).'" />'."\n";
-                    $pages_atom.= '        <author chyrp:user_id="'.fix($page->user_id).'">'."\n";
-                    $pages_atom.= '            <name>'.fix(oneof($page->user->full_name, $page->user->login)).'</name>'."\n";
+                    $pages_atom.= '<entry xml:base="'.fix($page->url(), true).'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
+                    $pages_atom.= '<title type="html">'.fix($page->title, false, true).'</title>'."\n";
+                    $pages_atom.= '<id>'.fix(url("id/page/".$page->id, MainController::current())).'</id>'."\n";
+                    $pages_atom.= '<updated>'.when("c", $updated).'</updated>'."\n";
+                    $pages_atom.= '<published>'.when("c", $page->created_at).'</published>'."\n";
+                    $pages_atom.= '<author chyrp:user_id="'.fix($page->user_id).'">'."\n";
+                    $pages_atom.= '<name>'.fix(oneof($page->user->full_name, $page->user->login)).'</name>'."\n";
 
                     if (!empty($page->user->website))
-                        $pages_atom.= '            <uri>'.fix($page->user->website).'</uri>'."\n";
+                        $pages_atom.= '<uri>'.fix($page->user->website).'</uri>'."\n";
 
-                    $pages_atom.= '            <chyrp:login>'.fix($page->user->login, false, true).'</chyrp:login>'."\n";
-                    $pages_atom.= '        </author>'."\n";
-                    $pages_atom.= '        <content type="html">'.fix($page->body, false, true).'</content>'."\n";
+                    $pages_atom.= '<chyrp:login>'.fix($page->user->login, false, true).'</chyrp:login>'."\n";
+                    $pages_atom.= '</author>'."\n";
+                    $pages_atom.= '<content type="html">'.fix($page->body, false, true).'</content>'."\n";
 
                     foreach (array("public", "show_in_list", "list_order", "clean", "url") as $attr)
-                        $pages_atom.= '        <chyrp:'.$attr.'>'.fix($page->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
+                        $pages_atom.= '<chyrp:'.$attr.'>'.fix($page->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
 
 
                     $trigger->filter($pages_atom, "pages_export", $page);
 
-                    $pages_atom.= '    </entry>'."\n";
+                    $pages_atom.= '</entry>'."\n";
                 }
 
                 $pages_atom.= '</feed>'."\n";
@@ -1290,7 +1282,7 @@
                 return $this->display("pages".DIR."import");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
                 if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or
@@ -1563,7 +1555,6 @@
                 Flash::message(__("You are currently previewing a theme.").
                                  ' <a href="'.url("preview_theme").'">'.__("Stop &rarr;").'</a>');
 
-            $config = Config::current();
             $this->context["themes"] = array();
 
             if (!$open = @opendir(THEMES_DIR))
@@ -1594,7 +1585,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to enable."), null, 400);
@@ -1638,7 +1629,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
                 error(__("No Extension Specified"), __("You did not specify an extension to disable."), null, 400);
@@ -1675,7 +1666,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['theme']))
                 error(__("No Theme Specified"), __("You did not specify which theme to select."), null, 400);
@@ -1683,9 +1674,8 @@
             if (!isset($_POST['change']) or $_POST['change'] != "indubitably")
                 self::preview_theme();
 
-            $config = Config::current();
             $theme = str_replace(array(".", DIR), "", $_POST['theme']);
-            $config->set("theme", $theme);
+            Config::current()->set("theme", $theme);
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale");
 
@@ -1712,7 +1702,7 @@
             }
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
             $trigger->call("preview_theme_started");
@@ -1727,11 +1717,9 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            $locales = array();
-
             # Ensure the default locale is always present in the list.
-            $locales[] = array("code" => "en_US",
-                               "name" => lang_code("en_US"));
+            $locales = array(array("code" => "en_US",
+                                   "name" => lang_code("en_US")));
 
             if ($open = opendir(INCLUDES_DIR.DIR."locale")) {
                  while (($folder = readdir($open)) !== false)
@@ -1748,7 +1736,7 @@
                                             "timezones" => timezones()));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."), null, 422);
@@ -1797,11 +1785,18 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
+            $feed_formats = array(array("name" => "Atom",
+                                        "class" => "AtomFeed"),
+                                  array("name" => "RSS",
+                                        "class" => "RSSFeed"),
+                                  array("name" => "JSON",
+                                        "class" => "JSONFeed"));
+
             if (empty($_POST))
-                return $this->display("pages".DIR."content_settings");
+                return $this->display("pages".DIR."content_settings", array("feed_formats" => $feed_formats));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
                 error(__("Error"), __("Invalid feed URL."), null, 422);
@@ -1810,6 +1805,7 @@
             fallback($_POST['admin_per_page'], 25);
             fallback($_POST['feed_items'], 20);
             fallback($_POST['feed_url'], "");
+            fallback($_POST['feed_format'], "AtomFeed");
             fallback($_POST['uploads_path'], "");
             fallback($_POST['uploads_limit'], 10);
 
@@ -1825,6 +1821,7 @@
             $config->set("admin_per_page", (int) $_POST['admin_per_page']);
             $config->set("feed_items", (int) $_POST['feed_items']);
             $config->set("feed_url", $_POST['feed_url']);
+            $config->set("feed_format", $_POST['feed_format']);
             $config->set("uploads_path", $matches[1].$matches[2].$matches[3]);
             $config->set("uploads_limit", (int) $_POST['uploads_limit']);
             $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
@@ -1849,7 +1846,7 @@
                                       array("groups" => Group::find(array("order" => "id DESC"))));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['default_group'], 0);
             fallback($_POST['guest_group'], 0);
@@ -1879,13 +1876,13 @@
                 return $this->display("pages".DIR."route_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $route = Route::current();
             $config = Config::current();
 
-            if (!empty($_POST['clean_urls']) and !$config->clean_urls and htaccess_conf() === false) {
-                Flash::warning(__("Clean URLs cannot be enabled because the <em>.htaccess</em> file is not configured."));
+            if (!empty($_POST['clean_urls']) and htaccess_conf() === false) {
+                Flash::warning(__("Clean URLs are disabled because the <em>.htaccess</em> file cannot be configured."));
                 unset($_POST['clean_urls']);
             }
 

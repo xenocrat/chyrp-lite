@@ -14,7 +14,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 323
+	admin/javascripts/admin.js.php on line 325
 
 
 admin_head
@@ -156,10 +156,10 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	feathers/audio/audio.php on line 90
-	feathers/photo/photo.php on line 84
-	feathers/uploader/uploader.php on line 132
-	feathers/video/video.php on line 90
+	feathers/audio/audio.php on line 89
+	feathers/photo/photo.php on line 89
+	feathers/uploader/uploader.php on line 130
+	feathers/video/video.php on line 89
 Arguments:
 	$post->filename
 
@@ -167,7 +167,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 107
+	feathers/audio/audio.php on line 106
 Arguments:
 	$post
 
@@ -175,7 +175,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 107
+	feathers/video/video.php on line 106
 Arguments:
 	$post
 
@@ -183,7 +183,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 115
+	includes/ajax.php on line 120
 
 
 change_setting
@@ -227,19 +227,19 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 370
+	includes/common.php on line 383
 
 
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1076
+	includes/controller/Admin.php on line 1075
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1343
+	includes/controller/Admin.php on line 1335
 Arguments:
 	$group
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1367
+	includes/controller/Admin.php on line 1359
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1403
+	includes/controller/Admin.php on line 1395
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1430
+	includes/controller/Admin.php on line 1422
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1434
+	includes/controller/Admin.php on line 1426
 Arguments:
 	$imports
 
@@ -279,13 +279,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1710
+	includes/controller/Admin.php on line 1700
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1718
+	includes/controller/Admin.php on line 1708
 
 
 can_not_view_page
@@ -319,15 +319,15 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 803
+	includes/controller/Main.php on line 795
 Arguments:
-	$post
+	$post, $feed
 
 
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 104
+	includes/javascript.php on line 111
 
 
 pingback
@@ -494,9 +494,9 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 669
+	modules/comments/comments.php on line 664
 Arguments:
-	$comment
+	$comment, $feed
 
 
 add_comment
@@ -542,23 +542,23 @@ Arguments:
 import_wordpress_post
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 164
+	modules/migrator/migrator.php on line 137
 Arguments:
-	$item, $post
+	$post, $new_post
 
 
 import_wordpress_page
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 177
+	modules/migrator/migrator.php on line 150
 Arguments:
-	$item, $page
+	$post, $new_page
 
 
 import_tumble
 -------------
 Called from:
-	modules/migrator/migrator.php on line 318
+	modules/migrator/migrator.php on line 285
 Arguments:
 	$post, $new_post
 
@@ -566,7 +566,7 @@ Arguments:
 import_textpattern_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 410
+	modules/migrator/migrator.php on line 384
 Arguments:
 	$post, $new_post
 
@@ -574,17 +574,17 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 529
+	modules/migrator/migrator.php on line 493
 Arguments:
-	$post, $new_post, $link
+	$post, $new_post
 
 
 import_movabletype_page
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 532
+	modules/migrator/migrator.php on line 507
 Arguments:
-	$post, $new_page, $link
+	$post, $new_page
 
 
 manage_pingbacks_column_header
@@ -612,7 +612,7 @@ Arguments:
 update_pingback
 ---------------
 Called from:
-	modules/pingable/model/Pingback.php on line 84
+	modules/pingable/model/Pingback.php on line 86
 Arguments:
 	$pingback, $this
 
@@ -744,7 +744,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 367
+	includes/common.php on line 380
 
 
 admin_determine_action
@@ -755,34 +755,14 @@ Called from:
 	includes/controller/Admin.php on line 135
 
 
-post_export_url
----------------
-Target:
-	$url
-Called from:
-	includes/controller/Admin.php on line 1125
-Arguments:
-	$post), true
-
-
 posts_export
 ------------
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1144
+	includes/controller/Admin.php on line 1139
 Arguments:
 	$post
-
-
-page_export_url
----------------
-Target:
-	$url
-Called from:
-	includes/controller/Admin.php on line 1179
-Arguments:
-	$page), true
 
 
 pages_export
@@ -790,7 +770,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1194
+	includes/controller/Admin.php on line 1186
 Arguments:
 	$page
 
@@ -800,7 +780,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1249
+	includes/controller/Admin.php on line 1241
 
 
 before_import
@@ -808,7 +788,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1313
+	includes/controller/Admin.php on line 1305
 
 
 write_nav
@@ -816,7 +796,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1989
+	includes/controller/Admin.php on line 1986
 
 
 manage_nav
@@ -824,7 +804,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2018
+	includes/controller/Admin.php on line 2015
 
 
 settings_nav
@@ -832,7 +812,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2043
+	includes/controller/Admin.php on line 2040
 
 
 extend_nav
@@ -840,17 +820,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2061
-
-
-feed_url
---------
-Target:
-	$url
-Called from:
-	includes/controller/Main.php on line 792
-Arguments:
-	$post
+	includes/controller/Admin.php on line 2058
 
 
 keyword_search
@@ -858,7 +828,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 783
+	includes/helpers.php on line 743
 Arguments:
 	$query, $plain
 
@@ -868,7 +838,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1342
+	includes/helpers.php on line 1302
 
 
 send_mail
@@ -876,7 +846,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2046
+	includes/helpers.php on line 2006
 
 
 xmlrpc_methods
@@ -1117,4 +1087,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 386
+	modules/comments/model/Comment.php on line 389

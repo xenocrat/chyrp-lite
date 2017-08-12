@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2017.02");
-    define('CHYRP_CODENAME', "Swahili");
+    define('CHYRP_VERSION',  "2017.03");
+    define('CHYRP_CODENAME', "Cape");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -94,7 +94,7 @@
     sanitize_input($_REQUEST);
 
     # Where are we?
-    $url = str_ireplace("/install.php", "", self_url());
+    $url = str_ireplace("/install.php", "", guess_url());
     $url_path = oneof(parse_url($url, PHP_URL_PATH), "/");
 
     # Already installed?
@@ -112,6 +112,17 @@
     # Test if we can write to CACHES_DIR (needed by some extensions).
     if (!is_writable(CACHES_DIR))
         $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
+
+    /**
+     * Function: guess_url
+     * Returns a best guess of the current URL.
+     */
+    function guess_url() {
+        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
+            "https://" : "http://" ;
+
+        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
+    }
 
     /**
      * Function: posted
@@ -217,13 +228,13 @@
                 line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
-                padding: 0em 0em 5em;
+                padding: 0rem 0rem 5rem;
             }
             h1 {
                 font-size: 2em;
                 text-align: center;
                 font-weight: bold;
-                margin: 0.5em 0em;
+                margin: 1rem 0em;
                 line-height: 1;
             }
             h1:first-child {
@@ -233,7 +244,38 @@
                 font-size: 1.25em;
                 text-align: center;
                 font-weight: bold;
-                margin: 0.75em 0em;
+                margin: 1rem 0em;
+            }
+            p {
+                margin-bottom: 1rem;
+            }
+            p:last-child,
+            p:empty {
+                margin-bottom: 0em;
+            }
+            code {
+                font-family: "Hack webfont", monospace;
+                font-style: normal;
+                word-wrap: break-word;
+                background-color: #efefef;
+                padding: 2px;
+                color: #4f4f4f;
+            }
+            strong {
+                font-weight: normal;
+                color: #d94c4c;
+            }
+            ul, ol {
+                margin: 0rem 0rem 2rem 2rem;
+                list-style-position: outside;
+            }
+            li {
+                margin-bottom: 1rem;
+            }
+            label {
+                display: block;
+                font-weight: bold;
+                line-height: 1.5;
             }
             input, textarea, select {
                 font-family: inherit;
@@ -289,70 +331,18 @@
                 border: none;
                 clear: both;
                 border-top: 1px solid #ddd;
-                margin: 2em 0em;
+                margin: 2rem 0rem;
             }
             form p {
-                padding-bottom: 1em;
-            }
-            .sub {
-                font-size: .8em;
-                color: #777;
-                font-weight: normal;
-            }
-            .sub.inline {
-                float: left;
-                margin-top: -1.5em !important;
-            }
-            .window {
-                width: 30em;
-                background: #fff;
-                padding: 2em;
-                margin: 2em auto 0em auto;
-                border-radius: 2em;
-            }
-            .window:first-child {
-                margin-top: 5em;
-            }
-            code {
-                font-family: "Hack webfont", monospace;
-                font-style: normal;
-                word-wrap: break-word;
-                background-color: #efefef;
-                padding: 2px;
-                color: #4f4f4f;
-            }
-            strong {
-                font-weight: normal;
-                color: #f00;
-            }
-            ul, ol {
-                margin: 0em 0em 2em 2em;
-                list-style-position: outside;
-            }
-            label {
-                display: block;
-                font-weight: bold;
-                line-height: 1.5;
-            }
-            .footer {
-                color: #777;
-                margin-top: 1em;
-                font-size: .9em;
-                text-align: center;
-            }
-            a:link, a:visited {
-                color: #4a4747;
-            }
-            a:hover, a:focus {
-                color: #1e57ba;
+                padding-bottom: 1rem;
             }
             pre.pane {
-                height: 15em;
+                height: 15rem;
                 overflow-y: auto;
-                margin: 1em -2em 1em -2em;
-                padding: 2em;
+                margin: 1rem -2rem 1rem -2rem;
+                padding: 2rem;
                 background: #4a4747;
-                color: #fff;
+                color: #ffffff;
             }
             pre.pane:empty {
                 display: none;
@@ -360,11 +350,13 @@
             pre.pane:empty + h1 {
                 margin-top: 0em;
             }
-            span.yay {
-                color: #76b362;
+            a:link,
+            a:visited {
+                color: #4a4747;
             }
-            span.boo {
-                color: #d94c4c;
+            a:hover,
+            a:focus {
+                color: #1e57ba;
             }
             a.big,
             button {
@@ -377,7 +369,7 @@
                 color: #4a4747;
                 text-decoration: none;
                 line-height: 1.25;
-                margin: 0.75em 0em;
+                margin: 1rem 0rem;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;
                 border: 1px solid #b8cdd9;
@@ -401,15 +393,24 @@
                 border-color: #1e57ba;
                 outline: none;
             }
-            p {
-                margin-bottom: 1em;
-            }
             aside {
-                margin-bottom: 1em;
+                margin-bottom: 1rem;
                 padding: 0.5em 1em;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
                 background-color: #fffecd;
+            }
+            .window {
+                width: 30rem;
+                background: #ffffff;
+                padding: 2rem;
+                margin: 5rem auto 0rem auto;
+                border-radius: 2rem;
+            }
+            .sub {
+                font-size: 0.8em;
+                color: #b3b5b5;
+                font-weight: normal;
             }
         </style>
         <script src="includes/common.js" type="text/javascript" charset="UTF-8"></script>
@@ -681,9 +682,6 @@
                                    "approved" => true,
                                    "joined_at" => datetime()));
 
-            if (password_strength($_POST['password1']) < 100)
-                $errors[] = __("Please consider setting a stronger password for your account.");
-
             # Build the configuration file.
             $set = array($config->set("sql", $settings),
                          $config->set("name", strip_tags($_POST['name'])),
@@ -699,6 +697,7 @@
                          $config->set("theme", "blossom"),
                          $config->set("posts_per_page", 5),
                          $config->set("admin_per_page", 25),
+                         $config->set("feed_format", "AtomFeed"),
                          $config->set("feed_items", 20),
                          $config->set("feed_url", ""),
                          $config->set("uploads_path", DIR."uploads".DIR),
@@ -722,13 +721,10 @@
                          $config->set("routes", array()),
                          $config->set("secure_hashkey", random(32)));
 
-            if (in_array(false, $set))
-                $errors[] = __("Could not write the configuration file.");
+            if (in_array(false, $set, true))
+                error(__("Error"), __("Could not write the configuration file."));
 
-            # Configure the .htaccess file.
-            if (htaccess_conf($url_path) === false)
-                $errors[] = __("Clean URLs will not be available because the <em>.htaccess</em> file is not writable.");
-
+            @unlink(INCLUDES_DIR.DIR."upgrading.lock");
             $installed = true;
         }
     }
@@ -756,7 +752,7 @@
                     </select>
                 </p>
                 <p id="host_field">
-                    <label for="host"><?php echo __("Host"); ?> <span class="sub"><?php echo __("(usually ok as \"localhost\")"); ?></span></label>
+                    <label for="host"><?php echo __("Host"); ?></label>
                     <input type="text" name="host" value="<?php posted("host", (isset($_ENV['DATABASE_SERVER']) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
                 </p>
                 <p id="username_field">

@@ -1,0 +1,10 @@
+{% extends "layouts" ~ DIR ~ "help.twig" %}
+
+{% block title %}{{ "Alternative Text" | translate("photo") }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Alternative Text" | translate("photo") }}</h1>
+<p>
+{{ "This text provides a brief description of the photo; it is useful for visually impaired visitors, and it will be displayed if the image format is not supported by the visitor's web browser or if the image has not yet downloaded." | translate("photo") }}
+</p>
+{% endblock %}

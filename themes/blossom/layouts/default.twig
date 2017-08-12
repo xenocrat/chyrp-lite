@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.locale | split('_') | first | split('-') | first }}">
+<html lang="{{ site.locale | preg_replace('/[\-_].*$/', '') }}">
 <head>
 <meta charset="UTF-8">
 <title>{% block title %}{{ site.name | fix }}{{ title is not empty ? " | " ~ title | striptags | fix : "" }}{% endblock %}</title>
@@ -76,7 +76,7 @@
 {% endfor %}
 {% endif %}
 <li role="presentation">
-<a role="menuitem" href="#" onclick="mailTo('{{ site.email | split('@') | last }}','{{ site.email | split('@') | first }}')">{{ "Email" | translate }}</a>
+<a role="menuitem" href="#" onclick="return mailTo('{{ site.email | split('@') | last }}','{{ site.email | split('@') | first }}')">{{ "Email" | translate }}</a>
 </li>
 <li role="presentation">
 <a role="menuitem" href="{{ url('feed') }}" rel="alternate">{{ "Feed" | translate }}</a>

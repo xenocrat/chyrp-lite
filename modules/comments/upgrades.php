@@ -9,6 +9,8 @@
      * Versions: 2017.01 => 2017.02
      */
     function comments_migrate_config() {
+        global $errors;
+
         $config = Config::current();
 
         if (isset($config->default_comment_status) and
@@ -27,13 +29,16 @@
                                       "enable_reload_comments" => $config->enable_reload_comments));
 
             if ($set !== false) {
-                $config->remove("default_comment_status");
-                $config->remove("allowed_comment_html");
-                $config->remove("comments_per_page");
-                $config->remove("akismet_api_key");
-                $config->remove("auto_reload_comments");
-                $config->remove("enable_reload_comments");
+                $set = array($config->remove("default_comment_status"),
+                             $config->remove("allowed_comment_html"),
+                             $config->remove("comments_per_page"),
+                             $config->remove("akismet_api_key"),
+                             $config->remove("auto_reload_comments"),
+                             $config->remove("enable_reload_comments"));
             }
+
+            if (in_array(false, (array) $set, true))
+                $errors[] = __("Could not write the configuration file.");
         }
     }
 

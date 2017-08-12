@@ -68,8 +68,13 @@
         }
 
         public function feed_content($post) {
-            return '<img src="'.Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($post->filename).
-                   '" alt="'.fix(oneof($post->alt_text, $post->filename), true).'"><p>'.$post->caption.'</p>';
+            $content = '<img src="'.Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($post->filename).
+                       '" alt="'.fix(oneof($post->alt_text, $post->filename), true).'">';
+
+            if (!empty($post->caption))
+                $content.= '<figcaption>'.$post->caption.'</figcaption>';
+
+            return '<figure>'.$content.'</figure>';
         }
 
         public function delete_file($post) {
@@ -95,12 +100,14 @@
                 return;
 
             $options[] = array("attr" => "option[alt_text]",
-                               "label" => __("Alt-Text", "photo"),
+                               "label" => __("Alternative Text", "photo"),
+                               "help" => "photo_alt_text",
                                "type" => "text",
                                "value" => (isset($post) ? $post->alt_text : ""));
 
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "photo"),
+                               "help" => "photo_source",
                                "type" => "text",
                                "value" => (isset($post) ? $post->source : ""));
 

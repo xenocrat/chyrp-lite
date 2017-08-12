@@ -38,6 +38,14 @@
 <span class="sub">{{ "(Megabytes)" | translate }}</span>
 </p>
 <p>
+<label for="feed_format">{{ "Feed Format" | translate }}</label>
+<select name="feed_format" id="feed_format">
+{% for feed_format in feed_formats %}
+<option value="{{ feed_format.class }}"{{ feed_format.class | selected(site.feed_format) }}>{{ feed_format.name }}</option>
+{% endfor %}
+</select>
+</p>
+<p>
 <label for="send_pingbacks">{{ "Send Pingbacks" | translate }}</label>
 <input class="checkbox" type="checkbox" name="send_pingbacks" id="send_pingbacks"{{ site.send_pingbacks | checked }}>
 <small>

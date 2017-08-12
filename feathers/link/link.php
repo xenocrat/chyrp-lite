@@ -17,7 +17,7 @@
             $this->setFilter("name", array("markup_post_title", "markup_title"));
             $this->setFilter("description", array("markup_post_text", "markup_text"));
 
-            $this->respondTo("feed_url", "set_feed_url");
+            $this->respondTo("feed_item", "link_related");
         }
 
         public function submit() {
@@ -65,10 +65,10 @@
             return $post->description;
         }
 
-        public function set_feed_url($url, $post) {
+        public function link_related($post, $feed) {
             if ($post->feather != "link")
                 return;
 
-            return $url = $post->source;
+            $feed->related($post->source);
         }
     }

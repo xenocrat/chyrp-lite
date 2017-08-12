@@ -1,12 +1,8 @@
 <?php
     /**
-     * File: Helpers
+     * File: helpers
      * Various functions used throughout the codebase.
      */
-
-    # Integer: $time_start
-    # Stores the internal timer value.
-    $time_start = 0;
 
     #---------------------------------------------
     # Sessions
@@ -27,9 +23,10 @@
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
 
-        $domain = preg_replace("~^www\.~", "", oneof($domain, @$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']));
+        $parsed = parse_url(Config::current()->url, PHP_URL_HOST);
+        $domain = preg_replace("~^www\.~", "", oneof($domain, $parsed, $_SERVER['SERVER_NAME']));
 
-        session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain);
+        session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain, false, true);
         session_name("ChyrpSession");
         register_shutdown_function("session_write_close");
         session_start();
@@ -48,7 +45,19 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        return (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], Config::current()->url) === 0);
+        $parsed = parse_url(Config::current()->url);
+        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
+
+        if (isset($parsed["port"]))
+            $origin.= ":".$parsed["port"];
+
+        if (isset($_SERVER['HTTP_ORIGIN']) and strpos($_SERVER['HTTP_ORIGIN'], $origin) === 0)
+            return true;
+
+        if (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], $origin) === 0)
+            return true;
+
+        return false;
     }
 
     #---------------------------------------------
@@ -127,13 +136,16 @@
 
     /**
      * Function: self_url
-     * Returns the current URL.
+     * Returns an absolute URL for the current request.
      */
     function self_url() {
-        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
-            "https://" : "http://" ;
+        $parsed = parse_url(Config::current()->url);
+        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
-        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
+        if (isset($parsed["port"]))
+            $origin.= ":".$parsed["port"];
+
+        return $origin.$_SERVER['REQUEST_URI'];
     }
 
     /**
@@ -147,7 +159,7 @@
      *     True if no action was needed, bytes written on success, false on failure.
      */
     function htaccess_conf($url_path = null) {
-        if (!INSTALLING and !UPGRADING)
+        if (!INSTALLING)
             $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
 
         # The trim operation guarantees a string with leading and trailing slashes,
@@ -350,12 +362,7 @@
             $zones[] = array("name" => $zone,
                              "now" => time_in_timezone($zone));
 
-        function by_time($a, $b) {
-            return (int) ($a["now"] > $b["now"]);
-        }
-
-        usort($zones, "by_time");
-
+        usort($zones, function($a, $b) { return (int) ($a["now"] > $b["now"]); });
         return $zones;
     }
 
@@ -561,18 +568,20 @@
 
     /**
      * Function: timer_start
-     * Starts the internal timer.
+     * Starts the internal timer and returns the microtime.
      */
     function timer_start() {
-        global $time_start;
-        $mtime = explode(" ", microtime());
-        $mtime = $mtime[1] + $mtime[0];
-        $time_start = $mtime;
+        static $timer;
+
+        if (!isset($timer))
+            $timer = microtime(true);
+
+        return $timer;
     }
 
     /**
      * Function: timer_stop
-     * Stops the timer and returns the total elapsed time.
+     * Returns the elapsed time since the timer started.
      *
      * Parameters:
      *     $precision - Round to n decimal places.
@@ -581,13 +590,7 @@
      *     A formatted number with the requested $precision.
      */
     function timer_stop($precision = 3) {
-        global $time_start;
-        $mtime = microtime();
-        $mtime = explode(" ", $mtime);
-        $mtime = $mtime[1] + $mtime[0];
-        $time_end = $mtime;
-        $time_total = $time_end - $time_start;
-        return number_format($time_total, $precision);
+        return number_format((microtime(true) - timer_start()), $precision);
     }
 
     /**
@@ -602,54 +605,11 @@
      *     Whether or not the match succeeded.
      */
     function match($try, $haystack) {
-        if (is_string($try))
-            return (bool) preg_match($try, $haystack);
-
-        foreach ($try as $needle)
+        foreach ((array) $try as $needle)
             if (preg_match($needle, $haystack))
                 return true;
 
         return false;
-    }
-
-    /**
-     * Function: list_notate
-     * Notates an array as a list of things.
-     *
-     * Parameters:
-     *     $array - An array of things to notate.
-     *     $quotes - Wrap quotes around strings?
-     *
-     * Returns:
-     *     A string like "foo, bar, and baz".
-     */
-    function list_notate($array, $quotes = false) {
-        $count = 0;
-        $items = array();
-
-        foreach ($array as $item) {
-            $string = (is_string($item) and $quotes) ?
-                _f("&#8220;%s&#8221;", $item) : (string) $item ;
-
-            $items[] = (count($array) == ++$count and $count !== 1) ?
-                _f("and %s", $string) : $string ;
-        }
-
-        return (count($array) == 2) ? implode(" ", $items) : implode(", ", $items) ;
-    }
-
-    /**
-     * Function: comma_sep
-     * Converts a comma-seperated string into an array of the listed values.
-     *
-     * Returns:
-     *     An array containing the exploded and trimmed values.
-     */
-    function comma_sep($string) {
-        $commas = explode(",", $string);
-        $trimmed = array_map("trim", $commas);
-        $cleaned = array_diff(array_unique($trimmed), array(""));
-        return $cleaned;
     }
 
     /**
@@ -1637,7 +1597,7 @@
         $filename = upload_filename($file['name'], $filter);
 
         if ($filename === false)
-            error(__("Error"), _f("Only %s files are accepted.", list_notate($filter)));
+            error(__("Error"), __("Uploaded file is of an unsupported type."));
 
         if (!is_uploaded_file($file['tmp_name']))
             show_403(__("Access Denied"), __("Only uploaded files are accepted."));

@@ -2,6 +2,15 @@
 #. Copyright 2017 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
+#: feathers/uploader/admin/help/uploader_source.twig:3
+#: feathers/uploader/admin/help/uploader_source.twig:6
+msgid "Upload Source"
+msgstr ""
+
+#: feathers/uploader/admin/help/uploader_source.twig:8
+msgid "This can be a URL that will take visitors to the original resource or it can be a human-readable description of the upload's origin."
+msgstr ""
+
 #: feathers/uploader/info.php:3
 msgid "Uploader"
 msgstr ""
@@ -31,7 +40,7 @@ msgstr ""
 msgid "You did not select any files to upload."
 msgstr ""
 
-#: feathers/uploader/uploader.php:182
+#: feathers/uploader/uploader.php:180
 msgid "Source"
 msgstr ""
 

@@ -1,4 +1,9 @@
 <?php
+    /**
+     * File: rsd
+     * Really Simple Discovery.
+     */
+
     require_once "common.php";
 
     header("Content-Type: text/xml; charset=UTF-8");

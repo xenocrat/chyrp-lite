@@ -120,12 +120,14 @@ function auto_submit() {
     });
 }
 var Route = {
-    action: "<?php echo fix(@$_GET['action'], true); ?>"
+    action: '<?php echo addslashes(@$_GET['action']); ?>'
+}
+var Visitor = {
+    token: '<?php if (same_origin()) echo token($_SERVER["REMOTE_ADDR"]); ?>'
 }
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',
     chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>',
-    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
 var Help = {
@@ -220,7 +222,7 @@ var Write = {
             $("<input>", {
                 "type": "hidden",
                 "name": "hash",
-                "value": Site.key
+                "value": Visitor.token
             })]
         ).insertAfter("#content");
 
@@ -302,14 +304,14 @@ var Settings = {
 var Extend = {
     init: function() {
         // Hide the confirmation checkbox and use a modal instead.
-        $(".module_disabler_confirm").hide();
-        $(".module_disabler").on("submit.confirm", Extend.confirm);
+        $(".module_disabler_confirm, .feather_disabler_confirm").hide();
+        $(".module_disabler, .feather_disabler").on("submit.confirm", Extend.confirm);
     },
     confirm: function(e) {
         e.preventDefault();
 
-        var id = $(e.target).parents("li.module").attr("id");
-        var name = (!!id) ? id.replace(/^module_/, "") : "" ;
+        var id = $(e.target).parents("li.module, li.feather").attr("id");
+        var name = (!!id) ? id.replace(/^(module|feather)_/, "") : "" ;
         var text = $('label[for="confirm_' + name + '"]').html();
 
         // Display the modal if the text was found, and set the checkbox to the response.

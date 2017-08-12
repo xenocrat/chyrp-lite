@@ -40,7 +40,7 @@
 {% endif %}
 </td>
 <td class="category_name name main">
-<a href="{{ category.url }}">{{ category.name | truncate }}</a>
+<a href="{{ category.url }}">{{ category.name | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="category_count value">
 {{ category.post_count }}

@@ -46,11 +46,12 @@
             return $post->quote;
         }
 
-        public function add_dash($text) {
-            return preg_replace("/(<p(\s+[^>]+)?>|^)/si", "\\1&mdash; ", $text, 1);
-        }
-
         public function feed_content($post) {
-            return "<blockquote>".$post->quote."</blockquote>".$post->source;
+            $content = '<blockquote>'.$post->quote.'</blockquote>';
+
+            if (!empty($post->source))
+                $content.= '<cite>'.$post->source.'</cite>';
+
+            return $content;
         }
     }

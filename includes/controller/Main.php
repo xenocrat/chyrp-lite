@@ -1,6 +1,6 @@
 <?php
     /**
-     * Class: Main Controller
+     * Class: MainController
      * The logic controlling the blog.
      */
     class MainController implements Controller {
@@ -477,7 +477,7 @@
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                    Flash::warning(__("Invalid security key."));
+                    Flash::warning(__("Invalid authentication token."));
 
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
@@ -600,7 +600,7 @@
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                    Flash::warning(__("Invalid security key."));
+                    Flash::warning(__("Invalid authentication token."));
 
                 fallback($_POST['login']);
                 fallback($_POST['password']);
@@ -657,7 +657,7 @@
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                    Flash::warning(__("Invalid security key."));
+                    Flash::warning(__("Invalid authentication token."));
 
                 if (!empty($_POST['new_password1']))
                     if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
@@ -712,7 +712,7 @@
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                    Flash::warning(__("Invalid security key."));
+                    Flash::warning(__("Invalid authentication token."));
 
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter your username."));
@@ -764,7 +764,7 @@
                     $posts = array();
             }
 
-            if (!is_array($posts))
+            if ($posts instanceof Paginator)
                 $posts = $posts->paginated;
 
             $latest_timestamp = 0;
@@ -773,9 +773,9 @@
                 if ($latest_timestamp < strtotime($post->created_at))
                     $latest_timestamp = strtotime($post->created_at);
 
-            $atom = new AtomFeed();
+            $feed = new BlogFeed();
 
-            $atom->open($config->name,
+            $feed->open($config->name,
                         oneof($theme->title, $config->description),
                         null,
                         $latest_timestamp);
@@ -783,27 +783,19 @@
             foreach ($posts as $post) {
                 $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
 
-                $tagged = substr(strstr(url("id/".$post->id), "//"), 2);
-                $tagged = str_replace("#", "/", $tagged);
-                $tagged = preg_replace("/(".preg_quote(parse_url($post->url(), PHP_URL_HOST)).")/",
-                                       "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
-
-                $url = $post->url();
-                $trigger->filter($url, "feed_url", $post);
-
-                $atom->entry(oneof($post->title(), ucfirst($post->feather)),
-                             $tagged,
+                $feed->entry(oneof($post->title(), ucfirst($post->feather)),
+                             url("id/post/".$post->id),
                              $post->feed_content(),
-                             $url,
+                             $post->url(),
                              $post->created_at,
                              $updated,
                              ((!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : null),
                              ((!$post->user->no_results) ? $post->user->website : null));
 
-                $trigger->call("feed_item", $post);
+                $trigger->call("feed_item", $post, $feed);
             }
 
-            $atom->close();
+            $feed->close();
         }
 
         /**
@@ -876,7 +868,7 @@
          * Function: resort
          * Queue a failpage in the event that none of the routes are successful.
          */
-        public function resort($template, $context, $title = null) {
+        public function resort($template, $context = array(), $title = "") {
             $this->fallback = array($template, $context, $title);
             return false;
         }

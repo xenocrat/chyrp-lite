@@ -40,11 +40,11 @@
 
                 if (is_array($_FILES['uploads']['name']))
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
-                            $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
-                                                        'type' => $_FILES['uploads']['type'][$i],
-                                                        'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                                        'error' => $_FILES['uploads']['error'][$i],
-                                                        'size' => $_FILES['uploads']['size'][$i]));
+                        $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
+                                                    'type' => $_FILES['uploads']['type'][$i],
+                                                    'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                                    'error' => $_FILES['uploads']['error'][$i],
+                                                    'size' => $_FILES['uploads']['size'][$i]));
                 else
                     $filenames[] = upload($_FILES['uploads']);
             } else
@@ -69,11 +69,11 @@
 
                 if (is_array($_FILES['uploads']['name']))
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
-                            $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
-                                                        'type' => $_FILES['uploads']['type'][$i],
-                                                        'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                                        'error' => $_FILES['uploads']['error'][$i],
-                                                        'size' => $_FILES['uploads']['size'][$i]));
+                        $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
+                                                    'type' => $_FILES['uploads']['type'][$i],
+                                                    'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                                    'error' => $_FILES['uploads']['error'][$i],
+                                                    'size' => $_FILES['uploads']['size'][$i]));
                 else
                     $filenames[] = upload($_FILES['uploads']);
             } else
@@ -102,7 +102,7 @@
             return $post->caption;
         }
 
-        public function enclose_uploaded($post) {
+        public function enclose_uploaded($post, $feed) {
             $config = Config::current();
 
             if ($post->feather != "uploader")
@@ -112,9 +112,7 @@
                 if (!file_exists(uploaded($filename, false)))
                     continue;
 
-                echo '<link rel="enclosure" href="'.uploaded($filename).
-                     '" title="'.fix($post->title_from_excerpt(), true).
-                     '" length="'.filesize(uploaded($filename, false)).'" />'."\n";
+                $feed->enclosure(uploaded($filename), filesize(uploaded($filename, false)));
             }
         }
 
@@ -180,6 +178,7 @@
 
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "uploader"),
+                               "help" => "uploader_source",
                                "type" => "text",
                                "value" => (isset($post) ? $post->source : ""));
 

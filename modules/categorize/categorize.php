@@ -26,9 +26,9 @@
             return $names;
         }
 
-        public function feed_item($post) {
+        public function feed_item($post, $feed) {
             if (!empty($post->category))
-                echo '<category term="'.$post->category->clean.'" label="'.fix($post->category->name, true).'" />'."\n";
+                $feed->category($post->category->clean, url("category", MainController::current()), $post->category->name);
         }
 
         public function metaWeblog_getPost($struct, $post) {
@@ -223,7 +223,7 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add categories.", "categorize"));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['name']))
                 error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"), null, 400);
@@ -255,7 +255,7 @@
 
         public function admin_update_category($admin) {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a category.", "categorize"), null, 400);
@@ -298,7 +298,7 @@
 
         public function admin_destroy_category() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);

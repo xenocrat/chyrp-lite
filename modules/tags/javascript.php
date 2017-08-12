@@ -5,7 +5,8 @@ var ChyrpTags = {
     },
     scan: function(e) {
         $(e.target).siblings("span.tags_select").children("a.tag").each(function(){
-            var regexp = new RegExp("(, ?|^)" + $(this).text() + "(, ?|$)", "g");
+            var name = $(this).html();
+            var regexp = new RegExp("(, ?|^)" + escapeRegExp(name) + "(, ?|$)", "g");
 
             if ($(e.target).val().match(regexp))
                 $(this).addClass("tag_added");
@@ -15,7 +16,7 @@ var ChyrpTags = {
     },
     add: function(e) {
         e.preventDefault();
-        var name = $(e.target).text();
+        var name = $(e.target).html();
         var tags = $(e.target).parent().siblings("input[name='tags']");
         var regexp = new RegExp("(, |^)" + escapeRegExp(name) + "(, |$)", "g");
 

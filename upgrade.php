@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2017.02");
-    define('CHYRP_CODENAME', "Swahili");
+    define('CHYRP_VERSION',  "2017.03");
+    define('CHYRP_CODENAME', "Cape");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -67,10 +67,6 @@
     # Has Chyrp Lite been upgraded?
     $upgraded = false;
 
-    # Handle a missing config file with redirect.
-    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        redirect("install.php");
-
     # Load the config settings.
     $config = Config::current();
 
@@ -93,7 +89,10 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_markdown() {
-        Config::current()->set("enable_markdown", true, true);
+        $set = Config::current()->set("enable_markdown", true, true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -103,7 +102,10 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_homepage() {
-        Config::current()->set("enable_homepage", false, true);
+        $set = Config::current()->set("enable_homepage", false, true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -113,7 +115,10 @@
      * Versions: 2015.06 => 2015.07
      */
     function add_uploads_limit() {
-        Config::current()->set("uploads_limit", 10, true);
+        $set = Config::current()->set("uploads_limit", 10, true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -123,7 +128,10 @@
      * Versions: 2015.06 => 2015.07
      */
     function remove_trackbacking() {
-        Config::current()->remove("enable_trackbacking");
+        $set = Config::current()->remove("enable_trackbacking");
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -133,7 +141,10 @@
      * Versions: 2015.07 => 2016.01
      */
     function add_admin_per_page() {
-        Config::current()->set("admin_per_page", 25, true);
+        $set = Config::current()->set("admin_per_page", 25, true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -144,7 +155,10 @@
      */
     function disable_importers() {
         $config = Config::current();
-        $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
+        $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     /**
@@ -158,6 +172,19 @@
 
         if (!$sql->count("permissions", array("id" => "export_content", "group_id" => 0)))
             $sql->insert("permissions", array("id" => "export_content", "name" => "Export Content", "group_id" => 0));
+    }
+
+    /**
+     * Function: add_feed_format
+     * Adds the feed_format config setting.
+     *
+     * Versions: 2017.02 => 2017.03
+     */
+    function add_feed_format() {
+        $set = Config::current()->set("feed_format", "AtomFeed", true);
+
+        if ($set === false)
+            $errors[] = __("Could not write the configuration file.");
     }
 
     #---------------------------------------------
@@ -239,18 +266,11 @@
                 line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
-                padding: 0em 0em 5em;
-            }
-            .window {
-                width: 30em;
-                background: #fff;
-                padding: 2em;
-                margin: 5em auto 0em;
-                border-radius: 2em;
+                padding: 0rem 0rem 5rem;
             }
             h1 {
                 font-size: 2em;
-                margin: 0.5em 0em;
+                margin: 1rem 0rem;
                 text-align: center;
                 line-height: 1;
             }
@@ -261,7 +281,14 @@
                 font-size: 1.25em;
                 text-align: center;
                 font-weight: bold;
-                margin: 0.75em 0em;
+                margin: 1rem 0rem;
+            }
+            p {
+                margin-bottom: 1rem;
+            }
+            p:last-child,
+            p:empty {
+                margin-bottom: 0em;
             }
             code {
                 font-family: "Hack webfont", monospace;
@@ -273,28 +300,22 @@
             }
             strong {
                 font-weight: normal;
-                color: #f00;
+                color: #d94c4c;
             }
             ul, ol {
-                margin: 0em 0em 2em 2em;
+                margin: 0rem 0rem 2rem 2rem;
                 list-style-position: outside;
             }
             li {
-                margin-bottom: 1em;
-            }
-            a:link, a:visited {
-                color: #4a4747;
-            }
-            a:hover, a:focus {
-                color: #1e57ba;
+                margin-bottom: 1rem;
             }
             pre.pane {
-                height: 15em;
+                height: 15rem;
                 overflow-y: auto;
-                margin: 1em -2em 1em -2em;
-                padding: 2em;
+                margin: 1rem -2rem 1rem -2rem;
+                padding: 2rem;
                 background: #4a4747;
-                color: #fff;
+                color: #ffffff;
             }
             pre.pane:empty {
                 display: none;
@@ -302,11 +323,13 @@
             pre.pane:empty + h1 {
                 margin-top: 0em;
             }
-            span.yay {
-                color: #76b362;
+            a:link,
+            a:visited {
+                color: #4a4747;
             }
-            span.boo {
-                color: #d94c4c;
+            a:hover,
+            a:focus {
+                color: #1e57ba;
             }
             a.big,
             button {
@@ -318,7 +341,7 @@
                 color: #4a4747;
                 text-decoration: none;
                 line-height: 1.25;
-                margin: 0.75em 0em;
+                margin: 1rem 0rem;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;
                 border: 1px solid #b8cdd9;
@@ -342,15 +365,19 @@
                 border-color: #1e57ba;
                 outline: none;
             }
-            p {
-                margin-bottom: 1em;
-            }
             aside {
-                margin-bottom: 1em;
+                margin-bottom: 1rem;
                 padding: 0.5em 1em;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
                 background-color: #fffecd;
+            }
+            .window {
+                width: 30rem;
+                background: #ffffff;
+                padding: 2rem;
+                margin: 5rem auto 0rem auto;
+                border-radius: 2rem;
             }
         </style>
     </head>
@@ -362,7 +389,7 @@
     # Upgrading Starts
     #---------------------------------------------
 
-    if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes") or (isset($_GET['upgrade']) and $_GET['upgrade'] == "yes")) {
+    if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes")) {
         # Perform core upgrade tasks.
         add_markdown();
         add_homepage();
@@ -371,6 +398,7 @@
         add_admin_per_page();
         disable_importers();
         add_export_content();
+        add_feed_format();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
@@ -382,6 +410,7 @@
             if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
 
+        @unlink(INCLUDES_DIR.DIR."upgrading.lock");
         $upgraded = true;
     }
 

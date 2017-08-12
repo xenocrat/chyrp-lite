@@ -1,6 +1,6 @@
 <?php
     /**
-     * File: Download
+     * File: download
      * Send an uploaded file to the visitor as a file attachment.
      */
 

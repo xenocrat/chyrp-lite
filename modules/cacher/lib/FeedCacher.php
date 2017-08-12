@@ -6,7 +6,7 @@
             $this->url  = $url;
             $this->user = Visitor::current()->id;
             $this->path = $this->base.DIR.$this->user;
-            $this->file = $this->path.DIR.token($this->url).".atom";
+            $this->file = $this->path.DIR.token($this->url).".feed";
 
             # If the directories do not exist and cannot be created, or are not writable, cancel execution.
             if (((!is_dir($this->base) and !@mkdir($this->base)) or !is_writable($this->base)) or
@@ -40,7 +40,7 @@
                 $contents = @file_get_contents($this->file);
 
                 if ($contents !== false and $contents !== "") {
-                    header("Content-Type: application/atom+xml; charset=UTF-8");
+                    header("Content-Type: ".BlogFeed::type()."; charset=UTF-8");
                     header("Last-Modified: ".date("r", filemtime($this->file)));
                     exit($contents);
                 }
@@ -63,7 +63,7 @@
             if (DEBUG)
                 error_log("REGENERATING feed caches");
 
-            foreach ((array) glob($this->base.DIR."*".DIR."*.atom") as $file)
+            foreach ((array) glob($this->base.DIR."*".DIR."*.feed") as $file)
                 @unlink($file);
         }
 
@@ -73,7 +73,7 @@
             if (DEBUG)
                 error_log("REGENERATING feed caches for user ID ".$user);
 
-            foreach ((array) glob($this->base.DIR.$user.DIR."*.atom") as $file)
+            foreach ((array) glob($this->base.DIR.$user.DIR."*.feed") as $file)
                 @unlink($file);
         }
 
@@ -83,7 +83,7 @@
             if (DEBUG)
                 error_log("REGENERATING feed caches for URL ".$url);
 
-            foreach ((array) glob($this->base.DIR."*".DIR.token($url).".atom") as $file)
+            foreach ((array) glob($this->base.DIR."*".DIR.token($url).".feed") as $file)
                 @unlink($file);
         }
     }

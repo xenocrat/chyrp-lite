@@ -1,7 +1,7 @@
 <?php 
     class Sitemap extends Modules {
         public function __init() {
-            if (!isset($_SERVER["DOCUMENT_ROOT"]))
+            if (!isset($_SERVER['DOCUMENT_ROOT']))
                 cancel_module("sitemap", __("Sitemap module cannot determine the server's document root.", "sitemap"));
 
             $actions = array("add_post",
@@ -47,7 +47,7 @@
                                                                    "never"   => __("Never", "sitemap"))));
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['blog_changefreq'], "daily");
             fallback($_POST['pages_changefreq'], "yearly");
@@ -93,35 +93,35 @@
             $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             $xml.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
 
-            $xml.= "  <url>\n".
-                   "    <loc>".$config->url."/</loc>\n".
-                   "    <lastmod>".when("c", time())."</lastmod>\n".
-                   "    <changefreq>".$settings["blog_changefreq"]."</changefreq>\n".
-                   "  </url>\n";
+            $xml.= '<url>'."\n".
+                   '<loc>'.$config->url.'/</loc>'."\n".
+                   '<lastmod>'.when("c", time()).'</lastmod>'."\n".
+                   '<changefreq>'.$settings["blog_changefreq"].'</changefreq>'."\n".
+                   '</url>'."\n";
 
             foreach ($posts as $post) {
                 $lastmod = ($post->updated) ? $post->updated_at : $post->created_at ;
 
-                $xml.= "  <url>\n".
-                       "    <loc>".$post->url()."</loc>\n".
-                       "    <lastmod>".when("c", $lastmod)."</lastmod>\n".
-                       "    <changefreq>".$settings["posts_changefreq"]."</changefreq>\n".
-                       "    <priority>".(($post->pinned) ? "1.0" : "0.5")."</priority>\n".
-                       "  </url>\n";
+                $xml.= '<url>'."\n".
+                       '<loc>'.$post->url().'</loc>'."\n".
+                       '<lastmod>'.when("c", $lastmod).'</lastmod>'."\n".
+                       '<changefreq>'.$settings["posts_changefreq"].'</changefreq>'."\n".
+                       '<priority>'.(($post->pinned) ? "1.0" : "0.5").'</priority>'."\n".
+                       '</url>'."\n";
             }
 
             foreach ($pages as $page) {
                 $lastmod = ($page->updated) ? $page->updated_at : $page->created_at ;
 
-                $xml.= "  <url>\n".
-                       "    <loc>".$page->url()."</loc>\n".
-                       "    <lastmod>".when("c", $lastmod)."</lastmod>\n".
-                       "    <changefreq>".$settings["pages_changefreq"]."</changefreq>\n".
-                       "  </url>\n";
+                $xml.= '<url>'."\n".
+                       '<loc>'.$page->url().'</loc>'."\n".
+                       '<lastmod>'.when("c", $lastmod).'</lastmod>'."\n".
+                       '<changefreq>'.$settings["pages_changefreq"].'</changefreq>'."\n".
+                       '</url>'."\n";
             }
 
-            $xml.= "</urlset>";
+            $xml.= '</urlset>'."\n";
 
-            @file_put_contents($_SERVER["DOCUMENT_ROOT"].DIR."sitemap.xml", $xml);
+            @file_put_contents($_SERVER['DOCUMENT_ROOT'].DIR."sitemap.xml", $xml);
         }
     }

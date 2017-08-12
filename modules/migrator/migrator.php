@@ -21,28 +21,29 @@
         public function admin_import_wordpress() {
             $config = Config::current();
             $trigger = Trigger::current();
+            $visitor = Visitor::current();
 
-            if (!Visitor::current()->group->can("add_post"))
+            if (!$visitor->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
                 redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled("text"))
                 error(__("Missing Feather", "migrator"),
-                      __("Importing from WordPress requires the Text feather to be installed and enabled.", "migrator"), null, 501);
+                      __("Text feather must be enabled to import from WordPress.", "migrator"), null, 501);
 
             if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
                 error(__("Error"), __("You must select a WordPress export file.", "migrator"), null, 422);
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+            if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
+                ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
+                set_time_limit(600);
 
             $stupid_xml = file_get_contents($_FILES['xml_file']['tmp_name']);
 
@@ -85,34 +86,30 @@
                            substr_count($xml->channel->generator, "wordpress.com")))
                 Flash::warning(__("The file does not seem to be a valid WordPress export file.", "migrator"), "manage_migration");
 
-            foreach ($xml->channel->item as $item) {
-                $wordpress = $item->children("http://wordpress.org/export/1.2/");
-                $content   = $item->children("http://purl.org/rss/1.0/modules/content/");
-                $contentencoded = $content->encoded;
+            foreach ($xml->channel->item as $post) {
+                $wordpress = $post->children("http://wordpress.org/export/1.2/");
+                $content   = $post->children("http://purl.org/rss/1.0/modules/content/");
+                $encoded   = $content->encoded;
 
-                if ($wordpress->post_type == "attachment" or $wordpress->status == "attachment" or $item->title == "zz_placeholder")
+                if ($wordpress->post_type == "attachment" or $wordpress->status == "attachment" or $post->title == "zz_placeholder")
                     continue;
-
-                $media = array();
 
                 if (!empty($_POST['media_url'])) {
                     $regexp_url = preg_quote($_POST['media_url'], "/");
 
                     if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                       $contentencoded,
+                                       $encoded,
                                        $media)) {
                         $media_uris = array_unique($media[0]);
 
                         foreach ($media_uris as $matched_url) {
                             $filename = upload_from_url($matched_url);
-                            $contentencoded = str_replace($matched_url, uploaded($filename), $contentencoded);
+                            $encoded = str_replace($matched_url, uploaded($filename), $encoded);
                         }
                     }
                 }
 
-                $clean = (isset($wordpress->post_name) && $wordpress->post_name != '') ? $wordpress->post_name : sanitize($item->title) ;
-
-                $pinned = (isset($wordpress->is_sticky)) ? $wordpress->is_sticky : 0 ;
+                $clean = sanitize(oneof($wordpress->post_name, $post->title), true, true, 80);
 
                 if (empty($wordpress->post_type) or $wordpress->post_type == "post") {
                     $status_translate = array("publish" => "public",
@@ -124,57 +121,33 @@
                                               "future"  => "draft",
                                               "pending" => "draft");
 
-                    $data = array("content" => array("title" => trim($item->title),
-                                                     "body" => trim($contentencoded),
-                                                     "imported_from" => "wordpress"),
-                                  "feather" => "text");
+                    $new_post = Post::add(array("title" => trim($post->title),
+                                                "body" => trim($encoded),
+                                                "imported_from" => "wordpress"),
+                                          $clean,
+                                          Post::check_url($clean),
+                                          "text",
+                                          null,
+                                          (isset($wordpress->is_sticky)) ? (bool) (int) $wordpress->is_sticky : false,
+                                          $status_translate[(string) $wordpress->status],
+                                          (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
+                                          null,
+                                          false);
 
-                    $wp_post_format = null;
+                    $trigger->call("import_wordpress_post", $post, $new_post);
 
-                    if (isset($item->category)) {
-                        foreach ($item->category as $category) {
-                            if (!empty($category) and
-                                isset($category->attributes()->domain) and
-                                (substr_count($category->attributes()->domain, "post_format") > 0) and
-                                isset($category->attributes()->nicename)
-                            ) {
-                                $wp_post_format = (string) $category->attributes()->nicename;
-                                break;
-                            }
-                        }
-                    }
+                } elseif ($wordpress->post_type == "page" and $visitor->group->can("add_page")) {
+                    $new_page = Page::add(trim($post->title),
+                                          trim($encoded),
+                                          null,
+                                          0,
+                                          true,
+                                          0,
+                                          $clean,
+                                          Page::check_url($clean),
+                                          (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date));
 
-                    if ($wp_post_format) {
-                        $trigger->filter($data,
-                                         "import_wordpress_post_".str_replace('post-format-', '', $wp_post_format),
-                                         $item);
-                    }
-
-                    $post = Post::add($data["content"],
-                                      $clean,
-                                      Post::check_url($clean),
-                                      $data["feather"],
-                                      null,
-                                      $pinned,
-                                      $status_translate[(string) $wordpress->status],
-                                      (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
-                                      null,
-                                      false);
-
-                    $trigger->call("import_wordpress_post", $item, $post);
-
-                } elseif ($wordpress->post_type == "page") {
-                    $page = Page::add(trim($item->title),
-                                      trim($content->encoded),
-                                      null,
-                                      0,
-                                      true,
-                                      0,
-                                      $clean,
-                                      Page::check_url($clean),
-                                      (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date));
-
-                    $trigger->call("import_wordpress_page", $item, $page);
+                    $trigger->call("import_wordpress_page", $post, $new_page);
                 }
             }
 
@@ -187,6 +160,7 @@
          */
         public function admin_import_tumblr() {
             $config = Config::current();
+            $trigger = Trigger::current();
 
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
@@ -195,29 +169,22 @@
                 redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (!feather_enabled("text") or
-                !feather_enabled("video") or
-                !feather_enabled("photo") or
-                !feather_enabled("quote") or
-                !feather_enabled("link"))
+            if (!feather_enabled("text") or !feather_enabled("photo") or !feather_enabled("quote") or !feather_enabled("link"))
                 error(__("Missing Feather", "migrator"),
-                      __("Importing from Tumblr requires the Text, Video, Photo, Quote, and Link feathers to be installed and enabled.", "migrator"), null, 501);
+                      __("Text, Photo, Quote, and Link feathers must be enabled to import from Tumblr.", "migrator"), null, 501);
 
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
                 error(__("Error"), __("Invalid URL.", "migrator"), null, 422);
 
-            if (!preg_match("/^(http(s)?:\/\/)?(www\.)?[a-z0-9][a-z0-9-]+[a-z0-9]+\.tumblr\.com(\/)?$/i", $_POST['tumblr_url']))
-                error(__("Error"), __("Invalid Tumblr URL.", "migrator"), null, 422);
-
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+            if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
+                ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
+                set_time_limit(600);
 
             $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
             $api = preg_replace("/<(\/?)([a-z]+)\-([a-z]+)/", "<\\1\\2_\\3", get_remote($url));
@@ -256,50 +223,50 @@
             usort($posts, "reverse");
 
             foreach ($posts as $key => $post) {
-                if ($post->attributes()->type == "audio")
-                    break; # Can't import Audio posts since Tumblr has the files locked in to Amazon.
-
-                $translate_types = array("regular" => "text", "conversation" => "text");
-                $clean = "";
-
                 switch($post->attributes()->type) {
                     case "regular":
+                        $feather = "text";
                         $title = fallback($post->regular_title);
                         $values = array("title" => $title,
                                         "body" => $post->regular_body);
-                        $clean = sanitize($title);
-                        break;
-                    case "video":
-                        $values = array("embed" => $post->video_player,
-                                        "description" => fallback($post->video_caption));
+                        $clean = sanitize($title, true, true, 80);
                         break;
                     case "conversation":
+                        $feather = "text";
                         $title = fallback($post->conversation_title);
-
                         $lines = array();
+
                         foreach ($post->conversation_line as $line)
                             $lines[] = $line->attributes()->label." ".$line;
 
                         $values = array("title" => $title,
                                         "body" => implode("<br>", $lines));
-                        $clean = sanitize($title);
+                        $clean = sanitize($title, true, true, 80);
                         break;
                     case "photo":
+                        $feather = "photo";
                         $values = array("filename" => upload_from_url($post->photo_url[0]),
                                         "caption" => fallback($post->photo_caption));
+                        $clean = sanitize($post->photo_caption, true, true, 80);
                         break;
                     case "quote":
+                        $feather = "quote";
                         $values = array("quote" => $post->quote_text,
-                                        "source" => preg_replace("/^&mdash; /", "",
-                                                                 fallback($post->quote_source)));
+                                        "source" => preg_replace("/^&mdash; /", "", fallback($post->quote_source)));
+                        $clean = sanitize($post->quote_source, true, true, 80);
                         break;
                     case "link":
+                        $feather = "link";
                         $name = fallback($post->link_text);
                         $values = array("name" => $name,
                                         "source" => $post->link_url,
                                         "description" => fallback($post->link_description));
-                        $clean = sanitize($name);
+                        $clean = sanitize($name, true, true, 80);
                         break;
+                    default:
+                        # Cannot import Audio posts because Tumblr has the files locked in to Amazon.
+                        # Cannot import Video posts because Tumblr does not reliably expose a source URL.
+                        continue 2;
                 }
 
                 $values["imported_from"] = "tumblr";
@@ -307,7 +274,7 @@
                 $new_post = Post::add($values,
                                       $clean,
                                       Post::check_url($clean),
-                                      fallback($translate_types[(string) $post->attributes()->type], (string) $post->attributes()->type),
+                                      $feather,
                                       null,
                                       null,
                                       "public",
@@ -315,7 +282,7 @@
                                       null,
                                       false);
 
-                Trigger::current()->call("import_tumble", $post, $new_post);
+                $trigger->call("import_tumble", $post, $new_post);
             }
 
             Flash::notice(__("Tumblr content successfully imported!", "migrator"), "manage_migration");
@@ -336,7 +303,11 @@
                 redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (!feather_enabled("text"))
+                error(__("Missing Feather", "migrator"),
+                      __("Text feather must be enabled to import from TextPattern.", "migrator"), null, 501);
 
             if (empty($_POST['host']))
                 error(__("Error"), __("Host cannot be empty.", "migrator"), null, 422);
@@ -350,11 +321,11 @@
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "migrator"), null, 422);
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+            if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
+                ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
+                set_time_limit(600);
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
@@ -364,7 +335,10 @@
             $mysqli->query("SET NAMES 'utf8'");
 
             $prefix = $mysqli->real_escape_string(fallback($_POST['prefix'], ""));
-            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC") or error(__("Database Error", "migrator"), fix($mysqli->error));
+            $result = $mysqli->query("SELECT * FROM {$prefix}textpattern ORDER BY ID ASC");
+
+            if ($result === false)
+                error(__("Database Error", "migrator"), fix($mysqli->error));
 
             $posts = array();
 
@@ -392,7 +366,7 @@
                                           4 => "public",
                                           5 => "public");
 
-                $clean = fallback($post["url_title"], sanitize($post["Title"]));
+                $clean = sanitize(fallback($post["url_title"], $post["Title"]), true, true, 80);
 
                 $new_post = Post::add(array("title" => $post["Title"],
                                             "body" => $post["Body"],
@@ -429,7 +403,11 @@
                 redirect("manage_migration");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (!feather_enabled("text"))
+                error(__("Missing Feather", "migrator"),
+                      __("Text feather must be enabled to import from MovableType.", "migrator"), null, 501);
 
             if (empty($_POST['host']))
                 error(__("Error"), __("Host cannot be empty.", "migrator"), null, 422);
@@ -443,11 +421,11 @@
             if (empty($_POST['database']))
                 error(__("Error"), __("Database cannot be empty.", "migrator"), null, 422);
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+            if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
+                ini_set("memory_limit", "100M");
 
             if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
+                set_time_limit(600);
 
             @$mysqli = new mysqli($_POST['host'], $_POST['username'], $_POST['password'], $_POST['database']);
 
@@ -456,30 +434,10 @@
 
             $mysqli->query("SET NAMES 'utf8'");
 
-            $authors = array();
-            $result = $mysqli->query("SELECT * FROM mt_author ORDER BY author_id ASC") or error(__("Database Error", "migrator"), fix($mysqli->error));
+            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC");
 
-            while ($author = $result->fetch_assoc()) {
-                # Try to figure out if this author is the same as the person doing the import.
-                if ($author["author_name"] == $visitor->login
-                    || $author["author_nickname"] == $visitor->login
-                    || $author["author_nickname"] == $visitor->full_name
-                    || $author["author_url"]      == $visitor->website
-                    || $author["author_email"]    == $visitor->email) {
-                    $users[$author["author_id"]] = $visitor;
-                } else {
-                    $users[$author["author_id"]] = User::add($author["author_name"],
-                                                             $author["author_password"],
-                                                             $author["author_email"],
-                                                             ($author["author_nickname"] != $author["author_name"] ? $author["author_nickname"] : ""),
-                                                             $author["author_url"],
-                                                             ($author["author_can_create_blog"] == "1" ? $visitor->group : null),
-                                                             ($config->email_activation) ? false : true,
-                                                             $author["author_created_on"]);
-                }
-            }
-
-            $result = $mysqli->query("SELECT * FROM mt_entry ORDER BY entry_id ASC") or error(__("Database Error", "migrator"), fix($mysqli->error));
+            if ($result === false)
+                error(__("Database Error", "migrator"), fix($mysqli->error));
 
             $posts = array();
 
@@ -489,6 +447,11 @@
             $mysqli->close();
 
             foreach ($posts as $post) {
+                fallback($post["entry_authored_on"]);
+                fallback($post["entry_created_on"]);
+                fallback($post["entry_modified_on"]);
+                fallback($post["entry_class"]);
+
                 $body = $post["entry_text"];
 
                 if (!empty($post["entry_text_more"]))
@@ -511,7 +474,7 @@
                                           3 => "draft",
                                           4 => "draft");
 
-                $clean = oneof($post["entry_basename"], sanitize($post["entry_title"]));
+                $clean = sanitize(fallback($post["entry_basename"], $post["entry_title"]), true, true, 80);
 
                 if (empty($post["entry_class"]) or $post["entry_class"] == "entry") {
                     $new_post = Post::add(array("title" => $post["entry_title"],
@@ -520,16 +483,28 @@
                                           $clean,
                                           Post::check_url($clean),
                                           "text",
-                                          @$users[$post["entry_author_id"]],
+                                          null,
                                           false,
                                           $status_translate[$post["entry_status"]],
-                                          oneof(@$post["entry_authored_on"], @$post["entry_created_on"], datetime()),
+                                          oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
                                           $post["entry_modified_on"],
                                           false);
-                    $trigger->call("import_movabletype_post", $post, $new_post, $link);
-                } elseif (@$post["entry_class"] == "page") {
-                    $new_page = Page::add($post["entry_title"], $body, null, 0, true, 0, $clean, Page::check_url($clean));
-                    $trigger->call("import_movabletype_page", $post, $new_page, $link);
+
+                    $trigger->call("import_movabletype_post", $post, $new_post);
+
+                } elseif ($post["entry_class"] == "page" and $visitor->group->can("add_page")) {
+                    $new_page = Page::add($post["entry_title"],
+                                          $body,
+                                          null,
+                                          0,
+                                          true,
+                                          0,
+                                          $clean,
+                                          Page::check_url($clean),
+                                          oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
+                                          $post["entry_modified_on"]);
+
+                    $trigger->call("import_movabletype_page", $post, $new_page);
                 }
             }
 

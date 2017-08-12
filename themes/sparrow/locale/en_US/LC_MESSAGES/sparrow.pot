@@ -24,6 +24,11 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
+#: themes/sparrow/content/post.twig:8
+#: themes/sparrow/pages/view.twig:21
+msgid "[Untitled]"
+msgstr ""
+
 #: themes/sparrow/content/post.twig:11
 msgid "Tags"
 msgstr ""

@@ -20,6 +20,11 @@ msgstr ""
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr ""
 
+#: themes/umbra/content/post.twig:7
+#: themes/umbra/pages/view.twig:11
+msgid "[Untitled]"
+msgstr ""
+
 #: themes/umbra/content/post.twig:10
 msgid "Tags"
 msgstr ""

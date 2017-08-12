@@ -9,7 +9,7 @@ msgid "Canonical URL"
 msgstr ""
 
 #: admin/help/canonical_url.twig:8
-msgid "If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to keep Chyrp Lite isolated in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
+msgid "If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to have Chyrp Lite in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
 msgstr ""
 
 #: admin/help/canonical_url.twig:12
@@ -40,7 +40,7 @@ msgstr ""
 #: admin/help/markdown.twig:3
 #: admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13
-#: admin/pages/content_settings.twig:70
+#: admin/pages/content_settings.twig:78
 msgid "Markdown"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgstr ""
 
 #: admin/help/unicode_emoticons.twig:3
 #: admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:62
+#: admin/pages/content_settings.twig:70
 msgid "Unicode Emoticons"
 msgstr ""
 
@@ -169,23 +169,23 @@ msgstr ""
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:144
+#: admin/javascripts/admin.js.php:146
 msgid "Help"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:150
 #: admin/javascripts/admin.js.php:152
-#: admin/javascripts/admin.js.php:240
+#: admin/javascripts/admin.js.php:154
 #: admin/javascripts/admin.js.php:242
+#: admin/javascripts/admin.js.php:244
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:172
-#: admin/javascripts/admin.js.php:173
+#: admin/javascripts/admin.js.php:174
+#: admin/javascripts/admin.js.php:175
 msgid "Preview this field"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:233
+#: admin/javascripts/admin.js.php:235
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
@@ -242,38 +242,42 @@ msgid "(Megabytes)"
 msgstr ""
 
 #: admin/pages/content_settings.twig:41
+msgid "Feed Format"
+msgstr ""
+
+#: admin/pages/content_settings.twig:49
 msgid "Send Pingbacks"
 msgstr ""
 
-#: admin/pages/content_settings.twig:44
+#: admin/pages/content_settings.twig:52
 msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
-#: admin/pages/content_settings.twig:48
+#: admin/pages/content_settings.twig:56
 msgid "XML-RPC Support"
 msgstr ""
 
-#: admin/pages/content_settings.twig:51
+#: admin/pages/content_settings.twig:59
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr ""
 
-#: admin/pages/content_settings.twig:55
+#: admin/pages/content_settings.twig:63
 msgid "Ajax"
 msgstr ""
 
-#: admin/pages/content_settings.twig:58
+#: admin/pages/content_settings.twig:66
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
-#: admin/pages/content_settings.twig:66
+#: admin/pages/content_settings.twig:74
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:74
+#: admin/pages/content_settings.twig:82
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:79
+#: admin/pages/content_settings.twig:87
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:68

@@ -71,14 +71,16 @@
             if ($this->no_results)
                 return false;
 
+            $title = strip_tags($title);
+
             SQL::current()->update("pingbacks",
                                    array("id"    => $this->id),
-                                   array("title" => strip_tags($title)));
+                                   array("title" => $title));
 
             $pingback = new self(null, array("read_from" => array("id"         => $this->id,
                                                                   "post_id"    => $this->post_id,
                                                                   "source"     => $this->source,
-                                                                  "title"      => strip_tags($title),
+                                                                  "title"      => $title,
                                                                   "created_at" => $this->created_at)));
 
             Trigger::current()->call("update_pingback", $pingback, $this);

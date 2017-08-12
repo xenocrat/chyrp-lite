@@ -55,7 +55,7 @@
 
         public function admin_update_pingback($admin) {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a pingback.", "pingable"), null, 400);
@@ -93,7 +93,7 @@
 
         public function admin_destroy_pingback() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a pingback.", "pingable"), null, 400);
@@ -201,11 +201,11 @@
                                                 array("post_id" => $post->id))->fetchAll();
 
             foreach ($pingbacks as $pingback) {
-                $atom.= "        <chyrp:pingback>\r";
-                $atom.= '            <title type="html">'.fix($pingback["title"], false, true).'</title>'."\r";
-                $atom.= '            <link href="'.fix($pingback["source"], true).'" />'."\r";
-                $atom.= '            <published>'.when("c", $pingback["created_at"]).'</published>'."\r";
-                $atom.= "        </chyrp:pingback>\r";
+                $atom.= '<chyrp:pingback>'."\n";
+                $atom.= '<title type="html">'.fix($pingback["title"], false, true).'</title>'."\n";
+                $atom.= '<link rel="via" href="'.fix($pingback["source"], true).'" />'."\n";
+                $atom.= '<published>'.when("c", $pingback["created_at"]).'</published>'."\n";
+                $atom.= '</chyrp:pingback>'."\n";
             }
 
             return $atom;

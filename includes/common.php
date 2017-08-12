@@ -1,11 +1,11 @@
 <?php
     /**
-     * File: Common
+     * File: common
      *
-     * Chyrp Lite: An ultra-lightweight blogging engine.
+     * Chyrp Lite: An ultra-lightweight blogging engine, written in PHP.
      *
      * Version:
-     *     v2017.02
+     *     v2017.03
      *
      * Copyright:
      *     Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi,
@@ -45,11 +45,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2017.02");
+    define('CHYRP_VERSION', "2017.03");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Swahili");
+    define('CHYRP_CODENAME', "Cape");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
@@ -204,6 +204,10 @@
     # Defines the Captcha interface.
     require_once INCLUDES_DIR.DIR."interface".DIR."Captcha.php";
 
+    # File: FeedGenerator
+    # Defines the FeedGenerator interface.
+    require_once INCLUDES_DIR.DIR."interface".DIR."FeedGenerator.php";
+
     # File: Config
     # See Also:
     #     <Config>
@@ -299,21 +303,30 @@
     #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
-    # Handle a missing config file.
+    # Exit if an upgrade is in progress.
+    if (file_exists(INCLUDES_DIR.DIR."upgrading.lock"))
+        error(__("Service Unavailable"),
+              __("This resource is temporarily unable to serve your request."), null, 503);
+
+    # Exit if the config file is missing.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        error(__("Error"), __("This resource cannot respond because it is not configured."), null, 501);
+        error(__("Service Unavailable"),
+              __("This resource cannot respond because it is not configured."), null, 503);
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
-
-    # Register our autoloader.
-    spl_autoload_register("autoload");
 
     # Load the config settings.
     $config = Config::current();
 
     # Prepare the SQL interface.
     $sql = SQL::current();
+
+    # Register our autoloader.
+    spl_autoload_register("autoload");
+
+    # Register our feed alias.
+    class_alias($config->feed_format, "BlogFeed");
 
     # Set the timezone for date(), etc.
     set_timezone($config->timezone);

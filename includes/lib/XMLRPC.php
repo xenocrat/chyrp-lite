@@ -72,7 +72,7 @@
                 return new IXR_Error(16, __("You have not published at that URL."));
 
             # Get the title and body of the page.
-            preg_match("/<title>([^<]+)<\/title>/i", $content, $title);
+            preg_match("/<title[^>]*>([^<]+)<\/title>/i", $content, $title);
             preg_match("/<body[^>]*>(.+)<\/body>/is", $content, $body);
             preg_match("/<meta charset=[\"\']?([^ \"\'\/>]+)/i", $content, $charset);
 

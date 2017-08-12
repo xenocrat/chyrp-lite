@@ -78,7 +78,7 @@
 
         private function add_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"), null, 400);
@@ -131,7 +131,7 @@
 
         private function update_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a comment.", "comments"), null, 400);
@@ -228,7 +228,7 @@
 
         public function admin_destroy_comment() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
@@ -331,7 +331,7 @@
                 return $admin->display("pages".DIR."comment_settings");
 
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['default_comment_status'], "denied");
             fallback($_POST['allowed_comment_html'], "");
@@ -461,7 +461,7 @@
 
         public function admin_bulk_comments() {
             if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                show_403(__("Access Denied"), __("Invalid security key."));
+                show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $from = (isset($_POST['from'])) ? $_POST['from'] : "manage_comments" ;
 
@@ -592,7 +592,7 @@
                     exit;
                 case "destroy_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                        show_403(__("Access Denied"), __("Invalid security key."));
+                        show_403(__("Access Denied"), __("Invalid authentication token."));
 
                     if (empty($_POST['id']) or !is_numeric($_POST['id']))
                         error(__("Error"), __("An ID is required to delete a comment.", "comments"), null, 400);
@@ -606,10 +606,10 @@
                         show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
 
                     Comment::delete($comment->id);
-                    json_response(__("Comment deleted.", "comments"));
+                    json_response(__("Comment deleted.", "comments"), true);
                 case "edit_comment":
                     if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
-                        show_403(__("Access Denied"), __("Invalid security key."));
+                        show_403(__("Access Denied"), __("Invalid authentication token."));
 
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                         error(__("Error"), __("An ID is required to edit a comment.", "comments"), null, 400);
@@ -636,15 +636,15 @@
             $post = $context["post"];
             $comments = $post->comments;
             $latest_timestamp = 0;
-            $subtitle = _f("Comments on &#8220;%s&#8221;", fix(oneof($post->title(), $post->url)), "comments");
+            $subtitle = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
 
             foreach ($comments as $comment)
                 if (strtotime($comment->created_at) > $latest_timestamp)
                     $latest_timestamp = strtotime($comment->created_at);
 
-            $atom = new AtomFeed();
+            $feed = new BlogFeed();
 
-            $atom->open(Config::current()->name,
+            $feed->open(Config::current()->name,
                         $subtitle,
                         null,
                         $latest_timestamp);
@@ -652,13 +652,8 @@
             foreach ($comments as $comment) {
                 $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
 
-                $tagged = substr(strstr(url("id/".$comment->post->id)."#comment_".$comment->id, "//"), 2);
-                $tagged = str_replace("#", "/", $tagged);
-                $tagged = preg_replace("/(".preg_quote(parse_url($comment->post->url(), PHP_URL_HOST)).")/",
-                                       "\\1,".when("Y-m-d", $updated).":", $tagged, 1);
-
-                $atom->entry(_f("Comment #%d", $comment->id, "comments"),
-                             $tagged,
+                $feed->entry(_f("Comment #%d", $comment->id, "comments"),
+                             url("comment/".$comment->id),
                              $comment->body,
                              $comment->post->url()."#comment_".$comment->id,
                              $comment->created_at,
@@ -666,10 +661,10 @@
                              $comment->author,
                              $comment->author_url);
 
-                $trigger->call("comments_feed_item", $comment);
+                $trigger->call("comments_feed_item", $comment, $feed);
             }
 
-            $atom->close();
+            $feed->close();
         }
 
         public function metaWeblog_getPost($struct, $post) {
@@ -838,21 +833,22 @@
             foreach ($comments as $comment) {
                 $updated = ($comment->updated) ? $comment->updated_at : $comment->created_at ;
 
-                $atom.= "        <chyrp:comment>\r".
-                        '            <updated>'.when("c", $updated).'</updated>'."\r".
-                        '            <published>'.when("c", $comment->created_at).'</published>'."\r".
-                        '            <author chyrp:user_id="'.$comment->user_id.'">'."\r".
-                        "                <name>".fix($comment->author, false, true)."</name>\r".
-                        "                <uri>".fix($comment->author_url, false, true)."</uri>\r".
-                        "                <email>".fix($comment->author_email, false, true)."</email>\r".
-                        "                <chyrp:login>".($comment->user->no_results ?
-                                                "" : fix($comment->user->login, false, true))."</chyrp:login>\r".
-                        "                <chyrp:ip>".fix(long2ip($comment->author_ip), false, true)."</chyrp:ip>\r".
-                        "                <chyrp:agent>".fix($comment->author_agent, false, true)."</chyrp:agent>\r".
-                        "            </author>\r".
-                        "            <content>".fix($comment->body, false, true)."</content>\r".
-                        "            <chyrp:status>".fix($comment->status, false, true)."</chyrp:status>\r".
-                        "        </chyrp:comment>\r";
+                $atom.= '<chyrp:comment>'."\n".
+                        '<updated>'.when("c", $updated).'</updated>'."\n".
+                        '<published>'.when("c", $comment->created_at).'</published>'."\n".
+                        '<author chyrp:user_id="'.$comment->user_id.'">'."\n".
+                        '<name>'.fix($comment->author, false, true).'</name>'."\n".
+                        '<uri>'.fix($comment->author_url, false, true).'</uri>'."\n".
+                        '<email>'.fix($comment->author_email, false, true).'</email>'."\n".
+                        '<chyrp:login>'.($comment->user->no_results ?
+                            "" :
+                            fix($comment->user->login, false, true)).'</chyrp:login>'."\n".
+                        '<chyrp:ip>'.fix(long2ip($comment->author_ip), false, true).'</chyrp:ip>'."\n".
+                        '<chyrp:agent>'.fix($comment->author_agent, false, true).'</chyrp:agent>'."\n".
+                        '</author>'."\n".
+                        '<content type="html">'.fix($comment->body, false, true).'</content>'."\n".
+                        '<chyrp:status>'.fix($comment->status, false, true).'</chyrp:status>'."\n".
+                        '</chyrp:comment>'."\n";
             }
 
             return $atom;

@@ -29,7 +29,7 @@
 
         # Variable: $error
         # Holds an error message from the last attempted query.
-        public $error = "";
+        public $error = null;
 
         /**
          * Function: __construct
@@ -86,7 +86,7 @@
                                                 "dbname=".$this->database,
                                                 $this->username,
                                                 $this->password,
-                                                array(PDO::ATTR_PERSISTENT => true));
+                                                array(PDO::ATTR_PERSISTENT => false));
 
                         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     } catch (PDOException $error) {
@@ -99,9 +99,9 @@
                     break;
                 case "mysqli":
                     $this->db = @new MySQLi($this->host, $this->username, $this->password, $this->database);
-                    $this->error = mysqli_connect_error();
+                    $this->error = $this->db->connect_error;
 
-                    if (mysqli_connect_errno())
+                    if (!empty($this->error))
                         return ($checking) ?
                             false :
                             trigger_error(_f("Database error: %s", fix($this->error, false, true)), E_USER_ERROR) ;
@@ -132,7 +132,7 @@
                 return false;
 
             # Reset the error message.
-            $this->error = "";
+            $this->error = null;
 
             # Ensure that every param in $params exists in the query.
             # If it doesn't, remove it from $params.

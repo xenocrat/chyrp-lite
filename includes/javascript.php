@@ -1,4 +1,9 @@
 <?php
+    /**
+     * File: javascript
+     * JavaScript for core functionality and extensions.
+     */
+
     define('JAVASCRIPT', true);
     require_once "common.php";
 ?>
@@ -9,12 +14,14 @@ $(function() {
     }
 });
 var Route = {
-    action: "<?php echo fix(@$_GET['action'], true); ?>"
+    action: '<?php echo addslashes(@$_GET['action']); ?>'
+}
+var Visitor = {
+    token: '<?php if (same_origin()) echo token($_SERVER["REMOTE_ADDR"]); ?>'
 }
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',
     chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>',
-    key: '<?php if (same_origin() and logged_in()) echo token($_SERVER["REMOTE_ADDR"]); ?>',
     ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
 }
 var Post = {
@@ -35,7 +42,7 @@ var Post = {
     destroy: function(id) {
         var thisPost = $("#post_" + id).loader();
 
-        if (Site.key == "") {
+        if (Visitor.token == "") {
             Post.panic('<?php echo __("The post cannot be deleted because your web browser did not send proper credentials."); ?>');
             return;
         }
@@ -43,7 +50,7 @@ var Post = {
         $.post(Site.chyrp_url + "/includes/ajax.php", {
             action: "destroy_post",
             id: id,
-            hash: Site.key
+            hash: Visitor.token
         }, function(response) {
             thisPost.loader(true).fadeOut("fast", function() {
                 $(this).remove();
@@ -78,7 +85,7 @@ var Page = {
     destroy: function(id) {
         var thisPage = $("#page_" + id).loader();
 
-        if (Site.key == "") {
+        if (Visitor.token == "") {
             Page.panic('<?php echo __("The page cannot be deleted because your web browser did not send proper credentials."); ?>');
             return;
         }
@@ -86,7 +93,7 @@ var Page = {
         $.post(Site.chyrp_url + "/includes/ajax.php", {
             action: "destroy_page",
             id: id,
-            hash: Site.key
+            hash: Visitor.token
         }, function(response) {
             thisPage.loader(true).fadeOut("fast", function() {
                 $(this).remove();

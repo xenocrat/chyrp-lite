@@ -9,13 +9,18 @@
      * Versions: 2017.01 => 2017.02
      */
     function maptcha_migrate_config() {
+        global $errors;
+
         $config = Config::current();
 
         if (isset($config->maptcha_hashkey)) {
             $set = $config->set("module_maptcha", array("maptcha_hashkey" => $config->maptcha_hashkey));
 
             if ($set !== false)
-                $config->remove("maptcha_hashkey");
+                $set = $config->remove("maptcha_hashkey");
+
+            if ($set === false)
+                $errors[] = __("Could not write the configuration file.");
         }
     }
 
