@@ -285,7 +285,7 @@
             $config = Config::current();
             $route = Route::current();
 
-            # Generate site and page Atom feeds.
+            # Generate site and page feeds.
             $mainfeedurl = oneof($config->feed_url, url("feed"));
             $pagefeedurl = ($config->clean_urls) ?
                 $config->url.rtrim($route->request, "/")."/feed/" :
