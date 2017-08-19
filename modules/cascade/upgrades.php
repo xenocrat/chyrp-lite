@@ -9,8 +9,6 @@
      * Versions: 2017.01 => 2017.02
      */
     function cascade_migrate_config() {
-        global $errors;
-
         $config = Config::current();
 
         if (isset($config->ajax_scroll_auto)) {
@@ -20,7 +18,7 @@
                 $set = $config->remove("ajax_scroll_auto");
 
             if ($set === false)
-                $errors[] = __("Could not write the configuration file.");
+                error(__("Error"), __("Could not write the configuration file."));
         }
     }
 

@@ -9,8 +9,6 @@
      * Versions: 2017.01 => 2017.02
      */
     function likes_migrate_config() {
-        global $errors;
-
         $config = Config::current();
 
         if (isset($config->module_like)) {
@@ -23,7 +21,7 @@
                 $set = $config->remove("module_like");
 
             if ($set === false)
-                $errors[] = __("Could not write the configuration file.");
+                error(__("Error"), __("Could not write the configuration file."));
         }
     }
 

@@ -92,7 +92,7 @@
         $set = Config::current()->set("enable_markdown", true, true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -105,7 +105,7 @@
         $set = Config::current()->set("enable_homepage", false, true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -118,7 +118,7 @@
         $set = Config::current()->set("uploads_limit", 10, true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -131,7 +131,7 @@
         $set = Config::current()->remove("enable_trackbacking");
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -144,7 +144,7 @@
         $set = Config::current()->set("admin_per_page", 25, true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -158,7 +158,7 @@
         $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -184,7 +184,7 @@
         $set = Config::current()->set("feed_format", "AtomFeed", true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     #---------------------------------------------
