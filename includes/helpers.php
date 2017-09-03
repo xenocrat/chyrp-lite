@@ -28,7 +28,7 @@
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain, false, true);
         session_name("ChyrpSession");
-        register_shutdown_function("session_write_close");
+        session_register_shutdown();
         session_start();
     }
 
@@ -1186,21 +1186,6 @@
             return "<".$element[1].$whitelist.$element[2].">";
 
         }, $text);
-    }
-
-    /**
-     * Function: sanitize_input
-     * Makes sure no inherently broken ideas such as magic_quotes break our application
-     *
-     * Parameters:
-     *     $data - The array to be sanitized, usually one of @$_GET@, @$_POST@, @$_COOKIE@, or @$_REQUEST@
-     */
-    function sanitize_input(&$data) {
-        foreach ($data as &$value)
-            if (is_array($value))
-                sanitize_input($value);
-            else
-                $value = get_magic_quotes_gpc() ? stripslashes($value) : $value ;
     }
 
     #---------------------------------------------

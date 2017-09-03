@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2017.03");
-    define('CHYRP_CODENAME', "Cape");
+    define('CHYRP_VERSION',  "2018.01");
+    define('CHYRP_CODENAME', "Kenya");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -29,16 +29,6 @@
     define('CACHE_THUMBS',   false);
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
-
-    # Constant: JSON_PRETTY_PRINT
-    # Define a safe value to avoid warnings pre-5.4.
-    if (!defined('JSON_PRETTY_PRINT'))
-        define('JSON_PRETTY_PRINT', 0);
-
-    # Constant: JSON_UNESCAPED_SLASHES
-    # Define a safe value to avoid warnings pre-5.4.
-    if (!defined('JSON_UNESCAPED_SLASHES'))
-        define('JSON_UNESCAPED_SLASHES', 0);
 
     ob_start();
 

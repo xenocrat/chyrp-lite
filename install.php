@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2017.03");
-    define('CHYRP_CODENAME', "Cape");
+    define('CHYRP_VERSION',  "2018.01");
+    define('CHYRP_CODENAME', "Kenya");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -27,18 +27,8 @@
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
 
-    # Constant: JSON_PRETTY_PRINT
-    # Define a safe value to avoid warnings pre-5.4.
-    if (!defined('JSON_PRETTY_PRINT'))
-        define('JSON_PRETTY_PRINT', 0);
-
-    # Constant: JSON_UNESCAPED_SLASHES
-    # Define a safe value to avoid warnings pre-5.4.
-    if (!defined('JSON_UNESCAPED_SLASHES'))
-        define('JSON_UNESCAPED_SLASHES', 0);
-
-    if (version_compare(PHP_VERSION, "5.3.2", "<"))
-        exit("Chyrp Lite requires PHP 5.3.2 or greater. Installation cannot continue.");
+    if (version_compare(PHP_VERSION, "5.4", "<"))
+        exit("Chyrp Lite requires PHP 5.4 or greater. Installation cannot continue.");
 
     ob_start();
 
@@ -86,12 +76,6 @@
 
     # Try to load an appropriate translation for the default locale.
     load_translator("chyrp", INCLUDES_DIR.DIR."locale");
-
-    # Sanitize all input depending on magic_quotes_gpc's enabled status.
-    sanitize_input($_GET);
-    sanitize_input($_POST);
-    sanitize_input($_COOKIE);
-    sanitize_input($_REQUEST);
 
     # Where are we?
     $url = str_ireplace("/install.php", "", guess_url());
