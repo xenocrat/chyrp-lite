@@ -500,7 +500,7 @@
                     Flash::warning(__("Invalid email address."));
 
                 if ($config->enable_captcha and !check_captcha())
-                    Flash::warning(__("Incorrect captcha code."));
+                    Flash::warning(__("Incorrect captcha response."));
 
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
                     Flash::warning(__("Invalid website URL."));
