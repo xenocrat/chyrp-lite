@@ -177,6 +177,19 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: remove_captcha
+     * Removes the enable_captcha config setting.
+     *
+     * Versions: 2017.03 => 2018.01
+     */
+    function remove_captcha() {
+        $set = Config::current()->remove("enable_captcha");
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -389,6 +402,7 @@
         disable_importers();
         add_export_content();
         add_feed_format();
+        remove_captcha();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
