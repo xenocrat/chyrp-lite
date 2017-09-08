@@ -1857,7 +1857,6 @@
             $config->set("can_register", !empty($_POST['can_register']));
             $config->set("email_activation", !empty($_POST['email_activation']));
             $config->set("email_correspondence", $correspond);
-            $config->set("enable_captcha", !empty($_POST['enable_captcha']));
             $config->set("default_group", (int) $_POST['default_group']);
             $config->set("guest_group", (int) $_POST['guest_group']);
 

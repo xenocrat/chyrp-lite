@@ -1870,7 +1870,7 @@
 
     /**
      * Function: check_captcha
-     * Checks if the answer to a captcha is right.
+     * Checks the response to a captcha.
      *
      * Returns:
      *     Whether or not the captcha was defeated.
@@ -1880,7 +1880,7 @@
             if (in_array("Captcha", class_implements($class)))
                 return call_user_func($class."::verifyCaptcha");
 
-        return false;
+        return true;
     }
 
     /**

@@ -499,7 +499,7 @@
                 elseif (!is_email($_POST['email']))
                     Flash::warning(__("Invalid email address."));
 
-                if ($config->enable_captcha and !check_captcha())
+                if (!check_captcha())
                     Flash::warning(__("Incorrect captcha response."));
 
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
@@ -849,7 +849,6 @@
             $this->context["visitor"]            = Visitor::current();
             $this->context["visitor"]->logged_in = logged_in();
             $this->context["title"]              = $theme->title;
-            $this->context["captcha"]            = generate_captcha();
             $this->context["modules"]            = Modules::$instances;
             $this->context["feathers"]           = Feathers::$instances;
             $this->context["POST"]               = $_POST;

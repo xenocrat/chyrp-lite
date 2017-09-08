@@ -22,11 +22,6 @@
 {{ "Should users activate by email?" | translate }}
 </p>
 <p>
-<label for="enable_captcha">{{ "Enable Captcha" | translate }}</label>
-<input class="checkbox" type="checkbox" name="enable_captcha" id="enable_captcha"{{ site.enable_captcha | checked }}>
-{{ "Use a Captcha module to prevent bots from registering." | translate }}
-</p>
-<p>
 <label for="default_group">{{ "Default User Group" | translate }}</label>
 <select name="default_group" id="default_group">
 {% for group in groups %}

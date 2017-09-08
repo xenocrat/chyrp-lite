@@ -23,9 +23,10 @@
                 new Twig_SimpleFunction("self_url",            "self_url"),
                 new Twig_SimpleFunction("module_enabled",      "module_enabled"),
                 new Twig_SimpleFunction("feather_enabled",     "feather_enabled"),
+                new Twig_SimpleFunction("password_strength",   "password_strength"),
                 new Twig_SimpleFunction("is_url",              "is_url"),
                 new Twig_SimpleFunction("is_email",            "is_email"),
-                new Twig_SimpleFunction("password_strength",   "password_strength"),
+                new Twig_SimpleFunction("generate_captcha",    "generate_captcha"),
 
                 # Custom functions:
                 new Twig_SimpleFunction("paginate",             "twig_function_paginate")
