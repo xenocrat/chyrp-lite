@@ -109,7 +109,7 @@
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
-            if (!logged_in() and Config::current()->enable_captcha and !check_captcha())
+            if (!logged_in() and !check_captcha())
                 return array($post, false, __("Incorrect captcha response.", "comments"));
 
             fallback($_POST['author_url'], "");
