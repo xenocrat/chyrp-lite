@@ -13,7 +13,7 @@
 <label for="email">{{ "Email" | translate }}</label>
 <input type="email" name="email" value="" id="email" maxlength="128">
 <input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
-{% if site.enable_captcha and captcha != false %}{{ captcha }}{% endif %}
+{{ generate_captcha() }}
 {{ trigger.call("user_register") }}
 <div class="doaction">
 <button type="submit">{{ "Register" | translate }}</button>

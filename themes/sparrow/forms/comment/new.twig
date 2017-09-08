@@ -8,7 +8,7 @@
 <input type="email" name="author_email" value="" id="comment_author_email_field" class="text">
 <label for="comment_author_url_field">{{ "Your website" | translate }}</label>
 <input type="url" name="author_url" value="" id="comment_author_url_field" class="text">
-{% if site.enable_captcha and captcha != false %}{{ captcha }}{% endif %}
+{{ generate_captcha() }}
 <label for="comment_body_field">{{ "Your comment" | translate }}</label>
 {% endif %}
 <textarea name="body" id="comment_body_field"></textarea>
