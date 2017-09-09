@@ -1,5 +1,5 @@
 <?php
-    class Maptcha extends Modules implements Captcha {
+    class Maptcha extends Modules implements CaptchaProvider {
         static function __install() {
             Config::current()->set("module_maptcha", array("maptcha_hashkey" => random(32)));
         }
