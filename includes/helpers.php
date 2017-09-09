@@ -1863,7 +1863,7 @@
     function generate_captcha() {
         foreach (get_declared_classes() as $class)
             if (in_array("CaptchaProvider", class_implements($class)))
-                return call_user_func($class."::getCaptcha");
+                return call_user_func($class."::generateCaptcha");
 
         return false;
     }
@@ -1878,7 +1878,7 @@
     function check_captcha() {
         foreach (get_declared_classes() as $class)
             if (in_array("CaptchaProvider", class_implements($class)))
-                return call_user_func($class."::verifyCaptcha");
+                return call_user_func($class."::checkCaptcha");
 
         return true;
     }

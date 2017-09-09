@@ -5,14 +5,14 @@
      */
     interface CaptchaProvider {
         /**
-         * Function: getCaptcha
+         * Function: generateCaptcha
          * Returns the HTML form elements for the captcha challenge.
          */
-        public static function getCaptcha();
+        public static function generateCaptcha();
 
         /**
-         * Function: verifyCaptcha
-         * Verifies the response and returns true (success) or false (failure).
+         * Function: checkCaptcha
+         * Checks the response and returns true (success) or false (failure).
          */
-        public static function verifyCaptcha();
+        public static function checkCaptcha();
     }
