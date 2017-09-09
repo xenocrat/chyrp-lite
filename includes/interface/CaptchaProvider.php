@@ -1,9 +1,9 @@
 <?php
     /**
-     * Interface: Captcha
-     * Describes the functions required by Captcha implementations.
+     * Interface: CaptchaProvider
+     * Describes the functions required by CaptchaProvider implementations.
      */
-    interface Captcha {
+    interface CaptchaProvider {
         /**
          * Function: getCaptcha
          * Returns the HTML form elements for the captcha challenge.

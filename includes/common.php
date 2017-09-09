@@ -183,9 +183,9 @@
     # Defines the Feather interface.
     require_once INCLUDES_DIR.DIR."interface".DIR."Feather.php";
 
-    # File: Captcha
-    # Defines the Captcha interface.
-    require_once INCLUDES_DIR.DIR."interface".DIR."Captcha.php";
+    # File: CaptchaProvider
+    # Defines the CaptchaProvider interface.
+    require_once INCLUDES_DIR.DIR."interface".DIR."CaptchaProvider.php";
 
     # File: FeedGenerator
     # Defines the FeedGenerator interface.
