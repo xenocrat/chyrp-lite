@@ -8,7 +8,7 @@
             Config::current()->remove("module_maptcha");
         }
 
-        static function getCaptcha() {
+        static function generateCaptcha() {
             $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
             $x = rand(1,9);
@@ -22,7 +22,7 @@
                    sha1(strval($x + $y).$maptcha_hashkey).'">'."\n";
         }
 
-        static function verifyCaptcha() {
+        static function checkCaptcha() {
             $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
             if (!isset($_POST['maptcha_response']) or !isset($_POST['maptcha_challenge']))
