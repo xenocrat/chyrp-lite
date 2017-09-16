@@ -1861,6 +1861,8 @@
      *     A string containing HTML elements to add to a form.
      */
     function generate_captcha() {
+        Trigger::current()->call("before_generate_captcha");
+
         foreach (get_declared_classes() as $class)
             if (in_array("CaptchaProvider", class_implements($class)))
                 return call_user_func($class."::generateCaptcha");
@@ -1876,6 +1878,8 @@
      *     Whether or not the captcha was defeated.
      */
     function check_captcha() {
+        Trigger::current()->call("before_check_captcha");
+
         foreach (get_declared_classes() as $class)
             if (in_array("CaptchaProvider", class_implements($class)))
                 return call_user_func($class."::checkCaptcha");
