@@ -7,6 +7,8 @@
                                    new FeedCacher($this->url));
 
             $this->prepare_cache_regenerators();
+
+            $this->addAlias("before_generate_captcha", "exclude_self");
         }
 
         static function __install() {
@@ -67,6 +69,10 @@
 
             foreach ($regenerate_posts as $action)
                 $this->addAlias($action, "regenerate_posts");
+        }
+
+        public function exclude_self() {
+            $this->exclude[] = rawurldecode(self_url());
         }
 
         public function regenerate() {
