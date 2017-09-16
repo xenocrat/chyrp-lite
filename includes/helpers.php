@@ -1019,7 +1019,7 @@
      */
     function fix($string, $quotes = false, $double = false) {
         $quotes = ($quotes) ? ENT_QUOTES : ENT_NOQUOTES ;
-        return htmlspecialchars($string, $quotes, "UTF-8", $double);
+        return htmlspecialchars($string, $quotes | ENT_HTML5, "UTF-8", $double);
     }
 
     /**
@@ -1033,7 +1033,7 @@
      *     An unsanitary version of the string.
      */
     function unfix($string) {
-        return htmlspecialchars_decode($string, ENT_QUOTES);
+        return htmlspecialchars_decode($string, ENT_QUOTES | ENT_HTML5);
     }
 
     /**
