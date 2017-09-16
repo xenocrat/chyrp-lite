@@ -7,8 +7,6 @@
                                    new FeedCacher($this->url));
 
             $this->prepare_cache_regenerators();
-
-            $this->addAlias("before_generate_captcha", "exclude_self");
         }
 
         static function __install() {
@@ -69,10 +67,17 @@
 
             foreach ($regenerate_posts as $action)
                 $this->addAlias($action, "regenerate_posts");
+
+            $exclude_urls = array("before_generate_captcha");
+
+            $trigger->filter($exclude_urls, "cacher_exclude_urls_triggers");
+
+            foreach ($exclude_urls as $action)
+                $this->addAlias($action, "exclude_urls");
         }
 
-        public function exclude_self() {
-            $this->exclude[] = rawurldecode(self_url());
+        public function exclude_urls($url = null) {
+            $this->exclude[] = rawurldecode(is_url($url) ? $url : self_url());
         }
 
         public function regenerate() {
@@ -117,7 +122,7 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (isset($_POST['clear_cache']) and $_POST['clear_cache'] == "indubitably")
-                self::admin_clear_cache();
+                $this->admin_clear_cache();
 
             fallback($_POST['cache_expire'], 3600);
             fallback($_POST['cache_exclude'], array());
