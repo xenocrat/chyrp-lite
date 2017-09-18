@@ -76,13 +76,16 @@
                 $this->addAlias($action, "exclude_urls");
         }
 
-        public function exclude_urls($url = null) {
-            $this->exclude[] = rawurldecode(is_url($url) ? $url : self_url());
-        }
-
         public function regenerate() {
             foreach ($this->cachers as $cacher)
                 $cacher->regenerate();
+        }
+
+        public function regenerate_users($user = null) {
+            $id = (($user instanceof User) and !$user->no_results) ? $user->id : Visitor::current()->id ;
+
+            foreach ($this->cachers as $cacher)
+                $cacher->regenerate_user($id);
         }
 
         public function regenerate_posts($model) {
@@ -97,11 +100,8 @@
                 $cacher->regenerate_url($url);
         }
 
-        public function regenerate_users($user = null) {
-            $id = (($user instanceof User) and !$user->no_results) ? $user->id : Visitor::current()->id ;
-
-            foreach ($this->cachers as $cacher)
-                $cacher->regenerate_user($id);
+        public function exclude_urls($url = null) {
+            $this->exclude[] = rawurldecode(is_url($url) ? $url : self_url());
         }
 
         public function settings_nav($navs) {
