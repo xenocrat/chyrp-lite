@@ -153,7 +153,8 @@
             if (empty($config->enabled_feathers))
                 Flash::notice(__("You must enable at least one feather in order to write a post."), "feathers");
 
-            fallback($_GET['feather'], @$_SESSION['latest_feather'], reset($config->enabled_feathers));
+            fallback($_SESSION['latest_feather'], reset($config->enabled_feathers));
+            fallback($_GET['feather'], $_SESSION['latest_feather']);
 
             if (!feather_enabled($_GET['feather']))
                 show_404(__("Not Found"), __("Feather not found."));
