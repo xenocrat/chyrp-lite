@@ -622,7 +622,7 @@
                     $_SESSION['cookies_notified'] = true;
 
                     $trigger->call("user_logged_in", $user);
-                    Flash::notice(__("Logged in."), oneof(@$_SESSION['redirect_to'], "/"));
+                    Flash::notice(__("Logged in."), fallback($_SESSION['redirect_to'], "/"));
                 }
             }
 
