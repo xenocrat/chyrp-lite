@@ -12,7 +12,7 @@
 <input type="password" name="password2" value="" id="password2" maxlength="128">
 <label for="email">{{ "Email" | translate }}</label>
 <input type="email" name="email" value="" id="email" maxlength="128">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 {{ generate_captcha() }}
 {{ trigger.call("user_register") }}
 <div class="doaction">
