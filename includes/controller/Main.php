@@ -551,7 +551,7 @@
 
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results or empty($_GET['token']) or token(array($user->login, $user->email)) != $_GET['token'])
+            if ($user->no_results or empty($_GET['token']) or $_GET['token'] != token(array($user->login, $user->email)))
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if ($user->approved)
