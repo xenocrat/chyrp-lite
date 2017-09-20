@@ -77,7 +77,7 @@
         }
 
         private function add_comment() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
@@ -130,7 +130,7 @@
         }
 
         private function update_comment() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -227,7 +227,7 @@
         }
 
         public function admin_destroy_comment() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -330,7 +330,7 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."comment_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['default_comment_status'], "denied");
@@ -460,7 +460,7 @@
         }
 
         public function admin_bulk_comments() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $from = (isset($_POST['from'])) ? $_POST['from'] : "manage_comments" ;
@@ -591,7 +591,7 @@
                     $main->display("content".DIR."comment", array("comment" => $comment));
                     exit;
                 case "destroy_comment":
-                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                    if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                         show_403(__("Access Denied"), __("Invalid authentication token."));
 
                     if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -608,7 +608,7 @@
                     Comment::delete($comment->id);
                     json_response(__("Comment deleted.", "comments"), true);
                 case "edit_comment":
-                    if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                    if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                         show_403(__("Access Denied"), __("Invalid authentication token."));
 
                     if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))

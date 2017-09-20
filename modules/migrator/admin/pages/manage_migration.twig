@@ -22,7 +22,7 @@
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
 </p>
-<input type="hidden" name="hash" value="{{ ip | token }}" id="wordpress_hash">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="wordpress_hash">
 </fieldset>
 </form>
 <hr>
@@ -40,7 +40,7 @@
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
 </p>
-<input type="hidden" name="hash" value="{{ ip | token }}" id="tumblr_hash">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="tumblr_hash">
 </fieldset>
 </form>
 <hr>
@@ -81,7 +81,7 @@
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
 </p>
-<input type="hidden" name="hash" value="{{ ip | token }}" id="textpattern_hash">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="textpattern_hash">
 </fieldset>
 </form>
 <hr>
@@ -116,7 +116,7 @@
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
 </p>
-<input type="hidden" name="hash" value="{{ ip | token }}" id="movabletype_hash">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="movabletype_hash">
 </fieldset>
 </form>
 {% endblock %}

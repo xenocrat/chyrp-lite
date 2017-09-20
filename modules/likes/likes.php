@@ -45,7 +45,7 @@
                 return $admin->display("pages".DIR."like_settings",
                                        array("like_images" => $this->like_images()));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['like_image'], $config->chyrp_url."/modules/likes/images/pink.svg");
