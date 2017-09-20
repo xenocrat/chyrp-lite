@@ -506,6 +506,14 @@
     }
 
     /**
+     * Function: authenticate
+     * Generates an authentication token for the visitor.
+     */
+    function authenticate() {
+        return token(session_id());
+    }
+
+    /**
      * Function: random
      * Generates a string of alphanumeric random characters.
      *

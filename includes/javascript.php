@@ -17,7 +17,7 @@ var Route = {
     action: '<?php echo addslashes(@$_GET['action']); ?>'
 }
 var Visitor = {
-    token: '<?php if (same_origin()) echo token($_SERVER["REMOTE_ADDR"]); ?>'
+    token: '<?php if (same_origin()) echo authenticate(); ?>'
 }
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',

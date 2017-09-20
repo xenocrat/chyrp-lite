@@ -44,7 +44,7 @@
 <form class="module_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">
-<input type="hidden" name="hash" value="{{ ip | token }}">
+<input type="hidden" name="hash" value="{{ authenticate() }}">
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
 </button>
@@ -101,7 +101,7 @@
 <form class="module_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">
-<input type="hidden" name="hash" value="{{ ip | token }}">
+<input type="hidden" name="hash" value="{{ authenticate() }}">
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
 </button>
