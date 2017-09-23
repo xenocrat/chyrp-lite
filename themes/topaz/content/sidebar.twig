@@ -12,7 +12,7 @@
 <a role="menuitem" href="{{ url('index') }}">{{ "Blog" | translate }}</a>
 </li>
 <li role="presentation">
-<a role="menuitem" href="#" onclick="return mailTo('{{ site.email | split('@') | last }}','{{ site.email | split('@') | first }}')">{{ "Email" | translate }}</a>
+<a role="menuitem"{{ mailto(site.email) }}>{{ "Email" | translate }}</a>
 </li>
 <li role="presentation">
 <a role="menuitem" href="{{ url('feed') }}" rel="alternate">{{ "Feed" | translate }}</a>
