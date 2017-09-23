@@ -510,7 +510,8 @@
      * Generates an authentication token for the visitor.
      */
     function authenticate() {
-        return token(session_id());
+        $id = session_id();
+        return ($id == "") ? "" : token($id) ;
     }
 
     /**
@@ -1653,9 +1654,9 @@
     function uploaded($file, $url = true) {
         $config = Config::current();
 
-        return ($url ?
+        return ($url) ?
                 $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($file) :
-                MAIN_DIR.$config->uploads_path.$file);
+                MAIN_DIR.$config->uploads_path.$file ;
     }
 
     /**
