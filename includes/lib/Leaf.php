@@ -30,7 +30,8 @@
                 new Twig_SimpleFunction("generate_captcha",    "generate_captcha"),
 
                 # Custom functions:
-                new Twig_SimpleFunction("paginate",             "twig_function_paginate")
+                new Twig_SimpleFunction("paginate",            "twig_function_paginate"),
+                new Twig_SimpleFunction("mailto",              "twig_function_mailto")
             );
         }
 
@@ -119,6 +120,18 @@
         }
 
         return new Paginator($array, $per_page, $unique);
+    }
+
+    /**
+     * Function: twig_function_mailto
+     * Returns the <a> attributes for obfuscated mailto.
+     */
+    function twig_function_mailto($email) {
+        if (!is_email($email))
+            return false;
+
+        $parts = explode("@", $email);
+        return ' href="#" onclick="'."return mailTo('".$parts[1]."','".$parts[0]."');".'"';
     }
 
     /**
