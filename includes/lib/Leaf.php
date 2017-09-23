@@ -67,7 +67,7 @@
                 new Twig_SimpleFilter("translate_plural",      "twig_filter_translate_plural"),
                 new Twig_SimpleFilter("strftimeformat",        "twig_filter_strftime_format"),
                 new Twig_SimpleFilter("filesizeformat",        "twig_filter_filesize_format"),
-                new Twig_SimpleFilter("match",                 "twig_filter_match"),
+                new Twig_SimpleFilter("preg_match",            "twig_filter_preg_match"),
                 new Twig_SimpleFilter("preg_replace",          "twig_filter_preg_replace"),
                 new Twig_SimpleFilter("contains",              "twig_filter_contains"),
                 new Twig_SimpleFilter("inspect",               "twig_filter_inspect"),
@@ -193,7 +193,7 @@
      * Function: twig_filter_match
      * Try to match a string against an array of regular expressions, or a single regular expression.
      */
-    function twig_filter_match($haystack, $try) {
+    function twig_filter_preg_match($haystack, $try) {
         return match($try, $haystack);
     }
 
