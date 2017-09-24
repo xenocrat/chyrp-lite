@@ -65,15 +65,3 @@ function isEmail(text) {
 function escapeRegExp(text) {
 	return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
-
-// Obfuscated mailto.
-function mailTo(domain, recipient) {
-	var address = recipient + '@' + domain;
-
-	if (isEmail(address)) {
-    	location.assign(('mailto:' + address));
-    	return false;
-    }
-
-    return true;
-}
