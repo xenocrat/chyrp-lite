@@ -282,7 +282,7 @@ msgstr ""
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:68
 #: admin/pages/route_settings.twig:85
-#: admin/pages/user_settings.twig:46
+#: admin/pages/user_settings.twig:41
 msgid "Update"
 msgstr ""
 
@@ -988,18 +988,10 @@ msgid "Should users activate by email?"
 msgstr ""
 
 #: admin/pages/user_settings.twig:25
-msgid "Enable Captcha"
-msgstr ""
-
-#: admin/pages/user_settings.twig:27
-msgid "Use a Captcha module to prevent bots from registering."
-msgstr ""
-
-#: admin/pages/user_settings.twig:30
 msgid "Default User Group"
 msgstr ""
 
-#: admin/pages/user_settings.twig:38
+#: admin/pages/user_settings.twig:33
 msgid "&#8220;Guest&#8221; Group"
 msgstr ""
 

@@ -245,7 +245,7 @@ msgid "Invalid website URL."
 msgstr ""
 
 #: modules/comments/comments.php:113
-msgid "Incorrect captcha code."
+msgid "Incorrect captcha response."
 msgstr ""
 
 #: modules/comments/comments.php:128
