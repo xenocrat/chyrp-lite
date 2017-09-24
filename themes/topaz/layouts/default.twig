@@ -75,7 +75,7 @@
 {% endfor %}
 {% endif %}
 <li role="presentation">
-<a role="menuitem"{{ mailto(site.email) }}>{{ "Email" | translate }}</a>
+<a role="menuitem" href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
 </li>
 <li role="presentation">
 <a role="menuitem" href="{{ url('feed') }}" rel="alternate">{{ "Feed" | translate }}</a>

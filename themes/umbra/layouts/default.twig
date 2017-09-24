@@ -37,7 +37,7 @@
 <h1 class="banner"><a href="{{ site.url }}">{{ site.name }}</a></h1>
 <ul role="menubar" class="navigation">
 <li role="presentation">
-<a role="menuitem"{{ mailto(site.email) }}>{{ "Email" | translate }}</a>
+<a role="menuitem" href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
 </li>
 <li role="presentation">
 <a role="menuitem" href="{{ url('feed') }}">{{ "Feed" | translate }}</a>
