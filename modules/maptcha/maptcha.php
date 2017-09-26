@@ -57,13 +57,25 @@
             return '<label for="maptcha_response">'.$label.'</label>'."\n".
                    '<input type="number" name="maptcha_response" value="" placeholder="'.
                    __("Yay mathemetics!", "maptcha").'">'."\n".
+                   '<input type="hidden" name="maptcha_requested" value="'.time().'">'."\n".
                    '<input type="hidden" name="maptcha_challenge" value="'.$value.'">'."\n";
         }
 
         static function checkCaptcha() {
+            # Constant: MAPTCHA_MIN_ELAPSE
+            # Minimum elapsed timed in seconds allowed between challenge and response.
+            if (!defined('MAPTCHA_MIN_ELAPSE'))
+                define('MAPTCHA_MIN_ELAPSE', 10);
+
             $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
             if (!isset($_POST['maptcha_response']) or !isset($_POST['maptcha_challenge']))
+                return false;
+
+            if (empty($_POST['maptcha_requested']) or !is_numeric($_POST['maptcha_requested']))
+                return false;
+
+            if ((time() - (int) $_POST['maptcha_requested']) < MAPTCHA_MIN_ELAPSE)
                 return false;
 
             $maptcha_response = preg_replace("/[^0-9]/", "", $_POST['maptcha_response']);
