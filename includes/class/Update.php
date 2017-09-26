@@ -9,11 +9,16 @@
          * Checks the update channel.
          */
         public static function check() {
+            $config = Config::current();
+
             if (!Visitor::current()->group->can("change_settings"))
                 return;
 
+            if (!$config->check_updates or !((time() - $config->check_updates_last) > UPDATE_INTERVAL))
+                return;
+
             $xml = simplexml_load_string(get_remote(UPDATE_XML, 3));
-            Config::current()->set("check_updates_last", time());
+            $config->set("check_updates_last", time());
 
             if (!self::validate($xml))
                 return Flash::warning(__("Unable to check for new Chyrp Lite versions.").

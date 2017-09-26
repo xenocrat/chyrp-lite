@@ -2109,8 +2109,7 @@
 
             $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $template)));
 
-            if ($config->check_updates and (time() - $config->check_updates_last) > UPDATE_INTERVAL)
-                Update::check();
+            Update::check();
 
             $this->twig->display($template.".twig", $this->context);
         }
