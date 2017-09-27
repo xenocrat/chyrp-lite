@@ -62,12 +62,10 @@
         }
 
         static function checkCaptcha() {
-            # Constant: MAPTCHA_MIN_ELAPSE
+            # Constant: MAPTCHA_MIN_ELAPSED
             # Minimum elapsed timed in seconds allowed between challenge and response.
-            if (!defined('MAPTCHA_MIN_ELAPSE'))
-                define('MAPTCHA_MIN_ELAPSE', 10);
-
-            $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
+            if (!defined('MAPTCHA_MIN_ELAPSED'))
+                define('MAPTCHA_MIN_ELAPSED', 10);
 
             if (!isset($_POST['maptcha_response']) or !isset($_POST['maptcha_challenge']))
                 return false;
@@ -75,8 +73,10 @@
             if (empty($_POST['maptcha_requested']) or !is_numeric($_POST['maptcha_requested']))
                 return false;
 
-            if ((time() - (int) $_POST['maptcha_requested']) < MAPTCHA_MIN_ELAPSE)
+            if ((time() - (int) $_POST['maptcha_requested']) < MAPTCHA_MIN_ELAPSED)
                 return false;
+
+            $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
             $maptcha_response = preg_replace("/[^0-9]/", "", $_POST['maptcha_response']);
             $maptcha_response = sha1($maptcha_response.$maptcha_hashkey);
