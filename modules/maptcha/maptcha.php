@@ -9,8 +9,9 @@
         }
 
         static function generateCaptcha() {
-            $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
+            $hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
+            $t = time();
             $x = rand(1,9);
             $y = rand(1,$x);
             $z = rand(1,9);
@@ -18,46 +19,46 @@
             switch ($z) {
                 case 1:
                     $label = _f("How much is %d&nbsp;&#43;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x + $y).$maptcha_hashkey);
+                    $value = sha1(strval($x + $y).$t.$hashkey);
                     break;
                 case 2:
                     $label = _f("How much is %d&nbsp;&#8722;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x - $y).$maptcha_hashkey);
+                    $value = sha1(strval($x - $y).$t.$hashkey);
                     break;
                 case 3:
                     $label = _f("How much is %d&nbsp;&#215;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x * $y).$maptcha_hashkey);
+                    $value = sha1(strval($x * $y).$t.$hashkey);
                     break;
                 case 4:
                     $label = _f("How much is %d&nbsp;&plus;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x + $y).$maptcha_hashkey);
+                    $value = sha1(strval($x + $y).$t.$hashkey);
                     break;
                 case 5:
                     $label = _f("How much is %d&nbsp;&minus;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x - $y).$maptcha_hashkey);
+                    $value = sha1(strval($x - $y).$t.$hashkey);
                     break;
                 case 6:
                     $label = _f("How much is %d&nbsp;&times;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x * $y).$maptcha_hashkey);
+                    $value = sha1(strval($x * $y).$t.$hashkey);
                     break;
                 case 7:
                     $label = _f("How much is %d&nbsp;&#x0002B;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x + $y).$maptcha_hashkey);
+                    $value = sha1(strval($x + $y).$t.$hashkey);
                     break;
                 case 8:
                     $label = _f("How much is %d&nbsp;&#x02212;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x - $y).$maptcha_hashkey);
+                    $value = sha1(strval($x - $y).$t.$hashkey);
                     break;
                 case 9:
                     $label = _f("How much is %d&nbsp;&#x000D7;&nbsp;%d&nbsp;?", array($x, $y), "maptcha");
-                    $value = sha1(strval($x * $y).$maptcha_hashkey);
+                    $value = sha1(strval($x * $y).$t.$hashkey);
                     break;
             }
 
             return '<label for="maptcha_response">'.$label.'</label>'."\n".
                    '<input type="number" name="maptcha_response" value="" placeholder="'.
                    __("Yay mathemetics!", "maptcha").'">'."\n".
-                   '<input type="hidden" name="maptcha_requested" value="'.time().'">'."\n".
+                   '<input type="hidden" name="maptcha_requested" value="'.$t.'">'."\n".
                    '<input type="hidden" name="maptcha_challenge" value="'.$value.'">'."\n";
         }
 
@@ -73,14 +74,13 @@
             if (empty($_POST['maptcha_requested']) or !is_numeric($_POST['maptcha_requested']))
                 return false;
 
-            if ((time() - (int) $_POST['maptcha_requested']) < MAPTCHA_MIN_ELAPSED)
-                return false;
+            $hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
-            $maptcha_hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
+            $requested = $_POST['maptcha_requested'];
+            $challenge = $_POST['maptcha_challenge'];
+            $response = preg_replace("/[^0-9]/", "", $_POST['maptcha_response']);
+            $response = sha1($response.$requested.$hashkey);
 
-            $maptcha_response = preg_replace("/[^0-9]/", "", $_POST['maptcha_response']);
-            $maptcha_response = sha1($maptcha_response.$maptcha_hashkey);
-
-            return ($maptcha_response == $_POST['maptcha_challenge']);
+            return (((time() - (int) $requested) >= MAPTCHA_MIN_ELAPSED) and ($response == $challenge));
         }
     }
