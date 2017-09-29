@@ -81,6 +81,9 @@
             $response = preg_replace("/[^0-9]/", "", $_POST['maptcha_response']);
             $response = sha1($response.$requested.$hashkey);
 
-            return (((time() - (int) $requested) >= MAPTCHA_MIN_ELAPSED) and ($response == $challenge));
+            if ((time() - (int) $requested) < MAPTCHA_MIN_ELAPSED)
+                return false;
+
+            return ($response == $challenge);
         }
     }
