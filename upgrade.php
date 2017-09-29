@@ -190,6 +190,20 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: disable_recaptcha
+     * Disables the recaptcha module.
+     *
+     * Versions: 2017.03 => 2018.01
+     */
+    function disable_recaptcha() {
+        $config = Config::current();
+        $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("recaptcha")));
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -403,6 +417,7 @@
         add_export_content();
         add_feed_format();
         remove_captcha();
+        disable_recaptcha();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
