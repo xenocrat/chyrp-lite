@@ -7,7 +7,7 @@
 <form id="like_settings" class="split" action="{{ url('like_settings') }}" method="post">
 <fieldset>
 <p>
-<label for="like_image">{{ "Like Button Image" | translate("likes") }}</label>
+<label for="like_image">{{ "Like Image" | translate("likes") }}</label>
 <select name="like_image">
 {% for filename, filepath in like_images %}
 {% set option_selected = filepath | selected(site.module_likes.like_image) %}
