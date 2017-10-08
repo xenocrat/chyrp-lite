@@ -19,19 +19,19 @@
         public function getFunctions() {
             return array(   
                 # Helpers:
-                new Twig_SimpleFunction("url",                 "url"),
-                new Twig_SimpleFunction("self_url",            "self_url"),
-                new Twig_SimpleFunction("authenticate",        "authenticate"),
-                new Twig_SimpleFunction("module_enabled",      "module_enabled"),
-                new Twig_SimpleFunction("feather_enabled",     "feather_enabled"),
-                new Twig_SimpleFunction("password_strength",   "password_strength"),
-                new Twig_SimpleFunction("is_url",              "is_url"),
-                new Twig_SimpleFunction("is_email",            "is_email"),
-                new Twig_SimpleFunction("generate_captcha",    "generate_captcha"),
+                new Twig_SimpleFunction("url",               "url"),
+                new Twig_SimpleFunction("self_url",          "self_url"),
+                new Twig_SimpleFunction("authenticate",      "authenticate"),
+                new Twig_SimpleFunction("module_enabled",    "module_enabled"),
+                new Twig_SimpleFunction("feather_enabled",   "feather_enabled"),
+                new Twig_SimpleFunction("password_strength", "password_strength"),
+                new Twig_SimpleFunction("is_url",            "is_url"),
+                new Twig_SimpleFunction("is_email",          "is_email"),
+                new Twig_SimpleFunction("generate_captcha",  "generate_captcha"),
 
                 # Custom functions:
-                new Twig_SimpleFunction("paginate",            "twig_function_paginate"),
-                new Twig_SimpleFunction("mailto",              "twig_function_mailto")
+                new Twig_SimpleFunction("paginate",          "twig_function_paginate"),
+                new Twig_SimpleFunction("mailto",            "twig_function_mailto")
             );
         }
 
@@ -42,39 +42,39 @@
         public function getFilters() {
             return array(
                 # Internal:
-                new Twig_SimpleFilter("repeat",                "str_repeat"),
+                new Twig_SimpleFilter("repeat",              "str_repeat"),
 
                 # Helpers:
-                new Twig_SimpleFilter("camelize",              "camelize"),
-                new Twig_SimpleFilter("decamelize",            "decamelize"),
-                new Twig_SimpleFilter("normalize",             "normalize"),
-                new Twig_SimpleFilter("truncate",              "truncate"),
-                new Twig_SimpleFilter("pluralize",             "pluralize"),
-                new Twig_SimpleFilter("depluralize",           "depluralize"),
-                new Twig_SimpleFilter("emote",                 "emote"),
-                new Twig_SimpleFilter("oneof",                 "oneof"),
-                new Twig_SimpleFilter("fix",                   "fix"),
-                new Twig_SimpleFilter("unfix",                 "unfix"),
-                new Twig_SimpleFilter("sanitize",              "sanitize"),
-                new Twig_SimpleFilter("sanitize_html",         "sanitize_html"),
-                new Twig_SimpleFilter("token",                 "token"),
-                new Twig_SimpleFilter("uploaded",              "uploaded"),
-                new Twig_SimpleFilter("gravatar",              "get_gravatar"),
-                new Twig_SimpleFilter("add_scheme",            "add_scheme"),
+                new Twig_SimpleFilter("camelize",            "camelize"),
+                new Twig_SimpleFilter("decamelize",          "decamelize"),
+                new Twig_SimpleFilter("normalize",           "normalize"),
+                new Twig_SimpleFilter("truncate",            "truncate"),
+                new Twig_SimpleFilter("pluralize",           "pluralize"),
+                new Twig_SimpleFilter("depluralize",         "depluralize"),
+                new Twig_SimpleFilter("emote",               "emote"),
+                new Twig_SimpleFilter("oneof",               "oneof"),
+                new Twig_SimpleFilter("fix",                 "fix"),
+                new Twig_SimpleFilter("unfix",               "unfix"),
+                new Twig_SimpleFilter("sanitize",            "sanitize"),
+                new Twig_SimpleFilter("sanitize_html",       "sanitize_html"),
+                new Twig_SimpleFilter("token",               "token"),
+                new Twig_SimpleFilter("uploaded",            "uploaded"),
+                new Twig_SimpleFilter("gravatar",            "get_gravatar"),
+                new Twig_SimpleFilter("add_scheme",          "add_scheme"),
 
                 # Custom filters:
-                new Twig_SimpleFilter("translate",             "twig_filter_translate"),
-                new Twig_SimpleFilter("translate_plural",      "twig_filter_translate_plural"),
-                new Twig_SimpleFilter("strftimeformat",        "twig_filter_strftime_format"),
-                new Twig_SimpleFilter("filesizeformat",        "twig_filter_filesize_format"),
-                new Twig_SimpleFilter("preg_match",            "twig_filter_preg_match"),
-                new Twig_SimpleFilter("preg_replace",          "twig_filter_preg_replace"),
-                new Twig_SimpleFilter("contains",              "twig_filter_contains"),
-                new Twig_SimpleFilter("inspect",               "twig_filter_inspect"),
-                new Twig_SimpleFilter("selected",              "twig_filter_selected"),
-                new Twig_SimpleFilter("checked",               "twig_filter_checked"),
-                new Twig_SimpleFilter("download",              "twig_filter_download"),
-                new Twig_SimpleFilter("thumbnail",             "twig_filter_thumbnail")
+                new Twig_SimpleFilter("translate",           "twig_filter_translate"),
+                new Twig_SimpleFilter("translate_plural",    "twig_filter_translate_plural"),
+                new Twig_SimpleFilter("strftimeformat",      "twig_filter_strftime_format"),
+                new Twig_SimpleFilter("filesizeformat",      "twig_filter_filesize_format"),
+                new Twig_SimpleFilter("preg_match",          "twig_filter_preg_match"),
+                new Twig_SimpleFilter("preg_replace",        "twig_filter_preg_replace"),
+                new Twig_SimpleFilter("contains",            "twig_filter_contains"),
+                new Twig_SimpleFilter("inspect",             "twig_filter_inspect"),
+                new Twig_SimpleFilter("selected",            "twig_filter_selected"),
+                new Twig_SimpleFilter("checked",             "twig_filter_checked"),
+                new Twig_SimpleFilter("download",            "twig_filter_download"),
+                new Twig_SimpleFilter("thumbnail",           "twig_filter_thumbnail")
             );
         }
     }
