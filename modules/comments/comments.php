@@ -72,7 +72,7 @@
         }
 
         public function parse_urls($urls) {
-            $urls["|/comment/([0-9]+)/|"] = "/?action=comment&amp;id=$1";
+            $urls['|/comment/([0-9]+)/|'] = '/?action=comment&amp;id=$1';
             return $urls;
         }
 
