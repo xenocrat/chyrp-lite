@@ -1364,7 +1364,7 @@
 
         # Check for X-Pingback header.
         while (!feof($connect)) {
-            $line = fgets($connect, 512);
+            $line = fgets($connect);
 
             if (trim($line) == "")
                 break;
@@ -1380,7 +1380,7 @@
             return false;
 
         while (!feof($connect)) {
-            $line = fgets($connect, 1024);
+            $line = fgets($connect);
 
             if (preg_match("/<link rel=[\"|\']pingback[\"|\'] href=[\"|\']([^\"\']+)[\"|\'] ?\/?>/i", $line, $link))
                 return $link[1];
