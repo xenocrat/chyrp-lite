@@ -1154,7 +1154,7 @@
         $text = preg_replace("/<\/?script[^>]*>/i", "", $text);
 
         # Strip attributes from each tag, but allow attributes essential to a tag's function.
-        return preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( \/)?>/i", function ($element) {
+        return preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( ?\/)?>/i", function ($element) {
             fallback($element[2], "");
 
             $name = strtolower($element[1]);
@@ -1382,8 +1382,9 @@
         while (!feof($connect)) {
             $line = fgets($connect);
 
-            if (preg_match("/<link rel=[\"|\']pingback[\"|\'] href=[\"|\']([^\"\']+)[\"|\'] ?\/?>/i", $line, $link))
-                return $link[1];
+            if (preg_match("/<link[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>/i", $line, $link))
+                if (preg_match("/ rel=(\"pingback\"|\'pingback\')/i", $link[0]))
+                    return trim($link[1], "\"'");
 
             $remote_bytes += strlen($line);
 
