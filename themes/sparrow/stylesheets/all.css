@@ -569,4 +569,6 @@ img.gravatar {                                  position: absolute;
     div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 8rem }
     iframe.video_embed {                        max-height: 432px }
+    ul.archive article.post.archive {           width: 196px;
+                                                height: 196px }
 }
