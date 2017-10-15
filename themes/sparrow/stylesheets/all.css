@@ -341,8 +341,8 @@ div.tags.standalone {                           line-height: 2 }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
                                                 float: left;
-                                                width: 222px;
-                                                height: 222px;
+                                                width: 196px;
+                                                height: 196px;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
                                                 margin: 1rem 0rem 1rem 1rem;
@@ -569,6 +569,4 @@ img.gravatar {                                  position: absolute;
     div#main > article.discourse,
     div#main > article.commentary {             padding: 0rem 8rem }
     iframe.video_embed {                        max-height: 432px }
-    ul.archive article.post.archive {           width: 196px;
-                                                height: 196px }
 }
