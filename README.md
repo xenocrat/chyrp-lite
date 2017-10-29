@@ -53,7 +53,7 @@ ARIA labelling ensure your blog will be accessible to visitors who use assistive
 
 ## Requirements
 
-* PHP 5.3.2+
+* PHP 5.4+
 * MySQL:
   - MySQL 4.1+
   - MySQLi or PDO
