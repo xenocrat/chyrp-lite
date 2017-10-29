@@ -205,13 +205,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 97
+	includes/class/Route.php on line 98
 
 
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 101
+	includes/class/Route.php on line 102
 Arguments:
 	$this
 
@@ -219,7 +219,7 @@ Arguments:
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 150
+	includes/class/Route.php on line 151
 Arguments:
 	$this
 
@@ -327,13 +327,13 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1873
+	includes/helpers.php on line 1874
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1890
+	includes/helpers.php on line 1891
 
 
 javascript
@@ -714,7 +714,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 191
+	includes/class/Route.php on line 192
 
 
 related_posts
@@ -858,7 +858,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2004
+	includes/helpers.php on line 2005
 
 
 xmlrpc_methods
