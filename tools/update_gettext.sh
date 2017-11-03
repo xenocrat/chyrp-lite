@@ -21,7 +21,6 @@ ruby ./tools/gettext.rb ./modules/maptcha/      --domain=maptcha             > .
 ruby ./tools/gettext.rb ./modules/migrator/     --domain=migrator            > ./modules/migrator/locale/en_US/LC_MESSAGES/migrator.pot
 ruby ./tools/gettext.rb ./modules/pingable/     --domain=pingable            > ./modules/pingable/locale/en_US/LC_MESSAGES/pingable.pot
 ruby ./tools/gettext.rb ./modules/read_more/    --domain=read_more           > ./modules/read_more/locale/en_US/LC_MESSAGES/read_more.pot
-ruby ./tools/gettext.rb ./modules/recaptcha/    --domain=recaptcha           > ./modules/recaptcha/locale/en_US/LC_MESSAGES/recaptcha.pot
 ruby ./tools/gettext.rb ./modules/rights/       --domain=rights              > ./modules/rights/locale/en_US/LC_MESSAGES/rights.pot
 ruby ./tools/gettext.rb ./modules/simplemde/    --domain=simplemde           > ./modules/simplemde/locale/en_US/LC_MESSAGES/simplemde.pot
 ruby ./tools/gettext.rb ./modules/sitemap/      --domain=sitemap             > ./modules/sitemap/locale/en_US/LC_MESSAGES/sitemap.pot

@@ -172,7 +172,7 @@
         }
 
         public function parse_urls($urls) {
-            $urls["|/tag/([^/]+)/|"] = "/?action=tag&amp;name=$1";
+            $urls['|/tag/([^/]+)/|'] = '/?action=tag&amp;name=$1';
             return $urls;
         }
 
@@ -257,7 +257,7 @@
         }
 
         public function admin_update_tags($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -280,7 +280,7 @@
             if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['original']))
@@ -328,7 +328,7 @@
             if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['name']))
@@ -361,7 +361,7 @@
             if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['post']))

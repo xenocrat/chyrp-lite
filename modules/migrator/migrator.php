@@ -29,7 +29,7 @@
             if (empty($_POST))
                 redirect("manage_migration");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled("text"))
@@ -168,7 +168,7 @@
             if (empty($_POST))
                 redirect("manage_migration");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled("text") or !feather_enabled("photo") or !feather_enabled("quote") or !feather_enabled("link"))
@@ -302,7 +302,7 @@
             if (empty($_POST))
                 redirect("manage_migration");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled("text"))
@@ -402,7 +402,7 @@
             if (empty($_POST))
                 redirect("manage_migration");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled("text"))

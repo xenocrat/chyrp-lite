@@ -67,11 +67,25 @@
 
             foreach ($regenerate_posts as $action)
                 $this->addAlias($action, "regenerate_posts");
+
+            $exclude_urls = array("before_generate_captcha");
+
+            $trigger->filter($exclude_urls, "cacher_exclude_urls_triggers");
+
+            foreach ($exclude_urls as $action)
+                $this->addAlias($action, "exclude_urls");
         }
 
         public function regenerate() {
             foreach ($this->cachers as $cacher)
                 $cacher->regenerate();
+        }
+
+        public function regenerate_users($user = null) {
+            $id = (($user instanceof User) and !$user->no_results) ? $user->id : Visitor::current()->id ;
+
+            foreach ($this->cachers as $cacher)
+                $cacher->regenerate_user($id);
         }
 
         public function regenerate_posts($model) {
@@ -86,11 +100,8 @@
                 $cacher->regenerate_url($url);
         }
 
-        public function regenerate_users($user = null) {
-            $id = (($user instanceof User) and !$user->no_results) ? $user->id : Visitor::current()->id ;
-
-            foreach ($this->cachers as $cacher)
-                $cacher->regenerate_user($id);
+        public function exclude_urls($url = null) {
+            $this->exclude[] = rawurldecode(is_url($url) ? $url : self_url());
         }
 
         public function settings_nav($navs) {
@@ -107,11 +118,11 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."cache_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (isset($_POST['clear_cache']) and $_POST['clear_cache'] == "indubitably")
-                self::admin_clear_cache();
+                $this->admin_clear_cache();
 
             fallback($_POST['cache_expire'], 3600);
             fallback($_POST['cache_exclude'], array());
@@ -127,7 +138,7 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $this->regenerate();

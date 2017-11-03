@@ -476,7 +476,7 @@
                 Flash::notice(__("You cannot register an account because you are already logged in."), "/");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                     Flash::warning(__("Invalid authentication token."));
 
                 if (empty($_POST['login']))
@@ -499,8 +499,8 @@
                 elseif (!is_email($_POST['email']))
                     Flash::warning(__("Invalid email address."));
 
-                if ($config->enable_captcha and !check_captcha())
-                    Flash::warning(__("Incorrect captcha code."));
+                if (!check_captcha())
+                    Flash::warning(__("Incorrect captcha response."));
 
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
                     Flash::warning(__("Invalid website URL."));
@@ -551,7 +551,7 @@
 
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results or empty($_GET['token']) or token(array($user->login, $user->email)) != $_GET['token'])
+            if ($user->no_results or empty($_GET['token']) or $_GET['token'] != token(array($user->login, $user->email)))
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if ($user->approved)
@@ -574,7 +574,7 @@
 
             $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
 
-            if ($user->no_results or empty($_GET['token']) or token(array($user->login, $user->email)) != $_GET['token'])
+            if ($user->no_results or empty($_GET['token']) or $_GET['token'] != token(array($user->login, $user->email)))
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             $new_password = random(8);
@@ -599,7 +599,7 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                     Flash::warning(__("Invalid authentication token."));
 
                 fallback($_POST['login']);
@@ -622,7 +622,7 @@
                     $_SESSION['cookies_notified'] = true;
 
                     $trigger->call("user_logged_in", $user);
-                    Flash::notice(__("Logged in."), oneof(@$_SESSION['redirect_to'], "/"));
+                    Flash::notice(__("Logged in."), fallback($_SESSION['redirect_to'], "/"));
                 }
             }
 
@@ -656,7 +656,7 @@
                 Flash::notice(__("You must be logged in to access user controls."), "login");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                     Flash::warning(__("Invalid authentication token."));
 
                 if (!empty($_POST['new_password1']))
@@ -711,7 +711,7 @@
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+                if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                     Flash::warning(__("Invalid authentication token."));
 
                 if (empty($_POST['login']))
@@ -849,7 +849,6 @@
             $this->context["visitor"]            = Visitor::current();
             $this->context["visitor"]->logged_in = logged_in();
             $this->context["title"]              = $theme->title;
-            $this->context["captcha"]            = generate_captcha();
             $this->context["modules"]            = Modules::$instances;
             $this->context["feathers"]           = Feathers::$instances;
             $this->context["POST"]               = $_POST;

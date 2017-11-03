@@ -205,13 +205,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 97
+	includes/class/Route.php on line 98
 
 
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 101
+	includes/class/Route.php on line 102
 Arguments:
 	$this
 
@@ -219,7 +219,7 @@ Arguments:
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 150
+	includes/class/Route.php on line 151
 Arguments:
 	$this
 
@@ -227,19 +227,19 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 383
+	includes/common.php on line 360
 
 
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1075
+	includes/controller/Admin.php on line 1076
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1335
+	includes/controller/Admin.php on line 1336
 Arguments:
 	$group
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1359
+	includes/controller/Admin.php on line 1360
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1395
+	includes/controller/Admin.php on line 1396
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1422
+	includes/controller/Admin.php on line 1423
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1426
+	includes/controller/Admin.php on line 1427
 Arguments:
 	$imports
 
@@ -279,13 +279,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1700
+	includes/controller/Admin.php on line 1701
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1708
+	includes/controller/Admin.php on line 1709
 
 
 can_not_view_page
@@ -322,6 +322,18 @@ Called from:
 	includes/controller/Main.php on line 795
 Arguments:
 	$post, $feed
+
+
+before_generate_captcha
+-----------------------
+Called from:
+	includes/helpers.php on line 1874
+
+
+before_check_captcha
+--------------------
+Called from:
+	includes/helpers.php on line 1891
 
 
 javascript
@@ -702,7 +714,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 191
+	includes/class/Route.php on line 192
 
 
 related_posts
@@ -744,7 +756,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 380
+	includes/common.php on line 357
 
 
 admin_determine_action
@@ -760,7 +772,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1139
+	includes/controller/Admin.php on line 1140
 Arguments:
 	$post
 
@@ -770,7 +782,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1186
+	includes/controller/Admin.php on line 1187
 Arguments:
 	$page
 
@@ -780,7 +792,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1241
+	includes/controller/Admin.php on line 1242
 
 
 before_import
@@ -788,7 +800,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1305
+	includes/controller/Admin.php on line 1306
 
 
 write_nav
@@ -828,7 +840,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 743
+	includes/helpers.php on line 752
 Arguments:
 	$query, $plain
 
@@ -838,7 +850,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1302
+	includes/helpers.php on line 1296
 
 
 send_mail
@@ -846,7 +858,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2006
+	includes/helpers.php on line 2005
 
 
 xmlrpc_methods
@@ -1072,6 +1084,14 @@ Target:
 	$regenerate_posts
 Called from:
 	modules/cacher/cacher.php on line 66
+
+
+cacher_exclude_urls_triggers
+----------------------------
+Target:
+	$exclude_urls
+Called from:
+	modules/cacher/cacher.php on line 73
 
 
 comment

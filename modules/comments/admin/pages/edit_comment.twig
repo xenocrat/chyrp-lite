@@ -53,7 +53,7 @@
 {{ trigger.call("edit_comment_options", comment) }}
 <div class="clear"></div>
 </div>
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash_field">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash_field">
 <input type="hidden" name="id" value="{{ comment.id }}" id="id_field">
 <div class="buttons confirmation">
 <button type="submit" class="yay">

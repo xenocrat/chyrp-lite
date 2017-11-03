@@ -396,8 +396,8 @@ div.archive.standalone {                        padding-bottom: 1rem }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
                                                 float: left;
-                                                width: 156px;
-                                                height: 156px;
+                                                width: 196px;
+                                                height: 196px;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
                                                 margin: 0rem 0rem 1rem 1rem;
@@ -630,7 +630,7 @@ article img {                                   max-width: 100% }
     iframe.video_embed {                        height: calc((100vw - 4rem) * 0.5625) }
 }
 
-@media screen and (max-width: 651px) {
+@media screen and (max-width: 599px) {
     ul.archive li {                             margin-left: 0em }
     ul.archive article.post.archive {           box-sizing: border-box;
                                                 width: 100%;

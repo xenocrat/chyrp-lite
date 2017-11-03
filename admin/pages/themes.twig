@@ -17,7 +17,7 @@
 <div class="controls">
 <form action="{{ url('change_theme') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <input type="hidden" name="theme" value="{{ safename }}">
-<input type="hidden" name="hash" value="{{ ip | token }}">
+<input type="hidden" name="hash" value="{{ authenticate() }}">
 <button name="change" value="indubitably" type="submit"{{ safename == site.theme ? " disabled" : "" }}>
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Select" | translate }}
 </button>

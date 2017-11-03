@@ -391,8 +391,8 @@ div.archive.standalone {                        padding-bottom: 1rem }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
                                                 float: left;
-                                                width: 156px;
-                                                height: 156px;
+                                                width: 196px;
+                                                height: 196px;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
                                                 background-color: #fbfbf7;
@@ -623,7 +623,7 @@ article img {                                   max-width: 100% }
 
 }
 
-@media screen and (max-width: 651px) {
+@media screen and (max-width: 599px) {
     ul.archive li {                             margin-left: 0em }
     ul.archive article.post.archive {           box-sizing: border-box;
                                                 width: 100%;

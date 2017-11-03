@@ -31,11 +31,11 @@ msgstr ""
 msgid "A list of URLs that will not be cached; enter one at a time."
 msgstr ""
 
-#: modules/cacher/cacher.php:98
+#: modules/cacher/cacher.php:109
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:135
+#: modules/cacher/cacher.php:146
 msgid "Cache cleared."
 msgstr ""
 

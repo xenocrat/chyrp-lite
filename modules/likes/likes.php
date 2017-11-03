@@ -45,7 +45,7 @@
                 return $admin->display("pages".DIR."like_settings",
                                        array("like_images" => $this->like_images()));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != token($_SERVER['REMOTE_ADDR']))
+            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['like_image'], $config->chyrp_url."/modules/likes/images/pink.svg");
@@ -213,21 +213,23 @@
 
             if (!Like::discover($post->id)) {
                 if ($visitor->group->can("like_post")) {
-                    $html.= "<a class=\"likes like\" href=\"".
-                                $config->url."/?action=like&amp;post_id=".
-                                $post->id."\" data-post_id=\"".
-                                $post->id."\">".
-                                "<img src=\"".$settings["like_image"]."\" alt='Likes icon'>";
+                    $html.= '<a class="likes like" href="'.
+                                $config->url.'/?action=like&amp;post_id='.
+                                $post->id.'" data-post_id="'.
+                                $post->id.'">';
+
+                    if (!empty($settings["like_image"]))
+                        $html.= '<img src="'.$settings["like_image"].'" alt="Likes icon">';
 
                     if ($settings["like_with_text"]) {
-                        $html.= " <span class='like'>".__("Like!", "likes")."</span>";
-                        $html.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
+                        $html.= ' <span class="like">'.__("Like!", "likes").'</span>';
+                        $html.= ' <span class="unlike">'.__("Unlike!", "likes").'</span>';
                     }
 
-                    $html.= "</a>";
+                    $html.= '</a>';
                 }
 
-                $html.= " <span class='like_text'>";
+                $html.= ' <span class="like_text">';
 
                 $count = $post->like_count;
 
@@ -235,24 +237,26 @@
                     __("No likes yet.", "likes") :
                     sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count) ;
 
-                $html.= "</span>";
+                $html.= '</span>';
             } else {
                 if ($visitor->group->can("unlike_post")) {
-                    $html.= "<a class=\"likes liked\" href=\"".
-                                $config->url."/?action=unlike&amp;post_id=".
-                                $post->id."\" data-post_id=\"".
-                                $post->id."\">".
-                                "<img src=\"".$settings["like_image"]."\" alt='Likes icon'>";
+                    $html.= '<a class="likes liked" href="'.
+                                $config->url.'/?action=unlike&amp;post_id='.
+                                $post->id.'" data-post_id="'.
+                                $post->id.'">';
+
+                    if (!empty($settings["like_image"]))
+                        $html.= '<img src="'.$settings["like_image"].'" alt="Likes icon">';
 
                     if ($settings["like_with_text"]) {
-                        $html.= " <span class='like'>".__("Like!", "likes")."</span>";
-                        $html.= " <span class='unlike'>".__("Unlike!", "likes")."</span>";
+                        $html.= ' <span class="like">'.__("Like!", "likes").'</span>';
+                        $html.= ' <span class="unlike">'.__("Unlike!", "likes").'</span>';
                     }
 
-                    $html.= "</a>";
+                    $html.= '</a>';
                 }
 
-                $html.= " <span class='like_text'>";
+                $html.= ' <span class="like_text">';
 
                 $count = $post->like_count - 1;
 
@@ -260,10 +264,10 @@
                     __("You like this.", "likes") :
                     sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count) ;
 
-                $html.= "</span>";
+                $html.= '</span>';
             }
 
-            $html.= "</div>";
+            $html.= '</div>';
             return $html;
         }
 

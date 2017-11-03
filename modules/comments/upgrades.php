@@ -9,8 +9,6 @@
      * Versions: 2017.01 => 2017.02
      */
     function comments_migrate_config() {
-        global $errors;
-
         $config = Config::current();
 
         if (isset($config->default_comment_status) and
@@ -38,7 +36,7 @@
             }
 
             if (in_array(false, (array) $set, true))
-                $errors[] = __("Could not write the configuration file.");
+                error(__("Error"), __("Could not write the configuration file."));
         }
     }
 

@@ -25,7 +25,7 @@
 {% endif %}
 </div>
 <input type="hidden" name="id" value="{{ comment.id }}">
-<input type="hidden" name="hash" value="{{ ip | token }}">
+<input type="hidden" name="hash" value="{{ authenticate() }}">
 <input type="hidden" name="action" value="update_comment">
 <div class="doaction speak">
 <button type="submit">{{ "Save" | translate }}</button>

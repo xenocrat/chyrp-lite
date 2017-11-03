@@ -74,7 +74,8 @@
             Trigger::current()->call("parse_route", $this);
 
             $this->try[] = isset($this->action) ?
-                               oneof($this->action, "index") : (!substr_count($this->arg[0], "?") ?
+                               oneof($this->action, "index") :
+                               ((!substr_count($this->arg[0], "?") and !($this->arg[0] == "index.php")) ?
                                    oneof($this->arg[0], "index") : "index") ;
 
             # Set the action, using a guess if necessary, to satisfy the view_site permission test.

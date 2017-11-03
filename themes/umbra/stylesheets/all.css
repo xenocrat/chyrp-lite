@@ -337,8 +337,8 @@ div.tags.standalone {                           line-height: 2 }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
                                                 float: left;
-                                                width: 222px;
-                                                height: 222px;
+                                                width: 196px;
+                                                height: 196px;
                                                 overflow: hidden;
                                                 font-size: 0.75em;
                                                 margin: 1rem 0rem 1rem 1rem;

@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2017.03");
-    define('CHYRP_CODENAME', "Cape");
+    define('CHYRP_VERSION',  "2018.01");
+    define('CHYRP_CODENAME', "Kenya");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -29,16 +29,6 @@
     define('CACHE_THUMBS',   false);
     define('USE_OB',         true);
     define('USE_ZLIB',       false);
-
-    # Constant: JSON_PRETTY_PRINT
-    # Define a safe value to avoid warnings pre-5.4.
-    if (!defined('JSON_PRETTY_PRINT'))
-        define('JSON_PRETTY_PRINT', 0);
-
-    # Constant: JSON_UNESCAPED_SLASHES
-    # Define a safe value to avoid warnings pre-5.4.
-    if (!defined('JSON_UNESCAPED_SLASHES'))
-        define('JSON_UNESCAPED_SLASHES', 0);
 
     ob_start();
 
@@ -92,7 +82,7 @@
         $set = Config::current()->set("enable_markdown", true, true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -105,7 +95,7 @@
         $set = Config::current()->set("enable_homepage", false, true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -118,7 +108,7 @@
         $set = Config::current()->set("uploads_limit", 10, true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -131,7 +121,7 @@
         $set = Config::current()->remove("enable_trackbacking");
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -144,7 +134,7 @@
         $set = Config::current()->set("admin_per_page", 25, true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -158,7 +148,7 @@
         $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     /**
@@ -184,7 +174,34 @@
         $set = Config::current()->set("feed_format", "AtomFeed", true);
 
         if ($set === false)
-            $errors[] = __("Could not write the configuration file.");
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
+    /**
+     * Function: remove_captcha
+     * Removes the enable_captcha config setting.
+     *
+     * Versions: 2017.03 => 2018.01
+     */
+    function remove_captcha() {
+        $set = Config::current()->remove("enable_captcha");
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
+    /**
+     * Function: disable_recaptcha
+     * Disables the recaptcha module.
+     *
+     * Versions: 2017.03 => 2018.01
+     */
+    function disable_recaptcha() {
+        $config = Config::current();
+        $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("recaptcha")));
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
     }
 
     #---------------------------------------------
@@ -399,6 +416,8 @@
         disable_importers();
         add_export_content();
         add_feed_format();
+        remove_captcha();
+        disable_recaptcha();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
@@ -419,7 +438,7 @@
     #---------------------------------------------
 
     foreach ($errors as $error)
-        echo '<span role="alert">'.sanitize_html($error)."</span>\n";
+        echo '<span role="alert">'.sanitize_html($error).'</span>'."\n";
 
             ?></pre>
 <?php if (!$upgraded): ?>

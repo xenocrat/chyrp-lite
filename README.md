@@ -45,7 +45,7 @@ ARIA labelling ensure your blog will be accessible to visitors who use assistive
 * Cascade: ajax-powered infinite scrolling for your blog.
 * Lightbox: on-page image viewer with image protection.
 * Sitemap: index your blog for search engines.
-* reCAPTCHA/MAPTCHA: prevent spam.
+* MAPTCHA: prevent spam.
 * Highlighter: syntax highlighting for your code snippets.
 * SimpleMDE: WYSIWYG-esque editor for Markdown content.
 * Easy Embed: the easiest way to embed videos in your blog.
@@ -53,7 +53,7 @@ ARIA labelling ensure your blog will be accessible to visitors who use assistive
 
 ## Requirements
 
-* PHP 5.3.2+
+* PHP 5.4+
 * MySQL:
   - MySQL 4.1+
   - MySQLi or PDO
@@ -97,5 +97,5 @@ Chyrp Lite was created by the following people:
 ## Licenses
 
 Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors,
-distributed under the [X11 license](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md).
+distributed under the [BSD license](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md).
 Please see the [licenses](licenses) directory for the full license text of all software packages distributed with Chyrp Lite.

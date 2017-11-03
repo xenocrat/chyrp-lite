@@ -7,7 +7,7 @@
 <fieldset>
 {% include "partials" ~ DIR ~ "post_fields.twig" %}
 <input type="hidden" name="feather" value="{{ feather.safename | fix(true) }}" id="feather">
-<input type="hidden" name="hash" value="{{ ip | token }}" id="hash">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>
 </form>
 {% endblock %}
