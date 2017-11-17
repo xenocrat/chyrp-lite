@@ -420,16 +420,16 @@ msgstr ""
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr ""
 
-#: includes/common.php:291
-#: includes/common.php:296
+#: includes/common.php:292
+#: includes/common.php:297
 msgid "Service Unavailable"
 msgstr ""
 
-#: includes/common.php:292
+#: includes/common.php:293
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 
-#: includes/common.php:297
+#: includes/common.php:298
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
