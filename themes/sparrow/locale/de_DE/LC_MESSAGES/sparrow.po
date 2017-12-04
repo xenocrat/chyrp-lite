@@ -1,0 +1,424 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2017 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: themes/sparrow/content/comment.twig:3
+#, php-format
+msgid "%s:"
+msgstr "%s:"
+
+#: themes/sparrow/content/comment.twig:5
+#, php-format
+msgid "%s said:"
+msgstr "%s hat gesagt:"
+
+#: themes/sparrow/content/comment.twig:9
+msgid "This comment is awaiting moderation."
+msgstr "Dieser Kommentar wartet auf die Freigabe durch die Moderation."
+
+#: themes/sparrow/content/comment.twig:23
+msgid "%d %B, %Y, at %I:%M %p"
+msgstr "%d %B, %Y, um %I:%M %p"
+
+#: themes/sparrow/content/post.twig:7
+msgid "Category"
+msgstr "Kategorien"
+
+#: themes/sparrow/content/post.twig:8 themes/sparrow/pages/view.twig:21
+msgid "[Untitled]"
+msgstr "[Unbenannt]"
+
+#: themes/sparrow/content/post.twig:11
+msgid "Tags"
+msgstr "Tags"
+
+#: themes/sparrow/content/post.twig:23 themes/sparrow/layouts/default.twig:58
+msgid "Draft"
+msgstr "Entwurf"
+
+#: themes/sparrow/content/post.twig:25
+msgid "Scheduled"
+msgstr "Geplant"
+
+#: themes/sparrow/content/post.twig:27
+msgid "Pinned"
+msgstr "Angepinnt"
+
+#: themes/sparrow/content/post.twig:29
+msgid "%d %b, %Y"
+msgstr "%d %b, %Y"
+
+#: themes/sparrow/content/post.twig:38
+#, php-format
+msgid "%s pingback"
+msgid_plural "%s pingbacks"
+msgstr[0] "%s Pingback"
+msgstr[1] "%s Pingbacks"
+
+#: themes/sparrow/content/post.twig:43
+msgid "Comments closed"
+msgstr "Kommentare geschlossen"
+
+#: themes/sparrow/content/post.twig:47
+#, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] "%s Kommentar"
+msgstr[1] "%s Kommentare"
+
+#: themes/sparrow/content/post.twig:54
+#, php-format
+msgid "&copy; %s, %s."
+msgstr "&copy; %s, %s."
+
+#: themes/sparrow/content/post.twig:56
+#, php-format
+msgid "&copy; %s."
+msgstr "&copy; %s."
+
+#: themes/sparrow/feathers/uploader.twig:21
+msgid "File attachment:"
+msgstr "Dateianhänge:"
+
+#: themes/sparrow/forms/comment/edit.twig:2
+msgid "Comment"
+msgstr "Kommentieren"
+
+#: themes/sparrow/forms/comment/edit.twig:5
+msgid "Author"
+msgstr "Autor"
+
+#: themes/sparrow/forms/comment/edit.twig:7
+msgid "Author's website"
+msgstr "Website des Autors"
+
+#: themes/sparrow/forms/comment/edit.twig:9
+msgid "Author's email"
+msgstr "E-Mail des Autors"
+
+#: themes/sparrow/forms/comment/edit.twig:13
+msgid "Timestamp"
+msgstr "Zeitstempel"
+
+#: themes/sparrow/forms/comment/edit.twig:15
+msgid "Status"
+msgstr "Status"
+
+#: themes/sparrow/forms/comment/edit.twig:17
+msgid "Approved"
+msgstr "Genehmigt"
+
+#: themes/sparrow/forms/comment/edit.twig:18
+msgid "Denied"
+msgstr "Abgelehnt"
+
+#: themes/sparrow/forms/comment/edit.twig:19
+msgid "Spam"
+msgstr "Spam"
+
+#: themes/sparrow/forms/comment/edit.twig:23
+msgid "Email Notifications"
+msgstr "E-Mail Benachrichtigungen"
+
+#: themes/sparrow/forms/comment/edit.twig:31
+msgid "Save"
+msgstr "Speichern"
+
+#: themes/sparrow/forms/comment/edit.twig:32
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: themes/sparrow/forms/comment/new.twig:3
+#, php-format
+msgid "%s's comment"
+msgstr "%s’s Kommentar"
+
+#: themes/sparrow/forms/comment/new.twig:5
+msgid "Your name"
+msgstr "Dein Name"
+
+#: themes/sparrow/forms/comment/new.twig:7
+msgid "Your email"
+msgstr "Deine E-Mail Adresse"
+
+#: themes/sparrow/forms/comment/new.twig:9
+msgid "Your website"
+msgstr "Deine Website"
+
+#: themes/sparrow/forms/comment/new.twig:12
+msgid "Your comment"
+msgstr "Dein Kommentar"
+
+#: themes/sparrow/forms/comment/new.twig:16
+msgid "Markdown is allowed."
+msgstr "Markdown ist erlaubt."
+
+#: themes/sparrow/forms/comment/new.twig:18
+msgid "HTML tags allowed:"
+msgstr "Erlaubte HTML Tags:"
+
+#: themes/sparrow/forms/comment/new.twig:20
+msgid "HTML is not allowed."
+msgstr "HTML ist nicht erlaubt."
+
+#: themes/sparrow/forms/comment/new.twig:24
+msgid "Notify me when others comment"
+msgstr "Benachrichtige mich, wenn andere kommentieren"
+
+#: themes/sparrow/forms/comment/new.twig:37
+msgid "Speak"
+msgstr "Sprich"
+
+#: themes/sparrow/forms/user/controls.twig:5
+#: themes/sparrow/layouts/default.twig:63
+msgid "Controls"
+msgstr "Details"
+
+#: themes/sparrow/forms/user/controls.twig:7
+msgid "Full name"
+msgstr "Voller Name"
+
+#: themes/sparrow/forms/user/controls.twig:9
+#: themes/sparrow/forms/user/register.twig:13
+#: themes/sparrow/layouts/default.twig:40
+msgid "Email"
+msgstr "E-Mail"
+
+#: themes/sparrow/forms/user/controls.twig:11
+msgid "Website"
+msgstr "Website"
+
+#: themes/sparrow/forms/user/controls.twig:13
+msgid "New password?"
+msgstr "Neues Passwort?"
+
+#: themes/sparrow/forms/user/controls.twig:15
+msgid "Confirm"
+msgstr "Bestätigen"
+
+#: themes/sparrow/forms/user/controls.twig:20
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: themes/sparrow/forms/user/login.twig:5
+#: themes/sparrow/forms/user/login.twig:14
+#: themes/sparrow/layouts/default.twig:75
+msgid "Log in"
+msgstr "Einloggen"
+
+#: themes/sparrow/forms/user/login.twig:7
+#: themes/sparrow/forms/user/lost_password.twig:8
+#: themes/sparrow/forms/user/register.twig:7
+msgid "Username"
+msgstr "Benutzername"
+
+#: themes/sparrow/forms/user/login.twig:9
+#: themes/sparrow/forms/user/register.twig:9
+msgid "Password"
+msgstr "Passwort"
+
+#: themes/sparrow/forms/user/login.twig:15
+msgid "Help!"
+msgstr "Hilfe!"
+
+#: themes/sparrow/forms/user/lost_password.twig:5
+msgid "Lost password"
+msgstr "Passwort vergessen"
+
+#: themes/sparrow/forms/user/lost_password.twig:7
+msgid ""
+"Please enter your username below and we will email you a new password for "
+"your account."
+msgstr ""
+"Bitte gib deinen Benutzernamen ein und wir werden dir eine E-Mail mit einem "
+"neuen Passwort senden."
+
+#: themes/sparrow/forms/user/lost_password.twig:12
+msgid "Submit"
+msgstr "Absenden"
+
+#: themes/sparrow/forms/user/register.twig:5
+#: themes/sparrow/forms/user/register.twig:19
+#: themes/sparrow/layouts/default.twig:71
+msgid "Register"
+msgstr "Registrieren"
+
+#: themes/sparrow/forms/user/register.twig:11
+msgid "Password "
+msgstr "Passwort "
+
+#: themes/sparrow/forms/user/register.twig:11
+msgid "(again)"
+msgstr "(wiederholen)"
+
+#: themes/sparrow/info.php:3
+msgid "Sparrow"
+msgstr ""
+
+#: themes/sparrow/info.php:6
+msgid "An unobtrusive tumbleblog theme for Chyrp Lite."
+msgstr ""
+
+#: themes/sparrow/layouts/default.twig:43
+msgid "Feed"
+msgstr "Feed"
+
+#: themes/sparrow/layouts/default.twig:46
+msgid "Archive"
+msgstr "Archiv"
+
+#: themes/sparrow/layouts/default.twig:50
+msgid "Admin"
+msgstr "Administration"
+
+#: themes/sparrow/layouts/default.twig:54
+msgid "Write"
+msgstr "Schreiben"
+
+#: themes/sparrow/layouts/default.twig:66
+msgid "Log out"
+msgstr "Ausloggen"
+
+#: themes/sparrow/layouts/default.twig:83
+msgid "Search"
+msgstr "Suchen"
+
+#: themes/sparrow/layouts/default.twig:91
+msgid "&larr; Newer posts"
+msgstr "&larr; Neuere Posts"
+
+#: themes/sparrow/layouts/default.twig:101
+msgid "Older posts &rarr;"
+msgstr "Ältere Posts &rarr;"
+
+#: themes/sparrow/layouts/default.twig:112
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
+msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."
+
+#: themes/sparrow/pages/403.twig:4
+msgid "Forbidden."
+msgstr "Nicht erlaubt."
+
+#: themes/sparrow/pages/404.twig:4
+msgid "Not found."
+msgstr "Nicht gefunden."
+
+#: themes/sparrow/pages/archive.twig:10
+#, php-format
+msgid "&larr; Archive of %s"
+msgstr "&larr; Archiv vom %s"
+
+#: themes/sparrow/pages/archive.twig:18
+msgid "%B %Y"
+msgstr "%B %Y"
+
+#: themes/sparrow/pages/archive.twig:36
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Permanentlink zu &#8220;%s&#8221;"
+
+#: themes/sparrow/pages/archive.twig:48
+#, php-format
+msgid "Archive of %s &rarr;"
+msgstr "Archiv vom %s &rarr;"
+
+#: themes/sparrow/pages/archive.twig:57
+#, php-format
+msgid "Archive of %s"
+msgstr "Archiv vom %s"
+
+#: themes/sparrow/pages/archive.twig:66
+msgid "There aren't any posts in the timeframe you specified."
+msgstr "In dem angegebenen Zeitfenster gibt es keine Posts."
+
+#: themes/sparrow/pages/category.twig:5
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr "Posts in der Kategorie &#8220;%s&#8221;"
+
+#: themes/sparrow/pages/drafts.twig:5
+msgid "Drafts"
+msgstr "Entwürfe"
+
+#: themes/sparrow/pages/drafts.twig:10
+msgid "You don't have any drafts"
+msgstr "Du hast keine Entwürfe"
+
+#: themes/sparrow/pages/index.twig:8
+msgid "No posts"
+msgstr "Keine Posts"
+
+#: themes/sparrow/pages/search.twig:5
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Suchergebnisse für &#8220;%s&#8221;"
+
+#: themes/sparrow/pages/search.twig:10
+msgid "Your search did not return any results."
+msgstr "Deine Suche erzielte keine Ergebnisse."
+
+#: themes/sparrow/pages/tag.twig:5
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr "Posts mit den Tags &#8220;%s&#8221;"
+
+#: themes/sparrow/pages/tags.twig:6
+msgid "Tag cloud"
+msgstr "Tagcloud"
+
+#: themes/sparrow/pages/tags.twig:12
+msgid "Nothing here yet!"
+msgstr "Hier ist noch nichts!"
+
+#: themes/sparrow/pages/view.twig:6
+msgid "&larr; Next post"
+msgstr "&larr; Nächster Post"
+
+#: themes/sparrow/pages/view.twig:12
+msgid "Previous post &rarr;"
+msgstr "Vorheriger Post &rarr;"
+
+#: themes/sparrow/pages/view.twig:18
+msgid "Pingbacks"
+msgstr "Pingbacks"
+
+#~ msgid "Blog"
+#~ msgstr "Blog"
+
+#~ msgid "Pages"
+#~ msgstr "Seiten"
+
+#~ msgid "Related Posts"
+#~ msgstr "Verwandte Posts"
+
+#~ msgid "Recent Posts"
+#~ msgstr "Kürzliche Posts"
+
+#~ msgid "Blossom"
+#~ msgstr "Blossom"
+
+#~ msgid "The default theme provided with Chyrp Lite."
+#~ msgstr "Das Standardtheme von Chyrp Lite."
+
+#~ msgid "Menu"
+#~ msgstr "Menü"
+
+#~ msgid "Newer comments"
+#~ msgstr "Neuere Kommentare"
+
+#~ msgid "Older comments"
+#~ msgstr "Ältere Kommentare"
