@@ -17,7 +17,7 @@
          * Returns a list of operators to add to the existing list.
          */
         public function getFunctions() {
-            return array(   
+            return array(
                 # Helpers:
                 new Twig_SimpleFunction("url",               "url"),
                 new Twig_SimpleFunction("self_url",          "self_url"),
