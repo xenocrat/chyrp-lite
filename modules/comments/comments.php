@@ -810,6 +810,8 @@
 
                 $user = new User(array("login" => unfix((string) $login)));
 
+                $updated = ((string) $comment->updated != (string) $comment->published);
+
                 Comment::add(unfix((string) $comment->content),
                              unfix((string) $comment->author->name),
                              unfix((string) $comment->author->uri),
@@ -822,7 +824,7 @@
                              0,
                              0,
                              datetime((string) $comment->published),
-                             ($comment->published == $comment->updated) ? null : datetime((string) $comment->updated));
+                             ($updated) ? datetime((string) $comment->updated) : null);
             }
         }
 
