@@ -1382,15 +1382,17 @@
 
                     $values["imported_from"] = "chyrp";
 
+                    $updated = ((string) $entry->updated != (string) $entry->published);
+
                     $post = Post::add($values,
                                       unfix((string) $chyrp->clean),
                                       Post::check_url(unfix((string) $chyrp->url)),
                                       unfix((string) $chyrp->feather),
                                       (!$user->no_results) ? $user->id : $visitor->id,
-                                      (bool) (int) unfix((string) $chyrp->pinned),
+                                      (int) (bool) unfix((string) $chyrp->pinned),
                                       unfix((string) $chyrp->status),
                                       datetime((string) $entry->published),
-                                      ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated),
+                                      ($updated) ? datetime((string) $entry->updated) : null,
                                       false);
 
                     $trigger->call("import_chyrp_post", $entry, $post);
@@ -1408,17 +1410,19 @@
 
                     $user = new User(array("login" => unfix((string) $login)));
 
+                    $updated = ((string) $entry->updated != (string) $entry->published);
+
                     $page = Page::add(unfix((string) $entry->title),
                                       unfix((string) $entry->content),
                                       (!$user->no_results) ? $user->id : $visitor->id,
                                       (int) unfix((string) $attr->parent_id),
-                                      (bool) (int) unfix((string) $chyrp->public),
-                                      (bool) (int) unfix((string) $chyrp->show_in_list),
+                                      (int) (bool) unfix((string) $chyrp->public),
+                                      (int) (bool) unfix((string) $chyrp->show_in_list),
                                       (int) unfix((string) $chyrp->list_order),
                                       unfix((string) $chyrp->clean),
                                       Page::check_url(unfix((string) $chyrp->url)),
                                       datetime((string) $entry->published),
-                                      ($entry->updated == $entry->published) ? null : datetime((string) $entry->updated));
+                                      ($updated) ? datetime((string) $entry->updated) : null);
 
                     $trigger->call("import_chyrp_page", $entry, $page);
                 }
