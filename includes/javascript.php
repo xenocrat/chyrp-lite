@@ -14,7 +14,7 @@ $(function() {
     }
 });
 var Route = {
-    action: '<?php echo addslashes(@$_GET['action']); ?>'
+    action: '<?php if (isset($_GET['action'])) echo addslashes($_GET['action']); ?>'
 }
 var Visitor = {
     token: '<?php if (same_origin()) echo authenticate(); ?>'
