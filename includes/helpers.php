@@ -24,7 +24,7 @@
                                  array("Session", "gc"));
 
         $parsed = parse_url(Config::current()->url, PHP_URL_HOST);
-        $domain = preg_replace("~^www\.~", "", oneof($domain, $parsed, $_SERVER['SERVER_NAME']));
+        $domain = oneof($domain, $parsed, $_SERVER['SERVER_NAME']);
 
         session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain, false, true);
         session_name("ChyrpSession");
