@@ -324,6 +324,7 @@ msgstr ""
 
 #: themes/topaz/forms/user/login.twig:9
 #: themes/topaz/forms/user/register.twig:9
+#: themes/topaz/forms/user/register.twig:11
 msgid "Password"
 msgstr ""
 
@@ -341,10 +342,6 @@ msgstr ""
 
 #: themes/topaz/forms/user/lost_password.twig:12
 msgid "Submit"
-msgstr ""
-
-#: themes/topaz/forms/user/register.twig:11
-msgid "Password "
 msgstr ""
 
 #: themes/topaz/forms/user/register.twig:11

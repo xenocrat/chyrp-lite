@@ -235,6 +235,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/login.twig:9
 #: themes/sparrow/forms/user/register.twig:9
+#: themes/sparrow/forms/user/register.twig:11
 msgid "Password"
 msgstr ""
 
@@ -258,10 +259,6 @@ msgstr ""
 #: themes/sparrow/forms/user/register.twig:19
 #: themes/sparrow/layouts/default.twig:71
 msgid "Register"
-msgstr ""
-
-#: themes/sparrow/forms/user/register.twig:11
-msgid "Password "
 msgstr ""
 
 #: themes/sparrow/forms/user/register.twig:11

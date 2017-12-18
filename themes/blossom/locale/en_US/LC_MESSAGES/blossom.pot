@@ -313,6 +313,7 @@ msgstr ""
 
 #: themes/blossom/forms/user/login.twig:9
 #: themes/blossom/forms/user/register.twig:9
+#: themes/blossom/forms/user/register.twig:11
 msgid "Password"
 msgstr ""
 
@@ -330,10 +331,6 @@ msgstr ""
 
 #: themes/blossom/forms/user/lost_password.twig:12
 msgid "Submit"
-msgstr ""
-
-#: themes/blossom/forms/user/register.twig:11
-msgid "Password "
 msgstr ""
 
 #: themes/blossom/forms/user/register.twig:11

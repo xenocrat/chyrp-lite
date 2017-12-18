@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1396
+	includes/controller/Admin.php on line 1398
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1423
+	includes/controller/Admin.php on line 1427
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1427
+	includes/controller/Admin.php on line 1431
 Arguments:
 	$imports
 
@@ -279,13 +279,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1701
+	includes/controller/Admin.php on line 1705
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1709
+	includes/controller/Admin.php on line 1713
 
 
 can_not_view_page
@@ -808,7 +808,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1986
+	includes/controller/Admin.php on line 1990
 
 
 manage_nav
@@ -816,7 +816,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2015
+	includes/controller/Admin.php on line 2019
 
 
 settings_nav
@@ -824,7 +824,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2040
+	includes/controller/Admin.php on line 2044
 
 
 extend_nav
@@ -832,7 +832,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2058
+	includes/controller/Admin.php on line 2062
 
 
 keyword_search

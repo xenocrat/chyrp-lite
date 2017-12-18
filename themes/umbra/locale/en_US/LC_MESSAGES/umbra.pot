@@ -59,7 +59,7 @@ msgstr ""
 
 #: themes/umbra/content/post.twig:37
 #, php-format
-msgid "&copy; %s. %s."
+msgid "&copy; %s, %s."
 msgstr ""
 
 #: themes/umbra/content/post.twig:39
@@ -205,6 +205,7 @@ msgstr ""
 
 #: themes/umbra/forms/user/login.twig:9
 #: themes/umbra/forms/user/register.twig:9
+#: themes/umbra/forms/user/register.twig:11
 msgid "Password"
 msgstr ""
 
@@ -228,10 +229,6 @@ msgstr ""
 #: themes/umbra/forms/user/register.twig:19
 #: themes/umbra/layouts/default.twig:71
 msgid "Register"
-msgstr ""
-
-#: themes/umbra/forms/user/register.twig:11
-msgid "Password "
 msgstr ""
 
 #: themes/umbra/forms/user/register.twig:11
