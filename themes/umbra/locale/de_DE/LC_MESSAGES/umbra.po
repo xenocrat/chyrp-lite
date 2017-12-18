@@ -59,7 +59,7 @@ msgstr "%d %b, %Y"
 
 #: themes/umbra/content/post.twig:37
 #, php-format
-msgid "&copy; %s. %s."
+msgid "&copy; %s, %s."
 msgstr "&copy; %s, %s."
 
 #: themes/umbra/content/post.twig:39
@@ -202,6 +202,7 @@ msgid "Username"
 msgstr "Benutzername"
 
 #: themes/umbra/forms/user/login.twig:9 themes/umbra/forms/user/register.twig:9
+#: themes/umbra/forms/user/register.twig:11
 msgid "Password"
 msgstr "Passwort"
 
@@ -232,20 +233,16 @@ msgid "Register"
 msgstr "Registrieren"
 
 #: themes/umbra/forms/user/register.twig:11
-msgid "Password "
-msgstr "Passwort "
-
-#: themes/umbra/forms/user/register.twig:11
 msgid "(again)"
 msgstr "(wiederholen)"
 
 #: themes/umbra/info.php:3
 msgid "Umbra"
-msgstr ""
+msgstr "Umbra"
 
 #: themes/umbra/info.php:6
 msgid "A dark tumbleblog theme for Chyrp Lite."
-msgstr ""
+msgstr "Ein dunkler Tumbleblog thema für Chyrp Lite."
 
 #: themes/umbra/layouts/default.twig:43
 msgid "Feed"
@@ -274,7 +271,7 @@ msgstr "Suchen"
 #: themes/umbra/layouts/default.twig:91 themes/umbra/layouts/default.twig:101
 #, php-format
 msgid "Page %d"
-msgstr ""
+msgstr "Seite %d"
 
 #: themes/umbra/layouts/default.twig:112
 #, php-format
@@ -349,52 +346,3 @@ msgstr "Hier ist noch nichts!"
 #: themes/umbra/pages/view.twig:8
 msgid "Pingbacks"
 msgstr "Pingbacks"
-
-#~ msgid "%s pingback"
-#~ msgid_plural "%s pingbacks"
-#~ msgstr[0] "%s Pingback"
-#~ msgstr[1] "%s Pingbacks"
-
-#~ msgid "Comments closed"
-#~ msgstr "Kommentare geschlossen"
-
-#~ msgid "%s comment"
-#~ msgid_plural "%s comments"
-#~ msgstr[0] "%s Kommentar"
-#~ msgstr[1] "%s Kommentare"
-
-#~ msgid "Blog"
-#~ msgstr "Blog"
-
-#~ msgid "Categories"
-#~ msgstr "Kategorien"
-
-#~ msgid "Related Posts"
-#~ msgstr "Verwandte Posts"
-
-#~ msgid "Recent Posts"
-#~ msgstr "Kürzliche Posts"
-
-#~ msgid "Blossom"
-#~ msgstr "Blossom"
-
-#~ msgid "Menu"
-#~ msgstr "Menü"
-
-#~ msgid "Newer posts"
-#~ msgstr "Neuere Posts"
-
-#~ msgid "Older posts"
-#~ msgstr "Ältere Posts"
-
-#~ msgid "Next post"
-#~ msgstr "Nächster Post"
-
-#~ msgid "Previous post"
-#~ msgstr "Vorheriger Post"
-
-#~ msgid "Newer comments"
-#~ msgstr "Neuere Kommentare"
-
-#~ msgid "Older comments"
-#~ msgstr "Ältere Kommentare"

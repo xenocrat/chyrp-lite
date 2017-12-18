@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.4\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de_DE\n"
 
 #. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2017 Daniel Pimley and other contributors.
@@ -289,6 +289,7 @@ msgstr "Benutzername"
 
 #: themes/blossom/forms/user/login.twig:9
 #: themes/blossom/forms/user/register.twig:9
+#: themes/blossom/forms/user/register.twig:11
 msgid "Password"
 msgstr "Passwort"
 
@@ -311,10 +312,6 @@ msgstr ""
 #: themes/blossom/forms/user/lost_password.twig:12
 msgid "Submit"
 msgstr "Absenden"
-
-#: themes/blossom/forms/user/register.twig:11
-msgid "Password "
-msgstr "Passwort "
 
 #: themes/blossom/forms/user/register.twig:11
 msgid "(again)"

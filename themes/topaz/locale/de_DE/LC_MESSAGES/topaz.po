@@ -163,7 +163,7 @@ msgstr "%B %Y"
 #: themes/topaz/feathers/video.twig:8
 #, php-format
 msgid "Written by %s"
-msgstr ""
+msgstr "Publiziert von %s"
 
 #: themes/topaz/feathers/uploader.twig:22
 msgid "File attachment:"
@@ -285,6 +285,7 @@ msgid "Username"
 msgstr "Benutzername"
 
 #: themes/topaz/forms/user/login.twig:9 themes/topaz/forms/user/register.twig:9
+#: themes/topaz/forms/user/register.twig:11
 msgid "Password"
 msgstr "Passwort"
 
@@ -309,20 +310,16 @@ msgid "Submit"
 msgstr "Absenden"
 
 #: themes/topaz/forms/user/register.twig:11
-msgid "Password "
-msgstr "Passwort "
-
-#: themes/topaz/forms/user/register.twig:11
 msgid "(again)"
 msgstr "(wiederholen)"
 
 #: themes/topaz/info.php:3
 msgid "Topaz"
-msgstr ""
+msgstr "Topaz"
 
 #: themes/topaz/info.php:6
 msgid "A minimalist responsive theme for Chyrp Lite."
-msgstr ""
+msgstr "Eine minimalistische ansprechbar thema für Chyrp Lite."
 
 #: themes/topaz/javascripts/theme.js.php:14
 #: themes/topaz/javascripts/theme.js.php:22
@@ -423,9 +420,3 @@ msgstr "Neuere Kommentare"
 #: themes/topaz/pages/view.twig:36
 msgid "Older comments"
 msgstr "Ältere Kommentare"
-
-#~ msgid "Blossom"
-#~ msgstr "Blossom"
-
-#~ msgid "The default theme provided with Chyrp Lite."
-#~ msgstr "Das Standardtheme von Chyrp Lite."

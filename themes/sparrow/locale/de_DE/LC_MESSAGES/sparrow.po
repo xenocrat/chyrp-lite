@@ -227,6 +227,7 @@ msgstr "Benutzername"
 
 #: themes/sparrow/forms/user/login.twig:9
 #: themes/sparrow/forms/user/register.twig:9
+#: themes/sparrow/forms/user/register.twig:11
 msgid "Password"
 msgstr "Passwort"
 
@@ -257,20 +258,16 @@ msgid "Register"
 msgstr "Registrieren"
 
 #: themes/sparrow/forms/user/register.twig:11
-msgid "Password "
-msgstr "Passwort "
-
-#: themes/sparrow/forms/user/register.twig:11
 msgid "(again)"
 msgstr "(wiederholen)"
 
 #: themes/sparrow/info.php:3
 msgid "Sparrow"
-msgstr ""
+msgstr "Spatz"
 
 #: themes/sparrow/info.php:6
 msgid "An unobtrusive tumbleblog theme for Chyrp Lite."
-msgstr ""
+msgstr "Eine unauffällige Tumbleblog thema für Chyrp Lite."
 
 #: themes/sparrow/layouts/default.twig:43
 msgid "Feed"
@@ -395,30 +392,3 @@ msgstr "Vorheriger Post &rarr;"
 #: themes/sparrow/pages/view.twig:18
 msgid "Pingbacks"
 msgstr "Pingbacks"
-
-#~ msgid "Blog"
-#~ msgstr "Blog"
-
-#~ msgid "Pages"
-#~ msgstr "Seiten"
-
-#~ msgid "Related Posts"
-#~ msgstr "Verwandte Posts"
-
-#~ msgid "Recent Posts"
-#~ msgstr "Kürzliche Posts"
-
-#~ msgid "Blossom"
-#~ msgstr "Blossom"
-
-#~ msgid "The default theme provided with Chyrp Lite."
-#~ msgstr "Das Standardtheme von Chyrp Lite."
-
-#~ msgid "Menu"
-#~ msgstr "Menü"
-
-#~ msgid "Newer comments"
-#~ msgstr "Neuere Kommentare"
-
-#~ msgid "Older comments"
-#~ msgstr "Ältere Kommentare"
