@@ -1,7 +1,6 @@
-## License
+## BSD 3-Clause License
 
-Chyrp Lite is Copyright 2008-2017 Alex Suraci, Arian Xhezairi, Daniel Pimley,
-and other contributors.
+Copyright 2008-2018 Alex Suraci, Arian Xhezairi, Daniel Pimley, and others.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

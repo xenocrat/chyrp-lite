@@ -31,18 +31,18 @@
 #: includes/controller/Admin.php:1002
 #: includes/controller/Admin.php:1014
 #: includes/controller/Admin.php:1255
-#: includes/controller/Admin.php:1446
-#: includes/controller/Admin.php:1528
-#: includes/controller/Admin.php:1562
-#: includes/controller/Admin.php:1601
-#: includes/controller/Admin.php:1645
-#: includes/controller/Admin.php:1743
-#: includes/controller/Admin.php:1746
-#: includes/controller/Admin.php:1749
-#: includes/controller/Admin.php:1752
-#: includes/controller/Admin.php:1755
-#: includes/controller/Admin.php:1803
-#: includes/controller/Admin.php:1943
+#: includes/controller/Admin.php:1450
+#: includes/controller/Admin.php:1532
+#: includes/controller/Admin.php:1566
+#: includes/controller/Admin.php:1605
+#: includes/controller/Admin.php:1649
+#: includes/controller/Admin.php:1747
+#: includes/controller/Admin.php:1750
+#: includes/controller/Admin.php:1753
+#: includes/controller/Admin.php:1756
+#: includes/controller/Admin.php:1759
+#: includes/controller/Admin.php:1807
+#: includes/controller/Admin.php:1947
 #: includes/download.php:12
 #: includes/download.php:15
 #: includes/error.php:144
@@ -83,7 +83,7 @@ msgid "This resource accepts POST requests only."
 msgstr ""
 
 #: includes/ajax.php:21
-#: includes/controller/Admin.php:1943
+#: includes/controller/Admin.php:1947
 #: includes/download.php:15
 #: includes/thumb.php:18
 msgid "Missing argument."
@@ -147,26 +147,26 @@ msgstr ""
 #: includes/controller/Admin.php:1329
 #: includes/controller/Admin.php:1343
 #: includes/controller/Admin.php:1367
-#: includes/controller/Admin.php:1402
-#: includes/controller/Admin.php:1438
-#: includes/controller/Admin.php:1520
-#: includes/controller/Admin.php:1553
-#: includes/controller/Admin.php:1586
-#: includes/controller/Admin.php:1589
-#: includes/controller/Admin.php:1630
-#: includes/controller/Admin.php:1633
-#: includes/controller/Admin.php:1667
-#: includes/controller/Admin.php:1670
-#: includes/controller/Admin.php:1695
-#: includes/controller/Admin.php:1706
-#: includes/controller/Admin.php:1719
-#: includes/controller/Admin.php:1740
-#: includes/controller/Admin.php:1787
-#: includes/controller/Admin.php:1800
-#: includes/controller/Admin.php:1843
-#: includes/controller/Admin.php:1850
-#: includes/controller/Admin.php:1873
-#: includes/controller/Admin.php:1879
+#: includes/controller/Admin.php:1404
+#: includes/controller/Admin.php:1442
+#: includes/controller/Admin.php:1524
+#: includes/controller/Admin.php:1557
+#: includes/controller/Admin.php:1590
+#: includes/controller/Admin.php:1593
+#: includes/controller/Admin.php:1634
+#: includes/controller/Admin.php:1637
+#: includes/controller/Admin.php:1671
+#: includes/controller/Admin.php:1674
+#: includes/controller/Admin.php:1699
+#: includes/controller/Admin.php:1710
+#: includes/controller/Admin.php:1723
+#: includes/controller/Admin.php:1744
+#: includes/controller/Admin.php:1791
+#: includes/controller/Admin.php:1804
+#: includes/controller/Admin.php:1847
+#: includes/controller/Admin.php:1854
+#: includes/controller/Admin.php:1877
+#: includes/controller/Admin.php:1883
 #: includes/controller/Main.php:334
 #: includes/controller/Main.php:398
 #: includes/download.php:18
@@ -200,14 +200,14 @@ msgstr ""
 #: includes/controller/Admin.php:959
 #: includes/controller/Admin.php:1074
 #: includes/controller/Admin.php:1286
-#: includes/controller/Admin.php:1589
-#: includes/controller/Admin.php:1633
-#: includes/controller/Admin.php:1670
-#: includes/controller/Admin.php:1706
-#: includes/controller/Admin.php:1740
-#: includes/controller/Admin.php:1800
-#: includes/controller/Admin.php:1850
-#: includes/controller/Admin.php:1879
+#: includes/controller/Admin.php:1593
+#: includes/controller/Admin.php:1637
+#: includes/controller/Admin.php:1674
+#: includes/controller/Admin.php:1710
+#: includes/controller/Admin.php:1744
+#: includes/controller/Admin.php:1804
+#: includes/controller/Admin.php:1854
+#: includes/controller/Admin.php:1883
 #: includes/controller/Main.php:480
 #: includes/controller/Main.php:603
 #: includes/controller/Main.php:660
@@ -255,8 +255,8 @@ msgstr ""
 #: includes/controller/Admin.php:918
 #: includes/controller/Admin.php:939
 #: includes/controller/Admin.php:970
-#: includes/controller/Admin.php:1604
-#: includes/controller/Admin.php:1648
+#: includes/controller/Admin.php:1608
+#: includes/controller/Admin.php:1652
 #: includes/download.php:24
 #: includes/helpers.php:115
 #: includes/thumb.php:44
@@ -328,7 +328,7 @@ msgstr ""
 #: includes/ajax.php:98
 #: includes/controller/Admin.php:368
 #: includes/controller/Admin.php:379
-#: includes/controller/Admin.php:1402
+#: includes/controller/Admin.php:1404
 msgid "You do not have sufficient privileges to add pages."
 msgstr ""
 
@@ -420,16 +420,16 @@ msgstr ""
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr ""
 
-#: includes/common.php:291
-#: includes/common.php:296
+#: includes/common.php:292
+#: includes/common.php:297
 msgid "Service Unavailable"
 msgstr ""
 
-#: includes/common.php:292
+#: includes/common.php:293
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 
-#: includes/common.php:297
+#: includes/common.php:298
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
@@ -509,7 +509,7 @@ msgid "Page updated."
 msgstr ""
 
 #: includes/controller/Admin.php:472
-#: includes/controller/Admin.php:1901
+#: includes/controller/Admin.php:1905
 msgid "View page &rarr;"
 msgstr ""
 
@@ -555,7 +555,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:601
 #: includes/controller/Admin.php:696
-#: includes/controller/Admin.php:1743
+#: includes/controller/Admin.php:1747
 #: includes/controller/Main.php:498
 #: includes/controller/Main.php:669
 #: install.php:471
@@ -564,7 +564,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:604
 #: includes/controller/Admin.php:699
-#: includes/controller/Admin.php:1746
+#: includes/controller/Admin.php:1750
 #: includes/controller/Main.php:500
 #: includes/controller/Main.php:671
 #: install.php:473
@@ -764,215 +764,215 @@ msgstr ""
 msgid "You did not select anything to import."
 msgstr ""
 
-#: includes/controller/Admin.php:1429
+#: includes/controller/Admin.php:1433
 msgid "Chyrp Lite content successfully imported!"
 msgstr ""
 
-#: includes/controller/Admin.php:1438
-#: includes/controller/Admin.php:1520
-#: includes/controller/Admin.php:1586
-#: includes/controller/Admin.php:1630
+#: includes/controller/Admin.php:1442
+#: includes/controller/Admin.php:1524
+#: includes/controller/Admin.php:1590
+#: includes/controller/Admin.php:1634
 msgid "You do not have sufficient privileges to toggle extensions."
 msgstr ""
 
-#: includes/controller/Admin.php:1446
+#: includes/controller/Admin.php:1450
 msgid "Could not read modules directory."
 msgstr ""
 
-#: includes/controller/Admin.php:1528
+#: includes/controller/Admin.php:1532
 msgid "Could not read feathers directory."
 msgstr ""
 
-#: includes/controller/Admin.php:1553
-#: includes/controller/Admin.php:1667
-#: includes/controller/Admin.php:1695
-#: includes/controller/Admin.php:1719
-#: includes/controller/Admin.php:1787
-#: includes/controller/Admin.php:1843
-#: includes/controller/Admin.php:1873
+#: includes/controller/Admin.php:1557
+#: includes/controller/Admin.php:1671
+#: includes/controller/Admin.php:1699
+#: includes/controller/Admin.php:1723
+#: includes/controller/Admin.php:1791
+#: includes/controller/Admin.php:1847
+#: includes/controller/Admin.php:1877
 msgid "You do not have sufficient privileges to change settings."
 msgstr ""
 
-#: includes/controller/Admin.php:1556
+#: includes/controller/Admin.php:1560
 msgid "You are currently previewing a theme."
 msgstr ""
 
-#: includes/controller/Admin.php:1557
+#: includes/controller/Admin.php:1561
 msgid "Stop &rarr;"
 msgstr ""
 
-#: includes/controller/Admin.php:1562
+#: includes/controller/Admin.php:1566
 msgid "Could not read themes directory."
 msgstr ""
 
-#: includes/controller/Admin.php:1592
-#: includes/controller/Admin.php:1636
+#: includes/controller/Admin.php:1596
+#: includes/controller/Admin.php:1640
 msgid "No Extension Specified"
 msgstr ""
 
-#: includes/controller/Admin.php:1592
+#: includes/controller/Admin.php:1596
 msgid "You did not specify an extension to enable."
 msgstr ""
 
-#: includes/controller/Admin.php:1601
+#: includes/controller/Admin.php:1605
 msgid "Extension already enabled."
 msgstr ""
 
-#: includes/controller/Admin.php:1604
-#: includes/controller/Admin.php:1648
+#: includes/controller/Admin.php:1608
+#: includes/controller/Admin.php:1652
 msgid "Extension not found."
 msgstr ""
 
-#: includes/controller/Admin.php:1618
+#: includes/controller/Admin.php:1622
 msgid "Extension enabled."
 msgstr ""
 
-#: includes/controller/Admin.php:1636
+#: includes/controller/Admin.php:1640
 msgid "You did not specify an extension to disable."
 msgstr ""
 
-#: includes/controller/Admin.php:1645
+#: includes/controller/Admin.php:1649
 msgid "Extension already disabled."
 msgstr ""
 
-#: includes/controller/Admin.php:1658
+#: includes/controller/Admin.php:1662
 msgid "Extension disabled."
 msgstr ""
 
-#: includes/controller/Admin.php:1673
+#: includes/controller/Admin.php:1677
 msgid "No Theme Specified"
 msgstr ""
 
-#: includes/controller/Admin.php:1673
+#: includes/controller/Admin.php:1677
 msgid "You did not specify which theme to select."
 msgstr ""
 
-#: includes/controller/Admin.php:1686
+#: includes/controller/Admin.php:1690
 msgid "Theme changed."
 msgstr ""
 
-#: includes/controller/Admin.php:1702
+#: includes/controller/Admin.php:1706
 msgid "Preview stopped."
 msgstr ""
 
-#: includes/controller/Admin.php:1710
+#: includes/controller/Admin.php:1714
 msgid "Preview started."
 msgstr ""
 
-#: includes/controller/Admin.php:1749
+#: includes/controller/Admin.php:1753
 msgid "Chyrp URL cannot be blank."
 msgstr ""
 
-#: includes/controller/Admin.php:1752
+#: includes/controller/Admin.php:1756
 msgid "Invalid Chyrp URL."
 msgstr ""
 
-#: includes/controller/Admin.php:1755
+#: includes/controller/Admin.php:1759
 msgid "Invalid canonical URL."
 msgstr ""
 
-#: includes/controller/Admin.php:1778
-#: includes/controller/Admin.php:1834
-#: includes/controller/Admin.php:1864
-#: includes/controller/Admin.php:1914
+#: includes/controller/Admin.php:1782
+#: includes/controller/Admin.php:1838
+#: includes/controller/Admin.php:1868
+#: includes/controller/Admin.php:1918
 msgid "Settings updated."
 msgstr ""
 
-#: includes/controller/Admin.php:1803
+#: includes/controller/Admin.php:1807
 msgid "Invalid feed URL."
 msgstr ""
 
-#: includes/controller/Admin.php:1885
+#: includes/controller/Admin.php:1889
 msgid "Clean URLs are disabled because the <em>.htaccess</em> file cannot be configured."
 msgstr ""
 
-#: includes/controller/Admin.php:1893
+#: includes/controller/Admin.php:1897
 msgid "My Awesome Homepage"
 msgstr ""
 
-#: includes/controller/Admin.php:1894
+#: includes/controller/Admin.php:1898
 msgid "Nothing here yet!"
 msgstr ""
 
-#: includes/controller/Admin.php:1901
+#: includes/controller/Admin.php:1905
 msgid "Page created."
 msgstr ""
 
-#: includes/controller/Admin.php:1923
+#: includes/controller/Admin.php:1927
 #: includes/controller/Main.php:599
 msgid "You are already logged in."
 msgstr ""
 
-#: includes/controller/Admin.php:1947
+#: includes/controller/Admin.php:1951
 msgid "Help"
 msgstr ""
 
-#: includes/controller/Admin.php:1960
+#: includes/controller/Admin.php:1964
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:1961
+#: includes/controller/Admin.php:1965
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:1962
+#: includes/controller/Admin.php:1966
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:1963
+#: includes/controller/Admin.php:1967
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:1973
+#: includes/controller/Admin.php:1977
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:2000
+#: includes/controller/Admin.php:2004
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:2004
+#: includes/controller/Admin.php:2008
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:2008
-#: includes/controller/Admin.php:2036
+#: includes/controller/Admin.php:2012
+#: includes/controller/Admin.php:2040
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:2012
+#: includes/controller/Admin.php:2016
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:2018
+#: includes/controller/Admin.php:2022
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:2021
+#: includes/controller/Admin.php:2025
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:2034
+#: includes/controller/Admin.php:2038
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:2035
+#: includes/controller/Admin.php:2039
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:2037
+#: includes/controller/Admin.php:2041
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:2053
+#: includes/controller/Admin.php:2057
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:2054
+#: includes/controller/Admin.php:2058
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:2055
+#: includes/controller/Admin.php:2059
 msgid "Themes"
 msgstr ""
 

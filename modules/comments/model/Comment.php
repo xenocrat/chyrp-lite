@@ -194,8 +194,8 @@
                                "user_id"      => $user_id,
                                "parent_id"    => $parent,
                                "notify"       => $notify,
-                               "created_at"   => oneof($created_at, datetime()),
-                               "updated_at"   => oneof($updated_at, "0000-00-00 00:00:00")));
+                               "created_at"   => fallback($created_at, datetime()),
+                               "updated_at"   => fallback($updated_at, "0000-00-00 00:00:00")));
 
             $new = new self($sql->latest("comments"));
             Trigger::current()->call("add_comment", $new);
