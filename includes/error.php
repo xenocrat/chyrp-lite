@@ -4,8 +4,8 @@
      * Functions for handling and reporting errors.
      */
 
-    ini_set('display_errors', false);
-    ini_set('error_log', MAIN_DIR.DIR."error_log.txt");
+    ini_set("display_errors", false);
+    ini_set("error_log", MAIN_DIR.DIR."error_log.txt");
 
     # Array: $errors
     # Stores errors encountered when installing or upgrading.
