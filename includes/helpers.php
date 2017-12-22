@@ -1989,7 +1989,7 @@
         header("Content-Type: application/octet-stream");
         header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
 
-        if (!in_array("ob_gzhandler", ob_list_handlers()))
+        if (!in_array("ob_gzhandler", ob_list_handlers()) and !ini_get("zlib.output_compression"))
             header("Content-Length: ".strlen($contents));
 
         echo $contents;
