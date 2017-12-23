@@ -389,12 +389,12 @@ msgstr ""
 
 #: themes/topaz/pages/archive.twig:41
 #: themes/topaz/pages/archive.twig:46
-#: themes/topaz/pages/archive.twig:57
+#: themes/topaz/pages/archive.twig:56
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:68
+#: themes/topaz/pages/archive.twig:67
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

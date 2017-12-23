@@ -46,21 +46,21 @@
 #: includes/download.php:12
 #: includes/download.php:15
 #: includes/error.php:144
-#: includes/helpers.php:1595
 #: includes/helpers.php:1601
-#: includes/helpers.php:1604
 #: includes/helpers.php:1607
-#: includes/helpers.php:1633
-#: includes/helpers.php:1636
+#: includes/helpers.php:1610
+#: includes/helpers.php:1613
 #: includes/helpers.php:1639
-#: includes/helpers.php:1701
-#: includes/helpers.php:1704
+#: includes/helpers.php:1642
+#: includes/helpers.php:1645
 #: includes/helpers.php:1707
 #: includes/helpers.php:1710
 #: includes/helpers.php:1713
 #: includes/helpers.php:1716
 #: includes/helpers.php:1719
-#: includes/helpers.php:1724
+#: includes/helpers.php:1722
+#: includes/helpers.php:1725
+#: includes/helpers.php:1730
 #: includes/thumb.php:15
 #: includes/thumb.php:18
 #: includes/thumb.php:47
@@ -170,7 +170,7 @@ msgstr ""
 #: includes/controller/Main.php:334
 #: includes/controller/Main.php:398
 #: includes/download.php:18
-#: includes/helpers.php:1598
+#: includes/helpers.php:1604
 #: includes/thumb.php:21
 msgid "Access Denied"
 msgstr ""
@@ -1167,146 +1167,146 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr ""
 
-#: includes/helpers.php:1434
+#: includes/helpers.php:1440
 msgid "Please create the uploads directory."
 msgstr ""
 
-#: includes/helpers.php:1436
+#: includes/helpers.php:1442
 msgid "Please make the uploads directory writable."
 msgstr ""
 
-#: includes/helpers.php:1454
+#: includes/helpers.php:1460
 #, php-format
 msgid "%s module is missing."
 msgstr ""
 
-#: includes/helpers.php:1463
+#: includes/helpers.php:1469
 #, php-format
 msgid "%s module is damaged."
 msgstr ""
 
-#: includes/helpers.php:1477
+#: includes/helpers.php:1483
 #, php-format
 msgid "%s feather is missing."
 msgstr ""
 
-#: includes/helpers.php:1486
+#: includes/helpers.php:1492
 #, php-format
 msgid "%s feather is damaged."
 msgstr ""
 
-#: includes/helpers.php:1546
-#: includes/helpers.php:1567
+#: includes/helpers.php:1552
+#: includes/helpers.php:1573
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr ""
 
-#: includes/helpers.php:1595
+#: includes/helpers.php:1601
 msgid "Uploaded file is of an unsupported type."
 msgstr ""
 
-#: includes/helpers.php:1598
-msgid "Only uploaded files are accepted."
-msgstr ""
-
-#: includes/helpers.php:1601
-#: includes/helpers.php:1633
-#: includes/lib/XMLRPC.php:195
-msgid "Upload path does not exist."
-msgstr ""
-
 #: includes/helpers.php:1604
-#: includes/helpers.php:1636
-#: includes/lib/XMLRPC.php:198
-msgid "Upload path is not writable."
+msgid "Only uploaded files are accepted."
 msgstr ""
 
 #: includes/helpers.php:1607
 #: includes/helpers.php:1639
-#: includes/helpers.php:1714
+#: includes/lib/XMLRPC.php:195
+msgid "Upload path does not exist."
+msgstr ""
+
+#: includes/helpers.php:1610
+#: includes/helpers.php:1642
+#: includes/lib/XMLRPC.php:198
+msgid "Upload path is not writable."
+msgstr ""
+
+#: includes/helpers.php:1613
+#: includes/helpers.php:1645
+#: includes/helpers.php:1720
 #: includes/lib/XMLRPC.php:201
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1702
+#: includes/helpers.php:1708
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:1705
+#: includes/helpers.php:1711
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:1708
+#: includes/helpers.php:1714
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:1711
+#: includes/helpers.php:1717
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:1717
+#: includes/helpers.php:1723
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:1720
+#: includes/helpers.php:1726
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:1725
+#: includes/helpers.php:1731
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:1941
+#: includes/helpers.php:1947
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:1962
+#: includes/helpers.php:1968
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2035
+#: includes/helpers.php:2041
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:2036
-#: includes/helpers.php:2046
-#: includes/helpers.php:2056
+#: includes/helpers.php:2042
+#: includes/helpers.php:2052
+#: includes/helpers.php:2062
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:2038
+#: includes/helpers.php:2044
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:2040
+#: includes/helpers.php:2046
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2045
+#: includes/helpers.php:2051
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2048
+#: includes/helpers.php:2054
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2050
+#: includes/helpers.php:2056
 msgid "Visit this link to reset your password:"
 msgstr ""
 
-#: includes/helpers.php:2055
+#: includes/helpers.php:2061
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2058
+#: includes/helpers.php:2064
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
@@ -1388,115 +1388,115 @@ msgstr ""
 msgid "XML-RPC support is disabled for this site."
 msgstr ""
 
-#: includes/model/Group.php:247
+#: includes/model/Group.php:249
 msgid "Change Settings"
 msgstr ""
 
-#: includes/model/Group.php:248
+#: includes/model/Group.php:250
 msgid "Toggle Extensions"
 msgstr ""
 
-#: includes/model/Group.php:249
+#: includes/model/Group.php:251
 msgid "View Site"
 msgstr ""
 
-#: includes/model/Group.php:250
+#: includes/model/Group.php:252
 msgid "View Private Posts"
 msgstr ""
 
-#: includes/model/Group.php:251
+#: includes/model/Group.php:253
 msgid "View Scheduled Posts"
 msgstr ""
 
-#: includes/model/Group.php:252
+#: includes/model/Group.php:254
 msgid "View Drafts"
 msgstr ""
 
-#: includes/model/Group.php:253
+#: includes/model/Group.php:255
 msgid "View Own Drafts"
 msgstr ""
 
-#: includes/model/Group.php:254
+#: includes/model/Group.php:256
 msgid "Add Posts"
 msgstr ""
 
-#: includes/model/Group.php:255
+#: includes/model/Group.php:257
 msgid "Add Drafts"
 msgstr ""
 
-#: includes/model/Group.php:256
+#: includes/model/Group.php:258
 msgid "Edit Posts"
 msgstr ""
 
-#: includes/model/Group.php:257
+#: includes/model/Group.php:259
 msgid "Edit Drafts"
 msgstr ""
 
-#: includes/model/Group.php:258
+#: includes/model/Group.php:260
 msgid "Edit Own Posts"
 msgstr ""
 
-#: includes/model/Group.php:259
+#: includes/model/Group.php:261
 msgid "Edit Own Drafts"
 msgstr ""
 
-#: includes/model/Group.php:260
+#: includes/model/Group.php:262
 msgid "Delete Posts"
 msgstr ""
 
-#: includes/model/Group.php:261
+#: includes/model/Group.php:263
 msgid "Delete Drafts"
 msgstr ""
 
-#: includes/model/Group.php:262
+#: includes/model/Group.php:264
 msgid "Delete Own Posts"
 msgstr ""
 
-#: includes/model/Group.php:263
+#: includes/model/Group.php:265
 msgid "Delete Own Drafts"
 msgstr ""
 
-#: includes/model/Group.php:264
+#: includes/model/Group.php:266
 msgid "View Pages"
 msgstr ""
 
-#: includes/model/Group.php:265
+#: includes/model/Group.php:267
 msgid "Add Pages"
 msgstr ""
 
-#: includes/model/Group.php:266
+#: includes/model/Group.php:268
 msgid "Edit Pages"
 msgstr ""
 
-#: includes/model/Group.php:267
+#: includes/model/Group.php:269
 msgid "Delete Pages"
 msgstr ""
 
-#: includes/model/Group.php:268
+#: includes/model/Group.php:270
 msgid "Add Users"
 msgstr ""
 
-#: includes/model/Group.php:269
+#: includes/model/Group.php:271
 msgid "Edit Users"
 msgstr ""
 
-#: includes/model/Group.php:270
+#: includes/model/Group.php:272
 msgid "Delete Users"
 msgstr ""
 
-#: includes/model/Group.php:271
+#: includes/model/Group.php:273
 msgid "Add Groups"
 msgstr ""
 
-#: includes/model/Group.php:272
+#: includes/model/Group.php:274
 msgid "Edit Groups"
 msgstr ""
 
-#: includes/model/Group.php:273
+#: includes/model/Group.php:275
 msgid "Delete Groups"
 msgstr ""
 
-#: includes/model/Group.php:274
+#: includes/model/Group.php:276
 msgid "Export Content"
 msgstr ""
 

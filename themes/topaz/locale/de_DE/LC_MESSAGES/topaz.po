@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -353,12 +353,12 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
 
 #: themes/topaz/pages/archive.twig:41 themes/topaz/pages/archive.twig:46
-#: themes/topaz/pages/archive.twig:57
+#: themes/topaz/pages/archive.twig:56
 #, php-format
 msgid "Archive of %s"
 msgstr "Archiv vom %s"
 
-#: themes/topaz/pages/archive.twig:68
+#: themes/topaz/pages/archive.twig:67
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "In dem angegebenen Zeitfenster gibt es keine Posts."
 
