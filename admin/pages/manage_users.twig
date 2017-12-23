@@ -42,7 +42,7 @@
 {% if user.full_name is not empty %}<span class="sub">({{ user.full_name }})</span>{% endif %}
 </td>
 <td class="user_group value">
-{{ user.group.name | fix }}
+{{ user.group.name }}
 </td>
 <td class="user_joined date">
 {{ user.joined_at | strftimeformat }}
