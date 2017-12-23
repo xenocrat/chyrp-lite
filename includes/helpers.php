@@ -507,11 +507,17 @@
 
     /**
      * Function: authenticate
-     * Generates an authentication token for the visitor.
+     * Generates or validates an authentication token for the visitor.
+     *
+     * Parameters:
+     *     $hash - A previously generated token to be validated (optional).
+     *
+     * Returns:
+     *     An authentication token, or the validity of the supplied token.
      */
-    function authenticate() {
+    function authenticate($hash = null) {
         $id = session_id();
-        return ($id == "") ? "" : token($id) ;
+        return isset($hash) ? (token($id) == $hash) : (($id == "") ? "" : token($id)) ;
     }
 
     /**

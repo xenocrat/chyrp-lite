@@ -25,7 +25,7 @@
 
     switch($_POST['action']) {
         case "destroy_post":
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -42,7 +42,7 @@
             Post::delete($post->id);
             json_response(__("Post deleted."), true);
         case "destroy_page":
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -59,7 +59,7 @@
             Page::delete($page->id, true);
             json_response(__("Page deleted."), true);
         case "preview_post":
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!$visitor->group->can("add_post", "add_draft"))
@@ -91,7 +91,7 @@
             $main->display("content".DIR."preview", array("content" => $content), __("Preview"));
             exit;
         case "preview_page":
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!$visitor->group->can("add_page"))
