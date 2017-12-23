@@ -482,6 +482,11 @@
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
 
+                $_POST['login'] = strip_tags($_POST['login']);
+
+                if (empty($_POST['login']))
+                    Flash::warning(__("Please enter a username for your account."));
+
                 $check = new User(array("login" => $_POST['login']));
 
                 if (!$check->no_results)

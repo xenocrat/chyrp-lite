@@ -583,6 +583,11 @@
             if (empty($_POST['login']))
                 error(__("Error"), __("Please enter a username for the account."), null, 422);
 
+            $_POST['login'] = strip_tags($_POST['login']);
+
+            if (empty($_POST['login']))
+                error(__("Error"), __("Please enter a username for the account."), null, 422);
+
             $check = new User(array("login" => $_POST['login']));
 
             if (!$check->no_results)
@@ -672,10 +677,18 @@
             if (!$visitor->group->can("edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
 
-            $check_name = new User(null, array("where" => array("login" => $_POST['login'],
-                                                                "id not" => $_POST['id'])));
+            if (empty($_POST['login']))
+                error(__("Error"), __("Please enter a username for the account."), null, 422);
 
-            if (!$check_name->no_results)
+            $_POST['login'] = strip_tags($_POST['login']);
+
+            if (empty($_POST['login']))
+                error(__("Error"), __("Please enter a username for the account."), null, 422);
+
+            $check = new User(null, array("where" => array("login" => $_POST['login'],
+                                                           "id not" => $_POST['id'])));
+
+            if (!$check->no_results)
                 error(__("Error"), __("That username is already in use."), null, 409);
 
             $user = new User($_POST['id']);
@@ -856,6 +869,11 @@
             if (empty($_POST['name']))
                 error(__("Error"), __("Please enter a name for the group."), null, 422);
 
+            $_POST['name'] = strip_tags($_POST['name']);
+
+            if (empty($_POST['name']))
+                error(__("Error"), __("Please enter a name for the group."), null, 422);
+
             fallback($_POST['permissions'], array());
 
             $check = new Group(null, array("where" => array("name" => $_POST['name'])));
@@ -903,13 +921,20 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
 
-            fallback($_POST['name'], "");
+            if (empty($_POST['name']))
+                error(__("Error"), __("Please enter a name for the group."), null, 422);
+
+            $_POST['name'] = strip_tags($_POST['name']);
+
+            if (empty($_POST['name']))
+                error(__("Error"), __("Please enter a name for the group."), null, 422);
+
             fallback($_POST['permissions'], array());
 
-            $check_name = new Group(null, array("where" => array("name" => $_POST['name'],
-                                                                 "id not" => $_POST['id'])));
+            $check = new Group(null, array("where" => array("name" => $_POST['name'],
+                                                            "id not" => $_POST['id'])));
 
-            if (!$check_name->no_results)
+            if (!$check->no_results)
                 error(__("Error"), __("That group name is already in use."), null, 409);
 
             $group = new Group($_POST['id']);
