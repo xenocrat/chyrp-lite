@@ -34,7 +34,7 @@
 {% for page in pages.paginated %}
 <tr id="page_{{ page.id }}" class="page">
 <td class="page_title title main">
-<a href="{{ page.url() }}">{{ page.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+<a href="{{ page.url() }}">{{ page.title | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="page_created date">
 {{ page.created_at | strftimeformat }}

@@ -57,7 +57,7 @@
 <input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}">
 </td>
 <td class="post_title title">
-<a class="edit_tag" href="{{ post.url() }}">{{ post.title() | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+<a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="post_tags list main">
 {% for name, clean in post.tags %}

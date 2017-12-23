@@ -5,7 +5,7 @@
 {% block content %}
 <h1>{{ "Delete Category?" | translate("categorize") }}</h1>
 <p>
-{{ "Are you sure you want to delete the category &#8220;%s&#8221;?" | translate("categorize") | format(category.name | fix) }}
+{{ "Are you sure you want to delete the category &#8220;%s&#8221;?" | translate("categorize") | format(category.name | oneof("[Untitled]" | translate)) }}
 </p>
 <form class="delete" action="{{ url('destroy_category') }}" method="post" accept-charset="UTF-8">
 <fieldset>
