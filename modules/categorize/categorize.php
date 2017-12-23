@@ -95,7 +95,7 @@
 
             foreach (Category::find() as $category) {
                 $options[$category->id]["value"] = $category->id;
-                $options[$category->id]["name"] = $category->name;
+                $options[$category->id]["name"] = oneof($category->name, __("[Untitled]"));
                 $options[$category->id]["selected"] = ($post ? $post->category_id == $category->id : false);
             }
 
