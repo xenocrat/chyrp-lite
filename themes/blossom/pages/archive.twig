@@ -28,7 +28,7 @@
 {% if post.feather == "photo" %}
 {{ post.filename | thumbnail(post.alt_text, false, ["max_width=196", "quality=60", "square=1"], "20vw") }}
 {% elseif post.feather == "uploader" and post.thumb is defined %}
-{{ post.thumb | thumbnail(post.thumb, false, ["max_width=156", "quality=60", "square=1"], "20vw") }}
+{{ post.thumb | thumbnail(post.thumb, false, ["max_width=196", "quality=60", "square=1"], "20vw") }}
 {% else %}
 <p>{{ post.excerpt() | striptags | normalize | oneof(post.slug) }}</p>
 {% endif %}
