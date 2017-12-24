@@ -327,13 +327,13 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1852
+	includes/helpers.php on line 1858
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1869
+	includes/helpers.php on line 1875
 
 
 javascript
@@ -850,7 +850,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1278
+	includes/helpers.php on line 1281
 
 
 send_mail
@@ -858,7 +858,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1983
+	includes/helpers.php on line 1989
 
 
 xmlrpc_methods
