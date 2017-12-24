@@ -1209,9 +1209,8 @@
      *     The response content from the remote site.
      */
     function get_remote($url, $redirects = 0, $timeout = 10) {
-        extract(parse_url($url), EXTR_SKIP);
+        extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
-        fallback($scheme, "http");
         fallback($port, ($scheme == "https") ? 443 : 80);
 
         if (isset($query))
@@ -1231,7 +1230,7 @@
 
         # Send the GET headers.
         fwrite($connect,
-            "GET ".$path." HTTP/1.1\r\n".
+            "GET ".$path." HTTP/1.0\r\n".
             "Host: ".$host."\r\n".
             "Connection: close"."\r\n".
             "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
@@ -1320,9 +1319,8 @@
      *     The pingback target, or false if the URL is not pingback-capable.
      */
     function pingback_url($url) {
-        extract(parse_url($url), EXTR_SKIP);
+        extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
-        fallback($scheme, "http");
         fallback($port, ($scheme == "https") ? 443 : 80);
 
         if (isset($query))
@@ -1342,7 +1340,7 @@
 
         # Send the GET headers.
         fwrite($connect,
-            "GET ".$path." HTTP/1.1\r\n".
+            "GET ".$path." HTTP/1.0\r\n".
             "Host: ".$host."\r\n".
             "Connection: close"."\r\n".
             "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
