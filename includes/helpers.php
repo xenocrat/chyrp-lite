@@ -1219,6 +1219,9 @@
         if (!isset($host))
             return false;
 
+        if ($scheme == "https" and !extension_loaded("openssl"))
+            return false;
+
         $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
         $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, $timeout);
 
@@ -1327,6 +1330,9 @@
             $path.= '?'.$query;
 
         if (!isset($host))
+            return false;
+
+        if ($scheme == "https" and !extension_loaded("openssl"))
             return false;
 
         $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
