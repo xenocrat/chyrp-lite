@@ -1211,6 +1211,7 @@
     function get_remote($url, $redirects = 0, $timeout = 10) {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
+        fallback($scheme, "http");
         fallback($port, ($scheme == "https") ? 443 : 80);
 
         if (isset($query))
@@ -1324,6 +1325,7 @@
     function pingback_url($url) {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
+        fallback($scheme, "http");
         fallback($port, ($scheme == "https") ? 443 : 80);
 
         if (isset($query))
