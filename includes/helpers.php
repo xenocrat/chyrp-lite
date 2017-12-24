@@ -538,24 +538,13 @@
         $range = strlen($input) - 1;
         $chars = "";
 
-        if (function_exists("random_int"))
-            for($i = 0; $i < $length; $i++)
-                $chars.= $input[random_int(0, $range)];
-        elseif (function_exists("openssl_random_pseudo_bytes"))
-            while (strlen($chars) < $length) {
-                $chunk = openssl_random_pseudo_bytes(3); # 3 * 8 / 6 = 4
-                $chars.= ($chunk === false) ?
-                    $input[rand(0, $range)] :
-                    preg_replace("/[^a-zA-Z0-9]/", "", base64_encode($chunk)) ;
-            }
-        elseif (function_exists("mt_rand"))
-            for($i = 0; $i < $length; $i++)
-                $chars.= $input[mt_rand(0, $range)];
-        else
-            for($i = 0; $i < $length; $i++)
-                $chars.= $input[rand(0, $range)];
+        $func  = function_exists("random_int") ? "random_int" :
+                (function_exists("mt_rand") ? "mt_rand" : "rand") ;
 
-        return substr($chars, 0, $length);
+        for ($i = 0; $i < $length; $i++)
+            $chars.= $input[$func(0, $range)];
+
+        return $chars;
     }
 
     /**
