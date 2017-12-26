@@ -1215,7 +1215,7 @@
         fallback($port, ($scheme == "https") ? 443 : 80);
 
         if (isset($query))
-            $path.= '?'.$query;
+            $path.= "?".$query;
 
         if (!isset($host))
             return false;
@@ -1329,7 +1329,7 @@
         fallback($port, ($scheme == "https") ? 443 : 80);
 
         if (isset($query))
-            $path.= '?'.$query;
+            $path.= "?".$query;
 
         if (!isset($host))
             return false;
