@@ -90,8 +90,9 @@
             # Build an associative array with tags as the keys and slugs as the values.
             $assoc = array_combine($names, $clean);
 
-            # Remove any entries with slugs that have been sanitized into nothingness.
-            $assoc = array_filter($assoc, function($value) { return preg_match('/[^\-]+/', $value); });
+            # Replace any slugs that have been sanitized into nothingness with a hash.
+            foreach ($assoc as $name => &$slug)
+                $slug = preg_match("/[^\-0-9]+/", $slug) ? $slug : md5($name) ;
 
             return $assoc;
         }
