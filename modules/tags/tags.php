@@ -90,8 +90,9 @@
             # Build an associative array with tags as the keys and slugs as the values.
             $assoc = array_combine($names, $clean);
 
-            # Remove any entries with slugs that have been sanitized into nothingness.
-            $assoc = array_filter($assoc, function($value) { return preg_match('/[^\-]+/', $value); });
+            # Replace any slugs that have been sanitized into nothingness with a hash.
+            foreach ($assoc as $name => &$slug)
+                $slug = preg_match("/[^\-0-9]+/", $slug) ? $slug : md5($name) ;
 
             return $assoc;
         }
@@ -257,7 +258,7 @@
         }
 
         public function admin_update_tags($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -280,7 +281,7 @@
             if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to rename tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['original']))
@@ -328,7 +329,7 @@
             if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['name']))
@@ -361,7 +362,7 @@
             if (!Post::any_editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add tags.", "tags"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['post']))

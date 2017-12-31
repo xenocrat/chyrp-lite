@@ -476,8 +476,13 @@
                 Flash::notice(__("You cannot register an account because you are already logged in."), "/");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                     Flash::warning(__("Invalid authentication token."));
+
+                if (empty($_POST['login']))
+                    Flash::warning(__("Please enter a username for your account."));
+
+                $_POST['login'] = strip_tags($_POST['login']);
 
                 if (empty($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
@@ -599,7 +604,7 @@
                 Flash::notice(__("You are already logged in."), "/");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                     Flash::warning(__("Invalid authentication token."));
 
                 fallback($_POST['login']);
@@ -656,7 +661,7 @@
                 Flash::notice(__("You must be logged in to access user controls."), "login");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                     Flash::warning(__("Invalid authentication token."));
 
                 if (!empty($_POST['new_password1']))
@@ -711,7 +716,7 @@
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                     Flash::warning(__("Invalid authentication token."));
 
                 if (empty($_POST['login']))

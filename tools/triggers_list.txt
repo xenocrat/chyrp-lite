@@ -233,13 +233,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1076
+	includes/controller/Admin.php on line 1101
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1336
+	includes/controller/Admin.php on line 1361
 Arguments:
 	$group
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1360
+	includes/controller/Admin.php on line 1385
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1398
+	includes/controller/Admin.php on line 1423
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1427
+	includes/controller/Admin.php on line 1452
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1431
+	includes/controller/Admin.php on line 1456
 Arguments:
 	$imports
 
@@ -279,13 +279,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1705
+	includes/controller/Admin.php on line 1730
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1713
+	includes/controller/Admin.php on line 1738
 
 
 can_not_view_page
@@ -297,7 +297,7 @@ Called from:
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 523
+	includes/controller/Main.php on line 528
 Arguments:
 	$user
 
@@ -305,13 +305,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 613
+	includes/controller/Main.php on line 618
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 624
+	includes/controller/Main.php on line 629
 Arguments:
 	$user
 
@@ -319,7 +319,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 795
+	includes/controller/Main.php on line 800
 Arguments:
 	$post, $feed
 
@@ -327,13 +327,13 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1874
+	includes/helpers.php on line 1860
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1891
+	includes/helpers.php on line 1877
 
 
 javascript
@@ -385,7 +385,7 @@ Arguments:
 add_group
 ---------
 Called from:
-	includes/model/Group.php on line 129
+	includes/model/Group.php on line 130
 Arguments:
 	$group
 
@@ -393,7 +393,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 187
+	includes/model/Group.php on line 189
 Arguments:
 	$group, $this
 
@@ -772,7 +772,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1140
+	includes/controller/Admin.php on line 1165
 Arguments:
 	$post
 
@@ -782,7 +782,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1187
+	includes/controller/Admin.php on line 1212
 Arguments:
 	$page
 
@@ -792,7 +792,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1242
+	includes/controller/Admin.php on line 1267
 
 
 before_import
@@ -800,7 +800,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1306
+	includes/controller/Admin.php on line 1331
 
 
 write_nav
@@ -808,7 +808,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 1990
+	includes/controller/Admin.php on line 2015
 
 
 manage_nav
@@ -816,7 +816,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2019
+	includes/controller/Admin.php on line 2044
 
 
 settings_nav
@@ -824,7 +824,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2044
+	includes/controller/Admin.php on line 2069
 
 
 extend_nav
@@ -832,7 +832,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2062
+	includes/controller/Admin.php on line 2087
 
 
 keyword_search
@@ -840,7 +840,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 752
+	includes/helpers.php on line 747
 Arguments:
 	$query, $plain
 
@@ -850,7 +850,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1296
+	includes/helpers.php on line 1282
 
 
 send_mail
@@ -858,7 +858,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2005
+	includes/helpers.php on line 1991
 
 
 xmlrpc_methods
@@ -901,7 +901,7 @@ before_group_add_name
 Target:
 	$name
 Called from:
-	includes/model/Group.php on line 101
+	includes/model/Group.php on line 102
 
 
 before_group_add_permissions
@@ -909,7 +909,7 @@ before_group_add_permissions
 Target:
 	$permissions
 Called from:
-	includes/model/Group.php on line 102
+	includes/model/Group.php on line 103
 
 
 before_group_update_name
@@ -917,7 +917,7 @@ before_group_update_name
 Target:
 	$name
 Called from:
-	includes/model/Group.php on line 154
+	includes/model/Group.php on line 156
 
 
 before_group_update_permissions
@@ -925,7 +925,7 @@ before_group_update_permissions
 Target:
 	$permissions
 Called from:
-	includes/model/Group.php on line 155
+	includes/model/Group.php on line 157
 
 
 list_permissions
@@ -933,7 +933,7 @@ list_permissions
 Target:
 	$names
 Called from:
-	includes/model/Group.php on line 276
+	includes/model/Group.php on line 278
 
 
 page

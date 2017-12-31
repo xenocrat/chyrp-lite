@@ -95,7 +95,7 @@
 
             foreach (Category::find() as $category) {
                 $options[$category->id]["value"] = $category->id;
-                $options[$category->id]["name"] = $category->name;
+                $options[$category->id]["name"] = oneof($category->name, __("[Untitled]"));
                 $options[$category->id]["selected"] = ($post ? $post->category_id == $category->id : false);
             }
 
@@ -222,7 +222,7 @@
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add categories.", "categorize"));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['name']))
@@ -254,7 +254,7 @@
         }
 
         public function admin_update_category($admin) {
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -297,7 +297,7 @@
         }
 
         public function admin_destroy_category() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))

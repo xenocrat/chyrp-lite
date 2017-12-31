@@ -118,7 +118,7 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."cache_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (isset($_POST['clear_cache']) and $_POST['clear_cache'] == "indubitably")
@@ -138,7 +138,7 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $this->regenerate();

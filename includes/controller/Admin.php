@@ -180,7 +180,7 @@
             if (!$visitor->group->can("add_post", "add_draft"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!feather_enabled($_POST['feather']))
@@ -226,7 +226,7 @@
         public function update_post() {
             $visitor = Visitor::current();
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -275,7 +275,7 @@
          * Destroys a post (the real deal).
          */
         public function destroy_post() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -378,7 +378,7 @@
             if (!Visitor::current()->group->can("add_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['title']))
@@ -436,7 +436,7 @@
             if (!Visitor::current()->group->can("edit_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit pages."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -499,7 +499,7 @@
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -577,8 +577,13 @@
             if (!Visitor::current()->group->can("add_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add users."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (empty($_POST['login']))
+                error(__("Error"), __("Please enter a username for the account."), null, 422);
+
+            $_POST['login'] = strip_tags($_POST['login']);
 
             if (empty($_POST['login']))
                 error(__("Error"), __("Please enter a username for the account."), null, 422);
@@ -660,7 +665,7 @@
          * Updates a user when the form is submitted.
          */
         public function update_user() {
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -672,10 +677,18 @@
             if (!$visitor->group->can("edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
 
-            $check_name = new User(null, array("where" => array("login" => $_POST['login'],
-                                                                "id not" => $_POST['id'])));
+            if (empty($_POST['login']))
+                error(__("Error"), __("Please enter a username for the account."), null, 422);
 
-            if (!$check_name->no_results)
+            $_POST['login'] = strip_tags($_POST['login']);
+
+            if (empty($_POST['login']))
+                error(__("Error"), __("Please enter a username for the account."), null, 422);
+
+            $check = new User(null, array("where" => array("login" => $_POST['login'],
+                                                           "id not" => $_POST['id'])));
+
+            if (!$check->no_results)
                 error(__("Error"), __("That username is already in use."), null, 409);
 
             $user = new User($_POST['id']);
@@ -758,7 +771,7 @@
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete users."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -850,8 +863,13 @@
             if (!Visitor::current()->group->can("add_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add groups."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (empty($_POST['name']))
+                error(__("Error"), __("Please enter a name for the group."), null, 422);
+
+            $_POST['name'] = strip_tags($_POST['name']);
 
             if (empty($_POST['name']))
                 error(__("Error"), __("Please enter a name for the group."), null, 422);
@@ -897,19 +915,26 @@
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit groups."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
 
-            fallback($_POST['name'], "");
+            if (empty($_POST['name']))
+                error(__("Error"), __("Please enter a name for the group."), null, 422);
+
+            $_POST['name'] = strip_tags($_POST['name']);
+
+            if (empty($_POST['name']))
+                error(__("Error"), __("Please enter a name for the group."), null, 422);
+
             fallback($_POST['permissions'], array());
 
-            $check_name = new Group(null, array("where" => array("name" => $_POST['name'],
-                                                                 "id not" => $_POST['id'])));
+            $check = new Group(null, array("where" => array("name" => $_POST['name'],
+                                                            "id not" => $_POST['id'])));
 
-            if (!$check_name->no_results)
+            if (!$check->no_results)
                 error(__("Error"), __("That group name is already in use."), null, 409);
 
             $group = new Group($_POST['id']);
@@ -955,7 +980,7 @@
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete groups."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
@@ -1070,7 +1095,7 @@
             if (empty($_POST))
                 return $this->display("pages".DIR."export");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $trigger->call("before_export");
@@ -1282,7 +1307,7 @@
             if (empty($_POST))
                 return $this->display("pages".DIR."import");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
@@ -1589,7 +1614,7 @@
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
@@ -1633,7 +1658,7 @@
             if (!$visitor->group->can("toggle_extensions"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to toggle extensions."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['extension']) or empty($_POST['type']))
@@ -1670,7 +1695,7 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['theme']))
@@ -1706,7 +1731,7 @@
                 Flash::notice(__("Preview stopped."), "themes");
             }
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
@@ -1740,7 +1765,7 @@
                                       array("locales" => $locales,
                                             "timezones" => timezones()));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['email']))
@@ -1800,7 +1825,7 @@
             if (empty($_POST))
                 return $this->display("pages".DIR."content_settings", array("feed_formats" => $feed_formats));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
@@ -1850,7 +1875,7 @@
                 return $this->display("pages".DIR."user_settings",
                                       array("groups" => Group::find(array("order" => "id DESC"))));
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['default_group'], 0);
@@ -1879,7 +1904,7 @@
             if (empty($_POST))
                 return $this->display("pages".DIR."route_settings");
 
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             $route = Route::current();

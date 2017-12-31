@@ -39,7 +39,7 @@
 {% endfor %}
 </tbody>
 </table>
-<h2>{{ GET.query is not empty ? "Posts tagged with &#8220;%s&#8221;" | translate("tags") | format(GET.query | striptags) : "Posts" | translate }}</h2>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Posts" | translate }}</h2>
 <form action="{{ url('bulk_tag') }}" method="post" accept-charset="UTF-8" data-toggler="tag_toggler">
 <table class="interactive">
 <thead>
@@ -57,7 +57,7 @@
 <input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}">
 </td>
 <td class="post_title title">
-<a class="edit_tag" href="{{ post.url() }}">{{ post.title() | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+<a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="post_tags list main">
 {% for name, clean in post.tags %}

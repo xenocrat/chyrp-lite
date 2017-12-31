@@ -507,11 +507,17 @@
 
     /**
      * Function: authenticate
-     * Generates an authentication token for the visitor.
+     * Generates or validates an authentication token for the visitor.
+     *
+     * Parameters:
+     *     $hash - A previously generated token to be validated (optional).
+     *
+     * Returns:
+     *     An authentication token, or the validity of the supplied token.
      */
-    function authenticate() {
+    function authenticate($hash = null) {
         $id = session_id();
-        return ($id == "") ? "" : token($id) ;
+        return isset($hash) ? (token($id) == $hash) : (($id == "") ? "" : token($id)) ;
     }
 
     /**
@@ -532,24 +538,13 @@
         $range = strlen($input) - 1;
         $chars = "";
 
-        if (function_exists("random_int"))
-            for($i = 0; $i < $length; $i++)
-                $chars.= $input[random_int(0, $range)];
-        elseif (function_exists("openssl_random_pseudo_bytes"))
-            while (strlen($chars) < $length) {
-                $chunk = openssl_random_pseudo_bytes(3); # 3 * 8 / 6 = 4
-                $chars.= ($chunk === false) ?
-                    $input[rand(0, $range)] :
-                    preg_replace("/[^a-zA-Z0-9]/", "", base64_encode($chunk)) ;
-            }
-        elseif (function_exists("mt_rand"))
-            for($i = 0; $i < $length; $i++)
-                $chars.= $input[mt_rand(0, $range)];
-        else
-            for($i = 0; $i < $length; $i++)
-                $chars.= $input[rand(0, $range)];
+        $func  = function_exists("random_int") ? "random_int" :
+                (function_exists("mt_rand") ? "mt_rand" : "rand") ;
 
-        return substr($chars, 0, $length);
+        for ($i = 0; $i < $length; $i++)
+            $chars.= $input[$func(0, $range)];
+
+        return $chars;
     }
 
     /**
@@ -1214,67 +1209,58 @@
      *     The response content from the remote site.
      */
     function get_remote($url, $redirects = 0, $timeout = 10) {
-        extract(parse_url($url), EXTR_SKIP);
-        $content = "";
+        extract(parse_url(add_scheme($url)), EXTR_SKIP);
+        fallback($path, "/");
+        fallback($scheme, "http");
+        fallback($port, ($scheme == "https") ? 443 : 80);
 
-        if (ini_get("allow_url_fopen")) {
-            $context = stream_context_create(array("http" => array("follow_location" => ($redirects == 0) ? 0 : 1 ,
-                                                                   "max_redirects" => $redirects,
-                                                                   "timeout" => $timeout,
-                                                                   "protocol_version" => 1.1,
-                                                                   "user_agent" => CHYRP_IDENTITY)));
-            $content = @file_get_contents($url, false, $context);
-        } elseif (function_exists("curl_init")) {
-            $handle = curl_init();
-            curl_setopt($handle, CURLOPT_URL, $url);
-            curl_setopt($handle, CURLOPT_HEADER, false);
-            curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($handle, CURLOPT_TIMEOUT, $timeout + 60);
-            curl_setopt($handle, CURLOPT_FOLLOWLOCATION, ($redirects == 0) ? false : true );
-            curl_setopt($handle, CURLOPT_MAXREDIRS, $redirects);
-            curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, $timeout);
-            curl_setopt($handle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-            curl_setopt($handle, CURLOPT_USERAGENT, CHYRP_IDENTITY);
-            $content = curl_exec($handle);
-            curl_close($handle);
-        } else {
-            fallback($path, '/');
-            fallback($port, 80);
+        if (isset($query))
+            $path.= "?".$query;
 
-            if (isset($query))
-                $path.= '?'.$query;
+        if (!isset($host))
+            return false;
 
-            $connect = @fsockopen($host, $port, $errno, $errstr, $timeout);
+        if ($scheme == "https" and !extension_loaded("openssl"))
+            return false;
 
-            if ($connect) {
-                $remote_headers = "";
+        $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
+        $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, $timeout);
 
-                # Send the GET headers.
-                fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
-                fwrite($connect, "Host: ".$host."\r\n");
-                fwrite($connect, "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
+        if (!$connect)
+            return false;
 
-                while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false)
-                    $remote_headers.= fgets($connect);
+        $remote_headers = "";
+        $remote_content = "";
 
-                while (!feof($connect))
-                    $content.= fgets($connect);
+        # Send the GET headers.
+        fwrite($connect,
+            "GET ".$path." HTTP/1.0\r\n".
+            "Host: ".$host."\r\n".
+            "Connection: close"."\r\n".
+            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
 
+        # Receive response headers.
+        while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false)
+            $remote_headers.= fgets($connect);
+
+        # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
+        if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)
+                           and preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
+
+            $location = trim($matches[1]);
+
+            if (is_url($location)) {
                 fclose($connect);
-
-                # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
-                if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)
-                                   and preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
-
-                    $location = trim($matches[1]);
-
-                    if (is_url($location))
-                        $content = get_remote($location, $redirects - 1, $timeout);
-                }
+                return get_remote($location, $redirects - 1, $timeout);
             }
         }
 
-        return $content;
+        # Receive the response content.
+        while (!feof($connect))
+            $remote_content.= fgets($connect);
+
+        fclose($connect);
+        return $remote_content;
     }
 
     /**
@@ -1305,7 +1291,7 @@
         foreach ($urls as &$url)
             $url = trim($url, " \"'");
 
-        return $urls;
+        return array_filter(array_unique($urls), "is_url");
     }
 
     /**
@@ -1337,59 +1323,59 @@
      *     The pingback target, or false if the URL is not pingback-capable.
      */
     function pingback_url($url) {
-        extract(parse_url($url), EXTR_SKIP);
-
-        $config = Config::current();
-        fallback($path, '/');
-        fallback($port, 80);
+        extract(parse_url(add_scheme($url)), EXTR_SKIP);
+        fallback($path, "/");
+        fallback($scheme, "http");
+        fallback($port, ($scheme == "https") ? 443 : 80);
 
         if (isset($query))
-            $path.= '?'.$query;
+            $path.= "?".$query;
 
         if (!isset($host))
             return false;
 
-        $connect = @fsockopen($host, $port, $errno, $errstr, 2);
+        if ($scheme == "https" and !extension_loaded("openssl"))
+            return false;
+
+        $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
+        $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
 
         if (!$connect)
             return false;
 
         $remote_headers = "";
-        $remote_bytes = 0;
+        $remote_content = "";
 
         # Send the GET headers.
-        fwrite($connect, "GET ".$path." HTTP/1.1\r\n");
-        fwrite($connect, "Host: $host\r\n");
-        fwrite($connect, "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
+        fwrite($connect,
+            "GET ".$path." HTTP/1.0\r\n".
+            "Host: ".$host."\r\n".
+            "Connection: close"."\r\n".
+            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
 
         # Check for X-Pingback header.
-        while (!feof($connect)) {
+        while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false) {
             $line = fgets($connect);
+            $remote_headers.= $line;
 
-            if (trim($line) == "")
-                break;
-
-            $remote_headers.= trim($line)."\n";
-
-            if (preg_match("/X-Pingback:(.+)/i", $line, $matches))
-                return trim($matches[1]);
+            if (preg_match("/^X-Pingback:(.+)/i", $line, $header)) {
+                fclose($connect);
+                return trim($header[1]);
+            }
         }
 
-        # X-Pingback header not found, <link> search if the content can be parsed.
-        if (!preg_match("~Content-Type:\s+(text/html|text/sgml|text/xml|text/plain)~im", $remote_headers))
-            return false;
+        # Check <link> elements if the content can be parsed.
+        if (preg_match("~^Content-Type:\s+(text/html|text/sgml|text/xml|text/plain)~im", $remote_headers)) {
+            while (!feof($connect) and strlen($remote_content) < 2048) {
+                $line = fgets($connect);
+                $remote_content.= $line;
 
-        while (!feof($connect)) {
-            $line = fgets($connect);
-
-            if (preg_match("/<link[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>/i", $line, $link))
-                if (preg_match("/ rel=(\"pingback\"|\'pingback\')/i", $link[0]))
-                    return trim($link[1], "\"'");
-
-            $remote_bytes += strlen($line);
-
-            if ($remote_bytes > 2048)
-                return false;
+                if (preg_match("/<link[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>/i", $line, $link))
+                    if (preg_match("/ rel=(\"pingback\"|\'pingback\')/i", $link[0])) {
+                        fclose($connect);
+                        return trim($link[1], "\"'");
+                    }
+            }
         }
 
         fclose($connect);
@@ -1819,9 +1805,9 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return (preg_match('~^(http://|https://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i', $string) or
-                preg_match('~^(http://|https://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~', $string) or
-                preg_match('~^(http://|https://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i', $string));
+        return (preg_match('~^(https?://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i', $string) or
+                preg_match('~^(https?://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~', $string) or
+                preg_match('~^(https?://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i', $string));
     }
 
     /**
@@ -1989,7 +1975,7 @@
         header("Content-Type: application/octet-stream");
         header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
 
-        if (!in_array("ob_gzhandler", ob_list_handlers()))
+        if (!in_array("ob_gzhandler", ob_list_handlers()) and !ini_get("zlib.output_compression"))
             header("Content-Length: ".strlen($contents));
 
         echo $contents;

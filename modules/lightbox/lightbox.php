@@ -18,7 +18,7 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."lightbox_settings");
     
-            if (!isset($_POST['hash']) or $_POST['hash'] != authenticate())
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             fallback($_POST['background'], "grey");

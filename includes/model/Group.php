@@ -97,6 +97,7 @@
         static function add($name, $permissions) {
             $sql = SQL::current();
             $trigger = Trigger::current();
+            $name = strip_tags($name);
 
             $trigger->filter($name, "before_group_add_name");
             $trigger->filter($permissions, "before_group_add_permissions");
@@ -150,6 +151,7 @@
 
             $sql = SQL::current();
             $trigger = Trigger::current();
+            $name = strip_tags($name);
 
             $trigger->filter($name, "before_group_update_name");
             $trigger->filter($permissions, "before_group_update_permissions");

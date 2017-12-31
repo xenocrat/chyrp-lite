@@ -32,10 +32,10 @@ msgstr ""
 
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:49
-#: modules/tags/tags.php:142
-#: modules/tags/tags.php:181
-#: modules/tags/tags.php:188
-#: modules/tags/tags.php:429
+#: modules/tags/tags.php:143
+#: modules/tags/tags.php:182
+#: modules/tags/tags.php:189
+#: modules/tags/tags.php:430
 msgid "Tags"
 msgstr ""
 
@@ -51,12 +51,6 @@ msgstr ""
 
 #: modules/tags/admin/pages/manage_tags.twig:11
 msgid "Posts Tagged"
-msgstr ""
-
-#: modules/tags/admin/pages/manage_tags.twig:42
-#: modules/tags/tags.php:423
-#, php-format
-msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""
 
 #: modules/tags/admin/pages/manage_tags.twig:81
@@ -92,105 +86,110 @@ msgstr ""
 msgid "Do you want to remove your tags from the database?"
 msgstr ""
 
-#: modules/tags/tags.php:144
+#: modules/tags/tags.php:145
 msgid "(comma separated)"
 msgstr ""
 
-#: modules/tags/tags.php:198
+#: modules/tags/tags.php:199
 msgid "You do not have sufficient privileges to manage tags."
 msgstr ""
 
-#: modules/tags/tags.php:231
-#: modules/tags/tags.php:281
+#: modules/tags/tags.php:232
+#: modules/tags/tags.php:282
 msgid "You do not have sufficient privileges to rename tags."
 msgstr ""
 
-#: modules/tags/tags.php:234
-#: modules/tags/tags.php:287
-#: modules/tags/tags.php:317
-#: modules/tags/tags.php:335
+#: modules/tags/tags.php:235
+#: modules/tags/tags.php:288
+#: modules/tags/tags.php:318
+#: modules/tags/tags.php:336
 msgid "No Tag Specified"
 msgstr ""
 
-#: modules/tags/tags.php:234
-#: modules/tags/tags.php:287
+#: modules/tags/tags.php:235
+#: modules/tags/tags.php:288
 msgid "Please specify the tag you want to rename."
 msgstr ""
 
-#: modules/tags/tags.php:239
-#: modules/tags/tags.php:322
+#: modules/tags/tags.php:240
+#: modules/tags/tags.php:323
 msgid "Tag not found."
 msgstr ""
 
-#: modules/tags/tags.php:246
+#: modules/tags/tags.php:247
 msgid "An ID is required to edit tags."
 msgstr ""
 
-#: modules/tags/tags.php:264
+#: modules/tags/tags.php:265
 msgid "An ID is required to update tags."
 msgstr ""
 
-#: modules/tags/tags.php:276
+#: modules/tags/tags.php:277
 msgid "Tags updated."
 msgstr ""
 
-#: modules/tags/tags.php:290
+#: modules/tags/tags.php:291
 msgid "Name cannot be blank."
 msgstr ""
 
-#: modules/tags/tags.php:309
+#: modules/tags/tags.php:310
 msgid "Tag renamed."
 msgstr ""
 
-#: modules/tags/tags.php:314
-#: modules/tags/tags.php:329
+#: modules/tags/tags.php:315
+#: modules/tags/tags.php:330
 msgid "You do not have sufficient privileges to delete tags."
 msgstr ""
 
-#: modules/tags/tags.php:317
-#: modules/tags/tags.php:335
+#: modules/tags/tags.php:318
+#: modules/tags/tags.php:336
 msgid "Please specify the tag you want to delete."
 msgstr ""
 
-#: modules/tags/tags.php:357
+#: modules/tags/tags.php:358
 msgid "Tag deleted."
 msgstr ""
 
-#: modules/tags/tags.php:362
+#: modules/tags/tags.php:363
 msgid "You do not have sufficient privileges to add tags."
 msgstr ""
 
-#: modules/tags/tags.php:368
+#: modules/tags/tags.php:369
 msgid "No posts selected."
 msgstr ""
 
-#: modules/tags/tags.php:371
+#: modules/tags/tags.php:372
 msgid "No tags specified."
 msgstr ""
 
-#: modules/tags/tags.php:383
+#: modules/tags/tags.php:384
 msgid "Posts tagged."
 msgstr ""
 
-#: modules/tags/tags.php:389
+#: modules/tags/tags.php:390
 msgid "You did not specify a tag."
 msgstr ""
 
-#: modules/tags/tags.php:390
-#: modules/tags/tags.php:397
-#: modules/tags/tags.php:412
+#: modules/tags/tags.php:391
+#: modules/tags/tags.php:398
+#: modules/tags/tags.php:413
 msgid "Invalid Tag"
 msgstr ""
 
-#: modules/tags/tags.php:396
+#: modules/tags/tags.php:397
 msgid "The tag you specified was not found."
 msgstr ""
 
-#: modules/tags/tags.php:411
+#: modules/tags/tags.php:412
 msgid "There are no posts with the tag you specified."
 msgstr ""
 
-#: modules/tags/tags.php:506
+#: modules/tags/tags.php:424
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/tags/tags.php:507
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"
