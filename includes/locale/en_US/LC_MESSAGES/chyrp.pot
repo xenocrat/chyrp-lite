@@ -1,5 +1,5 @@
 #. Content-Type: text/plain; charset=UTF-8
-#. Copyright 2017 Daniel Pimley and other contributors.
+#. Copyright 2018 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
 #: includes/ajax.php:18
@@ -400,7 +400,7 @@ msgstr ""
 msgid "Malformed URI."
 msgstr ""
 
-#: includes/class/Route.php:253
+#: includes/class/Route.php:254
 msgid "Route was initiated without a Controller."
 msgstr ""
 

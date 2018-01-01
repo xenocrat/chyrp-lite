@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Content-Type: text/plain; charset=UTF-8
-#. Copyright 2017 Daniel Pimley and other contributors.
+#. Copyright 2018 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/ajax.php:18 includes/ajax.php:21 includes/ajax.php:124
 #: includes/class/Route.php:45 includes/class/Route.php:48
@@ -266,7 +266,7 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 msgid "Malformed URI."
 msgstr "URI falsch aufgebaut."
 
-#: includes/class/Route.php:253
+#: includes/class/Route.php:254
 msgid "Route was initiated without a Controller."
 msgstr "Route wurde ohne einen Controller initiiert."
 
