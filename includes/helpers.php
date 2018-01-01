@@ -131,7 +131,7 @@
      * Mask for Route->url().
      */
     function url($url, $controller = null) {
-        return Route::current()->url($url, $controller);
+        return Route::url($url, $controller);
     }
 
     /**
