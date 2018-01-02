@@ -128,7 +128,7 @@
 
     /**
      * Function: url
-     * Mask for Route->url().
+     * Mask for Route::url().
      */
     function url($url, $controller = null) {
         return Route::url($url, $controller);
@@ -531,7 +531,7 @@
      *     A string of the requested length.
      *
      * Notes:
-     *     Uses cryptographically secure methods if available.
+     *     Uses a cryptographically secure method if available.
      */
     function random($length) {
         $input = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
