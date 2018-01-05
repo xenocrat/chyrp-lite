@@ -1844,9 +1844,9 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
-                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
-                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));
+        return (preg_match('~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
+                preg_match('~^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
+                preg_match('~^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));
     }
 
     /**
