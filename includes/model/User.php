@@ -149,14 +149,14 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $new_values = array("login"     => strip_tags($login),
-                                "password"  => $password,
-                                "email"     => strip_tags($email),
-                                "full_name" => strip_tags($full_name),
-                                "website"   => strip_tags($website),
-                                "group_id"  => $group_id,
-                                "approved"  => $approved,
-                                "joined_at" => $joined_at);
+            $new_values = array("login"     => oneof(strip_tags($login), $this->login),
+                                "password"  => oneof($password, $this->password),
+                                "email"     => oneof(strip_tags($email), $this->email),
+                                "full_name" => oneof(strip_tags($full_name), $this->full_name),
+                                "website"   => oneof(strip_tags($website), $this->website),
+                                "group_id"  => oneof($group_id, $this->group_id),
+                                "approved"  => oneof($approved, $this->approved),
+                                "joined_at" => oneof($joined_at, $this->joined_at));
 
             $trigger->filter($new_values, "before_update_user");
 

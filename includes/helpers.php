@@ -128,10 +128,10 @@
 
     /**
      * Function: url
-     * Mask for Route->url().
+     * Mask for Route::url().
      */
     function url($url, $controller = null) {
-        return Route::current()->url($url, $controller);
+        return Route::url($url, $controller);
     }
 
     /**
@@ -531,7 +531,7 @@
      *     A string of the requested length.
      *
      * Notes:
-     *     Uses cryptographically secure methods if available.
+     *     Uses a cryptographically secure method if available.
      */
     function random($length) {
         $input = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -1844,9 +1844,9 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return (preg_match('~^[^ @]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
-                preg_match('~^[^ @]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
-                preg_match('~^[^ @]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));
+        return (preg_match('~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
+                preg_match('~^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
+                preg_match('~^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));
     }
 
     /**

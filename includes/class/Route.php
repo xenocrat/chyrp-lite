@@ -166,10 +166,11 @@
          * Returns:
          *     An absolute clean or dirty URL, depending on @Config->clean_urls@.
          */
-        public function url($url, $controller = null) {
+        static function url($url, $controller = null) {
             $config = Config::current();
 
-            fallback($controller, $this->controller);
+            if (!isset($controller))
+                $controller = Route::current()->controller;
 
             if (is_string($controller))
                 $controller = $controller::current();
