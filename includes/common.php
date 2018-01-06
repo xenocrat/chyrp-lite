@@ -378,4 +378,4 @@
 
     # Upgrade future requests if the canonical URL is HTTPS.
     if (substr_count($config->url, "https://"))
-        header("Strict-Transport-Security: max-age=31536001");
+        header("Strict-Transport-Security: max-age=2592000");
