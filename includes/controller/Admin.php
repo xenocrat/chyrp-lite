@@ -620,12 +620,17 @@
             fallback($_POST['website'], "");
             fallback($_POST['group'], $config->default_group);
 
+            $group = new Group($_POST['group']);
+
+            if ($group->no_results)
+                show_404(__("Not Found"), __("Group not found."));
+
             $user = User::add($_POST['login'],
                               User::hashPassword($_POST['password1']),
                               $_POST['email'],
                               $_POST['full_name'],
                               $_POST['website'],
-                              $_POST['group'],
+                              $group->id,
                               ($config->email_activation) ? false : true);
 
             if (!$user->approved)
@@ -721,12 +726,17 @@
             fallback($_POST['website'], "");
             fallback($_POST['group'], $config->default_group);
 
+            $group = new Group($_POST['group']);
+
+            if ($group->no_results)
+                show_404(__("Not Found"), __("Group not found."));
+
             $user = $user->update($_POST['login'],
                                   $password,
                                   $_POST['email'],
                                   $_POST['full_name'],
                                   $_POST['website'],
-                                  $_POST['group'],
+                                  $group->id,
                                   (!$user->approved and $config->email_activation) ? false : true);
 
             if (!$user->approved)
