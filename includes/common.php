@@ -367,7 +367,7 @@
     # Set appropriate headers.
     if (JAVASCRIPT) {
         header("Content-Type: application/javascript");
-        header("Referrer-Policy: strict-origin-when-cross-origin");
+        header("Referrer-Policy: no-referrer");
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else {
@@ -375,3 +375,7 @@
         header("Referrer-Policy: strict-origin-when-cross-origin");
         header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
     }
+
+    # Upgrade future requests if the canonical URL is HTTPS.
+    if (substr_count($config->url, "https://"))
+        header("Strict-Transport-Security: max-age=3600");
