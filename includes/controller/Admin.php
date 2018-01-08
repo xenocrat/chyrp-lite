@@ -1891,14 +1891,24 @@
             fallback($_POST['default_group'], 0);
             fallback($_POST['guest_group'], 0);
 
+            $default_group = new Group($_POST['default_group']);
+
+            if ($default_group->no_results)
+                error(__("Gone"), __("New default group does not exist."), null, 410);
+
+            $guest_group = new Group($_POST['guest_group']);
+
+            if ($guest_group->no_results)
+                error(__("Gone"), __("New guest group does not exist."), null, 410);
+
             $correspond = (!empty($_POST['email_activation']) or !empty($_POST['email_correspondence'])) ? true : false ;
 
             $config = Config::current();
             $config->set("can_register", !empty($_POST['can_register']));
             $config->set("email_activation", !empty($_POST['email_activation']));
             $config->set("email_correspondence", $correspond);
-            $config->set("default_group", (int) $_POST['default_group']);
-            $config->set("guest_group", (int) $_POST['guest_group']);
+            $config->set("default_group", (int) $default_group->id);
+            $config->set("guest_group", (int) $guest_group->id);
 
             Flash::notice(__("Settings updated."), "user_settings");
         }
