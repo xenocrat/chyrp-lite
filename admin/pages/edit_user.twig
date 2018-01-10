@@ -7,20 +7,12 @@
 <form id="user_edit" class="split" action="{{ url('update_user') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data"{{user.id == visitor.id ? ' data-confirm="' ~ ("Are you sure you want to make these changes to your account?" | translate | fix(true)) ~ '"' : '' }}>
 <fieldset>
 <p>
-<label for="full_name">{{ "Full Name" | translate }}</label>
-<input class="text" type="text" name="full_name" value="{{ user.full_name | fix(true) }}" id="full_name" maxlength="250">
+<label for="login">{{ "Login" | translate }}</label>
+<input class="text" type="text" name="login" value="{{ user.login | fix(true) }}" id="full_name" maxlength="64">
 </p>
 <p>
 <label for="email">{{ "Email" | translate }}</label>
 <input class="text" type="email" name="email" value="{{ user.email | fix(true) }}" id="email" maxlength="128">
-</p>
-<p>
-<label for="website">{{ "Website" | translate }}</label>
-<input class="text" type="url" name="website" value="{{ user.website | fix(true) }}" id="website" maxlength="128">
-</p>
-<p>
-<label for="login">{{ "Login" | translate }}</label>
-<input class="text" type="text" name="login" value="{{ user.login | fix(true) }}" id="full_name" maxlength="64">
 </p>
 <p>
 <label for="group">{{ "Group" | translate }}</label>
@@ -37,6 +29,20 @@
 <p>
 <label for="new_password2">{{ "Confirm" | translate }}</label>
 <input class="text" type="password" name="new_password2" value="" id="new_password2" maxlength="128">
+</p>
+<p>
+<label for="full_name">
+{{ "Full Name" | translate }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="text" name="full_name" value="{{ user.full_name | fix(true) }}" id="full_name" maxlength="250">
+</p>
+<p>
+<label for="website">
+{{ "Website" | translate }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+<input class="text" type="url" name="website" value="{{ user.website | fix(true) }}" id="website" maxlength="128">
 </p>
 {{ trigger.call("edit_user_fields", user) }}
 <p class="buttons">
