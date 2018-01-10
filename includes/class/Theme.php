@@ -215,7 +215,7 @@
             $tags = array();
 
             foreach ($stylesheets as $stylesheet)
-                $tags[] = '<link rel="stylesheet" href="'.fix($stylesheet, true).'" type="text/css" media="all" charset="UTF-8">';
+                $tags[] = '<link rel="stylesheet" href="'.fix($stylesheet, true).'" type="text/css" media="all">';
 
             if (is_dir(THEME_DIR.DIR."stylesheets") or is_dir(THEME_DIR.DIR."css")) {
                 foreach(array_merge((array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
@@ -228,9 +228,10 @@
                     if (empty($filename) or substr_count($filename, ".inc.css"))
                         continue;
 
-                    $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "$2", $filepath);
+                    $qdir = preg_quote(DIR, "/");
+                    $path = preg_replace("/(.+)".$qdir."themes".$qdir."(.+)/", "$2", $filepath);
                     $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
-                    $tags[] = '<link rel="stylesheet" href="'.fix($href, true).'" type="text/css" media="all" charset="UTF-8">';
+                    $tags[] = '<link rel="stylesheet" href="'.fix($href, true).'" type="text/css" media="all">';
                 }
             }
 
@@ -268,7 +269,8 @@
                     if (empty($filename) or substr_count($filename, ".inc.js"))
                         continue;
 
-                    $path = preg_replace("/(.+)".preg_quote(DIR, "/")."themes".preg_quote(DIR, "/")."(.+)/", "$2", $filepath);
+                    $qdir = preg_quote(DIR, "/");
+                    $path = preg_replace("/(.+)".$qdir."themes".$qdir."(.+)/", "$2", $filepath);
                     $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
                     $tags[] = '<script src="'.fix($href, true).'" type="text/javascript" charset="UTF-8"></script>';
                 }
