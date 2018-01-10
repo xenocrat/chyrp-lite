@@ -366,7 +366,7 @@
 
     # Set appropriate headers.
     if (JAVASCRIPT) {
-        header("Content-Type: application/javascript");
+        header("Content-Type: application/javascript; charset=UTF-8");
         header("Referrer-Policy: no-referrer");
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
