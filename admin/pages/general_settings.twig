@@ -34,7 +34,7 @@
 <input class="text" type="email" name="email" value="{{ site.email | fix(true) }}" id="email">
 </p>
 <p>
-<label for="timezone">{{ "What time is it?" | translate }}</label>
+<label for="timezone">{{ "Time Zone" | translate }}</label>
 <select name="timezone" id="timezone">
 {% for zone in timezones %}
 {% set option_contents = (zone.now | strftimeformat("%H:%M")) ~ " &mdash; " ~ (zone.name | replace({"_": " ", "St ": "St. "})) %}
@@ -51,7 +51,7 @@
 </select>
 </p>
 <p>
-<label for="cookies_notification">{{ "Notify visitors about cookies?" | translate }}</label>
+<label for="cookies_notification">{{ "Notify Visitors About Cookies?" | translate }}</label>
 <input class="checkbox" type="checkbox" name="cookies_notification" id="cookies_notification"{{ site.cookies_notification | checked }}>
 <small>
 {{ "EU Directive 2002/58 on Privacy and Electronic Communications." | translate }}

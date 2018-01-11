@@ -11,7 +11,7 @@
 <input type="file" name="xml_file" value="" id="xml_file">
 </p>
 <p>
-<label for="media_url">{{ "What URL is used for embedded media?" | translate("migrator") }}
+<label for="media_url">{{ "URL for Embedded Media" | translate("migrator") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
 <input class="text" type="url" name="media_url" value="" id="wordpress_media_url">
@@ -34,8 +34,8 @@
 <input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
 <small>
 {{ "Something like <code>http://%s.tumblr.com/</code>." | translate("migrator") | format(visitor.login) }}
+{{ "Audio and Video cannot be imported." | translate("migrator") }}
 </small>
-<small>{{ "Note: Audio and Video tumbles cannot be imported." | translate("migrator") }}</small>
 </p>
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Import" | translate }}</button>
@@ -70,7 +70,7 @@
 <input class="text" type="text" name="prefix" value="" id="prefix">
 </p>
 <p>
-<label for="media_url">{{ "What URL is used for embedded media?" | translate("migrator") }}
+<label for="media_url">{{ "URL for Embedded Media" | translate("migrator") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
 <input class="text" type="url" name="media_url" value="" id="textpattern_media_url">
@@ -105,7 +105,7 @@
 <input class="text" type="text" name="database" value="" id="database">
 </p>
 <p>
-<label for="media_url">{{ "What URL is used for embedded media?" | translate("migrator") }}
+<label for="media_url">{{ "URL for Embedded Media" | translate("migrator") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
 <input class="text" type="url" name="media_url" value="" id="movabletype_media_url">
