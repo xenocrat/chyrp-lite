@@ -61,6 +61,9 @@
         }
 
         public function post_view_count_attr($attr, $post) {
+            if ($post->no_results)
+                return 0;
+
             if (isset($this->post_view_counts))
                 return fallback($this->post_view_counts[$post->id], 0);
 

@@ -684,6 +684,9 @@
         }
 
         public function post_comment_count_attr($attr, $post) {
+            if ($post->no_results)
+                return 0;
+
             if (isset($this->post_comment_counts))
                 return fallback($this->post_comment_counts[$post->id], 0);
 
@@ -704,10 +707,16 @@
         }
 
         public function post_commentable_attr($attr, $post) {
+            if ($post->no_results)
+                return false;
+
             return Comment::user_can($post);
         }
 
         public function post_latest_comment_attr($attr, $post) {
+            if ($post->no_results)
+                return null;
+
             if (isset($this->latest_comments))
                 return fallback($this->latest_comments[$post->id], null);
 
