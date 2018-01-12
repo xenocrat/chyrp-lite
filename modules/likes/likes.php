@@ -158,6 +158,9 @@
         }
 
         public function post_like_count_attr($attr, $post) {
+            if ($post->no_results)
+                return 0;
+
             if (isset($this->post_like_counts))
                 return fallback($this->post_like_counts[$post->id], 0);
 
@@ -177,6 +180,9 @@
         }
 
         public function user_like_count_attr($attr, $user) {
+            if ($user->no_results)
+                return 0;
+
             if (isset($this->user_like_counts))
                 return fallback($this->user_like_counts[$user->id], 0);
 
@@ -206,7 +212,10 @@
             $visitor = Visitor::current();
             $settings = $config->module_likes;
 
-            if (($settings["show_on_index"] == false and $route->action == "index") or $post->no_results)
+            if ($post->no_results)
+                return;
+
+            if ($settings["show_on_index"] == false and $route->action == "index")
                 return;
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
