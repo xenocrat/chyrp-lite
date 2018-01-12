@@ -772,7 +772,7 @@
                     <input type="text" name="description" value="<?php posted("description"); ?>" id="description">
                 </p>
                 <p id="timezone_field">
-                    <label for="timezone"><?php echo __("What time is it?"); ?></label>
+                    <label for="timezone"><?php echo __("Time Zone"); ?></label>
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
                         <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>
