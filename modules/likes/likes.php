@@ -110,9 +110,9 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            Like::create($post->id);
+            $count = $post->like_count;
 
-            $count = $post->like_count - 1;
+            Like::create($post->id);
 
             $text = ($count <= 0) ?
                 __("You like this.", "likes") :
@@ -134,9 +134,9 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            Like::remove($post->id);
+            $count = $post->like_count - 1;
 
-            $count = $post->like_count;
+            Like::remove($post->id);
 
             $text = ($count <= 0) ?
                 __("No likes yet.", "likes") :
