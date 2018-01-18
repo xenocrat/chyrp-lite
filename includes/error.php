@@ -342,7 +342,7 @@
                 <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
-            <?php if (!logged_in() and ADMIN): ?>
+            <?php if (!logged_in() and ADMIN and $code == 403): ?>
                 <a href="<?php echo $chyrp_url.'/admin/?action=login'; ?>" class="big login"><?php echo __("Log in"); ?></a>
             <?php endif; ?>
             </div>
