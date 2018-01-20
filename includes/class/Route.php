@@ -35,52 +35,35 @@
             if (!in_array("Controller", class_implements($controller)))
                 trigger_error(__("Route was initiated with an invalid Controller."), E_USER_ERROR);
 
+            $config = Config::current();
+
             fallback($controller->protected, array("__construct", "__destruct", "parse", "display"));
             fallback($controller->permitted, array("login", "logout"));
             fallback($controller->feed, (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed")));
 
+            # Set the contoller for this route.
             $this->controller = $controller;
-
-            if (substr_count($_SERVER['REQUEST_URI'], "..") > 0 )
-                error(__("Error"), __("Malformed URI."), null, 400);
-
-            if (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action']))
-                error(__("Error"), __("Invalid action."), null, 400);
 
             # Determining the action can be this simple if clean URLs are disabled.
             $this->action =& $_GET['action'];
 
-            # Parse the current URL and extract information.
-            $parse = parse_url(Config::current()->url);
-            fallback($parse["path"], "/");
+            $base = !empty($controller->base) ? $config->chyrp_url."/".$controller->base : $config->url ;
+            $path = oneof(parse_url($base, PHP_URL_PATH), "/");
 
-            if (isset($controller->base))
-                $parse["path"] = trim($parse["path"], "/")."/".trim($controller->base, "/")."/";
-
-            $this->safe_path = str_replace("/", "\\/", $parse["path"]);
-            $this->request = $parse["path"] == "/" ?
-                                 $_SERVER['REQUEST_URI'] :
-                                 preg_replace("/{$this->safe_path}?/", "", $_SERVER['REQUEST_URI'], 1) ;
+            # Extract the request.
+            $this->request = preg_replace("~^".preg_quote($path, "~")."~", "", $_SERVER['REQUEST_URI']);
 
             # Decompose clean URLs.
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
-
-            if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0]))
-                error(__("Error"), __("Invalid action."), null, 400);
 
             # Give the controller an opportunity to parse this route and determine the action.
             $controller->parse($this);
 
             Trigger::current()->call("parse_route", $this);
 
-            $this->try[] = isset($this->action) ?
-                               oneof($this->action, "index") :
-                               ((!substr_count($this->arg[0], "?") and !($this->arg[0] == "index.php")) ?
-                                   oneof($this->arg[0], "index") : "index") ;
-
-            # Set the action, using a guess if necessary, to satisfy the view_site permission test.
-            # A subset of actions is permitted even if the visitor is not allowed to view the site.
-            fallback($this->action, end($this->try));
+            # Support single parameter actions without custom routes or parsing by the controller.
+            if (!preg_match("/[^\w]/", $this->arg[0]))
+                $this->try[] = $this->arg[0];
         }
 
         /**
@@ -92,12 +75,6 @@
         public function init() {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
-
-            # Can the visitor view the site, or is this action exempt from the "view_site" permission?
-            if (!$visitor->group->can("view_site") and !in_array($this->action, $this->controller->permitted)) {
-                $trigger->call("can_not_view_site");
-                show_403(__("Access Denied"), __("You are not allowed to view this site."));
-            }
 
             $trigger->call("route_init", $this);
 
@@ -115,6 +92,16 @@
                     list($method, $args) = array($key, $val);
 
                 $this->action = $method;
+
+                # Don't try to call anything except a valid PHP function.
+                if (preg_match("/[^\w]/", $this->action))
+                    error(__("Error"), __("Invalid action."), null, 400);
+
+                # Can the visitor view the site, or is this action exempt from the "view_site" permission?
+                if (!$visitor->group->can("view_site") and !in_array($this->action, $this->controller->permitted)) {
+                    $trigger->call("can_not_view_site");
+                    show_403(__("Access Denied"), __("You are not allowed to view this site."));
+                }
 
                 $name = strtolower(str_replace("Controller", "", get_class($this->controller)));
 
