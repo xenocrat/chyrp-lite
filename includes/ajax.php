@@ -20,6 +20,9 @@
     if (empty($_POST['action']))
         error(__("Error"), __("Missing argument."), null, 400);
 
+    if (preg_match("/[^\w]/", $_POST['action']))
+        error(__("Error"), __("Invalid action."), null, 400);
+
     if (!$visitor->group->can("view_site"))
         show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
