@@ -77,8 +77,12 @@
         public function parse($route) {
             $config = Config::current();
 
-            # If they're just at / and that's not a custom route, don't bother with all this.
+            # If the visitor is at / and that's not a custom route, serve the blog index.
             if (empty($route->arg[0]) and !isset($config->routes["/"]))
+                return $route->action = "index";
+
+            # If the visitor has explicitly requested index.php, our fancy parsing breaks.
+            if (empty($route->action) and $route->arg[0] == "index.php")
                 return $route->action = "index";
 
             # Discover feed requests.
