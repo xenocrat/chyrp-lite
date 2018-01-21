@@ -39,7 +39,7 @@
 
             fallback($controller->protected, array("__construct", "__destruct", "parse", "display"));
             fallback($controller->permitted, array("login", "logout"));
-            fallback($controller->feed, (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed")));
+            fallback($controller->feed, isset($_GET['feed']));
 
             # Set the contoller for this route.
             $this->controller = $controller;
