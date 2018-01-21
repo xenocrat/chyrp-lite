@@ -47,11 +47,11 @@
             # Determining the action can be this simple if clean URLs are disabled.
             $this->action =& $_GET['action'];
 
-            $base = !empty($controller->base) ? $config->chyrp_url."/".$controller->base : $config->url ;
-            $path = oneof(parse_url($base, PHP_URL_PATH), "/");
+            $base = empty($controller->base) ? $config->url : $config->chyrp_url."/".$controller->base ;
+            $regex = "~^".preg_quote(oneof(parse_url($base, PHP_URL_PATH), ""), "~")."((/)index.php)?~";
 
             # Extract the request.
-            $this->request = preg_replace("~^".preg_quote($path, "~")."~", "", $_SERVER['REQUEST_URI']);
+            $this->request = preg_replace($regex, "$2", $_SERVER['REQUEST_URI']);
 
             # Decompose clean URLs.
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
@@ -162,7 +162,7 @@
             if (is_string($controller))
                 $controller = $controller::current();
 
-            $base = !empty($controller->base) ? $config->chyrp_url."/".$controller->base : $config->url ;
+            $base = empty($controller->base) ? $config->url : $config->chyrp_url."/".$controller->base ;
 
             # Assume this is a dirty URL and return it without translation.
             if (strpos($url, "/") === 0)
