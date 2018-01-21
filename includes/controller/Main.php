@@ -81,8 +81,8 @@
             if (empty($route->arg[0]) and !isset($config->routes["/"]))
                 return $route->action = "index";
 
-            # If the visitor has explicitly requested index.php, our fancy parsing breaks.
-            if (empty($route->action) and $route->arg[0] == "index.php")
+            # If the first argument is a query and action is unset, serve the blog index.
+            if (empty($route->action) and strpos($route->arg[0], "?") === 0)
                 return $route->action = "index";
 
             # Discover feed requests.
