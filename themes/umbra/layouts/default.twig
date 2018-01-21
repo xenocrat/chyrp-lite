@@ -35,7 +35,7 @@
 {% endfor %}
 <div id="mast" role="banner">
 <div id="mast_box">
-<h1 class="banner"><a href="{{ site.url }}">{{ site.name }}</a></h1>
+<h1 class="banner"><a href="{{ url('/') }}">{{ site.name }}</a></h1>
 <ul role="menubar" class="navigation">
 <li role="presentation">
 <a role="menuitem" href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
@@ -78,7 +78,7 @@
 {% endif %}
 </ul>
 <div role="search" class="search_box">
-<form action="{{ site.url }}" method="get" accept-charset="UTF-8">
+<form action="{{ url('/') }}" method="get" accept-charset="UTF-8">
 <input type="hidden" name="action" value="search">
 <input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix(true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" aria-label="{{ 'Search this blog' | translate }}">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>
