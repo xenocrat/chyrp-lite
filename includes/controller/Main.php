@@ -86,14 +86,8 @@
                 return $route->action = "index";
 
             # Discover feed requests.
-            if (preg_match("/\/feed\/?$/", $route->request)) {
+            if (preg_match("/\/feed\/?$/", $route->request))
                 $this->feed = true;
-                $this->post_limit = $config->feed_items;
-
-                # Don't set $route->action to "feed" - the display() method handles feeds transparently.
-                if ($route->arg[0] == "feed")
-                    return $route->action = "index";
-            }
 
             # Static ID of a post or page.
             if ($route->arg[0] == "id") {
@@ -108,7 +102,7 @@
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
 
-                # Don't fool ourselves into thinking we're viewing a page if this is pagination of the "/" route.
+                # Test the first route argument; this might be pagination of the / route.
                 if ($route->arg[0] == $page_matches[1][0])
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
             }
