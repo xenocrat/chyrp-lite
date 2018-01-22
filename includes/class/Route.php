@@ -62,7 +62,7 @@
             Trigger::current()->call("parse_route", $this);
 
             # Support single parameter actions without custom routes or parsing by the controller.
-            if (!preg_match("/[^\w]/", $this->arg[0]))
+            if (empty($this->action) and !empty($this->arg[0]))
                 $this->try[] = $this->arg[0];
         }
 
