@@ -9,7 +9,7 @@ msgid "Canonical URL"
 msgstr ""
 
 #: admin/help/canonical_url.twig:8
-msgid "If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to have Chyrp Lite in its own directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
+msgid "If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to have Chyrp Lite installed in its own dedicated directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
 msgstr ""
 
 #: admin/help/canonical_url.twig:12
@@ -190,11 +190,11 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: admin/layouts/default.twig:57
+#: admin/layouts/default.twig:58
 msgid "Log out"
 msgstr ""
 
-#: admin/layouts/default.twig:65
+#: admin/layouts/default.twig:66
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""
@@ -279,7 +279,7 @@ msgstr ""
 
 #: admin/pages/content_settings.twig:87
 #: admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:43
+#: admin/pages/edit_user.twig:49
 #: admin/pages/general_settings.twig:68
 #: admin/pages/route_settings.twig:85
 #: admin/pages/user_settings.twig:41
@@ -428,40 +428,50 @@ msgid "Are you sure you want to make these changes to your account?"
 msgstr ""
 
 #: admin/pages/edit_user.twig:10
-#: admin/pages/new_user.twig:31
-msgid "Full Name"
-msgstr ""
-
-#: admin/pages/edit_user.twig:14
-#: admin/pages/new_user.twig:35
-msgid "Email"
-msgstr ""
-
-#: admin/pages/edit_user.twig:18
-#: admin/pages/manage_users.twig:31
-#: admin/pages/new_user.twig:39
-msgid "Website"
-msgstr ""
-
-#: admin/pages/edit_user.twig:22
 #: admin/pages/new_user.twig:10
 msgid "Login"
 msgstr ""
 
-#: admin/pages/edit_user.twig:26
+#: admin/pages/edit_user.twig:14
+#: admin/pages/new_user.twig:14
+msgid "Email"
+msgstr ""
+
+#: admin/pages/edit_user.twig:18
 #: admin/pages/manage_groups.twig:25
 #: admin/pages/manage_users.twig:29
-#: admin/pages/new_user.twig:14
+#: admin/pages/new_user.twig:18
 msgid "Group"
 msgstr ""
 
-#: admin/pages/edit_user.twig:34
+#: admin/pages/edit_user.twig:26
 msgid "New Password?"
 msgstr ""
 
-#: admin/pages/edit_user.twig:38
-#: admin/pages/new_user.twig:27
+#: admin/pages/edit_user.twig:30
+#: admin/pages/new_user.twig:31
 msgid "Confirm"
+msgstr ""
+
+#: admin/pages/edit_user.twig:35
+#: admin/pages/new_user.twig:36
+msgid "Full Name"
+msgstr ""
+
+#: admin/pages/edit_user.twig:36
+#: admin/pages/edit_user.twig:43
+#: admin/pages/general_settings.twig:24
+#: admin/pages/import.twig:35
+#: admin/pages/new_user.twig:37
+#: admin/pages/new_user.twig:44
+#: admin/partials/post_fields.twig:16
+msgid "(optional)"
+msgstr ""
+
+#: admin/pages/edit_user.twig:42
+#: admin/pages/manage_users.twig:31
+#: admin/pages/new_user.twig:43
+msgid "Website"
 msgstr ""
 
 #: admin/pages/export.twig:3
@@ -501,7 +511,7 @@ msgid "Users"
 msgstr ""
 
 #: admin/pages/export.twig:33
-msgid "Warning: this file will contain the hashed password for each user – keep it safe!"
+msgid "Users export file will contain the hashed password for each user – keep it safe!"
 msgstr ""
 
 #: admin/pages/feathers.twig:3
@@ -546,12 +556,6 @@ msgstr ""
 msgid "Chyrp URL"
 msgstr ""
 
-#: admin/pages/general_settings.twig:24
-#: admin/pages/import.twig:35
-#: admin/partials/post_fields.twig:16
-msgid "(optional)"
-msgstr ""
-
 #: admin/pages/general_settings.twig:29
 msgid "Have your site URLs point someplace other than your install directory."
 msgstr ""
@@ -561,7 +565,7 @@ msgid "Contact Email Address"
 msgstr ""
 
 #: admin/pages/general_settings.twig:37
-msgid "What time is it?"
+msgid "Time Zone"
 msgstr ""
 
 #: admin/pages/general_settings.twig:46
@@ -569,7 +573,7 @@ msgid "Language"
 msgstr ""
 
 #: admin/pages/general_settings.twig:54
-msgid "Notify visitors about cookies?"
+msgid "Notify Visitors About Cookies?"
 msgstr ""
 
 #: admin/pages/general_settings.twig:57
@@ -610,7 +614,7 @@ msgid "Users .json File"
 msgstr ""
 
 #: admin/pages/import.twig:34
-msgid "What URL is used for embedded media?"
+msgid "URL for Embedded Media"
 msgstr ""
 
 #: admin/pages/import.twig:39
@@ -805,11 +809,11 @@ msgid "Add Group"
 msgstr ""
 
 #: admin/pages/new_user.twig:3
-#: admin/pages/new_user.twig:44
+#: admin/pages/new_user.twig:50
 msgid "Add User"
 msgstr ""
 
-#: admin/pages/new_user.twig:23
+#: admin/pages/new_user.twig:27
 msgid "Password"
 msgstr ""
 
@@ -980,7 +984,7 @@ msgid "Allow the site to send email correspondence to users?"
 msgstr ""
 
 #: admin/pages/user_settings.twig:20
-msgid "Activate by email"
+msgid "Activate by Email"
 msgstr ""
 
 #: admin/pages/user_settings.twig:22

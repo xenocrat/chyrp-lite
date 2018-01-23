@@ -20,7 +20,7 @@ Called from:
 admin_head
 ----------
 Called from:
-	admin/layouts/default.twig on line 14
+	admin/layouts/default.twig on line 15
 
 
 delete_user_form
@@ -32,7 +32,7 @@ Called from:
 edit_user_fields
 ----------------
 Called from:
-	admin/pages/edit_user.twig on line 41
+	admin/pages/edit_user.twig on line 47
 Arguments:
 	user
 
@@ -108,7 +108,7 @@ Arguments:
 new_user_fields
 ---------------
 Called from:
-	admin/pages/new_user.twig on line 42
+	admin/pages/new_user.twig on line 48
 
 
 before_page_fields
@@ -183,7 +183,7 @@ Arguments:
 ajax
 ----
 Called from:
-	includes/ajax.php on line 120
+	includes/ajax.php on line 123
 
 
 change_setting
@@ -197,7 +197,15 @@ Arguments:
 parse_route
 -----------
 Called from:
-	includes/class/Route.php on line 74
+	includes/class/Route.php on line 62
+Arguments:
+	$this
+
+
+route_init
+----------
+Called from:
+	includes/class/Route.php on line 79
 Arguments:
 	$this
 
@@ -205,21 +213,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 98
-
-
-route_init
-----------
-Called from:
 	includes/class/Route.php on line 102
-Arguments:
-	$this
 
 
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 151
+	includes/class/Route.php on line 138
 Arguments:
 	$this
 
@@ -233,13 +233,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1101
+	includes/controller/Admin.php on line 1110
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1361
+	includes/controller/Admin.php on line 1370
 Arguments:
 	$group
 
@@ -247,7 +247,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1385
+	includes/controller/Admin.php on line 1394
 Arguments:
 	$user
 
@@ -255,7 +255,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1423
+	includes/controller/Admin.php on line 1432
 Arguments:
 	$entry, $post
 
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1452
+	includes/controller/Admin.php on line 1461
 Arguments:
 	$entry, $page
 
@@ -271,7 +271,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1456
+	includes/controller/Admin.php on line 1465
 Arguments:
 	$imports
 
@@ -279,25 +279,25 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1730
+	includes/controller/Admin.php on line 1739
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1738
+	includes/controller/Admin.php on line 1747
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 397
+	includes/controller/Main.php on line 395
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 528
+	includes/controller/Main.php on line 526
 Arguments:
 	$user
 
@@ -305,13 +305,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 618
+	includes/controller/Main.php on line 616
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 629
+	includes/controller/Main.php on line 627
 Arguments:
 	$user
 
@@ -319,7 +319,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 800
+	includes/controller/Main.php on line 798
 Arguments:
 	$post, $feed
 
@@ -441,7 +441,7 @@ Arguments:
 add_user
 --------
 Called from:
-	includes/model/User.php on line 113
+	includes/model/User.php on line 108
 Arguments:
 	$user
 
@@ -449,7 +449,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 170
+	includes/model/User.php on line 165
 Arguments:
 	$user, $this
 
@@ -530,7 +530,7 @@ Arguments:
 add_like
 --------
 Called from:
-	modules/likes/model/Like.php on line 63
+	modules/likes/model/Like.php on line 65
 Arguments:
 	$new
 
@@ -538,7 +538,7 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 119
+	modules/likes/model/Like.php on line 123
 Arguments:
 	$post_id
 
@@ -546,7 +546,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 136
+	modules/likes/model/Like.php on line 142
 Arguments:
 	$post_id
 
@@ -659,19 +659,19 @@ Called from:
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 16
-	themes/sparrow/layouts/default.twig on line 16
-	themes/topaz/layouts/default.twig on line 16
-	themes/umbra/layouts/default.twig on line 16
+	themes/blossom/layouts/default.twig on line 17
+	themes/sparrow/layouts/default.twig on line 17
+	themes/topaz/layouts/default.twig on line 17
+	themes/umbra/layouts/default.twig on line 17
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 119
-	themes/sparrow/layouts/default.twig on line 105
-	themes/topaz/layouts/default.twig on line 118
-	themes/umbra/layouts/default.twig on line 105
+	themes/blossom/layouts/default.twig on line 120
+	themes/sparrow/layouts/default.twig on line 106
+	themes/topaz/layouts/default.twig on line 119
+	themes/umbra/layouts/default.twig on line 106
 
 
 
@@ -714,7 +714,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 193
+	includes/class/Route.php on line 180
 
 
 related_posts
@@ -740,7 +740,7 @@ scripts
 Target:
 	$scripts
 Called from:
-	includes/class/Theme.php on line 252
+	includes/class/Theme.php on line 253
 
 
 links
@@ -748,7 +748,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 306
+	includes/class/Theme.php on line 308
 
 
 visitor
@@ -772,7 +772,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1165
+	includes/controller/Admin.php on line 1174
 Arguments:
 	$post
 
@@ -782,7 +782,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1212
+	includes/controller/Admin.php on line 1221
 Arguments:
 	$page
 
@@ -792,7 +792,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1267
+	includes/controller/Admin.php on line 1276
 
 
 before_import
@@ -800,7 +800,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1331
+	includes/controller/Admin.php on line 1340
 
 
 write_nav
@@ -808,7 +808,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 2015
+	includes/controller/Admin.php on line 2034
 
 
 manage_nav
@@ -816,7 +816,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2044
+	includes/controller/Admin.php on line 2063
 
 
 settings_nav
@@ -824,7 +824,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2069
+	includes/controller/Admin.php on line 2088
 
 
 extend_nav
@@ -832,7 +832,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2087
+	includes/controller/Admin.php on line 2106
 
 
 keyword_search
@@ -1051,7 +1051,7 @@ before_add_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 107
+	includes/model/User.php on line 102
 
 
 before_update_user
@@ -1059,7 +1059,7 @@ before_update_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 161
+	includes/model/User.php on line 156
 
 
 cacher_regenerate_triggers
