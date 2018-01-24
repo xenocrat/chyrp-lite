@@ -12,10 +12,6 @@
     # Execute the appropriate Controller responder.
     $route->init();
 
-    # If the route failed or nothing was displayed, show a 404 page.
-    if (!$route->success and !$main->displayed)
-        show_404();
-
     $trigger->call("end", $route);
 
     ob_end_flush();
