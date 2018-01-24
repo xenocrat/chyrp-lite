@@ -78,18 +78,11 @@
 
             $trigger->call("route_init", $this);
 
-            $try = $this->try;
-
             if (isset($this->action))
-                array_unshift($try, $this->action);
+                array_unshift($this->try, $this->action);
 
-            $count = 0;
-
-            foreach ($try as $key => $val) {
-                if (is_numeric($key))
-                    list($method, $args) = array($val, array());
-                else
-                    list($method, $args) = array($key, $val);
+            foreach ($this->try as $key => $val) {
+                list($method, $args) = is_numeric($key) ? array($val, array()) : array($key, $val) ;
 
                 $this->action = $method;
 
@@ -97,8 +90,10 @@
                 if (preg_match("/[^\w]/", $this->action))
                     error(__("Error"), __("Invalid action."), null, 400);
 
-                # Can the visitor view the site, or is this action exempt from the "view_site" permission?
-                if (!$visitor->group->can("view_site") and !in_array($this->action, $this->controller->permitted)) {
+                # Show a 403 page if the visitor cannot view the site and this is not an exempt action.
+                if (!$visitor->group->can("view_site") and
+                    !in_array($this->action, $this->controller->permitted)) {
+
                     $trigger->call("can_not_view_site");
                     show_403(__("Access Denied"), __("You are not allowed to view this site."));
                 }
@@ -111,28 +106,38 @@
                 else
                     $call = false;
 
+                if ($call !== false) {
+                    $this->success = true;
+                    break;
+                }
+
                 # Protect the controller's non-responder methods. PHP functions are not case-sensitive!
                 foreach ($this->controller->protected as $protected)
                     if (strcasecmp($protected, $method) == 0)
                         continue 2;
 
                 # This discovers responders native to the controller.
-                if ($call !== true and method_exists($this->controller, $method))
+                if (method_exists($this->controller, $method))
                     $response = call_user_func_array(array($this->controller, $method), $args);
                 else
                     $response = false;
 
-                if ($response !== false or $call !== false) {
+                if ($response !== false) {
                     $this->success = true;
                     break;
                 }
-
-                # No responders were found; display a fallback template if one is set.
-                if (++$count == count($try) and isset($this->controller->fallback))
-                    call_user_func_array(array($this->controller, "display"), $this->controller->fallback);
             }
 
-            if ($this->success and !in_array($this->action, $this->controller->permitted))
+            # No responders were found; display a fallback template if one is set.
+            if (!$this->success and !empty($this->controller->fallback))
+                call_user_func_array(array($this->controller, "display"), $this->controller->fallback);
+
+            # Show a 404 page if routing failed and nothing was displayed.
+            if (!$this->success and !$this->controller->displayed)
+                show_404();
+
+            # Set redirect_to so that visitors will come back here after login.
+            if (!in_array($this->action, $this->controller->permitted))
                 $_SESSION['redirect_to'] = self_url();
 
             $trigger->call("route_done", $this);
