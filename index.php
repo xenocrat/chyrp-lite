@@ -9,7 +9,7 @@
     # Parse the route.
     $route = Route::current($main);
 
-    # Execute the appropriate Controller responder.
+    # Respond to the request.
     $route->init();
 
     $trigger->call("end", $route);
