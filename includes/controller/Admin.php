@@ -35,6 +35,10 @@
         # The base path for this controller.
         public $base = "admin";
 
+        # Array: $fallback
+        # Arguments for a failpage in the event that none of the routes are successful.
+        public $fallback = array();
+
         # Array: $protected
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "navigation_context", "display", "current");
