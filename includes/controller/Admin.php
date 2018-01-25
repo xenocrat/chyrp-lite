@@ -35,10 +35,6 @@
         # The base path for this controller.
         public $base = "admin";
 
-        # Array: $fallback
-        # Arguments for a failpage in the event that none of the routes are successful.
-        public $fallback = array();
-
         # Array: $protected
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "navigation_context", "display", "current");
@@ -275,7 +271,7 @@
 
         /**
          * Function: destroy_post
-         * Destroys a post (the real deal).
+         * Destroys a post.
          */
         public function destroy_post() {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
@@ -754,7 +750,7 @@
 
         /**
          * Function: delete_user
-         * User deletion.
+         * User deletion (confirm page).
          */
         public function delete_user() {
             if (!Visitor::current()->group->can("delete_user"))
