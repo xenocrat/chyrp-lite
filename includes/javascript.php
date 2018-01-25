@@ -47,7 +47,7 @@ var Post = {
             return;
         }
 
-        $.post(Site.chyrp_url + "/includes/ajax.php", {
+        $.post(Site.chyrp_url + "/ajax/", {
             action: "destroy_post",
             id: id,
             hash: Visitor.token
@@ -90,7 +90,7 @@ var Page = {
             return;
         }
 
-        $.post(Site.chyrp_url + "/includes/ajax.php", {
+        $.post(Site.chyrp_url + "/ajax/", {
             action: "destroy_page",
             id: id,
             hash: Visitor.token

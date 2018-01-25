@@ -287,6 +287,11 @@
     #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
+    # File: Ajax
+    # See Also:
+    #     <Controller>
+    require_once INCLUDES_DIR.DIR."controller".DIR."Ajax.php";
+
     # Exit if an upgrade is in progress.
     if (file_exists(INCLUDES_DIR.DIR."upgrading.lock"))
         error(__("Service Unavailable"),
