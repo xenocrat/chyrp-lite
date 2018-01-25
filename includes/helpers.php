@@ -1960,7 +1960,7 @@
      */
     function json_response($text = null, $data = null) {
         header("Content-Type: application/json; charset=UTF-8");
-        exit(json_set(array("text" => $text, "data" => $data)));
+        echo json_set(array("text" => $text, "data" => $data));
     }
 
     /**
