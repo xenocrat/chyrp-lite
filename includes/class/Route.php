@@ -40,6 +40,7 @@
             fallback($controller->protected, array("__construct", "__destruct", "parse", "display"));
             fallback($controller->permitted, array("login", "logout"));
             fallback($controller->feed, isset($_GET['feed']));
+            fallback($controller->displayed, false);
 
             # Set the contoller for this route.
             $this->controller = $controller;
@@ -128,9 +129,9 @@
                 }
             }
 
-            # No responders were found; display a fallback template if one is set.
-            if (!$this->success and !empty($this->controller->fallback))
-                call_user_func_array(array($this->controller, "display"), $this->controller->fallback);
+            # No responders were found; display a failpage if one is set.
+            if (!$this->success and method_exists($this->controller, "failed"))
+                $this->controller->failed($this);
 
             # Show a 404 page if routing failed and nothing was displayed.
             if (!$this->success and !$this->controller->displayed)
