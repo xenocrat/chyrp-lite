@@ -544,87 +544,89 @@
             redirect($from);
         }
 
-        public function ajax() {
-            $main = MainController::current();
+        public function ajax_reload_comments() {
+            if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
+                error(__("No ID Specified"), __("An ID is required to reload comments.", "comments"), null, 400);
 
-            switch($_POST['action']) {
-                case "reload_comments":
-                    if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
-                        error(__("No ID Specified"), __("An ID is required to reload comments.", "comments"), null, 400);
+            $post = new Post($_POST['post_id'], array("drafts" => true));
 
-                    $post = new Post($_POST['post_id'], array("drafts" => true));
-                    $last_comment = (empty($_POST['last_comment'])) ? $post->created_at : $_POST['last_comment'] ;
-                    $added_since = when(__("Comments added since %I:%M %p on %B %d, %Y", "comments"), $last_comment, true);
+            if ($post->no_results)
+                show_404(__("Not Found"), __("Post not found."));
 
-                    if ($post->no_results)
-                        show_404(__("Not Found"), __("Post not found."));
+            $last_comment = (empty($_POST['last_comment'])) ? $post->created_at : $_POST['last_comment'] ;
+            $added_since = when(__("Comments added since %I:%M %p on %B %d, %Y", "comments"), $last_comment, true);
 
-                    $ids = array();
+            $ids = array();
 
-                    if ($post->latest_comment > $last_comment) {
-                        $new_comments = SQL::current()->select("comments",
-                                                               "id, created_at",
-                                                               array("post_id" => $post->id,
-                                                                     "created_at >" => $last_comment,
-                                                                     "status not" => "spam",
-                                                                     self::visitor_comments()),
-                                                               array("created_at ASC"));
+            if ($post->latest_comment > $last_comment) {
+                $new_comments = SQL::current()->select("comments",
+                                                       "id, created_at",
+                                                       array("post_id" => $post->id,
+                                                             "created_at >" => $last_comment,
+                                                             "status not" => "spam",
+                                                             self::visitor_comments()),
+                                                       array("created_at ASC"));
 
-                        while ($the_comment = $new_comments->fetchObject()) {
-                            $ids[] = $the_comment->id;
+                while ($the_comment = $new_comments->fetchObject()) {
+                    $ids[] = $the_comment->id;
 
-                            if (strtotime($last_comment) < strtotime($the_comment->created_at))
-                                $last_comment = $the_comment->created_at;
-                        }
-                    }
-
-                    json_response($added_since, array("comment_ids" => $ids, "last_comment" => $last_comment));
-                case "show_comment":
-                    if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
-                        error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
-
-                    $comment = new Comment($_POST['comment_id']);
-
-                    if ($comment->no_results)
-                        show_404(__("Not Found"), __("Comment not found.", "comments"));
-
-                    $main->display("content".DIR."comment", array("comment" => $comment));
-                    exit;
-                case "destroy_comment":
-                    if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                        show_403(__("Access Denied"), __("Invalid authentication token."));
-
-                    if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                        error(__("Error"), __("An ID is required to delete a comment.", "comments"), null, 400);
-
-                    $comment = new Comment($_POST['id']);
-
-                    if ($comment->no_results)
-                        show_404(__("Not Found"), __("Comment not found.", "comments"));
-
-                    if (!$comment->deletable())
-                        show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
-
-                    Comment::delete($comment->id);
-                    json_response(__("Comment deleted.", "comments"), true);
-                case "edit_comment":
-                    if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                        show_403(__("Access Denied"), __("Invalid authentication token."));
-
-                    if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
-                        error(__("Error"), __("An ID is required to edit a comment.", "comments"), null, 400);
-
-                    $comment = new Comment($_POST['comment_id'], array("filter" => false));
-
-                    if ($comment->no_results)
-                        show_404(__("Not Found"), __("Comment not found.", "comments"));
-
-                    if (!$comment->editable())
-                        show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
-
-                    $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
-                    exit;
+                    if (strtotime($last_comment) < strtotime($the_comment->created_at))
+                        $last_comment = $the_comment->created_at;
+                }
             }
+
+            json_response($added_since, array("comment_ids" => $ids, "last_comment" => $last_comment));
+        }
+
+        public function ajax_show_comment() {
+            if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
+                error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
+
+            $comment = new Comment($_POST['comment_id']);
+
+            if ($comment->no_results)
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
+
+            $main = MainController::current();
+            $main->display("content".DIR."comment", array("comment" => $comment));
+        }
+
+        public function ajax_edit_comment() {
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
+                error(__("Error"), __("An ID is required to edit a comment.", "comments"), null, 400);
+
+            $comment = new Comment($_POST['comment_id'], array("filter" => false));
+
+            if ($comment->no_results)
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
+
+            if (!$comment->editable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
+
+            $main = MainController::current();
+            $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
+        }
+
+        public function ajax_destroy_comment() {
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (empty($_POST['id']) or !is_numeric($_POST['id']))
+                error(__("Error"), __("An ID is required to delete a comment.", "comments"), null, 400);
+
+            $comment = new Comment($_POST['id']);
+
+            if ($comment->no_results)
+                show_404(__("Not Found"), __("Comment not found.", "comments"));
+
+            if (!$comment->deletable())
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
+
+            Comment::delete($comment->id);
+            json_response(__("Comment deleted.", "comments"), true);
         }
 
         public function view_feed($context) {

@@ -19,7 +19,7 @@ var ChyrpComment = {
                     // Submit the form.
                     $.ajax({
                         type: "POST",
-                        url: Site.chyrp_url + "/includes/ajax.php",
+                        url: Site.chyrp_url + "/ajax/",
                         data: new FormData(this),
                         processData: false,
                         contentType: false,
@@ -69,7 +69,7 @@ var ChyrpComment = {
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: Site.chyrp_url + "/includes/ajax.php",
+                url: Site.chyrp_url + "/ajax/",
                 data: {
                     action: "reload_comments",
                     post_id: id,
@@ -79,7 +79,7 @@ var ChyrpComment = {
                     if (response.data.comment_ids.length > 0) {
                         $("#comments").attr("data-timestamp", response.data.last_comment);
                         $.each(response.data.comment_ids, function(i, id) {
-                            $.post(Site.chyrp_url + "/includes/ajax.php", {
+                            $.post(Site.chyrp_url + "/ajax/", {
                                 action: "show_comment",
                                 comment_id: id
                             }, function(data){
@@ -102,7 +102,7 @@ var ChyrpComment = {
             return;
         }
 
-        $.post(Site.chyrp_url + "/includes/ajax.php", {
+        $.post(Site.chyrp_url + "/ajax/", {
             action: "edit_comment",
             comment_id: id,
             hash: Visitor.token
@@ -120,7 +120,7 @@ var ChyrpComment = {
                             // Submit the form.
                             $.ajax({
                                 type: "POST",
-                                url: Site.chyrp_url + "/includes/ajax.php",
+                                url: Site.chyrp_url + "/ajax/",
                                 data: new FormData(thisForm[0]),
                                 processData: false,
                                 contentType: false,
@@ -137,7 +137,7 @@ var ChyrpComment = {
                                 ChyrpComment.editing--;
 
                                 // Load the updated post in place of the edit form.
-                                $.post(Site.chyrp_url + "/includes/ajax.php", {
+                                $.post(Site.chyrp_url + "/ajax/", {
                                     action: "show_comment",
                                     comment_id: id
                                 }, function(data) {
@@ -153,7 +153,7 @@ var ChyrpComment = {
 
                         if (!ChyrpComment.failed) {
                             thisItem.loader();
-                            $.post(Site.chyrp_url + "/includes/ajax.php", {
+                            $.post(Site.chyrp_url + "/ajax/", {
                                 action: "show_comment",
                                 comment_id: id
                             }, function(data){
@@ -176,7 +176,7 @@ var ChyrpComment = {
             return;
         }
 
-        $.post(Site.chyrp_url + "/includes/ajax.php", {
+        $.post(Site.chyrp_url + "/ajax/", {
             action: "destroy_comment",
             id: id,
             hash: Visitor.token

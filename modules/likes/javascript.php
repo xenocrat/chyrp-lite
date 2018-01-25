@@ -35,7 +35,7 @@ var ChyrpLikes = {
         if (!ChyrpLikes.busy && !ChyrpLikes.failed) {
             $.ajax({
                 type: "POST",
-                url: Site.chyrp_url + "/includes/ajax.php",
+                url: Site.chyrp_url + "/ajax/",
                 data: {
                     "action": (isUnlike) ? "unlike" : "like",
                     "post_id": post_id
