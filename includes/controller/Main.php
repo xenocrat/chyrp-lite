@@ -37,10 +37,6 @@
         # Item limit for pagination.
         public $post_limit = 10;
 
-        # Array: $fallback
-        # Arguments for a failpage in the event that none of the routes are successful.
-        public $fallback = array();
-
         # Array: $protected
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "display", "current");
@@ -48,6 +44,10 @@
         # Array: $permitted
         # Methods that are exempt from the "view_site" permission.
         public $permitted = array("login", "logout", "register", "activate", "lost_password", "reset");
+
+        # Array: $failpage
+        # Arguments for a failpage in the event that none of the actions are successful.
+        private $failpage = array();
 
         /**
          * Function: __construct
@@ -872,11 +872,20 @@
 
         /**
          * Function: resort
-         * Queue a failpage in the event that none of the routes are successful.
+         * Queue a failpage in the event that none of the actions are successful.
          */
         public function resort($template, $context = array(), $title = "") {
-            $this->fallback = array($template, $context, $title);
+            $this->failpage = array($template, $context, $title);
             return false;
+        }
+
+        /**
+         * Function: failed
+         * Serve a failpage in the event that none of the actions are successful.
+         */
+        public function failed($route) {
+            if (!empty($this->failpage))
+                call_user_func_array(array($this, "display"), $this->failpage);
         }
 
         /**
