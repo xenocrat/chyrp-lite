@@ -26,9 +26,11 @@
     if (DEBUG)
         error_log("SERVING file download for ".$filename);
 
+    if (!ini_get("zlib.output_compression"))
+        header("Content-Length: ".filesize($filepath));
+
     header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Content-Type: application/octet-stream");
     header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
-    header("Content-Length: ".filesize($filepath));
     readfile($filepath);
     flush();
