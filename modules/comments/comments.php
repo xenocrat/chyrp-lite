@@ -144,16 +144,22 @@
             if (!$comment->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
 
+            fallback($_POST['created_at']);
+            fallback($_POST['status'], $comment->status);
+            fallback($_POST['author_email'], "");
+            fallback($_POST['author_url'], "");
+            fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
+
             if (empty($_POST['body']))
                 return array($comment, false, __("Message can't be blank.", "comments"));
 
             if (empty($_POST['author']))
                 return array($comment, false, __("Author can't be blank.", "comments"));
 
-            if (empty($_POST['author_email']))
+            if (empty($_POST['author_email']) and $_POST['status'] != "pingback")
                 return array($comment, false, __("Email address can't be blank.", "comments"));
 
-            if (!is_email($_POST['author_email']))
+            if (!empty($_POST['author_email']) and !is_email($_POST['author_email']))
                 return array($comment, false, __("Invalid email address.", "comments"));
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
@@ -162,12 +168,9 @@
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
-            fallback($_POST['author_url'], "");
-            fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
-
             $visitor = Visitor::current();
-            $status = ($visitor->group->can("edit_comment")) ? fallback($_POST['status'], $comment->status) : $comment->status ;
-            $created_at = ($visitor->group->can("edit_comment")) ? datetime(fallback($_POST['created_at'])) : $comment->created_at ;
+            $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
+            $created_at = ($visitor->group->can("edit_comment")) ? datetime($_POST['created_at']) : $comment->created_at ;
 
             $comment = $comment->update($_POST['body'],
                                         $_POST['author'],
