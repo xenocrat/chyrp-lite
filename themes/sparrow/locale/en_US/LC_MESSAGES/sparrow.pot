@@ -137,15 +137,19 @@ msgstr ""
 msgid "Spam"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:23
+#: themes/sparrow/forms/comment/edit.twig:20
+msgid "Pingback"
+msgstr ""
+
+#: themes/sparrow/forms/comment/edit.twig:24
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:31
+#: themes/sparrow/forms/comment/edit.twig:32
 msgid "Save"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:32
+#: themes/sparrow/forms/comment/edit.twig:33
 msgid "Cancel"
 msgstr ""
 

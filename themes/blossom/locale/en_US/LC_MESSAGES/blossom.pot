@@ -232,15 +232,19 @@ msgstr ""
 msgid "Spam"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:23
+#: themes/blossom/forms/comment/edit.twig:20
+msgid "Pingback"
+msgstr ""
+
+#: themes/blossom/forms/comment/edit.twig:24
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:31
+#: themes/blossom/forms/comment/edit.twig:32
 msgid "Save"
 msgstr ""
 
-#: themes/blossom/forms/comment/edit.twig:32
+#: themes/blossom/forms/comment/edit.twig:33
 msgid "Cancel"
 msgstr ""
 

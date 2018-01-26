@@ -107,15 +107,19 @@ msgstr ""
 msgid "Spam"
 msgstr ""
 
-#: themes/umbra/forms/comment/edit.twig:23
+#: themes/umbra/forms/comment/edit.twig:20
+msgid "Pingback"
+msgstr ""
+
+#: themes/umbra/forms/comment/edit.twig:24
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/umbra/forms/comment/edit.twig:31
+#: themes/umbra/forms/comment/edit.twig:32
 msgid "Save"
 msgstr ""
 
-#: themes/umbra/forms/comment/edit.twig:32
+#: themes/umbra/forms/comment/edit.twig:33
 msgid "Cancel"
 msgstr ""
 

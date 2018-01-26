@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.5\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -107,15 +107,19 @@ msgstr "Abgelehnt"
 msgid "Spam"
 msgstr "Spam"
 
-#: themes/umbra/forms/comment/edit.twig:23
+#: themes/umbra/forms/comment/edit.twig:20
+msgid "Pingback"
+msgstr "Pingback"
+
+#: themes/umbra/forms/comment/edit.twig:24
 msgid "Email Notifications"
 msgstr "E-Mail Benachrichtigungen"
 
-#: themes/umbra/forms/comment/edit.twig:31
+#: themes/umbra/forms/comment/edit.twig:32
 msgid "Save"
 msgstr "Speichern"
 
-#: themes/umbra/forms/comment/edit.twig:32
+#: themes/umbra/forms/comment/edit.twig:33
 msgid "Cancel"
 msgstr "Abbrechen"
 

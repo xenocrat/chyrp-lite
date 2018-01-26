@@ -5,8 +5,9 @@
 end
 ---
 Called from:
-	admin/index.php on line 19
-	index.php on line 19
+	admin/index.php on line 15
+	ajax/index.php on line 15
+	index.php on line 15
 Arguments:
 	$route
 
@@ -197,7 +198,7 @@ Arguments:
 parse_route
 -----------
 Called from:
-	includes/class/Route.php on line 62
+	includes/class/Route.php on line 63
 Arguments:
 	$this
 
@@ -205,7 +206,7 @@ Arguments:
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 79
+	includes/class/Route.php on line 80
 Arguments:
 	$this
 
@@ -213,13 +214,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 102
+	includes/class/Route.php on line 98
 
 
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 138
+	includes/class/Route.php on line 144
 Arguments:
 	$this
 
@@ -227,7 +228,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 361
+	includes/common.php on line 366
 
 
 before_export
@@ -291,13 +292,13 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 395
+	includes/controller/Main.php on line 399
 
 
 user_registered
 ---------------
 Called from:
-	includes/controller/Main.php on line 526
+	includes/controller/Main.php on line 530
 Arguments:
 	$user
 
@@ -305,13 +306,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 616
+	includes/controller/Main.php on line 617
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 627
+	includes/controller/Main.php on line 631
 Arguments:
 	$user
 
@@ -319,7 +320,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 798
+	includes/controller/Main.php on line 802
 Arguments:
 	$post, $feed
 
@@ -506,7 +507,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 664
+	modules/comments/comments.php on line 669
 Arguments:
 	$comment, $feed
 
@@ -714,7 +715,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 180
+	includes/class/Route.php on line 186
 
 
 related_posts
@@ -756,7 +757,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 358
+	includes/common.php on line 363
 
 
 admin_determine_action

@@ -79,12 +79,12 @@ msgid "Post unliked."
 msgstr ""
 
 #: modules/likes/likes.php:118
-#: modules/likes/likes.php:273
+#: modules/likes/likes.php:272
 msgid "You like this."
 msgstr ""
 
 #: modules/likes/likes.php:119
-#: modules/likes/likes.php:274
+#: modules/likes/likes.php:273
 #, php-format
 msgid "You and %d person like this."
 msgid_plural "You and %d people like this."
@@ -105,12 +105,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: modules/likes/likes.php:234
-#: modules/likes/likes.php:261
+#: modules/likes/likes.php:260
 msgid "Like!"
 msgstr ""
 
 #: modules/likes/likes.php:235
-#: modules/likes/likes.php:262
+#: modules/likes/likes.php:261
 msgid "Unlike!"
 msgstr ""
 
