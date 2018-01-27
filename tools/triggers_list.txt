@@ -181,12 +181,6 @@ Arguments:
 	$post
 
 
-ajax
-----
-Called from:
-	includes/ajax.php on line 123
-
-
 change_setting
 --------------
 Called from:
@@ -295,24 +289,16 @@ Called from:
 	includes/controller/Main.php on line 399
 
 
-user_registered
----------------
-Called from:
-	includes/controller/Main.php on line 530
-Arguments:
-	$user
-
-
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 617
+	includes/controller/Main.php on line 614
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 631
+	includes/controller/Main.php on line 625
 Arguments:
 	$user
 
@@ -320,7 +306,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 802
+	includes/controller/Main.php on line 800
 Arguments:
 	$post, $feed
 
