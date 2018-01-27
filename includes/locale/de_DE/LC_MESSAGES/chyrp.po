@@ -904,7 +904,7 @@ msgstr ""
 msgid "We have emailed you a new password."
 msgstr "Wir haben Dir ein neues Passwort geschickt."
 
-#: includes/controller/Main.php:617 includes/lib/XMLRPC.php:424
+#: includes/controller/Main.php:617 includes/lib/XMLRPC.php:422
 msgid "Incorrect username and/or password."
 msgstr "Benutzername und/oder Passwort nicht korrekt."
 
@@ -1224,7 +1224,7 @@ msgstr "Deine Seite konnte nicht geparst werden."
 msgid "Your page does not link to our page."
 msgstr "Deine Seite verlinkt nicht auf unsere."
 
-#: includes/lib/XMLRPC.php:421
+#: includes/lib/XMLRPC.php:419
 msgid "XML-RPC support is disabled for this site."
 msgstr "XML-RPC Unterstützung ist auf dieser Seite deaktiviert."
 
