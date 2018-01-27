@@ -527,8 +527,6 @@
                                       $config->default_group,
                                       ($config->email_activation) ? false : true);
 
-                    Trigger::current()->call("user_registered", $user);
-
                     if (!$user->approved) {
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
@@ -612,8 +610,7 @@
                 fallback($_POST['login']);
                 fallback($_POST['password']);
 
-                # Modules can implement "user_login and "user_authenticate" to offer two-factor authentication.
-                # "user_authenticate" trigger function can block the login process by creating a Flash::warning().
+                # You can block the login process by creating a Flash::warning().
                 $trigger->call("user_authenticate");
 
                 if (!User::authenticate($_POST['login'], $_POST['password']))
@@ -625,10 +622,11 @@
                     if (!$user->approved)
                         Flash::notice(__("You must activate your account before you log in."), "/");
 
+                    $trigger->call("user_logged_in", $user);
+
                     $_SESSION['user_id'] = $user->id;
                     $_SESSION['cookies_notified'] = true;
 
-                    $trigger->call("user_logged_in", $user);
                     Flash::notice(__("Logged in."), fallback($_SESSION['redirect_to'], "/"));
                 }
             }
