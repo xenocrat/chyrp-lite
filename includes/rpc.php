@@ -20,7 +20,7 @@
     if (!defined('XML_RPC_DESCRIPTION'))
         define('XML_RPC_DESCRIPTION', "body");
 
-    # Use the Main controller for any Route calls.
-    Route::current(MainController::current());
-
     $server = new XMLRPC();
+
+    ob_end_flush();
+    
