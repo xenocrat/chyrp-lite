@@ -394,11 +394,9 @@
         public function metaWeblog_getUsersBlogs($args) {
             $this->auth(fallback($args[1]), fallback($args[2]));
 
-            $config = Config::current();
-
-            return array(array("url"      => $config->url,
-                               "blogName" => $config->name,
-                               "blogid"   => 1));
+            return array(array("url"      => url("/", MainController::current()),
+                               "blogName" => Config::current()->name,
+                               "blogid"   => "1"));
         }
 
        /**
