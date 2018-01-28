@@ -636,7 +636,7 @@
             $trigger = Trigger::current();
 
             if (!isset($context["post"]))
-                error(__("Not Found"), __("Post not found."), null, 404); # Don't use show_404(), we'll go in circles.
+                show_404(__("Not Found"), __("Post not found."));
 
             $post = $context["post"];
             $comments = $post->comments;
