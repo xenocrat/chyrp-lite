@@ -148,16 +148,16 @@
 
         /**
          * Function: url
-         * Constructs a canonical URL, translating clean to dirty URLs as necessary.
+         * Constructs an absolute URL from a relative one, translating clean to dirty URLs as necessary.
          *
          * The applicable URL translations are filtered through the @parse_urls@ trigger.
          *
          * Parameters:
-         *     $url - The clean URL. Assumed to be dirty if it begins with "/".
+         *     $url - The relative URL. This is assumed to be a dirty URL if it begins with "/".
          *     $controller - The controller to use. If omitted the current controller will be used.
          *
          * Returns:
-         *     An absolute clean or dirty URL, depending on @Config->clean_urls@.
+         *     An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller support.
          */
         static function url($url, $controller = null) {
             $config = Config::current();
@@ -200,7 +200,7 @@
         /**
          * Function: add
          * Adds a route to Chyrp. Only needed for actions that have more than one parameter.
-         * For example, for /tags/ you won't need to do this, but you will for /tag/tag-name/.
+         * For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
          *
          * Parameters:
          *     $path - The path to add. Wrap variables with parentheses, e.g. "tag/(name)/".
