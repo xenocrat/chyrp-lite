@@ -99,6 +99,7 @@
             error($title, $body, null, 403);
 
         header($_SERVER['SERVER_PROTOCOL']." 403 Forbidden");
+        $main->feed = false; # Tell the controller not to serve feeds.
         $main->display("pages".DIR."403", array("reason" => $body), $title);
         exit;
     }
@@ -122,6 +123,7 @@
             error($title, $body, null, 404);
 
         header($_SERVER['SERVER_PROTOCOL']." 404 Not Found");
+        $main->feed = false; # Tell the controller not to serve feeds.
         $main->display("pages".DIR."404", array("reason" => $body), $title);
         exit;
     }
