@@ -861,7 +861,7 @@
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
+            $trigger->filter($this->context, "main_context");
 
             $theme->cookies_notification();
 

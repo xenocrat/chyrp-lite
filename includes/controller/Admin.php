@@ -2155,7 +2155,7 @@
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $template)));
+            $trigger->filter($this->context, "admin_context");
 
             Update::check();
 
