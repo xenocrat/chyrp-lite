@@ -52,11 +52,9 @@
 <h4 id="label_categories">{{ "Categories" | translate }}</h4>
 <ul role="menu" class="navigation sidebar_nav categories" aria-labelledby="label_categories">
 {% for category in categorize %}
-{% if category.show_on_home %}
 <li role="presentation">
 <a role="menuitem" href="{{ category.url }}">{{ category.name | oneof("[Untitled]" | translate) }}</a>
 </li>
-{% endif %}
 {% endfor %}
 </ul>
 {% endif %}
@@ -64,8 +62,8 @@
 <h4 id="label_my_pages">{{ "Pages" | translate }}</h4>
 <ul role="menu" class="navigation sidebar_nav my_pages" aria-labelledby="label_my_pages">
 {% for item in theme.pages_list() %}
-<li role="presentation" class="page depth{{ item.depth }}">
-<a role="menuitem" href="{{ item.url() }}">{{ item.title }}</a>
+<li role="presentation" class="page">
+<a role="menuitem" href="{{ item.url() }}">{{ ("&nbsp;" | repeat((item.depth - 1) * 4)) ~ item.title }}</a>
 </li>
 {% endfor %}
 </ul>
