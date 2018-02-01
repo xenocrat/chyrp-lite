@@ -34,43 +34,38 @@
          * Returns a simple array of pages with @depth@ and @children@ attributes.
          *
          * Parameters:
-         *     $start - Page ID or slug to start at.
+         *     $page_id - Page ID to use as the basis.
          *     $exclude - Page ID to exclude from the list.
          */
-        public function pages_list($start = 0, $exclude = null) {
-            if (isset($this->caches["pages_list"][$start]))
-                return $this->caches["pages_list"][$start];
+        public function pages_list($page_id = 0, $exclude = null) {
+            $cache_id = serialize(array($page_id, $exclude));
+
+            if (isset($this->caches["pages_list"][$cache_id]))
+                return $this->caches["pages_list"][$cache_id];
 
             $this->caches["pages"]["flat"] = array();
             $this->caches["pages"]["children"] = array();
 
-            if (!empty($start) and !is_numeric($start)) {
-                $from = new Page(array("url" => $start));
+            $where = array("id not" => $exclude);
 
-                if (!$from->no_results)
-                    $start = $from->id;
-                else
-                    $start = (int) $start;
-            }
+            if (MAIN)
+                $where["show_in_list"] = true;
 
-            $where = ADMIN ? array("id not" => $exclude) : array("show_in_list" => true) ;
-            $pages = Page::find(array("where" => $where, "order" => "list_order ASC"));
+            $pages = Page::find(array("where" => $where,
+                                      "order" => "list_order ASC"));
 
             if (empty($pages))
-                return $this->caches["pages_list"][$start] = array();
+                return $this->caches["pages_list"][$cache_id] = array();
 
             foreach ($pages as $page)
                 if ($page->parent_id != 0)
                     $this->caches["pages"]["children"][$page->parent_id][] = $page;
 
             foreach ($pages as $page)
-                if ((!$start and $page->parent_id == 0) or ($start and $page->id == $start))
+                if (($page_id == 0 and $page->parent_id == 0) or ($page->id == $page_id))
                     $this->recurse_pages($page);
 
-            if (!isset($exclude))
-                return $this->caches["pages_list"][$start] = $this->caches["pages"]["flat"];
-            else
-                return $this->caches["pages"]["flat"];
+            return $this->caches["pages_list"][$cache_id] = $this->caches["pages"]["flat"];
         }
 
         /**
@@ -158,15 +153,15 @@
          * Ask modules to contribute to a list of related posts.
          *
          * Parameters:
-         *     $post - List posts related to this post.
+         *     $post - The post to use as the basis.
          *     $limit - Number of related posts to list.
          */
         public function related_posts($post, $limit = 5) {
             if ($post->no_results)
                 return;
 
-            if (isset($this->caches["related_posts"]["$post->id"][$limit]))
-                return $this->caches["related_posts"]["$post->id"][$limit];
+            if (isset($this->caches["related_posts"][$post->id][$limit]))
+                return $this->caches["related_posts"][$post->id][$limit];
 
             $ids = array();
 
@@ -185,7 +180,7 @@
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i]));
 
-            return $this->caches["related_posts"]["$post->id"][$limit] = $posts;
+            return $this->caches["related_posts"][$post->id][$limit] = $posts;
         }
 
         /**
