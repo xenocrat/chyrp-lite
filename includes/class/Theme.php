@@ -76,8 +76,8 @@
          *     $page - Page to start recursion at.
          */
         private function recurse_pages($page) {
-            $page->depth    = (isset($page->depth)) ? $page->depth : 1 ;
-            $page->children = (isset($this->caches["pages"]["children"][$page->id])) ? true : false ;
+            $page->depth    = isset($page->depth) ? $page->depth : 1 ;
+            $page->children = isset($this->caches["pages"]["children"][$page->id]);
 
             $this->caches["pages"]["flat"][] = $page;
 
