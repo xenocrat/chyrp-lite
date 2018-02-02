@@ -87,15 +87,15 @@
 </li>
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
 <li role="presentation">
-<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Admin" | translate }}</a>
+<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Admin" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_post") %}
 <li role="presentation">
-<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Write" | translate }}</a>
+<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Write" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_draft") %}
 <li role="presentation">
-<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Draft" | translate }}</a>
+<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Draft" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.logged_in %}
