@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Route
-     * Holds information for URLs, redirecting, etc.
+     * Handles the routing process and other route-related tasks.
      */
     class Route {
         # String: $action
