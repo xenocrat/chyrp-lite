@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Theme
-     * Various helper functions for the theming engine.
+     * Various helper functions for blog themes.
      */
     class Theme {
         # String: $safename
