@@ -151,7 +151,7 @@
 
             $trigger->call("route_done", $this);
 
-            return true;
+            return $this->success;
         }
 
         /**
