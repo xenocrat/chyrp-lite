@@ -39,7 +39,7 @@
 
         # Array: $protected
         # Methods that cannot respond to actions.
-        public $protected = array("__construct", "parse", "display", "current");
+        public $protected = array("__construct", "parse", "resort", "failed", "display", "current");
 
         # Array: $permitted
         # Methods that are exempt from the "view_site" permission.
