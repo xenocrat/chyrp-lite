@@ -8,8 +8,16 @@
         # The current action.
         public $action = "";
 
+        # String: $request
+        # The extracted request.
+        public $request = "";
+
+        # Array: $arg
+        # Clean URLs decomposed into an array of arguments.
+        public $arg = array();
+
         # Array: $try
-        # An array of (string) actions to try until one doesn't return false.
+        # An array of actions to try until one doesn't return false.
         public $try = array();
 
         # Boolean: $ajax

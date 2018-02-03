@@ -45,9 +45,13 @@
         # Methods that are exempt from the "view_site" permission.
         public $permitted = array("login", "logout", "register", "activate", "lost_password", "reset");
 
+        # Variable: $twig
+        # Environment for the Twig template engine.
+        private $twig;
+
         # Array: $failpage
         # Arguments for a failpage in the event that none of the actions are successful.
-        private $failpage = array();
+        private $failpage;
 
         /**
          * Function: __construct

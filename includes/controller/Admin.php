@@ -39,6 +39,10 @@
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "navigation_context", "display", "current");
 
+        # Variable: $twig
+        # Environment for the Twig template engine.
+        private $twig;
+
         /**
          * Function: __construct
          * Loads the Twig parser and sets up the l10n domain.
