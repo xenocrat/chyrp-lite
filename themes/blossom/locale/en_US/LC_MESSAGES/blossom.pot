@@ -54,7 +54,7 @@ msgid "%d %b, %Y"
 msgstr ""
 
 #: themes/blossom/content/post.twig:27
-#: themes/blossom/content/sidebar.twig:57
+#: themes/blossom/content/sidebar.twig:56
 #: themes/blossom/pages/view.twig:20
 msgid "[Untitled]"
 msgstr ""
@@ -170,24 +170,24 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:64
+#: themes/blossom/content/sidebar.twig:62
 msgid "Pages"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:74
+#: themes/blossom/content/sidebar.twig:72
 msgid "Related Posts"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:83
+#: themes/blossom/content/sidebar.twig:81
 msgid "Recent Posts"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:94
+#: themes/blossom/content/sidebar.twig:92
 #: themes/blossom/layouts/default.twig:86
 msgid "Archive"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:99
+#: themes/blossom/content/sidebar.twig:97
 #: themes/blossom/pages/archive.twig:18
 msgid "%B %Y"
 msgstr ""
