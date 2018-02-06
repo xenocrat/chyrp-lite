@@ -168,9 +168,14 @@
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
-            $visitor = Visitor::current();
-            $status = ($visitor->group->can("edit_comment")) ? $_POST['status'] : $comment->status ;
-            $created_at = ($visitor->group->can("edit_comment")) ? datetime($_POST['created_at']) : $comment->created_at ;
+            if (!in_array($_POST['status'], array("approved", "denied", "spam", "pingback")))
+                $_POST['status'] = $comment->status;
+
+            $editor = Visitor::current()->group->can("edit_comment");
+            $status = ($editor) ? $_POST['status'] : $comment->status ;
+            $created_at = ($editor) ? datetime($_POST['created_at']) : $comment->created_at ;
+
+
 
             $comment = $comment->update($_POST['body'],
                                         $_POST['author'],
