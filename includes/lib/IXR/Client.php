@@ -39,6 +39,7 @@
 
 class IXR_Client
 {
+    var $transport;
     var $server;
     var $port;
     var $path;
@@ -56,15 +57,27 @@ class IXR_Client
         if (!$path) {
             // Assume we have been given a URL instead
             $bits = parse_url($server);
-            $this->server = $bits['host'];
+            $this->server = isset($bits['host']) ? $bits['host'] : '';
             $this->port = isset($bits['port']) ? $bits['port'] : 80;
             $this->path = isset($bits['path']) ? $bits['path'] : '/';
 
-            // Make absolutely sure we have a path
-            if (!$this->path) {
-                $this->path = '/';
+            // Set the socket transport using the scheme
+            if (isset($bits['scheme'])) {
+                switch ($bits['scheme']) {
+                    case 'https':
+                        $this->transport = 'tls';
+                        break;
+                    case 'http':
+                        $this->transport = 'tcp';
+                        break;
+                    default:
+                        $this->transport = $bits['scheme'];
+                }
+            } else {
+                $this->transport = 'tcp';
             }
         } else {
+            $this->transport = 'tcp';
             $this->server = $server;
             $this->path = $path;
             $this->port = $port;
@@ -102,9 +115,9 @@ class IXR_Client
         }
 
         if ($this->timeout) {
-            $fp = @fsockopen($this->server, $this->port, $errno, $errstr, $this->timeout);
+            $fp = @fsockopen($this->transport.'://'.$this->server, $this->port, $errno, $errstr, $this->timeout);
         } else {
-            $fp = @fsockopen($this->server, $this->port, $errno, $errstr);
+            $fp = @fsockopen($this->transport.'://'.$this->server, $this->port, $errno, $errstr);
         }
         if (!$fp) {
             $this->error = new IXR_Error(-32300, 'transport error - could not open socket');
