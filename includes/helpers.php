@@ -1305,13 +1305,20 @@
      *     $post - The post we're sending from.
      */
     function send_pingbacks($string, $post) {
-        foreach (grab_urls($string) as $url)
-            if ($ping_url = pingback_url($url)) {
-                $client = new IXR_Client($ping_url);
+        foreach (grab_urls($string) as $url) {
+            $ping_url = pingback_url($url);
+
+            if ($ping_url !== false and is_url($ping_url)) {
+                $client = new IXR_Client(add_scheme($ping_url));
+
+                if ($client->transport == "tls" and !extension_loaded("openssl"))
+                    continue;
+
                 $client->timeout = 3;
                 $client->useragent = CHYRP_IDENTITY;
                 $client->query("pingback.ping", $post->url(), $url);
             }
+        }
     }
 
     /**
