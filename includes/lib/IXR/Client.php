@@ -57,24 +57,25 @@ class IXR_Client
         if (!$path) {
             // Assume we have been given a URL instead
             $bits = parse_url($server);
+            $this->transport = isset($bits['scheme']) ? $bits['scheme'] : 'tcp';
             $this->server = isset($bits['host']) ? $bits['host'] : '';
             $this->port = isset($bits['port']) ? $bits['port'] : 80;
             $this->path = isset($bits['path']) ? $bits['path'] : '/';
 
-            // Set the socket transport using the scheme
-            if (isset($bits['scheme'])) {
-                switch ($bits['scheme']) {
-                    case 'https':
-                        $this->transport = 'tls';
-                        break;
-                    case 'http':
-                        $this->transport = 'tcp';
-                        break;
-                    default:
-                        $this->transport = $bits['scheme'];
-                }
-            } else {
-                $this->transport = 'tcp';
+            // Set an appropriate socket transport and port for HTTP/S
+            switch ($this->transport) {
+                case 'https':
+                    $this->transport = 'tls';
+                    if (!isset($bits['port'])) {
+                        $this->port = 443;
+                    }
+                    break;
+                case 'http':
+                    $this->transport = 'tcp';
+                    if (!isset($bits['port'])) {
+                        $this->port = 80;
+                    }
+                    break;
             }
         } else {
             $this->transport = 'tcp';
