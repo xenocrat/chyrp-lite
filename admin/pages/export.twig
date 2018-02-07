@@ -30,7 +30,7 @@
 <input class="text filter_text" type="text" name="filter_users" value="" id="filter_users" aria-label="{{ 'filter (optional)' | translate }}" placeholder="{{ 'filter (optional)' | translate }}">
 <a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
-{{ "Warning: this file will contain the hashed password for each user – keep it safe!" | translate }}
+{{ "Users export file will contain the hashed password for each user – keep it safe!" | translate }}
 </small>
 </p>
 {{ trigger.call("export_choose") }}

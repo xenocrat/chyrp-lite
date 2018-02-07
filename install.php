@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2018.01");
-    define('CHYRP_CODENAME', "Kenya");
+    define('CHYRP_VERSION',  "2018.02");
+    define('CHYRP_CODENAME', "Shelley");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -772,7 +772,7 @@
                     <input type="text" name="description" value="<?php posted("description"); ?>" id="description">
                 </p>
                 <p id="timezone_field">
-                    <label for="timezone"><?php echo __("What time is it?"); ?></label>
+                    <label for="timezone"><?php echo __("Time Zone"); ?></label>
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
                         <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>

@@ -99,6 +99,7 @@
             error($title, $body, null, 403);
 
         header($_SERVER['SERVER_PROTOCOL']." 403 Forbidden");
+        $main->feed = false; # Tell the controller not to serve feeds.
         $main->display("pages".DIR."403", array("reason" => $body), $title);
         exit;
     }
@@ -122,6 +123,7 @@
             error($title, $body, null, 404);
 
         header($_SERVER['SERVER_PROTOCOL']." 404 Not Found");
+        $main->feed = false; # Tell the controller not to serve feeds.
         $main->display("pages".DIR."404", array("reason" => $body), $title);
         exit;
     }
@@ -1303,13 +1305,20 @@
      *     $post - The post we're sending from.
      */
     function send_pingbacks($string, $post) {
-        foreach (grab_urls($string) as $url)
-            if ($ping_url = pingback_url($url)) {
-                $client = new IXR_Client($ping_url);
+        foreach (grab_urls($string) as $url) {
+            $ping_url = pingback_url($url);
+
+            if ($ping_url !== false and is_url($ping_url)) {
+                $client = new IXR_Client(add_scheme($ping_url));
+
+                if ($client->transport == "tls" and !extension_loaded("openssl"))
+                    continue;
+
                 $client->timeout = 3;
                 $client->useragent = CHYRP_IDENTITY;
                 $client->query("pingback.ping", $post->url(), $url);
             }
+        }
     }
 
     /**
@@ -1960,7 +1969,7 @@
      */
     function json_response($text = null, $data = null) {
         header("Content-Type: application/json; charset=UTF-8");
-        exit(json_set(array("text" => $text, "data" => $data)));
+        echo json_set(array("text" => $text, "data" => $data));
     }
 
     /**

@@ -38,11 +38,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2018.01");
+    define('CHYRP_VERSION', "2018.02");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Kenya");
+    define('CHYRP_CODENAME', "Shelley");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
@@ -287,6 +287,11 @@
     #     <Controller>
     require_once INCLUDES_DIR.DIR."controller".DIR."Admin.php";
 
+    # File: Ajax
+    # See Also:
+    #     <Controller>
+    require_once INCLUDES_DIR.DIR."controller".DIR."Ajax.php";
+
     # Exit if an upgrade is in progress.
     if (file_exists(INCLUDES_DIR.DIR."upgrading.lock"))
         error(__("Service Unavailable"),
@@ -366,8 +371,8 @@
 
     # Set appropriate headers.
     if (JAVASCRIPT) {
-        header("Content-Type: application/javascript");
-        header("Referrer-Policy: strict-origin-when-cross-origin");
+        header("Content-Type: application/javascript; charset=UTF-8");
+        header("Referrer-Policy: no-referrer");
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else {
@@ -375,3 +380,7 @@
         header("Referrer-Policy: strict-origin-when-cross-origin");
         header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
     }
+
+    # Upgrade future requests if the canonical URL is HTTPS.
+    if (substr_count($config->url, "https://"))
+        header("Strict-Transport-Security: max-age=2592000");

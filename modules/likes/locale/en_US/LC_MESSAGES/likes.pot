@@ -12,7 +12,7 @@ msgid "Like Image"
 msgstr ""
 
 #: modules/likes/admin/pages/like_settings.twig:19
-msgid "Like With Text"
+msgid "Like with Text"
 msgstr ""
 
 #: modules/likes/admin/pages/like_settings.twig:21
@@ -20,7 +20,7 @@ msgid "Enables text descriptions in like/unlike links."
 msgstr ""
 
 #: modules/likes/admin/pages/like_settings.twig:24
-msgid "Show On Index Pages"
+msgid "Show on Index Pages"
 msgstr ""
 
 #: modules/likes/admin/pages/like_settings.twig:26
@@ -79,12 +79,12 @@ msgid "Post unliked."
 msgstr ""
 
 #: modules/likes/likes.php:118
-#: modules/likes/likes.php:264
+#: modules/likes/likes.php:272
 msgid "You like this."
 msgstr ""
 
 #: modules/likes/likes.php:119
-#: modules/likes/likes.php:265
+#: modules/likes/likes.php:273
 #, php-format
 msgid "You and %d person like this."
 msgid_plural "You and %d people like this."
@@ -92,25 +92,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: modules/likes/likes.php:142
-#: modules/likes/likes.php:237
+#: modules/likes/likes.php:246
 msgid "No likes yet."
 msgstr ""
 
 #: modules/likes/likes.php:143
-#: modules/likes/likes.php:238
+#: modules/likes/likes.php:247
 #, php-format
 msgid "%d person likes this."
 msgid_plural "%d people like this."
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/likes/likes.php:225
-#: modules/likes/likes.php:252
+#: modules/likes/likes.php:234
+#: modules/likes/likes.php:260
 msgid "Like!"
 msgstr ""
 
-#: modules/likes/likes.php:226
-#: modules/likes/likes.php:253
+#: modules/likes/likes.php:235
+#: modules/likes/likes.php:261
 msgid "Unlike!"
 msgstr ""
 

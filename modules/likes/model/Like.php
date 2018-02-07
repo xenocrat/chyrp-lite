@@ -42,11 +42,13 @@
          *
          * Returns:
          *     The newly created <Like>.
+         *
+         * Notes:
+         *     Allows only one like per hash to avoid abuse by guests.
          */
         static function add($post_id, $user_id, $timestamp, $session_hash) {
             $sql = SQL::current();
 
-            # Test for an existing key_session_hash pair.
             $old = new self(array("post_id"      => $post_id,
                                   "session_hash" => $session_hash));
 
@@ -101,19 +103,21 @@
 
         /**
          * Function: create
-         * Creates a like in the visitor's session values.
+         * Creates a like and sets it in the visitor's session values.
          *
          * Parameters:
          *     $post_id - The ID of the blog post that was liked.
+         *
+         * Notes:
+         *     Duplicate likes will be attributed ID 0 (non-removable).
          */
         static function create($post_id) {
-            if (!array_key_exists($post_id, $_SESSION["likes"]))
+            if (!isset($_SESSION["likes"][$post_id]))
                 $new = self::add($post_id,
                                  Visitor::current()->id,
                                  datetime(),
                                  self::session_hash());
 
-            # Set the session value so that we remember this like.
             $_SESSION["likes"][$post_id] = !empty($new) ? $new->id : 0 ;
 
             Trigger::current()->call("like_post", $post_id);
@@ -121,16 +125,18 @@
 
         /**
          * Function: remove
-         * Removes a like from the visitor's session values.
+         * Removes a like and unsets it in the visitor's session values.
          *
          * Parameters:
          *     $post_id - The ID of the blog post that was unliked.
+         *
+         * Notes:
+         *     Guests' likes are removable until the session is destroyed.
          */
         static function remove($post_id) {
             if (!empty($_SESSION["likes"][$post_id]))
                 self::delete($_SESSION["likes"][$post_id]);
 
-            # Unset the session value so that we forget this like.
             unset($_SESSION["likes"][$post_id]);
 
             Trigger::current()->call("unlike_post", $post_id);
@@ -141,23 +147,14 @@
          * Determines if a visitor has liked a post and sets the session value.
          */
         static function discover($post_id) {
-            if (!array_key_exists($post_id, $_SESSION["likes"]))
-                if (logged_in()) {
-                    $check = new self(array("post_id" => $post_id,
-                                            "user_id" => Visitor::current()->id));
+            if (logged_in()) {
+                $check = new self(array("post_id" => $post_id,
+                                        "user_id" => Visitor::current()->id));
 
-                    if (!$check->no_results)
-                        $_SESSION["likes"][$post_id] = $check->id;
-                } else {
-                    $check = new self(array("post_id"      => $post_id,
-                                            "user_id"      => Visitor::current()->id,
-                                            "session_hash" => self::session_hash()));
+                if (!$check->no_results)
+                    $_SESSION["likes"][$post_id] = $check->id;
+            }
 
-                    if (!$check->no_results)
-                        $_SESSION["likes"][$post_id] = null;
-                }
-
-            # A non-null value will attribute a like to this visitor.
             return isset($_SESSION["likes"][$post_id]);
         }
 
@@ -177,16 +174,14 @@
             $sql = SQL::current();
 
             if ($sql->adapter == "mysql") {
-                # SQLite does not support KEY or UNIQUE in CREATE.
+                # SQLite does not support the KEY column definition.
                 $sql->query("CREATE TABLE IF NOT EXISTS __likes (
                                  id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                  post_id INTEGER NOT NULL,
                                  user_id INTEGER NOT NULL,
                                  timestamp DATETIME DEFAULT NULL,
                                  session_hash VARCHAR(32) NOT NULL,
-                                 KEY key_post_id (post_id),
-                                 KEY key_user_id (post_id, user_id),
-                                 UNIQUE key_session_hash (post_id, session_hash)
+                                 KEY key_user_id (post_id, user_id)
                              ) DEFAULT CHARSET=utf8");
             } else {
                 # MySQL does not support CREATE INDEX IF NOT EXISTS.
@@ -197,9 +192,7 @@
                                  timestamp DATETIME DEFAULT NULL,
                                  session_hash VARCHAR(32) NOT NULL
                              )");
-                $sql->query("CREATE INDEX IF NOT EXISTS key_post_id ON __likes (post_id)");
                 $sql->query("CREATE INDEX IF NOT EXISTS key_user_id ON __likes (post_id, user_id)");
-                $sql->query("CREATE UNIQUE INDEX IF NOT EXISTS key_session_hash ON __likes (post_id, session_hash)");
             }
         }
 

@@ -1,15 +1,23 @@
 <?php
     /**
      * Class: Route
-     * Holds information for URLs, redirecting, etc.
+     * Handles the routing process and other route-related tasks.
      */
     class Route {
         # String: $action
         # The current action.
         public $action = "";
 
+        # String: $request
+        # The extracted request.
+        public $request = "";
+
+        # Array: $arg
+        # Clean URLs decomposed into an array of arguments.
+        public $arg = array();
+
         # Array: $try
-        # An array of (string) actions to try until one doesn't return false.
+        # An array of actions to try until one doesn't return false.
         public $try = array();
 
         # Boolean: $ajax
@@ -35,52 +43,36 @@
             if (!in_array("Controller", class_implements($controller)))
                 trigger_error(__("Route was initiated with an invalid Controller."), E_USER_ERROR);
 
+            $config = Config::current();
+
             fallback($controller->protected, array("__construct", "__destruct", "parse", "display"));
             fallback($controller->permitted, array("login", "logout"));
-            fallback($controller->feed, (isset($_GET['feed']) or (isset($_GET['action']) and $_GET['action'] == "feed")));
+            fallback($controller->feed, isset($_GET['feed']));
+            fallback($controller->displayed, false);
 
+            # Set the contoller for this route.
             $this->controller = $controller;
-
-            if (substr_count($_SERVER['REQUEST_URI'], "..") > 0 )
-                error(__("Error"), __("Malformed URI."), null, 400);
-
-            if (isset($_GET['action']) and preg_match("/[^(\w+)]/", $_GET['action']))
-                error(__("Error"), __("Invalid action."), null, 400);
 
             # Determining the action can be this simple if clean URLs are disabled.
             $this->action =& $_GET['action'];
 
-            # Parse the current URL and extract information.
-            $parse = parse_url(Config::current()->url);
-            fallback($parse["path"], "/");
+            $base = empty($controller->base) ? $config->url : $config->chyrp_url."/".$controller->base ;
+            $regex = "~^".preg_quote(oneof(parse_url($base, PHP_URL_PATH), ""), "~")."((/)index.php)?~";
 
-            if (isset($controller->base))
-                $parse["path"] = trim($parse["path"], "/")."/".trim($controller->base, "/")."/";
-
-            $this->safe_path = str_replace("/", "\\/", $parse["path"]);
-            $this->request = $parse["path"] == "/" ?
-                                 $_SERVER['REQUEST_URI'] :
-                                 preg_replace("/{$this->safe_path}?/", "", $_SERVER['REQUEST_URI'], 1) ;
+            # Extract the request.
+            $this->request = preg_replace($regex, "$2", $_SERVER['REQUEST_URI']);
 
             # Decompose clean URLs.
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
-
-            if (substr_count($this->arg[0], "?") > 0 and !preg_match("/\?\w+/", $this->arg[0]))
-                error(__("Error"), __("Invalid action."), null, 400);
 
             # Give the controller an opportunity to parse this route and determine the action.
             $controller->parse($this);
 
             Trigger::current()->call("parse_route", $this);
 
-            $this->try[] = isset($this->action) ?
-                               oneof($this->action, "index") :
-                               ((!substr_count($this->arg[0], "?") and !($this->arg[0] == "index.php")) ?
-                                   oneof($this->arg[0], "index") : "index") ;
-
-            # Set the action, using a guess if necessary, to satisfy the view_site permission test.
-            # A subset of actions is permitted even if the visitor is not allowed to view the site.
-            fallback($this->action, end($this->try));
+            # Support single parameter actions without custom routes or parsing by the controller.
+            if (empty($this->action) and !empty($this->arg[0]))
+                $this->try[] = $this->arg[0];
         }
 
         /**
@@ -93,28 +85,27 @@
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
-            # Can the visitor view the site, or is this action exempt from the "view_site" permission?
-            if (!$visitor->group->can("view_site") and !in_array($this->action, $this->controller->permitted)) {
-                $trigger->call("can_not_view_site");
-                show_403(__("Access Denied"), __("You are not allowed to view this site."));
-            }
-
             $trigger->call("route_init", $this);
 
-            $try = $this->try;
-
             if (isset($this->action))
-                array_unshift($try, $this->action);
+                array_unshift($this->try, $this->action);
 
-            $count = 0;
-
-            foreach ($try as $key => $val) {
-                if (is_numeric($key))
-                    list($method, $args) = array($val, array());
-                else
-                    list($method, $args) = array($key, $val);
+            foreach ($this->try as $key => $val) {
+                list($method, $args) = is_numeric($key) ? array($val, array()) : array($key, $val) ;
 
                 $this->action = $method;
+
+                # Don't try to call anything except a valid PHP function.
+                if (preg_match("/[^\w]/", $this->action))
+                    error(__("Error"), __("Invalid action."), null, 400);
+
+                # Show a 403 page if the visitor cannot view the site and this is not an exempt action.
+                if (!$visitor->group->can("view_site") and
+                    !in_array($this->action, $this->controller->permitted)) {
+
+                    $trigger->call("can_not_view_site");
+                    show_403(__("Access Denied"), __("You are not allowed to view this site."));
+                }
 
                 $name = strtolower(str_replace("Controller", "", get_class($this->controller)));
 
@@ -124,47 +115,57 @@
                 else
                     $call = false;
 
+                if ($call !== false) {
+                    $this->success = true;
+                    break;
+                }
+
                 # Protect the controller's non-responder methods. PHP functions are not case-sensitive!
                 foreach ($this->controller->protected as $protected)
                     if (strcasecmp($protected, $method) == 0)
                         continue 2;
 
                 # This discovers responders native to the controller.
-                if ($call !== true and method_exists($this->controller, $method))
+                if (method_exists($this->controller, $method))
                     $response = call_user_func_array(array($this->controller, $method), $args);
                 else
                     $response = false;
 
-                if ($response !== false or $call !== false) {
+                if ($response !== false) {
                     $this->success = true;
                     break;
                 }
-
-                # No responders were found; display a fallback template if one is set.
-                if (++$count == count($try) and isset($this->controller->fallback))
-                    call_user_func_array(array($this->controller, "display"), $this->controller->fallback);
             }
 
-            if ($this->success and !in_array($this->action, $this->controller->permitted))
+            # No responders were found; display a failpage if one is set.
+            if (!$this->success and method_exists($this->controller, "failed"))
+                $this->controller->failed($this);
+
+            # Show a 404 page if routing failed and nothing was displayed.
+            if (!$this->success and !$this->controller->displayed)
+                show_404();
+
+            # Set redirect_to so that visitors will come back here after login.
+            if (!in_array($this->action, $this->controller->permitted))
                 $_SESSION['redirect_to'] = self_url();
 
             $trigger->call("route_done", $this);
 
-            return true;
+            return $this->success;
         }
 
         /**
          * Function: url
-         * Constructs a canonical URL, translating clean to dirty URLs as necessary.
+         * Constructs an absolute URL from a relative one, translating clean to dirty URLs as necessary.
          *
          * The applicable URL translations are filtered through the @parse_urls@ trigger.
          *
          * Parameters:
-         *     $url - The clean URL. Assumed to be dirty if it begins with "/".
+         *     $url - The relative URL. This is assumed to be a dirty URL if it begins with "/".
          *     $controller - The controller to use. If omitted the current controller will be used.
          *
          * Returns:
-         *     An absolute clean or dirty URL, depending on @Config->clean_urls@.
+         *     An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller support.
          */
         static function url($url, $controller = null) {
             $config = Config::current();
@@ -175,7 +176,7 @@
             if (is_string($controller))
                 $controller = $controller::current();
 
-            $base = !empty($controller->base) ? $config->chyrp_url."/".$controller->base : $config->url ;
+            $base = empty($controller->base) ? $config->url : $config->chyrp_url."/".$controller->base ;
 
             # Assume this is a dirty URL and return it without translation.
             if (strpos($url, "/") === 0)
@@ -207,7 +208,7 @@
         /**
          * Function: add
          * Adds a route to Chyrp. Only needed for actions that have more than one parameter.
-         * For example, for /tags/ you won't need to do this, but you will for /tag/tag-name/.
+         * For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
          *
          * Parameters:
          *     $path - The path to add. Wrap variables with parentheses, e.g. "tag/(name)/".

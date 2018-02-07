@@ -53,24 +53,18 @@
          *     $post - The <Post> they're commenting on.
          *     $parent - The <Comment> they're replying to.
          *     $notify - Notification on follow-up comments.
-         *     $type - The type of comment (optional).
+         *     $status - The comment's status. (optional).
          */
-        static function create($body, $author, $author_url, $author_email, $post, $parent, $notify, $type = null) {
-            if (!self::user_can($post) and $type != "pingback")
-                return;
+        static function create($body, $author, $author_url, $author_email, $post, $parent, $notify, $status = null) {
+            if (!self::user_can($post) and $status != "pingback")
+                return false;
 
             $config = Config::current();
-            $route = Route::current();
             $visitor = Visitor::current();
 
-            if (empty($type)) {
-                $status = ($post->user_id == $visitor->id) ?
-                    "approved" :
-                    $config->module_comments["default_comment_status"] ;
-
-                $type = "comment";
-            } else
-                $status = $type;
+            fallback($status, ($post->user_id == $visitor->id) ?
+                                    "approved" :
+                                    $config->module_comments["default_comment_status"]);
 
             if (!logged_in())
                 $notify = 0; # Only logged-in users can request notifications.
@@ -85,7 +79,7 @@
                 $akismet->setCommentAuthorURL($author_url);
                 $akismet->setCommentAuthorEmail($author_email);
                 $akismet->setPermalink($post->url());
-                $akismet->setCommentType($type);
+                $akismet->setCommentType($status);
                 $akismet->setReferrer($HTTP_REFERER);
                 $akismet->setUserIP($_SERVER['REMOTE_ADDR']);
 

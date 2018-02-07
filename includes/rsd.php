@@ -13,7 +13,7 @@
     <service>
         <engineName><?php echo CHYRP_IDENTITY; ?></engineName>
         <engineLink>http://chyrplite.net/</engineLink>
-        <homePageLink><?php echo $config->url; ?></homePageLink>
+        <homePageLink><?php echo url("/", MainController::current()); ?></homePageLink>
         <apis>
             <api name="MetaWeblog" preferred="true" apiLink="<?php echo $config->chyrp_url; ?>/includes/rpc.php" blogID="1" />
         </apis>

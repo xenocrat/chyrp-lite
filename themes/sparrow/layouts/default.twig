@@ -8,7 +8,8 @@
 <meta name="viewport" content="initial-scale = 1.0">
 <link rel="pingback" href="{{ site.chyrp_url }}/includes/rpc.php">
 <link rel="EditURI" type="application/rsd+xml" href="{{ site.chyrp_url }}/includes/rsd.php">
-<link rel="shortcut icon" href="{{ site.chyrp_url }}/favicon.ico">
+<link rel="icon" sizes="32x32" type="image/x-icon" href="{{ site.chyrp_url }}/favicon.ico">
+<link rel="icon" sizes="any" type="image/svg+xml" href="{{ site.chyrp_url }}/favicon.svg">
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
 {{ theme.feeds() }}
 {{ theme.stylesheets() }}
@@ -34,7 +35,7 @@
 {% endfor %}
 <div id="mast" role="banner">
 <div id="mast_box">
-<h1 class="banner"><a href="{{ site.url }}">{{ site.name }}</a></h1>
+<h1 class="banner"><a href="{{ url('/') }}">{{ site.name }}</a></h1>
 <ul role="menubar" class="navigation">
 <li role="presentation">
 <a role="menuitem" href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
@@ -47,15 +48,15 @@
 </li>
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
 <li role="presentation">
-<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Admin" | translate }}</a>
+<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Admin" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_post") %}
 <li role="presentation">
-<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Write" | translate }}</a>
+<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Write" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_draft") %}
 <li role="presentation">
-<a role="menuitem" href="{{ site.chyrp_url }}/admin/">{{ "Draft" | translate }}</a>
+<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Draft" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.logged_in %}
@@ -77,7 +78,7 @@
 {% endif %}
 </ul>
 <div role="search" class="search_box">
-<form action="{{ site.url }}" method="get" accept-charset="UTF-8">
+<form action="{{ url('/') }}" method="get" accept-charset="UTF-8">
 <input type="hidden" name="action" value="search">
 <input type="text" id="search_field" name="query" value="{{ route.action == 'search' and GET.query is defined ? GET.query | fix(true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" aria-label="{{ 'Search this blog' | translate }}">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>

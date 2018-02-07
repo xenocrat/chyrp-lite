@@ -1,13 +1,13 @@
 <?php
-    define('ADMIN', true);
+    define('AJAX', true);
 
     require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
 
     # Prepare the controller.
-    $admin = AdminController::current();
+    $ajax = AjaxController::current();
 
     # Parse the route.
-    $route = Route::current($admin);
+    $route = Route::current($ajax);
 
     # Respond to the request.
     $route->init();

@@ -40,7 +40,7 @@
 <option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate("comments") }}</option>
 <option value="denied"{{ comment.status | selected("denied") }}>{{ "Denied" | translate("comments") }}</option>
 <option value="spam"{{ comment.status | selected("spam") }}>{{ "Spam" | translate("comments") }}</option>
-<option value="pingback"[{ comment.status | selected("pingback") }}>{{ "Pingback" | translate("comments") }}</option>
+<option value="pingback"{{ comment.status | selected("pingback") }}>{{ "Pingback" | translate("comments") }}</option>
 </select>
 </p>
 {% endif %}

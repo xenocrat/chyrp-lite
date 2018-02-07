@@ -65,7 +65,7 @@
             return $navs;
         }
 
-        public function route_like() {
+        public function main_like() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
@@ -81,7 +81,7 @@
             Flash::notice(__("Post liked.", "likes"), $post->url()."#likes_".$post->id);
         }
 
-        public function route_unlike() {
+        public function main_unlike() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
@@ -98,7 +98,7 @@
         }
 
         public function ajax_like() {
-            if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
+            if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
@@ -110,9 +110,9 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            Like::create($post->id);
+            $count = $post->like_count;
 
-            $count = $post->like_count - 1;
+            Like::create($post->id);
 
             $text = ($count <= 0) ?
                 __("You like this.", "likes") :
@@ -122,7 +122,7 @@
         }
 
         public function ajax_unlike() {
-            if (empty($_POST["post_id"]) or !is_numeric($_POST['post_id']))
+            if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
@@ -134,9 +134,9 @@
             if ($post->no_results)
                 show_404(__("Not Found"), __("Post not found."));
 
-            Like::remove($post->id);
+            $count = $post->like_count - 1;
 
-            $count = $post->like_count;
+            Like::remove($post->id);
 
             $text = ($count <= 0) ?
                 __("No likes yet.", "likes") :
@@ -158,6 +158,9 @@
         }
 
         public function post_like_count_attr($attr, $post) {
+            if ($post->no_results)
+                return 0;
+
             if (isset($this->post_like_counts))
                 return fallback($this->post_like_counts[$post->id], 0);
 
@@ -177,6 +180,9 @@
         }
 
         public function user_like_count_attr($attr, $user) {
+            if ($user->no_results)
+                return 0;
+
             if (isset($this->user_like_counts))
                 return fallback($this->user_like_counts[$user->id], 0);
 
@@ -203,10 +209,14 @@
         public function post_like_link_attr($attr, $post) {
             $config = Config::current();
             $route = Route::current();
+            $main = MainController::current();
             $visitor = Visitor::current();
             $settings = $config->module_likes;
 
-            if (($settings["show_on_index"] == false and $route->action == "index") or $post->no_results)
+            if ($post->no_results)
+                return;
+
+            if ($settings["show_on_index"] == false and $route->action == "index")
                 return;
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
@@ -214,9 +224,8 @@
             if (!Like::discover($post->id)) {
                 if ($visitor->group->can("like_post")) {
                     $html.= '<a class="likes like" href="'.
-                                $config->url.'/?action=like&amp;post_id='.
-                                $post->id.'" data-post_id="'.
-                                $post->id.'">';
+                                url("/?action=like&amp;post_id=".$post->id, $main).
+                                '" data-post_id="'.$post->id.'">';
 
                     if (!empty($settings["like_image"]))
                         $html.= '<img src="'.$settings["like_image"].'" alt="Likes icon">';
@@ -241,9 +250,8 @@
             } else {
                 if ($visitor->group->can("unlike_post")) {
                     $html.= '<a class="likes liked" href="'.
-                                $config->url.'/?action=unlike&amp;post_id='.
-                                $post->id.'" data-post_id="'.
-                                $post->id.'">';
+                                url("/?action=unlike&amp;post_id=".$post->id, $main).
+                                '" data-post_id="'.$post->id.'">';
 
                     if (!empty($settings["like_image"]))
                         $html.= '<img src="'.$settings["like_image"].'" alt="Likes icon">';

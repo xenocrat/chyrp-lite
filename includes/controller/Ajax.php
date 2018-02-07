@@ -1,30 +1,42 @@
 <?php
     /**
-     * File: ajax
-     * Handles AJAX requests.
+     * Class: AjaxController
+     * The logic controlling AJAX requests.
      */
+    class AjaxController implements Controller {
+        # Boolean: $clean
+        # Does this controller support clean URLs?
+        public $clean = false;
 
-    define('AJAX', true);
+        # Boolean: $feed
+        # Is the current page a feed?
+        public $feed = false;
 
-    require_once "common.php";
+        # String: $base
+        # The base path for this controller.
+        public $base = "ajax";
 
-    # Prepare the controller.
-    $main = MainController::current();
+        # Array: $protected
+        # Methods that cannot respond to actions.
+        public $protected = array("parse", "current");
 
-    # Parse the route.
-    $route = Route::current($main);
+        /**
+         * Function: parse
+         * Route constructor calls this to determine the action in the case of a POST request.
+         */
+        public function parse($route) {
+            if (empty($route->action) and isset($_POST['action']))
+                return $route->action = $_POST['action'];
 
-    if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] !== "POST")
-        error(__("Error"), __("This resource accepts POST requests only."), null, 405);
+            if (!isset($route->action))
+                error(__("Error"), __("Missing argument."), null, 400);
+        }
 
-    if (empty($_POST['action']))
-        error(__("Error"), __("Missing argument."), null, 400);
-
-    if (!$visitor->group->can("view_site"))
-        show_403(__("Access Denied"), __("You are not allowed to view this site."));
-
-    switch($_POST['action']) {
-        case "destroy_post":
+        /**
+         * Function: destroy_post
+         * Destroys a post.
+         */
+        public function destroy_post() {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -41,7 +53,16 @@
 
             Post::delete($post->id);
             json_response(__("Post deleted."), true);
-        case "destroy_page":
+        }
+
+        /**
+         * Function: destroy_page
+         * Destroys a page.
+         */
+        public function destroy_page() {
+            if (!Visitor::current()->group->can("delete_page"))
+                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
+
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -53,19 +74,23 @@
             if ($page->no_results)
                 show_404(__("Not Found"), __("Page not found."));
 
-            if (!$visitor->group->can("delete_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
-
             Page::delete($page->id, true);
             json_response(__("Page deleted."), true);
-        case "preview_post":
+        }
+
+        /**
+         * Function: preview_post
+         * Previews a post.
+         */
+        public function preview_post() {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (!$visitor->group->can("add_post", "add_draft"))
+            if (!Visitor::current()->group->can("add_post", "add_draft"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
 
             $trigger = Trigger::current();
+            $main = MainController::current();
 
             $class = camelize(fallback($_POST['safename'], "text"));
             $field = fallback($_POST['field'], "body");
@@ -89,15 +114,21 @@
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
             $main->display("content".DIR."preview", array("content" => $content), __("Preview"));
-            exit;
-        case "preview_page":
+        }
+
+        /**
+         * Function: preview_page
+         * Previews a page.
+         */
+        public function preview_page() {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (!$visitor->group->can("add_page"))
+            if (!Visitor::current()->group->can("add_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
 
             $trigger = Trigger::current();
+            $main = MainController::current();
 
             $field = fallback($_POST['field'], "body");
             $content = sanitize_html(fallback($_POST['content'], ""));
@@ -114,11 +145,15 @@
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
             $main->display("content".DIR."preview", array("content" => $content), __("Preview"));
-            exit;
+        }
+
+        /**
+         * Function: current
+         * Returns a singleton reference to the current class.
+         */
+        public static function & current() {
+            static $instance = null;
+            $instance = (empty($instance)) ? new self() : $instance ;
+            return $instance;
+        }
     }
-
-    $trigger->call("ajax");
-    $trigger->call("ajax_".$_POST['action']);
-
-    # Serve an error if no responders were found.
-    error(__("Error"), __("Invalid action."), null, 400);

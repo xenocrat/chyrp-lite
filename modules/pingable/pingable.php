@@ -159,6 +159,9 @@
         }
 
         public function post_pingback_count_attr($attr, $post) {
+            if ($post->no_results)
+                return 0;
+
             if (isset($this->post_pingback_counts))
                 return fallback($this->post_pingback_counts[$post->id], 0);
 

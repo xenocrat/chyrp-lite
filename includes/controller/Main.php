@@ -39,11 +39,19 @@
 
         # Array: $protected
         # Methods that cannot respond to actions.
-        public $protected = array("__construct", "parse", "display", "current");
+        public $protected = array("__construct", "parse", "resort", "failed", "display", "current");
 
         # Array: $permitted
         # Methods that are exempt from the "view_site" permission.
         public $permitted = array("login", "logout", "register", "activate", "lost_password", "reset");
+
+        # Variable: $twig
+        # Environment for the Twig template engine.
+        private $twig;
+
+        # Array: $failpage
+        # Arguments for a failpage in the event that none of the actions are successful.
+        private $failpage;
 
         /**
          * Function: __construct
@@ -77,19 +85,17 @@
         public function parse($route) {
             $config = Config::current();
 
-            # If they're just at / and that's not a custom route, don't bother with all this.
+            # If the visitor is at / and that's not a custom route, serve the blog index.
             if (empty($route->arg[0]) and !isset($config->routes["/"]))
                 return $route->action = "index";
 
-            # Discover feed requests.
-            if (preg_match("/\/feed\/?$/", $route->request)) {
-                $this->feed = true;
-                $this->post_limit = $config->feed_items;
+            # If the first argument is a query and action is unset, serve the blog index.
+            if (empty($route->action) and strpos($route->arg[0], "?") === 0)
+                return $route->action = "index";
 
-                # Don't set $route->action to "feed" - the display() method handles feeds transparently.
-                if ($route->arg[0] == "feed")
-                    return $route->action = "index";
-            }
+            # Discover feed requests.
+            if (preg_match("/\/feed\/?$/", $route->request))
+                $this->feed = true;
 
             # Static ID of a post or page.
             if ($route->arg[0] == "id") {
@@ -104,7 +110,7 @@
                 foreach ($page_matches[1] as $key => $page_var)
                     $_GET[$page_var] = (int) $page_matches[4][$key];
 
-                # Don't fool ourselves into thinking we're viewing a page if this is pagination of the "/" route.
+                # Test the first route argument; this might be pagination of the / route.
                 if ($route->arg[0] == $page_matches[1][0])
                     return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
             }
@@ -525,8 +531,6 @@
                                       $config->default_group,
                                       ($config->email_activation) ? false : true);
 
-                    Trigger::current()->call("user_registered", $user);
-
                     if (!$user->approved) {
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
@@ -610,12 +614,11 @@
                 fallback($_POST['login']);
                 fallback($_POST['password']);
 
+                # You can block the login process by creating a Flash::warning().
+                $trigger->call("user_authenticate");
+
                 if (!User::authenticate($_POST['login'], $_POST['password']))
                     Flash::warning(__("Incorrect username and/or password."));
-
-                # Modules can implement "user_login and "user_authenticate" to offer two-factor authentication.
-                # "user_authenticate" trigger function can block the login process by creating a Flash::warning().
-                $trigger->call("user_authenticate");
 
                 if (!Flash::exists("warning")) {
                     $user = new User(array("login" => $_POST['login']));
@@ -623,10 +626,11 @@
                     if (!$user->approved)
                         Flash::notice(__("You must activate your account before you log in."), "/");
 
+                    $trigger->call("user_logged_in", $user);
+
                     $_SESSION['user_id'] = $user->id;
                     $_SESSION['cookies_notified'] = true;
 
-                    $trigger->call("user_logged_in", $user);
                     Flash::notice(__("Logged in."), fallback($_SESSION['redirect_to'], "/"));
                 }
             }
@@ -861,7 +865,7 @@
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("main_context", "main_context_".str_replace(DIR, "_", $template)));
+            $trigger->filter($this->context, "main_context");
 
             $theme->cookies_notification();
 
@@ -870,11 +874,20 @@
 
         /**
          * Function: resort
-         * Queue a failpage in the event that none of the routes are successful.
+         * Queue a failpage in the event that none of the actions are successful.
          */
         public function resort($template, $context = array(), $title = "") {
-            $this->fallback = array($template, $context, $title);
+            $this->failpage = array($template, $context, $title);
             return false;
+        }
+
+        /**
+         * Function: failed
+         * Serve a failpage in the event that none of the actions are successful.
+         */
+        public function failed($route) {
+            if (!empty($this->failpage))
+                call_user_func_array(array($this, "display"), $this->failpage);
         }
 
         /**

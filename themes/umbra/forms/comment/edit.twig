@@ -17,6 +17,7 @@
 <option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate }}</option>
 <option value="denied"{{ comment.status | selected("denied") }}>{{ "Denied" | translate }}</option>
 <option value="spam"{{ comment.status | selected("spam") }}>{{ "Spam" | translate }}</option>
+<option value="pingback"{{ comment.status | selected("pingback") }}>{{ "Pingback" | translate }}</option>
 </select>
 {% endif %}
 {% if site.email_correspondence %}

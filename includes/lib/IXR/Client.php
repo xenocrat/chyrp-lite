@@ -39,6 +39,7 @@
 
 class IXR_Client
 {
+    var $transport;
     var $server;
     var $port;
     var $path;
@@ -56,15 +57,28 @@ class IXR_Client
         if (!$path) {
             // Assume we have been given a URL instead
             $bits = parse_url($server);
-            $this->server = $bits['host'];
-            $this->port = isset($bits['port']) ? $bits['port'] : 80;
+            $this->transport = isset($bits['scheme']) ? $bits['scheme'] : 'tcp';
+            $this->server = isset($bits['host']) ? $bits['host'] : '';
             $this->path = isset($bits['path']) ? $bits['path'] : '/';
+            $this->port = isset($bits['port']) ? $bits['port'] : $port;
 
-            // Make absolutely sure we have a path
-            if (!$this->path) {
-                $this->path = '/';
+            // Set an appropriate socket transport and port for HTTP/S
+            switch ($this->transport) {
+                case 'https':
+                    $this->transport = 'tls';
+                    if (!isset($bits['port'])) {
+                        $this->port = 443;
+                    }
+                    break;
+                case 'http':
+                    $this->transport = 'tcp';
+                    if (!isset($bits['port'])) {
+                        $this->port = 80;
+                    }
+                    break;
             }
         } else {
+            $this->transport = 'tcp';
             $this->server = $server;
             $this->path = $path;
             $this->port = $port;
@@ -102,9 +116,9 @@ class IXR_Client
         }
 
         if ($this->timeout) {
-            $fp = @fsockopen($this->server, $this->port, $errno, $errstr, $this->timeout);
+            $fp = @fsockopen($this->transport.'://'.$this->server, $this->port, $errno, $errstr, $this->timeout);
         } else {
-            $fp = @fsockopen($this->server, $this->port, $errno, $errstr);
+            $fp = @fsockopen($this->transport.'://'.$this->server, $this->port, $errno, $errstr);
         }
         if (!$fp) {
             $this->error = new IXR_Error(-32300, 'transport error - could not open socket');

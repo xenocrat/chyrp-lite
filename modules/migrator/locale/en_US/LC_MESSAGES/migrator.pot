@@ -9,7 +9,7 @@ msgstr ""
 #: modules/migrator/admin/pages/manage_migration.twig:14
 #: modules/migrator/admin/pages/manage_migration.twig:73
 #: modules/migrator/admin/pages/manage_migration.twig:108
-msgid "What URL is used for embedded media?"
+msgid "URL for Embedded Media"
 msgstr ""
 
 #: modules/migrator/admin/pages/manage_migration.twig:19
@@ -26,8 +26,8 @@ msgstr ""
 msgid "Something like <code>http://%s.tumblr.com/</code>."
 msgstr ""
 
-#: modules/migrator/admin/pages/manage_migration.twig:38
-msgid "Note: Audio and Video tumbles cannot be imported."
+#: modules/migrator/admin/pages/manage_migration.twig:37
+msgid "Audio and Video cannot be imported."
 msgstr ""
 
 #: modules/migrator/admin/pages/manage_migration.twig:51

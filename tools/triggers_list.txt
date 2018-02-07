@@ -5,8 +5,9 @@
 end
 ---
 Called from:
-	admin/index.php on line 19
-	index.php on line 19
+	admin/index.php on line 15
+	ajax/index.php on line 15
+	index.php on line 15
 Arguments:
 	$route
 
@@ -20,7 +21,7 @@ Called from:
 admin_head
 ----------
 Called from:
-	admin/layouts/default.twig on line 14
+	admin/layouts/default.twig on line 15
 
 
 delete_user_form
@@ -32,7 +33,7 @@ Called from:
 edit_user_fields
 ----------------
 Called from:
-	admin/pages/edit_user.twig on line 41
+	admin/pages/edit_user.twig on line 47
 Arguments:
 	user
 
@@ -108,7 +109,7 @@ Arguments:
 new_user_fields
 ---------------
 Called from:
-	admin/pages/new_user.twig on line 42
+	admin/pages/new_user.twig on line 48
 
 
 before_page_fields
@@ -180,12 +181,6 @@ Arguments:
 	$post
 
 
-ajax
-----
-Called from:
-	includes/ajax.php on line 120
-
-
 change_setting
 --------------
 Called from:
@@ -197,7 +192,15 @@ Arguments:
 parse_route
 -----------
 Called from:
-	includes/class/Route.php on line 74
+	includes/class/Route.php on line 71
+Arguments:
+	$this
+
+
+route_init
+----------
+Called from:
+	includes/class/Route.php on line 88
 Arguments:
 	$this
 
@@ -205,21 +208,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 98
-
-
-route_init
-----------
-Called from:
-	includes/class/Route.php on line 102
-Arguments:
-	$this
+	includes/class/Route.php on line 106
 
 
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 151
+	includes/class/Route.php on line 152
 Arguments:
 	$this
 
@@ -227,19 +222,19 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 361
+	includes/common.php on line 366
 
 
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1101
+	includes/controller/Admin.php on line 1114
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1361
+	includes/controller/Admin.php on line 1374
 Arguments:
 	$group
 
@@ -247,7 +242,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1385
+	includes/controller/Admin.php on line 1398
 Arguments:
 	$user
 
@@ -255,7 +250,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1423
+	includes/controller/Admin.php on line 1436
 Arguments:
 	$entry, $post
 
@@ -263,7 +258,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1452
+	includes/controller/Admin.php on line 1465
 Arguments:
 	$entry, $page
 
@@ -271,7 +266,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1456
+	includes/controller/Admin.php on line 1469
 Arguments:
 	$imports
 
@@ -279,27 +274,19 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1730
+	includes/controller/Admin.php on line 1743
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1738
+	includes/controller/Admin.php on line 1751
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 397
-
-
-user_registered
----------------
-Called from:
-	includes/controller/Main.php on line 528
-Arguments:
-	$user
+	includes/controller/Main.php on line 403
 
 
 user_authenticate
@@ -319,7 +306,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 800
+	includes/controller/Main.php on line 804
 Arguments:
 	$post, $feed
 
@@ -327,13 +314,13 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1860
+	includes/helpers.php on line 1869
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1877
+	includes/helpers.php on line 1886
 
 
 javascript
@@ -441,7 +428,7 @@ Arguments:
 add_user
 --------
 Called from:
-	includes/model/User.php on line 113
+	includes/model/User.php on line 108
 Arguments:
 	$user
 
@@ -449,7 +436,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 170
+	includes/model/User.php on line 165
 Arguments:
 	$user, $this
 
@@ -506,7 +493,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 664
+	modules/comments/comments.php on line 674
 Arguments:
 	$comment, $feed
 
@@ -514,7 +501,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 201
+	modules/comments/model/Comment.php on line 195
 Arguments:
 	$new
 
@@ -522,7 +509,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 269
+	modules/comments/model/Comment.php on line 263
 Arguments:
 	$comment, $this
 
@@ -530,7 +517,7 @@ Arguments:
 add_like
 --------
 Called from:
-	modules/likes/model/Like.php on line 63
+	modules/likes/model/Like.php on line 65
 Arguments:
 	$new
 
@@ -538,7 +525,7 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 119
+	modules/likes/model/Like.php on line 123
 Arguments:
 	$post_id
 
@@ -546,7 +533,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 136
+	modules/likes/model/Like.php on line 142
 Arguments:
 	$post_id
 
@@ -659,19 +646,19 @@ Called from:
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 16
-	themes/sparrow/layouts/default.twig on line 16
-	themes/topaz/layouts/default.twig on line 16
-	themes/umbra/layouts/default.twig on line 16
+	themes/blossom/layouts/default.twig on line 17
+	themes/sparrow/layouts/default.twig on line 17
+	themes/topaz/layouts/default.twig on line 17
+	themes/umbra/layouts/default.twig on line 17
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 119
-	themes/sparrow/layouts/default.twig on line 105
-	themes/topaz/layouts/default.twig on line 118
-	themes/umbra/layouts/default.twig on line 105
+	themes/blossom/layouts/default.twig on line 120
+	themes/sparrow/layouts/default.twig on line 106
+	themes/topaz/layouts/default.twig on line 119
+	themes/umbra/layouts/default.twig on line 106
 
 
 
@@ -714,7 +701,7 @@ parse_urls
 Target:
 	$urls
 Called from:
-	includes/class/Route.php on line 193
+	includes/class/Route.php on line 194
 
 
 related_posts
@@ -722,7 +709,7 @@ related_posts
 Target:
 	$ids
 Called from:
-	includes/class/Theme.php on line 173
+	includes/class/Theme.php on line 168
 Arguments:
 	$post, $limit
 
@@ -732,7 +719,7 @@ stylesheets
 Target:
 	$stylesheets
 Called from:
-	includes/class/Theme.php on line 212
+	includes/class/Theme.php on line 207
 
 
 scripts
@@ -740,7 +727,7 @@ scripts
 Target:
 	$scripts
 Called from:
-	includes/class/Theme.php on line 252
+	includes/class/Theme.php on line 248
 
 
 links
@@ -748,7 +735,7 @@ links
 Target:
 	$links
 Called from:
-	includes/class/Theme.php on line 306
+	includes/class/Theme.php on line 303
 
 
 visitor
@@ -756,7 +743,7 @@ visitor
 Target:
 	$visitor
 Called from:
-	includes/common.php on line 358
+	includes/common.php on line 363
 
 
 admin_determine_action
@@ -764,7 +751,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 135
+	includes/controller/Admin.php on line 139
 
 
 posts_export
@@ -772,7 +759,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1165
+	includes/controller/Admin.php on line 1178
 Arguments:
 	$post
 
@@ -782,7 +769,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1212
+	includes/controller/Admin.php on line 1225
 Arguments:
 	$page
 
@@ -792,7 +779,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1267
+	includes/controller/Admin.php on line 1280
 
 
 before_import
@@ -800,7 +787,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1331
+	includes/controller/Admin.php on line 1344
 
 
 write_nav
@@ -808,7 +795,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 2015
+	includes/controller/Admin.php on line 2038
 
 
 manage_nav
@@ -816,7 +803,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2044
+	includes/controller/Admin.php on line 2067
 
 
 settings_nav
@@ -824,7 +811,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2069
+	includes/controller/Admin.php on line 2092
 
 
 extend_nav
@@ -832,7 +819,23 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2087
+	includes/controller/Admin.php on line 2110
+
+
+admin_context
+-------------
+Target:
+	$this->context
+Called from:
+	includes/controller/Admin.php on line 2162
+
+
+main_context
+------------
+Target:
+	$this->context
+Called from:
+	includes/controller/Main.php on line 868
 
 
 keyword_search
@@ -840,7 +843,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 747
+	includes/helpers.php on line 749
 Arguments:
 	$query, $plain
 
@@ -850,7 +853,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1282
+	includes/helpers.php on line 1284
 
 
 send_mail
@@ -858,7 +861,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1991
+	includes/helpers.php on line 2000
 
 
 xmlrpc_methods
@@ -1051,7 +1054,7 @@ before_add_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 107
+	includes/model/User.php on line 102
 
 
 before_update_user
@@ -1059,7 +1062,7 @@ before_update_user
 Target:
 	$new_values
 Called from:
-	includes/model/User.php on line 161
+	includes/model/User.php on line 156
 
 
 cacher_regenerate_triggers
@@ -1107,4 +1110,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 389
+	modules/comments/model/Comment.php on line 383

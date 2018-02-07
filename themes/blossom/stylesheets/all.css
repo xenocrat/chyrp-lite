@@ -160,9 +160,6 @@ ul.navigation li {                              display: block;
                                                 text-overflow: ellipsis;
                                                 border-bottom: 1px solid #d2d9d4 }
 ul.navigation li:last-child {                   border-bottom: none }
-ul.navigation li.page.depth2 {                  padding-left: 2em }
-ul.navigation li.page.depth3 {                  padding-left: 3em }
-ul.navigation li.page.depth4 {                  padding-left: 4em }
 ul.sidebar_nav li {                             text-align: left;
                                                 font-size: 0.75em }
 ul.tail_nav li {                                text-align: center;
@@ -228,11 +225,6 @@ input {                                         box-sizing: border-box;
 input:focus {                                   outline: none;
                                                 background-color: #ffffff;
                                                 border: 1px solid #d94c7b }
-input::-webkit-input-placeholder,
-input:-moz-placeholder,
-input::-moz-placeholder,
-input:-ms-input-placeholder,
-input::-ms-input-placeholder,
 input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
 input[type='checkbox'] {                        width: auto }

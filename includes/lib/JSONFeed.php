@@ -45,7 +45,7 @@
             $this->json = array(
                 "version"       => "https://jsonfeed.org/version/1",
                 "title"         => strip_tags($title),
-                "home_page_url" => Config::current()->url,
+                "home_page_url" => url("/", MainController::current()),
                 "feed_url"      => self_url()
             );
 

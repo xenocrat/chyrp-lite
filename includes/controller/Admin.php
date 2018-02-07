@@ -39,6 +39,10 @@
         # Methods that cannot respond to actions.
         public $protected = array("__construct", "parse", "navigation_context", "display", "current");
 
+        # Variable: $twig
+        # Environment for the Twig template engine.
+        private $twig;
+
         /**
          * Function: __construct
          * Loads the Twig parser and sets up the l10n domain.
@@ -134,8 +138,7 @@
 
             Trigger::current()->filter($route->action, "admin_determine_action");
 
-            # Show a 403 if we can't determine an allowed action for the visitor;
-            # otherwise the action would fallback to "index" and fail with a 404.
+            # Show a 403 if we can't determine an allowed action for the visitor.
             if (!isset($route->action))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view this area."));
         }
@@ -272,7 +275,7 @@
 
         /**
          * Function: destroy_post
-         * Destroys a post (the real deal).
+         * Destroys a post.
          */
         public function destroy_post() {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
@@ -620,12 +623,17 @@
             fallback($_POST['website'], "");
             fallback($_POST['group'], $config->default_group);
 
+            $group = new Group($_POST['group']);
+
+            if ($group->no_results)
+                show_404(__("Not Found"), __("Group not found."));
+
             $user = User::add($_POST['login'],
                               User::hashPassword($_POST['password1']),
                               $_POST['email'],
                               $_POST['full_name'],
                               $_POST['website'],
-                              $_POST['group'],
+                              $group->id,
                               ($config->email_activation) ? false : true);
 
             if (!$user->approved)
@@ -721,12 +729,17 @@
             fallback($_POST['website'], "");
             fallback($_POST['group'], $config->default_group);
 
+            $group = new Group($_POST['group']);
+
+            if ($group->no_results)
+                show_404(__("Not Found"), __("Group not found."));
+
             $user = $user->update($_POST['login'],
                                   $password,
                                   $_POST['email'],
                                   $_POST['full_name'],
                                   $_POST['website'],
-                                  $_POST['group'],
+                                  $group->id,
                                   (!$user->approved and $config->email_activation) ? false : true);
 
             if (!$user->approved)
@@ -741,7 +754,7 @@
 
         /**
          * Function: delete_user
-         * User deletion.
+         * User deletion (confirm page).
          */
         public function delete_user() {
             if (!Visitor::current()->group->can("delete_user"))
@@ -1881,14 +1894,24 @@
             fallback($_POST['default_group'], 0);
             fallback($_POST['guest_group'], 0);
 
+            $default_group = new Group($_POST['default_group']);
+
+            if ($default_group->no_results)
+                error(__("Gone"), __("New default group does not exist."), null, 410);
+
+            $guest_group = new Group($_POST['guest_group']);
+
+            if ($guest_group->no_results)
+                error(__("Gone"), __("New guest group does not exist."), null, 410);
+
             $correspond = (!empty($_POST['email_activation']) or !empty($_POST['email_correspondence'])) ? true : false ;
 
             $config = Config::current();
             $config->set("can_register", !empty($_POST['can_register']));
             $config->set("email_activation", !empty($_POST['email_activation']));
             $config->set("email_correspondence", $correspond);
-            $config->set("default_group", (int) $_POST['default_group']);
-            $config->set("guest_group", (int) $_POST['guest_group']);
+            $config->set("default_group", (int) $default_group->id);
+            $config->set("guest_group", (int) $guest_group->id);
 
             Flash::notice(__("Settings updated."), "user_settings");
         }
@@ -2136,7 +2159,7 @@
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
 
-            $trigger->filter($this->context, array("admin_context", "admin_context_".str_replace(DIR, "_", $template)));
+            $trigger->filter($this->context, "admin_context");
 
             Update::check();
 

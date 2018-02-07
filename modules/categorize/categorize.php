@@ -118,6 +118,9 @@
         }
 
         public function category_post_count_attr($attr, $category) {
+            if ($category->no_results)
+                return 0;
+
             if (isset($this->category_post_counts))
                 return fallback($this->category_post_counts[$category->id], 0);
 

@@ -159,6 +159,9 @@
             $main = MainController::current();
             $tags = array();
 
+            if ($post->no_results)
+                return $tags;
+
             foreach ($post->tags as $tag => $clean)
                 $tags[] = '<a class="tag" href="'.url("tag/".urlencode($clean), $main).'" rel="tag">'.$tag.'</a>';
 

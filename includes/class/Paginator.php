@@ -70,8 +70,10 @@
             if ($model)
                 list($this->array, $model_name) = $this->array;
 
+            $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ? $_GET[$name] : null ;
+
             $this->total = count($this->array);
-            $this->page = oneof($page, @$_GET[$name], 1);
+            $this->page = oneof($page, $request, 1);
             $this->pages = ceil($this->total / $this->per_page);
 
             $offset = ($this->page - 1) * $this->per_page;

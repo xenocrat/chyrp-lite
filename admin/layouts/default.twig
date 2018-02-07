@@ -5,7 +5,8 @@
 <meta name="viewport" content="initial-scale = 1.0">
 <title>{{ site.name | fix }} | {% block title %}{{ title }}{% endblock %}</title>
 <!-- Styles -->
-<link rel="shortcut icon" href="{{ site.chyrp_url }}/favicon.ico">
+<link rel="icon" sizes="32x32" type="image/x-icon" href="{{ site.chyrp_url }}/favicon.ico">
+<link rel="icon" sizes="any" type="image/svg+xml" href="{{ site.chyrp_url }}/favicon.svg">
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
 <link rel="stylesheet" href="{{ site.chyrp_url }}/admin/stylesheets/all.css" type="text/css" media="all">
 <!-- JavaScripts -->
@@ -15,7 +16,7 @@
 </head>
 <body>
 <div id="header" role="banner">
-<h1><a href="{{ site.url }}">{{ site.name }}</a></h1>
+<h1><a href="{{ url('/', 'MainController') }}">{{ site.name }}</a></h1>
 <ul id="navigation" role="menubar">
 {% block navigation %}
 {% for action, attributes in navigation %}
@@ -54,7 +55,7 @@
 {% block content %}{% endblock %}
 </div>
 <div id="footer" role="navigation">
-<a id="logout" class="button" href="{{ url('logout') }}">{{ "Log out" | translate }}</a>
+{% if visitor.logged_in %}<a id="logout" class="button" href="{{ url('logout') }}">{{ "Log out" | translate }}</a>{% endif %}
 </div>
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->

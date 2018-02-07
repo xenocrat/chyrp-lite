@@ -38,9 +38,7 @@
          *     $updated - Time of update (optional).
          */
         public function open($title, $subtitle = "", $id = "", $updated = 0) {
-            $config = Config::current();
-
-            $language = preg_replace("/[\-_].*$/", "", $config->locale);
+            $language = preg_replace("/[\-_].*$/", "", Config::current()->locale);
 
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             echo '<rss version="2.0">'."\n";
@@ -52,7 +50,7 @@
                 echo '<description>'.strip_tags($subtitle).'</description>'."\n";
 
             echo '<lastBuildDate>'.when("r", oneof($updated, time())).'</lastBuildDate>'."\n";
-            echo '<link>'.fix($config->url).'</link>'."\n";
+            echo '<link>'.url("/", MainController::current()).'</link>'."\n";
             echo '<generator>'.CHYRP_IDENTITY.'</generator>'."\n";
         }
 

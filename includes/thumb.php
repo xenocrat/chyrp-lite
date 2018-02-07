@@ -26,8 +26,8 @@
     $filepath = uploaded($filename, false);;
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
     $url = uploaded($filename);
-    $thumbnail_width = abs((int) fallback($_GET["max_width"], 640));
-    $thumbnail_height = abs((int) fallback($_GET["max_height"], 0));
+    $thumb_w = abs((int) fallback($_GET["max_width"], 640));
+    $thumb_h = abs((int) fallback($_GET["max_height"], 0));
 
     # GD library is not available.
     if (!function_exists("gd_info"))
@@ -43,71 +43,71 @@
     if (!is_readable($filepath) or !is_file($filepath))
         show_404(__("Not Found"), __("File not found."));
 
-    if ($thumbnail_width == 0 and $thumbnail_height == 0)
+    if ($thumb_w == 0 and $thumb_h == 0)
         error(__("Error"), __("Maximum size cannot be zero."), null, 422);
 
-    function resize_thumb(&$crop_x, &$crop_y, &$thumbnail_width, &$thumbnail_height, &$original_width, &$original_height) {
-        $scale_x = ($thumbnail_width > 0) ? $thumbnail_width / $original_width : 0 ;
-        $scale_y = ($thumbnail_height > 0) ? $thumbnail_height / $original_height : 0 ;
+    function resize_thumb(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$original_w, &$original_h) {
+        $scale_x = ($thumb_w > 0) ? $thumb_w / $original_w : 0 ;
+        $scale_y = ($thumb_h > 0) ? $thumb_h / $original_h : 0 ;
 
         if (!empty($_GET['square'])) {
-            if ($thumbnail_width > $thumbnail_height)
-                $thumbnail_height = $thumbnail_width;
+            if ($thumb_w > $thumb_h)
+                $thumb_h = $thumb_w;
 
-            if ($thumbnail_height > $thumbnail_width)
-                $thumbnail_width = $thumbnail_height;
+            if ($thumb_h > $thumb_w)
+                $thumb_w = $thumb_h;
 
             # Portrait orientation.
-            if ($original_width > $original_height) {
-                $crop_x = round(($original_width - $original_height) / 2);
-                $original_width = $original_height;
+            if ($original_w > $original_h) {
+                $crop_x = round(($original_w - $original_h) / 2);
+                $original_w = $original_h;
             }
 
             # Landscape orientation.
-            if ($original_height > $original_width) {
-                $crop_y = round(($original_height - $original_width) / 2);
-                $original_height = $original_width;
+            if ($original_h > $original_w) {
+                $crop_y = round(($original_h - $original_w) / 2);
+                $original_h = $original_w;
             }
 
             return;
         }
 
-        if ($thumbnail_height == 0) {
-            $thumbnail_height = round(($thumbnail_width / $original_width) * $original_height);
+        if ($thumb_h == 0) {
+            $thumb_h = round(($thumb_w / $original_w) * $original_h);
             return;
         }
 
-        if ($thumbnail_width == 0) {
-            $thumbnail_width = round(($thumbnail_height / $original_height) * $original_width);
+        if ($thumb_w == 0) {
+            $thumb_w = round(($thumb_h / $original_h) * $original_w);
             return;
         }
 
         # Recompute to retain aspect ratio and stay within bounds.
         if ($scale_x != $scale_y) {
-            if ($original_width * $scale_y <= $thumbnail_width) {
-                $thumbnail_width = round($original_width * $scale_y);
+            if ($original_w * $scale_y <= $thumb_w) {
+                $thumb_w = round($original_w * $scale_y);
                 return;
             }
 
-            if ($original_height * $scale_x <= $thumbnail_height) {
-                $thumbnail_height = round($original_height * $scale_x);
+            if ($original_h * $scale_x <= $thumb_h) {
+                $thumb_h = round($original_h * $scale_x);
                 return;
             }
         }
     }
 
     # Fetch original image metadata.
-    list($original_width, $original_height, $type, $attr) = getimagesize($filepath);
+    list($original_w, $original_h, $type, $attr) = getimagesize($filepath);
 
     $crop_x = 0;
     $crop_y = 0;
     $quality = ($quality > 100) ? 100 : $quality ;
 
     # Call our function to determine the final scale of the thumbnail.
-    resize_thumb($crop_x, $crop_y, $thumbnail_width, $thumbnail_height, $original_width, $original_height);
+    resize_thumb($crop_x, $crop_y, $thumb_w, $thumb_h, $original_w, $original_h);
 
     # Redirect to the original if the size is already less than requested.
-    if ($original_width <= $thumbnail_width and $original_height <= $thumbnail_height and empty($_GET['square']))
+    if ($original_w <= $thumb_w and $original_h <= $thumb_h and empty($_GET['square']))
         redirect($url);
 
     # Determine the media type.
@@ -128,7 +128,7 @@
             $media_type = "application/octet-stream";
     }
 
-    $cache_filename = md5($filename.$thumbnail_width.$thumbnail_height.$quality).".".$extension;
+    $cache_filename = md5($filename.$thumb_w.$thumb_h.$quality).".".$extension;
     $cache_filepath = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_filename : null ;
 
     header("Last-Modified: ".date("r", filemtime($filepath)));
@@ -174,36 +174,36 @@
             error_log("GENERATING image thumbnail for ".$filename);
 
         # Create the thumbnail.
-        $thumbnail = imagecreatetruecolor($thumbnail_width, $thumbnail_height);
+        $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
 
         if ($function == "imagepng") {
-            imagealphablending($thumbnail, false);
-            imagesavealpha($thumbnail, true);
+            imagealphablending($thumb, false);
+            imagesavealpha($thumb, true);
             $quality = 10 - (($quality > 0) ? ceil($quality / 10) : 1);
         }
 
         # Do the crop and resize.
-        imagecopyresampled($thumbnail,
+        imagecopyresampled($thumb,
                            $original,
                            0,
                            0,
                            $crop_x,
                            $crop_y,
-                           $thumbnail_width,
-                           $thumbnail_height,
-                           $original_width,
-                           $original_height);
+                           $thumb_w,
+                           $thumb_h,
+                           $original_w,
+                           $original_h);
 
         # Create the thumbnail.
         $result = ($function == "imagejpeg" or $function == "imagepng") ?
-            $function($thumbnail, $cache_filepath, $quality) : $function($thumbnail, $cache_filepath) ;
+            $function($thumb, $cache_filepath, $quality) : $function($thumb, $cache_filepath) ;
 
         if ($result === false)
             error(__("Error"), __("Failed to create image thumbnail."));
 
         # Destroy resources.
         imagedestroy($original);
-        imagedestroy($thumbnail);
+        imagedestroy($thumb);
     }
 
     if (isset($cache_filepath)) {

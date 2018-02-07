@@ -181,7 +181,7 @@
             global $user;
 
             if (!$user->group->can("add_post", "add_draft"))
-                return new IXR_Error(401, __("You do not have sufficient privileges to add posts."));
+                return new IXR_Error(403, __("You do not have sufficient privileges to add posts."));
 
             fallback($args[3], array());
             fallback($args[3]["name"]);
@@ -218,7 +218,7 @@
                 return new IXR_Error(404, __("Post not found."));
 
             if (!$post->editable($user))
-                return new IXR_Error(401, __("You do not have sufficient privileges to edit this post."));
+                return new IXR_Error(403, __("You do not have sufficient privileges to edit this post."));
 
             $title = XML_RPC_TITLE;
             $description = XML_RPC_DESCRIPTION;
@@ -245,7 +245,7 @@
             global $user;
 
             if (!$user->group->can("add_post", "add_draft"))
-                return new IXR_Error(401, __("You do not have sufficient privileges to add posts."));
+                return new IXR_Error(403, __("You do not have sufficient privileges to add posts."));
 
             fallback($args[3], array());
             fallback($args[3]["description"], "");
@@ -331,7 +331,7 @@
                 return new IXR_Error(404, __("Post not found."));
 
             if (!$post->editable($user))
-                return new IXR_Error(401, __("You do not have sufficient privileges to edit this post."));
+                return new IXR_Error(403, __("You do not have sufficient privileges to edit this post."));
 
             # Convert statuses from WordPress to Chyrp equivalents.
             switch ($args[3]["post_status"]) {
@@ -381,7 +381,7 @@
                 return new IXR_Error(404, __("Post not found."));
 
             if (!$post->deletable($user))
-                return new IXR_Error(401, __("You do not have sufficient privileges to delete this post."));
+                return new IXR_Error(403, __("You do not have sufficient privileges to delete this post."));
 
             Post::delete($post->id);
             return true;
@@ -394,11 +394,9 @@
         public function metaWeblog_getUsersBlogs($args) {
             $this->auth(fallback($args[1]), fallback($args[2]));
 
-            $config = Config::current();
-
-            return array(array("url"      => $config->url,
-                               "blogName" => $config->name,
-                               "blogid"   => 1));
+            return array(array("url"      => url("/", MainController::current()),
+                               "blogName" => Config::current()->name,
+                               "blogid"   => "1"));
         }
 
        /**
