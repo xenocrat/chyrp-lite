@@ -59,8 +59,8 @@ class IXR_Client
             $bits = parse_url($server);
             $this->transport = isset($bits['scheme']) ? $bits['scheme'] : 'tcp';
             $this->server = isset($bits['host']) ? $bits['host'] : '';
-            $this->port = isset($bits['port']) ? $bits['port'] : 80;
             $this->path = isset($bits['path']) ? $bits['path'] : '/';
+            $this->port = isset($bits['port']) ? $bits['port'] : $port;
 
             // Set an appropriate socket transport and port for HTTP/S
             switch ($this->transport) {
