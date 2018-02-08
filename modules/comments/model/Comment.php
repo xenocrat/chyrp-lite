@@ -43,7 +43,7 @@
 
         /**
          * Function: create
-         * Attempts to create a comment using the passed information. If the Akismet API key is present, it will check it.
+         * Attempts to create a new comment that will be attributed to the current visitor.
          *
          * Parameters:
          *     $body - The comment.
@@ -51,14 +51,14 @@
          *     $author_url - The commenter's website.
          *     $author_email - The commenter's email.
          *     $post - The <Post> they're commenting on.
-         *     $parent - The <Comment> they're replying to.
-         *     $notify - Notification on follow-up comments.
-         *     $status - The comment's status. (optional).
+         *     $parent - The id of the <Comment> they're replying to.
+         *     $notify - Send correspondence if additional comments are added (1 or 0).
+         *     $status - A string describing the comment status (optional).
+         *
+         * Note:
+         *     The Akismet service will be used for spam detection if the API key is present.
          */
         static function create($body, $author, $author_url, $author_email, $post, $parent, $notify, $status = null) {
-            if (!self::user_can($post) and $status != "pingback")
-                return false;
-
             $config = Config::current();
             $visitor = Visitor::current();
 
