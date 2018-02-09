@@ -70,7 +70,7 @@
 {% for item in theme.pages_list %}
 {% if item.depth == 1 %}
 <li role="presentation" class="page">
-<a role="menuitem" href="{{ item.url }}">{{ item.title }}</a>
+<a role="menuitem" href="{{ item.url() }}">{{ item.title }}</a>
 </li>
 {% endif %}
 {% endfor %}
