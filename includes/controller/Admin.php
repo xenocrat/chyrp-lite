@@ -2159,7 +2159,7 @@
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
 
-            $trigger->filter($this->context, "admin_context");
+            $trigger->filter($this->context, "twig_context_admin");
 
             Update::check();
 

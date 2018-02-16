@@ -139,7 +139,7 @@
             return fallback($this->category_post_counts[$category->id], 0);
         }
 
-        public function main_context($context) {
+        public function twig_context_main($context) {
             $context["categorize"] = array();
 
             foreach (Category::find() as $category)

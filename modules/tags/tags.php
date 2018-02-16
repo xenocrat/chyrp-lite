@@ -168,7 +168,7 @@
             return $tags;
         }
 
-        public function main_context($context) {
+        public function twig_context_main($context) {
             if (!isset($context["tag_cloud"]))
                 $context["tag_cloud"] = self::tag_cloud(10);
 
