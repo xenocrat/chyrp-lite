@@ -8,7 +8,7 @@
 {% if comment.status == "denied" %}
 <em>{{ "This comment is awaiting moderation." | translate }}</em>
 {% else %}
-{{ comment.body }}
+{{ comment.body | sanitize_html() }}
 {% endif %}
 </section>
 {% if comment.editable() or comment.deletable() %}
