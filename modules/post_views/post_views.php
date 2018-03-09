@@ -11,7 +11,7 @@
                 View::uninstall();
         }
 
-        public function main_context($context) {
+        public function twig_context_main($context) {
             if (isset($context["post"]) and ($context["post"] instanceof Post) and !$context["post"]->no_results)
                 View::add($context["post"]->id, Visitor::current()->id);
         }

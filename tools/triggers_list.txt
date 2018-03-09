@@ -822,16 +822,16 @@ Called from:
 	includes/controller/Admin.php on line 2110
 
 
-admin_context
--------------
+twig_context_admin
+------------------
 Target:
 	$this->context
 Called from:
 	includes/controller/Admin.php on line 2162
 
 
-main_context
-------------
+twig_context_main
+-----------------
 Target:
 	$this->context
 Called from:
