@@ -54,17 +54,17 @@
         define('JAVASCRIPT', false);
 
     # Constant: MAIN
-    # Did the request come via chyrp/index.php?
+    # Is <MainController> the route controller?
     if (!defined('MAIN'))
         define('MAIN', false);
 
     # Constant: ADMIN
-    # Did the request come via admin/index.php?
+    # Is <AdminController> the route controller?
     if (!defined('ADMIN'))
         define('ADMIN', false);
 
     # Constant: AJAX
-    # Is this request AJAX?
+    # Is <AjaxController> the route controller?
     if (!defined('AJAX'))
         define('AJAX', false);
 
@@ -168,11 +168,11 @@
             ob_start();
         }
 
-    # File: Error
-    # Error handling functions.
+    # File: error
+    # Functions for handling and reporting errors.
     require_once INCLUDES_DIR.DIR."error.php";
 
-    # File: Helpers
+    # File: helpers
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
@@ -252,9 +252,9 @@
     #     <Trigger>
     require_once INCLUDES_DIR.DIR."class".DIR."Trigger.php";
 
-    # File: Module
+    # File: Modules
     # See Also:
-    #     <Module>
+    #     <Modules>
     require_once INCLUDES_DIR.DIR."class".DIR."Modules.php";
 
     # File: Feathers

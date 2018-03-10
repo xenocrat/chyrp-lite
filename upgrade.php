@@ -1,6 +1,6 @@
 <?php
     /**
-     * File: Upgrader
+     * File: upgrade
      * A task-based gerneral purpose upgrader for Chyrp Lite, enabled modules and enabled feathers.
      */
 
@@ -32,11 +32,11 @@
 
     ob_start();
 
-    # File: Error
-    # Error handling functions.
+    # File: error
+    # Functions for handling and reporting errors.
     require_once INCLUDES_DIR.DIR."error.php";
 
-    # File: Helpers
+    # File: helpers
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
