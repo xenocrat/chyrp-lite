@@ -1,6 +1,6 @@
 <?php
     /**
-     * File: Installer
+     * File: install
      * Builds the site configuration, creates the SQL tables, and configures the .htaccess file.
      */
 
@@ -32,11 +32,11 @@
 
     ob_start();
 
-    # File: Error
-    # Error handling functions.
+    # File: error
+    # Functions for handling and reporting errors.
     require_once INCLUDES_DIR.DIR."error.php";
 
-    # File: Helpers
+    # File: helpers
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
 
