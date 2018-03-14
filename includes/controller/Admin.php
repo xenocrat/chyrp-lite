@@ -1844,6 +1844,11 @@
             if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
                 error(__("Error"), __("Invalid feed URL."), null, 422);
 
+            if (!empty($_POST['enable_markdown']) and !extension_loaded("mbstring")) {
+                Flash::warning(__("Markdown is disabled because multibyte string support is not available."));
+                unset($_POST['enable_markdown']);
+            }
+
             fallback($_POST['posts_per_page'], 5);
             fallback($_POST['admin_per_page'], 25);
             fallback($_POST['feed_items'], 20);
