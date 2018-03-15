@@ -795,7 +795,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 2038
+	includes/controller/Admin.php on line 2043
 
 
 manage_nav
@@ -803,7 +803,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2067
+	includes/controller/Admin.php on line 2072
 
 
 settings_nav
@@ -811,7 +811,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2092
+	includes/controller/Admin.php on line 2097
 
 
 extend_nav
@@ -819,7 +819,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2110
+	includes/controller/Admin.php on line 2115
 
 
 twig_context_admin
@@ -827,7 +827,7 @@ twig_context_admin
 Target:
 	$this->context
 Called from:
-	includes/controller/Admin.php on line 2162
+	includes/controller/Admin.php on line 2167
 
 
 twig_context_main

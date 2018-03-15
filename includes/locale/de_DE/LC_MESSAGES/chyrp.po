@@ -85,7 +85,7 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/controller/Admin.php:1687 includes/controller/Admin.php:1785
 #: includes/controller/Admin.php:1788 includes/controller/Admin.php:1791
 #: includes/controller/Admin.php:1794 includes/controller/Admin.php:1797
-#: includes/controller/Admin.php:1845 includes/controller/Admin.php:1995
+#: includes/controller/Admin.php:1845 includes/controller/Admin.php:2000
 #: includes/controller/Ajax.php:32 includes/download.php:12
 #: includes/download.php:15 includes/error.php:144 includes/helpers.php:1590
 #: includes/helpers.php:1596 includes/helpers.php:1599
@@ -138,9 +138,9 @@ msgstr "Aktion nicht gültig."
 #: includes/controller/Admin.php:1712 includes/controller/Admin.php:1737
 #: includes/controller/Admin.php:1748 includes/controller/Admin.php:1761
 #: includes/controller/Admin.php:1782 includes/controller/Admin.php:1829
-#: includes/controller/Admin.php:1842 includes/controller/Admin.php:1885
-#: includes/controller/Admin.php:1892 includes/controller/Admin.php:1925
-#: includes/controller/Admin.php:1931 includes/controller/Ajax.php:41
+#: includes/controller/Admin.php:1842 includes/controller/Admin.php:1890
+#: includes/controller/Admin.php:1897 includes/controller/Admin.php:1930
+#: includes/controller/Admin.php:1936 includes/controller/Ajax.php:41
 #: includes/controller/Ajax.php:52 includes/controller/Ajax.php:64
 #: includes/controller/Ajax.php:67 includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
@@ -234,7 +234,7 @@ msgstr "Feather nicht gefunden."
 #: includes/controller/Admin.php:1631 includes/controller/Admin.php:1675
 #: includes/controller/Admin.php:1712 includes/controller/Admin.php:1748
 #: includes/controller/Admin.php:1782 includes/controller/Admin.php:1842
-#: includes/controller/Admin.php:1892 includes/controller/Admin.php:1931
+#: includes/controller/Admin.php:1897 includes/controller/Admin.php:1936
 #: includes/controller/Ajax.php:41 includes/controller/Ajax.php:67
 #: includes/controller/Ajax.php:87 includes/controller/Ajax.php:125
 #: includes/controller/Main.php:486 includes/controller/Main.php:612
@@ -343,7 +343,7 @@ msgstr "Du verfügst nicht über die Berechtigung Seiten zu bearbeiten."
 msgid "Page updated."
 msgstr "Seite aktualisiert."
 
-#: includes/controller/Admin.php:475 includes/controller/Admin.php:1953
+#: includes/controller/Admin.php:475 includes/controller/Admin.php:1958
 msgid "View page &rarr;"
 msgstr "Seite anzeigen &rarr;"
 
@@ -453,8 +453,8 @@ msgstr "Du kannst nicht deinen eigenen Account löschen."
 
 #: includes/controller/Admin.php:808 includes/controller/Admin.php:823
 #: includes/controller/Admin.php:1016 includes/controller/Admin.php:1036
-#: includes/controller/Admin.php:1048 includes/controller/Admin.php:1900
-#: includes/controller/Admin.php:1905
+#: includes/controller/Admin.php:1048 includes/controller/Admin.php:1905
+#: includes/controller/Admin.php:1910
 msgid "Gone"
 msgstr "Weg"
 
@@ -524,7 +524,7 @@ msgstr "Neue Mitgliedergruppe existiert nicht."
 msgid "New member group must be specified."
 msgstr "Neue Mitgliedergruppe muss angegeben werden."
 
-#: includes/controller/Admin.php:1036 includes/controller/Admin.php:1900
+#: includes/controller/Admin.php:1036 includes/controller/Admin.php:1905
 msgid "New default group does not exist."
 msgstr "Neue Standardgruppe existiert nicht."
 
@@ -532,7 +532,7 @@ msgstr "Neue Standardgruppe existiert nicht."
 msgid "New default group must be specified."
 msgstr "Neue Standardgruppe muss angegeben werden."
 
-#: includes/controller/Admin.php:1048 includes/controller/Admin.php:1905
+#: includes/controller/Admin.php:1048 includes/controller/Admin.php:1910
 msgid "New guest group does not exist."
 msgstr "Neue Gastgruppe existiert nicht."
 
@@ -604,8 +604,8 @@ msgstr "Feathers ordner konnte nicht gelesen werden."
 
 #: includes/controller/Admin.php:1595 includes/controller/Admin.php:1709
 #: includes/controller/Admin.php:1737 includes/controller/Admin.php:1761
-#: includes/controller/Admin.php:1829 includes/controller/Admin.php:1885
-#: includes/controller/Admin.php:1925
+#: includes/controller/Admin.php:1829 includes/controller/Admin.php:1890
+#: includes/controller/Admin.php:1930
 msgid "You do not have sufficient privileges to change settings."
 msgstr ""
 "Du verfügst nicht über die Berechtigung die Einstellungen zu verändern."
@@ -686,8 +686,8 @@ msgstr "Ungültige Chyrp URL."
 msgid "Invalid canonical URL."
 msgstr "Ungültige regelgerechte URL."
 
-#: includes/controller/Admin.php:1820 includes/controller/Admin.php:1876
-#: includes/controller/Admin.php:1916 includes/controller/Admin.php:1966
+#: includes/controller/Admin.php:1820 includes/controller/Admin.php:1881
+#: includes/controller/Admin.php:1921 includes/controller/Admin.php:1971
 msgid "Settings updated."
 msgstr "Einstellungen aktualisiert."
 
@@ -695,7 +695,13 @@ msgstr "Einstellungen aktualisiert."
 msgid "Invalid feed URL."
 msgstr "Ungültige feed URL."
 
-#: includes/controller/Admin.php:1937
+#: includes/controller/Admin.php:1848
+msgid "Markdown is disabled because multibyte string support is not available."
+msgstr ""
+"Markdown ist deaktiviert, weil Multibyte-Zeichenfolgenunterstützung nicht "
+"verfügbar ist."
+
+#: includes/controller/Admin.php:1942
 msgid ""
 "Clean URLs are disabled because the <em>.htaccess</em> file cannot be "
 "configured."
@@ -703,96 +709,96 @@ msgstr ""
 "Clean URLs sind deaktiviert, weil die <em>.htaccess</em> Datei nicht "
 "konfiguriert werden kann."
 
-#: includes/controller/Admin.php:1945
+#: includes/controller/Admin.php:1950
 msgid "My Awesome Homepage"
 msgstr "Meine coole Homepage"
 
-#: includes/controller/Admin.php:1946
+#: includes/controller/Admin.php:1951
 msgid "Nothing here yet!"
 msgstr "Hier ist noch nichts!"
 
-#: includes/controller/Admin.php:1953
+#: includes/controller/Admin.php:1958
 msgid "Page created."
 msgstr "Eite erstellt."
 
-#: includes/controller/Admin.php:1975 includes/controller/Main.php:608
+#: includes/controller/Admin.php:1980 includes/controller/Main.php:608
 msgid "You are already logged in."
 msgstr "Du bist bereits eingeloggt."
 
-#: includes/controller/Admin.php:1995 includes/controller/Ajax.php:32
+#: includes/controller/Admin.php:2000 includes/controller/Ajax.php:32
 #: includes/download.php:15 includes/thumb.php:18
 msgid "Missing argument."
 msgstr "Fehlendes Argument."
 
-#: includes/controller/Admin.php:1999
+#: includes/controller/Admin.php:2004
 msgid "Help"
 msgstr "Hilfe"
 
-#: includes/controller/Admin.php:2012
+#: includes/controller/Admin.php:2017
 msgid "Write"
 msgstr "Schreiben"
 
-#: includes/controller/Admin.php:2013
+#: includes/controller/Admin.php:2018
 msgid "Manage"
 msgstr "Verwalten"
 
-#: includes/controller/Admin.php:2014
+#: includes/controller/Admin.php:2019
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/controller/Admin.php:2015
+#: includes/controller/Admin.php:2020
 msgid "Extend"
 msgstr "Erweitern"
 
-#: includes/controller/Admin.php:2025
+#: includes/controller/Admin.php:2030
 msgid "Page"
 msgstr "Seite"
 
-#: includes/controller/Admin.php:2052
+#: includes/controller/Admin.php:2057
 msgid "Posts"
 msgstr "Posts"
 
-#: includes/controller/Admin.php:2056
+#: includes/controller/Admin.php:2061
 msgid "Pages"
 msgstr "Seiten"
 
-#: includes/controller/Admin.php:2060 includes/controller/Admin.php:2088
+#: includes/controller/Admin.php:2065 includes/controller/Admin.php:2093
 msgid "Users"
 msgstr "Benutzer"
 
-#: includes/controller/Admin.php:2064
+#: includes/controller/Admin.php:2069
 msgid "Groups"
 msgstr "Gruppen"
 
-#: includes/controller/Admin.php:2070
+#: includes/controller/Admin.php:2075
 msgid "Import"
 msgstr "Import"
 
-#: includes/controller/Admin.php:2073
+#: includes/controller/Admin.php:2078
 msgid "Export"
 msgstr "Export"
 
-#: includes/controller/Admin.php:2086
+#: includes/controller/Admin.php:2091
 msgid "General"
 msgstr "Allgemein"
 
-#: includes/controller/Admin.php:2087
+#: includes/controller/Admin.php:2092
 msgid "Content"
 msgstr "Inhalt"
 
-#: includes/controller/Admin.php:2089
+#: includes/controller/Admin.php:2094
 msgid "Routes"
 msgstr "Routes"
 
-#: includes/controller/Admin.php:2105
+#: includes/controller/Admin.php:2110
 msgid "Modules"
 msgstr "Module"
 
-#: includes/controller/Admin.php:2106
+#: includes/controller/Admin.php:2111
 msgid "Feathers"
 msgstr "Feathers"
 
-#: includes/controller/Admin.php:2107
+#: includes/controller/Admin.php:2112
 msgid "Themes"
 msgstr "Themes"
 
@@ -1177,17 +1183,17 @@ msgstr ""
 msgid "Guest"
 msgstr "Gast"
 
-#: includes/lib/Leaf.php:255
+#: includes/lib/Leaf.php:264
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:260
+#: includes/lib/Leaf.php:269
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:264
+#: includes/lib/Leaf.php:273
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
