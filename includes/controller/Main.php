@@ -296,7 +296,7 @@
          */
         public function search() {
             $config = Config::current();
-            $_GET['query'] = strip_tags(fallback($_GET['query'], ""));
+            fallback($_GET['query'], "");
 
             # Redirect search form submissions to a clean URL, removing "%2F" to avoid a server 404.
             if ($config->clean_urls and substr_count($_SERVER['REQUEST_URI'], "?"))
