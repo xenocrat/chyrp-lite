@@ -1,0 +1,1051 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: 筱枫 <q849958241@163.com>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
+#: admin/pages/general_settings.twig:23
+msgid "Canonical URL"
+msgstr "规范URL"
+
+#: admin/help/canonical_url.twig:8
+#, fuzzy
+msgid ""
+"If you enter a canonical URL, your site URLs will point someplace other than "
+"your install directory. You can use this feature to have Chyrp Lite "
+"installed in its own dedicated directory on your web server and still have "
+"your site accessible at your choice of destination directory. There are two "
+"requirements for this to work:"
+msgstr ""
+"如果您使用URL，则您的网站网址将指向安装目录以外的某个位置。 您可以使用此功能"
+"将Chyrp Lite安装在您的Web服务器上自己的专用目录中，并且仍然可以在您选择的目标"
+"目录中访问您的站点。 有两个要求工作："
+
+#: admin/help/canonical_url.twig:12
+#, fuzzy
+msgid ""
+"Create an <em>index.php</em> file in your destination directory with the "
+"following in it:"
+msgstr "使用以下内容在目标目录中创建一个<em> index.php </ em>文件："
+
+#: admin/help/canonical_url.twig:18
+#, fuzzy
+msgid ""
+"Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the "
+"destination directory, and change the <code>RewriteBase</code> line to "
+"reflect the new location."
+msgstr ""
+"将Chyrp Lite的安装目录中的<em> .htaccess </ em>文件复制到目标目录，并更改"
+"<code> RewriteBase </ code>行以反映新位置。"
+
+#: admin/help/filtering_results.twig:3 admin/help/filtering_results.twig:6
+msgid "Filtering Results"
+msgstr "过滤结果"
+
+#: admin/help/filtering_results.twig:8
+msgid ""
+"Use this search field to filter for specific items by entering plain text or "
+"keywords."
+msgstr "通过输入纯文本或是关键字，使用此搜索栏筛选特定项目。"
+
+#: admin/help/filtering_results.twig:10
+msgid "Keywords"
+msgstr "关键字"
+
+#: admin/help/filtering_results.twig:12
+msgid ""
+"Use the syntax <code>keyword:value;</code> to quickly match specific results "
+"where <code>keyword</code> is equal to <code>value</code>. The keyword can "
+"be the name of a database column, the name of an author or a group, or a "
+"date/time. For example: <code>author:Foo;year:2016;</code> would filter the "
+"posts table to display only posts created by Foo in 2016."
+msgstr ""
+"使用符号 <code>keyword:value;</code> 来快速匹配指定结果，当 <code>keyword</"
+"code> 等于 <code>value</code>. 关键字可以是数据库列的名称, 像是作者或组的名"
+"称，日期时间等。 例如： <code>author:Foo;year:2016;</code> 将过滤posts表，仅"
+"显示2016年由Foo创建的帖子。"
+
+#: admin/help/markdown.twig:3 admin/help/markdown.twig:6
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:78
+msgid "Markdown"
+msgstr "Markdown"
+
+#: admin/help/markdown.twig:8
+msgid ""
+"Markdown is a syntax for writing structured documents in plain text. Here "
+"are the basics to get you started:"
+msgstr "Markdown是用纯文本编写结构化文档的语法。 以下是让你入门的基础知识："
+
+#: admin/help/markdown.twig:14
+msgid "Result"
+msgstr "Result"
+
+#: admin/help/markdown.twig:19
+msgid "## Heading"
+msgstr ""
+
+#: admin/help/markdown.twig:20 admin/help/markdown.twig:24
+msgid "Heading"
+msgstr ""
+
+#: admin/help/markdown.twig:23
+msgid "### Heading"
+msgstr ""
+
+#: admin/help/markdown.twig:27
+msgid "*Emphasis*"
+msgstr ""
+
+#: admin/help/markdown.twig:28
+msgid "Emphasis"
+msgstr ""
+
+#: admin/help/markdown.twig:31
+msgid "~~Strikethrough~~"
+msgstr ""
+
+#: admin/help/markdown.twig:32
+msgid "Strikethrough"
+msgstr ""
+
+#: admin/help/markdown.twig:35
+msgid "**Strong**"
+msgstr ""
+
+#: admin/help/markdown.twig:36
+msgid "Strong"
+msgstr ""
+
+#: admin/help/markdown.twig:39
+msgid "&crarr;"
+msgstr ""
+
+#: admin/help/markdown.twig:40
+msgid "New paragraph"
+msgstr "新行"
+
+#: admin/help/markdown.twig:43
+msgid "[title](URL)"
+msgstr ""
+
+#: admin/help/markdown.twig:44
+msgid "Hyperlink"
+msgstr ""
+
+#: admin/help/markdown.twig:47
+msgid "![description](URL)"
+msgstr ""
+
+#: admin/help/markdown.twig:48
+msgid "Image"
+msgstr ""
+
+#: admin/help/markdown.twig:51
+msgid "`Code`"
+msgstr ""
+
+#: admin/help/markdown.twig:52
+msgid "Code"
+msgstr ""
+
+#: admin/help/markdown.twig:55
+msgid "- List of items"
+msgstr ""
+
+#: admin/help/markdown.twig:56 admin/help/markdown.twig:60
+msgid "List of items"
+msgstr ""
+
+#: admin/help/markdown.twig:59
+msgid "1. List of items"
+msgstr ""
+
+#: admin/help/slugs.twig:3 admin/help/slugs.twig:6
+msgid "Slugs"
+msgstr ""
+
+#: admin/help/slugs.twig:8
+msgid ""
+"The slug is the URL-friendly identifying name for this post or page. You can "
+"enter the slug yourself or have it auto-generated when the post or page is "
+"created. A slug may contain only the letters a-z, the numbers 0-9, and "
+"hyphen-minus (&#8220;-&#8221;)."
+msgstr ""
+"slug是这个帖子或页面的URL友好标识名称。 您可以自己输入slug或在创建帖子或页面"
+"时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。（注：这"
+"是用于SEO优化）"
+
+#: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
+#: admin/pages/content_settings.twig:70
+msgid "Unicode Emoticons"
+msgstr "Unicode表情符号"
+
+#: admin/help/unicode_emoticons.twig:8
+msgid ""
+"You can have some emoticons converted to equivalent Unicode emoji when your "
+"content is displayed. Your original content is not modified, so you can turn "
+"this feature on and off at any time. The following conversions will occur:"
+msgstr ""
+"显示内容时，可以将一些表情符号转换为等效的Unicode表情符号。 不会修改原本的内"
+"容，因此您可以随时开启或关闭此功能。 将发生以下转换："
+
+#: admin/help/unicode_emoticons.twig:13
+msgid "Emoticon"
+msgstr "表情"
+
+#: admin/help/unicode_emoticons.twig:14
+msgid "Emoji"
+msgstr "表情符号"
+
+#: admin/javascripts/admin.js.php:40
+msgid "Toggle All"
+msgstr "全部切换"
+
+#: admin/javascripts/admin.js.php:110
+msgid "Are you sure you want to proceed?"
+msgstr "确定继续？"
+
+#: admin/javascripts/admin.js.php:146
+msgid "Help"
+msgstr "帮助"
+
+#: admin/javascripts/admin.js.php:152 admin/javascripts/admin.js.php:154
+#: admin/javascripts/admin.js.php:242 admin/javascripts/admin.js.php:244
+msgid "Close"
+msgstr "关闭"
+
+#: admin/javascripts/admin.js.php:174 admin/javascripts/admin.js.php:175
+msgid "Preview this field"
+msgstr "预览这个字段"
+
+#: admin/javascripts/admin.js.php:235 admin/pages/themes.twig:25
+msgid "Preview"
+msgstr "预览"
+
+#: admin/layouts/default.twig:58
+msgid "Log out"
+msgstr "退出登陆"
+
+#: admin/layouts/default.twig:66
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
+msgstr "调用 %s 在行 %d 在 %s 秒."
+
+#: admin/pages/content_settings.twig:3 admin/pages/content_settings.twig:6
+msgid "Content Settings"
+msgstr "内容设置"
+
+#: admin/pages/content_settings.twig:10
+msgid "Posts Per Blog Page"
+msgstr "每个博客页面的文章"
+
+#: admin/pages/content_settings.twig:14
+msgid "Posts in Feed"
+msgstr "订阅中的文章"
+
+#: admin/pages/content_settings.twig:18
+msgid "Items Per Admin Page"
+msgstr "每个管理员的页面"
+
+#: admin/pages/content_settings.twig:22
+msgid "Feed URL"
+msgstr "订阅URL"
+
+#: admin/pages/content_settings.twig:25
+#, php-format
+msgid "Allows you to set an alternative URL for <code>%s</code>."
+msgstr "允许你为 <code>%s</code> 设置替代网址"
+
+#: admin/pages/content_settings.twig:29
+msgid "Uploads Path"
+msgstr "上传路径"
+
+#: admin/pages/content_settings.twig:32
+msgid ""
+"The directory to which files are uploaded, relative to your installation "
+"directory."
+msgstr "相对于你安装目录的上传文件的目录"
+
+#: admin/pages/content_settings.twig:36
+msgid "Upload Size Limit"
+msgstr "上传大小限制"
+
+#: admin/pages/content_settings.twig:38
+msgid "(Megabytes)"
+msgstr "(M)"
+
+#: admin/pages/content_settings.twig:41
+msgid "Feed Format"
+msgstr "订阅格式"
+
+#: admin/pages/content_settings.twig:49
+msgid "Send Pingbacks"
+msgstr "发送引用"
+
+#: admin/pages/content_settings.twig:52
+msgid "Attempts to notify sites to which your posts link."
+msgstr "尝试通知站点到你的文章链接中。"
+
+#: admin/pages/content_settings.twig:56
+msgid "XML-RPC Support"
+msgstr "XML-RPC支持"
+
+#: admin/pages/content_settings.twig:59
+msgid "XML-RPC support allows you to manipulate your blog content remotely."
+msgstr "XML-RPC支持允许您远程操作您的博客内容。"
+
+#: admin/pages/content_settings.twig:63
+msgid "Ajax"
+msgstr "Ajax"
+
+#: admin/pages/content_settings.twig:66
+msgid "Ajax enhances your blog with additional interactive features."
+msgstr "Ajax使用其他交互功能增强了您的博客。"
+
+#: admin/pages/content_settings.twig:74
+msgid "Display emoticons as Unicode emoji."
+msgstr "将表情符号显示为Unicode表情符号。"
+
+#: admin/pages/content_settings.twig:82
+msgid "Compose blog content using Markdown text formatting."
+msgstr "使用Markdown语法撰写博客内容。"
+
+#: admin/pages/content_settings.twig:87 admin/pages/edit_group.twig:24
+#: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:68
+#: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:41
+msgid "Update"
+msgstr "更新"
+
+#: admin/pages/delete_group.twig:3 admin/pages/delete_group.twig:6
+msgid "Delete Group?"
+msgstr "删除这个组？"
+
+#: admin/pages/delete_group.twig:8
+#, php-format
+msgid "Are you sure you want to delete the &#8220;%s&#8221; group?"
+msgstr "你确定你想删除 &#8220;%s&#8221; 这个组?"
+
+#: admin/pages/delete_group.twig:14
+msgid "Move members to:"
+msgstr "移动成员到："
+
+#: admin/pages/delete_group.twig:24
+msgid "New default group:"
+msgstr "新的默认组："
+
+#: admin/pages/delete_group.twig:34
+msgid "New &#8220;guest&#8221; group:"
+msgstr "新 &#8220;guest&#8221; 组："
+
+#: admin/pages/delete_group.twig:44 admin/pages/delete_page.twig:20
+#: admin/pages/delete_post.twig:14 admin/pages/delete_user.twig:41
+msgid "Delete!"
+msgstr "删除！"
+
+#: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
+#: admin/pages/delete_post.twig:17 admin/pages/delete_user.twig:44
+msgid "Cancel"
+msgstr "取消"
+
+#: admin/pages/delete_page.twig:3 admin/pages/delete_page.twig:6
+msgid "Delete Page?"
+msgstr "删除这个页面？"
+
+#: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
+#: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
+#: admin/pages/manage_pages.twig:37 admin/pages/manage_posts.twig:48
+msgid "[Untitled]"
+msgstr "[无标题]"
+
+#: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
+#, php-format
+msgid "Are you sure you want to delete &#8220;%s&#8221;?"
+msgstr "你确定你想删除 &#8220;%s&#8221;?"
+
+#: admin/pages/delete_page.twig:14
+msgid "Delete children?"
+msgstr "删除子？"
+
+#: admin/pages/delete_post.twig:3 admin/pages/delete_post.twig:6
+msgid "Delete Post?"
+msgstr "删除文章？"
+
+#: admin/pages/delete_user.twig:3 admin/pages/delete_user.twig:6
+msgid "Delete User?"
+msgstr "删除用户？"
+
+#: admin/pages/delete_user.twig:8
+#, php-format
+msgid "Are you sure you want to delete user &#8220;%s&#8221;?"
+msgstr "你确定你想删除用户 &#8220;%s&#8221;?"
+
+#: admin/pages/delete_user.twig:14
+msgid "Attribute posts to:"
+msgstr "文章属性："
+
+#: admin/pages/delete_user.twig:16
+msgid "[Delete Posts]"
+msgstr "[删除文章]"
+
+#: admin/pages/delete_user.twig:27
+msgid "Attribute pages to:"
+msgstr "页面属性："
+
+#: admin/pages/delete_user.twig:29
+msgid "[Delete Pages]"
+msgstr "[删除页面]"
+
+#: admin/pages/edit_group.twig:3
+msgid "Edit Group"
+msgstr "编辑组"
+
+#: admin/pages/edit_group.twig:6
+#, php-format
+msgid "Editing Group &#8220;%s&#8221;"
+msgstr "编辑组 &#8220;%s&#8221;"
+
+#: admin/pages/edit_group.twig:7
+msgid "Are you sure you want to make these changes to your group?"
+msgstr "你确定你想改变你的组吗？"
+
+#: admin/pages/edit_group.twig:10 admin/pages/new_group.twig:10
+msgid "Name"
+msgstr "姓名"
+
+#: admin/pages/edit_group.twig:13 admin/pages/new_group.twig:13
+msgid "Permissions"
+msgstr "权限"
+
+#: admin/pages/edit_page.twig:3
+msgid "Edit Page"
+msgstr "编辑页面"
+
+#: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
+#, php-format
+msgid "Editing &#8220;%s&#8221;"
+msgstr "编辑 &#8220;%s&#8221;"
+
+#: admin/pages/edit_post.twig:3
+msgid "Edit Post"
+msgstr "编辑文章"
+
+#: admin/pages/edit_user.twig:3
+msgid "Edit User"
+msgstr "编辑用户"
+
+#: admin/pages/edit_user.twig:6
+#, php-format
+msgid "Editing User &#8220;%s&#8221;"
+msgstr "编辑用户 &#8220;%s&#8221;"
+
+#: admin/pages/edit_user.twig:7
+msgid "Are you sure you want to make these changes to your account?"
+msgstr "你确定你想改变你的账户吗？"
+
+#: admin/pages/edit_user.twig:10 admin/pages/new_user.twig:10
+msgid "Login"
+msgstr "登陆"
+
+#: admin/pages/edit_user.twig:14 admin/pages/new_user.twig:14
+msgid "Email"
+msgstr "电子邮件"
+
+#: admin/pages/edit_user.twig:18 admin/pages/manage_groups.twig:25
+#: admin/pages/manage_users.twig:29 admin/pages/new_user.twig:18
+msgid "Group"
+msgstr "组"
+
+#: admin/pages/edit_user.twig:26
+msgid "New Password?"
+msgstr "新密码"
+
+#: admin/pages/edit_user.twig:30 admin/pages/new_user.twig:31
+msgid "Confirm"
+msgstr "确认密码"
+
+#: admin/pages/edit_user.twig:35 admin/pages/new_user.twig:36
+msgid "Full Name"
+msgstr "全名"
+
+#: admin/pages/edit_user.twig:36 admin/pages/edit_user.twig:43
+#: admin/pages/general_settings.twig:24 admin/pages/import.twig:35
+#: admin/pages/new_user.twig:37 admin/pages/new_user.twig:44
+#: admin/partials/post_fields.twig:16
+msgid "(optional)"
+msgstr "(可选)"
+
+#: admin/pages/edit_user.twig:42 admin/pages/manage_users.twig:31
+#: admin/pages/new_user.twig:43
+msgid "Website"
+msgstr "网站"
+
+#: admin/pages/export.twig:3 admin/pages/export.twig:38
+msgid "Export"
+msgstr "导出"
+
+#: admin/pages/export.twig:6
+msgid "What would you like to export?"
+msgstr "想要导出什么？"
+
+#: admin/pages/export.twig:10 admin/pages/manage_posts.twig:32
+msgid "Posts"
+msgstr "所有文章"
+
+#: admin/pages/export.twig:16 admin/pages/manage_pages.twig:19
+msgid "Pages"
+msgstr "所有页面"
+
+#: admin/pages/export.twig:22 admin/pages/manage_groups.twig:21
+msgid "Groups"
+msgstr "所有组"
+
+#: admin/pages/export.twig:28 admin/pages/manage_users.twig:24
+msgid "Users"
+msgstr "所有用户"
+
+#: admin/pages/export.twig:33
+msgid ""
+"Users export file will contain the hashed password for each user – keep it "
+"safe!"
+msgstr "用户导出文件将包含每个用户的哈希密码 - 请保证安全！"
+
+#: admin/pages/feathers.twig:3 admin/pages/feathers.twig:6
+msgid "Feathers"
+msgstr "羽毛"
+
+#: admin/pages/feathers.twig:8 admin/pages/modules.twig:8
+msgid "Enabled"
+msgstr "已启用"
+
+#: admin/pages/feathers.twig:29 admin/pages/modules.twig:49
+msgid "Disable"
+msgstr "禁用"
+
+#: admin/pages/feathers.twig:44 admin/pages/modules.twig:64
+msgid "Disabled"
+msgstr "已禁用"
+
+#: admin/pages/feathers.twig:65 admin/pages/modules.twig:106
+msgid "Enable"
+msgstr "启用"
+
+#: admin/pages/general_settings.twig:3 admin/pages/general_settings.twig:6
+msgid "General Settings"
+msgstr "通常设置"
+
+#: admin/pages/general_settings.twig:10
+msgid "Site Name"
+msgstr "站点名"
+
+#: admin/pages/general_settings.twig:14
+msgid "Description"
+msgstr "描述"
+
+#: admin/pages/general_settings.twig:18
+msgid "Chyrp URL"
+msgstr ""
+
+#: admin/pages/general_settings.twig:29
+msgid "Have your site URLs point someplace other than your install directory."
+msgstr "让您的网站网址指向安装目录以外的其他位置。"
+
+#: admin/pages/general_settings.twig:33
+msgid "Contact Email Address"
+msgstr "联系的邮件地址"
+
+#: admin/pages/general_settings.twig:37
+msgid "Time Zone"
+msgstr "时区"
+
+#: admin/pages/general_settings.twig:46
+msgid "Language"
+msgstr "语言（注意更改后重启PHP）"
+
+#: admin/pages/general_settings.twig:54
+msgid "Notify Visitors About Cookies?"
+msgstr "通知来访者关于Cookies？"
+
+#: admin/pages/general_settings.twig:57
+msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
+msgstr "关于隐私和电子通信的欧盟指令2002/58。"
+
+#: admin/pages/general_settings.twig:61
+msgid "Check for Updates?"
+msgstr "检查更新？"
+
+#: admin/pages/general_settings.twig:64
+msgid "Check for the availability of new Chyrp Lite versions."
+msgstr "检查可用的新版本。"
+
+#: admin/pages/import.twig:3 admin/pages/import.twig:44
+msgid "Import"
+msgstr "导入"
+
+#: admin/pages/import.twig:6
+msgid "What would you like to import?"
+msgstr "你想要导入什么？"
+
+#: admin/pages/import.twig:11
+msgid "Posts .atom File"
+msgstr "文章的 .atom 文件"
+
+#: admin/pages/import.twig:17
+msgid "Pages .atom File"
+msgstr "页面的 .atom 文件"
+
+#: admin/pages/import.twig:23
+msgid "Groups .json File"
+msgstr "组的 .json 文件"
+
+#: admin/pages/import.twig:29
+msgid "Users .json File"
+msgstr "用户的 .json 文件"
+
+#: admin/pages/import.twig:34
+msgid "URL for Embedded Media"
+msgstr "嵌入式媒体的URL"
+
+#: admin/pages/import.twig:39
+#, php-format
+msgid "Usually something like <code>%s/uploads/</code>."
+msgstr "一般类似于 <code>%s/uploads/</code>."
+
+#: admin/pages/manage_groups.twig:3
+msgid "Manage Groups"
+msgstr "管理所有组"
+
+#: admin/pages/manage_groups.twig:10
+msgid "Search all groups for user&hellip;"
+msgstr "搜索所有用户组"
+
+#: admin/pages/manage_groups.twig:12 admin/pages/manage_pages.twig:15
+#: admin/pages/manage_posts.twig:15 admin/pages/manage_users.twig:15
+msgid "Search"
+msgstr "搜索"
+
+#: admin/pages/manage_groups.twig:15 admin/pages/new_group.twig:3
+#: admin/pages/new_group.twig:6
+msgid "New Group"
+msgstr "新组"
+
+#: admin/pages/manage_groups.twig:21 admin/pages/manage_pages.twig:19
+#: admin/pages/manage_posts.twig:32 admin/pages/manage_users.twig:24
+msgid "Search Results"
+msgstr "搜索结果"
+
+#: admin/pages/manage_groups.twig:26
+msgid "Members"
+msgstr "成员"
+
+#: admin/pages/manage_groups.twig:27
+msgid "Default?"
+msgstr "默认？"
+
+#: admin/pages/manage_groups.twig:28
+msgid "Guests?"
+msgstr "访问者？"
+
+#: admin/pages/manage_groups.twig:30 admin/pages/manage_pages.twig:30
+#: admin/pages/manage_posts.twig:41 admin/pages/manage_users.twig:34
+msgid "Controls"
+msgstr "操作"
+
+#: admin/pages/manage_groups.twig:65 admin/pages/manage_pages.twig:75
+#: admin/pages/manage_posts.twig:76 admin/pages/manage_users.twig:75
+#, php-format
+msgid "Page %d of %s"
+msgstr "%d of %s 的页面"
+
+#: admin/pages/manage_pages.twig:3
+msgid "Manage Pages"
+msgstr "管理所有也米娜"
+
+#: admin/pages/manage_pages.twig:11 admin/pages/manage_posts.twig:11
+#: admin/pages/manage_users.twig:11
+msgid "Search&hellip;"
+msgstr "搜索&hellip;"
+
+#: admin/pages/manage_pages.twig:23 admin/pages/manage_posts.twig:36
+#: admin/partials/page_fields.twig:4
+msgid "Title"
+msgstr "标题"
+
+#: admin/pages/manage_pages.twig:24
+msgid "Created"
+msgstr "创建时间："
+
+#: admin/pages/manage_pages.twig:25
+msgid "Last Updated"
+msgstr "上一次更新时间："
+
+#: admin/pages/manage_pages.twig:26
+msgid "Public?"
+msgstr "发布？"
+
+#: admin/pages/manage_pages.twig:27
+msgid "Listed?"
+msgstr "上市？"
+
+#: admin/pages/manage_pages.twig:28 admin/pages/manage_posts.twig:39
+msgid "Author"
+msgstr "作者"
+
+#: admin/pages/manage_pages.twig:43
+msgid "never"
+msgstr "从不"
+
+#: admin/pages/manage_pages.twig:68 admin/pages/manage_posts.twig:69
+#: admin/pages/manage_users.twig:68
+msgid "(none)"
+msgstr "(空)"
+
+#: admin/pages/manage_posts.twig:3
+msgid "Manage Posts"
+msgstr "管理所有文章"
+
+#: admin/pages/manage_posts.twig:19
+msgid "Browse by month:"
+msgstr "按月浏览："
+
+#: admin/pages/manage_posts.twig:21
+msgid "[All]"
+msgstr "[所有]"
+
+#: admin/pages/manage_posts.twig:37
+msgid "Posted"
+msgstr "已发布的"
+
+#: admin/pages/manage_posts.twig:38 admin/partials/page_fields.twig:26
+#: admin/partials/post_fields.twig:52
+msgid "Status"
+msgstr "状态"
+
+#: admin/pages/manage_users.twig:3
+msgid "Manage Users"
+msgstr "管理所有用户"
+
+#: admin/pages/manage_users.twig:18 admin/pages/new_user.twig:6
+msgid "New User"
+msgstr "新用户"
+
+#: admin/pages/manage_users.twig:28
+msgid "Login (name)"
+msgstr "登陆（名称）"
+
+#: admin/pages/manage_users.twig:30
+msgid "Joined"
+msgstr "已加入"
+
+#: admin/pages/manage_users.twig:32
+msgid "Activated?"
+msgstr "激活？"
+
+#: admin/pages/modules.twig:3 admin/pages/modules.twig:6
+msgid "Modules"
+msgstr "模块"
+
+#: admin/pages/modules.twig:25 admin/pages/modules.twig:81
+msgid "This module conflicts with the following modules:"
+msgstr "该模块与以下模块冲突："
+
+#: admin/pages/modules.twig:35 admin/pages/modules.twig:91
+msgid "This module requires the following modules to be enabled:"
+msgstr "这个模块需要以下模块启用："
+
+#: admin/pages/new_group.twig:23
+msgid "Add Group"
+msgstr "增加组"
+
+#: admin/pages/new_user.twig:3 admin/pages/new_user.twig:50
+msgid "Add User"
+msgstr "增加用户"
+
+#: admin/pages/new_user.twig:27
+msgid "Password"
+msgstr "密码"
+
+#: admin/pages/route_settings.twig:3 admin/pages/route_settings.twig:6
+msgid "Route Settings"
+msgstr "路由设置"
+
+#: admin/pages/route_settings.twig:10
+msgid "Clean URLs"
+msgstr "优雅链接"
+
+#: admin/pages/route_settings.twig:12
+msgid "(recommended)"
+msgstr "(建议)"
+
+#: admin/pages/route_settings.twig:14
+msgid "Gives your site prettier urls."
+msgstr "为你的网站提供更漂亮的URL。"
+
+#: admin/pages/route_settings.twig:14
+msgid "Requires .htaccess support."
+msgstr "需要 .htaccess  支持"
+
+#: admin/pages/route_settings.twig:18
+msgid "Homepage"
+msgstr "主页"
+
+#: admin/pages/route_settings.twig:21
+msgid "Make the default route a homepage instead of the blog index."
+msgstr "使默认路由成为主页而不是博客索引。"
+
+#: admin/pages/route_settings.twig:26
+msgid "Post View URL"
+msgstr "文章查看链接"
+
+#: admin/pages/route_settings.twig:27
+msgid "(requires clean URLs)"
+msgstr "(需要优雅链接)"
+
+#: admin/pages/route_settings.twig:32
+msgid "Syntax:"
+msgstr "符号："
+
+#: admin/pages/route_settings.twig:36
+msgid "Year submitted"
+msgstr "提交的年份："
+
+#: admin/pages/route_settings.twig:36
+msgid "(e.g. 2007)"
+msgstr "(例如：2007)"
+
+#: admin/pages/route_settings.twig:40
+msgid "Month submitted"
+msgstr "提交的月份："
+
+#: admin/pages/route_settings.twig:40
+msgid "(e.g. 12)"
+msgstr "(例如 12)"
+
+#: admin/pages/route_settings.twig:44
+msgid "Day submitted"
+msgstr "提交的天"
+
+#: admin/pages/route_settings.twig:44
+msgid "(e.g. 25)"
+msgstr "(例如 25)"
+
+#: admin/pages/route_settings.twig:48
+msgid "Hour submitted"
+msgstr "提交的小时"
+
+#: admin/pages/route_settings.twig:48
+msgid "(e.g. 03)"
+msgstr "(例如 03)"
+
+#: admin/pages/route_settings.twig:52
+msgid "Minute submitted"
+msgstr "提交的分"
+
+#: admin/pages/route_settings.twig:52
+msgid "(e.g. 59)"
+msgstr "(例如 59)"
+
+#: admin/pages/route_settings.twig:56
+msgid "Second submitted"
+msgstr "提交的秒"
+
+#: admin/pages/route_settings.twig:56
+msgid "(e.g. 30)"
+msgstr "(例如 30)"
+
+#: admin/pages/route_settings.twig:60
+msgid "Post ID"
+msgstr "文章ID"
+
+#: admin/pages/route_settings.twig:64
+msgid "Post author (username)"
+msgstr "文章作者（用户名）"
+
+#: admin/pages/route_settings.twig:64
+msgid "(e.g. Alex)"
+msgstr "(例如 Alex)"
+
+#: admin/pages/route_settings.twig:68
+msgid "The non-unique slug"
+msgstr "非独特 slug"
+
+#: admin/pages/route_settings.twig:68
+msgid "(e.g. this_is_clean)"
+msgstr "(例如 this_is_clean)"
+
+#: admin/pages/route_settings.twig:72
+msgid "The unique form of (clean)"
+msgstr "独特的(优雅)"
+
+#: admin/pages/route_settings.twig:72
+msgid "(e.g. this_one_is_taken_2)"
+msgstr "(例如 this_one_is_taken_2)"
+
+#: admin/pages/route_settings.twig:76
+msgid "The post's feather"
+msgstr "文章的羽毛"
+
+#: admin/pages/route_settings.twig:76
+msgid "(e.g. text)"
+msgstr "(例如 text)"
+
+#: admin/pages/route_settings.twig:80
+msgid "The plural form of the post's feather"
+msgstr "文章羽毛的复数形式"
+
+#: admin/pages/route_settings.twig:80
+msgid "(e.g. links)"
+msgstr "(例如 links)"
+
+#: admin/pages/themes.twig:3
+msgid "Themes"
+msgstr "主题"
+
+#: admin/pages/themes.twig:6
+msgid "Blog Themes"
+msgstr "博客主题"
+
+#: admin/pages/themes.twig:22
+msgid "Select"
+msgstr "选择"
+
+#: admin/pages/user_settings.twig:3 admin/pages/user_settings.twig:6
+msgid "User Settings"
+msgstr "用户设置"
+
+#: admin/pages/user_settings.twig:10
+msgid "Registration"
+msgstr "注册"
+
+#: admin/pages/user_settings.twig:12
+msgid "Allow people to register."
+msgstr "允许用户注册"
+
+#: admin/pages/user_settings.twig:15
+msgid "Email Correspondence"
+msgstr "电子邮件通信"
+
+#: admin/pages/user_settings.twig:17
+msgid "Allow the site to send email correspondence to users?"
+msgstr "允许发送电子邮件通讯给用户？"
+
+#: admin/pages/user_settings.twig:20
+msgid "Activate by Email"
+msgstr "通过电子邮件激活"
+
+#: admin/pages/user_settings.twig:22
+msgid "Should users activate by email?"
+msgstr "用户是否应该通过电子邮件激活？"
+
+#: admin/pages/user_settings.twig:25
+msgid "Default User Group"
+msgstr "默认用户组"
+
+#: admin/pages/user_settings.twig:33
+msgid "&#8220;Guest&#8221; Group"
+msgstr "&#8220;Guest&#8221; 组"
+
+#: admin/pages/write_page.twig:3
+msgid "Add Page"
+msgstr "增加页面"
+
+#: admin/pages/write_post.twig:3
+msgid "Write"
+msgstr "写作"
+
+#: admin/partials/page_fields.twig:12
+msgid "Body"
+msgstr "主体"
+
+#: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:84
+msgid "Slug"
+msgstr ""
+
+#: admin/partials/page_fields.twig:29
+msgid "Public and visible in pages list"
+msgstr "公开并在页面列表中显示"
+
+#: admin/partials/page_fields.twig:31 admin/partials/post_fields.twig:57
+msgid "Public"
+msgstr "公开"
+
+#: admin/partials/page_fields.twig:33
+msgid "Private and visible in pages list"
+msgstr "隐藏并在页面列表中显示"
+
+#: admin/partials/page_fields.twig:35 admin/partials/post_fields.twig:59
+msgid "Private"
+msgstr "隐藏"
+
+#: admin/partials/page_fields.twig:39
+msgid "Priority in pages list"
+msgstr "页面列表中的优先级"
+
+#: admin/partials/page_fields.twig:42
+msgid "High"
+msgstr "高"
+
+#: admin/partials/page_fields.twig:44
+msgid "Medium"
+msgstr "中"
+
+#: admin/partials/page_fields.twig:46
+msgid "Low"
+msgstr "低"
+
+#: admin/partials/page_fields.twig:50
+msgid "Parent"
+msgstr "父级"
+
+#: admin/partials/page_fields.twig:52
+msgid "[None]"
+msgstr "[空]"
+
+#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:138
+#: admin/partials/post_fields.twig:147
+msgid "Publish"
+msgstr "公开"
+
+#: admin/partials/page_fields.twig:74 admin/partials/post_fields.twig:142
+#: admin/partials/post_fields.twig:151
+msgid "Save"
+msgstr "保存"
+
+#: admin/partials/post_fields.twig:55
+msgid "Draft"
+msgstr "草稿"
+
+#: admin/partials/post_fields.twig:61
+msgid "Scheduled"
+msgstr "定时发布"
+
+#: admin/partials/post_fields.twig:62
+msgid "Visible only to a group of users:"
+msgstr "仅可见于一组用户："
+
+#: admin/partials/post_fields.twig:64
+msgid "All registered users"
+msgstr "所有注册的用户"
+
+#: admin/partials/post_fields.twig:77
+msgid "Pinned?"
+msgstr "寄托？"
+
+#: admin/partials/post_fields.twig:78
+msgid "(shows this post above all others)"
+msgstr "（显示这篇文章高于一切）"
+
+#: admin/partials/post_fields.twig:90
+msgid "Timestamp"
+msgstr "时间戳"
