@@ -303,7 +303,7 @@
                 redirect("search/".str_ireplace("%2F", "", urlencode($_GET['query']))."/");
 
             if (empty($_GET['query']))
-                Flash::warning(__("Please enter a search term."));
+                Flash::warning(__("Please enter a search term."), "/");
 
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
