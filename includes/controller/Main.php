@@ -635,7 +635,7 @@
                 }
             }
 
-            $this->display("forms".DIR."user".DIR."login", array(), __("Log In"));
+            $this->display("forms".DIR."user".DIR."login", array(), __("Log in"));
         }
 
         /**
@@ -740,7 +740,7 @@
                 }
             }
 
-            $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost Password"));
+            $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost password"));
         }
 
         /**
