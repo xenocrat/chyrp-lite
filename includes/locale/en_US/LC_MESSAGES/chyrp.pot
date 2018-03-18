@@ -1102,7 +1102,8 @@ msgid "Logged in."
 msgstr ""
 
 #: includes/controller/Main.php:638
-msgid "Log In"
+#: includes/error.php:346
+msgid "Log in"
 msgstr ""
 
 #: includes/controller/Main.php:647
@@ -1134,7 +1135,7 @@ msgid "If that username is in our database, we will email you a password reset l
 msgstr ""
 
 #: includes/controller/Main.php:743
-msgid "Lost Password"
+msgid "Lost password"
 msgstr ""
 
 #: includes/download.php:12
@@ -1158,10 +1159,6 @@ msgstr ""
 #: includes/error.php:341
 #, php-format
 msgid "%s on line %d"
-msgstr ""
-
-#: includes/error.php:346
-msgid "Log in"
 msgstr ""
 
 #: includes/helpers.php:92

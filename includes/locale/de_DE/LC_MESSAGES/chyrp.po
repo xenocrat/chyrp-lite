@@ -922,8 +922,8 @@ msgstr "Du musst Deinen Account aktivieren bevor Du Dich einloggen kannst."
 msgid "Logged in."
 msgstr "Eingeloggt."
 
-#: includes/controller/Main.php:638
-msgid "Log In"
+#: includes/controller/Main.php:638 includes/error.php:346
+msgid "Log in"
 msgstr "Einloggen"
 
 #: includes/controller/Main.php:647
@@ -958,7 +958,7 @@ msgstr ""
 "Link zum Zurücksetzen deines Passworts zuschicken."
 
 #: includes/controller/Main.php:743
-msgid "Lost Password"
+msgid "Lost password"
 msgstr "Passwort vergessen"
 
 #: includes/download.php:12 includes/thumb.php:15
@@ -981,10 +981,6 @@ msgstr "Backtrace"
 #, php-format
 msgid "%s on line %d"
 msgstr "%s in Zeile %d"
-
-#: includes/error.php:346
-msgid "Log in"
-msgstr "Login"
 
 #: includes/helpers.php:92
 msgid "Forbidden"
