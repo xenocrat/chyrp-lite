@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.0.2\n"
 "Last-Translator: 筱枫 <q849958241@163.com>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
@@ -184,8 +184,7 @@ msgid ""
 "hyphen-minus (&#8220;-&#8221;)."
 msgstr ""
 "slug是这个帖子或页面的URL友好标识名称。 您可以自己输入slug或在创建帖子或页面"
-"时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。（注：这"
-"是用于SEO优化）"
+"时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。"
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
 #: admin/pages/content_settings.twig:70
@@ -266,7 +265,7 @@ msgstr "订阅URL"
 #: admin/pages/content_settings.twig:25
 #, php-format
 msgid "Allows you to set an alternative URL for <code>%s</code>."
-msgstr "允许你为 <code>%s</code> 设置替代网址"
+msgstr "允许你为 <code>%s</code> 设置替代网址。"
 
 #: admin/pages/content_settings.twig:29
 msgid "Uploads Path"
@@ -276,7 +275,7 @@ msgstr "上传路径"
 msgid ""
 "The directory to which files are uploaded, relative to your installation "
 "directory."
-msgstr "相对于你安装目录的上传文件的目录"
+msgstr "相对于你安装目录的上传文件的目录。"
 
 #: admin/pages/content_settings.twig:36
 msgid "Upload Size Limit"
@@ -571,7 +570,7 @@ msgstr "时区"
 
 #: admin/pages/general_settings.twig:46
 msgid "Language"
-msgstr "语言（注意更改后重启PHP）"
+msgstr "语言"
 
 #: admin/pages/general_settings.twig:54
 msgid "Notify Visitors About Cookies?"
@@ -684,11 +683,11 @@ msgstr "标题"
 
 #: admin/pages/manage_pages.twig:24
 msgid "Created"
-msgstr "创建时间："
+msgstr "创建时间"
 
 #: admin/pages/manage_pages.twig:25
 msgid "Last Updated"
-msgstr "上一次更新时间："
+msgstr "上一次更新时间"
 
 #: admin/pages/manage_pages.twig:26
 msgid "Public?"
@@ -794,7 +793,7 @@ msgstr "为你的网站提供更漂亮的URL。"
 
 #: admin/pages/route_settings.twig:14
 msgid "Requires .htaccess support."
-msgstr "需要 .htaccess  支持"
+msgstr "需要 .htaccess  支持。"
 
 #: admin/pages/route_settings.twig:18
 msgid "Homepage"
@@ -818,7 +817,7 @@ msgstr "符号："
 
 #: admin/pages/route_settings.twig:36
 msgid "Year submitted"
-msgstr "提交的年份："
+msgstr "提交的年份"
 
 #: admin/pages/route_settings.twig:36
 msgid "(e.g. 2007)"
@@ -826,7 +825,7 @@ msgstr "(例如：2007)"
 
 #: admin/pages/route_settings.twig:40
 msgid "Month submitted"
-msgstr "提交的月份："
+msgstr "提交的月份"
 
 #: admin/pages/route_settings.twig:40
 msgid "(e.g. 12)"
@@ -930,7 +929,7 @@ msgstr "注册"
 
 #: admin/pages/user_settings.twig:12
 msgid "Allow people to register."
-msgstr "允许用户注册"
+msgstr "允许用户注册。"
 
 #: admin/pages/user_settings.twig:15
 msgid "Email Correspondence"
@@ -1044,7 +1043,7 @@ msgstr "寄托？"
 
 #: admin/partials/post_fields.twig:78
 msgid "(shows this post above all others)"
-msgstr "（显示这篇文章高于一切）"
+msgstr "（置顶显示）"
 
 #: admin/partials/post_fields.twig:90
 msgid "Timestamp"

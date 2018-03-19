@@ -17,27 +17,23 @@ msgstr ""
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:21
 msgid "Could not read the configuration file."
-msgstr "不能读取配置文件"
+msgstr "不能读取配置文件。"
 
 #: includes/class/Model.php:457
-#, fuzzy
 msgid "Edit"
-msgstr "编辑页面"
+msgstr "编辑"
 
 #: includes/class/Model.php:482
-#, fuzzy
 msgid "Delete"
-msgstr "删除！"
+msgstr "删除"
 
 #: includes/class/Paginator.php:142
-#, fuzzy
 msgid "Next &rarr;"
-msgstr "下一篇"
+msgstr "下一篇 &rarr;"
 
 #: includes/class/Paginator.php:165
-#, fuzzy
 msgid "&larr; Previous"
-msgstr "上一篇"
+msgstr "&larr;  上一篇"
 
 #: includes/class/Paginator.php:187
 msgid "Final &rarr;"
@@ -49,25 +45,25 @@ msgstr "&larr; 开始"
 
 #: includes/class/Query.php:76
 msgid "PDO failed to execute the prepared statement."
-msgstr ""
+msgstr "PDO未能执行准备好的语句。"
 
 #: includes/class/Query.php:197
 msgid "Query String"
-msgstr ""
+msgstr "查询语句"
 
 #: includes/class/Query.php:199
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: includes/class/Query.php:203 includes/class/SQL.php:96
 #: includes/class/SQL.php:107 install.php:516
-#, fuzzy, php-format
+#, php-format
 msgid "Database error: %s"
-msgstr "&copy; %s, %s."
+msgstr "数据库错误： %s"
 
 #: includes/class/Route.php:44
 msgid "Route was initiated with an invalid Controller."
-msgstr ""
+msgstr "路由启动了一个无效的控制器。"
 
 #: includes/class/Route.php:100 includes/controller/Admin.php:388
 #: includes/controller/Admin.php:391 includes/controller/Admin.php:449
@@ -104,11 +100,11 @@ msgstr ""
 #: upgrade.php:124 upgrade.php:137 upgrade.php:151 upgrade.php:177
 #: upgrade.php:190 upgrade.php:204
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #: includes/class/Route.php:100
 msgid "Invalid action."
-msgstr ""
+msgstr "无效动作。"
 
 #: includes/class/Route.php:107 includes/controller/Admin.php:143
 #: includes/controller/Admin.php:152 includes/controller/Admin.php:184
@@ -151,13 +147,12 @@ msgstr ""
 #: includes/controller/Ajax.php:128 includes/controller/Main.php:340
 #: includes/controller/Main.php:404 includes/download.php:18
 #: includes/helpers.php:1593 includes/thumb.php:21
-#, fuzzy
 msgid "Access Denied"
-msgstr "拒绝"
+msgstr "访问被拒绝"
 
 #: includes/class/Route.php:107 includes/download.php:18 includes/thumb.php:21
 msgid "You are not allowed to view this site."
-msgstr "你不允许访问这个站点"
+msgstr "你不允许访问这个站点。"
 
 #: includes/class/Route.php:255
 msgid "Route was initiated without a Controller."
@@ -172,9 +167,8 @@ msgid "By browsing this website you are agreeing to our use of cookies."
 msgstr "浏览本网站即表示您同意我们使用cookies。"
 
 #: includes/class/Update.php:24
-#, fuzzy
 msgid "Unable to check for new Chyrp Lite versions."
-msgstr "检查可用的新版本。"
+msgstr "无法检查新的Chyrp Lite版本。"
 
 #: includes/class/Update.php:26 includes/class/Update.php:32
 msgid "Go to GitHub &rarr;"
@@ -221,14 +215,12 @@ msgstr "你必须启用至少一个羽毛才能撰写帖子。"
 #: includes/controller/Admin.php:1690 includes/controller/Ajax.php:49
 #: includes/controller/Ajax.php:75 includes/download.php:24
 #: includes/helpers.php:116 includes/thumb.php:44
-#, fuzzy
 msgid "Not Found"
-msgstr "未找到."
+msgstr "未找到"
 
 #: includes/controller/Admin.php:163 includes/controller/Admin.php:190
-#, fuzzy
 msgid "Feather not found."
-msgstr "未找到."
+msgstr "羽毛未找到。"
 
 #: includes/controller/Admin.php:187 includes/controller/Admin.php:233
 #: includes/controller/Admin.php:282 includes/controller/Admin.php:385
@@ -246,12 +238,11 @@ msgstr "未找到."
 #: includes/controller/Main.php:486 includes/controller/Main.php:612
 #: includes/controller/Main.php:669 includes/controller/Main.php:724
 msgid "Invalid authentication token."
-msgstr ""
+msgstr "无效的认证令牌。"
 
 #: includes/controller/Admin.php:197
-#, fuzzy
 msgid "Post created!"
-msgstr "创建时间："
+msgstr "文章已创建！"
 
 #: includes/controller/Admin.php:206 includes/controller/Admin.php:236
 #: includes/controller/Admin.php:263 includes/controller/Admin.php:285
@@ -262,22 +253,19 @@ msgstr "创建时间："
 #: includes/controller/Admin.php:911 includes/controller/Admin.php:935
 #: includes/controller/Admin.php:972 includes/controller/Admin.php:1000
 #: includes/controller/Ajax.php:44 includes/controller/Ajax.php:70
-#, fuzzy
 msgid "No ID Specified"
-msgstr "文章ID"
+msgstr "未指定ID"
 
 #: includes/controller/Admin.php:206
-#, fuzzy
 msgid "An ID is required to edit a post."
-msgstr "编辑文章"
+msgstr "编辑文章需要ID。"
 
 #: includes/controller/Admin.php:211 includes/controller/Admin.php:247
 #: includes/controller/Admin.php:268 includes/controller/Admin.php:293
 #: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:218
 #: includes/lib/XMLRPC.php:331 includes/lib/XMLRPC.php:381
-#, fuzzy
 msgid "Post not found."
-msgstr "未找到."
+msgstr "文章未找到。"
 
 #: includes/controller/Admin.php:214 includes/controller/Admin.php:250
 #: includes/lib/XMLRPC.php:221 includes/lib/XMLRPC.php:334
@@ -285,25 +273,21 @@ msgid "You do not have sufficient privileges to edit this post."
 msgstr "你没有足够的权限编辑这个文章。"
 
 #: includes/controller/Admin.php:236
-#, fuzzy
 msgid "An ID is required to update a post."
-msgstr "文章ID"
+msgstr "更新文章需要ID。"
 
 #: includes/controller/Admin.php:254
-#, fuzzy
 msgid "Post updated."
-msgstr "上一次更新时间："
+msgstr "文章已更新。"
 
 #: includes/controller/Admin.php:254
-#, fuzzy
 msgid "View post &rarr;"
-msgstr "文章查看链接"
+msgstr "查看文章 &rarr;"
 
 #: includes/controller/Admin.php:263 includes/controller/Admin.php:285
 #: includes/controller/Ajax.php:44
-#, fuzzy
 msgid "An ID is required to delete a post."
-msgstr "文章ID"
+msgstr "删除文章需要ID。"
 
 #: includes/controller/Admin.php:271 includes/controller/Admin.php:296
 #: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:384
@@ -311,9 +295,8 @@ msgid "You do not have sufficient privileges to delete this post."
 msgstr "你没有足够的权限删除这个文章。"
 
 #: includes/controller/Admin.php:300 includes/controller/Ajax.php:55
-#, fuzzy
 msgid "Post deleted."
-msgstr "上一篇"
+msgstr "文章已删除。"
 
 #: includes/controller/Admin.php:309
 msgid "You do not have sufficient privileges to manage any posts."
@@ -325,52 +308,42 @@ msgid "You do not have sufficient privileges to add pages."
 msgstr "你没有足够的权限增加页面。"
 
 #: includes/controller/Admin.php:388 includes/controller/Admin.php:449
-#, fuzzy
 msgid "Title cannot be blank."
-msgstr "标题"
+msgstr "标题不能为空。"
 
 #: includes/controller/Admin.php:391 includes/controller/Admin.php:452
-#, fuzzy
 msgid "Body cannot be blank."
-msgstr "主体"
+msgstr "正文不能为空。"
 
 #: includes/controller/Admin.php:410
-#, fuzzy
 msgid "Page created!"
-msgstr ""
-"slug是这个帖子或页面的URL友好标识名称。 您可以自己输入slug或在创建帖子或页面"
-"时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。（注：这"
-"是用于SEO优化）"
+msgstr "页面已创建！"
 
 #: includes/controller/Admin.php:419
 msgid "You do not have sufficient privileges to edit this page."
 msgstr "你没有足够的权限编辑这个页面。"
 
 #: includes/controller/Admin.php:422 includes/controller/Admin.php:446
-#, fuzzy
 msgid "An ID is required to edit a page."
-msgstr "编辑页面"
+msgstr "编辑页面需要ID。"
 
 #: includes/controller/Admin.php:427 includes/controller/Admin.php:457
 #: includes/controller/Admin.php:492 includes/controller/Admin.php:517
 #: includes/controller/Ajax.php:75
-#, fuzzy
 msgid "Page not found."
-msgstr "未找到."
+msgstr "页面未找到。"
 
 #: includes/controller/Admin.php:440
 msgid "You do not have sufficient privileges to edit pages."
 msgstr "你没有足够的权限编辑页面。"
 
 #: includes/controller/Admin.php:475
-#, fuzzy
 msgid "Page updated."
-msgstr "上一次更新时间："
+msgstr "页面已更新。"
 
 #: includes/controller/Admin.php:475 includes/controller/Admin.php:1958
-#, fuzzy
 msgid "View page &rarr;"
-msgstr "文章查看链接"
+msgstr "查看页面 &rarr;"
 
 #: includes/controller/Admin.php:484 includes/controller/Admin.php:503
 #: includes/controller/Ajax.php:64
@@ -379,14 +352,12 @@ msgstr "你没有足够的权限删除页面。"
 
 #: includes/controller/Admin.php:487 includes/controller/Admin.php:509
 #: includes/controller/Ajax.php:70
-#, fuzzy
 msgid "An ID is required to delete a page."
-msgstr "删除这个页面？"
+msgstr "删除页面需要ID。"
 
 #: includes/controller/Admin.php:535 includes/controller/Ajax.php:78
-#, fuzzy
 msgid "Page deleted."
-msgstr "删除这个页面？"
+msgstr "页面已删除。"
 
 #: includes/controller/Admin.php:546
 msgid "You do not have sufficient privileges to manage pages."
@@ -404,9 +375,8 @@ msgstr "请输入账户的用户名。"
 
 #: includes/controller/Admin.php:597 includes/controller/Admin.php:700
 #: includes/controller/Main.php:499
-#, fuzzy
 msgid "That username is already in use."
-msgstr "用户名"
+msgstr "用户名已被使用。"
 
 #: includes/controller/Admin.php:600 includes/controller/Main.php:502
 #: install.php:466
@@ -426,63 +396,54 @@ msgstr "请考虑为这个用户设置一个更强的密码。"
 #: includes/controller/Admin.php:609 includes/controller/Admin.php:717
 #: includes/controller/Admin.php:1785 includes/controller/Main.php:509
 #: includes/controller/Main.php:678 install.php:471
-#, fuzzy
 msgid "Email address cannot be blank."
-msgstr "联系的邮件地址"
+msgstr "邮件地址不能为空。"
 
 #: includes/controller/Admin.php:612 includes/controller/Admin.php:720
 #: includes/controller/Admin.php:1788 includes/controller/Main.php:511
 #: includes/controller/Main.php:680 install.php:473
-#, fuzzy
 msgid "Invalid email address."
-msgstr "联系的邮件地址"
+msgstr "无效的邮件地址。"
 
 #: includes/controller/Admin.php:615 includes/controller/Admin.php:723
 #: includes/controller/Main.php:517 includes/controller/Main.php:683
-#, fuzzy
 msgid "Invalid website URL."
-msgstr "网站"
+msgstr "无效的网站URL。"
 
 #: includes/controller/Admin.php:629 includes/controller/Admin.php:735
 #: includes/controller/Admin.php:916 includes/controller/Admin.php:956
 #: includes/controller/Admin.php:977 includes/controller/Admin.php:1008
-#, fuzzy
 msgid "Group not found."
-msgstr "未找到."
+msgstr "组未找到。"
 
 #: includes/controller/Admin.php:646
-#, fuzzy
 msgid "User added."
-msgstr "删除用户？"
+msgstr "用户已增加。"
 
 #: includes/controller/Admin.php:655 includes/controller/Admin.php:686
 msgid "You do not have sufficient privileges to edit users."
 msgstr "你没有足够的权限编辑用户。"
 
 #: includes/controller/Admin.php:658 includes/controller/Admin.php:680
-#, fuzzy
 msgid "An ID is required to edit a user."
-msgstr "编辑用户"
+msgstr "编辑用户需要ID。"
 
 #: includes/controller/Admin.php:663 includes/controller/Admin.php:705
 #: includes/controller/Admin.php:769 includes/controller/Admin.php:799
-#, fuzzy
 msgid "User not found."
-msgstr "未找到."
+msgstr "用户未找到。"
 
 #: includes/controller/Admin.php:752
-#, fuzzy
 msgid "User updated."
-msgstr "上一次更新时间："
+msgstr "用户已更新。"
 
 #: includes/controller/Admin.php:761 includes/controller/Admin.php:785
 msgid "You do not have sufficient privileges to delete users."
 msgstr "你没有足够的权限删除用户。"
 
 #: includes/controller/Admin.php:764 includes/controller/Admin.php:791
-#, fuzzy
 msgid "An ID is required to delete a user."
-msgstr "删除用户？"
+msgstr "删除用户需要ID。"
 
 #: includes/controller/Admin.php:772
 msgid "You cannot delete your own account."
@@ -504,9 +465,8 @@ msgid "New owner for pages does not exist."
 msgstr "新页面的所有者不存在。"
 
 #: includes/controller/Admin.php:835
-#, fuzzy
 msgid "User deleted."
-msgstr "用户设置"
+msgstr "用户已删除。"
 
 #: includes/controller/Admin.php:846
 msgid "You do not have sufficient privileges to manage users."
@@ -527,32 +487,28 @@ msgid "That group name is already in use."
 msgstr "这个组名已经被使用。"
 
 #: includes/controller/Admin.php:899
-#, fuzzy
 msgid "Group added."
-msgstr "组"
+msgstr "组已增加。"
 
 #: includes/controller/Admin.php:908 includes/controller/Admin.php:929
 msgid "You do not have sufficient privileges to edit groups."
 msgstr "你没有足够的权限编辑组。"
 
 #: includes/controller/Admin.php:911 includes/controller/Admin.php:935
-#, fuzzy
 msgid "An ID is required to edit a group."
-msgstr "编辑组"
+msgstr "编辑组需要ID。"
 
 #: includes/controller/Admin.php:960
-#, fuzzy
 msgid "Group updated."
-msgstr "上一次更新时间："
+msgstr "组已更新。"
 
 #: includes/controller/Admin.php:969 includes/controller/Admin.php:994
 msgid "You do not have sufficient privileges to delete groups."
 msgstr "你没有足够的权限删除组。"
 
 #: includes/controller/Admin.php:972 includes/controller/Admin.php:1000
-#, fuzzy
 msgid "An ID is required to delete a group."
-msgstr "删除这个组？"
+msgstr "删除组需要ID。"
 
 #: includes/controller/Admin.php:980
 msgid "You cannot delete your own group."
@@ -567,29 +523,24 @@ msgid "New member group must be specified."
 msgstr "新成员组必须被自定。"
 
 #: includes/controller/Admin.php:1036 includes/controller/Admin.php:1905
-#, fuzzy
 msgid "New default group does not exist."
-msgstr "新的默认组："
+msgstr "新的默认组不存在。"
 
 #: includes/controller/Admin.php:1040
-#, fuzzy
 msgid "New default group must be specified."
-msgstr "新的默认组："
+msgstr "新的默认组必须被指定。"
 
 #: includes/controller/Admin.php:1048 includes/controller/Admin.php:1910
-#, fuzzy
 msgid "New guest group does not exist."
-msgstr "新 &#8220;guest&#8221; 组："
+msgstr "新的访问组不存在。"
 
 #: includes/controller/Admin.php:1052
-#, fuzzy
 msgid "New guest group must be specified."
-msgstr "新 &#8220;guest&#8221; 组："
+msgstr "新的访问组必须被指定。"
 
 #: includes/controller/Admin.php:1068
-#, fuzzy
 msgid "Group deleted."
-msgstr "组"
+msgstr "组已删除。"
 
 #: includes/controller/Admin.php:1079
 msgid "You do not have sufficient privileges to manage groups."
@@ -613,24 +564,20 @@ msgid "You do not have sufficient privileges to import content."
 msgstr "你没有足够的权限导入内容。"
 
 #: includes/controller/Admin.php:1329
-#, fuzzy
 msgid "Posts export file is invalid."
-msgstr "文章的 .atom 文件"
+msgstr "文章导出的文件无效。"
 
 #: includes/controller/Admin.php:1334
-#, fuzzy
 msgid "Pages export file is invalid."
-msgstr "页面的 .atom 文件"
+msgstr "页面导出的文件无效。"
 
 #: includes/controller/Admin.php:1338
-#, fuzzy
 msgid "Groups export file is invalid."
-msgstr "组的 .json 文件"
+msgstr "组导出的文件无效。"
 
 #: includes/controller/Admin.php:1342
-#, fuzzy
 msgid "Users export file is invalid."
-msgstr "用户的 .json 文件"
+msgstr "用户导出的文件无效。"
 
 #: includes/controller/Admin.php:1347
 msgid "You did not select anything to import."
@@ -643,7 +590,7 @@ msgstr "Chyrp Lite 内容成功导入！"
 #: includes/controller/Admin.php:1480 includes/controller/Admin.php:1562
 #: includes/controller/Admin.php:1628 includes/controller/Admin.php:1672
 msgid "You do not have sufficient privileges to toggle extensions."
-msgstr "你没有足够的权限切换扩展"
+msgstr "你没有足够的权限切换扩展。"
 
 #: includes/controller/Admin.php:1488
 msgid "Could not read modules directory."
@@ -651,7 +598,7 @@ msgstr "不能读取模块目录。"
 
 #: includes/controller/Admin.php:1570
 msgid "Could not read feathers directory."
-msgstr "不能读取功能目录。"
+msgstr "不能读取羽毛目录。"
 
 #: includes/controller/Admin.php:1595 includes/controller/Admin.php:1709
 #: includes/controller/Admin.php:1737 includes/controller/Admin.php:1761
@@ -674,40 +621,35 @@ msgstr "不能读取主题目录。"
 
 #: includes/controller/Admin.php:1634 includes/controller/Admin.php:1678
 msgid "No Extension Specified"
-msgstr "没有指定扩展。"
+msgstr "没有指定扩展"
 
 #: includes/controller/Admin.php:1634
 msgid "You did not specify an extension to enable."
 msgstr "你没有指定要启用的扩展。"
 
 #: includes/controller/Admin.php:1643
-#, fuzzy
 msgid "Extension already enabled."
-msgstr "已启用"
+msgstr "扩展已启用。"
 
 #: includes/controller/Admin.php:1646 includes/controller/Admin.php:1690
-#, fuzzy
 msgid "Extension not found."
-msgstr "未找到."
+msgstr "扩展未找到。"
 
 #: includes/controller/Admin.php:1660
-#, fuzzy
 msgid "Extension enabled."
-msgstr "已启用"
+msgstr "扩展已启用。"
 
 #: includes/controller/Admin.php:1678
 msgid "You did not specify an extension to disable."
 msgstr "你没有指定要停用的扩展。"
 
 #: includes/controller/Admin.php:1687
-#, fuzzy
 msgid "Extension already disabled."
-msgstr "已禁用"
+msgstr "扩展已禁用。"
 
 #: includes/controller/Admin.php:1700
-#, fuzzy
 msgid "Extension disabled."
-msgstr "已禁用"
+msgstr "扩展已禁用。"
 
 #: includes/controller/Admin.php:1715
 msgid "No Theme Specified"
@@ -722,39 +664,33 @@ msgid "Theme changed."
 msgstr "主题已更改。"
 
 #: includes/controller/Admin.php:1744
-#, fuzzy
 msgid "Preview stopped."
-msgstr "预览"
+msgstr "预览已停止。"
 
 #: includes/controller/Admin.php:1752
-#, fuzzy
 msgid "Preview started."
-msgstr "预览"
+msgstr "预览已开始。"
 
 #: includes/controller/Admin.php:1791
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL 不能为空。"
 
 #: includes/controller/Admin.php:1794
-#, fuzzy
 msgid "Invalid Chyrp URL."
-msgstr "规范URL"
+msgstr "无效的Chyrp URL。"
 
 #: includes/controller/Admin.php:1797
-#, fuzzy
 msgid "Invalid canonical URL."
-msgstr "规范URL"
+msgstr "无效的规范URL。"
 
 #: includes/controller/Admin.php:1820 includes/controller/Admin.php:1881
 #: includes/controller/Admin.php:1921 includes/controller/Admin.php:1971
-#, fuzzy
 msgid "Settings updated."
-msgstr "上一次更新时间："
+msgstr "设置已更新。"
 
 #: includes/controller/Admin.php:1845
-#, fuzzy
 msgid "Invalid feed URL."
-msgstr "订阅URL"
+msgstr "无效的订阅URL。"
 
 #: includes/controller/Admin.php:1848
 msgid "Markdown is disabled because multibyte string support is not available."
@@ -764,30 +700,23 @@ msgstr "Markdown语法被禁用因为多字节字符串不可用。"
 msgid ""
 "Clean URLs are disabled because the <em>.htaccess</em> file cannot be "
 "configured."
-msgstr "清洁URL被禁用因为<em>.htaccess</em>文件未配置"
+msgstr "清洁URL被禁用因为<em>.htaccess</em>文件未配置。"
 
 #: includes/controller/Admin.php:1950
-#, fuzzy
 msgid "My Awesome Homepage"
-msgstr "主页"
+msgstr "我最棒的主页"
 
 #: includes/controller/Admin.php:1951
-#, fuzzy
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 
 #: includes/controller/Admin.php:1958
-#, fuzzy
 msgid "Page created."
-msgstr ""
-"slug是这个帖子或页面的URL友好标识名称。 您可以自己输入slug或在创建帖子或页面"
-"时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。（注：这"
-"是用于SEO优化）"
+msgstr "页面已创建。"
 
 #: includes/controller/Admin.php:1980 includes/controller/Main.php:608
-#, fuzzy
 msgid "You are already logged in."
-msgstr "确定继续？"
+msgstr "你已登陆。"
 
 #: includes/controller/Admin.php:2000 includes/controller/Ajax.php:32
 #: includes/download.php:15 includes/thumb.php:18
@@ -795,12 +724,10 @@ msgid "Missing argument."
 msgstr "缺少参数。"
 
 #: includes/controller/Admin.php:2004
-#, fuzzy
 msgid "Help"
 msgstr "帮助"
 
 #: includes/controller/Admin.php:2017
-#, fuzzy
 msgid "Write"
 msgstr "写作"
 
@@ -809,56 +736,46 @@ msgid "Manage"
 msgstr "管理所有"
 
 #: includes/controller/Admin.php:2019
-#, fuzzy
 msgid "Settings"
-msgstr "用户设置"
+msgstr "设置"
 
 #: includes/controller/Admin.php:2020
 msgid "Extend"
 msgstr "扩展"
 
 #: includes/controller/Admin.php:2030
-#, fuzzy
 msgid "Page"
-msgstr "每个博客页面的文章"
+msgstr "页面"
 
 #: includes/controller/Admin.php:2057
-#, fuzzy
 msgid "Posts"
 msgstr "所有文章"
 
 #: includes/controller/Admin.php:2061
-#, fuzzy
 msgid "Pages"
 msgstr "所有页面"
 
 #: includes/controller/Admin.php:2065 includes/controller/Admin.php:2093
-#, fuzzy
 msgid "Users"
 msgstr "所有用户"
 
 #: includes/controller/Admin.php:2069
-#, fuzzy
 msgid "Groups"
 msgstr "所有组"
 
 #: includes/controller/Admin.php:2075
-#, fuzzy
 msgid "Import"
 msgstr "导入"
 
 #: includes/controller/Admin.php:2078
-#, fuzzy
 msgid "Export"
 msgstr "导出"
 
 #: includes/controller/Admin.php:2091
-#, fuzzy
 msgid "General"
 msgstr "通常设置"
 
 #: includes/controller/Admin.php:2092
-#, fuzzy
 msgid "Content"
 msgstr "内容设置"
 
@@ -867,28 +784,24 @@ msgid "Routes"
 msgstr "路由"
 
 #: includes/controller/Admin.php:2110
-#, fuzzy
 msgid "Modules"
 msgstr "模块"
 
 #: includes/controller/Admin.php:2111
-#, fuzzy
 msgid "Feathers"
 msgstr "羽毛"
 
 #: includes/controller/Admin.php:2112
-#, fuzzy
 msgid "Themes"
 msgstr "主题"
 
 #: includes/controller/Ajax.php:116 includes/controller/Ajax.php:147
-#, fuzzy
 msgid "Preview"
 msgstr "预览"
 
 #: includes/controller/Main.php:237 includes/controller/Main.php:245
 #: includes/controller/Main.php:253
-#, fuzzy, php-format
+#, php-format
 msgid "Archive of %s"
 msgstr "%s的档案"
 
@@ -897,7 +810,7 @@ msgid "Please enter a search term."
 msgstr "请输入搜索项。"
 
 #: includes/controller/Main.php:329
-#, fuzzy, php-format
+#, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的搜索结果"
 
@@ -906,7 +819,6 @@ msgid "You do not have sufficient privileges to view drafts."
 msgstr "你没有足够的权限查看草稿。"
 
 #: includes/controller/Main.php:349
-#, fuzzy
 msgid "Drafts"
 msgstr "草稿"
 
@@ -915,9 +827,8 @@ msgid "The post cannot be displayed because the theme does not support it."
 msgstr "这篇文章无法显示，因为主题不支持。"
 
 #: includes/controller/Main.php:372
-#, fuzzy
 msgid "This post is not published."
-msgstr "文章查看链接"
+msgstr "文章没有被发布。"
 
 #: includes/controller/Main.php:375
 #, php-format
@@ -933,9 +844,8 @@ msgid "There aren't enough posts for random selection."
 msgstr "没有足够的文章来随机选择。"
 
 #: includes/controller/Main.php:479
-#, fuzzy
 msgid "This site does not allow registration."
-msgstr "允许发送电子邮件通讯给用户？"
+msgstr "站点不允许注册。"
 
 #: includes/controller/Main.php:482
 msgid "You cannot register an account because you are already logged in."
@@ -944,7 +854,7 @@ msgstr "你不能注册账户，因为你已登陆。"
 #: includes/controller/Main.php:489 includes/controller/Main.php:494
 #: install.php:463
 msgid "Please enter a username for your account."
-msgstr "请输入账户的用户名"
+msgstr "请输入账户的用户名。"
 
 #: includes/controller/Main.php:506 includes/controller/Main.php:675
 msgid "Please consider setting a stronger password for your account."
@@ -952,7 +862,7 @@ msgstr "请考虑为你的账户设置个更强大的密码。"
 
 #: includes/controller/Main.php:514
 msgid "Incorrect captcha response."
-msgstr "错误的验证码"
+msgstr "错误的验证码。"
 
 #: includes/controller/Main.php:541
 msgid "We have emailed you an activation link."
@@ -963,73 +873,67 @@ msgid "Your account is now active."
 msgstr "你的账户现已激活。"
 
 #: includes/controller/Main.php:550
-#, fuzzy
 msgid "Register"
 msgstr "注册"
 
 #: includes/controller/Main.php:559
 msgid "You cannot activate an account because you are already logged in."
-msgstr ""
+msgstr "你不能激活账户，因为你已登陆。"
 
 #: includes/controller/Main.php:564 includes/controller/Main.php:587
 #: includes/controller/Main.php:720
 msgid "Please contact the blog administrator for help with your account."
-msgstr ""
+msgstr "请联系博客管理员以获取有关您帐户的帮助。"
 
 #: includes/controller/Main.php:567
 msgid "Your account has already been activated."
-msgstr ""
+msgstr "你的账户已经被激活过。"
 
 #: includes/controller/Main.php:582 includes/controller/Main.php:717
 msgid "You cannot reset your password because you are already logged in."
-msgstr ""
+msgstr "你不能重设密码，因为你已登陆。"
 
 #: includes/controller/Main.php:597
 msgid "We have emailed you a new password."
-msgstr ""
+msgstr "我们已经通过电子邮件发送给你新密码。"
 
 #: includes/controller/Main.php:621 includes/lib/XMLRPC.php:422
-#, fuzzy
 msgid "Incorrect username and/or password."
-msgstr "密码"
+msgstr "不正确的用户名或者密码。"
 
 #: includes/controller/Main.php:627
 msgid "You must activate your account before you log in."
-msgstr ""
+msgstr "在登陆前必须激活你的账户。"
 
 #: includes/controller/Main.php:634
 msgid "Logged in."
-msgstr ""
+msgstr "已登陆。"
 
 #: includes/controller/Main.php:638
-#, fuzzy
 msgid "Log In"
 msgstr "登陆"
 
 #: includes/controller/Main.php:647
 msgid "You aren't logged in."
-msgstr ""
+msgstr "你没有登陆。"
 
 #: includes/controller/Main.php:653
-#, fuzzy
 msgid "Logged out."
-msgstr "退出登陆"
+msgstr "退出登陆。"
 
 #: includes/controller/Main.php:665
 msgid "You must be logged in to access user controls."
-msgstr ""
+msgstr "你必须登陆才能访问用户操作。"
 
 #: includes/controller/Main.php:702
 msgid "Your profile has been updated."
-msgstr ""
+msgstr "你的配置文件已经更新。"
 
 #: includes/controller/Main.php:706
-#, fuzzy
 msgid "Controls"
 msgstr "操作"
 
 #: includes/controller/Main.php:727
-#, fuzzy
 msgid "Please enter your username."
 msgstr "请在下面输入你的用户名，我们会通过电子邮件向你发送新帐户的密码。"
 
@@ -1037,635 +941,578 @@ msgstr "请在下面输入你的用户名，我们会通过电子邮件向你发
 msgid ""
 "If that username is in our database, we will email you a password reset link."
 msgstr ""
+"如果你的用户名在我们的数据中，我们将会用电子邮件发送重置密码的链接给你。"
 
 #: includes/controller/Main.php:743
-#, fuzzy
 msgid "Lost Password"
 msgstr "忘记密码"
 
 #: includes/download.php:12 includes/thumb.php:15
 msgid "This resource accepts GET requests only."
-msgstr ""
+msgstr "资源只能被GET请求。"
 
 #: includes/download.php:24 includes/thumb.php:44
-#, fuzzy
 msgid "File not found."
-msgstr "未找到."
+msgstr "未找到。"
 
 #: includes/error.php:145
 msgid "An unspecified error has occurred."
-msgstr ""
+msgstr "发生未指定错误。"
 
 #: includes/error.php:338
 msgid "Backtrace"
-msgstr ""
+msgstr "回溯"
 
 #: includes/error.php:341
-#, fuzzy, php-format
+#, php-format
 msgid "%s on line %d"
-msgstr "调用 %s 在行 %d 在 %s 秒."
+msgstr " %s 在行 %d"
 
 #: includes/error.php:346
-#, fuzzy
 msgid "Log in"
 msgstr "登陆"
 
 #: includes/helpers.php:92
-#, fuzzy
 msgid "Forbidden"
-msgstr "被禁止."
+msgstr "被禁止"
 
 #: includes/helpers.php:93
 msgid "You do not have permission to access this resource."
-msgstr ""
+msgstr "你没有权限访问这个资源。"
 
 #: includes/helpers.php:117
-#, fuzzy
 msgid "The requested resource was not found."
-msgstr "未找到."
+msgstr "请求的资源未找到。"
 
 #: includes/helpers.php:1429
 msgid "Please create the uploads directory."
-msgstr ""
+msgstr "请创建上传目录。"
 
 #: includes/helpers.php:1431
 msgid "Please make the uploads directory writable."
-msgstr ""
+msgstr "请确保上传目录科协。"
 
 #: includes/helpers.php:1449
-#, fuzzy, php-format
+#, php-format
 msgid "%s module is missing."
-msgstr "%s:"
+msgstr "找不到模块 %s 。"
 
 #: includes/helpers.php:1458
-#, fuzzy, php-format
+#, php-format
 msgid "%s module is damaged."
-msgstr "%s:"
+msgstr "模块 %s 破损。"
 
 #: includes/helpers.php:1472
-#, fuzzy, php-format
+#, php-format
 msgid "%s feather is missing."
-msgstr "文章的羽毛"
+msgstr "找不到羽毛 %s 。"
 
 #: includes/helpers.php:1481
-#, fuzzy, php-format
+#, php-format
 msgid "%s feather is damaged."
-msgstr "文章的羽毛"
+msgstr "羽毛 %s 破损。"
 
 #: includes/helpers.php:1541 includes/helpers.php:1562
 #, php-format
 msgid "Execution of %s has been cancelled."
-msgstr ""
+msgstr "执行 %s 已被取消。"
 
 #: includes/helpers.php:1590
 msgid "Uploaded file is of an unsupported type."
-msgstr ""
+msgstr "上传的文件是不支持的类型。"
 
 #: includes/helpers.php:1593
 msgid "Only uploaded files are accepted."
-msgstr ""
+msgstr "只有上传的文件被接受。"
 
 #: includes/helpers.php:1596 includes/helpers.php:1628
 #: includes/lib/XMLRPC.php:195
 msgid "Upload path does not exist."
-msgstr ""
+msgstr "上传路径不存在。"
 
 #: includes/helpers.php:1599 includes/helpers.php:1631
 #: includes/lib/XMLRPC.php:198
-#, fuzzy
 msgid "Upload path is not writable."
-msgstr "上传大小限制"
+msgstr "上传路径不可写。"
 
 #: includes/helpers.php:1602 includes/helpers.php:1634
 #: includes/helpers.php:1709 includes/lib/XMLRPC.php:201
 msgid "Failed to write file to disk."
-msgstr ""
+msgstr "写入文件到磁盘失败。"
 
 #: includes/helpers.php:1697
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
-msgstr ""
+msgstr "上传的文件超过 php.ini 中<code>upload_max_filesize</code>的大小。"
 
 #: includes/helpers.php:1700
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
-msgstr ""
+msgstr "上传的文件超过 php.ini 中<code>MAX_FILE_SIZE</code>的大小。"
 
 #: includes/helpers.php:1703
 msgid "The uploaded file was only partially uploaded."
-msgstr ""
+msgstr "上传文件仅部分上传。"
 
 #: includes/helpers.php:1706
 msgid "Missing a temporary folder."
-msgstr ""
+msgstr "缺少临时文件夹。"
 
 #: includes/helpers.php:1712
 msgid "File upload was stopped by a PHP extension."
-msgstr ""
+msgstr "文件上传已被PHP扩展停止。"
 
 #: includes/helpers.php:1715
 #, php-format
 msgid "File upload failed with error %d."
-msgstr ""
+msgstr "上传文件失败，错误：%d."
 
 #: includes/helpers.php:1720
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
 "site."
-msgstr ""
+msgstr "上传的文件超过本站点允许的 %d M。"
 
 #: includes/helpers.php:1936
 #, php-format
 msgid "JSON encoding error: %s"
-msgstr ""
+msgstr "JSON编码错误：%s"
 
 #: includes/helpers.php:1957
 #, php-format
 msgid "JSON decoding error: %s"
-msgstr ""
+msgstr "JSON解码错误：%s"
 
 #: includes/helpers.php:2030
 #, php-format
 msgid "Activate your account at %s"
-msgstr ""
+msgstr "在 %s 上激活你的账户"
 
 #: includes/helpers.php:2031 includes/helpers.php:2041
 #: includes/helpers.php:2051
-#, fuzzy, php-format
+#, php-format
 msgid "Hello, %s."
-msgstr "&copy; %s, %s."
+msgstr "你好，%s."
 
 #: includes/helpers.php:2033
 msgid "You are receiving this message because you registered a new account."
-msgstr ""
+msgstr "你收到此邮件因为你已经注册了新账户。"
 
 #: includes/helpers.php:2035
 msgid "Visit this link to activate your account:"
-msgstr ""
+msgstr "访问这个链接激活你的账户："
 
 #: includes/helpers.php:2040
 #, php-format
 msgid "Reset your password at %s"
-msgstr ""
+msgstr "在 %s上重置你的密码"
 
 #: includes/helpers.php:2043
 msgid "You are receiving this message because you requested a new password."
-msgstr ""
+msgstr "您收到此消息是因为您请求了新密码。"
 
 #: includes/helpers.php:2045
 msgid "Visit this link to reset your password:"
-msgstr ""
+msgstr "访问这个链接重置你的密码："
 
 #: includes/helpers.php:2050
-#, fuzzy, php-format
+#, php-format
 msgid "Your new password for %s"
-msgstr "新密码"
+msgstr "你的新密码为 %s"
 
 #: includes/helpers.php:2053
-#, fuzzy, php-format
+#, php-format
 msgid "Your new password is: %s"
-msgstr "新密码"
+msgstr "你的新密码: %s"
 
 #: includes/javascript.php:34
-#, fuzzy
 msgid "Are you sure you want to delete this post?"
-msgstr "确定继续？"
+msgstr "你确定你想删除这篇文章？"
 
 #: includes/javascript.php:46
 msgid ""
 "The post cannot be deleted because your web browser did not send proper "
 "credentials."
-msgstr ""
+msgstr "该文章无法被删除，因为你的浏览器没有发送正确的凭证。"
 
 #: includes/javascript.php:64 includes/javascript.php:105
 msgid "Oops! Something went wrong on this web page."
-msgstr ""
+msgstr "哎呀！这个网页出了点问题。"
 
 #: includes/javascript.php:77
 msgid "Are you sure you want to delete this page and its child pages?"
-msgstr ""
+msgstr "你确定你想要删除这个页面以及它的子页面？"
 
 #: includes/javascript.php:89
 msgid ""
 "The page cannot be deleted because your web browser did not send proper "
 "credentials."
-msgstr ""
+msgstr "该页面无法被删除，因为你的浏览器没有发送正确的凭证。"
 
 #: includes/lib/AtomFeed.php:84 includes/lib/JSONFeed.php:83
-#, fuzzy
 msgid "Guest"
-msgstr "新 &#8220;guest&#8221; 组："
+msgstr "访问者"
 
 #: includes/lib/Leaf.php:264
-#, fuzzy, php-format
+#, php-format
 msgid "%s GB"
-msgstr "%s:"
+msgstr "%s GB"
 
 #: includes/lib/Leaf.php:269
-#, fuzzy, php-format
+#, php-format
 msgid "%s MB"
-msgstr "%s:"
+msgstr "%s MB"
 
 #: includes/lib/Leaf.php:273
-#, fuzzy, php-format
+#, php-format
 msgid "%s KB"
-msgstr "%s:"
+msgstr "%s KB"
 
 #: includes/lib/XMLRPC.php:49
 msgid "Pingback support is disabled for this site."
-msgstr ""
+msgstr "此站点禁用Pingback支持。"
 
 #: includes/lib/XMLRPC.php:52
 msgid "The from and to URLs cannot be the same."
-msgstr ""
+msgstr "from和to的URL不能相同。"
 
 #: includes/lib/XMLRPC.php:55
 msgid "The URL for our page is not valid."
-msgstr ""
+msgstr "我们的页面链接无效。"
 
 #: includes/lib/XMLRPC.php:58
 msgid "The URL for your page is not valid."
-msgstr ""
+msgstr "你的页面链接无效。"
 
 #: includes/lib/XMLRPC.php:66
 msgid "We have not published at that URL."
-msgstr ""
+msgstr "我们没有公开这个链接。"
 
 #: includes/lib/XMLRPC.php:72
-#, fuzzy
 msgid "You have not published at that URL."
-msgstr "你没有任何草稿"
+msgstr "你尚未在该链接上公开。"
 
 #: includes/lib/XMLRPC.php:80
 msgid "Your page could not be parsed."
-msgstr ""
+msgstr "你的页面不能被解析。"
 
 #: includes/lib/XMLRPC.php:101
 msgid "Your page does not link to our page."
-msgstr ""
+msgstr "你的页面没有链接到我们的页面。"
 
 #: includes/lib/XMLRPC.php:419
-#, fuzzy
 msgid "XML-RPC support is disabled for this site."
-msgstr "XML-RPC支持"
+msgstr "这个站点禁用XML-RPC支持。"
 
 #: includes/model/Group.php:249
-#, fuzzy
 msgid "Change Settings"
-msgstr "内容设置"
+msgstr "改变设置"
 
 #: includes/model/Group.php:250
-#, fuzzy
 msgid "Toggle Extensions"
-msgstr "全部切换"
+msgstr "切换扩展"
 
 #: includes/model/Group.php:251
-#, fuzzy
 msgid "View Site"
-msgstr "文章查看链接"
+msgstr "查看站点"
 
 #: includes/model/Group.php:252
-#, fuzzy
 msgid "View Private Posts"
-msgstr "隐藏"
+msgstr "查看私人文章"
 
 #: includes/model/Group.php:253
-#, fuzzy
 msgid "View Scheduled Posts"
-msgstr "定时发布"
+msgstr "查看定时发布的文章"
 
 #: includes/model/Group.php:254
-#, fuzzy
 msgid "View Drafts"
-msgstr "草稿"
+msgstr "查看草稿"
 
 #: includes/model/Group.php:255
-#, fuzzy
 msgid "View Own Drafts"
-msgstr "草稿"
+msgstr "查看自己的草稿"
 
 #: includes/model/Group.php:256
-#, fuzzy
 msgid "Add Posts"
-msgstr "增加组"
+msgstr "增加文章"
 
 #: includes/model/Group.php:257
-#, fuzzy
 msgid "Add Drafts"
-msgstr "草稿"
+msgstr "增加草稿"
 
 #: includes/model/Group.php:258
-#, fuzzy
 msgid "Edit Posts"
-msgstr "所有文章"
+msgstr "编辑文章"
 
 #: includes/model/Group.php:259
-#, fuzzy
 msgid "Edit Drafts"
-msgstr "草稿"
+msgstr "编辑草稿"
 
 #: includes/model/Group.php:260
-#, fuzzy
 msgid "Edit Own Posts"
-msgstr "所有文章"
+msgstr "编辑自己的文章"
 
 #: includes/model/Group.php:261
-#, fuzzy
 msgid "Edit Own Drafts"
-msgstr "草稿"
+msgstr "编辑自己的草稿"
 
 #: includes/model/Group.php:262
-#, fuzzy
 msgid "Delete Posts"
-msgstr "[删除文章]"
+msgstr "删除文章"
 
 #: includes/model/Group.php:263
-#, fuzzy
 msgid "Delete Drafts"
-msgstr "草稿"
+msgstr "删除草稿"
 
 #: includes/model/Group.php:264
-#, fuzzy
 msgid "Delete Own Posts"
-msgstr "[删除文章]"
+msgstr "删除自己的文章"
 
 #: includes/model/Group.php:265
-#, fuzzy
 msgid "Delete Own Drafts"
-msgstr "草稿"
+msgstr "删除自己的草稿"
 
 #: includes/model/Group.php:266
-#, fuzzy
 msgid "View Pages"
-msgstr "所有页面"
+msgstr "查看页面"
 
 #: includes/model/Group.php:267
-#, fuzzy
 msgid "Add Pages"
-msgstr "增加组"
+msgstr "增加页面"
 
 #: includes/model/Group.php:268
-#, fuzzy
 msgid "Edit Pages"
-msgstr "编辑组"
+msgstr "编辑页面"
 
 #: includes/model/Group.php:269
-#, fuzzy
 msgid "Delete Pages"
-msgstr "[删除页面]"
+msgstr "删除页面"
 
 #: includes/model/Group.php:270
-#, fuzzy
 msgid "Add Users"
-msgstr "增加组"
+msgstr "增加用户"
 
 #: includes/model/Group.php:271
-#, fuzzy
 msgid "Edit Users"
-msgstr "编辑组"
+msgstr "编辑用户"
 
 #: includes/model/Group.php:272
-#, fuzzy
 msgid "Delete Users"
-msgstr "删除！"
+msgstr "删除用户"
 
 #: includes/model/Group.php:273
-#, fuzzy
 msgid "Add Groups"
-msgstr "所有组"
+msgstr "增加组"
 
 #: includes/model/Group.php:274
-#, fuzzy
 msgid "Edit Groups"
-msgstr "所有组"
+msgstr "编辑组"
 
 #: includes/model/Group.php:275
-#, fuzzy
 msgid "Delete Groups"
-msgstr "所有组"
+msgstr "删除组"
 
 #: includes/model/Group.php:276
-#, fuzzy
 msgid "Export Content"
-msgstr "导出"
+msgstr "导出内容"
 
 #: includes/thumb.php:47
 msgid "Maximum size cannot be zero."
-msgstr ""
+msgstr "最大尺寸不能为0."
 
 #: includes/thumb.php:202
 msgid "Failed to create image thumbnail."
-msgstr ""
+msgstr "无法创建图片缩略图。"
 
 #: install.php:90
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
-msgstr ""
+msgstr "请对安装目录使用CHMOD 或者 CHOWN 确保其可写。"
 
 #: install.php:94
 msgid ""
 "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
-msgstr ""
+msgstr "请对<em>includes</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 
 #: install.php:98
 msgid ""
 "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
-msgstr ""
+msgstr "请对<em>caches</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 
 #: install.php:144
-#, fuzzy
 msgid "Chyrp Lite Installer"
-msgstr "这是Chyrp Lite默认提供的主题。"
+msgstr "Chyrp Lite安装程序"
 
 #: install.php:454
 msgid "Database cannot be blank."
-msgstr ""
+msgstr "数据库不能为空。"
 
 #: install.php:457
 msgid "Please enter a name for your website."
-msgstr ""
+msgstr "请输入你站点的名字。"
 
 #: install.php:460
-#, fuzzy
 msgid "Time zone cannot be blank."
-msgstr "时区"
+msgstr "时区不能为空。"
 
 #: install.php:476
 msgid "MySQLi or PDO is required for database access."
-msgstr ""
+msgstr "MySQLi 或者 PDO 是访问数据库所必须的。"
 
 #: install.php:482
 msgid "Could not determine the absolute path to the SQLite database."
-msgstr ""
+msgstr "无法确定SQLite数据库的绝对路径。"
 
 #: install.php:489
 msgid "Please make the SQLite database writable by the server."
-msgstr ""
+msgstr "请确保你的SQLite数据库在这个服务器上可写。"
 
 #: install.php:493
 msgid "Please enter a username and password for the MySQL database."
-msgstr ""
+msgstr "请输入MySQL数据的用户名和密码。"
 
 #: install.php:708 upgrade.php:85 upgrade.php:98 upgrade.php:111
 #: upgrade.php:124 upgrade.php:137 upgrade.php:151 upgrade.php:177
 #: upgrade.php:190 upgrade.php:204
 msgid "Could not write the configuration file."
-msgstr ""
+msgstr "不能写入配置文件。"
 
 #: install.php:725
 msgid "Database Setup"
-msgstr ""
+msgstr "数据库设置"
 
 #: install.php:727
 msgid "Adapter"
-msgstr ""
+msgstr "适配器"
 
 #: install.php:738
 msgid "Host"
-msgstr ""
+msgstr "主机"
 
 #: install.php:742 install.php:788
-#, fuzzy
 msgid "Username"
 msgstr "用户名"
 
 #: install.php:746 install.php:792 install.php:796
-#, fuzzy
 msgid "Password"
 msgstr "密码"
 
 #: install.php:750
-#, fuzzy
 msgid "Database"
-msgstr ""
-"使用符号 <code>keyword:value;</code> 来快速匹配指定结果，当 <code>keyword</"
-"code> 等于 <code>value</code>. 关键字可以是数据库列的名称, 像是作者或组的名"
-"称，日期时间等。 例如： <code>author:Foo;year:2016;</code> 将过滤posts表，仅"
-"显示2016年由Foo创建的帖子。"
+msgstr "数据库"
 
 #: install.php:752
-#, fuzzy
 msgid "(absolute or relative path)"
-msgstr "上传路径"
+msgstr "（相对或者绝对路径）"
 
 #: install.php:758
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
-msgstr ""
+msgstr "请务必将您的SQLite数据库放在网站根目录之外，否则访问者将能够下载它。"
 
 #: install.php:761
 msgid "Table Prefix"
-msgstr ""
+msgstr "表前缀"
 
 #: install.php:761
-#, fuzzy
 msgid "(optional)"
 msgstr "(可选)"
 
 #: install.php:765
-#, fuzzy
 msgid "Website Setup"
-msgstr "网站"
+msgstr "网站设置"
 
 #: install.php:767
-#, fuzzy
 msgid "Site Name"
 msgstr "站点名"
 
 #: install.php:768
-#, fuzzy
 msgid "My Awesome Site"
-msgstr "站点名"
+msgstr "我最棒的站点"
 
 #: install.php:771
-#, fuzzy
 msgid "Description"
 msgstr "描述"
 
 #: install.php:775
-#, fuzzy
 msgid "Time Zone"
 msgstr "时区"
 
 #: install.php:786
-#, fuzzy
 msgid "Admin Account"
-msgstr "管理"
+msgstr "管理员账号"
 
 #: install.php:796
-#, fuzzy
 msgid "(again)"
-msgstr "(再一次)"
+msgstr "(重试)"
 
 #: install.php:800
-#, fuzzy
 msgid "Email Address"
 msgstr "联系的邮件地址"
 
 #: install.php:803
 msgid "Install me!"
-msgstr ""
+msgstr "安装！"
 
 #: install.php:806
 msgid "Installation Complete"
-msgstr ""
+msgstr "安装完成"
 
 #: install.php:807 upgrade.php:456
 msgid "What now?"
-msgstr ""
+msgstr "现在做什么？"
 
 #: install.php:809
 msgid "Delete <em>install.php</em>, you won't need it anymore."
-msgstr ""
+msgstr "删除 <em>install.php</em>，你不再需要它。"
 
 #: install.php:810
 msgid "Log in to your site and configure things to your liking."
-msgstr ""
+msgstr "登陆你的站点并且配置你喜欢的东西。"
 
 #: install.php:812 upgrade.php:462
 msgid "Take me to my site!"
-msgstr ""
+msgstr "前往我的站点！"
 
 #: upgrade.php:215
-#, fuzzy
 msgid "Chyrp Lite Upgrader"
-msgstr "这是Chyrp Lite默认提供的主题。"
+msgstr "Chyrp Lite升级程序"
 
 #: upgrade.php:445
 msgid "Halt!"
-msgstr ""
+msgstr "等一下！"
 
 #: upgrade.php:446
 msgid "Please take these precautionary measures before you upgrade:"
-msgstr ""
+msgstr "升级前请采取以下预防措施："
 
 #: upgrade.php:448
 msgid "<strong>Backup your database before proceeding!</strong>"
-msgstr ""
+msgstr "<strong>开始前备份你的数据库！</strong>"
 
 #: upgrade.php:449
 msgid "Tell your users that your site is offline for maintenance."
-msgstr ""
+msgstr "告知你的用户站点处于离线状态以进行维护。"
 
 #: upgrade.php:452
 msgid "Upgrade me!"
-msgstr ""
+msgstr "升级！"
 
 #: upgrade.php:455
 msgid "Upgrade Complete"
-msgstr ""
+msgstr "升级完成"
 
 #: upgrade.php:458
 msgid "Take action to resolve any errors reported on this page."
-msgstr ""
+msgstr "采取措施解决此页面上报告的任何错误。"
 
 #: upgrade.php:459
 msgid "Run this upgrader again if you need to."
-msgstr ""
+msgstr "如果需要，再次运行此升级程序。"
 
 #: upgrade.php:460
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
-msgstr ""
+msgstr "删除 <em>upgrade.php</em> 一旦你升级完成后。"
