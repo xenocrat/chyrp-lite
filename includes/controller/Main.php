@@ -85,13 +85,9 @@
         public function parse($route) {
             $config = Config::current();
 
-            # If the visitor is at / and that's not a custom route, serve the blog index.
-            if (empty($route->arg[0]) and !isset($config->routes["/"]))
-                return $route->action = "index";
-
-            # If the first argument is a query and action is unset, serve the blog index.
-            if (empty($route->action) and strpos($route->arg[0], "?") === 0)
-                return $route->action = "index";
+            # If the visitor is at / or the first arg is a query and action is unset, serve the / route.
+            if (empty($route->arg[0]) or (empty($route->action) and strpos($route->arg[0], "?") === 0))
+                return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
 
             # Discover feed requests.
             if (preg_match("/\/feed\/?$/", $route->request))
@@ -118,12 +114,16 @@
             # Archive.
             if ($route->arg[0] == "archive") {
                 # Make sure they're numeric; could be a "/page/" in there.
-                if (isset($route->arg[1]) and is_numeric($route->arg[1]))
+                if (isset($route->arg[1]) and is_numeric($route->arg[1])) {
                     $_GET['year'] = $route->arg[1];
-                if (isset($route->arg[2]) and is_numeric($route->arg[2]))
-                    $_GET['month'] = $route->arg[2];
-                if (isset($route->arg[3]) and is_numeric($route->arg[3]))
-                    $_GET['day'] = $route->arg[3];
+
+                    if (isset($route->arg[2]) and is_numeric($route->arg[2])) {
+                        $_GET['month'] = $route->arg[2];
+
+                        if (isset($route->arg[3]) and is_numeric($route->arg[3]))
+                            $_GET['day'] = $route->arg[3];
+                    }
+                }
 
                 return $route->action = "archive";
             }
@@ -155,12 +155,12 @@
                     $path = trim($path, "/");
 
                 $escape = preg_quote($path, "/");
-                $to_regexp = preg_replace("/\\\\\(([^\)]+)\\\\\)/", "([^\/]+)", $escape);
+                $regexp = preg_replace("/\\\\\(([^\)]+)\\\\\)/", "([^\/]+)", $escape);
 
                 if ($path == "/")
-                    $to_regexp = "\$";
+                    $regexp = "\$";
 
-                if (preg_match("/^\/{$to_regexp}/", $route->request, $url_matches)) {
+                if (preg_match("/^\/{$regexp}/", $route->request, $url_matches)) {
                     array_shift($url_matches);
 
                     if (isset($matches[1]))
