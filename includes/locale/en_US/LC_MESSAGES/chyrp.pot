@@ -45,7 +45,7 @@ msgstr ""
 #: includes/class/Query.php:203
 #: includes/class/SQL.php:96
 #: includes/class/SQL.php:107
-#: install.php:516
+#: install.php:529
 #, php-format
 msgid "Database error: %s"
 msgstr ""
@@ -100,26 +100,26 @@ msgstr ""
 #: includes/download.php:12
 #: includes/download.php:15
 #: includes/error.php:144
+#: includes/helpers.php:1584
 #: includes/helpers.php:1590
+#: includes/helpers.php:1593
 #: includes/helpers.php:1596
-#: includes/helpers.php:1599
-#: includes/helpers.php:1602
+#: includes/helpers.php:1622
+#: includes/helpers.php:1625
 #: includes/helpers.php:1628
-#: includes/helpers.php:1631
-#: includes/helpers.php:1634
+#: includes/helpers.php:1690
+#: includes/helpers.php:1693
 #: includes/helpers.php:1696
 #: includes/helpers.php:1699
 #: includes/helpers.php:1702
 #: includes/helpers.php:1705
 #: includes/helpers.php:1708
-#: includes/helpers.php:1711
-#: includes/helpers.php:1714
-#: includes/helpers.php:1719
+#: includes/helpers.php:1713
 #: includes/thumb.php:15
 #: includes/thumb.php:18
 #: includes/thumb.php:47
 #: includes/thumb.php:202
-#: install.php:708
+#: install.php:723
 #: upgrade.php:85
 #: upgrade.php:98
 #: upgrade.php:111
@@ -216,7 +216,7 @@ msgstr ""
 #: includes/controller/Main.php:340
 #: includes/controller/Main.php:404
 #: includes/download.php:18
-#: includes/helpers.php:1593
+#: includes/helpers.php:1587
 #: includes/thumb.php:21
 msgid "Access Denied"
 msgstr ""
@@ -518,7 +518,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:600
 #: includes/controller/Main.php:502
-#: install.php:466
+#: install.php:479
 msgid "Passwords cannot be blank."
 msgstr ""
 
@@ -526,8 +526,8 @@ msgstr ""
 #: includes/controller/Admin.php:709
 #: includes/controller/Main.php:504
 #: includes/controller/Main.php:673
-#: install.php:431
-#: install.php:468
+#: install.php:432
+#: install.php:481
 msgid "Passwords do not match."
 msgstr ""
 
@@ -541,7 +541,7 @@ msgstr ""
 #: includes/controller/Admin.php:1785
 #: includes/controller/Main.php:509
 #: includes/controller/Main.php:678
-#: install.php:471
+#: install.php:484
 msgid "Email address cannot be blank."
 msgstr ""
 
@@ -550,7 +550,7 @@ msgstr ""
 #: includes/controller/Admin.php:1788
 #: includes/controller/Main.php:511
 #: includes/controller/Main.php:680
-#: install.php:473
+#: install.php:486
 msgid "Invalid email address."
 msgstr ""
 
@@ -852,10 +852,12 @@ msgid "Preview started."
 msgstr ""
 
 #: includes/controller/Admin.php:1791
+#: install.php:465
 msgid "Chyrp URL cannot be blank."
 msgstr ""
 
 #: includes/controller/Admin.php:1794
+#: install.php:467
 msgid "Invalid Chyrp URL."
 msgstr ""
 
@@ -1039,7 +1041,7 @@ msgstr ""
 
 #: includes/controller/Main.php:489
 #: includes/controller/Main.php:494
-#: install.php:463
+#: install.php:476
 msgid "Please enter a username for your account."
 msgstr ""
 
@@ -1173,146 +1175,146 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr ""
 
-#: includes/helpers.php:1429
+#: includes/helpers.php:1423
 msgid "Please create the uploads directory."
 msgstr ""
 
-#: includes/helpers.php:1431
+#: includes/helpers.php:1425
 msgid "Please make the uploads directory writable."
 msgstr ""
 
-#: includes/helpers.php:1449
+#: includes/helpers.php:1443
 #, php-format
 msgid "%s module is missing."
 msgstr ""
 
-#: includes/helpers.php:1458
+#: includes/helpers.php:1452
 #, php-format
 msgid "%s module is damaged."
 msgstr ""
 
-#: includes/helpers.php:1472
+#: includes/helpers.php:1466
 #, php-format
 msgid "%s feather is missing."
 msgstr ""
 
-#: includes/helpers.php:1481
+#: includes/helpers.php:1475
 #, php-format
 msgid "%s feather is damaged."
 msgstr ""
 
-#: includes/helpers.php:1541
-#: includes/helpers.php:1562
+#: includes/helpers.php:1535
+#: includes/helpers.php:1556
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr ""
 
-#: includes/helpers.php:1590
+#: includes/helpers.php:1584
 msgid "Uploaded file is of an unsupported type."
 msgstr ""
 
-#: includes/helpers.php:1593
+#: includes/helpers.php:1587
 msgid "Only uploaded files are accepted."
 msgstr ""
 
-#: includes/helpers.php:1596
-#: includes/helpers.php:1628
+#: includes/helpers.php:1590
+#: includes/helpers.php:1622
 #: includes/lib/XMLRPC.php:195
 msgid "Upload path does not exist."
 msgstr ""
 
-#: includes/helpers.php:1599
-#: includes/helpers.php:1631
+#: includes/helpers.php:1593
+#: includes/helpers.php:1625
 #: includes/lib/XMLRPC.php:198
 msgid "Upload path is not writable."
 msgstr ""
 
-#: includes/helpers.php:1602
-#: includes/helpers.php:1634
-#: includes/helpers.php:1709
+#: includes/helpers.php:1596
+#: includes/helpers.php:1628
+#: includes/helpers.php:1703
 #: includes/lib/XMLRPC.php:201
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1697
+#: includes/helpers.php:1691
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:1700
+#: includes/helpers.php:1694
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:1703
+#: includes/helpers.php:1697
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:1706
+#: includes/helpers.php:1700
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:1712
+#: includes/helpers.php:1706
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:1715
+#: includes/helpers.php:1709
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:1720
+#: includes/helpers.php:1714
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:1936
+#: includes/helpers.php:1930
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:1957
+#: includes/helpers.php:1951
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2030
+#: includes/helpers.php:2024
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:2031
-#: includes/helpers.php:2041
-#: includes/helpers.php:2051
+#: includes/helpers.php:2025
+#: includes/helpers.php:2035
+#: includes/helpers.php:2045
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:2033
+#: includes/helpers.php:2027
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:2035
+#: includes/helpers.php:2029
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2040
+#: includes/helpers.php:2034
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2043
+#: includes/helpers.php:2037
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2045
+#: includes/helpers.php:2039
 msgid "Visit this link to reset your password:"
 msgstr ""
 
-#: includes/helpers.php:2050
+#: includes/helpers.php:2044
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2053
+#: includes/helpers.php:2047
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
@@ -1514,51 +1516,51 @@ msgstr ""
 msgid "Failed to create image thumbnail."
 msgstr ""
 
-#: install.php:90
+#: install.php:91
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
 msgstr ""
 
-#: install.php:94
+#: install.php:95
 msgid "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
 msgstr ""
 
-#: install.php:98
+#: install.php:99
 msgid "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
 msgstr ""
 
-#: install.php:144
+#: install.php:145
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:454
+#: install.php:462
 msgid "Database cannot be blank."
 msgstr ""
 
-#: install.php:457
+#: install.php:470
 msgid "Please enter a name for your website."
 msgstr ""
 
-#: install.php:460
+#: install.php:473
 msgid "Time zone cannot be blank."
 msgstr ""
 
-#: install.php:476
+#: install.php:489
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
-#: install.php:482
+#: install.php:495
 msgid "Could not determine the absolute path to the SQLite database."
 msgstr ""
 
-#: install.php:489
+#: install.php:502
 msgid "Please make the SQLite database writable by the server."
 msgstr ""
 
-#: install.php:493
+#: install.php:506
 msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 
-#: install.php:708
+#: install.php:723
 #: upgrade.php:85
 #: upgrade.php:98
 #: upgrade.php:111
@@ -1571,103 +1573,107 @@ msgstr ""
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:725
+#: install.php:740
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:727
+#: install.php:742
 msgid "Adapter"
 msgstr ""
 
-#: install.php:738
+#: install.php:753
 msgid "Host"
 msgstr ""
 
-#: install.php:742
-#: install.php:788
+#: install.php:757
+#: install.php:806
 msgid "Username"
 msgstr ""
 
-#: install.php:746
-#: install.php:792
-#: install.php:796
+#: install.php:761
+#: install.php:810
+#: install.php:814
 msgid "Password"
 msgstr ""
 
-#: install.php:750
+#: install.php:765
 msgid "Database"
 msgstr ""
 
-#: install.php:752
+#: install.php:767
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:758
+#: install.php:773
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:761
+#: install.php:776
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:761
+#: install.php:776
 msgid "(optional)"
 msgstr ""
 
-#: install.php:765
+#: install.php:780
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:767
-msgid "Site Name"
-msgstr ""
-
-#: install.php:768
-msgid "My Awesome Site"
-msgstr ""
-
-#: install.php:771
-msgid "Description"
-msgstr ""
-
-#: install.php:775
-msgid "Time Zone"
+#: install.php:782
+msgid "Chyrp URL"
 msgstr ""
 
 #: install.php:786
+msgid "Site Name"
+msgstr ""
+
+#: install.php:787
+msgid "My Awesome Site"
+msgstr ""
+
+#: install.php:790
+msgid "Description"
+msgstr ""
+
+#: install.php:794
+msgid "Time Zone"
+msgstr ""
+
+#: install.php:804
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:796
+#: install.php:814
 msgid "(again)"
 msgstr ""
 
-#: install.php:800
+#: install.php:818
 msgid "Email Address"
 msgstr ""
 
-#: install.php:803
+#: install.php:821
 msgid "Install me!"
 msgstr ""
 
-#: install.php:806
+#: install.php:824
 msgid "Installation Complete"
 msgstr ""
 
-#: install.php:807
+#: install.php:825
 #: upgrade.php:456
 msgid "What now?"
 msgstr ""
 
-#: install.php:809
+#: install.php:827
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:810
+#: install.php:828
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
-#: install.php:812
+#: install.php:830
 #: upgrade.php:462
 msgid "Take me to my site!"
 msgstr ""
