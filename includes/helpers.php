@@ -343,7 +343,7 @@
 
     /**
      * Function: time_in_timezone
-     * Returns the appropriate time() for representing a timezone.
+     * Returns the current time() in the supplied timezone.
      */
     function time_in_timezone($timezone) {
         $orig = get_timezone();
@@ -376,10 +376,7 @@
      *     $timezone - The timezone to set.
      */
     function set_timezone($timezone) {
-        if (function_exists("date_default_timezone_set"))
-            date_default_timezone_set($timezone);
-        else
-            ini_set("date.timezone", $timezone);
+        return date_default_timezone_set($timezone);
     }
 
     /**
@@ -387,10 +384,7 @@
      * Returns the current timezone.
      */
     function get_timezone() {
-        if (function_exists("date_default_timezone_set"))
-            return date_default_timezone_get();
-        else
-            return ini_get("date.timezone");
+        return date_default_timezone_get();
     }
 
     #---------------------------------------------
