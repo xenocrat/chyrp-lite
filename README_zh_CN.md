@@ -67,7 +67,7 @@ Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API
 
 1. 如果使用MySQL，使用用户名和密码创建一个MySQL数据库。
 2. 下载 [最新发布版](https://github.com/xenocrat/chyrp-lite/releases), 解压并上传至您的web服务器。
-3. 在您的浏览其中访问[install.php](install.php) 来运行安装程序。
+3. 在您的浏览其中访问 [install.php](install.php) 来运行安装程序。
 
 ## 升级
 
@@ -78,7 +78,7 @@ Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API
 3. 从 _includes/config.json.php_ 复制配置文件到一个安全的地方。
 4. 使用新版本覆盖当前版本， 确保保留 _uploads_ 文件夹。
 5. 恢复配置文件到 _includes_.
-6. 在您的浏览其中访问[upgrade.php](upgrade.php) 来运行升级程序。
+6. 在您的浏览其中访问 [upgrade.php](upgrade.php) 来运行升级程序。
 
 ## 文档
 
