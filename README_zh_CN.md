@@ -1,0 +1,100 @@
+[English](README.md)
+
+## Chyrp Lite能为我做什么？
+
+Chyrp Lite使您可以在自己的Web服务器上轻松托管一个博客。 您可以有创建一个传统的博客，一个tumble博客（像是微博），或者您可以添加一些定制和建立一个通用的带有博客功能的网络发布平台。
+
+通过灵活的羽毛和页面系统，您可以在网站上创作任何您想要的任何内容。
+羽毛可以启用不同类型的博客内容 - 您可以将自己限制为绝对纯文本，或者你可以创建一个多媒体彩虹。 
+通过页面可以发布与您的博客内容分开的文章。
+– 无论是简单的内容还是多个页面的层次结构，可以选择访问者会在他们第一次到达您的网站时看到您的主页
+   
+您可以获得四个漂亮的博客主题和一个友好的管理控制台，归功于响应式HTML5的强大功能，可以在任何设备上使用。语义标记和综合
+ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
+Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API，可以让您轻松实现
+远程执行许多博客任务，而无需访问您博客的网站。
+
+## 关键特征是什么？
+
+#### 核心:
+* 易于安装，易于维护，可通过设计进行扩展。
+* 使用响应式和无障碍W3C标准的HTML5构建。
+* 普遍支持纯文本，Markdown或原始标记。
+* 使用强大的扩展来个性化您的博客。
+* 使用Twig模板引擎可以轻松实现主题开发。
+* 使用全面的权限模式管理用户和访问者。
+
+#### 羽毛:
+* Text: 编写文本博客条目。
+* Photo: 上传图片。
+* Quote: 创建引用。
+* Link: 链接到其他站点。
+* Video: 上传视频文件。
+* Audio: 上传音频文件。
+* Uploader: 上传多个文件。
+
+#### 模块:
+* Cacher: 缓存您的博客页面以减少服务器负载。
+* Categorize: 为每个博客条目分配一个类别。
+* Tags: 将多个可搜索标签应用于您的博客条目。
+* Pingable: 从链接到你的博客注册Pingbacks。
+* Comments: 一个全面的博客评论系统。
+* Likes: 让您的访客表示感谢。
+* Read More: 摘录博客索引中的长博客条目。
+* Rights: 设置来源和版权/留下您的作品。
+* Cascade: ajax支持无限滚动您的博客。
+* Lightbox: 带图像保护的页面图像查看器。
+* Sitemap: 在搜索引擎上索引您的博客。
+* MAPTCHA: 使用简单的算法来防止垃圾邮件。
+* Highlighter: 语法突出显示您的代码片段。
+* SimpleMDE: Markdown内容的WYSIWYG-esque编辑器。
+* Easy Embed: 在您的博客中嵌入视频最简单的方法。
+* Post Views: 维护您的博客条目的查看次数。
+
+## 安装要求
+
+* PHP 5.4+
+* MySQL:
+  - MySQL 4.1+
+  - MySQLi or PDO
+* SQLite:
+  - SQLite 3+
+  - PDO
+
+## 安装
+
+您可以分三步安装Chyrp Lite：
+
+1. 如果使用MySQL，使用用户名和密码创建一个MySQL数据库。
+2. 下载 [最新发布版](https://github.com/xenocrat/chyrp-lite/releases), 解压并上传至您的web服务器。
+3. 在您的浏览其中访问[install.php](install.php) 来运行安装程序。
+
+## 升级
+
+您可以分六步升级Chyrp Lite：
+
+1. __继续之前备份您的数据库！__
+2. 下载最新版本的Chyrp Lite。
+3. 从 _includes/config.json.php_ 复制配置文件到一个安全的地方。
+4. 使用新版本覆盖当前版本， 确保保留 _uploads_ 文件夹。
+5. 恢复配置文件到 _includes_.
+6. 在您的浏览其中访问[upgrade.php](upgrade.php) 来运行升级程序。
+
+## 文档
+
+Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) 为用户和开发者提供了非常全面的文档。
+
+## 作者
+
+Chyrp Lite由以下人员创建:
+
+* Lite版开发者: Daniel Pimley
+* Chyrp开发者: Arian Xhezairi
+* 项目创始人: Alex Suraci
+* 模块作者和其他贡献者。
+
+## Licenses
+
+Chyrp Lite is Copyright 2008-2018 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors,
+distributed under the [BSD license](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md).
+Please see the [licenses](licenses) directory for the full license text of all software packages distributed with Chyrp Lite.
