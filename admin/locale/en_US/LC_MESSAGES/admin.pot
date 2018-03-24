@@ -492,7 +492,7 @@ msgstr ""
 #: admin/pages/export.twig:18
 #: admin/pages/export.twig:24
 #: admin/pages/export.twig:30
-msgid 'filter (optional)'
+msgid "filter (optional)"
 msgstr ""
 
 #: admin/pages/export.twig:16

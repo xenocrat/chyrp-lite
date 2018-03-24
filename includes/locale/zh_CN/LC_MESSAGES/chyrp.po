@@ -152,7 +152,7 @@ msgstr "访问被拒绝"
 
 #: includes/class/Route.php:107 includes/download.php:18 includes/thumb.php:21
 msgid "You are not allowed to view this site."
-msgstr "你不允许访问这个站点。"
+msgstr "您不允许访问这个站点。"
 
 #: includes/class/Route.php:255
 msgid "Route was initiated without a Controller."
@@ -193,17 +193,17 @@ msgstr ""
 
 #: includes/controller/Admin.php:143
 msgid "You do not have sufficient privileges to view this area."
-msgstr "你没有足够的权限查看此区域。"
+msgstr "您没有足够的权限查看此区域。"
 
 #: includes/controller/Admin.php:152 includes/controller/Admin.php:184
 #: includes/controller/Admin.php:1405 includes/controller/Ajax.php:90
 #: includes/lib/XMLRPC.php:184 includes/lib/XMLRPC.php:248
 msgid "You do not have sufficient privileges to add posts."
-msgstr "你没有足够的权限增加文章。"
+msgstr "您没有足够的权限增加帖子。"
 
 #: includes/controller/Admin.php:157
 msgid "You must enable at least one feather in order to write a post."
-msgstr "你必须启用至少一个羽毛才能撰写帖子。"
+msgstr "您必须启用至少一个羽毛才能撰写帖子。"
 
 #: includes/controller/Admin.php:163 includes/controller/Admin.php:190
 #: includes/controller/Admin.php:247 includes/controller/Admin.php:293
@@ -242,7 +242,7 @@ msgstr "无效的认证令牌。"
 
 #: includes/controller/Admin.php:197
 msgid "Post created!"
-msgstr "文章已创建！"
+msgstr "帖子已创建！"
 
 #: includes/controller/Admin.php:206 includes/controller/Admin.php:236
 #: includes/controller/Admin.php:263 includes/controller/Admin.php:285
@@ -258,54 +258,54 @@ msgstr "未指定ID"
 
 #: includes/controller/Admin.php:206
 msgid "An ID is required to edit a post."
-msgstr "编辑文章需要ID。"
+msgstr "编辑帖子需要ID。"
 
 #: includes/controller/Admin.php:211 includes/controller/Admin.php:247
 #: includes/controller/Admin.php:268 includes/controller/Admin.php:293
 #: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:218
 #: includes/lib/XMLRPC.php:331 includes/lib/XMLRPC.php:381
 msgid "Post not found."
-msgstr "文章未找到。"
+msgstr "帖子未找到。"
 
 #: includes/controller/Admin.php:214 includes/controller/Admin.php:250
 #: includes/lib/XMLRPC.php:221 includes/lib/XMLRPC.php:334
 msgid "You do not have sufficient privileges to edit this post."
-msgstr "你没有足够的权限编辑这个文章。"
+msgstr "您没有足够的权限编辑这个帖子。"
 
 #: includes/controller/Admin.php:236
 msgid "An ID is required to update a post."
-msgstr "更新文章需要ID。"
+msgstr "更新帖子需要ID。"
 
 #: includes/controller/Admin.php:254
 msgid "Post updated."
-msgstr "文章已更新。"
+msgstr "帖子已更新。"
 
 #: includes/controller/Admin.php:254
 msgid "View post &rarr;"
-msgstr "查看文章 &rarr;"
+msgstr "查看帖子 &rarr;"
 
 #: includes/controller/Admin.php:263 includes/controller/Admin.php:285
 #: includes/controller/Ajax.php:44
 msgid "An ID is required to delete a post."
-msgstr "删除文章需要ID。"
+msgstr "删除帖子需要ID。"
 
 #: includes/controller/Admin.php:271 includes/controller/Admin.php:296
 #: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:384
 msgid "You do not have sufficient privileges to delete this post."
-msgstr "你没有足够的权限删除这个文章。"
+msgstr "您没有足够的权限删除这个帖子。"
 
 #: includes/controller/Admin.php:300 includes/controller/Ajax.php:55
 msgid "Post deleted."
-msgstr "文章已删除。"
+msgstr "帖子已删除。"
 
 #: includes/controller/Admin.php:309
 msgid "You do not have sufficient privileges to manage any posts."
-msgstr "你没有足够的权限管理任何文章。"
+msgstr "您没有足够的权限管理任何帖子。"
 
 #: includes/controller/Admin.php:371 includes/controller/Admin.php:382
 #: includes/controller/Admin.php:1442 includes/controller/Ajax.php:128
 msgid "You do not have sufficient privileges to add pages."
-msgstr "你没有足够的权限增加页面。"
+msgstr "您没有足够的权限增加页面。"
 
 #: includes/controller/Admin.php:388 includes/controller/Admin.php:449
 msgid "Title cannot be blank."
@@ -321,7 +321,7 @@ msgstr "页面已创建！"
 
 #: includes/controller/Admin.php:419
 msgid "You do not have sufficient privileges to edit this page."
-msgstr "你没有足够的权限编辑这个页面。"
+msgstr "您没有足够的权限编辑这个页面。"
 
 #: includes/controller/Admin.php:422 includes/controller/Admin.php:446
 msgid "An ID is required to edit a page."
@@ -335,7 +335,7 @@ msgstr "页面未找到。"
 
 #: includes/controller/Admin.php:440
 msgid "You do not have sufficient privileges to edit pages."
-msgstr "你没有足够的权限编辑页面。"
+msgstr "您没有足够的权限编辑页面。"
 
 #: includes/controller/Admin.php:475
 msgid "Page updated."
@@ -348,7 +348,7 @@ msgstr "查看页面 &rarr;"
 #: includes/controller/Admin.php:484 includes/controller/Admin.php:503
 #: includes/controller/Ajax.php:64
 msgid "You do not have sufficient privileges to delete pages."
-msgstr "你没有足够的权限删除页面。"
+msgstr "您没有足够的权限删除页面。"
 
 #: includes/controller/Admin.php:487 includes/controller/Admin.php:509
 #: includes/controller/Ajax.php:70
@@ -361,12 +361,12 @@ msgstr "页面已删除。"
 
 #: includes/controller/Admin.php:546
 msgid "You do not have sufficient privileges to manage pages."
-msgstr "你没有足够的权限管理页面。"
+msgstr "您没有足够的权限管理页面。"
 
 #: includes/controller/Admin.php:564 includes/controller/Admin.php:581
 #: includes/controller/Admin.php:1381
 msgid "You do not have sufficient privileges to add users."
-msgstr "你没有足够的权限增加用户。"
+msgstr "您没有足够的权限增加用户。"
 
 #: includes/controller/Admin.php:587 includes/controller/Admin.php:592
 #: includes/controller/Admin.php:689 includes/controller/Admin.php:694
@@ -422,7 +422,7 @@ msgstr "用户已增加。"
 
 #: includes/controller/Admin.php:655 includes/controller/Admin.php:686
 msgid "You do not have sufficient privileges to edit users."
-msgstr "你没有足够的权限编辑用户。"
+msgstr "您没有足够的权限编辑用户。"
 
 #: includes/controller/Admin.php:658 includes/controller/Admin.php:680
 msgid "An ID is required to edit a user."
@@ -439,7 +439,7 @@ msgstr "用户已更新。"
 
 #: includes/controller/Admin.php:761 includes/controller/Admin.php:785
 msgid "You do not have sufficient privileges to delete users."
-msgstr "你没有足够的权限删除用户。"
+msgstr "您没有足够的权限删除用户。"
 
 #: includes/controller/Admin.php:764 includes/controller/Admin.php:791
 msgid "An ID is required to delete a user."
@@ -447,7 +447,7 @@ msgstr "删除用户需要ID。"
 
 #: includes/controller/Admin.php:772
 msgid "You cannot delete your own account."
-msgstr "你不能删除你自己的账户。"
+msgstr "您不能删除您自己的账户。"
 
 #: includes/controller/Admin.php:808 includes/controller/Admin.php:823
 #: includes/controller/Admin.php:1016 includes/controller/Admin.php:1036
@@ -458,7 +458,7 @@ msgstr "前往"
 
 #: includes/controller/Admin.php:808
 msgid "New owner for posts does not exist."
-msgstr "新文章的所有者不存在。"
+msgstr "新帖子的所有者不存在。"
 
 #: includes/controller/Admin.php:823
 msgid "New owner for pages does not exist."
@@ -470,12 +470,12 @@ msgstr "用户已删除。"
 
 #: includes/controller/Admin.php:846
 msgid "You do not have sufficient privileges to manage users."
-msgstr "你没有足够的权限管理用户。"
+msgstr "您没有足够的权限管理用户。"
 
 #: includes/controller/Admin.php:865 includes/controller/Admin.php:877
 #: includes/controller/Admin.php:1367
 msgid "You do not have sufficient privileges to add groups."
-msgstr "你没有足够的权限添加组。"
+msgstr "您没有足够的权限添加组。"
 
 #: includes/controller/Admin.php:883 includes/controller/Admin.php:888
 #: includes/controller/Admin.php:938 includes/controller/Admin.php:943
@@ -492,7 +492,7 @@ msgstr "组已增加。"
 
 #: includes/controller/Admin.php:908 includes/controller/Admin.php:929
 msgid "You do not have sufficient privileges to edit groups."
-msgstr "你没有足够的权限编辑组。"
+msgstr "您没有足够的权限编辑组。"
 
 #: includes/controller/Admin.php:911 includes/controller/Admin.php:935
 msgid "An ID is required to edit a group."
@@ -504,7 +504,7 @@ msgstr "组已更新。"
 
 #: includes/controller/Admin.php:969 includes/controller/Admin.php:994
 msgid "You do not have sufficient privileges to delete groups."
-msgstr "你没有足够的权限删除组。"
+msgstr "您没有足够的权限删除组。"
 
 #: includes/controller/Admin.php:972 includes/controller/Admin.php:1000
 msgid "An ID is required to delete a group."
@@ -512,7 +512,7 @@ msgstr "删除组需要ID。"
 
 #: includes/controller/Admin.php:980
 msgid "You cannot delete your own group."
-msgstr "你不能删除你自己的组。"
+msgstr "您不能删除您自己的组。"
 
 #: includes/controller/Admin.php:1016
 msgid "New member group does not exist."
@@ -544,15 +544,15 @@ msgstr "组已删除。"
 
 #: includes/controller/Admin.php:1079
 msgid "You do not have sufficient privileges to manage groups."
-msgstr "你没有足够的权限管理组。"
+msgstr "您没有足够的权限管理组。"
 
 #: includes/controller/Admin.php:1106
 msgid "You do not have sufficient privileges to export content."
-msgstr "你没有足够的权限导出内容。"
+msgstr "您没有足够的权限导出内容。"
 
 #: includes/controller/Admin.php:1283
 msgid "You did not select anything to export."
-msgstr "你没有选择任何导出的东西。"
+msgstr "您没有选择任何导出的东西。"
 
 #: includes/controller/Admin.php:1293
 #, php-format
@@ -561,11 +561,11 @@ msgstr "导出失败，原因：ZipArchive error %d."
 
 #: includes/controller/Admin.php:1318
 msgid "You do not have sufficient privileges to import content."
-msgstr "你没有足够的权限导入内容。"
+msgstr "您没有足够的权限导入内容。"
 
 #: includes/controller/Admin.php:1329
 msgid "Posts export file is invalid."
-msgstr "文章导出的文件无效。"
+msgstr "帖子导出的文件无效。"
 
 #: includes/controller/Admin.php:1334
 msgid "Pages export file is invalid."
@@ -581,7 +581,7 @@ msgstr "用户导出的文件无效。"
 
 #: includes/controller/Admin.php:1347
 msgid "You did not select anything to import."
-msgstr "你没有选择任何要导入的东西。"
+msgstr "您没有选择任何要导入的东西。"
 
 #: includes/controller/Admin.php:1471
 msgid "Chyrp Lite content successfully imported!"
@@ -590,7 +590,7 @@ msgstr "Chyrp Lite 内容成功导入！"
 #: includes/controller/Admin.php:1480 includes/controller/Admin.php:1562
 #: includes/controller/Admin.php:1628 includes/controller/Admin.php:1672
 msgid "You do not have sufficient privileges to toggle extensions."
-msgstr "你没有足够的权限切换扩展。"
+msgstr "您没有足够的权限切换扩展。"
 
 #: includes/controller/Admin.php:1488
 msgid "Could not read modules directory."
@@ -605,11 +605,11 @@ msgstr "不能读取羽毛目录。"
 #: includes/controller/Admin.php:1829 includes/controller/Admin.php:1890
 #: includes/controller/Admin.php:1930
 msgid "You do not have sufficient privileges to change settings."
-msgstr "你没有足够的权限改变设置。"
+msgstr "您没有足够的权限改变设置。"
 
 #: includes/controller/Admin.php:1598
 msgid "You are currently previewing a theme."
-msgstr "你目前正在预览主题。"
+msgstr "您目前正在预览主题。"
 
 #: includes/controller/Admin.php:1599
 msgid "Stop &rarr;"
@@ -625,7 +625,7 @@ msgstr "没有指定扩展"
 
 #: includes/controller/Admin.php:1634
 msgid "You did not specify an extension to enable."
-msgstr "你没有指定要启用的扩展。"
+msgstr "您没有指定要启用的扩展。"
 
 #: includes/controller/Admin.php:1643
 msgid "Extension already enabled."
@@ -641,7 +641,7 @@ msgstr "扩展已启用。"
 
 #: includes/controller/Admin.php:1678
 msgid "You did not specify an extension to disable."
-msgstr "你没有指定要停用的扩展。"
+msgstr "您没有指定要停用的扩展。"
 
 #: includes/controller/Admin.php:1687
 msgid "Extension already disabled."
@@ -657,7 +657,7 @@ msgstr "没有指定主题"
 
 #: includes/controller/Admin.php:1715
 msgid "You did not specify which theme to select."
-msgstr "你没有指定要选择哪个主题。"
+msgstr "您没有指定要选择哪个主题。"
 
 #: includes/controller/Admin.php:1728
 msgid "Theme changed."
@@ -716,7 +716,7 @@ msgstr "页面已创建。"
 
 #: includes/controller/Admin.php:1980 includes/controller/Main.php:608
 msgid "You are already logged in."
-msgstr "你已登陆。"
+msgstr "您已登陆。"
 
 #: includes/controller/Admin.php:2000 includes/controller/Ajax.php:32
 #: includes/download.php:15 includes/thumb.php:18
@@ -749,7 +749,7 @@ msgstr "页面"
 
 #: includes/controller/Admin.php:2057
 msgid "Posts"
-msgstr "所有文章"
+msgstr "所有帖子"
 
 #: includes/controller/Admin.php:2061
 msgid "Pages"
@@ -816,7 +816,7 @@ msgstr "&#8220;%s&#8221; 的搜索结果"
 
 #: includes/controller/Main.php:340
 msgid "You do not have sufficient privileges to view drafts."
-msgstr "你没有足够的权限查看草稿。"
+msgstr "您没有足够的权限查看草稿。"
 
 #: includes/controller/Main.php:349
 msgid "Drafts"
@@ -824,24 +824,24 @@ msgstr "草稿"
 
 #: includes/controller/Main.php:369
 msgid "The post cannot be displayed because the theme does not support it."
-msgstr "这篇文章无法显示，因为主题不支持。"
+msgstr "这篇帖子无法显示，因为主题不支持。"
 
 #: includes/controller/Main.php:372
 msgid "This post is not published."
-msgstr "文章没有被发布。"
+msgstr "帖子没有被发布。"
 
 #: includes/controller/Main.php:375
 #, php-format
 msgid "This post is scheduled to be published %s."
-msgstr "这篇文章计划被公开于 %s。"
+msgstr "这篇帖子计划被公开于 %s。"
 
 #: includes/controller/Main.php:404
 msgid "You are not allowed to view this page."
-msgstr "你不允许查看这个页面。"
+msgstr "您不允许查看这个页面。"
 
 #: includes/controller/Main.php:468
 msgid "There aren't enough posts for random selection."
-msgstr "没有足够的文章来随机选择。"
+msgstr "没有足够的帖子来随机选择。"
 
 #: includes/controller/Main.php:479
 msgid "This site does not allow registration."
@@ -849,7 +849,7 @@ msgstr "站点不允许注册。"
 
 #: includes/controller/Main.php:482
 msgid "You cannot register an account because you are already logged in."
-msgstr "你不能注册账户，因为你已登陆。"
+msgstr "您不能注册账户，因为您已登陆。"
 
 #: includes/controller/Main.php:489 includes/controller/Main.php:494
 #: install.php:463
@@ -858,7 +858,7 @@ msgstr "请输入账户的用户名。"
 
 #: includes/controller/Main.php:506 includes/controller/Main.php:675
 msgid "Please consider setting a stronger password for your account."
-msgstr "请考虑为你的账户设置个更强大的密码。"
+msgstr "请考虑为您的账户设置个更强大的密码。"
 
 #: includes/controller/Main.php:514
 msgid "Incorrect captcha response."
@@ -866,11 +866,11 @@ msgstr "错误的验证码。"
 
 #: includes/controller/Main.php:541
 msgid "We have emailed you an activation link."
-msgstr "我们已经通过电子邮件发送你的激活链接。"
+msgstr "我们已经通过电子邮件发送您的激活链接。"
 
 #: includes/controller/Main.php:546 includes/controller/Main.php:573
 msgid "Your account is now active."
-msgstr "你的账户现已激活。"
+msgstr "您的账户现已激活。"
 
 #: includes/controller/Main.php:550
 msgid "Register"
@@ -878,7 +878,7 @@ msgstr "注册"
 
 #: includes/controller/Main.php:559
 msgid "You cannot activate an account because you are already logged in."
-msgstr "你不能激活账户，因为你已登陆。"
+msgstr "您不能激活账户，因为您已登陆。"
 
 #: includes/controller/Main.php:564 includes/controller/Main.php:587
 #: includes/controller/Main.php:720
@@ -887,15 +887,15 @@ msgstr "请联系博客管理员以获取有关您帐户的帮助。"
 
 #: includes/controller/Main.php:567
 msgid "Your account has already been activated."
-msgstr "你的账户已经被激活过。"
+msgstr "您的账户已经被激活过。"
 
 #: includes/controller/Main.php:582 includes/controller/Main.php:717
 msgid "You cannot reset your password because you are already logged in."
-msgstr "你不能重设密码，因为你已登陆。"
+msgstr "您不能重设密码，因为您已登陆。"
 
 #: includes/controller/Main.php:597
 msgid "We have emailed you a new password."
-msgstr "我们已经通过电子邮件发送给你新密码。"
+msgstr "我们已经通过电子邮件发送给您新密码。"
 
 #: includes/controller/Main.php:621 includes/lib/XMLRPC.php:422
 msgid "Incorrect username and/or password."
@@ -903,7 +903,7 @@ msgstr "不正确的用户名或者密码。"
 
 #: includes/controller/Main.php:627
 msgid "You must activate your account before you log in."
-msgstr "在登陆前必须激活你的账户。"
+msgstr "在登陆前必须激活您的账户。"
 
 #: includes/controller/Main.php:634
 msgid "Logged in."
@@ -915,7 +915,7 @@ msgstr "登陆"
 
 #: includes/controller/Main.php:647
 msgid "You aren't logged in."
-msgstr "你没有登陆。"
+msgstr "您没有登陆。"
 
 #: includes/controller/Main.php:653
 msgid "Logged out."
@@ -923,11 +923,11 @@ msgstr "退出登陆。"
 
 #: includes/controller/Main.php:665
 msgid "You must be logged in to access user controls."
-msgstr "你必须登陆才能访问用户操作。"
+msgstr "您必须登陆才能访问用户操作。"
 
 #: includes/controller/Main.php:702
 msgid "Your profile has been updated."
-msgstr "你的配置文件已经更新。"
+msgstr "您的配置文件已经更新。"
 
 #: includes/controller/Main.php:706
 msgid "Controls"
@@ -935,13 +935,13 @@ msgstr "操作"
 
 #: includes/controller/Main.php:727
 msgid "Please enter your username."
-msgstr "请在下面输入你的用户名，我们会通过电子邮件向你发送新帐户的密码。"
+msgstr "请在下面输入您的用户名，我们会通过电子邮件向您发送新帐户的密码。"
 
 #: includes/controller/Main.php:739
 msgid ""
 "If that username is in our database, we will email you a password reset link."
 msgstr ""
-"如果你的用户名在我们的数据中，我们将会用电子邮件发送重置密码的链接给你。"
+"如果您的用户名在我们的数据中，我们将会用电子邮件发送重置密码的链接给您。"
 
 #: includes/controller/Main.php:743
 msgid "Lost Password"
@@ -978,7 +978,7 @@ msgstr "被禁止"
 
 #: includes/helpers.php:93
 msgid "You do not have permission to access this resource."
-msgstr "你没有权限访问这个资源。"
+msgstr "您没有权限访问这个资源。"
 
 #: includes/helpers.php:117
 msgid "The requested resource was not found."
@@ -1089,26 +1089,26 @@ msgstr "JSON解码错误：%s"
 #: includes/helpers.php:2030
 #, php-format
 msgid "Activate your account at %s"
-msgstr "在 %s 上激活你的账户"
+msgstr "在 %s 上激活您的账户"
 
 #: includes/helpers.php:2031 includes/helpers.php:2041
 #: includes/helpers.php:2051
 #, php-format
 msgid "Hello, %s."
-msgstr "你好，%s."
+msgstr "您好，%s."
 
 #: includes/helpers.php:2033
 msgid "You are receiving this message because you registered a new account."
-msgstr "你收到此邮件因为你已经注册了新账户。"
+msgstr "您收到此邮件因为您已经注册了新账户。"
 
 #: includes/helpers.php:2035
 msgid "Visit this link to activate your account:"
-msgstr "访问这个链接激活你的账户："
+msgstr "访问这个链接激活您的账户："
 
 #: includes/helpers.php:2040
 #, php-format
 msgid "Reset your password at %s"
-msgstr "在 %s上重置你的密码"
+msgstr "在 %s上重置您的密码"
 
 #: includes/helpers.php:2043
 msgid "You are receiving this message because you requested a new password."
@@ -1116,27 +1116,27 @@ msgstr "您收到此消息是因为您请求了新密码。"
 
 #: includes/helpers.php:2045
 msgid "Visit this link to reset your password:"
-msgstr "访问这个链接重置你的密码："
+msgstr "访问这个链接重置您的密码："
 
 #: includes/helpers.php:2050
 #, php-format
 msgid "Your new password for %s"
-msgstr "你的新密码为 %s"
+msgstr "您的新密码为 %s"
 
 #: includes/helpers.php:2053
 #, php-format
 msgid "Your new password is: %s"
-msgstr "你的新密码: %s"
+msgstr "您的新密码: %s"
 
 #: includes/javascript.php:34
 msgid "Are you sure you want to delete this post?"
-msgstr "你确定你想删除这篇文章？"
+msgstr "您确定您想删除这篇帖子？"
 
 #: includes/javascript.php:46
 msgid ""
 "The post cannot be deleted because your web browser did not send proper "
 "credentials."
-msgstr "该文章无法被删除，因为你的浏览器没有发送正确的凭证。"
+msgstr "该帖子无法被删除，因为您的浏览器没有发送正确的凭证。"
 
 #: includes/javascript.php:64 includes/javascript.php:105
 msgid "Oops! Something went wrong on this web page."
@@ -1144,13 +1144,13 @@ msgstr "哎呀！这个网页出了点问题。"
 
 #: includes/javascript.php:77
 msgid "Are you sure you want to delete this page and its child pages?"
-msgstr "你确定你想要删除这个页面以及它的子页面？"
+msgstr "您确定您想要删除这个页面以及它的子页面？"
 
 #: includes/javascript.php:89
 msgid ""
 "The page cannot be deleted because your web browser did not send proper "
 "credentials."
-msgstr "该页面无法被删除，因为你的浏览器没有发送正确的凭证。"
+msgstr "该页面无法被删除，因为您的浏览器没有发送正确的凭证。"
 
 #: includes/lib/AtomFeed.php:84 includes/lib/JSONFeed.php:83
 msgid "Guest"
@@ -1185,7 +1185,7 @@ msgstr "我们的页面链接无效。"
 
 #: includes/lib/XMLRPC.php:58
 msgid "The URL for your page is not valid."
-msgstr "你的页面链接无效。"
+msgstr "您的页面链接无效。"
 
 #: includes/lib/XMLRPC.php:66
 msgid "We have not published at that URL."
@@ -1193,15 +1193,15 @@ msgstr "我们没有公开这个链接。"
 
 #: includes/lib/XMLRPC.php:72
 msgid "You have not published at that URL."
-msgstr "你尚未在该链接上公开。"
+msgstr "您尚未在该链接上公开。"
 
 #: includes/lib/XMLRPC.php:80
 msgid "Your page could not be parsed."
-msgstr "你的页面不能被解析。"
+msgstr "您的页面不能被解析。"
 
 #: includes/lib/XMLRPC.php:101
 msgid "Your page does not link to our page."
-msgstr "你的页面没有链接到我们的页面。"
+msgstr "您的页面没有链接到我们的页面。"
 
 #: includes/lib/XMLRPC.php:419
 msgid "XML-RPC support is disabled for this site."
@@ -1221,11 +1221,11 @@ msgstr "查看站点"
 
 #: includes/model/Group.php:252
 msgid "View Private Posts"
-msgstr "查看私人文章"
+msgstr "查看私人帖子"
 
 #: includes/model/Group.php:253
 msgid "View Scheduled Posts"
-msgstr "查看定时发布的文章"
+msgstr "查看定时发布的帖子"
 
 #: includes/model/Group.php:254
 msgid "View Drafts"
@@ -1237,7 +1237,7 @@ msgstr "查看自己的草稿"
 
 #: includes/model/Group.php:256
 msgid "Add Posts"
-msgstr "增加文章"
+msgstr "增加帖子"
 
 #: includes/model/Group.php:257
 msgid "Add Drafts"
@@ -1245,7 +1245,7 @@ msgstr "增加草稿"
 
 #: includes/model/Group.php:258
 msgid "Edit Posts"
-msgstr "编辑文章"
+msgstr "编辑帖子"
 
 #: includes/model/Group.php:259
 msgid "Edit Drafts"
@@ -1253,7 +1253,7 @@ msgstr "编辑草稿"
 
 #: includes/model/Group.php:260
 msgid "Edit Own Posts"
-msgstr "编辑自己的文章"
+msgstr "编辑自己的帖子"
 
 #: includes/model/Group.php:261
 msgid "Edit Own Drafts"
@@ -1261,7 +1261,7 @@ msgstr "编辑自己的草稿"
 
 #: includes/model/Group.php:262
 msgid "Delete Posts"
-msgstr "删除文章"
+msgstr "删除帖子"
 
 #: includes/model/Group.php:263
 msgid "Delete Drafts"
@@ -1269,7 +1269,7 @@ msgstr "删除草稿"
 
 #: includes/model/Group.php:264
 msgid "Delete Own Posts"
-msgstr "删除自己的文章"
+msgstr "删除自己的帖子"
 
 #: includes/model/Group.php:265
 msgid "Delete Own Drafts"
@@ -1351,7 +1351,7 @@ msgstr "数据库不能为空。"
 
 #: install.php:457
 msgid "Please enter a name for your website."
-msgstr "请输入你站点的名字。"
+msgstr "请输入您站点的名字。"
 
 #: install.php:460
 msgid "Time zone cannot be blank."
@@ -1367,7 +1367,7 @@ msgstr "无法确定SQLite数据库的绝对路径。"
 
 #: install.php:489
 msgid "Please make the SQLite database writable by the server."
-msgstr "请确保你的SQLite数据库在这个服务器上可写。"
+msgstr "请确保您的SQLite数据库在这个服务器上可写。"
 
 #: install.php:493
 msgid "Please enter a username and password for the MySQL database."
@@ -1475,11 +1475,11 @@ msgstr "现在做什么？"
 
 #: install.php:809
 msgid "Delete <em>install.php</em>, you won't need it anymore."
-msgstr "删除 <em>install.php</em>，你不再需要它。"
+msgstr "删除 <em>install.php</em>，您不再需要它。"
 
 #: install.php:810
 msgid "Log in to your site and configure things to your liking."
-msgstr "登陆你的站点并且配置你喜欢的东西。"
+msgstr "登陆您的站点并且配置您喜欢的东西。"
 
 #: install.php:812 upgrade.php:462
 msgid "Take me to my site!"
@@ -1499,11 +1499,11 @@ msgstr "升级前请采取以下预防措施："
 
 #: upgrade.php:448
 msgid "<strong>Backup your database before proceeding!</strong>"
-msgstr "<strong>开始前备份你的数据库！</strong>"
+msgstr "<strong>开始前备份您的数据库！</strong>"
 
 #: upgrade.php:449
 msgid "Tell your users that your site is offline for maintenance."
-msgstr "告知你的用户站点处于离线状态以进行维护。"
+msgstr "告知您的用户站点处于离线状态以进行维护。"
 
 #: upgrade.php:452
 msgid "Upgrade me!"
@@ -1523,4 +1523,4 @@ msgstr "如果需要，再次运行此升级程序。"
 
 #: upgrade.php:460
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
-msgstr "删除 <em>upgrade.php</em> 一旦你升级完成后。"
+msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"

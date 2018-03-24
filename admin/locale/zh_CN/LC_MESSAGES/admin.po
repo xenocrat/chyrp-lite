@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.6\n"
 "Last-Translator: 筱枫 <q849958241@163.com>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
@@ -86,7 +86,7 @@ msgstr "Markdown"
 msgid ""
 "Markdown is a syntax for writing structured documents in plain text. Here "
 "are the basics to get you started:"
-msgstr "Markdown是用纯文本编写结构化文档的语法。 以下是让你入门的基础知识："
+msgstr "Markdown是用纯文本编写结构化文档的语法。 以下是让您入门的基础知识："
 
 #: admin/help/markdown.twig:14
 msgid "Result"
@@ -248,11 +248,11 @@ msgstr "内容设置"
 
 #: admin/pages/content_settings.twig:10
 msgid "Posts Per Blog Page"
-msgstr "每个博客页面的文章"
+msgstr "每个博客页面的帖子"
 
 #: admin/pages/content_settings.twig:14
 msgid "Posts in Feed"
-msgstr "订阅中的文章"
+msgstr "订阅中的帖子"
 
 #: admin/pages/content_settings.twig:18
 msgid "Items Per Admin Page"
@@ -265,7 +265,7 @@ msgstr "订阅URL"
 #: admin/pages/content_settings.twig:25
 #, php-format
 msgid "Allows you to set an alternative URL for <code>%s</code>."
-msgstr "允许你为 <code>%s</code> 设置替代网址。"
+msgstr "允许您为 <code>%s</code> 设置替代网址。"
 
 #: admin/pages/content_settings.twig:29
 msgid "Uploads Path"
@@ -275,7 +275,7 @@ msgstr "上传路径"
 msgid ""
 "The directory to which files are uploaded, relative to your installation "
 "directory."
-msgstr "相对于你安装目录的上传文件的目录。"
+msgstr "相对于您安装目录的上传文件的目录。"
 
 #: admin/pages/content_settings.twig:36
 msgid "Upload Size Limit"
@@ -295,7 +295,7 @@ msgstr "发送引用"
 
 #: admin/pages/content_settings.twig:52
 msgid "Attempts to notify sites to which your posts link."
-msgstr "尝试通知站点到你的文章链接中。"
+msgstr "尝试通知站点到您的帖子链接中。"
 
 #: admin/pages/content_settings.twig:56
 msgid "XML-RPC Support"
@@ -334,7 +334,7 @@ msgstr "删除这个组？"
 #: admin/pages/delete_group.twig:8
 #, php-format
 msgid "Are you sure you want to delete the &#8220;%s&#8221; group?"
-msgstr "你确定你想删除 &#8220;%s&#8221; 这个组?"
+msgstr "您确定您想删除 &#8220;%s&#8221; 这个组?"
 
 #: admin/pages/delete_group.twig:14
 msgid "Move members to:"
@@ -371,7 +371,7 @@ msgstr "[无标题]"
 #: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
-msgstr "你确定你想删除 &#8220;%s&#8221;?"
+msgstr "您确定您想删除 &#8220;%s&#8221;?"
 
 #: admin/pages/delete_page.twig:14
 msgid "Delete children?"
@@ -379,7 +379,7 @@ msgstr "删除子？"
 
 #: admin/pages/delete_post.twig:3 admin/pages/delete_post.twig:6
 msgid "Delete Post?"
-msgstr "删除文章？"
+msgstr "删除帖子？"
 
 #: admin/pages/delete_user.twig:3 admin/pages/delete_user.twig:6
 msgid "Delete User?"
@@ -388,15 +388,15 @@ msgstr "删除用户？"
 #: admin/pages/delete_user.twig:8
 #, php-format
 msgid "Are you sure you want to delete user &#8220;%s&#8221;?"
-msgstr "你确定你想删除用户 &#8220;%s&#8221;?"
+msgstr "您确定您想删除用户 &#8220;%s&#8221;?"
 
 #: admin/pages/delete_user.twig:14
 msgid "Attribute posts to:"
-msgstr "文章属性："
+msgstr "帖子属性："
 
 #: admin/pages/delete_user.twig:16
 msgid "[Delete Posts]"
-msgstr "[删除文章]"
+msgstr "[删除帖子]"
 
 #: admin/pages/delete_user.twig:27
 msgid "Attribute pages to:"
@@ -417,7 +417,7 @@ msgstr "编辑组 &#8220;%s&#8221;"
 
 #: admin/pages/edit_group.twig:7
 msgid "Are you sure you want to make these changes to your group?"
-msgstr "你确定你想改变你的组吗？"
+msgstr "您确定您想改变您的组吗？"
 
 #: admin/pages/edit_group.twig:10 admin/pages/new_group.twig:10
 msgid "Name"
@@ -438,7 +438,7 @@ msgstr "编辑 &#8220;%s&#8221;"
 
 #: admin/pages/edit_post.twig:3
 msgid "Edit Post"
-msgstr "编辑文章"
+msgstr "编辑帖子"
 
 #: admin/pages/edit_user.twig:3
 msgid "Edit User"
@@ -451,7 +451,7 @@ msgstr "编辑用户 &#8220;%s&#8221;"
 
 #: admin/pages/edit_user.twig:7
 msgid "Are you sure you want to make these changes to your account?"
-msgstr "你确定你想改变你的账户吗？"
+msgstr "您确定您想改变您的账户吗？"
 
 #: admin/pages/edit_user.twig:10 admin/pages/new_user.twig:10
 msgid "Login"
@@ -500,7 +500,12 @@ msgstr "想要导出什么？"
 
 #: admin/pages/export.twig:10 admin/pages/manage_posts.twig:32
 msgid "Posts"
-msgstr "所有文章"
+msgstr "所有帖子"
+
+#: admin/pages/export.twig:12 admin/pages/export.twig:18
+#: admin/pages/export.twig:24 admin/pages/export.twig:30
+msgid "filter (optional)"
+msgstr "过滤（可选）"
 
 #: admin/pages/export.twig:16 admin/pages/manage_pages.twig:19
 msgid "Pages"
@@ -594,11 +599,11 @@ msgstr "导入"
 
 #: admin/pages/import.twig:6
 msgid "What would you like to import?"
-msgstr "你想要导入什么？"
+msgstr "您想要导入什么？"
 
 #: admin/pages/import.twig:11
 msgid "Posts .atom File"
-msgstr "文章的 .atom 文件"
+msgstr "帖子的 .atom 文件"
 
 #: admin/pages/import.twig:17
 msgid "Pages .atom File"
@@ -627,7 +632,7 @@ msgstr "管理所有组"
 
 #: admin/pages/manage_groups.twig:10
 msgid "Search all groups for user&hellip;"
-msgstr "搜索所有用户组"
+msgstr "搜索所有用户组&hellip;"
 
 #: admin/pages/manage_groups.twig:12 admin/pages/manage_pages.twig:15
 #: admin/pages/manage_posts.twig:15 admin/pages/manage_users.twig:15
@@ -695,7 +700,7 @@ msgstr "发布？"
 
 #: admin/pages/manage_pages.twig:27
 msgid "Listed?"
-msgstr "上市？"
+msgstr "已列出？"
 
 #: admin/pages/manage_pages.twig:28 admin/pages/manage_posts.twig:39
 msgid "Author"
@@ -712,7 +717,7 @@ msgstr "(空)"
 
 #: admin/pages/manage_posts.twig:3
 msgid "Manage Posts"
-msgstr "管理所有文章"
+msgstr "管理所有帖子"
 
 #: admin/pages/manage_posts.twig:19
 msgid "Browse by month:"
@@ -745,7 +750,7 @@ msgstr "登陆（名称）"
 
 #: admin/pages/manage_users.twig:30
 msgid "Joined"
-msgstr "已加入"
+msgstr "加入时间"
 
 #: admin/pages/manage_users.twig:32
 msgid "Activated?"
@@ -789,7 +794,7 @@ msgstr "(建议)"
 
 #: admin/pages/route_settings.twig:14
 msgid "Gives your site prettier urls."
-msgstr "为你的网站提供更漂亮的URL。"
+msgstr "为您的网站提供更漂亮的URL。"
 
 #: admin/pages/route_settings.twig:14
 msgid "Requires .htaccess support."
@@ -805,7 +810,7 @@ msgstr "使默认路由成为主页而不是博客索引。"
 
 #: admin/pages/route_settings.twig:26
 msgid "Post View URL"
-msgstr "文章查看链接"
+msgstr "帖子查看链接"
 
 #: admin/pages/route_settings.twig:27
 msgid "(requires clean URLs)"
@@ -865,11 +870,11 @@ msgstr "(例如 30)"
 
 #: admin/pages/route_settings.twig:60
 msgid "Post ID"
-msgstr "文章ID"
+msgstr "帖子ID"
 
 #: admin/pages/route_settings.twig:64
 msgid "Post author (username)"
-msgstr "文章作者（用户名）"
+msgstr "帖子作者（用户名）"
 
 #: admin/pages/route_settings.twig:64
 msgid "(e.g. Alex)"
@@ -893,7 +898,7 @@ msgstr "(例如 this_one_is_taken_2)"
 
 #: admin/pages/route_settings.twig:76
 msgid "The post's feather"
-msgstr "文章的羽毛"
+msgstr "帖子的羽毛"
 
 #: admin/pages/route_settings.twig:76
 msgid "(e.g. text)"
@@ -901,7 +906,7 @@ msgstr "(例如 text)"
 
 #: admin/pages/route_settings.twig:80
 msgid "The plural form of the post's feather"
-msgstr "文章羽毛的复数形式"
+msgstr "帖子羽毛的复数形式"
 
 #: admin/pages/route_settings.twig:80
 msgid "(e.g. links)"
@@ -965,7 +970,7 @@ msgstr "写作"
 
 #: admin/partials/page_fields.twig:12
 msgid "Body"
-msgstr "主体"
+msgstr "正文"
 
 #: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:84
 msgid "Slug"
@@ -1039,7 +1044,7 @@ msgstr "所有注册的用户"
 
 #: admin/partials/post_fields.twig:77
 msgid "Pinned?"
-msgstr "寄托？"
+msgstr "置顶？"
 
 #: admin/partials/post_fields.twig:78
 msgid "(shows this post above all others)"
