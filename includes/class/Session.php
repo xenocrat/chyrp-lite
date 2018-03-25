@@ -44,9 +44,6 @@
                                                  array("id" => $id),
                                                  "id")->fetchColumn();
 
-            // This fallback when self::$data is false return false,
-            // but php7.1 need ''
-//            return fallback(self::$data, "");
             return self::$data ? self::$data : '';
         }
 
