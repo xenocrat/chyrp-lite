@@ -73,14 +73,20 @@
     # Get the timezone.
     $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : get_timezone() ;
 
-    # Where are we?
-    $url = str_ireplace("/install.php", "", guess_url());
+    # Get the locale.
+    $locale = isset($_REQUEST['locale']) ? $_REQUEST['locale'] : get_locale() ;
 
-    # Try to load an appropriate translation for the default locale.
-    load_translator("chyrp", INCLUDES_DIR.DIR."locale");
+    # Where are we?
+    $url = preg_replace("/\/install\.php.*$/i", "", guess_url());
 
     # Set the timezone.
     set_timezone($timezone);
+
+    # Set the locale.
+    set_locale($locale);
+
+    # Try to load an appropriate translation.
+    load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
     # Already installed?
     if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
@@ -97,33 +103,6 @@
     # Test if we can write to CACHES_DIR (needed by some extensions).
     if (!is_writable(CACHES_DIR))
         $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
-
-    # Set locale
-    # Ensure the default locale is always present in the list.
-    $locales = array(array("code" => "en_US",
-        "name" => lang_code("en_US")));
-
-    if ($open = opendir(INCLUDES_DIR.DIR."locale")) {
-        while (($folder = readdir($open)) !== false)
-            if ($folder != "en_US" and preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $folder))
-                $locales[] = array("code" => $folder,
-                    "name" => lang_code($folder));
-
-        closedir($open);
-    }
-    $locale = !empty($_GET['locale']) ? $_GET['locale'] :
-        (!empty($_POST['language']) ? $_POST['language'] : 'en_US');
-
-    foreach ($locales as $v) {
-        if ($v['code'] === $locale) {
-            @putenv("LC_ALL=" . $locale);
-            setlocale(LC_ALL, array($locale . ".UTF-8",
-                $locale . ".utf-8",
-                $locale . ".UTF8",
-                $locale . ".utf8",
-                $locale));
-        }
-    }
 
     /**
      * Function: guess_url
@@ -474,9 +453,9 @@
                         $(this).removeClass("error");
                 });
 
-                $("#language").change(function(e) {
+                $("#locale").change(function(e) {
                     var url = window.location.href.split('?');
-                    window.location.href = url[0]+"?locale="+$(this).val();
+                    window.location.href = url[0] + "?locale=" + $(this).val();
                 });
             });
         </script>
@@ -503,6 +482,9 @@
 
         if (empty($_POST['timezone']))
             $errors[] = __("Time zone cannot be blank.");
+
+        if (empty($_POST['locale']))
+            $errors[] = __("Language cannot be blank.");
 
         if (empty($_POST['login']))
             $errors[] = __("Please enter a username for your account.");
@@ -721,7 +703,7 @@
                          $config->set("chyrp_url", $chyrp_url),
                          $config->set("email", $_POST['email']),
                          $config->set("timezone", $_POST['timezone']),
-                         $config->set("locale", $_POST['language']),
+                         $config->set("locale", $_POST['locale']),
                          $config->set("cookies_notification", true),
                          $config->set("check_updates", true),
                          $config->set("check_updates_last", 0),
@@ -769,18 +751,6 @@
           ?></pre>
 <?php if (!$installed): ?>
             <form action="install.php" method="post" accept-charset="UTF-8" id="installer">
-                <h1><?php echo __("Language Setup"); ?></h1>
-                <p id="language_field">
-                    <label for="display_language"><?php echo __("Display Language"); ?></label>
-                    <select name="language" id="language">
-                        <?php foreach ($locales as $v): ?>
-                            <option value="<?php echo $v['code']; ?>" <?php if($locale === $v['code']) echo 'selected="selected"'; ?>>
-                                <?php echo $v['name']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </p>
-
                 <h1><?php echo __("Database Setup"); ?></h1>
                 <p id="adapter_field">
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
@@ -837,11 +807,21 @@
                 <p id="timezone_field">
                     <label for="timezone"><?php echo __("Time Zone"); ?></label>
                     <select name="timezone" id="timezone">
-                    <?php foreach (timezones() as $zone): ?>
-                        <option value="<?php echo $zone; ?>"<?php selected($zone, $timezone); ?>>
-                            <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone); ?>
+                    <?php foreach (timezones() as $timezones): ?>
+                        <option value="<?php echo $timezones['code']; ?>"<?php selected($timezones['code'], $timezone); ?>>
+                            <?php echo $timezones['name']; ?>
                         </option>
                     <?php endforeach; ?>
+                    </select>
+                </p>
+                <p id="locale_field">
+                    <label for="locale"><?php echo __("Language"); ?></label>
+                    <select name="locale" id="locale">
+                        <?php foreach (locales() as $locales): ?>
+                            <option value="<?php echo $locales['code']; ?>"<?php selected($locales['code'], $locale); ?>>
+                                <?php echo $locales['name']; ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </p>
                 <hr>
