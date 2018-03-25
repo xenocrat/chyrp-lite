@@ -1582,7 +1582,7 @@ msgstr ""
 msgid "Display Language"
 msgstr ""
 
-#: install.php:725
+#: install.php:740
 msgid "Database Setup"
 msgstr ""
 
