@@ -189,8 +189,29 @@
     #---------------------------------------------
 
     /**
+     * Function: locales
+     * Returns an array of locale choices for the "chyrp" domain.
+     */
+    function locales() {
+        # Ensure the default locale is always present in the list.
+        $locales = array(array("code" => "en_US",
+                               "name" => lang_code("en_US")));
+
+        if ($open = opendir(INCLUDES_DIR.DIR."locale")) {
+             while (($folder = readdir($open)) !== false)
+                if ($folder != "en_US" and preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $folder))
+                    $locales[] = array("code" => $folder,
+                                       "name" => lang_code($folder));
+
+            closedir($open);
+        }
+
+        return $locales;
+    }
+
+    /**
      * Function: set_locale
-     * Try to set the locale with fallbacks for platform-specific quirks.
+     * Sets the locale with fallbacks for platform-specific quirks.
      *
      * Parameters:
      *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
@@ -207,6 +228,14 @@
                                 $locale.".UTF8",
                                 $locale.".utf8",
                                 $locale));
+    }
+
+    /**
+     * Function: get_locale
+     * Gets the current locale setting.
+     */
+    function get_locale() {
+        return setlocale(LC_ALL, 0);
     }
 
     /**
@@ -346,7 +375,16 @@
      * Returns an array of timezone identifiers.
      */
     function timezones() {
-        return timezone_identifiers_list(DateTimeZone::ALL);
+        $timezones = array();
+        $zone_list = timezone_identifiers_list(DateTimeZone::ALL);
+
+        foreach ($zone_list as $zone) {
+            $timezones[] = array("code" => $zone,
+                                 "name" => str_replace(array("_", "St "), array(" ", "St. "), $zone));
+
+        }
+
+        return $timezones;
     }
 
     /**
@@ -361,7 +399,7 @@
     }
 
     /**
-     * Function: get_timezone()
+     * Function: get_timezone
      * Gets the timezone for all date/time functions.
      */
     function get_timezone() {
