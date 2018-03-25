@@ -1,0 +1,37 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/cascade/admin/pages/cascade_settings.twig:3
+#: modules/cascade/admin/pages/cascade_settings.twig:6
+msgid "Cascade Settings"
+msgstr "级联设置"
+
+#: modules/cascade/admin/pages/cascade_settings.twig:10
+msgid "Automatic"
+msgstr "自动"
+
+#: modules/cascade/admin/pages/cascade_settings.twig:12
+msgid "Load more posts when the visitor scrolls to the bottom of the page?"
+msgstr "当访问者滚动到页面底部时加载更多帖子？"
+
+#: modules/cascade/cascade.php:27 modules/cascade/info.php:3
+msgid "Cascade"
+msgstr ""
+
+#: modules/cascade/info.php:6
+msgid "Adds ajax-powered infinite scrolling to your blog."
+msgstr "为您的博客添加ajax无限滚动的功能。"

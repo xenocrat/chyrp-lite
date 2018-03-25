@@ -1573,6 +1573,14 @@ msgstr ""
 msgid "Could not write the configuration file."
 msgstr ""
 
+#: install.php:757
+msgid "Language Setup"
+msgstr ""
+
+#: install.php:759
+msgid "Display Language"
+msgstr ""
+
 #: install.php:740
 msgid "Database Setup"
 msgstr ""

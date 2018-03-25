@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/lightbox/admin/pages/lightbox_settings.twig:3
+#: modules/lightbox/admin/pages/lightbox_settings.twig:6
+msgid "Lightbox Settings"
+msgstr "灯箱设置"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:10
+msgid "Background"
+msgstr "背景"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:12
+msgid "Black"
+msgstr "黑色"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:13
+msgid "Grey"
+msgstr "灰色"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:14
+msgid "White"
+msgstr "白色"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:15
+msgid "Inherit"
+msgstr "继承"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:19
+msgid "Edge Spacing"
+msgstr "边缘间距"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+msgid "(pixels)"
+msgstr "（像素）"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+msgid "Protect Images"
+msgstr "保护图像"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:26
+msgid "Prevent visitors from saving images?"
+msgstr "防止访问者保存图像？"
+
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:37
+msgid "Lightbox"
+msgstr ""
+
+#: modules/lightbox/info.php:6
+msgid "A lightbox for your images."
+msgstr "为您的图片提供灯箱。"

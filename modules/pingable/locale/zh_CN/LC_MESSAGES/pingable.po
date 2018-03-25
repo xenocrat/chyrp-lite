@@ -1,0 +1,145 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/pingable/admin/pages/delete_pingback.twig:3
+#: modules/pingable/admin/pages/delete_pingback.twig:6
+msgid "Delete Pingback?"
+msgstr "删除Pingback？"
+
+#: modules/pingable/admin/pages/delete_pingback.twig:8
+#, php-format
+msgid "Are you sure you want to delete the pingback from &#8220;%s&#8221;?"
+msgstr "您确定想要从&#8220;%s&#8221;删除pingback？"
+
+#: modules/pingable/admin/pages/edit_pingback.twig:3
+msgid "Edit Pingback"
+msgstr "编辑Pingback"
+
+#: modules/pingable/admin/pages/edit_pingback.twig:6
+#, php-format
+msgid "Editing Pingback to &#8220;%s&#8221;"
+msgstr "编辑Pingback为&#8220;%s&#8221;"
+
+#: modules/pingable/admin/pages/edit_pingback.twig:10
+msgid "Title"
+msgstr "标题"
+
+#: modules/pingable/admin/pages/edit_pingback.twig:14
+msgid "Update"
+msgstr "更新"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:3
+msgid "Manage Pingbacks"
+msgstr "管理Pingback"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:19
+#: modules/pingable/pingable.php:133 modules/pingable/pingable.php:146
+msgid "Pingbacks"
+msgstr "引用"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:23
+msgid "Source"
+msgstr "来源"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:24
+msgid "Post"
+msgstr "帖子"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:25
+msgid "Added"
+msgstr "增加"
+
+#: modules/pingable/info.php:3
+msgid "Pingable"
+msgstr ""
+
+#: modules/pingable/info.php:6
+msgid "Register pingbacks from blogs that link to yours."
+msgstr "为所有链接到您的博客注册Pingbacks。"
+
+#: modules/pingable/info.php:11
+msgid "Please remember to update the permission settings for each group."
+msgstr "请记住更新每个组的权限设置。"
+
+#: modules/pingable/info.php:12
+msgid "Do you want to remove pingbacks from the database?"
+msgstr "您想从数据库中删除pingbacks？"
+
+#: modules/pingable/pingable.php:8 modules/pingable/pingable.php:20
+msgid "Edit Pingbacks"
+msgstr "编辑Pingback"
+
+#: modules/pingable/pingable.php:9 modules/pingable/pingable.php:21
+msgid "Delete Pingbacks"
+msgstr "删除Pingback"
+
+#: modules/pingable/pingable.php:31
+msgid "A ping from your URL is already registered."
+msgstr "您的URL中的ping已被注册。"
+
+#: modules/pingable/pingable.php:34
+msgid "Your URL is too long to be stored in our database."
+msgstr "您的网址太长，无法存储在我们的数据库中。"
+
+#: modules/pingable/pingable.php:38
+msgid "Pingback registered!"
+msgstr "Pingback已注册！"
+
+#: modules/pingable/pingable.php:43
+msgid "An ID is required to edit a pingback."
+msgstr "编辑pingback需要一个ID。"
+
+#: modules/pingable/pingable.php:48 modules/pingable/pingable.php:69
+#: modules/pingable/pingable.php:86 modules/pingable/pingable.php:107
+msgid "Pingback not found."
+msgstr "Pingback未找到。"
+
+#: modules/pingable/pingable.php:51 modules/pingable/pingable.php:72
+msgid "You do not have sufficient privileges to edit this pingback."
+msgstr "您没有足够的权限编辑这个pingback。"
+
+#: modules/pingable/pingable.php:61
+msgid "An ID is required to update a pingback."
+msgstr "更新pingback需要一个ID。"
+
+#: modules/pingable/pingable.php:64
+msgid "No Title Specified"
+msgstr "未指定标题。"
+
+#: modules/pingable/pingable.php:64
+msgid "A title is required to update a pingback."
+msgstr "更新pingback需要一个标题。"
+
+#: modules/pingable/pingable.php:76
+msgid "Pingback updated."
+msgstr "Pingback已更新。"
+
+#: modules/pingable/pingable.php:81 modules/pingable/pingable.php:99
+msgid "An ID is required to delete a pingback."
+msgstr "删除pingback需要一个ID。"
+
+#: modules/pingable/pingable.php:89 modules/pingable/pingable.php:110
+msgid "You do not have sufficient privileges to delete this pingback."
+msgstr "您没有足够的权限删除这个pingback。"
+
+#: modules/pingable/pingable.php:114
+msgid "Pingback deleted."
+msgstr "Pingback已删除。"
+
+#: modules/pingable/pingable.php:119
+msgid "You do not have sufficient privileges to manage pingbacks."
+msgstr "您没有足够的权限来管理pingback。"

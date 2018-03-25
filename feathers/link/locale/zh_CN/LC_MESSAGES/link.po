@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/link/info.php:3
+msgid "Link"
+msgstr "Link"
+
+#: feathers/link/info.php:6
+msgid "Link to other sites and add an optional description."
+msgstr "链接到其他网站并添加可选说明。"
+
+#: feathers/link/link.php:6
+msgid "Title"
+msgstr "标题"
+
+#: feathers/link/link.php:10
+msgid "URL"
+msgstr "URL"
+
+#: feathers/link/link.php:13
+msgid "Description"
+msgstr "描述"
+
+#: feathers/link/link.php:25 feathers/link/link.php:42
+msgid "URL can't be empty."
+msgstr "URL不能为空。"
+
+#: feathers/link/link.php:28 feathers/link/link.php:45
+msgid "Invalid URL."
+msgstr "无效的URL。"

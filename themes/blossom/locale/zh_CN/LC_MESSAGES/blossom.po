@@ -1,0 +1,426 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: blossom\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: q849958241@163.com\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: 筱枫 <q849958241@163.com>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: themes/blossom/content/comment.twig:3
+#, php-format
+msgid "%s:"
+msgstr "%s:"
+
+#: themes/blossom/content/comment.twig:5
+#, php-format
+msgid "%s said:"
+msgstr "%s 说："
+
+#: themes/blossom/content/comment.twig:9
+msgid "This comment is awaiting moderation."
+msgstr "这个评论正在等待审核。"
+
+#: themes/blossom/content/comment.twig:22
+msgid "%d %B, %Y, at %I:%M %p"
+msgstr "%d %B, %Y, at %I:%M %p"
+
+#: themes/blossom/content/post.twig:6
+msgid "Tags"
+msgstr "标签"
+
+#: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:30
+#: themes/blossom/layouts/default.twig:98
+msgid "Draft"
+msgstr "草稿"
+
+#: themes/blossom/content/post.twig:19
+msgid "Scheduled"
+msgstr "计划"
+
+#: themes/blossom/content/post.twig:21
+msgid "Pinned"
+msgstr "固定"
+
+#: themes/blossom/content/post.twig:23
+msgid "%d %b, %Y"
+msgstr "%d %b, %Y"
+
+#: themes/blossom/content/post.twig:27 themes/blossom/content/sidebar.twig:56
+#: themes/blossom/pages/view.twig:20
+msgid "[Untitled]"
+msgstr "[无标题]"
+
+#: themes/blossom/content/post.twig:35
+#, php-format
+msgid "%s pingback"
+msgid_plural "%s pingbacks"
+msgstr[0] "%s 包括引用"
+
+#: themes/blossom/content/post.twig:40
+msgid "Comments closed"
+msgstr "评论已关闭"
+
+#: themes/blossom/content/post.twig:44
+#, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] "%s 评论"
+
+#: themes/blossom/content/post.twig:51
+#, php-format
+msgid "&copy; %s, %s."
+msgstr "&copy; %s, %s."
+
+#: themes/blossom/content/post.twig:53
+#, php-format
+msgid "&copy; %s."
+msgstr "&copy; %s."
+
+#: themes/blossom/content/sidebar.twig:7 themes/blossom/layouts/default.twig:45
+msgid "Search"
+msgstr "搜索"
+
+#: themes/blossom/content/sidebar.twig:12
+#: themes/blossom/layouts/default.twig:68
+msgid "Blog"
+msgstr "博客"
+
+#: themes/blossom/content/sidebar.twig:15
+#: themes/blossom/forms/user/controls.twig:9
+#: themes/blossom/forms/user/register.twig:13
+#: themes/blossom/layouts/default.twig:80
+msgid "Email"
+msgstr "邮件"
+
+#: themes/blossom/content/sidebar.twig:18
+#: themes/blossom/layouts/default.twig:83
+msgid "Feed"
+msgstr "订阅"
+
+#: themes/blossom/content/sidebar.twig:22
+#: themes/blossom/layouts/default.twig:90
+msgid "Admin"
+msgstr "管理"
+
+#: themes/blossom/content/sidebar.twig:26
+#: themes/blossom/layouts/default.twig:94
+msgid "Write"
+msgstr "写作"
+
+#: themes/blossom/content/sidebar.twig:35
+#: themes/blossom/forms/user/controls.twig:5
+#: themes/blossom/layouts/default.twig:103
+msgid "Controls"
+msgstr "操作"
+
+#: themes/blossom/content/sidebar.twig:38
+#: themes/blossom/layouts/default.twig:106
+msgid "Log out"
+msgstr "退出登陆"
+
+#: themes/blossom/content/sidebar.twig:43
+#: themes/blossom/forms/user/register.twig:5
+#: themes/blossom/forms/user/register.twig:19
+#: themes/blossom/layouts/default.twig:111
+msgid "Register"
+msgstr "注册"
+
+#: themes/blossom/content/sidebar.twig:47
+#: themes/blossom/forms/user/login.twig:5
+#: themes/blossom/forms/user/login.twig:14
+#: themes/blossom/layouts/default.twig:115
+msgid "Log in"
+msgstr "登陆"
+
+#: themes/blossom/content/sidebar.twig:52
+msgid "Categories"
+msgstr "分类"
+
+#: themes/blossom/content/sidebar.twig:62
+msgid "Pages"
+msgstr "页面"
+
+#: themes/blossom/content/sidebar.twig:72
+msgid "Related Posts"
+msgstr "相关帖子"
+
+#: themes/blossom/content/sidebar.twig:81
+msgid "Recent Posts"
+msgstr "最近的帖子"
+
+#: themes/blossom/content/sidebar.twig:92
+#: themes/blossom/layouts/default.twig:86
+msgid "Archive"
+msgstr "档案"
+
+#: themes/blossom/content/sidebar.twig:97 themes/blossom/pages/archive.twig:18
+msgid "%B %Y"
+msgstr "%B %Y"
+
+#: themes/blossom/feathers/uploader.twig:21
+msgid "File attachment:"
+msgstr "文件附件："
+
+#: themes/blossom/forms/comment/edit.twig:2
+msgid "Comment"
+msgstr "评论"
+
+#: themes/blossom/forms/comment/edit.twig:5
+msgid "Author"
+msgstr "作者"
+
+#: themes/blossom/forms/comment/edit.twig:7
+msgid "Author's website"
+msgstr "作者的站点"
+
+#: themes/blossom/forms/comment/edit.twig:9
+msgid "Author's email"
+msgstr "作者的邮箱"
+
+#: themes/blossom/forms/comment/edit.twig:13
+msgid "Timestamp"
+msgstr "时间戳"
+
+#: themes/blossom/forms/comment/edit.twig:15
+msgid "Status"
+msgstr "状态"
+
+#: themes/blossom/forms/comment/edit.twig:17
+msgid "Approved"
+msgstr "批准"
+
+#: themes/blossom/forms/comment/edit.twig:18
+msgid "Denied"
+msgstr "拒绝"
+
+#: themes/blossom/forms/comment/edit.twig:19
+msgid "Spam"
+msgstr "垃圾邮件"
+
+#: themes/blossom/forms/comment/edit.twig:20
+msgid "Pingback"
+msgstr "引用"
+
+#: themes/blossom/forms/comment/edit.twig:24
+msgid "Email Notifications"
+msgstr "邮件通知"
+
+#: themes/blossom/forms/comment/edit.twig:32
+msgid "Save"
+msgstr "保存"
+
+#: themes/blossom/forms/comment/edit.twig:33
+msgid "Cancel"
+msgstr "取消"
+
+#: themes/blossom/forms/comment/new.twig:3
+#, php-format
+msgid "%s's comment"
+msgstr "%s的评论"
+
+#: themes/blossom/forms/comment/new.twig:5
+msgid "Your name"
+msgstr "您的姓名"
+
+#: themes/blossom/forms/comment/new.twig:7
+msgid "Your email"
+msgstr "您的邮箱"
+
+#: themes/blossom/forms/comment/new.twig:9
+msgid "Your website"
+msgstr "您的站点"
+
+#: themes/blossom/forms/comment/new.twig:12
+msgid "Your comment"
+msgstr "您的评论"
+
+#: themes/blossom/forms/comment/new.twig:16
+msgid "Markdown is allowed."
+msgstr "可以使用Markdown语法。"
+
+#: themes/blossom/forms/comment/new.twig:18
+msgid "HTML tags allowed:"
+msgstr "可以使用HTML标签："
+
+#: themes/blossom/forms/comment/new.twig:20
+msgid "HTML is not allowed."
+msgstr "无法使用HTML。"
+
+#: themes/blossom/forms/comment/new.twig:24
+msgid "Notify me when others comment"
+msgstr "当有其他人评论的时候通知我"
+
+#: themes/blossom/forms/comment/new.twig:37
+msgid "Speak"
+msgstr "说话"
+
+#: themes/blossom/forms/user/controls.twig:7
+msgid "Full name"
+msgstr "全名"
+
+#: themes/blossom/forms/user/controls.twig:11
+msgid "Website"
+msgstr "站点"
+
+#: themes/blossom/forms/user/controls.twig:13
+msgid "New password?"
+msgstr "新密码？"
+
+#: themes/blossom/forms/user/controls.twig:15
+msgid "Confirm"
+msgstr "确认密码"
+
+#: themes/blossom/forms/user/controls.twig:20
+msgid "Update"
+msgstr "更新"
+
+#: themes/blossom/forms/user/login.twig:7
+#: themes/blossom/forms/user/lost_password.twig:8
+#: themes/blossom/forms/user/register.twig:7
+msgid "Username"
+msgstr "用户名"
+
+#: themes/blossom/forms/user/login.twig:9
+#: themes/blossom/forms/user/register.twig:9
+#: themes/blossom/forms/user/register.twig:11
+msgid "Password"
+msgstr "密码"
+
+#: themes/blossom/forms/user/login.twig:15
+msgid "Help!"
+msgstr "需要帮助！"
+
+#: themes/blossom/forms/user/lost_password.twig:5
+msgid "Lost password"
+msgstr "忘记密码"
+
+#: themes/blossom/forms/user/lost_password.twig:7
+msgid ""
+"Please enter your username below and we will email you a new password for "
+"your account."
+msgstr "请在下面输入您的用户名，我们会通过电子邮件向您发送新帐户的密码。"
+
+#: themes/blossom/forms/user/lost_password.twig:12
+msgid "Submit"
+msgstr "提交"
+
+#: themes/blossom/forms/user/register.twig:11
+msgid "(again)"
+msgstr "(再一次)"
+
+#: themes/blossom/info.php:3
+msgid "Blossom"
+msgstr "Blossom"
+
+#: themes/blossom/info.php:6
+msgid "The default theme provided with Chyrp Lite."
+msgstr "这是Chyrp Lite默认提供的主题。"
+
+#: themes/blossom/javascripts/theme.js.php:14
+#: themes/blossom/javascripts/theme.js.php:22
+msgid "Menu"
+msgstr "菜单"
+
+#: themes/blossom/layouts/default.twig:54
+msgid "Newer posts"
+msgstr "较新的帖子"
+
+#: themes/blossom/layouts/default.twig:62
+msgid "Older posts"
+msgstr "较旧的帖子"
+
+#: themes/blossom/layouts/default.twig:127
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
+msgstr "调用 %s 在行 %d 在 %s 秒."
+
+#: themes/blossom/pages/403.twig:5
+msgid "Forbidden."
+msgstr "被禁止."
+
+#: themes/blossom/pages/404.twig:5
+msgid "Not found."
+msgstr "未找到."
+
+#: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:48
+#: themes/blossom/pages/archive.twig:58
+#, php-format
+msgid "Archive of %s"
+msgstr "%s的档案"
+
+#: themes/blossom/pages/archive.twig:36
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "永久链接至 &#8220;%s&#8221;"
+
+#: themes/blossom/pages/archive.twig:69
+msgid "There aren't any posts in the timeframe you specified."
+msgstr "在指定的时间范围内没有任何帖子。"
+
+#: themes/blossom/pages/category.twig:6
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221; 分类中的帖子"
+
+#: themes/blossom/pages/drafts.twig:6
+msgid "Drafts"
+msgstr "草稿"
+
+#: themes/blossom/pages/drafts.twig:13
+msgid "You don't have any drafts"
+msgstr "您没有任何草稿"
+
+#: themes/blossom/pages/index.twig:9
+msgid "No posts"
+msgstr "没有帖子"
+
+#: themes/blossom/pages/search.twig:6
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221; 的搜索结果"
+
+#: themes/blossom/pages/search.twig:13
+msgid "Your search did not return any results."
+msgstr "空空如也"
+
+#: themes/blossom/pages/tag.twig:6
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221; 的帖子标签"
+
+#: themes/blossom/pages/tags.twig:6
+msgid "Tag cloud"
+msgstr "标签云"
+
+#: themes/blossom/pages/tags.twig:13
+msgid "Nothing here yet!"
+msgstr "然而这里什么也没有！"
+
+#: themes/blossom/pages/view.twig:6
+msgid "Next post"
+msgstr "下一篇"
+
+#: themes/blossom/pages/view.twig:12
+msgid "Previous post"
+msgstr "上一篇"
+
+#: themes/blossom/pages/view.twig:17
+msgid "Pingbacks"
+msgstr "引用"
+
+#: themes/blossom/pages/view.twig:41
+msgid "Newer comments"
+msgstr "较新的评论"
+
+#: themes/blossom/pages/view.twig:42
+msgid "Older comments"
+msgstr "较旧的评论"

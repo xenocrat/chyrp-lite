@@ -1,3 +1,5 @@
+[简体中文](README_zh_CN.md)
+
 ## What can Chyrp Lite do for me?
 
 Chyrp Lite makes it possible to host a blog on your own web server with minimal fuss. You can have
