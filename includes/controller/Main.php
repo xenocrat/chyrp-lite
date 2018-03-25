@@ -93,6 +93,10 @@
             if (empty($route->action) and strpos($route->arg[0], "?") === 0)
                 return $route->action = "index";
 
+            # Discover feed requests.
+            if (preg_match("/\/feed\/?$/", $route->request))
+                $this->feed = true;
+
             # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
                 foreach ($pages[1] as $key => $page_var)
@@ -102,10 +106,6 @@
                 if ($route->arg[0] == $pages[1][0])
                     return $route->action = "index";
             }
-
-            # Discover feed requests.
-            if (preg_match("/\/feed\/?$/", $route->request))
-                $this->feed = true;
 
             # Archive.
             if ($route->arg[0] == "archive") {
