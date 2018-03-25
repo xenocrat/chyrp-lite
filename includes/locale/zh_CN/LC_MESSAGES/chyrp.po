@@ -757,7 +757,7 @@ msgstr "所有页面"
 
 #: includes/controller/Admin.php:2065 includes/controller/Admin.php:2093
 msgid "Users"
-msgstr "所有用户"
+msgstr "用户"
 
 #: includes/controller/Admin.php:2069
 msgid "Groups"
@@ -773,11 +773,11 @@ msgstr "导出"
 
 #: includes/controller/Admin.php:2091
 msgid "General"
-msgstr "通常设置"
+msgstr "通用"
 
 #: includes/controller/Admin.php:2092
 msgid "Content"
-msgstr "内容设置"
+msgstr "内容"
 
 #: includes/controller/Admin.php:2094
 msgid "Routes"

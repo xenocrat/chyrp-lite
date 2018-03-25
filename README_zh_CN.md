@@ -39,7 +39,7 @@ Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API
 * Tags: 将多个可搜索标签应用于您的博客条目。
 * Pingable: 从链接到你的博客注册Pingbacks。
 * Comments: 一个全面的博客评论系统。
-* Likes: 让您的访客表示感谢。
+* Likes: 让您的访客表示喜欢。
 * Read More: 摘录博客索引中的长博客条目。
 * Rights: 设置来源和版权/留下您的作品。
 * Cascade: ajax支持无限滚动您的博客。
