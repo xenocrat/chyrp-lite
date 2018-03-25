@@ -232,10 +232,10 @@
 
     /**
      * Function: get_locale
-     * Gets the current locale setting.
+     * Gets the current locale setting minus charset.
      */
     function get_locale() {
-        return setlocale(LC_ALL, 0);
+        return preg_replace("/\.utf-?8$/i", "", setlocale(LC_ALL, 0));
     }
 
     /**
