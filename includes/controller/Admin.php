@@ -1760,22 +1760,9 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            # Ensure the default locale is always present in the list.
-            $locales = array(array("code" => "en_US",
-                                   "name" => lang_code("en_US")));
-
-            if ($open = opendir(INCLUDES_DIR.DIR."locale")) {
-                 while (($folder = readdir($open)) !== false)
-                    if ($folder != "en_US" and preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $folder))
-                        $locales[] = array("code" => $folder,
-                                           "name" => lang_code($folder));
-
-                closedir($open);
-            }
-
             if (empty($_POST))
                 return $this->display("pages".DIR."general_settings",
-                                      array("locales" => $locales,
+                                      array("locales" => locales(),
                                             "timezones" => timezones()));
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
