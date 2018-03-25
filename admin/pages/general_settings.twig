@@ -37,8 +37,7 @@
 <label for="timezone">{{ "Time Zone" | translate }}</label>
 <select name="timezone" id="timezone">
 {% for zone in timezones %}
-{% set option_contents = zone | replace({"_": " "}) | replace({"St ": "St. "}) %}
-<option value="{{ zone }}"{{ zone | selected(site.timezone) }}>{{ option_contents }}</option>
+<option value="{{ zone.code }}"{{ zone.code | selected(site.timezone) }}>{{ zone.name }}</option>
 {% endfor %}
 </select>
 </p>
