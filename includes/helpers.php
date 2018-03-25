@@ -394,7 +394,7 @@
      * Parameters:
      *     $timezone - The timezone to set.
      */
-    function set_timezone($timezone) {
+    function set_timezone($timezone = "Atlantic/Reykjavik") {
         return date_default_timezone_set($timezone);
     }
 
