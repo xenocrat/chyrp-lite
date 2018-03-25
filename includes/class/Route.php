@@ -249,7 +249,7 @@
          * Parses custom routes stored in the configuration.
          *
          * Notes:
-         *     The / path strictly requires an empty request.
+         *     The / path strictly requires no request args.
          */
         public function custom() {
             $config = Config::current();
@@ -257,13 +257,13 @@
             foreach ($config->routes as $path => $action) {
                 preg_match_all("/\(([^\)]+)\)/", $path, $variables);
 
-                $escape = preg_quote(oneof(trim($path, "/"), "/"), "/");
-                $regexp = ($path == "/") ?
-                          "\$" :
-                          preg_replace("/\\\\\(([^\)]+)\\\\\)/", "([^\/]+)", $escape) ;
+                $exp = ($path == "/") ?
+                        "\$" :
+                        preg_replace("/\\\\\(([^\)]+)\\\\\)/", "([^\/]+)",
+                        preg_quote(oneof(trim($path, "/"), "/"), "/")) ;
 
                 # Expression matches?
-                if (preg_match("/^\/{$regexp}/", $this->request, $args)) {
+                if (preg_match("/^\/{$exp}/", $this->request, $args)) {
                     array_shift($args);
 
                     # Populate $_GET variables discovered in the path.
