@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/simplemde/info.php:3
+msgid "SimpleMDE"
+msgstr ""
+
+#: modules/simplemde/info.php:6
+msgid ""
+"WYSIWYG-esque editor that allows authors inexperienced with Markdown to use "
+"familiar toolbar buttons and shortcuts."
+msgstr ""
+"WYSIWYG-esque编辑器，允许为没有Markdown经验的作者添加熟悉的工具栏按钮和快捷"
+"键。"

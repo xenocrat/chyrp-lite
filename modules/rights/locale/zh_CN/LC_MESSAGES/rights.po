@@ -1,0 +1,143 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/rights/admin/help/choosing_a_licence.twig:3
+#, fuzzy
+msgid "Filtering Results"
+msgstr "过滤结果"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:6
+msgid "Choosing a License"
+msgstr "选择一个许可证"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:8
+msgid ""
+"When you create a piece of content for your blog, you get to decide whether "
+"or not you want your name associated with it, and whether or not it can be "
+"reproduced and reused by other people. As the &#8220;rights holder&#8221;, "
+"the license you choose to apply to your work determines which of those "
+"rights you retain and which of them you waive."
+msgstr ""
+"当您为博客创建一段内容时，您可以决定是否希望自己的姓名与其关联，以及是否可以"
+"让其他人复制并重复使用。 作为&#8220权利持有人r&#8221;，您选择适用于您的作品的"
+"许可证，决定您保留哪些权利以及放弃哪些权利。"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:11
+msgid ""
+"Creative Commons is a family of licenses that you can use to donate your "
+"work to &#8220;the commons&#8221; — the body of work freely available for "
+"legal use, sharing, repurposing, and remixing. With a Creative Commons "
+"license, you can give other people permission to reproduce or reuse your "
+"work with certain restrictions. Here is a chart comparing the licenses:"
+msgstr ""
+"知识共享组织是一系列许可证，您可以使用这些许可证将您的作品捐赠给&#8220;公共"
+"&#8221; —— 免费提供合法使用，共享，再利用和混合的作品。 使用知识共享许可证，"
+"您可以授予其他人许可以某些限制复制或重复使用您的作品。 以下是比较许可证的图"
+"表："
+
+#: modules/rights/admin/help/choosing_a_licence.twig:17
+#: modules/rights/rights.php:59
+msgid "License"
+msgstr "许可证"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:20
+msgid "Attribution"
+msgstr "归属"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:23
+msgid "ShareAlike"
+msgstr "相同方式共享"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:26
+msgid "NonCommercial"
+msgstr "非商业性使用"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:29
+msgid "NoDerivatives"
+msgstr "非衍生品"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:37
+#: modules/rights/rights.php:17 modules/rights/rights.php:76
+msgid "Creative Commons BY"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:48
+#: modules/rights/rights.php:20 modules/rights/rights.php:81
+msgid "Creative Commons BY-ND"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:63
+#: modules/rights/rights.php:23 modules/rights/rights.php:86
+msgid "Creative Commons BY-SA"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:78
+#: modules/rights/rights.php:26 modules/rights/rights.php:91
+msgid "Creative Commons BY-NC"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:93
+#: modules/rights/rights.php:29 modules/rights/rights.php:96
+msgid "Creative Commons BY-NC-ND"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:110
+#: modules/rights/rights.php:32 modules/rights/rights.php:101
+msgid "Creative Commons BY-NC-SA"
+msgstr ""
+
+#: modules/rights/admin/help/choosing_a_licence.twig:127
+#: modules/rights/rights.php:35 modules/rights/rights.php:106
+msgid "Creative Commons CC0"
+msgstr ""
+
+#: modules/rights/info.php:3
+msgid "Rights"
+msgstr ""
+
+#: modules/rights/info.php:6
+msgid ""
+"Adds post options for attribution and assigning intellectual property rights."
+msgstr "添加帖子的归属和分配知识产权选项。"
+
+#: modules/rights/info.php:10
+msgid "Do you want to remove rights data from the database?"
+msgstr "您想从数据库中删除权利数据吗？"
+
+#: modules/rights/rights.php:14 modules/rights/rights.php:115
+msgid "All rights reserved"
+msgstr "版权所有"
+
+#: modules/rights/rights.php:38
+msgid "Orphan Work"
+msgstr ""
+
+#: modules/rights/rights.php:41 modules/rights/rights.php:111
+msgid "Public Domain"
+msgstr ""
+
+#: modules/rights/rights.php:44
+msgid "Crown Copyright"
+msgstr ""
+
+#: modules/rights/rights.php:49
+msgid "Original Work"
+msgstr "原作"
+
+#: modules/rights/rights.php:54
+msgid "Rights Holder"
+msgstr "权利持有人"
