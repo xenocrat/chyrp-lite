@@ -207,12 +207,12 @@
 
         /**
          * Function: add
-         * Adds a route to Chyrp. Only needed for actions that have more than one parameter.
+         * Adds a route to the blog. Required for actions that have more than one parameter.
          * For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
          *
          * Parameters:
-         *     $path - The path to add. Wrap variables with parentheses, e.g. "tag/(name)/".
-         *     $action - The action the path points to.
+         *     $path - The path to add. Wrap variables with parentheses e.g. "tag/(name)/".
+         *     $action - The action. Add parameters with semicolons e.g "tag;foo=bar;baz=boo".
          *
          * See Also:
          *     <remove>
@@ -242,6 +242,51 @@
             unset($config->routes[$path]);
 
             $config->set("routes", $config->routes);
+        }
+
+        /**
+         * Function: custom
+         * Parses custom routes stored in the configuration.
+         *
+         * Notes:
+         *     The / path strictly requires an empty request.
+         */
+        public function custom() {
+            $config = Config::current();
+
+            foreach ($config->routes as $path => $action) {
+                preg_match_all("/\(([^\)]+)\)/", $path, $variables);
+
+                $escape = preg_quote(oneof(trim($path, "/"), "/"), "/");
+                $regexp = ($path == "/") ?
+                          "\$" :
+                          preg_replace("/\\\\\(([^\)]+)\\\\\)/", "([^\/]+)", $escape) ;
+
+                # Expression matches?
+                if (preg_match("/^\/{$regexp}/", $this->request, $args)) {
+                    array_shift($args);
+
+                    # Populate $_GET variables discovered in the path.
+                    if (isset($variables[1]))
+                        foreach ($variables[1] as $index => $variable)
+                            $_GET[$variable] = urldecode($args[$index]);
+
+                    # Populate $_GET variables contained in the action.
+                    $params = explode(";", $action);
+                    $action = $params[0];
+
+                    array_shift($params);
+
+                    foreach ($params as $param) {
+                        $split = explode("=", $param);
+                        fallback($split[1], "");
+                        $_GET[$split[0]] = urldecode($split[1]);
+                    }
+
+                    # Set the action.
+                    $this->action = $action;
+                }
+            }
         }
 
         /**

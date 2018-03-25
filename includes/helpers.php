@@ -342,30 +342,11 @@
     }
 
     /**
-     * Function: time_in_timezone
-     * Returns the appropriate time() for representing a timezone.
-     */
-    function time_in_timezone($timezone) {
-        $orig = get_timezone();
-        set_timezone($timezone);
-        $time = date("F jS, Y, g:i A");
-        set_timezone($orig);
-        return strtotime($time);
-    }
-
-    /**
      * Function: timezones
-     * Returns an array of timezones that have unique offsets.
+     * Returns an array of timezone identifiers.
      */
     function timezones() {
-        $zones = array();
-
-        foreach (timezone_identifiers_list(DateTimeZone::ALL) as $zone)
-            $zones[] = array("name" => $zone,
-                             "now" => time_in_timezone($zone));
-
-        usort($zones, function($a, $b) { return (int) ($a["now"] > $b["now"]); });
-        return $zones;
+        return timezone_identifiers_list(DateTimeZone::ALL);
     }
 
     /**
@@ -376,21 +357,15 @@
      *     $timezone - The timezone to set.
      */
     function set_timezone($timezone) {
-        if (function_exists("date_default_timezone_set"))
-            date_default_timezone_set($timezone);
-        else
-            ini_set("date.timezone", $timezone);
+        return date_default_timezone_set($timezone);
     }
 
     /**
      * Function: get_timezone()
-     * Returns the current timezone.
+     * Gets the timezone for all date/time functions.
      */
     function get_timezone() {
-        if (function_exists("date_default_timezone_set"))
-            return date_default_timezone_get();
-        else
-            return ini_get("date.timezone");
+        return date_default_timezone_get();
     }
 
     #---------------------------------------------

@@ -70,16 +70,17 @@
     # Prepare the Config interface.
     $config = Config::current();
 
-    # Set the timezone for time calculations (Atlantic/Reykjavik is 0 offset).
-    $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : oneof(ini_get("date.timezone"), "Atlantic/Reykjavik") ;
-    set_timezone($timezone);
+    # Get the timezone.
+    $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : get_timezone() ;
+
+    # Where are we?
+    $url = str_ireplace("/install.php", "", guess_url());
 
     # Try to load an appropriate translation for the default locale.
     load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
-    # Where are we?
-    $url = str_ireplace("/install.php", "", guess_url());
-    $url_path = oneof(parse_url($url, PHP_URL_PATH), "/");
+    # Set the timezone.
+    set_timezone($timezone);
 
     # Already installed?
     if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
@@ -129,10 +130,10 @@
      * Returns a best guess of the current URL.
      */
     function guess_url() {
-        $protocol = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off" or $_SERVER['SERVER_PORT'] == 443) ?
-            "https://" : "http://" ;
+        $scheme = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off") ? "https" : "http" ;
+        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'] ;
 
-        return $protocol.oneof(@$_SERVER['HTTP_HOST'], $_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
+        return $scheme."://".$host.$_SERVER['REQUEST_URI'];
     }
 
     /**
@@ -459,6 +460,13 @@
                     }
                 });
 
+                $("#url").keyup(function(e) {
+                    if ($(this).val() != "" && !isURL($(this).val()))
+                        $(this).addClass("error");
+                    else
+                        $(this).removeClass("error");
+                });
+
                 $("#email").keyup(function(e) {
                     if ($(this).val() != "" && !isEmail($(this).val()))
                         $(this).addClass("error");
@@ -485,10 +493,15 @@
         if (empty($_POST['database']))
             $errors[] = __("Database cannot be blank.");
 
+        if (empty($_POST['url']))
+            $errors[] = __("Chyrp URL cannot be blank.");
+        elseif (!is_url($_POST['url']))
+            $errors[] = __("Invalid Chyrp URL.");
+
         if (empty($_POST['name']))
             $errors[] = __("Please enter a name for your website.");
 
-        if (!isset($_POST['timezone']))
+        if (empty($_POST['timezone']))
             $errors[] = __("Time zone cannot be blank.");
 
         if (empty($_POST['login']))
@@ -687,13 +700,15 @@
                                         "group_id" => $group_id[$name]));
             }
 
+            $chyrp_url = rtrim(add_scheme($_POST['url']), "/");
+
             # Add the admin user account.
             if (!$sql->select("users", "id", array("login" => $_POST['login']))->fetchColumn())
                 $sql->insert("users",
                              array("login" => $_POST['login'],
                                    "password" => User::hashPassword($_POST['password1']),
                                    "email" => $_POST['email'],
-                                   "website" => rtrim($url, "/"),
+                                   "website" => $chyrp_url,
                                    "group_id" => $group_id["admin"],
                                    "approved" => true,
                                    "joined_at" => datetime()));
@@ -702,8 +717,8 @@
             $set = array($config->set("sql", $settings),
                          $config->set("name", strip_tags($_POST['name'])),
                          $config->set("description", strip_tags($_POST['description'])),
-                         $config->set("url", rtrim($url, "/")),
-                         $config->set("chyrp_url", rtrim($url, "/")),
+                         $config->set("url", $chyrp_url),
+                         $config->set("chyrp_url", $chyrp_url),
                          $config->set("email", $_POST['email']),
                          $config->set("timezone", $_POST['timezone']),
                          $config->set("locale", $_POST['language']),
@@ -807,6 +822,10 @@
                 </p>
                 <hr>
                 <h1><?php echo __("Website Setup"); ?></h1>
+                <p id="url_field">
+                    <label for="url"><?php echo __("Chyrp URL"); ?></label>
+                    <input type="url" name="url" value="<?php posted("url", $url); ?>" id="url">
+                </p>
                 <p id="name_field">
                     <label for="name"><?php echo __("Site Name"); ?></label>
                     <input type="text" name="name" value="<?php posted("name", __("My Awesome Site")); ?>" id="name">
@@ -819,9 +838,8 @@
                     <label for="timezone"><?php echo __("Time Zone"); ?></label>
                     <select name="timezone" id="timezone">
                     <?php foreach (timezones() as $zone): ?>
-                        <option value="<?php echo $zone["name"]; ?>"<?php selected($zone["name"], $timezone); ?>>
-                            <?php echo when("%H:%M", $zone["now"], true); ?> &mdash;
-                            <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone["name"]); ?>
+                        <option value="<?php echo $zone; ?>"<?php selected($zone, $timezone); ?>>
+                            <?php echo str_replace(array("_", "St "), array(" ", "St. "), $zone); ?>
                         </option>
                     <?php endforeach; ?>
                     </select>

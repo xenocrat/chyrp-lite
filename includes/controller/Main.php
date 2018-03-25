@@ -85,45 +85,41 @@
         public function parse($route) {
             $config = Config::current();
 
-            # If the visitor is at / and that's not a custom route, serve the blog index.
+            # Serve the index if the first arg is empty and / is not a route.
             if (empty($route->arg[0]) and !isset($config->routes["/"]))
                 return $route->action = "index";
 
-            # If the first argument is a query and action is unset, serve the blog index.
+            # Serve the index if the first arg is a query and action is unset.
             if (empty($route->action) and strpos($route->arg[0], "?") === 0)
                 return $route->action = "index";
+
+            # Discover pagination.
+            if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
+                foreach ($pages[1] as $key => $page_var)
+                    $_GET[$page_var] = (int) $pages[4][$key];
+
+                # Looks like pagination of the index.
+                if ($route->arg[0] == $pages[1][0])
+                    return $route->action = "index";
+            }
 
             # Discover feed requests.
             if (preg_match("/\/feed\/?$/", $route->request))
                 $this->feed = true;
 
-            # Static ID of a post or page.
-            if ($route->arg[0] == "id") {
-                if (isset($route->arg[1]) and isset($route->arg[2]))
-                    $_GET[$route->arg[1]] = $route->arg[2];
-
-                return $route->action = "id";
-            }
-
-            # Discover pagination.
-            if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $page_matches)) {
-                foreach ($page_matches[1] as $key => $page_var)
-                    $_GET[$page_var] = (int) $page_matches[4][$key];
-
-                # Test the first route argument; this might be pagination of the / route.
-                if ($route->arg[0] == $page_matches[1][0])
-                    return $route->action = (isset($config->routes["/"])) ? $config->routes["/"] : "index" ;
-            }
-
             # Archive.
             if ($route->arg[0] == "archive") {
                 # Make sure they're numeric; could be a "/page/" in there.
-                if (isset($route->arg[1]) and is_numeric($route->arg[1]))
+                if (isset($route->arg[1]) and is_numeric($route->arg[1])) {
                     $_GET['year'] = $route->arg[1];
-                if (isset($route->arg[2]) and is_numeric($route->arg[2]))
-                    $_GET['month'] = $route->arg[2];
-                if (isset($route->arg[3]) and is_numeric($route->arg[3]))
-                    $_GET['day'] = $route->arg[3];
+
+                    if (isset($route->arg[2]) and is_numeric($route->arg[2])) {
+                        $_GET['month'] = $route->arg[2];
+
+                        if (isset($route->arg[3]) and is_numeric($route->arg[3]))
+                            $_GET['day'] = $route->arg[3];
+                    }
+                }
 
                 return $route->action = "archive";
             }
@@ -144,43 +140,16 @@
                 return $route->action = "random";
             }
 
-            # Test custom routes and populate $_GET parameters if the route expression matches.
-            foreach ($config->routes as $path => $action) {
-                if (is_numeric($action))
-                    $action = $route->arg[0];
+            # Static ID of a post or page.
+            if ($route->arg[0] == "id") {
+                if (isset($route->arg[1]) and isset($route->arg[2]))
+                    $_GET[$route->arg[1]] = $route->arg[2];
 
-                preg_match_all("/\(([^\)]+)\)/", $path, $matches);
-
-                if ($path != "/")
-                    $path = trim($path, "/");
-
-                $escape = preg_quote($path, "/");
-                $to_regexp = preg_replace("/\\\\\(([^\)]+)\\\\\)/", "([^\/]+)", $escape);
-
-                if ($path == "/")
-                    $to_regexp = "\$";
-
-                if (preg_match("/^\/{$to_regexp}/", $route->request, $url_matches)) {
-                    array_shift($url_matches);
-
-                    if (isset($matches[1]))
-                        foreach ($matches[1] as $index => $parameter)
-                            $_GET[$parameter] = urldecode($url_matches[$index]);
-
-                    $params = explode(";", $action);
-                    $action = $params[0];
-
-                    array_shift($params);
-
-                    foreach ($params as $param) {
-                        $split = explode("=", $param);
-                        fallback($split[1], "");
-                        $_GET[$split[0]] = urldecode($split[1]);
-                    }
-
-                    $route->action = $action;
-                }
+                return $route->action = "id";
             }
+
+            # Custom route?
+            $route->custom();
 
             # Are we viewing a post?
             Post::from_url($route->request, $route);
@@ -303,7 +272,7 @@
                 redirect("search/".str_ireplace("%2F", "", urlencode($_GET['query']))."/");
 
             if (empty($_GET['query']))
-                Flash::warning(__("Please enter a search term."));
+                Flash::warning(__("Please enter a search term."), "/");
 
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
@@ -635,7 +604,7 @@
                 }
             }
 
-            $this->display("forms".DIR."user".DIR."login", array(), __("Log In"));
+            $this->display("forms".DIR."user".DIR."login", array(), __("Log in"));
         }
 
         /**
@@ -740,7 +709,7 @@
                 }
             }
 
-            $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost Password"));
+            $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost password"));
         }
 
         /**
