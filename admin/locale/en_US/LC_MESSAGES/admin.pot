@@ -280,7 +280,7 @@ msgstr ""
 #: admin/pages/content_settings.twig:87
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49
-#: admin/pages/general_settings.twig:68
+#: admin/pages/general_settings.twig:67
 #: admin/pages/route_settings.twig:85
 #: admin/pages/user_settings.twig:41
 msgid "Update"
@@ -475,7 +475,7 @@ msgid "Website"
 msgstr ""
 
 #: admin/pages/export.twig:3
-#: admin/pages/export.twig:38
+#: admin/pages/export.twig:39
 msgid "Export"
 msgstr ""
 
@@ -483,34 +483,31 @@ msgstr ""
 msgid "What would you like to export?"
 msgstr ""
 
-#: admin/pages/export.twig:10
+#: admin/pages/export.twig:9
+msgid "filter (optional)"
+msgstr ""
+
+#: admin/pages/export.twig:11
 #: admin/pages/manage_posts.twig:32
 msgid "Posts"
 msgstr ""
 
-#: admin/pages/export.twig:12
-#: admin/pages/export.twig:18
-#: admin/pages/export.twig:24
-#: admin/pages/export.twig:30
-msgid "filter (optional)"
-msgstr ""
-
-#: admin/pages/export.twig:16
+#: admin/pages/export.twig:17
 #: admin/pages/manage_pages.twig:19
 msgid "Pages"
 msgstr ""
 
-#: admin/pages/export.twig:22
+#: admin/pages/export.twig:23
 #: admin/pages/manage_groups.twig:21
 msgid "Groups"
 msgstr ""
 
-#: admin/pages/export.twig:28
+#: admin/pages/export.twig:29
 #: admin/pages/manage_users.twig:24
 msgid "Users"
 msgstr ""
 
-#: admin/pages/export.twig:33
+#: admin/pages/export.twig:34
 msgid "Users export file will contain the hashed password for each user – keep it safe!"
 msgstr ""
 
@@ -568,23 +565,23 @@ msgstr ""
 msgid "Time Zone"
 msgstr ""
 
-#: admin/pages/general_settings.twig:46
+#: admin/pages/general_settings.twig:45
 msgid "Language"
 msgstr ""
 
-#: admin/pages/general_settings.twig:54
+#: admin/pages/general_settings.twig:53
 msgid "Notify Visitors About Cookies?"
 msgstr ""
 
-#: admin/pages/general_settings.twig:57
+#: admin/pages/general_settings.twig:56
 msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
 msgstr ""
 
-#: admin/pages/general_settings.twig:61
+#: admin/pages/general_settings.twig:60
 msgid "Check for Updates?"
 msgstr ""
 
-#: admin/pages/general_settings.twig:64
+#: admin/pages/general_settings.twig:63
 msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 

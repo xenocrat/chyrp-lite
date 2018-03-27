@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: 筱枫 <q849958241@163.com>\n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: 筱枫 <q849958241@163.com>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
 #. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2018 Daniel Pimley and other contributors.
@@ -319,7 +319,7 @@ msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:87 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:68
+#: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:67
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:41
 msgid "Update"
 msgstr "更新"
@@ -487,7 +487,7 @@ msgstr "(可选)"
 msgid "Website"
 msgstr "网站"
 
-#: admin/pages/export.twig:3 admin/pages/export.twig:38
+#: admin/pages/export.twig:3 admin/pages/export.twig:39
 msgid "Export"
 msgstr "导出"
 
@@ -495,28 +495,27 @@ msgstr "导出"
 msgid "What would you like to export?"
 msgstr "想要导出什么？"
 
-#: admin/pages/export.twig:10 admin/pages/manage_posts.twig:32
-msgid "Posts"
-msgstr "所有帖子"
-
-#: admin/pages/export.twig:12 admin/pages/export.twig:18
-#: admin/pages/export.twig:24 admin/pages/export.twig:30
+#: admin/pages/export.twig:9
 msgid "filter (optional)"
 msgstr "过滤（可选）"
 
-#: admin/pages/export.twig:16 admin/pages/manage_pages.twig:19
+#: admin/pages/export.twig:11 admin/pages/manage_posts.twig:32
+msgid "Posts"
+msgstr "所有帖子"
+
+#: admin/pages/export.twig:17 admin/pages/manage_pages.twig:19
 msgid "Pages"
 msgstr "所有页面"
 
-#: admin/pages/export.twig:22 admin/pages/manage_groups.twig:21
+#: admin/pages/export.twig:23 admin/pages/manage_groups.twig:21
 msgid "Groups"
 msgstr "所有组"
 
-#: admin/pages/export.twig:28 admin/pages/manage_users.twig:24
+#: admin/pages/export.twig:29 admin/pages/manage_users.twig:24
 msgid "Users"
 msgstr "用户设置"
 
-#: admin/pages/export.twig:33
+#: admin/pages/export.twig:34
 msgid ""
 "Users export file will contain the hashed password for each user – keep it "
 "safe!"
@@ -570,23 +569,23 @@ msgstr "联系的邮件地址"
 msgid "Time Zone"
 msgstr "时区"
 
-#: admin/pages/general_settings.twig:46
+#: admin/pages/general_settings.twig:45
 msgid "Language"
 msgstr "语言"
 
-#: admin/pages/general_settings.twig:54
+#: admin/pages/general_settings.twig:53
 msgid "Notify Visitors About Cookies?"
 msgstr "通知来访者有关于Cookies的使用？"
 
-#: admin/pages/general_settings.twig:57
+#: admin/pages/general_settings.twig:56
 msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
 msgstr "关于隐私和电子通信的欧盟指令2002/58。"
 
-#: admin/pages/general_settings.twig:61
+#: admin/pages/general_settings.twig:60
 msgid "Check for Updates?"
 msgstr "检查更新？"
 
-#: admin/pages/general_settings.twig:64
+#: admin/pages/general_settings.twig:63
 msgid "Check for the availability of new Chyrp Lite versions."
 msgstr "检查可用的新版本。"
 

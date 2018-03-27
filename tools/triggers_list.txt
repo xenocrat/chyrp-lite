@@ -41,7 +41,7 @@ Arguments:
 export_choose
 -------------
 Called from:
-	admin/pages/export.twig on line 36
+	admin/pages/export.twig on line 37
 
 
 import_choose
@@ -286,19 +286,19 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 403
+	includes/controller/Main.php on line 372
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 618
+	includes/controller/Main.php on line 587
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 629
+	includes/controller/Main.php on line 598
 Arguments:
 	$user
 
@@ -306,7 +306,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 804
+	includes/controller/Main.php on line 773
 Arguments:
 	$post, $feed
 
@@ -314,13 +314,13 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1844
+	includes/helpers.php on line 1882
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1861
+	includes/helpers.php on line 1899
 
 
 javascript
@@ -795,7 +795,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 2043
+	includes/controller/Admin.php on line 2030
 
 
 manage_nav
@@ -803,7 +803,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2072
+	includes/controller/Admin.php on line 2059
 
 
 settings_nav
@@ -811,7 +811,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2097
+	includes/controller/Admin.php on line 2084
 
 
 extend_nav
@@ -819,7 +819,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2115
+	includes/controller/Admin.php on line 2102
 
 
 twig_context_admin
@@ -827,7 +827,7 @@ twig_context_admin
 Target:
 	$this->context
 Called from:
-	includes/controller/Admin.php on line 2167
+	includes/controller/Admin.php on line 2154
 
 
 twig_context_main
@@ -835,7 +835,7 @@ twig_context_main
 Target:
 	$this->context
 Called from:
-	includes/controller/Main.php on line 868
+	includes/controller/Main.php on line 837
 
 
 keyword_search
@@ -843,7 +843,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 724
+	includes/helpers.php on line 762
 Arguments:
 	$query, $plain
 
@@ -853,7 +853,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1259
+	includes/helpers.php on line 1297
 
 
 send_mail
@@ -861,7 +861,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 1975
+	includes/helpers.php on line 2013
 
 
 xmlrpc_methods
