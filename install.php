@@ -682,6 +682,7 @@
                                         "group_id" => $group_id[$name]));
             }
 
+            # Normalize the Chyrp URL.
             $chyrp_url = rtrim(add_scheme($_POST['url']), "/");
 
             # Add the admin user account.
@@ -690,7 +691,6 @@
                              array("login" => $_POST['login'],
                                    "password" => User::hashPassword($_POST['password1']),
                                    "email" => $_POST['email'],
-                                   "website" => $chyrp_url,
                                    "group_id" => $group_id["admin"],
                                    "approved" => true,
                                    "joined_at" => datetime()));
