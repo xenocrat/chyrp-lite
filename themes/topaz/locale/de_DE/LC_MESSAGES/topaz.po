@@ -37,6 +37,14 @@ msgstr "%d %B, %Y, um %I:%M %p"
 msgid "Tags"
 msgstr "Tags"
 
+#: themes/topaz/content/post.twig:15 themes/topaz/feathers/audio.twig:6
+#: themes/topaz/feathers/photo.twig:6 themes/topaz/feathers/quote.twig:6
+#: themes/topaz/feathers/text.twig:6 themes/topaz/feathers/uploader.twig:6
+#: themes/topaz/feathers/video.twig:6 themes/topaz/pages/archive.twig:29
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Permanentlink zu &#8220;%s&#8221;"
+
 #: themes/topaz/content/post.twig:17 themes/topaz/content/sidebar.twig:30
 #: themes/topaz/layouts/default.twig:97
 msgid "Draft"
@@ -59,6 +67,10 @@ msgstr "%d %b, %Y"
 msgid "[Untitled]"
 msgstr "[Unbenannt]"
 
+#: themes/topaz/content/post.twig:34
+msgid "View pingbacks"
+msgstr "Pingbacks anzeigen"
+
 #: themes/topaz/content/post.twig:35
 #, php-format
 msgid "%s pingback"
@@ -69,6 +81,10 @@ msgstr[1] "%s Pingbacks"
 #: themes/topaz/content/post.twig:40
 msgid "Comments closed"
 msgstr "Kommentare geschlossen"
+
+#: themes/topaz/content/post.twig:43
+msgid "View comments"
+msgstr "Kommentare ansehen"
 
 #: themes/topaz/content/post.twig:44
 #, php-format
@@ -87,9 +103,21 @@ msgstr "&copy; %s, %s."
 msgid "&copy; %s."
 msgstr "&copy; %s."
 
+#: themes/topaz/content/sidebar.twig:6 themes/topaz/layouts/default.twig:44
+msgid "Search&hellip;"
+msgstr "Suchen&hellip;"
+
+#: themes/topaz/content/sidebar.twig:6 themes/topaz/layouts/default.twig:44
+msgid "Search this blog"
+msgstr "Suchen"
+
 #: themes/topaz/content/sidebar.twig:7 themes/topaz/layouts/default.twig:45
 msgid "Search"
 msgstr "Suchen"
+
+#: themes/topaz/content/sidebar.twig:10
+msgid "Links"
+msgstr "Links"
 
 #: themes/topaz/content/sidebar.twig:12 themes/topaz/layouts/default.twig:67
 msgid "Blog"
@@ -350,11 +378,6 @@ msgstr "Nicht erlaubt."
 #: themes/topaz/pages/404.twig:5
 msgid "Not found."
 msgstr "Nicht gefunden."
-
-#: themes/topaz/pages/archive.twig:29
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
-msgstr "Permanentlink zu &#8220;%s&#8221;"
 
 #: themes/topaz/pages/archive.twig:41 themes/topaz/pages/archive.twig:46
 #: themes/topaz/pages/archive.twig:56

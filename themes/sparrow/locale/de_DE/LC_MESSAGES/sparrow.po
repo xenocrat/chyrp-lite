@@ -45,6 +45,14 @@ msgstr "[Unbenannt]"
 msgid "Tags"
 msgstr "Tags"
 
+#: themes/sparrow/content/post.twig:21 themes/sparrow/feathers/audio.twig:6
+#: themes/sparrow/feathers/photo.twig:6 themes/sparrow/feathers/quote.twig:6
+#: themes/sparrow/feathers/text.twig:6 themes/sparrow/feathers/uploader.twig:6
+#: themes/sparrow/feathers/video.twig:6 themes/sparrow/pages/archive.twig:36
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Permanentlink zu &#8220;%s&#8221;"
+
 #: themes/sparrow/content/post.twig:23 themes/sparrow/layouts/default.twig:59
 msgid "Draft"
 msgstr "Entwurf"
@@ -61,6 +69,10 @@ msgstr "Angepinnt"
 msgid "%d %b, %Y"
 msgstr "%d %b, %Y"
 
+#: themes/sparrow/content/post.twig:37
+msgid "View pingbacks"
+msgstr "Pingbacks anzeigen"
+
 #: themes/sparrow/content/post.twig:38
 #, php-format
 msgid "%s pingback"
@@ -71,6 +83,10 @@ msgstr[1] "%s Pingbacks"
 #: themes/sparrow/content/post.twig:43
 msgid "Comments closed"
 msgstr "Kommentare geschlossen"
+
+#: themes/sparrow/content/post.twig:46
+msgid "View comments"
+msgstr "Kommentare ansehen"
 
 #: themes/sparrow/content/post.twig:47
 #, php-format
@@ -293,6 +309,14 @@ msgstr "Schreiben"
 msgid "Log out"
 msgstr "Ausloggen"
 
+#: themes/sparrow/layouts/default.twig:83
+msgid "Search&hellip;"
+msgstr "Suchen&hellip;"
+
+#: themes/sparrow/layouts/default.twig:83
+msgid "Search this blog"
+msgstr "Suchen"
+
 #: themes/sparrow/layouts/default.twig:84
 msgid "Search"
 msgstr "Suchen"
@@ -326,11 +350,6 @@ msgstr "&larr; Archiv vom %s"
 #: themes/sparrow/pages/archive.twig:18
 msgid "%B %Y"
 msgstr "%B %Y"
-
-#: themes/sparrow/pages/archive.twig:36
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
-msgstr "Permanentlink zu &#8220;%s&#8221;"
 
 #: themes/sparrow/pages/archive.twig:48
 #, php-format

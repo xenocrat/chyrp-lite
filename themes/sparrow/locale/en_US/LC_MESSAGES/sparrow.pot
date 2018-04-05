@@ -40,8 +40,9 @@ msgstr ""
 #: themes/sparrow/feathers/text.twig:6
 #: themes/sparrow/feathers/uploader.twig:6
 #: themes/sparrow/feathers/video.twig:6
+#: themes/sparrow/pages/archive.twig:36
 #, php-format
-msgid 'Permanent link to &#8220;%s&#8221;'
+msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:23
@@ -62,7 +63,7 @@ msgid "%d %b, %Y"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:37
-msgid 'View pingbacks'
+msgid "View pingbacks"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:38
@@ -77,7 +78,7 @@ msgid "Comments closed"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:46
-msgid 'View comments'
+msgid "View comments"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:47
@@ -298,11 +299,11 @@ msgid "Log out"
 msgstr ""
 
 #: themes/sparrow/layouts/default.twig:83
-msgid 'Search&hellip;'
+msgid "Search&hellip;"
 msgstr ""
 
 #: themes/sparrow/layouts/default.twig:83
-msgid 'Search this blog'
+msgid "Search this blog"
 msgstr ""
 
 #: themes/sparrow/layouts/default.twig:84
@@ -337,11 +338,6 @@ msgstr ""
 
 #: themes/sparrow/pages/archive.twig:18
 msgid "%B %Y"
-msgstr ""
-
-#: themes/sparrow/pages/archive.twig:36
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/sparrow/pages/archive.twig:48

@@ -36,8 +36,9 @@ msgstr ""
 #: themes/umbra/feathers/text.twig:6
 #: themes/umbra/feathers/uploader.twig:6
 #: themes/umbra/feathers/video.twig:6
+#: themes/umbra/pages/archive.twig:36
 #, php-format
-msgid 'Permanent link to &#8220;%s&#8221;'
+msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/umbra/content/post.twig:22
@@ -268,11 +269,11 @@ msgid "Log out"
 msgstr ""
 
 #: themes/umbra/layouts/default.twig:83
-msgid 'Search&hellip;'
+msgid "Search&hellip;"
 msgstr ""
 
 #: themes/umbra/layouts/default.twig:83
-msgid 'Search this blog'
+msgid "Search this blog"
 msgstr ""
 
 #: themes/umbra/layouts/default.twig:84
@@ -300,11 +301,6 @@ msgstr ""
 
 #: themes/umbra/pages/archive.twig:18
 msgid "%B %Y"
-msgstr ""
-
-#: themes/umbra/pages/archive.twig:36
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/umbra/pages/archive.twig:57

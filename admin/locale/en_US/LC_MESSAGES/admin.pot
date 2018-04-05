@@ -671,21 +671,21 @@ msgstr ""
 #: admin/pages/manage_pages.twig:47
 #: admin/pages/manage_pages.twig:52
 #: admin/pages/manage_users.twig:55
-msgid 'yes'
+msgid "yes"
 msgstr ""
 
 #: admin/pages/manage_groups.twig:54
 #: admin/pages/manage_pages.twig:60
 #: admin/pages/manage_posts.twig:61
 #: admin/pages/manage_users.twig:60
-msgid 'edit'
+msgid "edit"
 msgstr ""
 
 #: admin/pages/manage_groups.twig:57
 #: admin/pages/manage_pages.twig:63
 #: admin/pages/manage_posts.twig:64
 #: admin/pages/manage_users.twig:63
-msgid 'delete'
+msgid "delete"
 msgstr ""
 
 #: admin/pages/manage_groups.twig:65

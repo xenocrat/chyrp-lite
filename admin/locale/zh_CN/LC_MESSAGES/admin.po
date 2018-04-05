@@ -662,6 +662,22 @@ msgstr "访问者？"
 msgid "Controls"
 msgstr "操作"
 
+#: admin/pages/manage_groups.twig:44 admin/pages/manage_groups.twig:49
+#: admin/pages/manage_pages.twig:47 admin/pages/manage_pages.twig:52
+#: admin/pages/manage_users.twig:55
+msgid "yes"
+msgstr ""
+
+#: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:60
+#: admin/pages/manage_posts.twig:61 admin/pages/manage_users.twig:60
+msgid "edit"
+msgstr ""
+
+#: admin/pages/manage_groups.twig:57 admin/pages/manage_pages.twig:63
+#: admin/pages/manage_posts.twig:64 admin/pages/manage_users.twig:63
+msgid "delete"
+msgstr ""
+
 #: admin/pages/manage_groups.twig:65 admin/pages/manage_pages.twig:75
 #: admin/pages/manage_posts.twig:76 admin/pages/manage_users.twig:75
 #, php-format

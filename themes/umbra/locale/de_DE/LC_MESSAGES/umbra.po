@@ -41,6 +41,14 @@ msgstr "[Unbenannt]"
 msgid "Tags"
 msgstr "Tags"
 
+#: themes/umbra/content/post.twig:20 themes/umbra/feathers/audio.twig:6
+#: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
+#: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
+#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:36
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Permanentlink zu &#8220;%s&#8221;"
+
 #: themes/umbra/content/post.twig:22 themes/umbra/layouts/default.twig:59
 msgid "Draft"
 msgstr "Entwurf"
@@ -268,6 +276,14 @@ msgstr "Schreiben"
 msgid "Log out"
 msgstr "Ausloggen"
 
+#: themes/umbra/layouts/default.twig:83
+msgid "Search&hellip;"
+msgstr "Suchen&hellip;"
+
+#: themes/umbra/layouts/default.twig:83
+msgid "Search this blog"
+msgstr "Suchen"
+
 #: themes/umbra/layouts/default.twig:84
 msgid "Search"
 msgstr "Suchen"
@@ -293,11 +309,6 @@ msgstr "Nicht gefunden."
 #: themes/umbra/pages/archive.twig:18
 msgid "%B %Y"
 msgstr "%B %Y"
-
-#: themes/umbra/pages/archive.twig:36
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
-msgstr "Permanentlink zu &#8220;%s&#8221;"
 
 #: themes/umbra/pages/archive.twig:57
 #, php-format

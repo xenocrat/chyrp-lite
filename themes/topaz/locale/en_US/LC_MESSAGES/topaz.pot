@@ -31,8 +31,9 @@ msgstr ""
 #: themes/topaz/feathers/text.twig:6
 #: themes/topaz/feathers/uploader.twig:6
 #: themes/topaz/feathers/video.twig:6
+#: themes/topaz/pages/archive.twig:29
 #, php-format
-msgid 'Permanent link to &#8220;%s&#8221;'
+msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/topaz/content/post.twig:17
@@ -60,7 +61,7 @@ msgid "[Untitled]"
 msgstr ""
 
 #: themes/topaz/content/post.twig:34
-msgid 'View pingbacks'
+msgid "View pingbacks"
 msgstr ""
 
 #: themes/topaz/content/post.twig:35
@@ -75,7 +76,7 @@ msgid "Comments closed"
 msgstr ""
 
 #: themes/topaz/content/post.twig:43
-msgid 'View comments'
+msgid "View comments"
 msgstr ""
 
 #: themes/topaz/content/post.twig:44
@@ -97,12 +98,12 @@ msgstr ""
 
 #: themes/topaz/content/sidebar.twig:6
 #: themes/topaz/layouts/default.twig:44
-msgid 'Search&hellip;'
+msgid "Search&hellip;"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:6
 #: themes/topaz/layouts/default.twig:44
-msgid 'Search this blog'
+msgid "Search this blog"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:7
@@ -111,7 +112,7 @@ msgid "Search"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:10
-msgid 'Links'
+msgid "Links"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:12
@@ -384,11 +385,6 @@ msgstr ""
 
 #: themes/topaz/pages/404.twig:5
 msgid "Not found."
-msgstr ""
-
-#: themes/topaz/pages/archive.twig:29
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/topaz/pages/archive.twig:41

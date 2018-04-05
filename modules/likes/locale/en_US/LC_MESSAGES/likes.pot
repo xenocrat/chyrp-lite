@@ -40,12 +40,10 @@ msgstr ""
 msgid "Please remember to update the permission settings for each group."
 msgstr ""
 
-#: modules/likes/likes.php:14
 #: modules/likes/likes.php:33
 msgid "Like Posts"
 msgstr ""
 
-#: modules/likes/likes.php:15
 #: modules/likes/likes.php:34
 msgid "Unlike Posts"
 msgstr ""
