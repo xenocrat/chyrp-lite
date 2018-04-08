@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/likes/admin/pages/like_settings.twig:3
+#: modules/likes/admin/pages/like_settings.twig:6
+msgid "Like Settings"
+msgstr "喜欢的设置"
+
+#: modules/likes/admin/pages/like_settings.twig:10
+msgid "Like Image"
+msgstr "喜欢的图片"
+
+#: modules/likes/admin/pages/like_settings.twig:19
+msgid "Like with Text"
+msgstr "喜欢的文本"
+
+#: modules/likes/admin/pages/like_settings.twig:21
+msgid "Enables text descriptions in like/unlike links."
+msgstr "在喜欢/不喜欢链接中启用文字说明。"
+
+#: modules/likes/admin/pages/like_settings.twig:24
+msgid "Show on Index Pages"
+msgstr "显示索引页"
+
+#: modules/likes/admin/pages/like_settings.twig:26
+msgid "Enables like functionality on blog index pages."
+msgstr "在博客索引页面上启用喜欢功能。"
+
+#: modules/likes/info.php:3 modules/likes/likes.php:63
+msgid "Likes"
+msgstr ""
+
+#: modules/likes/info.php:6
+msgid "Allow users to &#8220;like&#8221; a post."
+msgstr "允许用户&#8220;喜欢&#8221; 一篇帖子。"
+
+#: modules/likes/info.php:11
+msgid "Please remember to update the permission settings for each group."
+msgstr "请记住更新每个组的权限设置。"
+
+#: modules/likes/likes.php:33
+msgid "Like Posts"
+msgstr "喜欢帖子"
+
+#: modules/likes/likes.php:34
+msgid "Unlike Posts"
+msgstr "不喜欢帖子"
+
+#: modules/likes/likes.php:70 modules/likes/likes.php:102
+msgid "An ID is required to like a post."
+msgstr "喜欢一个帖子需要ID。"
+
+#: modules/likes/likes.php:73 modules/likes/likes.php:106
+msgid "You do not have sufficient privileges to like posts."
+msgstr "你没有权限喜欢这篇帖子。"
+
+#: modules/likes/likes.php:81
+msgid "Post liked."
+msgstr "帖子已喜欢。"
+
+#: modules/likes/likes.php:86 modules/likes/likes.php:126
+msgid "An ID is required to unlike a post."
+msgstr "不喜欢一个帖子需要ID。"
+
+#: modules/likes/likes.php:89 modules/likes/likes.php:130
+msgid "You do not have sufficient privileges to unlike posts."
+msgstr "你没有权限不喜欢这篇帖子。"
+
+#: modules/likes/likes.php:97
+msgid "Post unliked."
+msgstr "帖子已不喜欢。"
+
+#: modules/likes/likes.php:118 modules/likes/likes.php:272
+msgid "You like this."
+msgstr "你不喜欢这个。"
+
+#: modules/likes/likes.php:119 modules/likes/likes.php:273
+#, php-format
+msgid "You and %d person like this."
+msgid_plural "You and %d people like this."
+msgstr[0] "你和 %d 个人一样喜欢这篇。"
+
+#: modules/likes/likes.php:142 modules/likes/likes.php:246
+msgid "No likes yet."
+msgstr "过去没有人喜欢。"
+
+#: modules/likes/likes.php:143 modules/likes/likes.php:247
+#, php-format
+msgid "%d person likes this."
+msgid_plural "%d people like this."
+msgstr[0] "%d 个人喜欢这篇。"
+
+#: modules/likes/likes.php:234 modules/likes/likes.php:260
+msgid "Like!"
+msgstr "喜欢！"
+
+#: modules/likes/likes.php:235 modules/likes/likes.php:261
+msgid "Unlike!"
+msgstr "不喜欢！"

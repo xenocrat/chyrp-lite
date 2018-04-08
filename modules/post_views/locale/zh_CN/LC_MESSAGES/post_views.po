@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/post_views/info.php:3
+msgid "Post Views"
+msgstr "帖子查看"
+
+#: modules/post_views/info.php:6
+msgid "Counts the number of times your posts have been viewed."
+msgstr "统计您的帖子被查看的次数。"
+
+#: modules/post_views/info.php:10
+msgid "Do you want to remove view counts from the database?"
+msgstr "您想从数据库中删除查看计数？"
+
+#: modules/post_views/post_views.php:20
+msgid "View Count"
+msgstr "查看计数"
+
+#: modules/post_views/post_views.php:26
+#, php-format
+msgid "Download view count for &#8220;%s&#8221;"
+msgstr "从&#8220;%s&#8221;下载查看计数"
+
+#: modules/post_views/post_views.php:42
+msgid "An ID is required to download a view count."
+msgstr "下载查看计数需要一个ID。"
+
+#: modules/post_views/post_views.php:50
+msgid "You do not have sufficient privileges to download this view count."
+msgstr "您没有足够的权限下载查看计数。"

@@ -67,7 +67,6 @@ msgstr ""
 
 #: modules/categorize/admin/pages/manage_category.twig:3
 #: modules/categorize/admin/pages/manage_category.twig:23
-#: modules/categorize/categorize.php:12
 #: modules/categorize/categorize.php:25
 msgid "Manage Categories"
 msgstr ""

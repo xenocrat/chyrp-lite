@@ -44,7 +44,7 @@
                                                  array("id" => $id),
                                                  "id")->fetchColumn();
 
-            return fallback(self::$data, "");
+            return !empty(self::$data) ? self::$data : "" ;
         }
 
         /**

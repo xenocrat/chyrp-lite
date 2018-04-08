@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/maptcha/info.php:3
+msgid "MAPTCHA"
+msgstr ""
+
+#: modules/maptcha/info.php:6
+msgid "Ask users to solve simple mathematics problems to prevent spam."
+msgstr "要求用户解决简单的数学问题来防止垃圾邮件。"
+
+#: modules/maptcha/maptcha.php:21
+#, php-format
+msgid "How much is %d&nbsp;&#43;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&#43;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:25
+#, php-format
+msgid "How much is %d&nbsp;&#8722;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&#8722;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:29
+#, php-format
+msgid "How much is %d&nbsp;&#215;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&#215;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:33
+#, php-format
+msgid "How much is %d&nbsp;&plus;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&plus;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:37
+#, php-format
+msgid "How much is %d&nbsp;&minus;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&minus;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:41
+#, php-format
+msgid "How much is %d&nbsp;&times;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&times;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:45
+#, php-format
+msgid "How much is %d&nbsp;&#x0002B;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&#x0002B;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:49
+#, php-format
+msgid "How much is %d&nbsp;&#x02212;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&#x02212;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:53
+#, php-format
+msgid "How much is %d&nbsp;&#x000D7;&nbsp;%d&nbsp;?"
+msgstr "%d&nbsp;&#x000D7;&nbsp;%d&nbsp; 等于多少？"
+
+#: modules/maptcha/maptcha.php:60
+msgid "Yay mathemetics!"
+msgstr "耶！数学！"

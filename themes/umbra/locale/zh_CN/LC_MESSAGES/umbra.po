@@ -1,0 +1,361 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: blossom\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: 筱枫 <q849958241@163.com>\n"
+"Language-Team: q849958241@163.com\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2018 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: themes/umbra/content/comment.twig:3
+#, php-format
+msgid "%s:"
+msgstr "%s:"
+
+#: themes/umbra/content/comment.twig:5
+#, php-format
+msgid "%s said:"
+msgstr "%s 说："
+
+#: themes/umbra/content/comment.twig:9
+msgid "This comment is awaiting moderation."
+msgstr "这个评论正在等待审核。"
+
+#: themes/umbra/content/comment.twig:23
+msgid "%d %B, %Y, at %I:%M %p"
+msgstr "%d %B, %Y, at %I:%M %p"
+
+#: themes/umbra/content/post.twig:7 themes/umbra/pages/view.twig:11
+msgid "[Untitled]"
+msgstr "[无标题]"
+
+#: themes/umbra/content/post.twig:10
+msgid "Tags"
+msgstr "标签"
+
+#: themes/umbra/content/post.twig:20 themes/umbra/feathers/audio.twig:6
+#: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
+#: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
+#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:36
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "永久链接至 &#8220;%s&#8221;"
+
+#: themes/umbra/content/post.twig:22 themes/umbra/layouts/default.twig:59
+msgid "Draft"
+msgstr "草稿"
+
+#: themes/umbra/content/post.twig:24
+msgid "Scheduled"
+msgstr "计划"
+
+#: themes/umbra/content/post.twig:26
+msgid "Pinned"
+msgstr "固定"
+
+#: themes/umbra/content/post.twig:28
+msgid "%d %b, %Y"
+msgstr "%d %b, %Y"
+
+#: themes/umbra/content/post.twig:37
+#, php-format
+msgid "&copy; %s, %s."
+msgstr "&copy; %s, %s."
+
+#: themes/umbra/content/post.twig:39
+#, php-format
+msgid "&copy; %s."
+msgstr "&copy; %s."
+
+#: themes/umbra/feathers/uploader.twig:21
+msgid "File attachment:"
+msgstr "文件附件："
+
+#: themes/umbra/forms/comment/edit.twig:2
+msgid "Comment"
+msgstr "评论"
+
+#: themes/umbra/forms/comment/edit.twig:5
+msgid "Author"
+msgstr "作者"
+
+#: themes/umbra/forms/comment/edit.twig:7
+msgid "Author's website"
+msgstr "作者的站点"
+
+#: themes/umbra/forms/comment/edit.twig:9
+msgid "Author's email"
+msgstr "作者的邮箱"
+
+#: themes/umbra/forms/comment/edit.twig:13
+msgid "Timestamp"
+msgstr "时间戳"
+
+#: themes/umbra/forms/comment/edit.twig:15
+msgid "Status"
+msgstr "状态"
+
+#: themes/umbra/forms/comment/edit.twig:17
+msgid "Approved"
+msgstr "批准"
+
+#: themes/umbra/forms/comment/edit.twig:18
+msgid "Denied"
+msgstr "拒绝"
+
+#: themes/umbra/forms/comment/edit.twig:19
+msgid "Spam"
+msgstr "垃圾邮件"
+
+#: themes/umbra/forms/comment/edit.twig:20
+msgid "Pingback"
+msgstr "引用"
+
+#: themes/umbra/forms/comment/edit.twig:24
+msgid "Email Notifications"
+msgstr "邮件通知"
+
+#: themes/umbra/forms/comment/edit.twig:32
+msgid "Save"
+msgstr "保存"
+
+#: themes/umbra/forms/comment/edit.twig:33
+msgid "Cancel"
+msgstr "取消"
+
+#: themes/umbra/forms/comment/new.twig:3
+#, php-format
+msgid "%s's comment"
+msgstr "%s的评论"
+
+#: themes/umbra/forms/comment/new.twig:5
+msgid "Your name"
+msgstr "您的姓名"
+
+#: themes/umbra/forms/comment/new.twig:7
+msgid "Your email"
+msgstr "您的邮箱"
+
+#: themes/umbra/forms/comment/new.twig:9
+msgid "Your website"
+msgstr "您的站点"
+
+#: themes/umbra/forms/comment/new.twig:12
+msgid "Your comment"
+msgstr "您的评论"
+
+#: themes/umbra/forms/comment/new.twig:16
+msgid "Markdown is allowed."
+msgstr "可以使用Markdown语法。"
+
+#: themes/umbra/forms/comment/new.twig:18
+msgid "HTML tags allowed:"
+msgstr "可以使用HTML标签："
+
+#: themes/umbra/forms/comment/new.twig:20
+msgid "HTML is not allowed."
+msgstr "无法使用HTML。"
+
+#: themes/umbra/forms/comment/new.twig:24
+msgid "Notify me when others comment"
+msgstr "当有其他人评论的时候通知我"
+
+#: themes/umbra/forms/comment/new.twig:37
+msgid "Speak"
+msgstr "说话"
+
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:64
+msgid "Controls"
+msgstr "操作"
+
+#: themes/umbra/forms/user/controls.twig:7
+msgid "Full name"
+msgstr "全名"
+
+#: themes/umbra/forms/user/controls.twig:9
+#: themes/umbra/forms/user/register.twig:13
+#: themes/umbra/layouts/default.twig:41
+msgid "Email"
+msgstr "邮件"
+
+#: themes/umbra/forms/user/controls.twig:11
+msgid "Website"
+msgstr "站点"
+
+#: themes/umbra/forms/user/controls.twig:13
+msgid "New password?"
+msgstr "新密码？"
+
+#: themes/umbra/forms/user/controls.twig:15
+msgid "Confirm"
+msgstr "确认密码"
+
+#: themes/umbra/forms/user/controls.twig:20
+msgid "Update"
+msgstr "更新"
+
+#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
+#: themes/umbra/layouts/default.twig:76
+msgid "Log in"
+msgstr "登陆"
+
+#: themes/umbra/forms/user/login.twig:7
+#: themes/umbra/forms/user/lost_password.twig:8
+#: themes/umbra/forms/user/register.twig:7
+msgid "Username"
+msgstr "用户名"
+
+#: themes/umbra/forms/user/login.twig:9 themes/umbra/forms/user/register.twig:9
+#: themes/umbra/forms/user/register.twig:11
+msgid "Password"
+msgstr "密码"
+
+#: themes/umbra/forms/user/login.twig:15
+msgid "Help!"
+msgstr "需要帮助！"
+
+#: themes/umbra/forms/user/lost_password.twig:5
+msgid "Lost password"
+msgstr "忘记密码"
+
+#: themes/umbra/forms/user/lost_password.twig:7
+msgid ""
+"Please enter your username below and we will email you a new password for "
+"your account."
+msgstr "请在下面输入您的用户名，我们会通过电子邮件向您发送新帐户的密码。"
+
+#: themes/umbra/forms/user/lost_password.twig:12
+msgid "Submit"
+msgstr "提交"
+
+#: themes/umbra/forms/user/register.twig:5
+#: themes/umbra/forms/user/register.twig:19
+#: themes/umbra/layouts/default.twig:72
+msgid "Register"
+msgstr "注册"
+
+#: themes/umbra/forms/user/register.twig:11
+msgid "(again)"
+msgstr "(再一次)"
+
+#: themes/umbra/info.php:3
+msgid "Umbra"
+msgstr ""
+
+#: themes/umbra/info.php:6
+msgid "A dark tumbleblog theme for Chyrp Lite."
+msgstr ""
+
+#: themes/umbra/layouts/default.twig:44
+msgid "Feed"
+msgstr "订阅"
+
+#: themes/umbra/layouts/default.twig:47
+msgid "Archive"
+msgstr "档案"
+
+#: themes/umbra/layouts/default.twig:51
+msgid "Admin"
+msgstr "管理"
+
+#: themes/umbra/layouts/default.twig:55
+msgid "Write"
+msgstr "写作"
+
+#: themes/umbra/layouts/default.twig:67
+msgid "Log out"
+msgstr "退出登陆"
+
+#: themes/umbra/layouts/default.twig:83
+msgid "Search&hellip;"
+msgstr "搜索&hellip;"
+
+#: themes/umbra/layouts/default.twig:83
+msgid "Search this blog"
+msgstr "搜索"
+
+#: themes/umbra/layouts/default.twig:84
+msgid "Search"
+msgstr "搜索"
+
+#: themes/umbra/layouts/default.twig:92 themes/umbra/layouts/default.twig:102
+#, php-format
+msgid "Page %d"
+msgstr "第%d页"
+
+#: themes/umbra/layouts/default.twig:113
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
+msgstr "调用 %s 在行 %d 在 %s 秒."
+
+#: themes/umbra/pages/403.twig:4
+msgid "Forbidden."
+msgstr "被禁止."
+
+#: themes/umbra/pages/404.twig:4
+msgid "Not found."
+msgstr "未找到."
+
+#: themes/umbra/pages/archive.twig:18
+msgid "%B %Y"
+msgstr "%B %Y"
+
+#: themes/umbra/pages/archive.twig:57
+#, php-format
+msgid "Archive of %s"
+msgstr "%s的档案"
+
+#: themes/umbra/pages/archive.twig:66
+msgid "There aren't any posts in the timeframe you specified."
+msgstr "在指定的时间范围内没有任何帖子。"
+
+#: themes/umbra/pages/category.twig:5
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221; 分类中的帖子"
+
+#: themes/umbra/pages/drafts.twig:5
+msgid "Drafts"
+msgstr "草稿"
+
+#: themes/umbra/pages/drafts.twig:10
+msgid "You don't have any drafts"
+msgstr "您没有任何草稿"
+
+#: themes/umbra/pages/index.twig:8
+msgid "No posts"
+msgstr "没有帖子"
+
+#: themes/umbra/pages/search.twig:5
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221; 的搜索结果"
+
+#: themes/umbra/pages/search.twig:10
+msgid "Your search did not return any results."
+msgstr "空空如也"
+
+#: themes/umbra/pages/tag.twig:5
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221; 的帖子标签"
+
+#: themes/umbra/pages/tags.twig:6
+msgid "Tag cloud"
+msgstr "标签云"
+
+#: themes/umbra/pages/tags.twig:12
+msgid "Nothing here yet!"
+msgstr "然而这里什么也没有！"
+
+#: themes/umbra/pages/view.twig:8
+msgid "Pingbacks"
+msgstr "引用"

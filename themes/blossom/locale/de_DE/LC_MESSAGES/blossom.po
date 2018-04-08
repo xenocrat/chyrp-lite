@@ -37,6 +37,14 @@ msgstr "%d %B, %Y, um %I:%M %p"
 msgid "Tags"
 msgstr "Tags"
 
+#: themes/blossom/content/post.twig:15 themes/blossom/feathers/audio.twig:6
+#: themes/blossom/feathers/photo.twig:6 themes/blossom/feathers/quote.twig:6
+#: themes/blossom/feathers/text.twig:6 themes/blossom/feathers/uploader.twig:6
+#: themes/blossom/feathers/video.twig:6 themes/blossom/pages/archive.twig:36
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Permanentlink zu &#8220;%s&#8221;"
+
 #: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:30
 #: themes/blossom/layouts/default.twig:98
 msgid "Draft"
@@ -59,6 +67,10 @@ msgstr "%d %b, %Y"
 msgid "[Untitled]"
 msgstr "[Unbenannt]"
 
+#: themes/blossom/content/post.twig:34
+msgid "View pingbacks"
+msgstr "Pingbacks anzeigen"
+
 #: themes/blossom/content/post.twig:35
 #, php-format
 msgid "%s pingback"
@@ -69,6 +81,10 @@ msgstr[1] "%s Pingbacks"
 #: themes/blossom/content/post.twig:40
 msgid "Comments closed"
 msgstr "Kommentare geschlossen"
+
+#: themes/blossom/content/post.twig:43
+msgid "View comments"
+msgstr "Kommentare ansehen"
 
 #: themes/blossom/content/post.twig:44
 #, php-format
@@ -87,9 +103,21 @@ msgstr "&copy; %s, %s."
 msgid "&copy; %s."
 msgstr "&copy; %s."
 
+#: themes/blossom/content/sidebar.twig:6 themes/blossom/layouts/default.twig:44
+msgid "Search&hellip;"
+msgstr "Suchen&hellip;"
+
+#: themes/blossom/content/sidebar.twig:6 themes/blossom/layouts/default.twig:44
+msgid "Search this blog"
+msgstr "Suchen"
+
 #: themes/blossom/content/sidebar.twig:7 themes/blossom/layouts/default.twig:45
 msgid "Search"
 msgstr "Suchen"
+
+#: themes/blossom/content/sidebar.twig:10
+msgid "Links"
+msgstr "Links"
 
 #: themes/blossom/content/sidebar.twig:12
 #: themes/blossom/layouts/default.twig:68
@@ -360,11 +388,6 @@ msgstr "Nicht gefunden."
 #, php-format
 msgid "Archive of %s"
 msgstr "Archiv vom %s"
-
-#: themes/blossom/pages/archive.twig:36
-#, php-format
-msgid "Permanent link to &#8220;%s&#8221;"
-msgstr "Permanentlink zu &#8220;%s&#8221;"
 
 #: themes/blossom/pages/archive.twig:69
 msgid "There aren't any posts in the timeframe you specified."

@@ -172,37 +172,30 @@ msgstr ""
 msgid "Manage Spam"
 msgstr ""
 
-#: modules/comments/comments.php:23
 #: modules/comments/comments.php:52
 msgid "Add Comments"
 msgstr ""
 
-#: modules/comments/comments.php:24
 #: modules/comments/comments.php:53
 msgid "Add Comments to Private Posts"
 msgstr ""
 
-#: modules/comments/comments.php:25
 #: modules/comments/comments.php:54
 msgid "Edit Comments"
 msgstr ""
 
-#: modules/comments/comments.php:26
 #: modules/comments/comments.php:55
 msgid "Edit Own Comments"
 msgstr ""
 
-#: modules/comments/comments.php:27
 #: modules/comments/comments.php:56
 msgid "Delete Comments"
 msgstr ""
 
-#: modules/comments/comments.php:28
 #: modules/comments/comments.php:57
 msgid "Delete Own Comments"
 msgstr ""
 
-#: modules/comments/comments.php:29
 #: modules/comments/comments.php:58
 msgid "Can Use HTML in Comments"
 msgstr ""

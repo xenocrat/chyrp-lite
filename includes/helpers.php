@@ -189,8 +189,29 @@
     #---------------------------------------------
 
     /**
+     * Function: locales
+     * Returns an array of locale choices for the "chyrp" domain.
+     */
+    function locales() {
+        # Ensure the default locale is always present in the list.
+        $locales = array(array("code" => "en_US",
+                               "name" => lang_code("en_US")));
+
+        if ($open = opendir(INCLUDES_DIR.DIR."locale")) {
+             while (($folder = readdir($open)) !== false)
+                if ($folder != "en_US" and preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $folder))
+                    $locales[] = array("code" => $folder,
+                                       "name" => lang_code($folder));
+
+            closedir($open);
+        }
+
+        return $locales;
+    }
+
+    /**
      * Function: set_locale
-     * Try to set the locale with fallbacks for platform-specific quirks.
+     * Sets the locale with fallbacks for platform-specific quirks.
      *
      * Parameters:
      *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
@@ -207,6 +228,14 @@
                                 $locale.".UTF8",
                                 $locale.".utf8",
                                 $locale));
+    }
+
+    /**
+     * Function: get_locale
+     * Gets the current locale setting minus charset.
+     */
+    function get_locale() {
+        return preg_replace("/\.utf-?8$/i", "", setlocale(LC_ALL, 0));
     }
 
     /**
@@ -342,30 +371,20 @@
     }
 
     /**
-     * Function: time_in_timezone
-     * Returns the appropriate time() for representing a timezone.
-     */
-    function time_in_timezone($timezone) {
-        $orig = get_timezone();
-        set_timezone($timezone);
-        $time = date("F jS, Y, g:i A");
-        set_timezone($orig);
-        return strtotime($time);
-    }
-
-    /**
      * Function: timezones
-     * Returns an array of timezones that have unique offsets.
+     * Returns an array of timezone identifiers.
      */
     function timezones() {
-        $zones = array();
+        $timezones = array();
+        $zone_list = timezone_identifiers_list(DateTimeZone::ALL);
 
-        foreach (timezone_identifiers_list(DateTimeZone::ALL) as $zone)
-            $zones[] = array("name" => $zone,
-                             "now" => time_in_timezone($zone));
+        foreach ($zone_list as $zone) {
+            $timezones[] = array("code" => $zone,
+                                 "name" => str_replace(array("_", "St "), array(" ", "St. "), $zone));
 
-        usort($zones, function($a, $b) { return (int) ($a["now"] > $b["now"]); });
-        return $zones;
+        }
+
+        return $timezones;
     }
 
     /**
@@ -375,22 +394,16 @@
      * Parameters:
      *     $timezone - The timezone to set.
      */
-    function set_timezone($timezone) {
-        if (function_exists("date_default_timezone_set"))
-            date_default_timezone_set($timezone);
-        else
-            ini_set("date.timezone", $timezone);
+    function set_timezone($timezone = "Atlantic/Reykjavik") {
+        return date_default_timezone_set($timezone);
     }
 
     /**
-     * Function: get_timezone()
-     * Returns the current timezone.
+     * Function: get_timezone
+     * Gets the timezone for all date/time functions.
      */
     function get_timezone() {
-        if (function_exists("date_default_timezone_set"))
-            return date_default_timezone_get();
-        else
-            return ini_get("date.timezone");
+        return date_default_timezone_get();
     }
 
     #---------------------------------------------

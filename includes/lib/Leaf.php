@@ -31,6 +31,7 @@
 
                 # Custom functions:
                 new Twig_SimpleFunction("paginate",          "twig_function_paginate"),
+                new Twig_SimpleFunction("posted",            "twig_function_posted"),
                 new Twig_SimpleFunction("mailto",            "twig_function_mailto")
             );
         }
@@ -120,6 +121,14 @@
         }
 
         return new Paginator($array, $per_page, $unique);
+    }
+
+    /**
+     * Function: twig_function_posted
+     * Returns a $_POST value if set, otherwise returns the fallback value.
+     */
+    function twig_function_posted($index, $fallback = "") {
+        return isset($_POST[$index]) ? $_POST[$index] : $fallback ;
     }
 
     /**

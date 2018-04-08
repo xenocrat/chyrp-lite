@@ -24,7 +24,7 @@ msgid "License"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:19
-msgid 'Others who use your work in any way must give you credit.'
+msgid "Others who use your work in any way must give you credit."
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:20
@@ -32,7 +32,7 @@ msgid "Attribution"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:22
-msgid 'Derivative works must be licensed under the same terms.'
+msgid "Derivative works must be licensed under the same terms."
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:23
@@ -40,7 +40,7 @@ msgid "ShareAlike"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:25
-msgid 'Your work may not be reproduced or reused for commercial gain.'
+msgid "Your work may not be reproduced or reused for commercial gain."
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:26
@@ -48,7 +48,7 @@ msgid "NonCommercial"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:28
-msgid 'Your work may be reproduced but it may not be modified.'
+msgid "Your work may be reproduced but it may not be modified."
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:29
