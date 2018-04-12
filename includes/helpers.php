@@ -970,7 +970,7 @@
      */
     function markdown($text) {
         $parsedown = new Parsedown();
-        return $parsedown->text($text);
+        return $parsedown->setStrictMode(true)->text($text);
     }
 
     /**
