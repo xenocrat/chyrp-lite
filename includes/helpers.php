@@ -969,8 +969,7 @@
      *     The text with Markdown formatting applied.
      */
     function markdown($text) {
-        $parsedown = new Parsedown();
-        return $parsedown->setStrictMode(true)->text($text);
+        return Parsedown::instance()->setStrictMode(true)->text($text);
     }
 
     /**
