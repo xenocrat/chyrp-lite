@@ -52,6 +52,7 @@
                 new Twig_SimpleFilter("truncate",            "truncate"),
                 new Twig_SimpleFilter("pluralize",           "pluralize"),
                 new Twig_SimpleFilter("depluralize",         "depluralize"),
+                new Twig_SimpleFilter("markdown",            "markdown"),
                 new Twig_SimpleFilter("emote",               "emote"),
                 new Twig_SimpleFilter("oneof",               "oneof"),
                 new Twig_SimpleFilter("fix",                 "fix"),
