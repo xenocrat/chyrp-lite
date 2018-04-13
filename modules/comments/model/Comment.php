@@ -177,7 +177,7 @@
             $sql = SQL::current();
 
             $sql->insert("comments",
-                         array("body"         => sanitize_html($body),
+                         array("body"         => $body,
                                "author"       => strip_tags($author),
                                "author_url"   => strip_tags($author_url),
                                "author_email" => strip_tags($author_email),
@@ -239,7 +239,7 @@
             if ($this->no_results)
                 return false;
 
-            $new_values = array("body"         => sanitize_html($body),
+            $new_values = array("body"         => $body,
                                 "author"       => strip_tags($author),
                                 "author_url"   => strip_tags($author_url),
                                 "author_email" => strip_tags($author_email),
@@ -391,8 +391,12 @@
                 $this->user->group :
                 new Group($config->guest_group) ;
 
-            if ($this->status != "pingback" and !$group->can("code_in_comments"))
-                $this->body = strip_tags($this->body, "<".implode("><", $config->module_comments["allowed_comment_html"]).">");
+            if ($this->status != "pingback" and !$group->can("code_in_comments")) {
+                $allowed = $config->module_comments["allowed_comment_html"];
+                $this->body = strip_tags($this->body, "<".implode("><", $allowed).">");
+            }
+
+            $this->body = sanitize_html($this->body);
         }
 
         /**
