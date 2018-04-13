@@ -1,6 +1,6 @@
 <form id="comment_edit_{{ comment.id }}" class="comment_edit" action="{{ url('update_comment') }}" method="post" accept-charset="UTF-8">
 <label for="comment_body_{{ comment.id }}">{{ "Comment" | translate }}</label>
-<textarea name="body" id="comment_body_{{ comment.id }}">{{ comment.body }}</textarea>
+<textarea name="body" id="comment_body_{{ comment.id }}">{{ comment.body | fix(false, true) }}</textarea>
 <div id="more_options_{{ comment.id }}" class="more_options">
 <label for="comment_author_{{ comment.id }}">{{ "Author" | translate }}</label>
 <input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="comment_author_{{ comment.id }}">
