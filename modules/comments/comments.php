@@ -97,6 +97,11 @@
             if (empty($_POST['author']))
                 return array($post, false, __("Author can't be blank.", "comments"));
 
+            $_POST['author'] = strip_tags($_POST['author']);
+
+            if (empty($_POST['author']))
+                return array($post, false, __("Author can't be blank.", "comments"));
+
             if (empty($_POST['author_email']))
                 return array($post, false, __("Email address can't be blank.", "comments"));
 
@@ -880,10 +885,10 @@
 
             $params["subject"] = _f("New Comment at %s", Config::current()->name);
             $params["message"] = _f("%s commented on a blog post:", $params["author"]).
-                                 PHP_EOL.
+                                 "\r\n".
                                  unfix($post->url()).
-                                 PHP_EOL.PHP_EOL.
-                                 '"'.truncate(strip_tags($params["body"])).'"';
+                                 "\r\n"."\r\n".
+                                 strip_tags($params["body"]);
             return $params;
         }
 
