@@ -99,8 +99,8 @@
 
             # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
-                foreach ($pages[1] as $key => $page_var)
-                    $_GET[$page_var] = (int) $pages[4][$key];
+                foreach ($pages[1] as $index => $variable)
+                    $_GET[$variable] = (int) $pages[4][$index];
 
                 # Looks like pagination of the index.
                 if ($route->arg[0] == $pages[1][0])
