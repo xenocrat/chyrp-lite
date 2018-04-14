@@ -65,9 +65,6 @@
             # Decompose clean URLs.
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
 
-            if ($this->arg[0] == "?")
-                array_shift($this->arg);
-
             # Give the controller an opportunity to parse this route and determine the action.
             $controller->parse($this);
 
@@ -190,7 +187,7 @@
 
             # Translation is unnecessary if clean URLs are enabled and the controller supports them.
             if ($config->clean_urls and !empty($controller->clean))
-                return fix($base.(empty($controller->base) ? "/" : "/?/").$url, true);
+                return fix($base."/".$url, true);
 
             $urls = fallback($controller->urls, array());
 
