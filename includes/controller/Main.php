@@ -454,12 +454,7 @@
                 if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                     Flash::warning(__("Invalid authentication token."));
 
-                if (empty($_POST['login']))
-                    Flash::warning(__("Please enter a username for your account."));
-
-                $_POST['login'] = strip_tags($_POST['login']);
-
-                if (empty($_POST['login']))
+                if (empty($_POST['login']) or derezz($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
 
                 $check = new User(array("login" => $_POST['login']));
@@ -504,8 +499,10 @@
                         correspond("activate", array("login" => $user->login,
                                                      "to"    => $user->email,
                                                      "link"  => fix($config->url, true).
-                                                                "/?action=activate&amp;login=".urlencode($user->login).
-                                                                "&amp;token=".token(array($user->login, $user->email))));
+                                                                "/?action=activate&amp;login=".
+                                                                urlencode($user->login).
+                                                                "&amp;token=".
+                                                                token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     }
@@ -527,9 +524,10 @@
             if (logged_in())
                 Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
-            $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
+            $user = new User(array("login" => urldecode(fallback($_GET['login']))));
 
-            if ($user->no_results or empty($_GET['token']) or $_GET['token'] != token(array($user->login, $user->email)))
+            if ($user->no_results or empty($_GET['token']) or
+                $_GET['token'] != token(array($user->login, $user->email)))
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if ($user->approved)
@@ -550,9 +548,10 @@
             if (logged_in())
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
-            $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
+            $user = new User(array("login" => urldecode(fallback($_GET['login']))));
 
-            if ($user->no_results or empty($_GET['token']) or $_GET['token'] != token(array($user->login, $user->email)))
+            if ($user->no_results or empty($_GET['token']) or
+                $_GET['token'] != token(array($user->login, $user->email)))
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             $new_password = random(8);
@@ -702,8 +701,10 @@
                         correspond("reset", array("login" => $user->login,
                                                   "to"    => $user->email,
                                                   "link"  => fix($config->url, true).
-                                                             "/?action=reset&amp;login=".urlencode($user->login).
-                                                             "&amp;token=".token(array($user->login, $user->email))));
+                                                             "/?action=reset&amp;login=".
+                                                             urlencode($user->login).
+                                                             "&amp;token=".
+                                                             token(array($user->login, $user->email))));
 
                     Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
                 }
