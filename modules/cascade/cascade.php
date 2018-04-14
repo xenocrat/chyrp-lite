@@ -18,7 +18,9 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
     
-            Config::current()->set("ajax_scroll_auto", isset($_POST['auto']));
+            Config::current()->set("module_cascade",
+                                   array("ajax_scroll_auto" => isset($_POST['auto'])));
+
             Flash::notice(__("Settings updated."), "cascade_settings");
         }
 
